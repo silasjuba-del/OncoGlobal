@@ -174,7 +174,311 @@
             "pagina": null,
             "trecho": "",
             "estado": "PENDENTE"
-          }
+          },
+          "consultadoEm": "2026-10-14",
+          "procedimentosRelacionados": [
+            {
+              "codigo": "0304040169",
+              "nome": "QUIMIOTERAPIA DE SARCOMA ÓSSEO / OSTEOSSARCOMA - 1ª LINHA",
+              "cidsCompativeis": [
+                "C400",
+                "C401",
+                "C402",
+                "C403",
+                "C408",
+                "C409",
+                "C410",
+                "C411",
+                "C412",
+                "C413",
+                "C414",
+                "C418",
+                "C419"
+              ],
+              "instrumentosRegistro": [
+                "06"
+              ],
+              "fonte": {
+                "tipo": "NORMA",
+                "referencia": "corpus/f0c/sigtap/2026-09.json#procedimentos[codigo=0304040169]",
+                "trecho": "QUIMIOTERAPIA DE SARCOMA ÓSSEO / OSTEOSSARCOMA - 1ª LINHA",
+                "competencia": "2026-09"
+              },
+              "ressalva": "Procedimento administrativo; não comprova disponibilidade do fármaco, do esquema, elegibilidade individual ou autorização de APAC."
+            },
+            {
+              "codigo": "0304050210",
+              "nome": "QUIMIOTERAPIA DO OSTEOSSARCOMA",
+              "cidsCompativeis": [
+                "C400",
+                "C401",
+                "C402",
+                "C403",
+                "C408",
+                "C409",
+                "C410",
+                "C411",
+                "C412",
+                "C413",
+                "C414",
+                "C418",
+                "C419"
+              ],
+              "instrumentosRegistro": [
+                "06"
+              ],
+              "fonte": {
+                "tipo": "NORMA",
+                "referencia": "corpus/f0c/sigtap/2026-09.json#procedimentos[codigo=0304050210]",
+                "trecho": "QUIMIOTERAPIA DO OSTEOSSARCOMA",
+                "competencia": "2026-09"
+              },
+              "ressalva": "Procedimento administrativo; não comprova disponibilidade do fármaco, do esquema, elegibilidade individual ou autorização de APAC."
+            },
+            {
+              "codigo": "0304040150",
+              "nome": "QUIMIOTERAPIA DE OSTEOSSARCOMA - 2ª LINHA.",
+              "cidsCompativeis": [
+                "C400",
+                "C401",
+                "C402",
+                "C403",
+                "C408",
+                "C409",
+                "C410",
+                "C411",
+                "C412",
+                "C413",
+                "C414",
+                "C418",
+                "C419"
+              ],
+              "instrumentosRegistro": [
+                "06"
+              ],
+              "fonte": {
+                "tipo": "NORMA",
+                "referencia": "corpus/f0c/sigtap/2026-09.json#procedimentos[codigo=0304040150]",
+                "trecho": "QUIMIOTERAPIA DE OSTEOSSARCOMA - 2ª LINHA.",
+                "competencia": "2026-09"
+              },
+              "ressalva": "Procedimento administrativo; não comprova disponibilidade do fármaco, do esquema, elegibilidade individual ou autorização de APAC."
+            },
+            {
+              "codigo": "0304020303",
+              "nome": "QUIMIOTERAPIA DE SARCOMA ÓSSEO AVANÇADO",
+              "cidsCompativeis": [
+                "C400",
+                "C401",
+                "C402",
+                "C403",
+                "C408",
+                "C409",
+                "C410",
+                "C411",
+                "C412",
+                "C413",
+                "C414",
+                "C418",
+                "C419"
+              ],
+              "instrumentosRegistro": [
+                "06"
+              ],
+              "fonte": {
+                "tipo": "NORMA",
+                "referencia": "corpus/f0c/sigtap/2026-09.json#procedimentos[codigo=0304020303]",
+                "trecho": "QUIMIOTERAPIA DE SARCOMA ÓSSEO AVANÇADO",
+                "competencia": "2026-09"
+              },
+              "ressalva": "Procedimento administrativo; não comprova disponibilidade do fármaco, do esquema, elegibilidade individual ou autorização de APAC."
+            },
+            {
+              "codigo": "0304070050",
+              "nome": "QUIMIOTERAPIA DE ALTA DOSE DE OSTEOSSARCOMA NA INFÂNCIA E ADOLESCÊNCIA",
+              "cidsCompativeis": [
+                "C400",
+                "C401",
+                "C402",
+                "C403",
+                "C408",
+                "C409",
+                "C410",
+                "C411",
+                "C412",
+                "C413",
+                "C414",
+                "C418",
+                "C419"
+              ],
+              "instrumentosRegistro": [
+                "06"
+              ],
+              "fonte": {
+                "tipo": "NORMA",
+                "referencia": "corpus/f0c/sigtap/2026-09.json#procedimentos[codigo=0304070050]",
+                "trecho": "QUIMIOTERAPIA DE ALTA DOSE DE OSTEOSSARCOMA NA INFÂNCIA E ADOLESCÊNCIA",
+                "competencia": "2026-09"
+              },
+              "ressalva": "Procedimento administrativo; não comprova disponibilidade do fármaco, do esquema, elegibilidade individual ou autorização de APAC."
+            }
+          ],
+          "farmacos": [
+            {
+              "droga": "doxorrubicina",
+              "via": "EV",
+              "disponivel": "VERIFICAR",
+              "rename": {
+                "edicao": "2024",
+                "resultado": "NAO_LOCALIZADO_NA_EDICAO_CONSULTADA",
+                "paginas": [],
+                "fonte": {
+                  "tipo": "NORMA",
+                  "referencia": "https://bvsms.saude.gov.br/bvs/publicacoes/relacao_nacional_medicamentos_2024.pdf",
+                  "localizador": "busca textual integral, pp. 1–252, termo doxorrubicina",
+                  "trecho": "Termo doxorrubicina não localizado na busca textual da edição 2024; isso não demonstra não disponibilidade no SUS.",
+                  "sha256": "b1b0d582cb68fc96fcbe04fd65c1c697d5206b7dce8886f1c6ddb06374fd5201",
+                  "consultadoEm": "2026-10-14"
+                },
+                "ressalva": "Inclusão na RENAME não comprova indicação oncológica, apresentação do esquema, estoque do serviço nem cobertura ANS; ausência nesta edição também não comprova exclusão do SUS."
+              },
+              "sigtapEncontrados": [],
+              "buscasFeitas": [
+                "SIGTAP 2026-09: busca pelo nome doxorrubicina em tb_procedimento (ZIP local conferido por SHA-256), incluindo catálogo de medicamentos; RENAME 2024 integral (normalização de acentos; folínico pesquisado como folinato).",
+                "docs/referencias/: 28 arquivos com correspondência textual; docs/referencias\\externos\\PRESCRICAO-POR-TOXICIDADE.md, docs/referencias\\modelos\\05-prescricao-qt-institucional.md, docs/referencias\\fornecedores\\SONHE-2024-PROTOCOLOS.md, docs/referencias\\fornecedores\\RESUMO-GI-PRO2026-MODULO2.md; menção isolada não comprova acesso SUS."
+              ]
+            },
+            {
+              "droga": "cisplatina",
+              "via": "EV",
+              "disponivel": "VERIFICAR",
+              "rename": {
+                "edicao": "2024",
+                "resultado": "NAO_LOCALIZADO_NA_EDICAO_CONSULTADA",
+                "paginas": [],
+                "fonte": {
+                  "tipo": "NORMA",
+                  "referencia": "https://bvsms.saude.gov.br/bvs/publicacoes/relacao_nacional_medicamentos_2024.pdf",
+                  "localizador": "busca textual integral, pp. 1–252, termo cisplatina",
+                  "trecho": "Termo cisplatina não localizado na busca textual da edição 2024; isso não demonstra não disponibilidade no SUS.",
+                  "sha256": "b1b0d582cb68fc96fcbe04fd65c1c697d5206b7dce8886f1c6ddb06374fd5201",
+                  "consultadoEm": "2026-10-14"
+                },
+                "ressalva": "Inclusão na RENAME não comprova indicação oncológica, apresentação do esquema, estoque do serviço nem cobertura ANS; ausência nesta edição também não comprova exclusão do SUS."
+              },
+              "sigtapEncontrados": [],
+              "buscasFeitas": [
+                "SIGTAP 2026-09: busca pelo nome cisplatina em tb_procedimento (ZIP local conferido por SHA-256), incluindo catálogo de medicamentos; RENAME 2024 integral (normalização de acentos; folínico pesquisado como folinato).",
+                "docs/referencias/: 46 arquivos com correspondência textual; docs/referencias\\fornecedores\\SONHE-2024-PROTOCOLOS.md, docs/referencias\\fornecedores\\SONHE-2024-PROTOCOLOS.csv, docs/referencias\\fornecedores\\SBOC-DIRETRIZES-INDICE.md, docs/referencias\\fornecedores\\RESUMO-GI-PRO2026-MODULO2.md; menção isolada não comprova acesso SUS."
+              ]
+            },
+            {
+              "droga": "metotrexato",
+              "via": "EV",
+              "disponivel": "VERIFICAR",
+              "rename": {
+                "edicao": "2024",
+                "resultado": "CONSTA_COM_RESTRICOES_DE_APRESENTACAO_E_INDICACAO",
+                "paginas": [
+                  87,
+                  202,
+                  203
+                ],
+                "fonte": {
+                  "tipo": "NORMA",
+                  "referencia": "https://bvsms.saude.gov.br/bvs/publicacoes/relacao_nacional_medicamentos_2024.pdf#page=88",
+                  "localizador": "páginas impressas 87, 202, 203; entrada metotrexato",
+                  "trecho": "Metotrexato 25 mg/mL injetável e 2,5 mg comprimido; componente Especializado (p. 87).",
+                  "sha256": "b1b0d582cb68fc96fcbe04fd65c1c697d5206b7dce8886f1c6ddb06374fd5201",
+                  "consultadoEm": "2026-10-14"
+                },
+                "ressalva": "Inclusão na RENAME não comprova indicação oncológica, apresentação do esquema, estoque do serviço nem cobertura ANS; ausência nesta edição também não comprova exclusão do SUS."
+              },
+              "sigtapEncontrados": [
+                {
+                  "codigo": "0604530021",
+                  "linha": 4274,
+                  "nome": "METOTREXATO 2,5 MG (POR COMPRIMIDO)",
+                  "fonte": {
+                    "tipo": "NORMA",
+                    "referencia": "corpus/f0c/sigtap/fontes/TabelaUnificada_202609_v2610050950.zip!tb_procedimento.txt:L4274",
+                    "trecho": "METOTREXATO 2,5 MG (POR COMPRIMIDO)",
+                    "competencia": "2026-09"
+                  },
+                  "ressalva": "Código de medicamento do componente farmacêutico; indicação/apresentação para este esquema não comprovada."
+                },
+                {
+                  "codigo": "0604530030",
+                  "linha": 4275,
+                  "nome": "METOTREXATO 25 MG/ML INJETAVEL (POR AMPOLA DE 2 ML)",
+                  "fonte": {
+                    "tipo": "NORMA",
+                    "referencia": "corpus/f0c/sigtap/fontes/TabelaUnificada_202609_v2610050950.zip!tb_procedimento.txt:L4275",
+                    "trecho": "METOTREXATO 25 MG/ML INJETAVEL (POR AMPOLA DE 2 ML)",
+                    "competencia": "2026-09"
+                  },
+                  "ressalva": "Código de medicamento do componente farmacêutico; indicação/apresentação para este esquema não comprovada."
+                }
+              ],
+              "buscasFeitas": [
+                "SIGTAP 2026-09: busca pelo nome metotrexato em tb_procedimento (ZIP local conferido por SHA-256), incluindo catálogo de medicamentos; RENAME 2024 integral (normalização de acentos; folínico pesquisado como folinato).",
+                "docs/referencias/: 14 arquivos com correspondência textual; docs/referencias\\fornecedores\\SONHE-2024-PROTOCOLOS.md, docs/referencias\\ragGRAFO-oncologia\\dados\\nos.jsonl, docs/referencias\\externos\\PRESCRICAO-POR-TOXICIDADE.md, docs/referencias\\ragGRAFO-oncologia\\modulos\\11-sboc2026-mama\\nos.jsonl; menção isolada não comprova acesso SUS."
+              ]
+            },
+            {
+              "droga": "folínico",
+              "via": "VO",
+              "disponivel": "VERIFICAR",
+              "rename": {
+                "edicao": "2024",
+                "resultado": "CONSTA_COM_RESTRICOES_DE_APRESENTACAO_E_INDICACAO",
+                "paginas": [
+                  115,
+                  135,
+                  150
+                ],
+                "fonte": {
+                  "tipo": "NORMA",
+                  "referencia": "https://bvsms.saude.gov.br/bvs/publicacoes/relacao_nacional_medicamentos_2024.pdf#page=116",
+                  "localizador": "páginas impressas 115, 135, 150; entrada folinato",
+                  "trecho": "Folinato de cálcio 15 mg, comprimido; componentes Básico e Estratégico (p. 115).",
+                  "sha256": "b1b0d582cb68fc96fcbe04fd65c1c697d5206b7dce8886f1c6ddb06374fd5201",
+                  "consultadoEm": "2026-10-14"
+                },
+                "ressalva": "Inclusão na RENAME não comprova indicação oncológica, apresentação do esquema, estoque do serviço nem cobertura ANS; ausência nesta edição também não comprova exclusão do SUS."
+              },
+              "sigtapEncontrados": [],
+              "buscasFeitas": [
+                "SIGTAP 2026-09: busca pelo nome folínico em tb_procedimento (ZIP local conferido por SHA-256), incluindo catálogo de medicamentos; RENAME 2024 integral (normalização de acentos; folínico pesquisado como folinato).",
+                "docs/referencias/: 6 arquivos com correspondência textual; docs/referencias\\fornecedores\\AVALIACAO-CONSULTAS-E-CONSOLIDADO.md, docs/referencias\\protocolos\\protocolos-citotoxicos-revisado-silas.csv, docs/referencias\\ragGRAFO-oncologia\\modulos\\03-ginecologico\\arestas.jsonl, docs/referencias\\ragGRAFO-oncologia\\modulos\\03-ginecologico\\nos.jsonl; menção isolada não comprova acesso SUS."
+              ]
+            },
+            {
+              "droga": "pegfilgrastim",
+              "via": "SC",
+              "disponivel": "VERIFICAR",
+              "rename": {
+                "edicao": "2024",
+                "resultado": "NAO_LOCALIZADO_NA_EDICAO_CONSULTADA",
+                "paginas": [],
+                "fonte": {
+                  "tipo": "NORMA",
+                  "referencia": "https://bvsms.saude.gov.br/bvs/publicacoes/relacao_nacional_medicamentos_2024.pdf",
+                  "localizador": "busca textual integral, pp. 1–252, termo pegfilgrastim",
+                  "trecho": "Termo pegfilgrastim não localizado na busca textual da edição 2024; isso não demonstra não disponibilidade no SUS.",
+                  "sha256": "b1b0d582cb68fc96fcbe04fd65c1c697d5206b7dce8886f1c6ddb06374fd5201",
+                  "consultadoEm": "2026-10-14"
+                },
+                "ressalva": "Inclusão na RENAME não comprova indicação oncológica, apresentação do esquema, estoque do serviço nem cobertura ANS; ausência nesta edição também não comprova exclusão do SUS."
+              },
+              "sigtapEncontrados": [],
+              "buscasFeitas": [
+                "SIGTAP 2026-09: busca pelo nome pegfilgrastim em tb_procedimento (ZIP local conferido por SHA-256), incluindo catálogo de medicamentos; RENAME 2024 integral (normalização de acentos; folínico pesquisado como folinato).",
+                "docs/referencias/: 5 arquivos com correspondência textual; docs/referencias\\fornecedores\\SONHE-2024-PROTOCOLOS.md, docs/referencias\\ragGRAFO-oncologia\\modulos\\11-sboc2026-mama\\RESUMO.md, docs/referencias\\ragGRAFO-oncologia\\modulos\\11-sboc2026-mama\\nos.jsonl, docs/referencias\\ragGRAFO-oncologia\\modulos\\11-sboc2026-mama\\CONFERENCIA-RESUMO-NEOADJ.md; menção isolada não comprova acesso SUS."
+              ]
+            }
+          ],
+          "observacao": "VERIFICAR: há somente evidência administrativa parcial quando códigos relacionados são listados. Não reclassificar disponibilidade clínica por código de QT ou presença na RENAME. Confirmar fármaco/apresentação/indicação e acesso no serviço; cobertura ANS não foi avaliada."
         },
         "fonte": {
           "tipo": "PROTOCOLO_INSTITUCIONAL",
@@ -231,7 +535,263 @@
             "pagina": null,
             "trecho": "",
             "estado": "PENDENTE"
-          }
+          },
+          "consultadoEm": "2026-10-14",
+          "procedimentosRelacionados": [
+            {
+              "codigo": "0304040169",
+              "nome": "QUIMIOTERAPIA DE SARCOMA ÓSSEO / OSTEOSSARCOMA - 1ª LINHA",
+              "cidsCompativeis": [
+                "C400",
+                "C401",
+                "C402",
+                "C403",
+                "C408",
+                "C409",
+                "C410",
+                "C411",
+                "C412",
+                "C413",
+                "C414",
+                "C418",
+                "C419"
+              ],
+              "instrumentosRegistro": [
+                "06"
+              ],
+              "fonte": {
+                "tipo": "NORMA",
+                "referencia": "corpus/f0c/sigtap/2026-09.json#procedimentos[codigo=0304040169]",
+                "trecho": "QUIMIOTERAPIA DE SARCOMA ÓSSEO / OSTEOSSARCOMA - 1ª LINHA",
+                "competencia": "2026-09"
+              },
+              "ressalva": "Procedimento administrativo; não comprova disponibilidade do fármaco, do esquema, elegibilidade individual ou autorização de APAC."
+            },
+            {
+              "codigo": "0304050210",
+              "nome": "QUIMIOTERAPIA DO OSTEOSSARCOMA",
+              "cidsCompativeis": [
+                "C400",
+                "C401",
+                "C402",
+                "C403",
+                "C408",
+                "C409",
+                "C410",
+                "C411",
+                "C412",
+                "C413",
+                "C414",
+                "C418",
+                "C419"
+              ],
+              "instrumentosRegistro": [
+                "06"
+              ],
+              "fonte": {
+                "tipo": "NORMA",
+                "referencia": "corpus/f0c/sigtap/2026-09.json#procedimentos[codigo=0304050210]",
+                "trecho": "QUIMIOTERAPIA DO OSTEOSSARCOMA",
+                "competencia": "2026-09"
+              },
+              "ressalva": "Procedimento administrativo; não comprova disponibilidade do fármaco, do esquema, elegibilidade individual ou autorização de APAC."
+            },
+            {
+              "codigo": "0304040150",
+              "nome": "QUIMIOTERAPIA DE OSTEOSSARCOMA - 2ª LINHA.",
+              "cidsCompativeis": [
+                "C400",
+                "C401",
+                "C402",
+                "C403",
+                "C408",
+                "C409",
+                "C410",
+                "C411",
+                "C412",
+                "C413",
+                "C414",
+                "C418",
+                "C419"
+              ],
+              "instrumentosRegistro": [
+                "06"
+              ],
+              "fonte": {
+                "tipo": "NORMA",
+                "referencia": "corpus/f0c/sigtap/2026-09.json#procedimentos[codigo=0304040150]",
+                "trecho": "QUIMIOTERAPIA DE OSTEOSSARCOMA - 2ª LINHA.",
+                "competencia": "2026-09"
+              },
+              "ressalva": "Procedimento administrativo; não comprova disponibilidade do fármaco, do esquema, elegibilidade individual ou autorização de APAC."
+            },
+            {
+              "codigo": "0304020303",
+              "nome": "QUIMIOTERAPIA DE SARCOMA ÓSSEO AVANÇADO",
+              "cidsCompativeis": [
+                "C400",
+                "C401",
+                "C402",
+                "C403",
+                "C408",
+                "C409",
+                "C410",
+                "C411",
+                "C412",
+                "C413",
+                "C414",
+                "C418",
+                "C419"
+              ],
+              "instrumentosRegistro": [
+                "06"
+              ],
+              "fonte": {
+                "tipo": "NORMA",
+                "referencia": "corpus/f0c/sigtap/2026-09.json#procedimentos[codigo=0304020303]",
+                "trecho": "QUIMIOTERAPIA DE SARCOMA ÓSSEO AVANÇADO",
+                "competencia": "2026-09"
+              },
+              "ressalva": "Procedimento administrativo; não comprova disponibilidade do fármaco, do esquema, elegibilidade individual ou autorização de APAC."
+            },
+            {
+              "codigo": "0304070050",
+              "nome": "QUIMIOTERAPIA DE ALTA DOSE DE OSTEOSSARCOMA NA INFÂNCIA E ADOLESCÊNCIA",
+              "cidsCompativeis": [
+                "C400",
+                "C401",
+                "C402",
+                "C403",
+                "C408",
+                "C409",
+                "C410",
+                "C411",
+                "C412",
+                "C413",
+                "C414",
+                "C418",
+                "C419"
+              ],
+              "instrumentosRegistro": [
+                "06"
+              ],
+              "fonte": {
+                "tipo": "NORMA",
+                "referencia": "corpus/f0c/sigtap/2026-09.json#procedimentos[codigo=0304070050]",
+                "trecho": "QUIMIOTERAPIA DE ALTA DOSE DE OSTEOSSARCOMA NA INFÂNCIA E ADOLESCÊNCIA",
+                "competencia": "2026-09"
+              },
+              "ressalva": "Procedimento administrativo; não comprova disponibilidade do fármaco, do esquema, elegibilidade individual ou autorização de APAC."
+            }
+          ],
+          "farmacos": [
+            {
+              "droga": "doxorrubicina",
+              "via": "EV",
+              "disponivel": "VERIFICAR",
+              "rename": {
+                "edicao": "2024",
+                "resultado": "NAO_LOCALIZADO_NA_EDICAO_CONSULTADA",
+                "paginas": [],
+                "fonte": {
+                  "tipo": "NORMA",
+                  "referencia": "https://bvsms.saude.gov.br/bvs/publicacoes/relacao_nacional_medicamentos_2024.pdf",
+                  "localizador": "busca textual integral, pp. 1–252, termo doxorrubicina",
+                  "trecho": "Termo doxorrubicina não localizado na busca textual da edição 2024; isso não demonstra não disponibilidade no SUS.",
+                  "sha256": "b1b0d582cb68fc96fcbe04fd65c1c697d5206b7dce8886f1c6ddb06374fd5201",
+                  "consultadoEm": "2026-10-14"
+                },
+                "ressalva": "Inclusão na RENAME não comprova indicação oncológica, apresentação do esquema, estoque do serviço nem cobertura ANS; ausência nesta edição também não comprova exclusão do SUS."
+              },
+              "sigtapEncontrados": [],
+              "buscasFeitas": [
+                "SIGTAP 2026-09: busca pelo nome doxorrubicina em tb_procedimento (ZIP local conferido por SHA-256), incluindo catálogo de medicamentos; RENAME 2024 integral (normalização de acentos; folínico pesquisado como folinato).",
+                "docs/referencias/: 28 arquivos com correspondência textual; docs/referencias\\externos\\PRESCRICAO-POR-TOXICIDADE.md, docs/referencias\\modelos\\05-prescricao-qt-institucional.md, docs/referencias\\fornecedores\\SONHE-2024-PROTOCOLOS.md, docs/referencias\\fornecedores\\RESUMO-GI-PRO2026-MODULO2.md; menção isolada não comprova acesso SUS."
+              ]
+            },
+            {
+              "droga": "metotrexato",
+              "via": "EV",
+              "disponivel": "VERIFICAR",
+              "rename": {
+                "edicao": "2024",
+                "resultado": "CONSTA_COM_RESTRICOES_DE_APRESENTACAO_E_INDICACAO",
+                "paginas": [
+                  87,
+                  202,
+                  203
+                ],
+                "fonte": {
+                  "tipo": "NORMA",
+                  "referencia": "https://bvsms.saude.gov.br/bvs/publicacoes/relacao_nacional_medicamentos_2024.pdf#page=88",
+                  "localizador": "páginas impressas 87, 202, 203; entrada metotrexato",
+                  "trecho": "Metotrexato 25 mg/mL injetável e 2,5 mg comprimido; componente Especializado (p. 87).",
+                  "sha256": "b1b0d582cb68fc96fcbe04fd65c1c697d5206b7dce8886f1c6ddb06374fd5201",
+                  "consultadoEm": "2026-10-14"
+                },
+                "ressalva": "Inclusão na RENAME não comprova indicação oncológica, apresentação do esquema, estoque do serviço nem cobertura ANS; ausência nesta edição também não comprova exclusão do SUS."
+              },
+              "sigtapEncontrados": [
+                {
+                  "codigo": "0604530021",
+                  "linha": 4274,
+                  "nome": "METOTREXATO 2,5 MG (POR COMPRIMIDO)",
+                  "fonte": {
+                    "tipo": "NORMA",
+                    "referencia": "corpus/f0c/sigtap/fontes/TabelaUnificada_202609_v2610050950.zip!tb_procedimento.txt:L4274",
+                    "trecho": "METOTREXATO 2,5 MG (POR COMPRIMIDO)",
+                    "competencia": "2026-09"
+                  },
+                  "ressalva": "Código de medicamento do componente farmacêutico; indicação/apresentação para este esquema não comprovada."
+                },
+                {
+                  "codigo": "0604530030",
+                  "linha": 4275,
+                  "nome": "METOTREXATO 25 MG/ML INJETAVEL (POR AMPOLA DE 2 ML)",
+                  "fonte": {
+                    "tipo": "NORMA",
+                    "referencia": "corpus/f0c/sigtap/fontes/TabelaUnificada_202609_v2610050950.zip!tb_procedimento.txt:L4275",
+                    "trecho": "METOTREXATO 25 MG/ML INJETAVEL (POR AMPOLA DE 2 ML)",
+                    "competencia": "2026-09"
+                  },
+                  "ressalva": "Código de medicamento do componente farmacêutico; indicação/apresentação para este esquema não comprovada."
+                }
+              ],
+              "buscasFeitas": [
+                "SIGTAP 2026-09: busca pelo nome metotrexato em tb_procedimento (ZIP local conferido por SHA-256), incluindo catálogo de medicamentos; RENAME 2024 integral (normalização de acentos; folínico pesquisado como folinato).",
+                "docs/referencias/: 14 arquivos com correspondência textual; docs/referencias\\fornecedores\\SONHE-2024-PROTOCOLOS.md, docs/referencias\\ragGRAFO-oncologia\\dados\\nos.jsonl, docs/referencias\\externos\\PRESCRICAO-POR-TOXICIDADE.md, docs/referencias\\ragGRAFO-oncologia\\modulos\\11-sboc2026-mama\\nos.jsonl; menção isolada não comprova acesso SUS."
+              ]
+            },
+            {
+              "droga": "folínico",
+              "via": "VO",
+              "disponivel": "VERIFICAR",
+              "rename": {
+                "edicao": "2024",
+                "resultado": "CONSTA_COM_RESTRICOES_DE_APRESENTACAO_E_INDICACAO",
+                "paginas": [
+                  115,
+                  135,
+                  150
+                ],
+                "fonte": {
+                  "tipo": "NORMA",
+                  "referencia": "https://bvsms.saude.gov.br/bvs/publicacoes/relacao_nacional_medicamentos_2024.pdf#page=116",
+                  "localizador": "páginas impressas 115, 135, 150; entrada folinato",
+                  "trecho": "Folinato de cálcio 15 mg, comprimido; componentes Básico e Estratégico (p. 115).",
+                  "sha256": "b1b0d582cb68fc96fcbe04fd65c1c697d5206b7dce8886f1c6ddb06374fd5201",
+                  "consultadoEm": "2026-10-14"
+                },
+                "ressalva": "Inclusão na RENAME não comprova indicação oncológica, apresentação do esquema, estoque do serviço nem cobertura ANS; ausência nesta edição também não comprova exclusão do SUS."
+              },
+              "sigtapEncontrados": [],
+              "buscasFeitas": [
+                "SIGTAP 2026-09: busca pelo nome folínico em tb_procedimento (ZIP local conferido por SHA-256), incluindo catálogo de medicamentos; RENAME 2024 integral (normalização de acentos; folínico pesquisado como folinato).",
+                "docs/referencias/: 6 arquivos com correspondência textual; docs/referencias\\fornecedores\\AVALIACAO-CONSULTAS-E-CONSOLIDADO.md, docs/referencias\\protocolos\\protocolos-citotoxicos-revisado-silas.csv, docs/referencias\\ragGRAFO-oncologia\\modulos\\03-ginecologico\\arestas.jsonl, docs/referencias\\ragGRAFO-oncologia\\modulos\\03-ginecologico\\nos.jsonl; menção isolada não comprova acesso SUS."
+              ]
+            }
+          ],
+          "observacao": "VERIFICAR: há somente evidência administrativa parcial quando códigos relacionados são listados. Não reclassificar disponibilidade clínica por código de QT ou presença na RENAME. Confirmar fármaco/apresentação/indicação e acesso no serviço; cobertura ANS não foi avaliada."
         },
         "fonte": {
           "tipo": "PROTOCOLO_INSTITUCIONAL",
@@ -280,7 +840,206 @@
             "pagina": null,
             "trecho": "",
             "estado": "PENDENTE"
-          }
+          },
+          "consultadoEm": "2026-10-14",
+          "procedimentosRelacionados": [
+            {
+              "codigo": "0304040169",
+              "nome": "QUIMIOTERAPIA DE SARCOMA ÓSSEO / OSTEOSSARCOMA - 1ª LINHA",
+              "cidsCompativeis": [
+                "C400",
+                "C401",
+                "C402",
+                "C403",
+                "C408",
+                "C409",
+                "C410",
+                "C411",
+                "C412",
+                "C413",
+                "C414",
+                "C418",
+                "C419"
+              ],
+              "instrumentosRegistro": [
+                "06"
+              ],
+              "fonte": {
+                "tipo": "NORMA",
+                "referencia": "corpus/f0c/sigtap/2026-09.json#procedimentos[codigo=0304040169]",
+                "trecho": "QUIMIOTERAPIA DE SARCOMA ÓSSEO / OSTEOSSARCOMA - 1ª LINHA",
+                "competencia": "2026-09"
+              },
+              "ressalva": "Procedimento administrativo; não comprova disponibilidade do fármaco, do esquema, elegibilidade individual ou autorização de APAC."
+            },
+            {
+              "codigo": "0304050210",
+              "nome": "QUIMIOTERAPIA DO OSTEOSSARCOMA",
+              "cidsCompativeis": [
+                "C400",
+                "C401",
+                "C402",
+                "C403",
+                "C408",
+                "C409",
+                "C410",
+                "C411",
+                "C412",
+                "C413",
+                "C414",
+                "C418",
+                "C419"
+              ],
+              "instrumentosRegistro": [
+                "06"
+              ],
+              "fonte": {
+                "tipo": "NORMA",
+                "referencia": "corpus/f0c/sigtap/2026-09.json#procedimentos[codigo=0304050210]",
+                "trecho": "QUIMIOTERAPIA DO OSTEOSSARCOMA",
+                "competencia": "2026-09"
+              },
+              "ressalva": "Procedimento administrativo; não comprova disponibilidade do fármaco, do esquema, elegibilidade individual ou autorização de APAC."
+            },
+            {
+              "codigo": "0304040150",
+              "nome": "QUIMIOTERAPIA DE OSTEOSSARCOMA - 2ª LINHA.",
+              "cidsCompativeis": [
+                "C400",
+                "C401",
+                "C402",
+                "C403",
+                "C408",
+                "C409",
+                "C410",
+                "C411",
+                "C412",
+                "C413",
+                "C414",
+                "C418",
+                "C419"
+              ],
+              "instrumentosRegistro": [
+                "06"
+              ],
+              "fonte": {
+                "tipo": "NORMA",
+                "referencia": "corpus/f0c/sigtap/2026-09.json#procedimentos[codigo=0304040150]",
+                "trecho": "QUIMIOTERAPIA DE OSTEOSSARCOMA - 2ª LINHA.",
+                "competencia": "2026-09"
+              },
+              "ressalva": "Procedimento administrativo; não comprova disponibilidade do fármaco, do esquema, elegibilidade individual ou autorização de APAC."
+            },
+            {
+              "codigo": "0304020303",
+              "nome": "QUIMIOTERAPIA DE SARCOMA ÓSSEO AVANÇADO",
+              "cidsCompativeis": [
+                "C400",
+                "C401",
+                "C402",
+                "C403",
+                "C408",
+                "C409",
+                "C410",
+                "C411",
+                "C412",
+                "C413",
+                "C414",
+                "C418",
+                "C419"
+              ],
+              "instrumentosRegistro": [
+                "06"
+              ],
+              "fonte": {
+                "tipo": "NORMA",
+                "referencia": "corpus/f0c/sigtap/2026-09.json#procedimentos[codigo=0304020303]",
+                "trecho": "QUIMIOTERAPIA DE SARCOMA ÓSSEO AVANÇADO",
+                "competencia": "2026-09"
+              },
+              "ressalva": "Procedimento administrativo; não comprova disponibilidade do fármaco, do esquema, elegibilidade individual ou autorização de APAC."
+            },
+            {
+              "codigo": "0304070050",
+              "nome": "QUIMIOTERAPIA DE ALTA DOSE DE OSTEOSSARCOMA NA INFÂNCIA E ADOLESCÊNCIA",
+              "cidsCompativeis": [
+                "C400",
+                "C401",
+                "C402",
+                "C403",
+                "C408",
+                "C409",
+                "C410",
+                "C411",
+                "C412",
+                "C413",
+                "C414",
+                "C418",
+                "C419"
+              ],
+              "instrumentosRegistro": [
+                "06"
+              ],
+              "fonte": {
+                "tipo": "NORMA",
+                "referencia": "corpus/f0c/sigtap/2026-09.json#procedimentos[codigo=0304070050]",
+                "trecho": "QUIMIOTERAPIA DE ALTA DOSE DE OSTEOSSARCOMA NA INFÂNCIA E ADOLESCÊNCIA",
+                "competencia": "2026-09"
+              },
+              "ressalva": "Procedimento administrativo; não comprova disponibilidade do fármaco, do esquema, elegibilidade individual ou autorização de APAC."
+            }
+          ],
+          "farmacos": [
+            {
+              "droga": "doxorrubicina",
+              "via": "EV",
+              "disponivel": "VERIFICAR",
+              "rename": {
+                "edicao": "2024",
+                "resultado": "NAO_LOCALIZADO_NA_EDICAO_CONSULTADA",
+                "paginas": [],
+                "fonte": {
+                  "tipo": "NORMA",
+                  "referencia": "https://bvsms.saude.gov.br/bvs/publicacoes/relacao_nacional_medicamentos_2024.pdf",
+                  "localizador": "busca textual integral, pp. 1–252, termo doxorrubicina",
+                  "trecho": "Termo doxorrubicina não localizado na busca textual da edição 2024; isso não demonstra não disponibilidade no SUS.",
+                  "sha256": "b1b0d582cb68fc96fcbe04fd65c1c697d5206b7dce8886f1c6ddb06374fd5201",
+                  "consultadoEm": "2026-10-14"
+                },
+                "ressalva": "Inclusão na RENAME não comprova indicação oncológica, apresentação do esquema, estoque do serviço nem cobertura ANS; ausência nesta edição também não comprova exclusão do SUS."
+              },
+              "sigtapEncontrados": [],
+              "buscasFeitas": [
+                "SIGTAP 2026-09: busca pelo nome doxorrubicina em tb_procedimento (ZIP local conferido por SHA-256), incluindo catálogo de medicamentos; RENAME 2024 integral (normalização de acentos; folínico pesquisado como folinato).",
+                "docs/referencias/: 28 arquivos com correspondência textual; docs/referencias\\externos\\PRESCRICAO-POR-TOXICIDADE.md, docs/referencias\\modelos\\05-prescricao-qt-institucional.md, docs/referencias\\fornecedores\\SONHE-2024-PROTOCOLOS.md, docs/referencias\\fornecedores\\RESUMO-GI-PRO2026-MODULO2.md; menção isolada não comprova acesso SUS."
+              ]
+            },
+            {
+              "droga": "cisplatina",
+              "via": "EV",
+              "disponivel": "VERIFICAR",
+              "rename": {
+                "edicao": "2024",
+                "resultado": "NAO_LOCALIZADO_NA_EDICAO_CONSULTADA",
+                "paginas": [],
+                "fonte": {
+                  "tipo": "NORMA",
+                  "referencia": "https://bvsms.saude.gov.br/bvs/publicacoes/relacao_nacional_medicamentos_2024.pdf",
+                  "localizador": "busca textual integral, pp. 1–252, termo cisplatina",
+                  "trecho": "Termo cisplatina não localizado na busca textual da edição 2024; isso não demonstra não disponibilidade no SUS.",
+                  "sha256": "b1b0d582cb68fc96fcbe04fd65c1c697d5206b7dce8886f1c6ddb06374fd5201",
+                  "consultadoEm": "2026-10-14"
+                },
+                "ressalva": "Inclusão na RENAME não comprova indicação oncológica, apresentação do esquema, estoque do serviço nem cobertura ANS; ausência nesta edição também não comprova exclusão do SUS."
+              },
+              "sigtapEncontrados": [],
+              "buscasFeitas": [
+                "SIGTAP 2026-09: busca pelo nome cisplatina em tb_procedimento (ZIP local conferido por SHA-256), incluindo catálogo de medicamentos; RENAME 2024 integral (normalização de acentos; folínico pesquisado como folinato).",
+                "docs/referencias/: 46 arquivos com correspondência textual; docs/referencias\\fornecedores\\SONHE-2024-PROTOCOLOS.md, docs/referencias\\fornecedores\\SONHE-2024-PROTOCOLOS.csv, docs/referencias\\fornecedores\\SBOC-DIRETRIZES-INDICE.md, docs/referencias\\fornecedores\\RESUMO-GI-PRO2026-MODULO2.md; menção isolada não comprova acesso SUS."
+              ]
+            }
+          ],
+          "observacao": "VERIFICAR: há somente evidência administrativa parcial quando códigos relacionados são listados. Não reclassificar disponibilidade clínica por código de QT ou presença na RENAME. Confirmar fármaco/apresentação/indicação e acesso no serviço; cobertura ANS não foi avaliada."
         },
         "fonte": {
           "tipo": "PROTOCOLO_INSTITUCIONAL",
@@ -329,7 +1088,206 @@
             "pagina": null,
             "trecho": "",
             "estado": "PENDENTE"
-          }
+          },
+          "consultadoEm": "2026-10-14",
+          "procedimentosRelacionados": [
+            {
+              "codigo": "0304040169",
+              "nome": "QUIMIOTERAPIA DE SARCOMA ÓSSEO / OSTEOSSARCOMA - 1ª LINHA",
+              "cidsCompativeis": [
+                "C400",
+                "C401",
+                "C402",
+                "C403",
+                "C408",
+                "C409",
+                "C410",
+                "C411",
+                "C412",
+                "C413",
+                "C414",
+                "C418",
+                "C419"
+              ],
+              "instrumentosRegistro": [
+                "06"
+              ],
+              "fonte": {
+                "tipo": "NORMA",
+                "referencia": "corpus/f0c/sigtap/2026-09.json#procedimentos[codigo=0304040169]",
+                "trecho": "QUIMIOTERAPIA DE SARCOMA ÓSSEO / OSTEOSSARCOMA - 1ª LINHA",
+                "competencia": "2026-09"
+              },
+              "ressalva": "Procedimento administrativo; não comprova disponibilidade do fármaco, do esquema, elegibilidade individual ou autorização de APAC."
+            },
+            {
+              "codigo": "0304050210",
+              "nome": "QUIMIOTERAPIA DO OSTEOSSARCOMA",
+              "cidsCompativeis": [
+                "C400",
+                "C401",
+                "C402",
+                "C403",
+                "C408",
+                "C409",
+                "C410",
+                "C411",
+                "C412",
+                "C413",
+                "C414",
+                "C418",
+                "C419"
+              ],
+              "instrumentosRegistro": [
+                "06"
+              ],
+              "fonte": {
+                "tipo": "NORMA",
+                "referencia": "corpus/f0c/sigtap/2026-09.json#procedimentos[codigo=0304050210]",
+                "trecho": "QUIMIOTERAPIA DO OSTEOSSARCOMA",
+                "competencia": "2026-09"
+              },
+              "ressalva": "Procedimento administrativo; não comprova disponibilidade do fármaco, do esquema, elegibilidade individual ou autorização de APAC."
+            },
+            {
+              "codigo": "0304040150",
+              "nome": "QUIMIOTERAPIA DE OSTEOSSARCOMA - 2ª LINHA.",
+              "cidsCompativeis": [
+                "C400",
+                "C401",
+                "C402",
+                "C403",
+                "C408",
+                "C409",
+                "C410",
+                "C411",
+                "C412",
+                "C413",
+                "C414",
+                "C418",
+                "C419"
+              ],
+              "instrumentosRegistro": [
+                "06"
+              ],
+              "fonte": {
+                "tipo": "NORMA",
+                "referencia": "corpus/f0c/sigtap/2026-09.json#procedimentos[codigo=0304040150]",
+                "trecho": "QUIMIOTERAPIA DE OSTEOSSARCOMA - 2ª LINHA.",
+                "competencia": "2026-09"
+              },
+              "ressalva": "Procedimento administrativo; não comprova disponibilidade do fármaco, do esquema, elegibilidade individual ou autorização de APAC."
+            },
+            {
+              "codigo": "0304020303",
+              "nome": "QUIMIOTERAPIA DE SARCOMA ÓSSEO AVANÇADO",
+              "cidsCompativeis": [
+                "C400",
+                "C401",
+                "C402",
+                "C403",
+                "C408",
+                "C409",
+                "C410",
+                "C411",
+                "C412",
+                "C413",
+                "C414",
+                "C418",
+                "C419"
+              ],
+              "instrumentosRegistro": [
+                "06"
+              ],
+              "fonte": {
+                "tipo": "NORMA",
+                "referencia": "corpus/f0c/sigtap/2026-09.json#procedimentos[codigo=0304020303]",
+                "trecho": "QUIMIOTERAPIA DE SARCOMA ÓSSEO AVANÇADO",
+                "competencia": "2026-09"
+              },
+              "ressalva": "Procedimento administrativo; não comprova disponibilidade do fármaco, do esquema, elegibilidade individual ou autorização de APAC."
+            },
+            {
+              "codigo": "0304070050",
+              "nome": "QUIMIOTERAPIA DE ALTA DOSE DE OSTEOSSARCOMA NA INFÂNCIA E ADOLESCÊNCIA",
+              "cidsCompativeis": [
+                "C400",
+                "C401",
+                "C402",
+                "C403",
+                "C408",
+                "C409",
+                "C410",
+                "C411",
+                "C412",
+                "C413",
+                "C414",
+                "C418",
+                "C419"
+              ],
+              "instrumentosRegistro": [
+                "06"
+              ],
+              "fonte": {
+                "tipo": "NORMA",
+                "referencia": "corpus/f0c/sigtap/2026-09.json#procedimentos[codigo=0304070050]",
+                "trecho": "QUIMIOTERAPIA DE ALTA DOSE DE OSTEOSSARCOMA NA INFÂNCIA E ADOLESCÊNCIA",
+                "competencia": "2026-09"
+              },
+              "ressalva": "Procedimento administrativo; não comprova disponibilidade do fármaco, do esquema, elegibilidade individual ou autorização de APAC."
+            }
+          ],
+          "farmacos": [
+            {
+              "droga": "etoposídeo",
+              "via": "EV",
+              "disponivel": "VERIFICAR",
+              "rename": {
+                "edicao": "2024",
+                "resultado": "NAO_LOCALIZADO_NA_EDICAO_CONSULTADA",
+                "paginas": [],
+                "fonte": {
+                  "tipo": "NORMA",
+                  "referencia": "https://bvsms.saude.gov.br/bvs/publicacoes/relacao_nacional_medicamentos_2024.pdf",
+                  "localizador": "busca textual integral, pp. 1–252, termo etoposídeo",
+                  "trecho": "Termo etoposídeo não localizado na busca textual da edição 2024; isso não demonstra não disponibilidade no SUS.",
+                  "sha256": "b1b0d582cb68fc96fcbe04fd65c1c697d5206b7dce8886f1c6ddb06374fd5201",
+                  "consultadoEm": "2026-10-14"
+                },
+                "ressalva": "Inclusão na RENAME não comprova indicação oncológica, apresentação do esquema, estoque do serviço nem cobertura ANS; ausência nesta edição também não comprova exclusão do SUS."
+              },
+              "sigtapEncontrados": [],
+              "buscasFeitas": [
+                "SIGTAP 2026-09: busca pelo nome etoposídeo em tb_procedimento (ZIP local conferido por SHA-256), incluindo catálogo de medicamentos; RENAME 2024 integral (normalização de acentos; folínico pesquisado como folinato).",
+                "docs/referencias/: 14 arquivos com correspondência textual; docs/referencias\\fornecedores\\RESUMO-GI-PRO2026-MODULO2.md, docs/referencias\\fornecedores\\SONHE-2024-PROTOCOLOS.md, docs/referencias\\fornecedores\\SONHE-2024-PROTOCOLOS.csv, docs/referencias\\ragGRAFO-oncologia\\dados\\nos.jsonl; menção isolada não comprova acesso SUS."
+              ]
+            },
+            {
+              "droga": "ifosfamida",
+              "via": "EV",
+              "disponivel": "VERIFICAR",
+              "rename": {
+                "edicao": "2024",
+                "resultado": "NAO_LOCALIZADO_NA_EDICAO_CONSULTADA",
+                "paginas": [],
+                "fonte": {
+                  "tipo": "NORMA",
+                  "referencia": "https://bvsms.saude.gov.br/bvs/publicacoes/relacao_nacional_medicamentos_2024.pdf",
+                  "localizador": "busca textual integral, pp. 1–252, termo ifosfamida",
+                  "trecho": "Termo ifosfamida não localizado na busca textual da edição 2024; isso não demonstra não disponibilidade no SUS.",
+                  "sha256": "b1b0d582cb68fc96fcbe04fd65c1c697d5206b7dce8886f1c6ddb06374fd5201",
+                  "consultadoEm": "2026-10-14"
+                },
+                "ressalva": "Inclusão na RENAME não comprova indicação oncológica, apresentação do esquema, estoque do serviço nem cobertura ANS; ausência nesta edição também não comprova exclusão do SUS."
+              },
+              "sigtapEncontrados": [],
+              "buscasFeitas": [
+                "SIGTAP 2026-09: busca pelo nome ifosfamida em tb_procedimento (ZIP local conferido por SHA-256), incluindo catálogo de medicamentos; RENAME 2024 integral (normalização de acentos; folínico pesquisado como folinato).",
+                "docs/referencias/: 11 arquivos com correspondência textual; docs/referencias\\fornecedores\\SONHE-2024-PROTOCOLOS.md, docs/referencias\\fornecedores\\SONHE-2024-PROTOCOLOS.csv, docs/referencias\\fornecedores\\AVALIACAO-CONSULTAS-E-CONSOLIDADO.md, docs/referencias\\ragGRAFO-oncologia\\dados\\nos.jsonl; menção isolada não comprova acesso SUS."
+              ]
+            }
+          ],
+          "observacao": "VERIFICAR: há somente evidência administrativa parcial quando códigos relacionados são listados. Não reclassificar disponibilidade clínica por código de QT ou presença na RENAME. Confirmar fármaco/apresentação/indicação e acesso no serviço; cobertura ANS não foi avaliada."
         },
         "fonte": {
           "tipo": "PROTOCOLO_INSTITUCIONAL",
@@ -378,7 +1336,206 @@
             "pagina": null,
             "trecho": "",
             "estado": "PENDENTE"
-          }
+          },
+          "consultadoEm": "2026-10-14",
+          "procedimentosRelacionados": [
+            {
+              "codigo": "0304040169",
+              "nome": "QUIMIOTERAPIA DE SARCOMA ÓSSEO / OSTEOSSARCOMA - 1ª LINHA",
+              "cidsCompativeis": [
+                "C400",
+                "C401",
+                "C402",
+                "C403",
+                "C408",
+                "C409",
+                "C410",
+                "C411",
+                "C412",
+                "C413",
+                "C414",
+                "C418",
+                "C419"
+              ],
+              "instrumentosRegistro": [
+                "06"
+              ],
+              "fonte": {
+                "tipo": "NORMA",
+                "referencia": "corpus/f0c/sigtap/2026-09.json#procedimentos[codigo=0304040169]",
+                "trecho": "QUIMIOTERAPIA DE SARCOMA ÓSSEO / OSTEOSSARCOMA - 1ª LINHA",
+                "competencia": "2026-09"
+              },
+              "ressalva": "Procedimento administrativo; não comprova disponibilidade do fármaco, do esquema, elegibilidade individual ou autorização de APAC."
+            },
+            {
+              "codigo": "0304050210",
+              "nome": "QUIMIOTERAPIA DO OSTEOSSARCOMA",
+              "cidsCompativeis": [
+                "C400",
+                "C401",
+                "C402",
+                "C403",
+                "C408",
+                "C409",
+                "C410",
+                "C411",
+                "C412",
+                "C413",
+                "C414",
+                "C418",
+                "C419"
+              ],
+              "instrumentosRegistro": [
+                "06"
+              ],
+              "fonte": {
+                "tipo": "NORMA",
+                "referencia": "corpus/f0c/sigtap/2026-09.json#procedimentos[codigo=0304050210]",
+                "trecho": "QUIMIOTERAPIA DO OSTEOSSARCOMA",
+                "competencia": "2026-09"
+              },
+              "ressalva": "Procedimento administrativo; não comprova disponibilidade do fármaco, do esquema, elegibilidade individual ou autorização de APAC."
+            },
+            {
+              "codigo": "0304040150",
+              "nome": "QUIMIOTERAPIA DE OSTEOSSARCOMA - 2ª LINHA.",
+              "cidsCompativeis": [
+                "C400",
+                "C401",
+                "C402",
+                "C403",
+                "C408",
+                "C409",
+                "C410",
+                "C411",
+                "C412",
+                "C413",
+                "C414",
+                "C418",
+                "C419"
+              ],
+              "instrumentosRegistro": [
+                "06"
+              ],
+              "fonte": {
+                "tipo": "NORMA",
+                "referencia": "corpus/f0c/sigtap/2026-09.json#procedimentos[codigo=0304040150]",
+                "trecho": "QUIMIOTERAPIA DE OSTEOSSARCOMA - 2ª LINHA.",
+                "competencia": "2026-09"
+              },
+              "ressalva": "Procedimento administrativo; não comprova disponibilidade do fármaco, do esquema, elegibilidade individual ou autorização de APAC."
+            },
+            {
+              "codigo": "0304020303",
+              "nome": "QUIMIOTERAPIA DE SARCOMA ÓSSEO AVANÇADO",
+              "cidsCompativeis": [
+                "C400",
+                "C401",
+                "C402",
+                "C403",
+                "C408",
+                "C409",
+                "C410",
+                "C411",
+                "C412",
+                "C413",
+                "C414",
+                "C418",
+                "C419"
+              ],
+              "instrumentosRegistro": [
+                "06"
+              ],
+              "fonte": {
+                "tipo": "NORMA",
+                "referencia": "corpus/f0c/sigtap/2026-09.json#procedimentos[codigo=0304020303]",
+                "trecho": "QUIMIOTERAPIA DE SARCOMA ÓSSEO AVANÇADO",
+                "competencia": "2026-09"
+              },
+              "ressalva": "Procedimento administrativo; não comprova disponibilidade do fármaco, do esquema, elegibilidade individual ou autorização de APAC."
+            },
+            {
+              "codigo": "0304070050",
+              "nome": "QUIMIOTERAPIA DE ALTA DOSE DE OSTEOSSARCOMA NA INFÂNCIA E ADOLESCÊNCIA",
+              "cidsCompativeis": [
+                "C400",
+                "C401",
+                "C402",
+                "C403",
+                "C408",
+                "C409",
+                "C410",
+                "C411",
+                "C412",
+                "C413",
+                "C414",
+                "C418",
+                "C419"
+              ],
+              "instrumentosRegistro": [
+                "06"
+              ],
+              "fonte": {
+                "tipo": "NORMA",
+                "referencia": "corpus/f0c/sigtap/2026-09.json#procedimentos[codigo=0304070050]",
+                "trecho": "QUIMIOTERAPIA DE ALTA DOSE DE OSTEOSSARCOMA NA INFÂNCIA E ADOLESCÊNCIA",
+                "competencia": "2026-09"
+              },
+              "ressalva": "Procedimento administrativo; não comprova disponibilidade do fármaco, do esquema, elegibilidade individual ou autorização de APAC."
+            }
+          ],
+          "farmacos": [
+            {
+              "droga": "gemcitabina",
+              "via": "EV",
+              "disponivel": "VERIFICAR",
+              "rename": {
+                "edicao": "2024",
+                "resultado": "NAO_LOCALIZADO_NA_EDICAO_CONSULTADA",
+                "paginas": [],
+                "fonte": {
+                  "tipo": "NORMA",
+                  "referencia": "https://bvsms.saude.gov.br/bvs/publicacoes/relacao_nacional_medicamentos_2024.pdf",
+                  "localizador": "busca textual integral, pp. 1–252, termo gemcitabina",
+                  "trecho": "Termo gemcitabina não localizado na busca textual da edição 2024; isso não demonstra não disponibilidade no SUS.",
+                  "sha256": "b1b0d582cb68fc96fcbe04fd65c1c697d5206b7dce8886f1c6ddb06374fd5201",
+                  "consultadoEm": "2026-10-14"
+                },
+                "ressalva": "Inclusão na RENAME não comprova indicação oncológica, apresentação do esquema, estoque do serviço nem cobertura ANS; ausência nesta edição também não comprova exclusão do SUS."
+              },
+              "sigtapEncontrados": [],
+              "buscasFeitas": [
+                "SIGTAP 2026-09: busca pelo nome gemcitabina em tb_procedimento (ZIP local conferido por SHA-256), incluindo catálogo de medicamentos; RENAME 2024 integral (normalização de acentos; folínico pesquisado como folinato).",
+                "docs/referencias/: 13 arquivos com correspondência textual; docs/referencias\\fornecedores\\RESUMO-GI-PRO2026-AVALIACAO.md, docs/referencias\\fornecedores\\SONHE-2024-PROTOCOLOS.md, docs/referencias\\fornecedores\\RESUMO-GI-PRO2026-MODULO2.md, docs/referencias\\protocolos\\protocolos-citotoxicos-revisado-silas.csv; menção isolada não comprova acesso SUS."
+              ]
+            },
+            {
+              "droga": "docetaxel",
+              "via": "EV",
+              "disponivel": "VERIFICAR",
+              "rename": {
+                "edicao": "2024",
+                "resultado": "NAO_LOCALIZADO_NA_EDICAO_CONSULTADA",
+                "paginas": [],
+                "fonte": {
+                  "tipo": "NORMA",
+                  "referencia": "https://bvsms.saude.gov.br/bvs/publicacoes/relacao_nacional_medicamentos_2024.pdf",
+                  "localizador": "busca textual integral, pp. 1–252, termo docetaxel",
+                  "trecho": "Termo docetaxel não localizado na busca textual da edição 2024; isso não demonstra não disponibilidade no SUS.",
+                  "sha256": "b1b0d582cb68fc96fcbe04fd65c1c697d5206b7dce8886f1c6ddb06374fd5201",
+                  "consultadoEm": "2026-10-14"
+                },
+                "ressalva": "Inclusão na RENAME não comprova indicação oncológica, apresentação do esquema, estoque do serviço nem cobertura ANS; ausência nesta edição também não comprova exclusão do SUS."
+              },
+              "sigtapEncontrados": [],
+              "buscasFeitas": [
+                "SIGTAP 2026-09: busca pelo nome docetaxel em tb_procedimento (ZIP local conferido por SHA-256), incluindo catálogo de medicamentos; RENAME 2024 integral (normalização de acentos; folínico pesquisado como folinato).",
+                "docs/referencias/: 36 arquivos com correspondência textual; docs/referencias\\evidencias\\desfechos-gi-gu.csv, docs/referencias\\evidencias\\SBOC-2026-MAMA-NEOADJUVANCIA-RESUMO.md, docs/referencias\\evidencias\\DESFECHOS-GI-GU.md, docs/referencias\\evidencias\\NOVIDADES-2026.md; menção isolada não comprova acesso SUS."
+              ]
+            }
+          ],
+          "observacao": "VERIFICAR: há somente evidência administrativa parcial quando códigos relacionados são listados. Não reclassificar disponibilidade clínica por código de QT ou presença na RENAME. Confirmar fármaco/apresentação/indicação e acesso no serviço; cobertura ANS não foi avaliada."
         },
         "fonte": {
           "tipo": "PROTOCOLO_INSTITUCIONAL",
@@ -419,7 +1576,182 @@
             "pagina": null,
             "trecho": "",
             "estado": "PENDENTE"
-          }
+          },
+          "consultadoEm": "2026-10-14",
+          "procedimentosRelacionados": [
+            {
+              "codigo": "0304040169",
+              "nome": "QUIMIOTERAPIA DE SARCOMA ÓSSEO / OSTEOSSARCOMA - 1ª LINHA",
+              "cidsCompativeis": [
+                "C400",
+                "C401",
+                "C402",
+                "C403",
+                "C408",
+                "C409",
+                "C410",
+                "C411",
+                "C412",
+                "C413",
+                "C414",
+                "C418",
+                "C419"
+              ],
+              "instrumentosRegistro": [
+                "06"
+              ],
+              "fonte": {
+                "tipo": "NORMA",
+                "referencia": "corpus/f0c/sigtap/2026-09.json#procedimentos[codigo=0304040169]",
+                "trecho": "QUIMIOTERAPIA DE SARCOMA ÓSSEO / OSTEOSSARCOMA - 1ª LINHA",
+                "competencia": "2026-09"
+              },
+              "ressalva": "Procedimento administrativo; não comprova disponibilidade do fármaco, do esquema, elegibilidade individual ou autorização de APAC."
+            },
+            {
+              "codigo": "0304050210",
+              "nome": "QUIMIOTERAPIA DO OSTEOSSARCOMA",
+              "cidsCompativeis": [
+                "C400",
+                "C401",
+                "C402",
+                "C403",
+                "C408",
+                "C409",
+                "C410",
+                "C411",
+                "C412",
+                "C413",
+                "C414",
+                "C418",
+                "C419"
+              ],
+              "instrumentosRegistro": [
+                "06"
+              ],
+              "fonte": {
+                "tipo": "NORMA",
+                "referencia": "corpus/f0c/sigtap/2026-09.json#procedimentos[codigo=0304050210]",
+                "trecho": "QUIMIOTERAPIA DO OSTEOSSARCOMA",
+                "competencia": "2026-09"
+              },
+              "ressalva": "Procedimento administrativo; não comprova disponibilidade do fármaco, do esquema, elegibilidade individual ou autorização de APAC."
+            },
+            {
+              "codigo": "0304040150",
+              "nome": "QUIMIOTERAPIA DE OSTEOSSARCOMA - 2ª LINHA.",
+              "cidsCompativeis": [
+                "C400",
+                "C401",
+                "C402",
+                "C403",
+                "C408",
+                "C409",
+                "C410",
+                "C411",
+                "C412",
+                "C413",
+                "C414",
+                "C418",
+                "C419"
+              ],
+              "instrumentosRegistro": [
+                "06"
+              ],
+              "fonte": {
+                "tipo": "NORMA",
+                "referencia": "corpus/f0c/sigtap/2026-09.json#procedimentos[codigo=0304040150]",
+                "trecho": "QUIMIOTERAPIA DE OSTEOSSARCOMA - 2ª LINHA.",
+                "competencia": "2026-09"
+              },
+              "ressalva": "Procedimento administrativo; não comprova disponibilidade do fármaco, do esquema, elegibilidade individual ou autorização de APAC."
+            },
+            {
+              "codigo": "0304020303",
+              "nome": "QUIMIOTERAPIA DE SARCOMA ÓSSEO AVANÇADO",
+              "cidsCompativeis": [
+                "C400",
+                "C401",
+                "C402",
+                "C403",
+                "C408",
+                "C409",
+                "C410",
+                "C411",
+                "C412",
+                "C413",
+                "C414",
+                "C418",
+                "C419"
+              ],
+              "instrumentosRegistro": [
+                "06"
+              ],
+              "fonte": {
+                "tipo": "NORMA",
+                "referencia": "corpus/f0c/sigtap/2026-09.json#procedimentos[codigo=0304020303]",
+                "trecho": "QUIMIOTERAPIA DE SARCOMA ÓSSEO AVANÇADO",
+                "competencia": "2026-09"
+              },
+              "ressalva": "Procedimento administrativo; não comprova disponibilidade do fármaco, do esquema, elegibilidade individual ou autorização de APAC."
+            },
+            {
+              "codigo": "0304070050",
+              "nome": "QUIMIOTERAPIA DE ALTA DOSE DE OSTEOSSARCOMA NA INFÂNCIA E ADOLESCÊNCIA",
+              "cidsCompativeis": [
+                "C400",
+                "C401",
+                "C402",
+                "C403",
+                "C408",
+                "C409",
+                "C410",
+                "C411",
+                "C412",
+                "C413",
+                "C414",
+                "C418",
+                "C419"
+              ],
+              "instrumentosRegistro": [
+                "06"
+              ],
+              "fonte": {
+                "tipo": "NORMA",
+                "referencia": "corpus/f0c/sigtap/2026-09.json#procedimentos[codigo=0304070050]",
+                "trecho": "QUIMIOTERAPIA DE ALTA DOSE DE OSTEOSSARCOMA NA INFÂNCIA E ADOLESCÊNCIA",
+                "competencia": "2026-09"
+              },
+              "ressalva": "Procedimento administrativo; não comprova disponibilidade do fármaco, do esquema, elegibilidade individual ou autorização de APAC."
+            }
+          ],
+          "farmacos": [
+            {
+              "droga": "regorafenibe",
+              "via": "VO",
+              "disponivel": "VERIFICAR",
+              "rename": {
+                "edicao": "2024",
+                "resultado": "NAO_LOCALIZADO_NA_EDICAO_CONSULTADA",
+                "paginas": [],
+                "fonte": {
+                  "tipo": "NORMA",
+                  "referencia": "https://bvsms.saude.gov.br/bvs/publicacoes/relacao_nacional_medicamentos_2024.pdf",
+                  "localizador": "busca textual integral, pp. 1–252, termo regorafenibe",
+                  "trecho": "Termo regorafenibe não localizado na busca textual da edição 2024; isso não demonstra não disponibilidade no SUS.",
+                  "sha256": "b1b0d582cb68fc96fcbe04fd65c1c697d5206b7dce8886f1c6ddb06374fd5201",
+                  "consultadoEm": "2026-10-14"
+                },
+                "ressalva": "Inclusão na RENAME não comprova indicação oncológica, apresentação do esquema, estoque do serviço nem cobertura ANS; ausência nesta edição também não comprova exclusão do SUS."
+              },
+              "sigtapEncontrados": [],
+              "buscasFeitas": [
+                "SIGTAP 2026-09: busca pelo nome regorafenibe em tb_procedimento (ZIP local conferido por SHA-256), incluindo catálogo de medicamentos; RENAME 2024 integral (normalização de acentos; folínico pesquisado como folinato).",
+                "docs/referencias/: 13 arquivos com correspondência textual; docs/referencias\\evidencias\\ASCO-2026-VERIFICACAO.md, docs/referencias\\fornecedores\\RESUMO-GI-PRO2026-MODULO2.md, docs/referencias\\fornecedores\\RESUMO-GI-PRO2026-AVALIACAO.md, docs/referencias\\evidencias\\DESFECHOS-GI-GU.md; menção isolada não comprova acesso SUS."
+              ]
+            }
+          ],
+          "observacao": "VERIFICAR: há somente evidência administrativa parcial quando códigos relacionados são listados. Não reclassificar disponibilidade clínica por código de QT ou presença na RENAME. Confirmar fármaco/apresentação/indicação e acesso no serviço; cobertura ANS não foi avaliada."
         },
         "fonte": {
           "tipo": "PROTOCOLO_INSTITUCIONAL",
@@ -460,7 +1792,182 @@
             "pagina": null,
             "trecho": "",
             "estado": "PENDENTE"
-          }
+          },
+          "consultadoEm": "2026-10-14",
+          "procedimentosRelacionados": [
+            {
+              "codigo": "0304040169",
+              "nome": "QUIMIOTERAPIA DE SARCOMA ÓSSEO / OSTEOSSARCOMA - 1ª LINHA",
+              "cidsCompativeis": [
+                "C400",
+                "C401",
+                "C402",
+                "C403",
+                "C408",
+                "C409",
+                "C410",
+                "C411",
+                "C412",
+                "C413",
+                "C414",
+                "C418",
+                "C419"
+              ],
+              "instrumentosRegistro": [
+                "06"
+              ],
+              "fonte": {
+                "tipo": "NORMA",
+                "referencia": "corpus/f0c/sigtap/2026-09.json#procedimentos[codigo=0304040169]",
+                "trecho": "QUIMIOTERAPIA DE SARCOMA ÓSSEO / OSTEOSSARCOMA - 1ª LINHA",
+                "competencia": "2026-09"
+              },
+              "ressalva": "Procedimento administrativo; não comprova disponibilidade do fármaco, do esquema, elegibilidade individual ou autorização de APAC."
+            },
+            {
+              "codigo": "0304050210",
+              "nome": "QUIMIOTERAPIA DO OSTEOSSARCOMA",
+              "cidsCompativeis": [
+                "C400",
+                "C401",
+                "C402",
+                "C403",
+                "C408",
+                "C409",
+                "C410",
+                "C411",
+                "C412",
+                "C413",
+                "C414",
+                "C418",
+                "C419"
+              ],
+              "instrumentosRegistro": [
+                "06"
+              ],
+              "fonte": {
+                "tipo": "NORMA",
+                "referencia": "corpus/f0c/sigtap/2026-09.json#procedimentos[codigo=0304050210]",
+                "trecho": "QUIMIOTERAPIA DO OSTEOSSARCOMA",
+                "competencia": "2026-09"
+              },
+              "ressalva": "Procedimento administrativo; não comprova disponibilidade do fármaco, do esquema, elegibilidade individual ou autorização de APAC."
+            },
+            {
+              "codigo": "0304040150",
+              "nome": "QUIMIOTERAPIA DE OSTEOSSARCOMA - 2ª LINHA.",
+              "cidsCompativeis": [
+                "C400",
+                "C401",
+                "C402",
+                "C403",
+                "C408",
+                "C409",
+                "C410",
+                "C411",
+                "C412",
+                "C413",
+                "C414",
+                "C418",
+                "C419"
+              ],
+              "instrumentosRegistro": [
+                "06"
+              ],
+              "fonte": {
+                "tipo": "NORMA",
+                "referencia": "corpus/f0c/sigtap/2026-09.json#procedimentos[codigo=0304040150]",
+                "trecho": "QUIMIOTERAPIA DE OSTEOSSARCOMA - 2ª LINHA.",
+                "competencia": "2026-09"
+              },
+              "ressalva": "Procedimento administrativo; não comprova disponibilidade do fármaco, do esquema, elegibilidade individual ou autorização de APAC."
+            },
+            {
+              "codigo": "0304020303",
+              "nome": "QUIMIOTERAPIA DE SARCOMA ÓSSEO AVANÇADO",
+              "cidsCompativeis": [
+                "C400",
+                "C401",
+                "C402",
+                "C403",
+                "C408",
+                "C409",
+                "C410",
+                "C411",
+                "C412",
+                "C413",
+                "C414",
+                "C418",
+                "C419"
+              ],
+              "instrumentosRegistro": [
+                "06"
+              ],
+              "fonte": {
+                "tipo": "NORMA",
+                "referencia": "corpus/f0c/sigtap/2026-09.json#procedimentos[codigo=0304020303]",
+                "trecho": "QUIMIOTERAPIA DE SARCOMA ÓSSEO AVANÇADO",
+                "competencia": "2026-09"
+              },
+              "ressalva": "Procedimento administrativo; não comprova disponibilidade do fármaco, do esquema, elegibilidade individual ou autorização de APAC."
+            },
+            {
+              "codigo": "0304070050",
+              "nome": "QUIMIOTERAPIA DE ALTA DOSE DE OSTEOSSARCOMA NA INFÂNCIA E ADOLESCÊNCIA",
+              "cidsCompativeis": [
+                "C400",
+                "C401",
+                "C402",
+                "C403",
+                "C408",
+                "C409",
+                "C410",
+                "C411",
+                "C412",
+                "C413",
+                "C414",
+                "C418",
+                "C419"
+              ],
+              "instrumentosRegistro": [
+                "06"
+              ],
+              "fonte": {
+                "tipo": "NORMA",
+                "referencia": "corpus/f0c/sigtap/2026-09.json#procedimentos[codigo=0304070050]",
+                "trecho": "QUIMIOTERAPIA DE ALTA DOSE DE OSTEOSSARCOMA NA INFÂNCIA E ADOLESCÊNCIA",
+                "competencia": "2026-09"
+              },
+              "ressalva": "Procedimento administrativo; não comprova disponibilidade do fármaco, do esquema, elegibilidade individual ou autorização de APAC."
+            }
+          ],
+          "farmacos": [
+            {
+              "droga": "pembrolizumabe",
+              "via": "EV",
+              "disponivel": "VERIFICAR",
+              "rename": {
+                "edicao": "2024",
+                "resultado": "NAO_LOCALIZADO_NA_EDICAO_CONSULTADA",
+                "paginas": [],
+                "fonte": {
+                  "tipo": "NORMA",
+                  "referencia": "https://bvsms.saude.gov.br/bvs/publicacoes/relacao_nacional_medicamentos_2024.pdf",
+                  "localizador": "busca textual integral, pp. 1–252, termo pembrolizumabe",
+                  "trecho": "Termo pembrolizumabe não localizado na busca textual da edição 2024; isso não demonstra não disponibilidade no SUS.",
+                  "sha256": "b1b0d582cb68fc96fcbe04fd65c1c697d5206b7dce8886f1c6ddb06374fd5201",
+                  "consultadoEm": "2026-10-14"
+                },
+                "ressalva": "Inclusão na RENAME não comprova indicação oncológica, apresentação do esquema, estoque do serviço nem cobertura ANS; ausência nesta edição também não comprova exclusão do SUS."
+              },
+              "sigtapEncontrados": [],
+              "buscasFeitas": [
+                "SIGTAP 2026-09: busca pelo nome pembrolizumabe em tb_procedimento (ZIP local conferido por SHA-256), incluindo catálogo de medicamentos; RENAME 2024 integral (normalização de acentos; folínico pesquisado como folinato).",
+                "docs/referencias/: 40 arquivos com correspondência textual; docs/referencias\\fornecedores\\SONHE-2024-PROTOCOLOS.md, docs/referencias\\fornecedores\\RESUMO-GI-PRO2026-AVALIACAO.md, docs/referencias\\fornecedores\\SONHE-2024-PROTOCOLOS.csv, docs/referencias\\evidencias\\SBOC-2026-MAMA-NEOADJUVANCIA-RESUMO.md; menção isolada não comprova acesso SUS."
+              ]
+            }
+          ],
+          "observacao": "VERIFICAR: há somente evidência administrativa parcial quando códigos relacionados são listados. Não reclassificar disponibilidade clínica por código de QT ou presença na RENAME. Confirmar fármaco/apresentação/indicação e acesso no serviço; cobertura ANS não foi avaliada."
         },
         "fonte": {
           "tipo": "PROTOCOLO_INSTITUCIONAL",
@@ -588,6 +2095,90 @@
       "classe": "VARIANTE",
       "buscasFeitas": [
         "eviQ 1901 C5-6"
+      ]
+    },
+    {
+      "texto": "H2 osteo-map-c14: disponibilidade SUS do esquema e de cada fármaco não comprovada; códigos relacionados encontrados, sujeitos a CID, cenário e demais atributos.",
+      "classe": "DISPONIBILIDADE_SUS_NAO_COMPROVADA",
+      "protocoloId": "osteo-map-c14",
+      "buscasFeitas": [
+        "corpus/f0c/sigtap/2026-09.json: nomes e CIDs do pack; códigos relacionados 0304040169, 0304050210, 0304040150, 0304020303, 0304070050.",
+        "ZIP oficial 2026-09: tb_procedimento completo, por nomes de todos os fármacos do protocolo; sem consulta de rede ao SIGTAP.",
+        "docs/referencias/: busca textual por RENAME, disponibilidade SUS e nomes dos fármacos; compêndios secundários sem prova oficial específica de acesso para estes esquemas.",
+        "RENAME 2024, edição apontada vigente no portal do Ministério da Saúde; resultados por fármaco em tratamento.protocolos[id=osteo-map-c14].sus.farmacos.",
+        "Ausência de confirmação institucional de estoque/acesso por indicação."
+      ]
+    },
+    {
+      "texto": "H2 osteo-map-c56: disponibilidade SUS do esquema e de cada fármaco não comprovada; códigos relacionados encontrados, sujeitos a CID, cenário e demais atributos.",
+      "classe": "DISPONIBILIDADE_SUS_NAO_COMPROVADA",
+      "protocoloId": "osteo-map-c56",
+      "buscasFeitas": [
+        "corpus/f0c/sigtap/2026-09.json: nomes e CIDs do pack; códigos relacionados 0304040169, 0304050210, 0304040150, 0304020303, 0304070050.",
+        "ZIP oficial 2026-09: tb_procedimento completo, por nomes de todos os fármacos do protocolo; sem consulta de rede ao SIGTAP.",
+        "docs/referencias/: busca textual por RENAME, disponibilidade SUS e nomes dos fármacos; compêndios secundários sem prova oficial específica de acesso para estes esquemas.",
+        "RENAME 2024, edição apontada vigente no portal do Ministério da Saúde; resultados por fármaco em tratamento.protocolos[id=osteo-map-c56].sus.farmacos.",
+        "Ausência de confirmação institucional de estoque/acesso por indicação."
+      ]
+    },
+    {
+      "texto": "H2 osteo-ap: disponibilidade SUS do esquema e de cada fármaco não comprovada; códigos relacionados encontrados, sujeitos a CID, cenário e demais atributos.",
+      "classe": "DISPONIBILIDADE_SUS_NAO_COMPROVADA",
+      "protocoloId": "osteo-ap",
+      "buscasFeitas": [
+        "corpus/f0c/sigtap/2026-09.json: nomes e CIDs do pack; códigos relacionados 0304040169, 0304050210, 0304040150, 0304020303, 0304070050.",
+        "ZIP oficial 2026-09: tb_procedimento completo, por nomes de todos os fármacos do protocolo; sem consulta de rede ao SIGTAP.",
+        "docs/referencias/: busca textual por RENAME, disponibilidade SUS e nomes dos fármacos; compêndios secundários sem prova oficial específica de acesso para estes esquemas.",
+        "RENAME 2024, edição apontada vigente no portal do Ministério da Saúde; resultados por fármaco em tratamento.protocolos[id=osteo-ap].sus.farmacos.",
+        "Ausência de confirmação institucional de estoque/acesso por indicação."
+      ]
+    },
+    {
+      "texto": "H2 osteo-ifep: disponibilidade SUS do esquema e de cada fármaco não comprovada; códigos relacionados encontrados, sujeitos a CID, cenário e demais atributos.",
+      "classe": "DISPONIBILIDADE_SUS_NAO_COMPROVADA",
+      "protocoloId": "osteo-ifep",
+      "buscasFeitas": [
+        "corpus/f0c/sigtap/2026-09.json: nomes e CIDs do pack; códigos relacionados 0304040169, 0304050210, 0304040150, 0304020303, 0304070050.",
+        "ZIP oficial 2026-09: tb_procedimento completo, por nomes de todos os fármacos do protocolo; sem consulta de rede ao SIGTAP.",
+        "docs/referencias/: busca textual por RENAME, disponibilidade SUS e nomes dos fármacos; compêndios secundários sem prova oficial específica de acesso para estes esquemas.",
+        "RENAME 2024, edição apontada vigente no portal do Ministério da Saúde; resultados por fármaco em tratamento.protocolos[id=osteo-ifep].sus.farmacos.",
+        "Ausência de confirmação institucional de estoque/acesso por indicação."
+      ]
+    },
+    {
+      "texto": "H2 osteo-gemdoc: disponibilidade SUS do esquema e de cada fármaco não comprovada; códigos relacionados encontrados, sujeitos a CID, cenário e demais atributos.",
+      "classe": "DISPONIBILIDADE_SUS_NAO_COMPROVADA",
+      "protocoloId": "osteo-gemdoc",
+      "buscasFeitas": [
+        "corpus/f0c/sigtap/2026-09.json: nomes e CIDs do pack; códigos relacionados 0304040169, 0304050210, 0304040150, 0304020303, 0304070050.",
+        "ZIP oficial 2026-09: tb_procedimento completo, por nomes de todos os fármacos do protocolo; sem consulta de rede ao SIGTAP.",
+        "docs/referencias/: busca textual por RENAME, disponibilidade SUS e nomes dos fármacos; compêndios secundários sem prova oficial específica de acesso para estes esquemas.",
+        "RENAME 2024, edição apontada vigente no portal do Ministério da Saúde; resultados por fármaco em tratamento.protocolos[id=osteo-gemdoc].sus.farmacos.",
+        "Ausência de confirmação institucional de estoque/acesso por indicação."
+      ]
+    },
+    {
+      "texto": "H2 osteo-regorafenibe: disponibilidade SUS do esquema e de cada fármaco não comprovada; códigos relacionados encontrados, sujeitos a CID, cenário e demais atributos.",
+      "classe": "DISPONIBILIDADE_SUS_NAO_COMPROVADA",
+      "protocoloId": "osteo-regorafenibe",
+      "buscasFeitas": [
+        "corpus/f0c/sigtap/2026-09.json: nomes e CIDs do pack; códigos relacionados 0304040169, 0304050210, 0304040150, 0304020303, 0304070050.",
+        "ZIP oficial 2026-09: tb_procedimento completo, por nomes de todos os fármacos do protocolo; sem consulta de rede ao SIGTAP.",
+        "docs/referencias/: busca textual por RENAME, disponibilidade SUS e nomes dos fármacos; compêndios secundários sem prova oficial específica de acesso para estes esquemas.",
+        "RENAME 2024, edição apontada vigente no portal do Ministério da Saúde; resultados por fármaco em tratamento.protocolos[id=osteo-regorafenibe].sus.farmacos.",
+        "Ausência de confirmação institucional de estoque/acesso por indicação."
+      ]
+    },
+    {
+      "texto": "H2 osteo-pembro-msi: disponibilidade SUS do esquema e de cada fármaco não comprovada; códigos relacionados encontrados, sujeitos a CID, cenário e demais atributos.",
+      "classe": "DISPONIBILIDADE_SUS_NAO_COMPROVADA",
+      "protocoloId": "osteo-pembro-msi",
+      "buscasFeitas": [
+        "corpus/f0c/sigtap/2026-09.json: nomes e CIDs do pack; códigos relacionados 0304040169, 0304050210, 0304040150, 0304020303, 0304070050.",
+        "ZIP oficial 2026-09: tb_procedimento completo, por nomes de todos os fármacos do protocolo; sem consulta de rede ao SIGTAP.",
+        "docs/referencias/: busca textual por RENAME, disponibilidade SUS e nomes dos fármacos; compêndios secundários sem prova oficial específica de acesso para estes esquemas.",
+        "RENAME 2024, edição apontada vigente no portal do Ministério da Saúde; resultados por fármaco em tratamento.protocolos[id=osteo-pembro-msi].sus.farmacos.",
+        "Ausência de confirmação institucional de estoque/acesso por indicação."
       ]
     }
   ],

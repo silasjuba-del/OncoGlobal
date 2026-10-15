@@ -179,7 +179,58 @@
             "pagina": null,
             "trecho": "",
             "estado": "PENDENTE"
-          }
+          },
+          "consultadoEm": "2026-10-14",
+          "procedimentosRelacionados": [
+            {
+              "codigo": "0304040126",
+              "nome": "QUIMIOTERAPIA DO CARCINOMA EPIDERMOIDE DE VULVA",
+              "cidsCompativeis": [
+                "C510",
+                "C511",
+                "C512",
+                "C518",
+                "C519"
+              ],
+              "instrumentosRegistro": [
+                "06"
+              ],
+              "fonte": {
+                "tipo": "NORMA",
+                "referencia": "corpus/f0c/sigtap/2026-09.json#procedimentos[codigo=0304040126]",
+                "trecho": "QUIMIOTERAPIA DO CARCINOMA EPIDERMOIDE DE VULVA",
+                "competencia": "2026-09"
+              },
+              "ressalva": "Procedimento administrativo; não comprova disponibilidade do fármaco, do esquema, elegibilidade individual ou autorização de APAC."
+            }
+          ],
+          "farmacos": [
+            {
+              "droga": "cisplatina",
+              "via": "EV",
+              "disponivel": "VERIFICAR",
+              "rename": {
+                "edicao": "2024",
+                "resultado": "NAO_LOCALIZADO_NA_EDICAO_CONSULTADA",
+                "paginas": [],
+                "fonte": {
+                  "tipo": "NORMA",
+                  "referencia": "https://bvsms.saude.gov.br/bvs/publicacoes/relacao_nacional_medicamentos_2024.pdf",
+                  "localizador": "busca textual integral, pp. 1–252, termo cisplatina",
+                  "trecho": "Termo cisplatina não localizado na busca textual da edição 2024; isso não demonstra não disponibilidade no SUS.",
+                  "sha256": "b1b0d582cb68fc96fcbe04fd65c1c697d5206b7dce8886f1c6ddb06374fd5201",
+                  "consultadoEm": "2026-10-14"
+                },
+                "ressalva": "Inclusão na RENAME não comprova indicação oncológica, apresentação do esquema, estoque do serviço nem cobertura ANS; ausência nesta edição também não comprova exclusão do SUS."
+              },
+              "sigtapEncontrados": [],
+              "buscasFeitas": [
+                "SIGTAP 2026-09: busca pelo nome cisplatina em tb_procedimento (ZIP local conferido por SHA-256), incluindo catálogo de medicamentos; RENAME 2024 integral (normalização de acentos; folínico pesquisado como folinato).",
+                "docs/referencias/: 46 arquivos com correspondência textual; docs/referencias\\fornecedores\\SONHE-2024-PROTOCOLOS.md, docs/referencias\\fornecedores\\SONHE-2024-PROTOCOLOS.csv, docs/referencias\\fornecedores\\SBOC-DIRETRIZES-INDICE.md, docs/referencias\\fornecedores\\RESUMO-GI-PRO2026-MODULO2.md; menção isolada não comprova acesso SUS."
+              ]
+            }
+          ],
+          "observacao": "VERIFICAR: há somente evidência administrativa parcial quando códigos relacionados são listados. Não reclassificar disponibilidade clínica por código de QT ou presença na RENAME. Confirmar fármaco/apresentação/indicação e acesso no serviço; cobertura ANS não foi avaliada."
         },
         "fonte": {
           "tipo": "PROTOCOLO_INSTITUCIONAL",
@@ -228,7 +279,93 @@
             "pagina": null,
             "trecho": "",
             "estado": "PENDENTE"
-          }
+          },
+          "consultadoEm": "2026-10-14",
+          "procedimentosRelacionados": [
+            {
+              "codigo": "0304020184",
+              "nome": "QUIMIOTERAPIA DA NEOPLASIA MALIGNA AVANÇADA DO COLO OU DO CORPO UTERINO AVANÇADO, VULVA E VAGINA.",
+              "cidsCompativeis": [
+                "C510",
+                "C511",
+                "C512",
+                "C518",
+                "C519",
+                "C52",
+                "C530",
+                "C531",
+                "C538",
+                "C539",
+                "C540",
+                "C541",
+                "C542",
+                "C543",
+                "C548",
+                "C549"
+              ],
+              "instrumentosRegistro": [
+                "06"
+              ],
+              "fonte": {
+                "tipo": "NORMA",
+                "referencia": "corpus/f0c/sigtap/2026-09.json#procedimentos[codigo=0304020184]",
+                "trecho": "QUIMIOTERAPIA DA NEOPLASIA MALIGNA AVANÇADA DO COLO OU DO CORPO UTERINO AVANÇADO, VULVA E VAGINA.",
+                "competencia": "2026-09"
+              },
+              "ressalva": "Procedimento administrativo; não comprova disponibilidade do fármaco, do esquema, elegibilidade individual ou autorização de APAC."
+            }
+          ],
+          "farmacos": [
+            {
+              "droga": "paclitaxel",
+              "via": "EV",
+              "disponivel": "VERIFICAR",
+              "rename": {
+                "edicao": "2024",
+                "resultado": "NAO_LOCALIZADO_NA_EDICAO_CONSULTADA",
+                "paginas": [],
+                "fonte": {
+                  "tipo": "NORMA",
+                  "referencia": "https://bvsms.saude.gov.br/bvs/publicacoes/relacao_nacional_medicamentos_2024.pdf",
+                  "localizador": "busca textual integral, pp. 1–252, termo paclitaxel",
+                  "trecho": "Termo paclitaxel não localizado na busca textual da edição 2024; isso não demonstra não disponibilidade no SUS.",
+                  "sha256": "b1b0d582cb68fc96fcbe04fd65c1c697d5206b7dce8886f1c6ddb06374fd5201",
+                  "consultadoEm": "2026-10-14"
+                },
+                "ressalva": "Inclusão na RENAME não comprova indicação oncológica, apresentação do esquema, estoque do serviço nem cobertura ANS; ausência nesta edição também não comprova exclusão do SUS."
+              },
+              "sigtapEncontrados": [],
+              "buscasFeitas": [
+                "SIGTAP 2026-09: busca pelo nome paclitaxel em tb_procedimento (ZIP local conferido por SHA-256), incluindo catálogo de medicamentos; RENAME 2024 integral (normalização de acentos; folínico pesquisado como folinato).",
+                "docs/referencias/: 42 arquivos com correspondência textual; docs/referencias\\evidencias\\SBOC-2026-MAMA-NEOADJUVANCIA-RESUMO.md, docs/referencias\\evidencias\\novidades.csv, docs/referencias\\evidencias\\NOVIDADES-2026.md, docs/referencias\\protocolos\\protocolos-citotoxicos-revisado-silas.csv; menção isolada não comprova acesso SUS."
+              ]
+            },
+            {
+              "droga": "carboplatina",
+              "via": "EV",
+              "disponivel": "VERIFICAR",
+              "rename": {
+                "edicao": "2024",
+                "resultado": "NAO_LOCALIZADO_NA_EDICAO_CONSULTADA",
+                "paginas": [],
+                "fonte": {
+                  "tipo": "NORMA",
+                  "referencia": "https://bvsms.saude.gov.br/bvs/publicacoes/relacao_nacional_medicamentos_2024.pdf",
+                  "localizador": "busca textual integral, pp. 1–252, termo carboplatina",
+                  "trecho": "Termo carboplatina não localizado na busca textual da edição 2024; isso não demonstra não disponibilidade no SUS.",
+                  "sha256": "b1b0d582cb68fc96fcbe04fd65c1c697d5206b7dce8886f1c6ddb06374fd5201",
+                  "consultadoEm": "2026-10-14"
+                },
+                "ressalva": "Inclusão na RENAME não comprova indicação oncológica, apresentação do esquema, estoque do serviço nem cobertura ANS; ausência nesta edição também não comprova exclusão do SUS."
+              },
+              "sigtapEncontrados": [],
+              "buscasFeitas": [
+                "SIGTAP 2026-09: busca pelo nome carboplatina em tb_procedimento (ZIP local conferido por SHA-256), incluindo catálogo de medicamentos; RENAME 2024 integral (normalização de acentos; folínico pesquisado como folinato).",
+                "docs/referencias/: 37 arquivos com correspondência textual; docs/referencias\\protocolos\\protocolos-citotoxicos-revisado-silas.csv, docs/referencias\\evidencias\\ASCO-2026-VERIFICACAO.md, docs/referencias\\fornecedores\\RESUMO-GI-PRO2026-MODULO2.md, docs/referencias\\fornecedores\\SONHE-2024-PROTOCOLOS.csv; menção isolada não comprova acesso SUS."
+              ]
+            }
+          ],
+          "observacao": "VERIFICAR: há somente evidência administrativa parcial quando códigos relacionados são listados. Não reclassificar disponibilidade clínica por código de QT ou presença na RENAME. Confirmar fármaco/apresentação/indicação e acesso no serviço; cobertura ANS não foi avaliada."
         },
         "fonte": {
           "tipo": "PROTOCOLO_INSTITUCIONAL",
@@ -321,6 +458,30 @@
       "classe": "PENDENCIA_TECNICA",
       "buscasFeitas": [
         "Moore 2012 (esquema ~40 Gy em frações?) — ler texto integral"
+      ]
+    },
+    {
+      "texto": "H2 vulva-cis-rt: disponibilidade SUS do esquema e de cada fármaco não comprovada; códigos relacionados encontrados, sujeitos a CID, cenário e demais atributos.",
+      "classe": "DISPONIBILIDADE_SUS_NAO_COMPROVADA",
+      "protocoloId": "vulva-cis-rt",
+      "buscasFeitas": [
+        "corpus/f0c/sigtap/2026-09.json: nomes e CIDs do pack; códigos relacionados 0304040126.",
+        "ZIP oficial 2026-09: tb_procedimento completo, por nomes de todos os fármacos do protocolo; sem consulta de rede ao SIGTAP.",
+        "docs/referencias/: busca textual por RENAME, disponibilidade SUS e nomes dos fármacos; compêndios secundários sem prova oficial específica de acesso para estes esquemas.",
+        "RENAME 2024, edição apontada vigente no portal do Ministério da Saúde; resultados por fármaco em tratamento.protocolos[id=vulva-cis-rt].sus.farmacos.",
+        "Ausência de confirmação institucional de estoque/acesso por indicação."
+      ]
+    },
+    {
+      "texto": "H2 vulva-carbopac: disponibilidade SUS do esquema e de cada fármaco não comprovada; códigos relacionados encontrados, sujeitos a CID, cenário e demais atributos.",
+      "classe": "DISPONIBILIDADE_SUS_NAO_COMPROVADA",
+      "protocoloId": "vulva-carbopac",
+      "buscasFeitas": [
+        "corpus/f0c/sigtap/2026-09.json: nomes e CIDs do pack; códigos relacionados 0304020184.",
+        "ZIP oficial 2026-09: tb_procedimento completo, por nomes de todos os fármacos do protocolo; sem consulta de rede ao SIGTAP.",
+        "docs/referencias/: busca textual por RENAME, disponibilidade SUS e nomes dos fármacos; compêndios secundários sem prova oficial específica de acesso para estes esquemas.",
+        "RENAME 2024, edição apontada vigente no portal do Ministério da Saúde; resultados por fármaco em tratamento.protocolos[id=vulva-carbopac].sus.farmacos.",
+        "Ausência de confirmação institucional de estoque/acesso por indicação."
       ]
     }
   ],

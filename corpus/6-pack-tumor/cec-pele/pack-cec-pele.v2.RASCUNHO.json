@@ -157,7 +157,36 @@
             "pagina": null,
             "trecho": "",
             "estado": "PENDENTE"
-          }
+          },
+          "consultadoEm": "2026-10-14",
+          "procedimentosRelacionados": [],
+          "farmacos": [
+            {
+              "droga": "cemiplimabe",
+              "via": "EV",
+              "disponivel": "VERIFICAR",
+              "rename": {
+                "edicao": "2024",
+                "resultado": "NAO_LOCALIZADO_NA_EDICAO_CONSULTADA",
+                "paginas": [],
+                "fonte": {
+                  "tipo": "NORMA",
+                  "referencia": "https://bvsms.saude.gov.br/bvs/publicacoes/relacao_nacional_medicamentos_2024.pdf",
+                  "localizador": "busca textual integral, pp. 1–252, termo cemiplimabe",
+                  "trecho": "Termo cemiplimabe não localizado na busca textual da edição 2024; isso não demonstra não disponibilidade no SUS.",
+                  "sha256": "b1b0d582cb68fc96fcbe04fd65c1c697d5206b7dce8886f1c6ddb06374fd5201",
+                  "consultadoEm": "2026-10-14"
+                },
+                "ressalva": "Inclusão na RENAME não comprova indicação oncológica, apresentação do esquema, estoque do serviço nem cobertura ANS; ausência nesta edição também não comprova exclusão do SUS."
+              },
+              "sigtapEncontrados": [],
+              "buscasFeitas": [
+                "SIGTAP 2026-09: busca pelo nome cemiplimabe em tb_procedimento (ZIP local conferido por SHA-256), incluindo catálogo de medicamentos; RENAME 2024 integral (normalização de acentos; folínico pesquisado como folinato).",
+                "docs/referencias/: 10 arquivos com correspondência textual; docs/referencias\\onco-referencia\\07-tumor-packs-6-10.md, docs/referencias\\evidencias\\DESFECHOS-GINECO.md, docs/referencias\\ragGRAFO-oncologia\\modulos\\03-ginecologico\\nos.jsonl, docs/referencias\\ragGRAFO-oncologia\\modulos\\03-ginecologico\\RESUMO.md; menção isolada não comprova acesso SUS."
+              ]
+            }
+          ],
+          "observacao": "VERIFICAR: há somente evidência administrativa parcial quando códigos relacionados são listados. Não reclassificar disponibilidade clínica por código de QT ou presença na RENAME. Confirmar fármaco/apresentação/indicação e acesso no serviço; cobertura ANS não foi avaliada."
         },
         "fonte": {
           "tipo": "PROTOCOLO_INSTITUCIONAL",
@@ -206,7 +235,60 @@
             "pagina": null,
             "trecho": "",
             "estado": "PENDENTE"
-          }
+          },
+          "consultadoEm": "2026-10-14",
+          "procedimentosRelacionados": [],
+          "farmacos": [
+            {
+              "droga": "paclitaxel",
+              "via": "EV",
+              "disponivel": "VERIFICAR",
+              "rename": {
+                "edicao": "2024",
+                "resultado": "NAO_LOCALIZADO_NA_EDICAO_CONSULTADA",
+                "paginas": [],
+                "fonte": {
+                  "tipo": "NORMA",
+                  "referencia": "https://bvsms.saude.gov.br/bvs/publicacoes/relacao_nacional_medicamentos_2024.pdf",
+                  "localizador": "busca textual integral, pp. 1–252, termo paclitaxel",
+                  "trecho": "Termo paclitaxel não localizado na busca textual da edição 2024; isso não demonstra não disponibilidade no SUS.",
+                  "sha256": "b1b0d582cb68fc96fcbe04fd65c1c697d5206b7dce8886f1c6ddb06374fd5201",
+                  "consultadoEm": "2026-10-14"
+                },
+                "ressalva": "Inclusão na RENAME não comprova indicação oncológica, apresentação do esquema, estoque do serviço nem cobertura ANS; ausência nesta edição também não comprova exclusão do SUS."
+              },
+              "sigtapEncontrados": [],
+              "buscasFeitas": [
+                "SIGTAP 2026-09: busca pelo nome paclitaxel em tb_procedimento (ZIP local conferido por SHA-256), incluindo catálogo de medicamentos; RENAME 2024 integral (normalização de acentos; folínico pesquisado como folinato).",
+                "docs/referencias/: 42 arquivos com correspondência textual; docs/referencias\\evidencias\\SBOC-2026-MAMA-NEOADJUVANCIA-RESUMO.md, docs/referencias\\evidencias\\novidades.csv, docs/referencias\\evidencias\\NOVIDADES-2026.md, docs/referencias\\protocolos\\protocolos-citotoxicos-revisado-silas.csv; menção isolada não comprova acesso SUS."
+              ]
+            },
+            {
+              "droga": "carboplatina",
+              "via": "EV",
+              "disponivel": "VERIFICAR",
+              "rename": {
+                "edicao": "2024",
+                "resultado": "NAO_LOCALIZADO_NA_EDICAO_CONSULTADA",
+                "paginas": [],
+                "fonte": {
+                  "tipo": "NORMA",
+                  "referencia": "https://bvsms.saude.gov.br/bvs/publicacoes/relacao_nacional_medicamentos_2024.pdf",
+                  "localizador": "busca textual integral, pp. 1–252, termo carboplatina",
+                  "trecho": "Termo carboplatina não localizado na busca textual da edição 2024; isso não demonstra não disponibilidade no SUS.",
+                  "sha256": "b1b0d582cb68fc96fcbe04fd65c1c697d5206b7dce8886f1c6ddb06374fd5201",
+                  "consultadoEm": "2026-10-14"
+                },
+                "ressalva": "Inclusão na RENAME não comprova indicação oncológica, apresentação do esquema, estoque do serviço nem cobertura ANS; ausência nesta edição também não comprova exclusão do SUS."
+              },
+              "sigtapEncontrados": [],
+              "buscasFeitas": [
+                "SIGTAP 2026-09: busca pelo nome carboplatina em tb_procedimento (ZIP local conferido por SHA-256), incluindo catálogo de medicamentos; RENAME 2024 integral (normalização de acentos; folínico pesquisado como folinato).",
+                "docs/referencias/: 37 arquivos com correspondência textual; docs/referencias\\protocolos\\protocolos-citotoxicos-revisado-silas.csv, docs/referencias\\evidencias\\ASCO-2026-VERIFICACAO.md, docs/referencias\\fornecedores\\RESUMO-GI-PRO2026-MODULO2.md, docs/referencias\\fornecedores\\SONHE-2024-PROTOCOLOS.csv; menção isolada não comprova acesso SUS."
+              ]
+            }
+          ],
+          "observacao": "VERIFICAR: há somente evidência administrativa parcial quando códigos relacionados são listados. Não reclassificar disponibilidade clínica por código de QT ou presença na RENAME. Confirmar fármaco/apresentação/indicação e acesso no serviço; cobertura ANS não foi avaliada."
         },
         "fonte": {
           "tipo": "PROTOCOLO_INSTITUCIONAL",
@@ -247,7 +329,36 @@
             "pagina": null,
             "trecho": "",
             "estado": "PENDENTE"
-          }
+          },
+          "consultadoEm": "2026-10-14",
+          "procedimentosRelacionados": [],
+          "farmacos": [
+            {
+              "droga": "pembrolizumabe",
+              "via": "EV",
+              "disponivel": "VERIFICAR",
+              "rename": {
+                "edicao": "2024",
+                "resultado": "NAO_LOCALIZADO_NA_EDICAO_CONSULTADA",
+                "paginas": [],
+                "fonte": {
+                  "tipo": "NORMA",
+                  "referencia": "https://bvsms.saude.gov.br/bvs/publicacoes/relacao_nacional_medicamentos_2024.pdf",
+                  "localizador": "busca textual integral, pp. 1–252, termo pembrolizumabe",
+                  "trecho": "Termo pembrolizumabe não localizado na busca textual da edição 2024; isso não demonstra não disponibilidade no SUS.",
+                  "sha256": "b1b0d582cb68fc96fcbe04fd65c1c697d5206b7dce8886f1c6ddb06374fd5201",
+                  "consultadoEm": "2026-10-14"
+                },
+                "ressalva": "Inclusão na RENAME não comprova indicação oncológica, apresentação do esquema, estoque do serviço nem cobertura ANS; ausência nesta edição também não comprova exclusão do SUS."
+              },
+              "sigtapEncontrados": [],
+              "buscasFeitas": [
+                "SIGTAP 2026-09: busca pelo nome pembrolizumabe em tb_procedimento (ZIP local conferido por SHA-256), incluindo catálogo de medicamentos; RENAME 2024 integral (normalização de acentos; folínico pesquisado como folinato).",
+                "docs/referencias/: 40 arquivos com correspondência textual; docs/referencias\\fornecedores\\SONHE-2024-PROTOCOLOS.md, docs/referencias\\fornecedores\\RESUMO-GI-PRO2026-AVALIACAO.md, docs/referencias\\fornecedores\\SONHE-2024-PROTOCOLOS.csv, docs/referencias\\evidencias\\SBOC-2026-MAMA-NEOADJUVANCIA-RESUMO.md; menção isolada não comprova acesso SUS."
+              ]
+            }
+          ],
+          "observacao": "VERIFICAR: há somente evidência administrativa parcial quando códigos relacionados são listados. Não reclassificar disponibilidade clínica por código de QT ou presença na RENAME. Confirmar fármaco/apresentação/indicação e acesso no serviço; cobertura ANS não foi avaliada."
         },
         "fonte": {
           "tipo": "PROTOCOLO_INSTITUCIONAL",
@@ -288,7 +399,36 @@
             "pagina": null,
             "trecho": "",
             "estado": "PENDENTE"
-          }
+          },
+          "consultadoEm": "2026-10-14",
+          "procedimentosRelacionados": [],
+          "farmacos": [
+            {
+              "droga": "cisplatina",
+              "via": "EV",
+              "disponivel": "VERIFICAR",
+              "rename": {
+                "edicao": "2024",
+                "resultado": "NAO_LOCALIZADO_NA_EDICAO_CONSULTADA",
+                "paginas": [],
+                "fonte": {
+                  "tipo": "NORMA",
+                  "referencia": "https://bvsms.saude.gov.br/bvs/publicacoes/relacao_nacional_medicamentos_2024.pdf",
+                  "localizador": "busca textual integral, pp. 1–252, termo cisplatina",
+                  "trecho": "Termo cisplatina não localizado na busca textual da edição 2024; isso não demonstra não disponibilidade no SUS.",
+                  "sha256": "b1b0d582cb68fc96fcbe04fd65c1c697d5206b7dce8886f1c6ddb06374fd5201",
+                  "consultadoEm": "2026-10-14"
+                },
+                "ressalva": "Inclusão na RENAME não comprova indicação oncológica, apresentação do esquema, estoque do serviço nem cobertura ANS; ausência nesta edição também não comprova exclusão do SUS."
+              },
+              "sigtapEncontrados": [],
+              "buscasFeitas": [
+                "SIGTAP 2026-09: busca pelo nome cisplatina em tb_procedimento (ZIP local conferido por SHA-256), incluindo catálogo de medicamentos; RENAME 2024 integral (normalização de acentos; folínico pesquisado como folinato).",
+                "docs/referencias/: 46 arquivos com correspondência textual; docs/referencias\\fornecedores\\SONHE-2024-PROTOCOLOS.md, docs/referencias\\fornecedores\\SONHE-2024-PROTOCOLOS.csv, docs/referencias\\fornecedores\\SBOC-DIRETRIZES-INDICE.md, docs/referencias\\fornecedores\\RESUMO-GI-PRO2026-MODULO2.md; menção isolada não comprova acesso SUS."
+              ]
+            }
+          ],
+          "observacao": "VERIFICAR: há somente evidência administrativa parcial quando códigos relacionados são listados. Não reclassificar disponibilidade clínica por código de QT ou presença na RENAME. Confirmar fármaco/apresentação/indicação e acesso no serviço; cobertura ANS não foi avaliada."
         },
         "fonte": {
           "tipo": "PROTOCOLO_INSTITUCIONAL",
@@ -329,7 +469,36 @@
             "pagina": null,
             "trecho": "",
             "estado": "PENDENTE"
-          }
+          },
+          "consultadoEm": "2026-10-14",
+          "procedimentosRelacionados": [],
+          "farmacos": [
+            {
+              "droga": "paclitaxel",
+              "via": "EV",
+              "disponivel": "VERIFICAR",
+              "rename": {
+                "edicao": "2024",
+                "resultado": "NAO_LOCALIZADO_NA_EDICAO_CONSULTADA",
+                "paginas": [],
+                "fonte": {
+                  "tipo": "NORMA",
+                  "referencia": "https://bvsms.saude.gov.br/bvs/publicacoes/relacao_nacional_medicamentos_2024.pdf",
+                  "localizador": "busca textual integral, pp. 1–252, termo paclitaxel",
+                  "trecho": "Termo paclitaxel não localizado na busca textual da edição 2024; isso não demonstra não disponibilidade no SUS.",
+                  "sha256": "b1b0d582cb68fc96fcbe04fd65c1c697d5206b7dce8886f1c6ddb06374fd5201",
+                  "consultadoEm": "2026-10-14"
+                },
+                "ressalva": "Inclusão na RENAME não comprova indicação oncológica, apresentação do esquema, estoque do serviço nem cobertura ANS; ausência nesta edição também não comprova exclusão do SUS."
+              },
+              "sigtapEncontrados": [],
+              "buscasFeitas": [
+                "SIGTAP 2026-09: busca pelo nome paclitaxel em tb_procedimento (ZIP local conferido por SHA-256), incluindo catálogo de medicamentos; RENAME 2024 integral (normalização de acentos; folínico pesquisado como folinato).",
+                "docs/referencias/: 42 arquivos com correspondência textual; docs/referencias\\evidencias\\SBOC-2026-MAMA-NEOADJUVANCIA-RESUMO.md, docs/referencias\\evidencias\\novidades.csv, docs/referencias\\evidencias\\NOVIDADES-2026.md, docs/referencias\\protocolos\\protocolos-citotoxicos-revisado-silas.csv; menção isolada não comprova acesso SUS."
+              ]
+            }
+          ],
+          "observacao": "VERIFICAR: há somente evidência administrativa parcial quando códigos relacionados são listados. Não reclassificar disponibilidade clínica por código de QT ou presença na RENAME. Confirmar fármaco/apresentação/indicação e acesso no serviço; cobertura ANS não foi avaliada."
         },
         "fonte": {
           "tipo": "PROTOCOLO_INSTITUCIONAL",
@@ -429,6 +598,66 @@
       "classe": "BUSCA_LOCAL_NEGATIVA",
       "buscasFeitas": [
         "materiais locais 2026-10-14"
+      ]
+    },
+    {
+      "texto": "H2 cec-cemiplimabe: disponibilidade SUS do esquema e de cada fármaco não comprovada; sem código específico comprovado para este cenário.",
+      "classe": "DISPONIBILIDADE_SUS_NAO_COMPROVADA",
+      "protocoloId": "cec-cemiplimabe",
+      "buscasFeitas": [
+        "corpus/f0c/sigtap/2026-09.json: nomes e CIDs do pack; códigos relacionados nenhum.",
+        "ZIP oficial 2026-09: tb_procedimento completo, por nomes de todos os fármacos do protocolo; sem consulta de rede ao SIGTAP.",
+        "docs/referencias/: busca textual por RENAME, disponibilidade SUS e nomes dos fármacos; compêndios secundários sem prova oficial específica de acesso para estes esquemas.",
+        "RENAME 2024, edição apontada vigente no portal do Ministério da Saúde; resultados por fármaco em tratamento.protocolos[id=cec-cemiplimabe].sus.farmacos.",
+        "Ausência de confirmação institucional de estoque/acesso por indicação."
+      ]
+    },
+    {
+      "texto": "H2 cec-carbopac: disponibilidade SUS do esquema e de cada fármaco não comprovada; sem código específico comprovado para este cenário.",
+      "classe": "DISPONIBILIDADE_SUS_NAO_COMPROVADA",
+      "protocoloId": "cec-carbopac",
+      "buscasFeitas": [
+        "corpus/f0c/sigtap/2026-09.json: nomes e CIDs do pack; códigos relacionados nenhum.",
+        "ZIP oficial 2026-09: tb_procedimento completo, por nomes de todos os fármacos do protocolo; sem consulta de rede ao SIGTAP.",
+        "docs/referencias/: busca textual por RENAME, disponibilidade SUS e nomes dos fármacos; compêndios secundários sem prova oficial específica de acesso para estes esquemas.",
+        "RENAME 2024, edição apontada vigente no portal do Ministério da Saúde; resultados por fármaco em tratamento.protocolos[id=cec-carbopac].sus.farmacos.",
+        "Ausência de confirmação institucional de estoque/acesso por indicação."
+      ]
+    },
+    {
+      "texto": "H2 cec-pembro: disponibilidade SUS do esquema e de cada fármaco não comprovada; sem código específico comprovado para este cenário.",
+      "classe": "DISPONIBILIDADE_SUS_NAO_COMPROVADA",
+      "protocoloId": "cec-pembro",
+      "buscasFeitas": [
+        "corpus/f0c/sigtap/2026-09.json: nomes e CIDs do pack; códigos relacionados nenhum.",
+        "ZIP oficial 2026-09: tb_procedimento completo, por nomes de todos os fármacos do protocolo; sem consulta de rede ao SIGTAP.",
+        "docs/referencias/: busca textual por RENAME, disponibilidade SUS e nomes dos fármacos; compêndios secundários sem prova oficial específica de acesso para estes esquemas.",
+        "RENAME 2024, edição apontada vigente no portal do Ministério da Saúde; resultados por fármaco em tratamento.protocolos[id=cec-pembro].sus.farmacos.",
+        "Ausência de confirmação institucional de estoque/acesso por indicação."
+      ]
+    },
+    {
+      "texto": "H2 cec-cis-rt: disponibilidade SUS do esquema e de cada fármaco não comprovada; sem código específico comprovado para este cenário.",
+      "classe": "DISPONIBILIDADE_SUS_NAO_COMPROVADA",
+      "protocoloId": "cec-cis-rt",
+      "buscasFeitas": [
+        "corpus/f0c/sigtap/2026-09.json: nomes e CIDs do pack; códigos relacionados nenhum.",
+        "ZIP oficial 2026-09: tb_procedimento completo, por nomes de todos os fármacos do protocolo; sem consulta de rede ao SIGTAP.",
+        "docs/referencias/: busca textual por RENAME, disponibilidade SUS e nomes dos fármacos; compêndios secundários sem prova oficial específica de acesso para estes esquemas.",
+        "RENAME 2024, edição apontada vigente no portal do Ministério da Saúde; resultados por fármaco em tratamento.protocolos[id=cec-cis-rt].sus.farmacos.",
+        "Ausência de confirmação institucional de estoque/acesso por indicação."
+      ]
+    },
+    {
+      "texto": "H2 cec-pac-semanal: disponibilidade SUS do esquema e de cada fármaco não comprovada; sem código específico comprovado para este cenário.",
+      "classe": "DISPONIBILIDADE_SUS_NAO_COMPROVADA",
+      "protocoloId": "cec-pac-semanal",
+      "buscasFeitas": [
+        "corpus/f0c/sigtap/2026-09.json: nomes e CIDs do pack; códigos relacionados nenhum.",
+        "ZIP oficial 2026-09: tb_procedimento completo, por nomes de todos os fármacos do protocolo; sem consulta de rede ao SIGTAP.",
+        "docs/referencias/: busca textual por RENAME, disponibilidade SUS e nomes dos fármacos; compêndios secundários sem prova oficial específica de acesso para estes esquemas.",
+        "RENAME 2024, edição apontada vigente no portal do Ministério da Saúde; resultados por fármaco em tratamento.protocolos[id=cec-pac-semanal].sus.farmacos.",
+        "Ausência de confirmação institucional de estoque/acesso por indicação."
       ]
     }
   ],
