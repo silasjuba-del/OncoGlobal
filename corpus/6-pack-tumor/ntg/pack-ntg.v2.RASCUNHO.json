@@ -319,6 +319,46 @@
             "via": "EV",
             "dias": "D8",
             "observacao": ""
+          },
+          {
+            "droga": "folínico (+24 h)",
+            "dose": 15,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D2",
+            "observacao": "24 h após início do MTX; quatro doses q12h (ficha EMA selecionada)"
+          },
+          {
+            "droga": "folínico (+36 h)",
+            "dose": 15,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D2",
+            "observacao": "36 h após início do MTX; quatro doses q12h (ficha EMA selecionada)"
+          },
+          {
+            "droga": "folínico (+48 h)",
+            "dose": 15,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D3",
+            "observacao": "48 h após início do MTX; quatro doses q12h (ficha EMA selecionada)"
+          },
+          {
+            "droga": "folínico (+60 h)",
+            "dose": 15,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D3",
+            "observacao": "60 h após início do MTX; quatro doses q12h (ficha EMA selecionada)"
+          },
+          {
+            "droga": "filgrastim",
+            "dose": 5,
+            "unidade": "µg/kg",
+            "via": "SC",
+            "dias": "D3–D5 e D9–D11",
+            "observacao": "eviQ 599; ficha EMA-CO selecionada"
           }
         ],
         "cicloDias": 14,
@@ -392,6 +432,38 @@
             "via": "EV",
             "dias": "D8",
             "observacao": ""
+          },
+          {
+            "droga": "folínico (+24 h)",
+            "dose": 15,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D2",
+            "observacao": "24 h após início do MTX; quatro doses q12h (ficha EMA selecionada)"
+          },
+          {
+            "droga": "folínico (+36 h)",
+            "dose": 15,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D2",
+            "observacao": "36 h após início do MTX; quatro doses q12h (ficha EMA selecionada)"
+          },
+          {
+            "droga": "folínico (+48 h)",
+            "dose": 15,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D3",
+            "observacao": "48 h após início do MTX; quatro doses q12h (ficha EMA selecionada)"
+          },
+          {
+            "droga": "folínico (+60 h)",
+            "dose": 15,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D3",
+            "observacao": "60 h após início do MTX; quatro doses q12h (ficha EMA selecionada)"
           }
         ],
         "cicloDias": 14,

@@ -160,12 +160,28 @@
             "observacao": ""
           },
           {
-            "droga": "mesna",
+            "droga": "mesna (0 h)",
             "dose": 400,
             "unidade": "mg/m2",
             "via": "EV",
             "dias": "D1",
-            "observacao": "+ 800 VO 2h/6h"
+            "observacao": "15 min antes da ciclofosfamida"
+          },
+          {
+            "droga": "mesna (2 h)",
+            "dose": 800,
+            "unidade": "mg/m2",
+            "via": "VO",
+            "dias": "D1",
+            "observacao": "2 h após fim da ciclofosfamida"
+          },
+          {
+            "droga": "mesna (6 h)",
+            "dose": 800,
+            "unidade": "mg/m2",
+            "via": "VO",
+            "dias": "D1",
+            "observacao": "6 h após fim da ciclofosfamida"
           },
           {
             "droga": "pegfilgrastim",
@@ -225,12 +241,36 @@
             "observacao": "teto cumulativo ≤72 g/m2"
           },
           {
-            "droga": "mesna",
+            "droga": "mesna (0 h)",
             "dose": 600,
             "unidade": "mg/m2",
             "via": "EV",
-            "dias": "D1–D5 (0/4/8 h)",
-            "observacao": ""
+            "dias": "D1–D5",
+            "observacao": "15 min antes da ifosfamida"
+          },
+          {
+            "droga": "mesna (4 h)",
+            "dose": 600,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1–D5",
+            "observacao": "4 h após início da ifosfamida"
+          },
+          {
+            "droga": "mesna (8 h)",
+            "dose": 600,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1–D5",
+            "observacao": "8 h após início da ifosfamida"
+          },
+          {
+            "droga": "pegfilgrastim",
+            "dose": 6,
+            "unidade": "mg",
+            "via": "SC",
+            "dias": "D6",
+            "observacao": "≥24 h após fim da QT D5"
           }
         ],
         "cicloDias": 14,

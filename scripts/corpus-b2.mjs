@@ -16,7 +16,7 @@ function canonico(v) {
   return JSON.stringify(v);
 }
 const hashDe = (t) => { const { hash: _h, status: _s, ...resto } = t; return createHash("sha256").update(canonico(resto), "utf8").digest("hex"); };
-const chaveDe = (i) => `itens[drug=${i.drug};days=${i.days.join(",")}].standardDose`;
+const chaveDe = (i) => `itens[drug=${i.drug};classe=${i.classe};days=${i.days.join(",")}].standardDose`;
 const listar = (d) => readdirSync(d).sort().flatMap((f) => { const p = join(d, f); return statSync(p).isDirectory() ? listar(p) : f.endsWith(".json") ? [p] : []; });
 
 export function verificarB2(root = RAIZ) {
@@ -42,7 +42,10 @@ export function verificarB2(root = RAIZ) {
     if (!json.fonte.includes("D-F1-49")) problemas.push(`sem citação de D-F1-49 na fonte: ${f.arquivo}`);
     const chaves = new Set(f.campos.map((c) => c.campo));
     for (const i of json.itens) if (!chaves.has(chaveDe(i))) problemas.push(`item sem campo no manifesto: ${f.arquivo}: ${chaveDe(i)}`);
+    if (chaves.size !== f.campos.length || new Set(json.itens.map(chaveDe)).size !== json.itens.length) problemas.push(`localizador duplicado: ${f.arquivo}`);
     for (const c of f.campos) {
+      const alvos = json.itens.filter(i => chaveDe(i) === c.campo);
+      if (alvos.length !== 1 || alvos[0].standardDose !== c.valor || alvos[0].unit !== c.unidade) problemas.push(`valor/localizador divergente do manifesto: ${f.arquivo}: ${c.campo}`);
       if (c.situacao === "NAO_LOCALIZADO") {
         if (c.valor !== null) problemas.push(`NAO_LOCALIZADO com dose: ${f.arquivo}: ${c.campo}`);
         continue;

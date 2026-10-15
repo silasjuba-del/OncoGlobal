@@ -3101,7 +3101,7 @@
     },
     {
       "path": "corpus/manifesto/b2-fichas.v1.json",
-      "sha256": "0b52c593717fc057afc2474f3ff8a89f8de098c03fc8dab8279aec4561dc912d",
+      "sha256": "b56775330c20ae14d49950e53182d95e2d2a093918f944dc4116d9630e1540dd",
       "hashMode": "utf8-lf",
       "items": [
         {

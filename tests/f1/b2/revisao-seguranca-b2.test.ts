@@ -20,6 +20,22 @@ const dias = (lista: string[]) => lista.flatMap(d => {
   return m ? Array.from({ length: Number(m[2]) - Number(m[1]) + 1 }, (_, n) => `d${Number(m[1]) + n}`) : [d];
 });
 describe("PR19: representação e execução seguras das fichas B2", () => {
+  it("campos do manifesto distinguem todas as ocorrências, inclusive potássio pré e pós-QT",()=>{
+    for(const f of man.fichasNovas){
+      const t=JSON.parse(readFileSync(f.arquivo,"utf8"));
+      expect(new Set(f.campos.map((c:any)=>c.campo)).size).toBe(t.itens.length);
+      for(const i of t.itens)expect(f.campos.filter((c:any)=>c.campo===`itens[drug=${i.drug};classe=${i.classe};days=${i.days.join(",")}].standardDose`)).toHaveLength(1);
+    }
+  });
+  it("packs incluem as quatro doses de resgate EMA e o G-CSF do braço IE",()=>{
+    const ntg=JSON.parse(readFileSync("corpus/6-pack-tumor/ntg/pack-ntg.v2.RASCUNHO.json","utf8"));
+    for(const id of ["ntg-emaco","ntg-emaep"]){
+      const resgate=ntg.tratamento.protocolos.find((p:any)=>p.id===id).drogas.filter((d:any)=>d.droga.startsWith("folínico (+"));
+      expect(resgate.map((d:any)=>[d.dose,d.via,d.dias])).toEqual([[15,"VO","D2"],[15,"VO","D2"],[15,"VO","D3"],[15,"VO","D3"]]);
+    }
+    const ewing=JSON.parse(readFileSync("corpus/6-pack-tumor/ewing/pack-ewing.v2.RASCUNHO.json","utf8"));
+    expect(ewing.tratamento.protocolos.find((p:any)=>p.id==="ewing-ie").drogas).toContainEqual(expect.objectContaining({droga:"pegfilgrastim",dose:6,via:"SC",dias:"D6"}));
+  });
   it("filgrastim preserva microgramas: 5 µg/kg × 70 kg = 350 µg", () => {
     const t = fichas.find((t: any) => t.nome.startsWith("EMA-CO"))!;
     const f = calcular(t).itens.find(i => i.item.drug === "Filgrastim")!;
