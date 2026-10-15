@@ -180,8 +180,11 @@ export function avaliarConsulta(i: EntradaAvaliacaoConsulta) {
     bsaM2:null,clcr:renal.clcrMlMin,medidoEm:peso?.data ?? null};
   // Nutrição usa a última medida documentada, sem confundir a validade para dose com ausência de medida.
   // A data/fonte acompanham a sugestão; isto não declara peso atual nem libera cálculo de dose.
-  const dadosNutricionais = { pesoKg: peso && peso.kg > 0 && new Set(pesosDia.map(p => p.kg)).size === 1 ? peso.kg : null,
-    alturaCm: dadosCorporais.alturaCm, medidoEm: peso?.data ?? null, sourceId: peso?.sourceId ?? null };
+  const pesosNutricionais = pesosMedidosDocumentados(eventosVigentes(doPaciente.filter(e => Date.parse(e.criadoEm) <= horizonte)), i.hoje, horizonte);
+  const pesoNutricional = pesosNutricionais[0];
+  const concordantes = pesoNutricional ? pesosNutricionais.filter(p => p.data === pesoNutricional.data) : [];
+  const dadosNutricionais = { pesoKg: pesoNutricional && new Set(concordantes.map(p => p.kg)).size === 1 ? pesoNutricional.kg : null,
+    alturaCm: dadosCorporais.alturaCm, medidoEm: pesoNutricional?.data ?? null, sourceId: pesoNutricional?.sourceId ?? null };
   const avisosFlash = [...avisosCriticos,
     ...(variacaoPeso !== null && variacaoPeso>=0.10 ? ["Variação de peso de pelo menos 10%: revisar prescrição"] : []),
     ...(interacoes.estado === "VERMELHO" ? [interacoes.motivo] : []),

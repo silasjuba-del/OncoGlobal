@@ -531,9 +531,9 @@
       "id": "SUP-NVQ-BAIXO",
       "indicacao": "Baixo risco emetogênico — agente único (profilaxia opcional ou resgate)",
       "gatilho": "esquema de baixo risco emetogênico (10–30%)",
-      "droga": "dexametasona OU ondansetrona OU metoclopramida (escolher um)",
+      "droga": "dexametasona OU ondansetrona (escolher um)",
       "apresentacaoSUS": {
-        "texto": "dexametasona 4 mg cp; ondansetrona 8 mg cp; metoclopramida 10 mg cp (Básico)",
+        "texto": "dexametasona 4 mg cp; ondansetrona 8 mg cp",
         "fonte": {
           "tipo": "NORMA",
           "referencia": "RENAME 2024 (Portaria GM/MS 6.324/2024), PDF BVS-MS",
@@ -542,7 +542,7 @@
           "estado": "VERIFICADO"
         }
       },
-      "dose": "dexametasona 4–8 mg OU ondansetrona 8 mg (metoclopramida: dose SEM_FONTE)",
+      "dose": "dexametasona 4–8 mg OU ondansetrona 8 mg",
       "unidade": "mg",
       "via": "VO",
       "frequencia": "dose única D1",
@@ -578,7 +578,12 @@
           "estado": "VERIFICADO"
         }
       ],
-      "pendencia": "metoclopramida em NVIQ sem dose fontada nesta curadoria (bula FDA só refluxo/gastroparesia)"
+      "pendencia": "Metoclopramida retirada das opções iniciais por D-F1-30; resgate de 2ª linha permanece SEM_FONTE até curadoria da dose.",
+      "politicaLocal": {
+        "propor": true,
+        "decisao": "D-F1-30",
+        "motivo": "Metoclopramida somente na 2ª linha após ondansetrona; consultar SUP-NVQ-2A-LINHA-METOCLOPRAMIDA, dose SEM_FONTE. A menção da MASCC/ESMO abaixo é referência, não opção local inicial."
+      }
     },
     {
       "id": "SUP-NVQ-MINIMO",
