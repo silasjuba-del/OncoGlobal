@@ -6,6 +6,7 @@ import { FonteRevisao, ReconciliacaoProposta, RevisaoPreparada } from "./revisao
 import { AcaoResposta, AgendaResposta, ApacResposta, BundleResposta, CanalResposta, ChatResposta, ConfirmacaoResposta, ConsultaResposta, FlashPreparadaResposta, FlashRascunhoResposta, SalaoResposta } from "./respostas.js";
 import { z } from "zod";
 import { ResultadoInstrumentoSchema } from "../../contracts/f0c/resultadoInstrumento.js";
+import { criarApiBiblioteca } from "./biblioteca.js";
 import {
   ErroPorta,
   type AcaoIntent,
@@ -75,6 +76,7 @@ export function criarPortaHttp(opcoes: OpcoesHttp): PortaConsulta {
   }
 
   return {
+    biblioteca: criarApiBiblioteca((rota, corpo, signal) => enviar(rota, corpo, true, signal)),
     async reconciliarMedicamentos(pedido, signal) {
       const {status,json}=await enviar("/consulta/medicamentos/reconciliar",pedido,true,signal);
       const r=z.object({codigo:z.enum(["GRAVADA","REPLAY"]),eventId:z.string().min(1)}).safeParse(json);

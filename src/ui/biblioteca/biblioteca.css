@@ -1,0 +1,23 @@
+.biblioteca-local { display: grid; gap: 1rem; color: var(--consulta-ink, #243945); }
+.biblioteca-local > header, .biblioteca-controles { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .75rem; }
+.biblioteca-local h2, .biblioteca-local h3 { margin-block: .25rem .5rem; }
+.biblioteca-local header p { margin: 0; color: var(--consulta-muted, #526b78); }
+.biblioteca-local :is(button, input, select) { font: inherit; }
+.biblioteca-local :is(button, select, input:not([type=checkbox])) { border: 1px solid var(--consulta-line, #d7e4e7); border-radius: 6px; padding: .45rem .65rem; max-width: 100%; background: white; color: inherit; }
+.biblioteca-local button { cursor: pointer; }
+.biblioteca-local button:disabled { cursor: default; opacity: .55; }
+.biblioteca-local :focus-visible { outline: 2px solid var(--consulta-accent, #174968); outline-offset: 3px; }
+.biblioteca-controles label, .biblioteca-local label { display: inline-flex; align-items: center; flex-wrap: wrap; gap: .5rem; }
+.biblioteca-pacote, .biblioteca-local > section[aria-label="Consultar biblioteca"] { border: 1px solid var(--consulta-line, #d7e4e7); border-radius: 8px; padding: 1rem; }
+.biblioteca-pacote dl { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: .2rem .75rem; }
+.biblioteca-pacote dd { margin: 0; overflow-wrap: anywhere; }
+.biblioteca-pacote code { overflow-wrap: anywhere; }
+.biblioteca-item { margin-block: .75rem; padding: .85rem; background: var(--consulta-soft, #f3f7f8); border-left: 3px solid var(--consulta-accent, #174968); }
+.biblioteca-item h4 { margin: 0; }
+.biblioteca-item details { margin-block: .6rem; }
+.biblioteca-item summary { cursor: pointer; font-weight: 600; }
+.biblioteca-item pre, .biblioteca-local blockquote { white-space: pre-wrap; overflow-wrap: anywhere; max-height: 32rem; overflow: auto; }
+.biblioteca-item blockquote { margin: .5rem 0; border-left: 2px solid var(--consulta-line, #d7e4e7); padding-left: .75rem; }
+.biblioteca-filtros { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr)); gap: .5rem; margin-block: .75rem; }
+.biblioteca-filtros label { display: grid; }
+@media (max-width: 650px) { .biblioteca-local > header { align-items: flex-start; } .biblioteca-controles { align-items: flex-start; } .biblioteca-controles label { width: 100%; } }
