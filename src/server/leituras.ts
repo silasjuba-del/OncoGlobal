@@ -371,8 +371,9 @@ export function lerConsulta(db: DatabaseSync, patientId: string, agora: string, 
       motivos:[...avisosCondicionais,...pendenciasCondicionais].map(texto=>({texto}))}} : {}) });
   // D-F1-33/D-F1-48 · triagem nutricional NRS-2002: só do lote selecionado (nunca herda outro lote) e do peso/altura
   // vigentes no horizonte do encontro. Só SUGERE: não gera pedido, não trava e não entra no semáforo.
-  const presenteNoLote = (d: { campo: string; valor: string | null } | undefined) =>
-    d?.campo === "PRESENTE" && typeof d.valor === "string" && d.valor.trim() ? d.valor : null;
+  const presenteNoLote = (d: TumorLot["topografia"] | undefined) =>
+    d?.campo === "PRESENTE" && d.estado === "VERDE" && ["CONFIRMADO", "ASSINADO"].includes(d.revisao)
+      && d.fontes.length > 0 && typeof d.valor === "string" && d.valor.trim() ? d.valor : null;
   // Armadilha (a): encontro reaberto não usa a versão do lote confirmada em encontro POSTERIOR.
   const lotesNoHorizonte = lote ? porTipo(all.filter((e) => e.patientId === patientId && Date.parse(e.criadoEm) <= horizontePlaquetas),
     "TumorLot", TumorLot).filter((x) => x.value.patientId === patientId && x.value.tumorLotId === lote.tumorLotId) : [];
@@ -385,7 +386,8 @@ export function lerConsulta(db: DatabaseSync, patientId: string, agora: string, 
   const conteudosLote = new Set(lotesNoHorizonte.map(x => conteudoLote(x.value)));
   const loteNoHorizonte = conteudosLote.size === 1 ? lotesNoHorizonte[0]!.value : undefined;
   if (conteudosLote.size > 1) pendenciasLeitura.push("TRIAGEM_NUTRICIONAL_LOTE_AMBIGUO");
-  const fatosNutricionais = eventosDaConsulta.filter(e => e.tipo === "FATO" && Date.parse(e.criadoEm) <= horizontePlaquetas);
+  const fatosNutricionais = all.filter(e => e.patientId === patientId && e.tipo === "FATO"
+    && data(e)?.campo === "alturaCm" && Date.parse(e.criadoEm) <= horizontePlaquetas).map(e => ({ ...e, tumorLotId: null }));
   const alturaProjetada = projetarSnapshot(fatosNutricionais, patientId, lote?.tumorLotId ?? null,
     current.encounterId, "nutricao-altura-v1").campos.alturaCm;
   const fontesAltura = (alturaProjetada?.eventIds ?? []).flatMap(id => {
