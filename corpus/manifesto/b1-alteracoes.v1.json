@@ -218,6 +218,18 @@
       "caminho": "itens[id=SUP-NVQ-BAIXO].politicaLocal",
       "campo": "decisao",
       "decisao": "D-F1-30"
+    },
+    {
+      "arquivo": "corpus/2-receitas/suporte/receitas-suporte-oncologico.v1.RASCUNHO.json",
+      "caminho": "itens[id=SUP-NVQ-5HT3-PALO].politicaLocal",
+      "campo": "decisao",
+      "decisao": "D-F1-30"
+    },
+    {
+      "arquivo": "corpus/2-receitas/suporte/receitas-suporte-oncologico.v1.RASCUNHO.json",
+      "caminho": "itens[id=SUP-NVQ-ALTO-DEX].politicaLocal",
+      "campo": "decisao",
+      "decisao": "D-F1-30"
     }
   ],
   "localizador": "caminho = objeto alterado (\"\" = raiz; seletor [chave=valor] casa exatamente um elemento); campo = propriedade do objeto que cita a decisão"

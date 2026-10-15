@@ -2845,16 +2845,16 @@
     },
     {
       "path": "corpus/2-receitas/suporte/receitas-suporte-oncologico.v1.RASCUNHO.json",
-      "sha256": "b816e778453c29ab802e5df85249b27cd3c4073140727e7034ebe19bf1e4a4ce",
+      "sha256": "f3f7056f9b9741c54b371ab8bb1e32d123da7e0210828171b7c3b4a3f312885c",
       "hashMode": "utf8-lf",
       "items": [
         {
           "type": "telefone",
-          "line": 1703,
+          "line": 1715,
           "ordinal": 0,
           "status": "technical_token_false_positive",
-          "evidenceRef": "corpus/2-receitas/suporte/receitas-suporte-oncologico.v1.RASCUNHO.json:1703",
-          "reason": "Revisão Codex 2026-10-15: mesmo UUID público set_id da bula de ciprofloxacino, conferido no campo referencia; não é telefone. Atualização de posição após correção D-F1-30, sem ampliar exceção."
+          "evidenceRef": "corpus/2-receitas/suporte/receitas-suporte-oncologico.v1.RASCUNHO.json:1715",
+          "reason": "Revisão Codex 2026-10-15: UUID set_id público de bula FDA conferido na referência bibliográfica; não é telefone de paciente. Mesmo token, ocorrência exata preservada após correção do corpus."
         }
       ]
     },
@@ -2975,7 +2975,7 @@
     },
     {
       "path": "corpus/6-pack-tumor/adrenal/pack-adrenal.v2.RASCUNHO.json",
-      "sha256": "6fa6490a048b4041a3fc37ad101081b52aaa2c6c2456482e28544311dd9ef5d9",
+      "sha256": "f392371bfff829f54d6a0603fa317952c98fbfe75e7c6d2bf8ae475c186cbc46",
       "hashMode": "utf8-lf",
       "items": [
         {
@@ -2983,16 +2983,16 @@
           "line": 723,
           "ordinal": 0,
           "status": "technical_token_false_positive",
-          "evidenceRef": "docs/_arquivo/ondas/PRE-F1-CORRECAO-2026-10-12.md; corpus/6-pack-tumor/adrenal/pack-adrenal.v2.RASCUNHO.json:723",
-          "reason": "Revisao Codex em 2026-10-12: candidato contido integralmente no UUID set_id/setid de referencia bibliografica DailyMed/openFDA; nao e telefone de paciente. Revista por Claude em 2026-10-12 na integração com f1/integrado 2f1e795: mesmo UUID set_id, hash e linha atualizados. Revisto por Fugu em 2026-10-14 na F1-B1 (PR #17): mesmo UUID set_id; linhas e hash atualizados apos o lote clinico."
+          "evidenceRef": "docs/ondas/PRE-F1-CORRECAO-2026-10-12.md; corpus/6-pack-tumor/adrenal/pack-adrenal.v2.RASCUNHO.json:723",
+          "reason": "Revisão Codex 2026-10-15: UUID set_id público de bula FDA conferido na referência bibliográfica; não é telefone de paciente. Mesmo token, ocorrência exata preservada após correção do corpus."
         },
         {
           "type": "telefone",
           "line": 909,
           "ordinal": 0,
           "status": "technical_token_false_positive",
-          "evidenceRef": "docs/_arquivo/ondas/PRE-F1-CORRECAO-2026-10-12.md; corpus/6-pack-tumor/adrenal/pack-adrenal.v2.RASCUNHO.json:909",
-          "reason": "Revisao Fugu em 2026-10-14 (F1-B1, PR #17): candidato contido integralmente no UUID set_id openFDA da bula de doxorrubicina citada no novo protocolo adrenal-cca-edp-sem-mitotano; nao e telefone de paciente."
+          "evidenceRef": "docs/ondas/PRE-F1-CORRECAO-2026-10-12.md; corpus/6-pack-tumor/adrenal/pack-adrenal.v2.RASCUNHO.json:909",
+          "reason": "Revisão Codex 2026-10-15: UUID set_id público de bula FDA conferido na referência bibliográfica; não é telefone de paciente. Mesmo token, ocorrência exata preservada após correção do corpus."
         }
       ]
     },

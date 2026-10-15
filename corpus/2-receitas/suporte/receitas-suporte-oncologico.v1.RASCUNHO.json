@@ -191,7 +191,7 @@
         "trecho": "A single 24 mg dose administered 30 minutes before ... highly emetogenic chemotherapy",
         "estado": "VERIFICADO"
       },
-      "nota": "Alternativa: palonosetrona (SUP-NVQ-5HT3-PALO). MASCC 2023 não identificou diferença relevante entre 5-HT3.",
+      "nota": "D-F1-30: ondansetrona na 1ª linha local. Palonosetrona (SUP-NVQ-5HT3-PALO) permanece somente referência consultável, não alternativa proposta.",
       "politicaLocal": {
         "propor": true,
         "linhaAntiemese": 1,
@@ -239,6 +239,12 @@
         "secao": "2.1, Tabela 1",
         "trecho": "Adults 0.25 mg as a single dose",
         "estado": "VERIFICADO"
+      },
+      "politicaLocal": {
+        "estado": "REFERENCIA_CONSULTAVEL",
+        "propor": false,
+        "decisao": "D-F1-30",
+        "motivo": "Ondansetrona é a 1ª linha local; palonosetrona mantida somente como referência de diretriz."
       }
     },
     {
@@ -291,7 +297,13 @@
           "trecho": "no need to prescribe steroids (dexamethasone) beyond day 1 after AC HEC",
           "estado": "VERIFICADO"
         }
-      ]
+      ],
+      "politicaLocal": {
+        "estado": "PENDENTE",
+        "propor": false,
+        "decisao": "D-F1-30",
+        "motivo": "Dose desta referência foi reduzida pela interação com NK1, excluído localmente. Esquema sem NK1 aguarda curadoria; não propor esta dose. A dexametasona das fichas de pré-medicação permanece inalterada."
+      }
     },
     {
       "id": "SUP-NVQ-ALTO-OLZ",
