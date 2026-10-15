@@ -59,7 +59,7 @@ describe("F1-B2 · jornadas das 22 fichas novas (D-F1-49)", () => {
         const esperado = i.item.doseBasis === "MG_M2" ? arredondaMeioParaCima(i.item.standardDose! * 1.8)
           : i.item.doseBasis === "AUC" ? arredondaMeioParaCima(i.item.standardDose! * (Math.min(80, 125) + 25))
           : i.item.standardDose;
-        expect(i.item.calculatedDose, `${f.arquivo} ${i.item.drug}`).toBe(esperado);
+        expect(i.item.calculatedDose, `${f.arquivo} ${i.item.drug}`).toBe(Math.min(esperado!, i.item.doseMaximaMg ?? Infinity));
       }
     }
     // Conferência dirigida (variantes centrais):
@@ -71,7 +71,7 @@ describe("F1-B2 · jornadas das 22 fichas novas (D-F1-49)", () => {
     if (rCarbo.ok) expect(rCarbo.itens.find((i) => i.item.drug === "Carboplatina")!.item.calculatedDose).toBe(630); // AUC 6 × (80+25)
     const map14 = JSON.parse(readFileSync(join(RAIZ, "corpus/fichas/osteossarcoma/map-ciclos-1-4__nao-especificado.json"), "utf8"));
     const rMap = instanciarProtocolo({ ...map14, status: "CONFERIDA_MEDICO" } as any, dados, [] as any);
-    if (rMap.ok) expect(rMap.itens.find((i) => i.item.drug === "Metotrexato")!.item.calculatedDose).toBe(21600); // 12.000 × 1,8
+    if (rMap.ok) expect(rMap.itens.find((i) => i.item.drug === "Metotrexato")!.item.calculatedDose).toBe(20000); // teto absoluto da ficha, sem limitar a SC
     const p1577 = JSON.parse(readFileSync(join(RAIZ, "corpus/fichas/nao-informado-ficha-institucional/folinato-5-fu-semanal-p1577__nao-especificado.json"), "utf8"));
     const r1577 = instanciarProtocolo({ ...p1577, status: "CONFERIDA_MEDICO" } as any, dados, [] as any);
     if (r1577.ok) expect(r1577.itens.find((i) => /Fluoruracila/.test(i.item.drug))!.item.calculatedDose).toBe(765); // D-F1-50: 425 × 1,8 (NHS CR004)

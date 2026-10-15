@@ -4,7 +4,7 @@
   "nome": "AC-TH (fase TH — paclitaxel semanal + trastuzumabe)",
   "cenario": "neo/adjuvante",
   "versao": "1.0.0",
-  "hash": "dc1bed857438be9616f4e5d2be297a35df0fc82dd0ce995789cea9a272d2d137",
+  "hash": "48dd0da7aa73051e6608fe811bca376c43f55a9f9d70bdf071ba15edf6ff5d1c",
   "codigoInstitucional": null,
   "intervaloDias": 21,
   "ciclos": 4,
@@ -149,7 +149,7 @@
         "d8",
         "d15"
       ],
-      "observacao": "Semanal por 12 semanas (SOnHe TH p. 21). D-F1-28: paclitaxel semanal em SF 0,9% 500 mL. F1-B2: 80 mg/m²/60 min confirmados externamente (EXT-LEG-008/009); diluente SF 0,9% 500 mL é decisão local (D-F1-28) — eviQ usa 250 mL [divergência registrada]. F1-B2: 80 mg/m²/60 min confirmados externamente (EXT-LEG-008/009); diluente SF 0,9% 500 mL é decisão local (D-F1-28) — eviQ usa 250 mL [divergência registrada]. F1-B2: 80 mg/m²/60 min confirmados externamente (EXT-LEG-008/009); diluente SF 0,9% 500 mL é decisão local (D-F1-28) — eviQ usa 250 mL [divergência registrada]. F1-B2: 80 mg/m²/60 min confirmados externamente (EXT-LEG-008/009); diluente SF 0,9% 500 mL é decisão local (D-F1-28) — eviQ usa 250 mL [divergência registrada]. F1-B2: 80 mg/m²/60 min confirmados externamente (EXT-LEG-008/009); diluente SF 0,9% 500 mL é decisão local (D-F1-28) — eviQ usa 250 mL [divergência registrada].",
+      "observacao": "Semanal por 12 semanas (SOnHe TH p. 21). D-F1-28: paclitaxel semanal em SF 0,9% 500 mL. F1-B2: 80 mg/m²/60 min confirmados externamente (EXT-LEG-008/009); diluente SF 0,9% 500 mL é decisão local (D-F1-28) — eviQ usa 250 mL [divergência registrada].",
       "source": "PROTOCOL",
       "overrideMotivo": null
     },

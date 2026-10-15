@@ -4,7 +4,7 @@
   "nome": "Cisplatina semanal + RxT (vulva)",
   "cenario": "concomitante à RT",
   "versao": "1.0.0",
-  "hash": "1457a3144a5ef8f6b1b1fe2a2d499200505fc244e640b7c8bb6cbae2e7aec4ab",
+  "hash": "8c165d158f3c00b8a7311924bb0283409a7105b2146f8efeada4a7aa0c151b71",
   "codigoInstitucional": null,
   "intervaloDias": 7,
   "ciclos": null,
@@ -181,9 +181,10 @@
       "days": [
         "d1"
       ],
-      "observacao": "eviQ 1529: 40 mg/m² semanal no dia de RT (antes), 5–6 ciclos. GOCXCRT: 500 mL + manitol 30 g + MgSO4 2 g em 60 min. Taxa máxima 1 mg/min (padrão local das fichas reais).",
+      "observacao": "eviQ 1529: 40 mg/m² semanal no dia de RT (antes), 5–6 ciclos. GOCXCRT: 500 mL + manitol 30 g + MgSO4 2 g em 60 min. Taxa máxima 1 mg/min (padrão local das fichas reais); duração calculada nunca inferior ao tempo da fonte.",
       "source": "PROTOCOL",
-      "overrideMotivo": null
+      "overrideMotivo": null,
+      "taxaMaximaMgMin": 1
     },
     {
       "drug": "Manitol 20% frasco 250 mL",

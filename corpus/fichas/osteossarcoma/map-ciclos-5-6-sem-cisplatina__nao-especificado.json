@@ -4,7 +4,7 @@
   "nome": "MAP (ciclos 5–6 — sem cisplatina)",
   "cenario": "não especificado",
   "versao": "1.0.0",
-  "hash": "8141b1d3d73bb15022ba954dc8552fb42b90eb3a9ad3b4c94a790a8bdf1dbcfa",
+  "hash": "b7610867355991b6cb4f6effd52d906eaf38e04040d0e8db4373bf9053983812",
   "codigoInstitucional": null,
   "intervaloDias": 28,
   "ciclos": 2,
@@ -25,7 +25,11 @@
       "finalVolumeMl": 250,
       "infusionTime": null,
       "days": [
-        "d1"
+        "d1",
+        "d2",
+        "d3",
+        "d15",
+        "d22"
       ],
       "observacao": "Lavar acesso venoso pré e pós QT (planilha).",
       "source": "PROTOCOL",
@@ -47,7 +51,11 @@
       "finalVolumeMl": null,
       "infusionTime": "15 min",
       "days": [
-        "d1"
+        "d1",
+        "d2",
+        "d3",
+        "d15",
+        "d22"
       ],
       "observacao": "Padrão local (D-W9-23c/34c; D-F1-30).",
       "source": "PROTOCOL",
@@ -69,7 +77,11 @@
       "finalVolumeMl": null,
       "infusionTime": "15 min",
       "days": [
-        "d1"
+        "d1",
+        "d2",
+        "d3",
+        "d15",
+        "d22"
       ],
       "observacao": "Alto risco emetogênico: olanzapina 5 mg VO opcional (D-W9-34c); sem NK1 (padrão local).",
       "source": "PROTOCOL",
@@ -91,7 +103,11 @@
       "finalVolumeMl": null,
       "infusionTime": null,
       "days": [
-        "d1"
+        "d1",
+        "d2",
+        "d3",
+        "d15",
+        "d22"
       ],
       "observacao": "Pré-medicação local (D-W9-34c).",
       "source": "PROTOCOL",
@@ -142,7 +158,8 @@
       ],
       "observacao": "eviQ 1901 C5–6: 12.000 mg/m² em 4 h nas semanas 3 e 4 (D15 e D22).",
       "source": "PROTOCOL",
-      "overrideMotivo": null
+      "overrideMotivo": null,
+      "doseMaximaMg": 20000
     },
     {
       "drug": "Folinato de cálcio (resgate do MTX)",
@@ -161,13 +178,22 @@
       "infusionTime": null,
       "days": [
         "d16",
-        "d18",
-        "d23",
-        "d25"
+        "d23"
       ],
       "observacao": "15 mg/m² q6h a partir de 24 h do início do MTX; IV ×4 doses, depois VO até <0,1 µmol/L [VERIFICAR]. BC: 25 mg fixa [variante].",
       "source": "PROTOCOL",
-      "overrideMotivo": null
+      "overrideMotivo": null,
+      "resgateMtx": {
+        "inicioAposHoras": 24,
+        "intervaloHoras": 6,
+        "primeirasDosesEV": 4,
+        "viasPosteriores": [
+          "EV",
+          "VO"
+        ],
+        "ateNivelInferiorMicromolL": 0.1,
+        "fonte": "EXT-SARC-004, eviQ 1901, Treatment schedule, nota de resgate do MTX"
+      }
     },
     {
       "drug": "Pegfilgrastim",
@@ -185,9 +211,9 @@
       "finalVolumeMl": null,
       "infusionTime": null,
       "days": [
-        "d3"
+        "d4"
       ],
-      "observacao": "Profilaxia primária obrigatória (BC SANAHDMAP).",
+      "observacao": "Pelo menos 24 h após o fim da doxorrubicina D3 (D-F1-50/SBOC); condição eviQ 1901, adaptada ao fracionamento local. Profilaxia primária obrigatória (BC SANAHDMAP).",
       "source": "PROTOCOL",
       "overrideMotivo": null
     },
@@ -207,7 +233,11 @@
       "finalVolumeMl": 250,
       "infusionTime": null,
       "days": [
-        "d1"
+        "d1",
+        "d2",
+        "d3",
+        "d15",
+        "d22"
       ],
       "observacao": "Lavar acesso venoso pós-QT (planilha).",
       "source": "PROTOCOL",

@@ -4,7 +4,7 @@
   "nome": "Ewing IE (ciclo B — alternado ao VDC)",
   "cenario": "1ª linha, dose-denso q14",
   "versao": "1.0.0",
-  "hash": "f94aaf552c0ccc6811300f8145b708399b0b0027b4d5e5e9e03a966986715f31",
+  "hash": "0a70e1994d099af662e79e73dbd19ad3110561370118331cfe7b1c00b8e7624e",
   "codigoInstitucional": null,
   "intervaloDias": 14,
   "ciclos": 7,
@@ -25,7 +25,11 @@
       "finalVolumeMl": 250,
       "infusionTime": null,
       "days": [
-        "d1-d5"
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
       ],
       "observacao": "Lavar acesso venoso pré e pós QT (planilha).",
       "source": "PROTOCOL",
@@ -47,7 +51,11 @@
       "finalVolumeMl": null,
       "infusionTime": "15 min",
       "days": [
-        "d1-d5"
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
       ],
       "observacao": "Padrão local (D-W9-23c/34c; D-F1-30).",
       "source": "PROTOCOL",
@@ -69,7 +77,11 @@
       "finalVolumeMl": null,
       "infusionTime": "15 min",
       "days": [
-        "d1-d5"
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
       ],
       "observacao": "Alto risco emetogênico: olanzapina 5 mg VO opcional (D-W9-34c); sem NK1 (padrão local).",
       "source": "PROTOCOL",
@@ -91,7 +103,11 @@
       "finalVolumeMl": null,
       "infusionTime": null,
       "days": [
-        "d1-d5"
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
       ],
       "observacao": "Pré-medicação local (D-W9-34c).",
       "source": "PROTOCOL",
@@ -245,7 +261,11 @@
       "finalVolumeMl": 250,
       "infusionTime": null,
       "days": [
-        "d1-d5"
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
       ],
       "observacao": "Lavar acesso venoso pós-QT (planilha).",
       "source": "PROTOCOL",

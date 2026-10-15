@@ -24,12 +24,15 @@ const ACESSO = "2026-10-14"; // data de acesso das fontes externas (relatórios 
 
 // ---------- construtores (copiados de gerar-fichas.mjs — INT-FICHAS congelado) ----------
 const slug = (s) => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
-const UN = { m2: ["MG_M2", "mg/m²"], mg: ["FIXED", "mg"], auc: ["AUC", "AUC"], ugkg: ["MG_KG", "µg/kg"], mgkg: ["MG_KG", "mg/kg"], fr: ["FIXED", "frasco"], ml: ["FIXED", "mL"] };
+const UN = { m2: ["MG_M2", "mg/m²"], mg: ["FIXED", "mg"], auc: ["AUC", "AUC"], ugkg: ["MCG_KG", "µg/kg"], mgkg: ["MG_KG", "mg/kg"], fr: ["FIXED", "frasco"], ml: ["FIXED", "mL"] };
 function it(drug, classe, dose, un, route, days, o = {}) {
   const [doseBasis, unit] = UN[un];
   return { drug, classe, sequence: 0, standardDose: dose, doseBasis, calculatedDose: null, prescribedDose: null, unit,
     adjustmentPercent: null, adjustmentReason: null, route, diluent: o.dil ?? null, finalVolumeMl: o.vol ?? null,
-    infusionTime: o.t ?? null, days, observacao: o.obs ?? null, source: "PROTOCOL", overrideMotivo: null };
+    infusionTime: o.t ?? null, days, observacao: o.obs ?? null, source: "PROTOCOL", overrideMotivo: null,
+    ...(o.maxMg !== undefined ? { doseMaximaMg: o.maxMg } : {}),
+    ...(o.maxMgMin !== undefined ? { taxaMaximaMgMin: o.maxMgMin } : {}),
+    ...(o.resgateMtx ? { resgateMtx: o.resgateMtx } : {}) };
 }
 const qt = (drug, dose, un, days, o = {}) => it(drug, "QT", dose, un, o.route ?? "EV", days, o);
 const D = (...n) => n.map((x) => `d${x}`);
@@ -40,7 +43,11 @@ function montar(s) {
   const temIV = !s.semPremed;
   const taxano = s.itens.some((i) => i.drug && /paclitaxel|docetaxel/i.test(i.drug));
   const diasTaxano = taxano ? s.itens.find((i) => /paclitaxel|docetaxel/i.test(i.drug ?? "")).days : null;
-  const pd = s.premedDias ?? D(1);
+  const pd = [...new Set(s.itens.filter(i => i.cis || (i.classe === "QT" && i.route === "EV"
+    && !/folinato|mesna/i.test(i.drug))).flatMap(i => i.days).flatMap(dia => {
+      const r = /^d(\d+)-d(\d+)$/.exec(dia);
+      return r ? Array.from({ length: Number(r[2]) - Number(r[1]) + 1 }, (_, n) => `d${Number(r[1]) + n}`) : [dia];
+    }))].sort((a, b) => Number(a.slice(1)) - Number(b.slice(1)));
   if (temIV) {
     itens.push(it("Soro fisiológico 0,9% 250 mL (lavagem de acesso)", "PRE_QT", 1, "fr", "EV", pd, { vol: 250, obs: "Lavar acesso venoso pré e pós QT (planilha)." }));
     itens.push(it("Ondansetrona", "PRE_QT", 8, "mg", "EV", pd, { t: "15 min", obs: "Padrão local (D-W9-23c/34c; D-F1-30)." }));
@@ -53,7 +60,7 @@ function montar(s) {
     itens.push(it("Soro fisiológico 0,9% 500 mL (pré-cisplatina)", "PRE_QT", 1, "fr", "EV", x.days, { vol: 500, t: "20 min", obs: "Correr aberto antes da cisplatina (padrão local)." }));
     itens.push(it("Sulfato de magnésio 10% 10 mL", "PRE_QT", 10, "ml", "EV", x.days, { obs: "Aditivo da bolsa pré-cisplatina, em cada dia de cisplatina (D-W9-34d)." }));
     itens.push(it("Cloreto de potássio 19,1% 4 mL", "PRE_QT", 4, "ml", "EV", x.days, { obs: "Aditivo da bolsa pré-cisplatina, em cada dia de cisplatina (D-W9-34d)." }));
-    itens.push(qt("Cisplatina", x.dose, "m2", x.days, { t: x.t, dil: x.dil, vol: x.vol, obs: `${x.obsCis ? x.obsCis + " " : ""}Taxa máxima 1 mg/min (padrão local das fichas reais).` }));
+    itens.push(qt("Cisplatina", x.dose, "m2", x.days, { t: x.t, maxMgMin: 1, dil: x.dil, vol: x.vol, obs: `${x.obsCis ? x.obsCis + " " : ""}Taxa máxima 1 mg/min (padrão local das fichas reais); duração calculada nunca inferior ao tempo da fonte.` }));
     itens.push(qt("Manitol 20% frasco 250 mL", 1, "fr", x.days, { vol: 250, t: "60 min", obs: "Correr em Y com a cisplatina (padrão local)." }));
     pos.push(it("Soro fisiológico 0,9% 500 mL (pós-cisplatina)", "POS_QT", 1, "fr", "EV", x.days, { vol: 500, t: "20 min", obs: "Correr aberto após a cisplatina." }));
     pos.push(it("Cloreto de potássio 19,1% 4 mL", "POS_QT", 4, "ml", "EV", x.days, { obs: "Aditivo da bolsa pós-cisplatina (D-W9-34d)." }));
@@ -217,7 +224,7 @@ F({ tumor: EW, nome: "Ewing VDC (ciclo A — alternado ao IE)", cenario: "1ª li
   lacunas: ["versão convencional q3sem (eviQ 'VDC or IE every 21 days') disponível como alternativa — variante não preparada aqui"],
   fonteDecisao: `D-F1-34 e D-F1-49. Base do q2sem: Womer 2012 (AEWS0031) — ${ref(["EXT-SARC-022"])} (correção: 'Whelan JCO 2018' é Euro-E.W.I.N.G. 99/BuMel, não VDC/IE dose-denso). Protocolos operacionais: ${ref(["EXT-SARC-001", "EXT-SARC-002", "EXT-SARC-009"])}. Diretriz local: ${ref(["LOC-SBOC-OSSEOS"])}. Teto cumulativo de doxorrubicina 375 mg/m² (eviQ/BC): ao atingir, omitir (BC mantém VC; eviQ substitui por dactinomicina 1,25 mg/m² D1 só se cardiotoxicidade). Terapia local após 6 ciclos (eviQ 3464).`,
   itens: [
-    qt("Vincristina", 1.5, "m2", D(1), { t: "15 min", obs: "Cap 2 mg (eviQ/BC). Womer 2012 (abstract): 2 mg/m² [variante]." }),
+    qt("Vincristina", 1.5, "m2", D(1), { maxMg: 2, t: "15 min", obs: "Cap 2 mg (eviQ/BC). Womer 2012 (abstract): 2 mg/m² [variante]." }),
     qt("Doxorrubicina", 37.5, "m2", D(1, 2), { t: "15 min", obs: "37,5 mg/m²/dia D1–D2 (total 75/ciclo; eviQ 1916). BC: 75 IV push D1 [variante]. Teto cumulativo 375 mg/m²." }),
     qt("Ciclofosfamida", 1200, "m2", D(1), { t: "15 min", dil: "SF 0,9%", vol: 100, obs: "eviQ 1916: 1.200 mg/m² D1 em 100 mL SF 0,9% em 15 min." }),
     qt("Mesna (0 h)", 400, "m2", D(1), { t: "15 min", obs: "Carga IV 15 min antes da ciclofosfamia (eviQ 1916)." }),
@@ -253,9 +260,9 @@ F({ tumor: OST, nome: "MAP (ciclos 1–4)", cenario: NE, intervalo: 35, ciclos: 
   itens: [
     qt("Doxorrubicina", 25, "m2", D(1, 2, 3), { t: "15 min", obs: "SBOC p.12: 25 mg/m² D1–D3 (total 75). eviQ/BC/EURAMOS: 37,5 ×2 D1–D2 (mesmo total) [variante]." }),
     CIS(60, D(1, 2), { t: "2 h", obs: "SBOC p.12 e eviQ 1901: 60 mg/m² D1–D2 (eviQ: em 1.000 mL SF em 2 h; BC: 50×2, 60×2 excepcional)." }),
-    qt("Metotrexato", 12000, "m2", D(22, 29), { t: "4 h", dil: "SF 0,9%", vol: 1000, obs: "eviQ 1901: 12.000 mg/m² (máx 20 g) em 1.000 mL SF em 4 h; C1–C4 nas semanas 4 e 5. Alcalinização e níveis (BC SANAHDMAP: MTX h48 + diário até <0,1 µmol/L; pH urinário q6h)." }),
-    qt("Folinato de cálcio (resgate do MTX)", 15, "m2", [...D(23, 25), ...D(30, 32)], { obs: "eviQ 1901: 15 mg/m² q6h iniciando EXATAMENTE 24 h após o início do MTX; IV nas 4 primeiras doses, depois VO até MTX <0,1 µmol/L [VERIFICAR — nº de dias conforme depuração/níveis]. BC: 25 mg fixa q6h [variante]." }),
-    it("Pegfilgrastim", "POS_QT", 6, "mg", "SC", D(3), { obs: "BC SANAHDMAP: profilaxia primária obrigatória — pegfilgrastim 6 mg D3 OU filgrastim 5 µg/kg D3–D7; eviQ 1901: pegfilgrastim D3." }),
+    qt("Metotrexato", 12000, "m2", D(22, 29), { maxMg: 20000, t: "4 h", dil: "SF 0,9%", vol: 1000, obs: "eviQ 1901: 12.000 mg/m² (máx 20 g) em 1.000 mL SF em 4 h; C1–C4 nas semanas 4 e 5. Alcalinização e níveis (BC SANAHDMAP: MTX h48 + diário até <0,1 µmol/L; pH urinário q6h)." }),
+    qt("Folinato de cálcio (resgate do MTX)", 15, "m2", D(23, 30), { resgateMtx: { inicioAposHoras: 24, intervaloHoras: 6, primeirasDosesEV: 4, viasPosteriores: ["EV", "VO"], ateNivelInferiorMicromolL: 0.1, fonte: "EXT-SARC-004, eviQ 1901, Treatment schedule, nota de resgate do MTX" }, obs: "eviQ 1901: 15 mg/m² q6h iniciando EXATAMENTE 24 h após o início do MTX; IV nas 4 primeiras doses, depois VO até MTX <0,1 µmol/L [VERIFICAR — nº de dias conforme depuração/níveis]. BC: 25 mg fixa q6h [variante]." }),
+    it("Pegfilgrastim", "POS_QT", 6, "mg", "SC", D(4), { obs: "D4, pelo menos 24 h após o fim da doxorrubicina D3 (D-F1-50/SBOC); adaptação temporal da condição eviQ 1901, não do D3 da variante com doxo D1-D2. Variante não adotada: BC SANAHDMAP: profilaxia primária obrigatória — pegfilgrastim 6 mg D3 OU filgrastim 5 µg/kg D3–D7; eviQ 1901: pegfilgrastim D3." }),
   ] });
 
 F({ tumor: OST, nome: "MAP (ciclos 5–6 — sem cisplatina)", cenario: NE, intervalo: 28, ciclos: 2, premedDias: D(1), altoRisco: true,
@@ -266,9 +273,9 @@ F({ tumor: OST, nome: "MAP (ciclos 5–6 — sem cisplatina)", cenario: NE, inte
   fonteDecisao: `D-F1-34 e D-F1-49. Estrutura eviQ 1901 (C5–6 de 28 d: doxo semana 1 + MTX semanas 3–4, SEM cisplatina): ${ref(["EXT-SARC-004", "EXT-SARC-014"])}.`,
   itens: [
     qt("Doxorrubicina", 25, "m2", D(1, 2, 3), { t: "15 min", obs: "SBOC p.12 (25 D1–D3; total 75). eviQ/BC: 37,5 ×2 [variante]." }),
-    qt("Metotrexato", 12000, "m2", D(15, 22), { t: "4 h", dil: "SF 0,9%", vol: 1000, obs: "eviQ 1901 C5–6: 12.000 mg/m² em 4 h nas semanas 3 e 4 (D15 e D22)." }),
-    qt("Folinato de cálcio (resgate do MTX)", 15, "m2", [...D(16, 18), ...D(23, 25)], { obs: "15 mg/m² q6h a partir de 24 h do início do MTX; IV ×4 doses, depois VO até <0,1 µmol/L [VERIFICAR]. BC: 25 mg fixa [variante]." }),
-    it("Pegfilgrastim", "POS_QT", 6, "mg", "SC", D(3), { obs: "Profilaxia primária obrigatória (BC SANAHDMAP)." }),
+    qt("Metotrexato", 12000, "m2", D(15, 22), { maxMg: 20000, t: "4 h", dil: "SF 0,9%", vol: 1000, obs: "eviQ 1901 C5–6: 12.000 mg/m² em 4 h nas semanas 3 e 4 (D15 e D22)." }),
+    qt("Folinato de cálcio (resgate do MTX)", 15, "m2", D(16, 23), { resgateMtx: { inicioAposHoras: 24, intervaloHoras: 6, primeirasDosesEV: 4, viasPosteriores: ["EV", "VO"], ateNivelInferiorMicromolL: 0.1, fonte: "EXT-SARC-004, eviQ 1901, Treatment schedule, nota de resgate do MTX" }, obs: "15 mg/m² q6h a partir de 24 h do início do MTX; IV ×4 doses, depois VO até <0,1 µmol/L [VERIFICAR]. BC: 25 mg fixa [variante]." }),
+    it("Pegfilgrastim", "POS_QT", 6, "mg", "SC", D(4), { obs: "Pelo menos 24 h após o fim da doxorrubicina D3 (D-F1-50/SBOC); condição eviQ 1901, adaptada ao fracionamento local. Profilaxia primária obrigatória (BC SANAHDMAP)." }),
   ] });
 
 F({ tumor: OST, nome: "AP (doxorrubicina + cisplatina)", cenario: NE, intervalo: 21, ciclos: null, altoRisco: true,
@@ -369,7 +376,7 @@ F({ tumor: NTG, nome: "Dactinomicina em pulso (baixo risco)", cenario: "baixo ri
   lacunas: [],
   fonteDecisao: `D-F1-34 e D-F1-49. Protocolo operacional: ${ref(["EXT-CNV-027"])}. Diretriz: ${ref(["EXT-CNV-031"])}.`,
   itens: [
-    qt("Dactinomicina", 1.25, "m2", D(1), { t: "5 min", obs: "1,25 mg/m² IV em 3–5 min (cap 2 mg), q14d. Alternativa Lok: 0,5 mg/dia D1–5." }),
+    qt("Dactinomicina", 1.25, "m2", D(1), { maxMg: 2, t: "5 min", obs: "1,25 mg/m² IV em 3–5 min (cap 2 mg), q14d. Alternativa Lok: 0,5 mg/dia D1–5." }),
   ] });
 
 F({ tumor: NTG, nome: "EMA-CO (alto risco)", cenario: "alto risco (escore FIGO ≥7)", intervalo: 14, ciclos: null, premedDias: D(1, 2, 8), altoRisco: true,
@@ -382,8 +389,8 @@ F({ tumor: NTG, nome: "EMA-CO (alto risco)", cenario: "alto risco (escore FIGO �
     qt("Etoposídeo", 100, "m2", D(1, 2), { t: "60 min", dil: "SF 0,9%", vol: 500, obs: "100 mg/m²/dia D1 e D2 (Etopophos 113,6 ≡ 100)." }),
     qt("Metotrexato", 300, "m2", D(1), { t: "12 h", dil: "SF 0,9%", vol: 1000, obs: "300 mg/m² IV em 1.000 mL SF em 12 h (D1)." }),
     qt("Dactinomicina", 0.5, "mg", D(1, 2), { t: "5 min", obs: "0,5 mg IV D1 e D2." }),
-    qt("Folinato de cálcio (resgate do MTX)", 15, "mg", D(2), { route: "VO", obs: "15 mg VO q12h ×4 doses, iniciando 24 h após o início do MTX (D2)." }),
-    qt("Vincristina", 0.8, "m2", D(8), { t: "10 min", dil: "SF 0,9%", vol: 50, obs: "D-F1-50: 0,8 mg/m² (cap 2 mg; BC/Lok). eviQ 599: 1 mg/m² [variante registrada]." }),
+    ...[24, 36, 48, 60].map(h => qt(`Folinato de cálcio (resgate do MTX +${h} h)`, 15, "mg", D(h < 48 ? 2 : 3), { route: "VO", obs: "15 mg VO a cada 12 h, quatro doses: +24/+36/+48/+60 h após o início do MTX (EXT-CNV-028/031). Não omitir D3." })),
+    qt("Vincristina", 0.8, "m2", D(8), { maxMg: 2, t: "10 min", dil: "SF 0,9%", vol: 50, obs: "D-F1-50: 0,8 mg/m² (cap 2 mg; BC/Lok). eviQ 599: 1 mg/m² [variante registrada]." }),
     qt("Ciclofosfamida", 600, "m2", D(8), { t: "60 min", dil: "SF 0,9%", vol: 500, obs: "600 mg/m² D8." }),
     it("Filgrastim", "POS_QT", 5, "ugkg", "SC", [...R(3, 5), ...R(9, 11)], { obs: "5 µg/kg/dia SC D3–D5 e D9–D11 (eviQ nota: 2–3 dias frequentemente suficientes; BC: sem filgrastim)." }),
   ] });
@@ -398,7 +405,7 @@ F({ tumor: NTG, nome: "EMA/EP (resistência ao EMA-CO)", cenario: "resistente ao
     qt("Dactinomicina", 0.5, "mg", D(1), { t: "5 min", obs: "Tabela A5: actinomicina-D 0,5 mg IV D1 (somente)." }),
     qt("Etoposídeo", 100, "m2", D(1), { t: "60 min", dil: "SF 0,9%", vol: 500, obs: "Tabela A5: etoposídeo 100 mg/m² IV D1; no D8 a dose é 150 mg/m²." }),
     qt("Metotrexato", 300, "m2", D(1), { t: "12 h", dil: "SF 0,9%", vol: 1000, obs: "Tabela A5: MTX 300 mg/m² IV D1 (12 h no equivalente eviQ 1378)." }),
-    qt("Folinato de cálcio (resgate do MTX)", 15, "mg", D(2), { route: "VO", obs: "Tabela A5: leucovorina 15 mg VO 2×/dia ×4 doses, 24 h após o início do MTX — O D2 TEM SOMENTE ESTE ITEM (Figura A4: 'day 2 EA should be omitted')." }),
+    ...[24, 36, 48, 60].map(h => qt(`Folinato de cálcio (resgate do MTX +${h} h)`, 15, "mg", D(h < 48 ? 2 : 3), { route: "VO", obs: "15 mg VO a cada 12 h, quatro doses: +24/+36/+48/+60 h após o início do MTX (EXT-CNV-028/031). Não omitir D3." })),
     qt("Etoposídeo (D8, 150 mg/m²)", 150, "m2", D(8), { t: "60 min", dil: "SF 0,9%", vol: 500, obs: "Tabela A5: etoposídeo 150 mg/m² IV D8." }),
     CIS(75, D(8), { obs: "Tabela A5: cisplatina 75 mg/m² IV D8 (eviQ 1378: em 1.000 mL SF em 60 min com hidratação)." }),
   ] });
@@ -438,16 +445,22 @@ const alteradas = [];
 for (const rel of PAC_SEMANAL) {
   const caminho = `corpus/fichas/${rel}`;
   const json = JSON.parse(readFileSync(join(RAIZ, caminho), "utf8"));
-  // migração: remove acréscimo F1-B2 anterior (podia conter prefixos de 12 hex) e recoloca a forma atual
   const marco = json.fonte.indexOf(" F1-B2 (D-F1-49");
   if (marco >= 0) json.fonte = json.fonte.slice(0, marco);
-  if (!json.fonte.includes("F1-B2 (D-F1-49")) {
-    json.fonte += ACRESCIMO_FONTE;
-    const pac = json.itens.find((i) => /^paclitaxel/i.test(i.drug));
-    if (pac) pac.observacao = (pac.observacao ? pac.observacao + " " : "") + "F1-B2: 80 mg/m²/60 min confirmados externamente (EXT-LEG-008/009); diluente SF 0,9% 500 mL é decisão local (D-F1-28) — eviQ usa 250 mL [divergência registrada].";
-    json.hash = hashDe(json);
-    writeFileSync(join(RAIZ, caminho), JSON.stringify(json, null, 2) + "\n", "utf8");
-  } // fim do if de aplicação
+  const cross = rel.startsWith("esofago/");
+  const nota = cross
+    ? " F1-B2 (D-F1-49): CROSS mantém paclitaxel 50 mg/m² da ficha. Fontes mamárias 80 mg/m² não confirmam dose/indicação CROSS; monografia BC sustenta somente filtro e materiais."
+    : ACRESCIMO_FONTE;
+  json.fonte += nota;
+  const pac = json.itens.find(i => /^paclitaxel/i.test(i.drug));
+  if (pac) {
+    pac.observacao = (pac.observacao ?? "").split("F1-B2:")[0].trim();
+    pac.observacao += cross
+      ? " F1-B2: dose CROSS 50 mg/m² preservada; sem atribuir confirmação por fontes de mama 80 mg/m²."
+      : " F1-B2: 80 mg/m²/60 min confirmados externamente (EXT-LEG-008/009); diluente SF 0,9% 500 mL é decisão local (D-F1-28) — eviQ usa 250 mL [divergência registrada].";
+  }
+  json.hash = hashDe(json);
+  writeFileSync(join(RAIZ, caminho), JSON.stringify(json, null, 2) + "\n", "utf8");
   // registro idempotente: execução anterior já aplicou o acrescimo — o manifesto registra as 6 mesmo assim
   alteradas.push({ caminho, templateId: json.templateId });
 }

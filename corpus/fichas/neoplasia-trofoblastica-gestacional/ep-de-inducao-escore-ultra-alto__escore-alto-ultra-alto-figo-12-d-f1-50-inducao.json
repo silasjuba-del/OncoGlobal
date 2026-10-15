@@ -4,7 +4,7 @@
   "nome": "EP de indução (escore ultra-alto)",
   "cenario": "escore alto/ultra-alto (FIGO ≥12, D-F1-50) — indução",
   "versao": "1.0.0",
-  "hash": "a08fa8f55001ef6e6e35666a1478ae0ceab24395d77d3acea9e7e2c3317d01fc",
+  "hash": "74ddaf708e1e4a73004150b9366ae992e70544823f84c66cbe85651738cabd20",
   "codigoInstitucional": null,
   "intervaloDias": 7,
   "ciclos": null,
@@ -212,9 +212,10 @@
         "d1",
         "d2"
       ],
-      "observacao": "20 mg/m²/dia D1–D2 (dose baixa; hidratação para nefroproteção conforme eviQ 1347). Taxa máxima 1 mg/min (padrão local das fichas reais).",
+      "observacao": "20 mg/m²/dia D1–D2 (dose baixa; hidratação para nefroproteção conforme eviQ 1347). Taxa máxima 1 mg/min (padrão local das fichas reais); duração calculada nunca inferior ao tempo da fonte.",
       "source": "PROTOCOL",
-      "overrideMotivo": null
+      "overrideMotivo": null,
+      "taxaMaximaMgMin": 1
     },
     {
       "drug": "Manitol 20% frasco 250 mL",

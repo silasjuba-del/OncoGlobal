@@ -4,7 +4,7 @@
   "nome": "AC-CT (fase CT — carboplatina + paclitaxel semanal)",
   "cenario": "neo/adjuvante",
   "versao": "1.0.0",
-  "hash": "3509eb862b4a35f93d12806b82d63650b065689d11d6a492b7642eb064117402",
+  "hash": "88a1ec4bc841d75a00e0e47272a1d914afa4492ffb3d6663cbff5bc7fde1a665",
   "codigoInstitucional": null,
   "intervaloDias": 7,
   "ciclos": 12,
@@ -137,7 +137,7 @@
       "days": [
         "d1"
       ],
-      "observacao": "Semanal. D-F1-28: paclitaxel semanal em SF 0,9% 500 mL. F1-B2: 80 mg/m²/60 min confirmados externamente (EXT-LEG-008/009); diluente SF 0,9% 500 mL é decisão local (D-F1-28) — eviQ usa 250 mL [divergência registrada]. F1-B2: 80 mg/m²/60 min confirmados externamente (EXT-LEG-008/009); diluente SF 0,9% 500 mL é decisão local (D-F1-28) — eviQ usa 250 mL [divergência registrada]. F1-B2: 80 mg/m²/60 min confirmados externamente (EXT-LEG-008/009); diluente SF 0,9% 500 mL é decisão local (D-F1-28) — eviQ usa 250 mL [divergência registrada]. F1-B2: 80 mg/m²/60 min confirmados externamente (EXT-LEG-008/009); diluente SF 0,9% 500 mL é decisão local (D-F1-28) — eviQ usa 250 mL [divergência registrada]. F1-B2: 80 mg/m²/60 min confirmados externamente (EXT-LEG-008/009); diluente SF 0,9% 500 mL é decisão local (D-F1-28) — eviQ usa 250 mL [divergência registrada].",
+      "observacao": "Semanal. D-F1-28: paclitaxel semanal em SF 0,9% 500 mL. F1-B2: 80 mg/m²/60 min confirmados externamente (EXT-LEG-008/009); diluente SF 0,9% 500 mL é decisão local (D-F1-28) — eviQ usa 250 mL [divergência registrada].",
       "source": "PROTOCOL",
       "overrideMotivo": null
     },

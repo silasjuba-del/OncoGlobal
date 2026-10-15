@@ -4,7 +4,7 @@
   "nome": "AP (doxorrubicina + cisplatina)",
   "cenario": "não especificado",
   "versao": "1.0.0",
-  "hash": "1b4381779582d00ab71d3b95aa548b9851c174b3144a12152087525f73faea16",
+  "hash": "11b916e1a19af20d4cd8b2a9cb5c92d93f7979c1b120f641490ac700d4cbf700",
   "codigoInstitucional": null,
   "intervaloDias": 21,
   "ciclos": null,
@@ -203,9 +203,10 @@
       "days": [
         "d1"
       ],
-      "observacao": "SAAVAP: 100 mg/m² em 1 L SF + manitol 30 g + KCl 10 mEq em 2 h. Taxa máxima 1 mg/min (padrão local das fichas reais).",
+      "observacao": "SAAVAP: 100 mg/m² em 1 L SF + manitol 30 g + KCl 10 mEq em 2 h. Taxa máxima 1 mg/min (padrão local das fichas reais); duração calculada nunca inferior ao tempo da fonte.",
       "source": "PROTOCOL",
-      "overrideMotivo": null
+      "overrideMotivo": null,
+      "taxaMaximaMgMin": 1
     },
     {
       "drug": "Manitol 20% frasco 250 mL",

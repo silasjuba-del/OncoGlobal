@@ -157,8 +157,8 @@
             "dose": 6,
             "unidade": "mg",
             "via": "SC",
-            "dias": "D3",
-            "observacao": ""
+            "dias": "D4",
+            "observacao": "≥24 h após fim da doxo D3; condição temporal eviQ adaptada ao fracionamento SBOC/D-F1-50"
           }
         ],
         "cicloDias": 35,

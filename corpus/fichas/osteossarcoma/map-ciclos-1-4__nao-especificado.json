@@ -4,7 +4,7 @@
   "nome": "MAP (ciclos 1–4)",
   "cenario": "não especificado",
   "versao": "1.0.0",
-  "hash": "9b70912315e00818686e9d33f831e58033a7a63db51df09b322ad7d79d9cf2c8",
+  "hash": "45f09b59557c742127c793f751573ec5c3193c79c154db6b0e9294657fe5957d",
   "codigoInstitucional": null,
   "intervaloDias": 35,
   "ciclos": 4,
@@ -25,7 +25,11 @@
       "finalVolumeMl": 250,
       "infusionTime": null,
       "days": [
-        "d1-d2"
+        "d1",
+        "d2",
+        "d3",
+        "d22",
+        "d29"
       ],
       "observacao": "Lavar acesso venoso pré e pós QT (planilha).",
       "source": "PROTOCOL",
@@ -47,7 +51,11 @@
       "finalVolumeMl": null,
       "infusionTime": "15 min",
       "days": [
-        "d1-d2"
+        "d1",
+        "d2",
+        "d3",
+        "d22",
+        "d29"
       ],
       "observacao": "Padrão local (D-W9-23c/34c; D-F1-30).",
       "source": "PROTOCOL",
@@ -69,7 +77,11 @@
       "finalVolumeMl": null,
       "infusionTime": "15 min",
       "days": [
-        "d1-d2"
+        "d1",
+        "d2",
+        "d3",
+        "d22",
+        "d29"
       ],
       "observacao": "Alto risco emetogênico: olanzapina 5 mg VO opcional (D-W9-34c); sem NK1 (padrão local).",
       "source": "PROTOCOL",
@@ -91,7 +103,11 @@
       "finalVolumeMl": null,
       "infusionTime": null,
       "days": [
-        "d1-d2"
+        "d1",
+        "d2",
+        "d3",
+        "d22",
+        "d29"
       ],
       "observacao": "Pré-medicação local (D-W9-34c).",
       "source": "PROTOCOL",
@@ -209,9 +225,10 @@
         "d1",
         "d2"
       ],
-      "observacao": "SBOC p.12 e eviQ 1901: 60 mg/m² D1–D2 (eviQ: em 1.000 mL SF em 2 h; BC: 50×2, 60×2 excepcional). Taxa máxima 1 mg/min (padrão local das fichas reais).",
+      "observacao": "SBOC p.12 e eviQ 1901: 60 mg/m² D1–D2 (eviQ: em 1.000 mL SF em 2 h; BC: 50×2, 60×2 excepcional). Taxa máxima 1 mg/min (padrão local das fichas reais); duração calculada nunca inferior ao tempo da fonte.",
       "source": "PROTOCOL",
-      "overrideMotivo": null
+      "overrideMotivo": null,
+      "taxaMaximaMgMin": 1
     },
     {
       "drug": "Manitol 20% frasco 250 mL",
@@ -257,7 +274,8 @@
       ],
       "observacao": "eviQ 1901: 12.000 mg/m² (máx 20 g) em 1.000 mL SF em 4 h; C1–C4 nas semanas 4 e 5. Alcalinização e níveis (BC SANAHDMAP: MTX h48 + diário até <0,1 µmol/L; pH urinário q6h).",
       "source": "PROTOCOL",
-      "overrideMotivo": null
+      "overrideMotivo": null,
+      "doseMaximaMg": 20000
     },
     {
       "drug": "Folinato de cálcio (resgate do MTX)",
@@ -276,13 +294,22 @@
       "infusionTime": null,
       "days": [
         "d23",
-        "d25",
-        "d30",
-        "d32"
+        "d30"
       ],
       "observacao": "eviQ 1901: 15 mg/m² q6h iniciando EXATAMENTE 24 h após o início do MTX; IV nas 4 primeiras doses, depois VO até MTX <0,1 µmol/L [VERIFICAR — nº de dias conforme depuração/níveis]. BC: 25 mg fixa q6h [variante].",
       "source": "PROTOCOL",
-      "overrideMotivo": null
+      "overrideMotivo": null,
+      "resgateMtx": {
+        "inicioAposHoras": 24,
+        "intervaloHoras": 6,
+        "primeirasDosesEV": 4,
+        "viasPosteriores": [
+          "EV",
+          "VO"
+        ],
+        "ateNivelInferiorMicromolL": 0.1,
+        "fonte": "EXT-SARC-004, eviQ 1901, Treatment schedule, nota de resgate do MTX"
+      }
     },
     {
       "drug": "Pegfilgrastim",
@@ -300,9 +327,9 @@
       "finalVolumeMl": null,
       "infusionTime": null,
       "days": [
-        "d3"
+        "d4"
       ],
-      "observacao": "BC SANAHDMAP: profilaxia primária obrigatória — pegfilgrastim 6 mg D3 OU filgrastim 5 µg/kg D3–D7; eviQ 1901: pegfilgrastim D3.",
+      "observacao": "D4, pelo menos 24 h após o fim da doxorrubicina D3 (D-F1-50/SBOC); adaptação temporal da condição eviQ 1901, não do D3 da variante com doxo D1-D2. Variante não adotada: BC SANAHDMAP: profilaxia primária obrigatória — pegfilgrastim 6 mg D3 OU filgrastim 5 µg/kg D3–D7; eviQ 1901: pegfilgrastim D3.",
       "source": "PROTOCOL",
       "overrideMotivo": null
     },
@@ -368,7 +395,11 @@
       "finalVolumeMl": 250,
       "infusionTime": null,
       "days": [
-        "d1-d2"
+        "d1",
+        "d2",
+        "d3",
+        "d22",
+        "d29"
       ],
       "observacao": "Lavar acesso venoso pós-QT (planilha).",
       "source": "PROTOCOL",

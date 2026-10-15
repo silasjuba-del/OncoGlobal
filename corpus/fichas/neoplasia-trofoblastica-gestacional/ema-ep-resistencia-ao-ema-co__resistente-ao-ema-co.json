@@ -4,7 +4,7 @@
   "nome": "EMA/EP (resistência ao EMA-CO)",
   "cenario": "resistente ao EMA-CO",
   "versao": "1.0.0",
-  "hash": "d7a1dfd02eb0cac49aa5bd2c3e1907e6358572a54f117dec09e3762d055ba4b6",
+  "hash": "f681117a6889c213e81b05bdc134308599de8c911d541ed878926d3c028f5888",
   "codigoInstitucional": null,
   "intervaloDias": 14,
   "ciclos": null,
@@ -168,7 +168,7 @@
       "overrideMotivo": null
     },
     {
-      "drug": "Folinato de cálcio (resgate do MTX)",
+      "drug": "Folinato de cálcio (resgate do MTX +24 h)",
       "classe": "QT",
       "sequence": 8,
       "standardDose": 15,
@@ -185,14 +185,80 @@
       "days": [
         "d2"
       ],
-      "observacao": "Tabela A5: leucovorina 15 mg VO 2×/dia ×4 doses, 24 h após o início do MTX — O D2 TEM SOMENTE ESTE ITEM (Figura A4: 'day 2 EA should be omitted').",
+      "observacao": "15 mg VO a cada 12 h, quatro doses: +24/+36/+48/+60 h após o início do MTX (EXT-CNV-028/031). Não omitir D3.",
+      "source": "PROTOCOL",
+      "overrideMotivo": null
+    },
+    {
+      "drug": "Folinato de cálcio (resgate do MTX +36 h)",
+      "classe": "QT",
+      "sequence": 9,
+      "standardDose": 15,
+      "doseBasis": "FIXED",
+      "calculatedDose": null,
+      "prescribedDose": null,
+      "unit": "mg",
+      "adjustmentPercent": null,
+      "adjustmentReason": null,
+      "route": "VO",
+      "diluent": null,
+      "finalVolumeMl": null,
+      "infusionTime": null,
+      "days": [
+        "d2"
+      ],
+      "observacao": "15 mg VO a cada 12 h, quatro doses: +24/+36/+48/+60 h após o início do MTX (EXT-CNV-028/031). Não omitir D3.",
+      "source": "PROTOCOL",
+      "overrideMotivo": null
+    },
+    {
+      "drug": "Folinato de cálcio (resgate do MTX +48 h)",
+      "classe": "QT",
+      "sequence": 10,
+      "standardDose": 15,
+      "doseBasis": "FIXED",
+      "calculatedDose": null,
+      "prescribedDose": null,
+      "unit": "mg",
+      "adjustmentPercent": null,
+      "adjustmentReason": null,
+      "route": "VO",
+      "diluent": null,
+      "finalVolumeMl": null,
+      "infusionTime": null,
+      "days": [
+        "d3"
+      ],
+      "observacao": "15 mg VO a cada 12 h, quatro doses: +24/+36/+48/+60 h após o início do MTX (EXT-CNV-028/031). Não omitir D3.",
+      "source": "PROTOCOL",
+      "overrideMotivo": null
+    },
+    {
+      "drug": "Folinato de cálcio (resgate do MTX +60 h)",
+      "classe": "QT",
+      "sequence": 11,
+      "standardDose": 15,
+      "doseBasis": "FIXED",
+      "calculatedDose": null,
+      "prescribedDose": null,
+      "unit": "mg",
+      "adjustmentPercent": null,
+      "adjustmentReason": null,
+      "route": "VO",
+      "diluent": null,
+      "finalVolumeMl": null,
+      "infusionTime": null,
+      "days": [
+        "d3"
+      ],
+      "observacao": "15 mg VO a cada 12 h, quatro doses: +24/+36/+48/+60 h após o início do MTX (EXT-CNV-028/031). Não omitir D3.",
       "source": "PROTOCOL",
       "overrideMotivo": null
     },
     {
       "drug": "Etoposídeo (D8, 150 mg/m²)",
       "classe": "QT",
-      "sequence": 9,
+      "sequence": 12,
       "standardDose": 150,
       "doseBasis": "MG_M2",
       "calculatedDose": null,
@@ -214,7 +280,7 @@
     {
       "drug": "Soro fisiológico 0,9% 500 mL (pré-cisplatina)",
       "classe": "PRE_QT",
-      "sequence": 10,
+      "sequence": 13,
       "standardDose": 1,
       "doseBasis": "FIXED",
       "calculatedDose": null,
@@ -236,7 +302,7 @@
     {
       "drug": "Sulfato de magnésio 10% 10 mL",
       "classe": "PRE_QT",
-      "sequence": 11,
+      "sequence": 14,
       "standardDose": 10,
       "doseBasis": "FIXED",
       "calculatedDose": null,
@@ -258,7 +324,7 @@
     {
       "drug": "Cloreto de potássio 19,1% 4 mL",
       "classe": "PRE_QT",
-      "sequence": 12,
+      "sequence": 15,
       "standardDose": 4,
       "doseBasis": "FIXED",
       "calculatedDose": null,
@@ -280,7 +346,7 @@
     {
       "drug": "Cisplatina",
       "classe": "QT",
-      "sequence": 13,
+      "sequence": 16,
       "standardDose": 75,
       "doseBasis": "MG_M2",
       "calculatedDose": null,
@@ -295,14 +361,15 @@
       "days": [
         "d8"
       ],
-      "observacao": "Tabela A5: cisplatina 75 mg/m² IV D8 (eviQ 1378: em 1.000 mL SF em 60 min com hidratação). Taxa máxima 1 mg/min (padrão local das fichas reais).",
+      "observacao": "Tabela A5: cisplatina 75 mg/m² IV D8 (eviQ 1378: em 1.000 mL SF em 60 min com hidratação). Taxa máxima 1 mg/min (padrão local das fichas reais); duração calculada nunca inferior ao tempo da fonte.",
       "source": "PROTOCOL",
-      "overrideMotivo": null
+      "overrideMotivo": null,
+      "taxaMaximaMgMin": 1
     },
     {
       "drug": "Manitol 20% frasco 250 mL",
       "classe": "QT",
-      "sequence": 14,
+      "sequence": 17,
       "standardDose": 1,
       "doseBasis": "FIXED",
       "calculatedDose": null,
@@ -324,7 +391,7 @@
     {
       "drug": "Soro fisiológico 0,9% 500 mL (pós-cisplatina)",
       "classe": "POS_QT",
-      "sequence": 15,
+      "sequence": 18,
       "standardDose": 1,
       "doseBasis": "FIXED",
       "calculatedDose": null,
@@ -346,7 +413,7 @@
     {
       "drug": "Cloreto de potássio 19,1% 4 mL",
       "classe": "POS_QT",
-      "sequence": 16,
+      "sequence": 19,
       "standardDose": 4,
       "doseBasis": "FIXED",
       "calculatedDose": null,
@@ -368,7 +435,7 @@
     {
       "drug": "Soro fisiológico 0,9% 250 mL (lavagem pós-QT)",
       "classe": "POS_QT",
-      "sequence": 17,
+      "sequence": 20,
       "standardDose": 1,
       "doseBasis": "FIXED",
       "calculatedDose": null,

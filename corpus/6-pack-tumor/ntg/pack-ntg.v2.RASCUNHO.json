@@ -200,7 +200,7 @@
           },
           {
             "droga": "ácido folínico",
-            "dose": 15,
+            "dose": 7.5,
             "unidade": "mg",
             "via": "VO",
             "dias": "D2,4,6,8",
@@ -224,9 +224,9 @@
         },
         "fonte": {
           "tipo": "PROTOCOLO_INSTITUCIONAL",
-          "referencia": "eviQ 668 v4 + Lok A5",
+          "referencia": "D-F1-50 item 7 (DECISOES.md); Charing Cross clássico",
           "pagina": null,
-          "trecho": "MTX 50 mg D1,3,5,7 + FA 15 mg D2,4,6,8",
+          "trecho": "MTX 50 mg D1,3,5,7 + ácido folínico 7,5 mg D2,4,6,8; variante local selecionada",
           "estado": "CONSULTADO"
         },
         "observacao": "",
@@ -306,7 +306,7 @@
           },
           {
             "droga": "vincristina",
-            "dose": 1,
+            "dose": 0.8,
             "unidade": "mg/m2",
             "via": "EV",
             "dias": "D8",
@@ -338,9 +338,9 @@
         },
         "fonte": {
           "tipo": "PROTOCOLO_INSTITUCIONAL",
-          "referencia": "eviQ 599 v8",
+          "referencia": "eviQ 599 v8 + D-F1-50 item 7 (vincristina BC/Lok)",
           "pagina": null,
-          "trecho": "EMA day 1-2; CO day 8; folinic rescue",
+          "trecho": "EMA D1-2; CO D8; vincristina local 0,8 mg/m², cap 2 mg; folínico q12h x4 em D2-D3",
           "estado": "CONSULTADO"
         },
         "observacao": "",
@@ -389,7 +389,7 @@
         "cicloDias": 14,
         "numeroCiclos": null,
         "premedicacao": "Padrão local (D-W9-23c/34c; D-F1-30/48)",
-        "ajusteObrigatorio": "D2 SOMENTE folínico 15 mg 2×/dia ×4 (24 h pós-MTX).",
+        "ajusteObrigatorio": "Folínico 15 mg VO a cada 12 h, quatro doses em D2-D3 (+24/+36/+48/+60 h após início do MTX); D2 sem EA.",
         "fichaId": "FICHA.neoplasia-trofoblastica-gestacional.ema-ep-resistencia-ao-ema-co__resistente-ao-ema-co@1.0.0",
         "sus": {
           "disponivel": "VERIFICAR",
@@ -608,7 +608,7 @@
         "trecho": "0,8 mg/m²",
         "estado": "CONSULTADO"
       },
-      "escolhaSeguranca": "Ficha com 1 mg/m² (eviQ); variante registrada",
+      "escolhaSeguranca": "RESOLVIDO D-F1-50 item 7: ficha e pack com 0,8 mg/m² (BC/Lok); eviQ 1 mg/m² é variante não adotada",
       "decisaoNecessaria": false
     }
   ],

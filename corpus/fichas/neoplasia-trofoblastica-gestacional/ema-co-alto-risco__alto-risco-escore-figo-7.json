@@ -4,7 +4,7 @@
   "nome": "EMA-CO (alto risco)",
   "cenario": "alto risco (escore FIGO ≥7)",
   "versao": "1.0.0",
-  "hash": "32701c8dbfed99f3b9a12b1cb3c102a09688f0aab6917f508f85b99341a7a03f",
+  "hash": "f93329371ced5a301b5c419b7e80899f1d93c8b9a512d59bc083435b24f8ec3d",
   "codigoInstitucional": null,
   "intervaloDias": 14,
   "ciclos": null,
@@ -174,7 +174,7 @@
       "overrideMotivo": null
     },
     {
-      "drug": "Folinato de cálcio (resgate do MTX)",
+      "drug": "Folinato de cálcio (resgate do MTX +24 h)",
       "classe": "QT",
       "sequence": 8,
       "standardDose": 15,
@@ -191,14 +191,80 @@
       "days": [
         "d2"
       ],
-      "observacao": "15 mg VO q12h ×4 doses, iniciando 24 h após o início do MTX (D2).",
+      "observacao": "15 mg VO a cada 12 h, quatro doses: +24/+36/+48/+60 h após o início do MTX (EXT-CNV-028/031). Não omitir D3.",
+      "source": "PROTOCOL",
+      "overrideMotivo": null
+    },
+    {
+      "drug": "Folinato de cálcio (resgate do MTX +36 h)",
+      "classe": "QT",
+      "sequence": 9,
+      "standardDose": 15,
+      "doseBasis": "FIXED",
+      "calculatedDose": null,
+      "prescribedDose": null,
+      "unit": "mg",
+      "adjustmentPercent": null,
+      "adjustmentReason": null,
+      "route": "VO",
+      "diluent": null,
+      "finalVolumeMl": null,
+      "infusionTime": null,
+      "days": [
+        "d2"
+      ],
+      "observacao": "15 mg VO a cada 12 h, quatro doses: +24/+36/+48/+60 h após o início do MTX (EXT-CNV-028/031). Não omitir D3.",
+      "source": "PROTOCOL",
+      "overrideMotivo": null
+    },
+    {
+      "drug": "Folinato de cálcio (resgate do MTX +48 h)",
+      "classe": "QT",
+      "sequence": 10,
+      "standardDose": 15,
+      "doseBasis": "FIXED",
+      "calculatedDose": null,
+      "prescribedDose": null,
+      "unit": "mg",
+      "adjustmentPercent": null,
+      "adjustmentReason": null,
+      "route": "VO",
+      "diluent": null,
+      "finalVolumeMl": null,
+      "infusionTime": null,
+      "days": [
+        "d3"
+      ],
+      "observacao": "15 mg VO a cada 12 h, quatro doses: +24/+36/+48/+60 h após o início do MTX (EXT-CNV-028/031). Não omitir D3.",
+      "source": "PROTOCOL",
+      "overrideMotivo": null
+    },
+    {
+      "drug": "Folinato de cálcio (resgate do MTX +60 h)",
+      "classe": "QT",
+      "sequence": 11,
+      "standardDose": 15,
+      "doseBasis": "FIXED",
+      "calculatedDose": null,
+      "prescribedDose": null,
+      "unit": "mg",
+      "adjustmentPercent": null,
+      "adjustmentReason": null,
+      "route": "VO",
+      "diluent": null,
+      "finalVolumeMl": null,
+      "infusionTime": null,
+      "days": [
+        "d3"
+      ],
+      "observacao": "15 mg VO a cada 12 h, quatro doses: +24/+36/+48/+60 h após o início do MTX (EXT-CNV-028/031). Não omitir D3.",
       "source": "PROTOCOL",
       "overrideMotivo": null
     },
     {
       "drug": "Vincristina",
       "classe": "QT",
-      "sequence": 9,
+      "sequence": 12,
       "standardDose": 0.8,
       "doseBasis": "MG_M2",
       "calculatedDose": null,
@@ -215,12 +281,13 @@
       ],
       "observacao": "D-F1-50: 0,8 mg/m² (cap 2 mg; BC/Lok). eviQ 599: 1 mg/m² [variante registrada].",
       "source": "PROTOCOL",
-      "overrideMotivo": null
+      "overrideMotivo": null,
+      "doseMaximaMg": 2
     },
     {
       "drug": "Ciclofosfamida",
       "classe": "QT",
-      "sequence": 10,
+      "sequence": 13,
       "standardDose": 600,
       "doseBasis": "MG_M2",
       "calculatedDose": null,
@@ -242,9 +309,9 @@
     {
       "drug": "Filgrastim",
       "classe": "POS_QT",
-      "sequence": 11,
+      "sequence": 14,
       "standardDose": 5,
-      "doseBasis": "MG_KG",
+      "doseBasis": "MCG_KG",
       "calculatedDose": null,
       "prescribedDose": null,
       "unit": "µg/kg",
@@ -265,7 +332,7 @@
     {
       "drug": "Soro fisiológico 0,9% 250 mL (lavagem pós-QT)",
       "classe": "POS_QT",
-      "sequence": 12,
+      "sequence": 15,
       "standardDose": 1,
       "doseBasis": "FIXED",
       "calculatedDose": null,

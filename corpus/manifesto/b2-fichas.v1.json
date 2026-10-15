@@ -307,7 +307,7 @@
     {
       "arquivo": "corpus/fichas/nao-informado-ficha-institucional/folinato-5-fu-semanal-p1577__nao-especificado.json",
       "templateId": "FICHA.nao-informado-ficha-institucional.folinato-5-fu-semanal-p1577__nao-especificado@1.0.0",
-      "hash": "1e3ab10136fd7f7dc1c6b2ccdad85151f027ccd8d20d2ba6598f688c7678c8e8",
+      "hash": "156bb7d54e5c68c3de8834d54f6e48ff471c247f67530b660ed2d22f4b0d9088",
       "versao": "1.0.0",
       "status": "RASCUNHO",
       "identidadeClinica": "Folinato 20 mg/m² + 5-FU 425 mg/m² semanais IV bolus (D-F1-26 + D-F1-50; NHS CR004 casa exatamente com a identidade); dias locais D1–D36 (D-F1-26)",
@@ -316,7 +316,7 @@
       ],
       "campos": [
         {
-          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem de acesso);days=d1].standardDose",
+          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem de acesso);days=d1,d8,d15,d22,d29,d36].standardDose",
           "valor": 1,
           "unidade": "frasco",
           "situacao": "PADRAO_LOCAL",
@@ -326,7 +326,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Ondansetrona;days=d1].standardDose",
+          "campo": "itens[drug=Ondansetrona;days=d1,d8,d15,d22,d29,d36].standardDose",
           "valor": 8,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -336,7 +336,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Dexametasona;days=d1].standardDose",
+          "campo": "itens[drug=Dexametasona;days=d1,d8,d15,d22,d29,d36].standardDose",
           "valor": 10,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -346,7 +346,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Prometazina;days=d1].standardDose",
+          "campo": "itens[drug=Prometazina;days=d1,d8,d15,d22,d29,d36].standardDose",
           "valor": 25,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -382,7 +382,7 @@
           "decisaoLocal": "D-F1-50 (dose 425 mg/m²)"
         },
         {
-          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem pós-QT);days=d1].standardDose",
+          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem pós-QT);days=d1,d8,d15,d22,d29,d36].standardDose",
           "valor": 1,
           "unidade": "frasco",
           "situacao": "PADRAO_LOCAL",
@@ -404,7 +404,7 @@
     {
       "arquivo": "corpus/fichas/nao-informado-ficha-institucional/lv5fu2-5-fu-folinato-p1512__nao-especificado.json",
       "templateId": "FICHA.nao-informado-ficha-institucional.lv5fu2-5-fu-folinato-p1512__nao-especificado@1.0.0",
-      "hash": "abbee7313aaceb5d9a1823491e78ae0d51516a7cc0936c63b9b03f5a5d1b50b9",
+      "hash": "90468d8c5df0a12beb901b1e8f94d5d02a0218fd146564c23d4101536233d375",
       "versao": "1.0.0",
       "status": "RASCUNHO",
       "identidadeClinica": "LV5FU2 (de Gramont sem terceiro fármaco): folinato 200 + 5-FU 400 bolus + 5-FU 600 CI 22 h, D1–D2, q14 (D-F1-27 + D-F1-50)",
@@ -413,7 +413,7 @@
       ],
       "campos": [
         {
-          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem de acesso);days=d1].standardDose",
+          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem de acesso);days=d1,d2].standardDose",
           "valor": 1,
           "unidade": "frasco",
           "situacao": "PADRAO_LOCAL",
@@ -423,7 +423,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Ondansetrona;days=d1].standardDose",
+          "campo": "itens[drug=Ondansetrona;days=d1,d2].standardDose",
           "valor": 8,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -433,7 +433,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Dexametasona;days=d1].standardDose",
+          "campo": "itens[drug=Dexametasona;days=d1,d2].standardDose",
           "valor": 10,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -443,7 +443,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Prometazina;days=d1].standardDose",
+          "campo": "itens[drug=Prometazina;days=d1,d2].standardDose",
           "valor": 25,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -486,7 +486,7 @@
           "decisaoLocal": "D-F1-50: LV5FU2 — 400 mg/m² bolus D1–D2 (DECISAO_MEDICA 2026-10-08 FOLFOX4)"
         },
         {
-          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem pós-QT);days=d1].standardDose",
+          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem pós-QT);days=d1,d2].standardDose",
           "valor": 1,
           "unidade": "frasco",
           "situacao": "PADRAO_LOCAL",
@@ -507,7 +507,7 @@
     {
       "arquivo": "corpus/fichas/primario-desconhecido-cup/cisplatina-docetaxel__nao-especificado.json",
       "templateId": "FICHA.primario-desconhecido-cup.cisplatina-docetaxel__nao-especificado@1.0.0",
-      "hash": "278fb176810989ec4b4718a7bba93509172e39430d2d9e0e5116f66040f50133",
+      "hash": "45e7acfc15f06c23d7c19bb0ad6d75c7ef8b3fda2f99b2feaa6b66351eea6720",
       "versao": "1.0.0",
       "status": "RASCUNHO",
       "identidadeClinica": "CUP metastático, 1ª linha (D-F1-36); variante preparada: Greco 2000 75/75 q3sem",
@@ -882,7 +882,7 @@
     {
       "arquivo": "corpus/fichas/primario-desconhecido-cup/cisplatina-5-fluorouracil-cup-escamoso__escamoso-metastatico-primario-oculto.json",
       "templateId": "FICHA.primario-desconhecido-cup.cisplatina-5-fluorouracil-cup-escamoso__escamoso-metastatico-primario-oculto@1.0.0",
-      "hash": "fea3d48956b37f568d9efa428f07cbad4b5b4cddf0110e32b5077229321ed69a",
+      "hash": "46249753073e900420323ac7524b5154f0b55664be31d525a68a22bd9b72c664",
       "versao": "1.0.0",
       "status": "RASCUNHO",
       "identidadeClinica": "CUP de histologia escamosa com investigação de cabeça e pescoço completa negativa (Khansur 1995)",
@@ -891,7 +891,7 @@
       ],
       "campos": [
         {
-          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem de acesso);days=d1].standardDose",
+          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem de acesso);days=d1,d2,d3,d4].standardDose",
           "valor": 1,
           "unidade": "frasco",
           "situacao": "PADRAO_LOCAL",
@@ -901,7 +901,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Ondansetrona;days=d1].standardDose",
+          "campo": "itens[drug=Ondansetrona;days=d1,d2,d3,d4].standardDose",
           "valor": 8,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -911,7 +911,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Dexametasona;days=d1].standardDose",
+          "campo": "itens[drug=Dexametasona;days=d1,d2,d3,d4].standardDose",
           "valor": 10,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -921,7 +921,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Prometazina;days=d1].standardDose",
+          "campo": "itens[drug=Prometazina;days=d1,d2,d3,d4].standardDose",
           "valor": 25,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -1015,7 +1015,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem pós-QT);days=d1].standardDose",
+          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem pós-QT);days=d1,d2,d3,d4].standardDose",
           "valor": 1,
           "unidade": "frasco",
           "situacao": "PADRAO_LOCAL",
@@ -1037,7 +1037,7 @@
     {
       "arquivo": "corpus/fichas/ewing/ewing-vdc-ciclo-a-alternado-ao-ie__1-linha-dose-denso-q14.json",
       "templateId": "FICHA.ewing.ewing-vdc-ciclo-a-alternado-ao-ie__1-linha-dose-denso-q14@1.0.0",
-      "hash": "3743c536c570f5a8fb22d057835ff2e92b104130ecb265c927c13fee1a3f1395",
+      "hash": "164089565664a02a1c110ac71d9d3d5f0a2889bf7408d0d517c2387d2b8a5959",
       "versao": "1.0.0",
       "status": "RASCUNHO",
       "identidadeClinica": "Ewing localizado/metastático, 1ª linha VDC/IE interval-compressed (SBOC 2026 ósseos p. 15; Womer 2012)",
@@ -1046,7 +1046,7 @@
       ],
       "campos": [
         {
-          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem de acesso);days=d1].standardDose",
+          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem de acesso);days=d1,d2].standardDose",
           "valor": 1,
           "unidade": "frasco",
           "situacao": "PADRAO_LOCAL",
@@ -1056,7 +1056,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Ondansetrona;days=d1].standardDose",
+          "campo": "itens[drug=Ondansetrona;days=d1,d2].standardDose",
           "valor": 8,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -1066,7 +1066,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Dexametasona;days=d1].standardDose",
+          "campo": "itens[drug=Dexametasona;days=d1,d2].standardDose",
           "valor": 10,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -1076,7 +1076,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Prometazina;days=d1].standardDose",
+          "campo": "itens[drug=Prometazina;days=d1,d2].standardDose",
           "valor": 25,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -1172,7 +1172,7 @@
           "aprovacaoClinica": null
         },
         {
-          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem pós-QT);days=d1].standardDose",
+          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem pós-QT);days=d1,d2].standardDose",
           "valor": 1,
           "unidade": "frasco",
           "situacao": "PADRAO_LOCAL",
@@ -1196,7 +1196,7 @@
     {
       "arquivo": "corpus/fichas/ewing/ewing-ie-ciclo-b-alternado-ao-vdc__1-linha-dose-denso-q14.json",
       "templateId": "FICHA.ewing.ewing-ie-ciclo-b-alternado-ao-vdc__1-linha-dose-denso-q14@1.0.0",
-      "hash": "f94aaf552c0ccc6811300f8145b708399b0b0027b4d5e5e9e03a966986715f31",
+      "hash": "0a70e1994d099af662e79e73dbd19ad3110561370118331cfe7b1c00b8e7624e",
       "versao": "1.0.0",
       "status": "RASCUNHO",
       "identidadeClinica": "Ewing, braço IE do VDC/IE interval-compressed (ifosfamida+etoposídeo D1–D5)",
@@ -1205,7 +1205,7 @@
       ],
       "campos": [
         {
-          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem de acesso);days=d1-d5].standardDose",
+          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem de acesso);days=d1,d2,d3,d4,d5].standardDose",
           "valor": 1,
           "unidade": "frasco",
           "situacao": "PADRAO_LOCAL",
@@ -1215,7 +1215,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Ondansetrona;days=d1-d5].standardDose",
+          "campo": "itens[drug=Ondansetrona;days=d1,d2,d3,d4,d5].standardDose",
           "valor": 8,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -1225,7 +1225,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Dexametasona;days=d1-d5].standardDose",
+          "campo": "itens[drug=Dexametasona;days=d1,d2,d3,d4,d5].standardDose",
           "valor": 10,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -1235,7 +1235,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Prometazina;days=d1-d5].standardDose",
+          "campo": "itens[drug=Prometazina;days=d1,d2,d3,d4,d5].standardDose",
           "valor": 25,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -1317,7 +1317,7 @@
           "aprovacaoClinica": null
         },
         {
-          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem pós-QT);days=d1-d5].standardDose",
+          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem pós-QT);days=d1,d2,d3,d4,d5].standardDose",
           "valor": 1,
           "unidade": "frasco",
           "situacao": "PADRAO_LOCAL",
@@ -1337,7 +1337,7 @@
     {
       "arquivo": "corpus/fichas/osteossarcoma/map-ciclos-1-4__nao-especificado.json",
       "templateId": "FICHA.osteossarcoma.map-ciclos-1-4__nao-especificado@1.0.0",
-      "hash": "9b70912315e00818686e9d33f831e58033a7a63db51df09b322ad7d79d9cf2c8",
+      "hash": "45f09b59557c742127c793f751573ec5c3193c79c154db6b0e9294657fe5957d",
       "versao": "1.0.0",
       "status": "RASCUNHO",
       "identidadeClinica": "Osteossarcoma de alto grau, neoadjuvante/adjuvante; idade-limite local 40 ANOS por D-F1-50 (era 25 na SBOC; externo: eviQ nota >40, BC <40, EURAMOS ≤40, Onkopedia/AAOC <40)",
@@ -1346,7 +1346,7 @@
       ],
       "campos": [
         {
-          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem de acesso);days=d1-d2].standardDose",
+          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem de acesso);days=d1,d2,d3,d22,d29].standardDose",
           "valor": 1,
           "unidade": "frasco",
           "situacao": "PADRAO_LOCAL",
@@ -1356,7 +1356,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Ondansetrona;days=d1-d2].standardDose",
+          "campo": "itens[drug=Ondansetrona;days=d1,d2,d3,d22,d29].standardDose",
           "valor": 8,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -1366,7 +1366,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Dexametasona;days=d1-d2].standardDose",
+          "campo": "itens[drug=Dexametasona;days=d1,d2,d3,d22,d29].standardDose",
           "valor": 10,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -1376,7 +1376,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Prometazina;days=d1-d2].standardDose",
+          "campo": "itens[drug=Prometazina;days=d1,d2,d3,d22,d29].standardDose",
           "valor": 25,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -1463,7 +1463,7 @@
           "aprovacaoClinica": null
         },
         {
-          "campo": "itens[drug=Folinato de cálcio (resgate do MTX);days=d23,d25,d30,d32].standardDose",
+          "campo": "itens[drug=Folinato de cálcio (resgate do MTX);days=d23,d30].standardDose",
           "valor": 15,
           "unidade": "mg/m²",
           "situacao": "DOCUMENTADO",
@@ -1475,7 +1475,7 @@
           "aprovacaoClinica": null
         },
         {
-          "campo": "itens[drug=Pegfilgrastim;days=d3].standardDose",
+          "campo": "itens[drug=Pegfilgrastim;days=d4].standardDose",
           "valor": 6,
           "unidade": "mg",
           "situacao": "DOCUMENTADO",
@@ -1508,7 +1508,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem pós-QT);days=d1-d2].standardDose",
+          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem pós-QT);days=d1,d2,d3,d22,d29].standardDose",
           "valor": 1,
           "unidade": "frasco",
           "situacao": "PADRAO_LOCAL",
@@ -1533,7 +1533,7 @@
     {
       "arquivo": "corpus/fichas/osteossarcoma/map-ciclos-5-6-sem-cisplatina__nao-especificado.json",
       "templateId": "FICHA.osteossarcoma.map-ciclos-5-6-sem-cisplatina__nao-especificado@1.0.0",
-      "hash": "8141b1d3d73bb15022ba954dc8552fb42b90eb3a9ad3b4c94a790a8bdf1dbcfa",
+      "hash": "b7610867355991b6cb4f6effd52d906eaf38e04040d0e8db4373bf9053983812",
       "versao": "1.0.0",
       "status": "RASCUNHO",
       "identidadeClinica": "Osteossarcoma, ciclos finais do MAP (eviQ 1901: sem cisplatina; MTX semanas 3–4); idade-limite 40 anos (D-F1-50)",
@@ -1542,7 +1542,7 @@
       ],
       "campos": [
         {
-          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem de acesso);days=d1].standardDose",
+          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem de acesso);days=d1,d2,d3,d15,d22].standardDose",
           "valor": 1,
           "unidade": "frasco",
           "situacao": "PADRAO_LOCAL",
@@ -1552,7 +1552,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Ondansetrona;days=d1].standardDose",
+          "campo": "itens[drug=Ondansetrona;days=d1,d2,d3,d15,d22].standardDose",
           "valor": 8,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -1562,7 +1562,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Dexametasona;days=d1].standardDose",
+          "campo": "itens[drug=Dexametasona;days=d1,d2,d3,d15,d22].standardDose",
           "valor": 10,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -1572,7 +1572,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Prometazina;days=d1].standardDose",
+          "campo": "itens[drug=Prometazina;days=d1,d2,d3,d15,d22].standardDose",
           "valor": 25,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -1606,7 +1606,7 @@
           "aprovacaoClinica": null
         },
         {
-          "campo": "itens[drug=Folinato de cálcio (resgate do MTX);days=d16,d18,d23,d25].standardDose",
+          "campo": "itens[drug=Folinato de cálcio (resgate do MTX);days=d16,d23].standardDose",
           "valor": 15,
           "unidade": "mg/m²",
           "situacao": "DOCUMENTADO",
@@ -1618,7 +1618,7 @@
           "aprovacaoClinica": null
         },
         {
-          "campo": "itens[drug=Pegfilgrastim;days=d3].standardDose",
+          "campo": "itens[drug=Pegfilgrastim;days=d4].standardDose",
           "valor": 6,
           "unidade": "mg",
           "situacao": "DOCUMENTADO",
@@ -1631,7 +1631,7 @@
           "aprovacaoClinica": null
         },
         {
-          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem pós-QT);days=d1].standardDose",
+          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem pós-QT);days=d1,d2,d3,d15,d22].standardDose",
           "valor": 1,
           "unidade": "frasco",
           "situacao": "PADRAO_LOCAL",
@@ -1652,7 +1652,7 @@
     {
       "arquivo": "corpus/fichas/osteossarcoma/ap-doxorrubicina-cisplatina__nao-especificado.json",
       "templateId": "FICHA.osteossarcoma.ap-doxorrubicina-cisplatina__nao-especificado@1.0.0",
-      "hash": "1b4381779582d00ab71d3b95aa548b9851c174b3144a12152087525f73faea16",
+      "hash": "11b916e1a19af20d4cd8b2a9cb5c92d93f7979c1b120f641490ac700d4cbf700",
       "versao": "1.0.0",
       "status": "RASCUNHO",
       "identidadeClinica": "Osteossarcoma sem MTX; idade-limite local 40 anos por D-F1-50 (SBOC p.12 usava >25; SAAVAP cobre avançado)",
@@ -1810,7 +1810,7 @@
     {
       "arquivo": "corpus/fichas/vulva/cisplatina-semanal-rxt-vulva__concomitante-a-rt.json",
       "templateId": "FICHA.vulva.cisplatina-semanal-rxt-vulva__concomitante-a-rt@1.0.0",
-      "hash": "1457a3144a5ef8f6b1b1fe2a2d499200505fc244e640b7c8bb6cbae2e7aec4ab",
+      "hash": "8c165d158f3c00b8a7311924bb0283409a7105b2146f8efeada4a7aa0c151b71",
       "versao": "1.0.0",
       "status": "RASCUNHO",
       "identidadeClinica": "CEC de vulva localmente avançado (T3/T4 não ressecável por vulvectomia radical), previamente não tratado (eviQ 1529)",
@@ -2206,7 +2206,7 @@
     {
       "arquivo": "corpus/fichas/cec-de-pele-cutaneo/cisplatina-semanal-rxt-cec-de-pele__concomitante-a-rt.json",
       "templateId": "FICHA.cec-de-pele-cutaneo.cisplatina-semanal-rxt-cec-de-pele__concomitante-a-rt@1.0.0",
-      "hash": "da65e793f24a7a71346b225b2bfaa7c504adfcf2f5eca446c72b7ce2778a1250",
+      "hash": "da28e4a2eda46f000f209308c8d02aa399372769a234dc8c654a8e723a8714ce",
       "versao": "1.0.0",
       "status": "RASCUNHO",
       "identidadeClinica": "CEC cutâneo localmente avançado — EXTRAPOLAÇÃO de CECP localmente avançado (eviQ 292)",
@@ -2430,7 +2430,7 @@
     {
       "arquivo": "corpus/fichas/neoplasia-trofoblastica-gestacional/dactinomicina-em-pulso-baixo-risco__baixo-risco-escore-figo-0-4-d-f1-50.json",
       "templateId": "FICHA.neoplasia-trofoblastica-gestacional.dactinomicina-em-pulso-baixo-risco__baixo-risco-escore-figo-0-4-d-f1-50@1.0.0",
-      "hash": "8f21567e1cde0cd48dc1bae769532b43829dcf81b476e37093f604c9412c19f1",
+      "hash": "c9b206a274e3f560e1f24c6d4c2d647bfc39b0c8db26dfe78ed47ae1e5595726",
       "versao": "1.0.0",
       "status": "RASCUNHO",
       "identidadeClinica": "NTG de baixo risco — alternativa ao MTX ou resistência/contraindicação a ele (eviQ 1018)",
@@ -2512,7 +2512,7 @@
     {
       "arquivo": "corpus/fichas/neoplasia-trofoblastica-gestacional/ema-co-alto-risco__alto-risco-escore-figo-7.json",
       "templateId": "FICHA.neoplasia-trofoblastica-gestacional.ema-co-alto-risco__alto-risco-escore-figo-7@1.0.0",
-      "hash": "32701c8dbfed99f3b9a12b1cb3c102a09688f0aab6917f508f85b99341a7a03f",
+      "hash": "f93329371ced5a301b5c419b7e80899f1d93c8b9a512d59bc083435b24f8ec3d",
       "versao": "1.0.0",
       "status": "RASCUNHO",
       "identidadeClinica": "NTG de alto risco (escore ≥7) ou resistente a MTX/dactinomicina (eviQ 599)",
@@ -2597,7 +2597,43 @@
           "aprovacaoClinica": null
         },
         {
-          "campo": "itens[drug=Folinato de cálcio (resgate do MTX);days=d2].standardDose",
+          "campo": "itens[drug=Folinato de cálcio (resgate do MTX +24 h);days=d2].standardDose",
+          "valor": 15,
+          "unidade": "mg",
+          "situacao": "DOCUMENTADO",
+          "sourceIds": [
+            "EXT-CNV-028"
+          ],
+          "localizador": null,
+          "divergencias": [],
+          "aprovacaoClinica": null
+        },
+        {
+          "campo": "itens[drug=Folinato de cálcio (resgate do MTX +36 h);days=d2].standardDose",
+          "valor": 15,
+          "unidade": "mg",
+          "situacao": "DOCUMENTADO",
+          "sourceIds": [
+            "EXT-CNV-028"
+          ],
+          "localizador": null,
+          "divergencias": [],
+          "aprovacaoClinica": null
+        },
+        {
+          "campo": "itens[drug=Folinato de cálcio (resgate do MTX +48 h);days=d3].standardDose",
+          "valor": 15,
+          "unidade": "mg",
+          "situacao": "DOCUMENTADO",
+          "sourceIds": [
+            "EXT-CNV-028"
+          ],
+          "localizador": null,
+          "divergencias": [],
+          "aprovacaoClinica": null
+        },
+        {
+          "campo": "itens[drug=Folinato de cálcio (resgate do MTX +60 h);days=d3].standardDose",
           "valor": 15,
           "unidade": "mg",
           "situacao": "DOCUMENTADO",
@@ -2666,7 +2702,7 @@
     {
       "arquivo": "corpus/fichas/neoplasia-trofoblastica-gestacional/ema-ep-resistencia-ao-ema-co__resistente-ao-ema-co.json",
       "templateId": "FICHA.neoplasia-trofoblastica-gestacional.ema-ep-resistencia-ao-ema-co__resistente-ao-ema-co@1.0.0",
-      "hash": "d7a1dfd02eb0cac49aa5bd2c3e1907e6358572a54f117dec09e3762d055ba4b6",
+      "hash": "f681117a6889c213e81b05bdc134308599de8c911d541ed878926d3c028f5888",
       "versao": "1.0.0",
       "status": "RASCUNHO",
       "identidadeClinica": "NTG com resistência ao EMA-CO — estrutura EXATA da Tabela A5 de Lok 2025 (D2 sem etoposídeo/dactinomicina)",
@@ -2752,7 +2788,43 @@
           "aprovacaoClinica": null
         },
         {
-          "campo": "itens[drug=Folinato de cálcio (resgate do MTX);days=d2].standardDose",
+          "campo": "itens[drug=Folinato de cálcio (resgate do MTX +24 h);days=d2].standardDose",
+          "valor": 15,
+          "unidade": "mg",
+          "situacao": "DOCUMENTADO",
+          "sourceIds": [
+            "EXT-CNV-031"
+          ],
+          "localizador": null,
+          "divergencias": [],
+          "aprovacaoClinica": null
+        },
+        {
+          "campo": "itens[drug=Folinato de cálcio (resgate do MTX +36 h);days=d2].standardDose",
+          "valor": 15,
+          "unidade": "mg",
+          "situacao": "DOCUMENTADO",
+          "sourceIds": [
+            "EXT-CNV-031"
+          ],
+          "localizador": null,
+          "divergencias": [],
+          "aprovacaoClinica": null
+        },
+        {
+          "campo": "itens[drug=Folinato de cálcio (resgate do MTX +48 h);days=d3].standardDose",
+          "valor": 15,
+          "unidade": "mg",
+          "situacao": "DOCUMENTADO",
+          "sourceIds": [
+            "EXT-CNV-031"
+          ],
+          "localizador": null,
+          "divergencias": [],
+          "aprovacaoClinica": null
+        },
+        {
+          "campo": "itens[drug=Folinato de cálcio (resgate do MTX +60 h);days=d3].standardDose",
           "valor": 15,
           "unidade": "mg",
           "situacao": "DOCUMENTADO",
@@ -2870,7 +2942,7 @@
     {
       "arquivo": "corpus/fichas/neoplasia-trofoblastica-gestacional/ep-de-inducao-escore-ultra-alto__escore-alto-ultra-alto-figo-12-d-f1-50-inducao.json",
       "templateId": "FICHA.neoplasia-trofoblastica-gestacional.ep-de-inducao-escore-ultra-alto__escore-alto-ultra-alto-figo-12-d-f1-50-inducao@1.0.0",
-      "hash": "a08fa8f55001ef6e6e35666a1478ae0ceab24395d77d3acea9e7e2c3317d01fc",
+      "hash": "74ddaf708e1e4a73004150b9366ae992e70544823f84c66cbe85651738cabd20",
       "versao": "1.0.0",
       "status": "RASCUNHO",
       "identidadeClinica": "NTG com doença extensa (tórax/fígado/SNC) e/ou hemorragia — indução antes do EMA-CO/EMA-EP; corte local FIGO ≥12 por D-F1-50 (eviQ 1347; Lok ≥13 [variante])",

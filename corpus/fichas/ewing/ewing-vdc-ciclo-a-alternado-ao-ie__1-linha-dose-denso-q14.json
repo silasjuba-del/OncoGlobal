@@ -4,7 +4,7 @@
   "nome": "Ewing VDC (ciclo A — alternado ao IE)",
   "cenario": "1ª linha, dose-denso q14",
   "versao": "1.0.0",
-  "hash": "3743c536c570f5a8fb22d057835ff2e92b104130ecb265c927c13fee1a3f1395",
+  "hash": "164089565664a02a1c110ac71d9d3d5f0a2889bf7408d0d517c2387d2b8a5959",
   "codigoInstitucional": null,
   "intervaloDias": 14,
   "ciclos": 7,
@@ -25,7 +25,8 @@
       "finalVolumeMl": 250,
       "infusionTime": null,
       "days": [
-        "d1"
+        "d1",
+        "d2"
       ],
       "observacao": "Lavar acesso venoso pré e pós QT (planilha).",
       "source": "PROTOCOL",
@@ -47,7 +48,8 @@
       "finalVolumeMl": null,
       "infusionTime": "15 min",
       "days": [
-        "d1"
+        "d1",
+        "d2"
       ],
       "observacao": "Padrão local (D-W9-23c/34c; D-F1-30).",
       "source": "PROTOCOL",
@@ -69,7 +71,8 @@
       "finalVolumeMl": null,
       "infusionTime": "15 min",
       "days": [
-        "d1"
+        "d1",
+        "d2"
       ],
       "observacao": "Alto risco emetogênico: olanzapina 5 mg VO opcional (D-W9-34c); sem NK1 (padrão local).",
       "source": "PROTOCOL",
@@ -91,7 +94,8 @@
       "finalVolumeMl": null,
       "infusionTime": null,
       "days": [
-        "d1"
+        "d1",
+        "d2"
       ],
       "observacao": "Pré-medicação local (D-W9-34c).",
       "source": "PROTOCOL",
@@ -117,7 +121,8 @@
       ],
       "observacao": "Cap 2 mg (eviQ/BC). Womer 2012 (abstract): 2 mg/m² [variante].",
       "source": "PROTOCOL",
-      "overrideMotivo": null
+      "overrideMotivo": null,
+      "doseMaximaMg": 2
     },
     {
       "drug": "Doxorrubicina",
@@ -268,7 +273,8 @@
       "finalVolumeMl": 250,
       "infusionTime": null,
       "days": [
-        "d1"
+        "d1",
+        "d2"
       ],
       "observacao": "Lavar acesso venoso pós-QT (planilha).",
       "source": "PROTOCOL",
