@@ -3,6 +3,13 @@ import { sugerirTriagemNutricional as t, imcDeMedidas, textoSugestaoNutricional 
 import * as regras from "../../../src/rules/index.js";
 
 describe("F1-B1 triagem nutricional (D-F1-33, NRS-2002)", () => {
+  it.each(["Estômago (cárdia)","Estômago, pequena curvatura","Esôfago abdominal","junção esofagogástrica","JEG"])("subsítio elegível permanece reconhecido: %s",tumor=>{
+    expect(t({tumor,imc:24}).estado).toBe("SUGERIR");
+  });
+  it("junção aceita CID esofágico ou gástrico e preserva divergência explícita",()=>{
+    for(const cid of ["C15.5","C16.0"])expect(t({tumor:"junção esofagogástrica",cid,imc:24}).estado).toBe("SUGERIR");
+    expect(t({tumor:"junção esofagogástrica",histologia:"carcinoma adrenocortical",imc:24}).estado).toBe("PENDENTE");
+  });
   it.each([
     {tumor:"Mama",cid:"C15.4"},
     {tumor:"Mama",histologia:"adenocarcinoma gástrico"},
