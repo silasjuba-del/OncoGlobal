@@ -17,6 +17,8 @@ async (page) => {
     for (const width of [1440, 768, 390]) {
       await p.setViewportSize({ width, height: 1000 });
       await p.getByRole("navigation", { name: "Navegar nesta consulta" }).getByRole("link", { name: "Revisão da fonte", exact: true }).click();
+      // Medir após a pintura do viewport/âncora, como na prova CRIT-5; a amostra intermediária pode incluir scroll transitório.
+      await p.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
       const geometria = await p.evaluate(() => {
         const identidade = document.querySelector(".consulta-identidade").getBoundingClientRect();
         const revisao = document.getElementById("consulta-revisao").getBoundingClientRect();
