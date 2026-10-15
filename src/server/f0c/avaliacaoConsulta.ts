@@ -55,6 +55,14 @@ export function horizonteDoEncontro(eventosDoPaciente: readonly ClinicalEvent[],
   return Math.min(Date.parse(agora), seguinte - 1);
 }
 
+/** Evidência medida e datada, ainda sem aplicar a validade específica do cálculo de dose. */
+export function pesosMedidosDocumentados(atuais: readonly ClinicalEvent[], hoje: string, horizonte: number) {
+  return weightSeries(atuais).filter(p => p.origem === "MEDIDO" && p.data.slice(0, 10) <= hoje
+    && DataCivil.safeParse(p.data.slice(0, 10)).success && Date.parse(p.data) <= horizonte
+    && atuais.some(e => e.eventId === p.eventId && e.fontes.some(f => f.sourceId === p.sourceId)))
+    .sort((a, b) => Date.parse(b.data) - Date.parse(a.data));
+}
+
 /** A avaliação consome o mesmo ledger da consulta; dado ausente continua com motivo explícito. */
 export function avaliarConsulta(i: EntradaAvaliacaoConsulta) {
   const doPaciente = i.eventos.filter(e => e.patientId === i.patientId);
@@ -77,9 +85,7 @@ export function avaliarConsulta(i: EntradaAvaliacaoConsulta) {
       ? { valor: p.valor, unidade: p.unidade, fonte: p.sourceId } : null;
   };
   const cr = ultimoLab(labs, "creatinina", i.hoje);
-  const pesos = weightSeries(atuais).filter(p => p.origem === "MEDIDO" && p.data.slice(0,10) <= i.hoje
-    && DataCivil.safeParse(p.data.slice(0,10)).success && Date.parse(p.data)<=horizonte && atuais.some(e=>e.eventId===p.eventId && e.fontes.some(f=>f.sourceId===p.sourceId)))
-    .sort((a,b) => Date.parse(b.data)-Date.parse(a.data));
+  const pesos = pesosMedidosDocumentados(atuais, i.hoje, horizonte);
   const peso=pesos[0];
   const pesosDia = peso ? pesos.filter(p => Date.parse(p.data) === Date.parse(peso.data)) : [];
   const idadePeso=idadeDoDado({valor:peso?.kg ?? null,fonte:peso?.sourceId ?? null,medidoEm:peso?.data ?? null},i.agora,PESO_VALIDADE_DIAS);

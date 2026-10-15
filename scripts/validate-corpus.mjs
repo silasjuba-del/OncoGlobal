@@ -1,4 +1,5 @@
 import { RulesetHeader } from "../src/contracts/rulesetHeader.mjs";
+import { verificarB1 } from "./corpus-b1.mjs";
 // GLM-08 · Valida o corpus inteiro: headers (G-17, schema compartilhado RulesetHeader de src/contracts),
 // contagem de [VERIFICAR] e itens ativos por arquivo, e a invariante K-27: ativo sem fonte com trecho (ou DECISAO_MEDICA) => exit 1.
 import { readFileSync, readdirSync, statSync } from "node:fs";
@@ -76,6 +77,8 @@ for (const arquivo of walk(CORPUS)) {
   }
   linhas.push([rel, json.header === undefined ? "—" : errosHeader.length ? "INVÁLIDO" : "ok", contarVerificar(json), ativos]);
 }
+
+verificarB1(ROOT).forEach((p) => problemas.push("B1: " + p));
 
 const w = [Math.max(8, ...linhas.map((l) => l[0].length)), 10, 11, 6];
 console.log(["ARQUIVO", "HEADER", "[VERIFICAR]", "ATIVOS"].map((h, i) => h.padEnd(w[i])).join(" | "));

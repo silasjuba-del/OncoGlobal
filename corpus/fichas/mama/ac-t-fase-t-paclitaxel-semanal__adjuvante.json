@@ -4,7 +4,7 @@
   "nome": "AC-T (fase T — paclitaxel semanal)",
   "cenario": "adjuvante",
   "versao": "1.0.0",
-  "hash": "ee23b4da35d8b6e7f0c8ec1400fbb3ee76dc25d5fe1d8757811f450a4d8e2a10",
+  "hash": "58b00e6469abbf19787910f9c380788b4707b33fa7f973dba6cb284e1f806f70",
   "codigoInstitucional": "P1393",
   "intervaloDias": 7,
   "ciclos": 12,
@@ -132,12 +132,12 @@
       "adjustmentReason": null,
       "route": "EV",
       "diluent": "SF 0,9%",
-      "finalVolumeMl": 250,
+      "finalVolumeMl": 500,
       "infusionTime": "60 min",
       "days": [
         "d1"
       ],
-      "observacao": "Ficha real P1393: dose fixa com Dose Prot 0; a base mg/m² vem da planilha/SOnHe.",
+      "observacao": "Ficha real P1393: dose fixa com Dose Prot 0; a base mg/m² vem da planilha/SOnHe. D-F1-28: paclitaxel semanal em SF 0,9% 500 mL.",
       "source": "PROTOCOL",
       "overrideMotivo": null
     },
@@ -165,6 +165,6 @@
     }
   ],
   "limiaresBula": null,
-  "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); SOnHe 2024 (secundária, setor privado): Mama \"Esquema T (Paclitaxel semanal adjuvante)\" p. 20; ficha real P1393 (docs/referencias/modelos/05); decisões D-W9-23, D-W9-34, D-W9-50.",
+  "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); SOnHe 2024 (secundária, setor privado): Mama \"Esquema T (Paclitaxel semanal adjuvante)\" p. 20; ficha real P1393 (docs/referencias/modelos/05); decisões D-W9-23, D-W9-34, D-W9-50. D-F1-28 (diluente do paclitaxel semanal).",
   "status": "RASCUNHO"
 }

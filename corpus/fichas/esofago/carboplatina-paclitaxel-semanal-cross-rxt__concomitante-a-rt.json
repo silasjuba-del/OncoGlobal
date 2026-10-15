@@ -4,7 +4,7 @@
   "nome": "Carboplatina + Paclitaxel semanal (CROSS + RxT)",
   "cenario": "concomitante à RT",
   "versao": "1.0.0",
-  "hash": "58dc14bd3743b89f8c24007bea95c2e6a9c9379a3c650eb27ea3ad10c2d80bcd",
+  "hash": "e9960ace6bd6da6cf07a6dc54e75c682bb96894534c399f060ae2907734ddcb7",
   "codigoInstitucional": null,
   "intervaloDias": 7,
   "ciclos": 5,
@@ -131,13 +131,13 @@
       "adjustmentPercent": null,
       "adjustmentReason": null,
       "route": "EV",
-      "diluent": null,
-      "finalVolumeMl": null,
+      "diluent": "SF 0,9%",
+      "finalVolumeMl": 500,
       "infusionTime": "60 min",
       "days": [
         "d1"
       ],
-      "observacao": null,
+      "observacao": "D-F1-28: paclitaxel semanal em SF 0,9% 500 mL.",
       "source": "PROTOCOL",
       "overrideMotivo": null
     },
@@ -187,6 +187,6 @@
     }
   ],
   "limiaresBula": null,
-  "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); SOnHe 2024 (secundária, setor privado): Esôfago \"Esquema CROSS\" p. 119; decisões D-W9-23, D-W9-34, D-W9-50.",
+  "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); SOnHe 2024 (secundária, setor privado): Esôfago \"Esquema CROSS\" p. 119; decisões D-W9-23, D-W9-34, D-W9-50. D-F1-28 (diluente do paclitaxel semanal).",
   "status": "RASCUNHO"
 }

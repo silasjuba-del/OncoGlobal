@@ -20,6 +20,22 @@
       "hashMode": "utf8-lf"
     },
     {
+      "path": "corpus/fichas/prostata/carboplatina-paclitaxel-semanal__nao-especificado.json",
+      "sha256": "b3a570962c016e6a3e1c8f85577e837b98fc4ea437b6098e1f6ccfd19aec912d",
+      "items": [
+        {
+          "type": "telefone",
+          "line": 7,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "corpus/fichas/prostata/carboplatina-paclitaxel-semanal__nao-especificado.json:7",
+          "reason": "Match contido em token hash/commit hexadecimal completo de 40/64 caracteres.",
+          "contextTag": "json_sha256_field_64hex"
+        }
+      ],
+      "hashMode": "utf8-lf"
+    },
+    {
       "path": "corpus/fichas/pulmao-cpnpc/carboplatina-gemcitabina__nao-especificado.json",
       "sha256": "26af286322884606de59d180f252924bf830164261c010f149d40e2373d8ec47",
       "items": [
@@ -2845,16 +2861,16 @@
     },
     {
       "path": "corpus/2-receitas/suporte/receitas-suporte-oncologico.v1.RASCUNHO.json",
-      "sha256": "6baf91e631031ec341e52708de1a5f05586f82e0f8ab4480fa1c88e687c1344e",
+      "sha256": "f3f7056f9b9741c54b371ab8bb1e32d123da7e0210828171b7c3b4a3f312885c",
       "hashMode": "utf8-lf",
       "items": [
         {
           "type": "telefone",
-          "line": 1658,
+          "line": 1715,
           "ordinal": 0,
           "status": "technical_token_false_positive",
-          "evidenceRef": "docs/ondas/PRE-F1-CORRECAO-2026-10-12.md; corpus/2-receitas/suporte/receitas-suporte-oncologico.v1.RASCUNHO.json:1658",
-          "reason": "Revisao Codex em 2026-10-12: candidato contido integralmente no UUID set_id/setid de referencia bibliografica DailyMed/openFDA; nao e telefone de paciente."
+          "evidenceRef": "corpus/2-receitas/suporte/receitas-suporte-oncologico.v1.RASCUNHO.json:1715",
+          "reason": "Revisão Codex 2026-10-15: UUID set_id público de bula FDA conferido na referência bibliográfica; não é telefone de paciente. Mesmo token, ocorrência exata preservada após correção do corpus."
         }
       ]
     },
@@ -2975,16 +2991,24 @@
     },
     {
       "path": "corpus/6-pack-tumor/adrenal/pack-adrenal.v2.RASCUNHO.json",
-      "sha256": "b1f4aa7e60cd39de93ea347627bbf3be30cab82352b0069589f6aaacc2863f24",
+      "sha256": "f392371bfff829f54d6a0603fa317952c98fbfe75e7c6d2bf8ae475c186cbc46",
       "hashMode": "utf8-lf",
       "items": [
         {
           "type": "telefone",
-          "line": 707,
+          "line": 723,
           "ordinal": 0,
           "status": "technical_token_false_positive",
-          "evidenceRef": "docs/ondas/PRE-F1-CORRECAO-2026-10-12.md; corpus/6-pack-tumor/adrenal/pack-adrenal.v2.RASCUNHO.json:707",
-          "reason": "Revisao Codex em 2026-10-12: candidato contido integralmente no UUID set_id/setid de referencia bibliografica DailyMed/openFDA; nao e telefone de paciente. Revista por Claude em 2026-10-12 na integração com f1/integrado 2f1e795: mesmo UUID set_id, hash e linha atualizados."
+          "evidenceRef": "docs/ondas/PRE-F1-CORRECAO-2026-10-12.md; corpus/6-pack-tumor/adrenal/pack-adrenal.v2.RASCUNHO.json:723",
+          "reason": "Revisão Codex 2026-10-15: UUID set_id público de bula FDA conferido na referência bibliográfica; não é telefone de paciente. Mesmo token, ocorrência exata preservada após correção do corpus."
+        },
+        {
+          "type": "telefone",
+          "line": 909,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/ondas/PRE-F1-CORRECAO-2026-10-12.md; corpus/6-pack-tumor/adrenal/pack-adrenal.v2.RASCUNHO.json:909",
+          "reason": "Revisão Codex 2026-10-15: UUID set_id público de bula FDA conferido na referência bibliográfica; não é telefone de paciente. Mesmo token, ocorrência exata preservada após correção do corpus."
         }
       ]
     },

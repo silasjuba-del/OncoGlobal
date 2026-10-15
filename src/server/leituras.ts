@@ -34,7 +34,7 @@ import { projetarVinculosContato, type ContatoProjetado } from "../kernel/projec
 import { hashConteudoExibido } from "./sessao.js";
 import { projetarRetratoTransversal } from "./retratoTransversal.js";
 import { projetarContextoClinico, projetarHistoricoClinico } from "./f0c/contextoClinico.js";
-import { avaliarConsulta, horizonteDoEncontro, type EntradaAvaliacaoConsulta } from "./f0c/avaliacaoConsulta.js";
+import { avaliarConsulta, horizonteDoEncontro, pesosMedidosDocumentados, type EntradaAvaliacaoConsulta } from "./f0c/avaliacaoConsulta.js";
 import { coletarFontesSalao } from "./f0c/salao.js";
 import { projetarInstrumentosClinicos } from "./f0c/instrumentosClinicos.js";
 import type { RegraInstrumento } from "../contracts/f0c/instrumentos.js";
@@ -43,6 +43,7 @@ import { projetarIntervaloCiclo } from "./f0c/intervaloCiclo.js";
 import { avaliarInteracoesCondicionadasDaConsulta } from "./f0c/interacoesCondicionadas.js";
 import { projetarCumulativoClinico } from "./f0c/cumulativoClinico.js";
 import { chaveDroga, type LimiteExposicaoCumulativa } from "../rules/cumulativoAlerta.js";
+import { imcDeMedidas, sugerirTriagemNutricional, textoSugestaoNutricional } from "../rules/index.js";
 
 const RecistSerieSchema = z.object({
   patientId: z.string().min(1), tumorLotId: z.string().nullable(), episodioId: z.string().min(1),
@@ -368,6 +369,50 @@ export function lerConsulta(db: DatabaseSync, patientId: string, agora: string, 
     ...(condicionais.avaliacoes.some(r=>r.estado!=="NAO_APLICAVEL") ? {condicionais:{
       estado:avisosCondicionais.length ? "VERMELHO" as const : pendenciasCondicionais.length ? "PENDENTE" as const : "VERDE" as const,
       motivos:[...avisosCondicionais,...pendenciasCondicionais].map(texto=>({texto}))}} : {}) });
+  // D-F1-33/D-F1-48 · evidência documental no horizonte do encontro, independente da validade para dose.
+  // Só SUGERE: não gera pedido, não trava e não entra no semáforo. Medidas atuais exigem conferência.
+  const presenteNoLote = (d: TumorLot["topografia"] | undefined) =>
+    d?.campo === "PRESENTE" && d.estado === "VERDE" && ["CONFIRMADO", "ASSINADO"].includes(d.revisao)
+      && d.fontes.length > 0 && typeof d.valor === "string" && d.valor.trim() ? d.valor : null;
+  // Armadilha (a): encontro reaberto não usa a versão do lote confirmada em encontro POSTERIOR.
+  const lotesNoHorizonte = lote ? porTipo(all.filter((e) => e.patientId === patientId && Date.parse(e.criadoEm) <= horizontePlaquetas),
+    "TumorLot", TumorLot).filter((x) => x.value.patientId === patientId && x.event.tumorLotId === lote.tumorLotId
+      && x.value.tumorLotId === lote.tumorLotId) : [];
+  const loteNoHorizonte = lotesNoHorizonte.length === 1 ? lotesNoHorizonte[0]!.value : undefined;
+  const eventosNutricionais = all.filter(e => e.patientId === patientId);
+  const pesosNutricionais = pesosMedidosDocumentados(eventosVigentes(eventosNutricionais
+    .filter(e => Date.parse(e.criadoEm) <= horizontePlaquetas)), civil.dataCivil, horizontePlaquetas);
+  const ultimoPeso = pesosNutricionais[0];
+  const pesoNutricional = ultimoPeso && new Set(pesosNutricionais
+    .filter(p => Date.parse(p.data) === Date.parse(ultimoPeso.data)).map(p => p.kg)).size === 1 ? ultimoPeso : null;
+  // Peso e altura pertencem ao paciente; o lote de origem não restringe a medida corporal.
+  const fatosNutricionais = eventosNutricionais.filter(e => e.tipo === "FATO" && data(e)?.campo === "alturaCm"
+    && Date.parse(e.criadoEm) <= horizontePlaquetas).map(e => ({ ...e, tumorLotId: null }));
+  const alturaProjetada = projetarSnapshot(fatosNutricionais, patientId, lote?.tumorLotId ?? null,
+    current.encounterId, "nutricao-altura-v1").campos.alturaCm;
+  const fontesAltura = (alturaProjetada?.eventIds ?? []).flatMap(id => {
+    const e = fatosNutricionais.find(e => e.eventId === id), d = e ? data(e) : null;
+    const dia = DataCivil.safeParse(d?.dataClinica);
+    return e && e.fontes.length && dia.success && Date.parse(dia.data) <= horizontePlaquetas
+      ? [{ eventId: id, data: dia.data, fontes: e.fontes.map(f => f.sourceId).join(", ") }] : [];
+  });
+  const alturaDocumentada = alturaProjetada?.estado === "VERDE" && fontesAltura.length > 0
+    && fontesAltura.length === alturaProjetada.eventIds.length && typeof alturaProjetada.valor === "number"
+    ? alturaProjetada.valor : null;
+  const imcDocumentado = imcDeMedidas(pesoNutricional?.kg, alturaDocumentada);
+  if (lotesNoHorizonte.length > 1) pendenciasLeitura.push("TRIAGEM_NUTRICIONAL_LOTE_AMBIGUO");
+  const triagemNutricional = sugerirTriagemNutricional({
+    tumor: presenteNoLote(loteNoHorizonte?.topografia),
+    histologia: presenteNoLote(loteNoHorizonte?.histologia),
+    cid: presenteNoLote(loteNoHorizonte?.cid),
+    imc: imcDocumentado,
+  });
+  const textoNutricional = triagemNutricional ? textoSugestaoNutricional(triagemNutricional) : null;
+  if (triagemNutricional.motivos.some(m => /divergentes/.test(m)))
+    pendenciasLeitura.push("TRIAGEM_NUTRICIONAL_SITIOS_NAO_RECONCILIADOS");
+  const sugestaoNutricional = textoNutricional && pesoNutricional && triagemNutricional?.motivos.some(m => m.startsWith("IMC "))
+    ? `${textoNutricional}; peso documentado em ${pesoNutricional.data} (fonte ${pesoNutricional.sourceId}); altura ${alturaDocumentada} cm: ${fontesAltura.map(f => `${f.data} (fonte ${f.fontes}; evento ${f.eventId})`).join("; ")}; conferir medidas atuais`
+    : textoNutricional;
   pendenciasLeitura.push(...contextoClinico.pendencias,
     ...Object.entries(contextoClinico.campos).filter(([,c]) => c.valor === null).map(([nome]) => `${nome.toUpperCase()}_NAO_CARREGADAS`));
   const anteriores = patientEvents.filter(e => e.encounterId !== current.encounterId && Date.parse(e.criadoEm) < Date.parse(current.criadoEm));
@@ -445,7 +490,8 @@ export function lerConsulta(db: DatabaseSync, patientId: string, agora: string, 
     flash: { ...projetarFlash(eventosDaConsulta, civil.dataCivil, config.modeloFlash ?? null,
       rascunhoFlashDoContexto(db, { patientId, encounterId: current.encounterId, tumorLotId: lote?.tumorLotId ?? null })),
       ...contextoClinico.flash, avisos:[...avaliacao.avisosFlash,...avisosCondicionais,...avisosInteracoesCondicionadas.map(r=>r.motivo)],sugestoesLaboratorio:avaliacao.sugestoesLaboratorio,
-      ...(parciaisCumulativos.length ? {parciaisCumulativos} : {}) },
+      ...(parciaisCumulativos.length ? {parciaisCumulativos} : {}),
+      ...(sugestaoNutricional ? {sugestoesClinicas:[sugestaoNutricional]} : {}) },
     elegibilidade: avaliacao.elegibilidade,
     avaliacaoClinica: avaliacao,
     condicionaisClinicas:condicionais,

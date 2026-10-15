@@ -82,6 +82,7 @@ export function ConsultaFlash(props: ConsultaFlashProps) {
       <section className="flash-seguranca" aria-label="Toxicidades e alergia"><div><strong>TOX</strong> {props.toxicidades?.length ? props.toxicidades.join(" · ") : "Informação estruturada PENDENTE"}</div><div><strong>ALERGIA</strong> {c.alergia?.trim() || "Não informada"}</div></section>
       {props.avisos?.length ? <p role="alert" aria-label="Lembretes agrupados">{props.avisos.join("; ")}</p> : null}
       {props.parciaisCumulativos?.length ? <p className="flash-alaranjado" data-cor="ALARANJADO">{props.parciaisCumulativos.join("; ")}</p> : null}
+      {props.sugestoesClinicas?.length ? <p className="flash-linha" aria-label="Sugestões clínicas">{props.sugestoesClinicas.join("; ")}</p> : null}
       {props.sugestoesLaboratorio?.length ? <button type="button" onClick={() => setOutrosLab(atual =>
         [...new Set([...limparOutros(atual),...props.sugestoesLaboratorio!])].join("; "))}>
         Incluir exames sugeridos: {props.sugestoesLaboratorio.join(", ")}</button> : null}

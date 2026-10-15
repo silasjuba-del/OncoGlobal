@@ -4,7 +4,7 @@
   "nome": "Carboplatina + Paclitaxel semanal",
   "cenario": "não especificado",
   "versao": "1.0.0",
-  "hash": "90824af362c40eeb071844c4798a49bb99127bcc02657824ff09b263904b4321",
+  "hash": "9a8bdb80d1039432d305194c40fdad9853465732ca28e3046e70f1cbf98829d5",
   "codigoInstitucional": null,
   "intervaloDias": 7,
   "ciclos": null,
@@ -131,13 +131,13 @@
       "adjustmentPercent": null,
       "adjustmentReason": null,
       "route": "EV",
-      "diluent": null,
-      "finalVolumeMl": null,
+      "diluent": "SF 0,9%",
+      "finalVolumeMl": 500,
       "infusionTime": "60 min",
       "days": [
         "d1"
       ],
-      "observacao": null,
+      "observacao": "D-F1-28: paclitaxel semanal em SF 0,9% 500 mL.",
       "source": "PROTOCOL",
       "overrideMotivo": null
     },
@@ -187,6 +187,6 @@
     }
   ],
   "limiaresBula": null,
-  "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); decisões D-W9-23, D-W9-34, D-W9-50.",
+  "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); decisões D-W9-23, D-W9-34, D-W9-50. D-F1-28 (diluente do paclitaxel semanal).",
   "status": "RASCUNHO"
 }

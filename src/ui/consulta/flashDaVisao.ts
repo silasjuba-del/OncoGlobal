@@ -39,6 +39,7 @@ export function montarPropsFlash(visao: ConsultaIntegrada, _chart: CabecalhoChar
     exames: f?.exames ?? [], laboratorios: confirmados.laboratorios, toxicidades: f?.toxicidades ?? [],
     avisos:[...(f?.avisos ?? []), ...confirmados.avisos], sugestoesLaboratorio:f?.sugestoesLaboratorio ?? [],
     ...(f?.parciaisCumulativos?.length ? {parciaisCumulativos:f.parciaisCumulativos} : {}),
+    ...(f?.sugestoesClinicas?.length ? {sugestoesClinicas:f.sugestoesClinicas} : {}),
     ...(f?.rascunho?.plano ? {planoInicial: f.rascunho.plano} : {}),
     ...(f?.modeloSolicitacoes ? {modeloSolicitacoes:f.modeloSolicitacoes} : {}),
     acoesHoje: [], receitas: [],

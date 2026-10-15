@@ -84,7 +84,7 @@
     "Prazo universal de afastamento",
     "Usar siglas DPI/DPSC (não existem na IN 128/2022 — correção auditada)"
   ],
-  "observacoes": "Regra local F1: o laudo nunca bloqueia atendimento; pendência documental não trava o serviço. Modelos de perguntas ao INSS fora do escopo deste arquivo.",
+  "observacoes": "Regra local F1: o laudo nunca bloqueia atendimento; pendência documental não trava o serviço. Modelos de perguntas ao INSS fora do escopo deste arquivo. D-F1-37/38/39/46: ver regrasEmissao e validade.",
   "curadoria": {
     "estado": "RASCUNHO",
     "redigidoEm": "2026-10-11",
@@ -114,8 +114,11 @@
     "fonte": "relatorio-pericial.v1 + Res. CFM 2.381/2024 (identificação mínima do médico; texto oficial PENDENTE de reabertura)"
   },
   "validade": {
-    "valor": null,
-    "pendencia": "DECISAO_DR_SILAS: validade do documento por finalidade"
+    "valor": {
+      "meses": 6
+    },
+    "decisao": "D-F1-39",
+    "pendencia": null
   },
   "portas": {
     "consome": [
@@ -128,5 +131,22 @@
     "oferece": [
       "documento.laudo-inss"
     ]
+  },
+  "regrasEmissao": {
+    "bloqueiaEmissao": false,
+    "decisao": "D-F1-37",
+    "divergencia": "aparece como pendência visível ao médico na tela; não trava a emissão; o documento sai só com dados confirmados",
+    "dadoAusente": {
+      "imprimir": false,
+      "citar": false,
+      "decisao": "D-F1-38",
+      "regra": "linha ou seção sem dado some do documento; nunca sai 'não informado'"
+    },
+    "incapacidade": {
+      "preMarcada": true,
+      "desmarcavel": true,
+      "decisao": "D-F1-46",
+      "assinatura": "somente o médico"
+    }
   }
 }
