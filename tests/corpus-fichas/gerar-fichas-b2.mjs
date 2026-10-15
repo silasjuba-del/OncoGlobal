@@ -3,7 +3,7 @@
 // Escreve APENAS as fichas novas listadas (nunca apaga as existentes; o gerador histórico gerar-fichas.mjs
 // está congelado — as edições B1 vivem no corpus com manifesto próprio e regenerá-lo as apagaria).
 // Também: acrescenta as fontes externas às 6 fichas de paclitaxel semanal (D-F1-28/D-F1-49) e gera
-// corpus/manifesto/b2-fichas.v1.json (proveniência por campo, localizador estável = droga+dias).
+// corpus/manifesto/b2-fichas.v1.json (proveniência por campo, localizador estável = droga+classe+dias).
 import { createHash } from "node:crypto";
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
@@ -465,7 +465,7 @@ for (const rel of PAC_SEMANAL) {
   alteradas.push({ caminho, templateId: json.templateId });
 }
 
-// ---------- manifesto b2-fichas.v1.json (proveniência por campo; localizador estável = droga+dias) ----------
+// ---------- manifesto b2-fichas.v1.json (proveniência por campo; localizador estável = droga+classe+dias) ----------
 function camposDa(spec, t) {
   const mapa = spec.fontesItens ?? {};
   return t.itens.map((i) => {
@@ -474,24 +474,24 @@ function camposDa(spec, t) {
     const ehQT = i.classe === "QT";
     // Manitol acompanha o bloco de cisplatina (padrão local); demais itens de suporte mapeados carregam suas fontes.
     if (!ehQT || /^Manitol/.test(i.drug)) {
-      if (m?.sourceIds?.length) return { campo: `itens[drug=${i.drug};days=${i.days.join(",")}].standardDose`, valor: i.standardDose, unidade: i.unit, situacao: "DOCUMENTADO", sourceIds: m.sourceIds, localizador: m.localizador ?? null, divergencias: [], aprovacaoClinica: null };
-      return { campo: `itens[drug=${i.drug};days=${i.days.join(",")}].standardDose`, valor: i.standardDose, unidade: i.unit, situacao: "PADRAO_LOCAL", sourceIds: [], decisaoLocal: "D-W9-23c/34c/50; D-F1-30/48 (pré/pos-QT locais)", localizador: "padrão institucional das fichas", divergencias: [] };
+      if (m?.sourceIds?.length) return { campo: `itens[drug=${i.drug};classe=${i.classe};days=${i.days.join(",")}].standardDose`, valor: i.standardDose, unidade: i.unit, situacao: "DOCUMENTADO", sourceIds: m.sourceIds, localizador: m.localizador ?? null, divergencias: [], aprovacaoClinica: null };
+      return { campo: `itens[drug=${i.drug};classe=${i.classe};days=${i.days.join(",")}].standardDose`, valor: i.standardDose, unidade: i.unit, situacao: "PADRAO_LOCAL", sourceIds: [], decisaoLocal: "D-W9-23c/34c/50; D-F1-30/48 (pré/pos-QT locais)", localizador: "padrão institucional das fichas", divergencias: [] };
     }
     if (!m) throw new Error(`Ficha "${t.nome}": item QT sem proveniência declarada: ${i.drug}`);
     if (m.situacao === "NAO_LOCALIZADO") {
       if (i.standardDose !== null) throw new Error(`Ficha "${t.nome}": ${i.drug} declarado NAO_LOCALIZADO mas tem dose`);
       if (!(i.observacao ?? "").includes("[VERIFICAR]") && !(i.observacao ?? "").includes("NAO_LOCALIZADO")) throw new Error(`Ficha "${t.nome}": ${i.drug} NAO_LOCALIZADO sem [VERIFICAR] na observacao`);
-      return { campo: `itens[drug=${i.drug};days=${i.days.join(",")}].standardDose`, valor: null, unidade: i.unit, situacao: "NAO_LOCALIZADO", sourceIds: m.sourceIds ?? [], localizador: m.localizador ?? null, divergencias: [], aprovacaoClinica: null };
+      return { campo: `itens[drug=${i.drug};classe=${i.classe};days=${i.days.join(",")}].standardDose`, valor: null, unidade: i.unit, situacao: "NAO_LOCALIZADO", sourceIds: m.sourceIds ?? [], localizador: m.localizador ?? null, divergencias: [], aprovacaoClinica: null };
     }
     if (i.standardDose === null) throw new Error(`Ficha "${t.nome}": ${i.drug} DOCUMENTADO mas dose null`);
-    const saida = { campo: `itens[drug=${i.drug};days=${i.days.join(",")}].standardDose`, valor: i.standardDose, unidade: i.unit, situacao: "DOCUMENTADO", sourceIds: m.sourceIds ?? [], localizador: m.localizador ?? null, divergencias: [], aprovacaoClinica: null };
+    const saida = { campo: `itens[drug=${i.drug};classe=${i.classe};days=${i.days.join(",")}].standardDose`, valor: i.standardDose, unidade: i.unit, situacao: "DOCUMENTADO", sourceIds: m.sourceIds ?? [], localizador: m.localizador ?? null, divergencias: [], aprovacaoClinica: null };
     if (m.decisaoLocal) { saida.situacao = "DOCUMENTADO_POR_DECISAO_LOCAL"; saida.decisaoLocal = m.decisaoLocal; }
     return saida;
   });
 }
 const manifestoB2 = {
   versao: "1.0.0", fatia: "F1-B2", geradoEm: ACESSO, decisao: "D-F1-49",
-  regras: { localizador: "itens[drug=<nome estavel>;days=<dias>] — identidade estável por droga+dias, nunca índice numérico", aprovacao: "toda ficha nova nasce RASCUNHO; ativação clínica exige aprovação identificada por item/versão/hash; mudança de fonte NÃO aprova doses (D-F1-49)" },
+  regras: { localizador: "itens[drug=<nome estavel>;classe=<fase>;days=<dias>] — identidade estável por droga+classe+dias, nunca índice numérico", aprovacao: "toda ficha nova nasce RASCUNHO; ativação clínica exige aprovação identificada por item/versão/hash; mudança de fonte NÃO aprova doses (D-F1-49)" },
   fontesExternas: EXT, materiaisLocais: LOC,
   fichasNovas: geradas.map(({ spec, t, caminho }) => ({
     arquivo: caminho, templateId: t.templateId, hash: t.hash, versao: t.versao, status: t.status,

@@ -4,7 +4,7 @@
   "geradoEm": "2026-10-14",
   "decisao": "D-F1-49",
   "regras": {
-    "localizador": "itens[drug=<nome estavel>;days=<dias>] — identidade estável por droga+dias, nunca índice numérico",
+    "localizador": "itens[drug=<nome estavel>;classe=<fase>;days=<dias>] — identidade estável por droga+classe+dias, nunca índice numérico",
     "aprovacao": "toda ficha nova nasce RASCUNHO; ativação clínica exige aprovação identificada por item/versão/hash; mudança de fonte NÃO aprova doses (D-F1-49)"
   },
   "fontesExternas": {
@@ -316,7 +316,7 @@
       ],
       "campos": [
         {
-          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem de acesso);days=d1].standardDose",
+          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem de acesso);classe=PRE_QT;days=d1].standardDose",
           "valor": 1,
           "unidade": "frasco",
           "situacao": "PADRAO_LOCAL",
@@ -326,7 +326,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Ondansetrona;days=d1].standardDose",
+          "campo": "itens[drug=Ondansetrona;classe=PRE_QT;days=d1].standardDose",
           "valor": 8,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -336,7 +336,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Dexametasona;days=d1].standardDose",
+          "campo": "itens[drug=Dexametasona;classe=PRE_QT;days=d1].standardDose",
           "valor": 10,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -346,7 +346,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Prometazina;days=d1].standardDose",
+          "campo": "itens[drug=Prometazina;classe=PRE_QT;days=d1].standardDose",
           "valor": 25,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -356,7 +356,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Folinato de cálcio (leucovorina);days=d1].standardDose",
+          "campo": "itens[drug=Folinato de cálcio (leucovorina);classe=QT;days=d1].standardDose",
           "valor": 20,
           "unidade": "mg/m²",
           "situacao": "DOCUMENTADO_POR_DECISAO_LOCAL",
@@ -369,7 +369,7 @@
           "decisaoLocal": "D-F1-26 (folinato 20 mg/m² semanal); CR004 corrobora 20 mg/m² IV bolus"
         },
         {
-          "campo": "itens[drug=Fluoruracila (5-FU) em bolus;days=d1].standardDose",
+          "campo": "itens[drug=Fluoruracila (5-FU) em bolus;classe=QT;days=d1].standardDose",
           "valor": 425,
           "unidade": "mg/m²",
           "situacao": "DOCUMENTADO_POR_DECISAO_LOCAL",
@@ -382,7 +382,7 @@
           "decisaoLocal": "D-F1-50 (dose 425 mg/m²)"
         },
         {
-          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem pós-QT);days=d1].standardDose",
+          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem pós-QT);classe=POS_QT;days=d1].standardDose",
           "valor": 1,
           "unidade": "frasco",
           "situacao": "PADRAO_LOCAL",
@@ -413,7 +413,7 @@
       ],
       "campos": [
         {
-          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem de acesso);days=d1,d2].standardDose",
+          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem de acesso);classe=PRE_QT;days=d1,d2].standardDose",
           "valor": 1,
           "unidade": "frasco",
           "situacao": "PADRAO_LOCAL",
@@ -423,7 +423,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Ondansetrona;days=d1,d2].standardDose",
+          "campo": "itens[drug=Ondansetrona;classe=PRE_QT;days=d1,d2].standardDose",
           "valor": 8,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -433,7 +433,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Dexametasona;days=d1,d2].standardDose",
+          "campo": "itens[drug=Dexametasona;classe=PRE_QT;days=d1,d2].standardDose",
           "valor": 10,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -443,7 +443,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Prometazina;days=d1,d2].standardDose",
+          "campo": "itens[drug=Prometazina;classe=PRE_QT;days=d1,d2].standardDose",
           "valor": 25,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -453,7 +453,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Folinato de cálcio (leucovorina);days=d1,d2].standardDose",
+          "campo": "itens[drug=Folinato de cálcio (leucovorina);classe=QT;days=d1,d2].standardDose",
           "valor": 200,
           "unidade": "mg/m²",
           "situacao": "DOCUMENTADO_POR_DECISAO_LOCAL",
@@ -464,7 +464,7 @@
           "decisaoLocal": "D-F1-50: P1512 mapeado como LV5FU2 (= FOLFOX4 sem oxaliplatina; DECISAO_MEDICA 2026-10-08 traz LV 200 mg/m² 2 h D1–D2)"
         },
         {
-          "campo": "itens[drug=Fluoruracila (5-FU) em bolus;days=d1,d2].standardDose",
+          "campo": "itens[drug=Fluoruracila (5-FU) em bolus;classe=QT;days=d1,d2].standardDose",
           "valor": 400,
           "unidade": "mg/m²",
           "situacao": "DOCUMENTADO_POR_DECISAO_LOCAL",
@@ -475,7 +475,7 @@
           "decisaoLocal": "D-F1-50: LV5FU2 — 400 mg/m² bolus D1–D2 (DECISAO_MEDICA 2026-10-08 FOLFOX4)"
         },
         {
-          "campo": "itens[drug=Fluoruracila (5-FU) infusão contínua;days=d1,d2].standardDose",
+          "campo": "itens[drug=Fluoruracila (5-FU) infusão contínua;classe=QT;days=d1,d2].standardDose",
           "valor": 600,
           "unidade": "mg/m²",
           "situacao": "DOCUMENTADO_POR_DECISAO_LOCAL",
@@ -486,7 +486,7 @@
           "decisaoLocal": "D-F1-50: LV5FU2 — 400 mg/m² bolus D1–D2 (DECISAO_MEDICA 2026-10-08 FOLFOX4)"
         },
         {
-          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem pós-QT);days=d1,d2].standardDose",
+          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem pós-QT);classe=POS_QT;days=d1,d2].standardDose",
           "valor": 1,
           "unidade": "frasco",
           "situacao": "PADRAO_LOCAL",
@@ -516,7 +516,7 @@
       ],
       "campos": [
         {
-          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem de acesso);days=d1].standardDose",
+          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem de acesso);classe=PRE_QT;days=d1].standardDose",
           "valor": 1,
           "unidade": "frasco",
           "situacao": "PADRAO_LOCAL",
@@ -526,7 +526,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Ondansetrona;days=d1].standardDose",
+          "campo": "itens[drug=Ondansetrona;classe=PRE_QT;days=d1].standardDose",
           "valor": 8,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -536,7 +536,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Dexametasona;days=d1].standardDose",
+          "campo": "itens[drug=Dexametasona;classe=PRE_QT;days=d1].standardDose",
           "valor": 10,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -546,7 +546,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Prometazina;days=d1].standardDose",
+          "campo": "itens[drug=Prometazina;classe=PRE_QT;days=d1].standardDose",
           "valor": 25,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -556,7 +556,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Cimetidina;days=d1].standardDose",
+          "campo": "itens[drug=Cimetidina;classe=PRE_QT;days=d1].standardDose",
           "valor": 300,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -566,7 +566,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Docetaxel;days=d1].standardDose",
+          "campo": "itens[drug=Docetaxel;classe=QT;days=d1].standardDose",
           "valor": 75,
           "unidade": "mg/m²",
           "situacao": "DOCUMENTADO",
@@ -578,7 +578,7 @@
           "aprovacaoClinica": null
         },
         {
-          "campo": "itens[drug=Soro fisiológico 0,9% 500 mL (pré-cisplatina);days=d1].standardDose",
+          "campo": "itens[drug=Soro fisiológico 0,9% 500 mL (pré-cisplatina);classe=PRE_QT;days=d1].standardDose",
           "valor": 1,
           "unidade": "frasco",
           "situacao": "PADRAO_LOCAL",
@@ -588,7 +588,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Sulfato de magnésio 10% 10 mL;days=d1].standardDose",
+          "campo": "itens[drug=Sulfato de magnésio 10% 10 mL;classe=PRE_QT;days=d1].standardDose",
           "valor": 10,
           "unidade": "mL",
           "situacao": "PADRAO_LOCAL",
@@ -598,7 +598,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Cloreto de potássio 19,1% 4 mL;days=d1].standardDose",
+          "campo": "itens[drug=Cloreto de potássio 19,1% 4 mL;classe=PRE_QT;days=d1].standardDose",
           "valor": 4,
           "unidade": "mL",
           "situacao": "PADRAO_LOCAL",
@@ -608,7 +608,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Cisplatina;days=d1].standardDose",
+          "campo": "itens[drug=Cisplatina;classe=QT;days=d1].standardDose",
           "valor": 75,
           "unidade": "mg/m²",
           "situacao": "DOCUMENTADO",
@@ -620,7 +620,7 @@
           "aprovacaoClinica": null
         },
         {
-          "campo": "itens[drug=Manitol 20% frasco 250 mL;days=d1].standardDose",
+          "campo": "itens[drug=Manitol 20% frasco 250 mL;classe=QT;days=d1].standardDose",
           "valor": 1,
           "unidade": "frasco",
           "situacao": "PADRAO_LOCAL",
@@ -630,7 +630,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Soro fisiológico 0,9% 500 mL (pós-cisplatina);days=d1].standardDose",
+          "campo": "itens[drug=Soro fisiológico 0,9% 500 mL (pós-cisplatina);classe=POS_QT;days=d1].standardDose",
           "valor": 1,
           "unidade": "frasco",
           "situacao": "PADRAO_LOCAL",
@@ -640,7 +640,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Cloreto de potássio 19,1% 4 mL;days=d1].standardDose",
+          "campo": "itens[drug=Cloreto de potássio 19,1% 4 mL;classe=POS_QT;days=d1].standardDose",
           "valor": 4,
           "unidade": "mL",
           "situacao": "PADRAO_LOCAL",
@@ -650,7 +650,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem pós-QT);days=d1].standardDose",
+          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem pós-QT);classe=POS_QT;days=d1].standardDose",
           "valor": 1,
           "unidade": "frasco",
           "situacao": "PADRAO_LOCAL",
@@ -681,7 +681,7 @@
       ],
       "campos": [
         {
-          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem de acesso);days=d1].standardDose",
+          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem de acesso);classe=PRE_QT;days=d1].standardDose",
           "valor": 1,
           "unidade": "frasco",
           "situacao": "PADRAO_LOCAL",
@@ -691,7 +691,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Ondansetrona;days=d1].standardDose",
+          "campo": "itens[drug=Ondansetrona;classe=PRE_QT;days=d1].standardDose",
           "valor": 8,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -701,7 +701,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Dexametasona;days=d1].standardDose",
+          "campo": "itens[drug=Dexametasona;classe=PRE_QT;days=d1].standardDose",
           "valor": 10,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -711,7 +711,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Prometazina;days=d1].standardDose",
+          "campo": "itens[drug=Prometazina;classe=PRE_QT;days=d1].standardDose",
           "valor": 25,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -721,7 +721,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Cimetidina;days=d1].standardDose",
+          "campo": "itens[drug=Cimetidina;classe=PRE_QT;days=d1].standardDose",
           "valor": 300,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -731,7 +731,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Paclitaxel;days=d1].standardDose",
+          "campo": "itens[drug=Paclitaxel;classe=QT;days=d1].standardDose",
           "valor": 200,
           "unidade": "mg/m²",
           "situacao": "DOCUMENTADO",
@@ -744,7 +744,7 @@
           "aprovacaoClinica": null
         },
         {
-          "campo": "itens[drug=Carboplatina;days=d1].standardDose",
+          "campo": "itens[drug=Carboplatina;classe=QT;days=d1].standardDose",
           "valor": 6,
           "unidade": "AUC",
           "situacao": "DOCUMENTADO",
@@ -757,7 +757,7 @@
           "aprovacaoClinica": null
         },
         {
-          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem pós-QT);days=d1].standardDose",
+          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem pós-QT);classe=POS_QT;days=d1].standardDose",
           "valor": 1,
           "unidade": "frasco",
           "situacao": "PADRAO_LOCAL",
@@ -789,7 +789,7 @@
       ],
       "campos": [
         {
-          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem de acesso);days=d1,d8].standardDose",
+          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem de acesso);classe=PRE_QT;days=d1,d8].standardDose",
           "valor": 1,
           "unidade": "frasco",
           "situacao": "PADRAO_LOCAL",
@@ -799,7 +799,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Ondansetrona;days=d1,d8].standardDose",
+          "campo": "itens[drug=Ondansetrona;classe=PRE_QT;days=d1,d8].standardDose",
           "valor": 8,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -809,7 +809,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Dexametasona;days=d1,d8].standardDose",
+          "campo": "itens[drug=Dexametasona;classe=PRE_QT;days=d1,d8].standardDose",
           "valor": 10,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -819,7 +819,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Prometazina;days=d1,d8].standardDose",
+          "campo": "itens[drug=Prometazina;classe=PRE_QT;days=d1,d8].standardDose",
           "valor": 25,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -829,7 +829,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Cimetidina;days=d8].standardDose",
+          "campo": "itens[drug=Cimetidina;classe=PRE_QT;days=d8].standardDose",
           "valor": 300,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -839,7 +839,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Gemcitabina;days=d1,d8].standardDose",
+          "campo": "itens[drug=Gemcitabina;classe=QT;days=d1,d8].standardDose",
           "valor": 1000,
           "unidade": "mg/m²",
           "situacao": "DOCUMENTADO",
@@ -851,7 +851,7 @@
           "aprovacaoClinica": null
         },
         {
-          "campo": "itens[drug=Docetaxel;days=d8].standardDose",
+          "campo": "itens[drug=Docetaxel;classe=QT;days=d8].standardDose",
           "valor": 75,
           "unidade": "mg/m²",
           "situacao": "DOCUMENTADO",
@@ -863,7 +863,7 @@
           "aprovacaoClinica": null
         },
         {
-          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem pós-QT);days=d1,d8].standardDose",
+          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem pós-QT);classe=POS_QT;days=d1,d8].standardDose",
           "valor": 1,
           "unidade": "frasco",
           "situacao": "PADRAO_LOCAL",
@@ -891,7 +891,7 @@
       ],
       "campos": [
         {
-          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem de acesso);days=d1,d2,d3,d4].standardDose",
+          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem de acesso);classe=PRE_QT;days=d1,d2,d3,d4].standardDose",
           "valor": 1,
           "unidade": "frasco",
           "situacao": "PADRAO_LOCAL",
@@ -901,7 +901,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Ondansetrona;days=d1,d2,d3,d4].standardDose",
+          "campo": "itens[drug=Ondansetrona;classe=PRE_QT;days=d1,d2,d3,d4].standardDose",
           "valor": 8,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -911,7 +911,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Dexametasona;days=d1,d2,d3,d4].standardDose",
+          "campo": "itens[drug=Dexametasona;classe=PRE_QT;days=d1,d2,d3,d4].standardDose",
           "valor": 10,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -921,7 +921,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Prometazina;days=d1,d2,d3,d4].standardDose",
+          "campo": "itens[drug=Prometazina;classe=PRE_QT;days=d1,d2,d3,d4].standardDose",
           "valor": 25,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -931,7 +931,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Soro fisiológico 0,9% 500 mL (pré-cisplatina);days=d1].standardDose",
+          "campo": "itens[drug=Soro fisiológico 0,9% 500 mL (pré-cisplatina);classe=PRE_QT;days=d1].standardDose",
           "valor": 1,
           "unidade": "frasco",
           "situacao": "PADRAO_LOCAL",
@@ -941,7 +941,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Sulfato de magnésio 10% 10 mL;days=d1].standardDose",
+          "campo": "itens[drug=Sulfato de magnésio 10% 10 mL;classe=PRE_QT;days=d1].standardDose",
           "valor": 10,
           "unidade": "mL",
           "situacao": "PADRAO_LOCAL",
@@ -951,7 +951,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Cloreto de potássio 19,1% 4 mL;days=d1].standardDose",
+          "campo": "itens[drug=Cloreto de potássio 19,1% 4 mL;classe=PRE_QT;days=d1].standardDose",
           "valor": 4,
           "unidade": "mL",
           "situacao": "PADRAO_LOCAL",
@@ -961,7 +961,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Cisplatina;days=d1].standardDose",
+          "campo": "itens[drug=Cisplatina;classe=QT;days=d1].standardDose",
           "valor": 100,
           "unidade": "mg/m²",
           "situacao": "DOCUMENTADO",
@@ -973,7 +973,7 @@
           "aprovacaoClinica": null
         },
         {
-          "campo": "itens[drug=Manitol 20% frasco 250 mL;days=d1].standardDose",
+          "campo": "itens[drug=Manitol 20% frasco 250 mL;classe=QT;days=d1].standardDose",
           "valor": 1,
           "unidade": "frasco",
           "situacao": "PADRAO_LOCAL",
@@ -983,7 +983,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Fluoruracila (5-FU) infusão contínua 24 h/dia;days=d1-d4].standardDose",
+          "campo": "itens[drug=Fluoruracila (5-FU) infusão contínua 24 h/dia;classe=QT;days=d1-d4].standardDose",
           "valor": 1000,
           "unidade": "mg/m²",
           "situacao": "DOCUMENTADO",
@@ -995,7 +995,7 @@
           "aprovacaoClinica": null
         },
         {
-          "campo": "itens[drug=Soro fisiológico 0,9% 500 mL (pós-cisplatina);days=d1].standardDose",
+          "campo": "itens[drug=Soro fisiológico 0,9% 500 mL (pós-cisplatina);classe=POS_QT;days=d1].standardDose",
           "valor": 1,
           "unidade": "frasco",
           "situacao": "PADRAO_LOCAL",
@@ -1005,7 +1005,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Cloreto de potássio 19,1% 4 mL;days=d1].standardDose",
+          "campo": "itens[drug=Cloreto de potássio 19,1% 4 mL;classe=POS_QT;days=d1].standardDose",
           "valor": 4,
           "unidade": "mL",
           "situacao": "PADRAO_LOCAL",
@@ -1015,7 +1015,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem pós-QT);days=d1,d2,d3,d4].standardDose",
+          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem pós-QT);classe=POS_QT;days=d1,d2,d3,d4].standardDose",
           "valor": 1,
           "unidade": "frasco",
           "situacao": "PADRAO_LOCAL",
@@ -1046,7 +1046,7 @@
       ],
       "campos": [
         {
-          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem de acesso);days=d1,d2].standardDose",
+          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem de acesso);classe=PRE_QT;days=d1,d2].standardDose",
           "valor": 1,
           "unidade": "frasco",
           "situacao": "PADRAO_LOCAL",
@@ -1056,7 +1056,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Ondansetrona;days=d1,d2].standardDose",
+          "campo": "itens[drug=Ondansetrona;classe=PRE_QT;days=d1,d2].standardDose",
           "valor": 8,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -1066,7 +1066,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Dexametasona;days=d1,d2].standardDose",
+          "campo": "itens[drug=Dexametasona;classe=PRE_QT;days=d1,d2].standardDose",
           "valor": 10,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -1076,7 +1076,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Prometazina;days=d1,d2].standardDose",
+          "campo": "itens[drug=Prometazina;classe=PRE_QT;days=d1,d2].standardDose",
           "valor": 25,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -1086,7 +1086,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Vincristina;days=d1].standardDose",
+          "campo": "itens[drug=Vincristina;classe=QT;days=d1].standardDose",
           "valor": 1.5,
           "unidade": "mg/m²",
           "situacao": "DOCUMENTADO",
@@ -1100,7 +1100,7 @@
           "aprovacaoClinica": null
         },
         {
-          "campo": "itens[drug=Doxorrubicina;days=d1,d2].standardDose",
+          "campo": "itens[drug=Doxorrubicina;classe=QT;days=d1,d2].standardDose",
           "valor": 37.5,
           "unidade": "mg/m²",
           "situacao": "DOCUMENTADO",
@@ -1112,7 +1112,7 @@
           "aprovacaoClinica": null
         },
         {
-          "campo": "itens[drug=Ciclofosfamida;days=d1].standardDose",
+          "campo": "itens[drug=Ciclofosfamida;classe=QT;days=d1].standardDose",
           "valor": 1200,
           "unidade": "mg/m²",
           "situacao": "DOCUMENTADO",
@@ -1124,7 +1124,7 @@
           "aprovacaoClinica": null
         },
         {
-          "campo": "itens[drug=Mesna (0 h);days=d1].standardDose",
+          "campo": "itens[drug=Mesna (0 h);classe=QT;days=d1].standardDose",
           "valor": 400,
           "unidade": "mg/m²",
           "situacao": "DOCUMENTADO",
@@ -1136,7 +1136,7 @@
           "aprovacaoClinica": null
         },
         {
-          "campo": "itens[drug=Mesna (2 h, VO);days=d1].standardDose",
+          "campo": "itens[drug=Mesna (2 h, VO);classe=POS_QT;days=d1].standardDose",
           "valor": 800,
           "unidade": "mg/m²",
           "situacao": "DOCUMENTADO",
@@ -1148,7 +1148,7 @@
           "aprovacaoClinica": null
         },
         {
-          "campo": "itens[drug=Mesna (6 h, VO);days=d1].standardDose",
+          "campo": "itens[drug=Mesna (6 h, VO);classe=POS_QT;days=d1].standardDose",
           "valor": 800,
           "unidade": "mg/m²",
           "situacao": "DOCUMENTADO",
@@ -1160,7 +1160,7 @@
           "aprovacaoClinica": null
         },
         {
-          "campo": "itens[drug=Pegfilgrastim;days=d3].standardDose",
+          "campo": "itens[drug=Pegfilgrastim;classe=POS_QT;days=d3].standardDose",
           "valor": 6,
           "unidade": "mg",
           "situacao": "DOCUMENTADO",
@@ -1172,7 +1172,7 @@
           "aprovacaoClinica": null
         },
         {
-          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem pós-QT);days=d1,d2].standardDose",
+          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem pós-QT);classe=POS_QT;days=d1,d2].standardDose",
           "valor": 1,
           "unidade": "frasco",
           "situacao": "PADRAO_LOCAL",
@@ -1205,7 +1205,7 @@
       ],
       "campos": [
         {
-          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem de acesso);days=d1,d2,d3,d4,d5].standardDose",
+          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem de acesso);classe=PRE_QT;days=d1,d2,d3,d4,d5].standardDose",
           "valor": 1,
           "unidade": "frasco",
           "situacao": "PADRAO_LOCAL",
@@ -1215,7 +1215,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Ondansetrona;days=d1,d2,d3,d4,d5].standardDose",
+          "campo": "itens[drug=Ondansetrona;classe=PRE_QT;days=d1,d2,d3,d4,d5].standardDose",
           "valor": 8,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -1225,7 +1225,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Dexametasona;days=d1,d2,d3,d4,d5].standardDose",
+          "campo": "itens[drug=Dexametasona;classe=PRE_QT;days=d1,d2,d3,d4,d5].standardDose",
           "valor": 10,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -1235,7 +1235,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Prometazina;days=d1,d2,d3,d4,d5].standardDose",
+          "campo": "itens[drug=Prometazina;classe=PRE_QT;days=d1,d2,d3,d4,d5].standardDose",
           "valor": 25,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -1245,7 +1245,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Etoposídeo;days=d1-d5].standardDose",
+          "campo": "itens[drug=Etoposídeo;classe=QT;days=d1-d5].standardDose",
           "valor": 100,
           "unidade": "mg/m²",
           "situacao": "DOCUMENTADO",
@@ -1257,7 +1257,7 @@
           "aprovacaoClinica": null
         },
         {
-          "campo": "itens[drug=Ifosfamida;days=d1-d5].standardDose",
+          "campo": "itens[drug=Ifosfamida;classe=QT;days=d1-d5].standardDose",
           "valor": 1800,
           "unidade": "mg/m²",
           "situacao": "DOCUMENTADO",
@@ -1269,7 +1269,7 @@
           "aprovacaoClinica": null
         },
         {
-          "campo": "itens[drug=Mesna (0 h);days=d1-d5].standardDose",
+          "campo": "itens[drug=Mesna (0 h);classe=QT;days=d1-d5].standardDose",
           "valor": 600,
           "unidade": "mg/m²",
           "situacao": "DOCUMENTADO",
@@ -1281,7 +1281,7 @@
           "aprovacaoClinica": null
         },
         {
-          "campo": "itens[drug=Mesna (4 h);days=d1-d5].standardDose",
+          "campo": "itens[drug=Mesna (4 h);classe=POS_QT;days=d1-d5].standardDose",
           "valor": 600,
           "unidade": "mg/m²",
           "situacao": "DOCUMENTADO",
@@ -1293,7 +1293,7 @@
           "aprovacaoClinica": null
         },
         {
-          "campo": "itens[drug=Mesna (8 h);days=d1-d5].standardDose",
+          "campo": "itens[drug=Mesna (8 h);classe=POS_QT;days=d1-d5].standardDose",
           "valor": 600,
           "unidade": "mg/m²",
           "situacao": "DOCUMENTADO",
@@ -1305,7 +1305,7 @@
           "aprovacaoClinica": null
         },
         {
-          "campo": "itens[drug=Pegfilgrastim;days=d6].standardDose",
+          "campo": "itens[drug=Pegfilgrastim;classe=POS_QT;days=d6].standardDose",
           "valor": 6,
           "unidade": "mg",
           "situacao": "DOCUMENTADO",
@@ -1317,7 +1317,7 @@
           "aprovacaoClinica": null
         },
         {
-          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem pós-QT);days=d1,d2,d3,d4,d5].standardDose",
+          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem pós-QT);classe=POS_QT;days=d1,d2,d3,d4,d5].standardDose",
           "valor": 1,
           "unidade": "frasco",
           "situacao": "PADRAO_LOCAL",
@@ -1346,7 +1346,7 @@
       ],
       "campos": [
         {
-          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem de acesso);days=d1,d2,d3,d22,d29].standardDose",
+          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem de acesso);classe=PRE_QT;days=d1,d2,d3,d22,d29].standardDose",
           "valor": 1,
           "unidade": "frasco",
           "situacao": "PADRAO_LOCAL",
@@ -1356,7 +1356,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Ondansetrona;days=d1,d2,d3,d22,d29].standardDose",
+          "campo": "itens[drug=Ondansetrona;classe=PRE_QT;days=d1,d2,d3,d22,d29].standardDose",
           "valor": 8,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -1366,7 +1366,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Dexametasona;days=d1,d2,d3,d22,d29].standardDose",
+          "campo": "itens[drug=Dexametasona;classe=PRE_QT;days=d1,d2,d3,d22,d29].standardDose",
           "valor": 10,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -1376,7 +1376,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Prometazina;days=d1,d2,d3,d22,d29].standardDose",
+          "campo": "itens[drug=Prometazina;classe=PRE_QT;days=d1,d2,d3,d22,d29].standardDose",
           "valor": 25,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -1386,7 +1386,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Doxorrubicina;days=d1,d2,d3].standardDose",
+          "campo": "itens[drug=Doxorrubicina;classe=QT;days=d1,d2,d3].standardDose",
           "valor": 25,
           "unidade": "mg/m²",
           "situacao": "DOCUMENTADO",
@@ -1398,7 +1398,7 @@
           "aprovacaoClinica": null
         },
         {
-          "campo": "itens[drug=Soro fisiológico 0,9% 500 mL (pré-cisplatina);days=d1,d2].standardDose",
+          "campo": "itens[drug=Soro fisiológico 0,9% 500 mL (pré-cisplatina);classe=PRE_QT;days=d1,d2].standardDose",
           "valor": 1,
           "unidade": "frasco",
           "situacao": "PADRAO_LOCAL",
@@ -1408,7 +1408,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Sulfato de magnésio 10% 10 mL;days=d1,d2].standardDose",
+          "campo": "itens[drug=Sulfato de magnésio 10% 10 mL;classe=PRE_QT;days=d1,d2].standardDose",
           "valor": 10,
           "unidade": "mL",
           "situacao": "PADRAO_LOCAL",
@@ -1418,7 +1418,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Cloreto de potássio 19,1% 4 mL;days=d1,d2].standardDose",
+          "campo": "itens[drug=Cloreto de potássio 19,1% 4 mL;classe=PRE_QT;days=d1,d2].standardDose",
           "valor": 4,
           "unidade": "mL",
           "situacao": "PADRAO_LOCAL",
@@ -1428,7 +1428,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Cisplatina;days=d1,d2].standardDose",
+          "campo": "itens[drug=Cisplatina;classe=QT;days=d1,d2].standardDose",
           "valor": 60,
           "unidade": "mg/m²",
           "situacao": "DOCUMENTADO",
@@ -1441,7 +1441,7 @@
           "aprovacaoClinica": null
         },
         {
-          "campo": "itens[drug=Manitol 20% frasco 250 mL;days=d1,d2].standardDose",
+          "campo": "itens[drug=Manitol 20% frasco 250 mL;classe=QT;days=d1,d2].standardDose",
           "valor": 1,
           "unidade": "frasco",
           "situacao": "PADRAO_LOCAL",
@@ -1451,7 +1451,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Metotrexato;days=d22,d29].standardDose",
+          "campo": "itens[drug=Metotrexato;classe=QT;days=d22,d29].standardDose",
           "valor": 12000,
           "unidade": "mg/m²",
           "situacao": "DOCUMENTADO",
@@ -1463,7 +1463,7 @@
           "aprovacaoClinica": null
         },
         {
-          "campo": "itens[drug=Folinato de cálcio (resgate do MTX);days=d23,d30].standardDose",
+          "campo": "itens[drug=Folinato de cálcio (resgate do MTX);classe=QT;days=d23,d30].standardDose",
           "valor": 15,
           "unidade": "mg/m²",
           "situacao": "DOCUMENTADO",
@@ -1475,7 +1475,7 @@
           "aprovacaoClinica": null
         },
         {
-          "campo": "itens[drug=Pegfilgrastim;days=d4].standardDose",
+          "campo": "itens[drug=Pegfilgrastim;classe=POS_QT;days=d4].standardDose",
           "valor": 6,
           "unidade": "mg",
           "situacao": "DOCUMENTADO",
@@ -1488,7 +1488,7 @@
           "aprovacaoClinica": null
         },
         {
-          "campo": "itens[drug=Soro fisiológico 0,9% 500 mL (pós-cisplatina);days=d1,d2].standardDose",
+          "campo": "itens[drug=Soro fisiológico 0,9% 500 mL (pós-cisplatina);classe=POS_QT;days=d1,d2].standardDose",
           "valor": 1,
           "unidade": "frasco",
           "situacao": "PADRAO_LOCAL",
@@ -1498,7 +1498,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Cloreto de potássio 19,1% 4 mL;days=d1,d2].standardDose",
+          "campo": "itens[drug=Cloreto de potássio 19,1% 4 mL;classe=POS_QT;days=d1,d2].standardDose",
           "valor": 4,
           "unidade": "mL",
           "situacao": "PADRAO_LOCAL",
@@ -1508,7 +1508,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem pós-QT);days=d1,d2,d3,d22,d29].standardDose",
+          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem pós-QT);classe=POS_QT;days=d1,d2,d3,d22,d29].standardDose",
           "valor": 1,
           "unidade": "frasco",
           "situacao": "PADRAO_LOCAL",
@@ -1542,7 +1542,7 @@
       ],
       "campos": [
         {
-          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem de acesso);days=d1,d2,d3,d15,d22].standardDose",
+          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem de acesso);classe=PRE_QT;days=d1,d2,d3,d15,d22].standardDose",
           "valor": 1,
           "unidade": "frasco",
           "situacao": "PADRAO_LOCAL",
@@ -1552,7 +1552,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Ondansetrona;days=d1,d2,d3,d15,d22].standardDose",
+          "campo": "itens[drug=Ondansetrona;classe=PRE_QT;days=d1,d2,d3,d15,d22].standardDose",
           "valor": 8,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -1562,7 +1562,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Dexametasona;days=d1,d2,d3,d15,d22].standardDose",
+          "campo": "itens[drug=Dexametasona;classe=PRE_QT;days=d1,d2,d3,d15,d22].standardDose",
           "valor": 10,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -1572,7 +1572,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Prometazina;days=d1,d2,d3,d15,d22].standardDose",
+          "campo": "itens[drug=Prometazina;classe=PRE_QT;days=d1,d2,d3,d15,d22].standardDose",
           "valor": 25,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -1582,7 +1582,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Doxorrubicina;days=d1,d2,d3].standardDose",
+          "campo": "itens[drug=Doxorrubicina;classe=QT;days=d1,d2,d3].standardDose",
           "valor": 25,
           "unidade": "mg/m²",
           "situacao": "DOCUMENTADO",
@@ -1594,7 +1594,7 @@
           "aprovacaoClinica": null
         },
         {
-          "campo": "itens[drug=Metotrexato;days=d15,d22].standardDose",
+          "campo": "itens[drug=Metotrexato;classe=QT;days=d15,d22].standardDose",
           "valor": 12000,
           "unidade": "mg/m²",
           "situacao": "DOCUMENTADO",
@@ -1606,7 +1606,7 @@
           "aprovacaoClinica": null
         },
         {
-          "campo": "itens[drug=Folinato de cálcio (resgate do MTX);days=d16,d23].standardDose",
+          "campo": "itens[drug=Folinato de cálcio (resgate do MTX);classe=QT;days=d16,d23].standardDose",
           "valor": 15,
           "unidade": "mg/m²",
           "situacao": "DOCUMENTADO",
@@ -1618,7 +1618,7 @@
           "aprovacaoClinica": null
         },
         {
-          "campo": "itens[drug=Pegfilgrastim;days=d4].standardDose",
+          "campo": "itens[drug=Pegfilgrastim;classe=POS_QT;days=d4].standardDose",
           "valor": 6,
           "unidade": "mg",
           "situacao": "DOCUMENTADO",
@@ -1631,7 +1631,7 @@
           "aprovacaoClinica": null
         },
         {
-          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem pós-QT);days=d1,d2,d3,d15,d22].standardDose",
+          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem pós-QT);classe=POS_QT;days=d1,d2,d3,d15,d22].standardDose",
           "valor": 1,
           "unidade": "frasco",
           "situacao": "PADRAO_LOCAL",
@@ -1661,7 +1661,7 @@
       ],
       "campos": [
         {
-          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem de acesso);days=d1].standardDose",
+          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem de acesso);classe=PRE_QT;days=d1].standardDose",
           "valor": 1,
           "unidade": "frasco",
           "situacao": "PADRAO_LOCAL",
@@ -1671,7 +1671,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Ondansetrona;days=d1].standardDose",
+          "campo": "itens[drug=Ondansetrona;classe=PRE_QT;days=d1].standardDose",
           "valor": 8,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -1681,7 +1681,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Dexametasona;days=d1].standardDose",
+          "campo": "itens[drug=Dexametasona;classe=PRE_QT;days=d1].standardDose",
           "valor": 10,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -1691,7 +1691,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Prometazina;days=d1].standardDose",
+          "campo": "itens[drug=Prometazina;classe=PRE_QT;days=d1].standardDose",
           "valor": 25,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -1701,7 +1701,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Doxorrubicina;days=d1].standardDose",
+          "campo": "itens[drug=Doxorrubicina;classe=QT;days=d1].standardDose",
           "valor": 75,
           "unidade": "mg/m²",
           "situacao": "DOCUMENTADO",
@@ -1714,7 +1714,7 @@
           "aprovacaoClinica": null
         },
         {
-          "campo": "itens[drug=Soro fisiológico 0,9% 500 mL (pré-cisplatina);days=d1].standardDose",
+          "campo": "itens[drug=Soro fisiológico 0,9% 500 mL (pré-cisplatina);classe=PRE_QT;days=d1].standardDose",
           "valor": 1,
           "unidade": "frasco",
           "situacao": "PADRAO_LOCAL",
@@ -1724,7 +1724,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Sulfato de magnésio 10% 10 mL;days=d1].standardDose",
+          "campo": "itens[drug=Sulfato de magnésio 10% 10 mL;classe=PRE_QT;days=d1].standardDose",
           "valor": 10,
           "unidade": "mL",
           "situacao": "PADRAO_LOCAL",
@@ -1734,7 +1734,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Cloreto de potássio 19,1% 4 mL;days=d1].standardDose",
+          "campo": "itens[drug=Cloreto de potássio 19,1% 4 mL;classe=PRE_QT;days=d1].standardDose",
           "valor": 4,
           "unidade": "mL",
           "situacao": "PADRAO_LOCAL",
@@ -1744,7 +1744,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Cisplatina;days=d1].standardDose",
+          "campo": "itens[drug=Cisplatina;classe=QT;days=d1].standardDose",
           "valor": 100,
           "unidade": "mg/m²",
           "situacao": "DOCUMENTADO",
@@ -1757,7 +1757,7 @@
           "aprovacaoClinica": null
         },
         {
-          "campo": "itens[drug=Manitol 20% frasco 250 mL;days=d1].standardDose",
+          "campo": "itens[drug=Manitol 20% frasco 250 mL;classe=QT;days=d1].standardDose",
           "valor": 1,
           "unidade": "frasco",
           "situacao": "PADRAO_LOCAL",
@@ -1767,7 +1767,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Soro fisiológico 0,9% 500 mL (pós-cisplatina);days=d1].standardDose",
+          "campo": "itens[drug=Soro fisiológico 0,9% 500 mL (pós-cisplatina);classe=POS_QT;days=d1].standardDose",
           "valor": 1,
           "unidade": "frasco",
           "situacao": "PADRAO_LOCAL",
@@ -1777,7 +1777,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Cloreto de potássio 19,1% 4 mL;days=d1].standardDose",
+          "campo": "itens[drug=Cloreto de potássio 19,1% 4 mL;classe=POS_QT;days=d1].standardDose",
           "valor": 4,
           "unidade": "mL",
           "situacao": "PADRAO_LOCAL",
@@ -1787,7 +1787,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem pós-QT);days=d1].standardDose",
+          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem pós-QT);classe=POS_QT;days=d1].standardDose",
           "valor": 1,
           "unidade": "frasco",
           "situacao": "PADRAO_LOCAL",
@@ -1819,7 +1819,7 @@
       ],
       "campos": [
         {
-          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem de acesso);days=d1].standardDose",
+          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem de acesso);classe=PRE_QT;days=d1].standardDose",
           "valor": 1,
           "unidade": "frasco",
           "situacao": "PADRAO_LOCAL",
@@ -1829,7 +1829,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Ondansetrona;days=d1].standardDose",
+          "campo": "itens[drug=Ondansetrona;classe=PRE_QT;days=d1].standardDose",
           "valor": 8,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -1839,7 +1839,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Dexametasona;days=d1].standardDose",
+          "campo": "itens[drug=Dexametasona;classe=PRE_QT;days=d1].standardDose",
           "valor": 10,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -1849,7 +1849,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Prometazina;days=d1].standardDose",
+          "campo": "itens[drug=Prometazina;classe=PRE_QT;days=d1].standardDose",
           "valor": 25,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -1859,7 +1859,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Soro fisiológico 0,9% 500 mL (pré-cisplatina);days=d1].standardDose",
+          "campo": "itens[drug=Soro fisiológico 0,9% 500 mL (pré-cisplatina);classe=PRE_QT;days=d1].standardDose",
           "valor": 1,
           "unidade": "frasco",
           "situacao": "PADRAO_LOCAL",
@@ -1869,7 +1869,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Sulfato de magnésio 10% 10 mL;days=d1].standardDose",
+          "campo": "itens[drug=Sulfato de magnésio 10% 10 mL;classe=PRE_QT;days=d1].standardDose",
           "valor": 10,
           "unidade": "mL",
           "situacao": "PADRAO_LOCAL",
@@ -1879,7 +1879,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Cloreto de potássio 19,1% 4 mL;days=d1].standardDose",
+          "campo": "itens[drug=Cloreto de potássio 19,1% 4 mL;classe=PRE_QT;days=d1].standardDose",
           "valor": 4,
           "unidade": "mL",
           "situacao": "PADRAO_LOCAL",
@@ -1889,7 +1889,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Cisplatina;days=d1].standardDose",
+          "campo": "itens[drug=Cisplatina;classe=QT;days=d1].standardDose",
           "valor": 40,
           "unidade": "mg/m²",
           "situacao": "DOCUMENTADO",
@@ -1902,7 +1902,7 @@
           "aprovacaoClinica": null
         },
         {
-          "campo": "itens[drug=Manitol 20% frasco 250 mL;days=d1].standardDose",
+          "campo": "itens[drug=Manitol 20% frasco 250 mL;classe=QT;days=d1].standardDose",
           "valor": 1,
           "unidade": "frasco",
           "situacao": "PADRAO_LOCAL",
@@ -1912,7 +1912,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Soro fisiológico 0,9% 500 mL (pós-cisplatina);days=d1].standardDose",
+          "campo": "itens[drug=Soro fisiológico 0,9% 500 mL (pós-cisplatina);classe=POS_QT;days=d1].standardDose",
           "valor": 1,
           "unidade": "frasco",
           "situacao": "PADRAO_LOCAL",
@@ -1922,7 +1922,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Cloreto de potássio 19,1% 4 mL;days=d1].standardDose",
+          "campo": "itens[drug=Cloreto de potássio 19,1% 4 mL;classe=POS_QT;days=d1].standardDose",
           "valor": 4,
           "unidade": "mL",
           "situacao": "PADRAO_LOCAL",
@@ -1932,7 +1932,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem pós-QT);days=d1].standardDose",
+          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem pós-QT);classe=POS_QT;days=d1].standardDose",
           "valor": 1,
           "unidade": "frasco",
           "situacao": "PADRAO_LOCAL",
@@ -1962,7 +1962,7 @@
       ],
       "campos": [
         {
-          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem de acesso);days=d1].standardDose",
+          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem de acesso);classe=PRE_QT;days=d1].standardDose",
           "valor": 1,
           "unidade": "frasco",
           "situacao": "PADRAO_LOCAL",
@@ -1972,7 +1972,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Ondansetrona;days=d1].standardDose",
+          "campo": "itens[drug=Ondansetrona;classe=PRE_QT;days=d1].standardDose",
           "valor": 8,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -1982,7 +1982,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Dexametasona;days=d1].standardDose",
+          "campo": "itens[drug=Dexametasona;classe=PRE_QT;days=d1].standardDose",
           "valor": 10,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -1992,7 +1992,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Prometazina;days=d1].standardDose",
+          "campo": "itens[drug=Prometazina;classe=PRE_QT;days=d1].standardDose",
           "valor": 25,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -2002,7 +2002,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Cimetidina;days=d1].standardDose",
+          "campo": "itens[drug=Cimetidina;classe=PRE_QT;days=d1].standardDose",
           "valor": 300,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -2012,7 +2012,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Paclitaxel;days=d1].standardDose",
+          "campo": "itens[drug=Paclitaxel;classe=QT;days=d1].standardDose",
           "valor": 175,
           "unidade": "mg/m²",
           "situacao": "DOCUMENTADO",
@@ -2024,7 +2024,7 @@
           "aprovacaoClinica": null
         },
         {
-          "campo": "itens[drug=Carboplatina;days=d1].standardDose",
+          "campo": "itens[drug=Carboplatina;classe=QT;days=d1].standardDose",
           "valor": 6,
           "unidade": "AUC",
           "situacao": "DOCUMENTADO",
@@ -2036,7 +2036,7 @@
           "aprovacaoClinica": null
         },
         {
-          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem pós-QT);days=d1].standardDose",
+          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem pós-QT);classe=POS_QT;days=d1].standardDose",
           "valor": 1,
           "unidade": "frasco",
           "situacao": "PADRAO_LOCAL",
@@ -2068,7 +2068,7 @@
       ],
       "campos": [
         {
-          "campo": "itens[drug=Cemiplimabe;days=d1].standardDose",
+          "campo": "itens[drug=Cemiplimabe;classe=QT;days=d1].standardDose",
           "valor": 350,
           "unidade": "mg",
           "situacao": "DOCUMENTADO",
@@ -2080,7 +2080,7 @@
           "aprovacaoClinica": null
         },
         {
-          "campo": "itens[drug=Soro fisiológico 0,9% 50 mL (flush pós-infusão);days=d1].standardDose",
+          "campo": "itens[drug=Soro fisiológico 0,9% 50 mL (flush pós-infusão);classe=POS_QT;days=d1].standardDose",
           "valor": 1,
           "unidade": "frasco",
           "situacao": "PADRAO_LOCAL",
@@ -2110,7 +2110,7 @@
       ],
       "campos": [
         {
-          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem de acesso);days=d1].standardDose",
+          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem de acesso);classe=PRE_QT;days=d1].standardDose",
           "valor": 1,
           "unidade": "frasco",
           "situacao": "PADRAO_LOCAL",
@@ -2120,7 +2120,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Ondansetrona;days=d1].standardDose",
+          "campo": "itens[drug=Ondansetrona;classe=PRE_QT;days=d1].standardDose",
           "valor": 8,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -2130,7 +2130,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Dexametasona;days=d1].standardDose",
+          "campo": "itens[drug=Dexametasona;classe=PRE_QT;days=d1].standardDose",
           "valor": 10,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -2140,7 +2140,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Prometazina;days=d1].standardDose",
+          "campo": "itens[drug=Prometazina;classe=PRE_QT;days=d1].standardDose",
           "valor": 25,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -2150,7 +2150,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Cimetidina;days=d1].standardDose",
+          "campo": "itens[drug=Cimetidina;classe=PRE_QT;days=d1].standardDose",
           "valor": 300,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -2160,7 +2160,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Paclitaxel;days=d1].standardDose",
+          "campo": "itens[drug=Paclitaxel;classe=QT;days=d1].standardDose",
           "valor": 175,
           "unidade": "mg/m²",
           "situacao": "DOCUMENTADO",
@@ -2172,7 +2172,7 @@
           "aprovacaoClinica": null
         },
         {
-          "campo": "itens[drug=Carboplatina;days=d1].standardDose",
+          "campo": "itens[drug=Carboplatina;classe=QT;days=d1].standardDose",
           "valor": 5,
           "unidade": "AUC",
           "situacao": "DOCUMENTADO",
@@ -2184,7 +2184,7 @@
           "aprovacaoClinica": null
         },
         {
-          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem pós-QT);days=d1].standardDose",
+          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem pós-QT);classe=POS_QT;days=d1].standardDose",
           "valor": 1,
           "unidade": "frasco",
           "situacao": "PADRAO_LOCAL",
@@ -2215,7 +2215,7 @@
       ],
       "campos": [
         {
-          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem de acesso);days=d1].standardDose",
+          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem de acesso);classe=PRE_QT;days=d1].standardDose",
           "valor": 1,
           "unidade": "frasco",
           "situacao": "PADRAO_LOCAL",
@@ -2225,7 +2225,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Ondansetrona;days=d1].standardDose",
+          "campo": "itens[drug=Ondansetrona;classe=PRE_QT;days=d1].standardDose",
           "valor": 8,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -2235,7 +2235,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Dexametasona;days=d1].standardDose",
+          "campo": "itens[drug=Dexametasona;classe=PRE_QT;days=d1].standardDose",
           "valor": 10,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -2245,7 +2245,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Prometazina;days=d1].standardDose",
+          "campo": "itens[drug=Prometazina;classe=PRE_QT;days=d1].standardDose",
           "valor": 25,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -2255,7 +2255,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Soro fisiológico 0,9% 500 mL (pré-cisplatina);days=d1].standardDose",
+          "campo": "itens[drug=Soro fisiológico 0,9% 500 mL (pré-cisplatina);classe=PRE_QT;days=d1].standardDose",
           "valor": 1,
           "unidade": "frasco",
           "situacao": "PADRAO_LOCAL",
@@ -2265,7 +2265,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Sulfato de magnésio 10% 10 mL;days=d1].standardDose",
+          "campo": "itens[drug=Sulfato de magnésio 10% 10 mL;classe=PRE_QT;days=d1].standardDose",
           "valor": 10,
           "unidade": "mL",
           "situacao": "PADRAO_LOCAL",
@@ -2275,7 +2275,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Cloreto de potássio 19,1% 4 mL;days=d1].standardDose",
+          "campo": "itens[drug=Cloreto de potássio 19,1% 4 mL;classe=PRE_QT;days=d1].standardDose",
           "valor": 4,
           "unidade": "mL",
           "situacao": "PADRAO_LOCAL",
@@ -2285,7 +2285,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Cisplatina;days=d1].standardDose",
+          "campo": "itens[drug=Cisplatina;classe=QT;days=d1].standardDose",
           "valor": 40,
           "unidade": "mg/m²",
           "situacao": "DOCUMENTADO",
@@ -2297,7 +2297,7 @@
           "aprovacaoClinica": null
         },
         {
-          "campo": "itens[drug=Manitol 20% frasco 250 mL;days=d1].standardDose",
+          "campo": "itens[drug=Manitol 20% frasco 250 mL;classe=QT;days=d1].standardDose",
           "valor": 1,
           "unidade": "frasco",
           "situacao": "PADRAO_LOCAL",
@@ -2307,7 +2307,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Soro fisiológico 0,9% 500 mL (pós-cisplatina);days=d1].standardDose",
+          "campo": "itens[drug=Soro fisiológico 0,9% 500 mL (pós-cisplatina);classe=POS_QT;days=d1].standardDose",
           "valor": 1,
           "unidade": "frasco",
           "situacao": "PADRAO_LOCAL",
@@ -2317,7 +2317,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Cloreto de potássio 19,1% 4 mL;days=d1].standardDose",
+          "campo": "itens[drug=Cloreto de potássio 19,1% 4 mL;classe=POS_QT;days=d1].standardDose",
           "valor": 4,
           "unidade": "mL",
           "situacao": "PADRAO_LOCAL",
@@ -2327,7 +2327,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem pós-QT);days=d1].standardDose",
+          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem pós-QT);classe=POS_QT;days=d1].standardDose",
           "valor": 1,
           "unidade": "frasco",
           "situacao": "PADRAO_LOCAL",
@@ -2358,7 +2358,7 @@
       ],
       "campos": [
         {
-          "campo": "itens[drug=Pembrolizumabe;days=d1].standardDose",
+          "campo": "itens[drug=Pembrolizumabe;classe=QT;days=d1].standardDose",
           "valor": 200,
           "unidade": "mg",
           "situacao": "DOCUMENTADO_POR_DECISAO_LOCAL",
@@ -2392,7 +2392,7 @@
       ],
       "campos": [
         {
-          "campo": "itens[drug=Metotrexato;days=d1,d3,d5,d7].standardDose",
+          "campo": "itens[drug=Metotrexato;classe=QT;days=d1,d3,d5,d7].standardDose",
           "valor": 50,
           "unidade": "mg",
           "situacao": "DOCUMENTADO",
@@ -2405,7 +2405,7 @@
           "aprovacaoClinica": null
         },
         {
-          "campo": "itens[drug=Ácido folínico (resgate);days=d2,d4,d6,d8].standardDose",
+          "campo": "itens[drug=Ácido folínico (resgate);classe=QT;days=d2,d4,d6,d8].standardDose",
           "valor": 7.5,
           "unidade": "mg",
           "situacao": "DOCUMENTADO",
@@ -2439,7 +2439,7 @@
       ],
       "campos": [
         {
-          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem de acesso);days=d1].standardDose",
+          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem de acesso);classe=PRE_QT;days=d1].standardDose",
           "valor": 1,
           "unidade": "frasco",
           "situacao": "PADRAO_LOCAL",
@@ -2449,7 +2449,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Ondansetrona;days=d1].standardDose",
+          "campo": "itens[drug=Ondansetrona;classe=PRE_QT;days=d1].standardDose",
           "valor": 8,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -2459,7 +2459,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Dexametasona;days=d1].standardDose",
+          "campo": "itens[drug=Dexametasona;classe=PRE_QT;days=d1].standardDose",
           "valor": 10,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -2469,7 +2469,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Prometazina;days=d1].standardDose",
+          "campo": "itens[drug=Prometazina;classe=PRE_QT;days=d1].standardDose",
           "valor": 25,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -2479,7 +2479,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Dactinomicina;days=d1].standardDose",
+          "campo": "itens[drug=Dactinomicina;classe=QT;days=d1].standardDose",
           "valor": 1.25,
           "unidade": "mg/m²",
           "situacao": "DOCUMENTADO",
@@ -2492,7 +2492,7 @@
           "aprovacaoClinica": null
         },
         {
-          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem pós-QT);days=d1].standardDose",
+          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem pós-QT);classe=POS_QT;days=d1].standardDose",
           "valor": 1,
           "unidade": "frasco",
           "situacao": "PADRAO_LOCAL",
@@ -2521,7 +2521,7 @@
       ],
       "campos": [
         {
-          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem de acesso);days=d1,d2,d8].standardDose",
+          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem de acesso);classe=PRE_QT;days=d1,d2,d8].standardDose",
           "valor": 1,
           "unidade": "frasco",
           "situacao": "PADRAO_LOCAL",
@@ -2531,7 +2531,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Ondansetrona;days=d1,d2,d8].standardDose",
+          "campo": "itens[drug=Ondansetrona;classe=PRE_QT;days=d1,d2,d8].standardDose",
           "valor": 8,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -2541,7 +2541,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Dexametasona;days=d1,d2,d8].standardDose",
+          "campo": "itens[drug=Dexametasona;classe=PRE_QT;days=d1,d2,d8].standardDose",
           "valor": 10,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -2551,7 +2551,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Prometazina;days=d1,d2,d8].standardDose",
+          "campo": "itens[drug=Prometazina;classe=PRE_QT;days=d1,d2,d8].standardDose",
           "valor": 25,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -2561,7 +2561,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Etoposídeo;days=d1,d2].standardDose",
+          "campo": "itens[drug=Etoposídeo;classe=QT;days=d1,d2].standardDose",
           "valor": 100,
           "unidade": "mg/m²",
           "situacao": "DOCUMENTADO",
@@ -2573,7 +2573,7 @@
           "aprovacaoClinica": null
         },
         {
-          "campo": "itens[drug=Metotrexato;days=d1].standardDose",
+          "campo": "itens[drug=Metotrexato;classe=QT;days=d1].standardDose",
           "valor": 300,
           "unidade": "mg/m²",
           "situacao": "DOCUMENTADO",
@@ -2585,7 +2585,7 @@
           "aprovacaoClinica": null
         },
         {
-          "campo": "itens[drug=Dactinomicina;days=d1,d2].standardDose",
+          "campo": "itens[drug=Dactinomicina;classe=QT;days=d1,d2].standardDose",
           "valor": 0.5,
           "unidade": "mg",
           "situacao": "DOCUMENTADO",
@@ -2597,7 +2597,7 @@
           "aprovacaoClinica": null
         },
         {
-          "campo": "itens[drug=Folinato de cálcio (resgate do MTX +24 h);days=d2].standardDose",
+          "campo": "itens[drug=Folinato de cálcio (resgate do MTX +24 h);classe=QT;days=d2].standardDose",
           "valor": 15,
           "unidade": "mg",
           "situacao": "DOCUMENTADO",
@@ -2609,7 +2609,7 @@
           "aprovacaoClinica": null
         },
         {
-          "campo": "itens[drug=Folinato de cálcio (resgate do MTX +36 h);days=d2].standardDose",
+          "campo": "itens[drug=Folinato de cálcio (resgate do MTX +36 h);classe=QT;days=d2].standardDose",
           "valor": 15,
           "unidade": "mg",
           "situacao": "DOCUMENTADO",
@@ -2621,7 +2621,7 @@
           "aprovacaoClinica": null
         },
         {
-          "campo": "itens[drug=Folinato de cálcio (resgate do MTX +48 h);days=d3].standardDose",
+          "campo": "itens[drug=Folinato de cálcio (resgate do MTX +48 h);classe=QT;days=d3].standardDose",
           "valor": 15,
           "unidade": "mg",
           "situacao": "DOCUMENTADO",
@@ -2633,7 +2633,7 @@
           "aprovacaoClinica": null
         },
         {
-          "campo": "itens[drug=Folinato de cálcio (resgate do MTX +60 h);days=d3].standardDose",
+          "campo": "itens[drug=Folinato de cálcio (resgate do MTX +60 h);classe=QT;days=d3].standardDose",
           "valor": 15,
           "unidade": "mg",
           "situacao": "DOCUMENTADO",
@@ -2645,7 +2645,7 @@
           "aprovacaoClinica": null
         },
         {
-          "campo": "itens[drug=Vincristina;days=d8].standardDose",
+          "campo": "itens[drug=Vincristina;classe=QT;days=d8].standardDose",
           "valor": 0.8,
           "unidade": "mg/m²",
           "situacao": "DOCUMENTADO",
@@ -2657,7 +2657,7 @@
           "aprovacaoClinica": null
         },
         {
-          "campo": "itens[drug=Ciclofosfamida;days=d8].standardDose",
+          "campo": "itens[drug=Ciclofosfamida;classe=QT;days=d8].standardDose",
           "valor": 600,
           "unidade": "mg/m²",
           "situacao": "DOCUMENTADO",
@@ -2669,7 +2669,7 @@
           "aprovacaoClinica": null
         },
         {
-          "campo": "itens[drug=Filgrastim;days=d3-d5,d9-d11].standardDose",
+          "campo": "itens[drug=Filgrastim;classe=POS_QT;days=d3-d5,d9-d11].standardDose",
           "valor": 5,
           "unidade": "µg/kg",
           "situacao": "DOCUMENTADO",
@@ -2681,7 +2681,7 @@
           "aprovacaoClinica": null
         },
         {
-          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem pós-QT);days=d1,d2,d8].standardDose",
+          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem pós-QT);classe=POS_QT;days=d1,d2,d8].standardDose",
           "valor": 1,
           "unidade": "frasco",
           "situacao": "PADRAO_LOCAL",
@@ -2711,7 +2711,7 @@
       ],
       "campos": [
         {
-          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem de acesso);days=d1,d8].standardDose",
+          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem de acesso);classe=PRE_QT;days=d1,d8].standardDose",
           "valor": 1,
           "unidade": "frasco",
           "situacao": "PADRAO_LOCAL",
@@ -2721,7 +2721,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Ondansetrona;days=d1,d8].standardDose",
+          "campo": "itens[drug=Ondansetrona;classe=PRE_QT;days=d1,d8].standardDose",
           "valor": 8,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -2731,7 +2731,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Dexametasona;days=d1,d8].standardDose",
+          "campo": "itens[drug=Dexametasona;classe=PRE_QT;days=d1,d8].standardDose",
           "valor": 10,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -2741,7 +2741,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Prometazina;days=d1,d8].standardDose",
+          "campo": "itens[drug=Prometazina;classe=PRE_QT;days=d1,d8].standardDose",
           "valor": 25,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -2751,7 +2751,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Dactinomicina;days=d1].standardDose",
+          "campo": "itens[drug=Dactinomicina;classe=QT;days=d1].standardDose",
           "valor": 0.5,
           "unidade": "mg",
           "situacao": "DOCUMENTADO",
@@ -2763,7 +2763,7 @@
           "aprovacaoClinica": null
         },
         {
-          "campo": "itens[drug=Etoposídeo;days=d1].standardDose",
+          "campo": "itens[drug=Etoposídeo;classe=QT;days=d1].standardDose",
           "valor": 100,
           "unidade": "mg/m²",
           "situacao": "DOCUMENTADO",
@@ -2776,7 +2776,7 @@
           "aprovacaoClinica": null
         },
         {
-          "campo": "itens[drug=Metotrexato;days=d1].standardDose",
+          "campo": "itens[drug=Metotrexato;classe=QT;days=d1].standardDose",
           "valor": 300,
           "unidade": "mg/m²",
           "situacao": "DOCUMENTADO",
@@ -2788,7 +2788,7 @@
           "aprovacaoClinica": null
         },
         {
-          "campo": "itens[drug=Folinato de cálcio (resgate do MTX +24 h);days=d2].standardDose",
+          "campo": "itens[drug=Folinato de cálcio (resgate do MTX +24 h);classe=QT;days=d2].standardDose",
           "valor": 15,
           "unidade": "mg",
           "situacao": "DOCUMENTADO",
@@ -2800,7 +2800,7 @@
           "aprovacaoClinica": null
         },
         {
-          "campo": "itens[drug=Folinato de cálcio (resgate do MTX +36 h);days=d2].standardDose",
+          "campo": "itens[drug=Folinato de cálcio (resgate do MTX +36 h);classe=QT;days=d2].standardDose",
           "valor": 15,
           "unidade": "mg",
           "situacao": "DOCUMENTADO",
@@ -2812,7 +2812,7 @@
           "aprovacaoClinica": null
         },
         {
-          "campo": "itens[drug=Folinato de cálcio (resgate do MTX +48 h);days=d3].standardDose",
+          "campo": "itens[drug=Folinato de cálcio (resgate do MTX +48 h);classe=QT;days=d3].standardDose",
           "valor": 15,
           "unidade": "mg",
           "situacao": "DOCUMENTADO",
@@ -2824,7 +2824,7 @@
           "aprovacaoClinica": null
         },
         {
-          "campo": "itens[drug=Folinato de cálcio (resgate do MTX +60 h);days=d3].standardDose",
+          "campo": "itens[drug=Folinato de cálcio (resgate do MTX +60 h);classe=QT;days=d3].standardDose",
           "valor": 15,
           "unidade": "mg",
           "situacao": "DOCUMENTADO",
@@ -2836,7 +2836,7 @@
           "aprovacaoClinica": null
         },
         {
-          "campo": "itens[drug=Etoposídeo (D8, 150 mg/m²);days=d8].standardDose",
+          "campo": "itens[drug=Etoposídeo (D8, 150 mg/m²);classe=QT;days=d8].standardDose",
           "valor": 150,
           "unidade": "mg/m²",
           "situacao": "DOCUMENTADO",
@@ -2849,7 +2849,7 @@
           "aprovacaoClinica": null
         },
         {
-          "campo": "itens[drug=Soro fisiológico 0,9% 500 mL (pré-cisplatina);days=d8].standardDose",
+          "campo": "itens[drug=Soro fisiológico 0,9% 500 mL (pré-cisplatina);classe=PRE_QT;days=d8].standardDose",
           "valor": 1,
           "unidade": "frasco",
           "situacao": "PADRAO_LOCAL",
@@ -2859,7 +2859,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Sulfato de magnésio 10% 10 mL;days=d8].standardDose",
+          "campo": "itens[drug=Sulfato de magnésio 10% 10 mL;classe=PRE_QT;days=d8].standardDose",
           "valor": 10,
           "unidade": "mL",
           "situacao": "PADRAO_LOCAL",
@@ -2869,7 +2869,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Cloreto de potássio 19,1% 4 mL;days=d8].standardDose",
+          "campo": "itens[drug=Cloreto de potássio 19,1% 4 mL;classe=PRE_QT;days=d8].standardDose",
           "valor": 4,
           "unidade": "mL",
           "situacao": "PADRAO_LOCAL",
@@ -2879,7 +2879,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Cisplatina;days=d8].standardDose",
+          "campo": "itens[drug=Cisplatina;classe=QT;days=d8].standardDose",
           "valor": 75,
           "unidade": "mg/m²",
           "situacao": "DOCUMENTADO",
@@ -2892,7 +2892,7 @@
           "aprovacaoClinica": null
         },
         {
-          "campo": "itens[drug=Manitol 20% frasco 250 mL;days=d8].standardDose",
+          "campo": "itens[drug=Manitol 20% frasco 250 mL;classe=QT;days=d8].standardDose",
           "valor": 1,
           "unidade": "frasco",
           "situacao": "PADRAO_LOCAL",
@@ -2902,7 +2902,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Soro fisiológico 0,9% 500 mL (pós-cisplatina);days=d8].standardDose",
+          "campo": "itens[drug=Soro fisiológico 0,9% 500 mL (pós-cisplatina);classe=POS_QT;days=d8].standardDose",
           "valor": 1,
           "unidade": "frasco",
           "situacao": "PADRAO_LOCAL",
@@ -2912,7 +2912,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Cloreto de potássio 19,1% 4 mL;days=d8].standardDose",
+          "campo": "itens[drug=Cloreto de potássio 19,1% 4 mL;classe=POS_QT;days=d8].standardDose",
           "valor": 4,
           "unidade": "mL",
           "situacao": "PADRAO_LOCAL",
@@ -2922,7 +2922,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem pós-QT);days=d1,d8].standardDose",
+          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem pós-QT);classe=POS_QT;days=d1,d8].standardDose",
           "valor": 1,
           "unidade": "frasco",
           "situacao": "PADRAO_LOCAL",
@@ -2951,7 +2951,7 @@
       ],
       "campos": [
         {
-          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem de acesso);days=d1,d2].standardDose",
+          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem de acesso);classe=PRE_QT;days=d1,d2].standardDose",
           "valor": 1,
           "unidade": "frasco",
           "situacao": "PADRAO_LOCAL",
@@ -2961,7 +2961,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Ondansetrona;days=d1,d2].standardDose",
+          "campo": "itens[drug=Ondansetrona;classe=PRE_QT;days=d1,d2].standardDose",
           "valor": 8,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -2971,7 +2971,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Dexametasona;days=d1,d2].standardDose",
+          "campo": "itens[drug=Dexametasona;classe=PRE_QT;days=d1,d2].standardDose",
           "valor": 10,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -2981,7 +2981,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Prometazina;days=d1,d2].standardDose",
+          "campo": "itens[drug=Prometazina;classe=PRE_QT;days=d1,d2].standardDose",
           "valor": 25,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -2991,7 +2991,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Etoposídeo;days=d1,d2].standardDose",
+          "campo": "itens[drug=Etoposídeo;classe=QT;days=d1,d2].standardDose",
           "valor": 100,
           "unidade": "mg/m²",
           "situacao": "DOCUMENTADO",
@@ -3004,7 +3004,7 @@
           "aprovacaoClinica": null
         },
         {
-          "campo": "itens[drug=Soro fisiológico 0,9% 500 mL (pré-cisplatina);days=d1,d2].standardDose",
+          "campo": "itens[drug=Soro fisiológico 0,9% 500 mL (pré-cisplatina);classe=PRE_QT;days=d1,d2].standardDose",
           "valor": 1,
           "unidade": "frasco",
           "situacao": "PADRAO_LOCAL",
@@ -3014,7 +3014,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Sulfato de magnésio 10% 10 mL;days=d1,d2].standardDose",
+          "campo": "itens[drug=Sulfato de magnésio 10% 10 mL;classe=PRE_QT;days=d1,d2].standardDose",
           "valor": 10,
           "unidade": "mL",
           "situacao": "PADRAO_LOCAL",
@@ -3024,7 +3024,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Cloreto de potássio 19,1% 4 mL;days=d1,d2].standardDose",
+          "campo": "itens[drug=Cloreto de potássio 19,1% 4 mL;classe=PRE_QT;days=d1,d2].standardDose",
           "valor": 4,
           "unidade": "mL",
           "situacao": "PADRAO_LOCAL",
@@ -3034,7 +3034,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Cisplatina;days=d1,d2].standardDose",
+          "campo": "itens[drug=Cisplatina;classe=QT;days=d1,d2].standardDose",
           "valor": 20,
           "unidade": "mg/m²",
           "situacao": "DOCUMENTADO",
@@ -3047,7 +3047,7 @@
           "aprovacaoClinica": null
         },
         {
-          "campo": "itens[drug=Manitol 20% frasco 250 mL;days=d1,d2].standardDose",
+          "campo": "itens[drug=Manitol 20% frasco 250 mL;classe=QT;days=d1,d2].standardDose",
           "valor": 1,
           "unidade": "frasco",
           "situacao": "PADRAO_LOCAL",
@@ -3057,7 +3057,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Soro fisiológico 0,9% 500 mL (pós-cisplatina);days=d1,d2].standardDose",
+          "campo": "itens[drug=Soro fisiológico 0,9% 500 mL (pós-cisplatina);classe=POS_QT;days=d1,d2].standardDose",
           "valor": 1,
           "unidade": "frasco",
           "situacao": "PADRAO_LOCAL",
@@ -3067,7 +3067,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Cloreto de potássio 19,1% 4 mL;days=d1,d2].standardDose",
+          "campo": "itens[drug=Cloreto de potássio 19,1% 4 mL;classe=POS_QT;days=d1,d2].standardDose",
           "valor": 4,
           "unidade": "mL",
           "situacao": "PADRAO_LOCAL",
@@ -3077,7 +3077,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem pós-QT);days=d1,d2].standardDose",
+          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem pós-QT);classe=POS_QT;days=d1,d2].standardDose",
           "valor": 1,
           "unidade": "frasco",
           "situacao": "PADRAO_LOCAL",
