@@ -20,10 +20,10 @@ it("retira item consultável após revisão e confirmação explícita, limpando
   let obsoleto = false;
   const referencia = {id:"fixture",versao:"1.0.0",hash};
   const api: ApiBiblioteca = {
-    estado: vi.fn(async (pacoteId?:string) => ({ ativa:"fixture@1.0.0",referencia,pacoteId:pacoteId??null,hash:pacoteId?hash:null,ativacao:null,
+    estado: vi.fn(async (pacoteId?:string) => ({ ativa:"fixture@1.0.0",referencia,pacoteId:pacoteId??null,hash:pacoteId?hash:null,curadoriaHash:obsoleto?"b".repeat(64):hash,ativacao:null,
       pacotes:[{pacoteId:"fixture@1.0.0",versao:"1.0.0",hash,ativo:true,itens:[{id:item.id,estado:obsoleto?"OBSOLETO" as const:"CONSULTAVEL" as const}]}],
       itens:pacoteId?[{...item,estado:obsoleto?"OBSOLETO" as const:"CONSULTAVEL" as const}]:[] })),
-    curar:vi.fn(async () => {obsoleto=true;return {codigo:"ITEM_CURADO"};}),
+    curar:vi.fn(async pedido => {obsoleto=pedido.estado==="OBSOLETO";return {codigo:"ITEM_CURADO"};}),
     consultar:vi.fn(async()=>({itens:obsoleto?[]:[item],referencia})), importar:vi.fn(),ativar:vi.fn(),rollback:vi.fn(),
   };
   const confirmar=vi.spyOn(window,"confirm").mockReturnValue(false);
@@ -44,6 +44,13 @@ it("retira item consultável após revisão e confirmação explícita, limpando
   expect(within(consulta).queryByText("Texto público de exemplo.")).toBeNull();
   fireEvent.click(screen.getByRole("button",{name:"Consultar"}));
   await within(consulta).findByText("Nenhum resultado para estes filtros.");
+  const restaurar=screen.getByRole("button",{name:"Marcar CONSULTAVEL"}) as HTMLButtonElement;
+  expect(restaurar.disabled).toBe(true);
+  fireEvent.click(screen.getByLabelText(/Li e conferi o conteúdo e a fonte/));
+  confirmar.mockReturnValue(false);fireEvent.click(restaurar);
+  expect(api.curar).toHaveBeenCalledTimes(1);
+  confirmar.mockReturnValue(true);fireEvent.click(restaurar);
+  await waitFor(()=>expect(api.curar).toHaveBeenLastCalledWith({pacoteId:"fixture@1.0.0",itemId:item.id,expectedHash:hash,estado:"CONSULTAVEL"}));
 });
 
 it("importa como rascunho e só cura/ativa após exibir e confirmar conteúdo e versão", async () => {
@@ -51,7 +58,7 @@ it("importa como rascunho e só cura/ativa após exibir e confirmar conteúdo e 
   const pacote = { pacoteId: "fixture@1.0.0", versao: "1.0.0", hash, ativo: false, itens: [{ id: item.id, estado: curado ? "CONSULTAVEL" as const : "RASCUNHO" as const }] };
   const estado = vi.fn(async (pacoteId?: string): Promise<BibliotecaEstado> => ({
     ativa, referencia: ativa ? { id: "fixture", versao: "1.0.0", hash } : null,
-    pacoteId: pacoteId ?? null, hash: pacoteId ? hash : null, ativacao: null,
+    pacoteId: pacoteId ?? null, hash: pacoteId ? hash : null, curadoriaHash: pacoteId ? (curado ? "b".repeat(64) : hash) : null, ativacao: null,
     pacotes: [{ ...pacote, ativo: ativa === pacote.pacoteId }],
     itens: pacoteId ? [{ ...item, estado: curado ? "CONSULTAVEL" : "RASCUNHO", curadoria: curado ? { ator: "medico", registradoEm: "2026-01-03T00:00:00Z" } : null }] : [],
   }));
@@ -84,10 +91,11 @@ it("importa como rascunho e só cura/ativa após exibir e confirmar conteúdo e 
   fireEvent.click(confirmarItem);
   fireEvent.click(curar);
   await waitFor(() => expect(api.curar).toHaveBeenCalledWith({ pacoteId: pacote.pacoteId, itemId: item.id, expectedHash: hash, estado: "CONSULTAVEL" }));
-  await waitFor(() => expect(confirmarItem.checked).toBe(true));
+  await waitFor(() => expect(confirmarItem.checked).toBe(false));
+  fireEvent.click(confirmarItem);
   fireEvent.click(screen.getByLabelText(/Revisei a versão, o hash e os itens exibidos/));
   fireEvent.click(screen.getByRole("button", { name: "Ativar pacote revisado" }));
-  await waitFor(() => expect(api.ativar).toHaveBeenCalledWith({ pacoteId: pacote.pacoteId, expectedHash: hash }));
+  await waitFor(() => expect(api.ativar).toHaveBeenCalledWith({ pacoteId: pacote.pacoteId, expectedHash: hash, expectedCuradoriaHash: "b".repeat(64) }));
   expect(window.confirm).toHaveBeenCalled();
 });
 

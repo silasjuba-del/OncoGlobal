@@ -13,7 +13,7 @@ const Hash=z.string().regex(/^[a-f0-9]{64}$/),Id=z.string().min(1).max(250);
 const Conteudo=z.union([z.object({texto:z.string().max(1000000)}).strict(),z.object({base64:z.string().max(1400000).regex(/^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$/)}).strict()]);
 const Importar=z.object({manifesto:ManifestoBiblioteca,arquivos:z.record(z.string().regex(/^[a-zA-Z0-9_-]+\.json$/),Conteudo)}).strict();
 const Curar=z.object({pacoteId:Id,itemId:Id,expectedHash:Hash,estado:z.enum(['CONSULTAVEL','ALERTA','OBSOLETO'])}).strict();
-const Ativar=z.object({pacoteId:Id,expectedHash:Hash}).strict();
+const Ativar=z.object({pacoteId:Id,expectedHash:Hash,expectedCuradoriaHash:Hash}).strict();
 const Rollback=z.object({expectedAtiva:Id,expectedHash:Hash}).strict();
 const Filtros=z.object({tumor:z.string().optional(),histologia:z.string().optional(),estadio:z.string().optional(),biomarcador:z.string().optional(),linha:z.string().optional()}).strict();
 const Consultar=z.object({filtros:Filtros,modo:z.enum(['CONSULTA','ALERTA']).default('CONSULTA')}).strict();
@@ -21,6 +21,12 @@ const Estado=z.object({pacoteId:Id.optional()}).strict();
 function pacote(db:DatabaseSync,id:string) {return db.prepare('SELECT conteudo,hash FROM biblioteca_pacote WHERE id=?').get(id);}
 function conferirHash(db:DatabaseSync,id:string,hash:string):void {
  const p=pacote(db,id);if(!p||p.hash!==hash||sha256Biblioteca(String(p.conteudo))!==p.hash)throw new Error('PACOTE_HASH_DIVERGENTE');
+}
+/** Revisão do pacote selecionado, inclusive inativo; seq impede aceitar um ciclo OBSOLETO→CONSULTAVEL como revisão antiga. */
+export function hashCuradoriaPacote(db:DatabaseSync,id:string):string {
+ const p=pacote(db,id);if(!p)throw Error('PACOTE_AUSENTE');conferirHash(db,id,String(p.hash));
+ const estados=db.prepare('SELECT item,estado,seq FROM biblioteca_curadoria a WHERE pacote=? AND seq=(SELECT max(seq) FROM biblioteca_curadoria b WHERE b.pacote=a.pacote AND b.item=a.item) ORDER BY item').all(id);
+ return hashCanonico({pacoteHash:p.hash,estados});
 }
 /** Hash de conteúdo e curadoria efetiva: mudança de aprovação invalida avaliação em aberto. */
 export function referenciaBibliotecaAtiva(db:DatabaseSync):{id:string;versao:string;hash:string}|null {
@@ -67,7 +73,10 @@ export function rotearBiblioteca(deps:DepsBiblioteca,token:string,rota:string,bo
    return {status:200,body:{codigo:'ITEM_CURADO',estado:p.estado,referencia:referenciaBibliotecaAtiva(deps.db)}};
   }
   if(rota==='/biblioteca/ativar'){
-   const p=Ativar.parse(body);conferirHash(deps.db,p.pacoteId,p.expectedHash);lib.ativar(p.pacoteId);
+   const p=Ativar.parse(body);
+   transacao(deps.db,()=>{conferirHash(deps.db,p.pacoteId,p.expectedHash);
+    if(hashCuradoriaPacote(deps.db,p.pacoteId)!==p.expectedCuradoriaHash)throw Error('BIBLIOTECA_REVISAO_DIVERGENTE');
+    lib.ativar(p.pacoteId);});
    return {status:200,body:{codigo:'BIBLIOTECA_ATIVADA',referencia:referenciaBibliotecaAtiva(deps.db)}};
   }
   if(rota==='/biblioteca/rollback'){
@@ -89,7 +98,7 @@ export function rotearBiblioteca(deps:DepsBiblioteca,token:string,rota:string,bo
    return {pacoteId:r.id,versao:manifesto.versao,hash:r.hash,ativo:r.id===ativaId,
     itens:lib.listar(r.id).map(i=>({id:i.id,estado:i.estado}))};
   });
-  return {status:200,body:{ativa:lib.ativa(),referencia:referenciaBibliotecaAtiva(deps.db),pacoteId:id,hash:row?.hash??null,
+  return {status:200,body:{ativa:lib.ativa(),referencia:referenciaBibliotecaAtiva(deps.db),pacoteId:id,hash:row?.hash??null,curadoriaHash:id?hashCuradoriaPacote(deps.db,id):null,
     ativacao:ativacao??null,pacotes,itens:id?lib.listar(id):[]}};
  }catch(error){return {status:error instanceof z.ZodError?400:409,body:{codigo:error instanceof z.ZodError?'BIBLIOTECA_PEDIDO_INVALIDO':error instanceof Error&&/^[A-Z_]+$/.test(error.message)?error.message:'BIBLIOTECA_OPERACAO_RECUSADA'}};}
 }

@@ -15,11 +15,30 @@ async function ambiente(){
  const db=abrirLedger(':memory:'),agora=()=> instante;
  const sessoes=criarGerenciadorSessao({medicoId:'medico',crm:'SINTETICO',senha:'segredo-sintetico-123',duracaoMs:3600000,agora});
  const auth=sessoes.login('segredo-sintetico-123')!;const deps={db,sessoes,agora};
- const server=createServer(async(req,res)=>{let raw='';for await(const part of req)raw+=part;const token=String(req.headers.authorization??'').replace('Bearer ','');const result=rotearBiblioteca(deps,token,req.url!,JSON.parse(raw),auth.sessao);res.writeHead(result?.status??404,{'Content-Type':'application/json'});res.end(JSON.stringify(result?.body??{}));});
+ const server=createServer(async(req,res)=>{let raw='';for await(const part of req)raw+=part;const token=String(req.headers.authorization??'').replace('Bearer ','');const result=rotearBiblioteca(deps,token,req.url!,JSON.parse(raw),sessoes.obter(token)??auth.sessao);res.writeHead(result?.status??404,{'Content-Type':'application/json'});res.end(JSON.stringify(result?.body??{}));});
  await new Promise<void>(resolve=>server.listen(0,'127.0.0.1',resolve));const base=`http://127.0.0.1:${(server.address() as AddressInfo).port}`;
- return {db,auth,relogio(valor:string){instante=valor;},async post(rota:string,body:unknown,token=auth.token){const r=await fetch(base+rota,{method:'POST',headers:{authorization:`Bearer ${token}`,'Content-Type':'application/json'},body:JSON.stringify(body)});return {status:r.status,body:await r.json() as Record<string,any>};},async close(){await new Promise<void>((resolve,reject)=>server.close(e=>e?reject(e):resolve()));db.close();}};
+ return {db,auth,novaSessao:()=>sessoes.login('segredo-sintetico-123')!,relogio(valor:string){instante=valor;},async post(rota:string,body:unknown,token=auth.token){const r=await fetch(base+rota,{method:'POST',headers:{authorization:`Bearer ${token}`,'Content-Type':'application/json'},body:JSON.stringify(body)});return {status:r.status,body:await r.json() as Record<string,any>};},async close(){await new Promise<void>((resolve,reject)=>server.close(e=>e?reject(e):resolve()));db.close();}};
 }
 describe('S3 biblioteca manual no HTTP real',()=>{
+ it('recusa ativação com curadoria alterada por outra sessão, inclusive retorno ao mesmo estado',async()=>{
+  const a=await ambiente();try {
+   const outra=a.novaSessao();const p=await a.post('/biblioteca/importar',pacote());
+   const pedido={pacoteId:p.body.pacoteId,itemId:'item',expectedHash:p.body.hash};
+   await a.post('/biblioteca/curar',{...pedido,estado:'CONSULTAVEL'},outra.token);
+   const exibido=await a.post('/biblioteca/estado',{pacoteId:pedido.pacoteId});
+   const ativar={pacoteId:pedido.pacoteId,expectedHash:pedido.expectedHash,expectedCuradoriaHash:exibido.body.curadoriaHash};
+   await a.post('/biblioteca/curar',{...pedido,estado:'OBSOLETO'},outra.token);
+   expect(await a.post('/biblioteca/ativar',ativar)).toEqual({status:409,body:{codigo:'BIBLIOTECA_REVISAO_DIVERGENTE'}});
+   await a.post('/biblioteca/curar',{...pedido,estado:'CONSULTAVEL'},outra.token);
+   expect(await a.post('/biblioteca/ativar',ativar)).toEqual({status:409,body:{codigo:'BIBLIOTECA_REVISAO_DIVERGENTE'}});
+   expect(a.db.prepare('SELECT count(*) n FROM biblioteca_ativacao').get()?.n).toBe(0);
+   expect((await a.post('/biblioteca/ativar',{pacoteId:pedido.pacoteId,expectedHash:pedido.expectedHash})).status).toBe(400);
+   const atual=await a.post('/biblioteca/estado',{pacoteId:pedido.pacoteId});
+   expect(atual.body.hash).toBe(exibido.body.hash);
+   expect(atual.body.curadoriaHash).not.toBe(exibido.body.curadoriaHash);
+   expect((await a.post('/biblioteca/ativar',{...ativar,expectedCuradoriaHash:atual.body.curadoriaHash})).status).toBe(200);
+  }finally{await a.close();}
+ });
  it('relógio inválido recusa leitura e curadoria sem efeitos e se recupera',async()=>{
   const a=await ambiente();try {
    const p=await a.post('/biblioteca/importar',pacote());
@@ -42,10 +61,10 @@ describe('S3 biblioteca manual no HTTP real',()=>{
    expect(estado.body.itens).toMatchObject([{id:'item',estado:'RASCUNHO',titulo:'Fixture pública sintética',texto:'Texto manual, sem regra médica executável.',proveniencia:{fonte:'https://example.org/fixture'}}]);
    expect(estado.body.itens[0].curadoria).toBeNull();
    expect(estado.body.pacotes).toEqual([{pacoteId:id,versao:'1.0.0',hash,ativo:false,itens:[{id:'item',estado:'RASCUNHO'}]}]);
-   expect((await a.post('/biblioteca/ativar',{pacoteId:id,expectedHash:hash})).body.codigo).toBe('SEM_ITEM_APROVADO');
+   expect((await a.post('/biblioteca/ativar',{pacoteId:id,expectedHash:hash,expectedCuradoriaHash:(await a.post('/biblioteca/estado',{pacoteId:id})).body.curadoriaHash})).body.codigo).toBe('SEM_ITEM_APROVADO');
    expect((await a.post('/biblioteca/curar',{pacoteId:id,itemId:'item',expectedHash:hash,estado:'ALERTA'})).body.codigo).toBe('ALERTA_SEM_SCHEMA_EXECUTAVEL');
    expect((await a.post('/biblioteca/curar',{pacoteId:id,itemId:'item',expectedHash:hash,estado:'CONSULTAVEL'})).status).toBe(200);
-   const active=await a.post('/biblioteca/ativar',{pacoteId:id,expectedHash:hash});expect(active.status).toBe(200);expect(active.body.referencia.hash).toMatch(/^[a-f0-9]{64}$/);
+   const active=await a.post('/biblioteca/ativar',{pacoteId:id,expectedHash:hash,expectedCuradoriaHash:(await a.post('/biblioteca/estado',{pacoteId:id})).body.curadoriaHash});expect(active.status).toBe(200);expect(active.body.referencia.hash).toMatch(/^[a-f0-9]{64}$/);
    const aud=await a.post('/biblioteca/estado',{pacoteId:id});
    expect(respostaHttpValida('/biblioteca/estado',aud.status,aud.body)).toBe(true);
    expect(aud.body.itens[0].curadoria).toEqual({ator:'medico',registradoEm:'2026-10-12T10:00:00Z'});
@@ -55,7 +74,7 @@ describe('S3 biblioteca manual no HTTP real',()=>{
    const p2=pacote('2.0.0'),b64={...p2,arquivos:{'item.json':{base64:Buffer.from(p2.arquivos['item.json'].texto).toString('base64')}}};
    const second=await a.post('/biblioteca/importar',b64);expect(second.status).toBe(201);
    await a.post('/biblioteca/curar',{pacoteId:second.body.pacoteId,itemId:'item',expectedHash:second.body.hash,estado:'CONSULTAVEL'});
-   await a.post('/biblioteca/ativar',{pacoteId:second.body.pacoteId,expectedHash:second.body.hash});
+   await a.post('/biblioteca/ativar',{pacoteId:second.body.pacoteId,expectedHash:second.body.hash,expectedCuradoriaHash:(await a.post('/biblioteca/estado',{pacoteId:second.body.pacoteId})).body.curadoriaHash});
    const rollback=await a.post('/biblioteca/rollback',{expectedAtiva:second.body.pacoteId,expectedHash:second.body.hash});expect(rollback.body.referencia).toEqual(active.body.referencia);
    expect(a.db.prepare('SELECT count(*) AS n FROM estimulo_tecnico').get()?.n).toBe(3);
    expect(a.db.prepare('SELECT count(*) AS n FROM clinical_event').get()?.n).toBe(0);
@@ -90,14 +109,14 @@ describe('S3 biblioteca manual no HTTP real',()=>{
   const a=await ambiente();try {
    const p=await a.post('/biblioteca/importar',pacote());await a.post('/biblioteca/curar',{pacoteId:p.body.pacoteId,itemId:'item',expectedHash:p.body.hash,estado:'CONSULTAVEL'});
    a.db.exec("CREATE TRIGGER falha_emitir BEFORE INSERT ON estimulo_tecnico BEGIN SELECT RAISE(ABORT,'falha sintetica'); END;");
-   expect((await a.post('/biblioteca/ativar',{pacoteId:p.body.pacoteId,expectedHash:p.body.hash})).status).toBe(409);
+   expect((await a.post('/biblioteca/ativar',{pacoteId:p.body.pacoteId,expectedHash:p.body.hash,expectedCuradoriaHash:(await a.post('/biblioteca/estado',{pacoteId:p.body.pacoteId})).body.curadoriaHash})).status).toBe(409);
    expect(referenciaBibliotecaAtiva(a.db)).toBeNull();expect(a.db.prepare('SELECT count(*) AS n FROM biblioteca_ativacao').get()?.n).toBe(0);
   }finally{await a.close();}
  });
  it('curadoria de item ativo muda hash e publica estímulo na mesma transação',async()=>{
   const a=await ambiente();try {
    const p=await a.post('/biblioteca/importar',pacote());await a.post('/biblioteca/curar',{pacoteId:p.body.pacoteId,itemId:'item',expectedHash:p.body.hash,estado:'CONSULTAVEL'});
-   await a.post('/biblioteca/ativar',{pacoteId:p.body.pacoteId,expectedHash:p.body.hash});const before=referenciaBibliotecaAtiva(a.db);
+   await a.post('/biblioteca/ativar',{pacoteId:p.body.pacoteId,expectedHash:p.body.hash,expectedCuradoriaHash:(await a.post('/biblioteca/estado',{pacoteId:p.body.pacoteId})).body.curadoriaHash});const before=referenciaBibliotecaAtiva(a.db);
    await a.post('/biblioteca/curar',{pacoteId:p.body.pacoteId,itemId:'item',expectedHash:p.body.hash,estado:'OBSOLETO'});
    expect(referenciaBibliotecaAtiva(a.db)?.hash).not.toBe(before?.hash);expect(a.db.prepare('SELECT count(*) AS n FROM estimulo_tecnico').get()?.n).toBe(2);
    expect((await a.post('/biblioteca/consultar',{filtros:{tumor:'sintetico'}})).body.itens).toEqual([]);

@@ -46,6 +46,8 @@ export function BibliotecaLocal({ api }: { api: ApiBiblioteca }) {
         ?? (novo.pacoteId === alvoId ? novo.hash : null);
       if (alvoId !== selecionado || hashAnterior !== hashNovo) {
         setConteudoConferido({}); setItensExibidos({});
+      } else if (novo.curadoriaHash !== estado?.curadoriaHash) {
+        setConteudoConferido({});
       }
       setVersaoRevisada(false);
       setEstado(novo);
@@ -78,6 +80,7 @@ export function BibliotecaLocal({ api }: { api: ApiBiblioteca }) {
   async function curar(item: ItemBibliotecaResposta, destino: "CONSULTAVEL" | "OBSOLETO" = "CONSULTAVEL") {
     if (!estado?.hash || !conteudoConferido[item.id]) return;
     if (destino === "OBSOLETO" && !window.confirm(`Marcar “${item.titulo}” como OBSOLETO? O item deixará de aparecer nas consultas da biblioteca.`)) return;
+    if (item.estado === "OBSOLETO" && destino === "CONSULTAVEL" && !window.confirm(`Restaurar “${item.titulo}” como CONSULTAVEL após esta nova revisão?`)) return;
     setErro(""); setOcupado(true);
     limparConsulta();
     try {
@@ -89,10 +92,10 @@ export function BibliotecaLocal({ api }: { api: ApiBiblioteca }) {
   }
 
   async function ativar() {
-    if (!estado?.hash || !versaoRevisada || !pacoteAtual || !window.confirm(`Ativar ${pacoteAtual.pacoteId} (hash ${pacoteAtual.hash})? Confira a versão e os itens exibidos.`)) return;
+    if (!estado?.hash || !estado.curadoriaHash || !versaoRevisada || !pacoteAtual || !window.confirm(`Ativar ${pacoteAtual.pacoteId} (hash ${pacoteAtual.hash})? Confira a versão e os itens exibidos.`)) return;
     setErro(""); setOcupado(true);
     try {
-      await api.ativar({ pacoteId: selecionado, expectedHash: estado.hash });
+      await api.ativar({ pacoteId: selecionado, expectedHash: estado.hash, expectedCuradoriaHash: estado.curadoriaHash });
       await carregar(selecionado); setAviso(`Biblioteca ${selecionado} ativada.`);
     } catch (e) { setErro(mensagemErro(e)); }
     finally { setOcupado(false); }
@@ -155,13 +158,13 @@ export function BibliotecaLocal({ api }: { api: ApiBiblioteca }) {
         </details>
         <label><input type="checkbox" disabled={!itensExibidos[item.id]} checked={Boolean(conteudoConferido[item.id])}
           onChange={(e) => setConteudoConferido((anterior) => ({ ...anterior, [item.id]: e.target.checked }))} /> Li e conferi o conteúdo e a fonte deste item.</label>
-        {item.estado === "RASCUNHO" ? <button type="button" disabled={ocupado || !conteudoConferido[item.id]} onClick={() => void curar(item)}>Marcar CONSULTAVEL</button> : null}
+        {item.estado === "RASCUNHO" || item.estado === "OBSOLETO" ? <button type="button" disabled={ocupado || !conteudoConferido[item.id]} onClick={() => void curar(item)}>Marcar CONSULTAVEL</button> : null}
         {item.estado === "CONSULTAVEL" || item.estado === "ALERTA" ? <button type="button" disabled={ocupado || !conteudoConferido[item.id]} onClick={() => void curar(item, "OBSOLETO")}>Marcar OBSOLETO</button> : null}
       </article>)}
       {itens.length ? <label><input type="checkbox" disabled={!itens.every((item) => conteudoConferido[item.id]) || itens.some((item) => item.estado === "RASCUNHO" || item.estado === "ALERTA")}
         checked={versaoRevisada} onChange={(e) => setVersaoRevisada(e.target.checked)} />
         Revisei a versão, o hash e os itens exibidos antes de ativar.</label> : null}
-      <button type="button" disabled={ocupado || !versaoRevisada || !itens.some((item) => item.estado === "CONSULTAVEL") || pacoteAtual.ativo} onClick={() => void ativar()}>Ativar pacote revisado</button>
+      <button type="button" disabled={ocupado || !estado?.curadoriaHash || !versaoRevisada || !itens.some((item) => item.estado === "CONSULTAVEL") || pacoteAtual.ativo} onClick={() => void ativar()}>Ativar pacote revisado</button>
     </section> : <p>Selecione um pacote para ver seu conteúdo, as fontes e o estado de curadoria.</p>}
     <section aria-label="Consultar biblioteca"><h3>Consultar conteúdo ativo</h3>
       <form onSubmit={(e) => void consultar(e)}><div className="biblioteca-filtros">{Object.entries(filtros).map(([key, value]) => <label key={key}>{key}<input value={value} onChange={(e) => setFiltros((antes) => ({ ...antes, [key]: e.target.value }))} /></label>)}</div>
