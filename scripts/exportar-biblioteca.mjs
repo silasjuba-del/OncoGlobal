@@ -45,7 +45,7 @@ function conferirCaminhoPublico(caminho) {
     const legivel = componente.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[_-]/g, " ");
     if (/\b(?:paciente|patient|nome\s*(?:completo\s*)?paciente|patient\s*(?:full\s*)?name)\s+/i.test(legivel)
       || /\b(?:prontuario|cpf|cns|patientid|pacienteid)\s*[: .]?\s*\d/i.test(legivel)
-      || scanText(componente, "caminho.txt", { manifest: {files:[]} }).findings.length)
+      || scanText(componente.replace(/^[A-Z0-9._-]+@\d+\.\d+\.\d+\.md$/, "PROMPT_VERSIONADO"), "caminho.txt", { manifest: {files:[]} }).findings.length)
       throw new Error("PHI_CAMINHO");
   }
 }

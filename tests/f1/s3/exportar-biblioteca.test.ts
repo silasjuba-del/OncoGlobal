@@ -105,6 +105,13 @@ it.each(["prontuario-1234567", "Paciente-Pessoa-Sintetica", "nomeCompletoPacient
   expect(() => exportarBiblioteca(f.root, f.out)).toThrow("PHI_CAMINHO");
   expect(existsSync(f.out)).toBe(false);
 });
+it("nome técnico de prompt versionado é público, contato no nome é recusado",()=>{
+  const f=fixture();mkdirSync(join(f.root,"corpus/prompts"),{recursive:true});
+  writeFileSync(join(f.root,"corpus/prompts/CAPTURA@1.0.0.md"),"Instrução pública sintética");
+  expect(exportarBiblioteca(f.root,f.out).arquivos).toBe(2);
+  const g=fixture();writeFileSync(join(g.root,"corpus","contato@example.org.txt"),"Referência sintética");
+  expect(()=>exportarBiblioteca(g.root,g.out)).toThrow("PHI_CAMINHO");
+});
 it("exporta raízes consumidas pelo app e registra binários/scripts excluídos", () => {
   const f = fixture();
   for (const raiz of ["fichas", "regulatorio", "receitas", "f0c/sigtap/fontes"]) mkdirSync(join(f.root, "corpus", raiz), { recursive: true });
