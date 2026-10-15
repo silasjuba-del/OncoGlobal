@@ -1,0 +1,39 @@
+import {expect,it} from 'vitest';
+import {readFileSync} from 'node:fs';
+import {RulesetHeader} from '../../../src/contracts/agentes.js';
+const ler=(p:string)=>JSON.parse(readFileSync(p,'utf8'));
+const manifesto=ler('corpus/manifesto/b2-fichas.v1.json');
+const fichas=manifesto.fichasNovas.map((f:any)=>ler(f.arquivo));
+const pack=(slug:string)=>ler(`corpus/6-pack-tumor/${slug}/pack-${slug}.v2.RASCUNHO.json`);
+it('rascunhos B2 não atribuem curador nem aprovação médica',()=>{
+ for(const slug of ['ewing','osteossarcoma','cec-pele','ntg','vulva','cup']){
+  const p=pack(slug);
+  expect(p.header.curador).toBeNull();expect(p.header.aprovadoEm).toBeNull();
+  expect(p.header.schema).toBe('CabecalhoRascunho@1');
+  expect(p.curadoria.aprovacaoClinica).toBeNull();expect(p.alerta).toBe(false);
+  expect(RulesetHeader.safeParse(p.header).success).toBe(false);
+ }
+});
+it('fase VDC limita doxorrubicina a cinco administrações e continua em VC sem antraciclina',()=>{
+ const vdc=fichas.find((f:any)=>f.nome.startsWith('Ewing VDC'));
+ const vc=fichas.find((f:any)=>f.nome.startsWith('Ewing VC '));
+ expect(vdc.ciclos).toBe(5);expect(vc).toBeDefined();expect(vc.ciclos).toBe(2);
+ const doxo=vdc.itens.find((i:any)=>i.drug==='Doxorrubicina');
+ expect(doxo.standardDose*doxo.days.length*vdc.ciclos).toBe(375);
+ expect(vc.itens.some((i:any)=>i.drug==='Doxorrubicina')).toBe(false);
+ expect(vc.status).toBe('RASCUNHO');
+ expect(pack('ewing').tratamento.protocolos.find((p:any)=>p.id==='ewing-vc').fichaId).toBe(vc.templateId);
+});
+it('pembrolizumabe q21d registra o máximo de 35 administrações do KEYNOTE-629',()=>{
+ const p=fichas.find((f:any)=>f.tumor==='CEC de pele (cutâneo)'&&f.nome==='Pembrolizumabe');
+ expect(p).toBeDefined();expect(p.ciclos).toBe(35);expect(p.fonte).toContain('KEYNOTE-629');
+ expect(pack('cec-pele').tratamento.protocolos.find((p:any)=>p.id==='cec-pembro').numeroCiclos).toBe(35);
+});
+it('resgate TC inclui o suporte D6 documentado pela eviQ 4245',()=>{
+ expect(pack('ewing').tratamento.protocolos.find((p:any)=>p.id==='ewing-tc').drogas)
+  .toContainEqual(expect.objectContaining({droga:'pegfilgrastim',dose:6,unidade:'mg',via:'SC',dias:'D6'}));
+});
+it('vulva mantém a decisão D-F1-50 e só a pendência real de replanejamento',()=>{
+ const p=pack('vulva');expect(p.tratamento.radioterapia[0]).toMatchObject({doseTotalGy:57.6,fracoes:32});
+ expect(p.pendencias.some((x:any)=>/Dose total de RT|40 Gy/.test(JSON.stringify(x)))).toBe(false);
+});

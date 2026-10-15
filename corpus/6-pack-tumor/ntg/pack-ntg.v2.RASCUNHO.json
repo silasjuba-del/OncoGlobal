@@ -1,16 +1,17 @@
 {
   "header": {
+    "schema": "CabecalhoRascunho@1",
     "id": "pack-ntg",
     "versao": "2.0.0",
-    "vigenteDesde": "2026-10-14",
     "fonte": {
       "tipo": "DIRETRIZ",
       "referencia": "D-F1-34/D-F1-49 + Lok 2025 (DOI 10.1200/JCO-24-02326) + eviQ 668/1018/599/1378/1347",
       "trecho": "escore FIGO 2000 dirige o tratamento",
       "edicao": "F1-B2 2026-10-14"
     },
-    "curador": "Dr. Silas Negrão",
-    "aprovadoEm": "2026-10-14"
+    "redigidoEm": "2026-10-14",
+    "curador": null,
+    "aprovadoEm": null
   },
   "status": "RASCUNHO",
   "consultavel": true,

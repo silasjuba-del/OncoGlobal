@@ -217,7 +217,7 @@ F({ tumor: CUP, nome: "Cisplatina + 5-Fluorouracil (CUP escamoso)", cenario: "es
 
 // ===== EWING (D-F1-34/49; dose-denso Womer 2012; SBOC local) =====
 const EW = "Ewing";
-F({ tumor: EW, nome: "Ewing VDC (ciclo A — alternado ao IE)", cenario: "1ª linha, dose-denso q14", intervalo: 14, ciclos: 7, altoRisco: true,
+F({ tumor: EW, nome: "Ewing VDC (ciclo A — alternado ao IE)", cenario: "1ª linha, dose-denso q14", intervalo: 14, ciclos: 5, altoRisco: true,
   identidade: "Ewing localizado/metastático, 1ª linha VDC/IE interval-compressed (SBOC 2026 ósseos p. 15; Womer 2012)",
   fontesItens: { Vincristina: { sourceIds: ["EXT-SARC-002", "EXT-SARC-009", "EXT-SARC-022"] }, Doxorrubicina: { sourceIds: ["EXT-SARC-002"] }, Ciclofosfamida: { sourceIds: ["EXT-SARC-002"] }, "Mesna (0 h)": { sourceIds: ["EXT-SARC-002"] }, "Mesna (2 h, VO)": { sourceIds: ["EXT-SARC-002"] }, "Mesna (6 h, VO)": { sourceIds: ["EXT-SARC-002"] }, Pegfilgrastim: { sourceIds: ["EXT-SARC-002"] } },
   divergencias: ["doxorrubicina: eviQ 37,5 mg/m² ×2 (D1–D2, 5–15 min) × BC SAALT2W 75 mg/m² IV push D1 (dose única) × Womer abstract 75 mg/m²", "vincristina: 1,5 mg/m² (cap 2 mg) no eviQ/BC × 2 mg/m² no abstract de Womer", "G-CSF: pegfilgrastim 6 mg D3 (eviQ) × filgrastim a partir do D8 (BC)", "antiesse local sem NK1 (D-F1-30) × esquema eviQ com netupitant/palonosetrona"],
@@ -232,6 +232,14 @@ F({ tumor: EW, nome: "Ewing VDC (ciclo A — alternado ao IE)", cenario: "1ª li
     it("Mesna (6 h, VO)", "POS_QT", 800, "m2", "VO", D(1), { obs: "eviQ 1916: 800 mg/m² VO 6 h após o fim da infusão de ciclofosfamida." }),
     it("Pegfilgrastim", "POS_QT", 6, "mg", "SC", D(3), { obs: "eviQ 1916: 6 mg SC no D3 (24 h após a quimio do braço VDC, que termina no D2). BC SAALT2W: filgrastim a partir do D8 [variante]." }),
   ] });
+
+// A fonte eviQ 1916 omite doxorrubicina após 375 mg/m²: separar a fase final evita repetir a antraciclina sete vezes.
+const faseVdc=FICHAS.at(-1);
+faseVdc.fonteDecisao+=' Representação por fase: até 5 administrações VDC (75 mg/m² cada); as 2 restantes estão na ficha VC sem doxorrubicina. Fonte eviQ 1916, conferida 2026-10-15: https://www.eviq.org.au/p/1916 . Histórico cumulativo e decisão individual continuam sob revisão médica.';
+F({...faseVdc,nome:'Ewing VC (fase final sem doxorrubicina)',ciclos:2,
+ identidade:'Fase final do braço V[D]C: vincristina e ciclofosfamida, após omissão da doxorrubicina pelo limite documentado',
+ itens:faseVdc.itens.filter(i=>i.drug!=='Doxorrubicina').map(i=>({...i})),
+ fonteDecisao:faseVdc.fonteDecisao+' Ficha VC corresponde somente às 2 administrações finais sem antraciclina, não a um novo esquema aprovado.'});
 
 F({ tumor: EW, nome: "Ewing IE (ciclo B — alternado ao VDC)", cenario: "1ª linha, dose-denso q14", intervalo: 14, ciclos: 7, premedDias: R(1, 5), altoRisco: true,
   identidade: "Ewing, braço IE do VDC/IE interval-compressed (ifosfamida+etoposídeo D1–D5)",
@@ -346,14 +354,14 @@ F({ tumor: CEC, nome: "Cisplatina semanal + RxT (CEC de pele)", cenario: "concom
     CIS(40, D(1), { obs: "eviQ 292: 40 mg/m² semanal concomitante à RT (~6 semanas). Extrapolação de CECP declarada." }),
   ] });
 
-F({ tumor: CEC, nome: "Pembrolizumabe", cenario: "localmente avançado/metastático — inelegível a cirurgia/RT curativas", intervalo: 21, ciclos: null, semPremed: true,
+F({ tumor: CEC, nome: "Pembrolizumabe", cenario: "localmente avançado/metastático — inelegível a cirurgia/RT curativas", intervalo: 21, ciclos: 35, semPremed: true,
   identidade: "CSCC cutâneo localmente avançado/metastático inelegível a terapia curativa (D-F1-50; NCCN CSCC v1.2026 prefere pembro/cemi 2A — rodada v2)",
   fontesItens: { Pembrolizumabe: { sourceIds: ["EXT-SARC-008"], decisaoLocal: "D-F1-50 (criação da ficha; dose 200 mg q21d)" } },
   divergencias: ["FDA aprovado p/ CSCC; EMA NÃO aprovou pembrolizumabe para CEC cutâneo (só cemiplimabe) — ressalva regulatória registrada (rodada v2)", "KEYNOTE-629 (PMID 34293460): ORR 50% (localmente avançado) / 35% (metastático)"],
   lacunas: ["disponibilidade SUS: VERIFICAR (H2)"],
   fonteDecisao: `D-F1-34, D-F1-49 e D-F1-50 (criação). Protocolo operacional: ${ref(["EXT-SARC-008"])} (200 mg IV q21d OU 400 mg q42d, em 50–100 mL SF 0,9% em 30 min, até 24 meses). Indicação em CEC pela diretriz NCCN CSCC v1.2026 (pembro preferido 2A com cemiplimabe) e KEYNOTE-629 — registrados na rodada v2 (RELATORIO-F1-B2-PENDENCIAS-V2 §E3). Ressalva: EMA negativa para esta indicação.`,
   itens: [
-    qt("Pembrolizumabe", 200, "mg", D(1), { dil: "SF 0,9%", t: "30 min", obs: "200 mg IV q21d (D-F1-50; eviQ 5066). Alternativa da fonte: 400 mg q42d. Diluição 50–100 mL SF 0,9%; até 24 meses ou toxicidade." }),
+    qt("Pembrolizumabe", 200, "mg", D(1), { dil: "SF 0,9%", t: "30 min", obs: "200 mg IV q21d (D-F1-50; eviQ 5066 para dose/diluição). KEYNOTE-629: máximo 35 administrações q3sem (JCO.19.03054; https://ascopubs.org/doi/10.1200/JCO.19.03054). D-F1-50: respeitar também ≤24 meses reais, inclusive com atrasos; toxicidade/progressão exigem revisão. Alternativa 400 mg q42d não é representada nesta ficha." }),
   ] });
 
 // ===== NTG (D-F1-34/49; Lok 2025 + eviQ) =====

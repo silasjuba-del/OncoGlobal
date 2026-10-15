@@ -74,6 +74,7 @@ export function verificarB2(root = RAIZ) {
     const pack = JSON.parse(readFileSync(join(root, `corpus/6-pack-tumor/${slug}/pack-${slug}.v2.RASCUNHO.json`), "utf8"));
     if (pack.status !== "RASCUNHO" || pack.consultavel !== true || pack.alerta !== false) problemas.push(`pack ${slug} fora do estado RASCUNHO/consultável/não-alerta`);
     if (pack.curadoria?.aprovacaoClinica !== null) problemas.push(`pack ${slug} com aprovacaoClinica não-nula`);
+    if(pack.header?.schema!=='CabecalhoRascunho@1'||pack.header.curador!==null||pack.header.aprovadoEm!==null)problemas.push(`pack ${slug} atribui aprovação indevida ao rascunho`);
     for (const proto of pack.tratamento?.protocolos ?? []) {
       if (proto.fichaId === null || proto.fichaId === undefined) continue;
       const alvo = join(root, "corpus/fichas", SLUG_FICHA[slug]);

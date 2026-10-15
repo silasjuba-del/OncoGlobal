@@ -4,10 +4,10 @@
   "nome": "Pembrolizumabe",
   "cenario": "localmente avançado/metastático — inelegível a cirurgia/RT curativas",
   "versao": "1.0.0",
-  "hash": "55b44bce18f6807beb94dcfbf09f0a41310c8f9f629bcb52cd35e89dee311774",
+  "hash": "76389e149293e0ddf7ed511589b7628a0e5e47dfc5e3abfddd76f31cc4aec0b0",
   "codigoInstitucional": null,
   "intervaloDias": 21,
-  "ciclos": null,
+  "ciclos": 35,
   "itens": [
     {
       "drug": "Pembrolizumabe",
@@ -27,7 +27,7 @@
       "days": [
         "d1"
       ],
-      "observacao": "200 mg IV q21d (D-F1-50; eviQ 5066). Alternativa da fonte: 400 mg q42d. Diluição 50–100 mL SF 0,9%; até 24 meses ou toxicidade.",
+      "observacao": "200 mg IV q21d (D-F1-50; eviQ 5066 para dose/diluição). KEYNOTE-629: máximo 35 administrações q3sem (JCO.19.03054; https://ascopubs.org/doi/10.1200/JCO.19.03054). D-F1-50: respeitar também ≤24 meses reais, inclusive com atrasos; toxicidade/progressão exigem revisão. Alternativa 400 mg q42d não é representada nesta ficha.",
       "source": "PROTOCOL",
       "overrideMotivo": null
     }

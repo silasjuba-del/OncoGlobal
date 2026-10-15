@@ -1,16 +1,17 @@
 {
   "header": {
+    "schema": "CabecalhoRascunho@1",
     "id": "pack-osteossarcoma",
     "versao": "2.0.0",
-    "vigenteDesde": "2026-10-14",
     "fonte": {
       "tipo": "DIRETRIZ",
       "referencia": "D-F1-34/D-F1-49 + SBOC 2026 ósseos v5 p. 12 + eviQ 1901 v6",
       "trecho": "MAP e AP",
       "edicao": "F1-B2 2026-10-14"
     },
-    "curador": "Dr. Silas Negrão",
-    "aprovadoEm": "2026-10-14"
+    "redigidoEm": "2026-10-14",
+    "curador": null,
+    "aprovadoEm": null
   },
   "status": "RASCUNHO",
   "consultavel": true,

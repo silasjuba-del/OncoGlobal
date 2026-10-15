@@ -1,16 +1,17 @@
 {
   "header": {
+    "schema": "CabecalhoRascunho@1",
     "id": "pack-ewing",
     "versao": "2.0.0",
-    "vigenteDesde": "2026-10-14",
     "fonte": {
       "tipo": "DIRETRIZ",
       "referencia": "D-F1-34/D-F1-49 + eviQ 3464 v2 + Womer 2012 (PMID 23091096)",
       "trecho": "VDC/IE interval-compressed",
       "edicao": "F1-B2 2026-10-14"
     },
-    "curador": "Dr. Silas Negrão",
-    "aprovadoEm": "2026-10-14"
+    "redigidoEm": "2026-10-14",
+    "curador": null,
+    "aprovadoEm": null
   },
   "status": "RASCUNHO",
   "consultavel": true,
@@ -193,7 +194,7 @@
           }
         ],
         "cicloDias": 14,
-        "numeroCiclos": 7,
+        "numeroCiclos": 5,
         "premedicacao": "Padrão local (D-W9-23c/34c; D-F1-30/48)",
         "ajusteObrigatorio": "",
         "fichaId": "FICHA.ewing.ewing-vdc-ciclo-a-alternado-ao-ie__1-linha-dose-denso-q14@1.0.0",
@@ -215,6 +216,87 @@
           "estado": "CONSULTADO"
         },
         "observacao": "Componente repete a cada 28 d alternando com IE (administração a cada 14 d).",
+        "derivadoDe": null,
+        "criterioAplicacao": ""
+      },
+      {
+        "id": "ewing-vc",
+        "nome": "VC — fase final sem doxorrubicina",
+        "cenario": "1ª linha",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "vincristina",
+            "dose": 1.5,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "máx 2 mg"
+          },
+          {
+            "droga": "ciclofosfamida",
+            "dose": 1200,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "mesna (0 h)",
+            "dose": 400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "15 min antes da ciclofosfamida"
+          },
+          {
+            "droga": "mesna (2 h)",
+            "dose": 800,
+            "unidade": "mg/m2",
+            "via": "VO",
+            "dias": "D1",
+            "observacao": "2 h após fim da ciclofosfamida"
+          },
+          {
+            "droga": "mesna (6 h)",
+            "dose": 800,
+            "unidade": "mg/m2",
+            "via": "VO",
+            "dias": "D1",
+            "observacao": "6 h após fim da ciclofosfamida"
+          },
+          {
+            "droga": "pegfilgrastim",
+            "dose": 6,
+            "unidade": "mg",
+            "via": "SC",
+            "dias": "D3",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": 2,
+        "premedicacao": "Padrão local (D-W9-23c/34c; D-F1-30/48)",
+        "ajusteObrigatorio": "",
+        "fichaId": "FICHA.ewing.ewing-vc-fase-final-sem-doxorrubicina__1-linha-dose-denso-q14@1.0.0",
+        "sus": {
+          "disponivel": "VERIFICAR",
+          "fonte": {
+            "tipo": "DECISAO_MEDICA",
+            "referencia": "D-F1-34/49 — disponibilidade SUS por item a verificar",
+            "pagina": null,
+            "trecho": "",
+            "estado": "PENDENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "eviQ 1916 v8 (EXT-SARC-002)",
+          "pagina": null,
+          "trecho": "VDC: quimio D1–2; pegfilgrastim D3",
+          "estado": "CONSULTADO"
+        },
+        "observacao": "eviQ 1916: omitir doxorrubicina após 375 mg/m²; fase final sem antraciclina, sujeita à curadoria.",
         "derivadoDe": null,
         "criterioAplicacao": ""
       },
@@ -410,6 +492,14 @@
             "via": "EV",
             "dias": "D1–D5",
             "observacao": ""
+          },
+          {
+            "droga": "pegfilgrastim",
+            "dose": 6,
+            "unidade": "mg",
+            "via": "SC",
+            "dias": "D6",
+            "observacao": "≥24 h após QT; eviQ 4245"
           }
         ],
         "cicloDias": 21,

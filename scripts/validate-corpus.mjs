@@ -1,4 +1,5 @@
 import { RulesetHeader } from "../src/contracts/rulesetHeader.mjs";
+import { CabecalhoRascunho } from "../src/contracts/cabecalhoRascunho.mjs";
 import { verificarB1 } from "./corpus-b1.mjs";
 import { verificarB2 } from "./corpus-b2.mjs";
 // GLM-08 · Valida o corpus inteiro: headers (G-17, schema compartilhado RulesetHeader de src/contracts),
@@ -66,8 +67,13 @@ for (const arquivo of walk(CORPUS)) {
     linhas.push([rel, "JSON INVÁLIDO", 0, 0]);
     continue;
   }
-  const errosHeader = json.header !== undefined ? validarHeader(json.header)
+  const rascunho=json.status==='RASCUNHO'&&json.header?.schema==='CabecalhoRascunho@1';
+  const draftHeader=rascunho?CabecalhoRascunho.safeParse(json.header):null;
+  const errosHeader = rascunho ? draftHeader.success ? [] : draftHeader.error.issues.map(i=>`${i.path.join('.')}: ${i.message}`)
+    : json.header !== undefined ? validarHeader(json.header)
     : rel.startsWith("corpus/rulesets/") ? ["ruleset sem header"] : [];
+  if(rascunho&&(json.alerta!==false||json.curadoria?.aprovacaoClinica!==null||[...objetos(json)].some(o=>o.ativo===true)))
+    errosHeader.push('rascunho não pode receber aprovação, alerta ou item ativo');
   errosHeader.forEach((e) => problemas.push(`${rel}: ${e}`));
 
   let ativos = 0;

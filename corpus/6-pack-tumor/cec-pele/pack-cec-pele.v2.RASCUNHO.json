@@ -1,16 +1,17 @@
 {
   "header": {
+    "schema": "CabecalhoRascunho@1",
     "id": "pack-cec-pele",
     "versao": "2.0.0",
-    "vigenteDesde": "2026-10-14",
     "fonte": {
       "tipo": "DIRETRIZ",
       "referencia": "D-F1-34/D-F1-49 + eviQ 4151 v5 + SOnHe p. 236-238",
       "trecho": "cemiplimabe preferencial; QT por extrapolação",
       "edicao": "F1-B2 2026-10-14"
     },
-    "curador": "Dr. Silas Negrão",
-    "aprovadoEm": "2026-10-14"
+    "redigidoEm": "2026-10-14",
+    "curador": null,
+    "aprovadoEm": null
   },
   "status": "RASCUNHO",
   "consultavel": true,
@@ -235,7 +236,7 @@
           }
         ],
         "cicloDias": 21,
-        "numeroCiclos": null,
+        "numeroCiclos": 35,
         "premedicacao": "sem pré-medicação de rotina",
         "ajusteObrigatorio": "",
         "fichaId": "FICHA.cec-de-pele-cutaneo.pembrolizumabe__localmente-avancado-metastatico-inelegivel-a-cirurgia-rt-curativas@1.0.0",
