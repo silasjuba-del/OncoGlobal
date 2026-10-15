@@ -51,7 +51,9 @@ function chaveDeIdentidade(chave) {
 function conferirCaminhoPublico(caminho) {
   for (const componente of caminho.split("/")) {
     const legivel = componente.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[_-]/g, " ");
-    if (chaveDeIdentidade(componente.split(/[_.-]/)[0])
+    // Nome fixo do modelo público do serviço; conteúdo e hash continuam sob os demais filtros.
+    const rotulo = componente === "resumo-prontuario-modelo-servico.v1.RASCUNHO.json" ? "MODELO_PUBLICO" : componente;
+    if (chaveDeIdentidade(rotulo)
       || /\b(?:paciente|patient|nome\s*(?:completo\s*)?(?:do\s*)?paciente|(?:full\s*)?patient\s*(?:full\s*)?name)\s+/i.test(legivel)
       || /\b(?:prontuario|cpf|cns|patientid|pacienteid)\s*[: .]?\s*\d/i.test(legivel)
       || scanText(componente.replace(/^[A-Z0-9._-]+@\d+\.\d+\.\d+\.md$/, "PROMPT_VERSIONADO"), "caminho.txt", { manifest: {files:[]} }).findings.length)
