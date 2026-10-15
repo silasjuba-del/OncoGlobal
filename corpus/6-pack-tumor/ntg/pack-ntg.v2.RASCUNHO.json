@@ -367,7 +367,15 @@
             "unidade": "mg/m2",
             "via": "EV",
             "dias": "D1",
-            "observacao": "no D8: 150"
+            "observacao": ""
+          },
+          {
+            "droga": "etoposídeo",
+            "dose": 150,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D8",
+            "observacao": "Lok 2025 Tabela A5; ficha EMA/EP selecionada"
           },
           {
             "droga": "metotrexato",

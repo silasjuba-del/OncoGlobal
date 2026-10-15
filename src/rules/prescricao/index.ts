@@ -96,11 +96,15 @@ const pos = (n: number | null | undefined): n is number => typeof n === "number"
 export type EntradaDose =
   | { basis: "FIXED"; dose: number | null }
   | { basis: "MG_KG"; mgKg: number | null; pesoKg: number | null }
+  | { basis: "MCG_KG"; mcgKg: number | null; pesoKg: number | null }
   | { basis: "MG_M2"; mgM2: number | null; pesoKg: number | null; alturaCm: number | null; bsaM2?: number | null }
   | { basis: "AUC"; auc: number | null; clearance: number | null }
   | { basis: "OTHER" };
 
 export interface SaidaDose {
+  /** Dose na unidade declarada. doseMg permanece normalizada em mg para compatibilidade. */
+  dose: number | null;
+  unidade: "mg" | "µg";
   estado: "PRONTO" | "PENDENTE";
   doseMg: number | null;
   /** nome(s) do(s) campo(s) faltante(s), separados por vírgula; null se PRONTO */
@@ -108,9 +112,10 @@ export interface SaidaDose {
   aviso: string | null;
 }
 
-const pend = (campos: string[]): SaidaDose => ({ estado: "PENDENTE", doseMg: null, pendente: campos.join(", "), aviso: null });
+type SaidaDoseMg = Omit<SaidaDose, "dose" | "unidade">;
+const pend = (campos: string[]): SaidaDoseMg => ({ estado: "PENDENTE", doseMg: null, pendente: campos.join(", "), aviso: null });
 
-export function calcularDosePorBase(e: EntradaDose): SaidaDose {
+function calcularDoseEmMg(e: Exclude<EntradaDose, { basis: "MCG_KG" }>): SaidaDoseMg {
   switch (e.basis) {
     case "FIXED":
       return pos(e.dose) ? { estado: "PRONTO", doseMg: e.dose, pendente: null, aviso: null } : pend(["dose"]);
@@ -135,6 +140,17 @@ export function calcularDosePorBase(e: EntradaDose): SaidaDose {
     default:
       return pend(["formula"]);
   }
+}
+/** Unidade explícita: µg nunca é rotulado como mg; o campo legado doseMg é convertido. */
+export function calcularDosePorBase(e: EntradaDose): SaidaDose {
+  if (e.basis === "MCG_KG") {
+    const faltantes = [!pos(e.mcgKg) && "mcgKg", !pos(e.pesoKg) && "pesoKg"].filter((x): x is string => x !== false);
+    if (faltantes.length) return { ...pend(faltantes), dose: null, unidade: "µg" };
+    const dose = meioParaCima(e.mcgKg! * e.pesoKg!);
+    return { estado: "PRONTO", dose, unidade: "µg", doseMg: dose / 1000, pendente: null, aviso: null };
+  }
+  const r = calcularDoseEmMg(e);
+  return { ...r, dose: r.doseMg, unidade: "mg" };
 }
 /** Alias aceito pelo red team. */
 export const calcularDoseBasis = calcularDosePorBase;
