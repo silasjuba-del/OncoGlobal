@@ -79,6 +79,11 @@ it.each([
   { nomePaciente: "Pessoa Sintética", nascimento: "01/02/1970" },
   { nomeCompletoPaciente: "Pessoa Sintética" },
   { patientFullName: "Pessoa Sintética" },
+  { numeroProntuarioPaciente: 123456 },
+  { prontuarioDoPaciente: { valor: 123456 } },
+  { cpfDoPaciente: 123456 },
+  { rgPaciente: "registro-sintetico" },
+  { numeroCartaoSus: 123456 },
   { paciente: { nome: "Pessoa Sintética", dataNascimento: "1970-02-01" } },
   { patientId: "paciente-sintetico-identificavel" },
   { cpf: 1234567 },
@@ -98,7 +103,7 @@ it.each([
   expect(() => exportarBiblioteca(f.root, f.out)).toThrow("PHI_ESTRUTURAL");
   expect(existsSync(f.out)).toBe(false);
 });
-it.each(["prontuario-1234567", "Paciente-Pessoa-Sintetica", "nomeCompletoPaciente-Pessoa-Sintetica", "fullPatientName_Pessoa_Sintetica", "nomeDoPaciente_Pessoa_Sintetica"])("recusa identidade no caminho antes de criar saída: %s", nome => {
+it.each(["prontuario-1234567", "Paciente-Pessoa-Sintetica", "nomeCompletoPaciente-Pessoa-Sintetica", "fullPatientName_Pessoa_Sintetica", "nomeDoPaciente_Pessoa_Sintetica", "numeroProntuarioPaciente-123456", "cpfDoPaciente-123456", "numero_cartao_sus-123456"])("recusa identidade no caminho antes de criar saída: %s", nome => {
   const f = fixture();
   mkdirSync(join(f.root, "corpus", nome), { recursive: true });
   writeFileSync(join(f.root, "corpus", nome, "item.json"), '{"texto":"Referência sintética"}');

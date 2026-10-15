@@ -40,10 +40,21 @@ const triagemPublica = JSON.parse(readFileSync(new URL("./exportacao-publica-tri
 const categoriasPublicas = new Map(triagemPublica.itens.map(i => [`${i.arquivo}|${i.campo}|${i.sha256}`, new Set(i.categorias)]));
 const relativoSeguro = p => typeof p === "string" && !p.includes("\\") && !p.split("/").some(x => !x || x === "." || x === "..")
   && p.startsWith("corpus/") && !p.includes(":") && /\.(json|md|txt)$/.test(p);
+const normalizarChave = chave => chave.normalize("NFD").replace(/[\u0300-\u036f\W_]/g, "").toLowerCase();
+function chaveDeIdentidade(chave) {
+  const k = normalizarChave(chave);
+  return /(?:prontuario|medicalrecord|patientrecord|cpf|cns|cartaosus|cartaonacional|nascimento|birthdate|dateofbirth|endereco|address|telefone|phone)/.test(k)
+    || /^(?:(?:numero|num|nro|id)(?:do|da)?)?(?:rg|nis|pis)(?:(?:do|da)?(?:paciente|patient))?$/.test(k)
+    || /^(?:(?:dados|data|cadastro|identificacao|identification|demografia|demographics)(?:do|da|of)?)?(?:pacientes?|patients?)$/.test(k)
+    || /(?:(?:nome|name|identificador|identifier|numero|number|id).*(?:paciente|patient)|(?:paciente|patient).*(?:nome|name|identificador|identifier|numero|number|id))/.test(k);
+}
 function conferirCaminhoPublico(caminho) {
   for (const componente of caminho.split("/")) {
     const legivel = componente.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[_-]/g, " ");
-    if (/\b(?:paciente|patient|nome\s*(?:completo\s*)?(?:do\s*)?paciente|(?:full\s*)?patient\s*(?:full\s*)?name)\s+/i.test(legivel)
+    // Nome fixo do modelo público do serviço; conteúdo e hash continuam sob os demais filtros.
+    const rotulo = componente === "resumo-prontuario-modelo-servico.v1.RASCUNHO.json" ? "MODELO_PUBLICO" : componente;
+    if (chaveDeIdentidade(rotulo)
+      || /\b(?:paciente|patient|nome\s*(?:completo\s*)?(?:do\s*)?paciente|(?:full\s*)?patient\s*(?:full\s*)?name)\s+/i.test(legivel)
       || /\b(?:prontuario|cpf|cns|patientid|pacienteid)\s*[: .]?\s*\d/i.test(legivel)
       || scanText(componente.replace(/^[A-Z0-9._-]+@\d+\.\d+\.\d+\.md$/, "PROMPT_VERSIONADO"), "caminho.txt", { manifest: {files:[]} }).findings.length)
       throw new Error("PHI_CAMINHO");
@@ -58,9 +69,9 @@ function stringsClinicas(value, contexto = "", caminho = "") {
   if (!value || typeof value !== "object") return [];
   const chaves = Array.isArray(value) ? [] : Object.keys(value).map(key => ({ texto: key, campo: `${caminho}.$chave:${key}` }));
   return chaves.concat(Object.entries(value).flatMap(([key, item]) => {
-    const k = key.normalize("NFD").replace(/[\u0300-\u036f\W_]/g, "").toLowerCase();
+    const k = normalizarChave(key);
     if (item === null || item === undefined) return [];
-    const identidade = /^(pacientes?|patients?|nome(?:completo)?(?:do)?paciente|(?:full)?patient(?:full)?name|patientid|pacienteid|nascimento|datanascimento|birthdate|dateofbirth|cpf|cns|prontuario|numeroprontuario|medicalrecordnumber|rg|nis|pis|endereco|address|telefone|phone)$/.test(k)
+    const identidade = chaveDeIdentidade(key)
       || (/(?:^|\.)(?:pacientes?|patients?)(?:\.|$)/.test(contexto) && /^(nome|name|id)$/.test(k));
     // O rótulo não pode desaparecer ao entrar em um objeto/array (ex.: patientId: [valor]).
     if (typeof item === "object") {
