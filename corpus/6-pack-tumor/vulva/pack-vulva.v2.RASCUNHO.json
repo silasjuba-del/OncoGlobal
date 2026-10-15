@@ -241,7 +241,30 @@
         },
         "observacao": "",
         "derivadoDe": null,
-        "criterioAplicacao": ""
+        "criterioAplicacao": "",
+        "suporte": {
+          "emetogenicidade": {
+            "classificacao": "ALTA",
+            "fonte": {
+              "tipo": "PROTOCOLO_INSTITUCIONAL",
+              "referencia": "https://www.eviq.org.au/medical-oncology/gynaecological/vulval/locally-advanced/1529",
+              "localizador": "f1-b2-fontes-externas/cec-ntg-vulva/eviq-1529-vulval-cisplatin-weekly.txt:L92-L92; Clinical information / emetogenicity",
+              "trecho": "Emetogenicity HIGH",
+              "sha256": "c38c857aa71e06ef6b7b3cbc40922f3836af2fa4155a75bc78e54893c13b6e79",
+              "consultadoEm": "2026-10-14",
+              "estado": "CONSULTADO",
+              "sourceId": "EXT-CNV-021",
+              "sha256Original": "001b974eb8c1d2fca26af44972e07f9a1f7952f7a7922f1ebf53738e3dfb6a3a",
+              "edicao": "v9 (11/02/2026; PDF v6 arquivado)"
+            }
+          },
+          "riscoNeutropeniaFebril": {
+            "classificacao": "VERIFICAR",
+            "percentual": null,
+            "fonte": null,
+            "pendencia": "Não localizada classificação de risco FN específica para este protocolo/variante nas fontes consultadas; não inferir de neutropenia isolada nem da presença de G-CSF."
+          }
+        }
       },
       {
         "id": "vulva-carbopac",
@@ -376,7 +399,30 @@
         },
         "observacao": "",
         "derivadoDe": null,
-        "criterioAplicacao": ""
+        "criterioAplicacao": "",
+        "suporte": {
+          "emetogenicidade": {
+            "classificacao": "ALTA",
+            "fonte": {
+              "tipo": "PROTOCOLO_INSTITUCIONAL",
+              "referencia": "https://www.bccancer.bc.ca/chemotherapy-protocols-site/Documents/Gynecology/GOCXCAT_Protocol.pdf",
+              "localizador": "f1-b2-fontes-externas/cec-ntg-vulva/bccancer-GOCXCAT-protocol.txt:L69-L69; Clinical information / emetogenicity",
+              "trecho": "Antiemetic protocol for highly emetogenic chemotherapy protocols (see SCNAUSEA)",
+              "sha256": "cf45dec29260facc4e0d69c58a7657569934da04052ec058939eebecee74d798",
+              "consultadoEm": "2026-10-14",
+              "estado": "CONSULTADO",
+              "sourceId": "EXT-CNV-024",
+              "sha256Original": "03ddeed2cc303dd05cba344c300d44662b5a80fb6a49fdedd8ee58240a064fb3",
+              "edicao": "rev 01/10/2025"
+            }
+          },
+          "riscoNeutropeniaFebril": {
+            "classificacao": "VERIFICAR",
+            "percentual": null,
+            "fonte": null,
+            "pendencia": "Não localizada classificação de risco FN específica para este protocolo/variante nas fontes consultadas; não inferir de neutropenia isolada nem da presença de G-CSF."
+          }
+        }
       }
     ],
     "radioterapia": [
@@ -412,18 +458,17 @@
     "ensaios": [],
     "seguimento": [],
     "suporte": {
-      "emetogenicidade": "baixa-moderada (cisplatina semanal 40)",
-      "riscoNeutropeniaFebril": "moderado",
+      "emetogenicidade": "Consultar tratamento.protocolos[].suporte.emetogenicidade: classificação e fonte por esquema; VERIFICAR quando não documentada.",
+      "riscoNeutropeniaFebril": "VERIFICAR por protocolo; suporte G-CSF documentado separadamente não estabelece faixa percentual de FN.",
       "outros": [
         "CrCl >50-60 requerido (eviQ 1529/GOCXCRT)",
         "neuropatia/otoaudiologia prévia (cautelas eviQ)"
       ],
       "fonte": {
         "tipo": "PROTOCOLO_INSTITUCIONAL",
-        "referencia": "eviQ 1529 + GOCXCRT",
-        "pagina": null,
-        "trecho": "cautions",
-        "estado": "CONSULTADO"
+        "referencia": "Fontes individualizadas em tratamento.protocolos[].suporte; evidências locais f1-b2-fontes-externas (captura 2026-10-14).",
+        "trecho": "Classificações de emetogenicidade transcritas por esquema; ausência de classificação específica de FN permanece explícita.",
+        "estado": "PARCIAL"
       }
     }
   },
@@ -433,7 +478,13 @@
       "TC_PELVE",
       "HEMOGRAMA",
       "CREATININA",
-      "CLEARANCE_CREATININA"
+      "CLEARANCE_CREATININA",
+      "CALCIO",
+      "MAGNESIO",
+      "FOSFORO",
+      "TGP",
+      "BILIRRUBINA",
+      "AUDIOMETRIA_TONAL"
     ],
     "interacoesConsultar": [],
     "ctcaeAcao": [],
@@ -441,7 +492,202 @@
     "orientacoes": [],
     "encaminhamentos": [],
     "laudos": [],
-    "formulasXYZ": []
+    "formulasXYZ": [],
+    "examesFontes": [
+      {
+        "catalogoId": "HEMOGRAMA",
+        "protocoloId": "vulva-cis-rt",
+        "contexto": "FBC, EUC, eGFR, LFTs, calcium, magnesium and phosphate at baseline and prior to each treatment.",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "https://www.eviq.org.au/medical-oncology/gynaecological/vulval/locally-advanced/1529",
+          "localizador": "f1-b2-fontes-externas/cec-ntg-vulva/eviq-1529-vulval-cisplatin-weekly.txt:L137-L139; Blood tests / TESTS",
+          "trecho": "FBC, EUC, eGFR, LFTs, calcium, magnesium and phosphate at baseline and prior to each\n                                          treatment.",
+          "sha256": "c38c857aa71e06ef6b7b3cbc40922f3836af2fa4155a75bc78e54893c13b6e79",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO",
+          "sourceId": "EXT-CNV-021",
+          "sha256Original": "001b974eb8c1d2fca26af44972e07f9a1f7952f7a7922f1ebf53738e3dfb6a3a",
+          "edicao": "v9 (11/02/2026; PDF v6 arquivado)"
+        }
+      },
+      {
+        "catalogoId": "CREATININA",
+        "protocoloId": "vulva-cis-rt",
+        "contexto": "FBC, EUC, eGFR, LFTs, calcium, magnesium and phosphate at baseline and prior to each treatment.",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "https://www.eviq.org.au/medical-oncology/gynaecological/vulval/locally-advanced/1529",
+          "localizador": "f1-b2-fontes-externas/cec-ntg-vulva/eviq-1529-vulval-cisplatin-weekly.txt:L137-L139; Blood tests / TESTS",
+          "trecho": "FBC, EUC, eGFR, LFTs, calcium, magnesium and phosphate at baseline and prior to each\n                                          treatment.",
+          "sha256": "c38c857aa71e06ef6b7b3cbc40922f3836af2fa4155a75bc78e54893c13b6e79",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO",
+          "sourceId": "EXT-CNV-021",
+          "sha256Original": "001b974eb8c1d2fca26af44972e07f9a1f7952f7a7922f1ebf53738e3dfb6a3a",
+          "edicao": "v9 (11/02/2026; PDF v6 arquivado)"
+        }
+      },
+      {
+        "catalogoId": "CALCIO",
+        "protocoloId": "vulva-cis-rt",
+        "contexto": "FBC, EUC, eGFR, LFTs, calcium, magnesium and phosphate at baseline and prior to each treatment.",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "https://www.eviq.org.au/medical-oncology/gynaecological/vulval/locally-advanced/1529",
+          "localizador": "f1-b2-fontes-externas/cec-ntg-vulva/eviq-1529-vulval-cisplatin-weekly.txt:L137-L139; Blood tests / TESTS",
+          "trecho": "FBC, EUC, eGFR, LFTs, calcium, magnesium and phosphate at baseline and prior to each\n                                          treatment.",
+          "sha256": "c38c857aa71e06ef6b7b3cbc40922f3836af2fa4155a75bc78e54893c13b6e79",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO",
+          "sourceId": "EXT-CNV-021",
+          "sha256Original": "001b974eb8c1d2fca26af44972e07f9a1f7952f7a7922f1ebf53738e3dfb6a3a",
+          "edicao": "v9 (11/02/2026; PDF v6 arquivado)"
+        }
+      },
+      {
+        "catalogoId": "MAGNESIO",
+        "protocoloId": "vulva-cis-rt",
+        "contexto": "FBC, EUC, eGFR, LFTs, calcium, magnesium and phosphate at baseline and prior to each treatment.",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "https://www.eviq.org.au/medical-oncology/gynaecological/vulval/locally-advanced/1529",
+          "localizador": "f1-b2-fontes-externas/cec-ntg-vulva/eviq-1529-vulval-cisplatin-weekly.txt:L137-L139; Blood tests / TESTS",
+          "trecho": "FBC, EUC, eGFR, LFTs, calcium, magnesium and phosphate at baseline and prior to each\n                                          treatment.",
+          "sha256": "c38c857aa71e06ef6b7b3cbc40922f3836af2fa4155a75bc78e54893c13b6e79",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO",
+          "sourceId": "EXT-CNV-021",
+          "sha256Original": "001b974eb8c1d2fca26af44972e07f9a1f7952f7a7922f1ebf53738e3dfb6a3a",
+          "edicao": "v9 (11/02/2026; PDF v6 arquivado)"
+        }
+      },
+      {
+        "catalogoId": "FOSFORO",
+        "protocoloId": "vulva-cis-rt",
+        "contexto": "FBC, EUC, eGFR, LFTs, calcium, magnesium and phosphate at baseline and prior to each treatment.",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "https://www.eviq.org.au/medical-oncology/gynaecological/vulval/locally-advanced/1529",
+          "localizador": "f1-b2-fontes-externas/cec-ntg-vulva/eviq-1529-vulval-cisplatin-weekly.txt:L137-L139; Blood tests / TESTS",
+          "trecho": "FBC, EUC, eGFR, LFTs, calcium, magnesium and phosphate at baseline and prior to each\n                                          treatment.",
+          "sha256": "c38c857aa71e06ef6b7b3cbc40922f3836af2fa4155a75bc78e54893c13b6e79",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO",
+          "sourceId": "EXT-CNV-021",
+          "sha256Original": "001b974eb8c1d2fca26af44972e07f9a1f7952f7a7922f1ebf53738e3dfb6a3a",
+          "edicao": "v9 (11/02/2026; PDF v6 arquivado)"
+        }
+      },
+      {
+        "catalogoId": "HEMOGRAMA",
+        "protocoloId": "vulva-carbopac",
+        "contexto": "Baseline: CBC & Diff, creatinine, ALT, total bilirubin Baseline, if clinically indicated: alkaline phosphatase, CA 125, CA 15-3, CA 19-9, CEA, SCC, sodium,",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "https://www.bccancer.bc.ca/chemotherapy-protocols-site/Documents/Gynecology/GOCXCAT_Protocol.pdf",
+          "localizador": "f1-b2-fontes-externas/cec-ntg-vulva/bccancer-GOCXCAT-protocol.txt:L49-L51; Blood tests / TESTS",
+          "trecho": "Baseline: CBC & Diff, creatinine, ALT, total bilirubin\n Baseline, if clinically indicated: alkaline phosphatase, CA 125, CA 15-3, CA 19-9, CEA, SCC, sodium,",
+          "sha256": "cf45dec29260facc4e0d69c58a7657569934da04052ec058939eebecee74d798",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO",
+          "sourceId": "EXT-CNV-024",
+          "sha256Original": "03ddeed2cc303dd05cba344c300d44662b5a80fb6a49fdedd8ee58240a064fb3",
+          "edicao": "rev 01/10/2025"
+        }
+      },
+      {
+        "catalogoId": "CREATININA",
+        "protocoloId": "vulva-carbopac",
+        "contexto": "Baseline: CBC & Diff, creatinine, ALT, total bilirubin Baseline, if clinically indicated: alkaline phosphatase, CA 125, CA 15-3, CA 19-9, CEA, SCC, sodium,",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "https://www.bccancer.bc.ca/chemotherapy-protocols-site/Documents/Gynecology/GOCXCAT_Protocol.pdf",
+          "localizador": "f1-b2-fontes-externas/cec-ntg-vulva/bccancer-GOCXCAT-protocol.txt:L49-L51; Blood tests / TESTS",
+          "trecho": "Baseline: CBC & Diff, creatinine, ALT, total bilirubin\n Baseline, if clinically indicated: alkaline phosphatase, CA 125, CA 15-3, CA 19-9, CEA, SCC, sodium,",
+          "sha256": "cf45dec29260facc4e0d69c58a7657569934da04052ec058939eebecee74d798",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO",
+          "sourceId": "EXT-CNV-024",
+          "sha256Original": "03ddeed2cc303dd05cba344c300d44662b5a80fb6a49fdedd8ee58240a064fb3",
+          "edicao": "rev 01/10/2025"
+        }
+      },
+      {
+        "catalogoId": "FOSFORO",
+        "protocoloId": "vulva-carbopac",
+        "contexto": "Baseline: CBC & Diff, creatinine, ALT, total bilirubin Baseline, if clinically indicated: alkaline phosphatase, CA 125, CA 15-3, CA 19-9, CEA, SCC, sodium,",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "https://www.bccancer.bc.ca/chemotherapy-protocols-site/Documents/Gynecology/GOCXCAT_Protocol.pdf",
+          "localizador": "f1-b2-fontes-externas/cec-ntg-vulva/bccancer-GOCXCAT-protocol.txt:L49-L51; Blood tests / TESTS",
+          "trecho": "Baseline: CBC & Diff, creatinine, ALT, total bilirubin\n Baseline, if clinically indicated: alkaline phosphatase, CA 125, CA 15-3, CA 19-9, CEA, SCC, sodium,",
+          "sha256": "cf45dec29260facc4e0d69c58a7657569934da04052ec058939eebecee74d798",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO",
+          "sourceId": "EXT-CNV-024",
+          "sha256Original": "03ddeed2cc303dd05cba344c300d44662b5a80fb6a49fdedd8ee58240a064fb3",
+          "edicao": "rev 01/10/2025"
+        }
+      },
+      {
+        "catalogoId": "TGP",
+        "protocoloId": "vulva-carbopac",
+        "contexto": "Baseline: CBC & Diff, creatinine, ALT, total bilirubin Baseline, if clinically indicated: alkaline phosphatase, CA 125, CA 15-3, CA 19-9, CEA, SCC, sodium,",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "https://www.bccancer.bc.ca/chemotherapy-protocols-site/Documents/Gynecology/GOCXCAT_Protocol.pdf",
+          "localizador": "f1-b2-fontes-externas/cec-ntg-vulva/bccancer-GOCXCAT-protocol.txt:L49-L51; Blood tests / TESTS",
+          "trecho": "Baseline: CBC & Diff, creatinine, ALT, total bilirubin\n Baseline, if clinically indicated: alkaline phosphatase, CA 125, CA 15-3, CA 19-9, CEA, SCC, sodium,",
+          "sha256": "cf45dec29260facc4e0d69c58a7657569934da04052ec058939eebecee74d798",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO",
+          "sourceId": "EXT-CNV-024",
+          "sha256Original": "03ddeed2cc303dd05cba344c300d44662b5a80fb6a49fdedd8ee58240a064fb3",
+          "edicao": "rev 01/10/2025"
+        }
+      },
+      {
+        "catalogoId": "BILIRRUBINA",
+        "protocoloId": "vulva-carbopac",
+        "contexto": "Baseline: CBC & Diff, creatinine, ALT, total bilirubin Baseline, if clinically indicated: alkaline phosphatase, CA 125, CA 15-3, CA 19-9, CEA, SCC, sodium,",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "https://www.bccancer.bc.ca/chemotherapy-protocols-site/Documents/Gynecology/GOCXCAT_Protocol.pdf",
+          "localizador": "f1-b2-fontes-externas/cec-ntg-vulva/bccancer-GOCXCAT-protocol.txt:L49-L51; Blood tests / TESTS",
+          "trecho": "Baseline: CBC & Diff, creatinine, ALT, total bilirubin\n Baseline, if clinically indicated: alkaline phosphatase, CA 125, CA 15-3, CA 19-9, CEA, SCC, sodium,",
+          "sha256": "cf45dec29260facc4e0d69c58a7657569934da04052ec058939eebecee74d798",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO",
+          "sourceId": "EXT-CNV-024",
+          "sha256Original": "03ddeed2cc303dd05cba344c300d44662b5a80fb6a49fdedd8ee58240a064fb3",
+          "edicao": "rev 01/10/2025"
+        }
+      },
+      {
+        "catalogoId": "AUDIOMETRIA_TONAL",
+        "protocoloId": "vulva-cis-rt",
+        "contexto": "Audiometria se surgirem sintomas; não tornar rotina universal.",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "https://www.eviq.org.au/medical-oncology/gynaecological/vulval/locally-advanced/1529",
+          "localizador": "f1-b2-fontes-externas/cec-ntg-vulva/eviq-1529-vulval-cisplatin-weekly.txt:L118-L118; Ototoxicity",
+          "trecho": "An audiometry test should be performed if symptoms develop.",
+          "sha256": "c38c857aa71e06ef6b7b3cbc40922f3836af2fa4155a75bc78e54893c13b6e79",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO",
+          "sourceId": "EXT-CNV-021",
+          "sha256Original": "001b974eb8c1d2fca26af44972e07f9a1f7952f7a7922f1ebf53738e3dfb6a3a",
+          "edicao": "v9 (11/02/2026; PDF v6 arquivado)"
+        }
+      }
+    ],
+    "fonte": {
+      "tipo": "PROTOCOLO_INSTITUCIONAL",
+      "referencia": "ligacoes.examesFontes[catalogoId,protocoloId] — cada ligação acrescentada tem fonte própria com trecho, localizador e SHA-256.",
+      "trecho": "Hemograma, função renal e exames específicos vinculados às fontes por protocolo. Ligações herdadas sem comprovação nesta rodada permanecem descritas nas pendências; a lista não representa pedido universal.",
+      "estado": "PARCIAL"
+    }
   },
   "pendencias": [
     {
@@ -482,6 +728,47 @@
         "docs/referencias/: busca textual por RENAME, disponibilidade SUS e nomes dos fármacos; compêndios secundários sem prova oficial específica de acesso para estes esquemas.",
         "RENAME 2024, edição apontada vigente no portal do Ministério da Saúde; resultados por fármaco em tratamento.protocolos[id=vulva-carbopac].sus.farmacos.",
         "Ausência de confirmação institucional de estoque/acesso por indicação."
+      ]
+    },
+    {
+      "texto": "H4 vulva-cis-rt: risco FN sem classificação específica verificada.",
+      "classe": "SUPORTE_SEM_FONTE_ESPECIFICA",
+      "protocoloId": "vulva-cis-rt",
+      "buscasFeitas": [
+        "f1-b2-fontes-externas/cec-ntg-vulva/eviq-1529-vulval-cisplatin-weekly.txt: Clinical information, Evidence/Toxicity, growth factor support e Blood tests.",
+        "corpus/4-interacoes-contraindicacoes/risco-neutropenia-febril.v1.RASCUNHO.json: sem linha específica para este esquema; G-CSF por desenho não equivale a faixa percentual de FN."
+      ]
+    },
+    {
+      "texto": "H4 vulva-carbopac: risco FN sem classificação específica verificada.",
+      "classe": "SUPORTE_SEM_FONTE_ESPECIFICA",
+      "protocoloId": "vulva-carbopac",
+      "buscasFeitas": [
+        "f1-b2-fontes-externas/cec-ntg-vulva/bccancer-GOCXCAT-protocol.txt: Clinical information, Evidence/Toxicity, growth factor support e Blood tests.",
+        "corpus/4-interacoes-contraindicacoes/risco-neutropenia-febril.v1.RASCUNHO.json: sem linha específica para este esquema; G-CSF por desenho não equivale a faixa percentual de FN."
+      ]
+    },
+    {
+      "texto": "H4: aliases herdados da base sem ID exato no catálogo; preservados para não escolher segmento/técnica clínica. Não tratar estas ligações como IDs resolvidos.",
+      "classe": "CATALOGO_ID_PENDENTE",
+      "ids": [
+        "BIOPSIA"
+      ],
+      "buscasFeitas": [
+        "corpus/exames/exames-sigtap.v1.json, secoes[*].id (catálogo usado pelos painéis de corpus/1-exames/).",
+        "corpus/1-exames/: não há definição canônica de RM_LOCAL, BIOPSIA nem das composições genéricas TC_TORAX_ABDOME, TC_TORAX_ABDOME_PELVE e TC_CERVICO_TORACICA."
+      ]
+    },
+    {
+      "texto": "H4: ligações já presentes na base sem proveniência clínica revalidada nesta rodada; não contam como exames acrescentados/verificados.",
+      "classe": "LIGACAO_HERDADA_A_CONFERIR",
+      "ids": [
+        "BIOPSIA",
+        "TC_PELVE",
+        "CLEARANCE_CREATININA"
+      ],
+      "buscasFeitas": [
+        "Inventário integral dos seis packs em 9517c76; comparação com o catálogo e com as capturas específicas de monitorização dos protocolos."
       ]
     }
   ],
@@ -547,6 +834,20 @@
         "susPreenchidos": 0,
         "notas": [
           "D-F1-49: fichas institucionais novas sem SISAC; mudança de fonte não aprova doses"
+        ]
+      },
+      {
+        "data": "2026-10-14",
+        "redator": "Codex — SETOR PACKS-B2 H2+H4",
+        "susPreenchidos": 0,
+        "protocolosSusVerificar": 2,
+        "examesAcrescentados": 6,
+        "suportesPorProtocolo": 2,
+        "notas": [
+          "RENAME 2024 consultada (edição vigente indicada pelo Ministério da Saúde); SIGTAP 2026-09 consultado somente em arquivos locais.",
+          "Códigos administrativos e RENAME não comprovam acesso ao esquema no serviço nem cobertura ANS.",
+          "Fontes externas do manifesto pareadas por SHA-256; demais trechos têm hash da captura textual e localizador exato.",
+          "Preservados RASCUNHO, consultavel true, alerta false, aprovacaoClinica null e todas as doses."
         ]
       }
     ]

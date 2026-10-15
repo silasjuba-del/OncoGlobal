@@ -336,7 +336,30 @@
         },
         "observacao": "",
         "derivadoDe": null,
-        "criterioAplicacao": ""
+        "criterioAplicacao": "",
+        "suporte": {
+          "emetogenicidade": {
+            "classificacao": "BAIXA",
+            "fonte": {
+              "tipo": "PROTOCOLO_INSTITUCIONAL",
+              "referencia": "https://www.eviq.org.au/medical-oncology/gynaecological/gestational-trophoblastic/668",
+              "localizador": "f1-b2-fontes-externas/cec-ntg-vulva/eviq-668-mtx-lowrisk.txt:L121-L121; Clinical information / emetogenicity",
+              "trecho": "Emetogenicity LOW",
+              "sha256": "cbcc829510b752fb304486e2a38fe2a87071e1fa46073a89910392cddaf5eaf4",
+              "consultadoEm": "2026-10-14",
+              "estado": "CONSULTADO",
+              "sourceId": "EXT-CNV-026",
+              "sha256Original": "b66fbb8a28ce0787bee9788607f8dde30ac21673186ccac4f4ac6ae6633e3101",
+              "edicao": "v4 (PDF v3)"
+            }
+          },
+          "riscoNeutropeniaFebril": {
+            "classificacao": "VERIFICAR",
+            "percentual": null,
+            "fonte": null,
+            "pendencia": "Não localizada classificação de risco FN específica para este protocolo/variante nas fontes consultadas; não inferir de neutropenia isolada nem da presença de G-CSF."
+          }
+        }
       },
       {
         "id": "ntg-actd",
@@ -425,7 +448,30 @@
         },
         "observacao": "",
         "derivadoDe": null,
-        "criterioAplicacao": ""
+        "criterioAplicacao": "",
+        "suporte": {
+          "emetogenicidade": {
+            "classificacao": "MODERADA",
+            "fonte": {
+              "tipo": "PROTOCOLO_INSTITUCIONAL",
+              "referencia": "https://www.eviq.org.au/medical-oncology/gynaecological/gestational-trophoblastic/1018",
+              "localizador": "f1-b2-fontes-externas/cec-ntg-vulva/eviq-1018-dactinomycin-lowrisk.txt:L82-L82; Clinical information / emetogenicity",
+              "trecho": "Emetogenicity MODERATE",
+              "sha256": "0aa9ac3cc99c77f90330a1c281c16f493510a06711e8591f46b7760181ecc455",
+              "consultadoEm": "2026-10-14",
+              "estado": "CONSULTADO",
+              "sourceId": "EXT-CNV-027",
+              "sha256Original": "e1d1ecd154c78a588baf362e03df95449c366334369e325ce9dfef0fdc7de613",
+              "edicao": "acesso 2026-10-14"
+            }
+          },
+          "riscoNeutropeniaFebril": {
+            "classificacao": "VERIFICAR",
+            "percentual": null,
+            "fonte": null,
+            "pendencia": "Não localizada classificação de risco FN específica para este protocolo/variante nas fontes consultadas; não inferir de neutropenia isolada nem da presença de G-CSF."
+          }
+        }
       },
       {
         "id": "ntg-emaco",
@@ -686,7 +732,45 @@
         },
         "observacao": "",
         "derivadoDe": null,
-        "criterioAplicacao": ""
+        "criterioAplicacao": "",
+        "suporte": {
+          "emetogenicidade": {
+            "classificacao": "MODERADA",
+            "fonte": {
+              "tipo": "PROTOCOLO_INSTITUCIONAL",
+              "referencia": "https://www.eviq.org.au/medical-oncology/gynaecological/gestational-trophoblastic/599",
+              "localizador": "f1-b2-fontes-externas/cec-ntg-vulva/eviq-599-ema-co.txt:L149-L149; Clinical information / emetogenicity",
+              "trecho": "Emetogenicity MODERATE",
+              "sha256": "c7f0cdb4bb7fd5bbd281831d139f1bd8b65099a7549e528517abb017cff162bb",
+              "consultadoEm": "2026-10-14",
+              "estado": "CONSULTADO",
+              "sourceId": "EXT-CNV-028",
+              "sha256Original": "aa5e8ebebdd5a27279a6fefcb4790c5625f4c12c64498a8f2c5f49a2b72c2acf",
+              "edicao": "v8 (PDF v5)"
+            }
+          },
+          "riscoNeutropeniaFebril": {
+            "classificacao": "VERIFICAR",
+            "percentual": null,
+            "fonte": null,
+            "pendencia": "Não localizada classificação de risco FN específica para este protocolo/variante nas fontes consultadas; não inferir de neutropenia isolada nem da presença de G-CSF."
+          },
+          "gcsf": {
+            "descricao": "Suporte descrito na fonte do protocolo; confirmar aplicabilidade e esquema na ficha. Não equivale a classificação percentual de risco FN.",
+            "fonte": {
+              "tipo": "PROTOCOLO_INSTITUCIONAL",
+              "referencia": "https://www.eviq.org.au/medical-oncology/gynaecological/gestational-trophoblastic/599",
+              "localizador": "f1-b2-fontes-externas/cec-ntg-vulva/eviq-599-ema-co.txt:L46-L47; Growth factor support / supportive care",
+              "trecho": "** The use of short acting G-CSF (filgrastim) for 2-3 days is frequently required to maintain the schedule. Only 2 days of treatment\nmay be required with the initial cycles.",
+              "sha256": "c7f0cdb4bb7fd5bbd281831d139f1bd8b65099a7549e528517abb017cff162bb",
+              "consultadoEm": "2026-10-14",
+              "estado": "CONSULTADO",
+              "sourceId": "EXT-CNV-028",
+              "sha256Original": "aa5e8ebebdd5a27279a6fefcb4790c5625f4c12c64498a8f2c5f49a2b72c2acf",
+              "edicao": "v8 (PDF v5)"
+            }
+          }
+        }
       },
       {
         "id": "ntg-emaep",
@@ -899,7 +983,45 @@
         },
         "observacao": "",
         "derivadoDe": null,
-        "criterioAplicacao": ""
+        "criterioAplicacao": "",
+        "suporte": {
+          "emetogenicidade": {
+            "classificacao": "ALTA",
+            "fonte": {
+              "tipo": "PROTOCOLO_INSTITUCIONAL",
+              "referencia": "https://www.eviq.org.au/medical-oncology/gynaecological/gestational-trophoblastic/1378",
+              "localizador": "f1-b2-fontes-externas/cec-ntg-vulva/eviq-1378-ep-ema.txt:L154-L154; Clinical information / emetogenicity",
+              "trecho": "Emetogenicity HIGH",
+              "sha256": "e0abe646d9027a9a2aedc3a9a7df6b610e3f552fac08f343b512466549debdb4",
+              "consultadoEm": "2026-10-14",
+              "estado": "CONSULTADO",
+              "sourceId": "EXT-CNV-029",
+              "sha256Original": "1d2de6226e37f9df6f1b42ec5af664c0ff6967fcbd2f122e84ff8f8bdc63148e",
+              "edicao": "v8 (PDF v5)"
+            }
+          },
+          "riscoNeutropeniaFebril": {
+            "classificacao": "VERIFICAR",
+            "percentual": null,
+            "fonte": null,
+            "pendencia": "Não localizada classificação de risco FN específica para este protocolo/variante nas fontes consultadas; não inferir de neutropenia isolada nem da presença de G-CSF."
+          },
+          "gcsf": {
+            "descricao": "Suporte descrito na fonte do protocolo; confirmar aplicabilidade e esquema na ficha. Não equivale a classificação percentual de risco FN.",
+            "fonte": {
+              "tipo": "PROTOCOLO_INSTITUCIONAL",
+              "referencia": "https://www.eviq.org.au/medical-oncology/gynaecological/gestational-trophoblastic/1378",
+              "localizador": "f1-b2-fontes-externas/cec-ntg-vulva/eviq-1378-ep-ema.txt:L47-L48; Growth factor support / supportive care",
+              "trecho": "**** The use of short acting G-CSF (filgrastim) for 2-3 days is frequently required to maintain the schedule. Only 2 days of treatment\nmay be required with the initial cycles.",
+              "sha256": "e0abe646d9027a9a2aedc3a9a7df6b610e3f552fac08f343b512466549debdb4",
+              "consultadoEm": "2026-10-14",
+              "estado": "CONSULTADO",
+              "sourceId": "EXT-CNV-029",
+              "sha256Original": "1d2de6226e37f9df6f1b42ec5af664c0ff6967fcbd2f122e84ff8f8bdc63148e",
+              "edicao": "v8 (PDF v5)"
+            }
+          }
+        }
       },
       {
         "id": "ntg-ep-inducao",
@@ -1019,7 +1141,30 @@
         },
         "observacao": "",
         "derivadoDe": null,
-        "criterioAplicacao": ""
+        "criterioAplicacao": "",
+        "suporte": {
+          "emetogenicidade": {
+            "classificacao": "ALTA",
+            "fonte": {
+              "tipo": "PROTOCOLO_INSTITUCIONAL",
+              "referencia": "https://www.eviq.org.au/medical-oncology/gynaecological/gestational-trophoblastic/1347",
+              "localizador": "f1-b2-fontes-externas/cec-ntg-vulva/eviq-1347-ep-veryhighrisk.txt:L110-L110; Clinical information / emetogenicity",
+              "trecho": "Emetogenicity HIGH",
+              "sha256": "da469551441af12b74d3b4e19536ac6a4f7f85bcc218f12588dc5ce9019ac15b",
+              "consultadoEm": "2026-10-14",
+              "estado": "CONSULTADO",
+              "sourceId": "EXT-CNV-030",
+              "sha256Original": "3e0e8bcb23e649e4e8ac9a257143e4120f3e8b08c43006dabb896730fed7b9d0",
+              "edicao": "v5 (PDF v2)"
+            }
+          },
+          "riscoNeutropeniaFebril": {
+            "classificacao": "VERIFICAR",
+            "percentual": null,
+            "fonte": null,
+            "pendencia": "Não localizada classificação de risco FN específica para este protocolo/variante nas fontes consultadas; não inferir de neutropenia isolada nem da presença de G-CSF."
+          }
+        }
       }
     ],
     "radioterapia": [],
@@ -1055,18 +1200,17 @@
       }
     ],
     "suporte": {
-      "emetogenicidade": "moderada/alta conforme bloco (D-F1-30 local)",
-      "riscoNeutropeniaFebril": "alto no EMA-CO/EMA-EP",
+      "emetogenicidade": "Consultar tratamento.protocolos[].suporte.emetogenicidade: classificação e fonte por esquema; VERIFICAR quando não documentada.",
+      "riscoNeutropeniaFebril": "VERIFICAR por protocolo; suporte G-CSF documentado separadamente não estabelece faixa percentual de FN.",
       "outros": [
         "filgrastim D3–5 e D9–11 no EMA-CO (eviQ)",
         "resgate folínico obrigatório após MTX 300"
       ],
       "fonte": {
         "tipo": "PROTOCOLO_INSTITUCIONAL",
-        "referencia": "eviQ 599",
-        "pagina": null,
-        "trecho": "G-CSF and folinic rescue",
-        "estado": "CONSULTADO"
+        "referencia": "Fontes individualizadas em tratamento.protocolos[].suporte; evidências locais f1-b2-fontes-externas (captura 2026-10-14).",
+        "trecho": "Classificações de emetogenicidade transcritas por esquema; ausência de classificação específica de FN permanece explícita.",
+        "estado": "PARCIAL"
       }
     }
   },
@@ -1078,7 +1222,10 @@
       "RM_CRANIO",
       "HEMOGRAMA",
       "CREATININA",
-      "CLEARANCE_CREATININA"
+      "CLEARANCE_CREATININA",
+      "CALCIO",
+      "MAGNESIO",
+      "AUDIOMETRIA_TONAL"
     ],
     "interacoesConsultar": [],
     "ctcaeAcao": [],
@@ -1086,7 +1233,355 @@
     "orientacoes": [],
     "encaminhamentos": [],
     "laudos": [],
-    "formulasXYZ": []
+    "formulasXYZ": [],
+    "examesFontes": [
+      {
+        "catalogoId": "HEMOGRAMA",
+        "protocoloId": "ntg-mtx-fa",
+        "contexto": "FBC, EUC, eGFR and LFTs at baseline. Repeat FBC prior to each cycle and EUC, eGFR and LFTs monthly or as clinically indicated.",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "https://www.eviq.org.au/medical-oncology/gynaecological/gestational-trophoblastic/668",
+          "localizador": "f1-b2-fontes-externas/cec-ntg-vulva/eviq-668-mtx-lowrisk.txt:L157-L159; Blood tests / TESTS",
+          "trecho": "FBC, EUC, eGFR and LFTs at baseline. Repeat FBC prior to each cycle and EUC, eGFR and LFTs\n                      monthly or as clinically indicated.",
+          "sha256": "cbcc829510b752fb304486e2a38fe2a87071e1fa46073a89910392cddaf5eaf4",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO",
+          "sourceId": "EXT-CNV-026",
+          "sha256Original": "b66fbb8a28ce0787bee9788607f8dde30ac21673186ccac4f4ac6ae6633e3101",
+          "edicao": "v4 (PDF v3)"
+        }
+      },
+      {
+        "catalogoId": "CREATININA",
+        "protocoloId": "ntg-mtx-fa",
+        "contexto": "FBC, EUC, eGFR and LFTs at baseline. Repeat FBC prior to each cycle and EUC, eGFR and LFTs monthly or as clinically indicated.",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "https://www.eviq.org.au/medical-oncology/gynaecological/gestational-trophoblastic/668",
+          "localizador": "f1-b2-fontes-externas/cec-ntg-vulva/eviq-668-mtx-lowrisk.txt:L157-L159; Blood tests / TESTS",
+          "trecho": "FBC, EUC, eGFR and LFTs at baseline. Repeat FBC prior to each cycle and EUC, eGFR and LFTs\n                      monthly or as clinically indicated.",
+          "sha256": "cbcc829510b752fb304486e2a38fe2a87071e1fa46073a89910392cddaf5eaf4",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO",
+          "sourceId": "EXT-CNV-026",
+          "sha256Original": "b66fbb8a28ce0787bee9788607f8dde30ac21673186ccac4f4ac6ae6633e3101",
+          "edicao": "v4 (PDF v3)"
+        }
+      },
+      {
+        "catalogoId": "HEMOGRAMA",
+        "protocoloId": "ntg-actd",
+        "contexto": "Blood tests FBC, EUC, eGFR and LFTs at baseline and prior to each cycle. Routine screening for HBsAg and anti-HBc is recommended prior to initiation of treatment.",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "https://www.eviq.org.au/medical-oncology/gynaecological/gestational-trophoblastic/1018",
+          "localizador": "f1-b2-fontes-externas/cec-ntg-vulva/eviq-1018-dactinomycin-lowrisk.txt:L117-L119; Blood tests / TESTS",
+          "trecho": "Blood tests               FBC, EUC, eGFR and LFTs at baseline and prior to each cycle.\n\n                          Routine screening for HBsAg and anti-HBc is recommended prior to initiation of treatment.",
+          "sha256": "0aa9ac3cc99c77f90330a1c281c16f493510a06711e8591f46b7760181ecc455",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO",
+          "sourceId": "EXT-CNV-027",
+          "sha256Original": "e1d1ecd154c78a588baf362e03df95449c366334369e325ce9dfef0fdc7de613",
+          "edicao": "acesso 2026-10-14"
+        }
+      },
+      {
+        "catalogoId": "CREATININA",
+        "protocoloId": "ntg-actd",
+        "contexto": "Blood tests FBC, EUC, eGFR and LFTs at baseline and prior to each cycle. Routine screening for HBsAg and anti-HBc is recommended prior to initiation of treatment.",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "https://www.eviq.org.au/medical-oncology/gynaecological/gestational-trophoblastic/1018",
+          "localizador": "f1-b2-fontes-externas/cec-ntg-vulva/eviq-1018-dactinomycin-lowrisk.txt:L117-L119; Blood tests / TESTS",
+          "trecho": "Blood tests               FBC, EUC, eGFR and LFTs at baseline and prior to each cycle.\n\n                          Routine screening for HBsAg and anti-HBc is recommended prior to initiation of treatment.",
+          "sha256": "0aa9ac3cc99c77f90330a1c281c16f493510a06711e8591f46b7760181ecc455",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO",
+          "sourceId": "EXT-CNV-027",
+          "sha256Original": "e1d1ecd154c78a588baf362e03df95449c366334369e325ce9dfef0fdc7de613",
+          "edicao": "acesso 2026-10-14"
+        }
+      },
+      {
+        "catalogoId": "HEMOGRAMA",
+        "protocoloId": "ntg-emaco",
+        "contexto": "FBC, EUC, eGFR and LFTs at baseline and prior to each treatment. Regular monitoring of serum creatinine as clinically indicated to monitor for signs of nephrotoxicity.",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "https://www.eviq.org.au/medical-oncology/gynaecological/gestational-trophoblastic/599",
+          "localizador": "f1-b2-fontes-externas/cec-ntg-vulva/eviq-599-ema-co.txt:L212-L214; Blood tests / TESTS",
+          "trecho": "FBC, EUC, eGFR and LFTs at baseline and prior to each treatment.\n                             Regular monitoring of serum creatinine as clinically indicated to monitor for signs of\n                             nephrotoxicity.",
+          "sha256": "c7f0cdb4bb7fd5bbd281831d139f1bd8b65099a7549e528517abb017cff162bb",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO",
+          "sourceId": "EXT-CNV-028",
+          "sha256Original": "aa5e8ebebdd5a27279a6fefcb4790c5625f4c12c64498a8f2c5f49a2b72c2acf",
+          "edicao": "v8 (PDF v5)"
+        }
+      },
+      {
+        "catalogoId": "CREATININA",
+        "protocoloId": "ntg-emaco",
+        "contexto": "FBC, EUC, eGFR and LFTs at baseline and prior to each treatment. Regular monitoring of serum creatinine as clinically indicated to monitor for signs of nephrotoxicity.",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "https://www.eviq.org.au/medical-oncology/gynaecological/gestational-trophoblastic/599",
+          "localizador": "f1-b2-fontes-externas/cec-ntg-vulva/eviq-599-ema-co.txt:L212-L214; Blood tests / TESTS",
+          "trecho": "FBC, EUC, eGFR and LFTs at baseline and prior to each treatment.\n                             Regular monitoring of serum creatinine as clinically indicated to monitor for signs of\n                             nephrotoxicity.",
+          "sha256": "c7f0cdb4bb7fd5bbd281831d139f1bd8b65099a7549e528517abb017cff162bb",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO",
+          "sourceId": "EXT-CNV-028",
+          "sha256Original": "aa5e8ebebdd5a27279a6fefcb4790c5625f4c12c64498a8f2c5f49a2b72c2acf",
+          "edicao": "v8 (PDF v5)"
+        }
+      },
+      {
+        "catalogoId": "HEMOGRAMA",
+        "protocoloId": "ntg-emaep",
+        "contexto": "FBC, EUC, eGFR, LFTs, calcium and magnesium at baseline and prior to each treatment. Routine screening for HBsAg and anti-HBc is recommended prior to initiation of treatment.",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "https://www.eviq.org.au/medical-oncology/gynaecological/gestational-trophoblastic/1378",
+          "localizador": "f1-b2-fontes-externas/cec-ntg-vulva/eviq-1378-ep-ema.txt:L227-L229; Blood tests / TESTS",
+          "trecho": "FBC, EUC, eGFR, LFTs, calcium and magnesium at baseline and prior to each treatment.\n\n                             Routine screening for HBsAg and anti-HBc is recommended prior to initiation of treatment.",
+          "sha256": "e0abe646d9027a9a2aedc3a9a7df6b610e3f552fac08f343b512466549debdb4",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO",
+          "sourceId": "EXT-CNV-029",
+          "sha256Original": "1d2de6226e37f9df6f1b42ec5af664c0ff6967fcbd2f122e84ff8f8bdc63148e",
+          "edicao": "v8 (PDF v5)"
+        }
+      },
+      {
+        "catalogoId": "CREATININA",
+        "protocoloId": "ntg-emaep",
+        "contexto": "FBC, EUC, eGFR, LFTs, calcium and magnesium at baseline and prior to each treatment. Routine screening for HBsAg and anti-HBc is recommended prior to initiation of treatment.",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "https://www.eviq.org.au/medical-oncology/gynaecological/gestational-trophoblastic/1378",
+          "localizador": "f1-b2-fontes-externas/cec-ntg-vulva/eviq-1378-ep-ema.txt:L227-L229; Blood tests / TESTS",
+          "trecho": "FBC, EUC, eGFR, LFTs, calcium and magnesium at baseline and prior to each treatment.\n\n                             Routine screening for HBsAg and anti-HBc is recommended prior to initiation of treatment.",
+          "sha256": "e0abe646d9027a9a2aedc3a9a7df6b610e3f552fac08f343b512466549debdb4",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO",
+          "sourceId": "EXT-CNV-029",
+          "sha256Original": "1d2de6226e37f9df6f1b42ec5af664c0ff6967fcbd2f122e84ff8f8bdc63148e",
+          "edicao": "v8 (PDF v5)"
+        }
+      },
+      {
+        "catalogoId": "CALCIO",
+        "protocoloId": "ntg-emaep",
+        "contexto": "FBC, EUC, eGFR, LFTs, calcium and magnesium at baseline and prior to each treatment. Routine screening for HBsAg and anti-HBc is recommended prior to initiation of treatment.",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "https://www.eviq.org.au/medical-oncology/gynaecological/gestational-trophoblastic/1378",
+          "localizador": "f1-b2-fontes-externas/cec-ntg-vulva/eviq-1378-ep-ema.txt:L227-L229; Blood tests / TESTS",
+          "trecho": "FBC, EUC, eGFR, LFTs, calcium and magnesium at baseline and prior to each treatment.\n\n                             Routine screening for HBsAg and anti-HBc is recommended prior to initiation of treatment.",
+          "sha256": "e0abe646d9027a9a2aedc3a9a7df6b610e3f552fac08f343b512466549debdb4",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO",
+          "sourceId": "EXT-CNV-029",
+          "sha256Original": "1d2de6226e37f9df6f1b42ec5af664c0ff6967fcbd2f122e84ff8f8bdc63148e",
+          "edicao": "v8 (PDF v5)"
+        }
+      },
+      {
+        "catalogoId": "MAGNESIO",
+        "protocoloId": "ntg-emaep",
+        "contexto": "FBC, EUC, eGFR, LFTs, calcium and magnesium at baseline and prior to each treatment. Routine screening for HBsAg and anti-HBc is recommended prior to initiation of treatment.",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "https://www.eviq.org.au/medical-oncology/gynaecological/gestational-trophoblastic/1378",
+          "localizador": "f1-b2-fontes-externas/cec-ntg-vulva/eviq-1378-ep-ema.txt:L227-L229; Blood tests / TESTS",
+          "trecho": "FBC, EUC, eGFR, LFTs, calcium and magnesium at baseline and prior to each treatment.\n\n                             Routine screening for HBsAg and anti-HBc is recommended prior to initiation of treatment.",
+          "sha256": "e0abe646d9027a9a2aedc3a9a7df6b610e3f552fac08f343b512466549debdb4",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO",
+          "sourceId": "EXT-CNV-029",
+          "sha256Original": "1d2de6226e37f9df6f1b42ec5af664c0ff6967fcbd2f122e84ff8f8bdc63148e",
+          "edicao": "v8 (PDF v5)"
+        }
+      },
+      {
+        "catalogoId": "HEMOGRAMA",
+        "protocoloId": "ntg-ep-inducao",
+        "contexto": "FBC, EUC, eGFR, LFTs, calcium and magnesium at baseline and prior to each cycle. Routine screening for HBsAg and anti-HBc is recommended prior to initiation of treatment.",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "https://www.eviq.org.au/medical-oncology/gynaecological/gestational-trophoblastic/1347",
+          "localizador": "f1-b2-fontes-externas/cec-ntg-vulva/eviq-1347-ep-veryhighrisk.txt:L155-L157; Blood tests / TESTS",
+          "trecho": "FBC, EUC, eGFR, LFTs, calcium and magnesium at baseline and prior to each cycle.\n\n                             Routine screening for HBsAg and anti-HBc is recommended prior to initiation of treatment.",
+          "sha256": "da469551441af12b74d3b4e19536ac6a4f7f85bcc218f12588dc5ce9019ac15b",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO",
+          "sourceId": "EXT-CNV-030",
+          "sha256Original": "3e0e8bcb23e649e4e8ac9a257143e4120f3e8b08c43006dabb896730fed7b9d0",
+          "edicao": "v5 (PDF v2)"
+        }
+      },
+      {
+        "catalogoId": "CREATININA",
+        "protocoloId": "ntg-ep-inducao",
+        "contexto": "FBC, EUC, eGFR, LFTs, calcium and magnesium at baseline and prior to each cycle. Routine screening for HBsAg and anti-HBc is recommended prior to initiation of treatment.",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "https://www.eviq.org.au/medical-oncology/gynaecological/gestational-trophoblastic/1347",
+          "localizador": "f1-b2-fontes-externas/cec-ntg-vulva/eviq-1347-ep-veryhighrisk.txt:L155-L157; Blood tests / TESTS",
+          "trecho": "FBC, EUC, eGFR, LFTs, calcium and magnesium at baseline and prior to each cycle.\n\n                             Routine screening for HBsAg and anti-HBc is recommended prior to initiation of treatment.",
+          "sha256": "da469551441af12b74d3b4e19536ac6a4f7f85bcc218f12588dc5ce9019ac15b",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO",
+          "sourceId": "EXT-CNV-030",
+          "sha256Original": "3e0e8bcb23e649e4e8ac9a257143e4120f3e8b08c43006dabb896730fed7b9d0",
+          "edicao": "v5 (PDF v2)"
+        }
+      },
+      {
+        "catalogoId": "CALCIO",
+        "protocoloId": "ntg-ep-inducao",
+        "contexto": "FBC, EUC, eGFR, LFTs, calcium and magnesium at baseline and prior to each cycle. Routine screening for HBsAg and anti-HBc is recommended prior to initiation of treatment.",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "https://www.eviq.org.au/medical-oncology/gynaecological/gestational-trophoblastic/1347",
+          "localizador": "f1-b2-fontes-externas/cec-ntg-vulva/eviq-1347-ep-veryhighrisk.txt:L155-L157; Blood tests / TESTS",
+          "trecho": "FBC, EUC, eGFR, LFTs, calcium and magnesium at baseline and prior to each cycle.\n\n                             Routine screening for HBsAg and anti-HBc is recommended prior to initiation of treatment.",
+          "sha256": "da469551441af12b74d3b4e19536ac6a4f7f85bcc218f12588dc5ce9019ac15b",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO",
+          "sourceId": "EXT-CNV-030",
+          "sha256Original": "3e0e8bcb23e649e4e8ac9a257143e4120f3e8b08c43006dabb896730fed7b9d0",
+          "edicao": "v5 (PDF v2)"
+        }
+      },
+      {
+        "catalogoId": "MAGNESIO",
+        "protocoloId": "ntg-ep-inducao",
+        "contexto": "FBC, EUC, eGFR, LFTs, calcium and magnesium at baseline and prior to each cycle. Routine screening for HBsAg and anti-HBc is recommended prior to initiation of treatment.",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "https://www.eviq.org.au/medical-oncology/gynaecological/gestational-trophoblastic/1347",
+          "localizador": "f1-b2-fontes-externas/cec-ntg-vulva/eviq-1347-ep-veryhighrisk.txt:L155-L157; Blood tests / TESTS",
+          "trecho": "FBC, EUC, eGFR, LFTs, calcium and magnesium at baseline and prior to each cycle.\n\n                             Routine screening for HBsAg and anti-HBc is recommended prior to initiation of treatment.",
+          "sha256": "da469551441af12b74d3b4e19536ac6a4f7f85bcc218f12588dc5ce9019ac15b",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO",
+          "sourceId": "EXT-CNV-030",
+          "sha256Original": "3e0e8bcb23e649e4e8ac9a257143e4120f3e8b08c43006dabb896730fed7b9d0",
+          "edicao": "v5 (PDF v2)"
+        }
+      },
+      {
+        "catalogoId": "BETA_HCG",
+        "protocoloId": "ntg-mtx-fa",
+        "contexto": "Monitorização conforme unidade especializada e diretriz citada no protocolo; não converter em pedido automático.",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "https://www.eviq.org.au/medical-oncology/gynaecological/gestational-trophoblastic/668",
+          "localizador": "f1-b2-fontes-externas/cec-ntg-vulva/eviq-668-mtx-lowrisk.txt:L145-L148; Beta human chorionic gonadotrophin levels",
+          "trecho": "It is recommended that �-hCG is monitored as per published guidelines and in conjunction with\n                      a gestational trophoblastic disease speciality unit or molar registry if available.\n                      The Charing Cross monitoring recommendations are as follows: Measure �-hCG levels twice a\n                      week during treatment until levels become normal then check weekly until treatment stops.",
+          "sha256": "cbcc829510b752fb304486e2a38fe2a87071e1fa46073a89910392cddaf5eaf4",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO",
+          "sourceId": "EXT-CNV-026",
+          "sha256Original": "b66fbb8a28ce0787bee9788607f8dde30ac21673186ccac4f4ac6ae6633e3101",
+          "edicao": "v4 (PDF v3)"
+        }
+      },
+      {
+        "catalogoId": "BETA_HCG",
+        "protocoloId": "ntg-actd",
+        "contexto": "Monitorização conforme unidade especializada e diretriz citada no protocolo; não converter em pedido automático.",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "https://www.eviq.org.au/medical-oncology/gynaecological/gestational-trophoblastic/1018",
+          "localizador": "f1-b2-fontes-externas/cec-ntg-vulva/eviq-1018-dactinomycin-lowrisk.txt:L103-L106; Beta human chorionic gonadotrophin levels",
+          "trecho": "Beta human chorionic      It is recommended that �-hCG is monitored as per published guidelines and in conjunction with\ngonadotrophin levels (�-  a gestational trophoblastic disease speciality unit or molar registry if available.\nhCG)\n                          The Charing Cross monitoring recommendations are as follows: Measure �-hCG levels twice a",
+          "sha256": "0aa9ac3cc99c77f90330a1c281c16f493510a06711e8591f46b7760181ecc455",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO",
+          "sourceId": "EXT-CNV-027",
+          "sha256Original": "e1d1ecd154c78a588baf362e03df95449c366334369e325ce9dfef0fdc7de613",
+          "edicao": "acesso 2026-10-14"
+        }
+      },
+      {
+        "catalogoId": "BETA_HCG",
+        "protocoloId": "ntg-emaco",
+        "contexto": "Monitorização conforme unidade especializada e diretriz citada no protocolo; não converter em pedido automático.",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "https://www.eviq.org.au/medical-oncology/gynaecological/gestational-trophoblastic/599",
+          "localizador": "f1-b2-fontes-externas/cec-ntg-vulva/eviq-599-ema-co.txt:L200-L203; Beta human chorionic gonadotrophin levels",
+          "trecho": "C Hepatitis B screening and  It is recommended that �-hCG is monitored as per published guidelines and in conjunction with\n                             a gestational trophoblastic disease speciality unit or molar registry if available.\nprophylaxis                  The Charing Cross monitoring recommendations are as follows: Measure �-hCG levels twice a\n                             week during treatment until levels become normal then check weekly until treatment stops.",
+          "sha256": "c7f0cdb4bb7fd5bbd281831d139f1bd8b65099a7549e528517abb017cff162bb",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO",
+          "sourceId": "EXT-CNV-028",
+          "sha256Original": "aa5e8ebebdd5a27279a6fefcb4790c5625f4c12c64498a8f2c5f49a2b72c2acf",
+          "edicao": "v8 (PDF v5)"
+        }
+      },
+      {
+        "catalogoId": "BETA_HCG",
+        "protocoloId": "ntg-emaep",
+        "contexto": "Monitorização conforme unidade especializada e diretriz citada no protocolo; não converter em pedido automático.",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "https://www.eviq.org.au/medical-oncology/gynaecological/gestational-trophoblastic/1378",
+          "localizador": "f1-b2-fontes-externas/cec-ntg-vulva/eviq-1378-ep-ema.txt:L215-L218; Beta human chorionic gonadotrophin levels",
+          "trecho": "It is recommended that �-hCG is monitored as per published guidelines and in conjunction with\nC prophylaxis                a gestational trophoblastic disease speciality unit or molar registry if available.\n                             The Charing Cross monitoring recommendations are as follows: Measure �-hCG levels twice a\nVaccinations                 week during treatment until levels become normal then check weekly until treatment stops.",
+          "sha256": "e0abe646d9027a9a2aedc3a9a7df6b610e3f552fac08f343b512466549debdb4",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO",
+          "sourceId": "EXT-CNV-029",
+          "sha256Original": "1d2de6226e37f9df6f1b42ec5af664c0ff6967fcbd2f122e84ff8f8bdc63148e",
+          "edicao": "v8 (PDF v5)"
+        }
+      },
+      {
+        "catalogoId": "BETA_HCG",
+        "protocoloId": "ntg-ep-inducao",
+        "contexto": "Monitorização conforme unidade especializada e diretriz citada no protocolo; não converter em pedido automático.",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "https://www.eviq.org.au/medical-oncology/gynaecological/gestational-trophoblastic/1347",
+          "localizador": "f1-b2-fontes-externas/cec-ntg-vulva/eviq-1347-ep-veryhighrisk.txt:L143-L146; Beta human chorionic gonadotrophin levels",
+          "trecho": "It is recommended that �-hCG is monitored as per published guidelines and in conjunction with\n                             a gestational trophoblastic disease speciality unit or molar registry if available.\n                             The Charing Cross monitoring recommendations are as follows: Measure �-hCG levels twice a\n                             week during treatment until levels become normal then check weekly until treatment stops.",
+          "sha256": "da469551441af12b74d3b4e19536ac6a4f7f85bcc218f12588dc5ce9019ac15b",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO",
+          "sourceId": "EXT-CNV-030",
+          "sha256Original": "3e0e8bcb23e649e4e8ac9a257143e4120f3e8b08c43006dabb896730fed7b9d0",
+          "edicao": "v5 (PDF v2)"
+        }
+      },
+      {
+        "catalogoId": "AUDIOMETRIA_TONAL",
+        "protocoloId": "ntg-ep-inducao",
+        "contexto": "Audiometria se surgirem sintomas; não tornar rotina universal.",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "https://www.eviq.org.au/medical-oncology/gynaecological/gestational-trophoblastic/1347",
+          "localizador": "f1-b2-fontes-externas/cec-ntg-vulva/eviq-1347-ep-veryhighrisk.txt:L134-L134; Ototoxicity",
+          "trecho": "An audiometry test should be performed if symptoms develop.",
+          "sha256": "da469551441af12b74d3b4e19536ac6a4f7f85bcc218f12588dc5ce9019ac15b",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO",
+          "sourceId": "EXT-CNV-030",
+          "sha256Original": "3e0e8bcb23e649e4e8ac9a257143e4120f3e8b08c43006dabb896730fed7b9d0",
+          "edicao": "v5 (PDF v2)"
+        }
+      }
+    ],
+    "fonte": {
+      "tipo": "PROTOCOLO_INSTITUCIONAL",
+      "referencia": "ligacoes.examesFontes[catalogoId,protocoloId] — cada ligação acrescentada tem fonte própria com trecho, localizador e SHA-256.",
+      "trecho": "Hemograma, função renal e exames específicos vinculados às fontes por protocolo. Ligações herdadas sem comprovação nesta rodada permanecem descritas nas pendências; a lista não representa pedido universal.",
+      "estado": "PARCIAL"
+    }
   },
   "pendencias": [
     {
@@ -1171,6 +1666,75 @@
         "RENAME 2024, edição apontada vigente no portal do Ministério da Saúde; resultados por fármaco em tratamento.protocolos[id=ntg-ep-inducao].sus.farmacos.",
         "Ausência de confirmação institucional de estoque/acesso por indicação."
       ]
+    },
+    {
+      "texto": "H4 ntg-mtx-fa: risco FN sem classificação específica verificada.",
+      "classe": "SUPORTE_SEM_FONTE_ESPECIFICA",
+      "protocoloId": "ntg-mtx-fa",
+      "buscasFeitas": [
+        "f1-b2-fontes-externas/cec-ntg-vulva/eviq-668-mtx-lowrisk.txt: Clinical information, Evidence/Toxicity, growth factor support e Blood tests.",
+        "corpus/4-interacoes-contraindicacoes/risco-neutropenia-febril.v1.RASCUNHO.json: sem linha específica para este esquema; G-CSF por desenho não equivale a faixa percentual de FN."
+      ]
+    },
+    {
+      "texto": "H4 ntg-actd: risco FN sem classificação específica verificada.",
+      "classe": "SUPORTE_SEM_FONTE_ESPECIFICA",
+      "protocoloId": "ntg-actd",
+      "buscasFeitas": [
+        "f1-b2-fontes-externas/cec-ntg-vulva/eviq-1018-dactinomycin-lowrisk.txt: Clinical information, Evidence/Toxicity, growth factor support e Blood tests.",
+        "corpus/4-interacoes-contraindicacoes/risco-neutropenia-febril.v1.RASCUNHO.json: sem linha específica para este esquema; G-CSF por desenho não equivale a faixa percentual de FN."
+      ]
+    },
+    {
+      "texto": "H4 ntg-emaco: risco FN sem classificação específica verificada.",
+      "classe": "SUPORTE_SEM_FONTE_ESPECIFICA",
+      "protocoloId": "ntg-emaco",
+      "buscasFeitas": [
+        "f1-b2-fontes-externas/cec-ntg-vulva/eviq-599-ema-co.txt: Clinical information, Evidence/Toxicity, growth factor support e Blood tests.",
+        "corpus/4-interacoes-contraindicacoes/risco-neutropenia-febril.v1.RASCUNHO.json: sem linha específica para este esquema; G-CSF por desenho não equivale a faixa percentual de FN."
+      ]
+    },
+    {
+      "texto": "H4 ntg-emaep: risco FN sem classificação específica verificada.",
+      "classe": "SUPORTE_SEM_FONTE_ESPECIFICA",
+      "protocoloId": "ntg-emaep",
+      "buscasFeitas": [
+        "f1-b2-fontes-externas/cec-ntg-vulva/eviq-1378-ep-ema.txt: Clinical information, Evidence/Toxicity, growth factor support e Blood tests.",
+        "corpus/4-interacoes-contraindicacoes/risco-neutropenia-febril.v1.RASCUNHO.json: sem linha específica para este esquema; G-CSF por desenho não equivale a faixa percentual de FN."
+      ]
+    },
+    {
+      "texto": "H4 ntg-ep-inducao: risco FN sem classificação específica verificada.",
+      "classe": "SUPORTE_SEM_FONTE_ESPECIFICA",
+      "protocoloId": "ntg-ep-inducao",
+      "buscasFeitas": [
+        "f1-b2-fontes-externas/cec-ntg-vulva/eviq-1347-ep-veryhighrisk.txt: Clinical information, Evidence/Toxicity, growth factor support e Blood tests.",
+        "corpus/4-interacoes-contraindicacoes/risco-neutropenia-febril.v1.RASCUNHO.json: sem linha específica para este esquema; G-CSF por desenho não equivale a faixa percentual de FN."
+      ]
+    },
+    {
+      "texto": "H4: aliases herdados da base sem ID exato no catálogo; preservados para não escolher segmento/técnica clínica. Não tratar estas ligações como IDs resolvidos.",
+      "classe": "CATALOGO_ID_PENDENTE",
+      "ids": [
+        "TC_TORAX_ABDOME"
+      ],
+      "buscasFeitas": [
+        "corpus/exames/exames-sigtap.v1.json, secoes[*].id (catálogo usado pelos painéis de corpus/1-exames/).",
+        "corpus/1-exames/: não há definição canônica de RM_LOCAL, BIOPSIA nem das composições genéricas TC_TORAX_ABDOME, TC_TORAX_ABDOME_PELVE e TC_CERVICO_TORACICA."
+      ]
+    },
+    {
+      "texto": "H4: ligações já presentes na base sem proveniência clínica revalidada nesta rodada; não contam como exames acrescentados/verificados.",
+      "classe": "LIGACAO_HERDADA_A_CONFERIR",
+      "ids": [
+        "USG_PELVICA",
+        "TC_TORAX_ABDOME",
+        "RM_CRANIO",
+        "CLEARANCE_CREATININA"
+      ],
+      "buscasFeitas": [
+        "Inventário integral dos seis packs em 9517c76; comparação com o catálogo e com as capturas específicas de monitorização dos protocolos."
+      ]
     }
   ],
   "conflitos": [
@@ -1253,6 +1817,20 @@
         "susPreenchidos": 0,
         "notas": [
           "D-F1-49: fichas institucionais novas sem SISAC; mudança de fonte não aprova doses"
+        ]
+      },
+      {
+        "data": "2026-10-14",
+        "redator": "Codex — SETOR PACKS-B2 H2+H4",
+        "susPreenchidos": 0,
+        "protocolosSusVerificar": 5,
+        "examesAcrescentados": 3,
+        "suportesPorProtocolo": 5,
+        "notas": [
+          "RENAME 2024 consultada (edição vigente indicada pelo Ministério da Saúde); SIGTAP 2026-09 consultado somente em arquivos locais.",
+          "Códigos administrativos e RENAME não comprovam acesso ao esquema no serviço nem cobertura ANS.",
+          "Fontes externas do manifesto pareadas por SHA-256; demais trechos têm hash da captura textual e localizador exato.",
+          "Preservados RASCUNHO, consultavel true, alerta false, aprovacaoClinica null e todas as doses."
         ]
       }
     ]

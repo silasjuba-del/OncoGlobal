@@ -489,7 +489,42 @@
         },
         "observacao": "",
         "derivadoDe": null,
-        "criterioAplicacao": ""
+        "criterioAplicacao": "",
+        "suporte": {
+          "emetogenicidade": {
+            "classificacao": "MULTIDIA_POR_DIA",
+            "fonte": {
+              "tipo": "PROTOCOLO_INSTITUCIONAL",
+              "referencia": "evidência local f1-b2-fontes-externas/sarcomas/eviq-1901-osteosarcoma-map.txt",
+              "localizador": "f1-b2-fontes-externas/sarcomas/eviq-1901-osteosarcoma-map.txt:L947-L947; Clinical information / emetogenicity",
+              "trecho": "Patients being treated with multi-day anticancer protocols should receive antiemetics tailored to the emetogenic risk of the drugs administered each day during treatment and for two days after completion of the anticancer protocol.",
+              "sha256": "cc1fe602a2acdb699a3b982339fc330c0579177970dbc11f498683573567d6ae",
+              "consultadoEm": "2026-10-14",
+              "estado": "CONSULTADO"
+            }
+          },
+          "riscoNeutropeniaFebril": {
+            "classificacao": "VERIFICAR",
+            "percentual": null,
+            "fonte": null,
+            "pendencia": "Não localizada classificação de risco FN específica para este protocolo/variante nas fontes consultadas; não inferir de neutropenia isolada nem da presença de G-CSF."
+          },
+          "gcsf": {
+            "descricao": "Suporte descrito na fonte do protocolo; confirmar aplicabilidade e esquema na ficha. Não equivale a classificação percentual de risco FN.",
+            "fonte": {
+              "tipo": "PROTOCOLO_INSTITUCIONAL",
+              "referencia": "https://www.bccancer.bc.ca/chemotherapy-protocols-site/Documents/Sarcoma/SANAHDMAP_Protocol.pdf",
+              "localizador": "f1-b2-fontes-externas/sarcomas/bccancer-SANAHDMAP.txt:L141-L142; Growth factor support / supportive care",
+              "trecho": "o G-CSF support (filgrastim or pegfilgrastim) is mandatory for primary prophylaxis of\n        neutropenia. Submit a special authority request to Pharmacare for coverage. See",
+              "sha256": "0ec36bc469a15a6c664214167c8fe1b8a689b6be1c3e7099e19d80ea40bd2dee",
+              "consultadoEm": "2026-10-14",
+              "estado": "CONSULTADO",
+              "sourceId": "EXT-SARC-014",
+              "sha256Original": "d9f85193d1184934d8d9b6cbd8382cc70144f8f4dd7ff88525cfd5218e33d214",
+              "edicao": "rev 01/06/2026"
+            }
+          }
+        }
       },
       {
         "id": "osteo-map-c56",
@@ -802,7 +837,42 @@
         },
         "observacao": "",
         "derivadoDe": null,
-        "criterioAplicacao": ""
+        "criterioAplicacao": "",
+        "suporte": {
+          "emetogenicidade": {
+            "classificacao": "MULTIDIA_POR_DIA",
+            "fonte": {
+              "tipo": "PROTOCOLO_INSTITUCIONAL",
+              "referencia": "evidência local f1-b2-fontes-externas/sarcomas/eviq-1901-osteosarcoma-map.txt",
+              "localizador": "f1-b2-fontes-externas/sarcomas/eviq-1901-osteosarcoma-map.txt:L947-L947; Clinical information / emetogenicity",
+              "trecho": "Patients being treated with multi-day anticancer protocols should receive antiemetics tailored to the emetogenic risk of the drugs administered each day during treatment and for two days after completion of the anticancer protocol.",
+              "sha256": "cc1fe602a2acdb699a3b982339fc330c0579177970dbc11f498683573567d6ae",
+              "consultadoEm": "2026-10-14",
+              "estado": "CONSULTADO"
+            }
+          },
+          "riscoNeutropeniaFebril": {
+            "classificacao": "VERIFICAR",
+            "percentual": null,
+            "fonte": null,
+            "pendencia": "Não localizada classificação de risco FN específica para este protocolo/variante nas fontes consultadas; não inferir de neutropenia isolada nem da presença de G-CSF."
+          },
+          "gcsf": {
+            "descricao": "Suporte descrito na fonte do protocolo; confirmar aplicabilidade e esquema na ficha. Não equivale a classificação percentual de risco FN.",
+            "fonte": {
+              "tipo": "PROTOCOLO_INSTITUCIONAL",
+              "referencia": "https://www.bccancer.bc.ca/chemotherapy-protocols-site/Documents/Sarcoma/SANAHDMAP_Protocol.pdf",
+              "localizador": "f1-b2-fontes-externas/sarcomas/bccancer-SANAHDMAP.txt:L154-L155; Growth factor support / supportive care",
+              "trecho": "o G-CSF support (filgrastim or pegfilgrastim) is mandatory for primary prophylaxis of\n        neutropenia. Submit a special authority request to Pharmacare for coverage. See",
+              "sha256": "0ec36bc469a15a6c664214167c8fe1b8a689b6be1c3e7099e19d80ea40bd2dee",
+              "consultadoEm": "2026-10-14",
+              "estado": "CONSULTADO",
+              "sourceId": "EXT-SARC-014",
+              "sha256Original": "d9f85193d1184934d8d9b6cbd8382cc70144f8f4dd7ff88525cfd5218e33d214",
+              "edicao": "rev 01/06/2026"
+            }
+          }
+        }
       },
       {
         "id": "osteo-ap",
@@ -1050,7 +1120,20 @@
         },
         "observacao": "",
         "derivadoDe": null,
-        "criterioAplicacao": ""
+        "criterioAplicacao": "",
+        "suporte": {
+          "emetogenicidade": {
+            "classificacao": "VERIFICAR",
+            "fonte": null,
+            "pendencia": "Classificação específica não localizada; não derivada automaticamente das drogas ou de outro esquema."
+          },
+          "riscoNeutropeniaFebril": {
+            "classificacao": "VERIFICAR",
+            "percentual": null,
+            "fonte": null,
+            "pendencia": "Não localizada classificação de risco FN específica para este protocolo/variante nas fontes consultadas; não inferir de neutropenia isolada nem da presença de G-CSF."
+          }
+        }
       },
       {
         "id": "osteo-ifep",
@@ -1298,7 +1381,20 @@
         },
         "observacao": "",
         "derivadoDe": null,
-        "criterioAplicacao": ""
+        "criterioAplicacao": "",
+        "suporte": {
+          "emetogenicidade": {
+            "classificacao": "VERIFICAR",
+            "fonte": null,
+            "pendencia": "Classificação específica não localizada; não derivada automaticamente das drogas ou de outro esquema."
+          },
+          "riscoNeutropeniaFebril": {
+            "classificacao": "VERIFICAR",
+            "percentual": null,
+            "fonte": null,
+            "pendencia": "Não localizada classificação de risco FN específica para este protocolo/variante nas fontes consultadas; não inferir de neutropenia isolada nem da presença de G-CSF."
+          }
+        }
       },
       {
         "id": "osteo-gemdoc",
@@ -1546,7 +1642,40 @@
         },
         "observacao": "Indicação oficial dos protocolos é sarcoma de partes moles.",
         "derivadoDe": null,
-        "criterioAplicacao": ""
+        "criterioAplicacao": "",
+        "suporte": {
+          "emetogenicidade": {
+            "classificacao": "BAIXA",
+            "fonte": {
+              "tipo": "PROTOCOLO_INSTITUCIONAL",
+              "referencia": "evidência local f1-b2-fontes-externas/sarcomas/eviq-1898-gemdoc.txt",
+              "localizador": "f1-b2-fontes-externas/sarcomas/eviq-1898-gemdoc.txt:L123-L123; Clinical information / emetogenicity",
+              "trecho": "Emetogenicity LOW",
+              "sha256": "f682988ae649dcb3636f8f221c9b4e0b38c6d976c0dbc3bb2546b719917d35d0",
+              "consultadoEm": "2026-10-14",
+              "estado": "CONSULTADO"
+            }
+          },
+          "riscoNeutropeniaFebril": {
+            "classificacao": "VERIFICAR",
+            "percentual": null,
+            "fonte": null,
+            "pendencia": "Não localizada classificação de risco FN específica para este protocolo/variante nas fontes consultadas; não inferir de neutropenia isolada nem da presença de G-CSF."
+          },
+          "gcsf": {
+            "descricao": "Suporte descrito na fonte do protocolo; confirmar aplicabilidade e esquema na ficha. Não equivale a classificação percentual de risco FN.",
+            "fonte": {
+              "tipo": "PROTOCOLO_INSTITUCIONAL",
+              "referencia": "evidência local f1-b2-fontes-externas/sarcomas/eviq-1898-gemdoc.txt",
+              "localizador": "f1-b2-fontes-externas/sarcomas/eviq-1898-gemdoc.txt:L33-L35; Growth factor support / supportive care",
+              "trecho": "The gemcitabine dose and infusion time are based on the evidence used in support of this protocol, growth factor support is\n\nR included to reduce the haematological toxicity associated with the protracted infusion of gemcitabine.",
+              "sha256": "f682988ae649dcb3636f8f221c9b4e0b38c6d976c0dbc3bb2546b719917d35d0",
+              "consultadoEm": "2026-10-14",
+              "estado": "CONSULTADO"
+            }
+          },
+          "ressalva": "Fonte operacional de outra população e/ou variante, já apontada no pack; aplicabilidade permanece sujeita à decisão médica. Não altera a indicação nem as doses."
+        }
       },
       {
         "id": "osteo-regorafenibe",
@@ -1762,7 +1891,20 @@
         },
         "observacao": "",
         "derivadoDe": null,
-        "criterioAplicacao": ""
+        "criterioAplicacao": "",
+        "suporte": {
+          "emetogenicidade": {
+            "classificacao": "VERIFICAR",
+            "fonte": null,
+            "pendencia": "Classificação específica não localizada; não derivada automaticamente das drogas ou de outro esquema."
+          },
+          "riscoNeutropeniaFebril": {
+            "classificacao": "VERIFICAR",
+            "percentual": null,
+            "fonte": null,
+            "pendencia": "Não localizada classificação de risco FN específica para este protocolo/variante nas fontes consultadas; não inferir de neutropenia isolada nem da presença de G-CSF."
+          }
+        }
       },
       {
         "id": "osteo-pembro-msi",
@@ -1978,7 +2120,30 @@
         },
         "observacao": "",
         "derivadoDe": null,
-        "criterioAplicacao": ""
+        "criterioAplicacao": "",
+        "suporte": {
+          "emetogenicidade": {
+            "classificacao": "MINIMA",
+            "fonte": {
+              "tipo": "PROTOCOLO_INSTITUCIONAL",
+              "referencia": "https://www.eviq.org.au/p/5066",
+              "localizador": "f1-b2-fontes-externas/sarcomas/eviq-5066-pembro-tumouragnostic.txt:L329-L329; Clinical information / emetogenicity",
+              "trecho": "Emetogenicity MINIMAL",
+              "sha256": "bb9ca81609b51411bdd629a5b1602a06f599da668b1cdf3ed78012f245df4f60",
+              "consultadoEm": "2026-10-14",
+              "estado": "CONSULTADO",
+              "sourceId": "EXT-SARC-008",
+              "sha256Original": "8f0d7dc3d23e5238b7f352e3f231f791b612f491cd6bfd562bbe79c19b3c5fd2",
+              "edicao": "v1 (acesso 2026-10-14)"
+            }
+          },
+          "riscoNeutropeniaFebril": {
+            "classificacao": "VERIFICAR",
+            "percentual": null,
+            "fonte": null,
+            "pendencia": "Não localizada classificação de risco FN específica para este protocolo/variante nas fontes consultadas; não inferir de neutropenia isolada nem da presença de G-CSF."
+          }
+        }
       }
     ],
     "radioterapia": [
@@ -2028,8 +2193,8 @@
     "ensaios": [],
     "seguimento": [],
     "suporte": {
-      "emetogenicidade": "alto (D-F1-30 local)",
-      "riscoNeutropeniaFebril": "alto — G-CSF primário obrigatório (BC SANAHDMAP)",
+      "emetogenicidade": "Consultar tratamento.protocolos[].suporte.emetogenicidade: classificação e fonte por esquema; VERIFICAR quando não documentada.",
+      "riscoNeutropeniaFebril": "VERIFICAR por protocolo; suporte G-CSF documentado separadamente não estabelece faixa percentual de FN.",
       "outros": [
         "monitorização de MTX: níveis h48 + diário até <0,1 µmol/L; pH urinário q6h; alcalinização (BC)",
         "audiometria (cisplatina — D-F1-31)",
@@ -2037,10 +2202,9 @@
       ],
       "fonte": {
         "tipo": "PROTOCOLO_INSTITUCIONAL",
-        "referencia": "BC SANAHDMAP (EXT-SARC-014)",
-        "pagina": null,
-        "trecho": "G-CSF mandatory; MTX levels",
-        "estado": "CONSULTADO"
+        "referencia": "Fontes individualizadas em tratamento.protocolos[].suporte; evidências locais f1-b2-fontes-externas (captura 2026-10-14).",
+        "trecho": "Classificações de emetogenicidade transcritas por esquema; ausência de classificação específica de FN permanece explícita.",
+        "estado": "PARCIAL"
       },
       "mesna": {
         "regra": "n/a",
@@ -2060,10 +2224,22 @@
       "TC_TORAX",
       "BIOPSIA",
       "ECOCARDIOGRAMA",
-      "AUDIOMETRIA",
+      "AUDIOMETRIA_TONAL",
       "HEMOGRAMA",
       "CREATININA",
-      "CLEARANCE_CREATININA"
+      "CLEARANCE_CREATININA",
+      "CALCIO",
+      "MAGNESIO",
+      "TGP",
+      "BILIRRUBINA",
+      "FOSFORO",
+      "ECG",
+      "SODIO",
+      "POTASSIO",
+      "CORTISOL",
+      "TSH",
+      "T4_LIVRE",
+      "GLICEMIA"
     ],
     "interacoesConsultar": [],
     "ctcaeAcao": [],
@@ -2071,7 +2247,621 @@
     "orientacoes": [],
     "encaminhamentos": [],
     "laudos": [],
-    "formulasXYZ": []
+    "formulasXYZ": [],
+    "examesFontes": [
+      {
+        "catalogoId": "HEMOGRAMA",
+        "protocoloId": "osteo-map-c14",
+        "contexto": "FBC at baseline and repeat prior to each treatment. EUC, eGFR, LFTs and CMP at baseline and regularly throughout treatment as clinically indicated. Methotrexate levels to be monitored every 24 hours until the level is less than 0.1 micromol/L. Hepatitis B screening and prophylaxis",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "evidência local f1-b2-fontes-externas/sarcomas/eviq-1901-osteosarcoma-map.txt",
+          "localizador": "f1-b2-fontes-externas/sarcomas/eviq-1901-osteosarcoma-map.txt:L1029-L1031; Blood tests / TESTS",
+          "trecho": "FBC at baseline and repeat prior to each treatment. EUC, eGFR, LFTs and CMP at baseline and regularly throughout treatment as clinically indicated.\nMethotrexate levels to be monitored every 24 hours until the level is less than 0.1 micromol/L.\nHepatitis B screening and prophylaxis",
+          "sha256": "cc1fe602a2acdb699a3b982339fc330c0579177970dbc11f498683573567d6ae",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO"
+        }
+      },
+      {
+        "catalogoId": "CREATININA",
+        "protocoloId": "osteo-map-c14",
+        "contexto": "FBC at baseline and repeat prior to each treatment. EUC, eGFR, LFTs and CMP at baseline and regularly throughout treatment as clinically indicated. Methotrexate levels to be monitored every 24 hours until the level is less than 0.1 micromol/L. Hepatitis B screening and prophylaxis",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "evidência local f1-b2-fontes-externas/sarcomas/eviq-1901-osteosarcoma-map.txt",
+          "localizador": "f1-b2-fontes-externas/sarcomas/eviq-1901-osteosarcoma-map.txt:L1029-L1031; Blood tests / TESTS",
+          "trecho": "FBC at baseline and repeat prior to each treatment. EUC, eGFR, LFTs and CMP at baseline and regularly throughout treatment as clinically indicated.\nMethotrexate levels to be monitored every 24 hours until the level is less than 0.1 micromol/L.\nHepatitis B screening and prophylaxis",
+          "sha256": "cc1fe602a2acdb699a3b982339fc330c0579177970dbc11f498683573567d6ae",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO"
+        }
+      },
+      {
+        "catalogoId": "CALCIO",
+        "protocoloId": "osteo-map-c14",
+        "contexto": "FBC at baseline and repeat prior to each treatment. EUC, eGFR, LFTs and CMP at baseline and regularly throughout treatment as clinically indicated. Methotrexate levels to be monitored every 24 hours until the level is less than 0.1 micromol/L. Hepatitis B screening and prophylaxis",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "evidência local f1-b2-fontes-externas/sarcomas/eviq-1901-osteosarcoma-map.txt",
+          "localizador": "f1-b2-fontes-externas/sarcomas/eviq-1901-osteosarcoma-map.txt:L1029-L1031; Blood tests / TESTS",
+          "trecho": "FBC at baseline and repeat prior to each treatment. EUC, eGFR, LFTs and CMP at baseline and regularly throughout treatment as clinically indicated.\nMethotrexate levels to be monitored every 24 hours until the level is less than 0.1 micromol/L.\nHepatitis B screening and prophylaxis",
+          "sha256": "cc1fe602a2acdb699a3b982339fc330c0579177970dbc11f498683573567d6ae",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO"
+        }
+      },
+      {
+        "catalogoId": "MAGNESIO",
+        "protocoloId": "osteo-map-c14",
+        "contexto": "FBC at baseline and repeat prior to each treatment. EUC, eGFR, LFTs and CMP at baseline and regularly throughout treatment as clinically indicated. Methotrexate levels to be monitored every 24 hours until the level is less than 0.1 micromol/L. Hepatitis B screening and prophylaxis",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "evidência local f1-b2-fontes-externas/sarcomas/eviq-1901-osteosarcoma-map.txt",
+          "localizador": "f1-b2-fontes-externas/sarcomas/eviq-1901-osteosarcoma-map.txt:L1029-L1031; Blood tests / TESTS",
+          "trecho": "FBC at baseline and repeat prior to each treatment. EUC, eGFR, LFTs and CMP at baseline and regularly throughout treatment as clinically indicated.\nMethotrexate levels to be monitored every 24 hours until the level is less than 0.1 micromol/L.\nHepatitis B screening and prophylaxis",
+          "sha256": "cc1fe602a2acdb699a3b982339fc330c0579177970dbc11f498683573567d6ae",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO"
+        }
+      },
+      {
+        "catalogoId": "HEMOGRAMA",
+        "protocoloId": "osteo-map-c56",
+        "contexto": "FBC at baseline and repeat prior to each treatment. EUC, eGFR, LFTs and CMP at baseline and regularly throughout treatment as clinically indicated. Methotrexate levels to be monitored every 24 hours until the level is less than 0.1 micromol/L. Hepatitis B screening and prophylaxis",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "evidência local f1-b2-fontes-externas/sarcomas/eviq-1901-osteosarcoma-map.txt",
+          "localizador": "f1-b2-fontes-externas/sarcomas/eviq-1901-osteosarcoma-map.txt:L1029-L1031; Blood tests / TESTS",
+          "trecho": "FBC at baseline and repeat prior to each treatment. EUC, eGFR, LFTs and CMP at baseline and regularly throughout treatment as clinically indicated.\nMethotrexate levels to be monitored every 24 hours until the level is less than 0.1 micromol/L.\nHepatitis B screening and prophylaxis",
+          "sha256": "cc1fe602a2acdb699a3b982339fc330c0579177970dbc11f498683573567d6ae",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO"
+        }
+      },
+      {
+        "catalogoId": "CREATININA",
+        "protocoloId": "osteo-map-c56",
+        "contexto": "FBC at baseline and repeat prior to each treatment. EUC, eGFR, LFTs and CMP at baseline and regularly throughout treatment as clinically indicated. Methotrexate levels to be monitored every 24 hours until the level is less than 0.1 micromol/L. Hepatitis B screening and prophylaxis",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "evidência local f1-b2-fontes-externas/sarcomas/eviq-1901-osteosarcoma-map.txt",
+          "localizador": "f1-b2-fontes-externas/sarcomas/eviq-1901-osteosarcoma-map.txt:L1029-L1031; Blood tests / TESTS",
+          "trecho": "FBC at baseline and repeat prior to each treatment. EUC, eGFR, LFTs and CMP at baseline and regularly throughout treatment as clinically indicated.\nMethotrexate levels to be monitored every 24 hours until the level is less than 0.1 micromol/L.\nHepatitis B screening and prophylaxis",
+          "sha256": "cc1fe602a2acdb699a3b982339fc330c0579177970dbc11f498683573567d6ae",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO"
+        }
+      },
+      {
+        "catalogoId": "CALCIO",
+        "protocoloId": "osteo-map-c56",
+        "contexto": "FBC at baseline and repeat prior to each treatment. EUC, eGFR, LFTs and CMP at baseline and regularly throughout treatment as clinically indicated. Methotrexate levels to be monitored every 24 hours until the level is less than 0.1 micromol/L. Hepatitis B screening and prophylaxis",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "evidência local f1-b2-fontes-externas/sarcomas/eviq-1901-osteosarcoma-map.txt",
+          "localizador": "f1-b2-fontes-externas/sarcomas/eviq-1901-osteosarcoma-map.txt:L1029-L1031; Blood tests / TESTS",
+          "trecho": "FBC at baseline and repeat prior to each treatment. EUC, eGFR, LFTs and CMP at baseline and regularly throughout treatment as clinically indicated.\nMethotrexate levels to be monitored every 24 hours until the level is less than 0.1 micromol/L.\nHepatitis B screening and prophylaxis",
+          "sha256": "cc1fe602a2acdb699a3b982339fc330c0579177970dbc11f498683573567d6ae",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO"
+        }
+      },
+      {
+        "catalogoId": "MAGNESIO",
+        "protocoloId": "osteo-map-c56",
+        "contexto": "FBC at baseline and repeat prior to each treatment. EUC, eGFR, LFTs and CMP at baseline and regularly throughout treatment as clinically indicated. Methotrexate levels to be monitored every 24 hours until the level is less than 0.1 micromol/L. Hepatitis B screening and prophylaxis",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "evidência local f1-b2-fontes-externas/sarcomas/eviq-1901-osteosarcoma-map.txt",
+          "localizador": "f1-b2-fontes-externas/sarcomas/eviq-1901-osteosarcoma-map.txt:L1029-L1031; Blood tests / TESTS",
+          "trecho": "FBC at baseline and repeat prior to each treatment. EUC, eGFR, LFTs and CMP at baseline and regularly throughout treatment as clinically indicated.\nMethotrexate levels to be monitored every 24 hours until the level is less than 0.1 micromol/L.\nHepatitis B screening and prophylaxis",
+          "sha256": "cc1fe602a2acdb699a3b982339fc330c0579177970dbc11f498683573567d6ae",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO"
+        }
+      },
+      {
+        "catalogoId": "HEMOGRAMA",
+        "protocoloId": "osteo-ap",
+        "contexto": "Baseline and before each treatment: CBC & diff, platelets, electrolytes panel, creatinine, calcium, magnesium, albumin, bilirubin, alk phos, ALT, LDH, and GGT.",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "https://www.bccancer.bc.ca/chemotherapy-protocols-site/Documents/Sarcoma/SAAVAP_Protocol.pdf",
+          "localizador": "f1-b2-fontes-externas/sarcomas/bccancer-SAAVAP.txt:L17-L19; Blood tests / TESTS",
+          "trecho": "Baseline and before each treatment: CBC & diff, platelets, electrolytes panel,\n    creatinine, calcium, magnesium, albumin, bilirubin, alk phos, ALT, LDH, and GGT.",
+          "sha256": "deab7fc56fad465d604e4970d8a7e957cd1730b70df67a9b84df916560dbb688",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO",
+          "sourceId": "EXT-SARC-015",
+          "sha256Original": "0215e9ba4f7ef5516e3474f4f7df2e2034e0c171078edcb19a7bf248787f5f3e",
+          "edicao": "rev 01/03/2022"
+        }
+      },
+      {
+        "catalogoId": "CREATININA",
+        "protocoloId": "osteo-ap",
+        "contexto": "Baseline and before each treatment: CBC & diff, platelets, electrolytes panel, creatinine, calcium, magnesium, albumin, bilirubin, alk phos, ALT, LDH, and GGT.",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "https://www.bccancer.bc.ca/chemotherapy-protocols-site/Documents/Sarcoma/SAAVAP_Protocol.pdf",
+          "localizador": "f1-b2-fontes-externas/sarcomas/bccancer-SAAVAP.txt:L17-L19; Blood tests / TESTS",
+          "trecho": "Baseline and before each treatment: CBC & diff, platelets, electrolytes panel,\n    creatinine, calcium, magnesium, albumin, bilirubin, alk phos, ALT, LDH, and GGT.",
+          "sha256": "deab7fc56fad465d604e4970d8a7e957cd1730b70df67a9b84df916560dbb688",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO",
+          "sourceId": "EXT-SARC-015",
+          "sha256Original": "0215e9ba4f7ef5516e3474f4f7df2e2034e0c171078edcb19a7bf248787f5f3e",
+          "edicao": "rev 01/03/2022"
+        }
+      },
+      {
+        "catalogoId": "CALCIO",
+        "protocoloId": "osteo-ap",
+        "contexto": "Baseline and before each treatment: CBC & diff, platelets, electrolytes panel, creatinine, calcium, magnesium, albumin, bilirubin, alk phos, ALT, LDH, and GGT.",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "https://www.bccancer.bc.ca/chemotherapy-protocols-site/Documents/Sarcoma/SAAVAP_Protocol.pdf",
+          "localizador": "f1-b2-fontes-externas/sarcomas/bccancer-SAAVAP.txt:L17-L19; Blood tests / TESTS",
+          "trecho": "Baseline and before each treatment: CBC & diff, platelets, electrolytes panel,\n    creatinine, calcium, magnesium, albumin, bilirubin, alk phos, ALT, LDH, and GGT.",
+          "sha256": "deab7fc56fad465d604e4970d8a7e957cd1730b70df67a9b84df916560dbb688",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO",
+          "sourceId": "EXT-SARC-015",
+          "sha256Original": "0215e9ba4f7ef5516e3474f4f7df2e2034e0c171078edcb19a7bf248787f5f3e",
+          "edicao": "rev 01/03/2022"
+        }
+      },
+      {
+        "catalogoId": "MAGNESIO",
+        "protocoloId": "osteo-ap",
+        "contexto": "Baseline and before each treatment: CBC & diff, platelets, electrolytes panel, creatinine, calcium, magnesium, albumin, bilirubin, alk phos, ALT, LDH, and GGT.",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "https://www.bccancer.bc.ca/chemotherapy-protocols-site/Documents/Sarcoma/SAAVAP_Protocol.pdf",
+          "localizador": "f1-b2-fontes-externas/sarcomas/bccancer-SAAVAP.txt:L17-L19; Blood tests / TESTS",
+          "trecho": "Baseline and before each treatment: CBC & diff, platelets, electrolytes panel,\n    creatinine, calcium, magnesium, albumin, bilirubin, alk phos, ALT, LDH, and GGT.",
+          "sha256": "deab7fc56fad465d604e4970d8a7e957cd1730b70df67a9b84df916560dbb688",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO",
+          "sourceId": "EXT-SARC-015",
+          "sha256Original": "0215e9ba4f7ef5516e3474f4f7df2e2034e0c171078edcb19a7bf248787f5f3e",
+          "edicao": "rev 01/03/2022"
+        }
+      },
+      {
+        "catalogoId": "TGP",
+        "protocoloId": "osteo-ap",
+        "contexto": "Baseline and before each treatment: CBC & diff, platelets, electrolytes panel, creatinine, calcium, magnesium, albumin, bilirubin, alk phos, ALT, LDH, and GGT.",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "https://www.bccancer.bc.ca/chemotherapy-protocols-site/Documents/Sarcoma/SAAVAP_Protocol.pdf",
+          "localizador": "f1-b2-fontes-externas/sarcomas/bccancer-SAAVAP.txt:L17-L19; Blood tests / TESTS",
+          "trecho": "Baseline and before each treatment: CBC & diff, platelets, electrolytes panel,\n    creatinine, calcium, magnesium, albumin, bilirubin, alk phos, ALT, LDH, and GGT.",
+          "sha256": "deab7fc56fad465d604e4970d8a7e957cd1730b70df67a9b84df916560dbb688",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO",
+          "sourceId": "EXT-SARC-015",
+          "sha256Original": "0215e9ba4f7ef5516e3474f4f7df2e2034e0c171078edcb19a7bf248787f5f3e",
+          "edicao": "rev 01/03/2022"
+        }
+      },
+      {
+        "catalogoId": "BILIRRUBINA",
+        "protocoloId": "osteo-ap",
+        "contexto": "Baseline and before each treatment: CBC & diff, platelets, electrolytes panel, creatinine, calcium, magnesium, albumin, bilirubin, alk phos, ALT, LDH, and GGT.",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "https://www.bccancer.bc.ca/chemotherapy-protocols-site/Documents/Sarcoma/SAAVAP_Protocol.pdf",
+          "localizador": "f1-b2-fontes-externas/sarcomas/bccancer-SAAVAP.txt:L17-L19; Blood tests / TESTS",
+          "trecho": "Baseline and before each treatment: CBC & diff, platelets, electrolytes panel,\n    creatinine, calcium, magnesium, albumin, bilirubin, alk phos, ALT, LDH, and GGT.",
+          "sha256": "deab7fc56fad465d604e4970d8a7e957cd1730b70df67a9b84df916560dbb688",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO",
+          "sourceId": "EXT-SARC-015",
+          "sha256Original": "0215e9ba4f7ef5516e3474f4f7df2e2034e0c171078edcb19a7bf248787f5f3e",
+          "edicao": "rev 01/03/2022"
+        }
+      },
+      {
+        "catalogoId": "HEMOGRAMA",
+        "protocoloId": "osteo-ifep",
+        "contexto": "� Baseline and before each treatment: CBC & Diff, creatinine, sodium, potassium, phosphate, total bilirubin, alkaline phosphatase, LDH, albumin",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "evidência local f1-b2-fontes-externas/sarcomas/bccancer-SAAVIME3.txt",
+          "localizador": "f1-b2-fontes-externas/sarcomas/bccancer-SAAVIME3.txt:L19-L21; Blood tests / TESTS",
+          "trecho": "� Baseline and before each treatment: CBC & Diff, creatinine, sodium, potassium,\n\n    phosphate, total bilirubin, alkaline phosphatase, LDH, albumin",
+          "sha256": "ce5726d878ce3e2c0524f34df29fd891b57690e3461be9662bd632aa0ef00983",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO"
+        }
+      },
+      {
+        "catalogoId": "CREATININA",
+        "protocoloId": "osteo-ifep",
+        "contexto": "� Baseline and before each treatment: CBC & Diff, creatinine, sodium, potassium, phosphate, total bilirubin, alkaline phosphatase, LDH, albumin",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "evidência local f1-b2-fontes-externas/sarcomas/bccancer-SAAVIME3.txt",
+          "localizador": "f1-b2-fontes-externas/sarcomas/bccancer-SAAVIME3.txt:L19-L21; Blood tests / TESTS",
+          "trecho": "� Baseline and before each treatment: CBC & Diff, creatinine, sodium, potassium,\n\n    phosphate, total bilirubin, alkaline phosphatase, LDH, albumin",
+          "sha256": "ce5726d878ce3e2c0524f34df29fd891b57690e3461be9662bd632aa0ef00983",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO"
+        }
+      },
+      {
+        "catalogoId": "FOSFORO",
+        "protocoloId": "osteo-ifep",
+        "contexto": "� Baseline and before each treatment: CBC & Diff, creatinine, sodium, potassium, phosphate, total bilirubin, alkaline phosphatase, LDH, albumin",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "evidência local f1-b2-fontes-externas/sarcomas/bccancer-SAAVIME3.txt",
+          "localizador": "f1-b2-fontes-externas/sarcomas/bccancer-SAAVIME3.txt:L19-L21; Blood tests / TESTS",
+          "trecho": "� Baseline and before each treatment: CBC & Diff, creatinine, sodium, potassium,\n\n    phosphate, total bilirubin, alkaline phosphatase, LDH, albumin",
+          "sha256": "ce5726d878ce3e2c0524f34df29fd891b57690e3461be9662bd632aa0ef00983",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO"
+        }
+      },
+      {
+        "catalogoId": "BILIRRUBINA",
+        "protocoloId": "osteo-ifep",
+        "contexto": "� Baseline and before each treatment: CBC & Diff, creatinine, sodium, potassium, phosphate, total bilirubin, alkaline phosphatase, LDH, albumin",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "evidência local f1-b2-fontes-externas/sarcomas/bccancer-SAAVIME3.txt",
+          "localizador": "f1-b2-fontes-externas/sarcomas/bccancer-SAAVIME3.txt:L19-L21; Blood tests / TESTS",
+          "trecho": "� Baseline and before each treatment: CBC & Diff, creatinine, sodium, potassium,\n\n    phosphate, total bilirubin, alkaline phosphatase, LDH, albumin",
+          "sha256": "ce5726d878ce3e2c0524f34df29fd891b57690e3461be9662bd632aa0ef00983",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO"
+        }
+      },
+      {
+        "catalogoId": "HEMOGRAMA",
+        "protocoloId": "osteo-gemdoc",
+        "contexto": "FBC, EUC, eGFR and LFTs at baseline and prior to each treatment. Routine screening for HBsAg and anti-HBc is NOT usually recommended for patients receiving",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "evidência local f1-b2-fontes-externas/sarcomas/eviq-1898-gemdoc.txt",
+          "localizador": "f1-b2-fontes-externas/sarcomas/eviq-1898-gemdoc.txt:L148-L150; Blood tests / TESTS",
+          "trecho": "FBC, EUC, eGFR and LFTs at baseline and prior to each treatment.\n\n                           Routine screening for HBsAg and anti-HBc is NOT usually recommended for patients receiving",
+          "sha256": "f682988ae649dcb3636f8f221c9b4e0b38c6d976c0dbc3bb2546b719917d35d0",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO"
+        }
+      },
+      {
+        "catalogoId": "CREATININA",
+        "protocoloId": "osteo-gemdoc",
+        "contexto": "FBC, EUC, eGFR and LFTs at baseline and prior to each treatment. Routine screening for HBsAg and anti-HBc is NOT usually recommended for patients receiving",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "evidência local f1-b2-fontes-externas/sarcomas/eviq-1898-gemdoc.txt",
+          "localizador": "f1-b2-fontes-externas/sarcomas/eviq-1898-gemdoc.txt:L148-L150; Blood tests / TESTS",
+          "trecho": "FBC, EUC, eGFR and LFTs at baseline and prior to each treatment.\n\n                           Routine screening for HBsAg and anti-HBc is NOT usually recommended for patients receiving",
+          "sha256": "f682988ae649dcb3636f8f221c9b4e0b38c6d976c0dbc3bb2546b719917d35d0",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO"
+        }
+      },
+      {
+        "catalogoId": "HEMOGRAMA",
+        "protocoloId": "osteo-pembro-msi",
+        "contexto": "FBC, EUC, eGFR, LFTs, serum cortisol, TFTs, and BSL at baseline. Repeat FBC, EUC, eGFR, LFTs and BSL prior to each cycle. Check TFTs every 4-6 weeks during treatment and every 12 weeks as indicated after finalising treatment. Consider checking serum cortisol every 4-6 weeks during treatment and every 12 weeks as indicated after finalising treatment. Check lipase and amylase if symptomatic of pancreatitis. In the absence of suspicion of immune-related adverse events less frequent monitoring may be applicable, according to institutional guidelines. Evidence for the frequency of routine blood testing with immunotherapies varies within published studies and guidelines.",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "https://www.eviq.org.au/p/5066",
+          "localizador": "f1-b2-fontes-externas/sarcomas/eviq-5066-pembro-tumouragnostic.txt:L369-L371; Blood tests / TESTS",
+          "trecho": "FBC, EUC, eGFR, LFTs, serum cortisol, TFTs, and BSL at baseline.\nRepeat FBC, EUC, eGFR, LFTs and BSL prior to each cycle. Check TFTs every 4-6 weeks during treatment and every 12 weeks as indicated after finalising treatment. Consider checking serum cortisol every 4-6 weeks during treatment and every 12 weeks as indicated after finalising treatment. Check lipase and amylase if symptomatic of pancreatitis.\nIn the absence of suspicion of immune-related adverse events less frequent monitoring may be applicable, according to institutional guidelines. Evidence for the frequency of routine blood testing with immunotherapies varies within published studies and guidelines.",
+          "sha256": "bb9ca81609b51411bdd629a5b1602a06f599da668b1cdf3ed78012f245df4f60",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO",
+          "sourceId": "EXT-SARC-008",
+          "sha256Original": "8f0d7dc3d23e5238b7f352e3f231f791b612f491cd6bfd562bbe79c19b3c5fd2",
+          "edicao": "v1 (acesso 2026-10-14)"
+        }
+      },
+      {
+        "catalogoId": "CREATININA",
+        "protocoloId": "osteo-pembro-msi",
+        "contexto": "FBC, EUC, eGFR, LFTs, serum cortisol, TFTs, and BSL at baseline. Repeat FBC, EUC, eGFR, LFTs and BSL prior to each cycle. Check TFTs every 4-6 weeks during treatment and every 12 weeks as indicated after finalising treatment. Consider checking serum cortisol every 4-6 weeks during treatment and every 12 weeks as indicated after finalising treatment. Check lipase and amylase if symptomatic of pancreatitis. In the absence of suspicion of immune-related adverse events less frequent monitoring may be applicable, according to institutional guidelines. Evidence for the frequency of routine blood testing with immunotherapies varies within published studies and guidelines.",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "https://www.eviq.org.au/p/5066",
+          "localizador": "f1-b2-fontes-externas/sarcomas/eviq-5066-pembro-tumouragnostic.txt:L369-L371; Blood tests / TESTS",
+          "trecho": "FBC, EUC, eGFR, LFTs, serum cortisol, TFTs, and BSL at baseline.\nRepeat FBC, EUC, eGFR, LFTs and BSL prior to each cycle. Check TFTs every 4-6 weeks during treatment and every 12 weeks as indicated after finalising treatment. Consider checking serum cortisol every 4-6 weeks during treatment and every 12 weeks as indicated after finalising treatment. Check lipase and amylase if symptomatic of pancreatitis.\nIn the absence of suspicion of immune-related adverse events less frequent monitoring may be applicable, according to institutional guidelines. Evidence for the frequency of routine blood testing with immunotherapies varies within published studies and guidelines.",
+          "sha256": "bb9ca81609b51411bdd629a5b1602a06f599da668b1cdf3ed78012f245df4f60",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO",
+          "sourceId": "EXT-SARC-008",
+          "sha256Original": "8f0d7dc3d23e5238b7f352e3f231f791b612f491cd6bfd562bbe79c19b3c5fd2",
+          "edicao": "v1 (acesso 2026-10-14)"
+        }
+      },
+      {
+        "catalogoId": "ECOCARDIOGRAMA",
+        "protocoloId": "osteo-map-c14",
+        "contexto": "Avaliação basal de antraciclina; modalidade ECHO ou GHPS na fonte, sem tornar ambos obrigatórios.",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "evidência local f1-b2-fontes-externas/sarcomas/eviq-1901-osteosarcoma-map.txt",
+          "localizador": "f1-b2-fontes-externas/sarcomas/eviq-1901-osteosarcoma-map.txt:L961-L961; Cardiotoxicity / baseline assessment",
+          "trecho": "Baseline clinical assessments include echocardiogram (ECHO) or gated heart pool scan (GHPS) and electrocardiogram (ECG) evaluation.",
+          "sha256": "cc1fe602a2acdb699a3b982339fc330c0579177970dbc11f498683573567d6ae",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO"
+        }
+      },
+      {
+        "catalogoId": "ECOCARDIOGRAMA",
+        "protocoloId": "osteo-map-c56",
+        "contexto": "Avaliação basal de antraciclina; modalidade ECHO ou GHPS na fonte, sem tornar ambos obrigatórios.",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "evidência local f1-b2-fontes-externas/sarcomas/eviq-1901-osteosarcoma-map.txt",
+          "localizador": "f1-b2-fontes-externas/sarcomas/eviq-1901-osteosarcoma-map.txt:L961-L961; Cardiotoxicity / baseline assessment",
+          "trecho": "Baseline clinical assessments include echocardiogram (ECHO) or gated heart pool scan (GHPS) and electrocardiogram (ECG) evaluation.",
+          "sha256": "cc1fe602a2acdb699a3b982339fc330c0579177970dbc11f498683573567d6ae",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO"
+        }
+      },
+      {
+        "catalogoId": "ECG",
+        "protocoloId": "osteo-map-c14",
+        "contexto": "Avaliação basal de antraciclina; modalidade ECHO ou GHPS na fonte, sem tornar ambos obrigatórios.",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "evidência local f1-b2-fontes-externas/sarcomas/eviq-1901-osteosarcoma-map.txt",
+          "localizador": "f1-b2-fontes-externas/sarcomas/eviq-1901-osteosarcoma-map.txt:L961-L961; Cardiotoxicity / baseline assessment",
+          "trecho": "Baseline clinical assessments include echocardiogram (ECHO) or gated heart pool scan (GHPS) and electrocardiogram (ECG) evaluation.",
+          "sha256": "cc1fe602a2acdb699a3b982339fc330c0579177970dbc11f498683573567d6ae",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO"
+        }
+      },
+      {
+        "catalogoId": "ECG",
+        "protocoloId": "osteo-map-c56",
+        "contexto": "Avaliação basal de antraciclina; modalidade ECHO ou GHPS na fonte, sem tornar ambos obrigatórios.",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "evidência local f1-b2-fontes-externas/sarcomas/eviq-1901-osteosarcoma-map.txt",
+          "localizador": "f1-b2-fontes-externas/sarcomas/eviq-1901-osteosarcoma-map.txt:L961-L961; Cardiotoxicity / baseline assessment",
+          "trecho": "Baseline clinical assessments include echocardiogram (ECHO) or gated heart pool scan (GHPS) and electrocardiogram (ECG) evaluation.",
+          "sha256": "cc1fe602a2acdb699a3b982339fc330c0579177970dbc11f498683573567d6ae",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO"
+        }
+      },
+      {
+        "catalogoId": "AUDIOMETRIA_TONAL",
+        "protocoloId": "osteo-map-c14",
+        "contexto": "Se sintomas auditivos se desenvolverem (condição literal eviQ); indicação basal local continua separada.",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "evidência local f1-b2-fontes-externas/sarcomas/eviq-1901-osteosarcoma-map.txt",
+          "localizador": "f1-b2-fontes-externas/sarcomas/eviq-1901-osteosarcoma-map.txt:L1007-L1007; Ototoxicity",
+          "trecho": "An audiometry test should be performed if symptoms develop.",
+          "sha256": "cc1fe602a2acdb699a3b982339fc330c0579177970dbc11f498683573567d6ae",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO"
+        }
+      },
+      {
+        "catalogoId": "SODIO",
+        "protocoloId": "osteo-map-c14",
+        "contexto": "Exames basais do MAP; conferir cronograma específico de cada bloco.",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "https://www.bccancer.bc.ca/chemotherapy-protocols-site/Documents/Sarcoma/SANAHDMAP_Protocol.pdf",
+          "localizador": "f1-b2-fontes-externas/sarcomas/bccancer-SANAHDMAP.txt:L32-L34; TESTS / Baseline",
+          "trecho": "Baseline: CBC & Diff, sodium, potassium, creatinine, calcium, magnesium, albumin,\n\n    total bilirubin, alkaline phosphatase, ALT, LDH, GGT, urine pH, chest x-ray",
+          "sha256": "0ec36bc469a15a6c664214167c8fe1b8a689b6be1c3e7099e19d80ea40bd2dee",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO",
+          "sourceId": "EXT-SARC-014",
+          "sha256Original": "d9f85193d1184934d8d9b6cbd8382cc70144f8f4dd7ff88525cfd5218e33d214",
+          "edicao": "rev 01/06/2026"
+        }
+      },
+      {
+        "catalogoId": "SODIO",
+        "protocoloId": "osteo-map-c56",
+        "contexto": "Exames basais do MAP; conferir cronograma específico de cada bloco.",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "https://www.bccancer.bc.ca/chemotherapy-protocols-site/Documents/Sarcoma/SANAHDMAP_Protocol.pdf",
+          "localizador": "f1-b2-fontes-externas/sarcomas/bccancer-SANAHDMAP.txt:L32-L34; TESTS / Baseline",
+          "trecho": "Baseline: CBC & Diff, sodium, potassium, creatinine, calcium, magnesium, albumin,\n\n    total bilirubin, alkaline phosphatase, ALT, LDH, GGT, urine pH, chest x-ray",
+          "sha256": "0ec36bc469a15a6c664214167c8fe1b8a689b6be1c3e7099e19d80ea40bd2dee",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO",
+          "sourceId": "EXT-SARC-014",
+          "sha256Original": "d9f85193d1184934d8d9b6cbd8382cc70144f8f4dd7ff88525cfd5218e33d214",
+          "edicao": "rev 01/06/2026"
+        }
+      },
+      {
+        "catalogoId": "POTASSIO",
+        "protocoloId": "osteo-map-c14",
+        "contexto": "Exames basais do MAP; conferir cronograma específico de cada bloco.",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "https://www.bccancer.bc.ca/chemotherapy-protocols-site/Documents/Sarcoma/SANAHDMAP_Protocol.pdf",
+          "localizador": "f1-b2-fontes-externas/sarcomas/bccancer-SANAHDMAP.txt:L32-L34; TESTS / Baseline",
+          "trecho": "Baseline: CBC & Diff, sodium, potassium, creatinine, calcium, magnesium, albumin,\n\n    total bilirubin, alkaline phosphatase, ALT, LDH, GGT, urine pH, chest x-ray",
+          "sha256": "0ec36bc469a15a6c664214167c8fe1b8a689b6be1c3e7099e19d80ea40bd2dee",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO",
+          "sourceId": "EXT-SARC-014",
+          "sha256Original": "d9f85193d1184934d8d9b6cbd8382cc70144f8f4dd7ff88525cfd5218e33d214",
+          "edicao": "rev 01/06/2026"
+        }
+      },
+      {
+        "catalogoId": "POTASSIO",
+        "protocoloId": "osteo-map-c56",
+        "contexto": "Exames basais do MAP; conferir cronograma específico de cada bloco.",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "https://www.bccancer.bc.ca/chemotherapy-protocols-site/Documents/Sarcoma/SANAHDMAP_Protocol.pdf",
+          "localizador": "f1-b2-fontes-externas/sarcomas/bccancer-SANAHDMAP.txt:L32-L34; TESTS / Baseline",
+          "trecho": "Baseline: CBC & Diff, sodium, potassium, creatinine, calcium, magnesium, albumin,\n\n    total bilirubin, alkaline phosphatase, ALT, LDH, GGT, urine pH, chest x-ray",
+          "sha256": "0ec36bc469a15a6c664214167c8fe1b8a689b6be1c3e7099e19d80ea40bd2dee",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO",
+          "sourceId": "EXT-SARC-014",
+          "sha256Original": "d9f85193d1184934d8d9b6cbd8382cc70144f8f4dd7ff88525cfd5218e33d214",
+          "edicao": "rev 01/06/2026"
+        }
+      },
+      {
+        "catalogoId": "CALCIO",
+        "protocoloId": "osteo-map-c14",
+        "contexto": "Exames basais do MAP; conferir cronograma específico de cada bloco.",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "https://www.bccancer.bc.ca/chemotherapy-protocols-site/Documents/Sarcoma/SANAHDMAP_Protocol.pdf",
+          "localizador": "f1-b2-fontes-externas/sarcomas/bccancer-SANAHDMAP.txt:L32-L34; TESTS / Baseline",
+          "trecho": "Baseline: CBC & Diff, sodium, potassium, creatinine, calcium, magnesium, albumin,\n\n    total bilirubin, alkaline phosphatase, ALT, LDH, GGT, urine pH, chest x-ray",
+          "sha256": "0ec36bc469a15a6c664214167c8fe1b8a689b6be1c3e7099e19d80ea40bd2dee",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO",
+          "sourceId": "EXT-SARC-014",
+          "sha256Original": "d9f85193d1184934d8d9b6cbd8382cc70144f8f4dd7ff88525cfd5218e33d214",
+          "edicao": "rev 01/06/2026"
+        }
+      },
+      {
+        "catalogoId": "CALCIO",
+        "protocoloId": "osteo-map-c56",
+        "contexto": "Exames basais do MAP; conferir cronograma específico de cada bloco.",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "https://www.bccancer.bc.ca/chemotherapy-protocols-site/Documents/Sarcoma/SANAHDMAP_Protocol.pdf",
+          "localizador": "f1-b2-fontes-externas/sarcomas/bccancer-SANAHDMAP.txt:L32-L34; TESTS / Baseline",
+          "trecho": "Baseline: CBC & Diff, sodium, potassium, creatinine, calcium, magnesium, albumin,\n\n    total bilirubin, alkaline phosphatase, ALT, LDH, GGT, urine pH, chest x-ray",
+          "sha256": "0ec36bc469a15a6c664214167c8fe1b8a689b6be1c3e7099e19d80ea40bd2dee",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO",
+          "sourceId": "EXT-SARC-014",
+          "sha256Original": "d9f85193d1184934d8d9b6cbd8382cc70144f8f4dd7ff88525cfd5218e33d214",
+          "edicao": "rev 01/06/2026"
+        }
+      },
+      {
+        "catalogoId": "MAGNESIO",
+        "protocoloId": "osteo-map-c14",
+        "contexto": "Exames basais do MAP; conferir cronograma específico de cada bloco.",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "https://www.bccancer.bc.ca/chemotherapy-protocols-site/Documents/Sarcoma/SANAHDMAP_Protocol.pdf",
+          "localizador": "f1-b2-fontes-externas/sarcomas/bccancer-SANAHDMAP.txt:L32-L34; TESTS / Baseline",
+          "trecho": "Baseline: CBC & Diff, sodium, potassium, creatinine, calcium, magnesium, albumin,\n\n    total bilirubin, alkaline phosphatase, ALT, LDH, GGT, urine pH, chest x-ray",
+          "sha256": "0ec36bc469a15a6c664214167c8fe1b8a689b6be1c3e7099e19d80ea40bd2dee",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO",
+          "sourceId": "EXT-SARC-014",
+          "sha256Original": "d9f85193d1184934d8d9b6cbd8382cc70144f8f4dd7ff88525cfd5218e33d214",
+          "edicao": "rev 01/06/2026"
+        }
+      },
+      {
+        "catalogoId": "MAGNESIO",
+        "protocoloId": "osteo-map-c56",
+        "contexto": "Exames basais do MAP; conferir cronograma específico de cada bloco.",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "https://www.bccancer.bc.ca/chemotherapy-protocols-site/Documents/Sarcoma/SANAHDMAP_Protocol.pdf",
+          "localizador": "f1-b2-fontes-externas/sarcomas/bccancer-SANAHDMAP.txt:L32-L34; TESTS / Baseline",
+          "trecho": "Baseline: CBC & Diff, sodium, potassium, creatinine, calcium, magnesium, albumin,\n\n    total bilirubin, alkaline phosphatase, ALT, LDH, GGT, urine pH, chest x-ray",
+          "sha256": "0ec36bc469a15a6c664214167c8fe1b8a689b6be1c3e7099e19d80ea40bd2dee",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO",
+          "sourceId": "EXT-SARC-014",
+          "sha256Original": "d9f85193d1184934d8d9b6cbd8382cc70144f8f4dd7ff88525cfd5218e33d214",
+          "edicao": "rev 01/06/2026"
+        }
+      },
+      {
+        "catalogoId": "CORTISOL",
+        "protocoloId": "osteo-pembro-msi",
+        "contexto": "Basal; TFTs = TSH/T4 livre. Periodicidade e exames condicionais conforme a fonte específica; não universalizar aos demais esquemas.",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "https://www.eviq.org.au/p/5066",
+          "localizador": "f1-b2-fontes-externas/sarcomas/eviq-5066-pembro-tumouragnostic.txt:L369-L369; Blood tests",
+          "trecho": "FBC, EUC, eGFR, LFTs, serum cortisol, TFTs, and BSL at baseline.",
+          "sha256": "bb9ca81609b51411bdd629a5b1602a06f599da668b1cdf3ed78012f245df4f60",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO",
+          "sourceId": "EXT-SARC-008",
+          "sha256Original": "8f0d7dc3d23e5238b7f352e3f231f791b612f491cd6bfd562bbe79c19b3c5fd2",
+          "edicao": "v1 (acesso 2026-10-14)"
+        }
+      },
+      {
+        "catalogoId": "TSH",
+        "protocoloId": "osteo-pembro-msi",
+        "contexto": "Basal; TFTs = TSH/T4 livre. Periodicidade e exames condicionais conforme a fonte específica; não universalizar aos demais esquemas.",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "https://www.eviq.org.au/p/5066",
+          "localizador": "f1-b2-fontes-externas/sarcomas/eviq-5066-pembro-tumouragnostic.txt:L369-L369; Blood tests",
+          "trecho": "FBC, EUC, eGFR, LFTs, serum cortisol, TFTs, and BSL at baseline.",
+          "sha256": "bb9ca81609b51411bdd629a5b1602a06f599da668b1cdf3ed78012f245df4f60",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO",
+          "sourceId": "EXT-SARC-008",
+          "sha256Original": "8f0d7dc3d23e5238b7f352e3f231f791b612f491cd6bfd562bbe79c19b3c5fd2",
+          "edicao": "v1 (acesso 2026-10-14)"
+        }
+      },
+      {
+        "catalogoId": "T4_LIVRE",
+        "protocoloId": "osteo-pembro-msi",
+        "contexto": "Basal; TFTs = TSH/T4 livre. Periodicidade e exames condicionais conforme a fonte específica; não universalizar aos demais esquemas.",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "https://www.eviq.org.au/p/5066",
+          "localizador": "f1-b2-fontes-externas/sarcomas/eviq-5066-pembro-tumouragnostic.txt:L369-L369; Blood tests",
+          "trecho": "FBC, EUC, eGFR, LFTs, serum cortisol, TFTs, and BSL at baseline.",
+          "sha256": "bb9ca81609b51411bdd629a5b1602a06f599da668b1cdf3ed78012f245df4f60",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO",
+          "sourceId": "EXT-SARC-008",
+          "sha256Original": "8f0d7dc3d23e5238b7f352e3f231f791b612f491cd6bfd562bbe79c19b3c5fd2",
+          "edicao": "v1 (acesso 2026-10-14)"
+        }
+      },
+      {
+        "catalogoId": "GLICEMIA",
+        "protocoloId": "osteo-pembro-msi",
+        "contexto": "Basal; TFTs = TSH/T4 livre. Periodicidade e exames condicionais conforme a fonte específica; não universalizar aos demais esquemas.",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "https://www.eviq.org.au/p/5066",
+          "localizador": "f1-b2-fontes-externas/sarcomas/eviq-5066-pembro-tumouragnostic.txt:L369-L369; Blood tests",
+          "trecho": "FBC, EUC, eGFR, LFTs, serum cortisol, TFTs, and BSL at baseline.",
+          "sha256": "bb9ca81609b51411bdd629a5b1602a06f599da668b1cdf3ed78012f245df4f60",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO",
+          "sourceId": "EXT-SARC-008",
+          "sha256Original": "8f0d7dc3d23e5238b7f352e3f231f791b612f491cd6bfd562bbe79c19b3c5fd2",
+          "edicao": "v1 (acesso 2026-10-14)"
+        }
+      }
+    ],
+    "fonte": {
+      "tipo": "PROTOCOLO_INSTITUCIONAL",
+      "referencia": "ligacoes.examesFontes[catalogoId,protocoloId] — cada ligação acrescentada tem fonte própria com trecho, localizador e SHA-256.",
+      "trecho": "Hemograma, função renal e exames específicos vinculados às fontes por protocolo. Ligações herdadas sem comprovação nesta rodada permanecem descritas nas pendências; a lista não representa pedido universal.",
+      "estado": "PARCIAL"
+    }
   },
   "pendencias": [
     {
@@ -2180,6 +2970,95 @@
         "RENAME 2024, edição apontada vigente no portal do Ministério da Saúde; resultados por fármaco em tratamento.protocolos[id=osteo-pembro-msi].sus.farmacos.",
         "Ausência de confirmação institucional de estoque/acesso por indicação."
       ]
+    },
+    {
+      "texto": "H4 osteo-map-c14: risco FN sem classificação específica verificada.",
+      "classe": "SUPORTE_SEM_FONTE_ESPECIFICA",
+      "protocoloId": "osteo-map-c14",
+      "buscasFeitas": [
+        "f1-b2-fontes-externas/sarcomas/eviq-1901-osteosarcoma-map.txt: Clinical information, Evidence/Toxicity, growth factor support e Blood tests.",
+        "corpus/4-interacoes-contraindicacoes/risco-neutropenia-febril.v1.RASCUNHO.json: sem linha específica para este esquema; G-CSF por desenho não equivale a faixa percentual de FN."
+      ]
+    },
+    {
+      "texto": "H4 osteo-map-c56: risco FN sem classificação específica verificada.",
+      "classe": "SUPORTE_SEM_FONTE_ESPECIFICA",
+      "protocoloId": "osteo-map-c56",
+      "buscasFeitas": [
+        "f1-b2-fontes-externas/sarcomas/eviq-1901-osteosarcoma-map.txt: Clinical information, Evidence/Toxicity, growth factor support e Blood tests.",
+        "corpus/4-interacoes-contraindicacoes/risco-neutropenia-febril.v1.RASCUNHO.json: sem linha específica para este esquema; G-CSF por desenho não equivale a faixa percentual de FN."
+      ]
+    },
+    {
+      "texto": "H4 osteo-ap: risco FN sem classificação específica verificada; emetogenicidade também permanece VERIFICAR.",
+      "classe": "SUPORTE_SEM_FONTE_ESPECIFICA",
+      "protocoloId": "osteo-ap",
+      "buscasFeitas": [
+        "f1-b2-fontes-externas/sarcomas/bccancer-SAAVAP.txt: Clinical information, Evidence/Toxicity, growth factor support e Blood tests.",
+        "corpus/4-interacoes-contraindicacoes/risco-neutropenia-febril.v1.RASCUNHO.json: sem linha específica para este esquema; G-CSF por desenho não equivale a faixa percentual de FN."
+      ]
+    },
+    {
+      "texto": "H4 osteo-ifep: risco FN sem classificação específica verificada; emetogenicidade também permanece VERIFICAR.",
+      "classe": "SUPORTE_SEM_FONTE_ESPECIFICA",
+      "protocoloId": "osteo-ifep",
+      "buscasFeitas": [
+        "f1-b2-fontes-externas/sarcomas/bccancer-SAAVIME3.txt: Clinical information, Evidence/Toxicity, growth factor support e Blood tests.",
+        "corpus/4-interacoes-contraindicacoes/risco-neutropenia-febril.v1.RASCUNHO.json: sem linha específica para este esquema; G-CSF por desenho não equivale a faixa percentual de FN."
+      ]
+    },
+    {
+      "texto": "H4 osteo-gemdoc: risco FN sem classificação específica verificada.",
+      "classe": "SUPORTE_SEM_FONTE_ESPECIFICA",
+      "protocoloId": "osteo-gemdoc",
+      "buscasFeitas": [
+        "f1-b2-fontes-externas/sarcomas/eviq-1898-gemdoc.txt: Clinical information, Evidence/Toxicity, growth factor support e Blood tests.",
+        "corpus/4-interacoes-contraindicacoes/risco-neutropenia-febril.v1.RASCUNHO.json: sem linha específica para este esquema; G-CSF por desenho não equivale a faixa percentual de FN."
+      ]
+    },
+    {
+      "texto": "H4 osteo-regorafenibe: risco FN sem classificação específica verificada; emetogenicidade também permanece VERIFICAR.",
+      "classe": "SUPORTE_SEM_FONTE_ESPECIFICA",
+      "protocoloId": "osteo-regorafenibe",
+      "buscasFeitas": [
+        "Fontes originais citadas no protocolo osteo-regorafenibe: Duffaud Lancet Oncol 2019;20(1):120-33 (PMID 30477937); não localizada tabela específica de suporte na captura.",
+        "corpus/4-interacoes-contraindicacoes/risco-neutropenia-febril.v1.RASCUNHO.json: sem linha específica para este esquema; G-CSF por desenho não equivale a faixa percentual de FN."
+      ]
+    },
+    {
+      "texto": "H4 osteo-pembro-msi: risco FN sem classificação específica verificada.",
+      "classe": "SUPORTE_SEM_FONTE_ESPECIFICA",
+      "protocoloId": "osteo-pembro-msi",
+      "buscasFeitas": [
+        "f1-b2-fontes-externas/sarcomas/eviq-5066-pembro-tumouragnostic.txt: Clinical information, Evidence/Toxicity, growth factor support e Blood tests.",
+        "corpus/4-interacoes-contraindicacoes/risco-neutropenia-febril.v1.RASCUNHO.json: sem linha específica para este esquema; G-CSF por desenho não equivale a faixa percentual de FN."
+      ]
+    },
+    {
+      "texto": "H4: aliases herdados da base sem ID exato no catálogo; preservados para não escolher segmento/técnica clínica. Não tratar estas ligações como IDs resolvidos.",
+      "classe": "CATALOGO_ID_PENDENTE",
+      "ids": [
+        "RM_LOCAL",
+        "BIOPSIA"
+      ],
+      "buscasFeitas": [
+        "corpus/exames/exames-sigtap.v1.json, secoes[*].id (catálogo usado pelos painéis de corpus/1-exames/).",
+        "corpus/1-exames/: não há definição canônica de RM_LOCAL, BIOPSIA nem das composições genéricas TC_TORAX_ABDOME, TC_TORAX_ABDOME_PELVE e TC_CERVICO_TORACICA."
+      ]
+    },
+    {
+      "texto": "H4: ligações já presentes na base sem proveniência clínica revalidada nesta rodada; não contam como exames acrescentados/verificados.",
+      "classe": "LIGACAO_HERDADA_A_CONFERIR",
+      "ids": [
+        "RM_LOCAL",
+        "TC_TORAX",
+        "BIOPSIA",
+        "AUDIOMETRIA",
+        "CLEARANCE_CREATININA"
+      ],
+      "buscasFeitas": [
+        "Inventário integral dos seis packs em 9517c76; comparação com o catálogo e com as capturas específicas de monitorização dos protocolos."
+      ]
     }
   ],
   "conflitos": [
@@ -2263,6 +3142,20 @@
         "susPreenchidos": 0,
         "notas": [
           "D-F1-49: fichas institucionais novas sem SISAC; mudança de fonte não aprova doses"
+        ]
+      },
+      {
+        "data": "2026-10-14",
+        "redator": "Codex — SETOR PACKS-B2 H2+H4",
+        "susPreenchidos": 0,
+        "protocolosSusVerificar": 7,
+        "examesAcrescentados": 12,
+        "suportesPorProtocolo": 7,
+        "notas": [
+          "RENAME 2024 consultada (edição vigente indicada pelo Ministério da Saúde); SIGTAP 2026-09 consultado somente em arquivos locais.",
+          "Códigos administrativos e RENAME não comprovam acesso ao esquema no serviço nem cobertura ANS.",
+          "Fontes externas do manifesto pareadas por SHA-256; demais trechos têm hash da captura textual e localizador exato.",
+          "Preservados RASCUNHO, consultavel true, alerta false, aprovacaoClinica null e todas as doses."
         ]
       }
     ]
