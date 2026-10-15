@@ -257,6 +257,7 @@ async function main() {
   try {
     viteDev = await createViteServer({
       configFile: join(ROOT, "vite.config.ts"),
+      cacheDir: join(evidenceDir, "vite-cache"),
       root: ROOT,
       server: { host: "127.0.0.1", port: uiPort, strictPort: true },
     });

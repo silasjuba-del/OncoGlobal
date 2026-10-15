@@ -78,3 +78,8 @@ Resultados medidos nesta árvore de produto e na CI de `29cee755`, sem reutiliza
 Contagens das baterias se sobrepõem e não devem ser somadas. A primeira execução Windows completa terminou com 3348/3350; após saneamento dos artefatos/arquivo sintético e espera HTTP explícita no teste de receitas, o reataque passou e a CI integral passou com 3350/3350. O timeout de integração do teste não altera os limites CRIT-5.
 
 CI verificável: [execução integral](https://github.com/silasjuba-del/OncoGlobal/actions/runs/38493445272). O PR exige novos checks após o commit documental final. A aprovação clínica continua humana, por item, e provider ao vivo permanece dispensado.
+
+
+## Revisão de integração — 2026-10-15
+
+A prova B2 foi repetida em Chromium real após corrigir a trilha: versão e hash agora vêm do template do rascunho recebido em `draft.payload.template` e são comparados ao manifesto. Seis representantes passaram com recusa RASCUNHO visível, promoção somente em memória, proposta gravada e zero requisições externas. Evidências locais: `%TEMP%/s12-b2-evidence-a1VdBw/` (resumo, log e seis capturas). A reabertura usa o mesmo SQLite; `documentosHistorico = 0`. O escopo termina em proposta e rascunho documental: não comprova prescrição QT assinada nem histórico de documento assinado após reinício. A UI da biblioteca permite obsoletar conteúdo consultável após leitura e confirmação explícita, descartando resultados de consulta anteriores.
