@@ -27,7 +27,8 @@ const ausente = () => ({ valor: null, estado: "PENDENTE", campo: "AUSENTE", moti
 const presente = (valor: string, id: string) => ({ valor, estado: "VERDE", campo: "PRESENTE", motivo: "fixture sintética",
   fontes: [fonteSintetica(id)], revisao: "CONFIRMADO" });
 
-async function consultaCom(lotes: { id: string; topografia?: string; cid?: string; encontro?: string; em?: string }[], encontroAntigo?: { id: string; em: string }) {
+type MedidaTeste = { kg: number; data: string; fonte?: boolean; em?: string; encontro?: string; origem?: string };
+async function consultaCom(lotes: { id: string; topografia?: string; cid?: string; encontro?: string; em?: string }[], encontroAntigo?: { id: string; em: string }, medidas: MedidaTeste[] = []) {
   const root = mkdtempSync(join(tmpdir(), "f1-b1-nutri-")); dirs.push(root);
   const db = abrirLedger(join(root, "ledger.sqlite")); dbs.push(db);
   const sessoes = criarGerenciadorSessao({ medicoId: "medico-teste", crm: "CRM-TESTE", senha: "senha-sintetica-comprida", duracaoMs: 60_000, agora: () => AGORA });
@@ -39,12 +40,12 @@ async function consultaCom(lotes: { id: string; topografia?: string; cid?: strin
   const token = sessoes.login("senha-sintetica-comprida")!.token;
   const PAC = "Paciente Teste Nutri", ENC = "encontro-nutri-01";
   let seq = 0;
-  const seed = (tipo: string, payload: unknown, tumorLotId: string | null = null, enc = ENC, em = AGORA) => {
+  const seed = (tipo: string, payload: unknown, tumorLotId: string | null = null, enc = ENC, em = AGORA, sourceId?: string) => {
     seq += 1; const id = `nutri-${seq}`;
     salvarDraft(db, { draftId: id, patientId: PAC, sourceId: `src-${id}`, rawRef: "fixture-local", payload: {}, diagnostics: [], revision: 0, criadoEm: em });
     const r = confirmar(db, { operationId: `op-nutri-${String(seq).padStart(3, "0")}`, patientId: PAC, tumorLotId, encounterId: enc,
       reviewDecisionId: `rev-${id}`, sessao: sessoes.obter(token)!, em,
-      registros: [{ draftId: id, expectedRevision: 0, eventId: `ev-${id}`, tipo, payload, fontes: [], revisao: "CONFIRMADO" }] });
+      registros: [{ draftId: id, expectedRevision: 0, eventId: `ev-${id}`, tipo, payload, fontes: sourceId ? [fonteSintetica(sourceId)] : [], revisao: "CONFIRMADO" }] });
     expect(r.estado).toBe("GRAVADA");
   };
   const pac = { patientId: PAC, identificadores: [], nome: PAC, nascimento: null, sexoCadastral: "NAO_INFORMADO", divergencia: false };
@@ -53,6 +54,13 @@ async function consultaCom(lotes: { id: string; topografia?: string; cid?: strin
   for (const l of lotes) seed("TumorLot", { tumorLotId: l.id, patientId: PAC,
     cid: l.cid ? presente(l.cid, `cid-${l.id}`) : ausente(), topografia: l.topografia ? presente(l.topografia, `topo-${l.id}`) : ausente(),
     histologia: ausente(), estadiamentos: [], finalidadeApac: ausente(), marcos: [] }, l.id, l.encontro ?? ENC, l.em ?? AGORA);
+  if (medidas.length) seed("FATO", { campo: "alturaCm", valor: 170 }, null, encontroAntigo?.id ?? ENC,
+    encontroAntigo?.em ?? AGORA, "altura-nutri");
+  for (const [i, m] of medidas.entries()) {
+    const sourceId = `peso-nutri-${i}`;
+    seed("Weight", { kg: m.kg, data: m.data, origem: m.origem ?? "MEDIDO", sourceId }, null,
+      m.encontro ?? ENC, m.em ?? AGORA, m.fonte === false ? undefined : sourceId);
+  }
   const antes = listarEventos(db, PAC).length;
   const carregar = async (tumorLotId?: string, encounterId = ENC) => {
     const r = await fetch(`http://127.0.0.1:${addr.port}/consulta/carregar`, { method: "POST",
@@ -64,6 +72,41 @@ async function consultaCom(lotes: { id: string; topografia?: string; cid?: strin
 }
 
 describe("F1-B1 · triagem nutricional chega à consulta (D-F1-33, NRS-2002)", () => {
+  it("peso documental com mais de 30 dias sugere triagem com data e fonte, sem liberar peso para dose", async () => {
+    const c = await consultaCom([{ id: "lote-mama", topografia: "Mama" }], undefined,
+      [{ kg: 51.9, data: "2026-09-01" }]);
+    const v = await c.carregar();
+    expect(v.status).toBe(200);
+    expect(v.body.flash.sugestoesClinicas?.[0]).toMatch(/IMC 17\.9 < 18/);
+    expect(v.body.flash.sugestoesClinicas?.[0]).toMatch(/2026-09-01.*peso-nutri-0.*conferir medidas atuais/);
+    expect(v.body.avaliacaoClinica.dadosCorporais.pesoKg).toBeNull();
+    expect(c.eventos()).toBe(c.antes);
+  });
+  it.each([
+    [{ kg: 51.9, data: "2026-09-01" }, { kg: 70, data: "2026-10-14" }],
+    [{ kg: 51.9, data: "2026-09-01" }, { kg: 70, data: "2026-09-01" }],
+    [{ kg: 51.9, data: "2026-09-01", fonte: false }],
+    [{ kg: 51.9, data: "2026-10-15" }],
+    [{ kg: 51.9, data: "2026-09-01", origem: "INFORMADO_PACIENTE" }],
+  ] as MedidaTeste[][])("não usa peso antigo superado, conflitante, sem fonte, futuro ou informado (%j)", async (...medidas) => {
+    const v = await (await consultaCom([{ id: "lote-mama", topografia: "Mama" }], undefined, medidas)).carregar();
+    expect(v.status).toBe(200);
+    expect(v.body.flash.sugestoesClinicas).toBeUndefined();
+  });
+  it.each([["Mama", "Esôfago"], ["Esôfago", "Mama"]])("duas versões vigentes do mesmo lote ficam pendentes em qualquer ordem (%s, %s)", async (a, b) => {
+    const c = await consultaCom([{ id: "lote-conflitante", topografia: a }, { id: "lote-conflitante", topografia: b }]);
+    const v = await c.carregar("lote-conflitante");
+    expect(v.status).toBe(200);
+    expect(v.body.flash.sugestoesClinicas).toBeUndefined();
+    expect(v.body.pendenciasLeitura).toContain("TRIAGEM_NUTRICIONAL_LOTE_AMBIGUO");
+    expect(c.eventos()).toBe(c.antes);
+  });
+  it("reabertura não usa peso registrado em encontro posterior", async () => {
+    const c = await consultaCom([{ id: "lote-mama", topografia: "Mama", encontro: "encontro-antigo", em: "2026-09-01T09:00:00-03:00" }],
+      { id: "encontro-antigo", em: "2026-09-01T09:00:00-03:00" }, [{ kg: 51.9, data: "2026-09-01" }]);
+    expect((await c.carregar("lote-mama", "encontro-antigo")).body.flash.sugestoesClinicas).toBeUndefined();
+    expect((await c.carregar("lote-mama")).body.flash.sugestoesClinicas?.[0]).toMatch(/IMC 17\.9 < 18/);
+  });
   it("positivo: lote de esôfago confirmado mostra a sugestão na Flash, sem gravar nada", async () => {
     const c = await consultaCom([{ id: "lote-esofago", topografia: "Esôfago torácico" }]);
     const v = await c.carregar();

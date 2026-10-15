@@ -34,7 +34,7 @@ import { projetarVinculosContato, type ContatoProjetado } from "../kernel/projec
 import { hashConteudoExibido } from "./sessao.js";
 import { projetarRetratoTransversal } from "./retratoTransversal.js";
 import { projetarContextoClinico, projetarHistoricoClinico } from "./f0c/contextoClinico.js";
-import { avaliarConsulta, horizonteDoEncontro, type EntradaAvaliacaoConsulta } from "./f0c/avaliacaoConsulta.js";
+import { avaliarConsulta, horizonteDoEncontro, pesosMedidosDocumentados, type EntradaAvaliacaoConsulta } from "./f0c/avaliacaoConsulta.js";
 import { coletarFontesSalao } from "./f0c/salao.js";
 import { projetarInstrumentosClinicos } from "./f0c/instrumentosClinicos.js";
 import type { RegraInstrumento } from "../contracts/f0c/instrumentos.js";
@@ -369,19 +369,31 @@ export function lerConsulta(db: DatabaseSync, patientId: string, agora: string, 
     ...(condicionais.avaliacoes.some(r=>r.estado!=="NAO_APLICAVEL") ? {condicionais:{
       estado:avisosCondicionais.length ? "VERMELHO" as const : pendenciasCondicionais.length ? "PENDENTE" as const : "VERDE" as const,
       motivos:[...avisosCondicionais,...pendenciasCondicionais].map(texto=>({texto}))}} : {}) });
-  // D-F1-33/D-F1-48 · triagem nutricional NRS-2002: só do lote selecionado (nunca herda outro lote) e do peso/altura
-  // vigentes no horizonte do encontro. Só SUGERE: não gera pedido, não trava e não entra no semáforo.
+  // D-F1-33/D-F1-48 · evidência documental no horizonte do encontro, independente da validade para dose.
+  // Só SUGERE: não gera pedido, não trava e não entra no semáforo. Medidas atuais exigem conferência.
   const presenteNoLote = (d: { campo: string; valor: string | null } | undefined) =>
     d?.campo === "PRESENTE" && typeof d.valor === "string" && d.valor.trim() ? d.valor : null;
   // Armadilha (a): encontro reaberto não usa a versão do lote confirmada em encontro POSTERIOR.
-  const loteNoHorizonte = lote ? porTipo(all.filter((e) => e.patientId === patientId && Date.parse(e.criadoEm) <= horizontePlaquetas),
-    "TumorLot", TumorLot).find((x) => x.event.patientId === patientId && x.value.tumorLotId === lote.tumorLotId)?.value : undefined;
-  const triagemNutricional = sugerirTriagemNutricional({
+  const lotesNoHorizonte = lote ? porTipo(all.filter((e) => e.patientId === patientId && Date.parse(e.criadoEm) <= horizontePlaquetas),
+    "TumorLot", TumorLot).filter((x) => x.value.patientId === patientId && x.event.tumorLotId === lote.tumorLotId
+      && x.value.tumorLotId === lote.tumorLotId) : [];
+  const loteNoHorizonte = lotesNoHorizonte.length === 1 ? lotesNoHorizonte[0]!.value : undefined;
+  const pesosNutricionais = pesosMedidosDocumentados(eventosVigentes(eventosDaConsulta
+    .filter(e => Date.parse(e.criadoEm) <= horizontePlaquetas)), civil.dataCivil, horizontePlaquetas);
+  const ultimoPeso = pesosNutricionais[0];
+  const pesoNutricional = ultimoPeso && new Set(pesosNutricionais
+    .filter(p => Date.parse(p.data) === Date.parse(ultimoPeso.data)).map(p => p.kg)).size === 1 ? ultimoPeso : null;
+  const imcDocumentado = imcDeMedidas(pesoNutricional?.kg, avaliacao.dadosCorporais.alturaCm);
+  if (lotesNoHorizonte.length > 1) pendenciasLeitura.push("TRIAGEM_NUTRICIONAL_LOTE_AMBIGUO");
+  const triagemNutricional = lotesNoHorizonte.length > 1 ? null : sugerirTriagemNutricional({
     tumor: [presenteNoLote(loteNoHorizonte?.topografia), presenteNoLote(loteNoHorizonte?.histologia)].filter((t): t is string => t !== null).join(" ") || null,
     cid: presenteNoLote(loteNoHorizonte?.cid),
-    imc: imcDeMedidas(avaliacao.dadosCorporais.pesoKg, avaliacao.dadosCorporais.alturaCm),
+    imc: imcDocumentado,
   });
-  const sugestaoNutricional = textoSugestaoNutricional(triagemNutricional);
+  const textoNutricional = triagemNutricional ? textoSugestaoNutricional(triagemNutricional) : null;
+  const sugestaoNutricional = textoNutricional && pesoNutricional && triagemNutricional?.motivos.some(m => m.startsWith("IMC "))
+    ? `${textoNutricional}; peso documentado em ${pesoNutricional.data} (fonte ${pesoNutricional.sourceId}); conferir medidas atuais`
+    : textoNutricional;
   pendenciasLeitura.push(...contextoClinico.pendencias,
     ...Object.entries(contextoClinico.campos).filter(([,c]) => c.valor === null).map(([nome]) => `${nome.toUpperCase()}_NAO_CARREGADAS`));
   const anteriores = patientEvents.filter(e => e.encounterId !== current.encounterId && Date.parse(e.criadoEm) < Date.parse(current.criadoEm));
