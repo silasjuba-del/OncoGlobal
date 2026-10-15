@@ -1,4 +1,5 @@
 import type { ClinicalEvent } from "../../contracts/operacao.js";
+import { horizonteDoEncontro } from "./avaliacaoConsulta.js";
 import { Ciclo,TreatmentEpisode } from "../../contracts/clinico.js";
 import { ProtocolTemplate } from "../../contracts/w10/prescricao.js";
 import { dadosDoEvento,eventosVigentes } from "../../kernel/projections/snapshot.js";
@@ -12,7 +13,7 @@ export function projetarIntervaloCiclo(i:EntradaIntervaloClinico) {
  const fontes={eventIds:[] as string[],sourceIds:[] as string[]};
  const templateRef:{id:string;versao:string;hash:string;fonte:string}|null=null;
  const pendente=(motivo:string)=>({...avaliarIntervaloCiclo({inicioAnterior:null,dataProxima:null,intervaloDias:null}),motivo,aplicavel:true as boolean|null,fontes,templateRef});
- const agora=Date.parse(i.agora);if(!Number.isFinite(agora)) return pendente("HORARIO_ATUAL_INVALIDO");
+ const agora=horizonteDoEncontro(i.eventos.filter(e=>e.patientId===i.patientId),i.encounterId,i.agora);if(!Number.isFinite(agora)) return pendente("HORARIO_ATUAL_INVALIDO");
  const eventos=eventosVigentes(i.eventos.filter(e=>e.patientId===i.patientId && e.tumorLotId===i.tumorLotId && Date.parse(e.criadoEm)<=agora));
  const ep=TreatmentEpisode.safeParse(i.episodio),ci=Ciclo.safeParse(i.ciclo);
  if(!ep.success || !ci.success || !i.tumorLotId || ep.data.tumorLotId!==i.tumorLotId || ci.data.episodioId!==ep.data.episodioId)

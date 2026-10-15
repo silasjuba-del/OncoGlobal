@@ -55,17 +55,17 @@
     "normalizadoLFIgual": false
   },
   {
-    "path": "docs/ondas/W3-CODEX.md",
+    "path": "docs/_arquivo/ondas/W3-CODEX.md",
     "rawIgual": false,
     "normalizadoLFIgual": true
   },
   {
-    "path": "docs/ondas/W3-GROK.md",
+    "path": "docs/_arquivo/ondas/W3-GROK.md",
     "rawIgual": false,
     "normalizadoLFIgual": true
   },
   {
-    "path": "docs/ondas/W8-GLM.md",
+    "path": "docs/_arquivo/ondas/W8-GLM.md",
     "rawIgual": true,
     "normalizadoLFIgual": true
   },
@@ -85,17 +85,17 @@
     "normalizadoLFIgual": true
   },
   {
-    "path": "docs/progresso/W10-RETOMADA-JEV-FUGU.md",
+    "path": "docs/_arquivo/progresso/W10-RETOMADA-JEV-FUGU.md",
     "rawIgual": true,
     "normalizadoLFIgual": true
   },
   {
-    "path": "docs/progresso/W3-CODEX.md",
+    "path": "docs/_arquivo/progresso/W3-CODEX.md",
     "rawIgual": false,
     "normalizadoLFIgual": true
   },
   {
-    "path": "docs/progresso/W8-GLM.md",
+    "path": "docs/_arquivo/progresso/W8-GLM.md",
     "rawIgual": false,
     "normalizadoLFIgual": true
   },
@@ -125,17 +125,17 @@
     "normalizadoLFIgual": true
   },
   {
-    "path": "docs/w10/astra/REVISAO-ASTRA.md",
+    "path": "docs/_arquivo/w10/astra/REVISAO-ASTRA.md",
     "rawIgual": false,
     "normalizadoLFIgual": true
   },
   {
-    "path": "docs/w5/CLAIMS.md",
+    "path": "docs/_arquivo/w5/CLAIMS.md",
     "rawIgual": false,
     "normalizadoLFIgual": true
   },
   {
-    "path": "docs/w5/P1-REGRAS.md",
+    "path": "docs/_arquivo/w5/P1-REGRAS.md",
     "rawIgual": false,
     "normalizadoLFIgual": true
   },

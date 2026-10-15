@@ -1,7 +1,7 @@
 # F0 · FECHAMENTO · Astra (Codex, orquestradora) + 5 Lunas · modalidade GOAL · 2026-10-09
 
 > Ordem do Dr. Silas (09/10): **"Congela e pode publicar. Codex Astra orquestra + 5 agentes Luna (burros e determinísticos, com GOAL na execução + testes finais da fatia). Codex deve finalizar F0, incluindo os passos elencados: atualização de branches, revisão dos dados sem perda, push e commit completo. Dr. Silas apenas faz o merge na main."**
-> Plano-base: `docs/FECHAMENTO-F0.md` (E0–E12 + E6b) · Parecer: `docs/w12/PARECER-CODEX-2026-10-09.md` · Decisões: `docs/DECISOES.md` (até D-W9-80).
+> Plano-base: `docs/FECHAMENTO-F0.md` (E0–E12 + E6b) · Parecer: `docs/_arquivo/w12/PARECER-CODEX-2026-10-09.md` · Decisões: `docs/DECISOES.md` (até D-W9-80).
 
 ---
 
@@ -78,7 +78,7 @@ npx vitest run --config tests/adv-w8/vitest.config.ts --no-file-parallelism
 
 ### FASE A · Integração sem perda (serial, só a Astra) · portão A
 
-**A0 · Leitura (≤ 30 min).** Ler `docs/CONTEXTO-NOVA-ABA.md`, `docs/FECHAMENTO-F0.md`, este arquivo, `docs/DECISOES.md` de D-W9-56 em diante, `docs/w12/PARECER-CODEX-2026-10-09.md` e o seu próprio `docs/w10/RESULTADO-10-FATIAS-20261008.md`.
+**A0 · Leitura (≤ 30 min).** Ler `docs/CONTEXTO-NOVA-ABA.md`, `docs/FECHAMENTO-F0.md`, este arquivo, `docs/DECISOES.md` de D-W9-56 em diante, `docs/_arquivo/w12/PARECER-CODEX-2026-10-09.md` e o seu próprio `docs/_arquivo/w10/RESULTADO-10-FATIAS-20261008.md`.
 
 **A1 · Linha de base medida.** No checkout `C:\Users\silas\Projects\OncoGlobal` (ramo `f0/w1-integrado`, HEAD esperado = commit que publicou este arquivo):
 ```

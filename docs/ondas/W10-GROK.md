@@ -1,6 +1,6 @@
 # W10-GROK · 14 FATIAS · Regras clínicas puras: salão, agenda, RADS, interações, ownership, dedupe, manifesto, ledger APAC
 
-> Leia primeiro `docs/ondas/W10-COMUM.md` (inteiro). Absorve integralmente a antiga `docs/ondas/W9-GROK.md` (GROK-01…10) e acrescenta salão, agenda e RADS.
+> Leia primeiro `docs/ondas/W10-COMUM.md` (inteiro). Absorve integralmente a antiga `docs/_arquivo/ondas/W9-GROK.md` (GROK-01…10) e acrescenta salão, agenda e RADS.
 > EXECUTOR = `GROK`. Worktree `C:\Users\silas\Projects\OncoGlobal-wt\w10-grok` · branch `f0/w10-grok`.
 > **Faixa:** `src/rules/**` **exceto** `src/rules/prescricao/**` e os arquivos já existentes de `src/rules/w8/*` (pode criar novos ao lado; o pedido de import entre arquivos de `w8` continua NÃO liberado — quem orquestra importa); `src/modules/**`; `src/kernel/harness/ownership.ts` (novo); `scripts/verificar-manifesto.mjs` (novo); `corpus/rulesets/{rads-*,salao-*,agenda-*,interacoes*}`; `tests/{rules,rules-w8,modules}/**`, `tests/w10-grok/**`; `docs/progresso/W10-GROK.md`, `docs/w10/PEDIDOS-GROK.md`.
 > **Natureza do trabalho:** funções **puras e determinísticas**, sem I/O, sem LLM, sem dependência nova. Toda tabela clínica vem de **arquivo de ruleset versionado** (`corpus/rulesets/*.v1.json`, header com fonte/decisão), nunca hard-coded no `.ts`. Saída sempre com `motivo` legível + referência à decisão (D-W9-xx) ou fonte.

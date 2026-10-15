@@ -30,7 +30,7 @@ Faixa: `docs/ondas/W10-GROK.md`. Contrato que falta fica com tipo local `// PROV
 1. **Grade.** `SessaoAgenda` e `PedidoGeracao` estão em `src/rules/agendaQt.ts` (`// PROVISORIO-W10`). O merge `10bb8d4` não publicou contrato de agenda.
 2. **Fim de semana e feriado** do HTML de referência não movem a data. A geração soma o intervalo do protocolo. Mover seria reorganizar.
 3. **08:00–18:00** está no ruleset como rótulo editável da grade (PADROES-UI §3.2). D-W9-39 não cria corte separado para sessão que passa de 18:00.
-4. **Respostas do tech lead** em `docs/w10/RESPOSTAS-TECH-LEAD.md` (trocar `SinaisExtraW10` e `ProtocoloCiclo`, reexportar o barrel, subir `salao-triagem` para 1.1.0, ativar CREAT, alinhar FN-01 à FC &lt; 50) ficam para a fatia que mexer nesses arquivos. Esta fatia não altera a FN-01.
+4. **Respostas do tech lead** em `docs/_arquivo/w10/RESPOSTAS-TECH-LEAD.md` (trocar `SinaisExtraW10` e `ProtocoloCiclo`, reexportar o barrel, subir `salao-triagem` para 1.1.0, ativar CREAT, alinhar FN-01 à FC &lt; 50) ficam para a fatia que mexer nesses arquivos. Esta fatia não altera a FN-01.
 
 ## GROK-05
 

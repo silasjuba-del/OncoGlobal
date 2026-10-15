@@ -18,6 +18,12 @@ function consulta(id: string, encounterId: string, dia: string): ClinicalEvent {
     payload: {reviewDecisionId: "review", data: {dataClinica: dia, documentoIds: [{documentId: "evolucao", documentVersion: 1}]}} });
 }
 describe("S2 Retrato longitudinal", () => {
+  it("altura confirmada pertence ao paciente e conserva sua fonte no outro lote", () => {
+    const altura = evento("altura-paciente", "alturaCm", { tumorLotId: "t1",
+      payload: { data: { campo: "alturaCm", valor: 170, dataClinica: "2026-10-10" } } });
+    const r = projetarRetrato([altura], contexto);
+    expect(r.fatos).toEqual([expect.objectContaining({ escopo: "PACIENTE", campo: "alturaCm", fontes: altura.fontes })]);
+  });
   it("preserva materiais legados e texto assinado sem usá-lo como fato diagnóstico", () => {
     const cadastro = evento("cadastro", "", {tipo: "Paciente", tumorLotId: null, payload: {data: {patientId: "p1", nome: "Pessoa sintética", nascimento: null, sexoCadastral: "F"}}});
     const imagem = evento("imagem", "", {tipo: "ImagingReport", payload: {data: {textoLaudo: "Lesão indeterminada", achados: {incerto: true}}}});

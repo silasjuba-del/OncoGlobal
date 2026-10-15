@@ -34,7 +34,7 @@ import { projetarVinculosContato, type ContatoProjetado } from "../kernel/projec
 import { hashConteudoExibido } from "./sessao.js";
 import { projetarRetratoTransversal } from "./retratoTransversal.js";
 import { projetarContextoClinico, projetarHistoricoClinico } from "./f0c/contextoClinico.js";
-import { avaliarConsulta, horizonteDoEncontro, pesosMedidosDocumentados, type EntradaAvaliacaoConsulta } from "./f0c/avaliacaoConsulta.js";
+import { avaliarConsulta, horizonteDoEncontro, type EntradaAvaliacaoConsulta } from "./f0c/avaliacaoConsulta.js";
 import { coletarFontesSalao } from "./f0c/salao.js";
 import { projetarInstrumentosClinicos } from "./f0c/instrumentosClinicos.js";
 import type { RegraInstrumento } from "../contracts/f0c/instrumentos.js";
@@ -369,25 +369,25 @@ export function lerConsulta(db: DatabaseSync, patientId: string, agora: string, 
     ...(condicionais.avaliacoes.some(r=>r.estado!=="NAO_APLICAVEL") ? {condicionais:{
       estado:avisosCondicionais.length ? "VERMELHO" as const : pendenciasCondicionais.length ? "PENDENTE" as const : "VERDE" as const,
       motivos:[...avisosCondicionais,...pendenciasCondicionais].map(texto=>({texto}))}} : {}) });
-  // D-F1-33/D-F1-48 · evidência documental no horizonte do encontro, independente da validade para dose.
-  // Só SUGERE: não gera pedido, não trava e não entra no semáforo. Medidas atuais exigem conferência.
+  // D-F1-33/D-F1-48 · triagem nutricional NRS-2002: só do lote selecionado (nunca herda outro lote) e do peso/altura
+  // vigentes no horizonte do encontro. Só SUGERE: não gera pedido, não trava e não entra no semáforo.
   const presenteNoLote = (d: TumorLot["topografia"] | undefined) =>
     d?.campo === "PRESENTE" && d.estado === "VERDE" && ["CONFIRMADO", "ASSINADO"].includes(d.revisao)
       && d.fontes.length > 0 && typeof d.valor === "string" && d.valor.trim() ? d.valor : null;
   // Armadilha (a): encontro reaberto não usa a versão do lote confirmada em encontro POSTERIOR.
   const lotesNoHorizonte = lote ? porTipo(all.filter((e) => e.patientId === patientId && Date.parse(e.criadoEm) <= horizontePlaquetas),
-    "TumorLot", TumorLot).filter((x) => x.value.patientId === patientId && x.event.tumorLotId === lote.tumorLotId
-      && x.value.tumorLotId === lote.tumorLotId) : [];
-  const loteNoHorizonte = lotesNoHorizonte.length === 1 ? lotesNoHorizonte[0]!.value : undefined;
-  const eventosNutricionais = all.filter(e => e.patientId === patientId);
-  const pesosNutricionais = pesosMedidosDocumentados(eventosVigentes(eventosNutricionais
-    .filter(e => Date.parse(e.criadoEm) <= horizontePlaquetas)), civil.dataCivil, horizontePlaquetas);
-  const ultimoPeso = pesosNutricionais[0];
-  const pesoNutricional = ultimoPeso && new Set(pesosNutricionais
-    .filter(p => Date.parse(p.data) === Date.parse(ultimoPeso.data)).map(p => p.kg)).size === 1 ? ultimoPeso : null;
-  // Peso e altura pertencem ao paciente; o lote de origem não restringe a medida corporal.
-  const fatosNutricionais = eventosNutricionais.filter(e => e.tipo === "FATO" && data(e)?.campo === "alturaCm"
-    && Date.parse(e.criadoEm) <= horizontePlaquetas).map(e => ({ ...e, tumorLotId: null }));
+    "TumorLot", TumorLot).filter((x) => x.event.tumorLotId === lote.tumorLotId && x.value.patientId === patientId && x.value.tumorLotId === lote.tumorLotId) : [];
+  // Evidências diferentes podem confirmar o mesmo conteúdo. Ignorar apenas a proveniência na
+  // comparação; valores, estados, revisão, estadiamentos e marcos continuam distintos.
+  // Os lotes originais, com todas as fontes, permanecem em cabecalho.lotes e no ledger.
+  const conteudoLote = (value: TumorLot) => JSON.stringify(value, (chave, valor: unknown) =>
+    chave === "fontes" ? undefined : valor && typeof valor === "object" && !Array.isArray(valor)
+      ? Object.fromEntries(Object.entries(valor).sort(([a],[b]) => a.localeCompare(b))) : valor);
+  const conteudosLote = new Set(lotesNoHorizonte.map(x => conteudoLote(x.value)));
+  const loteNoHorizonte = conteudosLote.size === 1 ? lotesNoHorizonte[0]!.value : undefined;
+  if (conteudosLote.size > 1) pendenciasLeitura.push("TRIAGEM_NUTRICIONAL_LOTE_AMBIGUO");
+  const fatosNutricionais = all.filter(e => e.patientId === patientId && e.tipo === "FATO"
+    && data(e)?.campo === "alturaCm" && Date.parse(e.criadoEm) <= horizontePlaquetas).map(e => ({ ...e, tumorLotId: null }));
   const alturaProjetada = projetarSnapshot(fatosNutricionais, patientId, lote?.tumorLotId ?? null,
     current.encounterId, "nutricao-altura-v1").campos.alturaCm;
   const fontesAltura = (alturaProjetada?.eventIds ?? []).flatMap(id => {
@@ -399,19 +399,17 @@ export function lerConsulta(db: DatabaseSync, patientId: string, agora: string, 
   const alturaDocumentada = alturaProjetada?.estado === "VERDE" && fontesAltura.length > 0
     && fontesAltura.length === alturaProjetada.eventIds.length && typeof alturaProjetada.valor === "number"
     ? alturaProjetada.valor : null;
-  const imcDocumentado = imcDeMedidas(pesoNutricional?.kg, alturaDocumentada);
-  if (lotesNoHorizonte.length > 1) pendenciasLeitura.push("TRIAGEM_NUTRICIONAL_LOTE_AMBIGUO");
   const triagemNutricional = sugerirTriagemNutricional({
     tumor: presenteNoLote(loteNoHorizonte?.topografia),
     histologia: presenteNoLote(loteNoHorizonte?.histologia),
     cid: presenteNoLote(loteNoHorizonte?.cid),
-    imc: imcDocumentado,
+    imc: imcDeMedidas(avaliacao.dadosNutricionais.pesoKg, alturaDocumentada),
   });
-  const textoNutricional = triagemNutricional ? textoSugestaoNutricional(triagemNutricional) : null;
+  const textoNutricional = textoSugestaoNutricional(triagemNutricional);
   if (triagemNutricional.motivos.some(m => /divergentes/.test(m)))
     pendenciasLeitura.push("TRIAGEM_NUTRICIONAL_SITIOS_NAO_RECONCILIADOS");
-  const sugestaoNutricional = textoNutricional && pesoNutricional && triagemNutricional?.motivos.some(m => m.startsWith("IMC "))
-    ? `${textoNutricional}; peso documentado em ${pesoNutricional.data} (fonte ${pesoNutricional.sourceId}); altura ${alturaDocumentada} cm: ${fontesAltura.map(f => `${f.data} (fonte ${f.fontes}; evento ${f.eventId})`).join("; ")}; conferir medidas atuais`
+  const sugestaoNutricional = textoNutricional && triagemNutricional.motivos.some(m => m.startsWith("IMC "))
+    ? `${textoNutricional} (peso medido em ${avaliacao.dadosNutricionais.medidoEm}; fontes ${avaliacao.dadosNutricionais.fontes.map(f => `${f.sourceId} (evento ${f.eventId})`).join(", ")}; altura ${alturaDocumentada} cm: ${fontesAltura.map(f => `${f.data} (fonte ${f.fontes}; evento ${f.eventId})`).join("; ")}; conferir atualidade)`
     : textoNutricional;
   pendenciasLeitura.push(...contextoClinico.pendencias,
     ...Object.entries(contextoClinico.campos).filter(([,c]) => c.valor === null).map(([nome]) => `${nome.toUpperCase()}_NAO_CARREGADAS`));

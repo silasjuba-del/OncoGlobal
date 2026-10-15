@@ -1,4 +1,5 @@
 import { dataCivilNoOffset } from "../../rules/intervaloQt.js";
+import { horizonteDoEncontro } from "./avaliacaoConsulta.js";
 import { z } from "zod";
 import { Ciclo, TreatmentEpisode } from "../../contracts/clinico.js";
 import type { ClinicalEvent } from "../../contracts/operacao.js";
@@ -18,7 +19,7 @@ export interface EntradaContextoClinico {
   episodio?: unknown; ciclo?: unknown; templates?: readonly unknown[];
 }
 function noEscopo(i: EntradaContextoClinico) {
-  const instante = Date.parse(i.agora);
+  const instante = horizonteDoEncontro(i.eventos.filter(e => e.patientId === i.patientId), i.encounterId, i.agora);
   return i.eventos.filter(e => e.patientId === i.patientId && (escopoDoEvento(e) === "PACIENTE" || e.tumorLotId === i.tumorLotId || e.tumorLotId === null)
     && Number.isFinite(Date.parse(e.criadoEm)) && Date.parse(e.criadoEm) <= instante);
 }

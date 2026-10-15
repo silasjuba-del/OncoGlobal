@@ -18,7 +18,7 @@
       "revisor": "Claude (auditor cruzado, só leitura)"
     },
     {
-      "path": "docs/progresso/W10-RETOMADA-JEV-FUGU.md",
+      "path": "docs/_arquivo/progresso/W10-RETOMADA-JEV-FUGU.md",
       "sha256": "abd4befad9b799ea2e50c91bf663fc1f549c502a3097d28c370fe151088774a5",
       "type": "telefone",
       "line": 38,
@@ -27,11 +27,11 @@
       "statusProposto": "technical_token_false_positive",
       "reason": "Código de saída nativo de processo do Windows (crash de worker) citado em relatório técnico.",
       "contextTag": "exit_code_windows",
-      "evidenceRef": "docs/progresso/W10-RETOMADA-JEV-FUGU.md:38",
+      "evidenceRef": "docs/_arquivo/progresso/W10-RETOMADA-JEV-FUGU.md:38",
       "revisor": "Claude (auditor cruzado, só leitura)"
     },
     {
-      "path": "docs/progresso/W3-CODEX.md",
+      "path": "docs/_arquivo/progresso/W3-CODEX.md",
       "sha256": "d32d761bc5ed35c0d851c669056573d8ff14a3522c102315e926c8fe5ed5a60d",
       "type": "telefone",
       "line": 91,
@@ -40,7 +40,7 @@
       "statusProposto": "technical_token_false_positive",
       "reason": "Código de saída nativo de processo do Windows (crash de worker) citado em relatório técnico.",
       "contextTag": "exit_code_windows",
-      "evidenceRef": "docs/progresso/W3-CODEX.md:91",
+      "evidenceRef": "docs/_arquivo/progresso/W3-CODEX.md:91",
       "revisor": "Claude (auditor cruzado, só leitura)"
     },
     {

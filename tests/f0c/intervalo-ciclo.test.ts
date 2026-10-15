@@ -14,6 +14,15 @@ const eventos=()=>[e("ep","TreatmentEpisode",ep),e("ci","Ciclo",ci),e("ant","Cic
 const ancora=(data="2026-09-19")=>e("inicio","FATO",{campo:"inicioCicloEfetivo",valor:data,cicloId:"c1",episodioId:"ep"});
 const entrada=()=>({...base,episodio:ep,ciclo:ci,templates:[ficha],eventos:[...eventos(),ancora()]});
 describe("intervalo nominal sem inferir início de ciclo",()=>{
+ it("retificação posterior ao encontro seguinte não muda a âncora do encontro reaberto",()=>{
+  const input=entrada();
+  const emSeguinte="2026-10-11T12:00:00-03:00";
+  const seguinte=e("seguinte","Paciente",{},{encounterId:"consulta-seguinte",criadoEm:emSeguinte});
+  const corrigida={...ancora("2026-09-20"),eventId:"retificacao",criadoEm:emSeguinte,supersedesEventId:"inicio"};
+  const r=projetarIntervaloCiclo({...input,agora:"2026-10-14T12:00:00-03:00",eventos:[...input.eventos,seguinte,corrigida]});
+  expect(r.fontes.eventIds).toEqual(["inicio"]);
+  expect(r.diasObservados).toBe(21);
+ });
  it.each([["2026-10-09","AVISO",true,0],["2026-10-10","SEM_AVISO",false,0],["2026-10-12","AVISO",false,2]] as const)("data %s compara dias civis sem tolerância",(data,estado,antes,atraso)=>{
   expect(avaliarIntervaloCiclo({inicioAnterior:"2026-09-19",dataProxima:data,intervaloDias:21})).toMatchObject({estado,antesDoPrevisto:antes,atrasoDias:atraso,condutaAutomatica:false,consultaSegue:true});
  });

@@ -68,7 +68,7 @@ Arquivos em conflito no merge da Astra:
 5. **O que NÃO é F0 e não trava:** a caixa do modelo padrão da Flash, o prazo do retorno na tela, as receitas na Flash, as 25 orientações do canal e os biomarcadores extras de pulmão. Entram como abertura da F1.
 
 ## 4b. Parecer do Codex (09/10): o que entra agora e o que fica
-O parecer está registrado em `docs/w12/PARECER-CODEX-2026-10-09.md`.
+O parecer está registrado em `docs/_arquivo/w12/PARECER-CODEX-2026-10-09.md`.
 - **Entra na F0:** a prova da consulta completa (E6b). Ela coincide com o que a F0 já exige: demo no app (Q50) e "validar tudo" preso à versão exibida (A1/G-25).
 - **Entra na E11 (CANONICA, com ordem do Dr. Silas):**
   - (1) a permissão dos agentes, porque a GOVERNANÇA diz "sem ferramentas" e a RAIZ admite LLM com ferramentas. Explicitar: extrator clínico = restrito; OncoAssist e orquestrador = permissões próprias;

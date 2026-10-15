@@ -25,7 +25,7 @@ Para candidatos abreviados, a triagem consultou o contexto Git e tentou `git rev
 
 Por isso, as categorias preliminares de 66 sintéticos e 37 desconhecidos não foram copiadas como se fossem fatos. A revisão por contexto, ordinal e página deixou 103 disposições sintéticas, oito itens como metadado público de autoria/contato e 35 PENDENTE. A evidência por arquivo/linha/hash governa cada disposição; pasta `tests/`, marcador distante ou nome de artefato não libera um valor por si só.
 
-Os 14 falsos positivos de microprompt estão individualizados em `docs/ondas/W8-GLM.md:8,11,14,17`, `docs/PLANO-FINAL-ONCOGLOBAL-v1.1.md:207`, `docs/progresso/W8-GLM.md:22`, `tests/prompts/captura.test.ts:6`, `docid.test.ts:6`, `path-sitios.test.ts:6`, `prompts.test.ts:33,64-66` e `tests/w11-adv/seguranca-phi.test.ts:65`. A disposição é por token em contexto de catálogo/versão, protegida pelo hash do arquivo.
+Os 14 falsos positivos de microprompt estão individualizados em `docs/_arquivo/ondas/W8-GLM.md:8,11,14,17`, `docs/PLANO-FINAL-ONCOGLOBAL-v1.1.md:207`, `docs/_arquivo/progresso/W8-GLM.md:22`, `tests/prompts/captura.test.ts:6`, `docid.test.ts:6`, `path-sitios.test.ts:6`, `prompts.test.ts:33,64-66` e `tests/w11-adv/seguranca-phi.test.ts:65`. A disposição é por token em contexto de catálogo/versão, protegida pelo hash do arquivo.
 
 Os sintéticos foram confirmados por declarações próximas e específicas, com referências por ocorrência no JSON: `tests/fixtures/redteam/pacientes.ts`, `tests/fixtures/caso07/`, `tests/rules-w8/`, `tests/w11-adv/` e os demais arquivos com marcador local explícito. A regra global `docs/ondas/F0-FECHAMENTO-ASTRA.md:54` limita a declaração de nomes a `Paciente Teste NN`; ela não libera dados de outros arquivos nem valores de uma pasta inteira.
 
@@ -37,9 +37,9 @@ Os dez rasters revisados visualmente pela Astra têm hashes locais iguais aos fo
 
 - `docs/design/oncochart/assets/annot.png`, `crop-header.png`, `crop-right.png`, `crop-timeline.png` e `ref.png`: handoff de mock fictício em `docs/design/oncochart/DECISAO-UI-ALVO.md:3`, com revisão visual Astra de 2026-10-09.
 - `ct-abdome.jpg` e `ct-torax.jpg`: placeholders de CT sem identificação visível, evidência `docs/design/oncochart/README.md:144` e revisão visual Astra.
-- `docs/w7/kit-preview/apac-html.png`: formulário rascunho vazio/PENDENTE, revisão visual Astra e `docs/w7/COMO-EXECUTAR.md:48`.
+- `docs/_arquivo/w7/kit-preview/apac-html.png`: formulário rascunho vazio/PENDENTE, revisão visual Astra e `docs/_arquivo/w7/COMO-EXECUTAR.md:48`.
 - `apac-pg1.png`: formulário oficial vazio, revisão visual Astra e `docs/ondas/ADENDO-W6-W7.md:74`.
-- `workspace-pesquisa.png`: interface de estudo fictício, revisão visual Astra e `docs/w7/COMO-EXECUTAR.md:57`.
+- `workspace-pesquisa.png`: interface de estudo fictício, revisão visual Astra e `docs/_arquivo/w7/COMO-EXECUTAR.md:57`.
 
 Os dois WOFF2 foram classificados como fontes técnicas depois de validar magic `wOF2`, SHA-256 e a proveniência em `src/ui/oncochart/tokens.css` e `src/ui/oncochart/fontes/OFL-geist.txt`. A planilha `docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.xlsx` passa pelo leitor ZIP local: só lê XML de shared strings e worksheets, não executa fórmulas ou macros e não acessa rede. Se houver macro, ZIP inválido ou limites excedidos, mantém UNVERIFIED.
 

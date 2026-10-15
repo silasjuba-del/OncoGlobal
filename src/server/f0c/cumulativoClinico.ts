@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { horizonteDoEncontro } from "./avaliacaoConsulta.js";
 import type { ClinicalEvent } from "../../contracts/operacao.js";
 import { dadosDoEvento, eventosVigentes, projetarSnapshot } from "../../kernel/projections/snapshot.js";
 import { avaliarTetosExposicao, calcularTotalExposicao, chaveDroga, type EntradaExposicaoCumulativa,
@@ -34,7 +35,7 @@ export interface EntradaCumulativoClinico {
 }
 
 export function projetarCumulativoClinico(i: EntradaCumulativoClinico) {
-  const instante = Date.parse(i.agora);
+  const instante = horizonteDoEncontro(i.eventos.filter(e => e.patientId === i.patientId), i.encounterId, i.agora);
   const pendencias: string[] = [];
   if (!Number.isFinite(instante) || !i.patientId.trim() || !i.encounterId.trim()) pendencias.push("ESCOPO_OU_AGORA_INVALIDO");
   if (i.programados === null || i.programados.some((d) => !d.trim())) pendencias.push("ELENCO_DESCONHECIDO");

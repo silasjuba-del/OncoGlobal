@@ -1,7 +1,7 @@
 # W8-KIMI · progresso (retomada)
 
 > Onda W8 · executor KIMI · worktree `C:\Users\silas\Projects\OncoGlobal-wt\w8-kimi` · branch `f0/w8-kimi`.
-> Base: `f0/w1-integrado` @ 243dcae. Faixa exclusiva: `tests/cobertura/**`, `tests/fixtures/caso07/**`, `tests/adv-w8/**`, `docs/progresso/W8-KIMI.md`, `docs/w8/ACHADOS-KIMI.md`.
+> Base: `f0/w1-integrado` @ 243dcae. Faixa exclusiva: `tests/cobertura/**`, `tests/fixtures/caso07/**`, `tests/adv-w8/**`, `docs/progresso/W8-KIMI.md`, `docs/_arquivo/w8/ACHADOS-KIMI.md`.
 > **Retomada:** continue da primeira fatia não FEITA. Nunca refaça fatia FEITA.
 
 ## Estado por fatia
@@ -43,7 +43,7 @@ npx vitest run --config tests/adv-w8/vitest.config.ts --no-file-parallelism
 - KIMI-17: regressões reais que PASSAM hoje — CPF-rotulado-CNS não liga como CNS; comprovante de terceiro não liga; captação articular ≠ metástase (radAlerts). A dedupe virou adv (DEPENDE_W7) porque o motor de leitura ainda não existe.
 - KIMI-18: 13 provas — data civil com offset injetado, consumidores (APAC/hemograma/peso/intervalo QT) e varredura de 48 instantes provando que o aviso APAC pode adiantar ≤1 dia com offset errado, mas NUNCA atrasar (offset futuro é a única direção proibida e fica evidente).
 - KIMI-19: 7 provas HTTP reais em loopback (127.0.0.1, ledger `:memory:`). Destaque: replay com a mesma idempotencyKey devolve decisão REPLAY sem novo efeito (a reserva vive no SQLite do ledger via `sqliteIdempotencia`, não na memória volátil). BACKUP_LOCAL é autorizado mas negado `VERBO_SEM_EXECUTOR` — porta F0 desconectada, registrado como observação (não é achado de segurança).
-- KIMI-20: ACHADOS em `docs/w8/ACHADOS-KIMI.md` — 9 blocos (ID, severidade S0–S3, causa provável, dono provável, arquivo). Proposta de severidade: G-07/T-49, G-08/T-50, G-09/T-51 e FN-16/T-34 = **S1**; G-27 = **S0 latente → S1** quando egress for habilitado (hoje toda saída externa é recusada — mitigação comprovada em KIMI-19); K-26/N17, N19, T-56/G-16 e dedupe caso 07 = **S2**.
+- KIMI-20: ACHADOS em `docs/_arquivo/w8/ACHADOS-KIMI.md` — 9 blocos (ID, severidade S0–S3, causa provável, dono provável, arquivo). Proposta de severidade: G-07/T-49, G-08/T-50, G-09/T-51 e FN-16/T-34 = **S1**; G-27 = **S0 latente → S1** quando egress for habilitado (hoje toda saída externa é recusada — mitigação comprovada em KIMI-19); K-26/N17, N19, T-56/G-16 e dedupe caso 07 = **S2**.
 
 ## Honestidade sobre SEM_TESTE
 Nenhum dos 13 IDs "saiu" de SEM_TESTE — `docs/w5/MATRIZ.md` está fora da minha faixa e continua SEM_TESTE. O que existe agora para cada ID: (a) prova adversarial executável em `tests/adv-w8/*.adv.ts` com a falha-canônica SEM_IMPLEMENTACAO vermelha e os demais casos guardados como especificação; (b) item em ACHADOS-KIMI.md com severidade e dono. Nenhum ID ficou sem prova nem sem dono provável.

@@ -1,4 +1,5 @@
 import type { ClinicalEvent } from '../../contracts/operacao.js';
+import { horizonteDoEncontro } from './avaliacaoConsulta.js';
 import { ContextoInteracoesCondicionadas, type ResultadoInteracaoCondicionada } from '../../contracts/f0c/interacoesCondicionadas.js';
 import type { CatalogoInteracoes } from '../../contracts/f0c/interacoes.js';
 import { dadosDoEvento, eventosVigentes, projetarSnapshot } from '../../kernel/projections/snapshot.js';
@@ -14,8 +15,9 @@ export interface InteracoesCondicionadasDaConsulta {
 const objeto=(v:unknown):Record<string,unknown>|null=>v!==null&&typeof v==='object'&&!Array.isArray(v)?v as Record<string,unknown>:null;
 /** A presença de um envelope em outro atendimento não substitui reconciliação no atendimento atual. */
 export function avaliarInteracoesCondicionadasDaConsulta(i:EntradaInteracoesCondicionadasDaConsulta):InteracoesCondicionadasDaConsulta {
+  const instante=horizonteDoEncontro(i.eventos.filter(e=>e.patientId===i.patientId),i.encounterId,i.agora);
   const horizonte=i.eventos.filter(e=>e.patientId===i.patientId&&(e.tumorLotId===i.tumorLotId||e.tumorLotId===null)
-    &&Number.isFinite(Date.parse(e.criadoEm))&&Date.parse(e.criadoEm)<=Date.parse(i.agora));
+    &&Number.isFinite(Date.parse(e.criadoEm))&&Date.parse(e.criadoEm)<=instante);
   const vigentes=eventosVigentes(horizonte);
   const fatos=vigentes.filter(e=>e.tipo==='FATO'&&e.encounterId===i.encounterId&&e.tumorLotId===i.tumorLotId&&dadosDoEvento(e)?.campo==='interacoesContexto');
   const snapshot=projetarSnapshot(fatos,i.patientId,i.tumorLotId,i.encounterId,'f0c-interacoes-condicionadas-v1');

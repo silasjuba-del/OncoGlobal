@@ -185,7 +185,7 @@ Test Files  1 passed (1)
 
 PT08 abdome: linha 7 uropatia à direita e linha 27 fratura em L5. PT08 crânio: nenhum alerta. `corpus/rulesets/rad-emergencia.v1.json` (FN-20, sinônimos vazios) não foi editado.
 
-`git merge f0/w1-integrado` no início: `044d94f` (só `docs/ondas/W10-REDTEAM-GLM.md`).
+`git merge f0/w1-integrado` no início: `044d94f` (só `docs/_arquivo/ondas/W10-REDTEAM-GLM.md`).
 
 Testes novos: `tests/w10-grok/grok-05-rads.test.ts` (6).
 

@@ -1,6 +1,20 @@
-# Matriz de rastreabilidade F1 — S12
+# Matriz de rastreabilidade F1
 
-Esta matriz liga os aceites técnicos ao código e às provas. Os resultados executados e a versão integrada estão no [relatório S12](ondas/F1-S12-RELATORIO.md). `PASS técnico` não aprova regra clínica inativa, não transforma lacuna em normalidade e não comprova provider ao vivo. As decisões 1A/2A/3A e a dispensa do provider estão em `RELATORIO-F1.md`.
+Esta matriz liga os aceites técnicos ao código e às provas. O estado atual, os PRs e as dependências estão no [relatório F1](RELATORIO-F1.md). O [relatório S12](ondas/F1-S12-RELATORIO.md) registra a entrega anterior. `PASS técnico` não aprova regra clínica inativa, não transforma lacuna em normalidade e não comprova provider ao vivo. As decisões 1A/2A/3A e a dispensa do provider permanecem como aceites históricos.
+
+## Retomada após Fugu — 2026-10-14
+
+| Correção | Implementação | Prova |
+|---|---|---|
+| Horizonte antes de resolver versões, em sete projeções | `src/server/f0c/avaliacaoConsulta.ts`, projeções servidor/F0C | `tests/f1/s12/horizonte-projecoes.test.ts`, `tests/f0c/intervalo-ciclo.test.ts` |
+| Nutrição com última medida documentada; conflito de lote explícito | `src/server/leituras.ts`, avaliação F0C e triagem nutricional | `tests/f1/b1/triagemNutricional-consulta.test.ts` |
+| Fontes concordantes e critérios hematológicos independentes | `src/contracts/api/criterioElegibilidade.ts`, `src/server/f0c/avaliacaoConsulta.ts`, `src/rules/elegibilidadeCiclo.ts` | `tests/f0c/avaliacao-adversarial.test.ts`, `tests/w11-adv/elegibilidade-ciclo.test.ts` |
+| Contratos de saída das 54 rotas e portas de transporte | `src/contracts/api/saidasHttp.ts`, `src/server/rotas.ts` | `tests/server/contratos-saida.test.ts`; não equivale à cobertura clínica completa de cada rota |
+| Drenagem HTTP antes de liberar SQLite | `src/server/http.ts` | `tests/server/encerramento.test.ts`, `tests/f0c/impressao-runtime.test.ts` |
+| Biblioteca e exportação sem promoção de curadoria | `src/kernel/corpus/biblioteca.ts`, `scripts/exportar-biblioteca.mjs` | `tests/f1/s3/biblioteca.test.ts`, `exportar-biblioteca.test.ts`; pacote real de 224 arquivos validado |
+| Arquivo documental com consumidores preservados | `docs/_arquivo/MOVIMENTOS.json` | `tests/f1/s12/arquivo-documental.test.ts`; 403 movimentos mais relatório anterior preservado |
+
+Essas provas complementam S12. Pesquisa recebida para seis packs e planilha de casos não encerram F1-B2; doses ainda exigem fonte aplicável e validação por ficha.
 
 ## Fatias
 
@@ -23,7 +37,7 @@ Esta matriz liga os aceites técnicos ao código e às provas. Os resultados exe
 
 ## Red team A12–A19
 
-Os identificadores são os de `docs/ondas/F1-CORPUS-PROMPT-REDTEAM-GLM.md`, não ataques homônimos de ondas anteriores.
+Os identificadores são os de `docs/_arquivo/ondas/F1-CORPUS-PROMPT-REDTEAM-GLM.md`, não ataques homônimos de ondas anteriores.
 
 | Ataque | Prova | Resultado e fronteira |
 | --- | --- | --- |

@@ -7,7 +7,7 @@ param(
 $ErrorActionPreference = 'Stop'
 $git = 'C:\Program Files\Git\cmd\git.exe'
 $red = 'C:\Users\silas\Projects\OncoGlobal-wt\w5-red'
-$lockScript = 'C:\Users\silas\Projects\OncoGlobal-wt\w5-orq\docs\w5\ferramentas\vitest-lock.ps1'
+$lockScript = Join-Path $PSScriptRoot '..\..\docs\_arquivo\w5\ferramentas\vitest-lock.ps1'
 $expected = [IO.Path]::GetFullPath('C:\Users\silas\Projects\OncoGlobal-wt\w5-mut')
 $actual = [IO.Path]::GetFullPath($Worktree)
 if (-not [string]::Equals($actual, $expected, [StringComparison]::OrdinalIgnoreCase)) {

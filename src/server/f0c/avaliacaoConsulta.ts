@@ -7,6 +7,7 @@ import { labSeries, weightSeries, type PontoLab } from "../../kernel/projections
 import { avaliarTriagem } from "../../rules/triagem.js";
 import { idadeDoDado, PESO_VALIDADE_DIAS } from "../../rules/prescricao/index.js";
 import { DataCivil } from "../../contracts/base.js";
+import type { CriterioElegibilidade } from "../../contracts/api/criterioElegibilidade.js";
 import { semaforoInteracoes, type RulesetSemaforo } from "../../rules/semaforoInteracoes.js";
 import type { CatalogoInteracoes } from "../../contracts/f0c/interacoes.js";
 import { elegibilidadeCiclo, type SinalElegibilidade } from "../../rules/elegibilidadeCiclo.js";
@@ -22,16 +23,19 @@ const obj = (v: unknown): Record<string, unknown> | null => v && typeof v === "o
 const sinal = (estado: SinalElegibilidade["estado"], textos: string[]): SinalElegibilidade => ({ estado, motivos: textos.map(texto => ({ texto })) });
 const pend = (texto: string) => sinal("PENDENTE", [texto]);
 
-/** Seleção com conflito explícito: não faz média, não usa upload como data de coleta. */
-export function ultimoLab(pontos: readonly PontoLab[], campo: string, hoje: string) {
+function labsMaisRecentes(pontos: readonly PontoLab[], campo: string, hoje: string) {
   const candidatos = pontos.filter(p => analito(p.campo) === analito(campo) && p.data.slice(0, 10) <= hoje
     && Number.isFinite(Date.parse(p.data)) && Number.isFinite(p.valor) && p.sourceId.trim())
     .sort((a, b) => Date.parse(b.data) - Date.parse(a.data));
   const primeiro = candidatos[0];
-  if (!primeiro) return null;
-  const iguais = candidatos.filter(p => Date.parse(p.data) === Date.parse(primeiro.data));
+  return primeiro ? candidatos.filter(p => Date.parse(p.data) === Date.parse(primeiro.data)) : [];
+}
+
+/** Seleção com conflito explícito: não faz média, não usa upload como data de coleta. */
+export function ultimoLab(pontos: readonly PontoLab[], campo: string, hoje: string) {
+  const iguais = labsMaisRecentes(pontos, campo, hoje);
   if (new Set(iguais.map(p => `${p.valor}|${p.unidade}`)).size !== 1) return null;
-  return primeiro;
+  return iguais[0]!;
 }
 
 export interface EntradaAvaliacaoConsulta {
@@ -111,7 +115,24 @@ export function avaliarConsulta(i: EntradaAvaliacaoConsulta) {
   const avisosCriticos = criticos.filter(c=>c.estado === "AVISO").map(c=>`${c.analito}: ${c.medida!.valor} ${c.medida!.unidade}`);
   const anc = ultimoLab(labs,"neutrofilos",i.hoje), plq = ultimoLab(labs,"plaquetas",i.hoje);
   const portaPendentes: string[] = [], portaAlertas: string[] = [];
+  const criteriosPorta: CriterioElegibilidade[] = [];
+  const regraPorta = rs.success ? { id: rs.data.header.id, versao: rs.data.header.versao, fonte: rs.data.header.fonte.referencia } : null;
   for (const [nome,p,minimo] of [["neutrófilos",anc,1500],["plaquetas",plq,100000]] as const) {
+    const id = key(nome);
+    const ultimos = labsMaisRecentes(labs, nome, i.hoje);
+    const conflito = new Set(ultimos.map(l => `${l.valor}|${l.unidade}`)).size > 1;
+    // Um valor concordante pode ter várias evidências; a escolha numérica não descarta suas fontes.
+    const fontes = ultimos.flatMap(l => atuais.find(e => e.eventId === l.eventId)!.fontes
+      .map(f => ({ eventId: l.eventId, sourceId: f.sourceId, medidoEm: l.data })));
+    const unidadeValida = p && ["/µL","/uL","/μL"].includes(p.unidade);
+    criteriosPorta.push({ schema: "CriterioElegibilidade@1", id: `${id}.limiar`,
+      estado: conflito ? "CONFLITO" : !unidadeValida ? "AUSENTE" : p.valor < minimo ? "NAO_ATENDE" : "ATENDE",
+      texto: `${nome}: mínimo do serviço ${minimo}/µL`, fontes,
+      regra: rs.success && (nome === "neutrófilos" ? rs.data.cortes.ancMin : rs.data.cortes.plqMin) === minimo ? regraPorta : null });
+    criteriosPorta.push({ schema: "CriterioElegibilidade@1", id: `${id}.validade`,
+      estado: conflito ? "CONFLITO" : p && avaliarValidadeExame("HEMOGRAMA",p.data,i.agora).estado === "VALIDO" ? "ATENDE" : "AUSENTE",
+      // A função de validade usa sua própria política; não atribuir seu prazo ao ruleset de triagem.
+      texto: `${nome}: validade do hemograma`, fontes, regra: null });
     if (!p || !["/µL","/uL","/μL"].includes(p.unidade)) { portaPendentes.push(`${nome}: dado/unidade ausente ou em conflito`); continue; }
     if (p.valor < minimo) portaAlertas.push(`${nome} abaixo do corte do serviço (${minimo}/µL)`);
     if (avaliarValidadeExame("HEMOGRAMA",p.data,i.agora).estado !== "VALIDO") portaPendentes.push(`${nome}: validade não confirmada`);
@@ -141,7 +162,7 @@ export function avaliarConsulta(i: EntradaAvaliacaoConsulta) {
   const elegibilidade = elegibilidadeCiclo({ plaquetas:i.plaquetas,
     ...(i.condicionais ? {condicionais:i.condicionais} : {}),
     ...(i.intervalo ? {intervalo:i.intervalo} : {}),
-    portaCiclo: sinal(portaAlertas.length ? "VERMELHO" : portaPendentes.length ? "PENDENTE" : "VERDE", [...portaAlertas,...portaPendentes]),
+    portaCiclo: { ...sinal(portaAlertas.length ? "VERMELHO" : portaPendentes.length ? "PENDENTE" : "VERDE", [...portaAlertas,...portaPendentes]), criterios: criteriosPorta },
     triagem: avalTriagem ? sinal(avalTriagem.cortes.length ? "VERMELHO" : avalTriagem.pendentes.length ? "PENDENTE" : "VERDE",
       [...avalTriagem.cortes,...avalTriagem.pendentes].map(m=>m.texto)) : pend("triagem ausente ou ambígua"),
     ctcae, interacoes:sinalInteracoes,
@@ -158,6 +179,15 @@ export function avaliarConsulta(i: EntradaAvaliacaoConsulta) {
   const altura=campo("alturaCm");
   const dadosCorporais={pesoKg:renal.valoresUsados.peso.valor,alturaCm:typeof altura === "number" && altura>0 ? altura : null,
     bsaM2:null,clcr:renal.clcrMlMin,medidoEm:peso?.data ?? null};
+  // Nutrição usa a última medida documentada, sem confundir a validade para dose com ausência de medida.
+  // A data/fonte acompanham a sugestão; isto não declara peso atual nem libera cálculo de dose.
+  const pesosNutricionais = pesosMedidosDocumentados(eventosVigentes(doPaciente.filter(e => Date.parse(e.criadoEm) <= horizonte)), i.hoje, horizonte);
+  const pesoNutricional = pesosNutricionais[0];
+  const concordantes = pesoNutricional ? pesosNutricionais.filter(p => p.data === pesoNutricional.data) : [];
+  const dadosNutricionais = { pesoKg: pesoNutricional && new Set(concordantes.map(p => p.kg)).size === 1 ? pesoNutricional.kg : null,
+    alturaCm: dadosCorporais.alturaCm, medidoEm: pesoNutricional?.data ?? null, sourceId: pesoNutricional?.sourceId ?? null,
+    fontes: concordantes.flatMap(p => doPaciente.find(e => e.eventId === p.eventId)!.fontes
+      .map(f => ({eventId:p.eventId,sourceId:f.sourceId,medidoEm:p.data}))) };
   const avisosFlash = [...avisosCriticos,
     ...(variacaoPeso !== null && variacaoPeso>=0.10 ? ["Variação de peso de pelo menos 10%: revisar prescrição"] : []),
     ...(interacoes.estado === "VERMELHO" ? [interacoes.motivo] : []),
@@ -166,6 +196,6 @@ export function avaliarConsulta(i: EntradaAvaliacaoConsulta) {
     ...(hbv.faltantes.length ? [`Verificar sorologias: ${hbv.faltantes.join(", ")}`] : []),
     ...(i.cumulativo?.estado === "VERMELHO" ? i.cumulativo.motivos.map(m => m.texto) : [])];
   const sugestoesLaboratorio = [...(interacoes.achados.some(a=>key(a.drogaA).includes("capecitabina") && key(a.drogaBouClasse).includes("varfarina")) ? ["INR"] : []),...hbv.faltantes];
-  return { elegibilidade, renal, dadosCorporais, variacaoPeso, criticos, hbv, interacoes, emergencia, avisosFlash, sugestoesLaboratorio,
+  return { elegibilidade, renal, dadosCorporais, dadosNutricionais, variacaoPeso, criticos, hbv, interacoes, emergencia, avisosFlash, sugestoesLaboratorio,
     lembrete: elegibilidade.motivos.map(m=>m.texto).filter((t,index,a)=>a.indexOf(t)===index).join("; ") };
 }

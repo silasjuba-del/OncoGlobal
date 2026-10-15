@@ -57,6 +57,7 @@ function sinalDe(entradas: EntradasElegibilidadeCiclo, origem: OrigemElegibilida
 
 /** Cruza as entradas já calculadas. Mesma entrada → mesma saída. Não muta a entrada. */
 export function elegibilidadeCiclo(entradas: EntradasElegibilidadeCiclo): SaidaElegibilidadeCiclo {
+  const criterios = Object.values(entradas).flatMap(s => s?.criterios ?? []);
   const motivos: MotivoElegibilidadeCiclo[] = [];
   let temVermelho = false;
   let temPendente = false;
@@ -64,7 +65,14 @@ export function elegibilidadeCiclo(entradas: EntradasElegibilidadeCiclo): SaidaE
   let pendentes = 0;
 
   for (const origem of ORDEM) {
-    const sinal = sinalDe(entradas, origem);
+    const original = sinalDe(entradas, origem);
+    const sinal = original && original.criterios?.length ? { ...original,
+      estado: original.estado === "VERMELHO" || original.criterios.some(c => c.estado === "NAO_ATENDE") ? "VERMELHO" as const
+        : original.estado === "PENDENTE" || original.criterios.some(c => c.estado === "AUSENTE" || c.estado === "CONFLITO") ? "PENDENTE" as const
+        : "VERDE" as const,
+      motivos: [...original.motivos, ...original.criterios.filter(c => c.estado !== "ATENDE").map((c): MotivoEntradaElegibilidade => ({ texto: c.texto }))]
+        .filter((m, index, todos) => todos.findIndex(x => x.texto === m.texto) === index),
+    } : original;
     if (sinal === undefined) continue;
     total++;
     if (sinal === null) {
@@ -94,5 +102,8 @@ export function elegibilidadeCiclo(entradas: EntradasElegibilidadeCiclo): SaidaE
   if (total === 0) temPendente = true;
   const cor: CorElegibilidade = temVermelho ? "VERMELHO" : temPendente ? "PENDENTE" : "VERDE";
   return { cor, motivos: cor === "VERDE" ? [] : motivos, rotulo: ROTULO[cor],
-    cobertura: { avaliadas: total - pendentes, pendentes, total } };
+    cobertura: { avaliadas: total - pendentes, pendentes, total },
+    ...(criterios.length ? { criterios, coberturaCriterios: {
+      avaliados: criterios.filter(c => c.estado === "ATENDE" || c.estado === "NAO_ATENDE").length,
+      pendentes: criterios.filter(c => c.estado === "AUSENTE" || c.estado === "CONFLITO").length, total: criterios.length } } : {}) };
 }

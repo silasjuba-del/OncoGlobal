@@ -7,7 +7,7 @@ if((Get-Item -LiteralPath $Worktree).LinkType){throw 'DESCARTAVEL_E_LINK'}
 $branch = & git -C $Worktree rev-parse --abbrev-ref HEAD
 if($branch -ne 'HEAD'){throw 'DESCARTAVEL_NAO_DETACHED'}
 $base=(& git -C $Worktree rev-parse HEAD).Trim()
-$scriptLock='C:\Users\silas\Projects\OncoGlobal-wt\w5-orq\docs\w5\ferramentas\vitest-lock.ps1'
+$scriptLock=Join-Path $PSScriptRoot '..\..\docs\_arquivo\w5\ferramentas\vitest-lock.ps1'
 function Run-Locked([string]$command){
   $out=@(& $scriptLock -Agente RED -Worktree $Worktree -Comando $command -LinhasFinais 12)
   $m=[regex]::Match(($out -join "`n"),'EXIT_CODE=(\d+) - LOG=([^\r\n]+)')

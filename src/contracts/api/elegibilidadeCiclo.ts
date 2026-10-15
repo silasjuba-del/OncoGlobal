@@ -1,4 +1,4 @@
-
+import type { CriterioElegibilidade } from "./criterioElegibilidade.js";
 export type CorElegibilidade = "VERDE" | "VERMELHO" | "PENDENTE";
 
 export type NivelMotivoElegibilidade = "atencao" | "importante" | "contraindicacao";
@@ -21,6 +21,7 @@ export interface MotivoEntradaElegibilidade {
 export interface SinalElegibilidade {
   estado: CorElegibilidade;
   motivos: readonly MotivoEntradaElegibilidade[];
+  criterios?: readonly CriterioElegibilidade[];
 }
 
 export interface EntradasElegibilidadeCiclo {
@@ -52,4 +53,6 @@ export interface SaidaElegibilidadeCiclo {
   motivos: MotivoElegibilidadeCiclo[];
   rotulo: string;
   cobertura?: { avaliadas: number; pendentes: number; total: number };
+  criterios?: readonly CriterioElegibilidade[];
+  coberturaCriterios?: { avaliados: number; pendentes: number; total: number };
 }

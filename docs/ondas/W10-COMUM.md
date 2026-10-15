@@ -5,11 +5,11 @@
 
 ## Leitura obrigatória antes da 1ª fatia (nesta ordem)
 1. `docs/DECISOES.md` inteiro — **D-W9-01 a D-W9-53 são decisões do Dr. Silas e valem como estão** (tabelas clínicas já decididas; não crie `[VERIFICAR]` para o que já foi decidido).
-2. `docs/ondas/W8-COMUM.md` (regras de máquina e invariantes; onde diz W8, leia W10).
-3. Specs: `docs/specs/PIPELINE-EXTRACAO-MULTIMODAL.md`, `docs/specs/PATCH-PRESCRICAO-UI-LONGITUDINAL.md`, `docs/specs/PROMPT-ASSISTENTE-LONGITUDINAL.md`, `docs/specs/PORTAS-DE-ENTRADA.md`, `docs/specs/SKILL-MORFOMETRIA-LESAO-RM.md`, `docs/ondas/W10-PLANO.md`.
+2. `docs/_arquivo/ondas/W8-COMUM.md` (regras de máquina e invariantes; onde diz W8, leia W10).
+3. Specs: `docs/specs/PIPELINE-EXTRACAO-MULTIMODAL.md`, `docs/specs/PATCH-PRESCRICAO-UI-LONGITUDINAL.md`, `docs/specs/PROMPT-ASSISTENTE-LONGITUDINAL.md`, `docs/specs/PORTAS-DE-ENTRADA.md`, `docs/specs/SKILL-MORFOMETRIA-LESAO-RM.md`, `docs/_arquivo/ondas/W10-PLANO.md`.
 4. Modelos de documento: `docs/referencias/modelos/01…10` (+ `laudos-sinteticos/`).
 5. Design-alvo: `docs/design/oncochart/` (README + `DECISAO-UI-ALVO.md`).
-6. Achados ainda vermelhos: `docs/w8/ACHADOS-KIMI.md` + `tests/adv-w8/*.adv.ts` (rodar: `npx vitest run --config tests/adv-w8/vitest.config.ts --no-file-parallelism`).
+6. Achados ainda vermelhos: `docs/_arquivo/w8/ACHADOS-KIMI.md` + `tests/adv-w8/*.adv.ts` (rodar: `npx vitest run --config tests/adv-w8/vitest.config.ts --no-file-parallelism`).
 
 ## Quem faz o quê (faixas EXCLUSIVAS — tocar fora = BLOQUEADO_ESCOPO + nota em `docs/w10/PEDIDOS-<EXECUTOR>.md`)
 | Executor | Faixa |
@@ -18,7 +18,7 @@
 | **GROK** (externo) | `src/rules/**` **exceto** `src/rules/{prescricao,morfometria,recist}/**` e os arquivos já existentes de `src/rules/w8/*` (pode criar arquivos novos ao lado); `src/modules/**`; `src/kernel/harness/ownership.ts` (novo); `scripts/verificar-manifesto.mjs` (novo); `corpus/rulesets/{rads-*,salao-*,agenda-*,interacoes*}`; `tests/{rules,rules-w8,modules}/**`, `tests/w10-grok/**` |
 | **CURSOR** (externo) | `src/ui/**` **exceto** `src/ui/copy/**` e `src/ui/icones/**`; `tests/{ui,ui-telas}/**`, `tests/w10-cursor/**` |
 | Claude (tech lead) | `src/contracts/**` (contratos novos em `src/contracts/w10/`), integração, `docs/DECISOES.md`, `package.json` |
-| **Cadeia Astra + 5 Lunas** (`docs/ondas/W10-CADEIA-ASTRA.md`) | `src/server/**`, `src/app/**`, `src/kernel/gateway/**`, `src/rules/recist/**`, `src/estatistica/**`, `src/config/**`, `corpus/{glossario,regulatorio,receitas,redflags}/**`, `tests/w10-luna*/**` |
+| **Cadeia Astra + 5 Lunas** (`docs/_arquivo/ondas/W10-CADEIA-ASTRA.md`) | `src/server/**`, `src/app/**`, `src/kernel/gateway/**`, `src/rules/recist/**`, `src/estatistica/**`, `src/config/**`, `corpus/{glossario,regulatorio,receitas,redflags}/**`, `tests/w10-luna*/**` |
 | Equipe interna (Claude + 5 agentes + Codex CLI) | `src/kernel/harness/gates.ts`, `src/kernel/llm/**`, `src/app/**`, `src/server/**`, `src/apac/**` (novo), `src/rules/prescricao/**` (novo), `corpus/{templates,fichas,glossario,regulatorio}/**`, `src/ui/copy/**`, `src/ui/icones/**`, `docs/design/**`, `tests/adv-w10/**` |
 **Ninguém** edita: `src/contracts/**` (só o tech lead), `package.json`, `package-lock.json`, `tsconfig.json`, `scripts/check-boundaries.mjs`, `.github/**`, `docs/DECISOES.md`, `docs/PLANO-*`, CANONICA.
 

@@ -9,6 +9,40 @@ const base:EntradaAvaliacaoConsulta={eventos:[],patientId:paciente.patientId,tum
 function evento(id:string,tipo:string,data:unknown):ClinicalEvent {return {eventId:id,operationId:`op-${id}`,eventIndex:0,patientId:base.patientId,encounterId:base.encounterId,tumorLotId:null,tipo,payload:{data},fontes:[fonteSintetica("fonte-medida")],revisao:"CONFIRMADO",criadoEm:"2026-10-10T10:00:00-03:00",criadoPor:{tipo:"SESSAO",id:"medico"},supersedesEventId:null};}
 const lab=(id:string,campo:string,valor:number,data="2026-10-09T10:00:00-03:00",unidade="mmol/L")=>evento(id,"LabResult",{campo,valor,data,unidade,sourceId:"fonte-medida"});
 describe("auditoria clínica adversarial da composição",()=>{
+ it("preserva todas as fontes do envelope de um exame concordante",()=>{
+  const e={...lab("multifonte","neutrofilos",2000,"2026-10-09T10:00:00-03:00","/uL"),fontes:[fonteSintetica("fonte-medida"),fonteSintetica("fonte-adicional")]};
+  for(const c of avaliarConsulta({...base,eventos:[e]}).elegibilidade.criterios!.filter(c=>c.id.startsWith("neutrofilos.")))
+   expect(c.fontes.map(f=>f.sourceId)).toEqual(["fonte-medida","fonte-adicional"]);
+ });
+ it("peso concordante preserva eventos e fontes sem eleger o primeiro",()=>{
+  const pesos=["a","b"].map(id=>({...evento(`peso-${id}`,"Weight",{kg:50,origem:"MEDIDO",data:"2026-10-09",sourceId:"fonte-medida"}),fontes:[fonteSintetica("fonte-medida"),fonteSintetica(`fonte-${id}`)]}));
+  for(const eventos of [pesos,[...pesos].reverse()]){
+   const d=avaliarConsulta({...base,eventos}).dadosNutricionais;
+   expect(d.pesoKg).toBe(50);
+   expect((d as any).fontes).toEqual(expect.arrayContaining(pesos.flatMap(e=>e.fontes.map(f=>({eventId:e.eventId,sourceId:f.sourceId,medidoEm:"2026-10-09"})))));
+  }
+ });
+ it.each([["neutrofilos",2000],["plaquetas",150000]] as const)("preserva fontes concordantes de %s nos critérios de limiar e validade",(campo,valor)=>{
+  const data="2026-10-09T10:00:00-03:00";
+  const exames=["a","b"].map(sufixo=>({...evento(`lab-${sufixo}`,"LabResult",{campo,valor,data,unidade:"/uL",sourceId:`fonte-${sufixo}`}),fontes:[fonteSintetica(`fonte-${sufixo}`)]}));
+  const antigo=lab("antigo",campo,valor,"2026-10-08T10:00:00-03:00","/uL");
+  for(const atuais of [exames,[...exames].reverse()]) {
+   const r=avaliarConsulta({...base,eventos:[antigo,...atuais]});
+   for(const sufixo of ["limiar","validade"]) {
+    const criterio=r.elegibilidade.criterios?.find(c=>c.id===`${campo}.${sufixo}`);
+    expect(criterio?.estado).toBe("ATENDE");
+    expect(criterio?.fontes).toHaveLength(2);
+    expect(criterio?.fontes).toEqual(expect.arrayContaining(exames.map(e=>({eventId:e.eventId,sourceId:e.fontes[0]!.sourceId,medidoEm:data}))));
+   }
+  }
+ });
+ it("critério reprovado não esconde plaquetas ausentes na porta do ciclo",()=>{
+  const r=avaliarConsulta({...base,eventos:[lab("anc","neutrofilos",1000,"2026-10-09T10:00:00-03:00","/uL")]});
+  expect(r.elegibilidade).toMatchObject({cor:"VERMELHO",criterios:expect.arrayContaining([
+   expect.objectContaining({schema:"CriterioElegibilidade@1",id:"neutrofilos.limiar",estado:"NAO_ATENDE"}),
+   expect.objectContaining({schema:"CriterioElegibilidade@1",id:"plaquetas.limiar",estado:"AUSENTE"}),
+  ])});
+ });
  it("Na146 atual gera aviso D06 mas não inventa emergência",()=>{
   const r=avaliarConsulta({...base,eventos:[lab("na","sodio",146)]});
   expect(r.criticos.find(c=>c.analito==="NA")?.estado).toBe("AVISO");
@@ -46,6 +80,13 @@ describe("auditoria clínica adversarial da composição",()=>{
 });
 
 describe("horizonte do encontro e escopo do paciente (P1 PR #13)",()=>{
+ it("peso e altura do paciente atravessam lotes tumorais sem herdar outro paciente",()=>{
+  const peso={...evento("peso-a","Weight",{kg:70,origem:"MEDIDO",data:"2026-10-09",sourceId:"fonte-medida"}),tumorLotId:"lote-a"};
+  const altura={...evento("altura-a","FATO",{campo:"alturaCm",valor:170}),tumorLotId:"lote-a"};
+  const r=avaliarConsulta({...base,tumorLotId:"lote-b",eventos:[peso,altura,
+   {...peso,eventId:"outro",patientId:"paciente-diferente",payload:{data:{kg:90,origem:"MEDIDO",data:"2026-10-10",sourceId:"fonte-medida"}}}]});
+  expect(r.dadosNutricionais).toMatchObject({pesoKg:70,alturaCm:170});
+ });
  it("lab de outro lote tumoral continua valendo para o paciente",()=>{
   const r=avaliarConsulta({...base,tumorLotId:"lote-b",eventos:[{...lab("na-lote-a","sodio",146),tumorLotId:"lote-a"}]});
   expect(r.criticos.find(c=>c.analito==="NA")?.estado).toBe("AVISO");
