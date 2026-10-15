@@ -43,7 +43,7 @@ const relativoSeguro = p => typeof p === "string" && !p.includes("\\") && !p.spl
 function conferirCaminhoPublico(caminho) {
   for (const componente of caminho.split("/")) {
     const legivel = componente.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[_-]/g, " ");
-    if (/\b(?:paciente|patient|nome\s*(?:completo\s*)?paciente|patient\s*(?:full\s*)?name)\s+/i.test(legivel)
+    if (/\b(?:paciente|patient|nome\s*(?:completo\s*)?(?:do\s*)?paciente|(?:full\s*)?patient\s*(?:full\s*)?name)\s+/i.test(legivel)
       || /\b(?:prontuario|cpf|cns|patientid|pacienteid)\s*[: .]?\s*\d/i.test(legivel)
       || scanText(componente.replace(/^[A-Z0-9._-]+@\d+\.\d+\.\d+\.md$/, "PROMPT_VERSIONADO"), "caminho.txt", { manifest: {files:[]} }).findings.length)
       throw new Error("PHI_CAMINHO");
