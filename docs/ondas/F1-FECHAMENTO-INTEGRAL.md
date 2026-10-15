@@ -42,3 +42,13 @@ Não há sobreposição de arquivos entre os escritores. Nenhum agente faz commi
 - Packs H2/H4 preservam 28 protocolos SUS VERIFICAR, fontes e pendências; nenhum número é promovido para fechar estatística.
 
 Resultados finais e comandos serão registrados após execução, sem substituir evidência por planejamento.
+
+## Resultado da execução
+
+Cinco Lunas entregaram: base/revisão independente, reconciliação documental, backend, UI real e mapeamento de fontes. Integração feita pelo Codex principal.
+
+Ampliações coordenadas: Luna4 também escreveu `src/contracts/api/biblioteca.ts`, a porta opcional de biblioteca em `src/contracts/api/porta.ts` e seu transporte em `src/ui/api/http.ts`. O integrador acrescentou proxy `/biblioteca` em `vite.config.ts`, triagem exata de 14 hashes em `docs/f0-fecha/PHI-TRIAGEM.json` e regressões das duas falhas encontradas na revisão. Nenhuma dose ou aprovação clínica foi alterada.
+
+CI completo em 4163e36: 3607/457; F1 786/94; W10 240/31; W8 41/9. Build local e cinco testes de UI aprovados. Windows integral sem resultado consolidado: interrompido, não PASS. Primeiras tentativas locais inválidas por descoberta de dependências via link temporário e índice documental diferente da árvore não contam como validação. Nenhum teste foi removido ou afrouxado; link antigo preservado sob `dist/node_modules/base-anterior`, excluído pelas regras originais de descoberta. Dependências reutilizadas do checkout com package-lock idêntico; manifestos de dependência não mudaram.
+
+Snapshot253; pacote convertido2; exclusões251 com motivos. Prova visual/reinício documentada no relatório F1. PR20 criado e anexado ao chat; PR17/18/19 preservados. O encerramento integral permanece condicionado a revisão/integração, curadoria das lacunas e aceite humano, sem usar autorização técnica como aprovação clínica.
