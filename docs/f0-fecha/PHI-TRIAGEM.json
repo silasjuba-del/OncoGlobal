@@ -3084,6 +3084,146 @@
       ]
     },
     {
+      "path": "corpus/6-pack-tumor/ewing/pack-ewing.v2.RASCUNHO.json",
+      "sha256": "7492021e716f92c72b5cd38568bca126e6ecbba8385becb4fe24fb25840e71a4",
+      "items": [
+        {
+          "type": "telefone",
+          "line": 1379,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "corpus/6-pack-tumor/ewing/pack-ewing.v2.RASCUNHO.json:1379",
+          "reason": "Token sha256 documental integral de 64 hex conferido contra 8d0e990; merge acrescentou 40 linhas antes dos mesmos quatro tokens, sem contato pessoal. Revisao tecnica 2026-10-15.",
+          "contextTag": "json_sha256_field_64hex"
+        },
+        {
+          "type": "telefone",
+          "line": 1397,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "corpus/6-pack-tumor/ewing/pack-ewing.v2.RASCUNHO.json:1397",
+          "reason": "Token sha256 documental integral de 64 hex conferido contra 8d0e990; merge acrescentou 40 linhas antes dos mesmos quatro tokens, sem contato pessoal. Revisao tecnica 2026-10-15.",
+          "contextTag": "json_sha256_field_64hex"
+        },
+        {
+          "type": "telefone",
+          "line": 1606,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "corpus/6-pack-tumor/ewing/pack-ewing.v2.RASCUNHO.json:1606",
+          "reason": "Token sha256 documental integral de 64 hex conferido contra 8d0e990; merge acrescentou 40 linhas antes dos mesmos quatro tokens, sem contato pessoal. Revisao tecnica 2026-10-15.",
+          "contextTag": "json_sha256_field_64hex"
+        },
+        {
+          "type": "telefone",
+          "line": 1620,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "corpus/6-pack-tumor/ewing/pack-ewing.v2.RASCUNHO.json:1620",
+          "reason": "Token sha256 documental integral de 64 hex conferido contra 8d0e990; merge acrescentou 40 linhas antes dos mesmos quatro tokens, sem contato pessoal. Revisao tecnica 2026-10-15.",
+          "contextTag": "json_sha256_field_64hex"
+        }
+      ],
+      "hashMode": "utf8-lf"
+    },
+    {
+      "path": "corpus/6-pack-tumor/cec-pele/pack-cec-pele.v2.RASCUNHO.json",
+      "sha256": "1acfaeaef6ed4dc732a2cd22e89920a44a00f4d37e4859bd849cbb7130279a2a",
+      "items": [
+        {
+          "type": "telefone",
+          "line": 209,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "corpus/6-pack-tumor/cec-pele/pack-cec-pele.v2.RASCUNHO.json:209",
+          "reason": "H2/H4: correspondência integralmente contida em campo sha256 de fonte documental, token hexadecimal de 64 caracteres conferido. Nenhum contato ou identificador de paciente; triagem técnica vinculada ao hash integral do pack.",
+          "contextTag": "json_sha256_field_64hex"
+        },
+        {
+          "type": "telefone",
+          "line": 615,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "corpus/6-pack-tumor/cec-pele/pack-cec-pele.v2.RASCUNHO.json:615",
+          "reason": "H2/H4: correspondência integralmente contida em campo sha256 de fonte documental, token hexadecimal de 64 caracteres conferido. Nenhum contato ou identificador de paciente; triagem técnica vinculada ao hash integral do pack.",
+          "contextTag": "json_sha256_field_64hex"
+        },
+        {
+          "type": "telefone",
+          "line": 708,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "corpus/6-pack-tumor/cec-pele/pack-cec-pele.v2.RASCUNHO.json:708",
+          "reason": "H2/H4: correspondência integralmente contida em campo sha256 de fonte documental, token hexadecimal de 64 caracteres conferido. Nenhum contato ou identificador de paciente; triagem técnica vinculada ao hash integral do pack.",
+          "contextTag": "json_sha256_field_64hex"
+        },
+        {
+          "type": "telefone",
+          "line": 725,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "corpus/6-pack-tumor/cec-pele/pack-cec-pele.v2.RASCUNHO.json:725",
+          "reason": "H2/H4: correspondência integralmente contida em campo sha256 de fonte documental, token hexadecimal de 64 caracteres conferido. Nenhum contato ou identificador de paciente; triagem técnica vinculada ao hash integral do pack.",
+          "contextTag": "json_sha256_field_64hex"
+        },
+        {
+          "type": "telefone",
+          "line": 912,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "corpus/6-pack-tumor/cec-pele/pack-cec-pele.v2.RASCUNHO.json:912",
+          "reason": "H2/H4: correspondência integralmente contida em campo sha256 de fonte documental, token hexadecimal de 64 caracteres conferido. Nenhum contato ou identificador de paciente; triagem técnica vinculada ao hash integral do pack.",
+          "contextTag": "json_sha256_field_64hex"
+        },
+        {
+          "type": "telefone",
+          "line": 926,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "corpus/6-pack-tumor/cec-pele/pack-cec-pele.v2.RASCUNHO.json:926",
+          "reason": "H2/H4: correspondência integralmente contida em campo sha256 de fonte documental, token hexadecimal de 64 caracteres conferido. Nenhum contato ou identificador de paciente; triagem técnica vinculada ao hash integral do pack.",
+          "contextTag": "json_sha256_field_64hex"
+        },
+        {
+          "type": "telefone",
+          "line": 1008,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "corpus/6-pack-tumor/cec-pele/pack-cec-pele.v2.RASCUNHO.json:1008",
+          "reason": "H2/H4: correspondência integralmente contida em campo sha256 de fonte documental, token hexadecimal de 64 caracteres conferido. Nenhum contato ou identificador de paciente; triagem técnica vinculada ao hash integral do pack.",
+          "contextTag": "json_sha256_field_64hex"
+        },
+        {
+          "type": "telefone",
+          "line": 1025,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "corpus/6-pack-tumor/cec-pele/pack-cec-pele.v2.RASCUNHO.json:1025",
+          "reason": "H2/H4: correspondência integralmente contida em campo sha256 de fonte documental, token hexadecimal de 64 caracteres conferido. Nenhum contato ou identificador de paciente; triagem técnica vinculada ao hash integral do pack.",
+          "contextTag": "json_sha256_field_64hex"
+        },
+        {
+          "type": "telefone",
+          "line": 1042,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "corpus/6-pack-tumor/cec-pele/pack-cec-pele.v2.RASCUNHO.json:1042",
+          "reason": "H2/H4: correspondência integralmente contida em campo sha256 de fonte documental, token hexadecimal de 64 caracteres conferido. Nenhum contato ou identificador de paciente; triagem técnica vinculada ao hash integral do pack.",
+          "contextTag": "json_sha256_field_64hex"
+        },
+        {
+          "type": "telefone",
+          "line": 1059,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "corpus/6-pack-tumor/cec-pele/pack-cec-pele.v2.RASCUNHO.json:1059",
+          "reason": "H2/H4: correspondência integralmente contida em campo sha256 de fonte documental, token hexadecimal de 64 caracteres conferido. Nenhum contato ou identificador de paciente; triagem técnica vinculada ao hash integral do pack.",
+          "contextTag": "json_sha256_field_64hex"
+        }
+      ],
+      "hashMode": "utf8-lf"
+    },
+    {
       "path": "corpus/fichas/nao-informado-ficha-institucional/lv5fu2-5-fu-folinato-p1512__nao-especificado.json",
       "sha256": "00a338058d39f354ad167db0673e06a6be517e2c08006e85a6876c1eeea77340",
       "hashMode": "utf8-lf",

@@ -68,7 +68,15 @@ export const SaidasHttp: Readonly<Record<string, z.ZodType>> = {
   "/biblioteca/rollback": z.object({ codigo: z.literal("BIBLIOTECA_RESTAURADA"), referencia: RefBiblioteca }),
   "/biblioteca/consultar": z.object({ itens: z.array(ItemImportado), referencia: RefBiblioteca }),
   "/biblioteca/estado": z.object({ ativa: Id.nullable(), referencia: RefBiblioteca, pacoteId: Id.nullable(), hash: Id.nullable(),
-    itens: z.array(z.object({ id: Id, estado: z.enum(["RASCUNHO", "CONSULTAVEL", "ALERTA", "OBSOLETO"]) })) }),
+    ativacao: z.object({ pacote: Id, anterior: Id.nullable(), motivo: z.enum(["ATIVACAO", "ROLLBACK"]), ator: Id.nullable(), registradoEm: Instante.nullable() }).nullable(),
+    pacotes: z.array(z.object({ pacoteId: Id, versao: Id, hash: z.string().regex(/^[a-f0-9]{64}$/), ativo: z.boolean(),
+      itens: z.array(z.object({ id: Id, estado: z.enum(["RASCUNHO", "CONSULTAVEL", "ALERTA", "OBSOLETO"]) })) })),
+    itens: z.array(ItemImportado.extend({ titulo: z.string().min(1).max(300), texto: z.string().min(1).max(200000),
+      aplicabilidade: z.object({ tumor: z.array(Id), histologia: z.array(Id), estadio: z.array(Id), biomarcador: z.array(Id), linha: z.array(Id) }),
+      proveniencia: z.object({ fonte: z.string().url(), trecho: z.string().min(1).max(200000), publicadoEm: z.string().date(),
+        recuperadoEm: Instante, licenca: z.string().min(1).max(300) }), dependencias: z.array(z.object({ id: Id, versao: Id })),
+      estado: z.enum(["RASCUNHO", "CONSULTAVEL", "ALERTA", "OBSOLETO"]),
+      curadoria: z.object({ ator: Id, registradoEm: Instante.nullable() }).nullable() })) }),
 };
 
 export function respostaHttpValida(rota: string, status: number, resultado: unknown): boolean {

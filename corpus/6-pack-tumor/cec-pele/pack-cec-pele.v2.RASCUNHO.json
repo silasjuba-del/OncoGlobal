@@ -158,7 +158,36 @@
             "pagina": null,
             "trecho": "",
             "estado": "PENDENTE"
-          }
+          },
+          "consultadoEm": "2026-10-14",
+          "procedimentosRelacionados": [],
+          "farmacos": [
+            {
+              "droga": "cemiplimabe",
+              "via": "EV",
+              "disponivel": "VERIFICAR",
+              "rename": {
+                "edicao": "2024",
+                "resultado": "NAO_LOCALIZADO_NA_EDICAO_CONSULTADA",
+                "paginas": [],
+                "fonte": {
+                  "tipo": "NORMA",
+                  "referencia": "https://bvsms.saude.gov.br/bvs/publicacoes/relacao_nacional_medicamentos_2024.pdf",
+                  "localizador": "busca textual integral, pp. 1–252, termo cemiplimabe",
+                  "trecho": "Termo cemiplimabe não localizado na busca textual da edição 2024; isso não demonstra não disponibilidade no SUS.",
+                  "sha256": "b1b0d582cb68fc96fcbe04fd65c1c697d5206b7dce8886f1c6ddb06374fd5201",
+                  "consultadoEm": "2026-10-14"
+                },
+                "ressalva": "Inclusão na RENAME não comprova indicação oncológica, apresentação do esquema, estoque do serviço nem cobertura ANS; ausência nesta edição também não comprova exclusão do SUS."
+              },
+              "sigtapEncontrados": [],
+              "buscasFeitas": [
+                "SIGTAP 2026-09: busca pelo nome cemiplimabe em tb_procedimento (ZIP local conferido por SHA-256), incluindo catálogo de medicamentos; RENAME 2024 integral (normalização de acentos; folínico pesquisado como folinato).",
+                "docs/referencias/: 10 arquivos com correspondência textual; docs/referencias\\onco-referencia\\07-tumor-packs-6-10.md, docs/referencias\\evidencias\\DESFECHOS-GINECO.md, docs/referencias\\ragGRAFO-oncologia\\modulos\\03-ginecologico\\nos.jsonl, docs/referencias\\ragGRAFO-oncologia\\modulos\\03-ginecologico\\RESUMO.md; menção isolada não comprova acesso SUS."
+              ]
+            }
+          ],
+          "observacao": "VERIFICAR: há somente evidência administrativa parcial quando códigos relacionados são listados. Não reclassificar disponibilidade clínica por código de QT ou presença na RENAME. Confirmar fármaco/apresentação/indicação e acesso no serviço; cobertura ANS não foi avaliada."
         },
         "fonte": {
           "tipo": "PROTOCOLO_INSTITUCIONAL",
@@ -169,7 +198,30 @@
         },
         "observacao": "Migden NEJM 2018;379(4):341-351 e Lancet Oncol 2020;21(2):294-305 (pivôs).",
         "derivadoDe": null,
-        "criterioAplicacao": ""
+        "criterioAplicacao": "",
+        "suporte": {
+          "emetogenicidade": {
+            "classificacao": "MINIMA",
+            "fonte": {
+              "tipo": "PROTOCOLO_INSTITUCIONAL",
+              "referencia": "https://www.eviq.org.au/medical-oncology/skin/locally-advanced-or-metastatic-cutaneous-squamous-cell-carcinoma/4151",
+              "localizador": "f1-b2-fontes-externas/cec-ntg-vulva/eviq-4151-cemiplimab.txt:L119-L119; Clinical information / emetogenicity",
+              "trecho": "Emetogenicity MINIMAL",
+              "sha256": "f1fb1e8922705054ee8c10134e839d7edd246a03bd4e58382c4063572d845dee",
+              "consultadoEm": "2026-10-14",
+              "estado": "CONSULTADO",
+              "sourceId": "EXT-CNV-001",
+              "sha256Original": "c006e4a23668402ff16cecbd7331b7167f04e2205a037126d557d46434b352fa",
+              "edicao": "v5 (review due 31/12/2028)"
+            }
+          },
+          "riscoNeutropeniaFebril": {
+            "classificacao": "VERIFICAR",
+            "percentual": null,
+            "fonte": null,
+            "pendencia": "Não localizada classificação de risco FN específica para este protocolo/variante nas fontes consultadas; não inferir de neutropenia isolada nem da presença de G-CSF."
+          }
+        }
       },
       {
         "id": "cec-carbopac",
@@ -207,7 +259,60 @@
             "pagina": null,
             "trecho": "",
             "estado": "PENDENTE"
-          }
+          },
+          "consultadoEm": "2026-10-14",
+          "procedimentosRelacionados": [],
+          "farmacos": [
+            {
+              "droga": "paclitaxel",
+              "via": "EV",
+              "disponivel": "VERIFICAR",
+              "rename": {
+                "edicao": "2024",
+                "resultado": "NAO_LOCALIZADO_NA_EDICAO_CONSULTADA",
+                "paginas": [],
+                "fonte": {
+                  "tipo": "NORMA",
+                  "referencia": "https://bvsms.saude.gov.br/bvs/publicacoes/relacao_nacional_medicamentos_2024.pdf",
+                  "localizador": "busca textual integral, pp. 1–252, termo paclitaxel",
+                  "trecho": "Termo paclitaxel não localizado na busca textual da edição 2024; isso não demonstra não disponibilidade no SUS.",
+                  "sha256": "b1b0d582cb68fc96fcbe04fd65c1c697d5206b7dce8886f1c6ddb06374fd5201",
+                  "consultadoEm": "2026-10-14"
+                },
+                "ressalva": "Inclusão na RENAME não comprova indicação oncológica, apresentação do esquema, estoque do serviço nem cobertura ANS; ausência nesta edição também não comprova exclusão do SUS."
+              },
+              "sigtapEncontrados": [],
+              "buscasFeitas": [
+                "SIGTAP 2026-09: busca pelo nome paclitaxel em tb_procedimento (ZIP local conferido por SHA-256), incluindo catálogo de medicamentos; RENAME 2024 integral (normalização de acentos; folínico pesquisado como folinato).",
+                "docs/referencias/: 42 arquivos com correspondência textual; docs/referencias\\evidencias\\SBOC-2026-MAMA-NEOADJUVANCIA-RESUMO.md, docs/referencias\\evidencias\\novidades.csv, docs/referencias\\evidencias\\NOVIDADES-2026.md, docs/referencias\\protocolos\\protocolos-citotoxicos-revisado-silas.csv; menção isolada não comprova acesso SUS."
+              ]
+            },
+            {
+              "droga": "carboplatina",
+              "via": "EV",
+              "disponivel": "VERIFICAR",
+              "rename": {
+                "edicao": "2024",
+                "resultado": "NAO_LOCALIZADO_NA_EDICAO_CONSULTADA",
+                "paginas": [],
+                "fonte": {
+                  "tipo": "NORMA",
+                  "referencia": "https://bvsms.saude.gov.br/bvs/publicacoes/relacao_nacional_medicamentos_2024.pdf",
+                  "localizador": "busca textual integral, pp. 1–252, termo carboplatina",
+                  "trecho": "Termo carboplatina não localizado na busca textual da edição 2024; isso não demonstra não disponibilidade no SUS.",
+                  "sha256": "b1b0d582cb68fc96fcbe04fd65c1c697d5206b7dce8886f1c6ddb06374fd5201",
+                  "consultadoEm": "2026-10-14"
+                },
+                "ressalva": "Inclusão na RENAME não comprova indicação oncológica, apresentação do esquema, estoque do serviço nem cobertura ANS; ausência nesta edição também não comprova exclusão do SUS."
+              },
+              "sigtapEncontrados": [],
+              "buscasFeitas": [
+                "SIGTAP 2026-09: busca pelo nome carboplatina em tb_procedimento (ZIP local conferido por SHA-256), incluindo catálogo de medicamentos; RENAME 2024 integral (normalização de acentos; folínico pesquisado como folinato).",
+                "docs/referencias/: 37 arquivos com correspondência textual; docs/referencias\\protocolos\\protocolos-citotoxicos-revisado-silas.csv, docs/referencias\\evidencias\\ASCO-2026-VERIFICACAO.md, docs/referencias\\fornecedores\\RESUMO-GI-PRO2026-MODULO2.md, docs/referencias\\fornecedores\\SONHE-2024-PROTOCOLOS.csv; menção isolada não comprova acesso SUS."
+              ]
+            }
+          ],
+          "observacao": "VERIFICAR: há somente evidência administrativa parcial quando códigos relacionados são listados. Não reclassificar disponibilidade clínica por código de QT ou presença na RENAME. Confirmar fármaco/apresentação/indicação e acesso no serviço; cobertura ANS não foi avaliada."
         },
         "fonte": {
           "tipo": "PROTOCOLO_INSTITUCIONAL",
@@ -218,7 +323,31 @@
         },
         "observacao": "",
         "derivadoDe": null,
-        "criterioAplicacao": ""
+        "criterioAplicacao": "",
+        "suporte": {
+          "emetogenicidade": {
+            "classificacao": "MODERADA",
+            "fonte": {
+              "tipo": "PROTOCOLO_INSTITUCIONAL",
+              "referencia": "https://www.eviq.org.au/medical-oncology/head-and-neck/recurrent-or-metastatic/3579",
+              "localizador": "f1-b2-fontes-externas/cec-ntg-vulva/eviq-3579-carbo-paclitaxel-hn.txt:L107-L107; Clinical information / emetogenicity",
+              "trecho": "Emetogenicity MODERATE",
+              "sha256": "1811c69dd1c0b08a3e9936702d9e978ad36a5e74244d3823412aaa5f911fd70d",
+              "consultadoEm": "2026-10-14",
+              "estado": "CONSULTADO",
+              "sourceId": "EXT-CNV-008",
+              "sha256Original": "4bc8230b130195125dcdc514782c8561826c9246d3272de834b2c18d5ce90313",
+              "edicao": "acesso 2026-10-14"
+            }
+          },
+          "riscoNeutropeniaFebril": {
+            "classificacao": "VERIFICAR",
+            "percentual": null,
+            "fonte": null,
+            "pendencia": "Não localizada classificação de risco FN específica para este protocolo/variante nas fontes consultadas; não inferir de neutropenia isolada nem da presença de G-CSF."
+          },
+          "ressalva": "Fonte operacional de outra população e/ou variante, já apontada no pack; aplicabilidade permanece sujeita à decisão médica. Não altera a indicação nem as doses."
+        }
       },
       {
         "id": "cec-pembro",
@@ -248,7 +377,36 @@
             "pagina": null,
             "trecho": "",
             "estado": "PENDENTE"
-          }
+          },
+          "consultadoEm": "2026-10-14",
+          "procedimentosRelacionados": [],
+          "farmacos": [
+            {
+              "droga": "pembrolizumabe",
+              "via": "EV",
+              "disponivel": "VERIFICAR",
+              "rename": {
+                "edicao": "2024",
+                "resultado": "NAO_LOCALIZADO_NA_EDICAO_CONSULTADA",
+                "paginas": [],
+                "fonte": {
+                  "tipo": "NORMA",
+                  "referencia": "https://bvsms.saude.gov.br/bvs/publicacoes/relacao_nacional_medicamentos_2024.pdf",
+                  "localizador": "busca textual integral, pp. 1–252, termo pembrolizumabe",
+                  "trecho": "Termo pembrolizumabe não localizado na busca textual da edição 2024; isso não demonstra não disponibilidade no SUS.",
+                  "sha256": "b1b0d582cb68fc96fcbe04fd65c1c697d5206b7dce8886f1c6ddb06374fd5201",
+                  "consultadoEm": "2026-10-14"
+                },
+                "ressalva": "Inclusão na RENAME não comprova indicação oncológica, apresentação do esquema, estoque do serviço nem cobertura ANS; ausência nesta edição também não comprova exclusão do SUS."
+              },
+              "sigtapEncontrados": [],
+              "buscasFeitas": [
+                "SIGTAP 2026-09: busca pelo nome pembrolizumabe em tb_procedimento (ZIP local conferido por SHA-256), incluindo catálogo de medicamentos; RENAME 2024 integral (normalização de acentos; folínico pesquisado como folinato).",
+                "docs/referencias/: 40 arquivos com correspondência textual; docs/referencias\\fornecedores\\SONHE-2024-PROTOCOLOS.md, docs/referencias\\fornecedores\\RESUMO-GI-PRO2026-AVALIACAO.md, docs/referencias\\fornecedores\\SONHE-2024-PROTOCOLOS.csv, docs/referencias\\evidencias\\SBOC-2026-MAMA-NEOADJUVANCIA-RESUMO.md; menção isolada não comprova acesso SUS."
+              ]
+            }
+          ],
+          "observacao": "VERIFICAR: há somente evidência administrativa parcial quando códigos relacionados são listados. Não reclassificar disponibilidade clínica por código de QT ou presença na RENAME. Confirmar fármaco/apresentação/indicação e acesso no serviço; cobertura ANS não foi avaliada."
         },
         "fonte": {
           "tipo": "PROTOCOLO_INSTITUCIONAL",
@@ -259,7 +417,30 @@
         },
         "observacao": "KEYNOTE-629 (PMID 34293460): ORR 50% LA / 35% met. FDA aprovado; EMA NÃO aprovou p/ CEC cutâneo (ressalva regulatória).",
         "derivadoDe": null,
-        "criterioAplicacao": ""
+        "criterioAplicacao": "",
+        "suporte": {
+          "emetogenicidade": {
+            "classificacao": "MINIMA",
+            "fonte": {
+              "tipo": "PROTOCOLO_INSTITUCIONAL",
+              "referencia": "https://www.eviq.org.au/p/5066",
+              "localizador": "f1-b2-fontes-externas/sarcomas/eviq-5066-pembro-tumouragnostic.txt:L329-L329; Clinical information / emetogenicity",
+              "trecho": "Emetogenicity MINIMAL",
+              "sha256": "bb9ca81609b51411bdd629a5b1602a06f599da668b1cdf3ed78012f245df4f60",
+              "consultadoEm": "2026-10-14",
+              "estado": "CONSULTADO",
+              "sourceId": "EXT-SARC-008",
+              "sha256Original": "8f0d7dc3d23e5238b7f352e3f231f791b612f491cd6bfd562bbe79c19b3c5fd2",
+              "edicao": "v1 (acesso 2026-10-14)"
+            }
+          },
+          "riscoNeutropeniaFebril": {
+            "classificacao": "VERIFICAR",
+            "percentual": null,
+            "fonte": null,
+            "pendencia": "Não localizada classificação de risco FN específica para este protocolo/variante nas fontes consultadas; não inferir de neutropenia isolada nem da presença de G-CSF."
+          }
+        }
       },
       {
         "id": "cec-cis-rt",
@@ -289,7 +470,36 @@
             "pagina": null,
             "trecho": "",
             "estado": "PENDENTE"
-          }
+          },
+          "consultadoEm": "2026-10-14",
+          "procedimentosRelacionados": [],
+          "farmacos": [
+            {
+              "droga": "cisplatina",
+              "via": "EV",
+              "disponivel": "VERIFICAR",
+              "rename": {
+                "edicao": "2024",
+                "resultado": "NAO_LOCALIZADO_NA_EDICAO_CONSULTADA",
+                "paginas": [],
+                "fonte": {
+                  "tipo": "NORMA",
+                  "referencia": "https://bvsms.saude.gov.br/bvs/publicacoes/relacao_nacional_medicamentos_2024.pdf",
+                  "localizador": "busca textual integral, pp. 1–252, termo cisplatina",
+                  "trecho": "Termo cisplatina não localizado na busca textual da edição 2024; isso não demonstra não disponibilidade no SUS.",
+                  "sha256": "b1b0d582cb68fc96fcbe04fd65c1c697d5206b7dce8886f1c6ddb06374fd5201",
+                  "consultadoEm": "2026-10-14"
+                },
+                "ressalva": "Inclusão na RENAME não comprova indicação oncológica, apresentação do esquema, estoque do serviço nem cobertura ANS; ausência nesta edição também não comprova exclusão do SUS."
+              },
+              "sigtapEncontrados": [],
+              "buscasFeitas": [
+                "SIGTAP 2026-09: busca pelo nome cisplatina em tb_procedimento (ZIP local conferido por SHA-256), incluindo catálogo de medicamentos; RENAME 2024 integral (normalização de acentos; folínico pesquisado como folinato).",
+                "docs/referencias/: 46 arquivos com correspondência textual; docs/referencias\\fornecedores\\SONHE-2024-PROTOCOLOS.md, docs/referencias\\fornecedores\\SONHE-2024-PROTOCOLOS.csv, docs/referencias\\fornecedores\\SBOC-DIRETRIZES-INDICE.md, docs/referencias\\fornecedores\\RESUMO-GI-PRO2026-MODULO2.md; menção isolada não comprova acesso SUS."
+              ]
+            }
+          ],
+          "observacao": "VERIFICAR: há somente evidência administrativa parcial quando códigos relacionados são listados. Não reclassificar disponibilidade clínica por código de QT ou presença na RENAME. Confirmar fármaco/apresentação/indicação e acesso no serviço; cobertura ANS não foi avaliada."
         },
         "fonte": {
           "tipo": "PROTOCOLO_INSTITUCIONAL",
@@ -300,7 +510,31 @@
         },
         "observacao": "",
         "derivadoDe": null,
-        "criterioAplicacao": ""
+        "criterioAplicacao": "",
+        "suporte": {
+          "emetogenicidade": {
+            "classificacao": "ALTA",
+            "fonte": {
+              "tipo": "PROTOCOLO_INSTITUCIONAL",
+              "referencia": "https://www.eviq.org.au/medical-oncology/head-and-neck/locally-advanced/292",
+              "localizador": "f1-b2-fontes-externas/cec-ntg-vulva/eviq-292-cisplatin-weekly-crt.txt:L89-L89; Clinical information / emetogenicity",
+              "trecho": "Emetogenicity HIGH",
+              "sha256": "5eb0511575b67bab77ca1a63a763b3a0b8530217e9e9a391af11f9b062c608d5",
+              "consultadoEm": "2026-10-14",
+              "estado": "CONSULTADO",
+              "sourceId": "EXT-CNV-016",
+              "sha256Original": "1ade96c5a45617c0f4e7974493ae3cc2795d1ebc5a23fdbfa614d28e6d0bb8f1",
+              "edicao": "v10 (PDF v8)"
+            }
+          },
+          "riscoNeutropeniaFebril": {
+            "classificacao": "VERIFICAR",
+            "percentual": null,
+            "fonte": null,
+            "pendencia": "Não localizada classificação de risco FN específica para este protocolo/variante nas fontes consultadas; não inferir de neutropenia isolada nem da presença de G-CSF."
+          },
+          "ressalva": "Fonte operacional de outra população e/ou variante, já apontada no pack; aplicabilidade permanece sujeita à decisão médica. Não altera a indicação nem as doses."
+        }
       },
       {
         "id": "cec-pac-semanal",
@@ -330,7 +564,36 @@
             "pagina": null,
             "trecho": "",
             "estado": "PENDENTE"
-          }
+          },
+          "consultadoEm": "2026-10-14",
+          "procedimentosRelacionados": [],
+          "farmacos": [
+            {
+              "droga": "paclitaxel",
+              "via": "EV",
+              "disponivel": "VERIFICAR",
+              "rename": {
+                "edicao": "2024",
+                "resultado": "NAO_LOCALIZADO_NA_EDICAO_CONSULTADA",
+                "paginas": [],
+                "fonte": {
+                  "tipo": "NORMA",
+                  "referencia": "https://bvsms.saude.gov.br/bvs/publicacoes/relacao_nacional_medicamentos_2024.pdf",
+                  "localizador": "busca textual integral, pp. 1–252, termo paclitaxel",
+                  "trecho": "Termo paclitaxel não localizado na busca textual da edição 2024; isso não demonstra não disponibilidade no SUS.",
+                  "sha256": "b1b0d582cb68fc96fcbe04fd65c1c697d5206b7dce8886f1c6ddb06374fd5201",
+                  "consultadoEm": "2026-10-14"
+                },
+                "ressalva": "Inclusão na RENAME não comprova indicação oncológica, apresentação do esquema, estoque do serviço nem cobertura ANS; ausência nesta edição também não comprova exclusão do SUS."
+              },
+              "sigtapEncontrados": [],
+              "buscasFeitas": [
+                "SIGTAP 2026-09: busca pelo nome paclitaxel em tb_procedimento (ZIP local conferido por SHA-256), incluindo catálogo de medicamentos; RENAME 2024 integral (normalização de acentos; folínico pesquisado como folinato).",
+                "docs/referencias/: 42 arquivos com correspondência textual; docs/referencias\\evidencias\\SBOC-2026-MAMA-NEOADJUVANCIA-RESUMO.md, docs/referencias\\evidencias\\novidades.csv, docs/referencias\\evidencias\\NOVIDADES-2026.md, docs/referencias\\protocolos\\protocolos-citotoxicos-revisado-silas.csv; menção isolada não comprova acesso SUS."
+              ]
+            }
+          ],
+          "observacao": "VERIFICAR: há somente evidência administrativa parcial quando códigos relacionados são listados. Não reclassificar disponibilidade clínica por código de QT ou presença na RENAME. Confirmar fármaco/apresentação/indicação e acesso no serviço; cobertura ANS não foi avaliada."
         },
         "fonte": {
           "tipo": "PROTOCOLO_INSTITUCIONAL",
@@ -341,7 +604,28 @@
         },
         "observacao": "",
         "derivadoDe": null,
-        "criterioAplicacao": ""
+        "criterioAplicacao": "",
+        "suporte": {
+          "emetogenicidade": {
+            "classificacao": "BAIXA",
+            "fonte": {
+              "tipo": "PROTOCOLO_INSTITUCIONAL",
+              "referencia": "evidência local f1-b2-fontes-externas/cec-ntg-vulva/eviq-1948-paclitaxel-mono.txt",
+              "localizador": "f1-b2-fontes-externas/cec-ntg-vulva/eviq-1948-paclitaxel-mono.txt:L114-L114; Clinical information / emetogenicity",
+              "trecho": "Emetogenicity LOW",
+              "sha256": "46d56142f0c0594348a82ba70313412d9fd24cd5395482274b91a63e0ac403be",
+              "consultadoEm": "2026-10-14",
+              "estado": "CONSULTADO"
+            }
+          },
+          "riscoNeutropeniaFebril": {
+            "classificacao": "VERIFICAR",
+            "percentual": null,
+            "fonte": null,
+            "pendencia": "Não localizada classificação de risco FN específica para este protocolo/variante nas fontes consultadas; não inferir de neutropenia isolada nem da presença de G-CSF."
+          },
+          "ressalva": "Fonte operacional de outra população e/ou variante, já apontada no pack; aplicabilidade permanece sujeita à decisão médica. Não altera a indicação nem as doses."
+        }
       }
     ],
     "radioterapia": [
@@ -377,17 +661,16 @@
     "ensaios": [],
     "seguimento": [],
     "suporte": {
-      "emetogenicidade": "baixa (imunoterapia)/moderada (QT)",
-      "riscoNeutropeniaFebril": "conforme esquema",
+      "emetogenicidade": "Consultar tratamento.protocolos[].suporte.emetogenicidade: classificação e fonte por esquema; VERIFICAR quando não documentada.",
+      "riscoNeutropeniaFebril": "VERIFICAR por protocolo; suporte G-CSF documentado separadamente não estabelece faixa percentual de FN.",
       "outros": [
         "manejo de toxicidade imune (tiroidite, colite, hepatite, pneumonite) — orientar reconhecimento precoce"
       ],
       "fonte": {
         "tipo": "PROTOCOLO_INSTITUCIONAL",
-        "referencia": "eviQ 4151 + BC SMAVCEM",
-        "pagina": null,
-        "trecho": "immune-related AEs",
-        "estado": "CONSULTADO"
+        "referencia": "Fontes individualizadas em tratamento.protocolos[].suporte; evidências locais f1-b2-fontes-externas (captura 2026-10-14).",
+        "trecho": "Classificações de emetogenicidade transcritas por esquema; ausência de classificação específica de FN permanece explícita.",
+        "estado": "PARCIAL"
       }
     }
   },
@@ -398,7 +681,13 @@
       "TC_TORAX_ABDOME",
       "HEMOGRAMA",
       "CREATININA",
-      "TSH"
+      "TSH",
+      "CALCIO",
+      "MAGNESIO",
+      "CORTISOL",
+      "T4_LIVRE",
+      "GLICEMIA",
+      "AUDIOMETRIA_TONAL"
     ],
     "interacoesConsultar": [],
     "ctcaeAcao": [],
@@ -406,7 +695,400 @@
     "orientacoes": [],
     "encaminhamentos": [],
     "laudos": [],
-    "formulasXYZ": []
+    "formulasXYZ": [],
+    "examesFontes": [
+      {
+        "catalogoId": "HEMOGRAMA",
+        "protocoloId": "cec-cemiplimabe",
+        "contexto": "FBC, EUC, eGFR, LFTs, serum cortisol, TFTs and BSL at baseline. Repeat FBC, EUC, eGFR, LFTs and BSL prior to each cycle and serum cortisol and TFTs alternate",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "https://www.eviq.org.au/medical-oncology/skin/locally-advanced-or-metastatic-cutaneous-squamous-cell-carcinoma/4151",
+          "localizador": "f1-b2-fontes-externas/cec-ntg-vulva/eviq-4151-cemiplimab.txt:L172-L174; Blood tests / TESTS",
+          "trecho": "FBC, EUC, eGFR, LFTs, serum cortisol, TFTs and BSL at baseline.\n\n                                           Repeat FBC, EUC, eGFR, LFTs and BSL prior to each cycle and serum cortisol and TFTs alternate",
+          "sha256": "f1fb1e8922705054ee8c10134e839d7edd246a03bd4e58382c4063572d845dee",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO",
+          "sourceId": "EXT-CNV-001",
+          "sha256Original": "c006e4a23668402ff16cecbd7331b7167f04e2205a037126d557d46434b352fa",
+          "edicao": "v5 (review due 31/12/2028)"
+        }
+      },
+      {
+        "catalogoId": "CREATININA",
+        "protocoloId": "cec-cemiplimabe",
+        "contexto": "FBC, EUC, eGFR, LFTs, serum cortisol, TFTs and BSL at baseline. Repeat FBC, EUC, eGFR, LFTs and BSL prior to each cycle and serum cortisol and TFTs alternate",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "https://www.eviq.org.au/medical-oncology/skin/locally-advanced-or-metastatic-cutaneous-squamous-cell-carcinoma/4151",
+          "localizador": "f1-b2-fontes-externas/cec-ntg-vulva/eviq-4151-cemiplimab.txt:L172-L174; Blood tests / TESTS",
+          "trecho": "FBC, EUC, eGFR, LFTs, serum cortisol, TFTs and BSL at baseline.\n\n                                           Repeat FBC, EUC, eGFR, LFTs and BSL prior to each cycle and serum cortisol and TFTs alternate",
+          "sha256": "f1fb1e8922705054ee8c10134e839d7edd246a03bd4e58382c4063572d845dee",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO",
+          "sourceId": "EXT-CNV-001",
+          "sha256Original": "c006e4a23668402ff16cecbd7331b7167f04e2205a037126d557d46434b352fa",
+          "edicao": "v5 (review due 31/12/2028)"
+        }
+      },
+      {
+        "catalogoId": "HEMOGRAMA",
+        "protocoloId": "cec-carbopac",
+        "contexto": "FBC, EUC, eGFR, and LFTs at baseline and prior to each cycle. Calcium and magnesium at baseline and as clinically indicated. Recalculation of carboplatin doses at each cycle is unnecessary, except when baseline kidney function (e.g., eGFR) alters by greater than 20% or",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "https://www.eviq.org.au/medical-oncology/head-and-neck/recurrent-or-metastatic/3579",
+          "localizador": "f1-b2-fontes-externas/cec-ntg-vulva/eviq-3579-carbo-paclitaxel-hn.txt:L142-L144; Blood tests / TESTS",
+          "trecho": "FBC, EUC, eGFR, and LFTs at baseline and prior to each cycle. Calcium and magnesium at\n                           baseline and as clinically indicated. Recalculation of carboplatin doses at each cycle is\n                           unnecessary, except when baseline kidney function (e.g., eGFR) alters by greater than 20% or",
+          "sha256": "1811c69dd1c0b08a3e9936702d9e978ad36a5e74244d3823412aaa5f911fd70d",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO",
+          "sourceId": "EXT-CNV-008",
+          "sha256Original": "4bc8230b130195125dcdc514782c8561826c9246d3272de834b2c18d5ce90313",
+          "edicao": "acesso 2026-10-14"
+        }
+      },
+      {
+        "catalogoId": "CREATININA",
+        "protocoloId": "cec-carbopac",
+        "contexto": "FBC, EUC, eGFR, and LFTs at baseline and prior to each cycle. Calcium and magnesium at baseline and as clinically indicated. Recalculation of carboplatin doses at each cycle is unnecessary, except when baseline kidney function (e.g., eGFR) alters by greater than 20% or",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "https://www.eviq.org.au/medical-oncology/head-and-neck/recurrent-or-metastatic/3579",
+          "localizador": "f1-b2-fontes-externas/cec-ntg-vulva/eviq-3579-carbo-paclitaxel-hn.txt:L142-L144; Blood tests / TESTS",
+          "trecho": "FBC, EUC, eGFR, and LFTs at baseline and prior to each cycle. Calcium and magnesium at\n                           baseline and as clinically indicated. Recalculation of carboplatin doses at each cycle is\n                           unnecessary, except when baseline kidney function (e.g., eGFR) alters by greater than 20% or",
+          "sha256": "1811c69dd1c0b08a3e9936702d9e978ad36a5e74244d3823412aaa5f911fd70d",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO",
+          "sourceId": "EXT-CNV-008",
+          "sha256Original": "4bc8230b130195125dcdc514782c8561826c9246d3272de834b2c18d5ce90313",
+          "edicao": "acesso 2026-10-14"
+        }
+      },
+      {
+        "catalogoId": "CALCIO",
+        "protocoloId": "cec-carbopac",
+        "contexto": "FBC, EUC, eGFR, and LFTs at baseline and prior to each cycle. Calcium and magnesium at baseline and as clinically indicated. Recalculation of carboplatin doses at each cycle is unnecessary, except when baseline kidney function (e.g., eGFR) alters by greater than 20% or",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "https://www.eviq.org.au/medical-oncology/head-and-neck/recurrent-or-metastatic/3579",
+          "localizador": "f1-b2-fontes-externas/cec-ntg-vulva/eviq-3579-carbo-paclitaxel-hn.txt:L142-L144; Blood tests / TESTS",
+          "trecho": "FBC, EUC, eGFR, and LFTs at baseline and prior to each cycle. Calcium and magnesium at\n                           baseline and as clinically indicated. Recalculation of carboplatin doses at each cycle is\n                           unnecessary, except when baseline kidney function (e.g., eGFR) alters by greater than 20% or",
+          "sha256": "1811c69dd1c0b08a3e9936702d9e978ad36a5e74244d3823412aaa5f911fd70d",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO",
+          "sourceId": "EXT-CNV-008",
+          "sha256Original": "4bc8230b130195125dcdc514782c8561826c9246d3272de834b2c18d5ce90313",
+          "edicao": "acesso 2026-10-14"
+        }
+      },
+      {
+        "catalogoId": "MAGNESIO",
+        "protocoloId": "cec-carbopac",
+        "contexto": "FBC, EUC, eGFR, and LFTs at baseline and prior to each cycle. Calcium and magnesium at baseline and as clinically indicated. Recalculation of carboplatin doses at each cycle is unnecessary, except when baseline kidney function (e.g., eGFR) alters by greater than 20% or",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "https://www.eviq.org.au/medical-oncology/head-and-neck/recurrent-or-metastatic/3579",
+          "localizador": "f1-b2-fontes-externas/cec-ntg-vulva/eviq-3579-carbo-paclitaxel-hn.txt:L142-L144; Blood tests / TESTS",
+          "trecho": "FBC, EUC, eGFR, and LFTs at baseline and prior to each cycle. Calcium and magnesium at\n                           baseline and as clinically indicated. Recalculation of carboplatin doses at each cycle is\n                           unnecessary, except when baseline kidney function (e.g., eGFR) alters by greater than 20% or",
+          "sha256": "1811c69dd1c0b08a3e9936702d9e978ad36a5e74244d3823412aaa5f911fd70d",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO",
+          "sourceId": "EXT-CNV-008",
+          "sha256Original": "4bc8230b130195125dcdc514782c8561826c9246d3272de834b2c18d5ce90313",
+          "edicao": "acesso 2026-10-14"
+        }
+      },
+      {
+        "catalogoId": "HEMOGRAMA",
+        "protocoloId": "cec-pembro",
+        "contexto": "FBC, EUC, eGFR, LFTs, serum cortisol, TFTs, and BSL at baseline. Repeat FBC, EUC, eGFR, LFTs and BSL prior to each cycle. Check TFTs every 4-6 weeks during treatment and every 12 weeks as indicated after finalising treatment. Consider checking serum cortisol every 4-6 weeks during treatment and every 12 weeks as indicated after finalising treatment. Check lipase and amylase if symptomatic of pancreatitis. In the absence of suspicion of immune-related adverse events less frequent monitoring may be applicable, according to institutional guidelines. Evidence for the frequency of routine blood testing with immunotherapies varies within published studies and guidelines.",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "https://www.eviq.org.au/p/5066",
+          "localizador": "f1-b2-fontes-externas/sarcomas/eviq-5066-pembro-tumouragnostic.txt:L369-L371; Blood tests / TESTS",
+          "trecho": "FBC, EUC, eGFR, LFTs, serum cortisol, TFTs, and BSL at baseline.\nRepeat FBC, EUC, eGFR, LFTs and BSL prior to each cycle. Check TFTs every 4-6 weeks during treatment and every 12 weeks as indicated after finalising treatment. Consider checking serum cortisol every 4-6 weeks during treatment and every 12 weeks as indicated after finalising treatment. Check lipase and amylase if symptomatic of pancreatitis.\nIn the absence of suspicion of immune-related adverse events less frequent monitoring may be applicable, according to institutional guidelines. Evidence for the frequency of routine blood testing with immunotherapies varies within published studies and guidelines.",
+          "sha256": "bb9ca81609b51411bdd629a5b1602a06f599da668b1cdf3ed78012f245df4f60",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO",
+          "sourceId": "EXT-SARC-008",
+          "sha256Original": "8f0d7dc3d23e5238b7f352e3f231f791b612f491cd6bfd562bbe79c19b3c5fd2",
+          "edicao": "v1 (acesso 2026-10-14)"
+        }
+      },
+      {
+        "catalogoId": "CREATININA",
+        "protocoloId": "cec-pembro",
+        "contexto": "FBC, EUC, eGFR, LFTs, serum cortisol, TFTs, and BSL at baseline. Repeat FBC, EUC, eGFR, LFTs and BSL prior to each cycle. Check TFTs every 4-6 weeks during treatment and every 12 weeks as indicated after finalising treatment. Consider checking serum cortisol every 4-6 weeks during treatment and every 12 weeks as indicated after finalising treatment. Check lipase and amylase if symptomatic of pancreatitis. In the absence of suspicion of immune-related adverse events less frequent monitoring may be applicable, according to institutional guidelines. Evidence for the frequency of routine blood testing with immunotherapies varies within published studies and guidelines.",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "https://www.eviq.org.au/p/5066",
+          "localizador": "f1-b2-fontes-externas/sarcomas/eviq-5066-pembro-tumouragnostic.txt:L369-L371; Blood tests / TESTS",
+          "trecho": "FBC, EUC, eGFR, LFTs, serum cortisol, TFTs, and BSL at baseline.\nRepeat FBC, EUC, eGFR, LFTs and BSL prior to each cycle. Check TFTs every 4-6 weeks during treatment and every 12 weeks as indicated after finalising treatment. Consider checking serum cortisol every 4-6 weeks during treatment and every 12 weeks as indicated after finalising treatment. Check lipase and amylase if symptomatic of pancreatitis.\nIn the absence of suspicion of immune-related adverse events less frequent monitoring may be applicable, according to institutional guidelines. Evidence for the frequency of routine blood testing with immunotherapies varies within published studies and guidelines.",
+          "sha256": "bb9ca81609b51411bdd629a5b1602a06f599da668b1cdf3ed78012f245df4f60",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO",
+          "sourceId": "EXT-SARC-008",
+          "sha256Original": "8f0d7dc3d23e5238b7f352e3f231f791b612f491cd6bfd562bbe79c19b3c5fd2",
+          "edicao": "v1 (acesso 2026-10-14)"
+        }
+      },
+      {
+        "catalogoId": "HEMOGRAMA",
+        "protocoloId": "cec-cis-rt",
+        "contexto": "FBC, EUC, eGFR, LFTs, calcium and magnesium at baseline and prior to each cycle. Routine screening for HBsAg and anti-HBc is recommended prior to initiation of treatment.",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "https://www.eviq.org.au/medical-oncology/head-and-neck/locally-advanced/292",
+          "localizador": "f1-b2-fontes-externas/cec-ntg-vulva/eviq-292-cisplatin-weekly-crt.txt:L138-L140; Blood tests / TESTS",
+          "trecho": "FBC, EUC, eGFR, LFTs, calcium and magnesium at baseline and prior to each cycle.\n\n                           Routine screening for HBsAg and anti-HBc is recommended prior to initiation of treatment.",
+          "sha256": "5eb0511575b67bab77ca1a63a763b3a0b8530217e9e9a391af11f9b062c608d5",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO",
+          "sourceId": "EXT-CNV-016",
+          "sha256Original": "1ade96c5a45617c0f4e7974493ae3cc2795d1ebc5a23fdbfa614d28e6d0bb8f1",
+          "edicao": "v10 (PDF v8)"
+        }
+      },
+      {
+        "catalogoId": "CREATININA",
+        "protocoloId": "cec-cis-rt",
+        "contexto": "FBC, EUC, eGFR, LFTs, calcium and magnesium at baseline and prior to each cycle. Routine screening for HBsAg and anti-HBc is recommended prior to initiation of treatment.",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "https://www.eviq.org.au/medical-oncology/head-and-neck/locally-advanced/292",
+          "localizador": "f1-b2-fontes-externas/cec-ntg-vulva/eviq-292-cisplatin-weekly-crt.txt:L138-L140; Blood tests / TESTS",
+          "trecho": "FBC, EUC, eGFR, LFTs, calcium and magnesium at baseline and prior to each cycle.\n\n                           Routine screening for HBsAg and anti-HBc is recommended prior to initiation of treatment.",
+          "sha256": "5eb0511575b67bab77ca1a63a763b3a0b8530217e9e9a391af11f9b062c608d5",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO",
+          "sourceId": "EXT-CNV-016",
+          "sha256Original": "1ade96c5a45617c0f4e7974493ae3cc2795d1ebc5a23fdbfa614d28e6d0bb8f1",
+          "edicao": "v10 (PDF v8)"
+        }
+      },
+      {
+        "catalogoId": "CALCIO",
+        "protocoloId": "cec-cis-rt",
+        "contexto": "FBC, EUC, eGFR, LFTs, calcium and magnesium at baseline and prior to each cycle. Routine screening for HBsAg and anti-HBc is recommended prior to initiation of treatment.",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "https://www.eviq.org.au/medical-oncology/head-and-neck/locally-advanced/292",
+          "localizador": "f1-b2-fontes-externas/cec-ntg-vulva/eviq-292-cisplatin-weekly-crt.txt:L138-L140; Blood tests / TESTS",
+          "trecho": "FBC, EUC, eGFR, LFTs, calcium and magnesium at baseline and prior to each cycle.\n\n                           Routine screening for HBsAg and anti-HBc is recommended prior to initiation of treatment.",
+          "sha256": "5eb0511575b67bab77ca1a63a763b3a0b8530217e9e9a391af11f9b062c608d5",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO",
+          "sourceId": "EXT-CNV-016",
+          "sha256Original": "1ade96c5a45617c0f4e7974493ae3cc2795d1ebc5a23fdbfa614d28e6d0bb8f1",
+          "edicao": "v10 (PDF v8)"
+        }
+      },
+      {
+        "catalogoId": "MAGNESIO",
+        "protocoloId": "cec-cis-rt",
+        "contexto": "FBC, EUC, eGFR, LFTs, calcium and magnesium at baseline and prior to each cycle. Routine screening for HBsAg and anti-HBc is recommended prior to initiation of treatment.",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "https://www.eviq.org.au/medical-oncology/head-and-neck/locally-advanced/292",
+          "localizador": "f1-b2-fontes-externas/cec-ntg-vulva/eviq-292-cisplatin-weekly-crt.txt:L138-L140; Blood tests / TESTS",
+          "trecho": "FBC, EUC, eGFR, LFTs, calcium and magnesium at baseline and prior to each cycle.\n\n                           Routine screening for HBsAg and anti-HBc is recommended prior to initiation of treatment.",
+          "sha256": "5eb0511575b67bab77ca1a63a763b3a0b8530217e9e9a391af11f9b062c608d5",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO",
+          "sourceId": "EXT-CNV-016",
+          "sha256Original": "1ade96c5a45617c0f4e7974493ae3cc2795d1ebc5a23fdbfa614d28e6d0bb8f1",
+          "edicao": "v10 (PDF v8)"
+        }
+      },
+      {
+        "catalogoId": "HEMOGRAMA",
+        "protocoloId": "cec-pac-semanal",
+        "contexto": "FBC, EUC, eGFR and LFTs at baseline, prior to each treatment for 4 weeks, then monthly and as clinically indicated.",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "evidência local f1-b2-fontes-externas/cec-ntg-vulva/eviq-1948-paclitaxel-mono.txt",
+          "localizador": "f1-b2-fontes-externas/cec-ntg-vulva/eviq-1948-paclitaxel-mono.txt:L148-L150; Blood tests / TESTS",
+          "trecho": "FBC, EUC, eGFR and LFTs at baseline, prior to each treatment for 4 weeks, then monthly and as\n                       clinically indicated.",
+          "sha256": "46d56142f0c0594348a82ba70313412d9fd24cd5395482274b91a63e0ac403be",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO"
+        }
+      },
+      {
+        "catalogoId": "CREATININA",
+        "protocoloId": "cec-pac-semanal",
+        "contexto": "FBC, EUC, eGFR and LFTs at baseline, prior to each treatment for 4 weeks, then monthly and as clinically indicated.",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "evidência local f1-b2-fontes-externas/cec-ntg-vulva/eviq-1948-paclitaxel-mono.txt",
+          "localizador": "f1-b2-fontes-externas/cec-ntg-vulva/eviq-1948-paclitaxel-mono.txt:L148-L150; Blood tests / TESTS",
+          "trecho": "FBC, EUC, eGFR and LFTs at baseline, prior to each treatment for 4 weeks, then monthly and as\n                       clinically indicated.",
+          "sha256": "46d56142f0c0594348a82ba70313412d9fd24cd5395482274b91a63e0ac403be",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO"
+        }
+      },
+      {
+        "catalogoId": "CORTISOL",
+        "protocoloId": "cec-pembro",
+        "contexto": "Basal; TFTs = TSH/T4 livre. Periodicidade e exames condicionais conforme a fonte específica; não universalizar aos demais esquemas.",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "https://www.eviq.org.au/p/5066",
+          "localizador": "f1-b2-fontes-externas/sarcomas/eviq-5066-pembro-tumouragnostic.txt:L369-L369; Blood tests",
+          "trecho": "FBC, EUC, eGFR, LFTs, serum cortisol, TFTs, and BSL at baseline.",
+          "sha256": "bb9ca81609b51411bdd629a5b1602a06f599da668b1cdf3ed78012f245df4f60",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO",
+          "sourceId": "EXT-SARC-008",
+          "sha256Original": "8f0d7dc3d23e5238b7f352e3f231f791b612f491cd6bfd562bbe79c19b3c5fd2",
+          "edicao": "v1 (acesso 2026-10-14)"
+        }
+      },
+      {
+        "catalogoId": "TSH",
+        "protocoloId": "cec-pembro",
+        "contexto": "Basal; TFTs = TSH/T4 livre. Periodicidade e exames condicionais conforme a fonte específica; não universalizar aos demais esquemas.",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "https://www.eviq.org.au/p/5066",
+          "localizador": "f1-b2-fontes-externas/sarcomas/eviq-5066-pembro-tumouragnostic.txt:L369-L369; Blood tests",
+          "trecho": "FBC, EUC, eGFR, LFTs, serum cortisol, TFTs, and BSL at baseline.",
+          "sha256": "bb9ca81609b51411bdd629a5b1602a06f599da668b1cdf3ed78012f245df4f60",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO",
+          "sourceId": "EXT-SARC-008",
+          "sha256Original": "8f0d7dc3d23e5238b7f352e3f231f791b612f491cd6bfd562bbe79c19b3c5fd2",
+          "edicao": "v1 (acesso 2026-10-14)"
+        }
+      },
+      {
+        "catalogoId": "T4_LIVRE",
+        "protocoloId": "cec-pembro",
+        "contexto": "Basal; TFTs = TSH/T4 livre. Periodicidade e exames condicionais conforme a fonte específica; não universalizar aos demais esquemas.",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "https://www.eviq.org.au/p/5066",
+          "localizador": "f1-b2-fontes-externas/sarcomas/eviq-5066-pembro-tumouragnostic.txt:L369-L369; Blood tests",
+          "trecho": "FBC, EUC, eGFR, LFTs, serum cortisol, TFTs, and BSL at baseline.",
+          "sha256": "bb9ca81609b51411bdd629a5b1602a06f599da668b1cdf3ed78012f245df4f60",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO",
+          "sourceId": "EXT-SARC-008",
+          "sha256Original": "8f0d7dc3d23e5238b7f352e3f231f791b612f491cd6bfd562bbe79c19b3c5fd2",
+          "edicao": "v1 (acesso 2026-10-14)"
+        }
+      },
+      {
+        "catalogoId": "GLICEMIA",
+        "protocoloId": "cec-pembro",
+        "contexto": "Basal; TFTs = TSH/T4 livre. Periodicidade e exames condicionais conforme a fonte específica; não universalizar aos demais esquemas.",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "https://www.eviq.org.au/p/5066",
+          "localizador": "f1-b2-fontes-externas/sarcomas/eviq-5066-pembro-tumouragnostic.txt:L369-L369; Blood tests",
+          "trecho": "FBC, EUC, eGFR, LFTs, serum cortisol, TFTs, and BSL at baseline.",
+          "sha256": "bb9ca81609b51411bdd629a5b1602a06f599da668b1cdf3ed78012f245df4f60",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO",
+          "sourceId": "EXT-SARC-008",
+          "sha256Original": "8f0d7dc3d23e5238b7f352e3f231f791b612f491cd6bfd562bbe79c19b3c5fd2",
+          "edicao": "v1 (acesso 2026-10-14)"
+        }
+      },
+      {
+        "catalogoId": "CORTISOL",
+        "protocoloId": "cec-cemiplimabe",
+        "contexto": "Basal; TFTs = TSH/T4 livre. Não importar periodicidade do pembrolizumabe.",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "https://www.eviq.org.au/medical-oncology/skin/locally-advanced-or-metastatic-cutaneous-squamous-cell-carcinoma/4151",
+          "localizador": "f1-b2-fontes-externas/cec-ntg-vulva/eviq-4151-cemiplimab.txt:L172-L174; Blood tests",
+          "trecho": "FBC, EUC, eGFR, LFTs, serum cortisol, TFTs and BSL at baseline.\n\n                                           Repeat FBC, EUC, eGFR, LFTs and BSL prior to each cycle and serum cortisol and TFTs alternate",
+          "sha256": "f1fb1e8922705054ee8c10134e839d7edd246a03bd4e58382c4063572d845dee",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO",
+          "sourceId": "EXT-CNV-001",
+          "sha256Original": "c006e4a23668402ff16cecbd7331b7167f04e2205a037126d557d46434b352fa",
+          "edicao": "v5 (review due 31/12/2028)"
+        }
+      },
+      {
+        "catalogoId": "TSH",
+        "protocoloId": "cec-cemiplimabe",
+        "contexto": "Basal; TFTs = TSH/T4 livre. Não importar periodicidade do pembrolizumabe.",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "https://www.eviq.org.au/medical-oncology/skin/locally-advanced-or-metastatic-cutaneous-squamous-cell-carcinoma/4151",
+          "localizador": "f1-b2-fontes-externas/cec-ntg-vulva/eviq-4151-cemiplimab.txt:L172-L174; Blood tests",
+          "trecho": "FBC, EUC, eGFR, LFTs, serum cortisol, TFTs and BSL at baseline.\n\n                                           Repeat FBC, EUC, eGFR, LFTs and BSL prior to each cycle and serum cortisol and TFTs alternate",
+          "sha256": "f1fb1e8922705054ee8c10134e839d7edd246a03bd4e58382c4063572d845dee",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO",
+          "sourceId": "EXT-CNV-001",
+          "sha256Original": "c006e4a23668402ff16cecbd7331b7167f04e2205a037126d557d46434b352fa",
+          "edicao": "v5 (review due 31/12/2028)"
+        }
+      },
+      {
+        "catalogoId": "T4_LIVRE",
+        "protocoloId": "cec-cemiplimabe",
+        "contexto": "Basal; TFTs = TSH/T4 livre. Não importar periodicidade do pembrolizumabe.",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "https://www.eviq.org.au/medical-oncology/skin/locally-advanced-or-metastatic-cutaneous-squamous-cell-carcinoma/4151",
+          "localizador": "f1-b2-fontes-externas/cec-ntg-vulva/eviq-4151-cemiplimab.txt:L172-L174; Blood tests",
+          "trecho": "FBC, EUC, eGFR, LFTs, serum cortisol, TFTs and BSL at baseline.\n\n                                           Repeat FBC, EUC, eGFR, LFTs and BSL prior to each cycle and serum cortisol and TFTs alternate",
+          "sha256": "f1fb1e8922705054ee8c10134e839d7edd246a03bd4e58382c4063572d845dee",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO",
+          "sourceId": "EXT-CNV-001",
+          "sha256Original": "c006e4a23668402ff16cecbd7331b7167f04e2205a037126d557d46434b352fa",
+          "edicao": "v5 (review due 31/12/2028)"
+        }
+      },
+      {
+        "catalogoId": "GLICEMIA",
+        "protocoloId": "cec-cemiplimabe",
+        "contexto": "Basal; TFTs = TSH/T4 livre. Não importar periodicidade do pembrolizumabe.",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "https://www.eviq.org.au/medical-oncology/skin/locally-advanced-or-metastatic-cutaneous-squamous-cell-carcinoma/4151",
+          "localizador": "f1-b2-fontes-externas/cec-ntg-vulva/eviq-4151-cemiplimab.txt:L172-L174; Blood tests",
+          "trecho": "FBC, EUC, eGFR, LFTs, serum cortisol, TFTs and BSL at baseline.\n\n                                           Repeat FBC, EUC, eGFR, LFTs and BSL prior to each cycle and serum cortisol and TFTs alternate",
+          "sha256": "f1fb1e8922705054ee8c10134e839d7edd246a03bd4e58382c4063572d845dee",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO",
+          "sourceId": "EXT-CNV-001",
+          "sha256Original": "c006e4a23668402ff16cecbd7331b7167f04e2205a037126d557d46434b352fa",
+          "edicao": "v5 (review due 31/12/2028)"
+        }
+      },
+      {
+        "catalogoId": "AUDIOMETRIA_TONAL",
+        "protocoloId": "cec-cis-rt",
+        "contexto": "Audiometria se surgirem sintomas; não tornar rotina universal.",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "https://www.eviq.org.au/medical-oncology/head-and-neck/locally-advanced/292",
+          "localizador": "f1-b2-fontes-externas/cec-ntg-vulva/eviq-292-cisplatin-weekly-crt.txt:L122-L122; Ototoxicity",
+          "trecho": "Peripheral neuropathy      An audiometry test should be performed if symptoms develop.",
+          "sha256": "5eb0511575b67bab77ca1a63a763b3a0b8530217e9e9a391af11f9b062c608d5",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO",
+          "sourceId": "EXT-CNV-016",
+          "sha256Original": "1ade96c5a45617c0f4e7974493ae3cc2795d1ebc5a23fdbfa614d28e6d0bb8f1",
+          "edicao": "v10 (PDF v8)"
+        }
+      }
+    ],
+    "fonte": {
+      "tipo": "PROTOCOLO_INSTITUCIONAL",
+      "referencia": "ligacoes.examesFontes[catalogoId,protocoloId] — cada ligação acrescentada tem fonte própria com trecho, localizador e SHA-256.",
+      "trecho": "Hemograma, função renal e exames específicos vinculados às fontes por protocolo. Ligações herdadas sem comprovação nesta rodada permanecem descritas nas pendências; a lista não representa pedido universal.",
+      "estado": "PARCIAL"
+    }
   },
   "pendencias": [
     {
@@ -430,6 +1112,136 @@
       "classe": "BUSCA_LOCAL_NEGATIVA",
       "buscasFeitas": [
         "materiais locais 2026-10-14"
+      ]
+    },
+    {
+      "texto": "H2 cec-cemiplimabe: disponibilidade SUS do esquema e de cada fármaco não comprovada; sem código específico comprovado para este cenário.",
+      "classe": "DISPONIBILIDADE_SUS_NAO_COMPROVADA",
+      "protocoloId": "cec-cemiplimabe",
+      "buscasFeitas": [
+        "corpus/f0c/sigtap/2026-09.json: nomes e CIDs do pack; códigos relacionados nenhum.",
+        "ZIP oficial 2026-09: tb_procedimento completo, por nomes de todos os fármacos do protocolo; sem consulta de rede ao SIGTAP.",
+        "docs/referencias/: busca textual por RENAME, disponibilidade SUS e nomes dos fármacos; compêndios secundários sem prova oficial específica de acesso para estes esquemas.",
+        "RENAME 2024, edição apontada vigente no portal do Ministério da Saúde; resultados por fármaco em tratamento.protocolos[id=cec-cemiplimabe].sus.farmacos.",
+        "Ausência de confirmação institucional de estoque/acesso por indicação."
+      ]
+    },
+    {
+      "texto": "H2 cec-carbopac: disponibilidade SUS do esquema e de cada fármaco não comprovada; sem código específico comprovado para este cenário.",
+      "classe": "DISPONIBILIDADE_SUS_NAO_COMPROVADA",
+      "protocoloId": "cec-carbopac",
+      "buscasFeitas": [
+        "corpus/f0c/sigtap/2026-09.json: nomes e CIDs do pack; códigos relacionados nenhum.",
+        "ZIP oficial 2026-09: tb_procedimento completo, por nomes de todos os fármacos do protocolo; sem consulta de rede ao SIGTAP.",
+        "docs/referencias/: busca textual por RENAME, disponibilidade SUS e nomes dos fármacos; compêndios secundários sem prova oficial específica de acesso para estes esquemas.",
+        "RENAME 2024, edição apontada vigente no portal do Ministério da Saúde; resultados por fármaco em tratamento.protocolos[id=cec-carbopac].sus.farmacos.",
+        "Ausência de confirmação institucional de estoque/acesso por indicação."
+      ]
+    },
+    {
+      "texto": "H2 cec-pembro: disponibilidade SUS do esquema e de cada fármaco não comprovada; sem código específico comprovado para este cenário.",
+      "classe": "DISPONIBILIDADE_SUS_NAO_COMPROVADA",
+      "protocoloId": "cec-pembro",
+      "buscasFeitas": [
+        "corpus/f0c/sigtap/2026-09.json: nomes e CIDs do pack; códigos relacionados nenhum.",
+        "ZIP oficial 2026-09: tb_procedimento completo, por nomes de todos os fármacos do protocolo; sem consulta de rede ao SIGTAP.",
+        "docs/referencias/: busca textual por RENAME, disponibilidade SUS e nomes dos fármacos; compêndios secundários sem prova oficial específica de acesso para estes esquemas.",
+        "RENAME 2024, edição apontada vigente no portal do Ministério da Saúde; resultados por fármaco em tratamento.protocolos[id=cec-pembro].sus.farmacos.",
+        "Ausência de confirmação institucional de estoque/acesso por indicação."
+      ]
+    },
+    {
+      "texto": "H2 cec-cis-rt: disponibilidade SUS do esquema e de cada fármaco não comprovada; sem código específico comprovado para este cenário.",
+      "classe": "DISPONIBILIDADE_SUS_NAO_COMPROVADA",
+      "protocoloId": "cec-cis-rt",
+      "buscasFeitas": [
+        "corpus/f0c/sigtap/2026-09.json: nomes e CIDs do pack; códigos relacionados nenhum.",
+        "ZIP oficial 2026-09: tb_procedimento completo, por nomes de todos os fármacos do protocolo; sem consulta de rede ao SIGTAP.",
+        "docs/referencias/: busca textual por RENAME, disponibilidade SUS e nomes dos fármacos; compêndios secundários sem prova oficial específica de acesso para estes esquemas.",
+        "RENAME 2024, edição apontada vigente no portal do Ministério da Saúde; resultados por fármaco em tratamento.protocolos[id=cec-cis-rt].sus.farmacos.",
+        "Ausência de confirmação institucional de estoque/acesso por indicação."
+      ]
+    },
+    {
+      "texto": "H2 cec-pac-semanal: disponibilidade SUS do esquema e de cada fármaco não comprovada; sem código específico comprovado para este cenário.",
+      "classe": "DISPONIBILIDADE_SUS_NAO_COMPROVADA",
+      "protocoloId": "cec-pac-semanal",
+      "buscasFeitas": [
+        "corpus/f0c/sigtap/2026-09.json: nomes e CIDs do pack; códigos relacionados nenhum.",
+        "ZIP oficial 2026-09: tb_procedimento completo, por nomes de todos os fármacos do protocolo; sem consulta de rede ao SIGTAP.",
+        "docs/referencias/: busca textual por RENAME, disponibilidade SUS e nomes dos fármacos; compêndios secundários sem prova oficial específica de acesso para estes esquemas.",
+        "RENAME 2024, edição apontada vigente no portal do Ministério da Saúde; resultados por fármaco em tratamento.protocolos[id=cec-pac-semanal].sus.farmacos.",
+        "Ausência de confirmação institucional de estoque/acesso por indicação."
+      ]
+    },
+    {
+      "texto": "H4 cec-cemiplimabe: risco FN sem classificação específica verificada.",
+      "classe": "SUPORTE_SEM_FONTE_ESPECIFICA",
+      "protocoloId": "cec-cemiplimabe",
+      "buscasFeitas": [
+        "f1-b2-fontes-externas/cec-ntg-vulva/eviq-4151-cemiplimab.txt: Clinical information, Evidence/Toxicity, growth factor support e Blood tests.",
+        "corpus/4-interacoes-contraindicacoes/risco-neutropenia-febril.v1.RASCUNHO.json: sem linha específica para este esquema; G-CSF por desenho não equivale a faixa percentual de FN."
+      ]
+    },
+    {
+      "texto": "H4 cec-carbopac: risco FN sem classificação específica verificada.",
+      "classe": "SUPORTE_SEM_FONTE_ESPECIFICA",
+      "protocoloId": "cec-carbopac",
+      "buscasFeitas": [
+        "f1-b2-fontes-externas/cec-ntg-vulva/eviq-3579-carbo-paclitaxel-hn.txt: Clinical information, Evidence/Toxicity, growth factor support e Blood tests.",
+        "corpus/4-interacoes-contraindicacoes/risco-neutropenia-febril.v1.RASCUNHO.json: sem linha específica para este esquema; G-CSF por desenho não equivale a faixa percentual de FN."
+      ]
+    },
+    {
+      "texto": "H4 cec-pembro: risco FN sem classificação específica verificada.",
+      "classe": "SUPORTE_SEM_FONTE_ESPECIFICA",
+      "protocoloId": "cec-pembro",
+      "buscasFeitas": [
+        "f1-b2-fontes-externas/sarcomas/eviq-5066-pembro-tumouragnostic.txt: Clinical information, Evidence/Toxicity, growth factor support e Blood tests.",
+        "corpus/4-interacoes-contraindicacoes/risco-neutropenia-febril.v1.RASCUNHO.json: sem linha específica para este esquema; G-CSF por desenho não equivale a faixa percentual de FN."
+      ]
+    },
+    {
+      "texto": "H4 cec-cis-rt: risco FN sem classificação específica verificada.",
+      "classe": "SUPORTE_SEM_FONTE_ESPECIFICA",
+      "protocoloId": "cec-cis-rt",
+      "buscasFeitas": [
+        "f1-b2-fontes-externas/cec-ntg-vulva/eviq-292-cisplatin-weekly-crt.txt: Clinical information, Evidence/Toxicity, growth factor support e Blood tests.",
+        "corpus/4-interacoes-contraindicacoes/risco-neutropenia-febril.v1.RASCUNHO.json: sem linha específica para este esquema; G-CSF por desenho não equivale a faixa percentual de FN."
+      ]
+    },
+    {
+      "texto": "H4 cec-pac-semanal: risco FN sem classificação específica verificada.",
+      "classe": "SUPORTE_SEM_FONTE_ESPECIFICA",
+      "protocoloId": "cec-pac-semanal",
+      "buscasFeitas": [
+        "f1-b2-fontes-externas/cec-ntg-vulva/eviq-1948-paclitaxel-mono.txt: Clinical information, Evidence/Toxicity, growth factor support e Blood tests.",
+        "corpus/4-interacoes-contraindicacoes/risco-neutropenia-febril.v1.RASCUNHO.json: sem linha específica para este esquema; G-CSF por desenho não equivale a faixa percentual de FN."
+      ]
+    },
+    {
+      "texto": "H4: aliases herdados da base sem ID exato no catálogo; preservados para não escolher segmento/técnica clínica. Não tratar estas ligações como IDs resolvidos.",
+      "classe": "CATALOGO_ID_PENDENTE",
+      "ids": [
+        "BIOPSIA",
+        "TC_CERVICO_TORACICA",
+        "TC_TORAX_ABDOME"
+      ],
+      "buscasFeitas": [
+        "corpus/exames/exames-sigtap.v1.json, secoes[*].id (catálogo usado pelos painéis de corpus/1-exames/).",
+        "corpus/1-exames/: não há definição canônica de RM_LOCAL, BIOPSIA nem das composições genéricas TC_TORAX_ABDOME, TC_TORAX_ABDOME_PELVE e TC_CERVICO_TORACICA."
+      ]
+    },
+    {
+      "texto": "H4: ligações já presentes na base sem proveniência clínica revalidada nesta rodada; não contam como exames acrescentados/verificados.",
+      "classe": "LIGACAO_HERDADA_A_CONFERIR",
+      "ids": [
+        "BIOPSIA",
+        "TC_CERVICO_TORACICA",
+        "TC_TORAX_ABDOME"
+      ],
+      "buscasFeitas": [
+        "Inventário integral dos seis packs em 9517c76; comparação com o catálogo e com as capturas específicas de monitorização dos protocolos."
       ]
     }
   ],
@@ -496,6 +1308,20 @@
         "susPreenchidos": 0,
         "notas": [
           "D-F1-49: fichas institucionais novas sem SISAC; mudança de fonte não aprova doses"
+        ]
+      },
+      {
+        "data": "2026-10-14",
+        "redator": "Codex — SETOR PACKS-B2 H2+H4",
+        "susPreenchidos": 0,
+        "protocolosSusVerificar": 5,
+        "examesAcrescentados": 6,
+        "suportesPorProtocolo": 5,
+        "notas": [
+          "RENAME 2024 consultada (edição vigente indicada pelo Ministério da Saúde); SIGTAP 2026-09 consultado somente em arquivos locais.",
+          "Códigos administrativos e RENAME não comprovam acesso ao esquema no serviço nem cobertura ANS.",
+          "Fontes externas do manifesto pareadas por SHA-256; demais trechos têm hash da captura textual e localizador exato.",
+          "Preservados RASCUNHO, consultavel true, alerta false, aprovacaoClinica null e todas as doses."
         ]
       }
     ]

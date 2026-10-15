@@ -279,7 +279,7 @@ describe('F1-N ponte no HTTP real', () => {
       expect((await a.post('/biblioteca/consultar', { filtros: {} })).body.itens).toEqual([]); // RASCUNHO não é consultável
       for (const ref of payload.manifesto.itens) expect((await a.post('/biblioteca/curar', { pacoteId: id, itemId: ref.id, expectedHash: hash, estado: 'ALERTA' })).body.codigo).toBe('ALERTA_SEM_SCHEMA_EXECUTAVEL');
       for (const ref of payload.manifesto.itens) expect((await a.post('/biblioteca/curar', { pacoteId: id, itemId: ref.id, expectedHash: hash, estado: 'CONSULTAVEL' })).status).toBe(200);
-      expect((await a.post('/biblioteca/ativar', { pacoteId: id, expectedHash: hash })).status).toBe(200);
+      expect((await a.post('/biblioteca/ativar', { pacoteId: id, expectedHash: hash, expectedCuradoriaHash: (await a.post('/biblioteca/estado', {pacoteId:id})).body.curadoriaHash })).status).toBe(200);
       const consulta = await a.post('/biblioteca/consultar', { filtros: { tumor: 'mama' } });
       expect(consulta.body.itens.map((i: any) => i.id).sort()).toEqual(['1-exames-labs-painel-a', '1-exames-path-painel-b']);
       // REGRA manual também não ganha ALERTA no HTTP (proteção preservada — adendo item 5)
