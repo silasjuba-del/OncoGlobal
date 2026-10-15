@@ -401,13 +401,14 @@ export function lerConsulta(db: DatabaseSync, patientId: string, agora: string, 
     ? alturaProjetada.valor : null;
   const imcDocumentado = imcDeMedidas(pesoNutricional?.kg, alturaDocumentada);
   if (lotesNoHorizonte.length > 1) pendenciasLeitura.push("TRIAGEM_NUTRICIONAL_LOTE_AMBIGUO");
-  const triagemNutricional = lotesNoHorizonte.length > 1 ? null : sugerirTriagemNutricional({
-    tumor: [presenteNoLote(loteNoHorizonte?.topografia), presenteNoLote(loteNoHorizonte?.histologia)].filter((t): t is string => t !== null).join(" ") || null,
+  const triagemNutricional = sugerirTriagemNutricional({
+    tumor: presenteNoLote(loteNoHorizonte?.topografia),
+    histologia: presenteNoLote(loteNoHorizonte?.histologia),
     cid: presenteNoLote(loteNoHorizonte?.cid),
     imc: imcDocumentado,
   });
   const textoNutricional = triagemNutricional ? textoSugestaoNutricional(triagemNutricional) : null;
-  if (triagemNutricional?.estado === "PENDENTE" && triagemNutricional.motivos.some(m => /divergentes/.test(m)))
+  if (triagemNutricional.motivos.some(m => /divergentes/.test(m)))
     pendenciasLeitura.push("TRIAGEM_NUTRICIONAL_SITIOS_NAO_RECONCILIADOS");
   const sugestaoNutricional = textoNutricional && pesoNutricional && triagemNutricional?.motivos.some(m => m.startsWith("IMC "))
     ? `${textoNutricional}; peso documentado em ${pesoNutricional.data} (fonte ${pesoNutricional.sourceId}); altura ${alturaDocumentada} cm: ${fontesAltura.map(f => `${f.data} (fonte ${f.fontes}; evento ${f.eventId})`).join("; ")}; conferir medidas atuais`

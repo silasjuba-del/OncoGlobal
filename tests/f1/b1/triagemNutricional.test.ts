@@ -4,6 +4,16 @@ import * as regras from "../../../src/rules/index.js";
 
 describe("F1-B1 triagem nutricional (D-F1-33, NRS-2002)", () => {
   it.each([
+    {tumor:"Mama",cid:"C15.4"},
+    {tumor:"Mama",histologia:"adenocarcinoma gástrico"},
+    {tumor:"Estômago",cid:"C15.4"},
+  ])("IMC é gatilho independente, mantendo o conflito entre fontes (%j)", entrada => {
+    const r=t({...entrada,imc:17});expect(r.estado).toBe("SUGERIR");
+    expect(r.motivos[0]).toBe("IMC 17 < 18");expect(r.motivos[1]).toMatch(/divergentes/);
+    expect(r.motivos.join(" ")).not.toMatch(/câncer de/);
+    expect(t({...entrada,imc:24}).estado).toBe("PENDENTE");
+  });
+  it.each([
     {tumor:"Estômago",cid:"C15.4"}, {tumor:"Esôfago",cid:"C16.9"}, {tumor:"Esôfago e estômago",cid:null},
     {tumor:"Mama",cid:"C15.4"}, {tumor:"Esôfago",cid:"C50.9"},
   ])("sítios contraditórios não elegem um diagnóstico (%j)", entrada => {

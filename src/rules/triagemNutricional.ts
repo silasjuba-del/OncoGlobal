@@ -5,6 +5,7 @@
 export interface EntradaTriagemNutricional {
   tumor: string | null | undefined;
   imc: number | null | undefined;
+  histologia?: string | null | undefined;
   /** CID-10 do lote, quando confirmado: C15 = esôfago, C16 = estômago (classificação, não decisão clínica nova). */
   cid?: string | null | undefined;
 }
@@ -43,17 +44,20 @@ export function sugerirTriagemNutricional(entrada: EntradaTriagemNutricional): R
   const motivos: string[] = [];
   const tumor = typeof entrada.tumor === "string" && entrada.tumor.trim() ? semAcento(entrada.tumor) : null;
   const cid = typeof entrada.cid === "string" && entrada.cid.trim() ? entrada.cid.trim().toUpperCase() : null;
+  const histologia = typeof entrada.histologia === "string" && entrada.histologia.trim() ? semAcento(entrada.histologia) : null;
   const porTexto = GATILHO_TUMOR.filter(([re]) => tumor !== null && re.test(tumor)).map(([, nome]) => nome);
+  const porHistologia = GATILHO_TUMOR.filter(([re]) => histologia !== null && re.test(histologia)).map(([, nome]) => nome);
   const porCodigo = GATILHO_CID.filter(([re]) => cid !== null && re.test(cid)).map(([, nome]) => nome);
-  const gatilhos = [...new Set([...porTexto, ...porCodigo])];
-  if (tumor !== null && cid !== null && gatilhos.length &&
-    (porTexto.length !== 1 || porCodigo.length !== 1 || porTexto[0] !== porCodigo[0]))
-    return { estado: "PENDENTE", instrumento: "NRS-2002", motivos: ["topografia/CID divergentes ou compatibilidade não confirmada — conferir fontes"], bloqueia: false };
-  if (gatilhos.length > 1) return { estado: "PENDENTE", instrumento: "NRS-2002",
-    motivos: [`sítios tumorais divergentes: ${gatilhos.join("; ")} — conferir fontes`], bloqueia: false };
-  const gatilho = gatilhos[0] ?? null;
-  if (gatilho) motivos.push(gatilho);
+  const gatilhos = [...new Set([...porTexto, ...porHistologia, ...porCodigo])];
+  const conflito = gatilhos.length > 1 || (gatilhos.length > 0 &&
+    ((tumor !== null && porTexto.length !== 1) || (cid !== null && porCodigo.length !== 1)));
   const imc = typeof entrada.imc === "number" && Number.isFinite(entrada.imc) && entrada.imc > 0 && entrada.imc < 100 ? entrada.imc : null;
+  if (conflito) {
+    const pendencia = "topografia, histologia ou CID divergentes ou não reconciliados — conferir fontes";
+    return { estado: imc !== null && imc < IMC_CORTE ? "SUGERIR" : "PENDENTE", instrumento: "NRS-2002",
+      motivos: [...(imc !== null && imc < IMC_CORTE ? [`IMC ${imcExibido(imc)} < ${IMC_CORTE}`] : []), pendencia], bloqueia: false };
+  }
+  if (gatilhos[0]) motivos.push(gatilhos[0]);
   if (imc !== null && imc < IMC_CORTE) motivos.push(`IMC ${imcExibido(imc)} < ${IMC_CORTE}`);
   if (motivos.length) return { estado: "SUGERIR", instrumento: "NRS-2002", motivos, bloqueia: false };
   if (tumor === null && cid === null) return { estado: "PENDENTE", instrumento: "NRS-2002", motivos: ["tumor não informado"], bloqueia: false };
