@@ -14,6 +14,20 @@ const entradaDose = (over: Partial<EntradaDose> = {}): EntradaDose => ({
 });
 
 describe("FN-04 reduções e arredondamento", () => {
+  it.each([NaN,Infinity,-1,Number.MAX_VALUE])("recusa base inválida %s sem dose utilizável", valor => {
+    expect(calcularDose(entradaDose({doseAdministradaAnteriorMg:valor}),doseRuleset)).toMatchObject({doseMg:null,estado:"PENDENTE"});
+  });
+  it("administração anterior zero conserva o valor documentado e exige conferência", () => {
+    expect(calcularDose(entradaDose({doseAdministradaAnteriorMg:0}),doseRuleset)).toMatchObject({doseMg:0,estado:"PENDENTE"});
+  });
+  it.each([NaN,Infinity,-1,0])("recusa peso inválido %s", valor => {
+    expect(calcularDose(entradaDose({pesoKg:valor}),doseRuleset)).toMatchObject({doseMg:null,estado:"PENDENTE"});
+  });
+  it("redução sem peso não é descrita como dose mantida", () => {
+    const resultado=calcularDose(entradaDose({pesoKg:null,reducaoPct:20}),doseRuleset);
+    expect(resultado.doseMg).toBe(80);expect(resultado.estado).toBe("PENDENTE");
+    expect(resultado.motivo).not.toContain("mantida");
+  });
   it("base 100 com reduções 0/20/30/40 → 100/80/70/60", () => {
     for (const [reducaoPct, esperado] of [[0, 100], [20, 80], [30, 70], [40, 60]] as const) {
       const r = calcularDose(entradaDose({ reducaoPct }), doseRuleset);

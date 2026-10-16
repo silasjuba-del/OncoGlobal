@@ -100,9 +100,17 @@ export function criarPortaHttp(opcoes: OpcoesHttp): PortaConsulta {
     async uploadDocumentoLocal(pedido,signal) {
       const {status,json}=await enviar("/consulta/upload",pedido,true,signal);
       const parsed=z.object({codigo:z.enum(["RASCUNHO_SALVO","REPLAY"]),draftId:z.string().min(1),revision:z.number().int().nonnegative(),
-        linkedPatientId:z.string().nullable(),requiresMedicalReview:z.literal(true),conversionStatus:z.enum(["PRONTO","PENDENTE"]).optional(),motivo:z.string().nullable().optional()}).safeParse(json);
+        linkedPatientId:z.string().nullable(),requiresMedicalReview:z.literal(true),conversionStatus:z.enum(["PRONTO","PENDENTE"]).optional(),motivo:z.string().nullable().optional(),
+        paginasPendentes:z.array(z.number().int().positive()).default([]),totalPaginas:z.number().int().nonnegative().nullable().default(null)}).safeParse(json);
       if((status===201||status===200)&&parsed.success){const {conversionStatus,motivo,...r}=parsed.data;return {...r,...(conversionStatus===undefined?{}:{conversionStatus}),...(motivo===undefined?{}:{motivo})};}
       throw new ErroPorta("UPLOAD_RECUSADO",codigoDe(json,"UPLOAD_INVALIDO"));
+    },
+    async importarTranscricaoLocal(pedido,signal) {
+      const {status,json}=await enviar("/consulta/extrair",pedido,true,signal);
+      const parsed=z.object({codigo:z.enum(["RASCUNHO_SALVO","REPLAY"]),draftId:z.string().min(1),revision:z.number().int().nonnegative(),
+        linkedPatientId:z.null(),requiresMedicalReview:z.literal(true)}).safeParse(json);
+      if((status===201||status===200)&&parsed.success)return parsed.data;
+      throw new ErroPorta("TRANSCRICAO_RECUSADA",codigoDe(json,"TRANSCRICAO_INVALIDA"));
     },
     async avaliarInstrumento(contexto,pedido) {
       const r=await enviar("/consulta/instrumento/avaliar",{...contexto,pedido},true);

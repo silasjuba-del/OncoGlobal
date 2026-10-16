@@ -18,6 +18,8 @@ it("upload HTTP preserva arquivo ilegível inerte e exige vínculo humano sem fa
   expect(draft.payload).toMatchObject({kind:"EXTRACAO_RASCUNHO",original:{bytesBase64:pedido.bytesBase64,contentHash:createHash("sha256").update(Buffer.from(pedido.bytesBase64,"base64")).digest("hex")}});
   expect(a.eventos().filter(e=>e.revisao==="ASSINADO")).toHaveLength(0);
   const replay=await a.request("/consulta/upload",pedido);expect(replay.status).toBe(200);expect(replay.data.codigo).toBe("REPLAY");
+  expect(replay.data.conversionStatus).toBe("PENDENTE");
+  expect(replay.data.motivo).toBeTruthy();
   expect((await a.request("/consulta/upload",{...pedido,bytesBase64:Buffer.from("outro").toString("base64")})).status).toBe(409);
 });
 it("conversão pronta entra no mesmo pipeline de revisão com página/hash e paciente nulo",async()=>{

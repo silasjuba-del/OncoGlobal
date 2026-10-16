@@ -14,6 +14,14 @@ describe("S11 kernel PDF local", () => {
   it("PDF híbrido (texto + página escaneada) sem OCR fica pendente e não descarta a página (P1 PR #13)", async () => {
     const r = await converterPdfLocal({ id: "hibrido", tipo: "PDF_DIGITAL", conteudo: pdfHibrido(), recebidoEm: "2026-10-12T12:00:00Z" });
     expect(r.status).toBe("PENDENTE"); expect(r.documento.paginas.map(p => p.n)).toEqual([1]);
+    expect(r.documento.totalPaginas).toBe(2);
+    expect(r.documento.paginasPendentes).toEqual([2]);
+  });
+  it("cancelamento prévio conserva o original sem iniciar extração", async () => {
+    const abort=new AbortController();abort.abort();
+    const r=await converterPdfLocal({id:"cancelado",tipo:"PDF_ESCANEADO",conteudo:pdfHibrido(),recebidoEm:"2026-10-12T12:00:00Z"},{signal:abort.signal});
+    expect(r).toMatchObject({status:"PENDENTE",motivo:"PDF_LEITURA_CANCELADA",documento:{tipo:"PDF_ESCANEADO",paginas:[]}});
+    expect(r.documento.hash).toMatch(/^[a-f0-9]{64}$/);
   });
 });
 

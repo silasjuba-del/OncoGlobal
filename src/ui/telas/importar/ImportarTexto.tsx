@@ -80,7 +80,7 @@ export function ImportarTexto() {
           onChange={(evento) => aoArquivo(evento.target.files?.[0])}
         />
       </label>
-      <BotaoVoz />
+      <BotaoVoz aoTrecho={trecho => { setTexto(anterior => anterior ? `${anterior}\n${trecho}` : trecho); setAviso(false); setRascunho(null); }} />
       {rascunho ? (
         <section aria-label="Rascunho importado">
           <p>rascunho</p>

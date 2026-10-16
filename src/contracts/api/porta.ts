@@ -171,7 +171,16 @@ export interface PedidoUploadLocal {patientId:string;encounterId:string;tumorLot
   sourceType:"pathology"|"imaging_report"|"prescription"|"medical_note"|"nursing"|"lab_feed";
   tipo:"PDF"|"IMAGEM";bytesBase64:string}
 export interface ResultadoUploadLocal {codigo:"RASCUNHO_SALVO"|"REPLAY";draftId:string;revision:number;
-  linkedPatientId:string|null;requiresMedicalReview:true;conversionStatus?:"PRONTO"|"PENDENTE";motivo?:string|null}
+  linkedPatientId:string|null;requiresMedicalReview:true;conversionStatus?:"PRONTO"|"PENDENTE";motivo?:string|null;
+  paginasPendentes?:number[];totalPaginas?:number|null}
+
+export interface PedidoTranscricaoLocal {
+  contexto: PedidoBundle; recordingId: string; sourceId: string; sourceType: "medical_note";
+  rawTranscript: string; captureMethod: "LOCAL_DICTATION" | "PASTED_TEXT"; capturedTranscript: string;
+}
+export interface ResultadoTranscricaoLocal {
+  codigo: "RASCUNHO_SALVO" | "REPLAY"; draftId: string; revision: number; linkedPatientId: null; requiresMedicalReview: true;
+}
 
 export interface ItemAgendaVisao {
   horario: string;
@@ -288,6 +297,7 @@ export interface PortaConsulta {
   investigacao?(contexto: PedidoBundle, signal?: AbortSignal): Promise<InvestigacaoConsultaVisao>;
   avaliarInstrumento?(contexto:{patientId:string;encounterId:string;tumorLotId:string|null},pedido:unknown):Promise<ResultadoInstrumento>;
   uploadDocumentoLocal?(pedido:PedidoUploadLocal,signal?:AbortSignal):Promise<ResultadoUploadLocal>;
+  importarTranscricaoLocal?(pedido:PedidoTranscricaoLocal,signal?:AbortSignal):Promise<ResultadoTranscricaoLocal>;
   /** Configuração global autenticada; ausente quando a porta não oferece persistência. */
   lerCaixaConfiguracao?(numero: number): Promise<CaixaConfiguracaoFlash>;
   alterarCaixaConfiguracao?(pedido: { numero: number; valorNovo: unknown; expectedRevision: number; operationId: string }): Promise<AlteracaoConfiguracaoFlash>;

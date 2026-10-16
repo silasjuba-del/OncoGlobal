@@ -13,6 +13,7 @@ import { ConsultaPersistida } from "./consulta/ConsultaPersistida.js";
 import { TelaApacLote } from "./telas/apac/TelaApacLote.js";
 import { Configuracoes } from "./oncochart/Configuracoes.js";
 import { UploadDocumentoLocal } from "./consulta/UploadDocumentoLocal.js";
+import { TranscricaoLocal } from "./consulta/TranscricaoLocal.js";
 // @ts-expect-error folha CSS pura, resolvida pelo Vite
 import "./consulta/consulta-local.css";
 
@@ -138,6 +139,7 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp }: {
         </section>
         <div id="consulta-documentos" className="consulta-secao" tabIndex={-1}>
           <UploadDocumentoLocal porta={porta} contexto={contexto} aoSalvar={()=>setVersaoFontes(v=>v+1)}/>
+          <TranscricaoLocal porta={porta} contexto={contexto} aoSalvar={()=>setVersaoFontes(v=>v+1)}/>
         </div>
         <div id="consulta-revisao" className="consulta-secao" tabIndex={-1}>
         <RevisaoExtracaoLocal key={versaoFontes} porta={porta} contexto={contexto}
