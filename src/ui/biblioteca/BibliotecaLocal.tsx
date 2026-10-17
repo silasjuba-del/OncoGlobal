@@ -95,7 +95,8 @@ export function BibliotecaLocal({ api }: { api: ApiBiblioteca }) {
     if (!estado?.hash || !estado.curadoriaHash || !versaoRevisada || !pacoteAtual || !window.confirm(`Ativar ${pacoteAtual.pacoteId} (hash ${pacoteAtual.hash})? Confira a versão e os itens exibidos.`)) return;
     setErro(""); setOcupado(true);
     try {
-      await api.ativar({ pacoteId: selecionado, expectedHash: estado.hash, expectedCuradoriaHash: estado.curadoriaHash });
+      await api.ativar({ pacoteId: selecionado, expectedHash: estado.hash, expectedCuradoriaHash: estado.curadoriaHash,
+        expectedAtiva: estado.ativa, expectedAtivaHash: estado.referencia?.hash ?? null });
       await carregar(selecionado); setAviso(`Biblioteca ${selecionado} ativada.`);
     } catch (e) { setErro(mensagemErro(e)); }
     finally { setOcupado(false); }
@@ -104,7 +105,7 @@ export function BibliotecaLocal({ api }: { api: ApiBiblioteca }) {
   async function rollback() {
     const ativa = estado?.ativa, hash = estado?.pacotes.find((p) => p.pacoteId === ativa)?.hash;
     const alvo = estado?.anteriorRollback;
-    if (!ativa || !hash || !alvo) return;
+    if (!ativa || !hash || !alvo || !estado?.referencia?.hash) return;
     if (selecionado !== alvo.pacoteId || !versaoRevisada) {
       await carregar(alvo.pacoteId);
       setAviso("Confira o conteúdo e as fontes da versão anterior e marque a revisão antes de restaurar.");
@@ -114,7 +115,7 @@ export function BibliotecaLocal({ api }: { api: ApiBiblioteca }) {
       || !window.confirm(`Restaurar ${alvo.pacoteId} (hash ${alvo.hash}; revisão ${alvo.curadoriaHash}) no lugar de ${ativa}?`)) return;
     setErro(""); setOcupado(true);
     try {
-      await api.rollback({ expectedAtiva: ativa, expectedHash: hash, expectedAnterior:alvo.pacoteId,
+      await api.rollback({ expectedAtiva: ativa, expectedAtivaHash: estado.referencia.hash, expectedHash: hash, expectedAnterior:alvo.pacoteId,
         expectedAnteriorHash:alvo.hash,expectedAnteriorCuradoriaHash:alvo.curadoriaHash });
       await carregar(); setAviso("Versão anterior válida restaurada.");
     } catch (e) { setErro(mensagemErro(e)); }

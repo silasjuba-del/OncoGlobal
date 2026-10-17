@@ -35,7 +35,7 @@ export interface ApiBiblioteca {
   estado(pacoteId?: string): Promise<BibliotecaEstado>;
   importar(pacote: PacoteBibliotecaHttp): Promise<{ codigo: string; pacoteId: string; hash: string }>;
   curar(pedido: { pacoteId: string; itemId: string; expectedHash: string; expectedCuradoriaHash: string; estado: "CONSULTAVEL" | "OBSOLETO" }): Promise<{ codigo: string }>;
-  ativar(pedido: { pacoteId: string; expectedHash: string; expectedCuradoriaHash: string }): Promise<{ codigo: string }>;
-  rollback(pedido: { expectedAtiva: string; expectedHash: string; expectedAnterior: string; expectedAnteriorHash: string; expectedAnteriorCuradoriaHash: string }): Promise<{ codigo: string }>;
+  ativar(pedido: { pacoteId: string; expectedHash: string; expectedCuradoriaHash: string; expectedAtiva: string | null; expectedAtivaHash: string | null }): Promise<{ codigo: string }>;
+  rollback(pedido: { expectedAtiva: string; expectedAtivaHash: string; expectedHash: string; expectedAnterior: string; expectedAnteriorHash: string; expectedAnteriorCuradoriaHash: string }): Promise<{ codigo: string }>;
   consultar(pedido: { filtros: Partial<Record<"tumor" | "histologia" | "estadio" | "biomarcador" | "linha", string>>; modo?: "CONSULTA" | "ALERTA" }): Promise<BibliotecaConsulta>;
 }

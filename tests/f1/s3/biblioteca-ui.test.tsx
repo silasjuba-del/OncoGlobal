@@ -95,7 +95,7 @@ it("importa como rascunho e só cura/ativa após exibir e confirmar conteúdo e 
   fireEvent.click(confirmarItem);
   fireEvent.click(screen.getByLabelText(/Revisei a versão, o hash e os itens exibidos/));
   fireEvent.click(screen.getByRole("button", { name: "Ativar pacote revisado" }));
-  await waitFor(() => expect(api.ativar).toHaveBeenCalledWith({ pacoteId: pacote.pacoteId, expectedHash: hash, expectedCuradoriaHash: "b".repeat(64) }));
+  await waitFor(() => expect(api.ativar).toHaveBeenCalledWith({ pacoteId: pacote.pacoteId, expectedHash: hash, expectedCuradoriaHash: "b".repeat(64), expectedAtiva: null, expectedAtivaHash: null }));
   expect(window.confirm).toHaveBeenCalled();
 });
 
@@ -126,7 +126,7 @@ it("consulta conteúdo e exige confirmação para rollback da ativa", async () =
   await waitFor(()=>expect(leitura.disabled).toBe(false));fireEvent.click(leitura);
   fireEvent.click(screen.getByLabelText(/Revisei a versão, o hash e os itens exibidos/));
   fireEvent.click(screen.getByRole("button", { name: "Restaurar versão anterior" }));
-  await waitFor(() => expect(api.rollback).toHaveBeenCalledWith({ expectedAtiva: "fixture@1.0.0", expectedHash: hash,expectedAnterior:"fixture@0.9.0",expectedAnteriorHash:hash,expectedAnteriorCuradoriaHash:hash }));
+  await waitFor(() => expect(api.rollback).toHaveBeenCalledWith({ expectedAtiva: "fixture@1.0.0", expectedAtivaHash: hash, expectedHash: hash,expectedAnterior:"fixture@0.9.0",expectedAnteriorHash:hash,expectedAnteriorCuradoriaHash:hash }));
   expect(window.confirm).toHaveBeenCalledWith(expect.stringContaining("fixture@0.9.0"));
 });
 
