@@ -103,18 +103,19 @@ function send(res: ServerResponse, status: number, object: unknown) {
 async function body(req: IncomingMessage,limite=1_000_000): Promise<unknown> {
   let value = "", bytes = 0;
   const decoder = new TextDecoder("utf-8", {fatal:true});
-  for await (const chunk of req) {
-    const buffer = typeof chunk === "string" ? Buffer.from(chunk) : chunk;
-    bytes += buffer.length;
-    if (bytes > limite) throw new Error("BODY_TOO_LARGE");
-    value += decoder.decode(buffer,{stream:true});
-  }
-  value += decoder.decode();
   try {
+    for await (const chunk of req) {
+      const buffer = typeof chunk === "string" ? Buffer.from(chunk) : chunk;
+      bytes += buffer.length;
+      if (bytes > limite) throw new Error("BODY_TOO_LARGE");
+      value += decoder.decode(buffer,{stream:true});
+    }
+    value += decoder.decode();
     return JSON.parse(value);
   } catch (error) {
     // Só a falha do corpo HTTP é 400; JSON interno do ledger continua erro interno.
-    if (error instanceof SyntaxError) throw new JsonInvalido();
+    if (error instanceof SyntaxError || (error instanceof TypeError
+      && "code" in error && error.code === "ERR_ENCODING_INVALID_ENCODED_DATA")) throw new JsonInvalido();
     throw error;
   }
 }

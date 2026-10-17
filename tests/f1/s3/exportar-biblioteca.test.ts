@@ -110,6 +110,14 @@ it.each(["prontuario-1234567", "Paciente-Pessoa-Sintetica", "nomeCompletoPacient
   expect(() => exportarBiblioteca(f.root, f.out)).toThrow("PHI_CAMINHO");
   expect(existsSync(f.out)).toBe(false);
 });
+it.each(["paciente", "patient", "pacientes", "patients"])("recusa rótulo de identidade em diretório separado: %s", rotulo => {
+  const f = fixture();
+  const pasta = join(f.root, "corpus", rotulo, "Pessoa-Sintetica");
+  mkdirSync(pasta, { recursive: true });
+  writeFileSync(join(pasta, "item.json"), '{"texto":"Referência sintética"}');
+  expect(() => exportarBiblioteca(f.root, f.out)).toThrow("PHI_CAMINHO");
+  expect(existsSync(f.out)).toBe(false);
+});
 it("nome técnico de prompt versionado é público, contato no nome é recusado",()=>{
   const f=fixture();mkdirSync(join(f.root,"corpus/prompts"),{recursive:true});
   writeFileSync(join(f.root,"corpus/prompts",["CAPTURA","1.0.0.md"].join("@")),"Instrução pública sintética");
