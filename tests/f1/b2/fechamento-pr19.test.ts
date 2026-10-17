@@ -8,6 +8,21 @@ const ler=(p:string)=>JSON.parse(readFileSync(p,'utf8'));
 const manifesto=ler('corpus/manifesto/b2-fichas.v1.json');
 const fichas=manifesto.fichasNovas.map((f:any)=>ler(f.arquivo));
 const pack=(slug:string)=>ler(`corpus/6-pack-tumor/${slug}/pack-${slug}.v2.RASCUNHO.json`);
+it('quadros médicos preservam fontes e situação do manifesto por ocorrência',()=>{
+ const quadros=readFileSync('docs/ondas/F1-B2-QUADROS.md','utf8');
+ for(const f of manifesto.fichasNovas){
+  const ficha=ler(f.arquivo), titulo=`### ${ficha.nome} — ${ficha.cenario}`;
+  const secao=quadros.split(titulo)[1]?.split('\n### ')[0]; expect(secao,titulo).toBeDefined();
+  for(const i of ficha.itens){
+   const c=f.campos.find((c:any)=>c.campo===`itens[drug=${i.drug};classe=${i.classe};days=${i.days.join(',')}].standardDose`);
+   const linha=secao!.split('\n').find(l=>l.startsWith(`| ${i.sequence} | ${i.drug} | ${i.classe} |`));
+   expect(linha).toBeDefined();
+   for(const id of c.sourceIds??[])expect(linha).toContain(id);
+   if(c.situacao==='NAO_LOCALIZADO')expect(linha).toContain('NAO_LOCALIZADO');
+  }
+  if(ficha.itens.some((i:any)=>i.sequenciamentoPendente))expect(secao).toContain('Sequenciamento pendente');
+ }
+});
 it('rascunhos B2 não atribuem curador nem aprovação médica',()=>{
  for(const slug of ['ewing','osteossarcoma','cec-pele','ntg','vulva','cup']){
   const p=pack(slug);
