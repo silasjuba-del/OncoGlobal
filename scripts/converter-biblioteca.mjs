@@ -35,8 +35,24 @@ const LEIA_ME = [
 ].join("\n");
 
 const slug = (s) => s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
-const ehData = (s) => typeof s === "string" && /^\d{4}-\d{2}-\d{2}$/.test(s);
+const ehData = (s) => typeof s === "string" && /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/.test(s)
+  && Number.isFinite(Date.parse(s)) && new Date(s).toISOString().slice(0, 10) === s;
 const ehSemver = (s) => typeof s === "string" && /^\d+\.\d+\.\d+$/.test(s);
+const textoPreenchido = (s) => typeof s === "string" && s.trim().length > 0;
+
+// URL verificada, sozinha, não atesta uma data. A evidência deve ligar data, trecho e
+// localizador à revisão selecionada; nunca escolher a primeira/última revisão implicitamente.
+function evidenciaPublicacao(mapeamento, url, data, versaoFonte) {
+  if (!ehData(data)) return null;
+  const publicacoes = mapeamento.verificacoes.filter(v => v.url === url)
+    .flatMap(v => Array.isArray(v.publicacoes) ? v.publicacoes : []);
+  const versoes = new Set(publicacoes.map(p => p.versaoFonte ?? null));
+  if (versoes.size > 1 && !textoPreenchido(versaoFonte)) return null;
+  const provas = publicacoes.filter(p => p.publicadoEm === data
+    && (versaoFonte === undefined || p.versaoFonte === versaoFonte)
+    && textoPreenchido(p.localizador) && textoPreenchido(p.trecho));
+  return provas.length === 1 ? { fonte: url, ...provas[0] } : null;
+}
 
 /** Primeira fonte interna (varredura em profundidade, ordem de inserção do JSON) com referencia E trecho não vazios. */
 function primeiraFonteComTrecho(valor) {
@@ -76,7 +92,7 @@ function validarMapeamento(m) {
   for (const [caminho, item] of Object.entries(m.itens)) {
     if (!caminho.startsWith("corpus/") || !item || typeof item.provenienciaUrl !== "string" || !/^https:\/\//.test(item.provenienciaUrl)) throw new Error(`MAPEAMENTO_INVALIDO:${caminho}`);
     if (!verificadas.has(item.provenienciaUrl)) throw new Error(`URL_NAO_VERIFICADA_NO_MAPEAMENTO:${caminho}`);
-    if (item.publicadoEm !== undefined && (!ehData(item.publicadoEm) || !verificadas.has(item.fonteDataPublicacao)))
+    if (item.publicadoEm !== undefined && !evidenciaPublicacao(m, item.fonteDataPublicacao, item.publicadoEm, item.versaoFonte))
       throw new Error(`DATA_PUBLICACAO_NAO_VERIFICADA:${caminho}`);
     const ap = item.aplicabilidade;
     if (!ap || ["tumor", "histologia", "estadio", "biomarcador", "linha"].some((c) => !Array.isArray(ap[c]) || ap[c].length > 100 || ap[c].some((v) => typeof v !== "string" || !v.length || v.length > 200 || v === "*"))) throw new Error(`MAPEAMENTO_APLICABILIDADE_INVALIDA:${caminho}`);
@@ -130,6 +146,8 @@ export async function converterBiblioteca(diretorioSnapshot, destino, opcoes = {
     const publicadoEm = map.publicadoEm ?? (ehData(fonte.publicadoEm) ? fonte.publicadoEm : null);
     const publicadoEmOrigem = map.publicadoEm ? map.fonteDataPublicacao : "fonte.publicadoEm";
     if (!publicadoEm) { excluidos.push({ caminho: a.caminho, motivo: "SEM_DATA_PUBLICACAO", detalhe: "Data de publicação não declarada; edição, acesso e vigência local não substituem publicação." }); continue; }
+    const provaPublicacao = evidenciaPublicacao(mapeamento, map.fonteDataPublicacao ?? map.provenienciaUrl, publicadoEm, map.versaoFonte);
+    if (!provaPublicacao) { excluidos.push({ caminho: a.caminho, motivo: "DATA_PUBLICACAO_NAO_VERIFICADA", detalhe: "Publicação declarada sem evidência documental unívoca de data e revisão no mapeamento." }); continue; }
     const tituloBase = json?.header?.id ?? json?.id ?? a.caminho.split("/").pop().replace(/\.json$/, "");
     const titulo = `${tituloBase} — ${a.caminho}${map.escopoFonte ? `#${map.escopoFonte}` : ""}`;
     if (titulo.length > 300) { excluidos.push({ caminho: a.caminho, motivo: "TITULO_EXCESSIVO", detalhe: `${titulo.length} chars` }); continue; }
@@ -143,6 +161,10 @@ export async function converterBiblioteca(diretorioSnapshot, destino, opcoes = {
         dependencias: [],
       },
       origem: { caminho: a.caminho, sha256Snapshot: a.sha256, versaoOriginal: a.versao ?? null, versaoAtribuida: !ehSemver(a.versao), publicadoEmOrigem, aplicabilidadeNota: map.aplicabilidadeNota ?? null, fonteReferencia: fonte.referencia,
+        evidenciaPublicacao: provaPublicacao,
+        datasOriginais: { edicao: fonte.edicao ?? null, publicadoEm: fonte.publicadoEm ?? null,
+          recuperadoEm: fonte.recuperadoEm ?? null, vigenteDesde: json?.header?.vigenteDesde ?? null },
+        recuperadoEmOrigem: "instante de recuperação do snapshot para conversão; não é acesso à fonte externa",
         localizador: map.escopoFonte ?? "/", escopoParcial: Boolean(map.escopoFonte),
         outrasFontesNaoConvertidas: map.escopoFonte ? fontesComTrecho(json).filter(f => !f.localizador.startsWith(`${map.escopoFonte}/`)).map(f => f.localizador) : [] },
       arquivo,
