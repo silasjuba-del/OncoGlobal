@@ -4,10 +4,10 @@
   "nome": "Carboplatina + Paclitaxel 21/21 dias (CEC de pele)",
   "cenario": "não especificado",
   "versao": "1.0.0",
-  "hash": "8ac2e185abc5c227f57d6aa6df0615acea953ae06dd4cbd2321326f920f423c9",
+  "hash": "82027fdf6badce12bc9df42397f237dae75ff38aa7e9243a91f689b6032952d3",
   "codigoInstitucional": null,
   "intervaloDias": 21,
-  "ciclos": null,
+  "ciclos": 6,
   "itens": [
     {
       "drug": "Soro fisiológico 0,9% 250 mL (lavagem de acesso)",

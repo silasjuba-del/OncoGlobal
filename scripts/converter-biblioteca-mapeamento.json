@@ -8,7 +8,7 @@
     "dependencias": "vazias nesta ponte v1 — ligações entre objetos do corpus não foram mapeadas; ficam como pendência, não como vínculo implícito",
     "licenca": "Uso interno do serviço OncoGlobal; sem licença de redistribuição verificada — descrição declarativa, não uma permissão",
     "versao": "usa a versão semver declarada pelo arquivo; sem versão declarada, atribui 1.0.0 e registra no inventário (versaoAtribuida)",
-    "publicadoEm": "fonte.edicao quando é data completa AAAA-MM-DD; senão header.vigenteDesde (registrado como vigência local, não data da fonte); senão o arquivo é excluído com SEM_DATA_PUBLICACAO",
+    "publicadoEm": "Data de publicação explicitamente declarada em fonte.publicadoEm ou mapeamento com fonte verificada. Acesso, edição não qualificada e vigência local nunca substituem publicação.",
     "proveniencia": "Fonte própria da seção selecionada por JSON Pointer escopoFonte. Arquivo com fontes distintas sem escopo explícito é excluído; nenhuma primeira citação sustenta outras seções.",
     "aplicabilidade": "somente com evidência: lista por dimensão declarada no mapeamento (escopo lido do arquivo) ou listas vazias declaradas como UNIVERSAL nas 5 dimensões com nota; sem mapeamento = APLICABILIDADE_DESCONHECIDA (nunca convertido para lista vazia por conta própria)",
     "pilar": "pasta-raiz numérica do corpus (1-exames..8-encaminhamentos, D-F1-06); raízes transversais ficam excluídas com RAIZ_TRANSVERSAL_SEM_PILAR"
@@ -25,7 +25,9 @@
       },
       "aplicabilidadeNota": "UNIVERSAL nas 5 dimensões do contrato; o escopo real do arquivo é por classe de droga/esquema, dimensão fora do contrato",
       "provenienciaUrl": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=fa8f1f52-3f05-4ae8-bfec-7f0a029e6825",
-      "escopoFonte": "/painels/0"
+      "escopoFonte": "/painels/0",
+      "publicadoEm": "2026-09-25",
+      "fonteDataPublicacao": "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls/fa8f1f52-3f05-4ae8-bfec-7f0a029e6825/history.json"
     }
   },
   "verificacoes": [
@@ -64,6 +66,12 @@
       "verificadaEm": "2026-10-14",
       "metodo": "fetch direto",
       "observacao": "o corpus rotula 'ESMO Gastric 2022 rec 2c (PMC10937212)'; a página é a adaptação Pan-Asiática 2024 da diretriz ESMO de gástrico — divergência de rótulo registrada"
+    },
+    {
+      "url": "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls/fa8f1f52-3f05-4ae8-bfec-7f0a029e6825/history.json",
+      "verificadaEm": "2026-10-17",
+      "metodo": "DailyMed API v2 history.json",
+      "observacao": "SPL versão2, published_date Sep25 2026; versão1 Dec25 2024. Data de publicação distinta do acesso."
     }
   ],
   "pendencias": [

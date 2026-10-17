@@ -3101,7 +3101,7 @@
     },
     {
       "path": "corpus/manifesto/b2-fichas.v1.json",
-      "sha256": "84ff32f1a1a8503fd9f5161d4286d0f68ef9d4df62390e5ca4c0c20dcb1065a1",
+      "sha256": "f9d2cca565c52f668e859c826fedaec9060deba66db4e56237c0b0758292dbb6",
       "hashMode": "utf8-lf",
       "items": [
         {
@@ -3111,7 +3111,7 @@
           "contextTag": "json_sha256_field_64hex",
           "status": "technical_token_false_positive",
           "evidenceRef": "corpus/manifesto/b2-fichas.v1.json:407",
-          "reason": "Revisão Codex 2026-10-15: candidato contido no hash SHA-256 canônico de 64 hex da ficha LV5FU2, repetido no manifesto; nenhum identificador pessoal."
+          "reason": "Revisão 2026-10-17: hash técnico de fonte/ficha, não identificador pessoal; limite de ciclos e proveniência conferidos."
         }
       ]
     }

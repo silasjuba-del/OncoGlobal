@@ -37,3 +37,8 @@ it('vulva mantém a decisão D-F1-50 e só a pendência real de replanejamento',
  const p=pack('vulva');expect(p.tratamento.radioterapia[0]).toMatchObject({doseTotalGy:57.6,fracoes:32});
  expect(p.pendencias.some((x:any)=>/Dose total de RT|40 Gy/.test(JSON.stringify(x)))).toBe(false);
 });
+
+it('fichas preservam os limites de ciclos já documentados nos packs',()=>{
+ const casos=[['Primário desconhecido (CUP)','Cisplatina + Docetaxel',8],['Primário desconhecido (CUP)','Docetaxel + Gemcitabina',6],['Vulva','Carboplatina + Paclitaxel 21/21 dias (vulva)',6],['CEC de pele (cutâneo)','Carboplatina + Paclitaxel 21/21 dias (CEC de pele)',6]] as const;
+ for(const [tumor,nome,ciclos] of casos){const f=fichas.find((x:any)=>x.tumor===tumor&&x.nome===nome);expect(f,`${tumor}: ${nome}`).toBeDefined();expect(f.ciclos).toBe(ciclos);expect(f.status).toBe('RASCUNHO');}
+});
