@@ -4,12 +4,12 @@ import type { ClinicalOrder, PrescriptionItem } from "../../contracts/w10/prescr
 export type CampoComparado =
   | "classe" | "sequence" | "standardDose" | "doseBasis" | "calculatedDose" | "prescribedDose" | "unit"
   | "adjustmentPercent" | "adjustmentReason" | "route" | "diluent" | "finalVolumeMl" | "infusionTime"
-  | "days" | "observacao" | "source" | "overrideMotivo";
+  | "days" | "observacao" | "source" | "overrideMotivo" | "doseMaximaMg" | "taxaMaximaMgMin" | "resgateMtx" | "sequenciamentoPendente";
 
 const CAMPOS: readonly CampoComparado[] = [
   "classe", "sequence", "standardDose", "doseBasis", "calculatedDose", "prescribedDose", "unit",
   "adjustmentPercent", "adjustmentReason", "route", "diluent", "finalVolumeMl", "infusionTime",
-  "days", "observacao", "source", "overrideMotivo",
+  "days", "observacao", "source", "overrideMotivo", "doseMaximaMg", "taxaMaximaMgMin", "resgateMtx", "sequenciamentoPendente",
 ];
 
 export interface MudancaCampo { campo: CampoComparado; anterior: unknown; atual: unknown }

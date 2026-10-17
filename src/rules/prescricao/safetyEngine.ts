@@ -85,6 +85,18 @@ export function safetyEngine(
   // 1) itens
   for (const it of itens) {
     const rot = `${it.drug} (seq ${it.sequence})`;
+    if (it.sequenciamentoPendente)
+      add({ sev: "BLOCK_ARTEFATO", codigo: "SEQUENCIAMENTO_PENDENTE", texto: `${rot}: ${it.sequenciamentoPendente}`, fonte: "ficha" });
+    if (it.resgateMtx)
+      add({ sev: "NOT_EVALUABLE", codigo: "RESGATE_MTX_INDIVIDUAL", texto: `${rot}: resgate q6h depende de níveis e plano individual de doses/vias`, fonte: it.resgateMtx.fonte });
+    if (it.doseMaximaMg !== undefined && it.prescribedDose !== null && (it.unit !== "mg" || it.prescribedDose > it.doseMaximaMg))
+      add({ sev: "BLOCK_ARTEFATO", codigo: "TETO_DOSE_FICHA", texto: `${rot}: dose/unidade incompatível com teto de ${it.doseMaximaMg} mg`, fonte: "ficha" });
+    if (it.taxaMaximaMgMin !== undefined && it.prescribedDose !== null) {
+      const t = /^(\d+(?:\.\d+)?)\s*(min|h)$/.exec(it.infusionTime ?? "");
+      const minutos = t ? Number(t[1]) * (t[2] === "h" ? 60 : 1) : 0;
+      if (it.unit !== "mg" || minutos <= 0 || it.prescribedDose / minutos > it.taxaMaximaMgMin)
+        add({ sev: "BLOCK_ARTEFATO", codigo: "TAXA_INFUSAO_FICHA", texto: `${rot}: duração/dose não respeita taxa máxima declarada`, fonte: "ficha" });
+    }
     if (it.prescribedDose === null)
       add({ sev: "NOT_EVALUABLE", codigo: "DOSE_PENDENTE", texto: `${rot}: dose prescrita ausente (PENDENTE)`, fonte: "ordem" });
     if (it.source === "MANUAL" && it.classe === "QT")

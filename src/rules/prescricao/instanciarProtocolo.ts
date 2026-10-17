@@ -62,13 +62,22 @@ const valido = (n: number | null): n is number => n !== null && Number.isFinite(
 
 function calcular(item: PrescriptionItem, d: DadosCorporais): { dose: number | null; unidade: string; motivo: string | null; aviso?: string | null } {
   const std = item.standardDose;
+  if (item.sequenciamentoPendente) return { dose: null, unidade: item.unit, motivo: item.sequenciamentoPendente };
+  if (item.resgateMtx) return { dose: null, unidade: item.unit,
+    motivo: "Resgate MTX contínuo q6h: exige níveis, horário de início e plano individual de doses/vias; não gerar curso finito automaticamente" };
   switch (item.doseBasis) {
     case "FIXED":
       return std === null ? { dose: null, unidade: item.unit, motivo: "dose padrão ausente na ficha" } : { dose: std, unidade: item.unit, motivo: null };
     case "MG_KG":
+      if (/µg|μg|mcg|ug/i.test(item.unit)) return { dose: null, unidade: item.unit, motivo: "unidade micrograma incompatível com base MG_KG" };
       if (std === null) return { dose: null, unidade: "mg", motivo: "dose padrão ausente na ficha" };
       if (!valido(d.pesoKg)) return { dose: null, unidade: "mg", motivo: "mg/kg sem peso" };
       return { dose: arredondaMeioParaCima(std * d.pesoKg), unidade: "mg", motivo: null };
+    case "MCG_KG":
+      if (!/^(?:µg|μg|mcg|ug)(?:\/kg)?$/i.test(item.unit.trim()))
+        return { dose: null, unidade: item.unit, motivo: "unidade incompatível com base MCG_KG; conferir microgramas por kg" };
+      if (std === null || !valido(d.pesoKg)) return { dose: null, unidade: "µg", motivo: "µg/kg sem dose padrão ou peso" };
+      return { dose: arredondaMeioParaCima(std * d.pesoKg), unidade: "µg", motivo: null };
     case "MG_M2":
       if (std === null) return { dose: null, unidade: "mg", motivo: "dose padrão ausente na ficha" };
       if (!valido(d.pesoKg) || !valido(d.alturaCm)) return { dose: null, unidade: "mg", motivo: "mg/m² sem peso/altura" };
@@ -115,10 +124,28 @@ export function instanciarProtocolo(
     const k = vistos.get(norm(orig.drug)) ?? 0;
     vistos.set(norm(orig.drug), k + 1);
     const c = calcular(orig, dados);
+    if (c.dose !== null && orig.doseMaximaMg !== undefined) {
+      if (c.unidade !== "mg") { c.dose = null; c.motivo = "teto em mg incompatível com unidade calculada"; }
+      else if (c.dose > orig.doseMaximaMg) {
+        c.dose = orig.doseMaximaMg;
+        c.aviso = `Teto por administração aplicado: ${orig.doseMaximaMg} mg (fonte da ficha)`;
+      }
+    }
+    let infusionTime = orig.infusionTime;
+    if (c.dose !== null && orig.taxaMaximaMgMin !== undefined) {
+      const tempo = /^(\d+(?:\.\d+)?)\s*(min|h)$/.exec(infusionTime ?? "");
+      if (c.unidade !== "mg" || !tempo) { c.dose = null; c.motivo = "taxa máxima exige dose em mg e duração legível"; }
+      else {
+        const minutos = Number(tempo[1]) * (tempo[2] === "h" ? 60 : 1);
+        const minimo = Math.ceil(c.dose / orig.taxaMaximaMgMin);
+        if (minutos < minimo) { infusionTime = `${minimo} min`; c.aviso = [c.aviso, `Duração ampliada para respeitar ${orig.taxaMaximaMgMin} mg/min`].filter(Boolean).join("; "); }
+      }
+    }
     const pronto = c.dose !== null;
     const item: PrescriptionItem = {
       ...orig,
       unit: c.unidade,
+      infusionTime,
       calculatedDose: c.dose,
       prescribedDose: c.dose, // padrão do protocolo; o médico ajusta (−20/−30/−40) ou altera com motivo
       adjustmentPercent: null,

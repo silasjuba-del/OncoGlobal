@@ -1,0 +1,508 @@
+{
+  "header": {
+    "schema": "CabecalhoRascunho@1",
+    "id": "pack-cec-pele",
+    "versao": "2.0.0",
+    "fonte": {
+      "tipo": "DIRETRIZ",
+      "referencia": "D-F1-34/D-F1-49 + eviQ 4151 v5 + SOnHe p. 236-238",
+      "trecho": "cemiplimabe preferencial; QT por extrapolação",
+      "edicao": "F1-B2 2026-10-14"
+    },
+    "redigidoEm": "2026-10-14",
+    "curador": null,
+    "aprovadoEm": null
+  },
+  "status": "RASCUNHO",
+  "consultavel": true,
+  "alerta": false,
+  "substitui": [],
+  "identidade": {
+    "tumor": "Carcinoma epidermoide cutâneo (CEC) avançado",
+    "cid10": [
+      "C44.9"
+    ],
+    "subtipos": [],
+    "cenarios": [],
+    "limitesAplicabilidade": "Pack novo F1-B2 (D-F1-34/49): RASCUNHO de curadoria; nenhum conteúdo ativo; doses somente nas fichas com fonte (b2-fichas.v1.json)."
+  },
+  "diagnostico": {
+    "imagem": [
+      {
+        "catalogoId": "TC_CERVICO_TORACICA",
+        "rotulo": "TC cabeça/pescoço região acometida (linfonodos regionais)",
+        "indicacao": "regional",
+        "quando": "estadiamento locorregional",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "SOnHe p. 237",
+          "pagina": null,
+          "trecho": "avaliação linfonodal",
+          "estado": "CONSULTADO"
+        }
+      },
+      {
+        "catalogoId": "TC_TORAX_ABDOME",
+        "rotulo": "TC tórax/abdome (metástases a distância)",
+        "indicacao": "avançado",
+        "quando": "antes de terapia sistêmica",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "SOnHe p. 237",
+          "pagina": null,
+          "trecho": "estadiamento à distância",
+          "estado": "CONSULTADO"
+        }
+      }
+    ],
+    "endoscopicos": [],
+    "patologico": {
+      "obtencao": [
+        {
+          "tipo": "biópsia",
+          "quando": "confirmação histológica",
+          "catalogoId": "BIOPSIA",
+          "fonte": {
+            "tipo": "PROTOCOLO_INSTITUCIONAL",
+            "referencia": "SOnHe p. 236",
+            "pagina": null,
+            "trecho": "biópsia",
+            "estado": "CONSULTADO"
+          }
+        }
+      ],
+      "laudoDeveConter": [
+        "histologia epidermoide",
+        "grau",
+        "profundidade/invasão perineural"
+      ],
+      "molecular": []
+    }
+  },
+  "estadiamento": {
+    "sistema": "[VERIFICAR]",
+    "edicao": null,
+    "fonte": {
+      "tipo": "DECISAO_MEDICA",
+      "referencia": "Estadiamento específico pendente de curadoria (D-F1-34/49)",
+      "pagina": null,
+      "trecho": "",
+      "estado": "PENDENTE"
+    },
+    "exames": [],
+    "gruposConduta": [],
+    "marcadores": {
+      "uteis": [],
+      "naoPedirDeRotina": []
+    }
+  },
+  "tratamento": {
+    "cenarios": [
+      {
+        "cenario": "localmente avançado/metastático inelegível a cirurgia/RT curativas",
+        "intencao": "paliativa/controle",
+        "modalidades": [
+          "imunoterapia"
+        ],
+        "criterio": "eviQ 4151",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "eviQ 4151 v5 (EXT-CNV-001)",
+          "pagina": null,
+          "trecho": "mCSCC or laCSCC not candidates for curative surgery or radiation",
+          "estado": "CONSULTADO"
+        }
+      },
+      {
+        "cenario": "QT sistêmica (alternativa)",
+        "intencao": "paliativa",
+        "modalidades": [
+          "QT"
+        ],
+        "criterio": "EXTRAPOLAÇÃO de CECP (eviQ 3579/1948)",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "eviQ 3579 (EXT-CNV-008)",
+          "pagina": null,
+          "trecho": "head and neck SCC recurrent or metastatic",
+          "estado": "CONSULTADO"
+        }
+      }
+    ],
+    "protocolos": [
+      {
+        "id": "cec-cemiplimabe",
+        "nome": "Cemiplimabe",
+        "cenario": "laCSCC/mCSCC inelegível a terapia curativa",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "cemiplimabe",
+            "dose": 350,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1 q21d",
+            "observacao": "50 mL SF; 30 min; filtro 0,2–5 µm"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": "sem pré-medicação de rotina (eviQ/BC)",
+        "ajusteObrigatorio": "",
+        "fichaId": "FICHA.cec-de-pele-cutaneo.cemiplimabe__localmente-avancado-metastatico-inelegivel-a-cirurgia-rt-curativas@1.0.0",
+        "sus": {
+          "disponivel": "VERIFICAR",
+          "fonte": {
+            "tipo": "DECISAO_MEDICA",
+            "referencia": "D-F1-34/49 — disponibilidade SUS por item a verificar",
+            "pagina": null,
+            "trecho": "",
+            "estado": "PENDENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "eviQ 4151 v5 + BC SMAVCEM + DailyMed LIBTAYO",
+          "pagina": null,
+          "trecho": "350 mg IV q21d over 30 minutes",
+          "estado": "CONSULTADO"
+        },
+        "observacao": "Migden NEJM 2018;379(4):341-351 e Lancet Oncol 2020;21(2):294-305 (pivôs).",
+        "derivadoDe": null,
+        "criterioAplicacao": ""
+      },
+      {
+        "id": "cec-carbopac",
+        "nome": "Carboplatina + paclitaxel",
+        "cenario": "QT sistêmica",
+        "linha": "alternativa",
+        "drogas": [
+          {
+            "droga": "paclitaxel",
+            "dose": 175,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "3 h"
+          },
+          {
+            "droga": "carboplatina",
+            "dose": 5,
+            "unidade": "AUC",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "Calvert"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 6,
+        "premedicacao": "Padrão local (D-W9-23c/34c; D-F1-30/48)",
+        "ajusteObrigatorio": "",
+        "fichaId": "FICHA.cec-de-pele-cutaneo.carboplatina-paclitaxel-21-21-dias-cec-de-pele__nao-especificado@1.0.0",
+        "sus": {
+          "disponivel": "VERIFICAR",
+          "fonte": {
+            "tipo": "DECISAO_MEDICA",
+            "referencia": "D-F1-34/49 — disponibilidade SUS por item a verificar",
+            "pagina": null,
+            "trecho": "",
+            "estado": "PENDENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "eviQ 3579 (população CECP R/M — EXTRAPOLAÇÃO)",
+          "pagina": null,
+          "trecho": "paclitaxel 175/3h + carbo AUC5",
+          "estado": "CONSULTADO"
+        },
+        "observacao": "",
+        "derivadoDe": null,
+        "criterioAplicacao": ""
+      },
+      {
+        "id": "cec-pembro",
+        "nome": "Pembrolizumabe",
+        "cenario": "laCSCC/mCSCC inelegível a terapia curativa",
+        "linha": "1ª linha (alternativa ao cemiplimabe)",
+        "drogas": [
+          {
+            "droga": "pembrolizumabe",
+            "dose": 200,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1 q21d",
+            "observacao": "ou 400 mg q42d; ≤24 meses"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 35,
+        "premedicacao": "sem pré-medicação de rotina",
+        "ajusteObrigatorio": "",
+        "fichaId": "FICHA.cec-de-pele-cutaneo.pembrolizumabe__localmente-avancado-metastatico-inelegivel-a-cirurgia-rt-curativas@1.0.0",
+        "sus": {
+          "disponivel": "VERIFICAR",
+          "fonte": {
+            "tipo": "DECISAO_MEDICA",
+            "referencia": "D-F1-34/49 — disponibilidade SUS por item a verificar",
+            "pagina": null,
+            "trecho": "",
+            "estado": "PENDENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "eviQ 5066 (EXT-SARC-008) + NCCN CSCC v1.2026 (rodada v2) + D-F1-50",
+          "pagina": null,
+          "trecho": "200 mg q21d/400 mg q42d; preferred 2A com cemiplimabe",
+          "estado": "CONSULTADO"
+        },
+        "observacao": "KEYNOTE-629 (PMID 34293460): ORR 50% LA / 35% met. FDA aprovado; EMA NÃO aprovou p/ CEC cutâneo (ressalva regulatória).",
+        "derivadoDe": null,
+        "criterioAplicacao": ""
+      },
+      {
+        "id": "cec-cis-rt",
+        "nome": "Cisplatina semanal + RT",
+        "cenario": "localmente avançado",
+        "linha": "concomitante",
+        "drogas": [
+          {
+            "droga": "cisplatina",
+            "dose": 40,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "semanal com RT",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 7,
+        "numeroCiclos": null,
+        "premedicacao": "Padrão local (D-W9-23c/34c; D-F1-30/48)",
+        "ajusteObrigatorio": "",
+        "fichaId": "FICHA.cec-de-pele-cutaneo.cisplatina-semanal-rxt-cec-de-pele__concomitante-a-rt@1.0.0",
+        "sus": {
+          "disponivel": "VERIFICAR",
+          "fonte": {
+            "tipo": "DECISAO_MEDICA",
+            "referencia": "D-F1-34/49 — disponibilidade SUS por item a verificar",
+            "pagina": null,
+            "trecho": "",
+            "estado": "PENDENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "eviQ 292 v10 (EXT-CNV-016; CECP — EXTRAPOLAÇÃO)",
+          "pagina": null,
+          "trecho": "40 mg/m² weekly with RT",
+          "estado": "CONSULTADO"
+        },
+        "observacao": "",
+        "derivadoDe": null,
+        "criterioAplicacao": ""
+      },
+      {
+        "id": "cec-pac-semanal",
+        "nome": "Paclitaxel semanal (alternativa)",
+        "cenario": "QT sistêmica",
+        "linha": "alternativa",
+        "drogas": [
+          {
+            "droga": "paclitaxel",
+            "dose": 80,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "q7d contínuo",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 7,
+        "numeroCiclos": null,
+        "premedicacao": "Padrão local (D-W9-23c/34c; D-F1-30/48)",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "VERIFICAR",
+          "fonte": {
+            "tipo": "DECISAO_MEDICA",
+            "referencia": "D-F1-34/49 — disponibilidade SUS por item a verificar",
+            "pagina": null,
+            "trecho": "",
+            "estado": "PENDENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "eviQ 1948 (EXT-CNV-009; CECP)",
+          "pagina": null,
+          "trecho": "80 mg/m² weekly",
+          "estado": "CONSULTADO"
+        },
+        "observacao": "",
+        "derivadoDe": null,
+        "criterioAplicacao": ""
+      }
+    ],
+    "radioterapia": [
+      {
+        "cenario": "adjuvante/definitiva",
+        "doseTotalGy": null,
+        "fracoes": null,
+        "pendencia": "esquema com radioterapia",
+        "concomitante": true,
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "SOnHe p. 237-238",
+          "pagina": null,
+          "trecho": "RT conforme cenário",
+          "estado": "CONSULTADO"
+        }
+      }
+    ],
+    "cirurgia": [
+      {
+        "procedimento": "Cirurgia do primário/linfonodos (quando elegível)",
+        "quando": "antes de terapia sistêmica se curativa",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "SOnHe p. 236",
+          "pagina": null,
+          "trecho": "cirurgia quando possível",
+          "estado": "CONSULTADO"
+        }
+      }
+    ],
+    "biomarcadorTratamento": [],
+    "ensaios": [],
+    "seguimento": [],
+    "suporte": {
+      "emetogenicidade": "baixa (imunoterapia)/moderada (QT)",
+      "riscoNeutropeniaFebril": "conforme esquema",
+      "outros": [
+        "manejo de toxicidade imune (tiroidite, colite, hepatite, pneumonite) — orientar reconhecimento precoce"
+      ],
+      "fonte": {
+        "tipo": "PROTOCOLO_INSTITUCIONAL",
+        "referencia": "eviQ 4151 + BC SMAVCEM",
+        "pagina": null,
+        "trecho": "immune-related AEs",
+        "estado": "CONSULTADO"
+      }
+    }
+  },
+  "ligacoes": {
+    "exames": [
+      "BIOPSIA",
+      "TC_CERVICO_TORACICA",
+      "TC_TORAX_ABDOME",
+      "HEMOGRAMA",
+      "CREATININA",
+      "TSH"
+    ],
+    "interacoesConsultar": [],
+    "ctcaeAcao": [],
+    "suporteReceitas": [],
+    "orientacoes": [],
+    "encaminhamentos": [],
+    "laudos": [],
+    "formulasXYZ": []
+  },
+  "pendencias": [
+    {
+      "texto": "Cisplatina 100 mg/m² q21d monoterapia: NAO_LOCALIZADO como protocolo operacional (eviQ 288 reduz a 75 em combinação; BC HNAVP 25×2)",
+      "classe": "NAO_LOCALIZADO",
+      "buscasFeitas": [
+        "eviQ índice",
+        "BC Cancer",
+        "CCO inacessível (403)"
+      ]
+    },
+    {
+      "texto": "Extrapolação CECP→CEC cutâneo para QT citotóxica exige aceite explícito",
+      "classe": "DECISAO_MEDICA_PENDENTE",
+      "buscasFeitas": [
+        "eviQ 3579/292/1948 (populações CECP)"
+      ]
+    },
+    {
+      "texto": "Pembrolizumabe no CEC: 'não encontrado' na busca local (não é afirmação de ausência de indicação)",
+      "classe": "BUSCA_LOCAL_NEGATIVA",
+      "buscasFeitas": [
+        "materiais locais 2026-10-14"
+      ]
+    }
+  ],
+  "conflitos": [
+    {
+      "tema": "População dos protocolos de QT",
+      "fonteA": {
+        "tipo": "PROTOCOLO_INSTITUCIONAL",
+        "referencia": "eviQ 3579/292/1948",
+        "pagina": null,
+        "trecho": "carcinoma espinocelular de cabeça e pescoço",
+        "estado": "CONSULTADO"
+      },
+      "fonteB": {
+        "tipo": "PROTOCOLO_INSTITUCIONAL",
+        "referencia": "SOnHe p. 236-238",
+        "pagina": null,
+        "trecho": "CEC de pele",
+        "estado": "CONSULTADO"
+      },
+      "escolhaSeguranca": "Fichas marcadas EXTRAPOLAÇÃO explícita",
+      "decisaoNecessaria": "Dr. Silas aceita ou recusa a extrapolação"
+    },
+    {
+      "tema": "Fascículo do pivô do cemiplimabe",
+      "fonteA": {
+        "tipo": "PROTOCOLO_INSTITUCIONAL",
+        "referencia": "material local",
+        "pagina": null,
+        "trecho": "Lancet Oncol 2020 (fascículo 7)",
+        "estado": "CONSULTADO"
+      },
+      "fonteB": {
+        "tipo": "PROTOCOLO_INSTITUCIONAL",
+        "referencia": "PubMed 31952975",
+        "pagina": null,
+        "trecho": "Lancet Oncol 2020;21(2):294-305",
+        "estado": "CONSULTADO"
+      },
+      "escolhaSeguranca": "Corrigido na citação do pack/ficha",
+      "decisaoNecessaria": false
+    }
+  ],
+  "curadoria": {
+    "redator": "GLM (agente curador, missão F1-B2) — rascunho para revisão",
+    "redigidoEm": "2026-10-14",
+    "fontesLidas": [
+      "eviQ 4151 (HTML vivo v5 + PDF)",
+      "BC SMAVCEM",
+      "DailyMed LIBTAYO SPL",
+      "eviQ 3579/292/1948/288",
+      "BC HNAVPC/HNAVPE/SMMCCPE/HNNLAPRT/HNLACARTW",
+      "Migden 2018/2020 (PubMed)",
+      "SOnHe 2024 p. 236-238",
+      "Sv-Sau-EB p. 197-199"
+    ],
+    "aprovacaoClinica": null,
+    "rodadaPendencias": [
+      {
+        "data": "2026-10-14",
+        "redator": "GLM",
+        "resolvidas": 0,
+        "classificadas": 3,
+        "susPreenchidos": 0,
+        "notas": [
+          "D-F1-49: fichas institucionais novas sem SISAC; mudança de fonte não aprova doses"
+        ]
+      }
+    ]
+  },
+  "escopo": {
+    "classe": "EXPANSAO_F1_B2_SEM_SISAC",
+    "nota": "Pack novo da D-F1-34 construído na F1-B2 (D-F1-49) com fontes externas verificadas; conteúdo consultável em RASCUNHO, sem ativação clínica."
+  },
+  "correcoes": []
+}

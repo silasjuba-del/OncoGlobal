@@ -4,7 +4,7 @@
   "nome": "Carboplatina + Paclitaxel semanal",
   "cenario": "não especificado",
   "versao": "1.0.0",
-  "hash": "9a8bdb80d1039432d305194c40fdad9853465732ca28e3046e70f1cbf98829d5",
+  "hash": "e235da83c370eb29a2d6205281480dff4d3a778f48f91b87f5d2877115e91947",
   "codigoInstitucional": null,
   "intervaloDias": 7,
   "ciclos": null,
@@ -137,7 +137,7 @@
       "days": [
         "d1"
       ],
-      "observacao": "D-F1-28: paclitaxel semanal em SF 0,9% 500 mL.",
+      "observacao": "D-F1-28: paclitaxel semanal em SF 0,9% 500 mL. F1-B2: dose local preservada; fontes de mama não confirmam dose ou indicação neste tumor. Monografia BC (EXT-LEG-013): filtro e materiais apenas.",
       "source": "PROTOCOL",
       "overrideMotivo": null
     },
@@ -187,6 +187,6 @@
     }
   ],
   "limiaresBula": null,
-  "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); decisões D-W9-23, D-W9-34, D-W9-50. D-F1-28 (diluente do paclitaxel semanal).",
+  "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); decisões D-W9-23, D-W9-34, D-W9-50. D-F1-28 (diluente do paclitaxel semanal). F1-B2 (D-F1-49): dose e indicação locais preservadas, sem confirmação por protocolos mamários; monografia BC (EXT-LEG-013) sustenta somente filtro e materiais. Elegibilidade e dose nesta indicação permanecem sob curadoria específica.",
   "status": "RASCUNHO"
 }

@@ -53,8 +53,11 @@ function validarConteudo(manifesto: unknown, ler: (arquivo: string) => string): 
     if (new Set(item.dependencias.map(d => d.id)).size !== item.dependencias.length) throw new Error('DEPENDENCIA_DUPLICADA');
     if (item.id !== ref.id || item.versao !== ref.versao) throw new Error('IDENTIDADE_DIVERGENTE');
     // Pacote público não aceita identificadores comuns de paciente; declaração PUBLIC não basta.
-    const publico = JSON.stringify(item);
-    if (/\b\d{3}\.\d{3}\.\d{3}-\d{2}\b|\b\d{11}\b|\b\d{15}\b|[\w.+-]+@[\w.-]+\.[a-z]{2,}/i.test(publico)) throw new Error('IDENTIFICADOR_PESSOAL');
+    // O ramo de e-mail só é testado quando há '@' fora do literal do schema ("ItemBiblioteca@1" sempre
+    // contém '@'); sem isso, textos densos em palavras causam backtracking quadrático (170 kB ≈ 80 s/item).
+    const publico = JSON.stringify(item).replace('"ItemBiblioteca@1"', '"ItemBiblioteca"');
+    if (/\b\d{3}\.\d{3}\.\d{3}-\d{2}\b|\b\d{11}\b|\b\d{15}\b/.test(publico)
+      || (publico.includes('@') && /[\w.+-]+@[\w.-]+\.[a-z]{2,}/i.test(publico))) throw new Error('IDENTIFICADOR_PESSOAL');
     // A fonte bibliográfica é uma URL obrigatória. Nos textos, URLs de referência são permitidas;
     // as demais categorias estruturais (nome rotulado, endereço, nascimento...) continuam recusadas.
     const textoPublico = [item.titulo, item.texto, item.proveniencia.trecho, item.proveniencia.licenca,

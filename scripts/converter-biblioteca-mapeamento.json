@@ -1,0 +1,84 @@
+{
+  "schema": "ConversorBibliotecaMapeamento@1",
+  "versao": "1.0.0",
+  "atualizadoEm": "2026-10-14",
+  "unidadeDeConversao": "arquivo",
+  "regras": {
+    "tipo": "REFERENCIA — fixo nesta ponte v1: ItemBiblioteca@1 é textual; nenhum conteúdo vira REGRA/TRIAL por conversão (adendo ao eixo N, itens 5 e 6)",
+    "dependencias": "vazias nesta ponte v1 — ligações entre objetos do corpus não foram mapeadas; ficam como pendência, não como vínculo implícito",
+    "licenca": "Uso interno do serviço OncoGlobal; sem licença de redistribuição verificada — descrição declarativa, não uma permissão",
+    "versao": "usa a versão semver declarada pelo arquivo; sem versão declarada, atribui 1.0.0 e registra no inventário (versaoAtribuida)",
+    "publicadoEm": "Data de publicação explicitamente declarada em fonte.publicadoEm ou mapeamento com fonte verificada. Acesso, edição não qualificada e vigência local nunca substituem publicação.",
+    "proveniencia": "Fonte própria da seção selecionada por JSON Pointer escopoFonte. Arquivo com fontes distintas sem escopo explícito é excluído; nenhuma primeira citação sustenta outras seções.",
+    "aplicabilidade": "somente com evidência: lista por dimensão declarada no mapeamento (escopo lido do arquivo) ou listas vazias declaradas como UNIVERSAL nas 5 dimensões com nota; sem mapeamento = APLICABILIDADE_DESCONHECIDA (nunca convertido para lista vazia por conta própria)",
+    "pilar": "pasta-raiz numérica do corpus (1-exames..8-encaminhamentos, D-F1-06); raízes transversais ficam excluídas com RAIZ_TRANSVERSAL_SEM_PILAR"
+  },
+  "itens": {
+    "corpus/1-exames/labs/labs-por-esquema.v1.RASCUNHO.json": {
+      "pilar": 1,
+      "aplicabilidade": {
+        "tumor": [],
+        "histologia": [],
+        "estadio": [],
+        "biomarcador": [],
+        "linha": []
+      },
+      "aplicabilidadeNota": "UNIVERSAL nas 5 dimensões do contrato; o escopo real do arquivo é por classe de droga/esquema, dimensão fora do contrato",
+      "provenienciaUrl": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=fa8f1f52-3f05-4ae8-bfec-7f0a029e6825",
+      "escopoFonte": "/painels/0",
+      "publicadoEm": "2026-09-25",
+      "fonteDataPublicacao": "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls/fa8f1f52-3f05-4ae8-bfec-7f0a029e6825/history.json"
+    }
+  },
+  "verificacoes": [
+    {
+      "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=fa8f1f52-3f05-4ae8-bfec-7f0a029e6825",
+      "verificadaEm": "2026-10-14",
+      "metodo": "DailyMed API v2 (services/v2/spls.json?drug_name=pemetrexed)",
+      "observacao": "labeling PEMETREXED (Sagent) — o corpus cita 'DailyMed pemetrexede §§2.1–2.6, acesso 11/10/2026' como fonte do painel[0] (primeira fonte com trecho)"
+    },
+    {
+      "url": "https://www.esmo.org/guidelines/esmo-pocket-guidelines-mobile-app",
+      "verificadaEm": "2026-10-14",
+      "metodo": "busca web — página oficial ESMO Pocket Guidelines & Mobile App",
+      "observacao": "o corpus cita 'ESMO Pocket Breast 2023 pp. 60–61'; a página canônica atual lista as edições 2024/2025 do pocket de mama — divergência de edição registrada, conteúdo citado permanece o de 2023"
+    },
+    {
+      "url": "https://pubmed.ncbi.nlm.nih.gov/41990853/",
+      "verificadaEm": "2026-10-14",
+      "metodo": "NCBI E-utilities esummary.fcgi (PubMed bloqueia curl/HTML)",
+      "observacao": "confere o registro corpus 'ESMO mCRC 2026 (PMID 41990853)': Metastatic colorectal cancer ESMO CPG, Ann Oncol 2026 Jun — não é a primeira fonte com trecho do arquivo; fica disponível para expansão"
+    },
+    {
+      "url": "https://doi.org/10.1093/eurheartj/ehac244",
+      "verificadaEm": "2026-10-14",
+      "metodo": "busca web (Lyon AR et al., Eur Heart J 2022;43:4229–4361)",
+      "observacao": "ESC 2022 cardio-oncologia, citada no painel[1] — disponível para expansão quando o item de exames cardiovascular for mapeado"
+    },
+    {
+      "url": "https://www.acr.org/Clinical-Resources/ACR-Appropriateness-Criteria",
+      "verificadaEm": "2026-10-14",
+      "metodo": "fetch direto da página oficial",
+      "observacao": "citada no arquivo rads; o arquivo não traz trecho de fonte (apenas referencia) — arquivo segue excluído por PROVENIENCIA_SEM_TRECHO"
+    },
+    {
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10937212/",
+      "verificadaEm": "2026-10-14",
+      "metodo": "fetch direto",
+      "observacao": "o corpus rotula 'ESMO Gastric 2022 rec 2c (PMC10937212)'; a página é a adaptação Pan-Asiática 2024 da diretriz ESMO de gástrico — divergência de rótulo registrada"
+    },
+    {
+      "url": "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls/fa8f1f52-3f05-4ae8-bfec-7f0a029e6825/history.json",
+      "verificadaEm": "2026-10-17",
+      "metodo": "DailyMed API v2 history.json",
+      "observacao": "SPL versão2, published_date Sep25 2026; versão1 Dec25 2024. Data de publicação distinta do acesso."
+    }
+  ],
+  "pendencias": [
+    "Demais raízes dos oito pilares e transversais aguardam mapeamento curado (aplicabilidade) e verificação de URL por fonte citada",
+    "Arquivos com fonte puramente interna (DECISAO_MEDICA sem documento público, modelos do serviço) não têm URL pública e permanecem excluídos — Proveniencia.fonte do ItemBiblioteca@1 exige URL",
+    "Dependências entre itens do corpus não mapeadas nesta ponte v1",
+    "P-02 e P-03: definidos em docs/_arquivo/w10/PEDIDOS-LUNA3.md (campos do laudo sem tipo canônico; regulação por substância pendente) — não são decisões canônicas do eixo N; P-30 não existe no repositório (mais próximo: D-F1-30, antiemese)",
+    "Patologia aguarda mapeamento por seção e fonte; não atribuir todas as recomendações à fonte de mama. Labs: somente /painels/0 foi mapeado; demais seções permanecem no snapshot original e fora do pacote convertido."
+  ]
+}

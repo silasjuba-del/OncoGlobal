@@ -1,0 +1,726 @@
+{
+  "header": {
+    "schema": "CabecalhoRascunho@1",
+    "id": "pack-ntg",
+    "versao": "2.0.0",
+    "fonte": {
+      "tipo": "DIRETRIZ",
+      "referencia": "D-F1-34/D-F1-49 + Lok 2025 (DOI 10.1200/JCO-24-02326) + eviQ 668/1018/599/1378/1347",
+      "trecho": "escore FIGO 2000 dirige o tratamento",
+      "edicao": "F1-B2 2026-10-14"
+    },
+    "redigidoEm": "2026-10-14",
+    "curador": null,
+    "aprovadoEm": null
+  },
+  "status": "RASCUNHO",
+  "consultavel": true,
+  "alerta": false,
+  "substitui": [],
+  "identidade": {
+    "tumor": "Neoplasia trofoblástica gestacional (NTG)",
+    "cid10": [
+      "D39.2",
+      "C58"
+    ],
+    "subtipos": [],
+    "cenarios": [],
+    "limitesAplicabilidade": "Pack novo F1-B2 (D-F1-34/49): RASCUNHO de curadoria; nenhum conteúdo ativo; doses somente nas fichas com fonte (b2-fichas.v1.json)."
+  },
+  "diagnostico": {
+    "imagem": [
+      {
+        "catalogoId": "USG_PELVICA",
+        "rotulo": "Ultrassonografia pélvica/transvaginal",
+        "indicacao": "universal",
+        "quando": "seguimento pós-mola e estadiamento local",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "Lok 2025 + eviQ 668",
+          "pagina": null,
+          "trecho": "ultrasound in GTD follow-up",
+          "estado": "CONSULTADO"
+        }
+      },
+      {
+        "catalogoId": "TC_TORAX_ABDOME",
+        "rotulo": "TC tórax/abdome/pelve",
+        "indicacao": "antes de multiagente",
+        "quando": "estadiamento de alto risco",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "Lok 2025",
+          "pagina": null,
+          "trecho": "staging high-risk",
+          "estado": "CONSULTADO"
+        }
+      },
+      {
+        "catalogoId": "RM_CRANIO",
+        "rotulo": "RM de crânio",
+        "indicacao": "alto risco/sintomas",
+        "quando": "rastreio de metástase SNC",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "Lok 2025 (Fig A4 área SNC)",
+          "pagina": null,
+          "trecho": "CNS imaging when indicated",
+          "estado": "CONSULTADO"
+        }
+      }
+    ],
+    "endoscopicos": [],
+    "patologico": {
+      "obtencao": [
+        {
+          "tipo": "curetagem/histerectomia conforme cenário",
+          "quando": "conforme decisão",
+          "catalogoId": "ANATOMOPATOLOGICO",
+          "fonte": {
+            "tipo": "PROTOCOLO_INSTITUCIONAL",
+            "referencia": "Lok 2025",
+            "pagina": null,
+            "trecho": "histology where feasible",
+            "estado": "CONSULTADO"
+          }
+        }
+      ],
+      "laudoDeveConter": [
+        "β-hCG pré-tratamento",
+        "escore FIGO 2000 e grupo de risco"
+      ],
+      "molecular": []
+    }
+  },
+  "estadiamento": {
+    "sistema": "FIGO/OMS 2000 (escore de risco + estádio)",
+    "edicao": "2000",
+    "fonte": {
+      "tipo": "PROTOCOLO_INSTITUCIONAL",
+      "referencia": "Lok 2025 (metodologia)",
+      "pagina": null,
+      "trecho": "FIGO 2000 scoring confirmed",
+      "estado": "CONSULTADO"
+    },
+    "exames": [],
+    "gruposConduta": [
+      {
+        "grupo": "baixo risco (escore FIGO 0–4, D-F1-50; eviQ/Lok ≤6 como variante)",
+        "conduta": "monoterapia (MTX 50 mg fixa + folínico 7,5 mg, ou dactinomicina)",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "BC GOTDLRM + D-F1-50",
+          "pagina": null,
+          "trecho": "score 0-4 single agent",
+          "estado": "CONSULTADO"
+        }
+      },
+      {
+        "grupo": "alto risco (escore ≥7)",
+        "conduta": "EMA-CO",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "eviQ 599",
+          "pagina": null,
+          "trecho": "score ≥7 EMA-CO",
+          "estado": "CONSULTADO"
+        }
+      },
+      {
+        "grupo": "resistência ao EMA-CO",
+        "conduta": "EMA/EP",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "Lok 2025 Tabela A5/Fig A4",
+          "pagina": null,
+          "trecho": "EMA/EP; day 2 EA omitted",
+          "estado": "CONSULTADO"
+        }
+      },
+      {
+        "grupo": "ultra-alto (escore FIGO ≥12, D-F1-50; Lok ≥13 como variante)",
+        "conduta": "EP de indução",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "eviQ 1347 + D-F1-50",
+          "pagina": null,
+          "trecho": "low-dose EP induction",
+          "estado": "CONSULTADO"
+        }
+      }
+    ],
+    "marcadores": {
+      "uteis": [
+        {
+          "catalogoId": "BETA_HCG",
+          "uso": "diagnóstico, seguimento e consolidação",
+          "fonte": {
+            "tipo": "PROTOCOLO_INSTITUCIONAL",
+            "referencia": "eviQ 668",
+            "pagina": null,
+            "trecho": "hCG normalization +3 cycles",
+            "estado": "CONSULTADO"
+          }
+        }
+      ],
+      "naoPedirDeRotina": []
+    }
+  },
+  "tratamento": {
+    "cenarios": [
+      {
+        "cenario": "pós-mola com β-hCG em plateau/subida",
+        "intencao": "curativa",
+        "modalidades": [
+          "QT"
+        ],
+        "criterio": "escore FIGO 2000",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "Lok 2025",
+          "pagina": null,
+          "trecho": "treatment by risk score",
+          "estado": "CONSULTADO"
+        }
+      }
+    ],
+    "protocolos": [
+      {
+        "id": "ntg-mtx-fa",
+        "nome": "Metotrexato + ácido folínico (baixo risco)",
+        "cenario": "baixo risco",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "metotrexato",
+            "dose": 50,
+            "unidade": "mg",
+            "via": "IM",
+            "dias": "D1,3,5,7",
+            "observacao": "variante 1 mg/kg (Lok/Charing Cross)"
+          },
+          {
+            "droga": "ácido folínico",
+            "dose": 7.5,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D2,4,6,8",
+            "observacao": "24 h pós-MTX (BC: 30 h)"
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": null,
+        "premedicacao": "Padrão local (D-W9-23c/34c; D-F1-30/48)",
+        "ajusteObrigatorio": "Consolidar 3 ciclos além da normalização do β-hCG.",
+        "fichaId": "FICHA.neoplasia-trofoblastica-gestacional.metotrexato-acido-folinico-baixo-risco__baixo-risco-escore-figo-0-4-d-f1-50@1.0.0",
+        "sus": {
+          "disponivel": "VERIFICAR",
+          "fonte": {
+            "tipo": "DECISAO_MEDICA",
+            "referencia": "D-F1-34/49 — disponibilidade SUS por item a verificar",
+            "pagina": null,
+            "trecho": "",
+            "estado": "PENDENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "D-F1-50 item 7 (DECISOES.md); Charing Cross clássico",
+          "pagina": null,
+          "trecho": "MTX 50 mg D1,3,5,7 + ácido folínico 7,5 mg D2,4,6,8; variante local selecionada",
+          "estado": "CONSULTADO"
+        },
+        "observacao": "",
+        "derivadoDe": null,
+        "criterioAplicacao": ""
+      },
+      {
+        "id": "ntg-actd",
+        "nome": "Dactinomicina em pulso (baixo risco)",
+        "cenario": "baixo risco",
+        "linha": "alternativa/resistência a MTX",
+        "drogas": [
+          {
+            "droga": "dactinomicina",
+            "dose": 1.25,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 q14d",
+            "observacao": "cap 2 mg"
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": null,
+        "premedicacao": "Padrão local (D-W9-23c/34c; D-F1-30/48)",
+        "ajusteObrigatorio": "",
+        "fichaId": "FICHA.neoplasia-trofoblastica-gestacional.dactinomicina-em-pulso-baixo-risco__baixo-risco-escore-figo-0-4-d-f1-50@1.0.0",
+        "sus": {
+          "disponivel": "VERIFICAR",
+          "fonte": {
+            "tipo": "DECISAO_MEDICA",
+            "referencia": "D-F1-34/49 — disponibilidade SUS por item a verificar",
+            "pagina": null,
+            "trecho": "",
+            "estado": "PENDENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "eviQ 1018 + Lok A5",
+          "pagina": null,
+          "trecho": "1.25 mg/m² IV bolus max 2 mg q2w",
+          "estado": "CONSULTADO"
+        },
+        "observacao": "",
+        "derivadoDe": null,
+        "criterioAplicacao": ""
+      },
+      {
+        "id": "ntg-emaco",
+        "nome": "EMA-CO (alto risco)",
+        "cenario": "alto risco ≥7",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "etoposídeo",
+            "dose": 100,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1–D2",
+            "observacao": ""
+          },
+          {
+            "droga": "metotrexato",
+            "dose": 300,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "12 h"
+          },
+          {
+            "droga": "dactinomicina",
+            "dose": 0.5,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1–D2",
+            "observacao": ""
+          },
+          {
+            "droga": "vincristina",
+            "dose": 0.8,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D8",
+            "observacao": "cap 2 mg"
+          },
+          {
+            "droga": "ciclofosfamida",
+            "dose": 600,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D8",
+            "observacao": ""
+          },
+          {
+            "droga": "folínico (+24 h)",
+            "dose": 15,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D2",
+            "observacao": "24 h após início do MTX; quatro doses q12h (ficha EMA selecionada)"
+          },
+          {
+            "droga": "folínico (+36 h)",
+            "dose": 15,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D2",
+            "observacao": "36 h após início do MTX; quatro doses q12h (ficha EMA selecionada)"
+          },
+          {
+            "droga": "folínico (+48 h)",
+            "dose": 15,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D3",
+            "observacao": "48 h após início do MTX; quatro doses q12h (ficha EMA selecionada)"
+          },
+          {
+            "droga": "folínico (+60 h)",
+            "dose": 15,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D3",
+            "observacao": "60 h após início do MTX; quatro doses q12h (ficha EMA selecionada)"
+          },
+          {
+            "droga": "filgrastim",
+            "dose": 5,
+            "unidade": "µg/kg",
+            "via": "SC",
+            "dias": "D3–D5 e D9–D11",
+            "observacao": "eviQ 599; ficha EMA-CO selecionada"
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": null,
+        "premedicacao": "Padrão local (D-W9-23c/34c; D-F1-30/48)",
+        "ajusteObrigatorio": "",
+        "fichaId": "FICHA.neoplasia-trofoblastica-gestacional.ema-co-alto-risco__alto-risco-escore-figo-7@1.0.0",
+        "sus": {
+          "disponivel": "VERIFICAR",
+          "fonte": {
+            "tipo": "DECISAO_MEDICA",
+            "referencia": "D-F1-34/49 — disponibilidade SUS por item a verificar",
+            "pagina": null,
+            "trecho": "",
+            "estado": "PENDENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "eviQ 599 v8 + D-F1-50 item 7 (vincristina BC/Lok)",
+          "pagina": null,
+          "trecho": "EMA D1-2; CO D8; vincristina local 0,8 mg/m², cap 2 mg; folínico q12h x4 em D2-D3",
+          "estado": "CONSULTADO"
+        },
+        "observacao": "",
+        "derivadoDe": null,
+        "criterioAplicacao": ""
+      },
+      {
+        "id": "ntg-emaep",
+        "nome": "EMA/EP (resistência ao EMA-CO)",
+        "cenario": "resistente ao EMA-CO",
+        "linha": "2ª linha",
+        "drogas": [
+          {
+            "droga": "dactinomicina",
+            "dose": 0.5,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "etoposídeo",
+            "dose": 100,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "etoposídeo",
+            "dose": 150,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D8",
+            "observacao": "Lok 2025 Tabela A5; ficha EMA/EP selecionada"
+          },
+          {
+            "droga": "metotrexato",
+            "dose": 300,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "12 h"
+          },
+          {
+            "droga": "cisplatina",
+            "dose": 75,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D8",
+            "observacao": ""
+          },
+          {
+            "droga": "folínico (+24 h)",
+            "dose": 15,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D2",
+            "observacao": "24 h após início do MTX; quatro doses q12h (ficha EMA selecionada)"
+          },
+          {
+            "droga": "folínico (+36 h)",
+            "dose": 15,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D2",
+            "observacao": "36 h após início do MTX; quatro doses q12h (ficha EMA selecionada)"
+          },
+          {
+            "droga": "folínico (+48 h)",
+            "dose": 15,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D3",
+            "observacao": "48 h após início do MTX; quatro doses q12h (ficha EMA selecionada)"
+          },
+          {
+            "droga": "folínico (+60 h)",
+            "dose": 15,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D3",
+            "observacao": "60 h após início do MTX; quatro doses q12h (ficha EMA selecionada)"
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": null,
+        "premedicacao": "Padrão local (D-W9-23c/34c; D-F1-30/48)",
+        "ajusteObrigatorio": "Folínico 15 mg VO a cada 12 h, quatro doses em D2-D3 (+24/+36/+48/+60 h após início do MTX); D2 sem EA.",
+        "fichaId": "FICHA.neoplasia-trofoblastica-gestacional.ema-ep-resistencia-ao-ema-co__resistente-ao-ema-co@1.0.0",
+        "sus": {
+          "disponivel": "VERIFICAR",
+          "fonte": {
+            "tipo": "DECISAO_MEDICA",
+            "referencia": "D-F1-34/49 — disponibilidade SUS por item a verificar",
+            "pagina": null,
+            "trecho": "",
+            "estado": "PENDENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "Lok 2025 Tabela A5 + Figura A4 (EXT-CNV-031) + eviQ 1378",
+          "pagina": null,
+          "trecho": "D2 only leucovorin; day 2 EA omitted",
+          "estado": "CONSULTADO"
+        },
+        "observacao": "",
+        "derivadoDe": null,
+        "criterioAplicacao": ""
+      },
+      {
+        "id": "ntg-ep-inducao",
+        "nome": "EP de indução (ultra-alto)",
+        "cenario": "escore alto/ultra-alto",
+        "linha": "indução",
+        "drogas": [
+          {
+            "droga": "etoposídeo",
+            "dose": 100,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1–D2 semanal",
+            "observacao": ""
+          },
+          {
+            "droga": "cisplatina",
+            "dose": 20,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1–D2 semanal",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 7,
+        "numeroCiclos": null,
+        "premedicacao": "Padrão local (D-W9-23c/34c; D-F1-30/48)",
+        "ajusteObrigatorio": "",
+        "fichaId": "FICHA.neoplasia-trofoblastica-gestacional.ep-de-inducao-escore-ultra-alto__escore-alto-ultra-alto-figo-12-d-f1-50-inducao@1.0.0",
+        "sus": {
+          "disponivel": "VERIFICAR",
+          "fonte": {
+            "tipo": "DECISAO_MEDICA",
+            "referencia": "D-F1-34/49 — disponibilidade SUS por item a verificar",
+            "pagina": null,
+            "trecho": "",
+            "estado": "PENDENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "eviQ 1347 v5 + Lok A5",
+          "pagina": null,
+          "trecho": "etoposide 100 + cisplatin 20 D1-2; once weekly",
+          "estado": "CONSULTADO"
+        },
+        "observacao": "",
+        "derivadoDe": null,
+        "criterioAplicacao": ""
+      }
+    ],
+    "radioterapia": [],
+    "cirurgia": [
+      {
+        "procedimento": "Histerectomia (selecionada)",
+        "quando": "resistência localizada/controle de sangramento",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "Lok 2025",
+          "pagina": null,
+          "trecho": "surgery in selected cases",
+          "estado": "CONSULTADO"
+        }
+      }
+    ],
+    "biomarcadorTratamento": [],
+    "ensaios": [],
+    "seguimento": [
+      {
+        "periodo": "após normalização do β-hCG",
+        "exames": [
+          "BETA_HCG"
+        ],
+        "periodicidade": "conforme protocolo de consolidação + seguimento estendido",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "eviQ 668/599",
+          "pagina": null,
+          "trecho": "3 cycles beyond normal hCG",
+          "estado": "CONSULTADO"
+        }
+      }
+    ],
+    "suporte": {
+      "emetogenicidade": "moderada/alta conforme bloco (D-F1-30 local)",
+      "riscoNeutropeniaFebril": "alto no EMA-CO/EMA-EP",
+      "outros": [
+        "filgrastim D3–5 e D9–11 no EMA-CO (eviQ)",
+        "resgate folínico obrigatório após MTX 300"
+      ],
+      "fonte": {
+        "tipo": "PROTOCOLO_INSTITUCIONAL",
+        "referencia": "eviQ 599",
+        "pagina": null,
+        "trecho": "G-CSF and folinic rescue",
+        "estado": "CONSULTADO"
+      }
+    }
+  },
+  "ligacoes": {
+    "exames": [
+      "BETA_HCG",
+      "USG_PELVICA",
+      "TC_TORAX_ABDOME",
+      "RM_CRANIO",
+      "HEMOGRAMA",
+      "CREATININA",
+      "CLEARANCE_CREATININA"
+    ],
+    "interacoesConsultar": [],
+    "ctcaeAcao": [],
+    "suporteReceitas": [],
+    "orientacoes": [],
+    "encaminhamentos": [],
+    "laudos": [],
+    "formulasXYZ": []
+  },
+  "pendencias": [
+    {
+      "texto": "Corte de ultra-alto risco: ≥13 (Lok) × ≥12 (eviQ 1347)",
+      "classe": "CONFLITO_FONTE",
+      "buscasFeitas": [
+        "Lok 2025 High/Ultrahigh-risk",
+        "eviQ 1347 Indications"
+      ]
+    },
+    {
+      "texto": "Cortes de baixo risco: ≤6 (eviQ/Lok) × 0–4 (BC GOTDLRM/GOTDLRA; 5–6 = 'moderado')",
+      "classe": "CONFLITO_FONTE",
+      "buscasFeitas": [
+        "eviQ 668/1018",
+        "BC GOTDLRM"
+      ]
+    },
+    {
+      "texto": "Anticoncepção durante e após o tratamento — orientação e duração",
+      "classe": "CONDUTA",
+      "buscasFeitas": [
+        "Lok 2025"
+      ]
+    }
+  ],
+  "conflitos": [
+    {
+      "tema": "EMA/EP dia 2 (erro dos slides locais)",
+      "fonteA": {
+        "tipo": "PROTOCOLO_INSTITUCIONAL",
+        "referencia": "slides/aula local",
+        "pagina": null,
+        "trecho": "EMA/EP com EA no D2",
+        "estado": "CONSULTADO"
+      },
+      "fonteB": {
+        "tipo": "PROTOCOLO_INSTITUCIONAL",
+        "referencia": "Lok 2025 Tabela A5 + Figura A4",
+        "pagina": null,
+        "trecho": "day 2 EA should be omitted — only leucovorin",
+        "estado": "CONSULTADO"
+      },
+      "escolhaSeguranca": "RESOLVIDO: ficha EMA/EP com D2 somente folínico",
+      "decisaoNecessaria": false
+    },
+    {
+      "tema": "Dose do MTX de baixo risco",
+      "fonteA": {
+        "tipo": "PROTOCOLO_INSTITUCIONAL",
+        "referencia": "Aula 31 (Charing Cross)",
+        "pagina": null,
+        "trecho": "1 mg/kg IM",
+        "estado": "CONSULTADO"
+      },
+      "fonteB": {
+        "tipo": "PROTOCOLO_INSTITUCIONAL",
+        "referencia": "eviQ 668/Lok A5",
+        "pagina": null,
+        "trecho": "50 mg fixa (ou 1 mg/kg)",
+        "estado": "CONSULTADO"
+      },
+      "escolhaSeguranca": "Ficha com 50 mg fixa; variante registrada",
+      "decisaoNecessaria": false
+    },
+    {
+      "tema": "Vincristina do EMA-CO",
+      "fonteA": {
+        "tipo": "PROTOCOLO_INSTITUCIONAL",
+        "referencia": "eviQ 599",
+        "pagina": null,
+        "trecho": "1 mg/m² cap 2",
+        "estado": "CONSULTADO"
+      },
+      "fonteB": {
+        "tipo": "PROTOCOLO_INSTITUCIONAL",
+        "referencia": "BC GOTDEMACO/Lok",
+        "pagina": null,
+        "trecho": "0,8 mg/m²",
+        "estado": "CONSULTADO"
+      },
+      "escolhaSeguranca": "RESOLVIDO D-F1-50 item 7: ficha e pack com 0,8 mg/m² (BC/Lok); eviQ 1 mg/m² é variante não adotada",
+      "decisaoNecessaria": false
+    }
+  ],
+  "curadoria": {
+    "redator": "GLM (agente curador, missão F1-B2) — rascunho para revisão",
+    "redigidoEm": "2026-10-14",
+    "fontesLidas": [
+      "Lok 2025 (DOI 10.1200/JCO-24-02326; cópias ORBi+Radboud, dupla leitura)",
+      "eviQ 668/1018/599/1378/1347 (HTML+PDF)",
+      "BC GOTDLRM/GOTDLRA/GOTDEMACO",
+      "Berkowitz 2009 (referência Sv-Sau-EB)",
+      "Aula 31",
+      "Sv-Sau-EB p. 162-164"
+    ],
+    "aprovacaoClinica": null,
+    "rodadaPendencias": [
+      {
+        "data": "2026-10-14",
+        "redator": "GLM",
+        "resolvidas": 0,
+        "classificadas": 3,
+        "susPreenchidos": 0,
+        "notas": [
+          "D-F1-49: fichas institucionais novas sem SISAC; mudança de fonte não aprova doses"
+        ]
+      }
+    ]
+  },
+  "escopo": {
+    "classe": "EXPANSAO_F1_B2_SEM_SISAC",
+    "nota": "Pack novo da D-F1-34 construído na F1-B2 (D-F1-49) com fontes externas verificadas; conteúdo consultável em RASCUNHO, sem ativação clínica."
+  },
+  "correcoes": []
+}
