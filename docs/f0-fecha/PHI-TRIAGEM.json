@@ -3051,7 +3051,7 @@
     },
     {
       "path": "scripts/exportacao-publica-triagem.json",
-      "sha256": "2b1b9ceb97994a6b494c3d3261cba75f5169b1f0267dbba30131460e5af573ca",
+      "sha256": "04da2ad7c98454478a8cdfaff27c23a1edc02295965a8d39c5cd1276dd37f91b",
       "hashMode": "utf8-lf",
       "items": [
         {
@@ -3101,7 +3101,7 @@
     },
     {
       "path": "corpus/manifesto/b2-fichas.v1.json",
-      "sha256": "b56775330c20ae14d49950e53182d95e2d2a093918f944dc4116d9630e1540dd",
+      "sha256": "84ff32f1a1a8503fd9f5161d4286d0f68ef9d4df62390e5ca4c0c20dcb1065a1",
       "hashMode": "utf8-lf",
       "items": [
         {
