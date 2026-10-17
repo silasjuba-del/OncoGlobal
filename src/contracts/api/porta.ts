@@ -1,4 +1,6 @@
 import type { InvestigacaoConsultaVisao } from './investigacao.js';
+import type { RevisaoClinicaResposta } from '../fase2/revisaoClinica.js';
+import type { PedidoEstadoDoenca,EstadoDoencaPreparado,ConfirmacaoEstadoDoenca } from '../fase2/estadoDoenca.js';
 import type { DutosClinicaVisao } from './dutos.js';
 import type { z } from "zod";
 import type { EstadoOncoassist, FontesOncoassist, RespostaOncoassist } from "./oncoassist.js";
@@ -297,6 +299,9 @@ export interface PortaConsulta {
   investigacao?(contexto: PedidoBundle, signal?: AbortSignal): Promise<InvestigacaoConsultaVisao>;
   avaliarInstrumento?(contexto:{patientId:string;encounterId:string;tumorLotId:string|null},pedido:unknown):Promise<ResultadoInstrumento>;
   uploadDocumentoLocal?(pedido:PedidoUploadLocal,signal?:AbortSignal):Promise<ResultadoUploadLocal>;
+  revisaoClinica?(contexto:PedidoBundle,packId?:string,signal?:AbortSignal):Promise<RevisaoClinicaResposta>;
+  prepararEstadoDoenca?(pedido:PedidoEstadoDoenca,signal?:AbortSignal):Promise<EstadoDoencaPreparado>;
+  confirmarEstadoDoenca?(pedido:ConfirmacaoEstadoDoenca,signal?:AbortSignal):Promise<{codigo:"GRAVADA"|"REPLAY";eventId:string}>;
   importarTranscricaoLocal?(pedido:PedidoTranscricaoLocal,signal?:AbortSignal):Promise<ResultadoTranscricaoLocal>;
   /** Configuração global autenticada; ausente quando a porta não oferece persistência. */
   lerCaixaConfiguracao?(numero: number): Promise<CaixaConfiguracaoFlash>;

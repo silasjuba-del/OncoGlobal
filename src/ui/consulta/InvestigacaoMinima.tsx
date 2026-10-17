@@ -2,7 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import { InvestigacaoConsultaVisao } from '../../contracts/api/investigacao.js';
 import type { PedidoBundle, PortaConsulta } from '../api/porta.js';
 /** Consulta explícita por clique; propostas são minutas, sem criar pedido ou assinatura. */
-export function InvestigacaoMinima({porta,contexto,revisaoEsperada}:{porta:PortaConsulta;contexto:PedidoBundle;revisaoEsperada?:string}) {
+export type MinutaInvestigacao=NonNullable<InvestigacaoConsultaVisao['resultado']>['propostas'][number];
+export function InvestigacaoMinima({porta,contexto,revisaoEsperada,aoPrepararPedido}:{porta:PortaConsulta;contexto:PedidoBundle;revisaoEsperada?:string;aoPrepararPedido?:(proposta:MinutaInvestigacao,revisao:string)=>void}) {
  const [dados,setDados]=useState<InvestigacaoConsultaVisao|null>(null),[pendente,setPendente]=useState<string|null>(null),[ocupado,setOcupado]=useState(false),[aberto,setAberto]=useState(false);
  const revisao=useRef(0),controller=useRef<AbortController|null>(null),emCurso=useRef(false);
  const portaDaResposta=useRef<PortaConsulta|null>(null);
@@ -29,7 +30,8 @@ export function InvestigacaoMinima({porta,contexto,revisaoEsperada}:{porta:Porta
    <p><strong>{atuais.estado}</strong> · propostas exigem revisão médica e assinatura em fluxo próprio.</p>
    {[...atuais.lacunas,...(atuais.resultado?.lacunas??[])].map((l,i)=><p key={`${l.codigo}-${i}`} role="status">{l.codigo}: {l.texto}</p>)}
    {!!atuais.resultado?.requisitos.length&&<table><caption>Requisitos do pack aprovado</caption><thead><tr><th>Exame</th><th>Contexto</th><th>Situação</th></tr></thead><tbody>{atuais.resultado.requisitos.map(r=><tr key={r.id}><td>{r.exameCodigo}</td><td>{r.contexto}</td><td>{r.classificacao}</td></tr>)}</tbody></table>}
-   {!!atuais.resultado?.propostas.length&&<details><summary>Minutas de pedidos ({atuais.resultado.propostas.length})</summary><ul>{atuais.resultado.propostas.map((p,i)=><li key={`${p.exameCodigo}-${i}`}><strong>{p.exameCodigo}</strong> · {p.contexto}<p>{p.justificativa}</p><p>Código SUS: {p.codigoSus??'pendente'}. {p.pendencias.join('; ')}</p></li>)}</ul></details>}
+   {!!atuais.resultado?.propostas.length&&<details><summary>Minutas de pedidos ({atuais.resultado.propostas.length})</summary><ul>{atuais.resultado.propostas.map((p,i)=><li key={`${p.exameCodigo}-${i}`}><strong>{p.exameCodigo}</strong> · {p.contexto}<p>{p.justificativa}</p><p>Código SUS: {p.codigoSus??'pendente'}. {p.pendencias.join('; ')}</p>
+     {aoPrepararPedido&&atuais.revisao&&['LABORATORIO','IMAGEM'].includes(p.categoria??'')?<button type="button" onClick={()=>aoPrepararPedido(p,atuais.revisao!)}>Preparar pedido de {p.exameCodigo}</button>:<p>Categoria do pedido pendente de conferência.</p>}</li>)}</ul></details>}
   </>}</div>}
  </section>;
 }

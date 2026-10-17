@@ -1,4 +1,5 @@
 import { InvestigacaoMinima } from './InvestigacaoMinima.js';
+import type { MinutaInvestigacao } from './InvestigacaoMinima.js';
 import { DutosClinica } from './DutosClinica.js';
 import { useEffect, useRef, useState } from "react";
 import type { AcaoIntent, ConsultaVisao, FlashPreparada, PedidoBundle, PortaConsulta } from "../api/porta.js";
@@ -23,6 +24,8 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, versaoClinica
     contexto: PedidoBundle; versao: number; versaoClinica: number;
   } | null>(null);
   const [flash, setFlash] = useState(false);
+  const [pedidoInvestigacao,setPedidoInvestigacao]=useState<MinutaInvestigacao|null>(null);
+  const [pedidoRevisao,setPedidoRevisao]=useState("");
   const [preview, setPreview] = useState<Preview | null>(null);
   const [mensagem, setMensagem] = useState("");
   const [ocupado, setOcupado] = useState(false);
@@ -47,7 +50,7 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, versaoClinica
 
   useEffect(() => {
     geracao.current++;
-    emCurso.current = false; setOcupado(false); setFlash(false); setImpressaoPendente(null);
+    emCurso.current = false; setOcupado(false); setFlash(false); setPedidoInvestigacao(null); setImpressaoPendente(null);
     tentativaPreparacao.current = null;
     return () => { geracao.current++; };
   }, [porta, patientId, encounterId, tumorLotId]);
@@ -214,6 +217,20 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, versaoClinica
     ...(aoAbrirApac ? {aoAbrirApac} : {}),
     ocupado: ocupado || !visaoPronta, rotuloFinalizar: "Revisar documentos para assinatura", aoSalvarRascunho: salvar, aoFinalizar: preparar,
   } : null;
+  if(propsFlash&&pedidoInvestigacao&&visaoPronta?.retrato?.revisao!==pedidoRevisao){
+    propsFlash.ocupado=true;propsFlash.iaFala=[...propsFlash.iaFala,"Investigação alterada. Reabra a proposta antes de preparar documentos."];
+  }
+  if(propsFlash&&pedidoInvestigacao&&visaoPronta?.retrato?.revisao===pedidoRevisao&&['LABORATORIO','IMAGEM'].includes(pedidoInvestigacao.categoria??'')){
+    const antigo=propsFlash.planoInicial;
+    const categoria=pedidoInvestigacao.categoria==='IMAGEM'?'imagem':'laboratorio';
+    const solicitacoes={laboratorio:[...(antigo?.solicitacoes?.laboratorio??[])],imagem:[...(antigo?.solicitacoes?.imagem??[])]};
+    const codigo=pedidoInvestigacao.exameCodigo;
+    if(!solicitacoes[categoria].includes(codigo))solicitacoes[categoria].push(codigo);
+    const referencias=[...(antigo?.propostasInvestigacao??[]).filter(p=>p.exameCodigo!==codigo),
+      ...pedidoInvestigacao.regras.map(referencia=>({exameCodigo:codigo,contexto:pedidoInvestigacao.contexto,revisaoFatos:pedidoRevisao,referencia}))];
+    propsFlash.iaFala=[...propsFlash.iaFala,pedidoInvestigacao.justificativa];
+    propsFlash.planoInicial=antigo?{...antigo,solicitacoes,propostasInvestigacao:referencias}:{acoesMarcadas:[],receitasMarcadas:[],apac:{...propsFlash.apac,emitir:false},retorno:propsFlash.retorno,solicitacoes,propostasInvestigacao:referencias};
+  }
   return <section aria-label="Consulta persistida" className="consulta-persistida">
     {!visaoPronta ? <p aria-live="polite">{cargaAtual?.erro || "Carregando consulta persistida…"}</p> : <>
     <h2>{visaoPronta.cabecalho.paciente.nome} · consulta local</h2>
@@ -221,7 +238,8 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, versaoClinica
     {visaoPronta.alertas.filter((a) => a.presentationOverride).map((a) =>
       <aside role="alert" data-banner="e1" key={a.alertaId}><strong>Emergência E1</strong><p>{a.texto}</p></aside>)}
     {mensagem ? <p aria-live="polite">{mensagem}</p> : null}
-    <InvestigacaoMinima porta={porta} contexto={contexto} {...(visaoPronta.retrato?{revisaoEsperada:visaoPronta.retrato.revisao}:{})} />
+    <InvestigacaoMinima porta={porta} contexto={contexto} {...(visaoPronta.retrato?{revisaoEsperada:visaoPronta.retrato.revisao}:{})}
+      aoPrepararPedido={(p,revisao)=>{setPedidoInvestigacao(p);setPedidoRevisao(revisao);setPreview(null);setFlash(true);}} />
     <DutosClinica {...(visaoPronta.dutos?{dados:visaoPronta.dutos}:{})} />
     <div id="consulta-resumo" className="consulta-secao" tabIndex={-1}>
     <VisaoIntegradaMinima {...(visaoPronta.retrato ? {retrato:visaoPronta.retrato}: {})}
@@ -232,7 +250,7 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, versaoClinica
       : <p>Cartão transversal PENDENTE de fonte estruturada.</p>}
     </div>
     <div id="consulta-conduta" className="consulta-secao consulta-acoes" tabIndex={-1}>
-    <button type="button" disabled={ocupado} onClick={() => { setPreview(null); setFlash(true); }}>Consulta Flash</button>
+    <button type="button" disabled={ocupado} onClick={() => { setPreview(null); setPedidoInvestigacao(null); setFlash(true); }}>Consulta Flash</button>
     <button type="button" disabled={ocupado} onClick={() => setVersao((v) => v + 1)}>Reabrir histórico</button>
     </div>
     <InstrumentosClinicos key={`${patientId}:${encounterId}:${tumorLotId ?? ""}`} ocupado={ocupado}
@@ -242,7 +260,7 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, versaoClinica
       }} />
     </>}
     {flash && propsFlash ? <div hidden={!visaoPronta}>
-      <ConsultaFlash key={`${patientId}:${encounterId}:${tumorLotId ?? ""}`} {...propsFlash} />
+      <ConsultaFlash key={`${patientId}:${encounterId}:${tumorLotId ?? ""}:${pedidoInvestigacao?.exameCodigo??"manual"}:${pedidoInvestigacao?.contexto??""}:${pedidoRevisao}`} {...propsFlash} />
     </div> : null}
     {visaoPronta ? <>
     {preview ? <section aria-label="Conteúdo para assinatura">

@@ -1,4 +1,6 @@
 import { InvestigacaoConsultaVisao } from '../../contracts/api/investigacao.js';
+import { RevisaoClinicaResposta } from '../../contracts/fase2/revisaoClinica.js';
+import { EstadoDoencaPreparado } from '../../contracts/fase2/estadoDoenca.js';
 import { SintesePropostaResposta } from '../../contracts/api/sinteseProposta.js';
 import { ActionIntent, ConfirmarBloco } from "../../contracts/operacao.js";
 import { EstadoOncoassist, FontesOncoassist, RespostaOncoassist } from "./oncoassist.js";
@@ -88,6 +90,24 @@ export function criarPortaHttp(opcoes: OpcoesHttp): PortaConsulta {
       if (!r.success || ![200, 201, 409].includes(status)) throw new ErroPorta(codigoDe(json, "SINTESE_PENDENTE"));
       if (r.data.contexto.patientId !== contexto.patientId || r.data.contexto.encounterId !== contexto.encounterId || r.data.contexto.tumorLotId !== contexto.tumorLotId)
         throw new ErroPorta("SINTESE_FORA_CONTEXTO");
+      return r.data;
+    },
+    async prepararEstadoDoenca(pedido,signal){
+      const {status,json}=await enviar('/consulta/estado-doenca/preparar',pedido,true,signal),p=EstadoDoencaPreparado.safeParse(json);
+      if(status!==200||!p.success||p.data.contexto.patientId!==pedido.patientId||p.data.contexto.encounterId!==pedido.encounterId||p.data.contexto.tumorLotId!==pedido.tumorLotId)
+        throw new ErroPorta(codigoDe(json,'ESTADO_DOENCA_PENDENTE'));return p.data;
+    },
+    async confirmarEstadoDoenca(pedido,signal){
+      const {status,json}=await enviar('/consulta/estado-doenca/confirmar',pedido,true,signal);
+      const p=z.object({codigo:z.enum(['GRAVADA','REPLAY']),eventId:z.string().min(1)}).safeParse(json);
+      if(status!==200||!p.success)throw new ErroPorta(codigoDe(json,'ESTADO_DOENCA_PENDENTE'));return p.data;
+    },
+    async revisaoClinica(contexto,packId,signal){
+      const {status,json}=await enviar('/consulta/revisao-clinica',{patientId:contexto.patientId,encounterId:contexto.encounterId,
+        tumorLotId:contexto.tumorLotId,...(packId?{packId}:{})},true,signal);
+      const r=RevisaoClinicaResposta.safeParse(json);
+      if(status!==200||!r.success)throw new ErroPorta(codigoDe(json,'REVISAO_CLINICA_PENDENTE'));
+      if(r.data.contexto.patientId!==contexto.patientId||r.data.contexto.encounterId!==contexto.encounterId||r.data.contexto.tumorLotId!==contexto.tumorLotId)throw new ErroPorta('REVISAO_FORA_CONTEXTO');
       return r.data;
     },
     async investigacao(contexto, signal) {

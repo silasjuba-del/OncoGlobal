@@ -9,16 +9,24 @@ export interface ReconhecimentoLocal {
 export interface ConstrutorReconhecimentoLocal {
   new(): ReconhecimentoLocal;
   available(options: { langs: string[]; processLocally: true }): Promise<string>;
+  install?(options: { langs: string[]; processLocally: true }): Promise<boolean>;
 }
 function construtor(): ConstrutorReconhecimentoLocal | undefined {
   return (globalThis as typeof globalThis & { SpeechRecognition?: ConstrutorReconhecimentoLocal }).SpeechRecognition;
 }
+function mensagemDoErro(erro: unknown): string {
+  const codigo = erro instanceof Error ? erro.message : "";
+  if (codigo === "IDIOMA_LOCAL_INDISPONIVEL") return "Português ainda não está disponível para reconhecimento local. Prepare o idioma ou cole a transcrição.";
+  if (codigo === "RECONHECIMENTO_LOCAL_INDISPONIVEL") return "Este navegador não confirmou processamento local para o ditado.";
+  return "Ditado local indisponível neste navegador. Cole uma transcrição para revisar.";
+}
 
-/** Somente ditado no dispositivo. Nunca instala assets nem recorre a reconhecimento remoto. */
+/** Somente ditado no dispositivo. Instalação de idioma exige clique separado; sem alternativa remota de áudio. */
 export function BotaoVoz({ aoTrecho, aoAtividade, desabilitado = false }: {
   aoTrecho?: (texto: string) => void; aoAtividade?: (ativa: boolean) => void; desabilitado?: boolean;
 } = {}) {
-  const [estado, setEstado] = useState<"PARADO" | "VERIFICANDO" | "OUVINDO">("PARADO");
+  const [estado, setEstado] = useState<"PARADO" | "VERIFICANDO" | "INSTALANDO" | "OUVINDO">("PARADO");
+  const [podeInstalar,setPodeInstalar]=useState(false);
   const [mensagem, setMensagem] = useState("");
   const geracao = useRef(0), reconhecimento = useRef<ReconhecimentoLocal | null>(null);
   const callbacks = useRef({ aoTrecho, aoAtividade }); callbacks.current = { aoTrecho, aoAtividade };
@@ -39,6 +47,7 @@ export function BotaoVoz({ aoTrecho, aoAtividade, desabilitado = false }: {
     try {
       const disponibilidade = await Constructor.available({ langs: ["pt-BR"], processLocally: true });
       if (geracao.current !== atual) return;
+      setPodeInstalar(disponibilidade==="downloadable"&&typeof Constructor.install==="function");
       if (disponibilidade !== "available") throw Error("IDIOMA_LOCAL_INDISPONIVEL");
       const captura = new Constructor();
       if (!("processLocally" in captura)) throw Error("RECONHECIMENTO_LOCAL_INDISPONIVEL");
@@ -67,22 +76,46 @@ export function BotaoVoz({ aoTrecho, aoAtividade, desabilitado = false }: {
         if (geracao.current !== atual) return;
         geracao.current++; reconhecimento.current = null; setEstado("PARADO"); callbacks.current.aoAtividade?.(false);
       };
-      reconhecimento.current = captura; captura.start(); setEstado("OUVINDO");
-    } catch {
+      reconhecimento.current = captura;
+      captura.start(); setEstado("OUVINDO");
+    } catch (erro) {
       if (geracao.current !== atual) return;
       geracao.current++;
       const captura=reconhecimento.current;
       if(captura){captura.onresult=null;captura.onerror=null;captura.onend=null;captura.abort();}
       reconhecimento.current = null; setEstado("PARADO"); callbacks.current.aoAtividade?.(false);
-      setMensagem("Ditado local em português indisponível neste navegador. Cole uma transcrição para revisar.");
+      setMensagem(mensagemDoErro(erro));
     }
   }
+  async function instalarIdioma(){
+    const Constructor=construtor();
+    if(!podeInstalar||!Constructor?.install||estado!=="PARADO"||desabilitado)return;
+    const atual=++geracao.current;setEstado("INSTALANDO");setMensagem("Preparando português para ditado local. O microfone permanece desligado.");
+    callbacks.current.aoAtividade?.(true);
+    try{
+      const instalado=await Constructor.install({langs:["pt-BR"],processLocally:true});
+      if(atual!==geracao.current)return;
+      const disponivel=instalado&&await Constructor.available({langs:["pt-BR"],processLocally:true})==="available";
+      if(atual!==geracao.current)return;
+      setPodeInstalar(!disponivel);setMensagem(disponivel?"Português preparado. Clique em Ditar neste computador para iniciar."
+        :"Não foi possível preparar o idioma local. Você pode colar a transcrição.");
+    }catch{if(atual===geracao.current)setMensagem("Preparação do idioma indisponível. Nenhum áudio foi capturado.");}
+    finally{if(atual===geracao.current){setEstado("PARADO");callbacks.current.aoAtividade?.(false);}}
+  }
+  function cancelarPreparacao(){
+    if(estado!=="INSTALANDO")return;
+    geracao.current++;setEstado("PARADO");setMensagem("Preparação cancelada. Nenhum áudio foi capturado.");callbacks.current.aoAtividade?.(false);
+  }
   return <div>
-    <button type="button" aria-label="comando de voz" disabled={desabilitado || !disponivel || estado === "VERIFICANDO"}
+    <button type="button" aria-label="comando de voz" disabled={desabilitado || !disponivel || estado === "VERIFICANDO" || estado === "INSTALANDO"}
       onClick={() => { if (estado === "OUVINDO") reconhecimento.current?.stop(); else void iniciar(); }}>
       {!disponivel ? "capacidade não habilitada" : estado === "VERIFICANDO" ? "Verificando ditado local…"
         : estado === "OUVINDO" ? "Parar ditado" : "Ditar neste computador"}
     </button>
+    {podeInstalar?<div><p>Preparar o idioma baixa um pacote de reconhecimento do navegador. O ditado continuará local.</p>
+      <button type="button" disabled={desabilitado||estado!=="PARADO"} onClick={()=>void instalarIdioma()}>
+        {estado==="INSTALANDO"?"Preparando idioma…":"Preparar português para ditado local"}</button></div>:null}
+    {estado==="INSTALANDO"?<button type="button" onClick={cancelarPreparacao}>Cancelar preparação do idioma</button>:null}
     {!disponivel ? <p>Ditado local indisponível. Cole uma transcrição para revisar.</p> : null}
     {estado === "OUVINDO" ? <p role="status">Ouvindo neste computador. A fala preenche somente o rascunho.</p> : null}
     {mensagem ? <p role="status">{mensagem}</p> : null}

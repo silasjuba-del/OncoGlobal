@@ -12,6 +12,7 @@ import { dadosDoEvento, eventosVigentes } from "../kernel/projections/snapshot.j
 import type { PlanoFlash } from "../contracts/api/flash.js";
 import type { FlashVisao } from "../contracts/api/porta.js";
 import { hashConteudoExibido } from "./sessao.js";
+import { VersaoReferencia } from '../contracts/f1/correlacao.js';
 import { lerModeloFlashConfigurado, type ModeloFlash } from "../contracts/configFlash.js";
 export type { ModeloFlash } from "../contracts/configFlash.js";
 
@@ -94,6 +95,9 @@ const ApacFlashEntrada = z.object({
 }).strict();
 
 export const PlanoFlashEntrada = z.object({
+  documentosManuais:z.array(z.object({id:z.string().regex(/^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,100}$/),tipo:z.enum(['ENCAMINHAMENTO','LAUDO','ORIENTACOES']),
+    titulo:z.string().max(200),destino:z.string().max(200).nullable(),texto:z.string().max(8000)}).strict()).max(10).refine(v=>new Set(v.map(d=>d.id)).size===v.length,'DOCUMENTO_ID_DUPLICADO').optional(),
+  propostasInvestigacao:z.array(z.object({exameCodigo:Id,contexto:Id,revisaoFatos:Id,referencia:VersaoReferencia}).strict()).max(50).optional(),
   acoesMarcadas: z.array(Id).max(50),
   receitasMarcadas: z.array(Id).max(50),
   receitas:z.array(z.object({id:z.string().regex(/^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,100}$/).refine(v=>!["constructor","prototype","__proto__"].includes(v)),
@@ -123,6 +127,8 @@ export type PlanoFlashEntradaTipo = z.infer<typeof PlanoFlashEntrada>;
 /** O contrato da visão omite opcionais ausentes, inclusive no objeto retorno. */
 function planoParaVisao(plano: PlanoFlashEntradaTipo): PlanoFlash {
   return { acoesMarcadas: plano.acoesMarcadas, receitasMarcadas: plano.receitasMarcadas, apac: plano.apac,
+    ...(plano.documentosManuais===undefined?{}:{documentosManuais:plano.documentosManuais}),
+    ...(plano.propostasInvestigacao===undefined?{}:{propostasInvestigacao:plano.propostasInvestigacao}),
     ...(plano.receitas===undefined?{}:{receitas:plano.receitas}),
     retorno: { dias: plano.retorno.dias, examesAntesDoRetorno: plano.retorno.examesAntesDoRetorno,
       ...(plano.retorno.motivo !== undefined ? { motivo: plano.retorno.motivo } : {}) },
@@ -136,6 +142,7 @@ export interface ContextoFlash { patientId: string; encounterId: string; tumorLo
 interface Resposta { status: number; body: Record<string, unknown>; preparacaoDocumentos?: DocumentosConsultaPreparados }
 /** Fonte/versão resolvidas pelo servidor; jamais desserializar esta porta a partir do HTTP. */
 export interface FonteDocumentosFlash {
+  indicacoesInvestigacao?:Readonly<Record<string,string>>;
   fonte: Fonte; dataReferencia: string; revisao: string;
   medicamentos?: NonNullable<EntradaDocumentosConsulta["decisao"]>["medicamentos"];
   identidadePaciente?:{patientId:string;nome:string;cadastroEventId:string};
@@ -174,7 +181,7 @@ export interface ContextoQtFlash { protocolo: string; ciclo: number; ciclosPrevi
 interface DocumentoFlash { documentId: string; titulo: string; tipoDocumento: string; texto: string; extra: Record<string, unknown> }
 
 function montarDocumentos(chave: string, plano: PlanoFlashEntradaTipo, resumoClinico: string | null, contextoQt: ContextoQtFlash | null): DocumentoFlash[] {
-  const essencial = plano.solicitacoes !== undefined || plano.decisaoQt !== undefined;
+  const essencial = plano.solicitacoes !== undefined || plano.decisaoQt !== undefined || !!plano.documentosManuais?.length;
   const itensLab = plano.solicitacoes?.laboratorio ?? (essencial ? [] : plano.retorno.examesAntesDoRetorno);
   const itensImagem = plano.solicitacoes?.imagem ?? [];
   const lab = essencial ? itensLab.length > 0 : plano.tarefasRetorno?.laboratorio === true;
@@ -207,6 +214,12 @@ function montarDocumentos(chave: string, plano: PlanoFlashEntradaTipo, resumoCli
   docs.push({ documentId: id("retorno"), titulo: "Retorno", tipoDocumento: TIPO_DOC.retorno,
     texto: `Retorno ${prazo}.${plano.retorno.motivo ? `\nMotivo: ${plano.retorno.motivo}` : ""}`,
     extra: { retornoDias: dias, retornoEstado: dias === null ? "PENDENTE" : "DEFINIDO" } });
+  for(const documento of plano.documentosManuais??[]){
+    docs.push({documentId:id(`manual-${documento.id}`),titulo:documento.titulo.trim(),tipoDocumento:`FLASH_${documento.tipo}`,
+      texto:[documento.titulo.trim(),...(documento.destino?.trim()?[`Destino: ${documento.destino.trim()}`]:[]),
+        ...(resumoClinico?["Resumo clínico confirmado",resumoClinico]:[]),"Registro do médico",documento.texto.trim()].join("\n\n"),
+      extra:{documentoManual:documento,origemConteudo:"DECISAO_MEDICA"}});
+  }
   if (essencial) {
     // Cópia fixa dos documentos selecionados; o conjunto também exige exibição e assinatura.
     const documentosIncluidos = docs.map(d => ({ documentId: d.documentId, documentVersion: 1, titulo: d.titulo }));
@@ -240,6 +253,8 @@ function prepararDocumentosFlash(db: DatabaseSync, agora: string, input: Context
   plano: PlanoFlashEntradaTipo; idempotencyKey: string;
 }, resumoClinico: string | null, contextoQt: ContextoQtFlash | null, fonteDocumentos?: FonteDocumentosFlash): Resposta {
   const medicamentos = fonteDocumentos?.medicamentos ?? [];
+  if(input.plano.documentosManuais?.some(d=>!d.titulo.trim()||!d.texto.trim()||d.tipo==='ENCAMINHAMENTO'&&!d.destino?.trim()))
+    return {status:409,body:{codigo:'DOCUMENTO_MANUAL_INCOMPLETO'}};
   if (input.plano.acoesMarcadas.length > 0 || input.plano.receitasMarcadas.some(id => !medicamentos.some(m => m.id === id)))
     return { status: 409, body: { codigo: "ITENS_FLASH_SEM_DOCUMENTO" } };
   if(input.plano.receitas?.some(r=>!medicamentos.some(m=>m.id===r.id&&hashConteudoExibido(m)===hashConteudoExibido(r))))
@@ -271,11 +286,11 @@ function prepararDocumentosFlash(db: DatabaseSync, agora: string, input: Context
   let preparacaoDocumentos: DocumentosConsultaPreparados | undefined;
   if (fonteDocumentos) {
     const contextoCompleto = {patientId: input.patientId, ...contexto};
-    const essencial = input.plano.solicitacoes !== undefined || input.plano.decisaoQt !== undefined;
+    const essencial = input.plano.solicitacoes !== undefined || input.plano.decisaoQt !== undefined || !!input.plano.documentosManuais?.length;
     const lab = input.plano.solicitacoes?.laboratorio ?? (essencial ? [] : input.plano.retorno.examesAntesDoRetorno);
     const imagem = input.plano.solicitacoes?.imagem ?? [];
-    const pedidos = [...lab.map((exame,i)=>({id:`laboratorio_${i}`,exame,indicacao:null})),
-      ...imagem.map((exame,i)=>({id:`imagem_${i}`,exame,indicacao:resumoClinico}))];
+    const pedidos = [...lab.map((exame,i)=>({id:`laboratorio_${i}`,exame,indicacao:fonteDocumentos.indicacoesInvestigacao?.[`LABORATORIO|${exame}`]??null})),
+      ...imagem.map((exame,i)=>({id:`imagem_${i}`,exame,indicacao:fonteDocumentos.indicacoesInvestigacao?.[`IMAGEM|${exame}`]??resumoClinico}))];
     preparacaoDocumentos = prepararDocumentosConsulta({ contexto:contextoCompleto,
       operationId:input.idempotencyKey,revisao:fonteDocumentos.revisao,dataReferencia:fonteDocumentos.dataReferencia,
       fuso:"America/Fortaleza", materiais:[], decisao:{decisaoId:`flash-decisao-${chave}`,contexto:contextoCompleto,
@@ -284,7 +299,7 @@ function prepararDocumentosFlash(db: DatabaseSync, agora: string, input: Context
         retorno:{dias:input.plano.retorno.dias,motivo:input.plano.retorno.motivo ?? null,tarefaId:`flash-tarefa-${chave.slice(0,20)}`}} });
     const mapaDocumentos = new Map<string,string>();
     for (const d of docs) {
-      d.extra={...d.extra,fontes:[fonteDocumentos.fonte],preparacaoS9:{revisao:fonteDocumentos.revisao,documentos:[]}};
+      d.extra={...d.extra,...(input.plano.propostasInvestigacao?.length?{propostasInvestigacao:input.plano.propostasInvestigacao}:{}),fontes:[fonteDocumentos.fonte],preparacaoS9:{revisao:fonteDocumentos.revisao,documentos:[]}};
       const gerados = preparacaoDocumentos.documentos.filter(g=>
         d.tipoDocumento===TIPO_DOC.retorno ? g.tipoDocumento==="RETORNO"
         : d.tipoDocumento===TIPO_DOC.laboratorio ? g.tipoDocumento==="PEDIDO_EXAME" && lab.some(exame=>g.texto.includes(`Exame: ${exame}\n`))

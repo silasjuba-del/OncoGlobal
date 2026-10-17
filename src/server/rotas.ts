@@ -5,6 +5,9 @@ import { rotearBiblioteca } from "./biblioteca.js";
 import { rotearDutos, referenciaSigtapDuto } from "./dutos.js";
 import { reconciliarMedicamentos } from "./medicamentos.js";
 import { obterInvestigacao, type DepsInvestigacao } from "./investigacao.js";
+import { obterRevisaoClinica } from './revisaoClinica.js';
+import { rotearEstadoDoenca } from './estadoDoenca.js';
+import type { CatalogoTumorPacks } from '../kernel/corpus/tumorPacks.js';
 import { executarSinteseRetratoLlm, executarDocumentoOriginalLlm, executarExtracaoLlm } from "./extracaoLlm.js";
 import type { criarRuntimeExtracaoLlm } from "../kernel/llm/openai/runtime.js";
 import { processarUploadLocal } from "./upload.js";
@@ -62,6 +65,7 @@ export interface ServidorDeps {
   corpus?: ReturnType<typeof carregarCorpusServidor> | null;
   oncoassistJev?: ReturnType<typeof criarOncoassistJev>;
   motorF1?:ReturnType<typeof criarMotorF1>;
+  catalogoTumorPacks?:CatalogoTumorPacks;
   extracaoLlm?:ReturnType<typeof criarRuntimeExtracaoLlm>;
   packInvestigacao?:NonNullable<DepsInvestigacao["packInvestigacao"]>;
   agora: () => string;
@@ -346,6 +350,9 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
         : req.url === "/consulta/oncoassist/sintese" ? "sinteseRetratoLlm"
         : req.url === "/consulta/llm/documento-original" ? "documentoOriginalLlm"
         : req.url === "/consulta/investigacao" ? "investigacao"
+        : req.url === "/consulta/revisao-clinica" ? "revisaoClinica"
+        : req.url === "/consulta/estado-doenca/preparar" ? "prepararEstadoDoenca"
+        : req.url === "/consulta/estado-doenca/confirmar" ? "confirmarEstadoDoenca"
         : req.url === "/consulta/llm/extrair" ? "extracaoLlm"
         : ["/biblioteca/importar","/biblioteca/curar","/biblioteca/ativar","/biblioteca/rollback","/biblioteca/consultar","/biblioteca/estado"].includes(req.url??"") ? req.url!
         : ["/farmacia/enviar","/farmacia/conferir","/salao/registrar-administracao","/apac/validar-emissao","/chat/aceitar-decisao","/tarefas/receber","/tarefas/concluir"].includes(req.url??"") ? req.url!
@@ -409,6 +416,20 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
     if(rota === "reconciliarMedicamentos"){const result=reconciliarMedicamentos(raw,token,deps);return reply(result.status,String(result.body.codigo),result.body);}
     if(rota === "sinteseRetratoLlm"){const result=await executarSinteseRetratoLlm(raw,token,deps);return reply(result.status,String(result.body.codigo),result.body);}
     if(rota === "documentoOriginalLlm"){const result=await executarDocumentoOriginalLlm(raw,token,deps);return reply(result.status,String(result.body.codigo),result.body);}
+    const estadoDoenca=rotearEstadoDoenca(deps,token,rota,raw);if(estadoDoenca)return reply(estadoDoenca.status,String(estadoDoenca.body.codigo),estadoDoenca.body);
+    if(rota === "revisaoClinica"){
+      const p=z.object({patientId:Id,encounterId:Id,tumorLotId:Id.nullable(),packId:Id.optional()}).strict().safeParse(raw);
+      if(!p.success)return reply(400,"PAYLOAD_INVALIDO");
+      const ctx=deps.sessoes.consultaSelecionada(token);
+      if(!ctx||ctx.patientId!==p.data.patientId||ctx.encounterId!==p.data.encounterId||(ctx.tumorLotId??null)!==p.data.tumorLotId)return reply(409,"CONTEXTO_CONSULTA_ALTERADO");
+      if(!deps.motorF1||!deps.catalogoTumorPacks)return reply(409,"REVISAO_CLINICA_INDISPONIVEL");
+      try{const {packId,...contexto}=p.data;const result=await obterRevisaoClinica(deps.motorF1,deps.catalogoTumorPacks,contexto,packId,
+        ()=>lerRecist(deps.db,contexto.patientId,{encounterId:contexto.encounterId,tumorLotId:contexto.tumorLotId,agora:deps.agora()}));
+        const atual=deps.sessoes.consultaSelecionada(token);
+        if(!deps.sessoes.obter(token)||!atual||atual.patientId!==contexto.patientId||atual.encounterId!==contexto.encounterId||(atual.tumorLotId??null)!==contexto.tumorLotId)return reply(409,"CONTEXTO_CONSULTA_ALTERADO");
+        return reply(200,result.codigo,result);
+      }catch{return reply(409,"REVISAO_CLINICA_PENDENTE");}
+    }
     if(rota === "investigacao"){
       const p=z.object({patientId:Id,encounterId:Id,tumorLotId:Id.nullable()}).strict().safeParse(raw);if(!p.success)return reply(400,"PAYLOAD_INVALIDO");
       const ctx=deps.sessoes.consultaSelecionada(token);if(!ctx||ctx.patientId!==p.data.patientId||ctx.encounterId!==p.data.encounterId||(ctx.tumorLotId??null)!==p.data.tumorLotId)return reply(409,"CONTEXTO_CONSULTA_ALTERADO");
@@ -1082,6 +1103,21 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
       if ("codigo" in consultaRevisada) return reply(409, consultaRevisada.codigo);
       const resumoClinico = consultaRevisada.resumoConfirmadoParaDocumento;
       const contextoS9={patientId:parsed.data.patientId,encounterId:parsed.data.encounterId,tumorLotId:parsed.data.tumorLotId};
+      const indicacoesInvestigacao:Record<string,string>={};
+      if(rota==='prepararFlash'&&parsed.data.plano.propostasInvestigacao?.length){
+        const atual=obterInvestigacao(deps,contextoS9);
+        for(const escolhida of parsed.data.plano.propostasInvestigacao){
+          const candidatas=atual.resultado?.propostas.filter(p=>p.exameCodigo===escolhida.exameCodigo&&p.contexto===escolhida.contexto
+            &&p.regras.some(ref=>hashConteudoExibido(ref)===hashConteudoExibido(escolhida.referencia)))??[];
+          const proposta=candidatas.length===1?candidatas[0]:null;
+          if(atual.revisao!==escolhida.revisaoFatos||!proposta||!['LABORATORIO','IMAGEM'].includes(proposta.categoria??''))return reply(409,'INVESTIGACAO_ALTERADA_REPREPARAR');
+          const itens=proposta.categoria==='IMAGEM'?parsed.data.plano.solicitacoes?.imagem:parsed.data.plano.solicitacoes?.laboratorio;
+          if(!itens?.includes(proposta.exameCodigo))return reply(409,'PROPOSTA_FORA_DO_PEDIDO');
+          const chave=`${proposta.categoria}|${proposta.exameCodigo}`;
+          if(indicacoesInvestigacao[chave])return reply(409,'PROPOSTA_INVESTIGACAO_DUPLICADA');
+          indicacoesInvestigacao[chave]=`${proposta.justificativa} Referência: ${escolhida.referencia.id} v${escolhida.referencia.versao}.`;
+        }
+      }
       const revisaoS9=revisaoDocumentosFlash(deps,contextoS9,sessao);
       const civilS9=dataCivilDoServico(deps.agora(),"-03:00");
       if(civilS9.estado!=="OK")return reply(409,civilS9.codigo);
@@ -1116,7 +1152,7 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
       if ("idempotencyKey" in parsed.data && cadastros.length !== 1)
         return reply(409,cadastros.length ? "IDENTIDADE_PACIENTE_AMBIGUA" : "IDENTIDADE_PACIENTE_AUSENTE");
       const identidadePaciente=cadastros[0];
-      const fonteS9={...(identidadePaciente?{identidadePaciente}:{}),identidadeResponsavel:{medicoId:sessao.medicoId,crm:sessao.crm},medicamentos:parsed.data.plano.receitas??[],fonte:{sourceId:sourceIdS9,classe:"MANUAL" as const,localizador:resumoRef,
+      const fonteS9={...(Object.keys(indicacoesInvestigacao).length?{indicacoesInvestigacao}:{}),...(identidadePaciente?{identidadePaciente}:{}),identidadeResponsavel:{medicoId:sessao.medicoId,crm:sessao.crm},medicamentos:parsed.data.plano.receitas??[],fonte:{sourceId:sourceIdS9,classe:"MANUAL" as const,localizador:resumoRef,
         dataClinica:civilS9.dataCivil,dataCaptura:capturadoEm,versao:"s9-flash@1",contentHash:hashDecisao},
         dataReferencia:civilS9.dataCivil,revisao:revisaoS9};
       const result = "expectedRevision" in parsed.data

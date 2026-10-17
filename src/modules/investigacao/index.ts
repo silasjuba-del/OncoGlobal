@@ -14,6 +14,7 @@ export interface AplicabilidadeRequisito {
 }
 export interface RequisitoInvestigacao {
   id:string; exameCodigo:string; contexto:string; fonte:string; codigoSus:string|null;
+  categoria?:'LABORATORIO'|'IMAGEM'|'OUTRO'|undefined;
   aplicabilidade?:AplicabilidadeRequisito;
   /** Null = requisito documental sem janela; nunca utiliza prazo inventado. */
   validadeHoras:number|null;
@@ -30,6 +31,7 @@ export interface ResultadoRequisito {
 }
 export interface PropostaExame {
   exameCodigo:string; contexto:string; codigoSus:string|null; pendencias:string[];
+  categoria?:'LABORATORIO'|'IMAGEM'|'OUTRO'|undefined;
   justificativa:string; fatos:FatoRetrato['ref'][]; regras:Referencia[];
 }
 export interface ResultadoInvestigacao {
@@ -92,7 +94,7 @@ export function avaliarInvestigacao(r:Retrato,c:Correlacao,pack:PackRequisitos,o
   out.requisitos.push({...base,classificacao,justificativa,fatos:refs});
   if(classificacao==='ausente'||classificacao==='vencido'){const chave=`${k(req.exameCodigo)}|${k(req.contexto)}`;if(propostos.has(chave))continue;
     if(!refsResumo.length){lacuna(`RESUMO:${req.id}`,'Proposta de pedido exige resumo do caso com referências a fatos.');continue;}
-    propostos.add(chave);out.propostas.push({exameCodigo:req.exameCodigo,contexto:req.contexto,codigoSus:req.codigoSus?.trim()||null,pendencias:!req.codigoSus?.trim()?['SEM_CODIGO_SUS']:[],justificativa,fatos:[...refs,...refsResumo],regras:[pack.referencia]});}
+    propostos.add(chave);out.propostas.push({exameCodigo:req.exameCodigo,contexto:req.contexto,codigoSus:req.codigoSus?.trim()||null,...(req.categoria?{categoria:req.categoria}:{}),pendencias:!req.codigoSus?.trim()?['SEM_CODIGO_SUS']:[],justificativa,fatos:[...refs,...refsResumo],regras:[pack.referencia]});}
  }
  return out;
 }

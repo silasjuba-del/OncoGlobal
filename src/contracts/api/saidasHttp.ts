@@ -1,4 +1,6 @@
 import { z } from "zod";
+import { RevisaoClinicaResposta } from '../fase2/revisaoClinica.js';
+import { EstadoDoencaPreparado } from '../fase2/estadoDoenca.js';
 import { Id, Instante } from "../base.js";
 import { ClinicalFact, ReviewException } from "../w10/extracao.js";
 import { ResultadoInstrumentoSchema } from "../f0c/resultadoInstrumento.js";
@@ -28,6 +30,8 @@ export const SaidasHttp: Readonly<Record<string, z.ZodType>> = {
   salao: SalaoResposta, salvarTriagemSalao: SalaoResposta, liberarSalao: SalaoResposta,
   vincularCanal: CanalResposta, chat: ChatResposta, bundle: BundleResposta, confirmar: ConfirmacaoResposta,
   acao: AcaoResposta, investigacao: InvestigacaoConsultaVisao,
+  revisaoClinica: RevisaoClinicaResposta,
+  prepararEstadoDoenca: EstadoDoencaPreparado,confirmarEstadoDoenca:Gravacao,
   avaliarInstrumento: z.object({ resultado: ResultadoInstrumentoSchema, gravado: z.literal(false), assinado: z.literal(false) }),
   oncoassistStatus: EstadoOncoassist, oncoassistFontes: FontesOncoassist, oncoassistClassificar: RespostaOncoassist,
   sinteseRetratoLlm: SintesePropostaResposta, reconciliarRascunhos: ReconciliacaoProposta, prepararRevisao: RevisaoPreparada,
