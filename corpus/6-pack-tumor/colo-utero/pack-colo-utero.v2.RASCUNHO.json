@@ -2043,5 +2043,2920 @@
       "achado": "Decisão do Dr. Silas",
       "acao": "ifosfamida no colo: ciclo de 28 dias"
     }
-  ]
+  ],
+  "tumor_pack_universal": {
+    "schema_documental": "tumor-pack-universal@1",
+    "metadados": {
+      "revisao_documental": "2026-10-17-nccn-final-documental",
+      "versao": "1.3.0",
+      "data": "2026-10-17",
+      "autor_extracao": "Codex",
+      "estado": "RASCUNHO",
+      "aprovacao_clinica": null,
+      "escopo": "CAMADA_ADITIVA_UNIVERSAL_E_DELTA_DOCUMENTAL_NCCN",
+      "base_legada": {
+        "arquivo": "corpus/6-pack-tumor/colo-utero/pack-colo-utero.v2.RASCUNHO.json",
+        "commit": "2c0991d",
+        "versao": "2.0.0",
+        "sha256_bytes": "d585578f88567e308bcd28210d17aab77ffc55fe8c4899135380ad6e3ff727fa",
+        "sha256_semantico": "cf78f5ada661580060be36f1c7644155e9710b8f9068879eeb808ca11c1e23b9"
+      },
+      "nota_versao": "Camada universal 1.3.0; header identifica o legado preservado. Fechamento documental, sem aprovação clínica ou ativação.",
+      "integra_runtime": false,
+      "gera_conduta": false,
+      "historico_revisoes": [
+        {
+          "revisao_documental": "2026-10-17-nccn-delta-1",
+          "versao": "1.0.0",
+          "data": "2026-10-17",
+          "autor_extracao": "Codex",
+          "estado": "RASCUNHO",
+          "aprovacao_clinica": null,
+          "escopo": "CAMADA_ADITIVA_UNIVERSAL_E_DELTA_DOCUMENTAL_NCCN",
+          "base_legada": {
+            "arquivo": "corpus/6-pack-tumor/colo-utero/pack-colo-utero.v2.RASCUNHO.json",
+            "commit": "2c0991d",
+            "versao": "2.0.0",
+            "sha256_bytes": "d585578f88567e308bcd28210d17aab77ffc55fe8c4899135380ad6e3ff727fa",
+            "sha256_semantico": "cf78f5ada661580060be36f1c7644155e9710b8f9068879eeb808ca11c1e23b9"
+          },
+          "nota_versao": "header.versao identifica o legado intacto; esta extensão possui revisão própria. Não reutilizar aprovação/hashes antigos para o conjunto alterado.",
+          "integra_runtime": false,
+          "gera_conduta": false
+        },
+        {
+          "revisao_documental": "2026-10-17-nccn-delta-3-auditoria33",
+          "versao": "1.2.0",
+          "data": "2026-10-17",
+          "autor_extracao": "Codex",
+          "estado": "RASCUNHO",
+          "aprovacao_clinica": null,
+          "escopo": "CAMADA_ADITIVA_UNIVERSAL_E_DELTA_DOCUMENTAL_NCCN",
+          "base_legada": {
+            "arquivo": "corpus/6-pack-tumor/colo-utero/pack-colo-utero.v2.RASCUNHO.json",
+            "commit": "2c0991d",
+            "versao": "2.0.0",
+            "sha256_bytes": "d585578f88567e308bcd28210d17aab77ffc55fe8c4899135380ad6e3ff727fa",
+            "sha256_semantico": "cf78f5ada661580060be36f1c7644155e9710b8f9068879eeb808ca11c1e23b9"
+          },
+          "nota_versao": "Revisão da camada universal1.2.0; header legado preservado. Auditoria documental dos33 itens, sem aprovação clínica.",
+          "integra_runtime": false,
+          "gera_conduta": false,
+          "historico_revisoes": [
+            {
+              "revisao_documental": "2026-10-17-nccn-delta-1",
+              "versao": "1.0.0",
+              "data": "2026-10-17",
+              "autor_extracao": "Codex",
+              "estado": "RASCUNHO",
+              "aprovacao_clinica": null,
+              "escopo": "CAMADA_ADITIVA_UNIVERSAL_E_DELTA_DOCUMENTAL_NCCN",
+              "base_legada": {
+                "arquivo": "corpus/6-pack-tumor/colo-utero/pack-colo-utero.v2.RASCUNHO.json",
+                "commit": "2c0991d",
+                "versao": "2.0.0",
+                "sha256_bytes": "d585578f88567e308bcd28210d17aab77ffc55fe8c4899135380ad6e3ff727fa",
+                "sha256_semantico": "cf78f5ada661580060be36f1c7644155e9710b8f9068879eeb808ca11c1e23b9"
+              },
+              "nota_versao": "header.versao identifica o legado intacto; esta extensão possui revisão própria. Não reutilizar aprovação/hashes antigos para o conjunto alterado.",
+              "integra_runtime": false,
+              "gera_conduta": false
+            }
+          ]
+        }
+      ]
+    },
+    "identidade_ref": "/identidade",
+    "dominios": [
+      {
+        "dominio_id": 1,
+        "nome": "Diagnóstico e patologia",
+        "itens_legados_refs": [
+          "legado-e29fcc2c6d783a76",
+          "legado-e2c501e8afaf39ee",
+          "legado-95e1687319772ced",
+          "legado-835ffb859a652c68",
+          "legado-1941e826431cd14a",
+          "legado-a761b276122bf77c",
+          "legado-abc7d5734fb4d489",
+          "legado-23a5fb9c7d6f8011",
+          "legado-846a42907ceecf4d"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 2,
+        "nome": "Estadiamento, extensão e risco",
+        "itens_legados_refs": [
+          "legado-7e956daf4b5a3d82",
+          "legado-a72c83d8e5b3a16c",
+          "legado-e24f242454a80eae",
+          "legado-a758036b58dc5470",
+          "legado-07cde9c94a7ed014",
+          "legado-26faebe2021af434",
+          "legado-5f85ab590258268f",
+          "legado-59bd4b5c857811bb",
+          "legado-b95a019b5fedac63"
+        ],
+        "itens_nccn_refs": [
+          "nccn-20261017-colo-utero-figo-pembro"
+        ],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 3,
+        "nome": "Biomarcadores e farmacogenética",
+        "itens_legados_refs": [
+          "legado-d9c9a659a7893cf8",
+          "legado-abfbac8a3e5bed88",
+          "legado-3a2d2cc70cef5c5a",
+          "legado-53f78c06cb5e0d66",
+          "legado-4ffd9b66cd9d689a"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 4,
+        "nome": "Exames e requisitos documentais",
+        "itens_legados_refs": [
+          "legado-20fc6168cd2ce017",
+          "legado-4dcbed118f4b35fe",
+          "legado-5de4d45882862c49",
+          "legado-63d7d423512aef91",
+          "legado-2326aa028b8ff4b6",
+          "legado-259f241263569d9c",
+          "legado-d7596f46fb89fdea",
+          "legado-fb12cfbaa429bb51",
+          "legado-76d9bee846b18b43",
+          "legado-c6c3a53a758d92d9",
+          "legado-f2a22a29bc827d15",
+          "legado-8c9d51aa1969abed",
+          "legado-973eba77d25f93b0",
+          "legado-fb5c3e198c798c9a",
+          "legado-faae0c57b32e55d2",
+          "legado-89db3b6ec657bc2a",
+          "legado-7d2143eacc3b8445",
+          "legado-69259b6701405162",
+          "legado-35576a1689c02b4b",
+          "legado-7dc99d83d804fe16",
+          "legado-77bdc8afd83bec96",
+          "legado-8dbc3011da514373",
+          "legado-ad7da3bfcd1a8f20",
+          "legado-1adf0cba5b8ce961",
+          "legado-71887bd8a730c91c",
+          "legado-6794156b39810058",
+          "legado-1e182f6c9bda346d",
+          "legado-c4ad324f15dcd340",
+          "legado-096cb2cb9288a88b",
+          "legado-0f9299cb90be33fa",
+          "legado-6d89e4dddb1ce90d",
+          "legado-f5be3dfb88097e19"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 5,
+        "nome": "Avaliação antes do tratamento",
+        "itens_legados_refs": [],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "NAO_ESTRUTURADO_NESTA_RODADA",
+        "observacao": "Ausência de referências não significa não aplicabilidade; textos dentro de outros itens permanecem preservados."
+      },
+      {
+        "dominio_id": 6,
+        "nome": "Tratamento e protocolos",
+        "itens_legados_refs": [
+          "legado-d738f94e72f50c03",
+          "legado-96ac7232db5b82d3",
+          "legado-b9ccc874abca32c6",
+          "legado-54ecb50193655019",
+          "legado-f36e4ead9f60dde4",
+          "legado-357f6def60d72329",
+          "legado-85d7cd132cb22e3e",
+          "legado-f0b3301cb44128f0",
+          "legado-af29657a71cadc98",
+          "legado-296e30cbd8199990",
+          "legado-0aa3b37a2b08d610",
+          "legado-14837a06b8cc7aca",
+          "legado-e85f9540277ea91f",
+          "legado-7cd92fdd4a7cbdd0",
+          "legado-f2af3fbffac62552",
+          "legado-713fb3160ab9247c",
+          "legado-8e0c05d4abe75de7",
+          "legado-920050fd39825dec",
+          "legado-8372310cdfd04911",
+          "legado-9bc12d12f51876d3",
+          "legado-4f63bd0325cc4a1b",
+          "legado-61692c978662fbee",
+          "legado-5496c9365db23ea9",
+          "legado-dfed98e972e32423",
+          "legado-77f09b54809d1895",
+          "legado-0e8498f3fb87eadc",
+          "legado-ec5845cdcef40bfe",
+          "legado-11a4e5cd3df398ca",
+          "legado-63414bfeea33f917",
+          "legado-9d0f7fd590358b46",
+          "legado-f3fe19f1c82b8d54",
+          "legado-be66460bc4d242f9"
+        ],
+        "itens_nccn_refs": [
+          "nccn-20261017-colo-utero-tisotumabe",
+          "nccn-20261017-colo-utero-atezo-cis",
+          "nccn-20261017-colo-utero-atezo-carbo"
+        ],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 7,
+        "nome": "Segurança, interações e toxicidades",
+        "itens_legados_refs": [
+          "legado-4d6da71edd61d34a",
+          "legado-77ce82685ad7feeb",
+          "legado-ffcd5f4f938c06b0",
+          "legado-5600feb7330e0cbe",
+          "legado-8b9f07587fac3b2c",
+          "legado-f3c380cb128b21c6",
+          "legado-de089b673a9944a2",
+          "legado-e9b655544395b909",
+          "legado-e604835910e36719"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 8,
+        "nome": "Suporte e cuidados",
+        "itens_legados_refs": [
+          "legado-2b035de545b16e2d",
+          "legado-6d231c098ab45b75",
+          "legado-3f1cc43c9d31b02b",
+          "legado-4b1c2c155be8f456"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 9,
+        "nome": "Avaliação de resposta e estado da doença",
+        "itens_legados_refs": [],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "NAO_ESTRUTURADO_NESTA_RODADA",
+        "observacao": "Ausência de referências não significa não aplicabilidade; textos dentro de outros itens permanecem preservados."
+      },
+      {
+        "dominio_id": 10,
+        "nome": "Seguimento e sobrevivência",
+        "itens_legados_refs": [
+          "legado-242b7c7964e2fd6b",
+          "legado-2d6d091519156648",
+          "legado-fdd873bedb3e1613",
+          "legado-97ce6fd207fc72a7",
+          "legado-a7ace3dddeb92a90",
+          "legado-67cd8a019ef0f2b5"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 11,
+        "nome": "Encaminhamentos e atuação multiprofissional",
+        "itens_legados_refs": [
+          "legado-ecbdb4933d34afa9",
+          "legado-6cc190ceae05ea4f",
+          "legado-508a1e453d3cf6f4",
+          "legado-c5a0a04f348bcd4b"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 12,
+        "nome": "Documentos e acesso assistencial",
+        "itens_legados_refs": [
+          "legado-365dcdd60ab252a5",
+          "legado-f0c369326b507fb2"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      }
+    ],
+    "indice_itens_legados": [
+      {
+        "item_id": "legado-e29fcc2c6d783a76",
+        "origem_json_pointer": "/diagnostico/patologico/obtencao/0",
+        "sha256_conteudo": "3023224aaeecb62103f4d26c4874625a01bdec98ad25990f2f4256eb831a4d1b",
+        "nome": "/diagnostico/patologico/obtencao/0",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/obtencao/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e2c501e8afaf39ee",
+        "origem_json_pointer": "/diagnostico/patologico/obtencao/1",
+        "sha256_conteudo": "09c21bb257e5b53882df967322abb01d36760a72010a3047999ef598716575d6",
+        "nome": "/diagnostico/patologico/obtencao/1",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/obtencao/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-95e1687319772ced",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/0",
+        "sha256_conteudo": "b9d8de50b9edd0b2ac621b01599f4b74f9c8e56b4bec231a9629d89fdc70fe32",
+        "nome": "Tipo histológico (escamoso, adenocarcinoma, adenoescamoso)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-835ffb859a652c68",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/1",
+        "sha256_conteudo": "410b602687785a4a7b58cc81dd7f429f3eebe1ce8cc48eba81c89c9cd440cb28",
+        "nome": "Profundidade de invasão estromal (mm) e terço (superficial/médio/profundo)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-1941e826431cd14a",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/2",
+        "sha256_conteudo": "e329c84083b8f093f6caffc6ddbea7755f31f05642f97863273178e3ddd3b54f",
+        "nome": "Maior dimensão tumoral",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a761b276122bf77c",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/3",
+        "sha256_conteudo": "eb4af6abe987277af68549a2f3a9d9eb7896b9ed4d73579fb5f38f48ec7e5ea8",
+        "nome": "Invasão linfovascular",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-abc7d5734fb4d489",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/4",
+        "sha256_conteudo": "6ad7c1adf279d81ea06ea4484904ea40432aef0ff17aa55daa80ac0b8f4453ec",
+        "nome": "Margens (cone/traquelectomia/histerectomia)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-23a5fb9c7d6f8011",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/5",
+        "sha256_conteudo": "6f47dbbf3db60db132eac436bb8ecbf33c98f4544cb839d0d1fdc1c702bbe87b",
+        "nome": "Invasão parametrial",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-846a42907ceecf4d",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/6",
+        "sha256_conteudo": "2792f1114ef6d19bdc87d9da65d01f1722915fc5f59497b429588fa046228444",
+        "nome": "Linfonodos (pélvicos/para-aórticos; micro/macrometástase)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-7e956daf4b5a3d82",
+        "origem_json_pointer": "/estadiamento/sistema",
+        "sha256_conteudo": "68c61bd2e16c71e4cf20d62940edfeb99a349db7d5f0e01ec0bb87a76c20133a",
+        "nome": "FIGO",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a72c83d8e5b3a16c",
+        "origem_json_pointer": "/estadiamento/edicao",
+        "sha256_conteudo": "e93d5f9fd006133ba7ac982d5a8c0d0560475263a23da9c3e03ec568f5e020a5",
+        "nome": "FIGO 2018 / TNM (tabelas SBOC 2026 v4)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e24f242454a80eae",
+        "origem_json_pointer": "/estadiamento/gruposConduta/0",
+        "sha256_conteudo": "228e361f3c3959c59ad250b2ffe35eac5fe5a857d94fdd8dd2bfd74a17a264a7",
+        "nome": "/estadiamento/gruposConduta/0",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a758036b58dc5470",
+        "origem_json_pointer": "/estadiamento/gruposConduta/1",
+        "sha256_conteudo": "a5ff97dd62f6655f02244164edee4ca1c4cff9aa94c2a426bd1f186b7da8c395",
+        "nome": "/estadiamento/gruposConduta/1",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-07cde9c94a7ed014",
+        "origem_json_pointer": "/estadiamento/gruposConduta/2",
+        "sha256_conteudo": "3eb4b45386bb4f6306e014771843ae2c0304e35a32fa605a1366767072215486",
+        "nome": "/estadiamento/gruposConduta/2",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-26faebe2021af434",
+        "origem_json_pointer": "/estadiamento/gruposConduta/3",
+        "sha256_conteudo": "aa3a03f7ab2f4e63d6aa0170339771cdc3eb671299a64992806e5f62cfa569c1",
+        "nome": "/estadiamento/gruposConduta/3",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-5f85ab590258268f",
+        "origem_json_pointer": "/estadiamento/gruposConduta/4",
+        "sha256_conteudo": "a3bcb440143a5c857efd8dd590a94aefe6ec2f438a7f2dd181b86c2684fa1767",
+        "nome": "/estadiamento/gruposConduta/4",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-59bd4b5c857811bb",
+        "origem_json_pointer": "/estadiamento/gruposConduta/5",
+        "sha256_conteudo": "0e0765814f631862937d1cceb0dc55b6de7319f7249c598f6d75dde87d1992e3",
+        "nome": "/estadiamento/gruposConduta/5",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/5/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b95a019b5fedac63",
+        "origem_json_pointer": "/estadiamento/marcadores",
+        "sha256_conteudo": "34a05d567f35f6bf6f74e7b9e83e87b86444929dff2cd8ed3cc3ccec7bb8126f",
+        "nome": "/estadiamento/marcadores",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d9c9a659a7893cf8",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/0",
+        "sha256_conteudo": "1606b94ee8174b4704e084b03e5e3d61e02428c7874cb697ed80303dd8ef86ae",
+        "nome": "Doença IVB, persistente ou recorrente — 1ª linha",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-abfbac8a3e5bed88",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/1",
+        "sha256_conteudo": "9d4810ff026b426f5699d2170131feceea06b8c4d9af63982d43ebe318331ee7",
+        "nome": "2ª linha metastática",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-3a2d2cc70cef5c5a",
+        "origem_json_pointer": "/tratamento/biomarcadorTratamento/0",
+        "sha256_conteudo": "ba4a35c05848fffb83dabd7465736efb94676553c767f7b18492bc28c0f07548",
+        "nome": "/tratamento/biomarcadorTratamento/0",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/biomarcadorTratamento/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-53f78c06cb5e0d66",
+        "origem_json_pointer": "/tratamento/biomarcadorTratamento/1",
+        "sha256_conteudo": "baeec0d482527a2fabf74bc274b0294f35fcb833fe317f7d293dfacc8a7b960f",
+        "nome": "/tratamento/biomarcadorTratamento/1",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/biomarcadorTratamento/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-4ffd9b66cd9d689a",
+        "origem_json_pointer": "/tratamento/biomarcadorTratamento/2",
+        "sha256_conteudo": "7b3d89946748f00ba296777604a91086b6f8ca9d44171227258648281701dae6",
+        "nome": "/tratamento/biomarcadorTratamento/2",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/biomarcadorTratamento/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-20fc6168cd2ce017",
+        "origem_json_pointer": "/diagnostico/imagem/0",
+        "sha256_conteudo": "198abef56014fdb57a61570fa8cf6d03a0496175b13cbce1e1b48020c4c828fb",
+        "nome": "RM de pelve",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-4dcbed118f4b35fe",
+        "origem_json_pointer": "/diagnostico/imagem/1",
+        "sha256_conteudo": "4fba43310cf107dff7ae3adeb79a27312f12a991cc6ef24fd8c6187c3c719bc4",
+        "nome": "PET/CT-FDG",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-5de4d45882862c49",
+        "origem_json_pointer": "/diagnostico/endoscopicos/0",
+        "sha256_conteudo": "b06a8a78e1cf9582c4ad6a1d48c08c8e2538d9356f00e884e4fb956e648bfd49",
+        "nome": "Cistoscopia",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/endoscopicos/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-63d7d423512aef91",
+        "origem_json_pointer": "/diagnostico/endoscopicos/1",
+        "sha256_conteudo": "db9cd3963c780e07c1111a256951e78576fa418db50496f17585fcf32a18c9b8",
+        "nome": "Retossigmoidoscopia",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/endoscopicos/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-2326aa028b8ff4b6",
+        "origem_json_pointer": "/estadiamento/exames/0",
+        "sha256_conteudo": "3c32d12b49da09511cb92aaf931267b9d019b10c17ee1b4fbdf6f62d80329580",
+        "nome": "RM de pelve",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-259f241263569d9c",
+        "origem_json_pointer": "/estadiamento/exames/1",
+        "sha256_conteudo": "810d646aa2ea4d87684ed938ed2c64283f7c53368c35041acda6561e0902cb7e",
+        "nome": "RM ou TC de abdome",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d7596f46fb89fdea",
+        "origem_json_pointer": "/estadiamento/exames/2",
+        "sha256_conteudo": "42df9b3c2af884571196bd6f5d9f6abac8a9ed26cc133c7aaf569631a458300a",
+        "nome": "TC de abdome (alternativa à RM)",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-fb12cfbaa429bb51",
+        "origem_json_pointer": "/estadiamento/exames/3",
+        "sha256_conteudo": "a9fd3975a0c7b78b73f06faed02c64ebffc1691ba1dcfd2c2d0b4d99a16e126c",
+        "nome": "RX de tórax",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-76d9bee846b18b43",
+        "origem_json_pointer": "/estadiamento/exames/4",
+        "sha256_conteudo": "d9ce150c433f2f2e99a975a817facfc6cf62de6289deae4e95d75c479afe8492",
+        "nome": "TC de tórax",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-c6c3a53a758d92d9",
+        "origem_json_pointer": "/estadiamento/exames/5",
+        "sha256_conteudo": "ed67671f352eac55a65e0c0da94e015470ca957b88cd7d1074bd4df013a3cb4c",
+        "nome": "PET/CT-FDG",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/5/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-f2a22a29bc827d15",
+        "origem_json_pointer": "/estadiamento/exames/6",
+        "sha256_conteudo": "f4b336f3b3d6e15621f560846275cd5a86a80ad8c96098c4d051cda9ccc4819b",
+        "nome": "Hemograma",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/6/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8c9d51aa1969abed",
+        "origem_json_pointer": "/estadiamento/exames/7",
+        "sha256_conteudo": "94d3be9d692701dd38f499cf5e1419e511b183586fb33c38641c376a46995f0a",
+        "nome": "Função hepática",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/7/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-973eba77d25f93b0",
+        "origem_json_pointer": "/estadiamento/exames/8",
+        "sha256_conteudo": "6a63bdcf5e8b1e6445b73539ca39528dae3fc2eb4a7d93c9de30e5fe6c7d632c",
+        "nome": "Função hepática",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/8/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-fb5c3e198c798c9a",
+        "origem_json_pointer": "/estadiamento/exames/9",
+        "sha256_conteudo": "e9e0b14082e451abfe6493164a55e69415d9f6deab4144f775ba3d1a61f7a3b4",
+        "nome": "Função renal",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/9/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-faae0c57b32e55d2",
+        "origem_json_pointer": "/estadiamento/exames/10",
+        "sha256_conteudo": "3bd9267ca64007a6dd441c9c5e92102dce2420892771f2b22c1a938352d2459d",
+        "nome": "Sorologia HIV",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/10/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-89db3b6ec657bc2a",
+        "origem_json_pointer": "/ligacoes/exames/0",
+        "sha256_conteudo": "00cac656db90cece9385c8c98f658accb5b7c1553202e6be466fa96d39aaf2b9",
+        "nome": "ANATOMOPATOLOGICO",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-7d2143eacc3b8445",
+        "origem_json_pointer": "/ligacoes/exames/1",
+        "sha256_conteudo": "09c0bc2a57301c5e7f5c06c8c51c9dec764db31a5d9531aa98aac18b5d8251f3",
+        "nome": "BIOPSIA_PERCUTANEA_GUIADA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-69259b6701405162",
+        "origem_json_pointer": "/ligacoes/exames/2",
+        "sha256_conteudo": "c016f3b9930d01c32652ce60fab780a98c1ad16c3684ac5e839ef487b63a6696",
+        "nome": "CISTOSCOPIA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-35576a1689c02b4b",
+        "origem_json_pointer": "/ligacoes/exames/3",
+        "sha256_conteudo": "58d8c3bbd157d0d9be5bf551553eb11e7e0c313ef1db12f06d7863faa42fbbfb",
+        "nome": "CREATININA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-7dc99d83d804fe16",
+        "origem_json_pointer": "/ligacoes/exames/4",
+        "sha256_conteudo": "bf5e386b5411abfa4e5e12d1229575a6c7ec73dfaec6347d8959b27aac19aa86",
+        "nome": "HEMOGRAMA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-77bdc8afd83bec96",
+        "origem_json_pointer": "/ligacoes/exames/5",
+        "sha256_conteudo": "7e6eb8146933ca4629a8f652e1d1fd5d9ee0ebde5c5f53071fa3b4be69755bca",
+        "nome": "HIV",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8dbc3011da514373",
+        "origem_json_pointer": "/ligacoes/exames/6",
+        "sha256_conteudo": "99a98b9d268e78a05608d792d2fad81f4e16f25b8a4f95da9f7decd91a23a0dc",
+        "nome": "IMUNOHISTOQUIMICA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ad7da3bfcd1a8f20",
+        "origem_json_pointer": "/ligacoes/exames/7",
+        "sha256_conteudo": "3a955b75de510bd32be8d0f7de2bf070f27f223ac4c6a07cf68b35b7271856b2",
+        "nome": "PET_CT_FDG",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-1adf0cba5b8ce961",
+        "origem_json_pointer": "/ligacoes/exames/8",
+        "sha256_conteudo": "0a11983ed0f1f25f0cb393649509d8da35c120d78ab0d89c9884078a94bce572",
+        "nome": "RETOSSIGMOIDOSCOPIA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-71887bd8a730c91c",
+        "origem_json_pointer": "/ligacoes/exames/9",
+        "sha256_conteudo": "9c93ac77fd6457370871d33a5c58ba94777b0bb961f1f2eb5572fadaabd4df86",
+        "nome": "RM_ABDOMEN_SUPERIOR",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-6794156b39810058",
+        "origem_json_pointer": "/ligacoes/exames/10",
+        "sha256_conteudo": "ae974cff2b8cea688a4632542e3da503ad4a2f0f9301b96d75afbb2588228c37",
+        "nome": "RM_PELVE",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-1e182f6c9bda346d",
+        "origem_json_pointer": "/ligacoes/exames/11",
+        "sha256_conteudo": "c14ce60ca37c165e4caacee63f3b6f144d8c362ed86614c2583ca390362a034e",
+        "nome": "RX_TORAX_PA_PERFIL",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-c4ad324f15dcd340",
+        "origem_json_pointer": "/ligacoes/exames/12",
+        "sha256_conteudo": "eea68f82f02592e6262514a154ff52ae85284765c1f48ab3b07cabb92ead209f",
+        "nome": "TC_ABDOMEN_SUPERIOR",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-096cb2cb9288a88b",
+        "origem_json_pointer": "/ligacoes/exames/13",
+        "sha256_conteudo": "5beb801ddc054db97d463dd8b682c9128772e22b7938b6d4c645af14dc4ddd7a",
+        "nome": "TC_PELVE",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-0f9299cb90be33fa",
+        "origem_json_pointer": "/ligacoes/exames/14",
+        "sha256_conteudo": "147b97b900462813d8c6528cc01d88f8a5102936ee96ee4fb121f8a7b77f60b0",
+        "nome": "TC_TORAX",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-6d89e4dddb1ce90d",
+        "origem_json_pointer": "/ligacoes/exames/15",
+        "sha256_conteudo": "1c165f5403a7b90b63dbd46f6855431c8c1ada4519299d6c123bd630df5c529d",
+        "nome": "TGO",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-f5be3dfb88097e19",
+        "origem_json_pointer": "/ligacoes/exames/16",
+        "sha256_conteudo": "1739a80ab81e5bbef9460ae5f51087ed284845d8e31e606c2b564c7268c2cd15",
+        "nome": "TGP",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d738f94e72f50c03",
+        "origem_json_pointer": "/tratamento/cenarios/0",
+        "sha256_conteudo": "15ba85d3554f7340934e0c5bef28572333084dd14cc09224e224a2873328b319",
+        "nome": "IA-IB1 operável",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-96ac7232db5b82d3",
+        "origem_json_pointer": "/tratamento/cenarios/1",
+        "sha256_conteudo": "47e215b33745b49c1ef5210ecec38791f2bde507c9fdba1bf8d0b06b8133f40b",
+        "nome": "Pós-operatório risco intermediário (Sedlis)",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b9ccc874abca32c6",
+        "origem_json_pointer": "/tratamento/cenarios/2",
+        "sha256_conteudo": "a8fdea831cf82cf564ac0ea149dc16aef595ac12b939e36729ce20275b599e50",
+        "nome": "Pós-operatório alto risco",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-54ecb50193655019",
+        "origem_json_pointer": "/tratamento/cenarios/3",
+        "sha256_conteudo": "12ffe6e482a45677c8bc536e54d7180296764aca9d27ff917462b22147b4027d",
+        "nome": "Localmente avançado IB2-IVA (definitivo)",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-f36e4ead9f60dde4",
+        "origem_json_pointer": "/tratamento/cenarios/4",
+        "sha256_conteudo": "e153b915e64864c7cb23fdf4e53606a8bcbc1a368f11c57ab5f9e386e679b597",
+        "nome": "Recorrência local",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-357f6def60d72329",
+        "origem_json_pointer": "/tratamento/cenarios/5",
+        "sha256_conteudo": "8665cf674ddce0a9a83d6ed7d7da15c01df489b8e57d8c27197ccf10991c6e26",
+        "nome": "IVB / persistente / recorrente — 1ª linha",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/5/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-85d7cd132cb22e3e",
+        "origem_json_pointer": "/tratamento/cenarios/6",
+        "sha256_conteudo": "46ee72f2b3c6c481063189b6f141f62a28a5ba9415147f5cff5dad4c19b4002a",
+        "nome": "IVB / recorrente — 2ª linha",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/6/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-f0b3301cb44128f0",
+        "origem_json_pointer": "/tratamento/protocolos/0",
+        "sha256_conteudo": "95b68112fdc74fbfac49618085faef132f44caceb199a1ec030f1dcd0f8a29e5",
+        "nome": "Cisplatina semanal concomitante à RT — definitivo",
+        "id_original": "colo-cisplatina-semanal-qtrt-definitiva",
+        "fonte_local_ref": "/tratamento/protocolos/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-af29657a71cadc98",
+        "origem_json_pointer": "/tratamento/protocolos/1",
+        "sha256_conteudo": "e381e35fa4a2c597023b01eeee5e66b3eccd7b8da481af74b354ed6cb074b44f",
+        "nome": "Cisplatina semanal concomitante à RT — adjuvante alto risco",
+        "id_original": "colo-cisplatina-semanal-qtrt-adjuvante",
+        "fonte_local_ref": "/tratamento/protocolos/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-296e30cbd8199990",
+        "origem_json_pointer": "/tratamento/protocolos/2",
+        "sha256_conteudo": "875542e2548c36eaf3c0b411328c337d32139cdf11d4553766656bfea12d08f7",
+        "nome": "Indução carboplatina AUC2 + paclitaxel semanal (INTERLACE) → QT-RT",
+        "id_original": "colo-carbo-paclitaxel-inducao-interlace",
+        "fonte_local_ref": "/tratamento/protocolos/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-0aa3b37a2b08d610",
+        "origem_json_pointer": "/tratamento/protocolos/3",
+        "sha256_conteudo": "a245ea2c9922c70bbd0c1f3b1b8977c2a049accc5132cf1b6268055e1a0fd419",
+        "nome": "Pembrolizumabe + QT-RT com cisplatina (KEYNOTE-A18)",
+        "id_original": "colo-pembrolizumabe-qtrt-keynote-a18",
+        "fonte_local_ref": "/tratamento/protocolos/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-14837a06b8cc7aca",
+        "origem_json_pointer": "/tratamento/protocolos/4",
+        "sha256_conteudo": "e78c4484f2ec71d8a7b59b35bee38be5a5d9b2a957f8bfad1e67c2c2658d5785",
+        "nome": "Cisplatina + paclitaxel + pembrolizumabe ± bevacizumabe (KEYNOTE-826)",
+        "id_original": "colo-keynote826-cis-pacli-pembro",
+        "fonte_local_ref": "/tratamento/protocolos/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e85f9540277ea91f",
+        "origem_json_pointer": "/tratamento/protocolos/5",
+        "sha256_conteudo": "80b7dfbf4269461555b7b1e0424c04e4062296e8d09ec3d204ba5687f3624e3a",
+        "nome": "Cisplatina + paclitaxel ± bevacizumabe",
+        "id_original": "colo-cis-pacli-bev",
+        "fonte_local_ref": "/tratamento/protocolos/5/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-7cd92fdd4a7cbdd0",
+        "origem_json_pointer": "/tratamento/protocolos/6",
+        "sha256_conteudo": "31944bfb4c597044daea98f88372a0d46060cd3af7cb9027f493a358cb69c22c",
+        "nome": "Carboplatina + paclitaxel ± bevacizumabe",
+        "id_original": "colo-carbo-pacli-bev",
+        "fonte_local_ref": "/tratamento/protocolos/6/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-f2af3fbffac62552",
+        "origem_json_pointer": "/tratamento/protocolos/7",
+        "sha256_conteudo": "314ea28af6b5152dae16d54cfa2201a7e300d98227f9df23f8ea00b1f9f00ef7",
+        "nome": "Cisplatina + vinorelbina",
+        "id_original": "colo-cis-vinorelbina",
+        "fonte_local_ref": "/tratamento/protocolos/7/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-713fb3160ab9247c",
+        "origem_json_pointer": "/tratamento/protocolos/8",
+        "sha256_conteudo": "a8393d40fa25fb1744d0e4b832dd1ddd61a9751cf1a16063d52c14d4ffe435fa",
+        "nome": "Cisplatina + gemcitabina",
+        "id_original": "colo-cis-gemcitabina",
+        "fonte_local_ref": "/tratamento/protocolos/8/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8e0c05d4abe75de7",
+        "origem_json_pointer": "/tratamento/protocolos/9",
+        "sha256_conteudo": "2a069cf1732634c5fb833accbd3cf1a6eb83ddf49b54d857681e0df4fd552498",
+        "nome": "Cisplatina + topotecano",
+        "id_original": "colo-cis-topotecano",
+        "fonte_local_ref": "/tratamento/protocolos/9/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-920050fd39825dec",
+        "origem_json_pointer": "/tratamento/protocolos/10",
+        "sha256_conteudo": "c8fbbf563b082892ce88f9018627da791e46684fd96e29dd16ed20acdce66db1",
+        "nome": "Topotecano + paclitaxel + bevacizumabe",
+        "id_original": "colo-topotecano-pacli-bev",
+        "fonte_local_ref": "/tratamento/protocolos/10/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8372310cdfd04911",
+        "origem_json_pointer": "/tratamento/protocolos/11",
+        "sha256_conteudo": "390e03c0f4f517e9ddaafb960d1dcf6dcc21fca0c7bcfab054710ba8a8482850",
+        "nome": "Cemiplimabe — 2ª linha",
+        "id_original": "colo-cemiplimabe-2l",
+        "fonte_local_ref": "/tratamento/protocolos/11/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-9bc12d12f51876d3",
+        "origem_json_pointer": "/tratamento/protocolos/12",
+        "sha256_conteudo": "761872e3295683dc82b71514b99360229ef4d6c20eabcf38de1183cf9d7d4d56",
+        "nome": "Trastuzumabe deruxtecana — HER2 IHQ 3+",
+        "id_original": "colo-tdxd-her2-2l",
+        "fonte_local_ref": "/tratamento/protocolos/12/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-4f63bd0325cc4a1b",
+        "origem_json_pointer": "/tratamento/protocolos/13",
+        "sha256_conteudo": "d3d94955a0455babf7ea9dfe3c461313899fce7515835497b7d7b72f6657cc51",
+        "nome": "Pemetrexede — 2ª linha",
+        "id_original": "colo-pemetrexede-2l",
+        "fonte_local_ref": "/tratamento/protocolos/13/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-61692c978662fbee",
+        "origem_json_pointer": "/tratamento/protocolos/14",
+        "sha256_conteudo": "a59c978062c5d509cece737037e835e1cb17c39ae02058f352828bb8aa925557",
+        "nome": "Vinorelbina — 2ª linha",
+        "id_original": "colo-vinorelbina-2l",
+        "fonte_local_ref": "/tratamento/protocolos/14/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-5496c9365db23ea9",
+        "origem_json_pointer": "/tratamento/protocolos/15",
+        "sha256_conteudo": "e3f14dd794568a7cb15ffb9a02b99d1faad7b62ca746630d400dfc30bd41a774",
+        "nome": "Ifosfamida — 2ª linha",
+        "id_original": "colo-ifosfamida-2l",
+        "fonte_local_ref": "/tratamento/protocolos/15/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-dfed98e972e32423",
+        "origem_json_pointer": "/tratamento/protocolos/16",
+        "sha256_conteudo": "74bb8ca31f43651ed7935ffd0a9d99cf2a2340d732700648853f07cb5bfc2ebd",
+        "nome": "Topotecano D1-D5 — 2ª linha",
+        "id_original": "colo-topotecano-2l",
+        "fonte_local_ref": "/tratamento/protocolos/16/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-77f09b54809d1895",
+        "origem_json_pointer": "/tratamento/protocolos/17",
+        "sha256_conteudo": "96197d340b19d03b73a8c4abfef270236c6532354185ddebb6d41665385c7bf6",
+        "nome": "Irinotecano semanal — 2ª linha",
+        "id_original": "colo-irinotecano-2l",
+        "fonte_local_ref": "/tratamento/protocolos/17/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-0e8498f3fb87eadc",
+        "origem_json_pointer": "/tratamento/protocolos/18",
+        "sha256_conteudo": "e8041da84b0c5da719b21950d562ec7f602b77329ee7b7e45308639e27757a93",
+        "nome": "Docetaxel — 2ª linha",
+        "id_original": "colo-docetaxel-2l",
+        "fonte_local_ref": "/tratamento/protocolos/18/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ec5845cdcef40bfe",
+        "origem_json_pointer": "/tratamento/cirurgia/0",
+        "sha256_conteudo": "949c8d1dd80cc377e95cca8d8d020da9b590ef51465936f6862c1da135e24c48",
+        "nome": "/tratamento/cirurgia/0",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cirurgia/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-11a4e5cd3df398ca",
+        "origem_json_pointer": "/tratamento/cirurgia/1",
+        "sha256_conteudo": "2ae91ee8c2933a335b195b85838b2b5497584472098aef0ac16dd6793aa11e42",
+        "nome": "/tratamento/cirurgia/1",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cirurgia/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-63414bfeea33f917",
+        "origem_json_pointer": "/tratamento/cirurgia/2",
+        "sha256_conteudo": "11bcd93936f9510d5a73daab41d03e973f9692cb81c6bd3ad69501035c64d8fd",
+        "nome": "/tratamento/cirurgia/2",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cirurgia/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-9d0f7fd590358b46",
+        "origem_json_pointer": "/tratamento/radioterapia/0",
+        "sha256_conteudo": "b1cbd29108f36f66e8ce209f8fe5b774e35df9b33d4ddcd8869bd5ce4ad93a72",
+        "nome": "Braquiterapia após RT externa + cisplatina (IB2-IIA)",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/radioterapia/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-f3fe19f1c82b8d54",
+        "origem_json_pointer": "/tratamento/radioterapia/1",
+        "sha256_conteudo": "7bb6f03fcac4a50f35407e27c19efd4c1fa7f7f99c71395371ef02b16aa4f7cf",
+        "nome": "RT externa pélvica definitiva/adjuvante",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/radioterapia/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-be66460bc4d242f9",
+        "origem_json_pointer": "/tratamento/radioterapia/2",
+        "sha256_conteudo": "b25ce789fd1e32abbb696c112a0409bf221117f2c509513e80446deffd1fc66d",
+        "nome": "RT para-aórtica (LFN para-aórtico comprovado ou alto risco, p.ex. ilíaca comum)",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/radioterapia/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-4d6da71edd61d34a",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/0",
+        "sha256_conteudo": "23d68b53be1cd05ce2460d8ce91df52250fbc0171ceb11f2f98d878a1f58f0c6",
+        "nome": "/ligacoes/interacoesConsultar/0",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-77ce82685ad7feeb",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/1",
+        "sha256_conteudo": "fd1c850d5622f2388940368261fa8a3e586de410cc21c51a99d9fc0482e6bdc1",
+        "nome": "/ligacoes/interacoesConsultar/1",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ffcd5f4f938c06b0",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/2",
+        "sha256_conteudo": "30d9e244da12c9a127813b5f0c8c8d8c9c965ab1a24f148376f9abfcdb7be376",
+        "nome": "/ligacoes/interacoesConsultar/2",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-5600feb7330e0cbe",
+        "origem_json_pointer": "/ligacoes/ctcaeAcao/0",
+        "sha256_conteudo": "a936762ffc039deec95b1ef018d61a11e988524c2c1e2e6fba3d788c89861785",
+        "nome": "/ligacoes/ctcaeAcao/0",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8b9f07587fac3b2c",
+        "origem_json_pointer": "/ligacoes/ctcaeAcao/1",
+        "sha256_conteudo": "9799afb28746ce8d905e8ca743c59ac9192347119899bb2e43eb7fe2e615cc5b",
+        "nome": "/ligacoes/ctcaeAcao/1",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-f3c380cb128b21c6",
+        "origem_json_pointer": "/ligacoes/ctcaeAcao/2",
+        "sha256_conteudo": "644871e0584739616f90a3d1f8094cc39609faf1cb0dc53bd2d8b6589f661fa5",
+        "nome": "/ligacoes/ctcaeAcao/2",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-de089b673a9944a2",
+        "origem_json_pointer": "/ligacoes/ctcaeAcao/3",
+        "sha256_conteudo": "55a28926b0f7425fe7ad858f21850ad5e5d6ee9053702f013f7cd755f56e49bc",
+        "nome": "/ligacoes/ctcaeAcao/3",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e9b655544395b909",
+        "origem_json_pointer": "/ligacoes/ctcaeAcao/4",
+        "sha256_conteudo": "1492dbaa373ba0b81aa86c247d788422211b711edfab2784867c8163acf15497",
+        "nome": "/ligacoes/ctcaeAcao/4",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e604835910e36719",
+        "origem_json_pointer": "/ligacoes/ctcaeAcao/5",
+        "sha256_conteudo": "220bcb15d7ec2b18ed9f2a561526cf3342b07c56d6d937dff341c0e37c96385c",
+        "nome": "/ligacoes/ctcaeAcao/5",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-2b035de545b16e2d",
+        "origem_json_pointer": "/tratamento/suporte",
+        "sha256_conteudo": "44e246973182c66bb831eb00afe285e4ca2623a8a0400eaaf8c3120cbf15bd7e",
+        "nome": "/tratamento/suporte",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/suporte/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-6d231c098ab45b75",
+        "origem_json_pointer": "/ligacoes/suporteReceitas/0",
+        "sha256_conteudo": "51eaffda696fe22c77529fc83bce00bf52ed9f92d13d81b2a828b4278d39a544",
+        "nome": "Antiemese de alto risco (cisplatina)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-3f1cc43c9d31b02b",
+        "origem_json_pointer": "/ligacoes/suporteReceitas/1",
+        "sha256_conteudo": "8ae4a87f58915c2ff48878ebf7e7823fabf68a3ffc1f73fbff9a0f7b06ab02b2",
+        "nome": "Hidratação e reposição de magnésio pré/pós cisplatina",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-4b1c2c155be8f456",
+        "origem_json_pointer": "/ligacoes/suporteReceitas/2",
+        "sha256_conteudo": "e3b3eb3f470adb7991d2eb3aedcada6cd1cbe577da4008f90b596c2a301508ce",
+        "nome": "Mesna com ifosfamida",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-242b7c7964e2fd6b",
+        "origem_json_pointer": "/tratamento/seguimento/0",
+        "sha256_conteudo": "55f7768f858a7e038f0a253637fbc1edc2fc31de8b24efa7f915d4a24151c628",
+        "nome": "IA1-IB1: anos 1-2",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/seguimento/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-2d6d091519156648",
+        "origem_json_pointer": "/tratamento/seguimento/1",
+        "sha256_conteudo": "14ed9dfe16085c6556b762b083070a1a6aab121d8cdd7cd7fd9e98a3b9d837ec",
+        "nome": "IB3, IIA-IVA: 3-6 meses pós-tratamento",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/seguimento/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-fdd873bedb3e1613",
+        "origem_json_pointer": "/tratamento/seguimento/2",
+        "sha256_conteudo": "ba26f30e87f8cb299ad217d5b21a457c49c6ac7c82e1e824b12027b55914e53f",
+        "nome": "IVB em QT",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/seguimento/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-97ce6fd207fc72a7",
+        "origem_json_pointer": "/ligacoes/orientacoes/0",
+        "sha256_conteudo": "59b05f0717826d17485faed7b474f5433a41a10e9c313b03a537e2728be3049b",
+        "nome": "Sinais de fístula/sangramento em uso de bevacizumabe",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a7ace3dddeb92a90",
+        "origem_json_pointer": "/ligacoes/orientacoes/1",
+        "sha256_conteudo": "a653a2c30d1699750399c28748ac34ef336930394bbb250e3ab902e490031483",
+        "nome": "Dilatador vaginal após braquiterapia (se previsto no serviço)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-67cd8a019ef0f2b5",
+        "origem_json_pointer": "/ligacoes/orientacoes/2",
+        "sha256_conteudo": "d6c0d246c7a8b1dade6e023545fa2eaac96390095f6a5739cb55a4146e9afa19",
+        "nome": "Sintomas de imunotoxicidade",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ecbdb4933d34afa9",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/0",
+        "sha256_conteudo": "6e9eebe79eb2027a606c604341e0b7c8231d6dc2183e8c38f15bd4d5f55d13cf",
+        "nome": "Radioterapia (RT externa + braquiterapia)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-6cc190ceae05ea4f",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/1",
+        "sha256_conteudo": "2a2726ae95bc9501791a72ba1f72fdd72897d37d9eb02d0f3430ee1fc8d394e9",
+        "nome": "Oncoginecologia cirúrgica",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-508a1e453d3cf6f4",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/2",
+        "sha256_conteudo": "2866dbe7365db4ca0dba215b4391f717a5645dfef8641240e6414254ee6b16d8",
+        "nome": "Preservação de fertilidade (IA-IB1 jovens)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-c5a0a04f348bcd4b",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/3",
+        "sha256_conteudo": "e96bbd735cc8e448d255f606119d09ec6004dd71e376faef31c2cd92eb52bfe2",
+        "nome": "Infectologia se HIV+",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-365dcdd60ab252a5",
+        "origem_json_pointer": "/ligacoes/laudos/0",
+        "sha256_conteudo": "0be86e3158ace85ba2cce64ba8b97cd629531d6392700bce225430b9d540ca51",
+        "nome": "APAC radioterapia",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-f0c369326b507fb2",
+        "origem_json_pointer": "/ligacoes/laudos/1",
+        "sha256_conteudo": "5248de402cf91a98b35703b5b3f54b5f350048e3d77eb234ed4b083bce032b74",
+        "nome": "APAC quimioterapia (finalidade curativa concomitante / paliativa)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      }
+    ],
+    "itens_nccn": [
+      {
+        "item_id": "nccn-20261017-colo-utero-tisotumabe",
+        "nome": "Tisotumabe vedotina",
+        "tipo": "OPCAO_TERAPEUTICA",
+        "dominio_principal": 6,
+        "conteudo_extraido": "Tisotumabe vedotina: Preferred, categoria 1, segunda linha ou posterior de doença recorrente/metastática em CEC, adenocarcinoma ou adenoescamoso. Seleção considera paciente, apresentação, tratamentos prévios e preferências; ordem da lista não define sequência de preferência (nota i).",
+        "aplicabilidade": {
+          "criterios": [
+            "Colo uterino recorrente/metastático",
+            "CEC, adenocarcinoma ou adenoescamoso",
+            "Segunda linha ou posterior"
+          ],
+          "paciente_individual": null,
+          "estado": "NAO_AVALIADA"
+        },
+        "dados_estruturados": {
+          "farmacos": [
+            "tisotumabe vedotina"
+          ],
+          "posologia": {
+            "estado": "NAO_EXTRAIDA_NESTA_RODADA",
+            "valor": null,
+            "motivo": "A rodada incorpora o delta de indicação/cenário; não completa dose por inferência."
+          }
+        },
+        "fonte_refs": [
+          {
+            "fonte_id": "nccn-e8c9cf5e6e5f",
+            "edicao": "1.2027",
+            "pagina_pdf": 59,
+            "paginas_pdf": [
+              59
+            ],
+            "secao": "CERV-F 2/5, segunda linha Preferred",
+            "trecho": "Tisotumab vedotin-tftv (category 1)",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "a9b77ea755bd5f23330aba525e860fd4d8d904d1980dcf15838a8d40ee885cc7"
+          },
+          {
+            "fonte_id": "nccn-e8c9cf5e6e5f",
+            "edicao": "1.2027",
+            "pagina_pdf": 60,
+            "paginas_pdf": [
+              60
+            ],
+            "secao": "CERV-F 2A/5, nota i",
+            "trecho": "does not reflect order of preference",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "a9b77ea755bd5f23330aba525e860fd4d8d904d1980dcf15838a8d40ee885cc7"
+          }
+        ],
+        "evidencia_declarada": {
+          "sistema": "NCCN",
+          "categoria": "1",
+          "preferencia": "Preferred",
+          "estado": "CONFERIDA_DOCUMENTALMENTE_A_CONFERIR_CLINICAMENTE",
+          "nota": "2A por cabeçalho somente onde a página expressamente declara essa regra; não é categoria inferida por conhecimento externo."
+        },
+        "estado_extracao": "EXTRAIDO_COM_LIMITES_DECLARADOS",
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "temporalidade": {
+          "referencia": "CENARIO_DESCRITO",
+          "datas_individuais": null
+        },
+        "propor_automaticamente": false,
+        "disponivel_para_prescricao": false,
+        "acesso": {
+          "registro_anvisa": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "incorporacao_conitec": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "pcdt_ddt": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "sigtap_apac": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "cobertura_privada": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "disponibilidade_institucional": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          }
+        },
+        "alternativas_legadas_refs": [],
+        "relacoes_refs": [
+          "relacao-nccn-20261017-colo-utero-tisotumabe"
+        ],
+        "conflitos_refs": [],
+        "pendencias": [
+          "REVISAO_CLINICA_DO_DELTA",
+          "VERIFICAR_ACESSO_BRASILEIRO_POR_INDICACAO",
+          "POSOLOGIA_E_SUPORTE_NAO_COMPLETOS_NESTA_RODADA"
+        ],
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+            "anterior": {
+              "fonte_refs": [
+                {
+                  "fonte_id": "nccn-e8c9cf5e6e5f",
+                  "paginas_pdf": [
+                    59,
+                    60
+                  ],
+                  "secao": "CERV-F 2/5 e notas",
+                  "natureza": "EXTRACAO_DOCUMENTAL",
+                  "pagina_pdf": 59,
+                  "trecho": "Tisotumab vedotin-tftv (category 1)18,19 Other Recommended • Bevacizumab • Paclitaxel15,20 • Albumin-bound"
+                }
+              ],
+              "conteudo_extraido": "Opção presente na tabela NCCN, com linha e elegibilidade próprias.",
+              "aplicabilidade": {
+                "criterios": [
+                  "Colo uterino recorrente/metastático",
+                  "Segunda linha ou posterior"
+                ],
+                "paciente_individual": null,
+                "estado": "NAO_AVALIADA"
+              },
+              "evidencia_declarada": {
+                "sistema": "NCCN",
+                "categoria": null,
+                "estado": "NAO_EXTRAIDA_POR_ITEM"
+              }
+            },
+            "motivo": "Conteúdo genérico não identificava categoria/preferência e histologias do cabeçalho; citação atravessava a lista seguinte.",
+            "aprovacao_clinica": null
+          },
+          {
+            "revisao": "2026-10-17-nccn-final-documental",
+            "anterior": {
+              "conteudo_extraido": "Tisotumabe vedotina: Preferred, categoria1, segunda linha ou posterior de doença recorrente/metastática em CEC, adenocarcinoma ou adenoescamoso. Seleção considera paciente, apresentação, tratamentos prévios e preferências; ordem da lista não define sequência de preferência (nota i)."
+            },
+            "motivo": "Espaçamento da prosa; sem modificar valores, códigos ou fontes."
+          }
+        ],
+        "fontes_por_campo": {
+          "conteudo_extraido": [
+            {
+              "fonte_id": "nccn-e8c9cf5e6e5f",
+              "edicao": "1.2027",
+              "pagina_pdf": 59,
+              "paginas_pdf": [
+                59
+              ],
+              "secao": "CERV-F 2/5, segunda linha Preferred",
+              "trecho": "Tisotumab vedotin-tftv (category 1)",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "a9b77ea755bd5f23330aba525e860fd4d8d904d1980dcf15838a8d40ee885cc7"
+            },
+            {
+              "fonte_id": "nccn-e8c9cf5e6e5f",
+              "edicao": "1.2027",
+              "pagina_pdf": 60,
+              "paginas_pdf": [
+                60
+              ],
+              "secao": "CERV-F 2A/5, nota i",
+              "trecho": "does not reflect order of preference",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "a9b77ea755bd5f23330aba525e860fd4d8d904d1980dcf15838a8d40ee885cc7"
+            }
+          ],
+          "aplicabilidade": [
+            {
+              "fonte_id": "nccn-e8c9cf5e6e5f",
+              "edicao": "1.2027",
+              "pagina_pdf": 59,
+              "paginas_pdf": [
+                59
+              ],
+              "secao": "CERV-F 2/5, segunda linha Preferred",
+              "trecho": "Tisotumab vedotin-tftv (category 1)",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "a9b77ea755bd5f23330aba525e860fd4d8d904d1980dcf15838a8d40ee885cc7"
+            },
+            {
+              "fonte_id": "nccn-e8c9cf5e6e5f",
+              "edicao": "1.2027",
+              "pagina_pdf": 60,
+              "paginas_pdf": [
+                60
+              ],
+              "secao": "CERV-F 2A/5, nota i",
+              "trecho": "does not reflect order of preference",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "a9b77ea755bd5f23330aba525e860fd4d8d904d1980dcf15838a8d40ee885cc7"
+            }
+          ],
+          "evidencia_declarada": [
+            {
+              "fonte_id": "nccn-e8c9cf5e6e5f",
+              "edicao": "1.2027",
+              "pagina_pdf": 59,
+              "paginas_pdf": [
+                59
+              ],
+              "secao": "CERV-F 2/5, segunda linha Preferred",
+              "trecho": "Tisotumab vedotin-tftv (category 1)",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "a9b77ea755bd5f23330aba525e860fd4d8d904d1980dcf15838a8d40ee885cc7"
+            },
+            {
+              "fonte_id": "nccn-e8c9cf5e6e5f",
+              "edicao": "1.2027",
+              "pagina_pdf": 60,
+              "paginas_pdf": [
+                60
+              ],
+              "secao": "CERV-F 2A/5, nota i",
+              "trecho": "does not reflect order of preference",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "a9b77ea755bd5f23330aba525e860fd4d8d904d1980dcf15838a8d40ee885cc7"
+            }
+          ]
+        }
+      },
+      {
+        "item_id": "nccn-20261017-colo-utero-atezo-cis",
+        "nome": "Atezolizumabe + bevacizumabe + cisplatina/paclitaxel",
+        "tipo": "OPCAO_TERAPEUTICA",
+        "dominio_principal": 6,
+        "conteudo_extraido": "Atezolizumabe + bevacizumabe + cisplatina/paclitaxel: primeira linha Preferred, categoria 1, doença recorrente/metastática, PD-L1 positivo ou negativo, em CEC/adenocarcinoma/adenoescamoso. Nota c: ICI e/ou anticorpos do regime podem continuar como manutenção, com dose e agenda segundo o estudo original; não criar agenda por inferência.",
+        "aplicabilidade": {
+          "criterios": [
+            "Colo uterino recorrente/metastático",
+            "CEC, adenocarcinoma ou adenoescamoso",
+            "Primeira linha; PD-L1 positivo ou negativo",
+            "Conferir contraindicações e tratamentos prévios"
+          ],
+          "paciente_individual": null,
+          "estado": "NAO_AVALIADA"
+        },
+        "dados_estruturados": {
+          "farmacos": [
+            "atezolizumabe",
+            "bevacizumabe",
+            "cisplatina",
+            "paclitaxel"
+          ],
+          "posologia": {
+            "estado": "NAO_EXTRAIDA_NESTA_RODADA",
+            "valor": null,
+            "motivo": "A rodada incorpora o delta de indicação/cenário; não completa dose por inferência."
+          }
+        },
+        "fonte_refs": [
+          {
+            "fonte_id": "nccn-e8c9cf5e6e5f",
+            "edicao": "1.2027",
+            "pagina_pdf": 59,
+            "paginas_pdf": [
+              59
+            ],
+            "secao": "CERV-F 2/5, primeira linha",
+            "trecho": "Cisplatin/Paclitaxel + Atezolizumab",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "a9b77ea755bd5f23330aba525e860fd4d8d904d1980dcf15838a8d40ee885cc7"
+          },
+          {
+            "fonte_id": "nccn-e8c9cf5e6e5f",
+            "edicao": "1.2027",
+            "pagina_pdf": 60,
+            "paginas_pdf": [
+              60
+            ],
+            "secao": "CERV-F 2A/5, nota c",
+            "trecho": "may be continued as maintenance therapy",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "a9b77ea755bd5f23330aba525e860fd4d8d904d1980dcf15838a8d40ee885cc7"
+          }
+        ],
+        "evidencia_declarada": {
+          "sistema": "NCCN",
+          "categoria": "1",
+          "preferencia": "Preferred",
+          "estado": "CONFERIDA_DOCUMENTALMENTE_A_CONFERIR_CLINICAMENTE",
+          "nota": "2A por cabeçalho somente onde a página expressamente declara essa regra; não é categoria inferida por conhecimento externo."
+        },
+        "estado_extracao": "EXTRAIDO_COM_LIMITES_DECLARADOS",
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "temporalidade": {
+          "referencia": "CENARIO_DESCRITO",
+          "datas_individuais": null
+        },
+        "propor_automaticamente": false,
+        "disponivel_para_prescricao": false,
+        "acesso": {
+          "registro_anvisa": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "incorporacao_conitec": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "pcdt_ddt": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "sigtap_apac": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "cobertura_privada": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "disponibilidade_institucional": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          }
+        },
+        "alternativas_legadas_refs": [],
+        "relacoes_refs": [
+          "relacao-nccn-20261017-colo-utero-atezo-cis"
+        ],
+        "conflitos_refs": [],
+        "pendencias": [
+          "REVISAO_CLINICA_DO_DELTA",
+          "VERIFICAR_ACESSO_BRASILEIRO_POR_INDICACAO",
+          "POSOLOGIA_E_SUPORTE_NAO_COMPLETOS_NESTA_RODADA"
+        ],
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+            "anterior": {
+              "fonte_refs": [
+                {
+                  "fonte_id": "nccn-e8c9cf5e6e5f",
+                  "paginas_pdf": [
+                    59,
+                    60
+                  ],
+                  "secao": "CERV-F 2/5 e notas",
+                  "natureza": "EXTRACAO_DOCUMENTAL",
+                  "pagina_pdf": 59,
+                  "trecho": "Atezolizumab + Bevacizumab (category 1)c,7 \u0017Carboplatin/Paclitaxel + Atezolizumab + Bevacizumab (category 1)c,7"
+                }
+              ],
+              "conteudo_extraido": "Opção presente na tabela NCCN, com linha e elegibilidade próprias.",
+              "aplicabilidade": {
+                "criterios": [
+                  "Colo uterino recorrente/metastático",
+                  "Primeira linha",
+                  "PD-L1 positivo ou negativo; conferir contraindicações"
+                ],
+                "paciente_individual": null,
+                "estado": "NAO_AVALIADA"
+              },
+              "evidencia_declarada": {
+                "sistema": "NCCN",
+                "categoria": null,
+                "estado": "NAO_EXTRAIDA_POR_ITEM"
+              }
+            },
+            "motivo": "A fonte anterior compartilhava trecho que misturava os dois esquemas; faltava transcrição de categoria/preferência e da nota de manutenção.",
+            "aprovacao_clinica": null
+          },
+          {
+            "revisao": "2026-10-17-nccn-final-documental",
+            "anterior": {
+              "conteudo_extraido": "Atezolizumabe + bevacizumabe + cisplatina/paclitaxel: primeira linha Preferred, categoria1, doença recorrente/metastática, PD-L1 positivo ou negativo, em CEC/adenocarcinoma/adenoescamoso. Nota c: ICI e/ou anticorpos do regime podem continuar como manutenção, com dose e agenda segundo o estudo original; não criar agenda por inferência."
+            },
+            "motivo": "Espaçamento da prosa; sem modificar valores, códigos ou fontes."
+          }
+        ],
+        "fontes_por_campo": {
+          "conteudo_extraido": [
+            {
+              "fonte_id": "nccn-e8c9cf5e6e5f",
+              "edicao": "1.2027",
+              "pagina_pdf": 59,
+              "paginas_pdf": [
+                59
+              ],
+              "secao": "CERV-F 2/5, primeira linha",
+              "trecho": "Cisplatin/Paclitaxel + Atezolizumab",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "a9b77ea755bd5f23330aba525e860fd4d8d904d1980dcf15838a8d40ee885cc7"
+            },
+            {
+              "fonte_id": "nccn-e8c9cf5e6e5f",
+              "edicao": "1.2027",
+              "pagina_pdf": 60,
+              "paginas_pdf": [
+                60
+              ],
+              "secao": "CERV-F 2A/5, nota c",
+              "trecho": "may be continued as maintenance therapy",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "a9b77ea755bd5f23330aba525e860fd4d8d904d1980dcf15838a8d40ee885cc7"
+            }
+          ],
+          "aplicabilidade": [
+            {
+              "fonte_id": "nccn-e8c9cf5e6e5f",
+              "edicao": "1.2027",
+              "pagina_pdf": 59,
+              "paginas_pdf": [
+                59
+              ],
+              "secao": "CERV-F 2/5, primeira linha",
+              "trecho": "Cisplatin/Paclitaxel + Atezolizumab",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "a9b77ea755bd5f23330aba525e860fd4d8d904d1980dcf15838a8d40ee885cc7"
+            },
+            {
+              "fonte_id": "nccn-e8c9cf5e6e5f",
+              "edicao": "1.2027",
+              "pagina_pdf": 60,
+              "paginas_pdf": [
+                60
+              ],
+              "secao": "CERV-F 2A/5, nota c",
+              "trecho": "may be continued as maintenance therapy",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "a9b77ea755bd5f23330aba525e860fd4d8d904d1980dcf15838a8d40ee885cc7"
+            }
+          ],
+          "evidencia_declarada": [
+            {
+              "fonte_id": "nccn-e8c9cf5e6e5f",
+              "edicao": "1.2027",
+              "pagina_pdf": 59,
+              "paginas_pdf": [
+                59
+              ],
+              "secao": "CERV-F 2/5, primeira linha",
+              "trecho": "Cisplatin/Paclitaxel + Atezolizumab",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "a9b77ea755bd5f23330aba525e860fd4d8d904d1980dcf15838a8d40ee885cc7"
+            },
+            {
+              "fonte_id": "nccn-e8c9cf5e6e5f",
+              "edicao": "1.2027",
+              "pagina_pdf": 60,
+              "paginas_pdf": [
+                60
+              ],
+              "secao": "CERV-F 2A/5, nota c",
+              "trecho": "may be continued as maintenance therapy",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "a9b77ea755bd5f23330aba525e860fd4d8d904d1980dcf15838a8d40ee885cc7"
+            }
+          ]
+        }
+      },
+      {
+        "item_id": "nccn-20261017-colo-utero-atezo-carbo",
+        "nome": "Atezolizumabe + bevacizumabe + carboplatina/paclitaxel",
+        "tipo": "OPCAO_TERAPEUTICA",
+        "dominio_principal": 6,
+        "conteudo_extraido": "Atezolizumabe + bevacizumabe + carboplatina/paclitaxel: primeira linha Preferred, categoria 1, doença recorrente/metastática, PD-L1 positivo ou negativo, em CEC/adenocarcinoma/adenoescamoso. Nota c: ICI e/ou anticorpos do regime podem continuar como manutenção, com dose e agenda segundo o estudo original; não criar agenda por inferência.",
+        "aplicabilidade": {
+          "criterios": [
+            "Colo uterino recorrente/metastático",
+            "CEC, adenocarcinoma ou adenoescamoso",
+            "Primeira linha; PD-L1 positivo ou negativo",
+            "Conferir contraindicações e tratamentos prévios"
+          ],
+          "paciente_individual": null,
+          "estado": "NAO_AVALIADA"
+        },
+        "dados_estruturados": {
+          "farmacos": [
+            "atezolizumabe",
+            "bevacizumabe",
+            "carboplatina",
+            "paclitaxel"
+          ],
+          "posologia": {
+            "estado": "NAO_EXTRAIDA_NESTA_RODADA",
+            "valor": null,
+            "motivo": "A rodada incorpora o delta de indicação/cenário; não completa dose por inferência."
+          }
+        },
+        "fonte_refs": [
+          {
+            "fonte_id": "nccn-e8c9cf5e6e5f",
+            "edicao": "1.2027",
+            "pagina_pdf": 59,
+            "paginas_pdf": [
+              59
+            ],
+            "secao": "CERV-F 2/5, primeira linha",
+            "trecho": "Carboplatin/Paclitaxel + Atezolizumab",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "a9b77ea755bd5f23330aba525e860fd4d8d904d1980dcf15838a8d40ee885cc7"
+          },
+          {
+            "fonte_id": "nccn-e8c9cf5e6e5f",
+            "edicao": "1.2027",
+            "pagina_pdf": 60,
+            "paginas_pdf": [
+              60
+            ],
+            "secao": "CERV-F 2A/5, nota c",
+            "trecho": "may be continued as maintenance therapy",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "a9b77ea755bd5f23330aba525e860fd4d8d904d1980dcf15838a8d40ee885cc7"
+          }
+        ],
+        "evidencia_declarada": {
+          "sistema": "NCCN",
+          "categoria": "1",
+          "preferencia": "Preferred",
+          "estado": "CONFERIDA_DOCUMENTALMENTE_A_CONFERIR_CLINICAMENTE",
+          "nota": "2A por cabeçalho somente onde a página expressamente declara essa regra; não é categoria inferida por conhecimento externo."
+        },
+        "estado_extracao": "EXTRAIDO_COM_LIMITES_DECLARADOS",
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "temporalidade": {
+          "referencia": "CENARIO_DESCRITO",
+          "datas_individuais": null
+        },
+        "propor_automaticamente": false,
+        "disponivel_para_prescricao": false,
+        "acesso": {
+          "registro_anvisa": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "incorporacao_conitec": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "pcdt_ddt": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "sigtap_apac": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "cobertura_privada": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "disponibilidade_institucional": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          }
+        },
+        "alternativas_legadas_refs": [],
+        "relacoes_refs": [
+          "relacao-nccn-20261017-colo-utero-atezo-carbo"
+        ],
+        "conflitos_refs": [],
+        "pendencias": [
+          "REVISAO_CLINICA_DO_DELTA",
+          "VERIFICAR_ACESSO_BRASILEIRO_POR_INDICACAO",
+          "POSOLOGIA_E_SUPORTE_NAO_COMPLETOS_NESTA_RODADA"
+        ],
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+            "anterior": {
+              "fonte_refs": [
+                {
+                  "fonte_id": "nccn-e8c9cf5e6e5f",
+                  "paginas_pdf": [
+                    59,
+                    60
+                  ],
+                  "secao": "CERV-F 2/5 e notas",
+                  "natureza": "EXTRACAO_DOCUMENTAL",
+                  "pagina_pdf": 59,
+                  "trecho": "Atezolizumab + Bevacizumab (category 1)c,7 \u0017Carboplatin/Paclitaxel + Atezolizumab + Bevacizumab (category 1)c,7"
+                }
+              ],
+              "conteudo_extraido": "Opção presente na tabela NCCN, com linha e elegibilidade próprias.",
+              "aplicabilidade": {
+                "criterios": [
+                  "Colo uterino recorrente/metastático",
+                  "Primeira linha",
+                  "PD-L1 positivo ou negativo; conferir contraindicações"
+                ],
+                "paciente_individual": null,
+                "estado": "NAO_AVALIADA"
+              },
+              "evidencia_declarada": {
+                "sistema": "NCCN",
+                "categoria": null,
+                "estado": "NAO_EXTRAIDA_POR_ITEM"
+              }
+            },
+            "motivo": "A fonte anterior compartilhava trecho que misturava os dois esquemas; faltava transcrição de categoria/preferência e da nota de manutenção.",
+            "aprovacao_clinica": null
+          },
+          {
+            "revisao": "2026-10-17-nccn-final-documental",
+            "anterior": {
+              "conteudo_extraido": "Atezolizumabe + bevacizumabe + carboplatina/paclitaxel: primeira linha Preferred, categoria1, doença recorrente/metastática, PD-L1 positivo ou negativo, em CEC/adenocarcinoma/adenoescamoso. Nota c: ICI e/ou anticorpos do regime podem continuar como manutenção, com dose e agenda segundo o estudo original; não criar agenda por inferência."
+            },
+            "motivo": "Espaçamento da prosa; sem modificar valores, códigos ou fontes."
+          }
+        ],
+        "fontes_por_campo": {
+          "conteudo_extraido": [
+            {
+              "fonte_id": "nccn-e8c9cf5e6e5f",
+              "edicao": "1.2027",
+              "pagina_pdf": 59,
+              "paginas_pdf": [
+                59
+              ],
+              "secao": "CERV-F 2/5, primeira linha",
+              "trecho": "Carboplatin/Paclitaxel + Atezolizumab",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "a9b77ea755bd5f23330aba525e860fd4d8d904d1980dcf15838a8d40ee885cc7"
+            },
+            {
+              "fonte_id": "nccn-e8c9cf5e6e5f",
+              "edicao": "1.2027",
+              "pagina_pdf": 60,
+              "paginas_pdf": [
+                60
+              ],
+              "secao": "CERV-F 2A/5, nota c",
+              "trecho": "may be continued as maintenance therapy",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "a9b77ea755bd5f23330aba525e860fd4d8d904d1980dcf15838a8d40ee885cc7"
+            }
+          ],
+          "aplicabilidade": [
+            {
+              "fonte_id": "nccn-e8c9cf5e6e5f",
+              "edicao": "1.2027",
+              "pagina_pdf": 59,
+              "paginas_pdf": [
+                59
+              ],
+              "secao": "CERV-F 2/5, primeira linha",
+              "trecho": "Carboplatin/Paclitaxel + Atezolizumab",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "a9b77ea755bd5f23330aba525e860fd4d8d904d1980dcf15838a8d40ee885cc7"
+            },
+            {
+              "fonte_id": "nccn-e8c9cf5e6e5f",
+              "edicao": "1.2027",
+              "pagina_pdf": 60,
+              "paginas_pdf": [
+                60
+              ],
+              "secao": "CERV-F 2A/5, nota c",
+              "trecho": "may be continued as maintenance therapy",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "a9b77ea755bd5f23330aba525e860fd4d8d904d1980dcf15838a8d40ee885cc7"
+            }
+          ],
+          "evidencia_declarada": [
+            {
+              "fonte_id": "nccn-e8c9cf5e6e5f",
+              "edicao": "1.2027",
+              "pagina_pdf": 59,
+              "paginas_pdf": [
+                59
+              ],
+              "secao": "CERV-F 2/5, primeira linha",
+              "trecho": "Carboplatin/Paclitaxel + Atezolizumab",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "a9b77ea755bd5f23330aba525e860fd4d8d904d1980dcf15838a8d40ee885cc7"
+            },
+            {
+              "fonte_id": "nccn-e8c9cf5e6e5f",
+              "edicao": "1.2027",
+              "pagina_pdf": 60,
+              "paginas_pdf": [
+                60
+              ],
+              "secao": "CERV-F 2A/5, nota c",
+              "trecho": "may be continued as maintenance therapy",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "a9b77ea755bd5f23330aba525e860fd4d8d904d1980dcf15838a8d40ee885cc7"
+            }
+          ]
+        }
+      },
+      {
+        "item_id": "nccn-20261017-colo-utero-figo-pembro",
+        "nome": "Pembrolizumabe + QT/RT: edição FIGO e população",
+        "tipo": "ESTADIAMENTO_E_APLICABILIDADE",
+        "dominio_principal": 2,
+        "conteudo_extraido": "QT/RT com cisplatina (ou carboplatina se intolerância) + pembrolizumabe: Preferred. FIGO 2014 IIIA/IIIB/IVA é categoria 1. Nota b: categoria 2B para FIGO 2018 IIIC definido apenas por metástase linfonodal, sem as características tumorais de FIGO 2014 IIIA–IIIB; quando há sobreposição dessas características, pode-se aplicar categoria 1. Não converter uma edição FIGO em outra automaticamente.",
+        "aplicabilidade": {
+          "criterios": [
+            "Doença candidata à QT/RT",
+            "Edição FIGO e características tumorais/linfonodais documentadas",
+            "Distinguir IIIC exclusivamente nodal de sobreposição com FIGO 2014 IIIA/IIIB"
+          ],
+          "paciente_individual": null,
+          "estado": "NAO_AVALIADA"
+        },
+        "dados_estruturados": {
+          "categorias_por_contexto": [
+            {
+              "contexto": "FIGO 2014 IIIA/IIIB/IVA",
+              "categoria": "1"
+            },
+            {
+              "contexto": "FIGO 2018 IIIC puramente nodal sem critérios tumorais2014 IIIA/IIIB",
+              "categoria": "2B"
+            },
+            {
+              "contexto": "FIGO 2018 III com sobreposição2014 IIIA/IIIB",
+              "categoria": "1 pode ser aplicada"
+            }
+          ]
+        },
+        "fonte_refs": [
+          {
+            "fonte_id": "nccn-e8c9cf5e6e5f",
+            "edicao": "1.2027",
+            "pagina_pdf": 59,
+            "paginas_pdf": [
+              59
+            ],
+            "secao": "CERV-F 2/5",
+            "trecho": "Category 1: FIGO 2014",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "a9b77ea755bd5f23330aba525e860fd4d8d904d1980dcf15838a8d40ee885cc7"
+          },
+          {
+            "fonte_id": "nccn-e8c9cf5e6e5f",
+            "edicao": "1.2027",
+            "pagina_pdf": 60,
+            "paginas_pdf": [
+              60
+            ],
+            "secao": "CERV-F 2A/5, nota b",
+            "trecho": "purely on nodal metastasis",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "a9b77ea755bd5f23330aba525e860fd4d8d904d1980dcf15838a8d40ee885cc7"
+          }
+        ],
+        "evidencia_declarada": {
+          "sistema": "NCCN",
+          "categoria": "VARIA_POR_CONTEXTO",
+          "preferencia": "Preferred",
+          "estado": "CONFERIDA_DOCUMENTALMENTE_A_CONFERIR_CLINICAMENTE",
+          "nota": "2A por cabeçalho somente onde a página expressamente declara essa regra; não é categoria inferida por conhecimento externo."
+        },
+        "estado_extracao": "EXTRAIDO_COM_LIMITES_DECLARADOS",
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "temporalidade": {
+          "referencia": "CENARIO_DESCRITO",
+          "datas_individuais": null
+        },
+        "propor_automaticamente": false,
+        "disponivel_para_prescricao": false,
+        "acesso": {
+          "registro_anvisa": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "incorporacao_conitec": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "pcdt_ddt": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "sigtap_apac": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "cobertura_privada": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "disponibilidade_institucional": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          }
+        },
+        "alternativas_legadas_refs": [],
+        "relacoes_refs": [
+          "relacao-nccn-20261017-colo-utero-figo-pembro"
+        ],
+        "conflitos_refs": [],
+        "pendencias": [
+          "REVISAO_CLINICA_DO_DELTA",
+          "VERIFICAR_ACESSO_BRASILEIRO_POR_INDICACAO"
+        ],
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+            "anterior": {
+              "fonte_refs": [
+                {
+                  "fonte_id": "nccn-e8c9cf5e6e5f",
+                  "paginas_pdf": [
+                    59,
+                    60
+                  ],
+                  "secao": "CERV-F 2/5 e notas",
+                  "natureza": "EXTRACAO_DOCUMENTAL",
+                  "pagina_pdf": 59,
+                  "trecho": "FIGO 2014 stage IIIA, IIIB, and IVA \u0017Category 2B: select FIGO 2018"
+                }
+              ],
+              "conteudo_extraido": "A fonte distingue FIGO2014 IIIA/IIIB/IVA e casos selecionados FIGO2018 III–IVA com categorias diferentes; não tratar a edição do estádio como intercambiável.",
+              "aplicabilidade": {
+                "criterios": [
+                  "Doença localmente avançada candidata a QT/RT",
+                  "Edição FIGO documentada"
+                ],
+                "paciente_individual": null,
+                "estado": "NAO_AVALIADA"
+              },
+              "dados_estruturados": {},
+              "evidencia_declarada": {
+                "sistema": "NCCN",
+                "categoria": null,
+                "estado": "NAO_EXTRAIDA_POR_ITEM"
+              }
+            },
+            "motivo": "A regra genérica FIGO2018 III–IVA omitia a distinção crítica de IIIC por acometimento nodal isolado.",
+            "aprovacao_clinica": null
+          },
+          {
+            "revisao": "2026-10-17-nccn-final-documental",
+            "anterior": {
+              "conteudo_extraido": "QT/RT com cisplatina (ou carboplatina se intolerância) + pembrolizumabe: Preferred. FIGO2014 IIIA/IIIB/IVA é categoria1. Nota b: categoria2B para FIGO2018 IIIC definido apenas por metástase linfonodal, sem as características tumorais de FIGO2014 IIIA–IIIB; quando há sobreposição dessas características, pode-se aplicar categoria1. Não converter uma edição FIGO em outra automaticamente."
+            },
+            "motivo": "Espaçamento da prosa; sem modificar valores, códigos ou fontes."
+          },
+          {
+            "revisao": "2026-10-17-nccn-final-documental",
+            "anterior": {
+              "aplicabilidade": {
+                "criterios": [
+                  "Doença candidata à QT/RT",
+                  "Edição FIGO e características tumorais/linfonodais documentadas",
+                  "Distinguir IIIC exclusivamente nodal de sobreposição com FIGO2014 IIIA/IIIB"
+                ],
+                "paciente_individual": null,
+                "estado": "NAO_AVALIADA"
+              }
+            },
+            "motivo": "Espaçamento da prosa; sem modificar valores, códigos ou fontes."
+          },
+          {
+            "revisao": "2026-10-17-nccn-final-documental",
+            "anterior": {
+              "dados_estruturados": {
+                "categorias_por_contexto": [
+                  {
+                    "contexto": "FIGO2014 IIIA/IIIB/IVA",
+                    "categoria": "1"
+                  },
+                  {
+                    "contexto": "FIGO2018 IIIC puramente nodal sem critérios tumorais2014 IIIA/IIIB",
+                    "categoria": "2B"
+                  },
+                  {
+                    "contexto": "FIGO2018 III com sobreposição2014 IIIA/IIIB",
+                    "categoria": "1 pode ser aplicada"
+                  }
+                ]
+              }
+            },
+            "motivo": "Espaçamento da prosa; sem modificar valores, códigos ou fontes."
+          }
+        ],
+        "fontes_por_campo": {
+          "conteudo_extraido": [
+            {
+              "fonte_id": "nccn-e8c9cf5e6e5f",
+              "edicao": "1.2027",
+              "pagina_pdf": 59,
+              "paginas_pdf": [
+                59
+              ],
+              "secao": "CERV-F 2/5",
+              "trecho": "Category 1: FIGO 2014",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "a9b77ea755bd5f23330aba525e860fd4d8d904d1980dcf15838a8d40ee885cc7"
+            },
+            {
+              "fonte_id": "nccn-e8c9cf5e6e5f",
+              "edicao": "1.2027",
+              "pagina_pdf": 60,
+              "paginas_pdf": [
+                60
+              ],
+              "secao": "CERV-F 2A/5, nota b",
+              "trecho": "purely on nodal metastasis",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "a9b77ea755bd5f23330aba525e860fd4d8d904d1980dcf15838a8d40ee885cc7"
+            }
+          ],
+          "aplicabilidade": [
+            {
+              "fonte_id": "nccn-e8c9cf5e6e5f",
+              "edicao": "1.2027",
+              "pagina_pdf": 59,
+              "paginas_pdf": [
+                59
+              ],
+              "secao": "CERV-F 2/5",
+              "trecho": "Category 1: FIGO 2014",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "a9b77ea755bd5f23330aba525e860fd4d8d904d1980dcf15838a8d40ee885cc7"
+            },
+            {
+              "fonte_id": "nccn-e8c9cf5e6e5f",
+              "edicao": "1.2027",
+              "pagina_pdf": 60,
+              "paginas_pdf": [
+                60
+              ],
+              "secao": "CERV-F 2A/5, nota b",
+              "trecho": "purely on nodal metastasis",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "a9b77ea755bd5f23330aba525e860fd4d8d904d1980dcf15838a8d40ee885cc7"
+            }
+          ],
+          "dados_estruturados": [
+            {
+              "fonte_id": "nccn-e8c9cf5e6e5f",
+              "edicao": "1.2027",
+              "pagina_pdf": 59,
+              "paginas_pdf": [
+                59
+              ],
+              "secao": "CERV-F 2/5",
+              "trecho": "Category 1: FIGO 2014",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "a9b77ea755bd5f23330aba525e860fd4d8d904d1980dcf15838a8d40ee885cc7"
+            },
+            {
+              "fonte_id": "nccn-e8c9cf5e6e5f",
+              "edicao": "1.2027",
+              "pagina_pdf": 60,
+              "paginas_pdf": [
+                60
+              ],
+              "secao": "CERV-F 2A/5, nota b",
+              "trecho": "purely on nodal metastasis",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "a9b77ea755bd5f23330aba525e860fd4d8d904d1980dcf15838a8d40ee885cc7"
+            }
+          ],
+          "evidencia_declarada": [
+            {
+              "fonte_id": "nccn-e8c9cf5e6e5f",
+              "edicao": "1.2027",
+              "pagina_pdf": 59,
+              "paginas_pdf": [
+                59
+              ],
+              "secao": "CERV-F 2/5",
+              "trecho": "Category 1: FIGO 2014",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "a9b77ea755bd5f23330aba525e860fd4d8d904d1980dcf15838a8d40ee885cc7"
+            },
+            {
+              "fonte_id": "nccn-e8c9cf5e6e5f",
+              "edicao": "1.2027",
+              "pagina_pdf": 60,
+              "paginas_pdf": [
+                60
+              ],
+              "secao": "CERV-F 2A/5, nota b",
+              "trecho": "purely on nodal metastasis",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "a9b77ea755bd5f23330aba525e860fd4d8d904d1980dcf15838a8d40ee885cc7"
+            }
+          ]
+        }
+      }
+    ],
+    "cenarios": {
+      "identidade_ref": "/identidade/cenarios",
+      "detalhamento_ref": "/tratamento/cenarios",
+      "novas_condicoes_refs": [
+        "nccn-20261017-colo-utero-tisotumabe",
+        "nccn-20261017-colo-utero-atezo-cis",
+        "nccn-20261017-colo-utero-atezo-carbo",
+        "nccn-20261017-colo-utero-figo-pembro"
+      ],
+      "regra": "Não igualar automaticamente as duas listas nem selecionar cenário individual nesta camada."
+    },
+    "fontes": [
+      {
+        "id": "nccn-e8c9cf5e6e5f",
+        "arquivo_local": "C:\\Users\\silas\\.aside\\u\\0\\sessions\\2026-10-17_LutNNwUyDZGlA1pF\\artifacts\\nccn\\Cervical Cancer.pdf",
+        "nome": "Cervical Cancer",
+        "sha256": "a9b77ea755bd5f23330aba525e860fd4d8d904d1980dcf15838a8d40ee885cc7",
+        "numero_paginas": 161,
+        "versao_declarada": "1.2027",
+        "origem": "ARQUIVO_LOCAL_FORNECIDO",
+        "autenticidade_externa": "NAO_VERIFICADA_NO_PORTAL",
+        "paginas_examinadas": [
+          59,
+          60
+        ]
+      }
+    ],
+    "fontes_legadas_refs": [
+      "/header/fonte",
+      "/curadoria/fontesLidas"
+    ],
+    "ensaios": {
+      "legado_ref": "/tratamento/ensaios",
+      "novos_nct": [],
+      "nota": "Nenhum identificador NCT foi inventado ou verificado nesta rodada."
+    },
+    "relacoes": [
+      {
+        "relacao_id": "relacao-nccn-20261017-colo-utero-tisotumabe",
+        "tipo": "CONDICOES_PARA_APRESENTACAO_DOCUMENTAL",
+        "destino_item_ref": "nccn-20261017-colo-utero-tisotumabe",
+        "criterios_extraidos": [
+          "Colo uterino recorrente/metastático",
+          "CEC, adenocarcinoma ou adenoescamoso",
+          "Segunda linha ou posterior"
+        ],
+        "origem_condicoes": "FONTE_NCCN_CITADA",
+        "origem_mapeamento": "PROPOSTA_DE_MAPEAMENTO",
+        "executavel": false,
+        "estado": "A_CONFERIR",
+        "dados_ausentes": "MANTER_INDETERMINADO",
+        "dados_conflitantes": "MANTER_CONFLITO",
+        "efeito": "APRESENTAR_CONTEUDO_PARA_REVISAO; NAO PRESCREVER",
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+            "criterios_extraidos": [
+              "Colo uterino recorrente/metastático",
+              "Segunda linha ou posterior"
+            ]
+          }
+        ],
+        "fontes_por_campo": {
+          "criterios_extraidos": [
+            {
+              "fonte_id": "nccn-e8c9cf5e6e5f",
+              "edicao": "1.2027",
+              "pagina_pdf": 59,
+              "paginas_pdf": [
+                59
+              ],
+              "secao": "CERV-F 2/5, segunda linha Preferred",
+              "trecho": "Tisotumab vedotin-tftv (category 1)",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "a9b77ea755bd5f23330aba525e860fd4d8d904d1980dcf15838a8d40ee885cc7"
+            },
+            {
+              "fonte_id": "nccn-e8c9cf5e6e5f",
+              "edicao": "1.2027",
+              "pagina_pdf": 60,
+              "paginas_pdf": [
+                60
+              ],
+              "secao": "CERV-F 2A/5, nota i",
+              "trecho": "does not reflect order of preference",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "a9b77ea755bd5f23330aba525e860fd4d8d904d1980dcf15838a8d40ee885cc7"
+            }
+          ]
+        }
+      },
+      {
+        "relacao_id": "relacao-nccn-20261017-colo-utero-atezo-cis",
+        "tipo": "CONDICOES_PARA_APRESENTACAO_DOCUMENTAL",
+        "destino_item_ref": "nccn-20261017-colo-utero-atezo-cis",
+        "criterios_extraidos": [
+          "Colo uterino recorrente/metastático",
+          "CEC, adenocarcinoma ou adenoescamoso",
+          "Primeira linha; PD-L1 positivo ou negativo",
+          "Conferir contraindicações e tratamentos prévios"
+        ],
+        "origem_condicoes": "FONTE_NCCN_CITADA",
+        "origem_mapeamento": "PROPOSTA_DE_MAPEAMENTO",
+        "executavel": false,
+        "estado": "A_CONFERIR",
+        "dados_ausentes": "MANTER_INDETERMINADO",
+        "dados_conflitantes": "MANTER_CONFLITO",
+        "efeito": "APRESENTAR_CONTEUDO_PARA_REVISAO; NAO PRESCREVER",
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+            "criterios_extraidos": [
+              "Colo uterino recorrente/metastático",
+              "Primeira linha",
+              "PD-L1 positivo ou negativo; conferir contraindicações"
+            ]
+          }
+        ],
+        "fontes_por_campo": {
+          "criterios_extraidos": [
+            {
+              "fonte_id": "nccn-e8c9cf5e6e5f",
+              "edicao": "1.2027",
+              "pagina_pdf": 59,
+              "paginas_pdf": [
+                59
+              ],
+              "secao": "CERV-F 2/5, primeira linha",
+              "trecho": "Cisplatin/Paclitaxel + Atezolizumab",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "a9b77ea755bd5f23330aba525e860fd4d8d904d1980dcf15838a8d40ee885cc7"
+            },
+            {
+              "fonte_id": "nccn-e8c9cf5e6e5f",
+              "edicao": "1.2027",
+              "pagina_pdf": 60,
+              "paginas_pdf": [
+                60
+              ],
+              "secao": "CERV-F 2A/5, nota c",
+              "trecho": "may be continued as maintenance therapy",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "a9b77ea755bd5f23330aba525e860fd4d8d904d1980dcf15838a8d40ee885cc7"
+            }
+          ]
+        }
+      },
+      {
+        "relacao_id": "relacao-nccn-20261017-colo-utero-atezo-carbo",
+        "tipo": "CONDICOES_PARA_APRESENTACAO_DOCUMENTAL",
+        "destino_item_ref": "nccn-20261017-colo-utero-atezo-carbo",
+        "criterios_extraidos": [
+          "Colo uterino recorrente/metastático",
+          "CEC, adenocarcinoma ou adenoescamoso",
+          "Primeira linha; PD-L1 positivo ou negativo",
+          "Conferir contraindicações e tratamentos prévios"
+        ],
+        "origem_condicoes": "FONTE_NCCN_CITADA",
+        "origem_mapeamento": "PROPOSTA_DE_MAPEAMENTO",
+        "executavel": false,
+        "estado": "A_CONFERIR",
+        "dados_ausentes": "MANTER_INDETERMINADO",
+        "dados_conflitantes": "MANTER_CONFLITO",
+        "efeito": "APRESENTAR_CONTEUDO_PARA_REVISAO; NAO PRESCREVER",
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+            "criterios_extraidos": [
+              "Colo uterino recorrente/metastático",
+              "Primeira linha",
+              "PD-L1 positivo ou negativo; conferir contraindicações"
+            ]
+          }
+        ],
+        "fontes_por_campo": {
+          "criterios_extraidos": [
+            {
+              "fonte_id": "nccn-e8c9cf5e6e5f",
+              "edicao": "1.2027",
+              "pagina_pdf": 59,
+              "paginas_pdf": [
+                59
+              ],
+              "secao": "CERV-F 2/5, primeira linha",
+              "trecho": "Carboplatin/Paclitaxel + Atezolizumab",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "a9b77ea755bd5f23330aba525e860fd4d8d904d1980dcf15838a8d40ee885cc7"
+            },
+            {
+              "fonte_id": "nccn-e8c9cf5e6e5f",
+              "edicao": "1.2027",
+              "pagina_pdf": 60,
+              "paginas_pdf": [
+                60
+              ],
+              "secao": "CERV-F 2A/5, nota c",
+              "trecho": "may be continued as maintenance therapy",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "a9b77ea755bd5f23330aba525e860fd4d8d904d1980dcf15838a8d40ee885cc7"
+            }
+          ]
+        }
+      },
+      {
+        "relacao_id": "relacao-nccn-20261017-colo-utero-figo-pembro",
+        "tipo": "CONDICOES_PARA_APRESENTACAO_DOCUMENTAL",
+        "destino_item_ref": "nccn-20261017-colo-utero-figo-pembro",
+        "criterios_extraidos": [
+          "Doença candidata à QT/RT",
+          "Edição FIGO e características tumorais/linfonodais documentadas",
+          "Distinguir IIIC exclusivamente nodal de sobreposição com FIGO 2014 IIIA/IIIB"
+        ],
+        "origem_condicoes": "FONTE_NCCN_CITADA",
+        "origem_mapeamento": "PROPOSTA_DE_MAPEAMENTO",
+        "executavel": false,
+        "estado": "A_CONFERIR",
+        "dados_ausentes": "MANTER_INDETERMINADO",
+        "dados_conflitantes": "MANTER_CONFLITO",
+        "efeito": "APRESENTAR_CONTEUDO_PARA_REVISAO; NAO PRESCREVER",
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+            "criterios_extraidos": [
+              "Doença localmente avançada candidata a QT/RT",
+              "Edição FIGO documentada"
+            ]
+          },
+          {
+            "revisao": "2026-10-17-nccn-final-documental",
+            "criterios_extraidos": [
+              "Doença candidata à QT/RT",
+              "Edição FIGO e características tumorais/linfonodais documentadas",
+              "Distinguir IIIC exclusivamente nodal de sobreposição com FIGO2014 IIIA/IIIB"
+            ]
+          }
+        ],
+        "fontes_por_campo": {
+          "criterios_extraidos": [
+            {
+              "fonte_id": "nccn-e8c9cf5e6e5f",
+              "edicao": "1.2027",
+              "pagina_pdf": 59,
+              "paginas_pdf": [
+                59
+              ],
+              "secao": "CERV-F 2/5",
+              "trecho": "Category 1: FIGO 2014",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "a9b77ea755bd5f23330aba525e860fd4d8d904d1980dcf15838a8d40ee885cc7"
+            },
+            {
+              "fonte_id": "nccn-e8c9cf5e6e5f",
+              "edicao": "1.2027",
+              "pagina_pdf": 60,
+              "paginas_pdf": [
+                60
+              ],
+              "secao": "CERV-F 2A/5, nota b",
+              "trecho": "purely on nodal metastasis",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "a9b77ea755bd5f23330aba525e860fd4d8d904d1980dcf15838a8d40ee885cc7"
+            }
+          ]
+        }
+      }
+    ],
+    "conflitos": [],
+    "conflitos_legados_ref": "/conflitos",
+    "pendencias": [
+      {
+        "id": "revisao-clinica",
+        "estado": "ABERTA",
+        "descricao": "Conferir cada acréscimo, condições, fontes, doses, interações e suporte antes de uso clínico."
+      },
+      {
+        "id": "acesso-brasileiro",
+        "estado": "ABERTA",
+        "descricao": "NCCN não comprova Anvisa, Conitec, PCDT/DDT, SIGTAP/APAC, cobertura privada ou acesso institucional."
+      },
+      {
+        "id": "cobertura-nccn",
+        "estado": "PARCIAL_POR_DELTA",
+        "descricao": "Leitura dirigida das páginas citadas; não há alegação de extração integral da diretriz."
+      }
+    ],
+    "pendencias_legadas_ref": "/pendencias",
+    "itens_adicionais_a_classificar": [
+      {
+        "origem_ref": "/header",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/status",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/consultavel",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/alerta",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/substitui",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/identidade",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/pendencias",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/conflitos",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/curadoria",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/correcoes",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      }
+    ],
+    "mapa_de_cobertura": [
+      {
+        "origem_json_pointer": "/header",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "2bbc91d8007e07fa3cb8a5b722fecc40450138cef346e4d218a964c5040d4bd8",
+        "valores_folha": 9
+      },
+      {
+        "origem_json_pointer": "/status",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "04635ca3844c66b19ebbf49bf9ff60fe851d6ce89597d23e6a970f1dc3927289",
+        "valores_folha": 1
+      },
+      {
+        "origem_json_pointer": "/consultavel",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b",
+        "valores_folha": 1
+      },
+      {
+        "origem_json_pointer": "/alerta",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "valores_folha": 1
+      },
+      {
+        "origem_json_pointer": "/substitui",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "valores_folha": 1
+      },
+      {
+        "origem_json_pointer": "/identidade",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "bb0fa6c2246c27e11270d4c1161aaeb4fc52907f23a63049b1d6053bd9d2926f",
+        "valores_folha": 10
+      },
+      {
+        "origem_json_pointer": "/diagnostico",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "ad6f69492f719ef18ccc9b08a43cabb82955860c6436e52c6569217f69d972d7",
+        "valores_folha": 83
+      },
+      {
+        "origem_json_pointer": "/estadiamento",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "bc127d0c5af82fa9f050d63e337ae9b0a083819b70f2695d613fbfca65578211",
+        "valores_folha": 151
+      },
+      {
+        "origem_json_pointer": "/tratamento",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "5c05e8d09602795da94d5a3380d16c52c40d03f42b2d9146fd11b72eb09c0626",
+        "valores_folha": 885
+      },
+      {
+        "origem_json_pointer": "/ligacoes",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "45a8e8db70f5eccb5828cc5a5d989028685dc4dbe775881a8c54d2b0b1f6d947",
+        "valores_folha": 107
+      },
+      {
+        "origem_json_pointer": "/pendencias",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "08351d4d2a0397d1331fd6efb347241670d6637bd103e67c67b435b72d7ae02f",
+        "valores_folha": 14
+      },
+      {
+        "origem_json_pointer": "/conflitos",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "1d27df9048c78c5e3e29e0bc534a378a7480816a73a3a3ce035eeb697981dcab",
+        "valores_folha": 37
+      },
+      {
+        "origem_json_pointer": "/curadoria",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "6746b582c2cc9b7262b252ba2d590bc74edb9bd5070deaa0499820bc4e052cbb",
+        "valores_folha": 19
+      },
+      {
+        "origem_json_pointer": "/correcoes",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "907d2151f90f1afca4f30f72bf076d11fc35fe7457d4613bf85f7601ebcf09ed",
+        "valores_folha": 8
+      }
+    ],
+    "reconciliacao_com_versao_anterior": {
+      "modo": "ADITIVO",
+      "originais_removidos": 0,
+      "originais_alterados": 0,
+      "contagens_preservadas": {
+        "protocolos": 19,
+        "ensaios": 5,
+        "cenarios_identidade": 4,
+        "cenarios_tratamento": 7,
+        "seguimento": 3,
+        "conflitos": 2,
+        "pendencias": 4
+      }
+    },
+    "relatorio_de_completude": {
+      "estado": "INCOMPLETA_PARA_DIRETRIZ_INTEGRAL",
+      "preservacao_legado": "INTEGRAL",
+      "delta_itens": 4,
+      "normalizacao_legado": "INDEXACAO_POR_REFERENCIA; NAO REEXTRACAO CLINICA",
+      "posologias": "SOMENTE AS EXPLICITAMENTE EXTRAIDAS; RESTANTES PENDENTES",
+      "sem_fato_paciente": true,
+      "sem_aprovacao_inferida": true
+    },
+    "auditoria_33_pendentes": [
+      {
+        "item_id": "nccn-20261017-colo-utero-tisotumabe",
+        "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+        "resultado": "CORRIGIDO_ESCOPO_OU_COMPLETUDE",
+        "fundamento": "Conteúdo genérico não identificava categoria/preferência e histologias do cabeçalho; citação atravessava a lista seguinte.",
+        "fontes": [
+          {
+            "fonte_id": "nccn-e8c9cf5e6e5f",
+            "edicao": "1.2027",
+            "pagina_pdf": 59,
+            "paginas_pdf": [
+              59
+            ],
+            "secao": "CERV-F 2/5, segunda linha Preferred",
+            "trecho": "Tisotumab vedotin-tftv (category 1)",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "a9b77ea755bd5f23330aba525e860fd4d8d904d1980dcf15838a8d40ee885cc7"
+          },
+          {
+            "fonte_id": "nccn-e8c9cf5e6e5f",
+            "edicao": "1.2027",
+            "pagina_pdf": 60,
+            "paginas_pdf": [
+              60
+            ],
+            "secao": "CERV-F 2A/5, nota i",
+            "trecho": "does not reflect order of preference",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "a9b77ea755bd5f23330aba525e860fd4d8d904d1980dcf15838a8d40ee885cc7"
+          }
+        ],
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "limite": "Conferência das afirmações deste item; não extração integral de posologia, diretriz ou acesso brasileiro.",
+        "sha256_item_antes": "dbf98a61e6226326be5ec4b11e94a1332060945eab8dd7ee0123d809fc0023de"
+      },
+      {
+        "item_id": "nccn-20261017-colo-utero-atezo-cis",
+        "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+        "resultado": "CORRIGIDO_ESCOPO_OU_COMPLETUDE",
+        "fundamento": "A fonte anterior compartilhava trecho que misturava os dois esquemas; faltava transcrição de categoria/preferência e da nota de manutenção.",
+        "fontes": [
+          {
+            "fonte_id": "nccn-e8c9cf5e6e5f",
+            "edicao": "1.2027",
+            "pagina_pdf": 59,
+            "paginas_pdf": [
+              59
+            ],
+            "secao": "CERV-F 2/5, primeira linha",
+            "trecho": "Cisplatin/Paclitaxel + Atezolizumab",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "a9b77ea755bd5f23330aba525e860fd4d8d904d1980dcf15838a8d40ee885cc7"
+          },
+          {
+            "fonte_id": "nccn-e8c9cf5e6e5f",
+            "edicao": "1.2027",
+            "pagina_pdf": 60,
+            "paginas_pdf": [
+              60
+            ],
+            "secao": "CERV-F 2A/5, nota c",
+            "trecho": "may be continued as maintenance therapy",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "a9b77ea755bd5f23330aba525e860fd4d8d904d1980dcf15838a8d40ee885cc7"
+          }
+        ],
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "limite": "Conferência das afirmações deste item; não extração integral de posologia, diretriz ou acesso brasileiro.",
+        "sha256_item_antes": "9c06c06dc5755ae00d78aac352ccfe7775d99c5d471daab4a63b7b95fce43f5d"
+      },
+      {
+        "item_id": "nccn-20261017-colo-utero-atezo-carbo",
+        "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+        "resultado": "CORRIGIDO_ESCOPO_OU_COMPLETUDE",
+        "fundamento": "A fonte anterior compartilhava trecho que misturava os dois esquemas; faltava transcrição de categoria/preferência e da nota de manutenção.",
+        "fontes": [
+          {
+            "fonte_id": "nccn-e8c9cf5e6e5f",
+            "edicao": "1.2027",
+            "pagina_pdf": 59,
+            "paginas_pdf": [
+              59
+            ],
+            "secao": "CERV-F 2/5, primeira linha",
+            "trecho": "Carboplatin/Paclitaxel + Atezolizumab",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "a9b77ea755bd5f23330aba525e860fd4d8d904d1980dcf15838a8d40ee885cc7"
+          },
+          {
+            "fonte_id": "nccn-e8c9cf5e6e5f",
+            "edicao": "1.2027",
+            "pagina_pdf": 60,
+            "paginas_pdf": [
+              60
+            ],
+            "secao": "CERV-F 2A/5, nota c",
+            "trecho": "may be continued as maintenance therapy",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "a9b77ea755bd5f23330aba525e860fd4d8d904d1980dcf15838a8d40ee885cc7"
+          }
+        ],
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "limite": "Conferência das afirmações deste item; não extração integral de posologia, diretriz ou acesso brasileiro.",
+        "sha256_item_antes": "b1f1f53c19431827ed76e33c92b1925ae7bf59b2bfd2e041ee40459250198aea"
+      },
+      {
+        "item_id": "nccn-20261017-colo-utero-figo-pembro",
+        "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+        "resultado": "CORRIGIDO_ESCOPO_OU_COMPLETUDE",
+        "fundamento": "A regra genérica FIGO2018 III–IVA omitia a distinção crítica de IIIC por acometimento nodal isolado.",
+        "fontes": [
+          {
+            "fonte_id": "nccn-e8c9cf5e6e5f",
+            "edicao": "1.2027",
+            "pagina_pdf": 59,
+            "paginas_pdf": [
+              59
+            ],
+            "secao": "CERV-F 2/5",
+            "trecho": "Category 1: FIGO 2014",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "a9b77ea755bd5f23330aba525e860fd4d8d904d1980dcf15838a8d40ee885cc7"
+          },
+          {
+            "fonte_id": "nccn-e8c9cf5e6e5f",
+            "edicao": "1.2027",
+            "pagina_pdf": 60,
+            "paginas_pdf": [
+              60
+            ],
+            "secao": "CERV-F 2A/5, nota b",
+            "trecho": "purely on nodal metastasis",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "a9b77ea755bd5f23330aba525e860fd4d8d904d1980dcf15838a8d40ee885cc7"
+          }
+        ],
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "limite": "Conferência das afirmações deste item; não extração integral de posologia, diretriz ou acesso brasileiro.",
+        "sha256_item_antes": "0946bf051ef91b25ac0c4b5cfc308fe35a26ea8f0a00bca5a783627b67b8c980"
+      }
+    ],
+    "revisoes_auditoria": [
+      {
+        "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+        "escopo": "APENAS_33_ITENS_PENDENTES",
+        "legado_modificado": false,
+        "aprovacao_clinica": null,
+        "limites": "Sem leitura integral da pasta, sem completar doses, sem checagem de acesso ou autenticidade externa.",
+        "itens_ref": "/tumor_pack_universal/auditoria_33_pendentes",
+        "sha256_itens": "7e3a6ca3679979bdd1e6a56a35ade696396c6133ac0a2e184effc87a4dead545"
+      }
+    ],
+    "fechamento_documental": [
+      {
+        "revisao": "2026-10-17-nccn-final-documental",
+        "estado": "CORRECOES_DOCUMENTAIS_APLICADAS",
+        "ajustes_textuais": 8,
+        "deduplicacoes_por_referencia": [
+          "auditoria_33_pendentes"
+        ],
+        "aprovacao_clinica": null,
+        "legado_alterado": false
+      }
+    ]
+  }
 }

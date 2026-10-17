@@ -1760,5 +1760,2097 @@
       "achado": "Codex 2026-10-11 (veredito entrega final): faturamento molecular não demonstrado",
       "acao": "3 vínculos rebaixados a catalogoIdCandidato"
     }
-  ]
+  ],
+  "tumor_pack_universal": {
+    "schema_documental": "tumor-pack-universal@1",
+    "metadados": {
+      "revisao_documental": "2026-10-17-nccn-final-documental",
+      "versao": "1.3.0",
+      "data": "2026-10-17",
+      "autor_extracao": "Codex",
+      "estado": "RASCUNHO",
+      "aprovacao_clinica": null,
+      "escopo": "CAMADA_ADITIVA_UNIVERSAL_E_DELTA_DOCUMENTAL_NCCN",
+      "base_legada": {
+        "arquivo": "corpus/6-pack-tumor/melanoma/pack-melanoma.v2.RASCUNHO.json",
+        "commit": "2c0991d",
+        "versao": "2.0.0",
+        "sha256_bytes": "1175a8da9e585455151f1f1d6813ba8c771ba2ff9bcc060197aa1ccadd4dc15b",
+        "sha256_semantico": "ffe31293f968b8b9aa89ea2f2c4ee4bfd333b9e0df76bb30dee7d1d9021a9d2e"
+      },
+      "nota_versao": "Camada universal 1.3.0; header identifica o legado preservado. Fechamento documental, sem aprovação clínica ou ativação.",
+      "integra_runtime": false,
+      "gera_conduta": false,
+      "historico_revisoes": [
+        {
+          "revisao_documental": "2026-10-17-nccn-delta-1",
+          "versao": "1.0.0",
+          "data": "2026-10-17",
+          "autor_extracao": "Codex",
+          "estado": "RASCUNHO",
+          "aprovacao_clinica": null,
+          "escopo": "CAMADA_ADITIVA_UNIVERSAL_E_DELTA_DOCUMENTAL_NCCN",
+          "base_legada": {
+            "arquivo": "corpus/6-pack-tumor/melanoma/pack-melanoma.v2.RASCUNHO.json",
+            "commit": "2c0991d",
+            "versao": "2.0.0",
+            "sha256_bytes": "1175a8da9e585455151f1f1d6813ba8c771ba2ff9bcc060197aa1ccadd4dc15b",
+            "sha256_semantico": "ffe31293f968b8b9aa89ea2f2c4ee4bfd333b9e0df76bb30dee7d1d9021a9d2e"
+          },
+          "nota_versao": "header.versao identifica o legado intacto; esta extensão possui revisão própria. Não reutilizar aprovação/hashes antigos para o conjunto alterado.",
+          "integra_runtime": false,
+          "gera_conduta": false
+        },
+        {
+          "revisao_documental": "2026-10-17-nccn-delta-3-auditoria33",
+          "versao": "1.2.0",
+          "data": "2026-10-17",
+          "autor_extracao": "Codex",
+          "estado": "RASCUNHO",
+          "aprovacao_clinica": null,
+          "escopo": "CAMADA_ADITIVA_UNIVERSAL_E_DELTA_DOCUMENTAL_NCCN",
+          "base_legada": {
+            "arquivo": "corpus/6-pack-tumor/melanoma/pack-melanoma.v2.RASCUNHO.json",
+            "commit": "2c0991d",
+            "versao": "2.0.0",
+            "sha256_bytes": "1175a8da9e585455151f1f1d6813ba8c771ba2ff9bcc060197aa1ccadd4dc15b",
+            "sha256_semantico": "ffe31293f968b8b9aa89ea2f2c4ee4bfd333b9e0df76bb30dee7d1d9021a9d2e"
+          },
+          "nota_versao": "Revisão da camada universal1.2.0; header legado preservado. Auditoria documental dos33 itens, sem aprovação clínica.",
+          "integra_runtime": false,
+          "gera_conduta": false,
+          "historico_revisoes": [
+            {
+              "revisao_documental": "2026-10-17-nccn-delta-1",
+              "versao": "1.0.0",
+              "data": "2026-10-17",
+              "autor_extracao": "Codex",
+              "estado": "RASCUNHO",
+              "aprovacao_clinica": null,
+              "escopo": "CAMADA_ADITIVA_UNIVERSAL_E_DELTA_DOCUMENTAL_NCCN",
+              "base_legada": {
+                "arquivo": "corpus/6-pack-tumor/melanoma/pack-melanoma.v2.RASCUNHO.json",
+                "commit": "2c0991d",
+                "versao": "2.0.0",
+                "sha256_bytes": "1175a8da9e585455151f1f1d6813ba8c771ba2ff9bcc060197aa1ccadd4dc15b",
+                "sha256_semantico": "ffe31293f968b8b9aa89ea2f2c4ee4bfd333b9e0df76bb30dee7d1d9021a9d2e"
+              },
+              "nota_versao": "header.versao identifica o legado intacto; esta extensão possui revisão própria. Não reutilizar aprovação/hashes antigos para o conjunto alterado.",
+              "integra_runtime": false,
+              "gera_conduta": false
+            }
+          ]
+        }
+      ]
+    },
+    "identidade_ref": "/identidade",
+    "dominios": [
+      {
+        "dominio_id": 1,
+        "nome": "Diagnóstico e patologia",
+        "itens_legados_refs": [
+          "legado-1f7abfc1a524e1d3",
+          "legado-dc8716a720ecb8ed",
+          "legado-4f9396a88e90999a",
+          "legado-0cd0bfca33f1d10a",
+          "legado-b4b869d7b5457f8f",
+          "legado-716f6dcd4dd2c589",
+          "legado-6677a6905d96681f",
+          "legado-1bc4b01e57390311",
+          "legado-f970b074a923a860",
+          "legado-bace7154cee4c4c5"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 2,
+        "nome": "Estadiamento, extensão e risco",
+        "itens_legados_refs": [
+          "legado-14b70ed38bf74741",
+          "legado-de3dc6d4b2545b38",
+          "legado-5bd3a02ea2e2dbca",
+          "legado-4e07885a8cc98f9e",
+          "legado-ecbc6bacc7b4f03a",
+          "legado-b19e7f8ea829b3fa",
+          "legado-bf7c16a6c885e63d",
+          "legado-02f3056697813b38"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 3,
+        "nome": "Biomarcadores e farmacogenética",
+        "itens_legados_refs": [
+          "legado-e3717242eeed2dde",
+          "legado-9cb6ead74466e248",
+          "legado-601af59e6663de7e",
+          "legado-aa04c74e3e666e50",
+          "legado-58075d411daaf785",
+          "legado-fd21b04036b77ec7",
+          "legado-bfb07ed2405e0308"
+        ],
+        "itens_nccn_refs": [
+          "nccn-20261017-melanoma-kit"
+        ],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 4,
+        "nome": "Exames e requisitos documentais",
+        "itens_legados_refs": [
+          "legado-1be016421e0b68c3",
+          "legado-b9a2439fadb13eb1",
+          "legado-71678e929ae96c17",
+          "legado-4e5b5dd08df03666",
+          "legado-a08b041e5af62e7b",
+          "legado-9a5880400791cf43",
+          "legado-cd966b02dba5d307",
+          "legado-e15c6ac24399c4df",
+          "legado-9a6043dd03f8d005",
+          "legado-01329abb4e405fc5",
+          "legado-89db3b6ec657bc2a",
+          "legado-a0d29a0f7f77ca61",
+          "legado-86f37c4bf570d5ae",
+          "legado-cc607128c97c8999",
+          "legado-e1c76010d8625283",
+          "legado-895591b447f4ff95",
+          "legado-4292cf07752e4a77",
+          "legado-d0fd5ce30e0353a1",
+          "legado-4e3c1906c1082569",
+          "legado-41308264aad0cdb4",
+          "legado-47454658d98fc66c"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 5,
+        "nome": "Avaliação antes do tratamento",
+        "itens_legados_refs": [],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "NAO_ESTRUTURADO_NESTA_RODADA",
+        "observacao": "Ausência de referências não significa não aplicabilidade; textos dentro de outros itens permanecem preservados."
+      },
+      {
+        "dominio_id": 6,
+        "nome": "Tratamento e protocolos",
+        "itens_legados_refs": [
+          "legado-afb24ad77b3d4f8e",
+          "legado-bac1430363580b06",
+          "legado-a70453a8af0a5ca6",
+          "legado-462a6309469ac31b",
+          "legado-9d97f4000d26d54b",
+          "legado-85e7bd39a63c8e4a",
+          "legado-09216aa529d058cf",
+          "legado-9a8b140453425520",
+          "legado-a5d67d1596ba9b87",
+          "legado-252db9b131398861",
+          "legado-91a55184a4ac442e",
+          "legado-92f2a8c8475a39b1",
+          "legado-1e234673dbc1dcc3",
+          "legado-0e43af1ec8463e88",
+          "legado-095ddd237bca6a6f",
+          "legado-e148e23827e82c1f",
+          "legado-1771a2908c8423e2",
+          "legado-e3ca2aa438bde28e",
+          "legado-dbd784243c59cc7d",
+          "legado-ef0417fa40e5c661",
+          "legado-bb390e482592940c",
+          "legado-c080cbf46d433ae7",
+          "legado-6fad57f4bfb02b00",
+          "legado-359b2cc8a3e0bbb2",
+          "legado-326541779c070388",
+          "legado-571c942dc6631bc3",
+          "legado-953bca46f57dbe9f",
+          "legado-f8473b1290bc1856",
+          "legado-566b342128516934"
+        ],
+        "itens_nccn_refs": [
+          "nccn-20261017-melanoma-lifileucel"
+        ],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 7,
+        "nome": "Segurança, interações e toxicidades",
+        "itens_legados_refs": [
+          "legado-1c9c024c3bbca00f",
+          "legado-b52e9a48db74ee83",
+          "legado-6aa8ca5d9834bd0b",
+          "legado-83c9001cfd96f1f2",
+          "legado-e98d144a1d437a6c"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 8,
+        "nome": "Suporte e cuidados",
+        "itens_legados_refs": [
+          "legado-78151aadfad87b98",
+          "legado-b34dec1501679a94",
+          "legado-58069650ccf7378e",
+          "legado-af564edc9ceaa1e3"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 9,
+        "nome": "Avaliação de resposta e estado da doença",
+        "itens_legados_refs": [],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "NAO_ESTRUTURADO_NESTA_RODADA",
+        "observacao": "Ausência de referências não significa não aplicabilidade; textos dentro de outros itens permanecem preservados."
+      },
+      {
+        "dominio_id": 10,
+        "nome": "Seguimento e sobrevivência",
+        "itens_legados_refs": [
+          "legado-e6cc40940b1ea3fe",
+          "legado-58fd6136bdd45ad4",
+          "legado-832889d8f4807188",
+          "legado-caa816d229fe8346",
+          "legado-6d7fe27034c23178",
+          "legado-4926fe2acc0ba0b7"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 11,
+        "nome": "Encaminhamentos e atuação multiprofissional",
+        "itens_legados_refs": [
+          "legado-ed94f143e322e0f3",
+          "legado-522228a3ab70aae5",
+          "legado-bbe50e0fbc307924",
+          "legado-6bdcc543ec80e041"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 12,
+        "nome": "Documentos e acesso assistencial",
+        "itens_legados_refs": [
+          "legado-e4baea3d255d85a3",
+          "legado-276b474d27bb9857"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      }
+    ],
+    "indice_itens_legados": [
+      {
+        "item_id": "legado-1f7abfc1a524e1d3",
+        "origem_json_pointer": "/diagnostico/patologico/obtencao/0",
+        "sha256_conteudo": "48adea7b221bbb8e8d1614f11f90bbd0f0ba3cb2834e03ba42c981f4ea94bf02",
+        "nome": "/diagnostico/patologico/obtencao/0",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/obtencao/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-dc8716a720ecb8ed",
+        "origem_json_pointer": "/diagnostico/patologico/obtencao/1",
+        "sha256_conteudo": "5906e4ede4ebadd4dc0a9b8c839b1fa23c9d36e3309367ce7278901b8dfd0872",
+        "nome": "/diagnostico/patologico/obtencao/1",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/obtencao/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-4f9396a88e90999a",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/0",
+        "sha256_conteudo": "cc58df8725a9e412a7734c463563a0de110e987c68368e176a546d13c09243db",
+        "nome": "espessura de Breslow (mm)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-0cd0bfca33f1d10a",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/1",
+        "sha256_conteudo": "181bc11242a792ab84a9ba03604206c66c6d778dc3fa004306a90cf39d29510a",
+        "nome": "ulceração",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b4b869d7b5457f8f",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/2",
+        "sha256_conteudo": "38223916b3ad37a5784f0e9c0e3beb30717773ddd7df0b0db98af01deb6a5d6d",
+        "nome": "índice mitótico (/mm²)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-716f6dcd4dd2c589",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/3",
+        "sha256_conteudo": "df8651a78c9e0dc2d3a0dfe6068a5437db15b2952286ed9cbe0697bad85fe851",
+        "nome": "nível de Clark",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-6677a6905d96681f",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/4",
+        "sha256_conteudo": "514a73347717165a4e61594e82f9adf65359a83b2ac68cbdae2d32994f6eb261",
+        "nome": "invasão angiolinfática",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-1bc4b01e57390311",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/5",
+        "sha256_conteudo": "cdfb98d637c25bb30384a7715c29851c9e000a69a37b1d16de23d3964932b4c9",
+        "nome": "microssatelitose",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-f970b074a923a860",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/6",
+        "sha256_conteudo": "2546c1ef974e2daa2a1df865cc3b15b23934515bc5839a9a56e2f64a6f3585c7",
+        "nome": "margens (lateral e profunda)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-bace7154cee4c4c5",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/7",
+        "sha256_conteudo": "a8a33764bc6e9cf896d8aa525bc2f7432efd4cdc53d3234a88f18cc850e58bcd",
+        "nome": "LFN sentinela: número e tamanho do depósito (≥1 mm relevante no IIIA)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-14b70ed38bf74741",
+        "origem_json_pointer": "/estadiamento/sistema",
+        "sha256_conteudo": "d7dab6e16ae3278a0513466816530a61b1fcf4548c0e925655782b9ee09cf5ce",
+        "nome": "AJCC",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-de3dc6d4b2545b38",
+        "origem_json_pointer": "/estadiamento/edicao",
+        "sha256_conteudo": "dcc28f15172f39494d056efeeeeb698d5bde64ceab1a76412c62a08a5aafaf7c",
+        "nome": "8ª",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-5bd3a02ea2e2dbca",
+        "origem_json_pointer": "/estadiamento/gruposConduta/0",
+        "sha256_conteudo": "512a8a6fdc5b33c4ecf4a86b69951871b4d0d4fa0ac70bc43e67e43565c45097",
+        "nome": "/estadiamento/gruposConduta/0",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-4e07885a8cc98f9e",
+        "origem_json_pointer": "/estadiamento/gruposConduta/1",
+        "sha256_conteudo": "e1068759e1e9a3bf62da300cc47bcc000edd36ccffd1bac6ec407a711eda9709",
+        "nome": "/estadiamento/gruposConduta/1",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ecbc6bacc7b4f03a",
+        "origem_json_pointer": "/estadiamento/gruposConduta/2",
+        "sha256_conteudo": "71ec9f17219a862f1e8de2b46bb51fd3e8caaf7c34b3e54fe3378a1af813666d",
+        "nome": "/estadiamento/gruposConduta/2",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b19e7f8ea829b3fa",
+        "origem_json_pointer": "/estadiamento/gruposConduta/3",
+        "sha256_conteudo": "0010b93193aed9f867fbc1174828f06b08c186fb508e166792d34cec2e31bf84",
+        "nome": "/estadiamento/gruposConduta/3",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-bf7c16a6c885e63d",
+        "origem_json_pointer": "/estadiamento/gruposConduta/4",
+        "sha256_conteudo": "c09d68f756e379af19ff906c9d6f9c1c9381e377a4f2ca27b60f537da5fb5895",
+        "nome": "/estadiamento/gruposConduta/4",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-02f3056697813b38",
+        "origem_json_pointer": "/estadiamento/marcadores",
+        "sha256_conteudo": "f0fd10835f3d2bf4f3e2924900a0d2671c530174ec53e769954f4b9433dc3635",
+        "nome": "/estadiamento/marcadores",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e3717242eeed2dde",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/0",
+        "sha256_conteudo": "e1d27f5758c1ca7e68b0696a56cfd55a32487e1e82b2bb2f1348222bdfc288d4",
+        "nome": "Estádio III e doença avançada/irressecável",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-9cb6ead74466e248",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/1",
+        "sha256_conteudo": "f627165a9deed220f94ee467f1982efc98ff0a91f851223050e63be47d99a5d1",
+        "nome": "Doença avançada/irressecável (permite KIT, NRAS, NTRK no mesmo painel)",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-601af59e6663de7e",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/2",
+        "sha256_conteudo": "17f2c38df3b358d932ff5911f41e21810e1517074214b135ea5318989d6f975b",
+        "nome": "Triagem rápida quando teste molecular indisponível",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-aa04c74e3e666e50",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/3",
+        "sha256_conteudo": "155035f2a3c0984bcfc8e25481f67028413ebee30b743d2d5d01686c78df20df",
+        "nome": "Estádio IV, quando disponível",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-58075d411daaf785",
+        "origem_json_pointer": "/tratamento/biomarcadorTratamento/0",
+        "sha256_conteudo": "64b01263fa14456ec4ffe03840c19b364532c31eca98383e62b5d8669ba1773e",
+        "nome": "/tratamento/biomarcadorTratamento/0",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/biomarcadorTratamento/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-fd21b04036b77ec7",
+        "origem_json_pointer": "/tratamento/biomarcadorTratamento/1",
+        "sha256_conteudo": "42b613ea9b282461bf8645a750d4aaff562736c2904f8b29a9d687201a2aacd5",
+        "nome": "/tratamento/biomarcadorTratamento/1",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/biomarcadorTratamento/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-bfb07ed2405e0308",
+        "origem_json_pointer": "/tratamento/biomarcadorTratamento/2",
+        "sha256_conteudo": "b7b7c8d8c4425391708b2d448c122c98898f26230b4189269f01df82fcc40697",
+        "nome": "/tratamento/biomarcadorTratamento/2",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/biomarcadorTratamento/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-1be016421e0b68c3",
+        "origem_json_pointer": "/diagnostico/imagem/0",
+        "sha256_conteudo": "d7e682a0e9ae86a667ee57788f42fd05606698a44fd757deba66f4d8cbad1de0",
+        "nome": "TC de tórax",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b9a2439fadb13eb1",
+        "origem_json_pointer": "/diagnostico/imagem/1",
+        "sha256_conteudo": "641398b6b364b32f20ad99b3644358de1d40c25eb27fab574f101146d4736762",
+        "nome": "TC de abdome",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-71678e929ae96c17",
+        "origem_json_pointer": "/diagnostico/imagem/2",
+        "sha256_conteudo": "206c9811bf85fa4245315709cf0397776cc3c369ab91cb3f02b343589206fbb0",
+        "nome": "TC de pelve (conforme sítio primário)",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-4e5b5dd08df03666",
+        "origem_json_pointer": "/diagnostico/imagem/3",
+        "sha256_conteudo": "e7977fe350316a9de031a86ca8b6563393831a8361f2712c604f2332ae79d78b",
+        "nome": "RM de crânio com contraste",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a08b041e5af62e7b",
+        "origem_json_pointer": "/diagnostico/imagem/4",
+        "sha256_conteudo": "e323b8d9cae5b2c2bb5c543c533f9aaa02a4662887f5cdc7dda8ab49ec409085",
+        "nome": "PET/CT FDG",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-9a5880400791cf43",
+        "origem_json_pointer": "/diagnostico/imagem/5",
+        "sha256_conteudo": "52ed4e525f79f40a71932275d742ce093119b25978919e3d12b5604cc7231309",
+        "nome": "USG da cadeia linfonodal de drenagem",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/5/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-cd966b02dba5d307",
+        "origem_json_pointer": "/estadiamento/exames/0",
+        "sha256_conteudo": "b0b235c6af49dd42362469c2017e25519e510cd36856d02e8606430e00c6696c",
+        "nome": "Sem imagem de rotina (0, IA-IIA com BLS negativa)",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e15c6ac24399c4df",
+        "origem_json_pointer": "/estadiamento/exames/1",
+        "sha256_conteudo": "d9e3f26ebec775023f277abc6a80866666389883923984fe9839097dc9854182",
+        "nome": "TC tórax/abdome ± pelve/pescoço",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-9a6043dd03f8d005",
+        "origem_json_pointer": "/estadiamento/exames/2",
+        "sha256_conteudo": "ad4756ddbd696439e2b758388036f5b243a0b3154cfcafed4f7613906f14925b",
+        "nome": "RM crânio",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-01329abb4e405fc5",
+        "origem_json_pointer": "/estadiamento/exames/3",
+        "sha256_conteudo": "d541a227129615b83a84dc18ef3c49a5b700a527ed592a90605e7c310a4cf9b6",
+        "nome": "DHL",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-89db3b6ec657bc2a",
+        "origem_json_pointer": "/ligacoes/exames/0",
+        "sha256_conteudo": "00cac656db90cece9385c8c98f658accb5b7c1553202e6be466fa96d39aaf2b9",
+        "nome": "ANATOMOPATOLOGICO",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a0d29a0f7f77ca61",
+        "origem_json_pointer": "/ligacoes/exames/1",
+        "sha256_conteudo": "dc49fc936c8f159a3aa8208709558e35c50f545055f5cc9756e18bdd0d02c81b",
+        "nome": "BIOPSIA_GANGLIO",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-86f37c4bf570d5ae",
+        "origem_json_pointer": "/ligacoes/exames/2",
+        "sha256_conteudo": "1e49060d9ff6bb936a9d5318d51a013d181e7cefe4fae7d0525411391d598361",
+        "nome": "DHL",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-cc607128c97c8999",
+        "origem_json_pointer": "/ligacoes/exames/3",
+        "sha256_conteudo": "99a98b9d268e78a05608d792d2fad81f4e16f25b8a4f95da9f7decd91a23a0dc",
+        "nome": "IMUNOHISTOQUIMICA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e1c76010d8625283",
+        "origem_json_pointer": "/ligacoes/exames/4",
+        "sha256_conteudo": "3a955b75de510bd32be8d0f7de2bf070f27f223ac4c6a07cf68b35b7271856b2",
+        "nome": "PET_CT_FDG",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-895591b447f4ff95",
+        "origem_json_pointer": "/ligacoes/exames/5",
+        "sha256_conteudo": "bad8505e4a4450e4dd1c0691d739c56076e3e2a51d04f68ce1f3a4a823e89597",
+        "nome": "RM_CRANIO",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-4292cf07752e4a77",
+        "origem_json_pointer": "/ligacoes/exames/6",
+        "sha256_conteudo": "eea68f82f02592e6262514a154ff52ae85284765c1f48ab3b07cabb92ead209f",
+        "nome": "TC_ABDOMEN_SUPERIOR",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d0fd5ce30e0353a1",
+        "origem_json_pointer": "/ligacoes/exames/7",
+        "sha256_conteudo": "5beb801ddc054db97d463dd8b682c9128772e22b7938b6d4c645af14dc4ddd7a",
+        "nome": "TC_PELVE",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-4e3c1906c1082569",
+        "origem_json_pointer": "/ligacoes/exames/8",
+        "sha256_conteudo": "147b97b900462813d8c6528cc01d88f8a5102936ee96ee4fb121f8a7b77f60b0",
+        "nome": "TC_TORAX",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-41308264aad0cdb4",
+        "origem_json_pointer": "/ligacoes/exames/9",
+        "sha256_conteudo": "e587a7250a8633f1505dfb613cd4283458e6a8198d35f3721641c9ee3878017f",
+        "nome": "MOLECULAR_PCR_MUTACAO",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-47454658d98fc66c",
+        "origem_json_pointer": "/ligacoes/exames/10",
+        "sha256_conteudo": "c77d15bd8da7582e2d6d9825573309affb51c04c30c7829dbea1953584a30ee9",
+        "nome": "SEQUENCIAMENTO_AMPLICON",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-afb24ad77b3d4f8e",
+        "origem_json_pointer": "/tratamento/cenarios/0",
+        "sha256_conteudo": "436637e6a1fcc6ba58636a46f1093fb289d6ee9a11364a648aebc08d1273a35f",
+        "nome": "Primário: margens por Breslow",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-bac1430363580b06",
+        "origem_json_pointer": "/tratamento/cenarios/1",
+        "sha256_conteudo": "9e44656afce36f3d2a81c22e4d2ac00a88fe19149682785571019ae130aed8b2",
+        "nome": "Biópsia de LFN sentinela",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a70453a8af0a5ca6",
+        "origem_json_pointer": "/tratamento/cenarios/2",
+        "sha256_conteudo": "af2bfe1f94ca0344cdca28dca76e890115143768d25eea0775ad841f7379e000",
+        "nome": "BLS positiva",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-462a6309469ac31b",
+        "origem_json_pointer": "/tratamento/cenarios/3",
+        "sha256_conteudo": "e380c0e43444575f79cc754a2f97bea82c98f0ba8b69f49b1a12af957cf9499b",
+        "nome": "Adjuvante IIB/IIC, III, IV ressecado",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-9d97f4000d26d54b",
+        "origem_json_pointer": "/tratamento/cenarios/4",
+        "sha256_conteudo": "3a876a6700efd866da10f4acca652ca80eef5a35be8ca8411585bc2352c49cfc",
+        "nome": "Neoadjuvante (III com LFN clínico)",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-85e7bd39a63c8e4a",
+        "origem_json_pointer": "/tratamento/cenarios/5",
+        "sha256_conteudo": "8bce4063d9863b010adb1f1d1b596cc934f957e9ac90c90f24e4c08237a9d21b",
+        "nome": "Oligometastático",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/5/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-09216aa529d058cf",
+        "origem_json_pointer": "/tratamento/protocolos/0",
+        "sha256_conteudo": "24c8f1fd537bbcae9e4bed6b930febbe6a6bf0e6d57ac75e897db1b62b94786a",
+        "nome": "Pembrolizumabe adjuvante",
+        "id_original": "melanoma-adj-pembrolizumabe",
+        "fonte_local_ref": "/tratamento/protocolos/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-9a8b140453425520",
+        "origem_json_pointer": "/tratamento/protocolos/1",
+        "sha256_conteudo": "e2af6d52cbf93f76c56a7e90f9812350e0875e0a939fbb5f26ca5e29a5fd8cca",
+        "nome": "Nivolumabe adjuvante (IIB/IIC)",
+        "id_original": "melanoma-adj-nivolumabe-480",
+        "fonte_local_ref": "/tratamento/protocolos/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a5d67d1596ba9b87",
+        "origem_json_pointer": "/tratamento/protocolos/2",
+        "sha256_conteudo": "c30379eb9dbe72feb1a5a0061aa001288eb958c071842876bdd7e0c6452f4e4d",
+        "nome": "Nivolumabe adjuvante (III/IV ressecado)",
+        "id_original": "melanoma-adj-nivolumabe-iii",
+        "fonte_local_ref": "/tratamento/protocolos/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-252db9b131398861",
+        "origem_json_pointer": "/tratamento/protocolos/3",
+        "sha256_conteudo": "c7895c5f9d48d5657ceb7f5a0ad8a4877208f88c0c332b1acbb61f9884d1d1fe",
+        "nome": "Dabrafenibe + trametinibe adjuvante (BRAF V600)",
+        "id_original": "melanoma-adj-dabrafenibe-trametinibe",
+        "fonte_local_ref": "/tratamento/protocolos/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-91a55184a4ac442e",
+        "origem_json_pointer": "/tratamento/protocolos/4",
+        "sha256_conteudo": "9771364a10bf55c9aba7f43a1ba6e0821751fb26bc9c83fb9d79bf61ff519062",
+        "nome": "Ipilimumabe + nivolumabe neoadjuvante (NADINA)",
+        "id_original": "melanoma-neo-ipi-nivo",
+        "fonte_local_ref": "/tratamento/protocolos/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-92f2a8c8475a39b1",
+        "origem_json_pointer": "/tratamento/protocolos/5",
+        "sha256_conteudo": "dcdf78e05405e68ccd298afe6b814cf74adbb0ade3924e104a8ea45d88e89e6c",
+        "nome": "Pembrolizumabe neoadjuvante (SWOG S1801)",
+        "id_original": "melanoma-neo-pembrolizumabe",
+        "fonte_local_ref": "/tratamento/protocolos/5/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-1e234673dbc1dcc3",
+        "origem_json_pointer": "/tratamento/protocolos/6",
+        "sha256_conteudo": "ef120668b03958a5f413e448817f512490814635eecbbcf4db8d52b4a46d6ea2",
+        "nome": "Ipilimumabe 3 mg/kg + nivolumabe 1 mg/kg",
+        "id_original": "melanoma-av-ipi3-nivo1",
+        "fonte_local_ref": "/tratamento/protocolos/6/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-0e43af1ec8463e88",
+        "origem_json_pointer": "/tratamento/protocolos/7",
+        "sha256_conteudo": "0e17591733f1a265aa1bedb5c63bacacec4e3396b61388183f548f5b613f1d3a",
+        "nome": "Nivolumabe + relatlimabe",
+        "id_original": "melanoma-av-nivo-relatlimabe",
+        "fonte_local_ref": "/tratamento/protocolos/7/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-095ddd237bca6a6f",
+        "origem_json_pointer": "/tratamento/protocolos/8",
+        "sha256_conteudo": "3df8b7b2526049652ff620b56d7a729fdf4499874df0b76b8f5c269b19d84e31",
+        "nome": "Nivolumabe monoterapia",
+        "id_original": "melanoma-av-nivolumabe",
+        "fonte_local_ref": "/tratamento/protocolos/8/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e148e23827e82c1f",
+        "origem_json_pointer": "/tratamento/protocolos/9",
+        "sha256_conteudo": "9ca830ace9b4ec03859d57a1c4655513b877f8108700891996c8490b9df6b471",
+        "nome": "Pembrolizumabe monoterapia",
+        "id_original": "melanoma-av-pembrolizumabe",
+        "fonte_local_ref": "/tratamento/protocolos/9/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-1771a2908c8423e2",
+        "origem_json_pointer": "/tratamento/protocolos/10",
+        "sha256_conteudo": "2d184f47ebcbebb37b3ee9145a693e3f213ac38fdeb5b3eef0a8fca437d38f4d",
+        "nome": "Dabrafenibe + trametinibe (BRAF V600)",
+        "id_original": "melanoma-av-dabrafenibe-trametinibe",
+        "fonte_local_ref": "/tratamento/protocolos/10/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e3ca2aa438bde28e",
+        "origem_json_pointer": "/tratamento/protocolos/11",
+        "sha256_conteudo": "78aa0e0e851df2bb20d3c35cd674604938350a910d30bc74566a5c82eaeadaeb",
+        "nome": "Encorafenibe + binimetinibe (BRAF V600)",
+        "id_original": "melanoma-av-encorafenibe-binimetinibe",
+        "fonte_local_ref": "/tratamento/protocolos/11/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-dbd784243c59cc7d",
+        "origem_json_pointer": "/tratamento/protocolos/12",
+        "sha256_conteudo": "0def3d7ccef6f1234fb95a27cffdb21afeaa52a20d5d23e7fb9169a82f29b9da",
+        "nome": "Vemurafenibe + cobimetinibe (BRAF V600)",
+        "id_original": "melanoma-av-vemurafenibe-cobimetinibe",
+        "fonte_local_ref": "/tratamento/protocolos/12/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ef0417fa40e5c661",
+        "origem_json_pointer": "/tratamento/protocolos/13",
+        "sha256_conteudo": "d64a7d606141ec121ef3e5dd68c41471ff8a1d24ff2a88195e530e499a983016",
+        "nome": "Ipilimumabe monoterapia",
+        "id_original": "melanoma-av-ipilimumabe",
+        "fonte_local_ref": "/tratamento/protocolos/13/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-bb390e482592940c",
+        "origem_json_pointer": "/tratamento/protocolos/14",
+        "sha256_conteudo": "bfe9aa8fae39ea52c6c00472ca03ba2d24055b591d0f5ca5f92496b8649566db",
+        "nome": "Larotrectinibe (fusão NTRK)",
+        "id_original": "melanoma-av-larotrectinibe",
+        "fonte_local_ref": "/tratamento/protocolos/14/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-c080cbf46d433ae7",
+        "origem_json_pointer": "/tratamento/protocolos/15",
+        "sha256_conteudo": "5c91590757a41213cf98ffcf16d837f05528ff5d2fd2b6c66effabcfa19e1fff",
+        "nome": "Dacarbazina",
+        "id_original": "melanoma-av-dacarbazina",
+        "fonte_local_ref": "/tratamento/protocolos/15/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-6fad57f4bfb02b00",
+        "origem_json_pointer": "/tratamento/protocolos/16",
+        "sha256_conteudo": "7c17f4c32fdf7f2840595fc5b36e1c74d050335e36f899c9ff6234fc633eb891",
+        "nome": "CVD (cisplatina + vinblastina + dacarbazina)",
+        "id_original": "melanoma-av-cvd",
+        "fonte_local_ref": "/tratamento/protocolos/16/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-359b2cc8a3e0bbb2",
+        "origem_json_pointer": "/tratamento/protocolos/17",
+        "sha256_conteudo": "e16fddb8f1eb074f381708737b7c55617c7f6ffe79789c68987c831ca163ac5a",
+        "nome": "Carboplatina + paclitaxel",
+        "id_original": "melanoma-av-carbo-paclitaxel",
+        "fonte_local_ref": "/tratamento/protocolos/17/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-326541779c070388",
+        "origem_json_pointer": "/tratamento/cirurgia/0",
+        "sha256_conteudo": "9958e4ac63db19f0612c5ce4759e387ce77a80e85243a00946fd477e5663fe6c",
+        "nome": "/tratamento/cirurgia/0",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cirurgia/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-571c942dc6631bc3",
+        "origem_json_pointer": "/tratamento/cirurgia/1",
+        "sha256_conteudo": "03feffe3f7be049db1fa6b7f5c120bf87478acdcf38d02901c166f0fa8e94aa3",
+        "nome": "/tratamento/cirurgia/1",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cirurgia/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-953bca46f57dbe9f",
+        "origem_json_pointer": "/tratamento/cirurgia/2",
+        "sha256_conteudo": "9e0fc47f43a53600af00e507e5c5696b0cc2c7390cbfc59057dcdf1369ad4adf",
+        "nome": "/tratamento/cirurgia/2",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cirurgia/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-f8473b1290bc1856",
+        "origem_json_pointer": "/tratamento/radioterapia/0",
+        "sha256_conteudo": "bc23007ec04fd646c0d79faf125ee1edb044a7ccb89cd0f902ae7aa20f9188cd",
+        "nome": "RT adjuvante após linfadenectomia (III selecionado)",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/radioterapia/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-566b342128516934",
+        "origem_json_pointer": "/tratamento/radioterapia/1",
+        "sha256_conteudo": "b1d4b93859aa6e4c6b0f19bf95b005382ec7aaa23449edfbf9b0b29c3604c65e",
+        "nome": "SBRT/RT em oligometástase ou SNC",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/radioterapia/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-1c9c024c3bbca00f",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/0",
+        "sha256_conteudo": "e60ef76aa9e2179f19d366de068ec09bdd9326589ac0c4f7bfa76a22731581c2",
+        "nome": "/ligacoes/interacoesConsultar/0",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b52e9a48db74ee83",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/1",
+        "sha256_conteudo": "e36511726832042c82794a822e1a4664ab6510157b95d646ac2c747d5aa02b0b",
+        "nome": "/ligacoes/interacoesConsultar/1",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-6aa8ca5d9834bd0b",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/2",
+        "sha256_conteudo": "148a474708124f238d2fdda5348a29dbdc8dda1769874b1ff6d038f28c2d7cd1",
+        "nome": "/ligacoes/interacoesConsultar/2",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-83c9001cfd96f1f2",
+        "origem_json_pointer": "/ligacoes/ctcaeAcao/0",
+        "sha256_conteudo": "42a3053d8bba63fa955fe3804c61d9f30f3b97a2442384970627c4345eb49ae5",
+        "nome": "/ligacoes/ctcaeAcao/0",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e98d144a1d437a6c",
+        "origem_json_pointer": "/ligacoes/ctcaeAcao/1",
+        "sha256_conteudo": "8e475673602b2ff86794011d71b0a66ee521b69041440b3acb48de364e6a58b4",
+        "nome": "/ligacoes/ctcaeAcao/1",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-78151aadfad87b98",
+        "origem_json_pointer": "/tratamento/suporte",
+        "sha256_conteudo": "05bcb334fc88744b180078060ef301c198025cc87b4fd3a6808ae8d77fb0e862",
+        "nome": "/tratamento/suporte",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/suporte/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b34dec1501679a94",
+        "origem_json_pointer": "/ligacoes/suporteReceitas/0",
+        "sha256_conteudo": "e83d306860962b44a069044216ce281d73b3295db5664ee5e19c865024de3858",
+        "nome": "corticoide para eventos imunorrelacionados graus 2+",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-58069650ccf7378e",
+        "origem_json_pointer": "/ligacoes/suporteReceitas/1",
+        "sha256_conteudo": "ef1520b9c5efd5e5759cb0518ee04b05ced6ebc25c5a2fcb0ae9251b4cc11b5d",
+        "nome": "antipirético/protocolo de pirexia com dabrafenibe",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-af564edc9ceaa1e3",
+        "origem_json_pointer": "/ligacoes/suporteReceitas/2",
+        "sha256_conteudo": "92590a525256e69a74ca466f284dca2b901c25a0cd51107b8566f5b447b8ccfe",
+        "nome": "fotoproteção",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e6cc40940b1ea3fe",
+        "origem_json_pointer": "/tratamento/seguimento/0",
+        "sha256_conteudo": "85924d96047c7dd48fab726eb4e14ae78d9ccd8f9541db36d3cffe12f87a43bf",
+        "nome": "Indefinido",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/seguimento/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-58fd6136bdd45ad4",
+        "origem_json_pointer": "/tratamento/seguimento/1",
+        "sha256_conteudo": "4f1039c8e84d850614de9efe7edd35baf4cc01b94e94bf91a0fb6ed81b1b7468",
+        "nome": "Anos 1-2 e 3-5 (BLS positiva sem linfadenectomia ou BLS indicada não feita)",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/seguimento/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-832889d8f4807188",
+        "origem_json_pointer": "/tratamento/seguimento/2",
+        "sha256_conteudo": "ff3cfd99dc366c7eab7eb4d078c5ff9a2bc35da3b855a73fb40db288fbb43641",
+        "nome": "pT3b N0 ou maior",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/seguimento/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-caa816d229fe8346",
+        "origem_json_pointer": "/ligacoes/orientacoes/0",
+        "sha256_conteudo": "436bd46770c99de2db7ab9684bb24697ccd1fbacef590d7b9039d06c6088b3f8",
+        "nome": "autoexame de pele e cadeias linfonodais",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-6d7fe27034c23178",
+        "origem_json_pointer": "/ligacoes/orientacoes/1",
+        "sha256_conteudo": "604055dcdd59d5ad9bd32f66b3dd649a280acd3a000253b1065bcce54e5c7110",
+        "nome": "fotoproteção e evitar UV artificial",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-4926fe2acc0ba0b7",
+        "origem_json_pointer": "/ligacoes/orientacoes/2",
+        "sha256_conteudo": "d399dfd3f32f7509ff9c218aa48b3b41cfd9ebda4689901ba86ae2797d5d02f1",
+        "nome": "sinais de alerta de eventos imunorrelacionados",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ed94f143e322e0f3",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/0",
+        "sha256_conteudo": "e405532e965dee6b72bee112662ad98e7c39afb94a9ed8e33fd5538051fc5a4e",
+        "nome": "cirurgia oncológica",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-522228a3ab70aae5",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/1",
+        "sha256_conteudo": "66559a4d837a4e16cbe6e5ed19529e0b467b3363602f05576dc479ffb963fb74",
+        "nome": "dermatologia",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-bbe50e0fbc307924",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/2",
+        "sha256_conteudo": "eb54fb8d77e530fb6faedf5bf1621ae02068135f31f3ec1f1351cbd5f307765b",
+        "nome": "radioterapia",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-6bdcc543ec80e041",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/3",
+        "sha256_conteudo": "10573884e6b63cdac368ad743cba4eb46da4317105c797e029c281ef56145843",
+        "nome": "oncogenética (história familiar de melanoma/pâncreas)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e4baea3d255d85a3",
+        "origem_json_pointer": "/ligacoes/laudos/0",
+        "sha256_conteudo": "1ed1053672eca08556958b8f4d3f377744eec194a1feabbcfbdf936e9da2ba02",
+        "nome": "APAC de quimioterapia/imunoterapia (C43)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-276b474d27bb9857",
+        "origem_json_pointer": "/ligacoes/laudos/1",
+        "sha256_conteudo": "b3bb89a9c8129ca6b71be350126a799ae4bf268d58302005fcf8950710c4afe8",
+        "nome": "laudo anatomopatológico com Breslow, ulceração, mitoses",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      }
+    ],
+    "itens_nccn": [
+      {
+        "item_id": "nccn-20261017-melanoma-lifileucel",
+        "nome": "Lifileucel/TIL",
+        "tipo": "OPCAO_TERAPEUTICA",
+        "dominio_principal": 6,
+        "conteudo_extraido": "Lifileucel/TIL: Preferred em segunda linha ou posterior, categoria 2A pelo cabeçalho. Nota m: bom performance, anti-PD-1 prévio e BRAF/MEK prévio se BRAF V600 presente. Não considerar se função cardíaca/pulmonar/renal inadequada, performance ruim ou metástases cerebrais não tratadas/ativas. Requer metástase ressecável para coleta, QT não mieloablativa e IL-2 em alta dose. SYSCON 2/2 confirma a necessidade de candidatura à IL-2.",
+        "aplicabilidade": {
+          "criterios": [
+            "Melanoma avançado; segunda linha ou posterior",
+            "Anti-PD-1 prévio e BRAF/MEK prévio se BRAF V600",
+            "Bom performance e função orgânica adequada",
+            "Sem metástase cerebral não tratada ou ativa",
+            "Metástase ressecável para coleta e elegibilidade para QT não mieloablativa/IL-2"
+          ],
+          "paciente_individual": null,
+          "estado": "NAO_AVALIADA"
+        },
+        "dados_estruturados": {
+          "farmacos": [
+            "lifileucel"
+          ],
+          "posologia": {
+            "estado": "NAO_EXTRAIDA_NESTA_RODADA",
+            "valor": null,
+            "motivo": "A rodada incorpora o delta de indicação/cenário; não completa dose por inferência."
+          }
+        },
+        "fonte_refs": [
+          {
+            "fonte_id": "nccn-2b4ed16d796a",
+            "edicao": "3.2026",
+            "pagina_pdf": 59,
+            "paginas_pdf": [
+              59
+            ],
+            "secao": "MELSYS 2/10, Preferred",
+            "trecho": "Lifileucel",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "49dc5ff813133913c6ff6fc884e57bc38ad45a4632bd0e516c8e7007ec2240e0"
+          },
+          {
+            "fonte_id": "nccn-2b4ed16d796a",
+            "edicao": "3.2026",
+            "pagina_pdf": 60,
+            "paginas_pdf": [
+              60
+            ],
+            "secao": "MELSYS 3/10, nota m",
+            "trecho": "TIL therapy should not be considered",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "49dc5ff813133913c6ff6fc884e57bc38ad45a4632bd0e516c8e7007ec2240e0"
+          },
+          {
+            "fonte_id": "nccn-2b4ed16d796a",
+            "edicao": "3.2026",
+            "pagina_pdf": 69,
+            "paginas_pdf": [
+              69
+            ],
+            "secao": "SYSCON 2/2",
+            "trecho": "should consider lifileucel",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "49dc5ff813133913c6ff6fc884e57bc38ad45a4632bd0e516c8e7007ec2240e0"
+          }
+        ],
+        "evidencia_declarada": {
+          "sistema": "NCCN",
+          "categoria": "2A por cabeçalho",
+          "preferencia": "Preferred",
+          "estado": "CONFERIDA_DOCUMENTALMENTE_A_CONFERIR_CLINICAMENTE",
+          "nota": "2A por cabeçalho somente onde a página expressamente declara essa regra; não é categoria inferida por conhecimento externo."
+        },
+        "estado_extracao": "EXTRAIDO_COM_LIMITES_DECLARADOS",
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "temporalidade": {
+          "referencia": "CENARIO_DESCRITO",
+          "datas_individuais": null
+        },
+        "propor_automaticamente": false,
+        "disponivel_para_prescricao": false,
+        "acesso": {
+          "registro_anvisa": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "incorporacao_conitec": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "pcdt_ddt": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "sigtap_apac": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "cobertura_privada": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "disponibilidade_institucional": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          }
+        },
+        "alternativas_legadas_refs": [],
+        "relacoes_refs": [
+          "relacao-nccn-20261017-melanoma-lifileucel"
+        ],
+        "conflitos_refs": [],
+        "pendencias": [
+          "REVISAO_CLINICA_DO_DELTA",
+          "VERIFICAR_ACESSO_BRASILEIRO_POR_INDICACAO",
+          "POSOLOGIA_E_SUPORTE_NAO_COMPLETOS_NESTA_RODADA"
+        ],
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+            "anterior": {
+              "fonte_refs": [
+                {
+                  "fonte_id": "nccn-2b4ed16d796a",
+                  "paginas_pdf": [
+                    59,
+                    69
+                  ],
+                  "secao": "ME-I, terapia sistêmica e sequenciamento",
+                  "natureza": "EXTRACAO_DOCUMENTAL",
+                  "pagina_pdf": 59,
+                  "trecho": "Lifileucelm • Ipilimumab • Vusolimogene oderparepvec-wtpg + Nivolumabn • BRAF gene fusion-positive"
+                }
+              ],
+              "conteudo_extraido": "Terapia celular no contexto de doença avançada após anti-PD-1 e BRAF/MEK quando aplicável; preservar requisitos de elegibilidade e suporte, incluindo candidatura a IL-2 em alta dose.",
+              "aplicabilidade": {
+                "criterios": [
+                  "Melanoma avançado",
+                  "Tratamentos prévios e elegibilidade para terapia celular documentados"
+                ],
+                "paciente_individual": null,
+                "estado": "NAO_AVALIADA"
+              },
+              "evidencia_declarada": {
+                "sistema": "NCCN",
+                "categoria": null,
+                "estado": "NAO_EXTRAIDA_POR_ITEM"
+              }
+            },
+            "motivo": "Localizador ME-I estava incorreto e os critérios de segurança da nota m não estavam explícitos.",
+            "aprovacao_clinica": null
+          },
+          {
+            "revisao": "2026-10-17-nccn-final-documental",
+            "anterior": {
+              "conteudo_extraido": "Lifileucel/TIL: Preferred em segunda linha ou posterior, categoria2A pelo cabeçalho. Nota m: bom performance, anti-PD-1 prévio e BRAF/MEK prévio se BRAF V600 presente. Não considerar se função cardíaca/pulmonar/renal inadequada, performance ruim ou metástases cerebrais não tratadas/ativas. Requer metástase ressecável para coleta, QT não mieloablativa e IL-2 em alta dose. SYSCON2/2 confirma a necessidade de candidatura à IL-2."
+            },
+            "motivo": "Espaçamento da prosa; sem modificar valores, códigos ou fontes."
+          }
+        ],
+        "fontes_por_campo": {
+          "conteudo_extraido": [
+            {
+              "fonte_id": "nccn-2b4ed16d796a",
+              "edicao": "3.2026",
+              "pagina_pdf": 59,
+              "paginas_pdf": [
+                59
+              ],
+              "secao": "MELSYS 2/10, Preferred",
+              "trecho": "Lifileucel",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "49dc5ff813133913c6ff6fc884e57bc38ad45a4632bd0e516c8e7007ec2240e0"
+            },
+            {
+              "fonte_id": "nccn-2b4ed16d796a",
+              "edicao": "3.2026",
+              "pagina_pdf": 60,
+              "paginas_pdf": [
+                60
+              ],
+              "secao": "MELSYS 3/10, nota m",
+              "trecho": "TIL therapy should not be considered",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "49dc5ff813133913c6ff6fc884e57bc38ad45a4632bd0e516c8e7007ec2240e0"
+            },
+            {
+              "fonte_id": "nccn-2b4ed16d796a",
+              "edicao": "3.2026",
+              "pagina_pdf": 69,
+              "paginas_pdf": [
+                69
+              ],
+              "secao": "SYSCON 2/2",
+              "trecho": "should consider lifileucel",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "49dc5ff813133913c6ff6fc884e57bc38ad45a4632bd0e516c8e7007ec2240e0"
+            }
+          ],
+          "aplicabilidade": [
+            {
+              "fonte_id": "nccn-2b4ed16d796a",
+              "edicao": "3.2026",
+              "pagina_pdf": 59,
+              "paginas_pdf": [
+                59
+              ],
+              "secao": "MELSYS 2/10, Preferred",
+              "trecho": "Lifileucel",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "49dc5ff813133913c6ff6fc884e57bc38ad45a4632bd0e516c8e7007ec2240e0"
+            },
+            {
+              "fonte_id": "nccn-2b4ed16d796a",
+              "edicao": "3.2026",
+              "pagina_pdf": 60,
+              "paginas_pdf": [
+                60
+              ],
+              "secao": "MELSYS 3/10, nota m",
+              "trecho": "TIL therapy should not be considered",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "49dc5ff813133913c6ff6fc884e57bc38ad45a4632bd0e516c8e7007ec2240e0"
+            },
+            {
+              "fonte_id": "nccn-2b4ed16d796a",
+              "edicao": "3.2026",
+              "pagina_pdf": 69,
+              "paginas_pdf": [
+                69
+              ],
+              "secao": "SYSCON 2/2",
+              "trecho": "should consider lifileucel",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "49dc5ff813133913c6ff6fc884e57bc38ad45a4632bd0e516c8e7007ec2240e0"
+            }
+          ],
+          "evidencia_declarada": [
+            {
+              "fonte_id": "nccn-2b4ed16d796a",
+              "edicao": "3.2026",
+              "pagina_pdf": 59,
+              "paginas_pdf": [
+                59
+              ],
+              "secao": "MELSYS 2/10, Preferred",
+              "trecho": "Lifileucel",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "49dc5ff813133913c6ff6fc884e57bc38ad45a4632bd0e516c8e7007ec2240e0"
+            },
+            {
+              "fonte_id": "nccn-2b4ed16d796a",
+              "edicao": "3.2026",
+              "pagina_pdf": 60,
+              "paginas_pdf": [
+                60
+              ],
+              "secao": "MELSYS 3/10, nota m",
+              "trecho": "TIL therapy should not be considered",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "49dc5ff813133913c6ff6fc884e57bc38ad45a4632bd0e516c8e7007ec2240e0"
+            },
+            {
+              "fonte_id": "nccn-2b4ed16d796a",
+              "edicao": "3.2026",
+              "pagina_pdf": 69,
+              "paginas_pdf": [
+                69
+              ],
+              "secao": "SYSCON 2/2",
+              "trecho": "should consider lifileucel",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "49dc5ff813133913c6ff6fc884e57bc38ad45a4632bd0e516c8e7007ec2240e0"
+            }
+          ]
+        }
+      },
+      {
+        "item_id": "nccn-20261017-melanoma-kit",
+        "nome": "Opções dirigidas a KIT",
+        "tipo": "BIOMARCADOR_E_TRATAMENTO",
+        "dominio_principal": 3,
+        "conteudo_extraido": "MELSYS 2/10: melanoma avançado com mutação KIT positiva, segunda linha ou posterior, Useful in Certain Circumstances. Lista imatinibe ou outros inibidores KIT, exemplificando dasatinibe, nilotinibe e ripretinibe. Não substituir requisito de mutação por expressão isolada.",
+        "aplicabilidade": {
+          "criterios": [
+            "Melanoma avançado",
+            "Mutação KIT positiva",
+            "Segunda linha ou posterior"
+          ],
+          "paciente_individual": null,
+          "estado": "NAO_AVALIADA"
+        },
+        "dados_estruturados": {},
+        "fonte_refs": [
+          {
+            "fonte_id": "nccn-2b4ed16d796a",
+            "edicao": "3.2026",
+            "pagina_pdf": 59,
+            "paginas_pdf": [
+              59
+            ],
+            "secao": "MELSYS 2/10, Useful in Certain Circumstances",
+            "trecho": "KIT mutation positive",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "49dc5ff813133913c6ff6fc884e57bc38ad45a4632bd0e516c8e7007ec2240e0"
+          },
+          {
+            "fonte_id": "nccn-2b4ed16d796a",
+            "edicao": "3.2026",
+            "pagina_pdf": 59,
+            "paginas_pdf": [
+              59
+            ],
+            "secao": "MELSYS 2/10",
+            "trecho": "Imatinib or other KIT inhibitors",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "49dc5ff813133913c6ff6fc884e57bc38ad45a4632bd0e516c8e7007ec2240e0"
+          }
+        ],
+        "evidencia_declarada": {
+          "sistema": "NCCN",
+          "categoria": "2A por cabeçalho",
+          "preferencia": "Useful in Certain Circumstances",
+          "estado": "CONFERIDA_DOCUMENTALMENTE_A_CONFERIR_CLINICAMENTE",
+          "nota": "2A por cabeçalho somente onde a página expressamente declara essa regra; não é categoria inferida por conhecimento externo."
+        },
+        "estado_extracao": "EXTRAIDO_COM_LIMITES_DECLARADOS",
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "temporalidade": {
+          "referencia": "CENARIO_DESCRITO",
+          "datas_individuais": null
+        },
+        "propor_automaticamente": false,
+        "disponivel_para_prescricao": false,
+        "acesso": {
+          "registro_anvisa": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "incorporacao_conitec": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "pcdt_ddt": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "sigtap_apac": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "cobertura_privada": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "disponibilidade_institucional": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          }
+        },
+        "alternativas_legadas_refs": [],
+        "relacoes_refs": [
+          "relacao-nccn-20261017-melanoma-kit"
+        ],
+        "conflitos_refs": [],
+        "pendencias": [
+          "REVISAO_CLINICA_DO_DELTA",
+          "VERIFICAR_ACESSO_BRASILEIRO_POR_INDICACAO"
+        ],
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+            "anterior": {
+              "fonte_refs": [
+                {
+                  "fonte_id": "nccn-2b4ed16d796a",
+                  "paginas_pdf": [
+                    59
+                  ],
+                  "secao": "ME-I, terapia sistêmica",
+                  "natureza": "EXTRACAO_DOCUMENTAL",
+                  "pagina_pdf": 59,
+                  "trecho": "Imatinib or other KIT inhibitors (eg, Dasatinib, Nilotinib, Ripretinib) • NTRK1/2/3 gene"
+                }
+              ],
+              "conteudo_extraido": "A fonte apresenta imatinibe e outros inibidores em alterações específicas de KIT; não equiparar expressão de KIT à presença de mutação ativadora elegível.",
+              "aplicabilidade": {
+                "criterios": [
+                  "Melanoma avançado",
+                  "Alteração de KIT e elegibilidade conforme fonte"
+                ],
+                "paciente_individual": null,
+                "estado": "NAO_AVALIADA"
+              },
+              "evidencia_declarada": {
+                "sistema": "NCCN",
+                "categoria": null,
+                "estado": "NAO_EXTRAIDA_POR_ITEM"
+              }
+            },
+            "motivo": "Localizador ME-I estava incorreto; a própria tabela situa a opção em segunda linha/subsequentes e Useful in Certain Circumstances.",
+            "aprovacao_clinica": null
+          },
+          {
+            "revisao": "2026-10-17-nccn-final-documental",
+            "anterior": {
+              "conteudo_extraido": "MELSYS2/10: melanoma avançado com mutação KIT positiva, segunda linha ou posterior, Useful in Certain Circumstances. Lista imatinibe ou outros inibidores KIT, exemplificando dasatinibe, nilotinibe e ripretinibe. Não substituir requisito de mutação por expressão isolada."
+            },
+            "motivo": "Espaçamento da prosa; sem modificar valores, códigos ou fontes."
+          }
+        ],
+        "fontes_por_campo": {
+          "conteudo_extraido": [
+            {
+              "fonte_id": "nccn-2b4ed16d796a",
+              "edicao": "3.2026",
+              "pagina_pdf": 59,
+              "paginas_pdf": [
+                59
+              ],
+              "secao": "MELSYS 2/10, Useful in Certain Circumstances",
+              "trecho": "KIT mutation positive",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "49dc5ff813133913c6ff6fc884e57bc38ad45a4632bd0e516c8e7007ec2240e0"
+            },
+            {
+              "fonte_id": "nccn-2b4ed16d796a",
+              "edicao": "3.2026",
+              "pagina_pdf": 59,
+              "paginas_pdf": [
+                59
+              ],
+              "secao": "MELSYS 2/10",
+              "trecho": "Imatinib or other KIT inhibitors",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "49dc5ff813133913c6ff6fc884e57bc38ad45a4632bd0e516c8e7007ec2240e0"
+            }
+          ],
+          "aplicabilidade": [
+            {
+              "fonte_id": "nccn-2b4ed16d796a",
+              "edicao": "3.2026",
+              "pagina_pdf": 59,
+              "paginas_pdf": [
+                59
+              ],
+              "secao": "MELSYS 2/10, Useful in Certain Circumstances",
+              "trecho": "KIT mutation positive",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "49dc5ff813133913c6ff6fc884e57bc38ad45a4632bd0e516c8e7007ec2240e0"
+            },
+            {
+              "fonte_id": "nccn-2b4ed16d796a",
+              "edicao": "3.2026",
+              "pagina_pdf": 59,
+              "paginas_pdf": [
+                59
+              ],
+              "secao": "MELSYS 2/10",
+              "trecho": "Imatinib or other KIT inhibitors",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "49dc5ff813133913c6ff6fc884e57bc38ad45a4632bd0e516c8e7007ec2240e0"
+            }
+          ],
+          "evidencia_declarada": [
+            {
+              "fonte_id": "nccn-2b4ed16d796a",
+              "edicao": "3.2026",
+              "pagina_pdf": 59,
+              "paginas_pdf": [
+                59
+              ],
+              "secao": "MELSYS 2/10, Useful in Certain Circumstances",
+              "trecho": "KIT mutation positive",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "49dc5ff813133913c6ff6fc884e57bc38ad45a4632bd0e516c8e7007ec2240e0"
+            },
+            {
+              "fonte_id": "nccn-2b4ed16d796a",
+              "edicao": "3.2026",
+              "pagina_pdf": 59,
+              "paginas_pdf": [
+                59
+              ],
+              "secao": "MELSYS 2/10",
+              "trecho": "Imatinib or other KIT inhibitors",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "49dc5ff813133913c6ff6fc884e57bc38ad45a4632bd0e516c8e7007ec2240e0"
+            }
+          ]
+        }
+      }
+    ],
+    "cenarios": {
+      "identidade_ref": "/identidade/cenarios",
+      "detalhamento_ref": "/tratamento/cenarios",
+      "novas_condicoes_refs": [
+        "nccn-20261017-melanoma-lifileucel",
+        "nccn-20261017-melanoma-kit"
+      ],
+      "regra": "Não igualar automaticamente as duas listas nem selecionar cenário individual nesta camada."
+    },
+    "fontes": [
+      {
+        "id": "nccn-2b4ed16d796a",
+        "arquivo_local": "C:\\Users\\silas\\.aside\\u\\0\\sessions\\2026-10-17_LutNNwUyDZGlA1pF\\artifacts\\nccn\\Melanoma Cutaneous.pdf",
+        "nome": "Melanoma Cutaneous",
+        "sha256": "49dc5ff813133913c6ff6fc884e57bc38ad45a4632bd0e516c8e7007ec2240e0",
+        "numero_paginas": 260,
+        "versao_declarada": "3.2026",
+        "origem": "ARQUIVO_LOCAL_FORNECIDO",
+        "autenticidade_externa": "NAO_VERIFICADA_NO_PORTAL",
+        "paginas_examinadas": [
+          59,
+          60,
+          69
+        ]
+      }
+    ],
+    "fontes_legadas_refs": [
+      "/header/fonte",
+      "/curadoria/fontesLidas"
+    ],
+    "ensaios": {
+      "legado_ref": "/tratamento/ensaios",
+      "novos_nct": [],
+      "nota": "Nenhum identificador NCT foi inventado ou verificado nesta rodada."
+    },
+    "relacoes": [
+      {
+        "relacao_id": "relacao-nccn-20261017-melanoma-lifileucel",
+        "tipo": "CONDICOES_PARA_APRESENTACAO_DOCUMENTAL",
+        "destino_item_ref": "nccn-20261017-melanoma-lifileucel",
+        "criterios_extraidos": [
+          "Melanoma avançado; segunda linha ou posterior",
+          "Anti-PD-1 prévio e BRAF/MEK prévio se BRAF V600",
+          "Bom performance e função orgânica adequada",
+          "Sem metástase cerebral não tratada ou ativa",
+          "Metástase ressecável para coleta e elegibilidade para QT não mieloablativa/IL-2"
+        ],
+        "origem_condicoes": "FONTE_NCCN_CITADA",
+        "origem_mapeamento": "PROPOSTA_DE_MAPEAMENTO",
+        "executavel": false,
+        "estado": "A_CONFERIR",
+        "dados_ausentes": "MANTER_INDETERMINADO",
+        "dados_conflitantes": "MANTER_CONFLITO",
+        "efeito": "APRESENTAR_CONTEUDO_PARA_REVISAO; NAO PRESCREVER",
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+            "criterios_extraidos": [
+              "Melanoma avançado",
+              "Tratamentos prévios e elegibilidade para terapia celular documentados"
+            ]
+          }
+        ],
+        "fontes_por_campo": {
+          "criterios_extraidos": [
+            {
+              "fonte_id": "nccn-2b4ed16d796a",
+              "edicao": "3.2026",
+              "pagina_pdf": 59,
+              "paginas_pdf": [
+                59
+              ],
+              "secao": "MELSYS 2/10, Preferred",
+              "trecho": "Lifileucel",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "49dc5ff813133913c6ff6fc884e57bc38ad45a4632bd0e516c8e7007ec2240e0"
+            },
+            {
+              "fonte_id": "nccn-2b4ed16d796a",
+              "edicao": "3.2026",
+              "pagina_pdf": 60,
+              "paginas_pdf": [
+                60
+              ],
+              "secao": "MELSYS 3/10, nota m",
+              "trecho": "TIL therapy should not be considered",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "49dc5ff813133913c6ff6fc884e57bc38ad45a4632bd0e516c8e7007ec2240e0"
+            },
+            {
+              "fonte_id": "nccn-2b4ed16d796a",
+              "edicao": "3.2026",
+              "pagina_pdf": 69,
+              "paginas_pdf": [
+                69
+              ],
+              "secao": "SYSCON 2/2",
+              "trecho": "should consider lifileucel",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "49dc5ff813133913c6ff6fc884e57bc38ad45a4632bd0e516c8e7007ec2240e0"
+            }
+          ]
+        }
+      },
+      {
+        "relacao_id": "relacao-nccn-20261017-melanoma-kit",
+        "tipo": "CONDICOES_PARA_APRESENTACAO_DOCUMENTAL",
+        "destino_item_ref": "nccn-20261017-melanoma-kit",
+        "criterios_extraidos": [
+          "Melanoma avançado",
+          "Mutação KIT positiva",
+          "Segunda linha ou posterior"
+        ],
+        "origem_condicoes": "FONTE_NCCN_CITADA",
+        "origem_mapeamento": "PROPOSTA_DE_MAPEAMENTO",
+        "executavel": false,
+        "estado": "A_CONFERIR",
+        "dados_ausentes": "MANTER_INDETERMINADO",
+        "dados_conflitantes": "MANTER_CONFLITO",
+        "efeito": "APRESENTAR_CONTEUDO_PARA_REVISAO; NAO PRESCREVER",
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+            "criterios_extraidos": [
+              "Melanoma avançado",
+              "Alteração de KIT e elegibilidade conforme fonte"
+            ]
+          }
+        ],
+        "fontes_por_campo": {
+          "criterios_extraidos": [
+            {
+              "fonte_id": "nccn-2b4ed16d796a",
+              "edicao": "3.2026",
+              "pagina_pdf": 59,
+              "paginas_pdf": [
+                59
+              ],
+              "secao": "MELSYS 2/10, Useful in Certain Circumstances",
+              "trecho": "KIT mutation positive",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "49dc5ff813133913c6ff6fc884e57bc38ad45a4632bd0e516c8e7007ec2240e0"
+            },
+            {
+              "fonte_id": "nccn-2b4ed16d796a",
+              "edicao": "3.2026",
+              "pagina_pdf": 59,
+              "paginas_pdf": [
+                59
+              ],
+              "secao": "MELSYS 2/10",
+              "trecho": "Imatinib or other KIT inhibitors",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "49dc5ff813133913c6ff6fc884e57bc38ad45a4632bd0e516c8e7007ec2240e0"
+            }
+          ]
+        }
+      }
+    ],
+    "conflitos": [],
+    "conflitos_legados_ref": "/conflitos",
+    "pendencias": [
+      {
+        "id": "revisao-clinica",
+        "estado": "ABERTA",
+        "descricao": "Conferir cada acréscimo, condições, fontes, doses, interações e suporte antes de uso clínico."
+      },
+      {
+        "id": "acesso-brasileiro",
+        "estado": "ABERTA",
+        "descricao": "NCCN não comprova Anvisa, Conitec, PCDT/DDT, SIGTAP/APAC, cobertura privada ou acesso institucional."
+      },
+      {
+        "id": "cobertura-nccn",
+        "estado": "PARCIAL_POR_DELTA",
+        "descricao": "Leitura dirigida das páginas citadas; não há alegação de extração integral da diretriz."
+      }
+    ],
+    "pendencias_legadas_ref": "/pendencias",
+    "itens_adicionais_a_classificar": [
+      {
+        "origem_ref": "/header",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/status",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/consultavel",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/alerta",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/substitui",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/identidade",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/pendencias",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/conflitos",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/curadoria",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/correcoes",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      }
+    ],
+    "mapa_de_cobertura": [
+      {
+        "origem_json_pointer": "/header",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "44e98517c8e37a313cdfab58f04f413c5993f34fb54b36ef53d7256bfc356501",
+        "valores_folha": 9
+      },
+      {
+        "origem_json_pointer": "/status",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "04635ca3844c66b19ebbf49bf9ff60fe851d6ce89597d23e6a970f1dc3927289",
+        "valores_folha": 1
+      },
+      {
+        "origem_json_pointer": "/consultavel",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b",
+        "valores_folha": 1
+      },
+      {
+        "origem_json_pointer": "/alerta",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "valores_folha": 1
+      },
+      {
+        "origem_json_pointer": "/substitui",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "valores_folha": 1
+      },
+      {
+        "origem_json_pointer": "/identidade",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "11d8eee3bf737a25f9e989b90a130334ebefc07c312fa8ccd67ca8874b62ef1f",
+        "valores_folha": 14
+      },
+      {
+        "origem_json_pointer": "/diagnostico",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "0650ac75cff32a6811b7fe72d6f81ae3147391bf261d2f2534e0ca7796e102a8",
+        "valores_folha": 141
+      },
+      {
+        "origem_json_pointer": "/estadiamento",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "945d99e6bba0605797c8a2fcd274a5b1172345f0249239a2eaceb7cd76e4b545",
+        "valores_folha": 87
+      },
+      {
+        "origem_json_pointer": "/tratamento",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "fa3c4ffd7993fd3d6ff3c9ba9c6901651607acbb65bcf71bec938c783f75fcf6",
+        "valores_folha": 779
+      },
+      {
+        "origem_json_pointer": "/ligacoes",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "e47c15e2d59a3f7cbc03625e374d4d9dc5e09d49491a7af6121a7b65930bbc20",
+        "valores_folha": 76
+      },
+      {
+        "origem_json_pointer": "/pendencias",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "e7178fb759fab57df4d69af3726faa1cf901d74d726de23e92b749c7eab0ab24",
+        "valores_folha": 18
+      },
+      {
+        "origem_json_pointer": "/conflitos",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "73566a29ee721fa817c65e757dc3e9c5dbd4ed2016d8f76e50ae7cc011e815dd",
+        "valores_folha": 19
+      },
+      {
+        "origem_json_pointer": "/curadoria",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "61d005953fb88458846ab983564f3bb684f4fe299abbe3ee67666472bd54ac04",
+        "valores_folha": 19
+      },
+      {
+        "origem_json_pointer": "/correcoes",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "d60e3344ebadea595c17474209f1a96a8f5ebd2151cea03d9654184489aa4a96",
+        "valores_folha": 4
+      }
+    ],
+    "reconciliacao_com_versao_anterior": {
+      "modo": "ADITIVO",
+      "originais_removidos": 0,
+      "originais_alterados": 0,
+      "contagens_preservadas": {
+        "protocolos": 18,
+        "ensaios": 4,
+        "cenarios_identidade": 6,
+        "cenarios_tratamento": 6,
+        "seguimento": 3,
+        "conflitos": 1,
+        "pendencias": 4
+      }
+    },
+    "relatorio_de_completude": {
+      "estado": "INCOMPLETA_PARA_DIRETRIZ_INTEGRAL",
+      "preservacao_legado": "INTEGRAL",
+      "delta_itens": 2,
+      "normalizacao_legado": "INDEXACAO_POR_REFERENCIA; NAO REEXTRACAO CLINICA",
+      "posologias": "SOMENTE AS EXPLICITAMENTE EXTRAIDAS; RESTANTES PENDENTES",
+      "sem_fato_paciente": true,
+      "sem_aprovacao_inferida": true
+    },
+    "auditoria_33_pendentes": [
+      {
+        "item_id": "nccn-20261017-melanoma-lifileucel",
+        "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+        "resultado": "CORRIGIDO_ESCOPO_OU_COMPLETUDE",
+        "fundamento": "Localizador ME-I estava incorreto e os critérios de segurança da nota m não estavam explícitos.",
+        "fontes": [
+          {
+            "fonte_id": "nccn-2b4ed16d796a",
+            "edicao": "3.2026",
+            "pagina_pdf": 59,
+            "paginas_pdf": [
+              59
+            ],
+            "secao": "MELSYS 2/10, Preferred",
+            "trecho": "Lifileucel",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "49dc5ff813133913c6ff6fc884e57bc38ad45a4632bd0e516c8e7007ec2240e0"
+          },
+          {
+            "fonte_id": "nccn-2b4ed16d796a",
+            "edicao": "3.2026",
+            "pagina_pdf": 60,
+            "paginas_pdf": [
+              60
+            ],
+            "secao": "MELSYS 3/10, nota m",
+            "trecho": "TIL therapy should not be considered",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "49dc5ff813133913c6ff6fc884e57bc38ad45a4632bd0e516c8e7007ec2240e0"
+          },
+          {
+            "fonte_id": "nccn-2b4ed16d796a",
+            "edicao": "3.2026",
+            "pagina_pdf": 69,
+            "paginas_pdf": [
+              69
+            ],
+            "secao": "SYSCON 2/2",
+            "trecho": "should consider lifileucel",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "49dc5ff813133913c6ff6fc884e57bc38ad45a4632bd0e516c8e7007ec2240e0"
+          }
+        ],
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "limite": "Conferência das afirmações deste item; não extração integral de posologia, diretriz ou acesso brasileiro.",
+        "sha256_item_antes": "45dee385fba17cc1486ac327a41ad25a9dc3dbca485b5833f331c390d49b926e"
+      },
+      {
+        "item_id": "nccn-20261017-melanoma-kit",
+        "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+        "resultado": "CORRIGIDO_ESCOPO_OU_COMPLETUDE",
+        "fundamento": "Localizador ME-I estava incorreto; a própria tabela situa a opção em segunda linha/subsequentes e Useful in Certain Circumstances.",
+        "fontes": [
+          {
+            "fonte_id": "nccn-2b4ed16d796a",
+            "edicao": "3.2026",
+            "pagina_pdf": 59,
+            "paginas_pdf": [
+              59
+            ],
+            "secao": "MELSYS 2/10, Useful in Certain Circumstances",
+            "trecho": "KIT mutation positive",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "49dc5ff813133913c6ff6fc884e57bc38ad45a4632bd0e516c8e7007ec2240e0"
+          },
+          {
+            "fonte_id": "nccn-2b4ed16d796a",
+            "edicao": "3.2026",
+            "pagina_pdf": 59,
+            "paginas_pdf": [
+              59
+            ],
+            "secao": "MELSYS 2/10",
+            "trecho": "Imatinib or other KIT inhibitors",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "49dc5ff813133913c6ff6fc884e57bc38ad45a4632bd0e516c8e7007ec2240e0"
+          }
+        ],
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "limite": "Conferência das afirmações deste item; não extração integral de posologia, diretriz ou acesso brasileiro.",
+        "sha256_item_antes": "85f120194c7b5ee5431b87c72bbbe12cb983a6d2d8ecc5bd9c88fe2dc5afb9c5"
+      }
+    ],
+    "revisoes_auditoria": [
+      {
+        "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+        "escopo": "APENAS_33_ITENS_PENDENTES",
+        "legado_modificado": false,
+        "aprovacao_clinica": null,
+        "limites": "Sem leitura integral da pasta, sem completar doses, sem checagem de acesso ou autenticidade externa.",
+        "itens_ref": "/tumor_pack_universal/auditoria_33_pendentes",
+        "sha256_itens": "464f47cefe38bddb928f059005ae1cba2cf8a2d54cbcdb1b2dc4d54289004cad"
+      }
+    ],
+    "fechamento_documental": [
+      {
+        "revisao": "2026-10-17-nccn-final-documental",
+        "estado": "CORRECOES_DOCUMENTAIS_APLICADAS",
+        "ajustes_textuais": 2,
+        "deduplicacoes_por_referencia": [
+          "auditoria_33_pendentes"
+        ],
+        "aprovacao_clinica": null,
+        "legado_alterado": false
+      }
+    ]
+  }
 }

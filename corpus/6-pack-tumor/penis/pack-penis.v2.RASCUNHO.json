@@ -2303,5 +2303,2310 @@
       "achado": "Decisão D-F1-20 item 46A (Dr. Silas)",
       "acao": "conduta cN1 (aula PRO) aceita como provisória; pendência resolvida"
     }
-  ]
+  ],
+  "tumor_pack_universal": {
+    "schema_documental": "tumor-pack-universal@1",
+    "metadados": {
+      "revisao_documental": "2026-10-17-nccn-final-documental",
+      "versao": "1.3.0",
+      "data": "2026-10-17",
+      "autor_extracao": "Codex",
+      "estado": "RASCUNHO",
+      "aprovacao_clinica": null,
+      "escopo": "CAMADA_ADITIVA_UNIVERSAL_E_DELTA_DOCUMENTAL_NCCN",
+      "base_legada": {
+        "arquivo": "corpus/6-pack-tumor/penis/pack-penis.v2.RASCUNHO.json",
+        "commit": "2c0991d",
+        "versao": "2.0.0",
+        "sha256_bytes": "4adec28e57f5db6eb87e23c65cc7d31a955253c0029c371b750c0ba2d50b29e7",
+        "sha256_semantico": "a6427ec6d9a81d82059566b155cfe5855dac6bf1035a6d3b8a756d2082fce046"
+      },
+      "nota_versao": "Camada universal 1.3.0; header identifica o legado preservado. Fechamento documental, sem aprovação clínica ou ativação.",
+      "integra_runtime": false,
+      "gera_conduta": false,
+      "historico_revisoes": [
+        {
+          "revisao_documental": "2026-10-17-nccn-delta-1",
+          "versao": "1.0.0",
+          "data": "2026-10-17",
+          "autor_extracao": "Codex",
+          "estado": "RASCUNHO",
+          "aprovacao_clinica": null,
+          "escopo": "CAMADA_ADITIVA_UNIVERSAL_E_DELTA_DOCUMENTAL_NCCN",
+          "base_legada": {
+            "arquivo": "corpus/6-pack-tumor/penis/pack-penis.v2.RASCUNHO.json",
+            "commit": "2c0991d",
+            "versao": "2.0.0",
+            "sha256_bytes": "4adec28e57f5db6eb87e23c65cc7d31a955253c0029c371b750c0ba2d50b29e7",
+            "sha256_semantico": "a6427ec6d9a81d82059566b155cfe5855dac6bf1035a6d3b8a756d2082fce046"
+          },
+          "nota_versao": "header.versao identifica o legado intacto; esta extensão possui revisão própria. Não reutilizar aprovação/hashes antigos para o conjunto alterado.",
+          "integra_runtime": false,
+          "gera_conduta": false
+        },
+        {
+          "revisao_documental": "2026-10-17-nccn-delta-2-correcao-auditoria",
+          "versao": "1.1.0",
+          "data": "2026-10-17",
+          "autor_extracao": "Codex",
+          "estado": "RASCUNHO",
+          "aprovacao_clinica": null,
+          "escopo": "CAMADA_ADITIVA_UNIVERSAL_E_DELTA_DOCUMENTAL_NCCN",
+          "base_legada": {
+            "arquivo": "corpus/6-pack-tumor/penis/pack-penis.v2.RASCUNHO.json",
+            "commit": "2c0991d",
+            "versao": "2.0.0",
+            "sha256_bytes": "4adec28e57f5db6eb87e23c65cc7d31a955253c0029c371b750c0ba2d50b29e7",
+            "sha256_semantico": "a6427ec6d9a81d82059566b155cfe5855dac6bf1035a6d3b8a756d2082fce046"
+          },
+          "nota_versao": "Versão desta camada:1.1.0; revisão documental:2026-10-17-nccn-delta-2-correcao-auditoria. header.versao continua referindo-se ao legado intacto. Nenhuma aprovação é transferida.",
+          "integra_runtime": false,
+          "gera_conduta": false,
+          "historico_revisoes": [
+            {
+              "revisao_documental": "2026-10-17-nccn-delta-1",
+              "versao": "1.0.0",
+              "data": "2026-10-17",
+              "autor_extracao": "Codex",
+              "estado": "RASCUNHO",
+              "aprovacao_clinica": null,
+              "escopo": "CAMADA_ADITIVA_UNIVERSAL_E_DELTA_DOCUMENTAL_NCCN",
+              "base_legada": {
+                "arquivo": "corpus/6-pack-tumor/penis/pack-penis.v2.RASCUNHO.json",
+                "commit": "2c0991d",
+                "versao": "2.0.0",
+                "sha256_bytes": "4adec28e57f5db6eb87e23c65cc7d31a955253c0029c371b750c0ba2d50b29e7",
+                "sha256_semantico": "a6427ec6d9a81d82059566b155cfe5855dac6bf1035a6d3b8a756d2082fce046"
+              },
+              "nota_versao": "header.versao identifica o legado intacto; esta extensão possui revisão própria. Não reutilizar aprovação/hashes antigos para o conjunto alterado.",
+              "integra_runtime": false,
+              "gera_conduta": false
+            }
+          ]
+        }
+      ]
+    },
+    "identidade_ref": "/identidade",
+    "dominios": [
+      {
+        "dominio_id": 1,
+        "nome": "Diagnóstico e patologia",
+        "itens_legados_refs": [
+          "legado-f41e4ee366500bb1",
+          "legado-6ca14d968e17b563",
+          "legado-1cc9476962b32982",
+          "legado-52611059c79c72c6",
+          "legado-e0fe9bbbee339bb9",
+          "legado-b72be88319873082",
+          "legado-772ba9024879822c",
+          "legado-c857bd722ab1a496",
+          "legado-ca3d9da622522a9b",
+          "legado-7eeb63a967ec517c",
+          "legado-4f54a07a457fc031"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 2,
+        "nome": "Estadiamento, extensão e risco",
+        "itens_legados_refs": [
+          "legado-14b70ed38bf74741",
+          "legado-a8d085bbe31ff363",
+          "legado-c162e2ac26cee11e",
+          "legado-8094510e925edce1",
+          "legado-6a881ac9d2b184b0",
+          "legado-3237331dffd66ac4",
+          "legado-8636dec542c453ee",
+          "legado-df4a5f729b1ff3f4",
+          "legado-b9111685c04a754d",
+          "legado-8caf816f8031ad8f",
+          "legado-e67a7a1cecea90eb",
+          "legado-d9ea30f102e522f9"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 3,
+        "nome": "Biomarcadores e farmacogenética",
+        "itens_legados_refs": [
+          "legado-bc33b122743b06f7",
+          "legado-e25e69f5a3990ed7",
+          "legado-cfb1ab3092d0d999",
+          "legado-7e7a51b528ff12a8",
+          "legado-4f00f6105ceadad9"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 4,
+        "nome": "Exames e requisitos documentais",
+        "itens_legados_refs": [
+          "legado-b509fcb65a8ba077",
+          "legado-838470f289f4fca6",
+          "legado-d4c7b540a0646efe",
+          "legado-8489e045cf3d9e15",
+          "legado-d204c96f74d47f42",
+          "legado-61d13eec132aa6ff",
+          "legado-d23848f4d182b746",
+          "legado-88a2898fbb51e920",
+          "legado-7fc34856924c365f",
+          "legado-1b0644a4e725d702",
+          "legado-fb7f06de35b35a53",
+          "legado-917a8242bc316e45",
+          "legado-89db3b6ec657bc2a",
+          "legado-7d2143eacc3b8445",
+          "legado-912d89e40ed1d0da",
+          "legado-cc607128c97c8999",
+          "legado-92bfc6a4ae92dbbd",
+          "legado-75b022a80dba1ff3",
+          "legado-7c262091e0f6edda",
+          "legado-760701d3ff0b1bcc",
+          "legado-4e3c1906c1082569",
+          "legado-68c5d3e8d5e541b1",
+          "legado-56ac666d1338b85f",
+          "legado-bce3244bad6c2324",
+          "legado-6308c406d37d35e0"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 5,
+        "nome": "Avaliação antes do tratamento",
+        "itens_legados_refs": [],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "NAO_ESTRUTURADO_NESTA_RODADA",
+        "observacao": "Ausência de referências não significa não aplicabilidade; textos dentro de outros itens permanecem preservados."
+      },
+      {
+        "dominio_id": 6,
+        "nome": "Tratamento e protocolos",
+        "itens_legados_refs": [
+          "legado-eb1ebb101e6b6a7b",
+          "legado-ed5269c00b9a4fc4",
+          "legado-f5ee83cdf727a518",
+          "legado-e3ba48e41d0581fa",
+          "legado-32153385408d2c6d",
+          "legado-86a6499938713626",
+          "legado-bb284e221d7ed07b",
+          "legado-14d58884c4e35758",
+          "legado-288eadf8e9f973e5",
+          "legado-daa920df0fe59767",
+          "legado-8c56251907542f74",
+          "legado-0d827490652be8c5",
+          "legado-4b0b393396fc428c",
+          "legado-97ac378cdbd811dc",
+          "legado-a1a90674dfaf7848",
+          "legado-7766e9cd66f755af",
+          "legado-8da1e1f681cccc90",
+          "legado-87ac0685799f7046",
+          "legado-09c959d1bd0de969",
+          "legado-cdab4e3cb2898df8",
+          "legado-5edc44ff5f9efef5",
+          "legado-21ac98a852aa3f00",
+          "legado-ddcf0d059df1b96f",
+          "legado-bf782a20e785096f",
+          "legado-50efb81f8e3fba36",
+          "legado-243b755d8dfc37d3",
+          "legado-edc9f05410df1c6c",
+          "legado-d0dc764dcc100077",
+          "legado-3ecf9ad011f66e55",
+          "legado-19e51e512f9ab6ce",
+          "legado-ff46d47674b1eb65",
+          "legado-a9b3670e588d6b60",
+          "legado-c2138c516891c366"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 7,
+        "nome": "Segurança, interações e toxicidades",
+        "itens_legados_refs": [
+          "legado-4ffddd85aa01762c",
+          "legado-666d6d56c3530c91",
+          "legado-262c14b674a06539",
+          "legado-9b1948c8c813d948",
+          "legado-3a1c9e1a9c7d733e",
+          "legado-40b98374a10386c5",
+          "legado-ec5aa91ee9226b52",
+          "legado-6777d753a898b955",
+          "legado-f1476f1e02b3d611",
+          "legado-acd89a7288a84d8b",
+          "legado-b48bda2f00336ef7",
+          "legado-6aa800eda1a7901a",
+          "legado-8811d419a58ff0bf",
+          "legado-e0983f97b37e9e4f",
+          "legado-0564f3f5dda688c6",
+          "legado-861d1fbf981ea966"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 8,
+        "nome": "Suporte e cuidados",
+        "itens_legados_refs": [
+          "legado-d1bc782250ff9c4b",
+          "legado-e668157975b7fc89",
+          "legado-d07982d23d8b61f4",
+          "legado-84a0133eb4f8781a",
+          "legado-210f2d99192788ed"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 9,
+        "nome": "Avaliação de resposta e estado da doença",
+        "itens_legados_refs": [],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "NAO_ESTRUTURADO_NESTA_RODADA",
+        "observacao": "Ausência de referências não significa não aplicabilidade; textos dentro de outros itens permanecem preservados."
+      },
+      {
+        "dominio_id": 10,
+        "nome": "Seguimento e sobrevivência",
+        "itens_legados_refs": [
+          "legado-87c8ae7725df69bf",
+          "legado-9708eded704c3770",
+          "legado-1917634498839d00",
+          "legado-207eabbea5f9febb",
+          "legado-83b8e700ade31a9d",
+          "legado-ecc31f2b4dfa35c0",
+          "legado-3b6e2f9c13d66356",
+          "legado-1b109d88ed37faf0",
+          "legado-6f20176c56a24e4a",
+          "legado-8f3cbb7ee40029d9",
+          "legado-76fab05e4a5179cb",
+          "legado-9f995dab09b7d4fb"
+        ],
+        "itens_nccn_refs": [
+          "nccn-20261017-penis-calendarios"
+        ],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 11,
+        "nome": "Encaminhamentos e atuação multiprofissional",
+        "itens_legados_refs": [
+          "legado-55eb46a2e145ab68",
+          "legado-61dae9798ba31e44",
+          "legado-46f5f235ff433010",
+          "legado-0aa382d02f29c9bd"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 12,
+        "nome": "Documentos e acesso assistencial",
+        "itens_legados_refs": [
+          "legado-f1be0bc240fdcb6e",
+          "legado-77f7f1412350909b",
+          "legado-93d60b7330a4b52b",
+          "legado-d62cf1f5c978a4b0",
+          "legado-af07b6d35c78fbb1"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      }
+    ],
+    "indice_itens_legados": [
+      {
+        "item_id": "legado-f41e4ee366500bb1",
+        "origem_json_pointer": "/diagnostico/patologico/obtencao/0",
+        "sha256_conteudo": "964aa684fd99679964e6ee5742ff81904d6463d562d1deeb7b533853ef38593a",
+        "nome": "/diagnostico/patologico/obtencao/0",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/obtencao/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-6ca14d968e17b563",
+        "origem_json_pointer": "/diagnostico/patologico/obtencao/1",
+        "sha256_conteudo": "100ef5738d3054107a9cef435943108556e73999e2be447d674b6753e2191a67",
+        "nome": "/diagnostico/patologico/obtencao/1",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/obtencao/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-1cc9476962b32982",
+        "origem_json_pointer": "/diagnostico/patologico/obtencao/2",
+        "sha256_conteudo": "f1d3e483857789918edeb5ada7435d13bb1edba9bd8b2f8084692c9415a32a11",
+        "nome": "/diagnostico/patologico/obtencao/2",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/obtencao/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-52611059c79c72c6",
+        "origem_json_pointer": "/diagnostico/patologico/obtencao/3",
+        "sha256_conteudo": "f1f1eaa38ee7a6fa4be796e673d0dddc4dee1be3182e89becd530ffba7af7435",
+        "nome": "/diagnostico/patologico/obtencao/3",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/obtencao/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e0fe9bbbee339bb9",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/0",
+        "sha256_conteudo": "1c61689d8cea1d944a66e712f8d7f30ac607c67bb0cde2dc76e44e937a56dff1",
+        "nome": "Tipo/subtipo histológico (CEC usual, basaloide, verrucoso, papilar, sarcomatoide etc.)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b72be88319873082",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/1",
+        "sha256_conteudo": "823ec6b54f8d433d358ea853dd7f0f86748430412434cd4e9a00dccc2321a3a8",
+        "nome": "Grau histológico G1–G3 (alto grau = grau 3 ou sarcomatoide)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-772ba9024879822c",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/2",
+        "sha256_conteudo": "6081c485d620ea792a098a24010909d996cb13df80c31c6e4d632738ff970ac6",
+        "nome": "Invasão linfovascular (ILV) e perineural (IPN) — definem T1a × T1b",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-c857bd722ab1a496",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/3",
+        "sha256_conteudo": "4293c8de152f57e904f670051d7ceac03acf0c01e7f847fc1aa40536fcf2b6dd",
+        "nome": "Profundidade/estrutura invadida: lâmina própria/derme, corpo esponjoso, corpo cavernoso/túnica albugínea, uretra, estruturas adjacentes",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ca3d9da622522a9b",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/4",
+        "sha256_conteudo": "d8f860ef3803896c20e255da55f088b0d7e48a99c1ff83cfe9fe01da6e6fd417",
+        "nome": "Margens cirúrgicas",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-7eeb63a967ec517c",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/5",
+        "sha256_conteudo": "a1f3632771318b0043e8d81b0884aaa79820f8f487889e43f297237bb1d5dcb7",
+        "nome": "Linfadenectomia: número de LFN examinados e positivos, lateralidade, maior dimensão (> 4 cm), extensão extracapsular/extranodal, LFN pélvicos",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-4f54a07a457fc031",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/6",
+        "sha256_conteudo": "e6bf7e6311284418f2f4b8d67d8ba95c81c7ea7fb55c418f6fe78c832de88478",
+        "nome": "p16 por IHQ quando solicitado (marcador substituto de HPV)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-14b70ed38bf74741",
+        "origem_json_pointer": "/estadiamento/sistema",
+        "sha256_conteudo": "d7dab6e16ae3278a0513466816530a61b1fcf4548c0e925655782b9ee09cf5ce",
+        "nome": "AJCC",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a8d085bbe31ff363",
+        "origem_json_pointer": "/estadiamento/edicao",
+        "sha256_conteudo": "59ea274b352958684c0756f26149fb6b71488c8e3e276ddeea5a44f7675391ff",
+        "nome": "8ª edição (2017), conforme tabela da SBOC 2026",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-c162e2ac26cee11e",
+        "origem_json_pointer": "/estadiamento/gruposConduta/0",
+        "sha256_conteudo": "e82feee5f55c8e0a8c916e2a14b6253e65103a11c364d2528a5509222428bd00",
+        "nome": "/estadiamento/gruposConduta/0",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8094510e925edce1",
+        "origem_json_pointer": "/estadiamento/gruposConduta/1",
+        "sha256_conteudo": "b59b625edb51f11ccc1a76de1e855af0fda29a5223540f66723b6cab68055ce9",
+        "nome": "/estadiamento/gruposConduta/1",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-6a881ac9d2b184b0",
+        "origem_json_pointer": "/estadiamento/gruposConduta/2",
+        "sha256_conteudo": "20e8d2869553c0070fce41b30d939b0ff97c351b32b136e2232eb14555100ca9",
+        "nome": "/estadiamento/gruposConduta/2",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-3237331dffd66ac4",
+        "origem_json_pointer": "/estadiamento/gruposConduta/3",
+        "sha256_conteudo": "086be9a3b27282109b63c68a13e5927a80629ec6ab5ed5b1b36c7e0dbe3c3e81",
+        "nome": "/estadiamento/gruposConduta/3",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8636dec542c453ee",
+        "origem_json_pointer": "/estadiamento/gruposConduta/4",
+        "sha256_conteudo": "4a6a77c769598858e607bc347e615741c839c6dd9163dcc64b2516153fa08f66",
+        "nome": "/estadiamento/gruposConduta/4",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-df4a5f729b1ff3f4",
+        "origem_json_pointer": "/estadiamento/gruposConduta/5",
+        "sha256_conteudo": "afcb134ca274af8a15dbbe0512e535922405b22c06be2b0b384f85a6a68bf7bf",
+        "nome": "/estadiamento/gruposConduta/5",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/5/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b9111685c04a754d",
+        "origem_json_pointer": "/estadiamento/gruposConduta/6",
+        "sha256_conteudo": "1c32a8ce02284e4e3e53b9de475b60300637ea8c216afb8121aec2793a108a65",
+        "nome": "/estadiamento/gruposConduta/6",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/6/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8caf816f8031ad8f",
+        "origem_json_pointer": "/estadiamento/gruposConduta/7",
+        "sha256_conteudo": "874d8f50d9e7e4102697b2b42e2251962f4bc538558c1ccd2bbed2b4c0907cd9",
+        "nome": "/estadiamento/gruposConduta/7",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/7/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e67a7a1cecea90eb",
+        "origem_json_pointer": "/estadiamento/gruposConduta/8",
+        "sha256_conteudo": "194a99161c1a60d89e1d1e75abdf62a8db1ff2762a79d8f7e47cffb8cedef004",
+        "nome": "/estadiamento/gruposConduta/8",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/8/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d9ea30f102e522f9",
+        "origem_json_pointer": "/estadiamento/marcadores",
+        "sha256_conteudo": "fc0b4247ea87697939cfedff556215f076566b176a20ae59753457b165fcf727",
+        "nome": "/estadiamento/marcadores",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-bc33b122743b06f7",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/0",
+        "sha256_conteudo": "9cc0e11be72f443bdfb40243aca0f9f2f8f28d4696357e25adaad8204ffad272",
+        "nome": "Classificação HPV-dependente × independente; caracterização de NIP e de subtipo",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e25e69f5a3990ed7",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/1",
+        "sha256_conteudo": "4e2a5d93c2a1c6cd338f7e4d2c70cff091ed20fc4788e154c1aea57657b8d68f",
+        "nome": "Doença avançada, apenas no contexto de ensaio clínico com imunoterapia",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-cfb1ab3092d0d999",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/2",
+        "sha256_conteudo": "cc84e8ab355465a64524d6348e198e187b3a94550e569d095e0aae1d52132691",
+        "nome": "Doença avançada; exploratório (HERCULES)",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-7e7a51b528ff12a8",
+        "origem_json_pointer": "/tratamento/biomarcadorTratamento/0",
+        "sha256_conteudo": "99de9ccdfac817927b54b9999726c2d40ddf2003be01b9d5a11e137a2d3328cf",
+        "nome": "/tratamento/biomarcadorTratamento/0",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/biomarcadorTratamento/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-4f00f6105ceadad9",
+        "origem_json_pointer": "/tratamento/biomarcadorTratamento/1",
+        "sha256_conteudo": "907db935651c0cd1d2cc8c4b791b793c9ab5117695a45f41d4eff62c1d792f72",
+        "nome": "/tratamento/biomarcadorTratamento/1",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/biomarcadorTratamento/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b509fcb65a8ba077",
+        "origem_json_pointer": "/diagnostico/imagem/0",
+        "sha256_conteudo": "af35408ce20eb26f8ac1e56d157fe798d062c3fb4bd2647f6c9b1320eaad1cbc",
+        "nome": "USG de regiões inguinais (guia para PAAF de linfonodo)",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-838470f289f4fca6",
+        "origem_json_pointer": "/estadiamento/exames/0",
+        "sha256_conteudo": "f05ee54f6ac1d5b4aa9583b9a1deccfa877e9b1c5b40c5b6bf81b1e95734fe15",
+        "nome": "TC de abdome (ou RM)",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d4c7b540a0646efe",
+        "origem_json_pointer": "/estadiamento/exames/1",
+        "sha256_conteudo": "8ac2abd24bde49bc753ffb40c04c72d7431528e9464f732797f96d9d0eef0e82",
+        "nome": "TC de pelve (ou RM)",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8489e045cf3d9e15",
+        "origem_json_pointer": "/estadiamento/exames/2",
+        "sha256_conteudo": "c289b9d58506a19ded483567689903f8eca35092ba1a57a82e3f5a6b69de1b45",
+        "nome": "RM de abdome (alternativa à TC)",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d204c96f74d47f42",
+        "origem_json_pointer": "/estadiamento/exames/3",
+        "sha256_conteudo": "58ffee0f9abc2fd2b5ac20318e46dd3f87c1bbc46b8857aaa78455cb9b445a3b",
+        "nome": "RM de pelve (alternativa à TC)",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-61d13eec132aa6ff",
+        "origem_json_pointer": "/estadiamento/exames/4",
+        "sha256_conteudo": "26eb56966a910d88e2360a8a5d2ea04f519a463edfa68e74ff9c950fee9b6b7e",
+        "nome": "TC de tórax (ou RX)",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d23848f4d182b746",
+        "origem_json_pointer": "/estadiamento/exames/5",
+        "sha256_conteudo": "1533100eebe8a347b30a60f815c28411b616a2eba75dece012c8ba93d64dc467",
+        "nome": "RX de tórax (alternativa à TC)",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/5/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-88a2898fbb51e920",
+        "origem_json_pointer": "/estadiamento/exames/6",
+        "sha256_conteudo": "e5af4aad40c53613ce476aadefd7e03cccd8c389a43bfdfef6b655fc53006a89",
+        "nome": "Cintilografia óssea",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/6/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-7fc34856924c365f",
+        "origem_json_pointer": "/estadiamento/exames/7",
+        "sha256_conteudo": "5250ec589a2db1665fe4ad4baa4f457e24482ec8650ab6ea5206ecab6a77a03f",
+        "nome": "Fosfatase alcalina (gatilho para cintilografia)",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/7/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-1b0644a4e725d702",
+        "origem_json_pointer": "/estadiamento/exames/8",
+        "sha256_conteudo": "eb30f9298f94ce74c6f7fbb3bf312fdd92df83b0340bd8e4220e934a7b95e49d",
+        "nome": "PET/CT com FDG",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/8/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-fb7f06de35b35a53",
+        "origem_json_pointer": "/estadiamento/exames/9",
+        "sha256_conteudo": "ca17e21e5e52e33d8f5c1c7f2336f7aef46f1327f78c9550a036edc5e3dc820c",
+        "nome": "PAAF/biópsia guiada de LFN suspeito",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/9/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-917a8242bc316e45",
+        "origem_json_pointer": "/estadiamento/exames/10",
+        "sha256_conteudo": "8f5e8b5d99ec4df773781681a49c2e369eecaa08aa8237c4f66c136af7825d19",
+        "nome": "Biópsia dinâmica de linfonodo sentinela / biópsia de LFN",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/10/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-89db3b6ec657bc2a",
+        "origem_json_pointer": "/ligacoes/exames/0",
+        "sha256_conteudo": "00cac656db90cece9385c8c98f658accb5b7c1553202e6be466fa96d39aaf2b9",
+        "nome": "ANATOMOPATOLOGICO",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-7d2143eacc3b8445",
+        "origem_json_pointer": "/ligacoes/exames/1",
+        "sha256_conteudo": "09c0bc2a57301c5e7f5c06c8c51c9dec764db31a5d9531aa98aac18b5d8251f3",
+        "nome": "BIOPSIA_PERCUTANEA_GUIADA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-912d89e40ed1d0da",
+        "origem_json_pointer": "/ligacoes/exames/2",
+        "sha256_conteudo": "dc49fc936c8f159a3aa8208709558e35c50f545055f5cc9756e18bdd0d02c81b",
+        "nome": "BIOPSIA_GANGLIO",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-cc607128c97c8999",
+        "origem_json_pointer": "/ligacoes/exames/3",
+        "sha256_conteudo": "99a98b9d268e78a05608d792d2fad81f4e16f25b8a4f95da9f7decd91a23a0dc",
+        "nome": "IMUNOHISTOQUIMICA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-92bfc6a4ae92dbbd",
+        "origem_json_pointer": "/ligacoes/exames/4",
+        "sha256_conteudo": "eea68f82f02592e6262514a154ff52ae85284765c1f48ab3b07cabb92ead209f",
+        "nome": "TC_ABDOMEN_SUPERIOR",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-75b022a80dba1ff3",
+        "origem_json_pointer": "/ligacoes/exames/5",
+        "sha256_conteudo": "5beb801ddc054db97d463dd8b682c9128772e22b7938b6d4c645af14dc4ddd7a",
+        "nome": "TC_PELVE",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-7c262091e0f6edda",
+        "origem_json_pointer": "/ligacoes/exames/6",
+        "sha256_conteudo": "9c93ac77fd6457370871d33a5c58ba94777b0bb961f1f2eb5572fadaabd4df86",
+        "nome": "RM_ABDOMEN_SUPERIOR",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-760701d3ff0b1bcc",
+        "origem_json_pointer": "/ligacoes/exames/7",
+        "sha256_conteudo": "ae974cff2b8cea688a4632542e3da503ad4a2f0f9301b96d75afbb2588228c37",
+        "nome": "RM_PELVE",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-4e3c1906c1082569",
+        "origem_json_pointer": "/ligacoes/exames/8",
+        "sha256_conteudo": "147b97b900462813d8c6528cc01d88f8a5102936ee96ee4fb121f8a7b77f60b0",
+        "nome": "TC_TORAX",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-68c5d3e8d5e541b1",
+        "origem_json_pointer": "/ligacoes/exames/9",
+        "sha256_conteudo": "c14ce60ca37c165e4caacee63f3b6f144d8c362ed86614c2583ca390362a034e",
+        "nome": "RX_TORAX_PA_PERFIL",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-56ac666d1338b85f",
+        "origem_json_pointer": "/ligacoes/exames/10",
+        "sha256_conteudo": "6256d23e08fe42e0c5f18c2d537248d451b59b2ecdf935ab864d69cd8131c89d",
+        "nome": "CINTILOGRAFIA_OSSEA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-bce3244bad6c2324",
+        "origem_json_pointer": "/ligacoes/exames/11",
+        "sha256_conteudo": "ad1a3ef653b581c9aa616ab3bbab16ad7edca4cf6832cfc168f32389fc7cf658",
+        "nome": "FOSFATASE_ALCALINA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-6308c406d37d35e0",
+        "origem_json_pointer": "/ligacoes/exames/12",
+        "sha256_conteudo": "3a955b75de510bd32be8d0f7de2bf070f27f223ac4c6a07cf68b35b7271856b2",
+        "nome": "PET_CT_FDG",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-eb1ebb101e6b6a7b",
+        "origem_json_pointer": "/tratamento/cenarios/0",
+        "sha256_conteudo": "16f32ee390655e2ead9c5e26a8cc827c4a5ec362672c7de194d60c9101c25933",
+        "nome": "localizado_Ta_Tis",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ed5269c00b9a4fc4",
+        "origem_json_pointer": "/tratamento/cenarios/1",
+        "sha256_conteudo": "7e03645b5753941007cea9e7da523749d660c61358d53f7b0992f98e65615123",
+        "nome": "localizado_T1a",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-f5ee83cdf727a518",
+        "origem_json_pointer": "/tratamento/cenarios/2",
+        "sha256_conteudo": "45f09041f89809471ea37cc6c31509a5da0f96f571eb76d7f7b8ed6ba4fc1c29",
+        "nome": "localizado_T1b_T2",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e3ba48e41d0581fa",
+        "origem_json_pointer": "/tratamento/cenarios/3",
+        "sha256_conteudo": "307604324367ea449aa93ee8ee3fc6cf1a47e6abc49a51f94f95d03a01b1f730",
+        "nome": "localizado_T2extenso_T3_T4",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-32153385408d2c6d",
+        "origem_json_pointer": "/tratamento/cenarios/4",
+        "sha256_conteudo": "f2554334ac38aac34350be9ebbb26e430e4221bfa42a33f70cd47d440075e109",
+        "nome": "linfonodal_cN0_por_risco",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-86a6499938713626",
+        "origem_json_pointer": "/tratamento/cenarios/5",
+        "sha256_conteudo": "085f685c7105af4fe2c1966d0336a6e5e15de2cbaf2c27db983b3f08993c4573",
+        "nome": "linfonodal_cN1",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/5/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-bb284e221d7ed07b",
+        "origem_json_pointer": "/tratamento/cenarios/6",
+        "sha256_conteudo": "33be093d4b1ac4b88656f801906c805618dd392f3a3e0af0535f6605eb52964a",
+        "nome": "locorregional_avancado_cN2_cN3_pelvico",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/6/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-14d58884c4e35758",
+        "origem_json_pointer": "/tratamento/cenarios/7",
+        "sha256_conteudo": "e3700a896eba8352afb448b00ff95d75c238ff51e6688854329e9c70a73d24f2",
+        "nome": "adjuvante_pos_linfadenectomia",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/7/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-288eadf8e9f973e5",
+        "origem_json_pointer": "/tratamento/cenarios/8",
+        "sha256_conteudo": "450479b8797cc73fb8f3f022d007ab567128d964f4deec941f605b319d696963",
+        "nome": "metastatico",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/8/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-daa920df0fe59767",
+        "origem_json_pointer": "/tratamento/cenarios/9",
+        "sha256_conteudo": "d3af9b4ed7272a30f0c63e85fa66285fdd0b7d7d638ec2c4dc25d0bdecdaf035",
+        "nome": "recorrencia_local_inoperavel",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/9/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8c56251907542f74",
+        "origem_json_pointer": "/tratamento/protocolos/0",
+        "sha256_conteudo": "2b8d6ca60b75f97cc10eb5023e4f4c01ad2397ad9e824996fd7afed75217893c",
+        "nome": "Fluoruracila creme 5% tópica (Ta/Tis)",
+        "id_original": "penis-5fu-creme-ta-tis",
+        "fonte_local_ref": "/tratamento/protocolos/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-0d827490652be8c5",
+        "origem_json_pointer": "/tratamento/protocolos/1",
+        "sha256_conteudo": "f45f6b3999b287f316def1756711c3d0c702d4ada789194876400cb97bf5fd7f",
+        "nome": "Imiquimode creme 5% tópico (Ta/Tis)",
+        "id_original": "penis-imiquimode-creme-ta-tis",
+        "fonte_local_ref": "/tratamento/protocolos/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-4b0b393396fc428c",
+        "origem_json_pointer": "/tratamento/protocolos/2",
+        "sha256_conteudo": "42e374f53a543c1bb5ae119991f2d1c099834a05240aceceadf6eba98ed9fe1a",
+        "nome": "Cisplatina + 5-FU",
+        "id_original": "penis-cisplatina-5fu",
+        "fonte_local_ref": "/tratamento/protocolos/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-97ac378cdbd811dc",
+        "origem_json_pointer": "/tratamento/protocolos/3",
+        "sha256_conteudo": "15692daad4c6b81cc19abd7982a088c41cd45629936a220163e6c625d6da666a",
+        "nome": "TIP (paclitaxel + ifosfamida + cisplatina)",
+        "id_original": "penis-tip-paliativo",
+        "fonte_local_ref": "/tratamento/protocolos/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a1a90674dfaf7848",
+        "origem_json_pointer": "/tratamento/protocolos/4",
+        "sha256_conteudo": "2389d0312744355d67253afeccd26df5fee39ad1aac7540072f4d2747718f8ea",
+        "nome": "TPF (docetaxel + cisplatina + 5-FU)",
+        "id_original": "penis-tpf-paliativo",
+        "fonte_local_ref": "/tratamento/protocolos/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-7766e9cd66f755af",
+        "origem_json_pointer": "/tratamento/protocolos/5",
+        "sha256_conteudo": "1a501bb30fd975f3c0b2cd662cedabb894337ad5feca402e425e8f0ceb0591d9",
+        "nome": "Carboplatina + paclitaxel (ClCr < 50 mL/min)",
+        "id_original": "penis-carboplatina-paclitaxel-paliativo",
+        "fonte_local_ref": "/tratamento/protocolos/5/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8da1e1f681cccc90",
+        "origem_json_pointer": "/tratamento/protocolos/6",
+        "sha256_conteudo": "afbfb8f5a021fffc7067a4c96faeb163a2aa2b9fa406ed825f716311f8f3c584",
+        "nome": "Cisplatina + gemcitabina",
+        "id_original": "penis-cisplatina-gemcitabina-paliativo",
+        "fonte_local_ref": "/tratamento/protocolos/6/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-87ac0685799f7046",
+        "origem_json_pointer": "/tratamento/protocolos/7",
+        "sha256_conteudo": "f202f56b27b04a77261488bc8efa6e6424934cb4376724bb8455f8513eca3449",
+        "nome": "Paclitaxel semanal",
+        "id_original": "penis-paclitaxel-semanal-2linha",
+        "fonte_local_ref": "/tratamento/protocolos/7/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-09c959d1bd0de969",
+        "origem_json_pointer": "/tratamento/protocolos/8",
+        "sha256_conteudo": "1168496c2079923fab24a554621a87d1865e3fc66faf335fe883a2cadf28e89f",
+        "nome": "TIP neoadjuvante",
+        "id_original": "penis-tip-neoadjuvante",
+        "fonte_local_ref": "/tratamento/protocolos/8/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-cdab4e3cb2898df8",
+        "origem_json_pointer": "/tratamento/protocolos/9",
+        "sha256_conteudo": "5c29644b00e7494bd95f3b262c72e76aa7b5c2d451765fd996e1a12f3499a6dd",
+        "nome": "TPF neoadjuvante",
+        "id_original": "penis-tpf-neoadjuvante",
+        "fonte_local_ref": "/tratamento/protocolos/9/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-5edc44ff5f9efef5",
+        "origem_json_pointer": "/tratamento/protocolos/10",
+        "sha256_conteudo": "6385f3ed674255fe7976acffdbcaaec5b06937f16a39a02247f2b489922ae053",
+        "nome": "TIP adjuvante",
+        "id_original": "penis-tip-adjuvante",
+        "fonte_local_ref": "/tratamento/protocolos/10/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-21ac98a852aa3f00",
+        "origem_json_pointer": "/tratamento/cirurgia/0",
+        "sha256_conteudo": "61444586c248cb3e33b371d398bc3712dc45ee374b4159431d2b42724625740e",
+        "nome": "/tratamento/cirurgia/0",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cirurgia/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ddcf0d059df1b96f",
+        "origem_json_pointer": "/tratamento/cirurgia/1",
+        "sha256_conteudo": "32b959644cd4dbebafd5f4a4a756c27c5243163f84421c5a10425ce4da8fa546",
+        "nome": "/tratamento/cirurgia/1",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cirurgia/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-bf782a20e785096f",
+        "origem_json_pointer": "/tratamento/cirurgia/2",
+        "sha256_conteudo": "91aad67642654c49267ef36a9a588cb97d1d75e1fd720a00839d1c8bf92a17d8",
+        "nome": "/tratamento/cirurgia/2",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cirurgia/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-50efb81f8e3fba36",
+        "origem_json_pointer": "/tratamento/cirurgia/3",
+        "sha256_conteudo": "678bf3e237f16a5c7ba7630211b42d7e21f111359be29f380f13ce5616580007",
+        "nome": "/tratamento/cirurgia/3",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cirurgia/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-243b755d8dfc37d3",
+        "origem_json_pointer": "/tratamento/cirurgia/4",
+        "sha256_conteudo": "1388f4b0909cfeed794b531e2740b3b3e8c9ca7e4d73518c946985ce17da4326",
+        "nome": "/tratamento/cirurgia/4",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cirurgia/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-edc9f05410df1c6c",
+        "origem_json_pointer": "/tratamento/cirurgia/5",
+        "sha256_conteudo": "519246b02304e0e6a84f46850c6449f0ea67d2ddcd0c5d3d826c66d0226825e0",
+        "nome": "/tratamento/cirurgia/5",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cirurgia/5/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d0dc764dcc100077",
+        "origem_json_pointer": "/tratamento/cirurgia/6",
+        "sha256_conteudo": "322310702512ada21259505d7733be535971df742e575100a91b1a5868aedf56",
+        "nome": "/tratamento/cirurgia/6",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cirurgia/6/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-3ecf9ad011f66e55",
+        "origem_json_pointer": "/tratamento/cirurgia/7",
+        "sha256_conteudo": "fc7a5b3b5be21a7489530f9e4009e450ccd2928a1050120dd94840fff9b5479f",
+        "nome": "/tratamento/cirurgia/7",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cirurgia/7/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-19e51e512f9ab6ce",
+        "origem_json_pointer": "/tratamento/radioterapia/0",
+        "sha256_conteudo": "8533e74573d1294847201b5c4286a86d0bf4bd1102505e18e08c0beb1be161a0",
+        "nome": "localizado_T1a (tumores < 4 cm, G1–G2 selecionados)",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/radioterapia/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ff46d47674b1eb65",
+        "origem_json_pointer": "/tratamento/radioterapia/1",
+        "sha256_conteudo": "75e4b76c0073d9e0e2f137d9872c462743c6620a16bf96a243db1e0e0d815430",
+        "nome": "localizado T1b–T4 inoperável",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/radioterapia/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a9b3670e588d6b60",
+        "origem_json_pointer": "/tratamento/radioterapia/2",
+        "sha256_conteudo": "69861a3ebad75cb8415a0f04855cd142159bc928304a9ac3031fc3f981d968ff",
+        "nome": "adjuvante pN3 (extracapsular ou pélvico) após cirurgia",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/radioterapia/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-c2138c516891c366",
+        "origem_json_pointer": "/tratamento/radioterapia/3",
+        "sha256_conteudo": "7a6d182fa7b92bb35a045aa29565bae5048eca30bb5a7cbbceada7a6670710d0",
+        "nome": "recorrencia_local_inoperavel / metastático",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/radioterapia/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-4ffddd85aa01762c",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/0",
+        "sha256_conteudo": "90098472b5be46af38b3d177bbe0bed5db7b73db81f1e235917481c74e679a68",
+        "nome": "/ligacoes/interacoesConsultar/0",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-666d6d56c3530c91",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/1",
+        "sha256_conteudo": "ca748c03891da4a9f694845affc8d152188b02a8ad620302091c0cbd432a8c61",
+        "nome": "/ligacoes/interacoesConsultar/1",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-262c14b674a06539",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/2",
+        "sha256_conteudo": "f83d970d36d3e4e436fce5318682bc82591f37e476211437436b1ca8eaf8ab43",
+        "nome": "/ligacoes/interacoesConsultar/2",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-9b1948c8c813d948",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/3",
+        "sha256_conteudo": "8cebf106a877105576fa2fb0745b819f23da4dbe269937450302ae9a2034b0dc",
+        "nome": "/ligacoes/interacoesConsultar/3",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-3a1c9e1a9c7d733e",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/4",
+        "sha256_conteudo": "47af5467c2c7f65b4b4bd01793abe14d0c7cee51bd0bd1b073c2cd1f6d9b21bb",
+        "nome": "/ligacoes/interacoesConsultar/4",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-40b98374a10386c5",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/5",
+        "sha256_conteudo": "fae85311e2933456b334520179d6330fc1226e429782b1cf93dd71d76d8bcd0b",
+        "nome": "/ligacoes/interacoesConsultar/5",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ec5aa91ee9226b52",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/6",
+        "sha256_conteudo": "185a94cd1950f9d7ab6de129e0fcd75cd5d8e66b53c581f05fce23b1b861c1a2",
+        "nome": "/ligacoes/interacoesConsultar/6",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-6777d753a898b955",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/7",
+        "sha256_conteudo": "7b916c0bcc79cf66eade94d987ab20840751dad683efc96257fec2fc879a00c4",
+        "nome": "/ligacoes/interacoesConsultar/7",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-f1476f1e02b3d611",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/8",
+        "sha256_conteudo": "50798a94f93f0137b3a29f0670eb08cd762af3170ff4e38e429a0bf04a260c23",
+        "nome": "/ligacoes/interacoesConsultar/8",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-acd89a7288a84d8b",
+        "origem_json_pointer": "/ligacoes/ctcaeAcao/0",
+        "sha256_conteudo": "630b9a4412f67ded071bcfce7c66b32d159eee6a1a3b7118d6cc72d2898379db",
+        "nome": "/ligacoes/ctcaeAcao/0",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b48bda2f00336ef7",
+        "origem_json_pointer": "/ligacoes/ctcaeAcao/1",
+        "sha256_conteudo": "31d86ceeecc22589dc846331365b76e520dc813f72e91fd292a502a1ddee8618",
+        "nome": "/ligacoes/ctcaeAcao/1",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-6aa800eda1a7901a",
+        "origem_json_pointer": "/ligacoes/ctcaeAcao/2",
+        "sha256_conteudo": "d5f40bddf55d12a6f40c06d795c7be21a5e11cdb13b9b69b21013c78ca5a6186",
+        "nome": "/ligacoes/ctcaeAcao/2",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8811d419a58ff0bf",
+        "origem_json_pointer": "/ligacoes/ctcaeAcao/3",
+        "sha256_conteudo": "220bcb15d7ec2b18ed9f2a561526cf3342b07c56d6d937dff341c0e37c96385c",
+        "nome": "/ligacoes/ctcaeAcao/3",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e0983f97b37e9e4f",
+        "origem_json_pointer": "/ligacoes/ctcaeAcao/4",
+        "sha256_conteudo": "e1e2570b063be0e9337dc7217b06b7712a41c250b9aba41bfae99b9575922bc8",
+        "nome": "/ligacoes/ctcaeAcao/4",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-0564f3f5dda688c6",
+        "origem_json_pointer": "/ligacoes/ctcaeAcao/5",
+        "sha256_conteudo": "e313e9c9816e7236348f2e557137cb9de950f533826f5d1a5c3085b41356e678",
+        "nome": "/ligacoes/ctcaeAcao/5",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-861d1fbf981ea966",
+        "origem_json_pointer": "/ligacoes/ctcaeAcao/6",
+        "sha256_conteudo": "b0e4a78b87db35b3da066eb508b02c3009551fd074436f28f30bf3b7a5db903f",
+        "nome": "/ligacoes/ctcaeAcao/6",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d1bc782250ff9c4b",
+        "origem_json_pointer": "/tratamento/suporte",
+        "sha256_conteudo": "227a19cf81f39ac4d10e704f66358c3e5553f410021e727b1ba2669247355f65",
+        "nome": "/tratamento/suporte",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/suporte/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e668157975b7fc89",
+        "origem_json_pointer": "/ligacoes/suporteReceitas/0",
+        "sha256_conteudo": "51b8c43e160022a1799c73641ceea02a6fbe0b3b0b1d3bd322e5543d9ca4f89b",
+        "nome": "antiemese para esquema com cisplatina",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d07982d23d8b61f4",
+        "origem_json_pointer": "/ligacoes/suporteReceitas/1",
+        "sha256_conteudo": "e79d6040e73f04fed40198830271874e3d60f9540aab5336912403823ecb205d",
+        "nome": "mesna + hidratação com ifosfamida",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-84a0133eb4f8781a",
+        "origem_json_pointer": "/ligacoes/suporteReceitas/2",
+        "sha256_conteudo": "78680c3b17b5a56b86c076da5017bba862d83a463a22004f2c36906b84aaba02",
+        "nome": "pré-medicação de taxano",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-210f2d99192788ed",
+        "origem_json_pointer": "/ligacoes/suporteReceitas/3",
+        "sha256_conteudo": "ae4a8c88b02bd485c307fa316b7ceeac1d4b9679675f866ed9de4d6a37b05321",
+        "nome": "reposição de magnésio/eletrólitos com cisplatina",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-87c8ae7725df69bf",
+        "origem_json_pointer": "/tratamento/seguimento/0",
+        "sha256_conteudo": "c98a3bb642c039fa8715734472e29b627b35f6f0337fe51b755fb8d48eee514c",
+        "nome": "Primário com preservação peniana — 5 anos",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/seguimento/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-9708eded704c3770",
+        "origem_json_pointer": "/tratamento/seguimento/1",
+        "sha256_conteudo": "c929751aba94ab48941bcc490696e0dcaa8bbfa4ad5368cf40af8e93bcee841a",
+        "nome": "Primário com amputação — 5 anos",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/seguimento/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-1917634498839d00",
+        "origem_json_pointer": "/tratamento/seguimento/2",
+        "sha256_conteudo": "3147bf2abe437aadedafabd5840fdb6c47198ea071ffe93e6c5cb69721379ca2",
+        "nome": "Linfonodal: vigilância ativa — 5 anos",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/seguimento/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-207eabbea5f9febb",
+        "origem_json_pointer": "/tratamento/seguimento/3",
+        "sha256_conteudo": "68260c21a3b3c8d301ad0a4ba921b9ff227ebd17cecaa46dffee48c6d87f5c7b",
+        "nome": "Linfonodal: pN0 — 5 anos",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/seguimento/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-83b8e700ade31a9d",
+        "origem_json_pointer": "/tratamento/seguimento/4",
+        "sha256_conteudo": "0bff6f063bbab4d0dc10766ae3d1d535e487ca6e48c67b3c54d4821a53c67b98",
+        "nome": "Linfonodal: pN+ — 5 anos (imagem preferencialmente para pN2–N3)",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/seguimento/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ecc31f2b4dfa35c0",
+        "origem_json_pointer": "/tratamento/seguimento/5",
+        "sha256_conteudo": "c77f3c8d4a558a8395bf32d62b967b9c29061c2475ec91e765f884fb99e0940e",
+        "nome": "anos 1–2 (cirurgia conservadora ou RT)",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/seguimento/5/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-3b6e2f9c13d66356",
+        "origem_json_pointer": "/tratamento/seguimento/6",
+        "sha256_conteudo": "6216c199f0387e2f30015820ce97deacb6eaba4606d5f1ad60d4d611f8aac19b",
+        "nome": "depois dos 2 anos",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/seguimento/6/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-1b109d88ed37faf0",
+        "origem_json_pointer": "/ligacoes/orientacoes/0",
+        "sha256_conteudo": "09ee003eff1cdcf4205dde73eed610de8de2c854c7569b74356767593f5469e9",
+        "nome": "Seguimento de perto é condição para preservação peniana (penectomia parcial/terapias locais).",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-6f20176c56a24e4a",
+        "origem_json_pointer": "/ligacoes/orientacoes/1",
+        "sha256_conteudo": "10efde20add251485d271e08e5eb0f14bdab3429cea4a1f8cbb6ec5b53b370cc",
+        "nome": "Autoexame das virilhas e retorno precoce se nódulo inguinal.",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8f3cbb7ee40029d9",
+        "origem_json_pointer": "/ligacoes/orientacoes/2",
+        "sha256_conteudo": "d7d41579e37447f0d184b63f7b4b20ba8b7f387eda1a167e5ff1565529318c9e",
+        "nome": "Cuidados com ferida e prevenção de linfedema após linfadenectomia inguinal.",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-76fab05e4a5179cb",
+        "origem_json_pointer": "/ligacoes/orientacoes/3",
+        "sha256_conteudo": "b06618149218f341232eacc30efab8fdcf158eb90ceadf9395ecaabd9554163b",
+        "nome": "Vacina HPV no SUS para meninos e meninas de 9 a 14 anos (prevenção; não trata lesão existente) — fonte: aula PRO p.19.",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-9f995dab09b7d4fb",
+        "origem_json_pointer": "/ligacoes/orientacoes/4",
+        "sha256_conteudo": "1d2c8583e6a26109fa3f79e4fbf12716b4be2ddd3b4de34c15a386aa40ddfe53",
+        "nome": "Infusor de 5-FU por 96 h: cuidados com cateter e bomba.",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-55eb46a2e145ab68",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/0",
+        "sha256_conteudo": "5e90c2fe0c689c9825e2a5f61f10285aac34b9a34913dde224d87ec5e7e743b5",
+        "nome": "encaminhamento-cirurgia-oncologica",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-61dae9798ba31e44",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/1",
+        "sha256_conteudo": "b92a6c89eec82b9542c0d0bf3c50a216ebeef81398125d360e50df70c3e8f675",
+        "nome": "encaminhamento-radioterapia",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-46f5f235ff433010",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/2",
+        "sha256_conteudo": "17b58d7246ca5e5157f1b307c9b9dd2280d5683dba228a0dc6f6bd2c782a92b2",
+        "nome": "urologia",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-0aa382d02f29c9bd",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/3",
+        "sha256_conteudo": "ed684898957502cdc7f61c222f55df815be8b6a068f849dbe24727963a67575a",
+        "nome": "cuidados paliativos",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-f1be0bc240fdcb6e",
+        "origem_json_pointer": "/ligacoes/laudos/0",
+        "sha256_conteudo": "6a46438b183e8fd4b7a415067f836f7309f2eda0b78d30c905219bb7d5f4dbe5",
+        "nome": "laudo-inss",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-77f7f1412350909b",
+        "origem_json_pointer": "/ligacoes/laudos/1",
+        "sha256_conteudo": "af504b47768148287664fb7c8261386969e41e6892f762a9162444692f4dfbe1",
+        "nome": "laudo-afastamento",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-93d60b7330a4b52b",
+        "origem_json_pointer": "/ligacoes/laudos/2",
+        "sha256_conteudo": "78adca3dbd2239a0f585882019c32186c069fc3599dc815bbc6fd5ee1b225bac",
+        "nome": "laudo-loas",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d62cf1f5c978a4b0",
+        "origem_json_pointer": "/ligacoes/laudos/3",
+        "sha256_conteudo": "605d32053c94a49b3d3cb80232041ebc5f3348124175bc8224c8488e3785d1fa",
+        "nome": "laudo-transporte",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-af07b6d35c78fbb1",
+        "origem_json_pointer": "/ligacoes/laudos/4",
+        "sha256_conteudo": "2979aed27f52125ed5ce4979fdd3052d373b4312a791a0082a6c96ae27466cc6",
+        "nome": "laudo-judicial",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      }
+    ],
+    "itens_nccn": [
+      {
+        "item_id": "nccn-20261017-penis-calendarios",
+        "nome": "Seguimento por tratamento do primário e estado linfonodal",
+        "tipo": "SEGUIMENTO",
+        "dominio_principal": 10,
+        "conteudo_extraido": "Cinco ramos de PN-8 estruturados: primário após terapia local ou penectomia e linfonodos pNX, pN0/N1, pN2/N3. Preservadas divergências: SBOC trimestral versus semestral NCCN em contextos específicos; MOC bimestral versus trimestral no primário conservado; RM no legado pN+ versus TC nos ramos NCCN. A nota z condiciona US/TC/RM inguinal a exame anormal, obesidade ou cirurgia inguinal prévia.",
+        "aplicabilidade": {
+          "criterios": [
+            "Tratamento inicial e estado linfonodal documentados"
+          ],
+          "paciente_individual": null,
+          "estado": "NAO_AVALIADA"
+        },
+        "dados_estruturados": {
+          "seguimento_nccn": {
+            "ramos": [
+              {
+                "tabela_ou_ramo": "primario_local",
+                "cenario": "Lesão primária após terapia tópica/local",
+                "linhas": [
+                  {
+                    "exame": "Exame clínico pênis e região inguinal",
+                    "periodos": {
+                      "anos1–2": "a cada3 meses",
+                      "anos3–5": "a cada6 meses",
+                      "anos6–10": "anual"
+                    },
+                    "condicao": null
+                  }
+                ],
+                "notas": [],
+                "fontes": [
+                  {
+                    "fonte_id": "nccn-2361fe11fb9d",
+                    "edicao": "1.2027",
+                    "pagina_pdf": 12,
+                    "paginas_pdf": [
+                      12
+                    ],
+                    "secao": "PN-8",
+                    "trecho": "SURVEILLANCE SCHEDULE",
+                    "ancora_contextual": null,
+                    "natureza": "EXTRACAO_DOCUMENTAL",
+                    "sha256_pdf": "9c6238ffd547161896a4cdf7798d12ec10c581bcce73144e9521d225cafbe7e9"
+                  }
+                ],
+                "estado_curadoria": "A_CONFERIR",
+                "aprovacao_clinica": null,
+                "gera_agendamento": false
+              },
+              {
+                "tabela_ou_ramo": "primario_penectomia",
+                "cenario": "Lesão primária após penectomia parcial/radical",
+                "linhas": [
+                  {
+                    "exame": "Exame clínico pênis e região inguinal",
+                    "periodos": {
+                      "anos1–2": "a cada6 meses",
+                      "anos3–10": "anual"
+                    },
+                    "condicao": null
+                  }
+                ],
+                "notas": [],
+                "fontes": [
+                  {
+                    "fonte_id": "nccn-2361fe11fb9d",
+                    "edicao": "1.2027",
+                    "pagina_pdf": 12,
+                    "paginas_pdf": [
+                      12
+                    ],
+                    "secao": "PN-8",
+                    "trecho": "SURVEILLANCE SCHEDULE",
+                    "ancora_contextual": null,
+                    "natureza": "EXTRACAO_DOCUMENTAL",
+                    "sha256_pdf": "9c6238ffd547161896a4cdf7798d12ec10c581bcce73144e9521d225cafbe7e9"
+                  }
+                ],
+                "estado_curadoria": "A_CONFERIR",
+                "aprovacao_clinica": null,
+                "gera_agendamento": false
+              },
+              {
+                "tabela_ou_ramo": "nodal_pnx",
+                "cenario": "Linfonodos pNX: vigilância ativa conforme nota w",
+                "linhas": [
+                  {
+                    "exame": "Exame clínico",
+                    "periodos": {
+                      "anos1–2": "a cada6 meses",
+                      "anos3–4": "anual"
+                    },
+                    "condicao": null
+                  }
+                ],
+                "notas": [
+                  "Nota w: vigilância ativa de linfonodos clinicamente negativos e baixo risco de metástase inguinal."
+                ],
+                "fontes": [
+                  {
+                    "fonte_id": "nccn-2361fe11fb9d",
+                    "edicao": "1.2027",
+                    "pagina_pdf": 12,
+                    "paginas_pdf": [
+                      12
+                    ],
+                    "secao": "PN-8",
+                    "trecho": "SURVEILLANCE SCHEDULE",
+                    "ancora_contextual": null,
+                    "natureza": "EXTRACAO_DOCUMENTAL",
+                    "sha256_pdf": "9c6238ffd547161896a4cdf7798d12ec10c581bcce73144e9521d225cafbe7e9"
+                  }
+                ],
+                "estado_curadoria": "A_CONFERIR",
+                "aprovacao_clinica": null,
+                "gera_agendamento": false
+              },
+              {
+                "tabela_ou_ramo": "nodal_pn0n1",
+                "cenario": "Linfonodos pN0/pN1",
+                "linhas": [
+                  {
+                    "exame": "Exame clínico + TC abdome/pelve + RX tórax",
+                    "periodos": {
+                      "anos1–2": "a cada6 meses",
+                      "anos3–4": "anual"
+                    },
+                    "condicao": null
+                  }
+                ],
+                "notas": [],
+                "fontes": [
+                  {
+                    "fonte_id": "nccn-2361fe11fb9d",
+                    "edicao": "1.2027",
+                    "pagina_pdf": 12,
+                    "paginas_pdf": [
+                      12
+                    ],
+                    "secao": "PN-8",
+                    "trecho": "SURVEILLANCE SCHEDULE",
+                    "ancora_contextual": null,
+                    "natureza": "EXTRACAO_DOCUMENTAL",
+                    "sha256_pdf": "9c6238ffd547161896a4cdf7798d12ec10c581bcce73144e9521d225cafbe7e9"
+                  }
+                ],
+                "estado_curadoria": "A_CONFERIR",
+                "aprovacao_clinica": null,
+                "gera_agendamento": false
+              },
+              {
+                "tabela_ou_ramo": "nodal_pn2n3",
+                "cenario": "Linfonodos pN2/pN3",
+                "linhas": [
+                  {
+                    "exame": "Exame clínico + TC abdome/pelve + TC tórax",
+                    "periodos": {
+                      "ano1": "a cada3 meses",
+                      "anos2–4": "a cada6 meses"
+                    },
+                    "condicao": null
+                  }
+                ],
+                "notas": [],
+                "fontes": [
+                  {
+                    "fonte_id": "nccn-2361fe11fb9d",
+                    "edicao": "1.2027",
+                    "pagina_pdf": 12,
+                    "paginas_pdf": [
+                      12
+                    ],
+                    "secao": "PN-8",
+                    "trecho": "SURVEILLANCE SCHEDULE",
+                    "ancora_contextual": null,
+                    "natureza": "EXTRACAO_DOCUMENTAL",
+                    "sha256_pdf": "9c6238ffd547161896a4cdf7798d12ec10c581bcce73144e9521d225cafbe7e9"
+                  }
+                ],
+                "estado_curadoria": "A_CONFERIR",
+                "aprovacao_clinica": null,
+                "gera_agendamento": false
+              }
+            ],
+            "nota_z": "Se exame clínico anormal, obesidade ou cirurgia inguinal prévia, considerar US, TC com contraste ou RM com contraste da região inguinal.",
+            "sem_agendamento_automatico": true
+          },
+          "comparacao_com_legado": [
+            {
+              "legado_ref": "/tratamento/seguimento",
+              "estado": "CONFLITO_A_CONFERIR",
+              "descricao": "SBOC/MOC preservados; comparar apenas ramos com mesmo tratamento e estado linfonodal. US opcional legado e nota z NCCN não são autorização universal de rotina."
+            }
+          ]
+        },
+        "fonte_refs": [
+          {
+            "fonte_id": "nccn-2361fe11fb9d",
+            "edicao": "1.2027",
+            "pagina_pdf": 12,
+            "paginas_pdf": [
+              12
+            ],
+            "secao": "PN-8",
+            "trecho": "SURVEILLANCE SCHEDULE",
+            "ancora_contextual": null,
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "9c6238ffd547161896a4cdf7798d12ec10c581bcce73144e9521d225cafbe7e9"
+          }
+        ],
+        "evidencia_declarada": {
+          "sistema": "NCCN",
+          "categoria": null,
+          "estado": "NAO_EXTRAIDA_POR_ITEM"
+        },
+        "estado_extracao": "EXTRAIDO_COM_LIMITES_DECLARADOS",
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "temporalidade": {
+          "referencia": "CENARIO_DESCRITO",
+          "datas_individuais": null
+        },
+        "propor_automaticamente": false,
+        "disponivel_para_prescricao": false,
+        "acesso": {
+          "registro_anvisa": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "incorporacao_conitec": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "pcdt_ddt": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "sigtap_apac": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "cobertura_privada": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "disponibilidade_institucional": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          }
+        },
+        "alternativas_legadas_refs": [
+          "/tratamento/seguimento"
+        ],
+        "relacoes_refs": [
+          "relacao-nccn-20261017-penis-calendarios"
+        ],
+        "conflitos_refs": [
+          "conflito-nccn-20261017-penis-calendarios"
+        ],
+        "pendencias": [
+          "REVISAO_CLINICA_DO_DELTA",
+          "VERIFICAR_ACESSO_BRASILEIRO_POR_INDICACAO"
+        ],
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-2-correcao-auditoria",
+            "correcao_id": "AD1-penis",
+            "anterior": {
+              "conteudo_extraido": "A tabela distingue terapia tópica/local, penectomia parcial/radical, pNX, pN0/N1 e pN2/N3. O primário tem caminhos até dez anos; imagem e periodicidade nodal dependem do grupo.",
+              "fonte_refs": [
+                {
+                  "fonte_id": "nccn-2361fe11fb9d",
+                  "paginas_pdf": [
+                    12
+                  ],
+                  "secao": "PN-8",
+                  "natureza": "EXTRACAO_DOCUMENTAL",
+                  "pagina_pdf": 12,
+                  "trecho": "SURVEILLANCEx INITIAL TREATMENT ANATOMIC SITE SURVEILLANCE SCHEDULE For patients with recurrence at"
+                }
+              ],
+              "estado_curadoria": "A_CONFERIR",
+              "aprovacao_clinica": null,
+              "dados_estruturados": {}
+            },
+            "motivo": "Correção documental após auditoria Claude e conferência da fonte; não apaga versão anterior.",
+            "aprovacao_clinica": null
+          },
+          {
+            "revisao": "2026-10-17-nccn-final-documental",
+            "anterior": {
+              "dados_estruturados": {
+                "seguimento_nccn": {
+                  "ramos": [
+                    {
+                      "tabela_ou_ramo": "primario_local",
+                      "cenario": "Lesão primária após terapia tópica/local",
+                      "linhas": [
+                        {
+                          "exame": "Exame clínico pênis e região inguinal",
+                          "periodos": {
+                            "anos1–2": "a cada3meses",
+                            "anos3–5": "a cada6meses",
+                            "anos6–10": "anual"
+                          },
+                          "condicao": null
+                        }
+                      ],
+                      "notas": [],
+                      "fontes": [
+                        {
+                          "fonte_id": "nccn-2361fe11fb9d",
+                          "edicao": "1.2027",
+                          "pagina_pdf": 12,
+                          "paginas_pdf": [
+                            12
+                          ],
+                          "secao": "PN-8",
+                          "trecho": "SURVEILLANCE SCHEDULE",
+                          "ancora_contextual": null,
+                          "natureza": "EXTRACAO_DOCUMENTAL",
+                          "sha256_pdf": "9c6238ffd547161896a4cdf7798d12ec10c581bcce73144e9521d225cafbe7e9"
+                        }
+                      ],
+                      "estado_curadoria": "A_CONFERIR",
+                      "aprovacao_clinica": null,
+                      "gera_agendamento": false
+                    },
+                    {
+                      "tabela_ou_ramo": "primario_penectomia",
+                      "cenario": "Lesão primária após penectomia parcial/radical",
+                      "linhas": [
+                        {
+                          "exame": "Exame clínico pênis e região inguinal",
+                          "periodos": {
+                            "anos1–2": "a cada6meses",
+                            "anos3–10": "anual"
+                          },
+                          "condicao": null
+                        }
+                      ],
+                      "notas": [],
+                      "fontes": [
+                        {
+                          "fonte_id": "nccn-2361fe11fb9d",
+                          "edicao": "1.2027",
+                          "pagina_pdf": 12,
+                          "paginas_pdf": [
+                            12
+                          ],
+                          "secao": "PN-8",
+                          "trecho": "SURVEILLANCE SCHEDULE",
+                          "ancora_contextual": null,
+                          "natureza": "EXTRACAO_DOCUMENTAL",
+                          "sha256_pdf": "9c6238ffd547161896a4cdf7798d12ec10c581bcce73144e9521d225cafbe7e9"
+                        }
+                      ],
+                      "estado_curadoria": "A_CONFERIR",
+                      "aprovacao_clinica": null,
+                      "gera_agendamento": false
+                    },
+                    {
+                      "tabela_ou_ramo": "nodal_pnx",
+                      "cenario": "Linfonodos pNX: vigilância ativa conforme nota w",
+                      "linhas": [
+                        {
+                          "exame": "Exame clínico",
+                          "periodos": {
+                            "anos1–2": "a cada6meses",
+                            "anos3–4": "anual"
+                          },
+                          "condicao": null
+                        }
+                      ],
+                      "notas": [
+                        "Nota w: vigilância ativa de linfonodos clinicamente negativos e baixo risco de metástase inguinal."
+                      ],
+                      "fontes": [
+                        {
+                          "fonte_id": "nccn-2361fe11fb9d",
+                          "edicao": "1.2027",
+                          "pagina_pdf": 12,
+                          "paginas_pdf": [
+                            12
+                          ],
+                          "secao": "PN-8",
+                          "trecho": "SURVEILLANCE SCHEDULE",
+                          "ancora_contextual": null,
+                          "natureza": "EXTRACAO_DOCUMENTAL",
+                          "sha256_pdf": "9c6238ffd547161896a4cdf7798d12ec10c581bcce73144e9521d225cafbe7e9"
+                        }
+                      ],
+                      "estado_curadoria": "A_CONFERIR",
+                      "aprovacao_clinica": null,
+                      "gera_agendamento": false
+                    },
+                    {
+                      "tabela_ou_ramo": "nodal_pn0n1",
+                      "cenario": "Linfonodos pN0/pN1",
+                      "linhas": [
+                        {
+                          "exame": "Exame clínico + TC abdome/pelve + RX tórax",
+                          "periodos": {
+                            "anos1–2": "a cada6meses",
+                            "anos3–4": "anual"
+                          },
+                          "condicao": null
+                        }
+                      ],
+                      "notas": [],
+                      "fontes": [
+                        {
+                          "fonte_id": "nccn-2361fe11fb9d",
+                          "edicao": "1.2027",
+                          "pagina_pdf": 12,
+                          "paginas_pdf": [
+                            12
+                          ],
+                          "secao": "PN-8",
+                          "trecho": "SURVEILLANCE SCHEDULE",
+                          "ancora_contextual": null,
+                          "natureza": "EXTRACAO_DOCUMENTAL",
+                          "sha256_pdf": "9c6238ffd547161896a4cdf7798d12ec10c581bcce73144e9521d225cafbe7e9"
+                        }
+                      ],
+                      "estado_curadoria": "A_CONFERIR",
+                      "aprovacao_clinica": null,
+                      "gera_agendamento": false
+                    },
+                    {
+                      "tabela_ou_ramo": "nodal_pn2n3",
+                      "cenario": "Linfonodos pN2/pN3",
+                      "linhas": [
+                        {
+                          "exame": "Exame clínico + TC abdome/pelve + TC tórax",
+                          "periodos": {
+                            "ano1": "a cada3meses",
+                            "anos2–4": "a cada6meses"
+                          },
+                          "condicao": null
+                        }
+                      ],
+                      "notas": [],
+                      "fontes": [
+                        {
+                          "fonte_id": "nccn-2361fe11fb9d",
+                          "edicao": "1.2027",
+                          "pagina_pdf": 12,
+                          "paginas_pdf": [
+                            12
+                          ],
+                          "secao": "PN-8",
+                          "trecho": "SURVEILLANCE SCHEDULE",
+                          "ancora_contextual": null,
+                          "natureza": "EXTRACAO_DOCUMENTAL",
+                          "sha256_pdf": "9c6238ffd547161896a4cdf7798d12ec10c581bcce73144e9521d225cafbe7e9"
+                        }
+                      ],
+                      "estado_curadoria": "A_CONFERIR",
+                      "aprovacao_clinica": null,
+                      "gera_agendamento": false
+                    }
+                  ],
+                  "nota_z": "Se exame clínico anormal, obesidade ou cirurgia inguinal prévia, considerar US, TC com contraste ou RM com contraste da região inguinal.",
+                  "sem_agendamento_automatico": true
+                },
+                "comparacao_com_legado": [
+                  {
+                    "legado_ref": "/tratamento/seguimento",
+                    "estado": "CONFLITO_A_CONFERIR",
+                    "descricao": "SBOC/MOC preservados; comparar apenas ramos com mesmo tratamento e estado linfonodal. US opcional legado e nota z NCCN não são autorização universal de rotina."
+                  }
+                ]
+              }
+            },
+            "motivo": "Espaçamento da prosa; sem modificar valores, códigos ou fontes."
+          }
+        ],
+        "fontes_por_campo": {
+          "conteudo_extraido": [
+            {
+              "fonte_id": "nccn-2361fe11fb9d",
+              "edicao": "1.2027",
+              "pagina_pdf": 12,
+              "paginas_pdf": [
+                12
+              ],
+              "secao": "PN-8",
+              "trecho": "SURVEILLANCE SCHEDULE",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "9c6238ffd547161896a4cdf7798d12ec10c581bcce73144e9521d225cafbe7e9"
+            }
+          ],
+          "dados_estruturados": [
+            {
+              "fonte_id": "nccn-2361fe11fb9d",
+              "edicao": "1.2027",
+              "pagina_pdf": 12,
+              "paginas_pdf": [
+                12
+              ],
+              "secao": "PN-8",
+              "trecho": "SURVEILLANCE SCHEDULE",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "9c6238ffd547161896a4cdf7798d12ec10c581bcce73144e9521d225cafbe7e9"
+            }
+          ]
+        },
+        "correcoes_auditoria": [
+          {
+            "id": "AD1-penis",
+            "revisao": "2026-10-17-nccn-delta-2-correcao-auditoria",
+            "estado": "APLICADA_COM_CONFERENCIA_DOCUMENTAL",
+            "fontes": [
+              {
+                "fonte_id": "nccn-2361fe11fb9d",
+                "edicao": "1.2027",
+                "pagina_pdf": 12,
+                "paginas_pdf": [
+                  12
+                ],
+                "secao": "PN-8",
+                "trecho": "SURVEILLANCE SCHEDULE",
+                "ancora_contextual": null,
+                "natureza": "EXTRACAO_DOCUMENTAL",
+                "sha256_pdf": "9c6238ffd547161896a4cdf7798d12ec10c581bcce73144e9521d225cafbe7e9"
+              }
+            ],
+            "ajuste_ao_parecer": null
+          }
+        ]
+      }
+    ],
+    "cenarios": {
+      "identidade_ref": "/identidade/cenarios",
+      "detalhamento_ref": "/tratamento/cenarios",
+      "novas_condicoes_refs": [
+        "nccn-20261017-penis-calendarios"
+      ],
+      "regra": "Não igualar automaticamente as duas listas nem selecionar cenário individual nesta camada."
+    },
+    "fontes": [
+      {
+        "id": "nccn-2361fe11fb9d",
+        "arquivo_local": "C:\\Users\\silas\\.aside\\u\\0\\sessions\\2026-10-17_LutNNwUyDZGlA1pF\\artifacts\\nccn\\Penile Cancer.pdf",
+        "nome": "Penile Cancer",
+        "sha256": "9c6238ffd547161896a4cdf7798d12ec10c581bcce73144e9521d225cafbe7e9",
+        "numero_paginas": 64,
+        "versao_declarada": "1.2027",
+        "origem": "ARQUIVO_LOCAL_FORNECIDO",
+        "autenticidade_externa": "NAO_VERIFICADA_NO_PORTAL",
+        "paginas_examinadas": [
+          12
+        ]
+      }
+    ],
+    "fontes_legadas_refs": [
+      "/header/fonte",
+      "/curadoria/fontesLidas"
+    ],
+    "ensaios": {
+      "legado_ref": "/tratamento/ensaios",
+      "novos_nct": [],
+      "nota": "Nenhum identificador NCT foi inventado ou verificado nesta rodada."
+    },
+    "relacoes": [
+      {
+        "relacao_id": "relacao-nccn-20261017-penis-calendarios",
+        "tipo": "CONDICOES_PARA_APRESENTACAO_DOCUMENTAL",
+        "destino_item_ref": "nccn-20261017-penis-calendarios",
+        "criterios_extraidos": [
+          "Tratamento inicial e estado linfonodal documentados"
+        ],
+        "origem_condicoes": "FONTE_NCCN_CITADA",
+        "origem_mapeamento": "PROPOSTA_DE_MAPEAMENTO",
+        "executavel": false,
+        "estado": "A_CONFERIR",
+        "dados_ausentes": "MANTER_INDETERMINADO",
+        "dados_conflitantes": "MANTER_CONFLITO",
+        "efeito": "APRESENTAR_CONTEUDO_PARA_REVISAO; NAO PRESCREVER",
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-2-correcao-auditoria",
+            "correcao_id": "AD1-penis",
+            "criterios_extraidos": [
+              "Tratamento inicial e estado linfonodal documentados"
+            ]
+          }
+        ],
+        "fontes_por_campo": {
+          "criterios_extraidos": [
+            {
+              "fonte_id": "nccn-2361fe11fb9d",
+              "edicao": "1.2027",
+              "pagina_pdf": 12,
+              "paginas_pdf": [
+                12
+              ],
+              "secao": "PN-8",
+              "trecho": "SURVEILLANCE SCHEDULE",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "9c6238ffd547161896a4cdf7798d12ec10c581bcce73144e9521d225cafbe7e9"
+            }
+          ]
+        }
+      }
+    ],
+    "conflitos": [
+      {
+        "conflito_id": "conflito-nccn-20261017-penis-calendarios",
+        "tema": "Seguimento por tratamento do primário e estado linfonodal",
+        "descricao": "Intervalos e duração diferem das entradas SBOC/MOC do pack. Preservar alternativas separadas e a ambiguidade anterior, sem sobrescrever.",
+        "item_nccn_ref": "nccn-20261017-penis-calendarios",
+        "legado_refs": [
+          "/tratamento/seguimento"
+        ],
+        "fontes_nccn_refs": [
+          {
+            "fonte_id": "nccn-2361fe11fb9d",
+            "paginas_pdf": [
+              12
+            ],
+            "secao": "PN-8",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "pagina_pdf": 12,
+            "trecho": "SURVEILLANCEx INITIAL TREATMENT ANATOMIC SITE SURVEILLANCE SCHEDULE For patients with recurrence at"
+          }
+        ],
+        "estado": "A_CONFERIR",
+        "decisao_medica": null,
+        "resolucao_automatica": false
+      }
+    ],
+    "conflitos_legados_ref": "/conflitos",
+    "pendencias": [
+      {
+        "id": "revisao-clinica",
+        "estado": "ABERTA",
+        "descricao": "Conferir cada acréscimo, condições, fontes, doses, interações e suporte antes de uso clínico."
+      },
+      {
+        "id": "acesso-brasileiro",
+        "estado": "ABERTA",
+        "descricao": "NCCN não comprova Anvisa, Conitec, PCDT/DDT, SIGTAP/APAC, cobertura privada ou acesso institucional."
+      },
+      {
+        "id": "cobertura-nccn",
+        "estado": "PARCIAL_POR_DELTA",
+        "descricao": "Leitura dirigida das páginas citadas; não há alegação de extração integral da diretriz."
+      }
+    ],
+    "pendencias_legadas_ref": "/pendencias",
+    "itens_adicionais_a_classificar": [
+      {
+        "origem_ref": "/header",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/status",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/consultavel",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/alerta",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/substitui",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/identidade",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/pendencias",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/conflitos",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/curadoria",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/correcoes",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      }
+    ],
+    "mapa_de_cobertura": [
+      {
+        "origem_json_pointer": "/header",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "a4200500fd3ad32928f13cc8ca557d7ecf894e17ee63648812b76cbda1cee6fe",
+        "valores_folha": 9
+      },
+      {
+        "origem_json_pointer": "/status",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "04635ca3844c66b19ebbf49bf9ff60fe851d6ce89597d23e6a970f1dc3927289",
+        "valores_folha": 1
+      },
+      {
+        "origem_json_pointer": "/consultavel",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b",
+        "valores_folha": 1
+      },
+      {
+        "origem_json_pointer": "/alerta",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "valores_folha": 1
+      },
+      {
+        "origem_json_pointer": "/substitui",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "valores_folha": 1
+      },
+      {
+        "origem_json_pointer": "/identidade",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "4605608951803db519aca040bad97247f7e70d801ba709351ea3299bb070bf11",
+        "valores_folha": 25
+      },
+      {
+        "origem_json_pointer": "/diagnostico",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "a7b394f21362bf8aee0e716d0bbde5db8ace08aaa49f16e783f8c99d308ecfa4",
+        "valores_folha": 89
+      },
+      {
+        "origem_json_pointer": "/estadiamento",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "892438c15c4d30c8e1505a568df5e417b5e3888e34992c40a697615699631c92",
+        "valores_folha": 173
+      },
+      {
+        "origem_json_pointer": "/tratamento",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "7f7de1647b288db64e5c50a374396b5b5c20e90b51efd3a38b24a48e3b17276b",
+        "valores_folha": 895
+      },
+      {
+        "origem_json_pointer": "/ligacoes",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "70dd015a2e4cd01f9d5c38618a79b0d8454a419defe25e00aae834206f80aed1",
+        "valores_folha": 141
+      },
+      {
+        "origem_json_pointer": "/pendencias",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "66640ff8f13512f6a7ead5146f38d66c446e417e682ff33f8fe891a15d76b1de",
+        "valores_folha": 52
+      },
+      {
+        "origem_json_pointer": "/conflitos",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "48c346a964a70ef5daefe6d8f67ede52e7d518ddff5de2a4c61fa2cd545be626",
+        "valores_folha": 52
+      },
+      {
+        "origem_json_pointer": "/curadoria",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "985f53533fa8d05e21ffa724b492d3ae23817bc1558309ba20ad76244b97744f",
+        "valores_folha": 33
+      },
+      {
+        "origem_json_pointer": "/correcoes",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "6a48a36ed6812946d024967c9c2ae7e7f46c92b9376c567842cccb80cce38d91",
+        "valores_folha": 12
+      }
+    ],
+    "reconciliacao_com_versao_anterior": {
+      "modo": "ADITIVO",
+      "originais_removidos": 0,
+      "originais_alterados": 0,
+      "contagens_preservadas": {
+        "protocolos": 11,
+        "ensaios": 4,
+        "cenarios_identidade": 10,
+        "cenarios_tratamento": 10,
+        "seguimento": 7,
+        "conflitos": 4,
+        "pendencias": 11
+      }
+    },
+    "relatorio_de_completude": {
+      "estado": "INCOMPLETA_PARA_DIRETRIZ_INTEGRAL",
+      "preservacao_legado": "INTEGRAL",
+      "delta_itens": 1,
+      "normalizacao_legado": "INDEXACAO_POR_REFERENCIA; NAO REEXTRACAO CLINICA",
+      "posologias": "SOMENTE AS EXPLICITAMENTE EXTRAIDAS; RESTANTES PENDENTES",
+      "sem_fato_paciente": true,
+      "sem_aprovacao_inferida": true
+    },
+    "revisoes_auditoria": [
+      {
+        "revisao": "2026-10-17-nccn-delta-2-correcao-auditoria",
+        "correcoes": [
+          "AD1-penis"
+        ],
+        "legado_modificado": false,
+        "aprovacao_clinica": null,
+        "nota": "Correções conferidas nos PDFs; a auditoria Claude foi amostral. Os 33 itens não auditados não foram promovidos a revisados."
+      }
+    ],
+    "fechamento_documental": [
+      {
+        "revisao": "2026-10-17-nccn-final-documental",
+        "estado": "CORRECOES_DOCUMENTAIS_APLICADAS",
+        "ajustes_textuais": 7,
+        "deduplicacoes_por_referencia": [],
+        "aprovacao_clinica": null,
+        "legado_alterado": false
+      }
+    ]
+  }
 }

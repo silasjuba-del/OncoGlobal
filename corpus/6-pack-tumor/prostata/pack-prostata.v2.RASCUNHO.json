@@ -4196,5 +4196,3730 @@
       "achado": "Decisão D-F1-20 item 49 (Dr. Silas)",
       "acao": "alto risco mHSPC (LATITUDE ≥ 2 de 3) registrado como grupo complementar ao volume CHAARTED; pendência de grafia '> 8' resolvida; pendência de fonte primária adicionada"
     }
-  ]
+  ],
+  "tumor_pack_universal": {
+    "schema_documental": "tumor-pack-universal@1",
+    "metadados": {
+      "revisao_documental": "2026-10-17-nccn-final-documental",
+      "versao": "1.3.0",
+      "data": "2026-10-17",
+      "autor_extracao": "Codex",
+      "estado": "RASCUNHO",
+      "aprovacao_clinica": null,
+      "escopo": "CAMADA_ADITIVA_UNIVERSAL_E_DELTA_DOCUMENTAL_NCCN",
+      "base_legada": {
+        "arquivo": "corpus/6-pack-tumor/prostata/pack-prostata.v2.RASCUNHO.json",
+        "commit": "2c0991d",
+        "versao": "2.0.0",
+        "sha256_bytes": "dc410e02910d8f306ad022100f63b002359c021376499c3d37c09b2929230b26",
+        "sha256_semantico": "0e1dba7460eada7a430f1b214adb9dd7d1c62c6eb5dca6aa56d2b11512686a95"
+      },
+      "nota_versao": "Camada universal 1.3.0; header identifica o legado preservado. Fechamento documental, sem aprovação clínica ou ativação.",
+      "integra_runtime": false,
+      "gera_conduta": false,
+      "historico_revisoes": [
+        {
+          "revisao_documental": "2026-10-17-nccn-delta-1",
+          "versao": "1.0.0",
+          "data": "2026-10-17",
+          "autor_extracao": "Codex",
+          "estado": "RASCUNHO",
+          "aprovacao_clinica": null,
+          "escopo": "CAMADA_ADITIVA_UNIVERSAL_E_DELTA_DOCUMENTAL_NCCN",
+          "base_legada": {
+            "arquivo": "corpus/6-pack-tumor/prostata/pack-prostata.v2.RASCUNHO.json",
+            "commit": "2c0991d",
+            "versao": "2.0.0",
+            "sha256_bytes": "dc410e02910d8f306ad022100f63b002359c021376499c3d37c09b2929230b26",
+            "sha256_semantico": "0e1dba7460eada7a430f1b214adb9dd7d1c62c6eb5dca6aa56d2b11512686a95"
+          },
+          "nota_versao": "header.versao identifica o legado intacto; esta extensão possui revisão própria. Não reutilizar aprovação/hashes antigos para o conjunto alterado.",
+          "integra_runtime": false,
+          "gera_conduta": false
+        },
+        {
+          "revisao_documental": "2026-10-17-nccn-delta-2-correcao-auditoria",
+          "versao": "1.1.0",
+          "data": "2026-10-17",
+          "autor_extracao": "Codex",
+          "estado": "RASCUNHO",
+          "aprovacao_clinica": null,
+          "escopo": "CAMADA_ADITIVA_UNIVERSAL_E_DELTA_DOCUMENTAL_NCCN",
+          "base_legada": {
+            "arquivo": "corpus/6-pack-tumor/prostata/pack-prostata.v2.RASCUNHO.json",
+            "commit": "2c0991d",
+            "versao": "2.0.0",
+            "sha256_bytes": "dc410e02910d8f306ad022100f63b002359c021376499c3d37c09b2929230b26",
+            "sha256_semantico": "0e1dba7460eada7a430f1b214adb9dd7d1c62c6eb5dca6aa56d2b11512686a95"
+          },
+          "nota_versao": "Versão desta camada:1.1.0; revisão documental:2026-10-17-nccn-delta-2-correcao-auditoria. header.versao continua referindo-se ao legado intacto. Nenhuma aprovação é transferida.",
+          "integra_runtime": false,
+          "gera_conduta": false,
+          "historico_revisoes": [
+            {
+              "revisao_documental": "2026-10-17-nccn-delta-1",
+              "versao": "1.0.0",
+              "data": "2026-10-17",
+              "autor_extracao": "Codex",
+              "estado": "RASCUNHO",
+              "aprovacao_clinica": null,
+              "escopo": "CAMADA_ADITIVA_UNIVERSAL_E_DELTA_DOCUMENTAL_NCCN",
+              "base_legada": {
+                "arquivo": "corpus/6-pack-tumor/prostata/pack-prostata.v2.RASCUNHO.json",
+                "commit": "2c0991d",
+                "versao": "2.0.0",
+                "sha256_bytes": "dc410e02910d8f306ad022100f63b002359c021376499c3d37c09b2929230b26",
+                "sha256_semantico": "0e1dba7460eada7a430f1b214adb9dd7d1c62c6eb5dca6aa56d2b11512686a95"
+              },
+              "nota_versao": "header.versao identifica o legado intacto; esta extensão possui revisão própria. Não reutilizar aprovação/hashes antigos para o conjunto alterado.",
+              "integra_runtime": false,
+              "gera_conduta": false
+            }
+          ]
+        }
+      ]
+    },
+    "identidade_ref": "/identidade",
+    "dominios": [
+      {
+        "dominio_id": 1,
+        "nome": "Diagnóstico e patologia",
+        "itens_legados_refs": [
+          "legado-723ae719572716f0",
+          "legado-7f3bd841ba0e2789",
+          "legado-bab2954ddec2b072",
+          "legado-3ee327677fe91c4c",
+          "legado-1920db97ac2f5268",
+          "legado-0e3d2d0b4e1b56be",
+          "legado-4deb5adc63552df3"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 2,
+        "nome": "Estadiamento, extensão e risco",
+        "itens_legados_refs": [
+          "legado-14b70ed38bf74741",
+          "legado-539db3bdadd7bf28",
+          "legado-0db7df1d12ca381f",
+          "legado-c5f4616f5cfab7ad",
+          "legado-f0c132665dbd4272",
+          "legado-9391147ac7690590",
+          "legado-19bfe2cb29c573ce",
+          "legado-99cbd5497a220cd4",
+          "legado-424bbd88d7fe2731",
+          "legado-0ddbd62a6ad73fff",
+          "legado-eaa255d41e1d9668",
+          "legado-c6b575e41f298ee6",
+          "legado-1af9f866034804ad",
+          "legado-cc3fe790092e6bfa"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 3,
+        "nome": "Biomarcadores e farmacogenética",
+        "itens_legados_refs": [
+          "legado-457cf8a165a5466e",
+          "legado-40cda1b6b2e8b5f1",
+          "legado-9076c18b8fcddba7",
+          "legado-6cd63bac76a31385",
+          "legado-b3d48d06f0dd0cd4",
+          "legado-bbbf010334289540",
+          "legado-0a8367fbda1e75ef",
+          "legado-e16de9c16fba5792",
+          "legado-d8ef8afb7bc2c3f4",
+          "legado-091428ee71c8e437"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 4,
+        "nome": "Exames e requisitos documentais",
+        "itens_legados_refs": [
+          "legado-7e3bd8aad45464d3",
+          "legado-ea1ddc8553afa944",
+          "legado-d0f412a264889459",
+          "legado-2c9a3d3b0191b673",
+          "legado-5ac2258075f96ef3",
+          "legado-ba2c02f8119e219f",
+          "legado-fd571584062d8618",
+          "legado-5fce012a140b4695",
+          "legado-bba6ec37755f81e5",
+          "legado-d79f5c11634cf65c",
+          "legado-83d18c28bf47f560",
+          "legado-4b04b3707a93db88",
+          "legado-7a51e15f21aa82e0",
+          "legado-1550cb3dcd8e42a2",
+          "legado-26464b7eb5ec1bb0",
+          "legado-8edbe9756132a755",
+          "legado-17387f19bf71d15a",
+          "legado-b382acc7256b95b1",
+          "legado-8877853ace3414f7",
+          "legado-6ae8e001fb76776d",
+          "legado-8b4726e1bf8fcc34",
+          "legado-2a6520ed95e0a27b",
+          "legado-9242342940c29fcb",
+          "legado-64f7c4fe9eb0ae55",
+          "legado-721c8469ebf17ac6",
+          "legado-95bb8f6d659b0920",
+          "legado-cadb3a27ed6f2d6c",
+          "legado-55365d63f5f092c6",
+          "legado-7bb1c36583e84b21",
+          "legado-ab06ee86cdef8912",
+          "legado-19feafd8f0ccbb4c",
+          "legado-08ef6f73703afa35",
+          "legado-3ab6ac7e48c62401",
+          "legado-f3a45b319d732349",
+          "legado-951c6a6498553e1f",
+          "legado-aaa282862c649168",
+          "legado-f97aa814ca10d8df",
+          "legado-8179ee2eeb894e22",
+          "legado-3128dc4e8f4c7f1c",
+          "legado-e7397a88e3e4750d",
+          "legado-067751a16905ae18",
+          "legado-4f9d81f76550a3d5",
+          "legado-293f58008e3bf411",
+          "legado-fceafa563b25f655",
+          "legado-cc1326b536888c8c",
+          "legado-4ccd233d68c25374",
+          "legado-d3283e08fbb87cd0",
+          "legado-23635d261776b0bc",
+          "legado-07c14a7b65aaedc3",
+          "legado-fa7fc85e6187c7e0",
+          "legado-8af2b109220f0adb",
+          "legado-69d41a155a349620",
+          "legado-8d5368952deb861e",
+          "legado-7c7abed35d5cf12a",
+          "legado-df48ef2ce7f01b9b",
+          "legado-c6b7e9b5d53d980c"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 5,
+        "nome": "Avaliação antes do tratamento",
+        "itens_legados_refs": [],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "NAO_ESTRUTURADO_NESTA_RODADA",
+        "observacao": "Ausência de referências não significa não aplicabilidade; textos dentro de outros itens permanecem preservados."
+      },
+      {
+        "dominio_id": 6,
+        "nome": "Tratamento e protocolos",
+        "itens_legados_refs": [
+          "legado-82079d8bac9fea61",
+          "legado-c35952bd72ac6f3a",
+          "legado-663535b68a71b22b",
+          "legado-5c321ffba2353e38",
+          "legado-609eb4a5af32be44",
+          "legado-f0deeb937471e56c",
+          "legado-b509bc52186ae1c7",
+          "legado-0abbd0e1f5bceb04",
+          "legado-2497d01df85a1810",
+          "legado-2a8db3f11aad7ea4",
+          "legado-536f30488818d9bb",
+          "legado-a0b75ae20faddace",
+          "legado-85db49d1348201af",
+          "legado-9fa8f895bc9cae45",
+          "legado-2904a28f94fee2fb",
+          "legado-66f7c9947b654226",
+          "legado-cc9ef47ddab4ba89",
+          "legado-5093266db55fcaf7",
+          "legado-5b016084ef850935",
+          "legado-6667a1e47c13a227",
+          "legado-3ee9d1749ad92ada",
+          "legado-5a49c177868dafab",
+          "legado-13823f9f117e325a",
+          "legado-70c54bad12ce78c0",
+          "legado-759a08dbd1e1484b",
+          "legado-04f079771036ab9e",
+          "legado-7551197e9a008ee0",
+          "legado-c8dea7dc0e702a66",
+          "legado-bfc8c251a8b78a3e",
+          "legado-1a7cc77af8d9c2c6",
+          "legado-050a126f81ab937c",
+          "legado-53a8b83279b59e04",
+          "legado-47e844cfc8a13a5e",
+          "legado-3e3ebe25348432c2",
+          "legado-85053069ee952e36",
+          "legado-2a14cfa84eeacfd6",
+          "legado-370fa9f80958f445",
+          "legado-32c9c9780fd63e2d",
+          "legado-2b8dd9ebeb7705fe",
+          "legado-ed45042a38814b4e",
+          "legado-013473111b99a012",
+          "legado-676cc16765bad5c4",
+          "legado-d959bb8826d0ca3b",
+          "legado-70625bd95c646602",
+          "legado-e6b20f9ef0b90d24",
+          "legado-83b3190368ddfde1",
+          "legado-811552986cea5cc2",
+          "legado-5bf6a6b1267218f0",
+          "legado-d6f5ac3c3c827ac9",
+          "legado-9a2c0f488a79c209",
+          "legado-3367d41c252df02c",
+          "legado-877a877eeb178196",
+          "legado-83c2343c4966a4fc",
+          "legado-427895b5e0b47bc1",
+          "legado-1df6f0cf9fdde198",
+          "legado-5837b18d3b8639e5",
+          "legado-d039a9c87de36dbc",
+          "legado-1e67bd8efd7c9b93",
+          "legado-8cea408616e4040d",
+          "legado-b31ba957b6debeb0",
+          "legado-6c9818b88480f96f",
+          "legado-293f261d2159e9c7"
+        ],
+        "itens_nccn_refs": [
+          "nccn-20261017-prostata-rucaparibe",
+          "nccn-20261017-prostata-niraparibe-abiraterona",
+          "nccn-20261017-prostata-capivasertibe-abiraterona",
+          "nccn-20261017-prostata-estratificacao-mcspc"
+        ],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 7,
+        "nome": "Segurança, interações e toxicidades",
+        "itens_legados_refs": [
+          "legado-64ba52511b5a2d96",
+          "legado-205aef03dbb1fcf7",
+          "legado-b61d07a00771a328",
+          "legado-375a8c46c07cc248",
+          "legado-81314c6e51d81839",
+          "legado-2f5fd4035949ba08",
+          "legado-1f5122a688421194",
+          "legado-5e835075d4c84f01",
+          "legado-19fad6a62acc100d",
+          "legado-22b57bccdaf89077",
+          "legado-a6366ff1b8e130e9",
+          "legado-a8ee669ea635d549",
+          "legado-b7f4a9646cc149f5",
+          "legado-e0b8e6643f81f3c5",
+          "legado-7c1d730b331732cf",
+          "legado-4bd6411ba0f97093",
+          "legado-a8e19fbbc48b1c6a",
+          "legado-85b82e2611c0551e",
+          "legado-0ecf8c7fb43c73c3"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 8,
+        "nome": "Suporte e cuidados",
+        "itens_legados_refs": [
+          "legado-b0d23991765ad419",
+          "legado-a3488115f7dd9299",
+          "legado-ffdadb66af67e06b",
+          "legado-fa741b57b1413112"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 9,
+        "nome": "Avaliação de resposta e estado da doença",
+        "itens_legados_refs": [],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "NAO_ESTRUTURADO_NESTA_RODADA",
+        "observacao": "Ausência de referências não significa não aplicabilidade; textos dentro de outros itens permanecem preservados."
+      },
+      {
+        "dominio_id": 10,
+        "nome": "Seguimento e sobrevivência",
+        "itens_legados_refs": [
+          "legado-61f4d2c80106e2a7",
+          "legado-a7e2c9acaa7085c6",
+          "legado-aac15b2042ebab53",
+          "legado-458a8666aaae27d5",
+          "legado-3fc4cf7144fb23b9",
+          "legado-20f7307086e73eb0",
+          "legado-303a8cfecd5a65a9",
+          "legado-7719c8e8ba54fcd3",
+          "legado-c3dd2877f8bd758b"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 11,
+        "nome": "Encaminhamentos e atuação multiprofissional",
+        "itens_legados_refs": [
+          "legado-d54a15cbb841511b",
+          "legado-685c8cf172414883",
+          "legado-46f5f235ff433010",
+          "legado-0e97a18468ae03ca",
+          "legado-91f0581245ce6736"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 12,
+        "nome": "Documentos e acesso assistencial",
+        "itens_legados_refs": [
+          "legado-f1be0bc240fdcb6e",
+          "legado-77f7f1412350909b",
+          "legado-93d60b7330a4b52b",
+          "legado-d62cf1f5c978a4b0",
+          "legado-af07b6d35c78fbb1"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      }
+    ],
+    "indice_itens_legados": [
+      {
+        "item_id": "legado-723ae719572716f0",
+        "origem_json_pointer": "/diagnostico/patologico/obtencao/0",
+        "sha256_conteudo": "04c1cc2f48de93b8997bee4404781dddbf23c7a3841a18c0281e925630945c40",
+        "nome": "/diagnostico/patologico/obtencao/0",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/obtencao/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-7f3bd841ba0e2789",
+        "origem_json_pointer": "/diagnostico/patologico/obtencao/1",
+        "sha256_conteudo": "60c06106e65aebc281b6f3250bf742c8d24f3451cd1e1315a6f0560a382e28fd",
+        "nome": "/diagnostico/patologico/obtencao/1",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/obtencao/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-bab2954ddec2b072",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/0",
+        "sha256_conteudo": "7fc36720648b452f4606a9ea2c99bd7a5a153f7d0560e39074cf1450dfaa6993",
+        "nome": "Escore de Gleason (padrão primário + secundário) e grupo ISUP 1-5",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-3ee327677fe91c4c",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/1",
+        "sha256_conteudo": "01445add338ee8966a19fbedac6cc67728e9db32b542c728215d7e2dc30399ba",
+        "nome": "Número de fragmentos positivos e % de comprometimento por fragmento",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-1920db97ac2f5268",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/2",
+        "sha256_conteudo": "c2454de8a63c4f6dab9a3269ec68386e7370918e4f0977fd719178b88ab2c020",
+        "nome": "Presença de histologia intraductal/ductal",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-0e3d2d0b4e1b56be",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/3",
+        "sha256_conteudo": "33f0d85852d12c2c4638ce3ce042e703da48f67e0224578b17e3a3dc6205f29a",
+        "nome": "Variante agressiva (anaplásico/pequenas células) quando presente",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-4deb5adc63552df3",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/4",
+        "sha256_conteudo": "ced6598fe396cacd1f459fae9e95ba19bf9d2256b7d19c408ff09d317935a902",
+        "nome": "Na peça: pT, margens, invasão de vesículas seminais, linfonodos (pN)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-14b70ed38bf74741",
+        "origem_json_pointer": "/estadiamento/sistema",
+        "sha256_conteudo": "d7dab6e16ae3278a0513466816530a61b1fcf4548c0e925655782b9ee09cf5ce",
+        "nome": "AJCC",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-539db3bdadd7bf28",
+        "origem_json_pointer": "/estadiamento/edicao",
+        "sha256_conteudo": "0a6aeab4f299a50981f99359aa85e0ef89e35dd71222dfb9499e06217995bd25",
+        "nome": "8ª edição",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-0db7df1d12ca381f",
+        "origem_json_pointer": "/estadiamento/gruposConduta/0",
+        "sha256_conteudo": "9242b1bd1b0692a8d073478c2e796b42d487a52bcf93d0909cf2d943a9d5fda9",
+        "nome": "/estadiamento/gruposConduta/0",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-c5f4616f5cfab7ad",
+        "origem_json_pointer": "/estadiamento/gruposConduta/1",
+        "sha256_conteudo": "d8487ca2ba91018c75e098404f2ada004314d76682b6739000335176b6d7f735",
+        "nome": "/estadiamento/gruposConduta/1",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-f0c132665dbd4272",
+        "origem_json_pointer": "/estadiamento/gruposConduta/2",
+        "sha256_conteudo": "cab6a94c39bc68dca46b54bb5a69425629da9f7b77e30c8bd14cd17f4cd7739b",
+        "nome": "/estadiamento/gruposConduta/2",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-9391147ac7690590",
+        "origem_json_pointer": "/estadiamento/gruposConduta/3",
+        "sha256_conteudo": "f36a02c6db7f63443ae5f2513a44d4fc53cae04253c2b68d204de5ea43b85c4b",
+        "nome": "/estadiamento/gruposConduta/3",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-19bfe2cb29c573ce",
+        "origem_json_pointer": "/estadiamento/gruposConduta/4",
+        "sha256_conteudo": "c966d4beec833ea77169eec093f5ddb36abc84ead9ba9fd38d954c363fc7fac3",
+        "nome": "/estadiamento/gruposConduta/4",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-99cbd5497a220cd4",
+        "origem_json_pointer": "/estadiamento/gruposConduta/5",
+        "sha256_conteudo": "a1da81a690bd6c5f4f0b4cdf4981a53e66541145284eba752b0f0448362ecf04",
+        "nome": "/estadiamento/gruposConduta/5",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/5/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-424bbd88d7fe2731",
+        "origem_json_pointer": "/estadiamento/gruposConduta/6",
+        "sha256_conteudo": "14d2d49ea9e031b969d80d5f90878390db75ae1528a00680823eef992a90e8c1",
+        "nome": "/estadiamento/gruposConduta/6",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/6/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-0ddbd62a6ad73fff",
+        "origem_json_pointer": "/estadiamento/gruposConduta/7",
+        "sha256_conteudo": "446e4a28ac0b1bc7de52977154017b9db5fd1c3686323e8af7c8adc2bbf687ba",
+        "nome": "/estadiamento/gruposConduta/7",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/7/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-eaa255d41e1d9668",
+        "origem_json_pointer": "/estadiamento/gruposConduta/8",
+        "sha256_conteudo": "4ed9cf867b39c94b0c7dfa8a1cae86cf454f1b07cdbb0022b9151c75f4d40a23",
+        "nome": "/estadiamento/gruposConduta/8",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/8/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-c6b575e41f298ee6",
+        "origem_json_pointer": "/estadiamento/gruposConduta/9",
+        "sha256_conteudo": "8dbf2420452d428d73117a1ae6860d33fe901af9255ab1d1399657e39756b65f",
+        "nome": "/estadiamento/gruposConduta/9",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/9/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-1af9f866034804ad",
+        "origem_json_pointer": "/estadiamento/gruposConduta/10",
+        "sha256_conteudo": "7758d38cc01a7bf2bdb706c92b089434f7597eff82f3b394e8b87fef5deb0be4",
+        "nome": "/estadiamento/gruposConduta/10",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/10/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-cc3fe790092e6bfa",
+        "origem_json_pointer": "/estadiamento/marcadores",
+        "sha256_conteudo": "9f8685af0cb32e74c46b43a651d55a8575a0b5d7e69a9f492ddfdefda79e54ec",
+        "nome": "/estadiamento/marcadores",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-457cf8a165a5466e",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/0",
+        "sha256_conteudo": "2808c92cc79cb1a95c731bcddd4c8eb2f0be7e64990f4a3b74457f42d50d8dd9",
+        "nome": "Painel germinativo (NGS)",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-40cda1b6b2e8b5f1",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/1",
+        "sha256_conteudo": "9b771ae75da739e7f4b97b310b14b63294c91a519f297ba9e56e42bcac2f2dd2",
+        "nome": "NGS tumoral/germinativo HRR",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-9076c18b8fcddba7",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/2",
+        "sha256_conteudo": "fe8bacfaf2b1266c6cefdb4b5a43f14c193ef2042c7310c4732565cb154ec4dd",
+        "nome": "doença avançada resistente à castração",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-6cd63bac76a31385",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/3",
+        "sha256_conteudo": "90deb958b25b114033c5b7cdf7d45aff5b038ec8ac5a62bb53f028fc49fbf088",
+        "nome": "TMB por NGS",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b3d48d06f0dd0cd4",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/4",
+        "sha256_conteudo": "776598431081dc246fcec6d7876b0ac71b66b8f16112c77ac4280f8819d2b36c",
+        "nome": "mCRPC candidato a Lutécio-PSMA",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-bbbf010334289540",
+        "origem_json_pointer": "/tratamento/biomarcadorTratamento/0",
+        "sha256_conteudo": "583e06ec1130aaece2d24695c7fe278beef3890b5594e1e26811c7c7dfb69fd5",
+        "nome": "/tratamento/biomarcadorTratamento/0",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/biomarcadorTratamento/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-0a8367fbda1e75ef",
+        "origem_json_pointer": "/tratamento/biomarcadorTratamento/1",
+        "sha256_conteudo": "f2ad2b25018f902e95f5f18d74ec0fdbf4ae37f195129ae756c6b935acbc3207",
+        "nome": "/tratamento/biomarcadorTratamento/1",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/biomarcadorTratamento/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e16de9c16fba5792",
+        "origem_json_pointer": "/tratamento/biomarcadorTratamento/2",
+        "sha256_conteudo": "6770811c695a8dd912fc4755d17a03d9b90ea66688098eee721d678280a632e5",
+        "nome": "/tratamento/biomarcadorTratamento/2",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/biomarcadorTratamento/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d8ef8afb7bc2c3f4",
+        "origem_json_pointer": "/tratamento/biomarcadorTratamento/3",
+        "sha256_conteudo": "8926133dc69b1d80dcfc1086685ad1fb4d0d815b2c4802dc17b5c8d43f2d3b16",
+        "nome": "/tratamento/biomarcadorTratamento/3",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/biomarcadorTratamento/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-091428ee71c8e437",
+        "origem_json_pointer": "/tratamento/biomarcadorTratamento/4",
+        "sha256_conteudo": "2ed21164c1b438651ad3b48d3522250332b584f4315c02303ed1eac8fa4b66c9",
+        "nome": "/tratamento/biomarcadorTratamento/4",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/biomarcadorTratamento/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-7e3bd8aad45464d3",
+        "origem_json_pointer": "/diagnostico/imagem/0",
+        "sha256_conteudo": "af2288cf48922897e7e865308ae5a27691d01856a9cd55610a8440e54409a2f1",
+        "nome": "RM multiparamétrica de próstata",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ea1ddc8553afa944",
+        "origem_json_pointer": "/diagnostico/imagem/1",
+        "sha256_conteudo": "c926498d2226dfc8606b057aa4a735c971f1043b6e5f64e183c942f918d2c7d5",
+        "nome": "USG transretal (guia de biópsia)",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d0f412a264889459",
+        "origem_json_pointer": "/estadiamento/exames/0",
+        "sha256_conteudo": "c5e14def07b29512a36b1ae15168c6e36b12bf1c6c3b92bdafbff6b30ac525e1",
+        "nome": "Hemograma",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-2c9a3d3b0191b673",
+        "origem_json_pointer": "/estadiamento/exames/1",
+        "sha256_conteudo": "6135646769ae68a5787676420dbeb3964439af34e190469a712f8a2444249446",
+        "nome": "Bilirrubinas",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-5ac2258075f96ef3",
+        "origem_json_pointer": "/estadiamento/exames/2",
+        "sha256_conteudo": "e5c3c46a8f084550f321b9448d8f9ca8346ba882d8a228d71dd47231f376dd56",
+        "nome": "Albumina (proteínas totais e frações)",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ba2c02f8119e219f",
+        "origem_json_pointer": "/estadiamento/exames/3",
+        "sha256_conteudo": "f1dbfccb7acc8d1b40d28be2981788e9f3627c2d9da6f464c8ceea28bf3404e6",
+        "nome": "Coagulograma — TP",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-fd571584062d8618",
+        "origem_json_pointer": "/estadiamento/exames/4",
+        "sha256_conteudo": "b67c2d292e7e34f3f0c5b7a9a8584fe1e1b078c8a587d7ebe03d28f7a0765239",
+        "nome": "Coagulograma — TTPa",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-5fce012a140b4695",
+        "origem_json_pointer": "/estadiamento/exames/5",
+        "sha256_conteudo": "168a5d78ab0b1b4573b4b539cc46cbcb15d877ebf471c4fbd4d837c62098b664",
+        "nome": "AST",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/5/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-bba6ec37755f81e5",
+        "origem_json_pointer": "/estadiamento/exames/6",
+        "sha256_conteudo": "50b520d68941da28e99d99e9b2f79ad45ad1a210de4cb802703c303cf3b2341d",
+        "nome": "ALT",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/6/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d79f5c11634cf65c",
+        "origem_json_pointer": "/estadiamento/exames/7",
+        "sha256_conteudo": "5da6c03ea962b02316e1fbe10ce3aa8a3c5ae6eadb5f462e194651be494dc8cb",
+        "nome": "Função renal — creatinina",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/7/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-83d18c28bf47f560",
+        "origem_json_pointer": "/estadiamento/exames/8",
+        "sha256_conteudo": "5605035fcee8b2f2c17561d7a37fad27acf3086a4b73f8e864be258a90ae4f21",
+        "nome": "Função renal — ureia",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/8/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-4b04b3707a93db88",
+        "origem_json_pointer": "/estadiamento/exames/9",
+        "sha256_conteudo": "d2b15df6a53204d36334b49e791d7116358604c024c12c9264f649b3b326ebfd",
+        "nome": "Fosfatase alcalina",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/9/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-7a51e15f21aa82e0",
+        "origem_json_pointer": "/estadiamento/exames/10",
+        "sha256_conteudo": "b39fc96567acc76a306916f32fce2bbe5da4764fa7e1b00d6cc6fd507ae7f271",
+        "nome": "PSA",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/10/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-1550cb3dcd8e42a2",
+        "origem_json_pointer": "/estadiamento/exames/11",
+        "sha256_conteudo": "52426681158cde6dfc5195b64fac13451f4bfff1ab9e2306b4eca6c6759414e4",
+        "nome": "Testosterona",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/11/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-26464b7eb5ec1bb0",
+        "origem_json_pointer": "/estadiamento/exames/12",
+        "sha256_conteudo": "a3399ae81268bef2b0f1cf4a280b6b868479891bc7aa746705f0bda088863f97",
+        "nome": "RM multiparamétrica da próstata / RM de pelve",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/12/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8edbe9756132a755",
+        "origem_json_pointer": "/estadiamento/exames/13",
+        "sha256_conteudo": "1f73d7776b2a7f96bff980afb9f9704002aef53203370d776ebff299256759af",
+        "nome": "Cintilografia óssea (Tc-99m)",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/13/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-17387f19bf71d15a",
+        "origem_json_pointer": "/estadiamento/exames/14",
+        "sha256_conteudo": "8f23ba519132d9dd3fc3f24c5dc841bb7c4ab6c44a531f9176d6da8031b0a4e8",
+        "nome": "TC de abdome",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/14/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b382acc7256b95b1",
+        "origem_json_pointer": "/estadiamento/exames/15",
+        "sha256_conteudo": "9c0a38fadf06ead5d40f547639d9eef1242563d9438971b26348cdc1ff51156b",
+        "nome": "TC de pelve",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/15/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8877853ace3414f7",
+        "origem_json_pointer": "/estadiamento/exames/16",
+        "sha256_conteudo": "43048f4a499fb594fcf0c4d2891b0d395ec1898f4114eb6e512f5f20b37559f8",
+        "nome": "TC de tórax",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/16/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-6ae8e001fb76776d",
+        "origem_json_pointer": "/estadiamento/exames/17",
+        "sha256_conteudo": "b43f91a69eabdfc9e99a25c257486203ca49b09f2b537d94993de2c868de1466",
+        "nome": "Contraste iodado para TC",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/17/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8b4726e1bf8fcc34",
+        "origem_json_pointer": "/estadiamento/exames/18",
+        "sha256_conteudo": "bafcf7db13b76107b3ce2a83d7495effe0262933eef0818989836c5f2fc6b929",
+        "nome": "RX de tórax",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/18/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-2a6520ed95e0a27b",
+        "origem_json_pointer": "/estadiamento/exames/19",
+        "sha256_conteudo": "0cd69fdf1818cae6a714fbf4029fc9e4e6b6a0c9cb6807486d4d8d9db7642966",
+        "nome": "PET/PSMA (sem código SUS)",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/19/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-9242342940c29fcb",
+        "origem_json_pointer": "/estadiamento/exames/20",
+        "sha256_conteudo": "18d0c85f4059f56c95b758d082673157c47bf4906e020abc8e2db0788ade2886",
+        "nome": "Densitometria óssea",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/20/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-64f7c4fe9eb0ae55",
+        "origem_json_pointer": "/estadiamento/exames/21",
+        "sha256_conteudo": "8358eefc2aae2ebd22f9404f17466b8fa7f96e104e302fddc1d285144e83b8d7",
+        "nome": "TC ou RM de coluna (direcionada a sintomas)",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/21/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-721c8469ebf17ac6",
+        "origem_json_pointer": "/estadiamento/exames/22",
+        "sha256_conteudo": "c8e1c6e27da0956a3fd037dda8a47f8c62b54bc8e56f1cf37e0805c645962e38",
+        "nome": "RM ou TC de pelve na recidiva bioquímica",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/22/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-95bb8f6d659b0920",
+        "origem_json_pointer": "/ligacoes/exames/0",
+        "sha256_conteudo": "b8bdf5b0fb4ec5cdee5b0f94128db17756947cd974ad17c9f85fbac5d472faec",
+        "nome": "RM_PROSTATA_MP",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-cadb3a27ed6f2d6c",
+        "origem_json_pointer": "/ligacoes/exames/1",
+        "sha256_conteudo": "6fb272df244b6a122fbe6161bb2be847c29cc63cd4cb406a366a4351c963db90",
+        "nome": "USG_PROSTATA_TRANSRETAL",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-55365d63f5f092c6",
+        "origem_json_pointer": "/ligacoes/exames/2",
+        "sha256_conteudo": "09c0bc2a57301c5e7f5c06c8c51c9dec764db31a5d9531aa98aac18b5d8251f3",
+        "nome": "BIOPSIA_PERCUTANEA_GUIADA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-7bb1c36583e84b21",
+        "origem_json_pointer": "/ligacoes/exames/3",
+        "sha256_conteudo": "00cac656db90cece9385c8c98f658accb5b7c1553202e6be466fa96d39aaf2b9",
+        "nome": "ANATOMOPATOLOGICO",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ab06ee86cdef8912",
+        "origem_json_pointer": "/ligacoes/exames/4",
+        "sha256_conteudo": "99a98b9d268e78a05608d792d2fad81f4e16f25b8a4f95da9f7decd91a23a0dc",
+        "nome": "IMUNOHISTOQUIMICA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-19feafd8f0ccbb4c",
+        "origem_json_pointer": "/ligacoes/exames/5",
+        "sha256_conteudo": "f2f73f38e09342caf1b4f0a61d11f0b651cb02b4872e76493961e8c03c31d8c6",
+        "nome": "PET_PSMA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-08ef6f73703afa35",
+        "origem_json_pointer": "/ligacoes/exames/6",
+        "sha256_conteudo": "bf5e386b5411abfa4e5e12d1229575a6c7ec73dfaec6347d8959b27aac19aa86",
+        "nome": "HEMOGRAMA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-3ab6ac7e48c62401",
+        "origem_json_pointer": "/ligacoes/exames/7",
+        "sha256_conteudo": "5d85231af84b07a3159dc7b06efe241505fe0d9fa9e3cfc3ced2da4d9650052b",
+        "nome": "BILIRRUBINA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-f3a45b319d732349",
+        "origem_json_pointer": "/ligacoes/exames/8",
+        "sha256_conteudo": "4e4249e6c66f8d31a96fd1f2825bad6dc8ce6c4a3157926add98415b5b9ad908",
+        "nome": "PROTEINAS_TOTAIS_FRACOES",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-951c6a6498553e1f",
+        "origem_json_pointer": "/ligacoes/exames/9",
+        "sha256_conteudo": "fe9721bae5d09a49ec48414ec6632d6d21cffbd006f1d9daa5cf23186764c46c",
+        "nome": "TAP",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-aaa282862c649168",
+        "origem_json_pointer": "/ligacoes/exames/10",
+        "sha256_conteudo": "6809cf5158cb20fdcdc6b11a5872d44a626a16baaaa89eafeb7ecd4810b5eb26",
+        "nome": "TTPA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-f97aa814ca10d8df",
+        "origem_json_pointer": "/ligacoes/exames/11",
+        "sha256_conteudo": "1c165f5403a7b90b63dbd46f6855431c8c1ada4519299d6c123bd630df5c529d",
+        "nome": "TGO",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8179ee2eeb894e22",
+        "origem_json_pointer": "/ligacoes/exames/12",
+        "sha256_conteudo": "1739a80ab81e5bbef9460ae5f51087ed284845d8e31e606c2b564c7268c2cd15",
+        "nome": "TGP",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-3128dc4e8f4c7f1c",
+        "origem_json_pointer": "/ligacoes/exames/13",
+        "sha256_conteudo": "58d8c3bbd157d0d9be5bf551553eb11e7e0c313ef1db12f06d7863faa42fbbfb",
+        "nome": "CREATININA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e7397a88e3e4750d",
+        "origem_json_pointer": "/ligacoes/exames/14",
+        "sha256_conteudo": "a133b6c797048051de63b5b1f134afc70bc5a1444e49ac2e2721bd762204440d",
+        "nome": "UREIA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-067751a16905ae18",
+        "origem_json_pointer": "/ligacoes/exames/15",
+        "sha256_conteudo": "ad1a3ef653b581c9aa616ab3bbab16ad7edca4cf6832cfc168f32389fc7cf658",
+        "nome": "FOSFATASE_ALCALINA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-4f9d81f76550a3d5",
+        "origem_json_pointer": "/ligacoes/exames/16",
+        "sha256_conteudo": "1d0dbb3b8d860a3d9385f317044cebc118d951cd896c95cbe29ccdb4bbb2b1fe",
+        "nome": "PSA_TOTAL",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-293f58008e3bf411",
+        "origem_json_pointer": "/ligacoes/exames/17",
+        "sha256_conteudo": "32c416d97709b275292e4188325609ec89e284dc5892b17376479d7ce5178ead",
+        "nome": "TESTOSTERONA_TOTAL",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-fceafa563b25f655",
+        "origem_json_pointer": "/ligacoes/exames/18",
+        "sha256_conteudo": "6256d23e08fe42e0c5f18c2d537248d451b59b2ecdf935ab864d69cd8131c89d",
+        "nome": "CINTILOGRAFIA_OSSEA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-cc1326b536888c8c",
+        "origem_json_pointer": "/ligacoes/exames/19",
+        "sha256_conteudo": "eea68f82f02592e6262514a154ff52ae85284765c1f48ab3b07cabb92ead209f",
+        "nome": "TC_ABDOMEN_SUPERIOR",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-4ccd233d68c25374",
+        "origem_json_pointer": "/ligacoes/exames/20",
+        "sha256_conteudo": "5beb801ddc054db97d463dd8b682c9128772e22b7938b6d4c645af14dc4ddd7a",
+        "nome": "TC_PELVE",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d3283e08fbb87cd0",
+        "origem_json_pointer": "/ligacoes/exames/21",
+        "sha256_conteudo": "147b97b900462813d8c6528cc01d88f8a5102936ee96ee4fb121f8a7b77f60b0",
+        "nome": "TC_TORAX",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-23635d261776b0bc",
+        "origem_json_pointer": "/ligacoes/exames/22",
+        "sha256_conteudo": "ca7a59b500f43d318b5582028a0da32c0a1fd1c16ed90a23e8769872888013db",
+        "nome": "CONTRASTE_TC",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-07c14a7b65aaedc3",
+        "origem_json_pointer": "/ligacoes/exames/23",
+        "sha256_conteudo": "c14ce60ca37c165e4caacee63f3b6f144d8c362ed86614c2583ca390362a034e",
+        "nome": "RX_TORAX_PA_PERFIL",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-fa7fc85e6187c7e0",
+        "origem_json_pointer": "/ligacoes/exames/24",
+        "sha256_conteudo": "ae974cff2b8cea688a4632542e3da503ad4a2f0f9301b96d75afbb2588228c37",
+        "nome": "RM_PELVE",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8af2b109220f0adb",
+        "origem_json_pointer": "/ligacoes/exames/25",
+        "sha256_conteudo": "8a83e6031ecf91c278224de6c13a04bb5bb504727e9646819274382466b12397",
+        "nome": "DENSITOMETRIA_OSSEA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-69d41a155a349620",
+        "origem_json_pointer": "/ligacoes/exames/26",
+        "sha256_conteudo": "b7b3381a2b69a22b650640ee6d805a0098ad3dca2eed3fb2a64b65897512bd8e",
+        "nome": "RM_COLUNA_TORACICA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8d5368952deb861e",
+        "origem_json_pointer": "/ligacoes/exames/27",
+        "sha256_conteudo": "dbefcdbea8b8cfe6f040b0fea4e7a1c426fe4e467ca28e90dfe740279c332d18",
+        "nome": "CEA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-7c7abed35d5cf12a",
+        "origem_json_pointer": "/ligacoes/exames/28",
+        "sha256_conteudo": "1e49060d9ff6bb936a9d5318d51a013d181e7cefe4fae7d0525411391d598361",
+        "nome": "DHL",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-df48ef2ce7f01b9b",
+        "origem_json_pointer": "/ligacoes/exames/29",
+        "sha256_conteudo": "de457898f1982aae4c719e3412f19dbd82d9ff9d9341ee5273e6963b450e42ae",
+        "nome": "CALCIO",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-c6b7e9b5d53d980c",
+        "origem_json_pointer": "/ligacoes/exames/30",
+        "sha256_conteudo": "dd272c2bbb2ad64f3bd78162dfc1c88834a77adb6fd20144dab48aadfbea6a0f",
+        "nome": "VITAMINA_D",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-82079d8bac9fea61",
+        "origem_json_pointer": "/tratamento/cenarios/0",
+        "sha256_conteudo": "565df0f4af05e835b2a748c69c6f2af44074d753981782d49622aae3b0145356",
+        "nome": "localizado muito baixo/baixo risco",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-c35952bd72ac6f3a",
+        "origem_json_pointer": "/tratamento/cenarios/1",
+        "sha256_conteudo": "d17eb478bbe1c1a42530687f5e3b9ad0fb0c3705a4f05989139cdf9b67da236f",
+        "nome": "localizado intermediário",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-663535b68a71b22b",
+        "origem_json_pointer": "/tratamento/cenarios/2",
+        "sha256_conteudo": "b37ccb5d3d719b13dbb7e3efe705e37b6d4172997e7b942ed6b1f41f68cb8fc8",
+        "nome": "localizado alto/muito alto",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-5c321ffba2353e38",
+        "origem_json_pointer": "/tratamento/cenarios/3",
+        "sha256_conteudo": "0115d7b7ccae5d7e2529f4bbfe71438998c0db0af5d047f1e02d98ab6bd507b1",
+        "nome": "recidiva bioquímica",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-609eb4a5af32be44",
+        "origem_json_pointer": "/tratamento/cenarios/4",
+        "sha256_conteudo": "d2d7946db7418b9c043bc498c19d8cd7b0dd089b4636841512fa4de1b4bbf051",
+        "nome": "mHSPC",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-f0deeb937471e56c",
+        "origem_json_pointer": "/tratamento/cenarios/5",
+        "sha256_conteudo": "f8795cdc7b5ccbbd9f666a7b68ddb542adf66378e5fc8780a1fa5b8f80c7044c",
+        "nome": "nmCRPC",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/5/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b509bc52186ae1c7",
+        "origem_json_pointer": "/tratamento/cenarios/6",
+        "sha256_conteudo": "37b4f8c11fe111180197747d8e9759d289b731044ca6d8151208d1e94f951920",
+        "nome": "mCRPC assintomático/pouco sintomático",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/6/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-0abbd0e1f5bceb04",
+        "origem_json_pointer": "/tratamento/cenarios/7",
+        "sha256_conteudo": "f351be45bed820b64320881f85ed9a1ba6c26a4230e1048a892780c2bea8c60d",
+        "nome": "mCRPC sintomático",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/7/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-2497d01df85a1810",
+        "origem_json_pointer": "/tratamento/cenarios/8",
+        "sha256_conteudo": "09586d43e043307c8e7fc52a59b5ebf2042e04d2bc940384d05428786c54e0e0",
+        "nome": "variante histológica agressiva",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/8/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-2a8db3f11aad7ea4",
+        "origem_json_pointer": "/tratamento/protocolos/0",
+        "sha256_conteudo": "3cb42f1fcd210b008f1a9483ad8128b212dfa2aceb710ce466175d2793d1e6c1",
+        "nome": "RT externa + TDA curta (agonista LHRH 4 a 6 meses)",
+        "id_original": "prostata-rt-tda-curta",
+        "fonte_local_ref": "/tratamento/protocolos/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-536f30488818d9bb",
+        "origem_json_pointer": "/tratamento/protocolos/1",
+        "sha256_conteudo": "a37c8d70970c96919ca124c8908ac5dcb8247096022060da85d50994987302ab",
+        "nome": "RT externa + TDA longa (agonista LHRH 18 a 36 meses)",
+        "id_original": "prostata-rt-tda-longa",
+        "fonte_local_ref": "/tratamento/protocolos/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a0b75ae20faddace",
+        "origem_json_pointer": "/tratamento/protocolos/2",
+        "sha256_conteudo": "6ad6d3dd0510902806601f2237ad0b42abe2236bbe9d658fe18e8d67fa5a7071",
+        "nome": "RT + TDA 3 anos + abiraterona 2 anos (STAMPEDE, alto/muito alto selecionado)",
+        "id_original": "prostata-rt-tda-abiraterona-alto-risco",
+        "fonte_local_ref": "/tratamento/protocolos/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-85db49d1348201af",
+        "origem_json_pointer": "/tratamento/protocolos/3",
+        "sha256_conteudo": "e2bb2c43409cb2b76a5289502053849fba82abde68de6afc4261c9aa6e45bf59",
+        "nome": "RT de salvamento + TDA (PSA pré-RT > 0,5 ng/mL)",
+        "id_original": "prostata-rb-rt-salvamento-tda",
+        "fonte_local_ref": "/tratamento/protocolos/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-9fa8f895bc9cae45",
+        "origem_json_pointer": "/tratamento/protocolos/4",
+        "sha256_conteudo": "287fe6612a88c5c0df1316d91a197816d2a0816073fcdc8fc6328db7ae9a0a44",
+        "nome": "TDA + enzalutamida (RB de alto risco, sem resgate local; EMBARK)",
+        "id_original": "prostata-rb-tda-enzalutamida",
+        "fonte_local_ref": "/tratamento/protocolos/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-2904a28f94fee2fb",
+        "origem_json_pointer": "/tratamento/protocolos/5",
+        "sha256_conteudo": "b432a1b8f94baa8f1115358b3f6a91d7f23b9fecf5c365c04514bafcec345d30",
+        "nome": "TDA — leuprorrelina IM trimestral",
+        "id_original": "prostata-tda-leuprorrelina-im",
+        "fonte_local_ref": "/tratamento/protocolos/5/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-66f7c9947b654226",
+        "origem_json_pointer": "/tratamento/protocolos/6",
+        "sha256_conteudo": "75b73f052d7d9301e3d78b5bf0e796fb4839415c7c2f188f490c59eb6b2ba3f8",
+        "nome": "TDA — leuprorrelina IM mensal (7,5 mg a cada 28 dias)",
+        "id_original": "prostata-tda-leuprorrelina-im-28d",
+        "fonte_local_ref": "/tratamento/protocolos/6/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-cc9ef47ddab4ba89",
+        "origem_json_pointer": "/tratamento/protocolos/7",
+        "sha256_conteudo": "90fab0ed514848456ed3be3403e77844f768d278f654d7c53fcd1baa33ecb7f9",
+        "nome": "TDA — leuprorrelina SC trimestral",
+        "id_original": "prostata-tda-leuprorrelina-sc",
+        "fonte_local_ref": "/tratamento/protocolos/7/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-5093266db55fcaf7",
+        "origem_json_pointer": "/tratamento/protocolos/8",
+        "sha256_conteudo": "e910b5248d4ff98d14c697314b1bfc7578eb62b514b1170549d0f1c1f4335e5a",
+        "nome": "TDA — gosserelina 10,8 mg SC a cada 12 semanas",
+        "id_original": "prostata-tda-gosserelina-trimestral",
+        "fonte_local_ref": "/tratamento/protocolos/8/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-5b016084ef850935",
+        "origem_json_pointer": "/tratamento/protocolos/9",
+        "sha256_conteudo": "a294d24dc535ae4470f99786a6fb0d02fd94f2c71e545afd03c7dab1cd897185",
+        "nome": "TDA — gosserelina 3,6 mg SC a cada 28 dias",
+        "id_original": "prostata-tda-gosserelina-mensal",
+        "fonte_local_ref": "/tratamento/protocolos/9/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-6667a1e47c13a227",
+        "origem_json_pointer": "/tratamento/protocolos/10",
+        "sha256_conteudo": "2015d43534cadd186a6df6a28d7be92c1e6c7283a1fc80d1f35690f5924004ae",
+        "nome": "TDA — antagonista LHRH (degarelix)",
+        "id_original": "prostata-tda-degarelix",
+        "fonte_local_ref": "/tratamento/protocolos/10/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-3ee9d1749ad92ada",
+        "origem_json_pointer": "/tratamento/protocolos/11",
+        "sha256_conteudo": "8ace56a672efefff43b51ccf51cd69482daa8a22a75d55b2e9d1895c6eb37e67",
+        "nome": "Bicalutamida anti-flare antes do agonista LHRH",
+        "id_original": "prostata-bicalutamida-antiflare",
+        "fonte_local_ref": "/tratamento/protocolos/11/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-5a49c177868dafab",
+        "origem_json_pointer": "/tratamento/protocolos/12",
+        "sha256_conteudo": "7aebb1e2b9a25e8618a065db54f72abedfab5f4cb82532778dae24f3c256ff95",
+        "nome": "TDA + abiraterona + prednisona",
+        "id_original": "prostata-mhspc-abiraterona-prednisona",
+        "fonte_local_ref": "/tratamento/protocolos/12/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-13823f9f117e325a",
+        "origem_json_pointer": "/tratamento/protocolos/13",
+        "sha256_conteudo": "5abed131231a713086a373db080ee6bdc493f55df86a05e879ae92578fc7a2a6",
+        "nome": "TDA + enzalutamida",
+        "id_original": "prostata-mhspc-enzalutamida",
+        "fonte_local_ref": "/tratamento/protocolos/13/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-70c54bad12ce78c0",
+        "origem_json_pointer": "/tratamento/protocolos/14",
+        "sha256_conteudo": "c631b54de13152361e8cdab61a2cdff9c22beae6cf7bc7b48e2665c8c8411aad",
+        "nome": "TDA + apalutamida",
+        "id_original": "prostata-mhspc-apalutamida",
+        "fonte_local_ref": "/tratamento/protocolos/14/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-759a08dbd1e1484b",
+        "origem_json_pointer": "/tratamento/protocolos/15",
+        "sha256_conteudo": "83b204fb183d7aa94763b9ea7aeaf9f3f27fae6324bd5204dc54bf97752ddcc2",
+        "nome": "TDA + docetaxel + abiraterona + prednisona (triplete; PEACE-1)",
+        "id_original": "prostata-mhspc-docetaxel-abiraterona-prednisona",
+        "fonte_local_ref": "/tratamento/protocolos/15/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-04f079771036ab9e",
+        "origem_json_pointer": "/tratamento/protocolos/16",
+        "sha256_conteudo": "8ce79eb1a122791c05ec9b00dae90c1c5d88536ec82cd7d309b4b1468dded11c",
+        "nome": "TDA + docetaxel + darolutamida (triplete; ARASENS)",
+        "id_original": "prostata-mhspc-docetaxel-darolutamida",
+        "fonte_local_ref": "/tratamento/protocolos/16/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-7551197e9a008ee0",
+        "origem_json_pointer": "/tratamento/protocolos/17",
+        "sha256_conteudo": "afe59a046fa9615219b9c5a23ff229d9150c6ecc4d092c7095ac2c82993475f5",
+        "nome": "TDA + enzalutamida (nmCRPC, PSADT ≤ 10 meses)",
+        "id_original": "prostata-nmcrpc-enzalutamida",
+        "fonte_local_ref": "/tratamento/protocolos/17/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-c8dea7dc0e702a66",
+        "origem_json_pointer": "/tratamento/protocolos/18",
+        "sha256_conteudo": "01df69ba13017365ce9d484cb8f6cd61572dfd066cbc12b6ba029ca404dbd9f0",
+        "nome": "TDA + apalutamida (nmCRPC, PSADT ≤ 10 meses)",
+        "id_original": "prostata-nmcrpc-apalutamida",
+        "fonte_local_ref": "/tratamento/protocolos/18/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-bfc8c251a8b78a3e",
+        "origem_json_pointer": "/tratamento/protocolos/19",
+        "sha256_conteudo": "74f140b0476dcb268b26d4b80c2ea205c2a41762e6117cf7148165cc424d4d5f",
+        "nome": "TDA + darolutamida (nmCRPC, PSADT ≤ 10 meses)",
+        "id_original": "prostata-nmcrpc-darolutamida",
+        "fonte_local_ref": "/tratamento/protocolos/19/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-1a7cc77af8d9c2c6",
+        "origem_json_pointer": "/tratamento/protocolos/20",
+        "sha256_conteudo": "79d7c72fde89aadd5c5b4c216a257daf2e3229273b9719d00428b1b754c0fb4d",
+        "nome": "Abiraterona + prednisona (mCRPC)",
+        "id_original": "prostata-mcrpc-abiraterona-prednisona",
+        "fonte_local_ref": "/tratamento/protocolos/20/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-050a126f81ab937c",
+        "origem_json_pointer": "/tratamento/protocolos/21",
+        "sha256_conteudo": "ff2067dd2d53528d7941195b31d0e0676d87297b95d1b164a6781254d9993ea4",
+        "nome": "Enzalutamida (mCRPC)",
+        "id_original": "prostata-mcrpc-enzalutamida",
+        "fonte_local_ref": "/tratamento/protocolos/21/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-53a8b83279b59e04",
+        "origem_json_pointer": "/tratamento/protocolos/22",
+        "sha256_conteudo": "547462c9d836be90014bc07fbcc20a79f02a4de6baa83b6dbd9f9fa11a274ad1",
+        "nome": "Bicalutamida (hormonioterapia de 1ª geração)",
+        "id_original": "prostata-mcrpc-bicalutamida",
+        "fonte_local_ref": "/tratamento/protocolos/22/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-47e844cfc8a13a5e",
+        "origem_json_pointer": "/tratamento/protocolos/23",
+        "sha256_conteudo": "8dd5b778ca37cb682804b3ddc02c0596c45a4aa7577b33fdd9d040512fc2b2b6",
+        "nome": "Destilbenol (estrógeno)",
+        "id_original": "prostata-mcrpc-destilbenol",
+        "fonte_local_ref": "/tratamento/protocolos/23/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-3e3ebe25348432c2",
+        "origem_json_pointer": "/tratamento/protocolos/24",
+        "sha256_conteudo": "c931c3e4c337b0d7290dde6128d8f5401f15d158f3ffdb82e811e02d76699081",
+        "nome": "Dexametasona em dose baixa",
+        "id_original": "prostata-mcrpc-dexametasona",
+        "fonte_local_ref": "/tratamento/protocolos/24/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-85053069ee952e36",
+        "origem_json_pointer": "/tratamento/protocolos/25",
+        "sha256_conteudo": "05c9a015bf78c7a85e261adf112d960e36cb22ab9cdb3c84ebd49c7ab4ac6dbb",
+        "nome": "Docetaxel + prednisona 21/21 dias (mCRPC)",
+        "id_original": "prostata-mcrpc-docetaxel-prednisona",
+        "fonte_local_ref": "/tratamento/protocolos/25/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-2a14cfa84eeacfd6",
+        "origem_json_pointer": "/tratamento/protocolos/26",
+        "sha256_conteudo": "a0c742a7861ab2bfa93d8847c2de8f2778b79a364068412dc41354cfbe311976",
+        "nome": "Docetaxel quinzenal (esquema fracionado) + prednisona",
+        "id_original": "prostata-mcrpc-docetaxel-quinzenal",
+        "fonte_local_ref": "/tratamento/protocolos/26/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-370fa9f80958f445",
+        "origem_json_pointer": "/tratamento/protocolos/27",
+        "sha256_conteudo": "77b7708e7de14cbf8f5e8e0228ff186bd5977206fbd9c871062afc50e7474c43",
+        "nome": "Cabazitaxel + prednisona (mCRPC pós-docetaxel)",
+        "id_original": "prostata-mcrpc-cabazitaxel-prednisona",
+        "fonte_local_ref": "/tratamento/protocolos/27/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-32c9c9780fd63e2d",
+        "origem_json_pointer": "/tratamento/protocolos/28",
+        "sha256_conteudo": "8ef6395b3ea5722cab1c741014c7e1e7ebf5be434614713b40a12719f4851c3b",
+        "nome": "Mitoxantrona + prednisona",
+        "id_original": "prostata-mcrpc-mitoxantrona-prednisona",
+        "fonte_local_ref": "/tratamento/protocolos/28/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-2b8dd9ebeb7705fe",
+        "origem_json_pointer": "/tratamento/protocolos/29",
+        "sha256_conteudo": "6ff8ebbe225837ca8f715117361a1e6d5a3ce6737fb4d4756c8ba937a07152f9",
+        "nome": "Ciclofosfamida oral metronômica",
+        "id_original": "prostata-mcrpc-ciclofosfamida-oral",
+        "fonte_local_ref": "/tratamento/protocolos/29/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ed45042a38814b4e",
+        "origem_json_pointer": "/tratamento/protocolos/30",
+        "sha256_conteudo": "392dce3c83ea74957870cfc7e8377ded4e93de0a5fce49c36e5cce36c857bebc",
+        "nome": "Olaparibe (mCRPC com alteração BRCA1/2 ou ATM após ARPI)",
+        "id_original": "prostata-mcrpc-olaparibe",
+        "fonte_local_ref": "/tratamento/protocolos/30/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-013473111b99a012",
+        "origem_json_pointer": "/tratamento/protocolos/31",
+        "sha256_conteudo": "62d5bdad5a100eed6f15e4587b0cffc4e96021154b1bb08e1bec9c0814d52718",
+        "nome": "Olaparibe + abiraterona + prednisona (PROpel)",
+        "id_original": "prostata-mcrpc-olaparibe-abiraterona-prednisona",
+        "fonte_local_ref": "/tratamento/protocolos/31/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-676cc16765bad5c4",
+        "origem_json_pointer": "/tratamento/protocolos/32",
+        "sha256_conteudo": "48c8cad39767be14bb1f77d5b6792626c646f3a316521aa800fc5b94b30cf285",
+        "nome": "Talazoparibe + enzalutamida (TALAPRO-2)",
+        "id_original": "prostata-mcrpc-talazoparibe-enzalutamida",
+        "fonte_local_ref": "/tratamento/protocolos/32/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d959bb8826d0ca3b",
+        "origem_json_pointer": "/tratamento/protocolos/33",
+        "sha256_conteudo": "9c70019bf1f76043af2e080c3026d3b81b20a993fbf25f8bae9580fec3830754",
+        "nome": "Pembrolizumabe (TMB ≥ 10 mut/Mb)",
+        "id_original": "prostata-mcrpc-pembrolizumabe-tmb",
+        "fonte_local_ref": "/tratamento/protocolos/33/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-70625bd95c646602",
+        "origem_json_pointer": "/tratamento/protocolos/34",
+        "sha256_conteudo": "63538af3a8acef9855cf33c46a17ddad0450ce6c2ff1c056681a589d4d73d12e",
+        "nome": "Rádio-223 (doença óssea predominante, sintomática)",
+        "id_original": "prostata-mcrpc-radio-223",
+        "fonte_local_ref": "/tratamento/protocolos/34/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e6b20f9ef0b90d24",
+        "origem_json_pointer": "/tratamento/protocolos/35",
+        "sha256_conteudo": "695b51421e860eea15bb42e13e690a2eee9b44e497c55e505b3cecc1dd56cc55",
+        "nome": "177Lu-PSMA-617 (doença PSMA+)",
+        "id_original": "prostata-mcrpc-lutecio-psma",
+        "fonte_local_ref": "/tratamento/protocolos/35/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-83b3190368ddfde1",
+        "origem_json_pointer": "/tratamento/protocolos/36",
+        "sha256_conteudo": "7914db52b77e2a6bba86eb1d448aa57f26b60fe28fcba2d4a0fb8a22b62d6f1b",
+        "nome": "Carboplatina + docetaxel (variante agressiva/anaplásica/pequenas células)",
+        "id_original": "prostata-variante-agressiva-carboplatina-docetaxel",
+        "fonte_local_ref": "/tratamento/protocolos/36/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-811552986cea5cc2",
+        "origem_json_pointer": "/tratamento/protocolos/37",
+        "sha256_conteudo": "5d4f21b54bb56ba98d262a941461a39167a2b2697441accd9d37273282c4ea0e",
+        "nome": "Cisplatina + etoposídeo (variante agressiva/pequenas células)",
+        "id_original": "prostata-variante-agressiva-cisplatina-etoposideo",
+        "fonte_local_ref": "/tratamento/protocolos/37/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-5bf6a6b1267218f0",
+        "origem_json_pointer": "/tratamento/protocolos/38",
+        "sha256_conteudo": "868e0b2bfd41be4565f57912b1127b4f0067635799c33722bad1fd42bf1cbe13",
+        "nome": "Carboplatina + cabazitaxel (variante agressiva)",
+        "id_original": "prostata-variante-agressiva-carboplatina-cabazitaxel",
+        "fonte_local_ref": "/tratamento/protocolos/38/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d6f5ac3c3c827ac9",
+        "origem_json_pointer": "/tratamento/protocolos/39",
+        "sha256_conteudo": "619c0c9b0cd3869dba923519af62f361c13ba5f2c498f8d6f68f442d111ac9f5",
+        "nome": "Denosumabe 120 mg (eventos esqueléticos, mCRPC com metástase óssea)",
+        "id_original": "prostata-osso-denosumabe-120",
+        "fonte_local_ref": "/tratamento/protocolos/39/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-9a2c0f488a79c209",
+        "origem_json_pointer": "/tratamento/protocolos/40",
+        "sha256_conteudo": "a221a6a0bcbf9df05d5b15b6d948bc74475eb5c06de54a8866edb9c46d40aea9",
+        "nome": "Ácido zoledrônico 4 mg (eventos esqueléticos, mCRPC com metástase óssea)",
+        "id_original": "prostata-osso-zoledronico-4",
+        "fonte_local_ref": "/tratamento/protocolos/40/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-3367d41c252df02c",
+        "origem_json_pointer": "/tratamento/protocolos/41",
+        "sha256_conteudo": "daf8f34460eeb30d01696f5d4af2862e800664f7165053045ddf7e93863c9b04",
+        "nome": "Denosumabe 60 mg (perda óssea induzida por TDA)",
+        "id_original": "prostata-osso-denosumabe-60",
+        "fonte_local_ref": "/tratamento/protocolos/41/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-877a877eeb178196",
+        "origem_json_pointer": "/tratamento/protocolos/42",
+        "sha256_conteudo": "c459bd8ef0bc3eadec1f417e650f626e6cbb3d5aeb925823c5922ef09825fcdd",
+        "nome": "Ácido zoledrônico 5 mg anual (perda óssea induzida por TDA)",
+        "id_original": "prostata-osso-zoledronico-5-anual",
+        "fonte_local_ref": "/tratamento/protocolos/42/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-83c2343c4966a4fc",
+        "origem_json_pointer": "/tratamento/protocolos/43",
+        "sha256_conteudo": "33be0b642d4ce7f4460586b8bc23ea45e8e23dd86227d51d1b5601fa435a33a8",
+        "nome": "Alendronato semanal (perda óssea induzida por TDA)",
+        "id_original": "prostata-osso-alendronato",
+        "fonte_local_ref": "/tratamento/protocolos/43/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-427895b5e0b47bc1",
+        "origem_json_pointer": "/tratamento/protocolos/44",
+        "sha256_conteudo": "ba88a285f1bb8994cad03a65c452c3e463e16405a2d03bf63b86f52884c1b91c",
+        "nome": "Darolutamida + TDA (ARANOTE) — mHSPC sem docetaxel",
+        "id_original": "prostata-mhspc-darolutamida",
+        "fonte_local_ref": "/tratamento/protocolos/44/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-1df6f0cf9fdde198",
+        "origem_json_pointer": "/tratamento/cirurgia/0",
+        "sha256_conteudo": "fa5bd02731e27b905840c1516b4f500bcf0c4657f24f7e5d20eb59c70b982ff4",
+        "nome": "/tratamento/cirurgia/0",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cirurgia/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-5837b18d3b8639e5",
+        "origem_json_pointer": "/tratamento/cirurgia/1",
+        "sha256_conteudo": "11bb22f55f73b403701a4532f484c8c8bece380fb5dc4b6155d374f0060b96d8",
+        "nome": "/tratamento/cirurgia/1",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cirurgia/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d039a9c87de36dbc",
+        "origem_json_pointer": "/tratamento/cirurgia/2",
+        "sha256_conteudo": "032fb727f1f3881c7f564c594d5f5490e8bf960913f4b09aaad7ee78edb240ec",
+        "nome": "/tratamento/cirurgia/2",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cirurgia/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-1e67bd8efd7c9b93",
+        "origem_json_pointer": "/tratamento/cirurgia/3",
+        "sha256_conteudo": "013f6c79d3b7a354b6b9b3336512ddb8a0e3ebddfe71252a6213eae42cf50e2f",
+        "nome": "/tratamento/cirurgia/3",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cirurgia/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8cea408616e4040d",
+        "origem_json_pointer": "/tratamento/radioterapia/0",
+        "sha256_conteudo": "d73a2ae607ea6839a1307cb0fe85824dec9eaf83e37b2d3174a74ee59ca1a33e",
+        "nome": "localizado — RT externa definitiva (braço RT do ProtecT, aula)",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/radioterapia/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b31ba957b6debeb0",
+        "origem_json_pointer": "/tratamento/radioterapia/1",
+        "sha256_conteudo": "01c2030c6618f3fabae4b4c7ebd9bdd1048740fefa89072e4067d786ff3bcd0f",
+        "nome": "pós-prostatectomia — RT adjuvante/salvamento (esquemas de RADICALS-RT, GETUG-AFU 17)",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/radioterapia/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-6c9818b88480f96f",
+        "origem_json_pointer": "/tratamento/radioterapia/2",
+        "sha256_conteudo": "4e5706a23a6dbf24ab14847f70fe1fda0723e2aac4deab2c2f791b686ea56556",
+        "nome": "pós-prostatectomia — RT adjuvante/salvamento hipofracionada (RADICALS-RT)",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/radioterapia/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-293f261d2159e9c7",
+        "origem_json_pointer": "/tratamento/radioterapia/3",
+        "sha256_conteudo": "93f9750dd079e05543a2f4e38fff186d6dd50cf4320a48f9c5b04089b9953301",
+        "nome": "mHSPC baixo volume — RT do primário (STAMPEDE braço H, aula): esquema semanal",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/radioterapia/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-64ba52511b5a2d96",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/0",
+        "sha256_conteudo": "472647ac65eeddb53be838b7f16c7918521f1b40491d19ad3ea7f23164bb2933",
+        "nome": "/ligacoes/interacoesConsultar/0",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-205aef03dbb1fcf7",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/1",
+        "sha256_conteudo": "d0ff602856fbcb658c7133a6dd041fca35a85fd920c512524da7f8301b6d72ab",
+        "nome": "/ligacoes/interacoesConsultar/1",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b61d07a00771a328",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/2",
+        "sha256_conteudo": "d566fc62f6e9dc89fe62645c15e3da06d5bfacaf4446b13097acd21db73c7406",
+        "nome": "/ligacoes/interacoesConsultar/2",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-375a8c46c07cc248",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/3",
+        "sha256_conteudo": "4884bb06fed6d5cc69ee83620b539c1836404a48af347988b5aa488078c12168",
+        "nome": "/ligacoes/interacoesConsultar/3",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-81314c6e51d81839",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/4",
+        "sha256_conteudo": "217b028790006d724e8dd65fac6a8bc6c09800abeb45aaca74705076f300578c",
+        "nome": "/ligacoes/interacoesConsultar/4",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-2f5fd4035949ba08",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/5",
+        "sha256_conteudo": "f2b0248a77e3fdbf161e6fedbac73eeb557be19b96b0375f46b0d72921d83b3c",
+        "nome": "/ligacoes/interacoesConsultar/5",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-1f5122a688421194",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/6",
+        "sha256_conteudo": "5472c2652203eefb0037c5c9efca3022f7ef588eb7b745c9a6c162f99307198d",
+        "nome": "/ligacoes/interacoesConsultar/6",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-5e835075d4c84f01",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/7",
+        "sha256_conteudo": "5ce5163fc62be750a4d93c49310532e1c0774937d6da909af433da5a5cf1720d",
+        "nome": "/ligacoes/interacoesConsultar/7",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-19fad6a62acc100d",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/8",
+        "sha256_conteudo": "90098472b5be46af38b3d177bbe0bed5db7b73db81f1e235917481c74e679a68",
+        "nome": "/ligacoes/interacoesConsultar/8",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-22b57bccdaf89077",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/9",
+        "sha256_conteudo": "339a28055e4935256137b701f91a206d4caf57e17d8945ffd4182ef2761ee8f4",
+        "nome": "/ligacoes/interacoesConsultar/9",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a6366ff1b8e130e9",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/10",
+        "sha256_conteudo": "dbfe304f6ce7a6911e965e802415d658565238c27972a58cdeba2ffedab15dab",
+        "nome": "/ligacoes/interacoesConsultar/10",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a8ee669ea635d549",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/11",
+        "sha256_conteudo": "116b603534064c3f5d6b2b7799bfd625e16cc78367f01c6790557cefcdd793af",
+        "nome": "/ligacoes/interacoesConsultar/11",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b7f4a9646cc149f5",
+        "origem_json_pointer": "/ligacoes/ctcaeAcao/0",
+        "sha256_conteudo": "9c5d1bba955109bb5f89b6a69f34afe430851fdc2bce65b9b9579b2a600a54f8",
+        "nome": "/ligacoes/ctcaeAcao/0",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e0b8e6643f81f3c5",
+        "origem_json_pointer": "/ligacoes/ctcaeAcao/1",
+        "sha256_conteudo": "d30949e20a6dfa0cfbb3918e7c57af5e988b8e2a1a9292490c0cfb52542e40d6",
+        "nome": "/ligacoes/ctcaeAcao/1",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-7c1d730b331732cf",
+        "origem_json_pointer": "/ligacoes/ctcaeAcao/2",
+        "sha256_conteudo": "8275507b65b7ea12298cc5ef92bd7fc7e3cccb30843511547dc402d622b1b3b3",
+        "nome": "/ligacoes/ctcaeAcao/2",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-4bd6411ba0f97093",
+        "origem_json_pointer": "/ligacoes/ctcaeAcao/3",
+        "sha256_conteudo": "fe942288828f072f464303139222eba732eae5db4d29f890b5bac26d4739eceb",
+        "nome": "/ligacoes/ctcaeAcao/3",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a8e19fbbc48b1c6a",
+        "origem_json_pointer": "/ligacoes/ctcaeAcao/4",
+        "sha256_conteudo": "36291221040a4eff7dca178d8b896e110820ca686015fd295d957d2ac1ba1d63",
+        "nome": "/ligacoes/ctcaeAcao/4",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-85b82e2611c0551e",
+        "origem_json_pointer": "/ligacoes/ctcaeAcao/5",
+        "sha256_conteudo": "4dbcf457e66458cd9063c0a512c7d952614ca381cb693b6bed604b7c58d8a8ca",
+        "nome": "/ligacoes/ctcaeAcao/5",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-0ecf8c7fb43c73c3",
+        "origem_json_pointer": "/ligacoes/ctcaeAcao/6",
+        "sha256_conteudo": "e01aca14884328a4b85e048d7846175934145255aa9ca4ea4d3c9e9989ece633",
+        "nome": "/ligacoes/ctcaeAcao/6",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b0d23991765ad419",
+        "origem_json_pointer": "/tratamento/suporte",
+        "sha256_conteudo": "a1fba92261b1ff36ceb032dd01f642a86780804281fd0dba57f1fd292bc8ac68",
+        "nome": "/tratamento/suporte",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/suporte/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a3488115f7dd9299",
+        "origem_json_pointer": "/ligacoes/suporteReceitas/0",
+        "sha256_conteudo": "8f0f7d04c30f2d998d0ae4eaafad630bb2fef4514f5563ca67f8700b4f215d10",
+        "nome": "cálcio 1.000 mg/dia + vitamina D (TDA prolongada)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ffdadb66af67e06b",
+        "origem_json_pointer": "/ligacoes/suporteReceitas/1",
+        "sha256_conteudo": "751f4b4913c792c686bebf92d31f0811ba355b30e4bdb0ecd0949ba914b0ee54",
+        "nome": "antiemese para docetaxel/cabazitaxel (corpus de receitas)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-fa741b57b1413112",
+        "origem_json_pointer": "/ligacoes/suporteReceitas/2",
+        "sha256_conteudo": "56005aa0750f80440edcbd2340c49e8196a27a5773cc0a92afabe7e138162146",
+        "nome": "prednisona contínua com abiraterona",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-61f4d2c80106e2a7",
+        "origem_json_pointer": "/tratamento/seguimento/0",
+        "sha256_conteudo": "a7d2d1da2e0bbc5c39ab9d97ac9f03916caa2f96d0f2785c40106197a7459f3c",
+        "nome": "Vigilância ativa (muito baixo/baixo risco)",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/seguimento/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a7e2c9acaa7085c6",
+        "origem_json_pointer": "/tratamento/seguimento/1",
+        "sha256_conteudo": "66bd714458cb4535e08b2b3dccefe2f4ac679e2434eeefa7da8f6388d107359a",
+        "nome": "Pós-prostatectomia radical",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/seguimento/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-aac15b2042ebab53",
+        "origem_json_pointer": "/tratamento/seguimento/2",
+        "sha256_conteudo": "82dff0294d9111b3092d9a4c213401c6c5e7f9b3638bf022adbb8e372af4c2ed",
+        "nome": "mHSPC em TDA ± ARPI",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/seguimento/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-458a8666aaae27d5",
+        "origem_json_pointer": "/tratamento/seguimento/3",
+        "sha256_conteudo": "54664a3d0a4d72cbd071a5006010dead2b5abf5ec2cb9c9dda9541e4d6e0c9eb",
+        "nome": "Durante QT (triplete ou mCRPC)",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/seguimento/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-3fc4cf7144fb23b9",
+        "origem_json_pointer": "/ligacoes/orientacoes/0",
+        "sha256_conteudo": "4840173a9bc1fa01b26a9699f217680bbae7c564f486109225f48b5068bb1e77",
+        "nome": "TDA: fogachos, perda de massa óssea/muscular, risco cardiovascular — atividade física",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-20f7307086e73eb0",
+        "origem_json_pointer": "/ligacoes/orientacoes/1",
+        "sha256_conteudo": "8ffa82e0a5350ade67a65b7a484ef15260e8d1b5a3a27291be6b935d47eb9f85",
+        "nome": "Abiraterona: tomar em jejum (bula) e não suspender prednisona",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-303a8cfecd5a65a9",
+        "origem_json_pointer": "/ligacoes/orientacoes/2",
+        "sha256_conteudo": "0897eb4a9ffc5194e36818cb3f428ea9abd5f67b295b09e2eb72fb8c32da18c0",
+        "nome": "Enzalutamida: risco de convulsão e quedas",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-7719c8e8ba54fcd3",
+        "origem_json_pointer": "/ligacoes/orientacoes/3",
+        "sha256_conteudo": "c4112ae6a65d0a7a2a98991034e2aed5eaeb55f4d64bc5c581de52d5823ffe9d",
+        "nome": "Rádio-223/Lu-PSMA: cuidados de radioproteção",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-c3dd2877f8bd758b",
+        "origem_json_pointer": "/ligacoes/orientacoes/4",
+        "sha256_conteudo": "0d3ef09aeb4b1517a7e9c0fe707c43b694a520d7e142cf6dd8bb4c2cc7740a59",
+        "nome": "Denosumabe/zoledrônico: avaliação odontológica (osteonecrose)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d54a15cbb841511b",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/0",
+        "sha256_conteudo": "b92a6c89eec82b9542c0d0bf3c50a216ebeef81398125d360e50df70c3e8f675",
+        "nome": "encaminhamento-radioterapia",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-685c8cf172414883",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/1",
+        "sha256_conteudo": "5e90c2fe0c689c9825e2a5f61f10285aac34b9a34913dde224d87ec5e7e743b5",
+        "nome": "encaminhamento-cirurgia-oncologica",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-46f5f235ff433010",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/2",
+        "sha256_conteudo": "17b58d7246ca5e5157f1b307c9b9dd2280d5683dba228a0dc6f6bd2c782a92b2",
+        "nome": "urologia",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-0e97a18468ae03ca",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/3",
+        "sha256_conteudo": "3186508b469e274ab373a729f097f20bd2ba63a67e329f1ff6fd5485de676dda",
+        "nome": "medicina nuclear",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-91f0581245ce6736",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/4",
+        "sha256_conteudo": "80affe4e5f3cb1734042fe5dfc194178302680effeb2ef9fa9f53c28911aea54",
+        "nome": "aconselhamento genético",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-f1be0bc240fdcb6e",
+        "origem_json_pointer": "/ligacoes/laudos/0",
+        "sha256_conteudo": "6a46438b183e8fd4b7a415067f836f7309f2eda0b78d30c905219bb7d5f4dbe5",
+        "nome": "laudo-inss",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-77f7f1412350909b",
+        "origem_json_pointer": "/ligacoes/laudos/1",
+        "sha256_conteudo": "af504b47768148287664fb7c8261386969e41e6892f762a9162444692f4dfbe1",
+        "nome": "laudo-afastamento",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-93d60b7330a4b52b",
+        "origem_json_pointer": "/ligacoes/laudos/2",
+        "sha256_conteudo": "78adca3dbd2239a0f585882019c32186c069fc3599dc815bbc6fd5ee1b225bac",
+        "nome": "laudo-loas",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d62cf1f5c978a4b0",
+        "origem_json_pointer": "/ligacoes/laudos/3",
+        "sha256_conteudo": "605d32053c94a49b3d3cb80232041ebc5f3348124175bc8224c8488e3785d1fa",
+        "nome": "laudo-transporte",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-af07b6d35c78fbb1",
+        "origem_json_pointer": "/ligacoes/laudos/4",
+        "sha256_conteudo": "2979aed27f52125ed5ce4979fdd3052d373b4312a791a0082a6c96ae27466cc6",
+        "nome": "laudo-judicial",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      }
+    ],
+    "itens_nccn": [
+      {
+        "item_id": "nccn-20261017-prostata-rucaparibe",
+        "nome": "Rucaparibe",
+        "tipo": "OPCAO_TERAPEUTICA",
+        "dominio_principal": 6,
+        "conteudo_extraido": "mCRPC com BRCA1/2 mutado: rucaparibe em Useful in Certain Circumstances, categoria 1 pós-ARPI/pré-docetaxel; no ramo pós-ARPI/pós-docetaxel não há marca local de categoria 1 (categoria 2A pelo cabeçalho). PARPi diferem nos requisitos de biomarcador e terapia prévia (nota mmm).",
+        "aplicabilidade": {
+          "criterios": [
+            "mCRPC adenocarcinoma",
+            "BRCA1/2 mutado",
+            "Distinguir pós-ARPI/pré-docetaxel de pós-ARPI/pós-docetaxel"
+          ],
+          "paciente_individual": null,
+          "estado": "NAO_AVALIADA"
+        },
+        "dados_estruturados": {
+          "farmacos": [
+            "rucaparibe"
+          ],
+          "posologia": {
+            "estado": "NAO_EXTRAIDA_NESTA_RODADA",
+            "valor": null,
+            "motivo": "A rodada incorpora o delta de indicação/cenário; não completa dose por inferência."
+          },
+          "ramos": [
+            {
+              "contexto": "pos_ARPI_pre_docetaxel",
+              "categoria": "1",
+              "preferencia": "Useful in Certain Circumstances"
+            },
+            {
+              "contexto": "pos_ARPI_pos_docetaxel",
+              "categoria": "2A",
+              "origem_categoria": "cabecalho; sem categoria 1 local",
+              "preferencia": "Useful in Certain Circumstances"
+            }
+          ]
+        },
+        "fonte_refs": [
+          {
+            "fonte_id": "nccn-9eb20b8f3605",
+            "edicao": "1.2027",
+            "pagina_pdf": 8,
+            "paginas_pdf": [
+              8
+            ],
+            "secao": "UPDATES v1.2027",
+            "trecho": "Rucaparib",
+            "ancora_contextual": null,
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "3f5fd77990718f20041e220a6b7648f5ee12a0d4156807cc8f16a5c1e8fb691b"
+          },
+          {
+            "fonte_id": "nccn-9eb20b8f3605",
+            "edicao": "1.2027",
+            "pagina_pdf": 38,
+            "paginas_pdf": [
+              38
+            ],
+            "secao": "PROS-18",
+            "trecho": "Rucaparib",
+            "ancora_contextual": null,
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "3f5fd77990718f20041e220a6b7648f5ee12a0d4156807cc8f16a5c1e8fb691b"
+          },
+          {
+            "fonte_id": "nccn-9eb20b8f3605",
+            "edicao": "1.2027",
+            "pagina_pdf": 39,
+            "paginas_pdf": [
+              39
+            ],
+            "secao": "PROS-18A, nota mmm",
+            "trecho": "different biomarker",
+            "ancora_contextual": null,
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "3f5fd77990718f20041e220a6b7648f5ee12a0d4156807cc8f16a5c1e8fb691b"
+          }
+        ],
+        "evidencia_declarada": {
+          "sistema": "NCCN",
+          "categoria": "VARIA_POR_RAMO",
+          "preferencia": "Useful in Certain Circumstances",
+          "estado": "CONFERIDA_DOCUMENTALMENTE_A_CONFERIR_CLINICAMENTE",
+          "nota": "Categoria 2A sem marca local somente quando expressamente coberta pelo cabeçalho; múltiplas categorias permanecem nos ramos."
+        },
+        "estado_extracao": "EXTRAIDO_COM_LIMITES_DECLARADOS",
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "temporalidade": {
+          "referencia": "CENARIO_DESCRITO",
+          "datas_individuais": null
+        },
+        "propor_automaticamente": false,
+        "disponivel_para_prescricao": false,
+        "acesso": {
+          "registro_anvisa": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "incorporacao_conitec": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "pcdt_ddt": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "sigtap_apac": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "cobertura_privada": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "disponibilidade_institucional": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          }
+        },
+        "alternativas_legadas_refs": [],
+        "relacoes_refs": [
+          "relacao-nccn-20261017-prostata-rucaparibe"
+        ],
+        "conflitos_refs": [],
+        "pendencias": [
+          "REVISAO_CLINICA_DO_DELTA",
+          "VERIFICAR_ACESSO_BRASILEIRO_POR_INDICACAO",
+          "POSOLOGIA_E_SUPORTE_NAO_COMPLETOS_NESTA_RODADA"
+        ],
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-2-correcao-auditoria",
+            "correcao_id": "ALTA-prostata-rucaparibe",
+            "anterior": {
+              "conteudo_extraido": "Opção biomarcador-dirigida; distinguir doença sensível e resistente à castração e exposição prévia a ARPI.",
+              "fonte_refs": [
+                {
+                  "fonte_id": "nccn-9eb20b8f3605",
+                  "paginas_pdf": [
+                    8,
+                    34
+                  ],
+                  "secao": "UPDATES; PROS-15",
+                  "natureza": "EXTRACAO_DOCUMENTAL",
+                  "pagina_pdf": 8,
+                  "trecho": "Rucaparib (category 1, preferred) – Regimens removed: ▪Abiraterone/Niraparib (category 2B) ▪Enzalutamide/Talazoparib (category"
+                }
+              ],
+              "estado_curadoria": "A_CONFERIR",
+              "aprovacao_clinica": null,
+              "aplicabilidade": {
+                "criterios": [
+                  "mCRPC",
+                  "BRCA1/2 mutado",
+                  "Pós-ARPI conforme tabela"
+                ],
+                "paciente_individual": null,
+                "estado": "NAO_AVALIADA"
+              },
+              "dados_estruturados": {
+                "farmacos": [
+                  "rucaparibe"
+                ],
+                "posologia": {
+                  "estado": "NAO_EXTRAIDA_NESTA_RODADA",
+                  "valor": null,
+                  "motivo": "A rodada incorpora o delta de indicação/cenário; não completa dose por inferência."
+                }
+              },
+              "evidencia_declarada": {
+                "sistema": "NCCN",
+                "categoria": null,
+                "estado": "NAO_EXTRAIDA_POR_ITEM"
+              }
+            },
+            "motivo": "Correção documental após auditoria Claude e conferência da fonte; não apaga versão anterior.",
+            "aprovacao_clinica": null
+          },
+          {
+            "revisao": "2026-10-17-nccn-final-documental",
+            "anterior": {
+              "dados_estruturados": {
+                "farmacos": [
+                  "rucaparibe"
+                ],
+                "posologia": {
+                  "estado": "NAO_EXTRAIDA_NESTA_RODADA",
+                  "valor": null,
+                  "motivo": "A rodada incorpora o delta de indicação/cenário; não completa dose por inferência."
+                },
+                "ramos": [
+                  {
+                    "contexto": "pos_ARPI_pre_docetaxel",
+                    "categoria": "1",
+                    "preferencia": "Useful in Certain Circumstances"
+                  },
+                  {
+                    "contexto": "pos_ARPI_pos_docetaxel",
+                    "categoria": "2A",
+                    "origem_categoria": "cabecalho; sem categoria1 local",
+                    "preferencia": "Useful in Certain Circumstances"
+                  }
+                ]
+              }
+            },
+            "motivo": "Espaçamento da prosa; sem modificar valores, códigos ou fontes."
+          }
+        ],
+        "fontes_por_campo": {
+          "conteudo_extraido": [
+            {
+              "fonte_id": "nccn-9eb20b8f3605",
+              "edicao": "1.2027",
+              "pagina_pdf": 8,
+              "paginas_pdf": [
+                8
+              ],
+              "secao": "UPDATES v1.2027",
+              "trecho": "Rucaparib",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "3f5fd77990718f20041e220a6b7648f5ee12a0d4156807cc8f16a5c1e8fb691b"
+            },
+            {
+              "fonte_id": "nccn-9eb20b8f3605",
+              "edicao": "1.2027",
+              "pagina_pdf": 38,
+              "paginas_pdf": [
+                38
+              ],
+              "secao": "PROS-18",
+              "trecho": "Rucaparib",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "3f5fd77990718f20041e220a6b7648f5ee12a0d4156807cc8f16a5c1e8fb691b"
+            },
+            {
+              "fonte_id": "nccn-9eb20b8f3605",
+              "edicao": "1.2027",
+              "pagina_pdf": 39,
+              "paginas_pdf": [
+                39
+              ],
+              "secao": "PROS-18A, nota mmm",
+              "trecho": "different biomarker",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "3f5fd77990718f20041e220a6b7648f5ee12a0d4156807cc8f16a5c1e8fb691b"
+            }
+          ],
+          "aplicabilidade": [
+            {
+              "fonte_id": "nccn-9eb20b8f3605",
+              "edicao": "1.2027",
+              "pagina_pdf": 8,
+              "paginas_pdf": [
+                8
+              ],
+              "secao": "UPDATES v1.2027",
+              "trecho": "Rucaparib",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "3f5fd77990718f20041e220a6b7648f5ee12a0d4156807cc8f16a5c1e8fb691b"
+            },
+            {
+              "fonte_id": "nccn-9eb20b8f3605",
+              "edicao": "1.2027",
+              "pagina_pdf": 38,
+              "paginas_pdf": [
+                38
+              ],
+              "secao": "PROS-18",
+              "trecho": "Rucaparib",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "3f5fd77990718f20041e220a6b7648f5ee12a0d4156807cc8f16a5c1e8fb691b"
+            },
+            {
+              "fonte_id": "nccn-9eb20b8f3605",
+              "edicao": "1.2027",
+              "pagina_pdf": 39,
+              "paginas_pdf": [
+                39
+              ],
+              "secao": "PROS-18A, nota mmm",
+              "trecho": "different biomarker",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "3f5fd77990718f20041e220a6b7648f5ee12a0d4156807cc8f16a5c1e8fb691b"
+            }
+          ],
+          "dados_estruturados": [
+            {
+              "fonte_id": "nccn-9eb20b8f3605",
+              "edicao": "1.2027",
+              "pagina_pdf": 8,
+              "paginas_pdf": [
+                8
+              ],
+              "secao": "UPDATES v1.2027",
+              "trecho": "Rucaparib",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "3f5fd77990718f20041e220a6b7648f5ee12a0d4156807cc8f16a5c1e8fb691b"
+            },
+            {
+              "fonte_id": "nccn-9eb20b8f3605",
+              "edicao": "1.2027",
+              "pagina_pdf": 38,
+              "paginas_pdf": [
+                38
+              ],
+              "secao": "PROS-18",
+              "trecho": "Rucaparib",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "3f5fd77990718f20041e220a6b7648f5ee12a0d4156807cc8f16a5c1e8fb691b"
+            },
+            {
+              "fonte_id": "nccn-9eb20b8f3605",
+              "edicao": "1.2027",
+              "pagina_pdf": 39,
+              "paginas_pdf": [
+                39
+              ],
+              "secao": "PROS-18A, nota mmm",
+              "trecho": "different biomarker",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "3f5fd77990718f20041e220a6b7648f5ee12a0d4156807cc8f16a5c1e8fb691b"
+            }
+          ],
+          "evidencia_declarada": [
+            {
+              "fonte_id": "nccn-9eb20b8f3605",
+              "edicao": "1.2027",
+              "pagina_pdf": 8,
+              "paginas_pdf": [
+                8
+              ],
+              "secao": "UPDATES v1.2027",
+              "trecho": "Rucaparib",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "3f5fd77990718f20041e220a6b7648f5ee12a0d4156807cc8f16a5c1e8fb691b"
+            },
+            {
+              "fonte_id": "nccn-9eb20b8f3605",
+              "edicao": "1.2027",
+              "pagina_pdf": 38,
+              "paginas_pdf": [
+                38
+              ],
+              "secao": "PROS-18",
+              "trecho": "Rucaparib",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "3f5fd77990718f20041e220a6b7648f5ee12a0d4156807cc8f16a5c1e8fb691b"
+            },
+            {
+              "fonte_id": "nccn-9eb20b8f3605",
+              "edicao": "1.2027",
+              "pagina_pdf": 39,
+              "paginas_pdf": [
+                39
+              ],
+              "secao": "PROS-18A, nota mmm",
+              "trecho": "different biomarker",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "3f5fd77990718f20041e220a6b7648f5ee12a0d4156807cc8f16a5c1e8fb691b"
+            }
+          ]
+        },
+        "correcoes_auditoria": [
+          {
+            "id": "ALTA-prostata-rucaparibe",
+            "revisao": "2026-10-17-nccn-delta-2-correcao-auditoria",
+            "estado": "APLICADA_COM_CONFERENCIA_DOCUMENTAL",
+            "fontes": [
+              {
+                "fonte_id": "nccn-9eb20b8f3605",
+                "edicao": "1.2027",
+                "pagina_pdf": 8,
+                "paginas_pdf": [
+                  8
+                ],
+                "secao": "UPDATES v1.2027",
+                "trecho": "Rucaparib",
+                "ancora_contextual": null,
+                "natureza": "EXTRACAO_DOCUMENTAL",
+                "sha256_pdf": "3f5fd77990718f20041e220a6b7648f5ee12a0d4156807cc8f16a5c1e8fb691b"
+              },
+              {
+                "fonte_id": "nccn-9eb20b8f3605",
+                "edicao": "1.2027",
+                "pagina_pdf": 38,
+                "paginas_pdf": [
+                  38
+                ],
+                "secao": "PROS-18",
+                "trecho": "Rucaparib",
+                "ancora_contextual": null,
+                "natureza": "EXTRACAO_DOCUMENTAL",
+                "sha256_pdf": "3f5fd77990718f20041e220a6b7648f5ee12a0d4156807cc8f16a5c1e8fb691b"
+              },
+              {
+                "fonte_id": "nccn-9eb20b8f3605",
+                "edicao": "1.2027",
+                "pagina_pdf": 39,
+                "paginas_pdf": [
+                  39
+                ],
+                "secao": "PROS-18A, nota mmm",
+                "trecho": "different biomarker",
+                "ancora_contextual": null,
+                "natureza": "EXTRACAO_DOCUMENTAL",
+                "sha256_pdf": "3f5fd77990718f20041e220a6b7648f5ee12a0d4156807cc8f16a5c1e8fb691b"
+              }
+            ],
+            "ajuste_ao_parecer": null
+          }
+        ]
+      },
+      {
+        "item_id": "nccn-20261017-prostata-niraparibe-abiraterona",
+        "nome": "Niraparibe + abiraterona",
+        "tipo": "OPCAO_TERAPEUTICA",
+        "dominio_principal": 6,
+        "conteudo_extraido": "mCSPC BRCA2 mutado: categoria 2B em baixo volume síncrono/metacrônico; alto volume sem marca local (2A pelo cabeçalho). Nota yy: após completar docetaxel em triplete OU após EBRT do primário; benefício em baixo volume incerto, poucos casos metacrônicos de baixo volume e toxicidade adicional. Em mCRPC, a versão removeu a opção pós-ARPI; o ramo pré-ARPI BRCA1/2 mantém categoria 1.",
+        "aplicabilidade": {
+          "criterios": [
+            "mCSPC com BRCA2 mutado",
+            "Após completar docetaxel no triplete OU EBRT do primário",
+            "Distinguir baixo/alto volume e sincronia",
+            "Não extrapolar para mCRPC pós-ARPI"
+          ],
+          "paciente_individual": null,
+          "estado": "NAO_AVALIADA"
+        },
+        "dados_estruturados": {
+          "farmacos": [
+            "niraparibe",
+            "abiraterona"
+          ],
+          "posologia": {
+            "estado": "NAO_EXTRAIDA_NESTA_RODADA",
+            "valor": null,
+            "motivo": "A rodada incorpora o delta de indicação/cenário; não completa dose por inferência."
+          }
+        },
+        "fonte_refs": [
+          {
+            "fonte_id": "nccn-9eb20b8f3605",
+            "edicao": "1.2027",
+            "pagina_pdf": 34,
+            "paginas_pdf": [
+              34
+            ],
+            "secao": "PROS-15",
+            "trecho": "Niraparib and Abiraterone",
+            "ancora_contextual": null,
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "3f5fd77990718f20041e220a6b7648f5ee12a0d4156807cc8f16a5c1e8fb691b"
+          },
+          {
+            "fonte_id": "nccn-9eb20b8f3605",
+            "edicao": "1.2027",
+            "pagina_pdf": 35,
+            "paginas_pdf": [
+              35
+            ],
+            "secao": "PROS-15A, nota yy",
+            "trecho": "following the completion of docetaxel",
+            "ancora_contextual": null,
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "3f5fd77990718f20041e220a6b7648f5ee12a0d4156807cc8f16a5c1e8fb691b"
+          },
+          {
+            "fonte_id": "nccn-9eb20b8f3605",
+            "edicao": "1.2027",
+            "pagina_pdf": 38,
+            "paginas_pdf": [
+              38
+            ],
+            "secao": "PROS-18",
+            "trecho": "Niraparib and Abiraterone",
+            "ancora_contextual": null,
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "3f5fd77990718f20041e220a6b7648f5ee12a0d4156807cc8f16a5c1e8fb691b"
+          },
+          {
+            "fonte_id": "nccn-9eb20b8f3605",
+            "edicao": "1.2027",
+            "pagina_pdf": 8,
+            "paginas_pdf": [
+              8
+            ],
+            "secao": "UPDATES v1.2027",
+            "trecho": "Abiraterone/Niraparib",
+            "ancora_contextual": null,
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "3f5fd77990718f20041e220a6b7648f5ee12a0d4156807cc8f16a5c1e8fb691b"
+          }
+        ],
+        "evidencia_declarada": {
+          "sistema": "NCCN",
+          "categoria": "VARIA_POR_RAMO",
+          "preferencia": "Useful in Certain Circumstances",
+          "estado": "CONFERIDA_DOCUMENTALMENTE_A_CONFERIR_CLINICAMENTE",
+          "nota": "Categoria 2A sem marca local somente quando expressamente coberta pelo cabeçalho; múltiplas categorias permanecem nos ramos."
+        },
+        "estado_extracao": "EXTRAIDO_COM_LIMITES_DECLARADOS",
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "temporalidade": {
+          "referencia": "CENARIO_DESCRITO",
+          "datas_individuais": null
+        },
+        "propor_automaticamente": false,
+        "disponivel_para_prescricao": false,
+        "acesso": {
+          "registro_anvisa": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "incorporacao_conitec": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "pcdt_ddt": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "sigtap_apac": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "cobertura_privada": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "disponibilidade_institucional": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          }
+        },
+        "alternativas_legadas_refs": [],
+        "relacoes_refs": [
+          "relacao-nccn-20261017-prostata-niraparibe-abiraterona"
+        ],
+        "conflitos_refs": [],
+        "pendencias": [
+          "REVISAO_CLINICA_DO_DELTA",
+          "VERIFICAR_ACESSO_BRASILEIRO_POR_INDICACAO",
+          "POSOLOGIA_E_SUPORTE_NAO_COMPLETOS_NESTA_RODADA"
+        ],
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-2-correcao-auditoria",
+            "correcao_id": "M23",
+            "anterior": {
+              "conteudo_extraido": "Opção biomarcador-dirigida; distinguir doença sensível e resistente à castração e exposição prévia a ARPI.",
+              "fonte_refs": [
+                {
+                  "fonte_id": "nccn-9eb20b8f3605",
+                  "paginas_pdf": [
+                    8,
+                    34
+                  ],
+                  "secao": "UPDATES; PROS-15",
+                  "natureza": "EXTRACAO_DOCUMENTAL",
+                  "pagina_pdf": 8,
+                  "trecho": "Niraparib (category 2B) ▪Enzalutamide/Talazoparib (category 2B) ◊HRRm (other than BRCA1/2) – Regimen"
+                }
+              ],
+              "estado_curadoria": "A_CONFERIR",
+              "aprovacao_clinica": null,
+              "aplicabilidade": {
+                "criterios": [
+                  "mCSPC",
+                  "BRCA2 mutado",
+                  "Categoria depende de volume/sincronia"
+                ],
+                "paciente_individual": null,
+                "estado": "NAO_AVALIADA"
+              },
+              "evidencia_declarada": {
+                "sistema": "NCCN",
+                "categoria": null,
+                "estado": "NAO_EXTRAIDA_POR_ITEM"
+              }
+            },
+            "motivo": "Correção documental após auditoria Claude e conferência da fonte; não apaga versão anterior.",
+            "aprovacao_clinica": null
+          },
+          {
+            "revisao": "2026-10-17-nccn-final-documental",
+            "anterior": {
+              "conteudo_extraido": "mCSPC BRCA2 mutado: categoria2B em baixo volume síncrono/metacrônico; alto volume sem marca local (2A pelo cabeçalho). Nota yy: após completar docetaxel em triplete OU após EBRT do primário; benefício em baixo volume incerto, poucos casos metacrônicos de baixo volume e toxicidade adicional. Em mCRPC, a versão removeu a opção pós-ARPI; o ramo pré-ARPI BRCA1/2 mantém categoria1."
+            },
+            "motivo": "Espaçamento da prosa; sem modificar valores, códigos ou fontes."
+          }
+        ],
+        "fontes_por_campo": {
+          "conteudo_extraido": [
+            {
+              "fonte_id": "nccn-9eb20b8f3605",
+              "edicao": "1.2027",
+              "pagina_pdf": 34,
+              "paginas_pdf": [
+                34
+              ],
+              "secao": "PROS-15",
+              "trecho": "Niraparib and Abiraterone",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "3f5fd77990718f20041e220a6b7648f5ee12a0d4156807cc8f16a5c1e8fb691b"
+            },
+            {
+              "fonte_id": "nccn-9eb20b8f3605",
+              "edicao": "1.2027",
+              "pagina_pdf": 35,
+              "paginas_pdf": [
+                35
+              ],
+              "secao": "PROS-15A, nota yy",
+              "trecho": "following the completion of docetaxel",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "3f5fd77990718f20041e220a6b7648f5ee12a0d4156807cc8f16a5c1e8fb691b"
+            },
+            {
+              "fonte_id": "nccn-9eb20b8f3605",
+              "edicao": "1.2027",
+              "pagina_pdf": 38,
+              "paginas_pdf": [
+                38
+              ],
+              "secao": "PROS-18",
+              "trecho": "Niraparib and Abiraterone",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "3f5fd77990718f20041e220a6b7648f5ee12a0d4156807cc8f16a5c1e8fb691b"
+            },
+            {
+              "fonte_id": "nccn-9eb20b8f3605",
+              "edicao": "1.2027",
+              "pagina_pdf": 8,
+              "paginas_pdf": [
+                8
+              ],
+              "secao": "UPDATES v1.2027",
+              "trecho": "Abiraterone/Niraparib",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "3f5fd77990718f20041e220a6b7648f5ee12a0d4156807cc8f16a5c1e8fb691b"
+            }
+          ],
+          "aplicabilidade": [
+            {
+              "fonte_id": "nccn-9eb20b8f3605",
+              "edicao": "1.2027",
+              "pagina_pdf": 34,
+              "paginas_pdf": [
+                34
+              ],
+              "secao": "PROS-15",
+              "trecho": "Niraparib and Abiraterone",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "3f5fd77990718f20041e220a6b7648f5ee12a0d4156807cc8f16a5c1e8fb691b"
+            },
+            {
+              "fonte_id": "nccn-9eb20b8f3605",
+              "edicao": "1.2027",
+              "pagina_pdf": 35,
+              "paginas_pdf": [
+                35
+              ],
+              "secao": "PROS-15A, nota yy",
+              "trecho": "following the completion of docetaxel",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "3f5fd77990718f20041e220a6b7648f5ee12a0d4156807cc8f16a5c1e8fb691b"
+            },
+            {
+              "fonte_id": "nccn-9eb20b8f3605",
+              "edicao": "1.2027",
+              "pagina_pdf": 38,
+              "paginas_pdf": [
+                38
+              ],
+              "secao": "PROS-18",
+              "trecho": "Niraparib and Abiraterone",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "3f5fd77990718f20041e220a6b7648f5ee12a0d4156807cc8f16a5c1e8fb691b"
+            },
+            {
+              "fonte_id": "nccn-9eb20b8f3605",
+              "edicao": "1.2027",
+              "pagina_pdf": 8,
+              "paginas_pdf": [
+                8
+              ],
+              "secao": "UPDATES v1.2027",
+              "trecho": "Abiraterone/Niraparib",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "3f5fd77990718f20041e220a6b7648f5ee12a0d4156807cc8f16a5c1e8fb691b"
+            }
+          ],
+          "evidencia_declarada": [
+            {
+              "fonte_id": "nccn-9eb20b8f3605",
+              "edicao": "1.2027",
+              "pagina_pdf": 34,
+              "paginas_pdf": [
+                34
+              ],
+              "secao": "PROS-15",
+              "trecho": "Niraparib and Abiraterone",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "3f5fd77990718f20041e220a6b7648f5ee12a0d4156807cc8f16a5c1e8fb691b"
+            },
+            {
+              "fonte_id": "nccn-9eb20b8f3605",
+              "edicao": "1.2027",
+              "pagina_pdf": 35,
+              "paginas_pdf": [
+                35
+              ],
+              "secao": "PROS-15A, nota yy",
+              "trecho": "following the completion of docetaxel",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "3f5fd77990718f20041e220a6b7648f5ee12a0d4156807cc8f16a5c1e8fb691b"
+            },
+            {
+              "fonte_id": "nccn-9eb20b8f3605",
+              "edicao": "1.2027",
+              "pagina_pdf": 38,
+              "paginas_pdf": [
+                38
+              ],
+              "secao": "PROS-18",
+              "trecho": "Niraparib and Abiraterone",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "3f5fd77990718f20041e220a6b7648f5ee12a0d4156807cc8f16a5c1e8fb691b"
+            },
+            {
+              "fonte_id": "nccn-9eb20b8f3605",
+              "edicao": "1.2027",
+              "pagina_pdf": 8,
+              "paginas_pdf": [
+                8
+              ],
+              "secao": "UPDATES v1.2027",
+              "trecho": "Abiraterone/Niraparib",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "3f5fd77990718f20041e220a6b7648f5ee12a0d4156807cc8f16a5c1e8fb691b"
+            }
+          ]
+        },
+        "correcoes_auditoria": [
+          {
+            "id": "M23",
+            "revisao": "2026-10-17-nccn-delta-2-correcao-auditoria",
+            "estado": "APLICADA_COM_CONFERENCIA_DOCUMENTAL",
+            "fontes": [
+              {
+                "fonte_id": "nccn-9eb20b8f3605",
+                "edicao": "1.2027",
+                "pagina_pdf": 34,
+                "paginas_pdf": [
+                  34
+                ],
+                "secao": "PROS-15",
+                "trecho": "Niraparib and Abiraterone",
+                "ancora_contextual": null,
+                "natureza": "EXTRACAO_DOCUMENTAL",
+                "sha256_pdf": "3f5fd77990718f20041e220a6b7648f5ee12a0d4156807cc8f16a5c1e8fb691b"
+              },
+              {
+                "fonte_id": "nccn-9eb20b8f3605",
+                "edicao": "1.2027",
+                "pagina_pdf": 35,
+                "paginas_pdf": [
+                  35
+                ],
+                "secao": "PROS-15A, nota yy",
+                "trecho": "following the completion of docetaxel",
+                "ancora_contextual": null,
+                "natureza": "EXTRACAO_DOCUMENTAL",
+                "sha256_pdf": "3f5fd77990718f20041e220a6b7648f5ee12a0d4156807cc8f16a5c1e8fb691b"
+              },
+              {
+                "fonte_id": "nccn-9eb20b8f3605",
+                "edicao": "1.2027",
+                "pagina_pdf": 38,
+                "paginas_pdf": [
+                  38
+                ],
+                "secao": "PROS-18",
+                "trecho": "Niraparib and Abiraterone",
+                "ancora_contextual": null,
+                "natureza": "EXTRACAO_DOCUMENTAL",
+                "sha256_pdf": "3f5fd77990718f20041e220a6b7648f5ee12a0d4156807cc8f16a5c1e8fb691b"
+              },
+              {
+                "fonte_id": "nccn-9eb20b8f3605",
+                "edicao": "1.2027",
+                "pagina_pdf": 8,
+                "paginas_pdf": [
+                  8
+                ],
+                "secao": "UPDATES v1.2027",
+                "trecho": "Abiraterone/Niraparib",
+                "ancora_contextual": null,
+                "natureza": "EXTRACAO_DOCUMENTAL",
+                "sha256_pdf": "3f5fd77990718f20041e220a6b7648f5ee12a0d4156807cc8f16a5c1e8fb691b"
+              }
+            ],
+            "ajuste_ao_parecer": null
+          }
+        ]
+      },
+      {
+        "item_id": "nccn-20261017-prostata-capivasertibe-abiraterona",
+        "nome": "Capivasertibe + abiraterona",
+        "tipo": "OPCAO_TERAPEUTICA",
+        "dominio_principal": 6,
+        "conteudo_extraido": "mCSPC com deficiência PTEN, pacientes muito selecionados, categoria 2B. Nota ccc: discordância considerável no painel, ganho modesto de rPFS, ausência de ganho de sobrevida global, toxicidade considerável e ausência de comparação com triplete ADT/docetaxel/ARPI; muitos membros preferem aguardar seguimento mais maduro.",
+        "aplicabilidade": {
+          "criterios": [
+            "mCSPC alto volume",
+            "Deficiência de PTEN",
+            "Pacientes muito selecionados; categoria 2B"
+          ],
+          "paciente_individual": null,
+          "estado": "NAO_AVALIADA"
+        },
+        "dados_estruturados": {
+          "farmacos": [
+            "capivasertibe",
+            "abiraterona"
+          ],
+          "posologia": {
+            "estado": "NAO_EXTRAIDA_NESTA_RODADA",
+            "valor": null,
+            "motivo": "A rodada incorpora o delta de indicação/cenário; não completa dose por inferência."
+          }
+        },
+        "fonte_refs": [
+          {
+            "fonte_id": "nccn-9eb20b8f3605",
+            "edicao": "1.2027",
+            "pagina_pdf": 34,
+            "paginas_pdf": [
+              34
+            ],
+            "secao": "PROS-15",
+            "trecho": "Capivasertib/Abiraterone",
+            "ancora_contextual": null,
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "3f5fd77990718f20041e220a6b7648f5ee12a0d4156807cc8f16a5c1e8fb691b"
+          },
+          {
+            "fonte_id": "nccn-9eb20b8f3605",
+            "edicao": "1.2027",
+            "pagina_pdf": 35,
+            "paginas_pdf": [
+              35
+            ],
+            "secao": "PROS-15A, nota ccc",
+            "trecho": "considerable disagreement",
+            "ancora_contextual": null,
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "3f5fd77990718f20041e220a6b7648f5ee12a0d4156807cc8f16a5c1e8fb691b"
+          }
+        ],
+        "evidencia_declarada": {
+          "sistema": "NCCN",
+          "categoria": "2B",
+          "preferencia": "Very Select Patients Only",
+          "estado": "CONFERIDA_DOCUMENTALMENTE_A_CONFERIR_CLINICAMENTE",
+          "nota": "Categoria 2A sem marca local somente quando expressamente coberta pelo cabeçalho; múltiplas categorias permanecem nos ramos."
+        },
+        "estado_extracao": "EXTRAIDO_COM_LIMITES_DECLARADOS",
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "temporalidade": {
+          "referencia": "CENARIO_DESCRITO",
+          "datas_individuais": null
+        },
+        "propor_automaticamente": false,
+        "disponivel_para_prescricao": false,
+        "acesso": {
+          "registro_anvisa": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "incorporacao_conitec": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "pcdt_ddt": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "sigtap_apac": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "cobertura_privada": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "disponibilidade_institucional": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          }
+        },
+        "alternativas_legadas_refs": [],
+        "relacoes_refs": [
+          "relacao-nccn-20261017-prostata-capivasertibe-abiraterona"
+        ],
+        "conflitos_refs": [],
+        "pendencias": [
+          "REVISAO_CLINICA_DO_DELTA",
+          "VERIFICAR_ACESSO_BRASILEIRO_POR_INDICACAO",
+          "POSOLOGIA_E_SUPORTE_NAO_COMPLETOS_NESTA_RODADA"
+        ],
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-2-correcao-auditoria",
+            "correcao_id": "AD2-6",
+            "anterior": {
+              "conteudo_extraido": "Opção biomarcador-dirigida; distinguir doença sensível e resistente à castração e exposição prévia a ARPI.",
+              "fonte_refs": [
+                {
+                  "fonte_id": "nccn-9eb20b8f3605",
+                  "paginas_pdf": [
+                    8,
+                    34
+                  ],
+                  "secao": "UPDATES; PROS-15",
+                  "natureza": "EXTRACAO_DOCUMENTAL",
+                  "pagina_pdf": 34,
+                  "trecho": "Capivasertib/Abirateroneccc (category 2B) For monitoring, see PROS-14 PLEASE NOTE that use of"
+                }
+              ],
+              "estado_curadoria": "A_CONFERIR",
+              "aprovacao_clinica": null,
+              "evidencia_declarada": {
+                "sistema": "NCCN",
+                "categoria": null,
+                "estado": "NAO_EXTRAIDA_POR_ITEM"
+              }
+            },
+            "motivo": "Correção documental após auditoria Claude e conferência da fonte; não apaga versão anterior.",
+            "aprovacao_clinica": null
+          },
+          {
+            "revisao": "2026-10-17-nccn-final-documental",
+            "anterior": {
+              "conteudo_extraido": "mCSPC com deficiência PTEN, pacientes muito selecionados, categoria2B. Nota ccc: discordância considerável no painel, ganho modesto de rPFS, ausência de ganho de sobrevida global, toxicidade considerável e ausência de comparação com triplete ADT/docetaxel/ARPI; muitos membros preferem aguardar seguimento mais maduro."
+            },
+            "motivo": "Espaçamento da prosa; sem modificar valores, códigos ou fontes."
+          }
+        ],
+        "fontes_por_campo": {
+          "conteudo_extraido": [
+            {
+              "fonte_id": "nccn-9eb20b8f3605",
+              "edicao": "1.2027",
+              "pagina_pdf": 34,
+              "paginas_pdf": [
+                34
+              ],
+              "secao": "PROS-15",
+              "trecho": "Capivasertib/Abiraterone",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "3f5fd77990718f20041e220a6b7648f5ee12a0d4156807cc8f16a5c1e8fb691b"
+            },
+            {
+              "fonte_id": "nccn-9eb20b8f3605",
+              "edicao": "1.2027",
+              "pagina_pdf": 35,
+              "paginas_pdf": [
+                35
+              ],
+              "secao": "PROS-15A, nota ccc",
+              "trecho": "considerable disagreement",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "3f5fd77990718f20041e220a6b7648f5ee12a0d4156807cc8f16a5c1e8fb691b"
+            }
+          ],
+          "evidencia_declarada": [
+            {
+              "fonte_id": "nccn-9eb20b8f3605",
+              "edicao": "1.2027",
+              "pagina_pdf": 34,
+              "paginas_pdf": [
+                34
+              ],
+              "secao": "PROS-15",
+              "trecho": "Capivasertib/Abiraterone",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "3f5fd77990718f20041e220a6b7648f5ee12a0d4156807cc8f16a5c1e8fb691b"
+            },
+            {
+              "fonte_id": "nccn-9eb20b8f3605",
+              "edicao": "1.2027",
+              "pagina_pdf": 35,
+              "paginas_pdf": [
+                35
+              ],
+              "secao": "PROS-15A, nota ccc",
+              "trecho": "considerable disagreement",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "3f5fd77990718f20041e220a6b7648f5ee12a0d4156807cc8f16a5c1e8fb691b"
+            }
+          ]
+        },
+        "correcoes_auditoria": [
+          {
+            "id": "AD2-6",
+            "revisao": "2026-10-17-nccn-delta-2-correcao-auditoria",
+            "estado": "APLICADA_COM_CONFERENCIA_DOCUMENTAL",
+            "fontes": [
+              {
+                "fonte_id": "nccn-9eb20b8f3605",
+                "edicao": "1.2027",
+                "pagina_pdf": 34,
+                "paginas_pdf": [
+                  34
+                ],
+                "secao": "PROS-15",
+                "trecho": "Capivasertib/Abiraterone",
+                "ancora_contextual": null,
+                "natureza": "EXTRACAO_DOCUMENTAL",
+                "sha256_pdf": "3f5fd77990718f20041e220a6b7648f5ee12a0d4156807cc8f16a5c1e8fb691b"
+              },
+              {
+                "fonte_id": "nccn-9eb20b8f3605",
+                "edicao": "1.2027",
+                "pagina_pdf": 35,
+                "paginas_pdf": [
+                  35
+                ],
+                "secao": "PROS-15A, nota ccc",
+                "trecho": "considerable disagreement",
+                "ancora_contextual": null,
+                "natureza": "EXTRACAO_DOCUMENTAL",
+                "sha256_pdf": "3f5fd77990718f20041e220a6b7648f5ee12a0d4156807cc8f16a5c1e8fb691b"
+              }
+            ],
+            "ajuste_ao_parecer": null
+          }
+        ]
+      },
+      {
+        "item_id": "nccn-20261017-prostata-estratificacao-mcspc",
+        "nome": "mCSPC: volume, sincronia e radiofármacos",
+        "tipo": "CENARIO_TERAPEUTICO",
+        "dominio_principal": 6,
+        "conteudo_extraido": "O NCCN separa baixo volume metacrônico, baixo volume síncrono e alto volume, incluindo contextos específicos de terapia ao primário, MDT e Lu-177-PSMA associado a ARPI.",
+        "aplicabilidade": {
+          "criterios": [
+            "mCSPC",
+            "Volume, cronologia e PSMA documentados quando pertinentes"
+          ],
+          "paciente_individual": null,
+          "estado": "NAO_AVALIADA"
+        },
+        "dados_estruturados": {},
+        "fonte_refs": [
+          {
+            "fonte_id": "nccn-9eb20b8f3605",
+            "paginas_pdf": [
+              34
+            ],
+            "secao": "PROS-15",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "pagina_pdf": 34,
+            "trecho": "Metachronous Low-Volume mCSPC Synchronous Low-Volume mCSPCaaa High-Volume mCSPC (Synchronous or Metachronous) Preferred"
+          }
+        ],
+        "evidencia_declarada": {
+          "sistema": "NCCN",
+          "categoria": null,
+          "estado": "NAO_EXTRAIDA_POR_ITEM"
+        },
+        "estado_extracao": "EXTRAIDO_COM_LIMITES_DECLARADOS",
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "temporalidade": {
+          "referencia": "CENARIO_DESCRITO",
+          "datas_individuais": null
+        },
+        "propor_automaticamente": false,
+        "disponivel_para_prescricao": false,
+        "acesso": {
+          "registro_anvisa": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "incorporacao_conitec": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "pcdt_ddt": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "sigtap_apac": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "cobertura_privada": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "disponibilidade_institucional": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          }
+        },
+        "alternativas_legadas_refs": [],
+        "relacoes_refs": [
+          "relacao-nccn-20261017-prostata-estratificacao-mcspc"
+        ],
+        "conflitos_refs": [],
+        "pendencias": [
+          "REVISAO_CLINICA_DO_DELTA",
+          "VERIFICAR_ACESSO_BRASILEIRO_POR_INDICACAO"
+        ]
+      }
+    ],
+    "cenarios": {
+      "identidade_ref": "/identidade/cenarios",
+      "detalhamento_ref": "/tratamento/cenarios",
+      "novas_condicoes_refs": [
+        "nccn-20261017-prostata-rucaparibe",
+        "nccn-20261017-prostata-niraparibe-abiraterona",
+        "nccn-20261017-prostata-capivasertibe-abiraterona",
+        "nccn-20261017-prostata-estratificacao-mcspc"
+      ],
+      "regra": "Não igualar automaticamente as duas listas nem selecionar cenário individual nesta camada."
+    },
+    "fontes": [
+      {
+        "id": "nccn-9eb20b8f3605",
+        "arquivo_local": "C:\\Users\\silas\\.aside\\u\\0\\sessions\\2026-10-17_LutNNwUyDZGlA1pF\\artifacts\\nccn\\Prostate Cancer.pdf",
+        "nome": "Prostate Cancer",
+        "sha256": "3f5fd77990718f20041e220a6b7648f5ee12a0d4156807cc8f16a5c1e8fb691b",
+        "numero_paginas": 253,
+        "versao_declarada": "1.2027",
+        "origem": "ARQUIVO_LOCAL_FORNECIDO",
+        "autenticidade_externa": "NAO_VERIFICADA_NO_PORTAL",
+        "paginas_examinadas": [
+          8,
+          34,
+          35,
+          38,
+          39
+        ]
+      }
+    ],
+    "fontes_legadas_refs": [
+      "/header/fonte",
+      "/curadoria/fontesLidas"
+    ],
+    "ensaios": {
+      "legado_ref": "/tratamento/ensaios",
+      "novos_nct": [],
+      "nota": "Nenhum identificador NCT foi inventado ou verificado nesta rodada."
+    },
+    "relacoes": [
+      {
+        "relacao_id": "relacao-nccn-20261017-prostata-rucaparibe",
+        "tipo": "CONDICOES_PARA_APRESENTACAO_DOCUMENTAL",
+        "destino_item_ref": "nccn-20261017-prostata-rucaparibe",
+        "criterios_extraidos": [
+          "mCRPC adenocarcinoma",
+          "BRCA1/2 mutado",
+          "Distinguir pós-ARPI/pré-docetaxel de pós-ARPI/pós-docetaxel"
+        ],
+        "origem_condicoes": "FONTE_NCCN_CITADA",
+        "origem_mapeamento": "PROPOSTA_DE_MAPEAMENTO",
+        "executavel": false,
+        "estado": "A_CONFERIR",
+        "dados_ausentes": "MANTER_INDETERMINADO",
+        "dados_conflitantes": "MANTER_CONFLITO",
+        "efeito": "APRESENTAR_CONTEUDO_PARA_REVISAO; NAO PRESCREVER",
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-2-correcao-auditoria",
+            "correcao_id": "ALTA-prostata-rucaparibe",
+            "criterios_extraidos": [
+              "mCRPC",
+              "BRCA1/2 mutado",
+              "Pós-ARPI conforme tabela"
+            ]
+          }
+        ],
+        "fontes_por_campo": {
+          "criterios_extraidos": [
+            {
+              "fonte_id": "nccn-9eb20b8f3605",
+              "edicao": "1.2027",
+              "pagina_pdf": 8,
+              "paginas_pdf": [
+                8
+              ],
+              "secao": "UPDATES v1.2027",
+              "trecho": "Rucaparib",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "3f5fd77990718f20041e220a6b7648f5ee12a0d4156807cc8f16a5c1e8fb691b"
+            },
+            {
+              "fonte_id": "nccn-9eb20b8f3605",
+              "edicao": "1.2027",
+              "pagina_pdf": 38,
+              "paginas_pdf": [
+                38
+              ],
+              "secao": "PROS-18",
+              "trecho": "Rucaparib",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "3f5fd77990718f20041e220a6b7648f5ee12a0d4156807cc8f16a5c1e8fb691b"
+            },
+            {
+              "fonte_id": "nccn-9eb20b8f3605",
+              "edicao": "1.2027",
+              "pagina_pdf": 39,
+              "paginas_pdf": [
+                39
+              ],
+              "secao": "PROS-18A, nota mmm",
+              "trecho": "different biomarker",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "3f5fd77990718f20041e220a6b7648f5ee12a0d4156807cc8f16a5c1e8fb691b"
+            }
+          ]
+        }
+      },
+      {
+        "relacao_id": "relacao-nccn-20261017-prostata-niraparibe-abiraterona",
+        "tipo": "CONDICOES_PARA_APRESENTACAO_DOCUMENTAL",
+        "destino_item_ref": "nccn-20261017-prostata-niraparibe-abiraterona",
+        "criterios_extraidos": [
+          "mCSPC com BRCA2 mutado",
+          "Após completar docetaxel no triplete OU EBRT do primário",
+          "Distinguir baixo/alto volume e sincronia",
+          "Não extrapolar para mCRPC pós-ARPI"
+        ],
+        "origem_condicoes": "FONTE_NCCN_CITADA",
+        "origem_mapeamento": "PROPOSTA_DE_MAPEAMENTO",
+        "executavel": false,
+        "estado": "A_CONFERIR",
+        "dados_ausentes": "MANTER_INDETERMINADO",
+        "dados_conflitantes": "MANTER_CONFLITO",
+        "efeito": "APRESENTAR_CONTEUDO_PARA_REVISAO; NAO PRESCREVER",
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-2-correcao-auditoria",
+            "correcao_id": "M23",
+            "criterios_extraidos": [
+              "mCSPC",
+              "BRCA2 mutado",
+              "Categoria depende de volume/sincronia"
+            ]
+          }
+        ],
+        "fontes_por_campo": {
+          "criterios_extraidos": [
+            {
+              "fonte_id": "nccn-9eb20b8f3605",
+              "edicao": "1.2027",
+              "pagina_pdf": 34,
+              "paginas_pdf": [
+                34
+              ],
+              "secao": "PROS-15",
+              "trecho": "Niraparib and Abiraterone",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "3f5fd77990718f20041e220a6b7648f5ee12a0d4156807cc8f16a5c1e8fb691b"
+            },
+            {
+              "fonte_id": "nccn-9eb20b8f3605",
+              "edicao": "1.2027",
+              "pagina_pdf": 35,
+              "paginas_pdf": [
+                35
+              ],
+              "secao": "PROS-15A, nota yy",
+              "trecho": "following the completion of docetaxel",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "3f5fd77990718f20041e220a6b7648f5ee12a0d4156807cc8f16a5c1e8fb691b"
+            },
+            {
+              "fonte_id": "nccn-9eb20b8f3605",
+              "edicao": "1.2027",
+              "pagina_pdf": 38,
+              "paginas_pdf": [
+                38
+              ],
+              "secao": "PROS-18",
+              "trecho": "Niraparib and Abiraterone",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "3f5fd77990718f20041e220a6b7648f5ee12a0d4156807cc8f16a5c1e8fb691b"
+            },
+            {
+              "fonte_id": "nccn-9eb20b8f3605",
+              "edicao": "1.2027",
+              "pagina_pdf": 8,
+              "paginas_pdf": [
+                8
+              ],
+              "secao": "UPDATES v1.2027",
+              "trecho": "Abiraterone/Niraparib",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "3f5fd77990718f20041e220a6b7648f5ee12a0d4156807cc8f16a5c1e8fb691b"
+            }
+          ]
+        }
+      },
+      {
+        "relacao_id": "relacao-nccn-20261017-prostata-capivasertibe-abiraterona",
+        "tipo": "CONDICOES_PARA_APRESENTACAO_DOCUMENTAL",
+        "destino_item_ref": "nccn-20261017-prostata-capivasertibe-abiraterona",
+        "criterios_extraidos": [
+          "mCSPC alto volume",
+          "Deficiência de PTEN",
+          "Pacientes muito selecionados; categoria 2B"
+        ],
+        "origem_condicoes": "FONTE_NCCN_CITADA",
+        "origem_mapeamento": "PROPOSTA_DE_MAPEAMENTO",
+        "executavel": false,
+        "estado": "A_CONFERIR",
+        "dados_ausentes": "MANTER_INDETERMINADO",
+        "dados_conflitantes": "MANTER_CONFLITO",
+        "efeito": "APRESENTAR_CONTEUDO_PARA_REVISAO; NAO PRESCREVER",
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-2-correcao-auditoria",
+            "correcao_id": "AD2-6",
+            "criterios_extraidos": [
+              "mCSPC alto volume",
+              "Deficiência de PTEN",
+              "Pacientes muito selecionados; categoria 2B"
+            ]
+          }
+        ],
+        "fontes_por_campo": {
+          "criterios_extraidos": [
+            {
+              "fonte_id": "nccn-9eb20b8f3605",
+              "edicao": "1.2027",
+              "pagina_pdf": 34,
+              "paginas_pdf": [
+                34
+              ],
+              "secao": "PROS-15",
+              "trecho": "Capivasertib/Abiraterone",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "3f5fd77990718f20041e220a6b7648f5ee12a0d4156807cc8f16a5c1e8fb691b"
+            },
+            {
+              "fonte_id": "nccn-9eb20b8f3605",
+              "edicao": "1.2027",
+              "pagina_pdf": 35,
+              "paginas_pdf": [
+                35
+              ],
+              "secao": "PROS-15A, nota ccc",
+              "trecho": "considerable disagreement",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "3f5fd77990718f20041e220a6b7648f5ee12a0d4156807cc8f16a5c1e8fb691b"
+            }
+          ]
+        }
+      },
+      {
+        "relacao_id": "relacao-nccn-20261017-prostata-estratificacao-mcspc",
+        "tipo": "CONDICOES_PARA_APRESENTACAO_DOCUMENTAL",
+        "destino_item_ref": "nccn-20261017-prostata-estratificacao-mcspc",
+        "criterios_extraidos": [
+          "mCSPC",
+          "Volume, cronologia e PSMA documentados quando pertinentes"
+        ],
+        "origem_condicoes": "FONTE_NCCN_CITADA",
+        "origem_mapeamento": "PROPOSTA_DE_MAPEAMENTO",
+        "executavel": false,
+        "estado": "A_CONFERIR",
+        "dados_ausentes": "MANTER_INDETERMINADO",
+        "dados_conflitantes": "MANTER_CONFLITO",
+        "efeito": "APRESENTAR_CONTEUDO_PARA_REVISAO; NAO PRESCREVER"
+      }
+    ],
+    "conflitos": [],
+    "conflitos_legados_ref": "/conflitos",
+    "pendencias": [
+      {
+        "id": "revisao-clinica",
+        "estado": "ABERTA",
+        "descricao": "Conferir cada acréscimo, condições, fontes, doses, interações e suporte antes de uso clínico."
+      },
+      {
+        "id": "acesso-brasileiro",
+        "estado": "ABERTA",
+        "descricao": "NCCN não comprova Anvisa, Conitec, PCDT/DDT, SIGTAP/APAC, cobertura privada ou acesso institucional."
+      },
+      {
+        "id": "cobertura-nccn",
+        "estado": "PARCIAL_POR_DELTA",
+        "descricao": "Leitura dirigida das páginas citadas; não há alegação de extração integral da diretriz."
+      }
+    ],
+    "pendencias_legadas_ref": "/pendencias",
+    "itens_adicionais_a_classificar": [
+      {
+        "origem_ref": "/header",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/status",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/consultavel",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/alerta",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/substitui",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/identidade",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/pendencias",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/conflitos",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/curadoria",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/correcoes",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      }
+    ],
+    "mapa_de_cobertura": [
+      {
+        "origem_json_pointer": "/header",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "b46a1598668f3e1d29d023b9969f8c84d8219c1e57d962c6764ec7d3b6266125",
+        "valores_folha": 9
+      },
+      {
+        "origem_json_pointer": "/status",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "04635ca3844c66b19ebbf49bf9ff60fe851d6ce89597d23e6a970f1dc3927289",
+        "valores_folha": 1
+      },
+      {
+        "origem_json_pointer": "/consultavel",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b",
+        "valores_folha": 1
+      },
+      {
+        "origem_json_pointer": "/alerta",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "valores_folha": 1
+      },
+      {
+        "origem_json_pointer": "/substitui",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "90f9ca327bd3e45ab0b23de732b70a451308f6177e3180d29070fd6d867875e7",
+        "valores_folha": 1
+      },
+      {
+        "origem_json_pointer": "/identidade",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "bb6119c61001a9dd67cd445c3d9ab122f56b7255cd664705706aa815cf0f67f8",
+        "valores_folha": 14
+      },
+      {
+        "origem_json_pointer": "/diagnostico",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "dcfe12756a85eb3ccc3ece78568a9fd575e8d45f856d4f2b51dc551369f9b42b",
+        "valores_folha": 106
+      },
+      {
+        "origem_json_pointer": "/estadiamento",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "46e68f57f5ce5223727bf2a846bbc2bb7c8d1ed53dbb52e75693642ffafae37a",
+        "valores_folha": 354
+      },
+      {
+        "origem_json_pointer": "/tratamento",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "1b798c5446eb351a42cc587ddc4c5417e27c6b29e3baeddab1385a1170ebaf43",
+        "valores_folha": 1889
+      },
+      {
+        "origem_json_pointer": "/ligacoes",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "03b07c76fd50635b5b001389793546d038a30f08697c2f6a9423036188c3ed09",
+        "valores_folha": 188
+      },
+      {
+        "origem_json_pointer": "/pendencias",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "e774276ac873987b2ecbb7b21c47fae4a9e422ee0638f0857aef117863d508f4",
+        "valores_folha": 46
+      },
+      {
+        "origem_json_pointer": "/conflitos",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "8d06011c09c16ee71d4f1927e3c7b078c65f4d21fdf2449ff3e1c3dafcf0923d",
+        "valores_folha": 141
+      },
+      {
+        "origem_json_pointer": "/curadoria",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "bcdc8a39834559f363d133d6f482c99269cd0565603e56ffad4b66a6bf3ab5d2",
+        "valores_folha": 27
+      },
+      {
+        "origem_json_pointer": "/correcoes",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "e45e94132d9c16d578857798b66761885c467965153473bd91274023f62560c2",
+        "valores_folha": 12
+      }
+    ],
+    "reconciliacao_com_versao_anterior": {
+      "modo": "ADITIVO",
+      "originais_removidos": 0,
+      "originais_alterados": 0,
+      "contagens_preservadas": {
+        "protocolos": 45,
+        "ensaios": 10,
+        "cenarios_identidade": 8,
+        "cenarios_tratamento": 9,
+        "seguimento": 4,
+        "conflitos": 9,
+        "pendencias": 12
+      }
+    },
+    "relatorio_de_completude": {
+      "estado": "INCOMPLETA_PARA_DIRETRIZ_INTEGRAL",
+      "preservacao_legado": "INTEGRAL",
+      "delta_itens": 4,
+      "normalizacao_legado": "INDEXACAO_POR_REFERENCIA; NAO REEXTRACAO CLINICA",
+      "posologias": "SOMENTE AS EXPLICITAMENTE EXTRAIDAS; RESTANTES PENDENTES",
+      "sem_fato_paciente": true,
+      "sem_aprovacao_inferida": true
+    },
+    "revisoes_auditoria": [
+      {
+        "revisao": "2026-10-17-nccn-delta-2-correcao-auditoria",
+        "correcoes": [
+          "ALTA-prostata-rucaparibe",
+          "M23",
+          "AD2-6"
+        ],
+        "legado_modificado": false,
+        "aprovacao_clinica": null,
+        "nota": "Correções conferidas nos PDFs; a auditoria Claude foi amostral. Os 33 itens não auditados não foram promovidos a revisados."
+      }
+    ],
+    "fechamento_documental": [
+      {
+        "revisao": "2026-10-17-nccn-final-documental",
+        "estado": "CORRECOES_DOCUMENTAIS_APLICADAS",
+        "ajustes_textuais": 3,
+        "deduplicacoes_por_referencia": [],
+        "aprovacao_clinica": null,
+        "legado_alterado": false
+      }
+    ]
+  }
 }

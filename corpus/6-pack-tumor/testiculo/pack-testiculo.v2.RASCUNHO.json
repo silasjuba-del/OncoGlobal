@@ -3472,5 +3472,4493 @@
       "achado": "Conferência MOC 2026 item 12",
       "acao": "AUC 7 ×1–2 e GETUG-13 (intensificação no mau prognóstico) com fonte MOC"
     }
-  ]
+  ],
+  "tumor_pack_universal": {
+    "schema_documental": "tumor-pack-universal@1",
+    "metadados": {
+      "revisao_documental": "2026-10-17-nccn-final-documental",
+      "versao": "1.3.0",
+      "data": "2026-10-17",
+      "autor_extracao": "Codex",
+      "estado": "RASCUNHO",
+      "aprovacao_clinica": null,
+      "escopo": "CAMADA_ADITIVA_UNIVERSAL_E_DELTA_DOCUMENTAL_NCCN",
+      "base_legada": {
+        "arquivo": "corpus/6-pack-tumor/testiculo/pack-testiculo.v2.RASCUNHO.json",
+        "commit": "2c0991d",
+        "versao": "2.0.0",
+        "sha256_bytes": "6879a6bbf17c3cabb392feb0f4a4bb052ffe8a24a76d7daa86443d27e72aedc4",
+        "sha256_semantico": "d659ca8674dc97912068558f4f64e493c687d5bee9e0f0dd2c7ff208eea3180a"
+      },
+      "nota_versao": "Camada universal 1.3.0; header identifica o legado preservado. Fechamento documental, sem aprovação clínica ou ativação.",
+      "integra_runtime": false,
+      "gera_conduta": false,
+      "historico_revisoes": [
+        {
+          "revisao_documental": "2026-10-17-nccn-delta-1",
+          "versao": "1.0.0",
+          "data": "2026-10-17",
+          "autor_extracao": "Codex",
+          "estado": "RASCUNHO",
+          "aprovacao_clinica": null,
+          "escopo": "CAMADA_ADITIVA_UNIVERSAL_E_DELTA_DOCUMENTAL_NCCN",
+          "base_legada": {
+            "arquivo": "corpus/6-pack-tumor/testiculo/pack-testiculo.v2.RASCUNHO.json",
+            "commit": "2c0991d",
+            "versao": "2.0.0",
+            "sha256_bytes": "6879a6bbf17c3cabb392feb0f4a4bb052ffe8a24a76d7daa86443d27e72aedc4",
+            "sha256_semantico": "d659ca8674dc97912068558f4f64e493c687d5bee9e0f0dd2c7ff208eea3180a"
+          },
+          "nota_versao": "header.versao identifica o legado intacto; esta extensão possui revisão própria. Não reutilizar aprovação/hashes antigos para o conjunto alterado.",
+          "integra_runtime": false,
+          "gera_conduta": false
+        },
+        {
+          "revisao_documental": "2026-10-17-nccn-delta-2-correcao-auditoria",
+          "versao": "1.1.0",
+          "data": "2026-10-17",
+          "autor_extracao": "Codex",
+          "estado": "RASCUNHO",
+          "aprovacao_clinica": null,
+          "escopo": "CAMADA_ADITIVA_UNIVERSAL_E_DELTA_DOCUMENTAL_NCCN",
+          "base_legada": {
+            "arquivo": "corpus/6-pack-tumor/testiculo/pack-testiculo.v2.RASCUNHO.json",
+            "commit": "2c0991d",
+            "versao": "2.0.0",
+            "sha256_bytes": "6879a6bbf17c3cabb392feb0f4a4bb052ffe8a24a76d7daa86443d27e72aedc4",
+            "sha256_semantico": "d659ca8674dc97912068558f4f64e493c687d5bee9e0f0dd2c7ff208eea3180a"
+          },
+          "nota_versao": "Versão desta camada:1.1.0; revisão documental:2026-10-17-nccn-delta-2-correcao-auditoria. header.versao continua referindo-se ao legado intacto. Nenhuma aprovação é transferida.",
+          "integra_runtime": false,
+          "gera_conduta": false,
+          "historico_revisoes": [
+            {
+              "revisao_documental": "2026-10-17-nccn-delta-1",
+              "versao": "1.0.0",
+              "data": "2026-10-17",
+              "autor_extracao": "Codex",
+              "estado": "RASCUNHO",
+              "aprovacao_clinica": null,
+              "escopo": "CAMADA_ADITIVA_UNIVERSAL_E_DELTA_DOCUMENTAL_NCCN",
+              "base_legada": {
+                "arquivo": "corpus/6-pack-tumor/testiculo/pack-testiculo.v2.RASCUNHO.json",
+                "commit": "2c0991d",
+                "versao": "2.0.0",
+                "sha256_bytes": "6879a6bbf17c3cabb392feb0f4a4bb052ffe8a24a76d7daa86443d27e72aedc4",
+                "sha256_semantico": "d659ca8674dc97912068558f4f64e493c687d5bee9e0f0dd2c7ff208eea3180a"
+              },
+              "nota_versao": "header.versao identifica o legado intacto; esta extensão possui revisão própria. Não reutilizar aprovação/hashes antigos para o conjunto alterado.",
+              "integra_runtime": false,
+              "gera_conduta": false
+            }
+          ]
+        }
+      ]
+    },
+    "identidade_ref": "/identidade",
+    "dominios": [
+      {
+        "dominio_id": 1,
+        "nome": "Diagnóstico e patologia",
+        "itens_legados_refs": [
+          "legado-bb6142c28bbf3f3b",
+          "legado-8a7e90bde7242fa1",
+          "legado-9b3affab1047c82a",
+          "legado-c5dda7e1c2f85d19",
+          "legado-4d3c448a2d93f837",
+          "legado-9113faf7d2bae768",
+          "legado-57895082d7a3d911",
+          "legado-fd7885113a263d96",
+          "legado-8f18523debc4b233"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 2,
+        "nome": "Estadiamento, extensão e risco",
+        "itens_legados_refs": [
+          "legado-14b70ed38bf74741",
+          "legado-0e5af6df86c2c4ff",
+          "legado-21cd9d5550fcf5a0",
+          "legado-1b8a7f9c0ff34797",
+          "legado-8acfb0ca7897e39c",
+          "legado-8febd722f23591fc",
+          "legado-f8c795f191a5d926",
+          "legado-9749696033003d79",
+          "legado-dab5d2dd1ce393f9",
+          "legado-b4b4304ff592d559",
+          "legado-2840c0cdbb9689db",
+          "legado-613c594471e42de6",
+          "legado-eb9a95c28c2c1af9",
+          "legado-c3c49ff328f8361e",
+          "legado-fe84cf4cd937fb73",
+          "legado-c60db7b438283d9e",
+          "legado-6c0082803cc6ff95"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 3,
+        "nome": "Biomarcadores e farmacogenética",
+        "itens_legados_refs": [
+          "legado-c47430e46af53183",
+          "legado-f9ce571a850adef6"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 4,
+        "nome": "Exames e requisitos documentais",
+        "itens_legados_refs": [
+          "legado-b4b9fc1d2b9d8c66",
+          "legado-704ecbab5267809c",
+          "legado-87745320292de101",
+          "legado-1096bf107bf6ad11",
+          "legado-6ab5876eb836046c",
+          "legado-0067fd3ecbb1d262",
+          "legado-06db3083ccb482d2",
+          "legado-542fa8d20d09fdf3",
+          "legado-1d1be0103458d700",
+          "legado-8a92e3ad8ebf934b",
+          "legado-48047908922c81a7",
+          "legado-4f31b5c8a6377f92",
+          "legado-d934db2546d63629",
+          "legado-ee5d919f526ee813",
+          "legado-6358b28669eb580e",
+          "legado-d4baa75ad3252922",
+          "legado-cc4c9a78b17960fe",
+          "legado-c627073debc458b9",
+          "legado-eacd8073747f99e9",
+          "legado-08507fbf3ffbb559",
+          "legado-bdf08dc6501f9d06",
+          "legado-ca207bccc4e23feb",
+          "legado-ea6d410509baf5df",
+          "legado-b18d33a7d6daaa7c",
+          "legado-413ff39849f129c8",
+          "legado-83c72c6a50ef4d5b",
+          "legado-86c2d5bc49acf0b9",
+          "legado-bfef5073f438bc40",
+          "legado-8bc7a3271610e655",
+          "legado-b6e711a8068bce51",
+          "legado-22c9d508a982d509",
+          "legado-e4fcef1d375a39de",
+          "legado-a7f758d5fb7059a8",
+          "legado-a20c2bc169abded1",
+          "legado-ea73a4682c2f2ae7",
+          "legado-2d42b907049ce62c",
+          "legado-56ac666d1338b85f",
+          "legado-87651360c7e8d3f1",
+          "legado-be226e9752b07cdd",
+          "legado-b444a95156e8a467",
+          "legado-07392cdb14790c42",
+          "legado-04613d11e4409170",
+          "legado-eebf0c6696b2d1ec",
+          "legado-b036ed1e085560b8",
+          "legado-72c85f3ddb32430f",
+          "legado-a802cee28cec3270",
+          "legado-2032a3625da2a320",
+          "legado-d65748c83703a5ba",
+          "legado-1eddc815395c8c6a",
+          "legado-453f97871ba12199",
+          "legado-448a0e3854e94a74",
+          "legado-09d79eb53dc93bb4",
+          "legado-c702a6cae365a720",
+          "legado-58067df56e5ae062",
+          "legado-34d804e638487e28",
+          "legado-c8b720ecb0670c7a",
+          "legado-e41eba912daafd74",
+          "legado-51a6dbd1849bec48",
+          "legado-2b9fe797f859dbf9",
+          "legado-3ed61a7117e107af",
+          "legado-fcd382ba8e7ac8a5"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 5,
+        "nome": "Avaliação antes do tratamento",
+        "itens_legados_refs": [],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "NAO_ESTRUTURADO_NESTA_RODADA",
+        "observacao": "Ausência de referências não significa não aplicabilidade; textos dentro de outros itens permanecem preservados."
+      },
+      {
+        "dominio_id": 6,
+        "nome": "Tratamento e protocolos",
+        "itens_legados_refs": [
+          "legado-8f84dca41a270a6b",
+          "legado-0e286d8480d27ee0",
+          "legado-2a53957b91384aaf",
+          "legado-baab31e3174a2fd7",
+          "legado-52dc1f8266c2794a",
+          "legado-515e93a7b87db8cb",
+          "legado-e99258d426877117",
+          "legado-27926989d88cbf79",
+          "legado-3f2c19801d61a906",
+          "legado-ae376a6c244fb963",
+          "legado-9a4514a4eaa629a6",
+          "legado-4a96388038c622f6",
+          "legado-14150c62d0c5bdd7",
+          "legado-4ec6ae39785ed6df",
+          "legado-4ab8c59265534b33",
+          "legado-d97cc48511990231",
+          "legado-f54617942d6e24b4",
+          "legado-36331dc10b48c2f8",
+          "legado-cf0e634ad16019e2",
+          "legado-7853758b00a74f92",
+          "legado-fd26877e2f25760e",
+          "legado-bf9fd98d2d596da0",
+          "legado-09569656363cf0ac",
+          "legado-336c197d2684a401",
+          "legado-c0e1da9919e1cd8f",
+          "legado-6cf4eddaf6d35c10",
+          "legado-976b54c25a03a789",
+          "legado-511bf5fa8a7a568d",
+          "legado-fd65ebeb900384d8",
+          "legado-e1c8f783b04cd7d6",
+          "legado-0bb4b395db1f20b2",
+          "legado-d7881d9f229125f8",
+          "legado-a6cb1601967baf49",
+          "legado-aa0f860af6be4e98",
+          "legado-2b5872a296722595",
+          "legado-96e6a3661fe9ed4a",
+          "legado-ce5b3b3660826fad",
+          "legado-26b2339bff37ebb2",
+          "legado-989b938aa551a9c9",
+          "legado-99a2ba0446f5e57e",
+          "legado-a3ea28077ae98c56",
+          "legado-9901a421c0ced63a",
+          "legado-b11167060e5e57e9",
+          "legado-2247203e21be13ce",
+          "legado-d03519d0a29be297",
+          "legado-bd0ec9960b39ec52",
+          "legado-ded9e309698af50a",
+          "legado-05b4499d5fee89cb"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 7,
+        "nome": "Segurança, interações e toxicidades",
+        "itens_legados_refs": [
+          "legado-a231b9dcbbe49371",
+          "legado-0c3ca1e9ed427186",
+          "legado-5059aeb06d07b3c0",
+          "legado-80f7ce928c1c7a34",
+          "legado-a80bee44a166982d",
+          "legado-b97287b129643a43",
+          "legado-880085b505f0eb3e",
+          "legado-7063ae923198f803",
+          "legado-999fbcd965f4d74f",
+          "legado-8de63009dfa6099c",
+          "legado-00f77e7d46728c63",
+          "legado-b11900587b4125c9",
+          "legado-83068dca7b5cd49c",
+          "legado-8ec3321de9041b05"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 8,
+        "nome": "Suporte e cuidados",
+        "itens_legados_refs": [
+          "legado-72509c679125a7c0",
+          "legado-49dfdfcf233f9769",
+          "legado-6a7046d07b99809e",
+          "legado-e13556af4d37bd6a"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 9,
+        "nome": "Avaliação de resposta e estado da doença",
+        "itens_legados_refs": [],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "NAO_ESTRUTURADO_NESTA_RODADA",
+        "observacao": "Ausência de referências não significa não aplicabilidade; textos dentro de outros itens permanecem preservados."
+      },
+      {
+        "dominio_id": 10,
+        "nome": "Seguimento e sobrevivência",
+        "itens_legados_refs": [
+          "legado-1c2c945b46e66cff",
+          "legado-381a57b6a7959f1f",
+          "legado-64b897ec86418f55",
+          "legado-40efe38b6135c61e",
+          "legado-e7eb775ae2579a78",
+          "legado-eec9dc007cf787d5",
+          "legado-9f79980de914c4d2",
+          "legado-766f51b547691ba6",
+          "legado-b82cc889b6b0c8ed",
+          "legado-d4bf0841c2925cd7",
+          "legado-28f6b32f38c68175"
+        ],
+        "itens_nccn_refs": [
+          "nccn-20261017-testiculo-calendarios"
+        ],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 11,
+        "nome": "Encaminhamentos e atuação multiprofissional",
+        "itens_legados_refs": [
+          "legado-30cfaca2cd60baf0",
+          "legado-685c8cf172414883",
+          "legado-9d905eddfd79114e",
+          "legado-b44a12d798aeab01",
+          "legado-e3b98c699838c56e"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 12,
+        "nome": "Documentos e acesso assistencial",
+        "itens_legados_refs": [
+          "legado-f1be0bc240fdcb6e",
+          "legado-77f7f1412350909b",
+          "legado-38816e083da265c6"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      }
+    ],
+    "indice_itens_legados": [
+      {
+        "item_id": "legado-bb6142c28bbf3f3b",
+        "origem_json_pointer": "/diagnostico/patologico/obtencao/0",
+        "sha256_conteudo": "b11f18256c572d4ea4071dfb4d3c80edc429578912ac2ed39dcc3ef6108d40ed",
+        "nome": "/diagnostico/patologico/obtencao/0",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/obtencao/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8a7e90bde7242fa1",
+        "origem_json_pointer": "/diagnostico/patologico/obtencao/1",
+        "sha256_conteudo": "cee150820edc080864762055966aacc202a916c8f7e80e360fd414082977f8fe",
+        "nome": "QT antes da orquiectomia",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/obtencao/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-9b3affab1047c82a",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/0",
+        "sha256_conteudo": "b4f6fe76264ed3bb8da0f1ab8d97960a0ea9fa33d49848d6a88c588fe099dd2f",
+        "nome": "Histologia: seminoma puro × não seminoma, com proporção de cada componente (carcinoma embrionário, saco vitelino, coriocarcinoma, teratoma)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-c5dda7e1c2f85d19",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/1",
+        "sha256_conteudo": "1410ae75584ff0d6b8a4b17a4cc9c54bf8aa2a34e767a7a8606d8fd5fc48b04c",
+        "nome": "Tamanho do tumor (pT1a < 3 cm × pT1b ≥ 3 cm — só para seminoma puro)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-4d3c448a2d93f837",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/2",
+        "sha256_conteudo": "0f3e6dae18cc5c8cfadd9c9a4afd076cf26fcabb56c43e43da1877328ab35b9b",
+        "nome": "Invasão linfovascular (ILV)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-9113faf7d2bae768",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/3",
+        "sha256_conteudo": "ac8e8a6fbd394336f8b56c07fbdd05d41ef889372845dec00ed1759e240d82b9",
+        "nome": "Invasão de rete testis",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-57895082d7a3d911",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/4",
+        "sha256_conteudo": "d90916a6b4f711196bcb283b4d2cab5a5cb9dd45ec5bb96d3a291298a2fdaa86",
+        "nome": "Invasão hilar, de epidídimo, de túnica/camada mesotelial visceral, de cordão espermático e de escroto (pT)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-fd7885113a263d96",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/5",
+        "sha256_conteudo": "2606284ba0d5b479da348f3ce2aa630d7789facd71e41d762b19c840fd36001f",
+        "nome": "Predomínio de carcinoma embrionário",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8f18523debc4b233",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/6",
+        "sha256_conteudo": "83bf62e76f1361a067621456ea16289f35918759eaf4387e97ad3f0136ec9de2",
+        "nome": "Neoplasia germinativa intratubular (in situ)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-14b70ed38bf74741",
+        "origem_json_pointer": "/estadiamento/sistema",
+        "sha256_conteudo": "d7dab6e16ae3278a0513466816530a61b1fcf4548c0e925655782b9ee09cf5ce",
+        "nome": "AJCC",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-0e5af6df86c2c4ff",
+        "origem_json_pointer": "/estadiamento/edicao",
+        "sha256_conteudo": "b9750e4e53996eacf5f1db37d5a012463d1139b4b1e4155e6fb56a36ffcf141b",
+        "nome": "8ª edição (com categoria S de marcadores) + classificação prognóstica IGCCCG para estádios II-III",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-21cd9d5550fcf5a0",
+        "origem_json_pointer": "/estadiamento/gruposConduta/0",
+        "sha256_conteudo": "32916257aabe6d709e7765c339232c2e0937f671c6488b65916ab37ac21badd7",
+        "nome": "/estadiamento/gruposConduta/0",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-1b8a7f9c0ff34797",
+        "origem_json_pointer": "/estadiamento/gruposConduta/1",
+        "sha256_conteudo": "7338470b8552be7bd48065e3f1de82f69edc77ef86c930d8e07863aa0987202a",
+        "nome": "/estadiamento/gruposConduta/1",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8acfb0ca7897e39c",
+        "origem_json_pointer": "/estadiamento/gruposConduta/2",
+        "sha256_conteudo": "585c4dbd562ef984ef2ffdc9fd99f2700e8aad3d7bef3bf5ea5c77790c1defc6",
+        "nome": "/estadiamento/gruposConduta/2",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8febd722f23591fc",
+        "origem_json_pointer": "/estadiamento/gruposConduta/3",
+        "sha256_conteudo": "aefe6867eed144a2f4cf918bc5e7f960a48b1de47849cbb771a9f7496bfd104a",
+        "nome": "/estadiamento/gruposConduta/3",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-f8c795f191a5d926",
+        "origem_json_pointer": "/estadiamento/gruposConduta/4",
+        "sha256_conteudo": "a4008a74755643951440973221fdc832507e7488365d8801bb2991cdcf5d2b88",
+        "nome": "/estadiamento/gruposConduta/4",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-9749696033003d79",
+        "origem_json_pointer": "/estadiamento/gruposConduta/5",
+        "sha256_conteudo": "fdd985657191ae1ac7595c88d8f41b978ca671bfac9d866d2a0b5855ebc6c448",
+        "nome": "/estadiamento/gruposConduta/5",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/5/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-dab5d2dd1ce393f9",
+        "origem_json_pointer": "/estadiamento/gruposConduta/6",
+        "sha256_conteudo": "09587b8785b339de11f2f96d1f0b5fc7d5f1b4d3b348f382629dcdd2483afaf4",
+        "nome": "/estadiamento/gruposConduta/6",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/6/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b4b4304ff592d559",
+        "origem_json_pointer": "/estadiamento/gruposConduta/7",
+        "sha256_conteudo": "5d71ad9f38ef99f800a9b19c04b8550efa76d92f98b6be726d9a8dd78d3583e8",
+        "nome": "/estadiamento/gruposConduta/7",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/7/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-2840c0cdbb9689db",
+        "origem_json_pointer": "/estadiamento/gruposConduta/8",
+        "sha256_conteudo": "cfb3a3c2d0b9c6a9628161a0f557007ebd2f8c29c6101d884b86dbf97ab8b4fb",
+        "nome": "/estadiamento/gruposConduta/8",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/8/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-613c594471e42de6",
+        "origem_json_pointer": "/estadiamento/gruposConduta/9",
+        "sha256_conteudo": "229c520f82ebf49248a7752ad13db9b5c3903517fa13d92b45f5aaa0b71fe7c7",
+        "nome": "/estadiamento/gruposConduta/9",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/9/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-eb9a95c28c2c1af9",
+        "origem_json_pointer": "/estadiamento/gruposConduta/10",
+        "sha256_conteudo": "fe556f39750f126cc92bb227ee5af3533b63d9acf775c162d6cd83d763ec3e9e",
+        "nome": "/estadiamento/gruposConduta/10",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/10/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-c3c49ff328f8361e",
+        "origem_json_pointer": "/estadiamento/gruposConduta/11",
+        "sha256_conteudo": "7b088dc18b82ec99a38130540919ed6ad6ac7017d6cbf828b6109cc690946558",
+        "nome": "/estadiamento/gruposConduta/11",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/11/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-fe84cf4cd937fb73",
+        "origem_json_pointer": "/estadiamento/gruposConduta/12",
+        "sha256_conteudo": "389b60bb2562930777f2c991cff8f407158f433e2aeb1bc57d81346c1a04cb76",
+        "nome": "/estadiamento/gruposConduta/12",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/12/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-c60db7b438283d9e",
+        "origem_json_pointer": "/estadiamento/gruposConduta/13",
+        "sha256_conteudo": "b8d1d2f32f407728ed485f47560cebc2a7321d6585dc07f28f4a899b80d810a8",
+        "nome": "/estadiamento/gruposConduta/13",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/13/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-6c0082803cc6ff95",
+        "origem_json_pointer": "/estadiamento/marcadores",
+        "sha256_conteudo": "3069436f19a31d6a63e895327a383482c20f799bb8fe460a204887b2e3fa9407",
+        "nome": "/estadiamento/marcadores",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-c47430e46af53183",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/0",
+        "sha256_conteudo": "d653c9b855cbc649937a02a89f6dd1bb599a2b6b78f7d6715e0e28d706768c47",
+        "nome": "histologia incerta ou primário de linha média",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-f9ce571a850adef6",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/1",
+        "sha256_conteudo": "82d0053b28afa502c3696f2846e309dd95ee817f8a50b34725954c11c04b4f43",
+        "nome": "tumor de linha média de histogênese incerta",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b4b9fc1d2b9d8c66",
+        "origem_json_pointer": "/diagnostico/imagem/0",
+        "sha256_conteudo": "ca6fe2a584d4d0e074c55e3d4d3e9e51be9cf8b0277fe1bb4fd9cc93b3ac2cad",
+        "nome": "Ultrassonografia de bolsa escrotal (testículo)",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-704ecbab5267809c",
+        "origem_json_pointer": "/estadiamento/exames/0",
+        "sha256_conteudo": "2d91dd8826940c0deeb9b573e9be98f6fe4e10e2f87ec2a178ebf0699e13877b",
+        "nome": "TC de tórax",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-87745320292de101",
+        "origem_json_pointer": "/estadiamento/exames/1",
+        "sha256_conteudo": "bbe325fa40250b534d95ae4d8f94ab9c9ca96da5e1bee69321a12b80295a677c",
+        "nome": "TC de abdome",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-1096bf107bf6ad11",
+        "origem_json_pointer": "/estadiamento/exames/2",
+        "sha256_conteudo": "dc018a4dd8d857b9dbdf5307d94ad9eb17aae1ab4e1fbf24ecc0377c6da9de03",
+        "nome": "TC de pelve",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-6ab5876eb836046c",
+        "origem_json_pointer": "/estadiamento/exames/3",
+        "sha256_conteudo": "b8a14fc826eb201bf687a8fb20a3257f89c703c31778feac2b8e839359d78b6d",
+        "nome": "RM de abdome (alternativa à TC)",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-0067fd3ecbb1d262",
+        "origem_json_pointer": "/estadiamento/exames/4",
+        "sha256_conteudo": "89b6e7a5b902101b7b381266b594eeba363a3833d178dba19a544ef4dba93c84",
+        "nome": "RM de pelve (alternativa à TC)",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-06db3083ccb482d2",
+        "origem_json_pointer": "/estadiamento/exames/5",
+        "sha256_conteudo": "caee317d38a8b52e829fa59ccbe2ddfc886058c7d54226ab4c2184cc8965b8ec",
+        "nome": "RM de crânio",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/5/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-542fa8d20d09fdf3",
+        "origem_json_pointer": "/estadiamento/exames/6",
+        "sha256_conteudo": "d5eb40a7799696f74bc3085d2bb4623087595f9e80a6482b5e8595137915f890",
+        "nome": "Cintilografia óssea",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/6/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-1d1be0103458d700",
+        "origem_json_pointer": "/estadiamento/exames/7",
+        "sha256_conteudo": "b5e10e47d8984c272a8ce970efce8b693213a08d1eff61fad112288a5e8c6849",
+        "nome": "Alfafetoproteína",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/7/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8a92e3ad8ebf934b",
+        "origem_json_pointer": "/estadiamento/exames/8",
+        "sha256_conteudo": "3172ac926f4d65d8ededc5b7601ce3f023ca238ceb5356dcc0274d9c4ec78bf4",
+        "nome": "β-hCG",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/8/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-48047908922c81a7",
+        "origem_json_pointer": "/estadiamento/exames/9",
+        "sha256_conteudo": "42ff37810552799d43d64d20c54cd9d000ac434ba9ec89561d55a5c97fc3f343",
+        "nome": "Desidrogenase lática",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/9/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-4f31b5c8a6377f92",
+        "origem_json_pointer": "/estadiamento/exames/10",
+        "sha256_conteudo": "7bbdcddf73044c8b035adac5eb079c3986f70b3ed7497b55cdc0fefcd8916974",
+        "nome": "Hemograma",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/10/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d934db2546d63629",
+        "origem_json_pointer": "/estadiamento/exames/11",
+        "sha256_conteudo": "f4fa9c85b9d051a2e5635cc524f2116380edf90fc3076dbe1403dbcb06efb6b4",
+        "nome": "Creatinina (função renal)",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/11/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ee5d919f526ee813",
+        "origem_json_pointer": "/estadiamento/exames/12",
+        "sha256_conteudo": "6d9ac3c9fa4e9c9ec9d6ad03757208bf6fd45b8aaa7fed35172dd3c003249874",
+        "nome": "Ureia (função renal)",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/12/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-6358b28669eb580e",
+        "origem_json_pointer": "/estadiamento/exames/13",
+        "sha256_conteudo": "45041b290b114c23bd6db52fa8e5c9b6400b0fdb2e882baf811bb11a6537cb7d",
+        "nome": "TGO (função hepática)",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/13/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d4baa75ad3252922",
+        "origem_json_pointer": "/estadiamento/exames/14",
+        "sha256_conteudo": "4db4e75cf473a0805937ec13985d68f68a5f88bce1556d01d3d7c8d14e357027",
+        "nome": "TGP (função hepática)",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/14/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-cc4c9a78b17960fe",
+        "origem_json_pointer": "/estadiamento/exames/15",
+        "sha256_conteudo": "3e953c7bdadb6e91ea068d25779be2d95a9c47b68f185da2cc5d38fc2f304e07",
+        "nome": "Bilirrubinas (função hepática)",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/15/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-c627073debc458b9",
+        "origem_json_pointer": "/estadiamento/exames/16",
+        "sha256_conteudo": "d2f0195f6d1ed62fd023a9b6279efa93cf870b9c5148bcfe709acd38635a6d33",
+        "nome": "Sódio",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/16/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-eacd8073747f99e9",
+        "origem_json_pointer": "/estadiamento/exames/17",
+        "sha256_conteudo": "09c3d9f5feb14891d3dab932bf13f0bbe2b51e1d3729693d8263d3d11076cef9",
+        "nome": "Potássio",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/17/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-08507fbf3ffbb559",
+        "origem_json_pointer": "/estadiamento/exames/18",
+        "sha256_conteudo": "680bec1f5ed122c002ec86d81a2505fdb32e86a919e0edd0973dbb50bd77f925",
+        "nome": "Magnésio",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/18/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-bdf08dc6501f9d06",
+        "origem_json_pointer": "/estadiamento/exames/19",
+        "sha256_conteudo": "f1969300f09d010679242f30f0399bfff009fb6c519994c96fef939031a23b5c",
+        "nome": "Testosterona total",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/19/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ca207bccc4e23feb",
+        "origem_json_pointer": "/estadiamento/exames/20",
+        "sha256_conteudo": "d69c5dd4a1d27145b062cd7fef123dbc6bcc40a4afdb7ae6a5639ffb8186d60c",
+        "nome": "LH",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/20/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ea6d410509baf5df",
+        "origem_json_pointer": "/estadiamento/exames/21",
+        "sha256_conteudo": "67239cebca14c15ff475843123b5b91d9a716d3cd45ed8861b4ab339849a300b",
+        "nome": "FSH",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/21/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b18d33a7d6daaa7c",
+        "origem_json_pointer": "/estadiamento/exames/22",
+        "sha256_conteudo": "757279060f87489a41bb0a98bb544c2456c405cc8ef1b6673fb5092ec2741b6c",
+        "nome": "Audiometria tonal",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/22/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-413ff39849f129c8",
+        "origem_json_pointer": "/estadiamento/exames/23",
+        "sha256_conteudo": "9b112700b5bf39ee5970c3447d357768f24f4ca573856ad68b5c088c35397dcc",
+        "nome": "Prova de função pulmonar (espirometria; DLCO sem id próprio no catálogo)",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/23/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-83c72c6a50ef4d5b",
+        "origem_json_pointer": "/estadiamento/exames/24",
+        "sha256_conteudo": "aceb4f41162efa6c3eaf7ff7a0be05fe386287e411220c772a7151ef3f87dd34",
+        "nome": "PET/CT FDG",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/24/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-86c2d5bc49acf0b9",
+        "origem_json_pointer": "/ligacoes/exames/0",
+        "sha256_conteudo": "43d9a1d597073c1ab6b3e5053e3344a3dd04063f111c9e1779b6f3c3c73dd156",
+        "nome": "USG_BOLSA_ESCROTAL",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-bfef5073f438bc40",
+        "origem_json_pointer": "/ligacoes/exames/1",
+        "sha256_conteudo": "00cac656db90cece9385c8c98f658accb5b7c1553202e6be466fa96d39aaf2b9",
+        "nome": "ANATOMOPATOLOGICO",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8bc7a3271610e655",
+        "origem_json_pointer": "/ligacoes/exames/2",
+        "sha256_conteudo": "99a98b9d268e78a05608d792d2fad81f4e16f25b8a4f95da9f7decd91a23a0dc",
+        "nome": "IMUNOHISTOQUIMICA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b6e711a8068bce51",
+        "origem_json_pointer": "/ligacoes/exames/3",
+        "sha256_conteudo": "c6f5e5a6057e9ce942cde9a80b415b2bdbfccf0ac7d689ed5ae89b0846f94872",
+        "nome": "FISH",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-22c9d508a982d509",
+        "origem_json_pointer": "/ligacoes/exames/4",
+        "sha256_conteudo": "147b97b900462813d8c6528cc01d88f8a5102936ee96ee4fb121f8a7b77f60b0",
+        "nome": "TC_TORAX",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e4fcef1d375a39de",
+        "origem_json_pointer": "/ligacoes/exames/5",
+        "sha256_conteudo": "eea68f82f02592e6262514a154ff52ae85284765c1f48ab3b07cabb92ead209f",
+        "nome": "TC_ABDOMEN_SUPERIOR",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a7f758d5fb7059a8",
+        "origem_json_pointer": "/ligacoes/exames/6",
+        "sha256_conteudo": "5beb801ddc054db97d463dd8b682c9128772e22b7938b6d4c645af14dc4ddd7a",
+        "nome": "TC_PELVE",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a20c2bc169abded1",
+        "origem_json_pointer": "/ligacoes/exames/7",
+        "sha256_conteudo": "9c93ac77fd6457370871d33a5c58ba94777b0bb961f1f2eb5572fadaabd4df86",
+        "nome": "RM_ABDOMEN_SUPERIOR",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ea73a4682c2f2ae7",
+        "origem_json_pointer": "/ligacoes/exames/8",
+        "sha256_conteudo": "ae974cff2b8cea688a4632542e3da503ad4a2f0f9301b96d75afbb2588228c37",
+        "nome": "RM_PELVE",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-2d42b907049ce62c",
+        "origem_json_pointer": "/ligacoes/exames/9",
+        "sha256_conteudo": "bad8505e4a4450e4dd1c0691d739c56076e3e2a51d04f68ce1f3a4a823e89597",
+        "nome": "RM_CRANIO",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-56ac666d1338b85f",
+        "origem_json_pointer": "/ligacoes/exames/10",
+        "sha256_conteudo": "6256d23e08fe42e0c5f18c2d537248d451b59b2ecdf935ab864d69cd8131c89d",
+        "nome": "CINTILOGRAFIA_OSSEA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-87651360c7e8d3f1",
+        "origem_json_pointer": "/ligacoes/exames/11",
+        "sha256_conteudo": "4006905a9ae646b3b4a0a0ddc376a7dfad7b98e9d0d573edd4a21dc25b3a39c3",
+        "nome": "AFP",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-be226e9752b07cdd",
+        "origem_json_pointer": "/ligacoes/exames/12",
+        "sha256_conteudo": "dd13c22d49f61168262095a2dad18e4cbb0986ff4cc59fddfc395370f02578ed",
+        "nome": "BETA_HCG",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b444a95156e8a467",
+        "origem_json_pointer": "/ligacoes/exames/13",
+        "sha256_conteudo": "1e49060d9ff6bb936a9d5318d51a013d181e7cefe4fae7d0525411391d598361",
+        "nome": "DHL",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-07392cdb14790c42",
+        "origem_json_pointer": "/ligacoes/exames/14",
+        "sha256_conteudo": "bf5e386b5411abfa4e5e12d1229575a6c7ec73dfaec6347d8959b27aac19aa86",
+        "nome": "HEMOGRAMA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-04613d11e4409170",
+        "origem_json_pointer": "/ligacoes/exames/15",
+        "sha256_conteudo": "58d8c3bbd157d0d9be5bf551553eb11e7e0c313ef1db12f06d7863faa42fbbfb",
+        "nome": "CREATININA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-eebf0c6696b2d1ec",
+        "origem_json_pointer": "/ligacoes/exames/16",
+        "sha256_conteudo": "a133b6c797048051de63b5b1f134afc70bc5a1444e49ac2e2721bd762204440d",
+        "nome": "UREIA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b036ed1e085560b8",
+        "origem_json_pointer": "/ligacoes/exames/17",
+        "sha256_conteudo": "1c165f5403a7b90b63dbd46f6855431c8c1ada4519299d6c123bd630df5c529d",
+        "nome": "TGO",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-72c85f3ddb32430f",
+        "origem_json_pointer": "/ligacoes/exames/18",
+        "sha256_conteudo": "1739a80ab81e5bbef9460ae5f51087ed284845d8e31e606c2b564c7268c2cd15",
+        "nome": "TGP",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a802cee28cec3270",
+        "origem_json_pointer": "/ligacoes/exames/19",
+        "sha256_conteudo": "5d85231af84b07a3159dc7b06efe241505fe0d9fa9e3cfc3ced2da4d9650052b",
+        "nome": "BILIRRUBINA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-2032a3625da2a320",
+        "origem_json_pointer": "/ligacoes/exames/20",
+        "sha256_conteudo": "7ca56daea7b581342dac3e634f20a5489390de72c61d09e7c42a9b69cf4bb98e",
+        "nome": "SODIO",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d65748c83703a5ba",
+        "origem_json_pointer": "/ligacoes/exames/21",
+        "sha256_conteudo": "5177c5a6d32d2eeb000c9724575c7471cb1de7765bcf03a4245f9351e9594835",
+        "nome": "POTASSIO",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-1eddc815395c8c6a",
+        "origem_json_pointer": "/ligacoes/exames/22",
+        "sha256_conteudo": "6a9118fcd5950d8a87efa48899faecd5982172139f1d51d2ae8187fd125ced14",
+        "nome": "MAGNESIO",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-453f97871ba12199",
+        "origem_json_pointer": "/ligacoes/exames/23",
+        "sha256_conteudo": "32c416d97709b275292e4188325609ec89e284dc5892b17376479d7ce5178ead",
+        "nome": "TESTOSTERONA_TOTAL",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-448a0e3854e94a74",
+        "origem_json_pointer": "/ligacoes/exames/24",
+        "sha256_conteudo": "ad1b3e0e081b357c2f4d946aabae1080f0010f74cc5a02cb8d982a9527d22fd8",
+        "nome": "LH",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-09d79eb53dc93bb4",
+        "origem_json_pointer": "/ligacoes/exames/25",
+        "sha256_conteudo": "1674933b92efdbd7e6d18e6e9fe7ce30fdcf1e54683cfa648bf17b18784f2080",
+        "nome": "FSH",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-c702a6cae365a720",
+        "origem_json_pointer": "/ligacoes/exames/26",
+        "sha256_conteudo": "1fe2433819b56ddc71e139c126aef98e2e591270c3028c8d117f447ac7c9e1d7",
+        "nome": "AUDIOMETRIA_TONAL",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-58067df56e5ae062",
+        "origem_json_pointer": "/ligacoes/exames/27",
+        "sha256_conteudo": "d9d2aafc7df66637d237fd0186bd56cf5974d8cac840f94ea6f966fe63d75f39",
+        "nome": "ESPIROMETRIA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-34d804e638487e28",
+        "origem_json_pointer": "/ligacoes/exames/28",
+        "sha256_conteudo": "3a955b75de510bd32be8d0f7de2bf070f27f223ac4c6a07cf68b35b7271856b2",
+        "nome": "PET_CT_FDG",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-c8b720ecb0670c7a",
+        "origem_json_pointer": "/ligacoes/exames/29",
+        "sha256_conteudo": "c14ce60ca37c165e4caacee63f3b6f144d8c362ed86614c2583ca390362a034e",
+        "nome": "RX_TORAX_PA_PERFIL",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e41eba912daafd74",
+        "origem_json_pointer": "/ligacoes/exames/30",
+        "sha256_conteudo": "fd388a675f9b340cfa80d351df2d56d33aa68ffde109207791d0710586c51e00",
+        "nome": "GLICEMIA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-51a6dbd1849bec48",
+        "origem_json_pointer": "/ligacoes/exames/31",
+        "sha256_conteudo": "3ced8151d0ebf677b411b86ea7e2b4f1c0d63c6ad221451ec415d59f54ec369d",
+        "nome": "COLESTEROL_TOTAL",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-2b9fe797f859dbf9",
+        "origem_json_pointer": "/ligacoes/exames/32",
+        "sha256_conteudo": "87f17e481b1ecac2632ae9653c66c2c39e0f7c1c567841dc4161e3ba59b39447",
+        "nome": "COLESTEROL_HDL",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-3ed61a7117e107af",
+        "origem_json_pointer": "/ligacoes/exames/33",
+        "sha256_conteudo": "419e96b5d2c6171346f4972b6d28f2a0e462bc1997aa8bab5c7c94ebc004a1b7",
+        "nome": "COLESTEROL_LDL",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-fcd382ba8e7ac8a5",
+        "origem_json_pointer": "/ligacoes/exames/34",
+        "sha256_conteudo": "e52ec8c4446ce1c0d700eb967c540224ddf3571ffbe777f18a5b5f6d5865a64c",
+        "nome": "TRIGLICERIDEOS",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8f84dca41a270a6b",
+        "origem_json_pointer": "/tratamento/cenarios/0",
+        "sha256_conteudo": "d65b0959a2fa169b935d79183710dbc97a3d24737b921d5a77ad798be5cfd1e6",
+        "nome": "Seminoma puro EC I — apto ao seguimento",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-0e286d8480d27ee0",
+        "origem_json_pointer": "/tratamento/cenarios/1",
+        "sha256_conteudo": "ba4877f25555d34a9c5eb33092bb19d98803a1198c07d0eb880623cab532d9b1",
+        "nome": "Seminoma puro EC I — inapto ao seguimento",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-2a53957b91384aaf",
+        "origem_json_pointer": "/tratamento/cenarios/2",
+        "sha256_conteudo": "6ae01952859d26810d00f2ba51a5ff08a3db460d25bb3fb5732184d4ba0959c9",
+        "nome": "Não seminoma EC I sem ILV",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-baab31e3174a2fd7",
+        "origem_json_pointer": "/tratamento/cenarios/3",
+        "sha256_conteudo": "6d77d44ee5bd511229f67192b7fd9e6395e5576b38621fb65785086ec9d3459c",
+        "nome": "Não seminoma EC I com ILV ou outros fatores de risco",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-52dc1f8266c2794a",
+        "origem_json_pointer": "/tratamento/cenarios/4",
+        "sha256_conteudo": "e67b7286af9fdd280f329d5bb56ab0960b9cc23d79aa97f1c2436f1c01956d16",
+        "nome": "Estádio IS (marcador persistentemente elevado pós-orquiectomia)",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-515e93a7b87db8cb",
+        "origem_json_pointer": "/tratamento/cenarios/5",
+        "sha256_conteudo": "2fe88d48cbb6c3986cce58bf116c755a2c46d51c8e47dc3394953be1ea572cbf",
+        "nome": "Estádio patológico II após RPLND primária",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/5/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e99258d426877117",
+        "origem_json_pointer": "/tratamento/cenarios/6",
+        "sha256_conteudo": "50e5060a668073304a20301624db9301313b7f29b7f589dabc49a705b7c77cbf",
+        "nome": "Seminoma EC IIA/IIB não bulky (≤ 3 cm)",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/6/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-27926989d88cbf79",
+        "origem_json_pointer": "/tratamento/cenarios/7",
+        "sha256_conteudo": "531e3dcabe0b6d92e85eebc1b3924fdd642e42347c4029b5f259103f63793abf",
+        "nome": "Seminoma EC IIB e IIC",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/7/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-3f2c19801d61a906",
+        "origem_json_pointer": "/tratamento/cenarios/8",
+        "sha256_conteudo": "bb177c1f40f18760b631629e4fff13b79e358f9464a8f6d88e0a1ac2dd48a78e",
+        "nome": "Não seminoma EC IIA com marcadores negativos",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/8/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ae376a6c244fb963",
+        "origem_json_pointer": "/tratamento/cenarios/9",
+        "sha256_conteudo": "435a9398ebe4435a3befc8e4e8cdb8bdb1ec7a9a721ec66149d005f8968c02be",
+        "nome": "Não seminoma EC IIB/IIC com marcadores negativos",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/9/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-9a4514a4eaa629a6",
+        "origem_json_pointer": "/tratamento/cenarios/10",
+        "sha256_conteudo": "99738ad448cf28d641d87849f049d5abde27576c0fea873150a301bf1608554b",
+        "nome": "EC II com marcadores elevados pós-orquiectomia",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/10/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-4a96388038c622f6",
+        "origem_json_pointer": "/tratamento/cenarios/11",
+        "sha256_conteudo": "16587cd6a1c0ceab946a4df116ea125f0e3a058bed0bcbbda6d35a466af49a18",
+        "nome": "Estádio III — baixo risco IGCCCG",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/11/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-14150c62d0c5bdd7",
+        "origem_json_pointer": "/tratamento/cenarios/12",
+        "sha256_conteudo": "e33b384a9ecc87cc8c9c28a900d4f0ba1b022a7aefd59188074b069de3756cfc",
+        "nome": "Estádio III — risco intermediário/alto IGCCCG",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/12/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-4ec6ae39785ed6df",
+        "origem_json_pointer": "/tratamento/cenarios/13",
+        "sha256_conteudo": "408c2299f7aedd9aaf3bf3a1d03ce9dd596193207d100a20bcf54646b5eff80f",
+        "nome": "Massa residual pós-QT — seminoma",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/13/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-4ab8c59265534b33",
+        "origem_json_pointer": "/tratamento/cenarios/14",
+        "sha256_conteudo": "6f28c81f4f68b5371a69d21dc3899a0dbdeba66fc08e347a407601f9c87f8774",
+        "nome": "Massa residual pós-QT — não seminoma",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/14/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d97cc48511990231",
+        "origem_json_pointer": "/tratamento/cenarios/15",
+        "sha256_conteudo": "ec348322b0a7976c49f8da55918c498bce7f00ce109cde1a951a3b57b677e3f6",
+        "nome": "Doença recidivada (resgate)",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/15/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-f54617942d6e24b4",
+        "origem_json_pointer": "/tratamento/cenarios/16",
+        "sha256_conteudo": "279d7ef6fb09353ccc240fe2b4d4a001581f434ff99a72c716c7f0d6733e8c54",
+        "nome": "Doença recidivada refratária",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/16/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-36331dc10b48c2f8",
+        "origem_json_pointer": "/tratamento/cenarios/17",
+        "sha256_conteudo": "11368e5f28b9383e0a1a8dec4c6953f0e7568b4b77c5d98111bb506b1b202c50",
+        "nome": "Mau prognóstico com queda inadequada de marcadores após o 1º ciclo",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/17/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-cf0e634ad16019e2",
+        "origem_json_pointer": "/tratamento/protocolos/0",
+        "sha256_conteudo": "224a7c45343985d4d52d5b6dbf9f20e6bcbc521bf6f4b6e58073131720ac218b",
+        "nome": "Carboplatina AUC 7 adjuvante (dose única)",
+        "id_original": "testiculo-carboplatina-auc7-adjuvante",
+        "fonte_local_ref": "/tratamento/protocolos/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-7853758b00a74f92",
+        "origem_json_pointer": "/tratamento/protocolos/1",
+        "sha256_conteudo": "aec5c63918b920210af8d7aa1fe0dba3515bd3dad0cf6ec251a8876cde73ba7d",
+        "nome": "BEP × 1 adjuvante",
+        "id_original": "testiculo-bep-x1-adjuvante-ec1-nao-seminoma",
+        "fonte_local_ref": "/tratamento/protocolos/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-fd26877e2f25760e",
+        "origem_json_pointer": "/tratamento/protocolos/2",
+        "sha256_conteudo": "da56aa57da965fbc34ed5d4b76893370eb70ebfc8886801e66317e24e33776fb",
+        "nome": "BEP × 2 adjuvante após RPLND primária",
+        "id_original": "testiculo-bep-x2-adjuvante-pos-rplnd",
+        "fonte_local_ref": "/tratamento/protocolos/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-bf9fd98d2d596da0",
+        "origem_json_pointer": "/tratamento/protocolos/3",
+        "sha256_conteudo": "431937a12cb9ec42acded5ebc82e781af7aaf09dc6cbb66b5256c423009047a5",
+        "nome": "EP × 2 adjuvante após RPLND primária",
+        "id_original": "testiculo-ep-x2-adjuvante-pos-rplnd",
+        "fonte_local_ref": "/tratamento/protocolos/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-09569656363cf0ac",
+        "origem_json_pointer": "/tratamento/protocolos/4",
+        "sha256_conteudo": "152ecd1be931b7ef65362e1ca97ff81d91b32a67a69d1a0a880ee3538f3d3675",
+        "nome": "BEP × 3 após RPLND primária (pN3)",
+        "id_original": "testiculo-bep-x3-adjuvante-pos-rplnd-pn3",
+        "fonte_local_ref": "/tratamento/protocolos/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-336c197d2684a401",
+        "origem_json_pointer": "/tratamento/protocolos/5",
+        "sha256_conteudo": "c718c0ea9d4c9ce1da5863ec390e6a44d5789208054e547a56c73b27198e3a56",
+        "nome": "EP × 4 após RPLND primária (pN3)",
+        "id_original": "testiculo-ep-x4-adjuvante-pos-rplnd-pn3",
+        "fonte_local_ref": "/tratamento/protocolos/5/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-c0e1da9919e1cd8f",
+        "origem_json_pointer": "/tratamento/protocolos/6",
+        "sha256_conteudo": "bdb42590a75a25d0d6f5a89268c1d85e6cba56b2e435b786137da6c0f7148f3c",
+        "nome": "BEP × 3 (doença avançada de baixo risco IGCCCG)",
+        "id_original": "testiculo-bep-x3-baixo-risco",
+        "fonte_local_ref": "/tratamento/protocolos/6/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-6cf4eddaf6d35c10",
+        "origem_json_pointer": "/tratamento/protocolos/7",
+        "sha256_conteudo": "aab3e321bebe1059129e045f79f9d806a07a4a7ddad51df580d3ab2cc0f8d78a",
+        "nome": "EP × 4 (doença avançada de baixo risco IGCCCG)",
+        "id_original": "testiculo-ep-x4-baixo-risco",
+        "fonte_local_ref": "/tratamento/protocolos/7/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-976b54c25a03a789",
+        "origem_json_pointer": "/tratamento/protocolos/8",
+        "sha256_conteudo": "85271b0c77fd650a259b0bccee2a5c5aa6774351eeb31820169b920087cfc317",
+        "nome": "BEP × 4 (risco intermediário/alto IGCCCG)",
+        "id_original": "testiculo-bep-x4-intermediario-alto",
+        "fonte_local_ref": "/tratamento/protocolos/8/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-511bf5fa8a7a568d",
+        "origem_json_pointer": "/tratamento/protocolos/9",
+        "sha256_conteudo": "7d52e2555e891fe3d97786ec00fd5d4f38334d5e98accfeaf918664692802796",
+        "nome": "VIP × 4 (risco intermediário/alto, contraindicação à bleomicina)",
+        "id_original": "testiculo-vip-x4-intermediario-alto",
+        "fonte_local_ref": "/tratamento/protocolos/9/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-fd65ebeb900384d8",
+        "origem_json_pointer": "/tratamento/protocolos/10",
+        "sha256_conteudo": "965250ddf33a734f03ce19cb2829dd7003cb6a651428779b74efceabb1fe512b",
+        "nome": "TIP × 4 (risco intermediário/alto, contraindicação à bleomicina)",
+        "id_original": "testiculo-tip-x4-intermediario-alto",
+        "fonte_local_ref": "/tratamento/protocolos/10/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e1c8f783b04cd7d6",
+        "origem_json_pointer": "/tratamento/protocolos/11",
+        "sha256_conteudo": "21cda38983efaa9de4286f80f8ec7dfceed855a3e1da0b85fa3b036e622cd622",
+        "nome": "EP × 2 após ressecção de massa residual com tumor viável",
+        "id_original": "testiculo-ep-x2-pos-rplnd-massa-residual",
+        "fonte_local_ref": "/tratamento/protocolos/11/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-0bb4b395db1f20b2",
+        "origem_json_pointer": "/tratamento/protocolos/12",
+        "sha256_conteudo": "f2afed2bfa42a2da726673fbabc9b95ca2f3e6e764e65baca4d414ed82d7c046",
+        "nome": "TIP × 2 após ressecção de massa residual com tumor viável",
+        "id_original": "testiculo-tip-x2-pos-rplnd-massa-residual",
+        "fonte_local_ref": "/tratamento/protocolos/12/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d7881d9f229125f8",
+        "origem_json_pointer": "/tratamento/protocolos/13",
+        "sha256_conteudo": "219eb48ba4a13a99dfc8d93ca71d9f5f7da1b0c603d1dbc6ecdcb4e464e35360",
+        "nome": "VIP × 2 após ressecção de massa residual com tumor viável",
+        "id_original": "testiculo-vip-x2-pos-rplnd-massa-residual",
+        "fonte_local_ref": "/tratamento/protocolos/13/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a6cb1601967baf49",
+        "origem_json_pointer": "/tratamento/protocolos/14",
+        "sha256_conteudo": "d6f6fdf7158c7a3e3cc3424ba0d8663a664799777a4a396a60d84204441b3ece",
+        "nome": "VeIP × 2 após ressecção de massa residual com tumor viável",
+        "id_original": "testiculo-veip-x2-pos-rplnd-massa-residual",
+        "fonte_local_ref": "/tratamento/protocolos/14/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-aa0f860af6be4e98",
+        "origem_json_pointer": "/tratamento/protocolos/15",
+        "sha256_conteudo": "533e13604cc455aadef937cacb2d6a8c9c62ae032498477bb99ba1ab5582663e",
+        "nome": "TIP × 4 (resgate em doses convencionais)",
+        "id_original": "testiculo-tip-x4-resgate",
+        "fonte_local_ref": "/tratamento/protocolos/15/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-2b5872a296722595",
+        "origem_json_pointer": "/tratamento/protocolos/16",
+        "sha256_conteudo": "a7f070a7db2f2313485a68e9149a90145bd570caaf16999857158cf50bf10ebb",
+        "nome": "VeIP × 4 (resgate em doses convencionais)",
+        "id_original": "testiculo-veip-x4-resgate",
+        "fonte_local_ref": "/tratamento/protocolos/16/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-96e6a3661fe9ed4a",
+        "origem_json_pointer": "/tratamento/protocolos/17",
+        "sha256_conteudo": "e2503a099ad5f4595a337155e6c148e3bd604ce7051e030e99330fdd6dd432bd",
+        "nome": "Carboplatina + etoposídeo em altas doses com suporte de células-tronco hematopoiéticas",
+        "id_original": "testiculo-carboplatina-etoposideo-altas-doses-resgate",
+        "fonte_local_ref": "/tratamento/protocolos/17/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ce5b3b3660826fad",
+        "origem_json_pointer": "/tratamento/protocolos/18",
+        "sha256_conteudo": "197572aa8ca6c8111a1e205b07756ca4f4644d0992cc9ada2dcac2df0a431b5d",
+        "nome": "GemOx",
+        "id_original": "testiculo-gemox-paliativo",
+        "fonte_local_ref": "/tratamento/protocolos/18/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-26b2339bff37ebb2",
+        "origem_json_pointer": "/tratamento/protocolos/19",
+        "sha256_conteudo": "5e8917991eab8eebf6ee42920d4dac35575f2e12ce700e15eee961a1b4613f64",
+        "nome": "Gemcitabina + paclitaxel",
+        "id_original": "testiculo-gemcitabina-paclitaxel-paliativo",
+        "fonte_local_ref": "/tratamento/protocolos/19/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-989b938aa551a9c9",
+        "origem_json_pointer": "/tratamento/protocolos/20",
+        "sha256_conteudo": "2ed51f6ddd0cacd07a90e4bab3253530973d351475ad84bd244b737d9895ceea",
+        "nome": "Gemcitabina + paclitaxel + oxaliplatina",
+        "id_original": "testiculo-gop-paliativo",
+        "fonte_local_ref": "/tratamento/protocolos/20/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-99a2ba0446f5e57e",
+        "origem_json_pointer": "/tratamento/protocolos/21",
+        "sha256_conteudo": "eeeee14cea700c5cbec28a34c860deae76f624aeea00541c66efb66fa056dafb",
+        "nome": "Epirrubicina + cisplatina",
+        "id_original": "testiculo-epirrubicina-cisplatina-paliativo",
+        "fonte_local_ref": "/tratamento/protocolos/21/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a3ea28077ae98c56",
+        "origem_json_pointer": "/tratamento/protocolos/22",
+        "sha256_conteudo": "52548995033ee46fbd936fe980bc62fd1c69139d1c81bfcc8a9203559b0752a4",
+        "nome": "Etoposídeo oral",
+        "id_original": "testiculo-etoposideo-oral-paliativo",
+        "fonte_local_ref": "/tratamento/protocolos/22/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-9901a421c0ced63a",
+        "origem_json_pointer": "/tratamento/cirurgia/0",
+        "sha256_conteudo": "e45417448c9fd317dd690bfccce3398a7c46c7db5547ab83a327d4d26064f91b",
+        "nome": "/tratamento/cirurgia/0",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cirurgia/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b11167060e5e57e9",
+        "origem_json_pointer": "/tratamento/cirurgia/1",
+        "sha256_conteudo": "d839be2f53279de2608fffd548c613e067e1237233ae8940f10b40c28c03f1ea",
+        "nome": "/tratamento/cirurgia/1",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cirurgia/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-2247203e21be13ce",
+        "origem_json_pointer": "/tratamento/cirurgia/2",
+        "sha256_conteudo": "43a32cfb4920c824e5581217411db47603950812b72e3c52af0c7fd0c1d90eb0",
+        "nome": "/tratamento/cirurgia/2",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cirurgia/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d03519d0a29be297",
+        "origem_json_pointer": "/tratamento/cirurgia/3",
+        "sha256_conteudo": "dbbe40d11528405fbf66cf30957567b2aa767cb9577d5207bd771736f3940ba0",
+        "nome": "/tratamento/cirurgia/3",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cirurgia/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-bd0ec9960b39ec52",
+        "origem_json_pointer": "/tratamento/cirurgia/4",
+        "sha256_conteudo": "c669b0db7d13cb7a065a9b0a20cdba565a059bb7bfd9b32d2b38ac451fa55c96",
+        "nome": "/tratamento/cirurgia/4",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cirurgia/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ded9e309698af50a",
+        "origem_json_pointer": "/tratamento/radioterapia/0",
+        "sha256_conteudo": "1dfc4a6ca4c88d530022b61cc6ed2f6686cbd90bc3d91bff40f0ab72cdd88282",
+        "nome": "Seminoma puro EC I inapto ao seguimento (alternativa à carboplatina)",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/radioterapia/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-05b4499d5fee89cb",
+        "origem_json_pointer": "/tratamento/radioterapia/1",
+        "sha256_conteudo": "7f5143e1228f20d8ce6ca7dc35ab19444e4d967ba85bbffb70f690ef9666f71d",
+        "nome": "Seminoma EC IIA/IIB não bulky (≤ 3 cm): para-aórtica + pelve superior ipsilateral, boost opcional",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/radioterapia/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a231b9dcbbe49371",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/0",
+        "sha256_conteudo": "006b7ada8691967fd77706647e7b1cf268c196b2c54aeb88101ebf1964400cdd",
+        "nome": "/ligacoes/interacoesConsultar/0",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-0c3ca1e9ed427186",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/1",
+        "sha256_conteudo": "8d28d4e36b02e44c878ff2ad528e48e99c5ddbf7ca58d8a4e9f6bf243e4f4957",
+        "nome": "/ligacoes/interacoesConsultar/1",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-5059aeb06d07b3c0",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/2",
+        "sha256_conteudo": "4c42c62041fcc2607bc2c9cba0e11918f636a04303e921e59c1d72bc347fafca",
+        "nome": "/ligacoes/interacoesConsultar/2",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-80f7ce928c1c7a34",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/3",
+        "sha256_conteudo": "3bf5324719fc9b592508f9fa7faea5e7c15879e9e3d4bccd5e31ae7498d87170",
+        "nome": "/ligacoes/interacoesConsultar/3",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a80bee44a166982d",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/4",
+        "sha256_conteudo": "3bd9af67851eebd8f2de048febe99e037c791b2e935dcc73a6fc90705386f9b5",
+        "nome": "/ligacoes/interacoesConsultar/4",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b97287b129643a43",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/5",
+        "sha256_conteudo": "3746c1e2493b5f8abf8a31600e89663d2b7851916c3900e371c414ccc0741f64",
+        "nome": "/ligacoes/interacoesConsultar/5",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-880085b505f0eb3e",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/6",
+        "sha256_conteudo": "f845d73e46cc377c8c0a283d04867a744b1d4ee7769e27ad666098d93b711431",
+        "nome": "/ligacoes/interacoesConsultar/6",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-7063ae923198f803",
+        "origem_json_pointer": "/ligacoes/ctcaeAcao/0",
+        "sha256_conteudo": "320421f31e229eb1739404dc2b024cfcd03b86b5cba6174604dbef9eb7c37121",
+        "nome": "/ligacoes/ctcaeAcao/0",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-999fbcd965f4d74f",
+        "origem_json_pointer": "/ligacoes/ctcaeAcao/1",
+        "sha256_conteudo": "7823b73ced5b596c885bbaf52281feded1a06412a5b6278280ad89261978f39e",
+        "nome": "/ligacoes/ctcaeAcao/1",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8de63009dfa6099c",
+        "origem_json_pointer": "/ligacoes/ctcaeAcao/2",
+        "sha256_conteudo": "ada91b23ed4509e5663ea6fdfa648354e76929041be3af2ab25e112e29ddc977",
+        "nome": "/ligacoes/ctcaeAcao/2",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-00f77e7d46728c63",
+        "origem_json_pointer": "/ligacoes/ctcaeAcao/3",
+        "sha256_conteudo": "693183c59a292be147411d663801fed4528f6190d8d7299a69a41480d0fa9b7f",
+        "nome": "/ligacoes/ctcaeAcao/3",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b11900587b4125c9",
+        "origem_json_pointer": "/ligacoes/ctcaeAcao/4",
+        "sha256_conteudo": "5e09895947ace6aa88fb22cf818cb485311ed00393fa1f3b5c4b21ead3b1fd19",
+        "nome": "/ligacoes/ctcaeAcao/4",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-83068dca7b5cd49c",
+        "origem_json_pointer": "/ligacoes/ctcaeAcao/5",
+        "sha256_conteudo": "651525b53c611354e9b95ba9fa7a8d881df3d433d433e75249b2b3d6eae4878c",
+        "nome": "/ligacoes/ctcaeAcao/5",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8ec3321de9041b05",
+        "origem_json_pointer": "/ligacoes/ctcaeAcao/6",
+        "sha256_conteudo": "c6960bfa3fa5707bb7a1c571bc61dae530ecab3b3335a404dfd2dd003e33f6cf",
+        "nome": "/ligacoes/ctcaeAcao/6",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-72509c679125a7c0",
+        "origem_json_pointer": "/tratamento/suporte",
+        "sha256_conteudo": "798d01abde1738e74c0ff23b93c8223fef0007f9b074010340c32d0050873c4a",
+        "nome": "/tratamento/suporte",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/suporte/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-49dfdfcf233f9769",
+        "origem_json_pointer": "/ligacoes/suporteReceitas/0",
+        "sha256_conteudo": "53a653a8b6da5ba6a077780c07428706febcb54fb369d2e338bc629d5b4d9ea3",
+        "nome": "antiemese para cisplatina D1-D5 (protocolo institucional)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-6a7046d07b99809e",
+        "origem_json_pointer": "/ligacoes/suporteReceitas/1",
+        "sha256_conteudo": "e2191425dc7ed014ad055f56649303b61bc246e44a82a65b33cbf7921a352c9c",
+        "nome": "G-CSF profilaxia secundária após neutropenia febril ou atraso por mielotoxicidade",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e13556af4d37bd6a",
+        "origem_json_pointer": "/ligacoes/suporteReceitas/2",
+        "sha256_conteudo": "c6f86d84d788c024688c06f858b1322d26d2ace6d5cdc2a540a5b47de1571a9a",
+        "nome": "mesna com ifosfamida",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-1c2c945b46e66cff",
+        "origem_json_pointer": "/tratamento/seguimento/0",
+        "sha256_conteudo": "e8905b5c22db488021659623cd94ddec9df79aa21aa170a4017c0fae058e1b86",
+        "nome": "1º e 2º anos",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/seguimento/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-381a57b6a7959f1f",
+        "origem_json_pointer": "/tratamento/seguimento/1",
+        "sha256_conteudo": "c3ddfc174989cebe90ba684562de2cd349700da4e48c2a147f1ca42d794ca7c9",
+        "nome": "3º ano",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/seguimento/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-64b897ec86418f55",
+        "origem_json_pointer": "/tratamento/seguimento/2",
+        "sha256_conteudo": "53c62d67e7f0dd0c0c9889d50a0a40c69a26a6df9b81daee1b938b442c9e1d29",
+        "nome": "4º e 5º anos",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/seguimento/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-40efe38b6135c61e",
+        "origem_json_pointer": "/tratamento/seguimento/3",
+        "sha256_conteudo": "e1154917b440f3ea4c62f9e23512ee71b7c1c59916681f44d8d159cb17dcc132",
+        "nome": "Sobrevivência (orientações gerais)",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/seguimento/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e7eb775ae2579a78",
+        "origem_json_pointer": "/tratamento/seguimento/4",
+        "sha256_conteudo": "d6d88db305138da192a731298214553bf80402234bcdd374ad41e6cc902f04d8",
+        "nome": "anos 1–2",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/seguimento/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-eec9dc007cf787d5",
+        "origem_json_pointer": "/tratamento/seguimento/5",
+        "sha256_conteudo": "4270ed20a0be28a9dda15a9f721b3fa22853b95a5b1489fbae62e10bf582cba9",
+        "nome": "anos 3–4",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/seguimento/5/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-9f79980de914c4d2",
+        "origem_json_pointer": "/tratamento/seguimento/6",
+        "sha256_conteudo": "851db012692ae1efc0de485a6d4adddf49a25b1c3b90ea86447f93a3974ef08d",
+        "nome": "ano 5",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/seguimento/6/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-766f51b547691ba6",
+        "origem_json_pointer": "/ligacoes/orientacoes/0",
+        "sha256_conteudo": "e766de85d1b0c42e9f5a3dc8a2694d215be3e5d2c081e5a1d8c67b60f280dab8",
+        "nome": "Criopreservação de sêmen antes da orquiectomia e de qualquer tratamento",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b82cc889b6b0c8ed",
+        "origem_json_pointer": "/ligacoes/orientacoes/1",
+        "sha256_conteudo": "644051357c82204dffc326fc1918bb35eb56d6aa04c14b794514bcf4969d28f0",
+        "nome": "Adesão ao seguimento é critério de escolha no estádio I",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d4bf0841c2925cd7",
+        "origem_json_pointer": "/ligacoes/orientacoes/2",
+        "sha256_conteudo": "4e44704047566a5c07f2520b956045d87879e0576932902a063d0c318b9b9033",
+        "nome": "Informar exposição à bleomicina antes de anestesia/oxigenoterapia",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-28f6b32f38c68175",
+        "origem_json_pointer": "/ligacoes/orientacoes/3",
+        "sha256_conteudo": "50e04c106789c9ad5dd79e95283a0f352a6cc423e7fcd42d3742edcb7f46ef41",
+        "nome": "Controle de peso, atividade física regular, evitar tabagismo; monitorar PA, glicemia e perfil lipídico",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-30cfaca2cd60baf0",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/0",
+        "sha256_conteudo": "17b58d7246ca5e5157f1b307c9b9dd2280d5683dba228a0dc6f6bd2c782a92b2",
+        "nome": "urologia",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-685c8cf172414883",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/1",
+        "sha256_conteudo": "5e90c2fe0c689c9825e2a5f61f10285aac34b9a34913dde224d87ec5e7e743b5",
+        "nome": "encaminhamento-cirurgia-oncologica",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-9d905eddfd79114e",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/2",
+        "sha256_conteudo": "b92a6c89eec82b9542c0d0bf3c50a216ebeef81398125d360e50df70c3e8f675",
+        "nome": "encaminhamento-radioterapia",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b44a12d798aeab01",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/3",
+        "sha256_conteudo": "824239f1a97dad05000eb2051aea9d47f5002ade6918128db8bc96025263d28d",
+        "nome": "banco de sêmen / reprodução humana",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e3b98c699838c56e",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/4",
+        "sha256_conteudo": "e3248133ba7cef1e7d67b3f35aa598fe9a0f2de74d9064e4faf81aa37117b6e6",
+        "nome": "centro de TCTH (QT em altas doses)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-f1be0bc240fdcb6e",
+        "origem_json_pointer": "/ligacoes/laudos/0",
+        "sha256_conteudo": "6a46438b183e8fd4b7a415067f836f7309f2eda0b78d30c905219bb7d5f4dbe5",
+        "nome": "laudo-inss",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-77f7f1412350909b",
+        "origem_json_pointer": "/ligacoes/laudos/1",
+        "sha256_conteudo": "af504b47768148287664fb7c8261386969e41e6892f762a9162444692f4dfbe1",
+        "nome": "laudo-afastamento",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-38816e083da265c6",
+        "origem_json_pointer": "/ligacoes/laudos/2",
+        "sha256_conteudo": "605d32053c94a49b3d3cb80232041ebc5f3348124175bc8224c8488e3785d1fa",
+        "nome": "laudo-transporte",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      }
+    ],
+    "itens_nccn": [
+      {
+        "item_id": "nccn-20261017-testiculo-calendarios",
+        "nome": "Calendários de seguimento por histologia, estádio e tratamento",
+        "tipo": "SEGUIMENTO",
+        "dominio_principal": 10,
+        "conteudo_extraido": "Doze tabelas NCCN estruturadas por histologia, estádio e tratamento. Marcadores opcionais apenas nas tabelas1–5 de seminoma; tabela6 e não seminoma incluem marcadores. Os calendários gerais SBOC/MOC não receberam histologia/estádio inventados e não foram fundidos com as tabelas NCCN.",
+        "aplicabilidade": {
+          "criterios": [
+            "Histologia, estádio e tratamento conhecidos",
+            "Sem calendário único universal"
+          ],
+          "paciente_individual": null,
+          "estado": "NAO_AVALIADA"
+        },
+        "dados_estruturados": {
+          "seguimento_nccn": {
+            "tabelas": [
+              {
+                "tabela_ou_ramo": 1,
+                "cenario": "Seminoma estádioI: vigilância após orquiectomia",
+                "linhas": [
+                  {
+                    "exame": "História e exame físico",
+                    "periodos": {
+                      "ano1": "4–6 meses",
+                      "ano2": "6 meses",
+                      "ano3": "6–12 meses",
+                      "ano4": "anual",
+                      "ano5": "anual"
+                    },
+                    "condicao": null
+                  },
+                  {
+                    "exame": "TC/RM abdome ± pelve (ou abdome/pelve conforme tabela)",
+                    "periodos": {
+                      "ano1": "4–6 meses",
+                      "ano2": "6 meses",
+                      "ano3": "6–12 meses",
+                      "ano4": "12–24 meses",
+                      "ano5": "12–24 meses"
+                    },
+                    "condicao": null
+                  },
+                  {
+                    "exame": "RX tórax",
+                    "periodos": {
+                      "ano1": "conforme indicação clínica",
+                      "ano2": "conforme indicação clínica",
+                      "ano3": "conforme indicação clínica",
+                      "ano4": "conforme indicação clínica",
+                      "ano5": "conforme indicação clínica"
+                    },
+                    "condicao": null
+                  }
+                ],
+                "notas": [
+                  "Considerar TC tórax contrastada se sintomático; TC/RM não recomendada após 5 anos salvo indicação."
+                ],
+                "fontes": [
+                  {
+                    "fonte_id": "nccn-6d5cc2b82dad",
+                    "edicao": "2.2026",
+                    "pagina_pdf": 27,
+                    "paginas_pdf": [
+                      27
+                    ],
+                    "secao": "TEST-A 1/3, tabela1",
+                    "trecho": "Table 1",
+                    "ancora_contextual": null,
+                    "natureza": "EXTRACAO_DOCUMENTAL",
+                    "sha256_pdf": "aa89a4c6c6c0316b9bc07b4f82828f2cc3bca265d56ba207f40b63434b4a8fe3"
+                  }
+                ],
+                "estado_curadoria": "A_CONFERIR",
+                "aprovacao_clinica": null,
+                "gera_agendamento": false,
+                "marcadores_sericos": "opcionais (nota a)",
+                "histologia": "seminoma"
+              },
+              {
+                "tabela_ou_ramo": 2,
+                "cenario": "Seminoma estádioI: após adjuvância QT ou RT",
+                "linhas": [
+                  {
+                    "exame": "História e exame físico",
+                    "periodos": {
+                      "ano1": "6–12 meses",
+                      "ano2": "6–12 meses",
+                      "ano3": "anual",
+                      "ano4": "anual",
+                      "ano5": "anual"
+                    },
+                    "condicao": null
+                  },
+                  {
+                    "exame": "TC/RM abdome ± pelve (ou abdome/pelve conforme tabela)",
+                    "periodos": {
+                      "ano1": "anual",
+                      "ano2": "anual",
+                      "ano3": "anual",
+                      "ano4": "conforme indicação clínica",
+                      "ano5": "conforme indicação clínica"
+                    },
+                    "condicao": null
+                  },
+                  {
+                    "exame": "RX tórax",
+                    "periodos": {
+                      "ano1": "conforme indicação clínica",
+                      "ano2": "conforme indicação clínica",
+                      "ano3": "conforme indicação clínica",
+                      "ano4": "conforme indicação clínica",
+                      "ano5": "conforme indicação clínica"
+                    },
+                    "condicao": null
+                  }
+                ],
+                "notas": [
+                  "TC tórax se sintomático; não transportar rotina de marcadores do não seminoma."
+                ],
+                "fontes": [
+                  {
+                    "fonte_id": "nccn-6d5cc2b82dad",
+                    "edicao": "2.2026",
+                    "pagina_pdf": 27,
+                    "paginas_pdf": [
+                      27
+                    ],
+                    "secao": "TEST-A 1/3, tabela2",
+                    "trecho": "Table 2",
+                    "ancora_contextual": null,
+                    "natureza": "EXTRACAO_DOCUMENTAL",
+                    "sha256_pdf": "aa89a4c6c6c0316b9bc07b4f82828f2cc3bca265d56ba207f40b63434b4a8fe3"
+                  }
+                ],
+                "estado_curadoria": "A_CONFERIR",
+                "aprovacao_clinica": null,
+                "gera_agendamento": false,
+                "marcadores_sericos": "opcionais (nota a)",
+                "histologia": "seminoma"
+              },
+              {
+                "tabela_ou_ramo": 3,
+                "cenario": "Seminoma IIA/IIB não bulky: após RT ou QT ou ambas",
+                "linhas": [
+                  {
+                    "exame": "História e exame físico",
+                    "periodos": {
+                      "ano1": "3 meses",
+                      "ano2": "6 meses",
+                      "ano3": "6 meses",
+                      "ano4": "6 meses",
+                      "ano5": "6 meses"
+                    },
+                    "condicao": null
+                  },
+                  {
+                    "exame": "TC/RM abdome ± pelve (ou abdome/pelve conforme tabela)",
+                    "periodos": {
+                      "ano1": "mês3 e depois mês9 ou12",
+                      "ano2": "anual",
+                      "ano3": "anual",
+                      "ano4": "conforme indicação clínica",
+                      "ano5": "conforme indicação clínica"
+                    },
+                    "condicao": null
+                  },
+                  {
+                    "exame": "RX tórax",
+                    "periodos": {
+                      "ano1": "6 meses",
+                      "ano2": "6 meses",
+                      "ano3": "conforme indicação clínica",
+                      "ano4": "conforme indicação clínica",
+                      "ano5": "conforme indicação clínica"
+                    },
+                    "condicao": null
+                  }
+                ],
+                "notas": [
+                  "Pressupõe ausência de massa residual ou massa<3cm e marcadores normais."
+                ],
+                "fontes": [
+                  {
+                    "fonte_id": "nccn-6d5cc2b82dad",
+                    "edicao": "2.2026",
+                    "pagina_pdf": 28,
+                    "paginas_pdf": [
+                      28
+                    ],
+                    "secao": "TEST-A 2/3, tabela3",
+                    "trecho": "Table 3",
+                    "ancora_contextual": null,
+                    "natureza": "EXTRACAO_DOCUMENTAL",
+                    "sha256_pdf": "aa89a4c6c6c0316b9bc07b4f82828f2cc3bca265d56ba207f40b63434b4a8fe3"
+                  }
+                ],
+                "estado_curadoria": "A_CONFERIR",
+                "aprovacao_clinica": null,
+                "gera_agendamento": false,
+                "marcadores_sericos": "opcionais (nota a)",
+                "histologia": "seminoma"
+              },
+              {
+                "tabela_ou_ramo": 4,
+                "cenario": "Seminoma estádioII: após RPLND primária sem QT adjuvante",
+                "linhas": [
+                  {
+                    "exame": "História e exame físico",
+                    "periodos": {
+                      "ano1": "4 meses",
+                      "ano2": "6 meses",
+                      "ano3": "6 meses",
+                      "ano4": "6 meses",
+                      "ano5": "6 meses"
+                    },
+                    "condicao": null
+                  },
+                  {
+                    "exame": "TC/RM abdome ± pelve (ou abdome/pelve conforme tabela)",
+                    "periodos": {
+                      "ano1": "4 meses",
+                      "ano2": "6 meses",
+                      "ano3": "anual",
+                      "ano4": "conforme indicação clínica",
+                      "ano5": "conforme indicação clínica"
+                    },
+                    "condicao": null
+                  },
+                  {
+                    "exame": "RX tórax",
+                    "periodos": {
+                      "ano1": "4 meses",
+                      "ano2": "6 meses",
+                      "ano3": "anual",
+                      "ano4": "conforme indicação clínica",
+                      "ano5": "conforme indicação clínica"
+                    },
+                    "condicao": null
+                  }
+                ],
+                "notas": [],
+                "fontes": [
+                  {
+                    "fonte_id": "nccn-6d5cc2b82dad",
+                    "edicao": "2.2026",
+                    "pagina_pdf": 28,
+                    "paginas_pdf": [
+                      28
+                    ],
+                    "secao": "TEST-A 2/3, tabela4",
+                    "trecho": "Table 4",
+                    "ancora_contextual": null,
+                    "natureza": "EXTRACAO_DOCUMENTAL",
+                    "sha256_pdf": "aa89a4c6c6c0316b9bc07b4f82828f2cc3bca265d56ba207f40b63434b4a8fe3"
+                  }
+                ],
+                "estado_curadoria": "A_CONFERIR",
+                "aprovacao_clinica": null,
+                "gera_agendamento": false,
+                "marcadores_sericos": "opcionais (nota a)",
+                "histologia": "seminoma"
+              },
+              {
+                "tabela_ou_ramo": 5,
+                "cenario": "Seminoma estádioII: após RPLND primária com QT adjuvante",
+                "linhas": [
+                  {
+                    "exame": "História e exame físico",
+                    "periodos": {
+                      "ano1": "3 meses",
+                      "ano2": "6 meses",
+                      "ano3": "6 meses",
+                      "ano4": "6 meses",
+                      "ano5": "6 meses"
+                    },
+                    "condicao": null
+                  },
+                  {
+                    "exame": "TC/RM abdome ± pelve (ou abdome/pelve conforme tabela)",
+                    "periodos": {
+                      "ano1": "6 meses",
+                      "ano2": "anual",
+                      "ano3": "conforme indicação clínica",
+                      "ano4": "conforme indicação clínica",
+                      "ano5": "conforme indicação clínica"
+                    },
+                    "condicao": null
+                  },
+                  {
+                    "exame": "RX tórax",
+                    "periodos": {
+                      "ano1": "6 meses",
+                      "ano2": "anual",
+                      "ano3": "conforme indicação clínica",
+                      "ano4": "conforme indicação clínica",
+                      "ano5": "conforme indicação clínica"
+                    },
+                    "condicao": null
+                  }
+                ],
+                "notas": [],
+                "fontes": [
+                  {
+                    "fonte_id": "nccn-6d5cc2b82dad",
+                    "edicao": "2.2026",
+                    "pagina_pdf": 29,
+                    "paginas_pdf": [
+                      29
+                    ],
+                    "secao": "TEST-A 3/3, tabela5",
+                    "trecho": "Table 5",
+                    "ancora_contextual": null,
+                    "natureza": "EXTRACAO_DOCUMENTAL",
+                    "sha256_pdf": "aa89a4c6c6c0316b9bc07b4f82828f2cc3bca265d56ba207f40b63434b4a8fe3"
+                  }
+                ],
+                "estado_curadoria": "A_CONFERIR",
+                "aprovacao_clinica": null,
+                "gera_agendamento": false,
+                "marcadores_sericos": "opcionais (nota a)",
+                "histologia": "seminoma"
+              },
+              {
+                "tabela_ou_ramo": 6,
+                "cenario": "Seminoma bulky IIB/IIC/III: após QT",
+                "linhas": [
+                  {
+                    "exame": "História e exame físico + marcadores",
+                    "periodos": {
+                      "ano1": "2–4 meses",
+                      "ano2": "3–6 meses",
+                      "ano3": "6 meses",
+                      "ano4": "6 meses",
+                      "ano5": "anual"
+                    },
+                    "condicao": null
+                  },
+                  {
+                    "exame": "TC/RM abdome ± pelve (ou abdome/pelve conforme tabela)",
+                    "periodos": {
+                      "ano1": "4 meses",
+                      "ano2": "6 meses",
+                      "ano3": "anual",
+                      "ano4": "anual",
+                      "ano5": "conforme indicação clínica"
+                    },
+                    "condicao": null
+                  },
+                  {
+                    "exame": "RX tórax",
+                    "periodos": {
+                      "ano1": "4 meses",
+                      "ano2": "6 meses",
+                      "ano3": "anual",
+                      "ano4": "anual",
+                      "ano5": "anual"
+                    },
+                    "condicao": null
+                  }
+                ],
+                "notas": [
+                  "Nota i: massa residual>3cm PET-negativa: RM/TC abdome-pelve semestral no primeiro ano, depois anual por 5 anos.",
+                  "Massa residual pode requerer imagem mais frequente.",
+                  "TC tórax com contraste se doença supradiafragmática inicial.",
+                  "PET/CT conforme indicação; não transformar em rotina."
+                ],
+                "fontes": [
+                  {
+                    "fonte_id": "nccn-6d5cc2b82dad",
+                    "edicao": "2.2026",
+                    "pagina_pdf": 29,
+                    "paginas_pdf": [
+                      29
+                    ],
+                    "secao": "TEST-A 3/3, tabela6",
+                    "trecho": "Table 6",
+                    "ancora_contextual": null,
+                    "natureza": "EXTRACAO_DOCUMENTAL",
+                    "sha256_pdf": "aa89a4c6c6c0316b9bc07b4f82828f2cc3bca265d56ba207f40b63434b4a8fe3"
+                  }
+                ],
+                "estado_curadoria": "A_CONFERIR",
+                "aprovacao_clinica": null,
+                "gera_agendamento": false,
+                "marcadores_sericos": "incluídos na linha H&P e marcadores; sem nota de opcionalidade",
+                "histologia": "seminoma"
+              },
+              {
+                "tabela_ou_ramo": 7,
+                "cenario": "Não seminoma estádioI sem fatores de risco: vigilância ativa",
+                "linhas": [
+                  {
+                    "exame": "História e exame físico + marcadores",
+                    "periodos": {
+                      "ano1": "2–3 meses",
+                      "ano2": "3 meses",
+                      "ano3": "4–6 meses",
+                      "ano4": "6 meses",
+                      "ano5": "anual"
+                    },
+                    "condicao": null
+                  },
+                  {
+                    "exame": "TC/RM abdome ± pelve (ou abdome/pelve conforme tabela)",
+                    "periodos": {
+                      "ano1": "4–6 meses",
+                      "ano2": "6 meses",
+                      "ano3": "anual",
+                      "ano4": "12–24 meses",
+                      "ano5": "12–24 meses"
+                    },
+                    "condicao": null
+                  },
+                  {
+                    "exame": "RX tórax",
+                    "periodos": {
+                      "ano1": "meses4 e12",
+                      "ano2": "anual",
+                      "ano3": "conforme indicação clínica",
+                      "ano4": "conforme indicação clínica",
+                      "ano5": "conforme indicação clínica"
+                    },
+                    "condicao": null
+                  }
+                ],
+                "notas": [],
+                "fontes": [
+                  {
+                    "fonte_id": "nccn-6d5cc2b82dad",
+                    "edicao": "2.2026",
+                    "pagina_pdf": 30,
+                    "paginas_pdf": [
+                      30
+                    ],
+                    "secao": "TEST-B 1/3, tabela7",
+                    "trecho": "Table 7",
+                    "ancora_contextual": null,
+                    "natureza": "EXTRACAO_DOCUMENTAL",
+                    "sha256_pdf": "aa89a4c6c6c0316b9bc07b4f82828f2cc3bca265d56ba207f40b63434b4a8fe3"
+                  }
+                ],
+                "estado_curadoria": "A_CONFERIR",
+                "aprovacao_clinica": null,
+                "gera_agendamento": false,
+                "marcadores_sericos": "incluídos na linha H&P e marcadores; sem nota de opcionalidade",
+                "histologia": "não seminoma"
+              },
+              {
+                "tabela_ou_ramo": 8,
+                "cenario": "Não seminoma estádioI com fatores de risco: vigilância ativa",
+                "linhas": [
+                  {
+                    "exame": "História e exame físico + marcadores",
+                    "periodos": {
+                      "ano1": "2 meses",
+                      "ano2": "3 meses",
+                      "ano3": "4–6 meses",
+                      "ano4": "6 meses",
+                      "ano5": "anual"
+                    },
+                    "condicao": null
+                  },
+                  {
+                    "exame": "TC/RM abdome ± pelve (ou abdome/pelve conforme tabela)",
+                    "periodos": {
+                      "ano1": "4 meses",
+                      "ano2": "4–6 meses",
+                      "ano3": "6 meses",
+                      "ano4": "anual",
+                      "ano5": "conforme indicação clínica"
+                    },
+                    "condicao": null
+                  },
+                  {
+                    "exame": "RX tórax",
+                    "periodos": {
+                      "ano1": "4 meses",
+                      "ano2": "4–6 meses",
+                      "ano3": "6 meses",
+                      "ano4": "anual",
+                      "ano5": "conforme indicação clínica"
+                    },
+                    "condicao": null
+                  }
+                ],
+                "notas": [
+                  "Fatores da nota a: invasão linfovascular, cordão espermático ou escroto; alguns centros consideram predomínio embrionário."
+                ],
+                "fontes": [
+                  {
+                    "fonte_id": "nccn-6d5cc2b82dad",
+                    "edicao": "2.2026",
+                    "pagina_pdf": 30,
+                    "paginas_pdf": [
+                      30
+                    ],
+                    "secao": "TEST-B 1/3, tabela8",
+                    "trecho": "Table 8",
+                    "ancora_contextual": null,
+                    "natureza": "EXTRACAO_DOCUMENTAL",
+                    "sha256_pdf": "aa89a4c6c6c0316b9bc07b4f82828f2cc3bca265d56ba207f40b63434b4a8fe3"
+                  }
+                ],
+                "estado_curadoria": "A_CONFERIR",
+                "aprovacao_clinica": null,
+                "gera_agendamento": false,
+                "marcadores_sericos": "incluídos na linha H&P e marcadores; sem nota de opcionalidade",
+                "histologia": "não seminoma"
+              },
+              {
+                "tabela_ou_ramo": 9,
+                "cenario": "Não seminoma IA/B: após 1ciclo BEP adjuvante ou RPLND primária",
+                "linhas": [
+                  {
+                    "exame": "História e exame físico + marcadores",
+                    "periodos": {
+                      "ano1": "3 meses",
+                      "ano2": "3 meses",
+                      "ano3": "6 meses",
+                      "ano4": "6 meses",
+                      "ano5": "anual"
+                    },
+                    "condicao": null
+                  },
+                  {
+                    "exame": "TC/RM abdome ± pelve (ou abdome/pelve conforme tabela)",
+                    "periodos": {
+                      "ano1": "anual",
+                      "ano2": "anual; opcional se RPLND primária",
+                      "ano3": "conforme indicação clínica",
+                      "ano4": "conforme indicação clínica",
+                      "ano5": "conforme indicação clínica"
+                    },
+                    "condicao": null
+                  },
+                  {
+                    "exame": "RX tórax",
+                    "periodos": {
+                      "ano1": "6–12 meses",
+                      "ano2": "anual",
+                      "ano3": "conforme indicação clínica",
+                      "ano4": "conforme indicação clínica",
+                      "ano5": "conforme indicação clínica"
+                    },
+                    "condicao": null
+                  }
+                ],
+                "notas": [
+                  "Nota f: estádio patológicoI; estádio patológicoII vai à tabela11."
+                ],
+                "fontes": [
+                  {
+                    "fonte_id": "nccn-6d5cc2b82dad",
+                    "edicao": "2.2026",
+                    "pagina_pdf": 31,
+                    "paginas_pdf": [
+                      31
+                    ],
+                    "secao": "TEST-B 2/3, tabela9",
+                    "trecho": "Table 9",
+                    "ancora_contextual": null,
+                    "natureza": "EXTRACAO_DOCUMENTAL",
+                    "sha256_pdf": "aa89a4c6c6c0316b9bc07b4f82828f2cc3bca265d56ba207f40b63434b4a8fe3"
+                  }
+                ],
+                "estado_curadoria": "A_CONFERIR",
+                "aprovacao_clinica": null,
+                "gera_agendamento": false,
+                "marcadores_sericos": "incluídos na linha H&P e marcadores; sem nota de opcionalidade",
+                "histologia": "não seminoma"
+              },
+              {
+                "tabela_ou_ramo": 10,
+                "cenario": "Não seminoma estádioII–III: após QT ± cirurgia",
+                "linhas": [
+                  {
+                    "exame": "História e exame físico + marcadores",
+                    "periodos": {
+                      "ano1": "2 meses",
+                      "ano2": "3 meses",
+                      "ano3": "6 meses",
+                      "ano4": "6 meses",
+                      "ano5": "6 meses"
+                    },
+                    "condicao": null
+                  },
+                  {
+                    "exame": "TC/RM abdome ± pelve (ou abdome/pelve conforme tabela)",
+                    "periodos": {
+                      "ano1": "4–6 meses",
+                      "ano2": "6–12 meses",
+                      "ano3": "anual",
+                      "ano4": "conforme indicação clínica",
+                      "ano5": "conforme indicação clínica"
+                    },
+                    "condicao": null
+                  },
+                  {
+                    "exame": "RX tórax",
+                    "periodos": {
+                      "ano1": "4–6 meses",
+                      "ano2": "6–12 meses",
+                      "ano3": "conforme indicação clínica",
+                      "ano4": "conforme indicação clínica",
+                      "ano5": "conforme indicação clínica"
+                    },
+                    "condicao": null
+                  }
+                ],
+                "notas": [
+                  "Resposta parcial sem candidatura à cirurgia exige imagem mais frequente.",
+                  "EstádioII clínico após QT/RPLND com pN0 ou pN1 teratoma puro: apenas uma TC no mês3–4 pós-operatório, depois conforme indicação.",
+                  "TC tórax se doença supradiafragmática inicial.",
+                  "Considerar marcadores anuais dos anos5–10 e depois conforme indicação (nota k).",
+                  "Notas l/m: atenção às massas residuais; RX opcional nos meses36 e48."
+                ],
+                "fontes": [
+                  {
+                    "fonte_id": "nccn-6d5cc2b82dad",
+                    "edicao": "2.2026",
+                    "pagina_pdf": 31,
+                    "paginas_pdf": [
+                      31
+                    ],
+                    "secao": "TEST-B 2/3, tabela10",
+                    "trecho": "Table 10",
+                    "ancora_contextual": null,
+                    "natureza": "EXTRACAO_DOCUMENTAL",
+                    "sha256_pdf": "aa89a4c6c6c0316b9bc07b4f82828f2cc3bca265d56ba207f40b63434b4a8fe3"
+                  }
+                ],
+                "estado_curadoria": "A_CONFERIR",
+                "aprovacao_clinica": null,
+                "gera_agendamento": false,
+                "marcadores_sericos": "incluídos na linha H&P e marcadores; sem nota de opcionalidade",
+                "histologia": "não seminoma"
+              },
+              {
+                "tabela_ou_ramo": 11,
+                "cenario": "Não seminoma patológicoIIA/B/C: RPLND primária + QT adjuvante",
+                "linhas": [
+                  {
+                    "exame": "História e exame físico + marcadores",
+                    "periodos": {
+                      "ano1": "4–6 meses",
+                      "ano2": "6 meses",
+                      "ano3": "anual",
+                      "ano4": "anual",
+                      "ano5": "anual"
+                    },
+                    "condicao": null
+                  },
+                  {
+                    "exame": "TC/RM abdome ± pelve (ou abdome/pelve conforme tabela)",
+                    "periodos": {
+                      "ano1": "mês4 apósRPLND",
+                      "ano2": "conforme indicação clínica",
+                      "ano3": "conforme indicação clínica",
+                      "ano4": "conforme indicação clínica",
+                      "ano5": "conforme indicação clínica"
+                    },
+                    "condicao": null
+                  },
+                  {
+                    "exame": "RX tórax",
+                    "periodos": {
+                      "ano1": "6 meses",
+                      "ano2": "anual",
+                      "ano3": "anual",
+                      "ano4": "anual",
+                      "ano5": "anual"
+                    },
+                    "condicao": null
+                  }
+                ],
+                "notas": [
+                  "Nota n: pN0 ou pN1 teratoma puro apósRPLND: uma TC mês3–4, depois conforme indicação."
+                ],
+                "fontes": [
+                  {
+                    "fonte_id": "nccn-6d5cc2b82dad",
+                    "edicao": "2.2026",
+                    "pagina_pdf": 32,
+                    "paginas_pdf": [
+                      32
+                    ],
+                    "secao": "TEST-B 3/3, tabela11",
+                    "trecho": "Table 11",
+                    "ancora_contextual": null,
+                    "natureza": "EXTRACAO_DOCUMENTAL",
+                    "sha256_pdf": "aa89a4c6c6c0316b9bc07b4f82828f2cc3bca265d56ba207f40b63434b4a8fe3"
+                  }
+                ],
+                "estado_curadoria": "A_CONFERIR",
+                "aprovacao_clinica": null,
+                "gera_agendamento": false,
+                "marcadores_sericos": "incluídos na linha H&P e marcadores; sem nota de opcionalidade",
+                "histologia": "não seminoma"
+              },
+              {
+                "tabela_ou_ramo": 12,
+                "cenario": "Não seminoma patológicoIIA/B: RPLND primária sem QT adjuvante",
+                "linhas": [
+                  {
+                    "exame": "História e exame físico + marcadores",
+                    "periodos": {
+                      "ano1": "2 meses",
+                      "ano2": "3 meses",
+                      "ano3": "4 meses",
+                      "ano4": "6 meses",
+                      "ano5": "anual"
+                    },
+                    "condicao": null
+                  },
+                  {
+                    "exame": "TC/RM abdome ± pelve (ou abdome/pelve conforme tabela)",
+                    "periodos": {
+                      "ano1": "mês4",
+                      "ano2": "anual",
+                      "ano3": "conforme indicação clínica",
+                      "ano4": "conforme indicação clínica",
+                      "ano5": "conforme indicação clínica"
+                    },
+                    "condicao": null
+                  },
+                  {
+                    "exame": "RX tórax",
+                    "periodos": {
+                      "ano1": "2–4 meses",
+                      "ano2": "3–6 meses",
+                      "ano3": "anual",
+                      "ano4": "anual",
+                      "ano5": "anual"
+                    },
+                    "condicao": null
+                  }
+                ],
+                "notas": [
+                  "IIC patológico: imagem mais frequente; não usar tabela12 indistintamente.",
+                  "EstádioIIA/IIB clínico com RPLND pN0 sem câncer/teratoma: retornar ao esquema baixo risco, exceto apenas uma TC pós-operatória por volta do mês4 (nota p remete tabela9).",
+                  "Pressupõe ressecção completa (nota q)."
+                ],
+                "fontes": [
+                  {
+                    "fonte_id": "nccn-6d5cc2b82dad",
+                    "edicao": "2.2026",
+                    "pagina_pdf": 32,
+                    "paginas_pdf": [
+                      32
+                    ],
+                    "secao": "TEST-B 3/3, tabela12",
+                    "trecho": "Table 12",
+                    "ancora_contextual": null,
+                    "natureza": "EXTRACAO_DOCUMENTAL",
+                    "sha256_pdf": "aa89a4c6c6c0316b9bc07b4f82828f2cc3bca265d56ba207f40b63434b4a8fe3"
+                  }
+                ],
+                "estado_curadoria": "A_CONFERIR",
+                "aprovacao_clinica": null,
+                "gera_agendamento": false,
+                "marcadores_sericos": "incluídos na linha H&P e marcadores; sem nota de opcionalidade",
+                "histologia": "não seminoma"
+              }
+            ],
+            "notas_comuns": [
+              "Individualizar; novos sintomas exigem reavaliação independentemente do intervalo.",
+              "Ultrassom testicular para exame equívoco.",
+              "Contraste/protocolo de TC/RM conforme notas de cada tabela.",
+              "História de tratamento e resultado de RPLND definem a tabela."
+            ],
+            "sem_agendamento_automatico": true
+          },
+          "rotulagem_legado": [
+            {
+              "origem_ref": "/tratamento/seguimento/0",
+              "rotulo_original": "1º e 2º anos",
+              "histologia": null,
+              "estadio": null,
+              "estado": "NAO_DEFINIDOS_NA_ENTRADA_LEGADA; NAO_INFERIR",
+              "fonte_legada_ref": "/tratamento/seguimento/0/fonte"
+            },
+            {
+              "origem_ref": "/tratamento/seguimento/1",
+              "rotulo_original": "3º ano",
+              "histologia": null,
+              "estadio": null,
+              "estado": "NAO_DEFINIDOS_NA_ENTRADA_LEGADA; NAO_INFERIR",
+              "fonte_legada_ref": "/tratamento/seguimento/1/fonte"
+            },
+            {
+              "origem_ref": "/tratamento/seguimento/2",
+              "rotulo_original": "4º e 5º anos",
+              "histologia": null,
+              "estadio": null,
+              "estado": "NAO_DEFINIDOS_NA_ENTRADA_LEGADA; NAO_INFERIR",
+              "fonte_legada_ref": "/tratamento/seguimento/2/fonte"
+            },
+            {
+              "origem_ref": "/tratamento/seguimento/3",
+              "rotulo_original": "Sobrevivência (orientações gerais)",
+              "histologia": null,
+              "estadio": null,
+              "estado": "NAO_DEFINIDOS_NA_ENTRADA_LEGADA; NAO_INFERIR",
+              "fonte_legada_ref": "/tratamento/seguimento/3/fonte"
+            },
+            {
+              "origem_ref": "/tratamento/seguimento/4",
+              "rotulo_original": "anos 1–2",
+              "histologia": null,
+              "estadio": null,
+              "estado": "NAO_DEFINIDOS_NA_ENTRADA_LEGADA; NAO_INFERIR",
+              "fonte_legada_ref": "/tratamento/seguimento/4/fonte"
+            },
+            {
+              "origem_ref": "/tratamento/seguimento/5",
+              "rotulo_original": "anos 3–4",
+              "histologia": null,
+              "estadio": null,
+              "estado": "NAO_DEFINIDOS_NA_ENTRADA_LEGADA; NAO_INFERIR",
+              "fonte_legada_ref": "/tratamento/seguimento/5/fonte"
+            },
+            {
+              "origem_ref": "/tratamento/seguimento/6",
+              "rotulo_original": "ano 5",
+              "histologia": null,
+              "estadio": null,
+              "estado": "NAO_DEFINIDOS_NA_ENTRADA_LEGADA; NAO_INFERIR",
+              "fonte_legada_ref": "/tratamento/seguimento/6/fonte"
+            }
+          ],
+          "comparacao_com_legado": "MOC não lista imagem nessas entradas; NCCN possui exames por cenário. Não afirmar equivalência com o calendário geral antes de rotular histologia/estádio na fonte legada."
+        },
+        "fonte_refs": [
+          {
+            "fonte_id": "nccn-6d5cc2b82dad",
+            "edicao": "2.2026",
+            "pagina_pdf": 27,
+            "paginas_pdf": [
+              27
+            ],
+            "secao": "TEST-A/B, página27",
+            "trecho": "FOLLOW-UP",
+            "ancora_contextual": null,
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "aa89a4c6c6c0316b9bc07b4f82828f2cc3bca265d56ba207f40b63434b4a8fe3"
+          },
+          {
+            "fonte_id": "nccn-6d5cc2b82dad",
+            "edicao": "2.2026",
+            "pagina_pdf": 28,
+            "paginas_pdf": [
+              28
+            ],
+            "secao": "TEST-A/B, página28",
+            "trecho": "follow-up",
+            "ancora_contextual": null,
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "aa89a4c6c6c0316b9bc07b4f82828f2cc3bca265d56ba207f40b63434b4a8fe3"
+          },
+          {
+            "fonte_id": "nccn-6d5cc2b82dad",
+            "edicao": "2.2026",
+            "pagina_pdf": 29,
+            "paginas_pdf": [
+              29
+            ],
+            "secao": "TEST-A/B, página29",
+            "trecho": "FOLLOW-UP",
+            "ancora_contextual": null,
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "aa89a4c6c6c0316b9bc07b4f82828f2cc3bca265d56ba207f40b63434b4a8fe3"
+          },
+          {
+            "fonte_id": "nccn-6d5cc2b82dad",
+            "edicao": "2.2026",
+            "pagina_pdf": 30,
+            "paginas_pdf": [
+              30
+            ],
+            "secao": "TEST-A/B, página30",
+            "trecho": "FOLLOW-UP",
+            "ancora_contextual": null,
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "aa89a4c6c6c0316b9bc07b4f82828f2cc3bca265d56ba207f40b63434b4a8fe3"
+          },
+          {
+            "fonte_id": "nccn-6d5cc2b82dad",
+            "edicao": "2.2026",
+            "pagina_pdf": 31,
+            "paginas_pdf": [
+              31
+            ],
+            "secao": "TEST-A/B, página31",
+            "trecho": "FOLLOW-UP",
+            "ancora_contextual": null,
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "aa89a4c6c6c0316b9bc07b4f82828f2cc3bca265d56ba207f40b63434b4a8fe3"
+          },
+          {
+            "fonte_id": "nccn-6d5cc2b82dad",
+            "edicao": "2.2026",
+            "pagina_pdf": 32,
+            "paginas_pdf": [
+              32
+            ],
+            "secao": "TEST-A/B, página32",
+            "trecho": "follow-up",
+            "ancora_contextual": null,
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "aa89a4c6c6c0316b9bc07b4f82828f2cc3bca265d56ba207f40b63434b4a8fe3"
+          }
+        ],
+        "evidencia_declarada": {
+          "sistema": "NCCN",
+          "categoria": null,
+          "estado": "NAO_EXTRAIDA_POR_ITEM"
+        },
+        "estado_extracao": "EXTRAIDO_COM_LIMITES_DECLARADOS",
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "temporalidade": {
+          "referencia": "CENARIO_DESCRITO",
+          "datas_individuais": null
+        },
+        "propor_automaticamente": false,
+        "disponivel_para_prescricao": false,
+        "acesso": {
+          "registro_anvisa": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "incorporacao_conitec": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "pcdt_ddt": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "sigtap_apac": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "cobertura_privada": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "disponibilidade_institucional": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          }
+        },
+        "alternativas_legadas_refs": [
+          "/tratamento/seguimento"
+        ],
+        "relacoes_refs": [
+          "relacao-nccn-20261017-testiculo-calendarios"
+        ],
+        "conflitos_refs": [
+          "conflito-nccn-20261017-testiculo-calendarios"
+        ],
+        "pendencias": [
+          "REVISAO_CLINICA_DO_DELTA",
+          "VERIFICAR_ACESSO_BRASILEIRO_POR_INDICACAO"
+        ],
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-2-correcao-auditoria",
+            "correcao_id": "M36",
+            "anterior": {
+              "conteudo_extraido": "Preservar tabelas separadas para seminoma/não seminoma, vigilância após orquiectomia, adjuvância, QT e RPLND. Em seminoma estádio I os marcadores séricos são opcionais segundo a nota; não aplicar o calendário geral a todos.",
+              "fonte_refs": [
+                {
+                  "fonte_id": "nccn-6d5cc2b82dad",
+                  "paginas_pdf": [
+                    27,
+                    28,
+                    29,
+                    30,
+                    31,
+                    32
+                  ],
+                  "secao": "TEST-A e TEST-B",
+                  "natureza": "EXTRACAO_DOCUMENTAL",
+                  "pagina_pdf": 27,
+                  "trecho": "FOLLOW-UP FOR SEMINOMA a Serum tumor markers are optional. b Testicular ultrasound"
+                }
+              ],
+              "estado_curadoria": "A_CONFERIR",
+              "aprovacao_clinica": null
+            },
+            "motivo": "Correção documental após auditoria Claude e conferência da fonte; não apaga versão anterior.",
+            "aprovacao_clinica": null
+          },
+          {
+            "revisao": "2026-10-17-nccn-delta-2-correcao-auditoria",
+            "correcao_id": "AD1-testiculo",
+            "anterior": {
+              "conteudo_extraido": "Marcadores séricos são opcionais nas tabelas1–5 de seminoma (estádiosI/II); a tabela6 (bulky IIB/IIC/III) inclui H&P e marcadores, sem essa anotação na linha. As tabelas7–12 de não seminoma incluem marcadores. Histologia, estádio e tratamento definem a tabela; não aplicar um calendário genérico.",
+              "fonte_refs": [
+                {
+                  "fonte_id": "nccn-6d5cc2b82dad",
+                  "edicao": "2.2026",
+                  "pagina_pdf": 27,
+                  "paginas_pdf": [
+                    27
+                  ],
+                  "secao": "TEST-A 1/3, nota a",
+                  "trecho": "Serum tumor markers are optional",
+                  "ancora_contextual": null,
+                  "natureza": "EXTRACAO_DOCUMENTAL",
+                  "sha256_pdf": "aa89a4c6c6c0316b9bc07b4f82828f2cc3bca265d56ba207f40b63434b4a8fe3"
+                },
+                {
+                  "fonte_id": "nccn-6d5cc2b82dad",
+                  "edicao": "2.2026",
+                  "pagina_pdf": 29,
+                  "paginas_pdf": [
+                    29
+                  ],
+                  "secao": "TEST-A 3/3, tabela6",
+                  "trecho": "H&P and",
+                  "ancora_contextual": null,
+                  "natureza": "EXTRACAO_DOCUMENTAL",
+                  "sha256_pdf": "aa89a4c6c6c0316b9bc07b4f82828f2cc3bca265d56ba207f40b63434b4a8fe3"
+                },
+                {
+                  "fonte_id": "nccn-6d5cc2b82dad",
+                  "edicao": "2.2026",
+                  "pagina_pdf": 30,
+                  "paginas_pdf": [
+                    30
+                  ],
+                  "secao": "TEST-B 1/3",
+                  "trecho": "H&P and",
+                  "ancora_contextual": null,
+                  "natureza": "EXTRACAO_DOCUMENTAL",
+                  "sha256_pdf": "aa89a4c6c6c0316b9bc07b4f82828f2cc3bca265d56ba207f40b63434b4a8fe3"
+                }
+              ],
+              "estado_curadoria": "A_CONFERIR",
+              "aprovacao_clinica": null,
+              "dados_estruturados": {}
+            },
+            "motivo": "Correção documental após auditoria Claude e conferência da fonte; não apaga versão anterior.",
+            "aprovacao_clinica": null
+          },
+          {
+            "revisao": "2026-10-17-nccn-final-documental",
+            "anterior": {
+              "dados_estruturados": {
+                "seguimento_nccn": {
+                  "tabelas": [
+                    {
+                      "tabela_ou_ramo": 1,
+                      "cenario": "Seminoma estádioI: vigilância após orquiectomia",
+                      "linhas": [
+                        {
+                          "exame": "História e exame físico",
+                          "periodos": {
+                            "ano1": "4–6meses",
+                            "ano2": "6meses",
+                            "ano3": "6–12meses",
+                            "ano4": "anual",
+                            "ano5": "anual"
+                          },
+                          "condicao": null
+                        },
+                        {
+                          "exame": "TC/RM abdome ± pelve (ou abdome/pelve conforme tabela)",
+                          "periodos": {
+                            "ano1": "4–6meses",
+                            "ano2": "6meses",
+                            "ano3": "6–12meses",
+                            "ano4": "12–24meses",
+                            "ano5": "12–24meses"
+                          },
+                          "condicao": null
+                        },
+                        {
+                          "exame": "RX tórax",
+                          "periodos": {
+                            "ano1": "conforme indicação clínica",
+                            "ano2": "conforme indicação clínica",
+                            "ano3": "conforme indicação clínica",
+                            "ano4": "conforme indicação clínica",
+                            "ano5": "conforme indicação clínica"
+                          },
+                          "condicao": null
+                        }
+                      ],
+                      "notas": [
+                        "Considerar TC tórax contrastada se sintomático; TC/RM não recomendada após5anos salvo indicação."
+                      ],
+                      "fontes": [
+                        {
+                          "fonte_id": "nccn-6d5cc2b82dad",
+                          "edicao": "2.2026",
+                          "pagina_pdf": 27,
+                          "paginas_pdf": [
+                            27
+                          ],
+                          "secao": "TEST-A 1/3, tabela1",
+                          "trecho": "Table 1",
+                          "ancora_contextual": null,
+                          "natureza": "EXTRACAO_DOCUMENTAL",
+                          "sha256_pdf": "aa89a4c6c6c0316b9bc07b4f82828f2cc3bca265d56ba207f40b63434b4a8fe3"
+                        }
+                      ],
+                      "estado_curadoria": "A_CONFERIR",
+                      "aprovacao_clinica": null,
+                      "gera_agendamento": false,
+                      "marcadores_sericos": "opcionais (nota a)",
+                      "histologia": "seminoma"
+                    },
+                    {
+                      "tabela_ou_ramo": 2,
+                      "cenario": "Seminoma estádioI: após adjuvância QT ou RT",
+                      "linhas": [
+                        {
+                          "exame": "História e exame físico",
+                          "periodos": {
+                            "ano1": "6–12meses",
+                            "ano2": "6–12meses",
+                            "ano3": "anual",
+                            "ano4": "anual",
+                            "ano5": "anual"
+                          },
+                          "condicao": null
+                        },
+                        {
+                          "exame": "TC/RM abdome ± pelve (ou abdome/pelve conforme tabela)",
+                          "periodos": {
+                            "ano1": "anual",
+                            "ano2": "anual",
+                            "ano3": "anual",
+                            "ano4": "conforme indicação clínica",
+                            "ano5": "conforme indicação clínica"
+                          },
+                          "condicao": null
+                        },
+                        {
+                          "exame": "RX tórax",
+                          "periodos": {
+                            "ano1": "conforme indicação clínica",
+                            "ano2": "conforme indicação clínica",
+                            "ano3": "conforme indicação clínica",
+                            "ano4": "conforme indicação clínica",
+                            "ano5": "conforme indicação clínica"
+                          },
+                          "condicao": null
+                        }
+                      ],
+                      "notas": [
+                        "TC tórax se sintomático; não transportar rotina de marcadores do não seminoma."
+                      ],
+                      "fontes": [
+                        {
+                          "fonte_id": "nccn-6d5cc2b82dad",
+                          "edicao": "2.2026",
+                          "pagina_pdf": 27,
+                          "paginas_pdf": [
+                            27
+                          ],
+                          "secao": "TEST-A 1/3, tabela2",
+                          "trecho": "Table 2",
+                          "ancora_contextual": null,
+                          "natureza": "EXTRACAO_DOCUMENTAL",
+                          "sha256_pdf": "aa89a4c6c6c0316b9bc07b4f82828f2cc3bca265d56ba207f40b63434b4a8fe3"
+                        }
+                      ],
+                      "estado_curadoria": "A_CONFERIR",
+                      "aprovacao_clinica": null,
+                      "gera_agendamento": false,
+                      "marcadores_sericos": "opcionais (nota a)",
+                      "histologia": "seminoma"
+                    },
+                    {
+                      "tabela_ou_ramo": 3,
+                      "cenario": "Seminoma IIA/IIB não bulky: após RT ou QT ou ambas",
+                      "linhas": [
+                        {
+                          "exame": "História e exame físico",
+                          "periodos": {
+                            "ano1": "3meses",
+                            "ano2": "6meses",
+                            "ano3": "6meses",
+                            "ano4": "6meses",
+                            "ano5": "6meses"
+                          },
+                          "condicao": null
+                        },
+                        {
+                          "exame": "TC/RM abdome ± pelve (ou abdome/pelve conforme tabela)",
+                          "periodos": {
+                            "ano1": "mês3 e depois mês9 ou12",
+                            "ano2": "anual",
+                            "ano3": "anual",
+                            "ano4": "conforme indicação clínica",
+                            "ano5": "conforme indicação clínica"
+                          },
+                          "condicao": null
+                        },
+                        {
+                          "exame": "RX tórax",
+                          "periodos": {
+                            "ano1": "6meses",
+                            "ano2": "6meses",
+                            "ano3": "conforme indicação clínica",
+                            "ano4": "conforme indicação clínica",
+                            "ano5": "conforme indicação clínica"
+                          },
+                          "condicao": null
+                        }
+                      ],
+                      "notas": [
+                        "Pressupõe ausência de massa residual ou massa<3cm e marcadores normais."
+                      ],
+                      "fontes": [
+                        {
+                          "fonte_id": "nccn-6d5cc2b82dad",
+                          "edicao": "2.2026",
+                          "pagina_pdf": 28,
+                          "paginas_pdf": [
+                            28
+                          ],
+                          "secao": "TEST-A 2/3, tabela3",
+                          "trecho": "Table 3",
+                          "ancora_contextual": null,
+                          "natureza": "EXTRACAO_DOCUMENTAL",
+                          "sha256_pdf": "aa89a4c6c6c0316b9bc07b4f82828f2cc3bca265d56ba207f40b63434b4a8fe3"
+                        }
+                      ],
+                      "estado_curadoria": "A_CONFERIR",
+                      "aprovacao_clinica": null,
+                      "gera_agendamento": false,
+                      "marcadores_sericos": "opcionais (nota a)",
+                      "histologia": "seminoma"
+                    },
+                    {
+                      "tabela_ou_ramo": 4,
+                      "cenario": "Seminoma estádioII: após RPLND primária sem QT adjuvante",
+                      "linhas": [
+                        {
+                          "exame": "História e exame físico",
+                          "periodos": {
+                            "ano1": "4meses",
+                            "ano2": "6meses",
+                            "ano3": "6meses",
+                            "ano4": "6meses",
+                            "ano5": "6meses"
+                          },
+                          "condicao": null
+                        },
+                        {
+                          "exame": "TC/RM abdome ± pelve (ou abdome/pelve conforme tabela)",
+                          "periodos": {
+                            "ano1": "4meses",
+                            "ano2": "6meses",
+                            "ano3": "anual",
+                            "ano4": "conforme indicação clínica",
+                            "ano5": "conforme indicação clínica"
+                          },
+                          "condicao": null
+                        },
+                        {
+                          "exame": "RX tórax",
+                          "periodos": {
+                            "ano1": "4meses",
+                            "ano2": "6meses",
+                            "ano3": "anual",
+                            "ano4": "conforme indicação clínica",
+                            "ano5": "conforme indicação clínica"
+                          },
+                          "condicao": null
+                        }
+                      ],
+                      "notas": [],
+                      "fontes": [
+                        {
+                          "fonte_id": "nccn-6d5cc2b82dad",
+                          "edicao": "2.2026",
+                          "pagina_pdf": 28,
+                          "paginas_pdf": [
+                            28
+                          ],
+                          "secao": "TEST-A 2/3, tabela4",
+                          "trecho": "Table 4",
+                          "ancora_contextual": null,
+                          "natureza": "EXTRACAO_DOCUMENTAL",
+                          "sha256_pdf": "aa89a4c6c6c0316b9bc07b4f82828f2cc3bca265d56ba207f40b63434b4a8fe3"
+                        }
+                      ],
+                      "estado_curadoria": "A_CONFERIR",
+                      "aprovacao_clinica": null,
+                      "gera_agendamento": false,
+                      "marcadores_sericos": "opcionais (nota a)",
+                      "histologia": "seminoma"
+                    },
+                    {
+                      "tabela_ou_ramo": 5,
+                      "cenario": "Seminoma estádioII: após RPLND primária com QT adjuvante",
+                      "linhas": [
+                        {
+                          "exame": "História e exame físico",
+                          "periodos": {
+                            "ano1": "3meses",
+                            "ano2": "6meses",
+                            "ano3": "6meses",
+                            "ano4": "6meses",
+                            "ano5": "6meses"
+                          },
+                          "condicao": null
+                        },
+                        {
+                          "exame": "TC/RM abdome ± pelve (ou abdome/pelve conforme tabela)",
+                          "periodos": {
+                            "ano1": "6meses",
+                            "ano2": "anual",
+                            "ano3": "conforme indicação clínica",
+                            "ano4": "conforme indicação clínica",
+                            "ano5": "conforme indicação clínica"
+                          },
+                          "condicao": null
+                        },
+                        {
+                          "exame": "RX tórax",
+                          "periodos": {
+                            "ano1": "6meses",
+                            "ano2": "anual",
+                            "ano3": "conforme indicação clínica",
+                            "ano4": "conforme indicação clínica",
+                            "ano5": "conforme indicação clínica"
+                          },
+                          "condicao": null
+                        }
+                      ],
+                      "notas": [],
+                      "fontes": [
+                        {
+                          "fonte_id": "nccn-6d5cc2b82dad",
+                          "edicao": "2.2026",
+                          "pagina_pdf": 29,
+                          "paginas_pdf": [
+                            29
+                          ],
+                          "secao": "TEST-A 3/3, tabela5",
+                          "trecho": "Table 5",
+                          "ancora_contextual": null,
+                          "natureza": "EXTRACAO_DOCUMENTAL",
+                          "sha256_pdf": "aa89a4c6c6c0316b9bc07b4f82828f2cc3bca265d56ba207f40b63434b4a8fe3"
+                        }
+                      ],
+                      "estado_curadoria": "A_CONFERIR",
+                      "aprovacao_clinica": null,
+                      "gera_agendamento": false,
+                      "marcadores_sericos": "opcionais (nota a)",
+                      "histologia": "seminoma"
+                    },
+                    {
+                      "tabela_ou_ramo": 6,
+                      "cenario": "Seminoma bulky IIB/IIC/III: após QT",
+                      "linhas": [
+                        {
+                          "exame": "História e exame físico + marcadores",
+                          "periodos": {
+                            "ano1": "2–4meses",
+                            "ano2": "3–6meses",
+                            "ano3": "6meses",
+                            "ano4": "6meses",
+                            "ano5": "anual"
+                          },
+                          "condicao": null
+                        },
+                        {
+                          "exame": "TC/RM abdome ± pelve (ou abdome/pelve conforme tabela)",
+                          "periodos": {
+                            "ano1": "4meses",
+                            "ano2": "6meses",
+                            "ano3": "anual",
+                            "ano4": "anual",
+                            "ano5": "conforme indicação clínica"
+                          },
+                          "condicao": null
+                        },
+                        {
+                          "exame": "RX tórax",
+                          "periodos": {
+                            "ano1": "4meses",
+                            "ano2": "6meses",
+                            "ano3": "anual",
+                            "ano4": "anual",
+                            "ano5": "anual"
+                          },
+                          "condicao": null
+                        }
+                      ],
+                      "notas": [
+                        "Nota i: massa residual>3cm PET-negativa: RM/TC abdome-pelve semestral no primeiro ano, depois anual por5anos.",
+                        "Massa residual pode requerer imagem mais frequente.",
+                        "TC tórax com contraste se doença supradiafragmática inicial.",
+                        "PET/CT conforme indicação; não transformar em rotina."
+                      ],
+                      "fontes": [
+                        {
+                          "fonte_id": "nccn-6d5cc2b82dad",
+                          "edicao": "2.2026",
+                          "pagina_pdf": 29,
+                          "paginas_pdf": [
+                            29
+                          ],
+                          "secao": "TEST-A 3/3, tabela6",
+                          "trecho": "Table 6",
+                          "ancora_contextual": null,
+                          "natureza": "EXTRACAO_DOCUMENTAL",
+                          "sha256_pdf": "aa89a4c6c6c0316b9bc07b4f82828f2cc3bca265d56ba207f40b63434b4a8fe3"
+                        }
+                      ],
+                      "estado_curadoria": "A_CONFERIR",
+                      "aprovacao_clinica": null,
+                      "gera_agendamento": false,
+                      "marcadores_sericos": "incluídos na linha H&P e marcadores; sem nota de opcionalidade",
+                      "histologia": "seminoma"
+                    },
+                    {
+                      "tabela_ou_ramo": 7,
+                      "cenario": "Não seminoma estádioI sem fatores de risco: vigilância ativa",
+                      "linhas": [
+                        {
+                          "exame": "História e exame físico + marcadores",
+                          "periodos": {
+                            "ano1": "2–3meses",
+                            "ano2": "3meses",
+                            "ano3": "4–6meses",
+                            "ano4": "6meses",
+                            "ano5": "anual"
+                          },
+                          "condicao": null
+                        },
+                        {
+                          "exame": "TC/RM abdome ± pelve (ou abdome/pelve conforme tabela)",
+                          "periodos": {
+                            "ano1": "4–6meses",
+                            "ano2": "6meses",
+                            "ano3": "anual",
+                            "ano4": "12–24meses",
+                            "ano5": "12–24meses"
+                          },
+                          "condicao": null
+                        },
+                        {
+                          "exame": "RX tórax",
+                          "periodos": {
+                            "ano1": "meses4 e12",
+                            "ano2": "anual",
+                            "ano3": "conforme indicação clínica",
+                            "ano4": "conforme indicação clínica",
+                            "ano5": "conforme indicação clínica"
+                          },
+                          "condicao": null
+                        }
+                      ],
+                      "notas": [],
+                      "fontes": [
+                        {
+                          "fonte_id": "nccn-6d5cc2b82dad",
+                          "edicao": "2.2026",
+                          "pagina_pdf": 30,
+                          "paginas_pdf": [
+                            30
+                          ],
+                          "secao": "TEST-B 1/3, tabela7",
+                          "trecho": "Table 7",
+                          "ancora_contextual": null,
+                          "natureza": "EXTRACAO_DOCUMENTAL",
+                          "sha256_pdf": "aa89a4c6c6c0316b9bc07b4f82828f2cc3bca265d56ba207f40b63434b4a8fe3"
+                        }
+                      ],
+                      "estado_curadoria": "A_CONFERIR",
+                      "aprovacao_clinica": null,
+                      "gera_agendamento": false,
+                      "marcadores_sericos": "incluídos na linha H&P e marcadores; sem nota de opcionalidade",
+                      "histologia": "não seminoma"
+                    },
+                    {
+                      "tabela_ou_ramo": 8,
+                      "cenario": "Não seminoma estádioI com fatores de risco: vigilância ativa",
+                      "linhas": [
+                        {
+                          "exame": "História e exame físico + marcadores",
+                          "periodos": {
+                            "ano1": "2meses",
+                            "ano2": "3meses",
+                            "ano3": "4–6meses",
+                            "ano4": "6meses",
+                            "ano5": "anual"
+                          },
+                          "condicao": null
+                        },
+                        {
+                          "exame": "TC/RM abdome ± pelve (ou abdome/pelve conforme tabela)",
+                          "periodos": {
+                            "ano1": "4meses",
+                            "ano2": "4–6meses",
+                            "ano3": "6meses",
+                            "ano4": "anual",
+                            "ano5": "conforme indicação clínica"
+                          },
+                          "condicao": null
+                        },
+                        {
+                          "exame": "RX tórax",
+                          "periodos": {
+                            "ano1": "4meses",
+                            "ano2": "4–6meses",
+                            "ano3": "6meses",
+                            "ano4": "anual",
+                            "ano5": "conforme indicação clínica"
+                          },
+                          "condicao": null
+                        }
+                      ],
+                      "notas": [
+                        "Fatores da nota a: invasão linfovascular, cordão espermático ou escroto; alguns centros consideram predomínio embrionário."
+                      ],
+                      "fontes": [
+                        {
+                          "fonte_id": "nccn-6d5cc2b82dad",
+                          "edicao": "2.2026",
+                          "pagina_pdf": 30,
+                          "paginas_pdf": [
+                            30
+                          ],
+                          "secao": "TEST-B 1/3, tabela8",
+                          "trecho": "Table 8",
+                          "ancora_contextual": null,
+                          "natureza": "EXTRACAO_DOCUMENTAL",
+                          "sha256_pdf": "aa89a4c6c6c0316b9bc07b4f82828f2cc3bca265d56ba207f40b63434b4a8fe3"
+                        }
+                      ],
+                      "estado_curadoria": "A_CONFERIR",
+                      "aprovacao_clinica": null,
+                      "gera_agendamento": false,
+                      "marcadores_sericos": "incluídos na linha H&P e marcadores; sem nota de opcionalidade",
+                      "histologia": "não seminoma"
+                    },
+                    {
+                      "tabela_ou_ramo": 9,
+                      "cenario": "Não seminoma IA/B: após1ciclo BEP adjuvante ou RPLND primária",
+                      "linhas": [
+                        {
+                          "exame": "História e exame físico + marcadores",
+                          "periodos": {
+                            "ano1": "3meses",
+                            "ano2": "3meses",
+                            "ano3": "6meses",
+                            "ano4": "6meses",
+                            "ano5": "anual"
+                          },
+                          "condicao": null
+                        },
+                        {
+                          "exame": "TC/RM abdome ± pelve (ou abdome/pelve conforme tabela)",
+                          "periodos": {
+                            "ano1": "anual",
+                            "ano2": "anual; opcional se RPLND primária",
+                            "ano3": "conforme indicação clínica",
+                            "ano4": "conforme indicação clínica",
+                            "ano5": "conforme indicação clínica"
+                          },
+                          "condicao": null
+                        },
+                        {
+                          "exame": "RX tórax",
+                          "periodos": {
+                            "ano1": "6–12meses",
+                            "ano2": "anual",
+                            "ano3": "conforme indicação clínica",
+                            "ano4": "conforme indicação clínica",
+                            "ano5": "conforme indicação clínica"
+                          },
+                          "condicao": null
+                        }
+                      ],
+                      "notas": [
+                        "Nota f: estádio patológicoI; estádio patológicoII vai à tabela11."
+                      ],
+                      "fontes": [
+                        {
+                          "fonte_id": "nccn-6d5cc2b82dad",
+                          "edicao": "2.2026",
+                          "pagina_pdf": 31,
+                          "paginas_pdf": [
+                            31
+                          ],
+                          "secao": "TEST-B 2/3, tabela9",
+                          "trecho": "Table 9",
+                          "ancora_contextual": null,
+                          "natureza": "EXTRACAO_DOCUMENTAL",
+                          "sha256_pdf": "aa89a4c6c6c0316b9bc07b4f82828f2cc3bca265d56ba207f40b63434b4a8fe3"
+                        }
+                      ],
+                      "estado_curadoria": "A_CONFERIR",
+                      "aprovacao_clinica": null,
+                      "gera_agendamento": false,
+                      "marcadores_sericos": "incluídos na linha H&P e marcadores; sem nota de opcionalidade",
+                      "histologia": "não seminoma"
+                    },
+                    {
+                      "tabela_ou_ramo": 10,
+                      "cenario": "Não seminoma estádioII–III: após QT ± cirurgia",
+                      "linhas": [
+                        {
+                          "exame": "História e exame físico + marcadores",
+                          "periodos": {
+                            "ano1": "2meses",
+                            "ano2": "3meses",
+                            "ano3": "6meses",
+                            "ano4": "6meses",
+                            "ano5": "6meses"
+                          },
+                          "condicao": null
+                        },
+                        {
+                          "exame": "TC/RM abdome ± pelve (ou abdome/pelve conforme tabela)",
+                          "periodos": {
+                            "ano1": "4–6meses",
+                            "ano2": "6–12meses",
+                            "ano3": "anual",
+                            "ano4": "conforme indicação clínica",
+                            "ano5": "conforme indicação clínica"
+                          },
+                          "condicao": null
+                        },
+                        {
+                          "exame": "RX tórax",
+                          "periodos": {
+                            "ano1": "4–6meses",
+                            "ano2": "6–12meses",
+                            "ano3": "conforme indicação clínica",
+                            "ano4": "conforme indicação clínica",
+                            "ano5": "conforme indicação clínica"
+                          },
+                          "condicao": null
+                        }
+                      ],
+                      "notas": [
+                        "Resposta parcial sem candidatura à cirurgia exige imagem mais frequente.",
+                        "EstádioII clínico após QT/RPLND com pN0 ou pN1 teratoma puro: apenas uma TC no mês3–4 pós-operatório, depois conforme indicação.",
+                        "TC tórax se doença supradiafragmática inicial.",
+                        "Considerar marcadores anuais dos anos5–10 e depois conforme indicação (nota k).",
+                        "Notas l/m: atenção às massas residuais; RX opcional nos meses36 e48."
+                      ],
+                      "fontes": [
+                        {
+                          "fonte_id": "nccn-6d5cc2b82dad",
+                          "edicao": "2.2026",
+                          "pagina_pdf": 31,
+                          "paginas_pdf": [
+                            31
+                          ],
+                          "secao": "TEST-B 2/3, tabela10",
+                          "trecho": "Table 10",
+                          "ancora_contextual": null,
+                          "natureza": "EXTRACAO_DOCUMENTAL",
+                          "sha256_pdf": "aa89a4c6c6c0316b9bc07b4f82828f2cc3bca265d56ba207f40b63434b4a8fe3"
+                        }
+                      ],
+                      "estado_curadoria": "A_CONFERIR",
+                      "aprovacao_clinica": null,
+                      "gera_agendamento": false,
+                      "marcadores_sericos": "incluídos na linha H&P e marcadores; sem nota de opcionalidade",
+                      "histologia": "não seminoma"
+                    },
+                    {
+                      "tabela_ou_ramo": 11,
+                      "cenario": "Não seminoma patológicoIIA/B/C: RPLND primária + QT adjuvante",
+                      "linhas": [
+                        {
+                          "exame": "História e exame físico + marcadores",
+                          "periodos": {
+                            "ano1": "4–6meses",
+                            "ano2": "6meses",
+                            "ano3": "anual",
+                            "ano4": "anual",
+                            "ano5": "anual"
+                          },
+                          "condicao": null
+                        },
+                        {
+                          "exame": "TC/RM abdome ± pelve (ou abdome/pelve conforme tabela)",
+                          "periodos": {
+                            "ano1": "mês4 apósRPLND",
+                            "ano2": "conforme indicação clínica",
+                            "ano3": "conforme indicação clínica",
+                            "ano4": "conforme indicação clínica",
+                            "ano5": "conforme indicação clínica"
+                          },
+                          "condicao": null
+                        },
+                        {
+                          "exame": "RX tórax",
+                          "periodos": {
+                            "ano1": "6meses",
+                            "ano2": "anual",
+                            "ano3": "anual",
+                            "ano4": "anual",
+                            "ano5": "anual"
+                          },
+                          "condicao": null
+                        }
+                      ],
+                      "notas": [
+                        "Nota n: pN0 ou pN1 teratoma puro apósRPLND: uma TC mês3–4, depois conforme indicação."
+                      ],
+                      "fontes": [
+                        {
+                          "fonte_id": "nccn-6d5cc2b82dad",
+                          "edicao": "2.2026",
+                          "pagina_pdf": 32,
+                          "paginas_pdf": [
+                            32
+                          ],
+                          "secao": "TEST-B 3/3, tabela11",
+                          "trecho": "Table 11",
+                          "ancora_contextual": null,
+                          "natureza": "EXTRACAO_DOCUMENTAL",
+                          "sha256_pdf": "aa89a4c6c6c0316b9bc07b4f82828f2cc3bca265d56ba207f40b63434b4a8fe3"
+                        }
+                      ],
+                      "estado_curadoria": "A_CONFERIR",
+                      "aprovacao_clinica": null,
+                      "gera_agendamento": false,
+                      "marcadores_sericos": "incluídos na linha H&P e marcadores; sem nota de opcionalidade",
+                      "histologia": "não seminoma"
+                    },
+                    {
+                      "tabela_ou_ramo": 12,
+                      "cenario": "Não seminoma patológicoIIA/B: RPLND primária sem QT adjuvante",
+                      "linhas": [
+                        {
+                          "exame": "História e exame físico + marcadores",
+                          "periodos": {
+                            "ano1": "2meses",
+                            "ano2": "3meses",
+                            "ano3": "4meses",
+                            "ano4": "6meses",
+                            "ano5": "anual"
+                          },
+                          "condicao": null
+                        },
+                        {
+                          "exame": "TC/RM abdome ± pelve (ou abdome/pelve conforme tabela)",
+                          "periodos": {
+                            "ano1": "mês4",
+                            "ano2": "anual",
+                            "ano3": "conforme indicação clínica",
+                            "ano4": "conforme indicação clínica",
+                            "ano5": "conforme indicação clínica"
+                          },
+                          "condicao": null
+                        },
+                        {
+                          "exame": "RX tórax",
+                          "periodos": {
+                            "ano1": "2–4meses",
+                            "ano2": "3–6meses",
+                            "ano3": "anual",
+                            "ano4": "anual",
+                            "ano5": "anual"
+                          },
+                          "condicao": null
+                        }
+                      ],
+                      "notas": [
+                        "IIC patológico: imagem mais frequente; não usar tabela12 indistintamente.",
+                        "EstádioIIA/IIB clínico com RPLND pN0 sem câncer/teratoma: retornar ao esquema baixo risco, exceto apenas uma TC pós-operatória por volta do mês4 (nota p remete tabela9).",
+                        "Pressupõe ressecção completa (nota q)."
+                      ],
+                      "fontes": [
+                        {
+                          "fonte_id": "nccn-6d5cc2b82dad",
+                          "edicao": "2.2026",
+                          "pagina_pdf": 32,
+                          "paginas_pdf": [
+                            32
+                          ],
+                          "secao": "TEST-B 3/3, tabela12",
+                          "trecho": "Table 12",
+                          "ancora_contextual": null,
+                          "natureza": "EXTRACAO_DOCUMENTAL",
+                          "sha256_pdf": "aa89a4c6c6c0316b9bc07b4f82828f2cc3bca265d56ba207f40b63434b4a8fe3"
+                        }
+                      ],
+                      "estado_curadoria": "A_CONFERIR",
+                      "aprovacao_clinica": null,
+                      "gera_agendamento": false,
+                      "marcadores_sericos": "incluídos na linha H&P e marcadores; sem nota de opcionalidade",
+                      "histologia": "não seminoma"
+                    }
+                  ],
+                  "notas_comuns": [
+                    "Individualizar; novos sintomas exigem reavaliação independentemente do intervalo.",
+                    "Ultrassom testicular para exame equívoco.",
+                    "Contraste/protocolo de TC/RM conforme notas de cada tabela.",
+                    "História de tratamento e resultado de RPLND definem a tabela."
+                  ],
+                  "sem_agendamento_automatico": true
+                },
+                "rotulagem_legado": [
+                  {
+                    "origem_ref": "/tratamento/seguimento/0",
+                    "rotulo_original": "1º e 2º anos",
+                    "histologia": null,
+                    "estadio": null,
+                    "estado": "NAO_DEFINIDOS_NA_ENTRADA_LEGADA; NAO_INFERIR",
+                    "fonte_legada_ref": "/tratamento/seguimento/0/fonte"
+                  },
+                  {
+                    "origem_ref": "/tratamento/seguimento/1",
+                    "rotulo_original": "3º ano",
+                    "histologia": null,
+                    "estadio": null,
+                    "estado": "NAO_DEFINIDOS_NA_ENTRADA_LEGADA; NAO_INFERIR",
+                    "fonte_legada_ref": "/tratamento/seguimento/1/fonte"
+                  },
+                  {
+                    "origem_ref": "/tratamento/seguimento/2",
+                    "rotulo_original": "4º e 5º anos",
+                    "histologia": null,
+                    "estadio": null,
+                    "estado": "NAO_DEFINIDOS_NA_ENTRADA_LEGADA; NAO_INFERIR",
+                    "fonte_legada_ref": "/tratamento/seguimento/2/fonte"
+                  },
+                  {
+                    "origem_ref": "/tratamento/seguimento/3",
+                    "rotulo_original": "Sobrevivência (orientações gerais)",
+                    "histologia": null,
+                    "estadio": null,
+                    "estado": "NAO_DEFINIDOS_NA_ENTRADA_LEGADA; NAO_INFERIR",
+                    "fonte_legada_ref": "/tratamento/seguimento/3/fonte"
+                  },
+                  {
+                    "origem_ref": "/tratamento/seguimento/4",
+                    "rotulo_original": "anos 1–2",
+                    "histologia": null,
+                    "estadio": null,
+                    "estado": "NAO_DEFINIDOS_NA_ENTRADA_LEGADA; NAO_INFERIR",
+                    "fonte_legada_ref": "/tratamento/seguimento/4/fonte"
+                  },
+                  {
+                    "origem_ref": "/tratamento/seguimento/5",
+                    "rotulo_original": "anos 3–4",
+                    "histologia": null,
+                    "estadio": null,
+                    "estado": "NAO_DEFINIDOS_NA_ENTRADA_LEGADA; NAO_INFERIR",
+                    "fonte_legada_ref": "/tratamento/seguimento/5/fonte"
+                  },
+                  {
+                    "origem_ref": "/tratamento/seguimento/6",
+                    "rotulo_original": "ano 5",
+                    "histologia": null,
+                    "estadio": null,
+                    "estado": "NAO_DEFINIDOS_NA_ENTRADA_LEGADA; NAO_INFERIR",
+                    "fonte_legada_ref": "/tratamento/seguimento/6/fonte"
+                  }
+                ],
+                "comparacao_com_legado": "MOC não lista imagem nessas entradas; NCCN possui exames por cenário. Não afirmar equivalência com o calendário geral antes de rotular histologia/estádio na fonte legada."
+              }
+            },
+            "motivo": "Espaçamento da prosa; sem modificar valores, códigos ou fontes."
+          }
+        ],
+        "fontes_por_campo": {
+          "conteudo_extraido": [
+            {
+              "fonte_id": "nccn-6d5cc2b82dad",
+              "edicao": "2.2026",
+              "pagina_pdf": 27,
+              "paginas_pdf": [
+                27
+              ],
+              "secao": "TEST-A/B, página27",
+              "trecho": "FOLLOW-UP",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "aa89a4c6c6c0316b9bc07b4f82828f2cc3bca265d56ba207f40b63434b4a8fe3"
+            },
+            {
+              "fonte_id": "nccn-6d5cc2b82dad",
+              "edicao": "2.2026",
+              "pagina_pdf": 28,
+              "paginas_pdf": [
+                28
+              ],
+              "secao": "TEST-A/B, página28",
+              "trecho": "follow-up",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "aa89a4c6c6c0316b9bc07b4f82828f2cc3bca265d56ba207f40b63434b4a8fe3"
+            },
+            {
+              "fonte_id": "nccn-6d5cc2b82dad",
+              "edicao": "2.2026",
+              "pagina_pdf": 29,
+              "paginas_pdf": [
+                29
+              ],
+              "secao": "TEST-A/B, página29",
+              "trecho": "FOLLOW-UP",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "aa89a4c6c6c0316b9bc07b4f82828f2cc3bca265d56ba207f40b63434b4a8fe3"
+            },
+            {
+              "fonte_id": "nccn-6d5cc2b82dad",
+              "edicao": "2.2026",
+              "pagina_pdf": 30,
+              "paginas_pdf": [
+                30
+              ],
+              "secao": "TEST-A/B, página30",
+              "trecho": "FOLLOW-UP",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "aa89a4c6c6c0316b9bc07b4f82828f2cc3bca265d56ba207f40b63434b4a8fe3"
+            },
+            {
+              "fonte_id": "nccn-6d5cc2b82dad",
+              "edicao": "2.2026",
+              "pagina_pdf": 31,
+              "paginas_pdf": [
+                31
+              ],
+              "secao": "TEST-A/B, página31",
+              "trecho": "FOLLOW-UP",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "aa89a4c6c6c0316b9bc07b4f82828f2cc3bca265d56ba207f40b63434b4a8fe3"
+            },
+            {
+              "fonte_id": "nccn-6d5cc2b82dad",
+              "edicao": "2.2026",
+              "pagina_pdf": 32,
+              "paginas_pdf": [
+                32
+              ],
+              "secao": "TEST-A/B, página32",
+              "trecho": "follow-up",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "aa89a4c6c6c0316b9bc07b4f82828f2cc3bca265d56ba207f40b63434b4a8fe3"
+            }
+          ],
+          "dados_estruturados": [
+            {
+              "fonte_id": "nccn-6d5cc2b82dad",
+              "edicao": "2.2026",
+              "pagina_pdf": 27,
+              "paginas_pdf": [
+                27
+              ],
+              "secao": "TEST-A/B, página27",
+              "trecho": "FOLLOW-UP",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "aa89a4c6c6c0316b9bc07b4f82828f2cc3bca265d56ba207f40b63434b4a8fe3"
+            },
+            {
+              "fonte_id": "nccn-6d5cc2b82dad",
+              "edicao": "2.2026",
+              "pagina_pdf": 28,
+              "paginas_pdf": [
+                28
+              ],
+              "secao": "TEST-A/B, página28",
+              "trecho": "follow-up",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "aa89a4c6c6c0316b9bc07b4f82828f2cc3bca265d56ba207f40b63434b4a8fe3"
+            },
+            {
+              "fonte_id": "nccn-6d5cc2b82dad",
+              "edicao": "2.2026",
+              "pagina_pdf": 29,
+              "paginas_pdf": [
+                29
+              ],
+              "secao": "TEST-A/B, página29",
+              "trecho": "FOLLOW-UP",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "aa89a4c6c6c0316b9bc07b4f82828f2cc3bca265d56ba207f40b63434b4a8fe3"
+            },
+            {
+              "fonte_id": "nccn-6d5cc2b82dad",
+              "edicao": "2.2026",
+              "pagina_pdf": 30,
+              "paginas_pdf": [
+                30
+              ],
+              "secao": "TEST-A/B, página30",
+              "trecho": "FOLLOW-UP",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "aa89a4c6c6c0316b9bc07b4f82828f2cc3bca265d56ba207f40b63434b4a8fe3"
+            },
+            {
+              "fonte_id": "nccn-6d5cc2b82dad",
+              "edicao": "2.2026",
+              "pagina_pdf": 31,
+              "paginas_pdf": [
+                31
+              ],
+              "secao": "TEST-A/B, página31",
+              "trecho": "FOLLOW-UP",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "aa89a4c6c6c0316b9bc07b4f82828f2cc3bca265d56ba207f40b63434b4a8fe3"
+            },
+            {
+              "fonte_id": "nccn-6d5cc2b82dad",
+              "edicao": "2.2026",
+              "pagina_pdf": 32,
+              "paginas_pdf": [
+                32
+              ],
+              "secao": "TEST-A/B, página32",
+              "trecho": "follow-up",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "aa89a4c6c6c0316b9bc07b4f82828f2cc3bca265d56ba207f40b63434b4a8fe3"
+            }
+          ]
+        },
+        "correcoes_auditoria": [
+          {
+            "id": "M36",
+            "revisao": "2026-10-17-nccn-delta-2-correcao-auditoria",
+            "estado": "APLICADA_COM_CONFERENCIA_DOCUMENTAL",
+            "fontes": [
+              {
+                "fonte_id": "nccn-6d5cc2b82dad",
+                "edicao": "2.2026",
+                "pagina_pdf": 27,
+                "paginas_pdf": [
+                  27
+                ],
+                "secao": "TEST-A 1/3, nota a",
+                "trecho": "Serum tumor markers are optional",
+                "ancora_contextual": null,
+                "natureza": "EXTRACAO_DOCUMENTAL",
+                "sha256_pdf": "aa89a4c6c6c0316b9bc07b4f82828f2cc3bca265d56ba207f40b63434b4a8fe3"
+              },
+              {
+                "fonte_id": "nccn-6d5cc2b82dad",
+                "edicao": "2.2026",
+                "pagina_pdf": 29,
+                "paginas_pdf": [
+                  29
+                ],
+                "secao": "TEST-A 3/3, tabela6",
+                "trecho": "H&P and",
+                "ancora_contextual": null,
+                "natureza": "EXTRACAO_DOCUMENTAL",
+                "sha256_pdf": "aa89a4c6c6c0316b9bc07b4f82828f2cc3bca265d56ba207f40b63434b4a8fe3"
+              },
+              {
+                "fonte_id": "nccn-6d5cc2b82dad",
+                "edicao": "2.2026",
+                "pagina_pdf": 30,
+                "paginas_pdf": [
+                  30
+                ],
+                "secao": "TEST-B 1/3",
+                "trecho": "H&P and",
+                "ancora_contextual": null,
+                "natureza": "EXTRACAO_DOCUMENTAL",
+                "sha256_pdf": "aa89a4c6c6c0316b9bc07b4f82828f2cc3bca265d56ba207f40b63434b4a8fe3"
+              }
+            ],
+            "ajuste_ao_parecer": null
+          },
+          {
+            "id": "AD1-testiculo",
+            "revisao": "2026-10-17-nccn-delta-2-correcao-auditoria",
+            "estado": "APLICADA_COM_CONFERENCIA_DOCUMENTAL",
+            "fontes": [
+              {
+                "fonte_id": "nccn-6d5cc2b82dad",
+                "edicao": "2.2026",
+                "pagina_pdf": 27,
+                "paginas_pdf": [
+                  27
+                ],
+                "secao": "TEST-A/B, página27",
+                "trecho": "FOLLOW-UP",
+                "ancora_contextual": null,
+                "natureza": "EXTRACAO_DOCUMENTAL",
+                "sha256_pdf": "aa89a4c6c6c0316b9bc07b4f82828f2cc3bca265d56ba207f40b63434b4a8fe3"
+              },
+              {
+                "fonte_id": "nccn-6d5cc2b82dad",
+                "edicao": "2.2026",
+                "pagina_pdf": 28,
+                "paginas_pdf": [
+                  28
+                ],
+                "secao": "TEST-A/B, página28",
+                "trecho": "follow-up",
+                "ancora_contextual": null,
+                "natureza": "EXTRACAO_DOCUMENTAL",
+                "sha256_pdf": "aa89a4c6c6c0316b9bc07b4f82828f2cc3bca265d56ba207f40b63434b4a8fe3"
+              },
+              {
+                "fonte_id": "nccn-6d5cc2b82dad",
+                "edicao": "2.2026",
+                "pagina_pdf": 29,
+                "paginas_pdf": [
+                  29
+                ],
+                "secao": "TEST-A/B, página29",
+                "trecho": "FOLLOW-UP",
+                "ancora_contextual": null,
+                "natureza": "EXTRACAO_DOCUMENTAL",
+                "sha256_pdf": "aa89a4c6c6c0316b9bc07b4f82828f2cc3bca265d56ba207f40b63434b4a8fe3"
+              },
+              {
+                "fonte_id": "nccn-6d5cc2b82dad",
+                "edicao": "2.2026",
+                "pagina_pdf": 30,
+                "paginas_pdf": [
+                  30
+                ],
+                "secao": "TEST-A/B, página30",
+                "trecho": "FOLLOW-UP",
+                "ancora_contextual": null,
+                "natureza": "EXTRACAO_DOCUMENTAL",
+                "sha256_pdf": "aa89a4c6c6c0316b9bc07b4f82828f2cc3bca265d56ba207f40b63434b4a8fe3"
+              },
+              {
+                "fonte_id": "nccn-6d5cc2b82dad",
+                "edicao": "2.2026",
+                "pagina_pdf": 31,
+                "paginas_pdf": [
+                  31
+                ],
+                "secao": "TEST-A/B, página31",
+                "trecho": "FOLLOW-UP",
+                "ancora_contextual": null,
+                "natureza": "EXTRACAO_DOCUMENTAL",
+                "sha256_pdf": "aa89a4c6c6c0316b9bc07b4f82828f2cc3bca265d56ba207f40b63434b4a8fe3"
+              },
+              {
+                "fonte_id": "nccn-6d5cc2b82dad",
+                "edicao": "2.2026",
+                "pagina_pdf": 32,
+                "paginas_pdf": [
+                  32
+                ],
+                "secao": "TEST-A/B, página32",
+                "trecho": "follow-up",
+                "ancora_contextual": null,
+                "natureza": "EXTRACAO_DOCUMENTAL",
+                "sha256_pdf": "aa89a4c6c6c0316b9bc07b4f82828f2cc3bca265d56ba207f40b63434b4a8fe3"
+              }
+            ],
+            "ajuste_ao_parecer": null
+          }
+        ]
+      }
+    ],
+    "cenarios": {
+      "identidade_ref": "/identidade/cenarios",
+      "detalhamento_ref": "/tratamento/cenarios",
+      "novas_condicoes_refs": [
+        "nccn-20261017-testiculo-calendarios"
+      ],
+      "regra": "Não igualar automaticamente as duas listas nem selecionar cenário individual nesta camada."
+    },
+    "fontes": [
+      {
+        "id": "nccn-6d5cc2b82dad",
+        "arquivo_local": "C:\\Users\\silas\\.aside\\u\\0\\sessions\\2026-10-17_LutNNwUyDZGlA1pF\\artifacts\\nccn\\Testicular Cancer.pdf",
+        "nome": "Testicular Cancer",
+        "sha256": "aa89a4c6c6c0316b9bc07b4f82828f2cc3bca265d56ba207f40b63434b4a8fe3",
+        "numero_paginas": 95,
+        "versao_declarada": "2.2026",
+        "origem": "ARQUIVO_LOCAL_FORNECIDO",
+        "autenticidade_externa": "NAO_VERIFICADA_NO_PORTAL",
+        "paginas_examinadas": [
+          27,
+          28,
+          29,
+          30,
+          31,
+          32
+        ]
+      }
+    ],
+    "fontes_legadas_refs": [
+      "/header/fonte",
+      "/curadoria/fontesLidas"
+    ],
+    "ensaios": {
+      "legado_ref": "/tratamento/ensaios",
+      "novos_nct": [],
+      "nota": "Nenhum identificador NCT foi inventado ou verificado nesta rodada."
+    },
+    "relacoes": [
+      {
+        "relacao_id": "relacao-nccn-20261017-testiculo-calendarios",
+        "tipo": "CONDICOES_PARA_APRESENTACAO_DOCUMENTAL",
+        "destino_item_ref": "nccn-20261017-testiculo-calendarios",
+        "criterios_extraidos": [
+          "Histologia, estádio e tratamento conhecidos",
+          "Sem calendário único universal"
+        ],
+        "origem_condicoes": "FONTE_NCCN_CITADA",
+        "origem_mapeamento": "PROPOSTA_DE_MAPEAMENTO",
+        "executavel": false,
+        "estado": "A_CONFERIR",
+        "dados_ausentes": "MANTER_INDETERMINADO",
+        "dados_conflitantes": "MANTER_CONFLITO",
+        "efeito": "APRESENTAR_CONTEUDO_PARA_REVISAO; NAO PRESCREVER",
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-2-correcao-auditoria",
+            "correcao_id": "M36",
+            "criterios_extraidos": [
+              "Histologia, estádio e tratamento conhecidos",
+              "Sem calendário único universal"
+            ]
+          },
+          {
+            "revisao": "2026-10-17-nccn-delta-2-correcao-auditoria",
+            "correcao_id": "AD1-testiculo",
+            "criterios_extraidos": [
+              "Histologia, estádio e tratamento conhecidos",
+              "Sem calendário único universal"
+            ]
+          }
+        ],
+        "fontes_por_campo": {
+          "criterios_extraidos": [
+            {
+              "fonte_id": "nccn-6d5cc2b82dad",
+              "edicao": "2.2026",
+              "pagina_pdf": 27,
+              "paginas_pdf": [
+                27
+              ],
+              "secao": "TEST-A/B, página27",
+              "trecho": "FOLLOW-UP",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "aa89a4c6c6c0316b9bc07b4f82828f2cc3bca265d56ba207f40b63434b4a8fe3"
+            },
+            {
+              "fonte_id": "nccn-6d5cc2b82dad",
+              "edicao": "2.2026",
+              "pagina_pdf": 28,
+              "paginas_pdf": [
+                28
+              ],
+              "secao": "TEST-A/B, página28",
+              "trecho": "follow-up",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "aa89a4c6c6c0316b9bc07b4f82828f2cc3bca265d56ba207f40b63434b4a8fe3"
+            },
+            {
+              "fonte_id": "nccn-6d5cc2b82dad",
+              "edicao": "2.2026",
+              "pagina_pdf": 29,
+              "paginas_pdf": [
+                29
+              ],
+              "secao": "TEST-A/B, página29",
+              "trecho": "FOLLOW-UP",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "aa89a4c6c6c0316b9bc07b4f82828f2cc3bca265d56ba207f40b63434b4a8fe3"
+            },
+            {
+              "fonte_id": "nccn-6d5cc2b82dad",
+              "edicao": "2.2026",
+              "pagina_pdf": 30,
+              "paginas_pdf": [
+                30
+              ],
+              "secao": "TEST-A/B, página30",
+              "trecho": "FOLLOW-UP",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "aa89a4c6c6c0316b9bc07b4f82828f2cc3bca265d56ba207f40b63434b4a8fe3"
+            },
+            {
+              "fonte_id": "nccn-6d5cc2b82dad",
+              "edicao": "2.2026",
+              "pagina_pdf": 31,
+              "paginas_pdf": [
+                31
+              ],
+              "secao": "TEST-A/B, página31",
+              "trecho": "FOLLOW-UP",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "aa89a4c6c6c0316b9bc07b4f82828f2cc3bca265d56ba207f40b63434b4a8fe3"
+            },
+            {
+              "fonte_id": "nccn-6d5cc2b82dad",
+              "edicao": "2.2026",
+              "pagina_pdf": 32,
+              "paginas_pdf": [
+                32
+              ],
+              "secao": "TEST-A/B, página32",
+              "trecho": "follow-up",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "aa89a4c6c6c0316b9bc07b4f82828f2cc3bca265d56ba207f40b63434b4a8fe3"
+            }
+          ]
+        }
+      }
+    ],
+    "conflitos": [
+      {
+        "conflito_id": "conflito-nccn-20261017-testiculo-calendarios",
+        "tema": "Calendários de seguimento por histologia, estádio e tratamento",
+        "descricao": "Há calendários gerais SBOC e MOC divergentes no legado; adicionar alternativas NCCN por cenário sem eleger ou fundir intervalos.",
+        "item_nccn_ref": "nccn-20261017-testiculo-calendarios",
+        "legado_refs": [
+          "/tratamento/seguimento"
+        ],
+        "fontes_nccn_refs": [
+          {
+            "fonte_id": "nccn-6d5cc2b82dad",
+            "paginas_pdf": [
+              27,
+              28,
+              29,
+              30,
+              31,
+              32
+            ],
+            "secao": "TEST-A e TEST-B",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "pagina_pdf": 27,
+            "trecho": "FOLLOW-UP FOR SEMINOMA a Serum tumor markers are optional. b Testicular ultrasound"
+          }
+        ],
+        "estado": "A_CONFERIR",
+        "decisao_medica": null,
+        "resolucao_automatica": false
+      }
+    ],
+    "conflitos_legados_ref": "/conflitos",
+    "pendencias": [
+      {
+        "id": "revisao-clinica",
+        "estado": "ABERTA",
+        "descricao": "Conferir cada acréscimo, condições, fontes, doses, interações e suporte antes de uso clínico."
+      },
+      {
+        "id": "acesso-brasileiro",
+        "estado": "ABERTA",
+        "descricao": "NCCN não comprova Anvisa, Conitec, PCDT/DDT, SIGTAP/APAC, cobertura privada ou acesso institucional."
+      },
+      {
+        "id": "cobertura-nccn",
+        "estado": "PARCIAL_POR_DELTA",
+        "descricao": "Leitura dirigida das páginas citadas; não há alegação de extração integral da diretriz."
+      }
+    ],
+    "pendencias_legadas_ref": "/pendencias",
+    "itens_adicionais_a_classificar": [
+      {
+        "origem_ref": "/header",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/status",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/consultavel",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/alerta",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/substitui",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/identidade",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/pendencias",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/conflitos",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/curadoria",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/correcoes",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      }
+    ],
+    "mapa_de_cobertura": [
+      {
+        "origem_json_pointer": "/header",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "18683da8c18eb52232f669ec2971285552ab45e4ca66ad22b84745462210c9e4",
+        "valores_folha": 9
+      },
+      {
+        "origem_json_pointer": "/status",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "04635ca3844c66b19ebbf49bf9ff60fe851d6ce89597d23e6a970f1dc3927289",
+        "valores_folha": 1
+      },
+      {
+        "origem_json_pointer": "/consultavel",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b",
+        "valores_folha": 1
+      },
+      {
+        "origem_json_pointer": "/alerta",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "valores_folha": 1
+      },
+      {
+        "origem_json_pointer": "/substitui",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "valores_folha": 1
+      },
+      {
+        "origem_json_pointer": "/identidade",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "2196c750a05cada19c864d80c39c70e07351a7c759a891f55ee1f99ecfb10857",
+        "valores_folha": 18
+      },
+      {
+        "origem_json_pointer": "/diagnostico",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "51a17bb88546636d52ff408abaa1c741eea18b8c9a9deac3e52d882daf6a9d65",
+        "valores_folha": 59
+      },
+      {
+        "origem_json_pointer": "/estadiamento",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "00cbfacbb7cb3f58e7a2c71a6674ac5dc210eaa6f20fe7fe078dd412d7b28912",
+        "valores_folha": 356
+      },
+      {
+        "origem_json_pointer": "/tratamento",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "a3cde5659b7ef37af74872ba717fa601780663ba55cd59b71ab95e448cee81e3",
+        "valores_folha": 1448
+      },
+      {
+        "origem_json_pointer": "/ligacoes",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "8bcb2534bba6a97056cd3c5896ccc809c0f35b194f5a9dedcafaf79923058ce3",
+        "valores_folha": 210
+      },
+      {
+        "origem_json_pointer": "/pendencias",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "90ffd2a1ee6f26203d9098a72829426579afb196849e16644b65fdad9f615faa",
+        "valores_folha": 43
+      },
+      {
+        "origem_json_pointer": "/conflitos",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "5b65673b08fc0ab3ab46ae7cac73ac281a53a576f572510551f6f43cb33caf96",
+        "valores_folha": 91
+      },
+      {
+        "origem_json_pointer": "/curadoria",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "dd6a0bf0335f7ac9bedaf45feca968391dfe0c98f926bb4d2cbc95c50e101a9e",
+        "valores_folha": 30
+      },
+      {
+        "origem_json_pointer": "/correcoes",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "daca13c966dd3e82881323de9f6099ecc427c14e80ba7a7de9567f3289de8d26",
+        "valores_folha": 8
+      }
+    ],
+    "reconciliacao_com_versao_anterior": {
+      "modo": "ADITIVO",
+      "originais_removidos": 0,
+      "originais_alterados": 0,
+      "contagens_preservadas": {
+        "protocolos": 23,
+        "ensaios": 9,
+        "cenarios_identidade": 10,
+        "cenarios_tratamento": 18,
+        "seguimento": 7,
+        "conflitos": 7,
+        "pendencias": 11
+      }
+    },
+    "relatorio_de_completude": {
+      "estado": "INCOMPLETA_PARA_DIRETRIZ_INTEGRAL",
+      "preservacao_legado": "INTEGRAL",
+      "delta_itens": 1,
+      "normalizacao_legado": "INDEXACAO_POR_REFERENCIA; NAO REEXTRACAO CLINICA",
+      "posologias": "SOMENTE AS EXPLICITAMENTE EXTRAIDAS; RESTANTES PENDENTES",
+      "sem_fato_paciente": true,
+      "sem_aprovacao_inferida": true
+    },
+    "revisoes_auditoria": [
+      {
+        "revisao": "2026-10-17-nccn-delta-2-correcao-auditoria",
+        "correcoes": [
+          "M36",
+          "AD1-testiculo"
+        ],
+        "legado_modificado": false,
+        "aprovacao_clinica": null,
+        "nota": "Correções conferidas nos PDFs; a auditoria Claude foi amostral. Os 33 itens não auditados não foram promovidos a revisados."
+      }
+    ],
+    "fechamento_documental": [
+      {
+        "revisao": "2026-10-17-nccn-final-documental",
+        "estado": "CORRECOES_DOCUMENTAIS_APLICADAS",
+        "ajustes_textuais": 85,
+        "deduplicacoes_por_referencia": [],
+        "aprovacao_clinica": null,
+        "legado_alterado": false
+      }
+    ]
+  }
 }

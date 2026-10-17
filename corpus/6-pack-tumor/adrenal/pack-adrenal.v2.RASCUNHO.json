@@ -1419,5 +1419,1924 @@
       "achado": "Conferência MOC 2026 item 1",
       "acao": "exclusão bioquímica de feocromocitoma antes da punção RATIFICADA"
     }
-  ]
+  ],
+  "tumor_pack_universal": {
+    "schema_documental": "tumor-pack-universal@1",
+    "metadados": {
+      "revisao_documental": "2026-10-17-nccn-final-documental",
+      "versao": "1.3.0",
+      "data": "2026-10-17",
+      "autor_extracao": "Codex",
+      "estado": "RASCUNHO",
+      "aprovacao_clinica": null,
+      "escopo": "CAMADA_ADITIVA_UNIVERSAL_E_DELTA_DOCUMENTAL_NCCN",
+      "base_legada": {
+        "arquivo": "corpus/6-pack-tumor/adrenal/pack-adrenal.v2.RASCUNHO.json",
+        "commit": "2c0991d",
+        "versao": "2.0.0",
+        "sha256_bytes": "f392371bfff829f54d6a0603fa317952c98fbfe75e7c6d2bf8ae475c186cbc46",
+        "sha256_semantico": "272d5cd733c391d9352ea16ddee85f91976444abc709b3c834b46213b3bb34f3"
+      },
+      "nota_versao": "Camada universal 1.3.0; header identifica o legado preservado. Fechamento documental, sem aprovação clínica ou ativação.",
+      "integra_runtime": false,
+      "gera_conduta": false,
+      "historico_revisoes": [
+        {
+          "revisao_documental": "2026-10-17-nccn-delta-1",
+          "versao": "1.0.0",
+          "data": "2026-10-17",
+          "autor_extracao": "Codex",
+          "estado": "RASCUNHO",
+          "aprovacao_clinica": null,
+          "escopo": "CAMADA_ADITIVA_UNIVERSAL_E_DELTA_DOCUMENTAL_NCCN",
+          "base_legada": {
+            "arquivo": "corpus/6-pack-tumor/adrenal/pack-adrenal.v2.RASCUNHO.json",
+            "commit": "2c0991d",
+            "versao": "2.0.0",
+            "sha256_bytes": "f392371bfff829f54d6a0603fa317952c98fbfe75e7c6d2bf8ae475c186cbc46",
+            "sha256_semantico": "272d5cd733c391d9352ea16ddee85f91976444abc709b3c834b46213b3bb34f3"
+          },
+          "nota_versao": "header.versao identifica o legado intacto; esta extensão possui revisão própria. Não reutilizar aprovação/hashes antigos para o conjunto alterado.",
+          "integra_runtime": false,
+          "gera_conduta": false
+        },
+        {
+          "revisao_documental": "2026-10-17-nccn-delta-2-correcao-auditoria",
+          "versao": "1.1.0",
+          "data": "2026-10-17",
+          "autor_extracao": "Codex",
+          "estado": "RASCUNHO",
+          "aprovacao_clinica": null,
+          "escopo": "CAMADA_ADITIVA_UNIVERSAL_E_DELTA_DOCUMENTAL_NCCN",
+          "base_legada": {
+            "arquivo": "corpus/6-pack-tumor/adrenal/pack-adrenal.v2.RASCUNHO.json",
+            "commit": "2c0991d",
+            "versao": "2.0.0",
+            "sha256_bytes": "f392371bfff829f54d6a0603fa317952c98fbfe75e7c6d2bf8ae475c186cbc46",
+            "sha256_semantico": "272d5cd733c391d9352ea16ddee85f91976444abc709b3c834b46213b3bb34f3"
+          },
+          "nota_versao": "Versão desta camada:1.1.0; revisão documental:2026-10-17-nccn-delta-2-correcao-auditoria. header.versao continua referindo-se ao legado intacto. Nenhuma aprovação é transferida.",
+          "integra_runtime": false,
+          "gera_conduta": false,
+          "historico_revisoes": [
+            {
+              "revisao_documental": "2026-10-17-nccn-delta-1",
+              "versao": "1.0.0",
+              "data": "2026-10-17",
+              "autor_extracao": "Codex",
+              "estado": "RASCUNHO",
+              "aprovacao_clinica": null,
+              "escopo": "CAMADA_ADITIVA_UNIVERSAL_E_DELTA_DOCUMENTAL_NCCN",
+              "base_legada": {
+                "arquivo": "corpus/6-pack-tumor/adrenal/pack-adrenal.v2.RASCUNHO.json",
+                "commit": "2c0991d",
+                "versao": "2.0.0",
+                "sha256_bytes": "f392371bfff829f54d6a0603fa317952c98fbfe75e7c6d2bf8ae475c186cbc46",
+                "sha256_semantico": "272d5cd733c391d9352ea16ddee85f91976444abc709b3c834b46213b3bb34f3"
+              },
+              "nota_versao": "header.versao identifica o legado intacto; esta extensão possui revisão própria. Não reutilizar aprovação/hashes antigos para o conjunto alterado.",
+              "integra_runtime": false,
+              "gera_conduta": false
+            }
+          ]
+        }
+      ]
+    },
+    "identidade_ref": "/identidade",
+    "dominios": [
+      {
+        "dominio_id": 1,
+        "nome": "Diagnóstico e patologia",
+        "itens_legados_refs": [
+          "legado-9b8d5f124d5dfb1b",
+          "legado-06c792540c007dd1",
+          "legado-b0538dfed4f1ab79",
+          "legado-79c4597179e38003",
+          "legado-75449d650b3ba407",
+          "legado-94ec17bbcd443877",
+          "legado-be015a67c34d248e",
+          "legado-6e886f84c6bd570d",
+          "legado-30ce2e86620b4f1b"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 2,
+        "nome": "Estadiamento, extensão e risco",
+        "itens_legados_refs": [
+          "legado-8a9794281fa85fd1",
+          "legado-13d21f6d317c38ec",
+          "legado-380d050f895bd378",
+          "legado-8da1c6c915808cb5",
+          "legado-a78a44a73d5ae220",
+          "legado-fb8662218c6f96d9",
+          "legado-98b3c124238320d9",
+          "legado-1814a3775c6f383f",
+          "legado-4f8b9884326a8935"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 3,
+        "nome": "Biomarcadores e farmacogenética",
+        "itens_legados_refs": [
+          "legado-0f9b027984fc68a5",
+          "legado-3fc88d9192c63d65",
+          "legado-e8aaa6a081831603",
+          "legado-fe75970ba061fc30",
+          "legado-4612dff6058e972a",
+          "legado-b85e234ce671a493"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 4,
+        "nome": "Exames e requisitos documentais",
+        "itens_legados_refs": [
+          "legado-dbe99130f1ac739e",
+          "legado-0d0382a6c4278ab0",
+          "legado-bbc5ff42f1c21db5",
+          "legado-3ee9b8a8ac6931db",
+          "legado-977a2e5c13f1a1a4",
+          "legado-57f8748aa71a16cd",
+          "legado-b711d07677f23313",
+          "legado-5cde84eb301f956a",
+          "legado-7a43747e6e1039c3",
+          "legado-50866e8bdec2cca1",
+          "legado-e6673c77b02d5d34",
+          "legado-e57472fc19b21caf",
+          "legado-fe785b4f67d7e2b5",
+          "legado-f3e8645095de8665",
+          "legado-eefa15e67e4dbb3f",
+          "legado-629f5b4df50f713f",
+          "legado-502b18b8ce96baa8",
+          "legado-89db3b6ec657bc2a",
+          "legado-7d2143eacc3b8445",
+          "legado-4d33dc48555e8a1e",
+          "legado-901c65a739781b68",
+          "legado-03f45158f7c7e999",
+          "legado-2bea07fe1fcc6d1a",
+          "legado-08ef6f73703afa35",
+          "legado-9f48cbfd49f95380",
+          "legado-1f8a361cde153a58",
+          "legado-210d6841cbfb1eb4",
+          "legado-2869e01ee2ce9f06",
+          "legado-c0d2f6e3b691d2fa",
+          "legado-3cec65b3d22ede7c",
+          "legado-f7c6c280453dec1a",
+          "legado-0f9299cb90be33fa",
+          "legado-2390838ed2670f9e",
+          "legado-2133ea79e97fba39",
+          "legado-c73fae791556f4d4",
+          "legado-8adefffede8149df",
+          "legado-0fbffb1dd85f6282",
+          "legado-b608698673893295",
+          "legado-fb89d6eb08a88ad3",
+          "legado-bfaa3172f71643d4",
+          "legado-ea0da44de1c92c1c",
+          "legado-8744acfdb7e242a4"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 5,
+        "nome": "Avaliação antes do tratamento",
+        "itens_legados_refs": [],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "NAO_ESTRUTURADO_NESTA_RODADA",
+        "observacao": "Ausência de referências não significa não aplicabilidade; textos dentro de outros itens permanecem preservados."
+      },
+      {
+        "dominio_id": 6,
+        "nome": "Tratamento e protocolos",
+        "itens_legados_refs": [
+          "legado-596854c5310366a8",
+          "legado-199c56d2d5edc985",
+          "legado-04a15c84937f46f2",
+          "legado-82e698fef4270e9f",
+          "legado-a9850556aad29087",
+          "legado-3f387bc131c238bc",
+          "legado-766d060d3c632ae8",
+          "legado-4cb362311dcb10aa",
+          "legado-96c7e992330e082e",
+          "legado-a4ca6ee9e83e2303",
+          "legado-352bbc7a34993abe",
+          "legado-a228dfa594bfb425",
+          "legado-9ceb0ed4f420faa0",
+          "legado-ef1896129432ccf6",
+          "legado-0105bf0636b61d0b"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 7,
+        "nome": "Segurança, interações e toxicidades",
+        "itens_legados_refs": [
+          "legado-903eb9a6ca8c2ea5",
+          "legado-0bf7648332656dfd",
+          "legado-662342d2e7b0fd34",
+          "legado-e43c1043e01daf73",
+          "legado-c1ca648d59f21c79"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 8,
+        "nome": "Suporte e cuidados",
+        "itens_legados_refs": [
+          "legado-3f4cd6721ecb12f3",
+          "legado-15d479a525a8103d",
+          "legado-04b27161f9c26e51"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 9,
+        "nome": "Avaliação de resposta e estado da doença",
+        "itens_legados_refs": [],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "NAO_ESTRUTURADO_NESTA_RODADA",
+        "observacao": "Ausência de referências não significa não aplicabilidade; textos dentro de outros itens permanecem preservados."
+      },
+      {
+        "dominio_id": 10,
+        "nome": "Seguimento e sobrevivência",
+        "itens_legados_refs": [
+          "legado-d51bd9e03443258f",
+          "legado-8033ccb1132fd793",
+          "legado-d7b75ca149a20037",
+          "legado-8bfe38b515a3f6e2",
+          "legado-96ab3197697ec8e4"
+        ],
+        "itens_nccn_refs": [
+          "nccn-20261017-adrenal-seguimento-acc"
+        ],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 11,
+        "nome": "Encaminhamentos e atuação multiprofissional",
+        "itens_legados_refs": [
+          "legado-370e32377524980f",
+          "legado-9cc8a6fd34181a25",
+          "legado-ec22fcd92fe3a529",
+          "legado-5b2ffc3f2ee70766"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 12,
+        "nome": "Documentos e acesso assistencial",
+        "itens_legados_refs": [
+          "legado-d28f277d61b11c8f",
+          "legado-d6ea363866b01076"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      }
+    ],
+    "indice_itens_legados": [
+      {
+        "item_id": "legado-9b8d5f124d5dfb1b",
+        "origem_json_pointer": "/diagnostico/patologico/obtencao/0",
+        "sha256_conteudo": "b1dc485430925e08e691c44e61aa41cc254afd18e88cefdeec8b415e259c8f26",
+        "nome": "/diagnostico/patologico/obtencao/0",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/obtencao/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-06c792540c007dd1",
+        "origem_json_pointer": "/diagnostico/patologico/obtencao/1",
+        "sha256_conteudo": "8f1c55b28dd1899ad6381650a48b21e9d693476137583e8d464ae75d5431caad",
+        "nome": "/diagnostico/patologico/obtencao/1",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/obtencao/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b0538dfed4f1ab79",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/0",
+        "sha256_conteudo": "0edd043ff03d8668650186f1c3e42639a9c95b8f1035b3dcd6723fe684901399",
+        "nome": "critérios de Weiss (carcinoma ≥3) ou Lin-Weiss-Bisceglia nos oncocíticos",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-79c4597179e38003",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/1",
+        "sha256_conteudo": "a1722c7b17e5c4cd555e8d21b6bf54cb8434c89141fe16f3006b159feef2d043",
+        "nome": "Ki67 (≤10% vs >10%)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-75449d650b3ba407",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/2",
+        "sha256_conteudo": "ab084d5c58a3709fd8533e21ce1dd389cd9aa38c4c3b16a084ce2b91e850e0cb",
+        "nome": "índice mitótico (/50 CGA)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-94ec17bbcd443877",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/3",
+        "sha256_conteudo": "824ba2324daf429bbeed77d76b4d715478dc4e7950899eb4b46fd5c49f6ce323",
+        "nome": "margens (R0/R1/R2)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-be015a67c34d248e",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/4",
+        "sha256_conteudo": "2f747a41d838852e8759b1ec74674235f883c170dd58100e55b72f3c1b94562c",
+        "nome": "invasão capsular/vascular, ruptura tumoral",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-6e886f84c6bd570d",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/5",
+        "sha256_conteudo": "7cbb262c068b033ae16b0b6adfc201a191ed1fd11945446d922e911d1a21fac2",
+        "nome": "tamanho (>8 cm)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-30ce2e86620b4f1b",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/6",
+        "sha256_conteudo": "562352318b6b15c46f9c49c9c8bb1ab90865b5d74d45c4c5b341a9d4f402b92b",
+        "nome": "IHQ: alfa-inibina, melan-A, SF-1",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8a9794281fa85fd1",
+        "origem_json_pointer": "/estadiamento/sistema",
+        "sha256_conteudo": "837c66b52d48b6041bf453c628d47844d55ba63a066b91827737f1b35a53f412",
+        "nome": "outro",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-13d21f6d317c38ec",
+        "origem_json_pointer": "/estadiamento/edicao",
+        "sha256_conteudo": "6a1bd849a808089fe4856af2db740bc08aba161bf5c2b13c0668eeb17bfe3aa5",
+        "nome": "MacFarlane modificado por Sullivan (SBOC v3)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-380d050f895bd378",
+        "origem_json_pointer": "/estadiamento/gruposConduta/0",
+        "sha256_conteudo": "ad62f2c6f48dcaff9c4911ebf0706987433b56acb75aaa26ac59e3491e0409ce",
+        "nome": "/estadiamento/gruposConduta/0",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8da1c6c915808cb5",
+        "origem_json_pointer": "/estadiamento/gruposConduta/1",
+        "sha256_conteudo": "2e2210ae8d9fb933093f8c3d37268526147e4210f5719049c08e779eb8b663c5",
+        "nome": "/estadiamento/gruposConduta/1",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a78a44a73d5ae220",
+        "origem_json_pointer": "/estadiamento/gruposConduta/2",
+        "sha256_conteudo": "a4f04956ffea213f49ab8064f2bed04f84865c69770c4ac217c92e93be221b48",
+        "nome": "/estadiamento/gruposConduta/2",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-fb8662218c6f96d9",
+        "origem_json_pointer": "/estadiamento/gruposConduta/3",
+        "sha256_conteudo": "f81bcc1239a2b0cf6e34b5857bdb82a8c3dcfbd36f2a126ca462726cc5505986",
+        "nome": "/estadiamento/gruposConduta/3",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-98b3c124238320d9",
+        "origem_json_pointer": "/estadiamento/gruposConduta/4",
+        "sha256_conteudo": "e856a910b3a4eafbad8207cff6f40aefbc07751df5e347a8cfe3c2bc23e9b4a4",
+        "nome": "/estadiamento/gruposConduta/4",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-1814a3775c6f383f",
+        "origem_json_pointer": "/estadiamento/gruposConduta/5",
+        "sha256_conteudo": "5f4748ac12b4820a31f854e74bdabc4ff97a6a3503227f91e9fefc556f7803e4",
+        "nome": "/estadiamento/gruposConduta/5",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/5/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-4f8b9884326a8935",
+        "origem_json_pointer": "/estadiamento/marcadores",
+        "sha256_conteudo": "14529e13ba9c6eb32e21fbdf4bce03e3423875d6d54f7e8f7a94d44d7dc5f195",
+        "nome": "/estadiamento/marcadores",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-0f9b027984fc68a5",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/0",
+        "sha256_conteudo": "0f5099815e6e6e701aa58c5fe77e3300f5a0d22fc381d5ef02a69ec12732d38b",
+        "nome": "CCA",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-3fc88d9192c63d65",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/1",
+        "sha256_conteudo": "87c360b10241bb9aee15683a4a99fe937a7312bc67d8600afbffd74a17c849ea",
+        "nome": "CCA (indicação de avaliação genética)",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e8aaa6a081831603",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/2",
+        "sha256_conteudo": "40f615e35ec005aa5ce0657587aca17e0f6ab13f8c7120e7227bd6fc2df03ffa",
+        "nome": "Feocromocitoma e paraganglioma",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-fe75970ba061fc30",
+        "origem_json_pointer": "/tratamento/biomarcadorTratamento/0",
+        "sha256_conteudo": "fc501417f56e44a5af592e6dee100bddbaccea6e35d8e7aa3bf49b392f6638aa",
+        "nome": "/tratamento/biomarcadorTratamento/0",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/biomarcadorTratamento/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-4612dff6058e972a",
+        "origem_json_pointer": "/tratamento/biomarcadorTratamento/1",
+        "sha256_conteudo": "ca27e54d6cf2786bf7cf54559b0004444e1b210c1f49dbe027146bba84d046b9",
+        "nome": "/tratamento/biomarcadorTratamento/1",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/biomarcadorTratamento/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b85e234ce671a493",
+        "origem_json_pointer": "/tratamento/biomarcadorTratamento/2",
+        "sha256_conteudo": "f6c270feee483c24ad50b69cb35161d7c706386a2bd154cbbc65281ed28307b3",
+        "nome": "/tratamento/biomarcadorTratamento/2",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/biomarcadorTratamento/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-dbe99130f1ac739e",
+        "origem_json_pointer": "/diagnostico/imagem/0",
+        "sha256_conteudo": "a160e5b463dac69c01d67922f4c9b3284b3886feaee085f68e0a6d9c6aa49089",
+        "nome": "TC de tórax",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-0d0382a6c4278ab0",
+        "origem_json_pointer": "/diagnostico/imagem/1",
+        "sha256_conteudo": "738c6a2e2a85eaeb90ffeecb35846f3db0d00d9749bb4f579966804df406bf29",
+        "nome": "RM de abdome",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-bbc5ff42f1c21db5",
+        "origem_json_pointer": "/diagnostico/imagem/2",
+        "sha256_conteudo": "9cd0ed07636698edb0311ab87cf099ba67b45f16760b7206c217af494ac5d0e2",
+        "nome": "RM de pelve",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-3ee9b8a8ac6931db",
+        "origem_json_pointer": "/diagnostico/imagem/3",
+        "sha256_conteudo": "d2a55864893f60f77175de0ea537f67a217c651078a483b84a607c8b6721885c",
+        "nome": "Cintilografia óssea",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-977a2e5c13f1a1a4",
+        "origem_json_pointer": "/diagnostico/imagem/4",
+        "sha256_conteudo": "25a463b415a7dc6e2b66821eb7b9d23c610b66d02aa13154ec4c5b5fb2d9e50e",
+        "nome": "PET/CT",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-57f8748aa71a16cd",
+        "origem_json_pointer": "/estadiamento/exames/0",
+        "sha256_conteudo": "089c7b5c9d026ead692de78b3cd42e3bf7370f1d31aa9f1371a4eaac2a4dba80",
+        "nome": "Cortisol (com ACTH e supressão com dexametasona)",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b711d07677f23313",
+        "origem_json_pointer": "/estadiamento/exames/1",
+        "sha256_conteudo": "60221ef6f167b2553de1137aff87c22db06d0e1f3d5c4fa420fccf76a3158114",
+        "nome": "ACTH",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-5cde84eb301f956a",
+        "origem_json_pointer": "/estadiamento/exames/2",
+        "sha256_conteudo": "d8684e7cf2bc46cd8b43d15e0b4c785f6e9b90f48fab7b4158daa57603dd3d1f",
+        "nome": "Teste de supressão com dexametasona",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-7a43747e6e1039c3",
+        "origem_json_pointer": "/estadiamento/exames/3",
+        "sha256_conteudo": "dad006dc8a84d5798da90bd95e3c7bdccab8ac4465a002446a64286eab245276",
+        "nome": "S-DHEA",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-50866e8bdec2cca1",
+        "origem_json_pointer": "/estadiamento/exames/4",
+        "sha256_conteudo": "a9b37e0baa46c566191e7bfdc8b9bd76e34e0b2121e1a12759fe5902efdfc315",
+        "nome": "Androstenediona e 17-hidroxiprogesterona",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e6673c77b02d5d34",
+        "origem_json_pointer": "/estadiamento/exames/5",
+        "sha256_conteudo": "f0e5118ca1a7808b0ffdb465e6d239fca69372a9069bee3bd8f3c102774eec5f",
+        "nome": "Testosterona",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/5/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e57472fc19b21caf",
+        "origem_json_pointer": "/estadiamento/exames/6",
+        "sha256_conteudo": "7b9c44980c8b389dc7f31de71544710ab94d6f7d767c249fb401b2af46e5f0ec",
+        "nome": "Estradiol (homens e mulheres menopausadas)",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/6/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-fe785b4f67d7e2b5",
+        "origem_json_pointer": "/estadiamento/exames/7",
+        "sha256_conteudo": "7fc416442b51b23f71489620205ee53610946349cd37072cca2ccfddd8e5a389",
+        "nome": "Potássio (com sódio, aldosterona e renina)",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/7/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-f3e8645095de8665",
+        "origem_json_pointer": "/estadiamento/exames/8",
+        "sha256_conteudo": "4e090b3a02d9376839fb1376cb3fe3943e35fb1856d7e6435af9c9fee7d2382f",
+        "nome": "Sódio",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/8/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-eefa15e67e4dbb3f",
+        "origem_json_pointer": "/estadiamento/exames/9",
+        "sha256_conteudo": "ad076c2948354d7b44a5d763f6d7e2ff8004c14ac94217ad600bdcbbacba21af",
+        "nome": "Aldosterona e renina",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/9/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-629f5b4df50f713f",
+        "origem_json_pointer": "/estadiamento/exames/10",
+        "sha256_conteudo": "f8eeb021b6a88ab93685830f40924db155df3a9a158083cde18fee748e499d83",
+        "nome": "Metanefrinas e normetanefrinas (urina 24 h) ou metanefrinas plasmáticas",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/10/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-502b18b8ce96baa8",
+        "origem_json_pointer": "/estadiamento/exames/11",
+        "sha256_conteudo": "b7e67972e44c302b5850389c4d656ce5d0aea219eaefee5d65cd1b7c02afa984",
+        "nome": "TC de tórax",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/11/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-89db3b6ec657bc2a",
+        "origem_json_pointer": "/ligacoes/exames/0",
+        "sha256_conteudo": "00cac656db90cece9385c8c98f658accb5b7c1553202e6be466fa96d39aaf2b9",
+        "nome": "ANATOMOPATOLOGICO",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-7d2143eacc3b8445",
+        "origem_json_pointer": "/ligacoes/exames/1",
+        "sha256_conteudo": "09c0bc2a57301c5e7f5c06c8c51c9dec764db31a5d9531aa98aac18b5d8251f3",
+        "nome": "BIOPSIA_PERCUTANEA_GUIADA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-4d33dc48555e8a1e",
+        "origem_json_pointer": "/ligacoes/exames/2",
+        "sha256_conteudo": "6256d23e08fe42e0c5f18c2d537248d451b59b2ecdf935ab864d69cd8131c89d",
+        "nome": "CINTILOGRAFIA_OSSEA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-901c65a739781b68",
+        "origem_json_pointer": "/ligacoes/exames/3",
+        "sha256_conteudo": "3ced8151d0ebf677b411b86ea7e2b4f1c0d63c6ad221451ec415d59f54ec369d",
+        "nome": "COLESTEROL_TOTAL",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-03f45158f7c7e999",
+        "origem_json_pointer": "/ligacoes/exames/4",
+        "sha256_conteudo": "e0f93e178e7f98f0e171d53e739f74fe20253ffa2aabf91472d39f932eec3dfd",
+        "nome": "CORTISOL",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-2bea07fe1fcc6d1a",
+        "origem_json_pointer": "/ligacoes/exames/5",
+        "sha256_conteudo": "2b53d85e58c479c529e229ce1f4bf9b9cf79919c23a926032112debff31d9de1",
+        "nome": "ESTRADIOL",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-08ef6f73703afa35",
+        "origem_json_pointer": "/ligacoes/exames/6",
+        "sha256_conteudo": "bf5e386b5411abfa4e5e12d1229575a6c7ec73dfaec6347d8959b27aac19aa86",
+        "nome": "HEMOGRAMA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-9f48cbfd49f95380",
+        "origem_json_pointer": "/ligacoes/exames/7",
+        "sha256_conteudo": "99a98b9d268e78a05608d792d2fad81f4e16f25b8a4f95da9f7decd91a23a0dc",
+        "nome": "IMUNOHISTOQUIMICA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-1f8a361cde153a58",
+        "origem_json_pointer": "/ligacoes/exames/8",
+        "sha256_conteudo": "3a955b75de510bd32be8d0f7de2bf070f27f223ac4c6a07cf68b35b7271856b2",
+        "nome": "PET_CT_FDG",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-210d6841cbfb1eb4",
+        "origem_json_pointer": "/ligacoes/exames/9",
+        "sha256_conteudo": "5177c5a6d32d2eeb000c9724575c7471cb1de7765bcf03a4245f9351e9594835",
+        "nome": "POTASSIO",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-2869e01ee2ce9f06",
+        "origem_json_pointer": "/ligacoes/exames/10",
+        "sha256_conteudo": "9c93ac77fd6457370871d33a5c58ba94777b0bb961f1f2eb5572fadaabd4df86",
+        "nome": "RM_ABDOMEN_SUPERIOR",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-c0d2f6e3b691d2fa",
+        "origem_json_pointer": "/ligacoes/exames/11",
+        "sha256_conteudo": "ae974cff2b8cea688a4632542e3da503ad4a2f0f9301b96d75afbb2588228c37",
+        "nome": "RM_PELVE",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-3cec65b3d22ede7c",
+        "origem_json_pointer": "/ligacoes/exames/12",
+        "sha256_conteudo": "7ca56daea7b581342dac3e634f20a5489390de72c61d09e7c42a9b69cf4bb98e",
+        "nome": "SODIO",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-f7c6c280453dec1a",
+        "origem_json_pointer": "/ligacoes/exames/13",
+        "sha256_conteudo": "9f071c7549eaba1e3e4d0458b3a2370fd736ef6cfa62ecc77eed6fe1a80037e1",
+        "nome": "T4_LIVRE",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-0f9299cb90be33fa",
+        "origem_json_pointer": "/ligacoes/exames/14",
+        "sha256_conteudo": "147b97b900462813d8c6528cc01d88f8a5102936ee96ee4fb121f8a7b77f60b0",
+        "nome": "TC_TORAX",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-2390838ed2670f9e",
+        "origem_json_pointer": "/ligacoes/exames/15",
+        "sha256_conteudo": "32c416d97709b275292e4188325609ec89e284dc5892b17376479d7ce5178ead",
+        "nome": "TESTOSTERONA_TOTAL",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-2133ea79e97fba39",
+        "origem_json_pointer": "/ligacoes/exames/16",
+        "sha256_conteudo": "1c165f5403a7b90b63dbd46f6855431c8c1ada4519299d6c123bd630df5c529d",
+        "nome": "TGO",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-c73fae791556f4d4",
+        "origem_json_pointer": "/ligacoes/exames/17",
+        "sha256_conteudo": "1739a80ab81e5bbef9460ae5f51087ed284845d8e31e606c2b564c7268c2cd15",
+        "nome": "TGP",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8adefffede8149df",
+        "origem_json_pointer": "/ligacoes/exames/18",
+        "sha256_conteudo": "e52ec8c4446ce1c0d700eb967c540224ddf3571ffbe777f18a5b5f6d5865a64c",
+        "nome": "TRIGLICERIDEOS",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-0fbffb1dd85f6282",
+        "origem_json_pointer": "/ligacoes/exames/19",
+        "sha256_conteudo": "a723186a1328a8a0f43e1b82bd5d49ea0574e6bc72a7ad32889ce010ff549cdd",
+        "nome": "TSH",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b608698673893295",
+        "origem_json_pointer": "/ligacoes/exames/20",
+        "sha256_conteudo": "9a4b1ac656739a397213a24c9ca5da6856b1bb68b8d322dbc566d9f51bba321c",
+        "nome": "ACTH",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-fb89d6eb08a88ad3",
+        "origem_json_pointer": "/ligacoes/exames/21",
+        "sha256_conteudo": "db1bf3a1bd61aad4825d53aeefcfe4ae27ca8e856ab3a04679e0e6bef934ea13",
+        "nome": "SUPRESSAO_CORTISOL_DEXAMETASONA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-bfaa3172f71643d4",
+        "origem_json_pointer": "/ligacoes/exames/22",
+        "sha256_conteudo": "d59872ff47849cba41be78771380e49139e1ecca1ccb0414bc930596530f51f9",
+        "nome": "DHEAS",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ea0da44de1c92c1c",
+        "origem_json_pointer": "/ligacoes/exames/23",
+        "sha256_conteudo": "0400f47f08327306959679de09e4014ccc25f9af39263ff48fd7386ce5d8b0ff",
+        "nome": "HIDROXIPROGESTERONA_17",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8744acfdb7e242a4",
+        "origem_json_pointer": "/ligacoes/exames/24",
+        "sha256_conteudo": "1a28bf686e1084eb46433f16c28a2df4c93a4588ba414ac80ef799e81c0efbab",
+        "nome": "RENINA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-596854c5310366a8",
+        "origem_json_pointer": "/tratamento/cenarios/0",
+        "sha256_conteudo": "4b46ef0a57a93480057c6e35299810838368be7eb1df358caf7f877928624623",
+        "nome": "CCA localizado",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-199c56d2d5edc985",
+        "origem_json_pointer": "/tratamento/cenarios/1",
+        "sha256_conteudo": "871cf5aed50314d93b1ef701764e6dee6dd52c02712fdaca2cabd0787b0f96f2",
+        "nome": "CCA metastático",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-04a15c84937f46f2",
+        "origem_json_pointer": "/tratamento/cenarios/2",
+        "sha256_conteudo": "8990b9eca8b8aca294d370a27a0a7b907cf519fca4aa7b3de3521a18bc1e39d3",
+        "nome": "Feocromocitoma/paraganglioma",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-82e698fef4270e9f",
+        "origem_json_pointer": "/tratamento/cenarios/3",
+        "sha256_conteudo": "3643d0043442384db384459774bce625444936b80a721d69d582d3b6be4053de",
+        "nome": "Feo/PGL recidivado",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a9850556aad29087",
+        "origem_json_pointer": "/tratamento/protocolos/0",
+        "sha256_conteudo": "c01a061d5a35c43684006bed50f451be4018eb326cf7cd890746ff8c20280959",
+        "nome": "Mitotano adjuvante",
+        "id_original": "adrenal-cca-mitotano-adjuvante",
+        "fonte_local_ref": "/tratamento/protocolos/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-3f387bc131c238bc",
+        "origem_json_pointer": "/tratamento/protocolos/1",
+        "sha256_conteudo": "fd43bcd927e792163305677f74cf0fc919888b4c92572eafe13c58ef6f5f56b2",
+        "nome": "EDP + mitotano (FIRM-ACT)",
+        "id_original": "adrenal-cca-edp-mitotano",
+        "fonte_local_ref": "/tratamento/protocolos/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-766d060d3c632ae8",
+        "origem_json_pointer": "/tratamento/protocolos/2",
+        "sha256_conteudo": "e4934ab5beb49832e3cc33b56fdd534cd8c0ec05ff94c0de084f47360dc9b1cc",
+        "nome": "Belzutifano",
+        "id_original": "adrenal-pgl-belzutifano",
+        "fonte_local_ref": "/tratamento/protocolos/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-4cb362311dcb10aa",
+        "origem_json_pointer": "/tratamento/protocolos/3",
+        "sha256_conteudo": "8a4b0841c30328200ad70e1ec07b3d76b733cb4769a2104016d25d98f568f240",
+        "nome": "Sunitinibe",
+        "id_original": "adrenal-feo-sunitinibe",
+        "fonte_local_ref": "/tratamento/protocolos/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-96c7e992330e082e",
+        "origem_json_pointer": "/tratamento/protocolos/4",
+        "sha256_conteudo": "737592fa6d8fa97e607e3b87f49426b88737f81526ac98460e56f568c0c89deb",
+        "nome": "Everolimo",
+        "id_original": "adrenal-feo-everolimo",
+        "fonte_local_ref": "/tratamento/protocolos/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a4ca6ee9e83e2303",
+        "origem_json_pointer": "/tratamento/protocolos/5",
+        "sha256_conteudo": "0b6a30977568b6ed29dea32a5124c917dbf50e88a66253311ffa3bdfd33d6ccd",
+        "nome": "EDP sem mitotano",
+        "id_original": "adrenal-cca-edp-sem-mitotano",
+        "fonte_local_ref": "/tratamento/protocolos/5/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-352bbc7a34993abe",
+        "origem_json_pointer": "/tratamento/cirurgia/0",
+        "sha256_conteudo": "28246f6e37ad47b918ae10e9a76c73297e5788df4ff29bfd15e69553e9cf81cb",
+        "nome": "/tratamento/cirurgia/0",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cirurgia/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a228dfa594bfb425",
+        "origem_json_pointer": "/tratamento/cirurgia/1",
+        "sha256_conteudo": "25b234f12c4a0d0ca0f07813d63c754990ab3e59eca908c696397f53a38d0eba",
+        "nome": "/tratamento/cirurgia/1",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cirurgia/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-9ceb0ed4f420faa0",
+        "origem_json_pointer": "/tratamento/cirurgia/2",
+        "sha256_conteudo": "c956d65fe2fdf81c3cbc68f508a460b3f0403b1b400a54a192939f5f9ecb2528",
+        "nome": "/tratamento/cirurgia/2",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cirurgia/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ef1896129432ccf6",
+        "origem_json_pointer": "/tratamento/radioterapia/0",
+        "sha256_conteudo": "40e759341c22084eb52f5e7556a6cac01b0c891cfe89e39ea207f1936db6849b",
+        "nome": "CCA estádio III ou ressecção incompleta — RT adjuvante",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/radioterapia/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-0105bf0636b61d0b",
+        "origem_json_pointer": "/tratamento/radioterapia/1",
+        "sha256_conteudo": "24c1cae4b4233243898b9e686ac3982432ca176acd42b801e5da30dab33e08de",
+        "nome": "Feo/PGL irressecável — I-131-MIBG terapêutico",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/radioterapia/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-903eb9a6ca8c2ea5",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/0",
+        "sha256_conteudo": "43b111fa38651a66bbe7a22e7e9676746cc45bce54409042f1cf37cbb431bed0",
+        "nome": "/ligacoes/interacoesConsultar/0",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-0bf7648332656dfd",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/1",
+        "sha256_conteudo": "4a9b376700b4c2f071bdc78924736646b02ef16bb01b53f9ec8fd49b694b9510",
+        "nome": "/ligacoes/interacoesConsultar/1",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-662342d2e7b0fd34",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/2",
+        "sha256_conteudo": "dcd88d76b0d1f09fa9349747df82eb11ad0a46f3a0ab680b55aa0af3a47cc610",
+        "nome": "/ligacoes/interacoesConsultar/2",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e43c1043e01daf73",
+        "origem_json_pointer": "/ligacoes/ctcaeAcao/0",
+        "sha256_conteudo": "10818f7238e6a5d41c1da53e7fbb2b499584a4eb8b03340f8a6705c7b88b6d5e",
+        "nome": "/ligacoes/ctcaeAcao/0",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-c1ca648d59f21c79",
+        "origem_json_pointer": "/ligacoes/ctcaeAcao/1",
+        "sha256_conteudo": "d995ac9d9444c9e30762cf3cd012c5500b0785e492287fea30d5127450fd1695",
+        "nome": "/ligacoes/ctcaeAcao/1",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-3f4cd6721ecb12f3",
+        "origem_json_pointer": "/tratamento/suporte",
+        "sha256_conteudo": "1862005b38c061555d70b5b6fadfda3791719043ffd677ca89b58b787e0a85bf",
+        "nome": "/tratamento/suporte",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/suporte/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-15d479a525a8103d",
+        "origem_json_pointer": "/ligacoes/suporteReceitas/0",
+        "sha256_conteudo": "350cf14aeda51282e116f0dc5ae5c39854d42c53a860e70fabc7a3f096dfd40c",
+        "nome": "hidrocortisona/prednisona fisiológica com mitotano",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-04b27161f9c26e51",
+        "origem_json_pointer": "/ligacoes/suporteReceitas/1",
+        "sha256_conteudo": "3a95cce3f5b26d6dd7ac6372ef0560aff9764ace20eaa86a2e4113155e3ca0d4",
+        "nome": "alfa-bloqueador pré-operatório no feocromocitoma",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d51bd9e03443258f",
+        "origem_json_pointer": "/tratamento/seguimento/0",
+        "sha256_conteudo": "cf9a3e67216a95d1857634d0ffefee7d5c260e926069ab9f28d4713aff299e39",
+        "nome": "Durante mitotano",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/seguimento/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8033ccb1132fd793",
+        "origem_json_pointer": "/tratamento/seguimento/1",
+        "sha256_conteudo": "eacb3f5795afe0d0c677507a1426d78768133dbafd621d242cf46ff98f5d0eb1",
+        "nome": "CCA pós-ressecção",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/seguimento/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d7b75ca149a20037",
+        "origem_json_pointer": "/ligacoes/orientacoes/0",
+        "sha256_conteudo": "1b704cb3f6d5b8f3f2f7196fa2a2771bbc640f30f17fa2f87fa84f5becbc64a2",
+        "nome": "sinais de insuficiência adrenal sob mitotano",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8bfe38b515a3f6e2",
+        "origem_json_pointer": "/ligacoes/orientacoes/1",
+        "sha256_conteudo": "8d04cd49cbaa61f26d6e57ff9d1b24e4c9d3ecd4e53477838b31ae65a6934c5f",
+        "nome": "mitotano com alimentos gordurosos (absorção) — conferir bula",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-96ab3197697ec8e4",
+        "origem_json_pointer": "/ligacoes/orientacoes/2",
+        "sha256_conteudo": "b7c8df0252cb0b05016f4fce828555df9a3a68242313773db51c0113b4fd195a",
+        "nome": "evitar betabloqueador antes do alfa-bloqueio",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-370e32377524980f",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/0",
+        "sha256_conteudo": "c9f3a3e1df9560b66b54ff69be5fc1a4b779f3bfe199029b9558cade7980b706",
+        "nome": "cirurgia oncológica/urologia",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-9cc8a6fd34181a25",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/1",
+        "sha256_conteudo": "b7656bb8bf215c58c0d259a51f7e6c70bcad405fab8291cdf2a5b41c3edfe2ad",
+        "nome": "endocrinologia",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ec22fcd92fe3a529",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/2",
+        "sha256_conteudo": "32db658659bb02efbf330f2e298974d82d8283e98046de84b05d18334e155356",
+        "nome": "medicina nuclear (MIBG)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-5b2ffc3f2ee70766",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/3",
+        "sha256_conteudo": "b694f79ab738edb1991a47304ea6e85e95e5106ea6c19b4b69b1c86c6922a886",
+        "nome": "oncogenética (Li-Fraumeni, SDHx, VHL, MEN2)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d28f277d61b11c8f",
+        "origem_json_pointer": "/ligacoes/laudos/0",
+        "sha256_conteudo": "1e526694a5e0f538d5e3538949bab28e7f7723c8877d365a6ac29db44cb05120",
+        "nome": "APAC de quimioterapia (C74)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d6ea363866b01076",
+        "origem_json_pointer": "/ligacoes/laudos/1",
+        "sha256_conteudo": "953018b75649db293080cd7e982dcadc8bd467b2ba90cab70f714e4cf404736f",
+        "nome": "solicitação de mitotanemia",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      }
+    ],
+    "itens_nccn": [
+      {
+        "item_id": "nccn-20261017-adrenal-seguimento-acc",
+        "nome": "Seguimento do carcinoma adrenocortical",
+        "tipo": "SEGUIMENTO",
+        "dominio_principal": 10,
+        "conteudo_extraido": "Dois ramos NCCN estruturados na coluna FOLLOW-UP, preservando literalmente a amplitude12 semanas–12 meses até 10 anos e a diferença de exames. A pendência histórica SEM_FONTE da SBOC permanece aberta; o novo conteúdo é variante documental NCCN.",
+        "aplicabilidade": {
+          "criterios": [
+            "Carcinoma adrenocortical",
+            "Ramo localizado tratado OU irressecável/metastático",
+            "Individualizar faixa e modalidade"
+          ],
+          "paciente_individual": null,
+          "estado": "NAO_AVALIADA"
+        },
+        "dados_estruturados": {
+          "seguimento_nccn": {
+            "ramos": [
+              {
+                "tabela_ou_ramo": "localizado",
+                "cenario": "Carcinoma adrenocortical localizado tratado",
+                "linhas": [
+                  {
+                    "exame": "Considerar TC tórax ± contraste e TC/RM abdome com contraste",
+                    "periodos": {
+                      "até10anos": "a cada12 semanas–12 meses",
+                      "após10anos": "conforme indicação clínica"
+                    },
+                    "condicao": null
+                  },
+                  {
+                    "exame": "Considerar biomarcadores",
+                    "periodos": {
+                      "até10anos": "mesma faixa; individualizar"
+                    },
+                    "condicao": "se tumor inicialmente funcional"
+                  }
+                ],
+                "notas": [],
+                "fontes": [
+                  {
+                    "fonte_id": "nccn-902f0355ba44",
+                    "edicao": "1.2026",
+                    "pagina_pdf": 61,
+                    "paginas_pdf": [
+                      61
+                    ],
+                    "secao": "AGT-5, FOLLOW-UP localizado",
+                    "trecho": "Every 12 wk–12 mo up to 10 y",
+                    "ancora_contextual": null,
+                    "natureza": "EXTRACAO_DOCUMENTAL",
+                    "sha256_pdf": "9e3851747595d8afb6a5e33e1a96c8d9975d7b4e7b375d896cb01850d8c6776a"
+                  }
+                ],
+                "estado_curadoria": "A_CONFERIR",
+                "aprovacao_clinica": null,
+                "gera_agendamento": false
+              },
+              {
+                "tabela_ou_ramo": "irressecavel_metastatico",
+                "cenario": "Carcinoma adrenocortical irressecável/metastático",
+                "linhas": [
+                  {
+                    "exame": "TC tórax ± contraste e TC/RM abdome-pelve com contraste OU FDG-PET/CT",
+                    "periodos": {
+                      "até10anos": "a cada12 semanas–12 meses",
+                      "após10anos": "conforme indicação clínica"
+                    },
+                    "condicao": null
+                  }
+                ],
+                "notas": [],
+                "fontes": [
+                  {
+                    "fonte_id": "nccn-902f0355ba44",
+                    "edicao": "1.2026",
+                    "pagina_pdf": 61,
+                    "paginas_pdf": [
+                      61
+                    ],
+                    "secao": "AGT-5, FOLLOW-UP irressecável/metastático",
+                    "trecho": "Every 12 wk–12 mo up to 10 y",
+                    "ancora_contextual": null,
+                    "natureza": "EXTRACAO_DOCUMENTAL",
+                    "sha256_pdf": "9e3851747595d8afb6a5e33e1a96c8d9975d7b4e7b375d896cb01850d8c6776a"
+                  }
+                ],
+                "estado_curadoria": "A_CONFERIR",
+                "aprovacao_clinica": null,
+                "gera_agendamento": false
+              }
+            ],
+            "intervalo_nao_individualizado": true,
+            "pendencia_historica_preservada_ref": "/tratamento/seguimento/1"
+          }
+        },
+        "fonte_refs": [
+          {
+            "fonte_id": "nccn-902f0355ba44",
+            "edicao": "1.2026",
+            "pagina_pdf": 61,
+            "paginas_pdf": [
+              61
+            ],
+            "secao": "AGT-5, coluna FOLLOW-UP",
+            "trecho": "Every 12 wk–12 mo up to 10 y",
+            "ancora_contextual": null,
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "9e3851747595d8afb6a5e33e1a96c8d9975d7b4e7b375d896cb01850d8c6776a"
+          }
+        ],
+        "evidencia_declarada": {
+          "sistema": "NCCN",
+          "categoria": null,
+          "estado": "NAO_EXTRAIDA_POR_ITEM"
+        },
+        "estado_extracao": "EXTRAIDO_COM_LIMITES_DECLARADOS",
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "temporalidade": {
+          "referencia": "CENARIO_DESCRITO",
+          "datas_individuais": null
+        },
+        "propor_automaticamente": false,
+        "disponivel_para_prescricao": false,
+        "acesso": {
+          "registro_anvisa": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "incorporacao_conitec": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "pcdt_ddt": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "sigtap_apac": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "cobertura_privada": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "disponibilidade_institucional": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          }
+        },
+        "alternativas_legadas_refs": [
+          "/tratamento/seguimento/1"
+        ],
+        "relacoes_refs": [
+          "relacao-nccn-20261017-adrenal-seguimento-acc"
+        ],
+        "conflitos_refs": [
+          "conflito-nccn-20261017-adrenal-seguimento-acc"
+        ],
+        "pendencias": [
+          "REVISAO_CLINICA_DO_DELTA",
+          "VERIFICAR_ACESSO_BRASILEIRO_POR_INDICACAO"
+        ],
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-2-correcao-auditoria",
+            "correcao_id": "M35",
+            "anterior": {
+              "conteudo_extraido": "A fonte descreve acompanhamento de 12 semanas a 12 meses por até dez anos, depois conforme indicação, distinguindo imagem por cenário e biomarcadores se tumor inicialmente funcional. A faixa não equivale a um intervalo individual único.",
+              "fonte_refs": [
+                {
+                  "fonte_id": "nccn-902f0355ba44",
+                  "paginas_pdf": [
+                    61
+                  ],
+                  "secao": "AGT-5",
+                  "natureza": "EXTRACAO_DOCUMENTAL",
+                  "pagina_pdf": 61,
+                  "trecho": "every 12 wk and biomarkers (if tumor initially functional) • Consider resection"
+                }
+              ],
+              "estado_curadoria": "A_CONFERIR",
+              "aprovacao_clinica": null,
+              "aplicabilidade": {
+                "criterios": [
+                  "Carcinoma adrenocortical",
+                  "Distinguir doença localizada tratada de irressecável/metastática",
+                  "Individualização médica"
+                ],
+                "paciente_individual": null,
+                "estado": "NAO_AVALIADA"
+              }
+            },
+            "motivo": "Correção documental após auditoria Claude e conferência da fonte; não apaga versão anterior.",
+            "aprovacao_clinica": null
+          },
+          {
+            "revisao": "2026-10-17-nccn-delta-2-correcao-auditoria",
+            "correcao_id": "AD1-adrenal",
+            "anterior": {
+              "conteudo_extraido": "Coluna FOLLOW-UP de AGT-5: ambos os ramos indicam 12 semanas a 12 meses por até dez anos, depois conforme indicação. Localizado: considerar TC tórax, TC/RM abdome e biomarcadores se inicialmente funcional. Irressecável/metastático: TC tórax e TC/RM abdome-pelve ou FDG-PET/CT; não eleger um único intervalo dentro da faixa.",
+              "fonte_refs": [
+                {
+                  "fonte_id": "nccn-902f0355ba44",
+                  "edicao": "1.2026",
+                  "pagina_pdf": 61,
+                  "paginas_pdf": [
+                    61
+                  ],
+                  "secao": "AGT-5, coluna FOLLOW-UP",
+                  "trecho": "Every 12 wk–12 mo up to 10 y",
+                  "ancora_contextual": null,
+                  "natureza": "EXTRACAO_DOCUMENTAL",
+                  "sha256_pdf": "9e3851747595d8afb6a5e33e1a96c8d9975d7b4e7b375d896cb01850d8c6776a"
+                }
+              ],
+              "estado_curadoria": "A_CONFERIR",
+              "aprovacao_clinica": null,
+              "dados_estruturados": {}
+            },
+            "motivo": "Correção documental após auditoria Claude e conferência da fonte; não apaga versão anterior.",
+            "aprovacao_clinica": null
+          },
+          {
+            "revisao": "2026-10-17-nccn-final-documental",
+            "anterior": {
+              "conteudo_extraido": "Dois ramos NCCN estruturados na coluna FOLLOW-UP, preservando literalmente a amplitude12semanas–12meses até10anos e a diferença de exames. A pendência histórica SEM_FONTE da SBOC permanece aberta; o novo conteúdo é variante documental NCCN."
+            },
+            "motivo": "Espaçamento da prosa; sem modificar valores, códigos ou fontes."
+          },
+          {
+            "revisao": "2026-10-17-nccn-final-documental",
+            "anterior": {
+              "dados_estruturados": {
+                "seguimento_nccn": {
+                  "ramos": [
+                    {
+                      "tabela_ou_ramo": "localizado",
+                      "cenario": "Carcinoma adrenocortical localizado tratado",
+                      "linhas": [
+                        {
+                          "exame": "Considerar TC tórax ± contraste e TC/RM abdome com contraste",
+                          "periodos": {
+                            "até10anos": "a cada12semanas–12meses",
+                            "após10anos": "conforme indicação clínica"
+                          },
+                          "condicao": null
+                        },
+                        {
+                          "exame": "Considerar biomarcadores",
+                          "periodos": {
+                            "até10anos": "mesma faixa; individualizar"
+                          },
+                          "condicao": "se tumor inicialmente funcional"
+                        }
+                      ],
+                      "notas": [],
+                      "fontes": [
+                        {
+                          "fonte_id": "nccn-902f0355ba44",
+                          "edicao": "1.2026",
+                          "pagina_pdf": 61,
+                          "paginas_pdf": [
+                            61
+                          ],
+                          "secao": "AGT-5, FOLLOW-UP localizado",
+                          "trecho": "Every 12 wk–12 mo up to 10 y",
+                          "ancora_contextual": null,
+                          "natureza": "EXTRACAO_DOCUMENTAL",
+                          "sha256_pdf": "9e3851747595d8afb6a5e33e1a96c8d9975d7b4e7b375d896cb01850d8c6776a"
+                        }
+                      ],
+                      "estado_curadoria": "A_CONFERIR",
+                      "aprovacao_clinica": null,
+                      "gera_agendamento": false
+                    },
+                    {
+                      "tabela_ou_ramo": "irressecavel_metastatico",
+                      "cenario": "Carcinoma adrenocortical irressecável/metastático",
+                      "linhas": [
+                        {
+                          "exame": "TC tórax ± contraste e TC/RM abdome-pelve com contraste OU FDG-PET/CT",
+                          "periodos": {
+                            "até10anos": "a cada12semanas–12meses",
+                            "após10anos": "conforme indicação clínica"
+                          },
+                          "condicao": null
+                        }
+                      ],
+                      "notas": [],
+                      "fontes": [
+                        {
+                          "fonte_id": "nccn-902f0355ba44",
+                          "edicao": "1.2026",
+                          "pagina_pdf": 61,
+                          "paginas_pdf": [
+                            61
+                          ],
+                          "secao": "AGT-5, FOLLOW-UP irressecável/metastático",
+                          "trecho": "Every 12 wk–12 mo up to 10 y",
+                          "ancora_contextual": null,
+                          "natureza": "EXTRACAO_DOCUMENTAL",
+                          "sha256_pdf": "9e3851747595d8afb6a5e33e1a96c8d9975d7b4e7b375d896cb01850d8c6776a"
+                        }
+                      ],
+                      "estado_curadoria": "A_CONFERIR",
+                      "aprovacao_clinica": null,
+                      "gera_agendamento": false
+                    }
+                  ],
+                  "intervalo_nao_individualizado": true,
+                  "pendencia_historica_preservada_ref": "/tratamento/seguimento/1"
+                }
+              }
+            },
+            "motivo": "Espaçamento da prosa; sem modificar valores, códigos ou fontes."
+          }
+        ],
+        "fontes_por_campo": {
+          "conteudo_extraido": [
+            {
+              "fonte_id": "nccn-902f0355ba44",
+              "edicao": "1.2026",
+              "pagina_pdf": 61,
+              "paginas_pdf": [
+                61
+              ],
+              "secao": "AGT-5, coluna FOLLOW-UP",
+              "trecho": "Every 12 wk–12 mo up to 10 y",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "9e3851747595d8afb6a5e33e1a96c8d9975d7b4e7b375d896cb01850d8c6776a"
+            }
+          ],
+          "aplicabilidade": [
+            {
+              "fonte_id": "nccn-902f0355ba44",
+              "edicao": "1.2026",
+              "pagina_pdf": 61,
+              "paginas_pdf": [
+                61
+              ],
+              "secao": "AGT-5, coluna FOLLOW-UP",
+              "trecho": "Every 12 wk–12 mo up to 10 y",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "9e3851747595d8afb6a5e33e1a96c8d9975d7b4e7b375d896cb01850d8c6776a"
+            }
+          ],
+          "dados_estruturados": [
+            {
+              "fonte_id": "nccn-902f0355ba44",
+              "edicao": "1.2026",
+              "pagina_pdf": 61,
+              "paginas_pdf": [
+                61
+              ],
+              "secao": "AGT-5, coluna FOLLOW-UP",
+              "trecho": "Every 12 wk–12 mo up to 10 y",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "9e3851747595d8afb6a5e33e1a96c8d9975d7b4e7b375d896cb01850d8c6776a"
+            }
+          ]
+        },
+        "correcoes_auditoria": [
+          {
+            "id": "M35",
+            "revisao": "2026-10-17-nccn-delta-2-correcao-auditoria",
+            "estado": "APLICADA_COM_CONFERENCIA_DOCUMENTAL",
+            "fontes": [
+              {
+                "fonte_id": "nccn-902f0355ba44",
+                "edicao": "1.2026",
+                "pagina_pdf": 61,
+                "paginas_pdf": [
+                  61
+                ],
+                "secao": "AGT-5, coluna FOLLOW-UP",
+                "trecho": "Every 12 wk–12 mo up to 10 y",
+                "ancora_contextual": null,
+                "natureza": "EXTRACAO_DOCUMENTAL",
+                "sha256_pdf": "9e3851747595d8afb6a5e33e1a96c8d9975d7b4e7b375d896cb01850d8c6776a"
+              }
+            ],
+            "ajuste_ao_parecer": null
+          },
+          {
+            "id": "AD1-adrenal",
+            "revisao": "2026-10-17-nccn-delta-2-correcao-auditoria",
+            "estado": "APLICADA_COM_CONFERENCIA_DOCUMENTAL",
+            "fontes": [
+              {
+                "fonte_id": "nccn-902f0355ba44",
+                "edicao": "1.2026",
+                "pagina_pdf": 61,
+                "paginas_pdf": [
+                  61
+                ],
+                "secao": "AGT-5, coluna FOLLOW-UP",
+                "trecho": "Every 12 wk–12 mo up to 10 y",
+                "ancora_contextual": null,
+                "natureza": "EXTRACAO_DOCUMENTAL",
+                "sha256_pdf": "9e3851747595d8afb6a5e33e1a96c8d9975d7b4e7b375d896cb01850d8c6776a"
+              }
+            ],
+            "ajuste_ao_parecer": null
+          }
+        ]
+      }
+    ],
+    "cenarios": {
+      "identidade_ref": "/identidade/cenarios",
+      "detalhamento_ref": "/tratamento/cenarios",
+      "novas_condicoes_refs": [
+        "nccn-20261017-adrenal-seguimento-acc"
+      ],
+      "regra": "Não igualar automaticamente as duas listas nem selecionar cenário individual nesta camada."
+    },
+    "fontes": [
+      {
+        "id": "nccn-902f0355ba44",
+        "arquivo_local": "C:\\Users\\silas\\.aside\\u\\0\\sessions\\2026-10-17_LutNNwUyDZGlA1pF\\artifacts\\nccn\\Neuroendocrine and Adrenal Tumors.pdf",
+        "nome": "Neuroendocrine and Adrenal Tumors",
+        "sha256": "9e3851747595d8afb6a5e33e1a96c8d9975d7b4e7b375d896cb01850d8c6776a",
+        "numero_paginas": 237,
+        "versao_declarada": "1.2026",
+        "origem": "ARQUIVO_LOCAL_FORNECIDO",
+        "autenticidade_externa": "NAO_VERIFICADA_NO_PORTAL",
+        "paginas_examinadas": [
+          46,
+          47,
+          48,
+          49,
+          61
+        ]
+      }
+    ],
+    "fontes_legadas_refs": [
+      "/header/fonte",
+      "/curadoria/fontesLidas"
+    ],
+    "ensaios": {
+      "legado_ref": "/tratamento/ensaios",
+      "novos_nct": [],
+      "nota": "Nenhum identificador NCT foi inventado ou verificado nesta rodada."
+    },
+    "relacoes": [
+      {
+        "relacao_id": "relacao-nccn-20261017-adrenal-seguimento-acc",
+        "tipo": "CONDICOES_PARA_APRESENTACAO_DOCUMENTAL",
+        "destino_item_ref": "nccn-20261017-adrenal-seguimento-acc",
+        "criterios_extraidos": [
+          "Carcinoma adrenocortical",
+          "Ramo localizado tratado OU irressecável/metastático",
+          "Individualizar faixa e modalidade"
+        ],
+        "origem_condicoes": "FONTE_NCCN_CITADA",
+        "origem_mapeamento": "PROPOSTA_DE_MAPEAMENTO",
+        "executavel": false,
+        "estado": "A_CONFERIR",
+        "dados_ausentes": "MANTER_INDETERMINADO",
+        "dados_conflitantes": "MANTER_CONFLITO",
+        "efeito": "APRESENTAR_CONTEUDO_PARA_REVISAO; NAO PRESCREVER",
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-2-correcao-auditoria",
+            "correcao_id": "M35",
+            "criterios_extraidos": [
+              "Carcinoma adrenocortical",
+              "Distinguir doença localizada tratada de irressecável/metastática",
+              "Individualização médica"
+            ]
+          },
+          {
+            "revisao": "2026-10-17-nccn-delta-2-correcao-auditoria",
+            "correcao_id": "AD1-adrenal",
+            "criterios_extraidos": [
+              "Carcinoma adrenocortical",
+              "Ramo localizado tratado OU irressecável/metastático",
+              "Individualizar faixa e modalidade"
+            ]
+          }
+        ],
+        "fontes_por_campo": {
+          "criterios_extraidos": [
+            {
+              "fonte_id": "nccn-902f0355ba44",
+              "edicao": "1.2026",
+              "pagina_pdf": 61,
+              "paginas_pdf": [
+                61
+              ],
+              "secao": "AGT-5, coluna FOLLOW-UP",
+              "trecho": "Every 12 wk–12 mo up to 10 y",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "9e3851747595d8afb6a5e33e1a96c8d9975d7b4e7b375d896cb01850d8c6776a"
+            }
+          ]
+        }
+      }
+    ],
+    "conflitos": [
+      {
+        "conflito_id": "conflito-nccn-20261017-adrenal-seguimento-acc",
+        "tema": "Seguimento do carcinoma adrenocortical",
+        "descricao": "O legado assinala ausência de fonte para seguimento pós-ressecção. Nova fonte disponível; não apagar a pendência histórica nem escolher automaticamente um intervalo dentro da faixa.",
+        "item_nccn_ref": "nccn-20261017-adrenal-seguimento-acc",
+        "legado_refs": [
+          "/tratamento/seguimento/1"
+        ],
+        "fontes_nccn_refs": [
+          {
+            "fonte_id": "nccn-902f0355ba44",
+            "paginas_pdf": [
+              61
+            ],
+            "secao": "AGT-5",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "pagina_pdf": 61,
+            "trecho": "every 12 wk and biomarkers (if tumor initially functional) • Consider resection"
+          }
+        ],
+        "estado": "A_CONFERIR",
+        "decisao_medica": null,
+        "resolucao_automatica": false
+      }
+    ],
+    "conflitos_legados_ref": "/conflitos",
+    "pendencias": [
+      {
+        "id": "revisao-clinica",
+        "estado": "ABERTA",
+        "descricao": "Conferir cada acréscimo, condições, fontes, doses, interações e suporte antes de uso clínico."
+      },
+      {
+        "id": "acesso-brasileiro",
+        "estado": "ABERTA",
+        "descricao": "NCCN não comprova Anvisa, Conitec, PCDT/DDT, SIGTAP/APAC, cobertura privada ou acesso institucional."
+      },
+      {
+        "id": "cobertura-nccn",
+        "estado": "PARCIAL_POR_DELTA",
+        "descricao": "Leitura dirigida das páginas citadas; não há alegação de extração integral da diretriz."
+      }
+    ],
+    "pendencias_legadas_ref": "/pendencias",
+    "itens_adicionais_a_classificar": [
+      {
+        "origem_ref": "/header",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/status",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/consultavel",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/alerta",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/substitui",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/identidade",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/pendencias",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/conflitos",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/curadoria",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/correcoes",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      }
+    ],
+    "mapa_de_cobertura": [
+      {
+        "origem_json_pointer": "/header",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "8d531f972a8f67560fd1f17d18be9e1f768f973c67e8093148422ea7914b7646",
+        "valores_folha": 9
+      },
+      {
+        "origem_json_pointer": "/status",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "04635ca3844c66b19ebbf49bf9ff60fe851d6ce89597d23e6a970f1dc3927289",
+        "valores_folha": 1
+      },
+      {
+        "origem_json_pointer": "/consultavel",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b",
+        "valores_folha": 1
+      },
+      {
+        "origem_json_pointer": "/alerta",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "valores_folha": 1
+      },
+      {
+        "origem_json_pointer": "/substitui",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "valores_folha": 1
+      },
+      {
+        "origem_json_pointer": "/identidade",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "fed7141f3019baf716edf8cc64ef6a170f1b37d800e76a20134be7507c5601ed",
+        "valores_folha": 14
+      },
+      {
+        "origem_json_pointer": "/diagnostico",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "986eb5f85a52a65686aadd6ba2be677f33e469154dee0bf6c839d44cb0d7c740",
+        "valores_folha": 114
+      },
+      {
+        "origem_json_pointer": "/estadiamento",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "40bd9dc7de1306a81733d4f5d5427e9bc6f19abba3fe0974bf9cdbadf47b621c",
+        "valores_folha": 197
+      },
+      {
+        "origem_json_pointer": "/tratamento",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "8ee135339779dfabeeae9eb3f5b625ebebdd15107310120eb1f2c055be4dc848",
+        "valores_folha": 406
+      },
+      {
+        "origem_json_pointer": "/ligacoes",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "a3b2e379f786a1c29fff19ab323827cfbd0ea88d6691268c8ba36407dac83673",
+        "valores_folha": 96
+      },
+      {
+        "origem_json_pointer": "/pendencias",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "72a40abfbab756a899df7b25a0dd13a893520538c6a8190c33e2ad6788cf5a1f",
+        "valores_folha": 30
+      },
+      {
+        "origem_json_pointer": "/conflitos",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "c604070e51efa798cb4c28d4489e3c77969b5954232b08868a4b9482dba8002b",
+        "valores_folha": 32
+      },
+      {
+        "origem_json_pointer": "/curadoria",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "858e3c43d806489f6144735336acbefd70c56c978438b3477ec95418b8dd4e84",
+        "valores_folha": 17
+      },
+      {
+        "origem_json_pointer": "/correcoes",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "329e35899e048e50f2d0ac7fd851b0b554d0a9a3d0b8fc1bc1c02206a9280e76",
+        "valores_folha": 4
+      }
+    ],
+    "reconciliacao_com_versao_anterior": {
+      "modo": "ADITIVO",
+      "originais_removidos": 0,
+      "originais_alterados": 0,
+      "contagens_preservadas": {
+        "protocolos": 6,
+        "ensaios": 2,
+        "cenarios_identidade": 4,
+        "cenarios_tratamento": 4,
+        "seguimento": 2,
+        "conflitos": 2,
+        "pendencias": 6
+      }
+    },
+    "relatorio_de_completude": {
+      "estado": "INCOMPLETA_PARA_DIRETRIZ_INTEGRAL",
+      "preservacao_legado": "INTEGRAL",
+      "delta_itens": 1,
+      "normalizacao_legado": "INDEXACAO_POR_REFERENCIA; NAO REEXTRACAO CLINICA",
+      "posologias": "SOMENTE AS EXPLICITAMENTE EXTRAIDAS; RESTANTES PENDENTES",
+      "sem_fato_paciente": true,
+      "sem_aprovacao_inferida": true
+    },
+    "revisoes_auditoria": [
+      {
+        "revisao": "2026-10-17-nccn-delta-2-correcao-auditoria",
+        "correcoes": [
+          "M35",
+          "AD1-adrenal"
+        ],
+        "legado_modificado": false,
+        "aprovacao_clinica": null,
+        "nota": "Correções conferidas nos PDFs; a auditoria Claude foi amostral. Os 33 itens não auditados não foram promovidos a revisados."
+      }
+    ],
+    "fechamento_documental": [
+      {
+        "revisao": "2026-10-17-nccn-final-documental",
+        "estado": "CORRECOES_DOCUMENTAIS_APLICADAS",
+        "ajustes_textuais": 3,
+        "deduplicacoes_por_referencia": [],
+        "aprovacao_clinica": null,
+        "legado_alterado": false
+      }
+    ]
+  }
 }

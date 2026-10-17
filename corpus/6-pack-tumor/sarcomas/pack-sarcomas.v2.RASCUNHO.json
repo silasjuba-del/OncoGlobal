@@ -3077,5 +3077,2533 @@
       "achado": "Decisão D-F1-17 item 56A (Dr. Silas)",
       "acao": "MTX alta dose: hidratação/alcalinização por protocolo institucional; pendência 'criar protocolo institucional'"
     }
-  ]
+  ],
+  "tumor_pack_universal": {
+    "schema_documental": "tumor-pack-universal@1",
+    "metadados": {
+      "revisao_documental": "2026-10-17-nccn-delta-2-correcao-auditoria",
+      "versao": "1.1.0",
+      "data": "2026-10-17",
+      "autor_extracao": "Codex",
+      "estado": "RASCUNHO",
+      "aprovacao_clinica": null,
+      "escopo": "CAMADA_ADITIVA_UNIVERSAL_E_DELTA_DOCUMENTAL_NCCN",
+      "base_legada": {
+        "arquivo": "corpus/6-pack-tumor/sarcomas/pack-sarcomas.v2.RASCUNHO.json",
+        "commit": "2c0991d",
+        "versao": "2.0.0",
+        "sha256_bytes": "6a7a42e9f0324ccb7935a3a048b9a147bd537f5b93d9a99871becb491a256472",
+        "sha256_semantico": "9dc3640b25877c8dd8560228b5fb5c156d928ef5674a99ef9279feb46a7680cf"
+      },
+      "nota_versao": "Versão desta camada:1.1.0; revisão documental:2026-10-17-nccn-delta-2-correcao-auditoria. header.versao continua referindo-se ao legado intacto. Nenhuma aprovação é transferida.",
+      "integra_runtime": false,
+      "gera_conduta": false,
+      "historico_revisoes": [
+        {
+          "revisao_documental": "2026-10-17-nccn-delta-1",
+          "versao": "1.0.0",
+          "data": "2026-10-17",
+          "autor_extracao": "Codex",
+          "estado": "RASCUNHO",
+          "aprovacao_clinica": null,
+          "escopo": "CAMADA_ADITIVA_UNIVERSAL_E_DELTA_DOCUMENTAL_NCCN",
+          "base_legada": {
+            "arquivo": "corpus/6-pack-tumor/sarcomas/pack-sarcomas.v2.RASCUNHO.json",
+            "commit": "2c0991d",
+            "versao": "2.0.0",
+            "sha256_bytes": "6a7a42e9f0324ccb7935a3a048b9a147bd537f5b93d9a99871becb491a256472",
+            "sha256_semantico": "9dc3640b25877c8dd8560228b5fb5c156d928ef5674a99ef9279feb46a7680cf"
+          },
+          "nota_versao": "header.versao identifica o legado intacto; esta extensão possui revisão própria. Não reutilizar aprovação/hashes antigos para o conjunto alterado.",
+          "integra_runtime": false,
+          "gera_conduta": false
+        }
+      ]
+    },
+    "identidade_ref": "/identidade",
+    "dominios": [
+      {
+        "dominio_id": 1,
+        "nome": "Diagnóstico e patologia",
+        "itens_legados_refs": [
+          "legado-464dc15002d0307c",
+          "legado-1fde78dfbb89332c",
+          "legado-6940c259730c070f",
+          "legado-6410613c281c91fd",
+          "legado-53005ace9e248e50",
+          "legado-59e0aa7eb3f83db7",
+          "legado-66e2cb2402bedd10",
+          "legado-91cfe8c343f5ae46",
+          "legado-ff14a21b1262a2fe",
+          "legado-16abb07bfa3a4726",
+          "legado-e06be60478eec152"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 2,
+        "nome": "Estadiamento, extensão e risco",
+        "itens_legados_refs": [
+          "legado-14b70ed38bf74741",
+          "legado-58001716f82b6dfa",
+          "legado-3c5764d16e5d3e23",
+          "legado-c595a84eb83d7daf",
+          "legado-374b7301887eca5b",
+          "legado-9a8b00542e6c2991",
+          "legado-3eb6f5b24ea06d30",
+          "legado-4d23077aa8e0af17",
+          "legado-c4e28815d7ff88e4"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 3,
+        "nome": "Biomarcadores e farmacogenética",
+        "itens_legados_refs": [
+          "legado-e8263eef905a7a66",
+          "legado-c37d2093ea29c43d",
+          "legado-1eea780a265b197b",
+          "legado-c71c1ac50497b7b8",
+          "legado-c18d644452835b9c",
+          "legado-70984a6680fdade0",
+          "legado-6372cb3fa284bce0",
+          "legado-e97a6466d40462e9",
+          "legado-9c35856eccab198f",
+          "legado-4e342ba28ab75a38"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 4,
+        "nome": "Exames e requisitos documentais",
+        "itens_legados_refs": [
+          "legado-054ce8b74599c9e5",
+          "legado-76f7b4b16f9f974d",
+          "legado-d34ab5aca92b1cb0",
+          "legado-58855ac1f6941afd",
+          "legado-fec48b466e502abc",
+          "legado-9b4b55c64075f1ea",
+          "legado-a4f480d2506bf38a",
+          "legado-00c86355bdf6b6a6",
+          "legado-a5d30ca4a54f0d44",
+          "legado-3485151cd66df9d8",
+          "legado-b435f79a5d73e69f",
+          "legado-cec10ca91469c0f5",
+          "legado-ce0e541c3836fa81",
+          "legado-a66ec6da681c3aee",
+          "legado-89db3b6ec657bc2a",
+          "legado-4785e7df2d3041e2",
+          "legado-55365d63f5f092c6",
+          "legado-5ff85aeb9b8dbe65",
+          "legado-188c2e7bb69ce423",
+          "legado-38f58b48006a6626",
+          "legado-e3c17285d30c508e",
+          "legado-9f48cbfd49f95380",
+          "legado-1f8a361cde153a58",
+          "legado-fa32ff585ff734d1",
+          "legado-ea1c3274ac109285",
+          "legado-1e182f6c9bda346d",
+          "legado-c4ad324f15dcd340",
+          "legado-096cb2cb9288a88b",
+          "legado-0f9299cb90be33fa",
+          "legado-363b3688726e1e8e"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 5,
+        "nome": "Avaliação antes do tratamento",
+        "itens_legados_refs": [],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "NAO_ESTRUTURADO_NESTA_RODADA",
+        "observacao": "Ausência de referências não significa não aplicabilidade; textos dentro de outros itens permanecem preservados."
+      },
+      {
+        "dominio_id": 6,
+        "nome": "Tratamento e protocolos",
+        "itens_legados_refs": [
+          "legado-72e551b8eb9a6cbb",
+          "legado-d5b3ae2e1ac06c17",
+          "legado-a0a0dcbfbdc098fd",
+          "legado-2e2e835b1ad17818",
+          "legado-94c6afeace47666a",
+          "legado-880e4afe346ce5f5",
+          "legado-2f451ba01adf76a3",
+          "legado-779577108897681c",
+          "legado-7fcf1b7dd7aa92c5",
+          "legado-0f0de37643fa3506",
+          "legado-23b3f48cd64e2ee6",
+          "legado-d779583d9569dc7f",
+          "legado-ebb09f08a1cd13bb",
+          "legado-cefd8b5998a94941",
+          "legado-843586db17388509",
+          "legado-e33c07e28bcbddc3",
+          "legado-282c87d44e35aeda",
+          "legado-9b30f327635d2a3b",
+          "legado-6fe6efc3fb35f618",
+          "legado-0010235f6928109b",
+          "legado-2aa393b0c654dcb1",
+          "legado-dc887e9c9674f0fa",
+          "legado-14a008398d88bb18",
+          "legado-642488366c133197",
+          "legado-fbb33340ba0ce952",
+          "legado-893b2f7950f23514",
+          "legado-ecb34215e49f1076",
+          "legado-13973e273b43b7c0",
+          "legado-1a8e96579097ce61",
+          "legado-204196c73fee491b",
+          "legado-1c7c4a079e3af1c3",
+          "legado-94e0f6aa376352b5",
+          "legado-3fd53cb14994289e",
+          "legado-b968a17edf482686",
+          "legado-b75e55a51f4df8bd",
+          "legado-41f9220d5a6306d8",
+          "legado-13f0125c057cbe98",
+          "legado-e8e5bf032f8690f7",
+          "legado-37e660f04a89596e",
+          "legado-13b48c4f6cb2076e",
+          "legado-386e917abc6494f9",
+          "legado-8142f72d3187027b",
+          "legado-282d974b87803963",
+          "legado-9af4e05d8e66700b",
+          "legado-7b788dc9aae5536b",
+          "legado-1b88a2de5322b08a",
+          "legado-5c7f4e52e26ad3fa",
+          "legado-c04b25b2bbe564a9",
+          "legado-d289456263a00607",
+          "legado-364aa5f33d4adf14",
+          "legado-c449e3d0a4fb6ad1",
+          "legado-7683184417565e66"
+        ],
+        "itens_nccn_refs": [
+          "nccn-20261017-sarcomas-doxo-trab",
+          "nccn-20261017-sarcomas-afamitresgene",
+          "nccn-20261017-sarcomas-nirogacestate",
+          "nccn-20261017-sarcomas-pexidartinibe",
+          "nccn-20261017-sarcomas-vimseltinibe",
+          "nccn-20261017-sarcomas-ivosidenibe"
+        ],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 7,
+        "nome": "Segurança, interações e toxicidades",
+        "itens_legados_refs": [
+          "legado-9005584a7c69d684",
+          "legado-6a9c42e4ed558bff",
+          "legado-01a689ba7e69241d",
+          "legado-275cdd8e09640165",
+          "legado-607bea51134eb695",
+          "legado-d41b05aa3775b332",
+          "legado-2d4d25bcd1e900a0"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 8,
+        "nome": "Suporte e cuidados",
+        "itens_legados_refs": [
+          "legado-b0130187cd416719",
+          "legado-b6a68b6b4d86a3e0",
+          "legado-7871b9d4c3b6e8a9",
+          "legado-bea3eb5901a14d0e"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 9,
+        "nome": "Avaliação de resposta e estado da doença",
+        "itens_legados_refs": [],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "NAO_ESTRUTURADO_NESTA_RODADA",
+        "observacao": "Ausência de referências não significa não aplicabilidade; textos dentro de outros itens permanecem preservados."
+      },
+      {
+        "dominio_id": 10,
+        "nome": "Seguimento e sobrevivência",
+        "itens_legados_refs": [
+          "legado-ebf4fa115756b48f",
+          "legado-2b82ae54407cd4e7",
+          "legado-70882d515611f17a",
+          "legado-451c5039da7e3bf4",
+          "legado-4777ca85298372f5",
+          "legado-714f09ecc744ad62",
+          "legado-ddcdeee49fccf5f8"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 11,
+        "nome": "Encaminhamentos e atuação multiprofissional",
+        "itens_legados_refs": [
+          "legado-39b79a095ee2af1f",
+          "legado-da35098f724321ad",
+          "legado-bbe50e0fbc307924",
+          "legado-d55b6e3481e3e341"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 12,
+        "nome": "Documentos e acesso assistencial",
+        "itens_legados_refs": [
+          "legado-8ee1d796650d89af",
+          "legado-a60f00d2df3df91e"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      }
+    ],
+    "indice_itens_legados": [
+      {
+        "item_id": "legado-464dc15002d0307c",
+        "origem_json_pointer": "/diagnostico/patologico/obtencao/0",
+        "sha256_conteudo": "3a5b02b90c5e3951f733a7c2d24e862ed85e78f115f2c86d5e7e72b1f5c4db3e",
+        "nome": "/diagnostico/patologico/obtencao/0",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/obtencao/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-1fde78dfbb89332c",
+        "origem_json_pointer": "/diagnostico/patologico/obtencao/1",
+        "sha256_conteudo": "f85451ccaf7c677c93552e93cf5b421eb3a50cd1da8a14cfbaf1d4b0b948fb9c",
+        "nome": "/diagnostico/patologico/obtencao/1",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/obtencao/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-6940c259730c070f",
+        "origem_json_pointer": "/diagnostico/patologico/obtencao/2",
+        "sha256_conteudo": "b78692c01f5314f50d7194e076caca46d82e462250a98328379e51564c8612be",
+        "nome": "/diagnostico/patologico/obtencao/2",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/obtencao/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-6410613c281c91fd",
+        "origem_json_pointer": "/diagnostico/patologico/obtencao/3",
+        "sha256_conteudo": "c29224ac7147fbd43555a048159296dc56ec27bcd06562f7397cb437031d5013",
+        "nome": "/diagnostico/patologico/obtencao/3",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/obtencao/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-53005ace9e248e50",
+        "origem_json_pointer": "/diagnostico/patologico/obtencao/4",
+        "sha256_conteudo": "f54ca8370153162df5126b90db10845512d24c387717d2db544c543f7005b1cc",
+        "nome": "/diagnostico/patologico/obtencao/4",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/obtencao/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-59e0aa7eb3f83db7",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/0",
+        "sha256_conteudo": "c2b2752134374080590374aac404814b4150dfe162c2b701dce368ec043a5751",
+        "nome": "tipo histológico (OMS 2020)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-66e2cb2402bedd10",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/1",
+        "sha256_conteudo": "f31500029928b5e45d3009a87953421df60a56cf9480ab9c6e5f525ad70d6fc8",
+        "nome": "grau (G1-G3)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-91cfe8c343f5ae46",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/2",
+        "sha256_conteudo": "fcef5fb1269385b2ea676b62dbd1ad5cf13566a8eccfa5f2efcd13240c59caa0",
+        "nome": "tamanho tumoral (ósseo: 3 dimensões em mm)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ff14a21b1262a2fe",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/3",
+        "sha256_conteudo": "dcbe5911a10f728d05ab92f24edce417a2bdbd4f34a56e766802198a6fd2e72a",
+        "nome": "margens R0/R1/R2 e distância em mm",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-16abb07bfa3a4726",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/4",
+        "sha256_conteudo": "f5b4794155494e86c0a7f51802a1655ac8e280b277aef34590d526f3e0a72420",
+        "nome": "percentual de tumor viável/necrose pós-QT (Picci/Huvos)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e06be60478eec152",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/5",
+        "sha256_conteudo": "8ff30562c5311e8324e3093d8980f01640a9834f4adb4a9344d37654b83f4b08",
+        "nome": "revisão por patologista de centro de referência",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-14b70ed38bf74741",
+        "origem_json_pointer": "/estadiamento/sistema",
+        "sha256_conteudo": "d7dab6e16ae3278a0513466816530a61b1fcf4548c0e925655782b9ee09cf5ce",
+        "nome": "AJCC",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-58001716f82b6dfa",
+        "origem_json_pointer": "/estadiamento/edicao",
+        "sha256_conteudo": "93a193fc478559c209c890ecb995418c96999bd34ad8dd3a2daf9f31ed00bb90",
+        "nome": "8ª (partes moles e ósseo)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-3c5764d16e5d3e23",
+        "origem_json_pointer": "/estadiamento/gruposConduta/0",
+        "sha256_conteudo": "6854ebbefb991c87db93af080dc7299a19084a1dbac78d6eef6ef8e929fb14e0",
+        "nome": "/estadiamento/gruposConduta/0",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-c595a84eb83d7daf",
+        "origem_json_pointer": "/estadiamento/gruposConduta/1",
+        "sha256_conteudo": "899b5aef6180f95b289d5a1f5450628a33c497e8fbfd4058603d62a479706c10",
+        "nome": "/estadiamento/gruposConduta/1",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-374b7301887eca5b",
+        "origem_json_pointer": "/estadiamento/gruposConduta/2",
+        "sha256_conteudo": "f2f4733d885877c8178da8ba2e37560049d10ba8df740be5a4fc5b51f562722b",
+        "nome": "/estadiamento/gruposConduta/2",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-9a8b00542e6c2991",
+        "origem_json_pointer": "/estadiamento/gruposConduta/3",
+        "sha256_conteudo": "f9a162b6606d83f7669479ff4c5b6af8302e45b6e1e5c82e2a5151babd64ddad",
+        "nome": "/estadiamento/gruposConduta/3",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-3eb6f5b24ea06d30",
+        "origem_json_pointer": "/estadiamento/gruposConduta/4",
+        "sha256_conteudo": "904a47f749f4311d74916231564d01130abb7fdbbb2f51a9ed6f2729339a4ba4",
+        "nome": "/estadiamento/gruposConduta/4",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-4d23077aa8e0af17",
+        "origem_json_pointer": "/estadiamento/gruposConduta/5",
+        "sha256_conteudo": "15802b96becbdbf2c02b3e16f676bb577eb8a9b3535306170cc136765d7fa9b8",
+        "nome": "/estadiamento/gruposConduta/5",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/5/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-c4e28815d7ff88e4",
+        "origem_json_pointer": "/estadiamento/marcadores",
+        "sha256_conteudo": "6f050c145741b93e34ee20d5b92684e21ba9f25fdc6538343c98f68dad3cd67f",
+        "nome": "/estadiamento/marcadores",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e8263eef905a7a66",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/0",
+        "sha256_conteudo": "fa8842849e5c21a594f4d57de5b3130fade963aa74519358abb4c1c588983b54",
+        "nome": "Suspeita de sarcoma de Ewing / células redondas",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-c37d2093ea29c43d",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/1",
+        "sha256_conteudo": "fbf2be523bb263a20a27c821886c4ebf7d533053322567f5a3833dc0757d06b0",
+        "nome": "Partes moles, por patologista experiente em centro de referência",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-1eea780a265b197b",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/2",
+        "sha256_conteudo": "0af2a340e97ed3d7c143a75a248906fa3ddcdb0ef1e425f3320b436659042524",
+        "nome": "Todos",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-c71c1ac50497b7b8",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/3",
+        "sha256_conteudo": "6207590b62470a65fe1bf5f1f223ef98ef7a201eeac6183feff48efdf3440888",
+        "nome": "Partes moles avançado",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-c18d644452835b9c",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/4",
+        "sha256_conteudo": "4004dde179c1ba0e0ffdc485d7941c67939a94cedbdad2c4d972c4703b76f0db",
+        "nome": "Osteossarcoma recorrente",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-70984a6680fdade0",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/5",
+        "sha256_conteudo": "f86bd6a9977122409c52587109bff02a6ee45086edfc2f8a298f920a526308ef",
+        "nome": "<46 anos, AYA 15-39, múltiplos primários, sarcoma pós-RT, história familiar",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/5/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-6372cb3fa284bce0",
+        "origem_json_pointer": "/tratamento/biomarcadorTratamento/0",
+        "sha256_conteudo": "f8c5f54e8625cc5bf134e9c91be40242ffcc3e7f199d6c8a0fb2339a87e3120b",
+        "nome": "/tratamento/biomarcadorTratamento/0",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/biomarcadorTratamento/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e97a6466d40462e9",
+        "origem_json_pointer": "/tratamento/biomarcadorTratamento/1",
+        "sha256_conteudo": "2149f14276080d2d10f695b7d7c1378c4adeffdc46944a3cfc56b6f06bab979c",
+        "nome": "/tratamento/biomarcadorTratamento/1",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/biomarcadorTratamento/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-9c35856eccab198f",
+        "origem_json_pointer": "/tratamento/biomarcadorTratamento/2",
+        "sha256_conteudo": "bc1b97e10b04363398313579dbbb50836dfcc7db92b5be6aeb1e84f35b3ae40c",
+        "nome": "/tratamento/biomarcadorTratamento/2",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/biomarcadorTratamento/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-4e342ba28ab75a38",
+        "origem_json_pointer": "/tratamento/biomarcadorTratamento/3",
+        "sha256_conteudo": "5e770d9c3a76beb00c8d623fd030774bf74d738888cd1d71921246ccc5334889",
+        "nome": "/tratamento/biomarcadorTratamento/3",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/biomarcadorTratamento/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-054ce8b74599c9e5",
+        "origem_json_pointer": "/diagnostico/imagem/0",
+        "sha256_conteudo": "486d7b1327f0d8d4f2c985556b45c3c110c3a8117bbb7b6a2bd7cc893d615d84",
+        "nome": "USG da área suspeita (partes moles)",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-76f7b4b16f9f974d",
+        "origem_json_pointer": "/diagnostico/imagem/1",
+        "sha256_conteudo": "f0ef2bf917389e21b02b1dee1c93577b6ce91d0b0617d10b4f85781838ab57de",
+        "nome": "RM do segmento acometido (extremidade/osso)",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d34ab5aca92b1cb0",
+        "origem_json_pointer": "/diagnostico/imagem/2",
+        "sha256_conteudo": "9ee8a595c885f686e973f849f3f07c35954d72516627195d824eb1d740d862ee",
+        "nome": "RX do sítio primário em 2 planos",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-58855ac1f6941afd",
+        "origem_json_pointer": "/diagnostico/imagem/3",
+        "sha256_conteudo": "93dd3983569a27cb240a0601bc6b9f87c9c427313c86b4b45028081a40903e37",
+        "nome": "TC de tórax",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-fec48b466e502abc",
+        "origem_json_pointer": "/diagnostico/imagem/4",
+        "sha256_conteudo": "dce3abc5f9419b89c0fcdfd53ce1080774ae47fe955fc920f019f14f082c1a3c",
+        "nome": "RX de tórax",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-9b4b55c64075f1ea",
+        "origem_json_pointer": "/diagnostico/imagem/5",
+        "sha256_conteudo": "7fa00370e94ce344d55d7c1607f92991ae6f582aaa03657a8cebe6b8d22d18d1",
+        "nome": "TC de abdome",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/5/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a4f480d2506bf38a",
+        "origem_json_pointer": "/diagnostico/imagem/6",
+        "sha256_conteudo": "cae0cdc6283910277752a84f517ce997b0c49e4faa14e2c0fb8a983226f237c3",
+        "nome": "TC de pelve",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/6/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-00c86355bdf6b6a6",
+        "origem_json_pointer": "/diagnostico/imagem/7",
+        "sha256_conteudo": "81f0f039c68fe52978201bca00f91a2d8d280e721fd13de53e5721744d278043",
+        "nome": "RM de coluna total (torácica; associar cervical e lombar)",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/7/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a5d30ca4a54f0d44",
+        "origem_json_pointer": "/diagnostico/imagem/8",
+        "sha256_conteudo": "868e2fb5304e533b3a832f317f056bdd211298e4cacea0c8a227bc6cf7d7886e",
+        "nome": "RM de crânio",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/8/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-3485151cd66df9d8",
+        "origem_json_pointer": "/diagnostico/imagem/9",
+        "sha256_conteudo": "73e914ed127f870119071870a8cd80d0d76d384193152d84e8bac69d85894e06",
+        "nome": "Cintilografia óssea",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/9/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b435f79a5d73e69f",
+        "origem_json_pointer": "/diagnostico/imagem/10",
+        "sha256_conteudo": "f3ed621d1ac39d8aaf87128e0c655341d9663fa62c80feca9b1948bae94c531c",
+        "nome": "PET/CT FDG",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/10/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-cec10ca91469c0f5",
+        "origem_json_pointer": "/estadiamento/exames/0",
+        "sha256_conteudo": "d70315e3eb7a8eefaa6155aa82e4490fb138582298db361b71be0f174f2bc510",
+        "nome": "TC de tórax",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ce0e541c3836fa81",
+        "origem_json_pointer": "/estadiamento/exames/1",
+        "sha256_conteudo": "8a4fd21c745421e6b609f489ed29a04e3060e8529270cfc4d3131662d0a006e3",
+        "nome": "Fosfatase alcalina",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a66ec6da681c3aee",
+        "origem_json_pointer": "/estadiamento/exames/2",
+        "sha256_conteudo": "a2311431e20834d526c2def8f3654533b9536893ef9c9ab32e280059d2648ba6",
+        "nome": "DHL",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-89db3b6ec657bc2a",
+        "origem_json_pointer": "/ligacoes/exames/0",
+        "sha256_conteudo": "00cac656db90cece9385c8c98f658accb5b7c1553202e6be466fa96d39aaf2b9",
+        "nome": "ANATOMOPATOLOGICO",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-4785e7df2d3041e2",
+        "origem_json_pointer": "/ligacoes/exames/1",
+        "sha256_conteudo": "221ddaba89bb47b42bb1a745099dc56544953adbdcdd4753cfc98b2762357b22",
+        "nome": "BIOPSIA_MEDULA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-55365d63f5f092c6",
+        "origem_json_pointer": "/ligacoes/exames/2",
+        "sha256_conteudo": "09c0bc2a57301c5e7f5c06c8c51c9dec764db31a5d9531aa98aac18b5d8251f3",
+        "nome": "BIOPSIA_PERCUTANEA_GUIADA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-5ff85aeb9b8dbe65",
+        "origem_json_pointer": "/ligacoes/exames/3",
+        "sha256_conteudo": "6256d23e08fe42e0c5f18c2d537248d451b59b2ecdf935ab864d69cd8131c89d",
+        "nome": "CINTILOGRAFIA_OSSEA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-188c2e7bb69ce423",
+        "origem_json_pointer": "/ligacoes/exames/4",
+        "sha256_conteudo": "1e49060d9ff6bb936a9d5318d51a013d181e7cefe4fae7d0525411391d598361",
+        "nome": "DHL",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-38f58b48006a6626",
+        "origem_json_pointer": "/ligacoes/exames/5",
+        "sha256_conteudo": "c6f5e5a6057e9ce942cde9a80b415b2bdbfccf0ac7d689ed5ae89b0846f94872",
+        "nome": "FISH",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e3c17285d30c508e",
+        "origem_json_pointer": "/ligacoes/exames/6",
+        "sha256_conteudo": "ad1a3ef653b581c9aa616ab3bbab16ad7edca4cf6832cfc168f32389fc7cf658",
+        "nome": "FOSFATASE_ALCALINA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-9f48cbfd49f95380",
+        "origem_json_pointer": "/ligacoes/exames/7",
+        "sha256_conteudo": "99a98b9d268e78a05608d792d2fad81f4e16f25b8a4f95da9f7decd91a23a0dc",
+        "nome": "IMUNOHISTOQUIMICA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-1f8a361cde153a58",
+        "origem_json_pointer": "/ligacoes/exames/8",
+        "sha256_conteudo": "3a955b75de510bd32be8d0f7de2bf070f27f223ac4c6a07cf68b35b7271856b2",
+        "nome": "PET_CT_FDG",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-fa32ff585ff734d1",
+        "origem_json_pointer": "/ligacoes/exames/9",
+        "sha256_conteudo": "b7b3381a2b69a22b650640ee6d805a0098ad3dca2eed3fb2a64b65897512bd8e",
+        "nome": "RM_COLUNA_TORACICA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ea1c3274ac109285",
+        "origem_json_pointer": "/ligacoes/exames/10",
+        "sha256_conteudo": "bad8505e4a4450e4dd1c0691d739c56076e3e2a51d04f68ce1f3a4a823e89597",
+        "nome": "RM_CRANIO",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-1e182f6c9bda346d",
+        "origem_json_pointer": "/ligacoes/exames/11",
+        "sha256_conteudo": "c14ce60ca37c165e4caacee63f3b6f144d8c362ed86614c2583ca390362a034e",
+        "nome": "RX_TORAX_PA_PERFIL",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-c4ad324f15dcd340",
+        "origem_json_pointer": "/ligacoes/exames/12",
+        "sha256_conteudo": "eea68f82f02592e6262514a154ff52ae85284765c1f48ab3b07cabb92ead209f",
+        "nome": "TC_ABDOMEN_SUPERIOR",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-096cb2cb9288a88b",
+        "origem_json_pointer": "/ligacoes/exames/13",
+        "sha256_conteudo": "5beb801ddc054db97d463dd8b682c9128772e22b7938b6d4c645af14dc4ddd7a",
+        "nome": "TC_PELVE",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-0f9299cb90be33fa",
+        "origem_json_pointer": "/ligacoes/exames/14",
+        "sha256_conteudo": "147b97b900462813d8c6528cc01d88f8a5102936ee96ee4fb121f8a7b77f60b0",
+        "nome": "TC_TORAX",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-363b3688726e1e8e",
+        "origem_json_pointer": "/ligacoes/exames/15",
+        "sha256_conteudo": "e587a7250a8633f1505dfb613cd4283458e6a8198d35f3721641c9ee3878017f",
+        "nome": "MOLECULAR_PCR_MUTACAO",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-72e551b8eb9a6cbb",
+        "origem_json_pointer": "/tratamento/cenarios/0",
+        "sha256_conteudo": "10ed9e50badc9451f865d625d56cf7cb8bc329e3f8836814094c65c09e99cbfc",
+        "nome": "Partes moles localizado",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d5b3ae2e1ac06c17",
+        "origem_json_pointer": "/tratamento/cenarios/1",
+        "sha256_conteudo": "ecfe1b42f495d2ddc56606b64f591d35aa7406f657b086f2538d6941adb4c3cd",
+        "nome": "Retroperitônio",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a0a0dcbfbdc098fd",
+        "origem_json_pointer": "/tratamento/cenarios/2",
+        "sha256_conteudo": "23edc8567e9534030c39f5e889339cd541220be0b857b268925c69ba8fde3dd9",
+        "nome": "Partes moles — metástase pulmonar metacrônica",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-2e2e835b1ad17818",
+        "origem_json_pointer": "/tratamento/cenarios/3",
+        "sha256_conteudo": "702222b8fcb29d48fa1be1754eee8540d1cea3cab893b666a57ece550d9b9beb",
+        "nome": "Osteossarcoma metastático primário",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-94c6afeace47666a",
+        "origem_json_pointer": "/tratamento/cenarios/4",
+        "sha256_conteudo": "06ffdfd5944f4133cee86146c51d394c4804b94415ce4c6e50bf7e9b1eb32bb9",
+        "nome": "Ewing — controle local",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-880e4afe346ce5f5",
+        "origem_json_pointer": "/tratamento/cenarios/5",
+        "sha256_conteudo": "567431aae4da30efedc41c6e93fe21bf8d366ba5ad6cc155151c557b2f0657d9",
+        "nome": "Cordoma",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/5/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-2f451ba01adf76a3",
+        "origem_json_pointer": "/tratamento/protocolos/0",
+        "sha256_conteudo": "7540be24cfc21eca017b34dbb21401161d8b2d6fca81808e747cb84357f05107",
+        "nome": "Doxorrubicina + ifosfamida D1-D5 (neo/adjuvante)",
+        "id_original": "sarcomas-pm-ai-d1d5-periop-neoadjuvante",
+        "fonte_local_ref": "/tratamento/protocolos/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-779577108897681c",
+        "origem_json_pointer": "/tratamento/protocolos/1",
+        "sha256_conteudo": "85bd7e37b2d62d1111badc82880c0aa5869ffd0b304d33b1f1fd19cb832c1225",
+        "nome": "Doxorrubicina + ifosfamida D1-D5 (neo/adjuvante)",
+        "id_original": "sarcomas-pm-ai-d1d5-periop-adjuvante",
+        "fonte_local_ref": "/tratamento/protocolos/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-7fcf1b7dd7aa92c5",
+        "origem_json_pointer": "/tratamento/protocolos/2",
+        "sha256_conteudo": "4f269b5bd0cb6e52a587ff061f6e991fcf416ba40d96bc6fddfab8c30c236e2e",
+        "nome": "Doxorrubicina + ifosfamida D1-D3 (neo/adjuvante)",
+        "id_original": "sarcomas-pm-ai-d1d3-periop-neoadjuvante",
+        "fonte_local_ref": "/tratamento/protocolos/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-0f0de37643fa3506",
+        "origem_json_pointer": "/tratamento/protocolos/3",
+        "sha256_conteudo": "59ee9d915af1095c6cd8c5a2a2b9cfbe2a395720b867596e3cdffc195dade8f9",
+        "nome": "Doxorrubicina + ifosfamida D1-D3 (neo/adjuvante)",
+        "id_original": "sarcomas-pm-ai-d1d3-periop-adjuvante",
+        "fonte_local_ref": "/tratamento/protocolos/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-23b3f48cd64e2ee6",
+        "origem_json_pointer": "/tratamento/protocolos/4",
+        "sha256_conteudo": "97c4490866e64b26e56362274c31d0d3429532a1a29c02fda7212253f1e01d25",
+        "nome": "Epirrubicina + ifosfamida (neo/adjuvante)",
+        "id_original": "sarcomas-pm-ei-periop-neoadjuvante",
+        "fonte_local_ref": "/tratamento/protocolos/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d779583d9569dc7f",
+        "origem_json_pointer": "/tratamento/protocolos/5",
+        "sha256_conteudo": "2449057de03256dd92ac2e26145f2ee291d61381c20fbac33d5b65ce5058b776",
+        "nome": "Epirrubicina + ifosfamida (neo/adjuvante)",
+        "id_original": "sarcomas-pm-ei-periop-adjuvante",
+        "fonte_local_ref": "/tratamento/protocolos/5/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ebb09f08a1cd13bb",
+        "origem_json_pointer": "/tratamento/protocolos/6",
+        "sha256_conteudo": "4b2e7cc07513b47a8b6a04a42bba4fbb1a400222cfc3a758ea1a46f17dafc5f3",
+        "nome": "Doxorrubicina + ifosfamida (paliativo)",
+        "id_original": "sarcomas-pm-ai-paliativo",
+        "fonte_local_ref": "/tratamento/protocolos/6/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-cefd8b5998a94941",
+        "origem_json_pointer": "/tratamento/protocolos/7",
+        "sha256_conteudo": "82e19b91d2f414e04c8889ef7a6354687aa46ffc4bf8371bd3d11e7170896eca",
+        "nome": "Doxorrubicina + dacarbazina",
+        "id_original": "sarcomas-pm-doxo-dtic",
+        "fonte_local_ref": "/tratamento/protocolos/7/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-843586db17388509",
+        "origem_json_pointer": "/tratamento/protocolos/8",
+        "sha256_conteudo": "0a4cd87bb25d7f3ac8cbc452c579593140fb366274042c54fc9ae1afbc0fa7e6",
+        "nome": "Doxorrubicina monoterapia",
+        "id_original": "sarcomas-pm-doxorrubicina",
+        "fonte_local_ref": "/tratamento/protocolos/8/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e33c07e28bcbddc3",
+        "origem_json_pointer": "/tratamento/protocolos/9",
+        "sha256_conteudo": "5bfd1630e2b91926727b3f4a0a04718d92803f59fea5b1850c5045b177652977",
+        "nome": "Doxorrubicina lipossomal",
+        "id_original": "sarcomas-pm-doxo-lipossomal",
+        "fonte_local_ref": "/tratamento/protocolos/9/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-282c87d44e35aeda",
+        "origem_json_pointer": "/tratamento/protocolos/10",
+        "sha256_conteudo": "d2996974beeeeaf2dde5dde2ea45eb85aac2ab2789e0b070100b6a3c6c2618b0",
+        "nome": "Ifosfamida monoterapia",
+        "id_original": "sarcomas-pm-ifosfamida",
+        "fonte_local_ref": "/tratamento/protocolos/10/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-9b30f327635d2a3b",
+        "origem_json_pointer": "/tratamento/protocolos/11",
+        "sha256_conteudo": "c925a9dee9cd5c75c2f239e7d7217c48f91ce65e6be1aa235c0776d82c9868b1",
+        "nome": "Gencitabina + docetaxel",
+        "id_original": "sarcomas-pm-gem-doce",
+        "fonte_local_ref": "/tratamento/protocolos/11/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-6fe6efc3fb35f618",
+        "origem_json_pointer": "/tratamento/protocolos/12",
+        "sha256_conteudo": "4a9fe34076f4e6706231010abd1bc04af8ca7995133a3e4922b3a5dc97345351",
+        "nome": "Pazopanibe",
+        "id_original": "sarcomas-pm-pazopanibe",
+        "fonte_local_ref": "/tratamento/protocolos/12/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-0010235f6928109b",
+        "origem_json_pointer": "/tratamento/protocolos/13",
+        "sha256_conteudo": "80bea0d759acec92aff965894c7bfa3d641eb9b4f4d0d21119d3a23008933def",
+        "nome": "Eribulina",
+        "id_original": "sarcomas-pm-eribulina",
+        "fonte_local_ref": "/tratamento/protocolos/13/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-2aa393b0c654dcb1",
+        "origem_json_pointer": "/tratamento/protocolos/14",
+        "sha256_conteudo": "a3afd5eb0706e2fc8bee4161bf6daff52343a366a30b550d74f5b36c284d3578",
+        "nome": "Dacarbazina monoterapia",
+        "id_original": "sarcomas-pm-dacarbazina",
+        "fonte_local_ref": "/tratamento/protocolos/14/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-dc887e9c9674f0fa",
+        "origem_json_pointer": "/tratamento/protocolos/15",
+        "sha256_conteudo": "dbd4d6ccb6c24b2618e45abd366b86d26773356b523b4cf745fcf25bd8e6ac49",
+        "nome": "Gencitabina (taxa fixa) + dacarbazina",
+        "id_original": "sarcomas-pm-gem-dtic",
+        "fonte_local_ref": "/tratamento/protocolos/15/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-14a008398d88bb18",
+        "origem_json_pointer": "/tratamento/protocolos/16",
+        "sha256_conteudo": "d638e2df5819bd632327b8e7a3acc356e74a2956b8e2b8c40c072aed5f1d1999",
+        "nome": "Trabectedina",
+        "id_original": "sarcomas-pm-trabectedina",
+        "fonte_local_ref": "/tratamento/protocolos/16/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-642488366c133197",
+        "origem_json_pointer": "/tratamento/protocolos/17",
+        "sha256_conteudo": "74cf3f5a1147fc1c61a4b227d699534f6c42675939348569cd852f1aedcccc45",
+        "nome": "Cisplatina + doxorrubicina (osteossarcoma >25 anos) — pré-operatório",
+        "id_original": "sarcomas-osteo-ap-neoadjuvante",
+        "fonte_local_ref": "/tratamento/protocolos/17/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-fbb33340ba0ce952",
+        "origem_json_pointer": "/tratamento/protocolos/18",
+        "sha256_conteudo": "adf8c96b1c3bca155a81970f9b5774f60490e45c1ae935aec459f3de3823edc4",
+        "nome": "Cisplatina + doxorrubicina (osteossarcoma >25 anos) — pós-operatório",
+        "id_original": "sarcomas-osteo-ap-adjuvante",
+        "fonte_local_ref": "/tratamento/protocolos/18/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-893b2f7950f23514",
+        "origem_json_pointer": "/tratamento/protocolos/19",
+        "sha256_conteudo": "e6c5c7e555c106943fdd4d41dce5d10d16f392c4615c98b7bd18532d106d82f4",
+        "nome": "Cisplatina + doxorrubicina — osteossarcoma metastático 1ª linha",
+        "id_original": "sarcomas-osteo-ap-metastatico",
+        "fonte_local_ref": "/tratamento/protocolos/19/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ecb34215e49f1076",
+        "origem_json_pointer": "/tratamento/protocolos/20",
+        "sha256_conteudo": "8dbffb351ffe412a84e5fa1dde5d320b48ea2d522e47388e476369b86ae5e6a8",
+        "nome": "MAP pré-operatório (osteossarcoma <25 anos)",
+        "id_original": "sarcomas-osteo-map-pre",
+        "fonte_local_ref": "/tratamento/protocolos/20/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-13973e273b43b7c0",
+        "origem_json_pointer": "/tratamento/protocolos/21",
+        "sha256_conteudo": "573bcf0b0ea0ee9d433747dbf02a27e7c8caa627498e9dbe39d2b8d2832a41fc",
+        "nome": "MAP pós-operatório (osteossarcoma <25 anos)",
+        "id_original": "sarcomas-osteo-map-pos",
+        "fonte_local_ref": "/tratamento/protocolos/21/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-1a8e96579097ce61",
+        "origem_json_pointer": "/tratamento/protocolos/22",
+        "sha256_conteudo": "4ade11d7413610ba2c5f3fc3167aa3901c328d16d68c03bce2fb8673eb5d3e69",
+        "nome": "Ifosfamida + etoposídeo (osteossarcoma recorrente)",
+        "id_original": "sarcomas-osteo-ie-recorrente",
+        "fonte_local_ref": "/tratamento/protocolos/22/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-204196c73fee491b",
+        "origem_json_pointer": "/tratamento/protocolos/23",
+        "sha256_conteudo": "fa78628f9192b7c7449a13e37cfa69f1d9366b7eb6224649e6879af0f9b721e9",
+        "nome": "Ifosfamida + etoposídeo + carboplatina (osteossarcoma recorrente)",
+        "id_original": "sarcomas-osteo-ice-recorrente",
+        "fonte_local_ref": "/tratamento/protocolos/23/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-1c7c4a079e3af1c3",
+        "origem_json_pointer": "/tratamento/protocolos/24",
+        "sha256_conteudo": "18c18067d0c03bd427b8f737f79f70331b0adca54a85ed5a3956d31cb0c9bd49",
+        "nome": "Gencitabina + docetaxel (osteossarcoma recorrente)",
+        "id_original": "sarcomas-osteo-gem-doce",
+        "fonte_local_ref": "/tratamento/protocolos/24/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-94e0f6aa376352b5",
+        "origem_json_pointer": "/tratamento/protocolos/25",
+        "sha256_conteudo": "93199b0a2b0dae5d0d120753d4dd5a58fb68ebab632fe720eaa0f41133e48a53",
+        "nome": "Pembrolizumabe (MSI-H/dMMR/TMB >10)",
+        "id_original": "sarcomas-osteo-pembrolizumabe",
+        "fonte_local_ref": "/tratamento/protocolos/25/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-3fd53cb14994289e",
+        "origem_json_pointer": "/tratamento/protocolos/26",
+        "sha256_conteudo": "3b4af7ec143fc3aa27ed76154a5f021606415af51c397688c86b348f2623936a",
+        "nome": "VDC (alternado com IE) — sarcoma de Ewing",
+        "id_original": "sarcomas-ewing-vdc",
+        "fonte_local_ref": "/tratamento/protocolos/26/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b968a17edf482686",
+        "origem_json_pointer": "/tratamento/protocolos/27",
+        "sha256_conteudo": "b35e3e9d2686d65f368db028c65995c73f667efcc1d43017575bd6bf3af0b373",
+        "nome": "IE (alternado com VDC) — sarcoma de Ewing",
+        "id_original": "sarcomas-ewing-ie",
+        "fonte_local_ref": "/tratamento/protocolos/27/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b75e55a51f4df8bd",
+        "origem_json_pointer": "/tratamento/protocolos/28",
+        "sha256_conteudo": "ceebcd42cda0684c5f8ecdfd4646e72e033298e42742e8fc922f7fe1617ba1f5",
+        "nome": "Ciclofosfamida + topotecano — Ewing recorrente",
+        "id_original": "sarcomas-ewing-ciclo-topo",
+        "fonte_local_ref": "/tratamento/protocolos/28/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-41f9220d5a6306d8",
+        "origem_json_pointer": "/tratamento/protocolos/29",
+        "sha256_conteudo": "31ed47287f52d37fd25c3303d37bd55ec2c20b65dd8d86756394958b1201bd09",
+        "nome": "Ifosfamida em altas doses — Ewing",
+        "id_original": "sarcomas-ewing-ifo-altas-doses",
+        "fonte_local_ref": "/tratamento/protocolos/29/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-13f0125c057cbe98",
+        "origem_json_pointer": "/tratamento/protocolos/30",
+        "sha256_conteudo": "198b20a108121c761fc7a7ce06df2b8490300d33b625cd3c533db0a963e33adb",
+        "nome": "Gencitabina + docetaxel — Ewing",
+        "id_original": "sarcomas-ewing-gem-doce",
+        "fonte_local_ref": "/tratamento/protocolos/30/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e8e5bf032f8690f7",
+        "origem_json_pointer": "/tratamento/protocolos/31",
+        "sha256_conteudo": "64a304b9735415cbce1799b4b6238d79912c32bca02d30352597a59b1664aca7",
+        "nome": "Larotrectinibe (fusão NTRK)",
+        "id_original": "sarcomas-pm-larotrectinibe",
+        "fonte_local_ref": "/tratamento/protocolos/31/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-37e660f04a89596e",
+        "origem_json_pointer": "/tratamento/protocolos/32",
+        "sha256_conteudo": "83a1f759a6816e92637722aef4fc8a479ebbb1d022fbd15cdd8ba49af8cda6ae",
+        "nome": "Imatinibe (dermatofibrossarcoma protuberans)",
+        "id_original": "sarcomas-dfsp-imatinibe",
+        "fonte_local_ref": "/tratamento/protocolos/32/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-13b48c4f6cb2076e",
+        "origem_json_pointer": "/tratamento/protocolos/33",
+        "sha256_conteudo": "2929db7f240f6c1ca2f7eb918970bb99a49ea9e819d3ec9792badf6993de02a4",
+        "nome": "Denosumabe (tumor de células gigantes ósseo)",
+        "id_original": "sarcomas-tcg-denosumabe",
+        "fonte_local_ref": "/tratamento/protocolos/33/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-386e917abc6494f9",
+        "origem_json_pointer": "/tratamento/protocolos/34",
+        "sha256_conteudo": "e65c02e95d7c25d16b1dbb25d57a04777cb0796737bfa6f2ee1c6f90edaca436",
+        "nome": "Regorafenibe",
+        "id_original": "sarcomas-osseo-regorafenibe",
+        "fonte_local_ref": "/tratamento/protocolos/34/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8142f72d3187027b",
+        "origem_json_pointer": "/tratamento/protocolos/35",
+        "sha256_conteudo": "ae67852c0dc98827088505c4e10ebdb3dce0bbca58313df691502acfdacef680",
+        "nome": "Imatinibe (off-label)",
+        "id_original": "sarcomas-cordoma-imatinibe-offlabel",
+        "fonte_local_ref": "/tratamento/protocolos/35/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-282d974b87803963",
+        "origem_json_pointer": "/tratamento/cirurgia/0",
+        "sha256_conteudo": "385f7492976a26e7af9bbaf37d3f41047deb88fa4fb03d54aac430ed690fc42f",
+        "nome": "/tratamento/cirurgia/0",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cirurgia/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-9af4e05d8e66700b",
+        "origem_json_pointer": "/tratamento/cirurgia/1",
+        "sha256_conteudo": "db5d6a30b980bf9b593cb8b065b10277084573f2fdb95bdb52fe589dd43c1a82",
+        "nome": "/tratamento/cirurgia/1",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cirurgia/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-7b788dc9aae5536b",
+        "origem_json_pointer": "/tratamento/cirurgia/2",
+        "sha256_conteudo": "7c133c7079d47f26112aae4a3f8e24ceef0172f9fbcbebfe1b3ae43b5e22710b",
+        "nome": "/tratamento/cirurgia/2",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cirurgia/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-1b88a2de5322b08a",
+        "origem_json_pointer": "/tratamento/cirurgia/3",
+        "sha256_conteudo": "83e3d6c139b90c92526a555208f2e1db1e207387b6e5b9dedbb933b6c07d5fbd",
+        "nome": "/tratamento/cirurgia/3",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cirurgia/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-5c7f4e52e26ad3fa",
+        "origem_json_pointer": "/tratamento/cirurgia/4",
+        "sha256_conteudo": "06762c2563e5cc186970763dc8bd8825edf507b1bc92874ed70c39737fbaa4d3",
+        "nome": "/tratamento/cirurgia/4",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cirurgia/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-c04b25b2bbe564a9",
+        "origem_json_pointer": "/tratamento/radioterapia/0",
+        "sha256_conteudo": "9f0b320c3e4053bbb04193c4ae9057baeca5c99c23a268cc457dffb67adf3c5e",
+        "nome": "Partes moles de membro — RT pré-operatória (alto grau, profundo, >5 cm)",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/radioterapia/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d289456263a00607",
+        "origem_json_pointer": "/tratamento/radioterapia/1",
+        "sha256_conteudo": "078ee2e954c35f67a0163727873ea62d7ad724db59e6aecdc07cb5e506e51ae4",
+        "nome": "Partes moles de membro — RT pós-operatória (margens negativas)",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/radioterapia/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-364aa5f33d4adf14",
+        "origem_json_pointer": "/tratamento/radioterapia/2",
+        "sha256_conteudo": "1581634ed037606a3c7946eed11910755ca5d58f92804d4c269e853ff96c3cc5",
+        "nome": "Retroperitônio — RT neoadjuvante (braço do ensaio STRASS; benefício não comprovado)",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/radioterapia/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-c449e3d0a4fb6ad1",
+        "origem_json_pointer": "/tratamento/radioterapia/3",
+        "sha256_conteudo": "e94bae9382069cc3e4a01aff5fcc50fcf6d92db996003b8b5036f5097b6a5d88",
+        "nome": "Ewing — RT adjuvante (volume >200 mL, má resposta, margens inadequadas)",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/radioterapia/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-7683184417565e66",
+        "origem_json_pointer": "/tratamento/radioterapia/4",
+        "sha256_conteudo": "5bffc20e4e0b8128baba6f812ee6553dbf9ed2c7e073934ec6851a3014a3a30f",
+        "nome": "Osteossarcoma irressecável / condrossarcoma de base de crânio / cordoma (altas doses)",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/radioterapia/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-9005584a7c69d684",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/0",
+        "sha256_conteudo": "b14c537ce3bdaf0ad229ac8b9bb582d08ff3fe72494166fe8fa00d877ce72cd7",
+        "nome": "/ligacoes/interacoesConsultar/0",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-6a9c42e4ed558bff",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/1",
+        "sha256_conteudo": "a51483ce55b69d7c6c2991027d581732b86bfeb820c66eb426db0fbe45bc6519",
+        "nome": "/ligacoes/interacoesConsultar/1",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-01a689ba7e69241d",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/2",
+        "sha256_conteudo": "302e5fe461d6a3499b2682f9923056f22c5d6d8a5a2450404c6bcf6486a0121e",
+        "nome": "/ligacoes/interacoesConsultar/2",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-275cdd8e09640165",
+        "origem_json_pointer": "/ligacoes/ctcaeAcao/0",
+        "sha256_conteudo": "9c8b5b4fac7c349db71cee4542077d3f977581ba7e494b8f5cd11d61a3ea06d3",
+        "nome": "/ligacoes/ctcaeAcao/0",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-607bea51134eb695",
+        "origem_json_pointer": "/ligacoes/ctcaeAcao/1",
+        "sha256_conteudo": "b32e10c02477fe8305a274c290ef644a3f4735ff889915677f2785d9cd0532ad",
+        "nome": "/ligacoes/ctcaeAcao/1",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d41b05aa3775b332",
+        "origem_json_pointer": "/ligacoes/ctcaeAcao/2",
+        "sha256_conteudo": "6dd0894c711378c17c6f73c1cd3c9f2aaedc2bf3f04e8d2ee163d567fd91c93c",
+        "nome": "/ligacoes/ctcaeAcao/2",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-2d4d25bcd1e900a0",
+        "origem_json_pointer": "/ligacoes/ctcaeAcao/3",
+        "sha256_conteudo": "d584469a000114c58dde29b00a01726fa17d1ac54eeea5f5e9e86230ae9a8e8a",
+        "nome": "/ligacoes/ctcaeAcao/3",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b0130187cd416719",
+        "origem_json_pointer": "/tratamento/suporte",
+        "sha256_conteudo": "a231d46712e085b5f80b5030781fdee97501d53e883eff3cef9520e2538d37bc",
+        "nome": "/tratamento/suporte",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/suporte/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b6a68b6b4d86a3e0",
+        "origem_json_pointer": "/ligacoes/suporteReceitas/0",
+        "sha256_conteudo": "75cf04c103d6c3ff58e59876cb6c062bb73df28bedff34f9888ef3257eedff03",
+        "nome": "G-CSF profilático nos esquemas indicados pela SBOC",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-7871b9d4c3b6e8a9",
+        "origem_json_pointer": "/ligacoes/suporteReceitas/1",
+        "sha256_conteudo": "c6f86d84d788c024688c06f858b1322d26d2ace6d5cdc2a540a5b47de1571a9a",
+        "nome": "mesna com ifosfamida",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-bea3eb5901a14d0e",
+        "origem_json_pointer": "/ligacoes/suporteReceitas/2",
+        "sha256_conteudo": "a8a8880572671705a1cace608ac6fb9ce7ccd6804cb2c7895d2f3d7a4971a2ae",
+        "nome": "leucovorina com MTX alta dose",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ebf4fa115756b48f",
+        "origem_json_pointer": "/tratamento/seguimento/0",
+        "sha256_conteudo": "c8cedb66c97c8cb9a6fd1bcfe87ea3b58d5443edb4065302339d299af1b72e7e",
+        "nome": "Partes moles estádio I",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/seguimento/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-2b82ae54407cd4e7",
+        "origem_json_pointer": "/tratamento/seguimento/1",
+        "sha256_conteudo": "e658b7bf2f52eee3b07c4221ff876a6b04dffcb1531afbf92a8625f8a9072bab",
+        "nome": "Partes moles estádios II e III",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/seguimento/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-70882d515611f17a",
+        "origem_json_pointer": "/tratamento/seguimento/2",
+        "sha256_conteudo": "457facf8793fb6cdba3cec430fd6794284a08f156811cd558b4195bc7edaad62",
+        "nome": "Ósseo alto grau",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/seguimento/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-451c5039da7e3bf4",
+        "origem_json_pointer": "/tratamento/seguimento/3",
+        "sha256_conteudo": "1f963003eb67db54bc6dbae3119fd5a5188222230c5576de72952f3775a54fd7",
+        "nome": "Ósseo baixo grau",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/seguimento/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-4777ca85298372f5",
+        "origem_json_pointer": "/ligacoes/orientacoes/0",
+        "sha256_conteudo": "447502270ccd12e7498056cbf86d83d5e99ccc3d6836712516d024df09a74707",
+        "nome": "tratamento em centro de referência em sarcoma",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-714f09ecc744ad62",
+        "origem_json_pointer": "/ligacoes/orientacoes/1",
+        "sha256_conteudo": "93c023b56fde53edd345faff090509a71088008f1a4ac3521084f295b7626ad9",
+        "nome": "fisioterapia/reabilitação pós-cirúrgica",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ddcdeee49fccf5f8",
+        "origem_json_pointer": "/ligacoes/orientacoes/2",
+        "sha256_conteudo": "ae4161a37500401d3b7a460974d8a19afd8d6585398bc45cd426a67698e0e68c",
+        "nome": "ecocardiograma basal com antraciclina",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-39b79a095ee2af1f",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/0",
+        "sha256_conteudo": "f974a43ba07d02e45412fa0c617c9c4150bae79b94d80ea778870212c8b6c8ea",
+        "nome": "centro de referência em sarcoma",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-da35098f724321ad",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/1",
+        "sha256_conteudo": "883ef2ebac25f0670117aa997203b4ecb6897a0b373f3e0429c498b90ca6c311",
+        "nome": "ortopedia oncológica",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-bbe50e0fbc307924",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/2",
+        "sha256_conteudo": "eb54fb8d77e530fb6faedf5bf1621ae02068135f31f3ec1f1351cbd5f307765b",
+        "nome": "radioterapia",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d55b6e3481e3e341",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/3",
+        "sha256_conteudo": "0d8a3d2fd631aa9371702240069d1b6ad322d5034754594d0853d6d38c33972e",
+        "nome": "oncogenética (Li-Fraumeni)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8ee1d796650d89af",
+        "origem_json_pointer": "/ligacoes/laudos/0",
+        "sha256_conteudo": "0810dac6f65332556b812fbfc1052742583cedd4d8eda4d34d4f85cc5ce4821c",
+        "nome": "APAC de quimioterapia (C40-C41, C49)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a60f00d2df3df91e",
+        "origem_json_pointer": "/ligacoes/laudos/1",
+        "sha256_conteudo": "5f44b0853a19e6aac2028f53008b6f2d83284f21473568e23f1a6df7c5bfc323",
+        "nome": "revisão de lâmina em centro de referência",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      }
+    ],
+    "itens_nccn": [
+      {
+        "item_id": "nccn-20261017-sarcomas-doxo-trab",
+        "nome": "Doxorrubicina + trabectedina — leiomiossarcoma",
+        "tipo": "OPCAO_TERAPEUTICA",
+        "dominio_principal": 6,
+        "conteudo_extraido": "Opção dependente de histologia e critérios próprios; conservar o conjunto legado de sarcomas.",
+        "aplicabilidade": {
+          "criterios": [
+            "Leiomiossarcoma avançado/metastático",
+            "Primeira linha"
+          ],
+          "paciente_individual": null,
+          "estado": "NAO_AVALIADA"
+        },
+        "dados_estruturados": {
+          "farmacos": [
+            "doxorrubicina",
+            "trabectedina"
+          ],
+          "posologia": {
+            "estado": "NAO_EXTRAIDA_NESTA_RODADA",
+            "valor": null,
+            "motivo": "A rodada incorpora o delta de indicação/cenário; não completa dose por inferência."
+          }
+        },
+        "fonte_refs": [
+          {
+            "fonte_id": "nccn-64df24710c23",
+            "paginas_pdf": [
+              59
+            ],
+            "secao": "SARC-G 1/14",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "pagina_pdf": 59,
+            "trecho": "Doxorubicin/Trabectedin (for LMS)14,15 • NTRK gene fusion-positive sarcomas only (regardless of soft"
+          }
+        ],
+        "evidencia_declarada": {
+          "sistema": "NCCN",
+          "categoria": null,
+          "estado": "NAO_EXTRAIDA_POR_ITEM"
+        },
+        "estado_extracao": "EXTRAIDO_COM_LIMITES_DECLARADOS",
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "temporalidade": {
+          "referencia": "CENARIO_DESCRITO",
+          "datas_individuais": null
+        },
+        "propor_automaticamente": false,
+        "disponivel_para_prescricao": false,
+        "acesso": {
+          "registro_anvisa": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "incorporacao_conitec": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "pcdt_ddt": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "sigtap_apac": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "cobertura_privada": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "disponibilidade_institucional": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          }
+        },
+        "alternativas_legadas_refs": [],
+        "relacoes_refs": [
+          "relacao-nccn-20261017-sarcomas-doxo-trab"
+        ],
+        "conflitos_refs": [],
+        "pendencias": [
+          "REVISAO_CLINICA_DO_DELTA",
+          "VERIFICAR_ACESSO_BRASILEIRO_POR_INDICACAO",
+          "POSOLOGIA_E_SUPORTE_NAO_COMPLETOS_NESTA_RODADA"
+        ]
+      },
+      {
+        "item_id": "nccn-20261017-sarcomas-afamitresgene",
+        "nome": "Afamitresgene autoleucel",
+        "tipo": "OPCAO_TERAPEUTICA",
+        "dominio_principal": 6,
+        "conteudo_extraido": "Opção dependente de histologia e critérios próprios; conservar o conjunto legado de sarcomas.",
+        "aplicabilidade": {
+          "criterios": [
+            "Sarcoma sinovial",
+            "HLA elegível e MAGE-A4 positivo",
+            "Linha subsequente"
+          ],
+          "paciente_individual": null,
+          "estado": "NAO_AVALIADA"
+        },
+        "dados_estruturados": {
+          "farmacos": [
+            "afamitresgene autoleucel"
+          ],
+          "posologia": {
+            "estado": "NAO_EXTRAIDA_NESTA_RODADA",
+            "valor": null,
+            "motivo": "A rodada incorpora o delta de indicação/cenário; não completa dose por inferência."
+          }
+        },
+        "fonte_refs": [
+          {
+            "fonte_id": "nccn-64df24710c23",
+            "paginas_pdf": [
+              59
+            ],
+            "secao": "SARC-G 1/14",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "pagina_pdf": 59,
+            "trecho": "Afamitresgene Autoleucel44 \u0017HLA-A*02:01P, HLA-A*02:02P, HLA-A*02:03P or HLA- A*02:06P positive and whose tumor"
+          }
+        ],
+        "evidencia_declarada": {
+          "sistema": "NCCN",
+          "categoria": null,
+          "estado": "NAO_EXTRAIDA_POR_ITEM"
+        },
+        "estado_extracao": "EXTRAIDO_COM_LIMITES_DECLARADOS",
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "temporalidade": {
+          "referencia": "CENARIO_DESCRITO",
+          "datas_individuais": null
+        },
+        "propor_automaticamente": false,
+        "disponivel_para_prescricao": false,
+        "acesso": {
+          "registro_anvisa": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "incorporacao_conitec": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "pcdt_ddt": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "sigtap_apac": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "cobertura_privada": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "disponibilidade_institucional": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          }
+        },
+        "alternativas_legadas_refs": [],
+        "relacoes_refs": [
+          "relacao-nccn-20261017-sarcomas-afamitresgene"
+        ],
+        "conflitos_refs": [],
+        "pendencias": [
+          "REVISAO_CLINICA_DO_DELTA",
+          "VERIFICAR_ACESSO_BRASILEIRO_POR_INDICACAO",
+          "POSOLOGIA_E_SUPORTE_NAO_COMPLETOS_NESTA_RODADA"
+        ]
+      },
+      {
+        "item_id": "nccn-20261017-sarcomas-nirogacestate",
+        "nome": "Nirogacestate — desmoide",
+        "tipo": "OPCAO_TERAPEUTICA",
+        "dominio_principal": 6,
+        "conteudo_extraido": "Opção dependente de histologia e critérios próprios; conservar o conjunto legado de sarcomas.",
+        "aplicabilidade": {
+          "criterios": [
+            "Tumor desmoide/fibromatose agressiva",
+            "Conferir necessidade de tratamento sistêmico"
+          ],
+          "paciente_individual": null,
+          "estado": "NAO_AVALIADA"
+        },
+        "dados_estruturados": {
+          "farmacos": [
+            "nirogacestate"
+          ],
+          "posologia": {
+            "estado": "NAO_EXTRAIDA_NESTA_RODADA",
+            "valor": null,
+            "motivo": "A rodada incorpora o delta de indicação/cenário; não completa dose por inferência."
+          }
+        },
+        "fonte_refs": [
+          {
+            "fonte_id": "nccn-64df24710c23",
+            "paginas_pdf": [
+              60
+            ],
+            "secao": "SARC-G 2/14",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "pagina_pdf": 60,
+            "trecho": "Nirogacestat (category 1)45 • Sorafenib (category 1)46 • Methotrexate/Vinorelbine47 • Methotrexate/Vinblastine48 •"
+          }
+        ],
+        "evidencia_declarada": {
+          "sistema": "NCCN",
+          "categoria": null,
+          "estado": "NAO_EXTRAIDA_POR_ITEM"
+        },
+        "estado_extracao": "EXTRAIDO_COM_LIMITES_DECLARADOS",
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "temporalidade": {
+          "referencia": "CENARIO_DESCRITO",
+          "datas_individuais": null
+        },
+        "propor_automaticamente": false,
+        "disponivel_para_prescricao": false,
+        "acesso": {
+          "registro_anvisa": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "incorporacao_conitec": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "pcdt_ddt": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "sigtap_apac": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "cobertura_privada": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "disponibilidade_institucional": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          }
+        },
+        "alternativas_legadas_refs": [],
+        "relacoes_refs": [
+          "relacao-nccn-20261017-sarcomas-nirogacestate"
+        ],
+        "conflitos_refs": [],
+        "pendencias": [
+          "REVISAO_CLINICA_DO_DELTA",
+          "VERIFICAR_ACESSO_BRASILEIRO_POR_INDICACAO",
+          "POSOLOGIA_E_SUPORTE_NAO_COMPLETOS_NESTA_RODADA"
+        ]
+      },
+      {
+        "item_id": "nccn-20261017-sarcomas-pexidartinibe",
+        "nome": "Pexidartinibe — tumor tenossinovial de células gigantes",
+        "tipo": "OPCAO_TERAPEUTICA",
+        "dominio_principal": 6,
+        "conteudo_extraido": "Opção dependente de histologia e critérios próprios; conservar o conjunto legado de sarcomas.",
+        "aplicabilidade": {
+          "criterios": [
+            "Tumor tenossinovial de células gigantes",
+            "Não confundir com tumor de células gigantes ósseo"
+          ],
+          "paciente_individual": null,
+          "estado": "NAO_AVALIADA"
+        },
+        "dados_estruturados": {
+          "farmacos": [
+            "pexidartinibe"
+          ],
+          "posologia": {
+            "estado": "NAO_EXTRAIDA_NESTA_RODADA",
+            "valor": null,
+            "motivo": "A rodada incorpora o delta de indicação/cenário; não completa dose por inferência."
+          }
+        },
+        "fonte_refs": [
+          {
+            "fonte_id": "nccn-64df24710c23",
+            "paginas_pdf": [
+              64
+            ],
+            "secao": "SARC-G 6/14",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "pagina_pdf": 64,
+            "trecho": "Pexidartinib109 (category 1) • Vimseltinib110 (category 1) Useful in certain circumstances •"
+          }
+        ],
+        "evidencia_declarada": {
+          "sistema": "NCCN",
+          "categoria": null,
+          "estado": "NAO_EXTRAIDA_POR_ITEM"
+        },
+        "estado_extracao": "EXTRAIDO_COM_LIMITES_DECLARADOS",
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "temporalidade": {
+          "referencia": "CENARIO_DESCRITO",
+          "datas_individuais": null
+        },
+        "propor_automaticamente": false,
+        "disponivel_para_prescricao": false,
+        "acesso": {
+          "registro_anvisa": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "incorporacao_conitec": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "pcdt_ddt": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "sigtap_apac": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "cobertura_privada": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "disponibilidade_institucional": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          }
+        },
+        "alternativas_legadas_refs": [],
+        "relacoes_refs": [
+          "relacao-nccn-20261017-sarcomas-pexidartinibe"
+        ],
+        "conflitos_refs": [],
+        "pendencias": [
+          "REVISAO_CLINICA_DO_DELTA",
+          "VERIFICAR_ACESSO_BRASILEIRO_POR_INDICACAO",
+          "POSOLOGIA_E_SUPORTE_NAO_COMPLETOS_NESTA_RODADA"
+        ]
+      },
+      {
+        "item_id": "nccn-20261017-sarcomas-vimseltinibe",
+        "nome": "Vimseltinibe — tumor tenossinovial de células gigantes",
+        "tipo": "OPCAO_TERAPEUTICA",
+        "dominio_principal": 6,
+        "conteudo_extraido": "Opção dependente de histologia e critérios próprios; conservar o conjunto legado de sarcomas.",
+        "aplicabilidade": {
+          "criterios": [
+            "Tumor tenossinovial de células gigantes",
+            "Não confundir com tumor de células gigantes ósseo"
+          ],
+          "paciente_individual": null,
+          "estado": "NAO_AVALIADA"
+        },
+        "dados_estruturados": {
+          "farmacos": [
+            "vimseltinibe"
+          ],
+          "posologia": {
+            "estado": "NAO_EXTRAIDA_NESTA_RODADA",
+            "valor": null,
+            "motivo": "A rodada incorpora o delta de indicação/cenário; não completa dose por inferência."
+          }
+        },
+        "fonte_refs": [
+          {
+            "fonte_id": "nccn-64df24710c23",
+            "paginas_pdf": [
+              64
+            ],
+            "secao": "SARC-G 6/14",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "pagina_pdf": 64,
+            "trecho": "Vimseltinib110 (category 1) Useful in certain circumstances • Imatinib111 • Nilotinib112 Preferred"
+          }
+        ],
+        "evidencia_declarada": {
+          "sistema": "NCCN",
+          "categoria": null,
+          "estado": "NAO_EXTRAIDA_POR_ITEM"
+        },
+        "estado_extracao": "EXTRAIDO_COM_LIMITES_DECLARADOS",
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "temporalidade": {
+          "referencia": "CENARIO_DESCRITO",
+          "datas_individuais": null
+        },
+        "propor_automaticamente": false,
+        "disponivel_para_prescricao": false,
+        "acesso": {
+          "registro_anvisa": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "incorporacao_conitec": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "pcdt_ddt": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "sigtap_apac": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "cobertura_privada": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "disponibilidade_institucional": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          }
+        },
+        "alternativas_legadas_refs": [],
+        "relacoes_refs": [
+          "relacao-nccn-20261017-sarcomas-vimseltinibe"
+        ],
+        "conflitos_refs": [],
+        "pendencias": [
+          "REVISAO_CLINICA_DO_DELTA",
+          "VERIFICAR_ACESSO_BRASILEIRO_POR_INDICACAO",
+          "POSOLOGIA_E_SUPORTE_NAO_COMPLETOS_NESTA_RODADA"
+        ]
+      },
+      {
+        "item_id": "nccn-20261017-sarcomas-ivosidenibe",
+        "nome": "Ivosidenibe — condrossarcoma IDH1",
+        "tipo": "OPCAO_TERAPEUTICA",
+        "dominio_principal": 6,
+        "conteudo_extraido": "Ivosidenibe em Useful in Certain Circumstances para mutações IDH1 suscetíveis: condrossarcoma metastático/disseminado, convencional graus1–3 e desdiferenciado. Não está listado no ramo mesenquimal dessa tabela.",
+        "aplicabilidade": {
+          "criterios": [
+            "Condrossarcoma com IDH1 suscetível",
+            "Subtipo convencional G1–3, desdiferenciado ou ramo metastático/disseminado descrito",
+            "Não extrapolar ao mesenquimal"
+          ],
+          "paciente_individual": null,
+          "estado": "NAO_AVALIADA"
+        },
+        "dados_estruturados": {
+          "farmacos": [
+            "ivosidenibe"
+          ],
+          "posologia": {
+            "estado": "NAO_EXTRAIDA_NESTA_RODADA",
+            "valor": null,
+            "motivo": "A rodada incorpora o delta de indicação/cenário; não completa dose por inferência."
+          }
+        },
+        "fonte_refs": [
+          {
+            "fonte_id": "nccn-050df3d06ca3",
+            "edicao": "1.2027",
+            "pagina_pdf": 25,
+            "paginas_pdf": [
+              25
+            ],
+            "secao": "BONE-B 1/8",
+            "trecho": "Ivosidenib",
+            "ancora_contextual": null,
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "9e812eeda404d67a6c8b2eb9c7f10832dca53e8784516003108c6d62d801db04"
+          }
+        ],
+        "evidencia_declarada": {
+          "sistema": "NCCN",
+          "categoria": "2A por cabeçalho",
+          "preferencia": "Useful in Certain Circumstances",
+          "estado": "CONFERIDA_DOCUMENTALMENTE_A_CONFERIR_CLINICAMENTE",
+          "nota": "Categoria 2A sem marca local somente quando expressamente coberta pelo cabeçalho; múltiplas categorias permanecem nos ramos."
+        },
+        "estado_extracao": "EXTRAIDO_COM_LIMITES_DECLARADOS",
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "temporalidade": {
+          "referencia": "CENARIO_DESCRITO",
+          "datas_individuais": null
+        },
+        "propor_automaticamente": false,
+        "disponivel_para_prescricao": false,
+        "acesso": {
+          "registro_anvisa": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "incorporacao_conitec": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "pcdt_ddt": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "sigtap_apac": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "cobertura_privada": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "disponibilidade_institucional": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          }
+        },
+        "alternativas_legadas_refs": [],
+        "relacoes_refs": [
+          "relacao-nccn-20261017-sarcomas-ivosidenibe"
+        ],
+        "conflitos_refs": [],
+        "pendencias": [
+          "REVISAO_CLINICA_DO_DELTA",
+          "VERIFICAR_ACESSO_BRASILEIRO_POR_INDICACAO",
+          "POSOLOGIA_E_SUPORTE_NAO_COMPLETOS_NESTA_RODADA"
+        ],
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-2-correcao-auditoria",
+            "correcao_id": "M34",
+            "anterior": {
+              "conteudo_extraido": "Opção em mutações IDH1 suscetíveis nos ramos de condrossarcoma descritos; não extrapolar para todos os sarcomas ósseos.",
+              "fonte_refs": [
+                {
+                  "fonte_id": "nccn-050df3d06ca3",
+                  "paginas_pdf": [
+                    8,
+                    9,
+                    25
+                  ],
+                  "secao": "CHON; BONE-B",
+                  "natureza": "EXTRACAO_DOCUMENTAL",
+                  "pagina_pdf": 8,
+                  "trecho": "ivosidenib is an option for susceptible IDH1 mutations. See Systemic Therapy Agents"
+                }
+              ],
+              "estado_curadoria": "A_CONFERIR",
+              "aprovacao_clinica": null,
+              "aplicabilidade": {
+                "criterios": [
+                  "Condrossarcoma",
+                  "Mutação IDH1 suscetível",
+                  "Conferir subtipo e extensão"
+                ],
+                "paciente_individual": null,
+                "estado": "NAO_AVALIADA"
+              },
+              "evidencia_declarada": {
+                "sistema": "NCCN",
+                "categoria": null,
+                "estado": "NAO_EXTRAIDA_POR_ITEM"
+              }
+            },
+            "motivo": "Correção documental após auditoria Claude e conferência da fonte; não apaga versão anterior.",
+            "aprovacao_clinica": null
+          }
+        ],
+        "fontes_por_campo": {
+          "conteudo_extraido": [
+            {
+              "fonte_id": "nccn-050df3d06ca3",
+              "edicao": "1.2027",
+              "pagina_pdf": 25,
+              "paginas_pdf": [
+                25
+              ],
+              "secao": "BONE-B 1/8",
+              "trecho": "Ivosidenib",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "9e812eeda404d67a6c8b2eb9c7f10832dca53e8784516003108c6d62d801db04"
+            }
+          ],
+          "aplicabilidade": [
+            {
+              "fonte_id": "nccn-050df3d06ca3",
+              "edicao": "1.2027",
+              "pagina_pdf": 25,
+              "paginas_pdf": [
+                25
+              ],
+              "secao": "BONE-B 1/8",
+              "trecho": "Ivosidenib",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "9e812eeda404d67a6c8b2eb9c7f10832dca53e8784516003108c6d62d801db04"
+            }
+          ],
+          "evidencia_declarada": [
+            {
+              "fonte_id": "nccn-050df3d06ca3",
+              "edicao": "1.2027",
+              "pagina_pdf": 25,
+              "paginas_pdf": [
+                25
+              ],
+              "secao": "BONE-B 1/8",
+              "trecho": "Ivosidenib",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "9e812eeda404d67a6c8b2eb9c7f10832dca53e8784516003108c6d62d801db04"
+            }
+          ]
+        },
+        "correcoes_auditoria": [
+          {
+            "id": "M34",
+            "revisao": "2026-10-17-nccn-delta-2-correcao-auditoria",
+            "estado": "APLICADA_COM_CONFERENCIA_DOCUMENTAL",
+            "fontes": [
+              {
+                "fonte_id": "nccn-050df3d06ca3",
+                "edicao": "1.2027",
+                "pagina_pdf": 25,
+                "paginas_pdf": [
+                  25
+                ],
+                "secao": "BONE-B 1/8",
+                "trecho": "Ivosidenib",
+                "ancora_contextual": null,
+                "natureza": "EXTRACAO_DOCUMENTAL",
+                "sha256_pdf": "9e812eeda404d67a6c8b2eb9c7f10832dca53e8784516003108c6d62d801db04"
+              }
+            ],
+            "ajuste_ao_parecer": null
+          }
+        ]
+      }
+    ],
+    "cenarios": {
+      "identidade_ref": "/identidade/cenarios",
+      "detalhamento_ref": "/tratamento/cenarios",
+      "novas_condicoes_refs": [
+        "nccn-20261017-sarcomas-doxo-trab",
+        "nccn-20261017-sarcomas-afamitresgene",
+        "nccn-20261017-sarcomas-nirogacestate",
+        "nccn-20261017-sarcomas-pexidartinibe",
+        "nccn-20261017-sarcomas-vimseltinibe",
+        "nccn-20261017-sarcomas-ivosidenibe"
+      ],
+      "regra": "Não igualar automaticamente as duas listas nem selecionar cenário individual nesta camada."
+    },
+    "fontes": [
+      {
+        "id": "nccn-64df24710c23",
+        "arquivo_local": "C:\\Users\\silas\\.aside\\u\\0\\sessions\\2026-10-17_LutNNwUyDZGlA1pF\\artifacts\\nccn\\Soft Tissue Sarcoma.pdf",
+        "nome": "Soft Tissue Sarcoma",
+        "sha256": "10ff2574473a0a6fdb1e11a8fe83a662b960884107cc22891409ad9e0262ab10",
+        "numero_paginas": 144,
+        "versao_declarada": "5.2026",
+        "origem": "ARQUIVO_LOCAL_FORNECIDO",
+        "autenticidade_externa": "NAO_VERIFICADA_NO_PORTAL",
+        "paginas_examinadas": [
+          59,
+          60,
+          64
+        ]
+      },
+      {
+        "id": "nccn-050df3d06ca3",
+        "arquivo_local": "C:\\Users\\silas\\.aside\\u\\0\\sessions\\2026-10-17_LutNNwUyDZGlA1pF\\artifacts\\nccn\\Bone Cancer.pdf",
+        "nome": "Bone Cancer",
+        "sha256": "9e812eeda404d67a6c8b2eb9c7f10832dca53e8784516003108c6d62d801db04",
+        "numero_paginas": 129,
+        "versao_declarada": "1.2027",
+        "origem": "ARQUIVO_LOCAL_FORNECIDO",
+        "autenticidade_externa": "NAO_VERIFICADA_NO_PORTAL",
+        "paginas_examinadas": [
+          8,
+          9,
+          25
+        ]
+      }
+    ],
+    "fontes_legadas_refs": [
+      "/header/fonte",
+      "/curadoria/fontesLidas"
+    ],
+    "ensaios": {
+      "legado_ref": "/tratamento/ensaios",
+      "novos_nct": [],
+      "nota": "Nenhum identificador NCT foi inventado ou verificado nesta rodada."
+    },
+    "relacoes": [
+      {
+        "relacao_id": "relacao-nccn-20261017-sarcomas-doxo-trab",
+        "tipo": "CONDICOES_PARA_APRESENTACAO_DOCUMENTAL",
+        "destino_item_ref": "nccn-20261017-sarcomas-doxo-trab",
+        "criterios_extraidos": [
+          "Leiomiossarcoma avançado/metastático",
+          "Primeira linha"
+        ],
+        "origem_condicoes": "FONTE_NCCN_CITADA",
+        "origem_mapeamento": "PROPOSTA_DE_MAPEAMENTO",
+        "executavel": false,
+        "estado": "A_CONFERIR",
+        "dados_ausentes": "MANTER_INDETERMINADO",
+        "dados_conflitantes": "MANTER_CONFLITO",
+        "efeito": "APRESENTAR_CONTEUDO_PARA_REVISAO; NAO PRESCREVER"
+      },
+      {
+        "relacao_id": "relacao-nccn-20261017-sarcomas-afamitresgene",
+        "tipo": "CONDICOES_PARA_APRESENTACAO_DOCUMENTAL",
+        "destino_item_ref": "nccn-20261017-sarcomas-afamitresgene",
+        "criterios_extraidos": [
+          "Sarcoma sinovial",
+          "HLA elegível e MAGE-A4 positivo",
+          "Linha subsequente"
+        ],
+        "origem_condicoes": "FONTE_NCCN_CITADA",
+        "origem_mapeamento": "PROPOSTA_DE_MAPEAMENTO",
+        "executavel": false,
+        "estado": "A_CONFERIR",
+        "dados_ausentes": "MANTER_INDETERMINADO",
+        "dados_conflitantes": "MANTER_CONFLITO",
+        "efeito": "APRESENTAR_CONTEUDO_PARA_REVISAO; NAO PRESCREVER"
+      },
+      {
+        "relacao_id": "relacao-nccn-20261017-sarcomas-nirogacestate",
+        "tipo": "CONDICOES_PARA_APRESENTACAO_DOCUMENTAL",
+        "destino_item_ref": "nccn-20261017-sarcomas-nirogacestate",
+        "criterios_extraidos": [
+          "Tumor desmoide/fibromatose agressiva",
+          "Conferir necessidade de tratamento sistêmico"
+        ],
+        "origem_condicoes": "FONTE_NCCN_CITADA",
+        "origem_mapeamento": "PROPOSTA_DE_MAPEAMENTO",
+        "executavel": false,
+        "estado": "A_CONFERIR",
+        "dados_ausentes": "MANTER_INDETERMINADO",
+        "dados_conflitantes": "MANTER_CONFLITO",
+        "efeito": "APRESENTAR_CONTEUDO_PARA_REVISAO; NAO PRESCREVER"
+      },
+      {
+        "relacao_id": "relacao-nccn-20261017-sarcomas-pexidartinibe",
+        "tipo": "CONDICOES_PARA_APRESENTACAO_DOCUMENTAL",
+        "destino_item_ref": "nccn-20261017-sarcomas-pexidartinibe",
+        "criterios_extraidos": [
+          "Tumor tenossinovial de células gigantes",
+          "Não confundir com tumor de células gigantes ósseo"
+        ],
+        "origem_condicoes": "FONTE_NCCN_CITADA",
+        "origem_mapeamento": "PROPOSTA_DE_MAPEAMENTO",
+        "executavel": false,
+        "estado": "A_CONFERIR",
+        "dados_ausentes": "MANTER_INDETERMINADO",
+        "dados_conflitantes": "MANTER_CONFLITO",
+        "efeito": "APRESENTAR_CONTEUDO_PARA_REVISAO; NAO PRESCREVER"
+      },
+      {
+        "relacao_id": "relacao-nccn-20261017-sarcomas-vimseltinibe",
+        "tipo": "CONDICOES_PARA_APRESENTACAO_DOCUMENTAL",
+        "destino_item_ref": "nccn-20261017-sarcomas-vimseltinibe",
+        "criterios_extraidos": [
+          "Tumor tenossinovial de células gigantes",
+          "Não confundir com tumor de células gigantes ósseo"
+        ],
+        "origem_condicoes": "FONTE_NCCN_CITADA",
+        "origem_mapeamento": "PROPOSTA_DE_MAPEAMENTO",
+        "executavel": false,
+        "estado": "A_CONFERIR",
+        "dados_ausentes": "MANTER_INDETERMINADO",
+        "dados_conflitantes": "MANTER_CONFLITO",
+        "efeito": "APRESENTAR_CONTEUDO_PARA_REVISAO; NAO PRESCREVER"
+      },
+      {
+        "relacao_id": "relacao-nccn-20261017-sarcomas-ivosidenibe",
+        "tipo": "CONDICOES_PARA_APRESENTACAO_DOCUMENTAL",
+        "destino_item_ref": "nccn-20261017-sarcomas-ivosidenibe",
+        "criterios_extraidos": [
+          "Condrossarcoma com IDH1 suscetível",
+          "Subtipo convencional G1–3, desdiferenciado ou ramo metastático/disseminado descrito",
+          "Não extrapolar ao mesenquimal"
+        ],
+        "origem_condicoes": "FONTE_NCCN_CITADA",
+        "origem_mapeamento": "PROPOSTA_DE_MAPEAMENTO",
+        "executavel": false,
+        "estado": "A_CONFERIR",
+        "dados_ausentes": "MANTER_INDETERMINADO",
+        "dados_conflitantes": "MANTER_CONFLITO",
+        "efeito": "APRESENTAR_CONTEUDO_PARA_REVISAO; NAO PRESCREVER",
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-2-correcao-auditoria",
+            "correcao_id": "M34",
+            "criterios_extraidos": [
+              "Condrossarcoma",
+              "Mutação IDH1 suscetível",
+              "Conferir subtipo e extensão"
+            ]
+          }
+        ],
+        "fontes_por_campo": {
+          "criterios_extraidos": [
+            {
+              "fonte_id": "nccn-050df3d06ca3",
+              "edicao": "1.2027",
+              "pagina_pdf": 25,
+              "paginas_pdf": [
+                25
+              ],
+              "secao": "BONE-B 1/8",
+              "trecho": "Ivosidenib",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "9e812eeda404d67a6c8b2eb9c7f10832dca53e8784516003108c6d62d801db04"
+            }
+          ]
+        }
+      }
+    ],
+    "conflitos": [],
+    "conflitos_legados_ref": "/conflitos",
+    "pendencias": [
+      {
+        "id": "revisao-clinica",
+        "estado": "ABERTA",
+        "descricao": "Conferir cada acréscimo, condições, fontes, doses, interações e suporte antes de uso clínico."
+      },
+      {
+        "id": "acesso-brasileiro",
+        "estado": "ABERTA",
+        "descricao": "NCCN não comprova Anvisa, Conitec, PCDT/DDT, SIGTAP/APAC, cobertura privada ou acesso institucional."
+      },
+      {
+        "id": "cobertura-nccn",
+        "estado": "PARCIAL_POR_DELTA",
+        "descricao": "Leitura dirigida das páginas citadas; não há alegação de extração integral da diretriz."
+      }
+    ],
+    "pendencias_legadas_ref": "/pendencias",
+    "itens_adicionais_a_classificar": [
+      {
+        "origem_ref": "/header",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/status",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/consultavel",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/alerta",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/substitui",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/identidade",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/pendencias",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/conflitos",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/curadoria",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/correcoes",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      }
+    ],
+    "mapa_de_cobertura": [
+      {
+        "origem_json_pointer": "/header",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "560c63ff5b9cddc72d84c5aa9dcc3fa91196eb08a5825046cc40695b2c234c3a",
+        "valores_folha": 9
+      },
+      {
+        "origem_json_pointer": "/status",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "04635ca3844c66b19ebbf49bf9ff60fe851d6ce89597d23e6a970f1dc3927289",
+        "valores_folha": 1
+      },
+      {
+        "origem_json_pointer": "/consultavel",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b",
+        "valores_folha": 1
+      },
+      {
+        "origem_json_pointer": "/alerta",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "valores_folha": 1
+      },
+      {
+        "origem_json_pointer": "/substitui",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "valores_folha": 1
+      },
+      {
+        "origem_json_pointer": "/identidade",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "e1bf6f5302910900548932619318811d6a83f633112e8a76ab9007140956cc39",
+        "valores_folha": 18
+      },
+      {
+        "origem_json_pointer": "/diagnostico",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "eb2e43552d6dd51bb9ed1c4ab76a9cfcba476cf18dbe700f76277e4e748bc81d",
+        "valores_folha": 246
+      },
+      {
+        "origem_json_pointer": "/estadiamento",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "eb58e0d4ea6ac248a53434a6b5b7d844f925f417202f45286b4ff3c9b07ae173",
+        "valores_folha": 91
+      },
+      {
+        "origem_json_pointer": "/tratamento",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "317213930120aa921e098b5eb4a6a089e3f2a87264e90a432f3ba760019b28d4",
+        "valores_folha": 1454
+      },
+      {
+        "origem_json_pointer": "/ligacoes",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "bb854cb9e863d2d93497ad405a5e486dd42fb7ff03ff64a3dad80fd5cf7d5017",
+        "valores_folha": 84
+      },
+      {
+        "origem_json_pointer": "/pendencias",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "10ca6de075c2d570acd5f2f88ce13e52c03b4f62aff02289ec09e3218cacc871",
+        "valores_folha": 44
+      },
+      {
+        "origem_json_pointer": "/conflitos",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "76fbc213112eaf5938dccf6cf1c1f6f028cab06df369b292cef5f7ed281aed6f",
+        "valores_folha": 61
+      },
+      {
+        "origem_json_pointer": "/curadoria",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "d77b3bba304037ea1543a7ded8cb73c81ede26436dcbbf79ef17cf0fcc5c2b8d",
+        "valores_folha": 20
+      },
+      {
+        "origem_json_pointer": "/correcoes",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "9f61de0d1ecb0ddec3a5aee62f2d89e51908ad700452cc6771de66545b6aa556",
+        "valores_folha": 40
+      }
+    ],
+    "reconciliacao_com_versao_anterior": {
+      "modo": "ADITIVO",
+      "originais_removidos": 0,
+      "originais_alterados": 0,
+      "contagens_preservadas": {
+        "protocolos": 36,
+        "ensaios": 3,
+        "cenarios_identidade": 10,
+        "cenarios_tratamento": 6,
+        "seguimento": 4,
+        "conflitos": 3,
+        "pendencias": 6
+      }
+    },
+    "relatorio_de_completude": {
+      "estado": "INCOMPLETA_PARA_DIRETRIZ_INTEGRAL",
+      "preservacao_legado": "INTEGRAL",
+      "delta_itens": 6,
+      "normalizacao_legado": "INDEXACAO_POR_REFERENCIA; NAO REEXTRACAO CLINICA",
+      "posologias": "SOMENTE AS EXPLICITAMENTE EXTRAIDAS; RESTANTES PENDENTES",
+      "sem_fato_paciente": true,
+      "sem_aprovacao_inferida": true
+    },
+    "revisoes_auditoria": [
+      {
+        "revisao": "2026-10-17-nccn-delta-2-correcao-auditoria",
+        "correcoes": [
+          "M34"
+        ],
+        "legado_modificado": false,
+        "aprovacao_clinica": null,
+        "nota": "Correções conferidas nos PDFs; a auditoria Claude foi amostral. Os 33 itens não auditados não foram promovidos a revisados."
+      }
+    ]
+  }
 }
