@@ -169,7 +169,7 @@ F({ tumor: "Não informado (ficha institucional)", nome: "LV5FU2 — 5-FU + foli
 
 // ===== CUP (D-F1-36/49) =====
 const CUP = "Primário desconhecido (CUP)";
-F({ tumor: CUP, nome: "Cisplatina + Docetaxel", cenario: NE, intervalo: 21, ciclos: null,
+F({ tumor: CUP, nome: "Cisplatina + Docetaxel", cenario: NE, intervalo: 21, ciclos: 8,
   identidade: "CUP metastático, 1ª linha (D-F1-36); variante preparada: Greco 2000 75/75 q3sem",
   fontesItens: { Docetaxel: { sourceIds: ["EXT-CUP-001"] }, Cisplatina: { sourceIds: ["EXT-CUP-001"] } },
   divergencias: ["Greco 2000: docetaxel 75 + cisplatina 75 q3sem (n=26, máx 8 ciclos, toxicidade GI substancial)", "Mukai 2010: docetaxel 60 (1 h, antes) + cisplatina 80 (2 h) q3sem (n=45, ORR 65%)"],
@@ -191,7 +191,7 @@ F({ tumor: CUP, nome: "Carboplatina + Paclitaxel 21/21 dias", cenario: NE, inter
     qt("Carboplatina", 6, "auc", D(1), { t: "60 min", obs: "Calvert AUC 6 (GFR cap 125). Variante SOnHe: AUC 5 [decisão pendente]." }),
   ] });
 
-F({ tumor: CUP, nome: "Docetaxel + Gemcitabina", cenario: NE, intervalo: 21, ciclos: null, premedDias: D(1, 8),
+F({ tumor: CUP, nome: "Docetaxel + Gemcitabina", cenario: NE, intervalo: 21, ciclos: 6, premedDias: D(1, 8),
   identidade: "CUP, 1ª linha (D-F1-36); variante preparada: Pouessel 2004 (gem D1/D8 + doc D8)",
   fontesItens: { Gemcitabina: { sourceIds: ["EXT-CUP-009"] }, Docetaxel: { sourceIds: ["EXT-CUP-009"] } },
   divergencias: ["Pouessel 2004 (Cancer): gemcitabina 1.000 mg/m² D1 e D8 (30 min) + docetaxel 75 mg/m² D8 (1 h); q3sem, máx 6 — corrige o mapa local (que estimava 75/900 ou 60/800 e atribuía a Hainsworth)"],
@@ -309,7 +309,7 @@ F({ tumor: VUL, nome: "Cisplatina semanal + RxT (vulva)", cenario: "concomitante
     CIS(40, D(1), { obs: "eviQ 1529: 40 mg/m² semanal no dia de RT (antes), 5–6 ciclos. GOCXCRT: 500 mL + manitol 30 g + MgSO4 2 g em 60 min." }),
   ] });
 
-F({ tumor: VUL, nome: "Carboplatina + Paclitaxel 21/21 dias (vulva)", cenario: NE, intervalo: 21, ciclos: null,
+F({ tumor: VUL, nome: "Carboplatina + Paclitaxel 21/21 dias (vulva)", cenario: NE, intervalo: 21, ciclos: 6,
   identidade: "CEC/adenocarcinoma de vulva recorrente ou avançado, inelegível a quimiorradioterapia (GOCXCAT inclui vulva)",
   fontesItens: { Paclitaxel: { sourceIds: ["EXT-CNV-024"] }, Carboplatina: { sourceIds: ["EXT-CNV-024"] } },
   divergencias: ["GOCXCAT: paclitaxel 175 em 3 h + AUC 6 (AUC 5 se RT prévia extensa); q21/28d, máx 6", "SOnHe p. 89/91 (local): AUC 5 + 175 — variante [decisão pendente]", "infusão do paclitaxel: 3 h em TODAS as fontes (24 h NAO_LOCALIZADO)"],
@@ -333,7 +333,7 @@ F({ tumor: CEC, nome: "Cemiplimabe", cenario: "localmente avançado/metastático
     it("Soro fisiológico 0,9% 50 mL (flush pós-infusão)", "POS_QT", 1, "fr", "EV", D(1), { vol: 50, obs: "eviQ 4151: flush de 50 mL de SF 0,9% ao término." }),
   ] });
 
-F({ tumor: CEC, nome: "Carboplatina + Paclitaxel 21/21 dias (CEC de pele)", cenario: NE, intervalo: 21, ciclos: null,
+F({ tumor: CEC, nome: "Carboplatina + Paclitaxel 21/21 dias (CEC de pele)", cenario: NE, intervalo: 21, ciclos: 6,
   identidade: "CEC cutâneo avançado — EXTRAPOLAÇÃO explícita de CECP recorrente/metastático (eviQ 3579)",
   fontesItens: { Paclitaxel: { sourceIds: ["EXT-CNV-008"] }, Carboplatina: { sourceIds: ["EXT-CNV-008"] } },
   divergencias: ["população do protocolo é CECP de cabeça e pescoço — extrapolação para CEC cutâneo declarada, não transcrição", "cisplatina 100 q21d monoterapia: NAO_LOCALIZADO como protocolo operacional (eviQ 288 reduz a 75 em combinação; BC HNAVP usa 25 ×2)"],

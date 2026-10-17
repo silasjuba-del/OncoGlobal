@@ -20,8 +20,8 @@ const AGORA = '2026-10-14T12:00:00Z';
 it('não atribui o arquivo inteiro à primeira fonte: exige e respeita a seção mapeada', async () => {
   const caminho = 'corpus/1-exames/labs/composto.json';
   const root = criarRoot({ [caminho]: painel('composto', { painels: [
-    {classe:'pemetrexede', fonte:{referencia:'Fonte A', trecho:'trecho A', edicao:'2026-10-11'}},
-    {classe:'anti-HER2', fonte:{referencia:'Fonte B', trecho:'trecho B', edicao:'2026-10-11'}},
+    {classe:'pemetrexede', fonte:{referencia:'Fonte A', trecho:'trecho A', edicao:'2026-10-11', publicadoEm:'2026-10-11'}},
+    {classe:'anti-HER2', fonte:{referencia:'Fonte B', trecho:'trecho B', edicao:'2026-10-11', publicadoEm:'2026-10-11'}},
     {classe:'sem suporte', recomendacao:'conteúdo não fundamentado'},
   ] }), 'corpus/1-exames/labs/controle.json': painel('controle') });
   const integral = await converter(root,'multiplas',{itens:{[caminho]:{}, 'corpus/1-exames/labs/controle.json':{}}});
@@ -46,7 +46,7 @@ function criarRoot(arquivos: Record<string, unknown>) {
   return root;
 }
 const painel = (id: string, extra: Record<string, unknown> = {}) => ({
-  header: { id, versao: '1.0.0', vigenteDesde: '2026-10-11', fonte: { tipo: 'LITERATURA', referencia: `Exemplo ${id}`, trecho: `trecho público ${id}`, edicao: '2026-10-11' } },
+  header: { id, versao: '1.0.0', vigenteDesde: '2026-10-11', fonte: { tipo: 'LITERATURA', referencia: `Exemplo ${id}`, trecho: `trecho público ${id}`, edicao: '2026-10-11', publicadoEm: '2026-10-11' } },
   nota: 'fixture sintética sem dados pessoais', ...extra,
 });
 function mapeamento(itens: Record<string, { aplicabilidade?: Record<string, string[]>; url?: string; escopoFonte?: string }>, verificacoes: string[]) {
@@ -67,6 +67,17 @@ async function converter(root: string, nome: string, opcoes: { itens?: Record<st
   return { base, snap, destino, resultado, inventario: JSON.parse(readFileSync(join(destino, 'inventario.json'), 'utf8')), manifesto: JSON.parse(readFileSync(join(destino, 'pacote', 'manifesto.json'), 'utf8')) };
 }
 const lerItem = (destino: string, arquivo: string) => JSON.parse(readFileSync(join(destino, 'pacote', arquivo), 'utf8'));
+
+it('data de acesso ou vigência local não substitui publicação da fonte', async () => {
+  const caminho='corpus/1-exames/labs/acesso.json';
+  const semPublicacao=painel('acesso');
+  delete (semPublicacao.header.fonte as Partial<typeof semPublicacao.header.fonte>).publicadoEm;
+  semPublicacao.header.fonte.referencia='Fonte consultada em 2026-10-11';
+  const root=criarRoot({[caminho]:semPublicacao,'corpus/1-exames/labs/controle.json':painel('controle')});
+  const r=await converter(root,'sem-publicacao',{itens:{[caminho]:{},'corpus/1-exames/labs/controle.json':{}}});
+  expect(r.inventario.excluidos).toContainEqual(expect.objectContaining({caminho,motivo:'SEM_DATA_PUBLICACAO'}));
+  expect(r.manifesto.itens).toHaveLength(1);
+});
 function importarEmBanco(manifesto: unknown, destino: string) {
   const db = new DatabaseSync(':memory:');
   const biblioteca = criarBiblioteca(db, { autorizarCuradoria: () => ({ atorId: 'teste' }), emitir: () => {} });
@@ -234,7 +245,7 @@ describe('F1-N ponte snapshot→PacoteBiblioteca', () => {
   });
 
   it('ativação e rollback trocam o conjunto efetivamente consultável (um pacote ativo por vez)', async () => {
-    const painelV = (v: string) => painel('painel-a', { header: { id: 'painel-a', versao: '1.0.0', vigenteDesde: '2026-10-11', fonte: { tipo: 'LITERATURA', referencia: `Exemplo ${v}`, trecho: `trecho ${v}`, edicao: '2026-10-11' } } });
+    const painelV = (v: string) => painel('painel-a', { header: { id: 'painel-a', versao: '1.0.0', vigenteDesde: '2026-10-11', fonte: { tipo: 'LITERATURA', referencia: `Exemplo ${v}`, trecho: `trecho ${v}`, edicao: '2026-10-11', publicadoEm: '2026-10-11' } } });
     const v1 = await converter(criarRoot({ 'corpus/1-exames/labs/painel-a.json': painelV('v1') }), 'ativa1', { versao: '1.0.0', itens: { 'corpus/1-exames/labs/painel-a.json': {} } });
     const v2 = await converter(criarRoot({ 'corpus/1-exames/labs/painel-a.json': painelV('v2') }), 'ativa2', { versao: '2.0.0', itens: { 'corpus/1-exames/labs/painel-a.json': {} } });
     const db = new DatabaseSync(':memory:');

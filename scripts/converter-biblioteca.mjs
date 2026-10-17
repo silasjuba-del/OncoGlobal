@@ -76,6 +76,8 @@ function validarMapeamento(m) {
   for (const [caminho, item] of Object.entries(m.itens)) {
     if (!caminho.startsWith("corpus/") || !item || typeof item.provenienciaUrl !== "string" || !/^https:\/\//.test(item.provenienciaUrl)) throw new Error(`MAPEAMENTO_INVALIDO:${caminho}`);
     if (!verificadas.has(item.provenienciaUrl)) throw new Error(`URL_NAO_VERIFICADA_NO_MAPEAMENTO:${caminho}`);
+    if (item.publicadoEm !== undefined && (!ehData(item.publicadoEm) || !verificadas.has(item.fonteDataPublicacao)))
+      throw new Error(`DATA_PUBLICACAO_NAO_VERIFICADA:${caminho}`);
     const ap = item.aplicabilidade;
     if (!ap || ["tumor", "histologia", "estadio", "biomarcador", "linha"].some((c) => !Array.isArray(ap[c]) || ap[c].length > 100 || ap[c].some((v) => typeof v !== "string" || !v.length || v.length > 200 || v === "*"))) throw new Error(`MAPEAMENTO_APLICABILIDADE_INVALIDA:${caminho}`);
   }
@@ -122,10 +124,9 @@ export async function converterBiblioteca(diretorioSnapshot, destino, opcoes = {
     const fonte = primeiraFonteComTrecho(secao);
     if (!fonte) { excluidos.push({ caminho: a.caminho, motivo: "PROVENIENCIA_SEM_TRECHO", detalhe: "nenhuma fonte interna com referencia E trecho" }); continue; }
     if (!verificadas.has(map.provenienciaUrl)) { excluidos.push({ caminho: a.caminho, motivo: "URL_NAO_VERIFICADA", detalhe: map.provenienciaUrl }); continue; }
-    let publicadoEm = null, publicadoEmOrigem = null;
-    if (ehData(fonte.edicao)) publicadoEm = fonte.edicao;
-    else if (ehData(json?.header?.vigenteDesde)) { publicadoEm = json.header.vigenteDesde; publicadoEmOrigem = "header.vigenteDesde (vigência local — a fonte não declara data completa)"; }
-    if (!publicadoEm) { excluidos.push({ caminho: a.caminho, motivo: "SEM_DATA_PUBLICACAO", detalhe: `edicao=${JSON.stringify(fonte.edicao ?? null)} sem vigenteDesde` }); continue; }
+    const publicadoEm = map.publicadoEm ?? (ehData(fonte.publicadoEm) ? fonte.publicadoEm : null);
+    const publicadoEmOrigem = map.publicadoEm ? map.fonteDataPublicacao : "fonte.publicadoEm";
+    if (!publicadoEm) { excluidos.push({ caminho: a.caminho, motivo: "SEM_DATA_PUBLICACAO", detalhe: "Data de publicação não declarada; edição, acesso e vigência local não substituem publicação." }); continue; }
     const tituloBase = json?.header?.id ?? json?.id ?? a.caminho.split("/").pop().replace(/\.json$/, "");
     const titulo = `${tituloBase} — ${a.caminho}${map.escopoFonte ? `#${map.escopoFonte}` : ""}`;
     if (titulo.length > 300) { excluidos.push({ caminho: a.caminho, motivo: "TITULO_EXCESSIVO", detalhe: `${titulo.length} chars` }); continue; }
