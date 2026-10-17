@@ -361,7 +361,7 @@
 ### Cisplatina semanal + RxT (vulva) — concomitante à RT
 
 - **templateId:** `FICHA.vulva.cisplatina-semanal-rxt-vulva__concomitante-a-rt@1.0.0` · **versão:** 1.0.0 · **hash:** ver 'corpus/manifesto/b2-fichas.v1.json' (chave templateId) · **status:** RASCUNHO
-- **Intervalo:** 7 d · **Ciclos:** —
+- **Intervalo:** 7 d · **Ciclos:** 6
 - **Identidade clínica:** CEC de vulva localmente avançado (T3/T4 não ressecável por vulvectomia radical), previamente não tratado (eviQ 1529)
 - **Fonte da ficha:** D-F1-35 e D-F1-49. Protocolo ESPECÍFICO de vulva: EXT-CNV-021 (eviQ, ID 1529 — Vulval SCC locally advanced ciPlatin (weekly) chemoradiation, v9 (11/02/2026; PDF v6 arquivado), acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json). Protocolo BC que inclui vulva: EXT-CNV-023 (BC Cancer, GOCXCRT — Gynecologic locally advanced CISplatin weekly ×5 com RT (inclui vulva), rev 01/08/2026, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json). Material local: LOC-SONHE (SOnHe, Protocolos SOnHe 2024, p. 313–318 (sarcomas); p. 89–91 (vulva); p. 236–238 (CEC pele); p. …
 
@@ -459,7 +459,7 @@
 ### Cisplatina semanal + RxT (CEC de pele) — concomitante à RT
 
 - **templateId:** `FICHA.cec-de-pele-cutaneo.cisplatina-semanal-rxt-cec-de-pele__concomitante-a-rt@1.0.0` · **versão:** 1.0.0 · **hash:** ver 'corpus/manifesto/b2-fichas.v1.json' (chave templateId) · **status:** RASCUNHO
-- **Intervalo:** 7 d · **Ciclos:** —
+- **Intervalo:** 7 d · **Ciclos:** 6
 - **Identidade clínica:** CEC cutâneo localmente avançado — EXTRAPOLAÇÃO de CECP localmente avançado (eviQ 292)
 - **Fonte da ficha:** D-F1-34 e D-F1-49. Protocolo operacional (CECP localmente avançado — extrapolação explícita): EXT-CNV-016 (eviQ, ID 292 — Head and neck locally advanced ciSplatin weekly with radiation therapy, v10 (PDF v8), acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json).
 
@@ -610,7 +610,7 @@
 ### EP de indução (escore ultra-alto) — escore alto/ultra-alto (FIGO ≥12, D-F1-50) — indução
 
 - **templateId:** `FICHA.neoplasia-trofoblastica-gestacional.ep-de-inducao-escore-ultra-alto__escore-alto-ultra-alto-figo-12-d-f1-50-inducao@1.0.0` · **versão:** 1.0.0 · **hash:** ver 'corpus/manifesto/b2-fichas.v1.json' (chave templateId) · **status:** RASCUNHO
-- **Intervalo:** 7 d · **Ciclos:** —
+- **Intervalo:** 7 d · **Ciclos:** 3
 - **Identidade clínica:** NTG com doença extensa (tórax/fígado/SNC) e/ou hemorragia — indução antes do EMA-CO/EMA-EP; corte local FIGO ≥12 por D-F1-50 (eviQ 1347; Lok ≥13 [variante])
 - **Fonte da ficha:** D-F1-34 e D-F1-49. Protocolo operacional: EXT-CNV-030 (eviQ, ID 1347 — GTN low dose EP (indução, escore alto/ultra-alto), v5 (PDF v2), acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json). Diretriz: EXT-CNV-031 (J Clin Oncol (Lok C et al. — EOTTD/ESGO/ISSTD/GCIG), Practical Guidelines for the Treatment of Gestational Trophoblastic Disease (JCO 2025;43(18); DOI 10.1200/JCO-24-02326) — Tabela A5 e Figura A4, 2025 (pós-print ORBi 2268/340461), acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json) (Low-dose EP once weekly: etoposídeo 100 + cisplatina 20, D1–D …
 
@@ -639,12 +639,12 @@
 
 ## Fichas alteradas (fontes acrescentadas, doses intactas)
 
-- `FICHA.cabeca-e-pescoco.carboplatina-paclitaxel-semanal__nao-especificado@1.0.0` (corpus/fichas/cabeca-e-pescoco/carboplatina-paclitaxel-semanal__nao-especificado.json) — acréscimo de fontes externas do paclitaxel semanal (D-F1-28/D-F1-49); doses e diluente local inalterados; fontes: EXT-LEG-008, EXT-LEG-009, EXT-LEG-012, EXT-LEG-013
+- `FICHA.cabeca-e-pescoco.carboplatina-paclitaxel-semanal__nao-especificado@1.0.0` (corpus/fichas/cabeca-e-pescoco/carboplatina-paclitaxel-semanal__nao-especificado.json) — acréscimo de fontes externas do paclitaxel semanal (D-F1-28/D-F1-49); doses e diluente local inalterados; fontes: EXT-LEG-013
 - `FICHA.esofago.carboplatina-paclitaxel-semanal-cross-rxt__concomitante-a-rt@1.0.0` (corpus/fichas/esofago/carboplatina-paclitaxel-semanal-cross-rxt__concomitante-a-rt.json) — acréscimo de fontes externas do paclitaxel semanal (D-F1-28/D-F1-49); doses e diluente local inalterados; fontes: EXT-LEG-013
 - `FICHA.mama.ac-ct-fase-ct-carboplatina-paclitaxel-semanal__neo-adjuvante@1.0.0` (corpus/fichas/mama/ac-ct-fase-ct-carboplatina-paclitaxel-semanal__neo-adjuvante.json) — acréscimo de fontes externas do paclitaxel semanal (D-F1-28/D-F1-49); doses e diluente local inalterados; fontes: EXT-LEG-008, EXT-LEG-009, EXT-LEG-012, EXT-LEG-013
 - `FICHA.mama.ac-t-fase-t-paclitaxel-semanal__adjuvante@1.0.0` (corpus/fichas/mama/ac-t-fase-t-paclitaxel-semanal__adjuvante.json) — acréscimo de fontes externas do paclitaxel semanal (D-F1-28/D-F1-49); doses e diluente local inalterados; fontes: EXT-LEG-008, EXT-LEG-009, EXT-LEG-012, EXT-LEG-013
 - `FICHA.mama.ac-th-fase-th-paclitaxel-semanal-trastuzumabe__neo-adjuvante@1.0.0` (corpus/fichas/mama/ac-th-fase-th-paclitaxel-semanal-trastuzumabe__neo-adjuvante.json) — acréscimo de fontes externas do paclitaxel semanal (D-F1-28/D-F1-49); doses e diluente local inalterados; fontes: EXT-LEG-008, EXT-LEG-009, EXT-LEG-012, EXT-LEG-013
-- `FICHA.prostata.carboplatina-paclitaxel-semanal__nao-especificado@1.0.0` (corpus/fichas/prostata/carboplatina-paclitaxel-semanal__nao-especificado.json) — acréscimo de fontes externas do paclitaxel semanal (D-F1-28/D-F1-49); doses e diluente local inalterados; fontes: EXT-LEG-008, EXT-LEG-009, EXT-LEG-012, EXT-LEG-013
+- `FICHA.prostata.carboplatina-paclitaxel-semanal__nao-especificado@1.0.0` (corpus/fichas/prostata/carboplatina-paclitaxel-semanal__nao-especificado.json) — acréscimo de fontes externas do paclitaxel semanal (D-F1-28/D-F1-49); doses e diluente local inalterados; fontes: EXT-LEG-013
 
 ## Destinação dos códigos legados
 
@@ -656,4 +656,4 @@
 - **053:** erro de duplicação da biblioteca INT-MED (D-F1-44) — a corrigir NAQUELA biblioteca (externa ao repositório); nenhuma ficha nova
 
 ---
-Gerado em 2026-10-17T19:10:03.332Z · aprovacaoClinica: **null** (todas as fichas) — D-F1-49.
+Gerado em 2026-10-17T19:27:27.550Z · aprovacaoClinica: **null** (todas as fichas) — D-F1-49.
