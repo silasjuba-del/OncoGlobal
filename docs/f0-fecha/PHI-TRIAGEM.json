@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-09",
+  "generatedAt": "2026-10-17",
   "purpose": "Disposicoes por caminho+SHA-256+tipo/linha/ordinal/pagina+evidencia; hash diferente invalida excecao.",
   "files": [
     {
@@ -13,22 +13,6 @@
           "ordinal": 0,
           "status": "technical_token_false_positive",
           "evidenceRef": "corpus/fichas/esofago/carboplatina-paclitaxel-21-21-dias__nao-especificado.json:7",
-          "reason": "Match contido em token hash/commit hexadecimal completo de 40/64 caracteres.",
-          "contextTag": "json_sha256_field_64hex"
-        }
-      ],
-      "hashMode": "utf8-lf"
-    },
-    {
-      "path": "corpus/fichas/prostata/carboplatina-paclitaxel-semanal__nao-especificado.json",
-      "sha256": "b3a570962c016e6a3e1c8f85577e837b98fc4ea437b6098e1f6ccfd19aec912d",
-      "items": [
-        {
-          "type": "telefone",
-          "line": 7,
-          "ordinal": 0,
-          "status": "technical_token_false_positive",
-          "evidenceRef": "corpus/fichas/prostata/carboplatina-paclitaxel-semanal__nao-especificado.json:7",
           "reason": "Match contido em token hash/commit hexadecimal completo de 40/64 caracteres.",
           "contextTag": "json_sha256_field_64hex"
         }
@@ -3494,7 +3478,7 @@
     },
     {
       "path": "scripts/exportacao-publica-triagem.json",
-      "sha256": "2b1b9ceb97994a6b494c3d3261cba75f5169b1f0267dbba30131460e5af573ca",
+      "sha256": "04da2ad7c98454478a8cdfaff27c23a1edc02295965a8d39c5cd1276dd37f91b",
       "hashMode": "utf8-lf",
       "items": [
         {
@@ -7058,6 +7042,178 @@
           "status": "technical_token_false_positive",
           "evidenceRef": "docs/ondas/historico/FASE2-NCCN-DELTA-20261017-r1.json:753",
           "reason": "Conferência Codex 2026-10-17: Hash criptográfico documental de 64 hex, conferido no campo; não é telefone."
+        }
+      ]
+    },
+    {
+      "path": "corpus/6-pack-tumor/ewing/pack-ewing.v2.RASCUNHO.json",
+      "sha256": "680d0fafed0ad97950bab42a18f443924bf9dd19452d61b48e15845dae40859e",
+      "items": [
+        {
+          "type": "telefone",
+          "line": 1469,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "corpus/6-pack-tumor/ewing/pack-ewing.v2.RASCUNHO.json:1469",
+          "reason": "Revisão Codex 2026-10-17: candidato exclusivamente em SHA-256 de fonte documental; linha conferida após integração do PR19. Não contém identificador de paciente.",
+          "contextTag": "json_sha256_field_64hex"
+        },
+        {
+          "type": "telefone",
+          "line": 1487,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "corpus/6-pack-tumor/ewing/pack-ewing.v2.RASCUNHO.json:1487",
+          "reason": "Revisão Codex 2026-10-17: candidato exclusivamente em SHA-256 de fonte documental; linha conferida após integração do PR19. Não contém identificador de paciente.",
+          "contextTag": "json_sha256_field_64hex"
+        },
+        {
+          "type": "telefone",
+          "line": 1696,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "corpus/6-pack-tumor/ewing/pack-ewing.v2.RASCUNHO.json:1696",
+          "reason": "Revisão Codex 2026-10-17: candidato exclusivamente em SHA-256 de fonte documental; linha conferida após integração do PR19. Não contém identificador de paciente.",
+          "contextTag": "json_sha256_field_64hex"
+        },
+        {
+          "type": "telefone",
+          "line": 1710,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "corpus/6-pack-tumor/ewing/pack-ewing.v2.RASCUNHO.json:1710",
+          "reason": "Revisão Codex 2026-10-17: candidato exclusivamente em SHA-256 de fonte documental; linha conferida após integração do PR19. Não contém identificador de paciente.",
+          "contextTag": "json_sha256_field_64hex"
+        }
+      ],
+      "hashMode": "utf8-lf"
+    },
+    {
+      "path": "corpus/6-pack-tumor/cec-pele/pack-cec-pele.v2.RASCUNHO.json",
+      "sha256": "aabdb1bff3bf6ecf4726818b8a73a05895b7828524030337fbc92292b4657beb",
+      "items": [
+        {
+          "type": "telefone",
+          "line": 210,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "corpus/6-pack-tumor/cec-pele/pack-cec-pele.v2.RASCUNHO.json:210",
+          "reason": "Revisão Codex 2026-10-17: candidato exclusivamente em SHA-256 de fonte documental; linha conferida após integração do PR19. Não contém identificador de paciente.",
+          "contextTag": "json_sha256_field_64hex"
+        },
+        {
+          "type": "telefone",
+          "line": 616,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "corpus/6-pack-tumor/cec-pele/pack-cec-pele.v2.RASCUNHO.json:616",
+          "reason": "Revisão Codex 2026-10-17: candidato exclusivamente em SHA-256 de fonte documental; linha conferida após integração do PR19. Não contém identificador de paciente.",
+          "contextTag": "json_sha256_field_64hex"
+        },
+        {
+          "type": "telefone",
+          "line": 709,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "corpus/6-pack-tumor/cec-pele/pack-cec-pele.v2.RASCUNHO.json:709",
+          "reason": "Revisão Codex 2026-10-17: candidato exclusivamente em SHA-256 de fonte documental; linha conferida após integração do PR19. Não contém identificador de paciente.",
+          "contextTag": "json_sha256_field_64hex"
+        },
+        {
+          "type": "telefone",
+          "line": 726,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "corpus/6-pack-tumor/cec-pele/pack-cec-pele.v2.RASCUNHO.json:726",
+          "reason": "Revisão Codex 2026-10-17: candidato exclusivamente em SHA-256 de fonte documental; linha conferida após integração do PR19. Não contém identificador de paciente.",
+          "contextTag": "json_sha256_field_64hex"
+        },
+        {
+          "type": "telefone",
+          "line": 913,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "corpus/6-pack-tumor/cec-pele/pack-cec-pele.v2.RASCUNHO.json:913",
+          "reason": "Revisão Codex 2026-10-17: candidato exclusivamente em SHA-256 de fonte documental; linha conferida após integração do PR19. Não contém identificador de paciente.",
+          "contextTag": "json_sha256_field_64hex"
+        },
+        {
+          "type": "telefone",
+          "line": 927,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "corpus/6-pack-tumor/cec-pele/pack-cec-pele.v2.RASCUNHO.json:927",
+          "reason": "Revisão Codex 2026-10-17: candidato exclusivamente em SHA-256 de fonte documental; linha conferida após integração do PR19. Não contém identificador de paciente.",
+          "contextTag": "json_sha256_field_64hex"
+        },
+        {
+          "type": "telefone",
+          "line": 1009,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "corpus/6-pack-tumor/cec-pele/pack-cec-pele.v2.RASCUNHO.json:1009",
+          "reason": "Revisão Codex 2026-10-17: candidato exclusivamente em SHA-256 de fonte documental; linha conferida após integração do PR19. Não contém identificador de paciente.",
+          "contextTag": "json_sha256_field_64hex"
+        },
+        {
+          "type": "telefone",
+          "line": 1026,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "corpus/6-pack-tumor/cec-pele/pack-cec-pele.v2.RASCUNHO.json:1026",
+          "reason": "Revisão Codex 2026-10-17: candidato exclusivamente em SHA-256 de fonte documental; linha conferida após integração do PR19. Não contém identificador de paciente.",
+          "contextTag": "json_sha256_field_64hex"
+        },
+        {
+          "type": "telefone",
+          "line": 1043,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "corpus/6-pack-tumor/cec-pele/pack-cec-pele.v2.RASCUNHO.json:1043",
+          "reason": "Revisão Codex 2026-10-17: candidato exclusivamente em SHA-256 de fonte documental; linha conferida após integração do PR19. Não contém identificador de paciente.",
+          "contextTag": "json_sha256_field_64hex"
+        },
+        {
+          "type": "telefone",
+          "line": 1060,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "corpus/6-pack-tumor/cec-pele/pack-cec-pele.v2.RASCUNHO.json:1060",
+          "reason": "Revisão Codex 2026-10-17: candidato exclusivamente em SHA-256 de fonte documental; linha conferida após integração do PR19. Não contém identificador de paciente.",
+          "contextTag": "json_sha256_field_64hex"
+        }
+      ],
+      "hashMode": "utf8-lf"
+    },
+    {
+      "path": "corpus/fichas/nao-informado-ficha-institucional/lv5fu2-5-fu-folinato-p1512__nao-especificado.json",
+      "sha256": "00a338058d39f354ad167db0673e06a6be517e2c08006e85a6876c1eeea77340",
+      "hashMode": "utf8-lf",
+      "items": [
+        {
+          "type": "telefone",
+          "line": 7,
+          "ordinal": 0,
+          "contextTag": "json_sha256_field_64hex",
+          "status": "technical_token_false_positive",
+          "evidenceRef": "corpus/fichas/nao-informado-ficha-institucional/lv5fu2-5-fu-folinato-p1512__nao-especificado.json:7",
+          "reason": "Revisão Codex 2026-10-15: candidato contido no hash SHA-256 canônico de 64 hex da ficha LV5FU2, repetido no manifesto; nenhum identificador pessoal."
+        }
+      ]
+    },
+    {
+      "path": "corpus/manifesto/b2-fichas.v1.json",
+      "sha256": "799c5d57435a06abccdef3f547f36a1cad19668296b33f931851aba38c7f103d",
+      "hashMode": "utf8-lf",
+      "items": [
+        {
+          "type": "telefone",
+          "line": 407,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "corpus/manifesto/b2-fichas.v1.json:407",
+          "reason": "Match contido em campo JSON SHA-256 hexadecimal completo de 64 caracteres.",
+          "contextTag": "json_sha256_field_64hex"
         }
       ]
     }

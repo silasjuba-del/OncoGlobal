@@ -4,7 +4,7 @@
   "nome": "Carboplatina + Paclitaxel semanal (CROSS + RxT)",
   "cenario": "concomitante à RT",
   "versao": "1.0.0",
-  "hash": "e9960ace6bd6da6cf07a6dc54e75c682bb96894534c399f060ae2907734ddcb7",
+  "hash": "dfe8ca43f102235c687ccc17bc7d4ce49210affffc87f8808ba3c389ade5b80f",
   "codigoInstitucional": null,
   "intervaloDias": 7,
   "ciclos": 5,
@@ -137,7 +137,7 @@
       "days": [
         "d1"
       ],
-      "observacao": "D-F1-28: paclitaxel semanal em SF 0,9% 500 mL.",
+      "observacao": "D-F1-28: paclitaxel semanal em SF 0,9% 500 mL. F1-B2: dose CROSS 50 mg/m² preservada; sem atribuir confirmação por fontes de mama 80 mg/m².",
       "source": "PROTOCOL",
       "overrideMotivo": null
     },
@@ -187,6 +187,6 @@
     }
   ],
   "limiaresBula": null,
-  "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); SOnHe 2024 (secundária, setor privado): Esôfago \"Esquema CROSS\" p. 119; decisões D-W9-23, D-W9-34, D-W9-50. D-F1-28 (diluente do paclitaxel semanal).",
+  "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); SOnHe 2024 (secundária, setor privado): Esôfago \"Esquema CROSS\" p. 119; decisões D-W9-23, D-W9-34, D-W9-50. D-F1-28 (diluente do paclitaxel semanal). F1-B2 (D-F1-49): CROSS mantém paclitaxel 50 mg/m² da ficha. Fontes mamárias 80 mg/m² não confirmam dose/indicação CROSS; monografia BC (EXT-LEG-013) sustenta somente filtro e materiais.",
   "status": "RASCUNHO"
 }

@@ -1,5 +1,7 @@
 import { RulesetHeader } from "../src/contracts/rulesetHeader.mjs";
+import { CabecalhoRascunho } from "../src/contracts/cabecalhoRascunho.mjs";
 import { verificarB1 } from "./corpus-b1.mjs";
+import { verificarB2 } from "./corpus-b2.mjs";
 // GLM-08 · Valida o corpus inteiro: headers (G-17, schema compartilhado RulesetHeader de src/contracts),
 // contagem de [VERIFICAR] e itens ativos por arquivo, e a invariante K-27: ativo sem fonte com trecho (ou DECISAO_MEDICA) => exit 1.
 import { readFileSync, readdirSync, statSync } from "node:fs";
@@ -65,8 +67,15 @@ for (const arquivo of walk(CORPUS)) {
     linhas.push([rel, "JSON INVÁLIDO", 0, 0]);
     continue;
   }
-  const errosHeader = json.header !== undefined ? validarHeader(json.header)
+  // CabecalhoRascunho rege os novos packs B2; os headers legados são preservados.
+  // verificarB2 abaixo exige esse schema nos seis packs por caminho, mesmo se ele for removido.
+  const rascunho=json.status==='RASCUNHO'&&json.header?.schema==='CabecalhoRascunho@1';
+  const draftHeader=rascunho?CabecalhoRascunho.safeParse(json.header):null;
+  const errosHeader = rascunho ? draftHeader.success ? [] : draftHeader.error.issues.map(i=>`${i.path.join('.')}: ${i.message}`)
+    : json.header !== undefined ? validarHeader(json.header)
     : rel.startsWith("corpus/rulesets/") ? ["ruleset sem header"] : [];
+  if(rascunho&&(json.alerta!==false||json.curadoria?.aprovacaoClinica!==null||[...objetos(json)].some(o=>o.ativo===true)))
+    errosHeader.push('rascunho não pode receber aprovação, alerta ou item ativo');
   errosHeader.forEach((e) => problemas.push(`${rel}: ${e}`));
 
   let ativos = 0;
@@ -79,6 +88,7 @@ for (const arquivo of walk(CORPUS)) {
 }
 
 verificarB1(ROOT).forEach((p) => problemas.push("B1: " + p));
+verificarB2(ROOT).forEach((p) => problemas.push("B2: " + p));
 
 const w = [Math.max(8, ...linhas.map((l) => l[0].length)), 10, 11, 6];
 console.log(["ARQUIVO", "HEADER", "[VERIFICAR]", "ATIVOS"].map((h, i) => h.padEnd(w[i])).join(" | "));

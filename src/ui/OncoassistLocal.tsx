@@ -13,6 +13,7 @@ import { CaixaCanal } from "./telas/canal/CaixaCanal.js";
 import { ConsultaPersistida } from "./consulta/ConsultaPersistida.js";
 import { TelaApacLote } from "./telas/apac/TelaApacLote.js";
 import { Configuracoes } from "./oncochart/Configuracoes.js";
+import { BibliotecaLocal } from "./biblioteca/BibliotecaLocal.js";
 import { UploadDocumentoLocal } from "./consulta/UploadDocumentoLocal.js";
 import { TranscricaoLocal } from "./consulta/TranscricaoLocal.js";
 import { RevisaoClinica } from './consulta/RevisaoClinica.js';
@@ -41,7 +42,7 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp }: {
   const [metricas,setMetricas]=useState(metricasVazias);
   useEffect(()=>setMetricas(metricasVazias()),[contexto?.patientId,contexto?.encounterId,contexto?.tumorLotId]);
   const [mensagem, setMensagem] = useState("");
-  const [tela, setTela] = useState<"consulta" | "salao" | "canal" | "apac" | "config">("consulta");
+  const [tela, setTela] = useState<"consulta" | "salao" | "canal" | "apac" | "config" | "biblioteca">("consulta");
   const geracao = useRef(0);
   const chaves = useMemo(() => criarChaves(), []);
   const contextoAtual=useRef(contexto); contextoAtual.current=contexto;
@@ -152,6 +153,7 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp }: {
         <button type="button" disabled={ocupado} onClick={() => setTela("canal")}>Canal</button>
         <button type="button" disabled={ocupado} onClick={() => setTela("apac")}>APAC</button>
         <button type="button" disabled={ocupado} onClick={() => setTela("config")}>Configurações Flash</button>
+        <button type="button" disabled={ocupado} onClick={() => setTela("biblioteca")}>Biblioteca</button>
       </nav>
       </div>
       {ocupado ? <p role="status">Abrindo consulta…</p> : null}
@@ -203,6 +205,9 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp }: {
       {tela === "apac" ? <TelaApacLote porta={porta} chaves={chaves} /> : null}
       {tela === "config" ? <Configuracoes somenteFlash incluirServico porta={porta} tema="dia"
         onTema={() => {}} onFechar={() => setTela("consulta")} /> : null}
+      {tela === "biblioteca" ? (porta.biblioteca
+        ? <BibliotecaLocal api={porta.biblioteca} />
+        : <section aria-label="Biblioteca"><h2>Biblioteca indisponível</h2><p>O servidor local ainda não oferece a API autenticada da biblioteca.</p></section>) : null}
       {tela === "canal" ? <><p>Contexto ativo para vínculo: {pacienteAtivo
         ? `${pacienteAtivo.nome} · ${pacienteAtivo.patientId} · ${pacienteAtivo.encounterId}`
         : contexto ? `${contexto.patientId} · ${contexto.encounterId}` : "selecione na agenda"}</p>

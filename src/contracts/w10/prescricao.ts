@@ -7,7 +7,7 @@ import { Id, Instante } from "../base.js";
 export const ClasseMedicacao = z.enum(["PRE_QT", "QT", "POS_QT", "NAO_ONCOLOGICA"]);
 export type ClasseMedicacao = z.infer<typeof ClasseMedicacao>;
 
-export const DoseBasis = z.enum(["FIXED", "MG_KG", "MG_M2", "AUC", "OTHER"]);
+export const DoseBasis = z.enum(["FIXED", "MG_KG", "MCG_KG", "MG_M2", "AUC", "OTHER"]);
 export type DoseBasis = z.infer<typeof DoseBasis>;
 
 /** D-W9-26 · ajuste só pelos botões −20/−30/−40 sobre a dose anterior. */
@@ -46,6 +46,17 @@ export const PrescriptionItem = z.object({
   source: OrigemItem,
   /** Override de padrão do protocolo exige motivo (ALTERAR PADRÃO). */
   overrideMotivo: z.string().min(1).nullable(),
+  /** Teto absoluto por administração, declarado pela fonte da ficha (não limita a SC). */
+  doseMaximaMg: z.number().positive().optional(),
+  taxaMaximaMgMin: z.number().positive().optional(),
+  /** Braço de curso alternado sem sequência executável: não pode virar prescrição isolada. */
+  sequenciamentoPendente: z.string().min(1).optional(),
+  /** Resgate condicionado a níveis: permanece não executável sem planejamento individual. */
+  resgateMtx: z.object({
+    inicioAposHoras: z.literal(24), intervaloHoras: z.literal(6), primeirasDosesEV: z.literal(4),
+    viasPosteriores: z.tuple([z.literal("EV"), z.literal("VO")]),
+    ateNivelInferiorMicromolL: z.literal(0.1), fonte: z.string().min(1),
+  }).strict().optional(),
 }).strict().superRefine((i, ctx) => {
   if (i.adjustmentPercent !== null && !i.adjustmentReason)
     ctx.addIssue({ code: "custom", message: "ajuste de dose exige motivo" });

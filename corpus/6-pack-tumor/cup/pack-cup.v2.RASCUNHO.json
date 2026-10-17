@@ -1,0 +1,1223 @@
+{
+  "header": {
+    "schema": "CabecalhoRascunho@1",
+    "id": "pack-cup",
+    "versao": "2.0.0",
+    "fonte": {
+      "tipo": "DIRETRIZ",
+      "referencia": "D-F1-36/D-F1-49 + BC PUCAT + estudos originais (Greco/Mukai/Pouessel/Khansur)",
+      "trecho": "5 esquemas da decisão local",
+      "edicao": "F1-B2 2026-10-14"
+    },
+    "redigidoEm": "2026-10-14",
+    "curador": null,
+    "aprovadoEm": null
+  },
+  "status": "RASCUNHO",
+  "consultavel": true,
+  "alerta": false,
+  "substitui": [],
+  "identidade": {
+    "tumor": "Carcinoma de primário desconhecido (CUP)",
+    "cid10": [
+      "C80.9",
+      "C77"
+    ],
+    "subtipos": [],
+    "cenarios": [],
+    "limitesAplicabilidade": "Pack novo F1-B2 (D-F1-34/49): RASCUNHO de curadoria; nenhum conteúdo ativo; doses somente nas fichas com fonte (b2-fichas.v1.json)."
+  },
+  "diagnostico": {
+    "imagem": [
+      {
+        "catalogoId": "TC_TORAX_ABDOME_PELVE",
+        "rotulo": "TC tórax/abdome/pelve",
+        "indicacao": "universal",
+        "quando": "investigação inicial padronizada",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "ESMO 2015/2023 (contexto)",
+          "pagina": null,
+          "trecho": "imaging-based standardized workup",
+          "estado": "CONSULTADO"
+        }
+      },
+      {
+        "catalogoId": "PET_CT_FDG",
+        "rotulo": "PET-CT (selecionados)",
+        "indicacao": "selecionados",
+        "quando": "quando pode mudar conduta",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "NCI PDQ (EXT-CUP-016)",
+          "pagina": null,
+          "trecho": "PET in selected CUP",
+          "estado": "CONSULTADO"
+        }
+      }
+    ],
+    "endoscopicos": [],
+    "patologico": {
+      "obtencao": [
+        {
+          "tipo": "biópsia do sítio acessível",
+          "quando": "diagnóstico",
+          "catalogoId": "BIOPSIA",
+          "fonte": {
+            "tipo": "PROTOCOLO_INSTITUCIONAL",
+            "referencia": "NCI PDQ",
+            "pagina": null,
+            "trecho": "biopsy for diagnosis",
+            "estado": "CONSULTADO"
+          }
+        }
+      ],
+      "laudoDeveConter": [
+        "histologia",
+        "imuno-histoquímica direcionada",
+        "predictive biomarkers (quando aplicável)"
+      ],
+      "molecular": []
+    }
+  },
+  "estadiamento": {
+    "sistema": "[VERIFICAR]",
+    "edicao": null,
+    "fonte": {
+      "tipo": "DECISAO_MEDICA",
+      "referencia": "Estadiamento específico pendente de curadoria (D-F1-34/49)",
+      "pagina": null,
+      "trecho": "",
+      "estado": "PENDENTE"
+    },
+    "exames": [],
+    "gruposConduta": [],
+    "marcadores": {
+      "uteis": [],
+      "naoPedirDeRotina": []
+    }
+  },
+  "tratamento": {
+    "cenarios": [
+      {
+        "cenario": "CUP de bom prognóstico/adenocarcinoma",
+        "intencao": "paliativa",
+        "modalidades": [
+          "QT dupla"
+        ],
+        "criterio": "D-F1-36 (5 esquemas) ajustada pela D-F1-50 (retirada de cisplatina+vinorelbina — 4 esquemas)",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "D-F1-36 + D-F1-50",
+          "pagina": null,
+          "trecho": "lista decide esquemas, não doses",
+          "estado": "CONSULTADO"
+        }
+      },
+      {
+        "cenario": "CUP escamoso (investigação H&N completa negativa)",
+        "intencao": "paliativa",
+        "modalidades": [
+          "QT"
+        ],
+        "criterio": "população de Khansur",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "Khansur 1995 (PMID 7743377)",
+          "pagina": null,
+          "trecho": "metastatic squamous cell carcinoma from unknown primary",
+          "estado": "CONSULTADO"
+        }
+      }
+    ],
+    "protocolos": [
+      {
+        "id": "cup-cis-doc",
+        "nome": "Cisplatina + docetaxel",
+        "cenario": "não especificado",
+        "linha": "conforme seleção",
+        "drogas": [
+          {
+            "droga": "docetaxel",
+            "dose": 75,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "cisplatina",
+            "dose": 75,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 8,
+        "premedicacao": "Padrão local (D-W9-23c/34c; D-F1-30/48)",
+        "ajusteObrigatorio": "",
+        "fichaId": "FICHA.primario-desconhecido-cup.cisplatina-docetaxel__nao-especificado@1.0.0",
+        "sus": {
+          "disponivel": "VERIFICAR",
+          "fonte": {
+            "tipo": "DECISAO_MEDICA",
+            "referencia": "D-F1-34/49 — disponibilidade SUS por item a verificar",
+            "pagina": null,
+            "trecho": "",
+            "estado": "PENDENTE"
+          },
+          "consultadoEm": "2026-10-14",
+          "procedimentosRelacionados": [
+            {
+              "codigo": "0304020249",
+              "nome": "QUIMIOTERAPIA DE METÁSTASE DE ADENOCARCINOMA DE ORIGEM DESCONHECIDA",
+              "cidsCompativeis": [
+                "C80"
+              ],
+              "instrumentosRegistro": [
+                "06"
+              ],
+              "fonte": {
+                "tipo": "NORMA",
+                "referencia": "corpus/f0c/sigtap/2026-09.json#procedimentos[codigo=0304020249]",
+                "trecho": "QUIMIOTERAPIA DE METÁSTASE DE ADENOCARCINOMA DE ORIGEM DESCONHECIDA",
+                "competencia": "2026-09"
+              },
+              "ressalva": "Procedimento administrativo; não comprova disponibilidade do fármaco, do esquema, elegibilidade individual ou autorização de APAC."
+            },
+            {
+              "codigo": "0304020265",
+              "nome": "QUIMIOTERAPIA DE METÁSTASE DE NEOPLASIA MALIGNA INDIFERENCIADA DE ORIGEM DESCONHECIDA",
+              "cidsCompativeis": [
+                "C80"
+              ],
+              "instrumentosRegistro": [
+                "06"
+              ],
+              "fonte": {
+                "tipo": "NORMA",
+                "referencia": "corpus/f0c/sigtap/2026-09.json#procedimentos[codigo=0304020265]",
+                "trecho": "QUIMIOTERAPIA DE METÁSTASE DE NEOPLASIA MALIGNA INDIFERENCIADA DE ORIGEM DESCONHECIDA",
+                "competencia": "2026-09"
+              },
+              "ressalva": "Procedimento administrativo; não comprova disponibilidade do fármaco, do esquema, elegibilidade individual ou autorização de APAC."
+            }
+          ],
+          "farmacos": [
+            {
+              "droga": "docetaxel",
+              "via": "EV",
+              "disponivel": "VERIFICAR",
+              "rename": {
+                "edicao": "2024",
+                "resultado": "NAO_LOCALIZADO_NA_EDICAO_CONSULTADA",
+                "paginas": [],
+                "fonte": {
+                  "tipo": "NORMA",
+                  "referencia": "https://bvsms.saude.gov.br/bvs/publicacoes/relacao_nacional_medicamentos_2024.pdf",
+                  "localizador": "busca textual integral, pp. 1–252, termo docetaxel",
+                  "trecho": "Termo docetaxel não localizado na busca textual da edição 2024; isso não demonstra não disponibilidade no SUS.",
+                  "sha256": "b1b0d582cb68fc96fcbe04fd65c1c697d5206b7dce8886f1c6ddb06374fd5201",
+                  "consultadoEm": "2026-10-14"
+                },
+                "ressalva": "Inclusão na RENAME não comprova indicação oncológica, apresentação do esquema, estoque do serviço nem cobertura ANS; ausência nesta edição também não comprova exclusão do SUS."
+              },
+              "sigtapEncontrados": [],
+              "buscasFeitas": [
+                "SIGTAP 2026-09: busca pelo nome docetaxel em tb_procedimento (ZIP local conferido por SHA-256), incluindo catálogo de medicamentos; RENAME 2024 integral (normalização de acentos; folínico pesquisado como folinato).",
+                "docs/referencias/: 36 arquivos com correspondência textual; docs/referencias\\evidencias\\desfechos-gi-gu.csv, docs/referencias\\evidencias\\SBOC-2026-MAMA-NEOADJUVANCIA-RESUMO.md, docs/referencias\\evidencias\\DESFECHOS-GI-GU.md, docs/referencias\\evidencias\\NOVIDADES-2026.md; menção isolada não comprova acesso SUS."
+              ]
+            },
+            {
+              "droga": "cisplatina",
+              "via": "EV",
+              "disponivel": "VERIFICAR",
+              "rename": {
+                "edicao": "2024",
+                "resultado": "NAO_LOCALIZADO_NA_EDICAO_CONSULTADA",
+                "paginas": [],
+                "fonte": {
+                  "tipo": "NORMA",
+                  "referencia": "https://bvsms.saude.gov.br/bvs/publicacoes/relacao_nacional_medicamentos_2024.pdf",
+                  "localizador": "busca textual integral, pp. 1–252, termo cisplatina",
+                  "trecho": "Termo cisplatina não localizado na busca textual da edição 2024; isso não demonstra não disponibilidade no SUS.",
+                  "sha256": "b1b0d582cb68fc96fcbe04fd65c1c697d5206b7dce8886f1c6ddb06374fd5201",
+                  "consultadoEm": "2026-10-14"
+                },
+                "ressalva": "Inclusão na RENAME não comprova indicação oncológica, apresentação do esquema, estoque do serviço nem cobertura ANS; ausência nesta edição também não comprova exclusão do SUS."
+              },
+              "sigtapEncontrados": [],
+              "buscasFeitas": [
+                "SIGTAP 2026-09: busca pelo nome cisplatina em tb_procedimento (ZIP local conferido por SHA-256), incluindo catálogo de medicamentos; RENAME 2024 integral (normalização de acentos; folínico pesquisado como folinato).",
+                "docs/referencias/: 46 arquivos com correspondência textual; docs/referencias\\fornecedores\\SONHE-2024-PROTOCOLOS.md, docs/referencias\\fornecedores\\SONHE-2024-PROTOCOLOS.csv, docs/referencias\\fornecedores\\SBOC-DIRETRIZES-INDICE.md, docs/referencias\\fornecedores\\RESUMO-GI-PRO2026-MODULO2.md; menção isolada não comprova acesso SUS."
+              ]
+            }
+          ],
+          "observacao": "VERIFICAR: há somente evidência administrativa parcial quando códigos relacionados são listados. Não reclassificar disponibilidade clínica por código de QT ou presença na RENAME. Confirmar fármaco/apresentação/indicação e acesso no serviço; cobertura ANS não foi avaliada."
+        },
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "Greco 2000 (PMID 10761758; EXT-CUP-001)",
+          "pagina": null,
+          "trecho": "docetaxel 75 + cisplatin 75 every three weeks; max 8",
+          "estado": "CONSULTADO"
+        },
+        "observacao": "Variante Mukai (60/80) registrada na ficha.",
+        "derivadoDe": null,
+        "criterioAplicacao": "",
+        "suporte": {
+          "emetogenicidade": {
+            "classificacao": "VERIFICAR",
+            "fonte": null,
+            "pendencia": "Classificação específica não localizada; não derivada automaticamente das drogas ou de outro esquema."
+          },
+          "riscoNeutropeniaFebril": {
+            "classificacao": "VERIFICAR",
+            "percentual": null,
+            "fonte": null,
+            "pendencia": "Não localizada classificação de risco FN específica para este protocolo/variante nas fontes consultadas; não inferir de neutropenia isolada nem da presença de G-CSF."
+          }
+        }
+      },
+      {
+        "id": "cup-carbo-pac",
+        "nome": "Carboplatina + paclitaxel",
+        "cenario": "não especificado",
+        "linha": "conforme seleção",
+        "drogas": [
+          {
+            "droga": "paclitaxel",
+            "dose": 200,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 (primeiro)",
+            "observacao": "3 h"
+          },
+          {
+            "droga": "carboplatina",
+            "dose": 6,
+            "unidade": "AUC",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "Calvert; GFR cap 125"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": "Padrão local (D-W9-23c/34c; D-F1-30/48)",
+        "ajusteObrigatorio": "",
+        "fichaId": "FICHA.primario-desconhecido-cup.carboplatina-paclitaxel-21-21-dias__nao-especificado@1.0.0",
+        "sus": {
+          "disponivel": "VERIFICAR",
+          "fonte": {
+            "tipo": "DECISAO_MEDICA",
+            "referencia": "D-F1-34/49 — disponibilidade SUS por item a verificar",
+            "pagina": null,
+            "trecho": "",
+            "estado": "PENDENTE"
+          },
+          "consultadoEm": "2026-10-14",
+          "procedimentosRelacionados": [
+            {
+              "codigo": "0304020249",
+              "nome": "QUIMIOTERAPIA DE METÁSTASE DE ADENOCARCINOMA DE ORIGEM DESCONHECIDA",
+              "cidsCompativeis": [
+                "C80"
+              ],
+              "instrumentosRegistro": [
+                "06"
+              ],
+              "fonte": {
+                "tipo": "NORMA",
+                "referencia": "corpus/f0c/sigtap/2026-09.json#procedimentos[codigo=0304020249]",
+                "trecho": "QUIMIOTERAPIA DE METÁSTASE DE ADENOCARCINOMA DE ORIGEM DESCONHECIDA",
+                "competencia": "2026-09"
+              },
+              "ressalva": "Procedimento administrativo; não comprova disponibilidade do fármaco, do esquema, elegibilidade individual ou autorização de APAC."
+            },
+            {
+              "codigo": "0304020265",
+              "nome": "QUIMIOTERAPIA DE METÁSTASE DE NEOPLASIA MALIGNA INDIFERENCIADA DE ORIGEM DESCONHECIDA",
+              "cidsCompativeis": [
+                "C80"
+              ],
+              "instrumentosRegistro": [
+                "06"
+              ],
+              "fonte": {
+                "tipo": "NORMA",
+                "referencia": "corpus/f0c/sigtap/2026-09.json#procedimentos[codigo=0304020265]",
+                "trecho": "QUIMIOTERAPIA DE METÁSTASE DE NEOPLASIA MALIGNA INDIFERENCIADA DE ORIGEM DESCONHECIDA",
+                "competencia": "2026-09"
+              },
+              "ressalva": "Procedimento administrativo; não comprova disponibilidade do fármaco, do esquema, elegibilidade individual ou autorização de APAC."
+            }
+          ],
+          "farmacos": [
+            {
+              "droga": "paclitaxel",
+              "via": "EV",
+              "disponivel": "VERIFICAR",
+              "rename": {
+                "edicao": "2024",
+                "resultado": "NAO_LOCALIZADO_NA_EDICAO_CONSULTADA",
+                "paginas": [],
+                "fonte": {
+                  "tipo": "NORMA",
+                  "referencia": "https://bvsms.saude.gov.br/bvs/publicacoes/relacao_nacional_medicamentos_2024.pdf",
+                  "localizador": "busca textual integral, pp. 1–252, termo paclitaxel",
+                  "trecho": "Termo paclitaxel não localizado na busca textual da edição 2024; isso não demonstra não disponibilidade no SUS.",
+                  "sha256": "b1b0d582cb68fc96fcbe04fd65c1c697d5206b7dce8886f1c6ddb06374fd5201",
+                  "consultadoEm": "2026-10-14"
+                },
+                "ressalva": "Inclusão na RENAME não comprova indicação oncológica, apresentação do esquema, estoque do serviço nem cobertura ANS; ausência nesta edição também não comprova exclusão do SUS."
+              },
+              "sigtapEncontrados": [],
+              "buscasFeitas": [
+                "SIGTAP 2026-09: busca pelo nome paclitaxel em tb_procedimento (ZIP local conferido por SHA-256), incluindo catálogo de medicamentos; RENAME 2024 integral (normalização de acentos; folínico pesquisado como folinato).",
+                "docs/referencias/: 42 arquivos com correspondência textual; docs/referencias\\evidencias\\SBOC-2026-MAMA-NEOADJUVANCIA-RESUMO.md, docs/referencias\\evidencias\\novidades.csv, docs/referencias\\evidencias\\NOVIDADES-2026.md, docs/referencias\\protocolos\\protocolos-citotoxicos-revisado-silas.csv; menção isolada não comprova acesso SUS."
+              ]
+            },
+            {
+              "droga": "carboplatina",
+              "via": "EV",
+              "disponivel": "VERIFICAR",
+              "rename": {
+                "edicao": "2024",
+                "resultado": "NAO_LOCALIZADO_NA_EDICAO_CONSULTADA",
+                "paginas": [],
+                "fonte": {
+                  "tipo": "NORMA",
+                  "referencia": "https://bvsms.saude.gov.br/bvs/publicacoes/relacao_nacional_medicamentos_2024.pdf",
+                  "localizador": "busca textual integral, pp. 1–252, termo carboplatina",
+                  "trecho": "Termo carboplatina não localizado na busca textual da edição 2024; isso não demonstra não disponibilidade no SUS.",
+                  "sha256": "b1b0d582cb68fc96fcbe04fd65c1c697d5206b7dce8886f1c6ddb06374fd5201",
+                  "consultadoEm": "2026-10-14"
+                },
+                "ressalva": "Inclusão na RENAME não comprova indicação oncológica, apresentação do esquema, estoque do serviço nem cobertura ANS; ausência nesta edição também não comprova exclusão do SUS."
+              },
+              "sigtapEncontrados": [],
+              "buscasFeitas": [
+                "SIGTAP 2026-09: busca pelo nome carboplatina em tb_procedimento (ZIP local conferido por SHA-256), incluindo catálogo de medicamentos; RENAME 2024 integral (normalização de acentos; folínico pesquisado como folinato).",
+                "docs/referencias/: 37 arquivos com correspondência textual; docs/referencias\\protocolos\\protocolos-citotoxicos-revisado-silas.csv, docs/referencias\\evidencias\\ASCO-2026-VERIFICACAO.md, docs/referencias\\fornecedores\\RESUMO-GI-PRO2026-MODULO2.md, docs/referencias\\fornecedores\\SONHE-2024-PROTOCOLOS.csv; menção isolada não comprova acesso SUS."
+              ]
+            }
+          ],
+          "observacao": "VERIFICAR: há somente evidência administrativa parcial quando códigos relacionados são listados. Não reclassificar disponibilidade clínica por código de QT ou presença na RENAME. Confirmar fármaco/apresentação/indicação e acesso no serviço; cobertura ANS não foi avaliada."
+        },
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "BC PUCAT rev 12/2024 (EXT-CUP-004) + HeCOG (PMID 10963638)",
+          "pagina": null,
+          "trecho": "paclitaxel first + CARBO AUC 6; G-CSF D5-12 no estudo",
+          "estado": "CONSULTADO"
+        },
+        "observacao": "",
+        "derivadoDe": null,
+        "criterioAplicacao": "",
+        "suporte": {
+          "emetogenicidade": {
+            "classificacao": "ALTA",
+            "fonte": {
+              "tipo": "PROTOCOLO_INSTITUCIONAL",
+              "referencia": "https://www.bccancer.bc.ca/chemotherapy-protocols-site/Documents/Primary%20Unknown/PUCAT_Protocol.pdf",
+              "sourceId": "EXT-CUP-004",
+              "localizador": "cup/bccancer-PUCAT_Protocol.pdf; p. 1, PREMEDICATIONS",
+              "trecho": "Antiemetic protocol for highly emetogenic chemotherapy protocols (see SCNAUSEA)",
+              "sha256": "f3a066472ea44a28619640bf2126c777fbef3509408e3f42a6970035ab1745f6",
+              "estado": "CONSULTADO",
+              "consultadoEm": "2026-10-14"
+            }
+          },
+          "riscoNeutropeniaFebril": {
+            "classificacao": "VERIFICAR",
+            "percentual": null,
+            "fonte": null,
+            "pendencia": "Não localizada classificação de risco FN específica para este protocolo/variante nas fontes consultadas; não inferir de neutropenia isolada nem da presença de G-CSF."
+          }
+        }
+      },
+      {
+        "id": "cup-doc-gem",
+        "nome": "Docetaxel + gemcitabina",
+        "cenario": "não especificado",
+        "linha": "conforme seleção",
+        "drogas": [
+          {
+            "droga": "gemcitabina",
+            "dose": 1000,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 e D8",
+            "observacao": "30 min"
+          },
+          {
+            "droga": "docetaxel",
+            "dose": 75,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D8",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 6,
+        "premedicacao": "Padrão local (D-W9-23c/34c; D-F1-30/48)",
+        "ajusteObrigatorio": "",
+        "fichaId": "FICHA.primario-desconhecido-cup.docetaxel-gemcitabina__nao-especificado@1.0.0",
+        "sus": {
+          "disponivel": "VERIFICAR",
+          "fonte": {
+            "tipo": "DECISAO_MEDICA",
+            "referencia": "D-F1-34/49 — disponibilidade SUS por item a verificar",
+            "pagina": null,
+            "trecho": "",
+            "estado": "PENDENTE"
+          },
+          "consultadoEm": "2026-10-14",
+          "procedimentosRelacionados": [
+            {
+              "codigo": "0304020249",
+              "nome": "QUIMIOTERAPIA DE METÁSTASE DE ADENOCARCINOMA DE ORIGEM DESCONHECIDA",
+              "cidsCompativeis": [
+                "C80"
+              ],
+              "instrumentosRegistro": [
+                "06"
+              ],
+              "fonte": {
+                "tipo": "NORMA",
+                "referencia": "corpus/f0c/sigtap/2026-09.json#procedimentos[codigo=0304020249]",
+                "trecho": "QUIMIOTERAPIA DE METÁSTASE DE ADENOCARCINOMA DE ORIGEM DESCONHECIDA",
+                "competencia": "2026-09"
+              },
+              "ressalva": "Procedimento administrativo; não comprova disponibilidade do fármaco, do esquema, elegibilidade individual ou autorização de APAC."
+            },
+            {
+              "codigo": "0304020265",
+              "nome": "QUIMIOTERAPIA DE METÁSTASE DE NEOPLASIA MALIGNA INDIFERENCIADA DE ORIGEM DESCONHECIDA",
+              "cidsCompativeis": [
+                "C80"
+              ],
+              "instrumentosRegistro": [
+                "06"
+              ],
+              "fonte": {
+                "tipo": "NORMA",
+                "referencia": "corpus/f0c/sigtap/2026-09.json#procedimentos[codigo=0304020265]",
+                "trecho": "QUIMIOTERAPIA DE METÁSTASE DE NEOPLASIA MALIGNA INDIFERENCIADA DE ORIGEM DESCONHECIDA",
+                "competencia": "2026-09"
+              },
+              "ressalva": "Procedimento administrativo; não comprova disponibilidade do fármaco, do esquema, elegibilidade individual ou autorização de APAC."
+            }
+          ],
+          "farmacos": [
+            {
+              "droga": "gemcitabina",
+              "via": "EV",
+              "disponivel": "VERIFICAR",
+              "rename": {
+                "edicao": "2024",
+                "resultado": "NAO_LOCALIZADO_NA_EDICAO_CONSULTADA",
+                "paginas": [],
+                "fonte": {
+                  "tipo": "NORMA",
+                  "referencia": "https://bvsms.saude.gov.br/bvs/publicacoes/relacao_nacional_medicamentos_2024.pdf",
+                  "localizador": "busca textual integral, pp. 1–252, termo gemcitabina",
+                  "trecho": "Termo gemcitabina não localizado na busca textual da edição 2024; isso não demonstra não disponibilidade no SUS.",
+                  "sha256": "b1b0d582cb68fc96fcbe04fd65c1c697d5206b7dce8886f1c6ddb06374fd5201",
+                  "consultadoEm": "2026-10-14"
+                },
+                "ressalva": "Inclusão na RENAME não comprova indicação oncológica, apresentação do esquema, estoque do serviço nem cobertura ANS; ausência nesta edição também não comprova exclusão do SUS."
+              },
+              "sigtapEncontrados": [],
+              "buscasFeitas": [
+                "SIGTAP 2026-09: busca pelo nome gemcitabina em tb_procedimento (ZIP local conferido por SHA-256), incluindo catálogo de medicamentos; RENAME 2024 integral (normalização de acentos; folínico pesquisado como folinato).",
+                "docs/referencias/: 13 arquivos com correspondência textual; docs/referencias\\fornecedores\\RESUMO-GI-PRO2026-AVALIACAO.md, docs/referencias\\fornecedores\\SONHE-2024-PROTOCOLOS.md, docs/referencias\\fornecedores\\RESUMO-GI-PRO2026-MODULO2.md, docs/referencias\\protocolos\\protocolos-citotoxicos-revisado-silas.csv; menção isolada não comprova acesso SUS."
+              ]
+            },
+            {
+              "droga": "docetaxel",
+              "via": "EV",
+              "disponivel": "VERIFICAR",
+              "rename": {
+                "edicao": "2024",
+                "resultado": "NAO_LOCALIZADO_NA_EDICAO_CONSULTADA",
+                "paginas": [],
+                "fonte": {
+                  "tipo": "NORMA",
+                  "referencia": "https://bvsms.saude.gov.br/bvs/publicacoes/relacao_nacional_medicamentos_2024.pdf",
+                  "localizador": "busca textual integral, pp. 1–252, termo docetaxel",
+                  "trecho": "Termo docetaxel não localizado na busca textual da edição 2024; isso não demonstra não disponibilidade no SUS.",
+                  "sha256": "b1b0d582cb68fc96fcbe04fd65c1c697d5206b7dce8886f1c6ddb06374fd5201",
+                  "consultadoEm": "2026-10-14"
+                },
+                "ressalva": "Inclusão na RENAME não comprova indicação oncológica, apresentação do esquema, estoque do serviço nem cobertura ANS; ausência nesta edição também não comprova exclusão do SUS."
+              },
+              "sigtapEncontrados": [],
+              "buscasFeitas": [
+                "SIGTAP 2026-09: busca pelo nome docetaxel em tb_procedimento (ZIP local conferido por SHA-256), incluindo catálogo de medicamentos; RENAME 2024 integral (normalização de acentos; folínico pesquisado como folinato).",
+                "docs/referencias/: 36 arquivos com correspondência textual; docs/referencias\\evidencias\\desfechos-gi-gu.csv, docs/referencias\\evidencias\\SBOC-2026-MAMA-NEOADJUVANCIA-RESUMO.md, docs/referencias\\evidencias\\DESFECHOS-GI-GU.md, docs/referencias\\evidencias\\NOVIDADES-2026.md; menção isolada não comprova acesso SUS."
+              ]
+            }
+          ],
+          "observacao": "VERIFICAR: há somente evidência administrativa parcial quando códigos relacionados são listados. Não reclassificar disponibilidade clínica por código de QT ou presença na RENAME. Confirmar fármaco/apresentação/indicação e acesso no serviço; cobertura ANS não foi avaliada."
+        },
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "Pouessel 2004 (PMID 15022294; EXT-CUP-009)",
+          "pagina": null,
+          "trecho": "gemcitabine D1/D8 + docetaxel D8 q3w",
+          "estado": "CONSULTADO"
+        },
+        "observacao": "",
+        "derivadoDe": null,
+        "criterioAplicacao": "",
+        "suporte": {
+          "emetogenicidade": {
+            "classificacao": "VERIFICAR",
+            "fonte": null,
+            "pendencia": "Classificação específica não localizada; não derivada automaticamente das drogas ou de outro esquema."
+          },
+          "riscoNeutropeniaFebril": {
+            "classificacao": "VERIFICAR",
+            "percentual": null,
+            "fonte": null,
+            "pendencia": "Não localizada classificação de risco FN específica para este protocolo/variante nas fontes consultadas; não inferir de neutropenia isolada nem da presença de G-CSF."
+          }
+        }
+      },
+      {
+        "id": "cup-cis-5fu",
+        "nome": "Cisplatina + 5-FU (CUP escamoso)",
+        "cenario": "escamoso metastático (primário oculto)",
+        "linha": "conforme seleção",
+        "drogas": [
+          {
+            "droga": "cisplatina",
+            "dose": 100,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "fluoruracila",
+            "dose": 1000,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1–D4 CI",
+            "observacao": "24 h/dia (96 h)"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": "Padrão local (D-W9-23c/34c; D-F1-30/48)",
+        "ajusteObrigatorio": "",
+        "fichaId": "FICHA.primario-desconhecido-cup.cisplatina-5-fluorouracil-cup-escamoso__escamoso-metastatico-primario-oculto@1.0.0",
+        "sus": {
+          "disponivel": "VERIFICAR",
+          "fonte": {
+            "tipo": "DECISAO_MEDICA",
+            "referencia": "D-F1-34/49 — disponibilidade SUS por item a verificar",
+            "pagina": null,
+            "trecho": "",
+            "estado": "PENDENTE"
+          },
+          "consultadoEm": "2026-10-14",
+          "procedimentosRelacionados": [
+            {
+              "codigo": "0304020257",
+              "nome": "QUIMIOTERAPIA DE METÁSTASE DE CARCINOMA EPIDERMÓIDE/CARCINOMA NEUROENDOCRINO DE ORIGEM DESCONHECIDA",
+              "cidsCompativeis": [
+                "C80"
+              ],
+              "instrumentosRegistro": [
+                "06"
+              ],
+              "fonte": {
+                "tipo": "NORMA",
+                "referencia": "corpus/f0c/sigtap/2026-09.json#procedimentos[codigo=0304020257]",
+                "trecho": "QUIMIOTERAPIA DE METÁSTASE DE CARCINOMA EPIDERMÓIDE/CARCINOMA NEUROENDOCRINO DE ORIGEM DESCONHECIDA",
+                "competencia": "2026-09"
+              },
+              "ressalva": "Procedimento administrativo; não comprova disponibilidade do fármaco, do esquema, elegibilidade individual ou autorização de APAC."
+            }
+          ],
+          "farmacos": [
+            {
+              "droga": "cisplatina",
+              "via": "EV",
+              "disponivel": "VERIFICAR",
+              "rename": {
+                "edicao": "2024",
+                "resultado": "NAO_LOCALIZADO_NA_EDICAO_CONSULTADA",
+                "paginas": [],
+                "fonte": {
+                  "tipo": "NORMA",
+                  "referencia": "https://bvsms.saude.gov.br/bvs/publicacoes/relacao_nacional_medicamentos_2024.pdf",
+                  "localizador": "busca textual integral, pp. 1–252, termo cisplatina",
+                  "trecho": "Termo cisplatina não localizado na busca textual da edição 2024; isso não demonstra não disponibilidade no SUS.",
+                  "sha256": "b1b0d582cb68fc96fcbe04fd65c1c697d5206b7dce8886f1c6ddb06374fd5201",
+                  "consultadoEm": "2026-10-14"
+                },
+                "ressalva": "Inclusão na RENAME não comprova indicação oncológica, apresentação do esquema, estoque do serviço nem cobertura ANS; ausência nesta edição também não comprova exclusão do SUS."
+              },
+              "sigtapEncontrados": [],
+              "buscasFeitas": [
+                "SIGTAP 2026-09: busca pelo nome cisplatina em tb_procedimento (ZIP local conferido por SHA-256), incluindo catálogo de medicamentos; RENAME 2024 integral (normalização de acentos; folínico pesquisado como folinato).",
+                "docs/referencias/: 46 arquivos com correspondência textual; docs/referencias\\fornecedores\\SONHE-2024-PROTOCOLOS.md, docs/referencias\\fornecedores\\SONHE-2024-PROTOCOLOS.csv, docs/referencias\\fornecedores\\SBOC-DIRETRIZES-INDICE.md, docs/referencias\\fornecedores\\RESUMO-GI-PRO2026-MODULO2.md; menção isolada não comprova acesso SUS."
+              ]
+            },
+            {
+              "droga": "fluoruracila",
+              "via": "EV",
+              "disponivel": "VERIFICAR",
+              "rename": {
+                "edicao": "2024",
+                "resultado": "NAO_LOCALIZADO_NA_EDICAO_CONSULTADA",
+                "paginas": [],
+                "fonte": {
+                  "tipo": "NORMA",
+                  "referencia": "https://bvsms.saude.gov.br/bvs/publicacoes/relacao_nacional_medicamentos_2024.pdf",
+                  "localizador": "busca textual integral, pp. 1–252, termo fluoruracila",
+                  "trecho": "Termo fluoruracila não localizado na busca textual da edição 2024; isso não demonstra não disponibilidade no SUS.",
+                  "sha256": "b1b0d582cb68fc96fcbe04fd65c1c697d5206b7dce8886f1c6ddb06374fd5201",
+                  "consultadoEm": "2026-10-14"
+                },
+                "ressalva": "Inclusão na RENAME não comprova indicação oncológica, apresentação do esquema, estoque do serviço nem cobertura ANS; ausência nesta edição também não comprova exclusão do SUS."
+              },
+              "sigtapEncontrados": [],
+              "buscasFeitas": [
+                "SIGTAP 2026-09: busca pelo nome fluoruracila em tb_procedimento (ZIP local conferido por SHA-256), incluindo catálogo de medicamentos; RENAME 2024 integral (normalização de acentos; folínico pesquisado como folinato).",
+                "docs/referencias/: 4 arquivos com correspondência textual; docs/referencias\\ragGRAFO-oncologia\\modulos\\03-ginecologico\\nos.jsonl, docs/referencias\\ragGRAFO-oncologia\\modulos\\11-sboc2026-mama\\nos.jsonl, docs/referencias\\ragGRAFO-oncologia\\modulos\\04-mama\\nos.jsonl, docs/referencias\\ragGRAFO-oncologia\\dados\\nos.jsonl; menção isolada não comprova acesso SUS."
+              ]
+            }
+          ],
+          "observacao": "VERIFICAR: há somente evidência administrativa parcial quando códigos relacionados são listados. Não reclassificar disponibilidade clínica por código de QT ou presença na RENAME. Confirmar fármaco/apresentação/indicação e acesso no serviço; cobertura ANS não foi avaliada."
+        },
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "Khansur 1995 (PMID 7743377)",
+          "pagina": null,
+          "trecho": "cisplatin 100 D1 + 5-FU 1000 mg/m²/d ×4",
+          "estado": "CONSULTADO"
+        },
+        "observacao": "",
+        "derivadoDe": null,
+        "criterioAplicacao": "",
+        "suporte": {
+          "emetogenicidade": {
+            "classificacao": "ALTA",
+            "fonte": {
+              "tipo": "PROTOCOLO_INSTITUCIONAL",
+              "referencia": "evidência local f1-b2-fontes-externas/cec-ntg-vulva/eviq-288-cisplatin-5fu.txt",
+              "localizador": "f1-b2-fontes-externas/cec-ntg-vulva/eviq-288-cisplatin-5fu.txt:L128-L128; Clinical information / emetogenicity",
+              "trecho": "Emetogenicity HIGH",
+              "sha256": "3c08701c6773a78ced4077957ce4461bd28d28096b747538a31e26d25f428692",
+              "consultadoEm": "2026-10-14",
+              "estado": "CONSULTADO"
+            }
+          },
+          "riscoNeutropeniaFebril": {
+            "classificacao": "VERIFICAR",
+            "percentual": null,
+            "fonte": null,
+            "pendencia": "Não localizada classificação de risco FN específica para este protocolo/variante nas fontes consultadas; não inferir de neutropenia isolada nem da presença de G-CSF."
+          },
+          "ressalva": "Fonte operacional de outra população e/ou variante, já apontada no pack; aplicabilidade permanece sujeita à decisão médica. Não altera a indicação nem as doses."
+        }
+      }
+    ],
+    "radioterapia": [
+      {
+        "cenario": "linfonodos cervicais (suspeita de primário oculto H&N)",
+        "doseTotalGy": null,
+        "fracoes": null,
+        "pendencia": "fora do escopo D-F1-36",
+        "concomitante": false,
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "NCI PDQ",
+          "pagina": null,
+          "trecho": "RT in nodal subsets",
+          "estado": "CONSULTADO"
+        }
+      }
+    ],
+    "cirurgia": [],
+    "biomarcadorTratamento": [],
+    "ensaios": [],
+    "seguimento": [],
+    "suporte": {
+      "emetogenicidade": "Consultar tratamento.protocolos[].suporte.emetogenicidade: classificação e fonte por esquema; VERIFICAR quando não documentada.",
+      "riscoNeutropeniaFebril": "VERIFICAR por protocolo; suporte G-CSF documentado separadamente não estabelece faixa percentual de FN.",
+      "outros": [
+        "hidratação e Mg/K da cisplatina (padrão local)"
+      ],
+      "fonte": {
+        "tipo": "PROTOCOLO_INSTITUCIONAL",
+        "referencia": "Fontes individualizadas em tratamento.protocolos[].suporte; evidências locais f1-b2-fontes-externas (captura 2026-10-14).",
+        "trecho": "Classificações de emetogenicidade transcritas por esquema; ausência de classificação específica de FN permanece explícita.",
+        "estado": "PARCIAL"
+      }
+    }
+  },
+  "ligacoes": {
+    "exames": [
+      "BIOPSIA",
+      "TC_TORAX_ABDOME_PELVE",
+      "PET_CT_FDG",
+      "HEMOGRAMA",
+      "CREATININA",
+      "CLEARANCE_CREATININA",
+      "CALCIO",
+      "MAGNESIO",
+      "TGP",
+      "BILIRRUBINA",
+      "FOSFATASE_ALCALINA",
+      "GAMA_GT",
+      "DHL"
+    ],
+    "interacoesConsultar": [],
+    "ctcaeAcao": [],
+    "suporteReceitas": [],
+    "orientacoes": [],
+    "encaminhamentos": [],
+    "laudos": [],
+    "formulasXYZ": [],
+    "examesFontes": [
+      {
+        "catalogoId": "HEMOGRAMA",
+        "protocoloId": "cup-cis-5fu",
+        "contexto": "FBC, EUC, eGFR, LFTs, calcium and magnesium at baseline and prior to each treatment. Routine screening for HBsAg and anti-HBc is NOT usually recommended for patients receiving",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "evidência local f1-b2-fontes-externas/cec-ntg-vulva/eviq-288-cisplatin-5fu.txt",
+          "localizador": "f1-b2-fontes-externas/cec-ntg-vulva/eviq-288-cisplatin-5fu.txt:L180-L182; Blood tests / TESTS",
+          "trecho": "FBC, EUC, eGFR, LFTs, calcium and magnesium at baseline and prior to each treatment.\n\n                         Routine screening for HBsAg and anti-HBc is NOT usually recommended for patients receiving",
+          "sha256": "3c08701c6773a78ced4077957ce4461bd28d28096b747538a31e26d25f428692",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO"
+        }
+      },
+      {
+        "catalogoId": "CREATININA",
+        "protocoloId": "cup-cis-5fu",
+        "contexto": "FBC, EUC, eGFR, LFTs, calcium and magnesium at baseline and prior to each treatment. Routine screening for HBsAg and anti-HBc is NOT usually recommended for patients receiving",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "evidência local f1-b2-fontes-externas/cec-ntg-vulva/eviq-288-cisplatin-5fu.txt",
+          "localizador": "f1-b2-fontes-externas/cec-ntg-vulva/eviq-288-cisplatin-5fu.txt:L180-L182; Blood tests / TESTS",
+          "trecho": "FBC, EUC, eGFR, LFTs, calcium and magnesium at baseline and prior to each treatment.\n\n                         Routine screening for HBsAg and anti-HBc is NOT usually recommended for patients receiving",
+          "sha256": "3c08701c6773a78ced4077957ce4461bd28d28096b747538a31e26d25f428692",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO"
+        }
+      },
+      {
+        "catalogoId": "CALCIO",
+        "protocoloId": "cup-cis-5fu",
+        "contexto": "FBC, EUC, eGFR, LFTs, calcium and magnesium at baseline and prior to each treatment. Routine screening for HBsAg and anti-HBc is NOT usually recommended for patients receiving",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "evidência local f1-b2-fontes-externas/cec-ntg-vulva/eviq-288-cisplatin-5fu.txt",
+          "localizador": "f1-b2-fontes-externas/cec-ntg-vulva/eviq-288-cisplatin-5fu.txt:L180-L182; Blood tests / TESTS",
+          "trecho": "FBC, EUC, eGFR, LFTs, calcium and magnesium at baseline and prior to each treatment.\n\n                         Routine screening for HBsAg and anti-HBc is NOT usually recommended for patients receiving",
+          "sha256": "3c08701c6773a78ced4077957ce4461bd28d28096b747538a31e26d25f428692",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO"
+        }
+      },
+      {
+        "catalogoId": "MAGNESIO",
+        "protocoloId": "cup-cis-5fu",
+        "contexto": "FBC, EUC, eGFR, LFTs, calcium and magnesium at baseline and prior to each treatment. Routine screening for HBsAg and anti-HBc is NOT usually recommended for patients receiving",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "evidência local f1-b2-fontes-externas/cec-ntg-vulva/eviq-288-cisplatin-5fu.txt",
+          "localizador": "f1-b2-fontes-externas/cec-ntg-vulva/eviq-288-cisplatin-5fu.txt:L180-L182; Blood tests / TESTS",
+          "trecho": "FBC, EUC, eGFR, LFTs, calcium and magnesium at baseline and prior to each treatment.\n\n                         Routine screening for HBsAg and anti-HBc is NOT usually recommended for patients receiving",
+          "sha256": "3c08701c6773a78ced4077957ce4461bd28d28096b747538a31e26d25f428692",
+          "consultadoEm": "2026-10-14",
+          "estado": "CONSULTADO"
+        }
+      },
+      {
+        "catalogoId": "HEMOGRAMA",
+        "protocoloId": "cup-carbo-pac",
+        "contexto": "Basal conforme PUCAT; antes de cada tratamento somente CBC, creatinina e marcador inicialmente elevado; bilirrubina se indicada.",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "https://www.bccancer.bc.ca/chemotherapy-protocols-site/Documents/Primary%20Unknown/PUCAT_Protocol.pdf",
+          "sourceId": "EXT-CUP-004",
+          "localizador": "cup/bccancer-PUCAT_Protocol.pdf; p. 1, TESTS",
+          "trecho": "Baseline: CBC & Diff, creatinine, ALT, alkaline phosphatase, total bilirubin, albumin, GGT, LDH, chest X-ray, camera nuclear renogram for GFR (if available).",
+          "sha256": "f3a066472ea44a28619640bf2126c777fbef3509408e3f42a6970035ab1745f6",
+          "estado": "CONSULTADO",
+          "consultadoEm": "2026-10-14"
+        }
+      },
+      {
+        "catalogoId": "CREATININA",
+        "protocoloId": "cup-carbo-pac",
+        "contexto": "Basal conforme PUCAT; antes de cada tratamento somente CBC, creatinina e marcador inicialmente elevado; bilirrubina se indicada.",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "https://www.bccancer.bc.ca/chemotherapy-protocols-site/Documents/Primary%20Unknown/PUCAT_Protocol.pdf",
+          "sourceId": "EXT-CUP-004",
+          "localizador": "cup/bccancer-PUCAT_Protocol.pdf; p. 1, TESTS",
+          "trecho": "Baseline: CBC & Diff, creatinine, ALT, alkaline phosphatase, total bilirubin, albumin, GGT, LDH, chest X-ray, camera nuclear renogram for GFR (if available).",
+          "sha256": "f3a066472ea44a28619640bf2126c777fbef3509408e3f42a6970035ab1745f6",
+          "estado": "CONSULTADO",
+          "consultadoEm": "2026-10-14"
+        }
+      },
+      {
+        "catalogoId": "TGP",
+        "protocoloId": "cup-carbo-pac",
+        "contexto": "Basal conforme PUCAT; antes de cada tratamento somente CBC, creatinina e marcador inicialmente elevado; bilirrubina se indicada.",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "https://www.bccancer.bc.ca/chemotherapy-protocols-site/Documents/Primary%20Unknown/PUCAT_Protocol.pdf",
+          "sourceId": "EXT-CUP-004",
+          "localizador": "cup/bccancer-PUCAT_Protocol.pdf; p. 1, TESTS",
+          "trecho": "Baseline: CBC & Diff, creatinine, ALT, alkaline phosphatase, total bilirubin, albumin, GGT, LDH, chest X-ray, camera nuclear renogram for GFR (if available).",
+          "sha256": "f3a066472ea44a28619640bf2126c777fbef3509408e3f42a6970035ab1745f6",
+          "estado": "CONSULTADO",
+          "consultadoEm": "2026-10-14"
+        }
+      },
+      {
+        "catalogoId": "BILIRRUBINA",
+        "protocoloId": "cup-carbo-pac",
+        "contexto": "Basal conforme PUCAT; antes de cada tratamento somente CBC, creatinina e marcador inicialmente elevado; bilirrubina se indicada.",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "https://www.bccancer.bc.ca/chemotherapy-protocols-site/Documents/Primary%20Unknown/PUCAT_Protocol.pdf",
+          "sourceId": "EXT-CUP-004",
+          "localizador": "cup/bccancer-PUCAT_Protocol.pdf; p. 1, TESTS",
+          "trecho": "Baseline: CBC & Diff, creatinine, ALT, alkaline phosphatase, total bilirubin, albumin, GGT, LDH, chest X-ray, camera nuclear renogram for GFR (if available).",
+          "sha256": "f3a066472ea44a28619640bf2126c777fbef3509408e3f42a6970035ab1745f6",
+          "estado": "CONSULTADO",
+          "consultadoEm": "2026-10-14"
+        }
+      },
+      {
+        "catalogoId": "FOSFATASE_ALCALINA",
+        "protocoloId": "cup-carbo-pac",
+        "contexto": "Basal conforme PUCAT; antes de cada tratamento somente CBC, creatinina e marcador inicialmente elevado; bilirrubina se indicada.",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "https://www.bccancer.bc.ca/chemotherapy-protocols-site/Documents/Primary%20Unknown/PUCAT_Protocol.pdf",
+          "sourceId": "EXT-CUP-004",
+          "localizador": "cup/bccancer-PUCAT_Protocol.pdf; p. 1, TESTS",
+          "trecho": "Baseline: CBC & Diff, creatinine, ALT, alkaline phosphatase, total bilirubin, albumin, GGT, LDH, chest X-ray, camera nuclear renogram for GFR (if available).",
+          "sha256": "f3a066472ea44a28619640bf2126c777fbef3509408e3f42a6970035ab1745f6",
+          "estado": "CONSULTADO",
+          "consultadoEm": "2026-10-14"
+        }
+      },
+      {
+        "catalogoId": "GAMA_GT",
+        "protocoloId": "cup-carbo-pac",
+        "contexto": "Basal conforme PUCAT; antes de cada tratamento somente CBC, creatinina e marcador inicialmente elevado; bilirrubina se indicada.",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "https://www.bccancer.bc.ca/chemotherapy-protocols-site/Documents/Primary%20Unknown/PUCAT_Protocol.pdf",
+          "sourceId": "EXT-CUP-004",
+          "localizador": "cup/bccancer-PUCAT_Protocol.pdf; p. 1, TESTS",
+          "trecho": "Baseline: CBC & Diff, creatinine, ALT, alkaline phosphatase, total bilirubin, albumin, GGT, LDH, chest X-ray, camera nuclear renogram for GFR (if available).",
+          "sha256": "f3a066472ea44a28619640bf2126c777fbef3509408e3f42a6970035ab1745f6",
+          "estado": "CONSULTADO",
+          "consultadoEm": "2026-10-14"
+        }
+      },
+      {
+        "catalogoId": "DHL",
+        "protocoloId": "cup-carbo-pac",
+        "contexto": "Basal conforme PUCAT; antes de cada tratamento somente CBC, creatinina e marcador inicialmente elevado; bilirrubina se indicada.",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "https://www.bccancer.bc.ca/chemotherapy-protocols-site/Documents/Primary%20Unknown/PUCAT_Protocol.pdf",
+          "sourceId": "EXT-CUP-004",
+          "localizador": "cup/bccancer-PUCAT_Protocol.pdf; p. 1, TESTS",
+          "trecho": "Baseline: CBC & Diff, creatinine, ALT, alkaline phosphatase, total bilirubin, albumin, GGT, LDH, chest X-ray, camera nuclear renogram for GFR (if available).",
+          "sha256": "f3a066472ea44a28619640bf2126c777fbef3509408e3f42a6970035ab1745f6",
+          "estado": "CONSULTADO",
+          "consultadoEm": "2026-10-14"
+        }
+      }
+    ],
+    "fonte": {
+      "tipo": "PROTOCOLO_INSTITUCIONAL",
+      "referencia": "ligacoes.examesFontes[catalogoId,protocoloId] — cada ligação acrescentada tem fonte própria com trecho, localizador e SHA-256.",
+      "trecho": "Hemograma, função renal e exames específicos vinculados às fontes por protocolo. Ligações herdadas sem comprovação nesta rodada permanecem descritas nas pendências; a lista não representa pedido universal.",
+      "estado": "PARCIAL"
+    }
+  },
+  "pendencias": [
+    {
+      "texto": "Cisplatina + vinorelbina: RETIRADA da lista por D-F1-50 (fonte direta NAO_LOCALIZADA após 7 estratégias — registro de buscas preservado: PubMed, ClinicalTrials.gov, eviQ, BC, CCO-403, NCI PDQ, ESMO íntegra; tripla Palmeri não é derivável)",
+      "classe": "RETIRADA_POR_DECISAO",
+      "buscasFeitas": [
+        "PubMed",
+        "ClinicalTrials.gov",
+        "eviQ",
+        "BC",
+        "NCI PDQ",
+        "ESMO 2023 íntegra"
+      ]
+    },
+    {
+      "texto": "Full text ESMO 2023 (PMID 36563965) e 2015 (PMID 26314775) bloqueados (403/Cloudflare) — registros PubMed retidos",
+      "classe": "ACESSO",
+      "buscasFeitas": [
+        "academic.oup.com",
+        "annalsofoncology.org"
+      ]
+    },
+    {
+      "texto": "Escolha de variantes (75/75 × 60/80; 200/AUC6 × 175/AUC5) pendente de decisão",
+      "classe": "DECISAO_MEDICA_PENDENTE",
+      "buscasFeitas": [
+        "Greco vs Mukai",
+        "PUCAT/HeCOG vs SOnHe"
+      ]
+    },
+    {
+      "texto": "H2 cup-cis-doc: disponibilidade SUS do esquema e de cada fármaco não comprovada; códigos relacionados encontrados, sujeitos a CID, cenário e demais atributos.",
+      "classe": "DISPONIBILIDADE_SUS_NAO_COMPROVADA",
+      "protocoloId": "cup-cis-doc",
+      "buscasFeitas": [
+        "corpus/f0c/sigtap/2026-09.json: nomes e CIDs do pack; códigos relacionados 0304020249, 0304020265.",
+        "ZIP oficial 2026-09: tb_procedimento completo, por nomes de todos os fármacos do protocolo; sem consulta de rede ao SIGTAP.",
+        "docs/referencias/: busca textual por RENAME, disponibilidade SUS e nomes dos fármacos; compêndios secundários sem prova oficial específica de acesso para estes esquemas.",
+        "RENAME 2024, edição apontada vigente no portal do Ministério da Saúde; resultados por fármaco em tratamento.protocolos[id=cup-cis-doc].sus.farmacos.",
+        "Ausência de confirmação institucional de estoque/acesso por indicação."
+      ]
+    },
+    {
+      "texto": "H2 cup-carbo-pac: disponibilidade SUS do esquema e de cada fármaco não comprovada; códigos relacionados encontrados, sujeitos a CID, cenário e demais atributos.",
+      "classe": "DISPONIBILIDADE_SUS_NAO_COMPROVADA",
+      "protocoloId": "cup-carbo-pac",
+      "buscasFeitas": [
+        "corpus/f0c/sigtap/2026-09.json: nomes e CIDs do pack; códigos relacionados 0304020249, 0304020265.",
+        "ZIP oficial 2026-09: tb_procedimento completo, por nomes de todos os fármacos do protocolo; sem consulta de rede ao SIGTAP.",
+        "docs/referencias/: busca textual por RENAME, disponibilidade SUS e nomes dos fármacos; compêndios secundários sem prova oficial específica de acesso para estes esquemas.",
+        "RENAME 2024, edição apontada vigente no portal do Ministério da Saúde; resultados por fármaco em tratamento.protocolos[id=cup-carbo-pac].sus.farmacos.",
+        "Ausência de confirmação institucional de estoque/acesso por indicação."
+      ]
+    },
+    {
+      "texto": "H2 cup-doc-gem: disponibilidade SUS do esquema e de cada fármaco não comprovada; códigos relacionados encontrados, sujeitos a CID, cenário e demais atributos.",
+      "classe": "DISPONIBILIDADE_SUS_NAO_COMPROVADA",
+      "protocoloId": "cup-doc-gem",
+      "buscasFeitas": [
+        "corpus/f0c/sigtap/2026-09.json: nomes e CIDs do pack; códigos relacionados 0304020249, 0304020265.",
+        "ZIP oficial 2026-09: tb_procedimento completo, por nomes de todos os fármacos do protocolo; sem consulta de rede ao SIGTAP.",
+        "docs/referencias/: busca textual por RENAME, disponibilidade SUS e nomes dos fármacos; compêndios secundários sem prova oficial específica de acesso para estes esquemas.",
+        "RENAME 2024, edição apontada vigente no portal do Ministério da Saúde; resultados por fármaco em tratamento.protocolos[id=cup-doc-gem].sus.farmacos.",
+        "Ausência de confirmação institucional de estoque/acesso por indicação."
+      ]
+    },
+    {
+      "texto": "H2 cup-cis-5fu: disponibilidade SUS do esquema e de cada fármaco não comprovada; códigos relacionados encontrados, sujeitos a CID, cenário e demais atributos.",
+      "classe": "DISPONIBILIDADE_SUS_NAO_COMPROVADA",
+      "protocoloId": "cup-cis-5fu",
+      "buscasFeitas": [
+        "corpus/f0c/sigtap/2026-09.json: nomes e CIDs do pack; códigos relacionados 0304020257.",
+        "ZIP oficial 2026-09: tb_procedimento completo, por nomes de todos os fármacos do protocolo; sem consulta de rede ao SIGTAP.",
+        "docs/referencias/: busca textual por RENAME, disponibilidade SUS e nomes dos fármacos; compêndios secundários sem prova oficial específica de acesso para estes esquemas.",
+        "RENAME 2024, edição apontada vigente no portal do Ministério da Saúde; resultados por fármaco em tratamento.protocolos[id=cup-cis-5fu].sus.farmacos.",
+        "Ausência de confirmação institucional de estoque/acesso por indicação."
+      ]
+    },
+    {
+      "texto": "H4 cup-cis-doc: risco FN sem classificação específica verificada; emetogenicidade também permanece VERIFICAR.",
+      "classe": "SUPORTE_SEM_FONTE_ESPECIFICA",
+      "protocoloId": "cup-cis-doc",
+      "buscasFeitas": [
+        "Fontes originais citadas no protocolo cup-cis-doc: Greco 2000 (PMID 10761758; EXT-CUP-001); não localizada tabela específica de suporte na captura.",
+        "corpus/4-interacoes-contraindicacoes/risco-neutropenia-febril.v1.RASCUNHO.json: sem linha específica para este esquema; G-CSF por desenho não equivale a faixa percentual de FN."
+      ]
+    },
+    {
+      "texto": "H4 cup-carbo-pac: risco FN sem classificação específica verificada.",
+      "classe": "SUPORTE_SEM_FONTE_ESPECIFICA",
+      "protocoloId": "cup-carbo-pac",
+      "buscasFeitas": [
+        "f1-b2-fontes-externas/cup/bccancer-PUCAT_Protocol.pdf#text: Clinical information, Evidence/Toxicity, growth factor support e Blood tests.",
+        "corpus/4-interacoes-contraindicacoes/risco-neutropenia-febril.v1.RASCUNHO.json: sem linha específica para este esquema; G-CSF por desenho não equivale a faixa percentual de FN."
+      ]
+    },
+    {
+      "texto": "H4 cup-doc-gem: risco FN sem classificação específica verificada; emetogenicidade também permanece VERIFICAR.",
+      "classe": "SUPORTE_SEM_FONTE_ESPECIFICA",
+      "protocoloId": "cup-doc-gem",
+      "buscasFeitas": [
+        "Fontes originais citadas no protocolo cup-doc-gem: Pouessel 2004 (PMID 15022294; EXT-CUP-009); não localizada tabela específica de suporte na captura.",
+        "corpus/4-interacoes-contraindicacoes/risco-neutropenia-febril.v1.RASCUNHO.json: sem linha específica para este esquema; G-CSF por desenho não equivale a faixa percentual de FN."
+      ]
+    },
+    {
+      "texto": "H4 cup-cis-5fu: risco FN sem classificação específica verificada.",
+      "classe": "SUPORTE_SEM_FONTE_ESPECIFICA",
+      "protocoloId": "cup-cis-5fu",
+      "buscasFeitas": [
+        "f1-b2-fontes-externas/cec-ntg-vulva/eviq-288-cisplatin-5fu.txt: Clinical information, Evidence/Toxicity, growth factor support e Blood tests.",
+        "corpus/4-interacoes-contraindicacoes/risco-neutropenia-febril.v1.RASCUNHO.json: sem linha específica para este esquema; G-CSF por desenho não equivale a faixa percentual de FN."
+      ]
+    },
+    {
+      "texto": "H4: aliases herdados da base sem ID exato no catálogo; preservados para não escolher segmento/técnica clínica. Não tratar estas ligações como IDs resolvidos.",
+      "classe": "CATALOGO_ID_PENDENTE",
+      "ids": [
+        "BIOPSIA",
+        "TC_TORAX_ABDOME_PELVE"
+      ],
+      "buscasFeitas": [
+        "corpus/exames/exames-sigtap.v1.json, secoes[*].id (catálogo usado pelos painéis de corpus/1-exames/).",
+        "corpus/1-exames/: não há definição canônica de RM_LOCAL, BIOPSIA nem das composições genéricas TC_TORAX_ABDOME, TC_TORAX_ABDOME_PELVE e TC_CERVICO_TORACICA."
+      ]
+    },
+    {
+      "texto": "H4: ligações já presentes na base sem proveniência clínica revalidada nesta rodada; não contam como exames acrescentados/verificados.",
+      "classe": "LIGACAO_HERDADA_A_CONFERIR",
+      "ids": [
+        "BIOPSIA",
+        "TC_TORAX_ABDOME_PELVE",
+        "PET_CT_FDG",
+        "CLEARANCE_CREATININA"
+      ],
+      "buscasFeitas": [
+        "Inventário integral dos seis packs em 9517c76; comparação com o catálogo e com as capturas específicas de monitorização dos protocolos."
+      ]
+    }
+  ],
+  "conflitos": [
+    {
+      "tema": "Doses de cisplatina+docetaxel",
+      "fonteA": {
+        "tipo": "PROTOCOLO_INSTITUCIONAL",
+        "referencia": "Greco 2000",
+        "pagina": null,
+        "trecho": "75/75 q3sem (n=26)",
+        "estado": "CONSULTADO"
+      },
+      "fonteB": {
+        "tipo": "PROTOCOLO_INSTITUCIONAL",
+        "referencia": "Mukai 2010",
+        "pagina": null,
+        "trecho": "doc 60 + cis 80 (n=45)",
+        "estado": "CONSULTADO"
+      },
+      "escolhaSeguranca": "Ficha com Greco 75/75; variante registrada",
+      "decisaoNecessaria": "Dr. Silas decide"
+    },
+    {
+      "tema": "Variante de carboplatina+paclitaxel",
+      "fonteA": {
+        "tipo": "PROTOCOLO_INSTITUCIONAL",
+        "referencia": "BC PUCAT/HeCOG",
+        "pagina": null,
+        "trecho": "paclitaxel 200 + AUC 6",
+        "estado": "CONSULTADO"
+      },
+      "fonteB": {
+        "tipo": "PROTOCOLO_INSTITUCIONAL",
+        "referencia": "SOnHe p. 379 (local)",
+        "pagina": null,
+        "trecho": "175 + AUC 5",
+        "estado": "CONSULTADO"
+      },
+      "escolhaSeguranca": "Ficha com PUCAT (protocolo institucional específico de CUP); variante registrada",
+      "decisaoNecessaria": "Dr. Silas decide"
+    },
+    {
+      "tema": "Dupla cisplatina+vinorelbina vs tripla",
+      "fonteA": {
+        "tipo": "PROTOCOLO_INSTITUCIONAL",
+        "referencia": "decisão local D-F1-36",
+        "pagina": null,
+        "trecho": "dupla cis+vinorelbina",
+        "estado": "CONSULTADO"
+      },
+      "fonteB": {
+        "tipo": "PROTOCOLO_INSTITUCIONAL",
+        "referencia": "Palmeri 2006 (PMID 17109447)",
+        "pagina": null,
+        "trecho": "tripla cis+gem+vin",
+        "estado": "CONSULTADO"
+      },
+      "escolhaSeguranca": "Não derivado: ficha-dossiê com doses NAO_LOCALIZADO",
+      "decisaoNecessaria": "Fonte direta da dupla ou alteração da lista"
+    },
+    {
+      "tema": "População do cis+5-FU",
+      "fonteA": {
+        "tipo": "PROTOCOLO_INSTITUCIONAL",
+        "referencia": "Khansur 1995",
+        "pagina": null,
+        "trecho": "escamoso com investigação H&N negativa (n=15)",
+        "estado": "CONSULTADO"
+      },
+      "fonteB": {
+        "tipo": "PROTOCOLO_INSTITUCIONAL",
+        "referencia": "eviQ 288 (operacional)",
+        "pagina": null,
+        "trecho": "população H&N R/M; cis 75",
+        "estado": "CONSULTADO"
+      },
+      "escolhaSeguranca": "Ficha restrita ao cenário escamoso; generalização proibida",
+      "decisaoNecessaria": false
+    }
+  ],
+  "curadoria": {
+    "redator": "GLM (agente curador, missão F1-B2) — rascunho para revisão",
+    "redigidoEm": "2026-10-14",
+    "fontesLidas": [
+      "Greco 2000, Mukai 2003/2010, Briasoulis 2000, Hayashi 2019, Huebner 2009, Pouessel 2004, Khansur 1995, Palmeri 2006 (PubMed efetch)",
+      "BC PUCAT (protocolo+PPPO) e índice Primary Unknown",
+      "eviQ 288 (PDF v5)",
+      "Fizazi 2015 / Krämer 2023 (registros)",
+      "NCI PDQ",
+      "HemOnc (triangulação)",
+      "ESMO 2015/2023 (contexto)"
+    ],
+    "aprovacaoClinica": null,
+    "rodadaPendencias": [
+      {
+        "data": "2026-10-14",
+        "redator": "GLM",
+        "resolvidas": 0,
+        "classificadas": 3,
+        "susPreenchidos": 0,
+        "notas": [
+          "D-F1-49: fichas institucionais novas sem SISAC; mudança de fonte não aprova doses"
+        ]
+      },
+      {
+        "data": "2026-10-14",
+        "redator": "Codex — SETOR PACKS-B2 H2+H4",
+        "susPreenchidos": 0,
+        "protocolosSusVerificar": 4,
+        "examesAcrescentados": 7,
+        "suportesPorProtocolo": 4,
+        "notas": [
+          "RENAME 2024 consultada (edição vigente indicada pelo Ministério da Saúde); SIGTAP 2026-09 consultado somente em arquivos locais.",
+          "Códigos administrativos e RENAME não comprovam acesso ao esquema no serviço nem cobertura ANS.",
+          "Fontes externas do manifesto pareadas por SHA-256; demais trechos têm hash da captura textual e localizador exato.",
+          "Preservados RASCUNHO, consultavel true, alerta false, aprovacaoClinica null e todas as doses."
+        ]
+      }
+    ]
+  },
+  "escopo": {
+    "classe": "EXPANSAO_F1_B2_SEM_SISAC",
+    "nota": "Pack novo da D-F1-34 construído na F1-B2 (D-F1-49) com fontes externas verificadas; conteúdo consultável em RASCUNHO, sem ativação clínica."
+  },
+  "correcoes": []
+}

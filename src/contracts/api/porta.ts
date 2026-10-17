@@ -23,6 +23,7 @@ import type { LinhaTratamento } from "./historicoTratamento.js";
 import type { AlertaPlaquetas } from "./plaquetasAlerta.js";
 import type { SaidaElegibilidadeCiclo } from "./elegibilidadeCiclo.js";
 import type { ResultadoInstrumento } from "../f0c/instrumentos.js";
+import type { ApiBiblioteca } from "./biblioteca.js";
 
 export type CodigoPorta = string;
 
@@ -294,6 +295,8 @@ export interface ChatSetorVisao {
 }
 
 export interface PortaConsulta {
+  /** Biblioteca pública autenticada com a mesma sessão desta porta, quando suportada pelo servidor. */
+  biblioteca?: ApiBiblioteca;
   reconciliarMedicamentos?(pedido: {patientId:string;encounterId:string;tumorLotId:string|null;operationId:string;medicamentos:string[];listaAtualCompleta:true}, signal?:AbortSignal):Promise<{codigo:"GRAVADA"|"REPLAY";eventId:string}>;
   sintetizarRetrato?(contexto: { patientId: string; encounterId: string; tumorLotId: string | null; idempotencyKey: string }, signal?: AbortSignal): Promise<import("./sinteseProposta.js").SintesePropostaResposta>;
   investigacao?(contexto: PedidoBundle, signal?: AbortSignal): Promise<InvestigacaoConsultaVisao>;

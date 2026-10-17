@@ -1,0 +1,192 @@
+{
+  "templateId": "FICHA.cec-de-pele-cutaneo.carboplatina-paclitaxel-21-21-dias-cec-de-pele__nao-especificado@1.0.0",
+  "tumor": "CEC de pele (cutâneo)",
+  "nome": "Carboplatina + Paclitaxel 21/21 dias (CEC de pele)",
+  "cenario": "não especificado",
+  "versao": "1.0.0",
+  "hash": "82027fdf6badce12bc9df42397f237dae75ff38aa7e9243a91f689b6032952d3",
+  "codigoInstitucional": null,
+  "intervaloDias": 21,
+  "ciclos": 6,
+  "itens": [
+    {
+      "drug": "Soro fisiológico 0,9% 250 mL (lavagem de acesso)",
+      "classe": "PRE_QT",
+      "sequence": 1,
+      "standardDose": 1,
+      "doseBasis": "FIXED",
+      "calculatedDose": null,
+      "prescribedDose": null,
+      "unit": "frasco",
+      "adjustmentPercent": null,
+      "adjustmentReason": null,
+      "route": "EV",
+      "diluent": null,
+      "finalVolumeMl": 250,
+      "infusionTime": null,
+      "days": [
+        "d1"
+      ],
+      "observacao": "Lavar acesso venoso pré e pós QT (planilha).",
+      "source": "PROTOCOL",
+      "overrideMotivo": null
+    },
+    {
+      "drug": "Ondansetrona",
+      "classe": "PRE_QT",
+      "sequence": 2,
+      "standardDose": 8,
+      "doseBasis": "FIXED",
+      "calculatedDose": null,
+      "prescribedDose": null,
+      "unit": "mg",
+      "adjustmentPercent": null,
+      "adjustmentReason": null,
+      "route": "EV",
+      "diluent": null,
+      "finalVolumeMl": null,
+      "infusionTime": "15 min",
+      "days": [
+        "d1"
+      ],
+      "observacao": "Padrão local (D-W9-23c/34c; D-F1-30).",
+      "source": "PROTOCOL",
+      "overrideMotivo": null
+    },
+    {
+      "drug": "Dexametasona",
+      "classe": "PRE_QT",
+      "sequence": 3,
+      "standardDose": 10,
+      "doseBasis": "FIXED",
+      "calculatedDose": null,
+      "prescribedDose": null,
+      "unit": "mg",
+      "adjustmentPercent": null,
+      "adjustmentReason": null,
+      "route": "EV",
+      "diluent": null,
+      "finalVolumeMl": null,
+      "infusionTime": "15 min",
+      "days": [
+        "d1"
+      ],
+      "observacao": "Antiemese local sem NK1 (D-W9-23c/34c).",
+      "source": "PROTOCOL",
+      "overrideMotivo": null
+    },
+    {
+      "drug": "Prometazina",
+      "classe": "PRE_QT",
+      "sequence": 4,
+      "standardDose": 25,
+      "doseBasis": "FIXED",
+      "calculatedDose": null,
+      "prescribedDose": null,
+      "unit": "mg",
+      "adjustmentPercent": null,
+      "adjustmentReason": null,
+      "route": "VO",
+      "diluent": null,
+      "finalVolumeMl": null,
+      "infusionTime": null,
+      "days": [
+        "d1"
+      ],
+      "observacao": "Pré-medicação local (D-W9-34c). 30 min antes do taxano (ficha real P1456).",
+      "source": "PROTOCOL",
+      "overrideMotivo": null
+    },
+    {
+      "drug": "Cimetidina",
+      "classe": "PRE_QT",
+      "sequence": 5,
+      "standardDose": 300,
+      "doseBasis": "FIXED",
+      "calculatedDose": null,
+      "prescribedDose": null,
+      "unit": "mg",
+      "adjustmentPercent": null,
+      "adjustmentReason": null,
+      "route": "EV",
+      "diluent": null,
+      "finalVolumeMl": null,
+      "infusionTime": "15 min",
+      "days": [
+        "d1"
+      ],
+      "observacao": "Todo taxano (D-W9-34c; D-F1-48: fixa — só P1399/P1426 são 'se necessário').",
+      "source": "PROTOCOL",
+      "overrideMotivo": null
+    },
+    {
+      "drug": "Paclitaxel",
+      "classe": "QT",
+      "sequence": 6,
+      "standardDose": 175,
+      "doseBasis": "MG_M2",
+      "calculatedDose": null,
+      "prescribedDose": null,
+      "unit": "mg/m²",
+      "adjustmentPercent": null,
+      "adjustmentReason": null,
+      "route": "EV",
+      "diluent": "SF 0,9%",
+      "finalVolumeMl": 500,
+      "infusionTime": "3 h",
+      "days": [
+        "d1"
+      ],
+      "observacao": "eviQ 3579: 175 mg/m² em 500 mL SF em 3 h (recipientes não-PVC). EXTRAPOLAÇÃO de CECP.",
+      "source": "PROTOCOL",
+      "overrideMotivo": null
+    },
+    {
+      "drug": "Carboplatina",
+      "classe": "QT",
+      "sequence": 7,
+      "standardDose": 5,
+      "doseBasis": "AUC",
+      "calculatedDose": null,
+      "prescribedDose": null,
+      "unit": "AUC",
+      "adjustmentPercent": null,
+      "adjustmentReason": null,
+      "route": "EV",
+      "diluent": "SG 5%",
+      "finalVolumeMl": 500,
+      "infusionTime": "60 min",
+      "days": [
+        "d1"
+      ],
+      "observacao": "eviQ 3579: AUC 5 em 500 mL SG 5% em 30–60 min. 4–6 ciclos.",
+      "source": "PROTOCOL",
+      "overrideMotivo": null
+    },
+    {
+      "drug": "Soro fisiológico 0,9% 250 mL (lavagem pós-QT)",
+      "classe": "POS_QT",
+      "sequence": 8,
+      "standardDose": 1,
+      "doseBasis": "FIXED",
+      "calculatedDose": null,
+      "prescribedDose": null,
+      "unit": "frasco",
+      "adjustmentPercent": null,
+      "adjustmentReason": null,
+      "route": "EV",
+      "diluent": null,
+      "finalVolumeMl": 250,
+      "infusionTime": null,
+      "days": [
+        "d1"
+      ],
+      "observacao": "Lavar acesso venoso pós-QT (planilha).",
+      "source": "PROTOCOL",
+      "overrideMotivo": null
+    }
+  ],
+  "limiaresBula": null,
+  "fonte": "D-F1-34 e D-F1-49. Protocolo operacional (população CECP R/M — extrapolação explícita): EXT-CNV-008 (eviQ, ID 3579 — Head and neck SCC recurrent/metastatic CARBOplatin and PACLitaxel, acesso 2026-10-14, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json). Material local: LOC-SONHE (SOnHe, Protocolos SOnHe 2024, p. 313–318 (sarcomas); p. 89–91 (vulva); p. 236–238 (CEC pele); p. 314/317 (Ewing institucional)) (p. 236–238, opções incluem cemiplimabe preferencial).",
+  "status": "RASCUNHO"
+}
