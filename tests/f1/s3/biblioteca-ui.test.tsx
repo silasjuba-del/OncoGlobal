@@ -1,0 +1,178 @@
+// @vitest-environment jsdom
+import { afterEach, expect, it, vi } from "vitest";
+import { cleanup, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
+import { BibliotecaLocal } from "../../../src/ui/biblioteca/BibliotecaLocal.js";
+import type { ApiBiblioteca, BibliotecaEstado, ItemBibliotecaResposta } from "../../../src/contracts/api/biblioteca.js";
+
+afterEach(() => { cleanup(); vi.restoreAllMocks(); });
+
+const item: ItemBibliotecaResposta = {
+  schema: "ItemBiblioteca@1", id: "item-sintetico", versao: "1.0.0", pilar: 1, tipo: "REFERENCIA",
+  titulo: "Referência sintética", texto: "Texto público de exemplo.",
+  aplicabilidade: { tumor: ["mama"], histologia: [], estadio: [], biomarcador: [], linha: [] },
+  proveniencia: { fonte: "https://example.org/ref", trecho: "Trecho literal sintético", publicadoEm: "2026-01-01", recuperadoEm: "2026-01-02T00:00:00Z", licenca: "Fixture" },
+  dependencias: [], estado: "RASCUNHO", curadoria: null,
+};
+const hash = "a".repeat(64);
+const manifesto = { schema: "PacoteBiblioteca@1", id: "fixture", versao: "1.0.0", origem: "GENSPARK_MANUAL", classificacao: "PUBLIC", criadoEm: "2026-01-02T00:00:00Z", itens: [] };
+
+it("retira item consultável após revisão e confirmação explícita, limpando resultados anteriores", async () => {
+  let obsoleto = false;
+  const referencia = {id:"fixture",versao:"1.0.0",hash};
+  const api: ApiBiblioteca = {
+    estado: vi.fn(async (pacoteId?:string) => ({ ativa:"fixture@1.0.0",referencia,pacoteId:pacoteId??null,hash:pacoteId?hash:null,curadoriaHash:obsoleto?"b".repeat(64):hash,ativacao:null,
+      pacotes:[{pacoteId:"fixture@1.0.0",versao:"1.0.0",hash,ativo:true,itens:[{id:item.id,estado:obsoleto?"OBSOLETO" as const:"CONSULTAVEL" as const}]}],
+      itens:pacoteId?[{...item,estado:obsoleto?"OBSOLETO" as const:"CONSULTAVEL" as const}]:[] })),
+    curar:vi.fn(async pedido => {obsoleto=pedido.estado==="OBSOLETO";return {codigo:"ITEM_CURADO"};}),
+    consultar:vi.fn(async()=>({itens:obsoleto?[]:[item],referencia})), importar:vi.fn(),ativar:vi.fn(),rollback:vi.fn(),
+  };
+  const confirmar=vi.spyOn(window,"confirm").mockReturnValue(false);
+  render(<BibliotecaLocal api={api}/>);
+  fireEvent.click(await screen.findByRole("button",{name:"Abrir para revisão"}));
+  const botao=await screen.findByRole("button",{name:"Marcar OBSOLETO"});
+  expect((botao as HTMLButtonElement).disabled).toBe(true);
+  fireEvent.click(screen.getByText("Exibir conteúdo e trecho da fonte"));
+  const leitura=screen.getByLabelText(/Li e conferi o conteúdo e a fonte/) as HTMLInputElement;
+  await waitFor(()=>expect(leitura.disabled).toBe(false));fireEvent.click(leitura);
+  fireEvent.click(botao);expect(api.curar).not.toHaveBeenCalled();
+  fireEvent.click(screen.getByRole("button",{name:"Consultar"}));
+  const consulta=screen.getByRole("region",{name:"Consultar biblioteca"});
+  await within(consulta).findByText("Texto público de exemplo.");
+  confirmar.mockReturnValue(true);fireEvent.click(botao);
+  await waitFor(()=>expect(api.curar).toHaveBeenCalledWith({pacoteId:"fixture@1.0.0",itemId:item.id,expectedHash:hash,expectedCuradoriaHash:hash,estado:"OBSOLETO"}));
+  await screen.findByText(/marcado como OBSOLETO/);
+  expect(within(consulta).queryByText("Texto público de exemplo.")).toBeNull();
+  fireEvent.click(screen.getByRole("button",{name:"Consultar"}));
+  await within(consulta).findByText("Nenhum resultado para estes filtros.");
+  const restaurar=screen.getByRole("button",{name:"Marcar CONSULTAVEL"}) as HTMLButtonElement;
+  expect(restaurar.disabled).toBe(true);
+  fireEvent.click(screen.getByLabelText(/Li e conferi o conteúdo e a fonte/));
+  confirmar.mockReturnValue(false);fireEvent.click(restaurar);
+  expect(api.curar).toHaveBeenCalledTimes(1);
+  confirmar.mockReturnValue(true);fireEvent.click(restaurar);
+  await waitFor(()=>expect(api.curar).toHaveBeenLastCalledWith({pacoteId:"fixture@1.0.0",itemId:item.id,expectedHash:hash,expectedCuradoriaHash:"b".repeat(64),estado:"CONSULTAVEL"}));
+});
+
+it("importa como rascunho e só cura/ativa após exibir e confirmar conteúdo e versão", async () => {
+  let curado = false, ativa: string | null = null;
+  const pacote = { pacoteId: "fixture@1.0.0", versao: "1.0.0", hash, ativo: false, itens: [{ id: item.id, estado: curado ? "CONSULTAVEL" as const : "RASCUNHO" as const }] };
+  const estado = vi.fn(async (pacoteId?: string): Promise<BibliotecaEstado> => ({
+    ativa, referencia: ativa ? { id: "fixture", versao: "1.0.0", hash } : null,
+    pacoteId: pacoteId ?? null, hash: pacoteId ? hash : null, curadoriaHash: pacoteId ? (curado ? "b".repeat(64) : hash) : null, ativacao: null,
+    pacotes: [{ ...pacote, ativo: ativa === pacote.pacoteId }],
+    itens: pacoteId ? [{ ...item, estado: curado ? "CONSULTAVEL" : "RASCUNHO", curadoria: curado ? { ator: "medico", registradoEm: "2026-01-03T00:00:00Z" } : null }] : [],
+  }));
+  const api: ApiBiblioteca = {
+    estado,
+    importar: vi.fn(async () => ({ codigo: "PACOTE_IMPORTADO_RASCUNHO", pacoteId: pacote.pacoteId, hash })),
+    curar: vi.fn(async () => { curado = true; return { codigo: "ITEM_CURADO" }; }),
+    ativar: vi.fn(async () => { ativa = pacote.pacoteId; return { codigo: "BIBLIOTECA_ATIVADA" }; }),
+    rollback: vi.fn(async () => { ativa = null; return { codigo: "BIBLIOTECA_RESTAURADA" }; }),
+    consultar: vi.fn(async () => ({ itens: [], referencia: null })),
+  };
+  vi.spyOn(window, "confirm").mockReturnValue(true);
+  render(<BibliotecaLocal api={api} />);
+  const arquivo = new File([JSON.stringify({ manifesto, arquivos: { "item-sintetico.json": { texto: JSON.stringify(item) } } })], "pacote-http.json", { type: "application/json" });
+  fireEvent.change(screen.getByLabelText(/Importar pacote JSON local/), { target: { files: [arquivo] } });
+  await screen.findByText(/Pacote importado como RASCUNHO/);
+  expect(api.importar).toHaveBeenCalledWith(expect.objectContaining({ manifesto, arquivos: expect.any(Object) }));
+  expect(screen.getByText("Exibir conteúdo e trecho da fonte")).toBeTruthy();
+  const ativar = screen.getByRole("button", { name: "Ativar pacote revisado" }) as HTMLButtonElement;
+  expect(ativar.disabled).toBe(true);
+
+  const article = screen.getAllByRole("article")[0]!;
+  const curar = within(article).getByRole("button", { name: "Marcar CONSULTAVEL" }) as HTMLButtonElement;
+  expect(curar.disabled).toBe(true);
+  fireEvent.click(within(article).getByText("Exibir conteúdo e trecho da fonte"));
+  await screen.findByText("Texto público de exemplo.");
+  expect(screen.getByText("Trecho literal sintético")).toBeTruthy();
+  const confirmarItem = within(article).getByLabelText(/Li e conferi o conteúdo e a fonte/) as HTMLInputElement;
+  await waitFor(() => expect(confirmarItem.disabled).toBe(false));
+  fireEvent.click(confirmarItem);
+  fireEvent.click(curar);
+  await waitFor(() => expect(api.curar).toHaveBeenCalledWith({ pacoteId: pacote.pacoteId, itemId: item.id, expectedHash: hash, expectedCuradoriaHash: hash, estado: "CONSULTAVEL" }));
+  await waitFor(() => expect(confirmarItem.checked).toBe(false));
+  fireEvent.click(confirmarItem);
+  fireEvent.click(screen.getByLabelText(/Revisei a versão, o hash e os itens exibidos/));
+  fireEvent.click(screen.getByRole("button", { name: "Ativar pacote revisado" }));
+  await waitFor(() => expect(api.ativar).toHaveBeenCalledWith({ pacoteId: pacote.pacoteId, expectedHash: hash, expectedCuradoriaHash: "b".repeat(64), expectedAtiva: null, expectedAtivaHash: null }));
+  expect(window.confirm).toHaveBeenCalled();
+});
+
+it("consulta conteúdo e exige confirmação para rollback da ativa", async () => {
+  const estado: BibliotecaEstado = {
+    ativa: "fixture@1.0.0", referencia: { id: "fixture", versao: "1.0.0", hash }, pacoteId: null, hash: null,
+    anteriorRollback:{pacoteId:"fixture@0.9.0",hash,curadoriaHash:hash},
+    ativacao: null, pacotes: [{ pacoteId: "fixture@1.0.0", versao: "1.0.0", hash, ativo: true, itens: [{ id: item.id, estado: "CONSULTAVEL" }] },
+      {pacoteId:"fixture@0.9.0",versao:"0.9.0",hash,ativo:false,itens:[{id:item.id,estado:"CONSULTAVEL"}]}], itens: [],
+  };
+  const api: ApiBiblioteca = {
+    estado: vi.fn(async (id?:string) => id?{...estado,pacoteId:id,hash,curadoriaHash:hash,itens:[{...item,estado:"CONSULTAVEL" as const}]}:estado), importar: vi.fn(), curar: vi.fn(), ativar: vi.fn(),
+    rollback: vi.fn(async () => ({ codigo: "BIBLIOTECA_RESTAURADA" })),
+    consultar: vi.fn(async () => ({ itens: [item], referencia: estado.referencia })),
+  };
+  vi.spyOn(window, "confirm").mockReturnValue(true);
+  render(<BibliotecaLocal api={api} />);
+  const consultar = screen.getByRole("button", { name: "Consultar" }) as HTMLButtonElement;
+  await waitFor(() => expect(consultar.disabled).toBe(false));
+  fireEvent.change(screen.getByLabelText("tumor"), { target: { value: "mama" } });
+  fireEvent.click(consultar);
+  await screen.findByText("Texto público de exemplo.");
+  fireEvent.click(screen.getByRole("button", { name: "Restaurar versão anterior" }));
+  await screen.findByText(/Confira o conteúdo e as fontes da versão anterior/);
+  expect(api.rollback).not.toHaveBeenCalled();
+  fireEvent.click(screen.getByText("Exibir conteúdo e trecho da fonte"));
+  const leitura=screen.getByLabelText(/Li e conferi o conteúdo e a fonte/) as HTMLInputElement;
+  await waitFor(()=>expect(leitura.disabled).toBe(false));fireEvent.click(leitura);
+  fireEvent.click(screen.getByLabelText(/Revisei a versão, o hash e os itens exibidos/));
+  fireEvent.click(screen.getByRole("button", { name: "Restaurar versão anterior" }));
+  await waitFor(() => expect(api.rollback).toHaveBeenCalledWith({ expectedAtiva: "fixture@1.0.0", expectedAtivaHash: hash, expectedHash: hash,expectedAnterior:"fixture@0.9.0",expectedAnteriorHash:hash,expectedAnteriorCuradoriaHash:hash }));
+  expect(window.confirm).toHaveBeenCalledWith(expect.stringContaining("fixture@0.9.0"));
+});
+
+it("remove controles de ativação se a atualização do pacote falhar, sem expor erro bruto", async () => {
+  const detalhe: BibliotecaEstado = {
+    ativa: null, referencia: null, pacoteId: "fixture@1.0.0", hash,
+    ativacao: null, pacotes: [{ pacoteId: "fixture@1.0.0", versao: "1.0.0", hash, ativo: false, itens: [{ id: item.id, estado: "CONSULTAVEL" }] }],
+    itens: [{ ...item, estado: "CONSULTAVEL", curadoria: { ator: "medico", registradoEm: null } }],
+  };
+  const api: ApiBiblioteca = {
+    estado: vi.fn().mockResolvedValueOnce({ ...detalhe, pacoteId: null, hash: null, itens: [] })
+      .mockResolvedValueOnce(detalhe).mockRejectedValueOnce(new Error("ERRO_INTERNO_COM_PAYLOAD_SENSIVEL")),
+    importar: vi.fn(), curar: vi.fn(), ativar: vi.fn(), rollback: vi.fn(), consultar: vi.fn(),
+  };
+  render(<BibliotecaLocal api={api} />);
+  await screen.findByRole("button", { name: "Abrir para revisão" });
+  fireEvent.click(screen.getByRole("button", { name: "Abrir para revisão" }));
+  const itemCard = (await screen.findAllByRole("article"))[0]!;
+  fireEvent.click(within(itemCard).getByText("Exibir conteúdo e trecho da fonte"));
+  await screen.findByText("Trecho literal sintético");
+  const conferir = within(itemCard).getByLabelText(/Li e conferi o conteúdo e a fonte/) as HTMLInputElement;
+  await waitFor(() => expect(conferir.disabled).toBe(false));
+  fireEvent.click(conferir);
+  fireEvent.click(screen.getByLabelText(/Revisei a versão, o hash e os itens exibidos/));
+  expect(screen.getByRole("button", { name: "Ativar pacote revisado" })).toBeTruthy();
+  fireEvent.click(screen.getByRole("button", { name: "Atualizar lista" }));
+  expect((await screen.findByRole("alert")).textContent).toContain("Não foi possível concluir a operação");
+  expect(screen.queryByRole("button", { name: "Ativar pacote revisado" })).toBeNull();
+  expect(screen.queryByText(/ERRO_INTERNO_COM_PAYLOAD_SENSIVEL/)).toBeNull();
+});
+
+it.each(["versao", "falha"])("retira resultados antigos ao atualizar a biblioteca (%s)", async (mudanca) => {
+  const estado: BibliotecaEstado = { ativa: "fixture@1.0.0", referencia: { id: "fixture", versao: "1.0.0", hash },
+    pacoteId: null, hash: null, ativacao: null, pacotes: [], itens: [] };
+  const ler = vi.fn().mockResolvedValueOnce(estado);
+  if (mudanca === "falha") ler.mockRejectedValueOnce(new Error("FALHA_LEITURA"));
+  else ler.mockResolvedValueOnce({ ...estado, ativa: "fixture@2.0.0", referencia: { id: "fixture", versao: "2.0.0", hash: "b".repeat(64) } });
+  const api: ApiBiblioteca = { estado: ler, importar: vi.fn(), curar: vi.fn(), ativar: vi.fn(), rollback: vi.fn(),
+    consultar: vi.fn(async () => ({ itens: [item], referencia: estado.referencia })) };
+  render(<BibliotecaLocal api={api} />);
+  const consultar = screen.getByRole("button", { name: "Consultar" }) as HTMLButtonElement;
+  await waitFor(() => expect(consultar.disabled).toBe(false));
+  fireEvent.click(consultar);
+  await screen.findByText("Texto público de exemplo.");
+  expect(screen.getByText(/Resultados da biblioteca fixture/)).toBeTruthy();
+  fireEvent.click(screen.getByRole("button", { name: "Atualizar lista" }));
+  await waitFor(() => expect(screen.queryByText("Texto público de exemplo.")).toBeNull());
+  expect(screen.queryByText(/Resultados da biblioteca fixture/)).toBeNull();
+});

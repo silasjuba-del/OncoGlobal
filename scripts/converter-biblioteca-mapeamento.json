@@ -28,9 +28,30 @@
       "escopoFonte": "/painels/0",
       "publicadoEm": "2026-09-25",
       "fonteDataPublicacao": "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls/fa8f1f52-3f05-4ae8-bfec-7f0a029e6825/history.json"
+    },
+    "corpus/3-laudos/fgts/laudo-fgts.v1.RASCUNHO.json": {
+      "pilar": 3,
+      "aplicabilidade": {
+        "tumor": [],
+        "histologia": [],
+        "estadio": [],
+        "biomarcador": [],
+        "linha": []
+      },
+      "aplicabilidadeNota": "UNIVERSAL nas cinco dimensões para consulta da referência legal no corpus oncológico. O trecho legal continua restrito a neoplasia maligna; aparecer na busca não estabelece elegibilidade, direito ao saque ou indicação terapêutica. Só a base legal é convertida; requisitos de outras fontes e práticas locais permanecem no original.",
+      "escopoFonte": "/baseLegal/0",
+      "provenienciaUrl": "https://planalto.gov.br/ccivil_03/leis/l8036compilada.htm",
+      "publicadoEm": "1994-07-26",
+      "fonteDataPublicacao": "https://www.planalto.gov.br/ccivil_03/leis/l8922.htm"
     }
   },
   "verificacoes": [
+    {
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8922.htm",
+      "verificadaEm": "2026-10-17",
+      "metodo": "texto oficial da Lei 8.922/1994, rodapé de publicação",
+      "observacao": "Inclusão do inciso XI no art. 20 da Lei 8.036/1990. Publicado no D.O.U. de 26.7.1994; data distinta do acesso e da vigência local."
+    },
     {
       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=fa8f1f52-3f05-4ae8-bfec-7f0a029e6825",
       "verificadaEm": "2026-10-14",
@@ -66,6 +87,48 @@
       "verificadaEm": "2026-10-14",
       "metodo": "fetch direto",
       "observacao": "o corpus rotula 'ESMO Gastric 2022 rec 2c (PMC10937212)'; a página é a adaptação Pan-Asiática 2024 da diretriz ESMO de gástrico — divergência de rótulo registrada"
+    },
+    {
+      "url": "https://www.bccancer.bc.ca/chemotherapy-protocols-site/Documents/Primary%20Unknown/PUCAT_Protocol.pdf",
+      "verificadaEm": "2026-10-15",
+      "metodo": "página oficial BC Cancer, protocolo PUCAT",
+      "observacao": "fonte primária do esquema PUCAT para carcinoma metastático de origem desconhecida; evidência candidata para pack-cup, sem implicar aplicabilidade das outras dimensões"
+    },
+    {
+      "url": "https://www.eviq.org.au/medical-oncology/sarcoma/bone-sarcoma/1901-osteosarcoma-map-methotrexate-doxorubicin",
+      "verificadaEm": "2026-10-15",
+      "metodo": "página oficial eviQ, protocolo 1901",
+      "observacao": "fonte primária eviQ para osteosarcoma MAP; evidência candidata para pack-osteossarcoma"
+    },
+    {
+      "url": "https://www.eviq.org.au/medical-oncology/sarcoma/bone-sarcoma/3464-ewing-sarcoma-vdc-ie-overview",
+      "verificadaEm": "2026-10-15",
+      "metodo": "página oficial eviQ, protocolo 3464",
+      "observacao": "fonte primária eviQ para VDC/IE em sarcoma de Ewing/PNET; evidência candidata para pack-ewing"
+    },
+    {
+      "url": "https://www.eviq.org.au/medical-oncology/gynaecological/vulval/1529-vulval-scc-locally-advanced-cisplatin-weekly",
+      "verificadaEm": "2026-10-15",
+      "metodo": "página oficial eviQ, protocolo 1529",
+      "observacao": "fonte primária eviQ para cisplatina semanal com radioterapia em carcinoma epidermoide vulvar localmente avançado; evidência candidata para pack-vulva"
+    },
+    {
+      "url": "https://www.eviq.org.au/medical-oncology/respiratory/non-small-cell-lung-cancer-advanced-metastatic/4151-locally-advanced-or-metastatic-cemiplimab",
+      "verificadaEm": "2026-10-15",
+      "metodo": "página oficial eviQ, protocolo 4151",
+      "observacao": "conteúdo identifica cemiplimab para carcinoma epidermoide cutâneo avançado; fonte cobre cemiplimab, mas não sustenta isoladamente o trecho agregado do pack-cec-pele sobre quimioterapia por extrapolação"
+    },
+    {
+      "url": "https://www.eviq.org.au/medical-oncology/gynaecological/gestational-trophoblastic-disease/668-gestational-trophoblastic-disease-low-risk-met",
+      "verificadaEm": "2026-10-15",
+      "metodo": "página oficial eviQ, protocolo 668",
+      "observacao": "fonte primária eviQ para metotrexato em doença trofoblástica gestacional de baixo risco; evidência candidata para pack-ntg, não cobre por si só o escopo integral do pack"
+    },
+    {
+      "url": "https://planalto.gov.br/ccivil_03/leis/l8036compilada.htm",
+      "verificadaEm": "2026-10-15",
+      "metodo": "texto compilado oficial no Portal da Legislação, Presidência da República",
+      "observacao": "Lei 8.036/1990, art. 20, XI: 'quando o trabalhador ou qualquer de seus dependentes for acometido de neoplasia maligna'; corresponde ao trecho em baseLegal de laudo-fgts"
     },
     {
       "url": "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls/fa8f1f52-3f05-4ae8-bfec-7f0a029e6825/history.json",

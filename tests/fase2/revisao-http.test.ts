@@ -1,0 +1,24 @@
+import { afterEach,expect,it } from "vitest";
+import { abrirAmbiente,cadastrarPaciente,criarDiretorio,removerDiretorio,PACIENTE,ENCONTRO } from "../f0-fecha/fixtures/consulta-completa.js";
+import { criarPortaHttp } from "../../src/ui/api/http.js";
+import { RevisaoClinicaResposta } from "../../src/contracts/fase2/revisaoClinica.js";
+let a:Awaited<ReturnType<typeof abrirAmbiente>>|undefined;
+afterEach(async()=>{if(a){await a.close();removerDiretorio(a.dir);a=undefined;}});
+it("HTTP real carrega packs legados consultáveis e ficha ausente sem promover regras ou fatos",async()=>{
+  a=await abrirAmbiente(criarDiretorio());cadastrarPaciente(a);
+  const ctx={patientId:PACIENTE,encounterId:ENCONTRO,tumorLotId:null};
+  await a.request("/consulta/carregar",ctx);const antes=a.eventos().length;
+  const lotes=await a.request('/consulta/lotes',{patientId:PACIENTE});
+  expect(lotes.status).toBe(200);expect(lotes.data.patientId).toBe(PACIENTE);
+  expect(lotes.data.lotes.every((l:any)=>l.patientId===PACIENTE)).toBe(true);
+  expect((await a.request('/consulta/lotes',{patientId:'paciente-ausente'})).status).toBe(404);
+  const r=await a.request("/consulta/revisao-clinica",ctx);
+  expect(r.status,JSON.stringify(r.data)).toBe(200);
+  const parsed=RevisaoClinicaResposta.parse(r.data);expect(parsed.packs.length).toBeGreaterThan(0);
+  expect(parsed.packs.every(p=>p.estado!=="ATIVO")).toBe(true);expect(parsed.preQt).toMatchObject({estado:"PENDENTE",autorizaTratamento:false});
+  const pack=await a.request("/consulta/revisao-clinica",{...ctx,packId:parsed.packs[0]!.id});
+  expect(pack.status,JSON.stringify(pack.data)).toBe(200);expect(pack.data.pack.blocos).toHaveProperty("c1_lacunas");
+  expect(pack.data.pack.revisaoClinica).toBeNull();expect(a.eventos()).toHaveLength(antes);
+  expect((await a.request("/consulta/revisao-clinica",{...ctx,encounterId:"outro"})).status).toBe(409);
+  expect((await a.request("/consulta/revisao-clinica",{...ctx,estado:"ATIVO"})).status).toBe(400);
+});

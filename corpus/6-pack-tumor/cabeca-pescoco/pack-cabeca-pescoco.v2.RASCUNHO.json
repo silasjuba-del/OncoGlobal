@@ -2308,5 +2308,2439 @@
       "achado": "Codex 2026-10-11 (veredito entrega final): faturamento molecular não demonstrado",
       "acao": "1 vínculos rebaixados a catalogoIdCandidato"
     }
-  ]
+  ],
+  "tumor_pack_universal": {
+    "schema_documental": "tumor-pack-universal@1",
+    "metadados": {
+      "revisao_documental": "2026-10-17-nccn-final-documental",
+      "versao": "1.3.0",
+      "data": "2026-10-17",
+      "autor_extracao": "Codex",
+      "estado": "RASCUNHO",
+      "aprovacao_clinica": null,
+      "escopo": "CAMADA_ADITIVA_UNIVERSAL_E_DELTA_DOCUMENTAL_NCCN",
+      "base_legada": {
+        "arquivo": "corpus/6-pack-tumor/cabeca-pescoco/pack-cabeca-pescoco.v2.RASCUNHO.json",
+        "commit": "2c0991d",
+        "versao": "2.0.0",
+        "sha256_bytes": "659356db9e63d5ce4bb9e43dce6c15353000abe90875bc3afde95ad36fff5a2e",
+        "sha256_semantico": "c8aeb5c99b31b26ad9cf661ff208a7bbda8f528165e9c45465105e4f98932539"
+      },
+      "nota_versao": "Camada universal 1.3.0; header identifica o legado preservado. Fechamento documental, sem aprovação clínica ou ativação.",
+      "integra_runtime": false,
+      "gera_conduta": false,
+      "historico_revisoes": [
+        {
+          "revisao_documental": "2026-10-17-nccn-delta-1",
+          "versao": "1.0.0",
+          "data": "2026-10-17",
+          "autor_extracao": "Codex",
+          "estado": "RASCUNHO",
+          "aprovacao_clinica": null,
+          "escopo": "CAMADA_ADITIVA_UNIVERSAL_E_DELTA_DOCUMENTAL_NCCN",
+          "base_legada": {
+            "arquivo": "corpus/6-pack-tumor/cabeca-pescoco/pack-cabeca-pescoco.v2.RASCUNHO.json",
+            "commit": "2c0991d",
+            "versao": "2.0.0",
+            "sha256_bytes": "659356db9e63d5ce4bb9e43dce6c15353000abe90875bc3afde95ad36fff5a2e",
+            "sha256_semantico": "c8aeb5c99b31b26ad9cf661ff208a7bbda8f528165e9c45465105e4f98932539"
+          },
+          "nota_versao": "header.versao identifica o legado intacto; esta extensão possui revisão própria. Não reutilizar aprovação/hashes antigos para o conjunto alterado.",
+          "integra_runtime": false,
+          "gera_conduta": false
+        },
+        {
+          "revisao_documental": "2026-10-17-nccn-delta-3-auditoria33",
+          "versao": "1.2.0",
+          "data": "2026-10-17",
+          "autor_extracao": "Codex",
+          "estado": "RASCUNHO",
+          "aprovacao_clinica": null,
+          "escopo": "CAMADA_ADITIVA_UNIVERSAL_E_DELTA_DOCUMENTAL_NCCN",
+          "base_legada": {
+            "arquivo": "corpus/6-pack-tumor/cabeca-pescoco/pack-cabeca-pescoco.v2.RASCUNHO.json",
+            "commit": "2c0991d",
+            "versao": "2.0.0",
+            "sha256_bytes": "659356db9e63d5ce4bb9e43dce6c15353000abe90875bc3afde95ad36fff5a2e",
+            "sha256_semantico": "c8aeb5c99b31b26ad9cf661ff208a7bbda8f528165e9c45465105e4f98932539"
+          },
+          "nota_versao": "Revisão da camada universal1.2.0; header legado preservado. Auditoria documental dos33 itens, sem aprovação clínica.",
+          "integra_runtime": false,
+          "gera_conduta": false,
+          "historico_revisoes": [
+            {
+              "revisao_documental": "2026-10-17-nccn-delta-1",
+              "versao": "1.0.0",
+              "data": "2026-10-17",
+              "autor_extracao": "Codex",
+              "estado": "RASCUNHO",
+              "aprovacao_clinica": null,
+              "escopo": "CAMADA_ADITIVA_UNIVERSAL_E_DELTA_DOCUMENTAL_NCCN",
+              "base_legada": {
+                "arquivo": "corpus/6-pack-tumor/cabeca-pescoco/pack-cabeca-pescoco.v2.RASCUNHO.json",
+                "commit": "2c0991d",
+                "versao": "2.0.0",
+                "sha256_bytes": "659356db9e63d5ce4bb9e43dce6c15353000abe90875bc3afde95ad36fff5a2e",
+                "sha256_semantico": "c8aeb5c99b31b26ad9cf661ff208a7bbda8f528165e9c45465105e4f98932539"
+              },
+              "nota_versao": "header.versao identifica o legado intacto; esta extensão possui revisão própria. Não reutilizar aprovação/hashes antigos para o conjunto alterado.",
+              "integra_runtime": false,
+              "gera_conduta": false
+            }
+          ]
+        }
+      ]
+    },
+    "identidade_ref": "/identidade",
+    "dominios": [
+      {
+        "dominio_id": 1,
+        "nome": "Diagnóstico e patologia",
+        "itens_legados_refs": [
+          "legado-8a9a283797e01687",
+          "legado-553c45f1e03ea4f0",
+          "legado-a0f30ca58168a363",
+          "legado-2310e67062974f26",
+          "legado-2a905a097c219c15",
+          "legado-2c3fe9016b152f95",
+          "legado-d31de3c7d57759dd",
+          "legado-04dd96417fbb721a",
+          "legado-a50b8ab13a32d5b8",
+          "legado-3c29f71a383b442e"
+        ],
+        "itens_nccn_refs": [
+          "nccn-20261017-cabeca-pescoco-salivares"
+        ],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 2,
+        "nome": "Estadiamento, extensão e risco",
+        "itens_legados_refs": [
+          "legado-14b70ed38bf74741",
+          "legado-211c2df54196d2a7",
+          "legado-6fd6c9b8b35ca661",
+          "legado-8033256e1a7d71c4",
+          "legado-b78d43e9b21189fa",
+          "legado-32a51c40b912713b",
+          "legado-db546010d24e315e",
+          "legado-8bbcb5de422f7825"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 3,
+        "nome": "Biomarcadores e farmacogenética",
+        "itens_legados_refs": [
+          "legado-9f3e369b6c78c258",
+          "legado-b7d6e815c8fcfe3f",
+          "legado-512124d348bc1121",
+          "legado-40c226b918df8333",
+          "legado-8be86a6a58f9c7f6",
+          "legado-35a9f1aa77061cdc",
+          "legado-d6e22b3eb6d2834b"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 4,
+        "nome": "Exames e requisitos documentais",
+        "itens_legados_refs": [
+          "legado-f25d6413194d1548",
+          "legado-214b5840b8cd1cfc",
+          "legado-607bad794afb263c",
+          "legado-d37d4d4ecf9ad38a",
+          "legado-7cafd21d63804088",
+          "legado-65d047bf837db4a5",
+          "legado-4acb8074d55ecc61",
+          "legado-7ddb39abd87fd8e5",
+          "legado-4b66088b8f62e6d8",
+          "legado-81a4a8931f5f16ac",
+          "legado-6896d80949eee8ba",
+          "legado-89db3b6ec657bc2a",
+          "legado-a0d29a0f7f77ca61",
+          "legado-8d4b91e50a9e6651",
+          "legado-cc607128c97c8999",
+          "legado-f65b09126b15d2f0",
+          "legado-8ef7604140d1e260",
+          "legado-fb61d80c0c08d7a7",
+          "legado-5c704e1fefab91dc",
+          "legado-d6cbdfbeb55a8b6c",
+          "legado-bac44e91146e50c7",
+          "legado-7aa73168ee042307",
+          "legado-e620776a37db6ff2",
+          "legado-f337d4a04d6cef7b"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 5,
+        "nome": "Avaliação antes do tratamento",
+        "itens_legados_refs": [],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "NAO_ESTRUTURADO_NESTA_RODADA",
+        "observacao": "Ausência de referências não significa não aplicabilidade; textos dentro de outros itens permanecem preservados."
+      },
+      {
+        "dominio_id": 6,
+        "nome": "Tratamento e protocolos",
+        "itens_legados_refs": [
+          "legado-f7fac08457651609",
+          "legado-d79ce408792f0ba5",
+          "legado-20d0be163b78e405",
+          "legado-517148864e5222ca",
+          "legado-d4b021f17c579ac3",
+          "legado-ec2dca99162db9ad",
+          "legado-e74836b3032dffd1",
+          "legado-4fae027963735fdd",
+          "legado-253ab067c1f1277a",
+          "legado-adf5c1283485ec3a",
+          "legado-730f9421cbe37db5",
+          "legado-4c31e40475daea1f",
+          "legado-174f868172569041",
+          "legado-440bbc41765131b6",
+          "legado-9bd607d16068fafa",
+          "legado-ef92956089d19595",
+          "legado-04400710bc51a294",
+          "legado-314c33a25baed27a",
+          "legado-ade1d80eb8e2e17c",
+          "legado-151462873d785d83",
+          "legado-a6c84c1dea96fc6b",
+          "legado-68839e067eef8dc9",
+          "legado-4d2d75f89091c058",
+          "legado-6045fa3544a278b5",
+          "legado-b70fca863dd7eed3",
+          "legado-a7454fd868262ecf",
+          "legado-97e5685975d8b396",
+          "legado-915f59f8490bcdbb",
+          "legado-3791b780ab1374ce",
+          "legado-d988811ab7847f33",
+          "legado-4be4e9f7166f4dce",
+          "legado-f887c08ac0a93534",
+          "legado-a1e9b63b73d4a9ed",
+          "legado-a186314c1ec671f5",
+          "legado-076710025ba17ba5",
+          "legado-e5219e7c6763514f",
+          "legado-73d9ae2200b8a775",
+          "legado-1c1e0287e35af107",
+          "legado-7fbb8e74731f8729",
+          "legado-1fe5199bdc5f21c5",
+          "legado-6a1d84f54651355e",
+          "legado-758e99594c5006dc"
+        ],
+        "itens_nccn_refs": [
+          "nccn-20261017-cabeca-pescoco-pembro-perioperatorio",
+          "nccn-20261017-cabeca-pescoco-toripalimabe"
+        ],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 7,
+        "nome": "Segurança, interações e toxicidades",
+        "itens_legados_refs": [
+          "legado-57fe369fe2248c86",
+          "legado-31955affc7669587",
+          "legado-92fa7e19c05d5c5c",
+          "legado-9e82fa3fcbf82084",
+          "legado-6e89c00dbfc1a256",
+          "legado-1e53e701f8ba4326",
+          "legado-129feb91b1d17a6a"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 8,
+        "nome": "Suporte e cuidados",
+        "itens_legados_refs": [
+          "legado-c6f423d0f1a0da58",
+          "legado-0bfca46f9f8b02ad",
+          "legado-0956b350fa5b54ba",
+          "legado-e39dbe6889e5ed69",
+          "legado-4d9586122887b592"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 9,
+        "nome": "Avaliação de resposta e estado da doença",
+        "itens_legados_refs": [],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "NAO_ESTRUTURADO_NESTA_RODADA",
+        "observacao": "Ausência de referências não significa não aplicabilidade; textos dentro de outros itens permanecem preservados."
+      },
+      {
+        "dominio_id": 10,
+        "nome": "Seguimento e sobrevivência",
+        "itens_legados_refs": [
+          "legado-860a0dd515f0f5e5",
+          "legado-1f0e60672d5cb751",
+          "legado-6819629c6d0353db",
+          "legado-5665984e0826280f",
+          "legado-586396757d44f60e",
+          "legado-92d33f4d9167741a",
+          "legado-32292faca14a721b",
+          "legado-1b5c2c786b484655",
+          "legado-f36c99dbb36f5b36",
+          "legado-ebfa5447bde89cc6"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 11,
+        "nome": "Encaminhamentos e atuação multiprofissional",
+        "itens_legados_refs": [
+          "legado-7c9b3cbf03b43c80",
+          "legado-f7c608c28459a133",
+          "legado-ee2d930e26502e3b",
+          "legado-e8ce80cb9e8e8c74",
+          "legado-00c6a01d72b18283",
+          "legado-119e383dbc8ee6ce",
+          "legado-f63fc47568cbc0c1"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 12,
+        "nome": "Documentos e acesso assistencial",
+        "itens_legados_refs": [
+          "legado-d441d2d4a746c32c",
+          "legado-3a3c86772e07b53f",
+          "legado-6aa2ed677f682f36"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      }
+    ],
+    "indice_itens_legados": [
+      {
+        "item_id": "legado-8a9a283797e01687",
+        "origem_json_pointer": "/diagnostico/patologico/obtencao/0",
+        "sha256_conteudo": "6837be4c752717501c4175210504f26ebe8e23ef5dc1d0a934eca09f55fc44d0",
+        "nome": "/diagnostico/patologico/obtencao/0",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/obtencao/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-553c45f1e03ea4f0",
+        "origem_json_pointer": "/diagnostico/patologico/obtencao/1",
+        "sha256_conteudo": "0be97803fa9b41351a0ef137d0fbe8c8fa3856fa4c64f2f9ec987e330a4b404c",
+        "nome": "/diagnostico/patologico/obtencao/1",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/obtencao/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a0f30ca58168a363",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/0",
+        "sha256_conteudo": "8db5c191bbd99f64af8d8c3801ec87fdfa92008cbcf054d975c8631d6ecf9275",
+        "nome": "subsítio anatômico",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-2310e67062974f26",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/1",
+        "sha256_conteudo": "a91fa1778b8b444fc35194c56a8d27db8e04fe0c8258f6a872bf84a9fbe043c3",
+        "nome": "profundidade de invasão (cavidade oral)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-2a905a097c219c15",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/2",
+        "sha256_conteudo": "5af8f3e14ee0c71c99a892be5183fe17bcce9a982eb89be0b368af37c949baa5",
+        "nome": "margens",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-2c3fe9016b152f95",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/3",
+        "sha256_conteudo": "ae85e8211150b5520c8c85f5dd13444039267a6a72592b6ae27ddead188f5964",
+        "nome": "extensão extranodal (EEN)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d31de3c7d57759dd",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/4",
+        "sha256_conteudo": "f8b482db2c99c6536c358c529619831763020145d2a87c5830bc785eef8d60fe",
+        "nome": "invasão perineural e embolização vascular",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-04dd96417fbb721a",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/5",
+        "sha256_conteudo": "da2a0e47710e36e51391af89e79e2bdd63a298767a863ef10a4b3874e723248f",
+        "nome": "número e tamanho de LFN",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a50b8ab13a32d5b8",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/6",
+        "sha256_conteudo": "138fad89f40de05177d1a13e3c02d44e1f28f42cb06aa244a2b141e1aff4d2d1",
+        "nome": "p16 por IHQ em orofaringe",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-3c29f71a383b442e",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/7",
+        "sha256_conteudo": "c83e62ac8a379b162c6cafccd70fd01a8825ac87e5b09b5c5f33addc8b1d9537",
+        "nome": "histologia OMS em nasofaringe",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-14b70ed38bf74741",
+        "origem_json_pointer": "/estadiamento/sistema",
+        "sha256_conteudo": "d7dab6e16ae3278a0513466816530a61b1fcf4548c0e925655782b9ee09cf5ce",
+        "nome": "AJCC",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-211c2df54196d2a7",
+        "origem_json_pointer": "/estadiamento/edicao",
+        "sha256_conteudo": "2a25f079c14999f885413694e4e2cadc151b72ba3b1a919a7450ac7a022f946a",
+        "nome": "8ª (2017); tratamento ainda baseado na 7ª",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-6fd6c9b8b35ca661",
+        "origem_json_pointer": "/estadiamento/gruposConduta/0",
+        "sha256_conteudo": "9ee44258ef9c3b6d6900bb5f596cb1974fd8425bc3f189997df2f7b32356f464",
+        "nome": "/estadiamento/gruposConduta/0",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8033256e1a7d71c4",
+        "origem_json_pointer": "/estadiamento/gruposConduta/1",
+        "sha256_conteudo": "fc77335df8a8baf79f8b598024b645bbf5549f0a066b5cb50a12b4fae82ecd94",
+        "nome": "/estadiamento/gruposConduta/1",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b78d43e9b21189fa",
+        "origem_json_pointer": "/estadiamento/gruposConduta/2",
+        "sha256_conteudo": "f576c8c4d25d46379532b79afa88f853f17b9d9c4bd14eec21916bdb73d20aab",
+        "nome": "/estadiamento/gruposConduta/2",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-32a51c40b912713b",
+        "origem_json_pointer": "/estadiamento/gruposConduta/3",
+        "sha256_conteudo": "3dab421be6bd4e85eb6a610eacd064f0132370d56b23220d2b5a4213dc938e03",
+        "nome": "/estadiamento/gruposConduta/3",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-db546010d24e315e",
+        "origem_json_pointer": "/estadiamento/gruposConduta/4",
+        "sha256_conteudo": "a1b9301c94281c2a8df790a2f7b49fcf2daeb67686852c4b8b346337caf834de",
+        "nome": "/estadiamento/gruposConduta/4",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8bbcb5de422f7825",
+        "origem_json_pointer": "/estadiamento/marcadores",
+        "sha256_conteudo": "b158c231155e1f288fff8730e7d67b4aa7754b40ea48b021aeefb0a7ef30e473",
+        "nome": "/estadiamento/marcadores",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-9f3e369b6c78c258",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/0",
+        "sha256_conteudo": "c1dcf1ff8087fa8a892ffd1f19f9085f015d92672213a0e19dbb027e8aad7d33",
+        "nome": "Orofaringe (e LFN cervical de primário oculto)",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b7d6e815c8fcfe3f",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/1",
+        "sha256_conteudo": "9a5d34fe3728b31b4bfb801f91b3823361d9fe92728864a132097ec4173ba426",
+        "nome": "Orofaringe com p16 discordante/duvidoso",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-512124d348bc1121",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/2",
+        "sha256_conteudo": "3eb363f43c2a2248183fae2af8e454303e0bcb2a69f791e81e940bfa3a9d6c12",
+        "nome": "Nasofaringe / LFN cervical T0",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-40c226b918df8333",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/3",
+        "sha256_conteudo": "486b4e928f57cd39a8ff8fd83a1d5782d4c1c2882a9ef190bef13be394d8c419",
+        "nome": "Recorrente/metastático (exceto nasofaringe)",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8be86a6a58f9c7f6",
+        "origem_json_pointer": "/tratamento/biomarcadorTratamento/0",
+        "sha256_conteudo": "c4c916de3915a6e1ea23b86ec510d96524c313bd8a350204c9c3b9a7be1750d1",
+        "nome": "/tratamento/biomarcadorTratamento/0",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/biomarcadorTratamento/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-35a9f1aa77061cdc",
+        "origem_json_pointer": "/tratamento/biomarcadorTratamento/1",
+        "sha256_conteudo": "cdd2f59416fe75b0b958564c83b2ea6407d7a3b68a413206459a2facb513d261",
+        "nome": "/tratamento/biomarcadorTratamento/1",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/biomarcadorTratamento/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d6e22b3eb6d2834b",
+        "origem_json_pointer": "/tratamento/biomarcadorTratamento/2",
+        "sha256_conteudo": "f3363391e5589e2e6c4aec62f90666540965a40cdb71e842346d161b6f40a4e2",
+        "nome": "/tratamento/biomarcadorTratamento/2",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/biomarcadorTratamento/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-f25d6413194d1548",
+        "origem_json_pointer": "/diagnostico/imagem/0",
+        "sha256_conteudo": "1d01826a06d6f53c8866b1ac5ff158dfdfa7c4be2fbff1170221dd0c9caa762f",
+        "nome": "TC de face e pescoço com contraste",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-214b5840b8cd1cfc",
+        "origem_json_pointer": "/diagnostico/imagem/1",
+        "sha256_conteudo": "8add5b11d3de52e0b8d3fb7aeadf98a494941489de237f22f8bddaf322e33077",
+        "nome": "RM de face/pescoço (catálogo: RM coluna cervical/pescoço)",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-607bad794afb263c",
+        "origem_json_pointer": "/diagnostico/imagem/2",
+        "sha256_conteudo": "276a4e32736a5f331baa6550030a88a0671e788be1dbdcecca4c612fe716f657",
+        "nome": "TC de tórax",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d37d4d4ecf9ad38a",
+        "origem_json_pointer": "/diagnostico/imagem/3",
+        "sha256_conteudo": "b46c0f03c553aed7e6d3c0d817c114c81aff6584587c5c28da6309fd0a13b437",
+        "nome": "PET/CT FDG",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-7cafd21d63804088",
+        "origem_json_pointer": "/diagnostico/endoscopicos/0",
+        "sha256_conteudo": "49adf0406d7eb1835ed94f82966e1ec0faf78ac39fdea8bb8cb7bf2e655120c7",
+        "nome": "Videonasofaringolaringoscopia com biópsia",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/endoscopicos/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-65d047bf837db4a5",
+        "origem_json_pointer": "/diagnostico/endoscopicos/1",
+        "sha256_conteudo": "8279b51bceae69158ac32ed5518cfcbbeb534532d2d8e29be1e1c136f0b33d80",
+        "nome": "Laringoscopia direta sob anestesia geral",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/endoscopicos/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-4acb8074d55ecc61",
+        "origem_json_pointer": "/diagnostico/endoscopicos/2",
+        "sha256_conteudo": "9cabb9a12fee2531d80293e004c1c92300c63c6c0b4a7beb8c6d5a806b73e656",
+        "nome": "Esofagoscopia",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/endoscopicos/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-7ddb39abd87fd8e5",
+        "origem_json_pointer": "/estadiamento/exames/0",
+        "sha256_conteudo": "911cfe83f45e8ae3bdb2b1768c8e092e3b373afc83ef6c646b6fd378afdb9471",
+        "nome": "TC face e pescoço",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-4b66088b8f62e6d8",
+        "origem_json_pointer": "/estadiamento/exames/1",
+        "sha256_conteudo": "e54872abd92d3855a718ad2f9e0212bb3b23c3d9c6d37baa26325bcba7ea125b",
+        "nome": "TC de tórax",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-81a4a8931f5f16ac",
+        "origem_json_pointer": "/estadiamento/exames/2",
+        "sha256_conteudo": "34490dbd21ae817c675c4781b0014918f0935665695558f3150e0d3d1c93756b",
+        "nome": "PET/CT",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-6896d80949eee8ba",
+        "origem_json_pointer": "/estadiamento/exames/3",
+        "sha256_conteudo": "b66a2d73c1a1880c459e69c1ccdf1ef0dd1cc5f1a0709a407a33fa6cfa61d324",
+        "nome": "RX de tórax (NÃO recomendado para metástase pulmonar)",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-89db3b6ec657bc2a",
+        "origem_json_pointer": "/ligacoes/exames/0",
+        "sha256_conteudo": "00cac656db90cece9385c8c98f658accb5b7c1553202e6be466fa96d39aaf2b9",
+        "nome": "ANATOMOPATOLOGICO",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a0d29a0f7f77ca61",
+        "origem_json_pointer": "/ligacoes/exames/1",
+        "sha256_conteudo": "dc49fc936c8f159a3aa8208709558e35c50f545055f5cc9756e18bdd0d02c81b",
+        "nome": "BIOPSIA_GANGLIO",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8d4b91e50a9e6651",
+        "origem_json_pointer": "/ligacoes/exames/2",
+        "sha256_conteudo": "4eafbeeab923ac66d78540cd37c0f44aba4997fe0bb026271a95da2189ec190b",
+        "nome": "EDA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-cc607128c97c8999",
+        "origem_json_pointer": "/ligacoes/exames/3",
+        "sha256_conteudo": "99a98b9d268e78a05608d792d2fad81f4e16f25b8a4f95da9f7decd91a23a0dc",
+        "nome": "IMUNOHISTOQUIMICA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-f65b09126b15d2f0",
+        "origem_json_pointer": "/ligacoes/exames/4",
+        "sha256_conteudo": "95d2c9296510105780c68fd7b85e94cc8db94a00e44a39c827300cac75d765cc",
+        "nome": "LARINGOSCOPIA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8ef7604140d1e260",
+        "origem_json_pointer": "/ligacoes/exames/5",
+        "sha256_conteudo": "3a955b75de510bd32be8d0f7de2bf070f27f223ac4c6a07cf68b35b7271856b2",
+        "nome": "PET_CT_FDG",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-fb61d80c0c08d7a7",
+        "origem_json_pointer": "/ligacoes/exames/6",
+        "sha256_conteudo": "76ba5a288100352d0b630171f31b6de0c84b577dc81e407c6c3e976cb4b794ad",
+        "nome": "RM_COLUNA_CERVICAL",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-5c704e1fefab91dc",
+        "origem_json_pointer": "/ligacoes/exames/7",
+        "sha256_conteudo": "c14ce60ca37c165e4caacee63f3b6f144d8c362ed86614c2583ca390362a034e",
+        "nome": "RX_TORAX_PA_PERFIL",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d6cbdfbeb55a8b6c",
+        "origem_json_pointer": "/ligacoes/exames/8",
+        "sha256_conteudo": "abf013156d8f11e8b9d9be7a4bf0ca7e6df2ae05e9ed8840f510f1f6f3cba514",
+        "nome": "TC_PESCOCO",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-bac44e91146e50c7",
+        "origem_json_pointer": "/ligacoes/exames/9",
+        "sha256_conteudo": "147b97b900462813d8c6528cc01d88f8a5102936ee96ee4fb121f8a7b77f60b0",
+        "nome": "TC_TORAX",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-7aa73168ee042307",
+        "origem_json_pointer": "/ligacoes/exames/10",
+        "sha256_conteudo": "a723186a1328a8a0f43e1b82bd5d49ea0574e6bc72a7ad32889ce010ff549cdd",
+        "nome": "TSH",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e620776a37db6ff2",
+        "origem_json_pointer": "/ligacoes/exames/11",
+        "sha256_conteudo": "0e5a07a15ab8195f4422772993c1bccfff8c456397b2b5a29016536ea1354d97",
+        "nome": "VIDEONASOLARINGOSCOPIA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-f337d4a04d6cef7b",
+        "origem_json_pointer": "/ligacoes/exames/12",
+        "sha256_conteudo": "10b539905c5722767078e9ceb88d8fff1b02961b44c6a998cd836032dd5c0b69",
+        "nome": "HPV_MOLECULAR",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-f7fac08457651609",
+        "origem_json_pointer": "/tratamento/cenarios/0",
+        "sha256_conteudo": "6edb698c7eee9c3181023a8088af5379b3d6f7802a4e4044ea610ec0ff964cf4",
+        "nome": "Cavidade oral I-II",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d79ce408792f0ba5",
+        "origem_json_pointer": "/tratamento/cenarios/1",
+        "sha256_conteudo": "aa2fabf16e5ca8605269850ed7f6f9ba18c4d487b8f74983536e4b2a598b89ff",
+        "nome": "Adjuvante (todos os subsítios exceto nasofaringe)",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-20d0be163b78e405",
+        "origem_json_pointer": "/tratamento/cenarios/2",
+        "sha256_conteudo": "c33d377e8da67fd75f3f44dd01351cae473d326dbe97aacff6e0b08b893c02c8",
+        "nome": "Orofaringe I-II",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-517148864e5222ca",
+        "origem_json_pointer": "/tratamento/cenarios/3",
+        "sha256_conteudo": "eb4237029c376d53c1d3872702064307e0dd7f50d8ed15a16e045eb614d4e0fc",
+        "nome": "Laringe T3 com preservação de órgão",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d4b021f17c579ac3",
+        "origem_json_pointer": "/tratamento/cenarios/4",
+        "sha256_conteudo": "ad33e22bba0aaa252e7544b49d736de49126f02b9c3816e3564139d981a776f6",
+        "nome": "Localmente avançado irressecável",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ec2dca99162db9ad",
+        "origem_json_pointer": "/tratamento/cenarios/5",
+        "sha256_conteudo": "209bea1d1968ec2d9e45a19b21f6e263bce51cc2b39582c86287e27107bdb646",
+        "nome": "Nasofaringe III-IV",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/5/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e74836b3032dffd1",
+        "origem_json_pointer": "/tratamento/cenarios/6",
+        "sha256_conteudo": "b5ee017298e607b426ac783aa009b766f17ccf2ca45887bde8d54027c0c58090",
+        "nome": "Recorrente/metastático (exceto nasofaringe)",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/6/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-4fae027963735fdd",
+        "origem_json_pointer": "/tratamento/protocolos/0",
+        "sha256_conteudo": "4b02621ee46b90cf174b6243cf0ff447fbc7a8b440a39045ace4d9f94f1d2593",
+        "nome": "Cisplatina alta dose concomitante à RT",
+        "id_original": "cabeca-pescoco-cddp100-rt-definitivo",
+        "fonte_local_ref": "/tratamento/protocolos/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-253ab067c1f1277a",
+        "origem_json_pointer": "/tratamento/protocolos/1",
+        "sha256_conteudo": "01a19b90a815a0c719f69813752784a6914a638bc712a22065fdd463b3c269ec",
+        "nome": "Cisplatina alta dose concomitante à RT",
+        "id_original": "cabeca-pescoco-cddp100-rt-adjuvante",
+        "fonte_local_ref": "/tratamento/protocolos/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-adf5c1283485ec3a",
+        "origem_json_pointer": "/tratamento/protocolos/2",
+        "sha256_conteudo": "988a15cdb50c83b714531e07bf74303f176bfa33f6ad4d303b11ad3781ea703b",
+        "nome": "Cisplatina semanal concomitante à RT",
+        "id_original": "cabeca-pescoco-cddp40-semanal-rt-definitivo",
+        "fonte_local_ref": "/tratamento/protocolos/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-730f9421cbe37db5",
+        "origem_json_pointer": "/tratamento/protocolos/3",
+        "sha256_conteudo": "f423000ed8344a416dd3dc1d08047bb0461a5e4f00eff77d3d97002dd7ddf796",
+        "nome": "Cisplatina semanal concomitante à RT",
+        "id_original": "cabeca-pescoco-cddp40-semanal-rt-adjuvante",
+        "fonte_local_ref": "/tratamento/protocolos/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-4c31e40475daea1f",
+        "origem_json_pointer": "/tratamento/protocolos/4",
+        "sha256_conteudo": "67f2ac7f4d03130cc854f4c00e91d74182594265751b5aa63f729443615647ad",
+        "nome": "Docetaxel semanal concomitante à RT (inelegível à cisplatina)",
+        "id_original": "cabeca-pescoco-docetaxel15-rt-definitivo",
+        "fonte_local_ref": "/tratamento/protocolos/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-174f868172569041",
+        "origem_json_pointer": "/tratamento/protocolos/5",
+        "sha256_conteudo": "642401808469e1fe6cfed8d1d6de975a5d9ee41ee96357dc83ba69be254c4c51",
+        "nome": "Docetaxel semanal concomitante à RT (inelegível à cisplatina)",
+        "id_original": "cabeca-pescoco-docetaxel15-rt-adjuvante",
+        "fonte_local_ref": "/tratamento/protocolos/5/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-440bbc41765131b6",
+        "origem_json_pointer": "/tratamento/protocolos/6",
+        "sha256_conteudo": "5cd513f519eb4ae06c7c865dfcf92e0eb64d6522f768d05a309984032eefaf5b",
+        "nome": "Cetuximabe concomitante à RT (inelegível à cisplatina)",
+        "id_original": "cabeca-pescoco-cetuximabe-rt",
+        "fonte_local_ref": "/tratamento/protocolos/6/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-9bd607d16068fafa",
+        "origem_json_pointer": "/tratamento/protocolos/7",
+        "sha256_conteudo": "63b01e0bb836a7635224aeaeb0857d17ed629bd0b9ad27dbe34daa061ed5bad4",
+        "nome": "Carboplatina + 5-FU concomitante à RT",
+        "id_original": "cabeca-pescoco-carbo-5fu-rt",
+        "fonte_local_ref": "/tratamento/protocolos/7/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ef92956089d19595",
+        "origem_json_pointer": "/tratamento/protocolos/8",
+        "sha256_conteudo": "509fc5f704ec7c26ea645571bc31deb6fb8ca85f40a20ddbab44c44075677602",
+        "nome": "Carboplatina semanal concomitante à RT",
+        "id_original": "cabeca-pescoco-carbo-auc2-semanal-rt",
+        "fonte_local_ref": "/tratamento/protocolos/8/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-04400710bc51a294",
+        "origem_json_pointer": "/tratamento/protocolos/9",
+        "sha256_conteudo": "88c2b2fedfa6d60de57d2c07ab8563f9f825516143707e3f0f580afaa6fb0dff",
+        "nome": "TPF de indução (não-nasofaringe)",
+        "id_original": "cabeca-pescoco-tpf-inducao",
+        "fonte_local_ref": "/tratamento/protocolos/9/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-314c33a25baed27a",
+        "origem_json_pointer": "/tratamento/protocolos/10",
+        "sha256_conteudo": "75e2919b213ecd5d882fb6a2926958fa73305ad6576e568881eb8474f1790469",
+        "nome": "TPF de indução (nasofaringe)",
+        "id_original": "cabeca-pescoco-tpf-nasofaringe",
+        "fonte_local_ref": "/tratamento/protocolos/10/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ade1d80eb8e2e17c",
+        "origem_json_pointer": "/tratamento/protocolos/11",
+        "sha256_conteudo": "9ed11c7d9bcea228c384ba7e08f6c74f267b4076bc71de8642252ce2fede1357",
+        "nome": "Cisplatina + gencitabina de indução (nasofaringe)",
+        "id_original": "cabeca-pescoco-gc-nasofaringe",
+        "fonte_local_ref": "/tratamento/protocolos/11/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-151462873d785d83",
+        "origem_json_pointer": "/tratamento/protocolos/12",
+        "sha256_conteudo": "ec4cd721c8c2fc1ebc0eca54cb93cb63231ea11859413a57b1f7ff4dfc332b0c",
+        "nome": "Cisplatina + 5-FU de indução",
+        "id_original": "cabeca-pescoco-pf-inducao",
+        "fonte_local_ref": "/tratamento/protocolos/12/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a6c84c1dea96fc6b",
+        "origem_json_pointer": "/tratamento/protocolos/13",
+        "sha256_conteudo": "83459ec40ca4671db6153cc37fc30e1b32b7830f628d117ca76e42b4063188ed",
+        "nome": "Capecitabina metronômica adjuvante (nasofaringe LA)",
+        "id_original": "cabeca-pescoco-capecitabina-metronomica-nasofaringe",
+        "fonte_local_ref": "/tratamento/protocolos/13/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-68839e067eef8dc9",
+        "origem_json_pointer": "/tratamento/protocolos/14",
+        "sha256_conteudo": "7f50fdf8c6180b5bd9b3a1e8282d48324375f9ba830508533f83233a128dfff3",
+        "nome": "Pembrolizumabe monoterapia (CPS ≥1)",
+        "id_original": "cabeca-pescoco-rm-pembrolizumabe",
+        "fonte_local_ref": "/tratamento/protocolos/14/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-4d2d75f89091c058",
+        "origem_json_pointer": "/tratamento/protocolos/15",
+        "sha256_conteudo": "27bcb38deb11321a2b87512bcbcf47502a446bfa20916e4a08a590348751e3bf",
+        "nome": "Platina + 5-FU + pembrolizumabe",
+        "id_original": "cabeca-pescoco-rm-platina-5fu-pembro",
+        "fonte_local_ref": "/tratamento/protocolos/15/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-6045fa3544a278b5",
+        "origem_json_pointer": "/tratamento/protocolos/16",
+        "sha256_conteudo": "575c01839fdd26127fbbd5e90d1bcae97089a3e6366146030acc570aca178f66",
+        "nome": "Extreme: platina + 5-FU + cetuximabe (CPS 0)",
+        "id_original": "cabeca-pescoco-rm-extreme",
+        "fonte_local_ref": "/tratamento/protocolos/16/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b70fca863dd7eed3",
+        "origem_json_pointer": "/tratamento/protocolos/17",
+        "sha256_conteudo": "579a349ea518317f0612acce48a6049e8bee6528ccc74d8a4d07a5c1c2b89266",
+        "nome": "TPEx: cisplatina + docetaxel + cetuximabe (CPS 0)",
+        "id_original": "cabeca-pescoco-rm-tpex",
+        "fonte_local_ref": "/tratamento/protocolos/17/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a7454fd868262ecf",
+        "origem_json_pointer": "/tratamento/protocolos/18",
+        "sha256_conteudo": "31608425cbd282d0a52e1b13de39c573cc8e34e71028dfc7c507a0e0554ce754",
+        "nome": "Platina + paclitaxel (alternativa SUS)",
+        "id_original": "cabeca-pescoco-rm-platina-paclitaxel",
+        "fonte_local_ref": "/tratamento/protocolos/18/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-97e5685975d8b396",
+        "origem_json_pointer": "/tratamento/protocolos/19",
+        "sha256_conteudo": "69caff05dba018641f6fd61d689c05638d01ffee30ef5157c16d2f9700875e7f",
+        "nome": "Platina + 5-FU (alternativa SUS)",
+        "id_original": "cabeca-pescoco-rm-pf",
+        "fonte_local_ref": "/tratamento/protocolos/19/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-915f59f8490bcdbb",
+        "origem_json_pointer": "/tratamento/protocolos/20",
+        "sha256_conteudo": "8cd263aa6fb0461f3ccf97a819885fdea6e1c3e279caab9e3345e05338d15fec",
+        "nome": "Nivolumabe (2ª linha)",
+        "id_original": "cabeca-pescoco-rm-nivolumabe",
+        "fonte_local_ref": "/tratamento/protocolos/20/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-3791b780ab1374ce",
+        "origem_json_pointer": "/tratamento/protocolos/21",
+        "sha256_conteudo": "60213c321bfc6d3ec7844a2990f1a2a04f4f697522dfa3b653d83cba98a1bdae",
+        "nome": "Metotrexato semanal",
+        "id_original": "cabeca-pescoco-rm-metotrexato",
+        "fonte_local_ref": "/tratamento/protocolos/21/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d988811ab7847f33",
+        "origem_json_pointer": "/tratamento/protocolos/22",
+        "sha256_conteudo": "c9743ec848ee10e7c6a6d86ae8fac2991495b19217c71f984ca8b5379f209ab3",
+        "nome": "Docetaxel a cada 3 semanas",
+        "id_original": "cabeca-pescoco-rm-docetaxel-q21",
+        "fonte_local_ref": "/tratamento/protocolos/22/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-4be4e9f7166f4dce",
+        "origem_json_pointer": "/tratamento/protocolos/23",
+        "sha256_conteudo": "295ce31d98f17bdb85f7a654d9ec7f282aad9111812096871efb9095b12591a3",
+        "nome": "Paclitaxel semanal",
+        "id_original": "cabeca-pescoco-rm-paclitaxel-semanal",
+        "fonte_local_ref": "/tratamento/protocolos/23/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-f887c08ac0a93534",
+        "origem_json_pointer": "/tratamento/protocolos/24",
+        "sha256_conteudo": "38190fbff22815396222448c7fd52444363c34021858bf8ad07e6fd2095cb4b5",
+        "nome": "Cisplatina + gencitabina (nasofaringe R/M)",
+        "id_original": "cabeca-pescoco-nasofaringe-rm-gc",
+        "fonte_local_ref": "/tratamento/protocolos/24/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a1e9b63b73d4a9ed",
+        "origem_json_pointer": "/tratamento/protocolos/25",
+        "sha256_conteudo": "7c59d1b6fe9577c4951acfdf80e4168063bb3db8f19ddd363a33958841d1457d",
+        "nome": "Cisplatina + 5-FU adjuvante após radioquimioterapia (nasofaringe)",
+        "id_original": "cabeca-pescoco-pf-adjuvante-nasofaringe",
+        "fonte_local_ref": "/tratamento/protocolos/25/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a186314c1ec671f5",
+        "origem_json_pointer": "/tratamento/cirurgia/0",
+        "sha256_conteudo": "967e1bfc60694c6abab8b451784834db78e97f40cfd458f3b44e5965bdfa4bf2",
+        "nome": "/tratamento/cirurgia/0",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cirurgia/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-076710025ba17ba5",
+        "origem_json_pointer": "/tratamento/cirurgia/1",
+        "sha256_conteudo": "df41a543429ad9861a8d76b71c44007107744ffc31bf63bb9839a685b703940c",
+        "nome": "/tratamento/cirurgia/1",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cirurgia/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e5219e7c6763514f",
+        "origem_json_pointer": "/tratamento/cirurgia/2",
+        "sha256_conteudo": "267a74e922c2580c5f72c0698aa0cb2174e354825e8c8b4a43307df232cf23d8",
+        "nome": "/tratamento/cirurgia/2",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cirurgia/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-73d9ae2200b8a775",
+        "origem_json_pointer": "/tratamento/cirurgia/3",
+        "sha256_conteudo": "974fdd4336dda6e91d0bf1497e7ea504c31e2b32a7e05d14f072a46703f59423",
+        "nome": "/tratamento/cirurgia/3",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cirurgia/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-1c1e0287e35af107",
+        "origem_json_pointer": "/tratamento/cirurgia/4",
+        "sha256_conteudo": "daaa8ac5db7374d699b4a7af6294f287bbcb86730a33b69436c44b0a94b243a9",
+        "nome": "/tratamento/cirurgia/4",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cirurgia/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-7fbb8e74731f8729",
+        "origem_json_pointer": "/tratamento/radioterapia/0",
+        "sha256_conteudo": "1572d3493a948edabd57c758b3aa190a258679e72072707f2a1185e964757e27",
+        "nome": "RT pós-operatória (cavidade oral, orofaringe, hipofaringe, laringe)",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/radioterapia/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-1fe5199bdc5f21c5",
+        "origem_json_pointer": "/tratamento/radioterapia/1",
+        "sha256_conteudo": "5c7a9750154d6a5e67b1593503e9b2b4c8d342982602e59fd094a5dcd1ed197a",
+        "nome": "RT definitiva — nasofaringe (tumor macroscópico)",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/radioterapia/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-6a1d84f54651355e",
+        "origem_json_pointer": "/tratamento/radioterapia/2",
+        "sha256_conteudo": "cc7e51088fcbcf5b00bbc5a7c10311b39da620cad5bdb81361ddaad9612c1f2b",
+        "nome": "RT definitiva — cavidade oral, orofaringe, laringe, hipofaringe (± QT)",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/radioterapia/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-758e99594c5006dc",
+        "origem_json_pointer": "/tratamento/radioterapia/3",
+        "sha256_conteudo": "30b17b09d019e456fc94487cc921826899979230d0aa330f1d9a3a875ecad4a8",
+        "nome": "RT isolada ECOG >2 (definitiva ou paliativa)",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/radioterapia/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-57fe369fe2248c86",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/0",
+        "sha256_conteudo": "5cde3834f0296105d601a24434ec28607f00cf7ea3b5cef490ce96acd4fd347a",
+        "nome": "/ligacoes/interacoesConsultar/0",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-31955affc7669587",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/1",
+        "sha256_conteudo": "10470b5b2ee0af15ca6e2d8cc25f54fa25b8cdb17293021f5b80d46efcbe5c86",
+        "nome": "/ligacoes/interacoesConsultar/1",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-92fa7e19c05d5c5c",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/2",
+        "sha256_conteudo": "b2a449cf434b36f095bca047eb7dffe170e039407a11d73c8cb61fb01d95057a",
+        "nome": "/ligacoes/interacoesConsultar/2",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-9e82fa3fcbf82084",
+        "origem_json_pointer": "/ligacoes/ctcaeAcao/0",
+        "sha256_conteudo": "ccec5a8a87f562807a0bb69aefe58555be59c8d0abeab85233379f660c7a4391",
+        "nome": "/ligacoes/ctcaeAcao/0",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-6e89c00dbfc1a256",
+        "origem_json_pointer": "/ligacoes/ctcaeAcao/1",
+        "sha256_conteudo": "57dd61b021296c77ca272fe3897c6af40fc5f7f7cb4490a9ab728415d15265ce",
+        "nome": "/ligacoes/ctcaeAcao/1",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-1e53e701f8ba4326",
+        "origem_json_pointer": "/ligacoes/ctcaeAcao/2",
+        "sha256_conteudo": "c409c696eb101a186b8ddcf3cd48004fe6f104a6cf1b05170ea1ad25e454f14f",
+        "nome": "/ligacoes/ctcaeAcao/2",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-129feb91b1d17a6a",
+        "origem_json_pointer": "/ligacoes/ctcaeAcao/3",
+        "sha256_conteudo": "1ed337a07782d28b3eee8d2cb79f1845100c04f2c1ced09329b25854ab3738c3",
+        "nome": "/ligacoes/ctcaeAcao/3",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-c6f423d0f1a0da58",
+        "origem_json_pointer": "/tratamento/suporte",
+        "sha256_conteudo": "ad35bdcee0306604a5cc6de757799024ac50b5e439d24c11749661fdfd137ce5",
+        "nome": "/tratamento/suporte",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/suporte/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-0bfca46f9f8b02ad",
+        "origem_json_pointer": "/ligacoes/suporteReceitas/0",
+        "sha256_conteudo": "d4486eb163e62aaf11117460ee80d31777b7bbeb85db522e281bfc2b968262d7",
+        "nome": "antiemético alto risco (cisplatina 100 mg/m²)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-0956b350fa5b54ba",
+        "origem_json_pointer": "/ligacoes/suporteReceitas/1",
+        "sha256_conteudo": "ab023f9805d83bcc02e610fd91e37660a81ff32fbbb1f8465104b02dcdb680d8",
+        "nome": "hidratação e magnésio pré/pós cisplatina",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e39dbe6889e5ed69",
+        "origem_json_pointer": "/ligacoes/suporteReceitas/2",
+        "sha256_conteudo": "19eaf2d693649bc1e05fc6512a0d546898a0123d7c9620a10651e3dc767c1bc3",
+        "nome": "bochechos/analgesia para mucosite",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-4d9586122887b592",
+        "origem_json_pointer": "/ligacoes/suporteReceitas/3",
+        "sha256_conteudo": "99f7f5bbe5bed42d9e752e2c4490135a0224e19565f073c0745aa32b7a425c6a",
+        "nome": "G-CSF no TPEx",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-860a0dd515f0f5e5",
+        "origem_json_pointer": "/tratamento/seguimento/0",
+        "sha256_conteudo": "6f9512394872e4f2f6e0a9e6710f8104344d5b087cc6a0f157ad4e41d14332f8",
+        "nome": "1º ano",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/seguimento/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-1f0e60672d5cb751",
+        "origem_json_pointer": "/tratamento/seguimento/1",
+        "sha256_conteudo": "a4bbb7a3df6ac91601513266497529623d5daf83d29375290e5691a5860260f0",
+        "nome": "2º ano",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/seguimento/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-6819629c6d0353db",
+        "origem_json_pointer": "/tratamento/seguimento/2",
+        "sha256_conteudo": "199d565b74515290282fce204ee0aeb82e5e0e340b411578168384051b6fec04",
+        "nome": "3º ao 5º ano",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/seguimento/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-5665984e0826280f",
+        "origem_json_pointer": "/tratamento/seguimento/3",
+        "sha256_conteudo": "e97e8a9e74e75be773baf0feb8b1a7492479e92dbfb59d07dcb128080e780ac7",
+        "nome": "Pós-RT, anual",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/seguimento/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-586396757d44f60e",
+        "origem_json_pointer": "/tratamento/seguimento/4",
+        "sha256_conteudo": "a513aa516a4c04658cdb809bc52718bc58f10139fb14aa93d60ea5e3188e57e4",
+        "nome": "Tabagistas >50 anos e >20 anos-maço",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/seguimento/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-92d33f4d9167741a",
+        "origem_json_pointer": "/tratamento/seguimento/5",
+        "sha256_conteudo": "7f2989d44cd2aac71d485522c2d8c30f11c27720446db6267a1d2a7ae646b36b",
+        "nome": "N2-N3 após tratamento não cirúrgico",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/seguimento/5/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-32292faca14a721b",
+        "origem_json_pointer": "/ligacoes/orientacoes/0",
+        "sha256_conteudo": "c6878c19810b6e5974c462cb04addab9eecc63b9da3d7a06436c219a5c591458",
+        "nome": "cessação de tabagismo e álcool",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-1b5c2c786b484655",
+        "origem_json_pointer": "/ligacoes/orientacoes/1",
+        "sha256_conteudo": "0384d9d1533f2ac62aa01c5a46ade89dbd6bb44f0f891d60906fda59a2154bca",
+        "nome": "cuidados com pele irradiada",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-f36c99dbb36f5b36",
+        "origem_json_pointer": "/ligacoes/orientacoes/2",
+        "sha256_conteudo": "ae792a6ef2a86118e623f5ae5b966abf03ca9dc43a150fb560a10cfdf99cd4fe",
+        "nome": "avaliação odontológica pré-RT",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ebfa5447bde89cc6",
+        "origem_json_pointer": "/ligacoes/orientacoes/3",
+        "sha256_conteudo": "f5e0451bdff14e1339019131ed46867cd43f4cc5bd944ab64f281804b74b360a",
+        "nome": "nutrição/gastrostomia quando indicado",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-7c9b3cbf03b43c80",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/0",
+        "sha256_conteudo": "7493766c8afeb1f691e416372742d2691a9ad5b28a4a5d999f7fadba22338762",
+        "nome": "cirurgia de cabeça e pescoço",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-f7c608c28459a133",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/1",
+        "sha256_conteudo": "eb54fb8d77e530fb6faedf5bf1621ae02068135f31f3ec1f1351cbd5f307765b",
+        "nome": "radioterapia",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ee2d930e26502e3b",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/2",
+        "sha256_conteudo": "094bd9ded15e6e5faee01a585d86195a97800d65250fb87aa0ee83dc93e70144",
+        "nome": "odontologia",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e8ce80cb9e8e8c74",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/3",
+        "sha256_conteudo": "4c0cae233944082bbf0d554336551887acf074d328e15004e5d67d99685d7294",
+        "nome": "fonoaudiologia",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-00c6a01d72b18283",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/4",
+        "sha256_conteudo": "1979e973ae91021c13757fd38a335254b27b35044cb9bb047d6c52aae368c83b",
+        "nome": "nutrição",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-119e383dbc8ee6ce",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/5",
+        "sha256_conteudo": "82f6ed95dc0293533d51db96a9b3235fd16e6b98128ffaf9947d32831c7a7e7b",
+        "nome": "psicologia",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-f63fc47568cbc0c1",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/6",
+        "sha256_conteudo": "d35d984e8ce201894d962fa92b39093f1c9096712967eafdbc21643c8f2f0248",
+        "nome": "serviço social",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d441d2d4a746c32c",
+        "origem_json_pointer": "/ligacoes/laudos/0",
+        "sha256_conteudo": "f3e41b609dee2791f53f33e49a084765fa70fc626cd21e62d675d40aa2e056f6",
+        "nome": "APAC de radioterapia",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-3a3c86772e07b53f",
+        "origem_json_pointer": "/ligacoes/laudos/1",
+        "sha256_conteudo": "d2fcb758299c6dd3685d9d63e1928878fd3f5769f27c54b6c0f2058500507548",
+        "nome": "APAC de quimioterapia (CID C00-C14, C30-C32)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-6aa2ed677f682f36",
+        "origem_json_pointer": "/ligacoes/laudos/2",
+        "sha256_conteudo": "0e6ba7f05e4650f7b55497a06121207763d6a6da815e4fe2c966de9f81aef22f",
+        "nome": "laudo de IHQ p16 em orofaringe",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      }
+    ],
+    "itens_nccn": [
+      {
+        "item_id": "nccn-20261017-cabeca-pescoco-pembro-perioperatorio",
+        "nome": "Pembrolizumabe perioperatório — subgrupos definidos",
+        "tipo": "OPCAO_TERAPEUTICA",
+        "dominio_principal": 6,
+        "conteudo_extraido": "Estádio III–IVA com CPS≥1: cavidade oral em Other Recommended; orofaringe p16-negativa, hipofaringe e laringe em Useful in Certain Circumstances. Sequência neoadjuvante com pembrolizumabe, seguida de pembrolizumabe/RT adjuvantes, cisplatina se extensão extranodal e/ou margem positiva, depois pembrolizumabe adjuvante. O qualificador p16-negativo está associado à orofaringe. A delimitação é sustentada também por HYPO-5 (p.32), GLOT-6 (p.49), SUPRA-3 (p.54) e ST-4 (p.132); os algoritmos de sítio não exigem p16-negativo na laringe/hipofaringe. HYPO-5 e GLOT-6 explicitam exceção para N3.",
+        "aplicabilidade": {
+          "criterios": [
+            "Estádio III–IVA nas localizações descritas",
+            "CPS≥1",
+            "Cavidade oral OU orofaringe p16-negativa OU hipofaringe OU laringe",
+            "Ressecabilidade e sequência definidas no cenário"
+          ],
+          "paciente_individual": null,
+          "estado": "NAO_AVALIADA"
+        },
+        "dados_estruturados": {
+          "farmacos": [
+            "pembrolizumabe",
+            "cisplatina condicional"
+          ],
+          "posologia": {
+            "estado": "NAO_EXTRAIDA_NESTA_RODADA",
+            "valor": null,
+            "motivo": "A rodada incorpora o delta de indicação/cenário; não completa dose por inferência."
+          },
+          "ramos_por_sitio": [
+            {
+              "sitio": "cavidade oral",
+              "preferencia": "Other Recommended"
+            },
+            {
+              "sitio": "orofaringe p16-negativa; hipofaringe; laringe",
+              "preferencia": "Useful in Certain Circumstances"
+            }
+          ]
+        },
+        "fonte_refs": [
+          {
+            "fonte_id": "nccn-7670cd55a7c1",
+            "edicao": "2.2026",
+            "pagina_pdf": 117,
+            "paginas_pdf": [
+              117
+            ],
+            "secao": "SYST-A 2/7",
+            "trecho": "p16-negative oropharynx",
+            "sha256_pdf": "4f55936c29f30d87218e3ba01e0b6269556afdbe19de65be512f081357fd91b0",
+            "natureza": "EXTRACAO_DOCUMENTAL"
+          },
+          {
+            "fonte_id": "nccn-7670cd55a7c1",
+            "edicao": "2.2026",
+            "pagina_pdf": 32,
+            "paginas_pdf": [
+              32
+            ],
+            "secao": "HYPO-5",
+            "trecho": "except for N3 disease",
+            "sha256_pdf": "4f55936c29f30d87218e3ba01e0b6269556afdbe19de65be512f081357fd91b0",
+            "natureza": "EXTRACAO_DOCUMENTAL"
+          },
+          {
+            "fonte_id": "nccn-7670cd55a7c1",
+            "edicao": "2.2026",
+            "pagina_pdf": 49,
+            "paginas_pdf": [
+              49
+            ],
+            "secao": "GLOT-6",
+            "trecho": "except for N3",
+            "sha256_pdf": "4f55936c29f30d87218e3ba01e0b6269556afdbe19de65be512f081357fd91b0",
+            "natureza": "EXTRACAO_DOCUMENTAL"
+          },
+          {
+            "fonte_id": "nccn-7670cd55a7c1",
+            "edicao": "2.2026",
+            "pagina_pdf": 54,
+            "paginas_pdf": [
+              54
+            ],
+            "secao": "SUPRA-3",
+            "trecho": "If PD-L1 positive",
+            "sha256_pdf": "4f55936c29f30d87218e3ba01e0b6269556afdbe19de65be512f081357fd91b0",
+            "natureza": "EXTRACAO_DOCUMENTAL"
+          },
+          {
+            "fonte_id": "nccn-7670cd55a7c1",
+            "edicao": "2.2026",
+            "pagina_pdf": 132,
+            "paginas_pdf": [
+              132
+            ],
+            "secao": "ST-4",
+            "trecho": "Oropharynx (p16-) and Hypopharynx",
+            "sha256_pdf": "4f55936c29f30d87218e3ba01e0b6269556afdbe19de65be512f081357fd91b0",
+            "natureza": "EXTRACAO_DOCUMENTAL"
+          }
+        ],
+        "evidencia_declarada": {
+          "sistema": "NCCN",
+          "categoria": "2A por cabeçalho",
+          "preferencia": "VARIA_POR_SITIO",
+          "estado": "CONFERIDA_DOCUMENTALMENTE_A_CONFERIR_CLINICAMENTE",
+          "nota": "2A por cabeçalho somente onde a página expressamente declara essa regra; não é categoria inferida por conhecimento externo."
+        },
+        "estado_extracao": "EXTRAIDO_COM_LIMITES_DECLARADOS",
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "temporalidade": {
+          "referencia": "CENARIO_DESCRITO",
+          "datas_individuais": null
+        },
+        "propor_automaticamente": false,
+        "disponivel_para_prescricao": false,
+        "acesso": {
+          "registro_anvisa": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "incorporacao_conitec": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "pcdt_ddt": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "sigtap_apac": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "cobertura_privada": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "disponibilidade_institucional": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          }
+        },
+        "alternativas_legadas_refs": [],
+        "relacoes_refs": [
+          "relacao-nccn-20261017-cabeca-pescoco-pembro-perioperatorio"
+        ],
+        "conflitos_refs": [],
+        "pendencias": [
+          "REVISAO_CLINICA_DO_DELTA",
+          "VERIFICAR_ACESSO_BRASILEIRO_POR_INDICACAO",
+          "POSOLOGIA_E_SUPORTE_NAO_COMPLETOS_NESTA_RODADA"
+        ],
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+            "anterior": {
+              "fonte_refs": [
+                {
+                  "fonte_id": "nccn-7670cd55a7c1",
+                  "paginas_pdf": [
+                    117
+                  ],
+                  "secao": "SYST-A, tratamento sistêmico",
+                  "natureza": "EXTRACAO_DOCUMENTAL",
+                  "pagina_pdf": 117,
+                  "trecho": "Neoadjuvant Pembrolizumab followed by adjuvant Pembrolizumab/RT (with Cisplatin if extranodal extension and/or"
+                }
+              ],
+              "conteudo_extraido": "Sequência neoadjuvante seguida de pembrolizumabe/RT adjuvantes, cisplatina se extensão extranodal/margem positiva, e continuidade de pembrolizumabe. Distinguir cavidade oral dos subgrupos p16-negativos de orofaringe/hipofaringe/laringe.",
+              "aplicabilidade": {
+                "criterios": [
+                  "Estádio III–IVA nas localizações descritas",
+                  "PD-L1 CPS≥1",
+                  "Critérios de ressecabilidade e população do cenário"
+                ],
+                "paciente_individual": null,
+                "estado": "NAO_AVALIADA"
+              },
+              "dados_estruturados": {
+                "farmacos": [
+                  "pembrolizumabe",
+                  "cisplatina condicional"
+                ],
+                "posologia": {
+                  "estado": "NAO_EXTRAIDA_NESTA_RODADA",
+                  "valor": null,
+                  "motivo": "A rodada incorpora o delta de indicação/cenário; não completa dose por inferência."
+                }
+              },
+              "evidencia_declarada": {
+                "sistema": "NCCN",
+                "categoria": null,
+                "estado": "NAO_EXTRAIDA_POR_ITEM"
+              }
+            },
+            "motivo": "A redação anterior não distinguia categorias de preferência por sítio e podia estender o qualificativo p16-negativo a todas as localizações.",
+            "aprovacao_clinica": null
+          },
+          {
+            "revisao": "2026-10-17-nccn-final-documental",
+            "anterior": {
+              "conteudo_extraido": "Estádio III–IVA com CPS≥1: cavidade oral em Other Recommended; orofaringe p16-negativa, hipofaringe e laringe em Useful in Certain Circumstances. Sequência neoadjuvante com pembrolizumabe, seguida de pembrolizumabe/RT adjuvantes, cisplatina se extensão extranodal e/ou margem positiva, depois pembrolizumabe adjuvante. O qualificador p16-negativo está associado à orofaringe.",
+              "fonte_refs": [
+                {
+                  "fonte_id": "nccn-7670cd55a7c1",
+                  "edicao": "2.2026",
+                  "pagina_pdf": 117,
+                  "paginas_pdf": [
+                    117
+                  ],
+                  "secao": "SYST-A 2/7",
+                  "trecho": "Stage III–IVA cancer of the oral cavity",
+                  "natureza": "EXTRACAO_DOCUMENTAL",
+                  "sha256_pdf": "4f55936c29f30d87218e3ba01e0b6269556afdbe19de65be512f081357fd91b0"
+                },
+                {
+                  "fonte_id": "nccn-7670cd55a7c1",
+                  "edicao": "2.2026",
+                  "pagina_pdf": 117,
+                  "paginas_pdf": [
+                    117
+                  ],
+                  "secao": "SYST-A 2/7",
+                  "trecho": "p16-negative oropharynx, hypopharynx, and larynx",
+                  "natureza": "EXTRACAO_DOCUMENTAL",
+                  "sha256_pdf": "4f55936c29f30d87218e3ba01e0b6269556afdbe19de65be512f081357fd91b0"
+                }
+              ]
+            },
+            "motivo": "Complemento de evidência por sítio; não criar requisito p16-negativo para laringe/hipofaringe; corrigir GLOT-3 citado no parecer para GLOT-6.",
+            "aprovacao_clinica": null
+          }
+        ],
+        "fontes_por_campo": {
+          "conteudo_extraido": [
+            {
+              "fonte_id": "nccn-7670cd55a7c1",
+              "edicao": "2.2026",
+              "pagina_pdf": 117,
+              "paginas_pdf": [
+                117
+              ],
+              "secao": "SYST-A 2/7",
+              "trecho": "p16-negative oropharynx",
+              "sha256_pdf": "4f55936c29f30d87218e3ba01e0b6269556afdbe19de65be512f081357fd91b0",
+              "natureza": "EXTRACAO_DOCUMENTAL"
+            },
+            {
+              "fonte_id": "nccn-7670cd55a7c1",
+              "edicao": "2.2026",
+              "pagina_pdf": 32,
+              "paginas_pdf": [
+                32
+              ],
+              "secao": "HYPO-5",
+              "trecho": "except for N3 disease",
+              "sha256_pdf": "4f55936c29f30d87218e3ba01e0b6269556afdbe19de65be512f081357fd91b0",
+              "natureza": "EXTRACAO_DOCUMENTAL"
+            },
+            {
+              "fonte_id": "nccn-7670cd55a7c1",
+              "edicao": "2.2026",
+              "pagina_pdf": 49,
+              "paginas_pdf": [
+                49
+              ],
+              "secao": "GLOT-6",
+              "trecho": "except for N3",
+              "sha256_pdf": "4f55936c29f30d87218e3ba01e0b6269556afdbe19de65be512f081357fd91b0",
+              "natureza": "EXTRACAO_DOCUMENTAL"
+            },
+            {
+              "fonte_id": "nccn-7670cd55a7c1",
+              "edicao": "2.2026",
+              "pagina_pdf": 54,
+              "paginas_pdf": [
+                54
+              ],
+              "secao": "SUPRA-3",
+              "trecho": "If PD-L1 positive",
+              "sha256_pdf": "4f55936c29f30d87218e3ba01e0b6269556afdbe19de65be512f081357fd91b0",
+              "natureza": "EXTRACAO_DOCUMENTAL"
+            },
+            {
+              "fonte_id": "nccn-7670cd55a7c1",
+              "edicao": "2.2026",
+              "pagina_pdf": 132,
+              "paginas_pdf": [
+                132
+              ],
+              "secao": "ST-4",
+              "trecho": "Oropharynx (p16-) and Hypopharynx",
+              "sha256_pdf": "4f55936c29f30d87218e3ba01e0b6269556afdbe19de65be512f081357fd91b0",
+              "natureza": "EXTRACAO_DOCUMENTAL"
+            }
+          ],
+          "aplicabilidade": [
+            {
+              "fonte_id": "nccn-7670cd55a7c1",
+              "edicao": "2.2026",
+              "pagina_pdf": 117,
+              "paginas_pdf": [
+                117
+              ],
+              "secao": "SYST-A 2/7",
+              "trecho": "Stage III–IVA cancer of the oral cavity",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "4f55936c29f30d87218e3ba01e0b6269556afdbe19de65be512f081357fd91b0"
+            },
+            {
+              "fonte_id": "nccn-7670cd55a7c1",
+              "edicao": "2.2026",
+              "pagina_pdf": 117,
+              "paginas_pdf": [
+                117
+              ],
+              "secao": "SYST-A 2/7",
+              "trecho": "p16-negative oropharynx, hypopharynx, and larynx",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "4f55936c29f30d87218e3ba01e0b6269556afdbe19de65be512f081357fd91b0"
+            }
+          ],
+          "dados_estruturados": [
+            {
+              "fonte_id": "nccn-7670cd55a7c1",
+              "edicao": "2.2026",
+              "pagina_pdf": 117,
+              "paginas_pdf": [
+                117
+              ],
+              "secao": "SYST-A 2/7",
+              "trecho": "Stage III–IVA cancer of the oral cavity",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "4f55936c29f30d87218e3ba01e0b6269556afdbe19de65be512f081357fd91b0"
+            },
+            {
+              "fonte_id": "nccn-7670cd55a7c1",
+              "edicao": "2.2026",
+              "pagina_pdf": 117,
+              "paginas_pdf": [
+                117
+              ],
+              "secao": "SYST-A 2/7",
+              "trecho": "p16-negative oropharynx, hypopharynx, and larynx",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "4f55936c29f30d87218e3ba01e0b6269556afdbe19de65be512f081357fd91b0"
+            }
+          ],
+          "evidencia_declarada": [
+            {
+              "fonte_id": "nccn-7670cd55a7c1",
+              "edicao": "2.2026",
+              "pagina_pdf": 117,
+              "paginas_pdf": [
+                117
+              ],
+              "secao": "SYST-A 2/7",
+              "trecho": "Stage III–IVA cancer of the oral cavity",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "4f55936c29f30d87218e3ba01e0b6269556afdbe19de65be512f081357fd91b0"
+            },
+            {
+              "fonte_id": "nccn-7670cd55a7c1",
+              "edicao": "2.2026",
+              "pagina_pdf": 117,
+              "paginas_pdf": [
+                117
+              ],
+              "secao": "SYST-A 2/7",
+              "trecho": "p16-negative oropharynx, hypopharynx, and larynx",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "4f55936c29f30d87218e3ba01e0b6269556afdbe19de65be512f081357fd91b0"
+            }
+          ]
+        }
+      },
+      {
+        "item_id": "nccn-20261017-cabeca-pescoco-toripalimabe",
+        "nome": "Toripalimabe + cisplatina/gencitabina — nasofaringe",
+        "tipo": "OPCAO_TERAPEUTICA",
+        "dominio_principal": 6,
+        "conteudo_extraido": "Combinação de primeira linha no contexto recorrente/irressecável/oligometastático/metastático sem opção de cirurgia/RT. A observação legada de acesso não substitui a opção clínica.",
+        "aplicabilidade": {
+          "criterios": [
+            "Nasofaringe",
+            "Contexto descrito",
+            "Dados baseados em doença associada a EBV"
+          ],
+          "paciente_individual": null,
+          "estado": "NAO_AVALIADA"
+        },
+        "dados_estruturados": {
+          "farmacos": [
+            "toripalimabe",
+            "cisplatina",
+            "gencitabina"
+          ],
+          "posologia": {
+            "estado": "NAO_EXTRAIDA_NESTA_RODADA",
+            "valor": null,
+            "motivo": "A rodada incorpora o delta de indicação/cenário; não completa dose por inferência."
+          }
+        },
+        "fonte_refs": [
+          {
+            "fonte_id": "nccn-7670cd55a7c1",
+            "edicao": "2.2026",
+            "pagina_pdf": 41,
+            "paginas_pdf": [
+              41
+            ],
+            "secao": "NASO-B 2/4, primeira linha Preferred",
+            "trecho": "Cisplatin/Gemcitabine + Toripalimab-tpzi (category 1)",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "4f55936c29f30d87218e3ba01e0b6269556afdbe19de65be512f081357fd91b0"
+          },
+          {
+            "fonte_id": "nccn-7670cd55a7c1",
+            "edicao": "2.2026",
+            "pagina_pdf": 41,
+            "paginas_pdf": [
+              41
+            ],
+            "secao": "NASO-B 2/4, nota a",
+            "trecho": "EBV-associated nasopharynx cancer",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "4f55936c29f30d87218e3ba01e0b6269556afdbe19de65be512f081357fd91b0"
+          }
+        ],
+        "evidencia_declarada": {
+          "sistema": "NCCN",
+          "categoria": "1",
+          "estado": "TRANSCRITA"
+        },
+        "estado_extracao": "EXTRAIDO_COM_LIMITES_DECLARADOS",
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "temporalidade": {
+          "referencia": "CENARIO_DESCRITO",
+          "datas_individuais": null
+        },
+        "propor_automaticamente": false,
+        "disponivel_para_prescricao": false,
+        "acesso": {
+          "registro_anvisa": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "incorporacao_conitec": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "pcdt_ddt": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "sigtap_apac": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "cobertura_privada": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "disponibilidade_institucional": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          }
+        },
+        "alternativas_legadas_refs": [],
+        "relacoes_refs": [
+          "relacao-nccn-20261017-cabeca-pescoco-toripalimabe"
+        ],
+        "conflitos_refs": [],
+        "pendencias": [
+          "REVISAO_CLINICA_DO_DELTA",
+          "VERIFICAR_ACESSO_BRASILEIRO_POR_INDICACAO",
+          "POSOLOGIA_E_SUPORTE_NAO_COMPLETOS_NESTA_RODADA"
+        ],
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+            "anterior": {
+              "fonte_refs": [
+                {
+                  "fonte_id": "nccn-7670cd55a7c1",
+                  "paginas_pdf": [
+                    41
+                  ],
+                  "secao": "NASO-B 2/4",
+                  "natureza": "EXTRACAO_DOCUMENTAL",
+                  "pagina_pdf": 41,
+                  "trecho": "Toripalimab-tpzi (category 1)18 Subsequent-Line • Toripalimab-tpzi (if disease progression on or after"
+                }
+              ]
+            },
+            "motivo": "Trecho anterior atravessava a linha de combinação e a linha seguinte de monoterapia; a indicação e os critérios estavam corretos.",
+            "aprovacao_clinica": null
+          }
+        ],
+        "fontes_por_campo": {}
+      },
+      {
+        "item_id": "nccn-20261017-cabeca-pescoco-salivares",
+        "nome": "Cobertura de glândulas salivares",
+        "tipo": "AMPLIACAO_DE_ESCOPO_A_EXTRAIR",
+        "dominio_principal": 1,
+        "conteudo_extraido": "O documento contém caminhos próprios para histologias salivares e terapias associadas a biomarcadores; o pack predominantemente CEC não é cobertura equivalente.",
+        "aplicabilidade": {
+          "criterios": [
+            "Glândulas salivares",
+            "Histologia e biomarcador específicos"
+          ],
+          "paciente_individual": null,
+          "estado": "NAO_AVALIADA"
+        },
+        "dados_estruturados": {},
+        "fonte_refs": [
+          {
+            "fonte_id": "nccn-7670cd55a7c1",
+            "paginas_pdf": [
+              87,
+              88
+            ],
+            "secao": "Tratamento sistêmico de glândulas salivares",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "pagina_pdf": 87,
+            "trecho": "trastuzumab emtansine (TDM-1)17 \u0017Docetaxel + Trastuzumab18 \u0017Fam-trastuzumab deruxtecan-nxki19 \u0017Pertuzumab + Trastuzumab20 \u0017Trastuzumab21"
+          }
+        ],
+        "evidencia_declarada": {
+          "sistema": "NCCN",
+          "categoria": null,
+          "estado": "NAO_EXTRAIDA_POR_ITEM"
+        },
+        "estado_extracao": "EXTRAIDO_COM_LIMITES_DECLARADOS",
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "temporalidade": {
+          "referencia": "CENARIO_DESCRITO",
+          "datas_individuais": null
+        },
+        "propor_automaticamente": false,
+        "disponivel_para_prescricao": false,
+        "acesso": {
+          "registro_anvisa": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "incorporacao_conitec": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "pcdt_ddt": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "sigtap_apac": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "cobertura_privada": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "disponibilidade_institucional": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          }
+        },
+        "alternativas_legadas_refs": [],
+        "relacoes_refs": [
+          "relacao-nccn-20261017-cabeca-pescoco-salivares"
+        ],
+        "conflitos_refs": [],
+        "pendencias": [
+          "REVISAO_CLINICA_DO_DELTA",
+          "VERIFICAR_ACESSO_BRASILEIRO_POR_INDICACAO"
+        ]
+      }
+    ],
+    "cenarios": {
+      "identidade_ref": "/identidade/cenarios",
+      "detalhamento_ref": "/tratamento/cenarios",
+      "novas_condicoes_refs": [
+        "nccn-20261017-cabeca-pescoco-pembro-perioperatorio",
+        "nccn-20261017-cabeca-pescoco-toripalimabe",
+        "nccn-20261017-cabeca-pescoco-salivares"
+      ],
+      "regra": "Não igualar automaticamente as duas listas nem selecionar cenário individual nesta camada."
+    },
+    "fontes": [
+      {
+        "id": "nccn-7670cd55a7c1",
+        "arquivo_local": "C:\\Users\\silas\\.aside\\u\\0\\sessions\\2026-10-17_LutNNwUyDZGlA1pF\\artifacts\\nccn\\Head and Neck Cancers.pdf",
+        "nome": "Head and Neck Cancers",
+        "sha256": "4f55936c29f30d87218e3ba01e0b6269556afdbe19de65be512f081357fd91b0",
+        "numero_paginas": 276,
+        "versao_declarada": "2.2026",
+        "origem": "ARQUIVO_LOCAL_FORNECIDO",
+        "autenticidade_externa": "NAO_VERIFICADA_NO_PORTAL",
+        "paginas_examinadas": [
+          32,
+          41,
+          49,
+          54,
+          87,
+          88,
+          117,
+          132
+        ]
+      }
+    ],
+    "fontes_legadas_refs": [
+      "/header/fonte",
+      "/curadoria/fontesLidas"
+    ],
+    "ensaios": {
+      "legado_ref": "/tratamento/ensaios",
+      "novos_nct": [],
+      "nota": "Nenhum identificador NCT foi inventado ou verificado nesta rodada."
+    },
+    "relacoes": [
+      {
+        "relacao_id": "relacao-nccn-20261017-cabeca-pescoco-pembro-perioperatorio",
+        "tipo": "CONDICOES_PARA_APRESENTACAO_DOCUMENTAL",
+        "destino_item_ref": "nccn-20261017-cabeca-pescoco-pembro-perioperatorio",
+        "criterios_extraidos": [
+          "Estádio III–IVA nas localizações descritas",
+          "CPS≥1",
+          "Cavidade oral OU orofaringe p16-negativa OU hipofaringe OU laringe",
+          "Ressecabilidade e sequência definidas no cenário"
+        ],
+        "origem_condicoes": "FONTE_NCCN_CITADA",
+        "origem_mapeamento": "PROPOSTA_DE_MAPEAMENTO",
+        "executavel": false,
+        "estado": "A_CONFERIR",
+        "dados_ausentes": "MANTER_INDETERMINADO",
+        "dados_conflitantes": "MANTER_CONFLITO",
+        "efeito": "APRESENTAR_CONTEUDO_PARA_REVISAO; NAO PRESCREVER",
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+            "criterios_extraidos": [
+              "Estádio III–IVA nas localizações descritas",
+              "PD-L1 CPS≥1",
+              "Critérios de ressecabilidade e população do cenário"
+            ]
+          }
+        ],
+        "fontes_por_campo": {
+          "criterios_extraidos": [
+            {
+              "fonte_id": "nccn-7670cd55a7c1",
+              "edicao": "2.2026",
+              "pagina_pdf": 117,
+              "paginas_pdf": [
+                117
+              ],
+              "secao": "SYST-A 2/7",
+              "trecho": "Stage III–IVA cancer of the oral cavity",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "4f55936c29f30d87218e3ba01e0b6269556afdbe19de65be512f081357fd91b0"
+            },
+            {
+              "fonte_id": "nccn-7670cd55a7c1",
+              "edicao": "2.2026",
+              "pagina_pdf": 117,
+              "paginas_pdf": [
+                117
+              ],
+              "secao": "SYST-A 2/7",
+              "trecho": "p16-negative oropharynx, hypopharynx, and larynx",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "4f55936c29f30d87218e3ba01e0b6269556afdbe19de65be512f081357fd91b0"
+            }
+          ]
+        }
+      },
+      {
+        "relacao_id": "relacao-nccn-20261017-cabeca-pescoco-toripalimabe",
+        "tipo": "CONDICOES_PARA_APRESENTACAO_DOCUMENTAL",
+        "destino_item_ref": "nccn-20261017-cabeca-pescoco-toripalimabe",
+        "criterios_extraidos": [
+          "Nasofaringe",
+          "Contexto descrito",
+          "Dados baseados em doença associada a EBV"
+        ],
+        "origem_condicoes": "FONTE_NCCN_CITADA",
+        "origem_mapeamento": "PROPOSTA_DE_MAPEAMENTO",
+        "executavel": false,
+        "estado": "A_CONFERIR",
+        "dados_ausentes": "MANTER_INDETERMINADO",
+        "dados_conflitantes": "MANTER_CONFLITO",
+        "efeito": "APRESENTAR_CONTEUDO_PARA_REVISAO; NAO PRESCREVER"
+      },
+      {
+        "relacao_id": "relacao-nccn-20261017-cabeca-pescoco-salivares",
+        "tipo": "CONDICOES_PARA_APRESENTACAO_DOCUMENTAL",
+        "destino_item_ref": "nccn-20261017-cabeca-pescoco-salivares",
+        "criterios_extraidos": [
+          "Glândulas salivares",
+          "Histologia e biomarcador específicos"
+        ],
+        "origem_condicoes": "FONTE_NCCN_CITADA",
+        "origem_mapeamento": "PROPOSTA_DE_MAPEAMENTO",
+        "executavel": false,
+        "estado": "A_CONFERIR",
+        "dados_ausentes": "MANTER_INDETERMINADO",
+        "dados_conflitantes": "MANTER_CONFLITO",
+        "efeito": "APRESENTAR_CONTEUDO_PARA_REVISAO; NAO PRESCREVER"
+      }
+    ],
+    "conflitos": [],
+    "conflitos_legados_ref": "/conflitos",
+    "pendencias": [
+      {
+        "id": "revisao-clinica",
+        "estado": "ABERTA",
+        "descricao": "Conferir cada acréscimo, condições, fontes, doses, interações e suporte antes de uso clínico."
+      },
+      {
+        "id": "acesso-brasileiro",
+        "estado": "ABERTA",
+        "descricao": "NCCN não comprova Anvisa, Conitec, PCDT/DDT, SIGTAP/APAC, cobertura privada ou acesso institucional."
+      },
+      {
+        "id": "cobertura-nccn",
+        "estado": "PARCIAL_POR_DELTA",
+        "descricao": "Leitura dirigida das páginas citadas; não há alegação de extração integral da diretriz."
+      }
+    ],
+    "pendencias_legadas_ref": "/pendencias",
+    "itens_adicionais_a_classificar": [
+      {
+        "origem_ref": "/header",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/status",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/consultavel",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/alerta",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/substitui",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/identidade",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/pendencias",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/conflitos",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/curadoria",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/correcoes",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      }
+    ],
+    "mapa_de_cobertura": [
+      {
+        "origem_json_pointer": "/header",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "8de14de2fe25d7b9ea8f84a36a897928d0d3b96664dcf2f5d91366ec37fb46eb",
+        "valores_folha": 9
+      },
+      {
+        "origem_json_pointer": "/status",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "04635ca3844c66b19ebbf49bf9ff60fe851d6ce89597d23e6a970f1dc3927289",
+        "valores_folha": 1
+      },
+      {
+        "origem_json_pointer": "/consultavel",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b",
+        "valores_folha": 1
+      },
+      {
+        "origem_json_pointer": "/alerta",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "valores_folha": 1
+      },
+      {
+        "origem_json_pointer": "/substitui",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "valores_folha": 1
+      },
+      {
+        "origem_json_pointer": "/identidade",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "0afe63063939b6b9059bc7a2716624b94c2061f2cd8ddb386399f888de5aaaec",
+        "valores_folha": 17
+      },
+      {
+        "origem_json_pointer": "/diagnostico",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "5e4cff6c1670ab5dea5aa9f4e4245b15f5c634dfd296be022a36572981943400",
+        "valores_folha": 143
+      },
+      {
+        "origem_json_pointer": "/estadiamento",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "9807d51cb094aedf764f9e71b8cd89a21038ed2941b62333398325b65c74f93e",
+        "valores_folha": 87
+      },
+      {
+        "origem_json_pointer": "/tratamento",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "b29a9d75f9e3bb3078f18d8898b01eb50a045647dcce3fc75cf94e0544a1f8e2",
+        "valores_folha": 1121
+      },
+      {
+        "origem_json_pointer": "/ligacoes",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "636f73e1c5939d546aaf11d60eb8db079c90b83e2d4b3ee79a6dc757e8945a15",
+        "valores_folha": 89
+      },
+      {
+        "origem_json_pointer": "/pendencias",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "db09c0982f1a2cb366b2ce0d8b7a42232a144b456d68ffe2e163882ce3fa1bcb",
+        "valores_folha": 10
+      },
+      {
+        "origem_json_pointer": "/conflitos",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "014ddac915b944a487c4c62b2c6ee63c333773cbed1f28625ae4cdb1c9620fee",
+        "valores_folha": 32
+      },
+      {
+        "origem_json_pointer": "/curadoria",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "81547de0ccde06e77f7520cf93067f6d8841092b078d6e0f8ea34f7029febd23",
+        "valores_folha": 18
+      },
+      {
+        "origem_json_pointer": "/correcoes",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "c34b68ef8e59123930f76e4f61958754696ff2e4d38c08a85cf7f333b36106f4",
+        "valores_folha": 20
+      }
+    ],
+    "reconciliacao_com_versao_anterior": {
+      "modo": "ADITIVO",
+      "originais_removidos": 0,
+      "originais_alterados": 0,
+      "contagens_preservadas": {
+        "protocolos": 26,
+        "ensaios": 3,
+        "cenarios_identidade": 7,
+        "cenarios_tratamento": 7,
+        "seguimento": 6,
+        "conflitos": 2,
+        "pendencias": 2
+      }
+    },
+    "relatorio_de_completude": {
+      "estado": "INCOMPLETA_PARA_DIRETRIZ_INTEGRAL",
+      "preservacao_legado": "INTEGRAL",
+      "delta_itens": 3,
+      "normalizacao_legado": "INDEXACAO_POR_REFERENCIA; NAO REEXTRACAO CLINICA",
+      "posologias": "SOMENTE AS EXPLICITAMENTE EXTRAIDAS; RESTANTES PENDENTES",
+      "sem_fato_paciente": true,
+      "sem_aprovacao_inferida": true
+    },
+    "auditoria_33_pendentes": [
+      {
+        "item_id": "nccn-20261017-cabeca-pescoco-pembro-perioperatorio",
+        "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+        "resultado": "CORRIGIDO_ESCOPO_OU_COMPLETUDE",
+        "fundamento": "A redação anterior não distinguia categorias de preferência por sítio e podia estender o qualificativo p16-negativo a todas as localizações.",
+        "fontes": [
+          {
+            "fonte_id": "nccn-7670cd55a7c1",
+            "edicao": "2.2026",
+            "pagina_pdf": 117,
+            "paginas_pdf": [
+              117
+            ],
+            "secao": "SYST-A 2/7",
+            "trecho": "Stage III–IVA cancer of the oral cavity",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "4f55936c29f30d87218e3ba01e0b6269556afdbe19de65be512f081357fd91b0"
+          },
+          {
+            "fonte_id": "nccn-7670cd55a7c1",
+            "edicao": "2.2026",
+            "pagina_pdf": 117,
+            "paginas_pdf": [
+              117
+            ],
+            "secao": "SYST-A 2/7",
+            "trecho": "p16-negative oropharynx, hypopharynx, and larynx",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "4f55936c29f30d87218e3ba01e0b6269556afdbe19de65be512f081357fd91b0"
+          }
+        ],
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "limite": "Conferência das afirmações deste item; não extração integral de posologia, diretriz ou acesso brasileiro.",
+        "sha256_item_antes": "b1b8f1d153163037c89647c48442d635f3f77a7a33746abf3563b93c761bc113"
+      },
+      {
+        "item_id": "nccn-20261017-cabeca-pescoco-toripalimabe",
+        "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+        "resultado": "CORRIGIDO_LOCALIZADOR",
+        "fundamento": "Trecho anterior atravessava a linha de combinação e a linha seguinte de monoterapia; a indicação e os critérios estavam corretos.",
+        "fontes": [
+          {
+            "fonte_id": "nccn-7670cd55a7c1",
+            "edicao": "2.2026",
+            "pagina_pdf": 41,
+            "paginas_pdf": [
+              41
+            ],
+            "secao": "NASO-B 2/4, primeira linha Preferred",
+            "trecho": "Cisplatin/Gemcitabine + Toripalimab-tpzi (category 1)",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "4f55936c29f30d87218e3ba01e0b6269556afdbe19de65be512f081357fd91b0"
+          },
+          {
+            "fonte_id": "nccn-7670cd55a7c1",
+            "edicao": "2.2026",
+            "pagina_pdf": 41,
+            "paginas_pdf": [
+              41
+            ],
+            "secao": "NASO-B 2/4, nota a",
+            "trecho": "EBV-associated nasopharynx cancer",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "4f55936c29f30d87218e3ba01e0b6269556afdbe19de65be512f081357fd91b0"
+          }
+        ],
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "limite": "Conferência das afirmações deste item; não extração integral de posologia, diretriz ou acesso brasileiro.",
+        "sha256_item_antes": "2e36c04234fd2bd9448cb018974db19618a7077317b424cfa660c529554e3c1c"
+      },
+      {
+        "item_id": "nccn-20261017-cabeca-pescoco-salivares",
+        "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+        "resultado": "CONFIRMADO_SEM_REESCRITA",
+        "fundamento": "A afirmação é de cobertura adicional a extrair, não de prescrição. SALI-B distingue histologias/biomarcadores e sustenta essa delimitação.",
+        "fontes": [
+          {
+            "fonte_id": "nccn-7670cd55a7c1",
+            "edicao": "2.2026",
+            "pagina_pdf": 87,
+            "paginas_pdf": [
+              87
+            ],
+            "secao": "SALI-B 1/2",
+            "trecho": "SYSTEMIC THERAPY FOR SALIVARY GLAND TUMORS",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "4f55936c29f30d87218e3ba01e0b6269556afdbe19de65be512f081357fd91b0"
+          }
+        ],
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "limite": "Conferência das afirmações deste item; não extração integral de posologia, diretriz ou acesso brasileiro.",
+        "sha256_item_antes": "6c013c8e1d5baaab82c7b8f5af0833899aa874b8646c9c75fabdf2d7c0b05b43"
+      }
+    ],
+    "revisoes_auditoria": [
+      {
+        "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+        "escopo": "APENAS_33_ITENS_PENDENTES",
+        "legado_modificado": false,
+        "aprovacao_clinica": null,
+        "limites": "Sem leitura integral da pasta, sem completar doses, sem checagem de acesso ou autenticidade externa.",
+        "itens_ref": "/tumor_pack_universal/auditoria_33_pendentes",
+        "sha256_itens": "0280f5ed95f376404eb9ddb75fa92019f5fb299c424eb17c52716131c6d9b5da"
+      }
+    ],
+    "fechamento_documental": [
+      {
+        "revisao": "2026-10-17-nccn-final-documental",
+        "estado": "CORRECOES_DOCUMENTAIS_APLICADAS",
+        "ajustes_textuais": 0,
+        "deduplicacoes_por_referencia": [
+          "auditoria_33_pendentes"
+        ],
+        "aprovacao_clinica": null,
+        "legado_alterado": false
+      }
+    ]
+  }
 }

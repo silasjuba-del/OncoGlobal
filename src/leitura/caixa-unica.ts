@@ -11,6 +11,9 @@ export interface DocumentoBruto {
   readonly paginas: readonly Readonly<{ n: number; texto: string }>[];
   readonly hash: string;
   readonly recebidoEm: string;
+  /** Cobertura física do PDF; página sem texto permanece explicitamente pendente. */
+  readonly totalPaginas?: number;
+  readonly paginasPendentes?: readonly number[];
 }
 
 export type ResultadoLeitura =

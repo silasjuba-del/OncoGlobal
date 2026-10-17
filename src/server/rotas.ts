@@ -1,10 +1,14 @@
-import { PrescriptionItem } from "../contracts/w10/prescricao.js";
+import { PrescriptionItem, ProtocolTemplate } from "../contracts/w10/prescricao.js";
+import {LotesPacientePedido,LotesPacienteResposta} from '../contracts/api/lotes.js';
 import { respostaHttpValida } from "../contracts/api/saidasHttp.js";
 import { projetarDutos } from "./projecaoDutos.js";
 import { rotearBiblioteca } from "./biblioteca.js";
 import { rotearDutos, referenciaSigtapDuto } from "./dutos.js";
 import { reconciliarMedicamentos } from "./medicamentos.js";
 import { obterInvestigacao, type DepsInvestigacao } from "./investigacao.js";
+import { obterRevisaoClinica } from './revisaoClinica.js';
+import { rotearEstadoDoenca } from './estadoDoenca.js';
+import type { CatalogoTumorPacks } from '../kernel/corpus/tumorPacks.js';
 import { executarSinteseRetratoLlm, executarDocumentoOriginalLlm, executarExtracaoLlm } from "./extracaoLlm.js";
 import type { criarRuntimeExtracaoLlm } from "../kernel/llm/openai/runtime.js";
 import { processarUploadLocal } from "./upload.js";
@@ -33,6 +37,8 @@ import type { carregarCorpusServidor } from "./corpus.js";
 import { parserLinha } from "../rules/prescricao/parserLinha.js";
 import { classificarDocumento } from "../rules/prescricao/classificarDocumento.js";
 import { instanciarProtocolo } from "../rules/prescricao/instanciarProtocolo.js";
+import { aplicarAjuste } from "../rules/prescricao/aplicarAjuste.js";
+import { baseAjusteAnterior } from './f0c/baseAjusteAnterior.js';
 import { rotearItemReceita } from "../rules/prescricao/receituarioEspecial.js";
 import { lerConfiguracaoServico, NUMERO_CAIXA_RECEITUARIO_ESPECIAL } from "../contracts/configServico.js";
 import { dataCivilDoServico } from "../kernel/gateway/tempo.js";
@@ -62,6 +68,7 @@ export interface ServidorDeps {
   corpus?: ReturnType<typeof carregarCorpusServidor> | null;
   oncoassistJev?: ReturnType<typeof criarOncoassistJev>;
   motorF1?:ReturnType<typeof criarMotorF1>;
+  catalogoTumorPacks?:CatalogoTumorPacks;
   extracaoLlm?:ReturnType<typeof criarRuntimeExtracaoLlm>;
   packInvestigacao?:NonNullable<DepsInvestigacao["packInvestigacao"]>;
   agora: () => string;
@@ -100,16 +107,21 @@ function send(res: ServerResponse, status: number, object: unknown) {
   res.end(JSON.stringify(object));
 }
 async function body(req: IncomingMessage,limite=1_000_000): Promise<unknown> {
-  let value = "";
-  for await (const chunk of req) {
-    value += String(chunk);
-    if (value.length > limite) throw new Error("BODY_TOO_LARGE");
-  }
+  let value = "", bytes = 0;
+  const decoder = new TextDecoder("utf-8", {fatal:true});
   try {
+    for await (const chunk of req) {
+      const buffer = typeof chunk === "string" ? Buffer.from(chunk) : chunk;
+      bytes += buffer.length;
+      if (bytes > limite) throw new Error("BODY_TOO_LARGE");
+      value += decoder.decode(buffer,{stream:true});
+    }
+    value += decoder.decode();
     return JSON.parse(value);
   } catch (error) {
     // Só a falha do corpo HTTP é 400; JSON interno do ledger continua erro interno.
-    if (error instanceof SyntaxError) throw new JsonInvalido();
+    if (error instanceof SyntaxError || (error instanceof TypeError
+      && "code" in error && error.code === "ERR_ENCODING_INVALID_ENCODED_DATA")) throw new JsonInvalido();
     throw error;
   }
 }
@@ -346,6 +358,10 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
         : req.url === "/consulta/oncoassist/sintese" ? "sinteseRetratoLlm"
         : req.url === "/consulta/llm/documento-original" ? "documentoOriginalLlm"
         : req.url === "/consulta/investigacao" ? "investigacao"
+        : req.url === "/consulta/revisao-clinica" ? "revisaoClinica"
+        : req.url === "/consulta/lotes" ? "lotesPaciente"
+        : req.url === "/consulta/estado-doenca/preparar" ? "prepararEstadoDoenca"
+        : req.url === "/consulta/estado-doenca/confirmar" ? "confirmarEstadoDoenca"
         : req.url === "/consulta/llm/extrair" ? "extracaoLlm"
         : ["/biblioteca/importar","/biblioteca/curar","/biblioteca/ativar","/biblioteca/rollback","/biblioteca/consultar","/biblioteca/estado"].includes(req.url??"") ? req.url!
         : ["/farmacia/enviar","/farmacia/conferir","/salao/registrar-administracao","/apac/validar-emissao","/chat/aceitar-decisao","/tarefas/receber","/tarefas/concluir"].includes(req.url??"") ? req.url!
@@ -405,10 +421,25 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
     // A rota de efeito externo não aceita JSON sob um tipo de mídia diferente.
     // O gate de autenticação continua anterior a esta checagem.
     if (rota === "acao" && !contentTypeJson(req)) return reply(415, "CONTENT_TYPE_INVALIDO");
-    const raw = await body(req,rota === "upload" ? 11_300_000 : 1_000_000);
+    // Conteúdo da biblioteca continua limitado a 8 MB após decodificação; envelope cobre escapes JSON/base64.
+    const raw = await body(req,rota === "upload" ? 11_300_000 : rota === "/biblioteca/importar" ? 24_000_000 : 1_000_000);
     if(rota === "reconciliarMedicamentos"){const result=reconciliarMedicamentos(raw,token,deps);return reply(result.status,String(result.body.codigo),result.body);}
     if(rota === "sinteseRetratoLlm"){const result=await executarSinteseRetratoLlm(raw,token,deps);return reply(result.status,String(result.body.codigo),result.body);}
     if(rota === "documentoOriginalLlm"){const result=await executarDocumentoOriginalLlm(raw,token,deps);return reply(result.status,String(result.body.codigo),result.body);}
+    const estadoDoenca=rotearEstadoDoenca(deps,token,rota,raw);if(estadoDoenca)return reply(estadoDoenca.status,String(estadoDoenca.body.codigo),estadoDoenca.body);
+    if(rota === "revisaoClinica"){
+      const p=z.object({patientId:Id,encounterId:Id,tumorLotId:Id.nullable(),packId:Id.optional()}).strict().safeParse(raw);
+      if(!p.success)return reply(400,"PAYLOAD_INVALIDO");
+      const ctx=deps.sessoes.consultaSelecionada(token);
+      if(!ctx||ctx.patientId!==p.data.patientId||ctx.encounterId!==p.data.encounterId||(ctx.tumorLotId??null)!==p.data.tumorLotId)return reply(409,"CONTEXTO_CONSULTA_ALTERADO");
+      if(!deps.motorF1||!deps.catalogoTumorPacks)return reply(409,"REVISAO_CLINICA_INDISPONIVEL");
+      try{const {packId,...contexto}=p.data;const result=await obterRevisaoClinica(deps.motorF1,deps.catalogoTumorPacks,contexto,packId,
+        ()=>lerRecist(deps.db,contexto.patientId,{encounterId:contexto.encounterId,tumorLotId:contexto.tumorLotId,agora:deps.agora()}));
+        const atual=deps.sessoes.consultaSelecionada(token);
+        if(!deps.sessoes.obter(token)||!atual||atual.patientId!==contexto.patientId||atual.encounterId!==contexto.encounterId||(atual.tumorLotId??null)!==contexto.tumorLotId)return reply(409,"CONTEXTO_CONSULTA_ALTERADO");
+        return reply(200,result.codigo,result);
+      }catch{return reply(409,"REVISAO_CLINICA_PENDENTE");}
+    }
     if(rota === "investigacao"){
       const p=z.object({patientId:Id,encounterId:Id,tumorLotId:Id.nullable()}).strict().safeParse(raw);if(!p.success)return reply(400,"PAYLOAD_INVALIDO");
       const ctx=deps.sessoes.consultaSelecionada(token);if(!ctx||ctx.patientId!==p.data.patientId||ctx.encounterId!==p.data.encounterId||(ctx.tumorLotId??null)!==p.data.tumorLotId)return reply(409,"CONTEXTO_CONSULTA_ALTERADO");
@@ -418,16 +449,53 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
     const biblioteca=rotearBiblioteca(deps,token,rota,raw,sessao);if(biblioteca)return reply(biblioteca.status,String((biblioteca.body as {codigo?:string}).codigo??"BIBLIOTECA_CONSULTADA"),biblioteca.body);
     const duto=rotearDutos(deps,token,rota,raw,sessao);if(duto)return reply(duto.status,String((duto.body as {codigo?:string}).codigo??"DUTO_PROCESSADO"),duto.body);
     if(rota === "upload"){const result=await processarUploadLocal(deps,token,sessao,raw);return reply(result.status,String(result.body.codigo),result.body);}
+    if(rota === 'lotesPaciente'){
+      const p=LotesPacientePedido.safeParse(raw);if(!p.success)return reply(400,'PAYLOAD_INVALIDO');
+      if(!lerPaciente(deps.db,p.data.patientId))return reply(404,'PACIENTE_NAO_ENCONTRADO');
+      const r=LotesPacienteResposta.parse({codigo:'LOTES_CARREGADOS',patientId:p.data.patientId,lotes:lerLotes(deps.db,p.data.patientId)});
+      return reply(200,r.codigo,r);
+    }
     if(rota === "proporPrescricao"){
-      const parsed=z.object({patientId:Id,encounterId:Id,tumorLotId:Id.nullable(),id:Id,operationId:Id,expectedRevision:z.number().int().nonnegative().nullable(),itens:z.array(PrescriptionItem).min(1)}).strict().safeParse(raw);
+      const parsed=z.object({patientId:Id,encounterId:Id,tumorLotId:Id.nullable(),id:Id,operationId:Id,expectedRevision:z.number().int().nonnegative().nullable(),rascunhoOrigemId:Id.optional(),itens:z.array(PrescriptionItem).min(1)}).strict().safeParse(raw);
       if(!parsed.success)return reply(400,"PAYLOAD_INVALIDO");
       const ctx=deps.sessoes.consultaSelecionada(token);
       if(!ctx||ctx.patientId!==parsed.data.patientId||ctx.encounterId!==parsed.data.encounterId||(ctx.tumorLotId??null)!==parsed.data.tumorLotId)return reply(409,"CONTEXTO_CONSULTA_ALTERADO");
       if(parsed.data.itens.some(i=>i.source!=="MANUAL"))return reply(409,"PROPOSTA_MANUAL_EXIGE_ORIGEM_MANUAL");
       const contextoProposta={...ctx,tumorLotId:ctx.tumorLotId??null};
       const r=deps.motorF1?.retrato(contextoProposta);if(!r)return reply(409,"RETRATO_INDISPONIVEL");
-      const revisao=sha(JSON.stringify([r.revisao,parsed.data.itens]));
-      const salvo=proporPrescricao(deps.db,{schema:"PrescricaoProposta@1",id:parsed.data.id,revisao,correlacao:{...contextoProposta,operationId:parsed.data.operationId,revisaoFatos:r.revisao,regras:r.regras,biblioteca:r.biblioteca,proposta:{id:parsed.data.id,revisao}},templateId:null,templateVersao:null,itens:parsed.data.itens,estado:"DRAFT"},sessao,deps.agora(),parsed.data.expectedRevision);
+      let origem: {templateId:string;templateVersao:string;templateHash:string;rascunhoOrigemId:string}|null=null;
+      if(parsed.data.rascunhoOrigemId){
+        const draft=lerDraft(deps.db,parsed.data.rascunhoOrigemId),ctxOrigem=contextoDraft(draft?.payload);
+        const payload=draft?.payload as {kind?:unknown;template?:unknown;revisaoFatos?:string|null;contexto?:{patientId?:string};instanciacao?:{ok?:boolean;pendentes?:number;itens?:{estado:string;item:unknown;doseAnteriorPrescrita?:number|null}[]}}|undefined;
+        if(!draft||draft.patientId!==ctx.patientId||!ctxOrigem||payload?.contexto?.patientId!==ctx.patientId||ctxOrigem.encounterId!==ctx.encounterId
+          ||ctxOrigem.tumorLotId!==(ctx.tumorLotId??null)||payload?.kind!=="PRESCRICAO_RASCUNHO"||payload.instanciacao?.ok!==true)
+          return reply(409,"ORIGEM_TEMPLATE_INVALIDA");
+        const t=ProtocolTemplate.safeParse(payload.template);
+        if(!t.success||t.data.status!=="CONFERIDA_MEDICO")return reply(409,"ORIGEM_TEMPLATE_INVALIDA");
+        if(payload.revisaoFatos!==r.revisao)return reply(409,'ORIGEM_TEMPLATE_CONTEXTO_DESATUALIZADO');
+        const candidatos=deps.corpus?.templatesProtocolo.filter(x=>x.templateId===t.data.templateId&&x.versao===t.data.versao&&x.hash===t.data.hash)??[];
+        if(candidatos.length!==1||hashConteudoExibido(candidatos[0])!==hashConteudoExibido(t.data))return reply(409,"ORIGEM_TEMPLATE_DIVERGENTE");
+        if(payload.instanciacao.pendentes!==0||payload.instanciacao.itens?.length!==t.data.itens.length
+          ||payload.instanciacao.itens.some(i=>i.estado!=='PRONTO'))return reply(409,'ORIGEM_TEMPLATE_PENDENTE');
+        const prontos=payload.instanciacao.itens;
+        const originais=prontos.map(i=>PrescriptionItem.safeParse(i.item));
+        if(originais.length!==parsed.data.itens.length||originais.some(i=>!i.success))return reply(409,"ORIGEM_TEMPLATE_ITENS_DIVERGENTES");
+        const parteFixa=(item:PrescriptionItem)=>{
+          const {source,overrideMotivo,prescribedDose,adjustmentPercent,adjustmentReason,...fixa}=item;
+          return fixa;
+        };
+        for(const [indice,item] of parsed.data.itens.entries()){
+          const original=originais[indice]!;
+          if(!original.success||hashConteudoExibido(parteFixa(item))!==hashConteudoExibido(parteFixa(original.data)))return reply(409,"ORIGEM_TEMPLATE_ITENS_DIVERGENTES");
+          const ajuste=item.adjustmentPercent===null?null:aplicarAjuste(original.data,item.adjustmentPercent,item.adjustmentReason??"",{doseBase:prontos[indice]!.doseAnteriorPrescrita??null});
+          if(ajuste&&!ajuste.ok)return reply(409,"ORIGEM_TEMPLATE_ITENS_DIVERGENTES");
+          const doseEsperada=ajuste?.ok?ajuste.item.prescribedDose:original.data.prescribedDose;
+          if(item.prescribedDose!==doseEsperada)return reply(409,"ORIGEM_TEMPLATE_ITENS_DIVERGENTES");
+        }
+        origem={templateId:t.data.templateId,templateVersao:t.data.versao,templateHash:t.data.hash,rascunhoOrigemId:draft.draftId};
+      }
+      const revisao=sha(JSON.stringify([r.revisao,parsed.data.itens,...(origem?[origem]:[])]));
+      const salvo=proporPrescricao(deps.db,{schema:"PrescricaoProposta@1",id:parsed.data.id,revisao,correlacao:{...contextoProposta,operationId:parsed.data.operationId,revisaoFatos:r.revisao,regras:r.regras,biblioteca:r.biblioteca,proposta:{id:parsed.data.id,revisao}},templateId:null,templateVersao:null,...(origem??{}),itens:parsed.data.itens,estado:"DRAFT"},sessao,deps.agora(),parsed.data.expectedRevision);
       return reply(201,"PROPOSTA_SALVA",{draftId:salvo.draftId,revision:salvo.revision,revisao,assina:false,exporta:false});
     }
     if (rota === "selecionarContexto") {
@@ -974,8 +1042,9 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
         const dadosCorporais="codigo" in consultaCorporal
           ? { pesoKg:null,alturaCm:null,bsaM2:null,clcr:null,medidoEm:null }
           : consultaCorporal.avaliacaoClinica.dadosCorporais;
+        const {itens:basesAnteriores,...provenienciaBaseAnterior}=baseAjusteAnterior(listarEventos(deps.db,contexto.patientId),contexto,template,deps.agora());
         const instanciacao = hoje.estado === "OK"
-          ? instanciarProtocolo(template, dadosCorporais)
+          ? instanciarProtocolo(template, dadosCorporais,basesAnteriores)
           : { ok: false as const, recusa: { codigo: "DADOS_CORPORAIS_PENDENTES", motivo: hoje.codigo } };
         const itens = instanciacao.ok ? instanciacao.itens.map((item) => item.item) : [];
         const seguranca = { resultado: "NOT_EVALUABLE" as const,
@@ -985,6 +1054,8 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
         const saved = salvarDraft(deps.db, { draftId: randomUUID(), patientId: contexto.patientId,
           sourceId: "selecao-local-de-prescricao", rawRef: "proposta-prescricao-local",
           payload: { kind: "PRESCRICAO_RASCUNHO", contexto, template, instanciacao, seguranca,
+            revisaoFatos:deps.motorF1?.retrato({...contexto,tumorLotId:contexto.tumorLotId??null}).revisao??null,
+            baseAjusteAnterior:provenienciaBaseAnterior,
             status: "RASCUNHO", assinada: false },
           diagnostics: [template.status === "RASCUNHO" ? "TEMPLATE_NAO_CONFERIDO" : "REVISAO_MEDICA_OBRIGATORIA",
             "SEGURANCA_NAO_AVALIAVEL"],
@@ -1082,6 +1153,21 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
       if ("codigo" in consultaRevisada) return reply(409, consultaRevisada.codigo);
       const resumoClinico = consultaRevisada.resumoConfirmadoParaDocumento;
       const contextoS9={patientId:parsed.data.patientId,encounterId:parsed.data.encounterId,tumorLotId:parsed.data.tumorLotId};
+      const indicacoesInvestigacao:Record<string,string>={};
+      if(rota==='prepararFlash'&&parsed.data.plano.propostasInvestigacao?.length){
+        const atual=obterInvestigacao(deps,contextoS9);
+        for(const escolhida of parsed.data.plano.propostasInvestigacao){
+          const candidatas=atual.resultado?.propostas.filter(p=>p.exameCodigo===escolhida.exameCodigo&&p.contexto===escolhida.contexto
+            &&p.regras.some(ref=>hashConteudoExibido(ref)===hashConteudoExibido(escolhida.referencia)))??[];
+          const proposta=candidatas.length===1?candidatas[0]:null;
+          if(atual.revisao!==escolhida.revisaoFatos||!proposta||!['LABORATORIO','IMAGEM'].includes(proposta.categoria??''))return reply(409,'INVESTIGACAO_ALTERADA_REPREPARAR');
+          const itens=proposta.categoria==='IMAGEM'?parsed.data.plano.solicitacoes?.imagem:parsed.data.plano.solicitacoes?.laboratorio;
+          if(!itens?.includes(proposta.exameCodigo))return reply(409,'PROPOSTA_FORA_DO_PEDIDO');
+          const chave=`${proposta.categoria}|${proposta.exameCodigo}`;
+          if(indicacoesInvestigacao[chave])return reply(409,'PROPOSTA_INVESTIGACAO_DUPLICADA');
+          indicacoesInvestigacao[chave]=`${proposta.justificativa} Referência: ${escolhida.referencia.id} v${escolhida.referencia.versao}.`;
+        }
+      }
       const revisaoS9=revisaoDocumentosFlash(deps,contextoS9,sessao);
       const civilS9=dataCivilDoServico(deps.agora(),"-03:00");
       if(civilS9.estado!=="OK")return reply(409,civilS9.codigo);
@@ -1116,7 +1202,7 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
       if ("idempotencyKey" in parsed.data && cadastros.length !== 1)
         return reply(409,cadastros.length ? "IDENTIDADE_PACIENTE_AMBIGUA" : "IDENTIDADE_PACIENTE_AUSENTE");
       const identidadePaciente=cadastros[0];
-      const fonteS9={...(identidadePaciente?{identidadePaciente}:{}),identidadeResponsavel:{medicoId:sessao.medicoId,crm:sessao.crm},medicamentos:parsed.data.plano.receitas??[],fonte:{sourceId:sourceIdS9,classe:"MANUAL" as const,localizador:resumoRef,
+      const fonteS9={...(Object.keys(indicacoesInvestigacao).length?{indicacoesInvestigacao}:{}),...(identidadePaciente?{identidadePaciente}:{}),identidadeResponsavel:{medicoId:sessao.medicoId,crm:sessao.crm},medicamentos:parsed.data.plano.receitas??[],fonte:{sourceId:sourceIdS9,classe:"MANUAL" as const,localizador:resumoRef,
         dataClinica:civilS9.dataCivil,dataCaptura:capturadoEm,versao:"s9-flash@1",contentHash:hashDecisao},
         dataReferencia:civilS9.dataCivil,revisao:revisaoS9};
       const result = "expectedRevision" in parsed.data
@@ -1197,12 +1283,31 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
         recordingId: z.string().min(1), sourceId: z.string().min(1),
         sourceType: z.enum(["pathology", "imaging_report", "prescription", "medical_note", "nursing", "plaud", "administration"]),
         page: z.number().int().nonnegative().optional(), rawTranscript: z.string().min(1).max(200_000),
+        contexto: z.object({patientId:z.string().min(1),encounterId:z.string().min(1),tumorLotId:z.string().nullable()}).strict().optional(),
+        captureMethod:z.enum(["LOCAL_DICTATION","PASTED_TEXT"]).optional(),capturedTranscript:z.string().max(200_000).optional(),
       }).strict();
       const parsed = inputSchema.safeParse(raw);
       if (!parsed.success) return reply(400, "PAYLOAD_INVALIDO");
+      if (!parsed.data.rawTranscript.trim()) return reply(400,"TRANSCRICAO_VAZIA");
+      if (parsed.data.captureMethod && (!parsed.data.contexto || parsed.data.capturedTranscript===undefined))
+        return reply(400,"PROVENIENCIA_TRANSCRICAO_INCOMPLETA");
+      if (parsed.data.contexto) {
+        const atual=deps.sessoes.consultaSelecionada(token),pedido=parsed.data.contexto;
+        if(!atual||atual.patientId!==pedido.patientId||atual.encounterId!==pedido.encounterId||(atual.tumorLotId??null)!==pedido.tumorLotId)
+          return reply(409,"CONTEXTO_TRANSCRICAO_DIVERGENTE");
+      }
       const input = { recordingId: parsed.data.recordingId, sourceId: parsed.data.sourceId,
         sourceType: parsed.data.sourceType, rawTranscript: parsed.data.rawTranscript,
         ...(parsed.data.page === undefined ? {} : { page: parsed.data.page }) };
+      const draftId = parsed.data.captureMethod ? `transcricao-${sha(JSON.stringify([parsed.data.contexto,
+        parsed.data.recordingId,parsed.data.sourceId])).slice(0,40)}` : randomUUID();
+      const anterior = lerDraft(deps.db,draftId);
+      if (anterior) {
+        const payload = anterior.payload as {input?: unknown};
+        if (anterior.patientId !== null || JSON.stringify(payload.input)!==JSON.stringify(parsed.data))
+          return reply(409,"TRANSCRICAO_ID_CONFLITANTE");
+        return reply(200,"REPLAY",{codigo:"REPLAY",draftId,revision:anterior.revision,linkedPatientId:null,requiresMedicalReview:true});
+      }
       const state = executarPipelineExtracao(input);
       // Advisory chains use the approved local corpus and preserve original source.
       // They never create a clinical fact or confirm an emergency automatically.
@@ -1222,14 +1327,14 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
         }),
       ];
       const saved = salvarDraft(deps.db, {
-        draftId: randomUUID(), patientId: null, sourceId: parsed.data.sourceId,
+        draftId, patientId: null, sourceId: parsed.data.sourceId,
         rawRef: `importacao-local:${parsed.data.recordingId}`,
         payload: { kind: "EXTRACAO_RASCUNHO", input: parsed.data, state, alerts, alertasRads },
         diagnostics: ["VINCULO_MEDICO_PENDENTE", ...state.confirmationRequired.map((e) => e.kind),
           ...alerts.filter((a) => a.decisao !== "PASSA").map((a) => `${a.gate}_${a.decisao}`)],
         revision: 0, criadoEm: deps.agora(),
       });
-      return reply(201, "RASCUNHO_SALVO", { draftId: saved.draftId, revision: saved.revision,
+      return reply(201, "RASCUNHO_SALVO", { codigo:"RASCUNHO_SALVO",draftId: saved.draftId, revision: saved.revision,
         linkedPatientId: null, facts: state.facts, exceptions: state.confirmationRequired,
         timeline: null, alerts, alertasRads, requiresMedicalReview: true });
     }

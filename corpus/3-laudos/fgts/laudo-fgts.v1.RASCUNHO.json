@@ -21,7 +21,12 @@
       "trecho": "quando o trabalhador ou qualquer de seus dependentes for acometido de neoplasia maligna",
       "vigencia": "vigente",
       "estado": "CONFIRMADA (Planalto, auditada)",
-      "pendencia": null
+      "pendencia": null,
+      "fonte": {
+        "referencia": "Lei 8.036/1990, art. 20, XI, incluído pela Lei 8.922/1994 — https://www.planalto.gov.br/ccivil_03/leis/l8922.htm",
+        "trecho": "quando o trabalhador ou qualquer de seus dependentes for acometido de neoplasia maligna",
+        "publicadoEm": "1994-07-26"
+      }
     }
   ],
   "resalvaRenovacao": "Renovação anual do saque enquanto durar o tratamento é PRÁTICA da Caixa, sem previsão literal na lei — não escrever como direito certo no texto fixo (audit).",

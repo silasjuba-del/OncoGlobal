@@ -1,4 +1,7 @@
 import { z } from "zod";
+import { RevisaoClinicaResposta } from '../fase2/revisaoClinica.js';
+import { LotesPacienteResposta } from './lotes.js';
+import { EstadoDoencaPreparado } from '../fase2/estadoDoenca.js';
 import { Id, Instante } from "../base.js";
 import { ClinicalFact, ReviewException } from "../w10/extracao.js";
 import { ResultadoInstrumentoSchema } from "../f0c/resultadoInstrumento.js";
@@ -23,11 +26,14 @@ const Extracao = z.object({ draftId: Id, revision: Count, linkedPatientId: Id.nu
 
 /** Mesmos contratos no servidor e no cliente. Valida sem descartar campos adicionais da resposta legada. */
 export const SaidasHttp: Readonly<Record<string, z.ZodType>> = {
+  lotesPaciente:LotesPacienteResposta,
   login: z.object({ token: z.string().min(1), expiraEm: Instante }),
   carregarConsulta: ConsultaResposta, agenda: AgendaResposta, apac: ApacResposta, canal: CanalResposta,
   salao: SalaoResposta, salvarTriagemSalao: SalaoResposta, liberarSalao: SalaoResposta,
   vincularCanal: CanalResposta, chat: ChatResposta, bundle: BundleResposta, confirmar: ConfirmacaoResposta,
   acao: AcaoResposta, investigacao: InvestigacaoConsultaVisao,
+  revisaoClinica: RevisaoClinicaResposta,
+  prepararEstadoDoenca: EstadoDoencaPreparado,confirmarEstadoDoenca:Gravacao,
   avaliarInstrumento: z.object({ resultado: ResultadoInstrumentoSchema, gravado: z.literal(false), assinado: z.literal(false) }),
   oncoassistStatus: EstadoOncoassist, oncoassistFontes: FontesOncoassist, oncoassistClassificar: RespostaOncoassist,
   sinteseRetratoLlm: SintesePropostaResposta, reconciliarRascunhos: ReconciliacaoProposta, prepararRevisao: RevisaoPreparada,
@@ -38,7 +44,8 @@ export const SaidasHttp: Readonly<Record<string, z.ZodType>> = {
   rascunhoPrescricao: z.object({ draftId: Id, seguranca: z.object({ resultado: z.literal("NOT_EVALUABLE"),
     motivos: z.array(z.object({ codigo: Id, texto: Id, fonte: Id })) }), assina: z.literal(false), exporta: z.literal(false) }),
   extracaoLlm: PropostaLlm, documentoOriginalLlm: PropostaLlm,
-  extrair: Extracao,
+  extrair: z.union([Extracao, z.object({codigo:z.literal("REPLAY"),draftId:Id,revision:Count,
+    linkedPatientId:z.null(),requiresMedicalReview:z.literal(true)})]),
   upload: z.union([Extracao.extend({ codigo: z.literal("RASCUNHO_SALVO"), conversionStatus: z.enum(["PRONTO", "PENDENTE"]) }),
     z.object({ codigo: z.literal("REPLAY"), draftId: Id, revision: Count, linkedPatientId: Id.nullable(), requiresMedicalReview: z.literal(true) })]),
   rascunho: z.object({ draft: z.object({ draftId: Id, patientId: Id.nullable(), sourceId: Id, rawRef: Id,
@@ -68,7 +75,15 @@ export const SaidasHttp: Readonly<Record<string, z.ZodType>> = {
   "/biblioteca/rollback": z.object({ codigo: z.literal("BIBLIOTECA_RESTAURADA"), referencia: RefBiblioteca }),
   "/biblioteca/consultar": z.object({ itens: z.array(ItemImportado), referencia: RefBiblioteca }),
   "/biblioteca/estado": z.object({ ativa: Id.nullable(), referencia: RefBiblioteca, pacoteId: Id.nullable(), hash: Id.nullable(),
-    itens: z.array(z.object({ id: Id, estado: z.enum(["RASCUNHO", "CONSULTAVEL", "ALERTA", "OBSOLETO"]) })) }),
+    ativacao: z.object({ pacote: Id, anterior: Id.nullable(), motivo: z.enum(["ATIVACAO", "ROLLBACK"]), ator: Id.nullable(), registradoEm: Instante.nullable() }).nullable(),
+    pacotes: z.array(z.object({ pacoteId: Id, versao: Id, hash: z.string().regex(/^[a-f0-9]{64}$/), ativo: z.boolean(),
+      itens: z.array(z.object({ id: Id, estado: z.enum(["RASCUNHO", "CONSULTAVEL", "ALERTA", "OBSOLETO"]) })) })),
+    itens: z.array(ItemImportado.extend({ titulo: z.string().min(1).max(300), texto: z.string().min(1).max(200000),
+      aplicabilidade: z.object({ tumor: z.array(Id), histologia: z.array(Id), estadio: z.array(Id), biomarcador: z.array(Id), linha: z.array(Id) }),
+      proveniencia: z.object({ fonte: z.string().url(), trecho: z.string().min(1).max(200000), publicadoEm: z.string().date(),
+        recuperadoEm: Instante, licenca: z.string().min(1).max(300) }), dependencias: z.array(z.object({ id: Id, versao: Id })),
+      estado: z.enum(["RASCUNHO", "CONSULTAVEL", "ALERTA", "OBSOLETO"]),
+      curadoria: z.object({ ator: Id, registradoEm: Instante.nullable() }).nullable() })) }),
 };
 
 export function respostaHttpValida(rota: string, status: number, resultado: unknown): boolean {

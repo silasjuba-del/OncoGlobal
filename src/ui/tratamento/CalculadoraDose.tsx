@@ -29,6 +29,9 @@ export function CalculadoraDose({
 
   return (
     <section aria-label="Calculadora de dose" className="cartao pilha">
+      <p>Cálculo aritmético do percentual escolhido pelo médico. Não recomenda redução ou suspensão por toxicidade.</p>
+      <p>Protocolo, fonte e cenário do ajuste: A CONFERIR. Resultado não autoriza prescrição ou administração.</p>
+      <p>Fórmula: dose administrada anterior × (100 − redução %) / 100; arredondamento final para mg inteiro.</p>
       <p>Dose do ciclo anterior: {doseAnterior}</p>
       <p>Origem do peso: {rotuloOrigem(base.origemPeso)}</p>
       <p>Ciclos sem peso: {saida.ciclosSemPesoConsecutivos}</p>

@@ -14,7 +14,7 @@ import { converterBiblioteca } from '../../../scripts/converter-biblioteca.mjs';
 import { criarBiblioteca, sha256Biblioteca } from '../../../src/kernel/corpus/biblioteca.js';
 import { abrirLedger } from '../../../src/kernel/ledger/db.js';
 import { criarGerenciadorSessao } from '../../../src/server/sessao.js';
-import { rotearBiblioteca } from '../../../src/server/biblioteca.js';
+import { rotearBiblioteca, hashCuradoriaPacote } from '../../../src/server/biblioteca.js';
 
 const AGORA = '2026-10-14T12:00:00Z';
 it('não atribui o arquivo inteiro à primeira fonte: exige e respeita a seção mapeada', async () => {
@@ -98,6 +98,22 @@ function importarEmBanco(manifesto: unknown, destino: string) {
   biblioteca.importarPacote(manifesto, (arquivo) => readFileSync(join(destino, 'pacote', arquivo), 'utf8'));
   return { db, biblioteca };
 }
+it('FGTS publica só a base legal e fica localizável por tumor sem declarar elegibilidade',async()=>{
+ const caminho='corpus/3-laudos/fgts/laudo-fgts.v1.RASCUNHO.json';
+ const root=criarRoot({[caminho]:JSON.parse(readFileSync(caminho,'utf8'))});
+ const dir=mkdtempSync(join(tmpdir(),'fgts-escopo-')),snap=join(dir,'snap'),destino=join(dir,'pacote');
+ exportarBiblioteca(root,snap);
+ await converterBiblioteca(snap,destino,{mapeamento:join(process.cwd(),'scripts/converter-biblioteca-mapeamento.json'),agora:AGORA,idPacote:'fgts-sintetico',versao:'1.0.0'});
+ const m=JSON.parse(readFileSync(join(destino,'pacote/manifesto.json'),'utf8'));
+ const item=lerItem(destino,m.itens[0].arquivo);
+ expect(item.texto).toContain('neoplasia maligna');expect(item.texto).not.toContain('documentosAnexos');expect(item.texto).not.toContain('resalvaRenovacao');
+ expect(item.proveniencia.publicadoEm).toBe('1994-07-26');
+ const {db,biblioteca}=importarEmBanco(m,destino);
+ try{
+  const id=`${m.id}@${m.versao}`;biblioteca.revisarItem(id,m.itens[0].id,'CONSULTAVEL');biblioteca.ativar(id);
+  for(const tumor of ['mama','colorretal','pulmao'])expect(biblioteca.consultar({tumor})).toHaveLength(1);
+ }finally{db.close();}
+});
 /** Reescreve itens e manifesto de um pacote convertido, recalculando os hashes (para casos adversariais). */
 function reescrever(destino: string, mudanca: (itens: Record<string, any>[]) => void) {
   const manifesto = JSON.parse(readFileSync(join(destino, 'pacote', 'manifesto.json'), 'utf8'));
@@ -238,13 +254,14 @@ describe('F1-N ponte snapshot→PacoteBiblioteca', () => {
     try { expect(() => biblioteca.importarPacote({ schema: 'PacoteBiblioteca@1', id: 'g', versao: '1.0.0', origem: 'CURADOR_LOCAL', classificacao: 'PUBLIC', criadoEm: AGORA, itens: [{ id: 'grande', versao: '1.0.0', arquivo: 'grande.json', sha256: sha256Biblioteca(texto) }] }, () => texto)).toThrow('ITEM_EXCESSIVO'); } finally { db.close(); }
 
     const arquivos: Record<string, unknown> = {};
-    for (let k = 0; k < 6; k++) arquivos[`corpus/1-exames/labs/gra-${k}.json`] = painel(`gra-${k}`, { nota: 'y'.repeat(170_000) });
+    for (let k = 0; k < 6; k++) arquivos[`corpus/1-exames/labs/gra-${k}.json`] = painel(`gra-${k}`, { nota: 'á'.repeat(170_000) });
     const root = criarRoot(arquivos);
     const itens = Object.fromEntries(Object.keys(arquivos).map((c) => [c, {}]));
     const { destino, inventario } = await converter(root, 'httpgrande', { itens });
-    expect(inventario.http.emitido).toBe(false); // corpo ultrapassa o limite do roteador (1.000.000)
+    expect(inventario.http.emitido).toBe(true); // /biblioteca/importar aceita envelope de até 24 MB.
     expect(inventario.http.bytesBody).toBeGreaterThan(1_000_000);
-    expect(existsSync(join(destino, 'pacote-http.json'))).toBe(false);
+    expect(existsSync(join(destino, 'pacote-http.json'))).toBe(true);
+    expect(inventario.http.bytesBody).toBe(Buffer.byteLength(readFileSync(join(destino, 'pacote-http.json'), 'utf8').trim()));
     expect(existsSync(join(destino, 'pacote', 'manifesto.json'))).toBe(true); // pacote interno segue válido
   }, 120_000);
 
@@ -287,7 +304,7 @@ describe('F1-N ponte no HTTP real', () => {
     const server = createServer(async (req, res) => { let raw = ''; for await (const part of req) raw += part; const token = String(req.headers.authorization ?? '').replace('Bearer ', ''); const result = rotearBiblioteca(deps, token, req.url!, JSON.parse(raw), auth.sessao); res.writeHead(result?.status ?? 404, { 'Content-Type': 'application/json' }); res.end(JSON.stringify(result?.body ?? {})); });
     await new Promise<void>((resolve) => server.listen(0, '127.0.0.1', resolve));
     const base = `http://127.0.0.1:${(server.address() as AddressInfo).port}`;
-    return { db, async post(rota: string, body: unknown, token = auth.token) { const r = await fetch(base + rota, { method: 'POST', headers: { authorization: `Bearer ${token}`, 'Content-Type': 'application/json' }, body: JSON.stringify(body) }); return { status: r.status, body: await r.json() as Record<string, any> }; }, async close() { await new Promise<void>((resolve, reject) => server.close(e => e ? reject(e) : resolve())); db.close(); } };
+    return { db, async curar(body: Record<string, unknown>, token = auth.token) { const r = await fetch(base + '/biblioteca/curar', {method:'POST',headers:{authorization:`Bearer ${token}`,'Content-Type':'application/json'},body:JSON.stringify({expectedCuradoriaHash:hashCuradoriaPacote(db,String(body.pacoteId)),...body})}); return {status:r.status,body:await r.json() as Record<string,any>}; }, async post(rota: string, body: unknown, token = auth.token) {if(['/biblioteca/ativar','/biblioteca/rollback'].includes(rota)&&body&&typeof body==='object'&&!Object.hasOwn(body,'expectedAtivaHash')) { const atual=await fetch(base+'/biblioteca/estado',{method:'POST',headers:{authorization:`Bearer ${token}`,'Content-Type':'application/json'},body:'{}'}); const estado=await atual.json() as Record<string,any>;body={expectedAtiva:estado.ativa??null,expectedAtivaHash:estado.referencia?.hash??null,...body}; }  const r = await fetch(base + rota, { method: 'POST', headers: { authorization: `Bearer ${token}`, 'Content-Type': 'application/json' }, body: JSON.stringify(body) }); return { status: r.status, body: await r.json() as Record<string, any> }; }, async close() { await new Promise<void>((resolve, reject) => server.close(e => e ? reject(e) : resolve())); db.close(); } };
   }
   it('importa o pacote convertido, cura, ativa e consulta; ALERTA é recusado inclusive para REGRA', async () => {
     const root = criarRoot({ 'corpus/1-exames/labs/painel-a.json': painel('painel-a'), 'corpus/1-exames/path/painel-b.json': painel('painel-b') });
@@ -302,9 +319,9 @@ describe('F1-N ponte no HTTP real', () => {
       expect(imp.status).toBe(201); expect(imp.body.codigo).toBe('PACOTE_IMPORTADO_RASCUNHO');
       const id = imp.body.pacoteId, hash = imp.body.hash;
       expect((await a.post('/biblioteca/consultar', { filtros: {} })).body.itens).toEqual([]); // RASCUNHO não é consultável
-      for (const ref of payload.manifesto.itens) expect((await a.post('/biblioteca/curar', { pacoteId: id, itemId: ref.id, expectedHash: hash, estado: 'ALERTA' })).body.codigo).toBe('ALERTA_SEM_SCHEMA_EXECUTAVEL');
-      for (const ref of payload.manifesto.itens) expect((await a.post('/biblioteca/curar', { pacoteId: id, itemId: ref.id, expectedHash: hash, estado: 'CONSULTAVEL' })).status).toBe(200);
-      expect((await a.post('/biblioteca/ativar', { pacoteId: id, expectedHash: hash })).status).toBe(200);
+      for (const ref of payload.manifesto.itens) expect((await a.curar( { pacoteId: id, itemId: ref.id, expectedHash: hash, estado: 'ALERTA' })).body.codigo).toBe('ALERTA_SEM_SCHEMA_EXECUTAVEL');
+      for (const ref of payload.manifesto.itens) expect((await a.curar( { pacoteId: id, itemId: ref.id, expectedHash: hash, estado: 'CONSULTAVEL' })).status).toBe(200);
+      expect((await a.post('/biblioteca/ativar', { pacoteId: id, expectedHash: hash, expectedCuradoriaHash: (await a.post('/biblioteca/estado', {pacoteId:id})).body.curadoriaHash })).status).toBe(200);
       const consulta = await a.post('/biblioteca/consultar', { filtros: { tumor: 'mama' } });
       expect(consulta.body.itens.map((i: any) => i.id).sort()).toEqual(['1-exames-labs-painel-a', '1-exames-path-painel-b']);
       // REGRA manual também não ganha ALERTA no HTTP (proteção preservada — adendo item 5)
@@ -312,7 +329,7 @@ describe('F1-N ponte no HTTP real', () => {
       const texto = JSON.stringify(regra);
       const p2 = { manifesto: { schema: 'PacoteBiblioteca@1', id: 'regra-pac', versao: '1.0.0', origem: 'CURADOR_LOCAL', classificacao: 'PUBLIC', criadoEm: AGORA, itens: [{ id: 'regra', versao: '1.0.0', arquivo: 'regra.json', sha256: sha256Biblioteca(texto) }] }, arquivos: { 'regra.json': { texto } } };
       const imp2 = await a.post('/biblioteca/importar', p2);
-      expect((await a.post('/biblioteca/curar', { pacoteId: imp2.body.pacoteId, itemId: 'regra', expectedHash: imp2.body.hash, estado: 'ALERTA' })).body.codigo).toBe('ALERTA_SEM_SCHEMA_EXECUTAVEL');
+      expect((await a.curar( { pacoteId: imp2.body.pacoteId, itemId: 'regra', expectedHash: imp2.body.hash, estado: 'ALERTA' })).body.codigo).toBe('ALERTA_SEM_SCHEMA_EXECUTAVEL');
     } finally { await a.close(); }
   });
 });

@@ -1,4 +1,6 @@
 import { InvestigacaoConsultaVisao } from '../../contracts/api/investigacao.js';
+import { RevisaoClinicaResposta } from '../../contracts/fase2/revisaoClinica.js';
+import { EstadoDoencaPreparado } from '../../contracts/fase2/estadoDoenca.js';
 import { SintesePropostaResposta } from '../../contracts/api/sinteseProposta.js';
 import { ActionIntent, ConfirmarBloco } from "../../contracts/operacao.js";
 import { EstadoOncoassist, FontesOncoassist, RespostaOncoassist } from "./oncoassist.js";
@@ -6,6 +8,7 @@ import { FonteRevisao, ReconciliacaoProposta, RevisaoPreparada } from "./revisao
 import { AcaoResposta, AgendaResposta, ApacResposta, BundleResposta, CanalResposta, ChatResposta, ConfirmacaoResposta, ConsultaResposta, FlashPreparadaResposta, FlashRascunhoResposta, SalaoResposta } from "./respostas.js";
 import { z } from "zod";
 import { ResultadoInstrumentoSchema } from "../../contracts/f0c/resultadoInstrumento.js";
+import { criarApiBiblioteca } from "./biblioteca.js";
 import {
   ErroPorta,
   type AcaoIntent,
@@ -75,6 +78,7 @@ export function criarPortaHttp(opcoes: OpcoesHttp): PortaConsulta {
   }
 
   return {
+    biblioteca: criarApiBiblioteca((rota, corpo, signal) => enviar(rota, corpo, true, signal)),
     async reconciliarMedicamentos(pedido, signal) {
       const {status,json}=await enviar("/consulta/medicamentos/reconciliar",pedido,true,signal);
       const r=z.object({codigo:z.enum(["GRAVADA","REPLAY"]),eventId:z.string().min(1)}).safeParse(json);
@@ -90,6 +94,24 @@ export function criarPortaHttp(opcoes: OpcoesHttp): PortaConsulta {
         throw new ErroPorta("SINTESE_FORA_CONTEXTO");
       return r.data;
     },
+    async prepararEstadoDoenca(pedido,signal){
+      const {status,json}=await enviar('/consulta/estado-doenca/preparar',pedido,true,signal),p=EstadoDoencaPreparado.safeParse(json);
+      if(status!==200||!p.success||p.data.contexto.patientId!==pedido.patientId||p.data.contexto.encounterId!==pedido.encounterId||p.data.contexto.tumorLotId!==pedido.tumorLotId)
+        throw new ErroPorta(codigoDe(json,'ESTADO_DOENCA_PENDENTE'));return p.data;
+    },
+    async confirmarEstadoDoenca(pedido,signal){
+      const {status,json}=await enviar('/consulta/estado-doenca/confirmar',pedido,true,signal);
+      const p=z.object({codigo:z.enum(['GRAVADA','REPLAY']),eventId:z.string().min(1)}).safeParse(json);
+      if(status!==200||!p.success)throw new ErroPorta(codigoDe(json,'ESTADO_DOENCA_PENDENTE'));return p.data;
+    },
+    async revisaoClinica(contexto,packId,signal){
+      const {status,json}=await enviar('/consulta/revisao-clinica',{patientId:contexto.patientId,encounterId:contexto.encounterId,
+        tumorLotId:contexto.tumorLotId,...(packId?{packId}:{})},true,signal);
+      const r=RevisaoClinicaResposta.safeParse(json);
+      if(status!==200||!r.success)throw new ErroPorta(codigoDe(json,'REVISAO_CLINICA_PENDENTE'));
+      if(r.data.contexto.patientId!==contexto.patientId||r.data.contexto.encounterId!==contexto.encounterId||r.data.contexto.tumorLotId!==contexto.tumorLotId)throw new ErroPorta('REVISAO_FORA_CONTEXTO');
+      return r.data;
+    },
     async investigacao(contexto, signal) {
       const {status,json}=await enviar("/consulta/investigacao",{patientId:contexto.patientId,encounterId:contexto.encounterId,tumorLotId:contexto.tumorLotId},true,signal);
       const r=InvestigacaoConsultaVisao.safeParse(json);
@@ -100,9 +122,17 @@ export function criarPortaHttp(opcoes: OpcoesHttp): PortaConsulta {
     async uploadDocumentoLocal(pedido,signal) {
       const {status,json}=await enviar("/consulta/upload",pedido,true,signal);
       const parsed=z.object({codigo:z.enum(["RASCUNHO_SALVO","REPLAY"]),draftId:z.string().min(1),revision:z.number().int().nonnegative(),
-        linkedPatientId:z.string().nullable(),requiresMedicalReview:z.literal(true),conversionStatus:z.enum(["PRONTO","PENDENTE"]).optional(),motivo:z.string().nullable().optional()}).safeParse(json);
+        linkedPatientId:z.string().nullable(),requiresMedicalReview:z.literal(true),conversionStatus:z.enum(["PRONTO","PENDENTE"]).optional(),motivo:z.string().nullable().optional(),
+        paginasPendentes:z.array(z.number().int().positive()).default([]),totalPaginas:z.number().int().nonnegative().nullable().default(null)}).safeParse(json);
       if((status===201||status===200)&&parsed.success){const {conversionStatus,motivo,...r}=parsed.data;return {...r,...(conversionStatus===undefined?{}:{conversionStatus}),...(motivo===undefined?{}:{motivo})};}
       throw new ErroPorta("UPLOAD_RECUSADO",codigoDe(json,"UPLOAD_INVALIDO"));
+    },
+    async importarTranscricaoLocal(pedido,signal) {
+      const {status,json}=await enviar("/consulta/extrair",pedido,true,signal);
+      const parsed=z.object({codigo:z.enum(["RASCUNHO_SALVO","REPLAY"]),draftId:z.string().min(1),revision:z.number().int().nonnegative(),
+        linkedPatientId:z.null(),requiresMedicalReview:z.literal(true)}).safeParse(json);
+      if((status===201||status===200)&&parsed.success)return parsed.data;
+      throw new ErroPorta("TRANSCRICAO_RECUSADA",codigoDe(json,"TRANSCRICAO_INVALIDA"));
     },
     async avaliarInstrumento(contexto,pedido) {
       const r=await enviar("/consulta/instrumento/avaliar",{...contexto,pedido},true);
@@ -231,6 +261,12 @@ export function criarPortaHttp(opcoes: OpcoesHttp): PortaConsulta {
     },
 
     // [SERVIDOR_PENDENTE]
+    async lotesPaciente(patientId,signal) {
+      const {status,json}=await enviar('/consulta/lotes',LotesPacientePedido.parse({patientId}),true,signal);
+      const parsed=LotesPacienteResposta.safeParse(json);
+      if(status!==200||!parsed.success||parsed.data.patientId!==patientId)throw new ErroPorta(codigoDe(json,'LOTES_INVALIDOS'));
+      return parsed.data;
+    },
     async carregarConsulta(patientId, tumorLotId, encounterId) {
       if (!encounterId) throw new ErroPorta("ENCONTRO_EXPLICITO_OBRIGATORIO");
       return leitura("/consulta/carregar", { patientId, encounterId, ...(tumorLotId === undefined ? {} : { tumorLotId }) }, ConsultaResposta);
@@ -278,3 +314,4 @@ export function criarPortaHttp(opcoes: OpcoesHttp): PortaConsulta {
     },
   };
 }
+import {LotesPacientePedido,LotesPacienteResposta} from '../../contracts/api/lotes.js';

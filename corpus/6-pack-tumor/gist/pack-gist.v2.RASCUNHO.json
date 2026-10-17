@@ -1566,5 +1566,1847 @@
       "achado": "Decisão do Dr. Silas",
       "acao": "estratificação de risco AFIP (Aula 77) incorporada; 3 anos no alto risco"
     }
-  ]
+  ],
+  "tumor_pack_universal": {
+    "schema_documental": "tumor-pack-universal@1",
+    "metadados": {
+      "revisao_documental": "2026-10-17-nccn-delta-2-correcao-auditoria",
+      "versao": "1.1.0",
+      "data": "2026-10-17",
+      "autor_extracao": "Codex",
+      "estado": "RASCUNHO",
+      "aprovacao_clinica": null,
+      "escopo": "CAMADA_ADITIVA_UNIVERSAL_E_DELTA_DOCUMENTAL_NCCN",
+      "base_legada": {
+        "arquivo": "corpus/6-pack-tumor/gist/pack-gist.v2.RASCUNHO.json",
+        "commit": "2c0991d",
+        "versao": "2.0.0",
+        "sha256_bytes": "7cac224d67ff3053daff0b5f7db3bb7d5eda97c1d22d48dc4d61aaec3ddf5512",
+        "sha256_semantico": "0be25d54ff506e1e74c425284e606535a593ccf7fb044b56a910dd77916385ae"
+      },
+      "nota_versao": "Versão desta camada:1.1.0; revisão documental:2026-10-17-nccn-delta-2-correcao-auditoria. header.versao continua referindo-se ao legado intacto. Nenhuma aprovação é transferida.",
+      "integra_runtime": false,
+      "gera_conduta": false,
+      "historico_revisoes": [
+        {
+          "revisao_documental": "2026-10-17-nccn-delta-1",
+          "versao": "1.0.0",
+          "data": "2026-10-17",
+          "autor_extracao": "Codex",
+          "estado": "RASCUNHO",
+          "aprovacao_clinica": null,
+          "escopo": "CAMADA_ADITIVA_UNIVERSAL_E_DELTA_DOCUMENTAL_NCCN",
+          "base_legada": {
+            "arquivo": "corpus/6-pack-tumor/gist/pack-gist.v2.RASCUNHO.json",
+            "commit": "2c0991d",
+            "versao": "2.0.0",
+            "sha256_bytes": "7cac224d67ff3053daff0b5f7db3bb7d5eda97c1d22d48dc4d61aaec3ddf5512",
+            "sha256_semantico": "0be25d54ff506e1e74c425284e606535a593ccf7fb044b56a910dd77916385ae"
+          },
+          "nota_versao": "header.versao identifica o legado intacto; esta extensão possui revisão própria. Não reutilizar aprovação/hashes antigos para o conjunto alterado.",
+          "integra_runtime": false,
+          "gera_conduta": false
+        }
+      ]
+    },
+    "identidade_ref": "/identidade",
+    "dominios": [
+      {
+        "dominio_id": 1,
+        "nome": "Diagnóstico e patologia",
+        "itens_legados_refs": [
+          "legado-3dd3c106a377912b",
+          "legado-3771908083975adb",
+          "legado-f41698d26fe498d4",
+          "legado-e17570a9b9bad759",
+          "legado-da89561b4a8c5ec7",
+          "legado-a2a31534a37a2ff9",
+          "legado-4207dbb57d7ce04f",
+          "legado-f8a2fa6b05ff5d93"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 2,
+        "nome": "Estadiamento, extensão e risco",
+        "itens_legados_refs": [
+          "legado-8a9794281fa85fd1",
+          "legado-f0f06c0b1ffd163a",
+          "legado-4b08818b44c87ab0",
+          "legado-a263444f1a5c9e5a",
+          "legado-940c7fa0da2cc3ea",
+          "legado-a394e138eca83097",
+          "legado-93d0248c0adb2f2a",
+          "legado-a33637c9165bfbb2",
+          "legado-6998a6854c262f25",
+          "legado-ed7dbaeec87c79d0"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 3,
+        "nome": "Biomarcadores e farmacogenética",
+        "itens_legados_refs": [
+          "legado-fcb979550ef83baa",
+          "legado-21f100da5562b417",
+          "legado-28efda0b6176669b",
+          "legado-007dfb9feef66ed3",
+          "legado-8f4f29eb596658fe",
+          "legado-7e6cb26386f88a80",
+          "legado-8762320133ba725b",
+          "legado-e851fcea0458d13f",
+          "legado-200c6049541e755c"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 4,
+        "nome": "Exames e requisitos documentais",
+        "itens_legados_refs": [
+          "legado-f5411150b50bdd8c",
+          "legado-6ed80ab217ee51a3",
+          "legado-29b83d327ed4d93f",
+          "legado-493ad953e7d7edf0",
+          "legado-842643bf13724f4f",
+          "legado-4a374dc6df215a9a",
+          "legado-f52e11683e775b46",
+          "legado-847c6fa83b58e10b",
+          "legado-719358dde869e8f6",
+          "legado-88c64410d6008de5",
+          "legado-0a67d9e7b6ae278c",
+          "legado-89db3b6ec657bc2a",
+          "legado-7d2143eacc3b8445",
+          "legado-c1d7320f97e2ee8a",
+          "legado-818b16913bbcd44d",
+          "legado-ab06ee86cdef8912",
+          "legado-8ef7604140d1e260",
+          "legado-95fc0b22aee0a18b",
+          "legado-cf1f3bfaecf68afd",
+          "legado-d917bfe5daa9639b",
+          "legado-41308264aad0cdb4",
+          "legado-47454658d98fc66c"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 5,
+        "nome": "Avaliação antes do tratamento",
+        "itens_legados_refs": [],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "NAO_ESTRUTURADO_NESTA_RODADA",
+        "observacao": "Ausência de referências não significa não aplicabilidade; textos dentro de outros itens permanecem preservados."
+      },
+      {
+        "dominio_id": 6,
+        "nome": "Tratamento e protocolos",
+        "itens_legados_refs": [
+          "legado-2c08d5b09bb8d7e9",
+          "legado-9df1a153d0c3cc67",
+          "legado-4a2b25717e897665",
+          "legado-fc55c3d811f19094",
+          "legado-e26fbad344269977",
+          "legado-805e2caa5c4e2e25",
+          "legado-64296a6702e65f50",
+          "legado-228ec49ba4ba4557",
+          "legado-06c529c57c27ce8c",
+          "legado-f38c57b566db649c",
+          "legado-aad0b4af65157522",
+          "legado-161f282ac5c3e1b0",
+          "legado-448a08ceac7e8819",
+          "legado-6be071805ac7f842",
+          "legado-df9deee48ddcfc12"
+        ],
+        "itens_nccn_refs": [
+          "nccn-20261017-gist-avapritinibe-neo",
+          "nccn-20261017-gist-avapritinibe-avancado",
+          "nccn-20261017-gist-duracao-adjuvante"
+        ],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 7,
+        "nome": "Segurança, interações e toxicidades",
+        "itens_legados_refs": [
+          "legado-4f6b336195c5310e",
+          "legado-dd3e9aaff090fd6e",
+          "legado-f5e21702730ecb48",
+          "legado-196747994e9dbe21",
+          "legado-0810356700f0d0d9"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 8,
+        "nome": "Suporte e cuidados",
+        "itens_legados_refs": [
+          "legado-20884badaa99e138",
+          "legado-5560da9c52df43d3",
+          "legado-cb5d0b35a521b233",
+          "legado-56e201b2d1da99a2"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 9,
+        "nome": "Avaliação de resposta e estado da doença",
+        "itens_legados_refs": [],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "NAO_ESTRUTURADO_NESTA_RODADA",
+        "observacao": "Ausência de referências não significa não aplicabilidade; textos dentro de outros itens permanecem preservados."
+      },
+      {
+        "dominio_id": 10,
+        "nome": "Seguimento e sobrevivência",
+        "itens_legados_refs": [
+          "legado-eb4c5f255d7fe60f",
+          "legado-3ef0d272aabd99fd",
+          "legado-940ece8fa9400677",
+          "legado-d9b6d7141e676690",
+          "legado-7f54a333a82289de"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 11,
+        "nome": "Encaminhamentos e atuação multiprofissional",
+        "itens_legados_refs": [
+          "legado-11383b61c66ba908",
+          "legado-6b2edec79866e606",
+          "legado-fee636ed02dcf006",
+          "legado-b181a1f985b9e11f"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 12,
+        "nome": "Documentos e acesso assistencial",
+        "itens_legados_refs": [
+          "legado-c0e4e65d187a5c9b",
+          "legado-70a9d978442ee2e5"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      }
+    ],
+    "indice_itens_legados": [
+      {
+        "item_id": "legado-3dd3c106a377912b",
+        "origem_json_pointer": "/diagnostico/patologico/obtencao/0",
+        "sha256_conteudo": "2c6a4e1280d4985d70168526bf9bfe851ee30ee1e935b63fe76aab3a240b581c",
+        "nome": "/diagnostico/patologico/obtencao/0",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/obtencao/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-3771908083975adb",
+        "origem_json_pointer": "/diagnostico/patologico/obtencao/1",
+        "sha256_conteudo": "829904c4379a0471aa6b20ba72971a64e5a79960bd959c5d40fac5638a644386",
+        "nome": "/diagnostico/patologico/obtencao/1",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/obtencao/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-f41698d26fe498d4",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/0",
+        "sha256_conteudo": "5a8730f26ac4b1c72d4f9166347c4bdac03cf0440aecb149b34861edcbc14582",
+        "nome": "localização anatômica",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e17570a9b9bad759",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/1",
+        "sha256_conteudo": "cae57f3ba234accba36bd4b1346412b5e818246d042610feda57b2f68ba29b30",
+        "nome": "tamanho do tumor",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-da89561b4a8c5ec7",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/2",
+        "sha256_conteudo": "21622477281e8ef8b7962af83511473759e5565d9e87cb5576310e90acaa0b79",
+        "nome": "índice mitótico (em 50 CGA / 5 mm²)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a2a31534a37a2ff9",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/3",
+        "sha256_conteudo": "9b2efe4e03ea34f778e58fb4f562fd47d735c39d299045dbb06308b7ab00da75",
+        "nome": "ruptura tumoral",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-4207dbb57d7ce04f",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/4",
+        "sha256_conteudo": "9404d132ba172375a29360545fc7f81bb01c2c569d791f029092b852d73c1dc8",
+        "nome": "status da margem",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-f8a2fa6b05ff5d93",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/5",
+        "sha256_conteudo": "bbdfef310359f816d68ef8383294ef8ad7132d09b4d186df7ce88371142bc535",
+        "nome": "IHQ CD117 e DOG-1",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8a9794281fa85fd1",
+        "origem_json_pointer": "/estadiamento/sistema",
+        "sha256_conteudo": "837c66b52d48b6041bf453c628d47844d55ba63a066b91827737f1b35a53f412",
+        "nome": "outro",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-f0f06c0b1ffd163a",
+        "origem_json_pointer": "/estadiamento/edicao",
+        "sha256_conteudo": "a063f202bcc4f56fed33d38fb55016efc5380384e5e7ffac026e1473fc4b14f2",
+        "nome": "Estratificação de risco (tamanho × índice mitótico × sítio × ruptura); AJCC raramente usado",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-4b08818b44c87ab0",
+        "origem_json_pointer": "/estadiamento/gruposConduta/0",
+        "sha256_conteudo": "9588286a978cd183817df205f4b0d8be39abed50724d6815f010d21091e8b84c",
+        "nome": "/estadiamento/gruposConduta/0",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a263444f1a5c9e5a",
+        "origem_json_pointer": "/estadiamento/gruposConduta/1",
+        "sha256_conteudo": "e1fda809c6f8f1d95b27ecf581d5ed4001a6f4ad9c194f611ccb0649cc7bf51b",
+        "nome": "/estadiamento/gruposConduta/1",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-940c7fa0da2cc3ea",
+        "origem_json_pointer": "/estadiamento/gruposConduta/2",
+        "sha256_conteudo": "581f2feb610c681b506ced26933c4ca3f7160d131aca4609ca8e70449d6f753e",
+        "nome": "/estadiamento/gruposConduta/2",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a394e138eca83097",
+        "origem_json_pointer": "/estadiamento/gruposConduta/3",
+        "sha256_conteudo": "a387d2860bcef3d332b8f537fda80b79eb2342539384f141df19b06e7d66dbfb",
+        "nome": "/estadiamento/gruposConduta/3",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-93d0248c0adb2f2a",
+        "origem_json_pointer": "/estadiamento/gruposConduta/4",
+        "sha256_conteudo": "9e906548670312c2755b3f4d538cd6726c68f90389cf4a9ae88510949b86696a",
+        "nome": "/estadiamento/gruposConduta/4",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a33637c9165bfbb2",
+        "origem_json_pointer": "/estadiamento/gruposConduta/5",
+        "sha256_conteudo": "4d88c4dfe5e368e8757d2733a57059805751fe399d4d77c28aab6d8149c04695",
+        "nome": "/estadiamento/gruposConduta/5",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/5/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-6998a6854c262f25",
+        "origem_json_pointer": "/estadiamento/gruposConduta/6",
+        "sha256_conteudo": "7056159be3df76bc0fd14367737e21cbbb22d8700919c06455e3140a78e4d5c3",
+        "nome": "/estadiamento/gruposConduta/6",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/6/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ed7dbaeec87c79d0",
+        "origem_json_pointer": "/estadiamento/marcadores",
+        "sha256_conteudo": "7aa4d5e52f7378fc5be19ac9c10d9ab65630ce7ec394d946a56c4f468340e518",
+        "nome": "/estadiamento/marcadores",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-fcb979550ef83baa",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/0",
+        "sha256_conteudo": "3a014e87513b3533e487b79d05352368089f3934d7c52a9efbeda5c757ee6ccc",
+        "nome": "diagnóstico",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-21f100da5562b417",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/1",
+        "sha256_conteudo": "df560547b2c95002afa6061f7ab4c8d80f5048a4443f30d42d880e07da1b0da4",
+        "nome": "todos; obrigatório antes de adjuvância (alto risco) e de neoadjuvância",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-28efda0b6176669b",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/2",
+        "sha256_conteudo": "d43f919f5b75dfc0075ace1464d2c068d4d9ca55d26c75031f3652e12bd8757e",
+        "nome": "KIT/PDGFRA selvagem",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-007dfb9feef66ed3",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/3",
+        "sha256_conteudo": "fc11326de6e56ab1fd26f709816269039e0cff1ed969d4923a253e88d04955cf",
+        "nome": "selvagem com SDH preservado",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8f4f29eb596658fe",
+        "origem_json_pointer": "/tratamento/biomarcadorTratamento/0",
+        "sha256_conteudo": "429238a7aaea13bf36b38dcf7f21d640d0654873106bb3463f2c3f9a2bc2a2fe",
+        "nome": "/tratamento/biomarcadorTratamento/0",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/biomarcadorTratamento/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-7e6cb26386f88a80",
+        "origem_json_pointer": "/tratamento/biomarcadorTratamento/1",
+        "sha256_conteudo": "1a7a9e0c316842693cabac4e372da9cf698fa09ec555b42e5633c51ade5e8360",
+        "nome": "/tratamento/biomarcadorTratamento/1",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/biomarcadorTratamento/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8762320133ba725b",
+        "origem_json_pointer": "/tratamento/biomarcadorTratamento/2",
+        "sha256_conteudo": "b5f4ec0a4f6b498c7367b9a13bcc83b2fd02481f2d58afac4e4af5d1864004af",
+        "nome": "/tratamento/biomarcadorTratamento/2",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/biomarcadorTratamento/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e851fcea0458d13f",
+        "origem_json_pointer": "/tratamento/biomarcadorTratamento/3",
+        "sha256_conteudo": "291397f212e60c6536063c63054ee70d82b672c6752d1d25ef2b8a83dcdafdf0",
+        "nome": "/tratamento/biomarcadorTratamento/3",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/biomarcadorTratamento/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-200c6049541e755c",
+        "origem_json_pointer": "/tratamento/biomarcadorTratamento/4",
+        "sha256_conteudo": "40d134f0f317f05104d145aacbd635bcbe48bb59a7fa7f15df8ab08319074481",
+        "nome": "/tratamento/biomarcadorTratamento/4",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/biomarcadorTratamento/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-f5411150b50bdd8c",
+        "origem_json_pointer": "/diagnostico/imagem/0",
+        "sha256_conteudo": "4fecbe6680ed66f8496629ebda94085bd2e010d372d0e9d763bc8dad05a8c92f",
+        "nome": "TC de abdome com contraste",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-6ed80ab217ee51a3",
+        "origem_json_pointer": "/diagnostico/imagem/1",
+        "sha256_conteudo": "995311017bb84fcfc4212bfe87989160b2adbb8109f61b3f9ecd7e43894055b6",
+        "nome": "TC de pelve com contraste",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-29b83d327ed4d93f",
+        "origem_json_pointer": "/diagnostico/imagem/2",
+        "sha256_conteudo": "3107c4ca1bb0af7a7161de2282be7f95efaf86fed7fa54e9010fe91669014fd7",
+        "nome": "Contraste para TC",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-493ad953e7d7edf0",
+        "origem_json_pointer": "/diagnostico/imagem/3",
+        "sha256_conteudo": "bdf993a1ad41f9babea56c255d98951a26115319bb83a5f37cc830a40e638381",
+        "nome": "RM de pelve",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-842643bf13724f4f",
+        "origem_json_pointer": "/diagnostico/imagem/4",
+        "sha256_conteudo": "406aca9ec4e8c0ecb6c54942cedae32bcb8890e9af499eac871d933b1bd80331",
+        "nome": "PET-CT FDG",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-4a374dc6df215a9a",
+        "origem_json_pointer": "/diagnostico/endoscopicos/0",
+        "sha256_conteudo": "b75e0a671aad11ef300db918662e27ec5297ff65353994d992b8f8b1f1e43ae3",
+        "nome": "EDA",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/endoscopicos/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-f52e11683e775b46",
+        "origem_json_pointer": "/diagnostico/endoscopicos/1",
+        "sha256_conteudo": "dd0993ef149ab6a0096fdd97b3b7d5de33e312ed24d5a37746a7b0ca79784321",
+        "nome": "Ultrassom endoscópico (± biópsia guiada)",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/endoscopicos/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-847c6fa83b58e10b",
+        "origem_json_pointer": "/estadiamento/exames/0",
+        "sha256_conteudo": "a5b0100758594ae7f8d238e665498c46aabb2cf9bd76be32a5b003983962fcbc",
+        "nome": "TC de abdome com contraste",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-719358dde869e8f6",
+        "origem_json_pointer": "/estadiamento/exames/1",
+        "sha256_conteudo": "88a3e0932b0514063cd3797e445aec33719fbb1cf08a81717753524fced937be",
+        "nome": "TC de pelve com contraste",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-88c64410d6008de5",
+        "origem_json_pointer": "/estadiamento/exames/2",
+        "sha256_conteudo": "dc73178c89fced245f286063dee888c92ca821908958683335ffa985c4da93db",
+        "nome": "TC de tórax",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-0a67d9e7b6ae278c",
+        "origem_json_pointer": "/estadiamento/exames/3",
+        "sha256_conteudo": "5420e4814b8d768b21fbd60b52fd90108b17b6449adbf18d665ef18d4dad2abf",
+        "nome": "EDA",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-89db3b6ec657bc2a",
+        "origem_json_pointer": "/ligacoes/exames/0",
+        "sha256_conteudo": "00cac656db90cece9385c8c98f658accb5b7c1553202e6be466fa96d39aaf2b9",
+        "nome": "ANATOMOPATOLOGICO",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-7d2143eacc3b8445",
+        "origem_json_pointer": "/ligacoes/exames/1",
+        "sha256_conteudo": "09c0bc2a57301c5e7f5c06c8c51c9dec764db31a5d9531aa98aac18b5d8251f3",
+        "nome": "BIOPSIA_PERCUTANEA_GUIADA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-c1d7320f97e2ee8a",
+        "origem_json_pointer": "/ligacoes/exames/2",
+        "sha256_conteudo": "ca7a59b500f43d318b5582028a0da32c0a1fd1c16ed90a23e8769872888013db",
+        "nome": "CONTRASTE_TC",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-818b16913bbcd44d",
+        "origem_json_pointer": "/ligacoes/exames/3",
+        "sha256_conteudo": "4eafbeeab923ac66d78540cd37c0f44aba4997fe0bb026271a95da2189ec190b",
+        "nome": "EDA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ab06ee86cdef8912",
+        "origem_json_pointer": "/ligacoes/exames/4",
+        "sha256_conteudo": "99a98b9d268e78a05608d792d2fad81f4e16f25b8a4f95da9f7decd91a23a0dc",
+        "nome": "IMUNOHISTOQUIMICA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8ef7604140d1e260",
+        "origem_json_pointer": "/ligacoes/exames/5",
+        "sha256_conteudo": "3a955b75de510bd32be8d0f7de2bf070f27f223ac4c6a07cf68b35b7271856b2",
+        "nome": "PET_CT_FDG",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-95fc0b22aee0a18b",
+        "origem_json_pointer": "/ligacoes/exames/6",
+        "sha256_conteudo": "ae974cff2b8cea688a4632542e3da503ad4a2f0f9301b96d75afbb2588228c37",
+        "nome": "RM_PELVE",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-cf1f3bfaecf68afd",
+        "origem_json_pointer": "/ligacoes/exames/7",
+        "sha256_conteudo": "eea68f82f02592e6262514a154ff52ae85284765c1f48ab3b07cabb92ead209f",
+        "nome": "TC_ABDOMEN_SUPERIOR",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d917bfe5daa9639b",
+        "origem_json_pointer": "/ligacoes/exames/8",
+        "sha256_conteudo": "5beb801ddc054db97d463dd8b682c9128772e22b7938b6d4c645af14dc4ddd7a",
+        "nome": "TC_PELVE",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-41308264aad0cdb4",
+        "origem_json_pointer": "/ligacoes/exames/9",
+        "sha256_conteudo": "e587a7250a8633f1505dfb613cd4283458e6a8198d35f3721641c9ee3878017f",
+        "nome": "MOLECULAR_PCR_MUTACAO",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-47454658d98fc66c",
+        "origem_json_pointer": "/ligacoes/exames/10",
+        "sha256_conteudo": "c77d15bd8da7582e2d6d9825573309affb51c04c30c7829dbea1953584a30ee9",
+        "nome": "SEQUENCIAMENTO_AMPLICON",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-2c08d5b09bb8d7e9",
+        "origem_json_pointer": "/tratamento/cenarios/0",
+        "sha256_conteudo": "3f9863ac483839e0be61af0cbad3fe7acd8320a485b1558e70de8a0bc6d12688",
+        "nome": "localizado_ressecavel",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-9df1a153d0c3cc67",
+        "origem_json_pointer": "/tratamento/cenarios/1",
+        "sha256_conteudo": "fb9a446042e75cce2d10d6f95f1bc224c29caf8baa346332d8f732fa8ebae8ba",
+        "nome": "localmente_avancado",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-4a2b25717e897665",
+        "origem_json_pointer": "/tratamento/cenarios/2",
+        "sha256_conteudo": "31fa4efe746ad2ef3e68a1172706cac680936bb448287d1e05239e45df472bf1",
+        "nome": "metastatico",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-fc55c3d811f19094",
+        "origem_json_pointer": "/tratamento/protocolos/0",
+        "sha256_conteudo": "42e2f11cd4aa23f1b8170c32137c6de08eb4f3cbd5d4e795a498252f841e18a1",
+        "nome": "Imatinibe adjuvante 400 mg/dia por ≥ 3 anos",
+        "id_original": "gist-imatinibe-adjuvante",
+        "fonte_local_ref": "/tratamento/protocolos/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e26fbad344269977",
+        "origem_json_pointer": "/tratamento/protocolos/1",
+        "sha256_conteudo": "77c8b0a875b61856bb8fc50f1a1f277d9fa274a30d40a292a4375d43dfdcf63d",
+        "nome": "Imatinibe neoadjuvante 400 mg/dia por 6–12 meses",
+        "id_original": "gist-imatinibe-neoadjuvante",
+        "fonte_local_ref": "/tratamento/protocolos/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-805e2caa5c4e2e25",
+        "origem_json_pointer": "/tratamento/protocolos/2",
+        "sha256_conteudo": "1d2082a94b47d06710043d38a65df21d7687baa621c41514d7698aad1babfab1",
+        "nome": "Imatinibe 400 mg/dia (avançado/metastático)",
+        "id_original": "gist-imatinibe-400-metastatico",
+        "fonte_local_ref": "/tratamento/protocolos/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-64296a6702e65f50",
+        "origem_json_pointer": "/tratamento/protocolos/3",
+        "sha256_conteudo": "15e0514e7f9764573f38f839ffb6c197203f68f35ff6e701f5c511caad4f0ada",
+        "nome": "Imatinibe 800 mg/dia (éxon 9 ou progressão com 400 mg)",
+        "id_original": "gist-imatinibe-800",
+        "fonte_local_ref": "/tratamento/protocolos/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-228ec49ba4ba4557",
+        "origem_json_pointer": "/tratamento/protocolos/4",
+        "sha256_conteudo": "f57e4ef8865bc08f4662dc9dbab6dac64eedc7742299e6a54b60846eba4724f9",
+        "nome": "Sunitinibe 50 mg/dia esquema 4/2",
+        "id_original": "gist-sunitinibe-4-2",
+        "fonte_local_ref": "/tratamento/protocolos/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-06c529c57c27ce8c",
+        "origem_json_pointer": "/tratamento/protocolos/5",
+        "sha256_conteudo": "32ac7350e9e7670cefd604a9fd5d9e10981f367498873681dbab3e43e52ebf9e",
+        "nome": "Sunitinibe 37,5 mg/dia contínuo",
+        "id_original": "gist-sunitinibe-continuo",
+        "fonte_local_ref": "/tratamento/protocolos/5/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-f38c57b566db649c",
+        "origem_json_pointer": "/tratamento/protocolos/6",
+        "sha256_conteudo": "e606a341e1fa84c5dc7a78541f0520dc6161f527e664f539b1a200463f2ce9eb",
+        "nome": "Regorafenibe 160 mg/dia 3/1",
+        "id_original": "gist-regorafenibe",
+        "fonte_local_ref": "/tratamento/protocolos/6/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-aad0b4af65157522",
+        "origem_json_pointer": "/tratamento/protocolos/7",
+        "sha256_conteudo": "af05a6ffd053f8465209b80e6992551ccf42de304b1cd3e73684b43e8259d7fe",
+        "nome": "Ripretinibe 150 mg/dia",
+        "id_original": "gist-ripretinibe",
+        "fonte_local_ref": "/tratamento/protocolos/7/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-161f282ac5c3e1b0",
+        "origem_json_pointer": "/tratamento/protocolos/8",
+        "sha256_conteudo": "62041c5ddd89f9c2a158794dc5e0a0789dc07fd793a3bef27483fbd9aa9cb033",
+        "nome": "Larotrectinibe (fusão NTRK)",
+        "id_original": "gist-larotrectinibe",
+        "fonte_local_ref": "/tratamento/protocolos/8/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-448a08ceac7e8819",
+        "origem_json_pointer": "/tratamento/protocolos/9",
+        "sha256_conteudo": "0fbf63321a4c61e0a2328909b44fde637d4f2221e1680e48dd5f4caadaf27d01",
+        "nome": "Dabrafenibe + trametinibe (BRAF V600E)",
+        "id_original": "gist-dabrafenibe-trametinibe",
+        "fonte_local_ref": "/tratamento/protocolos/9/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-6be071805ac7f842",
+        "origem_json_pointer": "/tratamento/cirurgia/0",
+        "sha256_conteudo": "46dbdfeb2cfaa641d1aff96668dc399f9f3b823116449378219f39828d04a90c",
+        "nome": "/tratamento/cirurgia/0",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cirurgia/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-df9deee48ddcfc12",
+        "origem_json_pointer": "/tratamento/cirurgia/1",
+        "sha256_conteudo": "b87e1877bd7af3fa7e75629271ef15d83a681d9ee8a028505f4e7a7cda89ad0e",
+        "nome": "/tratamento/cirurgia/1",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cirurgia/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-4f6b336195c5310e",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/0",
+        "sha256_conteudo": "216aefef47b2706f4681185007e1a80fc4ef57bbb87aaf85ca3f506031de1417",
+        "nome": "/ligacoes/interacoesConsultar/0",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-dd3e9aaff090fd6e",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/1",
+        "sha256_conteudo": "1e103d126edfc9bb9e72360871036f959cac949c6b2d08a38fa11785baa56815",
+        "nome": "/ligacoes/interacoesConsultar/1",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-f5e21702730ecb48",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/2",
+        "sha256_conteudo": "2d5950e112010d513a2bcf07ccc5a608b5d3f3cb192d8ad8cc9296b66c1acf11",
+        "nome": "/ligacoes/interacoesConsultar/2",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-196747994e9dbe21",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/3",
+        "sha256_conteudo": "9866eec6c2e9408aeeb9ce3389117fcda023edb5d3d3a77ca3d76003c39a26c2",
+        "nome": "/ligacoes/interacoesConsultar/3",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-0810356700f0d0d9",
+        "origem_json_pointer": "/ligacoes/ctcaeAcao/0",
+        "sha256_conteudo": "82097cddd2ebb150cc90bfd6d5184e2ea5467a207bc2a242fc580f1c727366d7",
+        "nome": "/ligacoes/ctcaeAcao/0",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-20884badaa99e138",
+        "origem_json_pointer": "/tratamento/suporte",
+        "sha256_conteudo": "4e104a8b61b37a4c49d6e87c3e9323d9df03511a6b8905262aab369788a7d9b1",
+        "nome": "/tratamento/suporte",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/suporte/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-5560da9c52df43d3",
+        "origem_json_pointer": "/ligacoes/suporteReceitas/0",
+        "sha256_conteudo": "578de30be9dbaf29d2e22dcac9337ddc9bce6b1f77fc4fccb3f196d458a459f6",
+        "nome": "antidiarreico",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-cb5d0b35a521b233",
+        "origem_json_pointer": "/ligacoes/suporteReceitas/1",
+        "sha256_conteudo": "764082ad18a8e6f926bf5fbd30ad31bda1bc843e0d2b58edd2f028f812a0b04f",
+        "nome": "diurético para edema (imatinibe) conforme avaliação",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-56e201b2d1da99a2",
+        "origem_json_pointer": "/ligacoes/suporteReceitas/2",
+        "sha256_conteudo": "25d7224c1c7793e0d421e3f7ae11118a2828d11eaf973a3f73e27a7735dbc623",
+        "nome": "creme para mão-pé (sunitinibe/regorafenibe)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-eb4c5f255d7fe60f",
+        "origem_json_pointer": "/tratamento/seguimento/0",
+        "sha256_conteudo": "f862352a5117161e990cf380a97b9c6c136d389929341b70c1fc8fbaeed5db08",
+        "nome": "Alto risco — durante adjuvância",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/seguimento/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-3ef0d272aabd99fd",
+        "origem_json_pointer": "/tratamento/seguimento/1",
+        "sha256_conteudo": "21d723283d0f1419ffa4a7fb22bd36b7dd109da7f66be696297bcecc09caa31c",
+        "nome": "Alto risco — após o fim da adjuvância",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/seguimento/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-940ece8fa9400677",
+        "origem_json_pointer": "/tratamento/seguimento/2",
+        "sha256_conteudo": "75b907b15a182609a9f2a61ec5c3f543917065c82df8263b463f2074405b6908",
+        "nome": "Baixo risco",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/seguimento/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d9b6d7141e676690",
+        "origem_json_pointer": "/ligacoes/orientacoes/0",
+        "sha256_conteudo": "afba05e2de6389b751452a9fc6c36eff43abe35e94eedf588456a5e98a7bd825",
+        "nome": "sinais-alarme-consolidado",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-7f54a333a82289de",
+        "origem_json_pointer": "/ligacoes/orientacoes/1",
+        "sha256_conteudo": "b8ea876062c9e1d5187c1ff9251efb3dfda054409dbd6f453b696678705469bc",
+        "nome": "dieta-por-toxicidade",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-11383b61c66ba908",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/0",
+        "sha256_conteudo": "73119be663fabc0ff311c1e1509288f363624f987b5b142a83864ba2b819d0c0",
+        "nome": "cirurgia-oncologica",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-6b2edec79866e606",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/1",
+        "sha256_conteudo": "44f2b66678e1e98d47b278edad466d61da5efe23989ba84627fa3dd726b620a1",
+        "nome": "oncogenetica (GIST SDH deficiente, NF1, jovens)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-fee636ed02dcf006",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/2",
+        "sha256_conteudo": "f3c678035e885d3f52e5701d134da9a3975579bada9b9add3d51d4f7d4ecf94c",
+        "nome": "nutricao",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b181a1f985b9e11f",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/3",
+        "sha256_conteudo": "1904f18eb1604934ff206a272a685781943e9ec7c6a79eba7533a4d24c4195c9",
+        "nome": "cuidados-paliativos",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-c0e4e65d187a5c9b",
+        "origem_json_pointer": "/ligacoes/laudos/0",
+        "sha256_conteudo": "002ad68bb1274c64d205b90df39b756afa9c992b7773b76737efa82feac5b7bc",
+        "nome": "APAC de quimioterapia de GIST (SIGTAP 0304050334; 0304020311)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-70a9d978442ee2e5",
+        "origem_json_pointer": "/ligacoes/laudos/1",
+        "sha256_conteudo": "886490ec19e2e4bde254dbbe0b18b3a36d88016b1e386a2e8ae47830aab3fdc3",
+        "nome": "judicializacao-drogas (regorafenibe, ripretinibe)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      }
+    ],
+    "itens_nccn": [
+      {
+        "item_id": "nccn-20261017-gist-avapritinibe-neo",
+        "nome": "Avapritinibe — Neoadjuvante em doença ressecável com morbidade cirúrgica significativa",
+        "tipo": "OPCAO_TERAPEUTICA",
+        "dominio_principal": 6,
+        "conteudo_extraido": "Opção clínica do NCCN preservada independentemente da nota legada sobre indisponibilidade no Brasil; não presumir acesso atual.",
+        "aplicabilidade": {
+          "criterios": [
+            "GIST com PDGFRA éxon18 insensível ao imatinibe, incluindo D842V",
+            "Neoadjuvante em doença ressecável com morbidade cirúrgica significativa"
+          ],
+          "paciente_individual": null,
+          "estado": "NAO_AVALIADA"
+        },
+        "dados_estruturados": {
+          "farmacos": [
+            "avapritinibe"
+          ],
+          "posologia": {
+            "estado": "NAO_EXTRAIDA_NESTA_RODADA",
+            "valor": null,
+            "motivo": "A rodada incorpora o delta de indicação/cenário; não completa dose por inferência."
+          }
+        },
+        "fonte_refs": [
+          {
+            "fonte_id": "nccn-2ceda0ede5ce",
+            "paginas_pdf": [
+              18
+            ],
+            "secao": "GIST-E 1–2/4",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "pagina_pdf": 18,
+            "trecho": "Avapritinib for GIST with PDGFRA exon 18 mutations that are insensitive to"
+          }
+        ],
+        "evidencia_declarada": {
+          "sistema": "NCCN",
+          "categoria": null,
+          "estado": "NAO_EXTRAIDA_POR_ITEM"
+        },
+        "estado_extracao": "EXTRAIDO_COM_LIMITES_DECLARADOS",
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "temporalidade": {
+          "referencia": "CENARIO_DESCRITO",
+          "datas_individuais": null
+        },
+        "propor_automaticamente": false,
+        "disponivel_para_prescricao": false,
+        "acesso": {
+          "registro_anvisa": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "incorporacao_conitec": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "pcdt_ddt": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "sigtap_apac": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "cobertura_privada": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "disponibilidade_institucional": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          }
+        },
+        "alternativas_legadas_refs": [
+          "/tratamento/biomarcadorTratamento/1"
+        ],
+        "relacoes_refs": [
+          "relacao-nccn-20261017-gist-avapritinibe-neo"
+        ],
+        "conflitos_refs": [
+          "conflito-nccn-20261017-gist-avapritinibe-neo"
+        ],
+        "pendencias": [
+          "REVISAO_CLINICA_DO_DELTA",
+          "VERIFICAR_ACESSO_BRASILEIRO_POR_INDICACAO",
+          "POSOLOGIA_E_SUPORTE_NAO_COMPLETOS_NESTA_RODADA"
+        ]
+      },
+      {
+        "item_id": "nccn-20261017-gist-avapritinibe-avancado",
+        "nome": "Avapritinibe — Primeira linha de doença irressecável/progressiva/metastática",
+        "tipo": "OPCAO_TERAPEUTICA",
+        "dominio_principal": 6,
+        "conteudo_extraido": "GIST insensível ao imatinibe com mutação PDGFRA éxon18, incluindo D842V: primeira linha Preferred com avapritinibe. Separadamente, no ramo sensível com progressão após terapias aprovadas, avapritinibe aparece em Useful in Certain Circumstances. Dasatinibe aparece como segunda linha no ramo insensível, ainda sem extração posológica nesta rodada.",
+        "aplicabilidade": {
+          "criterios": [
+            "PDGFRA éxon18 insensível ao imatinibe, incluindo D842V",
+            "Primeira linha avançada; não misturar com ramo de progressão de doença sensível"
+          ],
+          "paciente_individual": null,
+          "estado": "NAO_AVALIADA"
+        },
+        "dados_estruturados": {
+          "farmacos": [
+            "avapritinibe"
+          ],
+          "posologia": {
+            "estado": "NAO_EXTRAIDA_NESTA_RODADA",
+            "valor": null,
+            "motivo": "A rodada incorpora o delta de indicação/cenário; não completa dose por inferência."
+          },
+          "extracoes_complementares": [
+            {
+              "nome": "Dasatinibe",
+              "contexto": "segunda linha de GIST insensível PDGFRA éxon18",
+              "preferencia": "Other Recommended",
+              "estado": "EXTRACAO_INCOMPLETA",
+              "posologia": null
+            }
+          ]
+        },
+        "fonte_refs": [
+          {
+            "fonte_id": "nccn-2ceda0ede5ce",
+            "edicao": "1.2026",
+            "pagina_pdf": 19,
+            "paginas_pdf": [
+              19
+            ],
+            "secao": "GIST-E 2/4, ramo imatinib-insensitive",
+            "trecho": "Avapritinib",
+            "ancora_contextual": "Imatinib-insensitive:",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "94b93c40240a74461bd807b22c134b6d890e98eb0fd799376b1a6a33e6c48050"
+          },
+          {
+            "fonte_id": "nccn-2ceda0ede5ce",
+            "edicao": "1.2026",
+            "pagina_pdf": 19,
+            "paginas_pdf": [
+              19
+            ],
+            "secao": "GIST-E 2/4, segunda linha",
+            "trecho": "Dasatinib",
+            "ancora_contextual": null,
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "94b93c40240a74461bd807b22c134b6d890e98eb0fd799376b1a6a33e6c48050"
+          }
+        ],
+        "evidencia_declarada": {
+          "sistema": "NCCN",
+          "categoria": "2A por cabeçalho",
+          "preferencia": "Preferred no ramo insensível de primeira linha",
+          "estado": "CONFERIDA_DOCUMENTALMENTE_A_CONFERIR_CLINICAMENTE",
+          "nota": "Categoria 2A sem marca local somente quando expressamente coberta pelo cabeçalho; múltiplas categorias permanecem nos ramos."
+        },
+        "estado_extracao": "EXTRAIDO_COM_LIMITES_DECLARADOS",
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "temporalidade": {
+          "referencia": "CENARIO_DESCRITO",
+          "datas_individuais": null
+        },
+        "propor_automaticamente": false,
+        "disponivel_para_prescricao": false,
+        "acesso": {
+          "registro_anvisa": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "incorporacao_conitec": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "pcdt_ddt": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "sigtap_apac": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "cobertura_privada": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "disponibilidade_institucional": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          }
+        },
+        "alternativas_legadas_refs": [
+          "/tratamento/biomarcadorTratamento/1"
+        ],
+        "relacoes_refs": [
+          "relacao-nccn-20261017-gist-avapritinibe-avancado"
+        ],
+        "conflitos_refs": [
+          "conflito-nccn-20261017-gist-avapritinibe-avancado"
+        ],
+        "pendencias": [
+          "REVISAO_CLINICA_DO_DELTA",
+          "VERIFICAR_ACESSO_BRASILEIRO_POR_INDICACAO",
+          "POSOLOGIA_E_SUPORTE_NAO_COMPLETOS_NESTA_RODADA"
+        ],
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-2-correcao-auditoria",
+            "correcao_id": "M33",
+            "anterior": {
+              "conteudo_extraido": "Opção clínica do NCCN preservada independentemente da nota legada sobre indisponibilidade no Brasil; não presumir acesso atual.",
+              "fonte_refs": [
+                {
+                  "fonte_id": "nccn-2ceda0ede5ce",
+                  "paginas_pdf": [
+                    19
+                  ],
+                  "secao": "GIST-E 1–2/4",
+                  "natureza": "EXTRACAO_DOCUMENTAL",
+                  "pagina_pdf": 19,
+                  "trecho": "Avapritinibg,1,2,7 • Cabozantinib16 • Everolimus/TKIh,17 • Nilotinib18,19 • Pazopanib20 • Ponatinibi,21 •"
+                }
+              ],
+              "estado_curadoria": "A_CONFERIR",
+              "aprovacao_clinica": null,
+              "aplicabilidade": {
+                "criterios": [
+                  "GIST com PDGFRA éxon18 insensível ao imatinibe, incluindo D842V",
+                  "Primeira linha de doença irressecável/progressiva/metastática"
+                ],
+                "paciente_individual": null,
+                "estado": "NAO_AVALIADA"
+              },
+              "dados_estruturados": {
+                "farmacos": [
+                  "avapritinibe"
+                ],
+                "posologia": {
+                  "estado": "NAO_EXTRAIDA_NESTA_RODADA",
+                  "valor": null,
+                  "motivo": "A rodada incorpora o delta de indicação/cenário; não completa dose por inferência."
+                }
+              },
+              "evidencia_declarada": {
+                "sistema": "NCCN",
+                "categoria": null,
+                "estado": "NAO_EXTRAIDA_POR_ITEM"
+              }
+            },
+            "motivo": "Correção documental após auditoria Claude e conferência da fonte; não apaga versão anterior.",
+            "aprovacao_clinica": null
+          }
+        ],
+        "fontes_por_campo": {
+          "conteudo_extraido": [
+            {
+              "fonte_id": "nccn-2ceda0ede5ce",
+              "edicao": "1.2026",
+              "pagina_pdf": 19,
+              "paginas_pdf": [
+                19
+              ],
+              "secao": "GIST-E 2/4, ramo imatinib-insensitive",
+              "trecho": "Avapritinib",
+              "ancora_contextual": "Imatinib-insensitive:",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "94b93c40240a74461bd807b22c134b6d890e98eb0fd799376b1a6a33e6c48050"
+            },
+            {
+              "fonte_id": "nccn-2ceda0ede5ce",
+              "edicao": "1.2026",
+              "pagina_pdf": 19,
+              "paginas_pdf": [
+                19
+              ],
+              "secao": "GIST-E 2/4, segunda linha",
+              "trecho": "Dasatinib",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "94b93c40240a74461bd807b22c134b6d890e98eb0fd799376b1a6a33e6c48050"
+            }
+          ],
+          "aplicabilidade": [
+            {
+              "fonte_id": "nccn-2ceda0ede5ce",
+              "edicao": "1.2026",
+              "pagina_pdf": 19,
+              "paginas_pdf": [
+                19
+              ],
+              "secao": "GIST-E 2/4, ramo imatinib-insensitive",
+              "trecho": "Avapritinib",
+              "ancora_contextual": "Imatinib-insensitive:",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "94b93c40240a74461bd807b22c134b6d890e98eb0fd799376b1a6a33e6c48050"
+            },
+            {
+              "fonte_id": "nccn-2ceda0ede5ce",
+              "edicao": "1.2026",
+              "pagina_pdf": 19,
+              "paginas_pdf": [
+                19
+              ],
+              "secao": "GIST-E 2/4, segunda linha",
+              "trecho": "Dasatinib",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "94b93c40240a74461bd807b22c134b6d890e98eb0fd799376b1a6a33e6c48050"
+            }
+          ],
+          "dados_estruturados": [
+            {
+              "fonte_id": "nccn-2ceda0ede5ce",
+              "edicao": "1.2026",
+              "pagina_pdf": 19,
+              "paginas_pdf": [
+                19
+              ],
+              "secao": "GIST-E 2/4, ramo imatinib-insensitive",
+              "trecho": "Avapritinib",
+              "ancora_contextual": "Imatinib-insensitive:",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "94b93c40240a74461bd807b22c134b6d890e98eb0fd799376b1a6a33e6c48050"
+            },
+            {
+              "fonte_id": "nccn-2ceda0ede5ce",
+              "edicao": "1.2026",
+              "pagina_pdf": 19,
+              "paginas_pdf": [
+                19
+              ],
+              "secao": "GIST-E 2/4, segunda linha",
+              "trecho": "Dasatinib",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "94b93c40240a74461bd807b22c134b6d890e98eb0fd799376b1a6a33e6c48050"
+            }
+          ],
+          "evidencia_declarada": [
+            {
+              "fonte_id": "nccn-2ceda0ede5ce",
+              "edicao": "1.2026",
+              "pagina_pdf": 19,
+              "paginas_pdf": [
+                19
+              ],
+              "secao": "GIST-E 2/4, ramo imatinib-insensitive",
+              "trecho": "Avapritinib",
+              "ancora_contextual": "Imatinib-insensitive:",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "94b93c40240a74461bd807b22c134b6d890e98eb0fd799376b1a6a33e6c48050"
+            },
+            {
+              "fonte_id": "nccn-2ceda0ede5ce",
+              "edicao": "1.2026",
+              "pagina_pdf": 19,
+              "paginas_pdf": [
+                19
+              ],
+              "secao": "GIST-E 2/4, segunda linha",
+              "trecho": "Dasatinib",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "94b93c40240a74461bd807b22c134b6d890e98eb0fd799376b1a6a33e6c48050"
+            }
+          ]
+        },
+        "correcoes_auditoria": [
+          {
+            "id": "M33",
+            "revisao": "2026-10-17-nccn-delta-2-correcao-auditoria",
+            "estado": "APLICADA_COM_CONFERENCIA_DOCUMENTAL",
+            "fontes": [
+              {
+                "fonte_id": "nccn-2ceda0ede5ce",
+                "edicao": "1.2026",
+                "pagina_pdf": 19,
+                "paginas_pdf": [
+                  19
+                ],
+                "secao": "GIST-E 2/4, ramo imatinib-insensitive",
+                "trecho": "Avapritinib",
+                "ancora_contextual": "Imatinib-insensitive:",
+                "natureza": "EXTRACAO_DOCUMENTAL",
+                "sha256_pdf": "94b93c40240a74461bd807b22c134b6d890e98eb0fd799376b1a6a33e6c48050"
+              },
+              {
+                "fonte_id": "nccn-2ceda0ede5ce",
+                "edicao": "1.2026",
+                "pagina_pdf": 19,
+                "paginas_pdf": [
+                  19
+                ],
+                "secao": "GIST-E 2/4, segunda linha",
+                "trecho": "Dasatinib",
+                "ancora_contextual": null,
+                "natureza": "EXTRACAO_DOCUMENTAL",
+                "sha256_pdf": "94b93c40240a74461bd807b22c134b6d890e98eb0fd799376b1a6a33e6c48050"
+              }
+            ],
+            "ajuste_ao_parecer": null
+          }
+        ]
+      },
+      {
+        "item_id": "nccn-20261017-gist-duracao-adjuvante",
+        "nome": "Imatinibe adjuvante: evidência de duração de 3 e 6 anos",
+        "tipo": "DURACAO_TERAPEUTICA",
+        "dominio_principal": 6,
+        "conteudo_extraido": "A duração ótima permanece desconhecida. O NCCN distingue suporte para pelo menos três anos por sobrevida global e pelo menos seis anos por sobrevida livre de doença; não traduzir ambos em um mesmo desfecho.",
+        "aplicabilidade": {
+          "criterios": [
+            "GIST de alto risco com mutação sensível",
+            "Curadoria da duração individual"
+          ],
+          "paciente_individual": null,
+          "estado": "NAO_AVALIADA"
+        },
+        "dados_estruturados": {},
+        "fonte_refs": [
+          {
+            "fonte_id": "nccn-2ceda0ede5ce",
+            "paginas_pdf": [
+              18
+            ],
+            "secao": "GIST-E 1/4, nota b",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "pagina_pdf": 18,
+            "trecho": "optimal duration of adjuvant imatinib is unknown. Available data support the use"
+          }
+        ],
+        "evidencia_declarada": {
+          "sistema": "NCCN",
+          "categoria": null,
+          "estado": "NAO_EXTRAIDA_POR_ITEM"
+        },
+        "estado_extracao": "EXTRAIDO_COM_LIMITES_DECLARADOS",
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "temporalidade": {
+          "referencia": "CENARIO_DESCRITO",
+          "datas_individuais": null
+        },
+        "propor_automaticamente": false,
+        "disponivel_para_prescricao": false,
+        "acesso": {
+          "registro_anvisa": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "incorporacao_conitec": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "pcdt_ddt": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "sigtap_apac": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "cobertura_privada": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "disponibilidade_institucional": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          }
+        },
+        "alternativas_legadas_refs": [
+          "/tratamento/ensaios/1"
+        ],
+        "relacoes_refs": [
+          "relacao-nccn-20261017-gist-duracao-adjuvante"
+        ],
+        "conflitos_refs": [],
+        "pendencias": [
+          "REVISAO_CLINICA_DO_DELTA",
+          "VERIFICAR_ACESSO_BRASILEIRO_POR_INDICACAO"
+        ]
+      }
+    ],
+    "cenarios": {
+      "identidade_ref": "/identidade/cenarios",
+      "detalhamento_ref": "/tratamento/cenarios",
+      "novas_condicoes_refs": [
+        "nccn-20261017-gist-avapritinibe-neo",
+        "nccn-20261017-gist-avapritinibe-avancado",
+        "nccn-20261017-gist-duracao-adjuvante"
+      ],
+      "regra": "Não igualar automaticamente as duas listas nem selecionar cenário individual nesta camada."
+    },
+    "fontes": [
+      {
+        "id": "nccn-2ceda0ede5ce",
+        "arquivo_local": "C:\\Users\\silas\\.aside\\u\\0\\sessions\\2026-10-17_LutNNwUyDZGlA1pF\\artifacts\\nccn\\Gastrointestinal Stromal Tumors.pdf",
+        "nome": "Gastrointestinal Stromal Tumors",
+        "sha256": "94b93c40240a74461bd807b22c134b6d890e98eb0fd799376b1a6a33e6c48050",
+        "numero_paginas": 54,
+        "versao_declarada": "1.2026",
+        "origem": "ARQUIVO_LOCAL_FORNECIDO",
+        "autenticidade_externa": "NAO_VERIFICADA_NO_PORTAL",
+        "paginas_examinadas": [
+          18,
+          19
+        ]
+      }
+    ],
+    "fontes_legadas_refs": [
+      "/header/fonte",
+      "/curadoria/fontesLidas"
+    ],
+    "ensaios": {
+      "legado_ref": "/tratamento/ensaios",
+      "novos_nct": [],
+      "nota": "Nenhum identificador NCT foi inventado ou verificado nesta rodada."
+    },
+    "relacoes": [
+      {
+        "relacao_id": "relacao-nccn-20261017-gist-avapritinibe-neo",
+        "tipo": "CONDICOES_PARA_APRESENTACAO_DOCUMENTAL",
+        "destino_item_ref": "nccn-20261017-gist-avapritinibe-neo",
+        "criterios_extraidos": [
+          "GIST com PDGFRA éxon18 insensível ao imatinibe, incluindo D842V",
+          "Neoadjuvante em doença ressecável com morbidade cirúrgica significativa"
+        ],
+        "origem_condicoes": "FONTE_NCCN_CITADA",
+        "origem_mapeamento": "PROPOSTA_DE_MAPEAMENTO",
+        "executavel": false,
+        "estado": "A_CONFERIR",
+        "dados_ausentes": "MANTER_INDETERMINADO",
+        "dados_conflitantes": "MANTER_CONFLITO",
+        "efeito": "APRESENTAR_CONTEUDO_PARA_REVISAO; NAO PRESCREVER"
+      },
+      {
+        "relacao_id": "relacao-nccn-20261017-gist-avapritinibe-avancado",
+        "tipo": "CONDICOES_PARA_APRESENTACAO_DOCUMENTAL",
+        "destino_item_ref": "nccn-20261017-gist-avapritinibe-avancado",
+        "criterios_extraidos": [
+          "PDGFRA éxon18 insensível ao imatinibe, incluindo D842V",
+          "Primeira linha avançada; não misturar com ramo de progressão de doença sensível"
+        ],
+        "origem_condicoes": "FONTE_NCCN_CITADA",
+        "origem_mapeamento": "PROPOSTA_DE_MAPEAMENTO",
+        "executavel": false,
+        "estado": "A_CONFERIR",
+        "dados_ausentes": "MANTER_INDETERMINADO",
+        "dados_conflitantes": "MANTER_CONFLITO",
+        "efeito": "APRESENTAR_CONTEUDO_PARA_REVISAO; NAO PRESCREVER",
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-2-correcao-auditoria",
+            "correcao_id": "M33",
+            "criterios_extraidos": [
+              "GIST com PDGFRA éxon18 insensível ao imatinibe, incluindo D842V",
+              "Primeira linha de doença irressecável/progressiva/metastática"
+            ]
+          }
+        ],
+        "fontes_por_campo": {
+          "criterios_extraidos": [
+            {
+              "fonte_id": "nccn-2ceda0ede5ce",
+              "edicao": "1.2026",
+              "pagina_pdf": 19,
+              "paginas_pdf": [
+                19
+              ],
+              "secao": "GIST-E 2/4, ramo imatinib-insensitive",
+              "trecho": "Avapritinib",
+              "ancora_contextual": "Imatinib-insensitive:",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "94b93c40240a74461bd807b22c134b6d890e98eb0fd799376b1a6a33e6c48050"
+            },
+            {
+              "fonte_id": "nccn-2ceda0ede5ce",
+              "edicao": "1.2026",
+              "pagina_pdf": 19,
+              "paginas_pdf": [
+                19
+              ],
+              "secao": "GIST-E 2/4, segunda linha",
+              "trecho": "Dasatinib",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "94b93c40240a74461bd807b22c134b6d890e98eb0fd799376b1a6a33e6c48050"
+            }
+          ]
+        }
+      },
+      {
+        "relacao_id": "relacao-nccn-20261017-gist-duracao-adjuvante",
+        "tipo": "CONDICOES_PARA_APRESENTACAO_DOCUMENTAL",
+        "destino_item_ref": "nccn-20261017-gist-duracao-adjuvante",
+        "criterios_extraidos": [
+          "GIST de alto risco com mutação sensível",
+          "Curadoria da duração individual"
+        ],
+        "origem_condicoes": "FONTE_NCCN_CITADA",
+        "origem_mapeamento": "PROPOSTA_DE_MAPEAMENTO",
+        "executavel": false,
+        "estado": "A_CONFERIR",
+        "dados_ausentes": "MANTER_INDETERMINADO",
+        "dados_conflitantes": "MANTER_CONFLITO",
+        "efeito": "APRESENTAR_CONTEUDO_PARA_REVISAO; NAO PRESCREVER"
+      }
+    ],
+    "conflitos": [
+      {
+        "conflito_id": "conflito-nccn-20261017-gist-avapritinibe-neo",
+        "tema": "Avapritinibe — Neoadjuvante em doença ressecável com morbidade cirúrgica significativa",
+        "descricao": "A nota legada combina ausência de acesso com ausência de tratamento dedicado. Separar evidência de opção terapêutica e disponibilidade brasileira sem apagar a nota.",
+        "item_nccn_ref": "nccn-20261017-gist-avapritinibe-neo",
+        "legado_refs": [
+          "/tratamento/biomarcadorTratamento/1"
+        ],
+        "fontes_nccn_refs": [
+          {
+            "fonte_id": "nccn-2ceda0ede5ce",
+            "paginas_pdf": [
+              18
+            ],
+            "secao": "GIST-E 1–2/4",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "pagina_pdf": 18,
+            "trecho": "Avapritinib for GIST with PDGFRA exon 18 mutations that are insensitive to"
+          }
+        ],
+        "estado": "A_CONFERIR",
+        "decisao_medica": null,
+        "resolucao_automatica": false
+      },
+      {
+        "conflito_id": "conflito-nccn-20261017-gist-avapritinibe-avancado",
+        "tema": "Avapritinibe — Primeira linha de doença irressecável/progressiva/metastática",
+        "descricao": "A nota legada combina ausência de acesso com ausência de tratamento dedicado. Separar evidência de opção terapêutica e disponibilidade brasileira sem apagar a nota.",
+        "item_nccn_ref": "nccn-20261017-gist-avapritinibe-avancado",
+        "legado_refs": [
+          "/tratamento/biomarcadorTratamento/1"
+        ],
+        "fontes_nccn_refs": [
+          {
+            "fonte_id": "nccn-2ceda0ede5ce",
+            "paginas_pdf": [
+              19
+            ],
+            "secao": "GIST-E 1–2/4",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "pagina_pdf": 19,
+            "trecho": "Avapritinibg,1,2,7 • Cabozantinib16 • Everolimus/TKIh,17 • Nilotinib18,19 • Pazopanib20 • Ponatinibi,21 •"
+          }
+        ],
+        "estado": "A_CONFERIR",
+        "decisao_medica": null,
+        "resolucao_automatica": false
+      }
+    ],
+    "conflitos_legados_ref": "/conflitos",
+    "pendencias": [
+      {
+        "id": "revisao-clinica",
+        "estado": "ABERTA",
+        "descricao": "Conferir cada acréscimo, condições, fontes, doses, interações e suporte antes de uso clínico."
+      },
+      {
+        "id": "acesso-brasileiro",
+        "estado": "ABERTA",
+        "descricao": "NCCN não comprova Anvisa, Conitec, PCDT/DDT, SIGTAP/APAC, cobertura privada ou acesso institucional."
+      },
+      {
+        "id": "cobertura-nccn",
+        "estado": "PARCIAL_POR_DELTA",
+        "descricao": "Leitura dirigida das páginas citadas; não há alegação de extração integral da diretriz."
+      }
+    ],
+    "pendencias_legadas_ref": "/pendencias",
+    "itens_adicionais_a_classificar": [
+      {
+        "origem_ref": "/header",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/status",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/consultavel",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/alerta",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/substitui",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/identidade",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/pendencias",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/conflitos",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/curadoria",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/correcoes",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      }
+    ],
+    "mapa_de_cobertura": [
+      {
+        "origem_json_pointer": "/header",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "e027d08b9e301cf06f5b7ac2cbcf06d185405c28bf30db84ca6faf5255d35123",
+        "valores_folha": 9
+      },
+      {
+        "origem_json_pointer": "/status",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "04635ca3844c66b19ebbf49bf9ff60fe851d6ce89597d23e6a970f1dc3927289",
+        "valores_folha": 1
+      },
+      {
+        "origem_json_pointer": "/consultavel",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b",
+        "valores_folha": 1
+      },
+      {
+        "origem_json_pointer": "/alerta",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "valores_folha": 1
+      },
+      {
+        "origem_json_pointer": "/substitui",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "valores_folha": 1
+      },
+      {
+        "origem_json_pointer": "/identidade",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "0b0478d14635aaaae5a30ccadbc22849bb1b1d2f9beaa664a70fde20b05a4920",
+        "valores_folha": 24
+      },
+      {
+        "origem_json_pointer": "/diagnostico",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "ee091229438d4eda3d95bee6f17ebe2395ac4218690325abbd5f1a73b308658d",
+        "valores_folha": 144
+      },
+      {
+        "origem_json_pointer": "/estadiamento",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "158583384c84fb1c80786a0d54e6f0a65d5e432c02c8b01d8eb4404230772d1a",
+        "valores_folha": 159
+      },
+      {
+        "origem_json_pointer": "/tratamento",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "cc617b3be56b6b65bdbc03dda292ddfd6364eced8733053874963e6389e65bfe",
+        "valores_folha": 503
+      },
+      {
+        "origem_json_pointer": "/ligacoes",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "3455538039ccb81632531b86344847d70f86959788575cecb86c6fb99e28b558",
+        "valores_folha": 98
+      },
+      {
+        "origem_json_pointer": "/pendencias",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "9f2fc5a967ecde97a940aa02cc7f0ef44168d34240d0e3348f21058cef4c6780",
+        "valores_folha": 26
+      },
+      {
+        "origem_json_pointer": "/conflitos",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "717673005af1544c5a08eabb738253b50636fd68f133f3a29dd3f50d0d4b7862",
+        "valores_folha": 53
+      },
+      {
+        "origem_json_pointer": "/curadoria",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "ae144f013d6a1d929ac43d779cdf40001bf4a97ed0f95f1e7a64a39af8bc9e76",
+        "valores_folha": 10
+      },
+      {
+        "origem_json_pointer": "/correcoes",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "49bdb6d059ae9b3626e169f5b363f5ea179ee10dff206a9a40f6b8c8f636aa47",
+        "valores_folha": 12
+      }
+    ],
+    "reconciliacao_com_versao_anterior": {
+      "modo": "ADITIVO",
+      "originais_removidos": 0,
+      "originais_alterados": 0,
+      "contagens_preservadas": {
+        "protocolos": 10,
+        "ensaios": 7,
+        "cenarios_identidade": 3,
+        "cenarios_tratamento": 3,
+        "seguimento": 3,
+        "conflitos": 3,
+        "pendencias": 5
+      }
+    },
+    "relatorio_de_completude": {
+      "estado": "INCOMPLETA_PARA_DIRETRIZ_INTEGRAL",
+      "preservacao_legado": "INTEGRAL",
+      "delta_itens": 3,
+      "normalizacao_legado": "INDEXACAO_POR_REFERENCIA; NAO REEXTRACAO CLINICA",
+      "posologias": "SOMENTE AS EXPLICITAMENTE EXTRAIDAS; RESTANTES PENDENTES",
+      "sem_fato_paciente": true,
+      "sem_aprovacao_inferida": true
+    },
+    "revisoes_auditoria": [
+      {
+        "revisao": "2026-10-17-nccn-delta-2-correcao-auditoria",
+        "correcoes": [
+          "M33"
+        ],
+        "legado_modificado": false,
+        "aprovacao_clinica": null,
+        "nota": "Correções conferidas nos PDFs; a auditoria Claude foi amostral. Os 33 itens não auditados não foram promovidos a revisados."
+      }
+    ]
+  }
 }
