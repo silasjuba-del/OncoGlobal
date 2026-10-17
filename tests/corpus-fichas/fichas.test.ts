@@ -326,8 +326,8 @@ describe("F1-B2 — fichas institucionais novas (D-F1-49)", () => {
   const manifest = JSON.parse(readFileSync(join(fileURLToPath(new URL(".", import.meta.url)), "../../corpus/manifesto/b2-fichas.v1.json"), "utf8")) as { fichasNovas: any[]; fichasAlteradas: any[]; fontesExternas: Record<string, any>; materiaisLocais: Record<string, any> };
   const nome = (t: string, n: string) => parseadas.find((p) => p.ficha.tumor === t && p.ficha.nome === n)!;
 
-  it("manifesto B2 cobre 22 fichas novas e 6 paclitaxel alteradas; nenhuma é CONFERIDA_MEDICO", () => {
-    expect(manifest.fichasNovas).toHaveLength(22);
+  it("manifesto B2 cobre 23 fichas (inclui a fase VC sem doxorrubicina) e 6 paclitaxel alteradas; nenhuma é CONFERIDA_MEDICO", () => {
+    expect(manifest.fichasNovas).toHaveLength(23);
     expect(manifest.fichasAlteradas).toHaveLength(6);
     for (const f of manifest.fichasNovas) {
       const achada = parseadas.find((p) => p.ficha.templateId === f.templateId);

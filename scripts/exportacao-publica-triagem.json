@@ -433,6 +433,16 @@
       "arquivo": "corpus/templates/kit/sinais-alarme.v1.json",
       "campo": ".textoFonteOriginal",
       "motivo": "Identificacao profissional do autor em modelo com campos de paciente vazios; nao contem identificacao de paciente."
+    },
+    {
+      "sha256": "4871ab8b385b2f36d7da8a1332d134200003a19e87927baf53f3036d6e6ed85f",
+      "categorias": [
+        "REGISTRO_PROFISSIONAL"
+      ],
+      "arquivo": "corpus/fichas/esofago/carboplatina-paclitaxel-semanal-cross-rxt__concomitante-a-rt.json",
+      "campo": ".itens.5.observacao",
+      "texto": "D-F1-28: paclitaxel semanal em SF 0,9% 500 mL. F1-B2: dose CROSS 50 mg/m² preservada; sem atribuir confirmação por fontes de mama 80 mg/m².",
+      "motivo": "CROSS 50 e dose do protocolo CROSS (study identifier), nao registro profissional."
     }
   ]
 }

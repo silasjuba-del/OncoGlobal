@@ -161,7 +161,7 @@ it("chave JSON duplicada não pode apagar identidade antes da inspeção estrutu
 });
 it("exceções públicas correspondem ao campo e ao texto integral efetivamente revisados", () => {
   const pins = JSON.parse(readFileSync("scripts/exportacao-publica-triagem.json", "utf8")) as {
-    itens: { arquivo: string; campo: string; sha256: string; motivo: string }[];
+    itens: { arquivo: string; campo: string; sha256: string; texto?: string; motivo: string }[];
   };
   const vistos = new Set<string>();
   for (const pin of pins.itens) {
@@ -172,7 +172,31 @@ it("exceções públicas correspondem ao campo e ao texto integral efetivamente 
     for (const parte of pin.campo.split(".").filter(Boolean)) {
       expect(Object.hasOwn(value, parte), chave).toBe(true); value = value[parte];
     }
+    if (pin.texto !== undefined) {
+      expect(String(value)).toBe(pin.texto);
+    }
     expect(createHash("sha256").update(String(value)).digest("hex"), chave).toBe(pin.sha256);
     expect(pin.motivo.length).toBeGreaterThan(10);
   }
+});
+it("CROSS 50 em dose de protocolo é falso positivo PHI; conteúdo pessoal adicional ainda é recusado", () => {
+  const textoPublico = "D-F1-28: paclitaxel semanal em SF 0,9% 500 mL. F1-B2: dose CROSS 50 mg/m² preservada; sem atribuir confirmação por fontes de mama 80 mg/m².";
+  const f = fixture();
+  rmSync(join(f.root, "corpus/1-exames"), { recursive: true, force: true });
+  mkdirSync(join(f.root, "corpus/fichas/esofago"), { recursive: true });
+  const original = JSON.parse(readFileSync("corpus/fichas/esofago/carboplatina-paclitaxel-semanal-cross-rxt__concomitante-a-rt.json", "utf8"));
+  original.itens[5].observacao = textoPublico;
+  writeFileSync(join(f.root, "corpus/fichas/esofago/carboplatina-paclitaxel-semanal-cross-rxt__concomitante-a-rt.json"),
+    JSON.stringify(original));
+  exportarBiblioteca(f.root, f.out);
+  expect(validarPacoteConsulta(f.out)).toEqual({ arquivos: 1, estado: "RASCUNHO", alerta: false });
+  
+  const comPII = fixture();
+  rmSync(join(comPII.root, "corpus/1-exames"), { recursive: true, force: true });
+  mkdirSync(join(comPII.root, "corpus/fichas/esofago"), { recursive: true });
+  const original2 = JSON.parse(readFileSync("corpus/fichas/esofago/carboplatina-paclitaxel-semanal-cross-rxt__concomitante-a-rt.json", "utf8"));
+  original2.itens[5].observacao = textoPublico + " Paciente: Dr. CROSS";
+  writeFileSync(join(comPII.root, "corpus/fichas/esofago/carboplatina-paclitaxel-semanal-cross-rxt__concomitante-a-rt.json"),
+    JSON.stringify(original2));
+  expect(() => exportarBiblioteca(comPII.root, comPII.out)).toThrow("PHI_ESTRUTURAL");
 });

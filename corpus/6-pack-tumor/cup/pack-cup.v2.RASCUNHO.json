@@ -1,16 +1,17 @@
 {
   "header": {
+    "schema": "CabecalhoRascunho@1",
     "id": "pack-cup",
     "versao": "2.0.0",
-    "vigenteDesde": "2026-10-14",
     "fonte": {
       "tipo": "DIRETRIZ",
       "referencia": "D-F1-36/D-F1-49 + BC PUCAT + estudos originais (Greco/Mukai/Pouessel/Khansur)",
       "trecho": "5 esquemas da decisão local",
       "edicao": "F1-B2 2026-10-14"
     },
-    "curador": "Dr. Silas Negrão",
-    "aprovadoEm": "2026-10-14"
+    "redigidoEm": "2026-10-14",
+    "curador": null,
+    "aprovadoEm": null
   },
   "status": "RASCUNHO",
   "consultavel": true,

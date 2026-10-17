@@ -1037,7 +1037,7 @@
     {
       "arquivo": "corpus/fichas/ewing/ewing-vdc-ciclo-a-alternado-ao-ie__1-linha-dose-denso-q14.json",
       "templateId": "FICHA.ewing.ewing-vdc-ciclo-a-alternado-ao-ie__1-linha-dose-denso-q14@1.0.0",
-      "hash": "164089565664a02a1c110ac71d9d3d5f0a2889bf7408d0d517c2387d2b8a5959",
+      "hash": "1a88369a01df59f458306b981a1e9ae4812ddbb578bfd638a9afa59d9b1be8b0",
       "versao": "1.0.0",
       "status": "RASCUNHO",
       "identidadeClinica": "Ewing localizado/metastático, 1ª linha VDC/IE interval-compressed (SBOC 2026 ósseos p. 15; Womer 2012)",
@@ -1173,6 +1173,153 @@
         },
         {
           "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem pós-QT);classe=POS_QT;days=d1,d2].standardDose",
+          "valor": 1,
+          "unidade": "frasco",
+          "situacao": "PADRAO_LOCAL",
+          "sourceIds": [],
+          "decisaoLocal": "D-W9-23c/34c/50; D-F1-30/48 (pré/pos-QT locais)",
+          "localizador": "padrão institucional das fichas",
+          "divergencias": []
+        }
+      ],
+      "divergencias": [
+        "doxorrubicina: eviQ 37,5 mg/m² ×2 (D1–D2, 5–15 min) × BC SAALT2W 75 mg/m² IV push D1 (dose única) × Womer abstract 75 mg/m²",
+        "vincristina: 1,5 mg/m² (cap 2 mg) no eviQ/BC × 2 mg/m² no abstract de Womer",
+        "G-CSF: pegfilgrastim 6 mg D3 (eviQ) × filgrastim a partir do D8 (BC)",
+        "antiesse local sem NK1 (D-F1-30) × esquema eviQ com netupitant/palonosetrona"
+      ],
+      "lacunas": [
+        "versão convencional q3sem (eviQ 'VDC or IE every 21 days') disponível como alternativa — variante não preparada aqui"
+      ],
+      "aprovacaoClinica": null
+    },
+    {
+      "arquivo": "corpus/fichas/ewing/ewing-vc-fase-final-sem-doxorrubicina__1-linha-dose-denso-q14.json",
+      "templateId": "FICHA.ewing.ewing-vc-fase-final-sem-doxorrubicina__1-linha-dose-denso-q14@1.0.0",
+      "hash": "6b35999f2336d27f9fb92eb7070692d80a95c1d17a1f038bd07117911c9c138b",
+      "versao": "1.0.0",
+      "status": "RASCUNHO",
+      "identidadeClinica": "Fase final do braço V[D]C: vincristina e ciclofosfamida, após omissão da doxorrubicina pelo limite documentado",
+      "decisisoes": [
+        "D-F1-49"
+      ],
+      "campos": [
+        {
+          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem de acesso);classe=PRE_QT;days=d1].standardDose",
+          "valor": 1,
+          "unidade": "frasco",
+          "situacao": "PADRAO_LOCAL",
+          "sourceIds": [],
+          "decisaoLocal": "D-W9-23c/34c/50; D-F1-30/48 (pré/pos-QT locais)",
+          "localizador": "padrão institucional das fichas",
+          "divergencias": []
+        },
+        {
+          "campo": "itens[drug=Ondansetrona;classe=PRE_QT;days=d1].standardDose",
+          "valor": 8,
+          "unidade": "mg",
+          "situacao": "PADRAO_LOCAL",
+          "sourceIds": [],
+          "decisaoLocal": "D-W9-23c/34c/50; D-F1-30/48 (pré/pos-QT locais)",
+          "localizador": "padrão institucional das fichas",
+          "divergencias": []
+        },
+        {
+          "campo": "itens[drug=Dexametasona;classe=PRE_QT;days=d1].standardDose",
+          "valor": 10,
+          "unidade": "mg",
+          "situacao": "PADRAO_LOCAL",
+          "sourceIds": [],
+          "decisaoLocal": "D-W9-23c/34c/50; D-F1-30/48 (pré/pos-QT locais)",
+          "localizador": "padrão institucional das fichas",
+          "divergencias": []
+        },
+        {
+          "campo": "itens[drug=Prometazina;classe=PRE_QT;days=d1].standardDose",
+          "valor": 25,
+          "unidade": "mg",
+          "situacao": "PADRAO_LOCAL",
+          "sourceIds": [],
+          "decisaoLocal": "D-W9-23c/34c/50; D-F1-30/48 (pré/pos-QT locais)",
+          "localizador": "padrão institucional das fichas",
+          "divergencias": []
+        },
+        {
+          "campo": "itens[drug=Vincristina;classe=QT;days=d1].standardDose",
+          "valor": 1.5,
+          "unidade": "mg/m²",
+          "situacao": "DOCUMENTADO",
+          "sourceIds": [
+            "EXT-SARC-002",
+            "EXT-SARC-009",
+            "EXT-SARC-022"
+          ],
+          "localizador": null,
+          "divergencias": [],
+          "aprovacaoClinica": null
+        },
+        {
+          "campo": "itens[drug=Ciclofosfamida;classe=QT;days=d1].standardDose",
+          "valor": 1200,
+          "unidade": "mg/m²",
+          "situacao": "DOCUMENTADO",
+          "sourceIds": [
+            "EXT-SARC-002"
+          ],
+          "localizador": null,
+          "divergencias": [],
+          "aprovacaoClinica": null
+        },
+        {
+          "campo": "itens[drug=Mesna (0 h);classe=QT;days=d1].standardDose",
+          "valor": 400,
+          "unidade": "mg/m²",
+          "situacao": "DOCUMENTADO",
+          "sourceIds": [
+            "EXT-SARC-002"
+          ],
+          "localizador": null,
+          "divergencias": [],
+          "aprovacaoClinica": null
+        },
+        {
+          "campo": "itens[drug=Mesna (2 h, VO);classe=POS_QT;days=d1].standardDose",
+          "valor": 800,
+          "unidade": "mg/m²",
+          "situacao": "DOCUMENTADO",
+          "sourceIds": [
+            "EXT-SARC-002"
+          ],
+          "localizador": null,
+          "divergencias": [],
+          "aprovacaoClinica": null
+        },
+        {
+          "campo": "itens[drug=Mesna (6 h, VO);classe=POS_QT;days=d1].standardDose",
+          "valor": 800,
+          "unidade": "mg/m²",
+          "situacao": "DOCUMENTADO",
+          "sourceIds": [
+            "EXT-SARC-002"
+          ],
+          "localizador": null,
+          "divergencias": [],
+          "aprovacaoClinica": null
+        },
+        {
+          "campo": "itens[drug=Pegfilgrastim;classe=POS_QT;days=d3].standardDose",
+          "valor": 6,
+          "unidade": "mg",
+          "situacao": "DOCUMENTADO",
+          "sourceIds": [
+            "EXT-SARC-002"
+          ],
+          "localizador": null,
+          "divergencias": [],
+          "aprovacaoClinica": null
+        },
+        {
+          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem pós-QT);classe=POS_QT;days=d1].standardDose",
           "valor": 1,
           "unidade": "frasco",
           "situacao": "PADRAO_LOCAL",
@@ -2349,7 +2496,7 @@
     {
       "arquivo": "corpus/fichas/cec-de-pele-cutaneo/pembrolizumabe__localmente-avancado-metastatico-inelegivel-a-cirurgia-rt-curativas.json",
       "templateId": "FICHA.cec-de-pele-cutaneo.pembrolizumabe__localmente-avancado-metastatico-inelegivel-a-cirurgia-rt-curativas@1.0.0",
-      "hash": "55b44bce18f6807beb94dcfbf09f0a41310c8f9f629bcb52cd35e89dee311774",
+      "hash": "76389e149293e0ddf7ed511589b7628a0e5e47dfc5e3abfddd76f31cc4aec0b0",
       "versao": "1.0.0",
       "status": "RASCUNHO",
       "identidadeClinica": "CSCC cutâneo localmente avançado/metastático inelegível a terapia curativa (D-F1-50; NCCN CSCC v1.2026 prefere pembro/cemi 2A — rodada v2)",

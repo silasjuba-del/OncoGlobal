@@ -1,16 +1,17 @@
 {
   "header": {
+    "schema": "CabecalhoRascunho@1",
     "id": "pack-vulva",
     "versao": "2.0.0",
-    "vigenteDesde": "2026-10-14",
     "fonte": {
       "tipo": "DIRETRIZ",
       "referencia": "D-F1-35/D-F1-49 + eviQ 1529 v9 + BC GOCXCRT/GOCXCAT",
       "trecho": "cisplatina semanal + RT; carboplatina/paclitaxel q21d",
       "edicao": "F1-B2 2026-10-14"
     },
-    "curador": "Dr. Silas Negrão",
-    "aprovadoEm": "2026-10-14"
+    "redigidoEm": "2026-10-14",
+    "curador": null,
+    "aprovadoEm": null
   },
   "status": "RASCUNHO",
   "consultavel": true,
@@ -700,10 +701,10 @@
       ]
     },
     {
-      "texto": "Dose total de RT do esquema concomitante — definir com radioterapia",
+      "texto": "Replanejamento fino de RT com radioterapia após D-F1-50 (dose e fracionamento já ancorados)",
       "classe": "PENDENCIA_TECNICA",
       "buscasFeitas": [
-        "Moore 2012 (esquema ~40 Gy em frações?) — ler texto integral"
+        "Moore 2012 GOG 205; D-F1-50"
       ]
     },
     {
