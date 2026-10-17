@@ -17,6 +17,15 @@ const base = () => [
 ];
 
 describe("W10-INT-PRESC-04 · diffCiclo", () => {
+  it("inclusão e retirada da restrição de sequência são exceções visíveis", () => {
+    const anterior = ordem([item({drug: 'Fármaco sintético'})]);
+    const atual = ordem([item({drug: 'Fármaco sintético', sequenciamentoPendente: 'curso alternado sem plano integrado'})]);
+    for (const [a, b] of [[atual, anterior], [anterior, atual]] as const) {
+      const d = diffCiclo(a, b);
+      expect(d.houveMudanca).toBe(true);
+      expect(d.excecoes).toContainEqual(expect.objectContaining({tipo: 'ALTERADO', mudancas: [expect.objectContaining({campo: 'sequenciamentoPendente'})]}));
+    }
+  });
   it("ordens idênticas: nenhuma exceção", () => {
     const d = diffCiclo(ordem(base()), ordem(base(), { orderId: "o0", cycle: 1 }));
     expect(d).toEqual({ temAnterior: true, ordem: [], excecoes: [], houveMudanca: false });
