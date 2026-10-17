@@ -54,6 +54,8 @@ Correções concretas de fechamento:
 - Exportação com proteção de caminhos, envelope compatível com o limite HTTP e contagem em bytes. Gerador histórico de packs congelado antes de qualquer escrita para preservar enriquecimentos posteriores. Dossiê médico mantém as fontes por ocorrência de fármaco/classe/dia.
 - UTF-8 inválido retorna erro de entrada; PDFs acima do limite conservam as páginas pendentes. Seleção do pack aceita faixas de CID e conserva a recusa em caso de ambiguidade.
 - Contagem local de cliques passou a ocorrer após o evento do controle, preservando a seleção dos checkboxes de revisão. O harness aguarda a fonte efetivamente carregada.
+- Registros de pCR preservam negação, incerteza, necessidade de confirmação, fontes e conflitos. O título da seção não transforma hipótese em resposta patológica definitiva.
+- Proposta com origem em protocolo não descarta itens pendentes: a submissão parcial é recusada, conservando o rascunho original. A base de ajuste vem da administração efetiva do ciclo anterior, no mesmo paciente/lote/episódio, com proveniência e horizonte temporal; uma prescrição apenas planejada não fornece essa base. Mudança de fatos invalida o rascunho de origem. Prova HTTP: 350 mg planejados, 280 mg efetivamente administrados e redução explícita de 20% resultam em 224 mg persistidos como proposta, sem assinatura.
 
 Evidências executadas em 17/10/2026:
 
