@@ -4,10 +4,10 @@
   "nome": "Cisplatina semanal + RxT (vulva)",
   "cenario": "concomitante à RT",
   "versao": "1.0.0",
-  "hash": "8c165d158f3c00b8a7311924bb0283409a7105b2146f8efeada4a7aa0c151b71",
+  "hash": "c1b78df6b5271323d6e8e3e5065bd197e3cc9f3d2bb1b1e21990973153f214be",
   "codigoInstitucional": null,
   "intervaloDias": 7,
-  "ciclos": null,
+  "ciclos": 6,
   "itens": [
     {
       "drug": "Soro fisiológico 0,9% 250 mL (lavagem de acesso)",

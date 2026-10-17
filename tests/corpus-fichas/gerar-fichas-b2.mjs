@@ -302,7 +302,7 @@ F({ tumor: OST, nome: "AP (doxorrubicina + cisplatina)", cenario: NE, intervalo:
 
 // ===== VULVA (D-F1-35/49; eviQ 1529 específico) =====
 const VUL = "Vulva";
-F({ tumor: VUL, nome: "Cisplatina semanal + RxT (vulva)", cenario: "concomitante à RT", intervalo: 7, ciclos: null,
+F({ tumor: VUL, nome: "Cisplatina semanal + RxT (vulva)", cenario: "concomitante à RT", intervalo: 7, ciclos: 6,
   identidade: "CEC de vulva localmente avançado (T3/T4 não ressecável por vulvectomia radical), previamente não tratado (eviQ 1529)",
   fontesItens: { Cisplatina: { sourceIds: ["EXT-CNV-021", "EXT-CNV-023"] } },
   divergencias: ["eviQ 1529 (v.9, específico de vulva): 40 mg/m² IV q7d, 5–6 ciclos conforme duração da RT, no dia de RT (antes dela)", "BC GOCXCRT (inclui vulva): 40 mg/m² em 500 mL NS + manitol 30 g + MgSO4 2 g em 60 min, semanal ×5, sem pós-hidratação", "estudo de referência GOG 205 = Moore DH, Gynecol Oncol 2012;124(3):529-33 (PMID 22079361) — o 'Gill 2015' do material local é atribuição incorreta"],
@@ -347,7 +347,7 @@ F({ tumor: CEC, nome: "Carboplatina + Paclitaxel 21/21 dias (CEC de pele)", cena
     qt("Carboplatina", 5, "auc", D(1), { t: "60 min", dil: "SG 5%", vol: 500, obs: "eviQ 3579: AUC 5 em 500 mL SG 5% em 30–60 min. 4–6 ciclos." }),
   ] });
 
-F({ tumor: CEC, nome: "Cisplatina semanal + RxT (CEC de pele)", cenario: "concomitante à RT", intervalo: 7, ciclos: null,
+F({ tumor: CEC, nome: "Cisplatina semanal + RxT (CEC de pele)", cenario: "concomitante à RT", intervalo: 7, ciclos: 6,
   identidade: "CEC cutâneo localmente avançado — EXTRAPOLAÇÃO de CECP localmente avançado (eviQ 292)",
   fontesItens: { Cisplatina: { sourceIds: ["EXT-CNV-016"] } },
   divergencias: ["população do protocolo é CECP — extrapolação declarada", "eviQ 292: 40 mg/m² em 1.000 mL SF em 60 min q7d contínuo com RT (~6 semanas); pré MgSO4 10 mmol em 1.000 mL; sem manitol na versão vigente (dose baixa)"],
@@ -421,7 +421,7 @@ F({ tumor: NTG, nome: "EMA/EP (resistência ao EMA-CO)", cenario: "resistente ao
     CIS(75, D(8), { obs: "Tabela A5: cisplatina 75 mg/m² IV D8 (eviQ 1378: em 1.000 mL SF em 60 min com hidratação)." }),
   ] });
 
-F({ tumor: NTG, nome: "EP de indução (escore ultra-alto)", cenario: "escore alto/ultra-alto (FIGO ≥12, D-F1-50) — indução", intervalo: 7, ciclos: null, premedDias: D(1, 2),
+F({ tumor: NTG, nome: "EP de indução (escore ultra-alto)", cenario: "escore alto/ultra-alto (FIGO ≥12, D-F1-50) — indução", intervalo: 7, ciclos: 3, premedDias: D(1, 2),
   identidade: "NTG com doença extensa (tórax/fígado/SNC) e/ou hemorragia — indução antes do EMA-CO/EMA-EP; corte local FIGO ≥12 por D-F1-50 (eviQ 1347; Lok ≥13 [variante])",
   fontesItens: { Etoposídeo: { sourceIds: ["EXT-CNV-030", "EXT-CNV-031"] }, Cisplatina: { sourceIds: ["EXT-CNV-030", "EXT-CNV-031"] } },
   divergencias: ["corte de indicação RESOLVIDO por D-F1-50: ≥12 (eviQ 1347); Lok 2025 usa ≥13 [variante registrada]", "frequência: eviQ 1347 'Frequency: 7 days' (=semanal, D1–D2 por semana); Lok: 'once weekly' 1–3 ciclos"],
@@ -459,16 +459,17 @@ for (const rel of PAC_SEMANAL) {
   const marco = json.fonte.indexOf(" F1-B2 (D-F1-49");
   if (marco >= 0) json.fonte = json.fonte.slice(0, marco);
   const cross = rel.startsWith("esofago/");
+  const outraIndicacao = !rel.startsWith("mama/");
   const nota = cross
     ? " F1-B2 (D-F1-49): CROSS mantém paclitaxel 50 mg/m² da ficha. Fontes mamárias 80 mg/m² não confirmam dose/indicação CROSS; monografia BC (EXT-LEG-013) sustenta somente filtro e materiais."
-    : ACRESCIMO_FONTE;
+    : outraIndicacao ? " F1-B2 (D-F1-49): dose e indicação locais preservadas, sem confirmação por protocolos mamários; monografia BC (EXT-LEG-013) sustenta somente filtro e materiais. Elegibilidade e dose nesta indicação permanecem sob curadoria específica." : ACRESCIMO_FONTE;
   json.fonte += nota;
   const pac = json.itens.find(i => /^paclitaxel/i.test(i.drug));
   if (pac) {
     pac.observacao = (pac.observacao ?? "").split("F1-B2:")[0].trim();
     pac.observacao += cross
       ? " F1-B2: dose CROSS 50 mg/m² preservada; sem atribuir confirmação por fontes de mama 80 mg/m²."
-      : " F1-B2: 80 mg/m²/60 min confirmados externamente (EXT-LEG-008/009); diluente SF 0,9% 500 mL é decisão local (D-F1-28) — eviQ usa 250 mL [divergência registrada].";
+      : outraIndicacao ? " F1-B2: dose local preservada; fontes de mama não confirmam dose ou indicação neste tumor. Monografia BC (EXT-LEG-013): filtro e materiais apenas." : " F1-B2: 80 mg/m²/60 min confirmados externamente (EXT-LEG-008/009); diluente SF 0,9% 500 mL é decisão local (D-F1-28) — eviQ usa 250 mL [divergência registrada].";
   }
   json.hash = hashDe(json);
   writeFileSync(join(RAIZ, caminho), JSON.stringify(json, null, 2) + "\n", "utf8");
@@ -509,7 +510,7 @@ const manifestoB2 = {
     identidadeClinica: spec.identidade, decisisoes: ["D-F1-49", ...(spec.decisisoes ?? [])],
     campos: camposDa(spec, t), divergencias: spec.divergencias ?? [], lacunas: spec.lacunas ?? [], aprovacaoClinica: null,
   })),
-  fichasAlteradas: alteradas.map((a) => ({ ...a, motivo: "acréscimo de fontes externas do paclitaxel semanal (D-F1-28/D-F1-49); doses e diluente local inalterados", fontesAcrescentadas: a.caminho.includes("/esofago/") ? ["EXT-LEG-013"] : ["EXT-LEG-008", "EXT-LEG-009", "EXT-LEG-012", "EXT-LEG-013"] })),
+  fichasAlteradas: alteradas.map((a) => ({ ...a, motivo: "acréscimo de fontes externas do paclitaxel semanal (D-F1-28/D-F1-49); doses e diluente local inalterados", fontesAcrescentadas: !a.caminho.includes("/mama/") ? ["EXT-LEG-013"] : ["EXT-LEG-008", "EXT-LEG-009", "EXT-LEG-012", "EXT-LEG-013"] })),
   destinacaoCodigosLegado: {
     P1577: "ficha nova criada com identidade própria (D-F1-26); código mantido como codigoInstitucional — identidade do código comprovada pela decisão local",
     P1512: "ficha nova criada (D-F1-27: D1 e D2); código mantido como codigoInstitucional — identidade comprovada pela decisão local",
