@@ -56,7 +56,9 @@ function mapeamento(itens: Record<string, { aplicabilidade?: Record<string, stri
       pilar: 1, aplicabilidade: i.aplicabilidade ?? { tumor: [], histologia: [], estadio: [], biomarcador: [], linha: [] },
       aplicabilidadeNota: 'UNIVERSAL nas dimensões vazias, conforme escopo desta fonte sintética',
       provenienciaUrl: i.url ?? 'https://example.org/fonte', ...(i.escopoFonte ? {escopoFonte:i.escopoFonte} : {}),
-    }])), verificacoes: verificacoes.map((url) => ({ url, verificadaEm: '2026-10-14', metodo: 'fixture' })), pendencias: [],
+    }])), verificacoes: verificacoes.map((url) => ({ url, verificadaEm: '2026-10-14', metodo: 'fixture',
+      publicacoes: [{ publicadoEm: '2026-10-11', localizador: 'cabeçalho sintético', trecho: 'Publicado em 11/10/2026' }],
+    })), pendencias: [],
   };
   const arquivo = join(dir, 'mapeamento.json'); writeFileSync(arquivo, JSON.stringify(m)); return arquivo;
 }
@@ -92,6 +94,82 @@ it('data de acesso ou vigência local não substitui publicação da fonte', asy
   expect(r.inventario.excluidos).toContainEqual(expect.objectContaining({caminho,motivo:'SEM_DATA_PUBLICACAO'}));
   expect(r.manifesto.itens).toHaveLength(1);
 });
+
+describe('proveniência temporal documental', () => {
+  const caminho = 'corpus/1-exames/labs/temporal.json';
+  const controle = 'corpus/1-exames/labs/controle.json';
+  async function executar(fonte: Record<string, unknown>, editar?: (m: any) => void) {
+    const root = criarRoot({ [caminho]: painel('temporal', { header: {
+      id: 'temporal', versao: '1.0.0', vigenteDesde: '2026-10-16',
+      fonte: { referencia: 'Fonte sintética, acesso 11/10/2026', trecho: 'texto sintético', ...fonte },
+    } }), [controle]: painel('controle') });
+    const base = mkdtempSync(join(tmpdir(), 'conv-temporal-'));
+    const snap = join(base, 'snap'), destino = join(base, 'pac');
+    exportarBiblioteca(root, snap);
+    const arquivo = mapeamento({ [caminho]: {}, [controle]: {} }, ['https://example.org/fonte']);
+    const m = JSON.parse(readFileSync(arquivo, 'utf8')); editar?.(m);
+    writeFileSync(arquivo, JSON.stringify(m));
+    await converterBiblioteca(snap, destino, { mapeamento: arquivo, agora: AGORA });
+    const inventario = JSON.parse(readFileSync(join(destino, 'inventario.json'), 'utf8'));
+    const manifesto = JSON.parse(readFileSync(join(destino, 'pacote/manifesto.json'), 'utf8'));
+    return { destino, inventario, manifesto };
+  }
+  it.each([
+    { edicao: '2026-10-11', recuperadoEm: '2026-10-11T09:00:00Z' },
+    { edicao: '2026' }, {},
+  ])('exclui publicação desconhecida apesar de edição/acesso/vigência: %j', async fonte => {
+    const r = await executar(fonte);
+    expect(r.inventario.excluidos).toContainEqual(expect.objectContaining({ caminho, motivo: 'SEM_DATA_PUBLICACAO' }));
+    expect(r.manifesto.itens).toHaveLength(1);
+  });
+  it('não aceita data declarada sem trecho documental da publicação', async () => {
+    const r = await executar({ publicadoEm: '2026-10-10' });
+    expect(r.inventario.excluidos).toContainEqual(expect.objectContaining({ caminho, motivo: 'DATA_PUBLICACAO_NAO_VERIFICADA' }));
+  });
+  it.each(['2026-02-30', '2026-13-01', '2026'])('exclui data inválida ou incompleta: %s', async publicadoEm => {
+    const r = await executar({ publicadoEm });
+    expect(r.inventario.excluidos).toContainEqual(expect.objectContaining({ caminho, motivo: 'SEM_DATA_PUBLICACAO' }));
+  });
+  it('preserva edição, recuperação original e vigência separadas da publicação comprovada', async () => {
+    const datas = { publicadoEm: '2026-10-11', edicao: 'edição 3', recuperadoEm: '2026-10-12T09:00:00Z' };
+    const r = await executar(datas);
+    const ref = r.manifesto.itens.find((i: any) => i.id.endsWith('temporal'));
+    const item = lerItem(r.destino, ref.arquivo);
+    expect(item.proveniencia).toMatchObject({ publicadoEm: datas.publicadoEm, recuperadoEm: AGORA });
+    expect(r.inventario.incluidos.find((i: any) => i.caminho === caminho)).toMatchObject({
+      datasOriginais: { ...datas, vigenteDesde: '2026-10-16' },
+      evidenciaPublicacao: { localizador: 'cabeçalho sintético', trecho: 'Publicado em 11/10/2026' },
+    });
+    const { db, biblioteca } = importarEmBanco(r.manifesto, r.destino);
+    try {
+      expect(biblioteca.estado('corpus-consulta-oncoglobal@1.0.0', ref.id)).toBe('RASCUNHO');
+      expect(biblioteca.consultar({})).toEqual([]);
+    } finally { db.close(); }
+  });
+  const revisoes = (m: any) => {
+    m.verificacoes.push({ url: 'https://example.org/historico', publicacoes: [
+      { publicadoEm: '2024-12-25', versaoFonte: '1', localizador: '/history/1', trecho: 'Version 1 published Dec 25, 2024' },
+      { publicadoEm: '2026-09-25', versaoFonte: '2', localizador: '/history/0', trecho: 'Version 2 published Sep 25, 2026' },
+    ] });
+    Object.assign(m.itens[caminho], { publicadoEm: '2024-12-25', fonteDataPublicacao: 'https://example.org/historico' });
+  };
+  it.each([undefined, '2'])('recusa revisão ausente ou incompatível com a data: %s', async versaoFonte => {
+    await expect(executar({}, m => { revisoes(m); m.itens[caminho].versaoFonte = versaoFonte; }))
+      .rejects.toThrow('DATA_PUBLICACAO_NAO_VERIFICADA');
+  });
+  it('seleciona revisão explícita, não a mais recente nem edição/acesso', async () => {
+    const r = await executar({ edicao: '2026-10-11' }, m => { revisoes(m); m.itens[caminho].versaoFonte = '1'; });
+    const ref = r.manifesto.itens.find((i: any) => i.id.endsWith('temporal'));
+    expect(lerItem(r.destino, ref.arquivo).proveniencia.publicadoEm).toBe('2024-12-25');
+    expect(r.inventario.incluidos.find((i: any) => i.caminho === caminho).evidenciaPublicacao.versaoFonte).toBe('1');
+  });
+  it.each(['localizador', 'trecho'])('URL conferida sem %s de publicação não comprova data', async campo => {
+    await expect(executar({}, m => {
+      revisoes(m); m.itens[caminho].versaoFonte = '1';
+      m.verificacoes.at(-1).publicacoes[0][campo] = '';
+    })).rejects.toThrow('DATA_PUBLICACAO_NAO_VERIFICADA');
+  });
+});
 function importarEmBanco(manifesto: unknown, destino: string) {
   const db = new DatabaseSync(':memory:');
   const biblioteca = criarBiblioteca(db, { autorizarCuradoria: () => ({ atorId: 'teste' }), emitir: () => {} });
@@ -113,6 +191,30 @@ it('FGTS publica só a base legal e fica localizável por tumor sem declarar ele
   const id=`${m.id}@${m.versao}`;biblioteca.revisarItem(id,m.itens[0].id,'CONSULTAVEL');biblioteca.ativar(id);
   for(const tumor of ['mama','colorretal','pulmao'])expect(biblioteca.consultar({tumor})).toHaveLength(1);
  }finally{db.close();}
+});
+it('DailyMed do painel real usa publicação da SPL 2, preservando o acesso registrado como edição', async () => {
+  const caminho = 'corpus/1-exames/labs/labs-por-esquema.v1.RASCUNHO.json';
+  const original = readFileSync(caminho, 'utf8');
+  const root = criarRoot({ [caminho]: JSON.parse(original) });
+  const base = mkdtempSync(join(tmpdir(), 'conv-dailymed-'));
+  const snap = join(base, 'snap'), destino = join(base, 'pac');
+  exportarBiblioteca(root, snap);
+  await converterBiblioteca(snap, destino, { agora: AGORA });
+  const manifesto = JSON.parse(readFileSync(join(destino, 'pacote/manifesto.json'), 'utf8'));
+  const item = lerItem(destino, manifesto.itens[0].arquivo);
+  expect(item.proveniencia.publicadoEm).toBe('2026-09-25');
+  expect(item.proveniencia.recuperadoEm).toBe(AGORA);
+  const inventario = JSON.parse(readFileSync(join(destino, 'inventario.json'), 'utf8'));
+  expect(inventario.incluidos[0]).toMatchObject({
+    evidenciaPublicacao: { versaoFonte: 'SPL 2', publicadoEm: '2026-09-25' },
+    datasOriginais: { edicao: '2026-10-11', publicadoEm: null },
+  });
+  expect(readFileSync(caminho, 'utf8')).toBe(original);
+  const { db, biblioteca } = importarEmBanco(manifesto, destino);
+  try {
+    expect(biblioteca.estado(`${manifesto.id}@${manifesto.versao}`, manifesto.itens[0].id)).toBe('RASCUNHO');
+    expect(biblioteca.consultar({})).toEqual([]);
+  } finally { db.close(); }
 });
 /** Reescreve itens e manifesto de um pacote convertido, recalculando os hashes (para casos adversariais). */
 function reescrever(destino: string, mudanca: (itens: Record<string, any>[]) => void) {
