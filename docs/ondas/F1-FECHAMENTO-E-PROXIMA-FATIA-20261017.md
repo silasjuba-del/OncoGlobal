@@ -45,4 +45,29 @@ Em 17/10/2026: PRs17/18 integrados; PR19 aberto em `8fcef9b`, PR20 aberto em `9d
 
 ## Resultado final
 
-Em execução. Registrar aqui o resultado dos gates e links de integração quando efetivamente concluídos. Esta marca não representa aprovação clínica nem encerramento do motor operacional de F2.
+As correções deste escopo estão implementadas. O fechamento remoto é formado pelos [PR19](https://github.com/silasjuba-del/OncoGlobal/pull/19), [PR20](https://github.com/silasjuba-del/OncoGlobal/pull/20) e [PR21](https://github.com/silasjuba-del/OncoGlobal/pull/21); seus registros de merge e checks obrigatórios são a evidência de integração, sem confundir o main local com o remoto. PR19 foi integrado em `117aaed` em 17/10/2026. PR20/21 seguem a mesma proteção, sem bypass ou aprovação clínica automática.
+
+Correções concretas de fechamento:
+
+- Limites dos cursos documentados e variantes das fichas B2; unidade micrograma preservada e unidade incompatível recusada; componentes isolados de Ewing não produzem um curso alternado executável. Nenhum protocolo foi retirado.
+- Curadoria da biblioteca vinculada à revisão exibida, com rejeição de aba desatualizada; data de acesso não substitui publicação. FGTS exporta somente a base legal com fonte própria e mantém sua condição de neoplasia maligna; a referência é pesquisável sem conceder elegibilidade automaticamente.
+- Exportação com proteção de caminhos, envelope compatível com o limite HTTP e contagem em bytes. Gerador histórico de packs congelado antes de qualquer escrita para preservar enriquecimentos posteriores. Dossiê médico mantém as fontes por ocorrência de fármaco/classe/dia.
+- UTF-8 inválido retorna erro de entrada; PDFs acima do limite conservam as páginas pendentes. Seleção do pack aceita faixas de CID e conserva a recusa em caso de ambiguidade.
+- Contagem local de cliques passou a ocorrer após o evento do controle, preservando a seleção dos checkboxes de revisão. O harness aguarda a fonte efetivamente carregada.
+
+Evidências executadas em 17/10/2026:
+
+| Verificação | Resultado |
+|---|---|
+| 29 packs originais × base `2c0991d` | Zero diferenças nas chaves legadas; protocolos, fontes e conflitos preservados. |
+| Manifesto documental | 29 hashes conferem com os arquivos locais e com os blobs Git; manifesto anterior preservado no histórico. |
+| Gates de integração | `verify` e bateria adversarial W10/W8/F1 executados pelo GitHub; o PR21 em `456b0b1` passou ambos. Atualizações posteriores exigem os mesmos checks antes do merge. |
+| Fronteiras e corpus nesse gate | 441 arquivos de código sem exceções de fronteira; 241 arquivos do corpus validados. |
+| Build da interface | `vite build` aprovado localmente. |
+| Navegador — cólon sintético | 3 fontes lidas e revisadas; 3 documentos assinados; zero chamadas externas da página. |
+| Navegador — retorno sintético | 5 documentos assinados; cinco cliques de ação registrados, além da digitação; zero chamadas externas da página. |
+| Reinício do servidor e mesmo SQLite | Os dois encontros reabriram com os 8 documentos; ambas as reimpressões retornaram `EXECUTADA`. A prova é HTML local, não papel físico. |
+
+Evidências locais do navegador: `%TEMP%/oncoglobal-fechamento-final/browser-colon.log`, `browser-retorno.log`, `browser-reabertura.log`, screenshots e vídeos em `.s12-evidence/`. Só há dados sintéticos. A tentativa de bateria integral Windows teve timeout local no scanner sob carga e foi interrompida; não é contabilizada como PASS. Os gates integrais de aceite são os checks protegidos do GitHub, com regressões dirigidas locais adicionais; nenhum teste foi removido ou teve o limite aumentado.
+
+Este fechamento é técnico/documental de F1. Conteúdo NCCN sem conferência médica continua `A_CONFERIR`, sem ativação automática, sem presumir acesso SUS/privado e sem assinatura atribuída ao médico. O motor terapêutico de F2 e as melhorias B1–B8 permanecem nas próximas fatias identificadas, conforme as fronteiras acima.
