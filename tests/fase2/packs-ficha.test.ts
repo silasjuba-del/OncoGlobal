@@ -5,7 +5,7 @@ import { join } from "node:path";
 import { afterEach,describe,expect,it } from "vitest";
 import { BLOCOS_TUMOR_PACK,TumorPackExtract } from "../../src/contracts/fase2/tumorPack.js";
 import { adaptarPackDocumental,carregarPacksTumor,hashExtracaoPack } from "../../src/kernel/corpus/tumorPacks.js";
-import { montarFichaMinima,selecionarPack } from "../../src/modules/consulta/revisaoClinica.js";
+import { montarFichaMinima,selecionarPack,packCorrespondeAoCid } from "../../src/modules/consulta/revisaoClinica.js";
 import { completudeKitTumorLot } from "../../src/rules/kitTumorLot.js";
 import { fato,retrato,packOriginal,fonte } from "./fixtures.js";
 const dirs:string[]=[];afterEach(()=>{for(const d of dirs.splice(0))rmSync(d,{recursive:true,force:true});});
@@ -43,6 +43,16 @@ describe("contrato documental separado",()=>{
   });
 });
 describe("ficha mínima",()=>{
+  it('CID dentro de faixa dispara o pack único, conservando limites e ambiguidade',()=>{
+    const {p}=base(),pack={...p,cids:['C00-C14','C30-C32']};
+    for(const cid of ['C00','C10','C14.9','C30','C31.1','C32.9']){
+      expect(packCorrespondeAoCid(pack,[cid])).toBe(true);
+      expect(selecionarPack(retrato([fato('cid',cid)]),[pack])).toBe(pack);
+    }
+    for(const cid of ['C15','C29.9','C33','D10','C10abc'])expect(packCorrespondeAoCid(pack,[cid])).toBe(false);
+    expect(packCorrespondeAoCid({...pack,cids:['C14-C00']},['C10'])).toBe(false);
+    expect(selecionarPack(retrato([fato('cid','C10')]),[pack,{...p,cids:['C10']}])).toBeNull();
+  });
   it('lê Dado PRESENTE com fontes internas e não promove hipótese ou negação',()=>{
     const dado={valor:'C50',estado:'VERDE',campo:'PRESENTE',motivo:'fixture',fontes:[fonte],revisao:'CONFIRMADO'};
     const r=retrato([fato('cid',null,{tipo:'TumorLot',campo:null,fontes:[],tempoClinico:null,dados:{cid:dado}}),

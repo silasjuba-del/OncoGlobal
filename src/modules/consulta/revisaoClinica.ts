@@ -79,7 +79,18 @@ export function cidsDaFicha(ficha:readonly CampoFichaMinima[]):string[]{
   const cid=ficha.find(f=>f.id==="cid");return cid?.estado==="DOCUMENTADO"&&typeof cid.valor==="string"?[cid.valor.trim().toUpperCase()]:[];
 }
 export function packCorrespondeAoCid(pack:TumorPackExtract,cids:readonly string[]):boolean{
-  return cids.length===1&&pack.cids.some(p=>cids[0]===p.toUpperCase()||cids[0]!.startsWith(`${p.toUpperCase()}.`));
+  if(cids.length!==1)return false;
+  const cid=cids[0]!.trim().toUpperCase();
+  return pack.cids.some(p=>{
+    const regra=p.trim().toUpperCase();
+    if(cid===regra||cid.startsWith(`${regra}.`))return true;
+    const faixa=/^([A-Z])(\d{2})\s*[-–]\s*([A-Z])(\d{2})$/.exec(regra);
+    const codigo=/^([A-Z])(\d{2})(?:\.\d{1,4})?$/.exec(cid);
+    if(!faixa||!codigo)return false;
+    const chave=(letra:string,numero:string)=>letra.charCodeAt(0)*100+Number(numero);
+    const inicio=chave(faixa[1]!,faixa[2]!),fim=chave(faixa[3]!,faixa[4]!),valor=chave(codigo[1]!,codigo[2]!);
+    return inicio<=fim&&valor>=inicio&&valor<=fim;
+  });
 }
 export function selecionarPack(r:Retrato,packs:readonly TumorPackExtract[]):TumorPackExtract|null{
   const cids=cidsDaFicha(montarFichaMinima(r)),candidatos=packs.filter(p=>packCorrespondeAoCid(p,cids));
