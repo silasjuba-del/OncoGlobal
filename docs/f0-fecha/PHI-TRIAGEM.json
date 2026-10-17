@@ -7203,7 +7203,7 @@
     },
     {
       "path": "corpus/manifesto/b2-fichas.v1.json",
-      "sha256": "799c5d57435a06abccdef3f547f36a1cad19668296b33f931851aba38c7f103d",
+      "sha256": "de045930df760d9026f02ea4f8375e1795d0e471e49c527487ee9d15aa906d71",
       "hashMode": "utf8-lf",
       "items": [
         {
@@ -7212,7 +7212,48 @@
           "ordinal": 0,
           "status": "technical_token_false_positive",
           "evidenceRef": "corpus/manifesto/b2-fichas.v1.json:407",
-          "reason": "Match contido em campo JSON SHA-256 hexadecimal completo de 64 caracteres.",
+          "reason": "Token SHA-256 completo de 64 caracteres no campo JSON, conferido; não é telefone.",
+          "contextTag": "json_sha256_field_64hex"
+        },
+        {
+          "type": "telefone",
+          "line": 1960,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "corpus/manifesto/b2-fichas.v1.json:1960",
+          "reason": "Token SHA-256 completo de 64 caracteres no campo JSON, conferido; não é telefone.",
+          "contextTag": "json_sha256_field_64hex"
+        }
+      ]
+    },
+    {
+      "path": "corpus/fichas/prostata/carboplatina-paclitaxel-semanal__nao-especificado.json",
+      "sha256": "8acee018223f620cee63fdd07d4ff9e832ded328359351ea6df03923dda2f04c",
+      "hashMode": "utf8-lf",
+      "items": [
+        {
+          "type": "telefone",
+          "line": 7,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "corpus/fichas/prostata/carboplatina-paclitaxel-semanal__nao-especificado.json:7",
+          "reason": "Token SHA-256 completo de 64 caracteres no campo JSON, conferido; não é telefone.",
+          "contextTag": "json_sha256_field_64hex"
+        }
+      ]
+    },
+    {
+      "path": "corpus/fichas/vulva/cisplatina-semanal-rxt-vulva__concomitante-a-rt.json",
+      "sha256": "db987f03e8bbd55d5e94ac0af63286eb9734f4049ac637f8c5454702d284cd4f",
+      "hashMode": "utf8-lf",
+      "items": [
+        {
+          "type": "telefone",
+          "line": 7,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "corpus/fichas/vulva/cisplatina-semanal-rxt-vulva__concomitante-a-rt.json:7",
+          "reason": "Token SHA-256 completo de 64 caracteres no campo JSON, conferido; não é telefone.",
           "contextTag": "json_sha256_field_64hex"
         }
       ]

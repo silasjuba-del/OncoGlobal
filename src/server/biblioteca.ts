@@ -12,7 +12,7 @@ const Rotas=new Set(['/biblioteca/importar','/biblioteca/curar','/biblioteca/ati
 const Hash=z.string().regex(/^[a-f0-9]{64}$/),Id=z.string().min(1).max(250);
 const Conteudo=z.union([z.object({texto:z.string().max(1000000)}).strict(),z.object({base64:z.string().max(1400000).regex(/^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$/)}).strict()]);
 const Importar=z.object({manifesto:ManifestoBiblioteca,arquivos:z.record(z.string().regex(/^[a-zA-Z0-9_-]+\.json$/),Conteudo)}).strict();
-const Curar=z.object({pacoteId:Id,itemId:Id,expectedHash:Hash,estado:z.enum(['CONSULTAVEL','ALERTA','OBSOLETO'])}).strict();
+const Curar=z.object({pacoteId:Id,itemId:Id,expectedHash:Hash,expectedCuradoriaHash:Hash,estado:z.enum(['CONSULTAVEL','ALERTA','OBSOLETO'])}).strict();
 const Ativar=z.object({pacoteId:Id,expectedHash:Hash,expectedCuradoriaHash:Hash}).strict();
 const Rollback=z.object({expectedAtiva:Id,expectedHash:Hash,expectedAnterior:Id,expectedAnteriorHash:Hash,expectedAnteriorCuradoriaHash:Hash}).strict();
 const Filtros=z.object({tumor:z.string().optional(),histologia:z.string().optional(),estadio:z.string().optional(),biomarcador:z.string().optional(),linha:z.string().optional()}).strict();
@@ -69,7 +69,10 @@ export function rotearBiblioteca(deps:DepsBiblioteca,token:string,rota:string,bo
    const p=Curar.parse(body);conferirHash(deps.db,p.pacoteId,p.expectedHash);
    // Textual knowledge has no executable threshold schema: approval for reading cannot create a medical rule.
    if(p.estado==='ALERTA')throw new Error('ALERTA_SEM_SCHEMA_EXECUTAVEL');
-   transacao(deps.db,()=>{lib.revisarItem(p.pacoteId,p.itemId,p.estado);if(lib.ativa()===p.pacoteId)emitir();});
+   transacao(deps.db,()=>{
+    conferirHash(deps.db,p.pacoteId,p.expectedHash);
+    if(hashCuradoriaPacote(deps.db,p.pacoteId)!==p.expectedCuradoriaHash)throw Error('BIBLIOTECA_REVISAO_DIVERGENTE');
+    lib.revisarItem(p.pacoteId,p.itemId,p.estado);if(lib.ativa()===p.pacoteId)emitir();});
    return {status:200,body:{codigo:'ITEM_CURADO',estado:p.estado,referencia:referenciaBibliotecaAtiva(deps.db)}};
   }
   if(rota==='/biblioteca/ativar'){

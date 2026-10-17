@@ -4,7 +4,7 @@
   "nome": "Carboplatina + Paclitaxel semanal",
   "cenario": "não especificado",
   "versao": "1.0.0",
-  "hash": "f3e4a696ef15eeed6d349525665b41a3795be46518e1ef46250554c40ebbe57f",
+  "hash": "e235da83c370eb29a2d6205281480dff4d3a778f48f91b87f5d2877115e91947",
   "codigoInstitucional": null,
   "intervaloDias": 7,
   "ciclos": null,
@@ -137,7 +137,7 @@
       "days": [
         "d1"
       ],
-      "observacao": "D-F1-28: paclitaxel semanal em SF 0,9% 500 mL. F1-B2: 80 mg/m²/60 min confirmados externamente (EXT-LEG-008/009); diluente SF 0,9% 500 mL é decisão local (D-F1-28) — eviQ usa 250 mL [divergência registrada].",
+      "observacao": "D-F1-28: paclitaxel semanal em SF 0,9% 500 mL. F1-B2: dose local preservada; fontes de mama não confirmam dose ou indicação neste tumor. Monografia BC (EXT-LEG-013): filtro e materiais apenas.",
       "source": "PROTOCOL",
       "overrideMotivo": null
     },
@@ -187,6 +187,6 @@
     }
   ],
   "limiaresBula": null,
-  "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); decisões D-W9-23, D-W9-34, D-W9-50. D-F1-28 (diluente do paclitaxel semanal). F1-B2 (D-F1-49, 2026-10-14): fontes externas do paclitaxel semanal — EXT-LEG-008 (eviQ, ID 4103 — Breast cancer neo/adjuvant weekly paclitaxel, v3, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json); EXT-LEG-009 (eviQ, ID 42 — Breast cancer metastatic weekly paclitaxel, v10, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json); EXT-LEG-012 (BC Cancer, BRAVTW — Paclitaxel weekly (palliative), rev 2014, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json); EXT-LEG-013 (BC Cancer, Monografia — Paclitaxel, rev 30/12/2019, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json). Conferido: 80 mg/m² q7d (eviQ 4103/42; 'usual' 80 na monografia BC; BRAVTW usa 90 [variante]); infusão 60 min; filtro inline ≤0,22 µm e materiais não-PVC/DEHP-free; hipersensibilidade típica nos 10 primeiros minutos das 2 primeiras infusões. Divergência de diluente REGISTRADA e não aplicada: eviQ 250 mL × decisão local SF 0,9% 500 mL (D-F1-28, mantida). Premeds das fontes (loratadina+dexa VO no eviQ; dexa+difenidramina+famotidina IV no BC) divergem do padrão local (D-W9-34c/D-F1-48) — padrão local mantido.",
+  "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); decisões D-W9-23, D-W9-34, D-W9-50. D-F1-28 (diluente do paclitaxel semanal). F1-B2 (D-F1-49): dose e indicação locais preservadas, sem confirmação por protocolos mamários; monografia BC (EXT-LEG-013) sustenta somente filtro e materiais. Elegibilidade e dose nesta indicação permanecem sob curadoria específica.",
   "status": "RASCUNHO"
 }

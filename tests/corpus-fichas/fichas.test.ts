@@ -338,7 +338,7 @@ describe("F1-B2 — fichas institucionais novas (D-F1-49)", () => {
     for (const a of manifest.fichasAlteradas) {
       const achada = parseadas.find((p) => p.ficha.templateId === a.templateId);
       expect(achada, a.caminho).toBeDefined();
-      expect(achada!.ficha.fonte).toContain(a.caminho.includes("/esofago/") ? "EXT-LEG-013" : "EXT-LEG-008");
+      for (const fonte of a.fontesAcrescentadas) expect(achada!.ficha.fonte).toContain(fonte);
     }
   });
 

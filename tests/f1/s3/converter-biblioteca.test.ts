@@ -14,7 +14,7 @@ import { converterBiblioteca } from '../../../scripts/converter-biblioteca.mjs';
 import { criarBiblioteca, sha256Biblioteca } from '../../../src/kernel/corpus/biblioteca.js';
 import { abrirLedger } from '../../../src/kernel/ledger/db.js';
 import { criarGerenciadorSessao } from '../../../src/server/sessao.js';
-import { rotearBiblioteca } from '../../../src/server/biblioteca.js';
+import { rotearBiblioteca, hashCuradoriaPacote } from '../../../src/server/biblioteca.js';
 
 const AGORA = '2026-10-14T12:00:00Z';
 it('não atribui o arquivo inteiro à primeira fonte: exige e respeita a seção mapeada', async () => {
@@ -287,7 +287,7 @@ describe('F1-N ponte no HTTP real', () => {
     const server = createServer(async (req, res) => { let raw = ''; for await (const part of req) raw += part; const token = String(req.headers.authorization ?? '').replace('Bearer ', ''); const result = rotearBiblioteca(deps, token, req.url!, JSON.parse(raw), auth.sessao); res.writeHead(result?.status ?? 404, { 'Content-Type': 'application/json' }); res.end(JSON.stringify(result?.body ?? {})); });
     await new Promise<void>((resolve) => server.listen(0, '127.0.0.1', resolve));
     const base = `http://127.0.0.1:${(server.address() as AddressInfo).port}`;
-    return { db, async post(rota: string, body: unknown, token = auth.token) { const r = await fetch(base + rota, { method: 'POST', headers: { authorization: `Bearer ${token}`, 'Content-Type': 'application/json' }, body: JSON.stringify(body) }); return { status: r.status, body: await r.json() as Record<string, any> }; }, async close() { await new Promise<void>((resolve, reject) => server.close(e => e ? reject(e) : resolve())); db.close(); } };
+    return { db, async curar(body: Record<string, unknown>, token = auth.token) { const r = await fetch(base + '/biblioteca/curar', {method:'POST',headers:{authorization:`Bearer ${token}`,'Content-Type':'application/json'},body:JSON.stringify({expectedCuradoriaHash:hashCuradoriaPacote(db,String(body.pacoteId)),...body})}); return {status:r.status,body:await r.json() as Record<string,any>}; }, async post(rota: string, body: unknown, token = auth.token) { const r = await fetch(base + rota, { method: 'POST', headers: { authorization: `Bearer ${token}`, 'Content-Type': 'application/json' }, body: JSON.stringify(body) }); return { status: r.status, body: await r.json() as Record<string, any> }; }, async close() { await new Promise<void>((resolve, reject) => server.close(e => e ? reject(e) : resolve())); db.close(); } };
   }
   it('importa o pacote convertido, cura, ativa e consulta; ALERTA é recusado inclusive para REGRA', async () => {
     const root = criarRoot({ 'corpus/1-exames/labs/painel-a.json': painel('painel-a'), 'corpus/1-exames/path/painel-b.json': painel('painel-b') });
@@ -302,8 +302,8 @@ describe('F1-N ponte no HTTP real', () => {
       expect(imp.status).toBe(201); expect(imp.body.codigo).toBe('PACOTE_IMPORTADO_RASCUNHO');
       const id = imp.body.pacoteId, hash = imp.body.hash;
       expect((await a.post('/biblioteca/consultar', { filtros: {} })).body.itens).toEqual([]); // RASCUNHO não é consultável
-      for (const ref of payload.manifesto.itens) expect((await a.post('/biblioteca/curar', { pacoteId: id, itemId: ref.id, expectedHash: hash, estado: 'ALERTA' })).body.codigo).toBe('ALERTA_SEM_SCHEMA_EXECUTAVEL');
-      for (const ref of payload.manifesto.itens) expect((await a.post('/biblioteca/curar', { pacoteId: id, itemId: ref.id, expectedHash: hash, estado: 'CONSULTAVEL' })).status).toBe(200);
+      for (const ref of payload.manifesto.itens) expect((await a.curar( { pacoteId: id, itemId: ref.id, expectedHash: hash, estado: 'ALERTA' })).body.codigo).toBe('ALERTA_SEM_SCHEMA_EXECUTAVEL');
+      for (const ref of payload.manifesto.itens) expect((await a.curar( { pacoteId: id, itemId: ref.id, expectedHash: hash, estado: 'CONSULTAVEL' })).status).toBe(200);
       expect((await a.post('/biblioteca/ativar', { pacoteId: id, expectedHash: hash, expectedCuradoriaHash: (await a.post('/biblioteca/estado', {pacoteId:id})).body.curadoriaHash })).status).toBe(200);
       const consulta = await a.post('/biblioteca/consultar', { filtros: { tumor: 'mama' } });
       expect(consulta.body.itens.map((i: any) => i.id).sort()).toEqual(['1-exames-labs-painel-a', '1-exames-path-painel-b']);
@@ -312,7 +312,7 @@ describe('F1-N ponte no HTTP real', () => {
       const texto = JSON.stringify(regra);
       const p2 = { manifesto: { schema: 'PacoteBiblioteca@1', id: 'regra-pac', versao: '1.0.0', origem: 'CURADOR_LOCAL', classificacao: 'PUBLIC', criadoEm: AGORA, itens: [{ id: 'regra', versao: '1.0.0', arquivo: 'regra.json', sha256: sha256Biblioteca(texto) }] }, arquivos: { 'regra.json': { texto } } };
       const imp2 = await a.post('/biblioteca/importar', p2);
-      expect((await a.post('/biblioteca/curar', { pacoteId: imp2.body.pacoteId, itemId: 'regra', expectedHash: imp2.body.hash, estado: 'ALERTA' })).body.codigo).toBe('ALERTA_SEM_SCHEMA_EXECUTAVEL');
+      expect((await a.curar( { pacoteId: imp2.body.pacoteId, itemId: 'regra', expectedHash: imp2.body.hash, estado: 'ALERTA' })).body.codigo).toBe('ALERTA_SEM_SCHEMA_EXECUTAVEL');
     } finally { await a.close(); }
   });
 });
