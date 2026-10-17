@@ -50,9 +50,16 @@ it('HTTP usa administração efetiva do ciclo anterior, conserva pendências e r
   expect(persistida.body.draft.payload.itens.find((i:any)=>i.drug==='Cemiplimabe').prescribedDose).toBe(224);
   const origem=await post('/consulta/rascunho',{draftId:rasc.body.draftId});
   expect(origem.body.draft.payload.baseAjusteAnterior.fontes).toContainEqual(expect.objectContaining({eventId:'evento-administracao',quantidadeEfetivaMg:280,status:'PARCIAL'}));
+  seed('administracao-retomada','TreatmentAdministration',{...admin,adminId:'admin-retomada',quantidadeEfetivaMg:20,status:'COMPLETA',inicio:'2026-09-21T08:45:00-03:00',fim:'2026-09-21T09:00:00-03:00'},'encontro-c1-sintetico');
+  const retomada=await criar();
+  expect(retomada.body.instanciacao.itens.find((i:any)=>i.item.drug==='Cemiplimabe').doseAnteriorPrescrita).toBe(300);
+  const doseRetomada=structuredClone(itens);doseRetomada.find((i:any)=>i.drug==='Cemiplimabe').prescribedDose=240;
+  expect((await post('/consulta/prescricao/propor',{...pedido,id:'retomada',operationId:'op-retomada',rascunhoOrigemId:retomada.body.draftId,itens:doseRetomada})).status).toBe(201);
   seed('administracao-conflitante','TreatmentAdministration',{...admin,adminId:'admin-conflitante',quantidadeEfetivaMg:260},'encontro-c1-sintetico');
   expect((await post('/consulta/prescricao/propor',{...pedido,id:'antigo',operationId:'op-antigo'})).body.codigo).toBe('ORIGEM_TEMPLATE_CONTEXTO_DESATUALIZADO');
   const ambiguo=await criar();expect(ambiguo.body.instanciacao.itens.find((i:any)=>i.item.drug==='Cemiplimabe').doseAnteriorPrescrita).toBeNull();
+  const detalheAmbiguo=await post('/consulta/rascunho',{draftId:ambiguo.body.draftId});
+  expect(detalheAmbiguo.body.draft.payload.baseAjusteAnterior.pendencias).toContainEqual(expect.objectContaining({droga:'Cemiplimabe',eventIds:expect.arrayContaining(['evento-administracao','evento-administracao-conflitante'])}));
   const map=corpusCompartilhadoDemoB2!.templatesProtocolo.find(t=>t.nome==='MAP (ciclos 1–4)')!;demo.promoverTemplate(map.templateId);
   const parcial=await post('/consulta/prescricao/rascunho',{...ctx,templateId:map.templateId});
   expect(parcial.body.instanciacao.pendentes).toBeGreaterThan(0);
