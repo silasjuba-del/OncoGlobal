@@ -98,6 +98,22 @@ function importarEmBanco(manifesto: unknown, destino: string) {
   biblioteca.importarPacote(manifesto, (arquivo) => readFileSync(join(destino, 'pacote', arquivo), 'utf8'));
   return { db, biblioteca };
 }
+it('FGTS publica só a base legal e fica localizável por tumor sem declarar elegibilidade',async()=>{
+ const caminho='corpus/3-laudos/fgts/laudo-fgts.v1.RASCUNHO.json';
+ const root=criarRoot({[caminho]:JSON.parse(readFileSync(caminho,'utf8'))});
+ const dir=mkdtempSync(join(tmpdir(),'fgts-escopo-')),snap=join(dir,'snap'),destino=join(dir,'pacote');
+ exportarBiblioteca(root,snap);
+ await converterBiblioteca(snap,destino,{mapeamento:join(process.cwd(),'scripts/converter-biblioteca-mapeamento.json'),agora:AGORA,idPacote:'fgts-sintetico',versao:'1.0.0'});
+ const m=JSON.parse(readFileSync(join(destino,'pacote/manifesto.json'),'utf8'));
+ const item=lerItem(destino,m.itens[0].arquivo);
+ expect(item.texto).toContain('neoplasia maligna');expect(item.texto).not.toContain('documentosAnexos');expect(item.texto).not.toContain('resalvaRenovacao');
+ expect(item.proveniencia.publicadoEm).toBe('1994-07-26');
+ const {db,biblioteca}=importarEmBanco(m,destino);
+ try{
+  const id=`${m.id}@${m.versao}`;biblioteca.revisarItem(id,m.itens[0].id,'CONSULTAVEL');biblioteca.ativar(id);
+  for(const tumor of ['mama','colorretal','pulmao'])expect(biblioteca.consultar({tumor})).toHaveLength(1);
+ }finally{db.close();}
+});
 /** Reescreve itens e manifesto de um pacote convertido, recalculando os hashes (para casos adversariais). */
 function reescrever(destino: string, mudanca: (itens: Record<string, any>[]) => void) {
   const manifesto = JSON.parse(readFileSync(join(destino, 'pacote', 'manifesto.json'), 'utf8'));
@@ -238,13 +254,14 @@ describe('F1-N ponte snapshot→PacoteBiblioteca', () => {
     try { expect(() => biblioteca.importarPacote({ schema: 'PacoteBiblioteca@1', id: 'g', versao: '1.0.0', origem: 'CURADOR_LOCAL', classificacao: 'PUBLIC', criadoEm: AGORA, itens: [{ id: 'grande', versao: '1.0.0', arquivo: 'grande.json', sha256: sha256Biblioteca(texto) }] }, () => texto)).toThrow('ITEM_EXCESSIVO'); } finally { db.close(); }
 
     const arquivos: Record<string, unknown> = {};
-    for (let k = 0; k < 6; k++) arquivos[`corpus/1-exames/labs/gra-${k}.json`] = painel(`gra-${k}`, { nota: 'y'.repeat(170_000) });
+    for (let k = 0; k < 6; k++) arquivos[`corpus/1-exames/labs/gra-${k}.json`] = painel(`gra-${k}`, { nota: 'á'.repeat(170_000) });
     const root = criarRoot(arquivos);
     const itens = Object.fromEntries(Object.keys(arquivos).map((c) => [c, {}]));
     const { destino, inventario } = await converter(root, 'httpgrande', { itens });
-    expect(inventario.http.emitido).toBe(false); // corpo ultrapassa o limite do roteador (1.000.000)
+    expect(inventario.http.emitido).toBe(true); // /biblioteca/importar aceita envelope de até 24 MB.
     expect(inventario.http.bytesBody).toBeGreaterThan(1_000_000);
-    expect(existsSync(join(destino, 'pacote-http.json'))).toBe(false);
+    expect(existsSync(join(destino, 'pacote-http.json'))).toBe(true);
+    expect(inventario.http.bytesBody).toBe(Buffer.byteLength(readFileSync(join(destino, 'pacote-http.json'), 'utf8').trim()));
     expect(existsSync(join(destino, 'pacote', 'manifesto.json'))).toBe(true); // pacote interno segue válido
   }, 120_000);
 

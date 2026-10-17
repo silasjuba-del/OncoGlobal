@@ -32,15 +32,14 @@
     "corpus/3-laudos/fgts/laudo-fgts.v1.RASCUNHO.json": {
       "pilar": 3,
       "aplicabilidade": {
-        "tumor": [
-          "neoplasia maligna (comportamento maligno; CID C00-C97)"
-        ],
+        "tumor": [],
         "histologia": [],
         "estadio": [],
         "biomarcador": [],
         "linha": []
       },
-      "aplicabilidadeNota": "TUMOR limitado à neoplasia maligna, como exige o art. 20, XI, da Lei 8.036/1990 e explicita finalidade/requisitos do arquivo. HISTOLOGIA, ESTADIO, BIOMARCADOR e LINHA são UNIVERSAIS para este documento legal: o texto legal não restringe por essas dimensões e o próprio arquivo diz que a lei exige a moléstia, não tratamento em curso nem grau de incapacidade; não é indicação terapêutica.",
+      "aplicabilidadeNota": "UNIVERSAL nas cinco dimensões para consulta da referência legal no corpus oncológico. O trecho legal continua restrito a neoplasia maligna; aparecer na busca não estabelece elegibilidade, direito ao saque ou indicação terapêutica. Só a base legal é convertida; requisitos de outras fontes e práticas locais permanecem no original.",
+      "escopoFonte": "/baseLegal/0",
       "provenienciaUrl": "https://planalto.gov.br/ccivil_03/leis/l8036compilada.htm",
       "publicadoEm": "1994-07-26",
       "fonteDataPublicacao": "https://www.planalto.gov.br/ccivil_03/leis/l8922.htm"
