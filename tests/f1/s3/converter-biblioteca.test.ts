@@ -54,6 +54,7 @@ function mapeamento(itens: Record<string, { aplicabilidade?: Record<string, stri
   const m = {
     schema: 'ConversorBibliotecaMapeamento@1', versao: '1.0.0', itens: Object.fromEntries(Object.entries(itens).map(([caminho, i]) => [caminho, {
       pilar: 1, aplicabilidade: i.aplicabilidade ?? { tumor: [], histologia: [], estadio: [], biomarcador: [], linha: [] },
+      aplicabilidadeNota: 'UNIVERSAL nas dimensões vazias, conforme escopo desta fonte sintética',
       provenienciaUrl: i.url ?? 'https://example.org/fonte', ...(i.escopoFonte ? {escopoFonte:i.escopoFonte} : {}),
     }])), verificacoes: verificacoes.map((url) => ({ url, verificadaEm: '2026-10-14', metodo: 'fixture' })), pendencias: [],
   };
@@ -67,6 +68,19 @@ async function converter(root: string, nome: string, opcoes: { itens?: Record<st
   return { base, snap, destino, resultado, inventario: JSON.parse(readFileSync(join(destino, 'inventario.json'), 'utf8')), manifesto: JSON.parse(readFileSync(join(destino, 'pacote', 'manifesto.json'), 'utf8')) };
 }
 const lerItem = (destino: string, arquivo: string) => JSON.parse(readFileSync(join(destino, 'pacote', arquivo), 'utf8'));
+
+it.each([undefined, '', 'escopo não conferido'])('não converte escopo vazio em universal sem declaração: %s', async nota => {
+  const caminho = 'corpus/1-exames/labs/painel.json';
+  const root = criarRoot({[caminho]: painel('painel')});
+  const base = mkdtempSync(join(tmpdir(), 'conv-universal-'));
+  const snap = join(base, 'snap'); exportarBiblioteca(root, snap);
+  const arquivo = mapeamento({[caminho]: {}}, ['https://example.org/fonte']);
+  const m = JSON.parse(readFileSync(arquivo, 'utf8')); m.itens[caminho].aplicabilidadeNota = nota;
+  writeFileSync(arquivo, JSON.stringify(m));
+  await expect(converterBiblioteca(snap, join(base, 'destino'), {mapeamento: arquivo, agora: AGORA}))
+    .rejects.toThrow('APLICABILIDADE_UNIVERSAL_NAO_DECLARADA');
+  expect(existsSync(join(base, 'destino'))).toBe(false);
+});
 
 it('data de acesso ou vigência local não substitui publicação da fonte', async () => {
   const caminho='corpus/1-exames/labs/acesso.json';

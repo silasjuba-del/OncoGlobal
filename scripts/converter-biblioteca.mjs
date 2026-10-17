@@ -80,6 +80,9 @@ function validarMapeamento(m) {
       throw new Error(`DATA_PUBLICACAO_NAO_VERIFICADA:${caminho}`);
     const ap = item.aplicabilidade;
     if (!ap || ["tumor", "histologia", "estadio", "biomarcador", "linha"].some((c) => !Array.isArray(ap[c]) || ap[c].length > 100 || ap[c].some((v) => typeof v !== "string" || !v.length || v.length > 200 || v === "*"))) throw new Error(`MAPEAMENTO_APLICABILIDADE_INVALIDA:${caminho}`);
+    if (Object.values(ap).some(v => Array.isArray(v) && v.length === 0)
+      && (typeof item.aplicabilidadeNota !== "string" || !/\bUNIVERSA(?:L|IS)\b/i.test(item.aplicabilidadeNota)))
+      throw new Error(`APLICABILIDADE_UNIVERSAL_NAO_DECLARADA:${caminho}`);
   }
   return { mapeamento: m, verificadas };
 }

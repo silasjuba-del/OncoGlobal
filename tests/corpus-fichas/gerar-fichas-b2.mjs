@@ -69,6 +69,7 @@ function montar(s) {
   itens.push(...pos);
   if (temIV) itens.push(it("Soro fisiológico 0,9% 250 mL (lavagem pós-QT)", "POS_QT", 1, "fr", "EV", pd, { vol: 250, obs: "Lavar acesso venoso pós-QT (planilha)." }));
   const finais = itens.map((x, i) => ({ ...x, sequence: i + 1 }));
+  if (s.sequenciamentoPendente) for (const item of finais) item.sequenciamentoPendente = s.sequenciamentoPendente;
   const baseId = s.slug ?? `${slug(s.nome)}__${slug(s.cenario)}`;
   const t = {
     templateId: `FICHA.${slug(s.tumor)}.${baseId}@${VERSAO}`,
@@ -217,7 +218,8 @@ F({ tumor: CUP, nome: "Cisplatina + 5-Fluorouracil (CUP escamoso)", cenario: "es
 
 // ===== EWING (D-F1-34/49; dose-denso Womer 2012; SBOC local) =====
 const EW = "Ewing";
-F({ tumor: EW, nome: "Ewing VDC (ciclo A — alternado ao IE)", cenario: "1ª linha, dose-denso q14", intervalo: 14, ciclos: 5, altoRisco: true,
+F({ tumor: EW, nome: "Ewing VDC (ciclo A — alternado ao IE)", cenario: "1ª linha, dose-denso q14", intervalo: 28, ciclos: 5, altoRisco: true,
+  sequenciamentoPendente: "Componente VDC/VC do curso VDC/IE: alternância a cada 14 dias, repetição do mesmo braço a cada 28 dias. Exige plano integrado de 14 ciclos, terapia local e limite cumulativo; esta ficha isolada não gera curso executável. Fonte: eviQ 3464 v2, Treatment schema, conferida 17/10/2026.",
   identidade: "Ewing localizado/metastático, 1ª linha VDC/IE interval-compressed (SBOC 2026 ósseos p. 15; Womer 2012)",
   fontesItens: { Vincristina: { sourceIds: ["EXT-SARC-002", "EXT-SARC-009", "EXT-SARC-022"] }, Doxorrubicina: { sourceIds: ["EXT-SARC-002"] }, Ciclofosfamida: { sourceIds: ["EXT-SARC-002"] }, "Mesna (0 h)": { sourceIds: ["EXT-SARC-002"] }, "Mesna (2 h, VO)": { sourceIds: ["EXT-SARC-002"] }, "Mesna (6 h, VO)": { sourceIds: ["EXT-SARC-002"] }, Pegfilgrastim: { sourceIds: ["EXT-SARC-002"] } },
   divergencias: ["doxorrubicina: eviQ 37,5 mg/m² ×2 (D1–D2, 5–15 min) × BC SAALT2W 75 mg/m² IV push D1 (dose única) × Womer abstract 75 mg/m²", "vincristina: 1,5 mg/m² (cap 2 mg) no eviQ/BC × 2 mg/m² no abstract de Womer", "G-CSF: pegfilgrastim 6 mg D3 (eviQ) × filgrastim a partir do D8 (BC)", "antiesse local sem NK1 (D-F1-30) × esquema eviQ com netupitant/palonosetrona"],
@@ -241,7 +243,8 @@ F({...faseVdc,nome:'Ewing VC (fase final sem doxorrubicina)',ciclos:2,
  itens:faseVdc.itens.filter(i=>i.drug!=='Doxorrubicina').map(i=>({...i})),
  fonteDecisao:faseVdc.fonteDecisao+' Ficha VC corresponde somente às 2 administrações finais sem antraciclina, não a um novo esquema aprovado.'});
 
-F({ tumor: EW, nome: "Ewing IE (ciclo B — alternado ao VDC)", cenario: "1ª linha, dose-denso q14", intervalo: 14, ciclos: 7, premedDias: R(1, 5), altoRisco: true,
+F({ tumor: EW, nome: "Ewing IE (ciclo B — alternado ao VDC)", cenario: "1ª linha, dose-denso q14", intervalo: 28, ciclos: 7, premedDias: R(1, 5), altoRisco: true,
+  sequenciamentoPendente: "Componente IE do curso VDC/IE: alternância a cada 14 dias, repetição do mesmo braço a cada 28 dias. Exige plano integrado de 14 ciclos, terapia local e limite cumulativo; esta ficha isolada não gera curso executável. Fonte: eviQ 3464 v2, Treatment schema, conferida 17/10/2026.",
   identidade: "Ewing, braço IE do VDC/IE interval-compressed (ifosfamida+etoposídeo D1–D5)",
   fontesItens: { Etoposídeo: { sourceIds: ["EXT-SARC-003"] }, Ifosfamida: { sourceIds: ["EXT-SARC-003"] }, "Mesna (0 h)": { sourceIds: ["EXT-SARC-003"] }, "Mesna (4 h)": { sourceIds: ["EXT-SARC-003"] }, "Mesna (8 h)": { sourceIds: ["EXT-SARC-003"] }, Pegfilgrastim: { sourceIds: ["EXT-SARC-003"] } },
   divergencias: ["mesna IE eviQ: 600 IV carga + 600 IV 4 h e 8 h (alternativa VO às 2 h e 6 h após o fim, dose dobrada)", "teto cumulativo de ifosfamida usualmente ≤72 g/m² (BC)"],

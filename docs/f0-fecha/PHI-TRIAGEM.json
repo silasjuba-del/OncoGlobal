@@ -3101,17 +3101,17 @@
     },
     {
       "path": "corpus/manifesto/b2-fichas.v1.json",
-      "sha256": "f9d2cca565c52f668e859c826fedaec9060deba66db4e56237c0b0758292dbb6",
+      "sha256": "799c5d57435a06abccdef3f547f36a1cad19668296b33f931851aba38c7f103d",
       "hashMode": "utf8-lf",
       "items": [
         {
           "type": "telefone",
           "line": 407,
           "ordinal": 0,
-          "contextTag": "json_sha256_field_64hex",
           "status": "technical_token_false_positive",
           "evidenceRef": "corpus/manifesto/b2-fichas.v1.json:407",
-          "reason": "Revisão 2026-10-17: hash técnico de fonte/ficha, não identificador pessoal; limite de ciclos e proveniência conferidos."
+          "reason": "Match contido em campo JSON SHA-256 hexadecimal completo de 64 caracteres.",
+          "contextTag": "json_sha256_field_64hex"
         }
       ]
     }

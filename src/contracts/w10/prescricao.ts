@@ -49,6 +49,8 @@ export const PrescriptionItem = z.object({
   /** Teto absoluto por administração, declarado pela fonte da ficha (não limita a SC). */
   doseMaximaMg: z.number().positive().optional(),
   taxaMaximaMgMin: z.number().positive().optional(),
+  /** Braço de curso alternado sem sequência executável: não pode virar prescrição isolada. */
+  sequenciamentoPendente: z.string().min(1).optional(),
   /** Resgate condicionado a níveis: permanece não executável sem planejamento individual. */
   resgateMtx: z.object({
     inicioAposHoras: z.literal(24), intervaloHoras: z.literal(6), primeirasDosesEV: z.literal(4),

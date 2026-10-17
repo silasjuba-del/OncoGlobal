@@ -67,6 +67,8 @@ for (const arquivo of walk(CORPUS)) {
     linhas.push([rel, "JSON INVÁLIDO", 0, 0]);
     continue;
   }
+  // CabecalhoRascunho rege os novos packs B2; os headers legados são preservados.
+  // verificarB2 abaixo exige esse schema nos seis packs por caminho, mesmo se ele for removido.
   const rascunho=json.status==='RASCUNHO'&&json.header?.schema==='CabecalhoRascunho@1';
   const draftHeader=rascunho?CabecalhoRascunho.safeParse(json.header):null;
   const errosHeader = rascunho ? draftHeader.success ? [] : draftHeader.error.issues.map(i=>`${i.path.join('.')}: ${i.message}`)
