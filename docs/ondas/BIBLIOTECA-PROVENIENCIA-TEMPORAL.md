@@ -37,3 +37,4 @@ Nenhum arquivo de `corpus/` foi modificado. Doses, decisões clínicas, estados 
 - W10: 240 testes em 31 arquivos, aprovados. W8: 41 em 9 arquivos, aprovados.
 - Typecheck, fronteiras gerais e de fechamento F1-S3 (zero exceções), corpus (241 arquivos) e build da UI: aprovados.
 - Exportação/conversão do recorte real mapeado: 2 arquivos/2 itens, importador real aprovado. A exportação integral tem a limitação PHI registrada acima.
+- Suíte geral final: `npm test -- --pool=forks --reporter=dot`, **3.770 testes em 473 arquivos**, todos aprovados, em 358 s. As tentativas com a configuração padrão de threads não produziram resumo final nesta execução; não se declara `npm run verify` integralmente aprovado. Seus passos de typecheck, fronteiras e corpus passaram; a bateria completa foi concluída com processos isolados, sem alterar configuração do repositório ou excluir testes.
