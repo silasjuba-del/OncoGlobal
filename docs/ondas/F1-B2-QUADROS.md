@@ -416,9 +416,9 @@
 ### Cemiplimabe — localmente avançado/metastático — inelegível a cirurgia/RT curativas
 
 - **templateId:** `FICHA.cec-de-pele-cutaneo.cemiplimabe__localmente-avancado-metastatico-inelegivel-a-cirurgia-rt-curativas@1.0.0` · **versão:** 1.0.0 · **hash:** ver 'corpus/manifesto/b2-fichas.v1.json' (chave templateId) · **status:** RASCUNHO
-- **Intervalo:** 21 d · **Ciclos:** —
+- **Intervalo:** 21 d · **Ciclos:** 35
 - **Identidade clínica:** CSCC metastático ou localmente avançado sem candidatura a cirurgia/RT curativas (eviQ 4151)
-- **Fonte da ficha:** D-F1-34 e D-F1-49. Protocolo operacional: EXT-CNV-001 (eviQ, ID 4151 — Cemiplimab monotherapy, v5 (review due 31/12/2028), acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json) (página viva v5, 02/09/2026; PDF capturado v1) + BC SMAVCEM (rev 08/2025) + DailyMed LIBTAYO SPL (setid 4347ae1f…). Sem pré-medicação de rotina (eviQ/BC).
+- **Fonte da ficha:** D-F1-34 e D-F1-49. Protocolo operacional: EXT-CNV-001 (eviQ, ID 4151 — Cemiplimab monotherapy, v5 (review due 31/12/2028), acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json) (página viva v5, 02/09/2026; PDF capturado v1) + BC SMAVCEM (rev 08/2025) + DailyMed LIBTAYO SPL (setid 4347ae1f…). Sem pré-medicação de rotina (eviQ/BC). Limite operacional: até 35 administrações q21d (D0 a D714), derivado do teto de 2 anos do Treatment schedule eviQ 4151, reconferido 17/10/2026; não é contagem literal do estudo. Interromper antes por progressão, toxicidade ou 2 anos de calendário; a …
 
 | # | Item | Classe | Dose | Unid. | Base | Via | Diluente | Vol. | Tempo | Dias | Situação | Fontes |
 |---|------|--------|------|-------|------|------|----------|------|-------|------|----------|--------|
@@ -656,4 +656,4 @@
 - **053:** erro de duplicação da biblioteca INT-MED (D-F1-44) — a corrigir NAQUELA biblioteca (externa ao repositório); nenhuma ficha nova
 
 ---
-Gerado em 2026-10-17T19:27:27.550Z · aprovacaoClinica: **null** (todas as fichas) — D-F1-49.
+Gerado em 2026-10-17T19:35:44.287Z · aprovacaoClinica: **null** (todas as fichas) — D-F1-49.

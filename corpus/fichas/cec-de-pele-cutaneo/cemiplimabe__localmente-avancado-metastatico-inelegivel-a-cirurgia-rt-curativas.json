@@ -4,10 +4,10 @@
   "nome": "Cemiplimabe",
   "cenario": "localmente avançado/metastático — inelegível a cirurgia/RT curativas",
   "versao": "1.0.0",
-  "hash": "3e1544d835b6013d58ed1d4c4171fe8f9a485b2208cda1e22e11ec9e0edf666c",
+  "hash": "ed887d3ac2a84a685ffb6084af1cfa02d41a389ffd5e5fe4bbec112e32e63716",
   "codigoInstitucional": null,
   "intervaloDias": 21,
-  "ciclos": null,
+  "ciclos": 35,
   "itens": [
     {
       "drug": "Cemiplimabe",
@@ -55,6 +55,6 @@
     }
   ],
   "limiaresBula": null,
-  "fonte": "D-F1-34 e D-F1-49. Protocolo operacional: EXT-CNV-001 (eviQ, ID 4151 — Cemiplimab monotherapy, v5 (review due 31/12/2028), acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json) (página viva v5, 02/09/2026; PDF capturado v1) + BC SMAVCEM (rev 08/2025) + DailyMed LIBTAYO SPL (setid 4347ae1f…). Sem pré-medicação de rotina (eviQ/BC).",
+  "fonte": "D-F1-34 e D-F1-49. Protocolo operacional: EXT-CNV-001 (eviQ, ID 4151 — Cemiplimab monotherapy, v5 (review due 31/12/2028), acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json) (página viva v5, 02/09/2026; PDF capturado v1) + BC SMAVCEM (rev 08/2025) + DailyMed LIBTAYO SPL (setid 4347ae1f…). Sem pré-medicação de rotina (eviQ/BC). Limite operacional: até 35 administrações q21d (D0 a D714), derivado do teto de 2 anos do Treatment schedule eviQ 4151, reconferido 17/10/2026; não é contagem literal do estudo. Interromper antes por progressão, toxicidade ou 2 anos de calendário; atrasos exigem reavaliar o total, não estender o prazo.",
   "status": "RASCUNHO"
 }
