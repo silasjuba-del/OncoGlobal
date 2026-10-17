@@ -39,7 +39,7 @@ it("retira item consultável após revisão e confirmação explícita, limpando
   const consulta=screen.getByRole("region",{name:"Consultar biblioteca"});
   await within(consulta).findByText("Texto público de exemplo.");
   confirmar.mockReturnValue(true);fireEvent.click(botao);
-  await waitFor(()=>expect(api.curar).toHaveBeenCalledWith({pacoteId:"fixture@1.0.0",itemId:item.id,expectedHash:hash,estado:"OBSOLETO"}));
+  await waitFor(()=>expect(api.curar).toHaveBeenCalledWith({pacoteId:"fixture@1.0.0",itemId:item.id,expectedHash:hash,expectedCuradoriaHash:hash,estado:"OBSOLETO"}));
   await screen.findByText(/marcado como OBSOLETO/);
   expect(within(consulta).queryByText("Texto público de exemplo.")).toBeNull();
   fireEvent.click(screen.getByRole("button",{name:"Consultar"}));
@@ -50,7 +50,7 @@ it("retira item consultável após revisão e confirmação explícita, limpando
   confirmar.mockReturnValue(false);fireEvent.click(restaurar);
   expect(api.curar).toHaveBeenCalledTimes(1);
   confirmar.mockReturnValue(true);fireEvent.click(restaurar);
-  await waitFor(()=>expect(api.curar).toHaveBeenLastCalledWith({pacoteId:"fixture@1.0.0",itemId:item.id,expectedHash:hash,estado:"CONSULTAVEL"}));
+  await waitFor(()=>expect(api.curar).toHaveBeenLastCalledWith({pacoteId:"fixture@1.0.0",itemId:item.id,expectedHash:hash,expectedCuradoriaHash:"b".repeat(64),estado:"CONSULTAVEL"}));
 });
 
 it("importa como rascunho e só cura/ativa após exibir e confirmar conteúdo e versão", async () => {
@@ -90,7 +90,7 @@ it("importa como rascunho e só cura/ativa após exibir e confirmar conteúdo e 
   await waitFor(() => expect(confirmarItem.disabled).toBe(false));
   fireEvent.click(confirmarItem);
   fireEvent.click(curar);
-  await waitFor(() => expect(api.curar).toHaveBeenCalledWith({ pacoteId: pacote.pacoteId, itemId: item.id, expectedHash: hash, estado: "CONSULTAVEL" }));
+  await waitFor(() => expect(api.curar).toHaveBeenCalledWith({ pacoteId: pacote.pacoteId, itemId: item.id, expectedHash: hash, expectedCuradoriaHash: hash, estado: "CONSULTAVEL" }));
   await waitFor(() => expect(confirmarItem.checked).toBe(false));
   fireEvent.click(confirmarItem);
   fireEvent.click(screen.getByLabelText(/Revisei a versão, o hash e os itens exibidos/));

@@ -126,7 +126,7 @@ Atualizações de estado (sem reescrever §2):
 
 - Manifesto: `corpus/manifesto/b2-fichas.v1.json` — 38 fontes externas (URL+versão+SHA-256 integral+data de acesso 2026-10-14) + 2 materiais locais (SBOC ósseos v5, SOnHe 2024, com hash do inventário da auditoria).
 - Validador: `npm run check:corpus` → `scripts/corpus-b2.mjs` (hash, RASCUNHO, cobertura por campo, fontes existentes, NAO_LOCALIZADO=null, fichaId dos packs resolve, fichas soltas).
-- Regeneração determinística: `node tests/corpus-fichas/gerar-fichas-b2.mjs` e `node scripts/gerar-packs-b2.mjs`; apresentação: `node scripts/gerar-dossie-fichas.mjs`.
+- Fichas: `node tests/corpus-fichas/gerar-fichas-b2.mjs`; apresentação: `node scripts/gerar-dossie-fichas.mjs`. O gerador histórico `scripts/gerar-packs-b2.mjs` está congelado e recusa execução antes de escrever: os seis packs receberam enriquecimentos e curadoria posteriores, preservados diretamente nos artefatos. Não regenerar packs a partir dessa versão histórica.
 - O gerador histórico `gerar-fichas.mjs` está congelado (executá-lo apagaria as edições B1 — verificado e restaurado durante o trabalho; guard documentado no gerador B2).
 
 ## 6. D-F1-50 aplicada (2026-10-14) — oito decisões do Dr. Silas implementadas em RASCUNHO

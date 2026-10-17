@@ -1,11 +1,13 @@
 // F1-B2 · Gerador dos 6 packs novos (D-F1-34/49): Ewing, osteossarcoma, CEC de pele, NTG, vulva e CUP.
-// Uso: node scripts/gerar-packs-b2.mjs  — grava corpus/6-pack-tumor/<slug>/pack-<slug>.v2.RASCUNHO.json
+// HISTÓRICO CONGELADO: os packs receberam curadoria posterior; não regenerar sobre o corpus.
 // Estrutura espelha os packs v2 existentes (pack-ldgcb etc.): header RulesetHeader, status RASCUNHO,
 // consultavel true, alerta false, identidade/diagnostico/estadiamento/tratamento/fichaId/ligacoes/
 // pendencias/conflitos/curadoria. Aprovação clínica: null (D-F1-49 — nada aqui é ativo).
 import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
+
+throw new Error("GERADOR_HISTORICO_CONGELADO: preserve os packs revisados; mudanças devem ser aditivas e verificadas contra o artefato atual.");
 
 const RAIZ = new URL("..", import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1");
 const DIA = "2026-10-14";

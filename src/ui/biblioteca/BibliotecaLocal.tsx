@@ -78,13 +78,13 @@ export function BibliotecaLocal({ api }: { api: ApiBiblioteca }) {
   }
 
   async function curar(item: ItemBibliotecaResposta, destino: "CONSULTAVEL" | "OBSOLETO" = "CONSULTAVEL") {
-    if (!estado?.hash || !conteudoConferido[item.id]) return;
+    if (!estado?.hash || !estado.curadoriaHash || !conteudoConferido[item.id]) return;
     if (destino === "OBSOLETO" && !window.confirm(`Marcar “${item.titulo}” como OBSOLETO? O item deixará de aparecer nas consultas da biblioteca.`)) return;
     if (item.estado === "OBSOLETO" && destino === "CONSULTAVEL" && !window.confirm(`Restaurar “${item.titulo}” como CONSULTAVEL após esta nova revisão?`)) return;
     setErro(""); setOcupado(true);
     limparConsulta();
     try {
-      await api.curar({ pacoteId: selecionado, itemId: item.id, expectedHash: estado.hash, estado: destino });
+      await api.curar({ pacoteId: selecionado, itemId: item.id, expectedHash: estado.hash, expectedCuradoriaHash: estado.curadoriaHash, estado: destino });
       await carregar(selecionado);
       setAviso(`Item “${item.titulo}” marcado como ${destino} após sua revisão.`);
     } catch (e) { setErro(mensagemErro(e)); }
