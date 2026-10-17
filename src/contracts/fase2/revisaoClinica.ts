@@ -17,7 +17,10 @@ export const RevisaoClinicaResposta=z.object({codigo:z.literal("REVISAO_CLINICA_
   estadosDoenca:z.array(RegistroEstadoDoenca.extend({fato:ReferenciaFato,fontes:z.array(Fonte),conflito:z.boolean()}).strict()),
   respostaTumoral:z.object({criterio:z.literal("RECIST_1_1"),aplicabilidade:z.literal("CONFERIR_CRITERIO_DO_TUMOR"),
     series:z.array(z.object({eventId:Id,episodioId:Id,tumorLotId:Id.nullable(),avaliacoes:z.array(RecistAvaliacao),pendencias:z.array(Id)}).strict()),
-    patologica:z.array(z.object({valor:z.json(),data:z.string().nullable(),fato:ReferenciaFato,fontes:z.array(Fonte)}).strict()),
+    patologica:z.array(z.object({valor:z.json(),data:z.string().nullable(),fato:ReferenciaFato,fontes:z.array(Fonte),
+      estado:z.enum(['DOCUMENTADO','NEGADO','INCERTO']),conflito:z.boolean(),
+      qualificadores:z.object({negated:z.json().optional(),negado:z.json().optional(),evidence:z.json().optional(),requiresConfirmation:z.json().optional()}).strict(),
+    }).strict()),
     pendencias:z.array(Id)}).strict(),
 }).strict();
 export type RevisaoClinicaResposta=z.infer<typeof RevisaoClinicaResposta>;

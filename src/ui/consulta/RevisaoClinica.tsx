@@ -42,8 +42,14 @@ export function RevisaoClinica({porta,contexto,versaoClinica,aoRegistrar=()=>{}}
           <table><thead><tr><th>Data</th><th>Soma (mm)</th><th>Δ baseline</th><th>Δ nadir</th><th>Proposta</th></tr></thead>
             <tbody>{s.avaliacoes.map((a,i)=><tr key={`${a.data}-${i}`}><td>{a.data}</td><td>{a.somaMm}</td><td>{a.deltaBaselinePct}%</td><td>{a.deltaNadirPct}%</td><td>{a.categoria??"PENDENTE"} · {a.revisao}</td></tr>)}</tbody></table>
           <p>{s.pendencias.join("; ")}</p></section>)}
-        <h4>Resposta patológica documentada (pCR)</h4>
-        {atual.respostaTumoral.patologica.length?atual.respostaTumoral.patologica.map(p=><p key={p.fato.eventId}>{p.data??"Data não consta"}: {JSON.stringify(p.valor)} · fonte {p.fontes.map(f=>f.sourceId).join(", ")}</p>):<p>Não consta. Resposta radiológica não determina pCR.</p>}
+        <h4>Registros de resposta patológica (pCR)</h4>
+        {atual.respostaTumoral.patologica.length?atual.respostaTumoral.patologica.map(p=><p key={p.fato.eventId}>
+          {p.estado==='NEGADO'?'pCR negada':p.estado==='INCERTO'?'pCR incerta — A CONFERIR':'Registro de pCR'}
+          {p.conflito?' · CONFLITO entre registros — A CONFERIR':''}
+          {(p.qualificadores.negated===true||p.qualificadores.negado===true)?' · negação explícita na fonte':''}
+          {p.estado==='INCERTO'?' · confirmação médica pendente':''}
+          {' · '}{p.data??"Data não consta"}: {JSON.stringify(p.valor)} · fonte {p.fontes.map(f=>f.sourceId).join(", ")}
+        </p>):<p>Não consta. Resposta radiológica não determina pCR.</p>}
       </details>
       <details><summary>Histórico de remissão e recidiva</summary>
         {atual.estadosDoenca.length?<ul>{atual.estadosDoenca.map(e=><li key={e.fato.eventId}>{e.data} · {e.estado}{e.conflito?" · A CONFERIR: registros divergentes nesta data":""}

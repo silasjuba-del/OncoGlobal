@@ -6,6 +6,22 @@ import type { criarMotorF1 } from "../kernel/orquestracao/runtime.js";
 import { obterInvestigacao } from "./investigacao.js";
 import type { lerRecist } from './leituras.js';
 import { RegistroEstadoDoenca } from '../contracts/fase2/estadoDoenca.js';
+import { hashCanonico } from '../modules/hash.js';
+
+/** Mantém cada registro e seus qualificadores; discordância não elege uma resposta. */
+export function projetarRespostaPatologica(r:Retrato):RevisaoClinicaResposta['respostaTumoral']['patologica']{
+  const registros=r.fatos.filter(f=>f.campo==='pcr'&&f.fontes.length&&f.dados.valor!==undefined).map(f=>{
+    const qualificadores=Object.fromEntries(['negated','negado','evidence','requiresConfirmation']
+      .filter(k=>f.dados[k]!==undefined).map(k=>[k,f.dados[k]])) as RevisaoClinicaResposta['respostaTumoral']['patologica'][number]['qualificadores'];
+    const incerto=qualificadores.requiresConfirmation===true||(qualificadores.evidence!==undefined&&qualificadores.evidence!=='EXPLICIT');
+    const negado=qualificadores.negated===true||qualificadores.negado===true;
+    return {valor:f.dados.valor as RevisaoClinicaResposta['respostaTumoral']['patologica'][number]['valor'],data:f.tempoClinico,fato:f.ref,fontes:f.fontes,
+      qualificadores,estado:incerto?'INCERTO' as const:negado?'NEGADO' as const:'DOCUMENTADO' as const,conflito:false};
+  });
+  for(const p of registros)p.conflito=new Set(registros.filter(o=>o.data===p.data).map(o=>hashCanonico({valor:o.valor,
+    negado:o.qualificadores.negated===true||o.qualificadores.negado===true}))).size>1;
+  return registros;
+}
 
 export async function obterRevisaoClinica(motor:Pick<ReturnType<typeof criarMotorF1>,"retrato"|"consultar">,catalogo:CatalogoTumorPacks,
   contexto:RevisaoClinicaResposta["contexto"],packId?:string,recist?:()=>ReturnType<typeof lerRecist>):Promise<RevisaoClinicaResposta> {
@@ -44,7 +60,7 @@ export async function obterRevisaoClinica(motor:Pick<ReturnType<typeof criarMoto
     series:resposta?.series.map(s=>({eventId:s.eventId,episodioId:s.episodioId,tumorLotId:s.tumorLotId,
       avaliacoes:s.resultado?.pontos.flatMap(p=>p.avaliacao?[p.avaliacao]:[])??[],
       pendencias:s.resultado?[...s.resultado.pendencias]:["ESCOPO_OU_PROVENIENCIA_INVALIDA"]}))??[],
-    patologica:r.fatos.filter(f=>f.campo==="pcr"&&f.fontes.length&&f.dados.valor!==undefined).map(f=>({valor:f.dados.valor as never,data:f.tempoClinico,fato:f.ref,fontes:f.fontes})),
+    patologica:projetarRespostaPatologica(r),
     pendencias:resposta?.estado==="PARCIAL"?[]:["Série RECIST confirmada com medidas e fontes não disponível."]};
   return RevisaoClinicaResposta.parse({codigo:"REVISAO_CLINICA_CARREGADA",contexto,revisao:r.revisao,ficha,
     preQt:{estado:preQt.length?"PENDENTE":"AGUARDA_DECISAO_MEDICA",autorizaTratamento:false,pendencias:preQt},

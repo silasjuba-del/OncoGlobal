@@ -19,6 +19,17 @@ it("resposta tardia de outro paciente não entra na ficha atual",async()=>{
   tela.rerender(<RevisaoClinica porta={porta} contexto={{...contexto,patientId:"outro"}} versaoClinica={0}/>);
   await act(async()=>antigo(resposta));expect(screen.queryByText("Paciente antigo sintético")).toBeNull();
 });
+it('pCR negada ou incerta mostra seus qualificadores e conflitos na tela',async()=>{
+  const porta=criarPortaFalsa();
+  porta.revisaoClinica=vi.fn(async()=>({...resposta,respostaTumoral:{...resposta.respostaTumoral,patologica:[
+    {valor:'pCR',data:'2026-10-16',fato:{eventId:'negada',revisao:'1'},fontes:[],estado:'NEGADO' as const,conflito:true,qualificadores:{negated:true}},
+    {valor:'pCR',data:'2026-10-16',fato:{eventId:'incerta',revisao:'1'},fontes:[],estado:'INCERTO' as const,conflito:true,qualificadores:{evidence:'UNCERTAIN',requiresConfirmation:true}},
+  ]}}));
+  render(<RevisaoClinica porta={porta} contexto={contexto} versaoClinica={0}/>);
+  expect(await screen.findByText(/pCR negada/)).toBeTruthy();
+  expect(screen.getByText(/pCR incerta/).textContent).toContain('confirmação médica pendente');
+  expect(screen.getAllByText(/CONFLITO entre registros/)).toHaveLength(2);
+});
 it("métrica só conserva etapa e contagem; texto e paciente nunca são coletados",()=>{
   const tela=render(<div id="consulta-documentos"><button>Nome sintético reservado</button><textarea defaultValue="conteúdo clínico sintético"/></div>);
   const etapa=etapaDoClique(screen.getByRole("button"));expect(etapa).toBe("ENTRADA");
