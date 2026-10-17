@@ -18,9 +18,23 @@ async function ambiente(){
  const auth=sessoes.login('segredo-sintetico-123')!;const deps={db,sessoes,agora};
  const server=createServer(async(req,res)=>{let raw='';for await(const part of req)raw+=part;const token=String(req.headers.authorization??'').replace('Bearer ','');const result=rotearBiblioteca(deps,token,req.url!,JSON.parse(raw),sessoes.obter(token)??auth.sessao);res.writeHead(result?.status??404,{'Content-Type':'application/json'});res.end(JSON.stringify(result?.body??{}));});
  await new Promise<void>(resolve=>server.listen(0,'127.0.0.1',resolve));const base=`http://127.0.0.1:${(server.address() as AddressInfo).port}`;
- return {db,auth,async curar(body: Record<string, unknown>, token = auth.token) { const r = await fetch(base + '/biblioteca/curar', {method:'POST',headers:{authorization:`Bearer ${token}`,'Content-Type':'application/json'},body:JSON.stringify({expectedCuradoriaHash:hashCuradoriaPacote(db,String(body.pacoteId)),...body})}); return {status:r.status,body:await r.json() as Record<string,any>}; }, novaSessao:()=>sessoes.login('segredo-sintetico-123')!,relogio(valor:string){instante=valor;},async post(rota:string,body:unknown,token=auth.token){const r=await fetch(base+rota,{method:'POST',headers:{authorization:`Bearer ${token}`,'Content-Type':'application/json'},body:JSON.stringify(body)});return {status:r.status,body:await r.json() as Record<string,any>};},async close(){await new Promise<void>((resolve,reject)=>server.close(e=>e?reject(e):resolve()));db.close();}};
+ return {db,auth,async curar(body: Record<string, unknown>, token = auth.token) { const r = await fetch(base + '/biblioteca/curar', {method:'POST',headers:{authorization:`Bearer ${token}`,'Content-Type':'application/json'},body:JSON.stringify({expectedCuradoriaHash:hashCuradoriaPacote(db,String(body.pacoteId)),...body})}); return {status:r.status,body:await r.json() as Record<string,any>}; }, novaSessao:()=>sessoes.login('segredo-sintetico-123')!,relogio(valor:string){instante=valor;},async post(rota:string,body:unknown,token=auth.token){if(['/biblioteca/ativar','/biblioteca/rollback'].includes(rota)&&body&&typeof body==='object'&&!Object.hasOwn(body,'expectedAtivaHash')) { const atual=await fetch(base+'/biblioteca/estado',{method:'POST',headers:{authorization:`Bearer ${token}`,'Content-Type':'application/json'},body:'{}'}); const estado=await atual.json() as Record<string,any>;body={expectedAtiva:estado.ativa??null,expectedAtivaHash:estado.referencia?.hash??null,...body}; } const r=await fetch(base+rota,{method:'POST',headers:{authorization:`Bearer ${token}`,'Content-Type':'application/json'},body:JSON.stringify(body)});return {status:r.status,body:await r.json() as Record<string,any>};},async close(){await new Promise<void>((resolve,reject)=>server.close(e=>e?reject(e):resolve()));db.close();}};
 }
 describe('S3 biblioteca manual no HTTP real',()=>{
+ it('ativação de outra versão invalida a tela antiga e sua tentativa de substituir a biblioteca ativa',async()=>{
+  const a=await ambiente();try{
+   const p1=await a.post('/biblioteca/importar',pacote()),p2=await a.post('/biblioteca/importar',pacote('2.0.0'));
+   for(const p of [p1,p2])expect((await a.curar({pacoteId:p.body.pacoteId,itemId:'item',expectedHash:p.body.hash,estado:'CONSULTAVEL'})).status).toBe(200);
+   const tela=await a.post('/biblioteca/estado',{pacoteId:p1.body.pacoteId});
+   const pedido={pacoteId:p1.body.pacoteId,expectedHash:p1.body.hash,expectedCuradoriaHash:tela.body.curadoriaHash,
+     expectedAtiva:tela.body.ativa,expectedAtivaHash:tela.body.referencia?.hash??null};
+   const segunda=await a.post('/biblioteca/estado',{pacoteId:p2.body.pacoteId});
+   expect((await a.post('/biblioteca/ativar',{pacoteId:p2.body.pacoteId,expectedHash:p2.body.hash,expectedCuradoriaHash:segunda.body.curadoriaHash},a.novaSessao().token)).status).toBe(200);
+   expect(await a.post('/biblioteca/ativar',pedido)).toEqual({status:409,body:{codigo:'BIBLIOTECA_REVISAO_DIVERGENTE'}});
+   expect((await a.post('/biblioteca/estado',{})).body.ativa).toBe(p2.body.pacoteId);
+   expect((await a.post('/biblioteca/ativar',{...pedido,expectedAtivaHash:undefined})).status).toBe(400);
+  }finally{await a.close();}
+ });
  it('revisão antiga não restaura um item tornado obsoleto por outra sessão',async()=>{
   const a=await ambiente();try{
    const imp=await a.post('/biblioteca/importar',pacote());
