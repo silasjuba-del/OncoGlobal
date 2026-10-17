@@ -62,6 +62,7 @@ const valido = (n: number | null): n is number => n !== null && Number.isFinite(
 
 function calcular(item: PrescriptionItem, d: DadosCorporais): { dose: number | null; unidade: string; motivo: string | null; aviso?: string | null } {
   const std = item.standardDose;
+  if (item.sequenciamentoPendente) return { dose: null, unidade: item.unit, motivo: item.sequenciamentoPendente };
   if (item.resgateMtx) return { dose: null, unidade: item.unit,
     motivo: "Resgate MTX contínuo q6h: exige níveis, horário de início e plano individual de doses/vias; não gerar curso finito automaticamente" };
   switch (item.doseBasis) {
