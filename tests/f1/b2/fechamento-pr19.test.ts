@@ -72,6 +72,7 @@ it('fichas preservam os limites de ciclos já documentados nos packs',()=>{
  for(const [tumor,nome,ciclos] of casos){const f=fichas.find((x:any)=>x.tumor===tumor&&x.nome===nome);expect(f,`${tumor}: ${nome}`).toBeDefined();expect(f.ciclos).toBe(ciclos);expect(f.status).toBe('RASCUNHO');}
 });
 it('indução EP e cisplatina com RT têm teto do curso documentado, sem extrapolar fontes de mama',()=>{
+ const cemi=fichas.find((f:any)=>f.nome==='Cemiplimabe');expect(cemi.ciclos).toBe(35);expect(cemi.fonte).toContain('2 anos de calendário');
  expect(fichas.find((f:any)=>f.nome.startsWith('EP de indução')).ciclos).toBe(3);
  for(const f of fichas.filter((f:any)=>f.nome.startsWith('Cisplatina semanal + RxT')))expect(f.ciclos).toBe(6);
  const prostata=ler('corpus/fichas/prostata/carboplatina-paclitaxel-semanal__nao-especificado.json');

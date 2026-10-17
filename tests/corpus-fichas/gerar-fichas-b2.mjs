@@ -325,12 +325,12 @@ F({ tumor: VUL, nome: "Carboplatina + Paclitaxel 21/21 dias (vulva)", cenario: N
 
 // ===== CEC DE PELE (D-F1-34/49) =====
 const CEC = "CEC de pele (cutâneo)";
-F({ tumor: CEC, nome: "Cemiplimabe", cenario: "localmente avançado/metastático — inelegível a cirurgia/RT curativas", intervalo: 21, ciclos: null, semPremed: true,
+F({ tumor: CEC, nome: "Cemiplimabe", cenario: "localmente avançado/metastático — inelegível a cirurgia/RT curativas", intervalo: 21, ciclos: 35, semPremed: true,
   identidade: "CSCC metastático ou localmente avançado sem candidatura a cirurgia/RT curativas (eviQ 4151)",
   fontesItens: { Cemiplimabe: { sourceIds: ["EXT-CNV-001"] } },
   divergencias: ["estudos pivô: Migden NEJM 2018;379(4):341-351 e Lancet Oncol 2020;21(2):294-305 (o material local cita o fascículo 7 do Lancet — corrigido)"],
   lacunas: ["dispensação/SUS: verificar"],
-  fonteDecisao: `D-F1-34 e D-F1-49. Protocolo operacional: ${ref(["EXT-CNV-001"])} (página viva v5, 02/09/2026; PDF capturado v1) + BC SMAVCEM (rev 08/2025) + DailyMed LIBTAYO SPL (setid 4347ae1f…). Sem pré-medicação de rotina (eviQ/BC).`,
+  fonteDecisao: `D-F1-34 e D-F1-49. Protocolo operacional: ${ref(["EXT-CNV-001"])} (página viva v5, 02/09/2026; PDF capturado v1) + BC SMAVCEM (rev 08/2025) + DailyMed LIBTAYO SPL (setid 4347ae1f…). Sem pré-medicação de rotina (eviQ/BC). Limite operacional: até 35 administrações q21d (D0 a D714), derivado do teto de 2 anos do Treatment schedule eviQ 4151, reconferido 17/10/2026; não é contagem literal do estudo. Interromper antes por progressão, toxicidade ou 2 anos de calendário; atrasos exigem reavaliar o total, não estender o prazo.`,
   itens: [
     qt("Cemiplimabe", 350, "mg", D(1), { dil: "SF 0,9%", vol: 50, t: "30 min", obs: "350 mg IV q21d em 50 mL SF 0,9% em 30 min; filtro in-line 0,2–5 µm; estabilidade ≤8 h TA ou ≤10 d 2–8 °C; até progressão/toxicidade (até 2 anos)." }),
     it("Soro fisiológico 0,9% 50 mL (flush pós-infusão)", "POS_QT", 1, "fr", "EV", D(1), { vol: 50, obs: "eviQ 4151: flush de 50 mL de SF 0,9% ao término." }),
