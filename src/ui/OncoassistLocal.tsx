@@ -123,7 +123,10 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp }: {
   }
 
   return <main aria-label="OncoAssist local" className="oncoassist-local" onClickCapture={event=>{
-    const etapa=etapaDoClique(event.target);if(etapa)setMetricas(atuais=>contarClique(atuais,etapa));
+    // Deixa o evento do controle concluir antes de renderizar a telemetria local.
+    // Atualização síncrona no capture restaura checked antes do onChange no navegador.
+    const etapa=etapaDoClique(event.target),atual=geracao.current;
+    if(etapa)setTimeout(()=>{if(atual===geracao.current)setMetricas(atuais=>contarClique(atuais,etapa));},0);
   }}>
     <header className="consulta-appbar"><div><h1>OncoAssist local</h1>
       <p>Documentos do servidor local. Sugestões aguardam revisão médica.</p></div>

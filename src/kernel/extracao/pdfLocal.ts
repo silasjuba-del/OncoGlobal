@@ -20,9 +20,9 @@ export async function converterPdfLocal(entrada: EntradaLeitura, opcoes: OpcoesP
   try {
     const doc = await tarefa.promise;
     documento.totalPaginas = doc.numPages;
+    documento.paginasPendentes = Array.from({ length: doc.numPages }, (_, i) => i + 1);
     // Limite verificado antes da extração, sem primeira varredura ilimitada.
     if (doc.numPages > 40) return pendente("PDF_LIMITE_40_PAGINAS_REVISAR_ORIGINAL");
-    documento.paginasPendentes = Array.from({ length: doc.numPages }, (_, i) => i + 1);
     for (let n = 1; n <= doc.numPages; n++) {
       if (opcoes.signal?.aborted) return pendente("PDF_LEITURA_CANCELADA");
       try {

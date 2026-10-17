@@ -198,7 +198,7 @@ it("CROSS 50 em dose de protocolo é falso positivo PHI; conteúdo pessoal adici
     JSON.stringify(original));
   exportarBiblioteca(f.root, f.out);
   expect(validarPacoteConsulta(f.out)).toEqual({ arquivos: 1, estado: "RASCUNHO", alerta: false });
-  
+
   const comPII = fixture();
   rmSync(join(comPII.root, "corpus/1-exames"), { recursive: true, force: true });
   mkdirSync(join(comPII.root, "corpus/fichas/esofago"), { recursive: true });

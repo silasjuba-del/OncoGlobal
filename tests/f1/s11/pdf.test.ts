@@ -2,6 +2,17 @@ import { describe, expect, it } from "vitest";
 import { converterPdfLocal } from "../../../src/kernel/extracao/pdfLocal.js";
 import type { ConfigOcrLocal } from "../../../src/leitura/ocr-local.js";
 describe("S11 kernel PDF local", () => {
+  it("PDF com mais de 40 páginas preserva toda a cobertura pendente sem iniciar extração", async () => {
+    const paginas = Array.from({length:41},(_,i)=>`${i+3} 0 R`).join(' ');
+    const objetos = ['<< /Type /Catalog /Pages 2 0 R >>',`<< /Type /Pages /Kids [${paginas}] /Count 41 >>`,
+      ...Array.from({length:41},()=> '<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << >> >>')];
+    let pdf='%PDF-1.4\n'; const offsets:number[]=[];
+    objetos.forEach((o,i)=>{offsets.push(pdf.length);pdf+=`${i+1} 0 obj\n${o}\nendobj\n`;});
+    const xref=pdf.length;pdf+=`xref\n0 44\n0000000000 65535 f \n${offsets.map(o=>`${String(o).padStart(10,'0')} 00000 n \n`).join('')}trailer\n<< /Size 44 /Root 1 0 R >>\nstartxref\n${xref}\n%%EOF`;
+    const r=await converterPdfLocal({id:'grande',tipo:'PDF_DIGITAL',conteudo:new Uint8Array(Buffer.from(pdf,'latin1')),recebidoEm:'2026-10-17T12:00:00Z'});
+    expect(r).toMatchObject({status:'PENDENTE',motivo:'PDF_LIMITE_40_PAGINAS_REVISAR_ORIGINAL',documento:{totalPaginas:41,paginas:[]}});
+    expect(r.documento.paginasPendentes).toEqual(Array.from({length:41},(_,i)=>i+1));
+  });
   it("arquivo ilegível conserva hash original e fica pendente sem pedir nova foto", async () => {
     const r = await converterPdfLocal({ id: "pdf", tipo: "PDF_DIGITAL", conteudo: new Uint8Array([1, 2, 3]), recebidoEm: "2026-10-12T12:00:00Z" });
     expect(r.status).toBe("PENDENTE"); expect(r.documento.hash).toMatch(/^[a-f0-9]{64}$/);
