@@ -46,6 +46,11 @@ describe("PR19: representação e execução seguras das fichas B2", () => {
     expect(calcularDosePorBase({basis:"MCG_KG",mcgKg:5,pesoKg:null})).toMatchObject({estado:"PENDENTE",dose:null,unidade:"µg",doseMg:null});
     const legado = { ...t, itens: [{ ...t.itens.find((i: any) => i.drug === "Filgrastim")!, doseBasis: "MG_KG" as const }] };
     expect(calcular(legado).itens[0]!.estado).toBe("PENDENTE");
+    for (const unit of ['mg/kg', 'mg', 'g/kg']) {
+      const incoerente = {...t, itens: [{...t.itens.find(i => i.drug === 'Filgrastim')!, unit}]};
+      const r = calcular(incoerente).itens[0]!;
+      expect(r.estado).toBe('PENDENTE'); expect(r.item.calculatedDose).toBeNull(); expect(r.item.prescribedDose).toBeNull();
+    }
   });
   it("tetos declarados são aplicados e o SafetyEngine recusa dose acima deles", () => {
     for (const t of fichas) for (const i of calcular(t).itens.filter(i => i.item.doseMaximaMg !== undefined && !i.item.sequenciamentoPendente)) {

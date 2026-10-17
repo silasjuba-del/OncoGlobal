@@ -74,6 +74,8 @@ function calcular(item: PrescriptionItem, d: DadosCorporais): { dose: number | n
       if (!valido(d.pesoKg)) return { dose: null, unidade: "mg", motivo: "mg/kg sem peso" };
       return { dose: arredondaMeioParaCima(std * d.pesoKg), unidade: "mg", motivo: null };
     case "MCG_KG":
+      if (!/^(?:µg|μg|mcg|ug)(?:\/kg)?$/i.test(item.unit.trim()))
+        return { dose: null, unidade: item.unit, motivo: "unidade incompatível com base MCG_KG; conferir microgramas por kg" };
       if (std === null || !valido(d.pesoKg)) return { dose: null, unidade: "µg", motivo: "µg/kg sem dose padrão ou peso" };
       return { dose: arredondaMeioParaCima(std * d.pesoKg), unidade: "µg", motivo: null };
     case "MG_M2":
