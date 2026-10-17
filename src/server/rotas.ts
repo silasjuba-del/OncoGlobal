@@ -37,6 +37,7 @@ import { parserLinha } from "../rules/prescricao/parserLinha.js";
 import { classificarDocumento } from "../rules/prescricao/classificarDocumento.js";
 import { instanciarProtocolo } from "../rules/prescricao/instanciarProtocolo.js";
 import { aplicarAjuste } from "../rules/prescricao/aplicarAjuste.js";
+import { baseAjusteAnterior } from './f0c/baseAjusteAnterior.js';
 import { rotearItemReceita } from "../rules/prescricao/receituarioEspecial.js";
 import { lerConfiguracaoServico, NUMERO_CAIXA_RECEITUARIO_ESPECIAL } from "../contracts/configServico.js";
 import { dataCivilDoServico } from "../kernel/gateway/tempo.js";
@@ -457,15 +458,18 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
       let origem: {templateId:string;templateVersao:string;templateHash:string;rascunhoOrigemId:string}|null=null;
       if(parsed.data.rascunhoOrigemId){
         const draft=lerDraft(deps.db,parsed.data.rascunhoOrigemId),ctxOrigem=contextoDraft(draft?.payload);
-        const payload=draft?.payload as {kind?:unknown;template?:unknown;contexto?:{patientId?:string};instanciacao?:{ok?:boolean;itens?:{estado:string;item:unknown;doseAnteriorPrescrita?:number|null}[]}}|undefined;
+        const payload=draft?.payload as {kind?:unknown;template?:unknown;revisaoFatos?:string|null;contexto?:{patientId?:string};instanciacao?:{ok?:boolean;pendentes?:number;itens?:{estado:string;item:unknown;doseAnteriorPrescrita?:number|null}[]}}|undefined;
         if(!draft||draft.patientId!==ctx.patientId||!ctxOrigem||payload?.contexto?.patientId!==ctx.patientId||ctxOrigem.encounterId!==ctx.encounterId
           ||ctxOrigem.tumorLotId!==(ctx.tumorLotId??null)||payload?.kind!=="PRESCRICAO_RASCUNHO"||payload.instanciacao?.ok!==true)
           return reply(409,"ORIGEM_TEMPLATE_INVALIDA");
         const t=ProtocolTemplate.safeParse(payload.template);
         if(!t.success||t.data.status!=="CONFERIDA_MEDICO")return reply(409,"ORIGEM_TEMPLATE_INVALIDA");
+        if(payload.revisaoFatos!==r.revisao)return reply(409,'ORIGEM_TEMPLATE_CONTEXTO_DESATUALIZADO');
         const candidatos=deps.corpus?.templatesProtocolo.filter(x=>x.templateId===t.data.templateId&&x.versao===t.data.versao&&x.hash===t.data.hash)??[];
         if(candidatos.length!==1||hashConteudoExibido(candidatos[0])!==hashConteudoExibido(t.data))return reply(409,"ORIGEM_TEMPLATE_DIVERGENTE");
-        const prontos=payload.instanciacao?.itens?.filter(i=>i.estado==="PRONTO")??[];
+        if(payload.instanciacao.pendentes!==0||payload.instanciacao.itens?.length!==t.data.itens.length
+          ||payload.instanciacao.itens.some(i=>i.estado!=='PRONTO'))return reply(409,'ORIGEM_TEMPLATE_PENDENTE');
+        const prontos=payload.instanciacao.itens;
         const originais=prontos.map(i=>PrescriptionItem.safeParse(i.item));
         if(originais.length!==parsed.data.itens.length||originais.some(i=>!i.success))return reply(409,"ORIGEM_TEMPLATE_ITENS_DIVERGENTES");
         const parteFixa=(item:PrescriptionItem)=>{
@@ -1030,8 +1034,9 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
         const dadosCorporais="codigo" in consultaCorporal
           ? { pesoKg:null,alturaCm:null,bsaM2:null,clcr:null,medidoEm:null }
           : consultaCorporal.avaliacaoClinica.dadosCorporais;
+        const {itens:basesAnteriores,...provenienciaBaseAnterior}=baseAjusteAnterior(listarEventos(deps.db,contexto.patientId),contexto,template,deps.agora());
         const instanciacao = hoje.estado === "OK"
-          ? instanciarProtocolo(template, dadosCorporais)
+          ? instanciarProtocolo(template, dadosCorporais,basesAnteriores)
           : { ok: false as const, recusa: { codigo: "DADOS_CORPORAIS_PENDENTES", motivo: hoje.codigo } };
         const itens = instanciacao.ok ? instanciacao.itens.map((item) => item.item) : [];
         const seguranca = { resultado: "NOT_EVALUABLE" as const,
@@ -1041,6 +1046,8 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
         const saved = salvarDraft(deps.db, { draftId: randomUUID(), patientId: contexto.patientId,
           sourceId: "selecao-local-de-prescricao", rawRef: "proposta-prescricao-local",
           payload: { kind: "PRESCRICAO_RASCUNHO", contexto, template, instanciacao, seguranca,
+            revisaoFatos:deps.motorF1?.retrato({...contexto,tumorLotId:contexto.tumorLotId??null}).revisao??null,
+            baseAjusteAnterior:provenienciaBaseAnterior,
             status: "RASCUNHO", assinada: false },
           diagnostics: [template.status === "RASCUNHO" ? "TEMPLATE_NAO_CONFERIDO" : "REVISAO_MEDICA_OBRIGATORIA",
             "SEGURANCA_NAO_AVALIAVEL"],

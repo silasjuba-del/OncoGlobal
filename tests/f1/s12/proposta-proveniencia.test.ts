@@ -42,10 +42,7 @@ it("proposta persiste a origem validada e recusa contexto ou template adulterado
     ajustados[0].prescribedDose=Math.floor(ajustados[0].calculatedDose*0.8+0.5);
     ajustados[0].adjustmentPercent=-20;ajustados[0].adjustmentReason='Ajuste médico sintético de teste';
     expect((await post('/consulta/prescricao/propor',{...pedido,id:'ajuste-sem-base',operationId:'op-ajuste-sem-base',itens:ajustados})).status).toBe(409);
-    const payloadAjuste=structuredClone(original.payload) as any;
-    payloadAjuste.instanciacao.itens.find((i:any)=>i.estado==='PRONTO').doseAnteriorPrescrita=itens[0].calculatedDose;
-    salvarDraft(demo.app.db,{...original,draftId:'origem-ajuste-explicito',payload:payloadAjuste});
-    expect((await post('/consulta/prescricao/propor',{...pedido,id:'ajuste-explicito',operationId:'op-ajuste-explicito',rascunhoOrigemId:'origem-ajuste-explicito',itens:ajustados})).status).toBe(201);
+    // Sucesso do ajuste é provado pelo fluxo HTTP e administração confirmada no teste base-dose-http.
     for(const ataque of ['paciente','hash','contexto'] as const){
       const payload=structuredClone(original.payload) as any;
       if(ataque==='hash')payload.template.hash='0'.repeat(64);

@@ -36,7 +36,8 @@ export interface ItemInstanciado {
   aviso: string | null;
   /** unidade da dose padrão no template (ex.: "mg/m²"); item.unit passa a ser a unidade calculada ("mg") */
   unidadePadrao: string;
-  /** prescribedDose do mesmo item no ciclo anterior (base para os botões −20/−30/−40); null se não houve */
+  /** Nome legado da base anterior. No HTTP, K-06 usa quantidade efetivamente administrada,
+   * com proveniência no draft; não usa a dose apenas planejada. null quando a base não é comprovada. */
   doseAnteriorPrescrita: number | null;
   medidoEm: string | null;
 }
