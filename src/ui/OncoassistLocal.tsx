@@ -4,6 +4,8 @@ import { TumorLot } from '../contracts/clinico.js';
 import { criarPortaHttp, type OpcoesHttp } from "./api/http.js";
 import { criarChaves } from "./api/chaves.js";
 import type { PedidoBundle, PortaConsulta } from "./api/porta.js";
+import {ErroPorta} from './api/porta.js';
+import {LotesPacienteResposta} from '../contracts/api/lotes.js';
 import { PainelOncoassist } from "./consulta/PainelOncoassist.js";
 import { ReconciliarMedicamentos } from "./consulta/ReconciliarMedicamentos.js";
 import { SinteseProposta } from "./consulta/SinteseProposta.js";
@@ -93,9 +95,15 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp }: {
           setContexto({patientId:consulta.data.patientId,encounterId:consulta.data.encounterId,tumorLotId:consulta.data.tumorLotId}); return;
         }
       } catch { /* An active appointment can start a new encounter without prior clinical events. */ }
+      if(atual!==geracao.current)return;
       const agendaEntry = entrada;
       if (!agendaEntry?.encounterId || !porta.selecionarContexto) {
         setMensagem("Consulta local indisponível para este paciente."); return;
+      }
+      if(porta.lotesPaciente){
+        const resposta=await porta.lotesPaciente(patientId);if(atual!==geracao.current)return;
+        const lista=LotesPacienteResposta.parse(resposta);if(lista.patientId!==patientId)throw Error('LOTES_FORA_DO_PACIENTE');
+        setLotes(lista.lotes);
       }
       await porta.selecionarContexto({ patientId, encounterId: agendaEntry.encounterId, tumorLotId: null });
       if (atual !== geracao.current) return;
@@ -111,7 +119,15 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp }: {
     if(ocupado||!entrada||tumorLotId&&!lotes.some(l=>l.tumorLotId===tumorLotId&&l.patientId===entrada.patientId))return;
     const atual=++geracao.current;setContexto(null);setOcupado(true);setMensagem("");
     try{
-      const r=consultaSchema.safeParse(await porta.carregarConsulta(entrada.patientId,tumorLotId||null,entrada.encounterId));
+      let carregada:unknown;
+      try{carregada=await porta.carregarConsulta(entrada.patientId,tumorLotId||null,entrada.encounterId);}
+      catch(erro){
+        if(atual!==geracao.current)return;
+        if(!(erro instanceof ErroPorta)||erro.codigo!=='CONSULTA_NAO_ENCONTRADA'||!porta.selecionarContexto)throw erro;
+        const novo={patientId:entrada.patientId,encounterId:entrada.encounterId,tumorLotId:tumorLotId||null};
+        await porta.selecionarContexto(novo);if(atual!==geracao.current)return;setContexto(novo);return;
+      }
+      const r=consultaSchema.safeParse(carregada);
       if(atual!==geracao.current)return;
       if(!r.success||r.data.patientId!==entrada.patientId||r.data.encounterId!==entrada.encounterId||r.data.tumorLotId!==(tumorLotId||null)){
         setMensagem("Não foi possível confirmar o lote desta consulta.");return;

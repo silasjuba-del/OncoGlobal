@@ -1,4 +1,5 @@
 import type { InvestigacaoConsultaVisao } from './investigacao.js';
+import type { LotesPacienteResposta } from './lotes.js';
 import type { RevisaoClinicaResposta } from '../fase2/revisaoClinica.js';
 import type { PedidoEstadoDoenca,EstadoDoencaPreparado,ConfirmacaoEstadoDoenca } from '../fase2/estadoDoenca.js';
 import type { DutosClinicaVisao } from './dutos.js';
@@ -295,6 +296,7 @@ export interface ChatSetorVisao {
 }
 
 export interface PortaConsulta {
+  lotesPaciente?(patientId:string,signal?:AbortSignal):Promise<LotesPacienteResposta>;
   /** Biblioteca pública autenticada com a mesma sessão desta porta, quando suportada pelo servidor. */
   biblioteca?: ApiBiblioteca;
   reconciliarMedicamentos?(pedido: {patientId:string;encounterId:string;tumorLotId:string|null;operationId:string;medicamentos:string[];listaAtualCompleta:true}, signal?:AbortSignal):Promise<{codigo:"GRAVADA"|"REPLAY";eventId:string}>;

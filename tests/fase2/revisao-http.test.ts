@@ -8,6 +8,10 @@ it("HTTP real carrega packs legados consultáveis e ficha ausente sem promover r
   a=await abrirAmbiente(criarDiretorio());cadastrarPaciente(a);
   const ctx={patientId:PACIENTE,encounterId:ENCONTRO,tumorLotId:null};
   await a.request("/consulta/carregar",ctx);const antes=a.eventos().length;
+  const lotes=await a.request('/consulta/lotes',{patientId:PACIENTE});
+  expect(lotes.status).toBe(200);expect(lotes.data.patientId).toBe(PACIENTE);
+  expect(lotes.data.lotes.every((l:any)=>l.patientId===PACIENTE)).toBe(true);
+  expect((await a.request('/consulta/lotes',{patientId:'paciente-ausente'})).status).toBe(404);
   const r=await a.request("/consulta/revisao-clinica",ctx);
   expect(r.status,JSON.stringify(r.data)).toBe(200);
   const parsed=RevisaoClinicaResposta.parse(r.data);expect(parsed.packs.length).toBeGreaterThan(0);

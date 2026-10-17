@@ -261,6 +261,12 @@ export function criarPortaHttp(opcoes: OpcoesHttp): PortaConsulta {
     },
 
     // [SERVIDOR_PENDENTE]
+    async lotesPaciente(patientId,signal) {
+      const {status,json}=await enviar('/consulta/lotes',LotesPacientePedido.parse({patientId}),true,signal);
+      const parsed=LotesPacienteResposta.safeParse(json);
+      if(status!==200||!parsed.success||parsed.data.patientId!==patientId)throw new ErroPorta(codigoDe(json,'LOTES_INVALIDOS'));
+      return parsed.data;
+    },
     async carregarConsulta(patientId, tumorLotId, encounterId) {
       if (!encounterId) throw new ErroPorta("ENCONTRO_EXPLICITO_OBRIGATORIO");
       return leitura("/consulta/carregar", { patientId, encounterId, ...(tumorLotId === undefined ? {} : { tumorLotId }) }, ConsultaResposta);
@@ -308,3 +314,4 @@ export function criarPortaHttp(opcoes: OpcoesHttp): PortaConsulta {
     },
   };
 }
+import {LotesPacientePedido,LotesPacienteResposta} from '../../contracts/api/lotes.js';

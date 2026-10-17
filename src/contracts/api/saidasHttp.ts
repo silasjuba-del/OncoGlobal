@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { RevisaoClinicaResposta } from '../fase2/revisaoClinica.js';
+import { LotesPacienteResposta } from './lotes.js';
 import { EstadoDoencaPreparado } from '../fase2/estadoDoenca.js';
 import { Id, Instante } from "../base.js";
 import { ClinicalFact, ReviewException } from "../w10/extracao.js";
@@ -25,6 +26,7 @@ const Extracao = z.object({ draftId: Id, revision: Count, linkedPatientId: Id.nu
 
 /** Mesmos contratos no servidor e no cliente. Valida sem descartar campos adicionais da resposta legada. */
 export const SaidasHttp: Readonly<Record<string, z.ZodType>> = {
+  lotesPaciente:LotesPacienteResposta,
   login: z.object({ token: z.string().min(1), expiraEm: Instante }),
   carregarConsulta: ConsultaResposta, agenda: AgendaResposta, apac: ApacResposta, canal: CanalResposta,
   salao: SalaoResposta, salvarTriagemSalao: SalaoResposta, liberarSalao: SalaoResposta,

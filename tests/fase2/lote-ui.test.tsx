@@ -3,7 +3,28 @@ import { cleanup,fireEvent,render,screen,waitFor } from '@testing-library/react'
 import { afterEach,expect,it,vi } from 'vitest';
 import { OncoassistLocal } from '../../src/ui/OncoassistLocal.js';
 import { criarPortaFalsa,ID } from '../../src/ui/api/fake.js';
+import {ErroPorta} from '../../src/ui/api/porta.js';
 afterEach(cleanup);
+it('novo encontro sem consulta anterior carrega os lotes do paciente e permite seleção explícita',async()=>{
+ const porta=criarPortaFalsa(),base=await porta.carregarConsulta(ID.verde,'lot-verde','en-verde'),encontro='novo-encontro';
+ porta.login=vi.fn(async()=>({ok:true,expiraEm:null}));
+ porta.agendaDoDia=vi.fn(async()=>({hoje:'2026-10-16',itens:[{patientId:base.patientId,encounterId:encontro,nome:'Paciente Sintético',horario:'10:00',prontuario:'sintetico',semaforo:'PENDENTE' as const,pendentes:0,preConsultaPronta:false,contatosDesdeUltima:0,temE1:false}]}));
+ porta.carregarConsulta=vi.fn(async()=>{throw new ErroPorta('CONSULTA_NAO_ENCONTRADA');});
+ porta.lotesPaciente=vi.fn(async (patientId:string)=>({codigo:'LOTES_CARREGADOS' as const,patientId,lotes:[...base.cabecalho.lotes]}));
+ porta.selecionarContexto=vi.fn(async()=>undefined);
+ porta.oncoassistFontes=vi.fn(async()=>({fontes:[]}));porta.carregarFonteRevisao=vi.fn(async()=>{throw Error('SEM_FONTE_SELECIONADA');});
+ const fabrica=()=>porta;render(<OncoassistLocal fabricaPorta={fabrica}/>);
+ fireEvent.change(screen.getByLabelText('Senha do servidor'),{target:{value:'senha-sintetica-novo-encontro'}});fireEvent.click(screen.getByRole('button',{name:'Entrar'}));
+ fireEvent.change(await screen.findByLabelText('Paciente da agenda'),{target:{value:encontro}});
+ const seletor=await screen.findByLabelText('Lote tumoral');
+ await waitFor(()=>expect((seletor as HTMLSelectElement).disabled).toBe(false));
+ const lote=base.cabecalho.lotes.find(l=>l.patientId===base.patientId)!;
+ fireEvent.change(seletor,{target:{value:lote.tumorLotId}});
+ await waitFor(()=>expect((screen.getByLabelText('Lote tumoral') as HTMLSelectElement).value).toBe(lote.tumorLotId));
+ expect(porta.lotesPaciente).toHaveBeenCalledWith(base.patientId);
+ expect(porta.selecionarContexto).toHaveBeenLastCalledWith({patientId:base.patientId,encounterId:encontro,tumorLotId:lote.tumorLotId});
+ await waitFor(()=>expect(porta.oncoassistFontes).toHaveBeenCalledWith(expect.objectContaining({encounterId:encontro,tumorLotId:lote.tumorLotId}),expect.any(AbortSignal)));
+});
 it('lote exige escolha explícita e muda o contexto usado nas fontes',async()=>{
   const porta=criarPortaFalsa(),base=await porta.carregarConsulta(ID.verde,'lot-verde','en-verde');
   porta.login=vi.fn(async()=>({ok:true,expiraEm:null}));

@@ -1,4 +1,5 @@
 import { PrescriptionItem, ProtocolTemplate } from "../contracts/w10/prescricao.js";
+import {LotesPacientePedido,LotesPacienteResposta} from '../contracts/api/lotes.js';
 import { respostaHttpValida } from "../contracts/api/saidasHttp.js";
 import { projetarDutos } from "./projecaoDutos.js";
 import { rotearBiblioteca } from "./biblioteca.js";
@@ -358,6 +359,7 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
         : req.url === "/consulta/llm/documento-original" ? "documentoOriginalLlm"
         : req.url === "/consulta/investigacao" ? "investigacao"
         : req.url === "/consulta/revisao-clinica" ? "revisaoClinica"
+        : req.url === "/consulta/lotes" ? "lotesPaciente"
         : req.url === "/consulta/estado-doenca/preparar" ? "prepararEstadoDoenca"
         : req.url === "/consulta/estado-doenca/confirmar" ? "confirmarEstadoDoenca"
         : req.url === "/consulta/llm/extrair" ? "extracaoLlm"
@@ -447,6 +449,12 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
     const biblioteca=rotearBiblioteca(deps,token,rota,raw,sessao);if(biblioteca)return reply(biblioteca.status,String((biblioteca.body as {codigo?:string}).codigo??"BIBLIOTECA_CONSULTADA"),biblioteca.body);
     const duto=rotearDutos(deps,token,rota,raw,sessao);if(duto)return reply(duto.status,String((duto.body as {codigo?:string}).codigo??"DUTO_PROCESSADO"),duto.body);
     if(rota === "upload"){const result=await processarUploadLocal(deps,token,sessao,raw);return reply(result.status,String(result.body.codigo),result.body);}
+    if(rota === 'lotesPaciente'){
+      const p=LotesPacientePedido.safeParse(raw);if(!p.success)return reply(400,'PAYLOAD_INVALIDO');
+      if(!lerPaciente(deps.db,p.data.patientId))return reply(404,'PACIENTE_NAO_ENCONTRADO');
+      const r=LotesPacienteResposta.parse({codigo:'LOTES_CARREGADOS',patientId:p.data.patientId,lotes:lerLotes(deps.db,p.data.patientId)});
+      return reply(200,r.codigo,r);
+    }
     if(rota === "proporPrescricao"){
       const parsed=z.object({patientId:Id,encounterId:Id,tumorLotId:Id.nullable(),id:Id,operationId:Id,expectedRevision:z.number().int().nonnegative().nullable(),rascunhoOrigemId:Id.optional(),itens:z.array(PrescriptionItem).min(1)}).strict().safeParse(raw);
       if(!parsed.success)return reply(400,"PAYLOAD_INVALIDO");
