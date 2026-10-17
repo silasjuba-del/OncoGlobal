@@ -18,7 +18,7 @@ const sha256Biblioteca = (bytes) => createHash("sha256").update(bytes, "utf8").d
 const LIMITE_TEXTO_ITEM = 200_000; // ItemBiblioteca@1: texto max 200000
 const LIMITE_BYTES_ITEM = 1_000_000; // importador interno: ITEM_EXCESSIVO
 const LIMITE_BYTES_CONTEUDOS = 8_000_000; // importador HTTP: PACOTE_EXCESSIVO
-const LIMITE_BODY_ROTEADOR = 1_000_000; // rotas.ts body(): unidades de string do corpo
+const LIMITE_BODY_ROTEADOR = 24_000_000; // /biblioteca/importar: envelope JSON, limite específico da rota em bytes
 const LICENCA_DECLARATIVA = "Uso interno do serviço OncoGlobal; sem licença de redistribuição verificada";
 const PASTA = dirname(fileURLToPath(import.meta.url));
 const LEIA_ME = [
@@ -205,7 +205,7 @@ export async function converterBiblioteca(diretorioSnapshot, destino, opcoes = {
 
     const manifesto = montarManifesto();
     const httpPayload = { manifesto, arquivos: Object.fromEntries(incluidos.map(({ arquivo }) => [arquivo, { texto: readFileSync(join(staging, "pacote", arquivo), "utf8") }])) };
-    const httpBytes = JSON.stringify(httpPayload).length;
+    const httpBytes = Buffer.byteLength(JSON.stringify(httpPayload), "utf8");
     const conteudosBytes = incluidos.reduce((n, { item }) => n + Buffer.byteLength(JSON.stringify(item), "utf8"), 0);
     const httpDentro = httpBytes <= LIMITE_BODY_ROTEADOR && conteudosBytes <= LIMITE_BYTES_CONTEUDOS;
     if (httpDentro) writeFileSync(join(staging, "pacote-http.json"), JSON.stringify(httpPayload) + "\n");
