@@ -7,6 +7,7 @@ import { EstadoOncoassist, FontesOncoassist, RespostaOncoassist } from "./oncoas
 import { FonteRevisao, ReconciliacaoProposta, RevisaoPreparada } from "./revisaoExtracao.js";
 import { AcaoResposta, AgendaResposta, ApacResposta, BundleResposta, CanalResposta, ChatResposta, ConfirmacaoResposta, ConsultaResposta, FlashPreparadaResposta, FlashRascunhoResposta, SalaoResposta } from "./respostas.js";
 import { z } from "zod";
+import {DitadoResposta} from '../../contracts/fase2/ditado.js';
 import { ResultadoInstrumentoSchema } from "../../contracts/f0c/resultadoInstrumento.js";
 import { criarApiBiblioteca } from "./biblioteca.js";
 import {
@@ -65,6 +66,7 @@ export function criarPortaHttp(opcoes: OpcoesHttp): PortaConsulta {
       opcoes.onSessaoExpirada();
       throw new ErroPorta("SESSAO_EXPIRADA");
     }
+    if (resposta.status === 404 && codigoDe(json,'') === 'CONSULTA_NAO_ENCONTRADA') throw new ErroPorta('CONSULTA_NAO_ENCONTRADA');
     if (resposta.status === 404 || resposta.status === 501) throw new ErroPorta("SERVIDOR_PENDENTE");
     return { status: resposta.status, json };
   }
@@ -78,6 +80,11 @@ export function criarPortaHttp(opcoes: OpcoesHttp): PortaConsulta {
   }
 
   return {
+    async ditado(pedido,signal){
+      const {status,json}=await enviar('/consulta/ditado',pedido,true,signal),p=DitadoResposta.safeParse(json);
+      if(status!==200||!p.success)throw new ErroPorta(codigoDe(json,'DITADO_INDISPONIVEL'));
+      return p.data;
+    },
     biblioteca: criarApiBiblioteca((rota, corpo, signal) => enviar(rota, corpo, true, signal)),
     async reconciliarMedicamentos(pedido, signal) {
       const {status,json}=await enviar("/consulta/medicamentos/reconciliar",pedido,true,signal);

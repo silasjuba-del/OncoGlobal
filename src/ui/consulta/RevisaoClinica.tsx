@@ -3,15 +3,16 @@ import { RevisaoClinicaResposta } from "../../contracts/fase2/revisaoClinica.js"
 import { BLOCOS_TUMOR_PACK } from "../../contracts/fase2/tumorPack.js";
 import type { PedidoBundle, PortaConsulta } from "../api/porta.js";
 import { EstadoDoenca } from './EstadoDoenca.js';
+import { LoteTumoralCompleto } from './LoteTumoralCompleto.js';
 const ROTULOS_BLOCOS={identidade:"Identidade do tumor",diagnostico:"Diagnóstico",estadiamento:"Estadiamento",biomarcadores:"Biomarcadores",
   c1_lacunas:"Lacunas da primeira consulta",pre_qt:"Pré-QT",tratamento:"Tratamento",toxicidades:"Toxicidades e interações",resposta:"Critérios de resposta",
   seguimento:"Seguimento",documentos:"Documentos e orientações",fontes:"Fontes"};
 
 export function RevisaoClinica({porta,contexto,versaoClinica,aoRegistrar=()=>{}}:{porta:PortaConsulta;contexto:PedidoBundle;versaoClinica:number;aoRegistrar?:()=>void}){
-  const [dados,setDados]=useState<RevisaoClinicaResposta|null>(null),[packId,setPackId]=useState("");
+  const [dados,setDados]=useState<RevisaoClinicaResposta|null>(null),[selecao,setSelecao]=useState({chave:'',id:''});
   const [erro,setErro]=useState(""),[ocupado,setOcupado]=useState(false),geracao=useRef(0);
   const chave=JSON.stringify([contexto.patientId,contexto.encounterId,contexto.tumorLotId]);
-  useEffect(()=>{setPackId("");},[chave]);
+  const packId=selecao.chave===chave?selecao.id:'';
   useEffect(()=>{
     const atual=++geracao.current,abort=new AbortController();setDados(null);setErro("");
     if(!porta.revisaoClinica){setErro("Revisão integrada ainda indisponível.");return;}
@@ -56,13 +57,13 @@ export function RevisaoClinica({porta,contexto,versaoClinica,aoRegistrar=()=>{}}
           <p>{e.fundamento}</p><small>Fontes: {e.fontes.map(f=>f.sourceId).join(", ")}</small></li>)}</ul>:<p>Nenhum estado documentado neste lote.</p>}
       </details>
       <EstadoDoenca porta={porta} contexto={contexto} aoRegistrar={aoRegistrar}/>
-      <label>Pack para consulta documental <select aria-label="Pack para consulta documental" value={packId} onChange={e=>setPackId(e.target.value)}>
+      <label>Tipo de tumor — disparar pack completo <select aria-label="Pack para consulta documental" value={packId} onChange={e=>setSelecao({chave,id:e.target.value})}>
         <option value="">Selecionar pelo CID documentado</option>{atual.packs.map(p=><option key={p.id} value={p.id}>{p.titulo} · {p.estado}</option>)}</select></label>
       {atual.pendencias.map((p,i)=><p role="status" key={i}>{p}</p>)}
       {atual.pack?<div aria-label="Pack documental selecionado"><p><strong>{atual.pack.titulo}</strong> · {atual.pack.estado}</p>
         <p>Fonte: {atual.pack.original.arquivo} · versão {atual.pack.referencia.versao} · estado original: {atual.pack.original.estado}</p>
         {atual.pack.estado!=="ATIVO"?<p>Conteúdo consultável, com revisão clínica pendente para gerar requisitos e propostas.</p>:null}
-        {BLOCOS_TUMOR_PACK.map(nome=><details key={nome}><summary>{ROTULOS_BLOCOS[nome]} · {atual.pack!.blocos[nome].estado}</summary>
+        {atual.loteCompleto?<LoteTumoralCompleto key={atual.loteCompleto.original.sha256} lote={atual.loteCompleto}/>:BLOCOS_TUMOR_PACK.map(nome=><details key={nome}><summary>{ROTULOS_BLOCOS[nome]} · {atual.pack!.blocos[nome].estado}</summary>
           {atual.pack!.blocos[nome].itens.length?atual.pack!.blocos[nome].itens.map(item=><section key={item.localizador}>
             <h4>{item.localizador}</h4><pre style={{whiteSpace:"pre-wrap",overflowWrap:"anywhere"}}>{JSON.stringify(item.conteudo,null,2)}</pre></section>):<p>Não consta neste pack.</p>}</details>)}
       </div>:null}

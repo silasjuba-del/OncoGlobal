@@ -5,7 +5,9 @@ import { BotaoVoz, type ReconhecimentoLocal } from "../../src/ui/telas/importar/
 import { TranscricaoLocal } from "../../src/ui/consulta/TranscricaoLocal.js";
 import { UploadDocumentoLocal } from "../../src/ui/consulta/UploadDocumentoLocal.js";
 import { criarPortaFalsa } from "../../src/ui/api/fake.js";
-import type { ResultadoTranscricaoLocal } from "../../src/ui/api/porta.js";
+import type { ResultadoTranscricaoLocal,PortaConsulta } from "../../src/ui/api/porta.js";
+const canalDeepgram=vi.hoisted(()=>({abrir:vi.fn()}));
+vi.mock('../../src/ui/api/ditado.js',()=>({abrirCanalDitado:canalDeepgram.abrir}));
 
 let ultima: Captura | undefined;
 class Captura implements ReconhecimentoLocal {
@@ -57,21 +59,31 @@ it("cancelar instalação não abre microfone e ignora resolução tardia",async
   expect(screen.getByText(/Preparação cancelada/)).toBeTruthy();expect(ultima).toBeUndefined();
 });
 it("transcrição editada conserva captura original e só envia rascunho após revisão",async()=>{
-  instalar();const porta=criarPortaFalsa(),aoSalvar=vi.fn();
+  const porta=criarPortaFalsa(),aoSalvar=vi.fn();
+  porta.ditado=vi.fn<NonNullable<PortaConsulta['ditado']>>(async p=>p.acao==='INICIAR'
+    ?{codigo:'DITADO_TICKET',ticket:'a'.repeat(64),caminho:'/consulta/ditado/stream',expiraEm:123}
+    :{codigo:'DITADO_CONFIGURACAO',configurada:true,provedor:'DEEPGRAM',modelo:'nova-3',idioma:'pt-BR'});
+  const pararTrack=vi.fn();Object.defineProperty(navigator,'mediaDevices',{value:{getUserMedia:async()=>({getTracks:()=>[{stop:pararTrack}]})},configurable:true});
+  class Gravador {static isTypeSupported(){return true;}state='inactive';ondataavailable=null;onerror=null;onstop:null|(()=>void)=null;
+    start(){this.state='recording';}stop(){this.state='inactive';this.onstop?.();}}
+  vi.stubGlobal('MediaRecorder',Gravador);
+  let eventos!:{mensagem:(s:string)=>void};const enviar=vi.fn();
+  canalDeepgram.abrir.mockImplementation((_t,e)=>{eventos=e;return{aberto:()=>true,pendentes:()=>0,enviar,fechar:vi.fn()};});
   porta.importarTranscricaoLocal=vi.fn(async()=>({codigo:"RASCUNHO_SALVO" as const,draftId:"d",revision:0,linkedPatientId:null,requiresMedicalReview:true as const}));
   render(<TranscricaoLocal porta={porta} contexto={{patientId:"p",encounterId:"e",tumorLotId:null}} aoSalvar={aoSalvar}/>);
-  fireEvent.click(screen.getByRole("button",{name:"comando de voz"}));await screen.findByText(/Ouvindo/);
-  if (!ultima) throw Error("CAPTURA_NAO_INICIADA");
-  const capturaAtual=ultima;
-  act(()=>capturaAtual.onresult?.({resultIndex:0,results:[{isFinal:true,0:{transcript:"Creatinina 12"}}]}));
-  fireEvent.click(screen.getByRole("button",{name:"comando de voz"}));
+  await act(async()=>{});
+  await act(async()=>fireEvent.click(screen.getByRole('button',{name:'Iniciar ditado Deepgram'})));
+  act(()=>eventos.mensagem(JSON.stringify({tipo:'PRONTO'})));
+  act(()=>eventos.mensagem(JSON.stringify({tipo:'TRECHO',id:'1',texto:'Creatinina 12',final:true,confianca:0.9})));
+  fireEvent.click(screen.getByRole('button',{name:'Parar ditado'}));expect(enviar).toHaveBeenCalledWith('PARAR');
+  act(()=>eventos.mensagem(JSON.stringify({tipo:'CONCLUIDO'})));expect(pararTrack).toHaveBeenCalled();
   fireEvent.change(screen.getByLabelText("Texto da transcrição"),{target:{value:"Creatinina 1,2; nega dor."}});
   const salvar=screen.getByRole("button",{name:"Salvar transcrição para revisão clínica"});
   expect(salvar.hasAttribute("disabled")).toBe(true);expect(porta.importarTranscricaoLocal).not.toHaveBeenCalled();
   fireEvent.click(screen.getByLabelText("Revisei o texto para salvar como rascunho"));fireEvent.click(salvar);
   await screen.findByText(/Rascunho salvo/);
   expect(porta.importarTranscricaoLocal).toHaveBeenCalledWith(expect.objectContaining({rawTranscript:"Creatinina 1,2; nega dor.",
-    capturedTranscript:"Creatinina 12",captureMethod:"LOCAL_DICTATION",contexto:{patientId:"p",encounterId:"e",tumorLotId:null}}),expect.any(AbortSignal));
+    capturedTranscript:"Creatinina 12",captureMethod:"DEEPGRAM_CLOUD",contexto:{patientId:"p",encounterId:"e",tumorLotId:null}}),expect.any(AbortSignal));
   expect(aoSalvar).toHaveBeenCalledOnce();
 });
 it("troca de paciente limpa ditado e ignora resposta de gravação antiga",async()=>{

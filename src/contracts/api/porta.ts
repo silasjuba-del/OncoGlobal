@@ -180,7 +180,7 @@ export interface ResultadoUploadLocal {codigo:"RASCUNHO_SALVO"|"REPLAY";draftId:
 
 export interface PedidoTranscricaoLocal {
   contexto: PedidoBundle; recordingId: string; sourceId: string; sourceType: "medical_note";
-  rawTranscript: string; captureMethod: "LOCAL_DICTATION" | "PASTED_TEXT"; capturedTranscript: string;
+  rawTranscript: string; captureMethod: "LOCAL_DICTATION" | "DEEPGRAM_CLOUD" | "PASTED_TEXT"; capturedTranscript: string;
 }
 export interface ResultadoTranscricaoLocal {
   codigo: "RASCUNHO_SALVO" | "REPLAY"; draftId: string; revision: number; linkedPatientId: null; requiresMedicalReview: true;
@@ -296,6 +296,7 @@ export interface ChatSetorVisao {
 }
 
 export interface PortaConsulta {
+  ditado?(pedido:import('../fase2/ditado.js').DitadoPedido,signal?:AbortSignal):Promise<import('../fase2/ditado.js').DitadoResposta>;
   lotesPaciente?(patientId:string,signal?:AbortSignal):Promise<LotesPacienteResposta>;
   /** Biblioteca pública autenticada com a mesma sessão desta porta, quando suportada pelo servidor. */
   biblioteca?: ApiBiblioteca;
