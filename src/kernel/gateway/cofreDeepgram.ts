@@ -24,6 +24,8 @@ export const dpapi:Criptografia=(operacao,dados,contexto)=>{
  try{
   const retorno=execFileSync(join(process.env.SystemRoot,'System32','WindowsPowerShell','v1.0','powershell.exe'),
    ['-NoLogo','-NoProfile','-NonInteractive','-Command',script],{input:JSON.stringify({operacao,dados:dados.toString('base64'),contexto}),
+    env:Object.fromEntries(['SystemRoot','WINDIR','USERPROFILE','APPDATA','LOCALAPPDATA','TEMP','TMP']
+     .flatMap(nome=>process.env[nome]===undefined?[]:[[nome,process.env[nome]!]])),
     encoding:'utf8',windowsHide:true,timeout:10_000,maxBuffer:16_384,stdio:['pipe','pipe','pipe']});
   return Buffer.from(retorno.trim(),'base64');
  }catch{throw Error('COFRE_DPAPI_FALHOU');}
