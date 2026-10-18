@@ -34,6 +34,8 @@ export interface ConsultaFlashProps {
 }
 
 export interface PlanoFlash {
+  documentosManuais?: readonly DocumentoManualFlash[];
+  propostasInvestigacao?: readonly {exameCodigo:string;contexto:string;revisaoFatos:string;referencia:{id:string;versao:string;hash:string}}[];
   acoesMarcadas: readonly string[]; receitasMarcadas: readonly string[];
   receitas?: readonly ReceitaManualFlash[];
   apac: ApacFlash & { emitir: false }; retorno: RetornoFlash; tarefasRetorno?: MarcacaoTarefasRetorno;
@@ -41,3 +43,4 @@ export interface PlanoFlash {
   decisaoQt?: { solicitarCiclo: boolean; data: string | null };
 }
 export interface ReceitaManualFlash {id:string;medicamento:string;dose:string|null;orientacao:string|null;duracao:string|null;via:string|null;quantidade:string|null}
+export interface DocumentoManualFlash {id:string;tipo:"ENCAMINHAMENTO"|"LAUDO"|"ORIENTACOES";titulo:string;destino:string|null;texto:string}

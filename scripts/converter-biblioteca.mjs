@@ -18,7 +18,7 @@ const sha256Biblioteca = (bytes) => createHash("sha256").update(bytes, "utf8").d
 const LIMITE_TEXTO_ITEM = 200_000; // ItemBiblioteca@1: texto max 200000
 const LIMITE_BYTES_ITEM = 1_000_000; // importador interno: ITEM_EXCESSIVO
 const LIMITE_BYTES_CONTEUDOS = 8_000_000; // importador HTTP: PACOTE_EXCESSIVO
-const LIMITE_BODY_ROTEADOR = 1_000_000; // rotas.ts body(): unidades de string do corpo
+const LIMITE_BODY_ROTEADOR = 24_000_000; // /biblioteca/importar: envelope JSON, limite específico da rota em bytes
 const LICENCA_DECLARATIVA = "Uso interno do serviço OncoGlobal; sem licença de redistribuição verificada";
 const PASTA = dirname(fileURLToPath(import.meta.url));
 const LEIA_ME = [
@@ -76,8 +76,13 @@ function validarMapeamento(m) {
   for (const [caminho, item] of Object.entries(m.itens)) {
     if (!caminho.startsWith("corpus/") || !item || typeof item.provenienciaUrl !== "string" || !/^https:\/\//.test(item.provenienciaUrl)) throw new Error(`MAPEAMENTO_INVALIDO:${caminho}`);
     if (!verificadas.has(item.provenienciaUrl)) throw new Error(`URL_NAO_VERIFICADA_NO_MAPEAMENTO:${caminho}`);
+    if (item.publicadoEm !== undefined && (!ehData(item.publicadoEm) || !verificadas.has(item.fonteDataPublicacao)))
+      throw new Error(`DATA_PUBLICACAO_NAO_VERIFICADA:${caminho}`);
     const ap = item.aplicabilidade;
     if (!ap || ["tumor", "histologia", "estadio", "biomarcador", "linha"].some((c) => !Array.isArray(ap[c]) || ap[c].length > 100 || ap[c].some((v) => typeof v !== "string" || !v.length || v.length > 200 || v === "*"))) throw new Error(`MAPEAMENTO_APLICABILIDADE_INVALIDA:${caminho}`);
+    if (Object.values(ap).some(v => Array.isArray(v) && v.length === 0)
+      && (typeof item.aplicabilidadeNota !== "string" || !/\bUNIVERSA(?:L|IS)\b/i.test(item.aplicabilidadeNota)))
+      throw new Error(`APLICABILIDADE_UNIVERSAL_NAO_DECLARADA:${caminho}`);
   }
   return { mapeamento: m, verificadas };
 }
@@ -122,10 +127,9 @@ export async function converterBiblioteca(diretorioSnapshot, destino, opcoes = {
     const fonte = primeiraFonteComTrecho(secao);
     if (!fonte) { excluidos.push({ caminho: a.caminho, motivo: "PROVENIENCIA_SEM_TRECHO", detalhe: "nenhuma fonte interna com referencia E trecho" }); continue; }
     if (!verificadas.has(map.provenienciaUrl)) { excluidos.push({ caminho: a.caminho, motivo: "URL_NAO_VERIFICADA", detalhe: map.provenienciaUrl }); continue; }
-    let publicadoEm = null, publicadoEmOrigem = null;
-    if (ehData(fonte.edicao)) publicadoEm = fonte.edicao;
-    else if (ehData(json?.header?.vigenteDesde)) { publicadoEm = json.header.vigenteDesde; publicadoEmOrigem = "header.vigenteDesde (vigência local — a fonte não declara data completa)"; }
-    if (!publicadoEm) { excluidos.push({ caminho: a.caminho, motivo: "SEM_DATA_PUBLICACAO", detalhe: `edicao=${JSON.stringify(fonte.edicao ?? null)} sem vigenteDesde` }); continue; }
+    const publicadoEm = map.publicadoEm ?? (ehData(fonte.publicadoEm) ? fonte.publicadoEm : null);
+    const publicadoEmOrigem = map.publicadoEm ? map.fonteDataPublicacao : "fonte.publicadoEm";
+    if (!publicadoEm) { excluidos.push({ caminho: a.caminho, motivo: "SEM_DATA_PUBLICACAO", detalhe: "Data de publicação não declarada; edição, acesso e vigência local não substituem publicação." }); continue; }
     const tituloBase = json?.header?.id ?? json?.id ?? a.caminho.split("/").pop().replace(/\.json$/, "");
     const titulo = `${tituloBase} — ${a.caminho}${map.escopoFonte ? `#${map.escopoFonte}` : ""}`;
     if (titulo.length > 300) { excluidos.push({ caminho: a.caminho, motivo: "TITULO_EXCESSIVO", detalhe: `${titulo.length} chars` }); continue; }
@@ -201,7 +205,7 @@ export async function converterBiblioteca(diretorioSnapshot, destino, opcoes = {
 
     const manifesto = montarManifesto();
     const httpPayload = { manifesto, arquivos: Object.fromEntries(incluidos.map(({ arquivo }) => [arquivo, { texto: readFileSync(join(staging, "pacote", arquivo), "utf8") }])) };
-    const httpBytes = JSON.stringify(httpPayload).length;
+    const httpBytes = Buffer.byteLength(JSON.stringify(httpPayload), "utf8");
     const conteudosBytes = incluidos.reduce((n, { item }) => n + Buffer.byteLength(JSON.stringify(item), "utf8"), 0);
     const httpDentro = httpBytes <= LIMITE_BODY_ROTEADOR && conteudosBytes <= LIMITE_BYTES_CONTEUDOS;
     if (httpDentro) writeFileSync(join(staging, "pacote-http.json"), JSON.stringify(httpPayload) + "\n");

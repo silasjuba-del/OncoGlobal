@@ -1759,5 +1759,1978 @@
       "data": "2026-10-11",
       "resolvidas": []
     }
+  },
+  "tumor_pack_universal": {
+    "schema_documental": "tumor-pack-universal@1",
+    "metadados": {
+      "revisao_documental": "2026-10-17-nccn-final-documental",
+      "versao": "1.3.0",
+      "data": "2026-10-17",
+      "autor_extracao": "Codex",
+      "estado": "RASCUNHO",
+      "aprovacao_clinica": null,
+      "escopo": "CAMADA_ADITIVA_UNIVERSAL_E_DELTA_DOCUMENTAL_NCCN",
+      "base_legada": {
+        "arquivo": "corpus/6-pack-tumor/neuroendocrinos/pack-neuroendocrinos.v2.RASCUNHO.json",
+        "commit": "2c0991d",
+        "versao": "2.0.0",
+        "sha256_bytes": "0faa887595edb6c1fb794812133bbb46dfa1a7f4c86742d81e7600329dae5c18",
+        "sha256_semantico": "ea44e92bbb6ecd04ff3f3c43c90c4eff67484c6ac49231a6ad138e2324d3f320"
+      },
+      "nota_versao": "Camada universal 1.3.0; header identifica o legado preservado. Fechamento documental, sem aprovação clínica ou ativação.",
+      "integra_runtime": false,
+      "gera_conduta": false,
+      "historico_revisoes": [
+        {
+          "revisao_documental": "2026-10-17-nccn-delta-1",
+          "versao": "1.0.0",
+          "data": "2026-10-17",
+          "autor_extracao": "Codex",
+          "estado": "RASCUNHO",
+          "aprovacao_clinica": null,
+          "escopo": "CAMADA_ADITIVA_UNIVERSAL_E_DELTA_DOCUMENTAL_NCCN",
+          "base_legada": {
+            "arquivo": "corpus/6-pack-tumor/neuroendocrinos/pack-neuroendocrinos.v2.RASCUNHO.json",
+            "commit": "2c0991d",
+            "versao": "2.0.0",
+            "sha256_bytes": "0faa887595edb6c1fb794812133bbb46dfa1a7f4c86742d81e7600329dae5c18",
+            "sha256_semantico": "ea44e92bbb6ecd04ff3f3c43c90c4eff67484c6ac49231a6ad138e2324d3f320"
+          },
+          "nota_versao": "header.versao identifica o legado intacto; esta extensão possui revisão própria. Não reutilizar aprovação/hashes antigos para o conjunto alterado.",
+          "integra_runtime": false,
+          "gera_conduta": false
+        },
+        {
+          "revisao_documental": "2026-10-17-nccn-delta-3-auditoria33",
+          "versao": "1.2.0",
+          "data": "2026-10-17",
+          "autor_extracao": "Codex",
+          "estado": "RASCUNHO",
+          "aprovacao_clinica": null,
+          "escopo": "CAMADA_ADITIVA_UNIVERSAL_E_DELTA_DOCUMENTAL_NCCN",
+          "base_legada": {
+            "arquivo": "corpus/6-pack-tumor/neuroendocrinos/pack-neuroendocrinos.v2.RASCUNHO.json",
+            "commit": "2c0991d",
+            "versao": "2.0.0",
+            "sha256_bytes": "0faa887595edb6c1fb794812133bbb46dfa1a7f4c86742d81e7600329dae5c18",
+            "sha256_semantico": "ea44e92bbb6ecd04ff3f3c43c90c4eff67484c6ac49231a6ad138e2324d3f320"
+          },
+          "nota_versao": "Revisão da camada universal1.2.0; header legado preservado. Auditoria documental dos33 itens, sem aprovação clínica.",
+          "integra_runtime": false,
+          "gera_conduta": false,
+          "historico_revisoes": [
+            {
+              "revisao_documental": "2026-10-17-nccn-delta-1",
+              "versao": "1.0.0",
+              "data": "2026-10-17",
+              "autor_extracao": "Codex",
+              "estado": "RASCUNHO",
+              "aprovacao_clinica": null,
+              "escopo": "CAMADA_ADITIVA_UNIVERSAL_E_DELTA_DOCUMENTAL_NCCN",
+              "base_legada": {
+                "arquivo": "corpus/6-pack-tumor/neuroendocrinos/pack-neuroendocrinos.v2.RASCUNHO.json",
+                "commit": "2c0991d",
+                "versao": "2.0.0",
+                "sha256_bytes": "0faa887595edb6c1fb794812133bbb46dfa1a7f4c86742d81e7600329dae5c18",
+                "sha256_semantico": "ea44e92bbb6ecd04ff3f3c43c90c4eff67484c6ac49231a6ad138e2324d3f320"
+              },
+              "nota_versao": "header.versao identifica o legado intacto; esta extensão possui revisão própria. Não reutilizar aprovação/hashes antigos para o conjunto alterado.",
+              "integra_runtime": false,
+              "gera_conduta": false
+            }
+          ]
+        }
+      ]
+    },
+    "identidade_ref": "/identidade",
+    "dominios": [
+      {
+        "dominio_id": 1,
+        "nome": "Diagnóstico e patologia",
+        "itens_legados_refs": [
+          "legado-14424544c2740715",
+          "legado-b9d8f6bba0508deb",
+          "legado-718e5d81b39d9463",
+          "legado-524fa891fbfefe8f",
+          "legado-179915490b958a3b",
+          "legado-172c196aa645260d",
+          "legado-b9f5808b6d632639",
+          "legado-ebdfca51b9373726",
+          "legado-b1e76795684109cc",
+          "legado-786a3521d22d313d"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 2,
+        "nome": "Estadiamento, extensão e risco",
+        "itens_legados_refs": [
+          "legado-14b70ed38bf74741",
+          "legado-de3dc6d4b2545b38",
+          "legado-3a8571d9b5f454fd",
+          "legado-6355aca2f04e4179",
+          "legado-3901f49238bfde40",
+          "legado-9275e4c12b3a4b40",
+          "legado-9b6e244e41ff4988",
+          "legado-c1a5ca4c1de9a90f",
+          "legado-7ce530cafa0ada5d"
+        ],
+        "itens_nccn_refs": [
+          "nccn-20261017-neuroendocrinos-g3-diferenciado"
+        ],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 3,
+        "nome": "Biomarcadores e farmacogenética",
+        "itens_legados_refs": [
+          "legado-b11eb1574d67256d",
+          "legado-8b97c5de7f20a136",
+          "legado-ae5db27a0544cd9e",
+          "legado-22730727e258438b",
+          "legado-703e5873322905de"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 4,
+        "nome": "Exames e requisitos documentais",
+        "itens_legados_refs": [
+          "legado-f5e8a7c041b04fad",
+          "legado-3c206bd6a0d2cd1c",
+          "legado-34440e0fe77fcc4d",
+          "legado-c6203ee4ce09c82f",
+          "legado-768b61739e99bf4e",
+          "legado-f9db0ee92b3074c1",
+          "legado-9b33df915499dae4",
+          "legado-7a1df469ad64e84d",
+          "legado-f375351ccaf619e6",
+          "legado-917a2c3faea286f8",
+          "legado-e61bac0942a7c3cd",
+          "legado-afa0c77d738c75c3",
+          "legado-27354377fab80089",
+          "legado-526572753c16be6f",
+          "legado-43f9a236d30b7de6",
+          "legado-bfef5073f438bc40",
+          "legado-52e4e19a73d0dbed",
+          "legado-ef90e8e27c47c4a5",
+          "legado-ef76406c028d5038",
+          "legado-a86f44fb1f45604c",
+          "legado-3824b2f096c91c07",
+          "legado-ad7da3bfcd1a8f20",
+          "legado-5265d1cef8ead218",
+          "legado-71887bd8a730c91c",
+          "legado-6794156b39810058",
+          "legado-74ecd002dd9af7fa",
+          "legado-7f9ba965aebca32d",
+          "legado-6b0ddac01e3e159c"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 5,
+        "nome": "Avaliação antes do tratamento",
+        "itens_legados_refs": [],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "NAO_ESTRUTURADO_NESTA_RODADA",
+        "observacao": "Ausência de referências não significa não aplicabilidade; textos dentro de outros itens permanecem preservados."
+      },
+      {
+        "dominio_id": 6,
+        "nome": "Tratamento e protocolos",
+        "itens_legados_refs": [
+          "legado-41a56d4ae720bcfd",
+          "legado-654140e9234f80ae",
+          "legado-e0a4dae939496df0",
+          "legado-99f8a55ef8cd5f00",
+          "legado-17a15b647796a8f8",
+          "legado-b1761ef907f939dc",
+          "legado-7270401cfd123e93",
+          "legado-edbfb06996c3115b",
+          "legado-04468b27a21d9ee0",
+          "legado-dab28970105c1661",
+          "legado-9e5f310313693b9d",
+          "legado-1b602294d2e09ad2",
+          "legado-e3462a919baf5ace",
+          "legado-11a66d5b8c23ffe7",
+          "legado-42c56f11227be673",
+          "legado-e914ff5204e44d8f",
+          "legado-0df5cbe6829a44d6",
+          "legado-e70b8ff32f3e62a7",
+          "legado-e794e4f64cf4b4da",
+          "legado-1c41fb3222ae6d3b",
+          "legado-2a56d76ab715af57",
+          "legado-3d126b83b459b36d",
+          "legado-f8720b1c969bbe32",
+          "legado-13c523b33cab217b",
+          "legado-d9dfb243caa60037"
+        ],
+        "itens_nccn_refs": [
+          "nccn-20261017-neuroendocrinos-sstr-negativo"
+        ],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 7,
+        "nome": "Segurança, interações e toxicidades",
+        "itens_legados_refs": [
+          "legado-d893f3fe4f4f7cb9",
+          "legado-dd3e9aaff090fd6e",
+          "legado-5a3484cfd5230ba7",
+          "legado-ae12bce1281b2f85",
+          "legado-d4d76311c330eb25",
+          "legado-4898d257a237cc92",
+          "legado-36b2afa031384864"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 8,
+        "nome": "Suporte e cuidados",
+        "itens_legados_refs": [
+          "legado-a387af5e8f9528d3",
+          "legado-5c7d31e7442b7a53",
+          "legado-3707cca3a9978945",
+          "legado-66b782eabaec1c32"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 9,
+        "nome": "Avaliação de resposta e estado da doença",
+        "itens_legados_refs": [],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "NAO_ESTRUTURADO_NESTA_RODADA",
+        "observacao": "Ausência de referências não significa não aplicabilidade; textos dentro de outros itens permanecem preservados."
+      },
+      {
+        "dominio_id": 10,
+        "nome": "Seguimento e sobrevivência",
+        "itens_legados_refs": [
+          "legado-95f1347338485d64",
+          "legado-3ca5969d4b127244",
+          "legado-03f186bc8f603c4d",
+          "legado-2d177118d62b6b28",
+          "legado-0d445c2004a83c8e",
+          "legado-d9b6d7141e676690",
+          "legado-7f54a333a82289de"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 11,
+        "nome": "Encaminhamentos e atuação multiprofissional",
+        "itens_legados_refs": [
+          "legado-11383b61c66ba908",
+          "legado-6e199940146ad842",
+          "legado-6202c5fd9eff081b",
+          "legado-7f9e1c542c31fc41",
+          "legado-6463c51ae5a24fa8"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 12,
+        "nome": "Documentos e acesso assistencial",
+        "itens_legados_refs": [
+          "legado-ae95c2a9a36854d1",
+          "legado-51cb0ed1a2cff691"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      }
+    ],
+    "indice_itens_legados": [
+      {
+        "item_id": "legado-14424544c2740715",
+        "origem_json_pointer": "/diagnostico/patologico/obtencao/0",
+        "sha256_conteudo": "77b84580630678f964e4ede4e803a9252df06c30f261d290a1f1a3033f63676a",
+        "nome": "/diagnostico/patologico/obtencao/0",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/obtencao/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b9d8f6bba0508deb",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/0",
+        "sha256_conteudo": "c755439907896663c4f15de17baf87bbb5628852d61c5f84bc8510ffee1c5344",
+        "nome": "diferenciação (bem × pouco diferenciado)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-718e5d81b39d9463",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/1",
+        "sha256_conteudo": "4fb24ea752f6366d117ded9fded760d1d6012aed749a75b2dc3d1d531442fb26",
+        "nome": "grau OMS",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-524fa891fbfefe8f",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/2",
+        "sha256_conteudo": "4c52d3ae903d01378c3626ac980895bda058ae81bae2e27011e38dab33b4a284",
+        "nome": "Ki-67 (%)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-179915490b958a3b",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/3",
+        "sha256_conteudo": "c0c2a7fdbd4c0747d1fa44cc08f1575c5732400b438360b9a1d7a5e75ddad2e1",
+        "nome": "índice mitótico (mitoses/2 mm²)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-172c196aa645260d",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/4",
+        "sha256_conteudo": "6b8d244510eaaad41a936939ee0278d9105f127f92e9769d2a9d053463520721",
+        "nome": "necrose (pulmão: típico × atípico)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b9f5808b6d632639",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/5",
+        "sha256_conteudo": "a8fb00c207f1e9186d1a7ca078ab638b977b687deeba028499429d109c0fde4d",
+        "nome": "tamanho e invasão (T)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ebdfca51b9373726",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/6",
+        "sha256_conteudo": "4917bb44480c31c95d8976bd0272e95d69a958dc0966563acc6ab87377917f98",
+        "nome": "linfonodos",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b1e76795684109cc",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/7",
+        "sha256_conteudo": "5af8f3e14ee0c71c99a892be5183fe17bcce9a982eb89be0b368af37c949baa5",
+        "nome": "margens",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-786a3521d22d313d",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/8",
+        "sha256_conteudo": "d582f5d6a7dd71bb54a9f88df95b3dc063308e80e46c9059203c562e3ba7fd96",
+        "nome": "apêndice: invasão do mesoapêndice > 3 mm e invasão angiolinfática",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-14b70ed38bf74741",
+        "origem_json_pointer": "/estadiamento/sistema",
+        "sha256_conteudo": "d7dab6e16ae3278a0513466816530a61b1fcf4548c0e925655782b9ee09cf5ce",
+        "nome": "AJCC",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-de3dc6d4b2545b38",
+        "origem_json_pointer": "/estadiamento/edicao",
+        "sha256_conteudo": "dcc28f15172f39494d056efeeeeb698d5bde64ceab1a76412c62a08a5aafaf7c",
+        "nome": "8ª",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-3a8571d9b5f454fd",
+        "origem_json_pointer": "/estadiamento/gruposConduta/0",
+        "sha256_conteudo": "a80efee0019e6cf8cdd87377dad1a74bd3baf3f735b2db55715d49cabb5c39e1",
+        "nome": "/estadiamento/gruposConduta/0",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-6355aca2f04e4179",
+        "origem_json_pointer": "/estadiamento/gruposConduta/1",
+        "sha256_conteudo": "be25d118cb6d10b23545e2daa64ba4a7457aeaff50f927c53a36f62beeaca9af",
+        "nome": "/estadiamento/gruposConduta/1",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-3901f49238bfde40",
+        "origem_json_pointer": "/estadiamento/gruposConduta/2",
+        "sha256_conteudo": "54924bdcac5a6813ddae389f353582d13967e10279783a6263a92a0489475f44",
+        "nome": "/estadiamento/gruposConduta/2",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-9275e4c12b3a4b40",
+        "origem_json_pointer": "/estadiamento/gruposConduta/3",
+        "sha256_conteudo": "3016345f7f90dd17fc890469438bfb8ad33ba2549c5b4107efb8f258bca1b453",
+        "nome": "/estadiamento/gruposConduta/3",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-9b6e244e41ff4988",
+        "origem_json_pointer": "/estadiamento/gruposConduta/4",
+        "sha256_conteudo": "499d9ddeae042744c08879755dae195873c4b5d638c38f7cecfa0c58fd6a7431",
+        "nome": "/estadiamento/gruposConduta/4",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-c1a5ca4c1de9a90f",
+        "origem_json_pointer": "/estadiamento/gruposConduta/5",
+        "sha256_conteudo": "fe1810faf18440ca740c6440783fe5b5adad2ff9047bda8dbfa58efe6ec646d5",
+        "nome": "/estadiamento/gruposConduta/5",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/5/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-7ce530cafa0ada5d",
+        "origem_json_pointer": "/estadiamento/marcadores",
+        "sha256_conteudo": "8d7cf09346db3e0a5ddb7d99e4afb31232642bbd4bc92d8dc9d75496b5c97042",
+        "nome": "/estadiamento/marcadores",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b11eb1574d67256d",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/0",
+        "sha256_conteudo": "652288390cd53b19f0984b3a71b05bcb77fd09d7518de74672fc0c4b3544146d",
+        "nome": "todo TNE",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8b97c5de7f20a136",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/1",
+        "sha256_conteudo": "da4ae282732f1d2037c5a1822fe7f997cf48eabd7d46d34cb056be588ddbbdf9",
+        "nome": "doença avançada",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ae5db27a0544cd9e",
+        "origem_json_pointer": "/tratamento/biomarcadorTratamento/0",
+        "sha256_conteudo": "ecd5efb1fa7989c976a4f263b54f4fd6dda2fcd8fbb1a59962f38187479ccd1b",
+        "nome": "/tratamento/biomarcadorTratamento/0",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/biomarcadorTratamento/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-22730727e258438b",
+        "origem_json_pointer": "/tratamento/biomarcadorTratamento/1",
+        "sha256_conteudo": "c1beaa590e554179fde78e619336f9307c45d2a0e7db5e44a438cf94af57b6bf",
+        "nome": "/tratamento/biomarcadorTratamento/1",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/biomarcadorTratamento/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-703e5873322905de",
+        "origem_json_pointer": "/tratamento/biomarcadorTratamento/2",
+        "sha256_conteudo": "d52121b3bef9e09980770c54992259da59f88283d4186a6a86791ed0f5f24e3e",
+        "nome": "/tratamento/biomarcadorTratamento/2",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/biomarcadorTratamento/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-f5e8a7c041b04fad",
+        "origem_json_pointer": "/diagnostico/imagem/0",
+        "sha256_conteudo": "43ad200287415e1eb6289a310ce7dba7d8cea6b8c046fb466f30ea2c2b9ac5ca",
+        "nome": "TC de tórax",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-3c206bd6a0d2cd1c",
+        "origem_json_pointer": "/diagnostico/imagem/1",
+        "sha256_conteudo": "da9ba62eb1fb0caaf9821c074b412c829f79c22c36fa4c905ffb9d48ad681337",
+        "nome": "TC de abdome",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-34440e0fe77fcc4d",
+        "origem_json_pointer": "/diagnostico/imagem/2",
+        "sha256_conteudo": "82150f764ab11c57b3595c8a198a050812e19a1b7efb85b34b5f54f67e5dca15",
+        "nome": "TC de pelve",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-c6203ee4ce09c82f",
+        "origem_json_pointer": "/diagnostico/imagem/3",
+        "sha256_conteudo": "b983d811463fa3c4ac7ea56477d1e91cbe8cfb39679be7bbc869b79d113a6852",
+        "nome": "PET-CT com Ga-68 DOTATATE",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-768b61739e99bf4e",
+        "origem_json_pointer": "/diagnostico/imagem/4",
+        "sha256_conteudo": "1fe23f0ad822f770d2b75c1153a0c17a1fba4ffbf86af77692af7e771de1fe5a",
+        "nome": "Octreoscan",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-f9db0ee92b3074c1",
+        "origem_json_pointer": "/diagnostico/imagem/5",
+        "sha256_conteudo": "4153b65c9ee1cd4212adb7a2f7501313b6cd63d2ed37cd809f2893e3fe92796c",
+        "nome": "RM de fígado (contraste hepatoespecífico)",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/5/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-9b33df915499dae4",
+        "origem_json_pointer": "/diagnostico/imagem/6",
+        "sha256_conteudo": "9dc122b756553e01121966192fe1680a93bf317e9c68febbf0e8e26d1071f212",
+        "nome": "PET-CT FDG",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/6/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-7a1df469ad64e84d",
+        "origem_json_pointer": "/diagnostico/imagem/7",
+        "sha256_conteudo": "de2395d0e70e83a583016ac9586e8abd0df1665708de3287021171645301f0c4",
+        "nome": "Ecocardiograma",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/7/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-f375351ccaf619e6",
+        "origem_json_pointer": "/diagnostico/endoscopicos/0",
+        "sha256_conteudo": "b3821687a5bbc4829b595e4c8a064522367c0c49b90591ba9d3d9813ceb0ac7a",
+        "nome": "EDA",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/endoscopicos/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-917a2c3faea286f8",
+        "origem_json_pointer": "/diagnostico/endoscopicos/1",
+        "sha256_conteudo": "cff508bc43d595535d0018bb2e0e512f5a3d45c5cd4077fa61d6bfc5646a08ba",
+        "nome": "Colonoscopia/proctoscopia",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/endoscopicos/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e61bac0942a7c3cd",
+        "origem_json_pointer": "/estadiamento/exames/0",
+        "sha256_conteudo": "5728a8d069800714358f9217c561090dc929b41ddc7c03e8f2e77a4986eb095c",
+        "nome": "TC de tórax",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-afa0c77d738c75c3",
+        "origem_json_pointer": "/estadiamento/exames/1",
+        "sha256_conteudo": "b50117c8050bb5227473ae0ba8685bef3c7215235c300170277f891352b208f9",
+        "nome": "TC de abdome",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-27354377fab80089",
+        "origem_json_pointer": "/estadiamento/exames/2",
+        "sha256_conteudo": "1b59aded61ed6879ce33b593f592fab77d6c69993feb6c0b8bf77197a3d4d7b9",
+        "nome": "PET-CT Ga-68",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-526572753c16be6f",
+        "origem_json_pointer": "/estadiamento/exames/3",
+        "sha256_conteudo": "e94e5421bf83f4054d9588e05b529a9a74eac98b23ec08ca633f634209ebb84d",
+        "nome": "5-HIAA em urina de 24 h",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-43f9a236d30b7de6",
+        "origem_json_pointer": "/ligacoes/exames/0",
+        "sha256_conteudo": "615dbbd1c34382e00571df06953649aabb446b5b0e4e7372fe8196baaf86bede",
+        "nome": "ACIDO_5HIAA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-bfef5073f438bc40",
+        "origem_json_pointer": "/ligacoes/exames/1",
+        "sha256_conteudo": "00cac656db90cece9385c8c98f658accb5b7c1553202e6be466fa96d39aaf2b9",
+        "nome": "ANATOMOPATOLOGICO",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-52e4e19a73d0dbed",
+        "origem_json_pointer": "/ligacoes/exames/2",
+        "sha256_conteudo": "12dc93df8c004cf66a8c4711211ce8df0ea7b8314ec42108f70d135ad99daf89",
+        "nome": "COLONOSCOPIA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ef90e8e27c47c4a5",
+        "origem_json_pointer": "/ligacoes/exames/3",
+        "sha256_conteudo": "da74dd747fd5fa4043db517559cb6da85f76ecae33e6cc8d4c104848d3eadb9b",
+        "nome": "ECOCARDIOGRAMA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ef76406c028d5038",
+        "origem_json_pointer": "/ligacoes/exames/4",
+        "sha256_conteudo": "4eafbeeab923ac66d78540cd37c0f44aba4997fe0bb026271a95da2189ec190b",
+        "nome": "EDA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a86f44fb1f45604c",
+        "origem_json_pointer": "/ligacoes/exames/5",
+        "sha256_conteudo": "99a98b9d268e78a05608d792d2fad81f4e16f25b8a4f95da9f7decd91a23a0dc",
+        "nome": "IMUNOHISTOQUIMICA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-3824b2f096c91c07",
+        "origem_json_pointer": "/ligacoes/exames/6",
+        "sha256_conteudo": "14bd122c55dc0fd068169e2bc437958f382685ecfb0f07465987f93b6fd4d4f1",
+        "nome": "OCTREOSCAN",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ad7da3bfcd1a8f20",
+        "origem_json_pointer": "/ligacoes/exames/7",
+        "sha256_conteudo": "3a955b75de510bd32be8d0f7de2bf070f27f223ac4c6a07cf68b35b7271856b2",
+        "nome": "PET_CT_FDG",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-5265d1cef8ead218",
+        "origem_json_pointer": "/ligacoes/exames/8",
+        "sha256_conteudo": "70f95d50266874bdfa84013c787002a366849f1e9caab8a9f28c621775d31c6f",
+        "nome": "PET_DOTATATE",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-71887bd8a730c91c",
+        "origem_json_pointer": "/ligacoes/exames/9",
+        "sha256_conteudo": "9c93ac77fd6457370871d33a5c58ba94777b0bb961f1f2eb5572fadaabd4df86",
+        "nome": "RM_ABDOMEN_SUPERIOR",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-6794156b39810058",
+        "origem_json_pointer": "/ligacoes/exames/10",
+        "sha256_conteudo": "ae974cff2b8cea688a4632542e3da503ad4a2f0f9301b96d75afbb2588228c37",
+        "nome": "RM_PELVE",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-74ecd002dd9af7fa",
+        "origem_json_pointer": "/ligacoes/exames/11",
+        "sha256_conteudo": "eea68f82f02592e6262514a154ff52ae85284765c1f48ab3b07cabb92ead209f",
+        "nome": "TC_ABDOMEN_SUPERIOR",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-7f9ba965aebca32d",
+        "origem_json_pointer": "/ligacoes/exames/12",
+        "sha256_conteudo": "5beb801ddc054db97d463dd8b682c9128772e22b7938b6d4c645af14dc4ddd7a",
+        "nome": "TC_PELVE",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-6b0ddac01e3e159c",
+        "origem_json_pointer": "/ligacoes/exames/13",
+        "sha256_conteudo": "147b97b900462813d8c6528cc01d88f8a5102936ee96ee4fb121f8a7b77f60b0",
+        "nome": "TC_TORAX",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-41a56d4ae720bcfd",
+        "origem_json_pointer": "/tratamento/cenarios/0",
+        "sha256_conteudo": "8db6401fc0dd9a391eb63192aadb65580d54344eb24f135e42a1fba3819fcd32",
+        "nome": "localizado_ressecavel",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-654140e9234f80ae",
+        "origem_json_pointer": "/tratamento/cenarios/1",
+        "sha256_conteudo": "0a2f856b627b26cc55784f3de96f1f9dc88ca438aed48dbfbe7376f3b19723bd",
+        "nome": "metastatico_hepatico_irressecavel_locorregional",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e0a4dae939496df0",
+        "origem_json_pointer": "/tratamento/cenarios/2",
+        "sha256_conteudo": "241b42bc5eb49e44308def56acc5161893e6bd7cbaa53ca7e6dbc850d261a745",
+        "nome": "metastatico_irressecavel_sistemico",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-99f8a55ef8cd5f00",
+        "origem_json_pointer": "/tratamento/cenarios/3",
+        "sha256_conteudo": "ee9c4ae0f3a768059870a6469982320ee8336a549b8c922c1843859d42cef897",
+        "nome": "funcionante",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-17a15b647796a8f8",
+        "origem_json_pointer": "/tratamento/protocolos/0",
+        "sha256_conteudo": "3e45bc9a448d50d9904cc1caed490aacb30cdeacd94a35a739edf9a4844df056",
+        "nome": "Octreotida LAR 30 mg (antitumoral/controle de síndrome)",
+        "id_original": "net-octreotida-lar",
+        "fonte_local_ref": "/tratamento/protocolos/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b1761ef907f939dc",
+        "origem_json_pointer": "/tratamento/protocolos/1",
+        "sha256_conteudo": "ba5e93b96f7eb0eb4882735120f651a4cd2c704d348c9af6f972a18c71391365",
+        "nome": "Lanreotida 120 mg",
+        "id_original": "net-lanreotida",
+        "fonte_local_ref": "/tratamento/protocolos/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-7270401cfd123e93",
+        "origem_json_pointer": "/tratamento/protocolos/2",
+        "sha256_conteudo": "b363699a7e2336dc3160d341e641abd25c2658549dc9c776e31c1ee36dc20838",
+        "nome": "Everolimo isolado",
+        "id_original": "net-everolimo",
+        "fonte_local_ref": "/tratamento/protocolos/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-edbfb06996c3115b",
+        "origem_json_pointer": "/tratamento/protocolos/3",
+        "sha256_conteudo": "de92f8d4dd088c52eb4ca0997e8cea26d09b305cbee991f5ea67dfeb3e65f1ea",
+        "nome": "Everolimo + octreotida LAR (funcionantes)",
+        "id_original": "net-everolimo-octreotida",
+        "fonte_local_ref": "/tratamento/protocolos/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-04468b27a21d9ee0",
+        "origem_json_pointer": "/tratamento/protocolos/4",
+        "sha256_conteudo": "85e921e44e5ae952e807b03d489300d1c8ec51fe3ff15a00fa4c77e712491a85",
+        "nome": "Lu-177 DOTATATO (PRRT) + octreotida LAR",
+        "id_original": "net-lutecio-177-dotatato",
+        "fonte_local_ref": "/tratamento/protocolos/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-dab28970105c1661",
+        "origem_json_pointer": "/tratamento/protocolos/5",
+        "sha256_conteudo": "3ecf9a97cfcc5dbabd3434396bd7bfdbd6a6c3194996ab2a900bd2b3c4fa2f39",
+        "nome": "Sunitinibe (TNE pancreático)",
+        "id_original": "net-sunitinibe-pnet",
+        "fonte_local_ref": "/tratamento/protocolos/5/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-9e5f310313693b9d",
+        "origem_json_pointer": "/tratamento/protocolos/6",
+        "sha256_conteudo": "ef8204f3295cbc172e1a547f54ba46763512b0475d7b84ffc22d02377de34b2b",
+        "nome": "Cabozantinibe",
+        "id_original": "net-cabozantinibe",
+        "fonte_local_ref": "/tratamento/protocolos/6/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-1b602294d2e09ad2",
+        "origem_json_pointer": "/tratamento/protocolos/7",
+        "sha256_conteudo": "f507a030ae8a2fa9dd95f44379ca111767fea9aacc7ac639d545c6b473ba42e3",
+        "nome": "Capecitabina + temozolamida (CAPTEM)",
+        "id_original": "net-captem",
+        "fonte_local_ref": "/tratamento/protocolos/7/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e3462a919baf5ace",
+        "origem_json_pointer": "/tratamento/protocolos/8",
+        "sha256_conteudo": "44db1cea91da7778cf524eab66a9dfad0004512ee04dde7f6b245738fb9b1ba4",
+        "nome": "Capecitabina + oxaliplatina (TNE)",
+        "id_original": "net-capox",
+        "fonte_local_ref": "/tratamento/protocolos/8/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-11a66d5b8c23ffe7",
+        "origem_json_pointer": "/tratamento/protocolos/9",
+        "sha256_conteudo": "57b74e0d92f06db4dd04c5a4bf855be04f93e5fbcaae776109d4a138b8fb7d7f",
+        "nome": "Temozolamida isolada",
+        "id_original": "net-temozolamida",
+        "fonte_local_ref": "/tratamento/protocolos/9/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-42c56f11227be673",
+        "origem_json_pointer": "/tratamento/protocolos/10",
+        "sha256_conteudo": "f43ab83efe50cb07e20abfda985a7e815759d25b324c34836262940049324d90",
+        "nome": "Platina + etoposídeo (carcinoma neuroendócrino pouco diferenciado)",
+        "id_original": "net-platina-etoposideo-cne",
+        "fonte_local_ref": "/tratamento/protocolos/10/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e914ff5204e44d8f",
+        "origem_json_pointer": "/tratamento/protocolos/11",
+        "sha256_conteudo": "59b566bdd4461a18f209b7d7e9e916448888af2b954fa468b8202a817260bc98",
+        "nome": "Análogo de somatostatina em TNE pulmonar SSTR2+",
+        "id_original": "net-ssa-pulmonar",
+        "fonte_local_ref": "/tratamento/protocolos/11/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-0df5cbe6829a44d6",
+        "origem_json_pointer": "/tratamento/cirurgia/0",
+        "sha256_conteudo": "e96c5b3e1b3e9d8657ff196c0657db491193827b8d40ca4a58c12e6ed303823b",
+        "nome": "/tratamento/cirurgia/0",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cirurgia/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e70b8ff32f3e62a7",
+        "origem_json_pointer": "/tratamento/cirurgia/1",
+        "sha256_conteudo": "d963787e2f63da9c66a671839f3964f5545b35dbd6defec347780e8c3b99d79a",
+        "nome": "/tratamento/cirurgia/1",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cirurgia/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e794e4f64cf4b4da",
+        "origem_json_pointer": "/tratamento/cirurgia/2",
+        "sha256_conteudo": "bf9484c9cb11cbd3d3086b7813c26bd408a2b167ba157a48fb274ba91ab1ef14",
+        "nome": "/tratamento/cirurgia/2",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cirurgia/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-1c41fb3222ae6d3b",
+        "origem_json_pointer": "/tratamento/cirurgia/3",
+        "sha256_conteudo": "be29d28f140a8b929b71ee69d69ab92f4539ac06375837a7c7cb8ed384889a66",
+        "nome": "/tratamento/cirurgia/3",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cirurgia/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-2a56d76ab715af57",
+        "origem_json_pointer": "/tratamento/cirurgia/4",
+        "sha256_conteudo": "995b42791268d6348364a0abf331830abaf16e25baf0150fd866c49f876b94a1",
+        "nome": "/tratamento/cirurgia/4",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cirurgia/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-3d126b83b459b36d",
+        "origem_json_pointer": "/tratamento/cirurgia/5",
+        "sha256_conteudo": "319bd0e9834e24d1067dcd77c193bf6e5c34b13b63b269d2c5d5ed4dd77339cb",
+        "nome": "/tratamento/cirurgia/5",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cirurgia/5/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-f8720b1c969bbe32",
+        "origem_json_pointer": "/tratamento/cirurgia/6",
+        "sha256_conteudo": "f1de4eee73e2c4f2d88406e38910350e616c514c376cd97fe1f921ae26e780d3",
+        "nome": "/tratamento/cirurgia/6",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cirurgia/6/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-13c523b33cab217b",
+        "origem_json_pointer": "/tratamento/cirurgia/7",
+        "sha256_conteudo": "4bfe1c0e9a691f0e08ea5860fe9159781c193072a15b3692bdb6335850d56c56",
+        "nome": "/tratamento/cirurgia/7",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cirurgia/7/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d9dfb243caa60037",
+        "origem_json_pointer": "/tratamento/cirurgia/8",
+        "sha256_conteudo": "739cbfdcd62fdc03d1aaac84c7d53e7ae848474bba2a2e432c6a7d7243fe2cac",
+        "nome": "/tratamento/cirurgia/8",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cirurgia/8/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d893f3fe4f4f7cb9",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/0",
+        "sha256_conteudo": "98e4447162d5234fdafe492cb42e4e8e5f804381e649272330f1d8f5d446da0b",
+        "nome": "/ligacoes/interacoesConsultar/0",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-dd3e9aaff090fd6e",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/1",
+        "sha256_conteudo": "1e103d126edfc9bb9e72360871036f959cac949c6b2d08a38fa11785baa56815",
+        "nome": "/ligacoes/interacoesConsultar/1",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-5a3484cfd5230ba7",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/2",
+        "sha256_conteudo": "c10183e2f6437633852eab9ded7c97ff9b85155a74761500907d767220a9266d",
+        "nome": "/ligacoes/interacoesConsultar/2",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ae12bce1281b2f85",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/3",
+        "sha256_conteudo": "590351f06b93099221064068e3d193b7e1f0cd3cecc18a53bd58b6ebd6c362ca",
+        "nome": "/ligacoes/interacoesConsultar/3",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d4d76311c330eb25",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/4",
+        "sha256_conteudo": "d4c2671f11e97e6b9414c5851977bc980c2b31a8dd9c80e3c4ae1f44ce1c5cd4",
+        "nome": "/ligacoes/interacoesConsultar/4",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-4898d257a237cc92",
+        "origem_json_pointer": "/ligacoes/ctcaeAcao/0",
+        "sha256_conteudo": "e90c4b25947406d8bb65c63ebc121aa3aaf1521dd4fcb91dc978bf2e2e5bdfd6",
+        "nome": "/ligacoes/ctcaeAcao/0",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-36b2afa031384864",
+        "origem_json_pointer": "/ligacoes/ctcaeAcao/1",
+        "sha256_conteudo": "fec408c47d658aa56bc92e08ed7024e0155b8b6488f3358163264ab735614a43",
+        "nome": "/ligacoes/ctcaeAcao/1",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a387af5e8f9528d3",
+        "origem_json_pointer": "/tratamento/suporte",
+        "sha256_conteudo": "aecaaa1b8731b28ad7ee810cd0905678e1b04638e67a57a10051072434ba8663",
+        "nome": "/tratamento/suporte",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/suporte/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-5c7d31e7442b7a53",
+        "origem_json_pointer": "/ligacoes/suporteReceitas/0",
+        "sha256_conteudo": "c1a1b54efb0986cb7d22d8ed29247e891666972321c65eec28062869e2622244",
+        "nome": "octreotida de ação curta para sintomas (bula Lutathera)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-3707cca3a9978945",
+        "origem_json_pointer": "/ligacoes/suporteReceitas/1",
+        "sha256_conteudo": "43ae53edf926b8029475fbb3e170e0efd9248883409d37ba83fb7a2729b5f5be",
+        "nome": "antiemético antes da solução de aminoácidos do PRRT",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-66b782eabaec1c32",
+        "origem_json_pointer": "/ligacoes/suporteReceitas/2",
+        "sha256_conteudo": "ec42aa5ddda6f4b7e9ffc5cf75b86d38b54fd8a242271a488c1d93185275dab0",
+        "nome": "bochecho/cuidado de estomatite (everolimo)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-95f1347338485d64",
+        "origem_json_pointer": "/tratamento/seguimento/0",
+        "sha256_conteudo": "4a874fce81935af71a185f5292be98650d6d97c40c2c2fc343205618ed6da14e",
+        "nome": "GI ressecado",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/seguimento/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-3ca5969d4b127244",
+        "origem_json_pointer": "/tratamento/seguimento/1",
+        "sha256_conteudo": "04eb45f4728a32f9a984c1e4a27c70ba30f6bb050a0da6fed2a5b7876bfef182",
+        "nome": "Apêndice < 2 cm ou reto < 1 cm ressecados",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/seguimento/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-03f186bc8f603c4d",
+        "origem_json_pointer": "/tratamento/seguimento/2",
+        "sha256_conteudo": "d50510706cfec54ec0d973e05c953789d80bebeed7b5e57521fd21ef45af3255",
+        "nome": "Reto 1–2 cm",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/seguimento/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-2d177118d62b6b28",
+        "origem_json_pointer": "/tratamento/seguimento/3",
+        "sha256_conteudo": "36ac03e79277cc6d1855ce38ab67b9f8ef13ff06602cdd281e14d2716a89750b",
+        "nome": "Gástrico com hipergastrinemia",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/seguimento/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-0d445c2004a83c8e",
+        "origem_json_pointer": "/tratamento/seguimento/4",
+        "sha256_conteudo": "81f5c19028c21eb2d228ac4b1cd4d7662ff4a788f9dc968d84ad6f21c16cc404",
+        "nome": "Doença metastática",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/seguimento/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d9b6d7141e676690",
+        "origem_json_pointer": "/ligacoes/orientacoes/0",
+        "sha256_conteudo": "afba05e2de6389b751452a9fc6c36eff43abe35e94eedf588456a5e98a7bd825",
+        "nome": "sinais-alarme-consolidado",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-7f54a333a82289de",
+        "origem_json_pointer": "/ligacoes/orientacoes/1",
+        "sha256_conteudo": "b8ea876062c9e1d5187c1ff9251efb3dfda054409dbd6f453b696678705469bc",
+        "nome": "dieta-por-toxicidade",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-11383b61c66ba908",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/0",
+        "sha256_conteudo": "73119be663fabc0ff311c1e1509288f363624f987b5b142a83864ba2b819d0c0",
+        "nome": "cirurgia-oncologica",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-6e199940146ad842",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/1",
+        "sha256_conteudo": "1ac6f2c7de19433d3b7e514d19194704efb5533d640e40ce00d13630a1597879",
+        "nome": "medicina nuclear (PET-Ga68/PRRT)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-6202c5fd9eff081b",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/2",
+        "sha256_conteudo": "8c38b0ba6185b54e0d319dcefe7b7b273416a8df0b0ddee8c8541eb0d0954e30",
+        "nome": "oncogenetica (suspeita de NEM1/VHL/NF1)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-7f9e1c542c31fc41",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/3",
+        "sha256_conteudo": "d89b342c781c6698940e9ea6a79e9f7a4aa26b6812a7134f60c88efab4d787f8",
+        "nome": "cardiologia (cardiopatia carcinoide)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-6463c51ae5a24fa8",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/4",
+        "sha256_conteudo": "f3c678035e885d3f52e5701d134da9a3975579bada9b9add3d51d4f7d4ecf94c",
+        "nome": "nutricao",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ae95c2a9a36854d1",
+        "origem_json_pointer": "/ligacoes/laudos/0",
+        "sha256_conteudo": "18c683891af6990d3c3b6f64dd424ac1d065ebcaa57668a6f51caeb21ce0b892",
+        "nome": "APAC de quimioterapia de TNE avançado (SIGTAP 0304020117)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-51cb0ed1a2cff691",
+        "origem_json_pointer": "/ligacoes/laudos/1",
+        "sha256_conteudo": "570f8b8df1090d937952f3b6c340a5038edbd1c0e40262888239a42b6ccb8497",
+        "nome": "judicializacao-drogas (octreotida LAR, everolimo, PRRT)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      }
+    ],
+    "itens_nccn": [
+      {
+        "item_id": "nccn-20261017-neuroendocrinos-sstr-negativo",
+        "nome": "Doença SSTR-negativa",
+        "tipo": "CENARIO_TERAPEUTICO",
+        "dominio_principal": 6,
+        "conteudo_extraido": "SSTRNEG-1 refere-se a TNE BEM DIFERENCIADO G1/G2. Nota a: captação insuficiente na imagem SSTR, menor que fígado/Krenning0–2. Sem indicação de citorredução: não funcional de baixo volume pode ser observado; não funcional de carga significativa/progressivo recebe terapia conforme tipo e opções locais, excluindo PRRT; funcional tem SSA em primeira linha conforme fluxograma. A nota h permite considerar PRRT em doença MISTA SSTR+/−, com eficácia possivelmente inferior e necessidade de abordar o componente negativo; não estender isso a SSTR-negativo puro.",
+        "aplicabilidade": {
+          "criterios": [
+            "TNE bem diferenciado G1/G2 no fluxograma",
+            "SSTR-negativo definido por imagem",
+            "Distinguir doença pura de mista",
+            "Funcionalidade, carga/progressão e elegibilidade cirúrgica documentadas"
+          ],
+          "paciente_individual": null,
+          "estado": "NAO_AVALIADA"
+        },
+        "dados_estruturados": {},
+        "fonte_refs": [
+          {
+            "fonte_id": "nccn-902f0355ba44",
+            "edicao": "1.2026",
+            "pagina_pdf": 46,
+            "paginas_pdf": [
+              46
+            ],
+            "secao": "SSTRNEG-1",
+            "trecho": "WELL-DIFFERENTIATED GRADE 1/2 NETS",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "9e3851747595d8afb6a5e33e1a96c8d9975d7b4e7b375d896cb01850d8c6776a"
+          },
+          {
+            "fonte_id": "nccn-902f0355ba44",
+            "edicao": "1.2026",
+            "pagina_pdf": 47,
+            "paginas_pdf": [
+              47
+            ],
+            "secao": "SSTRNEG-1A, nota a",
+            "trecho": "Krenning score 0–2",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "9e3851747595d8afb6a5e33e1a96c8d9975d7b4e7b375d896cb01850d8c6776a"
+          },
+          {
+            "fonte_id": "nccn-902f0355ba44",
+            "edicao": "1.2026",
+            "pagina_pdf": 47,
+            "paginas_pdf": [
+              47
+            ],
+            "secao": "SSTRNEG-1A, nota h",
+            "trecho": "mixed SSTR-positive/negative disease",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "9e3851747595d8afb6a5e33e1a96c8d9975d7b4e7b375d896cb01850d8c6776a"
+          }
+        ],
+        "evidencia_declarada": {
+          "sistema": "NCCN",
+          "categoria": null,
+          "estado": "NAO_EXTRAIDA_POR_ITEM"
+        },
+        "estado_extracao": "EXTRAIDO_COM_LIMITES_DECLARADOS",
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "temporalidade": {
+          "referencia": "CENARIO_DESCRITO",
+          "datas_individuais": null
+        },
+        "propor_automaticamente": false,
+        "disponivel_para_prescricao": false,
+        "acesso": {
+          "registro_anvisa": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "incorporacao_conitec": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "pcdt_ddt": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "sigtap_apac": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "cobertura_privada": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "disponibilidade_institucional": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          }
+        },
+        "alternativas_legadas_refs": [],
+        "relacoes_refs": [
+          "relacao-nccn-20261017-neuroendocrinos-sstr-negativo"
+        ],
+        "conflitos_refs": [],
+        "pendencias": [
+          "REVISAO_CLINICA_DO_DELTA",
+          "VERIFICAR_ACESSO_BRASILEIRO_POR_INDICACAO"
+        ],
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+            "anterior": {
+              "fonte_refs": [
+                {
+                  "fonte_id": "nccn-902f0355ba44",
+                  "paginas_pdf": [
+                    46,
+                    47
+                  ],
+                  "secao": "SSTRNEG-1/1A",
+                  "natureza": "EXTRACAO_DOCUMENTAL",
+                  "pagina_pdf": 46,
+                  "trecho": "SSTR-NEGATIVE DISEASE OF WELL-DIFFERENTIATED GRADE 1/2 NETS Surgical cytoreduction recommended Observe with"
+                }
+              ],
+              "conteudo_extraido": "Caminho próprio segundo funcionalidade, carga e progressão; a nota diferencia observação de baixo volume, acompanhamento e limitações do PRRT em doença mista SSTR-positiva/negativa.",
+              "aplicabilidade": {
+                "criterios": [
+                  "TNE",
+                  "Estado SSTR documentado",
+                  "Funcionalidade e carga tumoral"
+                ],
+                "paciente_individual": null,
+                "estado": "NAO_AVALIADA"
+              }
+            },
+            "motivo": "Faltavam a restrição G1/G2 do fluxograma e a distinção entre SSTR-negativo e captação mista para PRRT.",
+            "aprovacao_clinica": null
+          }
+        ],
+        "fontes_por_campo": {
+          "conteudo_extraido": [
+            {
+              "fonte_id": "nccn-902f0355ba44",
+              "edicao": "1.2026",
+              "pagina_pdf": 46,
+              "paginas_pdf": [
+                46
+              ],
+              "secao": "SSTRNEG-1",
+              "trecho": "WELL-DIFFERENTIATED GRADE 1/2 NETS",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "9e3851747595d8afb6a5e33e1a96c8d9975d7b4e7b375d896cb01850d8c6776a"
+            },
+            {
+              "fonte_id": "nccn-902f0355ba44",
+              "edicao": "1.2026",
+              "pagina_pdf": 47,
+              "paginas_pdf": [
+                47
+              ],
+              "secao": "SSTRNEG-1A, nota a",
+              "trecho": "Krenning score 0–2",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "9e3851747595d8afb6a5e33e1a96c8d9975d7b4e7b375d896cb01850d8c6776a"
+            },
+            {
+              "fonte_id": "nccn-902f0355ba44",
+              "edicao": "1.2026",
+              "pagina_pdf": 47,
+              "paginas_pdf": [
+                47
+              ],
+              "secao": "SSTRNEG-1A, nota h",
+              "trecho": "mixed SSTR-positive/negative disease",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "9e3851747595d8afb6a5e33e1a96c8d9975d7b4e7b375d896cb01850d8c6776a"
+            }
+          ],
+          "aplicabilidade": [
+            {
+              "fonte_id": "nccn-902f0355ba44",
+              "edicao": "1.2026",
+              "pagina_pdf": 46,
+              "paginas_pdf": [
+                46
+              ],
+              "secao": "SSTRNEG-1",
+              "trecho": "WELL-DIFFERENTIATED GRADE 1/2 NETS",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "9e3851747595d8afb6a5e33e1a96c8d9975d7b4e7b375d896cb01850d8c6776a"
+            },
+            {
+              "fonte_id": "nccn-902f0355ba44",
+              "edicao": "1.2026",
+              "pagina_pdf": 47,
+              "paginas_pdf": [
+                47
+              ],
+              "secao": "SSTRNEG-1A, nota a",
+              "trecho": "Krenning score 0–2",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "9e3851747595d8afb6a5e33e1a96c8d9975d7b4e7b375d896cb01850d8c6776a"
+            },
+            {
+              "fonte_id": "nccn-902f0355ba44",
+              "edicao": "1.2026",
+              "pagina_pdf": 47,
+              "paginas_pdf": [
+                47
+              ],
+              "secao": "SSTRNEG-1A, nota h",
+              "trecho": "mixed SSTR-positive/negative disease",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "9e3851747595d8afb6a5e33e1a96c8d9975d7b4e7b375d896cb01850d8c6776a"
+            }
+          ]
+        }
+      },
+      {
+        "item_id": "nccn-20261017-neuroendocrinos-g3-diferenciado",
+        "nome": "TNE G3 bem diferenciado",
+        "tipo": "CENARIO_DIAGNOSTICO_TERAPEUTICO",
+        "dominio_principal": 2,
+        "conteudo_extraido": "Separar TNE G3 bem diferenciado de carcinoma pouco diferenciado. A fonte usa biologia, Ki-67, velocidade e SSTR para os ramos e ressalva limitações do ponto de corte; não usar Ki-67 isolado como diagnóstico.",
+        "aplicabilidade": {
+          "criterios": [
+            "Morfologia e diferenciação confirmadas",
+            "Ki-67, evolução e SSTR documentados"
+          ],
+          "paciente_individual": null,
+          "estado": "NAO_AVALIADA"
+        },
+        "dados_estruturados": {},
+        "fonte_refs": [
+          {
+            "fonte_id": "nccn-902f0355ba44",
+            "edicao": "1.2026",
+            "pagina_pdf": 48,
+            "paginas_pdf": [
+              48
+            ],
+            "secao": "WDG3-1",
+            "trecho": "Well-Differentiated, Grade 3",
+            "sha256_pdf": "9e3851747595d8afb6a5e33e1a96c8d9975d7b4e7b375d896cb01850d8c6776a",
+            "natureza": "EXTRACAO_DOCUMENTAL"
+          },
+          {
+            "fonte_id": "nccn-902f0355ba44",
+            "edicao": "1.2026",
+            "pagina_pdf": 53,
+            "paginas_pdf": [
+              53
+            ],
+            "secao": "PDNEC-1, nota c",
+            "trecho": "Not all high-grade",
+            "sha256_pdf": "9e3851747595d8afb6a5e33e1a96c8d9975d7b4e7b375d896cb01850d8c6776a",
+            "natureza": "EXTRACAO_DOCUMENTAL"
+          }
+        ],
+        "evidencia_declarada": {
+          "sistema": "NCCN",
+          "categoria": null,
+          "estado": "NAO_EXTRAIDA_POR_ITEM"
+        },
+        "estado_extracao": "EXTRAIDO_COM_LIMITES_DECLARADOS",
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "temporalidade": {
+          "referencia": "CENARIO_DESCRITO",
+          "datas_individuais": null
+        },
+        "propor_automaticamente": false,
+        "disponivel_para_prescricao": false,
+        "acesso": {
+          "registro_anvisa": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "incorporacao_conitec": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "pcdt_ddt": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "sigtap_apac": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "cobertura_privada": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "disponibilidade_institucional": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          }
+        },
+        "alternativas_legadas_refs": [
+          "/conflitos"
+        ],
+        "relacoes_refs": [
+          "relacao-nccn-20261017-neuroendocrinos-g3-diferenciado"
+        ],
+        "conflitos_refs": [
+          "conflito-nccn-20261017-neuroendocrinos-g3-diferenciado"
+        ],
+        "pendencias": [
+          "REVISAO_CLINICA_DO_DELTA",
+          "VERIFICAR_ACESSO_BRASILEIRO_POR_INDICACAO"
+        ],
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-final-documental",
+            "anterior": {
+              "fonte_refs": [
+                {
+                  "fonte_id": "nccn-902f0355ba44",
+                  "paginas_pdf": [
+                    48,
+                    49
+                  ],
+                  "secao": "WDG3-1/2",
+                  "natureza": "EXTRACAO_DOCUMENTAL",
+                  "pagina_pdf": 48,
+                  "trecho": "Well-Differentiated, Grade 3 Neuroendocrine Tumors NCCN Guidelines Index Table of Contents Discussion"
+                }
+              ]
+            },
+            "motivo": "Adicionar a referência explícita que distingue TNE de alto grau e carcinoma pouco diferenciado; conteúdo clínico preservado.",
+            "aprovacao_clinica": null
+          }
+        ],
+        "fontes_por_campo": {}
+      }
+    ],
+    "cenarios": {
+      "identidade_ref": "/identidade/cenarios",
+      "detalhamento_ref": "/tratamento/cenarios",
+      "novas_condicoes_refs": [
+        "nccn-20261017-neuroendocrinos-sstr-negativo",
+        "nccn-20261017-neuroendocrinos-g3-diferenciado"
+      ],
+      "regra": "Não igualar automaticamente as duas listas nem selecionar cenário individual nesta camada."
+    },
+    "fontes": [
+      {
+        "id": "nccn-902f0355ba44",
+        "arquivo_local": "C:\\Users\\silas\\.aside\\u\\0\\sessions\\2026-10-17_LutNNwUyDZGlA1pF\\artifacts\\nccn\\Neuroendocrine and Adrenal Tumors.pdf",
+        "nome": "Neuroendocrine and Adrenal Tumors",
+        "sha256": "9e3851747595d8afb6a5e33e1a96c8d9975d7b4e7b375d896cb01850d8c6776a",
+        "numero_paginas": 237,
+        "versao_declarada": "1.2026",
+        "origem": "ARQUIVO_LOCAL_FORNECIDO",
+        "autenticidade_externa": "NAO_VERIFICADA_NO_PORTAL",
+        "paginas_examinadas": [
+          46,
+          47,
+          48,
+          49,
+          53,
+          61
+        ]
+      }
+    ],
+    "fontes_legadas_refs": [
+      "/header/fonte",
+      "/curadoria/fontesLidas"
+    ],
+    "ensaios": {
+      "legado_ref": "/tratamento/ensaios",
+      "novos_nct": [],
+      "nota": "Nenhum identificador NCT foi inventado ou verificado nesta rodada."
+    },
+    "relacoes": [
+      {
+        "relacao_id": "relacao-nccn-20261017-neuroendocrinos-sstr-negativo",
+        "tipo": "CONDICOES_PARA_APRESENTACAO_DOCUMENTAL",
+        "destino_item_ref": "nccn-20261017-neuroendocrinos-sstr-negativo",
+        "criterios_extraidos": [
+          "TNE bem diferenciado G1/G2 no fluxograma",
+          "SSTR-negativo definido por imagem",
+          "Distinguir doença pura de mista",
+          "Funcionalidade, carga/progressão e elegibilidade cirúrgica documentadas"
+        ],
+        "origem_condicoes": "FONTE_NCCN_CITADA",
+        "origem_mapeamento": "PROPOSTA_DE_MAPEAMENTO",
+        "executavel": false,
+        "estado": "A_CONFERIR",
+        "dados_ausentes": "MANTER_INDETERMINADO",
+        "dados_conflitantes": "MANTER_CONFLITO",
+        "efeito": "APRESENTAR_CONTEUDO_PARA_REVISAO; NAO PRESCREVER",
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+            "criterios_extraidos": [
+              "TNE",
+              "Estado SSTR documentado",
+              "Funcionalidade e carga tumoral"
+            ]
+          }
+        ],
+        "fontes_por_campo": {
+          "criterios_extraidos": [
+            {
+              "fonte_id": "nccn-902f0355ba44",
+              "edicao": "1.2026",
+              "pagina_pdf": 46,
+              "paginas_pdf": [
+                46
+              ],
+              "secao": "SSTRNEG-1",
+              "trecho": "WELL-DIFFERENTIATED GRADE 1/2 NETS",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "9e3851747595d8afb6a5e33e1a96c8d9975d7b4e7b375d896cb01850d8c6776a"
+            },
+            {
+              "fonte_id": "nccn-902f0355ba44",
+              "edicao": "1.2026",
+              "pagina_pdf": 47,
+              "paginas_pdf": [
+                47
+              ],
+              "secao": "SSTRNEG-1A, nota a",
+              "trecho": "Krenning score 0–2",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "9e3851747595d8afb6a5e33e1a96c8d9975d7b4e7b375d896cb01850d8c6776a"
+            },
+            {
+              "fonte_id": "nccn-902f0355ba44",
+              "edicao": "1.2026",
+              "pagina_pdf": 47,
+              "paginas_pdf": [
+                47
+              ],
+              "secao": "SSTRNEG-1A, nota h",
+              "trecho": "mixed SSTR-positive/negative disease",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "9e3851747595d8afb6a5e33e1a96c8d9975d7b4e7b375d896cb01850d8c6776a"
+            }
+          ]
+        }
+      },
+      {
+        "relacao_id": "relacao-nccn-20261017-neuroendocrinos-g3-diferenciado",
+        "tipo": "CONDICOES_PARA_APRESENTACAO_DOCUMENTAL",
+        "destino_item_ref": "nccn-20261017-neuroendocrinos-g3-diferenciado",
+        "criterios_extraidos": [
+          "Morfologia e diferenciação confirmadas",
+          "Ki-67, evolução e SSTR documentados"
+        ],
+        "origem_condicoes": "FONTE_NCCN_CITADA",
+        "origem_mapeamento": "PROPOSTA_DE_MAPEAMENTO",
+        "executavel": false,
+        "estado": "A_CONFERIR",
+        "dados_ausentes": "MANTER_INDETERMINADO",
+        "dados_conflitantes": "MANTER_CONFLITO",
+        "efeito": "APRESENTAR_CONTEUDO_PARA_REVISAO; NAO PRESCREVER"
+      }
+    ],
+    "conflitos": [
+      {
+        "conflito_id": "conflito-nccn-20261017-neuroendocrinos-g3-diferenciado",
+        "tema": "TNE G3 bem diferenciado",
+        "descricao": "O legado tem conflito sobre CNE versus TNE G3. Preservar a diferença morfológica; o limiar de Ki-67 não substitui a classificação.",
+        "item_nccn_ref": "nccn-20261017-neuroendocrinos-g3-diferenciado",
+        "legado_refs": [
+          "/conflitos"
+        ],
+        "fontes_nccn_refs": [
+          {
+            "fonte_id": "nccn-902f0355ba44",
+            "paginas_pdf": [
+              48,
+              49
+            ],
+            "secao": "WDG3-1/2",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "pagina_pdf": 48,
+            "trecho": "Well-Differentiated, Grade 3 Neuroendocrine Tumors NCCN Guidelines Index Table of Contents Discussion"
+          }
+        ],
+        "estado": "A_CONFERIR",
+        "decisao_medica": null,
+        "resolucao_automatica": false
+      }
+    ],
+    "conflitos_legados_ref": "/conflitos",
+    "pendencias": [
+      {
+        "id": "revisao-clinica",
+        "estado": "ABERTA",
+        "descricao": "Conferir cada acréscimo, condições, fontes, doses, interações e suporte antes de uso clínico."
+      },
+      {
+        "id": "acesso-brasileiro",
+        "estado": "ABERTA",
+        "descricao": "NCCN não comprova Anvisa, Conitec, PCDT/DDT, SIGTAP/APAC, cobertura privada ou acesso institucional."
+      },
+      {
+        "id": "cobertura-nccn",
+        "estado": "PARCIAL_POR_DELTA",
+        "descricao": "Leitura dirigida das páginas citadas; não há alegação de extração integral da diretriz."
+      }
+    ],
+    "pendencias_legadas_ref": "/pendencias",
+    "itens_adicionais_a_classificar": [
+      {
+        "origem_ref": "/header",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/status",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/consultavel",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/alerta",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/substitui",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/identidade",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/pendencias",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/conflitos",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/curadoria",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      }
+    ],
+    "mapa_de_cobertura": [
+      {
+        "origem_json_pointer": "/header",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "6e8e2242e40c2c90b163f0c216c5c3baead07fb6aa93047d28475e69faa5eb8d",
+        "valores_folha": 9
+      },
+      {
+        "origem_json_pointer": "/status",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "04635ca3844c66b19ebbf49bf9ff60fe851d6ce89597d23e6a970f1dc3927289",
+        "valores_folha": 1
+      },
+      {
+        "origem_json_pointer": "/consultavel",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b",
+        "valores_folha": 1
+      },
+      {
+        "origem_json_pointer": "/alerta",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "valores_folha": 1
+      },
+      {
+        "origem_json_pointer": "/substitui",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "valores_folha": 1
+      },
+      {
+        "origem_json_pointer": "/identidade",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "b1f851e88f65fc3ccc18a898050fe69ee04ca146da5fa0febec01b9f2491f913",
+        "valores_folha": 31
+      },
+      {
+        "origem_json_pointer": "/diagnostico",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "7d52b446816c2eec80c8e259fd55d0b99e552369312aafd76917db22bd91cea9",
+        "valores_folha": 142
+      },
+      {
+        "origem_json_pointer": "/estadiamento",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "2c425c3c24f6ec1cd219107db5134757403f3cd62240801e19cccb3969b0def9",
+        "valores_folha": 104
+      },
+      {
+        "origem_json_pointer": "/tratamento",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "7c24ab791a9244f80c73347b65837aadf513bde989036edd8b10ec97167c9d95",
+        "valores_folha": 669
+      },
+      {
+        "origem_json_pointer": "/ligacoes",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "d40b4838b3dd4e184a4e306111599e4a3c2f654a6531411dd1961d535aa93220",
+        "valores_folha": 105
+      },
+      {
+        "origem_json_pointer": "/pendencias",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "d455717299d1c24368fbee41ce90aeba3e6f47594fee111ddc8cca4ec021fcc3",
+        "valores_folha": 32
+      },
+      {
+        "origem_json_pointer": "/conflitos",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "a3ca481f8fb1a4140c7db543536cebbb1471c5f0e6a7be72c6111a7345f2ed73",
+        "valores_folha": 69
+      },
+      {
+        "origem_json_pointer": "/curadoria",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "e0418262496d9c737290ef8c136b4abf3b322ab947e6f451b16a12d0fb929135",
+        "valores_folha": 12
+      }
+    ],
+    "reconciliacao_com_versao_anterior": {
+      "modo": "ADITIVO",
+      "originais_removidos": 0,
+      "originais_alterados": 0,
+      "contagens_preservadas": {
+        "protocolos": 12,
+        "ensaios": 9,
+        "cenarios_identidade": 5,
+        "cenarios_tratamento": 4,
+        "seguimento": 5,
+        "conflitos": 5,
+        "pendencias": 6
+      }
+    },
+    "relatorio_de_completude": {
+      "estado": "INCOMPLETA_PARA_DIRETRIZ_INTEGRAL",
+      "preservacao_legado": "INTEGRAL",
+      "delta_itens": 2,
+      "normalizacao_legado": "INDEXACAO_POR_REFERENCIA; NAO REEXTRACAO CLINICA",
+      "posologias": "SOMENTE AS EXPLICITAMENTE EXTRAIDAS; RESTANTES PENDENTES",
+      "sem_fato_paciente": true,
+      "sem_aprovacao_inferida": true
+    },
+    "auditoria_33_pendentes": [
+      {
+        "item_id": "nccn-20261017-neuroendocrinos-sstr-negativo",
+        "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+        "resultado": "CORRIGIDO_ESCOPO_OU_COMPLETUDE",
+        "fundamento": "Faltavam a restrição G1/G2 do fluxograma e a distinção entre SSTR-negativo e captação mista para PRRT.",
+        "fontes": [
+          {
+            "fonte_id": "nccn-902f0355ba44",
+            "edicao": "1.2026",
+            "pagina_pdf": 46,
+            "paginas_pdf": [
+              46
+            ],
+            "secao": "SSTRNEG-1",
+            "trecho": "WELL-DIFFERENTIATED GRADE 1/2 NETS",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "9e3851747595d8afb6a5e33e1a96c8d9975d7b4e7b375d896cb01850d8c6776a"
+          },
+          {
+            "fonte_id": "nccn-902f0355ba44",
+            "edicao": "1.2026",
+            "pagina_pdf": 47,
+            "paginas_pdf": [
+              47
+            ],
+            "secao": "SSTRNEG-1A, nota a",
+            "trecho": "Krenning score 0–2",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "9e3851747595d8afb6a5e33e1a96c8d9975d7b4e7b375d896cb01850d8c6776a"
+          },
+          {
+            "fonte_id": "nccn-902f0355ba44",
+            "edicao": "1.2026",
+            "pagina_pdf": 47,
+            "paginas_pdf": [
+              47
+            ],
+            "secao": "SSTRNEG-1A, nota h",
+            "trecho": "mixed SSTR-positive/negative disease",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "9e3851747595d8afb6a5e33e1a96c8d9975d7b4e7b375d896cb01850d8c6776a"
+          }
+        ],
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "limite": "Conferência das afirmações deste item; não extração integral de posologia, diretriz ou acesso brasileiro.",
+        "sha256_item_antes": "27864ef1a307a7f65d47b7aee085b51685e719db7f647b6f1e3fae4118114d87"
+      },
+      {
+        "item_id": "nccn-20261017-neuroendocrinos-g3-diferenciado",
+        "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+        "resultado": "CONFIRMADO_SEM_REESCRITA",
+        "fundamento": "WDG3-1/2 sustenta a separação morfológica e a ressalva de Ki-67; o item não transforma55% em critério diagnóstico isolado.",
+        "fontes": [
+          {
+            "fonte_id": "nccn-902f0355ba44",
+            "edicao": "1.2026",
+            "pagina_pdf": 48,
+            "paginas_pdf": [
+              48
+            ],
+            "secao": "WDG3-1, nota g",
+            "trecho": "limitations in terms of the data",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "9e3851747595d8afb6a5e33e1a96c8d9975d7b4e7b375d896cb01850d8c6776a"
+          },
+          {
+            "fonte_id": "nccn-902f0355ba44",
+            "edicao": "1.2026",
+            "pagina_pdf": 49,
+            "paginas_pdf": [
+              49
+            ],
+            "secao": "WDG3-2",
+            "trecho": "Locoregional disease",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "9e3851747595d8afb6a5e33e1a96c8d9975d7b4e7b375d896cb01850d8c6776a"
+          }
+        ],
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "limite": "Conferência das afirmações deste item; não extração integral de posologia, diretriz ou acesso brasileiro.",
+        "sha256_item_antes": "6e4dae032547d797c355e9a98881bd6e3ec745a6242379d932088f1b44f535cd"
+      }
+    ],
+    "revisoes_auditoria": [
+      {
+        "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+        "escopo": "APENAS_33_ITENS_PENDENTES",
+        "legado_modificado": false,
+        "aprovacao_clinica": null,
+        "limites": "Sem leitura integral da pasta, sem completar doses, sem checagem de acesso ou autenticidade externa.",
+        "itens_ref": "/tumor_pack_universal/auditoria_33_pendentes",
+        "sha256_itens": "5cd555e54268722bc28dde3764387e0c6dd7bff088ebc65d636ed06a98be9ed4"
+      }
+    ],
+    "fechamento_documental": [
+      {
+        "revisao": "2026-10-17-nccn-final-documental",
+        "estado": "CORRECOES_DOCUMENTAIS_APLICADAS",
+        "ajustes_textuais": 0,
+        "deduplicacoes_por_referencia": [
+          "auditoria_33_pendentes"
+        ],
+        "aprovacao_clinica": null,
+        "legado_alterado": false
+      }
+    ]
   }
 }

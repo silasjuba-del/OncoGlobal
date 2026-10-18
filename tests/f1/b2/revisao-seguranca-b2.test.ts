@@ -8,7 +8,7 @@ import { instanciarProtocolo } from "../../../src/rules/prescricao/instanciarPro
 import { safetyEngine } from "../../../src/rules/prescricao/safetyEngine.js";
 import { calcularDosePorBase } from "../../../src/rules/prescricao/index.js";
 const man = JSON.parse(readFileSync("corpus/manifesto/b2-fichas.v1.json", "utf8"));
-const fichas = man.fichasNovas.map((f: {arquivo: string}) => ProtocolTemplate.parse(JSON.parse(readFileSync(f.arquivo, "utf8"))));
+const fichas: ProtocolTemplate[] = man.fichasNovas.map((f: {arquivo: string}) => ProtocolTemplate.parse(JSON.parse(readFileSync(f.arquivo, "utf8"))));
 const dados = { pesoKg: 70, alturaCm: 170, bsaM2: 1.8, clcr: 80, medidoEm: "2026-10-14T08:00:00-03:00" };
 function calcular(t: typeof ProtocolTemplate._output) {
   const r = instanciarProtocolo({ ...t, status: "CONFERIDA_MEDICO" }, dados);
@@ -46,17 +46,41 @@ describe("PR19: representação e execução seguras das fichas B2", () => {
     expect(calcularDosePorBase({basis:"MCG_KG",mcgKg:5,pesoKg:null})).toMatchObject({estado:"PENDENTE",dose:null,unidade:"µg",doseMg:null});
     const legado = { ...t, itens: [{ ...t.itens.find((i: any) => i.drug === "Filgrastim")!, doseBasis: "MG_KG" as const }] };
     expect(calcular(legado).itens[0]!.estado).toBe("PENDENTE");
+    for (const unit of ['mg/kg', 'mg', 'g/kg']) {
+      const incoerente = {...t, itens: [{...t.itens.find(i => i.drug === 'Filgrastim')!, unit}]};
+      const r = calcular(incoerente).itens[0]!;
+      expect(r.estado).toBe('PENDENTE'); expect(r.item.calculatedDose).toBeNull(); expect(r.item.prescribedDose).toBeNull();
+    }
   });
   it("tetos declarados são aplicados e o SafetyEngine recusa dose acima deles", () => {
-    for (const t of fichas) for (const i of calcular(t).itens.filter(i => i.item.doseMaximaMg !== undefined)) {
+    for (const t of fichas) for (const i of calcular(t).itens.filter(i => i.item.doseMaximaMg !== undefined && !i.item.sequenciamentoPendente)) {
       expect(i.item.calculatedDose).toBeLessThanOrEqual(i.item.doseMaximaMg!);
       const alterado = { ...i.item, prescribedDose: i.item.doseMaximaMg! + 1 };
       expect(safetyEngine([alterado], [], {} as any).motivos.some(m => m.codigo === "TETO_DOSE_FICHA")).toBe(true);
     }
     const map = calcular(fichas.find((t: any) => t.nome === "MAP (ciclos 1–4)")!);
     expect(map.itens.find(i => i.item.drug === "Metotrexato")!.item.calculatedDose).toBe(20000);
-    const vdc = calcular(fichas.find((t: any) => t.nome.startsWith("Ewing VDC"))!);
+    // Prova isolada do cálculo do teto; a ficha real inteira permanece pendente de sequência (teste abaixo).
+    const componente = fichas.find((t: any) => t.nome.startsWith("Ewing VDC"))!;
+    const vdc = calcular({...componente, itens: componente.itens.map(({sequenciamentoPendente, ...i}) => i)});
     expect(vdc.itens.find(i => i.item.drug === "Vincristina")!.item.calculatedDose).toBe(2);
+  });
+  it("componentes VDC/IE/VC nunca viram um curso repetido isolado, mesmo com promoção ou dose manual", () => {
+    const componentes = fichas.filter(t => /^Ewing (VDC|VC |IE)/.test(t.nome));
+    expect(componentes).toHaveLength(3);
+    for (const t of componentes) {
+      expect(t.intervaloDias).toBe(28);
+      const r = calcular(t);
+      expect(r.pendentes).toBe(t.itens.length);
+      for (const i of r.itens) {
+        expect(i.item.prescribedDose).toBeNull(); expect(i.item.calculatedDose).toBeNull();
+        expect(i.motivo).toContain('plano integrado');
+      }
+      const manual = r.itens.map(i => ({...i.item, prescribedDose: 1}));
+      const veredito = safetyEngine(manual, [], {} as any);
+      expect(veredito.resultado).toBe('BLOCK_ARTEFATO');
+      expect(veredito.motivos).toContainEqual(expect.objectContaining({codigo: 'SEQUENCIAMENTO_PENDENTE'}));
+    }
   });
   it("cisplatina respeita 1 mg/min inclusive após alteração manual", () => {
     const cis = fichas.flatMap((t: any) => calcular(t).itens).filter((i: any) => i.item.drug === "Cisplatina");

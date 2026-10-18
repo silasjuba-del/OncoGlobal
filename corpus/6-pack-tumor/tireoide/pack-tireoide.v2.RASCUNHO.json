@@ -2151,5 +2151,2791 @@
       "achado": "Conferência MOC 2026 item 10",
       "acao": "corte de lobectomia ajustado para 4 cm (MOC)"
     }
-  ]
+  ],
+  "tumor_pack_universal": {
+    "schema_documental": "tumor-pack-universal@1",
+    "metadados": {
+      "revisao_documental": "2026-10-17-nccn-final-documental",
+      "versao": "1.3.0",
+      "data": "2026-10-17",
+      "autor_extracao": "Codex",
+      "estado": "RASCUNHO",
+      "aprovacao_clinica": null,
+      "escopo": "CAMADA_ADITIVA_UNIVERSAL_E_DELTA_DOCUMENTAL_NCCN",
+      "base_legada": {
+        "arquivo": "corpus/6-pack-tumor/tireoide/pack-tireoide.v2.RASCUNHO.json",
+        "commit": "2c0991d",
+        "versao": "2.0.0",
+        "sha256_bytes": "d8ebc30222354a05e227b67efa26b40e9bc11f267964b815b5a6fe3146d8b9d0",
+        "sha256_semantico": "bcb1cf626a50a8a0ada9c256727dfd92b0047b65709619dba2bd5b8494215894"
+      },
+      "nota_versao": "Camada universal 1.3.0; header identifica o legado preservado. Fechamento documental, sem aprovação clínica ou ativação.",
+      "integra_runtime": false,
+      "gera_conduta": false,
+      "historico_revisoes": [
+        {
+          "revisao_documental": "2026-10-17-nccn-delta-1",
+          "versao": "1.0.0",
+          "data": "2026-10-17",
+          "autor_extracao": "Codex",
+          "estado": "RASCUNHO",
+          "aprovacao_clinica": null,
+          "escopo": "CAMADA_ADITIVA_UNIVERSAL_E_DELTA_DOCUMENTAL_NCCN",
+          "base_legada": {
+            "arquivo": "corpus/6-pack-tumor/tireoide/pack-tireoide.v2.RASCUNHO.json",
+            "commit": "2c0991d",
+            "versao": "2.0.0",
+            "sha256_bytes": "d8ebc30222354a05e227b67efa26b40e9bc11f267964b815b5a6fe3146d8b9d0",
+            "sha256_semantico": "bcb1cf626a50a8a0ada9c256727dfd92b0047b65709619dba2bd5b8494215894"
+          },
+          "nota_versao": "header.versao identifica o legado intacto; esta extensão possui revisão própria. Não reutilizar aprovação/hashes antigos para o conjunto alterado.",
+          "integra_runtime": false,
+          "gera_conduta": false
+        },
+        {
+          "revisao_documental": "2026-10-17-nccn-delta-3-auditoria33",
+          "versao": "1.2.0",
+          "data": "2026-10-17",
+          "autor_extracao": "Codex",
+          "estado": "RASCUNHO",
+          "aprovacao_clinica": null,
+          "escopo": "CAMADA_ADITIVA_UNIVERSAL_E_DELTA_DOCUMENTAL_NCCN",
+          "base_legada": {
+            "arquivo": "corpus/6-pack-tumor/tireoide/pack-tireoide.v2.RASCUNHO.json",
+            "commit": "2c0991d",
+            "versao": "2.0.0",
+            "sha256_bytes": "d8ebc30222354a05e227b67efa26b40e9bc11f267964b815b5a6fe3146d8b9d0",
+            "sha256_semantico": "bcb1cf626a50a8a0ada9c256727dfd92b0047b65709619dba2bd5b8494215894"
+          },
+          "nota_versao": "Revisão da camada universal1.2.0; header legado preservado. Auditoria documental dos33 itens, sem aprovação clínica.",
+          "integra_runtime": false,
+          "gera_conduta": false,
+          "historico_revisoes": [
+            {
+              "revisao_documental": "2026-10-17-nccn-delta-1",
+              "versao": "1.0.0",
+              "data": "2026-10-17",
+              "autor_extracao": "Codex",
+              "estado": "RASCUNHO",
+              "aprovacao_clinica": null,
+              "escopo": "CAMADA_ADITIVA_UNIVERSAL_E_DELTA_DOCUMENTAL_NCCN",
+              "base_legada": {
+                "arquivo": "corpus/6-pack-tumor/tireoide/pack-tireoide.v2.RASCUNHO.json",
+                "commit": "2c0991d",
+                "versao": "2.0.0",
+                "sha256_bytes": "d8ebc30222354a05e227b67efa26b40e9bc11f267964b815b5a6fe3146d8b9d0",
+                "sha256_semantico": "bcb1cf626a50a8a0ada9c256727dfd92b0047b65709619dba2bd5b8494215894"
+              },
+              "nota_versao": "header.versao identifica o legado intacto; esta extensão possui revisão própria. Não reutilizar aprovação/hashes antigos para o conjunto alterado.",
+              "integra_runtime": false,
+              "gera_conduta": false
+            }
+          ]
+        }
+      ]
+    },
+    "identidade_ref": "/identidade",
+    "dominios": [
+      {
+        "dominio_id": 1,
+        "nome": "Diagnóstico e patologia",
+        "itens_legados_refs": [
+          "legado-499283fdc0cf8608",
+          "legado-1ef158ad4e25a9ce",
+          "legado-57ae6af69cd522e6",
+          "legado-48dae3ef843e2732",
+          "legado-7d1a57056de084a7",
+          "legado-c036ca598f97c7e9",
+          "legado-272328e4ae3afeac",
+          "legado-842a2eeebaf424d3",
+          "legado-7f7479183c69c743"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 2,
+        "nome": "Estadiamento, extensão e risco",
+        "itens_legados_refs": [
+          "legado-14b70ed38bf74741",
+          "legado-de3dc6d4b2545b38",
+          "legado-3ed3618380bf310b",
+          "legado-356afaad4c52f822",
+          "legado-96e727f79b549340",
+          "legado-c432e5c3eb9c5377",
+          "legado-555d985b37a53eab",
+          "legado-63e6842393d2b448"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 3,
+        "nome": "Biomarcadores e farmacogenética",
+        "itens_legados_refs": [
+          "legado-3cf1fdcffb1ed405",
+          "legado-ae8af49e37d6462d",
+          "legado-9e6b782951928475",
+          "legado-adb63f46dfc595dc",
+          "legado-06b7d66a859e6f93",
+          "legado-a515a64dec006f51",
+          "legado-e8b02661bd176b99",
+          "legado-49d0ca026f14cc68",
+          "legado-33bfc5378483dd90",
+          "legado-682013c86757e907",
+          "legado-7556c4a4973f8f05",
+          "legado-270a2e58dae56706",
+          "legado-68ce8690b8b97b3c"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 4,
+        "nome": "Exames e requisitos documentais",
+        "itens_legados_refs": [
+          "legado-94a894ac4599b3c0",
+          "legado-8f411b0310ba1f73",
+          "legado-4102ce9344702b1e",
+          "legado-0abd441f93ca8fb8",
+          "legado-dc30d60b583b4fa7",
+          "legado-ffcfc15cb8146af7",
+          "legado-cc0aba63bc7577f6",
+          "legado-1b2f03b788d3d4b5",
+          "legado-2395cad06b416e7a",
+          "legado-e27cf89ebab2f990",
+          "legado-810218dd10671ac5",
+          "legado-b15c5f6cf5eb5b85",
+          "legado-926ffb0702e6a376",
+          "legado-5ccfdd6d986ad295",
+          "legado-1958545105f72ac3",
+          "legado-89db3b6ec657bc2a",
+          "legado-b66f74e8e17c348b",
+          "legado-6b18a914cd125c25",
+          "legado-2fd0d1e6d11527a5",
+          "legado-f8fc7ac0873f3a7b",
+          "legado-a86f44fb1f45604c",
+          "legado-3e6c333a0b1b77da",
+          "legado-ad7da3bfcd1a8f20",
+          "legado-5265d1cef8ead218",
+          "legado-8d99d43476763a27",
+          "legado-2869e01ee2ce9f06",
+          "legado-e50187b45c40874f",
+          "legado-c4ad324f15dcd340",
+          "legado-596b4e02cd5980f3",
+          "legado-0f9299cb90be33fa",
+          "legado-da0c6362f6893102",
+          "legado-0496e636a833ae07",
+          "legado-8c9193fd6b56d6fe",
+          "legado-5b33205a35a8ccfa",
+          "legado-d1d5ca2b19d910e8",
+          "legado-ec97d6e33854c24b"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 5,
+        "nome": "Avaliação antes do tratamento",
+        "itens_legados_refs": [],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "NAO_ESTRUTURADO_NESTA_RODADA",
+        "observacao": "Ausência de referências não significa não aplicabilidade; textos dentro de outros itens permanecem preservados."
+      },
+      {
+        "dominio_id": 6,
+        "nome": "Tratamento e protocolos",
+        "itens_legados_refs": [
+          "legado-2a61e1921b1ab19f",
+          "legado-28a7eba45973b8e5",
+          "legado-4b0fcd08328ec294",
+          "legado-20833fdc2eafe417",
+          "legado-3696a811930d929b",
+          "legado-11f97eedd7650e8d",
+          "legado-3749c34fcf2d793a",
+          "legado-db914878c3d2762c",
+          "legado-d9e08bda209c356a",
+          "legado-419a9be042bc3f76",
+          "legado-7f5a6d4edf71da55",
+          "legado-028685e8ce18e46a",
+          "legado-53a22c71b883c586",
+          "legado-5fe9409adc6abd52",
+          "legado-49aa48f2b53373d5",
+          "legado-65fed1ef12e66a46",
+          "legado-f27f54f6f8c4cfae",
+          "legado-e67139635080f316",
+          "legado-4425e35c7b6fafc6",
+          "legado-51b83595ab3e504c",
+          "legado-ac3e450799ed6be5",
+          "legado-b797b9003b0868e8",
+          "legado-095b7d10c763f3c3",
+          "legado-be6c0e062b2e9b2f",
+          "legado-e7151a125e70c115",
+          "legado-ce74fd19ede48c3e",
+          "legado-f4c4235d3282c9e7",
+          "legado-ce43a58ca9ab42c5",
+          "legado-de4be0f4fefabef1",
+          "legado-2a46920335cc12e1",
+          "legado-0fc943cd0d024e3a",
+          "legado-bc3d06352d335768",
+          "legado-8163d122dd7b4d94",
+          "legado-704a6fec0874f27e",
+          "legado-a863e31794ddd46c",
+          "legado-23e5846a8d0a5db3",
+          "legado-497d436216d20fdd"
+        ],
+        "itens_nccn_refs": [
+          "nccn-20261017-tireoide-encorafenibe-binimetinibe",
+          "nccn-20261017-tireoide-lenva-pembro",
+          "nccn-20261017-tireoide-ipi-nivo",
+          "nccn-20261017-tireoide-anaplasico-neo"
+        ],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 7,
+        "nome": "Segurança, interações e toxicidades",
+        "itens_legados_refs": [
+          "legado-bdebd39c32808ccb",
+          "legado-d9a0bbf146b1e884",
+          "legado-c4af2c332670259c",
+          "legado-8b3f15bb1ecf4fe3",
+          "legado-7b4aab09073937cd",
+          "legado-5687d44d915a857d"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 8,
+        "nome": "Suporte e cuidados",
+        "itens_legados_refs": [
+          "legado-1e74820d08f93c1a",
+          "legado-74b1bdbc50adaf15",
+          "legado-7a0aa9e7969ea605",
+          "legado-0f3c35f3fb560104"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 9,
+        "nome": "Avaliação de resposta e estado da doença",
+        "itens_legados_refs": [],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "NAO_ESTRUTURADO_NESTA_RODADA",
+        "observacao": "Ausência de referências não significa não aplicabilidade; textos dentro de outros itens permanecem preservados."
+      },
+      {
+        "dominio_id": 10,
+        "nome": "Seguimento e sobrevivência",
+        "itens_legados_refs": [
+          "legado-241e415be578d46d",
+          "legado-64761cec9a7ce583",
+          "legado-b5be936c960f151b",
+          "legado-ba73a2e0002e5c8c",
+          "legado-6c43bd267cce66db",
+          "legado-45142ef1ae492cc0",
+          "legado-5317d5873a0d4e41",
+          "legado-375035baf55b6576",
+          "legado-e09cf6a8f814a22e"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 11,
+        "nome": "Encaminhamentos e atuação multiprofissional",
+        "itens_legados_refs": [
+          "legado-7c9b3cbf03b43c80",
+          "legado-9cc8a6fd34181a25",
+          "legado-d969011f07f7f55c",
+          "legado-e95f2616c0437db3"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 12,
+        "nome": "Documentos e acesso assistencial",
+        "itens_legados_refs": [
+          "legado-99ecbe44d857ab8c",
+          "legado-5686a381ffc7426b"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      }
+    ],
+    "indice_itens_legados": [
+      {
+        "item_id": "legado-499283fdc0cf8608",
+        "origem_json_pointer": "/diagnostico/patologico/obtencao/0",
+        "sha256_conteudo": "37234dac80de59802a3c655983f3faa705e0d3df73026ee0a93d66c34f697009",
+        "nome": "/diagnostico/patologico/obtencao/0",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/obtencao/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-1ef158ad4e25a9ce",
+        "origem_json_pointer": "/diagnostico/patologico/obtencao/1",
+        "sha256_conteudo": "f0b5bc07b6f65ed586ffd84a433cc5b1379f58a4036b2e7d60172da52dd1f88d",
+        "nome": "/diagnostico/patologico/obtencao/1",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/obtencao/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-57ae6af69cd522e6",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/0",
+        "sha256_conteudo": "9ce851bd0c420c98d690c30838b1a1ee4bde1ba85032225d45e575d33834ed7a",
+        "nome": "tipo histológico",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-48dae3ef843e2732",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/1",
+        "sha256_conteudo": "8967ff8181c00ea23db35d31f6b5b2402d4fd1ba1ca2c593550312cfaddeca14",
+        "nome": "extensão extratireoidiana (microscópica/macroscópica)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-7d1a57056de084a7",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/2",
+        "sha256_conteudo": "dae55136011ed90ca712d8c8bcd306b312e69400ef56e38661a511ddc5ad1f3b",
+        "nome": "multifocalidade",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-c036ca598f97c7e9",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/3",
+        "sha256_conteudo": "6808f7f9276a80a3df33523cf888be3cc9f6689bae5a5a57b80ca9b6150a769c",
+        "nome": "invasão vascular (número de vasos)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-272328e4ae3afeac",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/4",
+        "sha256_conteudo": "824ba2324daf429bbeed77d76b4d715478dc4e7950899eb4b46fd5c49f6ce323",
+        "nome": "margens (R0/R1/R2)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-842a2eeebaf424d3",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/5",
+        "sha256_conteudo": "1d105659cb7194e1f4c4bda73758bbcb4c974dc9a6e067d0d84939fdfc364a5d",
+        "nome": "número e tamanho de LFN e extensão extranodal",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-7f7479183c69c743",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/6",
+        "sha256_conteudo": "8a414c5c76614c332d0994ad044b4413042340806e1bff03f18d15fe00d87cc9",
+        "nome": "componente pouco diferenciado/alto grau",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-14b70ed38bf74741",
+        "origem_json_pointer": "/estadiamento/sistema",
+        "sha256_conteudo": "d7dab6e16ae3278a0513466816530a61b1fcf4548c0e925655782b9ee09cf5ce",
+        "nome": "AJCC",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-de3dc6d4b2545b38",
+        "origem_json_pointer": "/estadiamento/edicao",
+        "sha256_conteudo": "dcc28f15172f39494d056efeeeeb698d5bde64ceab1a76412c62a08a5aafaf7c",
+        "nome": "8ª",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-3ed3618380bf310b",
+        "origem_json_pointer": "/estadiamento/gruposConduta/0",
+        "sha256_conteudo": "1ed43bb9435a2950ddf99079d98f8cb7615e4dc1a10d5fbba3713d0b11246b21",
+        "nome": "/estadiamento/gruposConduta/0",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-356afaad4c52f822",
+        "origem_json_pointer": "/estadiamento/gruposConduta/1",
+        "sha256_conteudo": "321d6020f0e8c20fd35bfcfff423eaa62c866b4ea0d3ec1df621bf8aaf757095",
+        "nome": "/estadiamento/gruposConduta/1",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-96e727f79b549340",
+        "origem_json_pointer": "/estadiamento/gruposConduta/2",
+        "sha256_conteudo": "a519ea1eaab078dbfc4ac244a9ad6b964632fd088a838acde0dc6fde65a908ee",
+        "nome": "/estadiamento/gruposConduta/2",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-c432e5c3eb9c5377",
+        "origem_json_pointer": "/estadiamento/gruposConduta/3",
+        "sha256_conteudo": "3b1cbd7d664446bb3b96de73fd58d75a022b91be21761054c0ffe1da679ae9b1",
+        "nome": "/estadiamento/gruposConduta/3",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-555d985b37a53eab",
+        "origem_json_pointer": "/estadiamento/gruposConduta/4",
+        "sha256_conteudo": "6df7584527cbd5a0efbd45a01704b1fad60625002435aa1c8789d0b67deff3a7",
+        "nome": "/estadiamento/gruposConduta/4",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-63e6842393d2b448",
+        "origem_json_pointer": "/estadiamento/marcadores",
+        "sha256_conteudo": "e59240aee7a4a33c5781751d61719c6ea1ab99d4d8e76cd5a84528ddcfa95c83",
+        "nome": "/estadiamento/marcadores",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-3cf1fdcffb1ed405",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/0",
+        "sha256_conteudo": "3e8f01dcf452ab46c1d6753fe9be3f8c66d04a56d7ba3c9127be57fa96875200",
+        "nome": "CDT iodorrefratário/avançado",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ae8af49e37d6462d",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/1",
+        "sha256_conteudo": "e9d0d149eeae602545c557f4faddacdb2847e6a0e67b441255d5edbd81bb045c",
+        "nome": "CDT iodorrefratário/avançado",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-9e6b782951928475",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/2",
+        "sha256_conteudo": "b3f9c417aaa7c7006539e3b234e3ccbb2a76f94b6839f3e4bea598d0979fbab6",
+        "nome": "CDT iodorrefratário/avançado",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-adb63f46dfc595dc",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/3",
+        "sha256_conteudo": "259d2a9dd59fa85da1796ff53a5d14dd47265bb8b353cff5751b85785154fcfe",
+        "nome": "Anaplásico (todos os casos, fluxo rápido)",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-06b7d66a859e6f93",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/4",
+        "sha256_conteudo": "fe68a6a9acc2bfd86fdc7bac4f8458f1be6bec60c3da4911ea92734a160c0fb5",
+        "nome": "Anaplásico (alternativa à IHQ)",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a515a64dec006f51",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/5",
+        "sha256_conteudo": "9c75bed5e1e6cd9d09c5b310e5f91b709e23d2c3260566196ace829fb0801be9",
+        "nome": "Medular (todos), sangue ou swab bucal",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/5/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e8b02661bd176b99",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/6",
+        "sha256_conteudo": "2b6998a884cc3dfbe49a26e536b36a83f7f109ef1b604bbbf2ece81f118b6623",
+        "nome": "Medular avançado ou metastático (lâminas/blocos)",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/6/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-49d0ca026f14cc68",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/7",
+        "sha256_conteudo": "20f712c7a18070b482095d0700a69ee9b4172a53a238e5da12b49b6111c990de",
+        "nome": "Só com suspeita clínica de síndrome hereditária",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/7/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-33bfc5378483dd90",
+        "origem_json_pointer": "/tratamento/biomarcadorTratamento/0",
+        "sha256_conteudo": "b0390db80821f7c392069afb5a62ba5fb58119eb7347f920d8d39a203c5dd1b1",
+        "nome": "/tratamento/biomarcadorTratamento/0",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/biomarcadorTratamento/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-682013c86757e907",
+        "origem_json_pointer": "/tratamento/biomarcadorTratamento/1",
+        "sha256_conteudo": "9a718f6782fc5b9daa3ddc4691ae374856469834bb65d977e445333a28c8a49a",
+        "nome": "/tratamento/biomarcadorTratamento/1",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/biomarcadorTratamento/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-7556c4a4973f8f05",
+        "origem_json_pointer": "/tratamento/biomarcadorTratamento/2",
+        "sha256_conteudo": "79844dac440c79d24c50d660181c40566a37dac50cecf0dd5d9b033639b5cc27",
+        "nome": "/tratamento/biomarcadorTratamento/2",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/biomarcadorTratamento/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-270a2e58dae56706",
+        "origem_json_pointer": "/tratamento/biomarcadorTratamento/3",
+        "sha256_conteudo": "9527e26915741a833fd4eb257928e9f992492a01d5e8c756578f56d843680275",
+        "nome": "/tratamento/biomarcadorTratamento/3",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/biomarcadorTratamento/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-68ce8690b8b97b3c",
+        "origem_json_pointer": "/tratamento/biomarcadorTratamento/4",
+        "sha256_conteudo": "84268b7f098746a66a116f125e82a4b562211940406683bf4ade53a494b05399",
+        "nome": "/tratamento/biomarcadorTratamento/4",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/biomarcadorTratamento/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-94a894ac4599b3c0",
+        "origem_json_pointer": "/diagnostico/imagem/0",
+        "sha256_conteudo": "5ac94a02b9e61cc8161f46954b6f6158dbfb5490432fb0dc419c025beea07f8e",
+        "nome": "USG de pescoço/tireoide",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8f411b0310ba1f73",
+        "origem_json_pointer": "/diagnostico/imagem/1",
+        "sha256_conteudo": "016db03b48b8476c5d9ffadf9e9595de662a686e4a877093ccc0747f155cbfc7",
+        "nome": "TC de pescoço (ou RM)",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-4102ce9344702b1e",
+        "origem_json_pointer": "/diagnostico/imagem/2",
+        "sha256_conteudo": "13cdd61c1fcd9ada0bf422784198340f718f7a70b8d492ad6ceacc15e17dce26",
+        "nome": "TC de tórax",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-0abd441f93ca8fb8",
+        "origem_json_pointer": "/diagnostico/imagem/3",
+        "sha256_conteudo": "07efb1fe32bb5b6fdb05d6f638b8ded35521e1cbf276c4260cb23d540a86d436",
+        "nome": "PET/CT FDG",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-dc30d60b583b4fa7",
+        "origem_json_pointer": "/diagnostico/imagem/4",
+        "sha256_conteudo": "779fa0cd8f31730ebbc65d45340af737d856d88fa09e6fca8bf0c6781e496dde",
+        "nome": "RM de crânio",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ffcfc15cb8146af7",
+        "origem_json_pointer": "/diagnostico/imagem/5",
+        "sha256_conteudo": "32eb548424aed8afa4ca7a0e0940ff294cf503e8610431395b1f68cf0cbb474c",
+        "nome": "Cintilografia óssea",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/5/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-cc0aba63bc7577f6",
+        "origem_json_pointer": "/diagnostico/imagem/6",
+        "sha256_conteudo": "ea4877e8177bb7a2e5df0ff7863bc2cbc7c78609bd454149f3d34905ac672a3b",
+        "nome": "RM de abdome",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/6/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-1b2f03b788d3d4b5",
+        "origem_json_pointer": "/diagnostico/imagem/7",
+        "sha256_conteudo": "6bef2d4828152b62747f4915f4a702376b6da7ba0d45b03e673193c4b817f853",
+        "nome": "PET/CT Gálio-DOTATATE",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/7/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-2395cad06b416e7a",
+        "origem_json_pointer": "/estadiamento/exames/0",
+        "sha256_conteudo": "7d12a9f811214db22753e46d80ceb30b6a711867045c50e3778fde43c7b55d01",
+        "nome": "USG de pescoço",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e27cf89ebab2f990",
+        "origem_json_pointer": "/estadiamento/exames/1",
+        "sha256_conteudo": "894826ba3f5044ed1296967287d14c5d5bcf9f813e7a862217f1a091b2aa786b",
+        "nome": "Calcitonina sérica",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-810218dd10671ac5",
+        "origem_json_pointer": "/estadiamento/exames/2",
+        "sha256_conteudo": "4fdeb10fd5b76a38fcc5d836a46e11d4de4442ad8fc824107f6154976a5e86a4",
+        "nome": "CEA",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b15c5f6cf5eb5b85",
+        "origem_json_pointer": "/estadiamento/exames/3",
+        "sha256_conteudo": "851efbcab384d0a53d06619779c93feac5b340280c3e650b10e4d4634b890219",
+        "nome": "PTH (excluir hiperparatireoidismo — MEN2)",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-926ffb0702e6a376",
+        "origem_json_pointer": "/estadiamento/exames/4",
+        "sha256_conteudo": "691c6a98edd8713a9c243f21deab6e7aa93d826e38625a6d825787d07fdf0bb2",
+        "nome": "Cálcio sérico (excluir hiperparatireoidismo)",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-5ccfdd6d986ad295",
+        "origem_json_pointer": "/estadiamento/exames/5",
+        "sha256_conteudo": "25d3a1c72f75b964db2cee639e94f9d97590da7dc1cadd46469266eeb181af48",
+        "nome": "Metanefrinas plasmáticas/urinárias (excluir feocromocitoma)",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/5/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-1958545105f72ac3",
+        "origem_json_pointer": "/estadiamento/exames/6",
+        "sha256_conteudo": "250f7b64269010993a13b83f660012c018b3fac1886a00440df8df4d9685fa9b",
+        "nome": "TC/RM de pescoço",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/6/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-89db3b6ec657bc2a",
+        "origem_json_pointer": "/ligacoes/exames/0",
+        "sha256_conteudo": "00cac656db90cece9385c8c98f658accb5b7c1553202e6be466fa96d39aaf2b9",
+        "nome": "ANATOMOPATOLOGICO",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b66f74e8e17c348b",
+        "origem_json_pointer": "/ligacoes/exames/1",
+        "sha256_conteudo": "de457898f1982aae4c719e3412f19dbd82d9ff9d9341ee5273e6963b450e42ae",
+        "nome": "CALCIO",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-6b18a914cd125c25",
+        "origem_json_pointer": "/ligacoes/exames/2",
+        "sha256_conteudo": "923362da80f53c095bf742082397f5be5163420f644fc391a6633f62b3143990",
+        "nome": "CALCITONINA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-2fd0d1e6d11527a5",
+        "origem_json_pointer": "/ligacoes/exames/3",
+        "sha256_conteudo": "dbefcdbea8b8cfe6f040b0fea4e7a1c426fe4e467ca28e90dfe740279c332d18",
+        "nome": "CEA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-f8fc7ac0873f3a7b",
+        "origem_json_pointer": "/ligacoes/exames/4",
+        "sha256_conteudo": "6256d23e08fe42e0c5f18c2d537248d451b59b2ecdf935ab864d69cd8131c89d",
+        "nome": "CINTILOGRAFIA_OSSEA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a86f44fb1f45604c",
+        "origem_json_pointer": "/ligacoes/exames/5",
+        "sha256_conteudo": "99a98b9d268e78a05608d792d2fad81f4e16f25b8a4f95da9f7decd91a23a0dc",
+        "nome": "IMUNOHISTOQUIMICA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-3e6c333a0b1b77da",
+        "origem_json_pointer": "/ligacoes/exames/6",
+        "sha256_conteudo": "5b752eb16ef8e7fab0a4b87aae695f35d7eb81e2abe5b440a19d720d70edb568",
+        "nome": "PAAF_TIREOIDE",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ad7da3bfcd1a8f20",
+        "origem_json_pointer": "/ligacoes/exames/7",
+        "sha256_conteudo": "3a955b75de510bd32be8d0f7de2bf070f27f223ac4c6a07cf68b35b7271856b2",
+        "nome": "PET_CT_FDG",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-5265d1cef8ead218",
+        "origem_json_pointer": "/ligacoes/exames/8",
+        "sha256_conteudo": "70f95d50266874bdfa84013c787002a366849f1e9caab8a9f28c621775d31c6f",
+        "nome": "PET_DOTATATE",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8d99d43476763a27",
+        "origem_json_pointer": "/ligacoes/exames/9",
+        "sha256_conteudo": "54cbe2667769e9ae776e01a6a32c45a9f0b01b11fd0ac57c52deab38e68f7794",
+        "nome": "PTH",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-2869e01ee2ce9f06",
+        "origem_json_pointer": "/ligacoes/exames/10",
+        "sha256_conteudo": "9c93ac77fd6457370871d33a5c58ba94777b0bb961f1f2eb5572fadaabd4df86",
+        "nome": "RM_ABDOMEN_SUPERIOR",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e50187b45c40874f",
+        "origem_json_pointer": "/ligacoes/exames/11",
+        "sha256_conteudo": "bad8505e4a4450e4dd1c0691d739c56076e3e2a51d04f68ce1f3a4a823e89597",
+        "nome": "RM_CRANIO",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-c4ad324f15dcd340",
+        "origem_json_pointer": "/ligacoes/exames/12",
+        "sha256_conteudo": "eea68f82f02592e6262514a154ff52ae85284765c1f48ab3b07cabb92ead209f",
+        "nome": "TC_ABDOMEN_SUPERIOR",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-596b4e02cd5980f3",
+        "origem_json_pointer": "/ligacoes/exames/13",
+        "sha256_conteudo": "abf013156d8f11e8b9d9be7a4bf0ca7e6df2ae05e9ed8840f510f1f6f3cba514",
+        "nome": "TC_PESCOCO",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-0f9299cb90be33fa",
+        "origem_json_pointer": "/ligacoes/exames/14",
+        "sha256_conteudo": "147b97b900462813d8c6528cc01d88f8a5102936ee96ee4fb121f8a7b77f60b0",
+        "nome": "TC_TORAX",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-da0c6362f6893102",
+        "origem_json_pointer": "/ligacoes/exames/15",
+        "sha256_conteudo": "70e7fb0ce7a6c158105ba4679a3466d14f22376a96557387de025e2e2eef1cb1",
+        "nome": "TIREOGLOBULINA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-0496e636a833ae07",
+        "origem_json_pointer": "/ligacoes/exames/16",
+        "sha256_conteudo": "a723186a1328a8a0f43e1b82bd5d49ea0574e6bc72a7ad32889ce010ff549cdd",
+        "nome": "TSH",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8c9193fd6b56d6fe",
+        "origem_json_pointer": "/ligacoes/exames/17",
+        "sha256_conteudo": "0ae0fc98fe1c5cf49467a9e93415bcae64502493285f516936f5b915ca3048b7",
+        "nome": "USG_TIREOIDE",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-5b33205a35a8ccfa",
+        "origem_json_pointer": "/ligacoes/exames/18",
+        "sha256_conteudo": "e587a7250a8633f1505dfb613cd4283458e6a8198d35f3721641c9ee3878017f",
+        "nome": "MOLECULAR_PCR_MUTACAO",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d1d5ca2b19d910e8",
+        "origem_json_pointer": "/ligacoes/exames/19",
+        "sha256_conteudo": "c77d15bd8da7582e2d6d9825573309affb51c04c30c7829dbea1953584a30ee9",
+        "nome": "SEQUENCIAMENTO_AMPLICON",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ec97d6e33854c24b",
+        "origem_json_pointer": "/ligacoes/exames/20",
+        "sha256_conteudo": "c6f5e5a6057e9ce942cde9a80b415b2bdbfccf0ac7d689ed5ae89b0846f94872",
+        "nome": "FISH",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-2a61e1921b1ab19f",
+        "origem_json_pointer": "/tratamento/cenarios/0",
+        "sha256_conteudo": "3eca8ebbd4021b20fedb6667dfb869ac5037026effdd134558005478331491a7",
+        "nome": "CDT iodorrefratário de baixo volume e oligossintomático",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-28a7eba45973b8e5",
+        "origem_json_pointer": "/tratamento/cenarios/1",
+        "sha256_conteudo": "93ec3519213bef39bd115fd855cb7d624faae18fc75b8ae0b63da5abea471459",
+        "nome": "CDT iodorrefratário selecionado",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-4b0fcd08328ec294",
+        "origem_json_pointer": "/tratamento/cenarios/2",
+        "sha256_conteudo": "23ce4ffa8223ff97fa80603e208c1ddbd621d84c496e89ca99c69c7fa6fab08b",
+        "nome": "CDT iodorrefratário progressivo",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-20833fdc2eafe417",
+        "origem_json_pointer": "/tratamento/cenarios/3",
+        "sha256_conteudo": "5b2f10640f5d21b87a11326cb797c7e2c452b4f214e134d3d0fce4061852f73d",
+        "nome": "CDT baixo risco ≤2 cm (cT1N0M0)",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-3696a811930d929b",
+        "origem_json_pointer": "/tratamento/cenarios/4",
+        "sha256_conteudo": "6e41c451908e1b198aeffa12556da1db47d99872835d3095b3897da7b02dc5d5",
+        "nome": "Anaplásico IVA",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-11f97eedd7650e8d",
+        "origem_json_pointer": "/tratamento/cenarios/5",
+        "sha256_conteudo": "582353aa501d5399eec8fc5dd572527a310d3f96edcd4daf724aaee082b6688e",
+        "nome": "Anaplásico IVC",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/5/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-3749c34fcf2d793a",
+        "origem_json_pointer": "/tratamento/cenarios/6",
+        "sha256_conteudo": "5990b3f1310569ac44ebb6551e62305f2918e77e178503406803e60078aee431",
+        "nome": "Medular inicial",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/6/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-db914878c3d2762c",
+        "origem_json_pointer": "/tratamento/cenarios/7",
+        "sha256_conteudo": "a6100025e373892119a25940122ff534d6e86054c1de81f8a87863426f2d3f89",
+        "nome": "Medular avançado de baixo volume",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/7/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d9e08bda209c356a",
+        "origem_json_pointer": "/tratamento/protocolos/0",
+        "sha256_conteudo": "92b4d164e38dd785538d1f0588aa158fec5c90ee15d632495d47ff066dd2ee7a",
+        "nome": "Lenvatinibe",
+        "id_original": "tireoide-cdt-lenvatinibe",
+        "fonte_local_ref": "/tratamento/protocolos/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-419a9be042bc3f76",
+        "origem_json_pointer": "/tratamento/protocolos/1",
+        "sha256_conteudo": "97d381f4af82b66268c1cc8b84f80e457ad28ae339630058f9806469bea97b0c",
+        "nome": "Sorafenibe",
+        "id_original": "tireoide-cdt-sorafenibe",
+        "fonte_local_ref": "/tratamento/protocolos/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-7f5a6d4edf71da55",
+        "origem_json_pointer": "/tratamento/protocolos/2",
+        "sha256_conteudo": "144d58a22c77c991678c99eb1c958a14897e77b4ffa6260b6dada91275dd39ca",
+        "nome": "Cabozantinibe",
+        "id_original": "tireoide-cdt-cabozantinibe",
+        "fonte_local_ref": "/tratamento/protocolos/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-028685e8ce18e46a",
+        "origem_json_pointer": "/tratamento/protocolos/3",
+        "sha256_conteudo": "f3d97eaaec6dfcae3d3a45218fb2bd9aacc81d32ec5f60d83454fe046a58390f",
+        "nome": "Dabrafenibe + trametinibe (BRAF V600E)",
+        "id_original": "tireoide-cdt-dabrafenibe-trametinibe",
+        "fonte_local_ref": "/tratamento/protocolos/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-53a22c71b883c586",
+        "origem_json_pointer": "/tratamento/protocolos/4",
+        "sha256_conteudo": "d85f9bce273f538a10e5fa66cc50796c0ba3917948306f7e10000d3f6f3bffaa",
+        "nome": "Dabrafenibe monoterapia (BRAF V600E)",
+        "id_original": "tireoide-cdt-dabrafenibe",
+        "fonte_local_ref": "/tratamento/protocolos/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-5fe9409adc6abd52",
+        "origem_json_pointer": "/tratamento/protocolos/5",
+        "sha256_conteudo": "0ab18af7be4a9dd57b1683eb2d13f674f670c127b5f2d11df7d18f9d0cdf74c5",
+        "nome": "Vemurafenibe (BRAF V600E)",
+        "id_original": "tireoide-cdt-vemurafenibe",
+        "fonte_local_ref": "/tratamento/protocolos/5/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-49aa48f2b53373d5",
+        "origem_json_pointer": "/tratamento/protocolos/6",
+        "sha256_conteudo": "bd6c48df63e307b71a6bcc4e0003eb40342a25ba2152c021d94549dcda46d114",
+        "nome": "Larotrectinibe (fusão NTRK1-3)",
+        "id_original": "tireoide-cdt-larotrectinibe",
+        "fonte_local_ref": "/tratamento/protocolos/6/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-65fed1ef12e66a46",
+        "origem_json_pointer": "/tratamento/protocolos/7",
+        "sha256_conteudo": "a9d2cdddf9dda12ed653df85b2482790320e7008724c91d3cacf8e90e6a74c34",
+        "nome": "Selpercatinibe (RET mutado)",
+        "id_original": "tireoide-medular-selpercatinibe",
+        "fonte_local_ref": "/tratamento/protocolos/7/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-f27f54f6f8c4cfae",
+        "origem_json_pointer": "/tratamento/protocolos/8",
+        "sha256_conteudo": "c6805feb2be5ec1a2a893350e0350a7238de5d0efb962d2021e68db9b4cfc8e5",
+        "nome": "Vandetanibe",
+        "id_original": "tireoide-medular-vandetanibe",
+        "fonte_local_ref": "/tratamento/protocolos/8/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e67139635080f316",
+        "origem_json_pointer": "/tratamento/protocolos/9",
+        "sha256_conteudo": "30465ca2c0b26ffc3f1f2878e45902719546a26300cd87bf253e965fd5a7eec2",
+        "nome": "Cabozantinibe (comprimido)",
+        "id_original": "tireoide-medular-cabozantinibe",
+        "fonte_local_ref": "/tratamento/protocolos/9/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-4425e35c7b6fafc6",
+        "origem_json_pointer": "/tratamento/protocolos/10",
+        "sha256_conteudo": "b92e3de5d9f29b121c04f71027570cc7bcee65f67fa41e544027e24d16cbf7ca",
+        "nome": "Dacarbazina",
+        "id_original": "tireoide-medular-dacarbazina",
+        "fonte_local_ref": "/tratamento/protocolos/10/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-51b83595ab3e504c",
+        "origem_json_pointer": "/tratamento/protocolos/11",
+        "sha256_conteudo": "d0936ce6796b0f4904ba384251fefce8623a8359f94303e3d4bf03f85dd268d4",
+        "nome": "Dacarbazina + 5-FU",
+        "id_original": "tireoide-medular-dtic-5fu",
+        "fonte_local_ref": "/tratamento/protocolos/11/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ac3e450799ed6be5",
+        "origem_json_pointer": "/tratamento/protocolos/12",
+        "sha256_conteudo": "433279f09a83fd06b0374a392ad3383bebad40a95eeb82d56a5112ff48349796",
+        "nome": "Ciclofosfamida + vincristina + dacarbazina",
+        "id_original": "tireoide-medular-cvd",
+        "fonte_local_ref": "/tratamento/protocolos/12/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b797b9003b0868e8",
+        "origem_json_pointer": "/tratamento/protocolos/13",
+        "sha256_conteudo": "96c28f113d3809a0922bc1fba7512a80d03f1c8936ba61f2a89d8ddacd9197f4",
+        "nome": "Doxorrubicina",
+        "id_original": "tireoide-medular-doxorrubicina",
+        "fonte_local_ref": "/tratamento/protocolos/13/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-095b7d10c763f3c3",
+        "origem_json_pointer": "/tratamento/protocolos/14",
+        "sha256_conteudo": "a0d4af43fdd073dfe6dd10e49e5474c9b66a7177fcbdab646df387b37d21036a",
+        "nome": "Paclitaxel + carboplatina a cada 21 dias (anaplásico)",
+        "id_original": "tireoide-anaplasico-paclitaxel-carboplatina",
+        "fonte_local_ref": "/tratamento/protocolos/14/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-be6c0e062b2e9b2f",
+        "origem_json_pointer": "/tratamento/protocolos/15",
+        "sha256_conteudo": "5e69af61cff62e144c8b4f7ca39bd2fd2906a1ad577f498a89fd7b434023301a",
+        "nome": "Paclitaxel semanal (anaplásico)",
+        "id_original": "tireoide-anaplasico-paclitaxel-semanal",
+        "fonte_local_ref": "/tratamento/protocolos/15/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e7151a125e70c115",
+        "origem_json_pointer": "/tratamento/protocolos/16",
+        "sha256_conteudo": "c9daf20a7934fcc7dbe3aba70d50c59bc3c5b60efecf4ac209f01c02f5ce26cd",
+        "nome": "Doxorrubicina monoterapia (anaplásico)",
+        "id_original": "tireoide-anaplasico-doxorrubicina",
+        "fonte_local_ref": "/tratamento/protocolos/16/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ce74fd19ede48c3e",
+        "origem_json_pointer": "/tratamento/protocolos/17",
+        "sha256_conteudo": "43fc0601a8bfedaed82f30155104b4f99a40abd13540a456ed0a33d6cde83a16",
+        "nome": "Dabrafenibe + trametinibe (anaplásico BRAF V600E)",
+        "id_original": "tireoide-anaplasico-dabrafenibe-trametinibe",
+        "fonte_local_ref": "/tratamento/protocolos/17/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-f4c4235d3282c9e7",
+        "origem_json_pointer": "/tratamento/protocolos/18",
+        "sha256_conteudo": "6d22dc283fabf41dba9db86a1f6b158eb07625b2990ea08f716fd9e94eb405da",
+        "nome": "Selpercatinibe (CDT com fusão RET, iodorrefratário)",
+        "id_original": "tireoide-cdt-selpercatinibe",
+        "fonte_local_ref": "/tratamento/protocolos/18/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ce43a58ca9ab42c5",
+        "origem_json_pointer": "/tratamento/cirurgia/0",
+        "sha256_conteudo": "4ff2c9bac3a6669590f3e7ce2930196c60c1488e552be9cdfafd79158f0abc3f",
+        "nome": "/tratamento/cirurgia/0",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cirurgia/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-de4be0f4fefabef1",
+        "origem_json_pointer": "/tratamento/cirurgia/1",
+        "sha256_conteudo": "d6aef51dcd969c59b346ee9d580d272dcb238a07089ad76ba6a80d3819981046",
+        "nome": "/tratamento/cirurgia/1",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cirurgia/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-2a46920335cc12e1",
+        "origem_json_pointer": "/tratamento/cirurgia/2",
+        "sha256_conteudo": "aca69c3c3791d6130bdbd329ad1c7680886c4b0474301c1d07d50e9015a1bb3a",
+        "nome": "/tratamento/cirurgia/2",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cirurgia/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-0fc943cd0d024e3a",
+        "origem_json_pointer": "/tratamento/cirurgia/3",
+        "sha256_conteudo": "0744f56f59ac80e920af41a457644c9b54528ea1f49729170547b844a2a97760",
+        "nome": "/tratamento/cirurgia/3",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cirurgia/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-bc3d06352d335768",
+        "origem_json_pointer": "/tratamento/cirurgia/4",
+        "sha256_conteudo": "f6a85cbcfeb3ea3c2004a6a8067c2fa2ebbf33d3d7f250b5f4fb12aeef916616",
+        "nome": "/tratamento/cirurgia/4",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cirurgia/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8163d122dd7b4d94",
+        "origem_json_pointer": "/tratamento/radioterapia/0",
+        "sha256_conteudo": "a6d8824c2d06f4aa6034edf47e75c42ac034f1e1f1155f9e51324bd142f7fd8c",
+        "nome": "I-131 — CDT baixo/intermediário risco, sem suspeita de doença residual (ablação)",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/radioterapia/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-704a6fec0874f27e",
+        "origem_json_pointer": "/tratamento/radioterapia/1",
+        "sha256_conteudo": "0677d2b85021a34ef52eced4d0b8cb6b18fac5a258648f95ea8ac2cb43413747",
+        "nome": "I-131 — CDT baixo/intermediário risco com suspeita de doença microscópica residual ou fator de pior prognóstico",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/radioterapia/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a863e31794ddd46c",
+        "origem_json_pointer": "/tratamento/radioterapia/2",
+        "sha256_conteudo": "f6820331cd58eb509bcb0764b46f62d8a990697550d58787663b82a271c6ebd9",
+        "nome": "I-131 — CDT com doença residual macroscópica ou metástases à distância (terapêutica)",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/radioterapia/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-23e5846a8d0a5db3",
+        "origem_json_pointer": "/tratamento/radioterapia/3",
+        "sha256_conteudo": "fcd438c05aeb4fc4b2741a31031cceea962d903202f83dff9b7efc8d30804dca",
+        "nome": "Anaplásico IVA/IVB — RT concomitante à QT pós-cirurgia",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/radioterapia/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-497d436216d20fdd",
+        "origem_json_pointer": "/tratamento/radioterapia/4",
+        "sha256_conteudo": "85d6436667ec8702ac1f5e11b9d88c3a7187c4a08fa0ed2476b5d4f1c37bcbd1",
+        "nome": "Medular — RT adjuvante (T4 ou margens positivas)",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/radioterapia/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-bdebd39c32808ccb",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/0",
+        "sha256_conteudo": "c955185402c80712435388874e047f1d6635bbf66c05b43bab6046680175b665",
+        "nome": "/ligacoes/interacoesConsultar/0",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d9a0bbf146b1e884",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/1",
+        "sha256_conteudo": "5cce1c3a1fdcefb1fda054859ae7d31ea311d7775b095a3132b3579f6d05cf43",
+        "nome": "/ligacoes/interacoesConsultar/1",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-c4af2c332670259c",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/2",
+        "sha256_conteudo": "792ae6c848053a618fad824255312217c05a5c9bfa806867992d889353d78d05",
+        "nome": "/ligacoes/interacoesConsultar/2",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8b3f15bb1ecf4fe3",
+        "origem_json_pointer": "/ligacoes/ctcaeAcao/0",
+        "sha256_conteudo": "c2db72f0a73eb1f1cb7b68d9428a96eb075e4dbc4961d6fda311b683612d9580",
+        "nome": "/ligacoes/ctcaeAcao/0",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-7b4aab09073937cd",
+        "origem_json_pointer": "/ligacoes/ctcaeAcao/1",
+        "sha256_conteudo": "3045261295ad6cddc5676a80b7a2ad9bdcbd03c29ae9e11a0133556ae91a21b9",
+        "nome": "/ligacoes/ctcaeAcao/1",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-5687d44d915a857d",
+        "origem_json_pointer": "/ligacoes/ctcaeAcao/2",
+        "sha256_conteudo": "c7cd16deeda6d099c7392bd88d9ef197ea5ac02d81410b5daa979946c69d1e87",
+        "nome": "/ligacoes/ctcaeAcao/2",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-1e74820d08f93c1a",
+        "origem_json_pointer": "/tratamento/suporte",
+        "sha256_conteudo": "05e272c008833e9f1ef1032922a10e1b8b11e0269921238cb10351903697ee75",
+        "nome": "/tratamento/suporte",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/suporte/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-74b1bdbc50adaf15",
+        "origem_json_pointer": "/ligacoes/suporteReceitas/0",
+        "sha256_conteudo": "dec62bb71590ec4fccc97cf520c8d77dd66b0b227d6ab9c44858d70c38a9f7e2",
+        "nome": "anti-hipertensivo para TKI",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-7a0aa9e7969ea605",
+        "origem_json_pointer": "/ligacoes/suporteReceitas/1",
+        "sha256_conteudo": "417de0c093bfacb668e170f702374aa5aedf66f720643014de4088781ef1eedd",
+        "nome": "loperamida (diarreia hormonal do medular)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-0f3c35f3fb560104",
+        "origem_json_pointer": "/ligacoes/suporteReceitas/2",
+        "sha256_conteudo": "ef64d85d3a86e84d6055d5a131382dee86cc5d6dda46544756d85d09ca28d21f",
+        "nome": "levotiroxina com TSH suprimido no iodorrefratário",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-241e415be578d46d",
+        "origem_json_pointer": "/tratamento/seguimento/0",
+        "sha256_conteudo": "73119f05a5e51c38596f024121820953593f90ac560bdea619f23d126029c9a4",
+        "nome": "Medular, 2-3 meses pós-operatório",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/seguimento/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-64761cec9a7ce583",
+        "origem_json_pointer": "/tratamento/seguimento/1",
+        "sha256_conteudo": "83e91d5cff29cf4f43125b21f94187797d70e89fcea02f05ef5ac10c4b44589a",
+        "nome": "Medular, anos 1-2 e depois",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/seguimento/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b5be936c960f151b",
+        "origem_json_pointer": "/tratamento/seguimento/2",
+        "sha256_conteudo": "4567c34053d4609b9d840781693496813538e1f184b304648377bd6c26e85e86",
+        "nome": "Medular com elevação de marcadores",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/seguimento/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ba73a2e0002e5c8c",
+        "origem_json_pointer": "/tratamento/seguimento/3",
+        "sha256_conteudo": "b52d5af52be1a6d5ca8290dd437e4bbb77ea610b4472586ef3294e85a048d2b2",
+        "nome": "MEN2",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/seguimento/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-6c43bd267cce66db",
+        "origem_json_pointer": "/tratamento/seguimento/4",
+        "sha256_conteudo": "c9f2d336bcfacb17efc9e5eedf1c359e4e008f36c2d462bf41fd5c653112ce90",
+        "nome": "CDT",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/seguimento/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-45142ef1ae492cc0",
+        "origem_json_pointer": "/tratamento/seguimento/5",
+        "sha256_conteudo": "4e56d2dbc9a460183a597222cee1293af2902280d74cb61c351c8afc9f11cd79",
+        "nome": "CDT — alvo de TSH com levotiroxina (PCDT Quadro 4)",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/seguimento/5/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-5317d5873a0d4e41",
+        "origem_json_pointer": "/ligacoes/orientacoes/0",
+        "sha256_conteudo": "94dffb44d8cdc6fd9735b64151df0e7a42fcd6a18823e55abc166d47d7d6b0ba",
+        "nome": "aferição de PA domiciliar em TKI",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-375035baf55b6576",
+        "origem_json_pointer": "/ligacoes/orientacoes/1",
+        "sha256_conteudo": "66d2b4ae16b8cbf213aa9f00b2c9f784b5da0af4df0a4a84cfc8797931ac2792",
+        "nome": "ECG basal e seriado com vandetanibe/selpercatinibe",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e09cf6a8f814a22e",
+        "origem_json_pointer": "/ligacoes/orientacoes/2",
+        "sha256_conteudo": "44ab1fede447ca4c986e351abc245d3f63a869ce7e739899609c7bcaa10590b7",
+        "nome": "aconselhamento genético familiar no medular (RET)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-7c9b3cbf03b43c80",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/0",
+        "sha256_conteudo": "7493766c8afeb1f691e416372742d2691a9ad5b28a4a5d999f7fadba22338762",
+        "nome": "cirurgia de cabeça e pescoço",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-9cc8a6fd34181a25",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/1",
+        "sha256_conteudo": "b7656bb8bf215c58c0d259a51f7e6c70bcad405fab8291cdf2a5b41c3edfe2ad",
+        "nome": "endocrinologia",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d969011f07f7f55c",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/2",
+        "sha256_conteudo": "3186508b469e274ab373a729f097f20bd2ba63a67e329f1ff6fd5485de676dda",
+        "nome": "medicina nuclear",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e95f2616c0437db3",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/3",
+        "sha256_conteudo": "f409f2647d0345e8358769f81dc9be13b501b59244f575cf0b6fe3fd9688a981",
+        "nome": "oncogenética",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-99ecbe44d857ab8c",
+        "origem_json_pointer": "/ligacoes/laudos/0",
+        "sha256_conteudo": "ea84712683a5014b2877df49cec6d58f2fb95a2d58d182fe572a131926629ab9",
+        "nome": "APAC de quimioterapia (C73)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-5686a381ffc7426b",
+        "origem_json_pointer": "/ligacoes/laudos/1",
+        "sha256_conteudo": "0675a88125ba22c6090125a76084339d7682a7a4aa1605c30f75e2497850ae92",
+        "nome": "solicitação de teste RET germinativo",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      }
+    ],
+    "itens_nccn": [
+      {
+        "item_id": "nccn-20261017-tireoide-encorafenibe-binimetinibe",
+        "nome": "Encorafenibe + binimetinibe",
+        "tipo": "OPCAO_TERAPEUTICA",
+        "dominio_principal": 6,
+        "conteudo_extraido": "Encorafenibe/binimetinibe para BRAF V600E: no carcinoma diferenciado, UCC após progressão em tratamento prévio e sem alternativa satisfatória, dentro do cenário de THYR-B 1/5. No anaplásico metastático, Preferred em THYR-B 3/5. Ambos categoria 2A pelo cabeçalho; não misturar as condições de linha.",
+        "aplicabilidade": {
+          "criterios": [
+            "BRAF V600E",
+            "Diferenciado: cenário iodorrefratário/progressivo descrito, após terapia e sem alternativa satisfatória",
+            "Anaplásico metastático: ramo separado"
+          ],
+          "paciente_individual": null,
+          "estado": "NAO_AVALIADA"
+        },
+        "dados_estruturados": {
+          "farmacos": [
+            "encorafenibe",
+            "binimetinibe"
+          ],
+          "posologia": {
+            "estado": "NAO_EXTRAIDA_NESTA_RODADA",
+            "valor": null,
+            "motivo": "A rodada incorpora o delta de indicação/cenário; não completa dose por inferência."
+          }
+        },
+        "fonte_refs": [
+          {
+            "fonte_id": "nccn-ccc238b89df0",
+            "edicao": "2.2026",
+            "pagina_pdf": 62,
+            "paginas_pdf": [
+              62
+            ],
+            "secao": "THYR-B 1/5",
+            "trecho": "Binimetinib/Encorafenib for BRAF V600E",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "0ed396290ae6e0a108c1b372f61c9ad3d568c0b672d401de51ae1ca1d16f16a8"
+          },
+          {
+            "fonte_id": "nccn-ccc238b89df0",
+            "edicao": "2.2026",
+            "pagina_pdf": 64,
+            "paginas_pdf": [
+              64
+            ],
+            "secao": "THYR-B 3/5, anaplásico metastático",
+            "trecho": "Binimetinib/Encorafenib",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "0ed396290ae6e0a108c1b372f61c9ad3d568c0b672d401de51ae1ca1d16f16a8"
+          }
+        ],
+        "evidencia_declarada": {
+          "sistema": "NCCN",
+          "categoria": "2A por cabeçalho",
+          "preferencia": "UCC no diferenciado; Preferred no anaplásico",
+          "estado": "CONFERIDA_DOCUMENTALMENTE_A_CONFERIR_CLINICAMENTE",
+          "nota": "2A por cabeçalho somente onde a página expressamente declara essa regra; não é categoria inferida por conhecimento externo."
+        },
+        "estado_extracao": "EXTRAIDO_COM_LIMITES_DECLARADOS",
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "temporalidade": {
+          "referencia": "CENARIO_DESCRITO",
+          "datas_individuais": null
+        },
+        "propor_automaticamente": false,
+        "disponivel_para_prescricao": false,
+        "acesso": {
+          "registro_anvisa": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "incorporacao_conitec": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "pcdt_ddt": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "sigtap_apac": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "cobertura_privada": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "disponibilidade_institucional": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          }
+        },
+        "alternativas_legadas_refs": [],
+        "relacoes_refs": [
+          "relacao-nccn-20261017-tireoide-encorafenibe-binimetinibe"
+        ],
+        "conflitos_refs": [],
+        "pendencias": [
+          "REVISAO_CLINICA_DO_DELTA",
+          "VERIFICAR_ACESSO_BRASILEIRO_POR_INDICACAO",
+          "POSOLOGIA_E_SUPORTE_NAO_COMPLETOS_NESTA_RODADA"
+        ],
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+            "anterior": {
+              "fonte_refs": [
+                {
+                  "fonte_id": "nccn-ccc238b89df0",
+                  "paginas_pdf": [
+                    62,
+                    64
+                  ],
+                  "secao": "THYR-B 1/5 e 3/5",
+                  "natureza": "EXTRACAO_DOCUMENTAL",
+                  "pagina_pdf": 62,
+                  "trecho": "Binimetinib/Encorafenib for BRAF V600E mutation that has progressed following prior treatment with"
+                }
+              ],
+              "conteudo_extraido": "Opções específicas por histologia/biomarcador com contextos distintos; exigem separação antes de prescrição.",
+              "aplicabilidade": {
+                "criterios": [
+                  "BRAF V600E",
+                  "Distinguir diferenciado refratário/progressivo de anaplásico metastático",
+                  "Conferir linha e alternativas"
+                ],
+                "paciente_individual": null,
+                "estado": "NAO_AVALIADA"
+              },
+              "evidencia_declarada": {
+                "sistema": "NCCN",
+                "categoria": null,
+                "estado": "NAO_EXTRAIDA_POR_ITEM"
+              }
+            },
+            "motivo": "No ramo diferenciado faltava explicitar progressão após terapia prévia e ausência de alternativa satisfatória; os dois ramos não têm mesma preferência.",
+            "aprovacao_clinica": null
+          },
+          {
+            "revisao": "2026-10-17-nccn-final-documental",
+            "anterior": {
+              "conteudo_extraido": "Encorafenibe/binimetinibe para BRAF V600E: no carcinoma diferenciado, UCC após progressão em tratamento prévio e sem alternativa satisfatória, dentro do cenário de THYR-B1/5. No anaplásico metastático, Preferred em THYR-B3/5. Ambos categoria2A pelo cabeçalho; não misturar as condições de linha."
+            },
+            "motivo": "Espaçamento da prosa; sem modificar valores, códigos ou fontes."
+          }
+        ],
+        "fontes_por_campo": {
+          "conteudo_extraido": [
+            {
+              "fonte_id": "nccn-ccc238b89df0",
+              "edicao": "2.2026",
+              "pagina_pdf": 62,
+              "paginas_pdf": [
+                62
+              ],
+              "secao": "THYR-B 1/5",
+              "trecho": "Binimetinib/Encorafenib for BRAF V600E",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "0ed396290ae6e0a108c1b372f61c9ad3d568c0b672d401de51ae1ca1d16f16a8"
+            },
+            {
+              "fonte_id": "nccn-ccc238b89df0",
+              "edicao": "2.2026",
+              "pagina_pdf": 64,
+              "paginas_pdf": [
+                64
+              ],
+              "secao": "THYR-B 3/5, anaplásico metastático",
+              "trecho": "Binimetinib/Encorafenib",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "0ed396290ae6e0a108c1b372f61c9ad3d568c0b672d401de51ae1ca1d16f16a8"
+            }
+          ],
+          "aplicabilidade": [
+            {
+              "fonte_id": "nccn-ccc238b89df0",
+              "edicao": "2.2026",
+              "pagina_pdf": 62,
+              "paginas_pdf": [
+                62
+              ],
+              "secao": "THYR-B 1/5",
+              "trecho": "Binimetinib/Encorafenib for BRAF V600E",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "0ed396290ae6e0a108c1b372f61c9ad3d568c0b672d401de51ae1ca1d16f16a8"
+            },
+            {
+              "fonte_id": "nccn-ccc238b89df0",
+              "edicao": "2.2026",
+              "pagina_pdf": 64,
+              "paginas_pdf": [
+                64
+              ],
+              "secao": "THYR-B 3/5, anaplásico metastático",
+              "trecho": "Binimetinib/Encorafenib",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "0ed396290ae6e0a108c1b372f61c9ad3d568c0b672d401de51ae1ca1d16f16a8"
+            }
+          ],
+          "evidencia_declarada": [
+            {
+              "fonte_id": "nccn-ccc238b89df0",
+              "edicao": "2.2026",
+              "pagina_pdf": 62,
+              "paginas_pdf": [
+                62
+              ],
+              "secao": "THYR-B 1/5",
+              "trecho": "Binimetinib/Encorafenib for BRAF V600E",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "0ed396290ae6e0a108c1b372f61c9ad3d568c0b672d401de51ae1ca1d16f16a8"
+            },
+            {
+              "fonte_id": "nccn-ccc238b89df0",
+              "edicao": "2.2026",
+              "pagina_pdf": 64,
+              "paginas_pdf": [
+                64
+              ],
+              "secao": "THYR-B 3/5, anaplásico metastático",
+              "trecho": "Binimetinib/Encorafenib",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "0ed396290ae6e0a108c1b372f61c9ad3d568c0b672d401de51ae1ca1d16f16a8"
+            }
+          ]
+        }
+      },
+      {
+        "item_id": "nccn-20261017-tireoide-lenva-pembro",
+        "nome": "Lenvatinibe + pembrolizumabe",
+        "tipo": "OPCAO_TERAPEUTICA",
+        "dominio_principal": 6,
+        "conteudo_extraido": "Lenvatinibe/pembrolizumabe: no carcinoma diferenciado, UCC se progressão em lenvatinibe; no anaplásico metastático, Other Recommended. Categoria 2A pelo cabeçalho. Não transferir o requisito de tratamento prévio do primeiro ramo ao segundo.",
+        "aplicabilidade": {
+          "criterios": [
+            "Diferenciado: progressão em lenvatinibe no cenário descrito",
+            "OU anaplásico metastático, ramo próprio"
+          ],
+          "paciente_individual": null,
+          "estado": "NAO_AVALIADA"
+        },
+        "dados_estruturados": {
+          "farmacos": [
+            "lenvatinibe",
+            "pembrolizumabe"
+          ],
+          "posologia": {
+            "estado": "NAO_EXTRAIDA_NESTA_RODADA",
+            "valor": null,
+            "motivo": "A rodada incorpora o delta de indicação/cenário; não completa dose por inferência."
+          }
+        },
+        "fonte_refs": [
+          {
+            "fonte_id": "nccn-ccc238b89df0",
+            "edicao": "2.2026",
+            "pagina_pdf": 62,
+            "paginas_pdf": [
+              62
+            ],
+            "secao": "THYR-B 1/5",
+            "trecho": "Lenvatinib + Pembrolizumab if disease progression on Lenvatinib",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "0ed396290ae6e0a108c1b372f61c9ad3d568c0b672d401de51ae1ca1d16f16a8"
+          },
+          {
+            "fonte_id": "nccn-ccc238b89df0",
+            "edicao": "2.2026",
+            "pagina_pdf": 64,
+            "paginas_pdf": [
+              64
+            ],
+            "secao": "THYR-B 3/5",
+            "trecho": "Lenvatinib + Pembrolizumab",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "0ed396290ae6e0a108c1b372f61c9ad3d568c0b672d401de51ae1ca1d16f16a8"
+          }
+        ],
+        "evidencia_declarada": {
+          "sistema": "NCCN",
+          "categoria": "2A por cabeçalho",
+          "preferencia": "UCC no diferenciado; Other Recommended no anaplásico",
+          "estado": "CONFERIDA_DOCUMENTALMENTE_A_CONFERIR_CLINICAMENTE",
+          "nota": "2A por cabeçalho somente onde a página expressamente declara essa regra; não é categoria inferida por conhecimento externo."
+        },
+        "estado_extracao": "EXTRAIDO_COM_LIMITES_DECLARADOS",
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "temporalidade": {
+          "referencia": "CENARIO_DESCRITO",
+          "datas_individuais": null
+        },
+        "propor_automaticamente": false,
+        "disponivel_para_prescricao": false,
+        "acesso": {
+          "registro_anvisa": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "incorporacao_conitec": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "pcdt_ddt": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "sigtap_apac": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "cobertura_privada": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "disponibilidade_institucional": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          }
+        },
+        "alternativas_legadas_refs": [],
+        "relacoes_refs": [
+          "relacao-nccn-20261017-tireoide-lenva-pembro"
+        ],
+        "conflitos_refs": [],
+        "pendencias": [
+          "REVISAO_CLINICA_DO_DELTA",
+          "VERIFICAR_ACESSO_BRASILEIRO_POR_INDICACAO",
+          "POSOLOGIA_E_SUPORTE_NAO_COMPLETOS_NESTA_RODADA"
+        ],
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+            "anterior": {
+              "fonte_refs": [
+                {
+                  "fonte_id": "nccn-ccc238b89df0",
+                  "paginas_pdf": [
+                    62,
+                    64
+                  ],
+                  "secao": "THYR-B 1/5 e 3/5",
+                  "natureza": "EXTRACAO_DOCUMENTAL",
+                  "pagina_pdf": 62,
+                  "trecho": "Lenvatinib + Pembrolizumab if disease progression on Lenvatinib • Pembrolizumabg for TMB-H"
+                }
+              ],
+              "conteudo_extraido": "Opções específicas por histologia/biomarcador com contextos distintos; exigem separação antes de prescrição.",
+              "aplicabilidade": {
+                "criterios": [
+                  "Distinguir diferenciado com progressão a lenvatinibe de anaplásico metastático"
+                ],
+                "paciente_individual": null,
+                "estado": "NAO_AVALIADA"
+              },
+              "evidencia_declarada": {
+                "sistema": "NCCN",
+                "categoria": null,
+                "estado": "NAO_EXTRAIDA_POR_ITEM"
+              }
+            },
+            "motivo": "Texto genérico não conservava as categorias de preferência distintas dos ramos nem explicitava progressão em lenvatinibe no diferenciado.",
+            "aprovacao_clinica": null
+          },
+          {
+            "revisao": "2026-10-17-nccn-final-documental",
+            "anterior": {
+              "conteudo_extraido": "Lenvatinibe/pembrolizumabe: no carcinoma diferenciado, UCC se progressão em lenvatinibe; no anaplásico metastático, Other Recommended. Categoria2A pelo cabeçalho. Não transferir o requisito de tratamento prévio do primeiro ramo ao segundo."
+            },
+            "motivo": "Espaçamento da prosa; sem modificar valores, códigos ou fontes."
+          }
+        ],
+        "fontes_por_campo": {
+          "conteudo_extraido": [
+            {
+              "fonte_id": "nccn-ccc238b89df0",
+              "edicao": "2.2026",
+              "pagina_pdf": 62,
+              "paginas_pdf": [
+                62
+              ],
+              "secao": "THYR-B 1/5",
+              "trecho": "Lenvatinib + Pembrolizumab if disease progression on Lenvatinib",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "0ed396290ae6e0a108c1b372f61c9ad3d568c0b672d401de51ae1ca1d16f16a8"
+            },
+            {
+              "fonte_id": "nccn-ccc238b89df0",
+              "edicao": "2.2026",
+              "pagina_pdf": 64,
+              "paginas_pdf": [
+                64
+              ],
+              "secao": "THYR-B 3/5",
+              "trecho": "Lenvatinib + Pembrolizumab",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "0ed396290ae6e0a108c1b372f61c9ad3d568c0b672d401de51ae1ca1d16f16a8"
+            }
+          ],
+          "aplicabilidade": [
+            {
+              "fonte_id": "nccn-ccc238b89df0",
+              "edicao": "2.2026",
+              "pagina_pdf": 62,
+              "paginas_pdf": [
+                62
+              ],
+              "secao": "THYR-B 1/5",
+              "trecho": "Lenvatinib + Pembrolizumab if disease progression on Lenvatinib",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "0ed396290ae6e0a108c1b372f61c9ad3d568c0b672d401de51ae1ca1d16f16a8"
+            },
+            {
+              "fonte_id": "nccn-ccc238b89df0",
+              "edicao": "2.2026",
+              "pagina_pdf": 64,
+              "paginas_pdf": [
+                64
+              ],
+              "secao": "THYR-B 3/5",
+              "trecho": "Lenvatinib + Pembrolizumab",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "0ed396290ae6e0a108c1b372f61c9ad3d568c0b672d401de51ae1ca1d16f16a8"
+            }
+          ],
+          "evidencia_declarada": [
+            {
+              "fonte_id": "nccn-ccc238b89df0",
+              "edicao": "2.2026",
+              "pagina_pdf": 62,
+              "paginas_pdf": [
+                62
+              ],
+              "secao": "THYR-B 1/5",
+              "trecho": "Lenvatinib + Pembrolizumab if disease progression on Lenvatinib",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "0ed396290ae6e0a108c1b372f61c9ad3d568c0b672d401de51ae1ca1d16f16a8"
+            },
+            {
+              "fonte_id": "nccn-ccc238b89df0",
+              "edicao": "2.2026",
+              "pagina_pdf": 64,
+              "paginas_pdf": [
+                64
+              ],
+              "secao": "THYR-B 3/5",
+              "trecho": "Lenvatinib + Pembrolizumab",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "0ed396290ae6e0a108c1b372f61c9ad3d568c0b672d401de51ae1ca1d16f16a8"
+            }
+          ]
+        }
+      },
+      {
+        "item_id": "nccn-20261017-tireoide-ipi-nivo",
+        "nome": "Ipilimumabe + nivolumabe — subtipos específicos",
+        "tipo": "OPCAO_TERAPEUTICA",
+        "dominio_principal": 6,
+        "conteudo_extraido": "Ipilimumabe/nivolumabe: UCC no carcinoma oncocítico dentro do ramo diferenciado; Other Recommended no anaplásico metastático somente em tumores não-RAS. Categoria 2A pelo cabeçalho. Não extrapolar a todo carcinoma diferenciado ou todo anaplásico.",
+        "aplicabilidade": {
+          "criterios": [
+            "Carcinoma oncocítico no cenário diferenciado descrito",
+            "OU anaplásico metastático não-RAS",
+            "Subtipo definido, sem extrapolação"
+          ],
+          "paciente_individual": null,
+          "estado": "NAO_AVALIADA"
+        },
+        "dados_estruturados": {
+          "farmacos": [
+            "ipilimumabe",
+            "nivolumabe"
+          ],
+          "posologia": {
+            "estado": "NAO_EXTRAIDA_NESTA_RODADA",
+            "valor": null,
+            "motivo": "A rodada incorpora o delta de indicação/cenário; não completa dose por inferência."
+          }
+        },
+        "fonte_refs": [
+          {
+            "fonte_id": "nccn-ccc238b89df0",
+            "edicao": "2.2026",
+            "pagina_pdf": 62,
+            "paginas_pdf": [
+              62
+            ],
+            "secao": "THYR-B 1/5",
+            "trecho": "Ipilimumab + Nivolumab (oncocytic carcinoma only)",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "0ed396290ae6e0a108c1b372f61c9ad3d568c0b672d401de51ae1ca1d16f16a8"
+          },
+          {
+            "fonte_id": "nccn-ccc238b89df0",
+            "edicao": "2.2026",
+            "pagina_pdf": 64,
+            "paginas_pdf": [
+              64
+            ],
+            "secao": "THYR-B 3/5",
+            "trecho": "Ipilimumab + Nivolumab (non-RAS",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "0ed396290ae6e0a108c1b372f61c9ad3d568c0b672d401de51ae1ca1d16f16a8"
+          }
+        ],
+        "evidencia_declarada": {
+          "sistema": "NCCN",
+          "categoria": "2A por cabeçalho",
+          "preferencia": "VARIA_POR_HISTOLOGIA",
+          "estado": "CONFERIDA_DOCUMENTALMENTE_A_CONFERIR_CLINICAMENTE",
+          "nota": "2A por cabeçalho somente onde a página expressamente declara essa regra; não é categoria inferida por conhecimento externo."
+        },
+        "estado_extracao": "EXTRAIDO_COM_LIMITES_DECLARADOS",
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "temporalidade": {
+          "referencia": "CENARIO_DESCRITO",
+          "datas_individuais": null
+        },
+        "propor_automaticamente": false,
+        "disponivel_para_prescricao": false,
+        "acesso": {
+          "registro_anvisa": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "incorporacao_conitec": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "pcdt_ddt": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "sigtap_apac": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "cobertura_privada": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "disponibilidade_institucional": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          }
+        },
+        "alternativas_legadas_refs": [],
+        "relacoes_refs": [
+          "relacao-nccn-20261017-tireoide-ipi-nivo"
+        ],
+        "conflitos_refs": [],
+        "pendencias": [
+          "REVISAO_CLINICA_DO_DELTA",
+          "VERIFICAR_ACESSO_BRASILEIRO_POR_INDICACAO",
+          "POSOLOGIA_E_SUPORTE_NAO_COMPLETOS_NESTA_RODADA"
+        ],
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+            "anterior": {
+              "fonte_refs": [
+                {
+                  "fonte_id": "nccn-ccc238b89df0",
+                  "paginas_pdf": [
+                    62,
+                    64
+                  ],
+                  "secao": "THYR-B 1/5 e 3/5",
+                  "natureza": "EXTRACAO_DOCUMENTAL",
+                  "pagina_pdf": 62,
+                  "trecho": "Ipilimumab + Nivolumab (oncocytic carcinoma only)1 • Carboplatin/Pemetrexed if disease progression following"
+                }
+              ],
+              "conteudo_extraido": "Opções específicas por histologia/biomarcador com contextos distintos; exigem separação antes de prescrição.",
+              "aplicabilidade": {
+                "criterios": [
+                  "Oncocítico no ramo diferenciado OU anaplásico não-RAS no ramo correspondente",
+                  "Não extrapolar a todos os carcinomas tireoidianos"
+                ],
+                "paciente_individual": null,
+                "estado": "NAO_AVALIADA"
+              },
+              "evidencia_declarada": {
+                "sistema": "NCCN",
+                "categoria": null,
+                "estado": "NAO_EXTRAIDA_POR_ITEM"
+              }
+            },
+            "motivo": "A afirmação dos subtipos era correta, mas faltavam referências separadas e categoria de preferência por ramo.",
+            "aprovacao_clinica": null
+          },
+          {
+            "revisao": "2026-10-17-nccn-final-documental",
+            "anterior": {
+              "conteudo_extraido": "Ipilimumabe/nivolumabe: UCC no carcinoma oncocítico dentro do ramo diferenciado; Other Recommended no anaplásico metastático somente em tumores não-RAS. Categoria2A pelo cabeçalho. Não extrapolar a todo carcinoma diferenciado ou todo anaplásico."
+            },
+            "motivo": "Espaçamento da prosa; sem modificar valores, códigos ou fontes."
+          }
+        ],
+        "fontes_por_campo": {
+          "conteudo_extraido": [
+            {
+              "fonte_id": "nccn-ccc238b89df0",
+              "edicao": "2.2026",
+              "pagina_pdf": 62,
+              "paginas_pdf": [
+                62
+              ],
+              "secao": "THYR-B 1/5",
+              "trecho": "Ipilimumab + Nivolumab (oncocytic carcinoma only)",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "0ed396290ae6e0a108c1b372f61c9ad3d568c0b672d401de51ae1ca1d16f16a8"
+            },
+            {
+              "fonte_id": "nccn-ccc238b89df0",
+              "edicao": "2.2026",
+              "pagina_pdf": 64,
+              "paginas_pdf": [
+                64
+              ],
+              "secao": "THYR-B 3/5",
+              "trecho": "Ipilimumab + Nivolumab (non-RAS",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "0ed396290ae6e0a108c1b372f61c9ad3d568c0b672d401de51ae1ca1d16f16a8"
+            }
+          ],
+          "aplicabilidade": [
+            {
+              "fonte_id": "nccn-ccc238b89df0",
+              "edicao": "2.2026",
+              "pagina_pdf": 62,
+              "paginas_pdf": [
+                62
+              ],
+              "secao": "THYR-B 1/5",
+              "trecho": "Ipilimumab + Nivolumab (oncocytic carcinoma only)",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "0ed396290ae6e0a108c1b372f61c9ad3d568c0b672d401de51ae1ca1d16f16a8"
+            },
+            {
+              "fonte_id": "nccn-ccc238b89df0",
+              "edicao": "2.2026",
+              "pagina_pdf": 64,
+              "paginas_pdf": [
+                64
+              ],
+              "secao": "THYR-B 3/5",
+              "trecho": "Ipilimumab + Nivolumab (non-RAS",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "0ed396290ae6e0a108c1b372f61c9ad3d568c0b672d401de51ae1ca1d16f16a8"
+            }
+          ],
+          "evidencia_declarada": [
+            {
+              "fonte_id": "nccn-ccc238b89df0",
+              "edicao": "2.2026",
+              "pagina_pdf": 62,
+              "paginas_pdf": [
+                62
+              ],
+              "secao": "THYR-B 1/5",
+              "trecho": "Ipilimumab + Nivolumab (oncocytic carcinoma only)",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "0ed396290ae6e0a108c1b372f61c9ad3d568c0b672d401de51ae1ca1d16f16a8"
+            },
+            {
+              "fonte_id": "nccn-ccc238b89df0",
+              "edicao": "2.2026",
+              "pagina_pdf": 64,
+              "paginas_pdf": [
+                64
+              ],
+              "secao": "THYR-B 3/5",
+              "trecho": "Ipilimumab + Nivolumab (non-RAS",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "0ed396290ae6e0a108c1b372f61c9ad3d568c0b672d401de51ae1ca1d16f16a8"
+            }
+          ]
+        }
+      },
+      {
+        "item_id": "nccn-20261017-tireoide-anaplasico-neo",
+        "nome": "Neoadjuvância no anaplásico borderline ressecável",
+        "tipo": "CENARIO_TERAPEUTICO",
+        "dominio_principal": 6,
+        "conteudo_extraido": "A fonte descreve neoadjuvância biomarcador-dirigida para doença IVa/IVb borderline ressecável; não confundir com o protocolo metastático.",
+        "aplicabilidade": {
+          "criterios": [
+            "Anaplásico IVa/IVb borderline ressecável",
+            "Biomarcador específico",
+            "Avaliação multidisciplinar"
+          ],
+          "paciente_individual": null,
+          "estado": "NAO_AVALIADA"
+        },
+        "dados_estruturados": {},
+        "fonte_refs": [
+          {
+            "fonte_id": "nccn-ccc238b89df0",
+            "paginas_pdf": [
+              64
+            ],
+            "secao": "THYR-B 3/5",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "pagina_pdf": 64,
+            "trecho": "Neoadjuvant Therapy (Stage IVa or IVb Borderline Resectable Disease) • BRAF V600E"
+          }
+        ],
+        "evidencia_declarada": {
+          "sistema": "NCCN",
+          "categoria": null,
+          "estado": "NAO_EXTRAIDA_POR_ITEM"
+        },
+        "estado_extracao": "EXTRAIDO_COM_LIMITES_DECLARADOS",
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "temporalidade": {
+          "referencia": "CENARIO_DESCRITO",
+          "datas_individuais": null
+        },
+        "propor_automaticamente": false,
+        "disponivel_para_prescricao": false,
+        "acesso": {
+          "registro_anvisa": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "incorporacao_conitec": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "pcdt_ddt": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "sigtap_apac": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "cobertura_privada": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "disponibilidade_institucional": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          }
+        },
+        "alternativas_legadas_refs": [],
+        "relacoes_refs": [
+          "relacao-nccn-20261017-tireoide-anaplasico-neo"
+        ],
+        "conflitos_refs": [],
+        "pendencias": [
+          "REVISAO_CLINICA_DO_DELTA",
+          "VERIFICAR_ACESSO_BRASILEIRO_POR_INDICACAO"
+        ]
+      }
+    ],
+    "cenarios": {
+      "identidade_ref": "/identidade/cenarios",
+      "detalhamento_ref": "/tratamento/cenarios",
+      "novas_condicoes_refs": [
+        "nccn-20261017-tireoide-encorafenibe-binimetinibe",
+        "nccn-20261017-tireoide-lenva-pembro",
+        "nccn-20261017-tireoide-ipi-nivo",
+        "nccn-20261017-tireoide-anaplasico-neo"
+      ],
+      "regra": "Não igualar automaticamente as duas listas nem selecionar cenário individual nesta camada."
+    },
+    "fontes": [
+      {
+        "id": "nccn-ccc238b89df0",
+        "arquivo_local": "C:\\Users\\silas\\.aside\\u\\0\\sessions\\2026-10-17_LutNNwUyDZGlA1pF\\artifacts\\nccn\\Thyroid Carcinoma.pdf",
+        "nome": "Thyroid Carcinoma",
+        "sha256": "0ed396290ae6e0a108c1b372f61c9ad3d568c0b672d401de51ae1ca1d16f16a8",
+        "numero_paginas": 159,
+        "versao_declarada": "2.2026",
+        "origem": "ARQUIVO_LOCAL_FORNECIDO",
+        "autenticidade_externa": "NAO_VERIFICADA_NO_PORTAL",
+        "paginas_examinadas": [
+          62,
+          64
+        ]
+      }
+    ],
+    "fontes_legadas_refs": [
+      "/header/fonte",
+      "/curadoria/fontesLidas"
+    ],
+    "ensaios": {
+      "legado_ref": "/tratamento/ensaios",
+      "novos_nct": [],
+      "nota": "Nenhum identificador NCT foi inventado ou verificado nesta rodada."
+    },
+    "relacoes": [
+      {
+        "relacao_id": "relacao-nccn-20261017-tireoide-encorafenibe-binimetinibe",
+        "tipo": "CONDICOES_PARA_APRESENTACAO_DOCUMENTAL",
+        "destino_item_ref": "nccn-20261017-tireoide-encorafenibe-binimetinibe",
+        "criterios_extraidos": [
+          "BRAF V600E",
+          "Diferenciado: cenário iodorrefratário/progressivo descrito, após terapia e sem alternativa satisfatória",
+          "Anaplásico metastático: ramo separado"
+        ],
+        "origem_condicoes": "FONTE_NCCN_CITADA",
+        "origem_mapeamento": "PROPOSTA_DE_MAPEAMENTO",
+        "executavel": false,
+        "estado": "A_CONFERIR",
+        "dados_ausentes": "MANTER_INDETERMINADO",
+        "dados_conflitantes": "MANTER_CONFLITO",
+        "efeito": "APRESENTAR_CONTEUDO_PARA_REVISAO; NAO PRESCREVER",
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+            "criterios_extraidos": [
+              "BRAF V600E",
+              "Distinguir diferenciado refratário/progressivo de anaplásico metastático",
+              "Conferir linha e alternativas"
+            ]
+          }
+        ],
+        "fontes_por_campo": {
+          "criterios_extraidos": [
+            {
+              "fonte_id": "nccn-ccc238b89df0",
+              "edicao": "2.2026",
+              "pagina_pdf": 62,
+              "paginas_pdf": [
+                62
+              ],
+              "secao": "THYR-B 1/5",
+              "trecho": "Binimetinib/Encorafenib for BRAF V600E",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "0ed396290ae6e0a108c1b372f61c9ad3d568c0b672d401de51ae1ca1d16f16a8"
+            },
+            {
+              "fonte_id": "nccn-ccc238b89df0",
+              "edicao": "2.2026",
+              "pagina_pdf": 64,
+              "paginas_pdf": [
+                64
+              ],
+              "secao": "THYR-B 3/5, anaplásico metastático",
+              "trecho": "Binimetinib/Encorafenib",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "0ed396290ae6e0a108c1b372f61c9ad3d568c0b672d401de51ae1ca1d16f16a8"
+            }
+          ]
+        }
+      },
+      {
+        "relacao_id": "relacao-nccn-20261017-tireoide-lenva-pembro",
+        "tipo": "CONDICOES_PARA_APRESENTACAO_DOCUMENTAL",
+        "destino_item_ref": "nccn-20261017-tireoide-lenva-pembro",
+        "criterios_extraidos": [
+          "Diferenciado: progressão em lenvatinibe no cenário descrito",
+          "OU anaplásico metastático, ramo próprio"
+        ],
+        "origem_condicoes": "FONTE_NCCN_CITADA",
+        "origem_mapeamento": "PROPOSTA_DE_MAPEAMENTO",
+        "executavel": false,
+        "estado": "A_CONFERIR",
+        "dados_ausentes": "MANTER_INDETERMINADO",
+        "dados_conflitantes": "MANTER_CONFLITO",
+        "efeito": "APRESENTAR_CONTEUDO_PARA_REVISAO; NAO PRESCREVER",
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+            "criterios_extraidos": [
+              "Distinguir diferenciado com progressão a lenvatinibe de anaplásico metastático"
+            ]
+          }
+        ],
+        "fontes_por_campo": {
+          "criterios_extraidos": [
+            {
+              "fonte_id": "nccn-ccc238b89df0",
+              "edicao": "2.2026",
+              "pagina_pdf": 62,
+              "paginas_pdf": [
+                62
+              ],
+              "secao": "THYR-B 1/5",
+              "trecho": "Lenvatinib + Pembrolizumab if disease progression on Lenvatinib",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "0ed396290ae6e0a108c1b372f61c9ad3d568c0b672d401de51ae1ca1d16f16a8"
+            },
+            {
+              "fonte_id": "nccn-ccc238b89df0",
+              "edicao": "2.2026",
+              "pagina_pdf": 64,
+              "paginas_pdf": [
+                64
+              ],
+              "secao": "THYR-B 3/5",
+              "trecho": "Lenvatinib + Pembrolizumab",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "0ed396290ae6e0a108c1b372f61c9ad3d568c0b672d401de51ae1ca1d16f16a8"
+            }
+          ]
+        }
+      },
+      {
+        "relacao_id": "relacao-nccn-20261017-tireoide-ipi-nivo",
+        "tipo": "CONDICOES_PARA_APRESENTACAO_DOCUMENTAL",
+        "destino_item_ref": "nccn-20261017-tireoide-ipi-nivo",
+        "criterios_extraidos": [
+          "Carcinoma oncocítico no cenário diferenciado descrito",
+          "OU anaplásico metastático não-RAS",
+          "Subtipo definido, sem extrapolação"
+        ],
+        "origem_condicoes": "FONTE_NCCN_CITADA",
+        "origem_mapeamento": "PROPOSTA_DE_MAPEAMENTO",
+        "executavel": false,
+        "estado": "A_CONFERIR",
+        "dados_ausentes": "MANTER_INDETERMINADO",
+        "dados_conflitantes": "MANTER_CONFLITO",
+        "efeito": "APRESENTAR_CONTEUDO_PARA_REVISAO; NAO PRESCREVER",
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+            "criterios_extraidos": [
+              "Oncocítico no ramo diferenciado OU anaplásico não-RAS no ramo correspondente",
+              "Não extrapolar a todos os carcinomas tireoidianos"
+            ]
+          }
+        ],
+        "fontes_por_campo": {
+          "criterios_extraidos": [
+            {
+              "fonte_id": "nccn-ccc238b89df0",
+              "edicao": "2.2026",
+              "pagina_pdf": 62,
+              "paginas_pdf": [
+                62
+              ],
+              "secao": "THYR-B 1/5",
+              "trecho": "Ipilimumab + Nivolumab (oncocytic carcinoma only)",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "0ed396290ae6e0a108c1b372f61c9ad3d568c0b672d401de51ae1ca1d16f16a8"
+            },
+            {
+              "fonte_id": "nccn-ccc238b89df0",
+              "edicao": "2.2026",
+              "pagina_pdf": 64,
+              "paginas_pdf": [
+                64
+              ],
+              "secao": "THYR-B 3/5",
+              "trecho": "Ipilimumab + Nivolumab (non-RAS",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "0ed396290ae6e0a108c1b372f61c9ad3d568c0b672d401de51ae1ca1d16f16a8"
+            }
+          ]
+        }
+      },
+      {
+        "relacao_id": "relacao-nccn-20261017-tireoide-anaplasico-neo",
+        "tipo": "CONDICOES_PARA_APRESENTACAO_DOCUMENTAL",
+        "destino_item_ref": "nccn-20261017-tireoide-anaplasico-neo",
+        "criterios_extraidos": [
+          "Anaplásico IVa/IVb borderline ressecável",
+          "Biomarcador específico",
+          "Avaliação multidisciplinar"
+        ],
+        "origem_condicoes": "FONTE_NCCN_CITADA",
+        "origem_mapeamento": "PROPOSTA_DE_MAPEAMENTO",
+        "executavel": false,
+        "estado": "A_CONFERIR",
+        "dados_ausentes": "MANTER_INDETERMINADO",
+        "dados_conflitantes": "MANTER_CONFLITO",
+        "efeito": "APRESENTAR_CONTEUDO_PARA_REVISAO; NAO PRESCREVER"
+      }
+    ],
+    "conflitos": [],
+    "conflitos_legados_ref": "/conflitos",
+    "pendencias": [
+      {
+        "id": "revisao-clinica",
+        "estado": "ABERTA",
+        "descricao": "Conferir cada acréscimo, condições, fontes, doses, interações e suporte antes de uso clínico."
+      },
+      {
+        "id": "acesso-brasileiro",
+        "estado": "ABERTA",
+        "descricao": "NCCN não comprova Anvisa, Conitec, PCDT/DDT, SIGTAP/APAC, cobertura privada ou acesso institucional."
+      },
+      {
+        "id": "cobertura-nccn",
+        "estado": "PARCIAL_POR_DELTA",
+        "descricao": "Leitura dirigida das páginas citadas; não há alegação de extração integral da diretriz."
+      }
+    ],
+    "pendencias_legadas_ref": "/pendencias",
+    "itens_adicionais_a_classificar": [
+      {
+        "origem_ref": "/header",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/status",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/consultavel",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/alerta",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/substitui",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/identidade",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/pendencias",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/conflitos",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/curadoria",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/correcoes",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      }
+    ],
+    "mapa_de_cobertura": [
+      {
+        "origem_json_pointer": "/header",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "bf2aaee47b8f107324575d31612fcedaba822a7435b57763ec9ac7a168345850",
+        "valores_folha": 9
+      },
+      {
+        "origem_json_pointer": "/status",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "04635ca3844c66b19ebbf49bf9ff60fe851d6ce89597d23e6a970f1dc3927289",
+        "valores_folha": 1
+      },
+      {
+        "origem_json_pointer": "/consultavel",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b",
+        "valores_folha": 1
+      },
+      {
+        "origem_json_pointer": "/alerta",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "valores_folha": 1
+      },
+      {
+        "origem_json_pointer": "/substitui",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "valores_folha": 1
+      },
+      {
+        "origem_json_pointer": "/identidade",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "87cb2ad8d20ccde7d34a8be722ddc492007d0cb2c8b62bff9b79183b095f46ad",
+        "valores_folha": 13
+      },
+      {
+        "origem_json_pointer": "/diagnostico",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "8b14f2c40b92a7574484ba4e11fb85171c2f3483615106cb146378eb2a299fb7",
+        "valores_folha": 218
+      },
+      {
+        "origem_json_pointer": "/estadiamento",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "72dae57587dbdd654e72232e22de2906bcbc126fdc455fa5a59e763f885e348c",
+        "valores_folha": 140
+      },
+      {
+        "origem_json_pointer": "/tratamento",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "f8c17c24a7b96785fa27e0324d54c69ddf22b6835f6e60fcd08a55edcd642ba7",
+        "valores_folha": 881
+      },
+      {
+        "origem_json_pointer": "/ligacoes",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "8396aacd740208203a9c9443c333481e91167451601f471281b5424727c19466",
+        "valores_folha": 86
+      },
+      {
+        "origem_json_pointer": "/pendencias",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "4605af09e981c1deeadfbc9d2f06951395029c1da689d6fc526a6b11760cb9a3",
+        "valores_folha": 14
+      },
+      {
+        "origem_json_pointer": "/conflitos",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "347be6b3b488edfb5cc7be6689539caf1144092a4867617f6172baabc957b70e",
+        "valores_folha": 44
+      },
+      {
+        "origem_json_pointer": "/curadoria",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "63f14fa877d11ed3e94e6426efc59a041ebcb571c57a0f588e7988252a696a71",
+        "valores_folha": 20
+      },
+      {
+        "origem_json_pointer": "/correcoes",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "983aefdcf4d7698e39c356ef1df2dda2f57d7d130c92a86c60966b7d6a64af98",
+        "valores_folha": 8
+      }
+    ],
+    "reconciliacao_com_versao_anterior": {
+      "modo": "ADITIVO",
+      "originais_removidos": 0,
+      "originais_alterados": 0,
+      "contagens_preservadas": {
+        "protocolos": 19,
+        "ensaios": 3,
+        "cenarios_identidade": 7,
+        "cenarios_tratamento": 8,
+        "seguimento": 6,
+        "conflitos": 3,
+        "pendencias": 3
+      }
+    },
+    "relatorio_de_completude": {
+      "estado": "INCOMPLETA_PARA_DIRETRIZ_INTEGRAL",
+      "preservacao_legado": "INTEGRAL",
+      "delta_itens": 4,
+      "normalizacao_legado": "INDEXACAO_POR_REFERENCIA; NAO REEXTRACAO CLINICA",
+      "posologias": "SOMENTE AS EXPLICITAMENTE EXTRAIDAS; RESTANTES PENDENTES",
+      "sem_fato_paciente": true,
+      "sem_aprovacao_inferida": true
+    },
+    "auditoria_33_pendentes": [
+      {
+        "item_id": "nccn-20261017-tireoide-encorafenibe-binimetinibe",
+        "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+        "resultado": "CORRIGIDO_ESCOPO_OU_COMPLETUDE",
+        "fundamento": "No ramo diferenciado faltava explicitar progressão após terapia prévia e ausência de alternativa satisfatória; os dois ramos não têm mesma preferência.",
+        "fontes": [
+          {
+            "fonte_id": "nccn-ccc238b89df0",
+            "edicao": "2.2026",
+            "pagina_pdf": 62,
+            "paginas_pdf": [
+              62
+            ],
+            "secao": "THYR-B 1/5",
+            "trecho": "Binimetinib/Encorafenib for BRAF V600E",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "0ed396290ae6e0a108c1b372f61c9ad3d568c0b672d401de51ae1ca1d16f16a8"
+          },
+          {
+            "fonte_id": "nccn-ccc238b89df0",
+            "edicao": "2.2026",
+            "pagina_pdf": 64,
+            "paginas_pdf": [
+              64
+            ],
+            "secao": "THYR-B 3/5, anaplásico metastático",
+            "trecho": "Binimetinib/Encorafenib",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "0ed396290ae6e0a108c1b372f61c9ad3d568c0b672d401de51ae1ca1d16f16a8"
+          }
+        ],
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "limite": "Conferência das afirmações deste item; não extração integral de posologia, diretriz ou acesso brasileiro.",
+        "sha256_item_antes": "dd84204d5b8a77e6c836f928fffc57924a5cdccfb2be9635f5e6bfe14a149cd8"
+      },
+      {
+        "item_id": "nccn-20261017-tireoide-lenva-pembro",
+        "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+        "resultado": "CORRIGIDO_ESCOPO_OU_COMPLETUDE",
+        "fundamento": "Texto genérico não conservava as categorias de preferência distintas dos ramos nem explicitava progressão em lenvatinibe no diferenciado.",
+        "fontes": [
+          {
+            "fonte_id": "nccn-ccc238b89df0",
+            "edicao": "2.2026",
+            "pagina_pdf": 62,
+            "paginas_pdf": [
+              62
+            ],
+            "secao": "THYR-B 1/5",
+            "trecho": "Lenvatinib + Pembrolizumab if disease progression on Lenvatinib",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "0ed396290ae6e0a108c1b372f61c9ad3d568c0b672d401de51ae1ca1d16f16a8"
+          },
+          {
+            "fonte_id": "nccn-ccc238b89df0",
+            "edicao": "2.2026",
+            "pagina_pdf": 64,
+            "paginas_pdf": [
+              64
+            ],
+            "secao": "THYR-B 3/5",
+            "trecho": "Lenvatinib + Pembrolizumab",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "0ed396290ae6e0a108c1b372f61c9ad3d568c0b672d401de51ae1ca1d16f16a8"
+          }
+        ],
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "limite": "Conferência das afirmações deste item; não extração integral de posologia, diretriz ou acesso brasileiro.",
+        "sha256_item_antes": "2180a93d8708d130c05088e1b4c3bad43243dc3ad414942cf8b721cb8298b421"
+      },
+      {
+        "item_id": "nccn-20261017-tireoide-ipi-nivo",
+        "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+        "resultado": "CORRIGIDO_ESCOPO_OU_COMPLETUDE",
+        "fundamento": "A afirmação dos subtipos era correta, mas faltavam referências separadas e categoria de preferência por ramo.",
+        "fontes": [
+          {
+            "fonte_id": "nccn-ccc238b89df0",
+            "edicao": "2.2026",
+            "pagina_pdf": 62,
+            "paginas_pdf": [
+              62
+            ],
+            "secao": "THYR-B 1/5",
+            "trecho": "Ipilimumab + Nivolumab (oncocytic carcinoma only)",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "0ed396290ae6e0a108c1b372f61c9ad3d568c0b672d401de51ae1ca1d16f16a8"
+          },
+          {
+            "fonte_id": "nccn-ccc238b89df0",
+            "edicao": "2.2026",
+            "pagina_pdf": 64,
+            "paginas_pdf": [
+              64
+            ],
+            "secao": "THYR-B 3/5",
+            "trecho": "Ipilimumab + Nivolumab (non-RAS",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "0ed396290ae6e0a108c1b372f61c9ad3d568c0b672d401de51ae1ca1d16f16a8"
+          }
+        ],
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "limite": "Conferência das afirmações deste item; não extração integral de posologia, diretriz ou acesso brasileiro.",
+        "sha256_item_antes": "617ee83df6e465a05d4bf64079b06e7bacb558ec666184079aa23e769ade1a91"
+      },
+      {
+        "item_id": "nccn-20261017-tireoide-anaplasico-neo",
+        "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+        "resultado": "CONFIRMADO_SEM_REESCRITA",
+        "fundamento": "THYR-B3/5 confirma neoadjuvância biomarcador-dirigida IVa/IVb borderline ressecável, separada do metastático.",
+        "fontes": [
+          {
+            "fonte_id": "nccn-ccc238b89df0",
+            "edicao": "2.2026",
+            "pagina_pdf": 64,
+            "paginas_pdf": [
+              64
+            ],
+            "secao": "THYR-B 3/5, neoadjuvância",
+            "trecho": "Stage IVa or IVb Borderline Resectable Disease",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "0ed396290ae6e0a108c1b372f61c9ad3d568c0b672d401de51ae1ca1d16f16a8"
+          }
+        ],
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "limite": "Conferência das afirmações deste item; não extração integral de posologia, diretriz ou acesso brasileiro.",
+        "sha256_item_antes": "7247ef52fe06f9afabe0c65bdf25e81b30c28ca05fe4b485f28c433d0ad88bb2"
+      }
+    ],
+    "revisoes_auditoria": [
+      {
+        "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+        "escopo": "APENAS_33_ITENS_PENDENTES",
+        "legado_modificado": false,
+        "aprovacao_clinica": null,
+        "limites": "Sem leitura integral da pasta, sem completar doses, sem checagem de acesso ou autenticidade externa.",
+        "itens_ref": "/tumor_pack_universal/auditoria_33_pendentes",
+        "sha256_itens": "1dd1c5f84f1214e5686a8fe9b95f4bdcae66575b4eb111e9249f24080995b7ef"
+      }
+    ],
+    "fechamento_documental": [
+      {
+        "revisao": "2026-10-17-nccn-final-documental",
+        "estado": "CORRECOES_DOCUMENTAIS_APLICADAS",
+        "ajustes_textuais": 3,
+        "deduplicacoes_por_referencia": [
+          "auditoria_33_pendentes"
+        ],
+        "aprovacao_clinica": null,
+        "legado_alterado": false
+      }
+    ]
+  }
 }

@@ -14,14 +14,14 @@ import { converterBiblioteca } from '../../../scripts/converter-biblioteca.mjs';
 import { criarBiblioteca, sha256Biblioteca } from '../../../src/kernel/corpus/biblioteca.js';
 import { abrirLedger } from '../../../src/kernel/ledger/db.js';
 import { criarGerenciadorSessao } from '../../../src/server/sessao.js';
-import { rotearBiblioteca } from '../../../src/server/biblioteca.js';
+import { rotearBiblioteca, hashCuradoriaPacote } from '../../../src/server/biblioteca.js';
 
 const AGORA = '2026-10-14T12:00:00Z';
 it('não atribui o arquivo inteiro à primeira fonte: exige e respeita a seção mapeada', async () => {
   const caminho = 'corpus/1-exames/labs/composto.json';
   const root = criarRoot({ [caminho]: painel('composto', { painels: [
-    {classe:'pemetrexede', fonte:{referencia:'Fonte A', trecho:'trecho A', edicao:'2026-10-11'}},
-    {classe:'anti-HER2', fonte:{referencia:'Fonte B', trecho:'trecho B', edicao:'2026-10-11'}},
+    {classe:'pemetrexede', fonte:{referencia:'Fonte A', trecho:'trecho A', edicao:'2026-10-11', publicadoEm:'2026-10-11'}},
+    {classe:'anti-HER2', fonte:{referencia:'Fonte B', trecho:'trecho B', edicao:'2026-10-11', publicadoEm:'2026-10-11'}},
     {classe:'sem suporte', recomendacao:'conteúdo não fundamentado'},
   ] }), 'corpus/1-exames/labs/controle.json': painel('controle') });
   const integral = await converter(root,'multiplas',{itens:{[caminho]:{}, 'corpus/1-exames/labs/controle.json':{}}});
@@ -46,7 +46,7 @@ function criarRoot(arquivos: Record<string, unknown>) {
   return root;
 }
 const painel = (id: string, extra: Record<string, unknown> = {}) => ({
-  header: { id, versao: '1.0.0', vigenteDesde: '2026-10-11', fonte: { tipo: 'LITERATURA', referencia: `Exemplo ${id}`, trecho: `trecho público ${id}`, edicao: '2026-10-11' } },
+  header: { id, versao: '1.0.0', vigenteDesde: '2026-10-11', fonte: { tipo: 'LITERATURA', referencia: `Exemplo ${id}`, trecho: `trecho público ${id}`, edicao: '2026-10-11', publicadoEm: '2026-10-11' } },
   nota: 'fixture sintética sem dados pessoais', ...extra,
 });
 function mapeamento(itens: Record<string, { aplicabilidade?: Record<string, string[]>; url?: string; escopoFonte?: string }>, verificacoes: string[]) {
@@ -54,6 +54,7 @@ function mapeamento(itens: Record<string, { aplicabilidade?: Record<string, stri
   const m = {
     schema: 'ConversorBibliotecaMapeamento@1', versao: '1.0.0', itens: Object.fromEntries(Object.entries(itens).map(([caminho, i]) => [caminho, {
       pilar: 1, aplicabilidade: i.aplicabilidade ?? { tumor: [], histologia: [], estadio: [], biomarcador: [], linha: [] },
+      aplicabilidadeNota: 'UNIVERSAL nas dimensões vazias, conforme escopo desta fonte sintética',
       provenienciaUrl: i.url ?? 'https://example.org/fonte', ...(i.escopoFonte ? {escopoFonte:i.escopoFonte} : {}),
     }])), verificacoes: verificacoes.map((url) => ({ url, verificadaEm: '2026-10-14', metodo: 'fixture' })), pendencias: [],
   };
@@ -67,12 +68,52 @@ async function converter(root: string, nome: string, opcoes: { itens?: Record<st
   return { base, snap, destino, resultado, inventario: JSON.parse(readFileSync(join(destino, 'inventario.json'), 'utf8')), manifesto: JSON.parse(readFileSync(join(destino, 'pacote', 'manifesto.json'), 'utf8')) };
 }
 const lerItem = (destino: string, arquivo: string) => JSON.parse(readFileSync(join(destino, 'pacote', arquivo), 'utf8'));
+
+it.each([undefined, '', 'escopo não conferido'])('não converte escopo vazio em universal sem declaração: %s', async nota => {
+  const caminho = 'corpus/1-exames/labs/painel.json';
+  const root = criarRoot({[caminho]: painel('painel')});
+  const base = mkdtempSync(join(tmpdir(), 'conv-universal-'));
+  const snap = join(base, 'snap'); exportarBiblioteca(root, snap);
+  const arquivo = mapeamento({[caminho]: {}}, ['https://example.org/fonte']);
+  const m = JSON.parse(readFileSync(arquivo, 'utf8')); m.itens[caminho].aplicabilidadeNota = nota;
+  writeFileSync(arquivo, JSON.stringify(m));
+  await expect(converterBiblioteca(snap, join(base, 'destino'), {mapeamento: arquivo, agora: AGORA}))
+    .rejects.toThrow('APLICABILIDADE_UNIVERSAL_NAO_DECLARADA');
+  expect(existsSync(join(base, 'destino'))).toBe(false);
+});
+
+it('data de acesso ou vigência local não substitui publicação da fonte', async () => {
+  const caminho='corpus/1-exames/labs/acesso.json';
+  const semPublicacao=painel('acesso');
+  delete (semPublicacao.header.fonte as Partial<typeof semPublicacao.header.fonte>).publicadoEm;
+  semPublicacao.header.fonte.referencia='Fonte consultada em 2026-10-11';
+  const root=criarRoot({[caminho]:semPublicacao,'corpus/1-exames/labs/controle.json':painel('controle')});
+  const r=await converter(root,'sem-publicacao',{itens:{[caminho]:{},'corpus/1-exames/labs/controle.json':{}}});
+  expect(r.inventario.excluidos).toContainEqual(expect.objectContaining({caminho,motivo:'SEM_DATA_PUBLICACAO'}));
+  expect(r.manifesto.itens).toHaveLength(1);
+});
 function importarEmBanco(manifesto: unknown, destino: string) {
   const db = new DatabaseSync(':memory:');
   const biblioteca = criarBiblioteca(db, { autorizarCuradoria: () => ({ atorId: 'teste' }), emitir: () => {} });
   biblioteca.importarPacote(manifesto, (arquivo) => readFileSync(join(destino, 'pacote', arquivo), 'utf8'));
   return { db, biblioteca };
 }
+it('FGTS publica só a base legal e fica localizável por tumor sem declarar elegibilidade',async()=>{
+ const caminho='corpus/3-laudos/fgts/laudo-fgts.v1.RASCUNHO.json';
+ const root=criarRoot({[caminho]:JSON.parse(readFileSync(caminho,'utf8'))});
+ const dir=mkdtempSync(join(tmpdir(),'fgts-escopo-')),snap=join(dir,'snap'),destino=join(dir,'pacote');
+ exportarBiblioteca(root,snap);
+ await converterBiblioteca(snap,destino,{mapeamento:join(process.cwd(),'scripts/converter-biblioteca-mapeamento.json'),agora:AGORA,idPacote:'fgts-sintetico',versao:'1.0.0'});
+ const m=JSON.parse(readFileSync(join(destino,'pacote/manifesto.json'),'utf8'));
+ const item=lerItem(destino,m.itens[0].arquivo);
+ expect(item.texto).toContain('neoplasia maligna');expect(item.texto).not.toContain('documentosAnexos');expect(item.texto).not.toContain('resalvaRenovacao');
+ expect(item.proveniencia.publicadoEm).toBe('1994-07-26');
+ const {db,biblioteca}=importarEmBanco(m,destino);
+ try{
+  const id=`${m.id}@${m.versao}`;biblioteca.revisarItem(id,m.itens[0].id,'CONSULTAVEL');biblioteca.ativar(id);
+  for(const tumor of ['mama','colorretal','pulmao'])expect(biblioteca.consultar({tumor})).toHaveLength(1);
+ }finally{db.close();}
+});
 /** Reescreve itens e manifesto de um pacote convertido, recalculando os hashes (para casos adversariais). */
 function reescrever(destino: string, mudanca: (itens: Record<string, any>[]) => void) {
   const manifesto = JSON.parse(readFileSync(join(destino, 'pacote', 'manifesto.json'), 'utf8'));
@@ -213,13 +254,14 @@ describe('F1-N ponte snapshot→PacoteBiblioteca', () => {
     try { expect(() => biblioteca.importarPacote({ schema: 'PacoteBiblioteca@1', id: 'g', versao: '1.0.0', origem: 'CURADOR_LOCAL', classificacao: 'PUBLIC', criadoEm: AGORA, itens: [{ id: 'grande', versao: '1.0.0', arquivo: 'grande.json', sha256: sha256Biblioteca(texto) }] }, () => texto)).toThrow('ITEM_EXCESSIVO'); } finally { db.close(); }
 
     const arquivos: Record<string, unknown> = {};
-    for (let k = 0; k < 6; k++) arquivos[`corpus/1-exames/labs/gra-${k}.json`] = painel(`gra-${k}`, { nota: 'y'.repeat(170_000) });
+    for (let k = 0; k < 6; k++) arquivos[`corpus/1-exames/labs/gra-${k}.json`] = painel(`gra-${k}`, { nota: 'á'.repeat(170_000) });
     const root = criarRoot(arquivos);
     const itens = Object.fromEntries(Object.keys(arquivos).map((c) => [c, {}]));
     const { destino, inventario } = await converter(root, 'httpgrande', { itens });
-    expect(inventario.http.emitido).toBe(false); // corpo ultrapassa o limite do roteador (1.000.000)
+    expect(inventario.http.emitido).toBe(true); // /biblioteca/importar aceita envelope de até 24 MB.
     expect(inventario.http.bytesBody).toBeGreaterThan(1_000_000);
-    expect(existsSync(join(destino, 'pacote-http.json'))).toBe(false);
+    expect(existsSync(join(destino, 'pacote-http.json'))).toBe(true);
+    expect(inventario.http.bytesBody).toBe(Buffer.byteLength(readFileSync(join(destino, 'pacote-http.json'), 'utf8').trim()));
     expect(existsSync(join(destino, 'pacote', 'manifesto.json'))).toBe(true); // pacote interno segue válido
   }, 120_000);
 
@@ -234,7 +276,7 @@ describe('F1-N ponte snapshot→PacoteBiblioteca', () => {
   });
 
   it('ativação e rollback trocam o conjunto efetivamente consultável (um pacote ativo por vez)', async () => {
-    const painelV = (v: string) => painel('painel-a', { header: { id: 'painel-a', versao: '1.0.0', vigenteDesde: '2026-10-11', fonte: { tipo: 'LITERATURA', referencia: `Exemplo ${v}`, trecho: `trecho ${v}`, edicao: '2026-10-11' } } });
+    const painelV = (v: string) => painel('painel-a', { header: { id: 'painel-a', versao: '1.0.0', vigenteDesde: '2026-10-11', fonte: { tipo: 'LITERATURA', referencia: `Exemplo ${v}`, trecho: `trecho ${v}`, edicao: '2026-10-11', publicadoEm: '2026-10-11' } } });
     const v1 = await converter(criarRoot({ 'corpus/1-exames/labs/painel-a.json': painelV('v1') }), 'ativa1', { versao: '1.0.0', itens: { 'corpus/1-exames/labs/painel-a.json': {} } });
     const v2 = await converter(criarRoot({ 'corpus/1-exames/labs/painel-a.json': painelV('v2') }), 'ativa2', { versao: '2.0.0', itens: { 'corpus/1-exames/labs/painel-a.json': {} } });
     const db = new DatabaseSync(':memory:');
@@ -262,7 +304,7 @@ describe('F1-N ponte no HTTP real', () => {
     const server = createServer(async (req, res) => { let raw = ''; for await (const part of req) raw += part; const token = String(req.headers.authorization ?? '').replace('Bearer ', ''); const result = rotearBiblioteca(deps, token, req.url!, JSON.parse(raw), auth.sessao); res.writeHead(result?.status ?? 404, { 'Content-Type': 'application/json' }); res.end(JSON.stringify(result?.body ?? {})); });
     await new Promise<void>((resolve) => server.listen(0, '127.0.0.1', resolve));
     const base = `http://127.0.0.1:${(server.address() as AddressInfo).port}`;
-    return { db, async post(rota: string, body: unknown, token = auth.token) { const r = await fetch(base + rota, { method: 'POST', headers: { authorization: `Bearer ${token}`, 'Content-Type': 'application/json' }, body: JSON.stringify(body) }); return { status: r.status, body: await r.json() as Record<string, any> }; }, async close() { await new Promise<void>((resolve, reject) => server.close(e => e ? reject(e) : resolve())); db.close(); } };
+    return { db, async curar(body: Record<string, unknown>, token = auth.token) { const r = await fetch(base + '/biblioteca/curar', {method:'POST',headers:{authorization:`Bearer ${token}`,'Content-Type':'application/json'},body:JSON.stringify({expectedCuradoriaHash:hashCuradoriaPacote(db,String(body.pacoteId)),...body})}); return {status:r.status,body:await r.json() as Record<string,any>}; }, async post(rota: string, body: unknown, token = auth.token) {if(['/biblioteca/ativar','/biblioteca/rollback'].includes(rota)&&body&&typeof body==='object'&&!Object.hasOwn(body,'expectedAtivaHash')) { const atual=await fetch(base+'/biblioteca/estado',{method:'POST',headers:{authorization:`Bearer ${token}`,'Content-Type':'application/json'},body:'{}'}); const estado=await atual.json() as Record<string,any>;body={expectedAtiva:estado.ativa??null,expectedAtivaHash:estado.referencia?.hash??null,...body}; }  const r = await fetch(base + rota, { method: 'POST', headers: { authorization: `Bearer ${token}`, 'Content-Type': 'application/json' }, body: JSON.stringify(body) }); return { status: r.status, body: await r.json() as Record<string, any> }; }, async close() { await new Promise<void>((resolve, reject) => server.close(e => e ? reject(e) : resolve())); db.close(); } };
   }
   it('importa o pacote convertido, cura, ativa e consulta; ALERTA é recusado inclusive para REGRA', async () => {
     const root = criarRoot({ 'corpus/1-exames/labs/painel-a.json': painel('painel-a'), 'corpus/1-exames/path/painel-b.json': painel('painel-b') });
@@ -277,8 +319,8 @@ describe('F1-N ponte no HTTP real', () => {
       expect(imp.status).toBe(201); expect(imp.body.codigo).toBe('PACOTE_IMPORTADO_RASCUNHO');
       const id = imp.body.pacoteId, hash = imp.body.hash;
       expect((await a.post('/biblioteca/consultar', { filtros: {} })).body.itens).toEqual([]); // RASCUNHO não é consultável
-      for (const ref of payload.manifesto.itens) expect((await a.post('/biblioteca/curar', { pacoteId: id, itemId: ref.id, expectedHash: hash, estado: 'ALERTA' })).body.codigo).toBe('ALERTA_SEM_SCHEMA_EXECUTAVEL');
-      for (const ref of payload.manifesto.itens) expect((await a.post('/biblioteca/curar', { pacoteId: id, itemId: ref.id, expectedHash: hash, estado: 'CONSULTAVEL' })).status).toBe(200);
+      for (const ref of payload.manifesto.itens) expect((await a.curar( { pacoteId: id, itemId: ref.id, expectedHash: hash, estado: 'ALERTA' })).body.codigo).toBe('ALERTA_SEM_SCHEMA_EXECUTAVEL');
+      for (const ref of payload.manifesto.itens) expect((await a.curar( { pacoteId: id, itemId: ref.id, expectedHash: hash, estado: 'CONSULTAVEL' })).status).toBe(200);
       expect((await a.post('/biblioteca/ativar', { pacoteId: id, expectedHash: hash, expectedCuradoriaHash: (await a.post('/biblioteca/estado', {pacoteId:id})).body.curadoriaHash })).status).toBe(200);
       const consulta = await a.post('/biblioteca/consultar', { filtros: { tumor: 'mama' } });
       expect(consulta.body.itens.map((i: any) => i.id).sort()).toEqual(['1-exames-labs-painel-a', '1-exames-path-painel-b']);
@@ -287,7 +329,7 @@ describe('F1-N ponte no HTTP real', () => {
       const texto = JSON.stringify(regra);
       const p2 = { manifesto: { schema: 'PacoteBiblioteca@1', id: 'regra-pac', versao: '1.0.0', origem: 'CURADOR_LOCAL', classificacao: 'PUBLIC', criadoEm: AGORA, itens: [{ id: 'regra', versao: '1.0.0', arquivo: 'regra.json', sha256: sha256Biblioteca(texto) }] }, arquivos: { 'regra.json': { texto } } };
       const imp2 = await a.post('/biblioteca/importar', p2);
-      expect((await a.post('/biblioteca/curar', { pacoteId: imp2.body.pacoteId, itemId: 'regra', expectedHash: imp2.body.hash, estado: 'ALERTA' })).body.codigo).toBe('ALERTA_SEM_SCHEMA_EXECUTAVEL');
+      expect((await a.curar( { pacoteId: imp2.body.pacoteId, itemId: 'regra', expectedHash: imp2.body.hash, estado: 'ALERTA' })).body.codigo).toBe('ALERTA_SEM_SCHEMA_EXECUTAVEL');
     } finally { await a.close(); }
   });
 });

@@ -4,10 +4,10 @@
   "nome": "Docetaxel + Gemcitabina",
   "cenario": "não especificado",
   "versao": "1.0.0",
-  "hash": "cb42a75da17db139cd9503523e3dba512b5fe4c2ade93c816e6f8547769b58c9",
+  "hash": "f8389a0995c0eca0b05c60620806e04a8e345c141a1b7fa4592ed963f183a097",
   "codigoInstitucional": null,
   "intervaloDias": 21,
-  "ciclos": null,
+  "ciclos": 6,
   "itens": [
     {
       "drug": "Soro fisiológico 0,9% 250 mL (lavagem de acesso)",

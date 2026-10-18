@@ -1633,5 +1633,2515 @@
         }
       ]
     }
+  },
+  "tumor_pack_universal": {
+    "schema_documental": "tumor-pack-universal@1",
+    "metadados": {
+      "revisao_documental": "2026-10-17-nccn-delta-2-correcao-auditoria",
+      "versao": "1.1.0",
+      "data": "2026-10-17",
+      "autor_extracao": "Codex",
+      "estado": "RASCUNHO",
+      "aprovacao_clinica": null,
+      "escopo": "CAMADA_ADITIVA_UNIVERSAL_E_DELTA_DOCUMENTAL_NCCN",
+      "base_legada": {
+        "arquivo": "corpus/6-pack-tumor/canal-anal/pack-canal-anal.v2.RASCUNHO.json",
+        "commit": "2c0991d",
+        "versao": "2.0.0",
+        "sha256_bytes": "0822ff6bac112006d3ea0abf63dfac476b39f160d3c3fedb2106a8ca176cb311",
+        "sha256_semantico": "41aab5b1793e2ebeafa0a00ec948390571caade7c3f2f90450bfd8161d48f824"
+      },
+      "nota_versao": "Versão desta camada:1.1.0; revisão documental:2026-10-17-nccn-delta-2-correcao-auditoria. header.versao continua referindo-se ao legado intacto. Nenhuma aprovação é transferida.",
+      "integra_runtime": false,
+      "gera_conduta": false,
+      "historico_revisoes": [
+        {
+          "revisao_documental": "2026-10-17-nccn-delta-1",
+          "versao": "1.0.0",
+          "data": "2026-10-17",
+          "autor_extracao": "Codex",
+          "estado": "RASCUNHO",
+          "aprovacao_clinica": null,
+          "escopo": "CAMADA_ADITIVA_UNIVERSAL_E_DELTA_DOCUMENTAL_NCCN",
+          "base_legada": {
+            "arquivo": "corpus/6-pack-tumor/canal-anal/pack-canal-anal.v2.RASCUNHO.json",
+            "commit": "2c0991d",
+            "versao": "2.0.0",
+            "sha256_bytes": "0822ff6bac112006d3ea0abf63dfac476b39f160d3c3fedb2106a8ca176cb311",
+            "sha256_semantico": "41aab5b1793e2ebeafa0a00ec948390571caade7c3f2f90450bfd8161d48f824"
+          },
+          "nota_versao": "header.versao identifica o legado intacto; esta extensão possui revisão própria. Não reutilizar aprovação/hashes antigos para o conjunto alterado.",
+          "integra_runtime": false,
+          "gera_conduta": false
+        }
+      ]
+    },
+    "identidade_ref": "/identidade",
+    "dominios": [
+      {
+        "dominio_id": 1,
+        "nome": "Diagnóstico e patologia",
+        "itens_legados_refs": [
+          "legado-1dd04cb1f1a66b03",
+          "legado-f0a376988e1aed21",
+          "legado-895c98c844539140",
+          "legado-22f3763bcceb332a",
+          "legado-c09e8ab2293f9d6c",
+          "legado-d120b680eddc3f2e"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 2,
+        "nome": "Estadiamento, extensão e risco",
+        "itens_legados_refs": [
+          "legado-14b70ed38bf74741",
+          "legado-de3dc6d4b2545b38",
+          "legado-bf59cbffeec6ba13",
+          "legado-85370c4642c8ffe8",
+          "legado-ee9f25480a7d632c",
+          "legado-78f560016efb3703",
+          "legado-0734c288367d673c",
+          "legado-b0baa9d6d0b2c601"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 3,
+        "nome": "Biomarcadores e farmacogenética",
+        "itens_legados_refs": [
+          "legado-98a5be1e1414a27d",
+          "legado-1b56db31f050c1ca",
+          "legado-b9fd7f65e53fefcb",
+          "legado-9181596cab33b5d4"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 4,
+        "nome": "Exames e requisitos documentais",
+        "itens_legados_refs": [
+          "legado-38e49ccc0cd2cf30",
+          "legado-307e97f5fbfafe42",
+          "legado-d3f67f4904b84545",
+          "legado-7a59066446331934",
+          "legado-5e7c574761d0b621",
+          "legado-818e6ab496d9b935",
+          "legado-d4b9fa267c330748",
+          "legado-e1850e5f096fc8e9",
+          "legado-07c9bd867603ef22",
+          "legado-ac92f581c815d31d",
+          "legado-70fd54cfdefb846b",
+          "legado-6db732ee3e418b2f",
+          "legado-f6ecc9f3efd36d56",
+          "legado-6ddf8d8edd304fa3",
+          "legado-aeef4fe513fa8eb3",
+          "legado-89db3b6ec657bc2a",
+          "legado-55745d0840b3f311",
+          "legado-912d89e40ed1d0da",
+          "legado-e91a5711c03e6ab9",
+          "legado-fd2cc59dba1bda71",
+          "legado-a86f44fb1f45604c",
+          "legado-e6db8921e6b8167c",
+          "legado-4bbd749d3e0a7aa8",
+          "legado-ea73a4682c2f2ae7",
+          "legado-ab307d21c693348b",
+          "legado-95a8fabc27cd7aec",
+          "legado-0a7018e0c4945d15",
+          "legado-7422a2121ecf9032"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 5,
+        "nome": "Avaliação antes do tratamento",
+        "itens_legados_refs": [],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "NAO_ESTRUTURADO_NESTA_RODADA",
+        "observacao": "Ausência de referências não significa não aplicabilidade; textos dentro de outros itens permanecem preservados."
+      },
+      {
+        "dominio_id": 6,
+        "nome": "Tratamento e protocolos",
+        "itens_legados_refs": [
+          "legado-1877642378341042",
+          "legado-7a22f79d2e3bccea",
+          "legado-c7bad0b3db659424",
+          "legado-9d554f3db1d5aac6",
+          "legado-cf7418b22bc5ed12",
+          "legado-6ad02bf489423ef3",
+          "legado-167c13a4f0313c4a",
+          "legado-1419f50c33d9d1a9",
+          "legado-80c3c1e3dede76e8",
+          "legado-b72d619cf9d2f116",
+          "legado-6480e62841122380",
+          "legado-ee1c0bd1d4a76b86",
+          "legado-8a8297699313c658",
+          "legado-af5de4f1625d7aa4",
+          "legado-ac0b1678cc18ba38",
+          "legado-d9993d647526a541",
+          "legado-78ed6fe13eca609f",
+          "legado-963e277edd020a4f",
+          "legado-361c19be774e9fb4",
+          "legado-eb78a91faab56ba3",
+          "legado-4fd1362528eaeef8"
+        ],
+        "itens_nccn_refs": [
+          "nccn-20261017-canal-anal-retifanlimabe",
+          "nccn-20261017-canal-anal-capox",
+          "nccn-20261017-canal-anal-mfolfox6"
+        ],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 7,
+        "nome": "Segurança, interações e toxicidades",
+        "itens_legados_refs": [
+          "legado-a23b01c87d41597f",
+          "legado-30de28b19ea4e032",
+          "legado-04dbac1d564b1970",
+          "legado-0f4ee202c9a12a29",
+          "legado-94d6e1f15a8e25be",
+          "legado-142fd6a49729b922",
+          "legado-d1866b81c09a7809",
+          "legado-72ab7473563ee32a",
+          "legado-eda3f3d1d78a38e7",
+          "legado-8aa8bd4848c03a1c",
+          "legado-5bf920ed1cb88e09",
+          "legado-a2d37bea417e64a1"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 8,
+        "nome": "Suporte e cuidados",
+        "itens_legados_refs": [
+          "legado-e2a755d0a5c08d13",
+          "legado-5a628df88993ef60",
+          "legado-157fde6bbbdce1bd",
+          "legado-8bcea4df3d2722ea",
+          "legado-2e06db9152737ba1"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 9,
+        "nome": "Avaliação de resposta e estado da doença",
+        "itens_legados_refs": [],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "NAO_ESTRUTURADO_NESTA_RODADA",
+        "observacao": "Ausência de referências não significa não aplicabilidade; textos dentro de outros itens permanecem preservados."
+      },
+      {
+        "dominio_id": 10,
+        "nome": "Seguimento e sobrevivência",
+        "itens_legados_refs": [
+          "legado-1e1a2afe4c6b6c28",
+          "legado-ae25813c6ac8d789",
+          "legado-b8be6d520997c557",
+          "legado-44ece6e412bc5c9c",
+          "legado-d9b6d7141e676690",
+          "legado-7f54a333a82289de"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 11,
+        "nome": "Encaminhamentos e atuação multiprofissional",
+        "itens_legados_refs": [
+          "legado-a83ecac3bbd6c934",
+          "legado-72d8a1919c5aae95",
+          "legado-f44680b4008c2f22",
+          "legado-2dff86bc5c8a02f9",
+          "legado-eabc92e107de128e"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 12,
+        "nome": "Documentos e acesso assistencial",
+        "itens_legados_refs": [
+          "legado-3288d00c70ad8661"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      }
+    ],
+    "indice_itens_legados": [
+      {
+        "item_id": "legado-1dd04cb1f1a66b03",
+        "origem_json_pointer": "/diagnostico/patologico/obtencao/0",
+        "sha256_conteudo": "d4d5e69f8328b6739ff84e7b90d373a64643ca9de3a554a74ba9ac34c2ff5620",
+        "nome": "/diagnostico/patologico/obtencao/0",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/obtencao/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-f0a376988e1aed21",
+        "origem_json_pointer": "/diagnostico/patologico/obtencao/1",
+        "sha256_conteudo": "a7eb6d44a94e4691ee932ab7f3228b05c47a60ea747d74aab7f27cae423ccfef",
+        "nome": "/diagnostico/patologico/obtencao/1",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/obtencao/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-895c98c844539140",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/0",
+        "sha256_conteudo": "e7342b705ede73a598334b0da036099991a5f886c354ec2ae528c8c63ccf00c0",
+        "nome": "tipo histológico (CEC)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-22f3763bcceb332a",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/1",
+        "sha256_conteudo": "e66527af3467753b6f957133baecad6f47b2ddb52bdedf368f91cf834036aaa5",
+        "nome": "grau de diferenciação",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-c09e8ab2293f9d6c",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/2",
+        "sha256_conteudo": "0d31729841971d192d06c19d489a5a9bea580befe1cf90a43ad796ab42510956",
+        "nome": "tamanho (T por dimensão em cm)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d120b680eddc3f2e",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/3",
+        "sha256_conteudo": "1f6109269e56053291f2b0e18454c03c830bf1548de271d431dcbef67af641d7",
+        "nome": "margens se excisão (> 1 mm para T1N0 bem diferenciado)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-14b70ed38bf74741",
+        "origem_json_pointer": "/estadiamento/sistema",
+        "sha256_conteudo": "d7dab6e16ae3278a0513466816530a61b1fcf4548c0e925655782b9ee09cf5ce",
+        "nome": "AJCC",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-de3dc6d4b2545b38",
+        "origem_json_pointer": "/estadiamento/edicao",
+        "sha256_conteudo": "dcc28f15172f39494d056efeeeeb698d5bde64ceab1a76412c62a08a5aafaf7c",
+        "nome": "8ª",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-bf59cbffeec6ba13",
+        "origem_json_pointer": "/estadiamento/gruposConduta/0",
+        "sha256_conteudo": "863aba9631c469f0afa714dfc8452fca99271fb6af853dffd76f500bf4e5d23f",
+        "nome": "/estadiamento/gruposConduta/0",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-85370c4642c8ffe8",
+        "origem_json_pointer": "/estadiamento/gruposConduta/1",
+        "sha256_conteudo": "4cc024a964172f71d45c6ca0fd12bacc18c3492c4b0d244bbb8e9e82ac1983cd",
+        "nome": "/estadiamento/gruposConduta/1",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ee9f25480a7d632c",
+        "origem_json_pointer": "/estadiamento/gruposConduta/2",
+        "sha256_conteudo": "9e9e795a7f1652795f8c4b75cfbe09e1bab28993d32a565618b4bbe37fddb6a4",
+        "nome": "/estadiamento/gruposConduta/2",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-78f560016efb3703",
+        "origem_json_pointer": "/estadiamento/gruposConduta/3",
+        "sha256_conteudo": "7725d4ba93c94ac3cff4c0615a474758e9434d3919a32327d4f77c214f1e333e",
+        "nome": "/estadiamento/gruposConduta/3",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-0734c288367d673c",
+        "origem_json_pointer": "/estadiamento/gruposConduta/4",
+        "sha256_conteudo": "772c856c03b2a1d400aa011d12d0a8c25b2758c4a18a9e7ac7eac3207d5bae86",
+        "nome": "/estadiamento/gruposConduta/4",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b0baa9d6d0b2c601",
+        "origem_json_pointer": "/estadiamento/marcadores",
+        "sha256_conteudo": "38239f26dd78f2b260f9b9f1e77d41c9e444e509e5800f8ade8996933f8b2285",
+        "nome": "/estadiamento/marcadores",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-98a5be1e1414a27d",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/0",
+        "sha256_conteudo": "8173b57629a840d24c452e0786a54012fb3811cc1dfc850ca8e3ee141404941e",
+        "nome": "doença avançada",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-1b56db31f050c1ca",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/1",
+        "sha256_conteudo": "fa53ce6b3c079d77ef8d1759a67e392737b52bef35add75272e06069d8b314e0",
+        "nome": "antes de 5-FU/capecitabina",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b9fd7f65e53fefcb",
+        "origem_json_pointer": "/tratamento/biomarcadorTratamento/0",
+        "sha256_conteudo": "f28ee411cce56ce560a57076063ae3f03c3fb3b2fec77e2647a78d360803c5c5",
+        "nome": "/tratamento/biomarcadorTratamento/0",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/biomarcadorTratamento/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-9181596cab33b5d4",
+        "origem_json_pointer": "/tratamento/biomarcadorTratamento/1",
+        "sha256_conteudo": "3a1c3ea5960221763815dacd6c764d03fdea1a4b3c76925844f36150123f66a9",
+        "nome": "/tratamento/biomarcadorTratamento/1",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/biomarcadorTratamento/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-38e49ccc0cd2cf30",
+        "origem_json_pointer": "/diagnostico/imagem/0",
+        "sha256_conteudo": "e9b046c188826e6e8b66b79678042a345e5818f19885b021f2c89062adc79534",
+        "nome": "TC de tórax",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-307e97f5fbfafe42",
+        "origem_json_pointer": "/diagnostico/imagem/1",
+        "sha256_conteudo": "0c7254e2034f3a2c17ea1c117fe1020f7fcc741eb7072ee9826caa43a25b4eee",
+        "nome": "TC de abdome",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d3f67f4904b84545",
+        "origem_json_pointer": "/diagnostico/imagem/2",
+        "sha256_conteudo": "df017343276cebd5dd0e6d2efe833ad05d19fe515a2810e4ba4421068d74ac04",
+        "nome": "RM de pelve",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-7a59066446331934",
+        "origem_json_pointer": "/diagnostico/imagem/3",
+        "sha256_conteudo": "3b6a1d4028c80b151374ac900f2e28f7181101f028f5ff909bfe00a12e6f0ae3",
+        "nome": "PET-CT FDG",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-5e7c574761d0b621",
+        "origem_json_pointer": "/diagnostico/endoscopicos/0",
+        "sha256_conteudo": "38efa14ec71cf6726d48fda0ab9392635818ac1efde144b64d6780280fda556f",
+        "nome": "Anuscopia com toque retal",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/endoscopicos/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-818e6ab496d9b935",
+        "origem_json_pointer": "/diagnostico/endoscopicos/1",
+        "sha256_conteudo": "c4d40653f34823e9201d2beae2ec29f6282c8c85be36c7ec0acf74c1de650230",
+        "nome": "Retoscopia/colonoscopia",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/endoscopicos/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d4b9fa267c330748",
+        "origem_json_pointer": "/diagnostico/laboratorio/0",
+        "sha256_conteudo": "36908f29b8d9804444d9a5363650dc794cf1e11c22dea0432889e6bb00bfd5ca",
+        "nome": "Sorologia HIV (com consentimento)",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/laboratorio/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e1850e5f096fc8e9",
+        "origem_json_pointer": "/diagnostico/laboratorio/1",
+        "sha256_conteudo": "f854d9bb0d48aca5dc56384771897ecb26677f07b2090361e53d765dc1d235a8",
+        "nome": "HBsAg",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/laboratorio/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-07c9bd867603ef22",
+        "origem_json_pointer": "/diagnostico/laboratorio/2",
+        "sha256_conteudo": "31edc1101dc8e5edd1a7789e1e001070062d7506ee0b664793bbcbb6463e9869",
+        "nome": "Anti-HCV",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/laboratorio/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ac92f581c815d31d",
+        "origem_json_pointer": "/diagnostico/laboratorio/3",
+        "sha256_conteudo": "361993ea58ede1e6dc18edf2b3011cea860181105713eaa8a1821e69668aa33f",
+        "nome": "CD4 e carga viral (se HIV+)",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/laboratorio/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-70fd54cfdefb846b",
+        "origem_json_pointer": "/estadiamento/exames/0",
+        "sha256_conteudo": "aba7f53f65dc9c1c9cff31598558460146d9311de8670e84fe4aa95d7a5dc455",
+        "nome": "TC de tórax",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-6db732ee3e418b2f",
+        "origem_json_pointer": "/estadiamento/exames/1",
+        "sha256_conteudo": "3686354712c48239e0188cfbc913bb3c76f30e811aec595af6f3901c209d78cc",
+        "nome": "TC de abdome",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-f6ecc9f3efd36d56",
+        "origem_json_pointer": "/estadiamento/exames/2",
+        "sha256_conteudo": "defd8dca2d2e5a0184792712241d4402c9016fbccafb36721467e918c4ad4071",
+        "nome": "RM de pelve",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-6ddf8d8edd304fa3",
+        "origem_json_pointer": "/estadiamento/exames/3",
+        "sha256_conteudo": "8b96a75a7ae3c233cbb918b0a6af04efaba7fcaa0edc1fd7e354f7f5e46d1a9e",
+        "nome": "PET-CT FDG",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-aeef4fe513fa8eb3",
+        "origem_json_pointer": "/estadiamento/exames/4",
+        "sha256_conteudo": "34b3c28586bcddaf66ef728e0e987f2b41ab866402a7b4054812aa069387bce6",
+        "nome": "Sorologia HIV",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-89db3b6ec657bc2a",
+        "origem_json_pointer": "/ligacoes/exames/0",
+        "sha256_conteudo": "00cac656db90cece9385c8c98f658accb5b7c1553202e6be466fa96d39aaf2b9",
+        "nome": "ANATOMOPATOLOGICO",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-55745d0840b3f311",
+        "origem_json_pointer": "/ligacoes/exames/1",
+        "sha256_conteudo": "bd3db595b528b1d7e0a9ce08d777e5b2ada3a7707c2ed2c9d0e5b461c7e3430a",
+        "nome": "ANTI_HCV",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-912d89e40ed1d0da",
+        "origem_json_pointer": "/ligacoes/exames/2",
+        "sha256_conteudo": "dc49fc936c8f159a3aa8208709558e35c50f545055f5cc9756e18bdd0d02c81b",
+        "nome": "BIOPSIA_GANGLIO",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e91a5711c03e6ab9",
+        "origem_json_pointer": "/ligacoes/exames/3",
+        "sha256_conteudo": "5228a75a2c61f24731de7c5a5fc97f2fb723736afc94712ad53cd682c14187fd",
+        "nome": "HBSAG",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-fd2cc59dba1bda71",
+        "origem_json_pointer": "/ligacoes/exames/4",
+        "sha256_conteudo": "7e6eb8146933ca4629a8f652e1d1fd5d9ee0ebde5c5f53071fa3b4be69755bca",
+        "nome": "HIV",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a86f44fb1f45604c",
+        "origem_json_pointer": "/ligacoes/exames/5",
+        "sha256_conteudo": "99a98b9d268e78a05608d792d2fad81f4e16f25b8a4f95da9f7decd91a23a0dc",
+        "nome": "IMUNOHISTOQUIMICA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e6db8921e6b8167c",
+        "origem_json_pointer": "/ligacoes/exames/6",
+        "sha256_conteudo": "3a955b75de510bd32be8d0f7de2bf070f27f223ac4c6a07cf68b35b7271856b2",
+        "nome": "PET_CT_FDG",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-4bbd749d3e0a7aa8",
+        "origem_json_pointer": "/ligacoes/exames/7",
+        "sha256_conteudo": "0a11983ed0f1f25f0cb393649509d8da35c120d78ab0d89c9884078a94bce572",
+        "nome": "RETOSSIGMOIDOSCOPIA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ea73a4682c2f2ae7",
+        "origem_json_pointer": "/ligacoes/exames/8",
+        "sha256_conteudo": "ae974cff2b8cea688a4632542e3da503ad4a2f0f9301b96d75afbb2588228c37",
+        "nome": "RM_PELVE",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ab307d21c693348b",
+        "origem_json_pointer": "/ligacoes/exames/9",
+        "sha256_conteudo": "eea68f82f02592e6262514a154ff52ae85284765c1f48ab3b07cabb92ead209f",
+        "nome": "TC_ABDOMEN_SUPERIOR",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-95a8fabc27cd7aec",
+        "origem_json_pointer": "/ligacoes/exames/10",
+        "sha256_conteudo": "5beb801ddc054db97d463dd8b682c9128772e22b7938b6d4c645af14dc4ddd7a",
+        "nome": "TC_PELVE",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-0a7018e0c4945d15",
+        "origem_json_pointer": "/ligacoes/exames/11",
+        "sha256_conteudo": "147b97b900462813d8c6528cc01d88f8a5102936ee96ee4fb121f8a7b77f60b0",
+        "nome": "TC_TORAX",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-7422a2121ecf9032",
+        "origem_json_pointer": "/ligacoes/exames/12",
+        "sha256_conteudo": "aca3b34f0d92929024c92e6ecb4d949cbdd22b269cfe661f91a060d203380447",
+        "nome": "CD4_CD8",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-1877642378341042",
+        "origem_json_pointer": "/tratamento/cenarios/0",
+        "sha256_conteudo": "53fd06137a699dd7a7b56df71550ecd31706841960dce375f968271dec899267",
+        "nome": "localizado_qtrt_definitiva",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-7a22f79d2e3bccea",
+        "origem_json_pointer": "/tratamento/cenarios/1",
+        "sha256_conteudo": "f3e0945e2253e024a6dd3a28f4b8fa92ef97061be9a5ffdba846b4a4fc1886b1",
+        "nome": "avaliacao_resposta",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-c7bad0b3db659424",
+        "origem_json_pointer": "/tratamento/cenarios/2",
+        "sha256_conteudo": "8cfd4a8af81dbcda90ab6b23091107d546c0a26b91109b40c0290ea4f7c5853a",
+        "nome": "resgate_cirurgico",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-9d554f3db1d5aac6",
+        "origem_json_pointer": "/tratamento/cenarios/3",
+        "sha256_conteudo": "6150a9d07fc0d75ce5f40da9926b3af8015e4141c0eb79f81e2c5302b588ea94",
+        "nome": "metastatico_ou_recorrente",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-cf7418b22bc5ed12",
+        "origem_json_pointer": "/tratamento/protocolos/0",
+        "sha256_conteudo": "58e8441dd1322635f2dea448ae93d38fb195509d50da7f963fce0db1812e2827",
+        "nome": "Mitomicina 12 mg/m² (máx. 20 mg) D1 + 5-FU infusional + RT",
+        "id_original": "canal-anal-mmc12-5fu-rt",
+        "fonte_local_ref": "/tratamento/protocolos/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-6ad02bf489423ef3",
+        "origem_json_pointer": "/tratamento/protocolos/1",
+        "sha256_conteudo": "7e9b6b999ff1190f86ac0755ce01545d812448a1d3367eb0e797b7dd0e3f468b",
+        "nome": "Mitomicina 10 mg/m² D1 e D29 + 5-FU infusional + RT",
+        "id_original": "canal-anal-mmc10x2-5fu-rt",
+        "fonte_local_ref": "/tratamento/protocolos/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-167c13a4f0313c4a",
+        "origem_json_pointer": "/tratamento/protocolos/2",
+        "sha256_conteudo": "64329ac8c15445ffa5b34dc4fbf32aa42b4021b6f80b34161912fd3bbd8b602e",
+        "nome": "Mitomicina + capecitabina (substitui 5-FU) + RT",
+        "id_original": "canal-anal-mmc-capecitabina-rt",
+        "fonte_local_ref": "/tratamento/protocolos/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-1419f50c33d9d1a9",
+        "origem_json_pointer": "/tratamento/protocolos/3",
+        "sha256_conteudo": "df326231983024802ff4e53d2d21106e7253995131e610eb8581b75f2a41b9bc",
+        "nome": "Cisplatina + 5-FU infusional + RT (mitomicina indisponível ou contraindicada)",
+        "id_original": "canal-anal-cisplatina-5fu-rt",
+        "fonte_local_ref": "/tratamento/protocolos/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-80c3c1e3dede76e8",
+        "origem_json_pointer": "/tratamento/protocolos/4",
+        "sha256_conteudo": "7ce2c8dbbb00a69c0f10eb9faa513c3eefd744dc9b0a2ce5cffdb09437ab834e",
+        "nome": "Cisplatina + capecitabina + RT",
+        "id_original": "canal-anal-cisplatina-capecitabina-rt",
+        "fonte_local_ref": "/tratamento/protocolos/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b72d619cf9d2f116",
+        "origem_json_pointer": "/tratamento/protocolos/5",
+        "sha256_conteudo": "f677cce0b14b2573bd8dae27b06560a61f43bc415af7289d4cd4a2338519e0b9",
+        "nome": "Carboplatina + paclitaxel semanal (preferencial)",
+        "id_original": "canal-anal-carboplatina-paclitaxel",
+        "fonte_local_ref": "/tratamento/protocolos/5/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-6480e62841122380",
+        "origem_json_pointer": "/tratamento/protocolos/6",
+        "sha256_conteudo": "c9c32e068164777713536bebec1a8568bea29b8d82d94a74aa2fa1a4a4be040f",
+        "nome": "Cisplatina + 5-FU infusional (metastático)",
+        "id_original": "canal-anal-cisplatina-5fu-met",
+        "fonte_local_ref": "/tratamento/protocolos/6/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ee1c0bd1d4a76b86",
+        "origem_json_pointer": "/tratamento/protocolos/7",
+        "sha256_conteudo": "214a934829873401d924f2e451567e88e5292d4db923d4c100040743650e7111",
+        "nome": "FOLFICIS",
+        "id_original": "canal-anal-folficis",
+        "fonte_local_ref": "/tratamento/protocolos/7/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8a8297699313c658",
+        "origem_json_pointer": "/tratamento/protocolos/8",
+        "sha256_conteudo": "dd34621fe4e2ff2454b125eace3482642b88e890a7ae2f707e184c2ea77ce96e",
+        "nome": "DCF modificado (+ filgrastima profilática)",
+        "id_original": "canal-anal-dcf-modificado",
+        "fonte_local_ref": "/tratamento/protocolos/8/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-af5de4f1625d7aa4",
+        "origem_json_pointer": "/tratamento/protocolos/9",
+        "sha256_conteudo": "377f600415377640866164b5a73e0074bd6f9eff60841b6ff2a7bafe077669c3",
+        "nome": "Nivolumabe",
+        "id_original": "canal-anal-nivolumabe",
+        "fonte_local_ref": "/tratamento/protocolos/9/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ac0b1678cc18ba38",
+        "origem_json_pointer": "/tratamento/protocolos/10",
+        "sha256_conteudo": "dc537e496494c8eb444dd178e0121f40acb40e4a01ddf5bf4467f3633370e26a",
+        "nome": "Pembrolizumabe",
+        "id_original": "canal-anal-pembrolizumabe",
+        "fonte_local_ref": "/tratamento/protocolos/10/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d9993d647526a541",
+        "origem_json_pointer": "/tratamento/protocolos/11",
+        "sha256_conteudo": "1eb8d3c483778cd2837dab829b13b741cc6a91caa7ea3e58816a8f1dfa024899",
+        "nome": "QT de 2ª linha sem imunoterapia: paclitaxel, FOLFIRI ou mitomicina + 5-FU",
+        "id_original": "canal-anal-2l-qt",
+        "fonte_local_ref": "/tratamento/protocolos/11/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-78ed6fe13eca609f",
+        "origem_json_pointer": "/tratamento/cirurgia/0",
+        "sha256_conteudo": "02113832ea479bb33df157137e0c288ec0a53515d958a4d51230cdc0f3bb86e0",
+        "nome": "/tratamento/cirurgia/0",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cirurgia/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-963e277edd020a4f",
+        "origem_json_pointer": "/tratamento/cirurgia/1",
+        "sha256_conteudo": "537e0302562df66f81df99f6fcb462e8ddfded37ffa513b8e8c7eeef67336f79",
+        "nome": "/tratamento/cirurgia/1",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cirurgia/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-361c19be774e9fb4",
+        "origem_json_pointer": "/tratamento/cirurgia/2",
+        "sha256_conteudo": "579aa5588160faee6803047061414cceb83f48bcc6f29799f885624e6a133155",
+        "nome": "/tratamento/cirurgia/2",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cirurgia/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-eb78a91faab56ba3",
+        "origem_json_pointer": "/tratamento/radioterapia/0",
+        "sha256_conteudo": "2a9839bc0fdb6a159ca4ad91a9acccf78744fc1f97f0ff69281072cb0039542b",
+        "nome": "localizado_qtrt_definitiva",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/radioterapia/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-4fd1362528eaeef8",
+        "origem_json_pointer": "/tratamento/radioterapia/1",
+        "sha256_conteudo": "cc77c178bf951112513569b5b0287b75a3813ca7c12416673c478d4d8bc68fc2",
+        "nome": "RT exclusiva (HIV CD4 < 200, frágil)",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/radioterapia/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a23b01c87d41597f",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/0",
+        "sha256_conteudo": "59be8f3f72a0128dd57eb3b2ff2cf8825feb79fc8236888808477b1d3359b535",
+        "nome": "/ligacoes/interacoesConsultar/0",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-30de28b19ea4e032",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/1",
+        "sha256_conteudo": "fa1590c52171a6c746e34074d8122ea40e0be2a6251b87f1fac8b43ac7da1c4c",
+        "nome": "/ligacoes/interacoesConsultar/1",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-04dbac1d564b1970",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/2",
+        "sha256_conteudo": "ae2e225a7a1de3f874800797c1c650a76329c6097bcb6d6e3b966929bfd7c979",
+        "nome": "/ligacoes/interacoesConsultar/2",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-0f4ee202c9a12a29",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/3",
+        "sha256_conteudo": "ca748c03891da4a9f694845affc8d152188b02a8ad620302091c0cbd432a8c61",
+        "nome": "/ligacoes/interacoesConsultar/3",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-94d6e1f15a8e25be",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/4",
+        "sha256_conteudo": "1e66ea8a73b4ba10619fea75763d8d3178a097d6792caefb50d25b3f5789ea7f",
+        "nome": "/ligacoes/interacoesConsultar/4",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-142fd6a49729b922",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/5",
+        "sha256_conteudo": "4f50dae37ccb1ebc25a09ccfec927d622749dbd71284be317e697ba661c48c37",
+        "nome": "/ligacoes/interacoesConsultar/5",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d1866b81c09a7809",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/6",
+        "sha256_conteudo": "ebc8e8b7ffaec337dd1d732fb753a057c40d733834df8c9cde89a7641325c2ad",
+        "nome": "/ligacoes/interacoesConsultar/6",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-72ab7473563ee32a",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/7",
+        "sha256_conteudo": "6089dbe9b3e4693522f04cd9befab56be96f73e0bc146edcd5cf003c899c4b0b",
+        "nome": "/ligacoes/interacoesConsultar/7",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-eda3f3d1d78a38e7",
+        "origem_json_pointer": "/ligacoes/ctcaeAcao/0",
+        "sha256_conteudo": "e5437f44c91f9cf0e90d134d9ff56ce2a81ea4b9be1c3094773c93b38765843b",
+        "nome": "/ligacoes/ctcaeAcao/0",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8aa8bd4848c03a1c",
+        "origem_json_pointer": "/ligacoes/ctcaeAcao/1",
+        "sha256_conteudo": "99115a9d8f87463840fb12707933cf04b22a9aa2f2976cdfcefcdbdd9aa0b30f",
+        "nome": "/ligacoes/ctcaeAcao/1",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-5bf920ed1cb88e09",
+        "origem_json_pointer": "/ligacoes/ctcaeAcao/2",
+        "sha256_conteudo": "b9c5ac9c9f0e87f35846f374becf93239efe687df7cc033befc90257d139e0ea",
+        "nome": "/ligacoes/ctcaeAcao/2",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a2d37bea417e64a1",
+        "origem_json_pointer": "/ligacoes/ctcaeAcao/3",
+        "sha256_conteudo": "1f3c502c5749e14bbd867edf4bdf36ed132e666d87198b9fbb544190a7b3f3f7",
+        "nome": "/ligacoes/ctcaeAcao/3",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e2a755d0a5c08d13",
+        "origem_json_pointer": "/tratamento/suporte",
+        "sha256_conteudo": "8ae556bb6f3594e1184fb5c3d8c75be84dfac34acefaa817dc0dfced40abb6d6",
+        "nome": "/tratamento/suporte",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/suporte/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-5a628df88993ef60",
+        "origem_json_pointer": "/ligacoes/suporteReceitas/0",
+        "sha256_conteudo": "8738fd3eb06f48d22731cab81784db18311ae33cfb46e4bf300a952d0d48d987",
+        "nome": "cuidados com radiodermatite perineal",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-157fde6bbbdce1bd",
+        "origem_json_pointer": "/ligacoes/suporteReceitas/1",
+        "sha256_conteudo": "dc8e3402eb8d4a734178081e11a328f655f087f447e33202a731a43fd5961299",
+        "nome": "analgesia",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8bcea4df3d2722ea",
+        "origem_json_pointer": "/ligacoes/suporteReceitas/2",
+        "sha256_conteudo": "d4a0b91d1f6c692104c7deda4952674fe8de31cf60c69003294379cb048a9156",
+        "nome": "dilatador vaginal",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-2e06db9152737ba1",
+        "origem_json_pointer": "/ligacoes/suporteReceitas/3",
+        "sha256_conteudo": "ee3c32491f595bfd59d327c7997350d05bcf0356b1e631e566cfe7a86b896c44",
+        "nome": "filgrastima (DCF modificado)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-1e1a2afe4c6b6c28",
+        "origem_json_pointer": "/tratamento/seguimento/0",
+        "sha256_conteudo": "c9bc29bd1086cadb21570940c5f5589928f41bfd48a19c040aa6e201f33225c9",
+        "nome": "3 anos — exame clínico",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/seguimento/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ae25813c6ac8d789",
+        "origem_json_pointer": "/tratamento/seguimento/1",
+        "sha256_conteudo": "03926089ad625b0d30b93ae9869444e6c2870a94687fed5196337e4c0dfe28b4",
+        "nome": "3 anos — anuscopia",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/seguimento/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b8be6d520997c557",
+        "origem_json_pointer": "/tratamento/seguimento/2",
+        "sha256_conteudo": "f07b5ceb4b20fb25a60e5ae81f04b4f838e6efeedd395f1f4930c2b281f56eca",
+        "nome": "3 anos — imagem",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/seguimento/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-44ece6e412bc5c9c",
+        "origem_json_pointer": "/tratamento/seguimento/3",
+        "sha256_conteudo": "af867f80284a403592e537d97e26447a2bac501fd6b9b64502bf2b9845abfad6",
+        "nome": "Localmente avançado — 1º ano",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/seguimento/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d9b6d7141e676690",
+        "origem_json_pointer": "/ligacoes/orientacoes/0",
+        "sha256_conteudo": "afba05e2de6389b751452a9fc6c36eff43abe35e94eedf588456a5e98a7bd825",
+        "nome": "sinais-alarme-consolidado",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-7f54a333a82289de",
+        "origem_json_pointer": "/ligacoes/orientacoes/1",
+        "sha256_conteudo": "b8ea876062c9e1d5187c1ff9251efb3dfda054409dbd6f453b696678705469bc",
+        "nome": "dieta-por-toxicidade",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a83ecac3bbd6c934",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/0",
+        "sha256_conteudo": "eb54fb8d77e530fb6faedf5bf1621ae02068135f31f3ec1f1351cbd5f307765b",
+        "nome": "radioterapia",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-72d8a1919c5aae95",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/1",
+        "sha256_conteudo": "4eeb740976b2bca50c646e5d39c3e087c19a5ac4695dcd9f24301e9cad14ca8a",
+        "nome": "cirurgia-oncologica (resgate)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-f44680b4008c2f22",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/2",
+        "sha256_conteudo": "6be9a07586c8258c03387728e0fa87ee285a1e67453e25122265f3fc5df23ea5",
+        "nome": "ginecologia/urologia (lesões por HPV)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-2dff86bc5c8a02f9",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/3",
+        "sha256_conteudo": "d4b715d9fec0591db2871b97192bf0140680dac48cf9a9c30c24feb40bad7dd8",
+        "nome": "infectologia (HIV)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-eabc92e107de128e",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/4",
+        "sha256_conteudo": "1904f18eb1604934ff206a272a685781943e9ec7c6a79eba7533a4d24c4195c9",
+        "nome": "cuidados-paliativos",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-3288d00c70ad8661",
+        "origem_json_pointer": "/ligacoes/laudos/0",
+        "sha256_conteudo": "3a9e4698f8c94246c53c711998df86262f4f509235018c321aa9bf876c1a2cc7",
+        "nome": "APAC de quimioterapia (SIGTAP 0304040053; 0304020192)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      }
+    ],
+    "itens_nccn": [
+      {
+        "item_id": "nccn-20261017-canal-anal-retifanlimabe",
+        "nome": "Carboplatina + paclitaxel + retifanlimabe",
+        "tipo": "OPCAO_TERAPEUTICA",
+        "dominio_principal": 6,
+        "conteudo_extraido": "Primeira linha metastática Preferred: carboplatina AUC5 D1 + paclitaxel 80 mg/m² D1/8/15 + retifanlimabe 500 mg D1, a cada 28 dias por seis ciclos; depois retifanlimabe 500 mg a cada 28 dias por até sete ciclos. Carboplatina/paclitaxel isolados são Other Recommended. Outros anti-PD-1 da nota c têm eficácia presumida por classe e dados insuficientes nessa combinação.",
+        "aplicabilidade": {
+          "criterios": [
+            "Carcinoma anal avançado/metastático",
+            "Primeira linha conforme ANAL-B"
+          ],
+          "paciente_individual": null,
+          "estado": "NAO_AVALIADA"
+        },
+        "dados_estruturados": {
+          "farmacos": [
+            "carboplatina",
+            "paclitaxel",
+            "retifanlimabe"
+          ],
+          "posologia": {
+            "estado": "EXTRAIDA_DA_PAGINA_14_A_CONFERIR",
+            "ciclo_dias": 28,
+            "fases": [
+              {
+                "nome": "combinacao",
+                "ciclos": 6,
+                "componentes": [
+                  {
+                    "farmaco": "carboplatina",
+                    "dose": 5,
+                    "unidade": "AUC",
+                    "via": "EV",
+                    "dias": "D1"
+                  },
+                  {
+                    "farmaco": "paclitaxel",
+                    "dose": 80,
+                    "unidade": "mg/m2",
+                    "via": "EV",
+                    "dias": "D1,D8,D15"
+                  },
+                  {
+                    "farmaco": "retifanlimabe",
+                    "dose": 500,
+                    "unidade": "mg",
+                    "via": "EV",
+                    "dias": "D1"
+                  }
+                ]
+              },
+              {
+                "nome": "continuidade",
+                "maximo_ciclos": 7,
+                "farmaco": "retifanlimabe",
+                "dose": 500,
+                "unidade": "mg",
+                "via": "EV",
+                "intervalo_dias": 28
+              }
+            ],
+            "premedicacao": null,
+            "ajustes": null
+          }
+        },
+        "fonte_refs": [
+          {
+            "fonte_id": "nccn-3bb780161848",
+            "edicao": "3.2026",
+            "pagina_pdf": 13,
+            "paginas_pdf": [
+              13
+            ],
+            "secao": "ANAL-B 2/5",
+            "trecho": "Carboplatin/Paclitaxel + Retifanlimab",
+            "ancora_contextual": null,
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "e6d2b240326db9390693bf8ea75bcbaccd4bab7d89f866f384bc63e92107a29d"
+          },
+          {
+            "fonte_id": "nccn-3bb780161848",
+            "edicao": "3.2026",
+            "pagina_pdf": 13,
+            "paginas_pdf": [
+              13
+            ],
+            "secao": "ANAL-B 2/5, nota c",
+            "trecho": "insufficient data",
+            "ancora_contextual": null,
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "e6d2b240326db9390693bf8ea75bcbaccd4bab7d89f866f384bc63e92107a29d"
+          },
+          {
+            "fonte_id": "nccn-3bb780161848",
+            "edicao": "3.2026",
+            "pagina_pdf": 14,
+            "paginas_pdf": [
+              14
+            ],
+            "secao": "ANAL-B 3/5",
+            "trecho": "Retifanlimab-dlwr 500 mg IV Day 1",
+            "ancora_contextual": null,
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "e6d2b240326db9390693bf8ea75bcbaccd4bab7d89f866f384bc63e92107a29d"
+          }
+        ],
+        "evidencia_declarada": {
+          "sistema": "NCCN",
+          "categoria": "2A por cabeçalho",
+          "preferencia": "Preferred",
+          "estado": "CONFERIDA_DOCUMENTALMENTE_A_CONFERIR_CLINICAMENTE",
+          "nota": "Categoria 2A sem marca local somente quando expressamente coberta pelo cabeçalho; múltiplas categorias permanecem nos ramos."
+        },
+        "estado_extracao": "EXTRAIDO_COM_LIMITES_DECLARADOS",
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "temporalidade": {
+          "referencia": "CENARIO_DESCRITO",
+          "datas_individuais": null
+        },
+        "propor_automaticamente": false,
+        "disponivel_para_prescricao": false,
+        "acesso": {
+          "registro_anvisa": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "incorporacao_conitec": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "pcdt_ddt": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "sigtap_apac": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "cobertura_privada": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "disponibilidade_institucional": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          }
+        },
+        "alternativas_legadas_refs": [
+          "/tratamento/ensaios/2"
+        ],
+        "relacoes_refs": [
+          "relacao-nccn-20261017-canal-anal-retifanlimabe"
+        ],
+        "conflitos_refs": [],
+        "pendencias": [
+          "REVISAO_CLINICA_DO_DELTA",
+          "VERIFICAR_ACESSO_BRASILEIRO_POR_INDICACAO",
+          "POSOLOGIA_E_SUPORTE_NAO_COMPLETOS_NESTA_RODADA"
+        ],
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-2-correcao-auditoria",
+            "correcao_id": "M07",
+            "anterior": {
+              "conteudo_extraido": "Transformar a menção ao ensaio em opção documental de primeira linha e continuidade com retifanlimabe, sem apagar o ensaio nem carboplatina/paclitaxel isolados.",
+              "fonte_refs": [
+                {
+                  "fonte_id": "nccn-3bb780161848",
+                  "paginas_pdf": [
+                    13,
+                    14
+                  ],
+                  "secao": "ANAL-B 2–3/5",
+                  "natureza": "EXTRACAO_DOCUMENTAL",
+                  "pagina_pdf": 13,
+                  "trecho": "Retifanlimab-dlwrb,c Other Recommended • CAPEOX (Capecitabine/Oxaliplatin)d • Carboplatin/Paclitaxel • FOLFCIS (Leucovorin/Fluorouracil/Cisplatin) •"
+                }
+              ],
+              "estado_curadoria": "A_CONFERIR",
+              "aprovacao_clinica": null,
+              "evidencia_declarada": {
+                "sistema": "NCCN",
+                "categoria": null,
+                "estado": "NAO_EXTRAIDA_POR_ITEM"
+              }
+            },
+            "motivo": "Correção documental após auditoria Claude e conferência da fonte; não apaga versão anterior.",
+            "aprovacao_clinica": null
+          }
+        ],
+        "fontes_por_campo": {
+          "conteudo_extraido": [
+            {
+              "fonte_id": "nccn-3bb780161848",
+              "edicao": "3.2026",
+              "pagina_pdf": 13,
+              "paginas_pdf": [
+                13
+              ],
+              "secao": "ANAL-B 2/5",
+              "trecho": "Carboplatin/Paclitaxel + Retifanlimab",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "e6d2b240326db9390693bf8ea75bcbaccd4bab7d89f866f384bc63e92107a29d"
+            },
+            {
+              "fonte_id": "nccn-3bb780161848",
+              "edicao": "3.2026",
+              "pagina_pdf": 13,
+              "paginas_pdf": [
+                13
+              ],
+              "secao": "ANAL-B 2/5, nota c",
+              "trecho": "insufficient data",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "e6d2b240326db9390693bf8ea75bcbaccd4bab7d89f866f384bc63e92107a29d"
+            },
+            {
+              "fonte_id": "nccn-3bb780161848",
+              "edicao": "3.2026",
+              "pagina_pdf": 14,
+              "paginas_pdf": [
+                14
+              ],
+              "secao": "ANAL-B 3/5",
+              "trecho": "Retifanlimab-dlwr 500 mg IV Day 1",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "e6d2b240326db9390693bf8ea75bcbaccd4bab7d89f866f384bc63e92107a29d"
+            }
+          ],
+          "evidencia_declarada": [
+            {
+              "fonte_id": "nccn-3bb780161848",
+              "edicao": "3.2026",
+              "pagina_pdf": 13,
+              "paginas_pdf": [
+                13
+              ],
+              "secao": "ANAL-B 2/5",
+              "trecho": "Carboplatin/Paclitaxel + Retifanlimab",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "e6d2b240326db9390693bf8ea75bcbaccd4bab7d89f866f384bc63e92107a29d"
+            },
+            {
+              "fonte_id": "nccn-3bb780161848",
+              "edicao": "3.2026",
+              "pagina_pdf": 13,
+              "paginas_pdf": [
+                13
+              ],
+              "secao": "ANAL-B 2/5, nota c",
+              "trecho": "insufficient data",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "e6d2b240326db9390693bf8ea75bcbaccd4bab7d89f866f384bc63e92107a29d"
+            },
+            {
+              "fonte_id": "nccn-3bb780161848",
+              "edicao": "3.2026",
+              "pagina_pdf": 14,
+              "paginas_pdf": [
+                14
+              ],
+              "secao": "ANAL-B 3/5",
+              "trecho": "Retifanlimab-dlwr 500 mg IV Day 1",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "e6d2b240326db9390693bf8ea75bcbaccd4bab7d89f866f384bc63e92107a29d"
+            }
+          ]
+        },
+        "correcoes_auditoria": [
+          {
+            "id": "M07",
+            "revisao": "2026-10-17-nccn-delta-2-correcao-auditoria",
+            "estado": "APLICADA_COM_CONFERENCIA_DOCUMENTAL",
+            "fontes": [
+              {
+                "fonte_id": "nccn-3bb780161848",
+                "edicao": "3.2026",
+                "pagina_pdf": 13,
+                "paginas_pdf": [
+                  13
+                ],
+                "secao": "ANAL-B 2/5",
+                "trecho": "Carboplatin/Paclitaxel + Retifanlimab",
+                "ancora_contextual": null,
+                "natureza": "EXTRACAO_DOCUMENTAL",
+                "sha256_pdf": "e6d2b240326db9390693bf8ea75bcbaccd4bab7d89f866f384bc63e92107a29d"
+              },
+              {
+                "fonte_id": "nccn-3bb780161848",
+                "edicao": "3.2026",
+                "pagina_pdf": 13,
+                "paginas_pdf": [
+                  13
+                ],
+                "secao": "ANAL-B 2/5, nota c",
+                "trecho": "insufficient data",
+                "ancora_contextual": null,
+                "natureza": "EXTRACAO_DOCUMENTAL",
+                "sha256_pdf": "e6d2b240326db9390693bf8ea75bcbaccd4bab7d89f866f384bc63e92107a29d"
+              },
+              {
+                "fonte_id": "nccn-3bb780161848",
+                "edicao": "3.2026",
+                "pagina_pdf": 14,
+                "paginas_pdf": [
+                  14
+                ],
+                "secao": "ANAL-B 3/5",
+                "trecho": "Retifanlimab-dlwr 500 mg IV Day 1",
+                "ancora_contextual": null,
+                "natureza": "EXTRACAO_DOCUMENTAL",
+                "sha256_pdf": "e6d2b240326db9390693bf8ea75bcbaccd4bab7d89f866f384bc63e92107a29d"
+              }
+            ],
+            "ajuste_ao_parecer": null
+          }
+        ]
+      },
+      {
+        "item_id": "nccn-20261017-canal-anal-capox",
+        "nome": "CAPOX",
+        "tipo": "OPCAO_TERAPEUTICA",
+        "dominio_principal": 6,
+        "conteudo_extraido": "Other Recommended em primeira linha e em segunda linha ou posterior se não utilizado. Nota d: considerar fortemente suspender oxaliplatina após 3–4 meses, ou antes por neurotoxicidade inaceitável, mantendo os demais agentes até progressão; pode ser reintroduzida se retirada por neurotoxicidade, não por progressão.",
+        "aplicabilidade": {
+          "criterios": [
+            "Carcinoma anal metastático",
+            "Primeira linha ou linha subsequente se não utilizado",
+            "Neurotoxicidade e motivo de suspensão documentados"
+          ],
+          "paciente_individual": null,
+          "estado": "NAO_AVALIADA"
+        },
+        "dados_estruturados": {
+          "farmacos": [
+            "capecitabina",
+            "oxaliplatina"
+          ],
+          "posologia": {
+            "estado": "EXTRAIDA_A_CONFERIR",
+            "ciclo_dias": 21,
+            "componentes": [
+              {
+                "farmaco": "oxaliplatina",
+                "dose": 130,
+                "unidade": "mg/m2",
+                "via": "EV",
+                "dias": "D1",
+                "frequencia": null
+              },
+              {
+                "farmaco": "capecitabina",
+                "dose": 1000,
+                "unidade": "mg/m2 por tomada",
+                "via": "VO",
+                "dias": "D1-D14",
+                "frequencia": "duas vezes ao dia"
+              }
+            ],
+            "ajustes_e_premedicacao": "PENDENTES_DE_EXTRACAO"
+          }
+        },
+        "fonte_refs": [
+          {
+            "fonte_id": "nccn-3bb780161848",
+            "edicao": "3.2026",
+            "pagina_pdf": 13,
+            "paginas_pdf": [
+              13
+            ],
+            "secao": "ANAL-B 2/5, nota d",
+            "trecho": "Discontinuation of oxaliplatin",
+            "ancora_contextual": null,
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "e6d2b240326db9390693bf8ea75bcbaccd4bab7d89f866f384bc63e92107a29d"
+          },
+          {
+            "fonte_id": "nccn-3bb780161848",
+            "edicao": "3.2026",
+            "pagina_pdf": 14,
+            "paginas_pdf": [
+              14
+            ],
+            "secao": "ANAL-B 3/5",
+            "trecho": "CAPEOX",
+            "ancora_contextual": null,
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "e6d2b240326db9390693bf8ea75bcbaccd4bab7d89f866f384bc63e92107a29d"
+          }
+        ],
+        "evidencia_declarada": {
+          "sistema": "NCCN",
+          "categoria": "2A por cabeçalho",
+          "preferencia": "Other Recommended",
+          "estado": "CONFERIDA_DOCUMENTALMENTE_A_CONFERIR_CLINICAMENTE",
+          "nota": "Categoria 2A sem marca local somente quando expressamente coberta pelo cabeçalho; múltiplas categorias permanecem nos ramos."
+        },
+        "estado_extracao": "EXTRAIDO_COM_LIMITES_DECLARADOS",
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "temporalidade": {
+          "referencia": "CENARIO_DESCRITO",
+          "datas_individuais": null
+        },
+        "propor_automaticamente": false,
+        "disponivel_para_prescricao": false,
+        "acesso": {
+          "registro_anvisa": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "incorporacao_conitec": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "pcdt_ddt": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "sigtap_apac": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "cobertura_privada": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "disponibilidade_institucional": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          }
+        },
+        "alternativas_legadas_refs": [],
+        "relacoes_refs": [
+          "relacao-nccn-20261017-canal-anal-capox"
+        ],
+        "conflitos_refs": [],
+        "pendencias": [
+          "REVISAO_CLINICA_DO_DELTA",
+          "VERIFICAR_ACESSO_BRASILEIRO_POR_INDICACAO",
+          "POSOLOGIA_E_SUPORTE_NAO_COMPLETOS_NESTA_RODADA"
+        ],
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-2-correcao-auditoria",
+            "correcao_id": "M08",
+            "anterior": {
+              "conteudo_extraido": "Alternativa explicitada entre opções de tratamento sistêmico metastático; não importar doses de outro tumor.",
+              "fonte_refs": [
+                {
+                  "fonte_id": "nccn-3bb780161848",
+                  "paginas_pdf": [
+                    5,
+                    13,
+                    14
+                  ],
+                  "secao": "ANAL-B 2–3/5",
+                  "natureza": "EXTRACAO_DOCUMENTAL",
+                  "pagina_pdf": 5,
+                  "trecho": "CAPEOX added ◊FOLFOX revised: Modified FOLFOX6 \u0017Second-Line and Subsequent Therapy; Preferred ◊Penpulimab-kcqx"
+                }
+              ],
+              "estado_curadoria": "A_CONFERIR",
+              "aprovacao_clinica": null,
+              "aplicabilidade": {
+                "criterios": [
+                  "Carcinoma anal metastático",
+                  "Conferir linha e exposição prévia"
+                ],
+                "paciente_individual": null,
+                "estado": "NAO_AVALIADA"
+              },
+              "dados_estruturados": {
+                "farmacos": [
+                  "capecitabina",
+                  "oxaliplatina"
+                ],
+                "posologia": {
+                  "estado": "NAO_EXTRAIDA_NESTA_RODADA",
+                  "valor": null,
+                  "motivo": "A rodada incorpora o delta de indicação/cenário; não completa dose por inferência."
+                }
+              },
+              "evidencia_declarada": {
+                "sistema": "NCCN",
+                "categoria": null,
+                "estado": "NAO_EXTRAIDA_POR_ITEM"
+              }
+            },
+            "motivo": "Correção documental após auditoria Claude e conferência da fonte; não apaga versão anterior.",
+            "aprovacao_clinica": null
+          }
+        ],
+        "fontes_por_campo": {
+          "conteudo_extraido": [
+            {
+              "fonte_id": "nccn-3bb780161848",
+              "edicao": "3.2026",
+              "pagina_pdf": 13,
+              "paginas_pdf": [
+                13
+              ],
+              "secao": "ANAL-B 2/5, nota d",
+              "trecho": "Discontinuation of oxaliplatin",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "e6d2b240326db9390693bf8ea75bcbaccd4bab7d89f866f384bc63e92107a29d"
+            },
+            {
+              "fonte_id": "nccn-3bb780161848",
+              "edicao": "3.2026",
+              "pagina_pdf": 14,
+              "paginas_pdf": [
+                14
+              ],
+              "secao": "ANAL-B 3/5",
+              "trecho": "CAPEOX",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "e6d2b240326db9390693bf8ea75bcbaccd4bab7d89f866f384bc63e92107a29d"
+            }
+          ],
+          "aplicabilidade": [
+            {
+              "fonte_id": "nccn-3bb780161848",
+              "edicao": "3.2026",
+              "pagina_pdf": 13,
+              "paginas_pdf": [
+                13
+              ],
+              "secao": "ANAL-B 2/5, nota d",
+              "trecho": "Discontinuation of oxaliplatin",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "e6d2b240326db9390693bf8ea75bcbaccd4bab7d89f866f384bc63e92107a29d"
+            },
+            {
+              "fonte_id": "nccn-3bb780161848",
+              "edicao": "3.2026",
+              "pagina_pdf": 14,
+              "paginas_pdf": [
+                14
+              ],
+              "secao": "ANAL-B 3/5",
+              "trecho": "CAPEOX",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "e6d2b240326db9390693bf8ea75bcbaccd4bab7d89f866f384bc63e92107a29d"
+            }
+          ],
+          "dados_estruturados": [
+            {
+              "fonte_id": "nccn-3bb780161848",
+              "edicao": "3.2026",
+              "pagina_pdf": 13,
+              "paginas_pdf": [
+                13
+              ],
+              "secao": "ANAL-B 2/5, nota d",
+              "trecho": "Discontinuation of oxaliplatin",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "e6d2b240326db9390693bf8ea75bcbaccd4bab7d89f866f384bc63e92107a29d"
+            },
+            {
+              "fonte_id": "nccn-3bb780161848",
+              "edicao": "3.2026",
+              "pagina_pdf": 14,
+              "paginas_pdf": [
+                14
+              ],
+              "secao": "ANAL-B 3/5",
+              "trecho": "CAPEOX",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "e6d2b240326db9390693bf8ea75bcbaccd4bab7d89f866f384bc63e92107a29d"
+            }
+          ],
+          "evidencia_declarada": [
+            {
+              "fonte_id": "nccn-3bb780161848",
+              "edicao": "3.2026",
+              "pagina_pdf": 13,
+              "paginas_pdf": [
+                13
+              ],
+              "secao": "ANAL-B 2/5, nota d",
+              "trecho": "Discontinuation of oxaliplatin",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "e6d2b240326db9390693bf8ea75bcbaccd4bab7d89f866f384bc63e92107a29d"
+            },
+            {
+              "fonte_id": "nccn-3bb780161848",
+              "edicao": "3.2026",
+              "pagina_pdf": 14,
+              "paginas_pdf": [
+                14
+              ],
+              "secao": "ANAL-B 3/5",
+              "trecho": "CAPEOX",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "e6d2b240326db9390693bf8ea75bcbaccd4bab7d89f866f384bc63e92107a29d"
+            }
+          ]
+        },
+        "correcoes_auditoria": [
+          {
+            "id": "M08",
+            "revisao": "2026-10-17-nccn-delta-2-correcao-auditoria",
+            "estado": "APLICADA_COM_CONFERENCIA_DOCUMENTAL",
+            "fontes": [
+              {
+                "fonte_id": "nccn-3bb780161848",
+                "edicao": "3.2026",
+                "pagina_pdf": 13,
+                "paginas_pdf": [
+                  13
+                ],
+                "secao": "ANAL-B 2/5, nota d",
+                "trecho": "Discontinuation of oxaliplatin",
+                "ancora_contextual": null,
+                "natureza": "EXTRACAO_DOCUMENTAL",
+                "sha256_pdf": "e6d2b240326db9390693bf8ea75bcbaccd4bab7d89f866f384bc63e92107a29d"
+              },
+              {
+                "fonte_id": "nccn-3bb780161848",
+                "edicao": "3.2026",
+                "pagina_pdf": 14,
+                "paginas_pdf": [
+                  14
+                ],
+                "secao": "ANAL-B 3/5",
+                "trecho": "CAPEOX",
+                "ancora_contextual": null,
+                "natureza": "EXTRACAO_DOCUMENTAL",
+                "sha256_pdf": "e6d2b240326db9390693bf8ea75bcbaccd4bab7d89f866f384bc63e92107a29d"
+              }
+            ],
+            "ajuste_ao_parecer": null
+          }
+        ]
+      },
+      {
+        "item_id": "nccn-20261017-canal-anal-mfolfox6",
+        "nome": "mFOLFOX6",
+        "tipo": "OPCAO_TERAPEUTICA",
+        "dominio_principal": 6,
+        "conteudo_extraido": "Other Recommended em primeira linha e em segunda linha ou posterior se não utilizado. Nota d: considerar fortemente suspender oxaliplatina após 3–4 meses, ou antes por neurotoxicidade inaceitável, mantendo os demais agentes até progressão; pode ser reintroduzida se retirada por neurotoxicidade, não por progressão.",
+        "aplicabilidade": {
+          "criterios": [
+            "Carcinoma anal metastático",
+            "Primeira linha ou linha subsequente se não utilizado",
+            "Neurotoxicidade e motivo de suspensão documentados"
+          ],
+          "paciente_individual": null,
+          "estado": "NAO_AVALIADA"
+        },
+        "dados_estruturados": {
+          "farmacos": [
+            "fluoruracila",
+            "leucovorina",
+            "oxaliplatina"
+          ],
+          "posologia": {
+            "estado": "EXTRAIDA_A_CONFERIR",
+            "ciclo_dias": 14,
+            "componentes": [
+              {
+                "farmaco": "oxaliplatina",
+                "dose": 85,
+                "unidade": "mg/m2",
+                "via": "EV",
+                "dias": "D1",
+                "frequencia": null
+              },
+              {
+                "farmaco": "leucovorina",
+                "dose": 400,
+                "unidade": "mg/m2",
+                "via": "EV",
+                "dias": "D1",
+                "frequencia": null
+              },
+              {
+                "farmaco": "fluoruracila",
+                "dose": 400,
+                "unidade": "mg/m2",
+                "via": "EV bolus",
+                "dias": "D1",
+                "frequencia": null
+              },
+              {
+                "farmaco": "fluoruracila",
+                "dose": 1200,
+                "unidade": "mg/m2/dia",
+                "via": "EV infusão contínua",
+                "dias": "dois dias",
+                "frequencia": "total2400 mg/m2 em46–48h"
+              }
+            ],
+            "ajustes_e_premedicacao": "PENDENTES_DE_EXTRACAO"
+          }
+        },
+        "fonte_refs": [
+          {
+            "fonte_id": "nccn-3bb780161848",
+            "edicao": "3.2026",
+            "pagina_pdf": 13,
+            "paginas_pdf": [
+              13
+            ],
+            "secao": "ANAL-B 2/5, nota d",
+            "trecho": "Discontinuation of oxaliplatin",
+            "ancora_contextual": null,
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "e6d2b240326db9390693bf8ea75bcbaccd4bab7d89f866f384bc63e92107a29d"
+          },
+          {
+            "fonte_id": "nccn-3bb780161848",
+            "edicao": "3.2026",
+            "pagina_pdf": 14,
+            "paginas_pdf": [
+              14
+            ],
+            "secao": "ANAL-B 3/5",
+            "trecho": "FOLFOX",
+            "ancora_contextual": null,
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "e6d2b240326db9390693bf8ea75bcbaccd4bab7d89f866f384bc63e92107a29d"
+          }
+        ],
+        "evidencia_declarada": {
+          "sistema": "NCCN",
+          "categoria": "2A por cabeçalho",
+          "preferencia": "Other Recommended",
+          "estado": "CONFERIDA_DOCUMENTALMENTE_A_CONFERIR_CLINICAMENTE",
+          "nota": "Categoria 2A sem marca local somente quando expressamente coberta pelo cabeçalho; múltiplas categorias permanecem nos ramos."
+        },
+        "estado_extracao": "EXTRAIDO_COM_LIMITES_DECLARADOS",
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "temporalidade": {
+          "referencia": "CENARIO_DESCRITO",
+          "datas_individuais": null
+        },
+        "propor_automaticamente": false,
+        "disponivel_para_prescricao": false,
+        "acesso": {
+          "registro_anvisa": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "incorporacao_conitec": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "pcdt_ddt": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "sigtap_apac": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "cobertura_privada": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "disponibilidade_institucional": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          }
+        },
+        "alternativas_legadas_refs": [],
+        "relacoes_refs": [
+          "relacao-nccn-20261017-canal-anal-mfolfox6"
+        ],
+        "conflitos_refs": [],
+        "pendencias": [
+          "REVISAO_CLINICA_DO_DELTA",
+          "VERIFICAR_ACESSO_BRASILEIRO_POR_INDICACAO",
+          "POSOLOGIA_E_SUPORTE_NAO_COMPLETOS_NESTA_RODADA"
+        ],
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-2-correcao-auditoria",
+            "correcao_id": "M09",
+            "anterior": {
+              "conteudo_extraido": "Alternativa explicitada entre opções de tratamento sistêmico metastático; não importar doses de outro tumor.",
+              "fonte_refs": [
+                {
+                  "fonte_id": "nccn-3bb780161848",
+                  "paginas_pdf": [
+                    5,
+                    13,
+                    14
+                  ],
+                  "secao": "ANAL-B 2–3/5",
+                  "natureza": "EXTRACAO_DOCUMENTAL",
+                  "pagina_pdf": 5,
+                  "trecho": "FOLFOX revised: Modified FOLFOX6 \u0017Second-Line and Subsequent Therapy; Preferred ◊Penpulimab-kcqx added ◊Footnote"
+                }
+              ],
+              "estado_curadoria": "A_CONFERIR",
+              "aprovacao_clinica": null,
+              "aplicabilidade": {
+                "criterios": [
+                  "Carcinoma anal metastático",
+                  "Conferir linha e exposição prévia"
+                ],
+                "paciente_individual": null,
+                "estado": "NAO_AVALIADA"
+              },
+              "dados_estruturados": {
+                "farmacos": [
+                  "fluoruracila",
+                  "leucovorina",
+                  "oxaliplatina"
+                ],
+                "posologia": {
+                  "estado": "NAO_EXTRAIDA_NESTA_RODADA",
+                  "valor": null,
+                  "motivo": "A rodada incorpora o delta de indicação/cenário; não completa dose por inferência."
+                }
+              },
+              "evidencia_declarada": {
+                "sistema": "NCCN",
+                "categoria": null,
+                "estado": "NAO_EXTRAIDA_POR_ITEM"
+              }
+            },
+            "motivo": "Correção documental após auditoria Claude e conferência da fonte; não apaga versão anterior.",
+            "aprovacao_clinica": null
+          }
+        ],
+        "fontes_por_campo": {
+          "conteudo_extraido": [
+            {
+              "fonte_id": "nccn-3bb780161848",
+              "edicao": "3.2026",
+              "pagina_pdf": 13,
+              "paginas_pdf": [
+                13
+              ],
+              "secao": "ANAL-B 2/5, nota d",
+              "trecho": "Discontinuation of oxaliplatin",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "e6d2b240326db9390693bf8ea75bcbaccd4bab7d89f866f384bc63e92107a29d"
+            },
+            {
+              "fonte_id": "nccn-3bb780161848",
+              "edicao": "3.2026",
+              "pagina_pdf": 14,
+              "paginas_pdf": [
+                14
+              ],
+              "secao": "ANAL-B 3/5",
+              "trecho": "FOLFOX",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "e6d2b240326db9390693bf8ea75bcbaccd4bab7d89f866f384bc63e92107a29d"
+            }
+          ],
+          "aplicabilidade": [
+            {
+              "fonte_id": "nccn-3bb780161848",
+              "edicao": "3.2026",
+              "pagina_pdf": 13,
+              "paginas_pdf": [
+                13
+              ],
+              "secao": "ANAL-B 2/5, nota d",
+              "trecho": "Discontinuation of oxaliplatin",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "e6d2b240326db9390693bf8ea75bcbaccd4bab7d89f866f384bc63e92107a29d"
+            },
+            {
+              "fonte_id": "nccn-3bb780161848",
+              "edicao": "3.2026",
+              "pagina_pdf": 14,
+              "paginas_pdf": [
+                14
+              ],
+              "secao": "ANAL-B 3/5",
+              "trecho": "FOLFOX",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "e6d2b240326db9390693bf8ea75bcbaccd4bab7d89f866f384bc63e92107a29d"
+            }
+          ],
+          "dados_estruturados": [
+            {
+              "fonte_id": "nccn-3bb780161848",
+              "edicao": "3.2026",
+              "pagina_pdf": 13,
+              "paginas_pdf": [
+                13
+              ],
+              "secao": "ANAL-B 2/5, nota d",
+              "trecho": "Discontinuation of oxaliplatin",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "e6d2b240326db9390693bf8ea75bcbaccd4bab7d89f866f384bc63e92107a29d"
+            },
+            {
+              "fonte_id": "nccn-3bb780161848",
+              "edicao": "3.2026",
+              "pagina_pdf": 14,
+              "paginas_pdf": [
+                14
+              ],
+              "secao": "ANAL-B 3/5",
+              "trecho": "FOLFOX",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "e6d2b240326db9390693bf8ea75bcbaccd4bab7d89f866f384bc63e92107a29d"
+            }
+          ],
+          "evidencia_declarada": [
+            {
+              "fonte_id": "nccn-3bb780161848",
+              "edicao": "3.2026",
+              "pagina_pdf": 13,
+              "paginas_pdf": [
+                13
+              ],
+              "secao": "ANAL-B 2/5, nota d",
+              "trecho": "Discontinuation of oxaliplatin",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "e6d2b240326db9390693bf8ea75bcbaccd4bab7d89f866f384bc63e92107a29d"
+            },
+            {
+              "fonte_id": "nccn-3bb780161848",
+              "edicao": "3.2026",
+              "pagina_pdf": 14,
+              "paginas_pdf": [
+                14
+              ],
+              "secao": "ANAL-B 3/5",
+              "trecho": "FOLFOX",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "e6d2b240326db9390693bf8ea75bcbaccd4bab7d89f866f384bc63e92107a29d"
+            }
+          ]
+        },
+        "correcoes_auditoria": [
+          {
+            "id": "M09",
+            "revisao": "2026-10-17-nccn-delta-2-correcao-auditoria",
+            "estado": "APLICADA_COM_CONFERENCIA_DOCUMENTAL",
+            "fontes": [
+              {
+                "fonte_id": "nccn-3bb780161848",
+                "edicao": "3.2026",
+                "pagina_pdf": 13,
+                "paginas_pdf": [
+                  13
+                ],
+                "secao": "ANAL-B 2/5, nota d",
+                "trecho": "Discontinuation of oxaliplatin",
+                "ancora_contextual": null,
+                "natureza": "EXTRACAO_DOCUMENTAL",
+                "sha256_pdf": "e6d2b240326db9390693bf8ea75bcbaccd4bab7d89f866f384bc63e92107a29d"
+              },
+              {
+                "fonte_id": "nccn-3bb780161848",
+                "edicao": "3.2026",
+                "pagina_pdf": 14,
+                "paginas_pdf": [
+                  14
+                ],
+                "secao": "ANAL-B 3/5",
+                "trecho": "FOLFOX",
+                "ancora_contextual": null,
+                "natureza": "EXTRACAO_DOCUMENTAL",
+                "sha256_pdf": "e6d2b240326db9390693bf8ea75bcbaccd4bab7d89f866f384bc63e92107a29d"
+              }
+            ],
+            "ajuste_ao_parecer": null
+          }
+        ]
+      }
+    ],
+    "cenarios": {
+      "identidade_ref": "/identidade/cenarios",
+      "detalhamento_ref": "/tratamento/cenarios",
+      "novas_condicoes_refs": [
+        "nccn-20261017-canal-anal-retifanlimabe",
+        "nccn-20261017-canal-anal-capox",
+        "nccn-20261017-canal-anal-mfolfox6"
+      ],
+      "regra": "Não igualar automaticamente as duas listas nem selecionar cenário individual nesta camada."
+    },
+    "fontes": [
+      {
+        "id": "nccn-3bb780161848",
+        "arquivo_local": "C:\\Users\\silas\\.aside\\u\\0\\sessions\\2026-10-17_LutNNwUyDZGlA1pF\\artifacts\\nccn\\Anal Carcinoma.pdf",
+        "nome": "Anal Carcinoma",
+        "sha256": "e6d2b240326db9390693bf8ea75bcbaccd4bab7d89f866f384bc63e92107a29d",
+        "numero_paginas": 70,
+        "versao_declarada": "3.2026",
+        "origem": "ARQUIVO_LOCAL_FORNECIDO",
+        "autenticidade_externa": "NAO_VERIFICADA_NO_PORTAL",
+        "paginas_examinadas": [
+          5,
+          13,
+          14
+        ]
+      }
+    ],
+    "fontes_legadas_refs": [
+      "/header/fonte",
+      "/curadoria/fontesLidas"
+    ],
+    "ensaios": {
+      "legado_ref": "/tratamento/ensaios",
+      "novos_nct": [],
+      "nota": "Nenhum identificador NCT foi inventado ou verificado nesta rodada."
+    },
+    "relacoes": [
+      {
+        "relacao_id": "relacao-nccn-20261017-canal-anal-retifanlimabe",
+        "tipo": "CONDICOES_PARA_APRESENTACAO_DOCUMENTAL",
+        "destino_item_ref": "nccn-20261017-canal-anal-retifanlimabe",
+        "criterios_extraidos": [
+          "Carcinoma anal avançado/metastático",
+          "Primeira linha conforme ANAL-B"
+        ],
+        "origem_condicoes": "FONTE_NCCN_CITADA",
+        "origem_mapeamento": "PROPOSTA_DE_MAPEAMENTO",
+        "executavel": false,
+        "estado": "A_CONFERIR",
+        "dados_ausentes": "MANTER_INDETERMINADO",
+        "dados_conflitantes": "MANTER_CONFLITO",
+        "efeito": "APRESENTAR_CONTEUDO_PARA_REVISAO; NAO PRESCREVER",
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-2-correcao-auditoria",
+            "correcao_id": "M07",
+            "criterios_extraidos": [
+              "Carcinoma anal avançado/metastático",
+              "Primeira linha conforme ANAL-B"
+            ]
+          }
+        ],
+        "fontes_por_campo": {
+          "criterios_extraidos": [
+            {
+              "fonte_id": "nccn-3bb780161848",
+              "edicao": "3.2026",
+              "pagina_pdf": 13,
+              "paginas_pdf": [
+                13
+              ],
+              "secao": "ANAL-B 2/5",
+              "trecho": "Carboplatin/Paclitaxel + Retifanlimab",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "e6d2b240326db9390693bf8ea75bcbaccd4bab7d89f866f384bc63e92107a29d"
+            },
+            {
+              "fonte_id": "nccn-3bb780161848",
+              "edicao": "3.2026",
+              "pagina_pdf": 13,
+              "paginas_pdf": [
+                13
+              ],
+              "secao": "ANAL-B 2/5, nota c",
+              "trecho": "insufficient data",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "e6d2b240326db9390693bf8ea75bcbaccd4bab7d89f866f384bc63e92107a29d"
+            },
+            {
+              "fonte_id": "nccn-3bb780161848",
+              "edicao": "3.2026",
+              "pagina_pdf": 14,
+              "paginas_pdf": [
+                14
+              ],
+              "secao": "ANAL-B 3/5",
+              "trecho": "Retifanlimab-dlwr 500 mg IV Day 1",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "e6d2b240326db9390693bf8ea75bcbaccd4bab7d89f866f384bc63e92107a29d"
+            }
+          ]
+        }
+      },
+      {
+        "relacao_id": "relacao-nccn-20261017-canal-anal-capox",
+        "tipo": "CONDICOES_PARA_APRESENTACAO_DOCUMENTAL",
+        "destino_item_ref": "nccn-20261017-canal-anal-capox",
+        "criterios_extraidos": [
+          "Carcinoma anal metastático",
+          "Primeira linha ou linha subsequente se não utilizado",
+          "Neurotoxicidade e motivo de suspensão documentados"
+        ],
+        "origem_condicoes": "FONTE_NCCN_CITADA",
+        "origem_mapeamento": "PROPOSTA_DE_MAPEAMENTO",
+        "executavel": false,
+        "estado": "A_CONFERIR",
+        "dados_ausentes": "MANTER_INDETERMINADO",
+        "dados_conflitantes": "MANTER_CONFLITO",
+        "efeito": "APRESENTAR_CONTEUDO_PARA_REVISAO; NAO PRESCREVER",
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-2-correcao-auditoria",
+            "correcao_id": "M08",
+            "criterios_extraidos": [
+              "Carcinoma anal metastático",
+              "Conferir linha e exposição prévia"
+            ]
+          }
+        ],
+        "fontes_por_campo": {
+          "criterios_extraidos": [
+            {
+              "fonte_id": "nccn-3bb780161848",
+              "edicao": "3.2026",
+              "pagina_pdf": 13,
+              "paginas_pdf": [
+                13
+              ],
+              "secao": "ANAL-B 2/5, nota d",
+              "trecho": "Discontinuation of oxaliplatin",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "e6d2b240326db9390693bf8ea75bcbaccd4bab7d89f866f384bc63e92107a29d"
+            },
+            {
+              "fonte_id": "nccn-3bb780161848",
+              "edicao": "3.2026",
+              "pagina_pdf": 14,
+              "paginas_pdf": [
+                14
+              ],
+              "secao": "ANAL-B 3/5",
+              "trecho": "CAPEOX",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "e6d2b240326db9390693bf8ea75bcbaccd4bab7d89f866f384bc63e92107a29d"
+            }
+          ]
+        }
+      },
+      {
+        "relacao_id": "relacao-nccn-20261017-canal-anal-mfolfox6",
+        "tipo": "CONDICOES_PARA_APRESENTACAO_DOCUMENTAL",
+        "destino_item_ref": "nccn-20261017-canal-anal-mfolfox6",
+        "criterios_extraidos": [
+          "Carcinoma anal metastático",
+          "Primeira linha ou linha subsequente se não utilizado",
+          "Neurotoxicidade e motivo de suspensão documentados"
+        ],
+        "origem_condicoes": "FONTE_NCCN_CITADA",
+        "origem_mapeamento": "PROPOSTA_DE_MAPEAMENTO",
+        "executavel": false,
+        "estado": "A_CONFERIR",
+        "dados_ausentes": "MANTER_INDETERMINADO",
+        "dados_conflitantes": "MANTER_CONFLITO",
+        "efeito": "APRESENTAR_CONTEUDO_PARA_REVISAO; NAO PRESCREVER",
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-2-correcao-auditoria",
+            "correcao_id": "M09",
+            "criterios_extraidos": [
+              "Carcinoma anal metastático",
+              "Conferir linha e exposição prévia"
+            ]
+          }
+        ],
+        "fontes_por_campo": {
+          "criterios_extraidos": [
+            {
+              "fonte_id": "nccn-3bb780161848",
+              "edicao": "3.2026",
+              "pagina_pdf": 13,
+              "paginas_pdf": [
+                13
+              ],
+              "secao": "ANAL-B 2/5, nota d",
+              "trecho": "Discontinuation of oxaliplatin",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "e6d2b240326db9390693bf8ea75bcbaccd4bab7d89f866f384bc63e92107a29d"
+            },
+            {
+              "fonte_id": "nccn-3bb780161848",
+              "edicao": "3.2026",
+              "pagina_pdf": 14,
+              "paginas_pdf": [
+                14
+              ],
+              "secao": "ANAL-B 3/5",
+              "trecho": "FOLFOX",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "e6d2b240326db9390693bf8ea75bcbaccd4bab7d89f866f384bc63e92107a29d"
+            }
+          ]
+        }
+      }
+    ],
+    "conflitos": [],
+    "conflitos_legados_ref": "/conflitos",
+    "pendencias": [
+      {
+        "id": "revisao-clinica",
+        "estado": "ABERTA",
+        "descricao": "Conferir cada acréscimo, condições, fontes, doses, interações e suporte antes de uso clínico."
+      },
+      {
+        "id": "acesso-brasileiro",
+        "estado": "ABERTA",
+        "descricao": "NCCN não comprova Anvisa, Conitec, PCDT/DDT, SIGTAP/APAC, cobertura privada ou acesso institucional."
+      },
+      {
+        "id": "cobertura-nccn",
+        "estado": "PARCIAL_POR_DELTA",
+        "descricao": "Leitura dirigida das páginas citadas; não há alegação de extração integral da diretriz."
+      }
+    ],
+    "pendencias_legadas_ref": "/pendencias",
+    "itens_adicionais_a_classificar": [
+      {
+        "origem_ref": "/header",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/status",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/consultavel",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/alerta",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/substitui",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/identidade",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/pendencias",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/conflitos",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/curadoria",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      }
+    ],
+    "mapa_de_cobertura": [
+      {
+        "origem_json_pointer": "/header",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "e7202153b7704a1a4e7590688652b3afc971884256607340d091ac793ce9c1b1",
+        "valores_folha": 9
+      },
+      {
+        "origem_json_pointer": "/status",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "04635ca3844c66b19ebbf49bf9ff60fe851d6ce89597d23e6a970f1dc3927289",
+        "valores_folha": 1
+      },
+      {
+        "origem_json_pointer": "/consultavel",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b",
+        "valores_folha": 1
+      },
+      {
+        "origem_json_pointer": "/alerta",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "valores_folha": 1
+      },
+      {
+        "origem_json_pointer": "/substitui",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "valores_folha": 1
+      },
+      {
+        "origem_json_pointer": "/identidade",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "ade5d632fd12c841a33411cfc639219830ced23ff132b5528acb32265aa2e654",
+        "valores_folha": 19
+      },
+      {
+        "origem_json_pointer": "/diagnostico",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "327d186a1e75dbc7d07a129f5b62db0773f9deac38086902932f148d4e07aef4",
+        "valores_folha": 150
+      },
+      {
+        "origem_json_pointer": "/estadiamento",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "2501fbd929578905a809b71f0a7c7e2fc4b322eeda07321114e5a20516a5c6d6",
+        "valores_folha": 96
+      },
+      {
+        "origem_json_pointer": "/tratamento",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "0118d88d88b2ab866ff3b8b9276368cfb8af3e36c9637ba5bf16c6219d696886",
+        "valores_folha": 594
+      },
+      {
+        "origem_json_pointer": "/ligacoes",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "5941f95ad1a9c829c477d9a0533f7917fb9d170cd52e56e97dce65998de9111f",
+        "valores_folha": 117
+      },
+      {
+        "origem_json_pointer": "/pendencias",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "fbe2d01dcc01156966b392c6d44bed04baab13affd67cde796b8de6a6b137e43",
+        "valores_folha": 23
+      },
+      {
+        "origem_json_pointer": "/conflitos",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "208b2e8aed757c4d8e3887b82c903842bcb0c7ce8c76119fc93987e8ec62ccf4",
+        "valores_folha": 44
+      },
+      {
+        "origem_json_pointer": "/curadoria",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "bf2f122342b28bc8b10d894d2a3c6fa09827dee5fe218d3da763746369d14c58",
+        "valores_folha": 11
+      }
+    ],
+    "reconciliacao_com_versao_anterior": {
+      "modo": "ADITIVO",
+      "originais_removidos": 0,
+      "originais_alterados": 0,
+      "contagens_preservadas": {
+        "protocolos": 12,
+        "ensaios": 4,
+        "cenarios_identidade": 5,
+        "cenarios_tratamento": 4,
+        "seguimento": 4,
+        "conflitos": 3,
+        "pendencias": 5
+      }
+    },
+    "relatorio_de_completude": {
+      "estado": "INCOMPLETA_PARA_DIRETRIZ_INTEGRAL",
+      "preservacao_legado": "INTEGRAL",
+      "delta_itens": 3,
+      "normalizacao_legado": "INDEXACAO_POR_REFERENCIA; NAO REEXTRACAO CLINICA",
+      "posologias": "SOMENTE AS EXPLICITAMENTE EXTRAIDAS; RESTANTES PENDENTES",
+      "sem_fato_paciente": true,
+      "sem_aprovacao_inferida": true
+    },
+    "revisoes_auditoria": [
+      {
+        "revisao": "2026-10-17-nccn-delta-2-correcao-auditoria",
+        "correcoes": [
+          "M07",
+          "M08",
+          "M09"
+        ],
+        "legado_modificado": false,
+        "aprovacao_clinica": null,
+        "nota": "Correções conferidas nos PDFs; a auditoria Claude foi amostral. Os 33 itens não auditados não foram promovidos a revisados."
+      }
+    ]
   }
 }

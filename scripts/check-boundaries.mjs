@@ -121,7 +121,11 @@ for (const file of files) {
   // src/app/** é a raiz de composição: pode subir servidor de ENTRADA local, nunca rede de saída.
   const servidor = rel.startsWith("src/server/") || rel.startsWith("src/app/");
   const uiApi = rel.startsWith("src/ui/api/");
-  if (uiApi) { if (UI_API_PROIBIDO.test(code)) erros.push(`${rel} cliente da UI fora da mesma origem (só caminho relativo "/...")`); }
+  if (uiApi) {
+    // F2: uma única conexão de áudio em caminho literal local; demais destinos e transportes continuam proibidos.
+    const local = rel === 'src/ui/api/ditado.ts' ? code.replace("new WebSocket('/consulta/ditado/stream',ticket)", 'canalLocalAutenticado') : code;
+    if (UI_API_PROIBIDO.test(local)) erros.push(`${rel} cliente da UI fora da mesma origem (só caminho relativo "/...")`);
+  }
   else if (servidor && (NET_SAIDA.test(code) || IMPORT_HTTP_CLIENTE.test(code) || referencias.some(ref => MODULOS_REDE.has(ref) && !["http", "node:http"].includes(ref)))) erros.push(`${rel} faz rede de saída (servidor só de entrada local)`);
   else if (!servidor && !rel.startsWith("src/kernel/gateway/") && !rel.startsWith("src/kernel/llm/") && (NET.test(code) || referencias.some(ref => MODULOS_REDE.has(ref))))
     erros.push(`${rel} usa rede fora do gateway/llm (INV-05)`);

@@ -2462,5 +2462,3220 @@
       "achado": "Codex 2026-10-11 (veredito entrega final): faturamento molecular não demonstrado",
       "acao": "1 vínculos rebaixados a catalogoIdCandidato"
     }
-  ]
+  ],
+  "tumor_pack_universal": {
+    "schema_documental": "tumor-pack-universal@1",
+    "metadados": {
+      "revisao_documental": "2026-10-17-nccn-final-documental",
+      "versao": "1.3.0",
+      "data": "2026-10-17",
+      "autor_extracao": "Codex",
+      "estado": "RASCUNHO",
+      "aprovacao_clinica": null,
+      "escopo": "CAMADA_ADITIVA_UNIVERSAL_E_DELTA_DOCUMENTAL_NCCN",
+      "base_legada": {
+        "arquivo": "corpus/6-pack-tumor/pancreas/pack-pancreas.v2.RASCUNHO.json",
+        "commit": "2c0991d",
+        "versao": "2.0.0",
+        "sha256_bytes": "65667a2415c134b1eba73c04bdb4ad921b427c19d8266c4abd0bdcda8d7814e9",
+        "sha256_semantico": "23f70314fbbf6bb4219b8ef233c98935b6f5aaaab90897b219fb547846d0cc2f"
+      },
+      "nota_versao": "Camada universal 1.3.0; header identifica o legado preservado. Fechamento documental, sem aprovação clínica ou ativação.",
+      "integra_runtime": false,
+      "gera_conduta": false,
+      "historico_revisoes": [
+        {
+          "revisao_documental": "2026-10-17-nccn-delta-1",
+          "versao": "1.0.0",
+          "data": "2026-10-17",
+          "autor_extracao": "Codex",
+          "estado": "RASCUNHO",
+          "aprovacao_clinica": null,
+          "escopo": "CAMADA_ADITIVA_UNIVERSAL_E_DELTA_DOCUMENTAL_NCCN",
+          "base_legada": {
+            "arquivo": "corpus/6-pack-tumor/pancreas/pack-pancreas.v2.RASCUNHO.json",
+            "commit": "2c0991d",
+            "versao": "2.0.0",
+            "sha256_bytes": "65667a2415c134b1eba73c04bdb4ad921b427c19d8266c4abd0bdcda8d7814e9",
+            "sha256_semantico": "23f70314fbbf6bb4219b8ef233c98935b6f5aaaab90897b219fb547846d0cc2f"
+          },
+          "nota_versao": "header.versao identifica o legado intacto; esta extensão possui revisão própria. Não reutilizar aprovação/hashes antigos para o conjunto alterado.",
+          "integra_runtime": false,
+          "gera_conduta": false
+        },
+        {
+          "revisao_documental": "2026-10-17-nccn-delta-3-auditoria33",
+          "versao": "1.2.0",
+          "data": "2026-10-17",
+          "autor_extracao": "Codex",
+          "estado": "RASCUNHO",
+          "aprovacao_clinica": null,
+          "escopo": "CAMADA_ADITIVA_UNIVERSAL_E_DELTA_DOCUMENTAL_NCCN",
+          "base_legada": {
+            "arquivo": "corpus/6-pack-tumor/pancreas/pack-pancreas.v2.RASCUNHO.json",
+            "commit": "2c0991d",
+            "versao": "2.0.0",
+            "sha256_bytes": "65667a2415c134b1eba73c04bdb4ad921b427c19d8266c4abd0bdcda8d7814e9",
+            "sha256_semantico": "23f70314fbbf6bb4219b8ef233c98935b6f5aaaab90897b219fb547846d0cc2f"
+          },
+          "nota_versao": "Revisão da camada universal1.2.0; header legado preservado. Auditoria documental dos33 itens, sem aprovação clínica.",
+          "integra_runtime": false,
+          "gera_conduta": false,
+          "historico_revisoes": [
+            {
+              "revisao_documental": "2026-10-17-nccn-delta-1",
+              "versao": "1.0.0",
+              "data": "2026-10-17",
+              "autor_extracao": "Codex",
+              "estado": "RASCUNHO",
+              "aprovacao_clinica": null,
+              "escopo": "CAMADA_ADITIVA_UNIVERSAL_E_DELTA_DOCUMENTAL_NCCN",
+              "base_legada": {
+                "arquivo": "corpus/6-pack-tumor/pancreas/pack-pancreas.v2.RASCUNHO.json",
+                "commit": "2c0991d",
+                "versao": "2.0.0",
+                "sha256_bytes": "65667a2415c134b1eba73c04bdb4ad921b427c19d8266c4abd0bdcda8d7814e9",
+                "sha256_semantico": "23f70314fbbf6bb4219b8ef233c98935b6f5aaaab90897b219fb547846d0cc2f"
+              },
+              "nota_versao": "header.versao identifica o legado intacto; esta extensão possui revisão própria. Não reutilizar aprovação/hashes antigos para o conjunto alterado.",
+              "integra_runtime": false,
+              "gera_conduta": false
+            }
+          ]
+        }
+      ]
+    },
+    "identidade_ref": "/identidade",
+    "dominios": [
+      {
+        "dominio_id": 1,
+        "nome": "Diagnóstico e patologia",
+        "itens_legados_refs": [
+          "legado-e2f4eb21c4a736f8",
+          "legado-c7b97a8d87dd6c84",
+          "legado-68a3105e99b09a28",
+          "legado-3d6eb2cc34d1950a",
+          "legado-2a905a097c219c15"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 2,
+        "nome": "Estadiamento, extensão e risco",
+        "itens_legados_refs": [
+          "legado-14b70ed38bf74741",
+          "legado-a31a54c98f8417bc",
+          "legado-fc9cda1ffda6921f",
+          "legado-c17f44b5af8760df",
+          "legado-7a565ce175033718",
+          "legado-867f37c624589d4f",
+          "legado-b926f913e671e107",
+          "legado-08aeac139def9a0f",
+          "legado-abc70b5c3469a4b9",
+          "legado-70fe430e9523c53e"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 3,
+        "nome": "Biomarcadores e farmacogenética",
+        "itens_legados_refs": [
+          "legado-44429462c3ffc969",
+          "legado-de0d6a6c4afd218f",
+          "legado-0b65bb98fce0102c",
+          "legado-02797fbf58851d48",
+          "legado-a9363a788c959529",
+          "legado-6d80af7f626cd9c2",
+          "legado-7191a2b6f5b8203c",
+          "legado-93cf268dd5a08b0e",
+          "legado-2d4b607ff5db6713",
+          "legado-ef16b165134b6ed1"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 4,
+        "nome": "Exames e requisitos documentais",
+        "itens_legados_refs": [
+          "legado-fff66a50e0250c1f",
+          "legado-5ac868fc394210f2",
+          "legado-bab5b36bde89d6af",
+          "legado-a3cd43a45d461620",
+          "legado-1e2f0e3e0b90a7df",
+          "legado-5c879c3f1062b115",
+          "legado-503572c233ea8227",
+          "legado-9a7e194ed96ec0c5",
+          "legado-44673490035d3176",
+          "legado-a403a02232a7cee7",
+          "legado-aba6929d11dfd4a8",
+          "legado-69af5c143030c468",
+          "legado-28e399645121efe9",
+          "legado-462190391bfc651c",
+          "legado-220096f73651afa8",
+          "legado-89db3b6ec657bc2a",
+          "legado-149b311ddf6d27a8",
+          "legado-55365d63f5f092c6",
+          "legado-11cc2b2b93e61f06",
+          "legado-1350b00bb7b52cce",
+          "legado-eb8e83013ffc2c20",
+          "legado-e3c17285d30c508e",
+          "legado-caa4a955d4ae5fda",
+          "legado-315ba84544423785",
+          "legado-37ea76b3e068ed61",
+          "legado-a81ee7b8f8e80d3a",
+          "legado-0b80f8fbf5937ec9",
+          "legado-c4ad324f15dcd340",
+          "legado-6b0ddac01e3e159c",
+          "legado-ffed0fa4be79560d",
+          "legado-aa3f5e6acbcb724a",
+          "legado-eebf0c6696b2d1ec",
+          "legado-aee46b86ef2b11eb",
+          "legado-7059db4c79641af9",
+          "legado-936d265e2b097d94"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 5,
+        "nome": "Avaliação antes do tratamento",
+        "itens_legados_refs": [],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "NAO_ESTRUTURADO_NESTA_RODADA",
+        "observacao": "Ausência de referências não significa não aplicabilidade; textos dentro de outros itens permanecem preservados."
+      },
+      {
+        "dominio_id": 6,
+        "nome": "Tratamento e protocolos",
+        "itens_legados_refs": [
+          "legado-50ff40ea588ec31c",
+          "legado-45a3a377fc21ced5",
+          "legado-3d9125de75f3cb0b",
+          "legado-971a638c4c6e1c03",
+          "legado-e32d13743eecbc73",
+          "legado-10098fb459d6790a",
+          "legado-667416e94b56c06e",
+          "legado-1b6dade4b9b02847",
+          "legado-1dcd7c210b1aea05",
+          "legado-3a0a9a0e9e171b23",
+          "legado-0243a2d60912becb",
+          "legado-4ed318467f938152",
+          "legado-9c30a3d95f833c89",
+          "legado-689f4d61da6681d2",
+          "legado-e11d20a8463f44e2",
+          "legado-acf194270ca94d6c",
+          "legado-e30bdc3760d7a130",
+          "legado-dbac8d6727d5e8e3",
+          "legado-d58e21e7c8b4df0a",
+          "legado-17c9a15e2385e03d",
+          "legado-c72324dc7330a478",
+          "legado-359b4dda3975d930",
+          "legado-875125cf7219783d",
+          "legado-89a3829c4e6821d4",
+          "legado-f0103c5d0f809b47",
+          "legado-e2e9b862a7cb5324"
+        ],
+        "itens_nccn_refs": [
+          "nccn-20261017-pancreas-daraxonrasibe",
+          "nccn-20261017-pancreas-zenocutuzumabe",
+          "nccn-20261017-pancreas-rucaparibe",
+          "nccn-20261017-pancreas-manutencao"
+        ],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 7,
+        "nome": "Segurança, interações e toxicidades",
+        "itens_legados_refs": [
+          "legado-96121b10a2f2e6a5",
+          "legado-93ce095b9dc6d176",
+          "legado-1b1d20e29a80bf65",
+          "legado-080cc568ce35c6dc",
+          "legado-46d5b70cf1d27c43",
+          "legado-01a29f5fb53ec8fe",
+          "legado-e4373ed7be695458",
+          "legado-60bf132d6d6f7b79",
+          "legado-00d813b960387f74",
+          "legado-a1d16af05dd96175",
+          "legado-e4586e76b2565d52"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 8,
+        "nome": "Suporte e cuidados",
+        "itens_legados_refs": [
+          "legado-c8b0d219ccc1fc33",
+          "legado-3dc3b223926d9cc3",
+          "legado-fdfada995ede955c"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 9,
+        "nome": "Avaliação de resposta e estado da doença",
+        "itens_legados_refs": [],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "NAO_ESTRUTURADO_NESTA_RODADA",
+        "observacao": "Ausência de referências não significa não aplicabilidade; textos dentro de outros itens permanecem preservados."
+      },
+      {
+        "dominio_id": 10,
+        "nome": "Seguimento e sobrevivência",
+        "itens_legados_refs": [
+          "legado-cc961b914d471323",
+          "legado-20a094a028a61ba8",
+          "legado-f0ac177310b34a27",
+          "legado-cb110359ddf27756"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 11,
+        "nome": "Encaminhamentos e atuação multiprofissional",
+        "itens_legados_refs": [
+          "legado-55eb46a2e145ab68",
+          "legado-61dae9798ba31e44",
+          "legado-ea5f861fee8f1286",
+          "legado-089699f9aa8be5b7"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 12,
+        "nome": "Documentos e acesso assistencial",
+        "itens_legados_refs": [
+          "legado-0d0b8e3288fc3ebb"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      }
+    ],
+    "indice_itens_legados": [
+      {
+        "item_id": "legado-e2f4eb21c4a736f8",
+        "origem_json_pointer": "/diagnostico/patologico/obtencao/0",
+        "sha256_conteudo": "2db3e234b2548ad82708d27ce8a5fe4508fc4727a98c37aa181cf1a0a1837f16",
+        "nome": "/diagnostico/patologico/obtencao/0",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/obtencao/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-c7b97a8d87dd6c84",
+        "origem_json_pointer": "/diagnostico/patologico/obtencao/1",
+        "sha256_conteudo": "66019f369b6161c336ae40644d412d825fef70d0f790435bd17d439f0947c8ee",
+        "nome": "/diagnostico/patologico/obtencao/1",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/obtencao/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-68a3105e99b09a28",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/0",
+        "sha256_conteudo": "4a2bbe7ae196c85be935f65b7050c4602a3fdadd19577950605b65d10bf03f5c",
+        "nome": "tipo histológico (ductal × acinar)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-3d6eb2cc34d1950a",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/1",
+        "sha256_conteudo": "e0a6b03d4d374608398886cff3bdfe926b3aa2892b7175317182f280103dce6f",
+        "nome": "pT/pN AJCC 8ª (linfonodos para-aórticos = M1)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-2a905a097c219c15",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/2",
+        "sha256_conteudo": "5af8f3e14ee0c71c99a892be5183fe17bcce9a982eb89be0b368af37c949baa5",
+        "nome": "margens",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-14b70ed38bf74741",
+        "origem_json_pointer": "/estadiamento/sistema",
+        "sha256_conteudo": "d7dab6e16ae3278a0513466816530a61b1fcf4548c0e925655782b9ee09cf5ce",
+        "nome": "AJCC",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a31a54c98f8417bc",
+        "origem_json_pointer": "/estadiamento/edicao",
+        "sha256_conteudo": "fa498a28e8ad39b58874ee1dd75d356ae67bd744e3308eca295a27c532eaf0b6",
+        "nome": "8ª edição + classificação de ressecabilidade (ressecável, borderline A/B/C, localmente avançado A/B, metastático)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-fc9cda1ffda6921f",
+        "origem_json_pointer": "/estadiamento/gruposConduta/0",
+        "sha256_conteudo": "66c40d1cbd361292a99653d80cb815bd22f4f7ba5bc717375ce211378ea3bd16",
+        "nome": "/estadiamento/gruposConduta/0",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-c17f44b5af8760df",
+        "origem_json_pointer": "/estadiamento/gruposConduta/1",
+        "sha256_conteudo": "9b092da2799f7428aaac2edae6dcdcf2db37c7c2007b55f3e6c829e7e7d40947",
+        "nome": "/estadiamento/gruposConduta/1",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-7a565ce175033718",
+        "origem_json_pointer": "/estadiamento/gruposConduta/2",
+        "sha256_conteudo": "391f5ed44a594d2bfed8e740fe040fce36e4784c1138cdd74fa87641e462b7ee",
+        "nome": "/estadiamento/gruposConduta/2",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-867f37c624589d4f",
+        "origem_json_pointer": "/estadiamento/gruposConduta/3",
+        "sha256_conteudo": "54db3b36aebdd38c61fb25040fd885fcb851e16e1611b3bf9376dfd5296b721d",
+        "nome": "/estadiamento/gruposConduta/3",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b926f913e671e107",
+        "origem_json_pointer": "/estadiamento/gruposConduta/4",
+        "sha256_conteudo": "f713dd1bda20cc3a0d13506ecf396361fba4480ad4422e1c045d520173fb8ccf",
+        "nome": "/estadiamento/gruposConduta/4",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-08aeac139def9a0f",
+        "origem_json_pointer": "/estadiamento/gruposConduta/5",
+        "sha256_conteudo": "91b31c6079e5e6e87e106ab0d97f88b51271cd30343e1f5236ee07ca4b1b3d2d",
+        "nome": "/estadiamento/gruposConduta/5",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/5/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-abc70b5c3469a4b9",
+        "origem_json_pointer": "/estadiamento/gruposConduta/6",
+        "sha256_conteudo": "29229d63ff8a7ccca539352b63869ba033e39aff8db677460355a68dd9f5154a",
+        "nome": "/estadiamento/gruposConduta/6",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/6/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-70fe430e9523c53e",
+        "origem_json_pointer": "/estadiamento/marcadores",
+        "sha256_conteudo": "f666fe8afe2a8b068dd833ea07054dc23d6fab87bd36daa5f464e09ef0e5a382",
+        "nome": "/estadiamento/marcadores",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-44429462c3ffc969",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/0",
+        "sha256_conteudo": "2c8aea20c9c01bc042a9534b8aeba301e044df673f14945b16b2b2da7cf10dc1",
+        "nome": "preferencialmente ao diagnóstico inicial (sequenciamento germinativo; não PCR)",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-de0d6a6c4afd218f",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/1",
+        "sha256_conteudo": "cce90fc2ce13e5f7dc4614957eb34562e4b1b97355729d818e68c2527f6e0914",
+        "nome": "doença avançada; positivos confirmar por método molecular",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-0b65bb98fce0102c",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/2",
+        "sha256_conteudo": "b5e1c13ae2e2e67ce030418f292796c8ed12d0d334b012adab529b3fbe455ee5",
+        "nome": "doença avançada; positivos confirmar por FISH/PCR",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-02797fbf58851d48",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/3",
+        "sha256_conteudo": "aec1b43ed46985da828fc1b5d87670adfc338892fc98d2a34d099afdf6d882ce",
+        "nome": "sem alterações na triagem IHQ",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a9363a788c959529",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/4",
+        "sha256_conteudo": "2617cd7b2eeb7a1e5e2f50f2bdecfd9c02ef3fbae71a2e71b09bade97c18580a",
+        "nome": "KRAS selvagem; histotipo acinar (upfront)",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-6d80af7f626cd9c2",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/5",
+        "sha256_conteudo": "fc201a590320aedb61dfde85c94156150a5553a7cc1f422caeb289bd575c6349",
+        "nome": "doença avançada, se possível/conforme acesso",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/5/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-7191a2b6f5b8203c",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/6",
+        "sha256_conteudo": "660fc0800dae83db368658be87a036fbcd7d2a60ac344113299430ee92a14dcc",
+        "nome": "candidatos a fluoropirimidina, se disponível",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/6/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-93cf268dd5a08b0e",
+        "origem_json_pointer": "/tratamento/biomarcadorTratamento/0",
+        "sha256_conteudo": "329bb3b35d5929f4d78ffabb9e59c113cab0c0dc9970b1d73285f08c0006d2d4",
+        "nome": "/tratamento/biomarcadorTratamento/0",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/biomarcadorTratamento/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-2d4b607ff5db6713",
+        "origem_json_pointer": "/tratamento/biomarcadorTratamento/1",
+        "sha256_conteudo": "4ed39a19ef45c5af5ca72e79ce43256f275be8b50cdf5236461f2d83ce63255f",
+        "nome": "/tratamento/biomarcadorTratamento/1",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/biomarcadorTratamento/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ef16b165134b6ed1",
+        "origem_json_pointer": "/tratamento/biomarcadorTratamento/2",
+        "sha256_conteudo": "b7f63d5f49850ab39bdfa45cb3313862549a23db34a9a6bb5faa4534c08ee370",
+        "nome": "/tratamento/biomarcadorTratamento/2",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/biomarcadorTratamento/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-fff66a50e0250c1f",
+        "origem_json_pointer": "/diagnostico/imagem/0",
+        "sha256_conteudo": "b8ca8bbbf98355f754d1cd4d606487629d6f368cf74cf41c1420070ba2f8707f",
+        "nome": "TC de abdome com protocolo para pâncreas (antes de drenagem biliar)",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-5ac868fc394210f2",
+        "origem_json_pointer": "/diagnostico/imagem/1",
+        "sha256_conteudo": "2183f4a48b16581c86c9ba53ce683251f4569f51d6afb0ad73b40f786f98627d",
+        "nome": "TC de tórax",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-bab5b36bde89d6af",
+        "origem_json_pointer": "/diagnostico/imagem/2",
+        "sha256_conteudo": "fc8c13479f2327d158fe9b9716cd72079a4a70546825a4faacce1462bc5d4f4d",
+        "nome": "RM de abdome",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a3cd43a45d461620",
+        "origem_json_pointer": "/diagnostico/imagem/3",
+        "sha256_conteudo": "e134012ec94bb38a7e90b9edd678c02cbf90c470ecfd7b9abe498656ae0a3495",
+        "nome": "PET/CT",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-1e2f0e3e0b90a7df",
+        "origem_json_pointer": "/diagnostico/endoscopicos/0",
+        "sha256_conteudo": "36eb4dd95a1fee4a3bd984ae1521a343906a0288e1a20c57c04ccce588d525ec",
+        "nome": "CPRE (drenagem biliar quando indicada)",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/endoscopicos/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-5c879c3f1062b115",
+        "origem_json_pointer": "/diagnostico/endoscopicos/1",
+        "sha256_conteudo": "71e5c1f54bf60776967701fdab434605ad21c1b64e5df0c4a2d1a9eb01fbe9d2",
+        "nome": "Videolaparoscopia",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/endoscopicos/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-503572c233ea8227",
+        "origem_json_pointer": "/estadiamento/exames/0",
+        "sha256_conteudo": "00de6a5c5b9d6f96a1c65306e07f450f791e7d38a812934c601857a98a4d16b8",
+        "nome": "Hemograma",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-9a7e194ed96ec0c5",
+        "origem_json_pointer": "/estadiamento/exames/1",
+        "sha256_conteudo": "3e2824a54d128a992d0cf2620c5ad673ccba8a114762f5fd96a289b524c32eef",
+        "nome": "TGO (função hepática)",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-44673490035d3176",
+        "origem_json_pointer": "/estadiamento/exames/2",
+        "sha256_conteudo": "b3db5b3ff2d6a3e78e2e9393f009519b769b8d6969d40198ad1345f510352651",
+        "nome": "TGP (função hepática)",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a403a02232a7cee7",
+        "origem_json_pointer": "/estadiamento/exames/3",
+        "sha256_conteudo": "50131e64bb5eafe15fc0440b00a02abbe8074f62a1388078889776798c5ba966",
+        "nome": "Bilirrubinas (função hepática)",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-aba6929d11dfd4a8",
+        "origem_json_pointer": "/estadiamento/exames/4",
+        "sha256_conteudo": "7aa563e1c78a6094fda650b2ea1fd1ba7d0aea2f14917093b748f5ecb0df0abc",
+        "nome": "Fosfatase alcalina (função hepática)",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-69af5c143030c468",
+        "origem_json_pointer": "/estadiamento/exames/5",
+        "sha256_conteudo": "adaae2250a8a9a759fabb3c9194451e85d829807b3be87e5719a42f0dcc4dc55",
+        "nome": "Gama-GT (função hepática)",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/5/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-28e399645121efe9",
+        "origem_json_pointer": "/estadiamento/exames/6",
+        "sha256_conteudo": "b82fe04b8cf68764ad95e20b41dc1ea06f61ac1d667f3dfbdbb45197ad7ac752",
+        "nome": "Creatinina (função renal)",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/6/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-462190391bfc651c",
+        "origem_json_pointer": "/estadiamento/exames/7",
+        "sha256_conteudo": "927b1742dc583877a430d3858369c960924261da404e5ca9105fc9e0f0fcd825",
+        "nome": "Ureia (função renal)",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/7/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-220096f73651afa8",
+        "origem_json_pointer": "/estadiamento/exames/8",
+        "sha256_conteudo": "ccb64862444317127589b026b946914273ee71353c8d0645175dbb8400718038",
+        "nome": "CA 19-9 (sem código SIGTAP no catálogo; preferencialmente após normalizar bilirrubinas)",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/8/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-89db3b6ec657bc2a",
+        "origem_json_pointer": "/ligacoes/exames/0",
+        "sha256_conteudo": "00cac656db90cece9385c8c98f658accb5b7c1553202e6be466fa96d39aaf2b9",
+        "nome": "ANATOMOPATOLOGICO",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-149b311ddf6d27a8",
+        "origem_json_pointer": "/ligacoes/exames/1",
+        "sha256_conteudo": "5d85231af84b07a3159dc7b06efe241505fe0d9fa9e3cfc3ced2da4d9650052b",
+        "nome": "BILIRRUBINA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-55365d63f5f092c6",
+        "origem_json_pointer": "/ligacoes/exames/2",
+        "sha256_conteudo": "09c0bc2a57301c5e7f5c06c8c51c9dec764db31a5d9531aa98aac18b5d8251f3",
+        "nome": "BIOPSIA_PERCUTANEA_GUIADA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-11cc2b2b93e61f06",
+        "origem_json_pointer": "/ligacoes/exames/3",
+        "sha256_conteudo": "e746b116ee9fd98b2dfdb3f2106c1bbfa0dd7b927735411ebc15362c75797ef7",
+        "nome": "CA199",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-1350b00bb7b52cce",
+        "origem_json_pointer": "/ligacoes/exames/4",
+        "sha256_conteudo": "ab637feec7449cedbbb392373cadb41abfa3cab33839fb4df0af5003f57cd503",
+        "nome": "CPRE",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-eb8e83013ffc2c20",
+        "origem_json_pointer": "/ligacoes/exames/5",
+        "sha256_conteudo": "58d8c3bbd157d0d9be5bf551553eb11e7e0c313ef1db12f06d7863faa42fbbfb",
+        "nome": "CREATININA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e3c17285d30c508e",
+        "origem_json_pointer": "/ligacoes/exames/6",
+        "sha256_conteudo": "ad1a3ef653b581c9aa616ab3bbab16ad7edca4cf6832cfc168f32389fc7cf658",
+        "nome": "FOSFATASE_ALCALINA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-caa4a955d4ae5fda",
+        "origem_json_pointer": "/ligacoes/exames/7",
+        "sha256_conteudo": "194a16126a69a5a7d0d5b4438614f5ee42930b662040f7a74d561e0f80ea9ddb",
+        "nome": "GAMA_GT",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-315ba84544423785",
+        "origem_json_pointer": "/ligacoes/exames/8",
+        "sha256_conteudo": "bf5e386b5411abfa4e5e12d1229575a6c7ec73dfaec6347d8959b27aac19aa86",
+        "nome": "HEMOGRAMA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-37ea76b3e068ed61",
+        "origem_json_pointer": "/ligacoes/exames/9",
+        "sha256_conteudo": "99a98b9d268e78a05608d792d2fad81f4e16f25b8a4f95da9f7decd91a23a0dc",
+        "nome": "IMUNOHISTOQUIMICA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a81ee7b8f8e80d3a",
+        "origem_json_pointer": "/ligacoes/exames/10",
+        "sha256_conteudo": "3a955b75de510bd32be8d0f7de2bf070f27f223ac4c6a07cf68b35b7271856b2",
+        "nome": "PET_CT_FDG",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-0b80f8fbf5937ec9",
+        "origem_json_pointer": "/ligacoes/exames/11",
+        "sha256_conteudo": "9c93ac77fd6457370871d33a5c58ba94777b0bb961f1f2eb5572fadaabd4df86",
+        "nome": "RM_ABDOMEN_SUPERIOR",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-c4ad324f15dcd340",
+        "origem_json_pointer": "/ligacoes/exames/12",
+        "sha256_conteudo": "eea68f82f02592e6262514a154ff52ae85284765c1f48ab3b07cabb92ead209f",
+        "nome": "TC_ABDOMEN_SUPERIOR",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-6b0ddac01e3e159c",
+        "origem_json_pointer": "/ligacoes/exames/13",
+        "sha256_conteudo": "147b97b900462813d8c6528cc01d88f8a5102936ee96ee4fb121f8a7b77f60b0",
+        "nome": "TC_TORAX",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ffed0fa4be79560d",
+        "origem_json_pointer": "/ligacoes/exames/14",
+        "sha256_conteudo": "1c165f5403a7b90b63dbd46f6855431c8c1ada4519299d6c123bd630df5c529d",
+        "nome": "TGO",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-aa3f5e6acbcb724a",
+        "origem_json_pointer": "/ligacoes/exames/15",
+        "sha256_conteudo": "1739a80ab81e5bbef9460ae5f51087ed284845d8e31e606c2b564c7268c2cd15",
+        "nome": "TGP",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-eebf0c6696b2d1ec",
+        "origem_json_pointer": "/ligacoes/exames/16",
+        "sha256_conteudo": "a133b6c797048051de63b5b1f134afc70bc5a1444e49ac2e2721bd762204440d",
+        "nome": "UREIA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-aee46b86ef2b11eb",
+        "origem_json_pointer": "/ligacoes/exames/17",
+        "sha256_conteudo": "e587a7250a8633f1505dfb613cd4283458e6a8198d35f3721641c9ee3878017f",
+        "nome": "MOLECULAR_PCR_MUTACAO",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-7059db4c79641af9",
+        "origem_json_pointer": "/ligacoes/exames/18",
+        "sha256_conteudo": "c77d15bd8da7582e2d6d9825573309affb51c04c30c7829dbea1953584a30ee9",
+        "nome": "SEQUENCIAMENTO_AMPLICON",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-936d265e2b097d94",
+        "origem_json_pointer": "/ligacoes/exames/19",
+        "sha256_conteudo": "b217505005d787121d27ac242932a35881a390454a55c59abeb58053945a3f3c",
+        "nome": "VIDEOLAPAROSCOPIA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-50ff40ea588ec31c",
+        "origem_json_pointer": "/tratamento/cenarios/0",
+        "sha256_conteudo": "00e58881ef9955fb8d396b0f24c49d290917660e46e69e14dccec5ef59db7a8d",
+        "nome": "ressecavel",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-45a3a377fc21ced5",
+        "origem_json_pointer": "/tratamento/cenarios/1",
+        "sha256_conteudo": "d695693e281551ec0f6ce9095b752027fa6cddcb2f262b489aa3209bc61846c3",
+        "nome": "borderline",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-3d9125de75f3cb0b",
+        "origem_json_pointer": "/tratamento/cenarios/2",
+        "sha256_conteudo": "5e7e1724ed0b39e2214df78d339fa315b137bea70500107a340711307d5f1187",
+        "nome": "localmente_avancado",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-971a638c4c6e1c03",
+        "origem_json_pointer": "/tratamento/cenarios/3",
+        "sha256_conteudo": "09900bb4feda3e26768ba36153c49b6b498f611046674be0bcacaef3057690a5",
+        "nome": "metastatico",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e32d13743eecbc73",
+        "origem_json_pointer": "/tratamento/protocolos/0",
+        "sha256_conteudo": "7c77b761acf61390247cdd41d29a971726df820b09210bce76324e2f65f03ea7",
+        "nome": "mFOLFIRINOX neoadjuvante",
+        "id_original": "pancreas-neoadjuvante-mfolfirinox",
+        "fonte_local_ref": "/tratamento/protocolos/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-10098fb459d6790a",
+        "origem_json_pointer": "/tratamento/protocolos/1",
+        "sha256_conteudo": "4031b8c00a5bb959e68c1553f783fe1a30a790661a3cfb827143d98d608c2c24",
+        "nome": "Gencitabina + nab-paclitaxel neoadjuvante",
+        "id_original": "pancreas-neoadjuvante-gencitabina-nab-paclitaxel",
+        "fonte_local_ref": "/tratamento/protocolos/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-667416e94b56c06e",
+        "origem_json_pointer": "/tratamento/protocolos/2",
+        "sha256_conteudo": "55e8310277fd608998e865e06a1400b9b1d61f1db254401c088d00479f93b15d",
+        "nome": "Gencitabina + cisplatina (HRD/BRCA) neoadjuvante",
+        "id_original": "pancreas-neoadjuvante-gencitabina-cisplatina-hrd",
+        "fonte_local_ref": "/tratamento/protocolos/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-1b6dade4b9b02847",
+        "origem_json_pointer": "/tratamento/protocolos/3",
+        "sha256_conteudo": "f1c996cf933921a7bc365aa6964bb803016b47c93f4cb46c357789f0fef9e08f",
+        "nome": "mFOLFIRINOX adjuvante (PRODIGE 24)",
+        "id_original": "pancreas-adjuvante-mfolfirinox",
+        "fonte_local_ref": "/tratamento/protocolos/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-1dcd7c210b1aea05",
+        "origem_json_pointer": "/tratamento/protocolos/4",
+        "sha256_conteudo": "60aaf059ce7215946e777c7eed7bd4097a8e84b910e34bede3323fbdfcfe8aca",
+        "nome": "Gencitabina + capecitabina adjuvante (ESPAC-4)",
+        "id_original": "pancreas-adjuvante-gencitabina-capecitabina",
+        "fonte_local_ref": "/tratamento/protocolos/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-3a0a9a0e9e171b23",
+        "origem_json_pointer": "/tratamento/protocolos/5",
+        "sha256_conteudo": "51f07d4e1c96ebe268a800e1ef6e2b70cfc34ebaef30536d8a28bd35c0ebf65c",
+        "nome": "Gencitabina adjuvante (CONKO-001)",
+        "id_original": "pancreas-adjuvante-gencitabina",
+        "fonte_local_ref": "/tratamento/protocolos/5/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-0243a2d60912becb",
+        "origem_json_pointer": "/tratamento/protocolos/6",
+        "sha256_conteudo": "d7362cb87015ae3e23ed0dbf42dcc57cf00482340bc02b256cf61f2d2f885843",
+        "nome": "5-FU/LV adjuvante",
+        "id_original": "pancreas-adjuvante-5fu-lv",
+        "fonte_local_ref": "/tratamento/protocolos/6/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-4ed318467f938152",
+        "origem_json_pointer": "/tratamento/protocolos/7",
+        "sha256_conteudo": "31454c7c4099764c73996375fe4732821c31fb0a1c5d568b6b796b99e3cf89ae",
+        "nome": "mFOLFIRINOX de indução (localmente avançado)",
+        "id_original": "pancreas-inducao-mfolfirinox",
+        "fonte_local_ref": "/tratamento/protocolos/7/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-9c30a3d95f833c89",
+        "origem_json_pointer": "/tratamento/protocolos/8",
+        "sha256_conteudo": "73b0683e1bee4548c3b39bfbe7b798e335ca41d467939796c1ccdef2a3f1cc54",
+        "nome": "FOLFIRINOX tradicional (PRODIGE 4/ACCORD 11)",
+        "id_original": "pancreas-paliativo-1l-folfirinox-tradicional",
+        "fonte_local_ref": "/tratamento/protocolos/8/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-689f4d61da6681d2",
+        "origem_json_pointer": "/tratamento/protocolos/9",
+        "sha256_conteudo": "bbfa16cc720ea52d3f27b1f92f8d549ed86d0300cedde36f54c90d06f53ec636",
+        "nome": "mFOLFIRINOX",
+        "id_original": "pancreas-paliativo-1l-mfolfirinox",
+        "fonte_local_ref": "/tratamento/protocolos/9/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e11d20a8463f44e2",
+        "origem_json_pointer": "/tratamento/protocolos/10",
+        "sha256_conteudo": "eb168279b77ba93974147286085969d537e739fee12d81fb4bf9baca81557468",
+        "nome": "Gencitabina + nab-paclitaxel (MPACT)",
+        "id_original": "pancreas-paliativo-1l-gencitabina-nab-paclitaxel",
+        "fonte_local_ref": "/tratamento/protocolos/10/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-acf194270ca94d6c",
+        "origem_json_pointer": "/tratamento/protocolos/11",
+        "sha256_conteudo": "4f2c5f03d38eba85367c78b5082d3c340e26a4644ba5d4110784521badd994d9",
+        "nome": "Gencitabina monoterapia",
+        "id_original": "pancreas-paliativo-1l-gencitabina",
+        "fonte_local_ref": "/tratamento/protocolos/11/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e30bdc3760d7a130",
+        "origem_json_pointer": "/tratamento/protocolos/12",
+        "sha256_conteudo": "e9c030fec9d68c91cd1229a82cd51101fa48ee2cd55a2e0fa45eccb2f38e9cc2",
+        "nome": "NALIRIFOX (NAPOLI-3)",
+        "id_original": "pancreas-paliativo-1l-nalirifox",
+        "fonte_local_ref": "/tratamento/protocolos/12/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-dbac8d6727d5e8e3",
+        "origem_json_pointer": "/tratamento/protocolos/13",
+        "sha256_conteudo": "5b4ba81d181b37b0f9b916963d8cb0398cc025e24ff16a74888df0deba93bb1e",
+        "nome": "Olaparibe de manutenção (POLO) — gBRCA1/2",
+        "id_original": "pancreas-manutencao-olaparibe",
+        "fonte_local_ref": "/tratamento/protocolos/13/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d58e21e7c8b4df0a",
+        "origem_json_pointer": "/tratamento/protocolos/14",
+        "sha256_conteudo": "413396eacff1038bd9021e82fa3a78f0875d7c6c0cb18120b77ae08ede226e77",
+        "nome": "FOLFIRI (descalonamento pós-FOLFIRINOX)",
+        "id_original": "pancreas-descalonamento-folfiri",
+        "fonte_local_ref": "/tratamento/protocolos/14/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-17c9a15e2385e03d",
+        "origem_json_pointer": "/tratamento/protocolos/15",
+        "sha256_conteudo": "0e9886f42e7451281a0d855b955790e0798b8198757d7911fc05556a1733dc9a",
+        "nome": "5-FU/LV (descalonamento a partir do 9º ciclo — PANOPTIMOX)",
+        "id_original": "pancreas-descalonamento-5fu-lv",
+        "fonte_local_ref": "/tratamento/protocolos/15/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-c72324dc7330a478",
+        "origem_json_pointer": "/tratamento/protocolos/16",
+        "sha256_conteudo": "cf0d76d2775f20bbfd196fa4d0d43384d04b10930554f7ea4c43f99cff8551e3",
+        "nome": "Irinotecano lipossomal + 5-FU/LV (NAPOLI-1)",
+        "id_original": "pancreas-paliativo-2l-nal-iri-5fu",
+        "fonte_local_ref": "/tratamento/protocolos/16/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-359b4dda3975d930",
+        "origem_json_pointer": "/tratamento/protocolos/17",
+        "sha256_conteudo": "9f390f25247d4094f1a0df57951f9ff7cdc0137d215c46a4e6c255d0ea6d20fb",
+        "nome": "FOLFOX de 2ª linha (pós-gencitabina)",
+        "id_original": "pancreas-paliativo-2l-folfox",
+        "fonte_local_ref": "/tratamento/protocolos/17/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-875125cf7219783d",
+        "origem_json_pointer": "/tratamento/protocolos/18",
+        "sha256_conteudo": "fe4f9e7b46c4ae588f4e58ead11a97d9a52c639766a99f9463962046a3024f5f",
+        "nome": "Gencitabina + nab-paclitaxel após 5-FU",
+        "id_original": "pancreas-paliativo-2l-gencitabina-nab-paclitaxel",
+        "fonte_local_ref": "/tratamento/protocolos/18/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-89a3829c4e6821d4",
+        "origem_json_pointer": "/tratamento/cirurgia/0",
+        "sha256_conteudo": "0ac5e44018ceb76daa9c0507f3ffaba6c88ebb01dcf38405944cd16cbee9c19d",
+        "nome": "/tratamento/cirurgia/0",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cirurgia/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-f0103c5d0f809b47",
+        "origem_json_pointer": "/tratamento/radioterapia/0",
+        "sha256_conteudo": "6aeb5e98fb0b28a605af9d1d1c96fde6b235222b756c4ad46a44b75ebbc268d4",
+        "nome": "QT+RT neoadjuvante (ressecável alto risco/borderline/LA respondedor)",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/radioterapia/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e2e9b862a7cb5324",
+        "origem_json_pointer": "/tratamento/radioterapia/1",
+        "sha256_conteudo": "3f2e69b61b8089a49991b88f25c6f5576cacc9e1cee02d23095dcc15f915aef0",
+        "nome": "QT+RT definitiva (LA estável com sintomas locais ou intolerância à QT)",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/radioterapia/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-96121b10a2f2e6a5",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/0",
+        "sha256_conteudo": "0349056aff2b410edec0a321a4d54b8913a69e485f89dfc0779e98eb817b3ff3",
+        "nome": "/ligacoes/interacoesConsultar/0",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-93ce095b9dc6d176",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/1",
+        "sha256_conteudo": "a7e3a6ddab551f7e42c58512c30675bf8011888b519d4b71f04a1d37cbdda2b1",
+        "nome": "/ligacoes/interacoesConsultar/1",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-1b1d20e29a80bf65",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/2",
+        "sha256_conteudo": "30f1e045ab6b836b0d635c8441792df161007962b17b4bba08cfc1f1beaffec4",
+        "nome": "/ligacoes/interacoesConsultar/2",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-080cc568ce35c6dc",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/3",
+        "sha256_conteudo": "30a2cde97967c5c5b64aa0d7d049fce5dd02aaf4a4c5b2d1b08d1702452cc60a",
+        "nome": "/ligacoes/interacoesConsultar/3",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-46d5b70cf1d27c43",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/4",
+        "sha256_conteudo": "b027b8d07da53df6e12683bd27665d45841e52b76964a23ea403447891aa681c",
+        "nome": "/ligacoes/interacoesConsultar/4",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-01a29f5fb53ec8fe",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/5",
+        "sha256_conteudo": "90098472b5be46af38b3d177bbe0bed5db7b73db81f1e235917481c74e679a68",
+        "nome": "/ligacoes/interacoesConsultar/5",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e4373ed7be695458",
+        "origem_json_pointer": "/ligacoes/ctcaeAcao/0",
+        "sha256_conteudo": "ed80dfae3843cd0e56ab57a6d914040ab5dcc682c424c3c0c765b6e75c5b5892",
+        "nome": "/ligacoes/ctcaeAcao/0",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-60bf132d6d6f7b79",
+        "origem_json_pointer": "/ligacoes/ctcaeAcao/1",
+        "sha256_conteudo": "8749397153927484edc6e0369611b96a58fe0bc41275678f3edfb3fbb8a48dd7",
+        "nome": "/ligacoes/ctcaeAcao/1",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-00d813b960387f74",
+        "origem_json_pointer": "/ligacoes/ctcaeAcao/2",
+        "sha256_conteudo": "9fda14c17417abb14aaf60702b62348cc76f788de2e6b920afced7ac405811d8",
+        "nome": "/ligacoes/ctcaeAcao/2",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a1d16af05dd96175",
+        "origem_json_pointer": "/ligacoes/ctcaeAcao/3",
+        "sha256_conteudo": "5132bf1bdaa0588e6027181b3b9c72f1466b4f5849793a800c4b011d0de8dab7",
+        "nome": "/ligacoes/ctcaeAcao/3",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e4586e76b2565d52",
+        "origem_json_pointer": "/ligacoes/ctcaeAcao/4",
+        "sha256_conteudo": "b91fe6e17d3433323884b3f2b00a98fa105693e2efa0c0724068456e095cfd87",
+        "nome": "/ligacoes/ctcaeAcao/4",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-c8b0d219ccc1fc33",
+        "origem_json_pointer": "/tratamento/suporte",
+        "sha256_conteudo": "e7bba2eadfc64489558109720215d07489e44aab73f46ed2b4eb1399277ddba1",
+        "nome": "/tratamento/suporte",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/suporte/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-3dc3b223926d9cc3",
+        "origem_json_pointer": "/ligacoes/suporteReceitas/0",
+        "sha256_conteudo": "73e33b7e02b9274006f68a87a9dbee1ca53032eb912043aed3cefe89d498d923",
+        "nome": "receita-sintomaticos-modelo-servico",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-fdfada995ede955c",
+        "origem_json_pointer": "/ligacoes/suporteReceitas/1",
+        "sha256_conteudo": "72f5a7ba941c16d447b2498a1f7e63dd9252285b4c2eb61cb21e770bdce02afa",
+        "nome": "enzimas pancreáticas se insuficiência exócrina (sem receita no corpus — pendência)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-cc961b914d471323",
+        "origem_json_pointer": "/tratamento/seguimento/0",
+        "sha256_conteudo": "aa686dd79e9232c7d957c851cb6e4a56bb00fdd82975081e613b2e4f9aef7dc8",
+        "nome": "pós-tratamento curativo, anos 1–2",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/seguimento/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-20a094a028a61ba8",
+        "origem_json_pointer": "/tratamento/seguimento/1",
+        "sha256_conteudo": "7914a47b6024ebbb786daa546322303363c5fc6b911279781b932e662aef31bc",
+        "nome": "anos 3–5",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/seguimento/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-f0ac177310b34a27",
+        "origem_json_pointer": "/ligacoes/orientacoes/0",
+        "sha256_conteudo": "949061242240aafb3be6d117e82372a90c968bb301788c17a40ef5700a22bd90",
+        "nome": "dieta-por-tumor",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-cb110359ddf27756",
+        "origem_json_pointer": "/ligacoes/orientacoes/1",
+        "sha256_conteudo": "afba05e2de6389b751452a9fc6c36eff43abe35e94eedf588456a5e98a7bd825",
+        "nome": "sinais-alarme-consolidado",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-55eb46a2e145ab68",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/0",
+        "sha256_conteudo": "5e90c2fe0c689c9825e2a5f61f10285aac34b9a34913dde224d87ec5e7e743b5",
+        "nome": "encaminhamento-cirurgia-oncologica",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-61dae9798ba31e44",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/1",
+        "sha256_conteudo": "b92a6c89eec82b9542c0d0bf3c50a216ebeef81398125d360e50df70c3e8f675",
+        "nome": "encaminhamento-radioterapia",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ea5f861fee8f1286",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/2",
+        "sha256_conteudo": "1e84b7cc3bee9494903e084dc3b9e813a24129dad82124eeb09c9b72001ce41c",
+        "nome": "oncogenética (BRCA germinativo)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-089699f9aa8be5b7",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/3",
+        "sha256_conteudo": "1979e973ae91021c13757fd38a335254b27b35044cb9bb047d6c52aae368c83b",
+        "nome": "nutrição",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-0d0b8e3288fc3ebb",
+        "origem_json_pointer": "/ligacoes/laudos/0",
+        "sha256_conteudo": "11e0efdaff727aaf3aafe13e544c5b157027d0f7448a60f65694d2c2ea068c87",
+        "nome": "laudo-nutricao",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      }
+    ],
+    "itens_nccn": [
+      {
+        "item_id": "nccn-20261017-pancreas-daraxonrasibe",
+        "nome": "Daraxonrasibe: contextos por linha e performance",
+        "tipo": "OPCAO_TERAPEUTICA",
+        "dominio_principal": 6,
+        "conteudo_extraido": "Daraxonrasibe: primeira linha metastática PS 0–1 em Useful in Certain Circumstances, categoria 2B; PS 2/PS 3 em UCC, sem marca local (2A pelo cabeçalho). Em linha subsequente: PS 0–1/PS 2 em Preferred, categoria 1; PS 3 em UCC, categoria 1. PS 4 recebe cuidado paliativo/suporte exclusivo segundo nota e. Não deduzir posologia pancreática de fonte de outro tumor nem requisito KRAS do pack de pulmão.",
+        "aplicabilidade": {
+          "criterios": [
+            "Adenocarcinoma pancreático no cenário da tabela",
+            "Separar primeira linha metastática de linha subsequente/recorrência",
+            "ECOG, drenagem biliar e aporte nutricional avaliados",
+            "Não extrapolar aos pacientes ECOG 4"
+          ],
+          "paciente_individual": null,
+          "estado": "NAO_AVALIADA"
+        },
+        "dados_estruturados": {
+          "farmacos": [
+            "daraxonrasibe"
+          ],
+          "posologia": {
+            "estado": "NAO_EXTRAIDA_NESTA_RODADA",
+            "valor": null,
+            "motivo": "A rodada incorpora o delta de indicação/cenário; não completa dose por inferência."
+          },
+          "ramos": [
+            {
+              "linha": "primeira_metastatica",
+              "ECOG": "0–1",
+              "categoria": "2B",
+              "preferencia": "Useful in Certain Circumstances"
+            },
+            {
+              "linha": "primeira_metastatica",
+              "ECOG": "2 ou3",
+              "categoria": "2A por cabeçalho",
+              "preferencia": "Useful in Certain Circumstances"
+            },
+            {
+              "linha": "subsequente",
+              "ECOG": "0–1 ou2",
+              "categoria": "1",
+              "preferencia": "Preferred"
+            },
+            {
+              "linha": "subsequente",
+              "ECOG": "3",
+              "categoria": "1",
+              "preferencia": "Useful in Certain Circumstances"
+            }
+          ]
+        },
+        "fonte_refs": [
+          {
+            "fonte_id": "nccn-99f9aaf4199e",
+            "edicao": "4.2026",
+            "pagina_pdf": 57,
+            "paginas_pdf": [
+              57
+            ],
+            "secao": "PANC-G 5/13",
+            "trecho": "Daraxonrasib",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "c4d2c8507e8c544e4a4c9c26cbf2b10dd42b6d5b13c3cf2900a4bf0da093058e"
+          },
+          {
+            "fonte_id": "nccn-99f9aaf4199e",
+            "edicao": "4.2026",
+            "pagina_pdf": 58,
+            "paginas_pdf": [
+              58
+            ],
+            "secao": "PANC-G 6/13",
+            "trecho": "Daraxonrasib",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "c4d2c8507e8c544e4a4c9c26cbf2b10dd42b6d5b13c3cf2900a4bf0da093058e"
+          },
+          {
+            "fonte_id": "nccn-99f9aaf4199e",
+            "edicao": "4.2026",
+            "pagina_pdf": 60,
+            "paginas_pdf": [
+              60
+            ],
+            "secao": "PANC-G 8/13",
+            "trecho": "Daraxonrasib",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "c4d2c8507e8c544e4a4c9c26cbf2b10dd42b6d5b13c3cf2900a4bf0da093058e"
+          },
+          {
+            "fonte_id": "nccn-99f9aaf4199e",
+            "edicao": "4.2026",
+            "pagina_pdf": 61,
+            "paginas_pdf": [
+              61
+            ],
+            "secao": "PANC-G 9/13",
+            "trecho": "Daraxonrasib",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "c4d2c8507e8c544e4a4c9c26cbf2b10dd42b6d5b13c3cf2900a4bf0da093058e"
+          },
+          {
+            "fonte_id": "nccn-99f9aaf4199e",
+            "edicao": "4.2026",
+            "pagina_pdf": 62,
+            "paginas_pdf": [
+              62
+            ],
+            "secao": "PANC-G 10/13",
+            "trecho": "Daraxonrasib",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "c4d2c8507e8c544e4a4c9c26cbf2b10dd42b6d5b13c3cf2900a4bf0da093058e"
+          }
+        ],
+        "evidencia_declarada": {
+          "sistema": "NCCN",
+          "categoria": "VARIA_POR_RAMO",
+          "preferencia": "VARIA_POR_RAMO",
+          "estado": "CONFERIDA_DOCUMENTALMENTE_A_CONFERIR_CLINICAMENTE",
+          "nota": "2A por cabeçalho somente onde a página expressamente declara essa regra; não é categoria inferida por conhecimento externo."
+        },
+        "estado_extracao": "EXTRAIDO_COM_LIMITES_DECLARADOS",
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "temporalidade": {
+          "referencia": "CENARIO_DESCRITO",
+          "datas_individuais": null
+        },
+        "propor_automaticamente": false,
+        "disponivel_para_prescricao": false,
+        "acesso": {
+          "registro_anvisa": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "incorporacao_conitec": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "pcdt_ddt": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "sigtap_apac": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "cobertura_privada": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "disponibilidade_institucional": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          }
+        },
+        "alternativas_legadas_refs": [],
+        "relacoes_refs": [
+          "relacao-nccn-20261017-pancreas-daraxonrasibe"
+        ],
+        "conflitos_refs": [],
+        "pendencias": [
+          "REVISAO_CLINICA_DO_DELTA",
+          "VERIFICAR_ACESSO_BRASILEIRO_POR_INDICACAO",
+          "POSOLOGIA_E_SUPORTE_NAO_COMPLETOS_NESTA_RODADA"
+        ],
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+            "anterior": {
+              "fonte_refs": [
+                {
+                  "fonte_id": "nccn-99f9aaf4199e",
+                  "paginas_pdf": [
+                    4,
+                    60,
+                    61,
+                    62
+                  ],
+                  "secao": "UPDATES v4.2026; PANC-G 8–10/13",
+                  "natureza": "EXTRACAO_DOCUMENTAL",
+                  "pagina_pdf": 4,
+                  "trecho": "daraxonrasib (category 1) PANC-G 5 of 13 • Principles of Systemic Therapy,"
+                }
+              ],
+              "conteudo_extraido": "A atualização descreve uso em linhas subsequentes/recorrência e contextos selecionados de primeira linha, com categorias diferentes por performance e linha; não reduzir a indicação a um único rótulo.",
+              "aplicabilidade": {
+                "criterios": [
+                  "Adenocarcinoma pancreático",
+                  "Separar primeira linha de linha subsequente e recorrência",
+                  "Conferir performance e tratamentos prévios"
+                ],
+                "paciente_individual": null,
+                "estado": "NAO_AVALIADA"
+              },
+              "dados_estruturados": {
+                "farmacos": [
+                  "daraxonrasibe"
+                ],
+                "posologia": {
+                  "estado": "NAO_EXTRAIDA_NESTA_RODADA",
+                  "valor": null,
+                  "motivo": "A rodada incorpora o delta de indicação/cenário; não completa dose por inferência."
+                }
+              },
+              "evidencia_declarada": {
+                "sistema": "NCCN",
+                "categoria": null,
+                "estado": "NAO_EXTRAIDA_POR_ITEM"
+              }
+            },
+            "motivo": "O item generalizava categorias por linha/performance e se apoiava principalmente em Updates; é necessário registrar os ramos das tabelas.",
+            "aprovacao_clinica": null
+          },
+          {
+            "revisao": "2026-10-17-nccn-final-documental",
+            "anterior": {
+              "conteudo_extraido": "Daraxonrasibe: primeira linha metastática PS0–1 em Useful in Certain Circumstances, categoria2B; PS2/PS3 em UCC, sem marca local (2A pelo cabeçalho). Em linha subsequente: PS0–1/PS2 em Preferred, categoria1; PS3 em UCC, categoria1. PS4 recebe cuidado paliativo/suporte exclusivo segundo nota e. Não deduzir posologia pancreática de fonte de outro tumor nem requisito KRAS do pack de pulmão."
+            },
+            "motivo": "Espaçamento da prosa; sem modificar valores, códigos ou fontes."
+          },
+          {
+            "revisao": "2026-10-17-nccn-final-documental",
+            "anterior": {
+              "aplicabilidade": {
+                "criterios": [
+                  "Adenocarcinoma pancreático no cenário da tabela",
+                  "Separar primeira linha metastática de linha subsequente/recorrência",
+                  "ECOG, drenagem biliar e aporte nutricional avaliados",
+                  "Não extrapolar aos pacientes ECOG4"
+                ],
+                "paciente_individual": null,
+                "estado": "NAO_AVALIADA"
+              }
+            },
+            "motivo": "Espaçamento da prosa; sem modificar valores, códigos ou fontes."
+          }
+        ],
+        "fontes_por_campo": {
+          "conteudo_extraido": [
+            {
+              "fonte_id": "nccn-99f9aaf4199e",
+              "edicao": "4.2026",
+              "pagina_pdf": 57,
+              "paginas_pdf": [
+                57
+              ],
+              "secao": "PANC-G 5/13",
+              "trecho": "Daraxonrasib",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "c4d2c8507e8c544e4a4c9c26cbf2b10dd42b6d5b13c3cf2900a4bf0da093058e"
+            },
+            {
+              "fonte_id": "nccn-99f9aaf4199e",
+              "edicao": "4.2026",
+              "pagina_pdf": 58,
+              "paginas_pdf": [
+                58
+              ],
+              "secao": "PANC-G 6/13",
+              "trecho": "Daraxonrasib",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "c4d2c8507e8c544e4a4c9c26cbf2b10dd42b6d5b13c3cf2900a4bf0da093058e"
+            },
+            {
+              "fonte_id": "nccn-99f9aaf4199e",
+              "edicao": "4.2026",
+              "pagina_pdf": 60,
+              "paginas_pdf": [
+                60
+              ],
+              "secao": "PANC-G 8/13",
+              "trecho": "Daraxonrasib",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "c4d2c8507e8c544e4a4c9c26cbf2b10dd42b6d5b13c3cf2900a4bf0da093058e"
+            },
+            {
+              "fonte_id": "nccn-99f9aaf4199e",
+              "edicao": "4.2026",
+              "pagina_pdf": 61,
+              "paginas_pdf": [
+                61
+              ],
+              "secao": "PANC-G 9/13",
+              "trecho": "Daraxonrasib",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "c4d2c8507e8c544e4a4c9c26cbf2b10dd42b6d5b13c3cf2900a4bf0da093058e"
+            },
+            {
+              "fonte_id": "nccn-99f9aaf4199e",
+              "edicao": "4.2026",
+              "pagina_pdf": 62,
+              "paginas_pdf": [
+                62
+              ],
+              "secao": "PANC-G 10/13",
+              "trecho": "Daraxonrasib",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "c4d2c8507e8c544e4a4c9c26cbf2b10dd42b6d5b13c3cf2900a4bf0da093058e"
+            }
+          ],
+          "aplicabilidade": [
+            {
+              "fonte_id": "nccn-99f9aaf4199e",
+              "edicao": "4.2026",
+              "pagina_pdf": 57,
+              "paginas_pdf": [
+                57
+              ],
+              "secao": "PANC-G 5/13",
+              "trecho": "Daraxonrasib",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "c4d2c8507e8c544e4a4c9c26cbf2b10dd42b6d5b13c3cf2900a4bf0da093058e"
+            },
+            {
+              "fonte_id": "nccn-99f9aaf4199e",
+              "edicao": "4.2026",
+              "pagina_pdf": 58,
+              "paginas_pdf": [
+                58
+              ],
+              "secao": "PANC-G 6/13",
+              "trecho": "Daraxonrasib",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "c4d2c8507e8c544e4a4c9c26cbf2b10dd42b6d5b13c3cf2900a4bf0da093058e"
+            },
+            {
+              "fonte_id": "nccn-99f9aaf4199e",
+              "edicao": "4.2026",
+              "pagina_pdf": 60,
+              "paginas_pdf": [
+                60
+              ],
+              "secao": "PANC-G 8/13",
+              "trecho": "Daraxonrasib",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "c4d2c8507e8c544e4a4c9c26cbf2b10dd42b6d5b13c3cf2900a4bf0da093058e"
+            },
+            {
+              "fonte_id": "nccn-99f9aaf4199e",
+              "edicao": "4.2026",
+              "pagina_pdf": 61,
+              "paginas_pdf": [
+                61
+              ],
+              "secao": "PANC-G 9/13",
+              "trecho": "Daraxonrasib",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "c4d2c8507e8c544e4a4c9c26cbf2b10dd42b6d5b13c3cf2900a4bf0da093058e"
+            },
+            {
+              "fonte_id": "nccn-99f9aaf4199e",
+              "edicao": "4.2026",
+              "pagina_pdf": 62,
+              "paginas_pdf": [
+                62
+              ],
+              "secao": "PANC-G 10/13",
+              "trecho": "Daraxonrasib",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "c4d2c8507e8c544e4a4c9c26cbf2b10dd42b6d5b13c3cf2900a4bf0da093058e"
+            }
+          ],
+          "dados_estruturados": [
+            {
+              "fonte_id": "nccn-99f9aaf4199e",
+              "edicao": "4.2026",
+              "pagina_pdf": 57,
+              "paginas_pdf": [
+                57
+              ],
+              "secao": "PANC-G 5/13",
+              "trecho": "Daraxonrasib",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "c4d2c8507e8c544e4a4c9c26cbf2b10dd42b6d5b13c3cf2900a4bf0da093058e"
+            },
+            {
+              "fonte_id": "nccn-99f9aaf4199e",
+              "edicao": "4.2026",
+              "pagina_pdf": 58,
+              "paginas_pdf": [
+                58
+              ],
+              "secao": "PANC-G 6/13",
+              "trecho": "Daraxonrasib",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "c4d2c8507e8c544e4a4c9c26cbf2b10dd42b6d5b13c3cf2900a4bf0da093058e"
+            },
+            {
+              "fonte_id": "nccn-99f9aaf4199e",
+              "edicao": "4.2026",
+              "pagina_pdf": 60,
+              "paginas_pdf": [
+                60
+              ],
+              "secao": "PANC-G 8/13",
+              "trecho": "Daraxonrasib",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "c4d2c8507e8c544e4a4c9c26cbf2b10dd42b6d5b13c3cf2900a4bf0da093058e"
+            },
+            {
+              "fonte_id": "nccn-99f9aaf4199e",
+              "edicao": "4.2026",
+              "pagina_pdf": 61,
+              "paginas_pdf": [
+                61
+              ],
+              "secao": "PANC-G 9/13",
+              "trecho": "Daraxonrasib",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "c4d2c8507e8c544e4a4c9c26cbf2b10dd42b6d5b13c3cf2900a4bf0da093058e"
+            },
+            {
+              "fonte_id": "nccn-99f9aaf4199e",
+              "edicao": "4.2026",
+              "pagina_pdf": 62,
+              "paginas_pdf": [
+                62
+              ],
+              "secao": "PANC-G 10/13",
+              "trecho": "Daraxonrasib",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "c4d2c8507e8c544e4a4c9c26cbf2b10dd42b6d5b13c3cf2900a4bf0da093058e"
+            }
+          ],
+          "evidencia_declarada": [
+            {
+              "fonte_id": "nccn-99f9aaf4199e",
+              "edicao": "4.2026",
+              "pagina_pdf": 57,
+              "paginas_pdf": [
+                57
+              ],
+              "secao": "PANC-G 5/13",
+              "trecho": "Daraxonrasib",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "c4d2c8507e8c544e4a4c9c26cbf2b10dd42b6d5b13c3cf2900a4bf0da093058e"
+            },
+            {
+              "fonte_id": "nccn-99f9aaf4199e",
+              "edicao": "4.2026",
+              "pagina_pdf": 58,
+              "paginas_pdf": [
+                58
+              ],
+              "secao": "PANC-G 6/13",
+              "trecho": "Daraxonrasib",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "c4d2c8507e8c544e4a4c9c26cbf2b10dd42b6d5b13c3cf2900a4bf0da093058e"
+            },
+            {
+              "fonte_id": "nccn-99f9aaf4199e",
+              "edicao": "4.2026",
+              "pagina_pdf": 60,
+              "paginas_pdf": [
+                60
+              ],
+              "secao": "PANC-G 8/13",
+              "trecho": "Daraxonrasib",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "c4d2c8507e8c544e4a4c9c26cbf2b10dd42b6d5b13c3cf2900a4bf0da093058e"
+            },
+            {
+              "fonte_id": "nccn-99f9aaf4199e",
+              "edicao": "4.2026",
+              "pagina_pdf": 61,
+              "paginas_pdf": [
+                61
+              ],
+              "secao": "PANC-G 9/13",
+              "trecho": "Daraxonrasib",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "c4d2c8507e8c544e4a4c9c26cbf2b10dd42b6d5b13c3cf2900a4bf0da093058e"
+            },
+            {
+              "fonte_id": "nccn-99f9aaf4199e",
+              "edicao": "4.2026",
+              "pagina_pdf": 62,
+              "paginas_pdf": [
+                62
+              ],
+              "secao": "PANC-G 10/13",
+              "trecho": "Daraxonrasib",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "c4d2c8507e8c544e4a4c9c26cbf2b10dd42b6d5b13c3cf2900a4bf0da093058e"
+            }
+          ]
+        }
+      },
+      {
+        "item_id": "nccn-20261017-pancreas-zenocutuzumabe",
+        "nome": "Zenocutuzumabe para fusão NRG1",
+        "tipo": "OPCAO_TERAPEUTICA",
+        "dominio_principal": 6,
+        "conteudo_extraido": "Zenocutuzumabe para fusão NRG1 em doença pancreática localmente avançada/metastática ou recorrente, com progressão durante/após terapia sistêmica prévia: UCC, categoria 2A pelo cabeçalho, nos ramos PS 0–1 e PS 2. Não consta no ramo PS 3 da página 62; não extrapolar o item a qualquer performance.",
+        "aplicabilidade": {
+          "criterios": [
+            "Adenocarcinoma pancreático com fusão NRG1",
+            "Progressão durante/após terapia sistêmica",
+            "PS 0–1 ouPS2 nos ramos descritos"
+          ],
+          "paciente_individual": null,
+          "estado": "NAO_AVALIADA"
+        },
+        "dados_estruturados": {
+          "farmacos": [
+            "zenocutuzumabe"
+          ],
+          "posologia": {
+            "estado": "NAO_EXTRAIDA_NESTA_RODADA",
+            "valor": null,
+            "motivo": "A rodada incorpora o delta de indicação/cenário; não completa dose por inferência."
+          }
+        },
+        "fonte_refs": [
+          {
+            "fonte_id": "nccn-99f9aaf4199e",
+            "edicao": "4.2026",
+            "pagina_pdf": 60,
+            "paginas_pdf": [
+              60
+            ],
+            "secao": "PANC-G 8/13, nota s",
+            "trecho": "Zenocutuzumab-zbco (if NRG1 gene fusion-positive)",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "c4d2c8507e8c544e4a4c9c26cbf2b10dd42b6d5b13c3cf2900a4bf0da093058e"
+          },
+          {
+            "fonte_id": "nccn-99f9aaf4199e",
+            "edicao": "4.2026",
+            "pagina_pdf": 61,
+            "paginas_pdf": [
+              61
+            ],
+            "secao": "PANC-G 9/13",
+            "trecho": "Zenocutuzumab-zbco",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "c4d2c8507e8c544e4a4c9c26cbf2b10dd42b6d5b13c3cf2900a4bf0da093058e"
+          },
+          {
+            "fonte_id": "nccn-99f9aaf4199e",
+            "edicao": "4.2026",
+            "pagina_pdf": 62,
+            "paginas_pdf": [
+              62
+            ],
+            "secao": "PANC-G 10/13, contexto PS3",
+            "trecho": "Poor PS 3",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "c4d2c8507e8c544e4a4c9c26cbf2b10dd42b6d5b13c3cf2900a4bf0da093058e"
+          }
+        ],
+        "evidencia_declarada": {
+          "sistema": "NCCN",
+          "categoria": "2A por cabeçalho",
+          "preferencia": "Useful in Certain Circumstances",
+          "estado": "CONFERIDA_DOCUMENTALMENTE_A_CONFERIR_CLINICAMENTE",
+          "nota": "2A por cabeçalho somente onde a página expressamente declara essa regra; não é categoria inferida por conhecimento externo."
+        },
+        "estado_extracao": "EXTRAIDO_COM_LIMITES_DECLARADOS",
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "temporalidade": {
+          "referencia": "CENARIO_DESCRITO",
+          "datas_individuais": null
+        },
+        "propor_automaticamente": false,
+        "disponivel_para_prescricao": false,
+        "acesso": {
+          "registro_anvisa": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "incorporacao_conitec": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "pcdt_ddt": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "sigtap_apac": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "cobertura_privada": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "disponibilidade_institucional": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          }
+        },
+        "alternativas_legadas_refs": [],
+        "relacoes_refs": [
+          "relacao-nccn-20261017-pancreas-zenocutuzumabe"
+        ],
+        "conflitos_refs": [],
+        "pendencias": [
+          "REVISAO_CLINICA_DO_DELTA",
+          "VERIFICAR_ACESSO_BRASILEIRO_POR_INDICACAO",
+          "POSOLOGIA_E_SUPORTE_NAO_COMPLETOS_NESTA_RODADA"
+        ],
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+            "anterior": {
+              "fonte_refs": [
+                {
+                  "fonte_id": "nccn-99f9aaf4199e",
+                  "paginas_pdf": [
+                    60
+                  ],
+                  "secao": "PANC-G 8/13, nota s",
+                  "natureza": "EXTRACAO_DOCUMENTAL",
+                  "pagina_pdf": 60,
+                  "trecho": "Zenocutuzumab-zbco (if NRG1 gene fusion-positive)s • Chemoradiation,a if not previously given, only"
+                }
+              ],
+              "conteudo_extraido": "Opção para fusão NRG1 com progressão durante ou após tratamento sistêmico prévio.",
+              "aplicabilidade": {
+                "criterios": [
+                  "Adenocarcinoma pancreático",
+                  "Fusão NRG1",
+                  "Progressão durante/após terapia sistêmica"
+                ],
+                "paciente_individual": null,
+                "estado": "NAO_AVALIADA"
+              },
+              "evidencia_declarada": {
+                "sistema": "NCCN",
+                "categoria": null,
+                "estado": "NAO_EXTRAIDA_POR_ITEM"
+              }
+            },
+            "motivo": "O critério de performance estava omitido: a opção aparece nos ramos PS0–1 ePS2, não no ramo PS3 examinado.",
+            "aprovacao_clinica": null
+          },
+          {
+            "revisao": "2026-10-17-nccn-final-documental",
+            "anterior": {
+              "conteudo_extraido": "Zenocutuzumabe para fusão NRG1 em doença pancreática localmente avançada/metastática ou recorrente, com progressão durante/após terapia sistêmica prévia: UCC, categoria2A pelo cabeçalho, nos ramos PS0–1 ePS2. Não consta no ramo PS3 da página62; não extrapolar o item a qualquer performance."
+            },
+            "motivo": "Espaçamento da prosa; sem modificar valores, códigos ou fontes."
+          },
+          {
+            "revisao": "2026-10-17-nccn-final-documental",
+            "anterior": {
+              "aplicabilidade": {
+                "criterios": [
+                  "Adenocarcinoma pancreático com fusão NRG1",
+                  "Progressão durante/após terapia sistêmica",
+                  "PS0–1 ouPS2 nos ramos descritos"
+                ],
+                "paciente_individual": null,
+                "estado": "NAO_AVALIADA"
+              }
+            },
+            "motivo": "Espaçamento da prosa; sem modificar valores, códigos ou fontes."
+          }
+        ],
+        "fontes_por_campo": {
+          "conteudo_extraido": [
+            {
+              "fonte_id": "nccn-99f9aaf4199e",
+              "edicao": "4.2026",
+              "pagina_pdf": 60,
+              "paginas_pdf": [
+                60
+              ],
+              "secao": "PANC-G 8/13, nota s",
+              "trecho": "Zenocutuzumab-zbco (if NRG1 gene fusion-positive)",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "c4d2c8507e8c544e4a4c9c26cbf2b10dd42b6d5b13c3cf2900a4bf0da093058e"
+            },
+            {
+              "fonte_id": "nccn-99f9aaf4199e",
+              "edicao": "4.2026",
+              "pagina_pdf": 61,
+              "paginas_pdf": [
+                61
+              ],
+              "secao": "PANC-G 9/13",
+              "trecho": "Zenocutuzumab-zbco",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "c4d2c8507e8c544e4a4c9c26cbf2b10dd42b6d5b13c3cf2900a4bf0da093058e"
+            },
+            {
+              "fonte_id": "nccn-99f9aaf4199e",
+              "edicao": "4.2026",
+              "pagina_pdf": 62,
+              "paginas_pdf": [
+                62
+              ],
+              "secao": "PANC-G 10/13, contexto PS3",
+              "trecho": "Poor PS 3",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "c4d2c8507e8c544e4a4c9c26cbf2b10dd42b6d5b13c3cf2900a4bf0da093058e"
+            }
+          ],
+          "aplicabilidade": [
+            {
+              "fonte_id": "nccn-99f9aaf4199e",
+              "edicao": "4.2026",
+              "pagina_pdf": 60,
+              "paginas_pdf": [
+                60
+              ],
+              "secao": "PANC-G 8/13, nota s",
+              "trecho": "Zenocutuzumab-zbco (if NRG1 gene fusion-positive)",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "c4d2c8507e8c544e4a4c9c26cbf2b10dd42b6d5b13c3cf2900a4bf0da093058e"
+            },
+            {
+              "fonte_id": "nccn-99f9aaf4199e",
+              "edicao": "4.2026",
+              "pagina_pdf": 61,
+              "paginas_pdf": [
+                61
+              ],
+              "secao": "PANC-G 9/13",
+              "trecho": "Zenocutuzumab-zbco",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "c4d2c8507e8c544e4a4c9c26cbf2b10dd42b6d5b13c3cf2900a4bf0da093058e"
+            },
+            {
+              "fonte_id": "nccn-99f9aaf4199e",
+              "edicao": "4.2026",
+              "pagina_pdf": 62,
+              "paginas_pdf": [
+                62
+              ],
+              "secao": "PANC-G 10/13, contexto PS3",
+              "trecho": "Poor PS 3",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "c4d2c8507e8c544e4a4c9c26cbf2b10dd42b6d5b13c3cf2900a4bf0da093058e"
+            }
+          ],
+          "evidencia_declarada": [
+            {
+              "fonte_id": "nccn-99f9aaf4199e",
+              "edicao": "4.2026",
+              "pagina_pdf": 60,
+              "paginas_pdf": [
+                60
+              ],
+              "secao": "PANC-G 8/13, nota s",
+              "trecho": "Zenocutuzumab-zbco (if NRG1 gene fusion-positive)",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "c4d2c8507e8c544e4a4c9c26cbf2b10dd42b6d5b13c3cf2900a4bf0da093058e"
+            },
+            {
+              "fonte_id": "nccn-99f9aaf4199e",
+              "edicao": "4.2026",
+              "pagina_pdf": 61,
+              "paginas_pdf": [
+                61
+              ],
+              "secao": "PANC-G 9/13",
+              "trecho": "Zenocutuzumab-zbco",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "c4d2c8507e8c544e4a4c9c26cbf2b10dd42b6d5b13c3cf2900a4bf0da093058e"
+            },
+            {
+              "fonte_id": "nccn-99f9aaf4199e",
+              "edicao": "4.2026",
+              "pagina_pdf": 62,
+              "paginas_pdf": [
+                62
+              ],
+              "secao": "PANC-G 10/13, contexto PS3",
+              "trecho": "Poor PS 3",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "c4d2c8507e8c544e4a4c9c26cbf2b10dd42b6d5b13c3cf2900a4bf0da093058e"
+            }
+          ]
+        }
+      },
+      {
+        "item_id": "nccn-20261017-pancreas-rucaparibe",
+        "nome": "Rucaparibe de manutenção",
+        "tipo": "OPCAO_TERAPEUTICA",
+        "dominio_principal": 6,
+        "conteudo_extraido": "Opção de manutenção após platina em alterações germinativas ou somáticas BRCA1/2 ou PALB2; sem progressão na platina mais recente.",
+        "aplicabilidade": {
+          "criterios": [
+            "Doença metastática",
+            "Performance boa/intermediária",
+            "BRCA1/2 ou PALB2",
+            "Sem progressão na platina"
+          ],
+          "paciente_individual": null,
+          "estado": "NAO_AVALIADA"
+        },
+        "dados_estruturados": {
+          "farmacos": [
+            "rucaparibe"
+          ],
+          "posologia": {
+            "estado": "NAO_EXTRAIDA_NESTA_RODADA",
+            "valor": null,
+            "motivo": "A rodada incorpora o delta de indicação/cenário; não completa dose por inferência."
+          }
+        },
+        "fonte_refs": [
+          {
+            "fonte_id": "nccn-99f9aaf4199e",
+            "paginas_pdf": [
+              59
+            ],
+            "secao": "PANC-G 7/13, notas o/p",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "pagina_pdf": 59,
+            "trecho": "Rucaparib (for germline or somatic BRCA1/2 or PALB2 mutations)o,p,31 PRINCIPLES OF SYSTEMIC"
+          }
+        ],
+        "evidencia_declarada": {
+          "sistema": "NCCN",
+          "categoria": null,
+          "estado": "NAO_EXTRAIDA_POR_ITEM"
+        },
+        "estado_extracao": "EXTRAIDO_COM_LIMITES_DECLARADOS",
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "temporalidade": {
+          "referencia": "CENARIO_DESCRITO",
+          "datas_individuais": null
+        },
+        "propor_automaticamente": false,
+        "disponivel_para_prescricao": false,
+        "acesso": {
+          "registro_anvisa": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "incorporacao_conitec": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "pcdt_ddt": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "sigtap_apac": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "cobertura_privada": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "disponibilidade_institucional": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          }
+        },
+        "alternativas_legadas_refs": [],
+        "relacoes_refs": [
+          "relacao-nccn-20261017-pancreas-rucaparibe"
+        ],
+        "conflitos_refs": [],
+        "pendencias": [
+          "REVISAO_CLINICA_DO_DELTA",
+          "VERIFICAR_ACESSO_BRASILEIRO_POR_INDICACAO",
+          "POSOLOGIA_E_SUPORTE_NAO_COMPLETOS_NESTA_RODADA"
+        ]
+      },
+      {
+        "item_id": "nccn-20261017-pancreas-manutencao",
+        "nome": "Alternativas de manutenção conforme regime prévio",
+        "tipo": "CENARIO_DE_MANUTENCAO",
+        "dominio_principal": 6,
+        "conteudo_extraido": "Manutenção/pausa após resposta ou estabilidade por 4–6 meses, PS bom/intermediário. Após FOLFIRINOX: capecitabina em Other Recommended; FOLFIRI e 5-FU/LV em UCC 2A, FOLFOX em UCC 2B. A nota m relaciona5-FU±irinotecano à neuropatia progressiva/alergia por oxaliplatina; a nota n admite FOLFOX quando toxicidade GI preocupa, sem apresentá-lo como manutenção usual. Após gencitabina/nab-paclitaxel: combinação modificada ou gencitabina, Other Recommended2B.",
+        "aplicabilidade": {
+          "criterios": [
+            "Doença metastática com resposta/estabilidade após 4–6 meses",
+            "Performance boa/intermediária",
+            "Regime de primeira linha e toxicidades identificados"
+          ],
+          "paciente_individual": null,
+          "estado": "NAO_AVALIADA"
+        },
+        "dados_estruturados": {
+          "ramos": [
+            {
+              "previo": "FOLFIRINOX",
+              "opcao": "capecitabina",
+              "categoria": "2A por cabeçalho",
+              "preferencia": "Other Recommended"
+            },
+            {
+              "previo": "FOLFIRINOX",
+              "opcao": "FOLFIRI ou5-FU/LV",
+              "categoria": "2A por cabeçalho",
+              "preferencia": "Useful in Certain Circumstances"
+            },
+            {
+              "previo": "FOLFIRINOX",
+              "opcao": "FOLFOX",
+              "categoria": "2B",
+              "preferencia": "Useful in Certain Circumstances"
+            },
+            {
+              "previo": "gencitabina/nab-paclitaxel",
+              "opcao": "combinação modificada ou gencitabina",
+              "categoria": "2B",
+              "preferencia": "Other Recommended"
+            }
+          ]
+        },
+        "fonte_refs": [
+          {
+            "fonte_id": "nccn-99f9aaf4199e",
+            "edicao": "4.2026",
+            "pagina_pdf": 59,
+            "paginas_pdf": [
+              59
+            ],
+            "secao": "PANC-G 7/13",
+            "trecho": "Maintenance Therapy for Good/Intermediate PS",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "c4d2c8507e8c544e4a4c9c26cbf2b10dd42b6d5b13c3cf2900a4bf0da093058e"
+          },
+          {
+            "fonte_id": "nccn-99f9aaf4199e",
+            "edicao": "4.2026",
+            "pagina_pdf": 59,
+            "paginas_pdf": [
+              59
+            ],
+            "secao": "PANC-G 7/13, notas m/n",
+            "trecho": "Oxaliplatin-related progressive neuropathy",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "c4d2c8507e8c544e4a4c9c26cbf2b10dd42b6d5b13c3cf2900a4bf0da093058e"
+          },
+          {
+            "fonte_id": "nccn-99f9aaf4199e",
+            "edicao": "4.2026",
+            "pagina_pdf": 59,
+            "paginas_pdf": [
+              59
+            ],
+            "secao": "PANC-G 7/13, nota n",
+            "trecho": "when GI toxicity is a concern",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "c4d2c8507e8c544e4a4c9c26cbf2b10dd42b6d5b13c3cf2900a4bf0da093058e"
+          }
+        ],
+        "evidencia_declarada": {
+          "sistema": "NCCN",
+          "categoria": "VARIA_POR_RAMO",
+          "preferencia": "VARIA_POR_RAMO",
+          "estado": "CONFERIDA_DOCUMENTALMENTE_A_CONFERIR_CLINICAMENTE",
+          "nota": "2A por cabeçalho somente onde a página expressamente declara essa regra; não é categoria inferida por conhecimento externo."
+        },
+        "estado_extracao": "EXTRAIDO_COM_LIMITES_DECLARADOS",
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "temporalidade": {
+          "referencia": "CENARIO_DESCRITO",
+          "datas_individuais": null
+        },
+        "propor_automaticamente": false,
+        "disponivel_para_prescricao": false,
+        "acesso": {
+          "registro_anvisa": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "incorporacao_conitec": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "pcdt_ddt": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "sigtap_apac": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "cobertura_privada": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "disponibilidade_institucional": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          }
+        },
+        "alternativas_legadas_refs": [],
+        "relacoes_refs": [
+          "relacao-nccn-20261017-pancreas-manutencao"
+        ],
+        "conflitos_refs": [],
+        "pendencias": [
+          "REVISAO_CLINICA_DO_DELTA",
+          "VERIFICAR_ACESSO_BRASILEIRO_POR_INDICACAO"
+        ],
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+            "anterior": {
+              "fonte_refs": [
+                {
+                  "fonte_id": "nccn-99f9aaf4199e",
+                  "paginas_pdf": [
+                    59
+                  ],
+                  "secao": "PANC-G 7/13",
+                  "natureza": "EXTRACAO_DOCUMENTAL",
+                  "pagina_pdf": 59,
+                  "trecho": "Maintenance Therapy for Good/Intermediate PS)e • Patients who have response or stable"
+                }
+              ],
+              "conteudo_extraido": "Após resposta/estabilidade, o documento diferencia pausa e manutenção conforme FOLFIRINOX ou gencitabina/nab-paclitaxel prévios; contempla capecitabina, FOLFIRI, 5-FU/LV, FOLFOX e regimes com gencitabina com categorias próprias.",
+              "aplicabilidade": {
+                "criterios": [
+                  "Resposta/estabilidade após 4–6 meses de quimioterapia",
+                  "Conferir toxicidade e tratamento anterior"
+                ],
+                "paciente_individual": null,
+                "estado": "NAO_AVALIADA"
+              },
+              "dados_estruturados": {},
+              "evidencia_declarada": {
+                "sistema": "NCCN",
+                "categoria": null,
+                "estado": "NAO_EXTRAIDA_POR_ITEM"
+              }
+            },
+            "motivo": "Faltava a diferenciação concreta de preferência e critérios de escolha entre variantes após FOLFIRINOX e após gencitabina/nab-paclitaxel.",
+            "aprovacao_clinica": null
+          },
+          {
+            "revisao": "2026-10-17-nccn-final-documental",
+            "anterior": {
+              "conteudo_extraido": "Manutenção/pausa após resposta ou estabilidade por4–6meses, PS bom/intermediário. Após FOLFIRINOX: capecitabina em Other Recommended; FOLFIRI e5-FU/LV em UCC2A, FOLFOX em UCC2B. A nota m relaciona5-FU±irinotecano à neuropatia progressiva/alergia por oxaliplatina; a nota n admite FOLFOX quando toxicidade GI preocupa, sem apresentá-lo como manutenção usual. Após gencitabina/nab-paclitaxel: combinação modificada ou gencitabina, Other Recommended2B."
+            },
+            "motivo": "Espaçamento da prosa; sem modificar valores, códigos ou fontes."
+          },
+          {
+            "revisao": "2026-10-17-nccn-final-documental",
+            "anterior": {
+              "aplicabilidade": {
+                "criterios": [
+                  "Doença metastática com resposta/estabilidade após4–6meses",
+                  "Performance boa/intermediária",
+                  "Regime de primeira linha e toxicidades identificados"
+                ],
+                "paciente_individual": null,
+                "estado": "NAO_AVALIADA"
+              }
+            },
+            "motivo": "Espaçamento da prosa; sem modificar valores, códigos ou fontes."
+          }
+        ],
+        "fontes_por_campo": {
+          "conteudo_extraido": [
+            {
+              "fonte_id": "nccn-99f9aaf4199e",
+              "edicao": "4.2026",
+              "pagina_pdf": 59,
+              "paginas_pdf": [
+                59
+              ],
+              "secao": "PANC-G 7/13",
+              "trecho": "Maintenance Therapy for Good/Intermediate PS",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "c4d2c8507e8c544e4a4c9c26cbf2b10dd42b6d5b13c3cf2900a4bf0da093058e"
+            },
+            {
+              "fonte_id": "nccn-99f9aaf4199e",
+              "edicao": "4.2026",
+              "pagina_pdf": 59,
+              "paginas_pdf": [
+                59
+              ],
+              "secao": "PANC-G 7/13, notas m/n",
+              "trecho": "Oxaliplatin-related progressive neuropathy",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "c4d2c8507e8c544e4a4c9c26cbf2b10dd42b6d5b13c3cf2900a4bf0da093058e"
+            },
+            {
+              "fonte_id": "nccn-99f9aaf4199e",
+              "edicao": "4.2026",
+              "pagina_pdf": 59,
+              "paginas_pdf": [
+                59
+              ],
+              "secao": "PANC-G 7/13, nota n",
+              "trecho": "when GI toxicity is a concern",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "c4d2c8507e8c544e4a4c9c26cbf2b10dd42b6d5b13c3cf2900a4bf0da093058e"
+            }
+          ],
+          "aplicabilidade": [
+            {
+              "fonte_id": "nccn-99f9aaf4199e",
+              "edicao": "4.2026",
+              "pagina_pdf": 59,
+              "paginas_pdf": [
+                59
+              ],
+              "secao": "PANC-G 7/13",
+              "trecho": "Maintenance Therapy for Good/Intermediate PS",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "c4d2c8507e8c544e4a4c9c26cbf2b10dd42b6d5b13c3cf2900a4bf0da093058e"
+            },
+            {
+              "fonte_id": "nccn-99f9aaf4199e",
+              "edicao": "4.2026",
+              "pagina_pdf": 59,
+              "paginas_pdf": [
+                59
+              ],
+              "secao": "PANC-G 7/13, notas m/n",
+              "trecho": "Oxaliplatin-related progressive neuropathy",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "c4d2c8507e8c544e4a4c9c26cbf2b10dd42b6d5b13c3cf2900a4bf0da093058e"
+            },
+            {
+              "fonte_id": "nccn-99f9aaf4199e",
+              "edicao": "4.2026",
+              "pagina_pdf": 59,
+              "paginas_pdf": [
+                59
+              ],
+              "secao": "PANC-G 7/13, nota n",
+              "trecho": "when GI toxicity is a concern",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "c4d2c8507e8c544e4a4c9c26cbf2b10dd42b6d5b13c3cf2900a4bf0da093058e"
+            }
+          ],
+          "dados_estruturados": [
+            {
+              "fonte_id": "nccn-99f9aaf4199e",
+              "edicao": "4.2026",
+              "pagina_pdf": 59,
+              "paginas_pdf": [
+                59
+              ],
+              "secao": "PANC-G 7/13",
+              "trecho": "Maintenance Therapy for Good/Intermediate PS",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "c4d2c8507e8c544e4a4c9c26cbf2b10dd42b6d5b13c3cf2900a4bf0da093058e"
+            },
+            {
+              "fonte_id": "nccn-99f9aaf4199e",
+              "edicao": "4.2026",
+              "pagina_pdf": 59,
+              "paginas_pdf": [
+                59
+              ],
+              "secao": "PANC-G 7/13, notas m/n",
+              "trecho": "Oxaliplatin-related progressive neuropathy",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "c4d2c8507e8c544e4a4c9c26cbf2b10dd42b6d5b13c3cf2900a4bf0da093058e"
+            },
+            {
+              "fonte_id": "nccn-99f9aaf4199e",
+              "edicao": "4.2026",
+              "pagina_pdf": 59,
+              "paginas_pdf": [
+                59
+              ],
+              "secao": "PANC-G 7/13, nota n",
+              "trecho": "when GI toxicity is a concern",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "c4d2c8507e8c544e4a4c9c26cbf2b10dd42b6d5b13c3cf2900a4bf0da093058e"
+            }
+          ],
+          "evidencia_declarada": [
+            {
+              "fonte_id": "nccn-99f9aaf4199e",
+              "edicao": "4.2026",
+              "pagina_pdf": 59,
+              "paginas_pdf": [
+                59
+              ],
+              "secao": "PANC-G 7/13",
+              "trecho": "Maintenance Therapy for Good/Intermediate PS",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "c4d2c8507e8c544e4a4c9c26cbf2b10dd42b6d5b13c3cf2900a4bf0da093058e"
+            },
+            {
+              "fonte_id": "nccn-99f9aaf4199e",
+              "edicao": "4.2026",
+              "pagina_pdf": 59,
+              "paginas_pdf": [
+                59
+              ],
+              "secao": "PANC-G 7/13, notas m/n",
+              "trecho": "Oxaliplatin-related progressive neuropathy",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "c4d2c8507e8c544e4a4c9c26cbf2b10dd42b6d5b13c3cf2900a4bf0da093058e"
+            },
+            {
+              "fonte_id": "nccn-99f9aaf4199e",
+              "edicao": "4.2026",
+              "pagina_pdf": 59,
+              "paginas_pdf": [
+                59
+              ],
+              "secao": "PANC-G 7/13, nota n",
+              "trecho": "when GI toxicity is a concern",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "c4d2c8507e8c544e4a4c9c26cbf2b10dd42b6d5b13c3cf2900a4bf0da093058e"
+            }
+          ]
+        }
+      }
+    ],
+    "cenarios": {
+      "identidade_ref": "/identidade/cenarios",
+      "detalhamento_ref": "/tratamento/cenarios",
+      "novas_condicoes_refs": [
+        "nccn-20261017-pancreas-daraxonrasibe",
+        "nccn-20261017-pancreas-zenocutuzumabe",
+        "nccn-20261017-pancreas-rucaparibe",
+        "nccn-20261017-pancreas-manutencao"
+      ],
+      "regra": "Não igualar automaticamente as duas listas nem selecionar cenário individual nesta camada."
+    },
+    "fontes": [
+      {
+        "id": "nccn-99f9aaf4199e",
+        "arquivo_local": "C:\\Users\\silas\\.aside\\u\\0\\sessions\\2026-10-17_LutNNwUyDZGlA1pF\\artifacts\\nccn\\Pancreatic Adenocarcinoma.pdf",
+        "nome": "Pancreatic Adenocarcinoma",
+        "sha256": "c4d2c8507e8c544e4a4c9c26cbf2b10dd42b6d5b13c3cf2900a4bf0da093058e",
+        "numero_paginas": 167,
+        "versao_declarada": "4.2026",
+        "origem": "ARQUIVO_LOCAL_FORNECIDO",
+        "autenticidade_externa": "NAO_VERIFICADA_NO_PORTAL",
+        "paginas_examinadas": [
+          4,
+          57,
+          58,
+          59,
+          60,
+          61,
+          62
+        ]
+      }
+    ],
+    "fontes_legadas_refs": [
+      "/header/fonte",
+      "/curadoria/fontesLidas"
+    ],
+    "ensaios": {
+      "legado_ref": "/tratamento/ensaios",
+      "novos_nct": [],
+      "nota": "Nenhum identificador NCT foi inventado ou verificado nesta rodada."
+    },
+    "relacoes": [
+      {
+        "relacao_id": "relacao-nccn-20261017-pancreas-daraxonrasibe",
+        "tipo": "CONDICOES_PARA_APRESENTACAO_DOCUMENTAL",
+        "destino_item_ref": "nccn-20261017-pancreas-daraxonrasibe",
+        "criterios_extraidos": [
+          "Adenocarcinoma pancreático no cenário da tabela",
+          "Separar primeira linha metastática de linha subsequente/recorrência",
+          "ECOG, drenagem biliar e aporte nutricional avaliados",
+          "Não extrapolar aos pacientes ECOG 4"
+        ],
+        "origem_condicoes": "FONTE_NCCN_CITADA",
+        "origem_mapeamento": "PROPOSTA_DE_MAPEAMENTO",
+        "executavel": false,
+        "estado": "A_CONFERIR",
+        "dados_ausentes": "MANTER_INDETERMINADO",
+        "dados_conflitantes": "MANTER_CONFLITO",
+        "efeito": "APRESENTAR_CONTEUDO_PARA_REVISAO; NAO PRESCREVER",
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+            "criterios_extraidos": [
+              "Adenocarcinoma pancreático",
+              "Separar primeira linha de linha subsequente e recorrência",
+              "Conferir performance e tratamentos prévios"
+            ]
+          },
+          {
+            "revisao": "2026-10-17-nccn-final-documental",
+            "criterios_extraidos": [
+              "Adenocarcinoma pancreático no cenário da tabela",
+              "Separar primeira linha metastática de linha subsequente/recorrência",
+              "ECOG, drenagem biliar e aporte nutricional avaliados",
+              "Não extrapolar aos pacientes ECOG4"
+            ]
+          }
+        ],
+        "fontes_por_campo": {
+          "criterios_extraidos": [
+            {
+              "fonte_id": "nccn-99f9aaf4199e",
+              "edicao": "4.2026",
+              "pagina_pdf": 57,
+              "paginas_pdf": [
+                57
+              ],
+              "secao": "PANC-G 5/13",
+              "trecho": "Daraxonrasib",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "c4d2c8507e8c544e4a4c9c26cbf2b10dd42b6d5b13c3cf2900a4bf0da093058e"
+            },
+            {
+              "fonte_id": "nccn-99f9aaf4199e",
+              "edicao": "4.2026",
+              "pagina_pdf": 58,
+              "paginas_pdf": [
+                58
+              ],
+              "secao": "PANC-G 6/13",
+              "trecho": "Daraxonrasib",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "c4d2c8507e8c544e4a4c9c26cbf2b10dd42b6d5b13c3cf2900a4bf0da093058e"
+            },
+            {
+              "fonte_id": "nccn-99f9aaf4199e",
+              "edicao": "4.2026",
+              "pagina_pdf": 60,
+              "paginas_pdf": [
+                60
+              ],
+              "secao": "PANC-G 8/13",
+              "trecho": "Daraxonrasib",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "c4d2c8507e8c544e4a4c9c26cbf2b10dd42b6d5b13c3cf2900a4bf0da093058e"
+            },
+            {
+              "fonte_id": "nccn-99f9aaf4199e",
+              "edicao": "4.2026",
+              "pagina_pdf": 61,
+              "paginas_pdf": [
+                61
+              ],
+              "secao": "PANC-G 9/13",
+              "trecho": "Daraxonrasib",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "c4d2c8507e8c544e4a4c9c26cbf2b10dd42b6d5b13c3cf2900a4bf0da093058e"
+            },
+            {
+              "fonte_id": "nccn-99f9aaf4199e",
+              "edicao": "4.2026",
+              "pagina_pdf": 62,
+              "paginas_pdf": [
+                62
+              ],
+              "secao": "PANC-G 10/13",
+              "trecho": "Daraxonrasib",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "c4d2c8507e8c544e4a4c9c26cbf2b10dd42b6d5b13c3cf2900a4bf0da093058e"
+            }
+          ]
+        }
+      },
+      {
+        "relacao_id": "relacao-nccn-20261017-pancreas-zenocutuzumabe",
+        "tipo": "CONDICOES_PARA_APRESENTACAO_DOCUMENTAL",
+        "destino_item_ref": "nccn-20261017-pancreas-zenocutuzumabe",
+        "criterios_extraidos": [
+          "Adenocarcinoma pancreático com fusão NRG1",
+          "Progressão durante/após terapia sistêmica",
+          "PS 0–1 ouPS2 nos ramos descritos"
+        ],
+        "origem_condicoes": "FONTE_NCCN_CITADA",
+        "origem_mapeamento": "PROPOSTA_DE_MAPEAMENTO",
+        "executavel": false,
+        "estado": "A_CONFERIR",
+        "dados_ausentes": "MANTER_INDETERMINADO",
+        "dados_conflitantes": "MANTER_CONFLITO",
+        "efeito": "APRESENTAR_CONTEUDO_PARA_REVISAO; NAO PRESCREVER",
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+            "criterios_extraidos": [
+              "Adenocarcinoma pancreático",
+              "Fusão NRG1",
+              "Progressão durante/após terapia sistêmica"
+            ]
+          },
+          {
+            "revisao": "2026-10-17-nccn-final-documental",
+            "criterios_extraidos": [
+              "Adenocarcinoma pancreático com fusão NRG1",
+              "Progressão durante/após terapia sistêmica",
+              "PS0–1 ouPS2 nos ramos descritos"
+            ]
+          }
+        ],
+        "fontes_por_campo": {
+          "criterios_extraidos": [
+            {
+              "fonte_id": "nccn-99f9aaf4199e",
+              "edicao": "4.2026",
+              "pagina_pdf": 60,
+              "paginas_pdf": [
+                60
+              ],
+              "secao": "PANC-G 8/13, nota s",
+              "trecho": "Zenocutuzumab-zbco (if NRG1 gene fusion-positive)",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "c4d2c8507e8c544e4a4c9c26cbf2b10dd42b6d5b13c3cf2900a4bf0da093058e"
+            },
+            {
+              "fonte_id": "nccn-99f9aaf4199e",
+              "edicao": "4.2026",
+              "pagina_pdf": 61,
+              "paginas_pdf": [
+                61
+              ],
+              "secao": "PANC-G 9/13",
+              "trecho": "Zenocutuzumab-zbco",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "c4d2c8507e8c544e4a4c9c26cbf2b10dd42b6d5b13c3cf2900a4bf0da093058e"
+            },
+            {
+              "fonte_id": "nccn-99f9aaf4199e",
+              "edicao": "4.2026",
+              "pagina_pdf": 62,
+              "paginas_pdf": [
+                62
+              ],
+              "secao": "PANC-G 10/13, contexto PS3",
+              "trecho": "Poor PS 3",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "c4d2c8507e8c544e4a4c9c26cbf2b10dd42b6d5b13c3cf2900a4bf0da093058e"
+            }
+          ]
+        }
+      },
+      {
+        "relacao_id": "relacao-nccn-20261017-pancreas-rucaparibe",
+        "tipo": "CONDICOES_PARA_APRESENTACAO_DOCUMENTAL",
+        "destino_item_ref": "nccn-20261017-pancreas-rucaparibe",
+        "criterios_extraidos": [
+          "Doença metastática",
+          "Performance boa/intermediária",
+          "BRCA1/2 ou PALB2",
+          "Sem progressão na platina"
+        ],
+        "origem_condicoes": "FONTE_NCCN_CITADA",
+        "origem_mapeamento": "PROPOSTA_DE_MAPEAMENTO",
+        "executavel": false,
+        "estado": "A_CONFERIR",
+        "dados_ausentes": "MANTER_INDETERMINADO",
+        "dados_conflitantes": "MANTER_CONFLITO",
+        "efeito": "APRESENTAR_CONTEUDO_PARA_REVISAO; NAO PRESCREVER"
+      },
+      {
+        "relacao_id": "relacao-nccn-20261017-pancreas-manutencao",
+        "tipo": "CONDICOES_PARA_APRESENTACAO_DOCUMENTAL",
+        "destino_item_ref": "nccn-20261017-pancreas-manutencao",
+        "criterios_extraidos": [
+          "Doença metastática com resposta/estabilidade após 4–6 meses",
+          "Performance boa/intermediária",
+          "Regime de primeira linha e toxicidades identificados"
+        ],
+        "origem_condicoes": "FONTE_NCCN_CITADA",
+        "origem_mapeamento": "PROPOSTA_DE_MAPEAMENTO",
+        "executavel": false,
+        "estado": "A_CONFERIR",
+        "dados_ausentes": "MANTER_INDETERMINADO",
+        "dados_conflitantes": "MANTER_CONFLITO",
+        "efeito": "APRESENTAR_CONTEUDO_PARA_REVISAO; NAO PRESCREVER",
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+            "criterios_extraidos": [
+              "Resposta/estabilidade após 4–6 meses de quimioterapia",
+              "Conferir toxicidade e tratamento anterior"
+            ]
+          },
+          {
+            "revisao": "2026-10-17-nccn-final-documental",
+            "criterios_extraidos": [
+              "Doença metastática com resposta/estabilidade após4–6meses",
+              "Performance boa/intermediária",
+              "Regime de primeira linha e toxicidades identificados"
+            ]
+          }
+        ],
+        "fontes_por_campo": {
+          "criterios_extraidos": [
+            {
+              "fonte_id": "nccn-99f9aaf4199e",
+              "edicao": "4.2026",
+              "pagina_pdf": 59,
+              "paginas_pdf": [
+                59
+              ],
+              "secao": "PANC-G 7/13",
+              "trecho": "Maintenance Therapy for Good/Intermediate PS",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "c4d2c8507e8c544e4a4c9c26cbf2b10dd42b6d5b13c3cf2900a4bf0da093058e"
+            },
+            {
+              "fonte_id": "nccn-99f9aaf4199e",
+              "edicao": "4.2026",
+              "pagina_pdf": 59,
+              "paginas_pdf": [
+                59
+              ],
+              "secao": "PANC-G 7/13, notas m/n",
+              "trecho": "Oxaliplatin-related progressive neuropathy",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "c4d2c8507e8c544e4a4c9c26cbf2b10dd42b6d5b13c3cf2900a4bf0da093058e"
+            },
+            {
+              "fonte_id": "nccn-99f9aaf4199e",
+              "edicao": "4.2026",
+              "pagina_pdf": 59,
+              "paginas_pdf": [
+                59
+              ],
+              "secao": "PANC-G 7/13, nota n",
+              "trecho": "when GI toxicity is a concern",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "c4d2c8507e8c544e4a4c9c26cbf2b10dd42b6d5b13c3cf2900a4bf0da093058e"
+            }
+          ]
+        }
+      }
+    ],
+    "conflitos": [],
+    "conflitos_legados_ref": "/conflitos",
+    "pendencias": [
+      {
+        "id": "revisao-clinica",
+        "estado": "ABERTA",
+        "descricao": "Conferir cada acréscimo, condições, fontes, doses, interações e suporte antes de uso clínico."
+      },
+      {
+        "id": "acesso-brasileiro",
+        "estado": "ABERTA",
+        "descricao": "NCCN não comprova Anvisa, Conitec, PCDT/DDT, SIGTAP/APAC, cobertura privada ou acesso institucional."
+      },
+      {
+        "id": "cobertura-nccn",
+        "estado": "PARCIAL_POR_DELTA",
+        "descricao": "Leitura dirigida das páginas citadas; não há alegação de extração integral da diretriz."
+      }
+    ],
+    "pendencias_legadas_ref": "/pendencias",
+    "itens_adicionais_a_classificar": [
+      {
+        "origem_ref": "/header",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/status",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/consultavel",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/alerta",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/substitui",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/identidade",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/pendencias",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/conflitos",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/curadoria",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/correcoes",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      }
+    ],
+    "mapa_de_cobertura": [
+      {
+        "origem_json_pointer": "/header",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "ea2628a0db605d934d51189025cdf08b6b8bf3793b4b7a41c80d1901bf1cb8cb",
+        "valores_folha": 9
+      },
+      {
+        "origem_json_pointer": "/status",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "04635ca3844c66b19ebbf49bf9ff60fe851d6ce89597d23e6a970f1dc3927289",
+        "valores_folha": 1
+      },
+      {
+        "origem_json_pointer": "/consultavel",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b",
+        "valores_folha": 1
+      },
+      {
+        "origem_json_pointer": "/alerta",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "valores_folha": 1
+      },
+      {
+        "origem_json_pointer": "/substitui",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "valores_folha": 1
+      },
+      {
+        "origem_json_pointer": "/identidade",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "e50282b4235eae97b66e8c86984a6bfb55902dc97698b0f2f609a6a1734728f7",
+        "valores_folha": 16
+      },
+      {
+        "origem_json_pointer": "/diagnostico",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "3b3e8927316f85fc4b2dfabb3b1f14d5ddd7436065f161e4e2a99c5a265e6a91",
+        "valores_folha": 171
+      },
+      {
+        "origem_json_pointer": "/estadiamento",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "1a905464e2a118035b1ee941bf8a28f164741e7bb76860e0c039f73ea5a3bd35",
+        "valores_folha": 157
+      },
+      {
+        "origem_json_pointer": "/tratamento",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "7178cc30e8cefdd225c51f08cf36e5ac2f9adcb2e20087f5f51dfef65e4ca6fa",
+        "valores_folha": 1128
+      },
+      {
+        "origem_json_pointer": "/ligacoes",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "7d1a0c3f106cc6bd417e516147d4fbad825979e6c449209d10e79fc81ce4043e",
+        "valores_folha": 93
+      },
+      {
+        "origem_json_pointer": "/pendencias",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "570b5f30c88e038bd15b91c7573714d260732c443909616fd2d523751b29ed21",
+        "valores_folha": 40
+      },
+      {
+        "origem_json_pointer": "/conflitos",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "1369cb3a69b047670fd06560eeb6f50cf5574057e938a33f35375244dc2b6986",
+        "valores_folha": 46
+      },
+      {
+        "origem_json_pointer": "/curadoria",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "957e531db4595033a0b6717ef6c16e9d11703205e060895f116c5a4e72fe6741",
+        "valores_folha": 14
+      },
+      {
+        "origem_json_pointer": "/correcoes",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "b7edd394f9e9b790af037d9077e12194824bb0bdfd6b18c417daefe7bf3bcedc",
+        "valores_folha": 4
+      }
+    ],
+    "reconciliacao_com_versao_anterior": {
+      "modo": "ADITIVO",
+      "originais_removidos": 0,
+      "originais_alterados": 0,
+      "contagens_preservadas": {
+        "protocolos": 19,
+        "ensaios": 9,
+        "cenarios_identidade": 4,
+        "cenarios_tratamento": 4,
+        "seguimento": 2,
+        "conflitos": 3,
+        "pendencias": 8
+      }
+    },
+    "relatorio_de_completude": {
+      "estado": "INCOMPLETA_PARA_DIRETRIZ_INTEGRAL",
+      "preservacao_legado": "INTEGRAL",
+      "delta_itens": 4,
+      "normalizacao_legado": "INDEXACAO_POR_REFERENCIA; NAO REEXTRACAO CLINICA",
+      "posologias": "SOMENTE AS EXPLICITAMENTE EXTRAIDAS; RESTANTES PENDENTES",
+      "sem_fato_paciente": true,
+      "sem_aprovacao_inferida": true
+    },
+    "auditoria_33_pendentes": [
+      {
+        "item_id": "nccn-20261017-pancreas-daraxonrasibe",
+        "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+        "resultado": "CORRIGIDO_ESCOPO_OU_COMPLETUDE",
+        "fundamento": "O item generalizava categorias por linha/performance e se apoiava principalmente em Updates; é necessário registrar os ramos das tabelas.",
+        "fontes": [
+          {
+            "fonte_id": "nccn-99f9aaf4199e",
+            "edicao": "4.2026",
+            "pagina_pdf": 57,
+            "paginas_pdf": [
+              57
+            ],
+            "secao": "PANC-G 5/13",
+            "trecho": "Daraxonrasib",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "c4d2c8507e8c544e4a4c9c26cbf2b10dd42b6d5b13c3cf2900a4bf0da093058e"
+          },
+          {
+            "fonte_id": "nccn-99f9aaf4199e",
+            "edicao": "4.2026",
+            "pagina_pdf": 58,
+            "paginas_pdf": [
+              58
+            ],
+            "secao": "PANC-G 6/13",
+            "trecho": "Daraxonrasib",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "c4d2c8507e8c544e4a4c9c26cbf2b10dd42b6d5b13c3cf2900a4bf0da093058e"
+          },
+          {
+            "fonte_id": "nccn-99f9aaf4199e",
+            "edicao": "4.2026",
+            "pagina_pdf": 60,
+            "paginas_pdf": [
+              60
+            ],
+            "secao": "PANC-G 8/13",
+            "trecho": "Daraxonrasib",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "c4d2c8507e8c544e4a4c9c26cbf2b10dd42b6d5b13c3cf2900a4bf0da093058e"
+          },
+          {
+            "fonte_id": "nccn-99f9aaf4199e",
+            "edicao": "4.2026",
+            "pagina_pdf": 61,
+            "paginas_pdf": [
+              61
+            ],
+            "secao": "PANC-G 9/13",
+            "trecho": "Daraxonrasib",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "c4d2c8507e8c544e4a4c9c26cbf2b10dd42b6d5b13c3cf2900a4bf0da093058e"
+          },
+          {
+            "fonte_id": "nccn-99f9aaf4199e",
+            "edicao": "4.2026",
+            "pagina_pdf": 62,
+            "paginas_pdf": [
+              62
+            ],
+            "secao": "PANC-G 10/13",
+            "trecho": "Daraxonrasib",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "c4d2c8507e8c544e4a4c9c26cbf2b10dd42b6d5b13c3cf2900a4bf0da093058e"
+          }
+        ],
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "limite": "Conferência das afirmações deste item; não extração integral de posologia, diretriz ou acesso brasileiro.",
+        "sha256_item_antes": "4e1427924be161a51b59dcfb605e1a1a5f14e3baa4d419ae614c98966b2f0b29"
+      },
+      {
+        "item_id": "nccn-20261017-pancreas-zenocutuzumabe",
+        "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+        "resultado": "CORRIGIDO_ESCOPO_OU_COMPLETUDE",
+        "fundamento": "O critério de performance estava omitido: a opção aparece nos ramos PS0–1 ePS2, não no ramo PS3 examinado.",
+        "fontes": [
+          {
+            "fonte_id": "nccn-99f9aaf4199e",
+            "edicao": "4.2026",
+            "pagina_pdf": 60,
+            "paginas_pdf": [
+              60
+            ],
+            "secao": "PANC-G 8/13, nota s",
+            "trecho": "Zenocutuzumab-zbco (if NRG1 gene fusion-positive)",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "c4d2c8507e8c544e4a4c9c26cbf2b10dd42b6d5b13c3cf2900a4bf0da093058e"
+          },
+          {
+            "fonte_id": "nccn-99f9aaf4199e",
+            "edicao": "4.2026",
+            "pagina_pdf": 61,
+            "paginas_pdf": [
+              61
+            ],
+            "secao": "PANC-G 9/13",
+            "trecho": "Zenocutuzumab-zbco",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "c4d2c8507e8c544e4a4c9c26cbf2b10dd42b6d5b13c3cf2900a4bf0da093058e"
+          },
+          {
+            "fonte_id": "nccn-99f9aaf4199e",
+            "edicao": "4.2026",
+            "pagina_pdf": 62,
+            "paginas_pdf": [
+              62
+            ],
+            "secao": "PANC-G 10/13, contexto PS3",
+            "trecho": "Poor PS 3",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "c4d2c8507e8c544e4a4c9c26cbf2b10dd42b6d5b13c3cf2900a4bf0da093058e"
+          }
+        ],
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "limite": "Conferência das afirmações deste item; não extração integral de posologia, diretriz ou acesso brasileiro.",
+        "sha256_item_antes": "b09a83794e20bcbbdddbe2fcf652235da8961079734f243b796b4146a66efa94"
+      },
+      {
+        "item_id": "nccn-20261017-pancreas-rucaparibe",
+        "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+        "resultado": "CONFIRMADO_SEM_REESCRITA",
+        "fundamento": "População de manutenção, alterações germinativas/somáticas e ausência de progressão à última platina estão corretamente preservadas.",
+        "fontes": [
+          {
+            "fonte_id": "nccn-99f9aaf4199e",
+            "edicao": "4.2026",
+            "pagina_pdf": 59,
+            "paginas_pdf": [
+              59
+            ],
+            "secao": "PANC-G 7/13, notas o/p",
+            "trecho": "Rucaparib (for germline or somatic",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "c4d2c8507e8c544e4a4c9c26cbf2b10dd42b6d5b13c3cf2900a4bf0da093058e"
+          },
+          {
+            "fonte_id": "nccn-99f9aaf4199e",
+            "edicao": "4.2026",
+            "pagina_pdf": 59,
+            "paginas_pdf": [
+              59
+            ],
+            "secao": "PANC-G 7/13, nota o",
+            "trecho": "most recent platinum-based chemotherapy",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "c4d2c8507e8c544e4a4c9c26cbf2b10dd42b6d5b13c3cf2900a4bf0da093058e"
+          }
+        ],
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "limite": "Conferência das afirmações deste item; não extração integral de posologia, diretriz ou acesso brasileiro.",
+        "sha256_item_antes": "62439ec15fdef7f5aab9e4c1a20259b49312b689d0f3703158545c455f035d0a"
+      },
+      {
+        "item_id": "nccn-20261017-pancreas-manutencao",
+        "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+        "resultado": "CORRIGIDO_ESCOPO_OU_COMPLETUDE",
+        "fundamento": "Faltava a diferenciação concreta de preferência e critérios de escolha entre variantes após FOLFIRINOX e após gencitabina/nab-paclitaxel.",
+        "fontes": [
+          {
+            "fonte_id": "nccn-99f9aaf4199e",
+            "edicao": "4.2026",
+            "pagina_pdf": 59,
+            "paginas_pdf": [
+              59
+            ],
+            "secao": "PANC-G 7/13",
+            "trecho": "Maintenance Therapy for Good/Intermediate PS",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "c4d2c8507e8c544e4a4c9c26cbf2b10dd42b6d5b13c3cf2900a4bf0da093058e"
+          },
+          {
+            "fonte_id": "nccn-99f9aaf4199e",
+            "edicao": "4.2026",
+            "pagina_pdf": 59,
+            "paginas_pdf": [
+              59
+            ],
+            "secao": "PANC-G 7/13, notas m/n",
+            "trecho": "Oxaliplatin-related progressive neuropathy",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "c4d2c8507e8c544e4a4c9c26cbf2b10dd42b6d5b13c3cf2900a4bf0da093058e"
+          },
+          {
+            "fonte_id": "nccn-99f9aaf4199e",
+            "edicao": "4.2026",
+            "pagina_pdf": 59,
+            "paginas_pdf": [
+              59
+            ],
+            "secao": "PANC-G 7/13, nota n",
+            "trecho": "when GI toxicity is a concern",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "c4d2c8507e8c544e4a4c9c26cbf2b10dd42b6d5b13c3cf2900a4bf0da093058e"
+          }
+        ],
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "limite": "Conferência das afirmações deste item; não extração integral de posologia, diretriz ou acesso brasileiro.",
+        "sha256_item_antes": "82139cc52332bba718be986f9a2f451f43dcda187c2634a168a2856dcc4bc25e"
+      }
+    ],
+    "revisoes_auditoria": [
+      {
+        "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+        "escopo": "APENAS_33_ITENS_PENDENTES",
+        "legado_modificado": false,
+        "aprovacao_clinica": null,
+        "limites": "Sem leitura integral da pasta, sem completar doses, sem checagem de acesso ou autenticidade externa.",
+        "itens_ref": "/tumor_pack_universal/auditoria_33_pendentes",
+        "sha256_itens": "256b5783c4266628f16028cdbb65bc6d9f59d799eb94eee6627457f0a4186704"
+      }
+    ],
+    "fechamento_documental": [
+      {
+        "revisao": "2026-10-17-nccn-final-documental",
+        "estado": "CORRECOES_DOCUMENTAIS_APLICADAS",
+        "ajustes_textuais": 6,
+        "deduplicacoes_por_referencia": [
+          "auditoria_33_pendentes"
+        ],
+        "aprovacao_clinica": null,
+        "legado_alterado": false
+      }
+    ]
+  }
 }

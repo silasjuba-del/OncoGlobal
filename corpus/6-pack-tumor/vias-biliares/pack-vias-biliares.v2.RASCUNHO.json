@@ -2027,5 +2027,3942 @@
       "achado": "Codex 2026-10-11 (veredito entrega final): faturamento molecular não demonstrado",
       "acao": "1 vínculos rebaixados a catalogoIdCandidato"
     }
-  ]
+  ],
+  "tumor_pack_universal": {
+    "schema_documental": "tumor-pack-universal@1",
+    "metadados": {
+      "revisao_documental": "2026-10-17-nccn-final-documental",
+      "versao": "1.3.0",
+      "data": "2026-10-17",
+      "autor_extracao": "Codex",
+      "estado": "RASCUNHO",
+      "aprovacao_clinica": null,
+      "escopo": "CAMADA_ADITIVA_UNIVERSAL_E_DELTA_DOCUMENTAL_NCCN",
+      "base_legada": {
+        "arquivo": "corpus/6-pack-tumor/vias-biliares/pack-vias-biliares.v2.RASCUNHO.json",
+        "commit": "2c0991d",
+        "versao": "2.0.0",
+        "sha256_bytes": "6882ef8c31ae0dc50e4af092cf7cf518f499a084b4269114b078748e2a2ddd62",
+        "sha256_semantico": "cfcfd3260cc5e86c4d8b2cf147eb877cb63e222f7a973ebfa468bd914b8f1ff3"
+      },
+      "nota_versao": "Camada universal 1.3.0; header identifica o legado preservado. Fechamento documental, sem aprovação clínica ou ativação.",
+      "integra_runtime": false,
+      "gera_conduta": false,
+      "historico_revisoes": [
+        {
+          "revisao_documental": "2026-10-17-nccn-delta-1",
+          "versao": "1.0.0",
+          "data": "2026-10-17",
+          "autor_extracao": "Codex",
+          "estado": "RASCUNHO",
+          "aprovacao_clinica": null,
+          "escopo": "CAMADA_ADITIVA_UNIVERSAL_E_DELTA_DOCUMENTAL_NCCN",
+          "base_legada": {
+            "arquivo": "corpus/6-pack-tumor/vias-biliares/pack-vias-biliares.v2.RASCUNHO.json",
+            "commit": "2c0991d",
+            "versao": "2.0.0",
+            "sha256_bytes": "6882ef8c31ae0dc50e4af092cf7cf518f499a084b4269114b078748e2a2ddd62",
+            "sha256_semantico": "cfcfd3260cc5e86c4d8b2cf147eb877cb63e222f7a973ebfa468bd914b8f1ff3"
+          },
+          "nota_versao": "header.versao identifica o legado intacto; esta extensão possui revisão própria. Não reutilizar aprovação/hashes antigos para o conjunto alterado.",
+          "integra_runtime": false,
+          "gera_conduta": false
+        },
+        {
+          "revisao_documental": "2026-10-17-nccn-delta-3-auditoria33",
+          "versao": "1.2.0",
+          "data": "2026-10-17",
+          "autor_extracao": "Codex",
+          "estado": "RASCUNHO",
+          "aprovacao_clinica": null,
+          "escopo": "CAMADA_ADITIVA_UNIVERSAL_E_DELTA_DOCUMENTAL_NCCN",
+          "base_legada": {
+            "arquivo": "corpus/6-pack-tumor/vias-biliares/pack-vias-biliares.v2.RASCUNHO.json",
+            "commit": "2c0991d",
+            "versao": "2.0.0",
+            "sha256_bytes": "6882ef8c31ae0dc50e4af092cf7cf518f499a084b4269114b078748e2a2ddd62",
+            "sha256_semantico": "cfcfd3260cc5e86c4d8b2cf147eb877cb63e222f7a973ebfa468bd914b8f1ff3"
+          },
+          "nota_versao": "Revisão da camada universal1.2.0; header legado preservado. Auditoria documental dos33 itens, sem aprovação clínica.",
+          "integra_runtime": false,
+          "gera_conduta": false,
+          "historico_revisoes": [
+            {
+              "revisao_documental": "2026-10-17-nccn-delta-1",
+              "versao": "1.0.0",
+              "data": "2026-10-17",
+              "autor_extracao": "Codex",
+              "estado": "RASCUNHO",
+              "aprovacao_clinica": null,
+              "escopo": "CAMADA_ADITIVA_UNIVERSAL_E_DELTA_DOCUMENTAL_NCCN",
+              "base_legada": {
+                "arquivo": "corpus/6-pack-tumor/vias-biliares/pack-vias-biliares.v2.RASCUNHO.json",
+                "commit": "2c0991d",
+                "versao": "2.0.0",
+                "sha256_bytes": "6882ef8c31ae0dc50e4af092cf7cf518f499a084b4269114b078748e2a2ddd62",
+                "sha256_semantico": "cfcfd3260cc5e86c4d8b2cf147eb877cb63e222f7a973ebfa468bd914b8f1ff3"
+              },
+              "nota_versao": "header.versao identifica o legado intacto; esta extensão possui revisão própria. Não reutilizar aprovação/hashes antigos para o conjunto alterado.",
+              "integra_runtime": false,
+              "gera_conduta": false
+            }
+          ]
+        }
+      ]
+    },
+    "identidade_ref": "/identidade",
+    "dominios": [
+      {
+        "dominio_id": 1,
+        "nome": "Diagnóstico e patologia",
+        "itens_legados_refs": [
+          "legado-115edbcc74892f4b",
+          "legado-0f0d10d8f76a4d86",
+          "legado-5fdbb3dbe4a1c316",
+          "legado-e280c037282dfc04",
+          "legado-7c30d425e219e9db"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 2,
+        "nome": "Estadiamento, extensão e risco",
+        "itens_legados_refs": [
+          "legado-14b70ed38bf74741",
+          "legado-a04bde45a7c682e9",
+          "legado-2080325ba075e49e",
+          "legado-0ee81c756e9e0f7f",
+          "legado-db69daf345891380",
+          "legado-3ff9ea3c4af293a2",
+          "legado-aeca3bcbd533e4d7",
+          "legado-1a4bd3a4a8dc035e",
+          "legado-4e7e375bf2db77f7",
+          "legado-0726a65c079d5ad3",
+          "legado-3b3a13820bcd65a4",
+          "legado-f6812b977287b8b0"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 3,
+        "nome": "Biomarcadores e farmacogenética",
+        "itens_legados_refs": [
+          "legado-b63669fb08712afd",
+          "legado-96898caaceb10c6a",
+          "legado-6d114fa722c99d4c",
+          "legado-8de1ec6d6c511c9b",
+          "legado-c8354e56d81465c4",
+          "legado-4db3e4a9b77ab6b6",
+          "legado-3d4319943b9d683a",
+          "legado-ab18824a77aa1ae6",
+          "legado-eae579ef694b6f2c",
+          "legado-276a7e373be91a92",
+          "legado-74d52ce924c16278"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 4,
+        "nome": "Exames e requisitos documentais",
+        "itens_legados_refs": [
+          "legado-5f01a40aca27c044",
+          "legado-5baeb9b7561a07ec",
+          "legado-e11e5a10005c839b",
+          "legado-33af2784b534a78c",
+          "legado-fd73bebb23b611c4",
+          "legado-5f4a5cfea4ed4081",
+          "legado-b1182ffcaa354ae2",
+          "legado-07f0c073c8389d5e",
+          "legado-a0cfe2ca9c154a4d",
+          "legado-8c2d537c73079a18",
+          "legado-8af974c374735f4d",
+          "legado-e211db3f5e518ea4",
+          "legado-6720d3ff4aff8ae9",
+          "legado-a782a726986b6c6d",
+          "legado-fb48745464e95a80",
+          "legado-c9d99e5073df0c91",
+          "legado-89db3b6ec657bc2a",
+          "legado-149b311ddf6d27a8",
+          "legado-07c172dc2f84b925",
+          "legado-2fd0d1e6d11527a5",
+          "legado-da1f9039d640243a",
+          "legado-b0fdb39df9b5d721",
+          "legado-7e17c6b9dde4b04b",
+          "legado-8d55e35e37b5b69b",
+          "legado-09a2211efe3c4941",
+          "legado-78de66dfc93f7a47",
+          "legado-c45d2d3f45e9a84c",
+          "legado-c016f102626f2c6c",
+          "legado-8fdb0d8fca2e2867",
+          "legado-df6d2fbc879fd16e",
+          "legado-0f9299cb90be33fa",
+          "legado-6d89e4dddb1ce90d",
+          "legado-f5be3dfb88097e19",
+          "legado-9c15beefe3667098",
+          "legado-5b33205a35a8ccfa",
+          "legado-d1d5ca2b19d910e8"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 5,
+        "nome": "Avaliação antes do tratamento",
+        "itens_legados_refs": [],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "NAO_ESTRUTURADO_NESTA_RODADA",
+        "observacao": "Ausência de referências não significa não aplicabilidade; textos dentro de outros itens permanecem preservados."
+      },
+      {
+        "dominio_id": 6,
+        "nome": "Tratamento e protocolos",
+        "itens_legados_refs": [
+          "legado-1693ad25f1751558",
+          "legado-2103b4d5dc1340dc",
+          "legado-6242e3fc243e6fbc",
+          "legado-37792e0d3af15b0d",
+          "legado-f251739f9a4d0c7d",
+          "legado-490ac6957e64301f",
+          "legado-e034cd80837c360e",
+          "legado-701b490e319d69dd",
+          "legado-7595c39a23ac2976",
+          "legado-8407037beece78c5",
+          "legado-4b8a492f3c9068c3",
+          "legado-7da107bfc4ce20b3",
+          "legado-1357ee4fc716a48e",
+          "legado-e54aaca514ffe246",
+          "legado-6ea2e98a20cd013d",
+          "legado-93a7d27abc301773",
+          "legado-e954d0c7b3064f8f",
+          "legado-de2e96b5ca2281cb",
+          "legado-0c19f4d1aa70843f",
+          "legado-0021a581f33d76fb",
+          "legado-e626f2a97e482aec",
+          "legado-5b5e10483247ca0b",
+          "legado-b636ffa92d6588d5"
+        ],
+        "itens_nccn_refs": [
+          "nccn-20261017-vias-biliares-futibatinibe",
+          "nccn-20261017-vias-biliares-lirafugratinibe",
+          "nccn-20261017-vias-biliares-zanidatamabe",
+          "nccn-20261017-vias-biliares-tucatinibe",
+          "nccn-20261017-vias-biliares-pertuzumabe",
+          "nccn-20261017-vias-biliares-braf",
+          "nccn-20261017-vias-biliares-ret",
+          "nccn-20261017-vias-biliares-nrg1"
+        ],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 7,
+        "nome": "Segurança, interações e toxicidades",
+        "itens_legados_refs": [
+          "legado-7acfaa8f3dbb67c9",
+          "legado-93ce095b9dc6d176",
+          "legado-6840ffe2313fdc28",
+          "legado-0b1f509b4947ed9b",
+          "legado-f890bfdcbb2425d5",
+          "legado-5cb4216f9e0ba0f8",
+          "legado-033ce339c1d0148b",
+          "legado-f2350aca0b06086e",
+          "legado-d514adabcf0b0f7a",
+          "legado-882700074a771700",
+          "legado-3cb82dde2229dad5"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 8,
+        "nome": "Suporte e cuidados",
+        "itens_legados_refs": [
+          "legado-d93a4c03a72e7aa2",
+          "legado-3dc3b223926d9cc3"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 9,
+        "nome": "Avaliação de resposta e estado da doença",
+        "itens_legados_refs": [],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "NAO_ESTRUTURADO_NESTA_RODADA",
+        "observacao": "Ausência de referências não significa não aplicabilidade; textos dentro de outros itens permanecem preservados."
+      },
+      {
+        "dominio_id": 10,
+        "nome": "Seguimento e sobrevivência",
+        "itens_legados_refs": [
+          "legado-fb3c5e0cd3dc7d32",
+          "legado-455dc2ff71790c71",
+          "legado-f0ac177310b34a27",
+          "legado-cb110359ddf27756"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 11,
+        "nome": "Encaminhamentos e atuação multiprofissional",
+        "itens_legados_refs": [
+          "legado-55eb46a2e145ab68",
+          "legado-61dae9798ba31e44",
+          "legado-0042a62369a0e12a"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 12,
+        "nome": "Documentos e acesso assistencial",
+        "itens_legados_refs": [],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "NAO_ESTRUTURADO_NESTA_RODADA",
+        "observacao": "Ausência de referências não significa não aplicabilidade; textos dentro de outros itens permanecem preservados."
+      }
+    ],
+    "indice_itens_legados": [
+      {
+        "item_id": "legado-115edbcc74892f4b",
+        "origem_json_pointer": "/diagnostico/patologico/obtencao/0",
+        "sha256_conteudo": "f2c7318ada1b557fdf7215f97b450332450fa4643762affcd618aaec498e3052",
+        "nome": "/diagnostico/patologico/obtencao/0",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/obtencao/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-0f0d10d8f76a4d86",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/0",
+        "sha256_conteudo": "81a5de2e560feb67c8bcd8b775c1c75d94f1780b676b0cce81f98d4968555e81",
+        "nome": "sítio (iCCA, peri-hilar, distal, vesícula, ampola)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-5fdbb3dbe4a1c316",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/1",
+        "sha256_conteudo": "62cab2fa5ae1064bd813a75d495668301d95de79de1909301e14e7b67c0361f9",
+        "nome": "subtipo histológico na ampola (intestinal × pancreatobiliar/misto)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e280c037282dfc04",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/2",
+        "sha256_conteudo": "bb831d62169a311850514dcb4de93473975de91d5c7566869866c7978418aaf0",
+        "nome": "pT/pN AJCC 8ª por sítio",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-7c30d425e219e9db",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/3",
+        "sha256_conteudo": "cb4d9f3e75db12308f2331ed951b7cb4bac5ce14febc95216f3e535fefe01cd6",
+        "nome": "margens (R1 orienta RT adjuvante em eCCA/vesícula)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-14b70ed38bf74741",
+        "origem_json_pointer": "/estadiamento/sistema",
+        "sha256_conteudo": "d7dab6e16ae3278a0513466816530a61b1fcf4548c0e925655782b9ee09cf5ce",
+        "nome": "AJCC",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a04bde45a7c682e9",
+        "origem_json_pointer": "/estadiamento/edicao",
+        "sha256_conteudo": "7810c51e3ea723cd4c6c664f61166dbf98d5d3ac3e4c9725a134c04c0b1feca0",
+        "nome": "8ª edição — sistemas distintos para vesícula, colangiocarcinoma intra-hepático, peri-hilar e distal",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-2080325ba075e49e",
+        "origem_json_pointer": "/estadiamento/gruposConduta/0",
+        "sha256_conteudo": "cd9f5f5bd29457db3e12bcb52179adb52618a336898c8523e7f233e85a1bbf90",
+        "nome": "/estadiamento/gruposConduta/0",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-0ee81c756e9e0f7f",
+        "origem_json_pointer": "/estadiamento/gruposConduta/1",
+        "sha256_conteudo": "9840c45c4bf4427260b28dd4dbbddb3d33f51388e48fe1bc12a2e26c9e2cef3d",
+        "nome": "/estadiamento/gruposConduta/1",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-db69daf345891380",
+        "origem_json_pointer": "/estadiamento/gruposConduta/2",
+        "sha256_conteudo": "7c92fa68fd56213eb91b0a68b4da98773a3107ef2f0f152c66f060a9b76d602e",
+        "nome": "/estadiamento/gruposConduta/2",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-3ff9ea3c4af293a2",
+        "origem_json_pointer": "/estadiamento/gruposConduta/3",
+        "sha256_conteudo": "32baef36709f06e6fb18cc6c002cd84d2d0d696b73d53ce71c450881426c6cc0",
+        "nome": "/estadiamento/gruposConduta/3",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-aeca3bcbd533e4d7",
+        "origem_json_pointer": "/estadiamento/gruposConduta/4",
+        "sha256_conteudo": "6fdbe3535123e4104fe5081039b95c6b3720cd3f884457aa2e7791d725996e63",
+        "nome": "/estadiamento/gruposConduta/4",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-1a4bd3a4a8dc035e",
+        "origem_json_pointer": "/estadiamento/gruposConduta/5",
+        "sha256_conteudo": "8d675050dd22c440d542c9b823ba14ec4bca02eb85edde3291d3c79cd67a7672",
+        "nome": "/estadiamento/gruposConduta/5",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/5/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-4e7e375bf2db77f7",
+        "origem_json_pointer": "/estadiamento/gruposConduta/6",
+        "sha256_conteudo": "2e780f07a52afed78445d3ee5f173a537716709138b5c63929e5dd8c4c8fc025",
+        "nome": "/estadiamento/gruposConduta/6",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/6/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-0726a65c079d5ad3",
+        "origem_json_pointer": "/estadiamento/gruposConduta/7",
+        "sha256_conteudo": "6fc9411da4ebde97136ca4fa1dce28cfda5d232a0809612812542ca94d1019bb",
+        "nome": "/estadiamento/gruposConduta/7",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/7/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-3b3a13820bcd65a4",
+        "origem_json_pointer": "/estadiamento/gruposConduta/8",
+        "sha256_conteudo": "862edb3ebc9099f02e33b0f55d15c0b252f8270b5d6314944767c72f0ea8cca4",
+        "nome": "/estadiamento/gruposConduta/8",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/8/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-f6812b977287b8b0",
+        "origem_json_pointer": "/estadiamento/marcadores",
+        "sha256_conteudo": "384f9e8320f690923b26d767b7acada2eeee7243bc1cf88c427b628f9df3f0b8",
+        "nome": "/estadiamento/marcadores",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b63669fb08712afd",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/0",
+        "sha256_conteudo": "8b22c918d56d3b3bf96df9f5afddc3d6d4ead92f18b605e17508f7de3274b186",
+        "nome": "preferencialmente ao diagnóstico de doença avançada",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-96898caaceb10c6a",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/1",
+        "sha256_conteudo": "aac11298b8ea85835eacfbcd82464b32811a8c964cc42a95a772fd148db45e7a",
+        "nome": "doença avançada (sobretudo vesícula e extra-hepático)",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-6d114fa722c99d4c",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/2",
+        "sha256_conteudo": "ec053fa66ebd66a3a86dd9d1e2171b69890b36d5e3ea96e44239bd1fd1d7c538",
+        "nome": "doença avançada",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8de1ec6d6c511c9b",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/3",
+        "sha256_conteudo": "604f7ed0c3d7402fbb6f2077ab4b943aa409c7b51937478ddb9048f002b997c2",
+        "nome": "doença avançada",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-c8354e56d81465c4",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/4",
+        "sha256_conteudo": "77d94923e0567caa45c646516ca53e6bcd19db53feb1636a2764f72874dc65e2",
+        "nome": "candidatos a fluoropirimidina (inclui capecitabina adjuvante), se disponível",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-4db3e4a9b77ab6b6",
+        "origem_json_pointer": "/tratamento/biomarcadorTratamento/0",
+        "sha256_conteudo": "7ebe21c02a3aba7691563ae848c347f62f9d984e58c0b950cdddf8825e72873c",
+        "nome": "/tratamento/biomarcadorTratamento/0",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/biomarcadorTratamento/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-3d4319943b9d683a",
+        "origem_json_pointer": "/tratamento/biomarcadorTratamento/1",
+        "sha256_conteudo": "971ab98b885c198993ce26fdc46a5e50331a794e266ccea6c0a5e67d57b9eb27",
+        "nome": "/tratamento/biomarcadorTratamento/1",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/biomarcadorTratamento/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ab18824a77aa1ae6",
+        "origem_json_pointer": "/tratamento/biomarcadorTratamento/2",
+        "sha256_conteudo": "74d0b8f7ba36550dde01f611e178a449a81ebc81f3d7ec739c5bddc4f0efcd19",
+        "nome": "/tratamento/biomarcadorTratamento/2",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/biomarcadorTratamento/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-eae579ef694b6f2c",
+        "origem_json_pointer": "/tratamento/biomarcadorTratamento/3",
+        "sha256_conteudo": "b21564847a17e7766027163b2371cac58c8fc32f368cca1ba86143136eb44772",
+        "nome": "/tratamento/biomarcadorTratamento/3",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/biomarcadorTratamento/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-276a7e373be91a92",
+        "origem_json_pointer": "/tratamento/biomarcadorTratamento/4",
+        "sha256_conteudo": "a07d999243e4f4f6edc03cc3c20c25c3474408bfa7271abb98eaf9e10f24d40f",
+        "nome": "/tratamento/biomarcadorTratamento/4",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/biomarcadorTratamento/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-74d52ce924c16278",
+        "origem_json_pointer": "/tratamento/biomarcadorTratamento/5",
+        "sha256_conteudo": "7a28d445af80efc813c5a14c56e68dbeeb5eac73e2623d346db7496af06fe519",
+        "nome": "/tratamento/biomarcadorTratamento/5",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/biomarcadorTratamento/5/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-5f01a40aca27c044",
+        "origem_json_pointer": "/diagnostico/imagem/0",
+        "sha256_conteudo": "b973fb4c9758864349d124cc527e7ca7bd6ca3540609316cd8c9a4ba04b37d1a",
+        "nome": "TC de abdome",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-5baeb9b7561a07ec",
+        "origem_json_pointer": "/diagnostico/imagem/1",
+        "sha256_conteudo": "c1a72305cb0e52c7191c033b77f0c271d62bbaa593abbc7ada6155d26d2b143f",
+        "nome": "TC de tórax",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e11e5a10005c839b",
+        "origem_json_pointer": "/diagnostico/imagem/2",
+        "sha256_conteudo": "49b6641b9cb821c35d7584307d39a19637bf4f4b1856237ae50f288630926fa0",
+        "nome": "Colangiorressonância",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-33af2784b534a78c",
+        "origem_json_pointer": "/diagnostico/imagem/3",
+        "sha256_conteudo": "3f9b955aefeb69b1d09a6196711c853a00439d36529fbb6db53d0d1b5b930c68",
+        "nome": "RM de abdome",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-fd73bebb23b611c4",
+        "origem_json_pointer": "/diagnostico/imagem/4",
+        "sha256_conteudo": "f213d626a716d1bb01c7e1187eb85ec0ee78be90fa0cd262f1cd102cb392ae6e",
+        "nome": "PET/CT",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-5f4a5cfea4ed4081",
+        "origem_json_pointer": "/diagnostico/endoscopicos/0",
+        "sha256_conteudo": "dd98bc746272bdf80f19078c7c959eff6f0712dba2c2d0571ac61696a1b691ca",
+        "nome": "CPRE",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/endoscopicos/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b1182ffcaa354ae2",
+        "origem_json_pointer": "/estadiamento/exames/0",
+        "sha256_conteudo": "ec7bff092b5b7a2dde088a4e88fcdb8fc7104d61b428c0457447e7c1a6fd3c87",
+        "nome": "Hemograma",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-07f0c073c8389d5e",
+        "origem_json_pointer": "/estadiamento/exames/1",
+        "sha256_conteudo": "83b3f9bac0a8abb47b3aa152276d0fd4f7323cdd52320ab85b300635309c9a19",
+        "nome": "TGO (função hepática)",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a0cfe2ca9c154a4d",
+        "origem_json_pointer": "/estadiamento/exames/2",
+        "sha256_conteudo": "33745d9c25161bd1102a5a704294a11f3ee60a16c29da035af1a3e95a1d1f4d2",
+        "nome": "TGP (função hepática)",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8c2d537c73079a18",
+        "origem_json_pointer": "/estadiamento/exames/3",
+        "sha256_conteudo": "3f84ea68ce5071131316d07b7bcee3f1d1537eec70f0d1458d33fe7b92d0855e",
+        "nome": "Bilirrubinas (função hepática)",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8af974c374735f4d",
+        "origem_json_pointer": "/estadiamento/exames/4",
+        "sha256_conteudo": "a4fb81907951f3a4b2b5ae4c32cf9d172dc06b174b33c13e8ee31932b11b2651",
+        "nome": "Fosfatase alcalina (função hepática)",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e211db3f5e518ea4",
+        "origem_json_pointer": "/estadiamento/exames/5",
+        "sha256_conteudo": "0daf48d8bd4706c8ebd65799bfb67356638413115aa43d47dc23146f6510bbe2",
+        "nome": "Gama-GT (função hepática)",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/5/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-6720d3ff4aff8ae9",
+        "origem_json_pointer": "/estadiamento/exames/6",
+        "sha256_conteudo": "6946f85738aa436ced33fb8eaa8907dafda52188906e21880b430ee507927561",
+        "nome": "Creatinina (função renal)",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/6/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a782a726986b6c6d",
+        "origem_json_pointer": "/estadiamento/exames/7",
+        "sha256_conteudo": "3ccad6aacf0565b95a0e6d9c705902fee52892663ade3361c9f3fb5a05a1c6b2",
+        "nome": "Ureia (função renal)",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/7/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-fb48745464e95a80",
+        "origem_json_pointer": "/estadiamento/exames/8",
+        "sha256_conteudo": "0f09a9b6d27e5f5fef8801a35aa1cf5be06c9cc1af14e6d55a03d2fefdf92bc8",
+        "nome": "CA 19-9 (sem código SIGTAP; preferencialmente após normalizar bilirrubinas)",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/8/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-c9d99e5073df0c91",
+        "origem_json_pointer": "/estadiamento/exames/9",
+        "sha256_conteudo": "c15997566fcfc54a4cf0cf7e22dceba617f22b42f398edb0dec327b2ca4eb4a1",
+        "nome": "CEA",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/9/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-89db3b6ec657bc2a",
+        "origem_json_pointer": "/ligacoes/exames/0",
+        "sha256_conteudo": "00cac656db90cece9385c8c98f658accb5b7c1553202e6be466fa96d39aaf2b9",
+        "nome": "ANATOMOPATOLOGICO",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-149b311ddf6d27a8",
+        "origem_json_pointer": "/ligacoes/exames/1",
+        "sha256_conteudo": "5d85231af84b07a3159dc7b06efe241505fe0d9fa9e3cfc3ced2da4d9650052b",
+        "nome": "BILIRRUBINA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-07c172dc2f84b925",
+        "origem_json_pointer": "/ligacoes/exames/2",
+        "sha256_conteudo": "e746b116ee9fd98b2dfdb3f2106c1bbfa0dd7b927735411ebc15362c75797ef7",
+        "nome": "CA199",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-2fd0d1e6d11527a5",
+        "origem_json_pointer": "/ligacoes/exames/3",
+        "sha256_conteudo": "dbefcdbea8b8cfe6f040b0fea4e7a1c426fe4e467ca28e90dfe740279c332d18",
+        "nome": "CEA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-da1f9039d640243a",
+        "origem_json_pointer": "/ligacoes/exames/4",
+        "sha256_conteudo": "b13e732f3c5d84bca7059b36a87a3cfba975f7d8f7b78e476b54530e967fa14b",
+        "nome": "COLANGIO_RM",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b0fdb39df9b5d721",
+        "origem_json_pointer": "/ligacoes/exames/5",
+        "sha256_conteudo": "ab637feec7449cedbbb392373cadb41abfa3cab33839fb4df0af5003f57cd503",
+        "nome": "CPRE",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-7e17c6b9dde4b04b",
+        "origem_json_pointer": "/ligacoes/exames/6",
+        "sha256_conteudo": "58d8c3bbd157d0d9be5bf551553eb11e7e0c313ef1db12f06d7863faa42fbbfb",
+        "nome": "CREATININA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8d55e35e37b5b69b",
+        "origem_json_pointer": "/ligacoes/exames/7",
+        "sha256_conteudo": "ad1a3ef653b581c9aa616ab3bbab16ad7edca4cf6832cfc168f32389fc7cf658",
+        "nome": "FOSFATASE_ALCALINA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-09a2211efe3c4941",
+        "origem_json_pointer": "/ligacoes/exames/8",
+        "sha256_conteudo": "194a16126a69a5a7d0d5b4438614f5ee42930b662040f7a74d561e0f80ea9ddb",
+        "nome": "GAMA_GT",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-78de66dfc93f7a47",
+        "origem_json_pointer": "/ligacoes/exames/9",
+        "sha256_conteudo": "bf5e386b5411abfa4e5e12d1229575a6c7ec73dfaec6347d8959b27aac19aa86",
+        "nome": "HEMOGRAMA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-c45d2d3f45e9a84c",
+        "origem_json_pointer": "/ligacoes/exames/10",
+        "sha256_conteudo": "99a98b9d268e78a05608d792d2fad81f4e16f25b8a4f95da9f7decd91a23a0dc",
+        "nome": "IMUNOHISTOQUIMICA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-c016f102626f2c6c",
+        "origem_json_pointer": "/ligacoes/exames/11",
+        "sha256_conteudo": "3a955b75de510bd32be8d0f7de2bf070f27f223ac4c6a07cf68b35b7271856b2",
+        "nome": "PET_CT_FDG",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8fdb0d8fca2e2867",
+        "origem_json_pointer": "/ligacoes/exames/12",
+        "sha256_conteudo": "9c93ac77fd6457370871d33a5c58ba94777b0bb961f1f2eb5572fadaabd4df86",
+        "nome": "RM_ABDOMEN_SUPERIOR",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-df6d2fbc879fd16e",
+        "origem_json_pointer": "/ligacoes/exames/13",
+        "sha256_conteudo": "eea68f82f02592e6262514a154ff52ae85284765c1f48ab3b07cabb92ead209f",
+        "nome": "TC_ABDOMEN_SUPERIOR",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-0f9299cb90be33fa",
+        "origem_json_pointer": "/ligacoes/exames/14",
+        "sha256_conteudo": "147b97b900462813d8c6528cc01d88f8a5102936ee96ee4fb121f8a7b77f60b0",
+        "nome": "TC_TORAX",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-6d89e4dddb1ce90d",
+        "origem_json_pointer": "/ligacoes/exames/15",
+        "sha256_conteudo": "1c165f5403a7b90b63dbd46f6855431c8c1ada4519299d6c123bd630df5c529d",
+        "nome": "TGO",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-f5be3dfb88097e19",
+        "origem_json_pointer": "/ligacoes/exames/16",
+        "sha256_conteudo": "1739a80ab81e5bbef9460ae5f51087ed284845d8e31e606c2b564c7268c2cd15",
+        "nome": "TGP",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-9c15beefe3667098",
+        "origem_json_pointer": "/ligacoes/exames/17",
+        "sha256_conteudo": "a133b6c797048051de63b5b1f134afc70bc5a1444e49ac2e2721bd762204440d",
+        "nome": "UREIA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-5b33205a35a8ccfa",
+        "origem_json_pointer": "/ligacoes/exames/18",
+        "sha256_conteudo": "e587a7250a8633f1505dfb613cd4283458e6a8198d35f3721641c9ee3878017f",
+        "nome": "MOLECULAR_PCR_MUTACAO",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d1d5ca2b19d910e8",
+        "origem_json_pointer": "/ligacoes/exames/19",
+        "sha256_conteudo": "c77d15bd8da7582e2d6d9825573309affb51c04c30c7829dbea1953584a30ee9",
+        "nome": "SEQUENCIAMENTO_AMPLICON",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-1693ad25f1751558",
+        "origem_json_pointer": "/tratamento/cenarios/0",
+        "sha256_conteudo": "f57171d70779b11307d653436a7b4ff3f74a2c37af5e2d6f169c334adb20677a",
+        "nome": "localizado_ressecavel",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-2103b4d5dc1340dc",
+        "origem_json_pointer": "/tratamento/cenarios/1",
+        "sha256_conteudo": "f66d731cea2b4b2157766f43fc02ab92e2ee8bafd7a4c1c92229637f48222855",
+        "nome": "neoadjuvancia_selecionada",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-6242e3fc243e6fbc",
+        "origem_json_pointer": "/tratamento/cenarios/2",
+        "sha256_conteudo": "f4146fae5ad3b508ad3a5a46fbec8bce1ffbf51aead38d3e8ab5d6824a1b9d59",
+        "nome": "avancado",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-37792e0d3af15b0d",
+        "origem_json_pointer": "/tratamento/protocolos/0",
+        "sha256_conteudo": "28bd2096b066c92c0746ae745c3b5a940335bd80908080abc02a07b434b05393",
+        "nome": "Capecitabina adjuvante (BILCAP)",
+        "id_original": "vias-biliares-adjuvante-capecitabina",
+        "fonte_local_ref": "/tratamento/protocolos/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-f251739f9a4d0c7d",
+        "origem_json_pointer": "/tratamento/protocolos/1",
+        "sha256_conteudo": "1ac91142a96719444344005149ac8d5b39104d1c2eb741e59047aefaa0dccdb4",
+        "nome": "Gencitabina adjuvante (ampola de Vater; ESPAC-3)",
+        "id_original": "vias-biliares-adjuvante-gencitabina-ampola",
+        "fonte_local_ref": "/tratamento/protocolos/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-490ac6957e64301f",
+        "origem_json_pointer": "/tratamento/protocolos/2",
+        "sha256_conteudo": "a45f4078eb5af0340d853e36a3f9d8981d4c9827f9f7dcc9864cfe4623264ccd",
+        "nome": "Gencitabina + cisplatina + durvalumabe (TOPAZ-1)",
+        "id_original": "vias-biliares-1l-gemcis-durvalumabe",
+        "fonte_local_ref": "/tratamento/protocolos/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e034cd80837c360e",
+        "origem_json_pointer": "/tratamento/protocolos/3",
+        "sha256_conteudo": "7ef0bbdb6102a970a780f1e1d38f5b0dc43146cdf772f2f6d405c8cdf215bd3e",
+        "nome": "Gencitabina + cisplatina + pembrolizumabe (KEYNOTE-966)",
+        "id_original": "vias-biliares-1l-gemcis-pembrolizumabe",
+        "fonte_local_ref": "/tratamento/protocolos/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-701b490e319d69dd",
+        "origem_json_pointer": "/tratamento/protocolos/4",
+        "sha256_conteudo": "66928f681472829c41d8b0bfc6d4d3039ee1ada5c2c79d44ac531c96ecf1cf89",
+        "nome": "Gencitabina + cisplatina (ABC-02)",
+        "id_original": "vias-biliares-1l-gemcis",
+        "fonte_local_ref": "/tratamento/protocolos/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-7595c39a23ac2976",
+        "origem_json_pointer": "/tratamento/protocolos/5",
+        "sha256_conteudo": "5030ea469b09dae24134adb2e7b7f0ebd245630cfece52e22912fc8304b85970",
+        "nome": "Gencitabina + oxaliplatina (GEMOX)",
+        "id_original": "vias-biliares-1l-gemox",
+        "fonte_local_ref": "/tratamento/protocolos/5/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8407037beece78c5",
+        "origem_json_pointer": "/tratamento/protocolos/6",
+        "sha256_conteudo": "f240b5d148908bff975a57ff2d1879b5e8e1835c690bf3542a01dba4f05f402e",
+        "nome": "Gencitabina + carboplatina",
+        "id_original": "vias-biliares-1l-gem-carboplatina",
+        "fonte_local_ref": "/tratamento/protocolos/6/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-4b8a492f3c9068c3",
+        "origem_json_pointer": "/tratamento/protocolos/7",
+        "sha256_conteudo": "27620952584dfa59dd3e4235204149e9b09a6e96caa3f28f6fa688ab68a988c4",
+        "nome": "FOLFIRINOX (adenocarcinoma ampular avançado)",
+        "id_original": "vias-biliares-1l-folfirinox-ampola",
+        "fonte_local_ref": "/tratamento/protocolos/7/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-7da107bfc4ce20b3",
+        "origem_json_pointer": "/tratamento/protocolos/8",
+        "sha256_conteudo": "ecc9587b371093db98d29f552d1f79af87432379673d4605869d1fc51b1dce68",
+        "nome": "CAPOX (adenocarcinoma ampular avançado, intestinal)",
+        "id_original": "vias-biliares-1l-capox-ampola",
+        "fonte_local_ref": "/tratamento/protocolos/8/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-1357ee4fc716a48e",
+        "origem_json_pointer": "/tratamento/protocolos/9",
+        "sha256_conteudo": "21fd59cb0c87b15322a5a3185bc73478c7a7504ebf8a6dfca7462c7db6667324",
+        "nome": "FOLFOX (ABC-06) — 2ª linha sem alvo, ou ampular 1ª linha",
+        "id_original": "vias-biliares-2l-mfolfox",
+        "fonte_local_ref": "/tratamento/protocolos/9/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e54aaca514ffe246",
+        "origem_json_pointer": "/tratamento/protocolos/10",
+        "sha256_conteudo": "00fdd47cfe958568f3fe4badadaa1c8a732c1f4083cd93b2584dea73409bdb91",
+        "nome": "Ivosidenibe (ClarIDHy) — IDH1 mutado",
+        "id_original": "vias-biliares-2l-ivosidenibe",
+        "fonte_local_ref": "/tratamento/protocolos/10/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-6ea2e98a20cd013d",
+        "origem_json_pointer": "/tratamento/protocolos/11",
+        "sha256_conteudo": "06d75755b7cc4430a23fd5f68565833e8681ed5ab0368a07727dc4df16c2ad24",
+        "nome": "Pemigatinibe (FIGHT-202) — fusão/rearranjo FGFR2",
+        "id_original": "vias-biliares-2l-pemigatinibe",
+        "fonte_local_ref": "/tratamento/protocolos/11/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-93a7d27abc301773",
+        "origem_json_pointer": "/tratamento/protocolos/12",
+        "sha256_conteudo": "112eded675f59f7320aa3dba534c36c6c2e2840673e4be7afdc58e40bd066971",
+        "nome": "Trastuzumabe-deruxtecana — HER2+",
+        "id_original": "vias-biliares-2l-trastuzumabe-deruxtecana",
+        "fonte_local_ref": "/tratamento/protocolos/12/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e954d0c7b3064f8f",
+        "origem_json_pointer": "/tratamento/protocolos/13",
+        "sha256_conteudo": "0f62583cbb8099f958d96bebbd94faf5e01f9b7bfc15ce97ae7065f53e424f14",
+        "nome": "Pembrolizumabe — dMMR/MSI-H (ou TMB > 10) sem IO prévia",
+        "id_original": "vias-biliares-2l-pembrolizumabe",
+        "fonte_local_ref": "/tratamento/protocolos/13/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-de2e96b5ca2281cb",
+        "origem_json_pointer": "/tratamento/protocolos/14",
+        "sha256_conteudo": "377a8141772e00b7c8f667e8e50c5cac9ef681a5cf8dc6634810fa97b85781bf",
+        "nome": "Larotrectinibe — fusão NTRK",
+        "id_original": "vias-biliares-2l-larotrectinibe",
+        "fonte_local_ref": "/tratamento/protocolos/14/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-0c19f4d1aa70843f",
+        "origem_json_pointer": "/tratamento/cirurgia/0",
+        "sha256_conteudo": "f5c82bbf14dc8e6c0a44991b768e68ddd17e66fe084defb1e1ef982891a09269",
+        "nome": "/tratamento/cirurgia/0",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cirurgia/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-0021a581f33d76fb",
+        "origem_json_pointer": "/tratamento/cirurgia/1",
+        "sha256_conteudo": "401635e399b627eaf74c221a607fbebad26ad579d6e949b1e788a5dd16ec813d",
+        "nome": "/tratamento/cirurgia/1",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cirurgia/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e626f2a97e482aec",
+        "origem_json_pointer": "/tratamento/cirurgia/2",
+        "sha256_conteudo": "a910f6696eee1adde93fa9c2d5d9ae4b65e4430112e61f4cce011f5f0667a74c",
+        "nome": "/tratamento/cirurgia/2",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cirurgia/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-5b5e10483247ca0b",
+        "origem_json_pointer": "/tratamento/cirurgia/3",
+        "sha256_conteudo": "212cfd081dca80c939c641962a9d783ab92e21f01a0194f4a1b9958d8aa568ce",
+        "nome": "/tratamento/cirurgia/3",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cirurgia/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b636ffa92d6588d5",
+        "origem_json_pointer": "/tratamento/radioterapia/0",
+        "sha256_conteudo": "cd951ea833c23c919a2c7e48a3018df8b94d8150320d6ff8f80b23b9598d6691",
+        "nome": "RT/QT-RT adjuvante em eCCA/vesícula de alto risco, sobretudo R1 (não rotineira no iCCA)",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/radioterapia/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-7acfaa8f3dbb67c9",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/0",
+        "sha256_conteudo": "e6c4af45625678898bfa3e4e27ef5e9edb7d2a69df53d4ce80b25546e1e54c1a",
+        "nome": "/ligacoes/interacoesConsultar/0",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-93ce095b9dc6d176",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/1",
+        "sha256_conteudo": "a7e3a6ddab551f7e42c58512c30675bf8011888b519d4b71f04a1d37cbdda2b1",
+        "nome": "/ligacoes/interacoesConsultar/1",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-6840ffe2313fdc28",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/2",
+        "sha256_conteudo": "3d4b9402d9e25067654dad2e93a8fd5fbaaa2dee4e65d6dc8422fc7f9a12f55b",
+        "nome": "/ligacoes/interacoesConsultar/2",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-0b1f509b4947ed9b",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/3",
+        "sha256_conteudo": "90098472b5be46af38b3d177bbe0bed5db7b73db81f1e235917481c74e679a68",
+        "nome": "/ligacoes/interacoesConsultar/3",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-f890bfdcbb2425d5",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/4",
+        "sha256_conteudo": "1b05690b4b0b184c27f095151b879d59aad82569e8a2218a4ef5262d1ae0b906",
+        "nome": "/ligacoes/interacoesConsultar/4",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-5cb4216f9e0ba0f8",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/5",
+        "sha256_conteudo": "53349035d9b5805895cee279ffb4a98c3663ca28846911863ed55181bdb2a35c",
+        "nome": "/ligacoes/interacoesConsultar/5",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-033ce339c1d0148b",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/6",
+        "sha256_conteudo": "a321f53dd879cc43415b9750fad8131aa070ba56c936d096812408196af9352e",
+        "nome": "/ligacoes/interacoesConsultar/6",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-f2350aca0b06086e",
+        "origem_json_pointer": "/ligacoes/ctcaeAcao/0",
+        "sha256_conteudo": "f1ae9344378c7d0fdba11bf2a46f73f68eb17c3270327c73a79570ba70f0ffe8",
+        "nome": "/ligacoes/ctcaeAcao/0",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d514adabcf0b0f7a",
+        "origem_json_pointer": "/ligacoes/ctcaeAcao/1",
+        "sha256_conteudo": "391ce41352e1ed3c8e6afaf7d028b276b75b91999c5e71d9a9ee6cd01a45d720",
+        "nome": "/ligacoes/ctcaeAcao/1",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-882700074a771700",
+        "origem_json_pointer": "/ligacoes/ctcaeAcao/2",
+        "sha256_conteudo": "d8c11d1513d9aa3227cd8df7b31ffb79ac656019aded11ebdab56fce7bbfa36b",
+        "nome": "/ligacoes/ctcaeAcao/2",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-3cb82dde2229dad5",
+        "origem_json_pointer": "/ligacoes/ctcaeAcao/3",
+        "sha256_conteudo": "cfb3b42d76af387890280aab4df65b2fba48aaf8f5bb22dcc3666291f2a42d38",
+        "nome": "/ligacoes/ctcaeAcao/3",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d93a4c03a72e7aa2",
+        "origem_json_pointer": "/tratamento/suporte",
+        "sha256_conteudo": "6b0bf923812815ce5251a36ce89ffbe73df11e3dbb07d51049c47a6f322cf12c",
+        "nome": "/tratamento/suporte",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/suporte/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-3dc3b223926d9cc3",
+        "origem_json_pointer": "/ligacoes/suporteReceitas/0",
+        "sha256_conteudo": "73e33b7e02b9274006f68a87a9dbee1ca53032eb912043aed3cefe89d498d923",
+        "nome": "receita-sintomaticos-modelo-servico",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-fb3c5e0cd3dc7d32",
+        "origem_json_pointer": "/tratamento/seguimento/0",
+        "sha256_conteudo": "3a0d8c9138fc6796043e4d30e065ea760908508de7d67c56e6dd3634914e8462",
+        "nome": "pós-tratamento curativo, anos 1–2",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/seguimento/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-455dc2ff71790c71",
+        "origem_json_pointer": "/tratamento/seguimento/1",
+        "sha256_conteudo": "e6586faebbed9ab2c348dd8909b4ed05c0774bc285f07d13c74f28e7a19b1795",
+        "nome": "anos 3–5",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/seguimento/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-f0ac177310b34a27",
+        "origem_json_pointer": "/ligacoes/orientacoes/0",
+        "sha256_conteudo": "949061242240aafb3be6d117e82372a90c968bb301788c17a40ef5700a22bd90",
+        "nome": "dieta-por-tumor",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-cb110359ddf27756",
+        "origem_json_pointer": "/ligacoes/orientacoes/1",
+        "sha256_conteudo": "afba05e2de6389b751452a9fc6c36eff43abe35e94eedf588456a5e98a7bd825",
+        "nome": "sinais-alarme-consolidado",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-55eb46a2e145ab68",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/0",
+        "sha256_conteudo": "5e90c2fe0c689c9825e2a5f61f10285aac34b9a34913dde224d87ec5e7e743b5",
+        "nome": "encaminhamento-cirurgia-oncologica",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-61dae9798ba31e44",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/1",
+        "sha256_conteudo": "b92a6c89eec82b9542c0d0bf3c50a216ebeef81398125d360e50df70c3e8f675",
+        "nome": "encaminhamento-radioterapia",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-0042a62369a0e12a",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/2",
+        "sha256_conteudo": "db280c98f6a9be57a1e2e02ac0b8dc424adaf61a660695059b7b74acbcfc5deb",
+        "nome": "endoscopia/CPRE para drenagem biliar",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      }
+    ],
+    "itens_nccn": [
+      {
+        "item_id": "nccn-20261017-vias-biliares-futibatinibe",
+        "nome": "Futibatinibe",
+        "tipo": "OPCAO_TERAPEUTICA",
+        "dominio_principal": 6,
+        "conteudo_extraido": "Futibatinibe para colangiocarcinoma com fusão/rearranjo FGFR2, linha subsequente após progressão: Useful in Certain Circumstances, categoria 2A pelo cabeçalho. Nota s: futibatinibe, lirafugratinibe e pemigatinibe são preferidos a erdafitinibe; isso não altera o título UCC da tabela. Seleção também depende da terapia prévia, testes somáticos e disfunção hepática (nota l).",
+        "aplicabilidade": {
+          "criterios": [
+            "Colangiocarcinoma com fusão/rearranjo FGFR2",
+            "Progressão após tratamento"
+          ],
+          "paciente_individual": null,
+          "estado": "NAO_AVALIADA"
+        },
+        "dados_estruturados": {
+          "farmacos": [
+            "futibatinibe"
+          ],
+          "posologia": {
+            "estado": "NAO_EXTRAIDA_NESTA_RODADA",
+            "valor": null,
+            "motivo": "A rodada incorpora o delta de indicação/cenário; não completa dose por inferência."
+          }
+        },
+        "fonte_refs": [
+          {
+            "fonte_id": "nccn-fc20077cf081",
+            "edicao": "2.2026",
+            "pagina_pdf": 38,
+            "paginas_pdf": [
+              38
+            ],
+            "secao": "BIL-C 3/5, linha subsequente",
+            "trecho": "Futibatinib",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe"
+          },
+          {
+            "fonte_id": "nccn-fc20077cf081",
+            "edicao": "2.2026",
+            "pagina_pdf": 38,
+            "paginas_pdf": [
+              38
+            ],
+            "secao": "BIL-C 3/5, nota s",
+            "trecho": "preferred over erdafitinib",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe"
+          }
+        ],
+        "evidencia_declarada": {
+          "sistema": "NCCN",
+          "categoria": "2A por cabeçalho",
+          "preferencia": "Useful in Certain Circumstances; preferência relativa sobre erdafitinibe",
+          "estado": "CONFERIDA_DOCUMENTALMENTE_A_CONFERIR_CLINICAMENTE",
+          "nota": "2A por cabeçalho somente onde a página expressamente declara essa regra; não é categoria inferida por conhecimento externo."
+        },
+        "estado_extracao": "EXTRAIDO_COM_LIMITES_DECLARADOS",
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "temporalidade": {
+          "referencia": "CENARIO_DESCRITO",
+          "datas_individuais": null
+        },
+        "propor_automaticamente": false,
+        "disponivel_para_prescricao": false,
+        "acesso": {
+          "registro_anvisa": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "incorporacao_conitec": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "pcdt_ddt": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "sigtap_apac": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "cobertura_privada": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "disponibilidade_institucional": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          }
+        },
+        "alternativas_legadas_refs": [],
+        "relacoes_refs": [
+          "relacao-nccn-20261017-vias-biliares-futibatinibe"
+        ],
+        "conflitos_refs": [],
+        "pendencias": [
+          "REVISAO_CLINICA_DO_DELTA",
+          "VERIFICAR_ACESSO_BRASILEIRO_POR_INDICACAO",
+          "POSOLOGIA_E_SUPORTE_NAO_COMPLETOS_NESTA_RODADA"
+        ],
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+            "anterior": {
+              "fonte_refs": [
+                {
+                  "fonte_id": "nccn-fc20077cf081",
+                  "paginas_pdf": [
+                    38
+                  ],
+                  "secao": "BIL-C 3/5",
+                  "natureza": "EXTRACAO_DOCUMENTAL",
+                  "pagina_pdf": 38,
+                  "trecho": "Futibatinib38 \u0017Lirafugratinib39 \u0017Pemigatinib40 \u0017Erdafitinibt,41 • For CCA with IDH1 mutations \u0017Ivosidenib (category"
+                }
+              ],
+              "conteudo_extraido": "Opção dirigida por biomarcador presente na tabela NCCN; preservar os critérios de método, linha e exposição prévia.",
+              "evidencia_declarada": {
+                "sistema": "NCCN",
+                "categoria": null,
+                "estado": "NAO_EXTRAIDA_POR_ITEM"
+              }
+            },
+            "motivo": "Trecho atravessava fármacos/biomarcadores seguintes e omitia a comparação relativa da nota s; não confundir preferência relativa com categoria Preferred.",
+            "aprovacao_clinica": null
+          },
+          {
+            "revisao": "2026-10-17-nccn-final-documental",
+            "anterior": {
+              "conteudo_extraido": "Futibatinibe para colangiocarcinoma com fusão/rearranjo FGFR2, linha subsequente após progressão: Useful in Certain Circumstances, categoria2A pelo cabeçalho. Nota s: futibatinibe, lirafugratinibe e pemigatinibe são preferidos a erdafitinibe; isso não altera o título UCC da tabela. Seleção também depende da terapia prévia, testes somáticos e disfunção hepática (nota l)."
+            },
+            "motivo": "Espaçamento da prosa; sem modificar valores, códigos ou fontes."
+          }
+        ],
+        "fontes_por_campo": {
+          "conteudo_extraido": [
+            {
+              "fonte_id": "nccn-fc20077cf081",
+              "edicao": "2.2026",
+              "pagina_pdf": 38,
+              "paginas_pdf": [
+                38
+              ],
+              "secao": "BIL-C 3/5, linha subsequente",
+              "trecho": "Futibatinib",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe"
+            },
+            {
+              "fonte_id": "nccn-fc20077cf081",
+              "edicao": "2.2026",
+              "pagina_pdf": 38,
+              "paginas_pdf": [
+                38
+              ],
+              "secao": "BIL-C 3/5, nota s",
+              "trecho": "preferred over erdafitinib",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe"
+            }
+          ],
+          "evidencia_declarada": [
+            {
+              "fonte_id": "nccn-fc20077cf081",
+              "edicao": "2.2026",
+              "pagina_pdf": 38,
+              "paginas_pdf": [
+                38
+              ],
+              "secao": "BIL-C 3/5, linha subsequente",
+              "trecho": "Futibatinib",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe"
+            },
+            {
+              "fonte_id": "nccn-fc20077cf081",
+              "edicao": "2.2026",
+              "pagina_pdf": 38,
+              "paginas_pdf": [
+                38
+              ],
+              "secao": "BIL-C 3/5, nota s",
+              "trecho": "preferred over erdafitinib",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe"
+            }
+          ]
+        }
+      },
+      {
+        "item_id": "nccn-20261017-vias-biliares-lirafugratinibe",
+        "nome": "Lirafugratinibe",
+        "tipo": "OPCAO_TERAPEUTICA",
+        "dominio_principal": 6,
+        "conteudo_extraido": "Lirafugratinibe para colangiocarcinoma com fusão/rearranjo FGFR2, linha subsequente após progressão: Useful in Certain Circumstances, categoria 2A pelo cabeçalho. Nota s: futibatinibe, lirafugratinibe e pemigatinibe são preferidos a erdafitinibe; isso não altera o título UCC da tabela. Seleção também depende da terapia prévia, testes somáticos e disfunção hepática (nota l).",
+        "aplicabilidade": {
+          "criterios": [
+            "Colangiocarcinoma com fusão/rearranjo FGFR2",
+            "Progressão após tratamento"
+          ],
+          "paciente_individual": null,
+          "estado": "NAO_AVALIADA"
+        },
+        "dados_estruturados": {
+          "farmacos": [
+            "lirafugratinibe"
+          ],
+          "posologia": {
+            "estado": "NAO_EXTRAIDA_NESTA_RODADA",
+            "valor": null,
+            "motivo": "A rodada incorpora o delta de indicação/cenário; não completa dose por inferência."
+          }
+        },
+        "fonte_refs": [
+          {
+            "fonte_id": "nccn-fc20077cf081",
+            "edicao": "2.2026",
+            "pagina_pdf": 38,
+            "paginas_pdf": [
+              38
+            ],
+            "secao": "BIL-C 3/5, linha subsequente",
+            "trecho": "Lirafugratinib",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe"
+          },
+          {
+            "fonte_id": "nccn-fc20077cf081",
+            "edicao": "2.2026",
+            "pagina_pdf": 38,
+            "paginas_pdf": [
+              38
+            ],
+            "secao": "BIL-C 3/5, nota s",
+            "trecho": "preferred over erdafitinib",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe"
+          }
+        ],
+        "evidencia_declarada": {
+          "sistema": "NCCN",
+          "categoria": "2A por cabeçalho",
+          "preferencia": "Useful in Certain Circumstances; preferência relativa sobre erdafitinibe",
+          "estado": "CONFERIDA_DOCUMENTALMENTE_A_CONFERIR_CLINICAMENTE",
+          "nota": "2A por cabeçalho somente onde a página expressamente declara essa regra; não é categoria inferida por conhecimento externo."
+        },
+        "estado_extracao": "EXTRAIDO_COM_LIMITES_DECLARADOS",
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "temporalidade": {
+          "referencia": "CENARIO_DESCRITO",
+          "datas_individuais": null
+        },
+        "propor_automaticamente": false,
+        "disponivel_para_prescricao": false,
+        "acesso": {
+          "registro_anvisa": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "incorporacao_conitec": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "pcdt_ddt": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "sigtap_apac": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "cobertura_privada": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "disponibilidade_institucional": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          }
+        },
+        "alternativas_legadas_refs": [],
+        "relacoes_refs": [
+          "relacao-nccn-20261017-vias-biliares-lirafugratinibe"
+        ],
+        "conflitos_refs": [],
+        "pendencias": [
+          "REVISAO_CLINICA_DO_DELTA",
+          "VERIFICAR_ACESSO_BRASILEIRO_POR_INDICACAO",
+          "POSOLOGIA_E_SUPORTE_NAO_COMPLETOS_NESTA_RODADA"
+        ],
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+            "anterior": {
+              "fonte_refs": [
+                {
+                  "fonte_id": "nccn-fc20077cf081",
+                  "paginas_pdf": [
+                    38
+                  ],
+                  "secao": "BIL-C 3/5",
+                  "natureza": "EXTRACAO_DOCUMENTAL",
+                  "pagina_pdf": 38,
+                  "trecho": "Lirafugratinib39 \u0017Pemigatinib40 \u0017Erdafitinibt,41 • For CCA with IDH1 mutations \u0017Ivosidenib (category 1)42,43"
+                }
+              ],
+              "conteudo_extraido": "Opção dirigida por biomarcador presente na tabela NCCN; preservar os critérios de método, linha e exposição prévia.",
+              "evidencia_declarada": {
+                "sistema": "NCCN",
+                "categoria": null,
+                "estado": "NAO_EXTRAIDA_POR_ITEM"
+              }
+            },
+            "motivo": "Trecho atravessava fármacos/biomarcadores seguintes e omitia a comparação relativa da nota s; não confundir preferência relativa com categoria Preferred.",
+            "aprovacao_clinica": null
+          },
+          {
+            "revisao": "2026-10-17-nccn-final-documental",
+            "anterior": {
+              "conteudo_extraido": "Lirafugratinibe para colangiocarcinoma com fusão/rearranjo FGFR2, linha subsequente após progressão: Useful in Certain Circumstances, categoria2A pelo cabeçalho. Nota s: futibatinibe, lirafugratinibe e pemigatinibe são preferidos a erdafitinibe; isso não altera o título UCC da tabela. Seleção também depende da terapia prévia, testes somáticos e disfunção hepática (nota l)."
+            },
+            "motivo": "Espaçamento da prosa; sem modificar valores, códigos ou fontes."
+          }
+        ],
+        "fontes_por_campo": {
+          "conteudo_extraido": [
+            {
+              "fonte_id": "nccn-fc20077cf081",
+              "edicao": "2.2026",
+              "pagina_pdf": 38,
+              "paginas_pdf": [
+                38
+              ],
+              "secao": "BIL-C 3/5, linha subsequente",
+              "trecho": "Lirafugratinib",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe"
+            },
+            {
+              "fonte_id": "nccn-fc20077cf081",
+              "edicao": "2.2026",
+              "pagina_pdf": 38,
+              "paginas_pdf": [
+                38
+              ],
+              "secao": "BIL-C 3/5, nota s",
+              "trecho": "preferred over erdafitinib",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe"
+            }
+          ],
+          "evidencia_declarada": [
+            {
+              "fonte_id": "nccn-fc20077cf081",
+              "edicao": "2.2026",
+              "pagina_pdf": 38,
+              "paginas_pdf": [
+                38
+              ],
+              "secao": "BIL-C 3/5, linha subsequente",
+              "trecho": "Lirafugratinib",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe"
+            },
+            {
+              "fonte_id": "nccn-fc20077cf081",
+              "edicao": "2.2026",
+              "pagina_pdf": 38,
+              "paginas_pdf": [
+                38
+              ],
+              "secao": "BIL-C 3/5, nota s",
+              "trecho": "preferred over erdafitinib",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe"
+            }
+          ]
+        }
+      },
+      {
+        "item_id": "nccn-20261017-vias-biliares-zanidatamabe",
+        "nome": "Zanidatamabe",
+        "tipo": "OPCAO_TERAPEUTICA",
+        "dominio_principal": 6,
+        "conteudo_extraido": "Zanidatamabe para tumores biliares com HER2 (ERBB2)-positivo, IHQ 3+, em linha subsequente após progressão, Useful in Certain Circumstances, categoria 2A pelo cabeçalho. A seleção depende do tratamento prévio, resultados moleculares somáticos e grau de disfunção hepática (nota l).",
+        "aplicabilidade": {
+          "criterios": [
+            "Tumor biliar HER2 IHQ3+",
+            "Linha subsequente"
+          ],
+          "paciente_individual": null,
+          "estado": "NAO_AVALIADA"
+        },
+        "dados_estruturados": {
+          "farmacos": [
+            "zanidatamabe"
+          ],
+          "posologia": {
+            "estado": "NAO_EXTRAIDA_NESTA_RODADA",
+            "valor": null,
+            "motivo": "A rodada incorpora o delta de indicação/cenário; não completa dose por inferência."
+          }
+        },
+        "fonte_refs": [
+          {
+            "fonte_id": "nccn-fc20077cf081",
+            "edicao": "2.2026",
+            "pagina_pdf": 38,
+            "paginas_pdf": [
+              38
+            ],
+            "secao": "BIL-C 3/5",
+            "trecho": "Zanidatamab-hrii (IHC3+)",
+            "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe",
+            "natureza": "EXTRACAO_DOCUMENTAL"
+          },
+          {
+            "fonte_id": "nccn-fc20077cf081",
+            "edicao": "2.2026",
+            "pagina_pdf": 38,
+            "paginas_pdf": [
+              38
+            ],
+            "secao": "BIL-C 3/5, nota l",
+            "trecho": "Treatment selection depends on clinical factors",
+            "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe",
+            "natureza": "EXTRACAO_DOCUMENTAL"
+          }
+        ],
+        "evidencia_declarada": {
+          "sistema": "NCCN",
+          "categoria": "2A pelo cabeçalho da página",
+          "preferencia": "Useful in Certain Circumstances",
+          "estado": "CONFERIDA_DOCUMENTALMENTE_A_CONFERIR_CLINICAMENTE"
+        },
+        "estado_extracao": "EXTRAIDO_COM_LIMITES_DECLARADOS",
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "temporalidade": {
+          "referencia": "CENARIO_DESCRITO",
+          "datas_individuais": null
+        },
+        "propor_automaticamente": false,
+        "disponivel_para_prescricao": false,
+        "acesso": {
+          "registro_anvisa": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "incorporacao_conitec": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "pcdt_ddt": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "sigtap_apac": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "cobertura_privada": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "disponibilidade_institucional": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          }
+        },
+        "alternativas_legadas_refs": [],
+        "relacoes_refs": [
+          "relacao-nccn-20261017-vias-biliares-zanidatamabe"
+        ],
+        "conflitos_refs": [],
+        "pendencias": [
+          "REVISAO_CLINICA_DO_DELTA",
+          "VERIFICAR_ACESSO_BRASILEIRO_POR_INDICACAO",
+          "POSOLOGIA_E_SUPORTE_NAO_COMPLETOS_NESTA_RODADA"
+        ],
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-final-documental",
+            "anterior": {
+              "conteudo_extraido": "Opção dirigida por biomarcador presente na tabela NCCN; preservar os critérios de método, linha e exposição prévia.",
+              "evidencia_declarada": {
+                "sistema": "NCCN",
+                "categoria": null,
+                "estado": "NAO_EXTRAIDA_POR_ITEM"
+              },
+              "fonte_refs": [
+                {
+                  "fonte_id": "nccn-fc20077cf081",
+                  "paginas_pdf": [
+                    38
+                  ],
+                  "secao": "BIL-C 3/5",
+                  "natureza": "EXTRACAO_DOCUMENTAL",
+                  "pagina_pdf": 38,
+                  "trecho": "Zanidatamab-hrii (IHC3+)36 • For RET gene fusion-positive tumors: \u0017Selpercatinib26 \u0017Pralsetinib (category 2B)25"
+                }
+              ]
+            },
+            "motivo": "Trocar resumo genérico por conteúdo explícito já condicionado na aplicabilidade; sem alteração da indicação legada.",
+            "aprovacao_clinica": null
+          }
+        ],
+        "fontes_por_campo": {
+          "conteudo_extraido": [
+            {
+              "fonte_id": "nccn-fc20077cf081",
+              "edicao": "2.2026",
+              "pagina_pdf": 38,
+              "paginas_pdf": [
+                38
+              ],
+              "secao": "BIL-C 3/5",
+              "trecho": "Zanidatamab-hrii (IHC3+)",
+              "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe",
+              "natureza": "EXTRACAO_DOCUMENTAL"
+            },
+            {
+              "fonte_id": "nccn-fc20077cf081",
+              "edicao": "2.2026",
+              "pagina_pdf": 38,
+              "paginas_pdf": [
+                38
+              ],
+              "secao": "BIL-C 3/5, nota l",
+              "trecho": "Treatment selection depends on clinical factors",
+              "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe",
+              "natureza": "EXTRACAO_DOCUMENTAL"
+            }
+          ],
+          "evidencia_declarada": [
+            {
+              "fonte_id": "nccn-fc20077cf081",
+              "edicao": "2.2026",
+              "pagina_pdf": 38,
+              "paginas_pdf": [
+                38
+              ],
+              "secao": "BIL-C 3/5",
+              "trecho": "Zanidatamab-hrii (IHC3+)",
+              "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe",
+              "natureza": "EXTRACAO_DOCUMENTAL"
+            },
+            {
+              "fonte_id": "nccn-fc20077cf081",
+              "edicao": "2.2026",
+              "pagina_pdf": 38,
+              "paginas_pdf": [
+                38
+              ],
+              "secao": "BIL-C 3/5, nota l",
+              "trecho": "Treatment selection depends on clinical factors",
+              "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe",
+              "natureza": "EXTRACAO_DOCUMENTAL"
+            }
+          ]
+        }
+      },
+      {
+        "item_id": "nccn-20261017-vias-biliares-tucatinibe",
+        "nome": "Tucatinibe + trastuzumabe",
+        "tipo": "OPCAO_TERAPEUTICA",
+        "dominio_principal": 6,
+        "conteudo_extraido": "Tucatinibe + trastuzumabe: BIL-C 3/5 lista IHC3+/ISH+/NGS+ para HER2 em linha subsequente após progressão, Useful in Certain Circumstances, categoria 2A pelo cabeçalho. BIL-B 6/8 descreve IHQ, FISH e NGS como métodos de detecção, mas ressalva a falta de cortes/algoritmos padronizados em tumores biliares. A notação da tabela não será transformada em regra booleana universal de elegibilidade; conferir o método e os critérios da evidência específica.",
+        "aplicabilidade": {
+          "criterios": [
+            "Tumor biliar HER2-positivo, com método e interpretação documentados",
+            "Notação literal NCCN: IHC3+/ISH+/NGS+; critérios não harmonizados automaticamente",
+            "Linha subsequente após progressão; tratamento prévio e função hepática avaliados"
+          ],
+          "paciente_individual": null,
+          "estado": "NAO_AVALIADA"
+        },
+        "dados_estruturados": {
+          "farmacos": [
+            "tucatinibe",
+            "trastuzumabe"
+          ],
+          "posologia": {
+            "estado": "NAO_EXTRAIDA_NESTA_RODADA",
+            "valor": null,
+            "motivo": "A rodada incorpora o delta de indicação/cenário; não completa dose por inferência."
+          },
+          "HER2_fonte": "IHC3+/ISH+/NGS+",
+          "logica": "RELACAO_ENTRE_METODOS_NAO_EXPLICITADA_NA_TABELA",
+          "pendencia_metodos": "Conferir cortes, contexto do ensaio e interpretação específica; não deduzir elegibilidade universal da lista de métodos."
+        },
+        "fonte_refs": [
+          {
+            "fonte_id": "nccn-fc20077cf081",
+            "edicao": "2.2026",
+            "pagina_pdf": 38,
+            "paginas_pdf": [
+              38
+            ],
+            "secao": "BIL-C 3/5",
+            "trecho": "Tucatinib + Trastuzumab",
+            "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe",
+            "natureza": "EXTRACAO_DOCUMENTAL"
+          },
+          {
+            "fonte_id": "nccn-fc20077cf081",
+            "edicao": "2.2026",
+            "pagina_pdf": 33,
+            "paginas_pdf": [
+              33
+            ],
+            "secao": "BIL-B 6/8",
+            "trecho": "lack of specific guideline cutoff points",
+            "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe",
+            "natureza": "EXTRACAO_DOCUMENTAL"
+          }
+        ],
+        "evidencia_declarada": {
+          "sistema": "NCCN",
+          "categoria": "2A por cabeçalho",
+          "preferencia": "Useful in Certain Circumstances",
+          "estado": "CONFERIDA_DOCUMENTALMENTE_A_CONFERIR_CLINICAMENTE",
+          "nota": "2A por cabeçalho somente onde a página expressamente declara essa regra; não é categoria inferida por conhecimento externo."
+        },
+        "estado_extracao": "EXTRAIDO_COM_LIMITES_DECLARADOS",
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "temporalidade": {
+          "referencia": "CENARIO_DESCRITO",
+          "datas_individuais": null
+        },
+        "propor_automaticamente": false,
+        "disponivel_para_prescricao": false,
+        "acesso": {
+          "registro_anvisa": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "incorporacao_conitec": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "pcdt_ddt": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "sigtap_apac": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "cobertura_privada": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "disponibilidade_institucional": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          }
+        },
+        "alternativas_legadas_refs": [],
+        "relacoes_refs": [
+          "relacao-nccn-20261017-vias-biliares-tucatinibe"
+        ],
+        "conflitos_refs": [],
+        "pendencias": [
+          "REVISAO_CLINICA_DO_DELTA",
+          "VERIFICAR_ACESSO_BRASILEIRO_POR_INDICACAO",
+          "POSOLOGIA_E_SUPORTE_NAO_COMPLETOS_NESTA_RODADA"
+        ],
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+            "anterior": {
+              "fonte_refs": [
+                {
+                  "fonte_id": "nccn-fc20077cf081",
+                  "paginas_pdf": [
+                    38
+                  ],
+                  "secao": "BIL-C 3/5",
+                  "natureza": "EXTRACAO_DOCUMENTAL",
+                  "pagina_pdf": 38,
+                  "trecho": "Tucatinib + Trastuzumab (IHC3+/ISH+/NGS+)35 \u0017Zanidatamab-hrii (IHC3+)36 • For RET gene fusion-positive tumors:"
+                }
+              ],
+              "conteudo_extraido": "Opção dirigida por biomarcador presente na tabela NCCN; preservar os critérios de método, linha e exposição prévia.",
+              "aplicabilidade": {
+                "criterios": [
+                  "Tumor biliar HER2-positivo conforme método/corte",
+                  "Linha subsequente"
+                ],
+                "paciente_individual": null,
+                "estado": "NAO_AVALIADA"
+              },
+              "dados_estruturados": {
+                "farmacos": [
+                  "tucatinibe",
+                  "trastuzumabe"
+                ],
+                "posologia": {
+                  "estado": "NAO_EXTRAIDA_NESTA_RODADA",
+                  "valor": null,
+                  "motivo": "A rodada incorpora o delta de indicação/cenário; não completa dose por inferência."
+                }
+              },
+              "evidencia_declarada": {
+                "sistema": "NCCN",
+                "categoria": null,
+                "estado": "NAO_EXTRAIDA_POR_ITEM"
+              }
+            },
+            "motivo": "O requisito HER2 estava descrito genericamente, sem as alternativas de teste explicitadas na célula; trecho misturava opções seguintes.",
+            "aprovacao_clinica": null
+          },
+          {
+            "revisao": "2026-10-17-nccn-final-documental",
+            "anterior": {
+              "conteudo_extraido": "Tucatinibe + trastuzumabe para tumor biliar HER2-positivo, documentado como IHQ3+/ISH+/NGS+ na célula; são alternativas de demonstração de positividade conforme método, não exigência cumulativa dos três testes. Linha subsequente após progressão, UCC, categoria2A pelo cabeçalho. Não importar cortes de outro tumor.",
+              "aplicabilidade": {
+                "criterios": [
+                  "Tumor biliar HER2-positivo conforme IHQ3+, ISH+ ou NGS+ no contexto do teste",
+                  "Progressão e linha subsequente",
+                  "Terapia prévia e função hepática avaliadas"
+                ],
+                "paciente_individual": null,
+                "estado": "NAO_AVALIADA"
+              },
+              "dados_estruturados": {
+                "farmacos": [
+                  "tucatinibe",
+                  "trastuzumabe"
+                ],
+                "posologia": {
+                  "estado": "NAO_EXTRAIDA_NESTA_RODADA",
+                  "valor": null,
+                  "motivo": "A rodada incorpora o delta de indicação/cenário; não completa dose por inferência."
+                },
+                "HER2_fonte": "IHC3+/ISH+/NGS+",
+                "logica": "ALTERNATIVAS_DE_METODO; NAO EXIGIR TODOS"
+              },
+              "fonte_refs": [
+                {
+                  "fonte_id": "nccn-fc20077cf081",
+                  "edicao": "2.2026",
+                  "pagina_pdf": 38,
+                  "paginas_pdf": [
+                    38
+                  ],
+                  "secao": "BIL-C 3/5, HER2 em linha subsequente",
+                  "trecho": "Tucatinib + Trastuzumab (IHC3+/ISH+/NGS+)",
+                  "natureza": "EXTRACAO_DOCUMENTAL",
+                  "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe"
+                }
+              ]
+            },
+            "motivo": "Retirar inferência operacional entre métodos; preservar notação e limitação explícita da fonte.",
+            "aprovacao_clinica": null
+          }
+        ],
+        "fontes_por_campo": {
+          "conteudo_extraido": [
+            {
+              "fonte_id": "nccn-fc20077cf081",
+              "edicao": "2.2026",
+              "pagina_pdf": 38,
+              "paginas_pdf": [
+                38
+              ],
+              "secao": "BIL-C 3/5",
+              "trecho": "Tucatinib + Trastuzumab",
+              "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe",
+              "natureza": "EXTRACAO_DOCUMENTAL"
+            },
+            {
+              "fonte_id": "nccn-fc20077cf081",
+              "edicao": "2.2026",
+              "pagina_pdf": 33,
+              "paginas_pdf": [
+                33
+              ],
+              "secao": "BIL-B 6/8",
+              "trecho": "lack of specific guideline cutoff points",
+              "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe",
+              "natureza": "EXTRACAO_DOCUMENTAL"
+            }
+          ],
+          "aplicabilidade": [
+            {
+              "fonte_id": "nccn-fc20077cf081",
+              "edicao": "2.2026",
+              "pagina_pdf": 38,
+              "paginas_pdf": [
+                38
+              ],
+              "secao": "BIL-C 3/5",
+              "trecho": "Tucatinib + Trastuzumab",
+              "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe",
+              "natureza": "EXTRACAO_DOCUMENTAL"
+            },
+            {
+              "fonte_id": "nccn-fc20077cf081",
+              "edicao": "2.2026",
+              "pagina_pdf": 33,
+              "paginas_pdf": [
+                33
+              ],
+              "secao": "BIL-B 6/8",
+              "trecho": "lack of specific guideline cutoff points",
+              "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe",
+              "natureza": "EXTRACAO_DOCUMENTAL"
+            }
+          ],
+          "dados_estruturados": [
+            {
+              "fonte_id": "nccn-fc20077cf081",
+              "edicao": "2.2026",
+              "pagina_pdf": 38,
+              "paginas_pdf": [
+                38
+              ],
+              "secao": "BIL-C 3/5",
+              "trecho": "Tucatinib + Trastuzumab",
+              "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe",
+              "natureza": "EXTRACAO_DOCUMENTAL"
+            },
+            {
+              "fonte_id": "nccn-fc20077cf081",
+              "edicao": "2.2026",
+              "pagina_pdf": 33,
+              "paginas_pdf": [
+                33
+              ],
+              "secao": "BIL-B 6/8",
+              "trecho": "lack of specific guideline cutoff points",
+              "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe",
+              "natureza": "EXTRACAO_DOCUMENTAL"
+            }
+          ],
+          "evidencia_declarada": [
+            {
+              "fonte_id": "nccn-fc20077cf081",
+              "edicao": "2.2026",
+              "pagina_pdf": 38,
+              "paginas_pdf": [
+                38
+              ],
+              "secao": "BIL-C 3/5, HER2 em linha subsequente",
+              "trecho": "Tucatinib + Trastuzumab (IHC3+/ISH+/NGS+)",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe"
+            }
+          ]
+        }
+      },
+      {
+        "item_id": "nccn-20261017-vias-biliares-pertuzumabe",
+        "nome": "Pertuzumabe + trastuzumabe",
+        "tipo": "OPCAO_TERAPEUTICA",
+        "dominio_principal": 6,
+        "conteudo_extraido": "Pertuzumabe + trastuzumabe: BIL-C 3/5 lista IHC3+/ISH+/NGS+ para HER2 em linha subsequente após progressão, Useful in Certain Circumstances, categoria 2A pelo cabeçalho. BIL-B 6/8 descreve IHQ, FISH e NGS como métodos de detecção, mas ressalva a falta de cortes/algoritmos padronizados em tumores biliares. A notação da tabela não será transformada em regra booleana universal de elegibilidade; conferir o método e os critérios da evidência específica.",
+        "aplicabilidade": {
+          "criterios": [
+            "Tumor biliar HER2-positivo, com método e interpretação documentados",
+            "Notação literal NCCN: IHC3+/ISH+/NGS+; critérios não harmonizados automaticamente",
+            "Linha subsequente após progressão; tratamento prévio e função hepática avaliados"
+          ],
+          "paciente_individual": null,
+          "estado": "NAO_AVALIADA"
+        },
+        "dados_estruturados": {
+          "farmacos": [
+            "pertuzumabe",
+            "trastuzumabe"
+          ],
+          "posologia": {
+            "estado": "NAO_EXTRAIDA_NESTA_RODADA",
+            "valor": null,
+            "motivo": "A rodada incorpora o delta de indicação/cenário; não completa dose por inferência."
+          },
+          "HER2_fonte": "IHC3+/ISH+/NGS+",
+          "logica": "RELACAO_ENTRE_METODOS_NAO_EXPLICITADA_NA_TABELA",
+          "pendencia_metodos": "Conferir cortes, contexto do ensaio e interpretação específica; não deduzir elegibilidade universal da lista de métodos."
+        },
+        "fonte_refs": [
+          {
+            "fonte_id": "nccn-fc20077cf081",
+            "edicao": "2.2026",
+            "pagina_pdf": 38,
+            "paginas_pdf": [
+              38
+            ],
+            "secao": "BIL-C 3/5",
+            "trecho": "Pertuzumab + Trastuzumab",
+            "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe",
+            "natureza": "EXTRACAO_DOCUMENTAL"
+          },
+          {
+            "fonte_id": "nccn-fc20077cf081",
+            "edicao": "2.2026",
+            "pagina_pdf": 33,
+            "paginas_pdf": [
+              33
+            ],
+            "secao": "BIL-B 6/8",
+            "trecho": "lack of specific guideline cutoff points",
+            "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe",
+            "natureza": "EXTRACAO_DOCUMENTAL"
+          }
+        ],
+        "evidencia_declarada": {
+          "sistema": "NCCN",
+          "categoria": "2A por cabeçalho",
+          "preferencia": "Useful in Certain Circumstances",
+          "estado": "CONFERIDA_DOCUMENTALMENTE_A_CONFERIR_CLINICAMENTE",
+          "nota": "2A por cabeçalho somente onde a página expressamente declara essa regra; não é categoria inferida por conhecimento externo."
+        },
+        "estado_extracao": "EXTRAIDO_COM_LIMITES_DECLARADOS",
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "temporalidade": {
+          "referencia": "CENARIO_DESCRITO",
+          "datas_individuais": null
+        },
+        "propor_automaticamente": false,
+        "disponivel_para_prescricao": false,
+        "acesso": {
+          "registro_anvisa": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "incorporacao_conitec": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "pcdt_ddt": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "sigtap_apac": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "cobertura_privada": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "disponibilidade_institucional": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          }
+        },
+        "alternativas_legadas_refs": [],
+        "relacoes_refs": [
+          "relacao-nccn-20261017-vias-biliares-pertuzumabe"
+        ],
+        "conflitos_refs": [],
+        "pendencias": [
+          "REVISAO_CLINICA_DO_DELTA",
+          "VERIFICAR_ACESSO_BRASILEIRO_POR_INDICACAO",
+          "POSOLOGIA_E_SUPORTE_NAO_COMPLETOS_NESTA_RODADA"
+        ],
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+            "anterior": {
+              "fonte_refs": [
+                {
+                  "fonte_id": "nccn-fc20077cf081",
+                  "paginas_pdf": [
+                    38
+                  ],
+                  "secao": "BIL-C 3/5",
+                  "natureza": "EXTRACAO_DOCUMENTAL",
+                  "pagina_pdf": 38,
+                  "trecho": "Pertuzumab + Trastuzumab (IHC3+/ISH+/NGS+)34 \u0017Tucatinib + Trastuzumab (IHC3+/ISH+/NGS+)35 \u0017Zanidatamab-hrii (IHC3+)36 • For"
+                }
+              ],
+              "conteudo_extraido": "Opção dirigida por biomarcador presente na tabela NCCN; preservar os critérios de método, linha e exposição prévia.",
+              "aplicabilidade": {
+                "criterios": [
+                  "Tumor biliar HER2-positivo conforme método/corte",
+                  "Linha subsequente"
+                ],
+                "paciente_individual": null,
+                "estado": "NAO_AVALIADA"
+              },
+              "dados_estruturados": {
+                "farmacos": [
+                  "pertuzumabe",
+                  "trastuzumabe"
+                ],
+                "posologia": {
+                  "estado": "NAO_EXTRAIDA_NESTA_RODADA",
+                  "valor": null,
+                  "motivo": "A rodada incorpora o delta de indicação/cenário; não completa dose por inferência."
+                }
+              },
+              "evidencia_declarada": {
+                "sistema": "NCCN",
+                "categoria": null,
+                "estado": "NAO_EXTRAIDA_POR_ITEM"
+              }
+            },
+            "motivo": "O requisito HER2 estava descrito genericamente, sem as alternativas de teste explicitadas na célula; trecho misturava opções seguintes.",
+            "aprovacao_clinica": null
+          },
+          {
+            "revisao": "2026-10-17-nccn-final-documental",
+            "anterior": {
+              "conteudo_extraido": "Pertuzumabe + trastuzumabe para tumor biliar HER2-positivo, documentado como IHQ3+/ISH+/NGS+ na célula; são alternativas de demonstração de positividade conforme método, não exigência cumulativa dos três testes. Linha subsequente após progressão, UCC, categoria2A pelo cabeçalho. Não importar cortes de outro tumor.",
+              "aplicabilidade": {
+                "criterios": [
+                  "Tumor biliar HER2-positivo conforme IHQ3+, ISH+ ou NGS+ no contexto do teste",
+                  "Progressão e linha subsequente",
+                  "Terapia prévia e função hepática avaliadas"
+                ],
+                "paciente_individual": null,
+                "estado": "NAO_AVALIADA"
+              },
+              "dados_estruturados": {
+                "farmacos": [
+                  "pertuzumabe",
+                  "trastuzumabe"
+                ],
+                "posologia": {
+                  "estado": "NAO_EXTRAIDA_NESTA_RODADA",
+                  "valor": null,
+                  "motivo": "A rodada incorpora o delta de indicação/cenário; não completa dose por inferência."
+                },
+                "HER2_fonte": "IHC3+/ISH+/NGS+",
+                "logica": "ALTERNATIVAS_DE_METODO; NAO EXIGIR TODOS"
+              },
+              "fonte_refs": [
+                {
+                  "fonte_id": "nccn-fc20077cf081",
+                  "edicao": "2.2026",
+                  "pagina_pdf": 38,
+                  "paginas_pdf": [
+                    38
+                  ],
+                  "secao": "BIL-C 3/5, HER2 em linha subsequente",
+                  "trecho": "Pertuzumab + Trastuzumab (IHC3+/ISH+/NGS+)",
+                  "natureza": "EXTRACAO_DOCUMENTAL",
+                  "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe"
+                }
+              ]
+            },
+            "motivo": "Retirar inferência operacional entre métodos; preservar notação e limitação explícita da fonte.",
+            "aprovacao_clinica": null
+          }
+        ],
+        "fontes_por_campo": {
+          "conteudo_extraido": [
+            {
+              "fonte_id": "nccn-fc20077cf081",
+              "edicao": "2.2026",
+              "pagina_pdf": 38,
+              "paginas_pdf": [
+                38
+              ],
+              "secao": "BIL-C 3/5",
+              "trecho": "Pertuzumab + Trastuzumab",
+              "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe",
+              "natureza": "EXTRACAO_DOCUMENTAL"
+            },
+            {
+              "fonte_id": "nccn-fc20077cf081",
+              "edicao": "2.2026",
+              "pagina_pdf": 33,
+              "paginas_pdf": [
+                33
+              ],
+              "secao": "BIL-B 6/8",
+              "trecho": "lack of specific guideline cutoff points",
+              "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe",
+              "natureza": "EXTRACAO_DOCUMENTAL"
+            }
+          ],
+          "aplicabilidade": [
+            {
+              "fonte_id": "nccn-fc20077cf081",
+              "edicao": "2.2026",
+              "pagina_pdf": 38,
+              "paginas_pdf": [
+                38
+              ],
+              "secao": "BIL-C 3/5",
+              "trecho": "Pertuzumab + Trastuzumab",
+              "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe",
+              "natureza": "EXTRACAO_DOCUMENTAL"
+            },
+            {
+              "fonte_id": "nccn-fc20077cf081",
+              "edicao": "2.2026",
+              "pagina_pdf": 33,
+              "paginas_pdf": [
+                33
+              ],
+              "secao": "BIL-B 6/8",
+              "trecho": "lack of specific guideline cutoff points",
+              "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe",
+              "natureza": "EXTRACAO_DOCUMENTAL"
+            }
+          ],
+          "dados_estruturados": [
+            {
+              "fonte_id": "nccn-fc20077cf081",
+              "edicao": "2.2026",
+              "pagina_pdf": 38,
+              "paginas_pdf": [
+                38
+              ],
+              "secao": "BIL-C 3/5",
+              "trecho": "Pertuzumab + Trastuzumab",
+              "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe",
+              "natureza": "EXTRACAO_DOCUMENTAL"
+            },
+            {
+              "fonte_id": "nccn-fc20077cf081",
+              "edicao": "2.2026",
+              "pagina_pdf": 33,
+              "paginas_pdf": [
+                33
+              ],
+              "secao": "BIL-B 6/8",
+              "trecho": "lack of specific guideline cutoff points",
+              "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe",
+              "natureza": "EXTRACAO_DOCUMENTAL"
+            }
+          ],
+          "evidencia_declarada": [
+            {
+              "fonte_id": "nccn-fc20077cf081",
+              "edicao": "2.2026",
+              "pagina_pdf": 38,
+              "paginas_pdf": [
+                38
+              ],
+              "secao": "BIL-C 3/5, HER2 em linha subsequente",
+              "trecho": "Pertuzumab + Trastuzumab (IHC3+/ISH+/NGS+)",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe"
+            }
+          ]
+        }
+      },
+      {
+        "item_id": "nccn-20261017-vias-biliares-braf",
+        "nome": "Dabrafenibe + trametinibe",
+        "tipo": "OPCAO_TERAPEUTICA",
+        "dominio_principal": 6,
+        "conteudo_extraido": "Dabrafenibe + trametinibe para tumores biliares com mutação BRAF V600E, em linha subsequente após progressão, Useful in Certain Circumstances, categoria 2A pelo cabeçalho. A seleção depende do tratamento prévio, resultados moleculares somáticos e grau de disfunção hepática (nota l).",
+        "aplicabilidade": {
+          "criterios": [
+            "Tumor biliar BRAF V600E",
+            "Linha subsequente"
+          ],
+          "paciente_individual": null,
+          "estado": "NAO_AVALIADA"
+        },
+        "dados_estruturados": {
+          "farmacos": [
+            "dabrafenibe",
+            "trametinibe"
+          ],
+          "posologia": {
+            "estado": "NAO_EXTRAIDA_NESTA_RODADA",
+            "valor": null,
+            "motivo": "A rodada incorpora o delta de indicação/cenário; não completa dose por inferência."
+          }
+        },
+        "fonte_refs": [
+          {
+            "fonte_id": "nccn-fc20077cf081",
+            "edicao": "2.2026",
+            "pagina_pdf": 38,
+            "paginas_pdf": [
+              38
+            ],
+            "secao": "BIL-C 3/5",
+            "trecho": "Dabrafenib/Trametinib",
+            "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe",
+            "natureza": "EXTRACAO_DOCUMENTAL"
+          },
+          {
+            "fonte_id": "nccn-fc20077cf081",
+            "edicao": "2.2026",
+            "pagina_pdf": 38,
+            "paginas_pdf": [
+              38
+            ],
+            "secao": "BIL-C 3/5, nota l",
+            "trecho": "Treatment selection depends on clinical factors",
+            "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe",
+            "natureza": "EXTRACAO_DOCUMENTAL"
+          }
+        ],
+        "evidencia_declarada": {
+          "sistema": "NCCN",
+          "categoria": "2A pelo cabeçalho da página",
+          "preferencia": "Useful in Certain Circumstances",
+          "estado": "CONFERIDA_DOCUMENTALMENTE_A_CONFERIR_CLINICAMENTE"
+        },
+        "estado_extracao": "EXTRAIDO_COM_LIMITES_DECLARADOS",
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "temporalidade": {
+          "referencia": "CENARIO_DESCRITO",
+          "datas_individuais": null
+        },
+        "propor_automaticamente": false,
+        "disponivel_para_prescricao": false,
+        "acesso": {
+          "registro_anvisa": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "incorporacao_conitec": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "pcdt_ddt": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "sigtap_apac": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "cobertura_privada": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "disponibilidade_institucional": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          }
+        },
+        "alternativas_legadas_refs": [],
+        "relacoes_refs": [
+          "relacao-nccn-20261017-vias-biliares-braf"
+        ],
+        "conflitos_refs": [],
+        "pendencias": [
+          "REVISAO_CLINICA_DO_DELTA",
+          "VERIFICAR_ACESSO_BRASILEIRO_POR_INDICACAO",
+          "POSOLOGIA_E_SUPORTE_NAO_COMPLETOS_NESTA_RODADA"
+        ],
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-final-documental",
+            "anterior": {
+              "conteudo_extraido": "Opção dirigida por biomarcador presente na tabela NCCN; preservar os critérios de método, linha e exposição prévia.",
+              "evidencia_declarada": {
+                "sistema": "NCCN",
+                "categoria": null,
+                "estado": "NAO_EXTRAIDA_POR_ITEM"
+              },
+              "fonte_refs": [
+                {
+                  "fonte_id": "nccn-fc20077cf081",
+                  "paginas_pdf": [
+                    38
+                  ],
+                  "secao": "BIL-C 3/5",
+                  "natureza": "EXTRACAO_DOCUMENTAL",
+                  "pagina_pdf": 38,
+                  "trecho": "Dabrafenib/Trametinib31,32 • For HER2 (ERBB2)-positive tumors: \u0017Fam-trastuzumab deruxtecan-nxki (IHC3+)33 \u0017Pertuzumab + Trastuzumab"
+                }
+              ]
+            },
+            "motivo": "Trocar resumo genérico por conteúdo explícito já condicionado na aplicabilidade; sem alteração da indicação legada.",
+            "aprovacao_clinica": null
+          }
+        ],
+        "fontes_por_campo": {
+          "conteudo_extraido": [
+            {
+              "fonte_id": "nccn-fc20077cf081",
+              "edicao": "2.2026",
+              "pagina_pdf": 38,
+              "paginas_pdf": [
+                38
+              ],
+              "secao": "BIL-C 3/5",
+              "trecho": "Dabrafenib/Trametinib",
+              "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe",
+              "natureza": "EXTRACAO_DOCUMENTAL"
+            },
+            {
+              "fonte_id": "nccn-fc20077cf081",
+              "edicao": "2.2026",
+              "pagina_pdf": 38,
+              "paginas_pdf": [
+                38
+              ],
+              "secao": "BIL-C 3/5, nota l",
+              "trecho": "Treatment selection depends on clinical factors",
+              "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe",
+              "natureza": "EXTRACAO_DOCUMENTAL"
+            }
+          ],
+          "evidencia_declarada": [
+            {
+              "fonte_id": "nccn-fc20077cf081",
+              "edicao": "2.2026",
+              "pagina_pdf": 38,
+              "paginas_pdf": [
+                38
+              ],
+              "secao": "BIL-C 3/5",
+              "trecho": "Dabrafenib/Trametinib",
+              "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe",
+              "natureza": "EXTRACAO_DOCUMENTAL"
+            },
+            {
+              "fonte_id": "nccn-fc20077cf081",
+              "edicao": "2.2026",
+              "pagina_pdf": 38,
+              "paginas_pdf": [
+                38
+              ],
+              "secao": "BIL-C 3/5, nota l",
+              "trecho": "Treatment selection depends on clinical factors",
+              "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe",
+              "natureza": "EXTRACAO_DOCUMENTAL"
+            }
+          ]
+        }
+      },
+      {
+        "item_id": "nccn-20261017-vias-biliares-ret",
+        "nome": "Selpercatinibe",
+        "tipo": "OPCAO_TERAPEUTICA",
+        "dominio_principal": 6,
+        "conteudo_extraido": "Opção para tumor biliar com fusão RET. No tratamento primário irressecável/metastático: UCC, categoria 2B expressa. Em linha subsequente após progressão: UCC, categoria 2A pelo cabeçalho, sem marca local2B. A categoria de uma linha não deve ser propagada à outra.",
+        "aplicabilidade": {
+          "criterios": [
+            "tumor biliar com fusão RET",
+            "Separar tratamento primário irressecável/metastático de linha subsequente após progressão"
+          ],
+          "paciente_individual": null,
+          "estado": "NAO_AVALIADA"
+        },
+        "dados_estruturados": {
+          "farmacos": [
+            "selpercatinibe"
+          ],
+          "posologia": {
+            "estado": "NAO_EXTRAIDA_NESTA_RODADA",
+            "valor": null,
+            "motivo": "A rodada incorpora o delta de indicação/cenário; não completa dose por inferência."
+          },
+          "ramos": [
+            {
+              "linha": "primária irressecável/metastática",
+              "categoria": "2B",
+              "preferencia": "Useful in Certain Circumstances"
+            },
+            {
+              "linha": "subsequente após progressão",
+              "categoria": "2A por cabeçalho",
+              "preferencia": "Useful in Certain Circumstances"
+            }
+          ]
+        },
+        "fonte_refs": [
+          {
+            "fonte_id": "nccn-fc20077cf081",
+            "edicao": "2.2026",
+            "pagina_pdf": 38,
+            "paginas_pdf": [
+              38
+            ],
+            "secao": "BIL-C 3/5, tratamento primário",
+            "trecho": "Selpercatinib (category 2B)",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe"
+          },
+          {
+            "fonte_id": "nccn-fc20077cf081",
+            "edicao": "2.2026",
+            "pagina_pdf": 38,
+            "paginas_pdf": [
+              38
+            ],
+            "secao": "BIL-C 3/5, linha subsequente",
+            "trecho": "Selpercatinib",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe"
+          }
+        ],
+        "evidencia_declarada": {
+          "sistema": "NCCN",
+          "categoria": "VARIA_POR_LINHA",
+          "preferencia": "Useful in Certain Circumstances",
+          "estado": "CONFERIDA_DOCUMENTALMENTE_A_CONFERIR_CLINICAMENTE",
+          "nota": "2A por cabeçalho somente onde a página expressamente declara essa regra; não é categoria inferida por conhecimento externo."
+        },
+        "estado_extracao": "EXTRAIDO_COM_LIMITES_DECLARADOS",
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "temporalidade": {
+          "referencia": "CENARIO_DESCRITO",
+          "datas_individuais": null
+        },
+        "propor_automaticamente": false,
+        "disponivel_para_prescricao": false,
+        "acesso": {
+          "registro_anvisa": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "incorporacao_conitec": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "pcdt_ddt": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "sigtap_apac": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "cobertura_privada": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "disponibilidade_institucional": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          }
+        },
+        "alternativas_legadas_refs": [],
+        "relacoes_refs": [
+          "relacao-nccn-20261017-vias-biliares-ret"
+        ],
+        "conflitos_refs": [],
+        "pendencias": [
+          "REVISAO_CLINICA_DO_DELTA",
+          "VERIFICAR_ACESSO_BRASILEIRO_POR_INDICACAO",
+          "POSOLOGIA_E_SUPORTE_NAO_COMPLETOS_NESTA_RODADA"
+        ],
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+            "anterior": {
+              "fonte_refs": [
+                {
+                  "fonte_id": "nccn-fc20077cf081",
+                  "paginas_pdf": [
+                    38
+                  ],
+                  "secao": "BIL-C 3/5",
+                  "natureza": "EXTRACAO_DOCUMENTAL",
+                  "pagina_pdf": 38,
+                  "trecho": "Selpercatinib26 \u0017Pralsetinib (category 2B)25 • For KRAS G12C mutation-positive tumors: \u0017Adagrasib37 •"
+                }
+              ],
+              "conteudo_extraido": "Opção dirigida por biomarcador presente na tabela NCCN; preservar os critérios de método, linha e exposição prévia.",
+              "aplicabilidade": {
+                "criterios": [
+                  "Tumor biliar com fusão RET",
+                  "Categoria depende da linha"
+                ],
+                "paciente_individual": null,
+                "estado": "NAO_AVALIADA"
+              },
+              "dados_estruturados": {
+                "farmacos": [
+                  "selpercatinibe"
+                ],
+                "posologia": {
+                  "estado": "NAO_EXTRAIDA_NESTA_RODADA",
+                  "valor": null,
+                  "motivo": "A rodada incorpora o delta de indicação/cenário; não completa dose por inferência."
+                }
+              },
+              "evidencia_declarada": {
+                "sistema": "NCCN",
+                "categoria": null,
+                "estado": "NAO_EXTRAIDA_POR_ITEM"
+              }
+            },
+            "motivo": "A categoria dependente de linha estava declarada, mas sem explicitar2B no tratamento primário e2A no subsequente; fonte anterior misturava os blocos.",
+            "aprovacao_clinica": null
+          },
+          {
+            "revisao": "2026-10-17-nccn-final-documental",
+            "anterior": {
+              "conteudo_extraido": "Opção para tumor biliar com fusão RET. No tratamento primário irressecável/metastático: UCC, categoria2B expressa. Em linha subsequente após progressão: UCC, categoria2A pelo cabeçalho, sem marca local2B. A categoria de uma linha não deve ser propagada à outra."
+            },
+            "motivo": "Espaçamento da prosa; sem modificar valores, códigos ou fontes."
+          }
+        ],
+        "fontes_por_campo": {
+          "conteudo_extraido": [
+            {
+              "fonte_id": "nccn-fc20077cf081",
+              "edicao": "2.2026",
+              "pagina_pdf": 38,
+              "paginas_pdf": [
+                38
+              ],
+              "secao": "BIL-C 3/5, tratamento primário",
+              "trecho": "Selpercatinib (category 2B)",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe"
+            },
+            {
+              "fonte_id": "nccn-fc20077cf081",
+              "edicao": "2.2026",
+              "pagina_pdf": 38,
+              "paginas_pdf": [
+                38
+              ],
+              "secao": "BIL-C 3/5, linha subsequente",
+              "trecho": "Selpercatinib",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe"
+            }
+          ],
+          "aplicabilidade": [
+            {
+              "fonte_id": "nccn-fc20077cf081",
+              "edicao": "2.2026",
+              "pagina_pdf": 38,
+              "paginas_pdf": [
+                38
+              ],
+              "secao": "BIL-C 3/5, tratamento primário",
+              "trecho": "Selpercatinib (category 2B)",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe"
+            },
+            {
+              "fonte_id": "nccn-fc20077cf081",
+              "edicao": "2.2026",
+              "pagina_pdf": 38,
+              "paginas_pdf": [
+                38
+              ],
+              "secao": "BIL-C 3/5, linha subsequente",
+              "trecho": "Selpercatinib",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe"
+            }
+          ],
+          "dados_estruturados": [
+            {
+              "fonte_id": "nccn-fc20077cf081",
+              "edicao": "2.2026",
+              "pagina_pdf": 38,
+              "paginas_pdf": [
+                38
+              ],
+              "secao": "BIL-C 3/5, tratamento primário",
+              "trecho": "Selpercatinib (category 2B)",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe"
+            },
+            {
+              "fonte_id": "nccn-fc20077cf081",
+              "edicao": "2.2026",
+              "pagina_pdf": 38,
+              "paginas_pdf": [
+                38
+              ],
+              "secao": "BIL-C 3/5, linha subsequente",
+              "trecho": "Selpercatinib",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe"
+            }
+          ],
+          "evidencia_declarada": [
+            {
+              "fonte_id": "nccn-fc20077cf081",
+              "edicao": "2.2026",
+              "pagina_pdf": 38,
+              "paginas_pdf": [
+                38
+              ],
+              "secao": "BIL-C 3/5, tratamento primário",
+              "trecho": "Selpercatinib (category 2B)",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe"
+            },
+            {
+              "fonte_id": "nccn-fc20077cf081",
+              "edicao": "2.2026",
+              "pagina_pdf": 38,
+              "paginas_pdf": [
+                38
+              ],
+              "secao": "BIL-C 3/5, linha subsequente",
+              "trecho": "Selpercatinib",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe"
+            }
+          ]
+        }
+      },
+      {
+        "item_id": "nccn-20261017-vias-biliares-nrg1",
+        "nome": "Zenocutuzumabe",
+        "tipo": "OPCAO_TERAPEUTICA",
+        "dominio_principal": 6,
+        "conteudo_extraido": "Opção para colangiocarcinoma com fusão NRG1. No tratamento primário irressecável/metastático: UCC, categoria 2B expressa. Em linha subsequente após progressão: UCC, categoria 2A pelo cabeçalho, sem marca local2B. A categoria de uma linha não deve ser propagada à outra.",
+        "aplicabilidade": {
+          "criterios": [
+            "colangiocarcinoma com fusão NRG1",
+            "Separar tratamento primário irressecável/metastático de linha subsequente após progressão"
+          ],
+          "paciente_individual": null,
+          "estado": "NAO_AVALIADA"
+        },
+        "dados_estruturados": {
+          "farmacos": [
+            "zenocutuzumabe"
+          ],
+          "posologia": {
+            "estado": "NAO_EXTRAIDA_NESTA_RODADA",
+            "valor": null,
+            "motivo": "A rodada incorpora o delta de indicação/cenário; não completa dose por inferência."
+          },
+          "ramos": [
+            {
+              "linha": "primária irressecável/metastática",
+              "categoria": "2B",
+              "preferencia": "Useful in Certain Circumstances"
+            },
+            {
+              "linha": "subsequente após progressão",
+              "categoria": "2A por cabeçalho",
+              "preferencia": "Useful in Certain Circumstances"
+            }
+          ]
+        },
+        "fonte_refs": [
+          {
+            "fonte_id": "nccn-fc20077cf081",
+            "edicao": "2.2026",
+            "pagina_pdf": 38,
+            "paginas_pdf": [
+              38
+            ],
+            "secao": "BIL-C 3/5, tratamento primário",
+            "trecho": "Zenocutuzumab-zbco (category 2B)",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe"
+          },
+          {
+            "fonte_id": "nccn-fc20077cf081",
+            "edicao": "2.2026",
+            "pagina_pdf": 38,
+            "paginas_pdf": [
+              38
+            ],
+            "secao": "BIL-C 3/5, linha subsequente",
+            "trecho": "Zenocutuzumab-zbco",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe"
+          }
+        ],
+        "evidencia_declarada": {
+          "sistema": "NCCN",
+          "categoria": "VARIA_POR_LINHA",
+          "preferencia": "Useful in Certain Circumstances",
+          "estado": "CONFERIDA_DOCUMENTALMENTE_A_CONFERIR_CLINICAMENTE",
+          "nota": "2A por cabeçalho somente onde a página expressamente declara essa regra; não é categoria inferida por conhecimento externo."
+        },
+        "estado_extracao": "EXTRAIDO_COM_LIMITES_DECLARADOS",
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "temporalidade": {
+          "referencia": "CENARIO_DESCRITO",
+          "datas_individuais": null
+        },
+        "propor_automaticamente": false,
+        "disponivel_para_prescricao": false,
+        "acesso": {
+          "registro_anvisa": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "incorporacao_conitec": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "pcdt_ddt": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "sigtap_apac": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "cobertura_privada": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "disponibilidade_institucional": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          }
+        },
+        "alternativas_legadas_refs": [],
+        "relacoes_refs": [
+          "relacao-nccn-20261017-vias-biliares-nrg1"
+        ],
+        "conflitos_refs": [],
+        "pendencias": [
+          "REVISAO_CLINICA_DO_DELTA",
+          "VERIFICAR_ACESSO_BRASILEIRO_POR_INDICACAO",
+          "POSOLOGIA_E_SUPORTE_NAO_COMPLETOS_NESTA_RODADA"
+        ],
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+            "anterior": {
+              "fonte_refs": [
+                {
+                  "fonte_id": "nccn-fc20077cf081",
+                  "paginas_pdf": [
+                    38
+                  ],
+                  "secao": "BIL-C 3/5",
+                  "natureza": "EXTRACAO_DOCUMENTAL",
+                  "pagina_pdf": 38,
+                  "trecho": "Zenocutuzumab-zbco27,28 Primary Treatment for Unresectable and Metastatic Disease Useful in Certain Circumstances"
+                }
+              ],
+              "conteudo_extraido": "Opção dirigida por biomarcador presente na tabela NCCN; preservar os critérios de método, linha e exposição prévia.",
+              "aplicabilidade": {
+                "criterios": [
+                  "Colangiocarcinoma com fusão NRG1",
+                  "Categoria depende da linha"
+                ],
+                "paciente_individual": null,
+                "estado": "NAO_AVALIADA"
+              },
+              "dados_estruturados": {
+                "farmacos": [
+                  "zenocutuzumabe"
+                ],
+                "posologia": {
+                  "estado": "NAO_EXTRAIDA_NESTA_RODADA",
+                  "valor": null,
+                  "motivo": "A rodada incorpora o delta de indicação/cenário; não completa dose por inferência."
+                }
+              },
+              "evidencia_declarada": {
+                "sistema": "NCCN",
+                "categoria": null,
+                "estado": "NAO_EXTRAIDA_POR_ITEM"
+              }
+            },
+            "motivo": "A categoria dependente de linha estava declarada, mas sem explicitar2B no tratamento primário e2A no subsequente; fonte anterior misturava os blocos.",
+            "aprovacao_clinica": null
+          },
+          {
+            "revisao": "2026-10-17-nccn-final-documental",
+            "anterior": {
+              "conteudo_extraido": "Opção para colangiocarcinoma com fusão NRG1. No tratamento primário irressecável/metastático: UCC, categoria2B expressa. Em linha subsequente após progressão: UCC, categoria2A pelo cabeçalho, sem marca local2B. A categoria de uma linha não deve ser propagada à outra."
+            },
+            "motivo": "Espaçamento da prosa; sem modificar valores, códigos ou fontes."
+          }
+        ],
+        "fontes_por_campo": {
+          "conteudo_extraido": [
+            {
+              "fonte_id": "nccn-fc20077cf081",
+              "edicao": "2.2026",
+              "pagina_pdf": 38,
+              "paginas_pdf": [
+                38
+              ],
+              "secao": "BIL-C 3/5, tratamento primário",
+              "trecho": "Zenocutuzumab-zbco (category 2B)",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe"
+            },
+            {
+              "fonte_id": "nccn-fc20077cf081",
+              "edicao": "2.2026",
+              "pagina_pdf": 38,
+              "paginas_pdf": [
+                38
+              ],
+              "secao": "BIL-C 3/5, linha subsequente",
+              "trecho": "Zenocutuzumab-zbco",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe"
+            }
+          ],
+          "aplicabilidade": [
+            {
+              "fonte_id": "nccn-fc20077cf081",
+              "edicao": "2.2026",
+              "pagina_pdf": 38,
+              "paginas_pdf": [
+                38
+              ],
+              "secao": "BIL-C 3/5, tratamento primário",
+              "trecho": "Zenocutuzumab-zbco (category 2B)",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe"
+            },
+            {
+              "fonte_id": "nccn-fc20077cf081",
+              "edicao": "2.2026",
+              "pagina_pdf": 38,
+              "paginas_pdf": [
+                38
+              ],
+              "secao": "BIL-C 3/5, linha subsequente",
+              "trecho": "Zenocutuzumab-zbco",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe"
+            }
+          ],
+          "dados_estruturados": [
+            {
+              "fonte_id": "nccn-fc20077cf081",
+              "edicao": "2.2026",
+              "pagina_pdf": 38,
+              "paginas_pdf": [
+                38
+              ],
+              "secao": "BIL-C 3/5, tratamento primário",
+              "trecho": "Zenocutuzumab-zbco (category 2B)",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe"
+            },
+            {
+              "fonte_id": "nccn-fc20077cf081",
+              "edicao": "2.2026",
+              "pagina_pdf": 38,
+              "paginas_pdf": [
+                38
+              ],
+              "secao": "BIL-C 3/5, linha subsequente",
+              "trecho": "Zenocutuzumab-zbco",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe"
+            }
+          ],
+          "evidencia_declarada": [
+            {
+              "fonte_id": "nccn-fc20077cf081",
+              "edicao": "2.2026",
+              "pagina_pdf": 38,
+              "paginas_pdf": [
+                38
+              ],
+              "secao": "BIL-C 3/5, tratamento primário",
+              "trecho": "Zenocutuzumab-zbco (category 2B)",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe"
+            },
+            {
+              "fonte_id": "nccn-fc20077cf081",
+              "edicao": "2.2026",
+              "pagina_pdf": 38,
+              "paginas_pdf": [
+                38
+              ],
+              "secao": "BIL-C 3/5, linha subsequente",
+              "trecho": "Zenocutuzumab-zbco",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe"
+            }
+          ]
+        }
+      }
+    ],
+    "cenarios": {
+      "identidade_ref": "/identidade/cenarios",
+      "detalhamento_ref": "/tratamento/cenarios",
+      "novas_condicoes_refs": [
+        "nccn-20261017-vias-biliares-futibatinibe",
+        "nccn-20261017-vias-biliares-lirafugratinibe",
+        "nccn-20261017-vias-biliares-zanidatamabe",
+        "nccn-20261017-vias-biliares-tucatinibe",
+        "nccn-20261017-vias-biliares-pertuzumabe",
+        "nccn-20261017-vias-biliares-braf",
+        "nccn-20261017-vias-biliares-ret",
+        "nccn-20261017-vias-biliares-nrg1"
+      ],
+      "regra": "Não igualar automaticamente as duas listas nem selecionar cenário individual nesta camada."
+    },
+    "fontes": [
+      {
+        "id": "nccn-fc20077cf081",
+        "arquivo_local": "C:\\Users\\silas\\.aside\\u\\0\\sessions\\2026-10-17_LutNNwUyDZGlA1pF\\artifacts\\nccn\\Biliary Tract Cancers.pdf",
+        "nome": "Biliary Tract Cancers",
+        "sha256": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe",
+        "numero_paginas": 111,
+        "versao_declarada": "2.2026",
+        "origem": "ARQUIVO_LOCAL_FORNECIDO",
+        "autenticidade_externa": "NAO_VERIFICADA_NO_PORTAL",
+        "paginas_examinadas": [
+          33,
+          38
+        ]
+      }
+    ],
+    "fontes_legadas_refs": [
+      "/header/fonte",
+      "/curadoria/fontesLidas"
+    ],
+    "ensaios": {
+      "legado_ref": "/tratamento/ensaios",
+      "novos_nct": [],
+      "nota": "Nenhum identificador NCT foi inventado ou verificado nesta rodada."
+    },
+    "relacoes": [
+      {
+        "relacao_id": "relacao-nccn-20261017-vias-biliares-futibatinibe",
+        "tipo": "CONDICOES_PARA_APRESENTACAO_DOCUMENTAL",
+        "destino_item_ref": "nccn-20261017-vias-biliares-futibatinibe",
+        "criterios_extraidos": [
+          "Colangiocarcinoma com fusão/rearranjo FGFR2",
+          "Progressão após tratamento"
+        ],
+        "origem_condicoes": "FONTE_NCCN_CITADA",
+        "origem_mapeamento": "PROPOSTA_DE_MAPEAMENTO",
+        "executavel": false,
+        "estado": "A_CONFERIR",
+        "dados_ausentes": "MANTER_INDETERMINADO",
+        "dados_conflitantes": "MANTER_CONFLITO",
+        "efeito": "APRESENTAR_CONTEUDO_PARA_REVISAO; NAO PRESCREVER"
+      },
+      {
+        "relacao_id": "relacao-nccn-20261017-vias-biliares-lirafugratinibe",
+        "tipo": "CONDICOES_PARA_APRESENTACAO_DOCUMENTAL",
+        "destino_item_ref": "nccn-20261017-vias-biliares-lirafugratinibe",
+        "criterios_extraidos": [
+          "Colangiocarcinoma com fusão/rearranjo FGFR2",
+          "Progressão após tratamento"
+        ],
+        "origem_condicoes": "FONTE_NCCN_CITADA",
+        "origem_mapeamento": "PROPOSTA_DE_MAPEAMENTO",
+        "executavel": false,
+        "estado": "A_CONFERIR",
+        "dados_ausentes": "MANTER_INDETERMINADO",
+        "dados_conflitantes": "MANTER_CONFLITO",
+        "efeito": "APRESENTAR_CONTEUDO_PARA_REVISAO; NAO PRESCREVER"
+      },
+      {
+        "relacao_id": "relacao-nccn-20261017-vias-biliares-zanidatamabe",
+        "tipo": "CONDICOES_PARA_APRESENTACAO_DOCUMENTAL",
+        "destino_item_ref": "nccn-20261017-vias-biliares-zanidatamabe",
+        "criterios_extraidos": [
+          "Tumor biliar HER2 IHQ3+",
+          "Linha subsequente"
+        ],
+        "origem_condicoes": "FONTE_NCCN_CITADA",
+        "origem_mapeamento": "PROPOSTA_DE_MAPEAMENTO",
+        "executavel": false,
+        "estado": "A_CONFERIR",
+        "dados_ausentes": "MANTER_INDETERMINADO",
+        "dados_conflitantes": "MANTER_CONFLITO",
+        "efeito": "APRESENTAR_CONTEUDO_PARA_REVISAO; NAO PRESCREVER"
+      },
+      {
+        "relacao_id": "relacao-nccn-20261017-vias-biliares-tucatinibe",
+        "tipo": "CONDICOES_PARA_APRESENTACAO_DOCUMENTAL",
+        "destino_item_ref": "nccn-20261017-vias-biliares-tucatinibe",
+        "criterios_extraidos": [
+          "Tumor biliar HER2-positivo, com método e interpretação documentados",
+          "Notação literal NCCN: IHC3+/ISH+/NGS+; critérios não harmonizados automaticamente",
+          "Linha subsequente após progressão; tratamento prévio e função hepática avaliados"
+        ],
+        "origem_condicoes": "FONTE_NCCN_CITADA",
+        "origem_mapeamento": "PROPOSTA_DE_MAPEAMENTO",
+        "executavel": false,
+        "estado": "A_CONFERIR",
+        "dados_ausentes": "MANTER_INDETERMINADO",
+        "dados_conflitantes": "MANTER_CONFLITO",
+        "efeito": "APRESENTAR_CONTEUDO_PARA_REVISAO; NAO PRESCREVER",
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+            "criterios_extraidos": [
+              "Tumor biliar HER2-positivo conforme método/corte",
+              "Linha subsequente"
+            ]
+          },
+          {
+            "revisao": "2026-10-17-nccn-final-documental",
+            "criterios_extraidos": [
+              "Tumor biliar HER2-positivo conforme IHQ3+, ISH+ ou NGS+ no contexto do teste",
+              "Progressão e linha subsequente",
+              "Terapia prévia e função hepática avaliadas"
+            ]
+          }
+        ],
+        "fontes_por_campo": {
+          "criterios_extraidos": [
+            {
+              "fonte_id": "nccn-fc20077cf081",
+              "edicao": "2.2026",
+              "pagina_pdf": 38,
+              "paginas_pdf": [
+                38
+              ],
+              "secao": "BIL-C 3/5",
+              "trecho": "Tucatinib + Trastuzumab",
+              "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe",
+              "natureza": "EXTRACAO_DOCUMENTAL"
+            },
+            {
+              "fonte_id": "nccn-fc20077cf081",
+              "edicao": "2.2026",
+              "pagina_pdf": 33,
+              "paginas_pdf": [
+                33
+              ],
+              "secao": "BIL-B 6/8",
+              "trecho": "lack of specific guideline cutoff points",
+              "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe",
+              "natureza": "EXTRACAO_DOCUMENTAL"
+            }
+          ]
+        }
+      },
+      {
+        "relacao_id": "relacao-nccn-20261017-vias-biliares-pertuzumabe",
+        "tipo": "CONDICOES_PARA_APRESENTACAO_DOCUMENTAL",
+        "destino_item_ref": "nccn-20261017-vias-biliares-pertuzumabe",
+        "criterios_extraidos": [
+          "Tumor biliar HER2-positivo, com método e interpretação documentados",
+          "Notação literal NCCN: IHC3+/ISH+/NGS+; critérios não harmonizados automaticamente",
+          "Linha subsequente após progressão; tratamento prévio e função hepática avaliados"
+        ],
+        "origem_condicoes": "FONTE_NCCN_CITADA",
+        "origem_mapeamento": "PROPOSTA_DE_MAPEAMENTO",
+        "executavel": false,
+        "estado": "A_CONFERIR",
+        "dados_ausentes": "MANTER_INDETERMINADO",
+        "dados_conflitantes": "MANTER_CONFLITO",
+        "efeito": "APRESENTAR_CONTEUDO_PARA_REVISAO; NAO PRESCREVER",
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+            "criterios_extraidos": [
+              "Tumor biliar HER2-positivo conforme método/corte",
+              "Linha subsequente"
+            ]
+          },
+          {
+            "revisao": "2026-10-17-nccn-final-documental",
+            "criterios_extraidos": [
+              "Tumor biliar HER2-positivo conforme IHQ3+, ISH+ ou NGS+ no contexto do teste",
+              "Progressão e linha subsequente",
+              "Terapia prévia e função hepática avaliadas"
+            ]
+          }
+        ],
+        "fontes_por_campo": {
+          "criterios_extraidos": [
+            {
+              "fonte_id": "nccn-fc20077cf081",
+              "edicao": "2.2026",
+              "pagina_pdf": 38,
+              "paginas_pdf": [
+                38
+              ],
+              "secao": "BIL-C 3/5",
+              "trecho": "Pertuzumab + Trastuzumab",
+              "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe",
+              "natureza": "EXTRACAO_DOCUMENTAL"
+            },
+            {
+              "fonte_id": "nccn-fc20077cf081",
+              "edicao": "2.2026",
+              "pagina_pdf": 33,
+              "paginas_pdf": [
+                33
+              ],
+              "secao": "BIL-B 6/8",
+              "trecho": "lack of specific guideline cutoff points",
+              "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe",
+              "natureza": "EXTRACAO_DOCUMENTAL"
+            }
+          ]
+        }
+      },
+      {
+        "relacao_id": "relacao-nccn-20261017-vias-biliares-braf",
+        "tipo": "CONDICOES_PARA_APRESENTACAO_DOCUMENTAL",
+        "destino_item_ref": "nccn-20261017-vias-biliares-braf",
+        "criterios_extraidos": [
+          "Tumor biliar BRAF V600E",
+          "Linha subsequente"
+        ],
+        "origem_condicoes": "FONTE_NCCN_CITADA",
+        "origem_mapeamento": "PROPOSTA_DE_MAPEAMENTO",
+        "executavel": false,
+        "estado": "A_CONFERIR",
+        "dados_ausentes": "MANTER_INDETERMINADO",
+        "dados_conflitantes": "MANTER_CONFLITO",
+        "efeito": "APRESENTAR_CONTEUDO_PARA_REVISAO; NAO PRESCREVER"
+      },
+      {
+        "relacao_id": "relacao-nccn-20261017-vias-biliares-ret",
+        "tipo": "CONDICOES_PARA_APRESENTACAO_DOCUMENTAL",
+        "destino_item_ref": "nccn-20261017-vias-biliares-ret",
+        "criterios_extraidos": [
+          "tumor biliar com fusão RET",
+          "Separar tratamento primário irressecável/metastático de linha subsequente após progressão"
+        ],
+        "origem_condicoes": "FONTE_NCCN_CITADA",
+        "origem_mapeamento": "PROPOSTA_DE_MAPEAMENTO",
+        "executavel": false,
+        "estado": "A_CONFERIR",
+        "dados_ausentes": "MANTER_INDETERMINADO",
+        "dados_conflitantes": "MANTER_CONFLITO",
+        "efeito": "APRESENTAR_CONTEUDO_PARA_REVISAO; NAO PRESCREVER",
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+            "criterios_extraidos": [
+              "Tumor biliar com fusão RET",
+              "Categoria depende da linha"
+            ]
+          }
+        ],
+        "fontes_por_campo": {
+          "criterios_extraidos": [
+            {
+              "fonte_id": "nccn-fc20077cf081",
+              "edicao": "2.2026",
+              "pagina_pdf": 38,
+              "paginas_pdf": [
+                38
+              ],
+              "secao": "BIL-C 3/5, tratamento primário",
+              "trecho": "Selpercatinib (category 2B)",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe"
+            },
+            {
+              "fonte_id": "nccn-fc20077cf081",
+              "edicao": "2.2026",
+              "pagina_pdf": 38,
+              "paginas_pdf": [
+                38
+              ],
+              "secao": "BIL-C 3/5, linha subsequente",
+              "trecho": "Selpercatinib",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe"
+            }
+          ]
+        }
+      },
+      {
+        "relacao_id": "relacao-nccn-20261017-vias-biliares-nrg1",
+        "tipo": "CONDICOES_PARA_APRESENTACAO_DOCUMENTAL",
+        "destino_item_ref": "nccn-20261017-vias-biliares-nrg1",
+        "criterios_extraidos": [
+          "colangiocarcinoma com fusão NRG1",
+          "Separar tratamento primário irressecável/metastático de linha subsequente após progressão"
+        ],
+        "origem_condicoes": "FONTE_NCCN_CITADA",
+        "origem_mapeamento": "PROPOSTA_DE_MAPEAMENTO",
+        "executavel": false,
+        "estado": "A_CONFERIR",
+        "dados_ausentes": "MANTER_INDETERMINADO",
+        "dados_conflitantes": "MANTER_CONFLITO",
+        "efeito": "APRESENTAR_CONTEUDO_PARA_REVISAO; NAO PRESCREVER",
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+            "criterios_extraidos": [
+              "Colangiocarcinoma com fusão NRG1",
+              "Categoria depende da linha"
+            ]
+          }
+        ],
+        "fontes_por_campo": {
+          "criterios_extraidos": [
+            {
+              "fonte_id": "nccn-fc20077cf081",
+              "edicao": "2.2026",
+              "pagina_pdf": 38,
+              "paginas_pdf": [
+                38
+              ],
+              "secao": "BIL-C 3/5, tratamento primário",
+              "trecho": "Zenocutuzumab-zbco (category 2B)",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe"
+            },
+            {
+              "fonte_id": "nccn-fc20077cf081",
+              "edicao": "2.2026",
+              "pagina_pdf": 38,
+              "paginas_pdf": [
+                38
+              ],
+              "secao": "BIL-C 3/5, linha subsequente",
+              "trecho": "Zenocutuzumab-zbco",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe"
+            }
+          ]
+        }
+      }
+    ],
+    "conflitos": [],
+    "conflitos_legados_ref": "/conflitos",
+    "pendencias": [
+      {
+        "id": "revisao-clinica",
+        "estado": "ABERTA",
+        "descricao": "Conferir cada acréscimo, condições, fontes, doses, interações e suporte antes de uso clínico."
+      },
+      {
+        "id": "acesso-brasileiro",
+        "estado": "ABERTA",
+        "descricao": "NCCN não comprova Anvisa, Conitec, PCDT/DDT, SIGTAP/APAC, cobertura privada ou acesso institucional."
+      },
+      {
+        "id": "cobertura-nccn",
+        "estado": "PARCIAL_POR_DELTA",
+        "descricao": "Leitura dirigida das páginas citadas; não há alegação de extração integral da diretriz."
+      }
+    ],
+    "pendencias_legadas_ref": "/pendencias",
+    "itens_adicionais_a_classificar": [
+      {
+        "origem_ref": "/header",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/status",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/consultavel",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/alerta",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/substitui",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/identidade",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/pendencias",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/conflitos",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/curadoria",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/correcoes",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      }
+    ],
+    "mapa_de_cobertura": [
+      {
+        "origem_json_pointer": "/header",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "db121fc587fc87b01c93895f44225cc28711bac12a61ab639c68dc5a7539b978",
+        "valores_folha": 9
+      },
+      {
+        "origem_json_pointer": "/status",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "04635ca3844c66b19ebbf49bf9ff60fe851d6ce89597d23e6a970f1dc3927289",
+        "valores_folha": 1
+      },
+      {
+        "origem_json_pointer": "/consultavel",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b",
+        "valores_folha": 1
+      },
+      {
+        "origem_json_pointer": "/alerta",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "valores_folha": 1
+      },
+      {
+        "origem_json_pointer": "/substitui",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "valores_folha": 1
+      },
+      {
+        "origem_json_pointer": "/identidade",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "f0bbdb315b2d8964966c846f49a1041fe5e12ef57cf3736c9911fe02eb95f22d",
+        "valores_folha": 19
+      },
+      {
+        "origem_json_pointer": "/diagnostico",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "30742dc068a6a324dea92e74546c1883022a130e8e7c407bd623db1f0dc61e5e",
+        "valores_folha": 136
+      },
+      {
+        "origem_json_pointer": "/estadiamento",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "e5dedee651b1f7b5df944c4e3fdc019c116912192f276265be304c4fbac30fe8",
+        "valores_folha": 186
+      },
+      {
+        "origem_json_pointer": "/tratamento",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "eccae5b61b659e90adabe1cab29c6cdce0f4b918e1d7e690681b15fd7d8e9189",
+        "valores_folha": 833
+      },
+      {
+        "origem_json_pointer": "/ligacoes",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "894b5cb643fa0117931652b7a9f39c498aa205886f2d7330666f3f667490ce37",
+        "valores_folha": 96
+      },
+      {
+        "origem_json_pointer": "/pendencias",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "f353ca82258fc17d4f68205ef7784b89eca0e156dc47816b48e49cb4aa797578",
+        "valores_folha": 38
+      },
+      {
+        "origem_json_pointer": "/conflitos",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "5a0f252db5c235fb75d0dcc51686534d0014218622c5b9cfd1d6f821479a6a1c",
+        "valores_folha": 32
+      },
+      {
+        "origem_json_pointer": "/curadoria",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "6b8c7a4c17f9fb69105e034a5055ee1f980b845dd223522dc0a39ef5950c8c45",
+        "valores_folha": 12
+      },
+      {
+        "origem_json_pointer": "/correcoes",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "b7edd394f9e9b790af037d9077e12194824bb0bdfd6b18c417daefe7bf3bcedc",
+        "valores_folha": 4
+      }
+    ],
+    "reconciliacao_com_versao_anterior": {
+      "modo": "ADITIVO",
+      "originais_removidos": 0,
+      "originais_alterados": 0,
+      "contagens_preservadas": {
+        "protocolos": 15,
+        "ensaios": 9,
+        "cenarios_identidade": 4,
+        "cenarios_tratamento": 3,
+        "seguimento": 2,
+        "conflitos": 2,
+        "pendencias": 8
+      }
+    },
+    "relatorio_de_completude": {
+      "estado": "INCOMPLETA_PARA_DIRETRIZ_INTEGRAL",
+      "preservacao_legado": "INTEGRAL",
+      "delta_itens": 8,
+      "normalizacao_legado": "INDEXACAO_POR_REFERENCIA; NAO REEXTRACAO CLINICA",
+      "posologias": "SOMENTE AS EXPLICITAMENTE EXTRAIDAS; RESTANTES PENDENTES",
+      "sem_fato_paciente": true,
+      "sem_aprovacao_inferida": true
+    },
+    "auditoria_33_pendentes": [
+      {
+        "item_id": "nccn-20261017-vias-biliares-futibatinibe",
+        "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+        "resultado": "CORRIGIDO_ESCOPO_OU_COMPLETUDE",
+        "fundamento": "Trecho atravessava fármacos/biomarcadores seguintes e omitia a comparação relativa da nota s; não confundir preferência relativa com categoria Preferred.",
+        "fontes": [
+          {
+            "fonte_id": "nccn-fc20077cf081",
+            "edicao": "2.2026",
+            "pagina_pdf": 38,
+            "paginas_pdf": [
+              38
+            ],
+            "secao": "BIL-C 3/5, linha subsequente",
+            "trecho": "Futibatinib",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe"
+          },
+          {
+            "fonte_id": "nccn-fc20077cf081",
+            "edicao": "2.2026",
+            "pagina_pdf": 38,
+            "paginas_pdf": [
+              38
+            ],
+            "secao": "BIL-C 3/5, nota s",
+            "trecho": "preferred over erdafitinib",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe"
+          }
+        ],
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "limite": "Conferência das afirmações deste item; não extração integral de posologia, diretriz ou acesso brasileiro.",
+        "sha256_item_antes": "70a44e3d2a0b037587622cea36394a9d07346eecc4d33b4fc4d74c24579ee3ab"
+      },
+      {
+        "item_id": "nccn-20261017-vias-biliares-lirafugratinibe",
+        "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+        "resultado": "CORRIGIDO_ESCOPO_OU_COMPLETUDE",
+        "fundamento": "Trecho atravessava fármacos/biomarcadores seguintes e omitia a comparação relativa da nota s; não confundir preferência relativa com categoria Preferred.",
+        "fontes": [
+          {
+            "fonte_id": "nccn-fc20077cf081",
+            "edicao": "2.2026",
+            "pagina_pdf": 38,
+            "paginas_pdf": [
+              38
+            ],
+            "secao": "BIL-C 3/5, linha subsequente",
+            "trecho": "Lirafugratinib",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe"
+          },
+          {
+            "fonte_id": "nccn-fc20077cf081",
+            "edicao": "2.2026",
+            "pagina_pdf": 38,
+            "paginas_pdf": [
+              38
+            ],
+            "secao": "BIL-C 3/5, nota s",
+            "trecho": "preferred over erdafitinib",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe"
+          }
+        ],
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "limite": "Conferência das afirmações deste item; não extração integral de posologia, diretriz ou acesso brasileiro.",
+        "sha256_item_antes": "503e20c9a1432804f4b15be4aa61fbd61df38eabc31e34d5035403d96bfb0b11"
+      },
+      {
+        "item_id": "nccn-20261017-vias-biliares-zanidatamabe",
+        "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+        "resultado": "CONFIRMADO_SEM_REESCRITA",
+        "fundamento": "IHQ3+ e linha subsequente estão corretos. O trecho original contém marcador de lista, mas é localizável após normalização de espaços; não há motivo clínico para reescrever.",
+        "fontes": [
+          {
+            "fonte_id": "nccn-fc20077cf081",
+            "edicao": "2.2026",
+            "pagina_pdf": 38,
+            "paginas_pdf": [
+              38
+            ],
+            "secao": "BIL-C 3/5, linha subsequente",
+            "trecho": "Zanidatamab-hrii (IHC3+)",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe"
+          }
+        ],
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "limite": "Conferência das afirmações deste item; não extração integral de posologia, diretriz ou acesso brasileiro.",
+        "sha256_item_antes": "3b3240b9a7d4e037f013572f3b6e943252b2b93e9cc8ab263801497897654812"
+      },
+      {
+        "item_id": "nccn-20261017-vias-biliares-tucatinibe",
+        "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+        "resultado": "CORRIGIDO_ESCOPO_OU_COMPLETUDE",
+        "fundamento": "O requisito HER2 estava descrito genericamente, sem as alternativas de teste explicitadas na célula; trecho misturava opções seguintes.",
+        "fontes": [
+          {
+            "fonte_id": "nccn-fc20077cf081",
+            "edicao": "2.2026",
+            "pagina_pdf": 38,
+            "paginas_pdf": [
+              38
+            ],
+            "secao": "BIL-C 3/5, HER2 em linha subsequente",
+            "trecho": "Tucatinib + Trastuzumab (IHC3+/ISH+/NGS+)",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe"
+          }
+        ],
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "limite": "Conferência das afirmações deste item; não extração integral de posologia, diretriz ou acesso brasileiro.",
+        "sha256_item_antes": "1f2d96c985d68add43b1a44a5689476d22776c8b5853b0b7fe166ae1232b9c95"
+      },
+      {
+        "item_id": "nccn-20261017-vias-biliares-pertuzumabe",
+        "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+        "resultado": "CORRIGIDO_ESCOPO_OU_COMPLETUDE",
+        "fundamento": "O requisito HER2 estava descrito genericamente, sem as alternativas de teste explicitadas na célula; trecho misturava opções seguintes.",
+        "fontes": [
+          {
+            "fonte_id": "nccn-fc20077cf081",
+            "edicao": "2.2026",
+            "pagina_pdf": 38,
+            "paginas_pdf": [
+              38
+            ],
+            "secao": "BIL-C 3/5, HER2 em linha subsequente",
+            "trecho": "Pertuzumab + Trastuzumab (IHC3+/ISH+/NGS+)",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe"
+          }
+        ],
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "limite": "Conferência das afirmações deste item; não extração integral de posologia, diretriz ou acesso brasileiro.",
+        "sha256_item_antes": "b52bb6b34f6869e43e37322cc4691f9596c865e468974c07469c2fc624e6f20c"
+      },
+      {
+        "item_id": "nccn-20261017-vias-biliares-braf",
+        "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+        "resultado": "CONFIRMADO_SEM_REESCRITA",
+        "fundamento": "BRAF V600E e linha subsequente estão corretamente delimitados; o texto não amplia a outros BRAF.",
+        "fontes": [
+          {
+            "fonte_id": "nccn-fc20077cf081",
+            "edicao": "2.2026",
+            "pagina_pdf": 38,
+            "paginas_pdf": [
+              38
+            ],
+            "secao": "BIL-C 3/5, linha subsequente",
+            "trecho": "For BRAF V600E-mutated tumors",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe"
+          },
+          {
+            "fonte_id": "nccn-fc20077cf081",
+            "edicao": "2.2026",
+            "pagina_pdf": 38,
+            "paginas_pdf": [
+              38
+            ],
+            "secao": "BIL-C 3/5",
+            "trecho": "Dabrafenib/Trametinib",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe"
+          }
+        ],
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "limite": "Conferência das afirmações deste item; não extração integral de posologia, diretriz ou acesso brasileiro.",
+        "sha256_item_antes": "b68ebf5ca2859523fad12e00ddeeac73834fc64d53318387a1f977bb69374a74"
+      },
+      {
+        "item_id": "nccn-20261017-vias-biliares-ret",
+        "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+        "resultado": "CORRIGIDO_ESCOPO_OU_COMPLETUDE",
+        "fundamento": "A categoria dependente de linha estava declarada, mas sem explicitar2B no tratamento primário e2A no subsequente; fonte anterior misturava os blocos.",
+        "fontes": [
+          {
+            "fonte_id": "nccn-fc20077cf081",
+            "edicao": "2.2026",
+            "pagina_pdf": 38,
+            "paginas_pdf": [
+              38
+            ],
+            "secao": "BIL-C 3/5, tratamento primário",
+            "trecho": "Selpercatinib (category 2B)",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe"
+          },
+          {
+            "fonte_id": "nccn-fc20077cf081",
+            "edicao": "2.2026",
+            "pagina_pdf": 38,
+            "paginas_pdf": [
+              38
+            ],
+            "secao": "BIL-C 3/5, linha subsequente",
+            "trecho": "Selpercatinib",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe"
+          }
+        ],
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "limite": "Conferência das afirmações deste item; não extração integral de posologia, diretriz ou acesso brasileiro.",
+        "sha256_item_antes": "7e2deec990cb341ab31edad55445f0e1c91995dc01e3c3422987ad949164ff46"
+      },
+      {
+        "item_id": "nccn-20261017-vias-biliares-nrg1",
+        "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+        "resultado": "CORRIGIDO_ESCOPO_OU_COMPLETUDE",
+        "fundamento": "A categoria dependente de linha estava declarada, mas sem explicitar2B no tratamento primário e2A no subsequente; fonte anterior misturava os blocos.",
+        "fontes": [
+          {
+            "fonte_id": "nccn-fc20077cf081",
+            "edicao": "2.2026",
+            "pagina_pdf": 38,
+            "paginas_pdf": [
+              38
+            ],
+            "secao": "BIL-C 3/5, tratamento primário",
+            "trecho": "Zenocutuzumab-zbco (category 2B)",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe"
+          },
+          {
+            "fonte_id": "nccn-fc20077cf081",
+            "edicao": "2.2026",
+            "pagina_pdf": 38,
+            "paginas_pdf": [
+              38
+            ],
+            "secao": "BIL-C 3/5, linha subsequente",
+            "trecho": "Zenocutuzumab-zbco",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe"
+          }
+        ],
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "limite": "Conferência das afirmações deste item; não extração integral de posologia, diretriz ou acesso brasileiro.",
+        "sha256_item_antes": "a2eb3077d05345338a4173e3e6bd5181aefbc237fdd7fdd8da2af7350728ce58"
+      }
+    ],
+    "revisoes_auditoria": [
+      {
+        "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+        "escopo": "APENAS_33_ITENS_PENDENTES",
+        "legado_modificado": false,
+        "aprovacao_clinica": null,
+        "limites": "Sem leitura integral da pasta, sem completar doses, sem checagem de acesso ou autenticidade externa.",
+        "itens_ref": "/tumor_pack_universal/auditoria_33_pendentes",
+        "sha256_itens": "46dfc697396b0c8efddd80d0f272b01c478f4c83aae3857824003469b9208a9b"
+      }
+    ],
+    "fechamento_documental": [
+      {
+        "revisao": "2026-10-17-nccn-final-documental",
+        "estado": "CORRECOES_DOCUMENTAIS_APLICADAS",
+        "ajustes_textuais": 4,
+        "deduplicacoes_por_referencia": [
+          "auditoria_33_pendentes"
+        ],
+        "aprovacao_clinica": null,
+        "legado_alterado": false
+      }
+    ]
+  }
 }

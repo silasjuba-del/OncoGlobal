@@ -4,9 +4,9 @@
   "nome": "Ewing IE (ciclo B — alternado ao VDC)",
   "cenario": "1ª linha, dose-denso q14",
   "versao": "1.0.0",
-  "hash": "0a70e1994d099af662e79e73dbd19ad3110561370118331cfe7b1c00b8e7624e",
+  "hash": "b49829fe99127cdf6bc4d1d6b2738d26842b8b68260524b4cda480f39878a8a0",
   "codigoInstitucional": null,
-  "intervaloDias": 14,
+  "intervaloDias": 28,
   "ciclos": 7,
   "itens": [
     {
@@ -33,7 +33,8 @@
       ],
       "observacao": "Lavar acesso venoso pré e pós QT (planilha).",
       "source": "PROTOCOL",
-      "overrideMotivo": null
+      "overrideMotivo": null,
+      "sequenciamentoPendente": "Componente IE do curso VDC/IE: alternância a cada 14 dias, repetição do mesmo braço a cada 28 dias. Exige plano integrado de 14 ciclos, terapia local e limite cumulativo; esta ficha isolada não gera curso executável. Fonte: eviQ 3464 v2, Treatment schema, conferida 17/10/2026."
     },
     {
       "drug": "Ondansetrona",
@@ -59,7 +60,8 @@
       ],
       "observacao": "Padrão local (D-W9-23c/34c; D-F1-30).",
       "source": "PROTOCOL",
-      "overrideMotivo": null
+      "overrideMotivo": null,
+      "sequenciamentoPendente": "Componente IE do curso VDC/IE: alternância a cada 14 dias, repetição do mesmo braço a cada 28 dias. Exige plano integrado de 14 ciclos, terapia local e limite cumulativo; esta ficha isolada não gera curso executável. Fonte: eviQ 3464 v2, Treatment schema, conferida 17/10/2026."
     },
     {
       "drug": "Dexametasona",
@@ -85,7 +87,8 @@
       ],
       "observacao": "Alto risco emetogênico: olanzapina 5 mg VO opcional (D-W9-34c); sem NK1 (padrão local).",
       "source": "PROTOCOL",
-      "overrideMotivo": null
+      "overrideMotivo": null,
+      "sequenciamentoPendente": "Componente IE do curso VDC/IE: alternância a cada 14 dias, repetição do mesmo braço a cada 28 dias. Exige plano integrado de 14 ciclos, terapia local e limite cumulativo; esta ficha isolada não gera curso executável. Fonte: eviQ 3464 v2, Treatment schema, conferida 17/10/2026."
     },
     {
       "drug": "Prometazina",
@@ -111,7 +114,8 @@
       ],
       "observacao": "Pré-medicação local (D-W9-34c).",
       "source": "PROTOCOL",
-      "overrideMotivo": null
+      "overrideMotivo": null,
+      "sequenciamentoPendente": "Componente IE do curso VDC/IE: alternância a cada 14 dias, repetição do mesmo braço a cada 28 dias. Exige plano integrado de 14 ciclos, terapia local e limite cumulativo; esta ficha isolada não gera curso executável. Fonte: eviQ 3464 v2, Treatment schema, conferida 17/10/2026."
     },
     {
       "drug": "Etoposídeo",
@@ -133,7 +137,8 @@
       ],
       "observacao": "eviQ 3465: 100 mg/m²/dia D1–D5 em 500 mL SF em 30–60 min (Etopophos 113,6 mg ≡ 100 mg).",
       "source": "PROTOCOL",
-      "overrideMotivo": null
+      "overrideMotivo": null,
+      "sequenciamentoPendente": "Componente IE do curso VDC/IE: alternância a cada 14 dias, repetição do mesmo braço a cada 28 dias. Exige plano integrado de 14 ciclos, terapia local e limite cumulativo; esta ficha isolada não gera curso executável. Fonte: eviQ 3464 v2, Treatment schema, conferida 17/10/2026."
     },
     {
       "drug": "Ifosfamida",
@@ -155,7 +160,8 @@
       ],
       "observacao": "eviQ 3465: 1.800 mg/m²/dia D1–D5 em 500–1.000 mL SF em 2 h. Teto cumulativo usual ≤72 g/m² (BC).",
       "source": "PROTOCOL",
-      "overrideMotivo": null
+      "overrideMotivo": null,
+      "sequenciamentoPendente": "Componente IE do curso VDC/IE: alternância a cada 14 dias, repetição do mesmo braço a cada 28 dias. Exige plano integrado de 14 ciclos, terapia local e limite cumulativo; esta ficha isolada não gera curso executável. Fonte: eviQ 3464 v2, Treatment schema, conferida 17/10/2026."
     },
     {
       "drug": "Mesna (0 h)",
@@ -177,7 +183,8 @@
       ],
       "observacao": "eviQ 3465: carga IV 15 min antes da ifosfamida.",
       "source": "PROTOCOL",
-      "overrideMotivo": null
+      "overrideMotivo": null,
+      "sequenciamentoPendente": "Componente IE do curso VDC/IE: alternância a cada 14 dias, repetição do mesmo braço a cada 28 dias. Exige plano integrado de 14 ciclos, terapia local e limite cumulativo; esta ficha isolada não gera curso executável. Fonte: eviQ 3464 v2, Treatment schema, conferida 17/10/2026."
     },
     {
       "drug": "Mesna (4 h)",
@@ -199,7 +206,8 @@
       ],
       "observacao": "eviQ 3465: 600 mg/m² IV 4 h após o início da ifosfamida (alternativa VO 2 h após o fim, dose dobrada).",
       "source": "PROTOCOL",
-      "overrideMotivo": null
+      "overrideMotivo": null,
+      "sequenciamentoPendente": "Componente IE do curso VDC/IE: alternância a cada 14 dias, repetição do mesmo braço a cada 28 dias. Exige plano integrado de 14 ciclos, terapia local e limite cumulativo; esta ficha isolada não gera curso executável. Fonte: eviQ 3464 v2, Treatment schema, conferida 17/10/2026."
     },
     {
       "drug": "Mesna (8 h)",
@@ -221,7 +229,8 @@
       ],
       "observacao": "eviQ 3465: 600 mg/m² IV 8 h após o início da ifosfamida.",
       "source": "PROTOCOL",
-      "overrideMotivo": null
+      "overrideMotivo": null,
+      "sequenciamentoPendente": "Componente IE do curso VDC/IE: alternância a cada 14 dias, repetição do mesmo braço a cada 28 dias. Exige plano integrado de 14 ciclos, terapia local e limite cumulativo; esta ficha isolada não gera curso executável. Fonte: eviQ 3464 v2, Treatment schema, conferida 17/10/2026."
     },
     {
       "drug": "Pegfilgrastim",
@@ -243,7 +252,8 @@
       ],
       "observacao": "eviQ 3465: 6 mg SC no D6 (≥24 h após a quimio do braço IE, que termina no D5).",
       "source": "PROTOCOL",
-      "overrideMotivo": null
+      "overrideMotivo": null,
+      "sequenciamentoPendente": "Componente IE do curso VDC/IE: alternância a cada 14 dias, repetição do mesmo braço a cada 28 dias. Exige plano integrado de 14 ciclos, terapia local e limite cumulativo; esta ficha isolada não gera curso executável. Fonte: eviQ 3464 v2, Treatment schema, conferida 17/10/2026."
     },
     {
       "drug": "Soro fisiológico 0,9% 250 mL (lavagem pós-QT)",
@@ -269,7 +279,8 @@
       ],
       "observacao": "Lavar acesso venoso pós-QT (planilha).",
       "source": "PROTOCOL",
-      "overrideMotivo": null
+      "overrideMotivo": null,
+      "sequenciamentoPendente": "Componente IE do curso VDC/IE: alternância a cada 14 dias, repetição do mesmo braço a cada 28 dias. Exige plano integrado de 14 ciclos, terapia local e limite cumulativo; esta ficha isolada não gera curso executável. Fonte: eviQ 3464 v2, Treatment schema, conferida 17/10/2026."
     }
   ],
   "limiaresBula": null,

@@ -29,6 +29,8 @@ describe("calculadora de dose", () => {
     expect(src).toContain("calcularDose");
     expect(src).not.toMatch(/Math\.|0\.8|0\.7|0\.6/);
     render(<CalculadoraDose base={base} ruleset={ruleset} />);
+    expect(screen.getByText(/Não recomenda redução ou suspensão/)).toBeTruthy();
+    expect(screen.getByText(/Protocolo, fonte e cenário do ajuste: A CONFERIR/)).toBeTruthy();
     expect(screen.getByRole("button", { name: "−20" })).toBeTruthy();
     expect(screen.getByRole("button", { name: "−30" })).toBeTruthy();
     expect(screen.getByRole("button", { name: "−40" })).toBeTruthy();

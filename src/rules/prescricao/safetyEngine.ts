@@ -85,6 +85,8 @@ export function safetyEngine(
   // 1) itens
   for (const it of itens) {
     const rot = `${it.drug} (seq ${it.sequence})`;
+    if (it.sequenciamentoPendente)
+      add({ sev: "BLOCK_ARTEFATO", codigo: "SEQUENCIAMENTO_PENDENTE", texto: `${rot}: ${it.sequenciamentoPendente}`, fonte: "ficha" });
     if (it.resgateMtx)
       add({ sev: "NOT_EVALUABLE", codigo: "RESGATE_MTX_INDIVIDUAL", texto: `${rot}: resgate q6h depende de níveis e plano individual de doses/vias`, fonte: it.resgateMtx.fonte });
     if (it.doseMaximaMg !== undefined && it.prescribedDose !== null && (it.unit !== "mg" || it.prescribedDose > it.doseMaximaMg))

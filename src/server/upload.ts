@@ -44,7 +44,10 @@ export async function processarUploadLocal(deps:DepsUpload,token:string,sessao:S
   if(existente){const payload=existente.payload as Record<string,unknown>,original=payload.original as Record<string,unknown>|undefined;
     const input=payload.input as Record<string,unknown>|undefined;
     if(original?.contentHash!==contentHash||original.tipo!==p.data.tipo||input?.sourceType!==p.data.sourceType)return {status:409,body:{codigo:"UPLOAD_ID_CONFLITANTE"}};
-    return {status:200,body:{codigo:"REPLAY",draftId,revision:existente.revision,linkedPatientId:existente.patientId,requiresMedicalReview:true}};
+    const documento=original.documento as Record<string,unknown>|undefined;
+    return {status:200,body:{codigo:"REPLAY",draftId,revision:existente.revision,linkedPatientId:existente.patientId,requiresMedicalReview:true,
+      conversionStatus:original.status==="PRONTO"?"PRONTO":"PENDENTE",motivo:typeof original.motivo==="string"?original.motivo:null,
+      paginasPendentes:documento?.paginasPendentes??[],totalPaginas:documento?.totalPaginas??null}};
   }
   const recebidoEm=deps.agora(),entrada:EntradaLeitura={id:p.data.id,tipo:p.data.tipo==="PDF"?"PDF_DIGITAL":"IMAGEM",conteudo:new Uint8Array(bytes),recebidoEm};
   const config=configuracaoOcrInstalada();
@@ -57,10 +60,11 @@ export async function processarUploadLocal(deps:DepsUpload,token:string,sessao:S
   if(textoIntegral.length>200_000)leitura={status:"PENDENTE",documento:leitura.documento,motivo:"TEXTO_LIMITE_PIPELINE_REVISAR_ORIGINAL"};
   const rawTranscript=textoIntegral.length>200_000?"":textoIntegral;
   const input={recordingId:p.data.id,sourceId:p.data.sourceId,sourceType:p.data.sourceType,rawTranscript};
-  const primeira=leitura.documento.paginas[0];
+  const paginasLegiveis=leitura.documento.paginas.filter(pagina=>pagina.texto.trim());
+  const primeira=paginasLegiveis[0];
   // Cada página é uma entrada do pipeline; recordingId distinto por página evita colisão multifonte.
   const state=executarPipelineExtracao(rawTranscript&&primeira?{...input,rawTranscript:primeira.texto,page:primeira.n,
-    additionalSources:leitura.documento.paginas.slice(1).map(pagina=>({...input,recordingId:`${input.recordingId}#p${pagina.n}`,rawTranscript:pagina.texto,page:pagina.n}))}:input);
+    additionalSources:paginasLegiveis.slice(1).map(pagina=>({...input,recordingId:`${input.recordingId}#p${pagina.n}`,rawTranscript:pagina.texto,page:pagina.n}))}:input);
   const salvo=salvarDraft(deps.db,{draftId,patientId:null,sourceId:p.data.sourceId,rawRef:`upload-local:${p.data.id}`,
     payload:{kind:"EXTRACAO_RASCUNHO",input,state,alerts:[],alertasRads:[],
       original:{tipo:p.data.tipo,bytesBase64:base64,contentHash,documento:leitura.documento,status:leitura.status,
@@ -68,5 +72,7 @@ export async function processarUploadLocal(deps:DepsUpload,token:string,sessao:S
         motivo:leitura.status==="PENDENTE"?leitura.motivo:null},contextoUpload:{patientId:p.data.patientId,encounterId:p.data.encounterId,tumorLotId:p.data.tumorLotId}},
     diagnostics:["VINCULO_MEDICO_PENDENTE",...(leitura.status==="PENDENTE"?[leitura.motivo]:[]),...state.confirmationRequired.map(e=>e.kind)],revision:0,criadoEm:recebidoEm});
   return {status:201,body:{codigo:"RASCUNHO_SALVO",draftId:salvo.draftId,revision:salvo.revision,linkedPatientId:null,
-    conversionStatus:leitura.status,motivo:leitura.status==="PENDENTE"?leitura.motivo:null,facts:state.facts,exceptions:state.confirmationRequired,requiresMedicalReview:true}};
+    conversionStatus:leitura.status,motivo:leitura.status==="PENDENTE"?leitura.motivo:null,
+    paginasPendentes:leitura.documento.paginasPendentes??[],totalPaginas:leitura.documento.totalPaginas??null,
+    facts:state.facts,exceptions:state.confirmationRequired,requiresMedicalReview:true}};
 }

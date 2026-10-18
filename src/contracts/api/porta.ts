@@ -1,4 +1,7 @@
 import type { InvestigacaoConsultaVisao } from './investigacao.js';
+import type { LotesPacienteResposta } from './lotes.js';
+import type { RevisaoClinicaResposta } from '../fase2/revisaoClinica.js';
+import type { PedidoEstadoDoenca,EstadoDoencaPreparado,ConfirmacaoEstadoDoenca } from '../fase2/estadoDoenca.js';
 import type { DutosClinicaVisao } from './dutos.js';
 import type { z } from "zod";
 import type { EstadoOncoassist, FontesOncoassist, RespostaOncoassist } from "./oncoassist.js";
@@ -172,7 +175,16 @@ export interface PedidoUploadLocal {patientId:string;encounterId:string;tumorLot
   sourceType:"pathology"|"imaging_report"|"prescription"|"medical_note"|"nursing"|"lab_feed";
   tipo:"PDF"|"IMAGEM";bytesBase64:string}
 export interface ResultadoUploadLocal {codigo:"RASCUNHO_SALVO"|"REPLAY";draftId:string;revision:number;
-  linkedPatientId:string|null;requiresMedicalReview:true;conversionStatus?:"PRONTO"|"PENDENTE";motivo?:string|null}
+  linkedPatientId:string|null;requiresMedicalReview:true;conversionStatus?:"PRONTO"|"PENDENTE";motivo?:string|null;
+  paginasPendentes?:number[];totalPaginas?:number|null}
+
+export interface PedidoTranscricaoLocal {
+  contexto: PedidoBundle; recordingId: string; sourceId: string; sourceType: "medical_note";
+  rawTranscript: string; captureMethod: "LOCAL_DICTATION" | "DEEPGRAM_CLOUD" | "PASTED_TEXT"; capturedTranscript: string;
+}
+export interface ResultadoTranscricaoLocal {
+  codigo: "RASCUNHO_SALVO" | "REPLAY"; draftId: string; revision: number; linkedPatientId: null; requiresMedicalReview: true;
+}
 
 export interface ItemAgendaVisao {
   horario: string;
@@ -284,6 +296,8 @@ export interface ChatSetorVisao {
 }
 
 export interface PortaConsulta {
+  ditado?(pedido:import('../fase2/ditado.js').DitadoPedido,signal?:AbortSignal):Promise<import('../fase2/ditado.js').DitadoResposta>;
+  lotesPaciente?(patientId:string,signal?:AbortSignal):Promise<LotesPacienteResposta>;
   /** Biblioteca pública autenticada com a mesma sessão desta porta, quando suportada pelo servidor. */
   biblioteca?: ApiBiblioteca;
   reconciliarMedicamentos?(pedido: {patientId:string;encounterId:string;tumorLotId:string|null;operationId:string;medicamentos:string[];listaAtualCompleta:true}, signal?:AbortSignal):Promise<{codigo:"GRAVADA"|"REPLAY";eventId:string}>;
@@ -291,6 +305,10 @@ export interface PortaConsulta {
   investigacao?(contexto: PedidoBundle, signal?: AbortSignal): Promise<InvestigacaoConsultaVisao>;
   avaliarInstrumento?(contexto:{patientId:string;encounterId:string;tumorLotId:string|null},pedido:unknown):Promise<ResultadoInstrumento>;
   uploadDocumentoLocal?(pedido:PedidoUploadLocal,signal?:AbortSignal):Promise<ResultadoUploadLocal>;
+  revisaoClinica?(contexto:PedidoBundle,packId?:string,signal?:AbortSignal):Promise<RevisaoClinicaResposta>;
+  prepararEstadoDoenca?(pedido:PedidoEstadoDoenca,signal?:AbortSignal):Promise<EstadoDoencaPreparado>;
+  confirmarEstadoDoenca?(pedido:ConfirmacaoEstadoDoenca,signal?:AbortSignal):Promise<{codigo:"GRAVADA"|"REPLAY";eventId:string}>;
+  importarTranscricaoLocal?(pedido:PedidoTranscricaoLocal,signal?:AbortSignal):Promise<ResultadoTranscricaoLocal>;
   /** Configuração global autenticada; ausente quando a porta não oferece persistência. */
   lerCaixaConfiguracao?(numero: number): Promise<CaixaConfiguracaoFlash>;
   alterarCaixaConfiguracao?(pedido: { numero: number; valorNovo: unknown; expectedRevision: number; operationId: string }): Promise<AlteracaoConfiguracaoFlash>;

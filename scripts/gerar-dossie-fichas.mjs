@@ -35,13 +35,16 @@ for (const [tumor, fichas] of porTumor) {
       "|---|------|--------|------|-------|------|------|----------|------|-------|------|----------|--------|");
     const porCampo = new Map(f.campos.map((c) => [c.campo, c]));
     for (const i of json.itens) {
-      const chave = `itens[drug=${i.drug};days=${i.days.join(",")}].standardDose`;
+      const chave = `itens[drug=${i.drug};classe=${i.classe};days=${i.days.join(",")}].standardDose`;
       const c = porCampo.get(chave);
+      if (!c) throw new Error(`CAMPO_SEM_EVIDENCIA:${f.templateId}:${chave}`);
       const sit = c?.situacao === "NAO_LOCALIZADO" ? "**NAO_LOCALIZADO**" : c?.situacao === "DOCUMENTADO_POR_DECISAO_LOCAL" ? `DECISÃO LOCAL (${c.decisaoLocal})` : c?.situacao === "DOCUMENTADO" ? "documentado" : "padrão local";
       const fontes = c?.sourceIds?.length ? c.sourceIds.map((s) => `\`${s}\``).join(" ") : "—";
       linhas.push(`| ${i.sequence} | ${i.drug} | ${i.classe} | ${i.standardDose ?? "**null**"} | ${i.unit} | ${i.doseBasis} | ${i.route} | ${i.diluent ?? "—"} | ${i.finalVolumeMl ?? "—"} | ${i.infusionTime ?? "—"} | ${i.days.join(", ")} | ${sit} | ${fontes} |`);
     }
     linhas.push("");
+    const sequencias = [...new Set(json.itens.map(i => i.sequenciamentoPendente).filter(Boolean))];
+    if (sequencias.length) linhas.push("**Sequenciamento pendente (impede emissão automática):**", ...sequencias.map(s => `- ${s}`), "");
     if (f.divergencias.length) linhas.push(`**Divergências registradas:**`, ...f.divergencias.map((d) => `- ${d}`), "");
     if (f.lacunas.length) linhas.push(`**Lacunas (impedem ativação):**`, ...f.lacunas.map((d) => `- ${d}`), "");
     if (json.itens.some((i) => i.observacao?.includes("[VERIFICAR]"))) linhas.push("> ⚠️ Itens com `[VERIFICAR]` nesta ficha permanecem pendentes — a ficha é dossiê de curadoria até decisão.", "");

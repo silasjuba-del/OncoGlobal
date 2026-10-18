@@ -22,7 +22,7 @@ export async function ambienteHttp(opcoes: { salaoRuleset?: unknown } = {}) {
   const address = server.address();
   if (!address || typeof address === "string") throw new Error("PORTA_AUSENTE");
   const base = `http://127.0.0.1:${address.port}`;
-  const request = async (path: string, method: string, raw: string, token?: string, contentType?: string) => {
+  const request = async (path: string, method: string, raw: string | Uint8Array<ArrayBuffer>, token?: string, contentType?: string) => {
     const r = await fetch(base + path, { method, headers: {
       ...(token ? { Authorization: `Bearer ${token}` } : {}),
       ...(contentType ? { "Content-Type": contentType } : {}),

@@ -2573,5 +2573,4008 @@
       "achado": "D-F1-17",
       "acao": "nivolumabe + ipilimumabe: D29 (21A)"
     }
-  ]
+  ],
+  "tumor_pack_universal": {
+    "schema_documental": "tumor-pack-universal@1",
+    "metadados": {
+      "revisao_documental": "2026-10-17-nccn-final-documental",
+      "versao": "1.3.0",
+      "data": "2026-10-17",
+      "autor_extracao": "Codex",
+      "estado": "RASCUNHO",
+      "aprovacao_clinica": null,
+      "escopo": "CAMADA_ADITIVA_UNIVERSAL_E_DELTA_DOCUMENTAL_NCCN",
+      "base_legada": {
+        "arquivo": "corpus/6-pack-tumor/esofago/pack-esofago.v2.RASCUNHO.json",
+        "commit": "2c0991d",
+        "versao": "2.0.0",
+        "sha256_bytes": "344a3908bbb4fd496ee72c783644f0c6879cbfe2d672ba7c4de8c066baf79f1b",
+        "sha256_semantico": "90172a96df1636345818b16743c78e1fb04f629697eed6d873bb7486af13c38e"
+      },
+      "nota_versao": "Camada universal 1.3.0; header identifica o legado preservado. Fechamento documental, sem aprovação clínica ou ativação.",
+      "integra_runtime": false,
+      "gera_conduta": false,
+      "historico_revisoes": [
+        {
+          "revisao_documental": "2026-10-17-nccn-delta-1",
+          "versao": "1.0.0",
+          "data": "2026-10-17",
+          "autor_extracao": "Codex",
+          "estado": "RASCUNHO",
+          "aprovacao_clinica": null,
+          "escopo": "CAMADA_ADITIVA_UNIVERSAL_E_DELTA_DOCUMENTAL_NCCN",
+          "base_legada": {
+            "arquivo": "corpus/6-pack-tumor/esofago/pack-esofago.v2.RASCUNHO.json",
+            "commit": "2c0991d",
+            "versao": "2.0.0",
+            "sha256_bytes": "344a3908bbb4fd496ee72c783644f0c6879cbfe2d672ba7c4de8c066baf79f1b",
+            "sha256_semantico": "90172a96df1636345818b16743c78e1fb04f629697eed6d873bb7486af13c38e"
+          },
+          "nota_versao": "header.versao identifica o legado intacto; esta extensão possui revisão própria. Não reutilizar aprovação/hashes antigos para o conjunto alterado.",
+          "integra_runtime": false,
+          "gera_conduta": false
+        },
+        {
+          "revisao_documental": "2026-10-17-nccn-delta-2-correcao-auditoria",
+          "versao": "1.1.0",
+          "data": "2026-10-17",
+          "autor_extracao": "Codex",
+          "estado": "RASCUNHO",
+          "aprovacao_clinica": null,
+          "escopo": "CAMADA_ADITIVA_UNIVERSAL_E_DELTA_DOCUMENTAL_NCCN",
+          "base_legada": {
+            "arquivo": "corpus/6-pack-tumor/esofago/pack-esofago.v2.RASCUNHO.json",
+            "commit": "2c0991d",
+            "versao": "2.0.0",
+            "sha256_bytes": "344a3908bbb4fd496ee72c783644f0c6879cbfe2d672ba7c4de8c066baf79f1b",
+            "sha256_semantico": "90172a96df1636345818b16743c78e1fb04f629697eed6d873bb7486af13c38e"
+          },
+          "nota_versao": "Versão desta camada:1.1.0; revisão documental:2026-10-17-nccn-delta-2-correcao-auditoria. header.versao continua referindo-se ao legado intacto. Nenhuma aprovação é transferida.",
+          "integra_runtime": false,
+          "gera_conduta": false,
+          "historico_revisoes": [
+            {
+              "revisao_documental": "2026-10-17-nccn-delta-1",
+              "versao": "1.0.0",
+              "data": "2026-10-17",
+              "autor_extracao": "Codex",
+              "estado": "RASCUNHO",
+              "aprovacao_clinica": null,
+              "escopo": "CAMADA_ADITIVA_UNIVERSAL_E_DELTA_DOCUMENTAL_NCCN",
+              "base_legada": {
+                "arquivo": "corpus/6-pack-tumor/esofago/pack-esofago.v2.RASCUNHO.json",
+                "commit": "2c0991d",
+                "versao": "2.0.0",
+                "sha256_bytes": "344a3908bbb4fd496ee72c783644f0c6879cbfe2d672ba7c4de8c066baf79f1b",
+                "sha256_semantico": "90172a96df1636345818b16743c78e1fb04f629697eed6d873bb7486af13c38e"
+              },
+              "nota_versao": "header.versao identifica o legado intacto; esta extensão possui revisão própria. Não reutilizar aprovação/hashes antigos para o conjunto alterado.",
+              "integra_runtime": false,
+              "gera_conduta": false
+            }
+          ]
+        }
+      ]
+    },
+    "identidade_ref": "/identidade",
+    "dominios": [
+      {
+        "dominio_id": 1,
+        "nome": "Diagnóstico e patologia",
+        "itens_legados_refs": [
+          "legado-b2153d25a5bd486c",
+          "legado-42e86f7a1a8588c1",
+          "legado-8566a7f9e97decc0",
+          "legado-a2eef8eafad48f7e",
+          "legado-7340926de4bbabc6",
+          "legado-50687951a98e60d7",
+          "legado-bbd3993cbc4c5fc4"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 2,
+        "nome": "Estadiamento, extensão e risco",
+        "itens_legados_refs": [
+          "legado-14b70ed38bf74741",
+          "legado-286dd2863b195a8e",
+          "legado-18bd16b6af7afab9",
+          "legado-ccb3dabe8e912854",
+          "legado-863873db6c4cabac",
+          "legado-230a043d6cbb318f",
+          "legado-8b816a941506fcba",
+          "legado-5010ffedcd8e232b",
+          "legado-bb54cfe20287b696",
+          "legado-52c9ff5b3268ccc6",
+          "legado-a5cef2d9c1afe230",
+          "legado-c8c39ba34b81efcd",
+          "legado-2274accb010d1af4"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 3,
+        "nome": "Biomarcadores e farmacogenética",
+        "itens_legados_refs": [
+          "legado-7beb3ae6d1a4ea0a",
+          "legado-d030d823c8d77319",
+          "legado-6951f650101ff869",
+          "legado-ec646c7ae9be7d7a",
+          "legado-aeaa0ffec4f65462",
+          "legado-bd540b3fbbe9f868",
+          "legado-d91c8bdc23c66026",
+          "legado-de4735f654e21878",
+          "legado-7446dd540de0e21f"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 4,
+        "nome": "Exames e requisitos documentais",
+        "itens_legados_refs": [
+          "legado-c883e0bd445eef8e",
+          "legado-8db007d375e4b4be",
+          "legado-0dae40929fe34bd5",
+          "legado-cf77581df52b71a7",
+          "legado-2e98f42b844da0b8",
+          "legado-af510040f18dfebd",
+          "legado-4ab64e3daa75f676",
+          "legado-8f3b7f9cae525235",
+          "legado-7ebd5db213c8677b",
+          "legado-c0480d5fed4eaa03",
+          "legado-b120dd137912e9dc",
+          "legado-f80e59ab73bc3d0c",
+          "legado-5abe75585076b33c",
+          "legado-7f0c6b33844e7089",
+          "legado-128cdff8b19b90df",
+          "legado-b5981fa4db36f47a",
+          "legado-89db3b6ec657bc2a",
+          "legado-149b311ddf6d27a8",
+          "legado-05b011c836638c67",
+          "legado-35576a1689c02b4b",
+          "legado-ef76406c028d5038",
+          "legado-37b0df89dce824dd",
+          "legado-4bc957f99f077a4b",
+          "legado-8d55e35e37b5b69b",
+          "legado-315ba84544423785",
+          "legado-37ea76b3e068ed61",
+          "legado-a81ee7b8f8e80d3a",
+          "legado-74ecd002dd9af7fa",
+          "legado-0cdedf215a2f4b46",
+          "legado-3df2555fe903e1ce",
+          "legado-db084fa3770a2253",
+          "legado-00203ef8b044b9ef",
+          "legado-c485d7a80a6560b4"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 5,
+        "nome": "Avaliação antes do tratamento",
+        "itens_legados_refs": [],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "NAO_ESTRUTURADO_NESTA_RODADA",
+        "observacao": "Ausência de referências não significa não aplicabilidade; textos dentro de outros itens permanecem preservados."
+      },
+      {
+        "dominio_id": 6,
+        "nome": "Tratamento e protocolos",
+        "itens_legados_refs": [
+          "legado-43590e7359a0b365",
+          "legado-ec23b865c1b557fe",
+          "legado-96ff4076a2fb613d",
+          "legado-c5e51f00febda077",
+          "legado-3e70ba2652b2a2ac",
+          "legado-7a1bc01aac57b99e",
+          "legado-2bd83ce35db8e5bd",
+          "legado-c6a84156f9149a97",
+          "legado-5883eabed311be89",
+          "legado-0ac90d7d258a2ffd",
+          "legado-752ba92cd8733a46",
+          "legado-5ba495b7b7205e39",
+          "legado-737c05e653ce4921",
+          "legado-0088de5ce40d0744",
+          "legado-2b28ebfdca3bc3f6",
+          "legado-c4f63bfcb2758125",
+          "legado-93916a6d5e5d7249",
+          "legado-21a38a3e586051b3",
+          "legado-8cb3f089489738c8",
+          "legado-6bd4d1e06f15c655",
+          "legado-c68a12c2aa9bb627",
+          "legado-53d2a5ebb76c5dbb",
+          "legado-cefcce6cd5f6f9f9",
+          "legado-b0465d60e71a206c",
+          "legado-3d96ab8bade14994",
+          "legado-24180814056cd2c6",
+          "legado-90f380d8dfeca449",
+          "legado-77fa2353f182bfd3",
+          "legado-d77d494d33102ee0",
+          "legado-790457a15fbc1f44",
+          "legado-cf6d6a5fec734428"
+        ],
+        "itens_nccn_refs": [
+          "nccn-20261017-esofago-zanidatamabe",
+          "nccn-20261017-esofago-zanidatamabe-tislelizumabe",
+          "nccn-20261017-esofago-nivo-adjuvante-cps",
+          "nccn-20261017-esofago-zanidatamabe-cis",
+          "nccn-20261017-esofago-zanidatamabe-cis-tisle",
+          "nccn-20261017-esofago-flot-durva-subgrupos"
+        ],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 7,
+        "nome": "Segurança, interações e toxicidades",
+        "itens_legados_refs": [
+          "legado-96121b10a2f2e6a5",
+          "legado-93ce095b9dc6d176",
+          "legado-958623ffa0e2705d",
+          "legado-9b1948c8c813d948",
+          "legado-3a1c9e1a9c7d733e",
+          "legado-55d99ce9ad277b6f",
+          "legado-76398ddcaabed3e4",
+          "legado-e4373ed7be695458",
+          "legado-d514adabcf0b0f7a",
+          "legado-5bf920ed1cb88e09",
+          "legado-4bf9dd3c4187e9ad",
+          "legado-d7a0fea7907e28f2"
+        ],
+        "itens_nccn_refs": [
+          "nccn-20261017-esofago-seguranca-zanidatamabe"
+        ],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 8,
+        "nome": "Suporte e cuidados",
+        "itens_legados_refs": [
+          "legado-b82c005fa2e63bfd",
+          "legado-3dc3b223926d9cc3"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 9,
+        "nome": "Avaliação de resposta e estado da doença",
+        "itens_legados_refs": [],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "NAO_ESTRUTURADO_NESTA_RODADA",
+        "observacao": "Ausência de referências não significa não aplicabilidade; textos dentro de outros itens permanecem preservados."
+      },
+      {
+        "dominio_id": 10,
+        "nome": "Seguimento e sobrevivência",
+        "itens_legados_refs": [
+          "legado-7cdbf7532146450e",
+          "legado-4e2a8b2324d391f4",
+          "legado-2aad110cd42d8146",
+          "legado-cb110359ddf27756"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 11,
+        "nome": "Encaminhamentos e atuação multiprofissional",
+        "itens_legados_refs": [
+          "legado-55eb46a2e145ab68",
+          "legado-61dae9798ba31e44",
+          "legado-1f1474315e7d48f1",
+          "legado-44a05ba8dcb0e97c",
+          "legado-0601b0e6d44e71e7"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 12,
+        "nome": "Documentos e acesso assistencial",
+        "itens_legados_refs": [
+          "legado-0d0b8e3288fc3ebb"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      }
+    ],
+    "indice_itens_legados": [
+      {
+        "item_id": "legado-b2153d25a5bd486c",
+        "origem_json_pointer": "/diagnostico/patologico/obtencao/0",
+        "sha256_conteudo": "0cf91a573f8d55171e467eba3490096cca67361083605efeb30c72e76b2788cb",
+        "nome": "/diagnostico/patologico/obtencao/0",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/obtencao/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-42e86f7a1a8588c1",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/0",
+        "sha256_conteudo": "8f1c11d1e506a2a30e53e5c98a9b9a42c220b43bbdbe190f7bf16af900865256",
+        "nome": "tipo histológico (CEC × adenocarcinoma)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8566a7f9e97decc0",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/1",
+        "sha256_conteudo": "99b0aba8c9077989af689ecbb42b7e7941c233484231eddc1ee4bb3c07d25174",
+        "nome": "grau histológico",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a2eef8eafad48f7e",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/2",
+        "sha256_conteudo": "fb48a79103d3d2752df9ec12e2e0cb81e39d8f21fc1cb47567dfb324ee5d273a",
+        "nome": "profundidade de invasão (T1a mucosa × T1b submucosa) em ressecção endoscópica",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-7340926de4bbabc6",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/3",
+        "sha256_conteudo": "7c4cbca129d73a7f9776c4f5c088d1c4773370eedcf7f2cd8dd54591a9b85d37",
+        "nome": "invasão linfovascular",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-50687951a98e60d7",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/4",
+        "sha256_conteudo": "5af8f3e14ee0c71c99a892be5183fe17bcce9a982eb89be0b368af37c949baa5",
+        "nome": "margens",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-bbd3993cbc4c5fc4",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/5",
+        "sha256_conteudo": "1c2db30f8de11395d988305fb36dac96b96aca44ce5662778a981f27aeeff0f1",
+        "nome": "tamanho tumoral (> 2 cm é fator de alto risco)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-14b70ed38bf74741",
+        "origem_json_pointer": "/estadiamento/sistema",
+        "sha256_conteudo": "d7dab6e16ae3278a0513466816530a61b1fcf4548c0e925655782b9ee09cf5ce",
+        "nome": "AJCC",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-286dd2863b195a8e",
+        "origem_json_pointer": "/estadiamento/edicao",
+        "sha256_conteudo": "0ad93e6404244471c9a1808651c8009cd78a5c3ac88356e31f20c894910b8753",
+        "nome": "8ª edição (TNM clínico, patológico e pós-neoadjuvância distintos para CEC e adenocarcinoma)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-18bd16b6af7afab9",
+        "origem_json_pointer": "/estadiamento/gruposConduta/0",
+        "sha256_conteudo": "7adc800e7876440ff89232dfeae5ae546500c92978a8d727cd2d272154f935e1",
+        "nome": "/estadiamento/gruposConduta/0",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ccb3dabe8e912854",
+        "origem_json_pointer": "/estadiamento/gruposConduta/1",
+        "sha256_conteudo": "da7bcb7f973bdb6da8788673dfaa06db92f8f5b1e9711bcf45880c09a8a439e9",
+        "nome": "/estadiamento/gruposConduta/1",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-863873db6c4cabac",
+        "origem_json_pointer": "/estadiamento/gruposConduta/2",
+        "sha256_conteudo": "bda120809844c08852fd47da6b6087cbb3fab7be107d627115f8d06054a84d3b",
+        "nome": "/estadiamento/gruposConduta/2",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-230a043d6cbb318f",
+        "origem_json_pointer": "/estadiamento/gruposConduta/3",
+        "sha256_conteudo": "a608acfa501f9f4dcc6ab16b93eaa7b7eddf0357e8c0989b3d3cf6614d7e0cb7",
+        "nome": "/estadiamento/gruposConduta/3",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8b816a941506fcba",
+        "origem_json_pointer": "/estadiamento/gruposConduta/4",
+        "sha256_conteudo": "6050b6cc1143cc8b5b47a0b4d1b5cac19d7d096263aaaca6b6da4c8fc1584afe",
+        "nome": "/estadiamento/gruposConduta/4",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-5010ffedcd8e232b",
+        "origem_json_pointer": "/estadiamento/gruposConduta/5",
+        "sha256_conteudo": "5fa6387610f1ea88eec31403f7b562ce198a3a4c631fe45e09ca33aa68b6560e",
+        "nome": "/estadiamento/gruposConduta/5",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/5/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-bb54cfe20287b696",
+        "origem_json_pointer": "/estadiamento/gruposConduta/6",
+        "sha256_conteudo": "3fdac7cd2ba98dd3f785a690bef1940720cfb929f47f3c523ba30ef14b48fcd4",
+        "nome": "/estadiamento/gruposConduta/6",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/6/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-52c9ff5b3268ccc6",
+        "origem_json_pointer": "/estadiamento/gruposConduta/7",
+        "sha256_conteudo": "f918c8c82d7962d243de4eb472b3b8c8e71fe905e89819756b8fca583c5ccd8f",
+        "nome": "/estadiamento/gruposConduta/7",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/7/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a5cef2d9c1afe230",
+        "origem_json_pointer": "/estadiamento/gruposConduta/8",
+        "sha256_conteudo": "87c723d9d6c8639f3df022ae102931e986ea6e53536709007fb96bf37ff1953b",
+        "nome": "/estadiamento/gruposConduta/8",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/8/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-c8c39ba34b81efcd",
+        "origem_json_pointer": "/estadiamento/gruposConduta/9",
+        "sha256_conteudo": "86ad4cf7d506f21712d1bff208b1313a4425318f614dc4cac5a428020b9ff714",
+        "nome": "/estadiamento/gruposConduta/9",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/9/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-2274accb010d1af4",
+        "origem_json_pointer": "/estadiamento/marcadores",
+        "sha256_conteudo": "e6898a7f8f45701d5479f27465556008f3ece4d9f55311762372ca7f7645c13d",
+        "nome": "/estadiamento/marcadores",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-7beb3ae6d1a4ea0a",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/0",
+        "sha256_conteudo": "690e4b3f5eaf73b697b1743b3abd15ecd4e1f7b298fc0eea29759f4d7ab008b5",
+        "nome": "todos os pacientes",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d030d823c8d77319",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/1",
+        "sha256_conteudo": "a2e66bdc618d6cafba276c9b68678367cce247f17cfd8ba6a00dbf2c5ece110f",
+        "nome": "suspeita ou confirmação de doença avançada/metastática; e na peça com doença residual após QT/RT neoadjuvante (nivolumabe adjuvante se CPS ≥ 1)",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-6951f650101ff869",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/2",
+        "sha256_conteudo": "285ccebe336ba6c97979ba5e4f163b58d38eb704bcc59ce3989c1c0db54061cb",
+        "nome": "adenocarcinoma avançado/metastático; IHQ 2+ confirmar por hibridização in situ (FISH/HER2_QUANTIFICACAO) — ver pack gástrico",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ec646c7ae9be7d7a",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/3",
+        "sha256_conteudo": "e3024cfcc4ddd098db9c8529c2787107aae70c28673461b3e8f74e0a35a84002",
+        "nome": "adenocarcinoma avançado/metastático",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-aeaa0ffec4f65462",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/4",
+        "sha256_conteudo": "35433f61be9b61eed03636cc154bb213fc0dbdd2e3f32f21ee37f2a343f3916a",
+        "nome": "todos os candidatos a fluoropirimidina, se o teste estiver disponível, antes do início",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-bd540b3fbbe9f868",
+        "origem_json_pointer": "/tratamento/biomarcadorTratamento/0",
+        "sha256_conteudo": "c98d372c4fb95dc9d42a9b5653d7e6d307aab7956bb4e2b3e0ed9f223ad06d8c",
+        "nome": "/tratamento/biomarcadorTratamento/0",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/biomarcadorTratamento/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d91c8bdc23c66026",
+        "origem_json_pointer": "/tratamento/biomarcadorTratamento/1",
+        "sha256_conteudo": "1e2e4863200bb5b62fa204b1119770214ef0ce724c6402bc129aa20d83217157",
+        "nome": "/tratamento/biomarcadorTratamento/1",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/biomarcadorTratamento/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-de4735f654e21878",
+        "origem_json_pointer": "/tratamento/biomarcadorTratamento/2",
+        "sha256_conteudo": "ce17a83e720636fd469235790ad427e414f6ffb3dc8a859f4f8b7481f276ddfa",
+        "nome": "/tratamento/biomarcadorTratamento/2",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/biomarcadorTratamento/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-7446dd540de0e21f",
+        "origem_json_pointer": "/tratamento/biomarcadorTratamento/3",
+        "sha256_conteudo": "2364c688aa014275de57ccc465a230028868f09db946ebd27bae4f112b31bdd7",
+        "nome": "/tratamento/biomarcadorTratamento/3",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/biomarcadorTratamento/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-c883e0bd445eef8e",
+        "origem_json_pointer": "/diagnostico/imagem/0",
+        "sha256_conteudo": "344315a289171c3fbab79279b36d7723f37b2e345a0e98c30732189e93406bb2",
+        "nome": "TC de tórax com contraste",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8db007d375e4b4be",
+        "origem_json_pointer": "/diagnostico/imagem/1",
+        "sha256_conteudo": "2ea00c79eb0264cb4e665fe5f78156db342b9e25261d94679f91276d037173c4",
+        "nome": "TC de abdome com contraste",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-0dae40929fe34bd5",
+        "origem_json_pointer": "/diagnostico/imagem/2",
+        "sha256_conteudo": "eb766c423d775535e37c0d48f67e16722ab4a06a52ef3d2bff787851442d8ab0",
+        "nome": "PET/CT",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-cf77581df52b71a7",
+        "origem_json_pointer": "/diagnostico/endoscopicos/0",
+        "sha256_conteudo": "0aadf0eb99ee51427d29492493b048f578dc3662916780bbfe6ca0489dbb80e6",
+        "nome": "Endoscopia digestiva alta com biópsias múltiplas (idealmente 6–8 fragmentos); topografia e Siewert na JEG",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/endoscopicos/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-2e98f42b844da0b8",
+        "origem_json_pointer": "/diagnostico/endoscopicos/1",
+        "sha256_conteudo": "8711ecbac77f7c79eb2ad149cf99dae85ebffbd0bc7cf99174b41af1dbb968a3",
+        "nome": "Ecoendoscopia",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/endoscopicos/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-af510040f18dfebd",
+        "origem_json_pointer": "/diagnostico/endoscopicos/2",
+        "sha256_conteudo": "6c745e1224f93f0b1ff6ed349d2b53ebf8cf9b38aefc96444ef8bd9b31d62794",
+        "nome": "Broncoscopia",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/endoscopicos/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-4ab64e3daa75f676",
+        "origem_json_pointer": "/diagnostico/endoscopicos/3",
+        "sha256_conteudo": "bd52458c2ae7fa1418df97f3cbc00a8588ffcb8ab20843805816634c80fcc164",
+        "nome": "Laparoscopia diagnóstica",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/endoscopicos/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8f3b7f9cae525235",
+        "origem_json_pointer": "/estadiamento/exames/0",
+        "sha256_conteudo": "5071656eeb6b36aa0a92b02b758af986050c42260fa078df18126901858a7545",
+        "nome": "Hemograma completo",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-7ebd5db213c8677b",
+        "origem_json_pointer": "/estadiamento/exames/1",
+        "sha256_conteudo": "5f3232eeb432aaf7214896893cee52ebf67a401e4f64e65f10d7fc9b937529e4",
+        "nome": "TGO (função hepática)",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-c0480d5fed4eaa03",
+        "origem_json_pointer": "/estadiamento/exames/2",
+        "sha256_conteudo": "712f8f066f954eddb70d912559d885e3b0ec2733059c95fd8447cf88cc9890fc",
+        "nome": "TGP (função hepática)",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b120dd137912e9dc",
+        "origem_json_pointer": "/estadiamento/exames/3",
+        "sha256_conteudo": "76bff6a251600b9f54effd758401a9f7b0b17d29ff9ef3ba6c4d707b1a4fa07c",
+        "nome": "Bilirrubinas (função hepática)",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-f80e59ab73bc3d0c",
+        "origem_json_pointer": "/estadiamento/exames/4",
+        "sha256_conteudo": "7cfd87cbccbcd5bedbd53795fe92c2c0eb64c5eec94e8b9964023ee77d272cac",
+        "nome": "Fosfatase alcalina (função hepática)",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-5abe75585076b33c",
+        "origem_json_pointer": "/estadiamento/exames/5",
+        "sha256_conteudo": "dbae9b9234a16cb68497e6fd07ca4211cc8ac91c90262fe59957e3d5404bf24e",
+        "nome": "Creatinina (função renal)",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/5/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-7f0c6b33844e7089",
+        "origem_json_pointer": "/estadiamento/exames/6",
+        "sha256_conteudo": "798b3e348379ff0b097e8ba337232dd50ef7409860c92be2fe92dca594b27e48",
+        "nome": "Ureia (função renal)",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/6/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-128cdff8b19b90df",
+        "origem_json_pointer": "/estadiamento/exames/7",
+        "sha256_conteudo": "5b800a157964e0c624bebc43f725cc771a2f7cd9f6805b3ff15403dcc5fbe14f",
+        "nome": "Ferritina",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/7/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b5981fa4db36f47a",
+        "origem_json_pointer": "/estadiamento/exames/8",
+        "sha256_conteudo": "f5e4dd94441901742082e70a4f6034b4db17c5a5d79af71929674656f7974b05",
+        "nome": "Ferro sérico",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/8/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-89db3b6ec657bc2a",
+        "origem_json_pointer": "/ligacoes/exames/0",
+        "sha256_conteudo": "00cac656db90cece9385c8c98f658accb5b7c1553202e6be466fa96d39aaf2b9",
+        "nome": "ANATOMOPATOLOGICO",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-149b311ddf6d27a8",
+        "origem_json_pointer": "/ligacoes/exames/1",
+        "sha256_conteudo": "5d85231af84b07a3159dc7b06efe241505fe0d9fa9e3cfc3ced2da4d9650052b",
+        "nome": "BILIRRUBINA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-05b011c836638c67",
+        "origem_json_pointer": "/ligacoes/exames/2",
+        "sha256_conteudo": "1e759c02b518b123ec88d5e3384da765522c5a06b6085dc06af90538168b85d1",
+        "nome": "BRONCOSCOPIA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-35576a1689c02b4b",
+        "origem_json_pointer": "/ligacoes/exames/3",
+        "sha256_conteudo": "58d8c3bbd157d0d9be5bf551553eb11e7e0c313ef1db12f06d7863faa42fbbfb",
+        "nome": "CREATININA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ef76406c028d5038",
+        "origem_json_pointer": "/ligacoes/exames/4",
+        "sha256_conteudo": "4eafbeeab923ac66d78540cd37c0f44aba4997fe0bb026271a95da2189ec190b",
+        "nome": "EDA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-37b0df89dce824dd",
+        "origem_json_pointer": "/ligacoes/exames/5",
+        "sha256_conteudo": "513fb40060e65040e362891745fb8f8e749e8b1045cd545490dd84c87ed24a0d",
+        "nome": "FERRITINA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-4bc957f99f077a4b",
+        "origem_json_pointer": "/ligacoes/exames/6",
+        "sha256_conteudo": "0e979bd1cd90028ce5e0f34d124b96e147bee9cba3ebafe4bc40d748a6bb9a84",
+        "nome": "FERRO_SERICO",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8d55e35e37b5b69b",
+        "origem_json_pointer": "/ligacoes/exames/7",
+        "sha256_conteudo": "ad1a3ef653b581c9aa616ab3bbab16ad7edca4cf6832cfc168f32389fc7cf658",
+        "nome": "FOSFATASE_ALCALINA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-315ba84544423785",
+        "origem_json_pointer": "/ligacoes/exames/8",
+        "sha256_conteudo": "bf5e386b5411abfa4e5e12d1229575a6c7ec73dfaec6347d8959b27aac19aa86",
+        "nome": "HEMOGRAMA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-37ea76b3e068ed61",
+        "origem_json_pointer": "/ligacoes/exames/9",
+        "sha256_conteudo": "99a98b9d268e78a05608d792d2fad81f4e16f25b8a4f95da9f7decd91a23a0dc",
+        "nome": "IMUNOHISTOQUIMICA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a81ee7b8f8e80d3a",
+        "origem_json_pointer": "/ligacoes/exames/10",
+        "sha256_conteudo": "3a955b75de510bd32be8d0f7de2bf070f27f223ac4c6a07cf68b35b7271856b2",
+        "nome": "PET_CT_FDG",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-74ecd002dd9af7fa",
+        "origem_json_pointer": "/ligacoes/exames/11",
+        "sha256_conteudo": "eea68f82f02592e6262514a154ff52ae85284765c1f48ab3b07cabb92ead209f",
+        "nome": "TC_ABDOMEN_SUPERIOR",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-0cdedf215a2f4b46",
+        "origem_json_pointer": "/ligacoes/exames/12",
+        "sha256_conteudo": "147b97b900462813d8c6528cc01d88f8a5102936ee96ee4fb121f8a7b77f60b0",
+        "nome": "TC_TORAX",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-3df2555fe903e1ce",
+        "origem_json_pointer": "/ligacoes/exames/13",
+        "sha256_conteudo": "1c165f5403a7b90b63dbd46f6855431c8c1ada4519299d6c123bd630df5c529d",
+        "nome": "TGO",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-db084fa3770a2253",
+        "origem_json_pointer": "/ligacoes/exames/14",
+        "sha256_conteudo": "1739a80ab81e5bbef9460ae5f51087ed284845d8e31e606c2b564c7268c2cd15",
+        "nome": "TGP",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-00203ef8b044b9ef",
+        "origem_json_pointer": "/ligacoes/exames/15",
+        "sha256_conteudo": "a133b6c797048051de63b5b1f134afc70bc5a1444e49ac2e2721bd762204440d",
+        "nome": "UREIA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-c485d7a80a6560b4",
+        "origem_json_pointer": "/ligacoes/exames/16",
+        "sha256_conteudo": "fbb7d0f6e9b247fc150be9f4105677a0118b9d1bd67dcf1326996ada89024a31",
+        "nome": "LAPAROSCOPIA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-43590e7359a0b365",
+        "origem_json_pointer": "/tratamento/cenarios/0",
+        "sha256_conteudo": "842e49ce04b032abac959aa512b475499828b49a33966e4b15dfdf20cd0ea1f2",
+        "nome": "inicial_cT1N0",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ec23b865c1b557fe",
+        "origem_json_pointer": "/tratamento/cenarios/1",
+        "sha256_conteudo": "13d1903144fcb1dfca27a4cfe037479ead72028d66ad46666f0a46db50a5366d",
+        "nome": "localmente_avancado_ressecavel (CEC)",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-96ff4076a2fb613d",
+        "origem_json_pointer": "/tratamento/cenarios/2",
+        "sha256_conteudo": "4afa14b55a631224a7d5d897adcbda8be99422db28503d5887c1a23a22c4f163",
+        "nome": "localmente_avancado_ressecavel (adenocarcinoma)",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-c5e51f00febda077",
+        "origem_json_pointer": "/tratamento/cenarios/3",
+        "sha256_conteudo": "c5620fda1b18d76bedd5a0a2122ab81adda1702486606b5ac9d004da4bc6ba16",
+        "nome": "irressecavel_T4b ou recusa/inelegível",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-3e70ba2652b2a2ac",
+        "origem_json_pointer": "/tratamento/cenarios/4",
+        "sha256_conteudo": "4ab727ff67fccaac396026766ed2d4b6d1b2e019441d5b6942b3f73a3bfbfed6",
+        "nome": "metastatico_CEC",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-7a1bc01aac57b99e",
+        "origem_json_pointer": "/tratamento/protocolos/0",
+        "sha256_conteudo": "89f55dea794ea02fcc54ad80823916e6e72a5c9522ded8af79bf79cc5084c57b",
+        "nome": "Carboplatina + paclitaxel semanal concomitante à RT definitiva",
+        "id_original": "esofago-qtrt-definitiva-carboplatina-paclitaxel",
+        "fonte_local_ref": "/tratamento/protocolos/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-2bd83ce35db8e5bd",
+        "origem_json_pointer": "/tratamento/protocolos/1",
+        "sha256_conteudo": "25f8131b1ebfde600b513d4815a6f142774baa70dd5763c3b9aee88d9374e569",
+        "nome": "Cisplatina + 5-FU concomitante à RT definitiva (Herskovic/RTOG 85-01)",
+        "id_original": "esofago-qtrt-definitiva-cisplatina-5fu",
+        "fonte_local_ref": "/tratamento/protocolos/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-c6a84156f9149a97",
+        "origem_json_pointer": "/tratamento/protocolos/2",
+        "sha256_conteudo": "620e8a2750b5e18a2ae846f2ae35f90c484bbf5389eb79aa2aa879c5fce60ed8",
+        "nome": "mFOLFOX4 concomitante à RT definitiva (PRODIGE5/ACCORD17)",
+        "id_original": "esofago-qtrt-definitiva-mfolfox4",
+        "fonte_local_ref": "/tratamento/protocolos/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-5883eabed311be89",
+        "origem_json_pointer": "/tratamento/protocolos/3",
+        "sha256_conteudo": "d45499775c7b7081ef8d74763f25dcee1c4dbe78a0271f45c935d7770764a5ff",
+        "nome": "CROSS — carboplatina + paclitaxel semanal com RT pré-operatória 41,4 Gy",
+        "id_original": "esofago-neoadjuvante-cross",
+        "fonte_local_ref": "/tratamento/protocolos/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-0ac90d7d258a2ffd",
+        "origem_json_pointer": "/tratamento/protocolos/4",
+        "sha256_conteudo": "d5c96b48b853ba2cbaa38be164774873f1dc70fbe79beff45c3c1ec47f56da00",
+        "nome": "Cisplatina + 5-FU concomitante à RT pré-operatória (CALGB 9781) — não é CROSS",
+        "id_original": "esofago-neoadjuvante-cisplatina-5fu-rt",
+        "fonte_local_ref": "/tratamento/protocolos/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-752ba92cd8733a46",
+        "origem_json_pointer": "/tratamento/protocolos/5",
+        "sha256_conteudo": "cecc544aacffa5f5dd024a3fe3e02f82ad0dfaa7e3cf630dae3e5ba17cb1e345",
+        "nome": "mFOLFOX4 concomitante à RT pré-operatória",
+        "id_original": "esofago-neoadjuvante-mfolfox4-rt",
+        "fonte_local_ref": "/tratamento/protocolos/5/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-5ba495b7b7205e39",
+        "origem_json_pointer": "/tratamento/protocolos/6",
+        "sha256_conteudo": "eb938386148b1e4f26b0f3ddfaec95c7f348e25b5ff5c31040991cfd8bf6321e",
+        "nome": "Nivolumabe adjuvante (CheckMate 577) — doença residual após QT/RT neoadjuvante + cirurgia, PD-L1 CPS ≥ 1",
+        "id_original": "esofago-adjuvante-nivolumabe",
+        "fonte_local_ref": "/tratamento/protocolos/6/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-737c05e653ce4921",
+        "origem_json_pointer": "/tratamento/protocolos/7",
+        "sha256_conteudo": "a87a012b008b77cb48f0852684dd09f16f7dec5ea45763c4c7c3ad90cef8bd38",
+        "nome": "FLOT perioperatório (FLOT4/ESOPEC)",
+        "id_original": "esofago-perioperatorio-flot",
+        "fonte_local_ref": "/tratamento/protocolos/7/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-0088de5ce40d0744",
+        "origem_json_pointer": "/tratamento/protocolos/8",
+        "sha256_conteudo": "f8e204b00705fc615b2341579b47767865a2271a6a41d877d399a743a96f4065",
+        "nome": "FLOT + durvalumabe perioperatório (MATTERHORN)",
+        "id_original": "esofago-perioperatorio-flot-durvalumabe",
+        "fonte_local_ref": "/tratamento/protocolos/8/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-2b28ebfdca3bc3f6",
+        "origem_json_pointer": "/tratamento/protocolos/9",
+        "sha256_conteudo": "4d8453367ddc10cb614fb2343adee2177d5b5405dfd5fd48a2c1fe960f2b129f",
+        "nome": "Pembrolizumabe + cisplatina + 5-FU (KEYNOTE-590)",
+        "id_original": "esofago-paliativo-1l-pembrolizumabe-cisplatina-5fu",
+        "fonte_local_ref": "/tratamento/protocolos/9/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-c4f63bfcb2758125",
+        "origem_json_pointer": "/tratamento/protocolos/10",
+        "sha256_conteudo": "3b6542d9671984b51c1fc8baf8bd4e2307c72972080f450cad4c809d86bfd1e5",
+        "nome": "Nivolumabe + cisplatina + 5-FU (CheckMate 648)",
+        "id_original": "esofago-paliativo-1l-nivolumabe-cisplatina-5fu",
+        "fonte_local_ref": "/tratamento/protocolos/10/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-93916a6d5e5d7249",
+        "origem_json_pointer": "/tratamento/protocolos/11",
+        "sha256_conteudo": "74c0b5c04e4fab1b3a1cb44485597bc306386b402ce7df60db3ef25c22afc8bc",
+        "nome": "Tislelizumabe + platina + fluoropirimidina/paclitaxel (RATIONALE-306)",
+        "id_original": "esofago-paliativo-1l-tislelizumabe-qt",
+        "fonte_local_ref": "/tratamento/protocolos/11/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-21a38a3e586051b3",
+        "origem_json_pointer": "/tratamento/protocolos/12",
+        "sha256_conteudo": "ba87b6ffea0b83f831f43b389d148d4286f6e78b34963279f3ee04583696c533",
+        "nome": "Nivolumabe + ipilimumabe (CheckMate 648)",
+        "id_original": "esofago-paliativo-1l-nivolumabe-ipilimumabe",
+        "fonte_local_ref": "/tratamento/protocolos/12/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8cb3f089489738c8",
+        "origem_json_pointer": "/tratamento/protocolos/13",
+        "sha256_conteudo": "0d4ba607412e3ef0865384faf6b25979d670357fc11474de5fb2acd11958c4ef",
+        "nome": "Cisplatina + 5-FU (PD-L1 negativo)",
+        "id_original": "esofago-paliativo-1l-cisplatina-5fu",
+        "fonte_local_ref": "/tratamento/protocolos/13/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-6bd4d1e06f15c655",
+        "origem_json_pointer": "/tratamento/protocolos/14",
+        "sha256_conteudo": "22f7d88aa5f028d595be5e3b726d900bb4a054105460bba18b451e0546040211",
+        "nome": "Pembrolizumabe monoterapia (KEYNOTE-181)",
+        "id_original": "esofago-paliativo-2l-pembrolizumabe",
+        "fonte_local_ref": "/tratamento/protocolos/14/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-c68a12c2aa9bb627",
+        "origem_json_pointer": "/tratamento/protocolos/15",
+        "sha256_conteudo": "dd7d201db4a9af1c4e781c196ab61b4d031fc377084274402817e32ffc9625ad",
+        "nome": "Nivolumabe monoterapia (ATTRACTION-3)",
+        "id_original": "esofago-paliativo-2l-nivolumabe",
+        "fonte_local_ref": "/tratamento/protocolos/15/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-53d2a5ebb76c5dbb",
+        "origem_json_pointer": "/tratamento/protocolos/16",
+        "sha256_conteudo": "7d4470e1a165b0e4cf9708af94b1246d546926d726110a3d5136578a20e1a08c",
+        "nome": "Tislelizumabe monoterapia (RATIONALE-302)",
+        "id_original": "esofago-paliativo-2l-tislelizumabe",
+        "fonte_local_ref": "/tratamento/protocolos/16/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-cefcce6cd5f6f9f9",
+        "origem_json_pointer": "/tratamento/protocolos/17",
+        "sha256_conteudo": "2e94d96f72e4c28154dc1863d2b0cd24fa429ad3cec045b797b6066f89c144c6",
+        "nome": "Paclitaxel semanal",
+        "id_original": "esofago-paliativo-2l-paclitaxel-semanal",
+        "fonte_local_ref": "/tratamento/protocolos/17/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b0465d60e71a206c",
+        "origem_json_pointer": "/tratamento/protocolos/18",
+        "sha256_conteudo": "9bd5ef996d62ff3be81aad33acd9275aa2b2cb173384308f84c8c47dbe614dec",
+        "nome": "Docetaxel monoterapia",
+        "id_original": "esofago-paliativo-2l-docetaxel",
+        "fonte_local_ref": "/tratamento/protocolos/18/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-3d96ab8bade14994",
+        "origem_json_pointer": "/tratamento/protocolos/19",
+        "sha256_conteudo": "18b4c2a51e4e420430c3b2a8e96f2db3d8d31ba3deea1caf7ea20bd4092683cd",
+        "nome": "Irinotecano monoterapia",
+        "id_original": "esofago-paliativo-2l-irinotecano",
+        "fonte_local_ref": "/tratamento/protocolos/19/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-24180814056cd2c6",
+        "origem_json_pointer": "/tratamento/cirurgia/0",
+        "sha256_conteudo": "b7eb4edea3627216ec4f7870b39c14e72d48d1c820637044dde6226c1818e624",
+        "nome": "/tratamento/cirurgia/0",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cirurgia/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-90f380d8dfeca449",
+        "origem_json_pointer": "/tratamento/cirurgia/1",
+        "sha256_conteudo": "aba4cb9378e1f661be4c5cab5816f3e66d699d4a678590538ccf7ad81611a7d9",
+        "nome": "/tratamento/cirurgia/1",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cirurgia/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-77fa2353f182bfd3",
+        "origem_json_pointer": "/tratamento/cirurgia/2",
+        "sha256_conteudo": "fe277196eed464632bd1e76d8a427c47dc145f0c721b48fa2b90594fcb556445",
+        "nome": "/tratamento/cirurgia/2",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cirurgia/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d77d494d33102ee0",
+        "origem_json_pointer": "/tratamento/radioterapia/0",
+        "sha256_conteudo": "141ad941f1ff1743327910f185f11d2b5873655fe0f508ef292ddd2d315bc384",
+        "nome": "QT/RT definitiva",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/radioterapia/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-790457a15fbc1f44",
+        "origem_json_pointer": "/tratamento/radioterapia/1",
+        "sha256_conteudo": "137d1efec0b65776bfd5d31eb19fc5a7892ffd80037f30ebc2d66ae45494a66e",
+        "nome": "QT/RT neoadjuvante CROSS",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/radioterapia/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-cf6d6a5fec734428",
+        "origem_json_pointer": "/tratamento/radioterapia/2",
+        "sha256_conteudo": "c81650aacf802c0a84adaeb6d06fb4b9e7236d6c90cefe29261664abd3cc6b21",
+        "nome": "QT/RT neoadjuvante com cisplatina+5-FU ou mFOLFOX4",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/radioterapia/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-96121b10a2f2e6a5",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/0",
+        "sha256_conteudo": "0349056aff2b410edec0a321a4d54b8913a69e485f89dfc0779e98eb817b3ff3",
+        "nome": "/ligacoes/interacoesConsultar/0",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-93ce095b9dc6d176",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/1",
+        "sha256_conteudo": "a7e3a6ddab551f7e42c58512c30675bf8011888b519d4b71f04a1d37cbdda2b1",
+        "nome": "/ligacoes/interacoesConsultar/1",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-958623ffa0e2705d",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/2",
+        "sha256_conteudo": "bee96e7f3adba9d3add0df02f4c07011e33c1047c0525fb83863051b7c468f05",
+        "nome": "/ligacoes/interacoesConsultar/2",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-9b1948c8c813d948",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/3",
+        "sha256_conteudo": "8cebf106a877105576fa2fb0745b819f23da4dbe269937450302ae9a2034b0dc",
+        "nome": "/ligacoes/interacoesConsultar/3",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-3a1c9e1a9c7d733e",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/4",
+        "sha256_conteudo": "47af5467c2c7f65b4b4bd01793abe14d0c7cee51bd0bd1b073c2cd1f6d9b21bb",
+        "nome": "/ligacoes/interacoesConsultar/4",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-55d99ce9ad277b6f",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/5",
+        "sha256_conteudo": "30f1e045ab6b836b0d635c8441792df161007962b17b4bba08cfc1f1beaffec4",
+        "nome": "/ligacoes/interacoesConsultar/5",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-76398ddcaabed3e4",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/6",
+        "sha256_conteudo": "c0ccfb98dbb831c79da3915ebd4e39ae13724c13148aa36322577436328aa3df",
+        "nome": "/ligacoes/interacoesConsultar/6",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e4373ed7be695458",
+        "origem_json_pointer": "/ligacoes/ctcaeAcao/0",
+        "sha256_conteudo": "ed80dfae3843cd0e56ab57a6d914040ab5dcc682c424c3c0c765b6e75c5b5892",
+        "nome": "/ligacoes/ctcaeAcao/0",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d514adabcf0b0f7a",
+        "origem_json_pointer": "/ligacoes/ctcaeAcao/1",
+        "sha256_conteudo": "391ce41352e1ed3c8e6afaf7d028b276b75b91999c5e71d9a9ee6cd01a45d720",
+        "nome": "/ligacoes/ctcaeAcao/1",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-5bf920ed1cb88e09",
+        "origem_json_pointer": "/ligacoes/ctcaeAcao/2",
+        "sha256_conteudo": "b9c5ac9c9f0e87f35846f374becf93239efe687df7cc033befc90257d139e0ea",
+        "nome": "/ligacoes/ctcaeAcao/2",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-4bf9dd3c4187e9ad",
+        "origem_json_pointer": "/ligacoes/ctcaeAcao/3",
+        "sha256_conteudo": "8749397153927484edc6e0369611b96a58fe0bc41275678f3edfb3fbb8a48dd7",
+        "nome": "/ligacoes/ctcaeAcao/3",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d7a0fea7907e28f2",
+        "origem_json_pointer": "/ligacoes/ctcaeAcao/4",
+        "sha256_conteudo": "968770d1e2ba706d97e5f3c58a68c1f1054f563319d17ed2c3c9b4053fd427d8",
+        "nome": "/ligacoes/ctcaeAcao/4",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b82c005fa2e63bfd",
+        "origem_json_pointer": "/tratamento/suporte",
+        "sha256_conteudo": "b9f326e05a191786fb84d3a46c97297c670ae526e5e995a136778b1ae39bc34f",
+        "nome": "/tratamento/suporte",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/suporte/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-3dc3b223926d9cc3",
+        "origem_json_pointer": "/ligacoes/suporteReceitas/0",
+        "sha256_conteudo": "73e33b7e02b9274006f68a87a9dbee1ca53032eb912043aed3cefe89d498d923",
+        "nome": "receita-sintomaticos-modelo-servico",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-7cdbf7532146450e",
+        "origem_json_pointer": "/tratamento/seguimento/0",
+        "sha256_conteudo": "028607b240dffa808e00ca2db9f44d30d82ae22b6e46ef058ca86350465a609f",
+        "nome": "sem esofagectomia prévia (ASCO)",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/seguimento/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-4e2a8b2324d391f4",
+        "origem_json_pointer": "/tratamento/seguimento/1",
+        "sha256_conteudo": "b49e8373a1c361609a64aeb6f8af946ecb4e564719cb34f9a006f2f9e19375cc",
+        "nome": "pós-esofagectomia (ASCO)",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/seguimento/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-2aad110cd42d8146",
+        "origem_json_pointer": "/ligacoes/orientacoes/0",
+        "sha256_conteudo": "b1cba1a14e200b9254b2d8f0e1ff8abb07a3917c50a8e83aa6a5934773de47bb",
+        "nome": "dieta-por-tumor (esofago-estomago)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-cb110359ddf27756",
+        "origem_json_pointer": "/ligacoes/orientacoes/1",
+        "sha256_conteudo": "afba05e2de6389b751452a9fc6c36eff43abe35e94eedf588456a5e98a7bd825",
+        "nome": "sinais-alarme-consolidado",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-55eb46a2e145ab68",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/0",
+        "sha256_conteudo": "5e90c2fe0c689c9825e2a5f61f10285aac34b9a34913dde224d87ec5e7e743b5",
+        "nome": "encaminhamento-cirurgia-oncologica",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-61dae9798ba31e44",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/1",
+        "sha256_conteudo": "b92a6c89eec82b9542c0d0bf3c50a216ebeef81398125d360e50df70c3e8f675",
+        "nome": "encaminhamento-radioterapia",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-1f1474315e7d48f1",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/2",
+        "sha256_conteudo": "6556be1200bf64f869101b5800ce14d0820e8e9e0e9897b948676e01bbd9fe90",
+        "nome": "nutrição (avaliação nutricional/gastrostomia)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-44a05ba8dcb0e97c",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/3",
+        "sha256_conteudo": "c73f27a2a8205d387876d417924de2cb3d478611f21c56019ac44414b92d722d",
+        "nome": "programa de cessação do tabagismo",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-0601b0e6d44e71e7",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/4",
+        "sha256_conteudo": "6aa3aacad646b9bef8ed480203c0525e2c57d45cdb544f511de4b362bd09c111",
+        "nome": "oncogenética se história familiar sugestiva",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-0d0b8e3288fc3ebb",
+        "origem_json_pointer": "/ligacoes/laudos/0",
+        "sha256_conteudo": "11e0efdaff727aaf3aafe13e544c5b157027d0f7448a60f65694d2c2ea068c87",
+        "nome": "laudo-nutricao",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      }
+    ],
+    "itens_nccn": [
+      {
+        "item_id": "nccn-20261017-esofago-zanidatamabe",
+        "nome": "Combinação HER2+ com oxaliplatina",
+        "tipo": "OPCAO_TERAPEUTICA",
+        "dominio_principal": 6,
+        "conteudo_extraido": "Primeira linha, Preferred, HER2-positivo: fluoropirimidina + oxaliplatina + zanidatamabe SEM imunoterapia, quando a imunoterapia é contraindicada (nota g). Profilaxia antidiarreica (nota h). Oxaliplatina é preferida à cisplatina por menor toxicidade.",
+        "aplicabilidade": {
+          "criterios": [
+            "Adenocarcinoma localmente avançado irressecável, recorrente ou metastático sem indicação de terapia local",
+            "HER2-positivo; IHQ3+ ou IHQ2+/ISH+ conforme critérios de patologia",
+            "Imunoterapia contraindicada, como transplante de órgão ou autoimunidade grave requerendo tratamento sistêmico"
+          ],
+          "paciente_individual": null,
+          "estado": "NAO_AVALIADA"
+        },
+        "dados_estruturados": {
+          "farmacos": [
+            "fluoropirimidina",
+            "oxaliplatina",
+            "zanidatamabe"
+          ],
+          "posologia": {
+            "estado": "NAO_EXTRAIDA_NESTA_RODADA",
+            "valor": null,
+            "motivo": "A rodada incorpora o delta de indicação/cenário; não completa dose por inferência."
+          }
+        },
+        "fonte_refs": [
+          {
+            "fonte_id": "nccn-89efc027268c",
+            "edicao": "4.2026",
+            "pagina_pdf": 59,
+            "paginas_pdf": [
+              59
+            ],
+            "secao": "ESOPH-F 4/12",
+            "trecho": "oxaliplatin, and zanidatamab",
+            "ancora_contextual": null,
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+          },
+          {
+            "fonte_id": "nccn-89efc027268c",
+            "edicao": "4.2026",
+            "pagina_pdf": 60,
+            "paginas_pdf": [
+              60
+            ],
+            "secao": "Notas g/h",
+            "trecho": "Where immunotherapy is contraindicated",
+            "ancora_contextual": null,
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+          },
+          {
+            "fonte_id": "nccn-89efc027268c",
+            "edicao": "4.2026",
+            "pagina_pdf": 60,
+            "paginas_pdf": [
+              60
+            ],
+            "secao": "Nota h",
+            "trecho": "Antidiarrheal prophylaxis",
+            "ancora_contextual": null,
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+          }
+        ],
+        "evidencia_declarada": {
+          "sistema": "NCCN",
+          "categoria": "2A",
+          "preferencia": "Preferred",
+          "estado": "CONFERIDA_DOCUMENTALMENTE_A_CONFERIR_CLINICAMENTE",
+          "nota": "Categoria 2A sem marca local somente quando expressamente coberta pelo cabeçalho; múltiplas categorias permanecem nos ramos."
+        },
+        "estado_extracao": "EXTRAIDO_COM_LIMITES_DECLARADOS",
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "temporalidade": {
+          "referencia": "CENARIO_DESCRITO",
+          "datas_individuais": null
+        },
+        "propor_automaticamente": false,
+        "disponivel_para_prescricao": false,
+        "acesso": {
+          "registro_anvisa": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "incorporacao_conitec": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "pcdt_ddt": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "sigtap_apac": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "cobertura_privada": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "disponibilidade_institucional": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          }
+        },
+        "alternativas_legadas_refs": [],
+        "relacoes_refs": [
+          "relacao-nccn-20261017-esofago-zanidatamabe"
+        ],
+        "conflitos_refs": [],
+        "pendencias": [
+          "REVISAO_CLINICA_DO_DELTA",
+          "VERIFICAR_ACESSO_BRASILEIRO_POR_INDICACAO",
+          "POSOLOGIA_E_SUPORTE_NAO_COMPLETOS_NESTA_RODADA"
+        ],
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-2-correcao-auditoria",
+            "correcao_id": "ALTA-esofago-zanidatamabe",
+            "anterior": {
+              "conteudo_extraido": "Nova combinação de primeira linha descrita no documento. A formulação, indicação e acesso brasileiros não são inferidos da recomendação NCCN.",
+              "fonte_refs": [
+                {
+                  "fonte_id": "nccn-89efc027268c",
+                  "paginas_pdf": [
+                    4
+                  ],
+                  "secao": "UPDATES v4.2026",
+                  "natureza": "EXTRACAO_DOCUMENTAL",
+                  "pagina_pdf": 4,
+                  "trecho": "zanidatamab-hrii or trastuzumab therapy is being considered, assessment for tumor HER2 (ERBB2)"
+                }
+              ],
+              "estado_curadoria": "A_CONFERIR",
+              "aprovacao_clinica": null,
+              "aplicabilidade": {
+                "criterios": [
+                  "Adenocarcinoma avançado/metastático HER2-positivo",
+                  "Conferir contraindicações à imunoterapia quando associada"
+                ],
+                "paciente_individual": null,
+                "estado": "NAO_AVALIADA"
+              },
+              "evidencia_declarada": {
+                "sistema": "NCCN",
+                "categoria": null,
+                "estado": "NAO_EXTRAIDA_POR_ITEM"
+              }
+            },
+            "motivo": "Correção documental após auditoria Claude e conferência da fonte; não apaga versão anterior.",
+            "aprovacao_clinica": null
+          }
+        ],
+        "fontes_por_campo": {
+          "conteudo_extraido": [
+            {
+              "fonte_id": "nccn-89efc027268c",
+              "edicao": "4.2026",
+              "pagina_pdf": 59,
+              "paginas_pdf": [
+                59
+              ],
+              "secao": "ESOPH-F 4/12",
+              "trecho": "oxaliplatin, and zanidatamab",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+            },
+            {
+              "fonte_id": "nccn-89efc027268c",
+              "edicao": "4.2026",
+              "pagina_pdf": 60,
+              "paginas_pdf": [
+                60
+              ],
+              "secao": "Notas g/h",
+              "trecho": "Where immunotherapy is contraindicated",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+            },
+            {
+              "fonte_id": "nccn-89efc027268c",
+              "edicao": "4.2026",
+              "pagina_pdf": 60,
+              "paginas_pdf": [
+                60
+              ],
+              "secao": "Nota h",
+              "trecho": "Antidiarrheal prophylaxis",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+            }
+          ],
+          "aplicabilidade": [
+            {
+              "fonte_id": "nccn-89efc027268c",
+              "edicao": "4.2026",
+              "pagina_pdf": 59,
+              "paginas_pdf": [
+                59
+              ],
+              "secao": "ESOPH-F 4/12",
+              "trecho": "oxaliplatin, and zanidatamab",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+            },
+            {
+              "fonte_id": "nccn-89efc027268c",
+              "edicao": "4.2026",
+              "pagina_pdf": 60,
+              "paginas_pdf": [
+                60
+              ],
+              "secao": "Notas g/h",
+              "trecho": "Where immunotherapy is contraindicated",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+            },
+            {
+              "fonte_id": "nccn-89efc027268c",
+              "edicao": "4.2026",
+              "pagina_pdf": 60,
+              "paginas_pdf": [
+                60
+              ],
+              "secao": "Nota h",
+              "trecho": "Antidiarrheal prophylaxis",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+            }
+          ],
+          "evidencia_declarada": [
+            {
+              "fonte_id": "nccn-89efc027268c",
+              "edicao": "4.2026",
+              "pagina_pdf": 59,
+              "paginas_pdf": [
+                59
+              ],
+              "secao": "ESOPH-F 4/12",
+              "trecho": "oxaliplatin, and zanidatamab",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+            },
+            {
+              "fonte_id": "nccn-89efc027268c",
+              "edicao": "4.2026",
+              "pagina_pdf": 60,
+              "paginas_pdf": [
+                60
+              ],
+              "secao": "Notas g/h",
+              "trecho": "Where immunotherapy is contraindicated",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+            },
+            {
+              "fonte_id": "nccn-89efc027268c",
+              "edicao": "4.2026",
+              "pagina_pdf": 60,
+              "paginas_pdf": [
+                60
+              ],
+              "secao": "Nota h",
+              "trecho": "Antidiarrheal prophylaxis",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+            }
+          ]
+        },
+        "correcoes_auditoria": [
+          {
+            "id": "ALTA-esofago-zanidatamabe",
+            "revisao": "2026-10-17-nccn-delta-2-correcao-auditoria",
+            "estado": "APLICADA_COM_CONFERENCIA_DOCUMENTAL",
+            "fontes": [
+              {
+                "fonte_id": "nccn-89efc027268c",
+                "edicao": "4.2026",
+                "pagina_pdf": 59,
+                "paginas_pdf": [
+                  59
+                ],
+                "secao": "ESOPH-F 4/12",
+                "trecho": "oxaliplatin, and zanidatamab",
+                "ancora_contextual": null,
+                "natureza": "EXTRACAO_DOCUMENTAL",
+                "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+              },
+              {
+                "fonte_id": "nccn-89efc027268c",
+                "edicao": "4.2026",
+                "pagina_pdf": 60,
+                "paginas_pdf": [
+                  60
+                ],
+                "secao": "Notas g/h",
+                "trecho": "Where immunotherapy is contraindicated",
+                "ancora_contextual": null,
+                "natureza": "EXTRACAO_DOCUMENTAL",
+                "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+              },
+              {
+                "fonte_id": "nccn-89efc027268c",
+                "edicao": "4.2026",
+                "pagina_pdf": 60,
+                "paginas_pdf": [
+                  60
+                ],
+                "secao": "Nota h",
+                "trecho": "Antidiarrheal prophylaxis",
+                "ancora_contextual": null,
+                "natureza": "EXTRACAO_DOCUMENTAL",
+                "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+              }
+            ],
+            "ajuste_ao_parecer": null
+          }
+        ]
+      },
+      {
+        "item_id": "nccn-20261017-esofago-zanidatamabe-tislelizumabe",
+        "nome": "Combinação HER2+ com oxaliplatina e tislelizumabe",
+        "tipo": "OPCAO_TERAPEUTICA",
+        "dominio_principal": 6,
+        "conteudo_extraido": "Primeira linha HER2-positiva, Preferred, categoria 2A: combinação com tislelizumabe. Nota f: sem ICI prévio OU sem progressão tumoral durante o ICI. Manejo de toxicidade de imunoterapia na nota b; profilaxia antidiarreica na nota h. Oxaliplatina é preferida à cisplatina por menor toxicidade. A categoria 2B da linha com cisplatina pertence à combinação SEM tislelizumabe.",
+        "aplicabilidade": {
+          "criterios": [
+            "Adenocarcinoma HER2-positivo avançado/recorrente/metastático",
+            "Primeira linha",
+            "Sem ICI prévio OU sem progressão durante ICI",
+            "Conferir toxicidades e profilaxia antidiarreica"
+          ],
+          "paciente_individual": null,
+          "estado": "NAO_AVALIADA"
+        },
+        "dados_estruturados": {
+          "farmacos": [
+            "fluoropirimidina",
+            "oxaliplatina",
+            "zanidatamabe",
+            "tislelizumabe"
+          ],
+          "posologia": {
+            "estado": "NAO_EXTRAIDA_NESTA_RODADA",
+            "valor": null,
+            "motivo": "A rodada incorpora o delta de indicação/cenário; não completa dose por inferência."
+          }
+        },
+        "fonte_refs": [
+          {
+            "fonte_id": "nccn-89efc027268c",
+            "edicao": "4.2026",
+            "pagina_pdf": 59,
+            "paginas_pdf": [
+              59
+            ],
+            "secao": "ESOPH-F 4/12",
+            "trecho": "oxaliplatin, zanidatamab",
+            "ancora_contextual": null,
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+          },
+          {
+            "fonte_id": "nccn-89efc027268c",
+            "edicao": "4.2026",
+            "pagina_pdf": 60,
+            "paginas_pdf": [
+              60
+            ],
+            "secao": "Notas f/h e b",
+            "trecho": "If no prior checkpoint inhibitor",
+            "ancora_contextual": null,
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+          },
+          {
+            "fonte_id": "nccn-89efc027268c",
+            "edicao": "4.2026",
+            "pagina_pdf": 60,
+            "paginas_pdf": [
+              60
+            ],
+            "secao": "Nota h",
+            "trecho": "Antidiarrheal prophylaxis",
+            "ancora_contextual": null,
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+          }
+        ],
+        "evidencia_declarada": {
+          "sistema": "NCCN",
+          "categoria": "2A",
+          "preferencia": "Preferred",
+          "estado": "CONFERIDA_DOCUMENTALMENTE_A_CONFERIR_CLINICAMENTE",
+          "nota": "Categoria 2A sem marca local somente quando expressamente coberta pelo cabeçalho; múltiplas categorias permanecem nos ramos."
+        },
+        "estado_extracao": "EXTRAIDO_COM_LIMITES_DECLARADOS",
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "temporalidade": {
+          "referencia": "CENARIO_DESCRITO",
+          "datas_individuais": null
+        },
+        "propor_automaticamente": false,
+        "disponivel_para_prescricao": false,
+        "acesso": {
+          "registro_anvisa": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "incorporacao_conitec": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "pcdt_ddt": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "sigtap_apac": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "cobertura_privada": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "disponibilidade_institucional": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          }
+        },
+        "alternativas_legadas_refs": [],
+        "relacoes_refs": [
+          "relacao-nccn-20261017-esofago-zanidatamabe-tislelizumabe"
+        ],
+        "conflitos_refs": [],
+        "pendencias": [
+          "REVISAO_CLINICA_DO_DELTA",
+          "VERIFICAR_ACESSO_BRASILEIRO_POR_INDICACAO",
+          "POSOLOGIA_E_SUPORTE_NAO_COMPLETOS_NESTA_RODADA"
+        ],
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-2-correcao-auditoria",
+            "correcao_id": "M01",
+            "anterior": {
+              "conteudo_extraido": "Nova combinação de primeira linha descrita no documento. A formulação, indicação e acesso brasileiros não são inferidos da recomendação NCCN.",
+              "fonte_refs": [
+                {
+                  "fonte_id": "nccn-89efc027268c",
+                  "paginas_pdf": [
+                    4
+                  ],
+                  "secao": "UPDATES v4.2026",
+                  "natureza": "EXTRACAO_DOCUMENTAL",
+                  "pagina_pdf": 4,
+                  "trecho": "zanidatamab-hrii or trastuzumab therapy is being considered, assessment for tumor HER2 (ERBB2)"
+                }
+              ],
+              "estado_curadoria": "A_CONFERIR",
+              "aprovacao_clinica": null,
+              "aplicabilidade": {
+                "criterios": [
+                  "Adenocarcinoma avançado/metastático HER2-positivo",
+                  "Conferir contraindicações à imunoterapia quando associada"
+                ],
+                "paciente_individual": null,
+                "estado": "NAO_AVALIADA"
+              },
+              "evidencia_declarada": {
+                "sistema": "NCCN",
+                "categoria": null,
+                "estado": "NAO_EXTRAIDA_POR_ITEM"
+              }
+            },
+            "motivo": "Correção documental após auditoria Claude e conferência da fonte; não apaga versão anterior.",
+            "aprovacao_clinica": null
+          }
+        ],
+        "fontes_por_campo": {
+          "conteudo_extraido": [
+            {
+              "fonte_id": "nccn-89efc027268c",
+              "edicao": "4.2026",
+              "pagina_pdf": 59,
+              "paginas_pdf": [
+                59
+              ],
+              "secao": "ESOPH-F 4/12",
+              "trecho": "oxaliplatin, zanidatamab",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+            },
+            {
+              "fonte_id": "nccn-89efc027268c",
+              "edicao": "4.2026",
+              "pagina_pdf": 60,
+              "paginas_pdf": [
+                60
+              ],
+              "secao": "Notas f/h e b",
+              "trecho": "If no prior checkpoint inhibitor",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+            },
+            {
+              "fonte_id": "nccn-89efc027268c",
+              "edicao": "4.2026",
+              "pagina_pdf": 60,
+              "paginas_pdf": [
+                60
+              ],
+              "secao": "Nota h",
+              "trecho": "Antidiarrheal prophylaxis",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+            }
+          ],
+          "aplicabilidade": [
+            {
+              "fonte_id": "nccn-89efc027268c",
+              "edicao": "4.2026",
+              "pagina_pdf": 59,
+              "paginas_pdf": [
+                59
+              ],
+              "secao": "ESOPH-F 4/12",
+              "trecho": "oxaliplatin, zanidatamab",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+            },
+            {
+              "fonte_id": "nccn-89efc027268c",
+              "edicao": "4.2026",
+              "pagina_pdf": 60,
+              "paginas_pdf": [
+                60
+              ],
+              "secao": "Notas f/h e b",
+              "trecho": "If no prior checkpoint inhibitor",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+            },
+            {
+              "fonte_id": "nccn-89efc027268c",
+              "edicao": "4.2026",
+              "pagina_pdf": 60,
+              "paginas_pdf": [
+                60
+              ],
+              "secao": "Nota h",
+              "trecho": "Antidiarrheal prophylaxis",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+            }
+          ],
+          "evidencia_declarada": [
+            {
+              "fonte_id": "nccn-89efc027268c",
+              "edicao": "4.2026",
+              "pagina_pdf": 59,
+              "paginas_pdf": [
+                59
+              ],
+              "secao": "ESOPH-F 4/12",
+              "trecho": "oxaliplatin, zanidatamab",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+            },
+            {
+              "fonte_id": "nccn-89efc027268c",
+              "edicao": "4.2026",
+              "pagina_pdf": 60,
+              "paginas_pdf": [
+                60
+              ],
+              "secao": "Notas f/h e b",
+              "trecho": "If no prior checkpoint inhibitor",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+            },
+            {
+              "fonte_id": "nccn-89efc027268c",
+              "edicao": "4.2026",
+              "pagina_pdf": 60,
+              "paginas_pdf": [
+                60
+              ],
+              "secao": "Nota h",
+              "trecho": "Antidiarrheal prophylaxis",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+            }
+          ]
+        },
+        "correcoes_auditoria": [
+          {
+            "id": "M01",
+            "revisao": "2026-10-17-nccn-delta-2-correcao-auditoria",
+            "estado": "APLICADA_COM_CONFERENCIA_DOCUMENTAL",
+            "fontes": [
+              {
+                "fonte_id": "nccn-89efc027268c",
+                "edicao": "4.2026",
+                "pagina_pdf": 59,
+                "paginas_pdf": [
+                  59
+                ],
+                "secao": "ESOPH-F 4/12",
+                "trecho": "oxaliplatin, zanidatamab",
+                "ancora_contextual": null,
+                "natureza": "EXTRACAO_DOCUMENTAL",
+                "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+              },
+              {
+                "fonte_id": "nccn-89efc027268c",
+                "edicao": "4.2026",
+                "pagina_pdf": 60,
+                "paginas_pdf": [
+                  60
+                ],
+                "secao": "Notas f/h e b",
+                "trecho": "If no prior checkpoint inhibitor",
+                "ancora_contextual": null,
+                "natureza": "EXTRACAO_DOCUMENTAL",
+                "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+              },
+              {
+                "fonte_id": "nccn-89efc027268c",
+                "edicao": "4.2026",
+                "pagina_pdf": 60,
+                "paginas_pdf": [
+                  60
+                ],
+                "secao": "Nota h",
+                "trecho": "Antidiarrheal prophylaxis",
+                "ancora_contextual": null,
+                "natureza": "EXTRACAO_DOCUMENTAL",
+                "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+              }
+            ],
+            "ajuste_ao_parecer": "A nota de toxicidade é b em ESOPH e c em GAST; o parecer a chamava c para ambos."
+          }
+        ]
+      },
+      {
+        "item_id": "nccn-20261017-esofago-seguranca-zanidatamabe",
+        "nome": "Suporte e administração nas combinações com zanidatamabe",
+        "tipo": "SEGURANCA_E_SUPORTE",
+        "dominio_principal": 7,
+        "conteudo_extraido": "A fonte requer profilaxia antidiarreica na associação com quimioterapia e orienta omitir bolus de fluoruracila na combinação com FOLFOX devido ao risco de diarreia.",
+        "aplicabilidade": {
+          "criterios": [
+            "Aplicável apenas à combinação correspondente com zanidatamabe"
+          ],
+          "paciente_individual": null,
+          "estado": "NAO_AVALIADA"
+        },
+        "dados_estruturados": {},
+        "fonte_refs": [
+          {
+            "fonte_id": "nccn-89efc027268c",
+            "paginas_pdf": [
+              4
+            ],
+            "secao": "UPDATES; notas do tratamento sistêmico",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "pagina_pdf": 4,
+            "trecho": "Antidiarrheal prophylaxis should be given when zanidatamab-hrii is used in combination with"
+          }
+        ],
+        "evidencia_declarada": {
+          "sistema": "NCCN",
+          "categoria": null,
+          "estado": "NAO_EXTRAIDA_POR_ITEM"
+        },
+        "estado_extracao": "EXTRAIDO_COM_LIMITES_DECLARADOS",
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "temporalidade": {
+          "referencia": "CENARIO_DESCRITO",
+          "datas_individuais": null
+        },
+        "propor_automaticamente": false,
+        "disponivel_para_prescricao": false,
+        "acesso": {
+          "registro_anvisa": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "incorporacao_conitec": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "pcdt_ddt": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "sigtap_apac": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "cobertura_privada": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "disponibilidade_institucional": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          }
+        },
+        "alternativas_legadas_refs": [],
+        "relacoes_refs": [
+          "relacao-nccn-20261017-esofago-seguranca-zanidatamabe"
+        ],
+        "conflitos_refs": [],
+        "pendencias": [
+          "REVISAO_CLINICA_DO_DELTA",
+          "VERIFICAR_ACESSO_BRASILEIRO_POR_INDICACAO"
+        ]
+      },
+      {
+        "item_id": "nccn-20261017-esofago-nivo-adjuvante-cps",
+        "nome": "Nivolumabe adjuvante: divergência sobre CPS",
+        "tipo": "OPCAO_TERAPEUTICA",
+        "dominio_principal": 6,
+        "conteudo_extraido": "Nivolumabe adjuvante, categoria 1, após QT/RT pré-operatória com ressecçãoR0 e doença residual. ESOPH-7 descreve ypT positivo e/ou N positivo sem exigir CPS. Preservar o conflito com CPS≥1 do legado SBOC.",
+        "aplicabilidade": {
+          "criterios": [
+            "CEC de esôfago",
+            "QT/RT pré-operatória",
+            "Ressecção R0",
+            "Doença residual ypT e/ou N"
+          ],
+          "paciente_individual": null,
+          "estado": "NAO_AVALIADA"
+        },
+        "dados_estruturados": {
+          "farmacos": [
+            "nivolumabe"
+          ],
+          "posologia": {
+            "estado": "NAO_EXTRAIDA_NESTA_RODADA",
+            "valor": null,
+            "motivo": "A rodada incorpora o delta de indicação/cenário; não completa dose por inferência."
+          }
+        },
+        "fonte_refs": [
+          {
+            "fonte_id": "nccn-89efc027268c",
+            "edicao": "4.2026",
+            "pagina_pdf": 19,
+            "paginas_pdf": [
+              19
+            ],
+            "secao": "ESOPH-7",
+            "trecho": "Nivolumab (category 1)",
+            "ancora_contextual": null,
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+          },
+          {
+            "fonte_id": "nccn-89efc027268c",
+            "edicao": "4.2026",
+            "pagina_pdf": 58,
+            "paginas_pdf": [
+              58
+            ],
+            "secao": "ESOPH-F 3/12",
+            "trecho": "Nivolumab only after preoperative chemoradiation",
+            "ancora_contextual": null,
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+          }
+        ],
+        "evidencia_declarada": {
+          "sistema": "NCCN",
+          "categoria": "1",
+          "preferencia": "Preferred em ESOPH-F 3/12",
+          "estado": "CONFERIDA_DOCUMENTALMENTE_A_CONFERIR_CLINICAMENTE",
+          "nota": "Categoria 2A sem marca local somente quando expressamente coberta pelo cabeçalho; múltiplas categorias permanecem nos ramos."
+        },
+        "estado_extracao": "EXTRAIDO_COM_LIMITES_DECLARADOS",
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "temporalidade": {
+          "referencia": "CENARIO_DESCRITO",
+          "datas_individuais": null
+        },
+        "propor_automaticamente": false,
+        "disponivel_para_prescricao": false,
+        "acesso": {
+          "registro_anvisa": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "incorporacao_conitec": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "pcdt_ddt": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "sigtap_apac": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "cobertura_privada": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "disponibilidade_institucional": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          }
+        },
+        "alternativas_legadas_refs": [
+          "/tratamento/protocolos/6",
+          "/diagnostico/patologico/molecular/1"
+        ],
+        "relacoes_refs": [
+          "relacao-nccn-20261017-esofago-nivo-adjuvante-cps"
+        ],
+        "conflitos_refs": [
+          "conflito-nccn-20261017-esofago-nivo-adjuvante-cps"
+        ],
+        "pendencias": [
+          "REVISAO_CLINICA_DO_DELTA",
+          "VERIFICAR_ACESSO_BRASILEIRO_POR_INDICACAO",
+          "POSOLOGIA_E_SUPORTE_NAO_COMPLETOS_NESTA_RODADA"
+        ],
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-2-correcao-auditoria",
+            "correcao_id": "AD2-4",
+            "anterior": {
+              "conteudo_extraido": "No caminho para CEC com QT/RT pré-operatória, ressecção R0 e ypT positivo e/ou N positivo, o NCCN indica nivolumabe sem condição CPS nessa página.",
+              "fonte_refs": [
+                {
+                  "fonte_id": "nccn-89efc027268c",
+                  "paginas_pdf": [
+                    19
+                  ],
+                  "secao": "ESOPH-7",
+                  "natureza": "EXTRACAO_DOCUMENTAL",
+                  "pagina_pdf": 19,
+                  "trecho": "Nivolumab (category 1)y,ii PLEASE NOTE that use of this NCCN Content is"
+                }
+              ],
+              "estado_curadoria": "A_CONFERIR",
+              "aprovacao_clinica": null,
+              "evidencia_declarada": {
+                "sistema": "NCCN",
+                "categoria": "1",
+                "estado": "TRANSCRITA"
+              }
+            },
+            "motivo": "Correção documental após auditoria Claude e conferência da fonte; não apaga versão anterior.",
+            "aprovacao_clinica": null
+          },
+          {
+            "revisao": "2026-10-17-nccn-final-documental",
+            "anterior": {
+              "conteudo_extraido": "Nivolumabe adjuvante, categoria1, após QT/RT pré-operatória com ressecçãoR0 e doença residual. ESOPH-7 descreve ypT positivo e/ou N positivo sem exigir CPS. Preservar o conflito com CPS≥1 do legado SBOC."
+            },
+            "motivo": "Espaçamento da prosa; sem modificar valores, códigos ou fontes."
+          }
+        ],
+        "fontes_por_campo": {
+          "conteudo_extraido": [
+            {
+              "fonte_id": "nccn-89efc027268c",
+              "edicao": "4.2026",
+              "pagina_pdf": 19,
+              "paginas_pdf": [
+                19
+              ],
+              "secao": "ESOPH-7",
+              "trecho": "Nivolumab (category 1)",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+            },
+            {
+              "fonte_id": "nccn-89efc027268c",
+              "edicao": "4.2026",
+              "pagina_pdf": 58,
+              "paginas_pdf": [
+                58
+              ],
+              "secao": "ESOPH-F 3/12",
+              "trecho": "Nivolumab only after preoperative chemoradiation",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+            }
+          ],
+          "evidencia_declarada": [
+            {
+              "fonte_id": "nccn-89efc027268c",
+              "edicao": "4.2026",
+              "pagina_pdf": 19,
+              "paginas_pdf": [
+                19
+              ],
+              "secao": "ESOPH-7",
+              "trecho": "Nivolumab (category 1)",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+            },
+            {
+              "fonte_id": "nccn-89efc027268c",
+              "edicao": "4.2026",
+              "pagina_pdf": 58,
+              "paginas_pdf": [
+                58
+              ],
+              "secao": "ESOPH-F 3/12",
+              "trecho": "Nivolumab only after preoperative chemoradiation",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+            }
+          ]
+        },
+        "correcoes_auditoria": [
+          {
+            "id": "AD2-4",
+            "revisao": "2026-10-17-nccn-delta-2-correcao-auditoria",
+            "estado": "APLICADA_COM_CONFERENCIA_DOCUMENTAL",
+            "fontes": [
+              {
+                "fonte_id": "nccn-89efc027268c",
+                "edicao": "4.2026",
+                "pagina_pdf": 19,
+                "paginas_pdf": [
+                  19
+                ],
+                "secao": "ESOPH-7",
+                "trecho": "Nivolumab (category 1)",
+                "ancora_contextual": null,
+                "natureza": "EXTRACAO_DOCUMENTAL",
+                "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+              },
+              {
+                "fonte_id": "nccn-89efc027268c",
+                "edicao": "4.2026",
+                "pagina_pdf": 58,
+                "paginas_pdf": [
+                  58
+                ],
+                "secao": "ESOPH-F 3/12",
+                "trecho": "Nivolumab only after preoperative chemoradiation",
+                "ancora_contextual": null,
+                "natureza": "EXTRACAO_DOCUMENTAL",
+                "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+              }
+            ],
+            "ajuste_ao_parecer": null
+          }
+        ]
+      },
+      {
+        "item_id": "nccn-20261017-esofago-zanidatamabe-cis",
+        "nome": "Fluoropirimidina/cisplatina + zanidatamabe",
+        "tipo": "OPCAO_TERAPEUTICA",
+        "dominio_principal": 6,
+        "conteudo_extraido": "Primeira linha, Preferred, HER2-positivo: fluoropirimidina + cisplatina + zanidatamabe SEM imunoterapia, quando a imunoterapia é contraindicada (nota g). Profilaxia antidiarreica (nota h). Oxaliplatina é preferida à cisplatina por menor toxicidade. A variante com cisplatina sem tislelizumabe é categoria 2B.",
+        "aplicabilidade": {
+          "criterios": [
+            "Adenocarcinoma localmente avançado irressecável, recorrente ou metastático sem indicação de terapia local",
+            "HER2-positivo; IHQ3+ ou IHQ2+/ISH+ conforme critérios de patologia",
+            "Imunoterapia contraindicada, como transplante de órgão ou autoimunidade grave requerendo tratamento sistêmico"
+          ],
+          "paciente_individual": null,
+          "estado": "NAO_AVALIADA"
+        },
+        "dados_estruturados": {
+          "farmacos": [
+            "fluoropirimidina",
+            "cisplatina",
+            "zanidatamabe"
+          ],
+          "posologia": {
+            "estado": "NAO_EXTRAIDA_NESTA_RODADA",
+            "valor": null,
+            "motivo": "A rodada incorpora o delta de indicação/cenário; não completa dose por inferência."
+          }
+        },
+        "fonte_refs": [
+          {
+            "fonte_id": "nccn-89efc027268c",
+            "edicao": "4.2026",
+            "pagina_pdf": 59,
+            "paginas_pdf": [
+              59
+            ],
+            "secao": "ESOPH-F 4/12",
+            "trecho": "cisplatin, and zanidatamab",
+            "ancora_contextual": null,
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+          },
+          {
+            "fonte_id": "nccn-89efc027268c",
+            "edicao": "4.2026",
+            "pagina_pdf": 60,
+            "paginas_pdf": [
+              60
+            ],
+            "secao": "Notas g/h",
+            "trecho": "Where immunotherapy is contraindicated",
+            "ancora_contextual": null,
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+          },
+          {
+            "fonte_id": "nccn-89efc027268c",
+            "edicao": "4.2026",
+            "pagina_pdf": 60,
+            "paginas_pdf": [
+              60
+            ],
+            "secao": "Nota h",
+            "trecho": "Antidiarrheal prophylaxis",
+            "ancora_contextual": null,
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+          }
+        ],
+        "evidencia_declarada": {
+          "sistema": "NCCN",
+          "categoria": "2B",
+          "preferencia": "Preferred",
+          "estado": "CONFERIDA_DOCUMENTALMENTE_A_CONFERIR_CLINICAMENTE",
+          "nota": "Categoria 2A sem marca local somente quando expressamente coberta pelo cabeçalho; múltiplas categorias permanecem nos ramos."
+        },
+        "estado_extracao": "EXTRAIDO_COM_LIMITES_DECLARADOS",
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "temporalidade": {
+          "referencia": "CENARIO_DESCRITO",
+          "datas_individuais": null
+        },
+        "propor_automaticamente": false,
+        "disponivel_para_prescricao": false,
+        "acesso": {
+          "registro_anvisa": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "incorporacao_conitec": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "pcdt_ddt": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "sigtap_apac": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "cobertura_privada": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "disponibilidade_institucional": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          }
+        },
+        "alternativas_legadas_refs": [],
+        "relacoes_refs": [
+          "relacao-nccn-20261017-esofago-zanidatamabe-cis"
+        ],
+        "conflitos_refs": [],
+        "pendencias": [
+          "REVISAO_CLINICA_DO_DELTA",
+          "VERIFICAR_ACESSO_BRASILEIRO_POR_INDICACAO",
+          "POSOLOGIA_E_SUPORTE_NAO_COMPLETOS_NESTA_RODADA"
+        ],
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-2-correcao-auditoria",
+            "correcao_id": "ALTA-esofago-zanidatamabe-cis",
+            "anterior": {
+              "conteudo_extraido": "Variante de primeira linha HER2+ com cisplatina, separada das combinações com oxaliplatina.",
+              "fonte_refs": [
+                {
+                  "fonte_id": "nccn-89efc027268c",
+                  "paginas_pdf": [
+                    4
+                  ],
+                  "secao": "UPDATES v4.2026",
+                  "natureza": "EXTRACAO_DOCUMENTAL",
+                  "pagina_pdf": 4,
+                  "trecho": "cisplatin, and zanidatamab-hrii (category 2B) \u0017Fluoropyrimidine (fluorouracil or capecitabine), cisplatin, zanidatamab-hrii, and"
+                }
+              ],
+              "estado_curadoria": "A_CONFERIR",
+              "aprovacao_clinica": null,
+              "aplicabilidade": {
+                "criterios": [
+                  "Adenocarcinoma avançado/metastático HER2+",
+                  "Conferir contraindicações à imunoterapia quando associada"
+                ],
+                "paciente_individual": null,
+                "estado": "NAO_AVALIADA"
+              },
+              "evidencia_declarada": {
+                "sistema": "NCCN",
+                "categoria": "2B",
+                "estado": "TRANSCRITA"
+              }
+            },
+            "motivo": "Correção documental após auditoria Claude e conferência da fonte; não apaga versão anterior.",
+            "aprovacao_clinica": null
+          }
+        ],
+        "fontes_por_campo": {
+          "conteudo_extraido": [
+            {
+              "fonte_id": "nccn-89efc027268c",
+              "edicao": "4.2026",
+              "pagina_pdf": 59,
+              "paginas_pdf": [
+                59
+              ],
+              "secao": "ESOPH-F 4/12",
+              "trecho": "cisplatin, and zanidatamab",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+            },
+            {
+              "fonte_id": "nccn-89efc027268c",
+              "edicao": "4.2026",
+              "pagina_pdf": 60,
+              "paginas_pdf": [
+                60
+              ],
+              "secao": "Notas g/h",
+              "trecho": "Where immunotherapy is contraindicated",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+            },
+            {
+              "fonte_id": "nccn-89efc027268c",
+              "edicao": "4.2026",
+              "pagina_pdf": 60,
+              "paginas_pdf": [
+                60
+              ],
+              "secao": "Nota h",
+              "trecho": "Antidiarrheal prophylaxis",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+            }
+          ],
+          "aplicabilidade": [
+            {
+              "fonte_id": "nccn-89efc027268c",
+              "edicao": "4.2026",
+              "pagina_pdf": 59,
+              "paginas_pdf": [
+                59
+              ],
+              "secao": "ESOPH-F 4/12",
+              "trecho": "cisplatin, and zanidatamab",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+            },
+            {
+              "fonte_id": "nccn-89efc027268c",
+              "edicao": "4.2026",
+              "pagina_pdf": 60,
+              "paginas_pdf": [
+                60
+              ],
+              "secao": "Notas g/h",
+              "trecho": "Where immunotherapy is contraindicated",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+            },
+            {
+              "fonte_id": "nccn-89efc027268c",
+              "edicao": "4.2026",
+              "pagina_pdf": 60,
+              "paginas_pdf": [
+                60
+              ],
+              "secao": "Nota h",
+              "trecho": "Antidiarrheal prophylaxis",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+            }
+          ],
+          "evidencia_declarada": [
+            {
+              "fonte_id": "nccn-89efc027268c",
+              "edicao": "4.2026",
+              "pagina_pdf": 59,
+              "paginas_pdf": [
+                59
+              ],
+              "secao": "ESOPH-F 4/12",
+              "trecho": "cisplatin, and zanidatamab",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+            },
+            {
+              "fonte_id": "nccn-89efc027268c",
+              "edicao": "4.2026",
+              "pagina_pdf": 60,
+              "paginas_pdf": [
+                60
+              ],
+              "secao": "Notas g/h",
+              "trecho": "Where immunotherapy is contraindicated",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+            },
+            {
+              "fonte_id": "nccn-89efc027268c",
+              "edicao": "4.2026",
+              "pagina_pdf": 60,
+              "paginas_pdf": [
+                60
+              ],
+              "secao": "Nota h",
+              "trecho": "Antidiarrheal prophylaxis",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+            }
+          ]
+        },
+        "correcoes_auditoria": [
+          {
+            "id": "ALTA-esofago-zanidatamabe-cis",
+            "revisao": "2026-10-17-nccn-delta-2-correcao-auditoria",
+            "estado": "APLICADA_COM_CONFERENCIA_DOCUMENTAL",
+            "fontes": [
+              {
+                "fonte_id": "nccn-89efc027268c",
+                "edicao": "4.2026",
+                "pagina_pdf": 59,
+                "paginas_pdf": [
+                  59
+                ],
+                "secao": "ESOPH-F 4/12",
+                "trecho": "cisplatin, and zanidatamab",
+                "ancora_contextual": null,
+                "natureza": "EXTRACAO_DOCUMENTAL",
+                "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+              },
+              {
+                "fonte_id": "nccn-89efc027268c",
+                "edicao": "4.2026",
+                "pagina_pdf": 60,
+                "paginas_pdf": [
+                  60
+                ],
+                "secao": "Notas g/h",
+                "trecho": "Where immunotherapy is contraindicated",
+                "ancora_contextual": null,
+                "natureza": "EXTRACAO_DOCUMENTAL",
+                "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+              },
+              {
+                "fonte_id": "nccn-89efc027268c",
+                "edicao": "4.2026",
+                "pagina_pdf": 60,
+                "paginas_pdf": [
+                  60
+                ],
+                "secao": "Nota h",
+                "trecho": "Antidiarrheal prophylaxis",
+                "ancora_contextual": null,
+                "natureza": "EXTRACAO_DOCUMENTAL",
+                "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+              }
+            ],
+            "ajuste_ao_parecer": null
+          }
+        ]
+      },
+      {
+        "item_id": "nccn-20261017-esofago-zanidatamabe-cis-tisle",
+        "nome": "Fluoropirimidina/cisplatina + zanidatamabe + tislelizumabe",
+        "tipo": "OPCAO_TERAPEUTICA",
+        "dominio_principal": 6,
+        "conteudo_extraido": "Primeira linha HER2-positiva, Preferred, categoria 2A: combinação com tislelizumabe. Nota f: sem ICI prévio OU sem progressão tumoral durante o ICI. Manejo de toxicidade de imunoterapia na nota b; profilaxia antidiarreica na nota h. Oxaliplatina é preferida à cisplatina por menor toxicidade. A categoria 2B da linha com cisplatina pertence à combinação SEM tislelizumabe.",
+        "aplicabilidade": {
+          "criterios": [
+            "Adenocarcinoma HER2-positivo avançado/recorrente/metastático",
+            "Primeira linha",
+            "Sem ICI prévio OU sem progressão durante ICI",
+            "Conferir toxicidades e profilaxia antidiarreica"
+          ],
+          "paciente_individual": null,
+          "estado": "NAO_AVALIADA"
+        },
+        "dados_estruturados": {
+          "farmacos": [
+            "fluoropirimidina",
+            "cisplatina",
+            "zanidatamabe",
+            "tislelizumabe"
+          ],
+          "posologia": {
+            "estado": "NAO_EXTRAIDA_NESTA_RODADA",
+            "valor": null,
+            "motivo": "A rodada incorpora o delta de indicação/cenário; não completa dose por inferência."
+          }
+        },
+        "fonte_refs": [
+          {
+            "fonte_id": "nccn-89efc027268c",
+            "edicao": "4.2026",
+            "pagina_pdf": 59,
+            "paginas_pdf": [
+              59
+            ],
+            "secao": "ESOPH-F 4/12",
+            "trecho": "cisplatin, zanidatamab",
+            "ancora_contextual": null,
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+          },
+          {
+            "fonte_id": "nccn-89efc027268c",
+            "edicao": "4.2026",
+            "pagina_pdf": 60,
+            "paginas_pdf": [
+              60
+            ],
+            "secao": "Notas f/h e b",
+            "trecho": "If no prior checkpoint inhibitor",
+            "ancora_contextual": null,
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+          },
+          {
+            "fonte_id": "nccn-89efc027268c",
+            "edicao": "4.2026",
+            "pagina_pdf": 60,
+            "paginas_pdf": [
+              60
+            ],
+            "secao": "Nota h",
+            "trecho": "Antidiarrheal prophylaxis",
+            "ancora_contextual": null,
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+          }
+        ],
+        "evidencia_declarada": {
+          "sistema": "NCCN",
+          "categoria": "2A",
+          "preferencia": "Preferred",
+          "estado": "CONFERIDA_DOCUMENTALMENTE_A_CONFERIR_CLINICAMENTE",
+          "nota": "Categoria 2A sem marca local somente quando expressamente coberta pelo cabeçalho; múltiplas categorias permanecem nos ramos."
+        },
+        "estado_extracao": "EXTRAIDO_COM_LIMITES_DECLARADOS",
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "temporalidade": {
+          "referencia": "CENARIO_DESCRITO",
+          "datas_individuais": null
+        },
+        "propor_automaticamente": false,
+        "disponivel_para_prescricao": false,
+        "acesso": {
+          "registro_anvisa": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "incorporacao_conitec": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "pcdt_ddt": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "sigtap_apac": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "cobertura_privada": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "disponibilidade_institucional": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          }
+        },
+        "alternativas_legadas_refs": [],
+        "relacoes_refs": [
+          "relacao-nccn-20261017-esofago-zanidatamabe-cis-tisle"
+        ],
+        "conflitos_refs": [],
+        "pendencias": [
+          "REVISAO_CLINICA_DO_DELTA",
+          "VERIFICAR_ACESSO_BRASILEIRO_POR_INDICACAO",
+          "POSOLOGIA_E_SUPORTE_NAO_COMPLETOS_NESTA_RODADA"
+        ],
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-2-correcao-auditoria",
+            "correcao_id": "M03",
+            "anterior": {
+              "conteudo_extraido": "Variante de primeira linha HER2+ com cisplatina, separada das combinações com oxaliplatina.",
+              "fonte_refs": [
+                {
+                  "fonte_id": "nccn-89efc027268c",
+                  "paginas_pdf": [
+                    4
+                  ],
+                  "secao": "UPDATES v4.2026",
+                  "natureza": "EXTRACAO_DOCUMENTAL",
+                  "pagina_pdf": 4,
+                  "trecho": "cisplatin, and zanidatamab-hrii (category 2B) \u0017Fluoropyrimidine (fluorouracil or capecitabine), cisplatin, zanidatamab-hrii, and"
+                }
+              ],
+              "estado_curadoria": "A_CONFERIR",
+              "aprovacao_clinica": null,
+              "aplicabilidade": {
+                "criterios": [
+                  "Adenocarcinoma avançado/metastático HER2+",
+                  "Conferir contraindicações à imunoterapia quando associada"
+                ],
+                "paciente_individual": null,
+                "estado": "NAO_AVALIADA"
+              },
+              "evidencia_declarada": {
+                "sistema": "NCCN",
+                "categoria": null,
+                "estado": "NAO_EXTRAIDA_POR_ITEM"
+              }
+            },
+            "motivo": "Correção documental após auditoria Claude e conferência da fonte; não apaga versão anterior.",
+            "aprovacao_clinica": null
+          }
+        ],
+        "fontes_por_campo": {
+          "conteudo_extraido": [
+            {
+              "fonte_id": "nccn-89efc027268c",
+              "edicao": "4.2026",
+              "pagina_pdf": 59,
+              "paginas_pdf": [
+                59
+              ],
+              "secao": "ESOPH-F 4/12",
+              "trecho": "cisplatin, zanidatamab",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+            },
+            {
+              "fonte_id": "nccn-89efc027268c",
+              "edicao": "4.2026",
+              "pagina_pdf": 60,
+              "paginas_pdf": [
+                60
+              ],
+              "secao": "Notas f/h e b",
+              "trecho": "If no prior checkpoint inhibitor",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+            },
+            {
+              "fonte_id": "nccn-89efc027268c",
+              "edicao": "4.2026",
+              "pagina_pdf": 60,
+              "paginas_pdf": [
+                60
+              ],
+              "secao": "Nota h",
+              "trecho": "Antidiarrheal prophylaxis",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+            }
+          ],
+          "aplicabilidade": [
+            {
+              "fonte_id": "nccn-89efc027268c",
+              "edicao": "4.2026",
+              "pagina_pdf": 59,
+              "paginas_pdf": [
+                59
+              ],
+              "secao": "ESOPH-F 4/12",
+              "trecho": "cisplatin, zanidatamab",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+            },
+            {
+              "fonte_id": "nccn-89efc027268c",
+              "edicao": "4.2026",
+              "pagina_pdf": 60,
+              "paginas_pdf": [
+                60
+              ],
+              "secao": "Notas f/h e b",
+              "trecho": "If no prior checkpoint inhibitor",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+            },
+            {
+              "fonte_id": "nccn-89efc027268c",
+              "edicao": "4.2026",
+              "pagina_pdf": 60,
+              "paginas_pdf": [
+                60
+              ],
+              "secao": "Nota h",
+              "trecho": "Antidiarrheal prophylaxis",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+            }
+          ],
+          "evidencia_declarada": [
+            {
+              "fonte_id": "nccn-89efc027268c",
+              "edicao": "4.2026",
+              "pagina_pdf": 59,
+              "paginas_pdf": [
+                59
+              ],
+              "secao": "ESOPH-F 4/12",
+              "trecho": "cisplatin, zanidatamab",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+            },
+            {
+              "fonte_id": "nccn-89efc027268c",
+              "edicao": "4.2026",
+              "pagina_pdf": 60,
+              "paginas_pdf": [
+                60
+              ],
+              "secao": "Notas f/h e b",
+              "trecho": "If no prior checkpoint inhibitor",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+            },
+            {
+              "fonte_id": "nccn-89efc027268c",
+              "edicao": "4.2026",
+              "pagina_pdf": 60,
+              "paginas_pdf": [
+                60
+              ],
+              "secao": "Nota h",
+              "trecho": "Antidiarrheal prophylaxis",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+            }
+          ]
+        },
+        "correcoes_auditoria": [
+          {
+            "id": "M03",
+            "revisao": "2026-10-17-nccn-delta-2-correcao-auditoria",
+            "estado": "APLICADA_COM_CONFERENCIA_DOCUMENTAL",
+            "fontes": [
+              {
+                "fonte_id": "nccn-89efc027268c",
+                "edicao": "4.2026",
+                "pagina_pdf": 59,
+                "paginas_pdf": [
+                  59
+                ],
+                "secao": "ESOPH-F 4/12",
+                "trecho": "cisplatin, zanidatamab",
+                "ancora_contextual": null,
+                "natureza": "EXTRACAO_DOCUMENTAL",
+                "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+              },
+              {
+                "fonte_id": "nccn-89efc027268c",
+                "edicao": "4.2026",
+                "pagina_pdf": 60,
+                "paginas_pdf": [
+                  60
+                ],
+                "secao": "Notas f/h e b",
+                "trecho": "If no prior checkpoint inhibitor",
+                "ancora_contextual": null,
+                "natureza": "EXTRACAO_DOCUMENTAL",
+                "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+              },
+              {
+                "fonte_id": "nccn-89efc027268c",
+                "edicao": "4.2026",
+                "pagina_pdf": 60,
+                "paginas_pdf": [
+                  60
+                ],
+                "secao": "Nota h",
+                "trecho": "Antidiarrheal prophylaxis",
+                "ancora_contextual": null,
+                "natureza": "EXTRACAO_DOCUMENTAL",
+                "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+              }
+            ],
+            "ajuste_ao_parecer": "A nota de toxicidade é b em ESOPH e c em GAST; o parecer a chamava c para ambos."
+          }
+        ]
+      },
+      {
+        "item_id": "nccn-20261017-esofago-flot-durva-subgrupos",
+        "nome": "FLOT + durvalumabe: subgrupos e categoria",
+        "tipo": "DETALHAMENTO_DE_PROTOCOLO",
+        "dominio_principal": 6,
+        "conteudo_extraido": "FLOT + durvalumabe perioperatório em adenocarcinoma de esôfago/JEG. CPS≥1 ou TAP≥1%: categoria 1 para JEG e 2A para esôfago. O ramo difuso é adenocarcinoma de JEG tipo difuso. Nota d: no MATTERHORN não houve vantagem de sobrevida global com durvalumabe + FLOT no tipo difuso gástrico/JEG.",
+        "aplicabilidade": {
+          "criterios": [
+            "Adenocarcinoma de esôfago ou JEG no cenário perioperatório",
+            "Distinguir sítio, PD-L1 e histologia"
+          ],
+          "paciente_individual": null,
+          "estado": "NAO_AVALIADA"
+        },
+        "dados_estruturados": {
+          "categorias_por_contexto": {
+            "JEG_CPS_ge1_ou_TAP_ge1": "1",
+            "esofago_CPS_ge1_ou_TAP_ge1": "2A",
+            "CPS_lt1_ou_TAP_lt1": "2A por cabeçalho",
+            "JEG_difuso": "2A por cabeçalho"
+          }
+        },
+        "fonte_refs": [
+          {
+            "fonte_id": "nccn-89efc027268c",
+            "edicao": "4.2026",
+            "pagina_pdf": 58,
+            "paginas_pdf": [
+              58
+            ],
+            "secao": "ESOPH-F 3/12",
+            "trecho": "category 1 for EGJ",
+            "ancora_contextual": null,
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+          },
+          {
+            "fonte_id": "nccn-89efc027268c",
+            "edicao": "4.2026",
+            "pagina_pdf": 58,
+            "paginas_pdf": [
+              58
+            ],
+            "secao": "ESOPH-F 3/12, nota d",
+            "trecho": "no overall survival advantage",
+            "ancora_contextual": null,
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+          }
+        ],
+        "evidencia_declarada": {
+          "sistema": "NCCN",
+          "categoria": "VARIA_POR_SITIO_E_SUBGRUPO",
+          "preferencia": "Preferred",
+          "estado": "CONFERIDA_DOCUMENTALMENTE_A_CONFERIR_CLINICAMENTE",
+          "nota": "Categoria 2A sem marca local somente quando expressamente coberta pelo cabeçalho; múltiplas categorias permanecem nos ramos."
+        },
+        "estado_extracao": "EXTRAIDO_COM_LIMITES_DECLARADOS",
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "temporalidade": {
+          "referencia": "CENARIO_DESCRITO",
+          "datas_individuais": null
+        },
+        "propor_automaticamente": false,
+        "disponivel_para_prescricao": false,
+        "acesso": {
+          "registro_anvisa": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "incorporacao_conitec": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "pcdt_ddt": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "sigtap_apac": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "cobertura_privada": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "disponibilidade_institucional": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          }
+        },
+        "alternativas_legadas_refs": [
+          "/tratamento/protocolos"
+        ],
+        "relacoes_refs": [
+          "relacao-nccn-20261017-esofago-flot-durva-subgrupos"
+        ],
+        "conflitos_refs": [],
+        "pendencias": [
+          "REVISAO_CLINICA_DO_DELTA",
+          "VERIFICAR_ACESSO_BRASILEIRO_POR_INDICACAO"
+        ],
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-2-correcao-auditoria",
+            "correcao_id": "M05",
+            "anterior": {
+              "conteudo_extraido": "A atualização modifica para categoria 2A os subgrupos PD-L1 CPS<1 ou TAP<1% e tipo difuso; não equivale a benefício homogêneo em todos os subgrupos.",
+              "fonte_refs": [
+                {
+                  "fonte_id": "nccn-89efc027268c",
+                  "paginas_pdf": [
+                    4
+                  ],
+                  "secao": "UPDATES v4.2026",
+                  "natureza": "EXTRACAO_DOCUMENTAL",
+                  "pagina_pdf": 4,
+                  "trecho": "FLOT + durvalumab ◊3rd sub-bullet revised: For PD-L1 CPS <1 or TAP"
+                }
+              ],
+              "estado_curadoria": "A_CONFERIR",
+              "aprovacao_clinica": null,
+              "aplicabilidade": {
+                "criterios": [
+                  "Perioperatório no cenário definido",
+                  "PD-L1 e histologia documentados"
+                ],
+                "paciente_individual": null,
+                "estado": "NAO_AVALIADA"
+              },
+              "dados_estruturados": {},
+              "evidencia_declarada": {
+                "sistema": "NCCN",
+                "categoria": null,
+                "estado": "NAO_EXTRAIDA_POR_ITEM"
+              }
+            },
+            "motivo": "Correção documental após auditoria Claude e conferência da fonte; não apaga versão anterior.",
+            "aprovacao_clinica": null
+          }
+        ],
+        "fontes_por_campo": {
+          "conteudo_extraido": [
+            {
+              "fonte_id": "nccn-89efc027268c",
+              "edicao": "4.2026",
+              "pagina_pdf": 58,
+              "paginas_pdf": [
+                58
+              ],
+              "secao": "ESOPH-F 3/12",
+              "trecho": "category 1 for EGJ",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+            },
+            {
+              "fonte_id": "nccn-89efc027268c",
+              "edicao": "4.2026",
+              "pagina_pdf": 58,
+              "paginas_pdf": [
+                58
+              ],
+              "secao": "ESOPH-F 3/12, nota d",
+              "trecho": "no overall survival advantage",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+            }
+          ],
+          "aplicabilidade": [
+            {
+              "fonte_id": "nccn-89efc027268c",
+              "edicao": "4.2026",
+              "pagina_pdf": 58,
+              "paginas_pdf": [
+                58
+              ],
+              "secao": "ESOPH-F 3/12",
+              "trecho": "category 1 for EGJ",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+            },
+            {
+              "fonte_id": "nccn-89efc027268c",
+              "edicao": "4.2026",
+              "pagina_pdf": 58,
+              "paginas_pdf": [
+                58
+              ],
+              "secao": "ESOPH-F 3/12, nota d",
+              "trecho": "no overall survival advantage",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+            }
+          ],
+          "dados_estruturados": [
+            {
+              "fonte_id": "nccn-89efc027268c",
+              "edicao": "4.2026",
+              "pagina_pdf": 58,
+              "paginas_pdf": [
+                58
+              ],
+              "secao": "ESOPH-F 3/12",
+              "trecho": "category 1 for EGJ",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+            },
+            {
+              "fonte_id": "nccn-89efc027268c",
+              "edicao": "4.2026",
+              "pagina_pdf": 58,
+              "paginas_pdf": [
+                58
+              ],
+              "secao": "ESOPH-F 3/12, nota d",
+              "trecho": "no overall survival advantage",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+            }
+          ],
+          "evidencia_declarada": [
+            {
+              "fonte_id": "nccn-89efc027268c",
+              "edicao": "4.2026",
+              "pagina_pdf": 58,
+              "paginas_pdf": [
+                58
+              ],
+              "secao": "ESOPH-F 3/12",
+              "trecho": "category 1 for EGJ",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+            },
+            {
+              "fonte_id": "nccn-89efc027268c",
+              "edicao": "4.2026",
+              "pagina_pdf": 58,
+              "paginas_pdf": [
+                58
+              ],
+              "secao": "ESOPH-F 3/12, nota d",
+              "trecho": "no overall survival advantage",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+            }
+          ]
+        },
+        "correcoes_auditoria": [
+          {
+            "id": "M05",
+            "revisao": "2026-10-17-nccn-delta-2-correcao-auditoria",
+            "estado": "APLICADA_COM_CONFERENCIA_DOCUMENTAL",
+            "fontes": [
+              {
+                "fonte_id": "nccn-89efc027268c",
+                "edicao": "4.2026",
+                "pagina_pdf": 58,
+                "paginas_pdf": [
+                  58
+                ],
+                "secao": "ESOPH-F 3/12",
+                "trecho": "category 1 for EGJ",
+                "ancora_contextual": null,
+                "natureza": "EXTRACAO_DOCUMENTAL",
+                "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+              },
+              {
+                "fonte_id": "nccn-89efc027268c",
+                "edicao": "4.2026",
+                "pagina_pdf": 58,
+                "paginas_pdf": [
+                  58
+                ],
+                "secao": "ESOPH-F 3/12, nota d",
+                "trecho": "no overall survival advantage",
+                "ancora_contextual": null,
+                "natureza": "EXTRACAO_DOCUMENTAL",
+                "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+              }
+            ],
+            "ajuste_ao_parecer": null
+          }
+        ]
+      }
+    ],
+    "cenarios": {
+      "identidade_ref": "/identidade/cenarios",
+      "detalhamento_ref": "/tratamento/cenarios",
+      "novas_condicoes_refs": [
+        "nccn-20261017-esofago-zanidatamabe",
+        "nccn-20261017-esofago-zanidatamabe-tislelizumabe",
+        "nccn-20261017-esofago-seguranca-zanidatamabe",
+        "nccn-20261017-esofago-nivo-adjuvante-cps",
+        "nccn-20261017-esofago-zanidatamabe-cis",
+        "nccn-20261017-esofago-zanidatamabe-cis-tisle",
+        "nccn-20261017-esofago-flot-durva-subgrupos"
+      ],
+      "regra": "Não igualar automaticamente as duas listas nem selecionar cenário individual nesta camada."
+    },
+    "fontes": [
+      {
+        "id": "nccn-89efc027268c",
+        "arquivo_local": "C:\\Users\\silas\\.aside\\u\\0\\sessions\\2026-10-17_LutNNwUyDZGlA1pF\\artifacts\\nccn\\Esophageal and Esophagogastric Junction Cancers.pdf",
+        "nome": "Esophageal and Esophagogastric Junction Cancers",
+        "sha256": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111",
+        "numero_paginas": 172,
+        "versao_declarada": "4.2026",
+        "origem": "ARQUIVO_LOCAL_FORNECIDO",
+        "autenticidade_externa": "NAO_VERIFICADA_NO_PORTAL",
+        "paginas_examinadas": [
+          4,
+          19,
+          58,
+          59,
+          60
+        ]
+      }
+    ],
+    "fontes_legadas_refs": [
+      "/header/fonte",
+      "/curadoria/fontesLidas"
+    ],
+    "ensaios": {
+      "legado_ref": "/tratamento/ensaios",
+      "novos_nct": [],
+      "nota": "Nenhum identificador NCT foi inventado ou verificado nesta rodada."
+    },
+    "relacoes": [
+      {
+        "relacao_id": "relacao-nccn-20261017-esofago-zanidatamabe",
+        "tipo": "CONDICOES_PARA_APRESENTACAO_DOCUMENTAL",
+        "destino_item_ref": "nccn-20261017-esofago-zanidatamabe",
+        "criterios_extraidos": [
+          "Adenocarcinoma localmente avançado irressecável, recorrente ou metastático sem indicação de terapia local",
+          "HER2-positivo; IHQ3+ ou IHQ2+/ISH+ conforme critérios de patologia",
+          "Imunoterapia contraindicada, como transplante de órgão ou autoimunidade grave requerendo tratamento sistêmico"
+        ],
+        "origem_condicoes": "FONTE_NCCN_CITADA",
+        "origem_mapeamento": "PROPOSTA_DE_MAPEAMENTO",
+        "executavel": false,
+        "estado": "A_CONFERIR",
+        "dados_ausentes": "MANTER_INDETERMINADO",
+        "dados_conflitantes": "MANTER_CONFLITO",
+        "efeito": "APRESENTAR_CONTEUDO_PARA_REVISAO; NAO PRESCREVER",
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-2-correcao-auditoria",
+            "correcao_id": "ALTA-esofago-zanidatamabe",
+            "criterios_extraidos": [
+              "Adenocarcinoma avançado/metastático HER2-positivo",
+              "Conferir contraindicações à imunoterapia quando associada"
+            ]
+          }
+        ],
+        "fontes_por_campo": {
+          "criterios_extraidos": [
+            {
+              "fonte_id": "nccn-89efc027268c",
+              "edicao": "4.2026",
+              "pagina_pdf": 59,
+              "paginas_pdf": [
+                59
+              ],
+              "secao": "ESOPH-F 4/12",
+              "trecho": "oxaliplatin, and zanidatamab",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+            },
+            {
+              "fonte_id": "nccn-89efc027268c",
+              "edicao": "4.2026",
+              "pagina_pdf": 60,
+              "paginas_pdf": [
+                60
+              ],
+              "secao": "Notas g/h",
+              "trecho": "Where immunotherapy is contraindicated",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+            },
+            {
+              "fonte_id": "nccn-89efc027268c",
+              "edicao": "4.2026",
+              "pagina_pdf": 60,
+              "paginas_pdf": [
+                60
+              ],
+              "secao": "Nota h",
+              "trecho": "Antidiarrheal prophylaxis",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+            }
+          ]
+        }
+      },
+      {
+        "relacao_id": "relacao-nccn-20261017-esofago-zanidatamabe-tislelizumabe",
+        "tipo": "CONDICOES_PARA_APRESENTACAO_DOCUMENTAL",
+        "destino_item_ref": "nccn-20261017-esofago-zanidatamabe-tislelizumabe",
+        "criterios_extraidos": [
+          "Adenocarcinoma HER2-positivo avançado/recorrente/metastático",
+          "Primeira linha",
+          "Sem ICI prévio OU sem progressão durante ICI",
+          "Conferir toxicidades e profilaxia antidiarreica"
+        ],
+        "origem_condicoes": "FONTE_NCCN_CITADA",
+        "origem_mapeamento": "PROPOSTA_DE_MAPEAMENTO",
+        "executavel": false,
+        "estado": "A_CONFERIR",
+        "dados_ausentes": "MANTER_INDETERMINADO",
+        "dados_conflitantes": "MANTER_CONFLITO",
+        "efeito": "APRESENTAR_CONTEUDO_PARA_REVISAO; NAO PRESCREVER",
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-2-correcao-auditoria",
+            "correcao_id": "M01",
+            "criterios_extraidos": [
+              "Adenocarcinoma avançado/metastático HER2-positivo",
+              "Conferir contraindicações à imunoterapia quando associada"
+            ]
+          }
+        ],
+        "fontes_por_campo": {
+          "criterios_extraidos": [
+            {
+              "fonte_id": "nccn-89efc027268c",
+              "edicao": "4.2026",
+              "pagina_pdf": 59,
+              "paginas_pdf": [
+                59
+              ],
+              "secao": "ESOPH-F 4/12",
+              "trecho": "oxaliplatin, zanidatamab",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+            },
+            {
+              "fonte_id": "nccn-89efc027268c",
+              "edicao": "4.2026",
+              "pagina_pdf": 60,
+              "paginas_pdf": [
+                60
+              ],
+              "secao": "Notas f/h e b",
+              "trecho": "If no prior checkpoint inhibitor",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+            },
+            {
+              "fonte_id": "nccn-89efc027268c",
+              "edicao": "4.2026",
+              "pagina_pdf": 60,
+              "paginas_pdf": [
+                60
+              ],
+              "secao": "Nota h",
+              "trecho": "Antidiarrheal prophylaxis",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+            }
+          ]
+        }
+      },
+      {
+        "relacao_id": "relacao-nccn-20261017-esofago-seguranca-zanidatamabe",
+        "tipo": "CONDICOES_PARA_APRESENTACAO_DOCUMENTAL",
+        "destino_item_ref": "nccn-20261017-esofago-seguranca-zanidatamabe",
+        "criterios_extraidos": [
+          "Aplicável apenas à combinação correspondente com zanidatamabe"
+        ],
+        "origem_condicoes": "FONTE_NCCN_CITADA",
+        "origem_mapeamento": "PROPOSTA_DE_MAPEAMENTO",
+        "executavel": false,
+        "estado": "A_CONFERIR",
+        "dados_ausentes": "MANTER_INDETERMINADO",
+        "dados_conflitantes": "MANTER_CONFLITO",
+        "efeito": "APRESENTAR_CONTEUDO_PARA_REVISAO; NAO PRESCREVER"
+      },
+      {
+        "relacao_id": "relacao-nccn-20261017-esofago-nivo-adjuvante-cps",
+        "tipo": "CONDICOES_PARA_APRESENTACAO_DOCUMENTAL",
+        "destino_item_ref": "nccn-20261017-esofago-nivo-adjuvante-cps",
+        "criterios_extraidos": [
+          "CEC de esôfago",
+          "QT/RT pré-operatória",
+          "Ressecção R0",
+          "Doença residual ypT e/ou N"
+        ],
+        "origem_condicoes": "FONTE_NCCN_CITADA",
+        "origem_mapeamento": "PROPOSTA_DE_MAPEAMENTO",
+        "executavel": false,
+        "estado": "A_CONFERIR",
+        "dados_ausentes": "MANTER_INDETERMINADO",
+        "dados_conflitantes": "MANTER_CONFLITO",
+        "efeito": "APRESENTAR_CONTEUDO_PARA_REVISAO; NAO PRESCREVER",
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-2-correcao-auditoria",
+            "correcao_id": "AD2-4",
+            "criterios_extraidos": [
+              "CEC de esôfago",
+              "QT/RT pré-operatória",
+              "Ressecção R0",
+              "Doença residual ypT e/ou N"
+            ]
+          }
+        ],
+        "fontes_por_campo": {
+          "criterios_extraidos": [
+            {
+              "fonte_id": "nccn-89efc027268c",
+              "edicao": "4.2026",
+              "pagina_pdf": 19,
+              "paginas_pdf": [
+                19
+              ],
+              "secao": "ESOPH-7",
+              "trecho": "Nivolumab (category 1)",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+            },
+            {
+              "fonte_id": "nccn-89efc027268c",
+              "edicao": "4.2026",
+              "pagina_pdf": 58,
+              "paginas_pdf": [
+                58
+              ],
+              "secao": "ESOPH-F 3/12",
+              "trecho": "Nivolumab only after preoperative chemoradiation",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+            }
+          ]
+        }
+      },
+      {
+        "relacao_id": "relacao-nccn-20261017-esofago-zanidatamabe-cis",
+        "tipo": "CONDICOES_PARA_APRESENTACAO_DOCUMENTAL",
+        "destino_item_ref": "nccn-20261017-esofago-zanidatamabe-cis",
+        "criterios_extraidos": [
+          "Adenocarcinoma localmente avançado irressecável, recorrente ou metastático sem indicação de terapia local",
+          "HER2-positivo; IHQ3+ ou IHQ2+/ISH+ conforme critérios de patologia",
+          "Imunoterapia contraindicada, como transplante de órgão ou autoimunidade grave requerendo tratamento sistêmico"
+        ],
+        "origem_condicoes": "FONTE_NCCN_CITADA",
+        "origem_mapeamento": "PROPOSTA_DE_MAPEAMENTO",
+        "executavel": false,
+        "estado": "A_CONFERIR",
+        "dados_ausentes": "MANTER_INDETERMINADO",
+        "dados_conflitantes": "MANTER_CONFLITO",
+        "efeito": "APRESENTAR_CONTEUDO_PARA_REVISAO; NAO PRESCREVER",
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-2-correcao-auditoria",
+            "correcao_id": "ALTA-esofago-zanidatamabe-cis",
+            "criterios_extraidos": [
+              "Adenocarcinoma avançado/metastático HER2+",
+              "Conferir contraindicações à imunoterapia quando associada"
+            ]
+          }
+        ],
+        "fontes_por_campo": {
+          "criterios_extraidos": [
+            {
+              "fonte_id": "nccn-89efc027268c",
+              "edicao": "4.2026",
+              "pagina_pdf": 59,
+              "paginas_pdf": [
+                59
+              ],
+              "secao": "ESOPH-F 4/12",
+              "trecho": "cisplatin, and zanidatamab",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+            },
+            {
+              "fonte_id": "nccn-89efc027268c",
+              "edicao": "4.2026",
+              "pagina_pdf": 60,
+              "paginas_pdf": [
+                60
+              ],
+              "secao": "Notas g/h",
+              "trecho": "Where immunotherapy is contraindicated",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+            },
+            {
+              "fonte_id": "nccn-89efc027268c",
+              "edicao": "4.2026",
+              "pagina_pdf": 60,
+              "paginas_pdf": [
+                60
+              ],
+              "secao": "Nota h",
+              "trecho": "Antidiarrheal prophylaxis",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+            }
+          ]
+        }
+      },
+      {
+        "relacao_id": "relacao-nccn-20261017-esofago-zanidatamabe-cis-tisle",
+        "tipo": "CONDICOES_PARA_APRESENTACAO_DOCUMENTAL",
+        "destino_item_ref": "nccn-20261017-esofago-zanidatamabe-cis-tisle",
+        "criterios_extraidos": [
+          "Adenocarcinoma HER2-positivo avançado/recorrente/metastático",
+          "Primeira linha",
+          "Sem ICI prévio OU sem progressão durante ICI",
+          "Conferir toxicidades e profilaxia antidiarreica"
+        ],
+        "origem_condicoes": "FONTE_NCCN_CITADA",
+        "origem_mapeamento": "PROPOSTA_DE_MAPEAMENTO",
+        "executavel": false,
+        "estado": "A_CONFERIR",
+        "dados_ausentes": "MANTER_INDETERMINADO",
+        "dados_conflitantes": "MANTER_CONFLITO",
+        "efeito": "APRESENTAR_CONTEUDO_PARA_REVISAO; NAO PRESCREVER",
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-2-correcao-auditoria",
+            "correcao_id": "M03",
+            "criterios_extraidos": [
+              "Adenocarcinoma avançado/metastático HER2+",
+              "Conferir contraindicações à imunoterapia quando associada"
+            ]
+          }
+        ],
+        "fontes_por_campo": {
+          "criterios_extraidos": [
+            {
+              "fonte_id": "nccn-89efc027268c",
+              "edicao": "4.2026",
+              "pagina_pdf": 59,
+              "paginas_pdf": [
+                59
+              ],
+              "secao": "ESOPH-F 4/12",
+              "trecho": "cisplatin, zanidatamab",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+            },
+            {
+              "fonte_id": "nccn-89efc027268c",
+              "edicao": "4.2026",
+              "pagina_pdf": 60,
+              "paginas_pdf": [
+                60
+              ],
+              "secao": "Notas f/h e b",
+              "trecho": "If no prior checkpoint inhibitor",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+            },
+            {
+              "fonte_id": "nccn-89efc027268c",
+              "edicao": "4.2026",
+              "pagina_pdf": 60,
+              "paginas_pdf": [
+                60
+              ],
+              "secao": "Nota h",
+              "trecho": "Antidiarrheal prophylaxis",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+            }
+          ]
+        }
+      },
+      {
+        "relacao_id": "relacao-nccn-20261017-esofago-flot-durva-subgrupos",
+        "tipo": "CONDICOES_PARA_APRESENTACAO_DOCUMENTAL",
+        "destino_item_ref": "nccn-20261017-esofago-flot-durva-subgrupos",
+        "criterios_extraidos": [
+          "Adenocarcinoma de esôfago ou JEG no cenário perioperatório",
+          "Distinguir sítio, PD-L1 e histologia"
+        ],
+        "origem_condicoes": "FONTE_NCCN_CITADA",
+        "origem_mapeamento": "PROPOSTA_DE_MAPEAMENTO",
+        "executavel": false,
+        "estado": "A_CONFERIR",
+        "dados_ausentes": "MANTER_INDETERMINADO",
+        "dados_conflitantes": "MANTER_CONFLITO",
+        "efeito": "APRESENTAR_CONTEUDO_PARA_REVISAO; NAO PRESCREVER",
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-2-correcao-auditoria",
+            "correcao_id": "M05",
+            "criterios_extraidos": [
+              "Perioperatório no cenário definido",
+              "PD-L1 e histologia documentados"
+            ]
+          }
+        ],
+        "fontes_por_campo": {
+          "criterios_extraidos": [
+            {
+              "fonte_id": "nccn-89efc027268c",
+              "edicao": "4.2026",
+              "pagina_pdf": 58,
+              "paginas_pdf": [
+                58
+              ],
+              "secao": "ESOPH-F 3/12",
+              "trecho": "category 1 for EGJ",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+            },
+            {
+              "fonte_id": "nccn-89efc027268c",
+              "edicao": "4.2026",
+              "pagina_pdf": 58,
+              "paginas_pdf": [
+                58
+              ],
+              "secao": "ESOPH-F 3/12, nota d",
+              "trecho": "no overall survival advantage",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111"
+            }
+          ]
+        }
+      }
+    ],
+    "conflitos": [
+      {
+        "conflito_id": "conflito-nccn-20261017-esofago-nivo-adjuvante-cps",
+        "tema": "Nivolumabe adjuvante: divergência sobre CPS",
+        "descricao": "O legado exige CPS ≥1; ESOPH-7 não o exige no caminho conferido. Preservar a redação legada e submeter a divergência ao médico; não ampliar automaticamente a indicação.",
+        "item_nccn_ref": "nccn-20261017-esofago-nivo-adjuvante-cps",
+        "legado_refs": [
+          "/tratamento/protocolos/6",
+          "/diagnostico/patologico/molecular/1"
+        ],
+        "fontes_nccn_refs": [
+          {
+            "fonte_id": "nccn-89efc027268c",
+            "paginas_pdf": [
+              19
+            ],
+            "secao": "ESOPH-7",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "pagina_pdf": 19,
+            "trecho": "Nivolumab (category 1)y,ii PLEASE NOTE that use of this NCCN Content is"
+          }
+        ],
+        "estado": "A_CONFERIR",
+        "decisao_medica": null,
+        "resolucao_automatica": false
+      }
+    ],
+    "conflitos_legados_ref": "/conflitos",
+    "pendencias": [
+      {
+        "id": "revisao-clinica",
+        "estado": "ABERTA",
+        "descricao": "Conferir cada acréscimo, condições, fontes, doses, interações e suporte antes de uso clínico."
+      },
+      {
+        "id": "acesso-brasileiro",
+        "estado": "ABERTA",
+        "descricao": "NCCN não comprova Anvisa, Conitec, PCDT/DDT, SIGTAP/APAC, cobertura privada ou acesso institucional."
+      },
+      {
+        "id": "cobertura-nccn",
+        "estado": "PARCIAL_POR_DELTA",
+        "descricao": "Leitura dirigida das páginas citadas; não há alegação de extração integral da diretriz."
+      }
+    ],
+    "pendencias_legadas_ref": "/pendencias",
+    "itens_adicionais_a_classificar": [
+      {
+        "origem_ref": "/header",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/status",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/consultavel",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/alerta",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/substitui",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/identidade",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/pendencias",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/conflitos",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/curadoria",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/correcoes",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      }
+    ],
+    "mapa_de_cobertura": [
+      {
+        "origem_json_pointer": "/header",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "b6f86e3da91338acb112a2246f868205e04a1b5bc3bcca34adca3a26e709f04f",
+        "valores_folha": 9
+      },
+      {
+        "origem_json_pointer": "/status",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "04635ca3844c66b19ebbf49bf9ff60fe851d6ce89597d23e6a970f1dc3927289",
+        "valores_folha": 1
+      },
+      {
+        "origem_json_pointer": "/consultavel",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b",
+        "valores_folha": 1
+      },
+      {
+        "origem_json_pointer": "/alerta",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "valores_folha": 1
+      },
+      {
+        "origem_json_pointer": "/substitui",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "valores_folha": 1
+      },
+      {
+        "origem_json_pointer": "/identidade",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "9b21ebccc250028d539f6dd04ac532072761acd663831247230888a822ead2ee",
+        "valores_folha": 15
+      },
+      {
+        "origem_json_pointer": "/diagnostico",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "dd439d65c638faa3d2acbff216dc2fe4cda993f603ec43c222a0ab14769251d3",
+        "valores_folha": 148
+      },
+      {
+        "origem_json_pointer": "/estadiamento",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "d1305a24b19302e635f6151dffeb97bcf7595d4778b9fcb69fc7af2ae79e2d9d",
+        "valores_folha": 169
+      },
+      {
+        "origem_json_pointer": "/tratamento",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "d7177f00c810bd10f2080b3c98aaf903109da81fef299758159bfb89d9375ba5",
+        "valores_folha": 1140
+      },
+      {
+        "origem_json_pointer": "/ligacoes",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "522a25c46018e36c4ef94bd9d811ba553c1d5cf714da5fb52b8babc923397a8d",
+        "valores_folha": 98
+      },
+      {
+        "origem_json_pointer": "/pendencias",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "7c3c9201c05023cedd23b331a8880abda9a9420f95015755d03d56d914480166",
+        "valores_folha": 44
+      },
+      {
+        "origem_json_pointer": "/conflitos",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "93058ca916f622e4f01f394ed3ae76362c1509ecd6b671e9163a48676021961a",
+        "valores_folha": 101
+      },
+      {
+        "origem_json_pointer": "/curadoria",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "5efad24c4a2a05f16506d11d377d41dce90e91467b5654d1698438ff6f8f2feb",
+        "valores_folha": 13
+      },
+      {
+        "origem_json_pointer": "/correcoes",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "6eab5e557d485033e6fcc6331bf4d8f99010cd3377b0a9041e24b0c00e0bada2",
+        "valores_folha": 12
+      }
+    ],
+    "reconciliacao_com_versao_anterior": {
+      "modo": "ADITIVO",
+      "originais_removidos": 0,
+      "originais_alterados": 0,
+      "contagens_preservadas": {
+        "protocolos": 20,
+        "ensaios": 9,
+        "cenarios_identidade": 5,
+        "cenarios_tratamento": 5,
+        "seguimento": 2,
+        "conflitos": 5,
+        "pendencias": 9
+      }
+    },
+    "relatorio_de_completude": {
+      "estado": "INCOMPLETA_PARA_DIRETRIZ_INTEGRAL",
+      "preservacao_legado": "INTEGRAL",
+      "delta_itens": 7,
+      "normalizacao_legado": "INDEXACAO_POR_REFERENCIA; NAO REEXTRACAO CLINICA",
+      "posologias": "SOMENTE AS EXPLICITAMENTE EXTRAIDAS; RESTANTES PENDENTES",
+      "sem_fato_paciente": true,
+      "sem_aprovacao_inferida": true
+    },
+    "revisoes_auditoria": [
+      {
+        "revisao": "2026-10-17-nccn-delta-2-correcao-auditoria",
+        "correcoes": [
+          "ALTA-esofago-zanidatamabe",
+          "ALTA-esofago-zanidatamabe-cis",
+          "M01",
+          "M03",
+          "M05",
+          "AD2-4"
+        ],
+        "legado_modificado": false,
+        "aprovacao_clinica": null,
+        "nota": "Correções conferidas nos PDFs; a auditoria Claude foi amostral. Os 33 itens não auditados não foram promovidos a revisados."
+      }
+    ],
+    "fechamento_documental": [
+      {
+        "revisao": "2026-10-17-nccn-final-documental",
+        "estado": "CORRECOES_DOCUMENTAIS_APLICADAS",
+        "ajustes_textuais": 1,
+        "deduplicacoes_por_referencia": [],
+        "aprovacao_clinica": null,
+        "legado_alterado": false
+      }
+    ]
+  }
 }

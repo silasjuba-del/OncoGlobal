@@ -1944,5 +1944,2086 @@
       "achado": "Decisão D-F1-17 item 34B (Dr. Silas)",
       "acao": "criado gliomas-tmz-protraida-recorrencia (TMZ 50 mg/m²/dia VO contínua, ciclo 28 dias; RESCUE PMID 20308655 + SBOC p. 16)"
     }
-  ]
+  ],
+  "tumor_pack_universal": {
+    "schema_documental": "tumor-pack-universal@1",
+    "metadados": {
+      "revisao_documental": "2026-10-17-nccn-final-documental",
+      "versao": "1.3.0",
+      "data": "2026-10-17",
+      "autor_extracao": "Codex",
+      "estado": "RASCUNHO",
+      "aprovacao_clinica": null,
+      "escopo": "CAMADA_ADITIVA_UNIVERSAL_E_DELTA_DOCUMENTAL_NCCN",
+      "base_legada": {
+        "arquivo": "corpus/6-pack-tumor/gliomas/pack-gliomas.v2.RASCUNHO.json",
+        "commit": "2c0991d",
+        "versao": "2.0.0",
+        "sha256_bytes": "8014f21a257e4db512161d760219017f358aeaffb21851a0385ffc3403da4132",
+        "sha256_semantico": "4483d6341a64af5467cbf4477f76a7eefa3a09784b30690e6c0e228bf0c9e117"
+      },
+      "nota_versao": "Camada universal 1.3.0; header identifica o legado preservado. Fechamento documental, sem aprovação clínica ou ativação.",
+      "integra_runtime": false,
+      "gera_conduta": false,
+      "historico_revisoes": [
+        {
+          "revisao_documental": "2026-10-17-nccn-delta-1",
+          "versao": "1.0.0",
+          "data": "2026-10-17",
+          "autor_extracao": "Codex",
+          "estado": "RASCUNHO",
+          "aprovacao_clinica": null,
+          "escopo": "CAMADA_ADITIVA_UNIVERSAL_E_DELTA_DOCUMENTAL_NCCN",
+          "base_legada": {
+            "arquivo": "corpus/6-pack-tumor/gliomas/pack-gliomas.v2.RASCUNHO.json",
+            "commit": "2c0991d",
+            "versao": "2.0.0",
+            "sha256_bytes": "8014f21a257e4db512161d760219017f358aeaffb21851a0385ffc3403da4132",
+            "sha256_semantico": "4483d6341a64af5467cbf4477f76a7eefa3a09784b30690e6c0e228bf0c9e117"
+          },
+          "nota_versao": "header.versao identifica o legado intacto; esta extensão possui revisão própria. Não reutilizar aprovação/hashes antigos para o conjunto alterado.",
+          "integra_runtime": false,
+          "gera_conduta": false
+        },
+        {
+          "revisao_documental": "2026-10-17-nccn-delta-3-auditoria33",
+          "versao": "1.2.0",
+          "data": "2026-10-17",
+          "autor_extracao": "Codex",
+          "estado": "RASCUNHO",
+          "aprovacao_clinica": null,
+          "escopo": "CAMADA_ADITIVA_UNIVERSAL_E_DELTA_DOCUMENTAL_NCCN",
+          "base_legada": {
+            "arquivo": "corpus/6-pack-tumor/gliomas/pack-gliomas.v2.RASCUNHO.json",
+            "commit": "2c0991d",
+            "versao": "2.0.0",
+            "sha256_bytes": "8014f21a257e4db512161d760219017f358aeaffb21851a0385ffc3403da4132",
+            "sha256_semantico": "4483d6341a64af5467cbf4477f76a7eefa3a09784b30690e6c0e228bf0c9e117"
+          },
+          "nota_versao": "Revisão da camada universal1.2.0; header legado preservado. Auditoria documental dos33 itens, sem aprovação clínica.",
+          "integra_runtime": false,
+          "gera_conduta": false,
+          "historico_revisoes": [
+            {
+              "revisao_documental": "2026-10-17-nccn-delta-1",
+              "versao": "1.0.0",
+              "data": "2026-10-17",
+              "autor_extracao": "Codex",
+              "estado": "RASCUNHO",
+              "aprovacao_clinica": null,
+              "escopo": "CAMADA_ADITIVA_UNIVERSAL_E_DELTA_DOCUMENTAL_NCCN",
+              "base_legada": {
+                "arquivo": "corpus/6-pack-tumor/gliomas/pack-gliomas.v2.RASCUNHO.json",
+                "commit": "2c0991d",
+                "versao": "2.0.0",
+                "sha256_bytes": "8014f21a257e4db512161d760219017f358aeaffb21851a0385ffc3403da4132",
+                "sha256_semantico": "4483d6341a64af5467cbf4477f76a7eefa3a09784b30690e6c0e228bf0c9e117"
+              },
+              "nota_versao": "header.versao identifica o legado intacto; esta extensão possui revisão própria. Não reutilizar aprovação/hashes antigos para o conjunto alterado.",
+              "integra_runtime": false,
+              "gera_conduta": false
+            }
+          ]
+        }
+      ]
+    },
+    "identidade_ref": "/identidade",
+    "dominios": [
+      {
+        "dominio_id": 1,
+        "nome": "Diagnóstico e patologia",
+        "itens_legados_refs": [
+          "legado-6674dfe6e62cf634",
+          "legado-4790710d9db71a85",
+          "legado-5871c6d1932a394b",
+          "legado-71ccfeaf80ea93dd",
+          "legado-bf55ecae37349ef6",
+          "legado-2be69f2473486faf",
+          "legado-f3a8d2c30660a438",
+          "legado-1132e4e3e652b738",
+          "legado-a4313233695af93e"
+        ],
+        "itens_nccn_refs": [
+          "nccn-20261017-gliomas-escopo-snc"
+        ],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 2,
+        "nome": "Estadiamento, extensão e risco",
+        "itens_legados_refs": [
+          "legado-8a9794281fa85fd1",
+          "legado-2721d0f87d917f4b",
+          "legado-1592675e2d7e3494",
+          "legado-0ab2199ef35d0397",
+          "legado-9738756b21aec2a9",
+          "legado-3e9c56b96bdff9c6",
+          "legado-ec2640a2dea0d98e",
+          "legado-e993b0e2f602c554",
+          "legado-09e46ce9a56f4387",
+          "legado-cc9f933bb40e562a"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 3,
+        "nome": "Biomarcadores e farmacogenética",
+        "itens_legados_refs": [
+          "legado-900084b1b2834378",
+          "legado-254c0bf37f7d49ac",
+          "legado-f0d7b5c6942789a8",
+          "legado-552350051eee3740",
+          "legado-4075ae3793311ac3",
+          "legado-6f09b39994cb9428",
+          "legado-3dba44675425ec73",
+          "legado-24d7df7d4b13d613",
+          "legado-69d65dfe3b756cdd",
+          "legado-383d123eca575ab7",
+          "legado-9e4426945d02561a",
+          "legado-a9e004764dda0426",
+          "legado-b824877ae0ed7d07",
+          "legado-d11eb803c6b7f079"
+        ],
+        "itens_nccn_refs": [
+          "nccn-20261017-gliomas-replicacao-reparo"
+        ],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 4,
+        "nome": "Exames e requisitos documentais",
+        "itens_legados_refs": [
+          "legado-055758017f864957",
+          "legado-74290fad37ec52cf",
+          "legado-e42db91ba67e74ec",
+          "legado-d52dee028f60bbe1",
+          "legado-bd7351c718bfdc41",
+          "legado-561b847f551f1c59",
+          "legado-c4a225ad3ef60edd",
+          "legado-327d535aaf3544d3",
+          "legado-655173ec31e3a2bb",
+          "legado-6287b4241e8604f4",
+          "legado-82db22e29fb20227",
+          "legado-89db3b6ec657bc2a",
+          "legado-df14a27eaccebf93",
+          "legado-debe4667471a44d1",
+          "legado-b6e711a8068bce51",
+          "legado-7dc99d83d804fe16",
+          "legado-a86f44fb1f45604c",
+          "legado-5c1ee876926e7932",
+          "legado-55b682b5b4977062",
+          "legado-b033861cb2a35ee1",
+          "legado-951c6a6498553e1f",
+          "legado-79a2fb2732eb481b",
+          "legado-c3a82231f4ecf32d",
+          "legado-310f512816595e16",
+          "legado-be9ad5c24188f1af",
+          "legado-2ec50c986656dc60"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 5,
+        "nome": "Avaliação antes do tratamento",
+        "itens_legados_refs": [],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "NAO_ESTRUTURADO_NESTA_RODADA",
+        "observacao": "Ausência de referências não significa não aplicabilidade; textos dentro de outros itens permanecem preservados."
+      },
+      {
+        "dominio_id": 6,
+        "nome": "Tratamento e protocolos",
+        "itens_legados_refs": [
+          "legado-b918baa3d268bf1a",
+          "legado-d4e40c51aef4ee4f",
+          "legado-151ecfb000649e42",
+          "legado-ce98ced96d9a4f2c",
+          "legado-3fdeaa8d2bd2d24e",
+          "legado-3e51c01321aac85a",
+          "legado-3016151fb68f8aca",
+          "legado-4f86bd44af21fd8f",
+          "legado-2750670411c62f7f",
+          "legado-f4566f0d0747629d",
+          "legado-d0875597b416ec80",
+          "legado-f45034d9e46106e2",
+          "legado-57039980838d2905",
+          "legado-93ab8626aedde1c9",
+          "legado-f65c2e1712d6358f",
+          "legado-22f53e5420cf1d7d",
+          "legado-d136000584b56d27",
+          "legado-bc7e8aa0f93d441f",
+          "legado-eef0dcc5597c7a9c",
+          "legado-340610f736736663",
+          "legado-e58aab3c096e82fb",
+          "legado-e941d20751cb5cee",
+          "legado-971878fd8c2ad472",
+          "legado-3af1fd6d49f20d9a",
+          "legado-b624ed51f959c9b6"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 7,
+        "nome": "Segurança, interações e toxicidades",
+        "itens_legados_refs": [
+          "legado-367990870bab557e",
+          "legado-2dd17844a370603d",
+          "legado-2fa8741ee515bd79",
+          "legado-a406bcbf805302d0",
+          "legado-a2da6b36a8f26159",
+          "legado-9ebcb941dac7c177",
+          "legado-3721194cf4b02741",
+          "legado-83a68f3eec7080fd"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 8,
+        "nome": "Suporte e cuidados",
+        "itens_legados_refs": [
+          "legado-6fa898c0180d550b",
+          "legado-439b36dbca83b616",
+          "legado-2dd4574607fb562e",
+          "legado-28297bfb1ef69494"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 9,
+        "nome": "Avaliação de resposta e estado da doença",
+        "itens_legados_refs": [],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "NAO_ESTRUTURADO_NESTA_RODADA",
+        "observacao": "Ausência de referências não significa não aplicabilidade; textos dentro de outros itens permanecem preservados."
+      },
+      {
+        "dominio_id": 10,
+        "nome": "Seguimento e sobrevivência",
+        "itens_legados_refs": [
+          "legado-d117225753a5f659",
+          "legado-a9bbbdc2bbc4b54c",
+          "legado-b07bc7b5a7ce5995",
+          "legado-0e27f682725a8cf0",
+          "legado-3546a3b9ee87f4e2",
+          "legado-2e0bba3e55fbb0d7",
+          "legado-33afc39506a9c38e",
+          "legado-765e50e826cb7c7e",
+          "legado-48ee13adfbd84aae"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 11,
+        "nome": "Encaminhamentos e atuação multiprofissional",
+        "itens_legados_refs": [
+          "legado-6cedb1d8411c8db9",
+          "legado-f7c608c28459a133",
+          "legado-25a5410ed4c7f8e4",
+          "legado-0aa382d02f29c9bd",
+          "legado-86200ea1cb93d7b3"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 12,
+        "nome": "Documentos e acesso assistencial",
+        "itens_legados_refs": [
+          "legado-df6e90c14805be6f",
+          "legado-3bce7fd382935dde"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      }
+    ],
+    "indice_itens_legados": [
+      {
+        "item_id": "legado-6674dfe6e62cf634",
+        "origem_json_pointer": "/diagnostico/patologico/obtencao/0",
+        "sha256_conteudo": "a92c739caf22d1db9aa7de5c1b802dd8d73cba73fa2e86ce972e0b271596a82f",
+        "nome": "/diagnostico/patologico/obtencao/0",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/obtencao/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-4790710d9db71a85",
+        "origem_json_pointer": "/diagnostico/patologico/obtencao/1",
+        "sha256_conteudo": "4019800c16cd2fd57c9181ad1e7e14fc2a731dc4113cc319af051ff840a89f0e",
+        "nome": "/diagnostico/patologico/obtencao/1",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/obtencao/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-5871c6d1932a394b",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/0",
+        "sha256_conteudo": "a573d95e21108633fc46d18e18a9ffb338a3c9aae5ca270043a6ea48f04dce50",
+        "nome": "tipo celular",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-71ccfeaf80ea93dd",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/1",
+        "sha256_conteudo": "d754e447b6beb8b0faedc09130ce6708138abd45de4d888f7cfa7092842891de",
+        "nome": "anaplasia",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-bf55ecae37349ef6",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/2",
+        "sha256_conteudo": "86d98e82685c84c94413819abe25ffc98dccefe8bc17e89f1e82047cf32b384b",
+        "nome": "vascularização/proliferação microvascular",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-2be69f2473486faf",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/3",
+        "sha256_conteudo": "f1fe55f4b0f9aba5d8d0828bd3910fc0e7432a28cd7dd12ffb05df6efc28cf03",
+        "nome": "necrose (padrão e extensão)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-f3a8d2c30660a438",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/4",
+        "sha256_conteudo": "5fc1612de19786a4539b79d3a6730c6fcf128284c61ab51c6f2e52e410f6df1f",
+        "nome": "atividade mitótica",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-1132e4e3e652b738",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/5",
+        "sha256_conteudo": "458036d91bbbc67a988396fe127563f86035afeb296316c774167a8b743b8597",
+        "nome": "diagnóstico integrado OMS 2021 (NOS/NEC quando avaliação molecular incompleta)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a4313233695af93e",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/6",
+        "sha256_conteudo": "330120d152fe3b2741332ae66ddac54716368c2b68e71e46dac752db1512d19e",
+        "nome": "IHQ: GFAP, IDH1, ATRX, p53, Ki67, H3K27M conforme suspeita",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8a9794281fa85fd1",
+        "origem_json_pointer": "/estadiamento/sistema",
+        "sha256_conteudo": "837c66b52d48b6041bf453c628d47844d55ba63a066b91827737f1b35a53f412",
+        "nome": "outro",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-2721d0f87d917f4b",
+        "origem_json_pointer": "/estadiamento/edicao",
+        "sha256_conteudo": "b80e9f3304be71dd388ba178852162b516185c5d455feee97e1d6de244767741",
+        "nome": "Classificação OMS 2021 do SNC (sem TNM)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-1592675e2d7e3494",
+        "origem_json_pointer": "/estadiamento/gruposConduta/0",
+        "sha256_conteudo": "4f284dc8d4b54911f5548e8ac6545907f8147a286c64b420e3b5a9c4bff9200a",
+        "nome": "/estadiamento/gruposConduta/0",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-0ab2199ef35d0397",
+        "origem_json_pointer": "/estadiamento/gruposConduta/1",
+        "sha256_conteudo": "4af68a0475bd5fe04b31dd801f6727914f0727510a5399dc0d4ae751fa3cdbfb",
+        "nome": "/estadiamento/gruposConduta/1",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-9738756b21aec2a9",
+        "origem_json_pointer": "/estadiamento/gruposConduta/2",
+        "sha256_conteudo": "9adbf9bb77bd6db14effc00e31f2cd5bff2e4e112ade0e7980c4dbe412855af7",
+        "nome": "/estadiamento/gruposConduta/2",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-3e9c56b96bdff9c6",
+        "origem_json_pointer": "/estadiamento/gruposConduta/3",
+        "sha256_conteudo": "159236ab784457cd0243752fe757b6304cc85a1fd57ba9b532cca4161976376e",
+        "nome": "/estadiamento/gruposConduta/3",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ec2640a2dea0d98e",
+        "origem_json_pointer": "/estadiamento/gruposConduta/4",
+        "sha256_conteudo": "cadb325d6b1c0c0b33c552ef7d537db494741ea68fdad8c65755038edfe342dc",
+        "nome": "/estadiamento/gruposConduta/4",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e993b0e2f602c554",
+        "origem_json_pointer": "/estadiamento/gruposConduta/5",
+        "sha256_conteudo": "680b9e4faf455e561521ad727df9ddb1f247fda12d8b71d064da831758a1f341",
+        "nome": "/estadiamento/gruposConduta/5",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/5/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-09e46ce9a56f4387",
+        "origem_json_pointer": "/estadiamento/gruposConduta/6",
+        "sha256_conteudo": "c1c5b84d3f4f2426c71d102908cd3a1c41b9f11c9a5b15e1e086d71cca6d46a9",
+        "nome": "/estadiamento/gruposConduta/6",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/6/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-cc9f933bb40e562a",
+        "origem_json_pointer": "/estadiamento/marcadores",
+        "sha256_conteudo": "58e3a76f7cffecec7d6e2611e26accaa63dba20b813986dc725f7994b49b3a5d",
+        "nome": "/estadiamento/marcadores",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-900084b1b2834378",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/0",
+        "sha256_conteudo": "edc32b59f88b22be6b31ff925fa80232a1d44a540f55bdbf8c5ae2a0d2df3a92",
+        "nome": "Todo glioma difuso",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-254c0bf37f7d49ac",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/1",
+        "sha256_conteudo": "b1eac2c8610a3b3817f4972c3afa9b3cfc19766f6f875cf10a9eb6ffe6deea09",
+        "nome": "IDH1 não expresso por IHQ e idade <55 anos ou glioma difuso prévio",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-f0d7b5c6942789a8",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/2",
+        "sha256_conteudo": "cdc064aa744c120def2ce8c1a8f29def0e92ac3ad93a69c8463dc5166f36ecfd",
+        "nome": "Glioma IDH-mutado com ATRX preservado (suspeita de oligodendroglioma)",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-552350051eee3740",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/3",
+        "sha256_conteudo": "db5ec938d627bb63bd53cb310b3e743932bc3e31a7e74a09c16556933134bebb",
+        "nome": "Alternativa ao FISH",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-4075ae3793311ac3",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/4",
+        "sha256_conteudo": "d1856dd24b860a3e40d53700c83f7d12c80c59054cab7a23252bfe66e7b6ff8c",
+        "nome": "Glioblastoma",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-6f09b39994cb9428",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/5",
+        "sha256_conteudo": "0c5c7ac3fb332bb40b6df1eac4684aa826c69abb95a8b7ba05e0e7cbdaee3e00",
+        "nome": "Astrocitoma IDH-selvagem sem critérios histológicos de grau 4",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/5/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-3dba44675425ec73",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/6",
+        "sha256_conteudo": "79c9540a90c6cdba635f2cb498ec878ec88139040ae20b3e2b4abaef2b75460b",
+        "nome": "Considerar na recorrência",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/6/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-24d7df7d4b13d613",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/7",
+        "sha256_conteudo": "8b61e9454f695fbed31d6f4434504d59f5524da591cf961d82eb113aa698ad80",
+        "nome": "Considerar na recorrência",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/7/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-69d65dfe3b756cdd",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/8",
+        "sha256_conteudo": "e77376a7f2270719215abb170e202d00e1c5bab364082a623c7052e9a72ab748",
+        "nome": "Recorrência; NÃO usar IHQ (falso positivo)",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/8/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-383d123eca575ab7",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/9",
+        "sha256_conteudo": "abccd8772a9dfb53f15d01a92b35840a09926c9e7a8aaee0b11a47c3546345c7",
+        "nome": "Astrocitoma IDH-mutado",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/9/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-9e4426945d02561a",
+        "origem_json_pointer": "/tratamento/biomarcadorTratamento/0",
+        "sha256_conteudo": "c0db7e57b3864778b4bd91b65bcf6311d8fa67c2148f559454fce2ce1882a265",
+        "nome": "/tratamento/biomarcadorTratamento/0",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/biomarcadorTratamento/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a9e004764dda0426",
+        "origem_json_pointer": "/tratamento/biomarcadorTratamento/1",
+        "sha256_conteudo": "20f89a2d9f801cde5d572416102e495c6b154f235e74d6a5daea24cab0a1d9f5",
+        "nome": "/tratamento/biomarcadorTratamento/1",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/biomarcadorTratamento/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b824877ae0ed7d07",
+        "origem_json_pointer": "/tratamento/biomarcadorTratamento/2",
+        "sha256_conteudo": "f463e5ae7a375c34f795bbca9fa1e81fbe8c32337f77401126dc4d1d2720b6f8",
+        "nome": "/tratamento/biomarcadorTratamento/2",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/biomarcadorTratamento/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d11eb803c6b7f079",
+        "origem_json_pointer": "/tratamento/biomarcadorTratamento/3",
+        "sha256_conteudo": "9a5e9e26b485003c18e680271eb91a7fe0b1d5955b8aa1012da0f948a7f307f9",
+        "nome": "/tratamento/biomarcadorTratamento/3",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/biomarcadorTratamento/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-055758017f864957",
+        "origem_json_pointer": "/diagnostico/imagem/0",
+        "sha256_conteudo": "d9dd1a967e96e893e933fa024cb08962bff18e7f332f6f6881d5963ca398ffe4",
+        "nome": "RM de crânio com contraste (T1, T2, FLAIR, T1 pós-contraste, DWI, perfusão, SWI)",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-74290fad37ec52cf",
+        "origem_json_pointer": "/diagnostico/imagem/1",
+        "sha256_conteudo": "8ff3f221ea2556d839d9dd8a136b359bf964732a5c43f6bb02458ed380c0d364",
+        "nome": "Contraste para RM",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e42db91ba67e74ec",
+        "origem_json_pointer": "/estadiamento/exames/0",
+        "sha256_conteudo": "400437a95449542ce7eccc72139ed6f723e5115239229f03921764f9209bea30",
+        "nome": "RM de crânio multiparamétrica",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d52dee028f60bbe1",
+        "origem_json_pointer": "/estadiamento/exames/1",
+        "sha256_conteudo": "f239fa6492ed4f358074e8265a789f14c66e3a9970e581beb74efaadd0ecf900",
+        "nome": "Hemograma completo",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-bd7351c718bfdc41",
+        "origem_json_pointer": "/estadiamento/exames/2",
+        "sha256_conteudo": "fa78120a5b28bcc5092de2ea53788f0b4d96ff3f4ad39829bcde7da74b38927f",
+        "nome": "Coagulograma (TAP)",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-561b847f551f1c59",
+        "origem_json_pointer": "/estadiamento/exames/3",
+        "sha256_conteudo": "eb11d9c3d32c2748a4ad198c128fbdd6f4eab5d360605269352c6a3e5cdf4b4c",
+        "nome": "Coagulograma (TTPA)",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-c4a225ad3ef60edd",
+        "origem_json_pointer": "/estadiamento/exames/4",
+        "sha256_conteudo": "f678dec9114669a53879764112aaa8e4624137be5b3ad93db8836f19b2a187b6",
+        "nome": "Função renal",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-327d535aaf3544d3",
+        "origem_json_pointer": "/estadiamento/exames/5",
+        "sha256_conteudo": "716ea4e6376124524db9aad273f2905c1070af1e5d104821c384452b857656ca",
+        "nome": "Função hepática (TGO)",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/5/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-655173ec31e3a2bb",
+        "origem_json_pointer": "/estadiamento/exames/6",
+        "sha256_conteudo": "f3902da03676967377a00f620435a2a956ef211ab98c13ccf8773eace599299e",
+        "nome": "Função hepática (TGP)",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/6/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-6287b4241e8604f4",
+        "origem_json_pointer": "/estadiamento/exames/7",
+        "sha256_conteudo": "cf6ae6960f451a2e4720a60fdd7f0996d2df25b5fa3c49d0d92022f07812ca3b",
+        "nome": "Eletrólitos (sódio)",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/7/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-82db22e29fb20227",
+        "origem_json_pointer": "/estadiamento/exames/8",
+        "sha256_conteudo": "b5b182a094588ceb4ec90bee954634b15c551459bcfa7d13d059972a75512987",
+        "nome": "Eletrólitos (potássio)",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/8/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-89db3b6ec657bc2a",
+        "origem_json_pointer": "/ligacoes/exames/0",
+        "sha256_conteudo": "00cac656db90cece9385c8c98f658accb5b7c1553202e6be466fa96d39aaf2b9",
+        "nome": "ANATOMOPATOLOGICO",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-df14a27eaccebf93",
+        "origem_json_pointer": "/ligacoes/exames/1",
+        "sha256_conteudo": "39b9c6e61d56eddc6970eed8b10cc6478867748fedabdd3d7d5c4cc4cbc89405",
+        "nome": "CONTRASTE_RM",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-debe4667471a44d1",
+        "origem_json_pointer": "/ligacoes/exames/2",
+        "sha256_conteudo": "58d8c3bbd157d0d9be5bf551553eb11e7e0c313ef1db12f06d7863faa42fbbfb",
+        "nome": "CREATININA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b6e711a8068bce51",
+        "origem_json_pointer": "/ligacoes/exames/3",
+        "sha256_conteudo": "c6f5e5a6057e9ce942cde9a80b415b2bdbfccf0ac7d689ed5ae89b0846f94872",
+        "nome": "FISH",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-7dc99d83d804fe16",
+        "origem_json_pointer": "/ligacoes/exames/4",
+        "sha256_conteudo": "bf5e386b5411abfa4e5e12d1229575a6c7ec73dfaec6347d8959b27aac19aa86",
+        "nome": "HEMOGRAMA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a86f44fb1f45604c",
+        "origem_json_pointer": "/ligacoes/exames/5",
+        "sha256_conteudo": "99a98b9d268e78a05608d792d2fad81f4e16f25b8a4f95da9f7decd91a23a0dc",
+        "nome": "IMUNOHISTOQUIMICA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-5c1ee876926e7932",
+        "origem_json_pointer": "/ligacoes/exames/6",
+        "sha256_conteudo": "5177c5a6d32d2eeb000c9724575c7471cb1de7765bcf03a4245f9351e9594835",
+        "nome": "POTASSIO",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-55b682b5b4977062",
+        "origem_json_pointer": "/ligacoes/exames/7",
+        "sha256_conteudo": "bad8505e4a4450e4dd1c0691d739c56076e3e2a51d04f68ce1f3a4a823e89597",
+        "nome": "RM_CRANIO",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b033861cb2a35ee1",
+        "origem_json_pointer": "/ligacoes/exames/8",
+        "sha256_conteudo": "7ca56daea7b581342dac3e634f20a5489390de72c61d09e7c42a9b69cf4bb98e",
+        "nome": "SODIO",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-951c6a6498553e1f",
+        "origem_json_pointer": "/ligacoes/exames/9",
+        "sha256_conteudo": "fe9721bae5d09a49ec48414ec6632d6d21cffbd006f1d9daa5cf23186764c46c",
+        "nome": "TAP",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-79a2fb2732eb481b",
+        "origem_json_pointer": "/ligacoes/exames/10",
+        "sha256_conteudo": "1c165f5403a7b90b63dbd46f6855431c8c1ada4519299d6c123bd630df5c529d",
+        "nome": "TGO",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-c3a82231f4ecf32d",
+        "origem_json_pointer": "/ligacoes/exames/11",
+        "sha256_conteudo": "1739a80ab81e5bbef9460ae5f51087ed284845d8e31e606c2b564c7268c2cd15",
+        "nome": "TGP",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-310f512816595e16",
+        "origem_json_pointer": "/ligacoes/exames/12",
+        "sha256_conteudo": "6809cf5158cb20fdcdc6b11a5872d44a626a16baaaa89eafeb7ecd4810b5eb26",
+        "nome": "TTPA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-be9ad5c24188f1af",
+        "origem_json_pointer": "/ligacoes/exames/13",
+        "sha256_conteudo": "e587a7250a8633f1505dfb613cd4283458e6a8198d35f3721641c9ee3878017f",
+        "nome": "MOLECULAR_PCR_MUTACAO",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-2ec50c986656dc60",
+        "origem_json_pointer": "/ligacoes/exames/14",
+        "sha256_conteudo": "c77d15bd8da7582e2d6d9825573309affb51c04c30c7829dbea1953584a30ee9",
+        "nome": "SEQUENCIAMENTO_AMPLICON",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b918baa3d268bf1a",
+        "origem_json_pointer": "/tratamento/cenarios/0",
+        "sha256_conteudo": "5f40bc9d796b9d6f9244edb1101031575ba09de7e08cf3ba65ef7ccb166d0e81",
+        "nome": "Cirurgia inicial",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d4e40c51aef4ee4f",
+        "origem_json_pointer": "/tratamento/cenarios/1",
+        "sha256_conteudo": "12ae99dc71880a041dbad601ee0cdabbfadf88e63e446683b1236bed89531219",
+        "nome": "Glioma IDH-mutado grau 2 após ressecção sem resíduo",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-151ecfb000649e42",
+        "origem_json_pointer": "/tratamento/cenarios/2",
+        "sha256_conteudo": "aa33fd779a4b90a7789013608c4527cefdc15c2ff9bddd39c659559c9e9adc90",
+        "nome": "Recorrência de baixo grau tratado com RT/QT",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ce98ced96d9a4f2c",
+        "origem_json_pointer": "/tratamento/cenarios/3",
+        "sha256_conteudo": "c1f3687c2fe85e79dc8af6263cb85858fc9214c7ba0758cab8d42e19b42251c7",
+        "nome": "Glioblastoma recorrente",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-3fdeaa8d2bd2d24e",
+        "origem_json_pointer": "/tratamento/protocolos/0",
+        "sha256_conteudo": "9baf92530ddc7ddeace80224bc4bd69cb8cdcc4aa898cb03dfa4310d6ed84dfb",
+        "nome": "Temozolomida concomitante à RT",
+        "id_original": "gliomas-tmz-concomitante-rt",
+        "fonte_local_ref": "/tratamento/protocolos/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-3e51c01321aac85a",
+        "origem_json_pointer": "/tratamento/protocolos/1",
+        "sha256_conteudo": "0660300ad112c4c9986d8e3d7f06af48800bd5ece9f0ab76f5fa32adb6927fbb",
+        "nome": "Temozolomida adjuvante — ciclo 1 (GBM)",
+        "id_original": "gliomas-tmz-adjuvante-c1",
+        "fonte_local_ref": "/tratamento/protocolos/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-3016151fb68f8aca",
+        "origem_json_pointer": "/tratamento/protocolos/2",
+        "sha256_conteudo": "2f8e8a2c5063a4acf13ecb9a4e4e2f40462f2311c54734c6ac8e4e35e480f794",
+        "nome": "Temozolomida adjuvante — ciclos 2 em diante (GBM)",
+        "id_original": "gliomas-tmz-adjuvante-c2",
+        "fonte_local_ref": "/tratamento/protocolos/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-4f86bd44af21fd8f",
+        "origem_json_pointer": "/tratamento/protocolos/3",
+        "sha256_conteudo": "28905bd8f61104a45a186dc141f2a21c5ef5c50c227a4563d1a1f65c7d9c2434",
+        "nome": "Temozolomida adjuvante — astrocitoma IDH-mutado grau 3 (CATNON)",
+        "id_original": "gliomas-tmz-adjuvante-catnon",
+        "fonte_local_ref": "/tratamento/protocolos/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-2750670411c62f7f",
+        "origem_json_pointer": "/tratamento/protocolos/4",
+        "sha256_conteudo": "a201e961878095893bacc89a513a4dd1b395a488b534bbeea04eeb55531dd31b",
+        "nome": "PCV (procarbazina, lomustina, vincristina)",
+        "id_original": "gliomas-pcv-adjuvante",
+        "fonte_local_ref": "/tratamento/protocolos/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-f4566f0d0747629d",
+        "origem_json_pointer": "/tratamento/protocolos/5",
+        "sha256_conteudo": "bfbf26d250cf55b01132e0b2d49ffa4b61c5b75687dea1c346518a47f20f5f0b",
+        "nome": "PCV (procarbazina, lomustina, vincristina)",
+        "id_original": "gliomas-pcv-recorrencia",
+        "fonte_local_ref": "/tratamento/protocolos/5/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d0875597b416ec80",
+        "origem_json_pointer": "/tratamento/protocolos/6",
+        "sha256_conteudo": "71b441abfe2418f2fce7563cff862e53e70bc9cb635c857b1f77dcc646efb1a0",
+        "nome": "Carmustina (BCNU)",
+        "id_original": "gliomas-carmustina",
+        "fonte_local_ref": "/tratamento/protocolos/6/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-f45034d9e46106e2",
+        "origem_json_pointer": "/tratamento/protocolos/7",
+        "sha256_conteudo": "05b465168ff9390d44a5ac06cc4e1f0032ead7b69ddb006096d6ad668c4e99ec",
+        "nome": "Temozolomida protraída (dose contínua 50 mg/m²/dia — RESCUE)",
+        "id_original": "gliomas-tmz-protraida-recorrencia",
+        "fonte_local_ref": "/tratamento/protocolos/7/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-57039980838d2905",
+        "origem_json_pointer": "/tratamento/protocolos/8",
+        "sha256_conteudo": "e19ce5f1e2158e9cb3b7edb55e20e493bf45f5b190fe2961a7a0a6e3fbb0e973",
+        "nome": "Vorasidenibe",
+        "id_original": "gliomas-vorasidenibe",
+        "fonte_local_ref": "/tratamento/protocolos/8/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-93ab8626aedde1c9",
+        "origem_json_pointer": "/tratamento/protocolos/9",
+        "sha256_conteudo": "f689daf7503eb068df978ee7cea6f03d0cd011788a1a76feb98fe6c2fd3941fc",
+        "nome": "Bevacizumabe (± QT)",
+        "id_original": "gliomas-bevacizumabe",
+        "fonte_local_ref": "/tratamento/protocolos/9/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-f65c2e1712d6358f",
+        "origem_json_pointer": "/tratamento/protocolos/10",
+        "sha256_conteudo": "972d7de66dd04f3c3d4cc66ab73878f1dfedbcad84dff4f3e1661dcd7b9a35e1",
+        "nome": "Dabrafenibe + trametinibe (BRAF V600E)",
+        "id_original": "gliomas-dabrafenibe-trametinibe",
+        "fonte_local_ref": "/tratamento/protocolos/10/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-22f53e5420cf1d7d",
+        "origem_json_pointer": "/tratamento/protocolos/11",
+        "sha256_conteudo": "6ef32fb3dcb95baf8151c79148269dd3c28415ea0a8d4c0cb5128a28b2aacfa1",
+        "nome": "Larotrectinibe (fusão NTRK)",
+        "id_original": "gliomas-larotrectinibe",
+        "fonte_local_ref": "/tratamento/protocolos/11/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d136000584b56d27",
+        "origem_json_pointer": "/tratamento/cirurgia/0",
+        "sha256_conteudo": "c4b06c24b975cf4611720f185093126a64b0daf28b526a12b5710a06a7814d77",
+        "nome": "/tratamento/cirurgia/0",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cirurgia/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-bc7e8aa0f93d441f",
+        "origem_json_pointer": "/tratamento/cirurgia/1",
+        "sha256_conteudo": "2511964ca2c609c12c6893bd486f8aa0dff1c1a90df9382132b2a54a3df99849",
+        "nome": "/tratamento/cirurgia/1",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cirurgia/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-eef0dcc5597c7a9c",
+        "origem_json_pointer": "/tratamento/radioterapia/0",
+        "sha256_conteudo": "c23eeaa31ed32e9d92c492acfe17639fa6a72627b2f205d5746ef60736c80a09",
+        "nome": "Glioblastoma IDH-selvagem <70 anos e/ou KPS ≥60 (+ TMZ concomitante)",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/radioterapia/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-340610f736736663",
+        "origem_json_pointer": "/tratamento/radioterapia/1",
+        "sha256_conteudo": "1df9bc669398c30553e547b4a27684e2981da7afdf0c563aaa55625ad7761bf9",
+        "nome": "Glioblastoma ≥70 anos e KPS ≥60 (+ TMZ concomitante)",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/radioterapia/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e58aab3c096e82fb",
+        "origem_json_pointer": "/tratamento/radioterapia/2",
+        "sha256_conteudo": "172adfbb4c3df7556c193c7f69faf9e76fe025fb359c92894e2b2866e00d9451",
+        "nome": "Glioblastoma KPS <60, MGMT não metilado — RT isolada",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/radioterapia/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e941d20751cb5cee",
+        "origem_json_pointer": "/tratamento/radioterapia/3",
+        "sha256_conteudo": "7606a362393c4c6871107a22e9133977fb0ea72363918fe20bdc9300363576ab",
+        "nome": "Glioblastoma KPS <60, MGMT não metilado — RT isolada curta",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/radioterapia/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-971878fd8c2ad472",
+        "origem_json_pointer": "/tratamento/radioterapia/4",
+        "sha256_conteudo": "07747b07137c205e9be8bc4f76f364335ffa97788ed25fff5aabf082ac63e799",
+        "nome": "Astrocitoma IDH-mutado graus 3-4 (→ TMZ adjuvante)",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/radioterapia/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-3af1fd6d49f20d9a",
+        "origem_json_pointer": "/tratamento/radioterapia/5",
+        "sha256_conteudo": "341d7f0c20a6c2dafa0b414ef298dcabf56286375bbfd989d4a42c2710817023",
+        "nome": "Oligodendroglioma IDH-mutado 1p/19q codeletado grau 3 (→ PCV ou TMZ)",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/radioterapia/5/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b624ed51f959c9b6",
+        "origem_json_pointer": "/tratamento/radioterapia/6",
+        "sha256_conteudo": "491857529379ecc8950b1ca24b482663555bb5f956aa81c622a206189aee19fc",
+        "nome": "Glioma IDH-mutado grau 2 com indicação de RT (→ PCV ou TMZ)",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/radioterapia/6/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-367990870bab557e",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/0",
+        "sha256_conteudo": "b618266503e4d9aa0cdec242d7fd905aa090c61317e3ed86bf5dd905ed33ef17",
+        "nome": "/ligacoes/interacoesConsultar/0",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-2dd17844a370603d",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/1",
+        "sha256_conteudo": "ec63a300b9ff94a84d382bb8f0dc6eeb1aa027883837f325dde089eb7803c320",
+        "nome": "/ligacoes/interacoesConsultar/1",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-2fa8741ee515bd79",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/2",
+        "sha256_conteudo": "c43e8509b669931b57d7df0d2f88faee8a6b6e7899526a8e73aaad5c233120b4",
+        "nome": "/ligacoes/interacoesConsultar/2",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a406bcbf805302d0",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/3",
+        "sha256_conteudo": "265172276b35d2896dbc3c8d107ffd1ee387c36b7337df2c385f324e6226cfde",
+        "nome": "/ligacoes/interacoesConsultar/3",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a2da6b36a8f26159",
+        "origem_json_pointer": "/ligacoes/ctcaeAcao/0",
+        "sha256_conteudo": "f64bbe221d17d2b794daee27f2ea91338d4b0b4a775963e0d7cc76e5f51975cf",
+        "nome": "/ligacoes/ctcaeAcao/0",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-9ebcb941dac7c177",
+        "origem_json_pointer": "/ligacoes/ctcaeAcao/1",
+        "sha256_conteudo": "44d7334a0a1746bc8f8c4f7b86dec24172d22f8cb5b2fa0da3e4b47d0699673d",
+        "nome": "/ligacoes/ctcaeAcao/1",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-3721194cf4b02741",
+        "origem_json_pointer": "/ligacoes/ctcaeAcao/2",
+        "sha256_conteudo": "2f6afaa8f5921743862672bce3dc63f6cc41ff550719a23d354e00039c308b3f",
+        "nome": "/ligacoes/ctcaeAcao/2",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-83a68f3eec7080fd",
+        "origem_json_pointer": "/ligacoes/ctcaeAcao/3",
+        "sha256_conteudo": "118eac780d62026333d9e13961fcf6023aa2f31e720a23e0c4f6036e2d93ab31",
+        "nome": "/ligacoes/ctcaeAcao/3",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-6fa898c0180d550b",
+        "origem_json_pointer": "/tratamento/suporte",
+        "sha256_conteudo": "97388c070452920b1052722cabd6e8a97dbeab62365d0bca046c6768165c6ab0",
+        "nome": "/tratamento/suporte",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/suporte/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-439b36dbca83b616",
+        "origem_json_pointer": "/ligacoes/suporteReceitas/0",
+        "sha256_conteudo": "efce63be71736076204773f568e0fbd3fbf18ea81627a164fad1f86d89d84494",
+        "nome": "antiemético pré-TMZ",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-2dd4574607fb562e",
+        "origem_json_pointer": "/ligacoes/suporteReceitas/1",
+        "sha256_conteudo": "21d01284e0a3d9b4b6b93b827251aedfa4ef6d927b15b4cc825b001c37970b3a",
+        "nome": "profilaxia de pneumocistose (sulfametoxazol-trimetoprima) na TMZ concomitante",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-28297bfb1ef69494",
+        "origem_json_pointer": "/ligacoes/suporteReceitas/2",
+        "sha256_conteudo": "a86f4732211de28b448bb5ca3a4d93b8e75805a5e0d78d99fd54c1fe027963b3",
+        "nome": "anticonvulsivante não indutor quando possível",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d117225753a5f659",
+        "origem_json_pointer": "/tratamento/seguimento/0",
+        "sha256_conteudo": "3fb0cf1db565fa0c4983552591e7e45e0ab37e41d515dbd0f1041b813fc1d8c1",
+        "nome": "Todos",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/seguimento/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a9bbbdc2bbc4b54c",
+        "origem_json_pointer": "/tratamento/seguimento/1",
+        "sha256_conteudo": "2c7c2f34d1d1ae8c63eb5381b9d981c6e907853ec0df84f5cb751e186e1990fb",
+        "nome": "Glioblastoma/astrocitoma IDH-selvagem",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/seguimento/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b07bc7b5a7ce5995",
+        "origem_json_pointer": "/tratamento/seguimento/2",
+        "sha256_conteudo": "fda04b1033b4edc389ddfda54740ff6b5182af0ef0376a5670a8295b38178c5e",
+        "nome": "Oligodendroglioma graus 2-3 após RT + QT",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/seguimento/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-0e27f682725a8cf0",
+        "origem_json_pointer": "/tratamento/seguimento/3",
+        "sha256_conteudo": "0dddd03c324c6b8041b91da9d29841efed6f23f978ab5128e4fa913bcd2f9882",
+        "nome": "Astrocitoma IDH-mutado grau 3 após RT + QT",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/seguimento/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-3546a3b9ee87f4e2",
+        "origem_json_pointer": "/tratamento/seguimento/4",
+        "sha256_conteudo": "cf410afc9ac2492e35bb7749d59940311aa4b6e33d409258a1a83ff9cd2b6b3a",
+        "nome": "Astrocitoma IDH-mutado recorrente",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/seguimento/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-2e0bba3e55fbb0d7",
+        "origem_json_pointer": "/ligacoes/orientacoes/0",
+        "sha256_conteudo": "4fb4ce81ee56e527d49673be9dcde5125d31340dff07efbc71c4f7874d421914",
+        "nome": "TMZ em jejum (1 h antes ou 2 h após refeição)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-33afc39506a9c38e",
+        "origem_json_pointer": "/ligacoes/orientacoes/1",
+        "sha256_conteudo": "5693e5e406d164e6a1e5cbe75043fc557d0c3450b3c79692fba9924aa4ac7135",
+        "nome": "dieta sem tiramina com procarbazina",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-765e50e826cb7c7e",
+        "origem_json_pointer": "/ligacoes/orientacoes/2",
+        "sha256_conteudo": "a141513b1d3f1cd571533c79b23a69598da596c682034f4c2bb67cac0a8bd99a",
+        "nome": "não dirigir após crise convulsiva",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-48ee13adfbd84aae",
+        "origem_json_pointer": "/ligacoes/orientacoes/3",
+        "sha256_conteudo": "46fc00c70eb7bc82fbac14bfd9d12493dea7cf8a1069893878164e9d6d2a780d",
+        "nome": "sinais de hipertensão intracraniana",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-6cedb1d8411c8db9",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/0",
+        "sha256_conteudo": "230277166190579d5555e67424da8c1d7dd9b439bd66ed18a6961fd0aa007195",
+        "nome": "neurocirurgia",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-f7c608c28459a133",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/1",
+        "sha256_conteudo": "eb54fb8d77e530fb6faedf5bf1621ae02068135f31f3ec1f1351cbd5f307765b",
+        "nome": "radioterapia",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-25a5410ed4c7f8e4",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/2",
+        "sha256_conteudo": "b006d594d386c712de3f0776b09397c6515edeb86223ceaca31fe37bc05dd895",
+        "nome": "neurologia",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-0aa382d02f29c9bd",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/3",
+        "sha256_conteudo": "ed684898957502cdc7f61c222f55df815be8b6a068f849dbe24727963a67575a",
+        "nome": "cuidados paliativos",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-86200ea1cb93d7b3",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/4",
+        "sha256_conteudo": "5a7c97f5ebc90dda652eeda034b7c81f1968fe391b093b5f39cd7e30dbd0a24d",
+        "nome": "reabilitação",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-df6e90c14805be6f",
+        "origem_json_pointer": "/ligacoes/laudos/0",
+        "sha256_conteudo": "8a740304995511dd1f62f8445d940adfdaf177db3b621e31d3060994b182a92f",
+        "nome": "APAC de quimioterapia (C71)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-3bce7fd382935dde",
+        "origem_json_pointer": "/ligacoes/laudos/1",
+        "sha256_conteudo": "77b834dad53f2a0a298a81c08396809c7c181acc40ca6fbe8f401e746bac5d8c",
+        "nome": "laudo com diagnóstico integrado OMS 2021 (IDH, 1p/19q, MGMT)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      }
+    ],
+    "itens_nccn": [
+      {
+        "item_id": "nccn-20261017-gliomas-escopo-snc",
+        "nome": "SNC além de gliomas",
+        "tipo": "AMPLIACAO_DE_ESCOPO_A_EXTRAIR",
+        "dominio_principal": 1,
+        "conteudo_extraido": "O PDF inclui ependimomas e outros universos excluídos pelo pack de gliomas, como meningiomas, linfoma de SNC e metástases. Registrar cobertura adicional a extrair em lotes próprios, sem aplicar protocolos de glioma a eles.",
+        "aplicabilidade": {
+          "criterios": [
+            "Identidade tumoral específica",
+            "Escopo não equivalente a gliomas"
+          ],
+          "paciente_individual": null,
+          "estado": "NAO_AVALIADA"
+        },
+        "dados_estruturados": {},
+        "fonte_refs": [
+          {
+            "fonte_id": "nccn-2b75ee1c4e22",
+            "paginas_pdf": [
+              3,
+              38,
+              39,
+              40,
+              41
+            ],
+            "secao": "Índice; EPEN-1–4",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "pagina_pdf": 3,
+            "trecho": "Ependymoma (Excluding Subependymoma) (EPEN-1) \u0017Systemic Therapy (EPEN-A) Sellar Tumors Pituitary Adenoma (SELLAR-1)"
+          }
+        ],
+        "evidencia_declarada": {
+          "sistema": "NCCN",
+          "categoria": null,
+          "estado": "NAO_EXTRAIDA_POR_ITEM"
+        },
+        "estado_extracao": "EXTRAIDO_COM_LIMITES_DECLARADOS",
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "temporalidade": {
+          "referencia": "CENARIO_DESCRITO",
+          "datas_individuais": null
+        },
+        "propor_automaticamente": false,
+        "disponivel_para_prescricao": false,
+        "acesso": {
+          "registro_anvisa": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "incorporacao_conitec": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "pcdt_ddt": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "sigtap_apac": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "cobertura_privada": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "disponibilidade_institucional": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          }
+        },
+        "alternativas_legadas_refs": [],
+        "relacoes_refs": [
+          "relacao-nccn-20261017-gliomas-escopo-snc"
+        ],
+        "conflitos_refs": [],
+        "pendencias": [
+          "REVISAO_CLINICA_DO_DELTA",
+          "VERIFICAR_ACESSO_BRASILEIRO_POR_INDICACAO"
+        ]
+      },
+      {
+        "item_id": "nccn-20261017-gliomas-replicacao-reparo",
+        "nome": "Glioblastoma com deficiência de reparo de replicação de novo",
+        "tipo": "SUBTIPO_MOLECULAR",
+        "dominio_principal": 3,
+        "conteudo_extraido": "BRAIN-E 5/10 recomenda pesquisar deficiência de reparo de replicação em glioblastoma recém-diagnosticado, sem radioterapia cerebral prévia, quando TMB-H. No subtipo IDH1/2 selvagem, a detecção inclui TMB-H em ensaio validado e inativação bialélica de MSH2, MSH6, MLH1 ou PMS2 por NGS e IHQ para perda proteica; POLE/POLD1 também devem ser avaliados. A fonte orienta teste germinativo para Lynch quando identificada a deficiência. A possível sensibilidade a ICI não é uma indicação automática.",
+        "aplicabilidade": {
+          "criterios": [
+            "Glioblastoma IDH1/2 selvagem",
+            "Recém-diagnosticado, sem RT cerebral prévia, TMB-H para o contexto de pesquisa descrito",
+            "Definição molecular por ensaio validado, NGS e IHQ; não inferir de diagnóstico genérico"
+          ],
+          "paciente_individual": null,
+          "estado": "NAO_AVALIADA"
+        },
+        "dados_estruturados": {
+          "criterios_documentais": {
+            "MMR_genes": [
+              "MSH2",
+              "MSH6",
+              "MLH1",
+              "PMS2"
+            ],
+            "inativacao": "bialélica",
+            "metodos": [
+              "NGS",
+              "IHQ de perda proteica"
+            ],
+            "polimerases_a_avaliar": [
+              "POLE",
+              "POLD1"
+            ],
+            "TMB": "alto por ensaio clinicamente validado; limiar numérico não transcrito"
+          }
+        },
+        "fonte_refs": [
+          {
+            "fonte_id": "nccn-2b75ee1c4e22",
+            "edicao": "3.2026",
+            "pagina_pdf": 130,
+            "paginas_pdf": [
+              130
+            ],
+            "secao": "BRAIN-E 5/10",
+            "trecho": "without history of prior brain radiation",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "afa63fd94ee11672c75ab12c613eb9cc24ac4e023f871e6de3a344f5f6660ba3"
+          },
+          {
+            "fonte_id": "nccn-2b75ee1c4e22",
+            "edicao": "3.2026",
+            "pagina_pdf": 130,
+            "paginas_pdf": [
+              130
+            ],
+            "secao": "BRAIN-E 5/10",
+            "trecho": "biallelic inactivation",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "afa63fd94ee11672c75ab12c613eb9cc24ac4e023f871e6de3a344f5f6660ba3"
+          },
+          {
+            "fonte_id": "nccn-2b75ee1c4e22",
+            "edicao": "3.2026",
+            "pagina_pdf": 130,
+            "paginas_pdf": [
+              130
+            ],
+            "secao": "BRAIN-E 5/10",
+            "trecho": "should undergo germline testing",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "afa63fd94ee11672c75ab12c613eb9cc24ac4e023f871e6de3a344f5f6660ba3"
+          }
+        ],
+        "evidencia_declarada": {
+          "sistema": "NCCN",
+          "categoria": null,
+          "estado": "NAO_EXTRAIDA_POR_ITEM"
+        },
+        "estado_extracao": "EXTRAIDO_COM_LIMITES_DECLARADOS",
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "temporalidade": {
+          "referencia": "CENARIO_DESCRITO",
+          "datas_individuais": null
+        },
+        "propor_automaticamente": false,
+        "disponivel_para_prescricao": false,
+        "acesso": {
+          "registro_anvisa": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "incorporacao_conitec": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "pcdt_ddt": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "sigtap_apac": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "cobertura_privada": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "disponibilidade_institucional": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          }
+        },
+        "alternativas_legadas_refs": [],
+        "relacoes_refs": [
+          "relacao-nccn-20261017-gliomas-replicacao-reparo"
+        ],
+        "conflitos_refs": [],
+        "pendencias": [
+          "REVISAO_CLINICA_DO_DELTA",
+          "VERIFICAR_ACESSO_BRASILEIRO_POR_INDICACAO"
+        ],
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+            "anterior": {
+              "fonte_refs": [
+                {
+                  "fonte_id": "nccn-2b75ee1c4e22",
+                  "paginas_pdf": [
+                    11
+                  ],
+                  "secao": "UPDATES, BRAIN-E 5/10",
+                  "natureza": "EXTRACAO_DOCUMENTAL",
+                  "pagina_pdf": 11,
+                  "trecho": "Replication Repair Deficiency • Detection: TMB-H high (defined by clinically validated assay)"
+                }
+              ],
+              "conteudo_extraido": "A atualização distingue deficiência de reparo de replicação de novo com avaliação molecular e IHQ específicas. Não inferir esse subtipo apenas do diagnóstico genérico de glioblastoma.",
+              "aplicabilidade": {
+                "criterios": [
+                  "Glioblastoma IDH selvagem",
+                  "Classificação molecular e patológica conforme fonte"
+                ],
+                "paciente_individual": null,
+                "estado": "NAO_AVALIADA"
+              },
+              "dados_estruturados": {}
+            },
+            "motivo": "A citação de Updates e os critérios genéricos omitiam a população de investigação e a definição molecular do subtipo.",
+            "aprovacao_clinica": null
+          },
+          {
+            "revisao": "2026-10-17-nccn-final-documental",
+            "anterior": {
+              "conteudo_extraido": "BRAIN-E5/10 recomenda pesquisar deficiência de reparo de replicação em glioblastoma recém-diagnosticado, sem radioterapia cerebral prévia, quando TMB-H. No subtipo IDH1/2 selvagem, a detecção inclui TMB-H em ensaio validado e inativação bialélica de MSH2, MSH6, MLH1 ou PMS2 por NGS e IHQ para perda proteica; POLE/POLD1 também devem ser avaliados. A fonte orienta teste germinativo para Lynch quando identificada a deficiência. A possível sensibilidade a ICI não é uma indicação automática."
+            },
+            "motivo": "Espaçamento da prosa; sem modificar valores, códigos ou fontes."
+          }
+        ],
+        "fontes_por_campo": {
+          "conteudo_extraido": [
+            {
+              "fonte_id": "nccn-2b75ee1c4e22",
+              "edicao": "3.2026",
+              "pagina_pdf": 130,
+              "paginas_pdf": [
+                130
+              ],
+              "secao": "BRAIN-E 5/10",
+              "trecho": "without history of prior brain radiation",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "afa63fd94ee11672c75ab12c613eb9cc24ac4e023f871e6de3a344f5f6660ba3"
+            },
+            {
+              "fonte_id": "nccn-2b75ee1c4e22",
+              "edicao": "3.2026",
+              "pagina_pdf": 130,
+              "paginas_pdf": [
+                130
+              ],
+              "secao": "BRAIN-E 5/10",
+              "trecho": "biallelic inactivation",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "afa63fd94ee11672c75ab12c613eb9cc24ac4e023f871e6de3a344f5f6660ba3"
+            },
+            {
+              "fonte_id": "nccn-2b75ee1c4e22",
+              "edicao": "3.2026",
+              "pagina_pdf": 130,
+              "paginas_pdf": [
+                130
+              ],
+              "secao": "BRAIN-E 5/10",
+              "trecho": "should undergo germline testing",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "afa63fd94ee11672c75ab12c613eb9cc24ac4e023f871e6de3a344f5f6660ba3"
+            }
+          ],
+          "aplicabilidade": [
+            {
+              "fonte_id": "nccn-2b75ee1c4e22",
+              "edicao": "3.2026",
+              "pagina_pdf": 130,
+              "paginas_pdf": [
+                130
+              ],
+              "secao": "BRAIN-E 5/10",
+              "trecho": "without history of prior brain radiation",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "afa63fd94ee11672c75ab12c613eb9cc24ac4e023f871e6de3a344f5f6660ba3"
+            },
+            {
+              "fonte_id": "nccn-2b75ee1c4e22",
+              "edicao": "3.2026",
+              "pagina_pdf": 130,
+              "paginas_pdf": [
+                130
+              ],
+              "secao": "BRAIN-E 5/10",
+              "trecho": "biallelic inactivation",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "afa63fd94ee11672c75ab12c613eb9cc24ac4e023f871e6de3a344f5f6660ba3"
+            },
+            {
+              "fonte_id": "nccn-2b75ee1c4e22",
+              "edicao": "3.2026",
+              "pagina_pdf": 130,
+              "paginas_pdf": [
+                130
+              ],
+              "secao": "BRAIN-E 5/10",
+              "trecho": "should undergo germline testing",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "afa63fd94ee11672c75ab12c613eb9cc24ac4e023f871e6de3a344f5f6660ba3"
+            }
+          ],
+          "dados_estruturados": [
+            {
+              "fonte_id": "nccn-2b75ee1c4e22",
+              "edicao": "3.2026",
+              "pagina_pdf": 130,
+              "paginas_pdf": [
+                130
+              ],
+              "secao": "BRAIN-E 5/10",
+              "trecho": "without history of prior brain radiation",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "afa63fd94ee11672c75ab12c613eb9cc24ac4e023f871e6de3a344f5f6660ba3"
+            },
+            {
+              "fonte_id": "nccn-2b75ee1c4e22",
+              "edicao": "3.2026",
+              "pagina_pdf": 130,
+              "paginas_pdf": [
+                130
+              ],
+              "secao": "BRAIN-E 5/10",
+              "trecho": "biallelic inactivation",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "afa63fd94ee11672c75ab12c613eb9cc24ac4e023f871e6de3a344f5f6660ba3"
+            },
+            {
+              "fonte_id": "nccn-2b75ee1c4e22",
+              "edicao": "3.2026",
+              "pagina_pdf": 130,
+              "paginas_pdf": [
+                130
+              ],
+              "secao": "BRAIN-E 5/10",
+              "trecho": "should undergo germline testing",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "afa63fd94ee11672c75ab12c613eb9cc24ac4e023f871e6de3a344f5f6660ba3"
+            }
+          ]
+        }
+      }
+    ],
+    "cenarios": {
+      "identidade_ref": "/identidade/cenarios",
+      "detalhamento_ref": "/tratamento/cenarios",
+      "novas_condicoes_refs": [
+        "nccn-20261017-gliomas-escopo-snc",
+        "nccn-20261017-gliomas-replicacao-reparo"
+      ],
+      "regra": "Não igualar automaticamente as duas listas nem selecionar cenário individual nesta camada."
+    },
+    "fontes": [
+      {
+        "id": "nccn-2b75ee1c4e22",
+        "arquivo_local": "C:\\Users\\silas\\.aside\\u\\0\\sessions\\2026-10-17_LutNNwUyDZGlA1pF\\artifacts\\nccn\\Central Nervous System Cancers.pdf",
+        "nome": "Central Nervous System Cancers",
+        "sha256": "afa63fd94ee11672c75ab12c613eb9cc24ac4e023f871e6de3a344f5f6660ba3",
+        "numero_paginas": 246,
+        "versao_declarada": "3.2026",
+        "origem": "ARQUIVO_LOCAL_FORNECIDO",
+        "autenticidade_externa": "NAO_VERIFICADA_NO_PORTAL",
+        "paginas_examinadas": [
+          3,
+          11,
+          38,
+          39,
+          40,
+          41,
+          130
+        ]
+      }
+    ],
+    "fontes_legadas_refs": [
+      "/header/fonte",
+      "/curadoria/fontesLidas"
+    ],
+    "ensaios": {
+      "legado_ref": "/tratamento/ensaios",
+      "novos_nct": [],
+      "nota": "Nenhum identificador NCT foi inventado ou verificado nesta rodada."
+    },
+    "relacoes": [
+      {
+        "relacao_id": "relacao-nccn-20261017-gliomas-escopo-snc",
+        "tipo": "CONDICOES_PARA_APRESENTACAO_DOCUMENTAL",
+        "destino_item_ref": "nccn-20261017-gliomas-escopo-snc",
+        "criterios_extraidos": [
+          "Identidade tumoral específica",
+          "Escopo não equivalente a gliomas"
+        ],
+        "origem_condicoes": "FONTE_NCCN_CITADA",
+        "origem_mapeamento": "PROPOSTA_DE_MAPEAMENTO",
+        "executavel": false,
+        "estado": "A_CONFERIR",
+        "dados_ausentes": "MANTER_INDETERMINADO",
+        "dados_conflitantes": "MANTER_CONFLITO",
+        "efeito": "APRESENTAR_CONTEUDO_PARA_REVISAO; NAO PRESCREVER"
+      },
+      {
+        "relacao_id": "relacao-nccn-20261017-gliomas-replicacao-reparo",
+        "tipo": "CONDICOES_PARA_APRESENTACAO_DOCUMENTAL",
+        "destino_item_ref": "nccn-20261017-gliomas-replicacao-reparo",
+        "criterios_extraidos": [
+          "Glioblastoma IDH1/2 selvagem",
+          "Recém-diagnosticado, sem RT cerebral prévia, TMB-H para o contexto de pesquisa descrito",
+          "Definição molecular por ensaio validado, NGS e IHQ; não inferir de diagnóstico genérico"
+        ],
+        "origem_condicoes": "FONTE_NCCN_CITADA",
+        "origem_mapeamento": "PROPOSTA_DE_MAPEAMENTO",
+        "executavel": false,
+        "estado": "A_CONFERIR",
+        "dados_ausentes": "MANTER_INDETERMINADO",
+        "dados_conflitantes": "MANTER_CONFLITO",
+        "efeito": "APRESENTAR_CONTEUDO_PARA_REVISAO; NAO PRESCREVER",
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+            "criterios_extraidos": [
+              "Glioblastoma IDH selvagem",
+              "Classificação molecular e patológica conforme fonte"
+            ]
+          }
+        ],
+        "fontes_por_campo": {
+          "criterios_extraidos": [
+            {
+              "fonte_id": "nccn-2b75ee1c4e22",
+              "edicao": "3.2026",
+              "pagina_pdf": 130,
+              "paginas_pdf": [
+                130
+              ],
+              "secao": "BRAIN-E 5/10",
+              "trecho": "without history of prior brain radiation",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "afa63fd94ee11672c75ab12c613eb9cc24ac4e023f871e6de3a344f5f6660ba3"
+            },
+            {
+              "fonte_id": "nccn-2b75ee1c4e22",
+              "edicao": "3.2026",
+              "pagina_pdf": 130,
+              "paginas_pdf": [
+                130
+              ],
+              "secao": "BRAIN-E 5/10",
+              "trecho": "biallelic inactivation",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "afa63fd94ee11672c75ab12c613eb9cc24ac4e023f871e6de3a344f5f6660ba3"
+            },
+            {
+              "fonte_id": "nccn-2b75ee1c4e22",
+              "edicao": "3.2026",
+              "pagina_pdf": 130,
+              "paginas_pdf": [
+                130
+              ],
+              "secao": "BRAIN-E 5/10",
+              "trecho": "should undergo germline testing",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "afa63fd94ee11672c75ab12c613eb9cc24ac4e023f871e6de3a344f5f6660ba3"
+            }
+          ]
+        }
+      }
+    ],
+    "conflitos": [],
+    "conflitos_legados_ref": "/conflitos",
+    "pendencias": [
+      {
+        "id": "revisao-clinica",
+        "estado": "ABERTA",
+        "descricao": "Conferir cada acréscimo, condições, fontes, doses, interações e suporte antes de uso clínico."
+      },
+      {
+        "id": "acesso-brasileiro",
+        "estado": "ABERTA",
+        "descricao": "NCCN não comprova Anvisa, Conitec, PCDT/DDT, SIGTAP/APAC, cobertura privada ou acesso institucional."
+      },
+      {
+        "id": "cobertura-nccn",
+        "estado": "PARCIAL_POR_DELTA",
+        "descricao": "Leitura dirigida das páginas citadas; não há alegação de extração integral da diretriz."
+      }
+    ],
+    "pendencias_legadas_ref": "/pendencias",
+    "itens_adicionais_a_classificar": [
+      {
+        "origem_ref": "/header",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/status",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/consultavel",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/alerta",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/substitui",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/identidade",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/pendencias",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/conflitos",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/curadoria",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/correcoes",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      }
+    ],
+    "mapa_de_cobertura": [
+      {
+        "origem_json_pointer": "/header",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "ea5634a58854e85253c315ebe63177df0696acbf63ff4d64f222a13f4876c073",
+        "valores_folha": 9
+      },
+      {
+        "origem_json_pointer": "/status",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "04635ca3844c66b19ebbf49bf9ff60fe851d6ce89597d23e6a970f1dc3927289",
+        "valores_folha": 1
+      },
+      {
+        "origem_json_pointer": "/consultavel",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b",
+        "valores_folha": 1
+      },
+      {
+        "origem_json_pointer": "/alerta",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "valores_folha": 1
+      },
+      {
+        "origem_json_pointer": "/substitui",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "valores_folha": 1
+      },
+      {
+        "origem_json_pointer": "/identidade",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "0322857df906c10a0eeaae782d199deb95a4d3bdbbfe136ffe3633dd662d188b",
+        "valores_folha": 12
+      },
+      {
+        "origem_json_pointer": "/diagnostico",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "324f16515d4ff99e4e05f4a4a889247d572bb31f55976ccfe08648c638bc8dbc",
+        "valores_folha": 214
+      },
+      {
+        "origem_json_pointer": "/estadiamento",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "8d0f770aa1917b576a294e33b69e5618bf35b1d0e773720179712a1e5f64bb4b",
+        "valores_folha": 139
+      },
+      {
+        "origem_json_pointer": "/tratamento",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "ccb80a07630bbb84246754d3128091990f50b069576209212c24012632db4e2e",
+        "valores_folha": 688
+      },
+      {
+        "origem_json_pointer": "/ligacoes",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "5ffa445e10bb970632c5c2de8048e9f505d262bb269b22e86a6fb498328bcbb8",
+        "valores_folha": 97
+      },
+      {
+        "origem_json_pointer": "/pendencias",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "321b3909e554012bd3d56a10accd59b791b9c36e41537c0ea99b256c47f29bef",
+        "valores_folha": 49
+      },
+      {
+        "origem_json_pointer": "/conflitos",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "a74c8b78c7b958b3f413c9ccf8e991b1478a7444792c4e4f12d8f931e330dfbd",
+        "valores_folha": 38
+      },
+      {
+        "origem_json_pointer": "/curadoria",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "eb4e59c568e97bb5e76192a64448879c8f9b7520c1f86ca30ea094f10c8224c0",
+        "valores_folha": 18
+      },
+      {
+        "origem_json_pointer": "/correcoes",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "341f97ae0d4573e9beae400741067feb2a968e72970ab53bfccac72c6aaed4dc",
+        "valores_folha": 24
+      }
+    ],
+    "reconciliacao_com_versao_anterior": {
+      "modo": "ADITIVO",
+      "originais_removidos": 0,
+      "originais_alterados": 0,
+      "contagens_preservadas": {
+        "protocolos": 12,
+        "ensaios": 4,
+        "cenarios_identidade": 6,
+        "cenarios_tratamento": 4,
+        "seguimento": 5,
+        "conflitos": 2,
+        "pendencias": 5
+      }
+    },
+    "relatorio_de_completude": {
+      "estado": "INCOMPLETA_PARA_DIRETRIZ_INTEGRAL",
+      "preservacao_legado": "INTEGRAL",
+      "delta_itens": 2,
+      "normalizacao_legado": "INDEXACAO_POR_REFERENCIA; NAO REEXTRACAO CLINICA",
+      "posologias": "SOMENTE AS EXPLICITAMENTE EXTRAIDAS; RESTANTES PENDENTES",
+      "sem_fato_paciente": true,
+      "sem_aprovacao_inferida": true
+    },
+    "auditoria_33_pendentes": [
+      {
+        "item_id": "nccn-20261017-gliomas-escopo-snc",
+        "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+        "resultado": "CONFIRMADO_SEM_REESCRITA",
+        "fundamento": "Índice confirma universos além de gliomas. O item apenas registra necessidade de lotes próprios e não extrapola tratamento.",
+        "fontes": [
+          {
+            "fonte_id": "nccn-2b75ee1c4e22",
+            "edicao": "3.2026",
+            "pagina_pdf": 3,
+            "paginas_pdf": [
+              3
+            ],
+            "secao": "Índice de cenários",
+            "trecho": "Primary CNS Lymphoma",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "afa63fd94ee11672c75ab12c613eb9cc24ac4e023f871e6de3a344f5f6660ba3"
+          },
+          {
+            "fonte_id": "nccn-2b75ee1c4e22",
+            "edicao": "3.2026",
+            "pagina_pdf": 3,
+            "paginas_pdf": [
+              3
+            ],
+            "secao": "Índice de cenários",
+            "trecho": "Meningiomas",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "afa63fd94ee11672c75ab12c613eb9cc24ac4e023f871e6de3a344f5f6660ba3"
+          }
+        ],
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "limite": "Conferência das afirmações deste item; não extração integral de posologia, diretriz ou acesso brasileiro.",
+        "sha256_item_antes": "999c02c620cc6fc9e87b409cfb0ac63c7bfc3e4e00c7ce66886da7f9c2c7fb37"
+      },
+      {
+        "item_id": "nccn-20261017-gliomas-replicacao-reparo",
+        "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+        "resultado": "CORRIGIDO_ESCOPO_OU_COMPLETUDE",
+        "fundamento": "A citação de Updates e os critérios genéricos omitiam a população de investigação e a definição molecular do subtipo.",
+        "fontes": [
+          {
+            "fonte_id": "nccn-2b75ee1c4e22",
+            "edicao": "3.2026",
+            "pagina_pdf": 130,
+            "paginas_pdf": [
+              130
+            ],
+            "secao": "BRAIN-E 5/10",
+            "trecho": "without history of prior brain radiation",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "afa63fd94ee11672c75ab12c613eb9cc24ac4e023f871e6de3a344f5f6660ba3"
+          },
+          {
+            "fonte_id": "nccn-2b75ee1c4e22",
+            "edicao": "3.2026",
+            "pagina_pdf": 130,
+            "paginas_pdf": [
+              130
+            ],
+            "secao": "BRAIN-E 5/10",
+            "trecho": "biallelic inactivation",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "afa63fd94ee11672c75ab12c613eb9cc24ac4e023f871e6de3a344f5f6660ba3"
+          },
+          {
+            "fonte_id": "nccn-2b75ee1c4e22",
+            "edicao": "3.2026",
+            "pagina_pdf": 130,
+            "paginas_pdf": [
+              130
+            ],
+            "secao": "BRAIN-E 5/10",
+            "trecho": "should undergo germline testing",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "afa63fd94ee11672c75ab12c613eb9cc24ac4e023f871e6de3a344f5f6660ba3"
+          }
+        ],
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "limite": "Conferência das afirmações deste item; não extração integral de posologia, diretriz ou acesso brasileiro.",
+        "sha256_item_antes": "28bfc090846275a2d32fa30e0b295fd9f278cbcb16eeab197c56e15248cc360e"
+      }
+    ],
+    "revisoes_auditoria": [
+      {
+        "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+        "escopo": "APENAS_33_ITENS_PENDENTES",
+        "legado_modificado": false,
+        "aprovacao_clinica": null,
+        "limites": "Sem leitura integral da pasta, sem completar doses, sem checagem de acesso ou autenticidade externa.",
+        "itens_ref": "/tumor_pack_universal/auditoria_33_pendentes",
+        "sha256_itens": "e07293318819fb2fa4e601316e946deed37de97069cac7ec613ea7bd551969bc"
+      }
+    ],
+    "fechamento_documental": [
+      {
+        "revisao": "2026-10-17-nccn-final-documental",
+        "estado": "CORRECOES_DOCUMENTAIS_APLICADAS",
+        "ajustes_textuais": 1,
+        "deduplicacoes_por_referencia": [
+          "auditoria_33_pendentes"
+        ],
+        "aprovacao_clinica": null,
+        "legado_alterado": false
+      }
+    ]
+  }
 }

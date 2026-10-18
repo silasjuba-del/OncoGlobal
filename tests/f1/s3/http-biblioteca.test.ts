@@ -4,7 +4,7 @@ import { createServer } from 'node:http';
 import type { AddressInfo } from 'node:net';
 import { abrirLedger } from '../../../src/kernel/ledger/db.js';
 import { criarGerenciadorSessao } from '../../../src/server/sessao.js';
-import { rotearBiblioteca, referenciaBibliotecaAtiva } from '../../../src/server/biblioteca.js';
+import { rotearBiblioteca, referenciaBibliotecaAtiva, hashCuradoriaPacote } from '../../../src/server/biblioteca.js';
 import { sha256Biblioteca } from '../../../src/kernel/corpus/biblioteca.js';
 import { respostaHttpValida } from '../../../src/contracts/api/saidasHttp.js';
 function pacote(versao='1.0.0'){
@@ -18,21 +18,49 @@ async function ambiente(){
  const auth=sessoes.login('segredo-sintetico-123')!;const deps={db,sessoes,agora};
  const server=createServer(async(req,res)=>{let raw='';for await(const part of req)raw+=part;const token=String(req.headers.authorization??'').replace('Bearer ','');const result=rotearBiblioteca(deps,token,req.url!,JSON.parse(raw),sessoes.obter(token)??auth.sessao);res.writeHead(result?.status??404,{'Content-Type':'application/json'});res.end(JSON.stringify(result?.body??{}));});
  await new Promise<void>(resolve=>server.listen(0,'127.0.0.1',resolve));const base=`http://127.0.0.1:${(server.address() as AddressInfo).port}`;
- return {db,auth,novaSessao:()=>sessoes.login('segredo-sintetico-123')!,relogio(valor:string){instante=valor;},async post(rota:string,body:unknown,token=auth.token){const r=await fetch(base+rota,{method:'POST',headers:{authorization:`Bearer ${token}`,'Content-Type':'application/json'},body:JSON.stringify(body)});return {status:r.status,body:await r.json() as Record<string,any>};},async close(){await new Promise<void>((resolve,reject)=>server.close(e=>e?reject(e):resolve()));db.close();}};
+ return {db,auth,async curar(body: Record<string, unknown>, token = auth.token) { const r = await fetch(base + '/biblioteca/curar', {method:'POST',headers:{authorization:`Bearer ${token}`,'Content-Type':'application/json'},body:JSON.stringify({expectedCuradoriaHash:hashCuradoriaPacote(db,String(body.pacoteId)),...body})}); return {status:r.status,body:await r.json() as Record<string,any>}; }, novaSessao:()=>sessoes.login('segredo-sintetico-123')!,relogio(valor:string){instante=valor;},async post(rota:string,body:unknown,token=auth.token){if(['/biblioteca/ativar','/biblioteca/rollback'].includes(rota)&&body&&typeof body==='object'&&!Object.hasOwn(body,'expectedAtivaHash')) { const atual=await fetch(base+'/biblioteca/estado',{method:'POST',headers:{authorization:`Bearer ${token}`,'Content-Type':'application/json'},body:'{}'}); const estado=await atual.json() as Record<string,any>;body={expectedAtiva:estado.ativa??null,expectedAtivaHash:estado.referencia?.hash??null,...body}; } const r=await fetch(base+rota,{method:'POST',headers:{authorization:`Bearer ${token}`,'Content-Type':'application/json'},body:JSON.stringify(body)});return {status:r.status,body:await r.json() as Record<string,any>};},async close(){await new Promise<void>((resolve,reject)=>server.close(e=>e?reject(e):resolve()));db.close();}};
 }
 describe('S3 biblioteca manual no HTTP real',()=>{
+ it('ativação de outra versão invalida a tela antiga e sua tentativa de substituir a biblioteca ativa',async()=>{
+  const a=await ambiente();try{
+   const p1=await a.post('/biblioteca/importar',pacote()),p2=await a.post('/biblioteca/importar',pacote('2.0.0'));
+   for(const p of [p1,p2])expect((await a.curar({pacoteId:p.body.pacoteId,itemId:'item',expectedHash:p.body.hash,estado:'CONSULTAVEL'})).status).toBe(200);
+   const tela=await a.post('/biblioteca/estado',{pacoteId:p1.body.pacoteId});
+   const pedido={pacoteId:p1.body.pacoteId,expectedHash:p1.body.hash,expectedCuradoriaHash:tela.body.curadoriaHash,
+     expectedAtiva:tela.body.ativa,expectedAtivaHash:tela.body.referencia?.hash??null};
+   const segunda=await a.post('/biblioteca/estado',{pacoteId:p2.body.pacoteId});
+   expect((await a.post('/biblioteca/ativar',{pacoteId:p2.body.pacoteId,expectedHash:p2.body.hash,expectedCuradoriaHash:segunda.body.curadoriaHash},a.novaSessao().token)).status).toBe(200);
+   expect(await a.post('/biblioteca/ativar',pedido)).toEqual({status:409,body:{codigo:'BIBLIOTECA_REVISAO_DIVERGENTE'}});
+   expect((await a.post('/biblioteca/estado',{})).body.ativa).toBe(p2.body.pacoteId);
+   expect((await a.post('/biblioteca/ativar',{...pedido,expectedAtivaHash:undefined})).status).toBe(400);
+  }finally{await a.close();}
+ });
+ it('revisão antiga não restaura um item tornado obsoleto por outra sessão',async()=>{
+  const a=await ambiente();try{
+   const imp=await a.post('/biblioteca/importar',pacote());
+   const base={pacoteId:imp.body.pacoteId,itemId:'item',expectedHash:imp.body.hash};
+   const antigo=(await a.post('/biblioteca/estado',{pacoteId:base.pacoteId})).body.curadoriaHash;
+   expect((await a.curar({...base,estado:'CONSULTAVEL',expectedCuradoriaHash:antigo})).status).toBe(200);
+   const tela=(await a.post('/biblioteca/estado',{pacoteId:base.pacoteId})).body.curadoriaHash;
+   expect((await a.post('/biblioteca/ativar',{pacoteId:base.pacoteId,expectedHash:base.expectedHash,expectedCuradoriaHash:tela})).status).toBe(200);
+   expect((await a.curar({...base,estado:'OBSOLETO',expectedCuradoriaHash:tela},a.novaSessao().token)).status).toBe(200);
+   expect((await a.curar({...base,estado:'CONSULTAVEL',expectedCuradoriaHash:tela})).body.codigo).toBe('BIBLIOTECA_REVISAO_DIVERGENTE');
+   expect((await a.post('/biblioteca/consultar',{filtros:{}})).body.itens).toEqual([]);
+   expect((await a.post('/biblioteca/curar',{...base,estado:'CONSULTAVEL'})).status).toBe(400);
+  }finally{await a.close();}
+ });
  it('rollback confere alvo e curadoria exibidos e não escolhe outra versão silenciosamente',async()=>{
   const a=await ambiente();try{
    const p1=await a.post('/biblioteca/importar',pacote()),p2=await a.post('/biblioteca/importar',pacote('2.0.0'));
    for(const p of [p1,p2]){
-    await a.post('/biblioteca/curar',{pacoteId:p.body.pacoteId,itemId:'item',expectedHash:p.body.hash,estado:'CONSULTAVEL'});
+    await a.curar({pacoteId:p.body.pacoteId,itemId:'item',expectedHash:p.body.hash,estado:'CONSULTAVEL'});
     await a.post('/biblioteca/ativar',{pacoteId:p.body.pacoteId,expectedHash:p.body.hash,expectedCuradoriaHash:(await a.post('/biblioteca/estado',{pacoteId:p.body.pacoteId})).body.curadoriaHash});
    }
    const alvo=await a.post('/biblioteca/estado',{pacoteId:p1.body.pacoteId});
    const pedido={expectedAtiva:p2.body.pacoteId,expectedHash:p2.body.hash,expectedAnterior:p1.body.pacoteId,expectedAnteriorHash:p1.body.hash,expectedAnteriorCuradoriaHash:alvo.body.curadoriaHash};
    const antes=a.db.prepare('SELECT count(*) n FROM biblioteca_ativacao').get()!.n;
    for(const estado of ['OBSOLETO','CONSULTAVEL']){
-    await a.post('/biblioteca/curar',{pacoteId:p1.body.pacoteId,itemId:'item',expectedHash:p1.body.hash,estado},a.novaSessao().token);
+    await a.curar({pacoteId:p1.body.pacoteId,itemId:'item',expectedHash:p1.body.hash,estado},a.novaSessao().token);
     expect(await a.post('/biblioteca/rollback',pedido)).toEqual({status:409,body:{codigo:'BIBLIOTECA_REVISAO_DIVERGENTE'}});
     expect(a.db.prepare('SELECT count(*) n FROM biblioteca_ativacao').get()!.n).toBe(antes);
    }
@@ -66,7 +94,7 @@ describe('S3 biblioteca manual no HTTP real',()=>{
    const arquivos:Record<string,{texto:string}>={};
    const itens=Array.from({length:120},(_,i)=>{const id=`item-${i}`,arquivo=`${id}.json`,texto=JSON.stringify({...original,id});arquivos[arquivo]={texto};return {id,versao:'1.0.0',arquivo,sha256:sha256Biblioteca(texto)};});
    const imp=await a.post('/biblioteca/importar',{manifesto:{...base.manifesto,itens},arquivos});expect(imp.status).toBe(201);
-   await a.post('/biblioteca/curar',{pacoteId:imp.body.pacoteId,itemId:'item-0',expectedHash:imp.body.hash,estado:'OBSOLETO'});
+   await a.curar({pacoteId:imp.body.pacoteId,itemId:'item-0',expectedHash:imp.body.hash,estado:'OBSOLETO'});
    const spy=vi.spyOn(a.db,'prepare');
    try{
     const estado=await a.post('/biblioteca/estado',{});expect(estado.body.itens).toEqual([]);
@@ -83,12 +111,12 @@ describe('S3 biblioteca manual no HTTP real',()=>{
   const a=await ambiente();try {
    const outra=a.novaSessao();const p=await a.post('/biblioteca/importar',pacote());
    const pedido={pacoteId:p.body.pacoteId,itemId:'item',expectedHash:p.body.hash};
-   await a.post('/biblioteca/curar',{...pedido,estado:'CONSULTAVEL'},outra.token);
+   await a.curar({...pedido,estado:'CONSULTAVEL'},outra.token);
    const exibido=await a.post('/biblioteca/estado',{pacoteId:pedido.pacoteId});
    const ativar={pacoteId:pedido.pacoteId,expectedHash:pedido.expectedHash,expectedCuradoriaHash:exibido.body.curadoriaHash};
-   await a.post('/biblioteca/curar',{...pedido,estado:'OBSOLETO'},outra.token);
+   await a.curar({...pedido,estado:'OBSOLETO'},outra.token);
    expect(await a.post('/biblioteca/ativar',ativar)).toEqual({status:409,body:{codigo:'BIBLIOTECA_REVISAO_DIVERGENTE'}});
-   await a.post('/biblioteca/curar',{...pedido,estado:'CONSULTAVEL'},outra.token);
+   await a.curar({...pedido,estado:'CONSULTAVEL'},outra.token);
    expect(await a.post('/biblioteca/ativar',ativar)).toEqual({status:409,body:{codigo:'BIBLIOTECA_REVISAO_DIVERGENTE'}});
    expect(a.db.prepare('SELECT count(*) n FROM biblioteca_ativacao').get()?.n).toBe(0);
    expect((await a.post('/biblioteca/ativar',{pacoteId:pedido.pacoteId,expectedHash:pedido.expectedHash})).status).toBe(400);
@@ -109,7 +137,7 @@ describe('S3 biblioteca manual no HTTP real',()=>{
    }
    expect(a.db.prepare('SELECT count(*) n FROM biblioteca_curadoria').get()?.n).toBe(0);
    a.relogio('2026-10-12T10:01:00Z');
-   expect((await a.post('/biblioteca/curar',pedido)).status).toBe(200);
+   expect((await a.curar(pedido)).status).toBe(200);
   }finally{await a.close();}
  });
  it('importa texto/base64, cura manualmente, ativa, consulta e restaura sem promover regra textual',async()=>{
@@ -121,8 +149,8 @@ describe('S3 biblioteca manual no HTTP real',()=>{
    expect(estado.body.itens[0].curadoria).toBeNull();
    expect(estado.body.pacotes).toEqual([{pacoteId:id,versao:'1.0.0',hash,ativo:false,itens:[{id:'item',estado:'RASCUNHO'}]}]);
    expect((await a.post('/biblioteca/ativar',{pacoteId:id,expectedHash:hash,expectedCuradoriaHash:(await a.post('/biblioteca/estado',{pacoteId:id})).body.curadoriaHash})).body.codigo).toBe('SEM_ITEM_APROVADO');
-   expect((await a.post('/biblioteca/curar',{pacoteId:id,itemId:'item',expectedHash:hash,estado:'ALERTA'})).body.codigo).toBe('ALERTA_SEM_SCHEMA_EXECUTAVEL');
-   expect((await a.post('/biblioteca/curar',{pacoteId:id,itemId:'item',expectedHash:hash,estado:'CONSULTAVEL'})).status).toBe(200);
+   expect((await a.curar({pacoteId:id,itemId:'item',expectedHash:hash,estado:'ALERTA'})).body.codigo).toBe('ALERTA_SEM_SCHEMA_EXECUTAVEL');
+   expect((await a.curar({pacoteId:id,itemId:'item',expectedHash:hash,estado:'CONSULTAVEL'})).status).toBe(200);
    const active=await a.post('/biblioteca/ativar',{pacoteId:id,expectedHash:hash,expectedCuradoriaHash:(await a.post('/biblioteca/estado',{pacoteId:id})).body.curadoriaHash});expect(active.status).toBe(200);expect(active.body.referencia.hash).toMatch(/^[a-f0-9]{64}$/);
    const aud=await a.post('/biblioteca/estado',{pacoteId:id});
    expect(respostaHttpValida('/biblioteca/estado',aud.status,aud.body)).toBe(true);
@@ -132,7 +160,7 @@ describe('S3 biblioteca manual no HTTP real',()=>{
    expect((await a.post('/biblioteca/consultar',{filtros:{tumor:'sintetico'},modo:'ALERTA'})).body.itens).toEqual([]);
    const p2=pacote('2.0.0'),b64={...p2,arquivos:{'item.json':{base64:Buffer.from(p2.arquivos['item.json'].texto).toString('base64')}}};
    const second=await a.post('/biblioteca/importar',b64);expect(second.status).toBe(201);
-   await a.post('/biblioteca/curar',{pacoteId:second.body.pacoteId,itemId:'item',expectedHash:second.body.hash,estado:'CONSULTAVEL'});
+   await a.curar({pacoteId:second.body.pacoteId,itemId:'item',expectedHash:second.body.hash,estado:'CONSULTAVEL'});
    await a.post('/biblioteca/ativar',{pacoteId:second.body.pacoteId,expectedHash:second.body.hash,expectedCuradoriaHash:(await a.post('/biblioteca/estado',{pacoteId:second.body.pacoteId})).body.curadoriaHash});
    const rollback=await a.post('/biblioteca/rollback',{expectedAtiva:second.body.pacoteId,expectedHash:second.body.hash,expectedAnterior:id,expectedAnteriorHash:hash,expectedAnteriorCuradoriaHash:(await a.post('/biblioteca/estado',{pacoteId:id})).body.curadoriaHash});expect(rollback.body.referencia).toEqual(active.body.referencia);
    expect(a.db.prepare('SELECT count(*) AS n FROM estimulo_tecnico').get()?.n).toBe(3);
@@ -159,14 +187,14 @@ describe('S3 biblioteca manual no HTTP real',()=>{
    expect((await a.post('/biblioteca/importar',{...pacote(),arquivos:{'item.json':{path:'/etc/passwd'}}})).status).toBe(400);
    const p=pacote();p.manifesto.itens[0]!.sha256='0'.repeat(64);expect((await a.post('/biblioteca/importar',p)).body.codigo).toBe('HASH_DIVERGENTE');
    const imported=await a.post('/biblioteca/importar',pacote());
-   expect((await a.post('/biblioteca/curar',{pacoteId:imported.body.pacoteId,itemId:'item',expectedHash:'f'.repeat(64),estado:'CONSULTAVEL'})).body.codigo).toBe('PACOTE_HASH_DIVERGENTE');
+   expect((await a.curar({pacoteId:imported.body.pacoteId,itemId:'item',expectedHash:'f'.repeat(64),estado:'CONSULTAVEL'})).body.codigo).toBe('PACOTE_HASH_DIVERGENTE');
    expect(a.db.prepare('SELECT count(*) AS n FROM biblioteca_curadoria').get()?.n).toBe(0);
    expect((await a.post('/biblioteca/rollback',{expectedAtiva:imported.body.pacoteId,expectedHash:imported.body.hash})).status).toBe(400);
   }finally{await a.close();}
  });
  it('falha ao persistir estímulo desfaz ativação e mantém referência anterior',async()=>{
   const a=await ambiente();try {
-   const p=await a.post('/biblioteca/importar',pacote());await a.post('/biblioteca/curar',{pacoteId:p.body.pacoteId,itemId:'item',expectedHash:p.body.hash,estado:'CONSULTAVEL'});
+   const p=await a.post('/biblioteca/importar',pacote());await a.curar({pacoteId:p.body.pacoteId,itemId:'item',expectedHash:p.body.hash,estado:'CONSULTAVEL'});
    a.db.exec("CREATE TRIGGER falha_emitir BEFORE INSERT ON estimulo_tecnico BEGIN SELECT RAISE(ABORT,'falha sintetica'); END;");
    expect((await a.post('/biblioteca/ativar',{pacoteId:p.body.pacoteId,expectedHash:p.body.hash,expectedCuradoriaHash:(await a.post('/biblioteca/estado',{pacoteId:p.body.pacoteId})).body.curadoriaHash})).status).toBe(409);
    expect(referenciaBibliotecaAtiva(a.db)).toBeNull();expect(a.db.prepare('SELECT count(*) AS n FROM biblioteca_ativacao').get()?.n).toBe(0);
@@ -174,9 +202,9 @@ describe('S3 biblioteca manual no HTTP real',()=>{
  });
  it('curadoria de item ativo muda hash e publica estímulo na mesma transação',async()=>{
   const a=await ambiente();try {
-   const p=await a.post('/biblioteca/importar',pacote());await a.post('/biblioteca/curar',{pacoteId:p.body.pacoteId,itemId:'item',expectedHash:p.body.hash,estado:'CONSULTAVEL'});
+   const p=await a.post('/biblioteca/importar',pacote());await a.curar({pacoteId:p.body.pacoteId,itemId:'item',expectedHash:p.body.hash,estado:'CONSULTAVEL'});
    await a.post('/biblioteca/ativar',{pacoteId:p.body.pacoteId,expectedHash:p.body.hash,expectedCuradoriaHash:(await a.post('/biblioteca/estado',{pacoteId:p.body.pacoteId})).body.curadoriaHash});const before=referenciaBibliotecaAtiva(a.db);
-   await a.post('/biblioteca/curar',{pacoteId:p.body.pacoteId,itemId:'item',expectedHash:p.body.hash,estado:'OBSOLETO'});
+   await a.curar({pacoteId:p.body.pacoteId,itemId:'item',expectedHash:p.body.hash,estado:'OBSOLETO'});
    expect(referenciaBibliotecaAtiva(a.db)?.hash).not.toBe(before?.hash);expect(a.db.prepare('SELECT count(*) AS n FROM estimulo_tecnico').get()?.n).toBe(2);
    expect((await a.post('/biblioteca/consultar',{filtros:{tumor:'sintetico'}})).body.itens).toEqual([]);
   }finally{await a.close();}

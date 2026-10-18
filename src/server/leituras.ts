@@ -739,28 +739,32 @@ export function lerMensagensChat(db: DatabaseSync, setor: SetorChat, contexto: {
     && m.event.patientId === contexto.patientId && m.event.encounterId === contexto.encounterId)
     .map((m) => ({ mensagemId: m.value.mensagemId, autor: m.value.autor, texto: m.value.texto }));
 }
-export function lerRecist(db: DatabaseSync, patientId: string) {
-  const all = eventos(db), patientEvents = all.filter((e) => e.patientId === patientId);
+export function lerRecist(db: DatabaseSync, patientId: string, contexto?:{encounterId:string;tumorLotId:string|null;agora:string}) {
+  const originais=eventos(db),doPaciente=originais.filter(e=>e.patientId===patientId);
+  const horizonte=contexto?horizonteDoEncontro(doPaciente,contexto.encounterId,contexto.agora):Infinity;
+  const all=originais.filter(e=>Date.parse(e.criadoEm)<=horizonte),patientEvents=all.filter(e=>e.patientId===patientId);
   const series = porTipo(all, "RecistSerie", RecistSerieSchema).filter(({ event, value }) =>
-    event.patientId === patientId && value.patientId === patientId);
+    event.patientId === patientId && value.patientId === patientId&&(!contexto||value.tumorLotId===contexto.tumorLotId&&event.tumorLotId===contexto.tumorLotId));
   if (!patientEvents.length) return { estado: "PENDENTE", codigo: "PACIENTE_NAO_ENCONTRADO", series: [] };
   if (!series.length) return { estado: "PENDENTE", codigo: "SERIE_RECIST_AUSENTE", series: [] };
   const byId = new Map(all.map((e) => [e.eventId, e]));
-  const sourceIds = new Set(patientEvents.flatMap((e) => e.fontes.map((f) => f.sourceId)));
-  return { estado: "PARCIAL", series: series.map(({ value }) => {
+  return { estado: "PARCIAL", series: series.map(({ event:serieEvento,value }) => {
+    const identidade={eventId:serieEvento.eventId,tumorLotId:value.tumorLotId,episodioId:value.episodioId};
+    const sourceIds = new Set(patientEvents.filter(e=>e.tumorLotId===value.tumorLotId||e.tumorLotId===null&&escopoDoEvento(e)==="PACIENTE")
+      .flatMap(e=>e.fontes.map(f=>f.sourceId)));
     const scoped = value.pontos.every((p) => {
       const event = byId.get(p.eventId);
       return p.patientId === patientId && event?.patientId === patientId
         && event.tumorLotId === p.tumorLotId && p.tumorLotId === value.tumorLotId
-        && p.episodioId === value.episodioId;
+        && p.episodioId === value.episodioId&&(!contexto||Date.parse(p.data)<=horizonte);
     });
     const provenance = [...value.alvos.flatMap((a) => a.fonteElegibilidadeIds),
       ...value.pontos.flatMap((p) => [...p.fonteIds, ...p.lesoes.flatMap((l) => l.fonteIds)])];
     if (!scoped || provenance.some((id) => !sourceIds.has(id))) {
-      return { estado: "PENDENTE", codigo: "ESCOPO_OU_PROVENIENCIA_INVALIDA", resultado: null };
+      return { ...identidade,estado: "PENDENTE", codigo: "ESCOPO_OU_PROVENIENCIA_INVALIDA", resultado: null,categoriaNuncaAssinada:true };
     }
     const resultado = avaliarSerieRecist(value as RecistSerieInput);
-    return { estado: resultado.estado, resultado, categoriaNuncaAssinada: true };
+    return { ...identidade,estado: resultado.estado, resultado, categoriaNuncaAssinada: true };
   }) };
 }
 export const validadoresLeitura = { Paciente, Contato, TumorLot, Triagem, TreatmentEpisode, Ciclo, Apac, Conversation };

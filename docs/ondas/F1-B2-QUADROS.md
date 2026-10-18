@@ -9,8 +9,8 @@
 ### Folinato + 5-FU semanal (P1577) — não especificado
 
 - **templateId:** `FICHA.nao-informado-ficha-institucional.folinato-5-fu-semanal-p1577__nao-especificado@1.0.0` · **versão:** 1.0.0 · **hash:** ver 'corpus/manifesto/b2-fichas.v1.json' (chave templateId) · **status:** RASCUNHO · **código:** P1577
-- **Intervalo:** 7 d · **Ciclos:** —
-- **Identidade clínica:** Folinato 20 mg/m² + 5-FU 425 mg/m² semanais IV bolus (D-F1-26 + D-F1-50; NHS CR004 casa exatamente com a identidade); dias locais D1–D36 (D-F1-26)
+- **Intervalo:** 7 d · **Ciclos:** 6
+- **Identidade clínica:** Folinato 20 mg/m² + 5-FU 425 mg/m² semanais IV bolus (D-F1-26 + D-F1-50; NHS CR004 casa exatamente com a identidade); dias absolutos D1–D36 (D-F1-26): seis ciclos semanais com administração em D1 de cada ciclo
 - **Fonte da ficha:** D-F1-26 (identidade: folinato 20 + 5-FU semanal D1–D36, sem vínculo com Roswell Park); D-F1-49; D-F1-50 (dose do 5-FU = 425 mg/m²). Fonte que casa com a identidade (2026-10-14): EXT-LEG-019 (Northern Cancer Alliance (NHS, Reino Unido), CR004 v1.4 — Weekly 5-Fluorouracil and Folinic Acid (CRP09), v1.4, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json) — folinato 20 mg/m² IV bolus + 5-FU 425 mg/m² IV bolus (reduzível a 370; 300 com RT), semanal. Variantes não adotadas: EXT-LEG-001 (eviQ (Cancer Institute NSW), ID 1494 — Colorectal cancer adjuvant QUASAR weekly fluorouracil …
 
 | # | Item | Classe | Dose | Unid. | Base | Via | Diluente | Vol. | Tempo | Dias | Situação | Fontes |
@@ -19,8 +19,8 @@
 | 2 | Ondansetrona | PRE_QT | 8 | mg | FIXED | EV | — | — | 15 min | d1 | padrão local | — |
 | 3 | Dexametasona | PRE_QT | 10 | mg | FIXED | EV | — | — | 15 min | d1 | padrão local | — |
 | 4 | Prometazina | PRE_QT | 25 | mg | FIXED | VO | — | — | — | d1 | padrão local | — |
-| 5 | Folinato de cálcio (leucovorina) | QT | 20 | mg/m² | MG_M2 | EV | — | — | bolus | d1, d8, d15, d22, d29, d36 | DECISÃO LOCAL (D-F1-26 (folinato 20 mg/m² semanal); CR004 corrobora 20 mg/m² IV bolus) | `EXT-LEG-019` |
-| 6 | Fluoruracila (5-FU) em bolus | QT | 425 | mg/m² | MG_M2 | EV | — | — | bolus | d1, d8, d15, d22, d29, d36 | DECISÃO LOCAL (D-F1-50 (dose 425 mg/m²)) | `EXT-LEG-019` |
+| 5 | Folinato de cálcio (leucovorina) | QT | 20 | mg/m² | MG_M2 | EV | — | — | bolus | d1 | DECISÃO LOCAL (D-F1-26 (folinato 20 mg/m² semanal); CR004 corrobora 20 mg/m² IV bolus) | `EXT-LEG-019` |
+| 6 | Fluoruracila (5-FU) em bolus | QT | 425 | mg/m² | MG_M2 | EV | — | — | bolus | d1 | DECISÃO LOCAL (D-F1-50 (dose 425 mg/m²)) | `EXT-LEG-019` |
 | 7 | Soro fisiológico 0,9% 250 mL (lavagem pós-QT) | POS_QT | 1 | frasco | FIXED | EV | — | 250 | — | d1 | padrão local | — |
 
 **Divergências registradas:**
@@ -39,14 +39,14 @@
 
 | # | Item | Classe | Dose | Unid. | Base | Via | Diluente | Vol. | Tempo | Dias | Situação | Fontes |
 |---|------|--------|------|-------|------|------|----------|------|-------|------|----------|--------|
-| 1 | Soro fisiológico 0,9% 250 mL (lavagem de acesso) | PRE_QT | 1 | frasco | FIXED | EV | — | 250 | — | d1 | padrão local | — |
-| 2 | Ondansetrona | PRE_QT | 8 | mg | FIXED | EV | — | — | 15 min | d1 | padrão local | — |
-| 3 | Dexametasona | PRE_QT | 10 | mg | FIXED | EV | — | — | 15 min | d1 | padrão local | — |
-| 4 | Prometazina | PRE_QT | 25 | mg | FIXED | VO | — | — | — | d1 | padrão local | — |
+| 1 | Soro fisiológico 0,9% 250 mL (lavagem de acesso) | PRE_QT | 1 | frasco | FIXED | EV | — | 250 | — | d1, d2 | padrão local | — |
+| 2 | Ondansetrona | PRE_QT | 8 | mg | FIXED | EV | — | — | 15 min | d1, d2 | padrão local | — |
+| 3 | Dexametasona | PRE_QT | 10 | mg | FIXED | EV | — | — | 15 min | d1, d2 | padrão local | — |
+| 4 | Prometazina | PRE_QT | 25 | mg | FIXED | VO | — | — | — | d1, d2 | padrão local | — |
 | 5 | Folinato de cálcio (leucovorina) | QT | 200 | mg/m² | MG_M2 | EV | — | — | 2 h | d1, d2 | DECISÃO LOCAL (D-F1-50: P1512 mapeado como LV5FU2 (= FOLFOX4 sem oxaliplatina; DECISAO_MEDICA 2026-10-08 traz LV 200 mg/m² 2 h D1–D2)) | — |
 | 6 | Fluoruracila (5-FU) em bolus | QT | 400 | mg/m² | MG_M2 | EV | — | — | bolus | d1, d2 | DECISÃO LOCAL (D-F1-50: LV5FU2 — 400 mg/m² bolus D1–D2 (DECISAO_MEDICA 2026-10-08 FOLFOX4)) | — |
 | 7 | Fluoruracila (5-FU) infusão contínua | QT | 600 | mg/m² | MG_M2 | EV | — | — | 22 h | d1, d2 | DECISÃO LOCAL (D-F1-50: LV5FU2 — 400 mg/m² bolus D1–D2 (DECISAO_MEDICA 2026-10-08 FOLFOX4)) | — |
-| 8 | Soro fisiológico 0,9% 250 mL (lavagem pós-QT) | POS_QT | 1 | frasco | FIXED | EV | — | 250 | — | d1 | padrão local | — |
+| 8 | Soro fisiológico 0,9% 250 mL (lavagem pós-QT) | POS_QT | 1 | frasco | FIXED | EV | — | 250 | — | d1, d2 | padrão local | — |
 
 **Divergências registradas:**
 - eviQ 97 (de Gramont MODIFICADO) usa LV 50 fixa + 2.400 CIV 46 h — variante NAO adotada
@@ -58,7 +58,7 @@
 ### Cisplatina + Docetaxel — não especificado
 
 - **templateId:** `FICHA.primario-desconhecido-cup.cisplatina-docetaxel__nao-especificado@1.0.0` · **versão:** 1.0.0 · **hash:** ver 'corpus/manifesto/b2-fichas.v1.json' (chave templateId) · **status:** RASCUNHO
-- **Intervalo:** 21 d · **Ciclos:** —
+- **Intervalo:** 21 d · **Ciclos:** 8
 - **Identidade clínica:** CUP metastático, 1ª linha (D-F1-36); variante preparada: Greco 2000 75/75 q3sem
 - **Fonte da ficha:** D-F1-36 (lista de esquemas de CUP) e D-F1-49. Variante preparada: Greco 2000 (75/75 q3sem, máx 8 ciclos). Fontes: EXT-CUP-001 (Annals of Oncology (Minnie Pearl Network — Greco FA et al.), Carcinoma of unknown primary site: phase II trials with docetaxel plus cisplatin or carboplatin (Ann Oncol 2000;11(2):211-5), PMID 10761758, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json); EXT-CUP-003 (Am J Clin Oncol (Mukai H et al.), Safety and efficacy of docetaxel and cisplatin in unknown primary cancer (Am J Clin Oncol 2010;33(1):32-5), PMID 19786850, acesso 2026-10-14; sha256 i …
 
@@ -115,7 +115,7 @@
 ### Docetaxel + Gemcitabina — não especificado
 
 - **templateId:** `FICHA.primario-desconhecido-cup.docetaxel-gemcitabina__nao-especificado@1.0.0` · **versão:** 1.0.0 · **hash:** ver 'corpus/manifesto/b2-fichas.v1.json' (chave templateId) · **status:** RASCUNHO
-- **Intervalo:** 21 d · **Ciclos:** —
+- **Intervalo:** 21 d · **Ciclos:** 6
 - **Identidade clínica:** CUP, 1ª linha (D-F1-36); variante preparada: Pouessel 2004 (gem D1/D8 + doc D8)
 - **Fonte da ficha:** D-F1-36 e D-F1-49. Fonte: EXT-CUP-009 (Cancer (Pouessel D et al.), Gemcitabine and docetaxel as front-line chemotherapy in unknown primary (Cancer 2004;100(6):1257-61), PMID 15022294, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json). Correção de citação registrada: o estudo original de CUP é Pouessel 2004, não Hainsworth.
 
@@ -142,10 +142,10 @@
 
 | # | Item | Classe | Dose | Unid. | Base | Via | Diluente | Vol. | Tempo | Dias | Situação | Fontes |
 |---|------|--------|------|-------|------|------|----------|------|-------|------|----------|--------|
-| 1 | Soro fisiológico 0,9% 250 mL (lavagem de acesso) | PRE_QT | 1 | frasco | FIXED | EV | — | 250 | — | d1 | padrão local | — |
-| 2 | Ondansetrona | PRE_QT | 8 | mg | FIXED | EV | — | — | 15 min | d1 | padrão local | — |
-| 3 | Dexametasona | PRE_QT | 10 | mg | FIXED | EV | — | — | 15 min | d1 | padrão local | — |
-| 4 | Prometazina | PRE_QT | 25 | mg | FIXED | VO | — | — | — | d1 | padrão local | — |
+| 1 | Soro fisiológico 0,9% 250 mL (lavagem de acesso) | PRE_QT | 1 | frasco | FIXED | EV | — | 250 | — | d1, d2, d3, d4 | padrão local | — |
+| 2 | Ondansetrona | PRE_QT | 8 | mg | FIXED | EV | — | — | 15 min | d1, d2, d3, d4 | padrão local | — |
+| 3 | Dexametasona | PRE_QT | 10 | mg | FIXED | EV | — | — | 15 min | d1, d2, d3, d4 | padrão local | — |
+| 4 | Prometazina | PRE_QT | 25 | mg | FIXED | VO | — | — | — | d1, d2, d3, d4 | padrão local | — |
 | 5 | Soro fisiológico 0,9% 500 mL (pré-cisplatina) | PRE_QT | 1 | frasco | FIXED | EV | — | 500 | 20 min | d1 | padrão local | — |
 | 6 | Sulfato de magnésio 10% 10 mL | PRE_QT | 10 | mL | FIXED | EV | — | — | — | d1 | padrão local | — |
 | 7 | Cloreto de potássio 19,1% 4 mL | PRE_QT | 4 | mL | FIXED | EV | — | — | — | d1 | padrão local | — |
@@ -154,7 +154,7 @@
 | 10 | Fluoruracila (5-FU) infusão contínua 24 h/dia | QT | 1000 | mg/m² | MG_M2 | EV | — | — | 24 h | d1-d4 | documentado | `EXT-CUP-010` |
 | 11 | Soro fisiológico 0,9% 500 mL (pós-cisplatina) | POS_QT | 1 | frasco | FIXED | EV | — | 500 | 20 min | d1 | padrão local | — |
 | 12 | Cloreto de potássio 19,1% 4 mL | POS_QT | 4 | mL | FIXED | EV | — | — | — | d1 | padrão local | — |
-| 13 | Soro fisiológico 0,9% 250 mL (lavagem pós-QT) | POS_QT | 1 | frasco | FIXED | EV | — | 250 | — | d1 | padrão local | — |
+| 13 | Soro fisiológico 0,9% 250 mL (lavagem pós-QT) | POS_QT | 1 | frasco | FIXED | EV | — | 250 | — | d1, d2, d3, d4 | padrão local | — |
 
 **Divergências registradas:**
 - Khansur 1995 (n=15): cisplatina 100 D1 + 5-FU 1.000 mg/m²/dia CI ×4 dias, q21d — população ESCAMOSA
@@ -168,8 +168,42 @@
 ### Ewing VDC (ciclo A — alternado ao IE) — 1ª linha, dose-denso q14
 
 - **templateId:** `FICHA.ewing.ewing-vdc-ciclo-a-alternado-ao-ie__1-linha-dose-denso-q14@1.0.0` · **versão:** 1.0.0 · **hash:** ver 'corpus/manifesto/b2-fichas.v1.json' (chave templateId) · **status:** RASCUNHO
-- **Intervalo:** 14 d · **Ciclos:** 7
+- **Intervalo:** 28 d · **Ciclos:** 5
 - **Identidade clínica:** Ewing localizado/metastático, 1ª linha VDC/IE interval-compressed (SBOC 2026 ósseos p. 15; Womer 2012)
+- **Fonte da ficha:** D-F1-34 e D-F1-49. Base do q2sem: Womer 2012 (AEWS0031) — EXT-SARC-022 (J Clin Oncol (Womer RB et al. — AEWS0031), Interval-compressed chemotherapy for Ewing sarcoma (JCO 2012;30(33):4148-54), PMID 23091096, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json) (correção: 'Whelan JCO 2018' é Euro-E.W.I.N.G. 99/BuMel, não VDC/IE dose-denso). Protocolos operacionais: EXT-SARC-001 (eviQ, ID 3464 — Ewing sarcoma VDC/IE overview, v2 (review due 31/12/2026), acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json); EXT-SARC-002 (eviQ, ID 1916 — Ewing sarcoma VDC (p …
+
+| # | Item | Classe | Dose | Unid. | Base | Via | Diluente | Vol. | Tempo | Dias | Situação | Fontes |
+|---|------|--------|------|-------|------|------|----------|------|-------|------|----------|--------|
+| 1 | Soro fisiológico 0,9% 250 mL (lavagem de acesso) | PRE_QT | 1 | frasco | FIXED | EV | — | 250 | — | d1, d2 | padrão local | — |
+| 2 | Ondansetrona | PRE_QT | 8 | mg | FIXED | EV | — | — | 15 min | d1, d2 | padrão local | — |
+| 3 | Dexametasona | PRE_QT | 10 | mg | FIXED | EV | — | — | 15 min | d1, d2 | padrão local | — |
+| 4 | Prometazina | PRE_QT | 25 | mg | FIXED | VO | — | — | — | d1, d2 | padrão local | — |
+| 5 | Vincristina | QT | 1.5 | mg/m² | MG_M2 | EV | — | — | 15 min | d1 | documentado | `EXT-SARC-002` `EXT-SARC-009` `EXT-SARC-022` |
+| 6 | Doxorrubicina | QT | 37.5 | mg/m² | MG_M2 | EV | — | — | 15 min | d1, d2 | documentado | `EXT-SARC-002` |
+| 7 | Ciclofosfamida | QT | 1200 | mg/m² | MG_M2 | EV | SF 0,9% | 100 | 15 min | d1 | documentado | `EXT-SARC-002` |
+| 8 | Mesna (0 h) | QT | 400 | mg/m² | MG_M2 | EV | — | — | 15 min | d1 | documentado | `EXT-SARC-002` |
+| 9 | Mesna (2 h, VO) | POS_QT | 800 | mg/m² | MG_M2 | VO | — | — | — | d1 | documentado | `EXT-SARC-002` |
+| 10 | Mesna (6 h, VO) | POS_QT | 800 | mg/m² | MG_M2 | VO | — | — | — | d1 | documentado | `EXT-SARC-002` |
+| 11 | Pegfilgrastim | POS_QT | 6 | mg | FIXED | SC | — | — | — | d3 | documentado | `EXT-SARC-002` |
+| 12 | Soro fisiológico 0,9% 250 mL (lavagem pós-QT) | POS_QT | 1 | frasco | FIXED | EV | — | 250 | — | d1, d2 | padrão local | — |
+
+**Sequenciamento pendente (impede emissão automática):**
+- Componente VDC/VC do curso VDC/IE: alternância a cada 14 dias, repetição do mesmo braço a cada 28 dias. Exige plano integrado de 14 ciclos, terapia local e limite cumulativo; esta ficha isolada não gera curso executável. Fonte: eviQ 3464 v2, Treatment schema, conferida 17/10/2026.
+
+**Divergências registradas:**
+- doxorrubicina: eviQ 37,5 mg/m² ×2 (D1–D2, 5–15 min) × BC SAALT2W 75 mg/m² IV push D1 (dose única) × Womer abstract 75 mg/m²
+- vincristina: 1,5 mg/m² (cap 2 mg) no eviQ/BC × 2 mg/m² no abstract de Womer
+- G-CSF: pegfilgrastim 6 mg D3 (eviQ) × filgrastim a partir do D8 (BC)
+- antiesse local sem NK1 (D-F1-30) × esquema eviQ com netupitant/palonosetrona
+
+**Lacunas (impedem ativação):**
+- versão convencional q3sem (eviQ 'VDC or IE every 21 days') disponível como alternativa — variante não preparada aqui
+
+### Ewing VC (fase final sem doxorrubicina) — 1ª linha, dose-denso q14
+
+- **templateId:** `FICHA.ewing.ewing-vc-fase-final-sem-doxorrubicina__1-linha-dose-denso-q14@1.0.0` · **versão:** 1.0.0 · **hash:** ver 'corpus/manifesto/b2-fichas.v1.json' (chave templateId) · **status:** RASCUNHO
+- **Intervalo:** 28 d · **Ciclos:** 2
+- **Identidade clínica:** Fase final do braço V[D]C: vincristina e ciclofosfamida, após omissão da doxorrubicina pelo limite documentado
 - **Fonte da ficha:** D-F1-34 e D-F1-49. Base do q2sem: Womer 2012 (AEWS0031) — EXT-SARC-022 (J Clin Oncol (Womer RB et al. — AEWS0031), Interval-compressed chemotherapy for Ewing sarcoma (JCO 2012;30(33):4148-54), PMID 23091096, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json) (correção: 'Whelan JCO 2018' é Euro-E.W.I.N.G. 99/BuMel, não VDC/IE dose-denso). Protocolos operacionais: EXT-SARC-001 (eviQ, ID 3464 — Ewing sarcoma VDC/IE overview, v2 (review due 31/12/2026), acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json); EXT-SARC-002 (eviQ, ID 1916 — Ewing sarcoma VDC (p …
 
 | # | Item | Classe | Dose | Unid. | Base | Via | Diluente | Vol. | Tempo | Dias | Situação | Fontes |
@@ -179,13 +213,15 @@
 | 3 | Dexametasona | PRE_QT | 10 | mg | FIXED | EV | — | — | 15 min | d1 | padrão local | — |
 | 4 | Prometazina | PRE_QT | 25 | mg | FIXED | VO | — | — | — | d1 | padrão local | — |
 | 5 | Vincristina | QT | 1.5 | mg/m² | MG_M2 | EV | — | — | 15 min | d1 | documentado | `EXT-SARC-002` `EXT-SARC-009` `EXT-SARC-022` |
-| 6 | Doxorrubicina | QT | 37.5 | mg/m² | MG_M2 | EV | — | — | 15 min | d1, d2 | documentado | `EXT-SARC-002` |
-| 7 | Ciclofosfamida | QT | 1200 | mg/m² | MG_M2 | EV | SF 0,9% | 100 | 15 min | d1 | documentado | `EXT-SARC-002` |
-| 8 | Mesna (0 h) | QT | 400 | mg/m² | MG_M2 | EV | — | — | 15 min | d1 | documentado | `EXT-SARC-002` |
-| 9 | Mesna (2 h, VO) | POS_QT | 800 | mg/m² | MG_M2 | VO | — | — | — | d1 | documentado | `EXT-SARC-002` |
-| 10 | Mesna (6 h, VO) | POS_QT | 800 | mg/m² | MG_M2 | VO | — | — | — | d1 | documentado | `EXT-SARC-002` |
-| 11 | Pegfilgrastim | POS_QT | 6 | mg | FIXED | SC | — | — | — | d3 | documentado | `EXT-SARC-002` |
-| 12 | Soro fisiológico 0,9% 250 mL (lavagem pós-QT) | POS_QT | 1 | frasco | FIXED | EV | — | 250 | — | d1 | padrão local | — |
+| 6 | Ciclofosfamida | QT | 1200 | mg/m² | MG_M2 | EV | SF 0,9% | 100 | 15 min | d1 | documentado | `EXT-SARC-002` |
+| 7 | Mesna (0 h) | QT | 400 | mg/m² | MG_M2 | EV | — | — | 15 min | d1 | documentado | `EXT-SARC-002` |
+| 8 | Mesna (2 h, VO) | POS_QT | 800 | mg/m² | MG_M2 | VO | — | — | — | d1 | documentado | `EXT-SARC-002` |
+| 9 | Mesna (6 h, VO) | POS_QT | 800 | mg/m² | MG_M2 | VO | — | — | — | d1 | documentado | `EXT-SARC-002` |
+| 10 | Pegfilgrastim | POS_QT | 6 | mg | FIXED | SC | — | — | — | d3 | documentado | `EXT-SARC-002` |
+| 11 | Soro fisiológico 0,9% 250 mL (lavagem pós-QT) | POS_QT | 1 | frasco | FIXED | EV | — | 250 | — | d1 | padrão local | — |
+
+**Sequenciamento pendente (impede emissão automática):**
+- Componente VDC/VC do curso VDC/IE: alternância a cada 14 dias, repetição do mesmo braço a cada 28 dias. Exige plano integrado de 14 ciclos, terapia local e limite cumulativo; esta ficha isolada não gera curso executável. Fonte: eviQ 3464 v2, Treatment schema, conferida 17/10/2026.
 
 **Divergências registradas:**
 - doxorrubicina: eviQ 37,5 mg/m² ×2 (D1–D2, 5–15 min) × BC SAALT2W 75 mg/m² IV push D1 (dose única) × Womer abstract 75 mg/m²
@@ -199,23 +235,26 @@
 ### Ewing IE (ciclo B — alternado ao VDC) — 1ª linha, dose-denso q14
 
 - **templateId:** `FICHA.ewing.ewing-ie-ciclo-b-alternado-ao-vdc__1-linha-dose-denso-q14@1.0.0` · **versão:** 1.0.0 · **hash:** ver 'corpus/manifesto/b2-fichas.v1.json' (chave templateId) · **status:** RASCUNHO
-- **Intervalo:** 14 d · **Ciclos:** 7
+- **Intervalo:** 28 d · **Ciclos:** 7
 - **Identidade clínica:** Ewing, braço IE do VDC/IE interval-compressed (ifosfamida+etoposídeo D1–D5)
 - **Fonte da ficha:** D-F1-34 e D-F1-49. Protocolo operacional: EXT-SARC-003 (eviQ, ID 3465 — Ewing sarcoma IE (part 2), v8 (PDF v5 conferido), acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json); EXT-SARC-001 (eviQ, ID 3464 — Ewing sarcoma VDC/IE overview, v2 (review due 31/12/2026), acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json). Elegibilidade SAALT2W <30 anos; cautelas eviQ (LVEF <45%, CrCl <60).
 
 | # | Item | Classe | Dose | Unid. | Base | Via | Diluente | Vol. | Tempo | Dias | Situação | Fontes |
 |---|------|--------|------|-------|------|------|----------|------|-------|------|----------|--------|
-| 1 | Soro fisiológico 0,9% 250 mL (lavagem de acesso) | PRE_QT | 1 | frasco | FIXED | EV | — | 250 | — | d1-d5 | padrão local | — |
-| 2 | Ondansetrona | PRE_QT | 8 | mg | FIXED | EV | — | — | 15 min | d1-d5 | padrão local | — |
-| 3 | Dexametasona | PRE_QT | 10 | mg | FIXED | EV | — | — | 15 min | d1-d5 | padrão local | — |
-| 4 | Prometazina | PRE_QT | 25 | mg | FIXED | VO | — | — | — | d1-d5 | padrão local | — |
+| 1 | Soro fisiológico 0,9% 250 mL (lavagem de acesso) | PRE_QT | 1 | frasco | FIXED | EV | — | 250 | — | d1, d2, d3, d4, d5 | padrão local | — |
+| 2 | Ondansetrona | PRE_QT | 8 | mg | FIXED | EV | — | — | 15 min | d1, d2, d3, d4, d5 | padrão local | — |
+| 3 | Dexametasona | PRE_QT | 10 | mg | FIXED | EV | — | — | 15 min | d1, d2, d3, d4, d5 | padrão local | — |
+| 4 | Prometazina | PRE_QT | 25 | mg | FIXED | VO | — | — | — | d1, d2, d3, d4, d5 | padrão local | — |
 | 5 | Etoposídeo | QT | 100 | mg/m² | MG_M2 | EV | SF 0,9% | 500 | 60 min | d1-d5 | documentado | `EXT-SARC-003` |
 | 6 | Ifosfamida | QT | 1800 | mg/m² | MG_M2 | EV | SF 0,9% | — | 2 h | d1-d5 | documentado | `EXT-SARC-003` |
 | 7 | Mesna (0 h) | QT | 600 | mg/m² | MG_M2 | EV | — | — | 15 min | d1-d5 | documentado | `EXT-SARC-003` |
 | 8 | Mesna (4 h) | POS_QT | 600 | mg/m² | MG_M2 | EV | — | — | 15 min | d1-d5 | documentado | `EXT-SARC-003` |
 | 9 | Mesna (8 h) | POS_QT | 600 | mg/m² | MG_M2 | EV | — | — | 15 min | d1-d5 | documentado | `EXT-SARC-003` |
 | 10 | Pegfilgrastim | POS_QT | 6 | mg | FIXED | SC | — | — | — | d6 | documentado | `EXT-SARC-003` |
-| 11 | Soro fisiológico 0,9% 250 mL (lavagem pós-QT) | POS_QT | 1 | frasco | FIXED | EV | — | 250 | — | d1-d5 | padrão local | — |
+| 11 | Soro fisiológico 0,9% 250 mL (lavagem pós-QT) | POS_QT | 1 | frasco | FIXED | EV | — | 250 | — | d1, d2, d3, d4, d5 | padrão local | — |
+
+**Sequenciamento pendente (impede emissão automática):**
+- Componente IE do curso VDC/IE: alternância a cada 14 dias, repetição do mesmo braço a cada 28 dias. Exige plano integrado de 14 ciclos, terapia local e limite cumulativo; esta ficha isolada não gera curso executável. Fonte: eviQ 3464 v2, Treatment schema, conferida 17/10/2026.
 
 **Divergências registradas:**
 - mesna IE eviQ: 600 IV carga + 600 IV 4 h e 8 h (alternativa VO às 2 h e 6 h após o fim, dose dobrada)
@@ -232,10 +271,10 @@
 
 | # | Item | Classe | Dose | Unid. | Base | Via | Diluente | Vol. | Tempo | Dias | Situação | Fontes |
 |---|------|--------|------|-------|------|------|----------|------|-------|------|----------|--------|
-| 1 | Soro fisiológico 0,9% 250 mL (lavagem de acesso) | PRE_QT | 1 | frasco | FIXED | EV | — | 250 | — | d1-d2 | padrão local | — |
-| 2 | Ondansetrona | PRE_QT | 8 | mg | FIXED | EV | — | — | 15 min | d1-d2 | padrão local | — |
-| 3 | Dexametasona | PRE_QT | 10 | mg | FIXED | EV | — | — | 15 min | d1-d2 | padrão local | — |
-| 4 | Prometazina | PRE_QT | 25 | mg | FIXED | VO | — | — | — | d1-d2 | padrão local | — |
+| 1 | Soro fisiológico 0,9% 250 mL (lavagem de acesso) | PRE_QT | 1 | frasco | FIXED | EV | — | 250 | — | d1, d2, d3, d22, d29 | padrão local | — |
+| 2 | Ondansetrona | PRE_QT | 8 | mg | FIXED | EV | — | — | 15 min | d1, d2, d3, d22, d29 | padrão local | — |
+| 3 | Dexametasona | PRE_QT | 10 | mg | FIXED | EV | — | — | 15 min | d1, d2, d3, d22, d29 | padrão local | — |
+| 4 | Prometazina | PRE_QT | 25 | mg | FIXED | VO | — | — | — | d1, d2, d3, d22, d29 | padrão local | — |
 | 5 | Doxorrubicina | QT | 25 | mg/m² | MG_M2 | EV | — | — | 15 min | d1, d2, d3 | documentado | `LOC-SBOC-OSSEOS` |
 | 6 | Soro fisiológico 0,9% 500 mL (pré-cisplatina) | PRE_QT | 1 | frasco | FIXED | EV | — | 500 | 20 min | d1, d2 | padrão local | — |
 | 7 | Sulfato de magnésio 10% 10 mL | PRE_QT | 10 | mL | FIXED | EV | — | — | — | d1, d2 | padrão local | — |
@@ -243,11 +282,11 @@
 | 9 | Cisplatina | QT | 60 | mg/m² | MG_M2 | EV | — | — | 2 h | d1, d2 | documentado | `LOC-SBOC-OSSEOS` `EXT-SARC-004` |
 | 10 | Manitol 20% frasco 250 mL | QT | 1 | frasco | FIXED | EV | — | 250 | 60 min | d1, d2 | padrão local | — |
 | 11 | Metotrexato | QT | 12000 | mg/m² | MG_M2 | EV | SF 0,9% | 1000 | 4 h | d22, d29 | documentado | `EXT-SARC-004` |
-| 12 | Folinato de cálcio (resgate do MTX) | QT | 15 | mg/m² | MG_M2 | EV | — | — | — | d23, d25, d30, d32 | documentado | `EXT-SARC-004` |
-| 13 | Pegfilgrastim | POS_QT | 6 | mg | FIXED | SC | — | — | — | d3 | documentado | `EXT-SARC-004` `EXT-SARC-014` |
+| 12 | Folinato de cálcio (resgate do MTX) | QT | 15 | mg/m² | MG_M2 | EV | — | — | — | d23, d30 | documentado | `EXT-SARC-004` |
+| 13 | Pegfilgrastim | POS_QT | 6 | mg | FIXED | SC | — | — | — | d4 | documentado | `EXT-SARC-004` `EXT-SARC-014` |
 | 14 | Soro fisiológico 0,9% 500 mL (pós-cisplatina) | POS_QT | 1 | frasco | FIXED | EV | — | 500 | 20 min | d1, d2 | padrão local | — |
 | 15 | Cloreto de potássio 19,1% 4 mL | POS_QT | 4 | mL | FIXED | EV | — | — | — | d1, d2 | padrão local | — |
-| 16 | Soro fisiológico 0,9% 250 mL (lavagem pós-QT) | POS_QT | 1 | frasco | FIXED | EV | — | 250 | — | d1-d2 | padrão local | — |
+| 16 | Soro fisiológico 0,9% 250 mL (lavagem pós-QT) | POS_QT | 1 | frasco | FIXED | EV | — | 250 | — | d1, d2, d3, d22, d29 | padrão local | — |
 
 **Divergências registradas:**
 - cisplatina: SBOC 60 D1–D2 (= eviQ 1901 60×2 em 2 h) × BC SANAHDMAP 50×2 (60×2 excepcional) × ensaios 120/ciclo (contínua 72 h; D1)
@@ -268,15 +307,15 @@
 
 | # | Item | Classe | Dose | Unid. | Base | Via | Diluente | Vol. | Tempo | Dias | Situação | Fontes |
 |---|------|--------|------|-------|------|------|----------|------|-------|------|----------|--------|
-| 1 | Soro fisiológico 0,9% 250 mL (lavagem de acesso) | PRE_QT | 1 | frasco | FIXED | EV | — | 250 | — | d1 | padrão local | — |
-| 2 | Ondansetrona | PRE_QT | 8 | mg | FIXED | EV | — | — | 15 min | d1 | padrão local | — |
-| 3 | Dexametasona | PRE_QT | 10 | mg | FIXED | EV | — | — | 15 min | d1 | padrão local | — |
-| 4 | Prometazina | PRE_QT | 25 | mg | FIXED | VO | — | — | — | d1 | padrão local | — |
+| 1 | Soro fisiológico 0,9% 250 mL (lavagem de acesso) | PRE_QT | 1 | frasco | FIXED | EV | — | 250 | — | d1, d2, d3, d15, d22 | padrão local | — |
+| 2 | Ondansetrona | PRE_QT | 8 | mg | FIXED | EV | — | — | 15 min | d1, d2, d3, d15, d22 | padrão local | — |
+| 3 | Dexametasona | PRE_QT | 10 | mg | FIXED | EV | — | — | 15 min | d1, d2, d3, d15, d22 | padrão local | — |
+| 4 | Prometazina | PRE_QT | 25 | mg | FIXED | VO | — | — | — | d1, d2, d3, d15, d22 | padrão local | — |
 | 5 | Doxorrubicina | QT | 25 | mg/m² | MG_M2 | EV | — | — | 15 min | d1, d2, d3 | documentado | `LOC-SBOC-OSSEOS` |
 | 6 | Metotrexato | QT | 12000 | mg/m² | MG_M2 | EV | SF 0,9% | 1000 | 4 h | d15, d22 | documentado | `EXT-SARC-004` |
-| 7 | Folinato de cálcio (resgate do MTX) | QT | 15 | mg/m² | MG_M2 | EV | — | — | — | d16, d18, d23, d25 | documentado | `EXT-SARC-004` |
-| 8 | Pegfilgrastim | POS_QT | 6 | mg | FIXED | SC | — | — | — | d3 | documentado | `EXT-SARC-004` `EXT-SARC-014` |
-| 9 | Soro fisiológico 0,9% 250 mL (lavagem pós-QT) | POS_QT | 1 | frasco | FIXED | EV | — | 250 | — | d1 | padrão local | — |
+| 7 | Folinato de cálcio (resgate do MTX) | QT | 15 | mg/m² | MG_M2 | EV | — | — | — | d16, d23 | documentado | `EXT-SARC-004` |
+| 8 | Pegfilgrastim | POS_QT | 6 | mg | FIXED | SC | — | — | — | d4 | documentado | `EXT-SARC-004` `EXT-SARC-014` |
+| 9 | Soro fisiológico 0,9% 250 mL (lavagem pós-QT) | POS_QT | 1 | frasco | FIXED | EV | — | 250 | — | d1, d2, d3, d15, d22 | padrão local | — |
 
 **Divergências registradas:**
 - mesmas divergências de dose do MAP C1–4 (doxo/fracionamento; folínico)
@@ -322,7 +361,7 @@
 ### Cisplatina semanal + RxT (vulva) — concomitante à RT
 
 - **templateId:** `FICHA.vulva.cisplatina-semanal-rxt-vulva__concomitante-a-rt@1.0.0` · **versão:** 1.0.0 · **hash:** ver 'corpus/manifesto/b2-fichas.v1.json' (chave templateId) · **status:** RASCUNHO
-- **Intervalo:** 7 d · **Ciclos:** —
+- **Intervalo:** 7 d · **Ciclos:** 6
 - **Identidade clínica:** CEC de vulva localmente avançado (T3/T4 não ressecável por vulvectomia radical), previamente não tratado (eviQ 1529)
 - **Fonte da ficha:** D-F1-35 e D-F1-49. Protocolo ESPECÍFICO de vulva: EXT-CNV-021 (eviQ, ID 1529 — Vulval SCC locally advanced ciPlatin (weekly) chemoradiation, v9 (11/02/2026; PDF v6 arquivado), acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json). Protocolo BC que inclui vulva: EXT-CNV-023 (BC Cancer, GOCXCRT — Gynecologic locally advanced CISplatin weekly ×5 com RT (inclui vulva), rev 01/08/2026, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json). Material local: LOC-SONHE (SOnHe, Protocolos SOnHe 2024, p. 313–318 (sarcomas); p. 89–91 (vulva); p. 236–238 (CEC pele); p. …
 
@@ -349,7 +388,7 @@
 ### Carboplatina + Paclitaxel 21/21 dias (vulva) — não especificado
 
 - **templateId:** `FICHA.vulva.carboplatina-paclitaxel-21-21-dias-vulva__nao-especificado@1.0.0` · **versão:** 1.0.0 · **hash:** ver 'corpus/manifesto/b2-fichas.v1.json' (chave templateId) · **status:** RASCUNHO
-- **Intervalo:** 21 d · **Ciclos:** —
+- **Intervalo:** 21 d · **Ciclos:** 6
 - **Identidade clínica:** CEC/adenocarcinoma de vulva recorrente ou avançado, inelegível a quimiorradioterapia (GOCXCAT inclui vulva)
 - **Fonte da ficha:** D-F1-35 e D-F1-49. Protocolo BC que INCLUI vulva na elegibilidade: EXT-CNV-024 (BC Cancer, GOCXCAT — Gynecologic CARBOplatin + PACLitaxel (inclui vulva), rev 01/10/2025, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json). Material local: LOC-SONHE (SOnHe, Protocolos SOnHe 2024, p. 313–318 (sarcomas); p. 89–91 (vulva); p. 236–238 (CEC pele); p. 314/317 (Ewing institucional)) (p. 89–91, AUC 5 + 175).
 
@@ -377,9 +416,9 @@
 ### Cemiplimabe — localmente avançado/metastático — inelegível a cirurgia/RT curativas
 
 - **templateId:** `FICHA.cec-de-pele-cutaneo.cemiplimabe__localmente-avancado-metastatico-inelegivel-a-cirurgia-rt-curativas@1.0.0` · **versão:** 1.0.0 · **hash:** ver 'corpus/manifesto/b2-fichas.v1.json' (chave templateId) · **status:** RASCUNHO
-- **Intervalo:** 21 d · **Ciclos:** —
+- **Intervalo:** 21 d · **Ciclos:** 35
 - **Identidade clínica:** CSCC metastático ou localmente avançado sem candidatura a cirurgia/RT curativas (eviQ 4151)
-- **Fonte da ficha:** D-F1-34 e D-F1-49. Protocolo operacional: EXT-CNV-001 (eviQ, ID 4151 — Cemiplimab monotherapy, v5 (review due 31/12/2028), acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json) (página viva v5, 02/09/2026; PDF capturado v1) + BC SMAVCEM (rev 08/2025) + DailyMed LIBTAYO SPL (setid 4347ae1f…). Sem pré-medicação de rotina (eviQ/BC).
+- **Fonte da ficha:** D-F1-34 e D-F1-49. Protocolo operacional: EXT-CNV-001 (eviQ, ID 4151 — Cemiplimab monotherapy, v5 (review due 31/12/2028), acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json) (página viva v5, 02/09/2026; PDF capturado v1) + BC SMAVCEM (rev 08/2025) + DailyMed LIBTAYO SPL (setid 4347ae1f…). Sem pré-medicação de rotina (eviQ/BC). Limite operacional: até 35 administrações q21d (D0 a D714), derivado do teto de 2 anos do Treatment schedule eviQ 4151, reconferido 17/10/2026; não é contagem literal do estudo. Interromper antes por progressão, toxicidade ou 2 anos de calendário; a …
 
 | # | Item | Classe | Dose | Unid. | Base | Via | Diluente | Vol. | Tempo | Dias | Situação | Fontes |
 |---|------|--------|------|-------|------|------|----------|------|-------|------|----------|--------|
@@ -395,7 +434,7 @@
 ### Carboplatina + Paclitaxel 21/21 dias (CEC de pele) — não especificado
 
 - **templateId:** `FICHA.cec-de-pele-cutaneo.carboplatina-paclitaxel-21-21-dias-cec-de-pele__nao-especificado@1.0.0` · **versão:** 1.0.0 · **hash:** ver 'corpus/manifesto/b2-fichas.v1.json' (chave templateId) · **status:** RASCUNHO
-- **Intervalo:** 21 d · **Ciclos:** —
+- **Intervalo:** 21 d · **Ciclos:** 6
 - **Identidade clínica:** CEC cutâneo avançado — EXTRAPOLAÇÃO explícita de CECP recorrente/metastático (eviQ 3579)
 - **Fonte da ficha:** D-F1-34 e D-F1-49. Protocolo operacional (população CECP R/M — extrapolação explícita): EXT-CNV-008 (eviQ, ID 3579 — Head and neck SCC recurrent/metastatic CARBOplatin and PACLitaxel, acesso 2026-10-14, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json). Material local: LOC-SONHE (SOnHe, Protocolos SOnHe 2024, p. 313–318 (sarcomas); p. 89–91 (vulva); p. 236–238 (CEC pele); p. 314/317 (Ewing institucional)) (p. 236–238, opções incluem cemiplimabe preferencial).
 
@@ -420,7 +459,7 @@
 ### Cisplatina semanal + RxT (CEC de pele) — concomitante à RT
 
 - **templateId:** `FICHA.cec-de-pele-cutaneo.cisplatina-semanal-rxt-cec-de-pele__concomitante-a-rt@1.0.0` · **versão:** 1.0.0 · **hash:** ver 'corpus/manifesto/b2-fichas.v1.json' (chave templateId) · **status:** RASCUNHO
-- **Intervalo:** 7 d · **Ciclos:** —
+- **Intervalo:** 7 d · **Ciclos:** 6
 - **Identidade clínica:** CEC cutâneo localmente avançado — EXTRAPOLAÇÃO de CECP localmente avançado (eviQ 292)
 - **Fonte da ficha:** D-F1-34 e D-F1-49. Protocolo operacional (CECP localmente avançado — extrapolação explícita): EXT-CNV-016 (eviQ, ID 292 — Head and neck locally advanced ciSplatin weekly with radiation therapy, v10 (PDF v8), acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json).
 
@@ -449,7 +488,7 @@
 ### Pembrolizumabe — localmente avançado/metastático — inelegível a cirurgia/RT curativas
 
 - **templateId:** `FICHA.cec-de-pele-cutaneo.pembrolizumabe__localmente-avancado-metastatico-inelegivel-a-cirurgia-rt-curativas@1.0.0` · **versão:** 1.0.0 · **hash:** ver 'corpus/manifesto/b2-fichas.v1.json' (chave templateId) · **status:** RASCUNHO
-- **Intervalo:** 21 d · **Ciclos:** —
+- **Intervalo:** 21 d · **Ciclos:** 35
 - **Identidade clínica:** CSCC cutâneo localmente avançado/metastático inelegível a terapia curativa (D-F1-50; NCCN CSCC v1.2026 prefere pembro/cemi 2A — rodada v2)
 - **Fonte da ficha:** D-F1-34, D-F1-49 e D-F1-50 (criação). Protocolo operacional: EXT-SARC-008 (eviQ, ID 5066 — Tumour-agnostic advanced or metastatic pembrolizumab, v1 (acesso 2026-10-14), acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json) (200 mg IV q21d OU 400 mg q42d, em 50–100 mL SF 0,9% em 30 min, até 24 meses). Indicação em CEC pela diretriz NCCN CSCC v1.2026 (pembro preferido 2A com cemiplimabe) e KEYNOTE-629 — registrados na rodada v2 (RELATORIO-F1-B2-PENDENCIAS-V2 §E3). Ressalva: EMA negativa para esta indicação.
 
@@ -520,11 +559,14 @@
 | 5 | Etoposídeo | QT | 100 | mg/m² | MG_M2 | EV | SF 0,9% | 500 | 60 min | d1, d2 | documentado | `EXT-CNV-028` |
 | 6 | Metotrexato | QT | 300 | mg/m² | MG_M2 | EV | SF 0,9% | 1000 | 12 h | d1 | documentado | `EXT-CNV-028` |
 | 7 | Dactinomicina | QT | 0.5 | mg | FIXED | EV | — | — | 5 min | d1, d2 | documentado | `EXT-CNV-028` |
-| 8 | Folinato de cálcio (resgate do MTX) | QT | 15 | mg | FIXED | VO | — | — | — | d2 | documentado | `EXT-CNV-028` |
-| 9 | Vincristina | QT | 0.8 | mg/m² | MG_M2 | EV | SF 0,9% | 50 | 10 min | d8 | documentado | `EXT-CNV-028` |
-| 10 | Ciclofosfamida | QT | 600 | mg/m² | MG_M2 | EV | SF 0,9% | 500 | 60 min | d8 | documentado | `EXT-CNV-028` |
-| 11 | Filgrastim | POS_QT | 5 | µg/kg | MG_KG | SC | — | — | — | d3-d5, d9-d11 | documentado | `EXT-CNV-028` |
-| 12 | Soro fisiológico 0,9% 250 mL (lavagem pós-QT) | POS_QT | 1 | frasco | FIXED | EV | — | 250 | — | d1, d2, d8 | padrão local | — |
+| 8 | Folinato de cálcio (resgate do MTX +24 h) | QT | 15 | mg | FIXED | VO | — | — | — | d2 | documentado | `EXT-CNV-028` |
+| 9 | Folinato de cálcio (resgate do MTX +36 h) | QT | 15 | mg | FIXED | VO | — | — | — | d2 | documentado | `EXT-CNV-028` |
+| 10 | Folinato de cálcio (resgate do MTX +48 h) | QT | 15 | mg | FIXED | VO | — | — | — | d3 | documentado | `EXT-CNV-028` |
+| 11 | Folinato de cálcio (resgate do MTX +60 h) | QT | 15 | mg | FIXED | VO | — | — | — | d3 | documentado | `EXT-CNV-028` |
+| 12 | Vincristina | QT | 0.8 | mg/m² | MG_M2 | EV | SF 0,9% | 50 | 10 min | d8 | documentado | `EXT-CNV-028` |
+| 13 | Ciclofosfamida | QT | 600 | mg/m² | MG_M2 | EV | SF 0,9% | 500 | 60 min | d8 | documentado | `EXT-CNV-028` |
+| 14 | Filgrastim | POS_QT | 5 | µg/kg | MCG_KG | SC | — | — | — | d3-d5, d9-d11 | documentado | `EXT-CNV-028` |
+| 15 | Soro fisiológico 0,9% 250 mL (lavagem pós-QT) | POS_QT | 1 | frasco | FIXED | EV | — | 250 | — | d1, d2, d8 | padrão local | — |
 
 **Divergências registradas:**
 - vincristina: eviQ 1 mg/m² (cap 2) × BC/Lok 0,8 mg/m² (cap 2)
@@ -547,16 +589,19 @@
 | 5 | Dactinomicina | QT | 0.5 | mg | FIXED | EV | — | — | 5 min | d1 | documentado | `EXT-CNV-031` |
 | 6 | Etoposídeo | QT | 100 | mg/m² | MG_M2 | EV | SF 0,9% | 500 | 60 min | d1 | documentado | `EXT-CNV-031` `EXT-CNV-029` |
 | 7 | Metotrexato | QT | 300 | mg/m² | MG_M2 | EV | SF 0,9% | 1000 | 12 h | d1 | documentado | `EXT-CNV-031` |
-| 8 | Folinato de cálcio (resgate do MTX) | QT | 15 | mg | FIXED | VO | — | — | — | d2 | documentado | `EXT-CNV-031` |
-| 9 | Etoposídeo (D8, 150 mg/m²) | QT | 150 | mg/m² | MG_M2 | EV | SF 0,9% | 500 | 60 min | d8 | documentado | `EXT-CNV-031` `EXT-CNV-029` |
-| 10 | Soro fisiológico 0,9% 500 mL (pré-cisplatina) | PRE_QT | 1 | frasco | FIXED | EV | — | 500 | 20 min | d8 | padrão local | — |
-| 11 | Sulfato de magnésio 10% 10 mL | PRE_QT | 10 | mL | FIXED | EV | — | — | — | d8 | padrão local | — |
-| 12 | Cloreto de potássio 19,1% 4 mL | PRE_QT | 4 | mL | FIXED | EV | — | — | — | d8 | padrão local | — |
-| 13 | Cisplatina | QT | 75 | mg/m² | MG_M2 | EV | — | — | 60 min | d8 | documentado | `EXT-CNV-031` `EXT-CNV-029` |
-| 14 | Manitol 20% frasco 250 mL | QT | 1 | frasco | FIXED | EV | — | 250 | 60 min | d8 | padrão local | — |
-| 15 | Soro fisiológico 0,9% 500 mL (pós-cisplatina) | POS_QT | 1 | frasco | FIXED | EV | — | 500 | 20 min | d8 | padrão local | — |
-| 16 | Cloreto de potássio 19,1% 4 mL | POS_QT | 4 | mL | FIXED | EV | — | — | — | d8 | padrão local | — |
-| 17 | Soro fisiológico 0,9% 250 mL (lavagem pós-QT) | POS_QT | 1 | frasco | FIXED | EV | — | 250 | — | d1, d8 | padrão local | — |
+| 8 | Folinato de cálcio (resgate do MTX +24 h) | QT | 15 | mg | FIXED | VO | — | — | — | d2 | documentado | `EXT-CNV-031` |
+| 9 | Folinato de cálcio (resgate do MTX +36 h) | QT | 15 | mg | FIXED | VO | — | — | — | d2 | documentado | `EXT-CNV-031` |
+| 10 | Folinato de cálcio (resgate do MTX +48 h) | QT | 15 | mg | FIXED | VO | — | — | — | d3 | documentado | `EXT-CNV-031` |
+| 11 | Folinato de cálcio (resgate do MTX +60 h) | QT | 15 | mg | FIXED | VO | — | — | — | d3 | documentado | `EXT-CNV-031` |
+| 12 | Etoposídeo (D8, 150 mg/m²) | QT | 150 | mg/m² | MG_M2 | EV | SF 0,9% | 500 | 60 min | d8 | documentado | `EXT-CNV-031` `EXT-CNV-029` |
+| 13 | Soro fisiológico 0,9% 500 mL (pré-cisplatina) | PRE_QT | 1 | frasco | FIXED | EV | — | 500 | 20 min | d8 | padrão local | — |
+| 14 | Sulfato de magnésio 10% 10 mL | PRE_QT | 10 | mL | FIXED | EV | — | — | — | d8 | padrão local | — |
+| 15 | Cloreto de potássio 19,1% 4 mL | PRE_QT | 4 | mL | FIXED | EV | — | — | — | d8 | padrão local | — |
+| 16 | Cisplatina | QT | 75 | mg/m² | MG_M2 | EV | — | — | 60 min | d8 | documentado | `EXT-CNV-031` `EXT-CNV-029` |
+| 17 | Manitol 20% frasco 250 mL | QT | 1 | frasco | FIXED | EV | — | 250 | 60 min | d8 | padrão local | — |
+| 18 | Soro fisiológico 0,9% 500 mL (pós-cisplatina) | POS_QT | 1 | frasco | FIXED | EV | — | 500 | 20 min | d8 | padrão local | — |
+| 19 | Cloreto de potássio 19,1% 4 mL | POS_QT | 4 | mL | FIXED | EV | — | — | — | d8 | padrão local | — |
+| 20 | Soro fisiológico 0,9% 250 mL (lavagem pós-QT) | POS_QT | 1 | frasco | FIXED | EV | — | 250 | — | d1, d8 | padrão local | — |
 
 **Divergências registradas:**
 - RESOLVIDO (ETAPA 3): EMA/EP NÃO tem etoposídeo/dactinomicina no D2 — D2 é SOMENTE leucovorina 15 mg 2×/dia ×4 (24 h pós-MTX). Confirmação dupla: Tabela A5 (p. 24) e Figura A4 ('EMA in EMA/EP, day 2 EA should be omitted') de Lok 2025; eviQ 1378 (EP-EMA, ordem invertida) também sem 2º dia de EA
@@ -565,7 +610,7 @@
 ### EP de indução (escore ultra-alto) — escore alto/ultra-alto (FIGO ≥12, D-F1-50) — indução
 
 - **templateId:** `FICHA.neoplasia-trofoblastica-gestacional.ep-de-inducao-escore-ultra-alto__escore-alto-ultra-alto-figo-12-d-f1-50-inducao@1.0.0` · **versão:** 1.0.0 · **hash:** ver 'corpus/manifesto/b2-fichas.v1.json' (chave templateId) · **status:** RASCUNHO
-- **Intervalo:** 7 d · **Ciclos:** —
+- **Intervalo:** 7 d · **Ciclos:** 3
 - **Identidade clínica:** NTG com doença extensa (tórax/fígado/SNC) e/ou hemorragia — indução antes do EMA-CO/EMA-EP; corte local FIGO ≥12 por D-F1-50 (eviQ 1347; Lok ≥13 [variante])
 - **Fonte da ficha:** D-F1-34 e D-F1-49. Protocolo operacional: EXT-CNV-030 (eviQ, ID 1347 — GTN low dose EP (indução, escore alto/ultra-alto), v5 (PDF v2), acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json). Diretriz: EXT-CNV-031 (J Clin Oncol (Lok C et al. — EOTTD/ESGO/ISSTD/GCIG), Practical Guidelines for the Treatment of Gestational Trophoblastic Disease (JCO 2025;43(18); DOI 10.1200/JCO-24-02326) — Tabela A5 e Figura A4, 2025 (pós-print ORBi 2268/340461), acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json) (Low-dose EP once weekly: etoposídeo 100 + cisplatina 20, D1–D …
 
@@ -594,12 +639,12 @@
 
 ## Fichas alteradas (fontes acrescentadas, doses intactas)
 
-- `FICHA.cabeca-e-pescoco.carboplatina-paclitaxel-semanal__nao-especificado@1.0.0` (corpus/fichas/cabeca-e-pescoco/carboplatina-paclitaxel-semanal__nao-especificado.json) — acréscimo de fontes externas do paclitaxel semanal (D-F1-28/D-F1-49); doses e diluente local inalterados; fontes: EXT-LEG-008, EXT-LEG-009, EXT-LEG-012, EXT-LEG-013
-- `FICHA.esofago.carboplatina-paclitaxel-semanal-cross-rxt__concomitante-a-rt@1.0.0` (corpus/fichas/esofago/carboplatina-paclitaxel-semanal-cross-rxt__concomitante-a-rt.json) — acréscimo de fontes externas do paclitaxel semanal (D-F1-28/D-F1-49); doses e diluente local inalterados; fontes: EXT-LEG-008, EXT-LEG-009, EXT-LEG-012, EXT-LEG-013
+- `FICHA.cabeca-e-pescoco.carboplatina-paclitaxel-semanal__nao-especificado@1.0.0` (corpus/fichas/cabeca-e-pescoco/carboplatina-paclitaxel-semanal__nao-especificado.json) — acréscimo de fontes externas do paclitaxel semanal (D-F1-28/D-F1-49); doses e diluente local inalterados; fontes: EXT-LEG-013
+- `FICHA.esofago.carboplatina-paclitaxel-semanal-cross-rxt__concomitante-a-rt@1.0.0` (corpus/fichas/esofago/carboplatina-paclitaxel-semanal-cross-rxt__concomitante-a-rt.json) — acréscimo de fontes externas do paclitaxel semanal (D-F1-28/D-F1-49); doses e diluente local inalterados; fontes: EXT-LEG-013
 - `FICHA.mama.ac-ct-fase-ct-carboplatina-paclitaxel-semanal__neo-adjuvante@1.0.0` (corpus/fichas/mama/ac-ct-fase-ct-carboplatina-paclitaxel-semanal__neo-adjuvante.json) — acréscimo de fontes externas do paclitaxel semanal (D-F1-28/D-F1-49); doses e diluente local inalterados; fontes: EXT-LEG-008, EXT-LEG-009, EXT-LEG-012, EXT-LEG-013
 - `FICHA.mama.ac-t-fase-t-paclitaxel-semanal__adjuvante@1.0.0` (corpus/fichas/mama/ac-t-fase-t-paclitaxel-semanal__adjuvante.json) — acréscimo de fontes externas do paclitaxel semanal (D-F1-28/D-F1-49); doses e diluente local inalterados; fontes: EXT-LEG-008, EXT-LEG-009, EXT-LEG-012, EXT-LEG-013
 - `FICHA.mama.ac-th-fase-th-paclitaxel-semanal-trastuzumabe__neo-adjuvante@1.0.0` (corpus/fichas/mama/ac-th-fase-th-paclitaxel-semanal-trastuzumabe__neo-adjuvante.json) — acréscimo de fontes externas do paclitaxel semanal (D-F1-28/D-F1-49); doses e diluente local inalterados; fontes: EXT-LEG-008, EXT-LEG-009, EXT-LEG-012, EXT-LEG-013
-- `FICHA.prostata.carboplatina-paclitaxel-semanal__nao-especificado@1.0.0` (corpus/fichas/prostata/carboplatina-paclitaxel-semanal__nao-especificado.json) — acréscimo de fontes externas do paclitaxel semanal (D-F1-28/D-F1-49); doses e diluente local inalterados; fontes: EXT-LEG-008, EXT-LEG-009, EXT-LEG-012, EXT-LEG-013
+- `FICHA.prostata.carboplatina-paclitaxel-semanal__nao-especificado@1.0.0` (corpus/fichas/prostata/carboplatina-paclitaxel-semanal__nao-especificado.json) — acréscimo de fontes externas do paclitaxel semanal (D-F1-28/D-F1-49); doses e diluente local inalterados; fontes: EXT-LEG-013
 
 ## Destinação dos códigos legados
 
@@ -611,4 +656,4 @@
 - **053:** erro de duplicação da biblioteca INT-MED (D-F1-44) — a corrigir NAQUELA biblioteca (externa ao repositório); nenhuma ficha nova
 
 ---
-Gerado em 2026-10-14T22:07:53.669Z · aprovacaoClinica: **null** (todas as fichas) — D-F1-49.
+Gerado em 2026-10-17T19:35:44.287Z · aprovacaoClinica: **null** (todas as fichas) — D-F1-49.

@@ -21,7 +21,7 @@ export function UploadDocumentoLocal({porta,contexto,aoSalvar}:{porta:PortaConsu
       if(atual!==geracao.current)return;
       const r=await porta.uploadDocumentoLocal({...contexto,...{id:identificadores.id,sourceId:identificadores.sourceId},sourceType:tipoFonte,tipo,bytesBase64},abort.current.signal);
       if(atual!==geracao.current)return;
-      setMensagem(r.conversionStatus==="PENDENTE"?`Original preservado. Conversão pendente (${r.motivo??"revisão necessária"}).`:
+      setMensagem(r.conversionStatus!=="PRONTO"?`Original preservado. Conversão pendente (${r.motivo??"revisão necessária"}).${r.paginasPendentes?.length?` Páginas a conferir: ${r.paginasPendentes.join(", ")}.`:""}`:
         "Texto convertido em rascunho. Confira a fonte e vincule ao paciente antes de confirmar fatos.");aoSalvar();
     }catch(e){if(atual===geracao.current)setMensagem(e instanceof ErroPorta?`Upload pendente (${e.detalhe??e.codigo}). Original não foi confirmado.`:"Não foi possível converter. Reabra o arquivo local.");}
     finally{if(atual===geracao.current)setOcupado(false);}

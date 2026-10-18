@@ -12,9 +12,9 @@ const Rotas=new Set(['/biblioteca/importar','/biblioteca/curar','/biblioteca/ati
 const Hash=z.string().regex(/^[a-f0-9]{64}$/),Id=z.string().min(1).max(250);
 const Conteudo=z.union([z.object({texto:z.string().max(1000000)}).strict(),z.object({base64:z.string().max(1400000).regex(/^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$/)}).strict()]);
 const Importar=z.object({manifesto:ManifestoBiblioteca,arquivos:z.record(z.string().regex(/^[a-zA-Z0-9_-]+\.json$/),Conteudo)}).strict();
-const Curar=z.object({pacoteId:Id,itemId:Id,expectedHash:Hash,estado:z.enum(['CONSULTAVEL','ALERTA','OBSOLETO'])}).strict();
-const Ativar=z.object({pacoteId:Id,expectedHash:Hash,expectedCuradoriaHash:Hash}).strict();
-const Rollback=z.object({expectedAtiva:Id,expectedHash:Hash,expectedAnterior:Id,expectedAnteriorHash:Hash,expectedAnteriorCuradoriaHash:Hash}).strict();
+const Curar=z.object({pacoteId:Id,itemId:Id,expectedHash:Hash,expectedCuradoriaHash:Hash,estado:z.enum(['CONSULTAVEL','ALERTA','OBSOLETO'])}).strict();
+const Ativar=z.object({pacoteId:Id,expectedHash:Hash,expectedCuradoriaHash:Hash,expectedAtiva:Id.nullable(),expectedAtivaHash:Hash.nullable()}).strict();
+const Rollback=z.object({expectedAtiva:Id,expectedAtivaHash:Hash,expectedHash:Hash,expectedAnterior:Id,expectedAnteriorHash:Hash,expectedAnteriorCuradoriaHash:Hash}).strict();
 const Filtros=z.object({tumor:z.string().optional(),histologia:z.string().optional(),estadio:z.string().optional(),biomarcador:z.string().optional(),linha:z.string().optional()}).strict();
 const Consultar=z.object({filtros:Filtros,modo:z.enum(['CONSULTA','ALERTA']).default('CONSULTA')}).strict();
 const Estado=z.object({pacoteId:Id.optional()}).strict();
@@ -69,12 +69,16 @@ export function rotearBiblioteca(deps:DepsBiblioteca,token:string,rota:string,bo
    const p=Curar.parse(body);conferirHash(deps.db,p.pacoteId,p.expectedHash);
    // Textual knowledge has no executable threshold schema: approval for reading cannot create a medical rule.
    if(p.estado==='ALERTA')throw new Error('ALERTA_SEM_SCHEMA_EXECUTAVEL');
-   transacao(deps.db,()=>{lib.revisarItem(p.pacoteId,p.itemId,p.estado);if(lib.ativa()===p.pacoteId)emitir();});
+   transacao(deps.db,()=>{
+    conferirHash(deps.db,p.pacoteId,p.expectedHash);
+    if(hashCuradoriaPacote(deps.db,p.pacoteId)!==p.expectedCuradoriaHash)throw Error('BIBLIOTECA_REVISAO_DIVERGENTE');
+    lib.revisarItem(p.pacoteId,p.itemId,p.estado);if(lib.ativa()===p.pacoteId)emitir();});
    return {status:200,body:{codigo:'ITEM_CURADO',estado:p.estado,referencia:referenciaBibliotecaAtiva(deps.db)}};
   }
   if(rota==='/biblioteca/ativar'){
    const p=Ativar.parse(body);
    transacao(deps.db,()=>{conferirHash(deps.db,p.pacoteId,p.expectedHash);
+    if(lib.ativa()!==p.expectedAtiva||(referenciaBibliotecaAtiva(deps.db)?.hash??null)!==p.expectedAtivaHash)throw Error('BIBLIOTECA_REVISAO_DIVERGENTE');
     if(hashCuradoriaPacote(deps.db,p.pacoteId)!==p.expectedCuradoriaHash)throw Error('BIBLIOTECA_REVISAO_DIVERGENTE');
     lib.ativar(p.pacoteId);});
    return {status:200,body:{codigo:'BIBLIOTECA_ATIVADA',referencia:referenciaBibliotecaAtiva(deps.db)}};
@@ -82,7 +86,7 @@ export function rotearBiblioteca(deps:DepsBiblioteca,token:string,rota:string,bo
   if(rota==='/biblioteca/rollback'){
    const p=Rollback.parse(body);
    transacao(deps.db,()=>{
-    if(lib.ativa()!==p.expectedAtiva)throw new Error('BIBLIOTECA_REVISAO_DIVERGENTE');
+    if(lib.ativa()!==p.expectedAtiva||referenciaBibliotecaAtiva(deps.db)?.hash!==p.expectedAtivaHash)throw new Error('BIBLIOTECA_REVISAO_DIVERGENTE');
     conferirHash(deps.db,p.expectedAtiva,p.expectedHash);
     conferirHash(deps.db,p.expectedAnterior,p.expectedAnteriorHash);
     if(hashCuradoriaPacote(deps.db,p.expectedAnterior)!==p.expectedAnteriorCuradoriaHash)throw Error('BIBLIOTECA_REVISAO_DIVERGENTE');

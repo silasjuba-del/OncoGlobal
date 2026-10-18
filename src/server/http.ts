@@ -5,6 +5,10 @@ import { carregarCorpusServidor } from "./corpus.js";
 import { criarMotorF1 } from "../kernel/orquestracao/runtime.js";
 import { referenciaBibliotecaAtiva } from "./biblioteca.js";
 import { carregarConfigMotor } from "../kernel/corpus/configMotor.js";
+import { carregarPacksTumor } from '../kernel/corpus/tumorPacks.js';
+import { selecionarPack } from '../modules/consulta/revisaoClinica.js';
+import {criarDitado} from '../kernel/gateway/ditado.js';
+import {cofreDeepgramWindows} from '../kernel/gateway/cofreDeepgram.js';
 
 /** Loopback only; a caller cannot override the bind address. */
 export function criarServidorLocal(deps: ServidorDeps, config: { host?: string; port?: number } = {}): Server {
@@ -21,7 +25,14 @@ export function criarServidorLocal(deps: ServidorDeps, config: { host?: string; 
   const runtimeDeps: ServidorDeps = { ...deps, settings,
     corpus,
     salaoRuleset: deps.salaoRuleset === undefined ? corpus?.ruleset ?? null : deps.salaoRuleset };
+  runtimeDeps.ditado=deps.ditado??criarDitado(deps.sessoes,{...(process.env.DEEPGRAM_API_KEY?{chave:process.env.DEEPGRAM_API_KEY}:{}),
+    cofre:deps.configRootDir?cofreDeepgramWindows(deps.configRootDir):null});
   const configMotor=carregarConfigMotor();
+  const catalogoTumorPacks=deps.catalogoTumorPacks??carregarPacksTumor();
+  runtimeDeps.catalogoTumorPacks=catalogoTumorPacks;
+  configMotor.regras=[...configMotor.regras,...catalogoTumorPacks.packs.filter(p=>p.estado==='ATIVO').map(p=>p.referencia)];
+  runtimeDeps.packInvestigacao=deps.packInvestigacao??(r=>{const p=selecionarPack(r,catalogoTumorPacks.packs);
+    return p?.estado==='ATIVO'?{referencia:p.referencia,status:'CONFERIDA_MEDICO',fonte:p.original.arquivo,requisitos:p.requisitos}:null;});
   runtimeDeps.motorF1=deps.motorF1??criarMotorF1(deps.db,deps.agora,()=>({...configMotor,biblioteca:referenciaBibliotecaAtiva(deps.db)??configMotor.biblioteca}));
   let encerrando = false;
   const pendentes = new Set<Promise<unknown>>();
@@ -47,10 +58,12 @@ export function criarServidorLocal(deps: ServidorDeps, config: { host?: string; 
   // HTTP respondido não significa que o processamento pós-commit terminou.
   // O callback/evento close só libera o chamador para fechar SQLite após drenar esse trabalho.
   const fecharHttp = server.close.bind(server);
+  runtimeDeps.ditado.anexar(server);
   let encerramento: Promise<Error | undefined> | null = null;
   server.close = (callback) => {
     if (!encerramento) {
       encerrando = true;
+      runtimeDeps.ditado?.fechar();
       encerramento = (async () => {
         while (pendentes.size) await Promise.allSettled([...pendentes]);
         return new Promise<Error | undefined>(resolve => fecharHttp(error => resolve(error)));

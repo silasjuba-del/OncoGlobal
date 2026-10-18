@@ -69,6 +69,7 @@ function montar(s) {
   itens.push(...pos);
   if (temIV) itens.push(it("Soro fisiológico 0,9% 250 mL (lavagem pós-QT)", "POS_QT", 1, "fr", "EV", pd, { vol: 250, obs: "Lavar acesso venoso pós-QT (planilha)." }));
   const finais = itens.map((x, i) => ({ ...x, sequence: i + 1 }));
+  if (s.sequenciamentoPendente) for (const item of finais) item.sequenciamentoPendente = s.sequenciamentoPendente;
   const baseId = s.slug ?? `${slug(s.nome)}__${slug(s.cenario)}`;
   const t = {
     templateId: `FICHA.${slug(s.tumor)}.${baseId}@${VERSAO}`,
@@ -169,7 +170,7 @@ F({ tumor: "Não informado (ficha institucional)", nome: "LV5FU2 — 5-FU + foli
 
 // ===== CUP (D-F1-36/49) =====
 const CUP = "Primário desconhecido (CUP)";
-F({ tumor: CUP, nome: "Cisplatina + Docetaxel", cenario: NE, intervalo: 21, ciclos: null,
+F({ tumor: CUP, nome: "Cisplatina + Docetaxel", cenario: NE, intervalo: 21, ciclos: 8,
   identidade: "CUP metastático, 1ª linha (D-F1-36); variante preparada: Greco 2000 75/75 q3sem",
   fontesItens: { Docetaxel: { sourceIds: ["EXT-CUP-001"] }, Cisplatina: { sourceIds: ["EXT-CUP-001"] } },
   divergencias: ["Greco 2000: docetaxel 75 + cisplatina 75 q3sem (n=26, máx 8 ciclos, toxicidade GI substancial)", "Mukai 2010: docetaxel 60 (1 h, antes) + cisplatina 80 (2 h) q3sem (n=45, ORR 65%)"],
@@ -191,7 +192,7 @@ F({ tumor: CUP, nome: "Carboplatina + Paclitaxel 21/21 dias", cenario: NE, inter
     qt("Carboplatina", 6, "auc", D(1), { t: "60 min", obs: "Calvert AUC 6 (GFR cap 125). Variante SOnHe: AUC 5 [decisão pendente]." }),
   ] });
 
-F({ tumor: CUP, nome: "Docetaxel + Gemcitabina", cenario: NE, intervalo: 21, ciclos: null, premedDias: D(1, 8),
+F({ tumor: CUP, nome: "Docetaxel + Gemcitabina", cenario: NE, intervalo: 21, ciclos: 6, premedDias: D(1, 8),
   identidade: "CUP, 1ª linha (D-F1-36); variante preparada: Pouessel 2004 (gem D1/D8 + doc D8)",
   fontesItens: { Gemcitabina: { sourceIds: ["EXT-CUP-009"] }, Docetaxel: { sourceIds: ["EXT-CUP-009"] } },
   divergencias: ["Pouessel 2004 (Cancer): gemcitabina 1.000 mg/m² D1 e D8 (30 min) + docetaxel 75 mg/m² D8 (1 h); q3sem, máx 6 — corrige o mapa local (que estimava 75/900 ou 60/800 e atribuía a Hainsworth)"],
@@ -217,7 +218,8 @@ F({ tumor: CUP, nome: "Cisplatina + 5-Fluorouracil (CUP escamoso)", cenario: "es
 
 // ===== EWING (D-F1-34/49; dose-denso Womer 2012; SBOC local) =====
 const EW = "Ewing";
-F({ tumor: EW, nome: "Ewing VDC (ciclo A — alternado ao IE)", cenario: "1ª linha, dose-denso q14", intervalo: 14, ciclos: 5, altoRisco: true,
+F({ tumor: EW, nome: "Ewing VDC (ciclo A — alternado ao IE)", cenario: "1ª linha, dose-denso q14", intervalo: 28, ciclos: 5, altoRisco: true,
+  sequenciamentoPendente: "Componente VDC/VC do curso VDC/IE: alternância a cada 14 dias, repetição do mesmo braço a cada 28 dias. Exige plano integrado de 14 ciclos, terapia local e limite cumulativo; esta ficha isolada não gera curso executável. Fonte: eviQ 3464 v2, Treatment schema, conferida 17/10/2026.",
   identidade: "Ewing localizado/metastático, 1ª linha VDC/IE interval-compressed (SBOC 2026 ósseos p. 15; Womer 2012)",
   fontesItens: { Vincristina: { sourceIds: ["EXT-SARC-002", "EXT-SARC-009", "EXT-SARC-022"] }, Doxorrubicina: { sourceIds: ["EXT-SARC-002"] }, Ciclofosfamida: { sourceIds: ["EXT-SARC-002"] }, "Mesna (0 h)": { sourceIds: ["EXT-SARC-002"] }, "Mesna (2 h, VO)": { sourceIds: ["EXT-SARC-002"] }, "Mesna (6 h, VO)": { sourceIds: ["EXT-SARC-002"] }, Pegfilgrastim: { sourceIds: ["EXT-SARC-002"] } },
   divergencias: ["doxorrubicina: eviQ 37,5 mg/m² ×2 (D1–D2, 5–15 min) × BC SAALT2W 75 mg/m² IV push D1 (dose única) × Womer abstract 75 mg/m²", "vincristina: 1,5 mg/m² (cap 2 mg) no eviQ/BC × 2 mg/m² no abstract de Womer", "G-CSF: pegfilgrastim 6 mg D3 (eviQ) × filgrastim a partir do D8 (BC)", "antiesse local sem NK1 (D-F1-30) × esquema eviQ com netupitant/palonosetrona"],
@@ -241,7 +243,8 @@ F({...faseVdc,nome:'Ewing VC (fase final sem doxorrubicina)',ciclos:2,
  itens:faseVdc.itens.filter(i=>i.drug!=='Doxorrubicina').map(i=>({...i})),
  fonteDecisao:faseVdc.fonteDecisao+' Ficha VC corresponde somente às 2 administrações finais sem antraciclina, não a um novo esquema aprovado.'});
 
-F({ tumor: EW, nome: "Ewing IE (ciclo B — alternado ao VDC)", cenario: "1ª linha, dose-denso q14", intervalo: 14, ciclos: 7, premedDias: R(1, 5), altoRisco: true,
+F({ tumor: EW, nome: "Ewing IE (ciclo B — alternado ao VDC)", cenario: "1ª linha, dose-denso q14", intervalo: 28, ciclos: 7, premedDias: R(1, 5), altoRisco: true,
+  sequenciamentoPendente: "Componente IE do curso VDC/IE: alternância a cada 14 dias, repetição do mesmo braço a cada 28 dias. Exige plano integrado de 14 ciclos, terapia local e limite cumulativo; esta ficha isolada não gera curso executável. Fonte: eviQ 3464 v2, Treatment schema, conferida 17/10/2026.",
   identidade: "Ewing, braço IE do VDC/IE interval-compressed (ifosfamida+etoposídeo D1–D5)",
   fontesItens: { Etoposídeo: { sourceIds: ["EXT-SARC-003"] }, Ifosfamida: { sourceIds: ["EXT-SARC-003"] }, "Mesna (0 h)": { sourceIds: ["EXT-SARC-003"] }, "Mesna (4 h)": { sourceIds: ["EXT-SARC-003"] }, "Mesna (8 h)": { sourceIds: ["EXT-SARC-003"] }, Pegfilgrastim: { sourceIds: ["EXT-SARC-003"] } },
   divergencias: ["mesna IE eviQ: 600 IV carga + 600 IV 4 h e 8 h (alternativa VO às 2 h e 6 h após o fim, dose dobrada)", "teto cumulativo de ifosfamida usualmente ≤72 g/m² (BC)"],
@@ -299,7 +302,7 @@ F({ tumor: OST, nome: "AP (doxorrubicina + cisplatina)", cenario: NE, intervalo:
 
 // ===== VULVA (D-F1-35/49; eviQ 1529 específico) =====
 const VUL = "Vulva";
-F({ tumor: VUL, nome: "Cisplatina semanal + RxT (vulva)", cenario: "concomitante à RT", intervalo: 7, ciclos: null,
+F({ tumor: VUL, nome: "Cisplatina semanal + RxT (vulva)", cenario: "concomitante à RT", intervalo: 7, ciclos: 6,
   identidade: "CEC de vulva localmente avançado (T3/T4 não ressecável por vulvectomia radical), previamente não tratado (eviQ 1529)",
   fontesItens: { Cisplatina: { sourceIds: ["EXT-CNV-021", "EXT-CNV-023"] } },
   divergencias: ["eviQ 1529 (v.9, específico de vulva): 40 mg/m² IV q7d, 5–6 ciclos conforme duração da RT, no dia de RT (antes dela)", "BC GOCXCRT (inclui vulva): 40 mg/m² em 500 mL NS + manitol 30 g + MgSO4 2 g em 60 min, semanal ×5, sem pós-hidratação", "estudo de referência GOG 205 = Moore DH, Gynecol Oncol 2012;124(3):529-33 (PMID 22079361) — o 'Gill 2015' do material local é atribuição incorreta"],
@@ -309,7 +312,7 @@ F({ tumor: VUL, nome: "Cisplatina semanal + RxT (vulva)", cenario: "concomitante
     CIS(40, D(1), { obs: "eviQ 1529: 40 mg/m² semanal no dia de RT (antes), 5–6 ciclos. GOCXCRT: 500 mL + manitol 30 g + MgSO4 2 g em 60 min." }),
   ] });
 
-F({ tumor: VUL, nome: "Carboplatina + Paclitaxel 21/21 dias (vulva)", cenario: NE, intervalo: 21, ciclos: null,
+F({ tumor: VUL, nome: "Carboplatina + Paclitaxel 21/21 dias (vulva)", cenario: NE, intervalo: 21, ciclos: 6,
   identidade: "CEC/adenocarcinoma de vulva recorrente ou avançado, inelegível a quimiorradioterapia (GOCXCAT inclui vulva)",
   fontesItens: { Paclitaxel: { sourceIds: ["EXT-CNV-024"] }, Carboplatina: { sourceIds: ["EXT-CNV-024"] } },
   divergencias: ["GOCXCAT: paclitaxel 175 em 3 h + AUC 6 (AUC 5 se RT prévia extensa); q21/28d, máx 6", "SOnHe p. 89/91 (local): AUC 5 + 175 — variante [decisão pendente]", "infusão do paclitaxel: 3 h em TODAS as fontes (24 h NAO_LOCALIZADO)"],
@@ -322,18 +325,18 @@ F({ tumor: VUL, nome: "Carboplatina + Paclitaxel 21/21 dias (vulva)", cenario: N
 
 // ===== CEC DE PELE (D-F1-34/49) =====
 const CEC = "CEC de pele (cutâneo)";
-F({ tumor: CEC, nome: "Cemiplimabe", cenario: "localmente avançado/metastático — inelegível a cirurgia/RT curativas", intervalo: 21, ciclos: null, semPremed: true,
+F({ tumor: CEC, nome: "Cemiplimabe", cenario: "localmente avançado/metastático — inelegível a cirurgia/RT curativas", intervalo: 21, ciclos: 35, semPremed: true,
   identidade: "CSCC metastático ou localmente avançado sem candidatura a cirurgia/RT curativas (eviQ 4151)",
   fontesItens: { Cemiplimabe: { sourceIds: ["EXT-CNV-001"] } },
   divergencias: ["estudos pivô: Migden NEJM 2018;379(4):341-351 e Lancet Oncol 2020;21(2):294-305 (o material local cita o fascículo 7 do Lancet — corrigido)"],
   lacunas: ["dispensação/SUS: verificar"],
-  fonteDecisao: `D-F1-34 e D-F1-49. Protocolo operacional: ${ref(["EXT-CNV-001"])} (página viva v5, 02/09/2026; PDF capturado v1) + BC SMAVCEM (rev 08/2025) + DailyMed LIBTAYO SPL (setid 4347ae1f…). Sem pré-medicação de rotina (eviQ/BC).`,
+  fonteDecisao: `D-F1-34 e D-F1-49. Protocolo operacional: ${ref(["EXT-CNV-001"])} (página viva v5, 02/09/2026; PDF capturado v1) + BC SMAVCEM (rev 08/2025) + DailyMed LIBTAYO SPL (setid 4347ae1f…). Sem pré-medicação de rotina (eviQ/BC). Limite operacional: até 35 administrações q21d (D0 a D714), derivado do teto de 2 anos do Treatment schedule eviQ 4151, reconferido 17/10/2026; não é contagem literal do estudo. Interromper antes por progressão, toxicidade ou 2 anos de calendário; atrasos exigem reavaliar o total, não estender o prazo.`,
   itens: [
     qt("Cemiplimabe", 350, "mg", D(1), { dil: "SF 0,9%", vol: 50, t: "30 min", obs: "350 mg IV q21d em 50 mL SF 0,9% em 30 min; filtro in-line 0,2–5 µm; estabilidade ≤8 h TA ou ≤10 d 2–8 °C; até progressão/toxicidade (até 2 anos)." }),
     it("Soro fisiológico 0,9% 50 mL (flush pós-infusão)", "POS_QT", 1, "fr", "EV", D(1), { vol: 50, obs: "eviQ 4151: flush de 50 mL de SF 0,9% ao término." }),
   ] });
 
-F({ tumor: CEC, nome: "Carboplatina + Paclitaxel 21/21 dias (CEC de pele)", cenario: NE, intervalo: 21, ciclos: null,
+F({ tumor: CEC, nome: "Carboplatina + Paclitaxel 21/21 dias (CEC de pele)", cenario: NE, intervalo: 21, ciclos: 6,
   identidade: "CEC cutâneo avançado — EXTRAPOLAÇÃO explícita de CECP recorrente/metastático (eviQ 3579)",
   fontesItens: { Paclitaxel: { sourceIds: ["EXT-CNV-008"] }, Carboplatina: { sourceIds: ["EXT-CNV-008"] } },
   divergencias: ["população do protocolo é CECP de cabeça e pescoço — extrapolação para CEC cutâneo declarada, não transcrição", "cisplatina 100 q21d monoterapia: NAO_LOCALIZADO como protocolo operacional (eviQ 288 reduz a 75 em combinação; BC HNAVP usa 25 ×2)"],
@@ -344,7 +347,7 @@ F({ tumor: CEC, nome: "Carboplatina + Paclitaxel 21/21 dias (CEC de pele)", cena
     qt("Carboplatina", 5, "auc", D(1), { t: "60 min", dil: "SG 5%", vol: 500, obs: "eviQ 3579: AUC 5 em 500 mL SG 5% em 30–60 min. 4–6 ciclos." }),
   ] });
 
-F({ tumor: CEC, nome: "Cisplatina semanal + RxT (CEC de pele)", cenario: "concomitante à RT", intervalo: 7, ciclos: null,
+F({ tumor: CEC, nome: "Cisplatina semanal + RxT (CEC de pele)", cenario: "concomitante à RT", intervalo: 7, ciclos: 6,
   identidade: "CEC cutâneo localmente avançado — EXTRAPOLAÇÃO de CECP localmente avançado (eviQ 292)",
   fontesItens: { Cisplatina: { sourceIds: ["EXT-CNV-016"] } },
   divergencias: ["população do protocolo é CECP — extrapolação declarada", "eviQ 292: 40 mg/m² em 1.000 mL SF em 60 min q7d contínuo com RT (~6 semanas); pré MgSO4 10 mmol em 1.000 mL; sem manitol na versão vigente (dose baixa)"],
@@ -418,7 +421,7 @@ F({ tumor: NTG, nome: "EMA/EP (resistência ao EMA-CO)", cenario: "resistente ao
     CIS(75, D(8), { obs: "Tabela A5: cisplatina 75 mg/m² IV D8 (eviQ 1378: em 1.000 mL SF em 60 min com hidratação)." }),
   ] });
 
-F({ tumor: NTG, nome: "EP de indução (escore ultra-alto)", cenario: "escore alto/ultra-alto (FIGO ≥12, D-F1-50) — indução", intervalo: 7, ciclos: null, premedDias: D(1, 2),
+F({ tumor: NTG, nome: "EP de indução (escore ultra-alto)", cenario: "escore alto/ultra-alto (FIGO ≥12, D-F1-50) — indução", intervalo: 7, ciclos: 3, premedDias: D(1, 2),
   identidade: "NTG com doença extensa (tórax/fígado/SNC) e/ou hemorragia — indução antes do EMA-CO/EMA-EP; corte local FIGO ≥12 por D-F1-50 (eviQ 1347; Lok ≥13 [variante])",
   fontesItens: { Etoposídeo: { sourceIds: ["EXT-CNV-030", "EXT-CNV-031"] }, Cisplatina: { sourceIds: ["EXT-CNV-030", "EXT-CNV-031"] } },
   divergencias: ["corte de indicação RESOLVIDO por D-F1-50: ≥12 (eviQ 1347); Lok 2025 usa ≥13 [variante registrada]", "frequência: eviQ 1347 'Frequency: 7 days' (=semanal, D1–D2 por semana); Lok: 'once weekly' 1–3 ciclos"],
@@ -456,16 +459,17 @@ for (const rel of PAC_SEMANAL) {
   const marco = json.fonte.indexOf(" F1-B2 (D-F1-49");
   if (marco >= 0) json.fonte = json.fonte.slice(0, marco);
   const cross = rel.startsWith("esofago/");
+  const outraIndicacao = !rel.startsWith("mama/");
   const nota = cross
     ? " F1-B2 (D-F1-49): CROSS mantém paclitaxel 50 mg/m² da ficha. Fontes mamárias 80 mg/m² não confirmam dose/indicação CROSS; monografia BC (EXT-LEG-013) sustenta somente filtro e materiais."
-    : ACRESCIMO_FONTE;
+    : outraIndicacao ? " F1-B2 (D-F1-49): dose e indicação locais preservadas, sem confirmação por protocolos mamários; monografia BC (EXT-LEG-013) sustenta somente filtro e materiais. Elegibilidade e dose nesta indicação permanecem sob curadoria específica." : ACRESCIMO_FONTE;
   json.fonte += nota;
   const pac = json.itens.find(i => /^paclitaxel/i.test(i.drug));
   if (pac) {
     pac.observacao = (pac.observacao ?? "").split("F1-B2:")[0].trim();
     pac.observacao += cross
       ? " F1-B2: dose CROSS 50 mg/m² preservada; sem atribuir confirmação por fontes de mama 80 mg/m²."
-      : " F1-B2: 80 mg/m²/60 min confirmados externamente (EXT-LEG-008/009); diluente SF 0,9% 500 mL é decisão local (D-F1-28) — eviQ usa 250 mL [divergência registrada].";
+      : outraIndicacao ? " F1-B2: dose local preservada; fontes de mama não confirmam dose ou indicação neste tumor. Monografia BC (EXT-LEG-013): filtro e materiais apenas." : " F1-B2: 80 mg/m²/60 min confirmados externamente (EXT-LEG-008/009); diluente SF 0,9% 500 mL é decisão local (D-F1-28) — eviQ usa 250 mL [divergência registrada].";
   }
   json.hash = hashDe(json);
   writeFileSync(join(RAIZ, caminho), JSON.stringify(json, null, 2) + "\n", "utf8");
@@ -506,7 +510,7 @@ const manifestoB2 = {
     identidadeClinica: spec.identidade, decisisoes: ["D-F1-49", ...(spec.decisisoes ?? [])],
     campos: camposDa(spec, t), divergencias: spec.divergencias ?? [], lacunas: spec.lacunas ?? [], aprovacaoClinica: null,
   })),
-  fichasAlteradas: alteradas.map((a) => ({ ...a, motivo: "acréscimo de fontes externas do paclitaxel semanal (D-F1-28/D-F1-49); doses e diluente local inalterados", fontesAcrescentadas: a.caminho.includes("/esofago/") ? ["EXT-LEG-013"] : ["EXT-LEG-008", "EXT-LEG-009", "EXT-LEG-012", "EXT-LEG-013"] })),
+  fichasAlteradas: alteradas.map((a) => ({ ...a, motivo: "acréscimo de fontes externas do paclitaxel semanal (D-F1-28/D-F1-49); doses e diluente local inalterados", fontesAcrescentadas: !a.caminho.includes("/mama/") ? ["EXT-LEG-013"] : ["EXT-LEG-008", "EXT-LEG-009", "EXT-LEG-012", "EXT-LEG-013"] })),
   destinacaoCodigosLegado: {
     P1577: "ficha nova criada com identidade própria (D-F1-26); código mantido como codigoInstitucional — identidade do código comprovada pela decisão local",
     P1512: "ficha nova criada (D-F1-27: D1 e D2); código mantido como codigoInstitucional — identidade comprovada pela decisão local",

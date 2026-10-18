@@ -1674,5 +1674,2537 @@
       "achado": "Conferência MOC 2026 item 17",
       "acao": "doses do MOC coincidem com as do pack (bula FDA); bula ANVISA NÃO VERIFICADA"
     }
-  ]
+  ],
+  "tumor_pack_universal": {
+    "schema_documental": "tumor-pack-universal@1",
+    "metadados": {
+      "revisao_documental": "2026-10-17-nccn-final-documental",
+      "versao": "1.3.0",
+      "data": "2026-10-17",
+      "autor_extracao": "Codex",
+      "estado": "RASCUNHO",
+      "aprovacao_clinica": null,
+      "escopo": "CAMADA_ADITIVA_UNIVERSAL_E_DELTA_DOCUMENTAL_NCCN",
+      "base_legada": {
+        "arquivo": "corpus/6-pack-tumor/chc/pack-chc.v2.RASCUNHO.json",
+        "commit": "2c0991d",
+        "versao": "2.0.0",
+        "sha256_bytes": "e4f10d3a253f9e0fdb90e8aaee7da274ac01ad6c8c52001aa1a8b7fda5a817b4",
+        "sha256_semantico": "426d1c58af0ff4bdfea2c223b20bcee1989ba42f9096bfd58efe6c9e1e56d27f"
+      },
+      "nota_versao": "Camada universal 1.3.0; header identifica o legado preservado. Fechamento documental, sem aprovação clínica ou ativação.",
+      "integra_runtime": false,
+      "gera_conduta": false,
+      "historico_revisoes": [
+        {
+          "revisao_documental": "2026-10-17-nccn-delta-1",
+          "versao": "1.0.0",
+          "data": "2026-10-17",
+          "autor_extracao": "Codex",
+          "estado": "RASCUNHO",
+          "aprovacao_clinica": null,
+          "escopo": "CAMADA_ADITIVA_UNIVERSAL_E_DELTA_DOCUMENTAL_NCCN",
+          "base_legada": {
+            "arquivo": "corpus/6-pack-tumor/chc/pack-chc.v2.RASCUNHO.json",
+            "commit": "2c0991d",
+            "versao": "2.0.0",
+            "sha256_bytes": "e4f10d3a253f9e0fdb90e8aaee7da274ac01ad6c8c52001aa1a8b7fda5a817b4",
+            "sha256_semantico": "426d1c58af0ff4bdfea2c223b20bcee1989ba42f9096bfd58efe6c9e1e56d27f"
+          },
+          "nota_versao": "header.versao identifica o legado intacto; esta extensão possui revisão própria. Não reutilizar aprovação/hashes antigos para o conjunto alterado.",
+          "integra_runtime": false,
+          "gera_conduta": false
+        },
+        {
+          "revisao_documental": "2026-10-17-nccn-delta-3-auditoria33",
+          "versao": "1.2.0",
+          "data": "2026-10-17",
+          "autor_extracao": "Codex",
+          "estado": "RASCUNHO",
+          "aprovacao_clinica": null,
+          "escopo": "CAMADA_ADITIVA_UNIVERSAL_E_DELTA_DOCUMENTAL_NCCN",
+          "base_legada": {
+            "arquivo": "corpus/6-pack-tumor/chc/pack-chc.v2.RASCUNHO.json",
+            "commit": "2c0991d",
+            "versao": "2.0.0",
+            "sha256_bytes": "e4f10d3a253f9e0fdb90e8aaee7da274ac01ad6c8c52001aa1a8b7fda5a817b4",
+            "sha256_semantico": "426d1c58af0ff4bdfea2c223b20bcee1989ba42f9096bfd58efe6c9e1e56d27f"
+          },
+          "nota_versao": "Revisão da camada universal1.2.0; header legado preservado. Auditoria documental dos33 itens, sem aprovação clínica.",
+          "integra_runtime": false,
+          "gera_conduta": false,
+          "historico_revisoes": [
+            {
+              "revisao_documental": "2026-10-17-nccn-delta-1",
+              "versao": "1.0.0",
+              "data": "2026-10-17",
+              "autor_extracao": "Codex",
+              "estado": "RASCUNHO",
+              "aprovacao_clinica": null,
+              "escopo": "CAMADA_ADITIVA_UNIVERSAL_E_DELTA_DOCUMENTAL_NCCN",
+              "base_legada": {
+                "arquivo": "corpus/6-pack-tumor/chc/pack-chc.v2.RASCUNHO.json",
+                "commit": "2c0991d",
+                "versao": "2.0.0",
+                "sha256_bytes": "e4f10d3a253f9e0fdb90e8aaee7da274ac01ad6c8c52001aa1a8b7fda5a817b4",
+                "sha256_semantico": "426d1c58af0ff4bdfea2c223b20bcee1989ba42f9096bfd58efe6c9e1e56d27f"
+              },
+              "nota_versao": "header.versao identifica o legado intacto; esta extensão possui revisão própria. Não reutilizar aprovação/hashes antigos para o conjunto alterado.",
+              "integra_runtime": false,
+              "gera_conduta": false
+            }
+          ]
+        }
+      ]
+    },
+    "identidade_ref": "/identidade",
+    "dominios": [
+      {
+        "dominio_id": 1,
+        "nome": "Diagnóstico e patologia",
+        "itens_legados_refs": [
+          "legado-e3885734f14b8202",
+          "legado-d6fcd56f4dd398c1",
+          "legado-f56fba8dcb5d7478",
+          "legado-0509b5bd578146e8"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 2,
+        "nome": "Estadiamento, extensão e risco",
+        "itens_legados_refs": [
+          "legado-6728ced42b65ec11",
+          "legado-8d2e9678f869b145",
+          "legado-422bde90332ed7a2",
+          "legado-285932d625f3ea34",
+          "legado-1e60edfb4aada35f",
+          "legado-48cadc59bfbc7b6f",
+          "legado-8466a7ca14b827b7",
+          "legado-a9c46af2f2d7c9e3",
+          "legado-5ae88b27605eaf0f"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 3,
+        "nome": "Biomarcadores e farmacogenética",
+        "itens_legados_refs": [
+          "legado-12110a3549e7bb0d",
+          "legado-593003e5f9e01de8"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 4,
+        "nome": "Exames e requisitos documentais",
+        "itens_legados_refs": [
+          "legado-0f2645216bc52075",
+          "legado-564efeebd0e98b89",
+          "legado-89294fc668a0f92f",
+          "legado-45117c4d2e8ac646",
+          "legado-bd2082e84fd3146e",
+          "legado-bf992a7e7231a113",
+          "legado-9df97db776a8b3f5",
+          "legado-070f2f2e91a2653d",
+          "legado-906feb0daa4a21ad",
+          "legado-c71f5c512572e203",
+          "legado-2e3785bacff11140",
+          "legado-7a58846758a1e991",
+          "legado-ac74488565e7b6e3",
+          "legado-55e21f9494796601",
+          "legado-abf898a8ba8c1d15",
+          "legado-b929e9696ea5268b",
+          "legado-8606b5ffecbd57dc",
+          "legado-8289665f828fb50e",
+          "legado-bca53861274212d0",
+          "legado-8e734f8cd36e0d4a",
+          "legado-6621e5815c50f9b0",
+          "legado-0dabd55fb4fae6d1",
+          "legado-acb26204cb2698fb",
+          "legado-07e77cec0d68eeea",
+          "legado-39a1baf1544b6f39",
+          "legado-ae0c90c0c43008b9",
+          "legado-95a3700b0447cc96",
+          "legado-19dd894ee8e78e9b",
+          "legado-768a0fb680d5115f",
+          "legado-478097dc695148c3",
+          "legado-d8f7f9be77145a6b",
+          "legado-34055216fdc7f77b",
+          "legado-d63309fe715e753c",
+          "legado-7de44db811ff3ff5",
+          "legado-ae90205d16506950",
+          "legado-8c998f892f29d747",
+          "legado-289a265f9737a73a",
+          "legado-b036ed1e085560b8",
+          "legado-72c85f3ddb32430f",
+          "legado-9a3e3340a585e9a6",
+          "legado-47339c12530c8af6",
+          "legado-206ec7091e3eecb8",
+          "legado-c2cab1e7f97d5fa8"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 5,
+        "nome": "Avaliação antes do tratamento",
+        "itens_legados_refs": [],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "NAO_ESTRUTURADO_NESTA_RODADA",
+        "observacao": "Ausência de referências não significa não aplicabilidade; textos dentro de outros itens permanecem preservados."
+      },
+      {
+        "dominio_id": 6,
+        "nome": "Tratamento e protocolos",
+        "itens_legados_refs": [
+          "legado-6e545227296b65df",
+          "legado-defbfb9ff8c2ba8d",
+          "legado-5c5efa00166f5cf0",
+          "legado-e3b0379903e38f2b",
+          "legado-7adca47911b23d60",
+          "legado-53ed6ef5d5fc4d85",
+          "legado-a98dc96c070f32a1",
+          "legado-a98b899caee4efc5",
+          "legado-d890ac8712ac9f48",
+          "legado-0890e4002abe5cab",
+          "legado-a658f966dee9fb04",
+          "legado-f83440c36b515285",
+          "legado-976baa49f4f5aa65",
+          "legado-ac5e68a4b6161217",
+          "legado-e35a9f4570ef9222",
+          "legado-493d7bafa132fedb",
+          "legado-43ce715cf7fb679c",
+          "legado-ba487a5b19b52059",
+          "legado-8d3c18a1cdc01324"
+        ],
+        "itens_nccn_refs": [
+          "nccn-20261017-chc-durvalumabe",
+          "nccn-20261017-chc-tislelizumabe",
+          "nccn-20261017-chc-pembrolizumabe"
+        ],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 7,
+        "nome": "Segurança, interações e toxicidades",
+        "itens_legados_refs": [
+          "legado-85bcca8b9796951b",
+          "legado-4aa2600ea1ea2ed5",
+          "legado-8259314dbfc50b70",
+          "legado-5156c7a9640cde9d",
+          "legado-0d5fbd418c2d1b9a",
+          "legado-884aee822e7915af",
+          "legado-9c36d252fa9de7ca"
+        ],
+        "itens_nccn_refs": [
+          "nccn-20261017-chc-sequencia-ici"
+        ],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 8,
+        "nome": "Suporte e cuidados",
+        "itens_legados_refs": [
+          "legado-8bf7166a5b984026",
+          "legado-3dc3b223926d9cc3"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 9,
+        "nome": "Avaliação de resposta e estado da doença",
+        "itens_legados_refs": [],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "NAO_ESTRUTURADO_NESTA_RODADA",
+        "observacao": "Ausência de referências não significa não aplicabilidade; textos dentro de outros itens permanecem preservados."
+      },
+      {
+        "dominio_id": 10,
+        "nome": "Seguimento e sobrevivência",
+        "itens_legados_refs": [
+          "legado-b239819294d81a3a",
+          "legado-0a6e4f1cad8d0d03",
+          "legado-fd48d8bbaefeb45b",
+          "legado-d9b6d7141e676690",
+          "legado-a7a604a9385791ee"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 11,
+        "nome": "Encaminhamentos e atuação multiprofissional",
+        "itens_legados_refs": [
+          "legado-68f950abf374867d",
+          "legado-685c8cf172414883",
+          "legado-0d6e5f759e879c2e",
+          "legado-d21574bb71e1cc64",
+          "legado-11823bad60e74300"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 12,
+        "nome": "Documentos e acesso assistencial",
+        "itens_legados_refs": [],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "NAO_ESTRUTURADO_NESTA_RODADA",
+        "observacao": "Ausência de referências não significa não aplicabilidade; textos dentro de outros itens permanecem preservados."
+      }
+    ],
+    "indice_itens_legados": [
+      {
+        "item_id": "legado-e3885734f14b8202",
+        "origem_json_pointer": "/diagnostico/patologico/obtencao/0",
+        "sha256_conteudo": "39346d5daec259892da07e2feef9c6246c080ab5f4f17c97e1e245b1670289f4",
+        "nome": "/diagnostico/patologico/obtencao/0",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/obtencao/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d6fcd56f4dd398c1",
+        "origem_json_pointer": "/diagnostico/patologico/obtencao/1",
+        "sha256_conteudo": "2a33dd67a9b5f2ffb91bac0c90f1a4fb903894ef225fa9cffdb202946a48b6e6",
+        "nome": "/diagnostico/patologico/obtencao/1",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/obtencao/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-f56fba8dcb5d7478",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/0",
+        "sha256_conteudo": "4609f141aebc7dc08b6ad8a49673a512f14c4898d14e50d683615751c2777541",
+        "nome": "confirmação de CHC",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-0509b5bd578146e8",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/1",
+        "sha256_conteudo": "fa17845a46ea1b263b41958cf1bfc134a9f13b500bba20e57940aee4f93376ae",
+        "nome": "grau de diferenciação (informação útil; não exigida explicitamente pela SBOC)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-6728ced42b65ec11",
+        "origem_json_pointer": "/estadiamento/sistema",
+        "sha256_conteudo": "bec8f5716617014fe0ac2bb2032407b5d3f7a7c34105878722c9e74ae6a402e1",
+        "nome": "BCLC",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8d2e9678f869b145",
+        "origem_json_pointer": "/estadiamento/edicao",
+        "sha256_conteudo": "23cedcb45a191d745c3342ca8245451d27ddd512d9c0c27853cfac18e74baa03",
+        "nome": "BCLC (atualização com framework CUSE; ALBI refina Child-Pugh A/B)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-422bde90332ed7a2",
+        "origem_json_pointer": "/estadiamento/gruposConduta/0",
+        "sha256_conteudo": "56682fd4d09c737b237f343fa79b6792c3adf8c49cfbdcc5e91a0a629acfb89a",
+        "nome": "/estadiamento/gruposConduta/0",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-285932d625f3ea34",
+        "origem_json_pointer": "/estadiamento/gruposConduta/1",
+        "sha256_conteudo": "985017007656f9a754325b8cacd901c2ff62d02c8ac98af98bddeba78ce6f606",
+        "nome": "/estadiamento/gruposConduta/1",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-1e60edfb4aada35f",
+        "origem_json_pointer": "/estadiamento/gruposConduta/2",
+        "sha256_conteudo": "0f621c223c65be9a666a9b841dc2663583def1f65c11bb32f2434679855c7fd2",
+        "nome": "/estadiamento/gruposConduta/2",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-48cadc59bfbc7b6f",
+        "origem_json_pointer": "/estadiamento/gruposConduta/3",
+        "sha256_conteudo": "76517722edcb684d72655cd4b6428526a2e5900d97b62baf5c1225e6a003921a",
+        "nome": "/estadiamento/gruposConduta/3",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8466a7ca14b827b7",
+        "origem_json_pointer": "/estadiamento/gruposConduta/4",
+        "sha256_conteudo": "c41f723145fa7d89b54c51d8b103db508abafa601e5f380b078d4be89b35fefe",
+        "nome": "/estadiamento/gruposConduta/4",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a9c46af2f2d7c9e3",
+        "origem_json_pointer": "/estadiamento/gruposConduta/5",
+        "sha256_conteudo": "0a3fe6df5e68283cb30bffc9c0ea04f0fd06f59d3a87d36516403420851a9ceb",
+        "nome": "/estadiamento/gruposConduta/5",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/5/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-5ae88b27605eaf0f",
+        "origem_json_pointer": "/estadiamento/marcadores",
+        "sha256_conteudo": "db4931738b9a9a6562dbaefc6eb16d2f2e8032bb681b981cabb729619d93500c",
+        "nome": "/estadiamento/marcadores",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-12110a3549e7bb0d",
+        "origem_json_pointer": "/tratamento/biomarcadorTratamento/0",
+        "sha256_conteudo": "c929cd7fa5a9d60dcb57b378dc4b6c46697ea0649c88d7ac78759c62e1a1dea7",
+        "nome": "/tratamento/biomarcadorTratamento/0",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/biomarcadorTratamento/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-593003e5f9e01de8",
+        "origem_json_pointer": "/tratamento/biomarcadorTratamento/1",
+        "sha256_conteudo": "670330365a12d2cbbdaf20ca89aa9b3b40d4b65fb0e26fac7a6641e0ec1afee0",
+        "nome": "/tratamento/biomarcadorTratamento/1",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/biomarcadorTratamento/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-0f2645216bc52075",
+        "origem_json_pointer": "/diagnostico/imagem/0",
+        "sha256_conteudo": "af3f9a695670991b747562b5053e60a4c651935b8879850b44e0ee2f5b4e59be",
+        "nome": "TC multifásica de abdome (LI-RADS)",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-564efeebd0e98b89",
+        "origem_json_pointer": "/diagnostico/imagem/1",
+        "sha256_conteudo": "680ba5191ed5cbb52686d5c7c2bc31496fb04a686f7519a9df521fe57dcdc68b",
+        "nome": "RM multifásica de abdome (alternativa à TC)",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-89294fc668a0f92f",
+        "origem_json_pointer": "/diagnostico/imagem/2",
+        "sha256_conteudo": "de392b1a5cbe24ea912ce8800c610656596a8009ee1e59383a2a512d1e02b9da",
+        "nome": "TC de tórax",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-45117c4d2e8ac646",
+        "origem_json_pointer": "/diagnostico/imagem/3",
+        "sha256_conteudo": "f18f9c6741822d6ef2e4514dcf7f709d67c01fd6cb55d0903d149cce9973b5b3",
+        "nome": "Cintilografia óssea",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-bd2082e84fd3146e",
+        "origem_json_pointer": "/diagnostico/endoscopicos/0",
+        "sha256_conteudo": "58c34e7545e9ad6cf12a25dede730926b5b304d2aac9e38c84e271be5532ec2b",
+        "nome": "EDA (rastreio de varizes)",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/endoscopicos/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-bf992a7e7231a113",
+        "origem_json_pointer": "/estadiamento/exames/0",
+        "sha256_conteudo": "97781450fc5d74e1e7acaae55317e51229b59f7a933f178a93dcc06eea09e701",
+        "nome": "Hemograma",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-9df97db776a8b3f5",
+        "origem_json_pointer": "/estadiamento/exames/1",
+        "sha256_conteudo": "f9e93906ccb1f6a043384b1f105ad9586c57d390253a8b9e4879b19d3bd0542a",
+        "nome": "Albumina (proteínas totais e frações)",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-070f2f2e91a2653d",
+        "origem_json_pointer": "/estadiamento/exames/2",
+        "sha256_conteudo": "b0aac7e80e3a320e55c63a72a73e46243b73be8f5c83dd60166f6ff3bad24dd9",
+        "nome": "Bilirrubina total e frações",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-906feb0daa4a21ad",
+        "origem_json_pointer": "/estadiamento/exames/3",
+        "sha256_conteudo": "186a4ba88c651e062ff749cd5d34e316cd5a625501be0f0554f2198cfe1e681d",
+        "nome": "TGO",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-c71f5c512572e203",
+        "origem_json_pointer": "/estadiamento/exames/4",
+        "sha256_conteudo": "566b4f4722dfcbad2ddb625fa3e4293c2f8dcb5aaa1340cb4af54d8412fe0e31",
+        "nome": "TGP",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-2e3785bacff11140",
+        "origem_json_pointer": "/estadiamento/exames/5",
+        "sha256_conteudo": "419429c9340b1af423371430ad936f188bda483de965b96dccb573a5ff2d18a8",
+        "nome": "Fosfatase alcalina",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/5/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-7a58846758a1e991",
+        "origem_json_pointer": "/estadiamento/exames/6",
+        "sha256_conteudo": "251337c03132d557d02ae6c0c14c3ab116e8215ad286a5b24164b4b49d2e9e4c",
+        "nome": "TAP/INR (coagulograma)",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/6/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ac74488565e7b6e3",
+        "origem_json_pointer": "/estadiamento/exames/7",
+        "sha256_conteudo": "c7e5fecb4f596a4271297b7681533a3c1ad67974fd5d07a23cf15322a3c3d4ea",
+        "nome": "TTPA (coagulograma)",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/7/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-55e21f9494796601",
+        "origem_json_pointer": "/estadiamento/exames/8",
+        "sha256_conteudo": "f5918b60c427a2228abb3d9f93f280316cb2aded696925996a5160622c8a73ea",
+        "nome": "Creatinina",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/8/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-abf898a8ba8c1d15",
+        "origem_json_pointer": "/estadiamento/exames/9",
+        "sha256_conteudo": "3ddfa27a903e25dec0db74da2f9596e9522e8251cb806cc7f42b70af83bb47fc",
+        "nome": "Ureia",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/9/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b929e9696ea5268b",
+        "origem_json_pointer": "/estadiamento/exames/10",
+        "sha256_conteudo": "a2fc2d6153c77f773216744fb470a79d7a74341b5c11d7d3acdbba5c3887930b",
+        "nome": "Alfafetoproteína",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/10/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8606b5ffecbd57dc",
+        "origem_json_pointer": "/estadiamento/exames/11",
+        "sha256_conteudo": "830ad172213714677bb2dfb2fb66d270a6428aae4b6a7fc3fbd767b43b8acc15",
+        "nome": "HBsAg",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/11/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8289665f828fb50e",
+        "origem_json_pointer": "/estadiamento/exames/12",
+        "sha256_conteudo": "9d61c5a8b52205da8c106b7fa45b35e099f900253f66328cf8b26b3baede3de4",
+        "nome": "Anti-HBc total",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/12/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-bca53861274212d0",
+        "origem_json_pointer": "/estadiamento/exames/13",
+        "sha256_conteudo": "d5fdca0b15a4b4781476186773e34e9075a4574d68dd8fdb30f1e506581a0684",
+        "nome": "Anti-HCV",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/13/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8e734f8cd36e0d4a",
+        "origem_json_pointer": "/estadiamento/exames/14",
+        "sha256_conteudo": "20908e3a1247192cbeb600bfbbdfd14f8b9a6e0f9ac02cb20a5a843ef507f063",
+        "nome": "Elastografia hepática",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/14/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-6621e5815c50f9b0",
+        "origem_json_pointer": "/ligacoes/exames/0",
+        "sha256_conteudo": "4006905a9ae646b3b4a0a0ddc376a7dfad7b98e9d0d573edd4a21dc25b3a39c3",
+        "nome": "AFP",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-0dabd55fb4fae6d1",
+        "origem_json_pointer": "/ligacoes/exames/1",
+        "sha256_conteudo": "00a845af8a467c5d308bcc1bed4136e988a65daa4fdf855563394f009a6a4cd1",
+        "nome": "ANTI_HBC_TOTAL",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-acb26204cb2698fb",
+        "origem_json_pointer": "/ligacoes/exames/2",
+        "sha256_conteudo": "bd3db595b528b1d7e0a9ce08d777e5b2ada3a7707c2ed2c9d0e5b461c7e3430a",
+        "nome": "ANTI_HCV",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-07e77cec0d68eeea",
+        "origem_json_pointer": "/ligacoes/exames/3",
+        "sha256_conteudo": "5d85231af84b07a3159dc7b06efe241505fe0d9fa9e3cfc3ced2da4d9650052b",
+        "nome": "BILIRRUBINA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-39a1baf1544b6f39",
+        "origem_json_pointer": "/ligacoes/exames/4",
+        "sha256_conteudo": "5646f5433899490076911fbb74245035637bbb8beecbcc6308f0e6aa46f7ed97",
+        "nome": "BIOPSIA_FIGADO_PUNCAO",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ae0c90c0c43008b9",
+        "origem_json_pointer": "/ligacoes/exames/5",
+        "sha256_conteudo": "09c0bc2a57301c5e7f5c06c8c51c9dec764db31a5d9531aa98aac18b5d8251f3",
+        "nome": "BIOPSIA_PERCUTANEA_GUIADA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-95a3700b0447cc96",
+        "origem_json_pointer": "/ligacoes/exames/6",
+        "sha256_conteudo": "6256d23e08fe42e0c5f18c2d537248d451b59b2ecdf935ab864d69cd8131c89d",
+        "nome": "CINTILOGRAFIA_OSSEA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-19dd894ee8e78e9b",
+        "origem_json_pointer": "/ligacoes/exames/7",
+        "sha256_conteudo": "58d8c3bbd157d0d9be5bf551553eb11e7e0c313ef1db12f06d7863faa42fbbfb",
+        "nome": "CREATININA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-768a0fb680d5115f",
+        "origem_json_pointer": "/ligacoes/exames/8",
+        "sha256_conteudo": "4eafbeeab923ac66d78540cd37c0f44aba4997fe0bb026271a95da2189ec190b",
+        "nome": "EDA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-478097dc695148c3",
+        "origem_json_pointer": "/ligacoes/exames/9",
+        "sha256_conteudo": "ad1a3ef653b581c9aa616ab3bbab16ad7edca4cf6832cfc168f32389fc7cf658",
+        "nome": "FOSFATASE_ALCALINA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d8f7f9be77145a6b",
+        "origem_json_pointer": "/ligacoes/exames/10",
+        "sha256_conteudo": "5228a75a2c61f24731de7c5a5fc97f2fb723736afc94712ad53cd682c14187fd",
+        "nome": "HBSAG",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-34055216fdc7f77b",
+        "origem_json_pointer": "/ligacoes/exames/11",
+        "sha256_conteudo": "bf5e386b5411abfa4e5e12d1229575a6c7ec73dfaec6347d8959b27aac19aa86",
+        "nome": "HEMOGRAMA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d63309fe715e753c",
+        "origem_json_pointer": "/ligacoes/exames/12",
+        "sha256_conteudo": "4e4249e6c66f8d31a96fd1f2825bad6dc8ce6c4a3157926add98415b5b9ad908",
+        "nome": "PROTEINAS_TOTAIS_FRACOES",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-7de44db811ff3ff5",
+        "origem_json_pointer": "/ligacoes/exames/13",
+        "sha256_conteudo": "9c93ac77fd6457370871d33a5c58ba94777b0bb961f1f2eb5572fadaabd4df86",
+        "nome": "RM_ABDOMEN_SUPERIOR",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ae90205d16506950",
+        "origem_json_pointer": "/ligacoes/exames/14",
+        "sha256_conteudo": "fe9721bae5d09a49ec48414ec6632d6d21cffbd006f1d9daa5cf23186764c46c",
+        "nome": "TAP",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8c998f892f29d747",
+        "origem_json_pointer": "/ligacoes/exames/15",
+        "sha256_conteudo": "eea68f82f02592e6262514a154ff52ae85284765c1f48ab3b07cabb92ead209f",
+        "nome": "TC_ABDOMEN_SUPERIOR",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-289a265f9737a73a",
+        "origem_json_pointer": "/ligacoes/exames/16",
+        "sha256_conteudo": "147b97b900462813d8c6528cc01d88f8a5102936ee96ee4fb121f8a7b77f60b0",
+        "nome": "TC_TORAX",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b036ed1e085560b8",
+        "origem_json_pointer": "/ligacoes/exames/17",
+        "sha256_conteudo": "1c165f5403a7b90b63dbd46f6855431c8c1ada4519299d6c123bd630df5c529d",
+        "nome": "TGO",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-72c85f3ddb32430f",
+        "origem_json_pointer": "/ligacoes/exames/18",
+        "sha256_conteudo": "1739a80ab81e5bbef9460ae5f51087ed284845d8e31e606c2b564c7268c2cd15",
+        "nome": "TGP",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-9a3e3340a585e9a6",
+        "origem_json_pointer": "/ligacoes/exames/19",
+        "sha256_conteudo": "6809cf5158cb20fdcdc6b11a5872d44a626a16baaaa89eafeb7ecd4810b5eb26",
+        "nome": "TTPA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-47339c12530c8af6",
+        "origem_json_pointer": "/ligacoes/exames/20",
+        "sha256_conteudo": "a133b6c797048051de63b5b1f134afc70bc5a1444e49ac2e2721bd762204440d",
+        "nome": "UREIA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-206ec7091e3eecb8",
+        "origem_json_pointer": "/ligacoes/exames/21",
+        "sha256_conteudo": "4a487307df95a6ccf67c2accddc94e056cf9124456e70f4175d67e0870dc3a30",
+        "nome": "USG_ABDOMEN_SUPERIOR",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-c2cab1e7f97d5fa8",
+        "origem_json_pointer": "/ligacoes/exames/22",
+        "sha256_conteudo": "e920ac065f92d71f59863c064fa609d6d2a3dc684f5eb953e0609a5d104a0c42",
+        "nome": "ELASTOGRAFIA_HEPATICA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-6e545227296b65df",
+        "origem_json_pointer": "/tratamento/cenarios/0",
+        "sha256_conteudo": "8c19dceb411d329f5b43b0bd7c3591b2c668040f66728128b96f66c2d5fcc0e0",
+        "nome": "BCLC_0_A",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-defbfb9ff8c2ba8d",
+        "origem_json_pointer": "/tratamento/cenarios/1",
+        "sha256_conteudo": "dc80ee50ea615c7239b61c638c8214962e3250bc8e9b06e1fa100e9a2bc6fa92",
+        "nome": "BCLC_B",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-5c5efa00166f5cf0",
+        "origem_json_pointer": "/tratamento/cenarios/2",
+        "sha256_conteudo": "06c7fde8fdb6191002ced23df50fa7f8f25a1e3490455dc4855a465cb1882ef3",
+        "nome": "BCLC_C",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e3b0379903e38f2b",
+        "origem_json_pointer": "/tratamento/cenarios/3",
+        "sha256_conteudo": "16d1297259a1f0295ef0f5da6e482f5948461ce8d8e07d65570f010efa09bf3f",
+        "nome": "BCLC_D",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-7adca47911b23d60",
+        "origem_json_pointer": "/tratamento/protocolos/0",
+        "sha256_conteudo": "98913b1e52e8fd63ae07f19255878e16cedc36c4f851eaa439f27b44a92e7484",
+        "nome": "Atezolizumabe + bevacizumabe (IMbrave150)",
+        "id_original": "chc-1l-atezolizumabe-bevacizumabe",
+        "fonte_local_ref": "/tratamento/protocolos/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-53ed6ef5d5fc4d85",
+        "origem_json_pointer": "/tratamento/protocolos/1",
+        "sha256_conteudo": "9695d0d8defcd2aa1fbabb79b2d3c00974bf6276d97a67ade29a0e783dc5d9c8",
+        "nome": "Durvalumabe + tremelimumabe — STRIDE (HIMALAYA)",
+        "id_original": "chc-1l-durvalumabe-tremelimumabe",
+        "fonte_local_ref": "/tratamento/protocolos/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a98dc96c070f32a1",
+        "origem_json_pointer": "/tratamento/protocolos/2",
+        "sha256_conteudo": "ac80bd0368a531a51b41491fbff62d6841dbe63b7cb85b6b5dfc1565b58aee35",
+        "nome": "Nivolumabe + ipilimumabe (CheckMate 9DW)",
+        "id_original": "chc-1l-nivolumabe-ipilimumabe",
+        "fonte_local_ref": "/tratamento/protocolos/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a98b899caee4efc5",
+        "origem_json_pointer": "/tratamento/protocolos/3",
+        "sha256_conteudo": "79a08c965ea62eda2350c2f0e1d7575fac50cd64e2bb81e99220e1092ecce3f8",
+        "nome": "Lenvatinibe (REFLECT)",
+        "id_original": "chc-1l-lenvatinibe",
+        "fonte_local_ref": "/tratamento/protocolos/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d890ac8712ac9f48",
+        "origem_json_pointer": "/tratamento/protocolos/4",
+        "sha256_conteudo": "e1649355e831332962feff2afaabd018f451177ad9337971995e19f9233464fa",
+        "nome": "Sorafenibe (SHARP)",
+        "id_original": "chc-1l-sorafenibe",
+        "fonte_local_ref": "/tratamento/protocolos/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-0890e4002abe5cab",
+        "origem_json_pointer": "/tratamento/protocolos/5",
+        "sha256_conteudo": "73ad30d25e07d2898abb5e2e9e6cd5fb23d389d6edbd878dd2c708ae32e1e2d0",
+        "nome": "Regorafenibe (RESORCE)",
+        "id_original": "chc-2l-regorafenibe",
+        "fonte_local_ref": "/tratamento/protocolos/5/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a658f966dee9fb04",
+        "origem_json_pointer": "/tratamento/protocolos/6",
+        "sha256_conteudo": "dc32c79c0778da73879b89339de3e0049fc7e4bed50fcc46eebef27b4615bc41",
+        "nome": "Cabozantinibe (CELESTIAL)",
+        "id_original": "chc-2l-cabozantinibe",
+        "fonte_local_ref": "/tratamento/protocolos/6/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-f83440c36b515285",
+        "origem_json_pointer": "/tratamento/protocolos/7",
+        "sha256_conteudo": "08d04bd7a1b9025421dd9bddf84824f3bcb356e64d098ae09254250214837034",
+        "nome": "Ramucirumabe (REACH-2) — AFP ≥ 400 ng/mL",
+        "id_original": "chc-2l-ramucirumabe",
+        "fonte_local_ref": "/tratamento/protocolos/7/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-976baa49f4f5aa65",
+        "origem_json_pointer": "/tratamento/cirurgia/0",
+        "sha256_conteudo": "827e2347c22cf9eadbae0383f1c911570d08b0b1241cae5c9def0a79698c4644",
+        "nome": "/tratamento/cirurgia/0",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cirurgia/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ac5e68a4b6161217",
+        "origem_json_pointer": "/tratamento/cirurgia/1",
+        "sha256_conteudo": "3652ade8257a6dfd55db4c2581242c9faa2c45da4237289e4ec2d1cbafe7d012",
+        "nome": "/tratamento/cirurgia/1",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cirurgia/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e35a9f4570ef9222",
+        "origem_json_pointer": "/tratamento/cirurgia/2",
+        "sha256_conteudo": "82527183ae5df230d98e39037ae40bf8a02afcac1bc28dbfe6ef5f321b702e5a",
+        "nome": "/tratamento/cirurgia/2",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cirurgia/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-493d7bafa132fedb",
+        "origem_json_pointer": "/tratamento/cirurgia/3",
+        "sha256_conteudo": "f47bef5eae267ccbacc09a5658c07bdc81ccd04652b441d4b2bcc75b8108f656",
+        "nome": "/tratamento/cirurgia/3",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cirurgia/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-43ce715cf7fb679c",
+        "origem_json_pointer": "/tratamento/cirurgia/4",
+        "sha256_conteudo": "52d4a08eae5eea0420a680b4841313ac093322c9ec434a0ea46a8331df97c269",
+        "nome": "/tratamento/cirurgia/4",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cirurgia/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ba487a5b19b52059",
+        "origem_json_pointer": "/tratamento/radioterapia/0",
+        "sha256_conteudo": "cf8053c60d76c480e8e6b41218010e0ab78aed3a5803fa56640c7127918b1ef9",
+        "nome": "SBRT locorregional (selecionados, quando ressecção/transplante/ablação/TACE não apropriados; invasão macrovascular; falha locorregional)",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/radioterapia/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8d3c18a1cdc01324",
+        "origem_json_pointer": "/tratamento/radioterapia/1",
+        "sha256_conteudo": "955fbffafe9e72e2cb4b888a32f4c5703c8244aec6e073aab6c8ede0f91d0ef2",
+        "nome": "RT paliativa (metástase óssea dolorosa, dor hepática por grande carga tumoral)",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/radioterapia/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-85bcca8b9796951b",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/0",
+        "sha256_conteudo": "e181c530d49fdbf75e50cce8f204d89b55ba05bd8a242fd6c1b7a815761ab11e",
+        "nome": "/ligacoes/interacoesConsultar/0",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-4aa2600ea1ea2ed5",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/1",
+        "sha256_conteudo": "f8c9e1c03affb8c9e36714079026f414e2aebf47acfb0ceb797973289bb05d29",
+        "nome": "/ligacoes/interacoesConsultar/1",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8259314dbfc50b70",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/2",
+        "sha256_conteudo": "23ff16910236fe5c69a222ebb9c4725463fc816cefec4ea59b2976b975d53d45",
+        "nome": "/ligacoes/interacoesConsultar/2",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-5156c7a9640cde9d",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/3",
+        "sha256_conteudo": "c87c07ef76a4e33db62d19a606ce1b027506b26255e56cac4d74120f4a1d5afa",
+        "nome": "/ligacoes/interacoesConsultar/3",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-0d5fbd418c2d1b9a",
+        "origem_json_pointer": "/ligacoes/ctcaeAcao/0",
+        "sha256_conteudo": "c46e0e054503ad24c57f8b5cbca9f7d3728b8267a746a92f818a371beb79333d",
+        "nome": "/ligacoes/ctcaeAcao/0",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-884aee822e7915af",
+        "origem_json_pointer": "/ligacoes/ctcaeAcao/1",
+        "sha256_conteudo": "78b8b9df71c68fd9d2953389d57075dfa8574e22319fa06346b991deeddbd849",
+        "nome": "/ligacoes/ctcaeAcao/1",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-9c36d252fa9de7ca",
+        "origem_json_pointer": "/ligacoes/ctcaeAcao/2",
+        "sha256_conteudo": "f1c650051b25bea38eab040d16c2fc011d98b664d44edce01693193c37a0013a",
+        "nome": "/ligacoes/ctcaeAcao/2",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8bf7166a5b984026",
+        "origem_json_pointer": "/tratamento/suporte",
+        "sha256_conteudo": "fe511f25d23f70d958e849ff9601c0f26256597cb0e3ff97225b70a9852b0e23",
+        "nome": "/tratamento/suporte",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/suporte/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-3dc3b223926d9cc3",
+        "origem_json_pointer": "/ligacoes/suporteReceitas/0",
+        "sha256_conteudo": "73e33b7e02b9274006f68a87a9dbee1ca53032eb912043aed3cefe89d498d923",
+        "nome": "receita-sintomaticos-modelo-servico",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b239819294d81a3a",
+        "origem_json_pointer": "/tratamento/seguimento/0",
+        "sha256_conteudo": "f3df3ac531fa28fe40359a136cb66232de06cb4bcc11e3ce3222d7b1de8b0797",
+        "nome": "pós-tratamento curativo, anos 1–2",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/seguimento/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-0a6e4f1cad8d0d03",
+        "origem_json_pointer": "/tratamento/seguimento/1",
+        "sha256_conteudo": "cd2e2114bc7a73c9f38b5202b9ada89a21f8c8e422deacac8ae0b0d6be129e2c",
+        "nome": "anos 3–5",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/seguimento/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-fd48d8bbaefeb45b",
+        "origem_json_pointer": "/tratamento/seguimento/2",
+        "sha256_conteudo": "d107643d61bf053bb3bc6389508f80b65e5c948df2e807d425d0aecef2f3f303",
+        "nome": "vigilância de CHC em cirrose (e HBV com PAGE-B moderado/alto)",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/seguimento/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d9b6d7141e676690",
+        "origem_json_pointer": "/ligacoes/orientacoes/0",
+        "sha256_conteudo": "afba05e2de6389b751452a9fc6c36eff43abe35e94eedf588456a5e98a7bd825",
+        "nome": "sinais-alarme-consolidado",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a7a604a9385791ee",
+        "origem_json_pointer": "/ligacoes/orientacoes/1",
+        "sha256_conteudo": "949061242240aafb3be6d117e82372a90c968bb301788c17a40ef5700a22bd90",
+        "nome": "dieta-por-tumor",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-68f950abf374867d",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/0",
+        "sha256_conteudo": "7dcbb3c8f12481e3bbff859c753060c7d5f33d65f237f6926064d22d4f702ac7",
+        "nome": "hepatologia",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-685c8cf172414883",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/1",
+        "sha256_conteudo": "5e90c2fe0c689c9825e2a5f61f10285aac34b9a34913dde224d87ec5e7e743b5",
+        "nome": "encaminhamento-cirurgia-oncologica",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-0d6e5f759e879c2e",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/2",
+        "sha256_conteudo": "603a0ea31beb97b1f423bb676a734b8db76bff49ffd275dce4211271c35fe444",
+        "nome": "radiologia intervencionista (TACE/ablação/TARE)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d21574bb71e1cc64",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/3",
+        "sha256_conteudo": "b92a6c89eec82b9542c0d0bf3c50a216ebeef81398125d360e50df70c3e8f675",
+        "nome": "encaminhamento-radioterapia",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-11823bad60e74300",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/4",
+        "sha256_conteudo": "f47ca2cea2fe24fc585a1453ca9380e11e055216013dafcf3d74d07745ef2229",
+        "nome": "centro transplantador",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      }
+    ],
+    "itens_nccn": [
+      {
+        "item_id": "nccn-20261017-chc-durvalumabe",
+        "nome": "Durvalumabe isolado",
+        "tipo": "OPCAO_TERAPEUTICA",
+        "dominio_principal": 6,
+        "conteudo_extraido": "Durvalumabe: primeira linha em Other Recommended, categoria 1. Avaliar função hepática/hipertensão portal; há dados de segurança limitados em CTP B/C e cautela extrema com bilirrubina elevada. Na utilização em linha subsequente, a nota h se refere a pacientes sem ICI prévio, pela falta de dados de repetição de ICI isolado.",
+        "aplicabilidade": {
+          "criterios": [
+            "CHC candidato a terapia sistêmica",
+            "Primeira linha; uso subsequente depende de exposição anterior",
+            "Função hepática e hipertensão portal avaliadas",
+            "Dados limitados em CTP B/C; cautela extrema se bilirrubina elevada"
+          ],
+          "paciente_individual": null,
+          "estado": "NAO_AVALIADA"
+        },
+        "dados_estruturados": {
+          "farmacos": [
+            "durvalumabe isolado"
+          ],
+          "posologia": {
+            "estado": "NAO_EXTRAIDA_NESTA_RODADA",
+            "valor": null,
+            "motivo": "A rodada incorpora o delta de indicação/cenário; não completa dose por inferência."
+          }
+        },
+        "fonte_refs": [
+          {
+            "fonte_id": "nccn-f086f3a37f58",
+            "edicao": "2.2026",
+            "pagina_pdf": 27,
+            "paginas_pdf": [
+              27
+            ],
+            "secao": "HCC-I 1/2, Other Recommended",
+            "trecho": "Durvalumab (category 1)",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "7167781b2207d1baf199f005027acb5a0717e7fdab0c41dae5271f9c352a1caa"
+          },
+          {
+            "fonte_id": "nccn-f086f3a37f58",
+            "edicao": "2.2026",
+            "pagina_pdf": 27,
+            "paginas_pdf": [
+              27
+            ],
+            "secao": "HCC-I 1/2, notas c/d/h",
+            "trecho": "limited safety data available for CTP Class B or C",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "7167781b2207d1baf199f005027acb5a0717e7fdab0c41dae5271f9c352a1caa"
+          }
+        ],
+        "evidencia_declarada": {
+          "sistema": "NCCN",
+          "categoria": "1",
+          "preferencia": "Other Recommended",
+          "estado": "CONFERIDA_DOCUMENTALMENTE_A_CONFERIR_CLINICAMENTE",
+          "nota": "2A por cabeçalho somente onde a página expressamente declara essa regra; não é categoria inferida por conhecimento externo."
+        },
+        "estado_extracao": "EXTRAIDO_COM_LIMITES_DECLARADOS",
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "temporalidade": {
+          "referencia": "CENARIO_DESCRITO",
+          "datas_individuais": null
+        },
+        "propor_automaticamente": false,
+        "disponivel_para_prescricao": false,
+        "acesso": {
+          "registro_anvisa": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "incorporacao_conitec": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "pcdt_ddt": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "sigtap_apac": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "cobertura_privada": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "disponibilidade_institucional": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          }
+        },
+        "alternativas_legadas_refs": [],
+        "relacoes_refs": [
+          "relacao-nccn-20261017-chc-durvalumabe"
+        ],
+        "conflitos_refs": [],
+        "pendencias": [
+          "REVISAO_CLINICA_DO_DELTA",
+          "VERIFICAR_ACESSO_BRASILEIRO_POR_INDICACAO",
+          "POSOLOGIA_E_SUPORTE_NAO_COMPLETOS_NESTA_RODADA"
+        ],
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+            "anterior": {
+              "fonte_refs": [
+                {
+                  "fonte_id": "nccn-f086f3a37f58",
+                  "paginas_pdf": [
+                    27
+                  ],
+                  "secao": "HCC-I 1/2",
+                  "natureza": "EXTRACAO_DOCUMENTAL",
+                  "pagina_pdf": 27,
+                  "trecho": "Durvalumab (category 1)f,h,3 • Lenvatinib (category 1)4,5 • Sorafenib (category 1)6,7 •"
+                }
+              ],
+              "conteudo_extraido": "Opção sistêmica de primeira linha na tabela NCCN, com ressalvas de função hepática e exposição prévia; não substituir combinações já presentes.",
+              "aplicabilidade": {
+                "criterios": [
+                  "CHC",
+                  "Conferir função hepática e contraindicações",
+                  "Não presumir benefício de repetição após exposição a ICI"
+                ],
+                "paciente_individual": null,
+                "estado": "NAO_AVALIADA"
+              },
+              "evidencia_declarada": {
+                "sistema": "NCCN",
+                "categoria": "1",
+                "estado": "TRANSCRITA"
+              }
+            },
+            "motivo": "Faltava a preferência Other Recommended e o alcance da ressalva de função hepática/ICI prévio; trecho antigo terminava em outras opções.",
+            "aprovacao_clinica": null
+          }
+        ],
+        "fontes_por_campo": {
+          "conteudo_extraido": [
+            {
+              "fonte_id": "nccn-f086f3a37f58",
+              "edicao": "2.2026",
+              "pagina_pdf": 27,
+              "paginas_pdf": [
+                27
+              ],
+              "secao": "HCC-I 1/2, Other Recommended",
+              "trecho": "Durvalumab (category 1)",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "7167781b2207d1baf199f005027acb5a0717e7fdab0c41dae5271f9c352a1caa"
+            },
+            {
+              "fonte_id": "nccn-f086f3a37f58",
+              "edicao": "2.2026",
+              "pagina_pdf": 27,
+              "paginas_pdf": [
+                27
+              ],
+              "secao": "HCC-I 1/2, notas c/d/h",
+              "trecho": "limited safety data available for CTP Class B or C",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "7167781b2207d1baf199f005027acb5a0717e7fdab0c41dae5271f9c352a1caa"
+            }
+          ],
+          "aplicabilidade": [
+            {
+              "fonte_id": "nccn-f086f3a37f58",
+              "edicao": "2.2026",
+              "pagina_pdf": 27,
+              "paginas_pdf": [
+                27
+              ],
+              "secao": "HCC-I 1/2, Other Recommended",
+              "trecho": "Durvalumab (category 1)",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "7167781b2207d1baf199f005027acb5a0717e7fdab0c41dae5271f9c352a1caa"
+            },
+            {
+              "fonte_id": "nccn-f086f3a37f58",
+              "edicao": "2.2026",
+              "pagina_pdf": 27,
+              "paginas_pdf": [
+                27
+              ],
+              "secao": "HCC-I 1/2, notas c/d/h",
+              "trecho": "limited safety data available for CTP Class B or C",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "7167781b2207d1baf199f005027acb5a0717e7fdab0c41dae5271f9c352a1caa"
+            }
+          ],
+          "evidencia_declarada": [
+            {
+              "fonte_id": "nccn-f086f3a37f58",
+              "edicao": "2.2026",
+              "pagina_pdf": 27,
+              "paginas_pdf": [
+                27
+              ],
+              "secao": "HCC-I 1/2, Other Recommended",
+              "trecho": "Durvalumab (category 1)",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "7167781b2207d1baf199f005027acb5a0717e7fdab0c41dae5271f9c352a1caa"
+            },
+            {
+              "fonte_id": "nccn-f086f3a37f58",
+              "edicao": "2.2026",
+              "pagina_pdf": 27,
+              "paginas_pdf": [
+                27
+              ],
+              "secao": "HCC-I 1/2, notas c/d/h",
+              "trecho": "limited safety data available for CTP Class B or C",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "7167781b2207d1baf199f005027acb5a0717e7fdab0c41dae5271f9c352a1caa"
+            }
+          ]
+        }
+      },
+      {
+        "item_id": "nccn-20261017-chc-tislelizumabe",
+        "nome": "Tislelizumabe",
+        "tipo": "OPCAO_TERAPEUTICA",
+        "dominio_principal": 6,
+        "conteudo_extraido": "Tislelizumabe: primeira linha em Other Recommended, categoria 1. Avaliar função hepática/hipertensão portal; há dados de segurança limitados em CTP B/C e cautela extrema com bilirrubina elevada. Na utilização em linha subsequente, a nota h se refere a pacientes sem ICI prévio, pela falta de dados de repetição de ICI isolado.",
+        "aplicabilidade": {
+          "criterios": [
+            "CHC candidato a terapia sistêmica",
+            "Primeira linha; uso subsequente depende de exposição anterior",
+            "Função hepática e hipertensão portal avaliadas",
+            "Dados limitados em CTP B/C; cautela extrema se bilirrubina elevada"
+          ],
+          "paciente_individual": null,
+          "estado": "NAO_AVALIADA"
+        },
+        "dados_estruturados": {
+          "farmacos": [
+            "tislelizumabe"
+          ],
+          "posologia": {
+            "estado": "NAO_EXTRAIDA_NESTA_RODADA",
+            "valor": null,
+            "motivo": "A rodada incorpora o delta de indicação/cenário; não completa dose por inferência."
+          }
+        },
+        "fonte_refs": [
+          {
+            "fonte_id": "nccn-f086f3a37f58",
+            "edicao": "2.2026",
+            "pagina_pdf": 27,
+            "paginas_pdf": [
+              27
+            ],
+            "secao": "HCC-I 1/2, Other Recommended",
+            "trecho": "Tislelizumab-jsgr (category 1)",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "7167781b2207d1baf199f005027acb5a0717e7fdab0c41dae5271f9c352a1caa"
+          },
+          {
+            "fonte_id": "nccn-f086f3a37f58",
+            "edicao": "2.2026",
+            "pagina_pdf": 27,
+            "paginas_pdf": [
+              27
+            ],
+            "secao": "HCC-I 1/2, notas c/d/h",
+            "trecho": "limited safety data available for CTP Class B or C",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "7167781b2207d1baf199f005027acb5a0717e7fdab0c41dae5271f9c352a1caa"
+          }
+        ],
+        "evidencia_declarada": {
+          "sistema": "NCCN",
+          "categoria": "1",
+          "preferencia": "Other Recommended",
+          "estado": "CONFERIDA_DOCUMENTALMENTE_A_CONFERIR_CLINICAMENTE",
+          "nota": "2A por cabeçalho somente onde a página expressamente declara essa regra; não é categoria inferida por conhecimento externo."
+        },
+        "estado_extracao": "EXTRAIDO_COM_LIMITES_DECLARADOS",
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "temporalidade": {
+          "referencia": "CENARIO_DESCRITO",
+          "datas_individuais": null
+        },
+        "propor_automaticamente": false,
+        "disponivel_para_prescricao": false,
+        "acesso": {
+          "registro_anvisa": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "incorporacao_conitec": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "pcdt_ddt": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "sigtap_apac": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "cobertura_privada": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "disponibilidade_institucional": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          }
+        },
+        "alternativas_legadas_refs": [],
+        "relacoes_refs": [
+          "relacao-nccn-20261017-chc-tislelizumabe"
+        ],
+        "conflitos_refs": [],
+        "pendencias": [
+          "REVISAO_CLINICA_DO_DELTA",
+          "VERIFICAR_ACESSO_BRASILEIRO_POR_INDICACAO",
+          "POSOLOGIA_E_SUPORTE_NAO_COMPLETOS_NESTA_RODADA"
+        ],
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+            "anterior": {
+              "fonte_refs": [
+                {
+                  "fonte_id": "nccn-f086f3a37f58",
+                  "paginas_pdf": [
+                    27
+                  ],
+                  "secao": "HCC-I 1/2",
+                  "natureza": "EXTRACAO_DOCUMENTAL",
+                  "pagina_pdf": 27,
+                  "trecho": "Tislelizumab-jsgr (category 1)f,h,8 • Pembrolizumab (category 2B)f,h,l,m,13-16 Subsequent-Line Systemic Therapy if Disease"
+                }
+              ],
+              "conteudo_extraido": "Opção sistêmica de primeira linha na tabela NCCN, com ressalvas de função hepática e exposição prévia; não substituir combinações já presentes.",
+              "aplicabilidade": {
+                "criterios": [
+                  "CHC",
+                  "Conferir função hepática e contraindicações",
+                  "Não presumir benefício de repetição após exposição a ICI"
+                ],
+                "paciente_individual": null,
+                "estado": "NAO_AVALIADA"
+              },
+              "evidencia_declarada": {
+                "sistema": "NCCN",
+                "categoria": "1",
+                "estado": "TRANSCRITA"
+              }
+            },
+            "motivo": "Faltava a preferência Other Recommended e o alcance da ressalva de função hepática/ICI prévio; trecho antigo terminava em outras opções.",
+            "aprovacao_clinica": null
+          }
+        ],
+        "fontes_por_campo": {
+          "conteudo_extraido": [
+            {
+              "fonte_id": "nccn-f086f3a37f58",
+              "edicao": "2.2026",
+              "pagina_pdf": 27,
+              "paginas_pdf": [
+                27
+              ],
+              "secao": "HCC-I 1/2, Other Recommended",
+              "trecho": "Tislelizumab-jsgr (category 1)",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "7167781b2207d1baf199f005027acb5a0717e7fdab0c41dae5271f9c352a1caa"
+            },
+            {
+              "fonte_id": "nccn-f086f3a37f58",
+              "edicao": "2.2026",
+              "pagina_pdf": 27,
+              "paginas_pdf": [
+                27
+              ],
+              "secao": "HCC-I 1/2, notas c/d/h",
+              "trecho": "limited safety data available for CTP Class B or C",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "7167781b2207d1baf199f005027acb5a0717e7fdab0c41dae5271f9c352a1caa"
+            }
+          ],
+          "aplicabilidade": [
+            {
+              "fonte_id": "nccn-f086f3a37f58",
+              "edicao": "2.2026",
+              "pagina_pdf": 27,
+              "paginas_pdf": [
+                27
+              ],
+              "secao": "HCC-I 1/2, Other Recommended",
+              "trecho": "Tislelizumab-jsgr (category 1)",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "7167781b2207d1baf199f005027acb5a0717e7fdab0c41dae5271f9c352a1caa"
+            },
+            {
+              "fonte_id": "nccn-f086f3a37f58",
+              "edicao": "2.2026",
+              "pagina_pdf": 27,
+              "paginas_pdf": [
+                27
+              ],
+              "secao": "HCC-I 1/2, notas c/d/h",
+              "trecho": "limited safety data available for CTP Class B or C",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "7167781b2207d1baf199f005027acb5a0717e7fdab0c41dae5271f9c352a1caa"
+            }
+          ],
+          "evidencia_declarada": [
+            {
+              "fonte_id": "nccn-f086f3a37f58",
+              "edicao": "2.2026",
+              "pagina_pdf": 27,
+              "paginas_pdf": [
+                27
+              ],
+              "secao": "HCC-I 1/2, Other Recommended",
+              "trecho": "Tislelizumab-jsgr (category 1)",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "7167781b2207d1baf199f005027acb5a0717e7fdab0c41dae5271f9c352a1caa"
+            },
+            {
+              "fonte_id": "nccn-f086f3a37f58",
+              "edicao": "2.2026",
+              "pagina_pdf": 27,
+              "paginas_pdf": [
+                27
+              ],
+              "secao": "HCC-I 1/2, notas c/d/h",
+              "trecho": "limited safety data available for CTP Class B or C",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "7167781b2207d1baf199f005027acb5a0717e7fdab0c41dae5271f9c352a1caa"
+            }
+          ]
+        }
+      },
+      {
+        "item_id": "nccn-20261017-chc-pembrolizumabe",
+        "nome": "Pembrolizumabe",
+        "tipo": "OPCAO_TERAPEUTICA",
+        "dominio_principal": 6,
+        "conteudo_extraido": "Pembrolizumabe: primeira linha em Other Recommended, categoria 2B. Avaliar função hepática/hipertensão portal; há dados de segurança limitados em CTP B/C e cautela extrema com bilirrubina elevada. Na utilização em linha subsequente, a nota h se refere a pacientes sem ICI prévio, pela falta de dados de repetição de ICI isolado. A nota l descreve a recomendação independentemente de MSI, distinguindo-a da indicação regulatória FDA mencionada para MSI-H em linha subsequente.",
+        "aplicabilidade": {
+          "criterios": [
+            "CHC candidato a terapia sistêmica",
+            "Primeira linha; uso subsequente depende de exposição anterior",
+            "Função hepática e hipertensão portal avaliadas",
+            "Dados limitados em CTP B/C; cautela extrema se bilirrubina elevada"
+          ],
+          "paciente_individual": null,
+          "estado": "NAO_AVALIADA"
+        },
+        "dados_estruturados": {
+          "farmacos": [
+            "pembrolizumabe"
+          ],
+          "posologia": {
+            "estado": "NAO_EXTRAIDA_NESTA_RODADA",
+            "valor": null,
+            "motivo": "A rodada incorpora o delta de indicação/cenário; não completa dose por inferência."
+          }
+        },
+        "fonte_refs": [
+          {
+            "fonte_id": "nccn-f086f3a37f58",
+            "edicao": "2.2026",
+            "pagina_pdf": 27,
+            "paginas_pdf": [
+              27
+            ],
+            "secao": "HCC-I 1/2, Other Recommended",
+            "trecho": "Pembrolizumab (category 2B)",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "7167781b2207d1baf199f005027acb5a0717e7fdab0c41dae5271f9c352a1caa"
+          },
+          {
+            "fonte_id": "nccn-f086f3a37f58",
+            "edicao": "2.2026",
+            "pagina_pdf": 27,
+            "paginas_pdf": [
+              27
+            ],
+            "secao": "HCC-I 1/2, notas c/d/h",
+            "trecho": "limited safety data available for CTP Class B or C",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "7167781b2207d1baf199f005027acb5a0717e7fdab0c41dae5271f9c352a1caa"
+          },
+          {
+            "fonte_id": "nccn-f086f3a37f58",
+            "edicao": "2.2026",
+            "pagina_pdf": 27,
+            "paginas_pdf": [
+              27
+            ],
+            "secao": "HCC-I 1/2, nota l",
+            "trecho": "regardless of microsatellite instability",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "7167781b2207d1baf199f005027acb5a0717e7fdab0c41dae5271f9c352a1caa"
+          }
+        ],
+        "evidencia_declarada": {
+          "sistema": "NCCN",
+          "categoria": "2B",
+          "preferencia": "Other Recommended",
+          "estado": "CONFERIDA_DOCUMENTALMENTE_A_CONFERIR_CLINICAMENTE",
+          "nota": "2A por cabeçalho somente onde a página expressamente declara essa regra; não é categoria inferida por conhecimento externo."
+        },
+        "estado_extracao": "EXTRAIDO_COM_LIMITES_DECLARADOS",
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "temporalidade": {
+          "referencia": "CENARIO_DESCRITO",
+          "datas_individuais": null
+        },
+        "propor_automaticamente": false,
+        "disponivel_para_prescricao": false,
+        "acesso": {
+          "registro_anvisa": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "incorporacao_conitec": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "pcdt_ddt": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "sigtap_apac": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "cobertura_privada": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "disponibilidade_institucional": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          }
+        },
+        "alternativas_legadas_refs": [],
+        "relacoes_refs": [
+          "relacao-nccn-20261017-chc-pembrolizumabe"
+        ],
+        "conflitos_refs": [],
+        "pendencias": [
+          "REVISAO_CLINICA_DO_DELTA",
+          "VERIFICAR_ACESSO_BRASILEIRO_POR_INDICACAO",
+          "POSOLOGIA_E_SUPORTE_NAO_COMPLETOS_NESTA_RODADA"
+        ],
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+            "anterior": {
+              "fonte_refs": [
+                {
+                  "fonte_id": "nccn-f086f3a37f58",
+                  "paginas_pdf": [
+                    27
+                  ],
+                  "secao": "HCC-I 1/2",
+                  "natureza": "EXTRACAO_DOCUMENTAL",
+                  "pagina_pdf": 27,
+                  "trecho": "Pembrolizumab (category 2B)f,h,l,m,13-16 Subsequent-Line Systemic Therapy if Disease Progressionn,o Options Other Recommended"
+                }
+              ],
+              "conteudo_extraido": "Opção sistêmica de primeira linha na tabela NCCN, com ressalvas de função hepática e exposição prévia; não substituir combinações já presentes.",
+              "aplicabilidade": {
+                "criterios": [
+                  "CHC",
+                  "Conferir função hepática e contraindicações",
+                  "Não presumir benefício de repetição após exposição a ICI"
+                ],
+                "paciente_individual": null,
+                "estado": "NAO_AVALIADA"
+              },
+              "evidencia_declarada": {
+                "sistema": "NCCN",
+                "categoria": "2B",
+                "estado": "TRANSCRITA"
+              }
+            },
+            "motivo": "Faltava a preferência Other Recommended e o alcance da ressalva de função hepática/ICI prévio; trecho antigo terminava em outras opções.",
+            "aprovacao_clinica": null
+          }
+        ],
+        "fontes_por_campo": {
+          "conteudo_extraido": [
+            {
+              "fonte_id": "nccn-f086f3a37f58",
+              "edicao": "2.2026",
+              "pagina_pdf": 27,
+              "paginas_pdf": [
+                27
+              ],
+              "secao": "HCC-I 1/2, Other Recommended",
+              "trecho": "Pembrolizumab (category 2B)",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "7167781b2207d1baf199f005027acb5a0717e7fdab0c41dae5271f9c352a1caa"
+            },
+            {
+              "fonte_id": "nccn-f086f3a37f58",
+              "edicao": "2.2026",
+              "pagina_pdf": 27,
+              "paginas_pdf": [
+                27
+              ],
+              "secao": "HCC-I 1/2, notas c/d/h",
+              "trecho": "limited safety data available for CTP Class B or C",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "7167781b2207d1baf199f005027acb5a0717e7fdab0c41dae5271f9c352a1caa"
+            },
+            {
+              "fonte_id": "nccn-f086f3a37f58",
+              "edicao": "2.2026",
+              "pagina_pdf": 27,
+              "paginas_pdf": [
+                27
+              ],
+              "secao": "HCC-I 1/2, nota l",
+              "trecho": "regardless of microsatellite instability",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "7167781b2207d1baf199f005027acb5a0717e7fdab0c41dae5271f9c352a1caa"
+            }
+          ],
+          "aplicabilidade": [
+            {
+              "fonte_id": "nccn-f086f3a37f58",
+              "edicao": "2.2026",
+              "pagina_pdf": 27,
+              "paginas_pdf": [
+                27
+              ],
+              "secao": "HCC-I 1/2, Other Recommended",
+              "trecho": "Pembrolizumab (category 2B)",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "7167781b2207d1baf199f005027acb5a0717e7fdab0c41dae5271f9c352a1caa"
+            },
+            {
+              "fonte_id": "nccn-f086f3a37f58",
+              "edicao": "2.2026",
+              "pagina_pdf": 27,
+              "paginas_pdf": [
+                27
+              ],
+              "secao": "HCC-I 1/2, notas c/d/h",
+              "trecho": "limited safety data available for CTP Class B or C",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "7167781b2207d1baf199f005027acb5a0717e7fdab0c41dae5271f9c352a1caa"
+            },
+            {
+              "fonte_id": "nccn-f086f3a37f58",
+              "edicao": "2.2026",
+              "pagina_pdf": 27,
+              "paginas_pdf": [
+                27
+              ],
+              "secao": "HCC-I 1/2, nota l",
+              "trecho": "regardless of microsatellite instability",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "7167781b2207d1baf199f005027acb5a0717e7fdab0c41dae5271f9c352a1caa"
+            }
+          ],
+          "evidencia_declarada": [
+            {
+              "fonte_id": "nccn-f086f3a37f58",
+              "edicao": "2.2026",
+              "pagina_pdf": 27,
+              "paginas_pdf": [
+                27
+              ],
+              "secao": "HCC-I 1/2, Other Recommended",
+              "trecho": "Pembrolizumab (category 2B)",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "7167781b2207d1baf199f005027acb5a0717e7fdab0c41dae5271f9c352a1caa"
+            },
+            {
+              "fonte_id": "nccn-f086f3a37f58",
+              "edicao": "2.2026",
+              "pagina_pdf": 27,
+              "paginas_pdf": [
+                27
+              ],
+              "secao": "HCC-I 1/2, notas c/d/h",
+              "trecho": "limited safety data available for CTP Class B or C",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "7167781b2207d1baf199f005027acb5a0717e7fdab0c41dae5271f9c352a1caa"
+            },
+            {
+              "fonte_id": "nccn-f086f3a37f58",
+              "edicao": "2.2026",
+              "pagina_pdf": 27,
+              "paginas_pdf": [
+                27
+              ],
+              "secao": "HCC-I 1/2, nota l",
+              "trecho": "regardless of microsatellite instability",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "7167781b2207d1baf199f005027acb5a0717e7fdab0c41dae5271f9c352a1caa"
+            }
+          ]
+        }
+      },
+      {
+        "item_id": "nccn-20261017-chc-sequencia-ici",
+        "nome": "Sequência e cautelas após imunoterapia",
+        "tipo": "SEGURANCA_E_SEQUENCIA",
+        "dominio_principal": 7,
+        "conteudo_extraido": "A fonte distingue ausência de ICI prévio e ausência de combinação anti-CTLA4 prévia, reconhece falta de comparação ótima após primeira linha e descreve risco inicial no CheckMate-9DW.",
+        "aplicabilidade": {
+          "criterios": [
+            "Sequenciamento do tratamento sistêmico"
+          ],
+          "paciente_individual": null,
+          "estado": "NAO_AVALIADA"
+        },
+        "dados_estruturados": {},
+        "fonte_refs": [
+          {
+            "fonte_id": "nccn-f086f3a37f58",
+            "paginas_pdf": [
+              27
+            ],
+            "secao": "HCC-I 1/2, notas h/i/k/n",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "pagina_pdf": 27,
+            "trecho": "previously treated with a checkpoint inhibitor when used as subsequent-line therapy because"
+          }
+        ],
+        "evidencia_declarada": {
+          "sistema": "NCCN",
+          "categoria": null,
+          "estado": "NAO_EXTRAIDA_POR_ITEM"
+        },
+        "estado_extracao": "EXTRAIDO_COM_LIMITES_DECLARADOS",
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "temporalidade": {
+          "referencia": "CENARIO_DESCRITO",
+          "datas_individuais": null
+        },
+        "propor_automaticamente": false,
+        "disponivel_para_prescricao": false,
+        "acesso": {
+          "registro_anvisa": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "incorporacao_conitec": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "pcdt_ddt": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "sigtap_apac": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "cobertura_privada": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "disponibilidade_institucional": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          }
+        },
+        "alternativas_legadas_refs": [],
+        "relacoes_refs": [
+          "relacao-nccn-20261017-chc-sequencia-ici"
+        ],
+        "conflitos_refs": [],
+        "pendencias": [
+          "REVISAO_CLINICA_DO_DELTA",
+          "VERIFICAR_ACESSO_BRASILEIRO_POR_INDICACAO"
+        ]
+      }
+    ],
+    "cenarios": {
+      "identidade_ref": "/identidade/cenarios",
+      "detalhamento_ref": "/tratamento/cenarios",
+      "novas_condicoes_refs": [
+        "nccn-20261017-chc-durvalumabe",
+        "nccn-20261017-chc-tislelizumabe",
+        "nccn-20261017-chc-pembrolizumabe",
+        "nccn-20261017-chc-sequencia-ici"
+      ],
+      "regra": "Não igualar automaticamente as duas listas nem selecionar cenário individual nesta camada."
+    },
+    "fontes": [
+      {
+        "id": "nccn-f086f3a37f58",
+        "arquivo_local": "C:\\Users\\silas\\.aside\\u\\0\\sessions\\2026-10-17_LutNNwUyDZGlA1pF\\artifacts\\nccn\\Hepatocellular Carcinoma.pdf",
+        "nome": "Hepatocellular Carcinoma",
+        "sha256": "7167781b2207d1baf199f005027acb5a0717e7fdab0c41dae5271f9c352a1caa",
+        "numero_paginas": 117,
+        "versao_declarada": "2.2026",
+        "origem": "ARQUIVO_LOCAL_FORNECIDO",
+        "autenticidade_externa": "NAO_VERIFICADA_NO_PORTAL",
+        "paginas_examinadas": [
+          27
+        ]
+      }
+    ],
+    "fontes_legadas_refs": [
+      "/header/fonte",
+      "/curadoria/fontesLidas"
+    ],
+    "ensaios": {
+      "legado_ref": "/tratamento/ensaios",
+      "novos_nct": [],
+      "nota": "Nenhum identificador NCT foi inventado ou verificado nesta rodada."
+    },
+    "relacoes": [
+      {
+        "relacao_id": "relacao-nccn-20261017-chc-durvalumabe",
+        "tipo": "CONDICOES_PARA_APRESENTACAO_DOCUMENTAL",
+        "destino_item_ref": "nccn-20261017-chc-durvalumabe",
+        "criterios_extraidos": [
+          "CHC candidato a terapia sistêmica",
+          "Primeira linha; uso subsequente depende de exposição anterior",
+          "Função hepática e hipertensão portal avaliadas",
+          "Dados limitados em CTP B/C; cautela extrema se bilirrubina elevada"
+        ],
+        "origem_condicoes": "FONTE_NCCN_CITADA",
+        "origem_mapeamento": "PROPOSTA_DE_MAPEAMENTO",
+        "executavel": false,
+        "estado": "A_CONFERIR",
+        "dados_ausentes": "MANTER_INDETERMINADO",
+        "dados_conflitantes": "MANTER_CONFLITO",
+        "efeito": "APRESENTAR_CONTEUDO_PARA_REVISAO; NAO PRESCREVER",
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+            "criterios_extraidos": [
+              "CHC",
+              "Conferir função hepática e contraindicações",
+              "Não presumir benefício de repetição após exposição a ICI"
+            ]
+          }
+        ],
+        "fontes_por_campo": {
+          "criterios_extraidos": [
+            {
+              "fonte_id": "nccn-f086f3a37f58",
+              "edicao": "2.2026",
+              "pagina_pdf": 27,
+              "paginas_pdf": [
+                27
+              ],
+              "secao": "HCC-I 1/2, Other Recommended",
+              "trecho": "Durvalumab (category 1)",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "7167781b2207d1baf199f005027acb5a0717e7fdab0c41dae5271f9c352a1caa"
+            },
+            {
+              "fonte_id": "nccn-f086f3a37f58",
+              "edicao": "2.2026",
+              "pagina_pdf": 27,
+              "paginas_pdf": [
+                27
+              ],
+              "secao": "HCC-I 1/2, notas c/d/h",
+              "trecho": "limited safety data available for CTP Class B or C",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "7167781b2207d1baf199f005027acb5a0717e7fdab0c41dae5271f9c352a1caa"
+            }
+          ]
+        }
+      },
+      {
+        "relacao_id": "relacao-nccn-20261017-chc-tislelizumabe",
+        "tipo": "CONDICOES_PARA_APRESENTACAO_DOCUMENTAL",
+        "destino_item_ref": "nccn-20261017-chc-tislelizumabe",
+        "criterios_extraidos": [
+          "CHC candidato a terapia sistêmica",
+          "Primeira linha; uso subsequente depende de exposição anterior",
+          "Função hepática e hipertensão portal avaliadas",
+          "Dados limitados em CTP B/C; cautela extrema se bilirrubina elevada"
+        ],
+        "origem_condicoes": "FONTE_NCCN_CITADA",
+        "origem_mapeamento": "PROPOSTA_DE_MAPEAMENTO",
+        "executavel": false,
+        "estado": "A_CONFERIR",
+        "dados_ausentes": "MANTER_INDETERMINADO",
+        "dados_conflitantes": "MANTER_CONFLITO",
+        "efeito": "APRESENTAR_CONTEUDO_PARA_REVISAO; NAO PRESCREVER",
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+            "criterios_extraidos": [
+              "CHC",
+              "Conferir função hepática e contraindicações",
+              "Não presumir benefício de repetição após exposição a ICI"
+            ]
+          }
+        ],
+        "fontes_por_campo": {
+          "criterios_extraidos": [
+            {
+              "fonte_id": "nccn-f086f3a37f58",
+              "edicao": "2.2026",
+              "pagina_pdf": 27,
+              "paginas_pdf": [
+                27
+              ],
+              "secao": "HCC-I 1/2, Other Recommended",
+              "trecho": "Tislelizumab-jsgr (category 1)",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "7167781b2207d1baf199f005027acb5a0717e7fdab0c41dae5271f9c352a1caa"
+            },
+            {
+              "fonte_id": "nccn-f086f3a37f58",
+              "edicao": "2.2026",
+              "pagina_pdf": 27,
+              "paginas_pdf": [
+                27
+              ],
+              "secao": "HCC-I 1/2, notas c/d/h",
+              "trecho": "limited safety data available for CTP Class B or C",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "7167781b2207d1baf199f005027acb5a0717e7fdab0c41dae5271f9c352a1caa"
+            }
+          ]
+        }
+      },
+      {
+        "relacao_id": "relacao-nccn-20261017-chc-pembrolizumabe",
+        "tipo": "CONDICOES_PARA_APRESENTACAO_DOCUMENTAL",
+        "destino_item_ref": "nccn-20261017-chc-pembrolizumabe",
+        "criterios_extraidos": [
+          "CHC candidato a terapia sistêmica",
+          "Primeira linha; uso subsequente depende de exposição anterior",
+          "Função hepática e hipertensão portal avaliadas",
+          "Dados limitados em CTP B/C; cautela extrema se bilirrubina elevada"
+        ],
+        "origem_condicoes": "FONTE_NCCN_CITADA",
+        "origem_mapeamento": "PROPOSTA_DE_MAPEAMENTO",
+        "executavel": false,
+        "estado": "A_CONFERIR",
+        "dados_ausentes": "MANTER_INDETERMINADO",
+        "dados_conflitantes": "MANTER_CONFLITO",
+        "efeito": "APRESENTAR_CONTEUDO_PARA_REVISAO; NAO PRESCREVER",
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+            "criterios_extraidos": [
+              "CHC",
+              "Conferir função hepática e contraindicações",
+              "Não presumir benefício de repetição após exposição a ICI"
+            ]
+          }
+        ],
+        "fontes_por_campo": {
+          "criterios_extraidos": [
+            {
+              "fonte_id": "nccn-f086f3a37f58",
+              "edicao": "2.2026",
+              "pagina_pdf": 27,
+              "paginas_pdf": [
+                27
+              ],
+              "secao": "HCC-I 1/2, Other Recommended",
+              "trecho": "Pembrolizumab (category 2B)",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "7167781b2207d1baf199f005027acb5a0717e7fdab0c41dae5271f9c352a1caa"
+            },
+            {
+              "fonte_id": "nccn-f086f3a37f58",
+              "edicao": "2.2026",
+              "pagina_pdf": 27,
+              "paginas_pdf": [
+                27
+              ],
+              "secao": "HCC-I 1/2, notas c/d/h",
+              "trecho": "limited safety data available for CTP Class B or C",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "7167781b2207d1baf199f005027acb5a0717e7fdab0c41dae5271f9c352a1caa"
+            },
+            {
+              "fonte_id": "nccn-f086f3a37f58",
+              "edicao": "2.2026",
+              "pagina_pdf": 27,
+              "paginas_pdf": [
+                27
+              ],
+              "secao": "HCC-I 1/2, nota l",
+              "trecho": "regardless of microsatellite instability",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "7167781b2207d1baf199f005027acb5a0717e7fdab0c41dae5271f9c352a1caa"
+            }
+          ]
+        }
+      },
+      {
+        "relacao_id": "relacao-nccn-20261017-chc-sequencia-ici",
+        "tipo": "CONDICOES_PARA_APRESENTACAO_DOCUMENTAL",
+        "destino_item_ref": "nccn-20261017-chc-sequencia-ici",
+        "criterios_extraidos": [
+          "Sequenciamento do tratamento sistêmico"
+        ],
+        "origem_condicoes": "FONTE_NCCN_CITADA",
+        "origem_mapeamento": "PROPOSTA_DE_MAPEAMENTO",
+        "executavel": false,
+        "estado": "A_CONFERIR",
+        "dados_ausentes": "MANTER_INDETERMINADO",
+        "dados_conflitantes": "MANTER_CONFLITO",
+        "efeito": "APRESENTAR_CONTEUDO_PARA_REVISAO; NAO PRESCREVER"
+      }
+    ],
+    "conflitos": [],
+    "conflitos_legados_ref": "/conflitos",
+    "pendencias": [
+      {
+        "id": "revisao-clinica",
+        "estado": "ABERTA",
+        "descricao": "Conferir cada acréscimo, condições, fontes, doses, interações e suporte antes de uso clínico."
+      },
+      {
+        "id": "acesso-brasileiro",
+        "estado": "ABERTA",
+        "descricao": "NCCN não comprova Anvisa, Conitec, PCDT/DDT, SIGTAP/APAC, cobertura privada ou acesso institucional."
+      },
+      {
+        "id": "cobertura-nccn",
+        "estado": "PARCIAL_POR_DELTA",
+        "descricao": "Leitura dirigida das páginas citadas; não há alegação de extração integral da diretriz."
+      }
+    ],
+    "pendencias_legadas_ref": "/pendencias",
+    "itens_adicionais_a_classificar": [
+      {
+        "origem_ref": "/header",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/status",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/consultavel",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/alerta",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/substitui",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/identidade",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/pendencias",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/conflitos",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/curadoria",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/correcoes",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      }
+    ],
+    "mapa_de_cobertura": [
+      {
+        "origem_json_pointer": "/header",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "4b27953d07e16e247a6854879f57eeb1808557a8db710104d36ef3c471c2e9ae",
+        "valores_folha": 9
+      },
+      {
+        "origem_json_pointer": "/status",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "04635ca3844c66b19ebbf49bf9ff60fe851d6ce89597d23e6a970f1dc3927289",
+        "valores_folha": 1
+      },
+      {
+        "origem_json_pointer": "/consultavel",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b",
+        "valores_folha": 1
+      },
+      {
+        "origem_json_pointer": "/alerta",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "valores_folha": 1
+      },
+      {
+        "origem_json_pointer": "/substitui",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "valores_folha": 1
+      },
+      {
+        "origem_json_pointer": "/identidade",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "b10e765c5b7626d723820cac52ac209cdbd1f7065e593603b30c00e54b434cd8",
+        "valores_folha": 15
+      },
+      {
+        "origem_json_pointer": "/diagnostico",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "a41e7498f79c92aa1b0cda552350d45ab5387487407b22fa9813bfa59f955698",
+        "valores_folha": 69
+      },
+      {
+        "origem_json_pointer": "/estadiamento",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "a02e5b22a23039371aaabfa0c52cbbd1c8d08ee11b35760ef50f0bdc11e22890",
+        "valores_folha": 208
+      },
+      {
+        "origem_json_pointer": "/tratamento",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "bd30fa363a0bbe0e3b016149c286cb6cdb63595b576b1c51cad4a2385708c6bc",
+        "valores_folha": 656
+      },
+      {
+        "origem_json_pointer": "/ligacoes",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "bb112670ba48ee926c8603a2313073797ceb6739d8eb8ed091bdfa9b3759078f",
+        "valores_folha": 89
+      },
+      {
+        "origem_json_pointer": "/pendencias",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "c30dbf78df3dec03087744721648f2c7b755ab5cb5b2130273b6d7d486163cdb",
+        "valores_folha": 28
+      },
+      {
+        "origem_json_pointer": "/conflitos",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "392f09e5c8437df1b0a0399775ae5b7b50dd5e731ad4d468d589155ddb6988ed",
+        "valores_folha": 19
+      },
+      {
+        "origem_json_pointer": "/curadoria",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "e09c6d3234d79d12ccee5b93c1851640beb3420d8b4ef956eda1e753c54f5e80",
+        "valores_folha": 13
+      },
+      {
+        "origem_json_pointer": "/correcoes",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "6e10dd4e24d23f3026e55551d61995af9480768c95aaa3700b68cf02d892f0e3",
+        "valores_folha": 4
+      }
+    ],
+    "reconciliacao_com_versao_anterior": {
+      "modo": "ADITIVO",
+      "originais_removidos": 0,
+      "originais_alterados": 0,
+      "contagens_preservadas": {
+        "protocolos": 8,
+        "ensaios": 10,
+        "cenarios_identidade": 4,
+        "cenarios_tratamento": 4,
+        "seguimento": 3,
+        "conflitos": 1,
+        "pendencias": 6
+      }
+    },
+    "relatorio_de_completude": {
+      "estado": "INCOMPLETA_PARA_DIRETRIZ_INTEGRAL",
+      "preservacao_legado": "INTEGRAL",
+      "delta_itens": 4,
+      "normalizacao_legado": "INDEXACAO_POR_REFERENCIA; NAO REEXTRACAO CLINICA",
+      "posologias": "SOMENTE AS EXPLICITAMENTE EXTRAIDAS; RESTANTES PENDENTES",
+      "sem_fato_paciente": true,
+      "sem_aprovacao_inferida": true
+    },
+    "auditoria_33_pendentes": [
+      {
+        "item_id": "nccn-20261017-chc-durvalumabe",
+        "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+        "resultado": "CORRIGIDO_ESCOPO_OU_COMPLETUDE",
+        "fundamento": "Faltava a preferência Other Recommended e o alcance da ressalva de função hepática/ICI prévio; trecho antigo terminava em outras opções.",
+        "fontes": [
+          {
+            "fonte_id": "nccn-f086f3a37f58",
+            "edicao": "2.2026",
+            "pagina_pdf": 27,
+            "paginas_pdf": [
+              27
+            ],
+            "secao": "HCC-I 1/2, Other Recommended",
+            "trecho": "Durvalumab (category 1)",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "7167781b2207d1baf199f005027acb5a0717e7fdab0c41dae5271f9c352a1caa"
+          },
+          {
+            "fonte_id": "nccn-f086f3a37f58",
+            "edicao": "2.2026",
+            "pagina_pdf": 27,
+            "paginas_pdf": [
+              27
+            ],
+            "secao": "HCC-I 1/2, notas c/d/h",
+            "trecho": "limited safety data available for CTP Class B or C",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "7167781b2207d1baf199f005027acb5a0717e7fdab0c41dae5271f9c352a1caa"
+          }
+        ],
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "limite": "Conferência das afirmações deste item; não extração integral de posologia, diretriz ou acesso brasileiro.",
+        "sha256_item_antes": "185fd78f370a28de2d3b0532e8017c5613bdd126ca805e306fc1dfb535aaf0bc"
+      },
+      {
+        "item_id": "nccn-20261017-chc-tislelizumabe",
+        "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+        "resultado": "CORRIGIDO_ESCOPO_OU_COMPLETUDE",
+        "fundamento": "Faltava a preferência Other Recommended e o alcance da ressalva de função hepática/ICI prévio; trecho antigo terminava em outras opções.",
+        "fontes": [
+          {
+            "fonte_id": "nccn-f086f3a37f58",
+            "edicao": "2.2026",
+            "pagina_pdf": 27,
+            "paginas_pdf": [
+              27
+            ],
+            "secao": "HCC-I 1/2, Other Recommended",
+            "trecho": "Tislelizumab-jsgr (category 1)",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "7167781b2207d1baf199f005027acb5a0717e7fdab0c41dae5271f9c352a1caa"
+          },
+          {
+            "fonte_id": "nccn-f086f3a37f58",
+            "edicao": "2.2026",
+            "pagina_pdf": 27,
+            "paginas_pdf": [
+              27
+            ],
+            "secao": "HCC-I 1/2, notas c/d/h",
+            "trecho": "limited safety data available for CTP Class B or C",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "7167781b2207d1baf199f005027acb5a0717e7fdab0c41dae5271f9c352a1caa"
+          }
+        ],
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "limite": "Conferência das afirmações deste item; não extração integral de posologia, diretriz ou acesso brasileiro.",
+        "sha256_item_antes": "73ca733f3ee06b63c2306cc57b6c3f07776307378b22ee32840dc3235d5641db"
+      },
+      {
+        "item_id": "nccn-20261017-chc-pembrolizumabe",
+        "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+        "resultado": "CORRIGIDO_ESCOPO_OU_COMPLETUDE",
+        "fundamento": "Faltava a preferência Other Recommended e o alcance da ressalva de função hepática/ICI prévio; trecho antigo terminava em outras opções.",
+        "fontes": [
+          {
+            "fonte_id": "nccn-f086f3a37f58",
+            "edicao": "2.2026",
+            "pagina_pdf": 27,
+            "paginas_pdf": [
+              27
+            ],
+            "secao": "HCC-I 1/2, Other Recommended",
+            "trecho": "Pembrolizumab (category 2B)",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "7167781b2207d1baf199f005027acb5a0717e7fdab0c41dae5271f9c352a1caa"
+          },
+          {
+            "fonte_id": "nccn-f086f3a37f58",
+            "edicao": "2.2026",
+            "pagina_pdf": 27,
+            "paginas_pdf": [
+              27
+            ],
+            "secao": "HCC-I 1/2, notas c/d/h",
+            "trecho": "limited safety data available for CTP Class B or C",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "7167781b2207d1baf199f005027acb5a0717e7fdab0c41dae5271f9c352a1caa"
+          },
+          {
+            "fonte_id": "nccn-f086f3a37f58",
+            "edicao": "2.2026",
+            "pagina_pdf": 27,
+            "paginas_pdf": [
+              27
+            ],
+            "secao": "HCC-I 1/2, nota l",
+            "trecho": "regardless of microsatellite instability",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "7167781b2207d1baf199f005027acb5a0717e7fdab0c41dae5271f9c352a1caa"
+          }
+        ],
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "limite": "Conferência das afirmações deste item; não extração integral de posologia, diretriz ou acesso brasileiro.",
+        "sha256_item_antes": "e45e696fb645a70f0fbb803aaddf16dc25cb3cab8685a6a799b3dd3b13f25311"
+      },
+      {
+        "item_id": "nccn-20261017-chc-sequencia-ici",
+        "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+        "resultado": "CONFIRMADO_SEM_REESCRITA",
+        "fundamento": "As distinções entre ICI e combinações anti-CTLA4 prévios e a ressalva CheckMate-9DW estão presentes nas notas h/i/k/n; não é necessário reescrever o item.",
+        "fontes": [
+          {
+            "fonte_id": "nccn-f086f3a37f58",
+            "edicao": "2.2026",
+            "pagina_pdf": 27,
+            "paginas_pdf": [
+              27
+            ],
+            "secao": "HCC-I 1/2, notas h/i/k/n",
+            "trecho": "increased incidence of early death",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "7167781b2207d1baf199f005027acb5a0717e7fdab0c41dae5271f9c352a1caa"
+          },
+          {
+            "fonte_id": "nccn-f086f3a37f58",
+            "edicao": "2.2026",
+            "pagina_pdf": 27,
+            "paginas_pdf": [
+              27
+            ],
+            "secao": "HCC-I 1/2, nota n",
+            "trecho": "There are no comparative data",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "7167781b2207d1baf199f005027acb5a0717e7fdab0c41dae5271f9c352a1caa"
+          }
+        ],
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "limite": "Conferência das afirmações deste item; não extração integral de posologia, diretriz ou acesso brasileiro.",
+        "sha256_item_antes": "9d52938c29c79f4913b3bacb39990b8b47bba7a1706b9297183045bb3bc8badb"
+      }
+    ],
+    "revisoes_auditoria": [
+      {
+        "revisao": "2026-10-17-nccn-delta-3-auditoria33",
+        "escopo": "APENAS_33_ITENS_PENDENTES",
+        "legado_modificado": false,
+        "aprovacao_clinica": null,
+        "limites": "Sem leitura integral da pasta, sem completar doses, sem checagem de acesso ou autenticidade externa.",
+        "itens_ref": "/tumor_pack_universal/auditoria_33_pendentes",
+        "sha256_itens": "6002c4ddc340fe8958452723d5f64f5c498e749af866ab781d945dda9273185d"
+      }
+    ],
+    "fechamento_documental": [
+      {
+        "revisao": "2026-10-17-nccn-final-documental",
+        "estado": "CORRECOES_DOCUMENTAIS_APLICADAS",
+        "ajustes_textuais": 0,
+        "deduplicacoes_por_referencia": [
+          "auditoria_33_pendentes"
+        ],
+        "aprovacao_clinica": null,
+        "legado_alterado": false
+      }
+    ]
+  }
 }

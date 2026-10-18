@@ -1,4 +1,4 @@
-import type { SituacaoExame, ExameRecenteFlash, ItemFlash, EstadoApacFlash, ApacFlash, RetornoFlash, TarefasRetornoFlash, ConsultaFlashProps, PlanoFlash,ReceitaManualFlash } from '../../contracts/api/flash.js';
+import type { SituacaoExame, ExameRecenteFlash, ItemFlash, EstadoApacFlash, ApacFlash, RetornoFlash, TarefasRetornoFlash, ConsultaFlashProps, PlanoFlash,ReceitaManualFlash,DocumentoManualFlash } from '../../contracts/api/flash.js';
 export type { SituacaoExame, ExameRecenteFlash, ItemFlash, EstadoApacFlash, ApacFlash, RetornoFlash, TarefasRetornoFlash, ConsultaFlashProps, PlanoFlash } from '../../contracts/api/flash.js';
 import { useState } from "react";
 import { marcadoInicialmente } from "./Bundle.js";
@@ -35,6 +35,8 @@ const camposReceita = [["medicamento", "Medicamento"], ["dose", "Dose"], ["orien
 
 export function ConsultaFlash(props: ConsultaFlashProps) {
   const { cabecalho: c, planoInicial: inicial } = props;
+  const [documentos,setDocumentos]=useState<DocumentoManualFlash[]>(()=>structuredClone([...(inicial?.documentosManuais??[])]));
+  const documentoInvalido=documentos.some(d=>!d.titulo.trim()||!d.texto.trim()||d.tipo==='ENCAMINHAMENTO'&&!d.destino?.trim());
   const selecaoInicial = inicial ? inicial.solicitacoes : props.modeloSolicitacoes;
   const [labs, setLabs] = useState<string[]>(() => selecaoInicial?.laboratorio.filter(x => LAB.includes(x)) ?? []);
   const [rad, setRad] = useState<string[]>(() => selecaoInicial?.imagem.filter(x => RAD.includes(x)) ?? []);
@@ -57,6 +59,8 @@ export function ConsultaFlash(props: ConsultaFlashProps) {
     const imagem = [...new Set([...rad, ...limparOutros(outrosRad)])];
     const preenchidas = receitas.filter(r => r.conteudo.medicamento.trim());
     return { acoesMarcadas: [], receitasMarcadas: preenchidas.filter(r => r.incluir).map(r => r.conteudo.id),
+      ...(documentos.length?{documentosManuais:documentos}:{}),
+      ...(inicial?.propostasInvestigacao?{propostasInvestigacao:inicial.propostasInvestigacao.filter(p=>[...laboratorio,...imagem].includes(p.exameCodigo))}:{}),
       ...(preenchidas.length ? { receitas: preenchidas.map(r => ({ ...r.conteudo, medicamento: r.conteudo.medicamento.trim() })) } : {}),
       apac: { ...props.apac, emitir: false },
       retorno: { ...props.retorno, dias: invalido ? null : dias, examesAntesDoRetorno: [...laboratorio, ...imagem] },
@@ -113,9 +117,27 @@ export function ConsultaFlash(props: ConsultaFlashProps) {
         <button type="button" onClick={() => setReceitas(atuais => [...atuais, novaReceita()])}>Adicionar medicamento</button>
         <small>Campos vazios continuam não informados. Dose, via e quantidade não são completadas automaticamente.</small>
       </fieldset>
+      <details><summary>Encaminhamentos, laudos e orientações</summary>
+        <fieldset disabled={props.ocupado}><legend>Documentos médicos</legend>
+          {documentos.map((d,i)=><section key={d.id} aria-label={`Documento médico ${i+1}`}>
+            <label>Título <input aria-label={`Título do documento ${i+1}`} value={d.titulo} maxLength={200}
+              onChange={e=>setDocumentos(atuais=>atuais.map(a=>a.id===d.id?{...a,titulo:e.target.value}:a))}/></label>
+            {d.tipo==='ENCAMINHAMENTO'?<label>Destino <input aria-label={`Destino do encaminhamento ${i+1}`} placeholder="Especialidade ou serviço" value={d.destino??''} maxLength={200}
+              onChange={e=>setDocumentos(atuais=>atuais.map(a=>a.id===d.id?{...a,destino:e.target.value}:a))}/></label>:null}
+            <label>Conteúdo escrito pelo médico <textarea aria-label={`Conteúdo do documento ${i+1}`} value={d.texto} maxLength={8000}
+              onChange={e=>setDocumentos(atuais=>atuais.map(a=>a.id===d.id?{...a,texto:e.target.value}:a))}/></label>
+            <button type="button" onClick={()=>setDocumentos(atuais=>atuais.filter(a=>a.id!==d.id))}>Remover documento {i+1}</button>
+          </section>)}
+          {(['ENCAMINHAMENTO','LAUDO','ORIENTACOES'] as const).map(tipo=><button type="button" key={tipo} disabled={documentos.length>=10}
+            onClick={()=>setDocumentos(atuais=>[...atuais,{id:`doc-${crypto.randomUUID()}`,tipo,titulo:tipo==='ENCAMINHAMENTO'?'Encaminhamento':tipo==='LAUDO'?'Laudo clínico':'Orientações',destino:null,texto:''}])}>
+            {tipo==='ENCAMINHAMENTO'?'Adicionar encaminhamento':tipo==='LAUDO'?'Adicionar laudo':'Adicionar orientações'}</button>)}
+          <p>O resumo clínico confirmado será incorporado à prévia. Conteúdo e destino dependem da decisão médica.</p>
+        </fieldset>
+      </details>
     </div>
-    <footer className="flash-rodape"><label>Retorno em <input type="number" aria-label="Prazo do retorno em dias" min={1} max={3650} value={prazo} disabled={props.ocupado} aria-invalid={invalido} onChange={e => setPrazo(e.target.value)} /> dias</label><div><button type="button" disabled={props.ocupado || invalido} onClick={() => props.aoSalvarRascunho(plano())}>SALVAR RASCUNHO</button><button type="button" disabled={props.ocupado || invalido} onClick={() => props.aoFinalizar(plano())}>{props.rotuloFinalizar ?? "REVISAR · IMPRIMIR"}</button></div></footer>
+    <footer className="flash-rodape"><label>Retorno em <input type="number" aria-label="Prazo do retorno em dias" min={1} max={3650} value={prazo} disabled={props.ocupado} aria-invalid={invalido} onChange={e => setPrazo(e.target.value)} /> dias</label><div><button type="button" disabled={props.ocupado || invalido} onClick={() => props.aoSalvarRascunho(plano())}>SALVAR RASCUNHO</button><button type="button" disabled={props.ocupado || invalido || documentoInvalido} onClick={() => props.aoFinalizar(plano())}>{props.rotuloFinalizar ?? "REVISAR · IMPRIMIR"}</button></div></footer>
     {prazoInvalido && <p role="alert">Informe um número inteiro entre 1 e 3650 dias, ou deixe vazio para PENDENTE.</p>}
     {receitaInvalida && <p role="alert">Informe o medicamento ou remova a linha para continuar. Os outros campos serão preservados.</p>}
+    {documentoInvalido&&<p role="status">Documento incompleto: pode salvar o rascunho; complete título, conteúdo e destino antes da revisão para assinatura.</p>}
   </section>;
 }

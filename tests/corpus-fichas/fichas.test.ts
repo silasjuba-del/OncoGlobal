@@ -338,7 +338,7 @@ describe("F1-B2 — fichas institucionais novas (D-F1-49)", () => {
     for (const a of manifest.fichasAlteradas) {
       const achada = parseadas.find((p) => p.ficha.templateId === a.templateId);
       expect(achada, a.caminho).toBeDefined();
-      expect(achada!.ficha.fonte).toContain(a.caminho.includes("/esofago/") ? "EXT-LEG-013" : "EXT-LEG-008");
+      for (const fonte of a.fontesAcrescentadas) expect(achada!.ficha.fonte).toContain(fonte);
     }
   });
 
@@ -390,7 +390,8 @@ describe("F1-B2 — fichas institucionais novas (D-F1-49)", () => {
     expect(ie.itens.find((i) => /etopos/i.test(i.drug))!.standardDose).toBe(100);
     expect(ie.itens.find((i) => /^ifosfamida/i.test(i.drug))!.standardDose).toBe(1800);
     expect(ie.itens.find((i) => /pegfilgrastim/i.test(i.drug))!.days).toEqual(["d6"]);
-    expect(vdc.intervaloDias).toBe(14);
+    // eviQ 3464: 14 dias entre braços alternados, 28 dias entre repetições do mesmo braço.
+    expect(vdc.intervaloDias).toBe(28);
   });
 
   it("Osteossarcoma MAP: cisplatina 60 D1–D2 em 2 h (SBOC=eviQ), MTX 12 g D22/D29 com resgate; C5–6 sem cisplatina", () => {

@@ -16,22 +16,22 @@ export interface ResultadoCompletudeKit {
   obrigatorios: readonly string[];
   presentes: readonly string[];
   ausentes: readonly string[];
-  score: number;
+  score: number | null;
   kitIncompleto: boolean;
   bloqueiaApac: boolean;
-  limiar: number;
+  limiar: number | null;
 }
 
 /** IDs ativos do baseline (labs + imagem) do pack. */
 export function idsObrigatoriosKit(pack: PackKitLike): string[] {
   const labs = (pack.labsBaseline ?? []).filter((i) => i.ativo === true).map((i) => i.id);
   const imgs = (pack.imagem?.baseline ?? []).filter((i) => i.ativo === true).map((i) => i.id);
-  return [...labs, ...imgs];
+  return [...new Set([...labs, ...imgs].filter(id=>id.trim()))];
 }
 
 /**
  * Completude do kit do lote. Ausente = PENDENTE (não vira zero clínico).
- * score = presentes / obrigatórios; NaN se não há obrigatório ativo.
+ * score = presentes / obrigatórios; null se não há obrigatório ativo.
  */
 export function completudeKitTumorLot(
   pack: PackKitLike,
@@ -41,9 +41,10 @@ export function completudeKitTumorLot(
   const docs = documentados instanceof Set ? documentados : new Set(documentados);
   const presentes = obrigatorios.filter((id) => docs.has(id));
   const ausentes = obrigatorios.filter((id) => !docs.has(id));
-  const limiar = pack.completudeKit?.limiarIncompleto ?? 0.6;
-  const score = obrigatorios.length === 0 ? 1 : presentes.length / obrigatorios.length;
-  const kitIncompleto = obrigatorios.length > 0 && score < limiar;
+  const informado = pack.completudeKit?.limiarIncompleto ?? 0.6;
+  const limiar = Number.isFinite(informado)&&informado>=0&&informado<=1?informado:null;
+  const score = obrigatorios.length === 0 ? null : presentes.length / obrigatorios.length;
+  const kitIncompleto = score === null || limiar === null || score < limiar;
   const bloqueiaApac = kitIncompleto && pack.completudeKit?.bloqueiaApacSeIncompleto === true;
   return { obrigatorios, presentes, ausentes, score, kitIncompleto, bloqueiaApac, limiar };
 }

@@ -1,4 +1,8 @@
 import { z } from "zod";
+import {DitadoResposta} from '../fase2/ditado.js';
+import { RevisaoClinicaResposta } from '../fase2/revisaoClinica.js';
+import { LotesPacienteResposta } from './lotes.js';
+import { EstadoDoencaPreparado } from '../fase2/estadoDoenca.js';
 import { Id, Instante } from "../base.js";
 import { ClinicalFact, ReviewException } from "../w10/extracao.js";
 import { ResultadoInstrumentoSchema } from "../f0c/resultadoInstrumento.js";
@@ -23,11 +27,15 @@ const Extracao = z.object({ draftId: Id, revision: Count, linkedPatientId: Id.nu
 
 /** Mesmos contratos no servidor e no cliente. Valida sem descartar campos adicionais da resposta legada. */
 export const SaidasHttp: Readonly<Record<string, z.ZodType>> = {
+  ditado:DitadoResposta,
+  lotesPaciente:LotesPacienteResposta,
   login: z.object({ token: z.string().min(1), expiraEm: Instante }),
   carregarConsulta: ConsultaResposta, agenda: AgendaResposta, apac: ApacResposta, canal: CanalResposta,
   salao: SalaoResposta, salvarTriagemSalao: SalaoResposta, liberarSalao: SalaoResposta,
   vincularCanal: CanalResposta, chat: ChatResposta, bundle: BundleResposta, confirmar: ConfirmacaoResposta,
   acao: AcaoResposta, investigacao: InvestigacaoConsultaVisao,
+  revisaoClinica: RevisaoClinicaResposta,
+  prepararEstadoDoenca: EstadoDoencaPreparado,confirmarEstadoDoenca:Gravacao,
   avaliarInstrumento: z.object({ resultado: ResultadoInstrumentoSchema, gravado: z.literal(false), assinado: z.literal(false) }),
   oncoassistStatus: EstadoOncoassist, oncoassistFontes: FontesOncoassist, oncoassistClassificar: RespostaOncoassist,
   sinteseRetratoLlm: SintesePropostaResposta, reconciliarRascunhos: ReconciliacaoProposta, prepararRevisao: RevisaoPreparada,
@@ -38,7 +46,8 @@ export const SaidasHttp: Readonly<Record<string, z.ZodType>> = {
   rascunhoPrescricao: z.object({ draftId: Id, seguranca: z.object({ resultado: z.literal("NOT_EVALUABLE"),
     motivos: z.array(z.object({ codigo: Id, texto: Id, fonte: Id })) }), assina: z.literal(false), exporta: z.literal(false) }),
   extracaoLlm: PropostaLlm, documentoOriginalLlm: PropostaLlm,
-  extrair: Extracao,
+  extrair: z.union([Extracao, z.object({codigo:z.literal("REPLAY"),draftId:Id,revision:Count,
+    linkedPatientId:z.null(),requiresMedicalReview:z.literal(true)})]),
   upload: z.union([Extracao.extend({ codigo: z.literal("RASCUNHO_SALVO"), conversionStatus: z.enum(["PRONTO", "PENDENTE"]) }),
     z.object({ codigo: z.literal("REPLAY"), draftId: Id, revision: Count, linkedPatientId: Id.nullable(), requiresMedicalReview: z.literal(true) })]),
   rascunho: z.object({ draft: z.object({ draftId: Id, patientId: Id.nullable(), sourceId: Id, rawRef: Id,

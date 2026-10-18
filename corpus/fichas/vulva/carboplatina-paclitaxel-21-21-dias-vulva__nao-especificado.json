@@ -4,10 +4,10 @@
   "nome": "Carboplatina + Paclitaxel 21/21 dias (vulva)",
   "cenario": "não especificado",
   "versao": "1.0.0",
-  "hash": "1c6a174f264ff1d41c4411bd9a7acb01482a7905671a77e1ff3a19c97435d39c",
+  "hash": "b9310fbcaddd9bd715d03cc8ec0198f836106324b18d4b7521c950421e92f773",
   "codigoInstitucional": null,
   "intervaloDias": 21,
-  "ciclos": null,
+  "ciclos": 6,
   "itens": [
     {
       "drug": "Soro fisiológico 0,9% 250 mL (lavagem de acesso)",

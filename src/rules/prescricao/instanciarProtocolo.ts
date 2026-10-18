@@ -36,7 +36,8 @@ export interface ItemInstanciado {
   aviso: string | null;
   /** unidade da dose padrão no template (ex.: "mg/m²"); item.unit passa a ser a unidade calculada ("mg") */
   unidadePadrao: string;
-  /** prescribedDose do mesmo item no ciclo anterior (base para os botões −20/−30/−40); null se não houve */
+  /** Nome legado da base anterior. No HTTP, K-06 usa quantidade efetivamente administrada,
+   * com proveniência no draft; não usa a dose apenas planejada. null quando a base não é comprovada. */
   doseAnteriorPrescrita: number | null;
   medidoEm: string | null;
 }
@@ -62,6 +63,7 @@ const valido = (n: number | null): n is number => n !== null && Number.isFinite(
 
 function calcular(item: PrescriptionItem, d: DadosCorporais): { dose: number | null; unidade: string; motivo: string | null; aviso?: string | null } {
   const std = item.standardDose;
+  if (item.sequenciamentoPendente) return { dose: null, unidade: item.unit, motivo: item.sequenciamentoPendente };
   if (item.resgateMtx) return { dose: null, unidade: item.unit,
     motivo: "Resgate MTX contínuo q6h: exige níveis, horário de início e plano individual de doses/vias; não gerar curso finito automaticamente" };
   switch (item.doseBasis) {
@@ -73,6 +75,8 @@ function calcular(item: PrescriptionItem, d: DadosCorporais): { dose: number | n
       if (!valido(d.pesoKg)) return { dose: null, unidade: "mg", motivo: "mg/kg sem peso" };
       return { dose: arredondaMeioParaCima(std * d.pesoKg), unidade: "mg", motivo: null };
     case "MCG_KG":
+      if (!/^(?:µg|μg|mcg|ug)(?:\/kg)?$/i.test(item.unit.trim()))
+        return { dose: null, unidade: item.unit, motivo: "unidade incompatível com base MCG_KG; conferir microgramas por kg" };
       if (std === null || !valido(d.pesoKg)) return { dose: null, unidade: "µg", motivo: "µg/kg sem dose padrão ou peso" };
       return { dose: arredondaMeioParaCima(std * d.pesoKg), unidade: "µg", motivo: null };
     case "MG_M2":

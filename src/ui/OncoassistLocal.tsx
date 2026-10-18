@@ -1,8 +1,11 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type FormEvent } from "react";
 import { z } from "zod";
+import { TumorLot } from '../contracts/clinico.js';
 import { criarPortaHttp, type OpcoesHttp } from "./api/http.js";
 import { criarChaves } from "./api/chaves.js";
 import type { PedidoBundle, PortaConsulta } from "./api/porta.js";
+import {ErroPorta} from './api/porta.js';
+import {LotesPacienteResposta} from '../contracts/api/lotes.js';
 import { PainelOncoassist } from "./consulta/PainelOncoassist.js";
 import { ReconciliarMedicamentos } from "./consulta/ReconciliarMedicamentos.js";
 import { SinteseProposta } from "./consulta/SinteseProposta.js";
@@ -14,11 +17,15 @@ import { TelaApacLote } from "./telas/apac/TelaApacLote.js";
 import { Configuracoes } from "./oncochart/Configuracoes.js";
 import { BibliotecaLocal } from "./biblioteca/BibliotecaLocal.js";
 import { UploadDocumentoLocal } from "./consulta/UploadDocumentoLocal.js";
+import { TranscricaoLocal } from "./consulta/TranscricaoLocal.js";
+import { RevisaoClinica } from './consulta/RevisaoClinica.js';
+import { contarClique, etapaDoClique, metricasVazias } from './consulta/metricasConsulta.js';
 // @ts-expect-error folha CSS pura, resolvida pelo Vite
 import "./consulta/consulta-local.css";
 
 const agendaSchema = z.object({ itens: z.array(z.object({ patientId: z.string().min(1), encounterId: z.string().min(1), nome: z.string(), horario: z.string() })) });
-const consultaSchema = z.object({ patientId: z.string().min(1), encounterId: z.string().min(1), tumorLotId: z.string().nullable() });
+const consultaSchema = z.object({ patientId: z.string().min(1), encounterId: z.string().min(1), tumorLotId: z.string().nullable(),
+  cabecalho:z.object({lotes:z.array(TumorLot)}).passthrough().optional() });
 
 /** Explicit real-server view; never mounts the synthetic clinical chart. */
 export function OncoassistLocal({ fabricaPorta = criarPortaHttp }: {
@@ -30,9 +37,12 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp }: {
   const [agenda, setAgenda] = useState<z.infer<typeof agendaSchema>["itens"]>([]);
   const [selecionado, setSelecionado] = useState("");
   const [contexto, setContexto] = useState<PedidoBundle | null>(null);
+  const [lotes,setLotes]=useState<z.infer<typeof TumorLot>[]>([]);
   const [ocupado, setOcupado] = useState(false);
   const [versaoFontes,setVersaoFontes]=useState(0);
   const [versaoConsulta,setVersaoConsulta]=useState(0);
+  const [metricas,setMetricas]=useState(metricasVazias);
+  useEffect(()=>setMetricas(metricasVazias()),[contexto?.patientId,contexto?.encounterId,contexto?.tumorLotId]);
   const [mensagem, setMensagem] = useState("");
   const [tela, setTela] = useState<"consulta" | "salao" | "canal" | "apac" | "config" | "biblioteca">("consulta");
   const geracao = useRef(0);
@@ -44,7 +54,7 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp }: {
   const limpar = useCallback(() => {
     geracao.current++;
     setSenha(""); setAutenticado(false); setAgenda([]); setSelecionado(""); setTela("consulta");
-    setContexto(null); setOcupado(false); setVersaoConsulta(0); setSessao((s) => s + 1);
+    setContexto(null); setLotes([]); setOcupado(false); setVersaoConsulta(0); setSessao((s) => s + 1);
   }, []);
   const expirar = useCallback(() => { limpar(); setMensagem("Sessão expirada. Entre novamente."); }, [limpar]);
   const porta = useMemo(() => fabricaPorta({ onSessaoExpirada: expirar }), [fabricaPorta, expirar, sessao]);
@@ -73,7 +83,7 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp }: {
     const entrada = agenda.find(item => item.encounterId === encounterId);
     const patientId = entrada?.patientId ?? "";
     const atual = ++geracao.current;
-    setSelecionado(encounterId); setContexto(null); setMensagem("");
+    setSelecionado(encounterId); setContexto(null); setLotes([]); setMensagem("");
     if (!patientId) return;
     setOcupado(true);
     try {
@@ -81,12 +91,19 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp }: {
         const consulta = consultaSchema.safeParse(await porta.carregarConsulta(patientId, undefined, encounterId));
         if (atual !== geracao.current) return;
         if (consulta.success && consulta.data.patientId === patientId && consulta.data.encounterId === encounterId) {
-          setContexto(consulta.data); return;
+          setLotes((consulta.data.cabecalho?.lotes??[]).filter(l=>l.patientId===patientId));
+          setContexto({patientId:consulta.data.patientId,encounterId:consulta.data.encounterId,tumorLotId:consulta.data.tumorLotId}); return;
         }
       } catch { /* An active appointment can start a new encounter without prior clinical events. */ }
+      if(atual!==geracao.current)return;
       const agendaEntry = entrada;
       if (!agendaEntry?.encounterId || !porta.selecionarContexto) {
         setMensagem("Consulta local indisponível para este paciente."); return;
+      }
+      if(porta.lotesPaciente){
+        const resposta=await porta.lotesPaciente(patientId);if(atual!==geracao.current)return;
+        const lista=LotesPacienteResposta.parse(resposta);if(lista.patientId!==patientId)throw Error('LOTES_FORA_DO_PACIENTE');
+        setLotes(lista.lotes);
       }
       await porta.selecionarContexto({ patientId, encounterId: agendaEntry.encounterId, tumorLotId: null });
       if (atual !== geracao.current) return;
@@ -97,7 +114,36 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp }: {
     } finally { if (atual === geracao.current) setOcupado(false); }
   }
 
-  return <main aria-label="OncoAssist local" className="oncoassist-local">
+  async function selecionarLote(tumorLotId:string){
+    const entrada=agenda.find(e=>e.encounterId===selecionado);
+    if(ocupado||!entrada||tumorLotId&&!lotes.some(l=>l.tumorLotId===tumorLotId&&l.patientId===entrada.patientId))return;
+    const atual=++geracao.current;setContexto(null);setOcupado(true);setMensagem("");
+    try{
+      let carregada:unknown;
+      try{carregada=await porta.carregarConsulta(entrada.patientId,tumorLotId||null,entrada.encounterId);}
+      catch(erro){
+        if(atual!==geracao.current)return;
+        if(!(erro instanceof ErroPorta)||erro.codigo!=='CONSULTA_NAO_ENCONTRADA'||!porta.selecionarContexto)throw erro;
+        const novo={patientId:entrada.patientId,encounterId:entrada.encounterId,tumorLotId:tumorLotId||null};
+        await porta.selecionarContexto(novo);if(atual!==geracao.current)return;setContexto(novo);return;
+      }
+      const r=consultaSchema.safeParse(carregada);
+      if(atual!==geracao.current)return;
+      if(!r.success||r.data.patientId!==entrada.patientId||r.data.encounterId!==entrada.encounterId||r.data.tumorLotId!==(tumorLotId||null)){
+        setMensagem("Não foi possível confirmar o lote desta consulta.");return;
+      }
+      setLotes((r.data.cabecalho?.lotes??[]).filter(l=>l.patientId===entrada.patientId));
+      setContexto({patientId:r.data.patientId,encounterId:r.data.encounterId,tumorLotId:r.data.tumorLotId});
+    }catch{if(atual===geracao.current)setMensagem("Não foi possível abrir o lote. Selecione novamente.");}
+    finally{if(atual===geracao.current)setOcupado(false);}
+  }
+
+  return <main aria-label="OncoAssist local" className="oncoassist-local" onClickCapture={event=>{
+    // Deixa o evento do controle concluir antes de renderizar a telemetria local.
+    // Atualização síncrona no capture restaura checked antes do onChange no navegador.
+    const etapa=etapaDoClique(event.target),atual=geracao.current;
+    if(etapa)setTimeout(()=>{if(atual===geracao.current)setMetricas(atuais=>contarClique(atuais,etapa));},0);
+  }}>
     <header className="consulta-appbar"><div><h1>OncoAssist local</h1>
       <p>Documentos do servidor local. Sugestões aguardam revisão médica.</p></div>
       <a href="/">Voltar à demonstração</a></header>
@@ -115,6 +161,11 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp }: {
           {agenda.map((p) => <option key={p.encounterId} value={p.encounterId}>{p.horario} — {p.nome}</option>)}
         </select>
       </label>}
+      {lotes.length?<label>Lote tumoral <select aria-label="Lote tumoral" value={contexto?.tumorLotId??''} disabled={ocupado}
+        onChange={e=>void selecionarLote(e.target.value)}>
+        <option value="">Consulta sem lote selecionado</option>{lotes.map((l,i)=><option key={l.tumorLotId} value={l.tumorLotId}>
+          {`Lote ${i+1} · ${l.cid.valor??'CID não informado'} · ${l.topografia.valor??l.tumorLotId}`}</option>)}
+      </select></label>:null}
       <nav aria-label="Áreas clínicas">
         <button type="button" disabled={ocupado} onClick={() => setTela("consulta")}>Consulta</button>
         <button type="button" disabled={ocupado} onClick={() => setTela("salao")}>Salão</button>
@@ -133,13 +184,19 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp }: {
             {contexto.tumorLotId ? <> · Lote <b>{contexto.tumorLotId}</b></> : " · Lote tumoral não vinculado"}</p>
           <nav aria-label="Navegar nesta consulta" className="consulta-ancoras">
             <a href="#consulta-documentos">Documentos</a><a href="#consulta-revisao">Revisão da fonte</a>
+            <a href="#consulta-fase2">Ficha e packs</a>
             <a href="#consulta-medicamentos">Medicamentos</a><a href="#consulta-sintese">Síntese proposta</a>
             <a href="#consulta-resumo">Visão integrada</a><a href="#consulta-conduta">Conduta e assinatura</a>
             <a href="#consulta-historico">Histórico</a>
           </nav>
         </section>
+        <details><summary>Cliques por etapa nesta consulta</summary><ul>{Object.entries(metricas).map(([etapa,cliques])=><li key={etapa}>{etapa}: {cliques}</li>)}</ul></details>
+        <div id="consulta-fase2" className="consulta-secao" tabIndex={-1}>
+          <RevisaoClinica porta={porta} contexto={contexto} versaoClinica={versaoConsulta} aoRegistrar={()=>setVersaoConsulta(v=>v+1)}/>
+        </div>
         <div id="consulta-documentos" className="consulta-secao" tabIndex={-1}>
           <UploadDocumentoLocal porta={porta} contexto={contexto} aoSalvar={()=>setVersaoFontes(v=>v+1)}/>
+          <TranscricaoLocal porta={porta} contexto={contexto} aoSalvar={()=>setVersaoFontes(v=>v+1)}/>
         </div>
         <div id="consulta-revisao" className="consulta-secao" tabIndex={-1}>
         <RevisaoExtracaoLocal key={versaoFontes} porta={porta} contexto={contexto}

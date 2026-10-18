@@ -4,10 +4,10 @@
   "nome": "Cisplatina semanal + RxT (CEC de pele)",
   "cenario": "concomitante à RT",
   "versao": "1.0.0",
-  "hash": "da28e4a2eda46f000f209308c8d02aa399372769a234dc8c654a8e723a8714ce",
+  "hash": "a6982d6bfe3c5b335c21b3b93d0bb0b79fa5d29a61c0d37f59819e29b9fd0212",
   "codigoInstitucional": null,
   "intervaloDias": 7,
-  "ciclos": null,
+  "ciclos": 6,
   "itens": [
     {
       "drug": "Soro fisiológico 0,9% 250 mL (lavagem de acesso)",

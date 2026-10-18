@@ -177,7 +177,8 @@ export async function jornadaB2NoNavegador(page, opts) {
         const rasc = await post("/consulta/prescricao/rascunho", { patientId, encounterId, tumorLotId: null, templateId: f.templateId });
         const inst = rasc.json.instanciacao;
         if (!inst?.ok) { pintar(art, "Instanciação falhou na proposta."); return; }
-        const itens = inst.itens.filter((i) => i.estado === "PRONTO").map((i) => ({
+        art.dataset.pendentes = String(inst.pendentes);
+        const itens = inst.itens.map((i) => ({
           ...i.item,
           source: "MANUAL",
           overrideMotivo: i.item.classe === "QT"
@@ -219,11 +220,13 @@ export async function jornadaB2NoNavegador(page, opts) {
     await art.getByRole("button", { name: "Propor e conferir trilha", exact: true }).click();
     await art.locator("[data-resultado]").filter({ hasText: /proposta HTTP/ }).waitFor({ timeout: 30_000 });
     const textoProp = await art.locator("[data-resultado]").innerText();
-    if (!textoProp.includes("proposta HTTP 201") && !textoProp.includes("proposta HTTP 200")) {
+    const pendentes = Number(await art.getAttribute("data-pendentes"));
+    if (pendentes > 0 ? !textoProp.includes("proposta HTTP 409 codigo ORIGEM_TEMPLATE_PENDENTE")
+      : !textoProp.includes("proposta HTTP 201") && !textoProp.includes("proposta HTTP 200")) {
       throw new Error(`PROPOSTA_NAO_SALVA:${f.familia}:${textoProp.slice(0, 200)}`);
     }
     const recebida = conferirTrilhaB2(JSON.parse(await art.getAttribute("data-trilha-recebida") ?? "null"), f);
-    resultados.push({ familia: f.familia, templateId: recebida.templateId, recusaVisivel: true, trilhaHash: recebida.hash, versao: recebida.versao, propostaId: await art.getAttribute("data-proposta-salva-id"), proposta: true });
+    resultados.push({ familia: f.familia, templateId: recebida.templateId, recusaVisivel: true, trilhaHash: recebida.hash, versao: recebida.versao, propostaId: await art.getAttribute("data-proposta-salva-id"), proposta: pendentes === 0, pendentesPreservados: pendentes });
     await page.screenshot({ path: join(opts.evidenceDir, `${f.familia}.png`), fullPage: true });
   }
 
@@ -298,7 +301,7 @@ async function main() {
     const manifesto2 = demo.manifesto;
     log({ prova: "REINICIO_SERVIDOR_MESMO_SQLITE", baseUrl: manifesto2.baseUrl });
     const { lerDraft } = await viteDev.ssrLoadModule("/src/kernel/ledger/drafts.ts");
-    const propostasReabertas = resultado.resultados.map(r => {
+    const propostasReabertas = resultado.resultados.filter(r => r.proposta).map(r => {
       const draft = lerDraft(demo.app.db, r.propostaId), p = draft?.payload;
       if (p?.schema !== "PrescricaoProposta@1" || p.estado !== "DRAFT" || draft.patientId !== manifesto2.b2.patientId) throw new Error("PROPOSTA_NAO_PERSISTIU");
       conferirTrilhaB2({templateId:p.templateId,versao:p.templateVersao,hash:p.templateHash},{templateId:r.templateId,versao:r.versao,hash:r.trilhaHash});

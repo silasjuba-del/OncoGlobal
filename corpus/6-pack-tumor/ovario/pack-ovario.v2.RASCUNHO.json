@@ -3750,5 +3750,3053 @@
       "achado": "Decisão D-F1-17 item 42A (Dr. Silas)",
       "acao": "criados ovario-epit-mucinoso-capox-adjuvante e ovario-epit-mucinoso-mfolfox6-adjuvante (doses do pack colorretal por decisão); nº de ciclos null"
     }
-  ]
+  ],
+  "tumor_pack_universal": {
+    "schema_documental": "tumor-pack-universal@1",
+    "metadados": {
+      "revisao_documental": "2026-10-17-nccn-delta-2-correcao-auditoria",
+      "versao": "1.1.0",
+      "data": "2026-10-17",
+      "autor_extracao": "Codex",
+      "estado": "RASCUNHO",
+      "aprovacao_clinica": null,
+      "escopo": "CAMADA_ADITIVA_UNIVERSAL_E_DELTA_DOCUMENTAL_NCCN",
+      "base_legada": {
+        "arquivo": "corpus/6-pack-tumor/ovario/pack-ovario.v2.RASCUNHO.json",
+        "commit": "2c0991d",
+        "versao": "2.0.0",
+        "sha256_bytes": "4a67d41312c44e1e157b0f29593bf0f62463c34cb71b8f2d0d96050dc06de997",
+        "sha256_semantico": "a1585cf21dd2659971c391ee502094ba3bf6225a1f4f52f3ab732fd1810ed755"
+      },
+      "nota_versao": "Versão desta camada:1.1.0; revisão documental:2026-10-17-nccn-delta-2-correcao-auditoria. header.versao continua referindo-se ao legado intacto. Nenhuma aprovação é transferida.",
+      "integra_runtime": false,
+      "gera_conduta": false,
+      "historico_revisoes": [
+        {
+          "revisao_documental": "2026-10-17-nccn-delta-1",
+          "versao": "1.0.0",
+          "data": "2026-10-17",
+          "autor_extracao": "Codex",
+          "estado": "RASCUNHO",
+          "aprovacao_clinica": null,
+          "escopo": "CAMADA_ADITIVA_UNIVERSAL_E_DELTA_DOCUMENTAL_NCCN",
+          "base_legada": {
+            "arquivo": "corpus/6-pack-tumor/ovario/pack-ovario.v2.RASCUNHO.json",
+            "commit": "2c0991d",
+            "versao": "2.0.0",
+            "sha256_bytes": "4a67d41312c44e1e157b0f29593bf0f62463c34cb71b8f2d0d96050dc06de997",
+            "sha256_semantico": "a1585cf21dd2659971c391ee502094ba3bf6225a1f4f52f3ab732fd1810ed755"
+          },
+          "nota_versao": "header.versao identifica o legado intacto; esta extensão possui revisão própria. Não reutilizar aprovação/hashes antigos para o conjunto alterado.",
+          "integra_runtime": false,
+          "gera_conduta": false
+        }
+      ]
+    },
+    "identidade_ref": "/identidade",
+    "dominios": [
+      {
+        "dominio_id": 1,
+        "nome": "Diagnóstico e patologia",
+        "itens_legados_refs": [
+          "legado-43225d1f275ca631",
+          "legado-31c4fb56f79fe6f8",
+          "legado-99a626c0c19d1504",
+          "legado-ac29c9a69202e5f9",
+          "legado-7cf4cc882a3cfa0d",
+          "legado-c458fa07d35b6d80",
+          "legado-db2cf7a3cd55ba36",
+          "legado-0fead37b84ed3fa5",
+          "legado-3305b7007440bbd0",
+          "legado-1d3cf2889a7689f5",
+          "legado-984814d1b6975e36"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 2,
+        "nome": "Estadiamento, extensão e risco",
+        "itens_legados_refs": [
+          "legado-7e956daf4b5a3d82",
+          "legado-310037c597c63d54",
+          "legado-16755c9427d5e720",
+          "legado-2b8f0ddcbe8936f1",
+          "legado-d9f22f1372d21e0e",
+          "legado-3383f796219a4d33",
+          "legado-9e8c8463b15a6908",
+          "legado-9de464299b115f1f",
+          "legado-e9afaa0c52d8de57",
+          "legado-bebc5df6e48f91b4"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 3,
+        "nome": "Biomarcadores e farmacogenética",
+        "itens_legados_refs": [
+          "legado-1f3c57618ee1a50c",
+          "legado-f2c5d883ae2ece1e",
+          "legado-d300dd68eb399afd",
+          "legado-f47e555c0a97f7ce",
+          "legado-9b9be84d8f3ffa60",
+          "legado-c59265205b52680b",
+          "legado-c8bc327916a8b0b2",
+          "legado-62cb2085fd588f12",
+          "legado-34b6d0f967b1b282",
+          "legado-12ab077ab3cfe060",
+          "legado-f999e67aba44eb7f",
+          "legado-8de28c27d63069ff",
+          "legado-c78fb63ca7292b56",
+          "legado-9ab089f79e6f5312"
+        ],
+        "itens_nccn_refs": [
+          "nccn-20261017-ovario-mirvetuximabe-variantes"
+        ],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 4,
+        "nome": "Exames e requisitos documentais",
+        "itens_legados_refs": [
+          "legado-d323fcade816005d",
+          "legado-c32e90fd86cc2ed6",
+          "legado-d36a5302b39cc1fa",
+          "legado-67c01bfa3932c2b1",
+          "legado-b2a93fc5fe2a8ee7",
+          "legado-b18eff08a07a0816",
+          "legado-7bf02cb3fef81300",
+          "legado-113858d28051eaf3",
+          "legado-b39013dcbb541e95",
+          "legado-ac870e5d00772382",
+          "legado-f99168ddf6fb8ee7",
+          "legado-8e661d8150e0f2af",
+          "legado-061478d923579c7d",
+          "legado-ba99d945d53a21ed",
+          "legado-6841e286cbae8250",
+          "legado-2d5033e0298be86a",
+          "legado-3e90f8ecfce5955a",
+          "legado-97a57d126019f598",
+          "legado-61f1ccdd8dc9a93f",
+          "legado-654587a2a5176cd0",
+          "legado-512e96cc79374409",
+          "legado-cd485b9b38e6567d",
+          "legado-6621e5815c50f9b0",
+          "legado-bfef5073f438bc40",
+          "legado-06113e6b6af3306a",
+          "legado-21e140d0858b600e",
+          "legado-6970967af4eac9dc",
+          "legado-3548d69e037422ca",
+          "legado-a80b395709a97927",
+          "legado-19dd894ee8e78e9b",
+          "legado-8a2f499300c164f1",
+          "legado-9edfc4f7b982c0f2",
+          "legado-169e0928122d36e6",
+          "legado-390fd630d9957130",
+          "legado-94b725d206c6a9f6",
+          "legado-9602f2834c76466f",
+          "legado-87490ba749a47b98",
+          "legado-18919c02e99371d7",
+          "legado-8423fc661378056f",
+          "legado-773cca9d319fdd9f",
+          "legado-169217bc0c95392f",
+          "legado-954bafc71228c8e8",
+          "legado-add1f42c8ed52d2f",
+          "legado-d33e8a2c8928851a",
+          "legado-b860b8862e010a1d",
+          "legado-a223a1f953868c07",
+          "legado-1910d4ab78a9f232",
+          "legado-36f2dda168feced1"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 5,
+        "nome": "Avaliação antes do tratamento",
+        "itens_legados_refs": [],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "NAO_ESTRUTURADO_NESTA_RODADA",
+        "observacao": "Ausência de referências não significa não aplicabilidade; textos dentro de outros itens permanecem preservados."
+      },
+      {
+        "dominio_id": 6,
+        "nome": "Tratamento e protocolos",
+        "itens_legados_refs": [
+          "legado-ebee105a7dce2cde",
+          "legado-63816a0a5b4b8f77",
+          "legado-6fc6f09ab676f530",
+          "legado-aa72d038784ca531",
+          "legado-7884f37a1c57b57e",
+          "legado-d4c362b190cebb59",
+          "legado-0f6ec44d3cbe7885",
+          "legado-617ffb1187f0378e",
+          "legado-434069246f9365ac",
+          "legado-47fb93e4b143f9a5",
+          "legado-36682d6c30fcca0e",
+          "legado-e3c9a99579fda8ac",
+          "legado-11ca94fe90c75375",
+          "legado-4eb5ff4679232383",
+          "legado-1efad58e9f5ae28b",
+          "legado-9be24116c0e23a94",
+          "legado-560526deec1b8b76",
+          "legado-f2c9da43b538aafc",
+          "legado-7b99dcfe70fda5c0",
+          "legado-9d284cec01d74b4d",
+          "legado-66125a85f8054695",
+          "legado-ca70adedd0bf85f3",
+          "legado-48ebe51859d04ad8",
+          "legado-6e3df03b79254ccc",
+          "legado-70683b4f284ae612",
+          "legado-2aa5c64448bbde90",
+          "legado-fd4009f3d5144c23",
+          "legado-67cd7fb2f79fedb2",
+          "legado-cd5e5d0ccf03bfd4",
+          "legado-b41d2bad78086480",
+          "legado-c784996f35126c6b",
+          "legado-06ac08fc782f5140",
+          "legado-4f25c12ef01ebf5f",
+          "legado-7c2729c8a57b6866",
+          "legado-753dac18dffa096c",
+          "legado-f6d7ba50f1258750",
+          "legado-2778dff1dfd6ce25",
+          "legado-76b8ed142a7782a3",
+          "legado-5c359b43289c4422",
+          "legado-d5fefcb50248bc1d",
+          "legado-4ff5f57745085baa",
+          "legado-11baa0ff5685bc39",
+          "legado-62363118f987a8e0",
+          "legado-bfa752b8998faff6",
+          "legado-4c8258a09535502d",
+          "legado-e2b619dc7573ad0a",
+          "legado-3c8f98cc50fc7c34",
+          "legado-e09428a5710ae2ca",
+          "legado-65bc719d048ed77d",
+          "legado-395065967650108b",
+          "legado-774ed9335e94c8fa",
+          "legado-7703697411bd4d1f",
+          "legado-18964bed62dbd034"
+        ],
+        "itens_nccn_refs": [
+          "nccn-20261017-ovario-trametinibe",
+          "nccn-20261017-ovario-avutometinibe-defactinibe",
+          "nccn-20261017-ovario-relacorilanto"
+        ],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 7,
+        "nome": "Segurança, interações e toxicidades",
+        "itens_legados_refs": [
+          "legado-30844a5c1d2c46ea",
+          "legado-050d31833671e51a",
+          "legado-adbfb6836d260675",
+          "legado-4e51e6f918e2c4f3",
+          "legado-12a11bc52ba835b0",
+          "legado-875df0eeaa80570f",
+          "legado-b6fcafdd79ae2e61",
+          "legado-7785c30f2b9c2b8f",
+          "legado-f6a3dfa0287ff08b",
+          "legado-a6d73c03dc681163",
+          "legado-466b816c12fd98ce"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 8,
+        "nome": "Suporte e cuidados",
+        "itens_legados_refs": [
+          "legado-2470a52d31c83b9a",
+          "legado-07b8ddc4e9254720",
+          "legado-07cbb30e3140efee",
+          "legado-4b1c2c155be8f456",
+          "legado-b546800ced57278f",
+          "legado-541db5da0e5b2bc4"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 9,
+        "nome": "Avaliação de resposta e estado da doença",
+        "itens_legados_refs": [],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "NAO_ESTRUTURADO_NESTA_RODADA",
+        "observacao": "Ausência de referências não significa não aplicabilidade; textos dentro de outros itens permanecem preservados."
+      },
+      {
+        "dominio_id": 10,
+        "nome": "Seguimento e sobrevivência",
+        "itens_legados_refs": [
+          "legado-165e0d6e0b4d9d3a",
+          "legado-4f40f938c0e5ade2",
+          "legado-64c7907b5ee41473",
+          "legado-e1706398d973efd5",
+          "legado-d240f54f7f94d270",
+          "legado-85c8d2bcf8dadd17",
+          "legado-3759efa62878bdc3",
+          "legado-52dc998bcefb7c2c"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 11,
+        "nome": "Encaminhamentos e atuação multiprofissional",
+        "itens_legados_refs": [
+          "legado-78faea4c98bf0a5d",
+          "legado-ce7b3844c24fe6e1",
+          "legado-0ed8d7f97703492d",
+          "legado-d8f127f13395e8d1",
+          "legado-91ebb61401860b30"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 12,
+        "nome": "Documentos e acesso assistencial",
+        "itens_legados_refs": [
+          "legado-5ec26e71463f005c",
+          "legado-224848e294bb0cb5"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      }
+    ],
+    "indice_itens_legados": [
+      {
+        "item_id": "legado-43225d1f275ca631",
+        "origem_json_pointer": "/diagnostico/patologico/obtencao/0",
+        "sha256_conteudo": "fb612eea8a6975e682c8061e022dfba2b33a7445a51839e1d6015ac998d00c3c",
+        "nome": "/diagnostico/patologico/obtencao/0",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/obtencao/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-31c4fb56f79fe6f8",
+        "origem_json_pointer": "/diagnostico/patologico/obtencao/1",
+        "sha256_conteudo": "725cc9feab2f0115ded314bf5fafa9569f8536d006c00bdedf2a11d1482dfa30",
+        "nome": "/diagnostico/patologico/obtencao/1",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/obtencao/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-99a626c0c19d1504",
+        "origem_json_pointer": "/diagnostico/patologico/obtencao/2",
+        "sha256_conteudo": "64c11b08b648e7756dc497964e495ad5cf152c938a8aaf79dacb4a437b419722",
+        "nome": "/diagnostico/patologico/obtencao/2",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/obtencao/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ac29c9a69202e5f9",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/0",
+        "sha256_conteudo": "4c798035b36d5c31239d52e798fba0104853445ca074acdb47a88a7c5b1a486c",
+        "nome": "Tipo histológico OMS e grau (seroso alto × baixo grau; endometrioide/mucinoso G1-3; células claras e carcinossarcoma = alto grau)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-7cf4cc882a3cfa0d",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/1",
+        "sha256_conteudo": "4e6990330b0d664b9c1b1e560b9bbadadc63f0c5cdbb50fac993488b99df7cab",
+        "nome": "Padrão de invasão no mucinoso (expansivo × infiltrativo)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-c458fa07d35b6d80",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/2",
+        "sha256_conteudo": "71899889d5b19470d0983ff11fa9532ec1b00d15cc86aea0f511f86a25dc7dc6",
+        "nome": "Citologia do lavado/ascite",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-db2cf7a3cd55ba36",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/3",
+        "sha256_conteudo": "859a9abae905692dbd651be0e0c9e97a60961ccb073127598b265661aa0f6630",
+        "nome": "Superfície/cápsula (rota antes ou durante cirurgia)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-0fead37b84ed3fa5",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/4",
+        "sha256_conteudo": "439899ba48299418e576390b098a410d3c958520cb5e18e1693ec52ac25a8bb9",
+        "nome": "Implantes peritoneais e omento",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-3305b7007440bbd0",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/5",
+        "sha256_conteudo": "43f4b8c14af89318cd3c1acf4550089799dcb9c63c55a3edb7beef529beffcc7",
+        "nome": "Linfonodos",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-1d3cf2889a7689f5",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/6",
+        "sha256_conteudo": "b1e201107aceaa07b0946eda735f4fe2163cd61d70fa3eb8ec136edba30ed5dc",
+        "nome": "Doença residual (citorredução completa/ótima/subótima)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-984814d1b6975e36",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/7",
+        "sha256_conteudo": "4b6f8e4e2eec2d4b5be530a771b262d6f0c2f675332f1df1c52d7ab8fea0d458",
+        "nome": "GERMINATIVO: SALL4, OCT3/4, SOX2; FISH 12p em casos difíceis",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-7e956daf4b5a3d82",
+        "origem_json_pointer": "/estadiamento/sistema",
+        "sha256_conteudo": "68c61bd2e16c71e4cf20d62940edfeb99a349db7d5f0e01ec0bb87a76c20133a",
+        "nome": "FIGO",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-310037c597c63d54",
+        "origem_json_pointer": "/estadiamento/edicao",
+        "sha256_conteudo": "719dff068c89845e09254829112e79e8272a06a9e8a4600235bdec5b17044266",
+        "nome": "FIGO 2014 / AJCC 8ª edição (ovário, tuba e peritônio)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-16755c9427d5e720",
+        "origem_json_pointer": "/estadiamento/gruposConduta/0",
+        "sha256_conteudo": "e1fdbce99316c0708d2bf1434cdcfd32e90afb630509e8fa5e98ffb3d7c25ab8",
+        "nome": "/estadiamento/gruposConduta/0",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-2b8f0ddcbe8936f1",
+        "origem_json_pointer": "/estadiamento/gruposConduta/1",
+        "sha256_conteudo": "3fac577f4df23ed0c940b6a812237e1feabb857f78a46cc5d425e2d6d5b23883",
+        "nome": "/estadiamento/gruposConduta/1",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d9f22f1372d21e0e",
+        "origem_json_pointer": "/estadiamento/gruposConduta/2",
+        "sha256_conteudo": "ace743a74665a7e97c2be1807d551e6369abf3695df76cb19cbd39103f8cf61a",
+        "nome": "/estadiamento/gruposConduta/2",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-3383f796219a4d33",
+        "origem_json_pointer": "/estadiamento/gruposConduta/3",
+        "sha256_conteudo": "f4e16b8c46093e083c058d6725299a1956f6edfb2c36eb5bc10e5b860c08f8a7",
+        "nome": "/estadiamento/gruposConduta/3",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-9e8c8463b15a6908",
+        "origem_json_pointer": "/estadiamento/gruposConduta/4",
+        "sha256_conteudo": "b6935b9bb2076fbc794e90af683c424d5c91002a06b95ffb14353cdfa48af797",
+        "nome": "/estadiamento/gruposConduta/4",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-9de464299b115f1f",
+        "origem_json_pointer": "/estadiamento/gruposConduta/5",
+        "sha256_conteudo": "9b0f66d43ac8d8b091099bbd9a38092e07a81bfec819c4c7f094cf29d99ae537",
+        "nome": "/estadiamento/gruposConduta/5",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/5/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e9afaa0c52d8de57",
+        "origem_json_pointer": "/estadiamento/gruposConduta/6",
+        "sha256_conteudo": "fce0debe760d7008fa490a109896fce147e204cff5ad145c1592ddec66c00c4f",
+        "nome": "/estadiamento/gruposConduta/6",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/6/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-bebc5df6e48f91b4",
+        "origem_json_pointer": "/estadiamento/marcadores",
+        "sha256_conteudo": "a482cfcc59f18c674bf407d3f7aca8b1a58c64a2990bda9e48bd0c20c0c111da",
+        "nome": "/estadiamento/marcadores",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-1f3c57618ee1a50c",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/0",
+        "sha256_conteudo": "86f916a7ec58403eb5901dee9b3b9d0a2dd02a4b710c5d7b6b91c8e6e3db1ed9",
+        "nome": "EPITELIAL não mucinoso (mandatório); seroso de baixo grau só para aconselhamento",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-f2c5d883ae2ece1e",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/1",
+        "sha256_conteudo": "6f2b36c9d87cd4b0e5bfd53af8dd7475e8ae7b1dc5a38226ee8fa439f93167f0",
+        "nome": "EPITELIAL não mucinoso, sempre que possível",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d300dd68eb399afd",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/2",
+        "sha256_conteudo": "04345e453ead504df8e8513f34ca571be66135d5da16ee9a69bc6e86d00068d1",
+        "nome": "EPITELIAL BRCA selvagem",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-f47e555c0a97f7ce",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/3",
+        "sha256_conteudo": "f7241d9dcbb0dc9211bf0c71d62a92d3793a43aa86dc2551e0450bdf4f24117f",
+        "nome": "EPITELIAL platino-resistente",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-9b9be84d8f3ffa60",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/4",
+        "sha256_conteudo": "56c62b9acc6facab4d558d472544b951f0f0bdd84f847ced1faad072fb72cb59",
+        "nome": "EPITELIAL seroso alto grau platino-resistente",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-c59265205b52680b",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/5",
+        "sha256_conteudo": "1b58a03107bbe825a05bf54f1b3e3ebccfb570d62294d25dc73b6f19fe4ede16",
+        "nome": "EPITELIAL platino-resistente",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/5/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-c8bc327916a8b0b2",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/6",
+        "sha256_conteudo": "68e070c6783af0a3eed5c20dfce4e20d757a15eb371afcbacd6d437a75234e67",
+        "nome": "GERMINATIVO: diagnóstico diferencial",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/6/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-62cb2085fd588f12",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/7",
+        "sha256_conteudo": "96610d5fd4f1b2dea311a2c4b11c774fe4a23bcc312254eb1bc0b0049130925c",
+        "nome": "GERMINATIVO: casos difíceis",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/7/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-34b6d0f967b1b282",
+        "origem_json_pointer": "/tratamento/biomarcadorTratamento/0",
+        "sha256_conteudo": "a5901df438f68ee6fa1e05a96a4c0b6dc8e847653fb873be323ef5577c69b7cf",
+        "nome": "/tratamento/biomarcadorTratamento/0",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/biomarcadorTratamento/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-12ab077ab3cfe060",
+        "origem_json_pointer": "/tratamento/biomarcadorTratamento/1",
+        "sha256_conteudo": "2827327e42523bdf9d1a581d1fad7b6e06be3b9f8d26894a9774c2e3756b4469",
+        "nome": "/tratamento/biomarcadorTratamento/1",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/biomarcadorTratamento/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-f999e67aba44eb7f",
+        "origem_json_pointer": "/tratamento/biomarcadorTratamento/2",
+        "sha256_conteudo": "8ac311bd7154307d0b2e7485299405992012de0235eefeec1d21b7e05f382546",
+        "nome": "/tratamento/biomarcadorTratamento/2",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/biomarcadorTratamento/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8de28c27d63069ff",
+        "origem_json_pointer": "/tratamento/biomarcadorTratamento/3",
+        "sha256_conteudo": "41820599f86010c8f7cbbe6951f400adf5bd2696c1b2bca0b804f8d6d5a827ce",
+        "nome": "/tratamento/biomarcadorTratamento/3",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/biomarcadorTratamento/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-c78fb63ca7292b56",
+        "origem_json_pointer": "/tratamento/biomarcadorTratamento/4",
+        "sha256_conteudo": "43c4ebfa5004a551842b67b1c838a7614148f358bc96d9b2e46648fc09913038",
+        "nome": "/tratamento/biomarcadorTratamento/4",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/biomarcadorTratamento/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-9ab089f79e6f5312",
+        "origem_json_pointer": "/tratamento/biomarcadorTratamento/5",
+        "sha256_conteudo": "dd4413f6f34ef783ccd5fa6eaef4c633e0df006dcf581b5134b61352d916ce22",
+        "nome": "/tratamento/biomarcadorTratamento/5",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/biomarcadorTratamento/5/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d323fcade816005d",
+        "origem_json_pointer": "/diagnostico/imagem/0",
+        "sha256_conteudo": "89aa4a702753bab1a25f687c77a64995ebdd84ec241ad93639f0298a735b6098",
+        "nome": "TC (ou RM) de abdome total",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-c32e90fd86cc2ed6",
+        "origem_json_pointer": "/diagnostico/imagem/1",
+        "sha256_conteudo": "d9ae138e911397d16e756d7dfeaee40a6bd21c98898a24c4a43d5c3866502703",
+        "nome": "TC (ou RM) de pelve",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d36a5302b39cc1fa",
+        "origem_json_pointer": "/diagnostico/imagem/2",
+        "sha256_conteudo": "3e14424ba7992b47d5d35a49e225d7533e9e5439a4992d526afa2793ef29b9f0",
+        "nome": "TC de tórax",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-67c01bfa3932c2b1",
+        "origem_json_pointer": "/diagnostico/imagem/3",
+        "sha256_conteudo": "1626b081ffbad6a390fd759eb8241f26730d69d12ce4a09f28db9de73f018e58",
+        "nome": "USG pélvica transvaginal",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b2a93fc5fe2a8ee7",
+        "origem_json_pointer": "/diagnostico/imagem/4",
+        "sha256_conteudo": "81506536eec27bcd0819380e278dc0a7ca31c826c7d7961972c3da02647a2300",
+        "nome": "USG abdominal",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b18eff08a07a0816",
+        "origem_json_pointer": "/diagnostico/imagem/5",
+        "sha256_conteudo": "1ce9d3eb1911408c2cd89ff12671c76df2307d78dd72326579ca97b2d452dab2",
+        "nome": "TC ou RM de abdome e pelve",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/5/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-7bf02cb3fef81300",
+        "origem_json_pointer": "/diagnostico/endoscopicos/0",
+        "sha256_conteudo": "1733073cbd322ba2ecf8cb09168376b10125f134130550425129038dc813c941",
+        "nome": "EDA",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/endoscopicos/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-113858d28051eaf3",
+        "origem_json_pointer": "/diagnostico/endoscopicos/1",
+        "sha256_conteudo": "d60e17c655b89f2eb3fae0645a3f17321f1af52144d2a5b1f175def4878f1c47",
+        "nome": "Colonoscopia",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/endoscopicos/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b39013dcbb541e95",
+        "origem_json_pointer": "/estadiamento/exames/0",
+        "sha256_conteudo": "6b104b615a375b125ff186cae2824642f5f73aa90a0a66d4280b9408aa9a2596",
+        "nome": "Hemograma",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ac870e5d00772382",
+        "origem_json_pointer": "/estadiamento/exames/1",
+        "sha256_conteudo": "df56e92e1a63694123b24a37daa31a82b18d66d83e465675163bf2e730dacbab",
+        "nome": "Função renal",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-f99168ddf6fb8ee7",
+        "origem_json_pointer": "/estadiamento/exames/2",
+        "sha256_conteudo": "ae9928618ee5319027f12a50e5b07d652b87765861f31fb071045584c2a05db5",
+        "nome": "Função hepática",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8e661d8150e0f2af",
+        "origem_json_pointer": "/estadiamento/exames/3",
+        "sha256_conteudo": "5db8a0786b80e71fa2fc28d668daf2beede30b20b4eb742b230ebf24c97385c0",
+        "nome": "Função hepática",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-061478d923579c7d",
+        "origem_json_pointer": "/estadiamento/exames/4",
+        "sha256_conteudo": "599587515616a1b8421adcf233a85db64280f6c0611bbcd43c8d8667ef8900a3",
+        "nome": "Eletrólitos",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ba99d945d53a21ed",
+        "origem_json_pointer": "/estadiamento/exames/5",
+        "sha256_conteudo": "99df1080dda4fc891ac411268ec7a81df5ac244fdecc595f9d4fafcc938dc57d",
+        "nome": "Eletrólitos",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/5/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-6841e286cbae8250",
+        "origem_json_pointer": "/estadiamento/exames/6",
+        "sha256_conteudo": "f21feee77bd87ab346e9610986ae7379b2f22bdf6738213e16aaef762fbbb298",
+        "nome": "CA-125",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/6/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-2d5033e0298be86a",
+        "origem_json_pointer": "/estadiamento/exames/7",
+        "sha256_conteudo": "cd4aedc9ed8b05cec6767aabbdae3d908bb31f4ff9d217b37347bd60e0e1c8de",
+        "nome": "CEA",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/7/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-3e90f8ecfce5955a",
+        "origem_json_pointer": "/estadiamento/exames/8",
+        "sha256_conteudo": "955d1a00a08c7e2ccd0507bd8bdc647f537d55b37db0eaee56474ea4705f128e",
+        "nome": "AFP",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/8/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-97a57d126019f598",
+        "origem_json_pointer": "/estadiamento/exames/9",
+        "sha256_conteudo": "9e7ef211b1a5de7721fdd73e10ff13ea96eba7b6d81d636ca6168833cd62bcd6",
+        "nome": "Beta-HCG",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/9/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-61f1ccdd8dc9a93f",
+        "origem_json_pointer": "/estadiamento/exames/10",
+        "sha256_conteudo": "5b32626fae8795879711099bb56028519155c610f00f129310da556aae64ec19",
+        "nome": "DHL",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/10/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-654587a2a5176cd0",
+        "origem_json_pointer": "/estadiamento/exames/11",
+        "sha256_conteudo": "8bea736057403991812f0a5e56765b68a7c62e279a3fa5a134387ddfe736a1ba",
+        "nome": "Inibina B (diagnóstico diferencial)",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/11/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-512e96cc79374409",
+        "origem_json_pointer": "/estadiamento/exames/12",
+        "sha256_conteudo": "cb48c12a7fc6e6db0ccb83365e1fa0183cfed3b10f3357f3ff771b2c4a20bcfa",
+        "nome": "RX ou TC de tórax",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/12/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-cd485b9b38e6567d",
+        "origem_json_pointer": "/estadiamento/exames/13",
+        "sha256_conteudo": "c23f135ef800fad94eae5e11ce4a2242ad24865b706cb6c4b234c700dd9d40b3",
+        "nome": "Função pulmonar",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/13/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-6621e5815c50f9b0",
+        "origem_json_pointer": "/ligacoes/exames/0",
+        "sha256_conteudo": "4006905a9ae646b3b4a0a0ddc376a7dfad7b98e9d0d573edd4a21dc25b3a39c3",
+        "nome": "AFP",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-bfef5073f438bc40",
+        "origem_json_pointer": "/ligacoes/exames/1",
+        "sha256_conteudo": "00cac656db90cece9385c8c98f658accb5b7c1553202e6be466fa96d39aaf2b9",
+        "nome": "ANATOMOPATOLOGICO",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-06113e6b6af3306a",
+        "origem_json_pointer": "/ligacoes/exames/2",
+        "sha256_conteudo": "dd13c22d49f61168262095a2dad18e4cbb0986ff4cc59fddfc395370f02578ed",
+        "nome": "BETA_HCG",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-21e140d0858b600e",
+        "origem_json_pointer": "/ligacoes/exames/3",
+        "sha256_conteudo": "09c0bc2a57301c5e7f5c06c8c51c9dec764db31a5d9531aa98aac18b5d8251f3",
+        "nome": "BIOPSIA_PERCUTANEA_GUIADA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-6970967af4eac9dc",
+        "origem_json_pointer": "/ligacoes/exames/4",
+        "sha256_conteudo": "45258bcdbd8d67800db97d38ddb6568e87448d729840ba546f879c8346fda25b",
+        "nome": "CA125",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-3548d69e037422ca",
+        "origem_json_pointer": "/ligacoes/exames/5",
+        "sha256_conteudo": "dbefcdbea8b8cfe6f040b0fea4e7a1c426fe4e467ca28e90dfe740279c332d18",
+        "nome": "CEA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a80b395709a97927",
+        "origem_json_pointer": "/ligacoes/exames/6",
+        "sha256_conteudo": "12dc93df8c004cf66a8c4711211ce8df0ea7b8314ec42108f70d135ad99daf89",
+        "nome": "COLONOSCOPIA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-19dd894ee8e78e9b",
+        "origem_json_pointer": "/ligacoes/exames/7",
+        "sha256_conteudo": "58d8c3bbd157d0d9be5bf551553eb11e7e0c313ef1db12f06d7863faa42fbbfb",
+        "nome": "CREATININA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8a2f499300c164f1",
+        "origem_json_pointer": "/ligacoes/exames/8",
+        "sha256_conteudo": "1e49060d9ff6bb936a9d5318d51a013d181e7cefe4fae7d0525411391d598361",
+        "nome": "DHL",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-9edfc4f7b982c0f2",
+        "origem_json_pointer": "/ligacoes/exames/9",
+        "sha256_conteudo": "4eafbeeab923ac66d78540cd37c0f44aba4997fe0bb026271a95da2189ec190b",
+        "nome": "EDA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-169e0928122d36e6",
+        "origem_json_pointer": "/ligacoes/exames/10",
+        "sha256_conteudo": "d9d2aafc7df66637d237fd0186bd56cf5974d8cac840f94ea6f966fe63d75f39",
+        "nome": "ESPIROMETRIA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-390fd630d9957130",
+        "origem_json_pointer": "/ligacoes/exames/11",
+        "sha256_conteudo": "c6f5e5a6057e9ce942cde9a80b415b2bdbfccf0ac7d689ed5ae89b0846f94872",
+        "nome": "FISH",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-94b725d206c6a9f6",
+        "origem_json_pointer": "/ligacoes/exames/12",
+        "sha256_conteudo": "bf5e386b5411abfa4e5e12d1229575a6c7ec73dfaec6347d8959b27aac19aa86",
+        "nome": "HEMOGRAMA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-9602f2834c76466f",
+        "origem_json_pointer": "/ligacoes/exames/13",
+        "sha256_conteudo": "99a98b9d268e78a05608d792d2fad81f4e16f25b8a4f95da9f7decd91a23a0dc",
+        "nome": "IMUNOHISTOQUIMICA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-87490ba749a47b98",
+        "origem_json_pointer": "/ligacoes/exames/14",
+        "sha256_conteudo": "5177c5a6d32d2eeb000c9724575c7471cb1de7765bcf03a4245f9351e9594835",
+        "nome": "POTASSIO",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-18919c02e99371d7",
+        "origem_json_pointer": "/ligacoes/exames/15",
+        "sha256_conteudo": "ae974cff2b8cea688a4632542e3da503ad4a2f0f9301b96d75afbb2588228c37",
+        "nome": "RM_PELVE",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8423fc661378056f",
+        "origem_json_pointer": "/ligacoes/exames/16",
+        "sha256_conteudo": "c14ce60ca37c165e4caacee63f3b6f144d8c362ed86614c2583ca390362a034e",
+        "nome": "RX_TORAX_PA_PERFIL",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-773cca9d319fdd9f",
+        "origem_json_pointer": "/ligacoes/exames/17",
+        "sha256_conteudo": "7ca56daea7b581342dac3e634f20a5489390de72c61d09e7c42a9b69cf4bb98e",
+        "nome": "SODIO",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-169217bc0c95392f",
+        "origem_json_pointer": "/ligacoes/exames/18",
+        "sha256_conteudo": "eea68f82f02592e6262514a154ff52ae85284765c1f48ab3b07cabb92ead209f",
+        "nome": "TC_ABDOMEN_SUPERIOR",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-954bafc71228c8e8",
+        "origem_json_pointer": "/ligacoes/exames/19",
+        "sha256_conteudo": "5beb801ddc054db97d463dd8b682c9128772e22b7938b6d4c645af14dc4ddd7a",
+        "nome": "TC_PELVE",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-add1f42c8ed52d2f",
+        "origem_json_pointer": "/ligacoes/exames/20",
+        "sha256_conteudo": "147b97b900462813d8c6528cc01d88f8a5102936ee96ee4fb121f8a7b77f60b0",
+        "nome": "TC_TORAX",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d33e8a2c8928851a",
+        "origem_json_pointer": "/ligacoes/exames/21",
+        "sha256_conteudo": "1c165f5403a7b90b63dbd46f6855431c8c1ada4519299d6c123bd630df5c529d",
+        "nome": "TGO",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b860b8862e010a1d",
+        "origem_json_pointer": "/ligacoes/exames/22",
+        "sha256_conteudo": "1739a80ab81e5bbef9460ae5f51087ed284845d8e31e606c2b564c7268c2cd15",
+        "nome": "TGP",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a223a1f953868c07",
+        "origem_json_pointer": "/ligacoes/exames/23",
+        "sha256_conteudo": "be9dc963ad4d99ea1d58ed76d6cb2ee7173c63c45ec72f636bd30d94a4be908b",
+        "nome": "USG_ABDOMEN_TOTAL",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-1910d4ab78a9f232",
+        "origem_json_pointer": "/ligacoes/exames/24",
+        "sha256_conteudo": "e227022341e551f9215a7c92093524b54eb055ec1fcea444f5427c1d7418a262",
+        "nome": "USG_PELVICA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-36f2dda168feced1",
+        "origem_json_pointer": "/ligacoes/exames/25",
+        "sha256_conteudo": "c207e54d63d280f3c67259b657ba8c91728a0be0a88f66b6f3b01e795470f49a",
+        "nome": "USG_TRANSVAGINAL",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ebee105a7dce2cde",
+        "origem_json_pointer": "/tratamento/cenarios/0",
+        "sha256_conteudo": "f56dc1d6220a7700577483a67dd7e3f3b7a8ed06285dd34f9ab0d41bb652ca86",
+        "nome": "EPITELIAL inicial pós-estadiamento cirúrgico",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-63816a0a5b4b8f77",
+        "origem_json_pointer": "/tratamento/cenarios/1",
+        "sha256_conteudo": "90f6b42a03f5c0121fec8cae423d866586423fe3815c6d46e0763df1963d012e",
+        "nome": "EPITELIAL III-IV — citorredução primária + QT adjuvante",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-6fc6f09ab676f530",
+        "origem_json_pointer": "/tratamento/cenarios/2",
+        "sha256_conteudo": "3acde3658798e53e1885058130123daf4222c3f64b7db843ecc055da98471713",
+        "nome": "EPITELIAL III-IV — neoadjuvante + intervalo",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-aa72d038784ca531",
+        "origem_json_pointer": "/tratamento/cenarios/3",
+        "sha256_conteudo": "371e2aaec0c9c1480f4ee63655b54acc45a58461b90d79de04538279c1e05538",
+        "nome": "EPITELIAL recidiva platino-sensível (>6 meses)",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-7884f37a1c57b57e",
+        "origem_json_pointer": "/tratamento/cenarios/4",
+        "sha256_conteudo": "f767743d8d20c3febef5daefde9c631e1710dbb8cc77c23b3d6704caa9c2926a",
+        "nome": "EPITELIAL recidiva platino-resistente/refratária",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d4c362b190cebb59",
+        "origem_json_pointer": "/tratamento/cenarios/5",
+        "sha256_conteudo": "d305f7af85caa3961ed271d76e8e6959ba1c835eb45493b555be656b9e96fafd",
+        "nome": "EPITELIAL seroso de baixo grau",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/5/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-0f6ec44d3cbe7885",
+        "origem_json_pointer": "/tratamento/cenarios/6",
+        "sha256_conteudo": "c6da8dfa5573ea0c7152fdc515724414862dacce44843c28207de41f0808c743",
+        "nome": "EPITELIAL borderline",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/6/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-617ffb1187f0378e",
+        "origem_json_pointer": "/tratamento/cenarios/7",
+        "sha256_conteudo": "00c18d49dfb7785cba3fcd8d4f012689f83584bf4b6cf6134c28bbb705c9f9e7",
+        "nome": "GERMINATIVO inicial",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/7/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-434069246f9365ac",
+        "origem_json_pointer": "/tratamento/cenarios/8",
+        "sha256_conteudo": "bce1f4ad89c5ee8622527487fd18596091e754594554fd65a0352bd4c1c44bef",
+        "nome": "GERMINATIVO avançado/recidiva",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/8/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-47fb93e4b143f9a5",
+        "origem_json_pointer": "/tratamento/protocolos/0",
+        "sha256_conteudo": "f3ca89862115a83669ab5c63c1fc79e4e60e7b8b7bb21701288bbc953efb11e4",
+        "nome": "EPITELIAL — Carboplatina + paclitaxel q21 (adjuvante pós-citorredução)",
+        "id_original": "ovario-epit-carbo-pacli-adjuvante",
+        "fonte_local_ref": "/tratamento/protocolos/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-36682d6c30fcca0e",
+        "origem_json_pointer": "/tratamento/protocolos/1",
+        "sha256_conteudo": "76ebb6444d73f2ba637a888e69949d429511df1ccc2894afc5618c482e3a0239",
+        "nome": "EPITELIAL — Carboplatina + paclitaxel q21 (neoadjuvante)",
+        "id_original": "ovario-epit-carbo-pacli-neoadjuvante",
+        "fonte_local_ref": "/tratamento/protocolos/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e3c9a99579fda8ac",
+        "origem_json_pointer": "/tratamento/protocolos/2",
+        "sha256_conteudo": "7a9f68c8f51b80da8cbdcbb6023512e26a0f76f23013f4f916071640129d6f0f",
+        "nome": "EPITELIAL — Carboplatina + docetaxel q21",
+        "id_original": "ovario-epit-carbo-docetaxel-adjuvante",
+        "fonte_local_ref": "/tratamento/protocolos/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-11ca94fe90c75375",
+        "origem_json_pointer": "/tratamento/protocolos/3",
+        "sha256_conteudo": "29c7f7efb1acf91fc35bb26d4b5b2e787bc233114b8b68c61f0b4a618348a992",
+        "nome": "EPITELIAL mucinoso — CAPOX (doses do pack colorretal)",
+        "id_original": "ovario-epit-mucinoso-capox-adjuvante",
+        "fonte_local_ref": "/tratamento/protocolos/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-4eb5ff4679232383",
+        "origem_json_pointer": "/tratamento/protocolos/4",
+        "sha256_conteudo": "98df7bcb294de4df9f69bf85e762734682cddc12eb3539db39836dafa12c3f41",
+        "nome": "EPITELIAL mucinoso — mFOLFOX6 (doses do pack colorretal)",
+        "id_original": "ovario-epit-mucinoso-mfolfox6-adjuvante",
+        "fonte_local_ref": "/tratamento/protocolos/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-1efad58e9f5ae28b",
+        "origem_json_pointer": "/tratamento/protocolos/5",
+        "sha256_conteudo": "b2fe1e5a23de97350df3a9df12a15707226a3e194515d1b721b1d42f339b5669",
+        "nome": "EPITELIAL — Carboplatina + paclitaxel + bevacizumabe 15 mg/kg q21",
+        "id_original": "ovario-epit-carbo-pacli-bev15-adjuvante",
+        "fonte_local_ref": "/tratamento/protocolos/5/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-9be24116c0e23a94",
+        "origem_json_pointer": "/tratamento/protocolos/6",
+        "sha256_conteudo": "aad815b8c92fc8fffca8ab6ca7baf5772fe98464fa85e08135b6b4a2f5b291b2",
+        "nome": "EPITELIAL — Carboplatina q21 + paclitaxel semanal + bevacizumabe 7,5 mg/kg (ICON8B)",
+        "id_original": "ovario-epit-carbo-pacli-dd-bev7-5-neoadjuvante",
+        "fonte_local_ref": "/tratamento/protocolos/6/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-560526deec1b8b76",
+        "origem_json_pointer": "/tratamento/protocolos/7",
+        "sha256_conteudo": "78c78b5cb119798e7233d3e610f00106a88b888f134b571b3c22a5dfdde6f972",
+        "nome": "EPITELIAL — Carboplatina AUC2 + paclitaxel 60 semanal (frágeis)",
+        "id_original": "ovario-epit-carbo-pacli-semanal-fragil",
+        "fonte_local_ref": "/tratamento/protocolos/7/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-f2c9da43b538aafc",
+        "origem_json_pointer": "/tratamento/protocolos/8",
+        "sha256_conteudo": "69fbe60168fe02e395de25ba41cfba687ad5b0228d0b31732f63778afc5bf6fa",
+        "nome": "EPITELIAL — Bevacizumabe 15 mg/kg manutenção",
+        "id_original": "ovario-epit-bev15-manutencao",
+        "fonte_local_ref": "/tratamento/protocolos/8/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-7b99dcfe70fda5c0",
+        "origem_json_pointer": "/tratamento/protocolos/9",
+        "sha256_conteudo": "18019a8e1bd4bb38692624f4469cca1bdd19e097cdb60286ca6f001f67d326f1",
+        "nome": "EPITELIAL — Olaparibe manutenção 1ª linha (SOLO-1)",
+        "id_original": "ovario-epit-olaparibe-manutencao-1l",
+        "fonte_local_ref": "/tratamento/protocolos/9/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-9d284cec01d74b4d",
+        "origem_json_pointer": "/tratamento/protocolos/10",
+        "sha256_conteudo": "0a990658f78f6fffaf761cf255f62a9a588cb08de7c018c0879b9eac706d2086",
+        "nome": "EPITELIAL — Olaparibe + bevacizumabe manutenção (PAOLA-1)",
+        "id_original": "ovario-epit-olaparibe-bev-manutencao-1l",
+        "fonte_local_ref": "/tratamento/protocolos/10/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-66125a85f8054695",
+        "origem_json_pointer": "/tratamento/protocolos/11",
+        "sha256_conteudo": "0a10c35fac022cbc3eb6e4e13dd94703f53c719b8aeb7f2903c0681402791952",
+        "nome": "EPITELIAL — Niraparibe manutenção 1ª linha (PRIMA)",
+        "id_original": "ovario-epit-niraparibe-manutencao-1l",
+        "fonte_local_ref": "/tratamento/protocolos/11/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ca70adedd0bf85f3",
+        "origem_json_pointer": "/tratamento/protocolos/12",
+        "sha256_conteudo": "cfdd443783889f96c6e55beef2eebab38f1fe214f43404f560d373bd443ade37",
+        "nome": "EPITELIAL — Carboplatina AUC5 + paclitaxel (recidiva platino-sensível)",
+        "id_original": "ovario-epit-carbo-pacli-recidiva-ps",
+        "fonte_local_ref": "/tratamento/protocolos/12/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-48ebe51859d04ad8",
+        "origem_json_pointer": "/tratamento/protocolos/13",
+        "sha256_conteudo": "7826810a1a1cc1a86532eb20baebc81c93e5854ffe08c8423e8b39b5d351158e",
+        "nome": "EPITELIAL — Carboplatina + doxorrubicina lipossomal (recidiva platino-sensível)",
+        "id_original": "ovario-epit-carbo-dlp-recidiva-ps",
+        "fonte_local_ref": "/tratamento/protocolos/13/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-6e3df03b79254ccc",
+        "origem_json_pointer": "/tratamento/protocolos/14",
+        "sha256_conteudo": "8a26ec6f2b92b6ea68987846d05896ffff6de46313a25bb913dfd10599a61a3e",
+        "nome": "EPITELIAL — Carboplatina + gencitabina (recidiva platino-sensível)",
+        "id_original": "ovario-epit-carbo-gem-recidiva-ps",
+        "fonte_local_ref": "/tratamento/protocolos/14/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-70683b4f284ae612",
+        "origem_json_pointer": "/tratamento/protocolos/15",
+        "sha256_conteudo": "7cc5c9445da6bbf47049d4524af95fab96d1deb48f1dda8ac04241d691d7113c",
+        "nome": "EPITELIAL — Olaparibe manutenção pós-recidiva platino-sensível",
+        "id_original": "ovario-epit-olaparibe-manutencao-recidiva",
+        "fonte_local_ref": "/tratamento/protocolos/15/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-2aa5c64448bbde90",
+        "origem_json_pointer": "/tratamento/protocolos/16",
+        "sha256_conteudo": "514d83049970c00c1f90a4128debf6bc7dcebcf9277f773e1c203bf985bd4b49",
+        "nome": "EPITELIAL — Doxorrubicina lipossomal ± bevacizumabe (platino-resistente)",
+        "id_original": "ovario-epit-dlp-pr",
+        "fonte_local_ref": "/tratamento/protocolos/16/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-fd4009f3d5144c23",
+        "origem_json_pointer": "/tratamento/protocolos/17",
+        "sha256_conteudo": "baf04507b1559fefc416649fa1d3b4b7b9aaaaa0fe15a81d6fb8b186546a8ec9",
+        "nome": "EPITELIAL — Paclitaxel semanal ± bevacizumabe (platino-resistente)",
+        "id_original": "ovario-epit-paclitaxel-semanal-pr",
+        "fonte_local_ref": "/tratamento/protocolos/17/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-67cd7fb2f79fedb2",
+        "origem_json_pointer": "/tratamento/protocolos/18",
+        "sha256_conteudo": "3846c0625a11c26c43c64a03197789d7cf23129443d8ded38b09551e269d2429",
+        "nome": "EPITELIAL — Topotecano D1-D5 ± bevacizumabe (platino-resistente)",
+        "id_original": "ovario-epit-topotecano-pr",
+        "fonte_local_ref": "/tratamento/protocolos/18/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-cd5e5d0ccf03bfd4",
+        "origem_json_pointer": "/tratamento/protocolos/19",
+        "sha256_conteudo": "9759edb08d6d25ab51a98d496040439b46b8d7bea12922b4b82c962bfbf8876a",
+        "nome": "EPITELIAL — Gencitabina D1, D8, D15 (platino-resistente)",
+        "id_original": "ovario-epit-gencitabina-pr",
+        "fonte_local_ref": "/tratamento/protocolos/19/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b41d2bad78086480",
+        "origem_json_pointer": "/tratamento/protocolos/20",
+        "sha256_conteudo": "8ca87fd8e2081b516442e94e005fed3ef6046d012bc15928c54109c3963fb5e0",
+        "nome": "EPITELIAL — Vinorelbina semanal (platino-resistente)",
+        "id_original": "ovario-epit-vinorelbina-pr",
+        "fonte_local_ref": "/tratamento/protocolos/20/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-c784996f35126c6b",
+        "origem_json_pointer": "/tratamento/protocolos/21",
+        "sha256_conteudo": "117451d5f59e3f52c9f95e43460e83d9eb6fa9dcae9aebd0d6388fa5ddfe8274",
+        "nome": "EPITELIAL — Ciclofosfamida oral contínua (platino-resistente)",
+        "id_original": "ovario-epit-ciclofosfamida-oral-pr",
+        "fonte_local_ref": "/tratamento/protocolos/21/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-06ac08fc782f5140",
+        "origem_json_pointer": "/tratamento/protocolos/22",
+        "sha256_conteudo": "4df60a00abf5f4aa57e25ed1f32846d36021b8c03a2fa7e4890bcefc292f2248",
+        "nome": "EPITELIAL — Etoposídeo oral (platino-resistente)",
+        "id_original": "ovario-epit-etoposideo-oral-pr",
+        "fonte_local_ref": "/tratamento/protocolos/22/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-4f25c12ef01ebf5f",
+        "origem_json_pointer": "/tratamento/protocolos/23",
+        "sha256_conteudo": "eacf12c08032e3f7f2ee4c89c8ca62d1f45d7d8f97ea081d41f1567b83d94660",
+        "nome": "EPITELIAL — Tamoxifeno (platino-resistente)",
+        "id_original": "ovario-epit-tamoxifeno-pr",
+        "fonte_local_ref": "/tratamento/protocolos/23/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-7c2729c8a57b6866",
+        "origem_json_pointer": "/tratamento/protocolos/24",
+        "sha256_conteudo": "83f71c43c4f39564feb6c676e8acabbd3006e5e4a9721755ccad2764b9017891",
+        "nome": "EPITELIAL — Trastuzumabe deruxtecana (HER2 3+)",
+        "id_original": "ovario-epit-tdxd-her2",
+        "fonte_local_ref": "/tratamento/protocolos/24/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-753dac18dffa096c",
+        "origem_json_pointer": "/tratamento/protocolos/25",
+        "sha256_conteudo": "01b230cc1218f8222f1f856144a6b2abf5d846cedc047b418c740339255ea8e2",
+        "nome": "EPITELIAL — Mirvetuximabe soravtansina (FRα alto)",
+        "id_original": "ovario-epit-mirvetuximabe-fra",
+        "fonte_local_ref": "/tratamento/protocolos/25/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-f6d7ba50f1258750",
+        "origem_json_pointer": "/tratamento/protocolos/26",
+        "sha256_conteudo": "0f4ec24b5b86b37e4b64996f38d69fc0037f435f47ca9972cfafd16b2b7d412d",
+        "nome": "EPITELIAL — Pembrolizumabe + paclitaxel semanal ± bevacizumabe (KEYNOTE-B96)",
+        "id_original": "ovario-epit-pembro-pacli-pr",
+        "fonte_local_ref": "/tratamento/protocolos/26/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-2778dff1dfd6ce25",
+        "origem_json_pointer": "/tratamento/protocolos/27",
+        "sha256_conteudo": "3e165edd92cff3cafeb11538071248eaadd6e1edcb395eecf639f71e39b2965d",
+        "nome": "GERMINATIVO — BEP",
+        "id_original": "ovario-germ-bep-adjuvante",
+        "fonte_local_ref": "/tratamento/protocolos/27/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-76b8ed142a7782a3",
+        "origem_json_pointer": "/tratamento/protocolos/28",
+        "sha256_conteudo": "fe5e841e52d7772a5c772556f9dd4654944120daccb7d4d0ddd1c7306985f006",
+        "nome": "GERMINATIVO — BEP",
+        "id_original": "ovario-germ-bep-avancado",
+        "fonte_local_ref": "/tratamento/protocolos/28/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-5c359b43289c4422",
+        "origem_json_pointer": "/tratamento/protocolos/29",
+        "sha256_conteudo": "bf83c07691998b5c2dabb6257c6d8c5abf06229638a4ed626302ceeee087f6d6",
+        "nome": "GERMINATIVO — EP × 3 (disgerminoma selecionado)",
+        "id_original": "ovario-germ-ep-disgerminoma",
+        "fonte_local_ref": "/tratamento/protocolos/29/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d5fefcb50248bc1d",
+        "origem_json_pointer": "/tratamento/protocolos/30",
+        "sha256_conteudo": "57a5a4709820203565969be3321befa5b8fe79735ba8c5a8e3e111303e26376a",
+        "nome": "GERMINATIVO — VeIP",
+        "id_original": "ovario-germ-veip-1l-residual",
+        "fonte_local_ref": "/tratamento/protocolos/30/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-4ff5f57745085baa",
+        "origem_json_pointer": "/tratamento/protocolos/31",
+        "sha256_conteudo": "666ffaf0302f424be825c785e3c0b882c5c428c740942f44505b81947ef9ab2d",
+        "nome": "GERMINATIVO — VeIP",
+        "id_original": "ovario-germ-veip-2l",
+        "fonte_local_ref": "/tratamento/protocolos/31/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-11baa0ff5685bc39",
+        "origem_json_pointer": "/tratamento/protocolos/32",
+        "sha256_conteudo": "44b5bad2bc57463d1e1d27a9cc7d62309128e6d697414541eee065ac54a726f5",
+        "nome": "GERMINATIVO — VAC (vincristina, dactinomicina, ciclofosfamida) — dose de dactinomicina PENDENTE",
+        "id_original": "ovario-germ-vac",
+        "fonte_local_ref": "/tratamento/protocolos/32/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-62363118f987a8e0",
+        "origem_json_pointer": "/tratamento/protocolos/33",
+        "sha256_conteudo": "b1fc053813914049803093469f5cd518f804f6637e04bddfdbe4bbdca44fa58b",
+        "nome": "GERMINATIVO — TIP",
+        "id_original": "ovario-germ-tip",
+        "fonte_local_ref": "/tratamento/protocolos/33/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-bfa752b8998faff6",
+        "origem_json_pointer": "/tratamento/protocolos/34",
+        "sha256_conteudo": "da7b42f0f878a20ac51a95170098b53186ac8435a826f187c6593b3f6ece01d1",
+        "nome": "GERMINATIVO — Carboplatina + etoposídeo",
+        "id_original": "ovario-germ-carbo-etoposideo",
+        "fonte_local_ref": "/tratamento/protocolos/34/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-4c8258a09535502d",
+        "origem_json_pointer": "/tratamento/protocolos/35",
+        "sha256_conteudo": "cd86da0965b14aaf66ee0a8a382b93ccb14dd1a44232d9d138fa67ce83f43e53",
+        "nome": "GERMINATIVO — Gencitabina + paclitaxel",
+        "id_original": "ovario-germ-gem-pacli",
+        "fonte_local_ref": "/tratamento/protocolos/35/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e2b619dc7573ad0a",
+        "origem_json_pointer": "/tratamento/protocolos/36",
+        "sha256_conteudo": "53c92a6f0bb3657838adc9e59af3d181737e25009eb5c0ee4e0c2e5f53dbb8fe",
+        "nome": "GERMINATIVO — Gencitabina + oxaliplatina",
+        "id_original": "ovario-germ-gemox",
+        "fonte_local_ref": "/tratamento/protocolos/36/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-3c8f98cc50fc7c34",
+        "origem_json_pointer": "/tratamento/protocolos/37",
+        "sha256_conteudo": "c25b80d519200cb0acc5a8a9515d408c50ca1721d963ddba8a2db96248d7b6ab",
+        "nome": "GERMINATIVO — Bleomicina + etoposídeo + carboplatina (BEC)",
+        "id_original": "ovario-germ-bec",
+        "fonte_local_ref": "/tratamento/protocolos/37/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e09428a5710ae2ca",
+        "origem_json_pointer": "/tratamento/protocolos/38",
+        "sha256_conteudo": "91d0fa864bc225f2e77a87a6de910f68570d9f249d3f375beb2f69b380e6c933",
+        "nome": "HIPEC com cisplatina na citorredução de intervalo (OVHIPEC-1)",
+        "id_original": "ovario-epit-hipec-cisplatina-intervalo",
+        "fonte_local_ref": "/tratamento/protocolos/38/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-65bc719d048ed77d",
+        "origem_json_pointer": "/tratamento/cirurgia/0",
+        "sha256_conteudo": "6d6d3b67c80ee23563a69e73e0ea51a61460f7a6705282508b94d274958fe61e",
+        "nome": "/tratamento/cirurgia/0",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cirurgia/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-395065967650108b",
+        "origem_json_pointer": "/tratamento/cirurgia/1",
+        "sha256_conteudo": "3a384451432d9005c0d6a5d403573779a8319068842daf013c549f36fb07298f",
+        "nome": "/tratamento/cirurgia/1",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cirurgia/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-774ed9335e94c8fa",
+        "origem_json_pointer": "/tratamento/cirurgia/2",
+        "sha256_conteudo": "d97931063cee4d57fd2aa1eb0748a565138d76bafb964f1b1f80b7a7ea82f1be",
+        "nome": "/tratamento/cirurgia/2",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cirurgia/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-7703697411bd4d1f",
+        "origem_json_pointer": "/tratamento/cirurgia/3",
+        "sha256_conteudo": "db5b44efef043115d46f98dc8ae482193ea0f89b98d51edac491e16dbeecefac",
+        "nome": "/tratamento/cirurgia/3",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cirurgia/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-18964bed62dbd034",
+        "origem_json_pointer": "/tratamento/radioterapia/0",
+        "sha256_conteudo": "0fe3f655c4ca94511409a23626851a7ae9e30eadff55e191497b201ec67adff5",
+        "nome": "GERMINATIVO disgerminoma (casos selecionados)",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/radioterapia/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-30844a5c1d2c46ea",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/0",
+        "sha256_conteudo": "7fdcc3843efb0a238a8f87712d95f31b648405353a6e907b5ffa6f4c0a0f2a47",
+        "nome": "/ligacoes/interacoesConsultar/0",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-050d31833671e51a",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/1",
+        "sha256_conteudo": "e1770acdf7261bea4ec751da4dbd8e4f5cabc21514dcd3fee528b6b4240f5a14",
+        "nome": "/ligacoes/interacoesConsultar/1",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-adbfb6836d260675",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/2",
+        "sha256_conteudo": "cdfa24423a2890a29d22ef58939c6ca9a4b15b9a075931deb82edefaecd4fcbb",
+        "nome": "/ligacoes/interacoesConsultar/2",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-4e51e6f918e2c4f3",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/3",
+        "sha256_conteudo": "0a5ecdb29f8f738e0850c2f17e7619294c1fff3d6c45423c2e75dfc855b19a75",
+        "nome": "/ligacoes/interacoesConsultar/3",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-12a11bc52ba835b0",
+        "origem_json_pointer": "/ligacoes/ctcaeAcao/0",
+        "sha256_conteudo": "c144c54a94813a7bec5d73b3ef3e9608f062c18fe4b791e986890dad6e662a2e",
+        "nome": "/ligacoes/ctcaeAcao/0",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-875df0eeaa80570f",
+        "origem_json_pointer": "/ligacoes/ctcaeAcao/1",
+        "sha256_conteudo": "56fe69f60a321401b2ea2eb07ed9aee650c4219b8ea4908daa4594f3ed9334ee",
+        "nome": "/ligacoes/ctcaeAcao/1",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b6fcafdd79ae2e61",
+        "origem_json_pointer": "/ligacoes/ctcaeAcao/2",
+        "sha256_conteudo": "d0e09f3eb2f996dae4bf801fb0537bf1e1af3080d06499cbfebe1f1fe67eb2df",
+        "nome": "/ligacoes/ctcaeAcao/2",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-7785c30f2b9c2b8f",
+        "origem_json_pointer": "/ligacoes/ctcaeAcao/3",
+        "sha256_conteudo": "55642d861ebaf75d88f8d93068361a3daafec5b3d4258b71d2e5525de60be661",
+        "nome": "/ligacoes/ctcaeAcao/3",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-f6a3dfa0287ff08b",
+        "origem_json_pointer": "/ligacoes/ctcaeAcao/4",
+        "sha256_conteudo": "6aa0b81ca3e89ea1a1cfe5f3c6a3f3768c73694ed6808013d2324dfc9abf640b",
+        "nome": "/ligacoes/ctcaeAcao/4",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a6d73c03dc681163",
+        "origem_json_pointer": "/ligacoes/ctcaeAcao/5",
+        "sha256_conteudo": "24fc4b9e23fad8c82f1f954fc1a2bd87487c2c2582ebc73908ab9d7fd667586c",
+        "nome": "/ligacoes/ctcaeAcao/5",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-466b816c12fd98ce",
+        "origem_json_pointer": "/ligacoes/ctcaeAcao/6",
+        "sha256_conteudo": "55f440294b9254e76ff7a10a429fb538097e7c6701660cf5d03933f0b1a8c81e",
+        "nome": "/ligacoes/ctcaeAcao/6",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-2470a52d31c83b9a",
+        "origem_json_pointer": "/tratamento/suporte",
+        "sha256_conteudo": "28bedd43712a14e9994c49366a1244cc99fcde354b13957943a4eb09b3b2d1b0",
+        "nome": "/tratamento/suporte",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/suporte/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-07b8ddc4e9254720",
+        "origem_json_pointer": "/ligacoes/suporteReceitas/0",
+        "sha256_conteudo": "3990311a707f6183bac99076155a5f7679f2a3d1ccab0cc52d58bd5acbd5372b",
+        "nome": "Antiemese (carboplatina moderado; cisplatina alto)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-07cbb30e3140efee",
+        "origem_json_pointer": "/ligacoes/suporteReceitas/1",
+        "sha256_conteudo": "ee762749b89ba835ac4e462aa98680ece45e6de1aefeb3416cd76830ba3e0508",
+        "nome": "Pré-medicação de taxano",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-4b1c2c155be8f456",
+        "origem_json_pointer": "/ligacoes/suporteReceitas/2",
+        "sha256_conteudo": "e3b3eb3f470adb7991d2eb3aedcada6cd1cbe577da4008f90b596c2a301508ce",
+        "nome": "Mesna com ifosfamida",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b546800ced57278f",
+        "origem_json_pointer": "/ligacoes/suporteReceitas/3",
+        "sha256_conteudo": "adb1983a4e5e031b02e6e2b5c6a79d676e9a2609643bfa670bc2ed8dae5d20e9",
+        "nome": "G-CSF no TIP",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-541db5da0e5b2bc4",
+        "origem_json_pointer": "/ligacoes/suporteReceitas/4",
+        "sha256_conteudo": "1d726ec2f49ea6763a11a2356a2807f1aa07bd6766800ac3a13c87dff91e69d4",
+        "nome": "Colírio lubrificante/corticoide conforme bula do mirvetuximabe",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-165e0d6e0b4d9d3a",
+        "origem_json_pointer": "/tratamento/seguimento/0",
+        "sha256_conteudo": "6d9e0121054383395abcfe55e9c1557cc937bf3801e74cb8100e45ef5c4c2bd8",
+        "nome": "EPITELIAL anos 1-2",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/seguimento/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-4f40f938c0e5ade2",
+        "origem_json_pointer": "/tratamento/seguimento/1",
+        "sha256_conteudo": "bd399ca5d62b9b1866c7e13cab96db4f03f588a00c8cb6a97d030aeeffaf49be",
+        "nome": "EPITELIAL anos 3-5",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/seguimento/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-64c7907b5ee41473",
+        "origem_json_pointer": "/tratamento/seguimento/2",
+        "sha256_conteudo": "5ab794755965e769a05cb56c456aaa0e5b47c6dad07fca406bbab6200a8660df",
+        "nome": "GERMINATIVO 1º ano",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/seguimento/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e1706398d973efd5",
+        "origem_json_pointer": "/tratamento/seguimento/3",
+        "sha256_conteudo": "de0267002e14bcb7f55262e9a57671a74c40f94a8c9be9c01829704ffed351a4",
+        "nome": "GERMINATIVO 2º-3º ano",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/seguimento/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d240f54f7f94d270",
+        "origem_json_pointer": "/ligacoes/orientacoes/0",
+        "sha256_conteudo": "83d05c9f491ccb14a07d0ee94d99dfc6fa7064bf3453679d16e995334b35d4c2",
+        "nome": "Aconselhamento genético e cascata familiar se BRCAm",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-85c8d2bcf8dadd17",
+        "origem_json_pointer": "/ligacoes/orientacoes/1",
+        "sha256_conteudo": "3e593bc2b8d7562c85cc8e629b4d8915a6f00734098871b7863e27a4c082b0ca",
+        "nome": "Hemograma mensal com iPARP",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-3759efa62878bdc3",
+        "origem_json_pointer": "/ligacoes/orientacoes/2",
+        "sha256_conteudo": "f8ff89e60fa6ab266602574825198f0838cdca97c6dc57ad78d9f09d33206350",
+        "nome": "Toxicidade ocular com mirvetuximabe",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-52dc998bcefb7c2c",
+        "origem_json_pointer": "/ligacoes/orientacoes/3",
+        "sha256_conteudo": "eb70b7028f09fd50e02473209a7abe376666fb984c90156806c7927c4b4a3043",
+        "nome": "Contracepção e fertilidade no germinativo",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-78faea4c98bf0a5d",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/0",
+        "sha256_conteudo": "f3b5b05e80effed0b031d9ad291b22e1be140408f7db5b955d52316745d635cb",
+        "nome": "Oncogenética (todo epitelial)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ce7b3844c24fe6e1",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/1",
+        "sha256_conteudo": "e9eb99305f80c7c5e74643dd19b8676d6923e20326c1c5c09fcdc7141a76d86a",
+        "nome": "Oncoginecologia cirúrgica (citorredução)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-0ed8d7f97703492d",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/2",
+        "sha256_conteudo": "55c2fd61f5c7b3d78bf32c80e26eecedae608875b972717e57180ea63de66143",
+        "nome": "Reprodução humana (germinativo jovem)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d8f127f13395e8d1",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/3",
+        "sha256_conteudo": "98b3cbc10a7ba00e90801b5348b28d0624e04512c5585d1969e951252cd48c94",
+        "nome": "Patologia de referência (germinativo: segunda opinião)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-91ebb61401860b30",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/4",
+        "sha256_conteudo": "baccd46f5c51a87995cbd7ee79c579877d3b779e3e35666e16cd3aa4a86d6ec7",
+        "nome": "Centro de TMO (germinativo refratário — QT alta dose)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-5ec26e71463f005c",
+        "origem_json_pointer": "/ligacoes/laudos/0",
+        "sha256_conteudo": "8b02c0b9d4d52f3a960e87c4d73505c3632710781048635cc984c101b97eb80a",
+        "nome": "APAC quimioterapia",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-224848e294bb0cb5",
+        "origem_json_pointer": "/ligacoes/laudos/1",
+        "sha256_conteudo": "036ea4787806cafa5bf2017a272fb85a3f46b18528e4bf7ec9582e05f9b19d20",
+        "nome": "Laudo de teste BRCA para olaparibe (condição da Portaria SECTICS 45/2024)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      }
+    ],
+    "itens_nccn": [
+      {
+        "item_id": "nccn-20261017-ovario-trametinibe",
+        "nome": "Trametinibe — seroso de baixo grau",
+        "tipo": "OPCAO_TERAPEUTICA",
+        "dominio_principal": 6,
+        "conteudo_extraido": "Trametinibe para carcinoma seroso de baixo grau recorrente, sensível ou resistente à platina, em Useful in Certain Circumstances. Esta linha não exige BRAF V600E; é distinta da associação dabrafenibe/trametinibe para BRAF V600E.",
+        "aplicabilidade": {
+          "criterios": [
+            "Carcinoma seroso de baixo grau recorrente",
+            "Platina-sensível ou resistente",
+            "Não adicionar requisito BRAF V600E da outra linha"
+          ],
+          "paciente_individual": null,
+          "estado": "NAO_AVALIADA"
+        },
+        "dados_estruturados": {
+          "farmacos": [
+            "trametinibe"
+          ],
+          "posologia": {
+            "estado": "NAO_EXTRAIDA_NESTA_RODADA",
+            "valor": null,
+            "motivo": "A rodada incorpora o delta de indicação/cenário; não completa dose por inferência."
+          }
+        },
+        "fonte_refs": [
+          {
+            "fonte_id": "nccn-2586b026f1b9",
+            "edicao": "4.2026",
+            "pagina_pdf": 54,
+            "paginas_pdf": [
+              54
+            ],
+            "secao": "OV-D 8/12, low-grade serous",
+            "trecho": "Trametinib",
+            "ancora_contextual": "For low-grade serous carcinoma:",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "ed1126c21faebaa4ba815a47c215b82ebac0eff9dc09352bda0019570fadfeeb"
+          },
+          {
+            "fonte_id": "nccn-2586b026f1b9",
+            "edicao": "4.2026",
+            "pagina_pdf": 55,
+            "paginas_pdf": [
+              55
+            ],
+            "secao": "OV-D 9/12, low-grade serous",
+            "trecho": "For low-grade serous carcinoma:",
+            "ancora_contextual": null,
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "ed1126c21faebaa4ba815a47c215b82ebac0eff9dc09352bda0019570fadfeeb"
+          }
+        ],
+        "evidencia_declarada": {
+          "sistema": "NCCN",
+          "categoria": "2A por cabeçalho",
+          "preferencia": "Useful in Certain Circumstances",
+          "estado": "CONFERIDA_DOCUMENTALMENTE_A_CONFERIR_CLINICAMENTE",
+          "nota": "Categoria 2A sem marca local somente quando expressamente coberta pelo cabeçalho; múltiplas categorias permanecem nos ramos."
+        },
+        "estado_extracao": "EXTRAIDO_COM_LIMITES_DECLARADOS",
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "temporalidade": {
+          "referencia": "CENARIO_DESCRITO",
+          "datas_individuais": null
+        },
+        "propor_automaticamente": false,
+        "disponivel_para_prescricao": false,
+        "acesso": {
+          "registro_anvisa": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "incorporacao_conitec": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "pcdt_ddt": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "sigtap_apac": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "cobertura_privada": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "disponibilidade_institucional": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          }
+        },
+        "alternativas_legadas_refs": [],
+        "relacoes_refs": [
+          "relacao-nccn-20261017-ovario-trametinibe"
+        ],
+        "conflitos_refs": [],
+        "pendencias": [
+          "REVISAO_CLINICA_DO_DELTA",
+          "VERIFICAR_ACESSO_BRASILEIRO_POR_INDICACAO",
+          "POSOLOGIA_E_SUPORTE_NAO_COMPLETOS_NESTA_RODADA"
+        ],
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-2-correcao-auditoria",
+            "correcao_id": "M25",
+            "anterior": {
+              "conteudo_extraido": "Opção específica da histologia/linha, preservando tratamentos e notas anteriores.",
+              "fonte_refs": [
+                {
+                  "fonte_id": "nccn-2586b026f1b9",
+                  "paginas_pdf": [
+                    54,
+                    55,
+                    56
+                  ],
+                  "secao": "OV-D 8–9A/12",
+                  "natureza": "EXTRACAO_DOCUMENTAL",
+                  "pagina_pdf": 54,
+                  "trecho": "Trametinib (for BRAF V600E-positive tumors)30 • Entrectinib31 or Larotrectinib32 or Repotrectinib33 (for"
+                }
+              ],
+              "estado_curadoria": "A_CONFERIR",
+              "aprovacao_clinica": null,
+              "aplicabilidade": {
+                "criterios": [
+                  "Carcinoma seroso de baixo grau recorrente"
+                ],
+                "paciente_individual": null,
+                "estado": "NAO_AVALIADA"
+              },
+              "evidencia_declarada": {
+                "sistema": "NCCN",
+                "categoria": null,
+                "estado": "NAO_EXTRAIDA_POR_ITEM"
+              }
+            },
+            "motivo": "Correção documental após auditoria Claude e conferência da fonte; não apaga versão anterior.",
+            "aprovacao_clinica": null
+          }
+        ],
+        "fontes_por_campo": {
+          "conteudo_extraido": [
+            {
+              "fonte_id": "nccn-2586b026f1b9",
+              "edicao": "4.2026",
+              "pagina_pdf": 54,
+              "paginas_pdf": [
+                54
+              ],
+              "secao": "OV-D 8/12, low-grade serous",
+              "trecho": "Trametinib",
+              "ancora_contextual": "For low-grade serous carcinoma:",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "ed1126c21faebaa4ba815a47c215b82ebac0eff9dc09352bda0019570fadfeeb"
+            },
+            {
+              "fonte_id": "nccn-2586b026f1b9",
+              "edicao": "4.2026",
+              "pagina_pdf": 55,
+              "paginas_pdf": [
+                55
+              ],
+              "secao": "OV-D 9/12, low-grade serous",
+              "trecho": "For low-grade serous carcinoma:",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "ed1126c21faebaa4ba815a47c215b82ebac0eff9dc09352bda0019570fadfeeb"
+            }
+          ],
+          "aplicabilidade": [
+            {
+              "fonte_id": "nccn-2586b026f1b9",
+              "edicao": "4.2026",
+              "pagina_pdf": 54,
+              "paginas_pdf": [
+                54
+              ],
+              "secao": "OV-D 8/12, low-grade serous",
+              "trecho": "Trametinib",
+              "ancora_contextual": "For low-grade serous carcinoma:",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "ed1126c21faebaa4ba815a47c215b82ebac0eff9dc09352bda0019570fadfeeb"
+            },
+            {
+              "fonte_id": "nccn-2586b026f1b9",
+              "edicao": "4.2026",
+              "pagina_pdf": 55,
+              "paginas_pdf": [
+                55
+              ],
+              "secao": "OV-D 9/12, low-grade serous",
+              "trecho": "For low-grade serous carcinoma:",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "ed1126c21faebaa4ba815a47c215b82ebac0eff9dc09352bda0019570fadfeeb"
+            }
+          ],
+          "evidencia_declarada": [
+            {
+              "fonte_id": "nccn-2586b026f1b9",
+              "edicao": "4.2026",
+              "pagina_pdf": 54,
+              "paginas_pdf": [
+                54
+              ],
+              "secao": "OV-D 8/12, low-grade serous",
+              "trecho": "Trametinib",
+              "ancora_contextual": "For low-grade serous carcinoma:",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "ed1126c21faebaa4ba815a47c215b82ebac0eff9dc09352bda0019570fadfeeb"
+            },
+            {
+              "fonte_id": "nccn-2586b026f1b9",
+              "edicao": "4.2026",
+              "pagina_pdf": 55,
+              "paginas_pdf": [
+                55
+              ],
+              "secao": "OV-D 9/12, low-grade serous",
+              "trecho": "For low-grade serous carcinoma:",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "ed1126c21faebaa4ba815a47c215b82ebac0eff9dc09352bda0019570fadfeeb"
+            }
+          ]
+        },
+        "correcoes_auditoria": [
+          {
+            "id": "M25",
+            "revisao": "2026-10-17-nccn-delta-2-correcao-auditoria",
+            "estado": "APLICADA_COM_CONFERENCIA_DOCUMENTAL",
+            "fontes": [
+              {
+                "fonte_id": "nccn-2586b026f1b9",
+                "edicao": "4.2026",
+                "pagina_pdf": 54,
+                "paginas_pdf": [
+                  54
+                ],
+                "secao": "OV-D 8/12, low-grade serous",
+                "trecho": "Trametinib",
+                "ancora_contextual": "For low-grade serous carcinoma:",
+                "natureza": "EXTRACAO_DOCUMENTAL",
+                "sha256_pdf": "ed1126c21faebaa4ba815a47c215b82ebac0eff9dc09352bda0019570fadfeeb"
+              },
+              {
+                "fonte_id": "nccn-2586b026f1b9",
+                "edicao": "4.2026",
+                "pagina_pdf": 55,
+                "paginas_pdf": [
+                  55
+                ],
+                "secao": "OV-D 9/12, low-grade serous",
+                "trecho": "For low-grade serous carcinoma:",
+                "ancora_contextual": null,
+                "natureza": "EXTRACAO_DOCUMENTAL",
+                "sha256_pdf": "ed1126c21faebaa4ba815a47c215b82ebac0eff9dc09352bda0019570fadfeeb"
+              }
+            ],
+            "ajuste_ao_parecer": null
+          }
+        ]
+      },
+      {
+        "item_id": "nccn-20261017-ovario-avutometinibe-defactinibe",
+        "nome": "Avutometinibe + defactinibe",
+        "tipo": "OPCAO_TERAPEUTICA",
+        "dominio_principal": 6,
+        "conteudo_extraido": "Opção específica da histologia/linha, preservando tratamentos e notas anteriores.",
+        "aplicabilidade": {
+          "criterios": [
+            "Carcinoma seroso de baixo grau recorrente",
+            "KRAS mutado"
+          ],
+          "paciente_individual": null,
+          "estado": "NAO_AVALIADA"
+        },
+        "dados_estruturados": {
+          "farmacos": [
+            "avutometinibe",
+            "defactinibe"
+          ],
+          "posologia": {
+            "estado": "NAO_EXTRAIDA_NESTA_RODADA",
+            "valor": null,
+            "motivo": "A rodada incorpora o delta de indicação/cenário; não completa dose por inferência."
+          }
+        },
+        "fonte_refs": [
+          {
+            "fonte_id": "nccn-2586b026f1b9",
+            "paginas_pdf": [
+              54,
+              55,
+              56
+            ],
+            "secao": "OV-D 8–9A/12",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "pagina_pdf": 54,
+            "trecho": "Avutometinib/Defactinib (for KRAS-mutated tumors)38 \u0017Trametinib39 \u0017Binimetinib (category 2B)40,41 Hormone Therapy • Fulvestrant"
+          }
+        ],
+        "evidencia_declarada": {
+          "sistema": "NCCN",
+          "categoria": null,
+          "estado": "NAO_EXTRAIDA_POR_ITEM"
+        },
+        "estado_extracao": "EXTRAIDO_COM_LIMITES_DECLARADOS",
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "temporalidade": {
+          "referencia": "CENARIO_DESCRITO",
+          "datas_individuais": null
+        },
+        "propor_automaticamente": false,
+        "disponivel_para_prescricao": false,
+        "acesso": {
+          "registro_anvisa": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "incorporacao_conitec": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "pcdt_ddt": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "sigtap_apac": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "cobertura_privada": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "disponibilidade_institucional": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          }
+        },
+        "alternativas_legadas_refs": [],
+        "relacoes_refs": [
+          "relacao-nccn-20261017-ovario-avutometinibe-defactinibe"
+        ],
+        "conflitos_refs": [],
+        "pendencias": [
+          "REVISAO_CLINICA_DO_DELTA",
+          "VERIFICAR_ACESSO_BRASILEIRO_POR_INDICACAO",
+          "POSOLOGIA_E_SUPORTE_NAO_COMPLETOS_NESTA_RODADA"
+        ]
+      },
+      {
+        "item_id": "nccn-20261017-ovario-relacorilanto",
+        "nome": "Relacorilanto + nab-paclitaxel",
+        "tipo": "OPCAO_TERAPEUTICA",
+        "dominio_principal": 6,
+        "conteudo_extraido": "Opção específica da histologia/linha, preservando tratamentos e notas anteriores.",
+        "aplicabilidade": {
+          "criterios": [
+            "Doença platino-resistente",
+            "Até três linhas prévias e bevacizumabe prévio conforme nota x",
+            "Não usar pré-medicação com corticoide conforme nota y"
+          ],
+          "paciente_individual": null,
+          "estado": "NAO_AVALIADA"
+        },
+        "dados_estruturados": {
+          "farmacos": [
+            "relacorilanto",
+            "nab-paclitaxel"
+          ],
+          "posologia": {
+            "estado": "NAO_EXTRAIDA_NESTA_RODADA",
+            "valor": null,
+            "motivo": "A rodada incorpora o delta de indicação/cenário; não completa dose por inferência."
+          }
+        },
+        "fonte_refs": [
+          {
+            "fonte_id": "nccn-2586b026f1b9",
+            "paginas_pdf": [
+              54,
+              55,
+              56
+            ],
+            "secao": "OV-D 8–9A/12",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "pagina_pdf": 55,
+            "trecho": "Relacorilantx,y,44 • Docetaxel45 • Gemcitabine46,47 • Liposomal Doxorubicin46,47 • Liposomal Doxorubicin +"
+          }
+        ],
+        "evidencia_declarada": {
+          "sistema": "NCCN",
+          "categoria": null,
+          "estado": "NAO_EXTRAIDA_POR_ITEM"
+        },
+        "estado_extracao": "EXTRAIDO_COM_LIMITES_DECLARADOS",
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "temporalidade": {
+          "referencia": "CENARIO_DESCRITO",
+          "datas_individuais": null
+        },
+        "propor_automaticamente": false,
+        "disponivel_para_prescricao": false,
+        "acesso": {
+          "registro_anvisa": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "incorporacao_conitec": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "pcdt_ddt": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "sigtap_apac": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "cobertura_privada": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "disponibilidade_institucional": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          }
+        },
+        "alternativas_legadas_refs": [],
+        "relacoes_refs": [
+          "relacao-nccn-20261017-ovario-relacorilanto"
+        ],
+        "conflitos_refs": [],
+        "pendencias": [
+          "REVISAO_CLINICA_DO_DELTA",
+          "VERIFICAR_ACESSO_BRASILEIRO_POR_INDICACAO",
+          "POSOLOGIA_E_SUPORTE_NAO_COMPLETOS_NESTA_RODADA"
+        ]
+      },
+      {
+        "item_id": "nccn-20261017-ovario-mirvetuximabe-variantes",
+        "nome": "Mirvetuximabe: combinações e critérios de FRα",
+        "tipo": "BIOMARCADOR_E_TRATAMENTO",
+        "dominio_principal": 3,
+        "conteudo_extraido": "Separar quatro ramos de FRα: sensível à platina, monoterapia ≥75% e combinação com bevacizumabe ≥50% (2B); resistente, monoterapia ≥75% (Preferred,1) e combinação ≥25% (Useful in Certain Circumstances,2A pelo cabeçalho). Bevacizumabe é contraindicado quando há risco aumentado de perfuração GI (nota r).",
+        "aplicabilidade": {
+          "criterios": [
+            "FRα documentado",
+            "Sensibilidade à platina",
+            "Monoterapia ou combinação explicitamente selecionada"
+          ],
+          "paciente_individual": null,
+          "estado": "NAO_AVALIADA"
+        },
+        "dados_estruturados": {
+          "ramos_FRalpha": [
+            {
+              "platina": "SENSIVEL",
+              "regime": "monoterapia",
+              "percentual_minimo": 75,
+              "categoria": "2A por cabeçalho",
+              "preferencia": "Useful in Certain Circumstances"
+            },
+            {
+              "platina": "SENSIVEL",
+              "regime": "+ bevacizumabe",
+              "percentual_minimo": 50,
+              "categoria": "2B",
+              "preferencia": "Useful in Certain Circumstances"
+            },
+            {
+              "platina": "RESISTENTE",
+              "regime": "monoterapia",
+              "percentual_minimo": 75,
+              "categoria": "1",
+              "preferencia": "Preferred"
+            },
+            {
+              "platina": "RESISTENTE",
+              "regime": "+ bevacizumabe",
+              "percentual_minimo": 25,
+              "categoria": "2A por cabeçalho",
+              "preferencia": "Useful in Certain Circumstances"
+            }
+          ]
+        },
+        "fonte_refs": [
+          {
+            "fonte_id": "nccn-2586b026f1b9",
+            "edicao": "4.2026",
+            "pagina_pdf": 54,
+            "paginas_pdf": [
+              54
+            ],
+            "secao": "OV-D 8/12",
+            "trecho": "Mirvetuximab",
+            "ancora_contextual": null,
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "ed1126c21faebaa4ba815a47c215b82ebac0eff9dc09352bda0019570fadfeeb"
+          },
+          {
+            "fonte_id": "nccn-2586b026f1b9",
+            "edicao": "4.2026",
+            "pagina_pdf": 55,
+            "paginas_pdf": [
+              55
+            ],
+            "secao": "OV-D 9/12",
+            "trecho": "Mirvetuximab",
+            "ancora_contextual": null,
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "ed1126c21faebaa4ba815a47c215b82ebac0eff9dc09352bda0019570fadfeeb"
+          },
+          {
+            "fonte_id": "nccn-2586b026f1b9",
+            "edicao": "4.2026",
+            "pagina_pdf": 56,
+            "paginas_pdf": [
+              56
+            ],
+            "secao": "OV-D 9A/12, nota r",
+            "trecho": "Contraindicated for patients at increased risk of GI perforation",
+            "ancora_contextual": null,
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "sha256_pdf": "ed1126c21faebaa4ba815a47c215b82ebac0eff9dc09352bda0019570fadfeeb"
+          }
+        ],
+        "evidencia_declarada": {
+          "sistema": "NCCN",
+          "categoria": "VARIA_POR_RAMO",
+          "preferencia": "VARIA_POR_RAMO",
+          "estado": "CONFERIDA_DOCUMENTALMENTE_A_CONFERIR_CLINICAMENTE",
+          "nota": "Categoria 2A sem marca local somente quando expressamente coberta pelo cabeçalho; múltiplas categorias permanecem nos ramos."
+        },
+        "estado_extracao": "EXTRAIDO_COM_LIMITES_DECLARADOS",
+        "estado_curadoria": "A_CONFERIR",
+        "aprovacao_clinica": null,
+        "temporalidade": {
+          "referencia": "CENARIO_DESCRITO",
+          "datas_individuais": null
+        },
+        "propor_automaticamente": false,
+        "disponivel_para_prescricao": false,
+        "acesso": {
+          "registro_anvisa": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "incorporacao_conitec": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "pcdt_ddt": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "sigtap_apac": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "cobertura_privada": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          },
+          "disponibilidade_institucional": {
+            "estado": "NAO_VERIFICADO",
+            "fonte": null
+          }
+        },
+        "alternativas_legadas_refs": [],
+        "relacoes_refs": [
+          "relacao-nccn-20261017-ovario-mirvetuximabe-variantes"
+        ],
+        "conflitos_refs": [
+          "conflito-nccn-20261017-ovario-mirvetuximabe-variantes"
+        ],
+        "pendencias": [
+          "REVISAO_CLINICA_DO_DELTA",
+          "VERIFICAR_ACESSO_BRASILEIRO_POR_INDICACAO"
+        ],
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-2-correcao-auditoria",
+            "correcao_id": "M24",
+            "anterior": {
+              "conteudo_extraido": "Distinguir monoterapia de associação com bevacizumabe. Os limiares de expressão e categorias variam por sensibilidade à platina e combinação; não transportar o corte de um ramo para outro.",
+              "fonte_refs": [
+                {
+                  "fonte_id": "nccn-2586b026f1b9",
+                  "paginas_pdf": [
+                    54,
+                    55,
+                    56
+                  ],
+                  "secao": "OV-D 8–9A/12",
+                  "natureza": "EXTRACAO_DOCUMENTAL",
+                  "pagina_pdf": 54,
+                  "trecho": "Mirvetuximab soravtansine-gynxw (for FRα-expressing tumors [≥75% positive tumor cells])35 • Mirvetuximab soravtansine-gynx"
+                }
+              ],
+              "estado_curadoria": "A_CONFERIR",
+              "aprovacao_clinica": null,
+              "dados_estruturados": {},
+              "evidencia_declarada": {
+                "sistema": "NCCN",
+                "categoria": null,
+                "estado": "NAO_EXTRAIDA_POR_ITEM"
+              }
+            },
+            "motivo": "Correção documental após auditoria Claude e conferência da fonte; não apaga versão anterior.",
+            "aprovacao_clinica": null
+          }
+        ],
+        "fontes_por_campo": {
+          "conteudo_extraido": [
+            {
+              "fonte_id": "nccn-2586b026f1b9",
+              "edicao": "4.2026",
+              "pagina_pdf": 54,
+              "paginas_pdf": [
+                54
+              ],
+              "secao": "OV-D 8/12",
+              "trecho": "Mirvetuximab",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "ed1126c21faebaa4ba815a47c215b82ebac0eff9dc09352bda0019570fadfeeb"
+            },
+            {
+              "fonte_id": "nccn-2586b026f1b9",
+              "edicao": "4.2026",
+              "pagina_pdf": 55,
+              "paginas_pdf": [
+                55
+              ],
+              "secao": "OV-D 9/12",
+              "trecho": "Mirvetuximab",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "ed1126c21faebaa4ba815a47c215b82ebac0eff9dc09352bda0019570fadfeeb"
+            },
+            {
+              "fonte_id": "nccn-2586b026f1b9",
+              "edicao": "4.2026",
+              "pagina_pdf": 56,
+              "paginas_pdf": [
+                56
+              ],
+              "secao": "OV-D 9A/12, nota r",
+              "trecho": "Contraindicated for patients at increased risk of GI perforation",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "ed1126c21faebaa4ba815a47c215b82ebac0eff9dc09352bda0019570fadfeeb"
+            }
+          ],
+          "dados_estruturados": [
+            {
+              "fonte_id": "nccn-2586b026f1b9",
+              "edicao": "4.2026",
+              "pagina_pdf": 54,
+              "paginas_pdf": [
+                54
+              ],
+              "secao": "OV-D 8/12",
+              "trecho": "Mirvetuximab",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "ed1126c21faebaa4ba815a47c215b82ebac0eff9dc09352bda0019570fadfeeb"
+            },
+            {
+              "fonte_id": "nccn-2586b026f1b9",
+              "edicao": "4.2026",
+              "pagina_pdf": 55,
+              "paginas_pdf": [
+                55
+              ],
+              "secao": "OV-D 9/12",
+              "trecho": "Mirvetuximab",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "ed1126c21faebaa4ba815a47c215b82ebac0eff9dc09352bda0019570fadfeeb"
+            },
+            {
+              "fonte_id": "nccn-2586b026f1b9",
+              "edicao": "4.2026",
+              "pagina_pdf": 56,
+              "paginas_pdf": [
+                56
+              ],
+              "secao": "OV-D 9A/12, nota r",
+              "trecho": "Contraindicated for patients at increased risk of GI perforation",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "ed1126c21faebaa4ba815a47c215b82ebac0eff9dc09352bda0019570fadfeeb"
+            }
+          ],
+          "evidencia_declarada": [
+            {
+              "fonte_id": "nccn-2586b026f1b9",
+              "edicao": "4.2026",
+              "pagina_pdf": 54,
+              "paginas_pdf": [
+                54
+              ],
+              "secao": "OV-D 8/12",
+              "trecho": "Mirvetuximab",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "ed1126c21faebaa4ba815a47c215b82ebac0eff9dc09352bda0019570fadfeeb"
+            },
+            {
+              "fonte_id": "nccn-2586b026f1b9",
+              "edicao": "4.2026",
+              "pagina_pdf": 55,
+              "paginas_pdf": [
+                55
+              ],
+              "secao": "OV-D 9/12",
+              "trecho": "Mirvetuximab",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "ed1126c21faebaa4ba815a47c215b82ebac0eff9dc09352bda0019570fadfeeb"
+            },
+            {
+              "fonte_id": "nccn-2586b026f1b9",
+              "edicao": "4.2026",
+              "pagina_pdf": 56,
+              "paginas_pdf": [
+                56
+              ],
+              "secao": "OV-D 9A/12, nota r",
+              "trecho": "Contraindicated for patients at increased risk of GI perforation",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "ed1126c21faebaa4ba815a47c215b82ebac0eff9dc09352bda0019570fadfeeb"
+            }
+          ]
+        },
+        "correcoes_auditoria": [
+          {
+            "id": "M24",
+            "revisao": "2026-10-17-nccn-delta-2-correcao-auditoria",
+            "estado": "APLICADA_COM_CONFERENCIA_DOCUMENTAL",
+            "fontes": [
+              {
+                "fonte_id": "nccn-2586b026f1b9",
+                "edicao": "4.2026",
+                "pagina_pdf": 54,
+                "paginas_pdf": [
+                  54
+                ],
+                "secao": "OV-D 8/12",
+                "trecho": "Mirvetuximab",
+                "ancora_contextual": null,
+                "natureza": "EXTRACAO_DOCUMENTAL",
+                "sha256_pdf": "ed1126c21faebaa4ba815a47c215b82ebac0eff9dc09352bda0019570fadfeeb"
+              },
+              {
+                "fonte_id": "nccn-2586b026f1b9",
+                "edicao": "4.2026",
+                "pagina_pdf": 55,
+                "paginas_pdf": [
+                  55
+                ],
+                "secao": "OV-D 9/12",
+                "trecho": "Mirvetuximab",
+                "ancora_contextual": null,
+                "natureza": "EXTRACAO_DOCUMENTAL",
+                "sha256_pdf": "ed1126c21faebaa4ba815a47c215b82ebac0eff9dc09352bda0019570fadfeeb"
+              },
+              {
+                "fonte_id": "nccn-2586b026f1b9",
+                "edicao": "4.2026",
+                "pagina_pdf": 56,
+                "paginas_pdf": [
+                  56
+                ],
+                "secao": "OV-D 9A/12, nota r",
+                "trecho": "Contraindicated for patients at increased risk of GI perforation",
+                "ancora_contextual": null,
+                "natureza": "EXTRACAO_DOCUMENTAL",
+                "sha256_pdf": "ed1126c21faebaa4ba815a47c215b82ebac0eff9dc09352bda0019570fadfeeb"
+              }
+            ],
+            "ajuste_ao_parecer": null
+          }
+        ]
+      }
+    ],
+    "cenarios": {
+      "identidade_ref": "/identidade/cenarios",
+      "detalhamento_ref": "/tratamento/cenarios",
+      "novas_condicoes_refs": [
+        "nccn-20261017-ovario-trametinibe",
+        "nccn-20261017-ovario-avutometinibe-defactinibe",
+        "nccn-20261017-ovario-relacorilanto",
+        "nccn-20261017-ovario-mirvetuximabe-variantes"
+      ],
+      "regra": "Não igualar automaticamente as duas listas nem selecionar cenário individual nesta camada."
+    },
+    "fontes": [
+      {
+        "id": "nccn-2586b026f1b9",
+        "arquivo_local": "C:\\Users\\silas\\.aside\\u\\0\\sessions\\2026-10-17_LutNNwUyDZGlA1pF\\artifacts\\nccn\\Ovarian CancerFallopian Tube CancerPrimary Peritoneal Cancer.pdf",
+        "nome": "Ovarian CancerFallopian Tube CancerPrimary Peritoneal Cancer",
+        "sha256": "ed1126c21faebaa4ba815a47c215b82ebac0eff9dc09352bda0019570fadfeeb",
+        "numero_paginas": 130,
+        "versao_declarada": "4.2026",
+        "origem": "ARQUIVO_LOCAL_FORNECIDO",
+        "autenticidade_externa": "NAO_VERIFICADA_NO_PORTAL",
+        "paginas_examinadas": [
+          54,
+          55,
+          56
+        ]
+      }
+    ],
+    "fontes_legadas_refs": [
+      "/header/fonte",
+      "/curadoria/fontesLidas"
+    ],
+    "ensaios": {
+      "legado_ref": "/tratamento/ensaios",
+      "novos_nct": [],
+      "nota": "Nenhum identificador NCT foi inventado ou verificado nesta rodada."
+    },
+    "relacoes": [
+      {
+        "relacao_id": "relacao-nccn-20261017-ovario-trametinibe",
+        "tipo": "CONDICOES_PARA_APRESENTACAO_DOCUMENTAL",
+        "destino_item_ref": "nccn-20261017-ovario-trametinibe",
+        "criterios_extraidos": [
+          "Carcinoma seroso de baixo grau recorrente",
+          "Platina-sensível ou resistente",
+          "Não adicionar requisito BRAF V600E da outra linha"
+        ],
+        "origem_condicoes": "FONTE_NCCN_CITADA",
+        "origem_mapeamento": "PROPOSTA_DE_MAPEAMENTO",
+        "executavel": false,
+        "estado": "A_CONFERIR",
+        "dados_ausentes": "MANTER_INDETERMINADO",
+        "dados_conflitantes": "MANTER_CONFLITO",
+        "efeito": "APRESENTAR_CONTEUDO_PARA_REVISAO; NAO PRESCREVER",
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-2-correcao-auditoria",
+            "correcao_id": "M25",
+            "criterios_extraidos": [
+              "Carcinoma seroso de baixo grau recorrente"
+            ]
+          }
+        ],
+        "fontes_por_campo": {
+          "criterios_extraidos": [
+            {
+              "fonte_id": "nccn-2586b026f1b9",
+              "edicao": "4.2026",
+              "pagina_pdf": 54,
+              "paginas_pdf": [
+                54
+              ],
+              "secao": "OV-D 8/12, low-grade serous",
+              "trecho": "Trametinib",
+              "ancora_contextual": "For low-grade serous carcinoma:",
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "ed1126c21faebaa4ba815a47c215b82ebac0eff9dc09352bda0019570fadfeeb"
+            },
+            {
+              "fonte_id": "nccn-2586b026f1b9",
+              "edicao": "4.2026",
+              "pagina_pdf": 55,
+              "paginas_pdf": [
+                55
+              ],
+              "secao": "OV-D 9/12, low-grade serous",
+              "trecho": "For low-grade serous carcinoma:",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "ed1126c21faebaa4ba815a47c215b82ebac0eff9dc09352bda0019570fadfeeb"
+            }
+          ]
+        }
+      },
+      {
+        "relacao_id": "relacao-nccn-20261017-ovario-avutometinibe-defactinibe",
+        "tipo": "CONDICOES_PARA_APRESENTACAO_DOCUMENTAL",
+        "destino_item_ref": "nccn-20261017-ovario-avutometinibe-defactinibe",
+        "criterios_extraidos": [
+          "Carcinoma seroso de baixo grau recorrente",
+          "KRAS mutado"
+        ],
+        "origem_condicoes": "FONTE_NCCN_CITADA",
+        "origem_mapeamento": "PROPOSTA_DE_MAPEAMENTO",
+        "executavel": false,
+        "estado": "A_CONFERIR",
+        "dados_ausentes": "MANTER_INDETERMINADO",
+        "dados_conflitantes": "MANTER_CONFLITO",
+        "efeito": "APRESENTAR_CONTEUDO_PARA_REVISAO; NAO PRESCREVER"
+      },
+      {
+        "relacao_id": "relacao-nccn-20261017-ovario-relacorilanto",
+        "tipo": "CONDICOES_PARA_APRESENTACAO_DOCUMENTAL",
+        "destino_item_ref": "nccn-20261017-ovario-relacorilanto",
+        "criterios_extraidos": [
+          "Doença platino-resistente",
+          "Até três linhas prévias e bevacizumabe prévio conforme nota x",
+          "Não usar pré-medicação com corticoide conforme nota y"
+        ],
+        "origem_condicoes": "FONTE_NCCN_CITADA",
+        "origem_mapeamento": "PROPOSTA_DE_MAPEAMENTO",
+        "executavel": false,
+        "estado": "A_CONFERIR",
+        "dados_ausentes": "MANTER_INDETERMINADO",
+        "dados_conflitantes": "MANTER_CONFLITO",
+        "efeito": "APRESENTAR_CONTEUDO_PARA_REVISAO; NAO PRESCREVER"
+      },
+      {
+        "relacao_id": "relacao-nccn-20261017-ovario-mirvetuximabe-variantes",
+        "tipo": "CONDICOES_PARA_APRESENTACAO_DOCUMENTAL",
+        "destino_item_ref": "nccn-20261017-ovario-mirvetuximabe-variantes",
+        "criterios_extraidos": [
+          "FRα documentado",
+          "Sensibilidade à platina",
+          "Monoterapia ou combinação explicitamente selecionada"
+        ],
+        "origem_condicoes": "FONTE_NCCN_CITADA",
+        "origem_mapeamento": "PROPOSTA_DE_MAPEAMENTO",
+        "executavel": false,
+        "estado": "A_CONFERIR",
+        "dados_ausentes": "MANTER_INDETERMINADO",
+        "dados_conflitantes": "MANTER_CONFLITO",
+        "efeito": "APRESENTAR_CONTEUDO_PARA_REVISAO; NAO PRESCREVER",
+        "variantes_anteriores": [
+          {
+            "revisao": "2026-10-17-nccn-delta-2-correcao-auditoria",
+            "correcao_id": "M24",
+            "criterios_extraidos": [
+              "FRα documentado",
+              "Sensibilidade à platina",
+              "Monoterapia ou combinação explicitamente selecionada"
+            ]
+          }
+        ],
+        "fontes_por_campo": {
+          "criterios_extraidos": [
+            {
+              "fonte_id": "nccn-2586b026f1b9",
+              "edicao": "4.2026",
+              "pagina_pdf": 54,
+              "paginas_pdf": [
+                54
+              ],
+              "secao": "OV-D 8/12",
+              "trecho": "Mirvetuximab",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "ed1126c21faebaa4ba815a47c215b82ebac0eff9dc09352bda0019570fadfeeb"
+            },
+            {
+              "fonte_id": "nccn-2586b026f1b9",
+              "edicao": "4.2026",
+              "pagina_pdf": 55,
+              "paginas_pdf": [
+                55
+              ],
+              "secao": "OV-D 9/12",
+              "trecho": "Mirvetuximab",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "ed1126c21faebaa4ba815a47c215b82ebac0eff9dc09352bda0019570fadfeeb"
+            },
+            {
+              "fonte_id": "nccn-2586b026f1b9",
+              "edicao": "4.2026",
+              "pagina_pdf": 56,
+              "paginas_pdf": [
+                56
+              ],
+              "secao": "OV-D 9A/12, nota r",
+              "trecho": "Contraindicated for patients at increased risk of GI perforation",
+              "ancora_contextual": null,
+              "natureza": "EXTRACAO_DOCUMENTAL",
+              "sha256_pdf": "ed1126c21faebaa4ba815a47c215b82ebac0eff9dc09352bda0019570fadfeeb"
+            }
+          ]
+        }
+      }
+    ],
+    "conflitos": [
+      {
+        "conflito_id": "conflito-nccn-20261017-ovario-mirvetuximabe-variantes",
+        "tema": "Mirvetuximabe: combinações e critérios de FRα",
+        "descricao": "O pack utiliza FRα alto para a monoterapia; a tabela NCCN tem outros limiares em combinações. Preservar variantes, sem substituir o corte legado de forma global.",
+        "item_nccn_ref": "nccn-20261017-ovario-mirvetuximabe-variantes",
+        "legado_refs": [
+          "/tratamento"
+        ],
+        "fontes_nccn_refs": [
+          {
+            "fonte_id": "nccn-2586b026f1b9",
+            "paginas_pdf": [
+              54,
+              55,
+              56
+            ],
+            "secao": "OV-D 8–9A/12",
+            "natureza": "EXTRACAO_DOCUMENTAL",
+            "pagina_pdf": 54,
+            "trecho": "Mirvetuximab soravtansine-gynxw (for FRα-expressing tumors [≥75% positive tumor cells])35 • Mirvetuximab soravtansine-gynx"
+          }
+        ],
+        "estado": "A_CONFERIR",
+        "decisao_medica": null,
+        "resolucao_automatica": false
+      }
+    ],
+    "conflitos_legados_ref": "/conflitos",
+    "pendencias": [
+      {
+        "id": "revisao-clinica",
+        "estado": "ABERTA",
+        "descricao": "Conferir cada acréscimo, condições, fontes, doses, interações e suporte antes de uso clínico."
+      },
+      {
+        "id": "acesso-brasileiro",
+        "estado": "ABERTA",
+        "descricao": "NCCN não comprova Anvisa, Conitec, PCDT/DDT, SIGTAP/APAC, cobertura privada ou acesso institucional."
+      },
+      {
+        "id": "cobertura-nccn",
+        "estado": "PARCIAL_POR_DELTA",
+        "descricao": "Leitura dirigida das páginas citadas; não há alegação de extração integral da diretriz."
+      }
+    ],
+    "pendencias_legadas_ref": "/pendencias",
+    "itens_adicionais_a_classificar": [
+      {
+        "origem_ref": "/header",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/status",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/consultavel",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/alerta",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/substitui",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/identidade",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/pendencias",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/conflitos",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/curadoria",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/correcoes",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      }
+    ],
+    "mapa_de_cobertura": [
+      {
+        "origem_json_pointer": "/header",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "fa700d9bea0c9adca14e510073c1e8902cc4114a787ae7c87507df310955ef8b",
+        "valores_folha": 9
+      },
+      {
+        "origem_json_pointer": "/status",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "04635ca3844c66b19ebbf49bf9ff60fe851d6ce89597d23e6a970f1dc3927289",
+        "valores_folha": 1
+      },
+      {
+        "origem_json_pointer": "/consultavel",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b",
+        "valores_folha": 1
+      },
+      {
+        "origem_json_pointer": "/alerta",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "valores_folha": 1
+      },
+      {
+        "origem_json_pointer": "/substitui",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "valores_folha": 1
+      },
+      {
+        "origem_json_pointer": "/identidade",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "e7abc5a64f70141c6e56fe3d6002cb1d52544e9ee2c8e5cb61b3ad9b0f652748",
+        "valores_folha": 25
+      },
+      {
+        "origem_json_pointer": "/diagnostico",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "b6eeac2503d7e0841a62bffb30d64a239a33ca783c2b8afb1d9f015e8d58e986",
+        "valores_folha": 204
+      },
+      {
+        "origem_json_pointer": "/estadiamento",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "ff4ca42c9a33c5b13f78e07dcc81564b9d944241daae2731bd97d628e84ca43e",
+        "valores_folha": 219
+      },
+      {
+        "origem_json_pointer": "/tratamento",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "7ab66e4d9db6272193568043960422e00a2fd044b686a136066ff650d7e112af",
+        "valores_folha": 1766
+      },
+      {
+        "origem_json_pointer": "/ligacoes",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "90fd76fc6cba4f4a3df75baa90f43f86498d5abd96945efbeeca6ec830424afe",
+        "valores_folha": 126
+      },
+      {
+        "origem_json_pointer": "/pendencias",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "7fe399cf2f9aa7a743f137fd484154cfe5b42a481cb7103e3d115ba8ee24e6cc",
+        "valores_folha": 55
+      },
+      {
+        "origem_json_pointer": "/conflitos",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "974c549ae0c502a84add5e820064157e44d49d91c11525656d15a7ad68b74787",
+        "valores_folha": 46
+      },
+      {
+        "origem_json_pointer": "/curadoria",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "2d6e0d958509899b541d109cd1b0e739291e3a1fd612d00e5d0b17b428bb83df",
+        "valores_folha": 26
+      },
+      {
+        "origem_json_pointer": "/correcoes",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "86de8c2befe97af0bb34e42fcd99e74ac53802ec2d5c6fe3daf3a4098f0b5492",
+        "valores_folha": 20
+      }
+    ],
+    "reconciliacao_com_versao_anterior": {
+      "modo": "ADITIVO",
+      "originais_removidos": 0,
+      "originais_alterados": 0,
+      "contagens_preservadas": {
+        "protocolos": 39,
+        "ensaios": 6,
+        "cenarios_identidade": 8,
+        "cenarios_tratamento": 9,
+        "seguimento": 4,
+        "conflitos": 3,
+        "pendencias": 7
+      }
+    },
+    "relatorio_de_completude": {
+      "estado": "INCOMPLETA_PARA_DIRETRIZ_INTEGRAL",
+      "preservacao_legado": "INTEGRAL",
+      "delta_itens": 4,
+      "normalizacao_legado": "INDEXACAO_POR_REFERENCIA; NAO REEXTRACAO CLINICA",
+      "posologias": "SOMENTE AS EXPLICITAMENTE EXTRAIDAS; RESTANTES PENDENTES",
+      "sem_fato_paciente": true,
+      "sem_aprovacao_inferida": true
+    },
+    "revisoes_auditoria": [
+      {
+        "revisao": "2026-10-17-nccn-delta-2-correcao-auditoria",
+        "correcoes": [
+          "M24",
+          "M25"
+        ],
+        "legado_modificado": false,
+        "aprovacao_clinica": null,
+        "nota": "Correções conferidas nos PDFs; a auditoria Claude foi amostral. Os 33 itens não auditados não foram promovidos a revisados."
+      }
+    ]
+  }
 }

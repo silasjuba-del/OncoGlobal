@@ -31,7 +31,13 @@ async (page) => {
       await p.getByRole("button", { name: /^Confirmar vínculo deste trecho/ }).waitFor({ state: "detached" });
     }
     for (const fonte of fontes) {
+      const leitura = p.waitForResponse(r => r.url().endsWith('/consulta/rascunho')
+        && r.request().postDataJSON()?.draftId === fonte.draftId);
       await p.getByRole("combobox", { name: "Fonte para revisão", exact: true }).selectOption(fonte.draftId);
+      const selecionada = await (await leitura).json();
+      // Aguarda a fonte selecionada; o checkbox anterior pode ainda estar no DOM durante a leitura HTTP.
+      await p.getByRole("region", { name: "Fonte original vinculada", exact: true })
+        .getByText(`Fonte ${selecionada.draft.payload.input.sourceId}`, { exact: true }).waitFor();
       const incluir = p.getByRole("checkbox", { name: "Incluir texto original deste trecho na evolução", exact: true });
       await incluir.waitFor(); if (fonte.literal) await incluir.check();
       const candidatos = p.getByRole("group", { name: "Achados para revisão", exact: true }).getByRole("checkbox");

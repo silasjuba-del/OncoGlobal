@@ -2,6 +2,16 @@ import { artefatoAssinado } from "./_artefatoAssinado.js";
 import { expect, it } from "vitest";
 import { ambienteHttp } from "./http-fixture.js";
 
+it.each([[0xff], [0xc3]])("ADV-003 · UTF-8 inválido ou incompleto %j retorna 400 sem efeito", async (...bytes) => {
+  const f = await ambienteHttp();
+  try {
+    const r = await f.request("/acao", "POST", new Uint8Array(bytes), f.token, "application/json");
+    expect(r.status).toBe(400);
+    expect(JSON.parse(r.body).codigo).toBe("JSON_INVALIDO");
+    expect(f.efeitos()).toBe(0);
+  } finally { await f.close(); }
+});
+
 it("ADV-003 · JSON malformado em POST autenticado retorna 400, não erro interno 500", async () => {
   const f = await ambienteHttp();
   try {

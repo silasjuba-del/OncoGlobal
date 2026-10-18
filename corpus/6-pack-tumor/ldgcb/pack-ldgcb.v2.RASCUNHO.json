@@ -1181,5 +1181,1217 @@
       "achado": "Codex 2026-10-11 (veredito entrega final): A05 Pola-R-CHP sem rituximabe C7–C8",
       "acao": "fases explícitas; calendarioExecutavel false"
     }
-  ]
+  ],
+  "tumor_pack_universal": {
+    "schema_documental": "tumor-pack-universal@1",
+    "metadados": {
+      "revisao_documental": "2026-10-17-nccn-delta-1",
+      "versao": "1.0.0",
+      "data": "2026-10-17",
+      "autor_extracao": "Codex",
+      "estado": "RASCUNHO",
+      "aprovacao_clinica": null,
+      "escopo": "CAMADA_ADITIVA_UNIVERSAL_E_DELTA_DOCUMENTAL_NCCN",
+      "base_legada": {
+        "arquivo": "corpus/6-pack-tumor/ldgcb/pack-ldgcb.v2.RASCUNHO.json",
+        "commit": "2c0991d",
+        "versao": "2.0.0",
+        "sha256_bytes": "4a04454111f83ae6b7474c1a968c37a0fb48f855cb2a3e78e4aebac01189b153",
+        "sha256_semantico": "7230ad2bec3408957eef3a0b599dcfe2b5cf220e36147a8b3d5f6fb2eb7dd443"
+      },
+      "nota_versao": "header.versao identifica o legado intacto; esta extensão possui revisão própria. Não reutilizar aprovação/hashes antigos para o conjunto alterado.",
+      "integra_runtime": false,
+      "gera_conduta": false
+    },
+    "identidade_ref": "/identidade",
+    "dominios": [
+      {
+        "dominio_id": 1,
+        "nome": "Diagnóstico e patologia",
+        "itens_legados_refs": [
+          "legado-31f48baf5bcf15ae",
+          "legado-935bfa2b80ecc201",
+          "legado-278205b923b9f8ba",
+          "legado-9fbc02f80245e098",
+          "legado-f556c2a18e1bbfc8"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 2,
+        "nome": "Estadiamento, extensão e risco",
+        "itens_legados_refs": [
+          "legado-0f00832332e3fa8f",
+          "legado-1b75eaa15e06a47a",
+          "legado-ed3674cbf794f7a3",
+          "legado-995baea9abd8fb0b",
+          "legado-205dd6dee00f36ba",
+          "legado-9cd96641e054d76b",
+          "legado-3ba56172ce141437"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 3,
+        "nome": "Biomarcadores e farmacogenética",
+        "itens_legados_refs": [
+          "legado-276ba10156617e76",
+          "legado-aaa47a8b58cd60ed",
+          "legado-7ab2e421ca04861c",
+          "legado-2f6837c53de55f6b"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 4,
+        "nome": "Exames e requisitos documentais",
+        "itens_legados_refs": [
+          "legado-eee85191803ef2ac",
+          "legado-75448ab070cb2e61",
+          "legado-04317dbd7c7317c8",
+          "legado-a8ac0ed72f50f3fe",
+          "legado-a9eea2a58ce8f251",
+          "legado-848290948c61e498",
+          "legado-b01a7be69881ba28",
+          "legado-fd9e976a04dfa013",
+          "legado-594f9102e8c45b76",
+          "legado-22ca8356a98d2ace",
+          "legado-696fed6caa7df815",
+          "legado-6195f47c7064f0a9",
+          "legado-c5275aa4b243f66b",
+          "legado-874555adc45a91c9",
+          "legado-d4a6efa87b3c9b67",
+          "legado-9ce7b9b0bacad5b5",
+          "legado-175d44be22464405",
+          "legado-36e77598864d1644",
+          "legado-30439585e8d7ddcd",
+          "legado-a4887e3d4f2b48c6",
+          "legado-21daf5ecdd50107e",
+          "legado-c68d6d8da098ed17",
+          "legado-222d5eccc4811d40",
+          "legado-ec028cb3d7ebc08a",
+          "legado-9f48cbfd49f95380",
+          "legado-3454f472939900da",
+          "legado-161d869086056040",
+          "legado-d27cdf35a666ebc8",
+          "legado-6bef10c1d3b6f70d",
+          "legado-331b7d83d4564e64",
+          "legado-c4982527a4955a15",
+          "legado-b312c11dc1df80aa",
+          "legado-6b8dff1ee3046665",
+          "legado-2f5d7939e6b73918",
+          "legado-12072975c1cb4629",
+          "legado-1a088a4a90d9ba09",
+          "legado-4e37a097249adaa5",
+          "legado-260ce3baa410299a",
+          "legado-b02e129679a402a0",
+          "legado-04ebc626996a615c"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 5,
+        "nome": "Avaliação antes do tratamento",
+        "itens_legados_refs": [],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "NAO_ESTRUTURADO_NESTA_RODADA",
+        "observacao": "Ausência de referências não significa não aplicabilidade; textos dentro de outros itens permanecem preservados."
+      },
+      {
+        "dominio_id": 6,
+        "nome": "Tratamento e protocolos",
+        "itens_legados_refs": [
+          "legado-d0738c86e44a5952",
+          "legado-3a4c606f46fe5c70",
+          "legado-a5696324c9e05165",
+          "legado-780c7c91a1f15e00",
+          "legado-8f6368889c9d4d4d",
+          "legado-b56458c1334a9183",
+          "legado-e2c97f60098d0869",
+          "legado-c7e62d0598bf011a",
+          "legado-b92eb3024ea22155",
+          "legado-736c49e9bf70ce80"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 7,
+        "nome": "Segurança, interações e toxicidades",
+        "itens_legados_refs": [
+          "legado-bcabeab1b40cef47",
+          "legado-c58f3d615b4b25c8",
+          "legado-5211d4a9d2f93e57",
+          "legado-8903a8c4c8cf338a",
+          "legado-34e375fd4e5693a9",
+          "legado-40b34aab121f0196",
+          "legado-5be809bf8fd8d347"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 8,
+        "nome": "Suporte e cuidados",
+        "itens_legados_refs": [
+          "legado-160381358685b8cb",
+          "legado-80e5afa0674e3983",
+          "legado-a8b640f7139db4c4",
+          "legado-c17f3a5aaf5eb1fc"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 9,
+        "nome": "Avaliação de resposta e estado da doença",
+        "itens_legados_refs": [],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "NAO_ESTRUTURADO_NESTA_RODADA",
+        "observacao": "Ausência de referências não significa não aplicabilidade; textos dentro de outros itens permanecem preservados."
+      },
+      {
+        "dominio_id": 10,
+        "nome": "Seguimento e sobrevivência",
+        "itens_legados_refs": [
+          "legado-386d7d7baa8e9dba",
+          "legado-39c49c627cc3f546",
+          "legado-8cbd1aca7b436a14",
+          "legado-444a793ac5c530c8",
+          "legado-06513dc370e1e82c",
+          "legado-4969cfecbfe1e210"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 11,
+        "nome": "Encaminhamentos e atuação multiprofissional",
+        "itens_legados_refs": [
+          "legado-a83ecac3bbd6c934",
+          "legado-1fe08c215c88f16e",
+          "legado-533d8bdb1f514b1f",
+          "legado-0ccf00655cc96bc4"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      },
+      {
+        "dominio_id": 12,
+        "nome": "Documentos e acesso assistencial",
+        "itens_legados_refs": [
+          "legado-7013fafb91298da3"
+        ],
+        "itens_nccn_refs": [],
+        "estado_cobertura": "CONTEUDO_INDEXADO_A_CONFERIR",
+        "observacao": null
+      }
+    ],
+    "indice_itens_legados": [
+      {
+        "item_id": "legado-31f48baf5bcf15ae",
+        "origem_json_pointer": "/diagnostico/patologico/obtencao/0",
+        "sha256_conteudo": "1a93a4b78e4970e1f3a71621a6536a1b063c6959a14db3605d0e0b6b53f1007d",
+        "nome": "/diagnostico/patologico/obtencao/0",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/obtencao/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-935bfa2b80ecc201",
+        "origem_json_pointer": "/diagnostico/patologico/obtencao/1",
+        "sha256_conteudo": "269ace84e3323479ef12b44c1b22c2bf99061f1f915b017bae30745c1ba519fe",
+        "nome": "/diagnostico/patologico/obtencao/1",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/obtencao/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-278205b923b9f8ba",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/0",
+        "sha256_conteudo": "a05c5d835dee2c2e61e7f07ff4ef3099442a0d167c697231fe45e52ad66e44fe",
+        "nome": "Antígenos B (CD19, CD20, CD22, CD79a), CD45, IgM de superfície",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-9fbc02f80245e098",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/1",
+        "sha256_conteudo": "38b19103ecc350801cb4dde153ba08cbdc02ed9a89970fd11ec3b88cc36310e6",
+        "nome": "Positividade de CD20 (condição para rituximabe e para auditoria SUS)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-f556c2a18e1bbfc8",
+        "origem_json_pointer": "/diagnostico/patologico/laudoDeveConter/2",
+        "sha256_conteudo": "7eb8701cceae7c2399d76b805b80a8829c22617d3aa52ff013dfb3457d9b0b21",
+        "nome": "Exclusão de linfoma primário do SNC e de transformação de linfoma indolente",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-0f00832332e3fa8f",
+        "origem_json_pointer": "/estadiamento/sistema",
+        "sha256_conteudo": "d0485ad4a58e80339d9725b6cc565267a8d97985667916e72144390a62f7064c",
+        "nome": "Lugano",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-1b75eaa15e06a47a",
+        "origem_json_pointer": "/estadiamento/edicao",
+        "sha256_conteudo": "97534f67c45ab4ed68734f70a06aa3a355f7f9f3ee9b2c907dd5b4388311e591",
+        "nome": "Ann Arbor (TNM/UICC) no PCDT 2014; Lugano no curso; IPI/R-IPI",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ed3674cbf794f7a3",
+        "origem_json_pointer": "/estadiamento/gruposConduta/0",
+        "sha256_conteudo": "25b569533e43a2576c4294cee0b39894f8812e8f2120b2a53cf932f298a32d79",
+        "nome": "/estadiamento/gruposConduta/0",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-995baea9abd8fb0b",
+        "origem_json_pointer": "/estadiamento/gruposConduta/1",
+        "sha256_conteudo": "142b3aaa467c7449b93b92391987f56afda487a5860e975d9eb12077206ba59f",
+        "nome": "/estadiamento/gruposConduta/1",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-205dd6dee00f36ba",
+        "origem_json_pointer": "/estadiamento/gruposConduta/2",
+        "sha256_conteudo": "99cd90bb34d4fb7a3511cb0d07ad51572f48b474b065499914584bfe821ff0de",
+        "nome": "/estadiamento/gruposConduta/2",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-9cd96641e054d76b",
+        "origem_json_pointer": "/estadiamento/gruposConduta/3",
+        "sha256_conteudo": "f20e3f03b0060f1815b542cd7f2dc9601decb58ade60c308c24346c96c967fff",
+        "nome": "/estadiamento/gruposConduta/3",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/gruposConduta/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-3ba56172ce141437",
+        "origem_json_pointer": "/estadiamento/marcadores",
+        "sha256_conteudo": "b753b8cdf152dc85c9a4569e9f6f403fe94f0675f55409bcdd35e4b68047f24e",
+        "nome": "/estadiamento/marcadores",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-276ba10156617e76",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/0",
+        "sha256_conteudo": "64fad01108baffd8e8ff1e3e996d8751757a304f64da142b441f1d52a580dd47",
+        "nome": "diagnóstico",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-aaa47a8b58cd60ed",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/1",
+        "sha256_conteudo": "65cc14b607d18405e5fb407658360432c14fd0de41f377b24d95f55ca5b0640a",
+        "nome": "diagnóstico",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-7ab2e421ca04861c",
+        "origem_json_pointer": "/diagnostico/patologico/molecular/2",
+        "sha256_conteudo": "bc1e32bdf961a0662c4061d15d192b2ef6a1ea50f91d27cf43df2b922877ddbf",
+        "nome": "suspeita de linfoma B de alto grau",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/patologico/molecular/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-2f6837c53de55f6b",
+        "origem_json_pointer": "/tratamento/biomarcadorTratamento/0",
+        "sha256_conteudo": "4ee4661d36ac0ad39cc7271c61ba635ef8d13646bd758eb1ffd709548e9deea4",
+        "nome": "/tratamento/biomarcadorTratamento/0",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/biomarcadorTratamento/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-eee85191803ef2ac",
+        "origem_json_pointer": "/diagnostico/imagem/0",
+        "sha256_conteudo": "c0ce8ebe0322e4801c5b05806d14654bffe4c1f57a2d265f36530283ad85b759",
+        "nome": "PET-CT FDG (ou TC tóraco-abdômino-pélvica)",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-75448ab070cb2e61",
+        "origem_json_pointer": "/diagnostico/imagem/1",
+        "sha256_conteudo": "2b1c591de3bf447e664ecf96257c157de1f697c736352d243d690026570b3c9f",
+        "nome": "TC de tórax (se sem PET-CT)",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-04317dbd7c7317c8",
+        "origem_json_pointer": "/diagnostico/imagem/2",
+        "sha256_conteudo": "7047c79a858e90fb93585ca7743da085896fb5e737d8000ec2289330d45527ba",
+        "nome": "TC de abdome (se sem PET-CT)",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a8ac0ed72f50f3fe",
+        "origem_json_pointer": "/diagnostico/imagem/3",
+        "sha256_conteudo": "cd8cfc258e141aae246111115d3f6e5acdb7e9e050ad6187efd32f8ba5a1950c",
+        "nome": "TC de pelve (se sem PET-CT)",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a9eea2a58ce8f251",
+        "origem_json_pointer": "/diagnostico/imagem/4",
+        "sha256_conteudo": "41a6259e304c2611091df14b3d2359c09a740e0e63906f4cf2b44a1443384b71",
+        "nome": "RM de crânio",
+        "id_original": null,
+        "fonte_local_ref": "/diagnostico/imagem/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-848290948c61e498",
+        "origem_json_pointer": "/estadiamento/exames/0",
+        "sha256_conteudo": "ba5202929a22452068cecda5c9310049041e86e00e16a24606d94f329831fa47",
+        "nome": "Hemograma com plaquetas",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b01a7be69881ba28",
+        "origem_json_pointer": "/estadiamento/exames/1",
+        "sha256_conteudo": "643a1984e3367fa5c4db86d90d1518f7bdf371d1bd81d2fd3c846eab948a50e7",
+        "nome": "Reticulócitos",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-fd9e976a04dfa013",
+        "origem_json_pointer": "/estadiamento/exames/2",
+        "sha256_conteudo": "63bcdfb2adea4045718245f450836036ee13c21b1404c216face7fd33b517513",
+        "nome": "Teste de Coombs",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-594f9102e8c45b76",
+        "origem_json_pointer": "/estadiamento/exames/3",
+        "sha256_conteudo": "06cf78cf8206eb6a1d1c26fd515d29b54472a997ca0f199f28fa0342f1faef50",
+        "nome": "LDH (entra no IPI)",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-22ca8356a98d2ace",
+        "origem_json_pointer": "/estadiamento/exames/4",
+        "sha256_conteudo": "f6194e80adc505567e53859ad65d4104878020a993fed12f4b15a5c793755ce0",
+        "nome": "Beta-2-microglobulina",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/4/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-696fed6caa7df815",
+        "origem_json_pointer": "/estadiamento/exames/5",
+        "sha256_conteudo": "03d81b6ca994210285e685deaf3340c9aa1364812a49f3995003d112d0e4db09",
+        "nome": "HBsAg (antes do rituximabe)",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/5/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-6195f47c7064f0a9",
+        "origem_json_pointer": "/estadiamento/exames/6",
+        "sha256_conteudo": "30d777bdae9dd90b5d860ed74ac31e0ecc6dc4f76ec64b38693d4825a2732cb4",
+        "nome": "Anti-HBc total (antes do rituximabe)",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/6/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-c5275aa4b243f66b",
+        "origem_json_pointer": "/estadiamento/exames/7",
+        "sha256_conteudo": "38627c5c5e0cee7e5709bc7187c8f6c9f00b0998f1c8afc280aa5860b716eb86",
+        "nome": "Anti-HCV",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/7/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-874555adc45a91c9",
+        "origem_json_pointer": "/estadiamento/exames/8",
+        "sha256_conteudo": "6d8c02176fdbe090b252ea0ec295bdd9fc0dd92a6c769d4bfdac2124b62934af",
+        "nome": "Anti-HIV",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/8/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d4a6efa87b3c9b67",
+        "origem_json_pointer": "/estadiamento/exames/9",
+        "sha256_conteudo": "ad1882e8b100dbb807c0ee4f737729cb1864366257e17b708c8c5438752c3c05",
+        "nome": "Biópsia de medula óssea",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/9/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-9ce7b9b0bacad5b5",
+        "origem_json_pointer": "/estadiamento/exames/10",
+        "sha256_conteudo": "a6995d4a5270486f8571e5ac6d7bf1544686b746fe3e1126177dcdea9b56bb51",
+        "nome": "Exame do líquor (citologia ± citometria)",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/10/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-175d44be22464405",
+        "origem_json_pointer": "/estadiamento/exames/11",
+        "sha256_conteudo": "578f7eb319e99aa6ff3da99e2fc5e9750afcb591f5a523fc5e0544218fd9c9c0",
+        "nome": "Ecocardiograma (antraciclina)",
+        "id_original": null,
+        "fonte_local_ref": "/estadiamento/exames/11/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-36e77598864d1644",
+        "origem_json_pointer": "/ligacoes/exames/0",
+        "sha256_conteudo": "3a955b75de510bd32be8d0f7de2bf070f27f223ac4c6a07cf68b35b7271856b2",
+        "nome": "PET_CT_FDG",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-30439585e8d7ddcd",
+        "origem_json_pointer": "/ligacoes/exames/1",
+        "sha256_conteudo": "147b97b900462813d8c6528cc01d88f8a5102936ee96ee4fb121f8a7b77f60b0",
+        "nome": "TC_TORAX",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a4887e3d4f2b48c6",
+        "origem_json_pointer": "/ligacoes/exames/2",
+        "sha256_conteudo": "eea68f82f02592e6262514a154ff52ae85284765c1f48ab3b07cabb92ead209f",
+        "nome": "TC_ABDOMEN_SUPERIOR",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-21daf5ecdd50107e",
+        "origem_json_pointer": "/ligacoes/exames/3",
+        "sha256_conteudo": "5beb801ddc054db97d463dd8b682c9128772e22b7938b6d4c645af14dc4ddd7a",
+        "nome": "TC_PELVE",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-c68d6d8da098ed17",
+        "origem_json_pointer": "/ligacoes/exames/4",
+        "sha256_conteudo": "bad8505e4a4450e4dd1c0691d739c56076e3e2a51d04f68ce1f3a4a823e89597",
+        "nome": "RM_CRANIO",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-222d5eccc4811d40",
+        "origem_json_pointer": "/ligacoes/exames/5",
+        "sha256_conteudo": "dc49fc936c8f159a3aa8208709558e35c50f545055f5cc9756e18bdd0d02c81b",
+        "nome": "BIOPSIA_GANGLIO",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-ec028cb3d7ebc08a",
+        "origem_json_pointer": "/ligacoes/exames/6",
+        "sha256_conteudo": "09c0bc2a57301c5e7f5c06c8c51c9dec764db31a5d9531aa98aac18b5d8251f3",
+        "nome": "BIOPSIA_PERCUTANEA_GUIADA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-9f48cbfd49f95380",
+        "origem_json_pointer": "/ligacoes/exames/7",
+        "sha256_conteudo": "99a98b9d268e78a05608d792d2fad81f4e16f25b8a4f95da9f7decd91a23a0dc",
+        "nome": "IMUNOHISTOQUIMICA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-3454f472939900da",
+        "origem_json_pointer": "/ligacoes/exames/8",
+        "sha256_conteudo": "4e650bcf406ffdaddef4c51c47a386ec29f45595a9f475415baaaec3c90c2015",
+        "nome": "IMUNOFENOTIPAGEM",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-161d869086056040",
+        "origem_json_pointer": "/ligacoes/exames/9",
+        "sha256_conteudo": "c6f5e5a6057e9ce942cde9a80b415b2bdbfccf0ac7d689ed5ae89b0846f94872",
+        "nome": "FISH",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d27cdf35a666ebc8",
+        "origem_json_pointer": "/ligacoes/exames/10",
+        "sha256_conteudo": "bf5e386b5411abfa4e5e12d1229575a6c7ec73dfaec6347d8959b27aac19aa86",
+        "nome": "HEMOGRAMA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-6bef10c1d3b6f70d",
+        "origem_json_pointer": "/ligacoes/exames/11",
+        "sha256_conteudo": "05f625c8ce61fad8ea4a51e97a39c6946273e163a8c93650d3325cbdd206a2ee",
+        "nome": "RETICULOCITOS",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-331b7d83d4564e64",
+        "origem_json_pointer": "/ligacoes/exames/12",
+        "sha256_conteudo": "1e49060d9ff6bb936a9d5318d51a013d181e7cefe4fae7d0525411391d598361",
+        "nome": "DHL",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-c4982527a4955a15",
+        "origem_json_pointer": "/ligacoes/exames/13",
+        "sha256_conteudo": "379df0091f70a3e0e0dcb8fcab51e1937220276bf44a6c135f4d2e7ec203d038",
+        "nome": "BETA2_MICROGLOBULINA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b312c11dc1df80aa",
+        "origem_json_pointer": "/ligacoes/exames/14",
+        "sha256_conteudo": "5228a75a2c61f24731de7c5a5fc97f2fb723736afc94712ad53cd682c14187fd",
+        "nome": "HBSAG",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-6b8dff1ee3046665",
+        "origem_json_pointer": "/ligacoes/exames/15",
+        "sha256_conteudo": "00a845af8a467c5d308bcc1bed4136e988a65daa4fdf855563394f009a6a4cd1",
+        "nome": "ANTI_HBC_TOTAL",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-2f5d7939e6b73918",
+        "origem_json_pointer": "/ligacoes/exames/16",
+        "sha256_conteudo": "bd3db595b528b1d7e0a9ce08d777e5b2ada3a7707c2ed2c9d0e5b461c7e3430a",
+        "nome": "ANTI_HCV",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-12072975c1cb4629",
+        "origem_json_pointer": "/ligacoes/exames/17",
+        "sha256_conteudo": "7e6eb8146933ca4629a8f652e1d1fd5d9ee0ebde5c5f53071fa3b4be69755bca",
+        "nome": "HIV",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-1a088a4a90d9ba09",
+        "origem_json_pointer": "/ligacoes/exames/18",
+        "sha256_conteudo": "221ddaba89bb47b42bb1a745099dc56544953adbdcdd4753cfc98b2762357b22",
+        "nome": "BIOPSIA_MEDULA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-4e37a097249adaa5",
+        "origem_json_pointer": "/ligacoes/exames/19",
+        "sha256_conteudo": "da74dd747fd5fa4043db517559cb6da85f76ecae33e6cc8d4c104848d3eadb9b",
+        "nome": "ECOCARDIOGRAMA",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-260ce3baa410299a",
+        "origem_json_pointer": "/ligacoes/exames/20",
+        "sha256_conteudo": "a723186a1328a8a0f43e1b82bd5d49ea0574e6bc72a7ad32889ce010ff549cdd",
+        "nome": "TSH",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b02e129679a402a0",
+        "origem_json_pointer": "/ligacoes/exames/21",
+        "sha256_conteudo": "6faececf93f441a92352cd5c126104566f0077b1314ca58321807a901a669759",
+        "nome": "CITOLOGIA_LIQUIDOS",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-04ebc626996a615c",
+        "origem_json_pointer": "/ligacoes/exames/22",
+        "sha256_conteudo": "fcfe9f2adc7b314742c3f263a6a476492d4d7d04f57d4c327c4388bcde8dcafe",
+        "nome": "COOMBS_DIRETO",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-d0738c86e44a5952",
+        "origem_json_pointer": "/tratamento/cenarios/0",
+        "sha256_conteudo": "dbf68a5bc2065a31876220e1c711e0203ed80805b6922994accad5291a81f2bd",
+        "nome": "avancado_III_IV ou I–II com sintomas B ou bulky >7,5 cm",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-3a4c606f46fe5c70",
+        "origem_json_pointer": "/tratamento/cenarios/1",
+        "sha256_conteudo": "bd9e9d96f71c3f212daad28ed4392adee31a3bf591c5d52af6f5f2274193d2db",
+        "nome": "localizado_I_II sem critérios do R-CHOP no PCDT",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a5696324c9e05165",
+        "origem_json_pointer": "/tratamento/cenarios/2",
+        "sha256_conteudo": "a307abc32680bb8cade23d527500d9c4802138f7540562b22b73627cf1a8f1ea",
+        "nome": "recaido_refratario",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-780c7c91a1f15e00",
+        "origem_json_pointer": "/tratamento/cenarios/3",
+        "sha256_conteudo": "081faa10823ec9a883497640bd2925a165b66091be2ed804d6ca45a6df8cb4f2",
+        "nome": "paliativo_3a_linha",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cenarios/3/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8f6368889c9d4d4d",
+        "origem_json_pointer": "/tratamento/protocolos/0",
+        "sha256_conteudo": "3252fe03aa2c0ea6d251c931b054a6678af4502744695ee1a92e6b2a6456301d",
+        "nome": "R-CHOP-21",
+        "id_original": "ldgcb-r-chop21",
+        "fonte_local_ref": "/tratamento/protocolos/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b56458c1334a9183",
+        "origem_json_pointer": "/tratamento/protocolos/1",
+        "sha256_conteudo": "969b9aeb4e8d52b2430a6f82d3cc7868aa9748fd0a6ea024586a73123396d3ed",
+        "nome": "CHOP-21",
+        "id_original": "ldgcb-chop21",
+        "fonte_local_ref": "/tratamento/protocolos/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-e2c97f60098d0869",
+        "origem_json_pointer": "/tratamento/protocolos/2",
+        "sha256_conteudo": "a17693d48f91498968ae0804e9f3259955441956056247331a9a9218837f9634",
+        "nome": "Polatuzumabe vedotina + R-CHP",
+        "id_original": "ldgcb-pola-r-chp",
+        "fonte_local_ref": "/tratamento/protocolos/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-c7e62d0598bf011a",
+        "origem_json_pointer": "/tratamento/cirurgia/0",
+        "sha256_conteudo": "25103b266e81211f3b1a3bb2dedf0cc81c7e7228b8a382f9c395031094a14e63",
+        "nome": "/tratamento/cirurgia/0",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cirurgia/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-b92eb3024ea22155",
+        "origem_json_pointer": "/tratamento/cirurgia/1",
+        "sha256_conteudo": "999555275a2c129265349cc5bf697f0106cbdcb4b88d3b415613fe478bb548e0",
+        "nome": "/tratamento/cirurgia/1",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/cirurgia/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-736c49e9bf70ce80",
+        "origem_json_pointer": "/tratamento/radioterapia/0",
+        "sha256_conteudo": "8da076acef40f745db165438dc17034e3ab0deb9cdedd2ab26ea052edff07351",
+        "nome": "LDGCB (PCDT): sem uso estabelecido; a critério do serviço. Curso: consolidação em EC I–II após R-CHOP",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/radioterapia/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-bcabeab1b40cef47",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/0",
+        "sha256_conteudo": "a19206610d4486c011bf560c353b4a79bcef3a735ee7e57c77eb8fdce1c2fd64",
+        "nome": "/ligacoes/interacoesConsultar/0",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-c58f3d615b4b25c8",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/1",
+        "sha256_conteudo": "ee2571a297ee04eb6db7233d22bb10dfd786c80754f8378fcd492d8721996623",
+        "nome": "/ligacoes/interacoesConsultar/1",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-5211d4a9d2f93e57",
+        "origem_json_pointer": "/ligacoes/interacoesConsultar/2",
+        "sha256_conteudo": "acd5f8039b44e61a8ecf6a9ffcc5c96fbeaf3388f622ad7aa8ce23947009023c",
+        "nome": "/ligacoes/interacoesConsultar/2",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8903a8c4c8cf338a",
+        "origem_json_pointer": "/ligacoes/ctcaeAcao/0",
+        "sha256_conteudo": "9f6403538654606ce08ee3c91d378001c62496f555e022faf751a18e1b51ee36",
+        "nome": "/ligacoes/ctcaeAcao/0",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-34e375fd4e5693a9",
+        "origem_json_pointer": "/ligacoes/ctcaeAcao/1",
+        "sha256_conteudo": "9bff826f15d45d25c4197b9646ff029df54df4d7e5feb8d517f103e0fedeadaf",
+        "nome": "/ligacoes/ctcaeAcao/1",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-40b34aab121f0196",
+        "origem_json_pointer": "/ligacoes/ctcaeAcao/2",
+        "sha256_conteudo": "27a9af9e3faf726d00a9dabda2f1385594c7477135e159d03c56a32d95d46ab5",
+        "nome": "/ligacoes/ctcaeAcao/2",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-5be809bf8fd8d347",
+        "origem_json_pointer": "/ligacoes/ctcaeAcao/3",
+        "sha256_conteudo": "0bc86a2f86a21a7d00513508e80597b65b67e893c247472185dddb1bb12ca44f",
+        "nome": "/ligacoes/ctcaeAcao/3",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-160381358685b8cb",
+        "origem_json_pointer": "/tratamento/suporte",
+        "sha256_conteudo": "2cb10b4b88455d8d7a467ade306d5eb2cde75f7fe78fde270f0c4844d20adcdf",
+        "nome": "/tratamento/suporte",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/suporte/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-80e5afa0674e3983",
+        "origem_json_pointer": "/ligacoes/suporteReceitas/0",
+        "sha256_conteudo": "d4a99d101c93eeaefc24e7bd1428cc0dee9d61e5ee612f5fef41892579dd09d2",
+        "nome": "antiemético conforme esquema",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a8b640f7139db4c4",
+        "origem_json_pointer": "/ligacoes/suporteReceitas/1",
+        "sha256_conteudo": "a5720d0bff706c3f57bc49362551b69aec7d9759b7b49bc5a6e105d1d94e8689",
+        "nome": "pré-medicação do rituximabe",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-c17f3a5aaf5eb1fc",
+        "origem_json_pointer": "/ligacoes/suporteReceitas/2",
+        "sha256_conteudo": "0380eeb946842cec83ed9bcb73552144d12fbe9ed429c782033ca918a80bffba",
+        "nome": "profilaxia antiviral HBV se HBsAg+ ou anti-HBc+ (dose SEM_FONTE)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-386d7d7baa8e9dba",
+        "origem_json_pointer": "/tratamento/seguimento/0",
+        "sha256_conteudo": "fa5536afe0f51ae47ba722cdc60be231dee3a0123485d597ecd4bc4ea8a48410",
+        "nome": "anos 1–2",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/seguimento/0/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-39c49c627cc3f546",
+        "origem_json_pointer": "/tratamento/seguimento/1",
+        "sha256_conteudo": "eef0571dcd2895c46feafc50f88889782a649d3afaf537d444500ad2596a02f9",
+        "nome": "ano 3",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/seguimento/1/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-8cbd1aca7b436a14",
+        "origem_json_pointer": "/tratamento/seguimento/2",
+        "sha256_conteudo": "4e5a6fd4ca6b3c9a8eee186e6a9b184bf44fe01fdc78e6e349fa1585b515bdb9",
+        "nome": "anos 4–5",
+        "id_original": null,
+        "fonte_local_ref": "/tratamento/seguimento/2/fonte",
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-444a793ac5c530c8",
+        "origem_json_pointer": "/ligacoes/orientacoes/0",
+        "sha256_conteudo": "dea61cd2b11320b640cd90850e80290c57ad42ac679ddf6a2d5c928e78683be0",
+        "nome": "sinais de reação infusional",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-06513dc370e1e82c",
+        "origem_json_pointer": "/ligacoes/orientacoes/1",
+        "sha256_conteudo": "9a965730876553d68a6abde3e1b52252e5b719109425f7cfc0d44c6315239703",
+        "nome": "sinais de neutropenia febril",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-4969cfecbfe1e210",
+        "origem_json_pointer": "/ligacoes/orientacoes/2",
+        "sha256_conteudo": "15a96bc0530eb0364cc2c15f8a5966bfd92e868ec3ae7d48489b6bf652092688",
+        "nome": "vacina influenza anual e pneumocócica a cada 5 anos no seguimento (PCDT p.13)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-a83ecac3bbd6c934",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/0",
+        "sha256_conteudo": "eb54fb8d77e530fb6faedf5bf1621ae02068135f31f3ec1f1351cbd5f307765b",
+        "nome": "radioterapia",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-1fe08c215c88f16e",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/1",
+        "sha256_conteudo": "1904f18eb1604934ff206a272a685781943e9ec7c6a79eba7533a4d24c4195c9",
+        "nome": "cuidados-paliativos",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-533d8bdb1f514b1f",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/2",
+        "sha256_conteudo": "5770b6b8d30e5c7b3405946de3c26bed0890aa465e580feffed8b4c979314194",
+        "nome": "centro de TCTH (recaída sensível)",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-0ccf00655cc96bc4",
+        "origem_json_pointer": "/ligacoes/encaminhamentos/3",
+        "sha256_conteudo": "f3c678035e885d3f52e5701d134da9a3975579bada9b9add3d51d4f7d4ecf94c",
+        "nome": "nutricao",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      },
+      {
+        "item_id": "legado-7013fafb91298da3",
+        "origem_json_pointer": "/ligacoes/laudos/0",
+        "sha256_conteudo": "755c0139b7d515fdb3d1200a297d132d1aa7d0b8a4df04e45ca2db2571b9f035",
+        "nome": "APAC 03.04.06.022-4 (LDGCB 1ª linha) ou 03.04.06.013-5; 2ª linha 03.04.06.011-9; 3ª linha 03.04.06.012-7",
+        "id_original": null,
+        "fonte_local_ref": null,
+        "estado": "PRESERVADO_SEM_REINTERPRETACAO"
+      }
+    ],
+    "itens_nccn": [],
+    "cenarios": {
+      "identidade_ref": "/identidade/cenarios",
+      "detalhamento_ref": "/tratamento/cenarios",
+      "novas_condicoes_refs": [],
+      "regra": "Não igualar automaticamente as duas listas nem selecionar cenário individual nesta camada."
+    },
+    "fontes": [],
+    "fontes_legadas_refs": [
+      "/header/fonte",
+      "/curadoria/fontesLidas"
+    ],
+    "ensaios": {
+      "legado_ref": "/tratamento/ensaios",
+      "novos_nct": [],
+      "nota": "Nenhum identificador NCT foi inventado ou verificado nesta rodada."
+    },
+    "relacoes": [],
+    "conflitos": [],
+    "conflitos_legados_ref": "/conflitos",
+    "pendencias": [
+      {
+        "id": "revisao-clinica",
+        "estado": "ABERTA",
+        "descricao": "Conferir cada acréscimo, condições, fontes, doses, interações e suporte antes de uso clínico."
+      },
+      {
+        "id": "acesso-brasileiro",
+        "estado": "ABERTA",
+        "descricao": "NCCN não comprova Anvisa, Conitec, PCDT/DDT, SIGTAP/APAC, cobertura privada ou acesso institucional."
+      },
+      {
+        "id": "cobertura-nccn",
+        "estado": "SEM_PDF_ESPECIFICO",
+        "descricao": "Sem PDF específico para este pack no conjunto fornecido."
+      }
+    ],
+    "pendencias_legadas_ref": "/pendencias",
+    "itens_adicionais_a_classificar": [
+      {
+        "origem_ref": "/header",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/status",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/consultavel",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/alerta",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/substitui",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/identidade",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/pendencias",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/conflitos",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/curadoria",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/escopo",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      },
+      {
+        "origem_ref": "/correcoes",
+        "estado": "PRESERVADO_COMO_TRANSVERSAL"
+      }
+    ],
+    "mapa_de_cobertura": [
+      {
+        "origem_json_pointer": "/header",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "563632fa54ef7de2e66aa946d8115e1f6b379635f64757573471a98430630932",
+        "valores_folha": 9
+      },
+      {
+        "origem_json_pointer": "/status",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "04635ca3844c66b19ebbf49bf9ff60fe851d6ce89597d23e6a970f1dc3927289",
+        "valores_folha": 1
+      },
+      {
+        "origem_json_pointer": "/consultavel",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b",
+        "valores_folha": 1
+      },
+      {
+        "origem_json_pointer": "/alerta",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "valores_folha": 1
+      },
+      {
+        "origem_json_pointer": "/substitui",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "valores_folha": 1
+      },
+      {
+        "origem_json_pointer": "/identidade",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "5e08fce1d76b40d3f8ffb757c24a8a7a2af89302cdf327d7cfb3f31fdc4d63ab",
+        "valores_folha": 11
+      },
+      {
+        "origem_json_pointer": "/diagnostico",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "cefb3dbce07d8c658dd66bf50ebbd4fe09dbdafd95b47d9f97282a0a9aaca208",
+        "valores_folha": 102
+      },
+      {
+        "origem_json_pointer": "/estadiamento",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "ca35b35e3b3f1ba310f38edb0c8a38b39df1d1fe06af90839b9f7af9549fcc44",
+        "valores_folha": 167
+      },
+      {
+        "origem_json_pointer": "/tratamento",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "29fdc919f117fc8a0426635f8a77f240f4be3c882ee95b9a29a3a0c513c82937",
+        "valores_folha": 285
+      },
+      {
+        "origem_json_pointer": "/ligacoes",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "0c6f54da4c2da435605719b62981098e8a359e18439ec02e20a7c3dec56b55b5",
+        "valores_folha": 86
+      },
+      {
+        "origem_json_pointer": "/pendencias",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "2f0b7f48b5ac8c7d54ce17e50fe745532903132b23661ec3f19849aed8798ce0",
+        "valores_folha": 27
+      },
+      {
+        "origem_json_pointer": "/conflitos",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "ae0c6bafdaceefc92ffbca17bb6471e3675289e01e95da490d436b379cf77e53",
+        "valores_folha": 39
+      },
+      {
+        "origem_json_pointer": "/curadoria",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "342db638710bfe1ea4a2710e852b060b203a2fc158cdf8c8d0a55611f6ae6da6",
+        "valores_folha": 17
+      },
+      {
+        "origem_json_pointer": "/escopo",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "6f177fb6305e92b40e8cea2305a0d229511298956fa95ff33fc4ade98330f5fb",
+        "valores_folha": 2
+      },
+      {
+        "origem_json_pointer": "/correcoes",
+        "destino": "LEGADO_PRESERVADO_NO_MESMO_PACK",
+        "sha256_conteudo": "29910e7b253e397282cf268a40beede956bf37e630e9147dceef98a0a1cd2d52",
+        "valores_folha": 4
+      }
+    ],
+    "reconciliacao_com_versao_anterior": {
+      "modo": "ADITIVO",
+      "originais_removidos": 0,
+      "originais_alterados": 0,
+      "contagens_preservadas": {
+        "protocolos": 3,
+        "ensaios": 1,
+        "cenarios_identidade": 4,
+        "cenarios_tratamento": 4,
+        "seguimento": 3,
+        "conflitos": 3,
+        "pendencias": 7
+      }
+    },
+    "relatorio_de_completude": {
+      "estado": "INCOMPLETA_PARA_DIRETRIZ_INTEGRAL",
+      "preservacao_legado": "INTEGRAL",
+      "delta_itens": 0,
+      "normalizacao_legado": "INDEXACAO_POR_REFERENCIA; NAO REEXTRACAO CLINICA",
+      "posologias": "SOMENTE AS EXPLICITAMENTE EXTRAIDAS; RESTANTES PENDENTES",
+      "sem_fato_paciente": true,
+      "sem_aprovacao_inferida": true
+    }
+  }
 }

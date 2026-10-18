@@ -4,10 +4,10 @@
   "nome": "EP de indução (escore ultra-alto)",
   "cenario": "escore alto/ultra-alto (FIGO ≥12, D-F1-50) — indução",
   "versao": "1.0.0",
-  "hash": "74ddaf708e1e4a73004150b9366ae992e70544823f84c66cbe85651738cabd20",
+  "hash": "2f28d09296d0c93b2b86445283a21a42cbaf0c74c1d8c40d536900c62b21826b",
   "codigoInstitucional": null,
   "intervaloDias": 7,
-  "ciclos": null,
+  "ciclos": 3,
   "itens": [
     {
       "drug": "Soro fisiológico 0,9% 250 mL (lavagem de acesso)",

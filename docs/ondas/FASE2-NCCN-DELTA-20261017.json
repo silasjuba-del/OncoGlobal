@@ -1,0 +1,904 @@
+{
+  "schema_documental": "auditoria-delta-tumor-pack@1",
+  "data": "2026-10-17",
+  "base_commit": "2c0991d",
+  "write_set": "29 packs v2 + documentação/auditoria; nenhum código",
+  "pdfs": [
+    {
+      "arquivo": "Ampullary Adenocarcinoma.pdf",
+      "sha256": "749c4078817073454db68656c855d35779e9627e552bf330b65c9447fda9285e",
+      "paginas": 81,
+      "versao": "2.2026",
+      "estado": "APENAS_INVENTARIADO_NESTA_RODADA"
+    },
+    {
+      "arquivo": "Anal Carcinoma.pdf",
+      "sha256": "e6d2b240326db9390693bf8ea75bcbaccd4bab7d89f866f384bc63e92107a29d",
+      "paginas": 70,
+      "versao": "3.2026",
+      "estado": "FONTE_DE_DELTA_DIRIGIDO"
+    },
+    {
+      "arquivo": "Appendiceal Neoplasms and Cancers.pdf",
+      "sha256": "0e82f735ca3e44f9d71e464747dd9125ae8ecf193863f6bb2768a5d3d9a0e64c",
+      "paginas": 76,
+      "versao": "2.2026",
+      "estado": "APENAS_INVENTARIADO_NESTA_RODADA"
+    },
+    {
+      "arquivo": "Basal Cell Skin Cancer.pdf",
+      "sha256": "fba5f80bcc5b3113c3bc6729a47e5d1250032ce4cd75642704c3ab0257d620e3",
+      "paginas": 64,
+      "versao": "1.2027",
+      "estado": "APENAS_INVENTARIADO_NESTA_RODADA"
+    },
+    {
+      "arquivo": "Biliary Tract Cancers.pdf",
+      "sha256": "a8b2b56ecde4a54aea53384922cd9833827cd061c40ca9fb21549c28a22dd5fe",
+      "paginas": 111,
+      "versao": "2.2026",
+      "estado": "FONTE_DE_DELTA_DIRIGIDO"
+    },
+    {
+      "arquivo": "Bladder Cancer.pdf",
+      "sha256": "1d9d0cd2d684dad6ed5bf08784829561eed4712ed7e807461bc0066f867ac05a",
+      "paginas": 142,
+      "versao": "3.2026",
+      "estado": "FONTE_DE_DELTA_DIRIGIDO"
+    },
+    {
+      "arquivo": "Bone Cancer.pdf",
+      "sha256": "9e812eeda404d67a6c8b2eb9c7f10832dca53e8784516003108c6d62d801db04",
+      "paginas": 129,
+      "versao": "1.2027",
+      "estado": "FONTE_DE_DELTA_DIRIGIDO"
+    },
+    {
+      "arquivo": "Breast Cancer.pdf",
+      "sha256": "d6504210f3ccdc88845356ffbd832d2f0ffc4d51e47e45a3d0e9058eec5efd45",
+      "paginas": 278,
+      "versao": "8.2026",
+      "estado": "FONTE_DE_DELTA_DIRIGIDO"
+    },
+    {
+      "arquivo": "Castleman Disease.pdf",
+      "sha256": "0d22afcf875ee6aa7d69e8d15da527abb5f14f6d12ced88c57da84c2fe9e1a86",
+      "paginas": 35,
+      "versao": "2.2026",
+      "estado": "APENAS_INVENTARIADO_NESTA_RODADA"
+    },
+    {
+      "arquivo": "Central Nervous System Cancers.pdf",
+      "sha256": "afa63fd94ee11672c75ab12c613eb9cc24ac4e023f871e6de3a344f5f6660ba3",
+      "paginas": 246,
+      "versao": "3.2026",
+      "estado": "FONTE_DE_DELTA_DIRIGIDO"
+    },
+    {
+      "arquivo": "Cervical Cancer.pdf",
+      "sha256": "a9b77ea755bd5f23330aba525e860fd4d8d904d1980dcf15838a8d40ee885cc7",
+      "paginas": 161,
+      "versao": "1.2027",
+      "estado": "FONTE_DE_DELTA_DIRIGIDO"
+    },
+    {
+      "arquivo": "Colon Cancer.pdf",
+      "sha256": "b9048ddbec20ab69e66d3b6d851604bd38138ff72e049f8946fd4646ba648ad7",
+      "paginas": 249,
+      "versao": "2.2026",
+      "estado": "FONTE_DE_DELTA_DIRIGIDO"
+    },
+    {
+      "arquivo": "Dermatofibrosarcoma Protuberans.pdf",
+      "sha256": "4bc4ddf2c92ef0597cfc961173f6cc002438b267c029181e550e23dbb95cb4e0",
+      "paginas": 23,
+      "versao": "1.2027",
+      "estado": "APENAS_INVENTARIADO_NESTA_RODADA"
+    },
+    {
+      "arquivo": "Esophageal and Esophagogastric Junction Cancers.pdf",
+      "sha256": "2994b18c46854d38ff179cf72967afdcbd0a158b0b5dfc2a4496a3cd45412111",
+      "paginas": 172,
+      "versao": "4.2026",
+      "estado": "FONTE_DE_DELTA_DIRIGIDO"
+    },
+    {
+      "arquivo": "Gastric Cancer.pdf",
+      "sha256": "a191cfb85ab939a9b7aecb8a3387a1242f9c6fe22a51b524c9d6c9aae26f0ea4",
+      "paginas": 140,
+      "versao": "4.2026",
+      "estado": "FONTE_DE_DELTA_DIRIGIDO"
+    },
+    {
+      "arquivo": "Gastrointestinal Stromal Tumors.pdf",
+      "sha256": "94b93c40240a74461bd807b22c134b6d890e98eb0fd799376b1a6a33e6c48050",
+      "paginas": 54,
+      "versao": "1.2026",
+      "estado": "FONTE_DE_DELTA_DIRIGIDO"
+    },
+    {
+      "arquivo": "Gestational Trophoblastic Neoplasia.pdf",
+      "sha256": "76db7de6352d10bc01d19ab43df63edeb071bd8ee5340177b012449f620f44e9",
+      "paginas": 60,
+      "versao": "1.2027",
+      "estado": "APENAS_INVENTARIADO_NESTA_RODADA"
+    },
+    {
+      "arquivo": "Head and Neck Cancers.pdf",
+      "sha256": "4f55936c29f30d87218e3ba01e0b6269556afdbe19de65be512f081357fd91b0",
+      "paginas": 276,
+      "versao": "2.2026",
+      "estado": "FONTE_DE_DELTA_DIRIGIDO"
+    },
+    {
+      "arquivo": "Hepatocellular Carcinoma.pdf",
+      "sha256": "7167781b2207d1baf199f005027acb5a0717e7fdab0c41dae5271f9c352a1caa",
+      "paginas": 117,
+      "versao": "2.2026",
+      "estado": "FONTE_DE_DELTA_DIRIGIDO"
+    },
+    {
+      "arquivo": "Histiocytic Neoplasms.pdf",
+      "sha256": "53700937c9786e09343cb599dc9f0917dd861c156a631392d07b9b9d3deb2d3e",
+      "paginas": 96,
+      "versao": "4.2026",
+      "estado": "APENAS_INVENTARIADO_NESTA_RODADA"
+    },
+    {
+      "arquivo": "Kaposi Sarcoma.pdf",
+      "sha256": "4684bf3ff5eb153a91feb45b9294672efa05c001f831eb517a72131447416b45",
+      "paginas": 57,
+      "versao": "1.2027",
+      "estado": "APENAS_INVENTARIADO_NESTA_RODADA"
+    },
+    {
+      "arquivo": "Kidney Cancer.pdf",
+      "sha256": "09bebaa2876eb7cf95721cbcbe1b55f9d202ddf1a6cd6edde01f9bac7c570dcc",
+      "paginas": 100,
+      "versao": "2.2027",
+      "estado": "FONTE_DE_DELTA_DIRIGIDO"
+    },
+    {
+      "arquivo": "Melanoma Cutaneous.pdf",
+      "sha256": "49dc5ff813133913c6ff6fc884e57bc38ad45a4632bd0e516c8e7007ec2240e0",
+      "paginas": 260,
+      "versao": "3.2026",
+      "estado": "FONTE_DE_DELTA_DIRIGIDO"
+    },
+    {
+      "arquivo": "Melanoma Uveal.pdf",
+      "sha256": "ea57f4027269de0976b747bd1adaf3e0f6deb61942f4b23e2dacd6546a4e5327",
+      "paginas": 96,
+      "versao": "2.2026",
+      "estado": "APENAS_INVENTARIADO_NESTA_RODADA"
+    },
+    {
+      "arquivo": "Merkel Cell Carcinoma.pdf",
+      "sha256": "7e88d31b9ce6198425dd0e2c35f1a47757ff24c136d5928d47c9ce3e40c15b26",
+      "paginas": 83,
+      "versao": "1.2027",
+      "estado": "APENAS_INVENTARIADO_NESTA_RODADA"
+    },
+    {
+      "arquivo": "Mesothelioma Peritoneal.pdf",
+      "sha256": "148f5e2ce8c318789b8c4b302b23eb90c15a1e2134b9586fe11822ef596c606d",
+      "paginas": 42,
+      "versao": "2.2026",
+      "estado": "APENAS_INVENTARIADO_NESTA_RODADA"
+    },
+    {
+      "arquivo": "Mesothelioma Pleural.pdf",
+      "sha256": "4924535b27780df724c37fabf7fcd6b0a35f43472245348dc0512d4cf924e6c0",
+      "paginas": 58,
+      "versao": "3.2026",
+      "estado": "APENAS_INVENTARIADO_NESTA_RODADA"
+    },
+    {
+      "arquivo": "Myelodysplastic Syndromes.pdf",
+      "sha256": "c8b4c668f5191ada24cee65470104e3831119253829e4085157949412076595d",
+      "paginas": 123,
+      "versao": "3.2026",
+      "estado": "APENAS_INVENTARIADO_NESTA_RODADA"
+    },
+    {
+      "arquivo": "MyeloidLymphoid Neoplasms with Eosinophilia and Tyrosine Kinase Gene Fusions.pdf",
+      "sha256": "5e642884b1ac79321289e8b40481382bb06ee8a4e6d0da827c4b14222af6ef71",
+      "paginas": 51,
+      "versao": "2.2026",
+      "estado": "APENAS_INVENTARIADO_NESTA_RODADA"
+    },
+    {
+      "arquivo": "Myeloproliferative Neoplasms.pdf",
+      "sha256": "bc88310f24e2f4855ccf455ea23978a9c190b489cf683dadc00ce9374a91e462",
+      "paginas": 125,
+      "versao": "3.2026",
+      "estado": "APENAS_INVENTARIADO_NESTA_RODADA"
+    },
+    {
+      "arquivo": "Neuroendocrine and Adrenal Tumors.pdf",
+      "sha256": "9e3851747595d8afb6a5e33e1a96c8d9975d7b4e7b375d896cb01850d8c6776a",
+      "paginas": 237,
+      "versao": "1.2026",
+      "estado": "FONTE_DE_DELTA_DIRIGIDO"
+    },
+    {
+      "arquivo": "Non-Small Cell Lung Cancer.pdf",
+      "sha256": "c27cfc84df937907796404da60afba69fc97bc15a28b0787abc528958d2c62ff",
+      "paginas": 303,
+      "versao": "9.2026",
+      "estado": "FONTE_DE_DELTA_DIRIGIDO"
+    },
+    {
+      "arquivo": "Occult Primary.pdf",
+      "sha256": "12cbe7019965140f301c79f5e9686b035d471f0889bdfd7bf2d61b17e23d4973",
+      "paginas": 86,
+      "versao": "2.2026",
+      "estado": "APENAS_INVENTARIADO_NESTA_RODADA"
+    },
+    {
+      "arquivo": "Ovarian CancerFallopian Tube CancerPrimary Peritoneal Cancer.pdf",
+      "sha256": "ed1126c21faebaa4ba815a47c215b82ebac0eff9dc09352bda0019570fadfeeb",
+      "paginas": 130,
+      "versao": "4.2026",
+      "estado": "FONTE_DE_DELTA_DIRIGIDO"
+    },
+    {
+      "arquivo": "Pancreatic Adenocarcinoma.pdf",
+      "sha256": "c4d2c8507e8c544e4a4c9c26cbf2b10dd42b6d5b13c3cf2900a4bf0da093058e",
+      "paginas": 167,
+      "versao": "4.2026",
+      "estado": "FONTE_DE_DELTA_DIRIGIDO"
+    },
+    {
+      "arquivo": "Penile Cancer.pdf",
+      "sha256": "9c6238ffd547161896a4cdf7798d12ec10c581bcce73144e9521d225cafbe7e9",
+      "paginas": 64,
+      "versao": "1.2027",
+      "estado": "FONTE_DE_DELTA_DIRIGIDO"
+    },
+    {
+      "arquivo": "Prostate Cancer.pdf",
+      "sha256": "3f5fd77990718f20041e220a6b7648f5ee12a0d4156807cc8f16a5c1e8fb691b",
+      "paginas": 253,
+      "versao": "1.2027",
+      "estado": "FONTE_DE_DELTA_DIRIGIDO"
+    },
+    {
+      "arquivo": "Rectal Cancer.pdf",
+      "sha256": "83ec9cc92a026d8f447d3d635267cd70ff035472c3dbfc7160aec157910d4530",
+      "paginas": 166,
+      "versao": "2.2026",
+      "estado": "APENAS_INVENTARIADO_NESTA_RODADA"
+    },
+    {
+      "arquivo": "Small Bowel Adenocarcinoma.pdf",
+      "sha256": "2f01c17290491e1b771827a90d5f3b53ae62b674eaa02f0fa4e980c6ad60c7ef",
+      "paginas": 68,
+      "versao": "2.2026",
+      "estado": "APENAS_INVENTARIADO_NESTA_RODADA"
+    },
+    {
+      "arquivo": "Small Cell Lung Cancer.pdf",
+      "sha256": "ebbf19355a5b2d848c9c1b43095974f95708b9e1576324a9bd22e64a174bafb6",
+      "paginas": 93,
+      "versao": "1.2027",
+      "estado": "FONTE_DE_DELTA_DIRIGIDO"
+    },
+    {
+      "arquivo": "Soft Tissue Sarcoma.pdf",
+      "sha256": "10ff2574473a0a6fdb1e11a8fe83a662b960884107cc22891409ad9e0262ab10",
+      "paginas": 144,
+      "versao": "5.2026",
+      "estado": "FONTE_DE_DELTA_DIRIGIDO"
+    },
+    {
+      "arquivo": "Squamous Cell Skin Cancer.pdf",
+      "sha256": "98ed543dcc4a5de0c60de687fd1517664bd2c92feba3d8ea3dab213ef6fe761d",
+      "paginas": 112,
+      "versao": "1.2027",
+      "estado": "APENAS_INVENTARIADO_NESTA_RODADA"
+    },
+    {
+      "arquivo": "Systemic Light Chain Amyloidosis.pdf",
+      "sha256": "79c793d488e42d9f0886438d33508acaaea1de432e99dc9f3d4ca2e4844260ec",
+      "paginas": 49,
+      "versao": "1.2027",
+      "estado": "APENAS_INVENTARIADO_NESTA_RODADA"
+    },
+    {
+      "arquivo": "Systemic Mastocytosis.pdf",
+      "sha256": "cea7263a6a1a97d15c1ac7012bd59c97386d158cebdcae4ad0b0db5f3bf9a243",
+      "paginas": 82,
+      "versao": "3.2026",
+      "estado": "APENAS_INVENTARIADO_NESTA_RODADA"
+    },
+    {
+      "arquivo": "Testicular Cancer.pdf",
+      "sha256": "aa89a4c6c6c0316b9bc07b4f82828f2cc3bca265d56ba207f40b63434b4a8fe3",
+      "paginas": 95,
+      "versao": "2.2026",
+      "estado": "FONTE_DE_DELTA_DIRIGIDO"
+    },
+    {
+      "arquivo": "Thymomas and Thymic Carcinomas.pdf",
+      "sha256": "f1aabd30512a175c67b6977340f91fb63e47b405189e1d9458a970a5fdbdaf36",
+      "paginas": 60,
+      "versao": "1.2027",
+      "estado": "APENAS_INVENTARIADO_NESTA_RODADA"
+    },
+    {
+      "arquivo": "Thyroid Carcinoma.pdf",
+      "sha256": "0ed396290ae6e0a108c1b372f61c9ad3d568c0b672d401de51ae1ca1d16f16a8",
+      "paginas": 159,
+      "versao": "2.2026",
+      "estado": "FONTE_DE_DELTA_DIRIGIDO"
+    },
+    {
+      "arquivo": "Uterine Neoplasms.pdf",
+      "sha256": "adad3057d8e1222030549dd9c8fac9a0618e31dc8e682e72e1096ca677652332",
+      "paginas": 151,
+      "versao": "3.2026",
+      "estado": "FONTE_DE_DELTA_DIRIGIDO"
+    },
+    {
+      "arquivo": "Vaginal Cancer.pdf",
+      "sha256": "22b0a03c5ff526eff9131682a697d3eee1e2b3b4b83051962c6149bf58af284d",
+      "paginas": 67,
+      "versao": "2.2026",
+      "estado": "APENAS_INVENTARIADO_NESTA_RODADA"
+    },
+    {
+      "arquivo": "Vulvar Cancer.pdf",
+      "sha256": "47596644450c69f63c8532770ccd2fab696e0195913375cb197ca056617277c2",
+      "paginas": 88,
+      "versao": "2.2026",
+      "estado": "APENAS_INVENTARIADO_NESTA_RODADA"
+    }
+  ],
+  "packs": [
+    {
+      "arquivo": "corpus/6-pack-tumor/adrenal/pack-adrenal.v2.RASCUNHO.json",
+      "slug": "adrenal",
+      "base_sha256": "f392371bfff829f54d6a0603fa317952c98fbfe75e7c6d2bf8ae475c186cbc46",
+      "resultado_sha256": "5db24b4371a610636aac948779cc8020c80b84a9102748087d37f87d39dc3677",
+      "itens_nccn": 1,
+      "conflitos_novos": 1,
+      "protocolos": 6,
+      "ensaios": 2,
+      "cenarios_identidade": 4,
+      "cenarios_tratamento": 4,
+      "seguimento": 2,
+      "conflitos": 2,
+      "pendencias": 6,
+      "revisao_documental": "2026-10-17-nccn-final-documental"
+    },
+    {
+      "arquivo": "corpus/6-pack-tumor/bexiga/pack-bexiga.v2.RASCUNHO.json",
+      "slug": "bexiga",
+      "base_sha256": "ea44abf6161849a2aa73c26226786c7f929c304e677fe1526ecbc4adbb1e737d",
+      "resultado_sha256": "b144efbe70727197285e7f33dde41e54a77c18852e0d7cc832b43e3e26c0c516",
+      "itens_nccn": 6,
+      "conflitos_novos": 2,
+      "protocolos": 37,
+      "ensaios": 10,
+      "cenarios_identidade": 5,
+      "cenarios_tratamento": 10,
+      "seguimento": 6,
+      "conflitos": 12,
+      "pendencias": 11,
+      "revisao_documental": "2026-10-17-nccn-final-documental"
+    },
+    {
+      "arquivo": "corpus/6-pack-tumor/cabeca-pescoco/pack-cabeca-pescoco.v2.RASCUNHO.json",
+      "slug": "cabeca-pescoco",
+      "base_sha256": "659356db9e63d5ce4bb9e43dce6c15353000abe90875bc3afde95ad36fff5a2e",
+      "resultado_sha256": "9f76b2b1fc53e1a6607bcc6c137283fa28c1237226f2baf769a7b89d4edbe864",
+      "itens_nccn": 3,
+      "conflitos_novos": 0,
+      "protocolos": 26,
+      "ensaios": 3,
+      "cenarios_identidade": 7,
+      "cenarios_tratamento": 7,
+      "seguimento": 6,
+      "conflitos": 2,
+      "pendencias": 2,
+      "revisao_documental": "2026-10-17-nccn-final-documental"
+    },
+    {
+      "arquivo": "corpus/6-pack-tumor/canal-anal/pack-canal-anal.v2.RASCUNHO.json",
+      "slug": "canal-anal",
+      "base_sha256": "0822ff6bac112006d3ea0abf63dfac476b39f160d3c3fedb2106a8ca176cb311",
+      "resultado_sha256": "a17f5e68d477ccd019991276dc5e507862db3a08ed159b91f06c70dd20f6d235",
+      "itens_nccn": 3,
+      "conflitos_novos": 0,
+      "protocolos": 12,
+      "ensaios": 4,
+      "cenarios_identidade": 5,
+      "cenarios_tratamento": 4,
+      "seguimento": 4,
+      "conflitos": 3,
+      "pendencias": 5,
+      "revisao_documental": "2026-10-17-nccn-delta-2-correcao-auditoria"
+    },
+    {
+      "arquivo": "corpus/6-pack-tumor/chc/pack-chc.v2.RASCUNHO.json",
+      "slug": "chc",
+      "base_sha256": "e4f10d3a253f9e0fdb90e8aaee7da274ac01ad6c8c52001aa1a8b7fda5a817b4",
+      "resultado_sha256": "d2de7816abfd3414ad23ca345d3894b1c4762c734358cb66e1d50ad144918941",
+      "itens_nccn": 4,
+      "conflitos_novos": 0,
+      "protocolos": 8,
+      "ensaios": 10,
+      "cenarios_identidade": 4,
+      "cenarios_tratamento": 4,
+      "seguimento": 3,
+      "conflitos": 1,
+      "pendencias": 6,
+      "revisao_documental": "2026-10-17-nccn-final-documental"
+    },
+    {
+      "arquivo": "corpus/6-pack-tumor/colo-utero/pack-colo-utero.v2.RASCUNHO.json",
+      "slug": "colo-utero",
+      "base_sha256": "d585578f88567e308bcd28210d17aab77ffc55fe8c4899135380ad6e3ff727fa",
+      "resultado_sha256": "2bfeba10dc138e9d3652f2aaae5075af193981d45709b6f6339dbe28cd759115",
+      "itens_nccn": 4,
+      "conflitos_novos": 0,
+      "protocolos": 19,
+      "ensaios": 5,
+      "cenarios_identidade": 4,
+      "cenarios_tratamento": 7,
+      "seguimento": 3,
+      "conflitos": 2,
+      "pendencias": 4,
+      "revisao_documental": "2026-10-17-nccn-final-documental"
+    },
+    {
+      "arquivo": "corpus/6-pack-tumor/colorretal/pack-colorretal.v2.RASCUNHO.json",
+      "slug": "colorretal",
+      "base_sha256": "1785a33cb2254f4014218b32bb0119468b9e53f243ada0d41f882b1093365a0d",
+      "resultado_sha256": "0881005a7edf37a05344ce46e705d67cf31949a44bad8ff1914cf5a443f5c82c",
+      "itens_nccn": 8,
+      "conflitos_novos": 1,
+      "protocolos": 49,
+      "ensaios": 16,
+      "cenarios_identidade": 12,
+      "cenarios_tratamento": 8,
+      "seguimento": 8,
+      "conflitos": 6,
+      "pendencias": 7,
+      "revisao_documental": "2026-10-17-nccn-final-documental"
+    },
+    {
+      "arquivo": "corpus/6-pack-tumor/endometrio/pack-endometrio.v2.RASCUNHO.json",
+      "slug": "endometrio",
+      "base_sha256": "5f4c563bf6a176ba1961f32ebbe772c0e210961155bbf66fa0bd6c6a01ddb2eb",
+      "resultado_sha256": "251952e0067b47b647cbce19f8d631a508c4deeb3278b7315b269fe1a2c54925",
+      "itens_nccn": 3,
+      "conflitos_novos": 1,
+      "protocolos": 25,
+      "ensaios": 5,
+      "cenarios_identidade": 5,
+      "cenarios_tratamento": 6,
+      "seguimento": 3,
+      "conflitos": 2,
+      "pendencias": 4,
+      "revisao_documental": "2026-10-17-nccn-delta-2-correcao-auditoria"
+    },
+    {
+      "arquivo": "corpus/6-pack-tumor/esofago/pack-esofago.v2.RASCUNHO.json",
+      "slug": "esofago",
+      "base_sha256": "344a3908bbb4fd496ee72c783644f0c6879cbfe2d672ba7c4de8c066baf79f1b",
+      "resultado_sha256": "9221f525376d59ff4274269680eae72e9a5b0c22632dcab51aabb8be179047b4",
+      "itens_nccn": 7,
+      "conflitos_novos": 1,
+      "protocolos": 20,
+      "ensaios": 9,
+      "cenarios_identidade": 5,
+      "cenarios_tratamento": 5,
+      "seguimento": 2,
+      "conflitos": 5,
+      "pendencias": 9,
+      "revisao_documental": "2026-10-17-nccn-final-documental"
+    },
+    {
+      "arquivo": "corpus/6-pack-tumor/gastrico/pack-gastrico.v2.RASCUNHO.json",
+      "slug": "gastrico",
+      "base_sha256": "fd041140e3db134a41999819bb41a950563ac73862aef5bf7e8fee1d2ab98274",
+      "resultado_sha256": "b3c09d9b9ae3284da47b053d8032403df2bce82cee7ea4e7c7760678035b15c7",
+      "itens_nccn": 8,
+      "conflitos_novos": 0,
+      "protocolos": 37,
+      "ensaios": 12,
+      "cenarios_identidade": 5,
+      "cenarios_tratamento": 3,
+      "seguimento": 4,
+      "conflitos": 8,
+      "pendencias": 7,
+      "revisao_documental": "2026-10-17-nccn-final-documental"
+    },
+    {
+      "arquivo": "corpus/6-pack-tumor/gist/pack-gist.v2.RASCUNHO.json",
+      "slug": "gist",
+      "base_sha256": "7cac224d67ff3053daff0b5f7db3bb7d5eda97c1d22d48dc4d61aaec3ddf5512",
+      "resultado_sha256": "b43d92b90f2311c9cf90e050de871d884ad434bd17bb6efa3238309fe1ade476",
+      "itens_nccn": 3,
+      "conflitos_novos": 2,
+      "protocolos": 10,
+      "ensaios": 7,
+      "cenarios_identidade": 3,
+      "cenarios_tratamento": 3,
+      "seguimento": 3,
+      "conflitos": 3,
+      "pendencias": 5,
+      "revisao_documental": "2026-10-17-nccn-delta-2-correcao-auditoria"
+    },
+    {
+      "arquivo": "corpus/6-pack-tumor/gliomas/pack-gliomas.v2.RASCUNHO.json",
+      "slug": "gliomas",
+      "base_sha256": "8014f21a257e4db512161d760219017f358aeaffb21851a0385ffc3403da4132",
+      "resultado_sha256": "b48c1a3f2fcdb44477c7b9dc09093264f5dd98fbafe833a0441fdd3dd8c699c8",
+      "itens_nccn": 2,
+      "conflitos_novos": 0,
+      "protocolos": 12,
+      "ensaios": 4,
+      "cenarios_identidade": 6,
+      "cenarios_tratamento": 4,
+      "seguimento": 5,
+      "conflitos": 2,
+      "pendencias": 5,
+      "revisao_documental": "2026-10-17-nccn-final-documental"
+    },
+    {
+      "arquivo": "corpus/6-pack-tumor/ldgcb/pack-ldgcb.v2.RASCUNHO.json",
+      "slug": "ldgcb",
+      "base_sha256": "4a04454111f83ae6b7474c1a968c37a0fb48f855cb2a3e78e4aebac01189b153",
+      "resultado_sha256": "3855b1b8bf7bcbde98704c9044bf206820fb3da22e0f25f25209c5848b476789",
+      "itens_nccn": 0,
+      "conflitos_novos": 0,
+      "protocolos": 3,
+      "ensaios": 1,
+      "cenarios_identidade": 4,
+      "cenarios_tratamento": 4,
+      "seguimento": 3,
+      "conflitos": 3,
+      "pendencias": 7,
+      "revisao_documental": "2026-10-17-nccn-delta-1"
+    },
+    {
+      "arquivo": "corpus/6-pack-tumor/linfoma-folicular/pack-linfoma-folicular.v2.RASCUNHO.json",
+      "slug": "linfoma-folicular",
+      "base_sha256": "512e0e2ad258887915af6ebb111462c8275d047c46697b32d7a5b4c61307aa26",
+      "resultado_sha256": "37a52d1b61e8e0da1e3e7159a8a5f9e932c47cd7593d7472f44beec40d170792",
+      "itens_nccn": 0,
+      "conflitos_novos": 0,
+      "protocolos": 4,
+      "ensaios": 3,
+      "cenarios_identidade": 5,
+      "cenarios_tratamento": 5,
+      "seguimento": 3,
+      "conflitos": 3,
+      "pendencias": 5,
+      "revisao_documental": "2026-10-17-nccn-delta-1"
+    },
+    {
+      "arquivo": "corpus/6-pack-tumor/linfoma-hodgkin/pack-linfoma-hodgkin.v2.RASCUNHO.json",
+      "slug": "linfoma-hodgkin",
+      "base_sha256": "bf7c8fdc08d6c471feca9d498ba183f916144978617a828739a7c37345d0ee6e",
+      "resultado_sha256": "87aa295fb925a3669f73e3b47efab11aac4aa0954ea2fd1163273c09c9a100a9",
+      "itens_nccn": 0,
+      "conflitos_novos": 0,
+      "protocolos": 4,
+      "ensaios": 1,
+      "cenarios_identidade": 5,
+      "cenarios_tratamento": 5,
+      "seguimento": 4,
+      "conflitos": 3,
+      "pendencias": 6,
+      "revisao_documental": "2026-10-17-nccn-delta-1"
+    },
+    {
+      "arquivo": "corpus/6-pack-tumor/mama/pack-mama.v2.RASCUNHO.json",
+      "slug": "mama",
+      "base_sha256": "7fe3fed203133f1bc6b209d264af58b60a070148452e9c741e1e04b13b9fcc69",
+      "resultado_sha256": "746aba4fef08ee15dec3bb15d1c0e98fa7289311f8023e359e745842f22da60e",
+      "itens_nccn": 9,
+      "conflitos_novos": 0,
+      "protocolos": 45,
+      "ensaios": 11,
+      "cenarios_identidade": 6,
+      "cenarios_tratamento": 12,
+      "seguimento": 5,
+      "conflitos": 3,
+      "pendencias": 5,
+      "revisao_documental": "2026-10-17-nccn-final-documental"
+    },
+    {
+      "arquivo": "corpus/6-pack-tumor/melanoma/pack-melanoma.v2.RASCUNHO.json",
+      "slug": "melanoma",
+      "base_sha256": "1175a8da9e585455151f1f1d6813ba8c771ba2ff9bcc060197aa1ccadd4dc15b",
+      "resultado_sha256": "2c051a3ff3f54551d0c221bf001c3183daf91f7a94f48fa42cd21b9b920cde7a",
+      "itens_nccn": 2,
+      "conflitos_novos": 0,
+      "protocolos": 18,
+      "ensaios": 4,
+      "cenarios_identidade": 6,
+      "cenarios_tratamento": 6,
+      "seguimento": 3,
+      "conflitos": 1,
+      "pendencias": 4,
+      "revisao_documental": "2026-10-17-nccn-final-documental"
+    },
+    {
+      "arquivo": "corpus/6-pack-tumor/mieloma/pack-mieloma.v2.RASCUNHO.json",
+      "slug": "mieloma",
+      "base_sha256": "ff65244071f94d0e6349aa6506edf2e0e4d7931d990d96142ffc7b47696b5860",
+      "resultado_sha256": "d3f4bdad50e3490aa30dfa97e1b5f7f17a7e7d85c14f9e8c581aa95d6f2e3a57",
+      "itens_nccn": 0,
+      "conflitos_novos": 0,
+      "protocolos": 7,
+      "ensaios": 1,
+      "cenarios_identidade": 4,
+      "cenarios_tratamento": 4,
+      "seguimento": 2,
+      "conflitos": 3,
+      "pendencias": 6,
+      "revisao_documental": "2026-10-17-nccn-delta-1"
+    },
+    {
+      "arquivo": "corpus/6-pack-tumor/neuroendocrinos/pack-neuroendocrinos.v2.RASCUNHO.json",
+      "slug": "neuroendocrinos",
+      "base_sha256": "0faa887595edb6c1fb794812133bbb46dfa1a7f4c86742d81e7600329dae5c18",
+      "resultado_sha256": "e2d18be7beb4161d90b833fbbf84c5e4b14060fccd3538f1cf00379f898d2629",
+      "itens_nccn": 2,
+      "conflitos_novos": 1,
+      "protocolos": 12,
+      "ensaios": 9,
+      "cenarios_identidade": 5,
+      "cenarios_tratamento": 4,
+      "seguimento": 5,
+      "conflitos": 5,
+      "pendencias": 6,
+      "revisao_documental": "2026-10-17-nccn-final-documental"
+    },
+    {
+      "arquivo": "corpus/6-pack-tumor/ovario/pack-ovario.v2.RASCUNHO.json",
+      "slug": "ovario",
+      "base_sha256": "4a67d41312c44e1e157b0f29593bf0f62463c34cb71b8f2d0d96050dc06de997",
+      "resultado_sha256": "38f038c2229eae44fdca737edb2955f95a10948e919b89b00d7b406f4c60dc7b",
+      "itens_nccn": 4,
+      "conflitos_novos": 1,
+      "protocolos": 39,
+      "ensaios": 6,
+      "cenarios_identidade": 8,
+      "cenarios_tratamento": 9,
+      "seguimento": 4,
+      "conflitos": 3,
+      "pendencias": 7,
+      "revisao_documental": "2026-10-17-nccn-delta-2-correcao-auditoria"
+    },
+    {
+      "arquivo": "corpus/6-pack-tumor/pancreas/pack-pancreas.v2.RASCUNHO.json",
+      "slug": "pancreas",
+      "base_sha256": "65667a2415c134b1eba73c04bdb4ad921b427c19d8266c4abd0bdcda8d7814e9",
+      "resultado_sha256": "be1c0f4ca0307c1e3a5ea7855734ab7c475abd04a46439f4afb9145b9a1c7cf7",
+      "itens_nccn": 4,
+      "conflitos_novos": 0,
+      "protocolos": 19,
+      "ensaios": 9,
+      "cenarios_identidade": 4,
+      "cenarios_tratamento": 4,
+      "seguimento": 2,
+      "conflitos": 3,
+      "pendencias": 8,
+      "revisao_documental": "2026-10-17-nccn-final-documental"
+    },
+    {
+      "arquivo": "corpus/6-pack-tumor/penis/pack-penis.v2.RASCUNHO.json",
+      "slug": "penis",
+      "base_sha256": "4adec28e57f5db6eb87e23c65cc7d31a955253c0029c371b750c0ba2d50b29e7",
+      "resultado_sha256": "03c5872c28aec9dd15a0e98300c688d5e8366af72e983ae201b0d942bfd3ffdd",
+      "itens_nccn": 1,
+      "conflitos_novos": 1,
+      "protocolos": 11,
+      "ensaios": 4,
+      "cenarios_identidade": 10,
+      "cenarios_tratamento": 10,
+      "seguimento": 7,
+      "conflitos": 4,
+      "pendencias": 11,
+      "revisao_documental": "2026-10-17-nccn-final-documental"
+    },
+    {
+      "arquivo": "corpus/6-pack-tumor/prostata/pack-prostata.v2.RASCUNHO.json",
+      "slug": "prostata",
+      "base_sha256": "dc410e02910d8f306ad022100f63b002359c021376499c3d37c09b2929230b26",
+      "resultado_sha256": "39e38d25ad802e53d0676906d729b1d540716afb28d644275f420571d0c7993b",
+      "itens_nccn": 4,
+      "conflitos_novos": 0,
+      "protocolos": 45,
+      "ensaios": 10,
+      "cenarios_identidade": 8,
+      "cenarios_tratamento": 9,
+      "seguimento": 4,
+      "conflitos": 9,
+      "pendencias": 12,
+      "revisao_documental": "2026-10-17-nccn-final-documental"
+    },
+    {
+      "arquivo": "corpus/6-pack-tumor/pulmao/pack-pulmao.v2.RASCUNHO.json",
+      "slug": "pulmao",
+      "base_sha256": "a6f6f5ad1e07ae95ebe90739ef19c3c4622b39b39ed6bf87fc6e2e23af2178d1",
+      "resultado_sha256": "b8004148140a76c508d34a77b6cb0803e6c6749d2325221367e19169ebe444aa",
+      "itens_nccn": 14,
+      "conflitos_novos": 0,
+      "protocolos": 65,
+      "ensaios": 9,
+      "cenarios_identidade": 9,
+      "cenarios_tratamento": 8,
+      "seguimento": 3,
+      "conflitos": 7,
+      "pendencias": 6,
+      "revisao_documental": "2026-10-17-nccn-final-documental"
+    },
+    {
+      "arquivo": "corpus/6-pack-tumor/rim/pack-rim.v2.RASCUNHO.json",
+      "slug": "rim",
+      "base_sha256": "5fc3597d10e7414277dcb12e29013abfffff0efa16b465865bafd6da1833a4f2",
+      "resultado_sha256": "9e511c38b1f62e165335a38c70b2495990b10632fbecf9b2b89afabeab0ddafb",
+      "itens_nccn": 4,
+      "conflitos_novos": 0,
+      "protocolos": 27,
+      "ensaios": 8,
+      "cenarios_identidade": 8,
+      "cenarios_tratamento": 10,
+      "seguimento": 6,
+      "conflitos": 6,
+      "pendencias": 9,
+      "revisao_documental": "2026-10-17-nccn-final-documental"
+    },
+    {
+      "arquivo": "corpus/6-pack-tumor/sarcomas/pack-sarcomas.v2.RASCUNHO.json",
+      "slug": "sarcomas",
+      "base_sha256": "6a7a42e9f0324ccb7935a3a048b9a147bd537f5b93d9a99871becb491a256472",
+      "resultado_sha256": "03de86a869caee0226cc850f367737a9543cadfa3daaaf0349004fb0c44a9f1f",
+      "itens_nccn": 6,
+      "conflitos_novos": 0,
+      "protocolos": 36,
+      "ensaios": 3,
+      "cenarios_identidade": 10,
+      "cenarios_tratamento": 6,
+      "seguimento": 4,
+      "conflitos": 3,
+      "pendencias": 6,
+      "revisao_documental": "2026-10-17-nccn-delta-2-correcao-auditoria"
+    },
+    {
+      "arquivo": "corpus/6-pack-tumor/testiculo/pack-testiculo.v2.RASCUNHO.json",
+      "slug": "testiculo",
+      "base_sha256": "6879a6bbf17c3cabb392feb0f4a4bb052ffe8a24a76d7daa86443d27e72aedc4",
+      "resultado_sha256": "f07ff3e08afc49a3f0d609761002e41db4315214c5c1ab19fab3f2695423a3fb",
+      "itens_nccn": 1,
+      "conflitos_novos": 1,
+      "protocolos": 23,
+      "ensaios": 9,
+      "cenarios_identidade": 10,
+      "cenarios_tratamento": 18,
+      "seguimento": 7,
+      "conflitos": 7,
+      "pendencias": 11,
+      "revisao_documental": "2026-10-17-nccn-final-documental"
+    },
+    {
+      "arquivo": "corpus/6-pack-tumor/tireoide/pack-tireoide.v2.RASCUNHO.json",
+      "slug": "tireoide",
+      "base_sha256": "d8ebc30222354a05e227b67efa26b40e9bc11f267964b815b5a6fe3146d8b9d0",
+      "resultado_sha256": "ea6a23ab4ef99652f28debbda59436cfda761a72e2c01f39f2cfac1beaef6af6",
+      "itens_nccn": 4,
+      "conflitos_novos": 0,
+      "protocolos": 19,
+      "ensaios": 3,
+      "cenarios_identidade": 7,
+      "cenarios_tratamento": 8,
+      "seguimento": 6,
+      "conflitos": 3,
+      "pendencias": 3,
+      "revisao_documental": "2026-10-17-nccn-final-documental"
+    },
+    {
+      "arquivo": "corpus/6-pack-tumor/vias-biliares/pack-vias-biliares.v2.RASCUNHO.json",
+      "slug": "vias-biliares",
+      "base_sha256": "6882ef8c31ae0dc50e4af092cf7cf518f499a084b4269114b078748e2a2ddd62",
+      "resultado_sha256": "16865b3173a94bff39e4a71739908fd673cbb2eb890293175ff4977e1403d072",
+      "itens_nccn": 8,
+      "conflitos_novos": 0,
+      "protocolos": 15,
+      "ensaios": 9,
+      "cenarios_identidade": 4,
+      "cenarios_tratamento": 3,
+      "seguimento": 2,
+      "conflitos": 2,
+      "pendencias": 8,
+      "revisao_documental": "2026-10-17-nccn-final-documental"
+    }
+  ],
+  "total_itens_nccn": 115,
+  "total_protocolos_legados_preservados": 653,
+  "pdfs_sem_pack_proprio": [
+    "Appendiceal Neoplasms and Cancers.pdf",
+    "Basal Cell Skin Cancer.pdf",
+    "Castleman Disease.pdf",
+    "Gestational Trophoblastic Neoplasia.pdf",
+    "Histiocytic Neoplasms.pdf",
+    "Kaposi Sarcoma.pdf",
+    "Melanoma Uveal.pdf",
+    "Merkel Cell Carcinoma.pdf",
+    "Mesothelioma Peritoneal.pdf",
+    "Mesothelioma Pleural.pdf",
+    "Myelodysplastic Syndromes.pdf",
+    "MyeloidLymphoid Neoplasms with Eosinophilia and Tyrosine Kinase Gene Fusions.pdf",
+    "Myeloproliferative Neoplasms.pdf",
+    "Occult Primary.pdf",
+    "Small Bowel Adenocarcinoma.pdf",
+    "Squamous Cell Skin Cancer.pdf",
+    "Systemic Light Chain Amyloidosis.pdf",
+    "Systemic Mastocytosis.pdf",
+    "Thymomas and Thymic Carcinomas.pdf",
+    "Vaginal Cancer.pdf",
+    "Vulvar Cancer.pdf"
+  ],
+  "packs_sem_pdf_especifico": [
+    "ldgcb",
+    "linfoma-folicular",
+    "linfoma-hodgkin",
+    "mieloma"
+  ],
+  "novos_packs_fabricados": 0,
+  "ativacao_clinica": false,
+  "alteracao_codigo": false,
+  "limites": [
+    "Extração dirigida do delta, não extração integral das 6149 páginas.",
+    "Os 21 universos sem pack próprio permanecem fila explícita de extração.",
+    "Novas opções são documentais; dose incompleta não é proposta prescrevível."
+  ],
+  "revisao_documental": "2026-10-17-nccn-final-documental",
+  "historico_manifestos": [
+    {
+      "arquivo": "docs/ondas/historico/FASE2-NCCN-DELTA-20261017-r1.json",
+      "sha256": "e952ce0385452e22131c84a56b8d093ae4175911b6be2af8093c9fa4eb18e583",
+      "revisao": "2026-10-17-nccn-delta-1"
+    }
+  ],
+  "fechamento": {
+    "alteracoes_clinicas_documentais": [
+      {
+        "item_id": "nccn-20261017-cabeca-pescoco-pembro-perioperatorio",
+        "motivo": "Complemento de evidência por sítio; não criar requisito p16-negativo para laringe/hipofaringe; corrigir GLOT-3 citado no parecer para GLOT-6."
+      },
+      {
+        "item_id": "nccn-20261017-neuroendocrinos-g3-diferenciado",
+        "motivo": "Adicionar a referência explícita que distingue TNE de alto grau e carcinoma pouco diferenciado; conteúdo clínico preservado."
+      },
+      {
+        "item_id": "nccn-20261017-vias-biliares-tucatinibe",
+        "motivo": "Retirar inferência operacional entre métodos; preservar notação e limitação explícita da fonte."
+      },
+      {
+        "item_id": "nccn-20261017-vias-biliares-pertuzumabe",
+        "motivo": "Retirar inferência operacional entre métodos; preservar notação e limitação explícita da fonte."
+      },
+      {
+        "item_id": "nccn-20261017-vias-biliares-zanidatamabe",
+        "motivo": "Trocar resumo genérico por conteúdo explícito já condicionado na aplicabilidade; sem alteração da indicação legada."
+      },
+      {
+        "item_id": "nccn-20261017-vias-biliares-braf",
+        "motivo": "Trocar resumo genérico por conteúdo explícito já condicionado na aplicabilidade; sem alteração da indicação legada."
+      }
+    ],
+    "espacamentos_corrigidos": 172,
+    "auditorias_deduplicadas_por_referencia": 9,
+    "legado_preservado": true,
+    "aprovacao_clinica": null,
+    "codigo_alterado_nesta_operacao": false
+  }
+}
