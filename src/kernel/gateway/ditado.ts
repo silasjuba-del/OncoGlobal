@@ -4,7 +4,8 @@ import {WebSocketServer,WebSocket} from 'ws';
 import {DeepgramClient} from '@deepgram/sdk';
 import {z} from 'zod';
 import {DitadoPedido,type EventoDitado,type ContextoDitado} from '../../contracts/fase2/ditado.js';
-type SessoesDitado={obter:(token:string)=>unknown;consultaSelecionada:(token:string)=>{patientId:string;encounterId:string;tumorLotId?:string|null}|null};
+import type {CofreDeepgram} from './cofreDeepgram.js';
+type SessoesDitado={obter:(token:string)=>{medicoId:string}|null;consultaSelecionada:(token:string)=>{patientId:string;encounterId:string;tumorLotId?:string|null}|null};
 
 export interface CanalVoz {
  enviar(audio:Uint8Array):void; finalizar():void; manter():void; fechar():void; pendentes():number;
@@ -26,8 +27,8 @@ const Resultado=z.object({type:z.literal('Results'),start:z.number(),duration:z.
  channel:z.object({alternatives:z.array(z.object({transcript:z.string().max(200_000),confidence:z.number().min(0).max(1).optional()}))})});
 type Ticket={token:string;contexto:z.infer<typeof ContextoDitado>;expira:number;chave:string};
 
-/** Credenciais da tela duram somente a sessão em memória; áudio não é gravado nem registrado em logs. */
-export function criarDitado(sessoes:SessoesDitado,opcoes:{chave?:string;conectar?:ConectarVoz;agora?:()=>number}={}){
+/** Credencial persistente exige cofre explícito; áudio nunca é gravado ou registrado em logs. */
+export function criarDitado(sessoes:SessoesDitado,opcoes:{chave?:string;cofre?:CofreDeepgram|null;conectar?:ConectarVoz;agora?:()=>number}={}){
  const agora=opcoes.agora??Date.now,conectar=opcoes.conectar??conectarDeepgram;
  const chaves=new Map<string,string>(),tickets=new Map<string,Ticket>(),ativos=new Map<string,()=>void>();
  const wss=new WebSocketServer({noServer:true,maxPayload:128*1024,perMessageDeflate:false});
@@ -38,13 +39,31 @@ export function criarDitado(sessoes:SessoesDitado,opcoes:{chave?:string;conectar
  function cancelar(token:string){ativos.get(token)?.();for(const [k,t] of tickets)if(t.token===token)tickets.delete(k);}
  function rotear(raw:unknown,token:string):{status:number;body:unknown}{
   limpar();const p=DitadoPedido.safeParse(raw);
-  if(!sessoes.obter(token))return {status:401,body:{codigo:'SESSAO_INVALIDA'}};
+  const sessao=sessoes.obter(token);if(!sessao)return {status:401,body:{codigo:'SESSAO_INVALIDA'}};
   if(!p.success)return {status:400,body:{codigo:'PAYLOAD_INVALIDO'}};
   if(encerrado)return {status:503,body:{codigo:'DITADO_INDISPONIVEL'}};
-  if(p.data.acao==='CONFIGURAR'){cancelar(token);chaves.set(token,p.data.chave);}
+  const persistir=p.data.acao==='SALVAR_CHAVE_ATUAL'||p.data.acao==='CONFIGURAR'&&p.data.persistir===true;
+  if((persistir||p.data.acao==='ESQUECER_CHAVE_SALVA')&&!opcoes.cofre)return {status:503,body:{codigo:'COFRE_WINDOWS_INDISPONIVEL'}};
+  const invalidarMedico=()=>{const tokens=new Set([...chaves.keys(),...ativos.keys(),...tickets.values()].map(t=>typeof t==='string'?t:t.token));
+   for(const t of tokens)if(sessoes.obter(t)?.medicoId===sessao.medicoId){cancelar(t);chaves.delete(t);}};
+  let salva:string|null=null,cofreIndisponivel=false;
+  const lerSalva=()=>{try{return opcoes.cofre?.ler(sessao.medicoId)??null;}catch{cofreIndisponivel=true;return null;}};
+  try{
+   if(p.data.acao==='CONFIGURAR'){
+    if(persistir){opcoes.cofre!.salvar(sessao.medicoId,p.data.chave);invalidarMedico();}
+    else{cancelar(token);chaves.set(token,p.data.chave);}
+   }
+   if(p.data.acao==='SALVAR_CHAVE_ATUAL'){const atual=chaves.get(token)||lerSalva()||opcoes.chave;
+    if(!atual)return {status:409,body:{codigo:'DEEPGRAM_CHAVE_AUSENTE'}};opcoes.cofre!.salvar(sessao.medicoId,atual);invalidarMedico();}
+   if(p.data.acao==='ESQUECER_CHAVE_SALVA'){opcoes.cofre!.remover(sessao.medicoId);invalidarMedico();}
+  }catch{return {status:503,body:{codigo:'COFRE_OPERACAO_FALHOU'}};}
+  cofreIndisponivel=false;salva=lerSalva();
+  // Falha de gravação/leitura posterior nunca é anunciada como salvamento concluído.
+  if(persistir&&cofreIndisponivel)return {status:503,body:{codigo:'COFRE_OPERACAO_FALHOU'}};
   if(p.data.acao==='REMOVER_CHAVE'){cancelar(token);chaves.delete(token);}
-  const chave=chaves.get(token)||opcoes.chave;
-  if(p.data.acao!=='INICIAR')return {status:200,body:{codigo:'DITADO_CONFIGURACAO',configurada:!!chave,provedor:'DEEPGRAM',modelo:'nova-3',idioma:'pt-BR'}};
+  const chave=chaves.get(token)||salva||opcoes.chave;
+  if(p.data.acao!=='INICIAR')return {status:200,body:{codigo:'DITADO_CONFIGURACAO',configurada:!!chave,salva:!!salva,
+   origem:chaves.has(token)?'SESSAO':salva?'COFRE':opcoes.chave?'AMBIENTE':'AUSENTE',persistenciaDisponivel:!!opcoes.cofre,cofreIndisponivel,provedor:'DEEPGRAM',modelo:'nova-3',idioma:'pt-BR'}};
   if(!chave)return {status:409,body:{codigo:'DEEPGRAM_CHAVE_AUSENTE'}};
   const t:Ticket={token,contexto:p.data.contexto,expira:agora()+15_000,chave};
   if(!valido(t))return {status:409,body:{codigo:'CONTEXTO_CONSULTA_ALTERADO'}};
