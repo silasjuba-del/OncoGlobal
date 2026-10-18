@@ -38,3 +38,11 @@ it('manifesto simultaneamente ampliado não permite reintroduzir exceção sem v
  const r=avaliar("export const x=1;",'src/modules/renal/index.ts',s=>s.replace('const EXCECOES = [];',`const EXCECOES = ${JSON.stringify([ex])};`),s=>{const m=JSON.parse(s);m.pares.push(ex);return JSON.stringify(m);});
  expect(r.status).toBe(1);expect(r.texto).toContain('exige 0 exceções');
 });
+it('ditado admite somente a rota literal local na porta específica da UI',()=>{
+ const local="new WebSocket('/consulta/ditado/stream',ticket)";
+ expect(avaliar(local,'src/ui/api/ditado.ts').status).toBe(0);
+ expect(avaliar(local,'src/ui/consulta/ataque.tsx').status).toBe(1);
+ expect(avaliar("new WebSocket(url,ticket)",'src/ui/api/ditado.ts').status).toBe(1);
+ expect(avaliar("new WebSocket('wss://externo.invalid',ticket)",'src/ui/api/ditado.ts').status).toBe(1);
+ expect(avaliar(`${local}; new WebSocket(outro);`,'src/ui/api/ditado.ts').status).toBe(1);
+});

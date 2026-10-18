@@ -4,6 +4,8 @@ import { dirname, join, relative } from "node:path";
 import { fileURLToPath } from "node:url";
 import { BLOCOS_TUMOR_PACK, TumorPackExtract } from "../../contracts/fase2/tumorPack.js";
 import { hashCanonico } from "../../rules/conteudoCanonico.js";
+import {montarLoteCompleto} from './loteCompleto.js';
+import type {LoteCompleto} from '../../contracts/fase2/loteCompleto.js';
 
 const objeto=(v:unknown):Record<string,unknown>=>v&&typeof v==="object"&&!Array.isArray(v)?v as Record<string,unknown>:{};
 const texto=(v:unknown)=>typeof v==="string"?v.trim():"";
@@ -50,7 +52,7 @@ export function adaptarPackDocumental(json:unknown,arquivo:string,hashOriginal:s
   candidato.referencia.hash=hashExtracaoPack(candidato);
   return TumorPackExtract.parse(candidato);
 }
-export interface CatalogoTumorPacks {packs:TumorPackExtract[];rejeitados:{arquivo:string;motivo:string}[]}
+export interface CatalogoTumorPacks {packs:TumorPackExtract[];rejeitados:{arquivo:string;motivo:string}[];lotes?:Record<string,LoteCompleto>}
 function raizCorpus():string|null{
   for(const inicio of [process.cwd(),dirname(fileURLToPath(import.meta.url))]){let atual=inicio;
     while(true){if(existsSync(join(atual,"corpus","6-pack-tumor")))return atual;const pai=dirname(atual);if(pai===atual)break;atual=pai;}}
@@ -58,7 +60,7 @@ function raizCorpus():string|null{
 }
 /** Arquivos ativos precisam corresponder tanto à extração revisada quanto aos bytes originais. */
 export function carregarPacksTumor(raiz=raizCorpus()):CatalogoTumorPacks{
-  const out:CatalogoTumorPacks={packs:[],rejeitados:[]};
+  const out:CatalogoTumorPacks={packs:[],rejeitados:[],lotes:{}};
   if(!raiz)return {packs:[],rejeitados:[{arquivo:"corpus/6-pack-tumor",motivo:"CORPUS_INDISPONIVEL"}]};
   const originais=new Map<string,string>(),extracoes:{arquivo:string;json:unknown}[]=[];
   function visitar(dir:string){for(const item of readdirSync(dir,{withFileTypes:true}).sort((a,b)=>a.name.localeCompare(b.name))){
@@ -67,7 +69,11 @@ export function carregarPacksTumor(raiz=raizCorpus()):CatalogoTumorPacks{
       try{const bruto=readFileSync(caminho,"utf8"),json=JSON.parse(bruto) as unknown;
         originais.set(arquivo,sha(bruto));
         if(objeto(json).schema==="tumor-pack-extract.v2")extracoes.push({arquivo,json});
-        else if(/^pack-.+\.v2\./.test(item.name))out.packs.push(adaptarPackDocumental(json,arquivo,sha(bruto)));
+        else if(/^pack-.+\.v2\./.test(item.name)){
+          const p=adaptarPackDocumental(json,arquivo,sha(bruto));
+          const lote=montarLoteCompleto(json,arquivo,sha(bruto));
+          out.packs.push(p);out.lotes![p.referencia.id]=lote;
+        }
       }catch{out.rejeitados.push({arquivo,motivo:"PACK_INVALIDO_OU_ILEGIVEL"});}
     }
   }}
@@ -81,5 +87,6 @@ export function carregarPacksTumor(raiz=raizCorpus()):CatalogoTumorPacks{
   const ids=out.packs.map(p=>p.referencia.id),duplicados=new Set(ids.filter((id,i)=>ids.indexOf(id)!==i));
   for(const id of duplicados)out.rejeitados.push({arquivo:id,motivo:"PACK_DUPLICADO"});
   out.packs=out.packs.filter(p=>!duplicados.has(p.referencia.id)).sort((a,b)=>a.referencia.id.localeCompare(b.referencia.id));
+  for(const id of duplicados)delete out.lotes![id];
   return out;
 }

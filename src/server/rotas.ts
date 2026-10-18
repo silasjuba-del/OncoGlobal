@@ -57,8 +57,10 @@ import { normalizarDataCivil } from "../kernel/extracao/normalizacao.js";
 import { farmacosMencionados, reconciliarCampos } from "../kernel/extracao/reconciliacao.js";
 import { AvaliacaoInstrumentoRequest, avaliarInstrumentoEstruturado } from "./f0c/instrumentosClinicos.js";
 import type { criarMotorF1 } from "../kernel/orquestracao/runtime.js";
+import type {criarDitado} from '../kernel/gateway/ditado.js';
 
 export interface ServidorDeps {
+  ditado?:ReturnType<typeof criarDitado>;
   db: DatabaseSync;
   sessoes: GerenciadorSessao;
   gateway: ReturnType<typeof criarGateway>;
@@ -352,6 +354,7 @@ function confirmarBloco(deps: ServidorDeps, token: string, input: Confirmar): { 
 
 export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: ServerResponse): Promise<void> {
   const rota = req.url === "/login" ? "login"
+    : req.url === "/consulta/ditado" ? "ditado"
     : req.url === "/consulta/bundle" ? "bundle"
       : req.url === "/consulta/confirmar" ? "confirmar"
         : req.url === "/consulta/medicamentos/reconciliar" ? "reconciliarMedicamentos"
@@ -423,6 +426,11 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
     if (rota === "acao" && !contentTypeJson(req)) return reply(415, "CONTENT_TYPE_INVALIDO");
     // Conteúdo da biblioteca continua limitado a 8 MB após decodificação; envelope cobre escapes JSON/base64.
     const raw = await body(req,rota === "upload" ? 11_300_000 : rota === "/biblioteca/importar" ? 24_000_000 : 1_000_000);
+    if(rota==='ditado'){
+      if(!contentTypeJson(req))return reply(415,'CONTENT_TYPE_INVALIDO');
+      const result=deps.ditado?.rotear(raw,token)??{status:503,body:{codigo:'DITADO_INDISPONIVEL'}};
+      return reply(result.status,'DITADO',result.body);
+    }
     if(rota === "reconciliarMedicamentos"){const result=reconciliarMedicamentos(raw,token,deps);return reply(result.status,String(result.body.codigo),result.body);}
     if(rota === "sinteseRetratoLlm"){const result=await executarSinteseRetratoLlm(raw,token,deps);return reply(result.status,String(result.body.codigo),result.body);}
     if(rota === "documentoOriginalLlm"){const result=await executarDocumentoOriginalLlm(raw,token,deps);return reply(result.status,String(result.body.codigo),result.body);}
@@ -501,6 +509,7 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
     if (rota === "selecionarContexto") {
       const parsed = z.object({ patientId: Id, encounterId: Id, tumorLotId: Id.nullable() }).strict().safeParse(raw);
       if (!parsed.success) return reply(400, "PAYLOAD_INVALIDO");
+      deps.ditado?.cancelar(token);
       deps.sessoes.selecionarConsulta(token, null);
       if (!lerPaciente(deps.db, parsed.data.patientId)) return reply(404, "PACIENTE_NAO_ENCONTRADO");
       if (parsed.data.tumorLotId !== null
@@ -1125,6 +1134,8 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
     if (rota === "carregarConsulta") {
       const parsed = ConsultaCarregar.safeParse(raw);
       if (!parsed.success) return reply(400, "PAYLOAD_INVALIDO");
+      const anterior=deps.sessoes.consultaSelecionada(token);
+      if(anterior?.patientId!==parsed.data.patientId||anterior?.encounterId!==parsed.data.encounterId||(anterior?.tumorLotId??null)!==(parsed.data.tumorLotId??null))deps.ditado?.cancelar(token);
       let leituraInicial: Parameters<NonNullable<NonNullable<Parameters<typeof lerConsulta>[5]>["aoLer"]>>[0] | undefined;
       const result = lerConsulta(deps.db, parsed.data.patientId, deps.agora(), sessao, parsed.data.tumorLotId,
         { ...opcoesLeituraConsulta(deps, sessao), encounterId: parsed.data.encounterId,aoLer:leitura=>{leituraInicial=leitura;} });
@@ -1284,7 +1295,7 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
         sourceType: z.enum(["pathology", "imaging_report", "prescription", "medical_note", "nursing", "plaud", "administration"]),
         page: z.number().int().nonnegative().optional(), rawTranscript: z.string().min(1).max(200_000),
         contexto: z.object({patientId:z.string().min(1),encounterId:z.string().min(1),tumorLotId:z.string().nullable()}).strict().optional(),
-        captureMethod:z.enum(["LOCAL_DICTATION","PASTED_TEXT"]).optional(),capturedTranscript:z.string().max(200_000).optional(),
+        captureMethod:z.enum(["LOCAL_DICTATION","DEEPGRAM_CLOUD","PASTED_TEXT"]).optional(),capturedTranscript:z.string().max(200_000).optional(),
       }).strict();
       const parsed = inputSchema.safeParse(raw);
       if (!parsed.success) return reply(400, "PAYLOAD_INVALIDO");
