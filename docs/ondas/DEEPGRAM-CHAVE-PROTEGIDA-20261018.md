@@ -8,6 +8,8 @@ Windows: DPAPI `CurrentUser`, sem chave mestra embutida. O arquivo em `%LOCALAPP
 
 O subprocesso nativo usa PowerShell do Windows sem perfil e sem janela; recebe os dados por stdin, nunca por argumentos ou variáveis de ambiente. Erros retornam somente códigos fixos. Falha de criptografia não cai para gravação em texto puro. Escrita usa arquivo temporário já cifrado e substituição por rename. Pasta/arquivo redirecionados por link são recusados. O segredo nunca é retornado pelas rotas HTTP.
 
+Se a leitura do cofre falhar, a falha afeta somente essa fonte: uma chave já configurada na sessão ou no ambiente continua podendo iniciar o ditado. O estado informa a indisponibilidade do cofre sem expor seu conteúdo. Uma operação de salvamento só é confirmada após leitura protegida bem-sucedida. Regressões cobrem as duas alternativas e a reparação explícita do cofre com a chave atual.
+
 Interface: “Salvar com segurança neste computador”, “Salvar a chave desta sessão” e “Esquecer chave salva”. O caminho temporário existente permanece disponível. Remover a chave salva invalida tickets, conexões e cópias temporárias daquele médico neste servidor. Variável de ambiente, quando configurada externamente, continua sendo alternativa independente. Em outros sistemas operacionais, a persistência não é oferecida sem um cofre compatível; não há fallback em texto puro.
 
 Validação inclui: DPAPI real no Windows com chave sintética; leitura em nova instância e login; isolamento por instalação/médico; arquivo adulterado; falha de cifragem sem perder a versão anterior; remoção; ausência de segredo na resposta; ausência de armazenamento no navegador. Referência: https://learn.microsoft.com/en-us/dotnet/standard/security/how-to-use-data-protection.

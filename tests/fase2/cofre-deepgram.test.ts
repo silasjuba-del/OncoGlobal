@@ -44,8 +44,8 @@ it.runIf(process.platform==='win32')('DPAPI real recupera a chave sintética em 
  const bytes=dpapi('Protect',Buffer.from(segredo),'contexto-a');expect(()=>dpapi('Unprotect',bytes,'contexto-b')).toThrow('COFRE_DPAPI_FALHOU');
  expect(readFileSync(join(dir,readdirSync(dir)[0]!),'utf8')).not.toContain(segredo);
 });
-function abrir(cofre?:ReturnType<typeof criarCofreDeepgram>){const sessoes=criarGerenciadorSessao({medicoId:'medico-a',crm:'CRM-SINTETICO',senha:'senha-sintetica-comprida',agora:()=>new Date().toISOString(),duracaoMs:60_000});
- const token=sessoes.login('senha-sintetica-comprida')!.token,d=criarDitado(sessoes,cofre?{cofre}:{});servicos.push(d);return{d,sessoes,token};}
+function abrir(cofre?:ReturnType<typeof criarCofreDeepgram>,chave?:string){const sessoes=criarGerenciadorSessao({medicoId:'medico-a',crm:'CRM-SINTETICO',senha:'senha-sintetica-comprida',agora:()=>new Date().toISOString(),duracaoMs:60_000});
+ const token=sessoes.login('senha-sintetica-comprida')!.token,d=criarDitado(sessoes,{...(cofre?{cofre}:{}),...(chave?{chave}:{})});servicos.push(d);return{d,sessoes,token};}
 it('configuração persistente sobrevive ao fechamento do serviço e login novo sem expor o valor',()=>{
  const dir=temporario(),a=abrir(criarCofreDeepgram(dir,'app',cryptoTeste));
  const r=a.d.rotear({acao:'CONFIGURAR',chave:segredo,persistir:true},a.token);expect(r.status).toBe(200);expect(r.body).toMatchObject({salva:true,configurada:true});
@@ -77,4 +77,14 @@ it('distingue chave temporária da salva e permite recuperar de arquivo corrompi
  writeFileSync(join(dir,readdirSync(dir)[0]!),'corrompido');
  expect(a.d.rotear({acao:'STATUS'},a.token).body).toMatchObject({configurada:false,persistenciaDisponivel:true,cofreIndisponivel:true});
  expect(a.d.rotear({acao:'CONFIGURAR',chave:outra,persistir:true},a.token).body).toMatchObject({origem:'COFRE',salva:true});
+});
+it.each(['AMBIENTE','SESSAO'])('cofre ilegível não bloqueia a chave independente de %s',origem=>{
+ const dir=temporario(),cofre=criarCofreDeepgram(dir,'app',cryptoTeste);cofre.salvar('medico-a',segredo);
+ writeFileSync(join(dir,readdirSync(dir)[0]!),'corrompido');const a=abrir(cofre,origem==='AMBIENTE'?segredo:undefined);
+ if(origem==='SESSAO')expect(a.d.rotear({acao:'CONFIGURAR',chave:segredo},a.token).status).toBe(200);
+ const r=a.d.rotear({acao:'STATUS'},a.token);expect(r.body).toMatchObject({configurada:true,salva:false,origem,cofreIndisponivel:true});
+ const contexto={patientId:'sintetico',encounterId:'encontro',tumorLotId:null};a.sessoes.selecionarConsulta(a.token,contexto);
+ expect(a.d.rotear({acao:'INICIAR',contexto,autorizaEnvioAudio:true},a.token).body).toMatchObject({codigo:'DITADO_TICKET'});
+ expect(a.d.rotear({acao:'SALVAR_CHAVE_ATUAL'},a.token).body).toMatchObject({salva:true,origem:'COFRE',cofreIndisponivel:false});
+ expect(cofre.ler('medico-a')).toBe(segredo);
 });

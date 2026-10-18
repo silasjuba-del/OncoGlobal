@@ -11,7 +11,7 @@ export function DitadoDeepgram({porta,contexto,desabilitado,aoTrecho,aoAtividade
  const geracao=useRef(0),limpar=useRef<()=>void>(()=>{}),parar=useRef<()=>void>(()=>{});
  const callbacks=useRef({aoTrecho,aoAtividade});callbacks.current={aoTrecho,aoAtividade};
  useEffect(()=>{const atual=++geracao.current,abort=new AbortController();
-  void porta.ditado?.({acao:'STATUS'},abort.signal).then(r=>{if(atual===geracao.current&&r.codigo==='DITADO_CONFIGURACAO'){setConfigurada(r.configurada);setSalva(r.salva===true);setOrigem(r.origem??'');setPersistencia(r.persistenciaDisponivel===true);if(r.cofreIndisponivel)setMensagem('Não foi possível ler a chave protegida. Insira a chave novamente e salve para substituir a configuração.');}}).catch(()=>{if(atual===geracao.current)setMensagem('Não foi possível consultar a configuração protegida do ditado.');});
+  void porta.ditado?.({acao:'STATUS'},abort.signal).then(r=>{if(atual===geracao.current&&r.codigo==='DITADO_CONFIGURACAO'){setConfigurada(r.configurada);setSalva(r.salva===true);setOrigem(r.origem??'');setPersistencia(r.persistenciaDisponivel===true);if(r.cofreIndisponivel)setMensagem(r.configurada?'A chave salva não pôde ser lida. O ditado está usando a configuração temporária ou do ambiente.':'Não foi possível ler a chave protegida. Insira a chave novamente e salve para substituir a configuração.');}}).catch(()=>{if(atual===geracao.current)setMensagem('Não foi possível consultar a configuração protegida do ditado.');});
   return()=>{geracao.current++;abort.abort();limpar.current();};
  },[porta]);
  async function configurar(acao:'SESSAO'|'SALVAR'|'ATUAL'|'REMOVER'|'ESQUECER'='SESSAO'){if(!porta.ditado)return;const atual=geracao.current;setConfigurando(true);setMensagem('');

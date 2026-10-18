@@ -46,24 +46,24 @@ export function criarDitado(sessoes:SessoesDitado,opcoes:{chave?:string;cofre?:C
   if((persistir||p.data.acao==='ESQUECER_CHAVE_SALVA')&&!opcoes.cofre)return {status:503,body:{codigo:'COFRE_WINDOWS_INDISPONIVEL'}};
   const invalidarMedico=()=>{const tokens=new Set([...chaves.keys(),...ativos.keys(),...tickets.values()].map(t=>typeof t==='string'?t:t.token));
    for(const t of tokens)if(sessoes.obter(t)?.medicoId===sessao.medicoId){cancelar(t);chaves.delete(t);}};
-  let salva:string|null=null;
+  let salva:string|null=null,cofreIndisponivel=false;
+  const lerSalva=()=>{try{return opcoes.cofre?.ler(sessao.medicoId)??null;}catch{cofreIndisponivel=true;return null;}};
   try{
    if(p.data.acao==='CONFIGURAR'){
     if(persistir){opcoes.cofre!.salvar(sessao.medicoId,p.data.chave);invalidarMedico();}
     else{cancelar(token);chaves.set(token,p.data.chave);}
    }
-   if(p.data.acao==='SALVAR_CHAVE_ATUAL'){const atual=chaves.get(token)||opcoes.cofre?.ler(sessao.medicoId)||opcoes.chave;
+   if(p.data.acao==='SALVAR_CHAVE_ATUAL'){const atual=chaves.get(token)||lerSalva()||opcoes.chave;
     if(!atual)return {status:409,body:{codigo:'DEEPGRAM_CHAVE_AUSENTE'}};opcoes.cofre!.salvar(sessao.medicoId,atual);invalidarMedico();}
    if(p.data.acao==='ESQUECER_CHAVE_SALVA'){opcoes.cofre!.remover(sessao.medicoId);invalidarMedico();}
-   salva=opcoes.cofre?.ler(sessao.medicoId)??null;
-  }catch{
-   if(p.data.acao==='STATUS')return {status:200,body:{codigo:'DITADO_CONFIGURACAO',configurada:false,salva:false,persistenciaDisponivel:!!opcoes.cofre,cofreIndisponivel:true,provedor:'DEEPGRAM',modelo:'nova-3',idioma:'pt-BR'}};
-   return {status:503,body:{codigo:'COFRE_OPERACAO_FALHOU'}};
-  }
+  }catch{return {status:503,body:{codigo:'COFRE_OPERACAO_FALHOU'}};}
+  cofreIndisponivel=false;salva=lerSalva();
+  // Falha de gravação/leitura posterior nunca é anunciada como salvamento concluído.
+  if(persistir&&cofreIndisponivel)return {status:503,body:{codigo:'COFRE_OPERACAO_FALHOU'}};
   if(p.data.acao==='REMOVER_CHAVE'){cancelar(token);chaves.delete(token);}
   const chave=chaves.get(token)||salva||opcoes.chave;
   if(p.data.acao!=='INICIAR')return {status:200,body:{codigo:'DITADO_CONFIGURACAO',configurada:!!chave,salva:!!salva,
-   origem:chaves.has(token)?'SESSAO':salva?'COFRE':opcoes.chave?'AMBIENTE':'AUSENTE',persistenciaDisponivel:!!opcoes.cofre,provedor:'DEEPGRAM',modelo:'nova-3',idioma:'pt-BR'}};
+   origem:chaves.has(token)?'SESSAO':salva?'COFRE':opcoes.chave?'AMBIENTE':'AUSENTE',persistenciaDisponivel:!!opcoes.cofre,cofreIndisponivel,provedor:'DEEPGRAM',modelo:'nova-3',idioma:'pt-BR'}};
   if(!chave)return {status:409,body:{codigo:'DEEPGRAM_CHAVE_AUSENTE'}};
   const t:Ticket={token,contexto:p.data.contexto,expira:agora()+15_000,chave};
   if(!valido(t))return {status:409,body:{codigo:'CONTEXTO_CONSULTA_ALTERADO'}};
