@@ -8,6 +8,7 @@
   },
   "scripts": {
     "test": "vitest run",
+    "test:b2": "node tests/f1/s12/browser-b2.js",
     "typecheck": "tsc --noEmit",
     "check:boundaries": "node scripts/check-boundaries.mjs",
     "check:boundaries:fechar-f1-s3": "node scripts/check-boundaries.mjs --fechar-fase=F1-S3",
@@ -49,6 +50,7 @@
     "@types/ws": "8.18.2",
     "@vitejs/plugin-react": "^6.1.2",
     "jsdom": "^30.1.2",
+    "playwright": "1.64.1",
     "typescript": "^7.0.2",
     "vite": "^8.3.2",
     "vitest": "^5.0.3"
