@@ -8,6 +8,7 @@ import { carregarConfigMotor } from "../kernel/corpus/configMotor.js";
 import { carregarPacksTumor } from '../kernel/corpus/tumorPacks.js';
 import { selecionarPack } from '../modules/consulta/revisaoClinica.js';
 import {criarDitado} from '../kernel/gateway/ditado.js';
+import {cofreDeepgramWindows} from '../kernel/gateway/cofreDeepgram.js';
 
 /** Loopback only; a caller cannot override the bind address. */
 export function criarServidorLocal(deps: ServidorDeps, config: { host?: string; port?: number } = {}): Server {
@@ -24,7 +25,8 @@ export function criarServidorLocal(deps: ServidorDeps, config: { host?: string; 
   const runtimeDeps: ServidorDeps = { ...deps, settings,
     corpus,
     salaoRuleset: deps.salaoRuleset === undefined ? corpus?.ruleset ?? null : deps.salaoRuleset };
-  runtimeDeps.ditado=deps.ditado??criarDitado(deps.sessoes,process.env.DEEPGRAM_API_KEY?{chave:process.env.DEEPGRAM_API_KEY}:{});
+  runtimeDeps.ditado=deps.ditado??criarDitado(deps.sessoes,{...(process.env.DEEPGRAM_API_KEY?{chave:process.env.DEEPGRAM_API_KEY}:{}),
+    cofre:deps.configRootDir?cofreDeepgramWindows(deps.configRootDir):null});
   const configMotor=carregarConfigMotor();
   const catalogoTumorPacks=deps.catalogoTumorPacks??carregarPacksTumor();
   runtimeDeps.catalogoTumorPacks=catalogoTumorPacks;

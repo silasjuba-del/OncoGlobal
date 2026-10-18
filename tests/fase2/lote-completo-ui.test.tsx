@@ -10,6 +10,20 @@ import type {PortaConsulta} from '../../src/ui/api/porta.js';
 const canal=vi.hoisted(()=>({abrir:vi.fn()}));
 vi.mock('../../src/ui/api/ditado.js',()=>({abrirCanalDitado:canal.abrir}));
 afterEach(()=>{cleanup();vi.unstubAllGlobals();vi.restoreAllMocks();});
+it('salvamento protegido é explícito e novo acesso habilita ditado sem revelar nem reinserir chave',async()=>{
+ const porta=criarPortaFalsa();let salva=false;const gravarNavegador=vi.spyOn(Storage.prototype,'setItem');
+ porta.ditado=vi.fn<NonNullable<PortaConsulta['ditado']>>(async p=>{if(p.acao==='CONFIGURAR'&&p.persistir)salva=true;
+  return{codigo:'DITADO_CONFIGURACAO',configurada:salva,salva,persistenciaDisponivel:true,provedor:'DEEPGRAM',modelo:'nova-3',idioma:'pt-BR'};});
+ const props={porta,contexto,desabilitado:false,aoTrecho:vi.fn(),aoAtividade:vi.fn()};
+ const t=render(<DitadoDeepgram {...props}/>);await act(async()=>{});
+ fireEvent.change(screen.getByLabelText('Chave Deepgram'),{target:{value:'chave-sintetica-nao-real-123456'}});
+ await act(async()=>fireEvent.click(screen.getByText('Salvar com segurança neste computador')));
+ expect(porta.ditado).toHaveBeenCalledWith({acao:'CONFIGURAR',chave:'chave-sintetica-nao-real-123456',persistir:true});
+ expect((screen.getByLabelText('Chave Deepgram') as HTMLInputElement).value).toBe('');t.unmount();
+ render(<DitadoDeepgram {...props}/>);await act(async()=>{});
+ expect(screen.getByText(/salva com segurança/)).toBeTruthy();expect(screen.getByText('Iniciar ditado Deepgram').hasAttribute('disabled')).toBe(false);
+ expect((screen.getByLabelText('Chave Deepgram') as HTMLInputElement).value).toBe('');expect(gravarNavegador).not.toHaveBeenCalled();
+});
 it('as três fases mantêm protocolos antigos, cenários e suporte; busca é reversível',()=>{
  const lote=montarLoteCompleto({header:{id:'teste',versao:'1'},identidade:{tumor:'Cólon sintético',cid10:['C18'],cenarios:['Adjuvância']},
   diagnostico:{imagem:[{nome:'TC sintética'}]},tratamento:{protocolos:[{nome:'Mayo'},{nome:'Roswell Park'}],suporte:[{nome:'Suporte sintético'}]}},'teste.json','a'.repeat(64));

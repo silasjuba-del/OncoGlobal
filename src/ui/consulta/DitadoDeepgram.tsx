@@ -5,16 +5,19 @@ import {abrirCanalDitado,type CanalDitado} from '../api/ditado.js';
 
 export function DitadoDeepgram({porta,contexto,desabilitado,aoTrecho,aoAtividade}:{porta:PortaConsulta;contexto:PedidoBundle;desabilitado:boolean;aoTrecho:(t:string)=>void;aoAtividade:(v:boolean)=>void}){
  const [configurada,setConfigurada]=useState(false),[chave,setChave]=useState(''),[mensagem,setMensagem]=useState(''),[parcial,setParcial]=useState('');
+ const [salva,setSalva]=useState(false),[persistencia,setPersistencia]=useState(false);
+ const [origem,setOrigem]=useState('');
  const [estado,setEstado]=useState<'PARADO'|'CONECTANDO'|'DITANDO'|'FINALIZANDO'>('PARADO'),[configurando,setConfigurando]=useState(false);
  const geracao=useRef(0),limpar=useRef<()=>void>(()=>{}),parar=useRef<()=>void>(()=>{});
  const callbacks=useRef({aoTrecho,aoAtividade});callbacks.current={aoTrecho,aoAtividade};
  useEffect(()=>{const atual=++geracao.current,abort=new AbortController();
-  void porta.ditado?.({acao:'STATUS'},abort.signal).then(r=>{if(atual===geracao.current&&r.codigo==='DITADO_CONFIGURACAO')setConfigurada(r.configurada);}).catch(()=>{});
+  void porta.ditado?.({acao:'STATUS'},abort.signal).then(r=>{if(atual===geracao.current&&r.codigo==='DITADO_CONFIGURACAO'){setConfigurada(r.configurada);setSalva(r.salva===true);setOrigem(r.origem??'');setPersistencia(r.persistenciaDisponivel===true);if(r.cofreIndisponivel)setMensagem('Não foi possível ler a chave protegida. Insira a chave novamente e salve para substituir a configuração.');}}).catch(()=>{if(atual===geracao.current)setMensagem('Não foi possível consultar a configuração protegida do ditado.');});
   return()=>{geracao.current++;abort.abort();limpar.current();};
  },[porta]);
- async function configurar(remover=false){if(!porta.ditado)return;const atual=geracao.current;setConfigurando(true);setMensagem('');
-  try{const r=await porta.ditado(remover?{acao:'REMOVER_CHAVE'}:{acao:'CONFIGURAR',chave});if(atual!==geracao.current)return;
-   if(r.codigo==='DITADO_CONFIGURACAO'){setConfigurada(r.configurada);setChave('');setMensagem(remover?'Chave da sessão removida.':'Chave recebida pelo servidor. A conexão será verificada ao iniciar o ditado.');}
+ async function configurar(acao:'SESSAO'|'SALVAR'|'ATUAL'|'REMOVER'|'ESQUECER'='SESSAO'){if(!porta.ditado)return;const atual=geracao.current;setConfigurando(true);setMensagem('');
+  try{const r=await porta.ditado(acao==='REMOVER'?{acao:'REMOVER_CHAVE'}:acao==='ESQUECER'?{acao:'ESQUECER_CHAVE_SALVA'}:acao==='ATUAL'?{acao:'SALVAR_CHAVE_ATUAL'}:{acao:'CONFIGURAR',chave,persistir:acao==='SALVAR'});if(atual!==geracao.current)return;
+   if(r.codigo==='DITADO_CONFIGURACAO'){setConfigurada(r.configurada);setSalva(r.salva===true);setOrigem(r.origem??'');setPersistencia(r.persistenciaDisponivel===true);setChave('');
+    setMensagem(acao==='ESQUECER'?'Chave salva removida deste computador.':acao==='REMOVER'?'Chave temporária removida. A configuração salva ou do ambiente, se existir, continua disponível.':acao==='SESSAO'?'Chave recebida somente para esta sessão. Uma chave salva anteriormente não foi substituída.':r.salva?'Chave salva com proteção do Windows. Será recuperada ao abrir o app novamente.':'Não foi possível confirmar a gravação protegida.');}
   }catch{if(atual===geracao.current)setMensagem('Não foi possível configurar a chave.');}
   finally{if(atual===geracao.current)setConfigurando(false);}
  }
@@ -63,11 +66,14 @@ export function DitadoDeepgram({porta,contexto,desabilitado,aoTrecho,aoAtividade
  const ativo=estado!=='PARADO';
  return <div aria-label="Ditado Deepgram">
   <p>Deepgram · português brasileiro. Ao iniciar, o áudio será enviado à Deepgram. O texto permanece como rascunho para revisão.</p>
-  <details><summary>Configurar chave Deepgram · {configurada?'configurada':'pendente'}</summary>
-   <p>A chave inserida aqui fica na memória do servidor durante a sessão. Também é possível configurar DEEPGRAM_API_KEY no ambiente do servidor.</p>
+  <details><summary>Configurar chave Deepgram · {origem==='SESSAO'?'temporária nesta sessão':origem==='AMBIENTE'?'configurada no ambiente':salva?'salva com segurança':configurada?'configurada nesta sessão':'pendente'}</summary>
+   <p>{persistencia?'Salve a chave protegida pela sua conta do Windows para recuperá-la automaticamente ao reabrir este app. O valor não é exibido nem armazenado no navegador.':'Armazenamento protegido indisponível neste servidor. A chave pode ser usada somente nesta sessão ou configurada no ambiente do servidor.'}</p>
    <label>Chave Deepgram <input type="password" autoComplete="off" value={chave} disabled={ativo||configurando} onChange={e=>setChave(e.target.value)}/></label>
    <button type="button" disabled={ativo||configurando||!chave.trim()||!porta.ditado} onClick={()=>void configurar()}>Usar chave nesta sessão</button>
-   <button type="button" disabled={ativo||configurando||!porta.ditado} onClick={()=>void configurar(true)}>Remover chave desta sessão</button>
+   {persistencia?<button type="button" disabled={ativo||configurando||!chave.trim()||!porta.ditado} onClick={()=>void configurar('SALVAR')}>Salvar com segurança neste computador</button>:null}
+   {persistencia&&configurada&&(!salva||origem==='SESSAO')?<button type="button" disabled={ativo||configurando||!porta.ditado} onClick={()=>void configurar('ATUAL')}>Salvar a chave desta sessão</button>:null}
+   {salva?<button type="button" disabled={ativo||configurando||!porta.ditado} onClick={()=>void configurar('ESQUECER')}>Esquecer chave salva</button>:null}
+   <button type="button" disabled={ativo||configurando||!porta.ditado} onClick={()=>void configurar('REMOVER')}>Remover chave desta sessão</button>
   </details>
   <button type="button" disabled={desabilitado||configurando||(!ativo&&(!configurada||!porta.ditado))||estado==='FINALIZANDO'} onClick={()=>ativo?parar.current():void iniciar()}>
    {estado==='CONECTANDO'?'Cancelar conexão':estado==='DITANDO'?'Parar ditado':estado==='FINALIZANDO'?'Finalizando ditado…':'Iniciar ditado Deepgram'}
