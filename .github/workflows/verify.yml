@@ -32,6 +32,35 @@ jobs:
       - name: Verify (typecheck + fronteiras + testes)
         run: npm run verify
 
+  browser-b2:
+    name: Jornadas B2 no Chromium
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      TMPDIR: ${{ runner.temp }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node 24
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - name: Instalar dependencias
+        run: npm ci
+      - name: Instalar Chromium e dependencias do sistema
+        run: npx --no-install playwright install --with-deps chromium
+      - name: Validar seis jornadas B2 e reabertura no SQLite
+        run: npm run test:b2
+      - name: Guardar evidencias sinteticas
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: jornadas-b2-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/s12-b2-evidence-*/
+          if-no-files-found: warn
+          retention-days: 7
+
   adversarial:
     name: Provas adversariais W10 e W8
     runs-on: ubuntu-latest
