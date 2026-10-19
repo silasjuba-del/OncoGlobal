@@ -16,7 +16,7 @@ import { abrirLedger } from '../../src/kernel/ledger/db.js';
 import { listarEventos } from '../../src/kernel/comandos/portas.js';
 import { ambiente,ctx,EM } from './fixtures.js';
 
-it('6A/6B: HTTP + tela real + reabertura SQLite preservam relato e retratação até decisão médica',async()=>{
+it.each([false,true])('6A/6B: HTTP + tela real + SQLite preservam relato até decisão médica (vínculo posterior=%s)',async vinculoPosterior=>{
  const path=join(mkdtempSync(join(tmpdir(),'oncoglobal-b2-sintetico-')),'teste.sqlite');
  const a=ambiente(path),c={...ctx,tumorLotId:null};
  a.seed('Paciente',{patientId:ctx.patientId,nome:'Paciente Sintético B2',identificadores:[],nascimento:null,sexoCadastral:'NAO_INFORMADO',divergencia:false},'CONFIRMADO',c);
@@ -24,7 +24,7 @@ it('6A/6B: HTTP + tela real + reabertura SQLite preservam relato e retratação 
  const remetente='+55'+'00000009999';
  for(const [id,texto] of [['reacao','fiquei toda vermelha e com coceira na infusão de ontem'],['retracao','melhorou, esquece']]){
   expect(receberTransporteSintetico(a.db,{accountId:'b2-sintetico',canal:'WHATSAPP_SERVICO',providerMessageId:id!,senderRef:remetente,providerSentAt:EM,ingestedAt:EM,
-   conteudo:{tipo:'TEXT',texto:texto!,contentSha256:createHash('sha256').update(texto!).digest('hex')},cadastros:[{patientId:ctx.patientId,nome:'Paciente Sintético B2',identificadores:[{tipo:'TELEFONE',valor:remetente}],chaveDemografica:null}]}).ok).toBe(true);
+   conteudo:{tipo:'TEXT',texto:texto!,contentSha256:createHash('sha256').update(texto!).digest('hex')},cadastros:vinculoPosterior?[]:[{patientId:ctx.patientId,nome:'Paciente Sintético B2',identificadores:[{tipo:'TELEFONE',valor:remetente}],chaveDemografica:null}]}).ok).toBe(true);
  }
  const rules=SalaoRuleset.parse(JSON.parse(readFileSync('corpus/rulesets/salao-triagem.v1.json','utf8')));
  a.db.close();const db=abrirLedger(path);
@@ -35,6 +35,8 @@ it('6A/6B: HTTP + tela real + reabertura SQLite preservam relato e retratação 
  vi.stubGlobal('fetch',(input:string|URL|Request,init?:RequestInit)=>realFetch(new URL(String(input),base),init));
  try {
   const porta=criarPortaHttp({onSessaoExpirada:()=>{}});expect((await porta.login('senha-sintetica-bateria2')).ok).toBe(true);
+  if(vinculoPosterior){await porta.selecionarContexto?.(c);await porta.pedirVinculo(remetente,ctx.patientId);
+   expect(db.prepare('SELECT vinculoPatientId FROM canal_mensagem').all().every(r=>r.vinculoPatientId===null)).toBe(true);}
   render(<TelaSalao porta={porta}/>);
   expect(await screen.findByText(/fiquei toda vermelha/)).toBeTruthy();expect(screen.getByText(/melhorou, esquece/)).toBeTruthy();
   cleanup();render(<TelaSalao porta={porta}/>);expect(await screen.findByText(/fiquei toda vermelha/)).toBeTruthy();
