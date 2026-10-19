@@ -66,6 +66,7 @@ export type RespostaPassoAnamnese = z.infer<typeof RespostaPassoAnamnese>;
  */
 export const ResumoEstruturadoAnamnese = z.object({
   schema: z.literal("ResumoEstruturadoAnamnese@1"),
+  respostasOriginais: z.array(RespostaPassoAnamnese).default([]),
   sessaoAnamneseId: Id,
   patientId: Id,
   contatoId: Id,
