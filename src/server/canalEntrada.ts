@@ -1040,9 +1040,9 @@ export function consultarCaixaCanal(
     const linhas = db.prepare(
       `SELECT mensagemId, accountId, providerMessageId, canal, senderRef, providerSentAt, ingestedAt,
         payloadSha256, conteudo, vinculoClasse, vinculoPatientId, vinculoMotivo, provaMetodo
-       FROM canal_mensagem ORDER BY ingestedAt, mensagemId LIMIT ?`,
+       FROM canal_mensagem ORDER BY ingestedAt DESC, rowid DESC LIMIT ?`,
     ).all(LIMITE_CAIXA) as Linha[];
-    return { ok: true, mensagens: linhas.map(itemDeLinha) };
+    return { ok: true, mensagens: linhas.reverse().map(itemDeLinha) };
   } catch {
     return falhaArmazenamento();
   }
