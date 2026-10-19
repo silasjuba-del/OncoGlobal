@@ -356,7 +356,7 @@ export function gerarFolhaContingenciaSalaoF3(
     const camposHtml = Object.entries(entrada.resumoTriagem)
       .map(([k, v]) => `<div class="campo"><strong>${esc(k)}:</strong> ${esc(v)}</div>`)
       .join("");
-    const html = `<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><title>${esc(templateRaw.id)}</title></head><body><main class="documento"><header><strong>Serviço de Oncologia Local</strong><div>${esc(sessao.medicoId)} · ${esc(sessao.crm)}</div></header><h1>Folha Operacional do Salão</h1><div><strong>Paciente:</strong> ${esc(entrada.nomePaciente)}</div><div><strong>Data:</strong> ${esc(entrada.dataImpressao)}</div><div><strong>Destino:</strong> ${esc(entrada.destino)}</div>${blocoE1}<section>${camposHtml}</section></main></body></html>`;
+    const html = `<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><title>${esc(templateRaw.id)}</title></head><body><main class="documento"><header><strong>Serviço de Oncologia Local</strong><div>${esc(sessao.medicoId)} · ${esc(sessao.crm)}</div></header><h1>Folha Operacional do Salão</h1><div><strong>Paciente:</strong> ${esc(entrada.nomePaciente)}</div><div><strong>Identificador:</strong> ${esc(entrada.patientId)}</div><div><strong>Encontro:</strong> ${esc(entrada.encounterId)}</div><div><strong>Data:</strong> ${esc(entrada.dataImpressao)}</div><div><strong>Destino:</strong> ${esc(entrada.destino)}</div>${blocoE1}<section>${camposHtml}</section></main></body></html>`;
 
     const folha = FolhaContingenciaSalao.parse({
       folhaId: entrada.folhaId ?? `folha-salao-${entrada.patientId}-${entrada.encounterId}`,

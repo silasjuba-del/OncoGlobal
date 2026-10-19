@@ -16,6 +16,7 @@ import { AcaoResposta, AgendaResposta, ApacResposta, BundleResposta, CanalRespos
   ConfirmacaoResposta, ConsultaResposta, FlashPreparadaResposta, FlashRascunhoResposta, SalaoResposta } from "./respostas.js";
 
 const Count = z.number().int().nonnegative();
+import { ContingenciaSalaoResposta, HistoricoContingenciaSalaoResposta } from "./salaoContingencia.js";
 const JsonObjeto = z.record(z.string(), z.json());
 const RefBiblioteca = z.object({ id: Id, versao: Id, hash: z.string().regex(/^[a-f0-9]{64}$/) }).nullable();
 const Gravacao = z.object({ codigo: z.enum(["GRAVADA", "REPLAY"]), eventId: Id });
@@ -29,6 +30,7 @@ const Extracao = z.object({ draftId: Id, revision: Count, linkedPatientId: Id.nu
 
 /** Mesmos contratos no servidor e no cliente. Valida sem descartar campos adicionais da resposta legada. */
 export const SaidasHttp: Readonly<Record<string, z.ZodType>> = {
+  gerarContingenciaSalao: ContingenciaSalaoResposta, historicoContingenciaSalao: HistoricoContingenciaSalaoResposta,
   prepararRespostaCanal:RespostaCanalPreparada,confirmarRespostaCanal:RespostaCanalConfirmada,
   ditado:DitadoResposta,
   lotesPaciente:LotesPacienteResposta,

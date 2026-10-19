@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import type { PortaConsulta, SalaoVisao } from "../api/porta.js";
 import { AgendaQt } from "../oncochart/AgendaQt.js";
+import { ContingenciaSalao } from "../salao/ContingenciaSalao.js";
 import { Triagem5Passos } from "../oncochart/Triagem5Passos.js";
 import { FormTriagem } from "../salao/FormTriagem.js";
 import { QuadroSalao } from "../salao/QuadroSalao.js";
@@ -141,6 +142,8 @@ export function TelaSalao({ porta }: { porta: PortaConsulta }) {
           }}
         />
       </div>
+      <ContingenciaSalao key={`${escolhido.patientId}:${escolhido.encounterId}`} porta={porta}
+        patientId={escolhido.patientId} encounterId={escolhido.encounterId} nome={escolhido.nome} />
       <AgendaQt />
       <section aria-label="Decisões do médico">
         <h2>Decisões do médico</h2>

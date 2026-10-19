@@ -1,4 +1,5 @@
 import { nomeMedicamento } from './propostasDoseReceita.js';
+import { operarContingenciaSalao } from './salaoContingencia.js';
 import {rotearWebhookCanal} from './canalWebhookHttp.js';
 import {type OperacaoCanal,revisaoContextoCanal,lerMensagensOperacionaisCanal,vinculoAtualCanal} from './canalOperacao.js';
 import {detalheMensagemCanal} from './canalEntrada.js';
@@ -379,6 +380,8 @@ function confirmarBloco(deps: ServidorDeps, token: string, input: Confirmar): { 
 export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: ServerResponse): Promise<void> {
   if(await rotearWebhookCanal(deps,req,res))return;
   const rota = req.url === "/login" ? "login"
+    : req.url === "/consulta/salao/contingencia/gerar" ? "gerarContingenciaSalao"
+    : req.url === "/consulta/salao/contingencia/historico" ? "historicoContingenciaSalao"
     : req.url === "/consulta/ditado" ? "ditado"
     : req.url === "/consulta/bundle" ? "bundle"
       : req.url === "/consulta/receita/propor-dose" ? "proporDoseReceita"
@@ -454,6 +457,10 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
     if (rota === "acao" && !contentTypeJson(req)) return reply(415, "CONTENT_TYPE_INVALIDO");
     // Conteúdo da biblioteca continua limitado a 8 MB após decodificação; envelope cobre escapes JSON/base64.
     const raw = await body(req,rota === "upload" ? 11_300_000 : rota === "/biblioteca/importar" ? 24_000_000 : 1_000_000);
+    if (rota === "gerarContingenciaSalao" || rota === "historicoContingenciaSalao") {
+      const r = operarContingenciaSalao(deps, token, rota, raw);
+      return reply(r.status, "codigo" in r.body ? String(r.body.codigo) : "CONTINGENCIA_SALAO", r.body);
+    }
     if(rota==='prepararRespostaCanal'){
       const p=PrepararRespostaCanal.safeParse(raw);if(!p.success)return reply(400,'PAYLOAD_INVALIDO');
       const revisaoContexto=revisaoContextoCanal(deps.db,p.data);if(!revisaoContexto)return reply(409,'CONTEXTO_RESPOSTA_INVALIDADO');
