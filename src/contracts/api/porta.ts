@@ -1,4 +1,6 @@
 import type { PropostaDoseReceita } from './propostaDoseReceita.js';
+import type {PrepararRespostaCanal,ConfirmarRespostaCanal} from './respostaCanal.js';
+import type {RascunhoRespostaCanal} from '../f2/caixaRespostaCanal.js';
 import type { InvestigacaoConsultaVisao } from './investigacao.js';
 import type { LotesPacienteResposta } from './lotes.js';
 import type { RevisaoClinicaResposta } from '../fase2/revisaoClinica.js';
@@ -239,6 +241,7 @@ export interface CandidatoVinculoVisao {
 }
 
 export interface MensagemCanalVisao {
+  contextosResposta?:readonly {patientId:string;encounterId:string;tumorLotId:string|null}[]|undefined;
   mensagemId: string;
   texto: string;
   em: string;
@@ -250,7 +253,7 @@ export interface MensagemCanalVisao {
   candidatos: readonly CandidatoVinculoVisao[];
   origemCanal?: "WHATSAPP_SERVICO" | "WHATSAPP_PESSOAL" | "EMAIL" | "TELEFONE" | undefined;
   pendenciaProcessamento?: boolean | undefined;
-  reciboTecnico?: "RECEBIDA" | "PROCESSADA" | "ENVIADA" | "ENTREGUE" | "FALHOU" | undefined;
+  reciboTecnico?: "RECEBIDA" | "PROCESSADA" | "ENVIADA" | "ENTREGUE" | "LIDA" | "FALHOU" | undefined;
   estadoConversa?: "NOVA" | "TRIADA" | "AGUARDA_MEDICO" | "RESPONDIDA" | "ENCERRADA" | undefined;
   midia?: {
     providerMediaId: string;
@@ -367,6 +370,8 @@ export interface PortaConsulta {
   selecionarContexto?(contexto: { patientId: string; encounterId: string; tumorLotId: string | null }): Promise<void>;
   // [SERVIDOR_PENDENTE]
   caixaCanal(): Promise<CaixaCanalVisao>;
+  prepararRespostaCanal?(pedido:PrepararRespostaCanal):Promise<RascunhoRespostaCanal>;
+  confirmarRespostaCanal?(pedido:ConfirmarRespostaCanal):Promise<{respostaId:string;versao:number}>;
   // [SERVIDOR_PENDENTE] o médico escolhe o candidato; a porta não liga por nome
   pedirVinculo(contatoId: string, patientId: string): Promise<CaixaCanalVisao>;
   // [SERVIDOR_PENDENTE]

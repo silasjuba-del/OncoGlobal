@@ -78,12 +78,13 @@ export const SalaoResposta: z.ZodType<SalaoVisao> = z.object({
   decisoes: z.array(z.object({ patientId: Texto, motivo: Texto })),
 }).passthrough();
 export const CanalResposta: z.ZodType<CaixaCanalVisao> = z.object({ mensagens: z.array(z.object({ mensagemId: Texto,
+  contextosResposta:z.array(z.object({patientId:Texto,encounterId:Texto,tumorLotId:Texto.nullable()})).optional(),
   texto: Texto, em: Texto, redFlag: z.boolean(), contatoId: Texto, patientId: Texto.nullable(), nomePaciente: Texto.nullable(),
   estadoVinculo: z.enum(["VINCULADO", "SEM_VINCULO", "CONFLITO", "REVOGADO"]).optional(),
   candidatos: z.array(z.object({ patientId: Texto, nome: Texto })),
   origemCanal: z.enum(["WHATSAPP_SERVICO", "WHATSAPP_PESSOAL", "EMAIL", "TELEFONE"]).optional(),
   pendenciaProcessamento: z.boolean().optional(),
-  reciboTecnico: z.enum(["RECEBIDA", "PROCESSADA", "ENVIADA", "ENTREGUE", "FALHOU"]).optional(),
+  reciboTecnico: z.enum(["RECEBIDA", "PROCESSADA", "ENVIADA", "ENTREGUE", "LIDA", "FALHOU"]).optional(),
   estadoConversa: z.enum(["NOVA", "TRIADA", "AGUARDA_MEDICO", "RESPONDIDA", "ENCERRADA"]).optional(),
   midia: z.object({
     providerMediaId: Texto,

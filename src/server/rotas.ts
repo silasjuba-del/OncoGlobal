@@ -1,4 +1,9 @@
 import { nomeMedicamento } from './propostasDoseReceita.js';
+import {rotearWebhookCanal} from './canalWebhookHttp.js';
+import {type OperacaoCanal,revisaoContextoCanal,lerMensagensOperacionaisCanal,vinculoAtualCanal} from './canalOperacao.js';
+import {detalheMensagemCanal} from './canalEntrada.js';
+import {prepararRascunhoRespostaCanal,confirmarRespostaCanalPeloMedico,executarEnvioAutorizadoCanal,revalidarAutorizacaoSaidaCanalNoLedger} from './canalResposta.js';
+import {PrepararRespostaCanal,ConfirmarRespostaCanal} from '../contracts/api/respostaCanal.js';
 import { documentoReceitaDosePendente } from '../contracts/f1/receitaDose.js';
 import { PrescriptionItem, ProtocolTemplate } from "../contracts/w10/prescricao.js";
 import {LotesPacientePedido,LotesPacienteResposta} from '../contracts/api/lotes.js';
@@ -62,6 +67,7 @@ import type { criarMotorF1 } from "../kernel/orquestracao/runtime.js";
 import type {criarDitado} from '../kernel/gateway/ditado.js';
 
 export interface ServidorDeps {
+  canal?:OperacaoCanal;
   ditado?:ReturnType<typeof criarDitado>;
   db: DatabaseSync;
   sessoes: GerenciadorSessao;
@@ -371,6 +377,7 @@ function confirmarBloco(deps: ServidorDeps, token: string, input: Confirmar): { 
 }
 
 export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: ServerResponse): Promise<void> {
+  if(await rotearWebhookCanal(deps,req,res))return;
   const rota = req.url === "/login" ? "login"
     : req.url === "/consulta/ditado" ? "ditado"
     : req.url === "/consulta/bundle" ? "bundle"
@@ -406,6 +413,8 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
                 : req.url === "/consulta/agenda" ? "agenda"
                   : req.url === "/consulta/salao" ? "salao"
                     : req.url === "/consulta/canal" ? "canal"
+                      : req.url === "/consulta/canal/resposta/preparar" ? "prepararRespostaCanal"
+                      : req.url === "/consulta/canal/resposta/confirmar" ? "confirmarRespostaCanal"
                       : req.url === "/consulta/apac" ? "apac"
                         : req.url === "/consulta/chat" ? "chat"
                           : req.url === "/consulta/recist" ? "recist"
@@ -445,6 +454,23 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
     if (rota === "acao" && !contentTypeJson(req)) return reply(415, "CONTENT_TYPE_INVALIDO");
     // Conteúdo da biblioteca continua limitado a 8 MB após decodificação; envelope cobre escapes JSON/base64.
     const raw = await body(req,rota === "upload" ? 11_300_000 : rota === "/biblioteca/importar" ? 24_000_000 : 1_000_000);
+    if(rota==='prepararRespostaCanal'){
+      const p=PrepararRespostaCanal.safeParse(raw);if(!p.success)return reply(400,'PAYLOAD_INVALIDO');
+      const revisaoContexto=revisaoContextoCanal(deps.db,p.data);if(!revisaoContexto)return reply(409,'CONTEXTO_RESPOSTA_INVALIDADO');
+      const origem=detalheMensagemCanal(deps.db,{sessoes:deps.sessoes,token,agora:deps.agora()},p.data.mensagemOrigemId);
+      if(!origem.ok||!vinculoAtualCanal(deps.db,p.data.patientId,origem.mensagem.senderRef))return reply(409,'CONTATO_NAO_VINCULADO_AO_PACIENTE');
+      const {patientId,encounterId,tumorLotId,...entrada}=p.data;
+      const r=prepararRascunhoRespostaCanal(deps.db,{sessoes:deps.sessoes,token,agora:deps.agora()},{...entrada,tipoResposta:'RESPOSTA_LIVRE_MEDICA',contexto:{patientId,encounterId,tumorLotId,revisaoContexto}});
+      return r.ok?reply(200,'RESPOSTA_PREPARADA',{codigo:'RESPOSTA_PREPARADA',rascunho:r.rascunho}):reply(r.codigo==='ARMAZENAMENTO_INDISPONIVEL'?503:409,r.codigo);
+    }
+    if(rota==='confirmarRespostaCanal'){
+      const p=ConfirmarRespostaCanal.safeParse(raw);if(!p.success)return reply(400,'PAYLOAD_INVALIDO');
+      const c=p.data.comprovanteExibicao.contexto;
+      if(!vinculoAtualCanal(deps.db,c.patientId,p.data.comprovanteExibicao.destinatario))return reply(409,'CONTATO_NAO_VINCULADO_AO_PACIENTE');
+      if(revisaoContextoCanal(deps.db,c)!==c.revisaoContexto)return reply(409,'CONTEXTO_RESPOSTA_INVALIDADO');
+      const r=confirmarRespostaCanalPeloMedico(deps.db,{sessoes:deps.sessoes,token,agora:deps.agora()},p.data);
+      return r.ok?reply(200,'RESPOSTA_CONFIRMADA',{codigo:'RESPOSTA_CONFIRMADA',respostaId:r.autorizacao.respostaId,versao:r.autorizacao.versao}):reply(r.codigo==='ARMAZENAMENTO_INDISPONIVEL'?503:409,r.codigo);
+    }
     if(rota==='ditado'){
       if(!contentTypeJson(req))return reply(415,'CONTENT_TYPE_INVALIDO');
       const result=deps.ditado?.rotear(raw,token)??{status:503,body:{codigo:'DITADO_INDISPONIVEL'}};
@@ -1278,7 +1304,8 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
     if (rota === "canal") {
       const parsed = z.object({}).strict().safeParse(raw);
       if (!parsed.success) return reply(400, "PAYLOAD_INVALIDO");
-      const result = lerCanal(deps.db);
+      const legado=lerCanal(deps.db),operacionais=lerMensagensOperacionaisCanal(deps.db,{sessoes:deps.sessoes,token,agora:deps.agora()});
+      const result={...legado,mensagens:[...legado.mensagens,...operacionais],estado:operacionais.length?'PARCIAL':legado.estado};
       return reply(200, result.estado === "FONTE_AUSENTE" ? "FONTE_CANAL_AUSENTE" : "CANAL_CARREGADO", result);
     }
     if (rota === "apac") {
@@ -1738,6 +1765,14 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
     }
     const parsed = ActionIntent.safeParse(raw);
     if (!parsed.success) return reply(400, "PAYLOAD_INVALIDO");
+    if(parsed.data.verbo==='ENVIAR_WHATSAPP'||parsed.data.verbo==='ENVIAR_EMAIL'){
+      const a=revalidarAutorizacaoSaidaCanalNoLedger(deps.db,parsed.data);if(!a.ok)return reply(409,a.codigo);
+      if(!deps.canal?.transporteSaida)return reply(409,'TRANSPORTE_CANAL_NAO_CONFIGURADO');
+      const r=await executarEnvioAutorizadoCanal(deps.db,{sessoes:deps.sessoes,token,agora:deps.agora()},{intent:parsed.data,
+        agoraAtual:deps.agora,revisaoContextoAtual:()=>revisaoContextoCanal(deps.db,a.autorizacao.contexto)??'CONTEXTO_AUSENTE',
+        validarVinculoAtual:()=>vinculoAtualCanal(deps.db,a.autorizacao.contexto.patientId,a.autorizacao.destinatarioCanonico),transporteSaida:deps.canal.transporteSaida});
+      const result=r.resultadoGateway;return reply(result.decisao==='NEGADA'?409:200,result.motivoCodigo,result);
+    }
     const autorizacao = autorizarSaida(deps.db, parsed.data,competencia=>referenciaSigtapDuto(deps.corpus,competencia));
     if (!autorizacao.ok) return reply(409, autorizacao.codigo);
     // Uma rota /acao nunca usa a idempotencia volátil do caller: o ledger local

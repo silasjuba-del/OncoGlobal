@@ -14,6 +14,7 @@ import { criarMotorF1 } from "../../../../src/kernel/orquestracao/runtime.js";
 import { referenciaBibliotecaAtiva } from "../../../../src/server/biblioteca.js";
 import { carregarConfigMotor } from "../../../../src/kernel/corpus/configMotor.js";
 import { fonteSintetica } from "../../../fixtures/triagem.js";
+import type {OperacaoCanal} from '../../../../src/server/canalOperacao.js';
 
 export const PACIENTE_B2 = "paciente-s12-b2-jornada-001";
 export const ENCONTRO_B2 = "encontro-s12-b2-jornada-001";
@@ -102,7 +103,7 @@ const depsColon = await (async () => {
 })();
 
 /** Igual ao ambiente cólon, mas porta fixa via ONCOGLOBAL_API_PORT (proxy Vite ↔ loopback). */
-async function abrirAmbienteB2(dir: string) {
+async function abrirAmbienteB2(dir: string,canal?:OperacaoCanal) {
   const { abrirLedger } = await import("../../../../src/kernel/ledger/db.js");
   const { criarGateway, memoriaIdempotencia } = await import("../../../../src/kernel/gateway/gateway.js");
   const { criarExecutorImprimir } = await import("../../../../src/kernel/gateway/executores/imprimir.js");
@@ -120,7 +121,7 @@ async function abrirAmbienteB2(dir: string) {
   const portRaw = process.env.ONCOGLOBAL_API_PORT;
   const port = portRaw ? Number(portRaw) : 0;
   if (portRaw && (!Number.isInteger(port) || port < 1 || port > 65535)) throw new Error("ONCOGLOBAL_API_PORT_INVALIDA");
-  const server = criarServidorLocalDemoB2({ db, sessoes, gateway, agora, log: () => {}, configRootDir: join(dir, "config") }, { port });
+  const server = criarServidorLocalDemoB2({ db, sessoes, gateway, agora, log: () => {}, configRootDir: join(dir, "config"),...(canal?{canal}:{}) }, { port });
   await new Promise<void>((resolve, reject) => {
     if (server.listening) return resolve();
     server.once("error", reject);
@@ -136,14 +137,14 @@ async function abrirAmbienteB2(dir: string) {
   return { dir, db, sessoes, token, close, baseUrl: `http://127.0.0.1:${address.port}` };
 }
 
-export async function bootServidorDemoB2(dirArg?: string) {
+export async function bootServidorDemoB2(dirArg?: string,canal?:OperacaoCanal) {
   const { confirmar, salvarDraft, AGORA } = depsColon;
   const dir = realpathSync(dirArg ?? criarDiretorioB2());
   if (dirname(dir).toLowerCase() !== realpathSync(tmpdir()).toLowerCase() || !basename(dir).startsWith("e2e-b2-f1-"))
     throw new Error("DEMO_B2_EXIGE_DIRETORIO_SINTETICO");
 
   const novo = !existsSync(join(dir, "ledger.sqlite"));
-  const app = await abrirAmbienteB2(dir);
+  const app = await abrirAmbienteB2(dir,canal);
 
   function seed(patientId: string, encounterId: string, id: string, tipo: string, payload: unknown, fontes = [fonteSintetica(id)]) {
     salvarDraft(app.db, { draftId: id, patientId, sourceId: id, rawRef: "cadastro-sintetico-b2-s12",
@@ -158,6 +159,7 @@ export async function bootServidorDemoB2(dirArg?: string) {
     seed(PACIENTE_B2, ENCONTRO_B2, "cadastro-b2-s12", "Paciente",
       { patientId: PACIENTE_B2, identificadores: [], nome: NOME_B2, nascimento: "1970-01-01",
         sexoCadastral: "F", divergencia: false }, []);
+    if(canal)seed(PACIENTE_B2,ENCONTRO_B2,'contato-canal-b2','Contato',{contatoId:'contato-canal-b2',canal:'WHATSAPP_SERVICO',endereco:'5500'+'000007777',patientId:PACIENTE_B2,relacao:'PACIENTE',vinculadoEm:AGORA,revogadoEm:null});
     seed(PACIENTE_B2, ENCONTRO_B2, "agenda-b2-s12", "AgendaEntry",
       { patientId: PACIENTE_B2, encounterId: ENCONTRO_B2, data: AGORA.slice(0, 10), horario: "10:30" }, []);
     const medidaEm = "2026-10-12";

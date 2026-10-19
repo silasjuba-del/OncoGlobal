@@ -95,6 +95,8 @@ export function CaixaCanal({
                 mensagemId={mensagem.mensagemId}
                 patientId={mensagem.patientId}
                 redFlag={mensagem.redFlag}
+                contextos={mensagem.contextosResposta??[]}
+                origemCanal={mensagem.origemCanal??'WHATSAPP_SERVICO'}
                 {...(mensagem.destinatarioExibido !== undefined ? { destinatario: mensagem.destinatarioExibido } : { destinatario: mensagem.contatoId })}
                 {...(mensagem.contextoExibido?.encounterId !== undefined ? { encounterId: mensagem.contextoExibido.encounterId } : {})}
               />

@@ -92,6 +92,7 @@ function garantirTabelasS03(db: DatabaseSync): void {
       versao INTEGER NOT NULL,
       mensagemOrigemId TEXT NOT NULL,
       reciboGateway TEXT NOT NULL,
+      providerReceiptId TEXT,
       enviadoEm TEXT NOT NULL,
       UNIQUE (respostaId, versao)
     );
@@ -100,6 +101,8 @@ function garantirTabelasS03(db: DatabaseSync): void {
     CREATE TRIGGER IF NOT EXISTS canal_resposta_envio_no_delete BEFORE DELETE ON canal_resposta_envio
       BEGIN SELECT RAISE(ABORT, 'canal_resposta_envio append-only'); END;
   `);
+  const colunas=db.prepare('PRAGMA table_info(canal_resposta_envio)').all() as {name:string}[];
+  if(!colunas.some(c=>c.name==='providerReceiptId'))db.exec('ALTER TABLE canal_resposta_envio ADD COLUMN providerReceiptId TEXT');
 }
 
 function obterSessaoMedicaValida(acesso: AcessoCanal): Sessao | null {
@@ -683,7 +686,9 @@ export async function executarEnvioAutorizadoCanal(
   opcoes: {
     intent: Intent;
     textoParaEnviar?: string;
-    revisaoContextoAtual?: string;
+    revisaoContextoAtual?: string | (()=>string);
+    agoraAtual?:()=>string;
+    validarVinculoAtual?:()=>boolean;
     dicionarioPaciente?: DicionarioPaciente;
     antesDoEnvioAssincrono?: () => Promise<void> | void;
     transporteSaida: (envio: {
@@ -699,7 +704,9 @@ export async function executarEnvioAutorizadoCanal(
   resultadoGateway: ResultadoGateway;
   estadoOperacional: EstadoOperacionalMensagemCanal | null;
 }> {
-  const sessao = obterSessaoMedicaValida(acesso);
+  const agora=()=>opcoes.agoraAtual?.()??acesso.agora;
+  const revisaoAtual=()=>typeof opcoes.revisaoContextoAtual==='function'?opcoes.revisaoContextoAtual():opcoes.revisaoContextoAtual!;
+  const sessao = obterSessaoMedicaValida({...acesso,agora:agora()});
   garantirTabelasS03(db);
   if (!sessao) {
     auditar(db, {
@@ -708,7 +715,7 @@ export async function executarEnvioAutorizadoCanal(
       decisao: "NEGADA",
       motivoCodigo: "SEM_SESSAO",
       politicaVersao: "F2-S03",
-      em: Instante.safeParse(acesso.agora).success ? acesso.agora : new Date().toISOString(),
+      em: Instante.safeParse(agora()).success ? agora() : new Date().toISOString(),
     });
     return {
       resultadoGateway: { decisao: "NEGADA", motivoCodigo: "SEM_SESSAO" },
@@ -718,20 +725,21 @@ export async function executarEnvioAutorizadoCanal(
 
   // Revalidação prévia antes do gateway (inclusive em replay!)
   const revalidacaoPrevia = revalidarAutorizacaoSaidaCanalNoLedger(db, opcoes.intent, {
-    ...(opcoes.revisaoContextoAtual !== undefined ? { revisaoContextoAtual: opcoes.revisaoContextoAtual } : {}),
+    ...(opcoes.revisaoContextoAtual !== undefined ? { revisaoContextoAtual: revisaoAtual() } : {}),
     ...(opcoes.textoParaEnviar !== undefined ? { textoEnviado: opcoes.textoParaEnviar } : {}),
   });
-  if (!revalidacaoPrevia.ok) {
+  if (!revalidacaoPrevia.ok || opcoes.validarVinculoAtual?.()===false) {
+    const codigo=!revalidacaoPrevia.ok?revalidacaoPrevia.codigo:'CONTATO_NAO_VINCULADO_AO_PACIENTE';
     auditar(db, {
       ator: sessao ? { tipo: "SESSAO", id: sessao.medicoId } : { tipo: "SISTEMA", id: "canal-saida" },
       acaoPedida: opcoes.intent.verbo,
       decisao: "NEGADA",
-      motivoCodigo: revalidacaoPrevia.codigo,
+      motivoCodigo: codigo,
       politicaVersao: "F2-S03",
-      em: acesso.agora,
+      em: agora(),
     });
     return {
-      resultadoGateway: { decisao: "NEGADA", motivoCodigo: revalidacaoPrevia.codigo },
+      resultadoGateway: { decisao: "NEGADA", motivoCodigo: codigo },
       estadoOperacional: null,
     };
   }
@@ -740,12 +748,46 @@ export async function executarEnvioAutorizadoCanal(
   const dic: DicionarioPaciente = opcoes.dicionarioPaciente
     ?? carregarDicionarioPacienteDoLedger(db, autInicial.contexto.patientId, autInicial.destinatarioCanonico);
 
-  let autorizacaoRevalidadaPosAsync: AutorizacaoRespostaCanalServidor | null = null;
 
   let reciboAnteriorReutilizado=false;
+  let reciboProvedor:string|null=null;
+  function persistirRecibo(resultado:ResultadoGateway){
+    const anterior=db.prepare('SELECT providerReceiptId FROM canal_resposta_envio WHERE respostaId=? AND versao=?').get(autInicial.respostaId,autInicial.versao) as {providerReceiptId:string|null}|undefined;
+    reciboProvedor??=anterior?.providerReceiptId??null;
+      db.prepare(`
+        INSERT INTO canal_resposta_envio (envioId, respostaId, versao, mensagemOrigemId, reciboGateway, enviadoEm,providerReceiptId)
+        VALUES (?, ?, ?, ?, ?, ?,?)
+        ON CONFLICT(respostaId, versao) DO NOTHING
+      `).run(
+        `envio-${autInicial.respostaId}-v${autInicial.versao}`,
+        autInicial.respostaId,
+        autInicial.versao,
+        autInicial.mensagemOrigemId,
+        resultado.recibo ?? "recibo-local",
+        agora(),
+        reciboProvedor,
+      );
+      db.prepare(`
+        INSERT INTO canal_recibo_tecnico (reciboTecnicoId, accountId, providerMessageId, statusRecibo, ocorreuEm, ingestedAt, payloadSha256)
+        VALUES (?, ?, ?, 'ENVIADA', ?, ?, ?)
+        ON CONFLICT DO NOTHING
+      `).run(
+        `recibo-envio-${autInicial.respostaId}-v${autInicial.versao}`,
+        autInicial.accountId,
+        reciboProvedor??`${autInicial.respostaId}@${autInicial.versao}`,
+        agora(),
+        agora(),
+        autInicial.conteudoSha256,
+      );
+  }
+  const storeBase=sqliteIdempotencia(db);
   const gateway = criarGateway({
-    agora: () => acesso.agora,
-    store: sqliteIdempotencia(db),
+    agora: () => agora(),
+    // Sucesso e recibo real são uma única gravação. Falha deixa a reserva OUTCOME_UNKNOWN.
+    store:{...storeBase,set:(chave,valor,em)=>transacao(db,()=>{
+      if(valor.resultado.decisao==='EXECUTADA')persistirRecibo(valor.resultado);
+      storeBase.set(chave,valor,em);
+    })},
     auditar: (r) => {
       auditar(db, {
         ator: sessao ? { tipo: "SESSAO", id: sessao.medicoId } : { tipo: "SISTEMA", id: "canal-saida" },
@@ -759,12 +801,13 @@ export async function executarEnvioAutorizadoCanal(
     validarSaida: async (intent) => {
       await opcoes.antesDoEnvioAssincrono?.();
       // Revalida a sessão médica e a autorização APÓS qualquer operação assíncrona!
-      const sessaoPosAsync = obterSessaoMedicaValida(acesso);
+      const sessaoPosAsync = obterSessaoMedicaValida({...acesso,agora:agora()});
+      if(opcoes.validarVinculoAtual?.()===false)return {ok:false,codigo:'SAIDA_NAO_AUTORIZADA'};
       if (!sessaoPosAsync || sessaoPosAsync.medicoId !== sessao.medicoId) {
         return { ok: false, codigo: "SAIDA_NAO_AUTORIZADA" };
       }
       const rev = revalidarAutorizacaoSaidaCanalNoLedger(db, intent, {
-        ...(opcoes.revisaoContextoAtual !== undefined ? { revisaoContextoAtual: opcoes.revisaoContextoAtual } : {}),
+        ...(opcoes.revisaoContextoAtual !== undefined ? { revisaoContextoAtual: revisaoAtual() } : {}),
         ...(opcoes.textoParaEnviar !== undefined ? { textoEnviado: opcoes.textoParaEnviar } : {}),
       });
       if (!rev.ok) {
@@ -773,7 +816,6 @@ export async function executarEnvioAutorizadoCanal(
           codigo: rev.codigo === "CONSENTIMENTO_REVOGADO_OU_AUSENTE" ? "CONSENTIMENTO_AUSENTE" : "SAIDA_NAO_AUTORIZADA",
         };
       }
-      autorizacaoRevalidadaPosAsync = rev.autorizacao;
       const payload = rev.autorizacao.textoAprovado;
       const payloadHash = sha256(payload);
       const destinoHash = sha256(rev.autorizacao.destinatarioCanonico);
@@ -781,7 +823,7 @@ export async function executarEnvioAutorizadoCanal(
         artefatoId: rev.autorizacao.respostaId,
         tipo: "TEXTO",
         texto: payload,
-        em: acesso.agora,
+        em: agora(),
         detectorPhi: (conteudo) => contemPhiResidual(conteudo, dic),
       });
       const evidencia: EvidenciaSaidaExterna = {
@@ -817,7 +859,10 @@ export async function executarEnvioAutorizadoCanal(
     executores: {
       [autInicial.verboPermitido]: {
         executar: async () => {
-          const vigente = autorizacaoRevalidadaPosAsync ?? autInicial;
+          const sessaoAtual=obterSessaoMedicaValida({...acesso,agora:agora()});
+          const conferida=revalidarAutorizacaoSaidaCanalNoLedger(db,opcoes.intent,{...(opcoes.revisaoContextoAtual!==undefined?{revisaoContextoAtual:revisaoAtual()}:{}),...(opcoes.textoParaEnviar!==undefined?{textoEnviado:opcoes.textoParaEnviar}:{})});
+          if(!sessaoAtual||sessaoAtual.medicoId!==sessao.medicoId||!conferida.ok||opcoes.validarVinculoAtual?.()===false)return {ok:false,incerto:false,erro:'AUTORIZACAO_ALTERADA_ANTES_DO_ENVIO'};
+          const vigente = conferida.autorizacao;
           const anterior=db.prepare('SELECT reciboGateway FROM canal_resposta_envio WHERE respostaId=? AND versao=?').get(vigente.respostaId,vigente.versao) as {reciboGateway:string}|undefined;
           if(anterior){reciboAnteriorReutilizado=true;return {ok:true,recibo:anterior.reciboGateway};}
           const res = await opcoes.transporteSaida({
@@ -829,6 +874,7 @@ export async function executarEnvioAutorizadoCanal(
             versao: vigente.versao,
           });
           if (!res.ok) return res;
+          reciboProvedor=res.providerReceiptId;
           return { ok: true, recibo: res.providerReceiptId };
         },
       },
@@ -842,32 +888,7 @@ export async function executarEnvioAutorizadoCanal(
     ?{...executado,decisao:'REPLAY'}:executado;
 
   if (resultadoGateway.decisao === "EXECUTADA" || resultadoGateway.decisao === "REPLAY") {
-    transacao(db, () => {
-      db.prepare(`
-        INSERT INTO canal_resposta_envio (envioId, respostaId, versao, mensagemOrigemId, reciboGateway, enviadoEm)
-        VALUES (?, ?, ?, ?, ?, ?)
-        ON CONFLICT(respostaId, versao) DO NOTHING
-      `).run(
-        `envio-${autInicial.respostaId}-v${autInicial.versao}`,
-        autInicial.respostaId,
-        autInicial.versao,
-        autInicial.mensagemOrigemId,
-        resultadoGateway.recibo ?? "recibo-local",
-        acesso.agora,
-      );
-      db.prepare(`
-        INSERT INTO canal_recibo_tecnico (reciboTecnicoId, accountId, providerMessageId, statusRecibo, ocorreuEm, ingestedAt, payloadSha256)
-        VALUES (?, ?, ?, 'ENVIADA', ?, ?, ?)
-        ON CONFLICT DO NOTHING
-      `).run(
-        `recibo-envio-${autInicial.respostaId}-v${autInicial.versao}`,
-        autInicial.accountId,
-        `${autInicial.respostaId}@${autInicial.versao}`,
-        acesso.agora,
-        acesso.agora,
-        autInicial.conteudoSha256,
-      );
-    });
+    transacao(db,()=>persistirRecibo(resultadoGateway));
 
     const estadoOperacional = projetarEstadoOperacionalMensagem({
       mensagemId: autInicial.mensagemOrigemId,

@@ -137,6 +137,11 @@ export function interpretarEnvelopeWebhook(
   const envelopeBytesSha256 = createHash("sha256").update(bytes).digest("hex");
   const registro = json as Record<string, unknown>;
 
+  if(registro.object==='whatsapp_business_account'){
+    const meta=interpretarEnvelopeMeta(registro,canal);
+    return meta?{ok:true,envelope:{...meta,envelopeBytesSha256}}:{ok:false,codigo:'PAYLOAD_MALFORMADO'};
+  }
+
   // Caso 1: envelope explícito com lista de eventos
   if ("eventos" in registro) {
     const chavesPermitidas = new Set(["envelopeId", "enviadoEm", "accountRef", "eventos"]);
@@ -184,6 +189,42 @@ export function interpretarEnvelopeWebhook(
       eventos: [{ categoriaEvento: "MENSAGEM", mensagem: unica.corpo, eventoSha256 }],
     },
   };
+}
+
+/** Envelope nativo Meta, convertido somente DEPOIS da autenticação dos bytes originais. */
+function interpretarEnvelopeMeta(registro:Record<string,unknown>,canal:CanalIngresso):Omit<EnvelopeWebhookInterpretado,'envelopeBytesSha256'>|null {
+ if(canal!=='WHATSAPP_SERVICO'||!Array.isArray(registro.entry)||!registro.entry.length||registro.entry.length>50)return null;
+ const eventos:EventoEnvelopeWebhook[]=[],contas=new Set<string>();
+ const obj=(v:unknown):Record<string,unknown>=>v&&typeof v==='object'&&!Array.isArray(v)?v as Record<string,unknown>:{};
+ const data=(v:unknown)=>typeof v==='string'&&/^\d{1,12}$/.test(v)&&Number.isFinite(new Date(Number(v)*1000).getTime())?new Date(Number(v)*1000).toISOString():null;
+ for(const entry of registro.entry){
+  const changes=obj(entry).changes;if(!Array.isArray(changes)||!changes.length||changes.length>50)return null;
+  for(const change of changes){
+   const c=obj(change),v=obj(c.value),metadata=obj(v.metadata);
+   if(c.field!=='messages'||v.messaging_product!=='whatsapp'||!idValido(metadata.phone_number_id))return null;
+   contas.add(metadata.phone_number_id);if(contas.size!==1)return null;
+   if(v.messages!==undefined&&!Array.isArray(v.messages)||v.statuses!==undefined&&!Array.isArray(v.statuses))return null;
+   for(const bruto of (v.messages??[]) as unknown[]){
+    const m=obj(bruto),em=data(m.timestamp);if(!em||!idValido(m.id)||!idValido(m.from))return null;
+    let msg:ReturnType<typeof interpretarObjetoMensagem>;
+    if(m.type==='text')msg=interpretarObjetoMensagem({providerMessageId:m.id,senderRef:m.from,providerSentAt:em,tipoConteudo:'TEXT',texto:obj(m.text).body});
+    else if(typeof m.type==='string'&&['image','audio','video','document','sticker'].includes(m.type)){
+     const media=obj(m[m.type]);msg=interpretarObjetoMensagem({providerMessageId:m.id,senderRef:m.from,providerSentAt:em,tipoConteudo:'MEDIA',media:{providerMediaId:media.id,mimeType:media.mime_type??null,sizeBytes:null}});
+    }else return null;
+    if(!msg.ok)return null;
+    eventos.push({categoriaEvento:'MENSAGEM',mensagem:msg.corpo,eventoSha256:hashEstavelEventoCanal({canal,...msg.corpo})});
+   }
+   for(const bruto of (v.statuses??[]) as unknown[]){
+    const s=obj(bruto),ocorreuEm=data(s.timestamp),mapa:Record<string,string>={sent:'ENVIADA',delivered:'ENTREGUE',read:'LIDA',failed:'FALHOU'};
+    const statusRecibo=typeof s.status==='string'?mapa[s.status]:undefined;
+    const ev=interpretarItemEnvelope({categoriaEvento:'RECIBO_TECNICO',providerMessageId:s.id,statusRecibo,ocorreuEm,recipientRef:s.recipient_id??null},canal);
+    if(!ev)return null;eventos.push(ev);
+   }
+   if(eventos.length>50)return null;
+  }
+ }
+ if(!eventos.length)return null;
+ return {envelopeId:`meta-${hashCanonico(eventos)}`,enviadoEm:null,accountRef:[...contas][0]!,eventos};
 }
 
 function interpretarItemEnvelope(valor: unknown, canal: CanalIngresso): EventoEnvelopeWebhook | null {

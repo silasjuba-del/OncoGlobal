@@ -9,11 +9,13 @@ import { carregarPacksTumor } from '../kernel/corpus/tumorPacks.js';
 import { selecionarPack } from '../modules/consulta/revisaoClinica.js';
 import {criarDitado} from '../kernel/gateway/ditado.js';
 import {cofreDeepgramWindows} from '../kernel/gateway/cofreDeepgram.js';
+import {carregarOperacaoCanal} from './canalOperacao.js';
 
 /** Loopback only; a caller cannot override the bind address. */
 export function criarServidorLocal(deps: ServidorDeps, config: { host?: string; port?: number } = {}): Server {
   if (config.host !== undefined && config.host !== "127.0.0.1")
     throw new Error("BIND_FORA_DO_LOOPBACK");
+  const canal=deps.canal??carregarOperacaoCanal(deps.configRootDir);
   let corpus: ReturnType<typeof carregarCorpusServidor> | null = null;
   try { corpus = carregarCorpusServidor(); } catch { /* dependent readers report PENDENTE */ }
   const ownsSettings = deps.settings === undefined && !!deps.configRootDir && !!corpus;
@@ -23,6 +25,7 @@ export function criarServidorLocal(deps: ServidorDeps, config: { host?: string; 
       : null
     : deps.settings;
   const runtimeDeps: ServidorDeps = { ...deps, settings,
+    canal,
     corpus,
     salaoRuleset: deps.salaoRuleset === undefined ? corpus?.ruleset ?? null : deps.salaoRuleset };
   runtimeDeps.ditado=deps.ditado??criarDitado(deps.sessoes,{...(process.env.DEEPGRAM_API_KEY?{chave:process.env.DEEPGRAM_API_KEY}:{}),
