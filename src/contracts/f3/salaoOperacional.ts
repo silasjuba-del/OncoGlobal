@@ -86,7 +86,7 @@ export const AvaliacaoDoseCicloSalao = z.object({
   bsaMostellerM2: z.number().positive().nullable(),
   dosePlanejadaProtocoloMg: z.number().int().nonnegative().nullable(),
   dosePrescritaAssinadaMg: z.number().int().nonnegative().nullable(),
-  doseAdministradaCicloAnteriorMg: z.number().int().nonnegative().nullable(),
+  doseAdministradaCicloAnteriorMg: z.number().finite().nonnegative().nullable(),
   reducaoPct: z.union([z.literal(0), z.literal(20), z.literal(30), z.literal(40)]),
   doseCalculadaPropostaMg: z.number().int().nonnegative().nullable(),
   estadoDose: Semaforo,
@@ -101,7 +101,7 @@ export type AvaliacaoDoseCicloSalao = z.infer<typeof AvaliacaoDoseCicloSalao>;
 
 export const ResumoCumulativoSalao = z.object({
   droga: z.string().min(1),
-  quantidadeEfetivaTotalMg: z.number().int().nonnegative(),
+  quantidadeEfetivaTotalMg: z.number().finite().nonnegative(),
   adminIds: z.array(Id),
   conflitoAdminIds: z.array(Id),
   incluiApenasAdministracaoEfetiva: z.literal(true),

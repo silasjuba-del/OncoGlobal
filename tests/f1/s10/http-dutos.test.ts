@@ -63,7 +63,7 @@ it('HTTP administração confirma quantidade observada uma vez e exige item/cicl
   const administracao={adminId:'admin',cicloId:'ciclo',prescricaoRef:{documentId:'rx',documentVersion:1},item:1,droga:'Droga Sintética',quantidadeEfetivaMg:50,status:'PARCIAL',motivo:'Interrupção observada sintética',inicio:'2026-10-12T11:00:00Z',fim:'2026-10-12T11:30:00Z',fonte:fonteSintetica('admin')};
   expect((await a.post('/salao/registrar-administracao',{...pedido('itemerrado'),administracao:{...administracao,droga:'Outra droga'}})).status).toBe(409);
   const respostaAdmin=await a.post('/salao/registrar-administracao',{...pedido('admin'),administracao});expect(respostaAdmin.status,JSON.stringify(respostaAdmin.body)).toBe(200);
-  expect((await a.post('/salao/registrar-administracao',{...pedido('admin2'),administracao})).status).toBe(409);
+  expect(await a.post('/salao/registrar-administracao',{...pedido('admin2'),administracao})).toMatchObject({status:200,body:{codigo:'REPLAY'}});
   expect((listarEventos(a.db,contexto.patientId).find(e=>e.operationId==='admin')!.payload as any).data.quantidadeEfetivaMg).toBe(50);
  }finally{await a.close();}
 });

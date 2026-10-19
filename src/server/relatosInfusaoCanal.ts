@@ -1,0 +1,33 @@
+import type { DatabaseSync } from 'node:sqlite';
+import type { ClinicalEvent } from '../contracts/operacao.js';
+import { dadosDoEvento,eventosVigentes } from '../kernel/projections/snapshot.js';
+
+export interface RelatoInfusaoPendente {
+ patientId:string; mensagemId:string; payloadSha256:string; texto:string; em:string;
+ contextoMensagens: {mensagemId:string;texto:string;em:string}[];
+}
+const normal=(s:string)=>s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+/** Localização documental, não diagnóstico nem regra de alarme clínico. Inclusive negativas ficam para leitura. */
+export function relatoMencionaInfusao(s:string):boolean {
+ return /\b(infusao|platina|empolad[ao]|garganta apertou|remedio (?:da|na) veia)\b/.test(normal(s));
+}
+export function relatosInfusaoPendentes(db:DatabaseSync,eventos:readonly ClinicalEvent[],agora:string):RelatoInfusaoPendente[] {
+ if(!db.prepare("SELECT 1 FROM sqlite_master WHERE type='table' AND name='canal_mensagem'").get())return [];
+ const rows=db.prepare(`SELECT mensagemId,vinculoPatientId,conteudo,payloadSha256,ingestedAt FROM canal_mensagem
+  WHERE vinculoClasse='CONHECIDO' AND vinculoPatientId IS NOT NULL AND provaMetodo <> 'IMAP_CONTA_LOCAL'
+  ORDER BY ingestedAt,mensagemId`).all() as {mensagemId:string;vinculoPatientId:string;conteudo:string;payloadSha256:string;ingestedAt:string}[];
+ const mensagens=rows.filter(r=>Date.parse(r.ingestedAt)<=Date.parse(agora)).flatMap(r=>{
+  try {const c=JSON.parse(r.conteudo) as {tipo?:string;texto?:string};
+   return c.tipo==='TEXT'&&typeof c.texto==='string'?[{patientId:r.vinculoPatientId,mensagemId:r.mensagemId,payloadSha256:r.payloadSha256,texto:c.texto,em:r.ingestedAt}]:[];
+  }catch{return [];}
+ });
+ const vigentes=eventosVigentes(eventos.filter(e=>Date.parse(e.criadoEm)<=Date.parse(agora)));
+ return mensagens.filter(m=>relatoMencionaInfusao(m.texto)).filter(m=>!vigentes.some(e=>{
+  if(e.tipo!=='ReviewDecision'||e.patientId!==m.patientId||e.criadoPor.tipo!=='SESSAO'||!['CONFIRMADO','ASSINADO'].includes(e.revisao)
+   ||Date.parse(e.criadoEm)<Date.parse(m.em)||Date.parse(e.criadoEm)>Date.parse(agora))return false;
+  const d=dadosDoEvento(e);
+  return d?.campo==='revisaoRelatoInfusaoCanal'&&d.mensagemId===m.mensagemId&&d.payloadSha256===m.payloadSha256
+   &&typeof d.decisao==='string'&&!!d.decisao.trim();
+ })).map(m=>({...m,contextoMensagens:mensagens.filter(x=>x.patientId===m.patientId&&Date.parse(x.em)>=Date.parse(m.em))
+  .map(({mensagemId,texto,em})=>({mensagemId,texto,em}))}));
+}

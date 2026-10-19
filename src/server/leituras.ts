@@ -1,3 +1,5 @@
+import { avisosAdministracoesLegadasF3 } from './salaoF3.js';
+import { relatosInfusaoPendentes } from './relatosInfusaoCanal.js';
 import { validarPayloadEvento } from "../contracts/envelope.js";
 import { FUSO_SERVICO } from "../contracts/f1/relogio.js";
 import type { DatabaseSync } from "node:sqlite";
@@ -690,6 +692,7 @@ export function lerSalao(db: DatabaseSync, agora: string, rulesetInput: unknown,
       nome: paciente.nome, draftId: null, revision: null, estadoRascunho: null }];
   });
   const allEvents = eventos(db);
+  const relatosInfusao = relatosInfusaoPendentes(db,allEvents,agora);
   const decisoes = allEvents.flatMap((event) => {
     if (event.tipo !== "ReviewDecision") return [];
     const value = data(event) as Record<string, unknown> | null;
@@ -703,7 +706,7 @@ export function lerSalao(db: DatabaseSync, agora: string, rulesetInput: unknown,
       hoje: null, estado: "PENDENTE" as const, motivo: "RULESET_OU_DATA_CIVIL_INDISPONIVEL",
       pacientes: [...triagensTodas.map((p) => ({ patientId: p.patientId, encounterId: p.encounterId,
       chegadaEm: p.chegadaEm, nome: p.paciente?.nome ?? "", draftId: p.draftId, revision: p.revision,
-      estadoRascunho: p.draftId ? "RASCUNHO" as const : null })), ...agendaCandidatos], cartoes: [], decisoes };
+      estadoRascunho: p.draftId ? "RASCUNHO" as const : null })), ...agendaCandidatos], cartoes: [], decisoes, relatosInfusao };
   }
   const doDia = triagensTodas.filter((item) => {
     const data = dataCivilDoServico(item.chegadaEm, offsetServico);
@@ -761,7 +764,8 @@ export function lerSalao(db: DatabaseSync, agora: string, rulesetInput: unknown,
   });
   return { hoje: civil.dataCivil, ruleset, contexto, fonte: calculados[0]?.fonte ?? null,
     cartoes, pacientes: pacientesOrdenados, decisoes: decisionesVisiveis,
-    avisos:calculados.flatMap(x=>x.avisos),
+    relatosInfusao,
+    avisos:[...calculados.flatMap(x=>x.avisos),...avisosAdministracoesLegadasF3(db)],
     estado: "PARCIAL" as const,
     pendencias: [...calculados.flatMap((x) => [...x.base.pendentes, ...x.portao.pendentes]),
       ...pacientesComTriagemDuplicada.map(() => ({ codigo: "TRIAGEM_DUPLICADA", estado: "PENDENTE" as const }))] };

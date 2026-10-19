@@ -10,13 +10,16 @@ import {
   ExcecaoLiberacaoMedicaSalao,
   FolhaContingenciaSalao,
   type DesfechoPesoSalao,
-  type RegistroAdministracaoEfetivaSalao,
+  RegistroAdministracaoEfetivaSalao,
   type TipoEventoInterrupcaoSalao,
 } from "../contracts/f3/salaoOperacional.js";
 import type { Pesagem, SalaoRuleset } from "../contracts/regras.js";
 import { g06E1Destaque } from "../kernel/harness/gates.js";
 import { transacao } from "../kernel/ledger/db.js";
-import { registrarAdministracao } from "../modules/salao/administracao.js";
+import { rotearDutos } from "./dutos.js";
+import { listarEventos } from "../kernel/comandos/portas.js";
+import { administrations } from "../kernel/projections/series.js";
+import { dadosDoEvento } from "../kernel/projections/snapshot.js";
 import {
   avaliarDesfechoPesoSalao,
   criarEventoInterrupcaoSalao,
@@ -270,62 +273,39 @@ export function registrarAdministracaoEfetivaSalaoF3(
   | { ok: false; codigo: string } {
   const sessao = obterSessaoValida(acesso);
   if (!sessao) return { ok: false, codigo: "SESSAO_INVALIDA" };
-  garantirSchemaSalaoF3(db);
-
-  const documentHash = entrada.prescricaoAssinadaRef.documentHash
-    ?? createHash("sha256").update(`${entrada.prescricaoAssinadaRef.documentId}@${entrada.prescricaoAssinadaRef.documentVersion}`, "utf8").digest("hex");
-  const validado = registrarAdministracao(
-    {
-      prescricao: {
-        documentId: entrada.prescricaoAssinadaRef.documentId,
-        documentVersion: entrada.prescricaoAssinadaRef.documentVersion,
-        documentHash,
-        revisao: "ASSINADO",
-        patientId: entrada.patientId,
-        encounterId: entrada.encounterId,
-        tumorLotId: entrada.tumorLotId,
-      },
-      administracao: entrada.administracao,
-    },
-    {
-      patientId: entrada.patientId,
-      encounterId: entrada.encounterId,
-      tumorLotId: entrada.tumorLotId,
-      atorId: sessao.medicoId,
-      em: acesso.agora,
-    },
-  );
-  if (!validado.ok) return { ok: false, codigo: validado.codigo };
-
-  transacao(db, () => {
-    db.prepare(`
-      INSERT INTO salao_administracao_efetiva (
-        adminId, patientId, encounterId, tumorLotId, administracaoJson, registradoEm
-      ) VALUES (?, ?, ?, ?, ?, ?)
-      ON CONFLICT(adminId) DO NOTHING
-    `).run(
-      validado.dados.adminId,
-      entrada.patientId,
-      entrada.encounterId,
-      entrada.tumorLotId,
-      JSON.stringify(validado.dados),
-      acesso.agora,
-    );
-  });
-
-  return { ok: true, administracao: validado.dados };
+  const parsed = RegistroAdministracaoEfetivaSalao.safeParse(entrada);
+  if (!parsed.success) return { ok: false, codigo: "ADMINISTRACAO_INVALIDA" };
+  const p = parsed.data;
+  // Um único escritor, a mesma sessão/contexto e a mesma verificação de prescrição da rota HTTP.
+  const resultado = rotearDutos({db, sessoes: acesso.sessoes, agora: () => acesso.agora}, acesso.token,
+    '/salao/registrar-administracao', {
+      contexto: {patientId:p.patientId,encounterId:p.encounterId,tumorLotId:p.tumorLotId,
+        operationId:`salao-admin-${p.administracao.adminId}`},
+      prescricao: {documentId:p.prescricaoAssinadaRef.documentId,documentVersion:p.prescricaoAssinadaRef.documentVersion},
+      administracao:p.administracao,
+    }, sessao);
+  const body = resultado?.body as {codigo?:string;eventId?:string} | undefined;
+  if (resultado?.status !== 200) return {ok:false,codigo:body?.codigo ?? 'ADMINISTRACAO_NAO_GRAVADA'};
+  const evento = listarEventos(db,p.patientId).find(e=>e.eventId===body?.eventId);
+  const gravada = evento ? dadosDoEvento(evento) : null;
+  if (!gravada) return {ok:false,codigo:'ADMINISTRACAO_NAO_GRAVADA'};
+  return {ok:true,administracao:gravada as RegistroAdministracaoEfetivaSalao['administracao']};
 }
 
 export function listarAdministracoesEfetivasSalaoF3(
   db: DatabaseSync,
   patientId: string,
 ): Array<RegistroAdministracaoEfetivaSalao["administracao"]> {
-  garantirSchemaSalaoF3(db);
-  const rows = db.prepare(`
-    SELECT administracaoJson FROM salao_administracao_efetiva
-    WHERE patientId = ? ORDER BY registradoEm, adminId
-  `).all(patientId) as Array<{ administracaoJson: string }>;
-  return rows.map((r) => JSON.parse(r.administracaoJson) as RegistroAdministracaoEfetivaSalao["administracao"]);
+  // Tabela F3 legada preservada para auditoria; não promover registros sem assinatura verificada.
+  return administrations(listarEventos(db,patientId));
+}
+
+/** Arquivo anterior preservado: exige reconciliação, sem desaparecer nem virar administração confirmada. */
+export function avisosAdministracoesLegadasF3(db:DatabaseSync):{patientId:string;texto:string}[] {
+  if(!db.prepare("SELECT 1 FROM sqlite_master WHERE type='table' AND name='salao_administracao_efetiva'").get())return [];
+  const rows=db.prepare('SELECT patientId,adminId FROM salao_administracao_efetiva').all() as {patientId:string;adminId:string}[];
+  return rows.filter(r=>!listarAdministracoesEfetivasSalaoF3(db,r.patientId).some(a=>a.adminId===r.adminId))
+    .map(r=>({patientId:r.patientId,texto:`Administração legada ${r.adminId} preservada, aguardando conferência de prescrição e origem antes de entrar no cumulativo.`}));
 }
 
 /**

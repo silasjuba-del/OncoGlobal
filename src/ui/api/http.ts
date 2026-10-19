@@ -285,6 +285,11 @@ export function criarPortaHttp(opcoes: OpcoesHttp): PortaConsulta {
     },
 
     // [SERVIDOR_PENDENTE]
+    async revisarRelatoInfusao(entrada) {
+      const {status,json}=await enviar('/salao/revisar-relato-canal',entrada,true);
+      if(status!==200)throw new ErroPorta(codigoDe(json,'REVISAO_NAO_GRAVADA'));
+      return json;
+    },
     async filaSalao() {
       return leitura("/consulta/salao", {}, SalaoResposta);
     },

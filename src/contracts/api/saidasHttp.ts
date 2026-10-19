@@ -69,6 +69,7 @@ export const SaidasHttp: Readonly<Record<string, z.ZodType>> = {
   consultarConhecimento: z.object({ status: z.literal("OK"), modo: z.literal("LEXICAL"), algoritmo: z.literal("TOKEN_EXATO_NORMALIZADO"),
     corpus: z.object({ versao: Id, arquivos: z.array(JsonObjeto) }), vetorial: z.object({ status: z.literal("NOT_IMPLEMENTED") }),
     resultados: z.array(z.object({ referencia: JsonObjeto, scoreLexical: z.number().finite() })), topKAplicado: z.number().int().positive(), aviso: Id }),
+  "/salao/revisar-relato-canal": Gravacao,
   "/farmacia/enviar": Gravacao, "/farmacia/conferir": Gravacao, "/salao/registrar-administracao": Gravacao,
   "/apac/validar-emissao": Gravacao, "/chat/aceitar-decisao": Gravacao, "/tarefas/receber": Gravacao, "/tarefas/concluir": Gravacao,
   "/biblioteca/importar": z.object({ codigo: z.literal("PACOTE_IMPORTADO_RASCUNHO"), pacoteId: Id, hash: z.string().regex(/^[a-f0-9]{64}$/) }),

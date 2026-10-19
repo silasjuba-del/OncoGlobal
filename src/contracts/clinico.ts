@@ -148,7 +148,14 @@ export const TreatmentAdministration = z.object({
   prescricaoRef: z.object({ documentId: Id, documentVersion: z.number().int().min(1) }).strict(),
   item: z.number().int().min(1),
   droga: z.string().min(1),
-  quantidadeEfetivaMg: z.number().int().nonnegative(),
+  quantidadeEfetivaMg: z.number().finite().nonnegative(),
+  // O campo legado continua em mg. Entradas novas podem preservar a unidade efetivamente lida.
+  medidaInformada: z.discriminatedUnion('unidade', [
+    z.object({ unidade: z.literal('mg'), valor: z.number().finite().nonnegative() }).strict(),
+    z.object({ unidade: z.literal('mL'), valor: z.number().finite().nonnegative(),
+      concentracaoSolucaoMgMl: z.number().finite().positive(), fonteConcentracao: Fonte }).strict(),
+  ]).optional(),
+  superficieCorporalNoDia: z.object({ valorM2: z.number().finite().positive(), fonte: Fonte }).strict().optional(),
   status: z.enum(["COMPLETA", "PARCIAL", "OMITIDA", "INTERROMPIDA"]),
   motivo: z.string().nullable(),
   inicio: Instante.nullable(),

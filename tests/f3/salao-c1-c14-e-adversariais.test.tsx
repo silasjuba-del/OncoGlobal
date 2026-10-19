@@ -1,3 +1,6 @@
+import { executarConfirmacao } from '../../src/kernel/comandos/index.js';
+import { salvarDraft } from '../../src/kernel/comandos/portas.js';
+import { hashCanonico } from '../../src/rules/conteudoCanonico.js';
 // @vitest-environment jsdom
 import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { mkdtempSync, readFileSync, rmSync } from "node:fs";
@@ -412,6 +415,21 @@ describe("FASE F3 · Salão de Quimioterapia (S-F3-01 a S-F3-04 e casos clínico
 
     // Cumulativos: só entra o que foi efetivamente administrado (OMITIDA = 0, PARCIAL = quantidadeEfetivaMg)
     const fonte = fonteSintetica("fonte-adm-f3");
+    // A administração agora usa o duto canônico: prescrição realmente assinada e ciclo confirmado.
+    function prepararContexto(n:number) {
+      const contexto={patientId:'pt-dose-1',encounterId:`enc-dose-${n}`,tumorLotId:'lot-1'};
+      acesso.sessoes.selecionarConsulta(acesso.token,contexto);
+      const sessaoMedica=acesso.sessoes.obter(acesso.token)!;
+      const doc={documentId:`rx-${n}`,documentVersion:1,tipoDocumento:'PRESCRICAO_QT',texto:'Prescrição sintética F3'};
+      for(const [tipo,payload] of [['DOCUMENTO',{data:doc,signature:{documentId:doc.documentId,documentVersion:1,documentHash:hashCanonico(doc),reviewDecisionId:`rev-f3-${n}-DOCUMENTO`,serverActorId:sessaoMedica.medicoId}}],
+        ['Ciclo',{cicloId:`ciclo-${n}`,episodioId:'ep-ac-1',numero:n,previstoEm:HOJE,pesoKg:{valor:70,estado:"VERDE",campo:"PRESENTE",motivo:"medida sintética",fontes:[fonte],revisao:"CONFIRMADO"},origemPeso:'MEDIDO',ciclosSemPesoConsecutivos:0,prescricaoRef:{documentId:doc.documentId,documentVersion:1},itens:[{item:1,droga:'doxorrubicina',doseMg:100,reducaoPct:0}],comMedico:true}]] as const){
+        const id=`seed-f3-${n}-${tipo}`;
+        salvarDraft(db,{draftId:id,patientId:contexto.patientId,sourceId:id,rawRef:id,payload:{contexto},diagnostics:[],revision:0,criadoEm:AGORA});
+        expect(executarConfirmacao(db,{...contexto,operationId:id,reviewDecisionId:`rev-f3-${n}-${tipo}`,sessao:sessaoMedica,em:AGORA,
+          registros:[{draftId:id,expectedRevision:0,eventId:id,tipo,payload,fontes:[fonte],revisao:tipo==='DOCUMENTO'?'ASSINADO':'CONFIRMADO'}]}).estado).toBe('GRAVADA');
+      }
+    }
+    prepararContexto(1);
     const rAdm1 = registrarAdministracaoEfetivaSalaoF3(db, acesso, {
       patientId: "pt-dose-1",
       encounterId: "enc-dose-1",
@@ -432,6 +450,7 @@ describe("FASE F3 · Salão de Quimioterapia (S-F3-01 a S-F3-04 e casos clínico
         fonte,
       },
     });
+    prepararContexto(2);
     const rAdm2 = registrarAdministracaoEfetivaSalaoF3(db, acesso, {
       patientId: "pt-dose-1",
       encounterId: "enc-dose-2",
@@ -452,6 +471,7 @@ describe("FASE F3 · Salão de Quimioterapia (S-F3-01 a S-F3-04 e casos clínico
         fonte,
       },
     });
+    prepararContexto(3);
     const rAdm3 = registrarAdministracaoEfetivaSalaoF3(db, acesso, {
       patientId: "pt-dose-1",
       encounterId: "enc-dose-3",

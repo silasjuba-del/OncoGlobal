@@ -1,3 +1,4 @@
+import { relatosInfusaoPendentes } from './relatosInfusaoCanal.js';
 import { createHash } from 'node:crypto';
 import type { DatabaseSync } from 'node:sqlite';
 import { z } from 'zod';
@@ -13,6 +14,7 @@ import { hashCanonico } from '../rules/conteudoCanonico.js';
 import { dataCivilDoServico } from '../rules/tempoServico.js';
 import { conferirPrescricao } from '../modules/farmacia/duto.js';
 import { registrarAdministracao } from '../modules/salao/administracao.js';
+import { validarMedidaAdministracao } from '../modules/salao/medidaAdministracao.js';
 import { criarValidacaoPersistida } from '../modules/apac/validacaoPersistida.js';
 import { antiglosa } from '../modules/apac/antiglosa.js';
 import { RELEASES_SIGTAP_CONFERIDAS } from '../modules/apac/sigtap.js';
@@ -32,8 +34,9 @@ const FarmaciaPedido = RxPedido.extend({ acao: z.enum(['CONFERIR','PEDIR_CORRECA
 const AdminPedido = RxPedido.extend({ administracao: TreatmentAdministration }).strict();
 const ApacPedido = z.object({ ...Base, apacId: Id, apacVersao: z.number().int().positive() }).strict();
 const ChatPedido = z.object({ ...Base, mensagemId: Id, decisao: z.object({ campo: Id, valor: z.unknown() }).strict().refine(v => Object.hasOwn(v, 'valor')) }).strict();
+const RevisaoRelatoPedido=z.object({...Base,mensagemId:Id,payloadSha256:z.string().regex(/^[a-f0-9]{64}$/),decisao:z.string().trim().min(1)}).strict();
 const TarefaPedido = z.object({ ...Base, tarefaId: Id }).strict();
-const Rotas = new Set(['/farmacia/enviar','/farmacia/conferir','/salao/registrar-administracao','/apac/validar-emissao','/chat/aceitar-decisao','/tarefas/receber','/tarefas/concluir']);
+const Rotas = new Set(['/salao/revisar-relato-canal','/farmacia/enviar','/farmacia/conferir','/salao/registrar-administracao','/apac/validar-emissao','/chat/aceitar-decisao','/tarefas/receber','/tarefas/concluir']);
 const negar = (codigo: string, status = 409): ResultadoDuto => ({ status, body: { codigo } });
 
 export type DiagnosticoPrescricaoDuto = {ok:true;prescricao:PrescricaoAssinadaRef}|{ok:false;codigo:string};
@@ -78,7 +81,7 @@ export function referenciaSigtapDuto(corpus: DepsDutos['corpus'], competencia: s
 /** Roteador local: a sessão já resolvida é novamente vinculada ao token e ao encontro selecionado. */
 function executarDuto(deps: DepsDutos, token: string, rota: string, entrada: unknown, sessaoResolvida: z.infer<typeof Sessao>): ResultadoDuto | null {
  if(!Rotas.has(rota))return null;
- const parsed=(rota==='/farmacia/enviar'?RxPedido:rota==='/farmacia/conferir'?FarmaciaPedido:rota==='/salao/registrar-administracao'?AdminPedido:rota==='/apac/validar-emissao'?ApacPedido:rota==='/chat/aceitar-decisao'?ChatPedido:TarefaPedido).safeParse(entrada);
+ const parsed=(rota==='/salao/revisar-relato-canal'?RevisaoRelatoPedido:rota==='/farmacia/enviar'?RxPedido:rota==='/farmacia/conferir'?FarmaciaPedido:rota==='/salao/registrar-administracao'?AdminPedido:rota==='/apac/validar-emissao'?ApacPedido:rota==='/chat/aceitar-decisao'?ChatPedido:TarefaPedido).safeParse(entrada);
  if(!parsed.success)return negar('DUTO_PEDIDO_INVALIDO',400);
  const em=deps.agora(); if(!Instante.safeParse(em).success)return negar('RELOGIO_INVALIDO');
  const sessao=deps.sessoes.obter(token), auth=Sessao.safeParse(sessao);
@@ -89,6 +92,20 @@ function executarDuto(deps: DepsDutos, token: string, rota: string, entrada: unk
  const eventos=listarEventos(deps.db,c.patientId), vigentes=eventosVigentes(eventos).filter(e=>e.patientId===c.patientId&&e.encounterId===c.encounterId&&e.tumorLotId===c.tumorLotId&&['CONFIRMADO','ASSINADO'].includes(e.revisao));
  const requestHash=hashCanonico({rota,entrada});
  const replay=eventos.filter(e=>e.operationId===c.operationId);
+ // Replay clínico por ID, sob a transação, independe do relógio de recebimento e da versão hoje vigente.
+ // Continua exigindo sessão e consulta selecionada; nunca altera um evento histórico.
+ if(rota==='/salao/registrar-administracao'){
+  const p=AdminPedido.parse(entrada);
+  const anteriores=listarEventos(deps.db,c.patientId).filter(e=>e.tipo==='TreatmentAdministration'&&dadosDoEvento(e)?.adminId===p.administracao.adminId);
+  if(anteriores.length){
+   const e=anteriores[0]!;
+   if(anteriores.length!==1||e.patientId!==c.patientId||e.encounterId!==c.encounterId||e.tumorLotId!==c.tumorLotId
+     ||!['CONFIRMADO','ASSINADO'].includes(e.revisao)||hashCanonico(dadosDoEvento(e))!==hashCanonico(p.administracao)
+     ||hashCanonico(p.prescricao)!==hashCanonico(p.administracao.prescricaoRef)
+     ||replay.some(r=>r.eventId!==e.eventId))return negar('ADMINISTRACAO_ID_CONFLITO');
+   return {status:200,body:{codigo:'REPLAY',eventId:e.eventId}};
+  }
+ }
  const diagnostico='prescricao' in pedido?verificarPrescricaoDuto(eventos,contexto,pedido.prescricao):null;
  if(diagnostico&&!diagnostico.ok)return negar(diagnostico.codigo);
  const prescricao=diagnostico?.ok?diagnostico.prescricao:null;
@@ -98,7 +115,11 @@ function executarDuto(deps: DepsDutos, token: string, rota: string, entrada: unk
  }
  let tipo='FATO',payload:unknown,supersedesEventId:string|null=null;
  const fato=(campo:string)=>vigentes.filter(e=>e.tipo==='FATO'&&dadosDoEvento(e)?.campo===campo);
- if(rota.startsWith('/farmacia/')){
+ if(rota==='/salao/revisar-relato-canal'){
+  const p=RevisaoRelatoPedido.parse(entrada);
+  if(!relatosInfusaoPendentes(deps.db,eventos,em).some(m=>m.patientId===c.patientId&&m.mensagemId===p.mensagemId&&m.payloadSha256===p.payloadSha256))return negar('RELATO_PENDENTE_NAO_ENCONTRADO');
+  tipo='ReviewDecision';payload={campo:'revisaoRelatoInfusaoCanal',mensagemId:p.mensagemId,payloadSha256:p.payloadSha256,decisao:p.decisao};
+ }else if(rota.startsWith('/farmacia/')){
   const anteriores=fato('farmacia.conferencia').flatMap(e=>{const p=ConferenciaFarmacia.safeParse(dadosDoEvento(e)?.valor);return p.success&&p.data.prescricao.documentId===prescricao!.documentId?[{e,registro:p.data}]:[];});
   if(anteriores.length>1)return negar('CONFERENCIA_FARMACIA_AMBIGUA');
   const anterior=anteriores.at(-1);
@@ -114,7 +135,7 @@ function executarDuto(deps: DepsDutos, token: string, rota: string, entrada: unk
  }else if(rota==='/salao/registrar-administracao'){
   const p=AdminPedido.parse(entrada),r=registrarAdministracao({prescricao,administracao:p.administracao},contexto);
   if(!r.ok)return negar(r.codigo);
-  if(vigentes.some(e=>e.tipo==='TreatmentAdministration'&&dadosDoEvento(e)?.adminId===p.administracao.adminId))return negar('ADMINISTRACAO_JA_REGISTRADA');
+  const medida=validarMedidaAdministracao(p.administracao);if(!medida.ok)return negar(medida.codigo);
   const ciclos=vigentes.filter(e=>e.tipo==='Ciclo'&&dadosDoEvento(e)?.cicloId===p.administracao.cicloId);
   if(ciclos.length!==1)return negar('CICLO_CONFIRMADO_NAO_ENCONTRADO');
   const ciclo=dadosDoEvento(ciclos[0]!);
@@ -148,7 +169,7 @@ function executarDuto(deps: DepsDutos, token: string, rota: string, entrada: unk
  const draft=salvarDraft(deps.db,{draftId,patientId:c.patientId,sourceId:fonte.sourceId,rawRef:draftId,payload:{contexto,valor:payload},diagnostics:[],revision:0,criadoEm:em});
  try{
   const r=executarConfirmacao(deps.db,{operationId:c.operationId,patientId:c.patientId,encounterId:c.encounterId,tumorLotId:c.tumorLotId,reviewDecisionId:`duto-review-${key}`,sessao:auth.data,em,
-   registros:[{draftId:draft.draftId,expectedRevision:draft.revision,eventId,tipo,payload,fontes:[fonte],revisao:'CONFIRMADO',supersedesEventId}]});
+   registros:[{draftId:draft.draftId,expectedRevision:draft.revision,eventId,tipo,payload,fontes:tipo==='TreatmentAdministration'?[fonte,AdminPedido.parse(entrada).administracao.fonte]:[fonte],revisao:'CONFIRMADO',supersedesEventId}]});
   return r.estado==='NEGADA'?negar(r.motivo??'DUTO_COMANDO_NEGADO'):{status:200,body:{codigo:r.estado,eventId}};
  }catch{throw new Error('DUTO_COMANDO_NAO_CONFIRMADO');}
 }

@@ -220,6 +220,8 @@ export interface DecisaoLiberacaoVisao {
 }
 
 export interface SalaoVisao {
+  relatosInfusao?: readonly {patientId:string;mensagemId:string;payloadSha256:string;texto:string;em:string;
+    contextoMensagens:readonly {mensagemId:string;texto:string;em:string}[]}[] | undefined;
   avisos?: readonly {patientId:string;texto:string}[];
   hoje: string;
   ruleset: SalaoRuleset;
@@ -354,6 +356,7 @@ export interface PortaConsulta {
   agendaDoDia(): Promise<AgendaVisao>;
   // [SERVIDOR_PENDENTE]
   filaSalao(): Promise<SalaoVisao>;
+  revisarRelatoInfusao?(entrada:{contexto:{patientId:string;encounterId:string;tumorLotId:string|null;operationId:string};mensagemId:string;payloadSha256:string;decisao:string}):Promise<unknown>;
   // [SERVIDOR_PENDENTE]
   salvarTriagem(triagem: Triagem, expectedRevision?: number | null): Promise<SalaoVisao>;
   // [SERVIDOR_PENDENTE]

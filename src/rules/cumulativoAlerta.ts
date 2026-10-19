@@ -54,7 +54,7 @@ function calcularcumulativoAlerta(input: CumulativoInput, rs: LimiteCumulativo |
   if (!noEscopo.length) return pendente(input, rs, "historico de administracoes ausente [VERIFICAR]", ["administracoes"]);
   const unicas = new Map<string, AdministracaoCumulativo>();
   for (const a of noEscopo) {
-    if (!a.adminId.trim() || !Number.isSafeInteger(a.quantidadeEfetivaMg) || a.quantidadeEfetivaMg < 0 ||
+    if (!a.adminId.trim() || !Number.isFinite(a.quantidadeEfetivaMg) || a.quantidadeEfetivaMg < 0 ||
         (!efetiva(a) && a.status !== "OMITIDA") || (a.status === "OMITIDA" && a.quantidadeEfetivaMg !== 0)) {
       return pendente(input, rs, "administracao invalida [VERIFICAR]", [`admin.${a.adminId}`]);
     }
@@ -75,10 +75,14 @@ function calcularcumulativoAlerta(input: CumulativoInput, rs: LimiteCumulativo |
     return pendente(input, rs, "unidade da administracao incompatível [VERIFICAR]", [`admin.${unidadeIncompativel.adminId}.unidadeEfetiva.mg`]);
   }
 
-  const total = administracoes.reduce((soma, a) => soma + a.quantidadeEfetivaMg, 0);
-  if (!Number.isSafeInteger(total)) return pendente(input, rs, "soma fora da faixa inteira exata [VERIFICAR]", ["total"]);
-  const estado = total > rs.maximo ? "VERMELHO" : "VERDE";
-  const motivo = total > rs.maximo ? "cumulativo acima do limite ativo" : "cumulativo dentro do limite ativo";
+  const decimais = administracoes.map(a=>decimalExposicao(a.quantidadeEfetivaMg));
+  const casas = Math.max(0,...decimais.map(d=>d.casas));
+  const soma = decimais.reduce((s,d)=>s+d.inteiro*10n**BigInt(casas-d.casas),0n);
+  const total = Number(`${soma}e-${casas}`);
+  if (!Number.isFinite(total) || total > Number.MAX_SAFE_INTEGER) return pendente(input, rs, "soma fora da faixa numérica suportada [VERIFICAR]", ["total"]);
+  const excedeu = soma > BigInt(rs.maximo)*10n**BigInt(casas);
+  const estado = excedeu ? "VERMELHO" : "VERDE";
+  const motivo = excedeu ? "cumulativo acima do limite ativo" : "cumulativo dentro do limite ativo";
 
   return {
     rulesetVersao: rs.versao,

@@ -1,3 +1,4 @@
+import { avisosAdministracao, exposicaoLocalMgM2 } from '../modules/salao/medidaAdministracao.js';
 import { Apac, type ClinicalEvent } from '../contracts/operacao.js';
 import { TreatmentAdministration } from '../contracts/clinico.js';
 import { ConferenciaFarmacia, ValidacaoApacPersistida, mesmaPrescricao } from '../contracts/f1/dutos.js';
@@ -8,7 +9,7 @@ import { dadosDoEvento, eventosVigentes } from '../kernel/projections/snapshot.j
 import { referenciaSigtapDuto, resolverPrescricaoDuto, type DepsDutos } from './dutos.js';
 /** Read-only: o servidor fornece a mesma lista de eventos já lida para a consulta. */
 export function projetarDutos(eventos:readonly ClinicalEvent[],ctx:{patientId:string;encounterId:string;tumorLotId:string|null},corpus?:DepsDutos['corpus']):DutosClinicaVisao {
- const contexto=ContextoDutosVisao.parse(ctx),out:DutosClinicaVisao={schema:'DutosClinicaVisao@1',contexto,farmacia:[],tarefas:[],apacs:[],administracoes:[],integridade:[]};
+ const contexto=ContextoDutosVisao.parse(ctx),out:DutosClinicaVisao={schema:'DutosClinicaVisao@1',contexto,farmacia:[],tarefas:[],apacs:[],administracoes:[],integridade:[],exposicoesLocais:[]};
  const atuais=eventosVigentes(eventos).filter(e=>e.patientId===ctx.patientId&&e.encounterId===ctx.encounterId&&e.tumorLotId===ctx.tumorLotId&&['CONFIRMADO','ASSINADO'].includes(e.revisao));
  const validar=(eventId:string,codigo:string)=>out.integridade.push({eventId,codigo});
  for(const e of atuais){const dados=dadosDoEvento(e);
@@ -24,7 +25,7 @@ export function projetarDutos(eventos:readonly ClinicalEvent[],ctx:{patientId:st
   }else if(e.tipo==='TreatmentAdministration'){
    const a=TreatmentAdministration.safeParse(dados);if(!a.success){validar(e.eventId,'ADMINISTRACAO_FORA_CONTRATO');continue;}
    const ref=resolverPrescricaoDuto(eventos,contexto,a.data.prescricaoRef);
-   out.administracoes.push({eventId:e.eventId,dados:a.data,prescricao:ref,referenciaValida:!!ref,motivo:ref?null:'Prescrição vigente não localizada; quantidade é observação histórica e requer revisão.'});
+   out.administracoes.push({eventId:e.eventId,dados:a.data,avisos:[],prescricao:ref,referenciaValida:!!ref,motivo:ref?null:'Prescrição vigente não localizada; quantidade é observação histórica e requer revisão.'});
   }else if(e.tipo==='APAC'){
    const a=Apac.safeParse(dados);if(!a.success){validar(e.eventId,'APAC_FORA_CONTRATO');continue;}
    if(a.data.tumorLotId!==ctx.tumorLotId){validar(e.eventId,'APAC_FORA_CONTEXTO');continue;}
@@ -35,5 +36,13 @@ export function projetarDutos(eventos:readonly ClinicalEvent[],ctx:{patientId:st
    out.apacs.push({eventId:e.eventId,apac:a.data,validacao:mesmoContexto?v!.valor:null,estado:valida&&mesmoContexto?'VALIDADA':'PENDENTE',motivo:valida&&mesmoContexto?null:'Validação administrativa, prescrição ou SIGTAP vigente pendente. Não comprova autorização externa.'});
   }
  }
+ const provenienciaPendente:string[]=[];
+ const historico=eventosVigentes(eventos).filter(e=>e.patientId===ctx.patientId&&e.tipo==='TreatmentAdministration'&&['CONFIRMADO','ASSINADO'].includes(e.revisao)).flatMap(e=>{
+  const a=TreatmentAdministration.safeParse(dadosDoEvento(e));if(!a.success)return [];
+  if(!e.fontes.some(f=>f.sourceId===a.data.fonte.sourceId&&f.contentHash===a.data.fonte.contentHash))provenienciaPendente.push(a.data.adminId);
+  return [a.data];
+ });
+ for(const a of out.administracoes)a.avisos=avisosAdministracao(a.dados,historico);
+ out.exposicoesLocais=[...new Set(historico.map(a=>a.droga))].map(droga=>exposicaoLocalMgM2(historico,droga,provenienciaPendente));
  return DutosClinicaVisao.parse(out);
 }

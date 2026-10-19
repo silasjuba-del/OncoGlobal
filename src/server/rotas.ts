@@ -367,7 +367,7 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
         : req.url === "/consulta/estado-doenca/confirmar" ? "confirmarEstadoDoenca"
         : req.url === "/consulta/llm/extrair" ? "extracaoLlm"
         : ["/biblioteca/importar","/biblioteca/curar","/biblioteca/ativar","/biblioteca/rollback","/biblioteca/consultar","/biblioteca/estado"].includes(req.url??"") ? req.url!
-        : ["/farmacia/enviar","/farmacia/conferir","/salao/registrar-administracao","/apac/validar-emissao","/chat/aceitar-decisao","/tarefas/receber","/tarefas/concluir"].includes(req.url??"") ? req.url!
+        : ["/salao/revisar-relato-canal","/farmacia/enviar","/farmacia/conferir","/salao/registrar-administracao","/apac/validar-emissao","/chat/aceitar-decisao","/tarefas/receber","/tarefas/concluir"].includes(req.url??"") ? req.url!
         : req.url === "/consulta/upload" ? "upload"
         : req.url === "/consulta/prescricao/propor" ? "proporPrescricao"
         : req.url === "/consulta/extrair" ? "extrair"

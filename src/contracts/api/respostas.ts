@@ -67,7 +67,9 @@ export const AgendaResposta: z.ZodType<AgendaVisao> = z.object({ hoje: DataCivil
   horario: Texto, patientId: Texto, encounterId: Texto.optional(), nome: Texto, prontuario: Texto, semaforo: Semaforo,
   pendentes: Count, preConsultaPronta: z.boolean(), contatosDesdeUltima: Count, temE1: z.boolean(),
 })) });
-export const SalaoResposta: z.ZodType<SalaoVisao> = z.object({ hoje: DataCivil, ruleset: SalaoRuleset,
+export const SalaoResposta: z.ZodType<SalaoVisao> = z.object({
+  relatosInfusao:z.array(z.object({patientId:Texto,mensagemId:Texto,payloadSha256:Texto,texto:Texto,em:Texto,
+    contextoMensagens:z.array(z.object({mensagemId:Texto,texto:Texto,em:Texto}))})).optional(), hoje: DataCivil, ruleset: SalaoRuleset,
   contexto: ContextoTriagem, fonte: Fonte.nullable(), cartoes: z.array(z.object({ entrada: EntradaFila,
     destino: Destino, emergencia: z.boolean(), temCorte: z.boolean(), nome: Texto })),
   pacientes: z.array(z.object({ patientId: Texto, encounterId: Texto, chegadaEm: Texto, nome: Texto,

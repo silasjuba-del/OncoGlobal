@@ -48,7 +48,7 @@ export function baseAjusteAnterior(eventos:readonly ClinicalEvent[],ctx:{patient
       &&(i===0||Date.parse(a.admin.inicio)>=Date.parse(efetivas[i-1]!.admin.fim!))));
   const total=efetivas.reduce((s,a)=>s+a.admin.quantidadeEfetivaMg,0);
   const valido=emMg&&unico&&fragmentos&&new Set(candidatos.map(a=>a.admin.adminId)).size===candidatos.length
-    &&new Set(candidatos.map(a=>a.admin.item)).size===1&&Number.isSafeInteger(total)&&total>0;
+    &&new Set(candidatos.map(a=>a.admin.item)).size===1&&Number.isFinite(total)&&total>0;
   if(valido)for(const a of efetivas)fontes.push({eventId:a.evento.eventId,adminId:a.admin.adminId,quantidadeEfetivaMg:a.admin.quantidadeEfetivaMg,status:a.admin.status,fonte:a.admin.fonte});
   else pendencias.push({droga:item.drug,motivo:candidatos.length?'BASE_EFETIVA_AMBIGUA_OU_UNIDADE_INCOMPATIVEL':'ADMINISTRACAO_EFETIVA_ANTERIOR_AUSENTE',eventIds:candidatos.map(a=>a.evento.eventId)});
   return {...item,unit:emMg?'mg':item.unit,prescribedDose:valido?total:null};
