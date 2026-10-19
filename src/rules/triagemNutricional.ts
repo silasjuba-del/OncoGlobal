@@ -29,8 +29,13 @@ const GATILHO_CID: ReadonlyArray<readonly [RegExp, string]> = [
   [/^C16/, "câncer de estômago"],
 ];
 const SITIO_JUNCAO = "topografia esofagogástrica";
-const gatilhosDoTexto = (texto: string | null): string[] => texto !== null && /\b(?:juncao (?:esofagogastrica|gastroesofagica)|esofagogastric[oa]|gastroesofagic[oa]|jeg)\b/.test(texto)
-  ? [SITIO_JUNCAO] : GATILHO_TUMOR.filter(([re]) => texto !== null && re.test(texto)).map(([, nome]) => nome);
+function gatilhosDoTexto(texto: string | null): string[] {
+  if (texto === null) return [];
+  // A menção genérica à junção não apaga os sítios explícitos do mesmo campo.
+  const semJuncao = texto.replace(/\b(?:juncao (?:esofagogastrica|gastroesofagica)|esofagogastric[oa]|gastroesofagic[oa]|jeg)\b/g, " ");
+  const especificos = GATILHO_TUMOR.filter(([re]) => re.test(semJuncao)).map(([, nome]) => nome);
+  return especificos.length ? especificos : semJuncao !== texto ? [SITIO_JUNCAO] : [];
+}
 
 /** Vocabulário fechado de formas reconhecidas; qualquer termo não reconciliado fica pendente. */
 function campoDeSitioReconhecido(texto: string | null, histologico: boolean): boolean {

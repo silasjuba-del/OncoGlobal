@@ -11,6 +11,38 @@ describe("F1-B1 triagem nutricional (D-F1-33, NRS-2002)", () => {
     expect(t({tumor:"junção esofagogástrica",histologia:"carcinoma adrenocortical",imc:24}).estado).toBe("PENDENTE");
   });
   it.each([
+    {tumor:"Estômago",histologia:"adenocarcinoma esofágico, JEG"},
+    {tumor:"Esôfago",histologia:"adenocarcinoma gástrico, JEG"},
+    {tumor:"Estômago, JEG",cid:"C15.4"},
+    {tumor:"Esôfago, junção esofagogástrica",cid:"C16.9"},
+  ])("junção não apaga sítio explícito nem sua divergência entre fontes (%j)", entrada => {
+    const normal=t({...entrada,imc:24});
+    expect(normal.estado).toBe("PENDENTE");
+    expect(normal.motivos).toEqual(["topografia, histologia ou CID divergentes ou não reconciliados — conferir fontes"]);
+    expect(textoSugestaoNutricional(normal)).toBeNull();
+    const baixo=t({...entrada,imc:17});
+    expect(baixo.estado).toBe("SUGERIR");
+    expect(baixo.motivos).toEqual(["IMC 17 < 18",...normal.motivos]);
+    expect(baixo.bloqueia).toBe(false);
+  });
+  it.each([
+    {tumor:"Estômago, JEG",cid:"C16.0",motivo:"câncer de estômago"},
+    {tumor:"Esôfago, junção esofagogástrica",cid:"C15.5",motivo:"câncer de esôfago"},
+    {tumor:"Estômago",histologia:"adenocarcinoma gástrico, JEG",motivo:"câncer de estômago"},
+  ])("junção preserva o sítio explícito quando as fontes concordam (%j)", ({motivo,...entrada}) => {
+    const r=t({...entrada,imc:24});
+    expect(r.estado).toBe("SUGERIR");
+    expect(r.motivos).toEqual([motivo]);
+    expect(r.bloqueia).toBe(false);
+  });
+  it.each(["Sem câncer de JEG","Suspeita de JEG","JEG?","Histologia não confirmada para JEG"])("junção mantém negação ou incerteza pendente: %s", tumor => {
+    expect(t({tumor,imc:24}).estado).toBe("PENDENTE");
+    const baixo=t({tumor,imc:17});
+    expect(baixo.motivos[0]).toBe("IMC 17 < 18");
+    expect(baixo.motivos[1]).toMatch(/não reconciliados/);
+    expect(baixo.motivos.join(" ")).not.toMatch(/câncer de/);
+  });
+  it.each([
     {tumor:"Mama",cid:"C15.4"},
     {tumor:"Mama",histologia:"adenocarcinoma gástrico"},
     {tumor:"Esôfago",histologia:"carcinoma ductal de mama"},
