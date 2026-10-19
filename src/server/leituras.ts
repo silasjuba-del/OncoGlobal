@@ -10,7 +10,7 @@ import { Contato } from "../contracts/clinico.js";
 import { dadosDoEvento, escopoDoEvento, eventosVigentes, projetarSnapshot } from "../kernel/projections/snapshot.js";
 import { apacTimeline } from "../kernel/projections/apacTimeline.js";
 import { dataCivilDoServico } from "../kernel/gateway/tempo.js";
-import { apacPrazo } from "../rules/apac.js";
+import { apacPrazo, apacRetrograda, type CodigoNegativa } from "../rules/apac.js";
 import { listarDrafts } from "../kernel/comandos/portas.js";
 import type { Sessao } from "../contracts/base.js";
 import type { SetorChat } from "../contracts/api/porta.js";
@@ -587,10 +587,22 @@ export function lerApacs(db: DatabaseSync, agora: string, config: {
     const resultadoAntiglosa = catalogoApac.estado === "DISPONIVEL"
       ? antiglosa(apac, { hoje: civil.dataCivil, sigtap: config.sigtap, caixas: catalogoApac.caixas,
         cnesConfigurado: config.cnesConfigurado, apacsDoLote: doLote }) : null;
+    const motivoNegativa = apac.resultadoExterno?.valor === "NEGADA" ? apac.resultadoExterno.motivo : null;
+    const codigosRetrogrados = new Set<CodigoNegativa>(["ESTADIO_AUSENTE", "HISTOLOGIA_AUSENTE", "TOPOGRAFIA_AUSENTE", "CID_AUSENTE", "OUTRO"]);
+    const campoOrigem = apac.resultadoExterno?.valor === "NEGADA"
+      && motivoNegativa !== null
+      && codigosRetrogrados.has(motivoNegativa as CodigoNegativa)
+      && apac.resultadoExterno.comprovanteRef
+      ? apacRetrograda({
+        apacId: apac.apacId,
+        comprovanteRef: apac.resultadoExterno.comprovanteRef,
+        codigo: motivoNegativa as CodigoNegativa,
+      }).campoOrigem
+      : null;
     return [{ apac, lote, nomePaciente: paciente.nome, patientId: paciente.patientId,
       encounterId: event.encounterId,
-      ultimoAvisoEm, campoOrigem: null,
-      motivoNegativa: apac.resultadoExterno?.valor === "NEGADA" ? apac.resultadoExterno.motivo : null,
+      ultimoAvisoEm, campoOrigem,
+      motivoNegativa,
       prazo: prazo ? { ...prazo, estado: prazo.dias < 0 ? "PENDENTE" : prazo.estado } : { estado: "PENDENTE" },
       antiglosa: resultadoAntiglosa,
       antiglosaEstado: resultadoAntiglosa ? (config.sigtap[apac.competencia] ? "AVALIADA_COM_TABELA_SIGTAP" : "AVALIADA_COM_TABELA_SIGTAP_AUSENTE") : "PENDENTE_CATALOGO_AUSENTE" }];
