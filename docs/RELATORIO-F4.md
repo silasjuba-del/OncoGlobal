@@ -1,4 +1,6 @@
-# Relatório de Fechamento Técnico — Fase F4 (APAC, Farmácia, Estoque e Documentação de Acesso)
+# Inventário técnico parcial — Fase F4 (APAC, Farmácia, Estoque e Documentação de Acesso)
+
+> Situação revisada em 2026-10-19: **INTEGRAÇÃO PENDENTE — fase não encerrada**. O conteúdo abaixo registra componentes e testes do snapshot `0b00a40`; não comprova funcionamento integral no atendimento. I05: o registro de negativa de APAC é persistido, mas a projeção do estado vigente ainda diverge na tela. A ordem de decisão e o recurso precisam de integração e prova pela interface. Ver [consolidação](reviews/CONSOLIDACAO-RECEITA-2026-10-19.md) e [auditoria 9X–12X](reviews/AUDITORIA-9X-12X-2026-10-19.md).
 
 **Data:** 2026-10-19  
 **Modalidade:** `GO_CODE ESCOPADO POR FASE` · **Fase:** `F4 — APAC, Farmácia, Estoque e Documentação de Acesso` (`S-F4-01` a `S-F4-05`)  
@@ -7,7 +9,7 @@
 
 ---
 
-## 1. Escopo Entregue por Fatia
+## 1. Componentes implementados por fatia
 
 ### S-F4-01 — APAC Linear, Validação, SIGTAP Versionado e Prazos (`D85 / D90`)
 - `executarFluxoLinearApacF4` (`src/modules/apac/laudoAcessoJudicial.ts`) integra `apacGerar` (`FN-10`: exige `revisao: "ASSINADO"` e descarta qualquer tentativa de converter intenção clínica em finalidade APAC, respeitando `G-12`), `validarEmissaoApac` (`FN-11`), `apacPrazo` (`FN-12`: aviso único no `D85`, `VENCIDA` no `D90` impedindo faturamento sem jamais travar a consulta clínica) e `antiglosa` com referência SIGTAP versionada por competência (`corpus/f0c/sigtap/2026-09.json`).

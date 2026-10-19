@@ -62,6 +62,7 @@ export const AutorizacaoRespostaCanalServidor = z.object({
   contexto: ContextoRespostaCanal,
   consentimento: z.object({
     estado: z.literal("TERMO_ACEITO"),
+    eventoId: Id.optional(), // Legados são legíveis, mas exigem nova confirmação antes de enviar.
     referenciaTermo: Id,
     versaoTermo: Id,
     registradoEm: Instante,

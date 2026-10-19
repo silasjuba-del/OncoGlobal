@@ -470,7 +470,7 @@ export function classificarRelatoCanal(entrada: {
 function regraEstaConferida(regra: RegraAlarmeCanalEntrada): boolean {
   const status = regra.status.trim().toUpperCase();
   const fonteValida = regra.fonte.trim().length > 0 && !regra.fonte.includes("[VERIFICAR]");
-  return (status === "CONFERIDA_MEDICO" || status === "APROVADO" || status === "ATIVO") && fonteValida;
+  return (status === "CONFERIDA_MEDICO" || status === "APROVADO") && fonteValida;
 }
 
 /**

@@ -1,3 +1,4 @@
+import type { PropostaDoseReceita } from './propostaDoseReceita.js';
 import type { InvestigacaoConsultaVisao } from './investigacao.js';
 import type { LotesPacienteResposta } from './lotes.js';
 import type { RevisaoClinicaResposta } from '../fase2/revisaoClinica.js';
@@ -135,7 +136,7 @@ export interface ConsultaVisao {
   instrumentosClinicos?: readonly {instrumento:string;avaliacao:ResultadoInstrumento}[];
   resumoEvolucao?: string | null;
   historicoDocumentos?: readonly { eventId: string; documentId: string; documentVersion: number; titulo: string;
-    texto: string; assinadoEm: string; autorId: string; encounterId: string; tumorLotId: string | null }[];
+    liberacaoPendente?:string|undefined; texto: string; assinadoEm: string; autorId: string; encounterId: string; tumorLotId: string | null }[];
   hoje: string;
   patientId: string;
   encounterId: string;
@@ -355,6 +356,7 @@ export interface PortaConsulta {
   // [SERVIDOR_PENDENTE]
   agendaDoDia(): Promise<AgendaVisao>;
   // [SERVIDOR_PENDENTE]
+  proporDoseReceita?(contexto:{patientId:string;encounterId:string;tumorLotId:string|null},medicamento:string):Promise<readonly PropostaDoseReceita[]>;
   filaSalao(): Promise<SalaoVisao>;
   revisarRelatoInfusao?(entrada:{contexto:{patientId:string;encounterId:string;tumorLotId:string|null;operationId:string};mensagemId:string;payloadSha256:string;decisao:string}):Promise<unknown>;
   // [SERVIDOR_PENDENTE]

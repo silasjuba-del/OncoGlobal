@@ -1,3 +1,4 @@
+import { documentoReceitaDosePendente } from '../contracts/f1/receitaDose.js';
 import type { DatabaseSync } from "node:sqlite";
 import type { ActionIntent } from "../contracts/operacao.js";
 import type { z } from "zod";
@@ -57,6 +58,18 @@ export function autorizarSaida(db: DatabaseSync, intent: Intent, sigtapAtual?: (
     return sig?.documentId === intent.objeto.id && sig.documentVersion === intent.objeto.versao;
   });
   if (!assinado) return { ok: false, codigo: "ARTEFATO_NAO_ASSINADO" };
+  const corpo=dadosDoEvento(assinado)?.data;
+  if(documentoReceitaDosePendente(corpo))return {ok:false,codigo:'RECEITA_DOSE_PENDENTE'};
+  if(corpo&&typeof corpo==='object'&&'tipoDocumento' in corpo&&corpo.tipoDocumento==='FLASH_CONJUNTO_IMPRESSAO'){
+    const refs=(corpo as {documentosIncluidos?:unknown}).documentosIncluidos;
+    if(!Array.isArray(refs))return {ok:false,codigo:'CONJUNTO_INCOMPLETO'};
+    for(const ref of refs){
+      const filhos=vigentes.filter(e=>e.tipo==='DOCUMENTO'&&e.revisao==='ASSINADO'&&e.encounterId===assinado.encounterId&&e.tumorLotId===assinado.tumorLotId)
+        .map(e=>dadosDoEvento(e)?.data as Record<string,unknown>|undefined).filter(d=>d?.documentId===ref?.documentId&&d?.documentVersion===ref?.documentVersion);
+      if(filhos.length!==1||filhos[0]?.tipoDocumento==='FLASH_CONJUNTO_IMPRESSAO')return {ok:false,codigo:'CONJUNTO_INCOMPLETO'};
+      if(documentoReceitaDosePendente(filhos[0]))return {ok:false,codigo:'RECEITA_DOSE_PENDENTE'};
+    }
+  }
   // Validação de emissão APAC ainda não é persistida no ledger (pendência CP-001b): contenção explícita.
   if (intent.verbo === "EXPORTAR_APAC") return { ok: false, codigo: "VALIDACAO_APAC_NAO_PERSISTIDA" };
   return { ok: true };

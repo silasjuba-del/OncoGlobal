@@ -29,7 +29,7 @@ export const ConsultaResposta: z.ZodType<ConsultaIntegrada> = z.object({ hoje: D
   resumoEvolucao: Texto.nullable().default(null),
   historicoDocumentos: z.array(z.object({ eventId: Texto, documentId: Texto, titulo: Texto,
     documentVersion: z.number().int().positive(), tumorLotId: Texto.nullable(),
-    texto: Texto, assinadoEm: Texto, autorId: Texto, encounterId: Texto })).default([]),
+    liberacaoPendente:Texto.optional(), texto: Texto, assinadoEm: Texto, autorId: Texto, encounterId: Texto })).default([]),
   patientId: Texto, encounterId: Texto, tumorLotId: Texto.nullable(),
   cabecalho: z.object({ hoje: DataCivil, paciente: Paciente, lotes: z.array(TumorLot), loteSelecionadoId: Texto.nullable(),
     episodio: TreatmentEpisode.nullable(), ciclo: Ciclo.nullable(), semaforo: Semaforo, pendentes: Count,

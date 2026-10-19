@@ -1,3 +1,4 @@
+import { ReferenciaPropostaDose,type PropostaDoseReceita } from '../contracts/api/propostaDoseReceita.js';
 // W12-F4 · Consulta Flash no servidor: dados calculados do ledger e fechamento pelos caminhos existentes.
 // IA propõe, código calcula, médico decide e assina. Nenhum efeito externo aqui: só rascunhos no ledger local.
 import { createHash } from "node:crypto";
@@ -95,6 +96,7 @@ const ApacFlashEntrada = z.object({
 }).strict();
 
 export const PlanoFlashEntrada = z.object({
+  propostasDoseReceita:z.array(ReferenciaPropostaDose).max(50).refine(xs=>new Set(xs.map(x=>x.receitaId)).size===xs.length,'PROPOSTA_RECEITA_DUPLICADA').optional(),
   documentosManuais:z.array(z.object({id:z.string().regex(/^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,100}$/),tipo:z.enum(['ENCAMINHAMENTO','LAUDO','ORIENTACOES']),
     titulo:z.string().max(200),destino:z.string().max(200).nullable(),texto:z.string().max(8000)}).strict()).max(10).refine(v=>new Set(v.map(d=>d.id)).size===v.length,'DOCUMENTO_ID_DUPLICADO').optional(),
   propostasInvestigacao:z.array(z.object({exameCodigo:Id,contexto:Id,revisaoFatos:Id,referencia:VersaoReferencia}).strict()).max(50).optional(),
@@ -130,6 +132,7 @@ function planoParaVisao(plano: PlanoFlashEntradaTipo): PlanoFlash {
     ...(plano.documentosManuais===undefined?{}:{documentosManuais:plano.documentosManuais}),
     ...(plano.propostasInvestigacao===undefined?{}:{propostasInvestigacao:plano.propostasInvestigacao}),
     ...(plano.receitas===undefined?{}:{receitas:plano.receitas}),
+    ...(plano.propostasDoseReceita===undefined?{}:{propostasDoseReceita:plano.propostasDoseReceita}),
     retorno: { dias: plano.retorno.dias, examesAntesDoRetorno: plano.retorno.examesAntesDoRetorno,
       ...(plano.retorno.motivo !== undefined ? { motivo: plano.retorno.motivo } : {}) },
     ...(plano.tarefasRetorno !== undefined ? { tarefasRetorno: plano.tarefasRetorno } : {}),
@@ -142,6 +145,7 @@ export interface ContextoFlash { patientId: string; encounterId: string; tumorLo
 interface Resposta { status: number; body: Record<string, unknown>; preparacaoDocumentos?: DocumentosConsultaPreparados }
 /** Fonte/versão resolvidas pelo servidor; jamais desserializar esta porta a partir do HTTP. */
 export interface FonteDocumentosFlash {
+  propostasDoseReceita?:readonly PropostaDoseReceita[];
   indicacoesInvestigacao?:Readonly<Record<string,string>>;
   fonte: Fonte; dataReferencia: string; revisao: string;
   medicamentos?: NonNullable<EntradaDocumentosConsulta["decisao"]>["medicamentos"];
@@ -311,7 +315,7 @@ function prepararDocumentosFlash(db: DatabaseSync, agora: string, input: Context
     }
     for(const receita of preparacaoDocumentos.documentos.filter(d=>d.tipoDocumento==="RECEITA")) {
       const documentId=`flash-receita-${chave.slice(0,20)}`;
-      docs.push({documentId,titulo:receita.titulo,tipoDocumento:"FLASH_RECEITA",texto:receita.texto,extra:{fontes:receita.fontes,preparacaoS9:{revisao:fonteDocumentos.revisao,documentos:[{documentId:receita.documentId,documentHash:receita.documentHash,templateRef:receita.templateRef}]}}});
+      docs.push({documentId,titulo:receita.titulo,tipoDocumento:"FLASH_RECEITA",texto:receita.texto,extra:{propostasDoseReceita:fonteDocumentos.propostasDoseReceita??[],receitasSelecionadas:medicamentos.filter(m=>input.plano.receitasMarcadas.includes(m.id)),camposPendentes:receita.camposPendentes,fontes:receita.fontes,preparacaoS9:{revisao:fonteDocumentos.revisao,documentos:[{documentId:receita.documentId,documentHash:receita.documentHash,templateRef:receita.templateRef}]}}});
       mapaDocumentos.set(receita.documentId,documentId);
     }
     const tarefas:ReferenciaTarefaRetorno[]=preparacaoDocumentos.tarefas.flatMap(t=>{

@@ -1,4 +1,6 @@
-# Relatório de Fechamento Técnico — Fase F3 (Salão de Quimioterapia)
+# Inventário técnico parcial — Fase F3 (Salão de Quimioterapia)
+
+> Situação revisada em 2026-10-19: **INTEGRAÇÃO PENDENTE — fase não encerrada**. O conteúdo abaixo registra componentes e testes do snapshot `0b00a40`; não comprova funcionamento integral no atendimento. I07: adiamento e nutrição ainda não têm efeitos completos sobre agenda, recepção e farmácia. Marcadores retornados por funções não comprovam tarefas atribuídas, prazos ou bolsa a recolher. Ver [consolidação](reviews/CONSOLIDACAO-RECEITA-2026-10-19.md) e [auditoria 9X–12X](reviews/AUDITORIA-9X-12X-2026-10-19.md).
 
 **Data:** 2026-10-19  
 **Modalidade:** `GO_CODE ESCOPADO POR FASE` · **Fase:** `F3 — Salão: Triagem, Fila, Aplicação e Dose` (`S-F3-01` a `S-F3-04`)  
@@ -7,7 +9,7 @@
 
 ---
 
-## 1. Escopo Entregue por Fatia
+## 1. Componentes implementados por fatia
 
 ### S-F3-01 — Triagem na Interface e Regras Existentes
 - Reutilização integral de `avaliarTriagem`, `validadeHemograma`, `avaliarCorteSalao` (`src/rules/triagem.ts`), `lerTriagens`/`lerSalao` (`src/server/leituras.ts`) e `TelaSalao`/`FormTriagem` (`src/ui/telas/TelaSalao.tsx`).

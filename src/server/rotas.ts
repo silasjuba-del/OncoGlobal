@@ -1,3 +1,5 @@
+import { nomeMedicamento } from './propostasDoseReceita.js';
+import { documentoReceitaDosePendente } from '../contracts/f1/receitaDose.js';
 import { PrescriptionItem, ProtocolTemplate } from "../contracts/w10/prescricao.js";
 import {LotesPacientePedido,LotesPacienteResposta} from '../contracts/api/lotes.js';
 import { respostaHttpValida } from "../contracts/api/saidasHttp.js";
@@ -255,6 +257,22 @@ function confirmarBloco(deps: ServidorDeps, token: string, input: Confirmar): { 
     return kind === "EXTRACAO_RASCUNHO" || kind === "PRESCRICAO_RASCUNHO" || kind === "EVOLUCAO_RASCUNHO"
       || kind === "FLASH_RASCUNHO" || kind === "FLASH_APAC_RASCUNHO";
   })) return { status: 409, body: { codigo: "DRAFT_AINDA_RASCUNHO" } };
+  for(const draft of drafts){
+    const corpo=draft!.payload as {propostasDoseReceita?:{id:string;hashProposta:string;fonte:{hash:string}}[]};
+    if(corpo.propostasDoseReceita?.some(p=>!(deps.corpus?.propostasDoseReceita??[]).some(c=>c.id===p.id&&c.hashProposta===p.hashProposta&&c.fonte.hash===p.fonte.hash)))
+      return {status:409,body:{codigo:'PROPOSTA_DOSE_DESATUALIZADA'}};
+  }
+  for(const draft of drafts){
+    const d=draft!.payload as {tipoDocumento?:string;documentosIncluidos?:{documentId:string;documentVersion:number}[]};
+    if(d.tipoDocumento==='FLASH_CONJUNTO_IMPRESSAO'&&Array.isArray(d.documentosIncluidos)){
+      for(const ref of d.documentosIncluidos){
+        const filho=lerDraft(deps.db,ref.documentId);
+        if(filho&&documentoReceitaDosePendente(filho.payload))return {status:409,body:{codigo:'RECEITA_DOSE_PENDENTE'}};
+      }
+    }
+  }
+  if(drafts.some(d=>documentoReceitaDosePendente(d!.payload)))
+    return {status:409,body:{codigo:'RECEITA_DOSE_PENDENTE'}};
   const consulta = deps.sessoes.consultaSelecionada(token);
   if (consulta && (consulta.patientId !== contexto.patientId || consulta.encounterId !== contexto.encounterId
     || (consulta.tumorLotId ?? null) !== contexto.tumorLotId))
@@ -356,6 +374,7 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
   const rota = req.url === "/login" ? "login"
     : req.url === "/consulta/ditado" ? "ditado"
     : req.url === "/consulta/bundle" ? "bundle"
+      : req.url === "/consulta/receita/propor-dose" ? "proporDoseReceita"
       : req.url === "/consulta/confirmar" ? "confirmar"
         : req.url === "/consulta/medicamentos/reconciliar" ? "reconciliarMedicamentos"
         : req.url === "/consulta/oncoassist/sintese" ? "sinteseRetratoLlm"
@@ -435,6 +454,13 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
     if(rota === "sinteseRetratoLlm"){const result=await executarSinteseRetratoLlm(raw,token,deps);return reply(result.status,String(result.body.codigo),result.body);}
     if(rota === "documentoOriginalLlm"){const result=await executarDocumentoOriginalLlm(raw,token,deps);return reply(result.status,String(result.body.codigo),result.body);}
     const estadoDoenca=rotearEstadoDoenca(deps,token,rota,raw);if(estadoDoenca)return reply(estadoDoenca.status,String(estadoDoenca.body.codigo),estadoDoenca.body);
+    if(rota==='proporDoseReceita'){
+      const p=z.object({patientId:Id,encounterId:Id,tumorLotId:Id.nullable(),medicamento:z.string().trim().min(1).max(300)}).strict().safeParse(raw);
+      if(!p.success)return reply(400,'PAYLOAD_INVALIDO');
+      const c=deps.sessoes.consultaSelecionada(token);
+      if(!c||c.patientId!==p.data.patientId||c.encounterId!==p.data.encounterId||(c.tumorLotId??null)!==p.data.tumorLotId)return reply(409,'CONTEXTO_CONSULTA_ALTERADO');
+      return reply(200,'PROPOSTAS_DOSE',{propostas:(deps.corpus?.propostasDoseReceita??[]).filter(x=>nomeMedicamento(x.medicamento)===nomeMedicamento(p.data.medicamento)),autorizaTratamento:false});
+    }
     if(rota === "revisaoClinica"){
       const p=z.object({patientId:Id,encounterId:Id,tumorLotId:Id.nullable(),packId:Id.optional()}).strict().safeParse(raw);
       if(!p.success)return reply(400,"PAYLOAD_INVALIDO");
@@ -1213,7 +1239,16 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
       if ("idempotencyKey" in parsed.data && cadastros.length !== 1)
         return reply(409,cadastros.length ? "IDENTIDADE_PACIENTE_AMBIGUA" : "IDENTIDADE_PACIENTE_AUSENTE");
       const identidadePaciente=cadastros[0];
-      const fonteS9={...(Object.keys(indicacoesInvestigacao).length?{indicacoesInvestigacao}:{}),...(identidadePaciente?{identidadePaciente}:{}),identidadeResponsavel:{medicoId:sessao.medicoId,crm:sessao.crm},medicamentos:parsed.data.plano.receitas??[],fonte:{sourceId:sourceIdS9,classe:"MANUAL" as const,localizador:resumoRef,
+      const propostasDose=[];
+      for(const ref of parsed.data.plano.propostasDoseReceita??[]){
+        // Minuta conserva sua proveniência mesmo se a fonte mudou; só a promoção exige revalidação.
+        if('expectedRevision' in parsed.data||!parsed.data.plano.receitasMarcadas.includes(ref.receitaId))continue;
+        const receita=parsed.data.plano.receitas?.find(r=>r.id===ref.receitaId);
+        const candidato=deps.corpus?.propostasDoseReceita?.find(p=>p.id===ref.propostaId&&p.fonte.hash===ref.hashFonte&&p.hashProposta===ref.hashProposta);
+        if(!receita||!candidato||nomeMedicamento(receita.medicamento)!==nomeMedicamento(candidato.medicamento))return reply(409,'PROPOSTA_DOSE_DESATUALIZADA');
+        if(parsed.data.plano.receitasMarcadas.includes(ref.receitaId))propostasDose.push(candidato);
+      }
+      const fonteS9={propostasDoseReceita:propostasDose,...(Object.keys(indicacoesInvestigacao).length?{indicacoesInvestigacao}:{}),...(identidadePaciente?{identidadePaciente}:{}),identidadeResponsavel:{medicoId:sessao.medicoId,crm:sessao.crm},medicamentos:parsed.data.plano.receitas??[],fonte:{sourceId:sourceIdS9,classe:"MANUAL" as const,localizador:resumoRef,
         dataClinica:civilS9.dataCivil,dataCaptura:capturadoEm,versao:"s9-flash@1",contentHash:hashDecisao},
         dataReferencia:civilS9.dataCivil,revisao:revisaoS9};
       const result = "expectedRevision" in parsed.data

@@ -1,4 +1,6 @@
-# Relatório de Fechamento Técnico — Fase F6 (Multiusuário, RBAC por Setor, Avisos sem PHI, Estatísticas e Isolamento WORK × STUDY)
+# Inventário técnico parcial — Fase F6 (Multiusuário, RBAC por Setor, Avisos sem PHI, Estatísticas e Isolamento WORK × STUDY)
+
+> Situação revisada em 2026-10-19: **INTEGRAÇÃO PENDENTE — fase não encerrada**. O conteúdo abaixo registra componentes e testes do snapshot `0b00a40`; não comprova funcionamento integral no atendimento. I06 e STUDY: faltam identidade multiusuário e permissões por pessoa nas rotas reais, além da exclusão de STUDY nas contagens e jornadas operacionais. Helpers testados não comprovam isolamento completo. Ver [consolidação](reviews/CONSOLIDACAO-RECEITA-2026-10-19.md) e [auditoria 9X–12X](reviews/AUDITORIA-9X-12X-2026-10-19.md).
 
 **Data:** 2026-10-19  
 **Modalidade:** `GO_CODE ESCOPADO POR FASE` · **Fase:** `F6 — Multiusuário e Setores`  
@@ -7,7 +9,7 @@
 
 ---
 
-## 1. Escopo Entregue
+## 1. Componentes implementados
 
 ### 1.1 Controle de Acesso por Profissional e Setor no Servidor (`RBAC`, `Q40`, `D-F1-13`)
 - Contrato estrito `SessaoProfissionalSetorF6` (`src/contracts/f6/multiusuarioSetores.ts`) separando `MEDICO`, `ENFERMAGEM_SALAO`, `FARMACIA` e `SECRETARIA_FATURAMENTO`.

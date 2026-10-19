@@ -1,6 +1,8 @@
+import { doseReceitaPendente } from '../../contracts/f1/receitaDose.js';
+import type { PropostaDoseReceita } from '../../contracts/api/propostaDoseReceita.js';
 import type { SituacaoExame, ExameRecenteFlash, ItemFlash, EstadoApacFlash, ApacFlash, RetornoFlash, TarefasRetornoFlash, ConsultaFlashProps, PlanoFlash,ReceitaManualFlash,DocumentoManualFlash } from '../../contracts/api/flash.js';
 export type { SituacaoExame, ExameRecenteFlash, ItemFlash, EstadoApacFlash, ApacFlash, RetornoFlash, TarefasRetornoFlash, ConsultaFlashProps, PlanoFlash } from '../../contracts/api/flash.js';
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { marcadoInicialmente } from "./Bundle.js";
 import type { MarcacaoTarefasRetorno } from "./TarefasRetorno.js";
 // @ts-expect-error folha CSS pura, resolvida pelo Vite
@@ -27,7 +29,7 @@ const RAD = ["TC tórax", "TC abdome superior", "TC abdome inferior", "Cintilogr
 const presente = (v?: string) => v?.trim() || "PENDENTE";
 const limparOutros = (v: string) => v.split(";").map(x => x.trim()).filter(Boolean);
 const situacao = { DENTRO_DO_LIMITE: "dentro do limite", FORA_DO_LIMITE: "fora do limite", SEM_REFERENCIA: "sem referência" };
-type ReceitaEmEdicao = { conteudo: ReceitaManualFlash; incluir: boolean; persistida: boolean };
+type ReceitaEmEdicao = { conteudo: ReceitaManualFlash; incluir: boolean; persistida: boolean; referencia?:undefined|NonNullable<PlanoFlash["propostasDoseReceita"]>[number]; proposta?:PropostaDoseReceita|undefined; candidatos?:readonly PropostaDoseReceita[]; aviso?:string|undefined };
 const novaReceita = (): ReceitaEmEdicao => ({ conteudo: { id: `receita-manual-${crypto.randomUUID()}`,
   medicamento: "", dose: null, orientacao: null, duracao: null, via: null, quantidade: null }, incluir: false, persistida: false });
 const camposReceita = [["medicamento", "Medicamento"], ["dose", "Dose"], ["orientacao", "Orientação / posologia"],
@@ -47,8 +49,39 @@ export function ConsultaFlash(props: ConsultaFlashProps) {
   const [data, setData] = useState(inicial?.decisaoQt?.data ?? props.hoje ?? "");
   const [prazo, setPrazo] = useState(() => { const d = inicial ? inicial.retorno.dias : props.retorno.dias; return d == null ? "" : String(d); });
   const [receitas, setReceitas] = useState<ReceitaEmEdicao[]>(() => inicial?.receitas?.length
-    ? inicial.receitas.map(conteudo => ({ conteudo: { ...conteudo }, incluir: inicial.receitasMarcadas.includes(conteudo.id), persistida: true }))
+    ? inicial.receitas.map(conteudo => ({ conteudo: { ...conteudo }, incluir: inicial.receitasMarcadas.includes(conteudo.id), persistida: true, ...(inicial.propostasDoseReceita?.find(p=>p.receitaId===conteudo.id)?{referencia:inicial.propostasDoseReceita.find(p=>p.receitaId===conteudo.id)!}:{}) }))
     : [novaReceita()]);
+  const consultasDose=useRef(new Map<string,number>());
+  useEffect(()=>()=>{consultasDose.current.clear();},[]);
+  function aplicarProposta(item:ReceitaEmEdicao,p:PropostaDoseReceita):ReceitaEmEdicao {
+    const anterior=item.proposta??item.candidatos?.find(c=>c.id===item.referencia?.propostaId&&c.hashProposta===item.referencia.hashProposta&&c.fonte.hash===item.referencia.hashFonte);
+    if(item.referencia&&!anterior)return {...item,aviso:'Fonte anterior indisponível. Para usar outra proposta, confirme a substituição dos campos abaixo.'};
+    const conteudo={...item.conteudo};
+    const preservados:string[]=[];
+    for(const campo of ['dose','via','orientacao','duracao'] as const){
+      const atual=conteudo[campo];
+      if(atual===null||doseReceitaPendente(atual)||anterior&&atual===anterior[campo])conteudo[campo]=p[campo];
+      else preservados.push(campo);
+    }
+    return {...item,proposta:p,candidatos:[],aviso:'Dose proposta. Valide indicação, dose e posologia na revisão para assinatura.',
+      referencia:{receitaId:item.conteudo.id,propostaId:p.id,hashFonte:p.fonte.hash,hashProposta:p.hashProposta},
+      ...(preservados.length?{aviso:`Edição médica preservada (${preservados.join(', ')}). Confira a diferença em relação à proposta antes de assinar.`}:{}),conteudo};
+  }
+  async function proporDose(item:ReceitaEmEdicao){
+    if(!props.aoProporDose||!item.conteudo.medicamento.trim())return;
+    const id=item.conteudo.id,numero=(consultasDose.current.get(id)??0)+1,original=JSON.stringify(item.conteudo);
+    consultasDose.current.set(id,numero);
+    try{
+      const candidatos=await props.aoProporDose(item.conteudo.medicamento);
+      if(consultasDose.current.get(id)!==numero)return;
+      setReceitas(atuais=>atuais.map(r=>{
+        if(r.conteudo.id!==id||JSON.stringify(r.conteudo)!==original)return r;
+        if(candidatos.length===1&&doseReceitaPendente(r.conteudo.dose))return aplicarProposta({...r,candidatos},candidatos[0]!);
+        return {...r,candidatos,aviso:candidatos.length?'Confira a indicação e escolha a proposta documental.':'Dose documental elegível não localizada. Preenchimento médico permanece disponível.'};
+      }));
+    }catch{if(consultasDose.current.get(id)===numero)setReceitas(atuais=>atuais.map(r=>r.conteudo.id===id?{...r,aviso:'Biblioteca indisponível; mantenha o rascunho ou preencha a dose documentada.'}:r));}
+  }
+  const dosePendente=receitas.some(r=>r.incluir&&doseReceitaPendente(r.conteudo.dose));
   const dias = prazo.trim() === "" ? null : Number(prazo);
   const prazoInvalido = dias !== null && (!Number.isInteger(dias) || dias < 1 || dias > 3650);
   const receitaInvalida = receitas.some(r => !r.conteudo.medicamento.trim()
@@ -61,6 +94,7 @@ export function ConsultaFlash(props: ConsultaFlashProps) {
     return { acoesMarcadas: [], receitasMarcadas: preenchidas.filter(r => r.incluir).map(r => r.conteudo.id),
       ...(documentos.length?{documentosManuais:documentos}:{}),
       ...(inicial?.propostasInvestigacao?{propostasInvestigacao:inicial.propostasInvestigacao.filter(p=>[...laboratorio,...imagem].includes(p.exameCodigo))}:{}),
+      ...(preenchidas.some(r=>r.referencia)?{propostasDoseReceita:preenchidas.flatMap(r=>r.referencia?[r.referencia]:[])}:{}),
       ...(preenchidas.length ? { receitas: preenchidas.map(r => ({ ...r.conteudo, medicamento: r.conteudo.medicamento.trim() })) } : {}),
       apac: { ...props.apac, emitir: false },
       retorno: { ...props.retorno, dias: invalido ? null : dias, examesAntesDoRetorno: [...laboratorio, ...imagem] },
@@ -108,14 +142,22 @@ export function ConsultaFlash(props: ConsultaFlashProps) {
           <div className="flash-receita-campos">{camposReceita.map(([campo, rotulo]) =>
             <label className="flash-outros" key={campo}>{rotulo}<input type="text"
               aria-label={`${rotulo} da receita${indice ? ` ${indice + 1}` : ""}`} maxLength={campo === "orientacao" ? 2000 : 300}
-              value={item.conteudo[campo] ?? ""} onChange={e => {
+              value={item.conteudo[campo] ?? ""} onBlur={campo==='medicamento'?()=>void proporDose(item):undefined} onChange={e => {
                 const valor = campo === "medicamento" ? e.target.value : e.target.value.trim() ? e.target.value : null;
                 setReceitas(atuais => atuais.map(r => r.conteudo.id === item.conteudo.id
-                  ? { ...r, conteudo: { ...r.conteudo, [campo]: valor } } : r));
+                  ? { ...r, ...(campo==='medicamento'?{referencia:undefined,proposta:undefined,candidatos:[],aviso:r.referencia?'Medicamento alterado: complete ou proponha novamente dose e posologia.':undefined}:{}), conteudo: { ...r.conteudo,
+                    ...(campo==='medicamento'&&r.referencia?{dose:null,via:null,orientacao:null,duracao:null,quantidade:null}:{}),[campo]: valor } } : r));
               }} /></label>)}</div>
+          {item.aviso?<p role="status">{item.aviso}</p>:null}
+          {item.candidatos?.map(p=><button type="button" key={p.id} onClick={()=>setReceitas(atuais=>atuais.map(r=>r.conteudo.id===item.conteudo.id?aplicarProposta(r,p):r))}>Usar proposta: {p.indicacao} · {p.dose} · {p.via}</button>)}
+          {item.referencia&&!item.proposta&&!item.candidatos?.some(p=>p.id===item.referencia?.propostaId&&p.hashProposta===item.referencia.hashProposta&&p.fonte.hash===item.referencia.hashFonte)
+            ?item.candidatos?.map(p=><button type="button" key={`substituir-${p.id}`} onClick={()=>setReceitas(atuais=>atuais.map(r=>r.conteudo.id===item.conteudo.id?aplicarProposta({...r,referencia:undefined,conteudo:{...r.conteudo,dose:null,via:null,orientacao:null,duracao:null}},p):r))}>Substituir campos pela nova proposta: {p.indicacao}</button>):null}
+          {item.proposta?<details><summary>Fonte e contexto da dose proposta</summary><p>{item.proposta.indicacao}</p>
+            <p>{item.proposta.fonte.referencia} · versão {item.proposta.fonte.versao} · {item.proposta.fonte.curadoria}</p>
+            <blockquote>{item.proposta.fonte.trecho}</blockquote><ul>{item.proposta.restricoes.map((r,i)=><li key={i}>{r}</li>)}</ul></details>:null}
         </section>)}
         <button type="button" onClick={() => setReceitas(atuais => [...atuais, novaReceita()])}>Adicionar medicamento</button>
-        <small>Campos vazios continuam não informados. Dose, via e quantidade não são completadas automaticamente.</small>
+        <small>Ao sair do campo Medicamento, a biblioteca pode propor dose com fonte. Havendo alternativas, escolha a indicação. Toda proposta aguarda validação médica antes da assinatura.</small>
       </fieldset>
       <details><summary>Encaminhamentos, laudos e orientações</summary>
         <fieldset disabled={props.ocupado}><legend>Documentos médicos</legend>
@@ -135,7 +177,8 @@ export function ConsultaFlash(props: ConsultaFlashProps) {
         </fieldset>
       </details>
     </div>
-    <footer className="flash-rodape"><label>Retorno em <input type="number" aria-label="Prazo do retorno em dias" min={1} max={3650} value={prazo} disabled={props.ocupado} aria-invalid={invalido} onChange={e => setPrazo(e.target.value)} /> dias</label><div><button type="button" disabled={props.ocupado || invalido} onClick={() => props.aoSalvarRascunho(plano())}>SALVAR RASCUNHO</button><button type="button" disabled={props.ocupado || invalido || documentoInvalido} onClick={() => props.aoFinalizar(plano())}>{props.rotuloFinalizar ?? "REVISAR · IMPRIMIR"}</button></div></footer>
+    <footer className="flash-rodape"><label>Retorno em <input type="number" aria-label="Prazo do retorno em dias" min={1} max={3650} value={prazo} disabled={props.ocupado} aria-invalid={invalido} onChange={e => setPrazo(e.target.value)} /> dias</label><div><button type="button" disabled={props.ocupado || invalido} onClick={() => props.aoSalvarRascunho(plano())}>SALVAR RASCUNHO</button><button type="button" disabled={props.ocupado || invalido || documentoInvalido || dosePendente} onClick={() => props.aoFinalizar(plano())}>{props.rotuloFinalizar ?? "REVISAR · IMPRIMIR"}</button></div></footer>
+    {dosePendente&&<p role="status">Dose pendente: a receita permanece em rascunho. Complete e valide a dose antes de assinar.</p>}
     {prazoInvalido && <p role="alert">Informe um número inteiro entre 1 e 3650 dias, ou deixe vazio para PENDENTE.</p>}
     {receitaInvalida && <p role="alert">Informe o medicamento ou remova a linha para continuar. Os outros campos serão preservados.</p>}
     {documentoInvalido&&<p role="status">Documento incompleto: pode salvar o rascunho; complete título, conteúdo e destino antes da revisão para assinatura.</p>}

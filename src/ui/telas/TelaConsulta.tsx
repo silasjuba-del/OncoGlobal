@@ -1,3 +1,5 @@
+import { documentoReceitaDosePendente } from '../../contracts/f1/receitaDose.js';
+import { FontesDoseReceita } from '../consulta/FontesDoseReceita.js';
 import { useEffect, useMemo, useRef, useState } from "react";
 import { BannerE1 } from "../consulta/BannerE1.js";
 import { BarraFechamento } from "../consulta/BarraFechamento.js";
@@ -342,8 +344,8 @@ export function TelaConsulta({
       {avisoFlash ? <p className="oc-flash-status" role="status" aria-label="status da Consulta Flash">{avisoFlash}</p> : null}
       {previewFlash ? <section aria-label="Revisão dos documentos Flash">
         {previewFlash.documentos.map((d) => <article key={d.documentId}><h3>{d.titulo}</h3>
-          <pre style={{ whiteSpace: "pre-wrap" }}>{d.texto}</pre></article>)}
-        <button type="button" disabled={flashOcupado} onClick={confirmarFlashExibida}>CONFIRMAR E IMPRIMIR</button>
+          <pre style={{ whiteSpace: "pre-wrap" }}>{d.texto}</pre><FontesDoseReceita propostas={d.propostasDoseReceita??[]}/></article>)}
+        <button type="button" disabled={flashOcupado||previewFlash.documentos.some(d=>documentoReceitaDosePendente({tipoDocumento:"FLASH_CONJUNTO_IMPRESSAO",texto:d.texto}))} onClick={confirmarFlashExibida}>CONFIRMAR E IMPRIMIR</button>
         <button type="button" disabled={flashOcupado} onClick={() => setPreviewFlash(null)}>Continuar sem assinar</button>
       </section> : null}
       {fonteAberta ? <p className="oc-flash-status" role="status">fonte: {fonteAberta}</p> : null}
@@ -599,6 +601,7 @@ export function TelaConsulta({
         <OverlayFlash
           flash={{
             ...montarPropsFlash(visao, chart, finalizarFlash, salvarRascunhoFlash),
+            ...(porta.proporDoseReceita?{aoProporDose:(medicamento:string)=>porta.proporDoseReceita!(contextoFlash,medicamento)}:{}),
             ocupado: flashOcupado,
           }}
           erro={flashErro}

@@ -11,6 +11,7 @@ import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { tmpdir } from "node:os";
 import { createServer as createViteServer } from "vite";
+import { jornadaReceitaNoNavegador } from './browser-receita.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
 const MANIFEST = JSON.parse(readFileSync(join(ROOT, "corpus/manifesto/b2-fichas.v1.json"), "utf8"));
@@ -319,6 +320,12 @@ async function main() {
     const qtd = await historico.locator("article").count();
     // Histórico vazio comprova somente a leitura da região após reinício, não persistência de propostas ou assinatura.
     log({ prova: "REINICIO_MESMO_SQLITE", dir: demoDir, documentosHistorico: qtd, historicoConsultado: true });
+    const {lerPropostasDoseReceita}=await viteDev.ssrLoadModule('/src/server/propostasDoseReceita.ts');
+    mod2.corpusCompartilhadoDemoB2.propostasDoseReceita.splice(0,mod2.corpusCompartilhadoDemoB2.propostasDoseReceita.length,...lerPropostasDoseReceita(JSON.stringify({header:{versao:'sintetica-navegador'},consultavel:true,status:'RASCUNHO',itens:[{id:'rx-sintetica-navegador',droga:'Medicamento sintético navegador',dose:'25',unidade:'mg',indicacao:'Teste sintético',controle344:{lista:'comum'},nota:'Condição sintética preservada',fonte:{estado:'VERIFICADO',referencia:'Fonte sintética navegador',trecho:'Trecho exclusivamente sintético'}}]})));
+    const {listarEventos}=await viteDev.ssrLoadModule('/src/kernel/ledger/ledger.ts');
+    const receita=await jornadaReceitaNoNavegador(page2,{senha:manifesto2.senhaDemo,encounterId:manifesto2.b2.encounterId,
+      lerAssinados:()=>listarEventos(demo.app.db,manifesto2.b2.patientId).filter(e=>e.tipo==='DOCUMENTO'&&e.revisao==='ASSINADO')});
+    log({prova:'RECEITA_PROPOSTA_VALIDACAO_MEDICA',...receita});
     writeFileSync(join(evidenceDir, "resumo.json"), JSON.stringify({ manifesto: manifesto2, familias: FAMILIAS_B2, resultado, reinicio: { documentosHistorico: qtd, propostasReabertas } }, null, 2));
     await demo.app.close();
   } finally {

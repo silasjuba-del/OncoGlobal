@@ -46,6 +46,11 @@ function sha256(texto: string): string {
   return createHash("sha256").update(texto, "utf8").digest("hex");
 }
 
+function eventoConsentimentoAtual(db:DatabaseSync,contatoId:string):string|null {
+  const row=db.prepare('SELECT eventoId FROM canal_consentimento_evento WHERE contatoId=? ORDER BY rowid DESC LIMIT 1').get(contatoId) as {eventoId:string}|undefined;
+  return row?.eventoId??null;
+}
+
 function garantirTabelasS03(db: DatabaseSync): void {
   garantirSchema(db);
   db.exec(`
@@ -427,6 +432,7 @@ export function confirmarRespostaCanalPeloMedico(
         contexto: rascunho.contexto,
         consentimento: {
           estado: "TERMO_ACEITO",
+          eventoId: eventoConsentimentoAtual(db,rascunho.contatoId)!,
           referenciaTermo: consentimento.referenciaTermo,
           versaoTermo: consentimento.versaoTermo,
           registradoEm: consentimento.registradoEm,
@@ -641,6 +647,11 @@ export function revalidarAutorizacaoSaidaCanalNoLedger(
       ? "ORIENTACAO_GERAL"
       : "COMUNICACAO_CLINICA";
     if (consentimentoAtual.estado !== "TERMO_ACEITO"
+      || !aut.consentimento.eventoId
+      || eventoConsentimentoAtual(db,aut.contatoId) !== aut.consentimento.eventoId
+      || consentimentoAtual.referenciaTermo !== aut.consentimento.referenciaTermo
+      || consentimentoAtual.versaoTermo !== aut.consentimento.versaoTermo
+      || consentimentoAtual.registradoEm !== aut.consentimento.registradoEm
       || (consentimentoAtual.patientId !== null && consentimentoAtual.patientId !== aut.contexto.patientId)
       || (!consentimentoAtual.finalidade.includes(finalidadeExigida) && !consentimentoAtual.finalidade.includes("COMUNICACAO_CLINICA"))) {
       return { ok: false, codigo: "CONSENTIMENTO_REVOGADO_OU_AUSENTE" };
@@ -731,6 +742,7 @@ export async function executarEnvioAutorizadoCanal(
 
   let autorizacaoRevalidadaPosAsync: AutorizacaoRespostaCanalServidor | null = null;
 
+  let reciboAnteriorReutilizado=false;
   const gateway = criarGateway({
     agora: () => acesso.agora,
     store: sqliteIdempotencia(db),
@@ -806,6 +818,8 @@ export async function executarEnvioAutorizadoCanal(
       [autInicial.verboPermitido]: {
         executar: async () => {
           const vigente = autorizacaoRevalidadaPosAsync ?? autInicial;
+          const anterior=db.prepare('SELECT reciboGateway FROM canal_resposta_envio WHERE respostaId=? AND versao=?').get(vigente.respostaId,vigente.versao) as {reciboGateway:string}|undefined;
+          if(anterior){reciboAnteriorReutilizado=true;return {ok:true,recibo:anterior.reciboGateway};}
           const res = await opcoes.transporteSaida({
             canal: vigente.canal,
             accountId: vigente.accountId,
@@ -821,7 +835,11 @@ export async function executarEnvioAutorizadoCanal(
     },
   });
 
-  const resultadoGateway = await gateway.executar(opcoes.intent, sessao);
+  // Reserva durável do gateway pela operação clínica, não pela chave de tentativa do cliente.
+  const chaveEnvio=`canal-envio-${sha256(JSON.stringify([autInicial.respostaId,autInicial.versao]))}`;
+  const executado = await gateway.executar({...opcoes.intent,idempotencyKey:chaveEnvio}, sessao);
+  const resultadoGateway:ResultadoGateway=reciboAnteriorReutilizado&&executado.decisao==='EXECUTADA'
+    ?{...executado,decisao:'REPLAY'}:executado;
 
   if (resultadoGateway.decisao === "EXECUTADA" || resultadoGateway.decisao === "REPLAY") {
     transacao(db, () => {
@@ -840,7 +858,7 @@ export async function executarEnvioAutorizadoCanal(
       db.prepare(`
         INSERT INTO canal_recibo_tecnico (reciboTecnicoId, accountId, providerMessageId, statusRecibo, ocorreuEm, ingestedAt, payloadSha256)
         VALUES (?, ?, ?, 'ENVIADA', ?, ?, ?)
-        ON CONFLICT(accountId, providerMessageId, statusRecibo, ocorreuEm) DO NOTHING
+        ON CONFLICT DO NOTHING
       `).run(
         `recibo-envio-${autInicial.respostaId}-v${autInicial.versao}`,
         autInicial.accountId,

@@ -1,3 +1,4 @@
+import { documentoReceitaDosePendente } from '../../contracts/f1/receitaDose.js';
 import { createHash } from "node:crypto";
 import type { DatabaseSync } from "node:sqlite";
 import { Paciente } from "../../contracts/clinico.js";
@@ -28,6 +29,7 @@ export function criarResolverDocumentoLedger(db: DatabaseSync): ResolverDocument
     const candidatos = validos.filter(v=>v.corpo.documentId === id && v.corpo.documentVersion === version);
     if (candidatos.length !== 1) return null;
     const {e,corpo} = candidatos[0]!;
+    if(documentoReceitaDosePendente(corpo))return null;
     if (corpo.tipoDocumento === "FLASH_CONJUNTO_IMPRESSAO") {
       if (!Array.isArray(corpo.documentosIncluidos) || !corpo.documentosIncluidos.length) return null;
       const textos: string[] = [], ids = new Set<string>();
@@ -39,6 +41,7 @@ export function criarResolverDocumentoLedger(db: DatabaseSync): ResolverDocument
           && c.e.patientId === e.patientId && c.e.encounterId === e.encounterId && c.e.tumorLotId === e.tumorLotId);
         if (encontrados.length !== 1) return null;
         const item = encontrados[0]!.corpo;
+        if(documentoReceitaDosePendente(item))return null;
         if (item.tipoDocumento === "FLASH_CONJUNTO_IMPRESSAO" || item.titulo !== ref.titulo) return null;
         textos.push(`${String(item.titulo)}\n${String(item.texto)}`);
       }

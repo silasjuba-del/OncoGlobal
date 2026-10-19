@@ -1,3 +1,4 @@
+import { PropostasDoseReceitaResposta } from './propostaDoseReceita.js';
 import { z } from "zod";
 import {DitadoResposta} from '../fase2/ditado.js';
 import { RevisaoClinicaResposta } from '../fase2/revisaoClinica.js';
@@ -39,6 +40,7 @@ export const SaidasHttp: Readonly<Record<string, z.ZodType>> = {
   avaliarInstrumento: z.object({ resultado: ResultadoInstrumentoSchema, gravado: z.literal(false), assinado: z.literal(false) }),
   oncoassistStatus: EstadoOncoassist, oncoassistFontes: FontesOncoassist, oncoassistClassificar: RespostaOncoassist,
   sinteseRetratoLlm: SintesePropostaResposta, reconciliarRascunhos: ReconciliacaoProposta, prepararRevisao: RevisaoPreparada,
+  proporDoseReceita: PropostasDoseReceitaResposta,
   rascunhoFlash: FlashRascunhoResposta, prepararFlash: FlashPreparadaResposta,
   selecionarContexto: z.object({ codigo: z.literal("CONTEXTO_SELECIONADO") }),
   reconciliarMedicamentos: Gravacao,

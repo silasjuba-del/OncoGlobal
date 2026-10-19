@@ -1,3 +1,4 @@
+import { PropostasDoseReceitaResposta } from '../../contracts/api/propostaDoseReceita.js';
 import { InvestigacaoConsultaVisao } from '../../contracts/api/investigacao.js';
 import { RevisaoClinicaResposta } from '../../contracts/fase2/revisaoClinica.js';
 import { EstadoDoencaPreparado } from '../../contracts/fase2/estadoDoenca.js';
@@ -289,6 +290,9 @@ export function criarPortaHttp(opcoes: OpcoesHttp): PortaConsulta {
       const {status,json}=await enviar('/salao/revisar-relato-canal',entrada,true);
       if(status!==200)throw new ErroPorta(codigoDe(json,'REVISAO_NAO_GRAVADA'));
       return json;
+    },
+    async proporDoseReceita(contexto,medicamento){
+      return (await leitura('/consulta/receita/propor-dose',{...contexto,medicamento},PropostasDoseReceitaResposta)).propostas;
     },
     async filaSalao() {
       return leitura("/consulta/salao", {}, SalaoResposta);

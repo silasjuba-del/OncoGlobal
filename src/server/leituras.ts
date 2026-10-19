@@ -1,3 +1,4 @@
+import { documentoReceitaDosePendente } from '../contracts/f1/receitaDose.js';
 import { avisosAdministracoesLegadasF3 } from './salaoF3.js';
 import { relatosInfusaoPendentes } from './relatosInfusaoCanal.js';
 import { validarPayloadEvento } from "../contracts/envelope.js";
@@ -449,6 +450,7 @@ export function lerConsulta(db: DatabaseSync, patientId: string, agora: string, 
     return [{ eventId: evento.eventId, documentId: corpo.documentId,
       documentVersion: corpo.documentVersion, tumorLotId: evento.tumorLotId,
       titulo: typeof corpo.titulo === "string" ? corpo.titulo : "Documento assinado",
+      ...(documentoReceitaDosePendente(corpo)?{liberacaoPendente:'Receita histórica com dose pendente: emissão indisponível; prepare nova versão com dose validada.'}:{}),
       texto: corpo.texto, assinadoEm: evento.criadoEm, autorId: evento.criadoPor.id,
       encounterId: evento.encounterId }];
   });

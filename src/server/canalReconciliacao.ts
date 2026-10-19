@@ -241,7 +241,7 @@ export async function reconciliarMensagemCanalPersistida(
         SELECT r.mensagemId, r.reconciliacaoJson
         FROM canal_reconciliacao_clinica r
         JOIN canal_mensagem m ON m.mensagemId = r.mensagemId
-        WHERE r.mensagemId <> ? AND m.provaMetodo <> 'IMAP_CONTA_LOCAL' AND (m.senderRef = ? OR m.vinculoPatientId = ?)
+        WHERE r.mensagemId <> ? AND m.provaMetodo <> 'IMAP_CONTA_LOCAL' AND (m.senderRef = ? OR CASE WHEN json_valid(r.reconciliacaoJson) THEN json_extract(r.reconciliacaoJson, '$.vinculo.patientId') END = ?)
         ORDER BY m.ingestedAt, r.mensagemId
       `).all(msg.mensagemId, msg.senderRef, vinculo.patientId)
     : db.prepare(`
@@ -256,9 +256,9 @@ export async function reconciliarMensagemCanalPersistida(
   for (const row of rowsAnteriores) {
     // E-mail autentica a caixa, não o autor/sujeito de cada mensagem. Não formar
     // conflito clínico entre mensagens pelo endereço enquanto não existir essa prova.
-    if (msg.canal === "EMAIL") continue;
+    if (msg.canal === "EMAIL" || vinculo.patientId === null) continue;
     const parsed = ReconciliacaoClinicaCanal.safeParse(JSON.parse(row.reconciliacaoJson));
-    if (parsed.success && parsed.data.classificacao.leituraComplementar?.versao === "F2-LEITURA-2") {
+    if (parsed.success && parsed.data.vinculo.estado === "VINCULADO" && parsed.data.vinculo.patientId === vinculo.patientId && parsed.data.classificacao.leituraComplementar?.versao === "F2-LEITURA-2") {
       anteriores.push({ mensagemId: row.mensagemId, mencoes: parsed.data.classificacao.mencoes });
     }
   }
@@ -288,12 +288,17 @@ export async function reconciliarMensagemCanalPersistida(
   try {
     return transacao(db, () => {
       garantirTabelaReconciliacao(db);
-      db.prepare(`
+      const insercao = db.prepare(`
         INSERT INTO canal_reconciliacao_clinica (mensagemId, reconciliacaoJson, avaliadoEm)
         VALUES (?, ?, ?)
         ON CONFLICT(mensagemId) DO NOTHING
       `).run(msg.mensagemId, JSON.stringify(reconciliacao), acesso.agora);
 
+      if(insercao.changes===0){
+        const vencedora=lerReconciliacaoMensagemCanal(db,msg.mensagemId);
+        return vencedora?{ok:true as const,reconciliacao:vencedora,replay:true}
+          :{ok:false as const,codigo:'RECONCILIACAO_REQUER_REPROCESSAMENTO' as const};
+      }
       db.prepare(`
         INSERT INTO canal_pendencia_resolucao (mensagemId, resolvidoEm, resultadoJson)
         VALUES (?, ?, ?)

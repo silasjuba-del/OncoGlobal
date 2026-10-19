@@ -1,4 +1,6 @@
-# Relatório de Fechamento Técnico — Fase F5 (Anamnese Guiada, Voz no Canal e Revisão Assistida OncoChief)
+# Inventário técnico parcial — Fase F5 (Anamnese Guiada, Voz no Canal e Revisão Assistida OncoChief)
+
+> Situação revisada em 2026-10-19: **INTEGRAÇÃO PENDENTE — fase não encerrada**. O conteúdo abaixo registra componentes e testes do snapshot `0b00a40`; não comprova funcionamento integral no atendimento. I09: anamnese, voz e revisão assistida têm componentes isolados; suas jornadas completas no servidor e na interface ainda não foram demonstradas. Ver [consolidação](reviews/CONSOLIDACAO-RECEITA-2026-10-19.md) e [auditoria 9X–12X](reviews/AUDITORIA-9X-12X-2026-10-19.md).
 
 **Data:** 2026-10-19  
 **Modalidade:** `GO_CODE ESCOPADO POR FASE` · **Fase:** `F5 — Anamnese Guiada, Voz no Canal e Revisão Assistida (OncoChief)`  
@@ -7,7 +9,7 @@
 
 ---
 
-## 1. Escopo Entregue
+## 1. Componentes implementados
 
 ### 1.1 Anamnese Guiada por Roteiro Aprovado (`AG-19`)
 - Contrato estrito `RoteiroAnamneseTumor` e `ResumoEstruturadoAnamnese` (`src/contracts/f5/anamneseEOncoChief.ts`).

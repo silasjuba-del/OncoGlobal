@@ -1,3 +1,4 @@
+import type { PropostaDoseReceita } from './propostaDoseReceita.js';
 import type { MarcacaoTarefasRetorno } from './tarefas.js';
 
 export type SituacaoExame = "DENTRO_DO_LIMITE" | "FORA_DO_LIMITE" | "SEM_REFERENCIA";
@@ -15,6 +16,7 @@ export interface RetornoFlash { dias: number | null; motivo?: string; examesAnte
 export interface TarefasRetornoFlash { modeloPadraoSalvo: boolean; retorno: ItemFlash; laboratorio: ItemFlash; imagem: ItemFlash }
 
 export interface ConsultaFlashProps {
+  aoProporDose?:(medicamento:string)=>Promise<readonly PropostaDoseReceita[]>;
   cabecalho: { diagnostico?: string; tnm?: string; estadio?: string; biomarcador?: string; antecedentes?: string; medicacoesUso?: string; alergia?: string; ecog?: string; tratamentoAtual?: string; linha?: string; cicloDia?: string; ultimoAdministrado?: string };
   exames: readonly ExameRecenteFlash[];
   laboratorios?: readonly ExameRecenteFlash[];
@@ -34,6 +36,7 @@ export interface ConsultaFlashProps {
 }
 
 export interface PlanoFlash {
+  propostasDoseReceita?:readonly {receitaId:string;propostaId:string;hashFonte:string;hashProposta:string}[];
   documentosManuais?: readonly DocumentoManualFlash[];
   propostasInvestigacao?: readonly {exameCodigo:string;contexto:string;revisaoFatos:string;referencia:{id:string;versao:string;hash:string}}[];
   acoesMarcadas: readonly string[]; receitasMarcadas: readonly string[];
