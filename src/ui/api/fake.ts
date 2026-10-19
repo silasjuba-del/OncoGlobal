@@ -1,7 +1,6 @@
 import corpusSalao from "../../../corpus/rulesets/salao-triagem.v1.json" with { type: "json" };
 import type { Fonte } from "../../contracts/base.js";
 import type {RascunhoRespostaCanal} from '../../contracts/f2/caixaRespostaCanal.js';
-import {hashCanonico} from '../../modules/tipos.js';
 import {
   Apac,
   ConfirmarBloco,
@@ -837,8 +836,10 @@ export function criarPortaFalsa(): PortaConsulta {
     async prepararRespostaCanal(pedido){
       contextoValido(pedido);const m=mensagens.find(m=>m.mensagemId===pedido.mensagemOrigemId&&m.patientId===pedido.patientId);
       if(!m)throw new ErroPorta('CONTATO_NAO_VINCULADO_AO_PACIENTE');
+      const digest=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(pedido.texto));
+      const conteudoSha256=Array.from(new Uint8Array(digest),b=>b.toString(16).padStart(2,'0')).join('');
       const p:RascunhoRespostaCanal={respostaId:pedido.respostaId,versao:pedido.versao,mensagemOrigemId:m.mensagemId,accountId:'conta-sintetica',canal:m.origemCanal==='EMAIL'?'EMAIL':'WHATSAPP_SERVICO',
-        contatoId:m.contatoId,destinatario:m.contatoId,contexto:{patientId:pedido.patientId,encounterId:pedido.encounterId,tumorLotId:pedido.tumorLotId,revisaoContexto:'revisao-sintetica'},tipoResposta:'RESPOSTA_LIVRE_MEDICA',cenarioId:null,statusCuradoriaCenario:null,texto:pedido.texto,conteudoSha256:hashCanonico(pedido.texto),exibidoEm:AGORA,confirmadoPeloMedico:false,confirmadoPorMedicoId:null,confirmadoPorCrm:null,confirmadoEm:null};
+        contatoId:m.contatoId,destinatario:m.contatoId,contexto:{patientId:pedido.patientId,encounterId:pedido.encounterId,tumorLotId:pedido.tumorLotId,revisaoContexto:'revisao-sintetica'},tipoResposta:'RESPOSTA_LIVRE_MEDICA',cenarioId:null,statusCuradoriaCenario:null,texto:pedido.texto,conteudoSha256,exibidoEm:AGORA,confirmadoPeloMedico:false,confirmadoPorMedicoId:null,confirmadoPorCrm:null,confirmadoEm:null};
       respostasCanal.set(`${p.respostaId}:${p.versao}`,p);return p;
     },
     async confirmarRespostaCanal(pedido){

@@ -19,3 +19,18 @@ export async function jornadaCanalNoNavegador(page,{baseUrl,manifesto,segredo,ef
  await form.getByRole('button',{name:'Confirmar e enviar resposta',exact:true}).click();assert.equal((await replay).status(),200);assert.equal(efeitos(),1);
  return {webhookHmac:true,previaInvalidadaAposEdicao:true,confirmacaoExplicita:true,envioUnico:true};
 }
+
+export async function jornadaDemonstracaoCanal(page){
+ await page.goto(new URL('/',page.url()).href);
+ await page.getByRole('button',{name:'Canal',exact:true}).click();
+ const mensagem=page.locator('[data-mensagem="msg-red"]');
+ const seletor=mensagem.getByLabel('Encontro para a resposta',{exact:true});
+ await seletor.selectOption({label:'en-verde'});
+ await mensagem.getByLabel('Texto da resposta',{exact:true}).fill('Retorno sintético escrito pelo médico.');
+ await mensagem.getByRole('button',{name:'Revisar resposta',exact:true}).click();
+ await mensagem.getByRole('region',{name:'Resposta preparada para confirmação'}).waitFor();
+ await mensagem.getByLabel('Confirmo destinatário, conteúdo e contexto da resposta',{exact:true}).check();
+ await mensagem.getByRole('button',{name:'Confirmar e enviar resposta',exact:true}).click();
+ await mensagem.getByText('Resposta enviada; recibo registrado.').waitFor();
+ return {demonstracaoSinteticaComWebCrypto:true};
+}
