@@ -245,6 +245,21 @@ export interface MensagemCanalVisao {
   estadoVinculo?: "VINCULADO" | "SEM_VINCULO" | "CONFLITO" | "REVOGADO" | undefined;
   nomePaciente: string | null;
   candidatos: readonly CandidatoVinculoVisao[];
+  origemCanal?: "WHATSAPP_SERVICO" | "WHATSAPP_PESSOAL" | "EMAIL" | "TELEFONE" | undefined;
+  pendenciaProcessamento?: boolean | undefined;
+  reciboTecnico?: "RECEBIDA" | "PROCESSADA" | "ENVIADA" | "ENTREGUE" | "FALHOU" | undefined;
+  estadoConversa?: "NOVA" | "TRIADA" | "AGUARDA_MEDICO" | "RESPONDIDA" | "ENCERRADA" | undefined;
+  midia?: {
+    providerMediaId: string;
+    mimeType: string | null;
+    processamento: "NAO_PROCESSADA" | "LIDA_LOCALMENTE";
+  } | null | undefined;
+  destinatarioExibido?: string | undefined;
+  contextoExibido?: {
+    patientId: string | null;
+    encounterId: string | null;
+    versaoContexto?: number | undefined;
+  } | undefined;
 }
 
 export interface CaixaCanalVisao {

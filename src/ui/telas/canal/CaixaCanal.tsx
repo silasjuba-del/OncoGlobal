@@ -71,8 +71,23 @@ export function CaixaCanal({
         <section key={grupo.patientId} aria-label={`Mensagens de ${grupo.nome}`} data-patient={grupo.patientId}>
           <h2>{grupo.nome}</h2>
           {grupo.mensagens.map((mensagem) => (
-            <article key={mensagem.mensagemId} data-mensagem={mensagem.mensagemId} className="pilha">
+          <article key={mensagem.mensagemId} data-mensagem={mensagem.mensagemId} className="pilha">
               <p>{mensagem.texto}</p>
+              <small data-meta-canal={mensagem.mensagemId}>
+                Contato: {mensagem.contatoId} · Data: {mensagem.em}
+                {mensagem.origemCanal ? ` · Origem: ${mensagem.origemCanal}` : ""}
+                {mensagem.pendenciaProcessamento ? " · Pendente de revisão" : ""}
+                {mensagem.reciboTecnico ? ` · Recibo técnico: ${mensagem.reciboTecnico}` : ""}
+                {mensagem.estadoConversa ? ` · Conversa: ${mensagem.estadoConversa}` : ""}
+              </small>
+              {mensagem.midia ? (
+                <p data-midia-status={mensagem.midia.processamento}>
+                  Mídia ({mensagem.midia.mimeType ?? "arquivo"}):{" "}
+                  {mensagem.midia.processamento === "NAO_PROCESSADA"
+                    ? "não processada — aguarda leitura local comprovada"
+                    : "lida localmente"}
+                </p>
+              ) : null}
               {mensagem.redFlag ? <p className="semaforo semaforo-vermelho">red flag</p> : null}
               <RespostaCanal
                 porta={porta}
@@ -80,6 +95,8 @@ export function CaixaCanal({
                 mensagemId={mensagem.mensagemId}
                 patientId={mensagem.patientId}
                 redFlag={mensagem.redFlag}
+                {...(mensagem.destinatarioExibido !== undefined ? { destinatario: mensagem.destinatarioExibido } : { destinatario: mensagem.contatoId })}
+                {...(mensagem.contextoExibido?.encounterId !== undefined ? { encounterId: mensagem.contextoExibido.encounterId } : {})}
               />
             </article>
           ))}

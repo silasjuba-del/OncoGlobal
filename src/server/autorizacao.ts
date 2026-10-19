@@ -7,6 +7,7 @@ import { ValidacaoApacPersistida, type ReferenciaSigtap } from "../contracts/f1/
 import { validarReferenciaApac } from "../modules/apac/validacaoPersistida.js";
 import { resolverPrescricaoDuto } from "./dutos.js";
 import { dadosDoEvento, eventosVigentes } from "../kernel/projections/snapshot.js";
+import { revalidarAutorizacaoSaidaCanalNoLedger } from "./canalResposta.js";
 
 type Intent = z.infer<typeof ActionIntent>;
 export type Autorizacao = { ok: true } | { ok: false; codigo: string };
@@ -19,9 +20,13 @@ export type Autorizacao = { ok: true } | { ok: false; codigo: string };
 export function autorizarSaida(db: DatabaseSync, intent: Intent, sigtapAtual?: (competencia: string) => ReferenciaSigtap | null): Autorizacao {
   if (intent.verbo === "BACKUP_LOCAL")
     return intent.objeto.tipo === "BACKUP" && intent.destino === null ? { ok: true } : { ok: false, codigo: "BACKUP_INVALIDO" };
-  // A10/G-02: canal externo exige contato vinculado e consentimento persistidos; ainda não existem.
-  if (intent.verbo === "ENVIAR_WHATSAPP" || intent.verbo === "ENVIAR_EMAIL" || intent.verbo === "AGENDAR")
+  // Um controle de canal nunca habilita agendamento ou outras capacidades externas.
+  if (intent.verbo === "AGENDAR")
     return { ok: false, codigo: "CANAL_EXTERNO_NAO_HABILITADO" };
+  if (intent.verbo === "ENVIAR_WHATSAPP" || intent.verbo === "ENVIAR_EMAIL") {
+    const rev = revalidarAutorizacaoSaidaCanalNoLedger(db, intent);
+    return rev.ok ? { ok: true } : { ok: false, codigo: rev.codigo };
+  }
   if (intent.destino !== null) return { ok: false, codigo: "DESTINO_NAO_PERMITIDO" };
   const { patientId, encounterId } = intent.escopo;
   if (!patientId) return { ok: false, codigo: "ESCOPO_SEM_PACIENTE" };
