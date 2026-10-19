@@ -9,7 +9,9 @@ export const LIMITE_BYTES_CORPO_WEBHOOK = 262_144;
 export const LIMITE_BYTES_SEGREDO = 512;
 export const LIMITE_KEY_ID = 250;
 export const LIMITE_PROFUNDIDADE_JSON = 16;
-export const LIMITE_NOS_JSON = 256;
+// Até 50 eventos: envelope (5 nós) + 12 nós por mensagem de mídia completa.
+// O limite de bytes e o de profundidade continuam independentes deste orçamento.
+export const LIMITE_NOS_JSON = 5 + 50 * 12;
 
 const PREFIXO_HMAC = "sha256=";
 const CHAVES_ALEGADAS = new Set([

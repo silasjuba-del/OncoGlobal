@@ -418,7 +418,7 @@ describe("S-F2-04 · Prova integral e fechamento da F2 (bateria adversarial, fal
     expect(caixaPosReinicio.ok && caixaPosReinicio.mensagens).toHaveLength(1);
 
     // 3e. IMAP reconexão e mudança de UIDVALIDITY no mesmo SQLite
-    expect(ingerirLoteImapCanal(dbPosReinicio, {
+    expect((await ingerirLoteImapCanal(dbPosReinicio, {
       accountId: "imap-s04",
       mailbox: "INBOX",
       uidValiditySessao: 9001,
@@ -432,9 +432,9 @@ describe("S-F2-04 · Prova integral e fechamento da F2 (bateria adversarial, fal
         rawBytes: utf8("Email 5"),
         conteudo: textoConteudo("Email antes da reconexão."),
       }],
-    }).ok).toBe(true);
+    })).ok).toBe(true);
 
-    expect(ingerirLoteImapCanal(dbPosReinicio, {
+    expect(await ingerirLoteImapCanal(dbPosReinicio, {
       accountId: "imap-s04",
       mailbox: "INBOX",
       uidValiditySessao: 9002,

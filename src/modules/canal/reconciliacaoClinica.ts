@@ -265,7 +265,7 @@ function classificarPolaridadeClausula(clausulaNorm: string, indiceTermo: number
   const depois = clausulaNorm.slice(indiceTermo, Math.min(clausulaNorm.length, indiceTermo + 45));
 
   // Se houver operador de negação antes na mesma cláusula (incluindo listas coordenadas com vírgula/e/ou/nem)
-  const padraoNegacao = /\b(?:sem|nega|negou|nunca(?:\s+tive|\s+teve|\s+apresentei|\s+apresentou)?|ausencia\s+de|nao\s+(?:estou|esta|tenho|tem|tive|teve|apresento|apresenta|sinto|sente)(?:\s+com)?)\s+(?:[a-z0-9,\s]+?\s+(?:ou|nem|e)\s+|[a-z0-9,\s]{0,35})?$/;
+  const padraoNegacao = /\b(?:sem|nega|nego|negou|nunca(?:\s+tive|\s+teve|\s+apresentei|\s+apresentou)?|ausencia\s+de|nao\s+(?:estou|esta|tenho|tem|tive|teve|apresento|apresenta|sinto|sente)(?:\s+com)?)\s+(?:[a-z0-9,\s]+?\s+(?:ou|nem|e)\s+|[a-z0-9,\s]{0,35})?$/;
   if (padraoNegacao.test(antes) || /\b(?:ausente|negad[oa])\b/.test(depois)) {
     return "NEGADO";
   }
@@ -284,16 +284,20 @@ function classificarTemporalidadeClausula(clausulaNorm: string, global: Temporal
 }
 
 function dividirEmClausulas(textoOriginal: string): string[] {
-  return textoOriginal
-    .split(/(?:[.!?\n;]+|\b(?:mas|porém|porem|contudo|entretanto)\b)/i)
-    .map((c, idx, arr) => {
-      // Preserva ponto de interrogação se a cláusula original era uma pergunta
-      const posFim = textoOriginal.indexOf(c) + c.length;
-      const pontuacao = textoOriginal[posFim] === "?" ? "?" : "";
-      void idx; void arr;
-      return (c.trim() + pontuacao).trim();
-    })
-    .filter((c) => c.length > 0 && c !== "?");
+  // Pontos decimais permanecem no valor; interrogação pertence à cláusula anterior.
+  // Nova oração com verbo explícito encerra o escopo da negação; listas continuam juntas.
+  const separador = /[!\n;]+|(?<!\d)\.|\.(?!\d)|\?\s*|\b(?:mas|porém|porem|contudo|entretanto)\b|(?:,\s*|\be\s+)(?=(?:(?:eu|ele|ela|paciente)\s+)?(?:(?:n[aã]o|tamb[eé]m)\s+)?(?:tenho|tem|estou|est[aá]|sinto|sente|apresento|apresenta)\b)|(?:,\s*|\be\s+)(?=(?:(?:apenas|tamb[eé]m)\s+)?com\b)/gi;
+  const clausulas: string[] = [];
+  let inicio = 0;
+  for (const match of textoOriginal.matchAll(separador)) {
+    const fim = match.index! + (match[0].startsWith("?") ? 1 : 0);
+    const clausula = textoOriginal.slice(inicio, fim).trim();
+    if (clausula) clausulas.push(clausula);
+    inicio = match.index! + match[0].length;
+  }
+  const ultima = textoOriginal.slice(inicio).trim();
+  if (ultima) clausulas.push(ultima);
+  return clausulas;
 }
 
 export function extrairMencoesClinicasCanal(textoOriginal: string): MencaoClinicaCanal[] {
@@ -374,31 +378,27 @@ function reconciliarMencoesLlmComDeterministicas(
   momentoGlobal: TemporalidadeRelatoCanal,
 ): MencaoClinicaCanal[] {
   const resultado = [...mencoesDeterministicas];
-  const normOriginal = semAcento(textoOriginal);
+  const clausulas = dividirEmClausulas(textoOriginal);
 
   for (const mLlm of mencoesLlm) {
     const jaExiste = resultado.some((d) => semAcento(d.termo) === semAcento(mLlm.termo));
     if (jaExiste) continue;
 
     const termoNorm = semAcento(mLlm.termo).trim();
-    const ocorrencias = encontrarOcorrenciasComFronteira(normOriginal, termoNorm);
-    if (ocorrencias.length === 0) {
-      // Menção não encontrada no texto original -> descartada como alucinação
-      continue;
+    for (const clausula of clausulas) {
+      const norm = semAcento(clausula);
+      const ocorrencias = encontrarOcorrenciasComFronteira(norm, termoNorm);
+      if (ocorrencias.length === 0) continue;
+      // A LLM pode sugerir um termo, nunca fornecer a evidência ou um valor clínico.
+      const pos = ocorrencias[0]!;
+      resultado.push({
+        termo: termoNorm,
+        trechoOriginal: clausula.slice(0, 1000),
+        polaridade: classificarPolaridadeClausula(norm, pos),
+        temporalidade: classificarTemporalidadeClausula(norm, momentoGlobal),
+        temperaturaDecimos: null,
+      });
     }
-
-    const pos = ocorrencias[0]!;
-    const polDeterministica = classificarPolaridadeClausula(normOriginal, pos);
-    const tempDeterministica = classificarTemporalidadeClausula(normOriginal, momentoGlobal);
-
-    resultado.push({
-      ...mLlm,
-      polaridade: polDeterministica !== "AFIRMADO" ? polDeterministica : mLlm.polaridade,
-      temporalidade:
-        tempDeterministica === "PASSADO" || tempDeterministica === "FUTURO_DUVIDA"
-          ? tempDeterministica
-          : mLlm.temporalidade,
-    });
   }
 
   return resultado;
@@ -444,29 +444,18 @@ export function classificarRelatoCanal(entrada: {
         momentoDeterministico.temporalidade,
       );
 
-      // A LLM nunca pode promover FAMILIAR/CUIDADOR ou contato não vinculado a PACIENTE
-      const autorReconciliado: AutorRelatoCanal =
-        autorDeterministico === "FAMILIAR" || autorDeterministico === "CUIDADOR" || !entrada.vinculado
-          ? autorDeterministico
-          : parsedLlm.data.autorRelato;
-
-      // A LLM nunca pode sobrescrever PASSADO ou FUTURO_DUVIDA determinístico para ATUAL
-      const momentoReconciliado =
-        momentoDeterministico.temporalidade === "PASSADO" || momentoDeterministico.temporalidade === "FUTURO_DUVIDA"
-          ? momentoDeterministico
-          : parsedLlm.data.momentoClinicoRelatado;
-
+      // Sem texto livre na LLM, autoria e contexto temporal permanecem ancorados na extração local.
       return PropostaClassificacaoCanal.parse({
         schema: "PropostaClassificacaoCanal@1",
         modoClassificacao: "LLM_DESIDENTIFICADO_VALIDADO",
-        categoria: parsedLlm.data.categoria,
-        autorRelato: autorReconciliado,
+        categoria: categoriaDeterministica,
+        autorRelato: autorDeterministico,
         origemCanal: entrada.origemCanal,
         instanteMensagem: {
           providerSentAt: entrada.providerSentAt,
           ingestedAt: entrada.ingestedAt,
         },
-        momentoClinicoRelatado: momentoReconciliado,
+        momentoClinicoRelatado: momentoDeterministico,
         mencoes: mencoesReconciliadas,
         textoDesidentificadoEnviadoLlm: entrada.propostaLlm.textoDesidentificadoEnviado,
         phiEgressPassou: true,
@@ -587,7 +576,7 @@ function sinalCasaAfirmadoAtual(
   const termosNorm = regra.termos.map((t) => semAcento(t).trim()).filter(Boolean);
   const mencoesDoSinal = mencoes.filter((m) => {
     const mNorm = semAcento(m.termo);
-    return termosNorm.some((t) => t === mNorm || encontrarOcorrenciasComFronteira(semAcento(m.trechoOriginal), t).length > 0);
+    return termosNorm.some((t) => t === mNorm);
   });
 
   if (mencoesDoSinal.length > 0) {

@@ -13,6 +13,7 @@ import {
   avaliarAlarmesCanalConferidos,
   classificarRelatoCanal,
   detectarConflitosRelatoCanal,
+  extrairMencoesClinicasCanal,
   resolverVinculoReconciliadoCanal,
   type ContatoExistenteStatus,
   type RulesetAlarmeCanalEntrada,
@@ -85,7 +86,6 @@ function montarDicionarioDesidentificacao(
       if (id.valor.trim()) identificadores.add(id.valor.trim());
     }
   }
-  if (nomes.size === 0) nomes.add("Paciente Sintetico Padrao");
   return {
     nomes: [...nomes],
     identificadores: [...identificadores],
@@ -113,7 +113,7 @@ export async function reconciliarMensagemCanalPersistida(
     rulesetAlarmes?: RulesetAlarmeCanalEntrada | null;
   },
 ): Promise<
-  | { ok: false; codigo: "SESSAO_INVALIDA" | "MENSAGEM_AUSENTE" | "PHI_EGRESS_BLOQUEADO" }
+  | { ok: false; codigo: "SESSAO_INVALIDA" | "MENSAGEM_AUSENTE" | "PHI_EGRESS_BLOQUEADO" | "VINCULO_EMAIL_REQUER_REVISAO" }
   | FalhaArmazenamento
   | { ok: true; reconciliacao: ReconciliacaoClinicaCanal; replay: boolean }
 > {
@@ -126,9 +126,14 @@ export async function reconciliarMensagemCanalPersistida(
       "SELECT reconciliacaoJson FROM canal_reconciliacao_clinica WHERE mensagemId = ?",
     ).get(opcoes.mensagemId) as { reconciliacaoJson: string } | undefined;
     if (jaExistente) {
+      const reconciliacao = ReconciliacaoClinicaCanal.parse(JSON.parse(jaExistente.reconciliacaoJson));
+      if (det.mensagem.vinculo.motivo === "REMETENTE_EMAIL_NAO_AUTENTICADO_REQUER_REVISAO"
+        && reconciliacao.vinculo.patientId !== null) {
+        return { ok: false, codigo: "VINCULO_EMAIL_REQUER_REVISAO" };
+      }
       return {
         ok: true,
-        reconciliacao: ReconciliacaoClinicaCanal.parse(JSON.parse(jaExistente.reconciliacaoJson)),
+        reconciliacao,
         replay: true,
       };
     }
@@ -137,13 +142,17 @@ export async function reconciliarMensagemCanalPersistida(
   }
 
   const msg: ItemCaixa = det.mensagem;
+  const remetenteImapNaoValidado = msg.vinculo.motivo === "REMETENTE_EMAIL_NAO_AUTENTICADO_REQUER_REVISAO";
   const vinculo = resolverVinculoReconciliadoCanal({
     endereco: msg.senderRef,
     tipo: tipoIdentificadorDoCanal(msg.canal),
     nomeDeclaradoNoRemetente: opcoes.nomeDeclaradoNoRemetente ?? null,
     chaveDemografica: opcoes.chaveDemografica ?? null,
-    cadastros: opcoes.cadastros,
-    statusContatoExistente: opcoes.statusContatoExistente ?? null,
+    cadastros: remetenteImapNaoValidado ? [] : opcoes.cadastros,
+    // Um vínculo prévio do endereço não autentica esta mensagem recebida por IMAP.
+    statusContatoExistente: remetenteImapNaoValidado && opcoes.statusContatoExistente
+      ? { ...opcoes.statusContatoExistente, patientIdVinculadoManual: null }
+      : opcoes.statusContatoExistente ?? null,
   });
 
   const ehMidia = msg.conteudo.tipo === "MEDIA_UNPROCESSED";
@@ -155,7 +164,8 @@ export async function reconciliarMensagemCanalPersistida(
     saidaBrutaLlm: unknown;
   } | null = null;
 
-  if (opcoes.classificadorLlm && !ehMidia) {
+  if (opcoes.classificadorLlm && !ehMidia && vinculo.estado === "VINCULADO"
+    && opcoes.cadastros.some((c) => c.patientId === vinculo.patientId && c.nome?.trim())) {
     const dicBase = montarDicionarioDesidentificacao(
       opcoes.cadastros,
       msg.senderRef,
@@ -168,7 +178,12 @@ export async function reconciliarMensagemCanalPersistida(
       nomes: dicBase.nomes,
       identificadores: [...new Set([...dicBase.identificadores, ...(opcoes.dicionarioExtras?.identificadores ?? [])])],
     };
-    const desid = desidentificar(textoOriginal, dic);
+    // Lista de nomes não cobre terceiros citados em texto livre. Só sai uma projeção
+    // de vocabulário fechado extraída localmente, sem trechos, nomes ou identificadores.
+    const projecaoMinima = JSON.stringify({ mencoes: extrairMencoesClinicasCanal(textoOriginal).map(
+      ({ termo, polaridade, temporalidade, temperaturaDecimos }) => ({ termo, polaridade, temporalidade, temperaturaDecimos }),
+    ) });
+    const desid = desidentificar(projecaoMinima, dic);
     const gate = g02PhiEgress(desid.texto, dic);
     if (gate.decisao !== "PASSA") {
       return { ok: false, codigo: "PHI_EGRESS_BLOQUEADO" };
@@ -217,7 +232,7 @@ export async function reconciliarMensagemCanalPersistida(
         SELECT r.mensagemId, r.reconciliacaoJson
         FROM canal_reconciliacao_clinica r
         JOIN canal_mensagem m ON m.mensagemId = r.mensagemId
-        WHERE r.mensagemId <> ? AND (m.senderRef = ? OR m.vinculoPatientId = ?)
+        WHERE r.mensagemId <> ? AND m.provaMetodo <> 'IMAP_CONTA_LOCAL' AND (m.senderRef = ? OR m.vinculoPatientId = ?)
         ORDER BY m.ingestedAt, r.mensagemId
       `).all(msg.mensagemId, msg.senderRef, vinculo.patientId)
     : db.prepare(`
@@ -294,5 +309,8 @@ export function lerReconciliacaoMensagemCanal(
     "SELECT reconciliacaoJson FROM canal_reconciliacao_clinica WHERE mensagemId = ?",
   ).get(mensagemId) as { reconciliacaoJson: string } | undefined;
   if (!row) return null;
-  return ReconciliacaoClinicaCanal.parse(JSON.parse(row.reconciliacaoJson));
+  const reconciliacao = ReconciliacaoClinicaCanal.parse(JSON.parse(row.reconciliacaoJson));
+  const origem = db.prepare("SELECT provaMetodo FROM canal_mensagem WHERE mensagemId = ?").get(mensagemId);
+  if (origem?.provaMetodo === "IMAP_CONTA_LOCAL" && reconciliacao.vinculo.patientId !== null) return null;
+  return reconciliacao;
 }
