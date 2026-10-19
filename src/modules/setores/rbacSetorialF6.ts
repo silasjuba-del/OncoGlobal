@@ -148,7 +148,10 @@ export function criarAvisoMedicoSemPhiF6(entrada: {
     .digest("hex");
 
   return AvisoMedicoSemPhiF6.parse({
-    avisoId: entrada.avisoId ?? `aviso-${randomUUID()}`,
+    // Codificação bijetiva dos nibbles do UUID: preserva sua entropia sem
+    // produzir sequências numéricas interpretáveis como telefone pelo gate PHI.
+    avisoId: entrada.avisoId ?? `aviso-${randomUUID().replace(/[0-9a-f]/g,
+      nibble => String.fromCharCode(97 + Number.parseInt(nibble, 16)))}`,
     setorOrigem: entrada.setorOrigem,
     urgencia: entrada.urgencia,
     codigoEventoOpaco: entrada.codigoEventoOpaco,

@@ -9,3 +9,7 @@ Validação local: typecheck PASS; fronteiras 486 arquivos, zero exceções; cor
 Preservação: inventário de todas as worktrees, HEAD, índice, status e hashes em OncoGlobal-backups/pr27-integracao-20261019/before.json; inventário adicional dos checkouts ativos em active-before.json. Arquivos locais de Cursor e frentes concorrentes não integram esta alteração. CI/revisão GitHub e merge devem ser conferidos no SHA efetivo.
 
 F3 permanece parcial. Próxima fatia: S-F3-04 contingência pelo HTTP e interface, com contexto de paciente/encontro, documento persistido e reabertura; reutilizar gerarFolhaContingenciaSalaoF3. Sem alterar corpus, limiares, regras em RASCUNHO, assinatura de prescrição ou permissões multiusuário. Adiamento/nutrição, dose/administração e integração clínica integral continuam pendentes até prova própria.
+
+## Falha real de CI e reteste F6
+
+Severidade operacional: aviso recusado indevidamente. Run push 39325722933 falhou em tests/f6/multiusuario-setores-rbac.test.ts:234; run PR39325731386 passou no mesmo código. Causa reproduzida: UUID aleatório com sufixo numérico satisfaz o detector de telefone e produz PHI_DETECTADA_NO_AVISO. Regressão determinística falhou antes da correção e passou depois. O identificador padrão agora codifica os nibbles UUID em letras a-p, de forma bijetiva, preservando entropia. Detector PHI, permissões e corpus inalterados; avisos com identificador fornecido continuam sujeitos ao gate. Reteste F6: 4/4 PASS, typecheck PASS. Sem habilitação clínica ou transporte externo.
