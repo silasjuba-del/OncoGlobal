@@ -53,10 +53,13 @@ export function CaixaCanal({
     });
   }
 
-  async function vincular(contatoId: string, patientId: string) {
+  async function vincular(contatoId: string, patientId: string, encounterId?: string, tumorLotId?: string | null) {
     if (ocupado) return;
     setOcupado(true); setMensagem("");
-    try { setVisao(await porta.pedirVinculo(contatoId, patientId)); }
+    try {
+      if (encounterId) await porta.selecionarContexto?.({ patientId, encounterId, tumorLotId: tumorLotId ?? null });
+      setVisao(await porta.pedirVinculo(contatoId, patientId));
+    }
     catch (error) { setMensagem(error instanceof ErroPorta
       ? `Vínculo não registrado (${error.codigo}). Confirme paciente e contexto.`
       : "Vínculo não registrado. A seleção foi mantida para tentar novamente."); }
@@ -118,13 +121,13 @@ export function CaixaCanal({
             {mensagem.estadoVinculo === "REVOGADO" ? <p role="alert">Contato revogado. Nenhum vínculo pode ser criado.</p> : null}
             {mensagem.estadoVinculo === "SEM_VINCULO" ? <p>Selecione explicitamente o paciente e confira o identificador exibido.</p> : null}
             {mensagem.candidatos.map((candidato) => (
-              <span key={candidato.patientId}>
+              <span key={`${candidato.patientId}:${candidato.encounterId ?? ""}:${candidato.tumorLotId ?? ""}`}>
                 <button type="button" disabled={ocupado || mensagem.estadoVinculo === "CONFLITO"
                   || mensagem.estadoVinculo === "REVOGADO"} aria-label={`vincular ${candidato.nome}`}
-                  onClick={() => void vincular(mensagem.contatoId, candidato.patientId)}>
+                  onClick={() => void vincular(mensagem.contatoId, candidato.patientId, candidato.encounterId, candidato.tumorLotId)}>
                   vincular {candidato.nome}
                 </button>
-                <small>Identificador: {candidato.patientId}</small>
+                <small>Identificador: {candidato.patientId}{candidato.encounterId ? ` · Encontro: ${candidato.encounterId}` : ""}</small>
               </span>
             ))}
           </article>

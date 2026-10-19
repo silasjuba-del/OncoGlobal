@@ -25,6 +25,7 @@ const Afirmacao = z.object({ rotulo: Texto, valorTexto: Texto.nullable(), estado
   candidatos: z.array(z.object({ valorTexto: Texto, fontes: z.array(Fonte) })).optional()
 }).transform(({ candidatos, ...item }) => ({ ...item, ...(candidatos === undefined ? {} : { candidatos }) }));
 export const ConsultaResposta: z.ZodType<ConsultaIntegrada> = z.object({ hoje: DataCivil,
+  contatosCanal: z.lazy(() => CanalResposta).optional(),
   retrato: Retrato.optional(), visaoIntegrada: VisaoIntegrada.optional(), dutos: DutosClinicaVisao.optional(),
   resumoEvolucao: Texto.nullable().default(null),
   historicoDocumentos: z.array(z.object({ eventId: Texto, documentId: Texto, titulo: Texto,
@@ -44,6 +45,8 @@ export const ConsultaResposta: z.ZodType<ConsultaIntegrada> = z.object({ hoje: D
     autorExibido: Texto, alvoImpressao: z.object({ tipo: Texto, id: Texto, versao: z.number().int().positive() }).nullable(),
     alertasVermelhos: z.array(Alerta) }),
 }).passthrough().superRefine((resposta, ctx) => {
+  if (resposta.contatosCanal?.mensagens.some(m => m.patientId !== resposta.patientId))
+    ctx.addIssue({ code: "custom", message: "CONTATOS_CANAL_FORA_CONTEXTO" });
   const r = resposta.retrato, v = resposta.visaoIntegrada;
   const d = resposta.dutos;
   if(d&&(d.contexto.patientId!==resposta.patientId||d.contexto.encounterId!==resposta.encounterId||d.contexto.tumorLotId!==resposta.tumorLotId))ctx.addIssue({code:"custom",message:"DUTOS_FORA_CONTEXTO"});
@@ -81,7 +84,7 @@ export const CanalResposta: z.ZodType<CaixaCanalVisao> = z.object({ mensagens: z
   contextosResposta:z.array(z.object({patientId:Texto,encounterId:Texto,tumorLotId:Texto.nullable()})).optional(),
   texto: Texto, em: Texto, redFlag: z.boolean(), contatoId: Texto, patientId: Texto.nullable(), nomePaciente: Texto.nullable(),
   estadoVinculo: z.enum(["VINCULADO", "SEM_VINCULO", "CONFLITO", "REVOGADO"]).optional(),
-  candidatos: z.array(z.object({ patientId: Texto, nome: Texto })),
+  candidatos: z.array(z.object({ patientId: Texto, nome: Texto, encounterId: Texto.optional(), tumorLotId: Texto.nullable().optional() })),
   origemCanal: z.enum(["WHATSAPP_SERVICO", "WHATSAPP_PESSOAL", "EMAIL", "TELEFONE"]).optional(),
   pendenciaProcessamento: z.boolean().optional(),
   reciboTecnico: z.enum(["RECEBIDA", "PROCESSADA", "ENVIADA", "ENTREGUE", "LIDA", "FALHOU"]).optional(),

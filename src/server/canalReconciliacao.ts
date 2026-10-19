@@ -22,6 +22,8 @@ import type { CadastroVinculo } from "../modules/canal/vinculo.js";
 import {
   consultarCaixaCanal,
   detalheMensagemCanal,
+  lerMensagemIngressoLocal,
+  listarPendenciasCanal,
   garantirSchema,
   type AcessoCanal,
   type FalhaArmazenamento,
@@ -105,8 +107,30 @@ function montarDicionarioDesidentificacao(
  * - Nunca cria evento em clinical_event nem promove a fato confirmado.
  */
 export async function reconciliarMensagemCanalPersistida(
+  db: DatabaseSync, acesso: AcessoCanal, opcoes: Parameters<typeof reconciliarItemCanalPersistido>[3],
+) {
+  const detalhe = detalheMensagemCanal(db, acesso, opcoes.mensagemId);
+  if (!detalhe.ok) return detalhe;
+  return reconciliarItemCanalPersistido(db, acesso.agora, detalhe.mensagem, opcoes);
+}
+
+/** Retomada técnica durável, sem sessão fabricada, LLM, confirmação clínica ou efeitos externos. */
+export async function processarPendenciasClinicasCanal(db: DatabaseSync, opcoes: {
+  agora: string; cadastros: readonly CadastroVinculo[];
+}) {
+  for (const pendencia of listarPendenciasCanal(db).filter(p => p.estado === "PENDENTE_PROCESSAMENTO")) {
+    const detalhe = lerMensagemIngressoLocal(db, pendencia.mensagemId);
+    if (!detalhe.ok) throw new Error("PROCESSAMENTO_CANAL_PENDENTE");
+    const r = await reconciliarItemCanalPersistido(db, opcoes.agora, detalhe.mensagem,
+      { mensagemId: pendencia.mensagemId, cadastros: opcoes.cadastros });
+    if (!r.ok) throw new Error("PROCESSAMENTO_CANAL_PENDENTE");
+  }
+}
+
+async function reconciliarItemCanalPersistido(
   db: DatabaseSync,
-  acesso: AcessoCanal,
+  agora: string,
+  mensagem: ItemCaixa,
   opcoes: {
     mensagemId: string;
     cadastros: readonly CadastroVinculo[];
@@ -122,9 +146,6 @@ export async function reconciliarMensagemCanalPersistida(
   | FalhaArmazenamento
   | { ok: true; reconciliacao: ReconciliacaoClinicaCanal; replay: boolean }
 > {
-  const det = detalheMensagemCanal(db, acesso, opcoes.mensagemId);
-  if (!det.ok) return det;
-
   try {
     garantirTabelaReconciliacao(db);
     const jaExistente = db.prepare(
@@ -132,7 +153,7 @@ export async function reconciliarMensagemCanalPersistida(
     ).get(opcoes.mensagemId) as { reconciliacaoJson: string } | undefined;
     if (jaExistente) {
       const reconciliacao = ReconciliacaoClinicaCanal.parse(JSON.parse(jaExistente.reconciliacaoJson));
-      if (det.mensagem.vinculo.motivo === "REMETENTE_EMAIL_NAO_AUTENTICADO_REQUER_REVISAO"
+      if (mensagem.vinculo.motivo === "REMETENTE_EMAIL_NAO_AUTENTICADO_REQUER_REVISAO"
         && reconciliacao.vinculo.patientId !== null) {
         return { ok: false, codigo: "VINCULO_EMAIL_REQUER_REVISAO" };
       }
@@ -149,7 +170,7 @@ export async function reconciliarMensagemCanalPersistida(
     return { ok: false, codigo: "ARMAZENAMENTO_INDISPONIVEL", recuperavel: true, persistida: false };
   }
 
-  const msg: ItemCaixa = det.mensagem;
+  const msg: ItemCaixa = mensagem;
   const remetenteImapNaoValidado = msg.vinculo.motivo === "REMETENTE_EMAIL_NAO_AUTENTICADO_REQUER_REVISAO";
   const vinculo = resolverVinculoReconciliadoCanal({
     endereco: msg.senderRef,
@@ -282,7 +303,7 @@ export async function reconciliarMensagemCanalPersistida(
     diagnostico: false,
     prescricao: false,
     assinatura: false,
-    avaliadoEm: acesso.agora,
+    avaliadoEm: agora,
   });
 
   try {
@@ -292,7 +313,7 @@ export async function reconciliarMensagemCanalPersistida(
         INSERT INTO canal_reconciliacao_clinica (mensagemId, reconciliacaoJson, avaliadoEm)
         VALUES (?, ?, ?)
         ON CONFLICT(mensagemId) DO NOTHING
-      `).run(msg.mensagemId, JSON.stringify(reconciliacao), acesso.agora);
+      `).run(msg.mensagemId, JSON.stringify(reconciliacao), agora);
 
       if(insercao.changes===0){
         const vencedora=lerReconciliacaoMensagemCanal(db,msg.mensagemId);
@@ -303,7 +324,7 @@ export async function reconciliarMensagemCanalPersistida(
         INSERT INTO canal_pendencia_resolucao (mensagemId, resolvidoEm, resultadoJson)
         VALUES (?, ?, ?)
         ON CONFLICT(mensagemId) DO NOTHING
-      `).run(msg.mensagemId, acesso.agora, JSON.stringify({
+      `).run(msg.mensagemId, agora, JSON.stringify({
         reciboTecnico: "PROCESSADA",
         vinculoEstado: vinculo.estado,
         categoria: classificacao.categoria,

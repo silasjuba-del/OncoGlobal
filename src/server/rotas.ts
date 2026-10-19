@@ -1,6 +1,7 @@
 import { nomeMedicamento } from './propostasDoseReceita.js';
 import {rotearWebhookCanal} from './canalWebhookHttp.js';
-import {type OperacaoCanal,revisaoContextoCanal,lerMensagensOperacionaisCanal,vinculoAtualCanal} from './canalOperacao.js';
+import {type OperacaoCanal,revisaoContextoCanal,lerMensagensOperacionaisCanal,vinculoAtualCanal,cadastrosCanal,contatoRevogadoCanal} from './canalOperacao.js';
+import {processarPendenciasClinicasCanal} from './canalReconciliacao.js';
 import {detalheMensagemCanal} from './canalEntrada.js';
 import {prepararRascunhoRespostaCanal,confirmarRespostaCanalPeloMedico,executarEnvioAutorizadoCanal,revalidarAutorizacaoSaidaCanalNoLedger} from './canalResposta.js';
 import {PrepararRespostaCanal,ConfirmarRespostaCanal} from '../contracts/api/respostaCanal.js';
@@ -699,6 +700,30 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
       if (!contexto || contexto.patientId !== parsed.data.patientId)
         return reply(409, "CONTEXTO_CONSULTA_ALTERADO");
       if (!lerPaciente(deps.db, parsed.data.patientId)) return reply(404, "PACIENTE_NAO_ENCONTRADO");
+      const acessoCanal = { sessoes: deps.sessoes, token, agora: deps.agora() };
+      const operacionais = lerMensagensOperacionaisCanal(deps.db, acessoCanal).filter(m => m.contatoId === parsed.data.contatoId);
+      if (operacionais.length) {
+        if (operacionais.some(m => m.origemCanal !== "WHATSAPP_SERVICO" || m.estadoVinculo === "REVOGADO"
+          || m.estadoVinculo === "CONFLITO" || (m.patientId !== null && m.patientId !== parsed.data.patientId))
+          || contatoRevogadoCanal(deps.db, parsed.data.contatoId)) return reply(409, "CONFLITO_VINCULO_CONTATO");
+        if (vinculoAtualCanal(deps.db, parsed.data.patientId, parsed.data.contatoId))
+          return reply(200, "REPLAY", { mensagens: [...lerCanal(deps.db).mensagens, ...lerMensagensOperacionaisCanal(deps.db, acessoCanal)] });
+        const operationId = `canal-operacional-link-${parsed.data.idempotencyKey}`;
+        const draftId = `canal-link-${sha(operationId)}`;
+        const payload = Contato.parse({ contatoId: parsed.data.contatoId, canal: "WHATSAPP_SERVICO", endereco: parsed.data.contatoId,
+          patientId: parsed.data.patientId, relacao: "DESCONHECIDO", vinculadoEm: acessoCanal.agora, revogadoEm: null });
+        const fontes = operacionais.map(m => ({ sourceId: m.mensagemId, classe: "CHAT_TEXT" as const,
+          localizador: null, dataClinica: null, dataCaptura: acessoCanal.agora, versao: "vinculo-operacional-v1", contentHash: hashConteudoExibido(m.texto) }));
+        const existente = lerDraft(deps.db, draftId);
+        if (existente) return reply(409, "CHAVE_IDEMPOTENCIA_REUTILIZADA");
+        const draft = salvarDraft(deps.db, { draftId, patientId: parsed.data.patientId, sourceId: fontes[0]!.sourceId,
+          rawRef: "vinculo-operacional-local", payload, diagnostics: [], revision: 0, criadoEm: acessoCanal.agora });
+        const r = confirmar(deps.db, { operationId, patientId: parsed.data.patientId, encounterId: contexto.encounterId,
+          tumorLotId: contexto.tumorLotId ?? null, reviewDecisionId: operationId, sessao, em: acessoCanal.agora,
+          registros: [{ draftId, expectedRevision: draft.revision, eventId: `contato-${sha(operationId)}`, tipo: "Contato", payload, fontes, revisao: "CONFIRMADO" }] });
+        if (r.estado === "NEGADA") return reply(409, r.motivo ?? "VINCULO_CANAL_NEGADO");
+        return reply(200, "VINCULO_GRAVADO", { mensagens: [...lerCanal(deps.db).mensagens, ...lerMensagensOperacionaisCanal(deps.db, acessoCanal)] });
+      }
       const caixa = lerCanal(deps.db);
       const mensagens = caixa.mensagens.filter((item) => item.contatoId === parsed.data.contatoId);
       if (!mensagens.length) return reply(409, "MENSAGEM_CONTATO_NAO_ENCONTRADA");
@@ -1186,6 +1211,7 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
     if (rota === "carregarConsulta") {
       const parsed = ConsultaCarregar.safeParse(raw);
       if (!parsed.success) return reply(400, "PAYLOAD_INVALIDO");
+      await processarPendenciasClinicasCanal(deps.db, { agora: deps.agora(), cadastros: cadastrosCanal(deps.db) });
       const anterior=deps.sessoes.consultaSelecionada(token);
       if(anterior?.patientId!==parsed.data.patientId||anterior?.encounterId!==parsed.data.encounterId||(anterior?.tumorLotId??null)!==(parsed.data.tumorLotId??null))deps.ditado?.cancelar(token);
       let leituraInicial: Parameters<NonNullable<NonNullable<Parameters<typeof lerConsulta>[5]>["aoLer"]>>[0] | undefined;
@@ -1197,8 +1223,10 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
       else deps.sessoes.selecionarConsulta(token, null);
       const integrado = !("codigo" in result) && deps.motorF1
         ? await deps.motorF1.consultar({patientId:result.patientId,encounterId:result.encounterId,tumorLotId:result.tumorLotId},leituraInicial) : null;
+      const contatosCanal = !("codigo" in result) ? { mensagens: lerMensagensOperacionaisCanal(deps.db,
+        { sessoes: deps.sessoes, token, agora: deps.agora() }).filter(m => m.patientId === result.patientId) } : undefined;
       return reply("codigo" in result ? 404 : 200, "codigo" in result ? result.codigo : "CONSULTA_CARREGADA",
-        integrado && !("codigo" in result) ? {...result,dutos:projetarDutos(leituraInicial?.itens??[],{patientId:result.patientId,encounterId:result.encounterId,tumorLotId:result.tumorLotId},deps.corpus),retrato:integrado.retrato,...(integrado.visaoIntegrada?{visaoIntegrada:integrado.visaoIntegrada}:{})}:result);
+        integrado && !("codigo" in result) ? {...result,contatosCanal,dutos:projetarDutos(leituraInicial?.itens??[],{patientId:result.patientId,encounterId:result.encounterId,tumorLotId:result.tumorLotId},deps.corpus),retrato:integrado.retrato,...(integrado.visaoIntegrada?{visaoIntegrada:integrado.visaoIntegrada}:{})}:"codigo" in result?result:{...result,contatosCanal});
     }
     if (rota === "rascunhoFlash" || rota === "prepararFlash") {
       const base = { patientId: Id, encounterId: Id, tumorLotId: Id.nullable(), plano: PlanoFlashEntrada };
@@ -1304,6 +1332,7 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
     if (rota === "canal") {
       const parsed = z.object({}).strict().safeParse(raw);
       if (!parsed.success) return reply(400, "PAYLOAD_INVALIDO");
+      await processarPendenciasClinicasCanal(deps.db, { agora: deps.agora(), cadastros: cadastrosCanal(deps.db) });
       const legado=lerCanal(deps.db),operacionais=lerMensagensOperacionaisCanal(deps.db,{sessoes:deps.sessoes,token,agora:deps.agora()});
       const result={...legado,mensagens:[...legado.mensagens,...operacionais],estado:operacionais.length?'PARCIAL':legado.estado};
       return reply(200, result.estado === "FONTE_AUSENTE" ? "FONTE_CANAL_AUSENTE" : "CANAL_CARREGADO", result);

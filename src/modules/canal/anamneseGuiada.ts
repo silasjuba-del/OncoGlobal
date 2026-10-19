@@ -104,9 +104,11 @@ export function compilarResumoEstruturadoAnamnese(entrada: {
   alertasRedFlag?: readonly string[];
   geradoEm: string;
 }): ResumoEstruturadoAnamnese {
-  const respostasPorPasso = new Map<string, RespostaPassoAnamnese>();
+  const respostasPorPasso = new Map<string, RespostaPassoAnamnese[]>();
   for (const r of entrada.respostas) {
-    respostasPorPasso.set(r.passoId, r);
+    const respostas = respostasPorPasso.get(r.passoId) ?? [];
+    respostas.push(r);
+    respostasPorPasso.set(r.passoId, respostas);
   }
 
   const itensColetados: ResumoEstruturadoAnamnese["itensColetados"] = [];
@@ -117,47 +119,57 @@ export function compilarResumoEstruturadoAnamnese(entrada: {
   const alertasEscalonamentoMedico: string[] = [...(entrada.alertasRedFlag ?? [])];
 
   for (const passo of entrada.roteiro.passos) {
-    const resp = respostasPorPasso.get(passo.passoId);
-    if (!resp || resp.polaridade === "NAO_RESPONDIDO") {
-      if (passo.obrigatorioParaResumo) {
-        lacunasExplicitas.push(`${passo.dominioClinico}: passo obrigatório "${passo.passoId}" não respondido`);
+    const respostas = respostasPorPasso.get(passo.passoId) ?? [];
+    if (respostas.length > 1) {
+      incertezasExplicitas.push(`A CONFERIR: múltiplas respostas para o passo "${passo.passoId}"; nenhum relato substitui outro.`);
+    }
+    for (const resp of respostas.length ? respostas : [undefined]) {
+      if (!resp || resp.polaridade === "NAO_RESPONDIDO") {
+        if (resp && respostas.length > 1) {
+          // O contrato de itens não admite NAO_RESPONDIDO. Preserva a resposta e
+          // sua proveniência nas lacunas, em partes dentro do limite do contrato.
+          const registro = JSON.stringify(resp);
+          for (let i = 0; i < registro.length; i += 400) {
+            lacunasExplicitas.push(`A CONFERIR: resposta NAO_RESPONDIDO, parte ${i / 400 + 1}: ${registro.slice(i, i + 400)}`);
+          }
+        }
+        if (passo.obrigatorioParaResumo) {
+          lacunasExplicitas.push(`${passo.dominioClinico}: passo obrigatório "${passo.passoId}" não respondido`);
+        }
+        if (passo.tipo === "SOLICITACAO_DOCUMENTO_EXAME" || passo.tipo === "SOLICITACAO_FOTO_LESAO_OU_RECEITA") {
+          documentosSolicitadosPendentes.push(passo.passoId);
+        }
+        continue;
       }
-      if (passo.tipo === "SOLICITACAO_DOCUMENTO_EXAME" || passo.tipo === "SOLICITACAO_FOTO_LESAO_OU_RECEITA") {
+
+      if ((passo.tipo === "SOLICITACAO_DOCUMENTO_EXAME" || passo.tipo === "SOLICITACAO_FOTO_LESAO_OU_RECEITA")
+        && !resp.documentoOuFotoRef) {
         documentosSolicitadosPendentes.push(passo.passoId);
+        lacunasExplicitas.push(`${passo.dominioClinico}: documento/foto solicitado em "${passo.passoId}" ainda não anexado`);
       }
-      continue;
-    }
 
-    if ((passo.tipo === "SOLICITACAO_DOCUMENTO_EXAME" || passo.tipo === "SOLICITACAO_FOTO_LESAO_OU_RECEITA")
-      && !resp.documentoOuFotoRef) {
-      documentosSolicitadosPendentes.push(passo.passoId);
-      lacunasExplicitas.push(`${passo.dominioClinico}: documento/foto solicitado em "${passo.passoId}" ainda não anexado`);
-    }
+      if (resp.polaridade === "INCERTO_DUVIDA") {
+        incertezasExplicitas.push(`${passo.dominioClinico}: relato com incerteza/dúvida ("${resp.respostaLiteral}")`);
+      }
+      if (resp.polaridade === "NEGADO") {
+        negacoesPreservadas.push(`${passo.dominioClinico}: negado pelo relato ("${resp.respostaLiteral}")`);
+      }
 
-    if (resp.polaridade === "INCERTO_DUVIDA") {
-      incertezasExplicitas.push(`${passo.dominioClinico}: relato com incerteza/dúvida ("${resp.respostaLiteral}")`);
-    }
-    if (resp.polaridade === "NEGADO") {
-      negacoesPreservadas.push(`${passo.dominioClinico}: negado pelo relato ("${resp.respostaLiteral}")`);
-    }
+      const pedidoTerapeutico = verificarPedidoTerapeuticoNaAnamnese(resp.respostaLiteral);
+      if (pedidoTerapeutico.pediuCondutaOuDose) {
+        alertasEscalonamentoMedico.push(`Solicitação de dose/conduta detectada no passo ${passo.passoId}: requer resposta médica.`);
+      }
 
-    const pedidoTerapeutico = verificarPedidoTerapeuticoNaAnamnese(resp.respostaLiteral);
-    if (pedidoTerapeutico.pediuCondutaOuDose) {
-      alertasEscalonamentoMedico.push(`Solicitação de dose/conduta detectada no passo ${passo.passoId}: requer resposta médica.`);
+      itensColetados.push({
+        passoId: passo.passoId,
+        dominioClinico: passo.dominioClinico,
+        resumoItem: resp.respostaLiteral,
+        polaridade: resp.polaridade,
+        fonte: resp.fonte,
+      });
     }
-
-    itensColetados.push({
-      passoId: passo.passoId,
-      dominioClinico: passo.dominioClinico,
-      resumoItem: resp.respostaLiteral,
-      polaridade: resp.polaridade,
-      fonte: resp.fonte,
-    });
   }
 
-  const orientacoesAprovadasIds = entrada.roteiro.lembretesOrientacoes
-    .filter((o) => o.statusCuradoria === "CONFERIDA_MEDICO")
-    .map((o) => o.orientacaoId);
 
   return ResumoEstruturadoAnamnese.parse({
     schema: "ResumoEstruturadoAnamnese@1",
@@ -173,7 +185,8 @@ export function compilarResumoEstruturadoAnamnese(entrada: {
     incertezasExplicitas,
     negacoesPreservadas,
     alertasEscalonamentoMedico,
-    orientacoesFixasEntreguesIds: orientacoesAprovadasIds,
+    // Curadoria não comprova entrega ao paciente.
+    orientacoesFixasEntreguesIds: [],
     avaliacaoMedicaConcluida: false,
     defineDiagnostico: false,
     defineDoseOuPrescricao: false,

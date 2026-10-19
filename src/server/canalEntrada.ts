@@ -1054,6 +1054,12 @@ export function detalheMensagemCanal(
   mensagemId: string,
 ): { ok: false; codigo: "SESSAO_INVALIDA" | "MENSAGEM_AUSENTE" } | FalhaArmazenamento | { ok: true; mensagem: ItemCaixa } {
   if (!sessaoValida(acesso)) return { ok: false, codigo: "SESSAO_INVALIDA" };
+  return lerMensagemIngressoLocal(db, mensagemId);
+}
+
+/** Leitura interna do processador local; não é uma porta HTTP nem concede autoridade clínica. */
+export function lerMensagemIngressoLocal(db: DatabaseSync, mensagemId: string):
+  { ok: false; codigo: "MENSAGEM_AUSENTE" } | FalhaArmazenamento | { ok: true; mensagem: ItemCaixa } {
   try {
     garantirSchema(db);
     const linha = db.prepare(

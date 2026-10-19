@@ -8,6 +8,8 @@ import { Instante, Sessao } from "../contracts/base.js";
 import { Contato, Paciente } from "../contracts/clinico.js";
 import { ActionIntent } from "../contracts/operacao.js";
 import { ReconciliacaoClinicaCanal } from "../contracts/f2/reconciliacaoCanal.js";
+import { cadastrosCanal, vinculoAtualCanal } from "./canalOperacao.js";
+import { classificarRemetente } from "../modules/canal/ingresso.js";
 import {
   AutorizacaoRespostaCanalServidor,
   RascunhoRespostaCanal,
@@ -251,7 +253,10 @@ export function prepararRascunhoRespostaCanal(
   const det = detalheMensagemCanal(db, acesso, entrada.mensagemOrigemId);
   if (!det.ok) return det;
 
-  if (det.mensagem.vinculo.classe !== "CONHECIDO" || det.mensagem.vinculo.patientId !== entrada.contexto.patientId) {
+  const vinculadoNoIngresso = det.mensagem.vinculo.classe === "CONHECIDO" && det.mensagem.vinculo.patientId === entrada.contexto.patientId;
+  const vinculadoPosteriormente = det.mensagem.canal === "WHATSAPP_SERVICO" && det.mensagem.vinculo.classe === "DESCONHECIDO"
+    && vinculoAtualCanal(db, entrada.contexto.patientId, det.mensagem.senderRef);
+  if (!vinculadoNoIngresso && !vinculadoPosteriormente) {
     return { ok: false, codigo: "CONTATO_NAO_VINCULADO_AO_PACIENTE" };
   }
   if (entrada.contatoId !== undefined && entrada.contatoId !== det.mensagem.senderRef) {
@@ -662,10 +667,12 @@ export function revalidarAutorizacaoSaidaCanalNoLedger(
     }
 
     const msgRow = db.prepare(
-      "SELECT vinculoClasse, vinculoPatientId, senderRef, provaMetodo FROM canal_mensagem WHERE mensagemId = ?",
-    ).get(aut.mensagemOrigemId) as { vinculoClasse: string; vinculoPatientId: string | null; senderRef: string; provaMetodo: string } | undefined;
-    if (!msgRow || msgRow.provaMetodo === "IMAP_CONTA_LOCAL" || msgRow.vinculoClasse !== "CONHECIDO"
-      || msgRow.vinculoPatientId !== aut.contexto.patientId
+      "SELECT vinculoClasse, vinculoPatientId, senderRef, provaMetodo, canal FROM canal_mensagem WHERE mensagemId = ?",
+    ).get(aut.mensagemOrigemId) as { vinculoClasse: string; vinculoPatientId: string | null; senderRef: string; provaMetodo: string; canal: string } | undefined;
+    const vinculoValido = msgRow && ((msgRow.vinculoClasse === "CONHECIDO" && msgRow.vinculoPatientId === aut.contexto.patientId)
+      || (msgRow.vinculoClasse === "DESCONHECIDO" && msgRow.canal === "WHATSAPP_SERVICO"
+        && vinculoAtualCanal(db, aut.contexto.patientId, msgRow.senderRef)));
+    if (!msgRow || msgRow.provaMetodo === "IMAP_CONTA_LOCAL" || !vinculoValido
       || msgRow.senderRef !== aut.destinatarioCanonico) {
       return { ok: false, codigo: "CONTATO_NAO_VINCULADO_AO_PACIENTE" };
     }
@@ -973,6 +980,14 @@ export function integrarCanalNaPreConsultaECabecalho(
           : vinculoReconciliado?.estado === "AMBIGUO" ? "AMBIGUO" : "DESCONHECIDO",
         vinculoPatientId: vinculoReconciliado?.patientId ?? null,
       };
+    }
+    if (l.canal === "WHATSAPP_SERVICO" && (!vinculoReconciliado || vinculoReconciliado.estado === "FILA_REVISAO")) {
+      const atual = classificarRemetente(l.senderRef, "TELEFONE", cadastrosCanal(db));
+      if (atual.classe === "CONHECIDO" && (l.vinculoPatientId === null || l.vinculoPatientId === atual.patientId)) {
+        l = { ...l, vinculoClasse: "CONHECIDO", vinculoPatientId: atual.patientId };
+      } else if (atual.classe === "AMBIGUO" || (atual.patientId && l.vinculoPatientId && atual.patientId !== l.vinculoPatientId)) {
+        l = { ...l, vinculoClasse: "AMBIGUO", vinculoPatientId: null };
+      }
     }
     // Projeção segura inclusive de linhas legadas; o registro original permanece intacto.
     if (l.provaMetodo === "IMAP_CONTA_LOCAL") {
