@@ -1,0 +1,293 @@
+// S-F2-02 · Serviço local de vínculo, desidentificação pré-LLM, classificação e reconciliação clínica do canal.
+// Mantém relato do paciente separado de fato confirmado pelo médico (revisao: "REVISAR").
+// Não remove o bloqueio de envio externo (CANAL_EXTERNO_NAO_HABILITADO preservado em S-F2-02).
+import type { DatabaseSync } from "node:sqlite";
+import { readFileSync } from "node:fs";
+import { ReconciliacaoClinicaCanal, type PropostaClassificacaoLlmBruta } from "../contracts/f2/reconciliacaoCanal.js";
+import { g02PhiEgress } from "../kernel/harness/gates.js";
+import { desidentificar, type DicionarioPaciente } from "../kernel/llm/desidentificar.js";
+import { transacao } from "../kernel/ledger/db.js";
+import { lerCanalRedflags } from "../rules/canalRedflags.js";
+import { tipoIdentificadorDoCanal } from "../modules/canal/ingresso.js";
+import {
+  avaliarAlarmesCanalConferidos,
+  classificarRelatoCanal,
+  detectarConflitosRelatoCanal,
+  resolverVinculoReconciliadoCanal,
+  type ContatoExistenteStatus,
+  type RulesetAlarmeCanalEntrada,
+} from "../modules/canal/reconciliacaoClinica.js";
+import type { CadastroVinculo } from "../modules/canal/vinculo.js";
+import {
+  consultarCaixaCanal,
+  detalheMensagemCanal,
+  garantirSchema,
+  type AcessoCanal,
+  type FalhaArmazenamento,
+  type ItemCaixa,
+} from "./canalEntrada.js";
+
+export type ClassificadorCanalLlm = (entrada: {
+  textoDesidentificado: string;
+  origemCanal: "WHATSAPP_SERVICO" | "EMAIL";
+}) => Promise<PropostaClassificacaoLlmBruta | unknown> | PropostaClassificacaoLlmBruta | unknown;
+
+let rulesetPadraoCache: RulesetAlarmeCanalEntrada | null = null;
+
+export function carregarRulesetAlarmeCanalPadrao(): RulesetAlarmeCanalEntrada | null {
+  if (rulesetPadraoCache) return rulesetPadraoCache;
+  try {
+    const raw = JSON.parse(
+      readFileSync(new URL("../../corpus/rulesets/canal-redflags.v1.json", import.meta.url), "utf8"),
+    ) as Record<string, unknown>;
+    const lido = lerCanalRedflags(raw);
+    const sinaisBrutos = Array.isArray(raw.sinais) ? raw.sinais as Array<Record<string, unknown>> : [];
+    rulesetPadraoCache = {
+      rulesetId: lido.rulesetId,
+      rulesetVersao: lido.rulesetVersao,
+      fraseFinal: lido.fraseFinal,
+      sinais: lido.sinais.map((s, idx) => ({
+        ...s,
+        fonte: typeof sinaisBrutos[idx]?.fonte === "string" ? String(sinaisBrutos[idx]!.fonte) : "[VERIFICAR]",
+      })),
+    };
+    return rulesetPadraoCache;
+  } catch {
+    return null;
+  }
+}
+
+function garantirTabelaReconciliacao(db: DatabaseSync): void {
+  garantirSchema(db);
+  db.exec(`
+    CREATE TABLE IF NOT EXISTS canal_reconciliacao_clinica (
+      mensagemId TEXT PRIMARY KEY REFERENCES canal_mensagem(mensagemId),
+      reconciliacaoJson TEXT NOT NULL,
+      avaliadoEm TEXT NOT NULL
+    );
+    CREATE TRIGGER IF NOT EXISTS canal_reconciliacao_no_update BEFORE UPDATE ON canal_reconciliacao_clinica
+      BEGIN SELECT RAISE(ABORT, 'canal_reconciliacao_clinica append-only'); END;
+    CREATE TRIGGER IF NOT EXISTS canal_reconciliacao_no_delete BEFORE DELETE ON canal_reconciliacao_clinica
+      BEGIN SELECT RAISE(ABORT, 'canal_reconciliacao_clinica append-only'); END;
+  `);
+}
+
+function montarDicionarioDesidentificacao(
+  cadastros: readonly CadastroVinculo[],
+  senderRef: string,
+  nomesExtras: readonly string[] = [],
+): DicionarioPaciente {
+  const nomes = new Set<string>(nomesExtras.filter((n) => n.trim().length > 0));
+  const identificadores = new Set<string>([senderRef]);
+  for (const c of cadastros) {
+    if (c.nome && c.nome.trim()) nomes.add(c.nome.trim());
+    for (const id of c.identificadores) {
+      if (id.valor.trim()) identificadores.add(id.valor.trim());
+    }
+  }
+  if (nomes.size === 0) nomes.add("Paciente Sintetico Padrao");
+  return {
+    nomes: [...nomes],
+    identificadores: [...identificadores],
+  };
+}
+
+/**
+ * Processa e reconcilia uma mensagem persistida no canal (S-F2-02).
+ * - Se usar classificador LLM, desidentifica antes (FN-24) e passa por G-02 (g02PhiEgress).
+ * - Preserva negação, dúvida, temporalidade, autor, origem e conflitos.
+ * - Só ativa alarmes de regras CONFERIDA_MEDICO/APROVADO (regras em RASCUNHO permanecem inativas).
+ * - Nunca cria evento em clinical_event nem promove a fato confirmado.
+ */
+export async function reconciliarMensagemCanalPersistida(
+  db: DatabaseSync,
+  acesso: AcessoCanal,
+  opcoes: {
+    mensagemId: string;
+    cadastros: readonly CadastroVinculo[];
+    nomeDeclaradoNoRemetente?: string | null;
+    chaveDemografica?: string | null;
+    statusContatoExistente?: ContatoExistenteStatus | null;
+    dicionarioExtras?: { nomes?: readonly string[]; identificadores?: readonly string[] };
+    classificadorLlm?: ClassificadorCanalLlm;
+    rulesetAlarmes?: RulesetAlarmeCanalEntrada | null;
+  },
+): Promise<
+  | { ok: false; codigo: "SESSAO_INVALIDA" | "MENSAGEM_AUSENTE" | "PHI_EGRESS_BLOQUEADO" }
+  | FalhaArmazenamento
+  | { ok: true; reconciliacao: ReconciliacaoClinicaCanal; replay: boolean }
+> {
+  const det = detalheMensagemCanal(db, acesso, opcoes.mensagemId);
+  if (!det.ok) return det;
+
+  try {
+    garantirTabelaReconciliacao(db);
+    const jaExistente = db.prepare(
+      "SELECT reconciliacaoJson FROM canal_reconciliacao_clinica WHERE mensagemId = ?",
+    ).get(opcoes.mensagemId) as { reconciliacaoJson: string } | undefined;
+    if (jaExistente) {
+      return {
+        ok: true,
+        reconciliacao: ReconciliacaoClinicaCanal.parse(JSON.parse(jaExistente.reconciliacaoJson)),
+        replay: true,
+      };
+    }
+  } catch {
+    return { ok: false, codigo: "ARMAZENAMENTO_INDISPONIVEL", recuperavel: true, persistida: false };
+  }
+
+  const msg: ItemCaixa = det.mensagem;
+  const vinculo = resolverVinculoReconciliadoCanal({
+    endereco: msg.senderRef,
+    tipo: tipoIdentificadorDoCanal(msg.canal),
+    nomeDeclaradoNoRemetente: opcoes.nomeDeclaradoNoRemetente ?? null,
+    chaveDemografica: opcoes.chaveDemografica ?? null,
+    cadastros: opcoes.cadastros,
+    statusContatoExistente: opcoes.statusContatoExistente ?? null,
+  });
+
+  const ehMidia = msg.conteudo.tipo === "MEDIA_UNPROCESSED";
+  const textoOriginal = msg.conteudo.tipo === "TEXT" ? msg.conteudo.texto : "";
+
+  let propostaLlm: {
+    textoDesidentificadoEnviado: string;
+    phiEgressPassou: boolean;
+    saidaBrutaLlm: unknown;
+  } | null = null;
+
+  if (opcoes.classificadorLlm && !ehMidia) {
+    const dicBase = montarDicionarioDesidentificacao(
+      opcoes.cadastros,
+      msg.senderRef,
+      [
+        ...(opcoes.nomeDeclaradoNoRemetente ? [opcoes.nomeDeclaradoNoRemetente] : []),
+        ...(opcoes.dicionarioExtras?.nomes ?? []),
+      ],
+    );
+    const dic: DicionarioPaciente = {
+      nomes: dicBase.nomes,
+      identificadores: [...new Set([...dicBase.identificadores, ...(opcoes.dicionarioExtras?.identificadores ?? [])])],
+    };
+    const desid = desidentificar(textoOriginal, dic);
+    const gate = g02PhiEgress(desid.texto, dic);
+    if (gate.decisao !== "PASSA") {
+      return { ok: false, codigo: "PHI_EGRESS_BLOQUEADO" };
+    }
+    try {
+      const saidaBrutaLlm = await opcoes.classificadorLlm({
+        textoDesidentificado: desid.texto,
+        origemCanal: msg.canal,
+      });
+      propostaLlm = {
+        textoDesidentificadoEnviado: desid.texto,
+        phiEgressPassou: true,
+        saidaBrutaLlm,
+      };
+    } catch {
+      propostaLlm = null;
+    }
+  }
+
+  const classificacao = classificarRelatoCanal({
+    textoOriginal,
+    ehMidia,
+    origemCanal: msg.canal,
+    providerSentAt: msg.providerSentAt,
+    ingestedAt: msg.ingestedAt,
+    ...(opcoes.statusContatoExistente?.relacao ? { relacaoCadastrada: opcoes.statusContatoExistente.relacao } : {}),
+    vinculado: vinculo.estado === "VINCULADO",
+    propostaLlm,
+  });
+
+  const ruleset = opcoes.rulesetAlarmes === undefined
+    ? carregarRulesetAlarmeCanalPadrao()
+    : opcoes.rulesetAlarmes;
+
+  const alarmes = avaliarAlarmesCanalConferidos({
+    textoOriginal,
+    mencoes: classificacao.mencoes,
+    patientIdVinculado: vinculo.patientId,
+    autorRelato: classificacao.autorRelato,
+    ruleset,
+  });
+
+  // Busca reconciliações anteriores do mesmo remetente ou do mesmo patientId para detectar conflitos de relato
+  const caixa = consultarCaixaCanal(db, acesso);
+  const anteriores: Array<{ mensagemId: string; mencoes: ReconciliacaoClinicaCanal["classificacao"]["mencoes"] }> = [];
+  if (caixa.ok) {
+    for (const item of caixa.mensagens) {
+      if (item.mensagemId === msg.mensagemId) continue;
+      const mesmoEscopo = item.senderRef === msg.senderRef
+        || (vinculo.patientId !== null && item.vinculo.patientId === vinculo.patientId);
+      if (!mesmoEscopo) continue;
+      const row = db.prepare(
+        "SELECT reconciliacaoJson FROM canal_reconciliacao_clinica WHERE mensagemId = ?",
+      ).get(item.mensagemId) as { reconciliacaoJson: string } | undefined;
+      if (!row) continue;
+      const parsed = ReconciliacaoClinicaCanal.safeParse(JSON.parse(row.reconciliacaoJson));
+      if (parsed.success) {
+        anteriores.push({ mensagemId: item.mensagemId, mencoes: parsed.data.classificacao.mencoes });
+      }
+    }
+  }
+
+  const conflitosRelato = detectarConflitosRelatoCanal(
+    { mensagemId: msg.mensagemId, mencoes: classificacao.mencoes },
+    anteriores,
+  );
+
+  const reconciliacao = ReconciliacaoClinicaCanal.parse({
+    schema: "ReconciliacaoClinicaCanal@1",
+    mensagemId: msg.mensagemId,
+    accountId: msg.accountId,
+    senderRef: msg.senderRef,
+    vinculo,
+    classificacao,
+    alarmes,
+    conflitosRelato,
+    naturezaEvidencia: "RELATO_CANAL_NAO_CONFIRMADO",
+    revisao: "REVISAR",
+    diagnostico: false,
+    prescricao: false,
+    assinatura: false,
+    avaliadoEm: acesso.agora,
+  });
+
+  try {
+    return transacao(db, () => {
+      garantirTabelaReconciliacao(db);
+      db.prepare(`
+        INSERT INTO canal_reconciliacao_clinica (mensagemId, reconciliacaoJson, avaliadoEm)
+        VALUES (?, ?, ?)
+        ON CONFLICT(mensagemId) DO NOTHING
+      `).run(msg.mensagemId, JSON.stringify(reconciliacao), acesso.agora);
+
+      db.prepare(`
+        INSERT INTO canal_pendencia_resolucao (mensagemId, resolvidoEm, resultadoJson)
+        VALUES (?, ?, ?)
+        ON CONFLICT(mensagemId) DO NOTHING
+      `).run(msg.mensagemId, acesso.agora, JSON.stringify({
+        reciboTecnico: "PROCESSADA",
+        vinculoEstado: vinculo.estado,
+        categoria: classificacao.categoria,
+        estadoRegras: alarmes.estadoRegras,
+      }));
+
+      return { ok: true as const, reconciliacao, replay: false };
+    });
+  } catch {
+    return { ok: false, codigo: "ARMAZENAMENTO_INDISPONIVEL", recuperavel: true, persistida: false };
+  }
+}
+
+export function lerReconciliacaoMensagemCanal(
+  db: DatabaseSync,
+  mensagemId: string,
+): ReconciliacaoClinicaCanal | null {
+  garantirTabelaReconciliacao(db);
+  const row = db.prepare(
+    "SELECT reconciliacaoJson FROM canal_reconciliacao_clinica WHERE mensagemId = ?",
+  ).get(mensagemId) as { reconciliacaoJson: string } | undefined;
+  if (!row) return null;
+  return ReconciliacaoClinicaCanal.parse(JSON.parse(row.reconciliacaoJson));
+}
