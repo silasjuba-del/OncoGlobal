@@ -28,6 +28,8 @@ export type ConteudoCanal =
     mimeType: string | null;
     sizeBytes: number | null;
     contentSha256: string | null;
+    /** Alegação do provedor, ainda não verificada contra os bytes da mídia. */
+    providerSha256?: string;
   };
 
 export type CorpoWebhook = {
@@ -303,11 +305,14 @@ export function admitirConteudo(valor: unknown): ConteudoCanal | null {
     return { tipo: "TEXT", texto: registro.texto, contentSha256 };
   }
   if (registro.tipo === "MEDIA_UNPROCESSED"
-    && mesmaLista(chaves, ["contentSha256", "mimeType", "processamento", "providerMediaId", "sizeBytes", "tipo"])) {
+    && (mesmaLista(chaves, ["contentSha256", "mimeType", "processamento", "providerMediaId", "sizeBytes", "tipo"])
+      || mesmaLista(chaves, ["contentSha256", "mimeType", "processamento", "providerMediaId", "providerSha256", "sizeBytes", "tipo"]))) {
     const mimeType = registro.mimeType;
     const sizeBytes = registro.sizeBytes;
     const contentSha256 = registro.contentSha256;
     if (registro.processamento !== "NAO_PROCESSADA") return null;
+    if (registro.providerSha256 !== undefined
+      && (typeof registro.providerSha256 !== "string" || !/^[a-f0-9]{64}$/.test(registro.providerSha256))) return null;
     if (contentSha256 !== null && (typeof contentSha256 !== "string" || !/^[a-f0-9]{64}$/.test(contentSha256))) return null;
     if (!idValido(registro.providerMediaId)) return null;
     if (mimeType !== null && (typeof mimeType !== "string" || mimeType.length === 0 || mimeType.length > 120)) return null;
@@ -319,6 +324,7 @@ export function admitirConteudo(valor: unknown): ConteudoCanal | null {
       mimeType,
       sizeBytes,
       contentSha256,
+      ...(typeof registro.providerSha256 === "string" ? { providerSha256: registro.providerSha256 } : {}),
     };
   }
   return null;
@@ -361,7 +367,8 @@ function lerMidia(valor: unknown): ConteudoCanal | null {
   const chaves = Object.keys(media).sort();
   const aceitaSha = mesmaLista(chaves, ["mimeType", "providerMediaId", "sha256", "sizeBytes"]);
   if (!mesmaLista(chaves, CHAVES_MEDIA) && !aceitaSha) return null;
-  if (aceitaSha && media.sha256 !== null) return null;
+  if (aceitaSha && media.sha256 !== null
+    && (typeof media.sha256 !== "string" || !/^[a-f0-9]{64}$/.test(media.sha256))) return null;
   const mimeType = media.mimeType;
   const sizeBytes = media.sizeBytes;
   if (!idValido(media.providerMediaId)) return null;
@@ -374,6 +381,7 @@ function lerMidia(valor: unknown): ConteudoCanal | null {
     mimeType,
     sizeBytes,
     contentSha256: null,
+    ...(typeof media.sha256 === "string" ? { providerSha256: media.sha256 } : {}),
   };
 }
 

@@ -1,6 +1,7 @@
 // S-F2-03 · Caixa clínica, integração com pré-consulta/cabeçalho, leitura local de mídia
 // e autorização específica no servidor para resposta pelo Action Gateway.
 import { createHash } from "node:crypto";
+import { hashCanonico } from "../modules/hash.js";
 import type { DatabaseSync } from "node:sqlite";
 import type { z } from "zod";
 import { Instante, Sessao } from "../contracts/base.js";
@@ -137,6 +138,10 @@ export function registrarLeituraLocalMidiaCanal(
   const sha256LocalComprovado = createHash("sha256").update(entrada.bytesLocais).digest("hex");
   if (det.mensagem.conteudo.contentSha256 !== null
     && det.mensagem.conteudo.contentSha256 !== sha256LocalComprovado) {
+    return { ok: false, codigo: "MIDIA_BYTES_INVALIDOS" };
+  }
+  if (det.mensagem.conteudo.providerSha256 !== undefined
+    && det.mensagem.conteudo.providerSha256 !== sha256LocalComprovado) {
     return { ok: false, codigo: "MIDIA_BYTES_INVALIDOS" };
   }
   const providerMediaId = det.mensagem.conteudo.providerMediaId;
@@ -286,12 +291,33 @@ export function prepararRascunhoRespostaCanal(
   try {
     garantirTabelasS03(db);
     return transacao(db, () => {
-      const jaInvalidada = db.prepare(
-        "SELECT invalidada FROM canal_resposta_rascunho WHERE respostaId = ? AND versao = ?",
-      ).get( parsed.data.respostaId, parsed.data.versao ) as { invalidada: number } | undefined;
-      if (jaInvalidada?.invalidada === 1) {
+      const existente = db.prepare(
+        "SELECT invalidada, rascunhoJson FROM canal_resposta_rascunho WHERE respostaId = ? AND versao = ?",
+      ).get(parsed.data.respostaId, parsed.data.versao) as { invalidada: number; rascunhoJson: string } | undefined;
+      const ultima = db.prepare(
+        "SELECT MAX(versao) AS versao FROM canal_resposta_rascunho WHERE respostaId = ?",
+      ).get(parsed.data.respostaId) as { versao: number | null };
+      if (existente?.invalidada === 1 || (ultima.versao !== null && ultima.versao > parsed.data.versao)) {
         return { ok: false as const, codigo: "RASCUNHO_INVALIDO" as const };
       }
+      if (existente) {
+        const anterior = RascunhoRespostaCanal.parse(JSON.parse(existente.rascunhoJson));
+        const aut = db.prepare("SELECT 1 FROM canal_resposta_autorizada WHERE respostaId = ? AND versao = ?")
+          .get(parsed.data.respostaId, parsed.data.versao);
+        if (anterior.confirmadoPeloMedico || aut) {
+          const conteudoAnterior = { ...anterior, exibidoEm: parsed.data.exibidoEm,
+            confirmadoPeloMedico: false, confirmadoPorMedicoId: null, confirmadoPorCrm: null, confirmadoEm: null };
+          if (!anterior.confirmadoPeloMedico || hashCanonico(conteudoAnterior) !== hashCanonico(parsed.data)) {
+            return { ok: false as const, codigo: "RASCUNHO_INVALIDO" as const };
+          }
+          return { ok: true as const, rascunho: anterior };
+        }
+      }
+      // Nova revisão conserva o histórico e revoga a saída da revisão anterior.
+      db.prepare("UPDATE canal_resposta_autorizada SET invalidada = 1 WHERE respostaId = ? AND versao < ?")
+        .run(parsed.data.respostaId, parsed.data.versao);
+      db.prepare("UPDATE canal_resposta_rascunho SET invalidada = 1 WHERE respostaId = ? AND versao < ?")
+        .run(parsed.data.respostaId, parsed.data.versao);
       db.prepare(`
         INSERT INTO canal_resposta_rascunho (respostaId, versao, rascunhoJson, invalidada, criadoEm)
         VALUES (?, ?, ?, 0, ?)
@@ -621,9 +647,9 @@ export function revalidarAutorizacaoSaidaCanalNoLedger(
     }
 
     const msgRow = db.prepare(
-      "SELECT vinculoClasse, vinculoPatientId, senderRef FROM canal_mensagem WHERE mensagemId = ?",
-    ).get(aut.mensagemOrigemId) as { vinculoClasse: string; vinculoPatientId: string | null; senderRef: string } | undefined;
-    if (!msgRow || msgRow.vinculoClasse !== "CONHECIDO"
+      "SELECT vinculoClasse, vinculoPatientId, senderRef, provaMetodo FROM canal_mensagem WHERE mensagemId = ?",
+    ).get(aut.mensagemOrigemId) as { vinculoClasse: string; vinculoPatientId: string | null; senderRef: string; provaMetodo: string } | undefined;
+    if (!msgRow || msgRow.provaMetodo === "IMAP_CONTA_LOCAL" || msgRow.vinculoClasse !== "CONHECIDO"
       || msgRow.vinculoPatientId !== aut.contexto.patientId
       || msgRow.senderRef !== aut.destinatarioCanonico) {
       return { ok: false, codigo: "CONTATO_NAO_VINCULADO_AO_PACIENTE" };
@@ -864,7 +890,7 @@ export function integrarCanalNaPreConsultaECabecalho(
 
   const linhas = db.prepare(`
     SELECT m.mensagemId, m.accountId, m.providerMessageId, m.canal, m.senderRef,
-           m.providerSentAt, m.ingestedAt, m.conteudo, m.vinculoClasse, m.vinculoPatientId,
+           m.providerSentAt, m.ingestedAt, m.conteudo, m.vinculoClasse, m.vinculoPatientId, m.provaMetodo,
            r.resolvidoEm, ml.sha256LocalComprovado
     FROM canal_mensagem m
     LEFT JOIN canal_pendencia_resolucao r ON r.mensagemId = m.mensagemId
@@ -881,11 +907,16 @@ export function integrarCanalNaPreConsultaECabecalho(
     conteudo: string;
     vinculoClasse: "CONHECIDO" | "DESCONHECIDO" | "AMBIGUO";
     vinculoPatientId: string | null;
+    provaMetodo: string;
     resolvidoEm: string | null;
     sha256LocalComprovado: string | null;
   }>;
 
   const mensagensParaResumo: MensagemEntradaResumo[] = linhas.map((l) => {
+    // Projeção segura inclusive de linhas legadas; o registro original permanece intacto.
+    if (l.provaMetodo === "IMAP_CONTA_LOCAL") {
+      l = { ...l, vinculoClasse: "DESCONHECIDO", vinculoPatientId: null };
+    }
     const rawConteudo = JSON.parse(l.conteudo) as Record<string, unknown>;
     const revogado = contatoFoiRevogadoNoLedger(db, l.senderRef, l.senderRef);
     const estadoVinculo: EstadoVinculoContatoEntrada = revogado

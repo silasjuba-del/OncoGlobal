@@ -178,6 +178,7 @@ type Linha = {
   vinculoClasse: string;
   vinculoPatientId: string | null;
   vinculoMotivo: string;
+  provaMetodo: string;
 };
 
 const LIMITE_CAIXA = 500;
@@ -285,6 +286,7 @@ export function receberEnvelopeWebhookCanal(
     falharAntesDoCommitTeste?: boolean;
   },
 ): ResultadoEnvelopeWebhook {
+  try { if (db.isTransaction) return falhaArmazenamento(); } catch { return falhaArmazenamento(); }
   const contaResolvida = resolverContaWebhookConfigurada(pedido.keyId, contexto.contasConfiguradas);
   if (!contaResolvida.ok) {
     contexto.log?.({ codigo: contaResolvida.codigo, accountId: "desconhecida", providerMessageId: null });
@@ -302,7 +304,12 @@ export function receberEnvelopeWebhookCanal(
     return { ok: false, codigo: "PAYLOAD_MALFORMADO", persistida: false };
   }
   const { envelope } = interpretado;
-  if (envelope.accountRef !== null && envelope.accountRef !== conta.accountId) {
+  const segredoCompartilhado = contexto.contasConfiguradas.some(
+    (outra) => outra.accountId !== conta.accountId
+      && createHash("sha256").update(outra.segredo).digest("hex") === createHash("sha256").update(conta.segredo).digest("hex"),
+  );
+  if ((segredoCompartilhado && envelope.accountRef === null)
+    || (envelope.accountRef !== null && envelope.accountRef !== conta.accountId)) {
     contexto.log?.({ codigo: "CONTA_INCORRETA", accountId: conta.accountId, providerMessageId: null });
     return { ok: false, codigo: "CONTA_INCORRETA", persistida: false };
   }
@@ -394,10 +401,10 @@ export function receberEnvelopeWebhookCanal(
         throw new Error("FALHA_INJETADA_ANTES_DO_COMMIT");
       }
 
+      if (mensagens.some((m) => m.classificacao === "CONFLITO" && !m.quarentenada)) {
+        throw new Error("CONFLITO_NAO_QUARENTENADO");
+      }
       if (conflitos.length > 0 && !contexto.autorizarAckConflitoQuarentenado) {
-        if (contexto.quarentenarConflito === false) {
-          throw new Error("CONFLITO_NAO_QUARENTENADO");
-        }
         return {
           ok: false as const,
           codigo: "CONFLITO_ENVELOPE" as const,
@@ -431,7 +438,7 @@ export function receberEnvelopeWebhookCanal(
  * Persiste mensagens e pendências ANTES de atualizar o checkpoint e retornar confirmação.
  * Se UIDVALIDITY mudar, marca o checkpoint como RECONCILIACAO_UIDVALIDITY_NECESSARIA e recusa avanço automático.
  */
-export function ingerirLoteImapCanal(
+export async function ingerirLoteImapCanal(
   db: DatabaseSync,
   entrada: {
     accountId: string;
@@ -440,9 +447,9 @@ export function ingerirLoteImapCanal(
     mensagens: readonly MensagemImapEntrada[];
     cadastros: readonly CadastroVinculo[];
     ingestedAt: string;
-    marcarProcessadoNoServidorImap?: (uidsPersistidos: readonly number[]) => void;
+    marcarProcessadoNoServidorImap?: (uidsPersistidos: readonly number[]) => void | Promise<void>;
   },
-):
+): Promise<
   | FalhaArmazenamento
   | {
     ok: false;
@@ -459,40 +466,42 @@ export function ingerirLoteImapCanal(
   | {
     ok: true;
     checkpoint: CheckpointImapCanal;
+    persistida: true;
+    marcacaoRemota: "NAO_SOLICITADA" | "PENDENTE" | "CONFIRMADA";
     resultados: Array<{ uid: number; providerMessageId: string; classificacao: "NOVA" | "REPLAY" | "CONFLITO"; reciboId: string }>;
-  } {
+  }> {
+  // Não tratar SAVEPOINT como commit durável, nem marcar a caixa antes de um commit externo.
   try {
+    if (db.isTransaction) return falhaArmazenamento();
     garantirSchema(db);
-    const checkpointAtual = lerCheckpointImapCanal(db, entrada.accountId, entrada.mailbox);
-    const decisao = prepararLoteImap({
-      accountId: entrada.accountId,
-      mailbox: entrada.mailbox,
-      uidValiditySessao: entrada.uidValiditySessao,
-      checkpointAtual,
-      mensagens: entrada.mensagens,
-      verificadoEm: entrada.ingestedAt,
-    });
-
-    if (!decisao.ok) {
-      if (decisao.codigo === "UIDVALIDITY_ALTERADO_RECONCILIACAO_EXIGIDA" && checkpointAtual) {
-        transacao(db, () => {
-          db.prepare(`
-            UPDATE canal_imap_checkpoint
-            SET estadoReconciliacao = 'RECONCILIACAO_UIDVALIDITY_NECESSARIA', atualizadoEm = ?
-            WHERE accountId = ? AND mailbox = ?
-          `).run(entrada.ingestedAt, entrada.accountId, entrada.mailbox);
-        });
-      }
-      return {
-        ok: false,
-        codigo: decisao.codigo,
-        persistida: false,
-        ...(decisao.uidValidityAnterior !== undefined ? { uidValidityAnterior: decisao.uidValidityAnterior } : {}),
-        ...(decisao.uidValidityRecebido !== undefined ? { uidValidityRecebido: decisao.uidValidityRecebido } : {}),
-      };
-    }
-
     const gravado = transacao(db, () => {
+      const checkpointAtual = lerCheckpointImapCanal(db, entrada.accountId, entrada.mailbox);
+      const decisao = prepararLoteImap({
+        accountId: entrada.accountId,
+        mailbox: entrada.mailbox,
+        uidValiditySessao: entrada.uidValiditySessao,
+        checkpointAtual,
+        mensagens: entrada.mensagens,
+        verificadoEm: entrada.ingestedAt,
+      });
+
+      if (!decisao.ok) {
+        if (decisao.codigo === "UIDVALIDITY_ALTERADO_RECONCILIACAO_EXIGIDA" && checkpointAtual) {
+            db.prepare(`
+              UPDATE canal_imap_checkpoint
+              SET estadoReconciliacao = 'RECONCILIACAO_UIDVALIDITY_NECESSARIA', atualizadoEm = ?
+              WHERE accountId = ? AND mailbox = ?
+            `).run(entrada.ingestedAt, entrada.accountId, entrada.mailbox);
+        }
+        return {
+          ok: false as const,
+          codigo: decisao.codigo,
+          persistida: false as const,
+          ...(decisao.uidValidityAnterior !== undefined ? { uidValidityAnterior: decisao.uidValidityAnterior } : {}),
+          ...(decisao.uidValidityRecebido !== undefined ? { uidValidityRecebido: decisao.uidValidityRecebido } : {}),
+        };
+      }
+
       const resultados: Array<{ uid: number; providerMessageId: string; classificacao: "NOVA" | "REPLAY" | "CONFLITO"; reciboId: string }> = [];
       for (const msg of decisao.mensagensAdmitidas) {
         const ack = persistirEntradaNaTransacao(db, {
@@ -518,6 +527,12 @@ export function ingerirLoteImapCanal(
           classificacao: ack.ok ? (ack.resultado === "RECEBIDA" ? "NOVA" : "REPLAY") : "CONFLITO",
           reciboId: ack.reciboId,
         });
+        if (entrada.marcarProcessadoNoServidorImap) {
+          db.prepare(`
+            INSERT INTO canal_imap_marcacao (accountId, mailbox, uidValidity, uid, confirmadoEm)
+            VALUES (?, ?, ?, ?, NULL) ON CONFLICT DO NOTHING
+          `).run(entrada.accountId, entrada.mailbox, entrada.uidValiditySessao, msg.uid);
+        }
       }
 
       const novoCheckpoint = criarCheckpointReconciliado({
@@ -546,12 +561,35 @@ export function ingerirLoteImapCanal(
         novoCheckpoint.atualizadoEm,
       );
 
-      return { checkpoint: novoCheckpoint, resultados };
+      return { ok: true as const, checkpoint: novoCheckpoint, resultados };
     });
 
-    // Somente APÓS o commit no SQLite local notificamos o callback opcional da caixa IMAP.
-    entrada.marcarProcessadoNoServidorImap?.(gravado.resultados.map((r) => r.uid));
-    return { ok: true, ...gravado };
+    if (!gravado.ok) return gravado;
+    // A marcação remota é idempotente e tem pendência durável, separada do commit local.
+    // Falha no callback NÃO apaga a persistência nem faz o checkpoint perder a tentativa.
+    let marcacaoRemota: "NAO_SOLICITADA" | "PENDENTE" | "CONFIRMADA" = "NAO_SOLICITADA";
+    if (entrada.marcarProcessadoNoServidorImap) {
+      marcacaoRemota = "PENDENTE";
+      try {
+        const pendentes = db.prepare(`
+          SELECT uid FROM canal_imap_marcacao
+          WHERE accountId = ? AND mailbox = ? AND uidValidity = ? AND confirmadoEm IS NULL ORDER BY uid
+        `).all(entrada.accountId, entrada.mailbox, entrada.uidValiditySessao) as Array<{ uid: number }>;
+        const uids = pendentes.map((p) => Number(p.uid));
+        if (uids.length > 0) {
+          await entrada.marcarProcessadoNoServidorImap(uids);
+          transacao(db, () => {
+            const confirmar = db.prepare(`UPDATE canal_imap_marcacao SET confirmadoEm = ?
+              WHERE accountId = ? AND mailbox = ? AND uidValidity = ? AND uid = ? AND confirmadoEm IS NULL`);
+            for (const uid of uids) confirmar.run(entrada.ingestedAt, entrada.accountId, entrada.mailbox, entrada.uidValiditySessao, uid);
+          });
+        }
+        marcacaoRemota = "CONFIRMADA";
+      } catch {
+        // Próxima chamada, inclusive lote vazio, retoma os UIDs pendentes desta época.
+      }
+    }
+    return { ...gravado, persistida: true, marcacaoRemota };
   } catch {
     return falhaArmazenamento();
   }
@@ -672,7 +710,7 @@ export function retomarPendenciasCanal(
       const pendentes = db.prepare(`
         SELECT p.pendenciaId, p.mensagemId, m.accountId, m.providerMessageId, m.canal, m.senderRef,
                m.providerSentAt, m.ingestedAt, m.payloadSha256, m.conteudo,
-               m.vinculoClasse, m.vinculoPatientId, m.vinculoMotivo
+               m.vinculoClasse, m.vinculoPatientId, m.vinculoMotivo, m.provaMetodo
         FROM canal_pendencia p
         JOIN canal_mensagem m ON m.mensagemId = p.mensagemId
         LEFT JOIN canal_pendencia_resolucao r ON r.mensagemId = p.mensagemId
@@ -1001,7 +1039,7 @@ export function consultarCaixaCanal(
     garantirSchema(db);
     const linhas = db.prepare(
       `SELECT mensagemId, accountId, providerMessageId, canal, senderRef, providerSentAt, ingestedAt,
-        payloadSha256, conteudo, vinculoClasse, vinculoPatientId, vinculoMotivo
+        payloadSha256, conteudo, vinculoClasse, vinculoPatientId, vinculoMotivo, provaMetodo
        FROM canal_mensagem ORDER BY ingestedAt, mensagemId LIMIT ?`,
     ).all(LIMITE_CAIXA) as Linha[];
     return { ok: true, mensagens: linhas.map(itemDeLinha) };
@@ -1020,7 +1058,7 @@ export function detalheMensagemCanal(
     garantirSchema(db);
     const linha = db.prepare(
       `SELECT mensagemId, accountId, providerMessageId, canal, senderRef, providerSentAt, ingestedAt,
-        payloadSha256, conteudo, vinculoClasse, vinculoPatientId, vinculoMotivo
+        payloadSha256, conteudo, vinculoClasse, vinculoPatientId, vinculoMotivo, provaMetodo
        FROM canal_mensagem WHERE mensagemId=?`,
     ).get(mensagemId) as Linha | undefined;
     if (!linha) return { ok: false, codigo: "MENSAGEM_AUSENTE" };
@@ -1055,6 +1093,7 @@ function persistirEntrada(db: DatabaseSync, entrada: {
   const conteudo = admitirConteudo(entrada.conteudo);
   if (!conteudo || !entradaCoerente({ ...entrada, conteudo })) return { ok: false, codigo: "ENTRADA_INVALIDA", persistida: false };
   try {
+    if (db.isTransaction) return falhaArmazenamento();
     garantirSchema(db);
     return transacao(db, () => {
       return persistirEntradaNaTransacao(db, { ...entrada, conteudo });
@@ -1085,7 +1124,10 @@ function persistirEntradaNaTransacao(db: DatabaseSync, entrada: {
   if (!conteudo || !entradaCoerente({ ...entrada, conteudo })) {
     return { ok: false, codigo: "ENTRADA_INVALIDA", persistida: false };
   }
-  const vinculo = classificarRemetente(entrada.senderRef, tipoIdentificadorDoCanal(entrada.canal), entrada.cadastros);
+  // A autenticação da caixa IMAP não autentica o remetente do campo From.
+  const vinculo = entrada.provaMetodo === "IMAP_CONTA_LOCAL"
+    ? { classe: "DESCONHECIDO" as const, patientId: null, motivo: "REMETENTE_EMAIL_NAO_AUTENTICADO_REQUER_REVISAO" }
+    : classificarRemetente(entrada.senderRef, tipoIdentificadorDoCanal(entrada.canal), entrada.cadastros);
   const mensagemId = idMensagem(entrada.accountId, entrada.providerMessageId);
   const chave = { accountId: entrada.accountId, providerMessageId: entrada.providerMessageId };
 
@@ -1300,6 +1342,15 @@ export function garantirSchema(db: DatabaseSync): void {
       PRIMARY KEY (accountId, mailbox)
     );
 
+    CREATE TABLE IF NOT EXISTS canal_imap_marcacao (
+      accountId TEXT NOT NULL,
+      mailbox TEXT NOT NULL,
+      uidValidity INTEGER NOT NULL CHECK (uidValidity > 0),
+      uid INTEGER NOT NULL CHECK (uid > 0),
+      confirmadoEm TEXT,
+      PRIMARY KEY (accountId, mailbox, uidValidity, uid)
+    );
+
     CREATE TABLE IF NOT EXISTS canal_consentimento_evento (
       eventoId TEXT PRIMARY KEY,
       contatoId TEXT NOT NULL,
@@ -1378,7 +1429,9 @@ function itemDeLinha(linha: Linha): ItemCaixa {
     ingestedAt: linha.ingestedAt,
     payloadSha256: linha.payloadSha256,
     reciboTecnico: "RECEBIDA",
-    vinculo: {
+    vinculo: linha.provaMetodo === "IMAP_CONTA_LOCAL"
+      ? { classe: "DESCONHECIDO", patientId: null, motivo: "REMETENTE_EMAIL_NAO_AUTENTICADO_REQUER_REVISAO" }
+      : {
       classe: linha.vinculoClasse as VinculoIngresso["classe"],
       patientId: linha.vinculoPatientId,
       motivo: linha.vinculoMotivo,

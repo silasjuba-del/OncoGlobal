@@ -20,7 +20,7 @@ const ConteudoInbox = z.discriminatedUnion("tipo", [
   z.object({ tipo: z.literal("TEXT"), texto: TextoMensagem, contentSha256: HashSha256 }).strict(),
   z.object({ tipo: z.literal("MEDIA_UNPROCESSED"), processamento: z.literal("NAO_PROCESSADA"),
     providerMediaId: Id, mimeType: z.string().min(1).max(120).nullable(), sizeBytes: z.number().int().nonnegative().max(25_000_000).nullable(),
-    contentSha256: HashSha256.nullable() }).strict(),
+    contentSha256: HashSha256.nullable(), providerSha256: HashSha256.optional() }).strict(),
 ]);
 
 /** Projeção operacional local. Não é fato clínico confirmado nem autorização de resposta/egress. */

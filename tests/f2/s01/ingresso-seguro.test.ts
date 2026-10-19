@@ -353,7 +353,7 @@ describe("S-F2-01 · Ingresso seguro e recuperável (WhatsApp, IMAP, idempotênc
     expect(quarentena[0]!.eventoSha256Persistido).not.toBe(quarentena[0]!.eventoSha256Recebido);
   });
 
-  it("C · adaptador IMAP faz checkpoint por conta+mailbox+UIDVALIDITY+UID, exige reconciliação quando UIDVALIDITY muda e ignora nome do From", () => {
+  it("C · adaptador IMAP faz checkpoint por conta+mailbox+UIDVALIDITY+UID, exige reconciliação quando UIDVALIDITY muda e ignora nome do From", async () => {
     const { db } = ledger();
     const acesso = sessao();
     const emailReal = `${"maria.real"}${"@example.test"}`;
@@ -368,7 +368,7 @@ describe("S-F2-01 · Ingresso seguro e recuperável (WhatsApp, IMAP, idempotênc
     ];
 
     let marcadosNoServidorImap: readonly number[] = [];
-    const lote1 = ingerirLoteImapCanal(db, {
+    const lote1 = await ingerirLoteImapCanal(db, {
       accountId: "imap-clinica-1",
       mailbox: "INBOX",
       uidValiditySessao: 5001,
@@ -408,18 +408,17 @@ describe("S-F2-01 · Ingresso seguro e recuperável (WhatsApp, IMAP, idempotênc
     });
     expect(marcadosNoServidorImap).toEqual([10, 12]);
 
-    // Verificar que o remetente impostor NÃO vinculou à paciente-maria,
-    // enquanto o email cadastrado vinculou pelo endereço exato
+    // Autenticar a caixa IMAP não autentica o From, nem quando coincide com o cadastro.
     const caixa = consultarCaixaCanal(db, acesso);
     expect(caixa.ok).toBe(true);
     if (!caixa.ok) return;
     const msgImpostor = caixa.mensagens.find((m) => m.providerMessageId === "imap:INBOX:5001:10")!;
     const msgReal = caixa.mensagens.find((m) => m.providerMessageId === "imap:INBOX:5001:12")!;
     expect(msgImpostor.vinculo).toMatchObject({ classe: "DESCONHECIDO", patientId: null });
-    expect(msgReal.vinculo).toMatchObject({ classe: "CONHECIDO", patientId: "paciente-maria" });
+    expect(msgReal.vinculo).toMatchObject({ classe: "DESCONHECIDO", patientId: null });
 
     // Mudança de UIDVALIDITY (5001 -> 5002) bloqueia ingestão automática e marca checkpoint para reconciliação
-    const loteUidValidityMudou = ingerirLoteImapCanal(db, {
+    const loteUidValidityMudou = await ingerirLoteImapCanal(db, {
       accountId: "imap-clinica-1",
       mailbox: "INBOX",
       uidValiditySessao: 5002,
@@ -444,7 +443,7 @@ describe("S-F2-01 · Ingresso seguro e recuperável (WhatsApp, IMAP, idempotênc
     expect(lerCheckpointImapCanal(db, "imap-clinica-1", "INBOX")?.estadoReconciliacao).toBe("RECONCILIACAO_UIDVALIDITY_NECESSARIA");
 
     // Enquanto não reconciliado, novas leituras recusam avanço silencioso
-    expect(ingerirLoteImapCanal(db, {
+    expect(await ingerirLoteImapCanal(db, {
       accountId: "imap-clinica-1",
       mailbox: "INBOX",
       uidValiditySessao: 5002,
@@ -463,7 +462,7 @@ describe("S-F2-01 · Ingresso seguro e recuperável (WhatsApp, IMAP, idempotênc
     });
     expect(reconciliado.ok).toBe(true);
 
-    const lotePosReconciliacao = ingerirLoteImapCanal(db, {
+    const lotePosReconciliacao = await ingerirLoteImapCanal(db, {
       accountId: "imap-clinica-1",
       mailbox: "INBOX",
       uidValiditySessao: 5002,

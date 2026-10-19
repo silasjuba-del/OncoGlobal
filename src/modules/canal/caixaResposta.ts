@@ -184,6 +184,7 @@ export function montarResumosContatoPreConsulta(entrada: {
     });
 
     const revisaoEntradaHash = hashCanonico({
+      versaoProjecaoVinculo: 2,
       ultimaConsultaConfirmadaEm: entrada.ultimaConsultaConfirmadaEm,
       itens: ordenadas.map((m) => ({
         accountId: m.accountId ?? null,
@@ -197,6 +198,12 @@ export function montarResumosContatoPreConsulta(entrada: {
     });
 
     const primeira = ordenadas[0]!;
+    const pacientes = new Set(ordenadas.map((m) => m.patientId).filter((id) => id !== null));
+    // O vínculo da primeira mensagem não autentica as demais do mesmo endereço.
+    const estadoVinculo = ordenadas.some((m) => m.estadoVinculo === "REVOGADO") ? "REVOGADO"
+      : pacientes.size > 1 || ordenadas.some((m) => m.estadoVinculo === "CONFLITO") ? "CONFLITO"
+        : ordenadas.some((m) => m.estadoVinculo !== "CONTATO_EXATO" || m.patientId === null) ? "PENDENTE"
+          : "CONTATO_EXATO";
     const emCache = entrada.cacheAnterior?.get(chave) ?? entrada.cacheAnterior?.get(`${primeira.canal}:${primeira.contatoId}`);
     if (emCache && emCache.revisaoEntradaHash === revisaoEntradaHash) {
       resumosPorContato.push(emCache);
@@ -242,9 +249,9 @@ export function montarResumosContatoPreConsulta(entrada: {
     resumosPorContato.push(
       ResumoContatoIntegradoPreConsulta.parse({
         contatoId: primeira.contatoId,
-        patientId: primeira.patientId,
+        patientId: estadoVinculo === "CONTATO_EXATO" ? primeira.patientId : null,
         canal: primeira.canal,
-        estadoVinculo: primeira.estadoVinculo,
+        estadoVinculo,
         quantidadeTotalMensagens: ordenadas.length,
         quantidadeNovasDesdeUltimaConsulta: novas.length,
         ultimaMensagemEm: ultimaEm,
