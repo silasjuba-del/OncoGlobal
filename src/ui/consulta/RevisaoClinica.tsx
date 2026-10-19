@@ -62,7 +62,7 @@ export function RevisaoClinica({porta,contexto,versaoClinica,aoRegistrar=()=>{}}
       {atual.pendencias.map((p,i)=><p role="status" key={i}>{p}</p>)}
       {atual.pack?<div aria-label="Pack documental selecionado"><p><strong>{atual.pack.titulo}</strong> · {atual.pack.estado}</p>
         <p>Fonte: {atual.pack.original.arquivo} · versão {atual.pack.referencia.versao} · estado original: {atual.pack.original.estado}</p>
-        {atual.pack.estado!=="ATIVO"?<p>Conteúdo consultável, com revisão clínica pendente para gerar requisitos e propostas.</p>:null}
+        {atual.pack.estado!=="ATIVO"?<p>{atual.pack.revisaoClinica===null?"Não curado. ":""}Conteúdo consultável, com revisão clínica pendente para gerar requisitos e propostas.</p>:null}
         {atual.loteCompleto?<LoteTumoralCompleto key={atual.loteCompleto.original.sha256} lote={atual.loteCompleto}/>:BLOCOS_TUMOR_PACK.map(nome=><details key={nome}><summary>{ROTULOS_BLOCOS[nome]} · {atual.pack!.blocos[nome].estado}</summary>
           {atual.pack!.blocos[nome].itens.length?atual.pack!.blocos[nome].itens.map(item=><section key={item.localizador}>
             <h4>{item.localizador}</h4><pre style={{whiteSpace:"pre-wrap",overflowWrap:"anywhere"}}>{JSON.stringify(item.conteudo,null,2)}</pre></section>):<p>Não consta neste pack.</p>}</details>)}
