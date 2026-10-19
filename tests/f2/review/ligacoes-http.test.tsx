@@ -15,8 +15,8 @@ import {revisaoContextoCanal,vinculoAtualCanal,type OperacaoCanal} from '../../.
 import {criarPortaHttp} from '../../../src/ui/api/http.js';
 import {criarChaves} from '../../../src/ui/api/chaves.js';
 import {CaixaCanal} from '../../../src/ui/telas/canal/CaixaCanal.js';
-const SENDER='5500'+'000007777',CONTA='00000000',SEGREDO='segredo-exclusivamente-sintetico-http';
-const conta={accountId:CONTA,canal:'WHATSAPP_SERVICO' as const,keyId:'sintetica',segredo:SEGREDO,verifyToken:'token-sintetico'};
+const SENDER='5500'+'000007777',CONTA='wpp-consultorio',PHONE_NUMBER_ID='00000000',SEGREDO='segredo-exclusivamente-sintetico-http';
+const conta={accountId:CONTA,phoneNumberId:PHONE_NUMBER_ID,canal:'WHATSAPP_SERVICO' as const,keyId:'sintetica',segredo:SEGREDO,verifyToken:'token-sintetico'};
 const fechar:Array<()=>Promise<void>>=[];
 afterEach(async()=>{cleanup();vi.unstubAllGlobals();for(const f of fechar.splice(0).reverse())await f();});
 async function montar(configurada=true){
@@ -30,7 +30,7 @@ async function montar(configurada=true){
  a.seed('Contato',{contatoId:'contato-http-sintetico',canal:'WHATSAPP_SERVICO',endereco:SENDER,patientId:ctx.patientId,relacao:'PACIENTE',vinculadoEm:EM,revogadoEm:null});
  const post=async(path:string,body:unknown,token=a.login.token)=>{const r=await fetch(base+path,{method:'POST',headers:{'Content-Type':'application/json',Authorization:`Bearer ${token}`},body:JSON.stringify(body)});return {status:r.status,data:await r.json() as any};};
  const receber=async(id='mensagem-sintetica',texto='Quando é meu retorno?',sender=SENDER)=>{
-  const raw=JSON.stringify({object:'whatsapp_business_account',entry:[{id:'waba-sintetica',changes:[{field:'messages',value:{messaging_product:'whatsapp',metadata:{phone_number_id:CONTA},messages:[{from:sender,id,timestamp:String(Date.parse(EM)/1000),type:'text',text:{body:texto}}]}}]}]},null,2);
+  const raw=JSON.stringify({object:'whatsapp_business_account',entry:[{id:'waba-sintetica',changes:[{field:'messages',value:{messaging_product:'whatsapp',metadata:{phone_number_id:PHONE_NUMBER_ID},messages:[{from:sender,id,timestamp:String(Date.parse(EM)/1000),type:'text',text:{body:texto}}]}}]}]},null,2);
   const response=await fetch(base+'/canal/webhook/sintetica',{method:'POST',headers:{'Content-Type':'application/json','X-Hub-Signature-256':`sha256=${createHmac('sha256',SEGREDO).update(raw).digest('hex')}`},body:raw});
   return {status:response.status,data:await response.json() as any,raw};
  };
@@ -127,7 +127,7 @@ it('acuso técnico enviado não equivale a resposta médica nem encerra conversa
 });
 it('recibo nativo de entrega correlaciona o wamid preservado sem representar atendimento clínico',async()=>{
  const e=await montar(),p=await e.preparar();expect((await e.confirmar(p)).status).toBe(200);expect((await e.post('/acao',e.intent(p))).data.decisao).toBe('EXECUTADA');
- const raw=JSON.stringify({object:'whatsapp_business_account',entry:[{id:'waba-sintetica',changes:[{field:'messages',value:{messaging_product:'whatsapp',metadata:{phone_number_id:CONTA},statuses:[{id:'recibo-sintetico',status:'read',timestamp:String(Date.parse(EM)/1000+60),recipient_id:SENDER}]}}]}]});
+ const raw=JSON.stringify({object:'whatsapp_business_account',entry:[{id:'waba-sintetica',changes:[{field:'messages',value:{messaging_product:'whatsapp',metadata:{phone_number_id:PHONE_NUMBER_ID},statuses:[{id:'recibo-sintetico',status:'read',timestamp:String(Date.parse(EM)/1000+60),recipient_id:SENDER}]}}]}]});
  const r=await fetch(e.base+'/canal/webhook/sintetica',{method:'POST',headers:{'Content-Type':'application/json','X-Hub-Signature-256':`sha256=${createHmac('sha256',SEGREDO).update(raw).digest('hex')}`},body:raw});expect(r.status).toBe(200);
  const caixa=await e.post('/consulta/canal',{});expect(caixa.data.mensagens[0].reciboTecnico).toBe('LIDA');expect(caixa.data.mensagens[0].pendenciaProcessamento).toBe(false);
 });

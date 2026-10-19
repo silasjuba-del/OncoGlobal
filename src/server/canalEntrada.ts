@@ -308,8 +308,23 @@ export function receberEnvelopeWebhookCanal(
     (outra) => outra.accountId !== conta.accountId
       && createHash("sha256").update(outra.segredo).digest("hex") === createHash("sha256").update(conta.segredo).digest("hex"),
   );
-  if ((segredoCompartilhado && envelope.accountRef === null)
-    || (envelope.accountRef !== null && envelope.accountRef !== conta.accountId)) {
+  // O parser Meta usa accountRef para o phone_number_id. O envelope sintético
+  // usa accountRef lógico. O formato é identificado nos bytes já autenticados.
+  let nativoMeta: boolean;
+  try {
+    // Mesmo decoder dos autenticadores/parser: aceita BOM UTF-8 e recusa bytes inválidos.
+    nativoMeta = JSON.parse(new TextDecoder("utf-8", { fatal: true }).decode(autenticado.bytes)).object === "whatsapp_business_account";
+  } catch {
+    contexto.log?.({ codigo: "PAYLOAD_MALFORMADO", accountId: conta.accountId, providerMessageId: null });
+    return { ok: false, codigo: "PAYLOAD_MALFORMADO", persistida: false };
+  }
+  const referenciaResolvida = resolverContaWebhookConfigurada(pedido.keyId, contexto.contasConfiguradas,
+    envelope.accountRef ?? undefined, nativoMeta ? "PHONE_NUMBER_ID" : "ACCOUNT_ID");
+  if (!referenciaResolvida.ok) {
+    contexto.log?.({ codigo: referenciaResolvida.codigo, accountId: conta.accountId, providerMessageId: null });
+    return { ok: false, codigo: referenciaResolvida.codigo, persistida: false };
+  }
+  if (segredoCompartilhado && envelope.accountRef === null) {
     contexto.log?.({ codigo: "CONTA_INCORRETA", accountId: conta.accountId, providerMessageId: null });
     return { ok: false, codigo: "CONTA_INCORRETA", persistida: false };
   }
