@@ -21,6 +21,7 @@ export function CaixaCanal({
   const [visao, setVisao] = useState<CaixaCanalVisao | null>(null);
   const [ocupado, setOcupado] = useState(false);
   const [mensagem, setMensagem] = useState("");
+  const [novasRespostas, setNovasRespostas] = useState<ReadonlySet<string>>(new Set());
 
   useEffect(() => {
     let viva = true;
@@ -92,7 +93,10 @@ export function CaixaCanal({
                 </p>
               ) : null}
               {mensagem.redFlag ? <p className="semaforo semaforo-vermelho">red flag</p> : null}
-              <RespostaCanal
+              {mensagem.estadoConversa === "RESPONDIDA" && !novasRespostas.has(mensagem.mensagemId) ? <div>
+                <p>Resposta médica enviada; resolução clínica não registrada automaticamente.</p>
+                <button type="button" onClick={() => setNovasRespostas(atuais => new Set([...atuais, mensagem.mensagemId]))}>Preparar nova resposta médica</button>
+              </div> : <RespostaCanal
                 porta={porta}
                 chaves={chaves}
                 mensagemId={mensagem.mensagemId}
@@ -100,9 +104,15 @@ export function CaixaCanal({
                 redFlag={mensagem.redFlag}
                 contextos={mensagem.contextosResposta??[]}
                 origemCanal={mensagem.origemCanal??'WHATSAPP_SERVICO'}
+                aoEnviar={() => {
+                  void Promise.resolve().then(() => porta.caixaCanal()).then(proxima => {
+                    setVisao(proxima);
+                    setNovasRespostas(atuais => new Set([...atuais].filter(id => id !== mensagem.mensagemId)));
+                  }).catch(() => setMensagem("Resposta enviada; não foi possível atualizar a caixa."));
+                }}
                 {...(mensagem.destinatarioExibido !== undefined ? { destinatario: mensagem.destinatarioExibido } : { destinatario: mensagem.contatoId })}
                 {...(mensagem.contextoExibido?.encounterId !== undefined ? { encounterId: mensagem.contextoExibido.encounterId } : {})}
-              />
+              />}
             </article>
           ))}
         </section>

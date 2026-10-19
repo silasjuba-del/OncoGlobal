@@ -10,7 +10,7 @@ import {criarServidorLocal} from '../../../src/server/http.js';
 import {criarGateway,memoriaIdempotencia} from '../../../src/kernel/gateway/gateway.js';
 import {registrarConsentimentoCanal,revogarConsentimentoCanal,receberTransporteSintetico} from '../../../src/server/canalEntrada.js';
 import {reconciliarMensagemCanalPersistida} from '../../../src/server/canalReconciliacao.js';
-import {executarEnvioAutorizadoCanal} from '../../../src/server/canalResposta.js';
+import {executarEnvioAutorizadoCanal,prepararRascunhoRespostaCanal} from '../../../src/server/canalResposta.js';
 import {revisaoContextoCanal,vinculoAtualCanal,type OperacaoCanal} from '../../../src/server/canalOperacao.js';
 import {criarPortaHttp} from '../../../src/ui/api/http.js';
 import {criarChaves} from '../../../src/ui/api/chaves.js';
@@ -110,9 +110,20 @@ it('HTTP prepara, confirma e envia a resposta correta uma vez; replay durável s
  const e=await montar(),p=await e.preparar();expect((await e.post('/acao',e.intent(p))).data.codigo).toBe('RESPOSTA_NAO_CONFIRMADA_PELO_MEDICO');expect(e.efeitos()).toBe(0);
  expect((await e.confirmar(p)).status).toBe(200);expect((await e.post('/acao',e.intent(p))).data.decisao).toBe('EXECUTADA');expect(e.efeitos()).toBe(1);
  expect(e.a.db.prepare('SELECT providerReceiptId FROM canal_resposta_envio').get()?.providerReceiptId).toBe('recibo-sintetico');
+ expect((await e.post('/consulta/canal',{})).data.mensagens[0]).toMatchObject({estadoConversa:'RESPONDIDA',reciboTecnico:'ENVIADA'});
  await e.reiniciar();expect((await e.post('/acao',e.intent(p,'outra-chave'))).data.decisao).toBe('REPLAY');expect(e.efeitos()).toBe(1);
+ expect((await e.post('/consulta/canal',{})).data.mensagens[0].estadoConversa).toBe('RESPONDIDA');
  expect(revogarConsentimentoCanal(e.a.db,e.a.acesso,{contatoId:SENDER,patientId:ctx.patientId,origem:'REVOGACAO_MEDICO'}).ok).toBe(true);
  expect((await e.post('/acao',e.intent(p))).status).toBe(409);expect(e.efeitos()).toBe(1);
+});
+it('acuso técnico enviado não equivale a resposta médica nem encerra conversa',async()=>{
+ const e=await montar(),p=await e.preparar();
+ const tecnico=prepararRascunhoRespostaCanal(e.a.db,e.a.acesso,{respostaId:'acuso-sintetico',versao:1,mensagemOrigemId:p.mensagemOrigemId,
+  contexto:p.contexto,tipoResposta:'ACUSO_RECEBIMENTO_TECNICO',texto:'Recebimento técnico registrado.'});
+ if(!tecnico.ok)throw Error('ACUSO_SINTETICO');
+ expect((await e.confirmar(tecnico.rascunho)).status).toBe(200);
+ expect((await e.post('/acao',e.intent(tecnico.rascunho))).data.decisao).toBe('EXECUTADA');
+ expect((await e.post('/consulta/canal',{})).data.mensagens[0]).toMatchObject({estadoConversa:'AGUARDA_MEDICO',reciboTecnico:'ENVIADA'});
 });
 it('recibo nativo de entrega correlaciona o wamid preservado sem representar atendimento clínico',async()=>{
  const e=await montar(),p=await e.preparar();expect((await e.confirmar(p)).status).toBe(200);expect((await e.post('/acao',e.intent(p))).data.decisao).toBe('EXECUTADA');

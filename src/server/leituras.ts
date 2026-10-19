@@ -569,10 +569,42 @@ export function validarCatalogoApac(caixas: readonly CaixaNumerada[]):
 export function lerApacs(db: DatabaseSync, agora: string, config: {
   caixas: readonly CaixaNumerada[]; sigtap: TabelasSigtap; cnesConfigurado: string; offsetServico?: string;
 }) {
-  const all = eventos(db), apacs = apacTimeline(all);
+  const all = eventos(db), apacsLedger = apacTimeline(all);
   const catalogoApac = validarCatalogoApac(config.caixas);
   const civil = dataCivilDoServico(agora, config.offsetServico ?? FUSO_SERVICO);
   if (civil.estado !== "OK") return { hoje: null, itens: [], estado: "PENDENTE", codigo: civil.codigo };
+  // A negativa F4 é uma decisão persistida sobre a mesma versão/conteúdo,
+  // não apenas um atalho para campoOrigem. Reutiliza a leitura única do ledger.
+  type NegativaPersistida = { apacId: string; patientId: string; tumorLotId: string;
+    comprovanteRef: string; apacNegadaJson: string; registradoEm: string };
+  let negativas: NegativaPersistida[] = [];
+  if (db.prepare("SELECT 1 FROM sqlite_master WHERE type='table' AND name='f4_apac_retrograda'").get()) {
+    negativas = db.prepare("SELECT apacId, patientId, tumorLotId, comprovanteRef, apacNegadaJson, registradoEm FROM f4_apac_retrograda")
+      .all() as NegativaPersistida[];
+  }
+  const apacs = apacsLedger.map(original => {
+    const event = all.find(e => e.eventId === original.eventId);
+    const row = negativas.find(n => n.apacId === original.apacId && n.patientId === event?.patientId
+      && n.tumorLotId === original.tumorLotId && n.tumorLotId === event?.tumorLotId);
+    if (!row || !event) return original;
+    try {
+      const parsed = Apac.safeParse(JSON.parse(row.apacNegadaJson));
+      if (!parsed.success) return original;
+      const negada = parsed.data, recebido = negada.resultadoExterno;
+      const registradoEm = Date.parse(row.registradoEm);
+      if (negada.apacId !== original.apacId || negada.tumorLotId !== original.tumorLotId
+        || negada.versao !== original.versao || negada.estado !== "NEGADA" || recebido?.valor !== "NEGADA"
+        || recebido.comprovanteRef !== row.comprovanteRef || !Number.isFinite(registradoEm)
+        || registradoEm > Date.parse(agora) || Date.parse(recebido.recebidoEm) > registradoEm
+        || Date.parse(event.criadoEm) > registradoEm) return original;
+      // Uma decisão externa posterior (ou empate ambíguo) mantém precedência.
+      if (original.resultadoExterno && Date.parse(original.resultadoExterno.recebidoEm) >= Date.parse(recebido.recebidoEm)) return original;
+      const { eventId, estado: _estado, resultadoExterno: _resultado, ...conteudoOriginal } = original;
+      const { estado: _estadoNegada, resultadoExterno: _resultadoNegada, ...conteudoNegada } = negada;
+      if (hashConteudoExibido(conteudoOriginal) !== hashConteudoExibido(conteudoNegada)) return original;
+      return { ...negada, eventId };
+    } catch { return original; } // Registro inválido nunca troca contexto ou decisão vigente.
+  });
   const lots = porTipo(all, "TumorLot", TumorLot), patients = porTipo(all, "Paciente", Paciente);
   return { hoje: civil.dataCivil, itens: apacs.flatMap((apac) => {
     const event = all.find((e) => e.eventId === apac.eventId);
@@ -613,16 +645,6 @@ export function lerApacs(db: DatabaseSync, agora: string, config: {
         comprovanteRef: apac.resultadoExterno.comprovanteRef,
         codigo: codigoExtraido,
       }).campoOrigem;
-    } else {
-      try {
-        const temTabelaF4 = db.prepare("SELECT 1 AS ok FROM sqlite_master WHERE type='table' AND name='f4_apac_retrograda'").get();
-        if (temTabelaF4) {
-          const rowRet = db.prepare("SELECT campoOrigem FROM f4_apac_retrograda WHERE apacId = ?").get(apac.apacId) as { campoOrigem: string | null } | undefined;
-          if (rowRet && (rowRet.campoOrigem === "estadiamentos" || rowRet.campoOrigem === "histologia" || rowRet.campoOrigem === "topografia" || rowRet.campoOrigem === "cid")) {
-            campoOrigemRetrograda = rowRet.campoOrigem;
-          }
-        }
-      } catch { /* fallback seguro */ }
     }
     return [{ apac, lote, nomePaciente: paciente.nome, patientId: paciente.patientId,
       encounterId: event.encounterId,
