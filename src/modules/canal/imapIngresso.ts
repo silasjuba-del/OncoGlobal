@@ -183,7 +183,7 @@ export function prepararLoteImap(entrada: {
 
 /**
  * Extrai apenas o endereço de e-mail normalizado em minúsculas.
- * Se vier `"Maria Silva <maria@example.test>"`, extrai `"maria@example.test"` e descarta o nome declaratório.
+ * Se vier `"Nome Declarado <endereco-local>"`, extrai apenas a parte entre `<...>` em minúsculas e descarta o nome declaratório.
  */
 export function extrairEnderecoEmailPuro(fromRaw: string): string | null {
   if (typeof fromRaw !== "string") return null;

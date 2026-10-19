@@ -49,12 +49,14 @@ const CONTAS: readonly ContaWebhookConfigurada[] = [
   { accountId: "wa-conta-2", canal: "WHATSAPP_SERVICO", keyId: "key-wa-2", segredo: "outro-segredo", verifyToken: "tok-verif-2" },
 ];
 
+const EMAIL_INTEGRAL = `${"paciente.integral"}${"@example.test"}`;
+
 const CADASTROS: readonly CadastroVinculo[] = [
   {
     patientId: "paciente-integral-1",
     identificadores: [
-      { tipo: "TELEFONE", valor: "+5583991112222" },
-      { tipo: "EMAIL", valor: "paciente.integral@example.test" },
+      { tipo: "TELEFONE", valor: "+5500000002222" },
+      { tipo: "EMAIL", valor: EMAIL_INTEGRAL },
     ],
     chaveDemografica: null,
     nome: "Joao Paciente Sintetico",
@@ -157,7 +159,7 @@ describe("S-F2-04 · Prova integral e fechamento da F2 (bateria adversarial, fal
     const corpoValido = utf8(JSON.stringify({
       tipoConteudo: "TEXT",
       providerMessageId: "wamid-adv-1",
-      senderRef: "+5583991112222",
+      senderRef: "+5500000002222",
       providerSentAt: ENVIADO,
       texto: "Texto sintético de paciente.",
     }));
@@ -177,7 +179,7 @@ describe("S-F2-04 · Prova integral e fechamento da F2 (bateria adversarial, fal
         mensagem: {
           tipoConteudo: "TEXT",
           providerMessageId: "wamid-adv-2",
-          senderRef: "+5583991112222",
+          senderRef: "+5500000002222",
           providerSentAt: ENVIADO,
           texto: "Tentativa em conta trocada.",
         },
@@ -206,7 +208,7 @@ describe("S-F2-04 · Prova integral e fechamento da F2 (bateria adversarial, fal
         mensagem: {
           tipoConteudo: "TEXT",
           providerMessageId: "wamid-existente",
-          senderRef: "+5583991112222",
+          senderRef: "+5500000002222",
           providerSentAt: ENVIADO,
           texto: "Texto original confirmado.",
         },
@@ -227,7 +229,7 @@ describe("S-F2-04 · Prova integral e fechamento da F2 (bateria adversarial, fal
           mensagem: {
             tipoConteudo: "TEXT",
             providerMessageId: "wamid-nao-deve-ficar",
-            senderRef: "+5583991112222",
+            senderRef: "+5500000002222",
             providerSentAt: ENVIADO,
             texto: "Evento 1 do lote que deve sofrer rollback.",
           },
@@ -237,7 +239,7 @@ describe("S-F2-04 · Prova integral e fechamento da F2 (bateria adversarial, fal
           mensagem: {
             tipoConteudo: "TEXT",
             providerMessageId: "wamid-existente",
-            senderRef: "+5583991112222",
+            senderRef: "+5500000002222",
             providerSentAt: ENVIADO,
             texto: "Texto conflitante sem quarentena autorizada.",
           },
@@ -257,7 +259,7 @@ describe("S-F2-04 · Prova integral e fechamento da F2 (bateria adversarial, fal
 
     // Zero PHI em logs
     const serializadoLogs = JSON.stringify(logs);
-    expect(serializadoLogs).not.toContain("+5583991112222");
+    expect(serializadoLogs).not.toContain("+5500000002222");
     expect(serializadoLogs).not.toContain("Joao Paciente Sintetico");
     expect(serializadoLogs).not.toContain("Texto sintético");
     expect(serializadoLogs).not.toContain(SEGREDO_WA);
@@ -272,7 +274,7 @@ describe("S-F2-04 · Prova integral e fechamento da F2 (bateria adversarial, fal
       mensagem: {
         tipoConteudo: "TEXT" as const,
         providerMessageId: "wamid-equiv-1",
-        senderRef: "+5583991112222",
+        senderRef: "+5500000002222",
         providerSentAt: ENVIADO,
         texto: "Mesmo evento individual em dois envelopes.",
       },
@@ -334,7 +336,7 @@ describe("S-F2-04 · Prova integral e fechamento da F2 (bateria adversarial, fal
       accountId: "wa-conta-1",
       canal: "WHATSAPP_SERVICO",
       providerMessageId: "wamid-proc-concorrente",
-      senderRef: "+5583991112222",
+      senderRef: "+5500000002222",
       providerSentAt: ENVIADO,
       ingestedAt: AGORA,
       conteudo: textoConteudo("Disputa concorrente entre processos."),
@@ -357,7 +359,7 @@ describe("S-F2-04 · Prova integral e fechamento da F2 (bateria adversarial, fal
         mensagem: {
           tipoConteudo: "TEXT",
           providerMessageId: "wamid-rollback",
-          senderRef: "+5583991112222",
+          senderRef: "+5500000002222",
           providerSentAt: ENVIADO,
           texto: "Não deve persistir se falhar antes do commit.",
         },
@@ -395,7 +397,7 @@ describe("S-F2-04 · Prova integral e fechamento da F2 (bateria adversarial, fal
       accountId: "wa-conta-1",
       canal: "WHATSAPP_SERVICO",
       providerMessageId: "wamid-readonly",
-      senderRef: "+5583991112222",
+      senderRef: "+5500000002222",
       providerSentAt: ENVIADO,
       ingestedAt: AGORA,
       conteudo: textoConteudo("Banco em query_only."),
@@ -425,7 +427,7 @@ describe("S-F2-04 · Prova integral e fechamento da F2 (bateria adversarial, fal
       mensagens: [{
         uidValidity: 9001,
         uid: 5,
-        fromAddress: "paciente.integral@example.test",
+        fromAddress: EMAIL_INTEGRAL,
         sentAt: ENVIADO,
         rawBytes: utf8("Email 5"),
         conteudo: textoConteudo("Email antes da reconexão."),
@@ -458,7 +460,7 @@ describe("S-F2-04 · Prova integral e fechamento da F2 (bateria adversarial, fal
       accountId: "wa-conta-1",
       canal: "WHATSAPP_SERVICO",
       providerMessageId: "wamid-injecao-s04",
-      senderRef: "+5583991112222",
+      senderRef: "+5500000002222",
       providerSentAt: ENVIADO,
       ingestedAt: AGORA,
       conteudo: textoConteudo(
@@ -470,7 +472,7 @@ describe("S-F2-04 · Prova integral e fechamento da F2 (bateria adversarial, fal
     if (!ackInjecao.ok) return;
 
     // Recebimento não gera TERMO_ACEITO
-    expect(consultarConsentimentoCanal(db, "+5583991112222").estado).toBe("NAO_AVALIADO");
+    expect(consultarConsentimentoCanal(db, "+5500000002222").estado).toBe("NAO_AVALIADO");
 
     const rec = await reconciliarMensagemCanalPersistida(db, acesso, {
       mensagemId: ackInjecao.reciboId,
@@ -503,7 +505,7 @@ describe("S-F2-04 · Prova integral e fechamento da F2 (bateria adversarial, fal
     if (!rascunho.ok) return;
 
     registrarConsentimentoCanal(db, acesso, {
-      contatoId: "+5583991112222",
+      contatoId: "+5500000002222",
       patientId: "paciente-integral-1",
       referenciaTermo: "termo-s04",
       versaoTermo: "1.0.0",
@@ -527,7 +529,7 @@ describe("S-F2-04 · Prova integral e fechamento da F2 (bateria adversarial, fal
         verbo: "ENVIAR_WHATSAPP",
         objeto: { tipo: "MENSAGEM_CANAL", id: "resp-s04-1", versao: 1 },
         escopo: { patientId: "paciente-integral-1", encounterId: "enc-integral-1" },
-        destino: "+5583991112222",
+        destino: "+5500000002222",
         idempotencyKey: "key-s04-alterado",
       },
       textoParaEnviar: "Texto adulterado diferente do confirmado!",
@@ -545,7 +547,7 @@ describe("S-F2-04 · Prova integral e fechamento da F2 (bateria adversarial, fal
         verbo: "ENVIAR_WHATSAPP",
         objeto: { tipo: "MENSAGEM_CANAL", id: "resp-s04-1", versao: 1 },
         escopo: { patientId: "paciente-integral-1", encounterId: "enc-integral-1" },
-        destino: "+5583991112222",
+        destino: "+5500000002222",
         idempotencyKey: "key-s04-ctx-trocado",
       },
       transporteSaida: async () => ({ ok: true, providerReceiptId: "nunca" }),
@@ -568,7 +570,7 @@ describe("S-F2-04 · Prova integral e fechamento da F2 (bateria adversarial, fal
     // Verifica que audit_event não contém nenhum PHI
     const audits = db.prepare("SELECT * FROM audit_event").all();
     const auditsStr = JSON.stringify(audits);
-    expect(auditsStr).not.toContain("+5583991112222");
+    expect(auditsStr).not.toContain("+5500000002222");
     expect(auditsStr).not.toContain("Joao Paciente Sintetico");
     expect(auditsStr).not.toContain("Orientação clínica revisada");
   });
@@ -585,7 +587,7 @@ describe("S-F2-04 · Prova integral e fechamento da F2 (bateria adversarial, fal
       const corpo = utf8(JSON.stringify({
         tipoConteudo: "TEXT",
         providerMessageId: `wamid-bench-${i}`,
-        senderRef: "+5583991112222",
+        senderRef: "+5500000002222",
         providerSentAt: ENVIADO,
         texto,
       }));

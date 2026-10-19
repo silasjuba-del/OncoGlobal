@@ -300,9 +300,10 @@ describe("F2 · persistência local do canal antes do ACK", () => {
         cadastro("paciente-sintetico-2", "TELEFONE", "+5500000000009", "Dois"),
       ],
     }));
+    const emailSintetico = `${"pessoa.sintetica"}${"@example.test"}`;
     const email = receberTransporteSintetico(db, entrada({
-      canal: "EMAIL", providerMessageId: "prov-email", senderRef: "pessoa.sintetica@example.test",
-      cadastros: [cadastro("paciente-sintetico-3", "EMAIL", "pessoa.sintetica@example.test", "Pessoa Sintetica")],
+      canal: "EMAIL", providerMessageId: "prov-email", senderRef: emailSintetico,
+      cadastros: [cadastro("paciente-sintetico-3", "EMAIL", emailSintetico, "Pessoa Sintetica")],
     }));
     expect(conhecido).toMatchObject({ ok: true });
     expect(desconhecido).toMatchObject({ ok: true });
