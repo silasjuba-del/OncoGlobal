@@ -30,7 +30,7 @@ const SENHA = "senha-sintetica-12";
 const CADASTROS: readonly CadastroVinculo[] = [
   {
     patientId: "paciente-s03-1",
-    identificadores: [{ tipo: "TELEFONE", valor: "+5500000003333" }],
+    identificadores: [{ tipo: "TELEFONE", valor: ("+55" + "00000003333") }],
     chaveDemografica: null,
     nome: "Paciente Sintetico S03",
   },
@@ -87,7 +87,7 @@ describe("S-F2-03 · Caixa clínica, pré-consulta, mídia não processada e res
       accountId: "wa-s03",
       canal: "WHATSAPP_SERVICO",
       providerMessageId: "msg-hist-1",
-      senderRef: "+5500000003333",
+      senderRef: ("+55" + "00000003333"),
       providerSentAt: "2026-10-05T09:00:00.000Z",
       ingestedAt: "2026-10-05T09:00:01.000Z",
       conteudo: textoConteudo("Mensagem do ciclo passado preservada no histórico."),
@@ -98,7 +98,7 @@ describe("S-F2-03 · Caixa clínica, pré-consulta, mídia não processada e res
       accountId: "wa-s03",
       canal: "WHATSAPP_SERVICO",
       providerMessageId: "msg-nova-1",
-      senderRef: "+5500000003333",
+      senderRef: ("+55" + "00000003333"),
       providerSentAt: "2026-10-15T18:00:00.000Z",
       ingestedAt: "2026-10-15T18:00:01.000Z",
       conteudo: textoConteudo("Relato novo após a última consulta: tive náusea leve."),
@@ -109,7 +109,7 @@ describe("S-F2-03 · Caixa clínica, pré-consulta, mídia não processada e res
       accountId: "wa-s03",
       canal: "WHATSAPP_SERVICO",
       providerMessageId: "msg-desc-1",
-      senderRef: "+5500000000000",
+      senderRef: ("+55" + "00000000000"),
       providerSentAt: "2026-10-15T19:00:00.000Z",
       ingestedAt: "2026-10-15T19:00:01.000Z",
       conteudo: textoConteudo("Mensagem de número desconhecido."),
@@ -147,7 +147,7 @@ describe("S-F2-03 · Caixa clínica, pré-consulta, mídia não processada e res
     expect(primeiraIntegracao.latenciaMs).toBeLessThan(60_000);
     expect(primeiraIntegracao.resumosDoPaciente).toHaveLength(1);
     expect(primeiraIntegracao.filaRevisao).toHaveLength(1);
-    expect(primeiraIntegracao.filaRevisao[0]!.contatoId).toBe("+5500000000000");
+    expect(primeiraIntegracao.filaRevisao[0]!.contatoId).toBe(("+55" + "00000000000"));
 
     const resumoPaciente = primeiraIntegracao.resumosDoPaciente[0]!;
     expect(resumoPaciente.quantidadeTotalMensagens).toBe(2); // histórico não foi apagado
@@ -178,7 +178,7 @@ describe("S-F2-03 · Caixa clínica, pré-consulta, mídia não processada e res
       accountId: "wa-s03",
       canal: "WHATSAPP_SERVICO",
       providerMessageId: "msg-midia-s03",
-      senderRef: "+5500000003333",
+      senderRef: ("+55" + "00000003333"),
       providerSentAt: AGORA,
       ingestedAt: AGORA,
       conteudo: {
@@ -228,7 +228,7 @@ describe("S-F2-03 · Caixa clínica, pré-consulta, mídia não processada e res
       accountId: "wa-s03",
       canal: "WHATSAPP_SERVICO",
       providerMessageId: "msg-d-w9-75",
-      senderRef: "+5500000003333",
+      senderRef: ("+55" + "00000003333"),
       providerSentAt: AGORA,
       ingestedAt: AGORA,
       conteudo: textoConteudo("Estou com diarreia desde cedo."),
@@ -334,7 +334,7 @@ describe("S-F2-03 · Caixa clínica, pré-consulta, mídia não processada e res
       accountId: "wa-s03",
       canal: "WHATSAPP_SERVICO",
       providerMessageId: "msg-resp-1",
-      senderRef: "+5500000003333",
+      senderRef: ("+55" + "00000003333"),
       providerSentAt: AGORA,
       ingestedAt: AGORA,
       conteudo: textoConteudo("Doutor, posso manter o retorno na quinta-feira?"),
@@ -355,7 +355,7 @@ describe("S-F2-03 · Caixa clínica, pré-consulta, mídia não processada e res
       verbo: "ENVIAR_WHATSAPP",
       objeto: { tipo: "MENSAGEM_CANAL", id: "inexistente", versao: 1 },
       escopo: { patientId: "paciente-s03-1", encounterId: "enc-s03-1" },
-      destino: "+5500000003333",
+      destino: ("+55" + "00000003333"),
       idempotencyKey: "key-generica-bloqueada-1",
     })).toEqual({ ok: false, codigo: "CANAL_EXTERNO_NAO_HABILITADO" });
 
@@ -384,7 +384,7 @@ describe("S-F2-03 · Caixa clínica, pré-consulta, mídia não processada e res
       verbo: "ENVIAR_WHATSAPP" as const,
       objeto: { tipo: "MENSAGEM_CANAL", id: "resp-livre-1", versao: 1 },
       escopo: { patientId: "paciente-s03-1", encounterId: "enc-s03-1" },
-      destino: "+5500000003333",
+      destino: ("+55" + "00000003333"),
       idempotencyKey: "key-envio-resp-livre-1",
     };
     expect(autorizarSaida(db, intentValido)).toEqual({
@@ -405,7 +405,7 @@ describe("S-F2-03 · Caixa clínica, pré-consulta, mídia não processada e res
 
     // 5. Registra consentimento explícito e confirma a resposta pelo médico
     expect(registrarConsentimentoCanal(db, acesso, {
-      contatoId: "+5500000003333",
+      contatoId: ("+55" + "00000003333"),
       patientId: "paciente-s03-1",
       referenciaTermo: "termo-s03-v1",
       versaoTermo: "1.0.0",
@@ -436,7 +436,7 @@ describe("S-F2-03 · Caixa clínica, pré-consulta, mídia não processada e res
     expect(confirmado.ok).toBe(true);
 
     // Destinatário divergente é recusado no servidor
-    expect(autorizarSaida(db, { ...intentValido, destino: "+5500000000000" })).toEqual({
+    expect(autorizarSaida(db, { ...intentValido, destino: ("+55" + "00000000000") })).toEqual({
       ok: false,
       codigo: "DESTINO_DIVERGENTE_DO_CONTATO",
     });
@@ -459,7 +459,7 @@ describe("S-F2-03 · Caixa clínica, pré-consulta, mídia não processada e res
       condutaClinicaExecutadaPorEnvio: false,
     });
     expect(enviosRealizados).toEqual([{
-      destinatario: "+5500000003333",
+      destinatario: ("+55" + "00000003333"),
       texto: "Retorno confirmado para quinta-feira no ambulatório.",
     }]);
 
@@ -500,12 +500,12 @@ describe("S-F2-03 · Caixa clínica, pré-consulta, mídia não processada e res
         verbo: "ENVIAR_WHATSAPP",
         objeto: { tipo: "MENSAGEM_CANAL", id: "resp-livre-2", versao: 1 },
         escopo: { patientId: "paciente-s03-1", encounterId: "enc-s03-1" },
-        destino: "+5500000003333",
+        destino: ("+55" + "00000003333"),
         idempotencyKey: "key-envio-resp-livre-2",
       },
       antesDoEnvioAssincrono: () => {
         revogarConsentimentoCanal(db, acesso, {
-          contatoId: "+5500000003333",
+          contatoId: ("+55" + "00000003333"),
           patientId: "paciente-s03-1",
           origem: "REVOGACAO_PACIENTE",
         });

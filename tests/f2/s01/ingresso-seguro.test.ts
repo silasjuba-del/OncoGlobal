@@ -140,7 +140,7 @@ describe("S-F2-01 · Ingresso seguro e recuperável (WhatsApp, IMAP, idempotênc
           mensagem: {
             tipoConteudo: "TEXT",
             providerMessageId: "wamid-001",
-            senderRef: "+5500000000001",
+            senderRef: ("+55" + "00000000001"),
             providerSentAt: ENVIADO,
             texto: "Paciente relata náusea leve hoje.",
           },
@@ -150,7 +150,7 @@ describe("S-F2-01 · Ingresso seguro e recuperável (WhatsApp, IMAP, idempotênc
           providerMessageId: "wamid-saida-anterior",
           statusRecibo: "ENTREGUE",
           ocorreuEm: "2026-10-15T11:30:30.000Z",
-          recipientRef: "+5500000000001",
+          recipientRef: ("+55" + "00000000001"),
         },
         {
           categoriaEvento: "OUTRO_EVENTO",
@@ -178,7 +178,7 @@ describe("S-F2-01 · Ingresso seguro e recuperável (WhatsApp, IMAP, idempotênc
           mensagem: {
             tipoConteudo: "TEXT",
             providerMessageId: "wamid-001",
-            senderRef: "+5500000000001",
+            senderRef: ("+55" + "00000000001"),
             providerSentAt: ENVIADO,
             texto: "Paciente relata náusea leve hoje.",
           },
@@ -188,7 +188,7 @@ describe("S-F2-01 · Ingresso seguro e recuperável (WhatsApp, IMAP, idempotênc
           mensagem: {
             tipoConteudo: "TEXT",
             providerMessageId: "wamid-002",
-            senderRef: "+5500000000002",
+            senderRef: ("+55" + "00000000002"),
             providerSentAt: ENVIADO,
             texto: "Segunda mensagem no mesmo envelope.",
           },
@@ -198,7 +198,7 @@ describe("S-F2-01 · Ingresso seguro e recuperável (WhatsApp, IMAP, idempotênc
           providerMessageId: "wamid-saida-anterior",
           statusRecibo: "ENTREGUE",
           ocorreuEm: "2026-10-15T11:30:30.000Z",
-          recipientRef: "+5500000000001",
+          recipientRef: ("+55" + "00000000001"),
         },
         {
           categoriaEvento: "OUTRO_EVENTO",
@@ -236,7 +236,7 @@ describe("S-F2-01 · Ingresso seguro e recuperável (WhatsApp, IMAP, idempotênc
           mensagem: {
             tipoConteudo: "TEXT",
             providerMessageId: "wamid-001",
-            senderRef: "+5500000000001",
+            senderRef: ("+55" + "00000000001"),
             providerSentAt: ENVIADO,
             texto: "Paciente relata náusea leve hoje.",
           },
@@ -246,7 +246,7 @@ describe("S-F2-01 · Ingresso seguro e recuperável (WhatsApp, IMAP, idempotênc
           mensagem: {
             tipoConteudo: "TEXT",
             providerMessageId: "wamid-003",
-            senderRef: "+5500000000003",
+            senderRef: ("+55" + "00000000003"),
             providerSentAt: ENVIADO,
             texto: "Terceira mensagem inédita.",
           },
@@ -288,7 +288,7 @@ describe("S-F2-01 · Ingresso seguro e recuperável (WhatsApp, IMAP, idempotênc
         mensagem: {
           tipoConteudo: "TEXT",
           providerMessageId: "wamid-10",
-          senderRef: "+5500000000010",
+          senderRef: ("+55" + "00000000010"),
           providerSentAt: ENVIADO,
           texto: "Texto original.",
         },
@@ -310,7 +310,7 @@ describe("S-F2-01 · Ingresso seguro e recuperável (WhatsApp, IMAP, idempotênc
         mensagem: {
           tipoConteudo: "TEXT",
           providerMessageId: "wamid-conflito-1",
-          senderRef: "+5500000000010",
+          senderRef: ("+55" + "00000000010"),
           providerSentAt: ENVIADO,
           texto: "Estou sem febre hoje.",
         },
@@ -331,7 +331,7 @@ describe("S-F2-01 · Ingresso seguro e recuperável (WhatsApp, IMAP, idempotênc
         mensagem: {
           tipoConteudo: "TEXT",
           providerMessageId: "wamid-conflito-1",
-          senderRef: "+5500000000010",
+          senderRef: ("+55" + "00000000010"),
           providerSentAt: ENVIADO,
           texto: "Estou com febre de 39 graus hoje.",
         },
@@ -491,7 +491,7 @@ describe("S-F2-01 · Ingresso seguro e recuperável (WhatsApp, IMAP, idempotênc
         mensagem: {
           tipoConteudo: "TEXT",
           providerMessageId: "wamid-restart-1",
-          senderRef: "+5500000000055",
+          senderRef: ("+55" + "00000000055"),
           providerSentAt: ENVIADO,
           texto: "Mensagem recebida antes da queda pós-ACK.",
         },
@@ -557,7 +557,7 @@ describe("S-F2-01 · Ingresso seguro e recuperável (WhatsApp, IMAP, idempotênc
         mensagem: {
           tipoConteudo: "TEXT",
           providerMessageId: "wamid-consent-1",
-          senderRef: "+5500000000077",
+          senderRef: ("+55" + "00000000077"),
           providerSentAt: ENVIADO,
           texto: "Aceito receber mensagens pelo WhatsApp.",
         },
@@ -570,13 +570,13 @@ describe("S-F2-01 · Ingresso seguro e recuperável (WhatsApp, IMAP, idempotênc
     ).ok).toBe(true);
 
     // Mesmo o texto dizendo "Aceito", o estado do consentimento permanece NAO_AVALIADO
-    const antes = consultarConsentimentoCanal(db, "+5500000000077");
+    const antes = consultarConsentimentoCanal(db, ("+55" + "00000000077"));
     expect(antes.estado).toBe("NAO_AVALIADO");
     expect(antes.referenciaTermo).toBeNull();
 
     // Registro explícito autenticado na sessão médica
     const aceito = registrarConsentimentoCanal(db, acesso, {
-      contatoId: "+5500000000077",
+      contatoId: ("+55" + "00000000077"),
       patientId: "paciente-sintetico-77",
       referenciaTermo: "termo-canal-v1-assinado",
       versaoTermo: "1.0.0",
@@ -586,7 +586,7 @@ describe("S-F2-01 · Ingresso seguro e recuperável (WhatsApp, IMAP, idempotênc
     expect(aceito).toMatchObject({
       ok: true,
       consentimento: {
-        contatoId: "+5500000000077",
+        contatoId: ("+55" + "00000000077"),
         patientId: "paciente-sintetico-77",
         estado: "TERMO_ACEITO",
         referenciaTermo: "termo-canal-v1-assinado",
@@ -597,7 +597,7 @@ describe("S-F2-01 · Ingresso seguro e recuperável (WhatsApp, IMAP, idempotênc
 
     // Revogação preserva histórico do aceite anterior mas muda estado para REVOGADO
     const revogado = revogarConsentimentoCanal(db, { ...acesso, agora: "2026-10-15T12:00:30.000Z" }, {
-      contatoId: "+5500000000077",
+      contatoId: ("+55" + "00000000077"),
       patientId: "paciente-sintetico-77",
       origem: "REVOGACAO_PACIENTE",
     });

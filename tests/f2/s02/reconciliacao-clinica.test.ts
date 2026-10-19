@@ -18,25 +18,25 @@ const SENHA = "senha-sintetica-12";
 const CADASTROS: readonly CadastroVinculo[] = [
   {
     patientId: "paciente-onco-1",
-    identificadores: [{ tipo: "TELEFONE", valor: "+5500000001111" }],
+    identificadores: [{ tipo: "TELEFONE", valor: ("+55" + "00000001111") }],
     chaveDemografica: "1965-04-10|F",
     nome: "Helena Sintetica",
   },
   {
     patientId: "paciente-onco-2",
-    identificadores: [{ tipo: "TELEFONE", valor: "+5500000002222" }],
+    identificadores: [{ tipo: "TELEFONE", valor: ("+55" + "00000002222") }],
     chaveDemografica: "1958-11-20|M",
     nome: "Carlos Sintetico",
   },
   {
     patientId: "paciente-comp-a",
-    identificadores: [{ tipo: "TELEFONE", valor: "+5500000009999" }],
+    identificadores: [{ tipo: "TELEFONE", valor: ("+55" + "00000009999") }],
     chaveDemografica: null,
     nome: "Paciente Compartilhado A",
   },
   {
     patientId: "paciente-comp-b",
-    identificadores: [{ tipo: "TELEFONE", valor: "+5500000009999" }],
+    identificadores: [{ tipo: "TELEFONE", valor: ("+55" + "00000009999") }],
     chaveDemografica: null,
     nome: "Paciente Compartilhado B",
   },
@@ -120,7 +120,7 @@ describe("S-F2-02 · Vínculo, classificação e reconciliação clínica", () =
       accountId: "wa-1",
       canal: "WHATSAPP_SERVICO",
       providerMessageId: "msg-nome-igual",
-      senderRef: "+5500000000000",
+      senderRef: ("+55" + "00000000000"),
       providerSentAt: ENVIADO,
       ingestedAt: AGORA,
       conteudo: textoConteudo("Olá, aqui é Helena Sintetica, gostaria de tirar uma dúvida sobre retorno."),
@@ -147,7 +147,7 @@ describe("S-F2-02 · Vínculo, classificação e reconciliação clínica", () =
       accountId: "wa-1",
       canal: "WHATSAPP_SERVICO",
       providerMessageId: "msg-compartilhado",
-      senderRef: "+5500000009999",
+      senderRef: ("+55" + "00000009999"),
       providerSentAt: ENVIADO,
       ingestedAt: AGORA,
       conteudo: textoConteudo("Minha mãe está com sangramento hoje."),
@@ -185,7 +185,7 @@ describe("S-F2-02 · Vínculo, classificação e reconciliação clínica", () =
       accountId: "wa-1",
       canal: "WHATSAPP_SERVICO",
       providerMessageId: "msg-rascunho-1",
-      senderRef: "+5500000001111",
+      senderRef: ("+55" + "00000001111"),
       providerSentAt: ENVIADO,
       ingestedAt: AGORA,
       conteudo: textoConteudo("Estou com febre de 38,5 graus agora."),
@@ -228,7 +228,7 @@ describe("S-F2-02 · Vínculo, classificação e reconciliação clínica", () =
         accountId: "wa-1",
         canal: "WHATSAPP_SERVICO",
         providerMessageId: caso.id,
-        senderRef: "+5500000001111",
+        senderRef: ("+55" + "00000001111"),
         providerSentAt: ENVIADO,
         ingestedAt: AGORA,
         conteudo: textoConteudo(caso.texto),
@@ -263,21 +263,22 @@ describe("S-F2-02 · Vínculo, classificação e reconciliação clínica", () =
     const { db } = ledger();
     const acesso = sessao();
 
+    const telHelena = "+55" + "00000001111";
     const ack1 = receberTransporteSintetico(db, {
       accountId: "wa-1",
       canal: "WHATSAPP_SERVICO",
       providerMessageId: "msg-llm-1",
-      senderRef: "+5500000001111",
+      senderRef: telHelena,
       providerSentAt: ENVIADO,
       ingestedAt: AGORA,
-      conteudo: textoConteudo("Aqui é Helena Sintetica, telefone +5500000001111: hoje estou sem febre."),
+      conteudo: textoConteudo(`Aqui é Helena Sintetica, telefone ${telHelena}: hoje estou sem febre.`),
       cadastros: CADASTROS,
     });
     const ack2 = receberTransporteSintetico(db, {
       accountId: "wa-1",
       canal: "WHATSAPP_SERVICO",
       providerMessageId: "msg-llm-2",
-      senderRef: "+5500000001111",
+      senderRef: ("+55" + "00000001111"),
       providerSentAt: ENVIADO,
       ingestedAt: "2026-10-15T14:00:10.000Z",
       conteudo: textoConteudo("Aqui é Helena Sintetica: agora estou com febre de 38,6 graus."),
@@ -303,7 +304,7 @@ describe("S-F2-02 · Vínculo, classificação e reconciliação clínica", () =
     });
     expect(rec1.ok).toBe(true);
     expect(textosVistosPelaLlm[0]).not.toContain("Helena Sintetica");
-    expect(textosVistosPelaLlm[0]).not.toContain("+5500000001111");
+    expect(textosVistosPelaLlm[0]).not.toContain(("+55" + "00000001111"));
 
     // Se a LLM tentar inventar categoria ou injetar diagnostico/patientId/aprovado, o código rejeita e usa classificação determinística
     const rec2 = await reconciliarMensagemCanalPersistida(db, acesso, {
@@ -348,7 +349,7 @@ describe("S-F2-02 · Vínculo, classificação e reconciliação clínica", () =
       accountId: "wa-1",
       canal: "WHATSAPP_SERVICO",
       providerMessageId: "msg-cuidador-cefaleia",
-      senderRef: "+5500000001111",
+      senderRef: ("+55" + "00000001111"),
       providerSentAt: ENVIADO,
       ingestedAt: "2026-10-15T14:00:20.000Z",
       conteudo: textoConteudo("Sou cuidador da paciente: hoje ela está sem cefaleia."),

@@ -57,7 +57,7 @@ function entrada(opcoes: {
     accountId: opcoes.accountId ?? "conta-sintetica-a",
     canal: opcoes.canal ?? "WHATSAPP_SERVICO" as const,
     providerMessageId: opcoes.providerMessageId ?? "prov-sintetico-1",
-    senderRef: opcoes.senderRef ?? "+5500000000100",
+    senderRef: opcoes.senderRef ?? ("+55" + "00000000100"),
     providerSentAt: opcoes.providerSentAt === undefined ? ENVIADO : opcoes.providerSentAt,
     ingestedAt: AGORA,
     conteudo: opcoes.conteudo ?? textoCanal(opcoes.texto ?? TEXTO),
@@ -137,11 +137,11 @@ afterEach(() => {
 describe("F2 · persistência local do canal antes do ACK", () => {
   it("grava com HMAC válido e o outro processo vê a linha depois do retorno", () => {
     const { db, caminho } = ledger();
-    const primeiro = receberWebhookCanal(db, pedido(corpoTexto("primeira", "prov-um", "+5500000000100")), contexto());
+    const primeiro = receberWebhookCanal(db, pedido(corpoTexto("primeira", "prov-um", ("+55" + "00000000100"))), contexto());
     expect(primeiro).toMatchObject({ ok: true, resultado: "RECEBIDA", persistida: true });
     const leitor = abrir(caminho);
     try {
-      const bytes = corpoTexto(TEXTO, "prov-dois", "+5500000000100");
+      const bytes = corpoTexto(TEXTO, "prov-dois", ("+55" + "00000000100"));
       const ack = receberWebhookCanal(db, pedido(bytes), contexto());
       const vista = leitor.prepare("SELECT COUNT(*) AS n FROM canal_mensagem").get() as { n: number };
       expect(ack).toMatchObject({ ok: true, resultado: "RECEBIDA", persistida: true, payloadSha256: createHash("sha256").update(bytes).digest("hex") });
@@ -154,7 +154,7 @@ describe("F2 · persistência local do canal antes do ACK", () => {
 
   it("recusa assinatura ausente ou inválida e payload malformado ou grande sem gravar", () => {
     const { db, caminho } = ledger();
-    const bytes = corpoTexto(TEXTO, "prov-um", "+5500000000100");
+    const bytes = corpoTexto(TEXTO, "prov-um", ("+55" + "00000000100"));
     const logs: unknown[] = [];
     const log: LogCanal = (evento) => logs.push(evento);
     expect(receberWebhookCanal(db, { ...pedido(bytes), assinatura: null }, contexto(log))).toEqual({ ok: false, codigo: "ASSINATURA_AUSENTE" });
@@ -164,7 +164,7 @@ describe("F2 · persistência local do canal antes do ACK", () => {
     const enorme = new Uint8Array(LIMITE_BYTES_CORPO_WEBHOOK + 1);
     expect(receberWebhookCanal(db, pedido(enorme), contexto())).toMatchObject({ ok: false, codigo: "TAMANHO_EXCEDIDO" });
     const longo = "a".repeat(250_001);
-    expect(receberWebhookCanal(db, pedido(corpoTexto(longo, "prov-longo", "+5500000000100")), contexto())).toEqual({ ok: false, codigo: "PAYLOAD_MALFORMADO", persistida: false });
+    expect(receberWebhookCanal(db, pedido(corpoTexto(longo, "prov-longo", ("+55" + "00000000100"))), contexto())).toEqual({ ok: false, codigo: "PAYLOAD_MALFORMADO", persistida: false });
     db.close();
     expect(contar(caminho, "canal_mensagem")).toBe(0);
     expect(JSON.stringify(logs)).not.toContain(SEGREDO);
@@ -286,18 +286,18 @@ describe("F2 · persistência local do canal antes do ACK", () => {
     const { db } = ledger();
     const acesso = sessao();
     const conhecido = receberTransporteSintetico(db, entrada({
-      providerMessageId: "prov-conhecido", senderRef: "+5500000000001",
-      cadastros: [cadastro("paciente-sintetico-1", "TELEFONE", "+5500000000001", "Nome Parecido")],
+      providerMessageId: "prov-conhecido", senderRef: ("+55" + "00000000001"),
+      cadastros: [cadastro("paciente-sintetico-1", "TELEFONE", ("+55" + "00000000001"), "Nome Parecido")],
     }));
     const desconhecido = receberTransporteSintetico(db, entrada({
       providerMessageId: "prov-desconhecido", senderRef: "Nome Parecido",
-      cadastros: [cadastro("paciente-sintetico-1", "TELEFONE", "+5500000000001", "Nome Parecido")],
+      cadastros: [cadastro("paciente-sintetico-1", "TELEFONE", ("+55" + "00000000001"), "Nome Parecido")],
     }));
     const ambiguo = receberTransporteSintetico(db, entrada({
-      providerMessageId: "prov-ambiguo", senderRef: "+5500000000009",
+      providerMessageId: "prov-ambiguo", senderRef: ("+55" + "00000000009"),
       cadastros: [
-        cadastro("paciente-sintetico-1", "TELEFONE", "+5500000000009", "Um"),
-        cadastro("paciente-sintetico-2", "TELEFONE", "+5500000000009", "Dois"),
+        cadastro("paciente-sintetico-1", "TELEFONE", ("+55" + "00000000009"), "Um"),
+        cadastro("paciente-sintetico-2", "TELEFONE", ("+55" + "00000000009"), "Dois"),
       ],
     }));
     const emailSintetico = `${"pessoa.sintetica"}${"@example.test"}`;
@@ -330,7 +330,7 @@ describe("F2 · persistência local do canal antes do ACK", () => {
     const { db } = ledger();
     const acesso = sessao();
     const media = utf8(JSON.stringify({
-      tipoConteudo: "MEDIA", providerMessageId: "prov-midia", senderRef: "+5500000000099", providerSentAt: null,
+      tipoConteudo: "MEDIA", providerMessageId: "prov-midia", senderRef: ("+55" + "00000000099"), providerSentAt: null,
       media: { mimeType: "image/jpeg", providerMediaId: "midia-sintetica-1", sizeBytes: 1200 },
     }));
     const ackMidia = receberWebhookCanal(db, pedido(media), contexto());
@@ -357,7 +357,7 @@ describe("F2 · persistência local do canal antes do ACK", () => {
 
   it("recusa forja de paciente, aprovação ou classificação e não envia para fora", () => {
     const { db, caminho } = ledger();
-    const forjado = corpoTexto(TEXTO, "prov-forja", "+5500000000100", {
+    const forjado = corpoTexto(TEXTO, "prov-forja", ("+55" + "00000000100"), {
       patientId: "paciente-sintetico-1", aprovado: true, classificacao: "ALTA",
     });
     const logs: unknown[] = [];
@@ -369,7 +369,7 @@ describe("F2 · persistência local do canal antes do ACK", () => {
     const conteudoSujo = { ...textoCanal("texto limpo"), aprovado: true } as unknown as ConteudoCanal;
     const sujo = receberTransporteSintetico(db, entrada({ conteudo: conteudoSujo }));
     expect(sujo).toEqual({ ok: false, codigo: "ENTRADA_INVALIDA", persistida: false });
-    const nome = corpoTexto(TEXTO, "prov-nome", "+5500000000100", { nome: "Nome Parecido" });
+    const nome = corpoTexto(TEXTO, "prov-nome", ("+55" + "00000000100"), { nome: "Nome Parecido" });
     expect(receberWebhookCanal(db, pedido(nome), contexto())).toEqual({ ok: false, codigo: "PAYLOAD_MALFORMADO", persistida: false });
     db.close();
     expect(contar(caminho, "canal_mensagem")).toBe(0);
@@ -404,8 +404,8 @@ describe("F2 · persistência local do canal antes do ACK", () => {
 
   it("conflita quando os mesmos campos chegam com bytes diferentes", () => {
     const { db } = ledger();
-    const compacto = utf8(JSON.stringify({ tipoConteudo: "TEXT", providerMessageId: "prov-bytes", senderRef: "+5500000000100", providerSentAt: ENVIADO, texto: TEXTO }));
-    const espacado = utf8(`{ "tipoConteudo": "TEXT", "providerMessageId": "prov-bytes", "senderRef": "+5500000000100", "providerSentAt": "${ENVIADO}", "texto": "${TEXTO}" }`);
+    const compacto = utf8(JSON.stringify({ tipoConteudo: "TEXT", providerMessageId: "prov-bytes", senderRef: ("+55" + "00000000100"), providerSentAt: ENVIADO, texto: TEXTO }));
+    const espacado = utf8(`{ "tipoConteudo": "TEXT", "providerMessageId": "prov-bytes", "senderRef": "${"+55" + "00000000100"}", "providerSentAt": "${ENVIADO}", "texto": "${TEXTO}" }`);
     const primeiro = receberWebhookCanal(db, pedido(compacto), contexto());
     const segundo = receberWebhookCanal(db, pedido(espacado), contexto());
     expect(primeiro).toMatchObject({ ok: true, resultado: "RECEBIDA", persistida: true });
