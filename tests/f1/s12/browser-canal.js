@@ -13,11 +13,15 @@ export async function jornadaCanalNoNavegador(page,{baseUrl,manifesto,segredo,ef
  await form.getByRole('button',{name:'Revisar resposta',exact:true}).click();await form.getByRole('region',{name:'Resposta preparada para confirmação'}).waitFor();
  await form.getByLabel('Confirmo destinatário, conteúdo e contexto da resposta').check();
  const envio=page.waitForResponse(r=>r.url().endsWith('/acao'));
- await form.getByRole('button',{name:'Confirmar e enviar resposta',exact:true}).click();assert.equal((await envio).status(),200);
- await form.getByText('Resposta enviada; recibo registrado.').waitFor();assert.equal(efeitos(),1);
- const replay=page.waitForResponse(r=>r.url().endsWith('/acao'));
- await form.getByRole('button',{name:'Confirmar e enviar resposta',exact:true}).click();assert.equal((await replay).status(),200);assert.equal(efeitos(),1);
- return {webhookHmac:true,previaInvalidadaAposEdicao:true,confirmacaoExplicita:true,envioUnico:true};
+ await form.getByRole('button',{name:'Confirmar e enviar resposta',exact:true}).click();const enviado=await envio;assert.equal(enviado.status(),200);
+ await caixa.getByText('Resposta médica enviada; resolução clínica não registrada automaticamente.').waitFor();assert.equal(efeitos(),1);
+ assert.equal(await form.count(),0);await caixa.getByRole('button',{name:'Preparar nova resposta médica',exact:true}).waitFor();
+ // Replay de transporte do mesmo pedido não é uma nova resposta clínica.
+ // A caixa reconstruída não oferece novamente o formulário já enviado.
+ const pedido=enviado.request();
+ const replay=await page.request.post(pedido.url(),{headers:await pedido.allHeaders(),data:pedido.postData()});
+ assert.equal(replay.status(),200);assert.equal((await replay.json()).decisao,'REPLAY');assert.equal(efeitos(),1);
+ return {webhookHmac:true,previaInvalidadaAposEdicao:true,confirmacaoExplicita:true,envioUnico:true,estadoRespondidaReaberto:true,novaRespostaExigeAcaoExplicita:true};
 }
 
 export async function jornadaDemonstracaoCanal(page){
