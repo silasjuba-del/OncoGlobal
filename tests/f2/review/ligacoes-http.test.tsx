@@ -1,14 +1,15 @@
 // @vitest-environment jsdom
 import {afterEach,expect,it,vi} from 'vitest';
 import {cleanup,fireEvent,render,screen,within,waitFor} from '@testing-library/react';
-import {createHmac} from 'node:crypto';
+import {createHmac,createHash} from 'node:crypto';
 import {mkdtempSync,rmSync} from 'node:fs';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import {ambiente,ctx,EM} from '../../bateria2/fixtures.js';
 import {criarServidorLocal} from '../../../src/server/http.js';
 import {criarGateway,memoriaIdempotencia} from '../../../src/kernel/gateway/gateway.js';
-import {registrarConsentimentoCanal,revogarConsentimentoCanal} from '../../../src/server/canalEntrada.js';
+import {registrarConsentimentoCanal,revogarConsentimentoCanal,receberTransporteSintetico} from '../../../src/server/canalEntrada.js';
+import {reconciliarMensagemCanalPersistida} from '../../../src/server/canalReconciliacao.js';
 import {executarEnvioAutorizadoCanal} from '../../../src/server/canalResposta.js';
 import {revisaoContextoCanal,vinculoAtualCanal,type OperacaoCanal} from '../../../src/server/canalOperacao.js';
 import {criarPortaHttp} from '../../../src/ui/api/http.js';
@@ -28,8 +29,8 @@ async function montar(configurada=true){
  a.seed('Paciente',{patientId:ctx.patientId,nome:'Paciente Sintético HTTP F2',identificadores:[],nascimento:null,sexoCadastral:'NAO_INFORMADO',divergencia:false});
  a.seed('Contato',{contatoId:'contato-http-sintetico',canal:'WHATSAPP_SERVICO',endereco:SENDER,patientId:ctx.patientId,relacao:'PACIENTE',vinculadoEm:EM,revogadoEm:null});
  const post=async(path:string,body:unknown,token=a.login.token)=>{const r=await fetch(base+path,{method:'POST',headers:{'Content-Type':'application/json',Authorization:`Bearer ${token}`},body:JSON.stringify(body)});return {status:r.status,data:await r.json() as any};};
- const receber=async(id='mensagem-sintetica',texto='Quando é meu retorno?')=>{
-  const raw=JSON.stringify({object:'whatsapp_business_account',entry:[{id:'waba-sintetica',changes:[{field:'messages',value:{messaging_product:'whatsapp',metadata:{phone_number_id:CONTA},messages:[{from:SENDER,id,timestamp:String(Date.parse(EM)/1000),type:'text',text:{body:texto}}]}}]}]},null,2);
+ const receber=async(id='mensagem-sintetica',texto='Quando é meu retorno?',sender=SENDER)=>{
+  const raw=JSON.stringify({object:'whatsapp_business_account',entry:[{id:'waba-sintetica',changes:[{field:'messages',value:{messaging_product:'whatsapp',metadata:{phone_number_id:CONTA},messages:[{from:sender,id,timestamp:String(Date.parse(EM)/1000),type:'text',text:{body:texto}}]}}]}]},null,2);
   const response=await fetch(base+'/canal/webhook/sintetica',{method:'POST',headers:{'Content-Type':'application/json','X-Hub-Signature-256':`sha256=${createHmac('sha256',SEGREDO).update(raw).digest('hex')}`},body:raw});
   return {status:response.status,data:await response.json() as any,raw};
  };
@@ -48,6 +49,59 @@ it('GET challenge separado e POST nativo autenticado preservam bytes, persistem 
  const adulterado=await fetch(e.base+'/canal/webhook/sintetica',{method:'POST',headers:{'Content-Type':'application/json','X-Hub-Signature-256':'sha256='+'0'.repeat(64)},body:r.raw});expect(adulterado.status).toBe(401);
  expect((await e.receber('id-sintetico','Conteúdo conflitante sintético.')).status).toBe(409);
 });
+it('mensagem desconhecida recebe vínculo médico pela tela e resposta autorizada sem promoção do ingresso',async()=>{
+ const e=await montar(),sender='5500'+'000008888';
+ expect((await e.receber('desconhecida','Dúvida sintética sobre retorno',sender)).status).toBe(200);
+ const realFetch=globalThis.fetch;vi.stubGlobal('fetch',(input:string|URL|Request,init?:RequestInit)=>realFetch(typeof input==='string'&&input.startsWith('/')?e.base+input:input,init));
+ const porta=criarPortaHttp({onSessaoExpirada:()=>{}});expect((await porta.login('senha-sintetica-bateria2')).ok).toBe(true);
+ render(<CaixaCanal porta={porta} chaves={criarChaves()}/>);
+ fireEvent.click(await screen.findByRole('button',{name:'vincular Paciente Sintético HTTP F2'}));
+ await waitFor(()=>expect(screen.getByRole('region',{name:'Mensagens de Paciente Sintético HTTP F2'})).toBeTruthy());
+ const caixa=await e.post('/consulta/canal',{}),msg=caixa.data.mensagens[0];
+ expect(msg).toMatchObject({patientId:ctx.patientId,pendenciaProcessamento:false,redFlag:false});
+ expect(e.a.db.prepare('SELECT vinculoPatientId FROM canal_mensagem').get()?.vinculoPatientId).toBe(null);
+ expect((await e.post('/consulta/canal/vincular',{contatoId:sender,patientId:ctx.patientId,idempotencyKey:'replay-manual-sintetico'})).status).toBe(200);
+ const preparada=await e.post('/consulta/canal/resposta/preparar',{...ctx,tumorLotId:null,mensagemOrigemId:msg.mensagemId,respostaId:'resposta-manual-sintetica',versao:1,texto:'Resposta médica sintética para revisão.'});
+ expect(preparada.status).toBe(200);const p=preparada.data.rascunho;
+ expect((await e.confirmar(p)).status).toBe(409); // vínculo não cria consentimento.
+ expect(e.efeitos()).toBe(0);
+ expect(registrarConsentimentoCanal(e.a.db,e.a.acesso,{contatoId:sender,patientId:ctx.patientId,referenciaTermo:'termo-manual-sintetico',versaoTermo:'1',finalidade:['COMUNICACAO_CLINICA'],origem:'PRESENCIAL_CONSULTORIO'}).ok).toBe(true);
+ expect((await e.confirmar(p)).status).toBe(200);
+ expect((await e.post('/acao',e.intent(p))).data.decisao).toBe('EXECUTADA');
+ expect((await e.post('/acao',e.intent(p,'replay-desconhecido'))).data.decisao).toBe('REPLAY');
+ expect(e.efeitos()).toBe(1);
+ const observarLeitura=vi.spyOn(e.a.db,'prepare');
+ const consulta=await e.post('/consulta/carregar',{...ctx,tumorLotId:null});
+ expect(observarLeitura.mock.calls.filter(([sql])=>/SELECT \* FROM clinical_event/i.test(sql))).toHaveLength(1);
+ observarLeitura.mockRestore();
+ expect(consulta.status,JSON.stringify(consulta.data)).toBe(200);
+ expect(consulta.data.contatosCanal.mensagens).toContainEqual(expect.objectContaining({mensagemId:msg.mensagemId,patientId:ctx.patientId,texto:'Dúvida sintética sobre retorno'}));
+ expect(revogarConsentimentoCanal(e.a.db,e.a.acesso,{contatoId:sender,patientId:ctx.patientId,origem:'REVOGACAO_MEDICO'}).ok).toBe(true);
+ expect((await e.post('/acao',e.intent(p,'apos-revogacao'))).status).toBe(409);
+ expect(e.efeitos()).toBe(1);
+});
+it('retoma pendências duráveis no início e projeta somente alarmes persistidos e conferidos',async()=>{
+ const e=await montar(),texto='Estou com sangramento agora';
+ const ack=receberTransporteSintetico(e.a.db,{accountId:CONTA,canal:'WHATSAPP_SERVICO',providerMessageId:'pendente-reinicio',senderRef:SENDER,
+  providerSentAt:EM,ingestedAt:EM,conteudo:{tipo:'TEXT',texto,contentSha256:createHash('sha256').update(texto).digest('hex')},
+  cadastros:[{patientId:ctx.patientId,nome:'Paciente Sintético HTTP F2',chaveDemografica:null,identificadores:[{tipo:'TELEFONE',valor:SENDER}]}]});
+ if(!ack.ok)throw Error('INGRESSO_SINTETICO');
+ const r=await reconciliarMensagemCanalPersistida(e.a.db,e.a.acesso,{mensagemId:ack.reciboId,cadastros:[],rulesetAlarmes:{
+  rulesetId:'conferido-apenas-fixture',rulesetVersao:'1',fraseFinal:'Nada substitui a avaliação presencial do seu médico.',sinais:[{
+   id:'sangramento-sintetico',termo:'Sangramento',termos:['sangramento'],limiarDecimosExclusivo:null,status:'CONFERIDA_MEDICO',fonte:'fixture-sintetica',orientacao:'Avaliação médica.'}]}});
+ expect(r.ok).toBe(true);
+ expect((await e.post('/consulta/canal',{})).data.mensagens[0].redFlag).toBe(true);
+ const pendente=receberTransporteSintetico(e.a.db,{accountId:CONTA,canal:'WHATSAPP_SERVICO',providerMessageId:'pendente-frio',senderRef:SENDER,
+  providerSentAt:EM,ingestedAt:EM,conteudo:{tipo:'TEXT',texto:'Relato sintético',contentSha256:createHash('sha256').update('Relato sintético').digest('hex')},cadastros:[]});
+ expect(pendente.ok).toBe(true);
+ if(!pendente.ok)throw Error('INGRESSO_SINTETICO');
+ await e.reiniciar();
+ await waitFor(()=>expect(e.a.db.prepare('SELECT COUNT(*) n FROM canal_reconciliacao_clinica').get()?.n).toBe(2));
+ const caixa=await e.post('/consulta/canal',{});
+ expect(caixa.data.mensagens.find((m:any)=>m.mensagemId===pendente.reciboId).redFlag).toBe(false);
+ expect(caixa.data.mensagens.every((m:any)=>m.pendenciaProcessamento===false)).toBe(true);
+ expect(e.efeitos()).toBe(0);
+});
 it('banco indisponível não produz ACK e ausência de configuração nunca habilita transporte',async()=>{
  const e=await montar(false);e.a.db.exec('PRAGMA query_only=ON');expect((await e.receber()).status).toBe(503);e.a.db.exec('PRAGMA query_only=OFF');
  const p=await e.preparar();expect((await e.confirmar(p)).status).toBe(200);expect((await e.post('/acao',e.intent(p))).data.codigo).toBe('TRANSPORTE_CANAL_NAO_CONFIGURADO');expect(e.efeitos()).toBe(0);
@@ -64,7 +118,7 @@ it('recibo nativo de entrega correlaciona o wamid preservado sem representar ate
  const e=await montar(),p=await e.preparar();expect((await e.confirmar(p)).status).toBe(200);expect((await e.post('/acao',e.intent(p))).data.decisao).toBe('EXECUTADA');
  const raw=JSON.stringify({object:'whatsapp_business_account',entry:[{id:'waba-sintetica',changes:[{field:'messages',value:{messaging_product:'whatsapp',metadata:{phone_number_id:CONTA},statuses:[{id:'recibo-sintetico',status:'read',timestamp:String(Date.parse(EM)/1000+60),recipient_id:SENDER}]}}]}]});
  const r=await fetch(e.base+'/canal/webhook/sintetica',{method:'POST',headers:{'Content-Type':'application/json','X-Hub-Signature-256':`sha256=${createHmac('sha256',SEGREDO).update(raw).digest('hex')}`},body:raw});expect(r.status).toBe(200);
- const caixa=await e.post('/consulta/canal',{});expect(caixa.data.mensagens[0].reciboTecnico).toBe('LIDA');expect(caixa.data.mensagens[0].pendenciaProcessamento).toBe(true);
+ const caixa=await e.post('/consulta/canal',{});expect(caixa.data.mensagens[0].reciboTecnico).toBe('LIDA');expect(caixa.data.mensagens[0].pendenciaProcessamento).toBe(false);
 });
 it('resultado incerto não reenvia com outra chave nem após reiniciar',async()=>{
  const e=await montar(),original=e.operacao.transporteSaida!;
@@ -84,7 +138,7 @@ it('falha ao confirmar sucesso faz rollback do recibo e conserva reserva incerta
 });
 it('limite de bytes é preservado sem gravar nem confirmar corpo excessivo',async()=>{
  const e=await montar();const r=await fetch(e.base+'/canal/webhook/sintetica',{method:'POST',headers:{'Content-Type':'application/json','X-Hub-Signature-256':'sha256='+'0'.repeat(64)},body:' '.repeat(262_145)});expect(r.status).toBe(413);
- expect(e.a.db.prepare("SELECT COUNT(*) n FROM sqlite_master WHERE name='canal_mensagem'").get()?.n).toBe(0);
+ expect(e.a.db.prepare("SELECT COUNT(*) n FROM canal_mensagem").get()?.n).toBe(0);
 });
 it('troca de conteúdo, destinatário, contexto ou revisão depois da prévia impede confirmação/envio',async()=>{
  const e=await montar(),p=await e.preparar();

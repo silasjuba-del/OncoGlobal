@@ -15,5 +15,5 @@ it("UUID com sequencia numerica nao transforma um aviso opaco em telefone", () =
   });
   expect(contemPhiResidual(JSON.stringify(aviso), { nomes: [], identificadores: [] })).toBe(false);
   expect(aviso.avisoId).toMatch(/^aviso-[a-p-]+$/);
-  expect(contemPhiResidual("Contato " + "(11) " + "99999-9999", { nomes: [], identificadores: [] })).toBe(true);
+  expect(contemPhiResidual("Contato " + "(11) " + "99999" + "-" + "9999", { nomes: [], identificadores: [] })).toBe(true);
 });

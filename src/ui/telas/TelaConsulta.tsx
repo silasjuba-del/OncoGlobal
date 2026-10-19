@@ -359,6 +359,15 @@ export function TelaConsulta({
         }}
         onEditarTnm={() => setOverlay("dx")}
       />
+      {!!visao.contatosCanal?.mensagens.length && <section aria-label="Relatos do canal na pré-consulta">
+        <h2>Contatos do canal · relatos ainda não confirmados</h2>
+        <details><summary>{visao.contatosCanal.mensagens.length} mensagens · consultar originais</summary>
+          <ul>{visao.contatosCanal.mensagens.map(m => <li key={m.mensagemId}>
+            <p>{m.texto}</p><small>{m.em} · {m.origemCanal} · fonte {m.mensagemId}</small>
+            {m.redFlag && <p role="alert">Sinal de alarme conforme regra conferida; requer revisão médica.</p>}
+          </li>)}</ul>
+        </details>
+      </section>}
       {visao.retratoTransversal !== undefined && visao.retratoTransversal !== null ? (
         <CartaoTransversal entrada={visao.retratoTransversal} />
       ) : null}

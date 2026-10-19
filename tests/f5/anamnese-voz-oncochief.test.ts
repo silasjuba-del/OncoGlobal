@@ -191,8 +191,8 @@ describe("FASE F5 · Anamnese Guiada (AG-19), Voz no Canal e Revisão Cruzada On
     expect(salvo.resumo.incertezasExplicitas).toHaveLength(1);
     expect(salvo.resumo.documentosSolicitadosPendentes).toEqual(["passo-3-hemograma"]);
     expect(salvo.resumo.lacunasExplicitas.some((l) => l.includes("passo-3-hemograma"))).toBe(true);
-    // Só entrega lembretes/orientações CONFERIDA_MEDICO
-    expect(salvo.resumo.orientacoesFixasEntreguesIds).toEqual(["ori-hidratacao-1"]);
+    // Curadoria aprovada não comprova entrega; sem evidência de entrega, a lista permanece vazia.
+    expect(salvo.resumo.orientacoesFixasEntreguesIds).toEqual([]);
 
     // Recuperação após reiniciar SQLite
     db.close();

@@ -134,6 +134,7 @@ export interface FlashPreparada {
 }
 
 export interface ConsultaVisao {
+  contatosCanal?: CaixaCanalVisao | undefined;
   dutos?: DutosClinicaVisao;
   instrumentosClinicos?: readonly {instrumento:string;avaliacao:ResultadoInstrumento}[];
   resumoEvolucao?: string | null;
@@ -238,6 +239,8 @@ export interface SalaoVisao {
 export interface CandidatoVinculoVisao {
   patientId: string;
   nome: string;
+  encounterId?: string | undefined;
+  tumorLotId?: string | null | undefined;
 }
 
 export interface MensagemCanalVisao {

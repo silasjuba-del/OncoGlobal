@@ -12,7 +12,8 @@ export function RespostaCanal({porta,chaves,mensagemId,patientId,redFlag,destina
  const [previa,setPrevia]=useState<RascunhoRespostaCanal|null>(null),[confirmado,setConfirmado]=useState(false),[ocupado,setOcupado]=useState(false),[aviso,setAviso]=useState('');
  const identidade=JSON.stringify([mensagemId,patientId,destinatario,encounterId,origemCanal]);
  const seq=useRef(0),emVoo=useRef(false),respostaId=useRef(`resposta-${crypto.randomUUID()}`),versao=useRef(0);
- useEffect(()=>{seq.current++;setTexto('');setPrevia(null);setConfirmado(false);setContexto(null);setAviso('');respostaId.current=`resposta-${crypto.randomUUID()}`;versao.current=0;return()=>{seq.current++;};},[identidade]);
+ const identidadeAnterior=useRef(identidade);
+ useEffect(()=>{if(identidadeAnterior.current!==identidade){identidadeAnterior.current=identidade;seq.current++;setTexto('');setPrevia(null);setConfirmado(false);setContexto(null);setAviso('');respostaId.current=`resposta-${crypto.randomUUID()}`;versao.current=0;}return()=>{seq.current++;};},[identidade]);
  function invalidar(){seq.current++;setPrevia(null);setConfirmado(false);setAviso('');}
  async function preparar(){
   if(emVoo.current||!texto.trim()||!contexto||contexto.patientId!==patientId)return;
