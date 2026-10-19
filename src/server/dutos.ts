@@ -1,4 +1,5 @@
 import { relatosInfusaoPendentes } from './relatosInfusaoCanal.js';
+import { lerEventosComIntegridade } from './leituras.js';
 import { createHash } from 'node:crypto';
 import type { DatabaseSync } from 'node:sqlite';
 import { z } from 'zod';
@@ -87,9 +88,20 @@ function executarDuto(deps: DepsDutos, token: string, rota: string, entrada: unk
  const sessao=deps.sessoes.obter(token), auth=Sessao.safeParse(sessao);
  if(!auth.success||hashCanonico(auth.data)!==hashCanonico(sessaoResolvida)||Date.parse(auth.data.emitidaEm)>Date.parse(em)||Date.parse(auth.data.expiraEm)<=Date.parse(em))return negar('SESSAO_INVALIDA',401);
  const pedido=parsed.data, c=pedido.contexto, selecionada=deps.sessoes.consultaSelecionada(token);
- if(!selecionada||selecionada.patientId!==c.patientId||selecionada.encounterId!==c.encounterId||(selecionada.tumorLotId??null)!==c.tumorLotId)return negar('CONSULTA_SELECIONADA_DIVERGENTE',403);
+ const eventosGlobais=rota==='/salao/revisar-relato-canal'?lerEventosComIntegridade(deps.db).itens:null;
+ const relatoAtual=eventosGlobais?(()=>{const p=RevisaoRelatoPedido.parse(entrada);return relatosInfusaoPendentes(deps.db,eventosGlobais,em)
+   .find(m=>m.patientId===c.patientId&&m.mensagemId===p.mensagemId&&m.payloadSha256===p.payloadSha256);})():null;
+ const mesmoContexto=!!selecionada&&selecionada.patientId===c.patientId&&selecionada.encounterId===c.encounterId&&(selecionada.tumorLotId??null)===c.tumorLotId;
+ // A fila de relatos é global no consultório monousuário. Seu contexto é
+ // explícito por operação e não muda o foco da triagem de outro paciente.
+ // A mensagem/hash/vínculo serão novamente verificados no ramo dedicado.
+ const contextoRevisaoConhecido=!!eventosGlobais&&c.tumorLotId===null&&eventosGlobais.some(e=>e.patientId===c.patientId
+   &&e.encounterId===c.encounterId&&['CONFIRMADO','ASSINADO'].includes(e.revisao)&&Date.parse(e.criadoEm)<=Date.parse(em));
+ if(rota==='/salao/revisar-relato-canal'){
+  if(!contextoRevisaoConhecido)return negar('CONTEXTO_REVISAO_RELATO_INVALIDO',403);
+ }else if(!mesmoContexto)return negar('CONSULTA_SELECIONADA_DIVERGENTE',403);
  const contexto:ContextoDutoServidor={patientId:c.patientId,encounterId:c.encounterId,tumorLotId:c.tumorLotId,atorId:auth.data.medicoId,em};
- const eventos=listarEventos(deps.db,c.patientId), vigentes=eventosVigentes(eventos).filter(e=>e.patientId===c.patientId&&e.encounterId===c.encounterId&&e.tumorLotId===c.tumorLotId&&['CONFIRMADO','ASSINADO'].includes(e.revisao));
+ const eventos=eventosGlobais?.filter(e=>e.patientId===c.patientId)??listarEventos(deps.db,c.patientId), vigentes=eventosVigentes(eventos).filter(e=>e.patientId===c.patientId&&e.encounterId===c.encounterId&&e.tumorLotId===c.tumorLotId&&['CONFIRMADO','ASSINADO'].includes(e.revisao));
  const requestHash=hashCanonico({rota,entrada});
  const replay=eventos.filter(e=>e.operationId===c.operationId);
  // Replay clínico por ID, sob a transação, independe do relógio de recebimento e da versão hoje vigente.
@@ -117,8 +129,9 @@ function executarDuto(deps: DepsDutos, token: string, rota: string, entrada: unk
  const fato=(campo:string)=>vigentes.filter(e=>e.tipo==='FATO'&&dadosDoEvento(e)?.campo===campo);
  if(rota==='/salao/revisar-relato-canal'){
   const p=RevisaoRelatoPedido.parse(entrada);
-  if(!relatosInfusaoPendentes(deps.db,eventos,em).some(m=>m.patientId===c.patientId&&m.mensagemId===p.mensagemId&&m.payloadSha256===p.payloadSha256))return negar('RELATO_PENDENTE_NAO_ENCONTRADO');
-  tipo='ReviewDecision';payload={campo:'revisaoRelatoInfusaoCanal',mensagemId:p.mensagemId,payloadSha256:p.payloadSha256,decisao:p.decisao};
+  if(!relatoAtual)return negar('RELATO_PENDENTE_NAO_ENCONTRADO');
+  tipo='ReviewDecision';payload={campo:'revisaoRelatoInfusaoCanal',mensagemId:p.mensagemId,payloadSha256:p.payloadSha256,decisao:p.decisao,
+    contatoId:relatoAtual.contatoId,canal:relatoAtual.canal};
  }else if(rota.startsWith('/farmacia/')){
   const anteriores=fato('farmacia.conferencia').flatMap(e=>{const p=ConferenciaFarmacia.safeParse(dadosDoEvento(e)?.valor);return p.success&&p.data.prescricao.documentId===prescricao!.documentId?[{e,registro:p.data}]:[];});
   if(anteriores.length>1)return negar('CONFERENCIA_FARMACIA_AMBIGUA');

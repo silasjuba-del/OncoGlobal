@@ -225,7 +225,8 @@ export interface DecisaoLiberacaoVisao {
 
 export interface SalaoVisao {
   relatosInfusao?: readonly {patientId:string;mensagemId:string;payloadSha256:string;texto:string;em:string;
-    contextoMensagens:readonly {mensagemId:string;texto:string;em:string}[]}[] | undefined;
+    contextosRevisao?:readonly {patientId:string;encounterId:string;tumorLotId:null}[]|undefined;
+    contextoMensagens:readonly {mensagemId:string;texto:string;em:string;contatoId?:string|undefined;canal?:string|undefined}[]}[] | undefined;
   avisos?: readonly {patientId:string;texto:string}[];
   hoje: string;
   ruleset: SalaoRuleset;

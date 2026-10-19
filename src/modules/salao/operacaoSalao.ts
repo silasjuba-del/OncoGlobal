@@ -251,30 +251,50 @@ export function avaliarDoseECicloSalao(entrada: {
 export function calcularCumulativosEfetivosSalao(
   administracoes: readonly TreatmentAdministration[],
 ): ResumoCumulativoSalao[] {
-  const porAdmin = new Map<string, { droga: string; quantidades: Set<number> }>();
+  // Canonicalização recursiva como nos componentes existentes; ordem de chaves não é identidade.
+  const canonical = (valor: unknown): string => JSON.stringify(valor, (_chave, item: unknown) =>
+    item && typeof item === "object" && !Array.isArray(item)
+      ? Object.fromEntries(Object.entries(item).sort(([a], [b]) => a.localeCompare(b)))
+      : item);
+  const porAdmin = new Map<string, {
+    administracao: TreatmentAdministration;
+    identidade: string;
+    drogas: Set<string>;
+    conflito: boolean;
+  }>();
   for (const adm of administracoes) {
-    if (adm.status === "OMITIDA" || adm.quantidadeEfetivaMg === 0) continue;
-    const atual = porAdmin.get(adm.adminId) ?? { droga: adm.droga, quantidades: new Set<number>() };
-    atual.quantidades.add(adm.quantidadeEfetivaMg);
-    porAdmin.set(adm.adminId, atual);
+    const identidade = canonical(adm);
+    const atual = porAdmin.get(adm.adminId);
+    if (atual) {
+      atual.drogas.add(adm.droga);
+      if (atual.identidade !== identidade) atual.conflito = true;
+    } else {
+      porAdmin.set(adm.adminId, {
+        administracao: adm, identidade, drogas: new Set([adm.droga]), conflito: false,
+      });
+    }
   }
 
   const porDroga = new Map<string, ResumoCumulativoSalao>();
-  for (const [adminId, { droga, quantidades }] of porAdmin.entries()) {
-    const item = porDroga.get(droga) ?? {
-      droga,
-      quantidadeEfetivaTotalMg: 0,
-      adminIds: [],
-      conflitoAdminIds: [],
-      incluiApenasAdministracaoEfetiva: true as const,
-    };
-    if (quantidades.size > 1) {
-      item.conflitoAdminIds.push(adminId);
-    } else {
-      item.quantidadeEfetivaTotalMg += [...quantidades][0]!;
-      item.adminIds.push(adminId);
+  for (const [adminId, { administracao: adm, drogas, conflito }] of porAdmin.entries()) {
+    // Omitidas e quantidades zero só são ignoradas depois de comparar todas as identidades.
+    if (!conflito && (adm.status === "OMITIDA" || adm.quantidadeEfetivaMg === 0)) continue;
+    for (const droga of drogas) {
+      const item = porDroga.get(droga) ?? {
+        droga,
+        quantidadeEfetivaTotalMg: 0,
+        adminIds: [],
+        conflitoAdminIds: [],
+        incluiApenasAdministracaoEfetiva: true as const,
+      };
+      if (conflito) {
+        item.conflitoAdminIds.push(adminId);
+      } else {
+        item.quantidadeEfetivaTotalMg += adm.quantidadeEfetivaMg;
+        item.adminIds.push(adminId);
+      }
+      porDroga.set(droga, item);
     }
-    porDroga.set(droga, item);
   }
 
   return [...porDroga.values()].sort((a, b) => a.droga.localeCompare(b.droga));
