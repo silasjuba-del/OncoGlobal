@@ -29,8 +29,11 @@ export async function obterRevisaoClinica(motor:Pick<ReturnType<typeof criarMoto
   if(r.patientId!==contexto.patientId||r.encounterId!==contexto.encounterId||r.tumorLotId!==contexto.tumorLotId)throw Error("RETRATO_FORA_CONTEXTO");
   if(motor.retrato(contexto).revisao!==r.revisao)throw Error("RETRATO_ALTERADO");
   const ficha=montarFichaMinima(r),pack=packId?catalogo.packs.find(p=>p.referencia.id===packId)??null:selecionarPack(r,catalogo.packs);
+  const candidato=pack?catalogo.lotes?.[pack.referencia.id]:undefined;
+  const loteCompleto=candidato&&candidato.original.sha256===pack?.original.hash&&candidato.original.arquivo===pack.original.arquivo?candidato:null;
   const pendencias=catalogo.rejeitados.map(p=>`${p.arquivo}: ${p.motivo}`);
-  if(!pack)pendencias.push("Pack específico não selecionado ou CID ausente/conflitante.");
+  if(!pack){const candidatos=catalogo.packs.filter(p=>packCorrespondeAoCid(p,cidsDaFicha(ficha)));
+    pendencias.push(candidatos.length>1?'CID compartilhado por mais de um tipo tumoral. Selecione o tipo de tumor/histologia para abrir o pack completo.':'Pack específico não selecionado ou CID ausente/conflitante.');}
   const preQt=ficha.filter(f=>!["ecog","kps"].includes(f.id)&&!["DOCUMENTADO","CALCULADO"].includes(f.estado)).map(f=>`${f.rotulo}: ${f.motivo}`);
   if(!ficha.some(f=>["ecog","kps"].includes(f.id)&&f.estado==="DOCUMENTADO"))preQt.push("Performance: ECOG/KPS documentado não disponível.");
   if(!pack||pack.estado!=="ATIVO")preQt.push("Pack sem requisitos clinicamente conferidos e ativos.");
@@ -64,5 +67,6 @@ export async function obterRevisaoClinica(motor:Pick<ReturnType<typeof criarMoto
     pendencias:resposta?.estado==="PARCIAL"?[]:["Série RECIST confirmada com medidas e fontes não disponível."]};
   return RevisaoClinicaResposta.parse({codigo:"REVISAO_CLINICA_CARREGADA",contexto,revisao:r.revisao,ficha,
     preQt:{estado:preQt.length?"PENDENTE":"AGUARDA_DECISAO_MEDICA",autorizaTratamento:false,pendencias:preQt},
-    packs:catalogo.packs.map(p=>({id:p.referencia.id,titulo:p.titulo,estado:p.estado,cids:p.cids})),pack,pendencias,respostaTumoral,estadosDoenca});
+    packs:catalogo.packs.map(p=>({id:p.referencia.id,titulo:p.titulo,estado:p.estado,cids:p.cids})),pack,
+    loteCompleto,pendencias,respostaTumoral,estadosDoenca});
 }

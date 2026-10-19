@@ -1,4 +1,5 @@
 import { z } from "zod";
+import {DitadoResposta} from '../fase2/ditado.js';
 import { RevisaoClinicaResposta } from '../fase2/revisaoClinica.js';
 import { LotesPacienteResposta } from './lotes.js';
 import { EstadoDoencaPreparado } from '../fase2/estadoDoenca.js';
@@ -26,6 +27,7 @@ const Extracao = z.object({ draftId: Id, revision: Count, linkedPatientId: Id.nu
 
 /** Mesmos contratos no servidor e no cliente. Valida sem descartar campos adicionais da resposta legada. */
 export const SaidasHttp: Readonly<Record<string, z.ZodType>> = {
+  ditado:DitadoResposta,
   lotesPaciente:LotesPacienteResposta,
   login: z.object({ token: z.string().min(1), expiraEm: Instante }),
   carregarConsulta: ConsultaResposta, agenda: AgendaResposta, apac: ApacResposta, canal: CanalResposta,

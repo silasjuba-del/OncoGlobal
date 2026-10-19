@@ -46,7 +46,7 @@ export default defineConfig(async () => {
   return {
     plugins,
     build: { outDir: "dist/ui", rollupOptions: { input: { demonstracao: "index.html", oncoassist: "oncoassist.html" } } },
-    ...(target ? { server: { host: "127.0.0.1", proxy: { "/login": { target }, "/consulta": { target },
+    ...(target ? { server: { host: "127.0.0.1", proxy: { "/login": { target }, "/consulta": { target, ws:true },
       "/config": { target }, "/acao": { target }, "/biblioteca": { target } } } } : {}),
     test: {
       // Preserva o exclude padrao; filtro explicito habilita apenas o reataque real,

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { ErroPorta, type PedidoBundle, type PortaConsulta } from "../api/porta.js";
-import { BotaoVoz } from "../telas/importar/BotaoVoz.js";
+import { DitadoDeepgram } from './DitadoDeepgram.js';
 
 /** Transcrição é fonte bruta revisável; nunca executa comandos ditados. */
 export function TranscricaoLocal({ porta, contexto, aoSalvar }: {
@@ -24,7 +24,7 @@ export function TranscricaoLocal({ porta, contexto, aoSalvar }: {
     if (identidade.current?.texto !== texto) identidade.current = { texto, recordingId: crypto.randomUUID(), sourceId: crypto.randomUUID() };
     try {
       await porta.importarTranscricaoLocal({ contexto, recordingId: identidade.current.recordingId, sourceId: identidade.current.sourceId,
-        sourceType: "medical_note", rawTranscript: texto, captureMethod: capturado ? "LOCAL_DICTATION" : "PASTED_TEXT",
+        sourceType: "medical_note", rawTranscript: texto, captureMethod: capturado ? "DEEPGRAM_CLOUD" : "PASTED_TEXT",
         capturedTranscript: capturado || texto }, abort.current.signal);
       if (atual !== geracao.current) return;
       setMensagem("Rascunho salvo. Confira a fonte, vincule o paciente e revise os fatos na seção de revisão.");
@@ -36,7 +36,7 @@ export function TranscricaoLocal({ porta, contexto, aoSalvar }: {
   }
   return <section aria-label="Transcrição local">
     <h3>Ditar ou colar transcrição</h3>
-    <BotaoVoz key={chave} desabilitado={ocupado} aoAtividade={setDitando} aoTrecho={trecho => {
+    <DitadoDeepgram key={chave} porta={porta} contexto={contexto} desabilitado={ocupado} aoAtividade={setDitando} aoTrecho={trecho => {
       setCapturado(anterior => anterior ? `${anterior}\n${trecho}` : trecho);
       setTexto(anterior => anterior ? `${anterior}\n${trecho}` : trecho); setRevisado(false); setMensagem("");
     }} />

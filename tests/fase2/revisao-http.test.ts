@@ -18,6 +18,9 @@ it("HTTP real carrega packs legados consultáveis e ficha ausente sem promover r
   expect(parsed.packs.every(p=>p.estado!=="ATIVO")).toBe(true);expect(parsed.preQt).toMatchObject({estado:"PENDENTE",autorizaTratamento:false});
   const pack=await a.request("/consulta/revisao-clinica",{...ctx,packId:parsed.packs[0]!.id});
   expect(pack.status,JSON.stringify(pack.data)).toBe(200);expect(pack.data.pack.blocos).toHaveProperty("c1_lacunas");
+  expect(pack.data.loteCompleto.setores.map((s:{id:string})=>s.id)).toEqual(expect.arrayContaining(['cenarios','exames','tratamento','suporte']));
+  expect(pack.data.loteCompleto.original.sha256).toBe(pack.data.pack.original.hash);
+  expect(pack.data.loteCompleto.autorizaTratamento).toBe(false);
   expect(pack.data.pack.revisaoClinica).toBeNull();expect(a.eventos()).toHaveLength(antes);
   expect((await a.request("/consulta/revisao-clinica",{...ctx,encounterId:"outro"})).status).toBe(409);
   expect((await a.request("/consulta/revisao-clinica",{...ctx,estado:"ATIVO"})).status).toBe(400);

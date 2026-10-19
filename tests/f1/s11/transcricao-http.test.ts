@@ -7,7 +7,9 @@ async function abrir(){ambiente=await abrirAmbiente(criarDiretorio());cadastrarP
   await ambiente.request("/consulta/carregar",{patientId:PACIENTE,encounterId:ENCONTRO,tumorLotId:null});return ambiente;}
 const pedido={contexto:{patientId:PACIENTE,encounterId:ENCONTRO,tumorLotId:null},recordingId:"ditado-sintetico",sourceId:"fonte-ditado",
   sourceType:"medical_note",captureMethod:"LOCAL_DICTATION",capturedTranscript:"Creatinina 12. Nega dor.",rawTranscript:"Creatinina 1,2 mg/dL. Nega dor."};
-it("ditado mantém original, edição e contexto como rascunho sem vínculo nem assinatura; retry não duplica",async()=>{
+const globalPedido=pedido;
+it.each(['LOCAL_DICTATION','DEEPGRAM_CLOUD'])("ditado %s mantém original, edição e contexto como rascunho sem vínculo nem assinatura; retry não duplica",async(captureMethod)=>{
+  const pedido={...globalPedido,captureMethod};
   const a=await abrir(),r=await a.request("/consulta/extrair",pedido);expect(r.status).toBe(201);
   const draft=lerDraft(a.db,r.data.draftId)!;expect(draft.patientId).toBeNull();
   expect(draft.payload).toMatchObject({kind:"EXTRACAO_RASCUNHO",input:pedido});
