@@ -39,19 +39,27 @@ const ehData = (s) => typeof s === "string" && /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/.te
   && Number.isFinite(Date.parse(s)) && new Date(s).toISOString().slice(0, 10) === s;
 const ehSemver = (s) => typeof s === "string" && /^\d+\.\d+\.\d+$/.test(s);
 const textoPreenchido = (s) => typeof s === "string" && s.trim().length > 0;
+const ehUrlHttps = (s) => {
+  if (typeof s !== "string") return false;
+  try { return new URL(s).protocol === "https:"; } catch { return false; }
+};
 
 // URL verificada, sozinha, não atesta uma data. A evidência deve ligar data, trecho e
 // localizador à revisão selecionada; nunca escolher a primeira/última revisão implicitamente.
 function evidenciaPublicacao(mapeamento, url, data, versaoFonte) {
-  if (!ehData(data)) return null;
-  const publicacoes = mapeamento.verificacoes.filter(v => v.url === url)
+  if (!ehData(data) || !ehUrlHttps(url)
+    || (versaoFonte !== undefined && !textoPreenchido(versaoFonte))) return null;
+  const publicacoes = mapeamento.verificacoes.filter(v => v?.url === url)
     .flatMap(v => Array.isArray(v.publicacoes) ? v.publicacoes : []);
-  const versoes = new Set(publicacoes.map(p => p.versaoFonte ?? null));
-  if (versoes.size > 1 && !textoPreenchido(versaoFonte)) return null;
-  const provas = publicacoes.filter(p => p.publicadoEm === data
-    && (versaoFonte === undefined || p.versaoFonte === versaoFonte)
+  if (publicacoes.some(p => !p || typeof p !== "object" || !ehData(p.publicadoEm)
+    || (p.versaoFonte !== undefined && !textoPreenchido(p.versaoFonte)))) return null;
+  const publicacoesDistintas = new Set(publicacoes.map(p => JSON.stringify([p.publicadoEm, p.versaoFonte ?? null])));
+  if (publicacoesDistintas.size > 1 && !textoPreenchido(versaoFonte)) return null;
+  const selecionadas = publicacoes.filter(p => versaoFonte === undefined || p.versaoFonte === versaoFonte);
+  if (new Set(selecionadas.map(p => p.publicadoEm)).size > 1) return null;
+  const provas = selecionadas.filter(p => p.publicadoEm === data
     && textoPreenchido(p.localizador) && textoPreenchido(p.trecho));
-  return provas.length === 1 ? { fonte: url, ...provas[0] } : null;
+  return provas.length === 1 ? { ...provas[0], fonte: url } : null;
 }
 
 /** Primeira fonte interna (varredura em profundidade, ordem de inserção do JSON) com referencia E trecho não vazios. */

@@ -163,6 +163,53 @@ describe('proveniência temporal documental', () => {
     expect(lerItem(r.destino, ref.arquivo).proveniencia.publicadoEm).toBe('2024-12-25');
     expect(r.inventario.incluidos.find((i: any) => i.caminho === caminho).evidenciaPublicacao.versaoFonte).toBe('1');
   });
+  it.each([undefined, '', ' ', '1'])('recusa histórico com datas distintas e versões ausentes ou repetidas: %s', async versaoFonte => {
+    await expect(executar({}, m => {
+      revisoes(m);
+      for (const p of m.verificacoes.at(-1).publicacoes) p.versaoFonte = versaoFonte;
+    })).rejects.toThrow('DATA_PUBLICACAO_NAO_VERIFICADA');
+  });
+  it('recusa a mesma revisão explícita associada a datas conflitantes', async () => {
+    await expect(executar({}, m => {
+      revisoes(m); m.itens[caminho].versaoFonte = '1';
+      m.verificacoes.at(-1).publicacoes[1].versaoFonte = '1';
+    })).rejects.toThrow('DATA_PUBLICACAO_NAO_VERIFICADA');
+  });
+  it('não escolhe publicação ambígua pela data herdada da fonte', async () => {
+    const r = await executar({ publicadoEm: '2024-12-25' }, m => {
+      revisoes(m); delete m.itens[caminho].publicadoEm;
+      for (const p of m.verificacoes.at(-1).publicacoes) delete p.versaoFonte;
+    });
+    expect(r.inventario.excluidos).toContainEqual(expect.objectContaining({ caminho, motivo: 'DATA_PUBLICACAO_NAO_VERIFICADA' }));
+    expect(r.manifesto.itens).toHaveLength(1);
+  });
+  it.each([7, true, {}, null, 'sem-url', 'https://'])('recusa fonte de publicação sem URL HTTPS válida: %j', async url => {
+    await expect(executar({}, m => {
+      revisoes(m); m.itens[caminho].versaoFonte = '1';
+      m.itens[caminho].fonteDataPublicacao = url;
+      m.verificacoes.at(-1).url = url;
+    })).rejects.toThrow('DATA_PUBLICACAO_NAO_VERIFICADA');
+  });
+  it('recusa verificação nula sem produzir prova de publicação', async () => {
+    await expect(executar({}, m => {
+      revisoes(m); m.itens[caminho].versaoFonte = '1';
+      m.verificacoes[m.verificacoes.length - 1] = null;
+    })).rejects.toThrow('DATA_PUBLICACAO_NAO_VERIFICADA');
+  });
+  it('recusa prova nula sem produzir prova de publicação', async () => {
+    await expect(executar({}, m => {
+      revisoes(m); m.itens[caminho].versaoFonte = '1';
+      m.verificacoes.at(-1).publicacoes = [null];
+    })).rejects.toThrow('DATA_PUBLICACAO_NAO_VERIFICADA');
+  });
+  it('preserva a URL cotejada quando a prova contém outra propriedade fonte', async () => {
+    const r = await executar({}, m => {
+      revisoes(m); m.itens[caminho].versaoFonte = '1';
+      m.verificacoes.at(-1).publicacoes[0].fonte = 'https://example.org/outra-fonte';
+    });
+    expect(r.inventario.incluidos.find((i: any) => i.caminho === caminho).evidenciaPublicacao.fonte)
+      .toBe('https://example.org/historico');
+  });
   it.each(['localizador', 'trecho'])('URL conferida sem %s de publicação não comprova data', async campo => {
     await expect(executar({}, m => {
       revisoes(m); m.itens[caminho].versaoFonte = '1';

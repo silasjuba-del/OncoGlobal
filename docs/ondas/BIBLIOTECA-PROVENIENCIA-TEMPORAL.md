@@ -22,6 +22,19 @@ O inventário conserva `evidenciaPublicacao` e `datasOriginais`: edição litera
 
 O conversor continua offline: o registro de prova é uma declaração curada, auditável, não uma verificação automática da autenticidade ou do significado do trecho. Inclusão documental não confirma o conteúdo clínico.
 
+### Correções da revisão independente de 18/10/2026
+
+Na base atualizada após o PR #25, a revisão identificou dois bloqueios e um
+problema de rastreabilidade. O gate agora considera pares data/revisão, exige
+seleção explícita quando há publicações distintas e recusa uma mesma revisão
+ligada a datas conflitantes. Ausência, repetição ou vazio do identificador não
+permitem escolher silenciosamente uma data, inclusive quando herdada da fonte.
+
+A URL da prova precisa ser textual e HTTPS válida; verificações/provas nulas
+não produzem evidência. O inventário preserva a URL efetivamente cotejada mesmo
+se o registro trouxer outra propriedade `fonte`. Quinze casos de regressão foram
+adicionados: quatorze falharam antes da correção, demonstrando as lacunas.
+
 ## Regressão e limites
 
 `tests/f1/s3/converter-biblioteca.test.ts`: publicação desconhecida; acesso confundido com edição; vigência local; data declarada sem prova; datas inválidas/incompletas; preservação independente das datas; revisões ausente/incompatível/explícita; URL sem trecho/localizador; painel DailyMed real e importação em RASCUNHO sem visibilidade clínica.
