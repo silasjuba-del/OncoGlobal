@@ -11,3 +11,21 @@ Aceite: caso sintético atravessa tela/HTTP/SQLite, reabre folha após reinício
 F3 permanece PARCIAL: este recorte não fecha as fatias de fila, dose, administração, adiamento/nutrição ou o atendimento integral. Nenhuma aprovação clínica é produzida por testes. Não houve contato com paciente, impressão automática, configuração de provedor ou serviço externo.
 
 Revisão independente encontrou duas bordas (replay após meia-noite e histórico atrasado); ambas receberam regressões. A prova de reabertura foi tornada determinística por folhaId, sem presumir ordem de UUIDs. O HTML agora imprime também patientId e encounterId para preservar identificação na contingência.
+
+## Evidência do recorte F3
+
+No snapshot de composição 8b04c7d: 118 testes em sete arquivos PASS (F3, salão HTTP/UI, contratos HTTP, integridade, ligações F2 e scanner PHI); typecheck, fronteiras (489 arquivos/zero exceções) e build UI PASS. Revisão independente Noether: sem bloqueantes, incluindo confirmação da composição; 80 testes focados revisados. A correção posterior do limite da caixa F2 foi incorporada por merge preservando seu histórico; o CI do SHA final continua necessário.
+
+| Requisito | Implementação | Teste/evidência | Estado |
+|---|---|---|---|
+| Identidade do paciente/encontro e data do servidor | operarContingenciaSalao + contexto médico selecionado | sessão ausente, contexto trocado, identidade injetada recusados por HTTP | COMPROVADA_LOCAL |
+| Documento local persistido, preview e reabertura | tabela existente salao_folha_contingencia; ContingenciaSalao em TelaSalao | HTML igual após reinício; seleção por folhaId, sem depender de ordem aleatória | COMPROVADA_LOCAL |
+| Replay e conflito | ID por contexto/operação + comparação no gerador existente | repetição após meia-noite retorna folha original; alteração preserva original e retorna conflito | COMPROVADA_LOCAL |
+| Histórico atrasado e conteúdo não confiável | merge por folhaId; escape HTML e iframe sandbox | resposta histórica atrasada não apaga folha nova; script literal escapado | COMPROVADA_LOCAL |
+| Sem ativação clínica implícita | dados declarados pelo médico; nenhuma alteração do corpus | contagem de eventos clínicos não aumenta; nenhum envio externo no teste | COMPROVADA_LOCAL |
+
+Medição: não foi realizado benchmark de carga desta fatia. Os tempos do runner são tempos de teste, não latência de atendimento. Demonstração local por componentes React com HTTP real e SQLite temporário; impressão física e uso assistencial real não foram demonstrados. A integração no GitHub e o SHA de merge são conferidos separadamente, sem declarar conclusão clínica da F3.
+
+Preservação: snapshot inicial de 119 worktrees e 77 arquivos protegidos; nova comparação dos 77 hashes sem mudanças. As Lunas da avaliação global permaneceram em leitura na sua worktree, que não recebeu alterações desta fatia. Arquivos não commitados do Cursor não entram no PR.
+
+Handoff: concluir os efeitos operacionais de adiamento/nutrição e depois a ligação de dose/administração/cumulativos à interface e aos eventos efetivos, reutilizando módulos/contratos existentes. Decisões médicas e regras pendentes pertencem ao médico; a próxima fase clínica não é ativada por esta entrega. FASE_CONCLUIDA: NAO.

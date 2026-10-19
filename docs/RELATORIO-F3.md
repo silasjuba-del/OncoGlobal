@@ -1,5 +1,7 @@
 # Inventário técnico parcial — Fase F3 (Salão de Quimioterapia)
 
+> Avanço S-F3-04 em 2026-10-19: contingência operacional ligada ao HTTP e à tela, com identidade/contexto, replay, conflito, prévia e reabertura SQLite. Evidências e limites no [relatório da fatia](reviews/F3-CONTINGENCIA-HTTP-2026-10-19.md). A F3 permanece parcial; não houve ativação de regras clínicas pendentes.
+
 > Situação revisada em 2026-10-19: **INTEGRAÇÃO PENDENTE — fase não encerrada**. O conteúdo abaixo registra componentes e testes do snapshot `0b00a40`; não comprova funcionamento integral no atendimento. I07: adiamento e nutrição ainda não têm efeitos completos sobre agenda, recepção e farmácia. Marcadores retornados por funções não comprovam tarefas atribuídas, prazos ou bolsa a recolher. Ver [consolidação](reviews/CONSOLIDACAO-RECEITA-2026-10-19.md) e [auditoria 9X–12X](reviews/AUDITORIA-9X-12X-2026-10-19.md).
 
 **Data:** 2026-10-19  
