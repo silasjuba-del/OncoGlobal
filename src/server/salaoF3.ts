@@ -9,13 +9,15 @@ import {
   EventoInterrupcaoSalao,
   ExcecaoLiberacaoMedicaSalao,
   FolhaContingenciaSalao,
-  type DesfechoPesoSalao,
+  DesfechoPesoSalao,
+  RevisaoDesfechoPesoSalao,
   RegistroAdministracaoEfetivaSalao,
   type TipoEventoInterrupcaoSalao,
 } from "../contracts/f3/salaoOperacional.js";
 import type { Pesagem, SalaoRuleset } from "../contracts/regras.js";
 import { g06E1Destaque } from "../kernel/harness/gates.js";
 import { transacao } from "../kernel/ledger/db.js";
+import { hashCanonico } from "../modules/hash.js";
 import { rotearDutos } from "./dutos.js";
 import { listarEventos } from "../kernel/comandos/portas.js";
 import { administrations } from "../kernel/projections/series.js";
@@ -61,6 +63,20 @@ export function garantirSchemaSalaoF3(db: DatabaseSync): void {
       registradoEm TEXT NOT NULL,
       UNIQUE (patientId, encounterId)
     );
+
+    CREATE TABLE IF NOT EXISTS salao_desfecho_peso_revisao (
+      desfechoId TEXT NOT NULL,
+      versao INTEGER NOT NULL CHECK (versao > 0),
+      patientId TEXT NOT NULL,
+      encounterId TEXT NOT NULL,
+      revisaoJson TEXT NOT NULL,
+      registradoEm TEXT NOT NULL,
+      PRIMARY KEY (desfechoId, versao)
+    );
+    CREATE TRIGGER IF NOT EXISTS salao_peso_revisao_no_update BEFORE UPDATE ON salao_desfecho_peso_revisao
+      BEGIN SELECT RAISE(ABORT, 'salao_desfecho_peso_revisao append-only'); END;
+    CREATE TRIGGER IF NOT EXISTS salao_peso_revisao_no_delete BEFORE DELETE ON salao_desfecho_peso_revisao
+      BEGIN SELECT RAISE(ABORT, 'salao_desfecho_peso_revisao append-only'); END;
 
     CREATE TABLE IF NOT EXISTS salao_excecao_liberacao (
       liberacaoId TEXT PRIMARY KEY,
@@ -171,12 +187,43 @@ export function registrarDesfechoPesoSalaoF3(
     hoje: string;
     ruleset: SalaoRuleset;
   },
-): { ok: true; desfecho: DesfechoPesoSalao } | { ok: false; codigo: "SESSAO_INVALIDA" } {
+): { ok: true; desfecho: DesfechoPesoSalao; versao: number; replay: boolean }
+  | { ok: false; codigo: "SESSAO_INVALIDA" | "ARMAZENAMENTO_INDISPONIVEL" } {
   const sessao = obterSessaoValida(acesso);
   if (!sessao) return { ok: false, codigo: "SESSAO_INVALIDA" };
-  garantirSchemaSalaoF3(db);
-  const desfecho = avaliarDesfechoPesoSalao(entrada);
-  transacao(db, () => {
+  try {
+    garantirSchemaSalaoF3(db);
+    const desfecho = avaliarDesfechoPesoSalao(entrada);
+    const entradaSha256 = hashCanonico(entrada);
+    return transacao(db, () => {
+      const atual = db.prepare("SELECT desfechoId, desfechoJson, registradoEm FROM salao_desfecho_peso WHERE patientId=? AND encounterId=?")
+        .get(entrada.patientId, entrada.encounterId) as { desfechoId: string; desfechoJson: string; registradoEm: string } | undefined;
+      const desfechoId = atual?.desfechoId ?? `peso-${hashCanonico([entrada.patientId, entrada.encounterId])}`;
+      const lerUltima = () => {
+        const row = db.prepare("SELECT revisaoJson FROM salao_desfecho_peso_revisao WHERE desfechoId=? ORDER BY versao DESC LIMIT 1")
+          .get(desfechoId) as { revisaoJson: string } | undefined;
+        return row ? RevisaoDesfechoPesoSalao.parse(JSON.parse(row.revisaoJson)) : null;
+      };
+      const anexar = (revisao: RevisaoDesfechoPesoSalao) => db.prepare(`INSERT INTO salao_desfecho_peso_revisao
+        (desfechoId,versao,patientId,encounterId,revisaoJson,registradoEm) VALUES (?,?,?,?,?,?)`)
+        .run(revisao.desfechoId, revisao.versao, revisao.patientId, revisao.encounterId, JSON.stringify(revisao), revisao.registradoEm);
+      let ultima = lerUltima();
+      if (atual && !ultima) {
+        ultima = RevisaoDesfechoPesoSalao.parse({ desfechoId, versao: 1, patientId: entrada.patientId,
+          encounterId: entrada.encounterId, origem: "LEGADO_SEM_PROVENIENCIA", entradaSha256: null, proveniencia: null,
+          desfecho: DesfechoPesoSalao.parse(JSON.parse(atual.desfechoJson)), legadoOriginalJson: atual.desfechoJson,
+          autor: null, registradoEm: atual.registradoEm });
+        anexar(ultima);
+      }
+      if (ultima && (ultima.desfechoId !== desfechoId || ultima.patientId !== entrada.patientId || ultima.encounterId !== entrada.encounterId)) throw Error("CONTEXTO_PESO_DIVERGENTE");
+      if (ultima?.entradaSha256 === entradaSha256 && hashCanonico(ultima.desfecho) === hashCanonico(desfecho)) {
+        return { ok: true as const, desfecho: ultima.desfecho, versao: ultima.versao, replay: true };
+      }
+      const revisao = RevisaoDesfechoPesoSalao.parse({ desfechoId, versao: (ultima?.versao ?? 0) + 1,
+        patientId: entrada.patientId, encounterId: entrada.encounterId, origem: "CAPTURA_ATUAL", entradaSha256,
+        proveniencia: { pesagens: entrada.pesagens, hoje: entrada.hoje, rulesetJson: JSON.stringify(entrada.ruleset), rulesetSha256: hashCanonico(entrada.ruleset) },
+        desfecho, legadoOriginalJson: null, autor: { medicoId: sessao.medicoId, crm: sessao.crm }, registradoEm: acesso.agora });
+      anexar(revisao);
     db.prepare(`
       INSERT INTO salao_desfecho_peso (desfechoId, patientId, encounterId, desfechoJson, registradoEm)
       VALUES (?, ?, ?, ?, ?)
@@ -184,14 +231,25 @@ export function registrarDesfechoPesoSalaoF3(
         desfechoJson = excluded.desfechoJson,
         registradoEm = excluded.registradoEm
     `).run(
-      `peso-${entrada.patientId}-${entrada.encounterId}`,
+      desfechoId,
       entrada.patientId,
       entrada.encounterId,
       JSON.stringify(desfecho),
       acesso.agora,
     );
-  });
-  return { ok: true, desfecho };
+      return { ok: true as const, desfecho, versao: revisao.versao, replay: false };
+    });
+  } catch { return { ok: false, codigo: "ARMAZENAMENTO_INDISPONIVEL" }; }
+}
+
+export function listarRevisoesDesfechoPesoSalaoF3(db: DatabaseSync, patientId: string, encounterId: string): RevisaoDesfechoPesoSalao[] {
+  garantirSchemaSalaoF3(db);
+  return (db.prepare("SELECT revisaoJson FROM salao_desfecho_peso_revisao WHERE patientId=? AND encounterId=? ORDER BY versao")
+    .all(patientId, encounterId) as { revisaoJson: string }[]).map(row => {
+      const revisao = RevisaoDesfechoPesoSalao.parse(JSON.parse(row.revisaoJson));
+      if (revisao.patientId !== patientId || revisao.encounterId !== encounterId) throw Error("REVISAO_PESO_FORA_CONTEXTO");
+      return revisao;
+    });
 }
 
 export function registrarLiberacaoComCorteSalaoF3(

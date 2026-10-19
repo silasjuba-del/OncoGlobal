@@ -51,17 +51,18 @@ it.each(['mantenha enoxaparina 80 mg à noite','não mantenha enoxaparina 40 mg 
 });
 it('6A retratação e processamento administrativo não apagam relato; somente decisão médica referenciada',()=>{
  const a=ambiente();try{
+  a.seed('Paciente',{patientId:ctx.patientId,nome:'Paciente Sintético Bateria2',identificadores:[],nascimento:null,sexoCadastral:'NAO_INFORMADO',divergencia:false},'CONFIRMADO',{...ctx,tumorLotId:null});
   const id=receber(a,'reacao','fiquei toda vermelha e com coceira no braço na infusão de ontem, acho que foi a platina','2026-10-18T12:00:00Z');
   receber(a,'retracao','melhorou, deve ter sido o calor da sala, esquece','2026-10-18T20:00:00Z');
   const ler=()=>relatosInfusaoPendentes(a.db,listarEventos(a.db,ctx.patientId),EM);
   expect(relatosInfusaoPendentes(a.db,listarEventos(a.db,ctx.patientId),'2026-11-09T18:00:00Z')).toHaveLength(1);
   expect(ler()).toHaveLength(1);expect(ler()[0]!.contextoMensagens.map(m=>m.texto).join(' ')).toContain('esquece');
   const r=ler()[0]!;
-  const decisao={contexto:{...ctx,operationId:'revisao-sintetica'},mensagemId:id,payloadSha256:r.payloadSha256,decisao:'Relato revisto; conduta registrada pelo médico sintético.'};
+  const decisao={contexto:{...ctx,tumorLotId:null,operationId:'revisao-sintetica'},mensagemId:id,payloadSha256:r.payloadSha256,decisao:'Relato revisto; conduta registrada pelo médico sintético.'};
   expect(rotearDutos({db:a.db,sessoes:a.acesso.sessoes,agora:()=>EM},a.acesso.token,'/salao/revisar-relato-canal',decisao,a.login.sessao)?.status).toBe(200);
   expect(ler()).toHaveLength(0);
   const decisaoAntiga=listarEventos(a.db,ctx.patientId).find(e=>e.tipo==='ReviewDecision')!;
-  a.seed('ReviewDecision',{campo:'revisaoRelatoInfusaoCanal',mensagemId:id,payloadSha256:r.payloadSha256,decisao:null,motivo:'Revisão registrada por engano'},'CONFIRMADO',ctx,decisaoAntiga.eventId);
+  a.seed('ReviewDecision',{campo:'revisaoRelatoInfusaoCanal',mensagemId:id,payloadSha256:r.payloadSha256,decisao:null,motivo:'Revisão registrada por engano'},'CONFIRMADO',{...ctx,tumorLotId:null},decisaoAntiga.eventId);
   expect(ler()).toHaveLength(1);
   receber(a,'reacao-nova','tive reação na infusão novamente');expect(ler()).toHaveLength(2);
  }finally{a.db.close();}

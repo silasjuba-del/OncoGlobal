@@ -85,6 +85,29 @@ export const DesfechoPesoSalao = z.preprocess((entrada) => {
 }, DesfechoPesoSalaoAtual);
 export type DesfechoPesoSalao = z.infer<typeof DesfechoPesoSalao>;
 
+/** Revisões locais anexas ao desfecho existente; legado sem fonte não ganha proveniência inventada. */
+export const RevisaoDesfechoPesoSalao = z.object({
+  desfechoId: Id, versao: z.number().int().positive(), patientId: Id, encounterId: Id,
+  origem: z.enum(["CAPTURA_ATUAL", "LEGADO_SEM_PROVENIENCIA"]),
+  entradaSha256: z.string().regex(/^[a-f0-9]{64}$/).nullable(),
+  proveniencia: z.object({
+    pesagens: z.array(z.object({ data: z.string(), kg: z.number(), origem: z.enum(["MEDIDO", "INFORMADO_PACIENTE"]) }).passthrough()),
+    hoje: DataCivil, rulesetJson: z.string().min(1), rulesetSha256: z.string().regex(/^[a-f0-9]{64}$/),
+  }).strict().nullable(),
+  desfecho: DesfechoPesoSalao,
+  legadoOriginalJson: z.string().nullable(),
+  autor: z.object({ medicoId: Id, crm: Id }).strict().nullable(),
+  registradoEm: Instante,
+}).strict().superRefine((r, ctx) => {
+  if (r.desfecho.patientId !== r.patientId || r.desfecho.encounterId !== r.encounterId)
+    ctx.addIssue({ code: "custom", message: "revisão de peso fora do contexto do desfecho" });
+  if (r.origem === "CAPTURA_ATUAL" && (!r.proveniencia || !r.entradaSha256 || !r.autor || r.legadoOriginalJson !== null))
+    ctx.addIssue({ code: "custom", message: "captura atual exige proveniência e autoria" });
+  if (r.origem === "LEGADO_SEM_PROVENIENCIA" && (r.proveniencia !== null || r.entradaSha256 !== null || r.autor !== null || r.legadoOriginalJson === null))
+    ctx.addIssue({ code: "custom", message: "legado não pode inventar fonte ou autoria" });
+});
+export type RevisaoDesfechoPesoSalao = z.infer<typeof RevisaoDesfechoPesoSalao>;
+
 /** S-F3-02 · Exceção / liberação médica com corte (INV-04 / Q28): exige sessão médica e justificativa explícita. */
 export const ExcecaoLiberacaoMedicaSalao = z.object({
   liberacaoId: Id,

@@ -1,10 +1,12 @@
 // F4 · Persistência e governança server-side para APAC, retrógrada, farmácia/estoque e minutas de laudo de acesso/judicialização.
 import type { DatabaseSync } from "node:sqlite";
+import { z } from "zod";
 import type { ChipEstoque, LeituraEstoque, ValidadeChip } from "../contracts/api/estoque.js";
 import type { PedidoFarmacia, RegistroFarmacia, ResultadoFarmacia } from "../contracts/api/farmacia.js";
-import { Instante, Sessao } from "../contracts/base.js";
+import { Id, Instante, Sessao } from "../contracts/base.js";
 import { MinutaLaudoAcessoJudicial } from "../contracts/f4/acessoEJudicializacao.js";
-import type { Apac } from "../contracts/operacao.js";
+import { Apac } from "../contracts/operacao.js";
+import { hashCanonico } from "../rules/conteudoCanonico.js";
 import { g03Assinatura } from "../kernel/harness/gates.js";
 import { transacao } from "../kernel/ledger/db.js";
 import {
@@ -90,6 +92,12 @@ export function garantirSchemaF4(db: DatabaseSync): void {
   `);
 }
 
+/** Metadado interno de replay; não altera o contrato público da pendência. */
+function lerPendenciaNegativaPersistida(json: string) {
+  const { entradaNegativaSha256, ...pendencia } = JSON.parse(json) as PendenciaRetrograda & { entradaNegativaSha256?: string };
+  return { entradaNegativaSha256, pendencia };
+}
+
 export function registrarNegativaRetrogradaNoBancoF4(
   db: DatabaseSync,
   acesso: AcessoF4,
@@ -107,6 +115,13 @@ export function registrarNegativaRetrogradaNoBancoF4(
   if (!sessao) return { ok: false, codigo: "SESSAO_INVALIDA" };
   try {
     garantirSchemaF4(db);
+    const patientId = Id.parse(entrada.patientId);
+    const apacExistente = Apac.parse(entrada.apacExistente);
+    // A entrada será persistida como JSON: não permitir que undefined/NaN etc.
+    // colidam com null ou desapareçam na serialização do payload original.
+    const payloadNegativa = z.json().parse({ patientId, apacExistente,
+      codigoNegativa: entrada.codigoNegativa, motivoTexto: entrada.motivoTexto, comprovanteRef: entrada.comprovanteRef });
+    const entradaNegativaSha256 = hashCanonico(payloadNegativa);
     const proc = processarNegativaRetrogradaApacF4({
       apacExistente: entrada.apacExistente,
       codigoNegativa: entrada.codigoNegativa,
@@ -116,22 +131,33 @@ export function registrarNegativaRetrogradaNoBancoF4(
     });
     return transacao(db, () => {
       const existente = db.prepare(
-        "SELECT comprovanteRef, codigoNegativa, apacNegadaJson, pendenciaJson FROM f4_apac_retrograda WHERE apacId = ?",
+        "SELECT patientId, tumorLotId, comprovanteRef, codigoNegativa, campoOrigem, apacNegadaJson, pendenciaJson FROM f4_apac_retrograda WHERE apacId = ?",
       ).get(entrada.apacExistente.apacId) as {
+        patientId: string;
+        tumorLotId: string;
         comprovanteRef: string;
         codigoNegativa: string;
+        campoOrigem: string | null;
         apacNegadaJson: string;
         pendenciaJson: string;
       } | undefined;
       if (existente) {
-        if (existente.comprovanteRef === entrada.comprovanteRef && existente.codigoNegativa === entrada.codigoNegativa) {
-          return {
-            ok: true as const,
-            apacNegadaPreservada: JSON.parse(existente.apacNegadaJson) as Apac,
-            pendenciaRetrograda: JSON.parse(existente.pendenciaJson) as PendenciaRetrograda,
-            replay: true,
-          };
+        const { entradaNegativaSha256: hashPersistido, pendencia } = lerPendenciaNegativaPersistida(existente.pendenciaJson);
+        const persistida = Apac.parse(JSON.parse(existente.apacNegadaJson));
+        // recebidoEm foi gerado na primeira tentativa; acesso.agora é apenas
+        // o horário deste retry. Datas externas da entrada continuam no hash.
+        const candidata = { ...proc.apacNegadaPreservada, resultadoExterno: {
+          ...proc.apacNegadaPreservada.resultadoExterno!, recebidoEm: persistida.resultadoExterno?.recebidoEm,
+        } };
+        if (hashPersistido === entradaNegativaSha256 && existente.patientId === patientId
+          && existente.tumorLotId === apacExistente.tumorLotId
+          && existente.comprovanteRef === entrada.comprovanteRef && existente.codigoNegativa === entrada.codigoNegativa
+          && existente.campoOrigem === proc.pendenciaRetrograda.campoOrigem
+          && hashCanonico(pendencia) === hashCanonico(proc.pendenciaRetrograda)
+          && hashCanonico(persistida) === hashCanonico(candidata)) {
+          return { ok: true as const, apacNegadaPreservada: persistida, pendenciaRetrograda: pendencia, replay: true };
         }
+        // Sem hash de origem (legado), não há prova para afirmar replay completo.
         return { ok: false as const, codigo: "CONFLITO_NEGATIVA_EXISTENTE" as const };
       }
       db.prepare(`
@@ -147,7 +173,7 @@ export function registrarNegativaRetrogradaNoBancoF4(
         entrada.codigoNegativa,
         proc.pendenciaRetrograda.campoOrigem,
         JSON.stringify(proc.apacNegadaPreservada),
-        JSON.stringify(proc.pendenciaRetrograda),
+        JSON.stringify({ ...proc.pendenciaRetrograda, entradaNegativaSha256 }),
         acesso.agora,
       );
       return { ok: true as const, ...proc, replay: false };
@@ -170,7 +196,7 @@ export function listarNegativasRetrogradasF4(
   }>;
   return rows.map((r) => ({
     apacNegadaPreservada: JSON.parse(r.apacNegadaJson) as Apac,
-    pendenciaRetrograda: JSON.parse(r.pendenciaJson) as PendenciaRetrograda,
+    pendenciaRetrograda: lerPendenciaNegativaPersistida(r.pendenciaJson).pendencia,
   }));
 }
 

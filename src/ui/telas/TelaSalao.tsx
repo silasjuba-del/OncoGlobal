@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import type { PortaConsulta, SalaoVisao } from "../api/porta.js";
 import { AgendaQt } from "../oncochart/AgendaQt.js";
 import { ContingenciaSalao } from "../salao/ContingenciaSalao.js";
+import { FilaRelatosInfusao } from "../salao/FilaRelatosInfusao.js";
 import { Triagem5Passos } from "../oncochart/Triagem5Passos.js";
 import { FormTriagem } from "../salao/FormTriagem.js";
 import { QuadroSalao } from "../salao/QuadroSalao.js";
@@ -25,7 +26,6 @@ export function TelaSalao({ porta }: { porta: PortaConsulta }) {
   const [resumoFlash, setResumoFlash] = useState<string | null>(null);
   const [erro, setErro] = useState<string | null>(null);
   const [tentativa, setTentativa] = useState(0);
-  const [decisaoRelato,setDecisaoRelato]=useState<Record<string,string>>({});
 
   useEffect(() => {
     let viva = true;
@@ -56,7 +56,7 @@ export function TelaSalao({ porta }: { porta: PortaConsulta }) {
     <button type="button" onClick={() => setTentativa((atual) => atual + 1)}>Tentar carregar novamente</button>
   </section> : <p>carregando salão</p>;
   const escolhido = visao.pacientes.find((p) => p.patientId === patientId) ?? visao.pacientes[0];
-  if (!escolhido) return <p>salão vazio</p>;
+  if (!escolhido) return <section aria-label="Salão"><FilaRelatosInfusao porta={porta} relatos={visao.relatosInfusao ?? []} aoAtualizar={async () => setVisao(await porta.filaSalao())} /><p>salão vazio</p></section>;
   const fonteFormulario: Fonte = visao.fonte ?? { sourceId: `triagem-manual-${crypto.randomUUID()}`,
     classe: "MANUAL", localizador: "entrada manual em rascunho", dataClinica: visao.hoje,
     dataCaptura: new Date().toISOString(), versao: "triagem-form-local", contentHash: "PENDENTE_HASH_SERVIDOR" };
@@ -98,19 +98,7 @@ export function TelaSalao({ porta }: { porta: PortaConsulta }) {
       {erro ? <p role="alert">{erro}</p> : null}
       {visao.avisos?.filter(a=>a.patientId === escolhido.patientId).length ? <p role="status" aria-label="Avisos do salão">
         {visao.avisos.filter(a=>a.patientId === escolhido.patientId).map(a=>a.texto).join("; ")}</p> : null}
-      {visao.relatosInfusao?.filter(r=>r.patientId===escolhido.patientId).map(r=><section key={r.mensagemId} aria-label="Relato de infusão pendente">
-        <h2>Relato sobre infusão — revisão médica pendente</h2>
-        <p>Relato do canal; agente e diagnóstico não confirmados. Não impede a conduta do médico.</p>
-        <ul>{r.contextoMensagens.map(m=><li key={m.mensagemId}>{m.em} · {m.texto}<small> · fonte {m.mensagemId}</small></li>)}</ul>
-        {porta.revisarRelatoInfusao&&<form onSubmit={async e=>{e.preventDefault();setErro(null);try{
-          await porta.revisarRelatoInfusao!({contexto:{patientId:escolhido.patientId,encounterId:escolhido.encounterId,tumorLotId:null,operationId:crypto.randomUUID()},
-            mensagemId:r.mensagemId,payloadSha256:r.payloadSha256,decisao:decisaoRelato[r.mensagemId]??''});
-          setVisao(await porta.filaSalao());
-        }catch(error){setErro(textoErro(error));}}}>
-          <label>Decisão médica sobre o relato<textarea required value={decisaoRelato[r.mensagemId]??''} onChange={e=>setDecisaoRelato(v=>({...v,[r.mensagemId]:e.target.value}))}/></label>
-          <button type="submit">Registrar revisão deste relato</button>
-        </form>}
-      </section>)}
+      <FilaRelatosInfusao porta={porta} relatos={visao.relatosInfusao ?? []} aoAtualizar={async () => setVisao(await porta.filaSalao())} />
       <Triagem5Passos
         pacienteNome={escolhido.nome}
         onResumo={(t) => {

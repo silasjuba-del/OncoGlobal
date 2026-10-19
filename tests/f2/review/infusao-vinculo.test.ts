@@ -3,6 +3,7 @@ import { expect, it } from "vitest";
 import { receberTransporteSintetico } from "../../../src/server/canalEntrada.js";
 import { relatosInfusaoPendentes } from "../../../src/server/relatosInfusaoCanal.js";
 import { lerEventosComIntegridade } from "../../../src/server/leituras.js";
+import { rotearDutos } from "../../../src/server/dutos.js";
 import { ambiente, ctx, EM } from "../../bateria2/fixtures.js";
 
 it.each(["compartilhado", "revogado"])("vínculo atual leva relato ao salão e %s impede atribuição indevida", tipo => {
@@ -28,6 +29,11 @@ it.each(["compartilhado", "revogado"])("vínculo atual leva relato ao salão e %
       a.seed("Contato", { ...contato, contatoId: "outro-contato-infusao", patientId: outro.patientId }, "CONFIRMADO", outro);
     }
     expect(ler()).toEqual([]);
+    const negada = rotearDutos({ db: a.db, sessoes: a.acesso.sessoes, agora: () => EM }, a.acesso.token,
+      "/salao/revisar-relato-canal", { contexto: { ...ctx, tumorLotId: null, operationId: "revisao-vinculo-alterado" },
+        mensagemId: ack.reciboId, payloadSha256: ack.payloadSha256, decisao: "Tentativa sintética após alteração do vínculo." }, a.login.sessao);
+    expect(negada?.status).toBe(409);
+    expect(lerEventosComIntegridade(a.db).itens.filter(e => e.tipo === "ReviewDecision")).toHaveLength(0);
     expect(a.db.prepare("SELECT vinculoPatientId FROM canal_mensagem").get()!.vinculoPatientId).toBe(null);
   } finally { a.db.close(); }
 });

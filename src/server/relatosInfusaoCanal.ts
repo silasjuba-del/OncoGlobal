@@ -6,7 +6,9 @@ import { projetarVinculosContato } from '../kernel/projections/vinculosContato.j
 
 export interface RelatoInfusaoPendente {
  patientId:string; mensagemId:string; payloadSha256:string; texto:string; em:string;
- contextoMensagens: {mensagemId:string;texto:string;em:string}[];
+ contatoId:string; canal:string;
+ contextoMensagens: {mensagemId:string;texto:string;em:string;contatoId:string;canal:string}[];
+ contextosRevisao: {patientId:string;encounterId:string;tumorLotId:null}[];
 }
 const normal=(s:string)=>s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
 /** Localização documental, não diagnóstico nem regra de alarme clínico. Inclusive negativas ficam para leitura. */
@@ -32,7 +34,7 @@ export function relatosInfusaoPendentes(db:DatabaseSync,eventos:readonly Clinica
   const patientId=alvos[0]??(r.vinculoClasse==='CONHECIDO'?r.vinculoPatientId:null);
   if(!patientId||(r.vinculoPatientId&&r.vinculoPatientId!==patientId))return [];
   try {const c=JSON.parse(r.conteudo) as {tipo?:string;texto?:string};
-   return c.tipo==='TEXT'&&typeof c.texto==='string'?[{patientId,mensagemId:r.mensagemId,payloadSha256:r.payloadSha256,texto:c.texto,em:r.ingestedAt}]:[];
+   return c.tipo==='TEXT'&&typeof c.texto==='string'?[{patientId,mensagemId:r.mensagemId,payloadSha256:r.payloadSha256,texto:c.texto,em:r.ingestedAt,contatoId:r.senderRef,canal:r.canal}]:[];
   }catch{return [];}
  });
  return mensagens.filter(m=>relatoMencionaInfusao(m.texto)).filter(m=>!vigentes.some(e=>{
@@ -41,6 +43,8 @@ export function relatosInfusaoPendentes(db:DatabaseSync,eventos:readonly Clinica
   const d=dadosDoEvento(e);
   return d?.campo==='revisaoRelatoInfusaoCanal'&&d.mensagemId===m.mensagemId&&d.payloadSha256===m.payloadSha256
    &&typeof d.decisao==='string'&&!!d.decisao.trim();
- })).map(m=>({...m,contextoMensagens:mensagens.filter(x=>x.patientId===m.patientId&&Date.parse(x.em)>=Date.parse(m.em))
-  .map(({mensagemId,texto,em})=>({mensagemId,texto,em}))}));
+ })).map(m=>({...m,contextosRevisao:[...new Set(vigentes.filter(e=>e.patientId===m.patientId&&['CONFIRMADO','ASSINADO'].includes(e.revisao)).map(e=>e.encounterId))]
+   .map(encounterId=>({patientId:m.patientId,encounterId,tumorLotId:null})),
+  contextoMensagens:mensagens.filter(x=>x.patientId===m.patientId&&Date.parse(x.em)>=Date.parse(m.em))
+  .map(({mensagemId,texto,em,contatoId,canal})=>({mensagemId,texto,em,contatoId,canal}))}));
 }
