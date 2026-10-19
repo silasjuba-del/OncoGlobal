@@ -29,3 +29,5 @@ Medição: não foi realizado benchmark de carga desta fatia. Os tempos do runne
 Preservação: snapshot inicial de 119 worktrees e 77 arquivos protegidos; nova comparação dos 77 hashes sem mudanças. As Lunas da avaliação global permaneceram em leitura na sua worktree, que não recebeu alterações desta fatia. Arquivos não commitados do Cursor não entram no PR.
 
 Handoff: concluir os efeitos operacionais de adiamento/nutrição e depois a ligação de dose/administração/cumulativos à interface e aos eventos efetivos, reutilizando módulos/contratos existentes. Decisões médicas e regras pendentes pertencem ao médico; a próxima fase clínica não é ativada por esta entrega. FASE_CONCLUIDA: NAO.
+
+Borda adicional de contexto: a contingência só monta depois que o servidor confirma a seleção. O seletor de paciente é serializado durante a seleção inicial e as trocas; teste A/B impede disparo concorrente enquanto A está pendente e permite B depois. Typecheck e três testes F3/HTTP-salão PASS; revisão independente sem bloqueantes. Os testes anteriores de atraso do histórico e meia-noite permanecem.

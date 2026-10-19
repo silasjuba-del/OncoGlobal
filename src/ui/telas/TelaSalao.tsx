@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { PortaConsulta, SalaoVisao } from "../api/porta.js";
 import { AgendaQt } from "../oncochart/AgendaQt.js";
 import { ContingenciaSalao } from "../salao/ContingenciaSalao.js";
@@ -19,6 +19,9 @@ function erroCarregamento(error: unknown) {
 export function TelaSalao({ porta }: { porta: PortaConsulta }) {
   const [visao, setVisao] = useState<SalaoVisao | null>(null);
   const [patientId, setPatientId] = useState<string | null>(null);
+  const [contextoContingencia, setContextoContingencia] = useState<string | null>(null);
+  const contextoEmVoo = useRef(true);
+  const [selecionandoContexto, setSelecionandoContexto] = useState(true);
   const [resumoFlash, setResumoFlash] = useState<string | null>(null);
   const [erro, setErro] = useState<string | null>(null);
   const [tentativa, setTentativa] = useState(0);
@@ -26,6 +29,9 @@ export function TelaSalao({ porta }: { porta: PortaConsulta }) {
 
   useEffect(() => {
     let viva = true;
+    contextoEmVoo.current = true;
+    setSelecionandoContexto(true);
+    setContextoContingencia(null);
     setErro(null);
     porta.filaSalao().then(async (proxima) => {
       if (!viva) return;
@@ -34,10 +40,12 @@ export function TelaSalao({ porta }: { porta: PortaConsulta }) {
       setPatientId((atual) => atual ?? primeira?.patientId ?? null);
       if (primeira && porta.selecionarContexto) {
         try { await porta.selecionarContexto({ patientId: primeira.patientId,
-          encounterId: primeira.encounterId, tumorLotId: null }); }
+          encounterId: primeira.encounterId, tumorLotId: null });
+          if (viva) setContextoContingencia(`${primeira.patientId}:${primeira.encounterId}`); }
         catch (error) { if (viva) setErro(textoErro(error)); }
       }
-    }).catch((error) => { if (viva) setErro(erroCarregamento(error)); });
+      if (viva) { contextoEmVoo.current = false; setSelecionandoContexto(false); }
+    }).catch((error) => { if (viva) { setErro(erroCarregamento(error)); contextoEmVoo.current = false; setSelecionandoContexto(false); } });
     return () => {
       viva = false;
     };
@@ -59,17 +67,24 @@ export function TelaSalao({ porta }: { porta: PortaConsulta }) {
         Paciente em triagem
         <select
           aria-label="Paciente em triagem"
+          disabled={selecionandoContexto}
           value={escolhido.patientId}
           onChange={(evento) => {
+            if (contextoEmVoo.current) return;
             const proximo = visao.pacientes.find((p) => p.patientId === evento.target.value);
             if (!proximo) return;
             setErro(null);
+            contextoEmVoo.current = true;
+            setSelecionandoContexto(true);
+            setContextoContingencia(null);
             void (async () => {
               try {
                 await porta.selecionarContexto?.({ patientId: proximo.patientId,
                   encounterId: proximo.encounterId, tumorLotId: null });
                 setPatientId(proximo.patientId);
+                setContextoContingencia(`${proximo.patientId}:${proximo.encounterId}`);
               } catch (error) { setErro(textoErro(error)); }
+              finally { contextoEmVoo.current = false; setSelecionandoContexto(false); }
             })();
           }}
         >
@@ -142,8 +157,9 @@ export function TelaSalao({ porta }: { porta: PortaConsulta }) {
           }}
         />
       </div>
-      <ContingenciaSalao key={`${escolhido.patientId}:${escolhido.encounterId}`} porta={porta}
-        patientId={escolhido.patientId} encounterId={escolhido.encounterId} nome={escolhido.nome} />
+      {contextoContingencia === `${escolhido.patientId}:${escolhido.encounterId}` &&
+        <ContingenciaSalao key={contextoContingencia} porta={porta}
+          patientId={escolhido.patientId} encounterId={escolhido.encounterId} nome={escolhido.nome} />}
       <AgendaQt />
       <section aria-label="Decisões do médico">
         <h2>Decisões do médico</h2>

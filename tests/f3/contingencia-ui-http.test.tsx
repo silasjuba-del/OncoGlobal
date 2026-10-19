@@ -10,7 +10,37 @@ import { abrirLedger } from "../../src/kernel/ledger/db.js";
 import { criarServidorLocal } from "../../src/server/http.js";
 import { criarPortaHttp } from "../../src/ui/api/http.js";
 import { TelaSalao } from "../../src/ui/telas/TelaSalao.js";
+import { criarPortaFalsa } from "../../src/ui/api/fake.js";
 import { ambiente, ctx, EM } from "../bateria2/fixtures.js";
+
+it("serializa a seleção inicial e a troca de paciente antes de oferecer contingência", async () => {
+  const porta = criarPortaFalsa(), visao = await porta.filaSalao();
+  porta.filaSalao = async () => ({ ...visao, pacientes: [
+    { patientId: "a-sintetico", encounterId: "ea-sintetico", nome: "Paciente Sintetico A", chegadaEm: EM },
+    { patientId: "b-sintetico", encounterId: "eb-sintetico", nome: "Paciente Sintetico B", chegadaEm: EM },
+  ] });
+  let liberarInicial!: () => void;
+  const inicial = new Promise<void>(r => { liberarInicial = r; });
+  const selecionados: string[] = [];
+  porta.selecionarContexto = async c => { selecionados.push(c.patientId); if (c.patientId === "a-sintetico") await inicial; };
+  porta.historicoContingenciaSalao = async () => [];
+  porta.gerarContingenciaSalao = async () => { throw Error("GERACAO_NAO_SOLICITADA"); };
+  try {
+    render(<TelaSalao porta={porta} />);
+    const seletor = await screen.findByLabelText("Paciente em triagem") as HTMLSelectElement;
+    expect(seletor.disabled).toBe(true);
+    fireEvent.change(seletor, { target: { value: "b-sintetico" } });
+    expect(selecionados).toEqual(["a-sintetico"]);
+    expect(screen.queryByLabelText("Resumo operacional informado pelo médico")).toBeNull();
+    liberarInicial();
+    await waitFor(() => expect(seletor.disabled).toBe(false));
+    expect(seletor.value).toBe("a-sintetico");
+    fireEvent.change(seletor, { target: { value: "b-sintetico" } });
+    await screen.findByText("Paciente Sintetico B · b-sintetico · eb-sintetico");
+    expect(selecionados).toEqual(["a-sintetico", "b-sintetico"]);
+    expect(screen.queryByText("Paciente Sintetico A · a-sintetico · ea-sintetico")).toBeNull();
+  } finally { liberarInicial(); cleanup(); }
+});
 
 it("contingência cruza tela, HTTP e SQLite: contexto, E1, replay, conflito e reabertura", async () => {
   const pasta = mkdtempSync(join(tmpdir(), "f3-contingencia-sintetica-"));
@@ -57,8 +87,16 @@ it("contingência cruza tela, HTTP e SQLite: contexto, E1, replay, conflito e re
       await esperaHistorico;
       return antigas;
     };
+    const selecionarContexto = porta.selecionarContexto!;
+    let liberarContexto!: () => void;
+    const esperaContexto = new Promise<void>(r => { liberarContexto = r; });
+    porta.selecionarContexto = async c => { await esperaContexto; return selecionarContexto(c); };
     render(<TelaSalao porta={porta} />);
+    await screen.findByLabelText("Paciente em triagem");
+    expect(screen.queryByLabelText("Resumo operacional informado pelo médico")).toBeNull();
+    liberarContexto();
     await screen.findByLabelText("Resumo operacional informado pelo médico");
+    porta.selecionarContexto = selecionarContexto;
     await porta.selecionarContexto?.(contexto);
     fireEvent.change(screen.getByLabelText("Resumo operacional informado pelo médico"), { target: { value: "Observação sintética <script>alert('x')</script>" } });
     fireEvent.click(screen.getByLabelText("Emergência ativa informada pelo médico"));
