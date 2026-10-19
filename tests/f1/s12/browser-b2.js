@@ -262,7 +262,7 @@ async function main() {
   let viteDev;
   let efeitosCanal=0;
   const segredoCanal='segredo-exclusivamente-sintetico-navegador';
-  const operacaoCanal={contasWebhook:[{accountId:'00000000',keyId:'sintetica',canal:'WHATSAPP_SERVICO',segredo:segredoCanal,verifyToken:'token-sintetico'}],
+  const operacaoCanal={contasWebhook:[{accountId:'00000000',phoneNumberId:'00000000',keyId:'sintetica',canal:'WHATSAPP_SERVICO',segredo:segredoCanal,verifyToken:'token-sintetico'}],
     transporteSaida:async()=>{efeitosCanal++;return {ok:true,providerReceiptId:'recibo-provedor-sintetico-navegador'};}};
   try {
     viteDev = await createViteServer({

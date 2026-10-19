@@ -65,6 +65,8 @@ export type ResultadoDesafioWebhook =
 
 export interface ContaWebhookConfigurada {
   accountId: string;
+  /** Identificador nativo Meta; nunca é a identidade lógica da conta local. */
+  phoneNumberId?: string | undefined;
   canal: "WHATSAPP_SERVICO";
   keyId: string;
   segredo: string | Uint8Array;
@@ -106,12 +108,21 @@ export function resolverContaWebhookConfigurada(
   keyId: string,
   contas: readonly ContaWebhookConfigurada[],
   accountRefNoEnvelope?: string,
+  tipoReferencia: "ACCOUNT_ID" | "PHONE_NUMBER_ID" = "ACCOUNT_ID",
 ): { ok: true; conta: ContaWebhookConfigurada } | { ok: false; codigo: "CONTA_INCORRETA" | "CONFIGURACAO_INVALIDA" } {
   if (!keyIdValido(keyId) || contas.length === 0) return { ok: false, codigo: "CONFIGURACAO_INVALIDA" };
   const candidatas = contas.filter((c) => c.keyId === keyId && c.canal === "WHATSAPP_SERVICO" && keyIdValido(c.accountId));
   if (candidatas.length !== 1) return { ok: false, codigo: "CONTA_INCORRETA" };
   const conta = candidatas[0]!;
-  if (accountRefNoEnvelope !== undefined && accountRefNoEnvelope !== conta.accountId) {
+  if (conta.phoneNumberId !== undefined && (typeof conta.phoneNumberId !== "string" || !/^\d+$/.test(conta.phoneNumberId)
+    || !keyIdValido(conta.phoneNumberId))) return { ok: false, codigo: "CONFIGURACAO_INVALIDA" };
+  if (conta.phoneNumberId !== undefined
+    && contas.filter(c => c.phoneNumberId === conta.phoneNumberId).length !== 1) {
+    return { ok: false, codigo: "CONFIGURACAO_INVALIDA" };
+  }
+  const referenciaEsperada = tipoReferencia === "PHONE_NUMBER_ID" ? conta.phoneNumberId : conta.accountId;
+  if (referenciaEsperada === undefined) return { ok: false, codigo: "CONFIGURACAO_INVALIDA" };
+  if (accountRefNoEnvelope !== undefined && accountRefNoEnvelope !== referenciaEsperada) {
     return { ok: false, codigo: "CONTA_INCORRETA" };
   }
   return { ok: true, conta };

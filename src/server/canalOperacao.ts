@@ -19,9 +19,12 @@ import {lerReconciliacaoMensagemCanal} from './canalReconciliacao.js';
 import {AutorizacaoRespostaCanalServidor} from '../contracts/f2/caixaRespostaCanal.js';
 
 const Id=z.string().trim().min(1).max(250);
-export const ConfiguracaoCanalLocal=z.object({contasWebhook:z.array(z.object({accountId:Id,canal:z.literal('WHATSAPP_SERVICO'),keyId:Id.regex(/^[A-Za-z0-9_-]+$/),
+export const ConfiguracaoCanalLocal=z.object({contasWebhook:z.array(z.object({accountId:Id,phoneNumberId:z.string().regex(/^\d+$/).max(250).optional(),canal:z.literal('WHATSAPP_SERVICO'),keyId:Id.regex(/^[A-Za-z0-9_-]+$/),
   segredo:z.string().min(1).max(512),verifyToken:Id}).strict()).max(20),whatsappSaida:z.array(ContaSaidaWhatsApp).max(20).default([])}).strict()
  .superRefine((c,ctx)=>{for(const chave of ['keyId','accountId'] as const)if(new Set(c.contasWebhook.map(x=>x[chave])).size!==c.contasWebhook.length)ctx.addIssue({code:'custom',message:'Contas duplicadas'});
+  const nativas=c.contasWebhook.flatMap(w=>w.phoneNumberId===undefined?[]:[w.phoneNumberId]);
+  if(new Set(nativas).size!==nativas.length)ctx.addIssue({code:'custom',message:'Conta nativa duplicada'});
+  if(c.whatsappSaida.some(s=>c.contasWebhook.some(w=>w.accountId===s.accountId&&w.phoneNumberId!==undefined&&w.phoneNumberId!==s.phoneNumberId)))ctx.addIssue({code:'custom',message:'Identificador nativo divergente entre ingresso e saída'});
   if(new Set(c.whatsappSaida.map(x=>x.accountId)).size!==c.whatsappSaida.length)ctx.addIssue({code:'custom',message:'Saída duplicada'});
   if(c.whatsappSaida.some(s=>!c.contasWebhook.some(w=>w.accountId===s.accountId)))ctx.addIssue({code:'custom',message:'Conta de saída sem ingresso'});});
 export interface OperacaoCanal {contasWebhook:readonly ContaWebhookConfigurada[];transporteSaida?:TransporteCanal}

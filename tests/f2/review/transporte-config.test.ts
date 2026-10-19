@@ -9,7 +9,7 @@ const envio:EnvioCanal={canal:'WHATSAPP_SERVICO',accountId:conta.accountId,desti
 it('configuração local é opt-in, valida contas e nunca define um destino arbitrário de rede',()=>{
  const dir=mkdtempSync(join(tmpdir(),'f2-config-sintetica-'));try{
   expect(carregarOperacaoCanal(dir)).toEqual({contasWebhook:[]});
-  const c={contasWebhook:[{accountId:conta.accountId,keyId:'key-sintetica',canal:'WHATSAPP_SERVICO',segredo:'segredo-sintetico',verifyToken:'verify-sintetico'}],whatsappSaida:[conta]};
+  const c={contasWebhook:[{accountId:conta.accountId,phoneNumberId:conta.phoneNumberId,keyId:'key-sintetica',canal:'WHATSAPP_SERVICO',segredo:'segredo-sintetico',verifyToken:'verify-sintetico'}],whatsappSaida:[conta]};
   writeFileSync(join(dir,'canal.local.json'),JSON.stringify(c));expect(carregarOperacaoCanal(dir).transporteSaida).toBeTypeOf('function');
   expect(ConfiguracaoCanalLocal.safeParse({...c,contasWebhook:[...c.contasWebhook,...c.contasWebhook]}).success).toBe(false);
   expect(ConfiguracaoCanalLocal.safeParse({...c,whatsappSaida:[{...conta,accountId:'sem-ingresso'}]}).success).toBe(false);
