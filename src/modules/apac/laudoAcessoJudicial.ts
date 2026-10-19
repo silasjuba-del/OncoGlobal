@@ -10,7 +10,7 @@ import {
   type StatusCoberturaPadrao,
   type StatusRegistroRegulatorio,
 } from "../../contracts/f4/acessoEJudicializacao.js";
-import type { Apac } from "../../contracts/operacao.js";
+import { Apac as ApacSchema, type Apac } from "../../contracts/operacao.js";
 import {
   apacGerar,
   apacPrazo,
@@ -28,10 +28,13 @@ import type { CaixaNumerada } from "../../contracts/w10/clinico-w10.js";
 /**
  * S-F4-01 · Gera APAC a partir de prescrição ASSINADA, valida campos obrigatórios,
  * prazos D85/D90 e antiglosa com tabela SIGTAP versionada por competência.
+ * Aceita `dataGeracaoApp` opcional (quando a APAC foi gerada em data anterior a `hoje`)
+ * para avaliar prazos D85/D90 ao longo do ciclo de validade de 90 dias.
  */
 export function executarFluxoLinearApacF4(entrada: {
   prescricaoAssinada: PrescricaoAssinada;
   tumorLot: TumorLot;
+  dataGeracaoApp?: string;
   hoje: string;
   ultimoAvisoEm: string | null;
   camposObrigatorios: readonly string[];
@@ -40,7 +43,8 @@ export function executarFluxoLinearApacF4(entrada: {
   cnesConfigurado: string;
   apacsDoLote?: readonly Apac[];
 }) {
-  const apac = apacGerar(entrada.prescricaoAssinada, entrada.tumorLot, entrada.hoje);
+  const dataGeracao = entrada.dataGeracaoApp ?? entrada.hoje;
+  const apac = apacGerar(entrada.prescricaoAssinada, entrada.tumorLot, dataGeracao);
   const validacaoEmissao = validarEmissaoApac(apac, entrada.camposObrigatorios);
   const prazo = apacPrazo(apac.dataGeracaoApp, entrada.hoje, entrada.ultimoAvisoEm);
   const vereditoAntiglosa = antiglosa(apac, {
@@ -71,7 +75,7 @@ export function executarFluxoLinearApacF4(entrada: {
 export function processarNegativaRetrogradaApacF4(entrada: {
   apacExistente: Apac;
   codigoNegativa: CodigoNegativa;
-  motivoTexto: string;
+  motivoTexto?: string;
   comprovanteRef: string;
   recebidoEm: string;
 }): {
@@ -83,16 +87,19 @@ export function processarNegativaRetrogradaApacF4(entrada: {
     codigo: entrada.codigoNegativa,
     comprovanteRef: entrada.comprovanteRef,
   });
-  const apacNegadaPreservada: Apac = {
+  const motivoFormatado = entrada.motivoTexto?.trim()
+    ? `${entrada.codigoNegativa}: ${entrada.motivoTexto.trim()}`
+    : entrada.codigoNegativa;
+  const apacNegadaPreservada = ApacSchema.parse({
     ...entrada.apacExistente,
     estado: "NEGADA",
     resultadoExterno: {
       valor: "NEGADA",
       comprovanteRef: entrada.comprovanteRef,
-      motivo: entrada.motivoTexto,
+      motivo: motivoFormatado,
       recebidoEm: entrada.recebidoEm,
     },
-  };
+  });
   return { apacNegadaPreservada, pendenciaRetrograda };
 }
 

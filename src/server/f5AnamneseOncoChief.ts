@@ -185,6 +185,7 @@ export function processarVozAnamneseComExpurgoAudioF5(
 
   const texto = entrada.transcricaoValidadaPeloMedico.trim();
   if (!texto || entrada.audioBufferTemporario.byteLength === 0) {
+    entrada.audioBufferTemporario.fill(0);
     return { ok: false, codigo: "TRANSCRICAO_NAO_VALIDADA" };
   }
 

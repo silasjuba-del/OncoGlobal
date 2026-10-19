@@ -588,20 +588,41 @@ export function lerApacs(db: DatabaseSync, agora: string, config: {
       ? antiglosa(apac, { hoje: civil.dataCivil, sigtap: config.sigtap, caixas: catalogoApac.caixas,
         cnesConfigurado: config.cnesConfigurado, apacsDoLote: doLote }) : null;
     const motivoNegativa = apac.resultadoExterno?.valor === "NEGADA" ? apac.resultadoExterno.motivo : null;
-    const codigosRetrogrados = new Set<CodigoNegativa>(["ESTADIO_AUSENTE", "HISTOLOGIA_AUSENTE", "TOPOGRAFIA_AUSENTE", "CID_AUSENTE", "OUTRO"]);
-    const campoOrigem = apac.resultadoExterno?.valor === "NEGADA"
-      && motivoNegativa !== null
-      && codigosRetrogrados.has(motivoNegativa as CodigoNegativa)
-      && apac.resultadoExterno.comprovanteRef
-      ? apacRetrograda({
+    const extrairCodigoNegativa = (motivo: string | null): CodigoNegativa | null => {
+      if (!motivo) return null;
+      const prefixo = motivo.split(":")[0]?.trim().toUpperCase() ?? "";
+      if (["ESTADIO_AUSENTE", "HISTOLOGIA_AUSENTE", "TOPOGRAFIA_AUSENTE", "CID_AUSENTE", "OUTRO"].includes(prefixo)) {
+        return prefixo as CodigoNegativa;
+      }
+      const norm = motivo.toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, "");
+      if (norm.includes("estadio") || norm.includes("estadiamento") || norm.includes("tnm")) return "ESTADIO_AUSENTE";
+      if (norm.includes("histologia") || norm.includes("anatomopatologico")) return "HISTOLOGIA_AUSENTE";
+      if (norm.includes("topografia")) return "TOPOGRAFIA_AUSENTE";
+      if (norm.includes("cid")) return "CID_AUSENTE";
+      return null;
+    };
+    let campoOrigemRetrograda: "estadiamentos" | "histologia" | "topografia" | "cid" | null = null;
+    const codigoExtraido = extrairCodigoNegativa(motivoNegativa);
+    if (apac.resultadoExterno?.valor === "NEGADA" && codigoExtraido && apac.resultadoExterno.comprovanteRef) {
+      campoOrigemRetrograda = apacRetrograda({
         apacId: apac.apacId,
         comprovanteRef: apac.resultadoExterno.comprovanteRef,
-        codigo: motivoNegativa as CodigoNegativa,
-      }).campoOrigem
-      : null;
+        codigo: codigoExtraido,
+      }).campoOrigem;
+    } else {
+      try {
+        const temTabelaF4 = db.prepare("SELECT 1 AS ok FROM sqlite_master WHERE type='table' AND name='f4_apac_retrograda'").get();
+        if (temTabelaF4) {
+          const rowRet = db.prepare("SELECT campoOrigem FROM f4_apac_retrograda WHERE apacId = ?").get(apac.apacId) as { campoOrigem: string | null } | undefined;
+          if (rowRet && (rowRet.campoOrigem === "estadiamentos" || rowRet.campoOrigem === "histologia" || rowRet.campoOrigem === "topografia" || rowRet.campoOrigem === "cid")) {
+            campoOrigemRetrograda = rowRet.campoOrigem;
+          }
+        }
+      } catch { /* fallback seguro */ }
+    }
     return [{ apac, lote, nomePaciente: paciente.nome, patientId: paciente.patientId,
       encounterId: event.encounterId,
-      ultimoAvisoEm, campoOrigem,
+      ultimoAvisoEm, campoOrigem: campoOrigemRetrograda,
       motivoNegativa,
       prazo: prazo ? { ...prazo, estado: prazo.dias < 0 ? "PENDENTE" : prazo.estado } : { estado: "PENDENTE" },
       antiglosa: resultadoAntiglosa,

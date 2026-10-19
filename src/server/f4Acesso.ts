@@ -101,8 +101,8 @@ export function registrarNegativaRetrogradaNoBancoF4(
     comprovanteRef: string;
   },
 ):
-  | { ok: true; apacNegadaPreservada: Apac; pendenciaRetrograda: PendenciaRetrograda }
-  | { ok: false; codigo: "SESSAO_INVALIDA" | "NEGATIVA_INVALIDA" } {
+  | { ok: true; apacNegadaPreservada: Apac; pendenciaRetrograda: PendenciaRetrograda; replay?: boolean }
+  | { ok: false; codigo: "SESSAO_INVALIDA" | "NEGATIVA_INVALIDA" | "CONFLITO_NEGATIVA_EXISTENTE" } {
   const sessao = obterSessaoMedicaValida(acesso);
   if (!sessao) return { ok: false, codigo: "SESSAO_INVALIDA" };
   try {
@@ -114,13 +114,31 @@ export function registrarNegativaRetrogradaNoBancoF4(
       comprovanteRef: entrada.comprovanteRef,
       recebidoEm: acesso.agora,
     });
-    transacao(db, () => {
+    return transacao(db, () => {
+      const existente = db.prepare(
+        "SELECT comprovanteRef, codigoNegativa, apacNegadaJson, pendenciaJson FROM f4_apac_retrograda WHERE apacId = ?",
+      ).get(entrada.apacExistente.apacId) as {
+        comprovanteRef: string;
+        codigoNegativa: string;
+        apacNegadaJson: string;
+        pendenciaJson: string;
+      } | undefined;
+      if (existente) {
+        if (existente.comprovanteRef === entrada.comprovanteRef && existente.codigoNegativa === entrada.codigoNegativa) {
+          return {
+            ok: true as const,
+            apacNegadaPreservada: JSON.parse(existente.apacNegadaJson) as Apac,
+            pendenciaRetrograda: JSON.parse(existente.pendenciaJson) as PendenciaRetrograda,
+            replay: true,
+          };
+        }
+        return { ok: false as const, codigo: "CONFLITO_NEGATIVA_EXISTENTE" as const };
+      }
       db.prepare(`
         INSERT INTO f4_apac_retrograda (
           apacId, patientId, tumorLotId, comprovanteRef, codigoNegativa,
           campoOrigem, apacNegadaJson, pendenciaJson, registradoEm
         ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-        ON CONFLICT(apacId) DO NOTHING
       `).run(
         entrada.apacExistente.apacId,
         entrada.patientId,
@@ -132,8 +150,8 @@ export function registrarNegativaRetrogradaNoBancoF4(
         JSON.stringify(proc.pendenciaRetrograda),
         acesso.agora,
       );
+      return { ok: true as const, ...proc, replay: false };
     });
-    return { ok: true, ...proc };
   } catch {
     return { ok: false, codigo: "NEGATIVA_INVALIDA" };
   }
@@ -173,7 +191,13 @@ export function salvarMinutaLaudoAcessoJudicialF4(
   });
   if (!gerada.ok) return gerada;
 
-  transacao(db, () => {
+  return transacao(db, () => {
+    const existente = db.prepare(
+      "SELECT revisao FROM f4_minuta_laudo_judicial WHERE minutaId = ? AND versao = ?",
+    ).get(gerada.minuta.minutaId, gerada.minuta.versao) as { revisao: string } | undefined;
+    if (existente?.revisao === "ASSINADO") {
+      return { ok: false as const, codigo: "MINUTA_JA_ASSINADA_IMUTAVEL" };
+    }
     db.prepare(`
       INSERT INTO f4_minuta_laudo_judicial (
         minutaId, versao, patientId, encounterId, tumorLotId, revisao, minutaJson, atualizadoEm
@@ -191,9 +215,8 @@ export function salvarMinutaLaudoAcessoJudicialF4(
       JSON.stringify(gerada.minuta),
       acesso.agora,
     );
+    return { ok: true as const, minuta: gerada.minuta };
   });
-
-  return { ok: true, minuta: gerada.minuta };
 }
 
 /**

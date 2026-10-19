@@ -54,8 +54,8 @@ const PADROES_PROIBIDOS_LAUDO_JUDICIAL = [
   /\beleg[ií]vel\s+automaticamente\b/i,
   /\bgarantia\s+de\s+cura\b/i,
   /\bprometo\s+resposta\b/i,
-  /\bCORRECAO_IA\b/,
-  /\bALERTA_E1\b/,
+  /\bCORRECAO_IA\b/i,
+  /\bALERTA(?:_E1)?\b/i,
 ];
 
 /**
@@ -123,7 +123,7 @@ export const MinutaLaudoAcessoJudicial = z.object({
     }
   }
   for (const proibido of PADROES_PROIBIDOS_LAUDO_JUDICIAL) {
-    if (proibido.test(m.textoMinutaConsolidado)) {
+    if (proibido.test(m.textoMinutaConsolidado) || proibido.test(m.separacaoEixosAcesso.indicacaoClinicaMedica)) {
       ctx.addIssue({
         code: "custom",
         path: ["textoMinutaConsolidado"],

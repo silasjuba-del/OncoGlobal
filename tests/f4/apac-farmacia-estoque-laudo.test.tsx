@@ -163,9 +163,9 @@ describe("FASE F4 · APAC, Farmácia, Estoque e Documentação de Acesso/Judicia
     expect(d10.validacaoEmissao.podeEmitir).toBe(true);
     expect(d10.tabelaSigtapPresente).toBe(true);
 
-    // Prazo D85 (aviso 1x, se ultimoAvisoEm !== null não repete) e D90 (VENCIDA: faturamento não emite, consulta segue)
-    const apacGeradaEm01Jul = { ...d10.apac, dataGeracaoApp: "2026-07-20" };
-    // 2026-07-20 -> 2026-10-13 = 85 dias
+    // Prazo D85 (aviso 1x: ultimoAvisoEm === null -> aviso: true; ultimoAvisoEm !== null -> aviso: false)
+    // e D90 (VENCIDA: faturamento não emite, podeExportarFaturamento: false, mas consultaSegue: true)
+    // 2026-07-01 -> 2026-09-24 = 85 dias; 2026-07-01 -> 2026-09-29 = 90 dias
     const d85PrimeiraVez = executarFluxoLinearApacF4({
       prescricaoAssinada: {
         apacId: "apac-d85",
@@ -176,16 +176,62 @@ describe("FASE F4 · APAC, Farmácia, Estoque e Documentação de Acesso/Judicia
         campos: { cidPrincipal: "C509", procedimentoPrincipal: "0304050067" },
       },
       tumorLot: lot,
-      hoje: "2026-07-20",
+      dataGeracaoApp: "2026-07-01",
+      hoje: "2026-09-24",
       ultimoAvisoEm: null,
       camposObrigatorios: ["cidPrincipal"],
       sigtap: { "2026-09": SIGTAP_2026_09 },
       caixas: CAIXAS,
       cnesConfigurado: "2605473",
     });
-    void apacGeradaEm01Jul;
+    expect(d85PrimeiraVez.prazo.dias).toBe(85);
+    expect(d85PrimeiraVez.prazo.aviso).toBe(true);
     expect(d85PrimeiraVez.prazo.faturamentoPodeEmitir).toBe(true);
     expect(d85PrimeiraVez.consultaClinicaSegueSempre).toBe(true);
+
+    const d85Repetido = executarFluxoLinearApacF4({
+      prescricaoAssinada: {
+        apacId: "apac-d85",
+        documentId: "rx-assinada-1",
+        documentVersion: 1,
+        revisao: "ASSINADO",
+        competencia: "2026-09",
+        campos: { cidPrincipal: "C509", procedimentoPrincipal: "0304050067" },
+      },
+      tumorLot: lot,
+      dataGeracaoApp: "2026-07-01",
+      hoje: "2026-09-24",
+      ultimoAvisoEm: "2026-09-24T08:00:00.000Z",
+      camposObrigatorios: ["cidPrincipal"],
+      sigtap: { "2026-09": SIGTAP_2026_09 },
+      caixas: CAIXAS,
+      cnesConfigurado: "2605473",
+    });
+    expect(d85Repetido.prazo.aviso).toBe(false);
+
+    const d90Vencida = executarFluxoLinearApacF4({
+      prescricaoAssinada: {
+        apacId: "apac-d90",
+        documentId: "rx-assinada-1",
+        documentVersion: 1,
+        revisao: "ASSINADO",
+        competencia: "2026-09",
+        campos: { cidPrincipal: "C509", procedimentoPrincipal: "0304050067" },
+      },
+      tumorLot: lot,
+      dataGeracaoApp: "2026-07-01",
+      hoje: "2026-09-29",
+      ultimoAvisoEm: "2026-09-24T08:00:00.000Z",
+      camposObrigatorios: ["cidPrincipal"],
+      sigtap: { "2026-09": SIGTAP_2026_09 },
+      caixas: CAIXAS,
+      cnesConfigurado: "2605473",
+    });
+    expect(d90Vencida.prazo.dias).toBe(90);
+    expect(d90Vencida.prazo.estado).toBe("VENCIDA");
+    expect(d90Vencida.prazo.faturamentoPodeEmitir).toBe(false);
+    expect(d90Vencida.podeExportarFaturamento).toBe(false);
+    expect(d90Vencida.consultaClinicaSegueSempre).toBe(true);
   });
 
   it("S-F4-02 · lotes ApacBatch por competência única (excluindo cirurgia/AIH, vencida e bloqueado sem travar os demais) e negativa retrógrada FN-13", () => {
@@ -293,6 +339,7 @@ describe("FASE F4 · APAC, Farmácia, Estoque e Documentação de Acesso/Judicia
 
     expect(negada).toMatchObject({
       ok: true,
+      replay: false,
       apacNegadaPreservada: {
         apacId: "apac-neg-1",
         estado: "NEGADA",
@@ -307,6 +354,28 @@ describe("FASE F4 · APAC, Farmácia, Estoque e Documentação de Acesso/Judicia
         estado: "PENDENTE",
       },
     });
+
+    // Segunda chamada com código conflitante para o mesmo apacId é recusada com CONFLITO_NEGATIVA_EXISTENTE
+    expect(
+      registrarNegativaRetrogradaNoBancoF4(db, acesso, {
+        patientId: "pt-f4-1",
+        apacExistente: {
+          apacId: "apac-neg-1",
+          tumorLotId: "lot-f4-1",
+          prescricaoAssinadaRef: { documentId: "rx-1", documentVersion: 1 },
+          dataGeracaoApp: "2026-10-01",
+          competencia: "2026-10",
+          campos: { cidPrincipal: "C509" },
+          estado: "EMITIDA",
+          resultadoExterno: null,
+          versao: 1,
+          substituiApacId: null,
+        },
+        codigoNegativa: "CID_AUSENTE",
+        motivoTexto: "Conflito de código de negativa.",
+        comprovanteRef: "comp-glosa-outro",
+      }),
+    ).toEqual({ ok: false, codigo: "CONFLITO_NEGATIVA_EXISTENTE" });
 
     db.close();
     const dbReaberto = reabrir(caminho);
@@ -336,7 +405,16 @@ describe("FASE F4 · APAC, Farmácia, Estoque e Documentação de Acesso/Judicia
       motivo: "estoque informado como indisponível",
     });
 
-    // 2. Farmácia pede correção com motivo -> CORRECAO_PEDIDA; médico aceita -> ACEITA
+    // 2. Farmácia confere -> CONFERIDA; ou pede correção com motivo -> CORRECAO_PEDIDA; médico recusa ou aceita
+    const conferidaDireto = avaliarFarmaciaEEstoqueF4({
+      conteudoPrescricaoId: "rx-conferida-1",
+      pedidoFarmacia: { ator: "FARMACIA", acao: "CONFERIR" },
+      leituraEstoque: { estado: "DISPONIVEL", origem: "Farmácia Satélite QT", data: HOJE },
+      hoje: HOJE,
+      validadeEstoque: { dias: 7, fonte: "DECISAO_SERVICO" },
+    });
+    expect(conferidaDireto.registroFarmacia.estado).toBe("CONFERIDA");
+
     const pediuCorrecao = avaliarFarmaciaEEstoqueF4({
       conteudoPrescricaoId: "rx-assinada-99",
       pedidoFarmacia: {
@@ -350,8 +428,19 @@ describe("FASE F4 · APAC, Farmácia, Estoque e Documentação de Acesso/Judicia
     });
     expect(pediuCorrecao.registroFarmacia.estado).toBe("CORRECAO_PEDIDA");
 
-    const medicoAceitou = avaliarFarmaciaEEstoqueF4({
+    const medicoRecusou = avaliarFarmaciaEEstoqueF4({
       registroAtual: pediuCorrecao.registroFarmacia,
+      conteudoPrescricaoId: "rx-assinada-99",
+      pedidoFarmacia: { ator: "MEDICO", acao: "RECUSAR" },
+      leituraEstoque: { estado: "DISPONIVEL", origem: "Farmácia Satélite QT", data: HOJE },
+      hoje: HOJE,
+      validadeEstoque: { dias: 7, fonte: "DECISAO_SERVICO" },
+    });
+    expect(medicoRecusou.registroFarmacia.estado).toBe("CORRECAO_PEDIDA");
+    expect(medicoRecusou.registroFarmacia.historico).toHaveLength(2);
+
+    const medicoAceitou = avaliarFarmaciaEEstoqueF4({
+      registroAtual: medicoRecusou.registroFarmacia,
       conteudoPrescricaoId: "rx-assinada-99",
       pedidoFarmacia: { ator: "MEDICO", acao: "ACEITAR" },
       leituraEstoque: { estado: "DISPONIVEL", origem: "Farmácia Satélite QT", data: HOJE },
@@ -359,7 +448,7 @@ describe("FASE F4 · APAC, Farmácia, Estoque e Documentação de Acesso/Judicia
       validadeEstoque: { dias: 7, fonte: "DECISAO_SERVICO" },
     });
     expect(medicoAceitou.registroFarmacia.estado).toBe("ACEITA");
-    expect(medicoAceitou.registroFarmacia.historico).toHaveLength(2);
+    expect(medicoAceitou.registroFarmacia.historico).toHaveLength(3);
 
     // Leitura de estoque vencida (> 7 dias) vira DESCONHECIDO sem travar
     const estoqueVelho = avaliarFarmaciaEEstoqueF4({
@@ -373,8 +462,8 @@ describe("FASE F4 · APAC, Farmácia, Estoque e Documentação de Acesso/Judicia
     expect(estoqueVelho.chipEstoque.sugereTroca).toBe(false);
   });
 
-  it("S-F4-04 & S-F4-05 · minuta de laudo de acesso/judicialização exige grounding por fato/fonte datada, separa indicação/registro/cobertura/disponibilidade, recusa tese de direito adquirido, bloqueia assinatura por IA (G-03) e renderiza UI APAC/Estoque", async () => {
-    const { db } = ledger();
+  it("S-F4-04 & S-F4-05 · minuta de laudo de acesso/judicialização exige grounding por fato/fonte datada, separa indicação/registro/cobertura/disponibilidade, recusa tese de direito adquirido, bloqueia assinatura por IA (G-03), impede sobrescrita pós-assinatura e renderiza UI APAC/Estoque", async () => {
+    const { db, caminho } = ledger();
     const acesso = sessao();
 
     const citacoes = [
@@ -531,7 +620,7 @@ describe("FASE F4 · APAC, Farmácia, Estoque e Documentação de Acesso/Judicia
       atorOverrideParaTesteAdversarial: { tipo: "AGENTE", crm: null },
     })).toEqual({ ok: false, codigo: "G03_ASSINATURA_NEGADA" });
 
-    // 5. Assinatura pelo médico autenticado na sessão (SESSAO + CRM) promove a ASSINADO
+    // 5. Assinatura pelo médico autenticado na sessão (SESSAO + CRM) promove a ASSINADO e impede sobrescrita posterior na mesma versão
     const assinada = assinarMinutaLaudoAcessoJudicialF4(db, acesso, {
       minutaId: "laudo-valido-1",
       versao: 1,
@@ -544,7 +633,47 @@ describe("FASE F4 · APAC, Farmácia, Estoque e Documentação de Acesso/Judicia
         assinadoPorCrm: "CRM-PB-SINTETICO",
       },
     });
-    expect(lerMinutaLaudoAcessoJudicialF4(db, "laudo-valido-1", 1)?.revisao).toBe("ASSINADO");
+
+    // Tentar sobrescrever versão 1 já ASSINADO retorna MINUTA_JA_ASSINADA_IMUTAVEL
+    expect(
+      salvarMinutaLaudoAcessoJudicialF4(db, acesso, {
+        minutaId: "laudo-valido-1",
+        versao: 1,
+        patientId: "pt-f4-1",
+        encounterId: "enc-f4-1",
+        tumorLotId: "lot-f4-1",
+        prescricaoAssinadaRef: { documentId: "rx-jud-1", documentVersion: 1 },
+        medicamentoSolicitado: {
+          nome: "Pembrolizumabe",
+          posologiaPlanejada: "200 mg EV a cada 21 dias",
+          duracaoPrevista: "Até 12 meses",
+        },
+        indicacaoClinicaMedica: "Tentativa de sobrescrever versão já assinada.",
+        registroRegulatorio: "REGISTRADO_ANVISA",
+        coberturaPadrao: "NAO_INCORPORADO_SUS",
+        chipEstoque: {
+          estado: "INDISPONIVEL",
+          origem: "Farmácia UNACON",
+          data: HOJE,
+          trava: false,
+          sugereTroca: false,
+          motivo: "indisponível",
+        },
+        citacoesVerificadas: citacoes,
+        afirmacoes: [
+          {
+            afirmacaoId: "af-1",
+            secao: "IDENTIFICACAO_DIAGNOSTICO",
+            texto: "Texto modificado.",
+            citacoesIds: ["cit-fato-1"],
+          },
+        ],
+      }),
+    ).toEqual({ ok: false, codigo: "MINUTA_JA_ASSINADA_IMUTAVEL" });
+
+    db.close();
+    const dbReaberto = reabrir(caminho);
+    expect(lerMinutaLaudoAcessoJudicialF4(dbReaberto, "laudo-valido-1", 1)?.revisao).toBe("ASSINADO");
 
     // 6. Demonstração na UI: TelaApacLote + ChipEstoque
     const porta = criarPortaFalsa();
