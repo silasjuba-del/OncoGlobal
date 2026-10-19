@@ -29,5 +29,7 @@
 - `registrarAvisoMedicoSemPhiF6` emite avisos operacionais contendo apenas `codigoEventoOpaco`, `setorOrigem`, `urgencia` e `referenciaOpacaHash` (SHA-256), validando com `contemPhiResidual` que nenhum nome, CPF, CNS, telefone ou texto livre identificável sai no aviso (`contemPhi: false`).
 
 ### 1.4 Estatísticas do Serviço com Denominadores Explícitos (`D-W9-44`) e Separação `WORK × STUDY` (`Q54`)
-- `consultarEstatisticaServicoF6` reutiliza `projetarEstatisticaLedger` (`src/kernel/projections/estatistica.ts`), expondo `denominadorPacientes`, `totalPacientes`, `eventosPorCategoria`, `pacientesPorCategoria`, `administracoesPorStatus` e `exclusoes` detalhadas sob controle RBAC.
-- `validarFronteiraWorkStudyF6` garante a separação estrita entre os territórios `WORK` e `STUDY`, bloqueando qualquer transferência de prontuário ou PHI.
+- `consultarEstatisticaServicoF6` retorna `PENDENTE_ISOLAMENTO_WORK_STUDY`: RBAC sozinho não comprova o território dos eventos. Sem contrato persistente de separação comprovado, a F6 não publica denominadores. O projetor assistencial legado permanece separado e testado; isso não aprova estatísticas multiusuário.
+- `validarFronteiraWorkStudyF6` é um gate puro; sua presença não comprova isolamento integral da base nem das rotas. A ativação F6 exige prova própria de WORK/STUDY e permanece pendente.
+
+Revisão adicional PR27: avisos usam a operação específica EMITIR_AVISO_MEDICO e o wrapper de auditoria para tentativas permitidas/negadas. Estatísticas F6 são indisponíveis enquanto falta o contrato persistente de isolamento WORK/STUDY; não foi criado carimbo/default WORK nem reinterpretado evento legado. Esta correção não ativa acesso multiusuário/setorial nem transporte externo.

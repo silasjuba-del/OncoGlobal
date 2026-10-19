@@ -41,22 +41,48 @@ export const EventoInterrupcaoSalao = z.object({
 });
 export type EventoInterrupcaoSalao = z.infer<typeof EventoInterrupcaoSalao>;
 
-/** S-F3-02 · Peso vermelho (Q24–Q25): perda > 5 kg em 60 dias gera tarefa nutrição + QT adiada + consulta médica mantida. */
-export const DesfechoPesoSalao = z.object({
+/** Recomendações não comprovam criação de tarefa nem alteração de agenda. */
+const RecomendacaoPesoSalao = z.enum(["PENDENTE_DECISAO_MEDICA", "NAO_INDICADA", "NAO_AVALIADA"]);
+const DesfechoPesoSalaoAtual = z.object({
   patientId: Id,
   encounterId: Id,
   estadoPeso: Semaforo,
   perdaKg: z.number().nullable(),
   motivo: z.string().min(1),
-  tarefaNutricaoCriada: z.boolean(),
-  qtAdiada: z.boolean(),
+  tarefaNutricaoCriada: z.literal(false),
+  qtAdiada: z.literal(false),
+  efeitosLegadosNaoVerificados: z.object({
+    tarefaNutricaoCriada: z.boolean(),
+    qtAdiada: z.boolean(),
+    verificacao: z.literal("NAO_VERIFICADO"),
+  }).strict().nullable().default(null),
+  recomendacaoNutricao: RecomendacaoPesoSalao,
+  recomendacaoAdiamentoQt: RecomendacaoPesoSalao,
   passaEmConsultaMedica: z.literal(true),
   rulesetVersao: z.string().min(1),
 }).strict().superRefine((d, ctx) => {
-  if (d.estadoPeso === "VERMELHO" && (!d.tarefaNutricaoCriada || !d.qtAdiada)) {
-    ctx.addIssue({ code: "custom", message: "peso VERMELHO exige tarefa de nutrição e QT adiada, mantendo consulta médica" });
+  const esperada = d.estadoPeso === "VERMELHO" ? "PENDENTE_DECISAO_MEDICA"
+    : d.estadoPeso === "VERDE" ? "NAO_INDICADA" : "NAO_AVALIADA";
+  if (d.recomendacaoNutricao !== esperada || d.recomendacaoAdiamentoQt !== esperada) {
+    ctx.addIssue({ code: "custom", message: "recomendações devem refletir o estado do peso, sem presumir efeitos realizados" });
   }
 });
+
+/** Legados continham marcadores calculados, sem prova de efeitos operacionais.
+ * Normaliza somente a leitura; não modifica registros SQLite nem inventa execução.
+ */
+export const DesfechoPesoSalao = z.preprocess((entrada) => {
+  if (typeof entrada !== "object" || entrada === null || Array.isArray(entrada)) return entrada;
+  const d = entrada as Record<string, unknown>;
+  if (d.recomendacaoNutricao !== undefined || d.recomendacaoAdiamentoQt !== undefined
+    || typeof d.tarefaNutricaoCriada !== "boolean" || typeof d.qtAdiada !== "boolean") return entrada;
+  const recomendacao = d.estadoPeso === "VERMELHO" ? "PENDENTE_DECISAO_MEDICA"
+    : d.estadoPeso === "VERDE" ? "NAO_INDICADA" : "NAO_AVALIADA";
+  return { ...d, tarefaNutricaoCriada: false, qtAdiada: false,
+    efeitosLegadosNaoVerificados: { tarefaNutricaoCriada: d.tarefaNutricaoCriada,
+      qtAdiada: d.qtAdiada, verificacao: "NAO_VERIFICADO" },
+    recomendacaoNutricao: recomendacao, recomendacaoAdiamentoQt: recomendacao };
+}, DesfechoPesoSalaoAtual);
 export type DesfechoPesoSalao = z.infer<typeof DesfechoPesoSalao>;
 
 /** S-F3-02 · Exceção / liberação médica com corte (INV-04 / Q28): exige sessão médica e justificativa explícita. */
