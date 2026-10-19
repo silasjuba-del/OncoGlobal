@@ -1211,7 +1211,6 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
     if (rota === "carregarConsulta") {
       const parsed = ConsultaCarregar.safeParse(raw);
       if (!parsed.success) return reply(400, "PAYLOAD_INVALIDO");
-      await processarPendenciasClinicasCanal(deps.db, { agora: deps.agora(), cadastros: cadastrosCanal(deps.db) });
       const anterior=deps.sessoes.consultaSelecionada(token);
       if(anterior?.patientId!==parsed.data.patientId||anterior?.encounterId!==parsed.data.encounterId||(anterior?.tumorLotId??null)!==(parsed.data.tumorLotId??null))deps.ditado?.cancelar(token);
       let leituraInicial: Parameters<NonNullable<NonNullable<Parameters<typeof lerConsulta>[5]>["aoLer"]>>[0] | undefined;
@@ -1223,8 +1222,9 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
       else deps.sessoes.selecionarConsulta(token, null);
       const integrado = !("codigo" in result) && deps.motorF1
         ? await deps.motorF1.consultar({patientId:result.patientId,encounterId:result.encounterId,tumorLotId:result.tumorLotId},leituraInicial) : null;
+      if (!("codigo" in result)) await processarPendenciasClinicasCanal(deps.db, { agora: deps.agora(), cadastros: () => cadastrosCanal(deps.db, leituraInicial?.itens) });
       const contatosCanal = !("codigo" in result) ? { mensagens: lerMensagensOperacionaisCanal(deps.db,
-        { sessoes: deps.sessoes, token, agora: deps.agora() }).filter(m => m.patientId === result.patientId) } : undefined;
+        { sessoes: deps.sessoes, token, agora: deps.agora() }, leituraInicial?.itens).filter(m => m.patientId === result.patientId) } : undefined;
       return reply("codigo" in result ? 404 : 200, "codigo" in result ? result.codigo : "CONSULTA_CARREGADA",
         integrado && !("codigo" in result) ? {...result,contatosCanal,dutos:projetarDutos(leituraInicial?.itens??[],{patientId:result.patientId,encounterId:result.encounterId,tumorLotId:result.tumorLotId},deps.corpus),retrato:integrado.retrato,...(integrado.visaoIntegrada?{visaoIntegrada:integrado.visaoIntegrada}:{})}:"codigo" in result?result:{...result,contatosCanal});
     }
@@ -1332,7 +1332,7 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
     if (rota === "canal") {
       const parsed = z.object({}).strict().safeParse(raw);
       if (!parsed.success) return reply(400, "PAYLOAD_INVALIDO");
-      await processarPendenciasClinicasCanal(deps.db, { agora: deps.agora(), cadastros: cadastrosCanal(deps.db) });
+      await processarPendenciasClinicasCanal(deps.db, { agora: deps.agora(), cadastros: () => cadastrosCanal(deps.db) });
       const legado=lerCanal(deps.db),operacionais=lerMensagensOperacionaisCanal(deps.db,{sessoes:deps.sessoes,token,agora:deps.agora()});
       const result={...legado,mensagens:[...legado.mensagens,...operacionais],estado:operacionais.length?'PARCIAL':legado.estado};
       return reply(200, result.estado === "FONTE_AUSENTE" ? "FONTE_CANAL_AUSENTE" : "CANAL_CARREGADO", result);

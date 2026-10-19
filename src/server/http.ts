@@ -46,7 +46,7 @@ export function criarServidorLocal(deps: ServidorDeps, config: { host?: string; 
     void acompanhado.catch(() => {}); // Os caminhos abaixo já registram erro sem conteúdo clínico.
   };
   acompanhar(runtimeDeps.motorF1.processar().catch(()=>deps.log({rota:"motor-f1",codigo:"RECUPERACAO_PENDENTE",status:503})));
-  const processarCanal = () => processarPendenciasClinicasCanal(deps.db, { agora: deps.agora(), cadastros: cadastrosCanal(deps.db) });
+  const processarCanal = () => processarPendenciasClinicasCanal(deps.db, { agora: deps.agora(), cadastros: () => cadastrosCanal(deps.db) });
   acompanhar(processarCanal().catch(() => deps.log({ rota: "canal", codigo: "PROCESSAMENTO_PENDENTE", status: 503 })));
   const server = createServer((req, res) => {
     if (encerrando) {

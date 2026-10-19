@@ -116,13 +116,16 @@ export async function reconciliarMensagemCanalPersistida(
 
 /** Retomada técnica durável, sem sessão fabricada, LLM, confirmação clínica ou efeitos externos. */
 export async function processarPendenciasClinicasCanal(db: DatabaseSync, opcoes: {
-  agora: string; cadastros: readonly CadastroVinculo[];
+  agora: string; cadastros: readonly CadastroVinculo[] | (() => readonly CadastroVinculo[]);
 }) {
-  for (const pendencia of listarPendenciasCanal(db).filter(p => p.estado === "PENDENTE_PROCESSAMENTO")) {
+  const pendencias = listarPendenciasCanal(db).filter(p => p.estado === "PENDENTE_PROCESSAMENTO");
+  if (!pendencias.length) return;
+  const cadastros = typeof opcoes.cadastros === "function" ? opcoes.cadastros() : opcoes.cadastros;
+  for (const pendencia of pendencias) {
     const detalhe = lerMensagemIngressoLocal(db, pendencia.mensagemId);
     if (!detalhe.ok) throw new Error("PROCESSAMENTO_CANAL_PENDENTE");
     const r = await reconciliarItemCanalPersistido(db, opcoes.agora, detalhe.mensagem,
-      { mensagemId: pendencia.mensagemId, cadastros: opcoes.cadastros });
+      { mensagemId: pendencia.mensagemId, cadastros });
     if (!r.ok) throw new Error("PROCESSAMENTO_CANAL_PENDENTE");
   }
 }

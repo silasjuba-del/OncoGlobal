@@ -70,7 +70,10 @@ it('mensagem desconhecida recebe vínculo médico pela tela e resposta autorizad
  expect((await e.post('/acao',e.intent(p))).data.decisao).toBe('EXECUTADA');
  expect((await e.post('/acao',e.intent(p,'replay-desconhecido'))).data.decisao).toBe('REPLAY');
  expect(e.efeitos()).toBe(1);
+ const observarLeitura=vi.spyOn(e.a.db,'prepare');
  const consulta=await e.post('/consulta/carregar',{...ctx,tumorLotId:null});
+ expect(observarLeitura.mock.calls.filter(([sql])=>/SELECT \* FROM clinical_event/i.test(sql))).toHaveLength(1);
+ observarLeitura.mockRestore();
  expect(consulta.status,JSON.stringify(consulta.data)).toBe(200);
  expect(consulta.data.contatosCanal.mensagens).toContainEqual(expect.objectContaining({mensagemId:msg.mensagemId,patientId:ctx.patientId,texto:'Dúvida sintética sobre retorno'}));
  expect(revogarConsentimentoCanal(e.a.db,e.a.acesso,{contatoId:sender,patientId:ctx.patientId,origem:'REVOGACAO_MEDICO'}).ok).toBe(true);

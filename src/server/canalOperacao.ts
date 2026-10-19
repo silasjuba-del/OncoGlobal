@@ -10,7 +10,8 @@ import {Contato,Paciente} from '../contracts/clinico.js';
 import {hashConteudoExibido} from './sessao.js';
 import type {ContaWebhookConfigurada} from './canalEntrada.js';
 import {consultarCaixaCanal,type AcessoCanal} from './canalEntrada.js';
-import {lerEventosComIntegridade,lerPaciente} from './leituras.js';
+import {lerEventosComIntegridade} from './leituras.js';
+import type {ClinicalEvent} from '../contracts/operacao.js';
 import type {MensagemCanalVisao} from '../contracts/api/porta.js';
 import {classificarRemetente} from '../modules/canal/ingresso.js';
 import {StatusReciboTecnico} from '../contracts/f2/canalEntrada.js';
@@ -31,22 +32,22 @@ export function carregarOperacaoCanal(root?:string):OperacaoCanal {
   }catch{throw new Error('CONFIGURACAO_CANAL_INVALIDA');}
 }
 /** Somente contatos explicitamente vinculados no prontuário; nome e From não provam identidade. */
-export function cadastrosCanal(db:DatabaseSync){
- const eventos=eventosVigentes(lerEventosComIntegridade(db).itens);
+export function cadastrosCanal(db:DatabaseSync, snapshot?:readonly ClinicalEvent[]){
+ const eventos=eventosVigentes(snapshot??lerEventosComIntegridade(db).itens);
  const pacientes=eventos.filter(e=>['CONFIRMADO','ASSINADO'].includes(e.revisao)&&e.tipo==='Paciente').flatMap(e=>{const p=Paciente.safeParse(dadosDoEvento(e));return p.success&&p.data.patientId===e.patientId?[p.data]:[];});
  const contatos=eventos.filter(e=>e.tipo==='Contato'&&['CONFIRMADO','ASSINADO'].includes(e.revisao)).flatMap(event=>{const p=Contato.safeParse(dadosDoEvento(event));return p.success?[{event,value:p.data}]:[];});
  const projetados=projetarVinculosContato(contatos,eventos);
  return pacientes.map(p=>({patientId:p.patientId,nome:p.nome,chaveDemografica:null,identificadores:projetados.filter(c=>c.estadoVinculo==='VINCULADO'&&c.patientIdResolvido===p.patientId&&c.value.revogadoEm===null&&c.value.canal==='WHATSAPP_SERVICO')
    .map(c=>({tipo:'TELEFONE' as const,valor:c.value.endereco}))}));
 }
-export function contatoRevogadoCanal(db:DatabaseSync,endereco:string):boolean {
- return eventosVigentes(lerEventosComIntegridade(db).itens).some(e=>{
+export function contatoRevogadoCanal(db:DatabaseSync,endereco:string,snapshot?:readonly ClinicalEvent[]):boolean {
+ return eventosVigentes(snapshot??lerEventosComIntegridade(db).itens).some(e=>{
   if(e.tipo!=='Contato'||!['CONFIRMADO','ASSINADO'].includes(e.revisao))return false;
   const c=Contato.safeParse(dadosDoEvento(e));return c.success&&c.data.endereco===endereco&&c.data.revogadoEm!==null;
  });
 }
-export function contextosCanal(db:DatabaseSync,patientId:string){
- const eventos=eventosVigentes(listarEventos(db,patientId)).filter(e=>['CONFIRMADO','ASSINADO'].includes(e.revisao));
+export function contextosCanal(db:DatabaseSync,patientId:string,snapshot?:readonly ClinicalEvent[]){
+ const eventos=eventosVigentes(snapshot?snapshot.filter(e=>e.patientId===patientId):listarEventos(db,patientId)).filter(e=>['CONFIRMADO','ASSINADO'].includes(e.revisao));
  return [...new Map(eventos.map(e=>[JSON.stringify([e.encounterId,e.tumorLotId]),{patientId,encounterId:e.encounterId,tumorLotId:e.tumorLotId}])).values()];
 }
 export function vinculoAtualCanal(db:DatabaseSync,patientId:string,endereco:string):boolean {
@@ -58,18 +59,20 @@ export function revisaoContextoCanal(db:DatabaseSync,c:{patientId:string;encount
  if(!contextosCanal(db,c.patientId).some(e=>e.encounterId===c.encounterId&&e.tumorLotId===c.tumorLotId))return null;
  return hashConteudoExibido(eventos);
 }
-export function lerMensagensOperacionaisCanal(db:DatabaseSync,acesso:AcessoCanal):MensagemCanalVisao[]{
+export function lerMensagensOperacionaisCanal(db:DatabaseSync,acesso:AcessoCanal,snapshot?:readonly ClinicalEvent[]):MensagemCanalVisao[]{
  const caixa=consultarCaixaCanal(db,acesso);if(!caixa.ok)throw new Error(caixa.codigo);
- const cadastros=cadastrosCanal(db);
+ if(!caixa.mensagens.length)return [];
+ const eventos=snapshot??lerEventosComIntegridade(db).itens;
+ const cadastros=cadastrosCanal(db,eventos);
  const colunas=db.prepare('PRAGMA table_info(canal_resposta_envio)').all() as {name:string}[];
  const temRecibos=colunas.some(c=>c.name==='providerReceiptId');
  return caixa.mensagens.map(m=>{
   const reconciliacao=lerReconciliacaoMensagemCanal(db,m.mensagemId);
   const atual=m.canal==='WHATSAPP_SERVICO'?classificarRemetente(m.senderRef,'TELEFONE',cadastros):null;
-  const revogado=contatoRevogadoCanal(db,m.senderRef);
+  const revogado=contatoRevogadoCanal(db,m.senderRef,eventos);
   const conflito=atual?.classe==='AMBIGUO'||(m.vinculo.patientId&&atual?.patientId&&m.vinculo.patientId!==atual.patientId);
   const patientId=!revogado&&!conflito&&atual?.classe==='CONHECIDO'?atual.patientId:null;
-  const paciente=patientId?lerPaciente(db,patientId):null;
+  const paciente=patientId?cadastros.find(c=>c.patientId===patientId):null;
   const status=temRecibos?db.prepare(`SELECT t.statusRecibo FROM canal_recibo_tecnico t
     JOIN canal_resposta_envio e ON e.providerReceiptId=t.providerMessageId
     JOIN canal_mensagem origem ON origem.mensagemId=e.mensagemOrigemId AND origem.accountId=t.accountId
@@ -77,9 +80,9 @@ export function lerMensagensOperacionaisCanal(db:DatabaseSync,acesso:AcessoCanal
   const recibo=StatusReciboTecnico.safeParse(status?.statusRecibo);
   return {mensagemId:m.mensagemId,texto:m.conteudo.tipo==='TEXT'?m.conteudo.texto:'Mídia recebida; aguarda leitura local.',em:m.providerSentAt??m.ingestedAt,
    redFlag:!!reconciliacao?.alarmes.alarmesAtivos.length,contatoId:m.senderRef,patientId:paciente?patientId:null,nomePaciente:paciente?.nome??null,
-   candidatos:!paciente&&!revogado&&!conflito&&m.canal==='WHATSAPP_SERVICO'?cadastros.flatMap(c=>[...new Set(contextosCanal(db,c.patientId).map(ctx=>ctx.encounterId))].map(encounterId=>({patientId:c.patientId,nome:c.nome??c.patientId,encounterId,tumorLotId:null}))):[],
+   candidatos:!paciente&&!revogado&&!conflito&&m.canal==='WHATSAPP_SERVICO'?cadastros.flatMap(c=>[...new Set(contextosCanal(db,c.patientId,eventos).map(ctx=>ctx.encounterId))].map(encounterId=>({patientId:c.patientId,nome:c.nome??c.patientId,encounterId,tumorLotId:null}))):[],
    estadoVinculo:revogado?'REVOGADO':conflito?'CONFLITO':paciente?'VINCULADO':'SEM_VINCULO',origemCanal:m.canal,pendenciaProcessamento:!reconciliacao,estadoConversa:'AGUARDA_MEDICO',reciboTecnico:recibo.success?recibo.data:reconciliacao?'PROCESSADA':m.reciboTecnico,
-   ...(paciente&&patientId?{contextosResposta:contextosCanal(db,patientId)}:{}),destinatarioExibido:m.senderRef,
+   ...(paciente&&patientId?{contextosResposta:contextosCanal(db,patientId,eventos)}:{}),destinatarioExibido:m.senderRef,
    midia:m.conteudo.tipo==='MEDIA_UNPROCESSED'?{providerMediaId:m.conteudo.providerMediaId,mimeType:m.conteudo.mimeType,processamento:'NAO_PROCESSADA'}:null};
  });
 }
