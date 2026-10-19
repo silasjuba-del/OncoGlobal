@@ -23,6 +23,7 @@ import {
   registrarLeituraLocalMidiaCanal,
 } from "../../../src/server/canalResposta.js";
 import { criarGerenciadorSessao } from "../../../src/server/sessao.js";
+import { reconciliarMensagemCanalPersistida } from "../../../src/server/canalReconciliacao.js";
 
 const AGORA = "2026-10-16T10:00:00.000Z";
 const SENHA = "senha-sintetica-12";
@@ -79,6 +80,40 @@ afterEach(() => {
 });
 
 describe("S-F2-03 · Caixa clínica, pré-consulta, mídia não processada e resposta autorizada", () => {
+  it("projeta vínculo reconciliado sem alterar o ingresso e invalida o cache da pré-consulta", async () => {
+    const { db } = ledger();
+    const senderRef = "contato-sintetico-reconciliado";
+    const ack = receberTransporteSintetico(db, {
+      accountId: "wa-s03", canal: "WHATSAPP_SERVICO", providerMessageId: "manual-s03",
+      senderRef, providerSentAt: AGORA, ingestedAt: AGORA,
+      conteudo: textoConteudo("Relato sintético para revisão."), cadastros: [],
+    });
+    if (!ack.ok) throw new Error("INGRESSO_SINTETICO_FALHOU");
+    const entradaPreConsulta = {
+      atual: { kind: "CONFIRMED" as const, snapshotId: "snap-manual", patientId: "paciente-s03-1",
+        tumorLotId: "lot-1", encounterId: "enc-atual", fatos: [], pendencias: [], tratamento: null,
+        cumulativos: [], contatos: [], apac: null, decisoes: [] },
+      anterior: null, hoje: "2026-10-16", prazosApac: null, direcoes: null,
+    };
+    const antes = integrarCanalNaPreConsultaECabecalho(db, { entradaPreConsulta, ultimaConsultaConfirmadaEm: null });
+    expect(antes.filaRevisao).toHaveLength(1);
+    const reconciliada = await reconciliarMensagemCanalPersistida(db, sessao(), {
+      mensagemId: ack.reciboId, cadastros: [], rulesetAlarmes: null,
+      statusContatoExistente: { contatoId: senderRef, endereco: senderRef, canal: "WHATSAPP_SERVICO",
+        revogadoEm: null, patientIdVinculadoManual: "paciente-s03-1" },
+    });
+    expect(reconciliada.ok).toBe(true);
+    const depois = integrarCanalNaPreConsultaECabecalho(db, {
+      entradaPreConsulta, ultimaConsultaConfirmadaEm: null,
+      cacheAnterior: new Map(antes.filaRevisao.map(r => [`${r.canal}:${r.contatoId}`, r])),
+    });
+    expect(depois.filaRevisao).toHaveLength(0);
+    expect(depois.resumosDoPaciente).toHaveLength(1);
+    expect(depois.resumosDoPaciente[0]!.mensagensOriginaisIds).toEqual([ack.reciboId]);
+    expect(depois.recalculados).toBe(1);
+    expect(db.prepare("SELECT vinculoPatientId FROM canal_mensagem WHERE mensagemId=?").get(ack.reciboId))
+      .toMatchObject({ vinculoPatientId: null });
+  });
   it("1 · contato conhecido chega à pré-consulta < 60s com mensagens originais, preserva histórico anterior, recalcula só mudanças e mantém desconhecido na fila", () => {
     const { db } = ledger();
 

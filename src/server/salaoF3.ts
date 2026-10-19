@@ -329,7 +329,7 @@ export function gerarFolhaContingenciaSalaoF3(
   },
 ):
   | { ok: true; folha: FolhaContingenciaSalao }
-  | { ok: false; codigo: "SESSAO_INVALIDA" | "G-06_E1_DESTAQUE_AUSENTE" | "ERRO_RENDERIZACAO_FOLHA" } {
+  | { ok: false; codigo: "SESSAO_INVALIDA" | "G-06_E1_DESTAQUE_AUSENTE" | "ERRO_RENDERIZACAO_FOLHA" | "FOLHA_ID_CONFLITANTE" } {
   const sessao = obterSessaoValida(acesso);
   if (!sessao) return { ok: false, codigo: "SESSAO_INVALIDA" };
   garantirSchemaSalaoF3(db);
@@ -372,15 +372,26 @@ export function gerarFolhaContingenciaSalaoF3(
       geradoEm: acesso.agora,
     });
 
-    transacao(db, () => {
-      db.prepare(`
+    return transacao(db, () => {
+      const inserida = db.prepare(`
         INSERT INTO salao_folha_contingencia (folhaId, patientId, encounterId, folhaJson, geradoEm)
         VALUES (?, ?, ?, ?, ?)
         ON CONFLICT(folhaId) DO NOTHING
       `).run(folha.folhaId, folha.patientId, folha.encounterId, JSON.stringify(folha), folha.geradoEm);
+      if (Number(inserida.changes) === 0) {
+        const row = db.prepare("SELECT folhaJson FROM salao_folha_contingencia WHERE folhaId = ?")
+          .get(folha.folhaId) as { folhaJson: string };
+        const persistida = FolhaContingenciaSalao.parse(JSON.parse(row.folhaJson));
+        if (persistida.patientId !== folha.patientId || persistida.encounterId !== folha.encounterId
+          || persistida.hashDocumento !== folha.hashDocumento
+          || persistida.destino !== folha.destino || persistida.emergenciaAtiva !== folha.emergenciaAtiva
+          || persistida.dataImpressao !== folha.dataImpressao) {
+          return { ok: false as const, codigo: "FOLHA_ID_CONFLITANTE" as const };
+        }
+        return { ok: true as const, folha: persistida };
+      }
+      return { ok: true as const, folha };
     });
-
-    return { ok: true, folha };
   } catch (err) {
     if (err instanceof Error && err.message === "G-06_E1_DESTAQUE_AUSENTE") {
       return { ok: false, codigo: "G-06_E1_DESTAQUE_AUSENTE" };

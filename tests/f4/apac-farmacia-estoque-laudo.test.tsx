@@ -564,7 +564,7 @@ describe("FASE F4 · APAC, Farmácia, Estoque e Documentação de Acesso/Judicia
     expect(comTeseJuridicaProibida).toMatchObject({ ok: false, codigo: "EXPRESSAO_PROIBIDA_NO_LAUDO" });
 
     // 3. Minuta válida nasce em REVISAR (sem assinatura automática), separando indicação, registro, cobertura e disponibilidade
-    const minutaValida = salvarMinutaLaudoAcessoJudicialF4(db, acesso, {
+    const entradaMinutaValida: Parameters<typeof salvarMinutaLaudoAcessoJudicialF4>[2] = {
       minutaId: "laudo-valido-1",
       patientId: "pt-f4-1",
       encounterId: "enc-f4-1",
@@ -601,7 +601,8 @@ describe("FASE F4 · APAC, Farmácia, Estoque e Documentação de Acesso/Judicia
           citacoesIds: ["cit-estudo-1"],
         },
       ],
-    });
+    };
+    const minutaValida = salvarMinutaLaudoAcessoJudicialF4(db, acesso, entradaMinutaValida);
     expect(minutaValida.ok).toBe(true);
     if (!minutaValida.ok) return;
     expect(minutaValida.minuta.revisao).toBe("REVISAR");
@@ -612,6 +613,14 @@ describe("FASE F4 · APAC, Farmácia, Estoque e Documentação de Acesso/Judicia
       presumeDireitoIndividualAutomatico: false,
       presumeElegibilidadeAutomatica: false,
     });
+
+    // Reuso de identidade de minuta não pode trocar nenhum eixo do contexto.
+    for (const campo of ["patientId", "encounterId", "tumorLotId"] as const) {
+      expect(salvarMinutaLaudoAcessoJudicialF4(db, acesso, {
+        ...entradaMinutaValida, [campo]: "outro-contexto-sintetico",
+      })).toEqual({ ok: false, codigo: "CONTEXTO_MINUTA_DIVERGENTE" });
+      expect(lerMinutaLaudoAcessoJudicialF4(db, "laudo-valido-1", 1)).toEqual(minutaValida.minuta);
+    }
 
     // 4. Tentativa de assinatura por AGENTE/IA é bloqueada pelo gate G-03
     expect(assinarMinutaLaudoAcessoJudicialF4(db, acesso, {

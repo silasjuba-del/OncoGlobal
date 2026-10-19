@@ -85,7 +85,7 @@ export function registrarResumoAnamneseGuiadaF5(
     alertasRedFlag?: readonly string[];
   },
 ):
-  | { ok: false; codigo: "SESSAO_INVALIDA" | "ROTEIRO_INVALIDO" | "ROTEIRO_EM_RASCUNHO_NAO_AUTORIZADO" | "CONSENTIMENTO_CANAL_AUSENTE_OU_REVOGADO" }
+  | { ok: false; codigo: "SESSAO_INVALIDA" | "ROTEIRO_INVALIDO" | "ROTEIRO_EM_RASCUNHO_NAO_AUTORIZADO" | "CONSENTIMENTO_CANAL_AUSENTE_OU_REVOGADO" | "IDENTIDADE_OU_CONTEXTO_CONFLITANTE" }
   | { ok: true; resumo: ResumoEstruturadoAnamnese } {
   if (!obterSessaoValida(acesso)) return { ok: false, codigo: "SESSAO_INVALIDA" };
   garantirSchemaF5(db);
@@ -94,7 +94,9 @@ export function registrarResumoAnamneseGuiadaF5(
   if (!admitido.ok) return admitido;
 
   const consentimento = consultarConsentimentoCanal(db, entrada.contatoId);
-  if (consentimento.estado !== "TERMO_ACEITO") {
+  if (consentimento.estado !== "TERMO_ACEITO"
+    || consentimento.patientId !== entrada.patientId
+    || !consentimento.finalidade.includes("COMUNICACAO_CLINICA")) {
     return { ok: false, codigo: "CONSENTIMENTO_CANAL_AUSENTE_OU_REVOGADO" };
   }
 
@@ -108,7 +110,7 @@ export function registrarResumoAnamneseGuiadaF5(
     geradoEm: acesso.agora,
   });
 
-  transacao(db, () => {
+  return transacao(db, () => {
     db.prepare(`
       INSERT INTO f5_anamnese_resumo (sessaoAnamneseId, patientId, contatoId, roteiroId, resumoJson, geradoEm)
       VALUES (?, ?, ?, ?, ?, ?)
@@ -121,9 +123,16 @@ export function registrarResumoAnamneseGuiadaF5(
       JSON.stringify(resumo),
       resumo.geradoEm,
     );
+    const persistido = lerResumoAnamneseGuiadaF5(db, resumo.sessaoAnamneseId)!;
+    if (persistido.patientId !== resumo.patientId
+      || persistido.contatoId !== resumo.contatoId
+      || persistido.roteiroId !== resumo.roteiroId
+      || persistido.roteiroVersao !== resumo.roteiroVersao
+      || persistido.tumorPackId !== resumo.tumorPackId) {
+      return { ok: false, codigo: "IDENTIDADE_OU_CONTEXTO_CONFLITANTE" };
+    }
+    return { ok: true, resumo: persistido };
   });
-
-  return { ok: true, resumo };
 }
 
 export function lerResumoAnamneseGuiadaF5(
@@ -165,14 +174,17 @@ export function processarVozAnamneseComExpurgoAudioF5(
       | "SESSAO_INVALIDA"
       | "CONSENTIMENTO_VOZ_AUSENTE_OU_REVOGADO"
       | "G23_AUDIO_LONGO_BLOQUEADO_PARA_DEEPGRAM"
-      | "TRANSCRICAO_NAO_VALIDADA";
+      | "TRANSCRICAO_NAO_VALIDADA"
+      | "IDENTIDADE_OU_CONTEXTO_CONFLITANTE";
   }
   | { ok: true; registroVoz: RegistroVozAnamneseCanal } {
   if (!obterSessaoValida(acesso)) return { ok: false, codigo: "SESSAO_INVALIDA" };
   garantirSchemaF5(db);
 
   const consentimento = consultarConsentimentoCanal(db, entrada.contatoId);
-  if (consentimento.estado !== "TERMO_ACEITO" || !consentimento.referenciaTermo) {
+  if (consentimento.estado !== "TERMO_ACEITO" || !consentimento.referenciaTermo
+    || consentimento.patientId !== entrada.patientId
+    || !consentimento.finalidade.includes("COMUNICACAO_CLINICA")) {
     return { ok: false, codigo: "CONSENTIMENTO_VOZ_AUSENTE_OU_REVOGADO" };
   }
 
@@ -207,7 +219,7 @@ export function processarVozAnamneseComExpurgoAudioF5(
     apagadoEm: acesso.agora,
   });
 
-  transacao(db, () => {
+  return transacao(db, () => {
     db.prepare(`
       INSERT INTO f5_voz_anamnese (vozId, sessaoAnamneseId, patientId, contatoId, registroVozJson, apagadoEm)
       VALUES (?, ?, ?, ?, ?, ?)
@@ -220,9 +232,18 @@ export function processarVozAnamneseComExpurgoAudioF5(
       JSON.stringify(registroVoz),
       registroVoz.apagadoEm,
     );
+    const row = db.prepare("SELECT registroVozJson FROM f5_voz_anamnese WHERE vozId = ?")
+      .get(registroVoz.vozId) as { registroVozJson: string };
+    const persistido = RegistroVozAnamneseCanal.parse(JSON.parse(row.registroVozJson));
+    if (persistido.patientId !== registroVoz.patientId
+      || persistido.contatoId !== registroVoz.contatoId
+      || persistido.sessaoAnamneseId !== registroVoz.sessaoAnamneseId
+      || persistido.tecnologia !== registroVoz.tecnologia
+      || persistido.consentimentoVigenteRef !== registroVoz.consentimentoVigenteRef) {
+      return { ok: false, codigo: "IDENTIDADE_OU_CONTEXTO_CONFLITANTE" };
+    }
+    return { ok: true, registroVoz: persistido };
   });
-
-  return { ok: true, registroVoz };
 }
 
 /**

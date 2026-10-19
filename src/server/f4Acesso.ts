@@ -193,8 +193,15 @@ export function salvarMinutaLaudoAcessoJudicialF4(
 
   return transacao(db, () => {
     const existente = db.prepare(
-      "SELECT revisao FROM f4_minuta_laudo_judicial WHERE minutaId = ? AND versao = ?",
-    ).get(gerada.minuta.minutaId, gerada.minuta.versao) as { revisao: string } | undefined;
+      "SELECT revisao, patientId, encounterId, tumorLotId FROM f4_minuta_laudo_judicial WHERE minutaId = ? AND versao = ?",
+    ).get(gerada.minuta.minutaId, gerada.minuta.versao) as {
+      revisao: string; patientId: string; encounterId: string; tumorLotId: string;
+    } | undefined;
+    if (existente && (existente.patientId !== gerada.minuta.patientId
+      || existente.encounterId !== gerada.minuta.encounterId
+      || existente.tumorLotId !== gerada.minuta.tumorLotId)) {
+      return { ok: false as const, codigo: "CONTEXTO_MINUTA_DIVERGENTE" };
+    }
     if (existente?.revisao === "ASSINADO") {
       return { ok: false as const, codigo: "MINUTA_JA_ASSINADA_IMUTAVEL" };
     }

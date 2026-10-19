@@ -7,6 +7,7 @@ import type { z } from "zod";
 import { Instante, Sessao } from "../contracts/base.js";
 import { Contato, Paciente } from "../contracts/clinico.js";
 import { ActionIntent } from "../contracts/operacao.js";
+import { ReconciliacaoClinicaCanal } from "../contracts/f2/reconciliacaoCanal.js";
 import {
   AutorizacaoRespostaCanalServidor,
   RascunhoRespostaCanal,
@@ -927,13 +928,18 @@ export function integrarCanalNaPreConsultaECabecalho(
   const inicio = performance.now();
   garantirTabelasS03(db);
 
+  const temReconciliacao = !!db.prepare(
+    "SELECT 1 FROM sqlite_master WHERE type = 'table' AND name = 'canal_reconciliacao_clinica'",
+  ).get();
   const linhas = db.prepare(`
     SELECT m.mensagemId, m.accountId, m.providerMessageId, m.canal, m.senderRef,
            m.providerSentAt, m.ingestedAt, m.conteudo, m.vinculoClasse, m.vinculoPatientId, m.provaMetodo,
-           r.resolvidoEm, ml.sha256LocalComprovado
+           r.resolvidoEm, ml.sha256LocalComprovado,
+           ${temReconciliacao ? "rc.reconciliacaoJson" : "NULL"} AS reconciliacaoJson
     FROM canal_mensagem m
     LEFT JOIN canal_pendencia_resolucao r ON r.mensagemId = m.mensagemId
     LEFT JOIN canal_midia_lida ml ON ml.mensagemId = m.mensagemId
+    ${temReconciliacao ? "LEFT JOIN canal_reconciliacao_clinica rc ON rc.mensagemId = m.mensagemId" : ""}
     ORDER BY m.ingestedAt, m.mensagemId
   `).all() as Array<{
     mensagemId: string;
@@ -949,15 +955,32 @@ export function integrarCanalNaPreConsultaECabecalho(
     provaMetodo: string;
     resolvidoEm: string | null;
     sha256LocalComprovado: string | null;
+    reconciliacaoJson: string | null;
   }>;
 
   const mensagensParaResumo: MensagemEntradaResumo[] = linhas.map((l) => {
+    let vinculoReconciliado: ReconciliacaoClinicaCanal["vinculo"] | null = null;
+    if (l.reconciliacaoJson !== null) {
+      try {
+        const parsed = ReconciliacaoClinicaCanal.safeParse(JSON.parse(l.reconciliacaoJson));
+        if (parsed.success && parsed.data.mensagemId === l.mensagemId
+          && parsed.data.accountId === l.accountId && parsed.data.senderRef === l.senderRef) {
+          vinculoReconciliado = parsed.data.vinculo;
+        }
+      } catch { /* Reconciliação inválida permanece na fila de revisão. */ }
+      l = { ...l,
+        vinculoClasse: vinculoReconciliado?.estado === "VINCULADO" ? "CONHECIDO"
+          : vinculoReconciliado?.estado === "AMBIGUO" ? "AMBIGUO" : "DESCONHECIDO",
+        vinculoPatientId: vinculoReconciliado?.patientId ?? null,
+      };
+    }
     // Projeção segura inclusive de linhas legadas; o registro original permanece intacto.
     if (l.provaMetodo === "IMAP_CONTA_LOCAL") {
       l = { ...l, vinculoClasse: "DESCONHECIDO", vinculoPatientId: null };
     }
     const rawConteudo = JSON.parse(l.conteudo) as Record<string, unknown>;
-    const revogado = contatoFoiRevogadoNoLedger(db, l.senderRef, l.senderRef);
+    const revogado = vinculoReconciliado?.estado === "REVOGADO"
+      || contatoFoiRevogadoNoLedger(db, l.senderRef, l.senderRef);
     const estadoVinculo: EstadoVinculoContatoEntrada = revogado
       ? "REVOGADO"
       : l.vinculoClasse === "CONHECIDO" && l.vinculoPatientId
@@ -980,7 +1003,7 @@ export function integrarCanalNaPreConsultaECabecalho(
         providerSentAt: l.providerSentAt,
         ingestedAt: l.ingestedAt,
         reciboTecnico,
-        decisaoReconciliacaoHash: l.resolvidoEm,
+        decisaoReconciliacaoHash: l.reconciliacaoJson ? sha256(l.reconciliacaoJson) : l.resolvidoEm,
         conteudo: { tipo: "TEXT", texto: String(rawConteudo.texto) },
       };
     }
@@ -996,7 +1019,7 @@ export function integrarCanalNaPreConsultaECabecalho(
       providerSentAt: l.providerSentAt,
       ingestedAt: l.ingestedAt,
       reciboTecnico,
-      decisaoReconciliacaoHash: l.resolvidoEm,
+      decisaoReconciliacaoHash: l.reconciliacaoJson ? sha256(l.reconciliacaoJson) : l.resolvidoEm,
       conteudo: {
         tipo: "MEDIA_UNPROCESSED",
         providerMediaId: String(rawConteudo.providerMediaId),

@@ -88,6 +88,29 @@ afterEach(() => {
 });
 
 describe("FASE F3 · Salão de Quimioterapia (S-F3-01 a S-F3-04 e casos clínicos C1–C14)", () => {
+  it("folha: replay retorna o documento persistido e reuso divergente preserva o original", () => {
+    const { db, caminho } = ledger();
+    const acesso = sessao();
+    const entrada = {
+      patientId: "pt-folha-sintetica", encounterId: "enc-folha-sintetica",
+      nomePaciente: "Paciente Sintetico", dataImpressao: HOJE, destino: "SALAO" as const,
+      emergenciaAtiva: false, alertasOperacionaisE1: [], resumoTriagem: { peso: "70 kg" },
+    };
+    const original = gerarFolhaContingenciaSalaoF3(db, acesso, entrada);
+    expect(original.ok).toBe(true);
+    if (!original.ok) throw new Error("FOLHA_SINTETICA_AUSENTE");
+    expect(gerarFolhaContingenciaSalaoF3(db, { ...acesso, agora: "2026-10-18T10:01:00.000Z" }, entrada)).toEqual(original);
+    for (const alteracao of [
+      { resumoTriagem: { peso: "68 kg" } }, { patientId: "outro-paciente" },
+      { encounterId: "outro-encontro" }, { destino: "FILA_MEDICO" as const },
+    ]) {
+      expect(gerarFolhaContingenciaSalaoF3(db, acesso, {
+        ...entrada, folhaId: original.folha.folhaId, ...alteracao,
+      })).toEqual({ ok: false, codigo: "FOLHA_ID_CONFLITANTE" });
+    }
+    db.close();
+    expect(listarFolhasContingenciaSalaoF3(reabrir(caminho))).toEqual([original.folha]);
+  });
   it("S-F3-01 & C1–C3 · triagem com valores no limite (C1 -> SALAO), corte PAS 161 (C2 -> FILA_MEDICO), febre 37,9 + ANC 900 (C3 -> FILA_MEDICO + E1), hemograma > 7 dias e desconhecidos explícitos", () => {
     const ctx = contextoBase({ hoje: "2026-10-05" });
 
