@@ -18,13 +18,14 @@
 - `executarTriagemSalaoF3` (`src/modules/salao/operacaoSalao.ts`) consolida destino (`SALAO | FILA_MEDICO | FRENTE`), cortes, pendências, validade de 7 dias do hemograma e explicitação de campos desconhecidos (`idadeAnos: null`, `tontura: null`).
 
 ### S-F3-02 — Fila, Eventos do Salão e Interrupções
-- **Fila e Frente**: `organizarFilaSalaoF3` aplica `ordenarFila` (`ECOG 4 → ECOG 3 → cama → cadeira → >80 anos → chegada`), garante que `FRENTE` exige zero cortes e zero pendências (K-11 / Q26–Q27), e mantém a emergência `E1` em escalonamento separado sem reordenar a fila (A7).
+- **Fila e Frente**: `organizarFilaSalaoF3` aplica `ordenarFila` (`ECOG 4 → ECOG 3 → cama → cadeira → >80 anos → chegada`), expõe `destinosPorEntrada` via `decidirDestino` (`temCorte`/`temPendencia` → `FILA_MEDICO`), mantendo `filaOrdenada`; `FRENTE` exige `temCorte: false` e `temPendencia: false` explícitos; flags ausentes ou parcialmente conhecidas permanecem em `FILA_MEDICO` (K-11 / Q26–Q27), e mantém a emergência `E1` em escalonamento separado sem reordenar a fila (A7).
 - **Eventos de Interrupção Operacional (`EventoInterrupcaoSalao`)**:
   - `ALERGIA_INFUSIONAL` → `PARAR_INFUSAO_NA_HORA` + avaliação médica + notificação ao chat da triagem.
   - `VOMITO_DIFICIL` → `PAUSAR_E_AGUARDAR_ESTABILIZACAO` + avaliação médica.
   - `DOR_OU_EXTRAVASAMENTO_INFUSAO` → `AVISAR_ENFERMAGEM_E_MEDICO_NA_HORA`.
 - **Tendência de Peso (`DesfechoPesoSalao`, Q24–Q25, A2)**:
-  - Perda `> 5,0 kg` em 60 dias (ambas medidas) → `VERMELHO` + `tarefaNutricaoCriada: true` + `qtAdiada: true` + `passaEmConsultaMedica: true` (médico confirma se perda é real ou erro de medida).
+  - Perda `> 5,0 kg` em 60 dias (ambas medidas) → `VERMELHO` + `recomendacaoNutricao: PENDENTE_DECISAO_MEDICA` + `recomendacaoAdiamentoQt: PENDENTE_DECISAO_MEDICA` + `passaEmConsultaMedica: true` (médico confirma se perda é real ou erro de medida).
+  - `tarefaNutricaoCriada` e `qtAdiada` permanecem `false`: não há tarefa, responsável, prazo ou mudança de agenda produzidos por este módulo. Na leitura de legados, os antigos marcadores calculados são preservados em `efeitosLegadosNaoVerificados` com `verificacao: NAO_VERIFICADO`, separados das recomendações; os efeitos atuais permanecem `false`. O JSON histórico armazenado não é alterado nem comprova execução.
   - Perda exatamente `5,0 kg` → `VERDE` (passa).
   - Diferença com peso `INFORMADO_PACIENTE` → `PENDENTE` (nunca dispara vermelho sozinho).
 - **Liberação com Corte (`ExcecaoLiberacaoMedicaSalao`)**: exige sessão médica válida (`medicoId` + `crm`) e motivo justificado não vazio, persistido de forma *append-only* no SQLite.

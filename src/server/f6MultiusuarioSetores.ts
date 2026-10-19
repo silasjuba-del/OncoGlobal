@@ -3,8 +3,7 @@
 // - Visões fatiadas por setor (Enfermagem/Salão, Farmácia, Secretaria/Faturamento, Médico);
 // - Chat operacional por paciente e setor (nunca promovido automaticamente ao prontuário);
 // - Avisos ao médico sem PHI;
-// - Estatísticas do serviço com denominadores e exclusões explícitos;
-// - Separação estrita WORK × STUDY.
+// - Estatísticas F6 indisponíveis até comprovar isolamento persistente WORK × STUDY.
 import { randomUUID } from "node:crypto";
 import type { DatabaseSync } from "node:sqlite";
 import {
@@ -14,11 +13,10 @@ import {
   type OperacaoSetorialF6,
   type SessaoProfissionalSetorF6,
 } from "../contracts/f6/multiusuarioSetores.js";
-import { auditar, listarEventos } from "../kernel/comandos/portas.js";
+import { auditar } from "../kernel/comandos/portas.js";
 import { transacao } from "../kernel/ledger/db.js";
 import { contemPhiResidual, type DicionarioPaciente } from "../kernel/llm/desidentificar.js";
-import { projetarEstatisticaLedger } from "../kernel/projections/estatistica.js";
-import type { OpcoesEstatistica, ProjecaoEstatistica } from "../modules/estatistica/projetar.js";
+import type { OpcoesEstatistica } from "../modules/estatistica/projetar.js";
 import {
   autorizarOperacaoSetorialF6,
   criarAvisoMedicoSemPhiF6,
@@ -307,9 +305,9 @@ export function registrarAvisoMedicoSemPhiF6(
   },
 ): { ok: false; codigo: string } | { ok: true; aviso: AvisoMedicoSemPhiF6 } {
   garantirSchemaF6(db);
-  const parsedSessao = autorizarOperacaoSetorialF6({
+  const parsedSessao = verificarEAuditarAcessoSetorialF6(db, {
     sessaoCandidata: entrada.sessaoEmissora,
-    operacao: "LER_CHAT_SETOR",
+    operacao: "EMITIR_AVISO_MEDICO",
     agora: entrada.agora,
   });
   if (!parsedSessao.permitida) return { ok: false, codigo: parsedSessao.motivoCodigo };
@@ -354,8 +352,8 @@ export function listarAvisosMedicoSemPhiF6(db: DatabaseSync): AvisoMedicoSemPhiF
 }
 
 /**
- * Consulta estatísticas cumulativas do serviço (D-W9-44) com denominadores e exclusões explícitos,
- * exigindo permissão RBAC (`LER_ESTATISTICA_SERVICO`) e garantindo zero PHI.
+ * A permissão RBAC não comprova território dos eventos. Sem contrato persistente
+ * de isolamento da F6, não publica denominadores potencialmente contaminados.
  */
 export function consultarEstatisticaServicoF6(
   db: DatabaseSync,
@@ -364,7 +362,7 @@ export function consultarEstatisticaServicoF6(
     opcoes?: OpcoesEstatistica;
     agora: string;
   },
-): { ok: false; codigo: string } | { ok: true; estatistica: ProjecaoEstatistica; totalEventosBrutosLedger: number } {
+): { ok: false; codigo: string } {
   const rbac = verificarEAuditarAcessoSetorialF6(db, {
     sessaoCandidata: entrada.sessao,
     operacao: "LER_ESTATISTICA_SERVICO",
@@ -372,12 +370,5 @@ export function consultarEstatisticaServicoF6(
   });
   if (!rbac.permitida) return { ok: false, codigo: rbac.motivoCodigo };
 
-  const estatistica = projetarEstatisticaLedger(db, entrada.opcoes ?? {});
-  const rowCount = db.prepare("SELECT COUNT(*) AS n FROM clinical_event").get() as { n: number };
-  void listarEventos;
-  return {
-    ok: true,
-    estatistica,
-    totalEventosBrutosLedger: Number(rowCount.n),
-  };
+  return { ok: false, codigo: "PENDENTE_ISOLAMENTO_WORK_STUDY" };
 }

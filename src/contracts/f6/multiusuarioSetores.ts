@@ -37,6 +37,7 @@ export const OperacaoSetorialF6 = z.enum([
   "ESCREVER_CHAT_SETOR",
   "PROMOVER_CHAT_AO_PRONTUARIO_SEM_MEDICO",
   "LER_ESTATISTICA_SERVICO",
+  "EMITIR_AVISO_MEDICO",
   "EXPORTAR_WORK_PARA_STUDY",
 ]);
 export type OperacaoSetorialF6 = z.infer<typeof OperacaoSetorialF6>;

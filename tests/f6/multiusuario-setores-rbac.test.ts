@@ -7,6 +7,7 @@ import type { SessaoProfissionalSetorF6 } from "../../src/contracts/f6/multiusua
 import { salvarDraft } from "../../src/kernel/comandos/portas.js";
 import { abrirLedger } from "../../src/kernel/ledger/db.js";
 import { confirmar } from "../../src/kernel/ledger/writeRouter.js";
+import { projetarEstatisticaLedger } from "../../src/kernel/projections/estatistica.js";
 import { validarFronteiraWorkStudyF6 } from "../../src/modules/setores/rbacSetorialF6.js";
 import {
   consultarEstatisticaServicoF6,
@@ -306,12 +307,14 @@ describe("FASE F6 · Multiusuário, RBAC por Setor, Avisos sem PHI, Estatística
       sessao: SESSAO_MEDICO,
       agora: AGORA,
     });
-    expect(statMed.ok).toBe(true);
-    if (!statMed.ok) return;
-    expect(statMed.estatistica.denominadorPacientes).toBe(1);
-    expect(statMed.estatistica.totalPacientes).toBe(1);
-    expect(statMed.estatistica.eventosPorCategoria.FATO).toBe(1);
-    expect(statMed.estatistica.exclusoes).toBeDefined();
+    expect(statMed).toEqual({ ok: false, codigo: "PENDENTE_ISOLAMENTO_WORK_STUDY" });
+    // O projetor assistencial existente é testado separadamente; não é prova
+    // de isolamento de uma futura base multiusuário que misture territórios.
+    const projecao = projetarEstatisticaLedger(db);
+    expect(projecao.denominadorPacientes).toBe(1);
+    expect(projecao.totalPacientes).toBe(1);
+    expect(projecao.eventosPorCategoria.FATO).toBe(1);
+    expect(projecao.exclusoes).toBeDefined();
 
     // Separação estrita WORK × STUDY: qualquer tentativa de transferir prontuário/PHI ou cruzar territórios é bloqueada
     expect(

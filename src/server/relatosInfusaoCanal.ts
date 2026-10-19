@@ -1,7 +1,7 @@
 import type { DatabaseSync } from 'node:sqlite';
 import type { ClinicalEvent } from '../contracts/operacao.js';
 import { dadosDoEvento,eventosVigentes } from '../kernel/projections/snapshot.js';
-import { Contato, Paciente } from '../contracts/clinico.js';
+import { Contato } from '../contracts/clinico.js';
 import { projetarVinculosContato } from '../kernel/projections/vinculosContato.js';
 
 export interface RelatoInfusaoPendente {
@@ -20,8 +20,6 @@ export function relatosInfusaoPendentes(db:DatabaseSync,eventos:readonly Clinica
   const c=Contato.safeParse(dadosDoEvento(event));return c.success?[{event,value:c.data}]:[];
  });
  const projetados=projetarVinculosContato(contatos,vigentes);
- const pacientes=new Set(vigentes.filter(e=>e.tipo==='Paciente'&&['CONFIRMADO','ASSINADO'].includes(e.revisao))
-  .flatMap(e=>{const p=Paciente.safeParse(dadosDoEvento(e));return p.success&&p.data.patientId===e.patientId?[p.data.patientId]:[];}));
  const rows=db.prepare(`SELECT mensagemId,vinculoClasse,vinculoPatientId,senderRef,canal,conteudo,payloadSha256,ingestedAt FROM canal_mensagem
   WHERE provaMetodo <> 'IMAP_CONTA_LOCAL'
   ORDER BY ingestedAt,mensagemId`).all() as {mensagemId:string;vinculoClasse:string;vinculoPatientId:string|null;senderRef:string;canal:string;conteudo:string;payloadSha256:string;ingestedAt:string}[];
@@ -32,7 +30,7 @@ export function relatosInfusaoPendentes(db:DatabaseSync,eventos:readonly Clinica
   const alvos=[...new Set(contatosAtuais.flatMap(c=>c.patientIdResolvido?[c.patientIdResolvido]:[]))];
   if(alvos.length>1)return [];
   const patientId=alvos[0]??(r.vinculoClasse==='CONHECIDO'?r.vinculoPatientId:null);
-  if(!patientId||!pacientes.has(patientId)||(r.vinculoPatientId&&r.vinculoPatientId!==patientId))return [];
+  if(!patientId||(r.vinculoPatientId&&r.vinculoPatientId!==patientId))return [];
   try {const c=JSON.parse(r.conteudo) as {tipo?:string;texto?:string};
    return c.tipo==='TEXT'&&typeof c.texto==='string'?[{patientId,mensagemId:r.mensagemId,payloadSha256:r.payloadSha256,texto:c.texto,em:r.ingestedAt}]:[];
   }catch{return [];}

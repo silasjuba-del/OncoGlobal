@@ -2,6 +2,7 @@
 // Reutiliza FN-01 (avaliarTriagem/avaliarCorteSalao), FN-02 (decidirDestino), FN-03 (ordenarFila),
 // FN-04 (calcularDose), FN-06 (avaliarPeso), FN-09 (cicloVaiAoMedico), bsaMosteller e G-06 (g06E1Destaque).
 import { randomUUID } from "node:crypto";
+import type { Destino } from "../../contracts/estados.js";
 import type { OrigemPeso, ResultadoTriagem, TreatmentAdministration, Triagem } from "../../contracts/clinico.js";
 import type { ContextoTriagem, DoseRuleset, EntradaFila, Pesagem, SalaoRuleset } from "../../contracts/regras.js";
 import {
@@ -62,7 +63,7 @@ export function executarTriagemSalaoF3(
 
 /**
  * S-F3-02 · Organiza a fila do salão conforme decisões vigentes:
- * FRENTE só sem corte e sem pendência (cama/cadeira/>80);
+ * FRENTE só com temCorte=false e temPendencia=false explícitos (cama/cadeira/>80);
  * Com corte/pendência -> FILA_MEDICO ordenada por ECOG4 -> ECOG3 -> cama -> cadeira -> >80 -> chegada;
  * E1 nunca altera a ordem da fila, acionando escalonamento separado (A7).
  */
@@ -71,13 +72,20 @@ export function organizarFilaSalaoF3(
   ruleset: SalaoRuleset,
 ): {
   filaOrdenada: EntradaFila[];
+  destinosPorEntrada: (EntradaFila & { destino: Destino })[];
   escalonamentoE1Ids: string[];
 } {
+  const destinosPorEntrada = entradas.map(e => ({
+    ...e,
+    // Ausência de informação não comprova ausência de corte/pendência.
+    destino: decidirDestino({ temCorte: e.temCorte !== false, temPendencia: e.temPendencia !== false,
+      recurso: e.recurso, idadeAnos: e.idadeAnos }, ruleset),
+  }));
   const filaOrdenada = ordenarFila(entradas, ruleset);
   const escalonamentoE1Ids = entradas
     .filter((e) => e.emergencia === true)
     .map((e) => e.patientId);
-  return { filaOrdenada, escalonamentoE1Ids };
+  return { filaOrdenada, destinosPorEntrada, escalonamentoE1Ids };
 }
 
 /**
@@ -121,7 +129,7 @@ export function criarEventoInterrupcaoSalao(entrada: {
 
 /**
  * S-F3-02 · Avalia tendência de peso no salão (FN-06 / Q24–Q25 / A2):
- * - Perda > 5,0 kg em 60 dias (ambas medidas) -> VERMELHO + tarefa nutrição + QT adiada + consulta médica mantida;
+ * - Perda > 5,0 kg em 60 dias (ambas medidas) -> VERMELHO + recomendações de nutrição/adiamento pendentes de decisão médica;
  * - Perda exatamente 5,0 kg -> VERDE (passa);
  * - Peso informado × medido divergente -> PENDENTE (diferença incerta, médico confirma; nunca dispara vermelho sozinho).
  */
@@ -140,8 +148,10 @@ export function avaliarDesfechoPesoSalao(entrada: {
     estadoPeso: avaliacao.estado,
     perdaKg: avaliacao.perdaKg,
     motivo: avaliacao.motivo,
-    tarefaNutricaoCriada: vermelho,
-    qtAdiada: vermelho,
+    tarefaNutricaoCriada: false,
+    qtAdiada: false,
+    recomendacaoNutricao: vermelho ? "PENDENTE_DECISAO_MEDICA" : avaliacao.estado === "VERDE" ? "NAO_INDICADA" : "NAO_AVALIADA",
+    recomendacaoAdiamentoQt: vermelho ? "PENDENTE_DECISAO_MEDICA" : avaliacao.estado === "VERDE" ? "NAO_INDICADA" : "NAO_AVALIADA",
     passaEmConsultaMedica: true,
     rulesetVersao: avaliacao.rulesetVersao,
   });

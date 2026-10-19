@@ -173,7 +173,7 @@ describe("FASE F3 · Salão de Quimioterapia (S-F3-01 a S-F3-04 e casos clínico
     );
   });
 
-  it("S-F3-02 & C4–C5, C7 · fila ordenada (ECOG4 antes de ECOG3 em cadeira), frente exige zero corte/pendência, eventos de alergia/vômito, peso (-5,0 kg passa; -5,1 kg -> nutrição + QT adiada + consulta) e liberação médica justificada", () => {
+  it("S-F3-02 & C4–C5, C7 · fila ordenada (ECOG4 antes de ECOG3 em cadeira), frente exige zero corte/pendência, eventos de alergia/vômito, peso (-5,0 kg passa; -5,1 kg -> recomendações pendentes + consulta) e liberação médica justificada", () => {
     const { db } = ledger();
     const acesso = sessao();
 
@@ -255,6 +255,8 @@ describe("FASE F3 · Salão de Quimioterapia (S-F3-01 a S-F3-04 e casos clínico
       ok: true,
       desfecho: {
         estadoPeso: "VERDE",
+        recomendacaoNutricao: "NAO_INDICADA",
+        recomendacaoAdiamentoQt: "NAO_INDICADA",
         perdaKg: 5.0,
         tarefaNutricaoCriada: false,
         qtAdiada: false,
@@ -262,7 +264,7 @@ describe("FASE F3 · Salão de Quimioterapia (S-F3-01 a S-F3-04 e casos clínico
       },
     });
 
-    // C5: perda de 5,1 kg em 60 dias (medidas) -> VERMELHO + tarefa nutrição + QT adiada + consulta médica mantida
+    // C5: perda de 5,1 kg em 60 dias (medidas) -> VERMELHO + recomendações pendentes, sem tarefa criada nem adiamento executado
     const c5Peso = registrarDesfechoPesoSalaoF3(db, acesso, {
       patientId: "pt-c5",
       encounterId: "enc-c5",
@@ -277,8 +279,10 @@ describe("FASE F3 · Salão de Quimioterapia (S-F3-01 a S-F3-04 e casos clínico
       ok: true,
       desfecho: {
         estadoPeso: "VERMELHO",
-        tarefaNutricaoCriada: true,
-        qtAdiada: true,
+        tarefaNutricaoCriada: false,
+        qtAdiada: false,
+        recomendacaoNutricao: "PENDENTE_DECISAO_MEDICA",
+        recomendacaoAdiamentoQt: "PENDENTE_DECISAO_MEDICA",
         passaEmConsultaMedica: true,
       },
     });
@@ -298,6 +302,8 @@ describe("FASE F3 · Salão de Quimioterapia (S-F3-01 a S-F3-04 e casos clínico
       ok: true,
       desfecho: {
         estadoPeso: "PENDENTE",
+        recomendacaoNutricao: "NAO_AVALIADA",
+        recomendacaoAdiamentoQt: "NAO_AVALIADA",
         tarefaNutricaoCriada: false,
         qtAdiada: false,
         passaEmConsultaMedica: true,
