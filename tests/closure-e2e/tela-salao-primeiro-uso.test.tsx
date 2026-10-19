@@ -111,6 +111,7 @@ it("UI de primeiro uso envia triagem como draft e registra liberação no SQLite
   render(<TelaSalao porta={porta} />);
   const pacienteSelect = await screen.findByLabelText("Paciente em triagem");
   expect((pacienteSelect as HTMLSelectElement).value).toBe(outroPatientId);
+  await waitFor(() => expect((pacienteSelect as HTMLSelectElement).disabled).toBe(false));
   fireEvent.change(pacienteSelect, { target: { value: patientId } });
   await waitFor(() => expect((pacienteSelect as HTMLSelectElement).value).toBe(patientId));
   fireEvent.change(screen.getByLabelText("PA sistólica (mmHg)"), { target: { value: "181" } });
