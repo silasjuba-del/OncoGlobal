@@ -11,6 +11,18 @@ afterEach(() => {
 });
 
 describe("caixa do canal", () => {
+  it("resposta persistida exige ação explícita para preparar outra e não é encerramento clínico", async () => {
+    const porta = criarPortaFalsa(), caixa = await porta.caixaCanal();
+    const original = caixa.mensagens.find(m => m.patientId !== null)!;
+    porta.caixaCanal = async () => ({ mensagens: [{ ...original, estadoConversa: "RESPONDIDA" }] });
+    const acao = vi.spyOn(porta, "acao");
+    render(<CaixaCanal porta={porta} chaves={criarChaves()} />);
+    await screen.findByText("Resposta médica enviada; resolução clínica não registrada automaticamente.");
+    expect(screen.queryByRole("form", { name: /Resposta/ })).toBeNull();
+    fireEvent.click(screen.getByRole("button", { name: "Preparar nova resposta médica" }));
+    expect(screen.getByRole("form", { name: /Resposta/ })).toBeTruthy();
+    expect(acao).not.toHaveBeenCalled();
+  });
   it("não envia sozinho, não liga por nome e mostra injeção como texto", async () => {
     const porta = criarPortaFalsa();
     const acao = vi.spyOn(porta, "acao");

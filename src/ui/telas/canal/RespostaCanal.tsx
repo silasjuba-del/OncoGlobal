@@ -6,8 +6,8 @@ type Contexto={patientId:string;encounterId:string;tumorLotId:string|null};
 
 /** Conteúdo preparado no servidor é exibido antes da confirmação e do envio explícitos. */
 export function RespostaCanal({porta,chaves,mensagemId,patientId,redFlag,destinatario,encounterId=null,origemCanal='WHATSAPP_SERVICO',contextos=[],
- exigirCheckboxConfirmacao:_compatibilidade=false}:{porta:PortaConsulta;chaves:ChavesIntencao;mensagemId:string;patientId:string|null;redFlag:boolean;
- destinatario?:string;encounterId?:string|null;origemCanal?:'WHATSAPP_SERVICO'|'WHATSAPP_PESSOAL'|'EMAIL'|'TELEFONE';contextos?:readonly Contexto[];exigirCheckboxConfirmacao?:boolean}){
+ exigirCheckboxConfirmacao:_compatibilidade=false,aoEnviar}:{porta:PortaConsulta;chaves:ChavesIntencao;mensagemId:string;patientId:string|null;redFlag:boolean;
+ destinatario?:string;encounterId?:string|null;origemCanal?:'WHATSAPP_SERVICO'|'WHATSAPP_PESSOAL'|'EMAIL'|'TELEFONE';contextos?:readonly Contexto[];exigirCheckboxConfirmacao?:boolean;aoEnviar?:()=>void}){
  const [texto,setTexto]=useState(''),[contexto,setContexto]=useState<Contexto|null>(null);
  const [previa,setPrevia]=useState<RascunhoRespostaCanal|null>(null),[confirmado,setConfirmado]=useState(false),[ocupado,setOcupado]=useState(false),[aviso,setAviso]=useState('');
  const identidade=JSON.stringify([mensagemId,patientId,destinatario,encounterId,origemCanal]);
@@ -36,6 +36,7 @@ export function RespostaCanal({porta,chaves,mensagemId,patientId,redFlag,destina
    const r=await porta.acao({verbo:p.canal==='EMAIL'?'ENVIAR_EMAIL':'ENVIAR_WHATSAPP',objeto:{tipo:'MENSAGEM_CANAL',id:p.respostaId,versao:p.versao},escopo:{patientId:p.contexto.patientId,encounterId:p.contexto.encounterId},destino:p.destinatario,
     idempotencyKey:chaves.novaChaveIntencao(`enviar:${p.respostaId}:${p.versao}`)});
    if(numero===seq.current)setAviso(r.decisao==='EXECUTADA'||r.decisao==='REPLAY'?'Resposta enviada; recibo registrado.':r.decisao==='OUTCOME_UNKNOWN'?'Resultado do envio incerto. Confira o recibo; não reenvie às cegas.':'Envio não realizado. Confira a configuração e a autorização.');
+   if(numero===seq.current&&(r.decisao==='EXECUTADA'||r.decisao==='REPLAY'))aoEnviar?.();
   }catch(e){if(numero===seq.current)setAviso(e instanceof ErroPorta?`Envio não realizado (${e.codigo}).`:'Não foi possível confirmar o envio. Confira o recibo antes de tentar novamente.');}
   finally{emVoo.current=false;setOcupado(false);}
  }

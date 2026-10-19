@@ -16,6 +16,7 @@ import type {MensagemCanalVisao} from '../contracts/api/porta.js';
 import {classificarRemetente} from '../modules/canal/ingresso.js';
 import {StatusReciboTecnico} from '../contracts/f2/canalEntrada.js';
 import {lerReconciliacaoMensagemCanal} from './canalReconciliacao.js';
+import {AutorizacaoRespostaCanalServidor} from '../contracts/f2/caixaRespostaCanal.js';
 
 const Id=z.string().trim().min(1).max(250);
 export const ConfiguracaoCanalLocal=z.object({contasWebhook:z.array(z.object({accountId:Id,canal:z.literal('WHATSAPP_SERVICO'),keyId:Id.regex(/^[A-Za-z0-9_-]+$/),
@@ -78,10 +79,20 @@ export function lerMensagensOperacionaisCanal(db:DatabaseSync,acesso:AcessoCanal
     JOIN canal_mensagem origem ON origem.mensagemId=e.mensagemOrigemId AND origem.accountId=t.accountId
     WHERE e.mensagemOrigemId=? ORDER BY t.ocorreuEm DESC,CASE t.statusRecibo WHEN 'LIDA' THEN 4 WHEN 'ENTREGUE' THEN 3 WHEN 'FALHOU' THEN 2 ELSE 1 END DESC LIMIT 1`).get(m.mensagemId) as {statusRecibo:string}|undefined:undefined;
   const recibo=StatusReciboTecnico.safeParse(status?.statusRecibo);
+  const envios=colunas.length?db.prepare(`SELECT a.autorizacaoJson FROM canal_resposta_envio e
+    JOIN canal_resposta_autorizada a ON a.respostaId=e.respostaId AND a.versao=e.versao
+    WHERE e.mensagemOrigemId=?`).all(m.mensagemId) as {autorizacaoJson:string}[]:[];
+  const respondida=envios.some(e=>{
+    try{const a=AutorizacaoRespostaCanalServidor.safeParse(JSON.parse(e.autorizacaoJson));
+      return a.success&&a.data.mensagemOrigemId===m.mensagemId&&a.data.accountId===m.accountId
+        &&a.data.canal===m.canal&&a.data.contexto.patientId===patientId
+        &&a.data.destinatarioCanonico===m.senderRef&&a.data.tipoResposta!=='ACUSO_RECEBIMENTO_TECNICO';
+    }catch{return false;}
+  });
   return {mensagemId:m.mensagemId,texto:m.conteudo.tipo==='TEXT'?m.conteudo.texto:'Mídia recebida; aguarda leitura local.',em:m.providerSentAt??m.ingestedAt,
    redFlag:!!reconciliacao?.alarmes.alarmesAtivos.length,contatoId:m.senderRef,patientId:paciente?patientId:null,nomePaciente:paciente?.nome??null,
    candidatos:!paciente&&!revogado&&!conflito&&m.canal==='WHATSAPP_SERVICO'?cadastros.flatMap(c=>[...new Set(contextosCanal(db,c.patientId,eventos).map(ctx=>ctx.encounterId))].map(encounterId=>({patientId:c.patientId,nome:c.nome??c.patientId,encounterId,tumorLotId:null}))):[],
-   estadoVinculo:revogado?'REVOGADO':conflito?'CONFLITO':paciente?'VINCULADO':'SEM_VINCULO',origemCanal:m.canal,pendenciaProcessamento:!reconciliacao,estadoConversa:'AGUARDA_MEDICO',reciboTecnico:recibo.success?recibo.data:reconciliacao?'PROCESSADA':m.reciboTecnico,
+   estadoVinculo:revogado?'REVOGADO':conflito?'CONFLITO':paciente?'VINCULADO':'SEM_VINCULO',origemCanal:m.canal,pendenciaProcessamento:!reconciliacao,estadoConversa:respondida?'RESPONDIDA':'AGUARDA_MEDICO',reciboTecnico:recibo.success?recibo.data:envios.length?'ENVIADA':reconciliacao?'PROCESSADA':m.reciboTecnico,
    ...(paciente&&patientId?{contextosResposta:contextosCanal(db,patientId,eventos)}:{}),destinatarioExibido:m.senderRef,
    midia:m.conteudo.tipo==='MEDIA_UNPROCESSED'?{providerMediaId:m.conteudo.providerMediaId,mimeType:m.conteudo.mimeType,processamento:'NAO_PROCESSADA'}:null};
  });
