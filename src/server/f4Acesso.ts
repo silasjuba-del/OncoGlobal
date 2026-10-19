@@ -255,33 +255,35 @@ export function assinarMinutaLaudoAcessoJudicialF4(
     return { ok: false, codigo: "G03_ASSINATURA_NEGADA" };
   }
 
-  const row = db.prepare(
-    "SELECT minutaJson FROM f4_minuta_laudo_judicial WHERE minutaId = ? AND versao = ?",
-  ).get(entrada.minutaId, entrada.versao) as { minutaJson: string } | undefined;
-  if (!row) return { ok: false, codigo: "MINUTA_AUSENTE" };
+  // BEGIN IMMEDIATE serializa os escritores antes de ler o estado da minuta.
+  return transacao(db, () => {
+    const lerPersistida = () => {
+      const row = db.prepare(
+        "SELECT minutaJson FROM f4_minuta_laudo_judicial WHERE minutaId = ? AND versao = ?",
+      ).get(entrada.minutaId, entrada.versao) as { minutaJson: string } | undefined;
+      return row ? MinutaLaudoAcessoJudicial.parse(JSON.parse(row.minutaJson)) : null;
+    };
+    const atual = lerPersistida();
+    if (!atual) return { ok: false, codigo: "MINUTA_AUSENTE" };
+    if (atual.revisao === "ASSINADO") return { ok: true, minutaAssinada: atual };
 
-  const atual = MinutaLaudoAcessoJudicial.parse(JSON.parse(row.minutaJson));
-  if (atual.revisao === "ASSINADO") {
-    return { ok: true, minutaAssinada: atual };
-  }
-
-  const minutaAssinada = MinutaLaudoAcessoJudicial.parse({
-    ...atual,
-    revisao: "ASSINADO",
-    assinadoPorMedicoId: sessao.medicoId,
-    assinadoPorCrm: sessao.crm,
-    assinadoEm: acesso.agora,
-  });
-
-  transacao(db, () => {
+    const minutaAssinada = MinutaLaudoAcessoJudicial.parse({
+      ...atual,
+      revisao: "ASSINADO",
+      assinadoPorMedicoId: sessao.medicoId,
+      assinadoPorCrm: sessao.crm,
+      assinadoEm: acesso.agora,
+    });
     db.prepare(`
       UPDATE f4_minuta_laudo_judicial
       SET revisao = 'ASSINADO', minutaJson = ?, atualizadoEm = ?
-      WHERE minutaId = ? AND versao = ?
+      WHERE minutaId = ? AND versao = ? AND revisao = 'REVISAR'
     `).run(JSON.stringify(minutaAssinada), acesso.agora, entrada.minutaId, entrada.versao);
-  });
 
-  return { ok: true, minutaAssinada };
+    const persistida = lerPersistida();
+    if (!persistida) return { ok: false, codigo: "MINUTA_AUSENTE" };
+    return { ok: true, minutaAssinada: persistida };
+  });
 }
 
 export function lerMinutaLaudoAcessoJudicialF4(
