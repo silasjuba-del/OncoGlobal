@@ -90,6 +90,21 @@ export function verificarPedidoTerapeuticoNaAnamnese(mensagemPaciente: string): 
   };
 }
 
+/** Partes ordenadas, sem truncamento nem separação de pares UTF-16. */
+function dividirTexto(texto: string, limite: number): string[] {
+  const partes: string[] = [];
+  let inicio = 0;
+  while (inicio < texto.length) {
+    let fim = Math.min(inicio + limite, texto.length);
+    const ultimo = texto.charCodeAt(fim - 1);
+    if (fim < texto.length && ultimo >= 0xD800 && ultimo <= 0xDBFF
+      && texto.charCodeAt(fim) >= 0xDC00 && texto.charCodeAt(fim) <= 0xDFFF) fim--;
+    partes.push(texto.slice(inicio, fim));
+    inicio = fim;
+  }
+  return partes;
+}
+
 /**
  * Compila o resumo estruturado da anamnese guiada (F5):
  * - Preserva fontes, lacunas (passos obrigatórios não respondidos ou documentos faltantes), incertezas e negações;
@@ -125,14 +140,6 @@ export function compilarResumoEstruturadoAnamnese(entrada: {
     }
     for (const resp of respostas.length ? respostas : [undefined]) {
       if (!resp || resp.polaridade === "NAO_RESPONDIDO") {
-        if (resp && respostas.length > 1) {
-          // O contrato de itens não admite NAO_RESPONDIDO. Preserva a resposta e
-          // sua proveniência nas lacunas, em partes dentro do limite do contrato.
-          const registro = JSON.stringify(resp);
-          for (let i = 0; i < registro.length; i += 400) {
-            lacunasExplicitas.push(`A CONFERIR: resposta NAO_RESPONDIDO, parte ${i / 400 + 1}: ${registro.slice(i, i + 400)}`);
-          }
-        }
         if (passo.obrigatorioParaResumo) {
           lacunasExplicitas.push(`${passo.dominioClinico}: passo obrigatório "${passo.passoId}" não respondido`);
         }
@@ -160,16 +167,24 @@ export function compilarResumoEstruturadoAnamnese(entrada: {
         alertasEscalonamentoMedico.push(`Solicitação de dose/conduta detectada no passo ${passo.passoId}: requer resposta médica.`);
       }
 
-      itensColetados.push({
-        passoId: passo.passoId,
-        dominioClinico: passo.dominioClinico,
-        resumoItem: resp.respostaLiteral,
-        polaridade: resp.polaridade,
-        fonte: resp.fonte,
-      });
+      for (const parte of dividirTexto(resp.respostaLiteral, 1000)) {
+        itensColetados.push({
+          passoId: passo.passoId,
+          dominioClinico: passo.dominioClinico,
+          resumoItem: parte,
+          polaridade: resp.polaridade,
+          fonte: resp.fonte,
+        });
+      }
     }
   }
 
+  const passosConhecidos = new Set(entrada.roteiro.passos.map(p => p.passoId));
+  for (const resposta of entrada.respostas) {
+    if (!passosConhecidos.has(resposta.passoId)) {
+      lacunasExplicitas.push(`A CONFERIR: resposta do passo "${resposta.passoId}" ausente do roteiro; registro integral em respostasOriginais.`);
+    }
+  }
 
   return ResumoEstruturadoAnamnese.parse({
     schema: "ResumoEstruturadoAnamnese@1",
@@ -179,12 +194,13 @@ export function compilarResumoEstruturadoAnamnese(entrada: {
     roteiroId: entrada.roteiro.roteiroId,
     roteiroVersao: entrada.roteiro.versao,
     tumorPackId: entrada.roteiro.tumorPackId,
+    respostasOriginais: [...entrada.respostas],
     itensColetados,
     documentosSolicitadosPendentes,
-    lacunasExplicitas,
-    incertezasExplicitas,
-    negacoesPreservadas,
-    alertasEscalonamentoMedico,
+    lacunasExplicitas: lacunasExplicitas.flatMap(texto => dividirTexto(texto, 500)),
+    incertezasExplicitas: incertezasExplicitas.flatMap(texto => dividirTexto(texto, 500)),
+    negacoesPreservadas: negacoesPreservadas.flatMap(texto => dividirTexto(texto, 500)),
+    alertasEscalonamentoMedico: alertasEscalonamentoMedico.flatMap(texto => dividirTexto(texto, 500)),
     // Curadoria não comprova entrega ao paciente.
     orientacoesFixasEntreguesIds: [],
     avaliacaoMedicaConcluida: false,
