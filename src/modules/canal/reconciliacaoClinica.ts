@@ -44,20 +44,58 @@ export interface ContatoExistenteStatus {
   candidatosConflitoManual?: readonly string[];
 }
 
+// Cobertura integral dos 25 sinais de alarme do corpus (D-W9-28 / D-W9-38 / D-W9-75)
 const TERMOS_CLINICOS_BASE: ReadonlyArray<{ termo: string; padroes: readonly string[]; temTemperatura?: boolean }> = [
   { termo: "febre", padroes: ["febre", "estado febril", "temperatura"], temTemperatura: true },
   { termo: "falta de ar", padroes: ["falta de ar", "dificuldade respiratoria", "dispneia"] },
+  { termo: "alteracao urinaria", padroes: ["parar de urinar", "perder o controle da urina", "ardencia ao urinar"] },
+  { termo: "alteracao visual", padroes: ["visao dupla", "visao borrada"] },
+  { termo: "dor", padroes: ["dor toracica", "dor no peito", "dor forte", "dor"] },
   { termo: "sangramento", padroes: ["sangramento", "sangue nas fezes", "sangue na urina"] },
+  { termo: "confusao mental", padroes: ["confusao mental", "convulsao", "desorientado", "desorientada"] },
+  { termo: "fraqueza nas pernas", padroes: ["fraqueza nas pernas", "perda de forca"] },
   { termo: "vomito", padroes: ["vomito", "vomitos", "nausea", "enjoo"] },
   { termo: "diarreia", padroes: ["diarreia", "evacuacoes liquidas"] },
-  { termo: "dor", padroes: ["dor toracica", "dor no peito", "dor forte", "dor"] },
-  { termo: "confusao mental", padroes: ["confusao mental", "convulsao", "desorientado", "desorientada"] },
-  { termo: "mucosite", padroes: ["mucosite", "afta", "aftas", "ferida na boca"] },
   { termo: "constipacao", padroes: ["constipacao", "prisao de ventre"] },
+  { termo: "inchaco", padroes: ["inchaco"] },
+  { termo: "mucosite", padroes: ["mucosite", "afta", "aftas", "ferida na boca", "sapinho", "placas brancas"] },
+  { termo: "ferida", padroes: ["ferida"] },
+  { termo: "picc", padroes: ["picc"] },
+  { termo: "local da infusao", padroes: ["local da infusao"] },
+  { termo: "neuropatia", padroes: ["neuropatia", "formigamento"] },
+  { termo: "atraso menstrual", padroes: ["atraso menstrual"] },
+  { termo: "cefaleia", padroes: ["cefaleia", "dor de cabeca"] },
+  { termo: "tosse", padroes: ["tosse"] },
+  { termo: "cansaco extremo", padroes: ["cansaco extremo", "intolerancia a calor", "intolerancia a frio"] },
+  { termo: "ictericia", padroes: ["hipocondrio", "ictericia"] },
+  { termo: "artralgia", padroes: ["artralgia"] },
+  { termo: "resfriado", padroes: ["resfriado"] },
 ];
 
 function semAcento(texto: string): string {
   return texto.toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, "");
+}
+
+/**
+ * Encontra todas as posições de `padrao` em `norm` respeitando fronteira de palavra alfanumérica.
+ * Não para na primeira ocorrência se ela estiver dentro de outra palavra (ex.: "dor" dentro de "cuidador").
+ */
+function encontrarOcorrenciasComFronteira(norm: string, padrao: string): number[] {
+  const alvo = semAcento(padrao).trim();
+  if (!alvo) return [];
+  const indices: number[] = [];
+  let from = 0;
+  while (from <= norm.length - alvo.length) {
+    const idx = norm.indexOf(alvo, from);
+    if (idx < 0) break;
+    const charAntes = idx === 0 ? " " : norm[idx - 1]!;
+    const charDepois = idx + alvo.length >= norm.length ? " " : norm[idx + alvo.length]!;
+    if (!/[a-z0-9]/.test(charAntes) && !/[a-z0-9]/.test(charDepois)) {
+      indices.push(idx);
+    }
+    from = idx + 1;
+  }
+  return indices;
 }
 
 /**
@@ -98,7 +136,6 @@ export function resolverVinculoReconciliadoCanal(entrada: {
     });
   }
 
-  // Importante: nomeInformado é explicitamente ignorado por resolverVinculo para impedir vínculo por nome.
   const base = resolverVinculo({
     contatoId: entrada.endereco,
     tipo: entrada.tipo,
@@ -117,11 +154,15 @@ export function resolverVinculoReconciliadoCanal(entrada: {
     });
   }
 
-  if (base.classe === "CANDIDATO" || base.patientIds.length > 1 || /compartilhado|mais de um cadastro/.test(base.motivo)) {
+  if (base.classe === "CANDIDATO" || base.patientIds.length > 0 || /compartilhado|mais de um cadastro/.test(base.motivo)) {
     const porId = entrada.cadastros
       .filter((c) => c.identificadores.some((id) => id.tipo === entrada.tipo && id.valor.trim() === entrada.endereco.trim()))
       .map((c) => c.patientId);
-    const candidatos = [...new Set([...base.patientIds, ...porId])];
+    const chaveDemo = entrada.chaveDemografica?.trim() ?? "";
+    const porDemo = chaveDemo.length > 0
+      ? entrada.cadastros.filter((c) => (c.chaveDemografica?.trim() ?? "") === chaveDemo).map((c) => c.patientId)
+      : [];
+    const candidatos = [...new Set([...base.patientIds, ...porId, ...porDemo])];
     return VinculoReconciliadoCanal.parse({
       estado: "AMBIGUO",
       patientId: null,
@@ -165,42 +206,67 @@ function extrairMomentoClinico(textoOriginal: string): {
       trechoTemporal: textoOriginal.slice(futuroMatch.index, futuroMatch.index + futuroMatch[0].length),
     };
   }
+  const passadoMatch = /\b(?:ontem|anteontem|semana passada|mes passado|ha \d+ dias)\b/i.exec(norm);
   const atualMatch = /\b(?:agora|hoje|neste momento|atualmente|desde cedo)\b/i.exec(norm);
+  if (passadoMatch && !atualMatch) {
+    return {
+      temporalidade: "PASSADO",
+      trechoTemporal: textoOriginal.slice(passadoMatch.index, passadoMatch.index + passadoMatch[0].length),
+    };
+  }
   if (atualMatch) {
     return {
       temporalidade: "ATUAL",
       trechoTemporal: textoOriginal.slice(atualMatch.index, atualMatch.index + atualMatch[0].length),
     };
   }
-  const passadoMatch = /\b(?:ontem|anteontem|semana passada|mes passado|ha \d+ dias)\b/i.exec(norm);
-  if (passadoMatch) {
-    return {
-      temporalidade: "PASSADO",
-      trechoTemporal: textoOriginal.slice(passadoMatch.index, passadoMatch.index + passadoMatch[0].length),
-    };
-  }
   return { temporalidade: "NAO_INFORMADO", trechoTemporal: null };
 }
 
-function extrairTemperaturasDecimos(clausulaNorm: string): number[] {
-  const valores: number[] = [];
-  const re = /(?:^|[^a-z0-9])(3[5-9]|4[0-2])(?:[.,](\d))?(?:\s*(?:°\s*c|graus|c\b))?/g;
+/**
+ * Extrai temperaturas em décimos (350..430) evitando falsos positivos com idade ("38 anos"),
+ * horário ("14:38"), peso ("42 kg") ou contagens ("40 mil").
+ * Exige unidade explícita (°C / graus) OU contexto explícito de febre/temperatura na cláusula.
+ */
+function extrairTemperaturasDecimos(
+  clausulaNorm: string,
+  temContextoFebreNaClausula: boolean,
+): Array<{ decimos: number; index: number }> {
+  const valores: Array<{ decimos: number; index: number }> = [];
+  const re = /(?:^|[^a-z0-9:])(3[5-9]|4[0-2])(?:[.,](\d))?(?:\s*(°\s*c|graus?|c\b))?/g;
   let m = re.exec(clausulaNorm);
   while (m !== null) {
-    const intPart = Number(m[1]);
-    const decPart = m[2] !== undefined ? Number(m[2]) : 0;
-    const decimos = intPart * 10 + decPart;
-    if (decimos >= 350 && decimos <= 430) valores.push(decimos);
+    const matchStart = m.index + (m[0].startsWith(m[1]!) ? 0 : 1);
+    const depois = clausulaNorm.slice(m.index + m[0].length, m.index + m[0].length + 18);
+    // Ignora números seguidos por unidades não térmicas (anos, kg, mg, ml, dias, mil, h, horas, min)
+    if (!/^\s*(?:anos?|kg|mg|mcg|ml|dias?|mil|horas?|h\b|min|cp|comprimidos?)\b/.test(depois)) {
+      const temDecimal = m[2] !== undefined;
+      const temUnidade = m[3] !== undefined;
+      if (temUnidade || (temContextoFebreNaClausula && (temDecimal || /\b(?:febre|temperatura|estado febril)\b/.test(clausulaNorm)))) {
+        const intPart = Number(m[1]);
+        const decPart = m[2] !== undefined ? Number(m[2]) : 0;
+        const decimos = intPart * 10 + decPart;
+        if (decimos >= 350 && decimos <= 430) {
+          valores.push({ decimos, index: matchStart });
+        }
+      }
+    }
     m = re.exec(clausulaNorm);
   }
   return valores;
 }
 
+/**
+ * Preserva negação direta e coordenada ("sem febre ou sangramento", "não tenho febre nem vômito",
+ * "nega febre, náusea e diarreia", "nunca tive febre") e hipótese/dúvida.
+ */
 function classificarPolaridadeClausula(clausulaNorm: string, indiceTermo: number): PolaridadeMencaoCanal {
-  const antes = clausulaNorm.slice(Math.max(0, indiceTermo - 45), indiceTermo);
+  const antes = clausulaNorm.slice(Math.max(0, indiceTermo - 80), indiceTermo);
   const depois = clausulaNorm.slice(indiceTermo, Math.min(clausulaNorm.length, indiceTermo + 45));
-  if (/\b(?:sem|nega|negou|ausencia de|nao\s+(?:estou|esta|tenho|tem|tive|teve|apresento|apresenta|sinto|sente)(?:\s+com)?)\s+(?:(?:qualquer|sinais?\s+de|nenhuma?)\s+)?$/.test(antes)
-    || /\b(?:ausente|negad[oa])\b/.test(depois)) {
+
+  // Se houver operador de negação antes na mesma cláusula (incluindo listas coordenadas com vírgula/e/ou/nem)
+  const padraoNegacao = /\b(?:sem|nega|negou|nunca(?:\s+tive|\s+teve|\s+apresentei|\s+apresentou)?|ausencia\s+de|nao\s+(?:estou|esta|tenho|tem|tive|teve|apresento|apresenta|sinto|sente)(?:\s+com)?)\s+(?:[a-z0-9,\s]+?\s+(?:ou|nem|e)\s+|[a-z0-9,\s]{0,35})?$/;
+  if (padraoNegacao.test(antes) || /\b(?:ausente|negad[oa])\b/.test(depois)) {
     return "NEGADO";
   }
   if (/\b(?:sera que|se eu tiver|caso tenha|caso apareca|pode dar|tenho duvida|duvida sobre|hipotese de|suspeita de)\b/.test(clausulaNorm)
@@ -212,44 +278,54 @@ function classificarPolaridadeClausula(clausulaNorm: string, indiceTermo: number
 
 function classificarTemporalidadeClausula(clausulaNorm: string, global: TemporalidadeRelatoCanal): TemporalidadeRelatoCanal {
   if (/\b(?:se eu tiver|caso tenha|caso apareca|se acontecer)\b/.test(clausulaNorm)) return "FUTURO_DUVIDA";
-  if (/\b(?:agora|hoje|neste momento|atualmente)\b/.test(clausulaNorm)) return "ATUAL";
   if (/\b(?:ontem|anteontem|semana passada|mes passado|ha \d+ dias|tive ontem|teve ontem)\b/.test(clausulaNorm)) return "PASSADO";
+  if (/\b(?:agora|hoje|neste momento|atualmente)\b/.test(clausulaNorm)) return "ATUAL";
   return global;
+}
+
+function dividirEmClausulas(textoOriginal: string): string[] {
+  return textoOriginal
+    .split(/(?:[.!?\n;]+|\b(?:mas|porém|porem|contudo|entretanto)\b)/i)
+    .map((c, idx, arr) => {
+      // Preserva ponto de interrogação se a cláusula original era uma pergunta
+      const posFim = textoOriginal.indexOf(c) + c.length;
+      const pontuacao = textoOriginal[posFim] === "?" ? "?" : "";
+      void idx; void arr;
+      return (c.trim() + pontuacao).trim();
+    })
+    .filter((c) => c.length > 0 && c !== "?");
 }
 
 export function extrairMencoesClinicasCanal(textoOriginal: string): MencaoClinicaCanal[] {
   const momentoGlobal = extrairMomentoClinico(textoOriginal);
-  const clausulas = textoOriginal
-    .split(/(?:[.!?\n;]+|\b(?:mas|porém|porem|contudo|entretanto)\b)/i)
-    .map((c) => c.trim())
-    .filter((c) => c.length > 0);
+  const clausulas = dividirEmClausulas(textoOriginal);
 
   const mencoes: MencaoClinicaCanal[] = [];
   for (const clausula of clausulas) {
     const norm = semAcento(clausula);
-    const temps = extrairTemperaturasDecimos(norm);
 
     for (const def of TERMOS_CLINICOS_BASE) {
-      let posMatch = -1;
+      let indicesMatch: number[] = [];
       for (const padrao of def.padroes) {
-        const idx = norm.indexOf(padrao);
-        if (idx >= 0) {
-          const charAntes = idx === 0 ? " " : norm[idx - 1]!;
-          const charDepois = idx + padrao.length >= norm.length ? " " : norm[idx + padrao.length]!;
-          if (!/[a-z0-9]/.test(charAntes) && !/[a-z0-9]/.test(charDepois)) {
-            posMatch = idx;
-            break;
-          }
+        const encontrados = encontrarOcorrenciasComFronteira(norm, padrao);
+        if (encontrados.length > 0) {
+          indicesMatch = encontrados;
+          break;
         }
       }
-      if (posMatch < 0 && def.temTemperatura && temps.length > 0) {
-        posMatch = 0;
-      }
-      if (posMatch < 0) continue;
 
+      const temps = def.temTemperatura ? extrairTemperaturasDecimos(norm, indicesMatch.length > 0) : [];
+      if (indicesMatch.length === 0 && def.temTemperatura && temps.length > 0) {
+        indicesMatch = [temps[0]!.index];
+      }
+      if (indicesMatch.length === 0) continue;
+
+      const posMatch = indicesMatch[0]!;
       const polaridade = classificarPolaridadeClausula(norm, posMatch);
       const temporalidade = classificarTemporalidadeClausula(norm, momentoGlobal.temporalidade);
-      const temperaturaDecimos = def.temTemperatura && temps.length > 0 ? Math.max(...temps) : null;
+      const temperaturaDecimos = def.temTemperatura && temps.length > 0
+        ? Math.max(...temps.map((t) => t.decimos))
+        : null;
 
       mencoes.push({
         termo: def.termo,
@@ -287,9 +363,51 @@ function classificarCategoriaDeterministica(
 }
 
 /**
+ * Valida qualquer menção proposta pela LLM contra o texto original:
+ * - Impede menção alucinada (termo/trecho deve existir no texto original).
+ * - Recalcula polaridade e temporalidade na cláusula para impedir que a LLM converta negação/dúvida/passado em AFIRMADO+ATUAL.
+ */
+function reconciliarMencoesLlmComDeterministicas(
+  textoOriginal: string,
+  mencoesDeterministicas: readonly MencaoClinicaCanal[],
+  mencoesLlm: readonly MencaoClinicaCanal[],
+  momentoGlobal: TemporalidadeRelatoCanal,
+): MencaoClinicaCanal[] {
+  const resultado = [...mencoesDeterministicas];
+  const normOriginal = semAcento(textoOriginal);
+
+  for (const mLlm of mencoesLlm) {
+    const jaExiste = resultado.some((d) => semAcento(d.termo) === semAcento(mLlm.termo));
+    if (jaExiste) continue;
+
+    const termoNorm = semAcento(mLlm.termo).trim();
+    const ocorrencias = encontrarOcorrenciasComFronteira(normOriginal, termoNorm);
+    if (ocorrencias.length === 0) {
+      // Menção não encontrada no texto original -> descartada como alucinação
+      continue;
+    }
+
+    const pos = ocorrencias[0]!;
+    const polDeterministica = classificarPolaridadeClausula(normOriginal, pos);
+    const tempDeterministica = classificarTemporalidadeClausula(normOriginal, momentoGlobal);
+
+    resultado.push({
+      ...mLlm,
+      polaridade: polDeterministica !== "AFIRMADO" ? polDeterministica : mLlm.polaridade,
+      temporalidade:
+        tempDeterministica === "PASSADO" || tempDeterministica === "FUTURO_DUVIDA"
+          ? tempDeterministica
+          : mLlm.temporalidade,
+    });
+  }
+
+  return resultado;
+}
+
+/**
  * Classifica o contato conforme contrato explícito, sem inventar categorias.
  * Se uma proposta de LLM (gerada apenas sobre texto desidentificado) for fornecida,
- * valida seu schema estritamente por código e preserva negações/temporalidade verificadas pelo código.
+ * valida seu schema estritamente por código e preserva negações/temporalidade/autoria verificadas pelo código.
  */
 export function classificarRelatoCanal(entrada: {
   textoOriginal: string;
@@ -319,21 +437,36 @@ export function classificarRelatoCanal(entrada: {
   if (entrada.propostaLlm && entrada.propostaLlm.phiEgressPassou === true) {
     const parsedLlm = PropostaClassificacaoLlmBrutaSchema.safeParse(entrada.propostaLlm.saidaBrutaLlm);
     if (parsedLlm.success) {
-      // Assimetria de segurança: a LLM nunca pode converter uma negação ou dúvida determinística em sintoma afirmado.
-      const mencoesReconciliadas = mencoesDeterministicas.length > 0
-        ? mencoesDeterministicas
-        : parsedLlm.data.mencoes;
+      const mencoesReconciliadas = reconciliarMencoesLlmComDeterministicas(
+        entrada.textoOriginal,
+        mencoesDeterministicas,
+        parsedLlm.data.mencoes,
+        momentoDeterministico.temporalidade,
+      );
+
+      // A LLM nunca pode promover FAMILIAR/CUIDADOR ou contato não vinculado a PACIENTE
+      const autorReconciliado: AutorRelatoCanal =
+        autorDeterministico === "FAMILIAR" || autorDeterministico === "CUIDADOR" || !entrada.vinculado
+          ? autorDeterministico
+          : parsedLlm.data.autorRelato;
+
+      // A LLM nunca pode sobrescrever PASSADO ou FUTURO_DUVIDA determinístico para ATUAL
+      const momentoReconciliado =
+        momentoDeterministico.temporalidade === "PASSADO" || momentoDeterministico.temporalidade === "FUTURO_DUVIDA"
+          ? momentoDeterministico
+          : parsedLlm.data.momentoClinicoRelatado;
+
       return PropostaClassificacaoCanal.parse({
         schema: "PropostaClassificacaoCanal@1",
         modoClassificacao: "LLM_DESIDENTIFICADO_VALIDADO",
         categoria: parsedLlm.data.categoria,
-        autorRelato: parsedLlm.data.autorRelato,
+        autorRelato: autorReconciliado,
         origemCanal: entrada.origemCanal,
         instanteMensagem: {
           providerSentAt: entrada.providerSentAt,
           ingestedAt: entrada.ingestedAt,
         },
-        momentoClinicoRelatado: parsedLlm.data.momentoClinicoRelatado,
+        momentoClinicoRelatado: momentoReconciliado,
         mencoes: mencoesReconciliadas,
         textoDesidentificadoEnviadoLlm: entrada.propostaLlm.textoDesidentificadoEnviado,
         phiEgressPassou: true,
@@ -387,7 +520,6 @@ export function avaliarAlarmesCanalConferidos(entrada: {
   }
 
   const rs = entrada.ruleset;
-  const normTexto = semAcento(entrada.textoOriginal);
   const conferidas = rs.sinais.filter(regraEstaConferida);
   const rascunhos = rs.sinais.filter((r) => !regraEstaConferida(r));
 
@@ -401,7 +533,7 @@ export function avaliarAlarmesCanalConferidos(entrada: {
 
   const candidatosRascunhoNaoAtivados: string[] = [];
   for (const rascunho of rascunhos) {
-    if (sinalCasaAfirmadoAtual(normTexto, entrada.mencoes, rascunho)) {
+    if (sinalCasaAfirmadoAtual(entrada.textoOriginal, entrada.mencoes, rascunho)) {
       candidatosRascunhoNaoAtivados.push(rascunho.id);
     }
   }
@@ -423,7 +555,7 @@ export function avaliarAlarmesCanalConferidos(entrada: {
 
   const alarmesAtivos: AlarmeConferidoAtivo[] = [];
   for (const regra of conferidas) {
-    if (!sinalCasaAfirmadoAtual(normTexto, entrada.mencoes, regra)) continue;
+    if (!sinalCasaAfirmadoAtual(entrada.textoOriginal, entrada.mencoes, regra)) continue;
     const orientacao = regra.orientacao.endsWith(rs.fraseFinal)
       ? regra.orientacao
       : `${regra.orientacao} ${rs.fraseFinal}`.trim();
@@ -448,15 +580,14 @@ export function avaliarAlarmesCanalConferidos(entrada: {
 }
 
 function sinalCasaAfirmadoAtual(
-  normTexto: string,
+  textoOriginal: string,
   mencoes: readonly MencaoClinicaCanal[],
   regra: RegraAlarmeCanalEntrada,
 ): boolean {
   const termosNorm = regra.termos.map((t) => semAcento(t).trim()).filter(Boolean);
-  // Verifica nas menções extraídas primeiro
   const mencoesDoSinal = mencoes.filter((m) => {
     const mNorm = semAcento(m.termo);
-    return termosNorm.some((t) => t === mNorm || semAcento(m.trechoOriginal).includes(t));
+    return termosNorm.some((t) => t === mNorm || encontrarOcorrenciasComFronteira(semAcento(m.trechoOriginal), t).length > 0);
   });
 
   if (mencoesDoSinal.length > 0) {
@@ -473,21 +604,27 @@ function sinalCasaAfirmadoAtual(
     return true;
   }
 
-  // Fallback para termos do ruleset que não estão na tabela base de menções
-  for (const t of termosNorm) {
-    const idx = normTexto.indexOf(t);
-    if (idx < 0) continue;
-    const antes = idx === 0 ? " " : normTexto[idx - 1]!;
-    const depois = idx + t.length >= normTexto.length ? " " : normTexto[idx + t.length]!;
-    if (/[a-z0-9]/.test(antes) || /[a-z0-9]/.test(depois)) continue;
-    const pol = classificarPolaridadeClausula(normTexto, idx);
-    const temp = classificarTemporalidadeClausula(normTexto, "NAO_INFORMADO");
-    if (pol !== "AFIRMADO" || temp === "PASSADO" || temp === "FUTURO_DUVIDA") continue;
-    if (regra.limiarDecimosExclusivo !== null) {
-      const temps = extrairTemperaturasDecimos(normTexto);
-      if (temps.length > 0) return temps.some((v) => v > regra.limiarDecimosExclusivo!);
+  // Fallback por cláusula (nunca sobre a mensagem inteira concatenada)
+  const clausulas = dividirEmClausulas(textoOriginal);
+  const momentoGlobal = extrairMomentoClinico(textoOriginal).temporalidade;
+  for (const clausula of clausulas) {
+    const normClausula = semAcento(clausula);
+    for (const t of termosNorm) {
+      const ocorrencias = encontrarOcorrenciasComFronteira(normClausula, t);
+      for (const idx of ocorrencias) {
+        const pol = classificarPolaridadeClausula(normClausula, idx);
+        const temp = classificarTemporalidadeClausula(normClausula, momentoGlobal);
+        if (pol !== "AFIRMADO" || temp === "PASSADO" || temp === "FUTURO_DUVIDA") continue;
+        if (regra.limiarDecimosExclusivo !== null) {
+          const temps = extrairTemperaturasDecimos(normClausula, true);
+          if (temps.length > 0) {
+            if (temps.some((v) => v.decimos > regra.limiarDecimosExclusivo!)) return true;
+            continue;
+          }
+        }
+        return true;
+      }
     }
-    return true;
   }
   return false;
 }

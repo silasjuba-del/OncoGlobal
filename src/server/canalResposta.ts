@@ -4,7 +4,7 @@ import { createHash } from "node:crypto";
 import type { DatabaseSync } from "node:sqlite";
 import type { z } from "zod";
 import { Instante, Sessao } from "../contracts/base.js";
-import { Contato } from "../contracts/clinico.js";
+import { Contato, Paciente } from "../contracts/clinico.js";
 import { ActionIntent } from "../contracts/operacao.js";
 import {
   AutorizacaoRespostaCanalServidor,
@@ -19,7 +19,7 @@ import { criarGateway, type EvidenciaSaidaExterna, type ResultadoGateway } from 
 import { sqliteIdempotencia } from "../kernel/ledger/idempotencia.js";
 import { auditar, listarEventos } from "../kernel/comandos/portas.js";
 import { transacao } from "../kernel/ledger/db.js";
-import type { DicionarioPaciente } from "../kernel/llm/desidentificar.js";
+import { contemPhiResidual, sanitizarArtefato, type DicionarioPaciente } from "../kernel/llm/desidentificar.js";
 import {
   montarResumosContatoPreConsulta,
   projetarEstadoOperacionalMensagem,
@@ -66,6 +66,7 @@ function garantirTabelasS03(db: DatabaseSync): void {
       respostaId TEXT NOT NULL,
       versao INTEGER NOT NULL CHECK (versao > 0),
       rascunhoJson TEXT NOT NULL,
+      invalidada INTEGER NOT NULL DEFAULT 0 CHECK (invalidada IN (0, 1)),
       criadoEm TEXT NOT NULL,
       PRIMARY KEY (respostaId, versao)
     );
@@ -134,17 +135,34 @@ export function registrarLeituraLocalMidiaCanal(
     return { ok: false, codigo: "MIDIA_BYTES_INVALIDOS" };
   }
   const sha256LocalComprovado = createHash("sha256").update(entrada.bytesLocais).digest("hex");
+  if (det.mensagem.conteudo.contentSha256 !== null
+    && det.mensagem.conteudo.contentSha256 !== sha256LocalComprovado) {
+    return { ok: false, codigo: "MIDIA_BYTES_INVALIDOS" };
+  }
   const providerMediaId = det.mensagem.conteudo.providerMediaId;
 
   try {
+    garantirTabelasS03(db);
     return transacao(db, () => {
-      garantirTabelasS03(db);
+      const jaLida = db.prepare(
+        "SELECT sha256LocalComprovado FROM canal_midia_lida WHERE mensagemId = ?",
+      ).get(entrada.mensagemId) as { sha256LocalComprovado: string } | undefined;
+      if (jaLida) {
+        if (jaLida.sha256LocalComprovado !== sha256LocalComprovado) {
+          return { ok: false as const, codigo: "MIDIA_BYTES_INVALIDOS" as const };
+        }
+        return {
+          ok: true as const,
+          mensagemId: entrada.mensagemId,
+          processamento: "LIDA_LOCALMENTE" as const,
+          sha256LocalComprovado: jaLida.sha256LocalComprovado,
+        };
+      }
       db.prepare(`
         INSERT INTO canal_midia_lida (
           mensagemId, providerMediaId, sha256LocalComprovado, sizeBytesLocal,
           mimeTypeVerificado, lidoPorMedicoId, lidoEm
         ) VALUES (?, ?, ?, ?, ?, ?, ?)
-        ON CONFLICT(mensagemId) DO NOTHING
       `).run(
         entrada.mensagemId,
         providerMediaId,
@@ -222,6 +240,9 @@ export function prepararRascunhoRespostaCanal(
   if (det.mensagem.vinculo.classe !== "CONHECIDO" || det.mensagem.vinculo.patientId !== entrada.contexto.patientId) {
     return { ok: false, codigo: "CONTATO_NAO_VINCULADO_AO_PACIENTE" };
   }
+  if (entrada.contatoId !== undefined && entrada.contatoId !== det.mensagem.senderRef) {
+    return { ok: false, codigo: "CONTATO_NAO_VINCULADO_AO_PACIENTE" };
+  }
 
   let textoFinal = entrada.texto.trim();
   let cenarioId: string | null = entrada.cenarioId ?? null;
@@ -263,11 +284,17 @@ export function prepararRascunhoRespostaCanal(
   if (!parsed.success) return { ok: false, codigo: "RASCUNHO_INVALIDO" };
 
   try {
+    garantirTabelasS03(db);
     return transacao(db, () => {
-      garantirTabelasS03(db);
+      const jaInvalidada = db.prepare(
+        "SELECT invalidada FROM canal_resposta_rascunho WHERE respostaId = ? AND versao = ?",
+      ).get( parsed.data.respostaId, parsed.data.versao ) as { invalidada: number } | undefined;
+      if (jaInvalidada?.invalidada === 1) {
+        return { ok: false as const, codigo: "RASCUNHO_INVALIDO" as const };
+      }
       db.prepare(`
-        INSERT INTO canal_resposta_rascunho (respostaId, versao, rascunhoJson, criadoEm)
-        VALUES (?, ?, ?, ?)
+        INSERT INTO canal_resposta_rascunho (respostaId, versao, rascunhoJson, invalidada, criadoEm)
+        VALUES (?, ?, ?, 0, ?)
         ON CONFLICT(respostaId, versao) DO UPDATE SET
           rascunhoJson = excluded.rascunhoJson,
           criadoEm = excluded.criadoEm
@@ -313,14 +340,26 @@ export function confirmarRespostaCanalPeloMedico(
   if (!sessao) return { ok: false, codigo: "SESSAO_INVALIDA" };
 
   try {
+    garantirTabelasS03(db);
     return transacao(db, () => {
-      garantirTabelasS03(db);
       const row = db.prepare(
-        "SELECT rascunhoJson FROM canal_resposta_rascunho WHERE respostaId = ? AND versao = ?",
-      ).get(entrada.respostaId, entrada.versao) as { rascunhoJson: string } | undefined;
+        "SELECT rascunhoJson, invalidada FROM canal_resposta_rascunho WHERE respostaId = ? AND versao = ?",
+      ).get(entrada.respostaId, entrada.versao) as { rascunhoJson: string; invalidada: number } | undefined;
       if (!row) return { ok: false as const, codigo: "RASCUNHO_RESPOSTA_AUSENTE" as const };
+      if (row.invalidada === 1) {
+        return { ok: false as const, codigo: "CONTEXTO_ALTERADO_APOS_EXIBICAO" as const };
+      }
+      const autPrevia = db.prepare(
+        "SELECT invalidada FROM canal_resposta_autorizada WHERE respostaId = ? AND versao = ?",
+      ).get(entrada.respostaId, entrada.versao) as { invalidada: number } | undefined;
+      if (autPrevia?.invalidada === 1) {
+        return { ok: false as const, codigo: "CONTEXTO_ALTERADO_APOS_EXIBICAO" as const };
+      }
 
       const rascunho = RascunhoRespostaCanal.parse(JSON.parse(row.rascunhoJson));
+      if (rascunho.contatoId !== rascunho.destinatario) {
+        return { ok: false as const, codigo: "DESTINATARIO_ALTERADO_APOS_EXIBICAO" as const };
+      }
       if (rascunho.destinatario !== entrada.comprovanteExibicao.destinatario) {
         return { ok: false as const, codigo: "DESTINATARIO_ALTERADO_APOS_EXIBICAO" as const };
       }
@@ -339,7 +378,12 @@ export function confirmarRespostaCanalPeloMedico(
       }
 
       const consentimento = consultarConsentimentoCanal(db, rascunho.contatoId);
+      const finalidadeExigida = rascunho.tipoResposta === "ORIENTACAO_GERAL_CENARIO"
+        ? "ORIENTACAO_GERAL"
+        : "COMUNICACAO_CLINICA";
       if (consentimento.estado !== "TERMO_ACEITO"
+        || (consentimento.patientId !== null && consentimento.patientId !== rascunho.contexto.patientId)
+        || (!consentimento.finalidade.includes(finalidadeExigida) && !consentimento.finalidade.includes("COMUNICACAO_CLINICA"))
         || !consentimento.referenciaTermo || !consentimento.versaoTermo || !consentimento.registradoEm) {
         return { ok: false as const, codigo: "CONSENTIMENTO_REVOGADO_OU_AUSENTE" as const };
       }
@@ -414,6 +458,9 @@ export function invalidarRespostasPorMudancaContextoCanal(
   const rows = db.prepare(
     "SELECT respostaId, versao, autorizacaoJson FROM canal_resposta_autorizada WHERE invalidada = 0",
   ).all() as Array<{ respostaId: string; versao: number; autorizacaoJson: string }>;
+  const rowsDrafts = db.prepare(
+    "SELECT respostaId, versao, rascunhoJson FROM canal_resposta_rascunho WHERE invalidada = 0",
+  ).all() as Array<{ respostaId: string; versao: number; rascunhoJson: string }>;
   let invalidadas = 0;
   transacao(db, () => {
     for (const row of rows) {
@@ -431,8 +478,49 @@ export function invalidarRespostasPorMudancaContextoCanal(
         invalidadas += 1;
       }
     }
+    for (const row of rowsDrafts) {
+      const draft = RascunhoRespostaCanal.parse(JSON.parse(row.rascunhoJson));
+      if (draft.contexto.patientId === patientId && (!encounterId || draft.contexto.encounterId === encounterId)) {
+        db.prepare(`
+          UPDATE canal_resposta_rascunho
+          SET invalidada = 1
+          WHERE respostaId = ? AND versao = ?
+        `).run(row.respostaId, row.versao);
+        invalidadas += 1;
+      }
+    }
   });
   return invalidadas;
+}
+
+function carregarDicionarioPacienteDoLedger(
+  db: DatabaseSync,
+  patientId: string,
+  destinatario: string,
+): DicionarioPaciente {
+  const nomes = new Set<string>();
+  const identificadores = new Set<string>();
+  try {
+    const eventos = listarEventos(db, patientId);
+    for (const ev of eventos) {
+      if (ev.tipo !== "Paciente") continue;
+      const outer = ev.payload && typeof ev.payload === "object" ? ev.payload as Record<string, unknown> : null;
+      const parsed = Paciente.safeParse(outer?.data ?? outer);
+      if (parsed.success) {
+        if (parsed.data.nome.trim()) nomes.add(parsed.data.nome.trim());
+        for (const id of parsed.data.identificadores) {
+          if (id.valor.trim()) identificadores.add(id.valor.trim());
+        }
+      }
+    }
+  } catch { /* fallback seguro quando a tabela de eventos está vazia */ }
+  if (nomes.size === 0) nomes.add("Paciente Sintetico Padrao");
+  if (identificadores.size === 0) identificadores.add(`ID-PACIENTE-${patientId}`);
+  void destinatario;
+  return {
+    nomes: [...nomes],
+    identificadores: [...identificadores],
+  };
 }
 
 function contatoFoiRevogadoNoLedger(db: DatabaseSync, contatoId: string, endereco: string): boolean {
@@ -473,6 +561,9 @@ export function revalidarAutorizacaoSaidaCanalNoLedger(
   if (intent.verbo !== "ENVIAR_WHATSAPP" && intent.verbo !== "ENVIAR_EMAIL") {
     return { ok: false, codigo: "CANAL_EXTERNO_NAO_HABILITADO" };
   }
+  if (intent.objeto.tipo !== "MENSAGEM_CANAL") {
+    return { ok: false, codigo: "CANAL_EXTERNO_NAO_HABILITADO" };
+  }
   try {
     const temTabelaAut = db.prepare(
       "SELECT 1 AS ok FROM sqlite_master WHERE type='table' AND name='canal_resposta_autorizada'",
@@ -485,9 +576,14 @@ export function revalidarAutorizacaoSaidaCanalNoLedger(
 
     if (!rowAut) {
       const rowDraft = db.prepare(
-        "SELECT 1 AS ok FROM canal_resposta_rascunho WHERE respostaId = ? AND versao = ?",
-      ).get(intent.objeto.id, intent.objeto.versao);
-      if (rowDraft) return { ok: false, codigo: "RESPOSTA_NAO_CONFIRMADA_PELO_MEDICO" };
+        "SELECT invalidada FROM canal_resposta_rascunho WHERE respostaId = ? AND versao = ?",
+      ).get(intent.objeto.id, intent.objeto.versao) as { invalidada: number } | undefined;
+      if (rowDraft) {
+        return {
+          ok: false,
+          codigo: rowDraft.invalidada === 1 ? "CONTEXTO_RESPOSTA_INVALIDADO" : "RESPOSTA_NAO_CONFIRMADA_PELO_MEDICO",
+        };
+      }
       return { ok: false, codigo: "CANAL_EXTERNO_NAO_HABILITADO" };
     }
 
@@ -504,7 +600,7 @@ export function revalidarAutorizacaoSaidaCanalNoLedger(
     if (opcoes?.revisaoContextoAtual !== undefined && opcoes.revisaoContextoAtual !== aut.contexto.revisaoContexto) {
       return { ok: false, codigo: "CONTEXTO_RESPOSTA_INVALIDADO" };
     }
-    if (!intent.destino || intent.destino !== aut.destinatarioCanonico) {
+    if (!intent.destino || intent.destino !== aut.destinatarioCanonico || aut.contatoId !== aut.destinatarioCanonico) {
       return { ok: false, codigo: "DESTINO_DIVERGENTE_DO_CONTATO" };
     }
     if (opcoes?.textoEnviado !== undefined && sha256(opcoes.textoEnviado) !== aut.conteudoSha256) {
@@ -515,7 +611,12 @@ export function revalidarAutorizacaoSaidaCanalNoLedger(
     }
 
     const consentimentoAtual = consultarConsentimentoCanal(db, aut.contatoId);
-    if (consentimentoAtual.estado !== "TERMO_ACEITO") {
+    const finalidadeExigida = aut.tipoResposta === "ORIENTACAO_GERAL_CENARIO"
+      ? "ORIENTACAO_GERAL"
+      : "COMUNICACAO_CLINICA";
+    if (consentimentoAtual.estado !== "TERMO_ACEITO"
+      || (consentimentoAtual.patientId !== null && consentimentoAtual.patientId !== aut.contexto.patientId)
+      || (!consentimentoAtual.finalidade.includes(finalidadeExigida) && !consentimentoAtual.finalidade.includes("COMUNICACAO_CLINICA"))) {
       return { ok: false, codigo: "CONSENTIMENTO_REVOGADO_OU_AUSENTE" };
     }
 
@@ -563,6 +664,20 @@ export async function executarEnvioAutorizadoCanal(
 }> {
   const sessao = obterSessaoMedicaValida(acesso);
   garantirTabelasS03(db);
+  if (!sessao) {
+    auditar(db, {
+      ator: { tipo: "SISTEMA", id: "canal-saida" },
+      acaoPedida: opcoes.intent.verbo,
+      decisao: "NEGADA",
+      motivoCodigo: "SEM_SESSAO",
+      politicaVersao: "F2-S03",
+      em: Instante.safeParse(acesso.agora).success ? acesso.agora : new Date().toISOString(),
+    });
+    return {
+      resultadoGateway: { decisao: "NEGADA", motivoCodigo: "SEM_SESSAO" },
+      estadoOperacional: null,
+    };
+  }
 
   // Revalidação prévia antes do gateway (inclusive em replay!)
   const revalidacaoPrevia = revalidarAutorizacaoSaidaCanalNoLedger(db, opcoes.intent, {
@@ -585,10 +700,8 @@ export async function executarEnvioAutorizadoCanal(
   }
 
   const autInicial = revalidacaoPrevia.autorizacao;
-  const dic: DicionarioPaciente = opcoes.dicionarioPaciente ?? {
-    nomes: ["Paciente Sintetico Padrao"],
-    identificadores: ["ID-SINTETICO-PADRAO"],
-  };
+  const dic: DicionarioPaciente = opcoes.dicionarioPaciente
+    ?? carregarDicionarioPacienteDoLedger(db, autInicial.contexto.patientId, autInicial.destinatarioCanonico);
 
   let autorizacaoRevalidadaPosAsync: AutorizacaoRespostaCanalServidor | null = null;
 
@@ -607,7 +720,11 @@ export async function executarEnvioAutorizadoCanal(
     },
     validarSaida: async (intent) => {
       await opcoes.antesDoEnvioAssincrono?.();
-      // Revalida novamente APÓS qualquer operação assíncrona!
+      // Revalida a sessão médica e a autorização APÓS qualquer operação assíncrona!
+      const sessaoPosAsync = obterSessaoMedicaValida(acesso);
+      if (!sessaoPosAsync || sessaoPosAsync.medicoId !== sessao.medicoId) {
+        return { ok: false, codigo: "SAIDA_NAO_AUTORIZADA" };
+      }
       const rev = revalidarAutorizacaoSaidaCanalNoLedger(db, intent, {
         ...(opcoes.revisaoContextoAtual !== undefined ? { revisaoContextoAtual: opcoes.revisaoContextoAtual } : {}),
         ...(opcoes.textoParaEnviar !== undefined ? { textoEnviado: opcoes.textoParaEnviar } : {}),
@@ -622,6 +739,13 @@ export async function executarEnvioAutorizadoCanal(
       const payload = rev.autorizacao.textoAprovado;
       const payloadHash = sha256(payload);
       const destinoHash = sha256(rev.autorizacao.destinatarioCanonico);
+      const sanitizado = sanitizarArtefato({
+        artefatoId: rev.autorizacao.respostaId,
+        tipo: "TEXTO",
+        texto: payload,
+        em: acesso.agora,
+        detectorPhi: (conteudo) => contemPhiResidual(conteudo, dic),
+      });
       const evidencia: EvidenciaSaidaExterna = {
         payload,
         destinoCanonico: rev.autorizacao.destinatarioCanonico,
@@ -634,8 +758,8 @@ export async function executarEnvioAutorizadoCanal(
         },
         dicionarioPaciente: dic,
         sanitizationReport: {
-          riscoResidual: "BAIXO",
-          versaoSanitizador: "f2-canal-1.0.0",
+          riscoResidual: sanitizado.report.riscoResidual,
+          versaoSanitizador: sanitizado.report.versaoSanitizador,
           payloadHash,
           destinoHash,
         },
@@ -763,8 +887,10 @@ export function integrarCanalNaPreConsultaECabecalho(
 
   const mensagensParaResumo: MensagemEntradaResumo[] = linhas.map((l) => {
     const rawConteudo = JSON.parse(l.conteudo) as Record<string, unknown>;
-    const estadoVinculo: EstadoVinculoContatoEntrada =
-      l.vinculoClasse === "CONHECIDO" && l.vinculoPatientId
+    const revogado = contatoFoiRevogadoNoLedger(db, l.senderRef, l.senderRef);
+    const estadoVinculo: EstadoVinculoContatoEntrada = revogado
+      ? "REVOGADO"
+      : l.vinculoClasse === "CONHECIDO" && l.vinculoPatientId
         ? "CONTATO_EXATO"
         : l.vinculoClasse === "AMBIGUO"
           ? "CONFLITO"
@@ -773,30 +899,34 @@ export function integrarCanalNaPreConsultaECabecalho(
 
     if (rawConteudo.tipo === "TEXT") {
       return {
+        accountId: l.accountId,
         mensagemId: l.mensagemId,
         providerMessageId: l.providerMessageId,
         canal: l.canal,
         contatoId: l.senderRef,
-        patientId: l.vinculoClasse === "CONHECIDO" ? l.vinculoPatientId : null,
+        patientId: !revogado && l.vinculoClasse === "CONHECIDO" ? l.vinculoPatientId : null,
         estadoVinculo,
         senderRef: l.senderRef,
         providerSentAt: l.providerSentAt,
         ingestedAt: l.ingestedAt,
         reciboTecnico,
+        decisaoReconciliacaoHash: l.resolvidoEm,
         conteudo: { tipo: "TEXT", texto: String(rawConteudo.texto) },
       };
     }
     return {
+      accountId: l.accountId,
       mensagemId: l.mensagemId,
       providerMessageId: l.providerMessageId,
       canal: l.canal,
       contatoId: l.senderRef,
-      patientId: l.vinculoClasse === "CONHECIDO" ? l.vinculoPatientId : null,
+      patientId: !revogado && l.vinculoClasse === "CONHECIDO" ? l.vinculoPatientId : null,
       estadoVinculo,
       senderRef: l.senderRef,
       providerSentAt: l.providerSentAt,
       ingestedAt: l.ingestedAt,
       reciboTecnico,
+      decisaoReconciliacaoHash: l.resolvidoEm,
       conteudo: {
         tipo: "MEDIA_UNPROCESSED",
         providerMediaId: String(rawConteudo.providerMediaId),
@@ -826,6 +956,8 @@ export function integrarCanalNaPreConsultaECabecalho(
       canal: r.canal,
       resumo: r.resumoTexto,
       em: r.ultimaMensagemEm ?? opcoes.entradaPreConsulta.hoje,
+      mensagensOriginaisIds: r.mensagensOriginaisIds,
+      mensagensOriginais: r.mensagensOriginais,
     })),
   ];
 

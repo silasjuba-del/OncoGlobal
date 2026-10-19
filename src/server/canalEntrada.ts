@@ -72,6 +72,8 @@ export type AckCanal =
     chave: ChaveCanal;
     payloadSha256Recebido: string;
     payloadSha256Persistido: string;
+    eventoSha256Recebido?: string;
+    eventoSha256Persistido?: string;
   };
 
 export type FalhaArmazenamento = {
@@ -306,8 +308,8 @@ export function receberEnvelopeWebhookCanal(
   }
 
   try {
+    garantirSchema(db);
     return transacao(db, () => {
-      garantirSchema(db);
       const mensagens: Array<{
         providerMessageId: string;
         classificacao: ResultadoIdempotenciaCanal;
@@ -374,8 +376,8 @@ export function receberEnvelopeWebhookCanal(
             mensagemIdOriginal: r.reciboId,
             payloadSha256Persistido: r.payloadSha256Persistido,
             payloadSha256Recebido: r.payloadSha256Recebido,
-            eventoSha256Persistido: r.payloadSha256Persistido,
-            eventoSha256Recebido: r.payloadSha256Recebido,
+            eventoSha256Persistido: r.eventoSha256Persistido ?? r.payloadSha256Persistido,
+            eventoSha256Recebido: r.eventoSha256Recebido ?? ev.eventoSha256,
             registradoEm: pedido.verificadoEm,
           };
           conflitos.push(itemConflito);
@@ -1053,8 +1055,8 @@ function persistirEntrada(db: DatabaseSync, entrada: {
   const conteudo = admitirConteudo(entrada.conteudo);
   if (!conteudo || !entradaCoerente({ ...entrada, conteudo })) return { ok: false, codigo: "ENTRADA_INVALIDA", persistida: false };
   try {
+    garantirSchema(db);
     return transacao(db, () => {
-      garantirSchema(db);
       return persistirEntradaNaTransacao(db, { ...entrada, conteudo });
     });
   } catch {
@@ -1184,7 +1186,12 @@ function persistirEntradaNaTransacao(db: DatabaseSync, entrada: {
     ok: false as const,
     resultado: "CONFLITO_REPLAY" as const,
     persistida: false as const,
-    ...(entrada.quarentenarConflito ? { quarentenada: true, ...(conflitoId ? { conflitoId } : {}) } : {}),
+    ...(entrada.quarentenarConflito ? {
+      quarentenada: true,
+      ...(conflitoId ? { conflitoId } : {}),
+      eventoSha256Persistido: metaExistente?.eventoSha256 ?? existente.payloadSha256,
+      eventoSha256Recebido: entrada.eventoSha256,
+    } : {}),
     reciboId: existente.mensagemId,
     chave,
     payloadSha256Recebido: entrada.payloadSha256,

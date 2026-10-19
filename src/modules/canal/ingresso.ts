@@ -27,7 +27,7 @@ export type ConteudoCanal =
     providerMediaId: string;
     mimeType: string | null;
     sizeBytes: number | null;
-    contentSha256: null;
+    contentSha256: string | null;
   };
 
 export type CorpoWebhook = {
@@ -306,7 +306,9 @@ export function admitirConteudo(valor: unknown): ConteudoCanal | null {
     && mesmaLista(chaves, ["contentSha256", "mimeType", "processamento", "providerMediaId", "sizeBytes", "tipo"])) {
     const mimeType = registro.mimeType;
     const sizeBytes = registro.sizeBytes;
-    if (registro.processamento !== "NAO_PROCESSADA" || registro.contentSha256 !== null) return null;
+    const contentSha256 = registro.contentSha256;
+    if (registro.processamento !== "NAO_PROCESSADA") return null;
+    if (contentSha256 !== null && (typeof contentSha256 !== "string" || !/^[a-f0-9]{64}$/.test(contentSha256))) return null;
     if (!idValido(registro.providerMediaId)) return null;
     if (mimeType !== null && (typeof mimeType !== "string" || mimeType.length === 0 || mimeType.length > 120)) return null;
     if (sizeBytes !== null && (typeof sizeBytes !== "number" || !Number.isInteger(sizeBytes) || sizeBytes < 0 || sizeBytes > LIMITE_MIDIA_BYTES)) return null;
@@ -316,7 +318,7 @@ export function admitirConteudo(valor: unknown): ConteudoCanal | null {
       providerMediaId: registro.providerMediaId,
       mimeType,
       sizeBytes,
-      contentSha256: null,
+      contentSha256,
     };
   }
   return null;

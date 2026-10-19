@@ -107,6 +107,11 @@ export function CaixaCanal({
         {soltas.length === 0 ? <p>nenhum contato sem vínculo</p> : soltas.map((mensagem) => (
           <article key={mensagem.mensagemId} data-mensagem={mensagem.mensagemId} className="pilha">
             <p>{mensagem.texto}</p>
+            <small data-meta-canal={mensagem.mensagemId}>
+              Contato: {mensagem.contatoId} · Data: {mensagem.em}
+              {mensagem.origemCanal ? ` · Origem: ${mensagem.origemCanal}` : ""}
+              {mensagem.pendenciaProcessamento ? " · Pendente de revisão" : ""}
+            </small>
             {mensagem.estadoVinculo === "CONFLITO" ? <p role="alert">Conflito de vínculos preservado. Destino pendente de decisão.</p> : null}
             {mensagem.estadoVinculo === "REVOGADO" ? <p role="alert">Contato revogado. Nenhum vínculo pode ser criado.</p> : null}
             {mensagem.estadoVinculo === "SEM_VINCULO" ? <p>Selecione explicitamente o paciente e confira o identificador exibido.</p> : null}

@@ -211,11 +211,16 @@ describe("S-F2-02 · Vínculo, classificação e reconciliação clínica", () =
     const acesso = sessao();
 
     const casos = [
-      { id: "msg-negada", texto: "Hoje estou sem febre e não tenho sangramento.", esperaAlarme: false },
-      { id: "msg-passado", texto: "Ontem tive febre de 38,5 graus.", esperaAlarme: false },
-      { id: "msg-duvida", texto: "Se eu tiver febre de 38,5 graus o que devo fazer?", esperaAlarme: false },
-      { id: "msg-378", texto: "Estou com febre de 37,8 graus agora.", esperaAlarme: false },
-      { id: "msg-379", texto: "Estou com febre de 37,9 graus agora.", esperaAlarme: true },
+      { id: "msg-negada", texto: "Hoje estou sem febre e não tenho sangramento.", esperaAlarme: false, regraEsperada: null },
+      { id: "msg-neg-coord-1", texto: "Estou sem febre ou sangramento hoje.", esperaAlarme: false, regraEsperada: null },
+      { id: "msg-neg-coord-2", texto: "Não tenho febre nem sangramento.", esperaAlarme: false, regraEsperada: null },
+      { id: "msg-nunca", texto: "Nunca tive febre desde o início do ciclo.", esperaAlarme: false, regraEsperada: null },
+      { id: "msg-idade-38", texto: "Tenho 38 anos, peso 42 kg e tomei o remédio às 14:38.", esperaAlarme: false, regraEsperada: null },
+      { id: "msg-passado", texto: "Ontem tive febre de 38,5 graus.", esperaAlarme: false, regraEsperada: null },
+      { id: "msg-duvida", texto: "Se eu tiver febre de 38,5 graus o que devo fazer?", esperaAlarme: false, regraEsperada: null },
+      { id: "msg-378", texto: "Estou com febre de 37,8 graus agora.", esperaAlarme: false, regraEsperada: null },
+      { id: "msg-379", texto: "Estou com febre de 37,9 graus agora.", esperaAlarme: true, regraEsperada: "redflag-01-febre" },
+      { id: "msg-multi-frase", texto: "Estou com sangramento intenso hoje. O que devo fazer?", esperaAlarme: true, regraEsperada: "redflag-06-sangramento" },
     ] as const;
 
     for (const caso of casos) {
@@ -243,7 +248,7 @@ describe("S-F2-02 · Vínculo, classificação e reconciliação clínica", () =
       if (caso.esperaAlarme) {
         expect(rec.reconciliacao.alarmes.alarmesAtivos).toEqual([
           expect.objectContaining({
-            regraId: "redflag-01-febre",
+            regraId: caso.regraEsperada,
             alvo: "PACIENTE",
             exigeAvaliacaoPresencial: true,
           }),
@@ -337,5 +342,39 @@ describe("S-F2-02 · Vínculo, classificação e reconciliação clínica", () =
     expect(Number(nEventos)).toBe(0);
     // Saída externa continua bloqueada em S-F2-02
     expect(enviarParaForaCanal()).toEqual({ ok: false, codigo: "CANAL_EXTERNO_NAO_HABILITADO", enviou: false });
+
+    // Se a LLM tentar converter uma negação ("sem cefaleia") em AFIRMADO ou promover cuidador a PACIENTE, o código bloqueia
+    const ackCuidador = receberTransporteSintetico(db, {
+      accountId: "wa-1",
+      canal: "WHATSAPP_SERVICO",
+      providerMessageId: "msg-cuidador-cefaleia",
+      senderRef: "+5583999991111",
+      providerSentAt: ENVIADO,
+      ingestedAt: "2026-10-15T14:00:20.000Z",
+      conteudo: textoConteudo("Sou cuidador da paciente: hoje ela está sem cefaleia."),
+      cadastros: CADASTROS,
+    });
+    expect(ackCuidador.ok).toBe(true);
+    if (!ackCuidador.ok) return;
+    const recCuidador = await reconciliarMensagemCanalPersistida(db, acesso, {
+      mensagemId: ackCuidador.reciboId,
+      cadastros: CADASTROS,
+      rulesetAlarmes: RULESET_CONFERIDO,
+      classificadorLlm: () => ({
+        categoria: "SINTOMA_INTERCORRENCIA",
+        autorRelato: "PACIENTE",
+        momentoClinicoRelatado: { temporalidade: "ATUAL", trechoTemporal: "hoje" },
+        mencoes: [
+          { termo: "cefaleia", polaridade: "AFIRMADO", temporalidade: "ATUAL", trechoOriginal: "sem cefaleia", temperaturaDecimos: null },
+          { termo: "alucinacao_inexistente", polaridade: "AFIRMADO", temporalidade: "ATUAL", trechoOriginal: "nao existe", temperaturaDecimos: null },
+        ],
+      }),
+    });
+    expect(recCuidador.ok).toBe(true);
+    if (!recCuidador.ok) return;
+    expect(recCuidador.reconciliacao.classificacao.autorRelato).toBe("CUIDADOR");
+    expect(recCuidador.reconciliacao.classificacao.mencoes).toEqual([
+      expect.objectContaining({ termo: "cefaleia", polaridade: "NEGADO" }),
+    ]);
   });
 });

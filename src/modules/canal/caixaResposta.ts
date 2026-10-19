@@ -12,13 +12,29 @@ import type { CanalFonte, EstadoReciboCanal, EstadoVinculoContatoEntrada } from 
 import type { EstadoConversa } from "../../contracts/estados.js";
 import { hashCanonico } from "../hash.js";
 
-// Proibições estritas da D-W9-75b em orientações gerais por cenário:
+function semAcento(texto: string): string {
+  return texto.toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, "");
+}
+
+// Proibições estritas da D-W9-75b em orientações gerais por cenário (aplicadas sobre texto sem acento):
 // nunca prescrever dose, posologia, início de medicamento ou diagnóstico.
 const PADROES_PROIBIDOS_ORIENTACAO_GERAL: ReadonlyArray<{ codigo: string; regex: RegExp }> = [
-  { codigo: "DOSE_NUMERICA_PROIBIDA", regex: /\b\d+\s*(?:mg|mcg|ug|g|ml|ui|cp|comprimidos?|capsulas?|gotas?)\b/i },
-  { codigo: "POSOLOGIA_PROIBIDA", regex: /\b(?:de\s+\d+\s+em\s+\d+\s*h(?:oras)?|\d+\s*x\s*ao\s*dia|a\s+cada\s+\d+\s*h(?:oras)?)\b/i },
-  { codigo: "INICIO_MEDICAMENTO_PROIBIDO", regex: /\b(?:inicie|iniciar|comece\s+a\s+tomar|tome|prescrevo)\s+[a-záàâãéêíóôõúç]{3,}/i },
-  { codigo: "DIAGNOSTICO_DEFINITIVO_PROIBIDO", regex: /\b(?:seu\s+diagnostico\s+e|confirmo\s+diagnostico\s+de|voce\s+esta\s+com\s+progressao\s+tumoral)\b/i },
+  {
+    codigo: "DOSE_NUMERICA_PROIBIDA",
+    regex: /\b(?:\d+|um|uma|dois|duas|tres|quatro)\s*(?:mg|mcg|ug|g|ml|ui|cp|comprimidos?|capsulas?|gotas?|ampolas?)\b/i,
+  },
+  {
+    codigo: "POSOLOGIA_PROIBIDA",
+    regex: /\b(?:de\s+\d+\s+em\s+\d+\s*h(?:oras)?|\d+\s*x\s*ao\s*dia|a\s+cada\s+\d+\s*h(?:oras)?|posologia)\b/i,
+  },
+  {
+    codigo: "INICIO_MEDICAMENTO_PROIBIDO",
+    regex: /\b(?:inicie|iniciar|comece\s+a\s+tomar|tome|prescrevo|receito)\s+(?:(?:o|a|os|as|um|uma)\s+)?[a-z0-9]{3,}/i,
+  },
+  {
+    codigo: "DIAGNOSTICO_DEFINITIVO_PROIBIDO",
+    regex: /\b(?:seu\s+diagnostico\s+e|confirmo\s+(?:o\s+)?diagnostico\s+de|voce\s+esta\s+com\s+(?:progressao|metastase|recidiva|neutropenia\s+febril)|diagnostico\s+confirmado)\b/i,
+  },
 ];
 
 export type ValidacaoOrientacaoCenario =
@@ -38,7 +54,7 @@ export type ValidacaoOrientacaoCenario =
 /**
  * D-W9-75b · Valida orientação geral por cenário:
  * - Exige curadoria médica explícita (`status === "CONFERIDA_MEDICO"`).
- * - Proíbe dose, posologia, início de medicamento e diagnóstico.
+ * - Proíbe dose, posologia, início de medicamento e diagnóstico (com normalização de acentos).
  * - Exige encerramento literal com "Nada substitui a avaliação presencial do seu médico."
  */
 export function validarOrientacaoGeralPorCenario(entrada: {
@@ -52,8 +68,9 @@ export function validarOrientacaoGeralPorCenario(entrada: {
   const limpo = entrada.textoOrientacao.trim();
   if (!limpo) return { ok: false, codigo: "ORIENTACAO_VAZIA" };
 
+  const norm = semAcento(limpo);
   for (const regra of PADROES_PROIBIDOS_ORIENTACAO_GERAL) {
-    if (regra.regex.test(limpo)) {
+    if (regra.regex.test(norm)) {
       return { ok: false, codigo: regra.codigo as Extract<ValidacaoOrientacaoCenario, { ok: false }>["codigo"] };
     }
   }
@@ -107,6 +124,7 @@ export function projetarEstadoOperacionalMensagem(entrada: {
 }
 
 export interface MensagemEntradaResumo {
+  accountId?: string;
   mensagemId: string;
   providerMessageId: string;
   canal: CanalFonte;
@@ -117,6 +135,7 @@ export interface MensagemEntradaResumo {
   providerSentAt: string | null;
   ingestedAt: string;
   reciboTecnico: EstadoReciboCanal;
+  decisaoReconciliacaoHash?: string | null;
   conteudo:
     | { tipo: "TEXT"; texto: string }
     | {
@@ -144,7 +163,9 @@ export function montarResumosContatoPreConsulta(entrada: {
 } {
   const porContato = new Map<string, MensagemEntradaResumo[]>();
   for (const msg of entrada.mensagens) {
-    const chave = `${msg.canal}:${msg.contatoId}`;
+    const chave = msg.accountId
+      ? `${msg.accountId}:${msg.canal}:${msg.contatoId}`
+      : `${msg.canal}:${msg.contatoId}`;
     const lista = porContato.get(chave) ?? [];
     lista.push(msg);
     porContato.set(chave, lista);
@@ -165,15 +186,18 @@ export function montarResumosContatoPreConsulta(entrada: {
     const revisaoEntradaHash = hashCanonico({
       ultimaConsultaConfirmadaEm: entrada.ultimaConsultaConfirmadaEm,
       itens: ordenadas.map((m) => ({
+        accountId: m.accountId ?? null,
         mensagemId: m.mensagemId,
         patientId: m.patientId,
         estadoVinculo: m.estadoVinculo,
         reciboTecnico: m.reciboTecnico,
+        decisaoReconciliacaoHash: m.decisaoReconciliacaoHash ?? null,
         conteudo: m.conteudo,
       })),
     });
 
-    const emCache = entrada.cacheAnterior?.get(chave);
+    const primeira = ordenadas[0]!;
+    const emCache = entrada.cacheAnterior?.get(chave) ?? entrada.cacheAnterior?.get(`${primeira.canal}:${primeira.contatoId}`);
     if (emCache && emCache.revisaoEntradaHash === revisaoEntradaHash) {
       resumosPorContato.push(emCache);
       reutilizadosDoCache += 1;
@@ -181,7 +205,6 @@ export function montarResumosContatoPreConsulta(entrada: {
     }
 
     recalculados += 1;
-    const primeira = ordenadas[0]!;
     const ultima = ordenadas.at(-1)!;
     const ultimaEm = ultima.providerSentAt ?? ultima.ingestedAt;
 

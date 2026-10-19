@@ -256,7 +256,7 @@ describe("S-F2-03 · Caixa clínica, pré-consulta, mídia não processada e res
       texto: `Hidratação e dieta antidiarreica. ${FRASE_FINAL_D_W9_75}`,
     })).toEqual({ ok: false, codigo: "CENARIO_NAO_CURADO_PELO_MEDICO" });
 
-    // Dose de medicamento ("4 mg", "2 mg de 2 em 2h") é proibida mesmo com status CONFERIDA_MEDICO
+    // Dose de medicamento ("4 mg", "2 cápsulas", "Seu diagnóstico é...", "Inicie o medicamento") é proibida mesmo com status CONFERIDA_MEDICO
     expect(prepararRascunhoRespostaCanal(db, acesso, {
       respostaId: "resp-dose",
       versao: 1,
@@ -267,6 +267,39 @@ describe("S-F2-03 · Caixa clínica, pré-consulta, mídia não processada e res
       statusCuradoriaCenario: "CONFERIDA_MEDICO",
       texto: `Tome loperamida 4 mg agora. ${FRASE_FINAL_D_W9_75}`,
     })).toEqual({ ok: false, codigo: "DOSE_NUMERICA_PROIBIDA" });
+
+    expect(prepararRascunhoRespostaCanal(db, acesso, {
+      respostaId: "resp-capsulas",
+      versao: 1,
+      mensagemOrigemId: ack.reciboId,
+      contexto,
+      tipoResposta: "ORIENTACAO_GERAL_CENARIO",
+      cenarioId: "redflag-10-diarreia",
+      statusCuradoriaCenario: "CONFERIDA_MEDICO",
+      texto: `Usar 2 cápsulas após evacuação. ${FRASE_FINAL_D_W9_75}`,
+    })).toEqual({ ok: false, codigo: "DOSE_NUMERICA_PROIBIDA" });
+
+    expect(prepararRascunhoRespostaCanal(db, acesso, {
+      respostaId: "resp-inicio-med",
+      versao: 1,
+      mensagemOrigemId: ack.reciboId,
+      contexto,
+      tipoResposta: "ORIENTACAO_GERAL_CENARIO",
+      cenarioId: "redflag-10-diarreia",
+      statusCuradoriaCenario: "CONFERIDA_MEDICO",
+      texto: `Inicie o medicamento imediatamente. ${FRASE_FINAL_D_W9_75}`,
+    })).toEqual({ ok: false, codigo: "INICIO_MEDICAMENTO_PROIBIDO" });
+
+    expect(prepararRascunhoRespostaCanal(db, acesso, {
+      respostaId: "resp-diagnostico",
+      versao: 1,
+      mensagemOrigemId: ack.reciboId,
+      contexto,
+      tipoResposta: "ORIENTACAO_GERAL_CENARIO",
+      cenarioId: "redflag-10-diarreia",
+      statusCuradoriaCenario: "CONFERIDA_MEDICO",
+      texto: `Seu diagnóstico é progressão tumoral. ${FRASE_FINAL_D_W9_75}`,
+    })).toEqual({ ok: false, codigo: "DIAGNOSTICO_DEFINITIVO_PROIBIDO" });
 
     // Falta da frase final obrigatória é recusada
     expect(prepararRascunhoRespostaCanal(db, acesso, {
@@ -484,11 +517,43 @@ describe("S-F2-03 · Caixa clínica, pré-consulta, mídia não processada e res
       motivoCodigo: "CONSENTIMENTO_AUSENTE",
     });
 
-    // 8. Mudança de contexto invalida aprovações anteriores incompatíveis
+    // 8. Mudança de contexto invalida rascunhos abertos e aprovações anteriores incompatíveis (e impede ressurreição)
+    const prep3 = prepararRascunhoRespostaCanal(db, acesso, {
+      respostaId: "resp-livre-3",
+      versao: 1,
+      mensagemOrigemId: ack.reciboId,
+      contexto,
+      tipoResposta: "ACUSO_RECEBIMENTO_TECNICO",
+      texto: "Recebemos sua mensagem técnica; aguarde avaliação médica.",
+    });
+    expect(prep3.ok).toBe(true);
+    if (!prep3.ok) return;
+
     invalidarRespostasPorMudancaContextoCanal(db, "paciente-s03-1", "enc-s03-1");
     expect(autorizarSaida(db, intentValido)).toEqual({
       ok: false,
       codigo: "CONTEXTO_RESPOSTA_INVALIDADO",
     });
+
+    // Tentar confirmar um rascunho preparado antes da invalidação de contexto (ou ressuscitar resp-livre-1) é recusado
+    expect(confirmarRespostaCanalPeloMedico(db, acesso, {
+      respostaId: "resp-livre-3",
+      versao: 1,
+      comprovanteExibicao: {
+        destinatario: prep3.rascunho.destinatario,
+        conteudoSha256: prep3.rascunho.conteudoSha256,
+        contexto,
+      },
+    })).toEqual({ ok: false, codigo: "CONTEXTO_ALTERADO_APOS_EXIBICAO" });
+
+    expect(confirmarRespostaCanalPeloMedico(db, acesso, {
+      respostaId: "resp-livre-1",
+      versao: 1,
+      comprovanteExibicao: {
+        destinatario: preparado.rascunho.destinatario,
+        conteudoSha256: preparado.rascunho.conteudoSha256,
+        contexto,
+      },
+    })).toEqual({ ok: false, codigo: "CONTEXTO_ALTERADO_APOS_EXIBICAO" });
   });
 });

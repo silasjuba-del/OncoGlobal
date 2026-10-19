@@ -59,8 +59,12 @@ export const PropostaClassificacaoCanal = z.object({
   }).strict(),
   mencoes: z.array(MencaoClinicaCanal).max(50),
   textoDesidentificadoEnviadoLlm: z.string().max(250_000).nullable(),
-  phiEgressPassou: z.boolean(),
-}).strict();
+  phiEgressPassou: z.literal(true),
+}).strict().superRefine((p, ctx) => {
+  if (p.modoClassificacao === "LLM_DESIDENTIFICADO_VALIDADO" && !p.textoDesidentificadoEnviadoLlm) {
+    ctx.addIssue({ code: "custom", path: ["textoDesidentificadoEnviadoLlm"], message: "modo LLM exige texto desidentificado registrado" });
+  }
+});
 export type PropostaClassificacaoCanal = z.infer<typeof PropostaClassificacaoCanal>;
 
 export const AlarmeConferidoAtivo = z.object({

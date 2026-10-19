@@ -211,23 +211,28 @@ export async function reconciliarMensagemCanalPersistida(
     ruleset,
   });
 
-  // Busca reconciliações anteriores do mesmo remetente ou do mesmo patientId para detectar conflitos de relato
-  const caixa = consultarCaixaCanal(db, acesso);
+  // Busca reconciliações anteriores filtradas diretamente no SQLite por senderRef ou patientId (sem depender de LIMITE_CAIXA global)
+  const rowsAnteriores = (vinculo.patientId !== null
+    ? db.prepare(`
+        SELECT r.mensagemId, r.reconciliacaoJson
+        FROM canal_reconciliacao_clinica r
+        JOIN canal_mensagem m ON m.mensagemId = r.mensagemId
+        WHERE r.mensagemId <> ? AND (m.senderRef = ? OR m.vinculoPatientId = ?)
+        ORDER BY m.ingestedAt, r.mensagemId
+      `).all(msg.mensagemId, msg.senderRef, vinculo.patientId)
+    : db.prepare(`
+        SELECT r.mensagemId, r.reconciliacaoJson
+        FROM canal_reconciliacao_clinica r
+        JOIN canal_mensagem m ON m.mensagemId = r.mensagemId
+        WHERE r.mensagemId <> ? AND m.senderRef = ?
+        ORDER BY m.ingestedAt, r.mensagemId
+      `).all(msg.mensagemId, msg.senderRef)) as Array<{ mensagemId: string; reconciliacaoJson: string }>;
+
   const anteriores: Array<{ mensagemId: string; mencoes: ReconciliacaoClinicaCanal["classificacao"]["mencoes"] }> = [];
-  if (caixa.ok) {
-    for (const item of caixa.mensagens) {
-      if (item.mensagemId === msg.mensagemId) continue;
-      const mesmoEscopo = item.senderRef === msg.senderRef
-        || (vinculo.patientId !== null && item.vinculo.patientId === vinculo.patientId);
-      if (!mesmoEscopo) continue;
-      const row = db.prepare(
-        "SELECT reconciliacaoJson FROM canal_reconciliacao_clinica WHERE mensagemId = ?",
-      ).get(item.mensagemId) as { reconciliacaoJson: string } | undefined;
-      if (!row) continue;
-      const parsed = ReconciliacaoClinicaCanal.safeParse(JSON.parse(row.reconciliacaoJson));
-      if (parsed.success) {
-        anteriores.push({ mensagemId: item.mensagemId, mencoes: parsed.data.classificacao.mencoes });
-      }
+  for (const row of rowsAnteriores) {
+    const parsed = ReconciliacaoClinicaCanal.safeParse(JSON.parse(row.reconciliacaoJson));
+    if (parsed.success) {
+      anteriores.push({ mensagemId: row.mensagemId, mencoes: parsed.data.classificacao.mencoes });
     }
   }
 

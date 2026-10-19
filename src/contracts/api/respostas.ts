@@ -79,6 +79,21 @@ export const CanalResposta: z.ZodType<CaixaCanalVisao> = z.object({ mensagens: z
   texto: Texto, em: Texto, redFlag: z.boolean(), contatoId: Texto, patientId: Texto.nullable(), nomePaciente: Texto.nullable(),
   estadoVinculo: z.enum(["VINCULADO", "SEM_VINCULO", "CONFLITO", "REVOGADO"]).optional(),
   candidatos: z.array(z.object({ patientId: Texto, nome: Texto })),
+  origemCanal: z.enum(["WHATSAPP_SERVICO", "WHATSAPP_PESSOAL", "EMAIL", "TELEFONE"]).optional(),
+  pendenciaProcessamento: z.boolean().optional(),
+  reciboTecnico: z.enum(["RECEBIDA", "PROCESSADA", "ENVIADA", "ENTREGUE", "FALHOU"]).optional(),
+  estadoConversa: z.enum(["NOVA", "TRIADA", "AGUARDA_MEDICO", "RESPONDIDA", "ENCERRADA"]).optional(),
+  midia: z.object({
+    providerMediaId: Texto,
+    mimeType: Texto.nullable(),
+    processamento: z.enum(["NAO_PROCESSADA", "LIDA_LOCALMENTE"]),
+  }).nullable().optional(),
+  destinatarioExibido: Texto.optional(),
+  contextoExibido: z.object({
+    patientId: Texto.nullable(),
+    encounterId: Texto.nullable(),
+    versaoContexto: z.number().int().positive().optional(),
+  }).optional(),
 })) });
 // A projeção do ledger acrescenta sua referência de evento; o contrato clínico continua estrito.
 const ApacProjetada = Apac.safeExtend({ eventId: Texto.optional() }).transform(({ eventId: _eventId, ...apac }) => apac);
