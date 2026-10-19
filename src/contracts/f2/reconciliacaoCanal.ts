@@ -28,8 +28,36 @@ export const MencaoClinicaCanal = z.object({
   temporalidade: TemporalidadeRelatoCanal,
   trechoOriginal: z.string().min(1).max(1000),
   temperaturaDecimos: z.number().int().min(350).max(430).nullable(),
+  temperaturaFahrenheit: z.number().finite().optional(),
+  temperaturaCelsiusOriginal: z.number().finite().optional(),
 }).strict();
 export type MencaoClinicaCanal = z.infer<typeof MencaoClinicaCanal>;
+
+/** Evidência complementar derivada do relato; não é diagnóstico nem autorização. */
+export const LeituraComplementarCanal = z.object({
+  versao: z.literal("F2-LEITURA-2"),
+  autoriaVerificada: z.literal(false),
+  sujeitoRelato: z.enum(["PRIMEIRA_PESSOA_NAO_IDENTIFICADA", "TERCEIRO_NAO_IDENTIFICADO", "MULTIPLOS_OU_INDEFINIDO"]),
+  temperaturas: z.array(z.object({
+    texto: z.string().max(1000), valor: z.number().finite().nullable(),
+    unidade: z.enum(["C", "F"]).nullable(), celsiusDecimos: z.number().int().min(350).max(430).nullable(),
+    estado: z.enum(["NORMALIZADA", "UNIDADE_A_CONFIRMAR", "VALOR_AMBIGUO", "FORA_FAIXA_SUPORTADA"]),
+    origem: z.enum(["RELATO", "CITACAO"]), temporalidade: TemporalidadeRelatoCanal,
+    intervaloRelativo: z.string().max(100).nullable(),
+  }).strict()).max(50),
+  diarreia: z.object({
+    atual: z.number().int().nonnegative().nullable(), basal: z.number().int().nonnegative().nullable(),
+    aumento: z.number().int().nonnegative().nullable(), operador: z.enum(["IGUAL", "MAIOR_QUE"]).nullable(),
+    janela: z.enum(["DIA", "NAO_INFORMADA"]), ostomia: z.boolean(),
+    trechoOriginal: z.string().max(250_000), grauCandidato: z.number().int().min(0).max(5).nullable(),
+    confirmadoPeloMedico: z.literal(false), rulesetVersao: z.string().nullable(),
+    ctcaeVersao: z.string().nullable(),
+    criterioLiteral: z.string().nullable(), fonteTrecho: z.string().nullable(),
+  }).strict().nullable(),
+  contextos: z.array(z.enum(["CORTICOIDE_DECLARADO", "TONTURA_POSTURAL_DECLARADA", "DIFICULDADE_ALIMENTAR_DECLARADA"])).max(3),
+  pendencias: z.array(z.string().min(1).max(120)).max(50),
+}).strict();
+export type LeituraComplementarCanal = z.infer<typeof LeituraComplementarCanal>;
 
 /** Proposta vinda de LLM (quando usada): só aceita campos estritos sobre texto já desidentificado. */
 export const PropostaClassificacaoLlmBrutaSchema = z.object({
@@ -60,6 +88,7 @@ export const PropostaClassificacaoCanal = z.object({
   mencoes: z.array(MencaoClinicaCanal).max(50),
   textoDesidentificadoEnviadoLlm: z.string().max(250_000).nullable(),
   phiEgressPassou: z.literal(true),
+  leituraComplementar: LeituraComplementarCanal.optional(),
 }).strict().superRefine((p, ctx) => {
   if (p.modoClassificacao === "LLM_DESIDENTIFICADO_VALIDADO" && !p.textoDesidentificadoEnviadoLlm) {
     ctx.addIssue({ code: "custom", path: ["textoDesidentificadoEnviadoLlm"], message: "modo LLM exige texto desidentificado registrado" });

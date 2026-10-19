@@ -35,6 +35,11 @@ export type ClassificadorCanalLlm = (entrada: {
 
 let rulesetPadraoCache: RulesetAlarmeCanalEntrada | null = null;
 
+function carregarCorpusCtcae(): unknown {
+  try { return JSON.parse(readFileSync(new URL("../../corpus/rulesets/salao-ctcae.v1.json", import.meta.url), "utf8")); }
+  catch { return null; }
+}
+
 export function carregarRulesetAlarmeCanalPadrao(): RulesetAlarmeCanalEntrada | null {
   if (rulesetPadraoCache) return rulesetPadraoCache;
   try {
@@ -113,7 +118,7 @@ export async function reconciliarMensagemCanalPersistida(
     rulesetAlarmes?: RulesetAlarmeCanalEntrada | null;
   },
 ): Promise<
-  | { ok: false; codigo: "SESSAO_INVALIDA" | "MENSAGEM_AUSENTE" | "PHI_EGRESS_BLOQUEADO" | "VINCULO_EMAIL_REQUER_REVISAO" }
+  | { ok: false; codigo: "SESSAO_INVALIDA" | "MENSAGEM_AUSENTE" | "PHI_EGRESS_BLOQUEADO" | "VINCULO_EMAIL_REQUER_REVISAO" | "RECONCILIACAO_REQUER_REPROCESSAMENTO" }
   | FalhaArmazenamento
   | { ok: true; reconciliacao: ReconciliacaoClinicaCanal; replay: boolean }
 > {
@@ -130,6 +135,9 @@ export async function reconciliarMensagemCanalPersistida(
       if (det.mensagem.vinculo.motivo === "REMETENTE_EMAIL_NAO_AUTENTICADO_REQUER_REVISAO"
         && reconciliacao.vinculo.patientId !== null) {
         return { ok: false, codigo: "VINCULO_EMAIL_REQUER_REVISAO" };
+      }
+      if (!reconciliacao.classificacao.leituraComplementar) {
+        return { ok: false, codigo: "RECONCILIACAO_REQUER_REPROCESSAMENTO" };
       }
       return {
         ok: true,
@@ -205,6 +213,7 @@ export async function reconciliarMensagemCanalPersistida(
 
   const classificacao = classificarRelatoCanal({
     textoOriginal,
+    corpusCtcae: carregarCorpusCtcae(),
     ehMidia,
     origemCanal: msg.canal,
     providerSentAt: msg.providerSentAt,
@@ -245,8 +254,11 @@ export async function reconciliarMensagemCanalPersistida(
 
   const anteriores: Array<{ mensagemId: string; mencoes: ReconciliacaoClinicaCanal["classificacao"]["mencoes"] }> = [];
   for (const row of rowsAnteriores) {
+    // E-mail autentica a caixa, não o autor/sujeito de cada mensagem. Não formar
+    // conflito clínico entre mensagens pelo endereço enquanto não existir essa prova.
+    if (msg.canal === "EMAIL") continue;
     const parsed = ReconciliacaoClinicaCanal.safeParse(JSON.parse(row.reconciliacaoJson));
-    if (parsed.success) {
+    if (parsed.success && parsed.data.classificacao.leituraComplementar?.versao === "F2-LEITURA-2") {
       anteriores.push({ mensagemId: row.mensagemId, mencoes: parsed.data.classificacao.mencoes });
     }
   }
@@ -312,5 +324,6 @@ export function lerReconciliacaoMensagemCanal(
   const reconciliacao = ReconciliacaoClinicaCanal.parse(JSON.parse(row.reconciliacaoJson));
   const origem = db.prepare("SELECT provaMetodo FROM canal_mensagem WHERE mensagemId = ?").get(mensagemId);
   if (origem?.provaMetodo === "IMAP_CONTA_LOCAL" && reconciliacao.vinculo.patientId !== null) return null;
+  if (!reconciliacao.classificacao.leituraComplementar) return null;
   return reconciliacao;
 }
