@@ -3,6 +3,7 @@
 // Este passo não persiste e não emite ACK.
 import { createHash, createHmac, timingSafeEqual } from "node:crypto";
 import { Instante } from "../../contracts/base.js";
+import { DesafioWebhookWhatsApp } from "../../contracts/f2/canalEntrada.js";
 
 export const LIMITE_BYTES_CORPO_WEBHOOK = 262_144;
 export const LIMITE_BYTES_SEGREDO = 512;
@@ -55,6 +56,64 @@ export type PedidoWebhook = {
   keyId: string;
   verificadoEm: string;
 };
+
+export type ResultadoDesafioWebhook =
+  | { ok: true; challenge: string }
+  | { ok: false; codigo: "CONFIGURACAO_INVALIDA" | "DESAFIO_INVALIDO" | "TOKEN_VERIFICACAO_INVALIDO" };
+
+export interface ContaWebhookConfigurada {
+  accountId: string;
+  canal: "WHATSAPP_SERVICO";
+  keyId: string;
+  segredo: string | Uint8Array;
+  verifyToken?: string;
+}
+
+/**
+ * Verificação inicial do webhook (GET challenge), estritamente separada do recebimento de mensagens (POST).
+ * Não aceita corpo de mensagem e compara hub.verify_token em tempo constante.
+ */
+export function verificarDesafioWebhookWhatsApp(
+  query: Readonly<Record<string, string | readonly string[] | undefined>>,
+  verifyTokenConfigurado: string | null | undefined,
+): ResultadoDesafioWebhook {
+  if (typeof verifyTokenConfigurado !== "string" || verifyTokenConfigurado.trim().length === 0
+    || verifyTokenConfigurado.length > 250 || verifyTokenConfigurado !== verifyTokenConfigurado.trim()) {
+    return { ok: false, codigo: "CONFIGURACAO_INVALIDA" };
+  }
+  const chaves = Object.keys(query);
+  if (chaves.length !== 3) return { ok: false, codigo: "DESAFIO_INVALIDO" };
+  const normalizado: Record<string, unknown> = {};
+  for (const chave of chaves) {
+    const val = query[chave];
+    if (typeof val !== "string") return { ok: false, codigo: "DESAFIO_INVALIDO" };
+    normalizado[chave] = val;
+  }
+  const parsed = DesafioWebhookWhatsApp.safeParse(normalizado);
+  if (!parsed.success) return { ok: false, codigo: "DESAFIO_INVALIDO" };
+  const esperado = Buffer.from(verifyTokenConfigurado, "utf8");
+  const recebido = Buffer.from(parsed.data["hub.verify_token"], "utf8");
+  if (esperado.byteLength !== recebido.byteLength || !timingSafeEqual(esperado, recebido)) {
+    return { ok: false, codigo: "TOKEN_VERIFICACAO_INVALIDO" };
+  }
+  return { ok: true, challenge: parsed.data["hub.challenge"] };
+}
+
+/** Resolve conta e canal exclusivamente pela configuração autenticada do servidor. */
+export function resolverContaWebhookConfigurada(
+  keyId: string,
+  contas: readonly ContaWebhookConfigurada[],
+  accountRefNoEnvelope?: string,
+): { ok: true; conta: ContaWebhookConfigurada } | { ok: false; codigo: "CONTA_INCORRETA" | "CONFIGURACAO_INVALIDA" } {
+  if (!keyIdValido(keyId) || contas.length === 0) return { ok: false, codigo: "CONFIGURACAO_INVALIDA" };
+  const candidatas = contas.filter((c) => c.keyId === keyId && c.canal === "WHATSAPP_SERVICO" && keyIdValido(c.accountId));
+  if (candidatas.length !== 1) return { ok: false, codigo: "CONTA_INCORRETA" };
+  const conta = candidatas[0]!;
+  if (accountRefNoEnvelope !== undefined && accountRefNoEnvelope !== conta.accountId) {
+    return { ok: false, codigo: "CONTA_INCORRETA" };
+  }
+  return { ok: true, conta };
+}
 
 export function autenticarWebhookHmac(pedido: PedidoWebhook): ResultadoWebhook {
   const bytesRecebidos = pedido.bytes.byteLength;
