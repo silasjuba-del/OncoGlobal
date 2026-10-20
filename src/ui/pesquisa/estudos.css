@@ -1,0 +1,122 @@
+.estudos-panel {
+  --estudos-ink: #18343c;
+  --estudos-muted: #536b70;
+  --estudos-line: #cfdddc;
+  --estudos-accent: #087b76;
+  --estudos-surface: #fff;
+  display: grid;
+  gap: 1rem;
+  min-width: 0;
+  color: var(--estudos-ink);
+}
+
+.estudos-panel *,
+.estudos-panel *::before,
+.estudos-panel *::after { box-sizing: border-box; }
+
+.estudos-panel h2,
+.estudos-panel h3,
+.estudos-panel h4,
+.estudos-panel h5,
+.estudos-panel p { margin-top: 0; }
+
+.estudos-panel__import,
+.estudos-panel__list,
+.estudos-panel__review,
+.estudos-panel__result,
+.estudos-panel__facts,
+.estudos-panel__source,
+.estudos-panel__candidate,
+.estudos-panel__arms,
+.estudos-panel__criteria,
+.estudos-panel__criterion {
+  min-width: 0;
+  border: 1px solid var(--estudos-line);
+  border-radius: 14px;
+  background: var(--estudos-surface);
+  padding: 1rem;
+}
+
+.estudos-panel__form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .8rem;
+}
+
+.estudos-panel label { display: grid; gap: .35rem; min-width: 0; color: var(--estudos-ink); font-weight: 600; }
+.estudos-panel input,
+.estudos-panel select,
+.estudos-panel textarea,
+.estudos-panel button {
+  max-width: 100%;
+  font: inherit;
+}
+
+.estudos-panel input:not([type="checkbox"]),
+.estudos-panel select,
+.estudos-panel textarea {
+  width: 100%;
+  min-width: 0;
+  border: 1px solid #9fb5b5;
+  border-radius: 9px;
+  background: #fff;
+  color: var(--estudos-ink);
+  padding: .65rem .72rem;
+}
+
+.estudos-panel textarea { resize: vertical; line-height: 1.5; }
+.estudos-panel input[type="file"] { width: 100%; min-width: 0; }
+.estudos-panel input[type="checkbox"] { accent-color: var(--estudos-accent); }
+
+.estudos-panel button {
+  min-height: 42px;
+  border: 1px solid var(--estudos-accent);
+  border-radius: 9px;
+  background: #087b76;
+  color: #fff;
+  padding: .55rem .85rem;
+  cursor: pointer;
+}
+
+.estudos-panel button:disabled { cursor: not-allowed; opacity: .55; }
+.estudos-panel :focus-visible { outline: 3px solid #e5a82a; outline-offset: 2px; }
+.estudos-panel__actions { display: flex; flex-wrap: wrap; gap: .6rem; }
+.estudos-panel__error { border-left: 4px solid #a72c31; color: #842329; padding: .7rem; background: #fff4f2; }
+.estudos-panel__message { border-left: 4px solid var(--estudos-accent); padding: .7rem; background: #eff9f7; }
+.estudos-panel__study-list { display: grid; gap: .8rem; }
+.estudos-panel__study { min-width: 0; border: 1px solid var(--estudos-line); border-radius: 12px; padding: .9rem; }
+.estudos-panel__study h4 { overflow-wrap: anywhere; }
+.estudos-panel__metadata { display: grid; gap: .35rem; color: var(--estudos-muted); }
+.estudos-panel__source summary,
+.estudos-panel details summary { cursor: pointer; color: var(--estudos-accent); font-weight: 650; }
+.estudos-panel__evidence { display: grid; gap: .6rem; padding-left: 1.25rem; min-width: 0; }
+.estudos-panel__evidence li { min-width: 0; overflow-wrap: anywhere; }
+.estudos-panel blockquote { margin: .4rem 0; border-left: 3px solid #9bc9c4; padding-left: .75rem; white-space: pre-wrap; overflow-wrap: anywhere; }
+.estudos-panel pre { max-width: 100%; overflow: auto; white-space: pre-wrap; overflow-wrap: anywhere; }
+.estudos-panel code { overflow-wrap: anywhere; }
+.estudos-panel__candidate-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .7rem; }
+.estudos-panel__candidate article,
+.estudos-panel__arms article,
+.estudos-panel__facts article,
+.estudos-panel__result article { min-width: 0; border-top: 1px solid #e4eceb; padding: .65rem 0; overflow-wrap: anywhere; }
+.estudos-panel__facts article { display: grid; gap: .25rem; }
+.estudos-panel__criterion { margin: .65rem 0; }
+.estudos-panel__criterion legend { padding: 0 .35rem; font-weight: 700; }
+.estudos-panel__patient-facts { color: var(--estudos-muted); font-size: .95rem; }
+
+@media (max-width: 700px) {
+  .estudos-panel__form-grid,
+  .estudos-panel__candidate-grid { grid-template-columns: minmax(0, 1fr); }
+  .estudos-panel__import,
+  .estudos-panel__list,
+  .estudos-panel__review,
+  .estudos-panel__result,
+  .estudos-panel__facts,
+  .estudos-panel__source,
+  .estudos-panel__candidate,
+  .estudos-panel__arms,
+  .estudos-panel__criteria,
+  .estudos-panel__criterion { padding: .8rem; }
+  .estudos-panel__actions { display: grid; grid-template-columns: minmax(0, 1fr); }
+  .estudos-panel__actions button { width: 100%; }
+}

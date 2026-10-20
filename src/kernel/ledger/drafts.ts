@@ -56,3 +56,9 @@ export function listarDrafts(db: DatabaseSync, patientId?: string): Draft[] {
 export function listarDraftsSemVinculo(db: DatabaseSync): Draft[] {
   return db.prepare("SELECT * FROM draft_envelope WHERE patientId IS NULL ORDER BY draftId").all().map(rowToDraft);
 }
+
+/** Conhecimento global por tipo: não materializa documentos de pacientes. */
+export function listarDraftsGlobaisPorTipo(db: DatabaseSync, kind: string): Draft[] {
+  return db.prepare("SELECT * FROM draft_envelope WHERE patientId IS NULL AND json_extract(payload, '$.kind')=? ORDER BY draftId")
+    .all(kind).map(rowToDraft);
+}

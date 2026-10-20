@@ -19,6 +19,7 @@ import { BibliotecaLocal } from "./biblioteca/BibliotecaLocal.js";
 import { UploadDocumentoLocal } from "./consulta/UploadDocumentoLocal.js";
 import { TranscricaoLocal } from "./consulta/TranscricaoLocal.js";
 import { PainelEstatistica } from "./estatistica/PainelEstatistica.js";
+import { EstudosConsulta } from "./pesquisa/EstudosConsulta.js";
 import type { VisaoEstatisticaServico, PeriodoClinicoEstatisticaServico } from "../contracts/api/estatisticaServico.js";
 import { RevisaoClinica } from './consulta/RevisaoClinica.js';
 import { contarClique, etapaDoClique, metricasVazias } from './consulta/metricasConsulta.js';
@@ -48,8 +49,10 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp }: {
   const [transcricaoSalvando,setTranscricaoSalvando]=useState(false);
   const [prescricaoPendente,setPrescricaoPendente]=useState(false);
   const [prescricaoSalvando,setPrescricaoSalvando]=useState(false);
-  const edicaoPendente = transcricaoPendente || prescricaoPendente;
-  const salvamentoEmCurso = transcricaoSalvando || prescricaoSalvando;
+  const [estudoPendente,setEstudoPendente]=useState(false);
+  const [estudoSalvando,setEstudoSalvando]=useState(false);
+  const edicaoPendente = transcricaoPendente || prescricaoPendente || estudoPendente;
+  const salvamentoEmCurso = transcricaoSalvando || prescricaoSalvando || estudoSalvando;
   const removerProtecaoDocumento=useRef<(() => void) | null>(null);
   useEffect(() => {
     if (!edicaoPendente && !salvamentoEmCurso) return;
@@ -66,13 +69,14 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp }: {
     return remover;
   }, [edicaoPendente, salvamentoEmCurso]);
   const [mensagemSalvamento,setMensagemSalvamento]=useState("");
+  useEffect(() => { if (!salvamentoEmCurso) setMensagemSalvamento(""); }, [salvamentoEmCurso]);
   const [navegacaoPendente,setNavegacaoPendente]=useState<(() => void) | null>(null);
   const dialogoNavegacao=useRef<HTMLDivElement>(null);
   const focoAnterior=useRef<HTMLElement|null>(null);
   const restaurarFoco=useRef(false);
   useEffect(()=>setMetricas(metricasVazias()),[contexto?.patientId,contexto?.encounterId,contexto?.tumorLotId]);
   const [mensagem, setMensagem] = useState("");
-  const [tela, setTela] = useState<"consulta" | "salao" | "canal" | "apac" | "config" | "biblioteca" | "estatistica">("consulta");
+  const [tela, setTela] = useState<"consulta" | "salao" | "canal" | "apac" | "config" | "biblioteca" | "estatistica" | "estudos">("consulta");
   const [estatistica, setEstatistica] = useState<VisaoEstatisticaServico | null>(null);
   const [periodoEstatistica, setPeriodoEstatistica] = useState<PeriodoClinicoEstatisticaServico | null>(null);
   const [estatisticaCarregando, setEstatisticaCarregando] = useState(false);
@@ -90,6 +94,7 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp }: {
     setContexto(null); setLotes([]); setOcupado(false); setVersaoConsulta(0); setTranscricaoPendente(false);
     setTranscricaoSalvando(false); setMensagemSalvamento("");
     setPrescricaoPendente(false); setPrescricaoSalvando(false); setEstatistica(null); setPeriodoEstatistica(null);
+    setEstudoPendente(false); setEstudoSalvando(false);
     setNavegacaoPendente(null); restaurarFoco.current=false; setSessao((s) => s + 1);
   }, []);
   const expirar = useCallback(() => { limpar(); setMensagem("Sessão expirada. Entre novamente."); }, [limpar]);
@@ -109,7 +114,8 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp }: {
 
   function solicitarNavegacaoVoluntaria(navegar: () => void) {
     if (salvamentoEmCurso) {
-      setMensagemSalvamento(prescricaoSalvando ? "A prescrição está sendo processada. Aguarde a conclusão antes de sair."
+      setMensagemSalvamento(estudoSalvando ? "O estudo está sendo salvo. Aguarde a conclusão antes de sair."
+        : prescricaoSalvando ? "A prescrição está sendo processada. Aguarde a conclusão antes de sair."
         : "A transcrição está sendo salva. Aguarde a conclusão antes de sair.");
       return;
     }
@@ -118,7 +124,7 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp }: {
     restaurarFoco.current=false;
     setNavegacaoPendente(() => navegar);
   }
-  function navegarParaTela(proxima: "consulta" | "salao" | "canal" | "apac" | "config" | "biblioteca" | "estatistica") {
+  function navegarParaTela(proxima: "consulta" | "salao" | "canal" | "apac" | "config" | "biblioteca" | "estatistica" | "estudos") {
     if (tela === proxima) return;
     solicitarNavegacaoVoluntaria(() => setTela(proxima));
   }
@@ -141,6 +147,7 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp }: {
     // documento síncrona (location.assign) não deve pedir confirmação de novo.
     removerProtecaoDocumento.current?.();
     setPrescricaoPendente(false); setTranscricaoPendente(false);
+    setEstudoPendente(false);
     restaurarFoco.current=false;
     setNavegacaoPendente(null);
     navegar?.();
@@ -254,6 +261,7 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp }: {
     {mensagem ? <p role="status">{mensagem}</p> : null}
     {transcricaoSalvando ? <p role="status">Salvando transcrição. Aguarde a conclusão para navegar.</p> : null}
     {prescricaoSalvando ? <p role="status">Processando prescrição. Aguarde a conclusão para navegar.</p> : null}
+    {estudoSalvando ? <p role="status">Salvando estudo. Aguarde a conclusão para navegar.</p> : null}
     {mensagemSalvamento ? <p role="status">{mensagemSalvamento}</p> : null}
     {!autenticado ? <form onSubmit={(event) => void entrar(event)}>
       <label>Senha do servidor <input type="password" autoComplete="current-password" value={senha}
@@ -282,6 +290,8 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp }: {
         <button type="button" disabled={ocupado || transcricaoSalvando} onClick={() => navegarParaTela("biblioteca")}>Biblioteca</button>
         {porta.lerEstatisticaServico ? <button type="button" disabled={ocupado || salvamentoEmCurso}
           onClick={() => navegarParaTela("estatistica")}>Estatísticas</button> : null}
+        {porta.listarEstudosTrials ? <button type="button" disabled={ocupado || salvamentoEmCurso}
+          onClick={() => navegarParaTela("estudos")}>Estudos clínicos</button> : null}
       </nav>
       </div>
       {ocupado ? <p role="status">Abrindo consulta…</p> : null}
@@ -335,6 +345,9 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp }: {
         </div>
       </div> : null}
       {tela === "salao" ? <TelaSalao porta={porta} /> : null}
+      {tela === "estudos" ? <EstudosConsulta key={`${contexto?.patientId}:${contexto?.encounterId}:${contexto?.tumorLotId}`}
+        porta={porta} contexto={contexto}
+        aoAlterarPendente={setEstudoPendente} aoAlterarSalvamento={setEstudoSalvando} /> : null}
       {tela === "estatistica" ? <section aria-label="Estatísticas do serviço local">
         {estatisticaErro ? <p role="alert">{estatisticaErro}</p> : null}
         {estatistica ? <PainelEstatistica dados={estatistica} ocupado={estatisticaCarregando} aoPeriodo={setPeriodoEstatistica} />
@@ -366,10 +379,12 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp }: {
             }
           }} style={{ width: "min(32rem, 100%)", boxSizing: "border-box", padding: "1.25rem", borderRadius: ".75rem",
             background: "var(--consulta-surface, #fff)", color: "var(--consulta-text, #172033)", boxShadow: "0 20px 60px rgba(0,0,0,.28)" }}>
-          <h2 id="transcricao-navegacao-titulo">{prescricaoPendente ? "Prescrição em edição" : "Transcrição não salva"}</h2>
+          <h2 id="transcricao-navegacao-titulo">{estudoPendente ? "Estudo em edição"
+            : prescricaoPendente ? "Prescrição em edição" : "Transcrição não salva"}</h2>
           {transcricaoPendente ? <><p>Há texto de transcrição nesta consulta que ainda não foi salvo.</p>
             <p>Para salvar, continue editando e use “Salvar transcrição para revisão clínica”.</p></> : null}
           {prescricaoPendente ? <p>A prescrição ainda não foi assinada. Continue editando para revisar e concluir.</p> : null}
+          {estudoPendente ? <p>Há alterações no protocolo do estudo que ainda não foram salvas. Continue editando para concluir.</p> : null}
           <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "flex-end", gap: ".75rem" }}>
             <button type="button" onClick={continuarEditando}>Continuar editando</button>
             <button type="button" onClick={descartarEContinuar}>Descartar e sair</button>
