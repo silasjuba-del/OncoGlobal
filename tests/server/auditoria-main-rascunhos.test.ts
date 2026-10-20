@@ -7,7 +7,7 @@ import {salvarDraft} from "../../src/kernel/ledger/drafts.js";
 import {confirmar} from "../../src/kernel/ledger/writeRouter.js";
 let a:Awaited<ReturnType<typeof abrirAmbiente>>;
 afterEach(async()=>{if(a){await a.close();removerDiretorio(a.dir);a=undefined!;}});
-it.each(Object.keys(RASCUNHOS))("%s nao vira fato por confirmacao generica",async kind=>{
+it.each([...Object.keys(RASCUNHOS),"TIPO_FUTURO_RASCUNHO"])("%s nao vira fato por confirmacao generica",async kind=>{
  a=await abrirAmbiente(criarDiretorio());cadastrarPaciente(a);
  const payload={kind,contexto:{patientId:PACIENTE,encounterId:ENCONTRO,tumorLotId:null}};
  salvarDraft(a.db,{draftId:"draft-inerte",patientId:PACIENTE,sourceId:"fonte",rawRef:"local",payload,diagnostics:[],revision:0,criadoEm:AGORA});
@@ -17,6 +17,7 @@ it.each(Object.keys(RASCUNHOS))("%s nao vira fato por confirmacao generica",asyn
  const antes=a.eventos().length;
  const r=confirmar(a.db,{operationId:"promocao-generica",patientId:PACIENTE,encounterId:ENCONTRO,tumorLotId:null,reviewDecisionId:"revisao",sessao:a.sessoes.obter(a.token)!,em:AGORA,registros:[{draftId:"draft-inerte",expectedRevision:0,eventId:"evento-indevido",tipo:"FATO",payload,fontes:[],revisao:"CONFIRMADO"}]});
  expect(r.estado).toBe("NEGADA");expect(a.eventos()).toHaveLength(antes);
+ if(kind==="TIPO_FUTURO_RASCUNHO")expect(confirmar(a.db,{operationId:"promocao-limpa",patientId:PACIENTE,encounterId:ENCONTRO,tumorLotId:null,reviewDecisionId:"revisao",sessao:a.sessoes.obter(a.token)!,em:AGORA,registros:[{draftId:"draft-inerte",expectedRevision:0,eventId:"evento-limpo",tipo:"FATO",payload:{campo:"observacao",valor:"texto sintetico"},fontes:[],revisao:"CONFIRMADO"}]}).estado).toBe("NEGADA");
  const consulta=await a.request("/consulta/carregar",{patientId:PACIENTE,encounterId:ENCONTRO,tumorLotId:null});
  if(kind!=="EVOLUCAO_RASCUNHO") expect(JSON.stringify(consulta.data.fechamento?.registros)).not.toContain("draft-inerte");
 });

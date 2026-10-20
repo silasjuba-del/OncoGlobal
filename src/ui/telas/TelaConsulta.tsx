@@ -1,3 +1,4 @@
+import { useCienciaAlertas } from "../consulta/useCienciaAlertas.js";
 import { documentoReceitaDosePendente } from '../../contracts/f1/receitaDose.js';
 import { FontesDoseReceita } from '../consulta/FontesDoseReceita.js';
 import { useEffect, useMemo, useRef, useState } from "react";
@@ -62,9 +63,8 @@ export function TelaConsulta({
   chaves: ChavesIntencao;
   onChart?: (chart: CabecalhoChart | null) => void;
 }) {
-  const [cientes, setCientes] = useState<readonly string[]>([]);
   const [visao, setVisao] = useState<ConsultaIntegrada | null>(null);
-  useEffect(()=>setCientes([]),[patientId,visao?.encounterId,visao?.tumorLotId]);
+  const [cientes, setCientes] = useCienciaAlertas(JSON.stringify([patientId,visao?.encounterId,visao?.tumorLotId]));
   const [loteId, setLoteId] = useState<string | null>(null);
   const [selecionandoLote, setSelecionandoLote] = useState(false);
   const pacienteAtual = useRef(patientId);

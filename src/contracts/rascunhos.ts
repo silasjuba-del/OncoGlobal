@@ -18,15 +18,19 @@ function kind(payload: unknown): keyof typeof RASCUNHOS | null {
     || typeof payload.kind !== "string" || !Object.hasOwn(RASCUNHOS, payload.kind)) return null;
   return payload.kind as keyof typeof RASCUNHOS;
 }
-export function rascunhoNaoPromovivel(payload: unknown): boolean { return kind(payload) !== null; }
+function desconhecido(payload:unknown):boolean {
+ return !!payload && typeof payload==="object" && "kind" in payload && typeof payload.kind==="string"
+   && /_RASCUNHO$|_AUXILIAR$|^FICHA_/.test(payload.kind) && !Object.hasOwn(RASCUNHOS,payload.kind);
+}
+export function rascunhoNaoPromovivel(payload: unknown): boolean { return desconhecido(payload) || kind(payload) !== null; }
 export function rascunhoInerte(payload: unknown): boolean {
-  const k = kind(payload); return k !== null && RASCUNHOS[k] === "INERTE";
+  const k = kind(payload); return desconhecido(payload) || k !== null && RASCUNHOS[k] === "INERTE";
 }
 
 export const TipoRascunho = z.enum(Object.keys(RASCUNHOS) as [keyof typeof RASCUNHOS, ...(keyof typeof RASCUNHOS)[]]);
 export const RegistroRascunhos = z.record(TipoRascunho, ClasseRascunho);
 RegistroRascunhos.parse(RASCUNHOS);
 
-export function fonteRascunhoNaoPromovivel(payload: unknown): boolean { const k=kind(payload); return k!==null && ["INERTE","EXTRACAO"].includes(RASCUNHOS[k]); }
+export function fonteRascunhoNaoPromovivel(payload: unknown): boolean { const k=kind(payload); return desconhecido(payload) || k!==null && ["INERTE","EXTRACAO"].includes(RASCUNHOS[k]); }
 
-export function rascunhoVisivelNaRevisao(payload:unknown):boolean { const k=kind(payload);return k===null || RASCUNHOS[k]==="RESUMO"; }
+export function rascunhoVisivelNaRevisao(payload:unknown):boolean { const k=kind(payload);return !desconhecido(payload) && (k===null || RASCUNHOS[k]==="RESUMO"); }

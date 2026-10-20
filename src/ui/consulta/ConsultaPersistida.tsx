@@ -1,3 +1,4 @@
+import { useCienciaAlertas } from "./useCienciaAlertas.js";
 import { PropostaDoseReceita } from '../../contracts/api/propostaDoseReceita.js';
 import { FontesDoseReceita } from './FontesDoseReceita.js';
 import { documentoReceitaDosePendente } from '../../contracts/f1/receitaDose.js';
@@ -41,12 +42,11 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, versaoClinica
   aoAlterarApacSalvando?: (salvando: boolean) => void;
   aoAtualizarClinico?: () => void;
 }) {
-  const [cientes, setCientes] = useState<readonly string[]>([]);
+  const [cientes, setCientes] = useCienciaAlertas(JSON.stringify([contexto.patientId,contexto.encounterId,contexto.tumorLotId]));
   const aoAlterarApacPendenteAtual = useRef(aoAlterarApacPendente);
   aoAlterarApacPendenteAtual.current = aoAlterarApacPendente;
   const aoAlterarApacSalvandoAtual = useRef(aoAlterarApacSalvando);
   aoAlterarApacSalvandoAtual.current = aoAlterarApacSalvando;
-  useEffect(()=>setCientes([]),[contexto.patientId,contexto.encounterId,contexto.tumorLotId]);
   const [consultaCarregada, setConsultaCarregada] = useState<{
     visao: ConsultaIntegrada | null; erro: string; porta: PortaConsulta;
     contexto: PedidoBundle; versao: number; versaoClinica: number;
