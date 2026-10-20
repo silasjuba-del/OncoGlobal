@@ -131,7 +131,7 @@ export function avaliarImagem(r:Retrato,c:Correlacao,op:OpcoesSetores={}):Achado
   }return o;
 }
 export function avaliarPatologia(r:Retrato,c:Correlacao,op:OpcoesSetores={}):AchadosSetor {
-  const {out:o,fatos}=inicio(r,c,'PATOLOGIA',/patolog|pathology|biomarc/);
+  const {out:o,fatos}=inicio(r,c,'PATOLOGIA',/patolog|pathology|biomarc|biopsy|biopsia/);
   if(!fatos.length)lacuna(o,'PATOLOGIA_AUSENTE','Patologia e biomarcadores não documentados.');
   for(const f of fatos){if(conflitoTipoCampoLab(f)){lacunaConflitoTipoCampo(o,f,'PATOLOGIA');continue;}
     const d=dados(f);if(d.pT!=null && !['RESSECCAO','RESECTION'].includes(String(d.specimenRole??d.specimen_role)))
