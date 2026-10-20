@@ -1,7 +1,7 @@
 // proveniência: dados sintéticos — não utilizar em produção
 import { afterEach, expect, it } from "vitest";
 import { executarConfirmacao } from "../../src/kernel/comandos/index.js";
-import { listarDrafts, salvarDraft } from "../../src/kernel/comandos/portas.js";
+import { lerDraft, listarDrafts, salvarDraft } from "../../src/kernel/comandos/portas.js";
 import { hashConteudoExibido } from "../../src/server/sessao.js";
 import { BasePrescricaoExecutavelResposta, ConfirmarPrescricaoExecutavelPedido,
   PrepararPrescricaoExecutavelPedido, PrescricaoExecutavelConfirmada,
@@ -133,6 +133,92 @@ async function assinar(a: Ambiente, preparada: PrescricaoExecutavelPreparada, id
   expect(resposta.status).toBe(200);
   return PrescricaoExecutavelConfirmada.parse(resposta.data);
 }
+
+it.each([false, true])("recibo vincula a escolha de farmácia originalmente exibida: %s", async encaminharFarmacia => {
+  const a = await abrir();
+  const { preparada, pedido } = await prepararNovaLinha(a, { edicao: { encaminharFarmacia } });
+  const draft = lerDraft(a.db, preparada.draftId)!;
+  const payload = structuredClone(draft.payload) as { edicao: { encaminharFarmacia: boolean } };
+  payload.edicao.encaminharFarmacia = !encaminharFarmacia;
+  a.db.prepare("UPDATE draft_envelope SET payload=? WHERE draftId=?").run(JSON.stringify(payload), draft.draftId);
+  const antes = a.eventos();
+  const confirmacao = await a.request(CONFIRMAR, { contexto, draftId: preparada.draftId,
+    expectedRevision: preparada.revision, conteudoHash: preparada.conteudoHash, idempotencyKey: "recibo-farmacia-adulterado" });
+  expect(confirmacao.status).toBe(409);
+  expect(confirmacao.data.codigo).toBe("CONTEUDO_ALTERADO_APOS_EXIBICAO");
+  expect(a.eventos()).toEqual(antes);
+  expect((await a.request(PREPARAR, pedido)).status).toBe(409);
+  expect(a.eventos()).toEqual(antes);
+});
+
+it("não permite reatar o recibo antigo a uma base nova modificando o draft", async () => {
+  const a = await abrir();
+  const { preparada } = await prepararNovaLinha(a);
+  a.seed("FATO", { campo: "nota.sintetica", valor: "Informação posterior à prévia" });
+  const baseNova = await carregarBase(a);
+  const draft = lerDraft(a.db, preparada.draftId)!;
+  const payload = structuredClone(draft.payload) as { resposta: PrescricaoExecutavelPreparada };
+  payload.resposta.baseHash = baseNova.revisao;
+  a.db.prepare("UPDATE draft_envelope SET payload=? WHERE draftId=?").run(JSON.stringify(payload), draft.draftId);
+  const antes = a.eventos();
+  const r = await a.request(CONFIRMAR, { contexto, draftId: preparada.draftId,
+    expectedRevision: preparada.revision, conteudoHash: preparada.conteudoHash, idempotencyKey: "base-revinculada" });
+  expect(r.status).toBe(409);
+  expect(a.eventos()).toEqual(antes);
+});
+
+it.each(["base", "conteudo"])("replay concluído usa o documento assinado, não o draft mutável: %s", async campo => {
+  const a = await abrir();
+  const { preparada } = await prepararNovaLinha(a);
+  const assinada = await assinar(a, preparada, "assinatura-replay-duravel");
+  const antes = a.eventos();
+  const draft = lerDraft(a.db, preparada.draftId)!;
+  const payload = structuredClone(draft.payload) as { resposta: PrescricaoExecutavelPreparada };
+  if (campo === "base") payload.resposta.baseHash = "0".repeat(64);
+  else payload.resposta.conteudo.documentId = "identidade-do-draft-adulterada";
+  a.db.prepare("UPDATE draft_envelope SET payload=? WHERE draftId=?").run(JSON.stringify(payload), draft.draftId);
+  const entrada = { contexto, draftId: preparada.draftId, expectedRevision: preparada.revision,
+    conteudoHash: preparada.conteudoHash, idempotencyKey: "assinatura-replay-duravel" };
+  const replay = await a.request(CONFIRMAR, entrada);
+  expect(replay.status).toBe(200);
+  expect(replay.data).toEqual({ ...assinada, codigo: "REPLAY" });
+  expect((await a.request(CONFIRMAR, { ...entrada, idempotencyKey: "outra-assinatura-adulterada" })).status).toBe(409);
+  expect(a.eventos()).toEqual(antes);
+});
+
+it("encerramento documentado do episódio selecionado permite nova linha sem reabrir o episódio antigo", async () => {
+  const a = await abrir();
+  const { preparada } = await prepararNovaLinha(a);
+  const assinada = await assinar(a, preparada, "assinar-antes-de-encerrar");
+  const original = a.eventos().find(e => e.tipo === "TreatmentEpisode" && dadosEvento(e).episodioId === assinada.episodioId)!;
+  const encerrado = { ...dadosEvento(original), fim: presente("2026-10-09") };
+  const encerramentoId = a.seed("TreatmentEpisode", encerrado, "CONFIRMADO", original.eventId);
+  const proximo = { ...contexto, encounterId: "encontro-apos-encerramento" };
+  a.sessoes.selecionarConsulta(a.token, proximo);
+  const r = await a.request(BASE, proximo);
+  expect(r.status).toBe(200);
+  const base = BasePrescricaoExecutavelResposta.parse(r.data);
+  expect(base.pendencias).toEqual([]);
+  expect(base.episodio).toBeNull();
+  const continuar = await a.request(PREPARAR, { contexto: proximo, expectedBaseHash: base.revisao,
+    idempotencyKey: "continuar-episodio-encerrado", edicao: edicao({
+      planejamento: { modo: "NOVO_CICLO", linha: 1, intencao: "PALIATIVA", numeroCiclo: 2 },
+    }) });
+  expect(continuar.status).toBe(409);
+  const nova = await a.request(PREPARAR, { contexto: proximo, expectedBaseHash: base.revisao,
+    idempotencyKey: "nova-linha-apos-encerramento", edicao: edicao({ protocoloId: "novo-protocolo-sintetico",
+      planejamento: { modo: "NOVA_LINHA", linha: 2, intencao: "PALIATIVA", numeroCiclo: 1 },
+    }) });
+  expect(nova.status).toBe(200);
+  const previa = PrescricaoExecutavelPreparada.parse(nova.data);
+  expect(previa.conteudo.contexto.episodioId).not.toBe(assinada.episodioId);
+  const gravada = await a.request(CONFIRMAR, { contexto: proximo, draftId: previa.draftId,
+    expectedRevision: previa.revision, conteudoHash: previa.conteudoHash, idempotencyKey: "assinar-nova-apos-encerramento" });
+  expect(gravada.status).toBe(200);
+  expect(dadosEvento(a.eventos().find(e => e.eventId === encerramentoId)!)).toEqual(encerrado);
+  expect(a.eventos().find(e => e.eventId === original.eventId)).toEqual(original);
+  expect(a.eventos().filter(e => e.tipo === "TreatmentAdministration")).toHaveLength(0);
+});
 
 it("prepara uma nova linha sem criar fato; assina documento, episódio e ciclo sem registrar administração", async () => {
   const a = await abrir();
