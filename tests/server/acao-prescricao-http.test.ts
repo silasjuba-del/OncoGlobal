@@ -255,3 +255,91 @@ it("recusa origem quando a base muda depois do plano", async () => {
   expect(a.eventos()).toEqual(eventosAntes);
   expect(a.eventos().filter(e => e.tipo === "DOCUMENTO")).toHaveLength(eventosAntes.filter(e => e.tipo === "DOCUMENTO").length);
 });
+
+it.each(["pedido", "contexto"])("replay nao confirma acao cujo %s persistido foi alterado", async campo => {
+  const a = await abrir(), { action, entrada } = await prepararAcao(a, "MANTER_CICLO", `persistido-${campo}`);
+  const { edicao } = await derivarEdicao(a, action);
+  const payload = structuredClone(a.draft(action.draftId)!.payload) as Record<string, any>;
+  if (campo === "pedido") payload.pedido.motivo = "Motivo persistido alterado apos a revisao";
+  else payload.contexto.encounterId = outroContexto.encounterId;
+  a.db.prepare("UPDATE draft_envelope SET payload=? WHERE draftId=?").run(JSON.stringify(payload), action.draftId);
+  const antes = a.eventos();
+  // The prescription boundary already rejects this invalid stored origin.
+  expect((await prepararRx(a, action, edicao, contexto, `origem-alterada-${campo}`)).status).toBe(409);
+  const replay = await a.request(PREPARAR_ACAO, entrada);
+  expect(replay.status).toBe(409);
+  expect(replay.data.codigo).toBe("IDEMPOTENCIA_CONFLITO");
+  expect(a.eventos()).toEqual(antes);
+  expect(a.draft(action.draftId)!.payload).toEqual(payload);
+});
+
+it("replay trata payload persistido nulo como conflito sem erro interno", async () => {
+  const a = await abrir(), { action, entrada } = await prepararAcao(a, "MANTER_CICLO", "persistido-nulo");
+  a.db.prepare("UPDATE draft_envelope SET payload=? WHERE draftId=?").run("null", action.draftId);
+  const antes = a.eventos();
+  const r = await a.request(PREPARAR_ACAO, entrada);
+  expect(r).toMatchObject({ status: 409, data: { codigo: "IDEMPOTENCIA_CONFLITO" } });
+  expect(a.eventos()).toEqual(antes);
+});
+
+it.each(["fatos", "medico", "administracao"])("confirmacao revalida %s alterado depois da previa", async mudanca => {
+  const a = await abrir(), { action } = await prepararAcao(a, "REDUZIR_DOSE", `apos-previa-${mudanca}`);
+  const { base, edicao } = await derivarEdicao(a, action);
+  const p = await prepararRx(a, action, edicao, contexto, `apos-previa-${mudanca}`);
+  expect(p.status).toBe(200);
+  if (mudanca === "fatos") a.seed(contexto, "FATO", { campo: "nota.sintetica", valor: "Novo registro apos previa" });
+  if (mudanca === "medico") a.trocarMedico();
+  if (mudanca === "administracao") a.seed(contexto, "TreatmentAdministration", id => ({
+    adminId: "administracao-sintetica-apos-previa", cicloId: base.ciclo!.cicloId,
+    prescricaoRef: { documentId: base.vigente!.documentId, documentVersion: base.vigente!.documentVersion },
+    item: 1, droga: "Fármaco sintético", quantidadeEfetivaMg: 100, status: "COMPLETA", motivo: null,
+    inicio: "2026-10-01T10:00:00-03:00", fim: "2026-10-01T11:00:00-03:00", fonte: fonteSintetica(id),
+  }));
+  const antes = a.eventos();
+  expect((await assinarRx(a, p.data, contexto, `confirmar-apos-${mudanca}`)).status).toBe(409);
+  expect(a.eventos()).toEqual(antes);
+  if (mudanca === "administracao") {
+    const novaBase = await a.request(BASE_ACAO, contexto);
+    expect(novaBase.data).toMatchObject({ base: null, pendencias: ["CICLO_COM_ADMINISTRACAO_REGISTRADA"] });
+  }
+});
+
+it("outra assinatura entre previa e confirmacao nao e sobrescrita pela acao antiga", async () => {
+  const a = await abrir(), primeira = await prepararAcao(a, "MANTER_CICLO", "concorrente-1");
+  const e1 = await derivarEdicao(a, primeira.action);
+  const p1 = await prepararRx(a, primeira.action, e1.edicao, contexto, "concorrente-1");
+  expect(p1.status).toBe(200);
+  const segunda = await prepararAcao(a, "ADIAR_CICLO", "concorrente-2");
+  const e2 = await derivarEdicao(a, segunda.action);
+  const p2 = await prepararRx(a, segunda.action, e2.edicao, contexto, "concorrente-2");
+  expect(p2.status).toBe(200);
+  expect((await assinarRx(a, p2.data, contexto, "assinar-concorrente-2")).status).toBe(200);
+  const depois = a.eventos();
+  expect((await assinarRx(a, p1.data, contexto, "assinar-concorrente-1")).status).toBe(409);
+  expect(a.eventos()).toEqual(depois);
+  const vigente = (await a.request(BASE_RX, contexto)).data.vigente;
+  expect(vigente).toMatchObject({ documentVersion: 2, dataPrevista: "2026-10-22" });
+});
+
+it("replay de assinatura concluida preserva documento mesmo depois de novos fatos", async () => {
+  const a = await abrir(), { action } = await prepararAcao(a, "MANTER_CICLO", "replay-historico");
+  const { edicao } = await derivarEdicao(a, action);
+  const p = await prepararRx(a, action, edicao, contexto, "replay-historico");
+  expect(p.status).toBe(200);
+  const primeiro = await assinarRx(a, p.data, contexto, "replay-historico");
+  expect(primeiro.status).toBe(200);
+  a.seed(contexto, "FATO", { campo: "nota.sintetica", valor: "Registro posterior a assinatura" });
+  const depois = a.eventos();
+  const replay = await assinarRx(a, p.data, contexto, "replay-historico");
+  expect(replay.status).toBe(200);
+  expect(replay.data).toEqual({ ...primeiro.data, codigo: "REPLAY" });
+  expect(a.eventos()).toEqual(depois);
+});
+
+it("replay aceita reordenacao de propriedades sem alterar conteudo", async () => {
+  const a = await abrir(), { action, entrada } = await prepararAcao(a, "MANTER_CICLO", "ordem-propriedades");
+  const payload = structuredClone(a.draft(action.draftId)!.payload) as Record<string, any>;
+  for (const campo of ["pedido", "contexto"]) payload[campo] = Object.fromEntries(Object.entries(payload[campo]).reverse());
+  a.db.prepare("UPDATE draft_envelope SET payload=? WHERE draftId=?").run(JSON.stringify(payload), action.draftId);
+  expect((await a.request(PREPARAR_ACAO, entrada)).status).toBe(200);
+});
