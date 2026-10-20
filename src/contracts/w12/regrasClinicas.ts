@@ -38,8 +38,10 @@ export interface RespostaCanal {
   bloqueiaSalvar: false; defineDose: false; defineCausalidade: false;
 }
 export interface ResultadoCanal {
-  estado: "ALERTA" | "SEM_ALERTA"; respostas: RespostaCanal[]; alertaMedico: boolean;
+  estado: "ALERTA" | "SEM_ALERTA" | "PENDENTE"; respostas: RespostaCanal[]; alertaMedico: boolean;
   bloqueiaSalvar: false; rulesetVersao: string;
+  cobertura: "CONFERIDA" | "PARCIAL" | "INDISPONIVEL";
+  pendencias: string[];
 }
 export interface LeituraValorAtual { valor: number; data: string; hora: string | null }
 export interface ResultadoValorAtual {
