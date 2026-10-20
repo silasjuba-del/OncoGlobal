@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState, type FormEvent } from "react";
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState, type FormEvent } from "react";
 import { z } from "zod";
 import { TumorLot } from '../contracts/clinico.js';
 import { criarPortaHttp, type OpcoesHttp } from "./api/http.js";
@@ -86,6 +86,27 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp }: {
   const contextoAtual=useRef(contexto); contextoAtual.current=contexto;
   const geracaoTela=geracao.current;
   const pacienteAtivo = agenda.find((item) => item.patientId === contexto?.patientId && item.encounterId === contexto?.encounterId);
+  const ancorasConsulta = useRef<HTMLElement | null>(null);
+  useLayoutEffect(() => {
+    const nav = ancorasConsulta.current;
+    if (!nav) return;
+    const enquadrarFoco = () => {
+      const alvo = document.activeElement;
+      if (!(alvo instanceof HTMLElement) || !nav.contains(alvo)) return;
+      const faixa = nav.getBoundingClientRect(), link = alvo.getBoundingClientRect(), estilo = getComputedStyle(nav);
+      const esquerda = faixa.left + (parseFloat(estilo.scrollPaddingInlineStart) || 0);
+      const direita = faixa.right - (parseFloat(estilo.scrollPaddingInlineEnd) || 0);
+      // Keep the current focus visible after resize; never move document scroll or focus.
+      if (link.right > direita) nav.scrollLeft += Math.ceil(link.right - direita);
+      else if (link.left < esquerda) nav.scrollLeft -= Math.ceil(esquerda - link.left);
+    };
+    nav.addEventListener("focusin", enquadrarFoco);
+    window.addEventListener("resize", enquadrarFoco);
+    const observer = typeof ResizeObserver === "function" ? new ResizeObserver(enquadrarFoco) : null;
+    observer?.observe(nav);
+    return () => { observer?.disconnect(); nav.removeEventListener("focusin", enquadrarFoco);
+      window.removeEventListener("resize", enquadrarFoco); };
+  }, [tela, contexto?.patientId, contexto?.encounterId, contexto?.tumorLotId]);
 
   const limpar = useCallback(() => {
     removerProtecaoDocumento.current?.();
@@ -302,7 +323,7 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp }: {
             <span>{pacienteAtivo?.horario ? `Agenda ${pacienteAtivo.horario}` : "Consulta selecionada"}</span></div>
           <p className="consulta-identificadores">Paciente <b>{contexto.patientId}</b> · Encontro <b>{contexto.encounterId}</b>
             {contexto.tumorLotId ? <> · Lote <b>{contexto.tumorLotId}</b></> : " · Lote tumoral não vinculado"}</p>
-          <nav aria-label="Navegar nesta consulta" className="consulta-ancoras">
+          <nav ref={ancorasConsulta} aria-label="Navegar nesta consulta" className="consulta-ancoras">
             <a href="#consulta-documentos">Documentos</a><a href="#consulta-revisao">Revisão da fonte</a>
             <a href="#consulta-fase2">Ficha e packs</a>
             <a href="#consulta-medicamentos">Medicamentos</a><a href="#consulta-sintese">Síntese proposta</a>

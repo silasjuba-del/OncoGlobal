@@ -171,6 +171,7 @@ describe("prescrição a partir de ação revisada", () => {
     expect((screen.getByLabelText("Data prevista") as HTMLInputElement).value).toBe("2026-10-27");
     expect(screen.getByRole("region", { name: /Origem da proposta de ação/ })).toBeTruthy();
     expect(screen.queryByRole("region", { name: /Origem da prescrição/ })).toBeNull();
+    expect(screen.queryByRole("button", { name: /Desvincular ficha e editar manualmente/ })).toBeNull();
     fireEvent.click(screen.getByRole("button", { name: /Desvincular.*ação/ }));
     expect(screen.queryByRole("region", { name: /Origem da proposta de ação/ })).toBeNull();
     expect((screen.getByLabelText("Data prevista") as HTMLInputElement).value).toBe("2026-10-27");

@@ -1,6 +1,6 @@
 import type { DatabaseSync } from "node:sqlite";
 import { Ciclo, TreatmentEpisode } from "../contracts/clinico.js";
-import { ContextoAcaoComposta, type BaseAcaoComposta, type ResultadoAcaoComposta } from "../contracts/api/acoesCompostas.js";
+import { ContextoAcaoComposta, PedidoAcaoComposta, type BaseAcaoComposta, type ResultadoAcaoComposta } from "../contracts/api/acoesCompostas.js";
 import { AcaoCompostaPreparada, BaseAcaoCompostaResposta, PrepararAcaoCompostaPedido } from "../contracts/api/execucaoAcaoComposta.js";
 import { lerDraft, listarEventos, salvarDraft, transacao } from "../kernel/comandos/portas.js";
 import { dadosDoEvento, eventosVigentes } from "../kernel/projections/snapshot.js";
@@ -85,10 +85,18 @@ export function operarAcoesCompostas(deps: Deps, token: string, operacao: "base"
   return transacao(deps.db, () => {
     const anterior = lerDraft(deps.db, draftId);
     if (anterior) {
-      const payload = anterior.payload as { kind?: unknown; requestHash?: unknown; resposta?: unknown; atorId?: unknown };
+      if (!anterior.payload || typeof anterior.payload !== "object" || Array.isArray(anterior.payload))
+        return negar("IDEMPOTENCIA_CONFLITO");
+      const payload = anterior.payload as { kind?: unknown; requestHash?: unknown; resposta?: unknown; atorId?: unknown;
+        contexto?: unknown; pedido?: unknown };
       const resposta = AcaoCompostaPreparada.safeParse(payload.resposta);
+      const contextoSalvo = ContextoAcaoComposta.safeParse(payload.contexto);
+      const pedidoSalvo = PedidoAcaoComposta.safeParse(payload.pedido);
       if (anterior.patientId !== entrada.contexto.patientId || payload.kind !== "ACAO_COMPOSTA_RASCUNHO"
         || payload.requestHash !== requestHash || payload.atorId !== sessao.medicoId || !resposta.success
+        || !contextoSalvo.success || !pedidoSalvo.success
+        || hashConteudoExibido(contextoSalvo.data) !== hashConteudoExibido(entrada.contexto)
+        || hashConteudoExibido(pedidoSalvo.data) !== hashConteudoExibido(entrada.pedido)
         || resposta.data.draftId !== draftId || resposta.data.revision !== anterior.revision
         || resposta.data.conteudoHash !== conteudoHash
         || hashConteudoExibido(resposta.data.resultado) !== hashConteudoExibido(resultado)
