@@ -14,6 +14,19 @@ function segment(text: string, sourceType: FactSourceType) {
 
 describe("extrator: hipótese lexical não vira fato explícito (ARQ-03, recorte)", () => {
   it.each([
+    "Paciente não sente dor.", "Paciente não apresentou dor.", "Paciente não apresentava náusea.",
+    "Paciente nao sente dor.", "Ausência de dor.", "Dor ausente.",
+    "Paciente sem piora da dor.",
+  ])("negador com escopo não resolvido mantém candidato para revisão: %s", (frase) => {
+    const facts = extratorDeterministico.extrair(segment(frase, "medical_note"));
+    expect(facts.find(f => f.domain === "symptom")).toMatchObject({
+      evidence: "UNCERTAIN", requiresConfirmation: true,
+      qualificadores: { polaridade: "NAO_DETERMINADA" }, rawEvidence: frase,
+    });
+    expect(Object.values(reconciliarCampos(facts)).every(c => c.resolvedFactId === null)).toBe(true);
+  });
+
+  it.each([
     "Paciente não apresenta dor.", "Paciente não refere náusea.",
     "Paciente não relata formigamento.", "Paciente não tem dor.",
     "Paciente sem dor.", "Paciente sem náusea.",

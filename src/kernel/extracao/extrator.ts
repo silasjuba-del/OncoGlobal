@@ -148,7 +148,12 @@ export const extratorDeterministico: Extrator = {
         : dataUnicaNaLinha && dataUnicaNaLinha !== refData ? dataUnicaNaLinha : null;
       // Negação vale apenas para esta cláusula; o restante da linha continua analisável.
       const negated = NEGACAO_CLAUSULA.test(raw);
-      const wordingUncertain = /\b(?:não se pode excluir|sugestiv[oa]s?|compat[ií]ve(?:l|is)(?:\s+com)?|prov[aá]vel(?:mente)?|poss[ií]ve(?:l|is)(?:mente)?|suspeit[oa]s?|hip[oó]tese)\b/iu.test(raw);
+      // Um negador fora dos padrões conhecidos não permite afirmar o achado.
+      // Conserva-se o candidato/trecho para revisão, sem adivinhar seu escopo.
+      const negacaoNaoResolvida = !negated
+        && /(?:^|[^\p{L}\p{N}_])(?:n[ãa]o|sem|aus[eê]ncia|ausente)(?=$|[^\p{L}\p{N}_])/iu.test(raw);
+      const wordingUncertain = negacaoNaoResolvida
+        || /\b(?:não se pode excluir|sugestiv[oa]s?|compat[ií]ve(?:l|is)(?:\s+com)?|prov[aá]vel(?:mente)?|poss[ií]ve(?:l|is)(?:mente)?|suspeit[oa]s?|hip[oó]tese)\b/iu.test(raw);
       const sujeitoTerceiro = /(?:^|[^\p{L}\p{N}_])(?:mãe|pai|irmão|irmã|filho|filha|cônjuge|espos[oa]|avô|avó|familiar|acompanhante)(?=$|[^\p{L}\p{N}_])/iu.test(raw);
       const sujeitoPaciente = /\b(?:paciente|eu|meu|minha|meus|minhas)\b/iu.test(raw);
       const tempoFuturo = /\b(?:futuro|futura|futuramente|terá|apresentará|receberá|vai\s+(?:ter|apresentar|receber|fazer)|programad[oa]\s+para)(?=$|[^\p{L}\p{N}_])/iu.test(raw);
