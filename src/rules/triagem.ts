@@ -18,6 +18,7 @@ export function validadeHemograma(
     return { estado: "PENDENTE", dias: null, motivo: "hemograma ausente" };
   }
   const dias = diferencaDiasCivis(coleta, hoje);
+  if (dias === null) return {estado:"PENDENTE",dias:null,motivo:"data civil invalida"};
   if (dias < 0) return { estado: "PENDENTE", dias, motivo: "coleta futura" };
   if (dias > rs.hemogramaValidadeDias) return { estado: "PENDENTE", dias, motivo: "hemograma vencido" };
   return { estado: "VERDE", dias, motivo: "hemograma válido" };
