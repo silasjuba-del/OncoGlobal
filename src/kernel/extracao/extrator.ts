@@ -113,7 +113,9 @@ export interface Extrator {
   extrair(segmento: EncounterSegment): readonly ClinicalFact[];
 }
 
-/** Dublê determinístico para textos sintéticos, não LLM, não emite ordens clínicas. */
+/** Extrator determinístico local (não é LLM): usado pelo pipeline real de
+ * upload/importação. Só propõe candidatos com trecho literal; nunca confirma
+ * fato, emite ordem clínica ou substitui revisão médica. */
 export const extratorDeterministico: Extrator = {
   extrair(segmento) {
     const result: ClinicalFact[] = [];
@@ -146,7 +148,7 @@ export const extratorDeterministico: Extrator = {
         : dataUnicaNaLinha && dataUnicaNaLinha !== refData ? dataUnicaNaLinha : null;
       // Negação vale apenas para esta cláusula; o restante da linha continua analisável.
       const negated = NEGACAO_CLAUSULA.test(raw);
-      const wordingUncertain = /\b(?:não se pode excluir|sugestiv[oa]s?|compat[ií]ve(?:l|is)(?:\s+com)?|prov[aá]vel(?:mente)?)\b/iu.test(raw);
+      const wordingUncertain = /\b(?:não se pode excluir|sugestiv[oa]s?|compat[ií]ve(?:l|is)(?:\s+com)?|prov[aá]vel(?:mente)?|poss[ií]ve(?:l|is)(?:mente)?|suspeit[oa]s?|hip[oó]tese)\b/iu.test(raw);
       const add = (domain: FactDomain, value: unknown, evidence: FactEvidence = "EXPLICIT",
         confirmation = false, regra?: string): void => {
         const evidenceFinal: FactEvidence = evidence === "EXPLICIT" && wordingUncertain ? "UNCERTAIN" : evidence;
