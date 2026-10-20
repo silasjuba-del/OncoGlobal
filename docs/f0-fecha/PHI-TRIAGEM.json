@@ -7257,6 +7257,22 @@
           "contextTag": "json_sha256_field_64hex"
         }
       ]
+    },
+    {
+      "path": "tests/server/leitura-contatos-global.test.ts",
+      "sha256": "3713f46dd34932602cdb9446751506dfc77e8f84394eca864b5205becfd9ca62",
+      "hashMode": "utf8-lf",
+      "items": [
+        {
+          "type": "email",
+          "line": 19,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/server/leitura-contatos-global.test.ts:1,19; docs/reviews/REVISAO-PHI-REFACTOR-20261020.md",
+          "reason": "Endereco criado pelo Codex 2 exclusivamente na fixture de transferencia de contato; nao importado de paciente ou fonte externa. A prova usa SQLite/loopback, sem transporte para esse endereco. Disposicao apenas para esta ocorrencia e este hash.",
+          "contextTag": null
+        }
+      ]
     }
   ],
   "protectedPaths": []
