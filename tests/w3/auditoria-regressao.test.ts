@@ -9,6 +9,7 @@ import { Readable } from "node:stream";
 import type { IncomingMessage, ServerResponse } from "node:http";
 import { abrirLedger } from "../../src/kernel/ledger/db.js";
 import { salvarDraft } from "../../src/kernel/ledger/drafts.js";
+import { gravarOperacao, hashPayload, listarEventos } from "../../src/kernel/ledger/ledger.js";
 import { criarGerenciadorSessao, hashConteudoExibido } from "../../src/server/sessao.js";
 import { rotear } from "../../src/server/rotas.js";
 
@@ -23,7 +24,9 @@ function snapshot(eventos: Parameters<typeof projetarSnapshot>[0], propostas: Pa
 function administracao(id: string, mg: number) {
   const { patientId: _p, episodioId: _e, unidadeEfetiva: _u, ...data } = administracaoCompleta("mesma-admin", mg);
   TreatmentAdministration.parse(data);
-  return { ...base, eventId: id, tipo: "TreatmentAdministration", payload: { reviewDecisionId: "r", data } };
+  return { ...base, eventId: id, operationId: `op-admin-${id}`, eventIndex: 0,
+    criadoPor: { tipo: "SESSAO" as const, id: "medico-sintetico" },
+    tipo: "TreatmentAdministration", payload: { reviewDecisionId: "r", data } };
 }
 
 describe("Achados adversariais fora da propriedade W3 - expectativas de seguranca", () => {
@@ -59,7 +62,28 @@ describe("Achados adversariais fora da propriedade W3 - expectativas de seguranc
   });
   it("A05 projecao cumulativa deve excluir administracao substituida", () => {
     const anterior = administracao("e1", 50), correcao = { ...administracao("e2", 30), supersedesEventId: "e1" };
-    expect(cumulativos([anterior, correcao])[0]?.quantidadeEfetivaMg).toBe(30);
+    const db = abrirLedger(":memory:");
+    try {
+      for (const evento of [anterior, correcao]) {
+        expect(gravarOperacao(db, { operationId: evento.operationId, payloadHash: hashPayload([evento]),
+          resultRef: evento.eventId, criadoEm: evento.criadoEm }, [evento]).estado).toBe("GRAVADA");
+      }
+      const eventos = listarEventos(db, anterior.patientId);
+      expect(eventos).toHaveLength(2);
+      expect(cumulativos(eventos)[0]?.quantidadeEfetivaMg).toBe(30);
+      expect(cumulativos(eventos)[0]?.conflitoAdminIds).toEqual([]);
+    } finally { db.close(); }
+  });
+  it("A05 dois eventos nao ocupam o mesmo indice de uma operacao", () => {
+    const anterior = administracao("e1", 50);
+    const correcao = { ...administracao("e2", 30), operationId: anterior.operationId, supersedesEventId: anterior.eventId };
+    const eventos = [anterior, correcao], db = abrirLedger(":memory:");
+    try {
+      expect(() => gravarOperacao(db, { operationId: anterior.operationId, payloadHash: hashPayload(eventos),
+        resultRef: anterior.eventId, criadoEm: anterior.criadoEm }, eventos)).toThrow("OPERATION_EVENTS_INVALID");
+      expect(listarEventos(db, anterior.patientId)).toEqual([]);
+      expect(cumulativos(eventos)[0]?.conflitoAdminIds).toEqual(["mesma-admin"]);
+    } finally { db.close(); }
   });
   it("A06 snapshot nao deve chamar RAW de CONFIRMED", () => {
     const r = snapshot([{ ...fato("e1", 3), revisao: "RAW" }]);
