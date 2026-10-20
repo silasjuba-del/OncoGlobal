@@ -161,6 +161,8 @@ function preparar(deps: Deps, token: string, raw: unknown, contexto: Contexto, a
     && e.tumorLotId === contexto.tumorLotId
     && (dadosDoEvento(e)?.data as Record<string, unknown> | undefined)?.documentId === refAnterior.documentId) : null;
   const conteudo = ConteudoPrescricaoExecutavel.parse({ schema: "PrescricaoExecutavel@1",
+    pacienteNome: base.pacienteNome, linha: modo === "NOVA_LINHA" ? edicao.planejamento.linha : base.episodio!.linha,
+    numeroCiclo: modo === "CICLO_ATUAL" ? base.ciclo!.numero : edicao.planejamento.numeroCiclo,
     contexto: { ...contexto, episodioId, cicloId }, documentId: refAnterior?.documentId ?? `prescricao-${chave}`,
     documentVersion: (refAnterior?.documentVersion ?? 0) + 1, protocoloId: edicao.protocoloId,
     dataPrevista: edicao.dataPrevista, motivo: edicao.motivo, itens: edicao.itens, origemProposta: edicao.origemProposta });

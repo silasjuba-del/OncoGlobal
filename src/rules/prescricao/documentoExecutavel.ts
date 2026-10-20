@@ -24,8 +24,8 @@ function unidadePendente(unidade: string): boolean {
 }
 
 function dadosPreparo(item: ItemPrescricaoExecutavel, pendencias: string[], avisos: string[]): string[] {
-  const { item: prescrito, itemId } = item;
-  const prefixo = `Item ${prescrito.sequence} (${itemId})`;
+  const { item: prescrito } = item;
+  const prefixo = `Item ${prescrito.sequence} · ${prescrito.drug}`;
   if (prescrito.prescribedDose === null || !Number.isFinite(prescrito.prescribedDose) || prescrito.prescribedDose <= 0)
     pendencias.push(`${prefixo}: dose final prescrita ausente ou não positiva.`);
   if (!prescrito.unit.trim()) pendencias.push(`${prefixo}: unidade final ausente.`);
@@ -37,10 +37,10 @@ function dadosPreparo(item: ItemPrescricaoExecutavel, pendencias: string[], avis
     if (prescrito.calculatedDose === null || prescrito.prescribedDose === null) {
       pendencias.push(`${prefixo}: percentual declarado sem dose calculada de referência e dose final.`);
     } else {
-      const esperada = prescrito.calculatedDose * (100 + prescrito.adjustmentPercent) / 100;
+      const esperada = prescrito.calculatedDose * ((100 + prescrito.adjustmentPercent) / 100);
       // Tolerância apenas do IEEE-754; não institui arredondamento de dose.
       const tolerancia = Number.EPSILON * Math.max(Math.abs(esperada), Math.abs(prescrito.prescribedDose)) * 8;
-      if (Math.abs(prescrito.prescribedDose - esperada) > tolerancia)
+      if (!Number.isFinite(esperada) || Math.abs(prescrito.prescribedDose - esperada) > tolerancia)
         pendencias.push(`${prefixo}: dose final incompatível com o percentual sobre a dose calculada de referência.`);
     }
   }
@@ -73,7 +73,6 @@ function dadosPreparo(item: ItemPrescricaoExecutavel, pendencias: string[], avis
   const dias = prescrito.days.length > 0 ? prescrito.days.join(", ") : "não informados";
   const lines = [
     `Item ${prescrito.sequence} — ${prescrito.drug} (${prescrito.classe})`,
-    `Identificador do item: ${itemId}`,
     `Dose final: ${dose}`,
     `Via: ${prescrito.route.trim() || "não informada"}`,
     `Diluente: ${diluente}`,
@@ -113,19 +112,13 @@ export function avaliarDocumentoExecutavel(entrada: unknown): AvaliacaoDocumento
   const pendencias: string[] = [];
   const avisos: string[] = [];
   const itens = [...conteudo.itens].sort((a, b) => a.item.sequence - b.item.sequence);
-  const origem = conteudo.origemProposta
-    ? `${conteudo.origemProposta.draftId}, revisão ${conteudo.origemProposta.revision}, hash SHA-256 ${conteudo.origemProposta.hash}`
-    : "não vinculada a proposta";
   const linhas = [
     "PRESCRIÇÃO ONCOLÓGICA — QT",
-    `Documento: ${conteudo.documentId} · versão ${conteudo.documentVersion}`,
-    `Paciente/contexto (IDs): ${conteudo.contexto.patientId} · atendimento ${conteudo.contexto.encounterId}`,
-    `Episódio: ${conteudo.contexto.episodioId} · ciclo: ${conteudo.contexto.cicloId}`,
-    `Lote tumoral: ${conteudo.contexto.tumorLotId ?? "não informado"}`,
+    `Paciente: ${conteudo.pacienteNome ?? conteudo.contexto.patientId}`,
+    `Versão ${conteudo.documentVersion}${conteudo.linha ? ` · Linha ${conteudo.linha}` : ""}${conteudo.numeroCiclo ? ` · Ciclo ${conteudo.numeroCiclo}` : ""}`,
     `Protocolo: ${conteudo.protocoloId}`,
     `Data prevista: ${conteudo.dataPrevista}`,
     `Motivo informado: ${conteudo.motivo}`,
-    `Origem da proposta: ${origem}`,
     "",
     ...itens.flatMap((item, index) => [
       ...(index > 0 ? [""] : []),

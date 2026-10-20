@@ -64,8 +64,17 @@ describe("documento executável de prescrição", () => {
     expect(result.texto).toContain("60 min");
     expect(result.texto).toContain("d1, d8");
     expect(result.texto).toContain("Ajuste para revisão sintética");
-    expect(result.texto).toContain("proposta-sintetica");
+    expect(result.conteudo?.origemProposta?.draftId).toBe("proposta-sintetica");
+    expect(result.texto).not.toContain("episodio-sintetico");
     expect(input).toEqual(before);
+  });
+
+  it("usa identidade confirmada e números clínicos na folha, mantendo IDs na estrutura auditável", () => {
+    const r = avaliarDocumentoExecutavel(conteudo({ pacienteNome: "Paciente Exemplo Sintético", linha: 2, numeroCiclo: 3 }));
+    expect(r.texto).toContain("Paciente: Paciente Exemplo Sintético");
+    expect(r.texto).toContain("Versão 1 · Linha 2 · Ciclo 3");
+    expect(r.texto).not.toContain("prescricao-sintetica");
+    expect(r.conteudo?.documentId).toBe("prescricao-sintetica");
   });
 
   it("aceita percentual explícito de 25 sem arredondar dose nem alterar campos não relacionados", () => {
@@ -93,6 +102,14 @@ describe("documento executável de prescrição", () => {
       expect(r.ok).toBe(false);
       expect(r.pendencias.join(" ")).toMatch(/percentual/i);
     }
+  });
+
+  it("não aceita uma incompatibilidade de dose por overflow na aritmética do percentual", () => {
+    const r = avaliarDocumentoExecutavel(conteudo({ itens: [item({
+      calculatedDose: 1e308, prescribedDose: 1, adjustmentPercent: -25, adjustmentReason: "Caso adversarial numérico",
+    })] }));
+    expect(r.ok).toBe(false);
+    expect(r.pendencias.join(" ")).toMatch(/incompatível/);
   });
 
   it("preserva refinements legados de motivo de ajuste e override manual QT", () => {

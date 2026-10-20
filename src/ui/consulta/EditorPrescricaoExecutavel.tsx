@@ -496,10 +496,15 @@ export function EditorPrescricaoExecutavel({ base, ocupado = false, aoPreparar, 
       <button type="button" disabled={bloqueado || !base} onClick={preparar}>Preparar prévia exata</button>
     </div>
     {atual ? <section className="prescricao-executavel__preview" aria-label="Prévia da prescrição">
-      <h3>Prévia exata do servidor</h3>
+      <h3>Confira a prescrição</h3>
       <p>Confira o texto e os efeitos datados antes de assinar. A prévia não comprova preparo, dispensação ou administração.</p>
       <p>Encaminhamento à fila interna da farmácia: {edicao.encaminharFarmacia ? "selecionado" : "não selecionado"}.</p>
       <pre>{atual.texto}</pre>
+      <details>
+        <summary>Rastreabilidade da prescrição</summary>
+        <pre>{JSON.stringify({ documento: atual.conteudo.documentId, versao: atual.conteudo.documentVersion,
+          contexto: atual.conteudo.contexto, origemProposta: atual.conteudo.origemProposta, hash: atual.conteudoHash }, null, 2)}</pre>
+      </details>
       <div className="prescricao-executavel__pair">
         <section aria-label="Avisos da prescrição"><h4>Avisos</h4>{atual.avisos.length ? <ul>{atual.avisos.map((warning, index) => <li key={`${index}-${warning}`}>{warning}</li>)}</ul> : <p>Nenhum aviso retornado.</p>}</section>
         <section aria-label="Efeitos datados"><h4>Efeitos datados</h4>{atual.efeitos.length ? <ul>{atual.efeitos.map((effect, index) => <li key={`${index}-${effect}`}>{effect}</li>)}</ul> : <p>Nenhum efeito datado retornado.</p>}</section>
