@@ -38,6 +38,7 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, versaoClinica
   aoAtualizarClinico?: () => void;
 }) {
   const [cientes, setCientes] = useState<readonly string[]>([]);
+  useEffect(()=>setCientes([]),[contexto.patientId,contexto.encounterId,contexto.tumorLotId]);
   const [consultaCarregada, setConsultaCarregada] = useState<{
     visao: ConsultaIntegrada | null; erro: string; porta: PortaConsulta;
     contexto: PedidoBundle; versao: number; versaoClinica: number;

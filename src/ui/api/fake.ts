@@ -486,7 +486,7 @@ function itemApac(
 }
 
 /** Porta em memória. Seis pacientes sintéticos; nenhum dado real. */
-export function criarPortaFalsa(): PortaConsulta {
+export function criarPortaFalsa(opcoes: { falhaAcao?: "FALHA" | "OUTCOME_UNKNOWN" } = {}): PortaConsulta {
   const respostasCanal=new Map<string,RascunhoRespostaCanal>();
   const fichas = montarFichas();
   const preparacoes = new Map<string,{payload:string;resultado:FlashPreparada}>();
@@ -737,6 +737,8 @@ export function criarPortaFalsa(): PortaConsulta {
     async acao(intent) {
       const parsed = ActionIntent.safeParse(intent);
       if (!parsed.success || "medicoId" in intent) throw new ErroPorta("PAYLOAD_INVALIDO");
+      if(opcoes.falhaAcao==="FALHA")throw new ErroPorta("FALHA_SIMULADA");
+      if(opcoes.falhaAcao==="OUTCOME_UNKNOWN")return {codigo:"OUTCOME_UNKNOWN",decisao:"OUTCOME_UNKNOWN"};
       const chave=JSON.stringify([intent.escopo.patientId,intent.escopo.encounterId,intent.idempotencyKey]),payload=JSON.stringify(intent);
       const anterior=efeitos.get(chave);if(anterior){if(anterior!==payload)throw new ErroPorta("IDEMPOTENCY_CONFLICT");return {codigo:parsed.data.verbo,decisao:"REPLAY"};}
       if(intent.verbo==="IMPRIMIR"){
@@ -794,7 +796,8 @@ export function criarPortaFalsa(): PortaConsulta {
     },
 
     // [SERVIDOR_PENDENTE]
-    async salvarTriagem(triagem: Triagem) {
+    async salvarTriagem(triagem: Triagem, expectedRevision = null) {
+      if((revisoesTriagem.get(triagem.patientId)??null)!==expectedRevision)throw new ErroPorta("REVISAO_RASCUNHO_CONFLITANTE");
       revisoesTriagem.set(triagem.patientId, (revisoesTriagem.get(triagem.patientId) ?? -1) + 1);
       const resultado = avaliarTriagem(triagem, CONTEXTO, RULESET);
       const portao = avaliarCorteSalao(triagem, { pad: null, crCentesimos: null }, RULESET);
