@@ -220,6 +220,7 @@ export function PainelEstudos({
     generation.current += 1;
     actionGeneration.current += 1;
     setAcaoEmCurso("");
+    setArquivoCarregando(false);
     setResultados({});
     setErro(""); setMensagem("");
     reportarSalvamento(false);
@@ -394,7 +395,7 @@ export function PainelEstudos({
       setRascunhosRevisao(previous => { const copy = { ...previous }; delete copy[estudoSelecionado.draftId]; return copy; });
       setRevisaoSelecionada(null); setResultados(previous => { const copy = { ...previous }; delete copy[estudoSelecionado.draftId]; return copy; });
       setMensagem(decision === "CONFIRMAR" ? "Revisão humana registrada. Compatibilidade ainda não determina elegibilidade." : "Estudo rejeitado na revisão humana.");
-      reportarPendente(dirtyImport);
+      reportarPendente();
     } catch (cause) {
       if (mounted.current && token === generation.current)
         setErro(cause instanceof Error ? cause.message : "A revisão não foi concluída. Campos permanecem preservados.");
@@ -479,6 +480,10 @@ export function PainelEstudos({
         const result = resultados[estudo.draftId];
         const resultCurrent = result && contexto && result.contexto.patientId === contexto.patientId
           && result.contexto.encounterId === contexto.encounterId && result.contexto.tumorLotId === contexto.tumorLotId
+          && estudo.review?.decision === "CONFIRMAR"
+          && result.dados.estudo.revision === estudo.revision
+          && result.dados.estudo.candidateHash === estudo.candidateHash
+          && result.dados.estudo.review?.reviewHash === estudo.review.reviewHash
           ? result.dados : null;
         return <article className="estudos-panel__study" aria-label={`${estudo.review ? "Estudo revisado" : "Estudo pendente"}: ${title}`}
           key={estudo.draftId}>
