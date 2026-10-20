@@ -33,13 +33,65 @@ function schemaMetadata(database) {
     schemaSha256: hash(Buffer.from(JSON.stringify(rows))),
   };
 }
+function parsePayload(value) {
+  if (value && typeof value === "object" && !Array.isArray(value)) return value;
+  if (typeof value !== "string") return null;
+  try { const parsed = JSON.parse(value); return parsed && typeof parsed === "object" && !Array.isArray(parsed) ? parsed : null; }
+  catch { return null; }
+}
+/* Referências internas conhecidas: o conteúdo já vive no snapshot SQLite do
+ * ledger (payload do draft), portanto não viram entrada de arquivo. Namespace
+ * com dois-pontos não basta: kind/campo do payload precisa corresponder. */
+const NAMESPACE_INTERNO = {
+  "upload-local": (p) => !!p && ["EXTRACAO_RASCUNHO", "D66_TRANSCRICAO_RASCUNHO"].includes(p.kind),
+  "importacao-local": (p) => p?.kind === "EXTRACAO_RASCUNHO",
+  "retrato-local": (p) => p?.kind === "SINTESE_RASCUNHO",
+  "registro-medico": (p, suffix, draftId) => p?.kind === "ESTADO_DOENCA_RASCUNHO" && suffix === draftId,
+  "manual": (p) => p?.campo === "medicamentos",
+  "triagem-local": (p) => p?.kind === "SALAO_TRIAGEM_RASCUNHO",
+  "canal-link": (p) => p?.kind === "VinculoContato",
+  "review-link": (p) => p?.kind === "PATIENT_LINK_REVIEW",
+  "revisao-local": (p, suffix, draftId) => !!p && suffix === draftId,
+};
+const LITERAL_INTERNO = {
+  "consulta-flash-local": (p) => !!p && ((typeof p.kind === "string" && p.kind.startsWith("FLASH_")) || typeof p.documentId === "string"),
+  "referencia-local": (p) => !!p,
+  "vinculo-operacional-local": (p) => typeof p?.contatoId === "string",
+  "proposta-prescricao-local": (p) => p?.kind === "PRESCRICAO_RASCUNHO",
+  "proposta-local": (p) => p?.schema === "PrescricaoProposta@1",
+};
 function refsLedger(db, files) {
   let rows = [];
-  try { rows = db.prepare("SELECT rawRef FROM draft_envelope").all(); }
-  catch { /* a synthetic/minimal ledger may not define drafts */ }
-  const rawRefs = rows.map((row) => row.rawRef);
-  if (rawRefs.some((ref) => typeof ref !== "string" || !ref)) throw new Error("REFERENCIA_FORA_DA_RAIZ");
-  return [...new Set([...rawRefs, ...files])].sort();
+  let comMetadados = true;
+  try { rows = db.prepare("SELECT draftId, rawRef, payload FROM draft_envelope").all(); }
+  catch {
+    comMetadados = false;
+    try { rows = db.prepare("SELECT rawRef FROM draft_envelope").all(); }
+    catch { /* a synthetic/minimal ledger may not define drafts */ }
+  }
+  const draftIds = new Set(rows.map((row) => row.draftId).filter((id) => typeof id === "string"));
+  const fisicas = new Set(files);
+  for (const row of rows) {
+    const ref = row.rawRef;
+    if (typeof ref !== "string" || !ref) throw new Error("REFERENCIA_FORA_DA_RAIZ");
+    if (!comMetadados) { fisicas.add(ref); continue; }
+    if (ref === row.draftId || draftIds.has(ref)) continue; // auto-referência / referência entre drafts
+    if (Object.hasOwn(LITERAL_INTERNO, ref)) {
+      if (!LITERAL_INTERNO[ref](parsePayload(row.payload))) throw new Error("REFERENCIA_AMBIGUA");
+      continue;
+    }
+    const colon = ref.indexOf(":");
+    if (colon > 0) {
+      const namespace = ref.slice(0, colon), suffix = ref.slice(colon + 1);
+      if (!Object.hasOwn(NAMESPACE_INTERNO, namespace)) throw new Error("REFERENCIA_DESCONHECIDA");
+      if (!suffix || !NAMESPACE_INTERNO[namespace](parsePayload(row.payload), suffix, row.draftId))
+        throw new Error("REFERENCIA_AMBIGUA");
+      continue;
+    }
+    if (colon === 0) throw new Error("REFERENCIA_DESCONHECIDA");
+    fisicas.add(ref);
+  }
+  return [...fisicas].sort();
 }
 function validateStores(stores) {
   if (!stores || typeof stores !== "object" || Array.isArray(stores)
@@ -83,7 +135,9 @@ export async function criarBackup({ dbPath, stores, filesRoot, files = [], desti
     }
     const entries = ledgerRefs.map((ref) => {
       const source = inside(filesRoot, ref);
-      if (realpathSync(source) !== source || !statSync(source).isFile()) throw new Error("REFERENCIA_INVALIDA");
+      let real;
+      try { real = realpathSync(source); } catch { throw new Error("REFERENCIA_AUSENTE"); }
+      if (real !== source || !statSync(source).isFile()) throw new Error("REFERENCIA_INVALIDA");
       const data = readFileSync(source);
       return { ref, sha256: hash(data), base64: data.toString("base64") };
     });
