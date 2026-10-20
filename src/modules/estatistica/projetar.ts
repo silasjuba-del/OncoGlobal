@@ -4,7 +4,8 @@ import { TreatmentAdministration, type TreatmentAdministration as TreatmentAdmin
 import { DataCivil, Instante } from "../../contracts/base.js";
 import { dataCivilDoServico } from "../../rules/tempoServico.js";
 
-export const ESTATISTICA_VERSAO = "W10-REAUDITORIA-03" as const;
+import { ESTATISTICA_VERSAO } from "../../contracts/api/estatisticaVersao.js";
+export { ESTATISTICA_VERSAO };
 
 export type CategoriaEventoEstatistico = "FATO" | "DOCUMENTO" | "ADMINISTRACAO" | "OUTRO";
 export type StatusAdministracaoEstatistica = "COMPLETA" | "PARCIAL" | "OMITIDA" | "INTERROMPIDA";

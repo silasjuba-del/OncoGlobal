@@ -73,7 +73,7 @@ export function CabecalhoJEV({ visao, ocupado = false }: { visao: ConsultaIntegr
   const planejado = ciclo ? `C${ciclo.numero} · previsto ${ciclo.previstoEm}` : "PENDENTE";
   const prescrito = ciclo?.prescricaoRef
     ? `${ciclo.prescricaoRef.documentId} · v${ciclo.prescricaoRef.documentVersion}${ciclo.itens.length
-      ? ` · ${ciclo.itens.map(item => `${item.droga}: ${item.doseMg} mg${item.reducaoPct > 0 ? ` · redução ${item.reducaoPct}%` : ""}`).join("; ")}` : ""}`
+      ? ` · ${ciclo.itens.map(item => `${item.droga}: ${item.doseMg} mg${item.reducaoPct !== null && item.reducaoPct > 0 ? ` · redução ${item.reducaoPct}%` : ""}`).join("; ")}` : ""}`
     : "PENDENTE";
   const administrado = visao.flash?.ultimoAdministrado?.trim() || "PENDENTE";
 

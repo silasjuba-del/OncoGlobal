@@ -1,5 +1,6 @@
 import { nomeMedicamento } from './propostasDoseReceita.js';
 import { operarAcoesCompostas } from "./acoesCompostas.js";
+import { operarPrescricaoExecutavel } from "./prescricaoExecutavel.js";
 import { lerTimelineMulticamadas } from "./timelineMulticamadas.js";
 import { ContextoAcaoComposta } from "../contracts/api/acoesCompostas.js";
 import { operarContingenciaSalao } from './salaoContingencia.js';
@@ -268,7 +269,8 @@ function confirmarBloco(deps: ServidorDeps, token: string, input: Confirmar): { 
     const kind = draft?.payload && typeof draft.payload === "object" && "kind" in draft.payload
       ? draft.payload.kind : null;
     return kind === "EXTRACAO_RASCUNHO" || kind === "PRESCRICAO_RASCUNHO" || kind === "EVOLUCAO_RASCUNHO"
-      || kind === "FLASH_RASCUNHO" || kind === "FLASH_APAC_RASCUNHO" || kind === "ACAO_COMPOSTA_RASCUNHO";
+      || kind === "FLASH_RASCUNHO" || kind === "FLASH_APAC_RASCUNHO" || kind === "ACAO_COMPOSTA_RASCUNHO"
+      || kind === "PRESCRICAO_EXECUTAVEL_RASCUNHO" || kind === "PRESCRICAO_EXECUTAVEL_AUXILIAR";
   })) return { status: 409, body: { codigo: "DRAFT_AINDA_RASCUNHO" } };
   for(const draft of drafts){
     const corpo=draft!.payload as {propostasDoseReceita?:{id:string;hashProposta:string;fonte:{hash:string}}[]};
@@ -411,6 +413,9 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
         : req.url === "/consulta/prescricao/propor" ? "proporPrescricao"
         : req.url === "/consulta/acoes-compostas/base" ? "baseAcaoComposta"
         : req.url === "/consulta/acoes-compostas/preparar" ? "prepararAcaoComposta"
+        : req.url === "/consulta/prescricao-executavel/base" ? "basePrescricaoExecutavel"
+        : req.url === "/consulta/prescricao-executavel/preparar" ? "prepararPrescricaoExecutavel"
+        : req.url === "/consulta/prescricao-executavel/confirmar" ? "confirmarPrescricaoExecutavel"
         : req.url === "/consulta/timeline-multicamadas" ? "timelineMulticamadas"
         : req.url === "/consulta/extrair" ? "extrair"
           : req.url === "/consulta/prescricao/rascunho" ? "rascunhoPrescricao"
@@ -481,6 +486,11 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
     }
     if (rota === "baseAcaoComposta" || rota === "prepararAcaoComposta") {
       const r = operarAcoesCompostas(deps, token, rota === "baseAcaoComposta" ? "base" : "preparar", raw);
+      return reply(r.status, rota, r.body);
+    }
+    if (rota === "basePrescricaoExecutavel" || rota === "prepararPrescricaoExecutavel" || rota === "confirmarPrescricaoExecutavel") {
+      const r = operarPrescricaoExecutavel(deps, token, rota === "basePrescricaoExecutavel" ? "base"
+        : rota === "prepararPrescricaoExecutavel" ? "preparar" : "confirmar", raw);
       return reply(r.status, rota, r.body);
     }
     if (rota === "gerarContingenciaSalao" || rota === "historicoContingenciaSalao") {

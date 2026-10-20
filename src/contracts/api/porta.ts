@@ -31,6 +31,10 @@ import type { AlertaPlaquetas } from "./plaquetasAlerta.js";
 import type { SaidaElegibilidadeCiclo } from "./elegibilidadeCiclo.js";
 import type { ResultadoInstrumento } from "../f0c/instrumentos.js";
 import type { ApiBiblioteca } from "./biblioteca.js";
+import type { BasePrescricaoExecutavelResposta, ConfirmarPrescricaoExecutavelPedido,
+  PrepararPrescricaoExecutavelPedido, PrescricaoExecutavelConfirmada,
+  PrescricaoExecutavelPreparada } from "./operacaoPrescricaoExecutavel.js";
+import type { PeriodoClinicoEstatisticaServico, VisaoEstatisticaServico } from "./estatisticaServico.js";
 
 export type CodigoPorta = string;
 
@@ -327,6 +331,10 @@ export interface PortaConsulta {
   carregarTimelineMulticamadas?(contexto: ContextoAcaoComposta, signal?: AbortSignal): Promise<VisaoTimelineMulticamadas>;
   carregarBaseAcaoComposta?(contexto: ContextoAcaoComposta, signal?: AbortSignal): Promise<BaseAcaoCompostaResposta>;
   prepararAcaoComposta?(pedido: PrepararAcaoCompostaPedido, signal?: AbortSignal): Promise<AcaoCompostaPreparada>;
+  lerBasePrescricaoExecutavel?(contexto: ContextoAcaoComposta, signal?: AbortSignal): Promise<BasePrescricaoExecutavelResposta>;
+  prepararPrescricaoExecutavel?(pedido: PrepararPrescricaoExecutavelPedido, signal?: AbortSignal): Promise<PrescricaoExecutavelPreparada>;
+  confirmarPrescricaoExecutavel?(pedido: ConfirmarPrescricaoExecutavelPedido, signal?: AbortSignal): Promise<PrescricaoExecutavelConfirmada>;
+  lerEstatisticaServico?(periodo: PeriodoClinicoEstatisticaServico | null, signal?: AbortSignal): Promise<VisaoEstatisticaServico>;
   ditado?(pedido:import('../fase2/ditado.js').DitadoPedido,signal?:AbortSignal):Promise<import('../fase2/ditado.js').DitadoResposta>;
   lotesPaciente?(patientId:string,signal?:AbortSignal):Promise<LotesPacienteResposta>;
   /** Biblioteca pública autenticada com a mesma sessão desta porta, quando suportada pelo servidor. */

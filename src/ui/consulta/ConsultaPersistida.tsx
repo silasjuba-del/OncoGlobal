@@ -19,14 +19,21 @@ import type { BaseAcaoComposta, PedidoAcaoComposta, TipoAcaoComposta } from "../
 import type { AcaoCompostaPreparada } from "../../contracts/api/execucaoAcaoComposta.js";
 import type { VisaoTimelineMulticamadas } from "../../contracts/api/timelineMulticamadas.js";
 import { TimelineMulticamadas } from "./TimelineMulticamadas.js";
+import { EditorPrescricaoExecutavel } from "./EditorPrescricaoExecutavel.js";
+import type { BasePrescricaoExecutavelResposta, EdicaoPrescricaoExecutavel,
+  PrescricaoExecutavelPreparada } from "../../contracts/api/operacaoPrescricaoExecutavel.js";
 
 type DocumentoPreview = { documentId: string; documentVersion: number; draftId: string;
   titulo: string; texto: string; conteudoHash: string; propostasDoseReceita:PropostaDoseReceita[] };
 type Preview = { preparacao: FlashPreparada; documentos: DocumentoPreview[]; operacao: string };
 
 /** Composição HTTP real. Nenhum cadastro, prescrição ou histórico de demonstração. */
-export function ConsultaPersistida({ porta, contexto, aoAbrirApac, versaoClinica = 0 }: {
+export function ConsultaPersistida({ porta, contexto, aoAbrirApac, versaoClinica = 0,
+  aoAlterarPrescricaoPendente, aoAlterarPrescricaoSalvando, aoAtualizarClinico }: {
   porta: PortaConsulta; contexto: PedidoBundle; aoAbrirApac?:()=>void; versaoClinica?: number;
+  aoAlterarPrescricaoPendente?: (pendente: boolean) => void;
+  aoAlterarPrescricaoSalvando?: (salvando: boolean) => void;
+  aoAtualizarClinico?: () => void;
 }) {
   const [consultaCarregada, setConsultaCarregada] = useState<{
     visao: ConsultaIntegrada | null; erro: string; porta: PortaConsulta;
@@ -45,6 +52,12 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, versaoClinica
   const [acaoRevisada, setAcaoRevisada] = useState<AcaoCompostaPreparada | null>(null);
   const [linhaTempo, setLinhaTempo] = useState<{ origem: ConsultaIntegrada; dados: VisaoTimelineMulticamadas | null } | null>(null);
   const tentativaAcao = useRef<{ conteudo: string; chave: string } | null>(null);
+  const [editorRx, setEditorRx] = useState(false);
+  const [baseRx, setBaseRx] = useState<{ origem: ConsultaIntegrada; dados: BasePrescricaoExecutavelResposta } | null>(null);
+  const [erroRx, setErroRx] = useState("");
+  const [rxEmCurso, setRxEmCurso] = useState(false);
+  const tentativaRx = useRef<{ conteudo: string; chave: string } | null>(null);
+  const assinaturaRx = useRef<{ conteudo: string; chave: string } | null>(null);
   const [impressaoPendente, setImpressaoPendente] = useState<AcaoIntent | null>(null);
   const geracao = useRef(0);
   const geracaoLeitura = useRef(0);
@@ -71,12 +84,14 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, versaoClinica
     tentativaPreparacao.current = null;
     tentativaAcao.current = null; setTipoAcao(null); setBaseAcao(null); setAcaoPreparada(null); setAcaoRevisada(null);
     setLinhaTempo(null);
+    setMensagem("");
+    setEditorRx(false); setBaseRx(null); setErroRx(""); tentativaRx.current = null; assinaturaRx.current = null;
     return () => { geracao.current++; };
   }, [porta, patientId, encounterId, tumorLotId]);
 
   useEffect(() => {
     const atual = ++geracaoLeitura.current;
-    setMensagem(""); setPreview(null);
+    setPreview(null);
     const carga = { porta, contexto: { patientId, encounterId, tumorLotId }, versao, versaoClinica };
     const falhar = (erro: string) => setConsultaCarregada((anterior) => ({ ...carga, erro,
       visao: anterior?.porta === porta && anterior.contexto.patientId === patientId
@@ -104,6 +119,54 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, versaoClinica
     return () => { ativo = false; abort.abort(); };
   }, [visao, porta, patientId, encounterId, tumorLotId]);
   const baseAcaoAtual = baseAcao?.origem === visao ? baseAcao.base : null;
+
+  useEffect(() => {
+    if (!editorRx || !visao || !porta.lerBasePrescricaoExecutavel) return;
+    const origem = visao, abort = new AbortController();
+    let ativo = true;
+    setErroRx("");
+    void porta.lerBasePrescricaoExecutavel({ patientId, encounterId, tumorLotId }, abort.signal).then(dados => {
+      if (ativo) setBaseRx({ origem, dados });
+    }, () => { if (ativo) setErroRx("Não foi possível atualizar a base da prescrição. Reabra o histórico para tentar novamente."); });
+    return () => { ativo = false; abort.abort(); };
+  }, [editorRx, visao, porta, patientId, encounterId, tumorLotId]);
+
+  async function prepararRx(edicao: EdicaoPrescricaoExecutavel) {
+    if (!baseRx || baseRx.origem !== visao || !porta.prepararPrescricaoExecutavel)
+      throw new Error("Aguarde a atualização da base da prescrição.");
+    const atual = geracao.current, origem = visao;
+    const conteudo = JSON.stringify([patientId, encounterId, tumorLotId, baseRx.dados.revisao, edicao]);
+    if (tentativaRx.current?.conteudo !== conteudo) tentativaRx.current = { conteudo, chave: crypto.randomUUID() };
+    setRxEmCurso(true); aoAlterarPrescricaoSalvando?.(true);
+    try {
+      const r = await porta.prepararPrescricaoExecutavel({ contexto: { patientId, encounterId, tumorLotId },
+        expectedBaseHash: baseRx.dados.revisao, idempotencyKey: tentativaRx.current.chave, edicao });
+      if (atual !== geracao.current || origem !== visaoAtual.current) throw new Error("O contexto mudou. Prepare novamente.");
+      return r;
+    } finally {
+      if (atual === geracao.current) { setRxEmCurso(false); aoAlterarPrescricaoSalvando?.(false); }
+    }
+  }
+
+  async function assinarRx(preparacao: PrescricaoExecutavelPreparada) {
+    if (!baseRx || baseRx.origem !== visao || preparacao.baseHash !== baseRx.dados.revisao
+      || !porta.confirmarPrescricaoExecutavel) throw new Error("A base mudou. Prepare novamente.");
+    const atual = geracao.current;
+    const conteudo = JSON.stringify([preparacao.draftId, preparacao.revision, preparacao.conteudoHash]);
+    if (assinaturaRx.current?.conteudo !== conteudo) assinaturaRx.current = { conteudo, chave: crypto.randomUUID() };
+    setRxEmCurso(true); aoAlterarPrescricaoSalvando?.(true);
+    try {
+      await porta.confirmarPrescricaoExecutavel({ contexto: { patientId, encounterId, tumorLotId },
+        draftId: preparacao.draftId, expectedRevision: preparacao.revision,
+        conteudoHash: preparacao.conteudoHash, idempotencyKey: assinaturaRx.current.chave });
+      if (atual !== geracao.current) return;
+      aoAlterarPrescricaoPendente?.(false);
+      if (aoAtualizarClinico) aoAtualizarClinico(); else setVersao(v => v + 1);
+      setMensagem("Prescrição assinada e ciclo planejado gravados. Nenhuma administração registrada.");
+    } finally {
+      if (atual === geracao.current) { setRxEmCurso(false); aoAlterarPrescricaoSalvando?.(false); }
+    }
+  }
 
   useEffect(() => {
     setLinhaTempo(null);
@@ -305,7 +368,7 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, versaoClinica
     {visaoPronta.alertas.filter((a) => a.presentationOverride).map((a) =>
       <aside role="alert" data-banner="e1" key={a.alertaId}><strong>Emergência E1</strong><p>{a.texto}</p></aside>)}
     {mensagem ? <p aria-live="polite">{mensagem}</p> : null}
-    <CockpitJEV visao={visaoPronta} ocupado={ocupado} aoComando={comandoJev}
+    <CockpitJEV visao={visaoPronta} ocupado={ocupado || rxEmCurso} aoComando={comandoJev}
       mudancasExtra={<div id="consulta-resumo" className="consulta-secao" tabIndex={-1}>
     <VisaoIntegradaMinima {...(visaoPronta.retrato ? {retrato:visaoPronta.retrato}: {})}
       {...(visaoPronta.visaoIntegrada ? {visao:visaoPronta.visaoIntegrada}: {})} />
@@ -318,6 +381,8 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, versaoClinica
     <div id="consulta-conduta" className="consulta-secao consulta-acoes" tabIndex={-1}>
     <button type="button" disabled={ocupado} onClick={() => { setPreview(null); setPedidoInvestigacao(null); setFlash(true); }}>Consulta Flash</button>
     <button type="button" disabled={ocupado} onClick={() => setVersao((v) => v + 1)}>Reabrir histórico</button>
+    {porta.lerBasePrescricaoExecutavel && porta.prepararPrescricaoExecutavel && porta.confirmarPrescricaoExecutavel
+      ? <button type="button" disabled={ocupado || rxEmCurso} onClick={() => setEditorRx(true)}>Prescrição estruturada</button> : null}
     </div>
     <div className="consulta-acoes" aria-label="Preparar conduta">
       {([["MANTER_CICLO", "Manter ciclo"], ["REDUZIR_DOSE", "Reduzir dose"],
@@ -366,6 +431,15 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, versaoClinica
         : <p role="status">Não foi possível carregar a timeline deste contexto.</p>
       : <p role="status">Carregando timeline longitudinal…</p> : null}
     </>}
+    {editorRx ? <section aria-label="Editor da prescrição desta consulta">
+      {erroRx ? <p role="alert">{erroRx}</p> : null}
+      {baseRx?.dados.contexto.patientId === patientId && baseRx.dados.contexto.encounterId === encounterId
+        && baseRx.dados.contexto.tumorLotId === tumorLotId ? <EditorPrescricaoExecutavel key={`${patientId}:${encounterId}:${tumorLotId ?? ""}`}
+        base={baseRx.dados} ocupado={ocupado || rxEmCurso || !visao || baseRx.origem !== visao || !!erroRx}
+        aoPreparar={prepararRx} aoAssinar={assinarRx}
+        {...(aoAlterarPrescricaoPendente ? { aoAlterarPendente: aoAlterarPrescricaoPendente } : {})} />
+        : <p role="status">Carregando a base da prescrição…</p>}
+    </section> : null}
     {flash && propsFlash ? <div hidden={!visaoPronta}>
       <ConsultaFlash key={`${patientId}:${encounterId}:${tumorLotId ?? ""}:${pedidoInvestigacao?.exameCodigo??"manual"}:${pedidoInvestigacao?.contexto??""}:${pedidoRevisao}`} {...propsFlash} />
     </div> : null}
