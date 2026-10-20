@@ -209,6 +209,47 @@ describe("navegação com transcrição não salva", () => {
     expect(aoSalvar).toHaveBeenCalledOnce();
   });
 
+  it("mantém contexto e esconde descarte enquanto salva; sucesso libera navegação sem diálogo", async () => {
+    const f = fixture();
+    let resolver!: (resultado: ResultadoTranscricaoLocal) => void;
+    f.porta.importarTranscricaoLocal = vi.fn(() => new Promise<ResultadoTranscricaoLocal>(resolve => { resolver = resolve; }));
+    render(<OncoassistLocal fabricaPorta={f.fabrica} />);
+    entrar(); await abrirPaciente(); await escrever("texto em salvamento");
+    fireEvent.click(screen.getByRole("button", { name: "Salvar transcrição para revisão clínica" }));
+    await waitFor(() => expect(f.porta.importarTranscricaoLocal).toHaveBeenCalledOnce());
+
+    fireEvent.click(screen.getByRole("button", { name: "APAC" }));
+    expect(screen.queryByRole("dialog")).toBeNull();
+    expect(screen.queryByRole("button", { name: "Descartar e sair" })).toBeNull();
+    expect((screen.getByLabelText("Paciente da agenda") as HTMLSelectElement).value).toBe("en-multi");
+    expect((screen.getByLabelText("Texto da transcrição") as HTMLTextAreaElement).value).toBe("texto em salvamento");
+
+    await act(async () => resolver({ codigo: "RASCUNHO_SALVO", draftId: "save-race", revision: 0, linkedPatientId: null, requiresMedicalReview: true }));
+    await screen.findByText(/Rascunho salvo/);
+    fireEvent.click(screen.getByRole("button", { name: "APAC" }));
+    expect(screen.queryByRole("dialog")).toBeNull();
+    expect(screen.queryByLabelText("Texto da transcrição")).toBeNull();
+  });
+
+  it("falha durante o salvamento preserva o texto e restaura a guarda após resolver", async () => {
+    const f = fixture();
+    let rejeitar!: (erro: Error) => void;
+    f.porta.importarTranscricaoLocal = vi.fn(() => new Promise<ResultadoTranscricaoLocal>((_, reject) => { rejeitar = reject; }));
+    render(<OncoassistLocal fabricaPorta={f.fabrica} />);
+    entrar(); await abrirPaciente(); await escrever("texto após falha de salvamento");
+    fireEvent.click(screen.getByRole("button", { name: "Salvar transcrição para revisão clínica" }));
+    await waitFor(() => expect(f.porta.importarTranscricaoLocal).toHaveBeenCalledOnce());
+
+    fireEvent.click(screen.getByRole("link", { name: "Voltar à demonstração" }));
+    expect(screen.queryByRole("dialog")).toBeNull();
+    expect((screen.getByLabelText("Texto da transcrição") as HTMLTextAreaElement).value).toBe("texto após falha de salvamento");
+
+    await act(async () => rejeitar(new Error("falha sintética")));
+    expect((screen.getByLabelText("Texto da transcrição") as HTMLTextAreaElement).value).toBe("texto após falha de salvamento");
+    fireEvent.click(screen.getByRole("button", { name: "APAC" }));
+    expect(dialogo()).toBeTruthy();
+  });
+
   it("expiração forçada limpa texto sem pedir confirmação", async () => {
     const f = fixture();
     render(<OncoassistLocal fabricaPorta={f.fabrica} />);

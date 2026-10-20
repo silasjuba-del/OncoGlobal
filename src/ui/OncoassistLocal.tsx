@@ -43,6 +43,8 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp }: {
   const [versaoConsulta,setVersaoConsulta]=useState(0);
   const [metricas,setMetricas]=useState(metricasVazias);
   const [transcricaoPendente,setTranscricaoPendente]=useState(false);
+  const [transcricaoSalvando,setTranscricaoSalvando]=useState(false);
+  const [mensagemSalvamento,setMensagemSalvamento]=useState("");
   const [navegacaoPendente,setNavegacaoPendente]=useState<(() => void) | null>(null);
   const dialogoNavegacao=useRef<HTMLDivElement>(null);
   const focoAnterior=useRef<HTMLElement|null>(null);
@@ -60,6 +62,7 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp }: {
     geracao.current++;
     setSenha(""); setAutenticado(false); setAgenda([]); setSelecionado(""); setTela("consulta");
     setContexto(null); setLotes([]); setOcupado(false); setVersaoConsulta(0); setTranscricaoPendente(false);
+    setTranscricaoSalvando(false); setMensagemSalvamento("");
     setNavegacaoPendente(null); restaurarFoco.current=false; setSessao((s) => s + 1);
   }, []);
   const expirar = useCallback(() => { limpar(); setMensagem("Sessão expirada. Entre novamente."); }, [limpar]);
@@ -67,6 +70,10 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp }: {
   useEffect(() => () => { geracao.current++; }, []);
 
   function solicitarNavegacaoVoluntaria(navegar: () => void) {
+    if (transcricaoSalvando) {
+      setMensagemSalvamento("A transcrição está sendo salva. Aguarde a conclusão antes de sair.");
+      return;
+    }
     if (!transcricaoPendente) { navegar(); return; }
     focoAnterior.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
     restaurarFoco.current=false;
@@ -89,6 +96,7 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp }: {
     setNavegacaoPendente(null);
   }
   function descartarEContinuar() {
+    if (transcricaoSalvando) return;
     const navegar=navegacaoPendente;
     restaurarFoco.current=false;
     setNavegacaoPendente(null);
@@ -104,6 +112,10 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp }: {
     }
     dialogoNavegacao.current?.querySelector<HTMLElement>("button:not(:disabled)")?.focus();
   }, [navegacaoPendente]);
+  function registrarSalvamentoTranscricao(salvando: boolean) {
+    setTranscricaoSalvando(salvando);
+    if (!salvando) setMensagemSalvamento("");
+  }
 
   async function entrar(event: FormEvent) {
     event.preventDefault();
@@ -192,36 +204,38 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp }: {
     <header className="consulta-appbar"><div><h1>OncoAssist local</h1>
       <p>Documentos do servidor local. Sugestões aguardam revisão médica.</p></div>
       <a href="/" onClick={event=>{
-        if (!transcricaoPendente) return;
+        if (!transcricaoPendente && !transcricaoSalvando) return;
         event.preventDefault();
         solicitarNavegacaoVoluntaria(() => window.location.assign("/"));
       }}>Voltar à demonstração</a></header>
     {mensagem ? <p role="status">{mensagem}</p> : null}
+    {transcricaoSalvando ? <p role="status">Salvando transcrição. Aguarde a conclusão para navegar.</p> : null}
+    {mensagemSalvamento ? <p role="status">{mensagemSalvamento}</p> : null}
     {!autenticado ? <form onSubmit={(event) => void entrar(event)}>
       <label>Senha do servidor <input type="password" autoComplete="current-password" value={senha}
         minLength={12} maxLength={512} required disabled={ocupado} onChange={(e) => setSenha(e.target.value)} /></label>
       <button type="submit" disabled={ocupado || senha.length < 12}>{ocupado ? "Conectando…" : "Entrar"}</button>
     </form> : <>
-      <div className="consulta-controles"><button type="button" onClick={() => solicitarNavegacaoVoluntaria(() => { limpar(); setMensagem(""); })}>Sair</button>
+      <div className="consulta-controles"><button type="button" disabled={transcricaoSalvando} onClick={() => solicitarNavegacaoVoluntaria(() => { limpar(); setMensagem(""); })}>Sair</button>
       {agenda.length === 0 ? <p>Nenhum paciente na agenda local de hoje.</p> : <label>Paciente da agenda
-        <select aria-label="Paciente da agenda" value={selecionado} disabled={ocupado}
+        <select aria-label="Paciente da agenda" value={selecionado} disabled={ocupado || transcricaoSalvando}
           onChange={(e) => solicitarPaciente(e.target.value)}>
           <option value="">Selecione um paciente</option>
           {agenda.map((p) => <option key={p.encounterId} value={p.encounterId}>{p.horario} — {p.nome}</option>)}
         </select>
       </label>}
-      {lotes.length?<label>Lote tumoral <select aria-label="Lote tumoral" value={contexto?.tumorLotId??''} disabled={ocupado}
+      {lotes.length?<label>Lote tumoral <select aria-label="Lote tumoral" value={contexto?.tumorLotId??''} disabled={ocupado || transcricaoSalvando}
         onChange={e=>solicitarLote(e.target.value)}>
         <option value="">Consulta sem lote selecionado</option>{lotes.map((l,i)=><option key={l.tumorLotId} value={l.tumorLotId}>
           {`Lote ${i+1} · ${l.cid.valor??'CID não informado'} · ${l.topografia.valor??l.tumorLotId}`}</option>)}
       </select></label>:null}
       <nav aria-label="Áreas clínicas">
-        <button type="button" disabled={ocupado} onClick={() => navegarParaTela("consulta")}>Consulta</button>
-        <button type="button" disabled={ocupado} onClick={() => navegarParaTela("salao")}>Salão</button>
-        <button type="button" disabled={ocupado} onClick={() => navegarParaTela("canal")}>Canal</button>
-        <button type="button" disabled={ocupado} onClick={() => navegarParaTela("apac")}>APAC</button>
-        <button type="button" disabled={ocupado} onClick={() => navegarParaTela("config")}>Configurações Flash</button>
-        <button type="button" disabled={ocupado} onClick={() => navegarParaTela("biblioteca")}>Biblioteca</button>
+        <button type="button" disabled={ocupado || transcricaoSalvando} onClick={() => navegarParaTela("consulta")}>Consulta</button>
+        <button type="button" disabled={ocupado || transcricaoSalvando} onClick={() => navegarParaTela("salao")}>Salão</button>
+        <button type="button" disabled={ocupado || transcricaoSalvando} onClick={() => navegarParaTela("canal")}>Canal</button>
+        <button type="button" disabled={ocupado || transcricaoSalvando} onClick={() => navegarParaTela("apac")}>APAC</button>
+        <button type="button" disabled={ocupado || transcricaoSalvando} onClick={() => navegarParaTela("config")}>Configurações Flash</button>
+        <button type="button" disabled={ocupado || transcricaoSalvando} onClick={() => navegarParaTela("biblioteca")}>Biblioteca</button>
       </nav>
       </div>
       {ocupado ? <p role="status">Abrindo consulta…</p> : null}
@@ -245,7 +259,8 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp }: {
         </div>
         <div id="consulta-documentos" className="consulta-secao" tabIndex={-1}>
           <UploadDocumentoLocal porta={porta} contexto={contexto} aoSalvar={()=>setVersaoFontes(v=>v+1)}/>
-          <TranscricaoLocal porta={porta} contexto={contexto} aoSalvar={()=>setVersaoFontes(v=>v+1)} aoAlterarPendente={setTranscricaoPendente}/>
+          <TranscricaoLocal porta={porta} contexto={contexto} aoSalvar={()=>setVersaoFontes(v=>v+1)}
+            aoAlterarPendente={setTranscricaoPendente} aoAlterarSalvamento={registrarSalvamentoTranscricao}/>
         </div>
         <div id="consulta-revisao" className="consulta-secao" tabIndex={-1}>
         <RevisaoExtracaoLocal key={versaoFontes} porta={porta} contexto={contexto}
