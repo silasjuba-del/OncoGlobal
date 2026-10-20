@@ -487,7 +487,9 @@ export function PainelEstudos({
           <p>Status: {estudo.review?.decision === "CONFIRMAR" ? "Protocolo revisado"
             : estudo.review?.decision === "REJEITAR" ? "Protocolo rejeitado" : "Aguardando revisão médica"}</p>
           {estudo.candidate.description ? <p>{estudo.candidate.description.text}</p> : null}
-          {estudo.candidate.warnings.length ? <ul className="estudos-panel__warnings">{estudo.candidate.warnings.map((warning, index) => <li key={`${index}-${warning}`}>{warning}</li>)}</ul> : null}
+          {estudo.candidate.warnings.length ? <ul className="estudos-panel__warnings">{estudo.candidate.warnings.map((warning, index) =>
+            <li key={`${index}-${warning}`}>{warning.startsWith("CANDIDATO_EXTRAIDO_DE_ESTRUTURA_DOCUMENTAL")
+              ? "Revise o texto original e a vinculação de cada critério." : warning}</li>)}</ul> : null}
           <details>
             <summary>Fonte original e metadados</summary>
             <p>{estudo.source.originalName} · {estudo.source.mimeType} · {estudo.source.kind}</p>
