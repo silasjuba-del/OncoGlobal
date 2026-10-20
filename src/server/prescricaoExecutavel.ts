@@ -2,6 +2,7 @@ import type { DatabaseSync } from "node:sqlite";
 import { z } from "zod";
 import { Sessao, type Fonte } from "../contracts/base.js";
 import { Ciclo, Paciente, TreatmentEpisode, TumorLot } from "../contracts/clinico.js";
+import type { ClinicalEvent } from "../contracts/operacao.js";
 import { ContextoAcaoComposta } from "../contracts/api/acoesCompostas.js";
 import { ConteudoPrescricaoExecutavel } from "../contracts/api/prescricaoExecutavel.js";
 import { BasePrescricaoExecutavelResposta, ConfirmarPrescricaoExecutavelPedido,
@@ -26,6 +27,17 @@ const mesmoContexto = (a: Contexto, b: Contexto) => hash(a) === hash(b);
 function eventosConfirmados(db: DatabaseSync, contexto: Contexto, em: string) {
   return listarEventos(db, contexto.patientId).filter(e => e.patientId === contexto.patientId
     && ["CONFIRMADO", "ASSINADO"].includes(e.revisao) && Date.parse(e.criadoEm) <= Date.parse(em));
+}
+
+/** Usa a mesma identidade completa na leitura e na supersessão da prescrição. */
+function documentoReferenciado(eventos: readonly ClinicalEvent[], contexto: Contexto,
+  ref: { documentId: string; documentVersion: number }): ClinicalEvent | undefined {
+  return eventos.find(e => {
+    const documento = dadosDoEvento(e)?.data as Record<string, unknown> | undefined;
+    return e.tipo === "DOCUMENTO" && e.revisao === "ASSINADO" && e.patientId === contexto.patientId
+      && e.encounterId === contexto.encounterId && e.tumorLotId === contexto.tumorLotId
+      && documento?.documentId === ref.documentId && documento?.documentVersion === ref.documentVersion;
+  });
 }
 
 /** A revisão abrange os fatos do paciente, inclusive os que mudam a segurança da ordem. */
@@ -72,9 +84,7 @@ export function lerBasePrescricaoExecutavel(db: DatabaseSync, contexto: Contexto
     const validacao = verificarPrescricaoDuto(eventos, contexto, ciclo.prescricaoRef);
     if (!validacao.ok) pendencias.push(validacao.codigo);
     else {
-      const doc = vigentes.find(e => e.tipo === "DOCUMENTO" && e.encounterId === contexto.encounterId
-        && e.tumorLotId === contexto.tumorLotId
-        && (dadosDoEvento(e)?.data as Record<string, unknown> | undefined)?.documentId === ciclo.prescricaoRef!.documentId);
+      const doc = documentoReferenciado(vigentes, contexto, ciclo.prescricaoRef);
       const p = ConteudoPrescricaoExecutavel.safeParse((doc && dadosDoEvento(doc)?.data as Record<string, unknown> | undefined)?.prescricao);
       if (p.success) {
         const { episodioId, cicloId, ...origem } = p.data.contexto;
@@ -177,9 +187,7 @@ function preparar(deps: Deps, token: string, raw: unknown, contexto: Contexto, a
     && ["Ciclo", "Ciclo@1"].includes(e.tipo) && dadosDoEvento(e)?.episodioId === episodioId
     && dadosDoEvento(e)?.numero === edicao.planejamento.numeroCiclo)) return negar("NUMERO_CICLO_JA_REGISTRADO");
   const refAnterior = modo === "CICLO_ATUAL" ? base.ciclo?.prescricaoRef : null;
-  const documentoAnterior = refAnterior ? vigentes.find(e => e.tipo === "DOCUMENTO" && e.encounterId === contexto.encounterId
-    && e.tumorLotId === contexto.tumorLotId
-    && (dadosDoEvento(e)?.data as Record<string, unknown> | undefined)?.documentId === refAnterior.documentId) : null;
+  const documentoAnterior = refAnterior ? documentoReferenciado(vigentes, contexto, refAnterior) : null;
   const conteudo = ConteudoPrescricaoExecutavel.parse({ schema: "PrescricaoExecutavel@1",
     pacienteNome: base.pacienteNome, linha: modo === "NOVA_LINHA" ? edicao.planejamento.linha : base.episodio!.linha,
     numeroCiclo: modo === "CICLO_ATUAL" ? base.ciclo!.numero : edicao.planejamento.numeroCiclo,
