@@ -18,6 +18,8 @@ describe("extrator: hipótese lexical não vira fato explícito (ARQ-03, recorte
     "Diagnóstico: câncer.) Biomarcadores não disponíveis.",
     "“Diagnóstico: câncer.” Biomarcadores não disponíveis.",
     "“Diagnóstico: câncer.”) Biomarcadores não disponíveis.",
+    "‘Diagnóstico: câncer.’ Biomarcadores não disponíveis.",
+    "Diagnóstico: câncer. ‘Biomarcadores não disponíveis.’",
     "Diagnóstico: câncer. (Biomarcadores não disponíveis.)",
     "Diagnóstico: câncer etc. Biomarcadores não disponíveis.",
   ])("isola a negação posterior com aspas, parênteses ou fim de lista: %s", (frase) => {

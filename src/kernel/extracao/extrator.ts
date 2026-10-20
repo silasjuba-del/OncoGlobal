@@ -94,7 +94,7 @@ function trechosNaoRiscados(linha: string, aberto: boolean): { trechos: string[]
 
 const NEGACAO_CLAUSULA = /\b(?:não\s+(?:há|observamos|apresenta|refere|relata|tem)|nega|negou|negativo para|sem\s+(?:dor|náusea|dormência|formigamento|sinais de|evidência(?: de)?|les(?:ão|ões)|nódul(?:o|os)|foc(?:o|os)|neoplasia|carcinoma|adenocarcinoma|tumor|metástase|expressão|amplificação|HER2|RE|RP|Ki-67|PD-L1))(?=$|[^\p{L}\p{N}_])/iu;
 // Pontuação de sentença encerra o escopo lexical; decimal e abreviações comuns não.
-const LIMITE_SENTENCA = /(?<!\b(?:aprox|dr|dra|sr|sra|ex|p|pp|n)\.[”"’')\]]{0,3})(?<=[.!?][”"’')\]]{0,3})\s+(?=[“"'(\[]*\p{L})/iu;
+const LIMITE_SENTENCA = /(?<!\b(?:aprox|dr|dra|sr|sra|ex|p|pp|n)\.[”"’')\]]{0,3})(?<=[.!?][”"’')\]]{0,3})\s+(?=[“‘"'(\[]*\p{L})/iu;
 
 /**
  * Comparação seriada declarada pela própria fonte (ex.: "aumentado em relação à CO de 14/05/28").
@@ -198,13 +198,13 @@ export const extratorDeterministico: Extrator = {
         const literal = hist?.[1]?.trim();
         if (literal && !/^(?:não (?:sei|consta|informad[oa])|pendente)\b/iu.test(literal)) add("histology", literal);
       }
-      const diagnosis = raw.match(/^[\s“"'(\[]*diagnóstico(?: oncológico)?\s*:\s*([^.;]+)/iu);
+      const diagnosis = raw.match(/^[\s“‘"'(\[]*diagnóstico(?: oncológico)?\s*:\s*([^.;]+)/iu);
       if (diagnosis && !negated && !/\bNÃO SEI\b/iu.test(raw)) {
         add("diagnosis", diagnosis[1]?.trim());
       }
       // Menção literal de neoplasia/carcinoma (ex.: "antecedente de neoplasia mamária direita"):
       // o sítio só entra quando a tabela de órgãos o reconhece; nada é inferido de "dona Maria".
-      if (!negated && !/^[\s“"'(\[]*diagn[oó]stico/iu.test(raw)) {
+      if (!negated && !/^[\s“‘"'(\[]*diagn[oó]stico/iu.test(raw)) {
         const mencao = raw.match(/\b(?:neoplasia|carcinoma|adenocarcinoma)\s+(?:de\s+|do\s+|da\s+)?([\p{L}]+(?:\s+(?:uterino|do\s+ú?tero))?)/iu);
         const sitioCanonico = mencao ? normalizarSitioAnatomico(mencao[1]) : null;
         if (mencao && sitioCanonico) {
