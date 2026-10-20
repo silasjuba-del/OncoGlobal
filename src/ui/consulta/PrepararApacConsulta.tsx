@@ -42,7 +42,11 @@ function mensagemErroApac(erro: unknown): string {
 }
 
 function fingerprint(contexto: ContextoAcaoComposta, baseHash: string, edicao: EdicaoApacRascunho): string {
-  return JSON.stringify([contexto, baseHash, edicao]);
+  return JSON.stringify([chaveSemanticaContexto(contexto), baseHash, edicao]);
+}
+
+function chaveSemanticaContexto(contexto: ContextoAcaoComposta): string {
+  return JSON.stringify([contexto.patientId, contexto.encounterId, contexto.tumorLotId]);
 }
 
 export function PrepararApacConsulta({ porta, contexto, aberto, ocupado = false, aoAtualizarClinico }: {
@@ -61,7 +65,7 @@ export function PrepararApacConsulta({ porta, contexto, aberto, ocupado = false,
   const [salvando, setSalvando] = useState(false);
   const [salva, setSalva] = useState(false);
   const geracao = useRef(0);
-  const chaveContexto = JSON.stringify(contexto);
+  const chaveContexto = chaveSemanticaContexto(contexto);
   const contextoAtual = useRef(chaveContexto);
   contextoAtual.current = chaveContexto;
   const contextoCarregado = useRef(chaveContexto);
@@ -91,7 +95,7 @@ export function PrepararApacConsulta({ porta, contexto, aberto, ocupado = false,
     try {
       const resposta = BaseApacRascunhoRespostaSchema.parse(
         await porta.lerBaseApacRascunho(contexto, abort.signal));
-      const ctx = JSON.stringify(resposta.contexto);
+      const ctx = chaveSemanticaContexto(resposta.contexto);
       if (token !== geracao.current || ctx !== contextoAtual.current) return;
       if (resposta.contexto.patientId !== contexto.patientId || resposta.contexto.encounterId !== contexto.encounterId
         || resposta.contexto.tumorLotId !== contexto.tumorLotId) throw new Error("CONTEXTO_APAC_ALTERADO");
@@ -155,8 +159,8 @@ export function PrepararApacConsulta({ porta, contexto, aberto, ocupado = false,
       const pedido = { contexto, expectedBaseHash: base.revisao,
         idempotencyKey: tentativaPreparo.current.id, edicao: validacao.data };
       const resposta = ApacRascunhoPreparadoSchema.parse(await porta.prepararApacRascunho(pedido));
-      if (token !== geracao.current || contextoAtual.current !== JSON.stringify(contexto)) return;
-      if (JSON.stringify(resposta.contexto) !== JSON.stringify(contexto) || resposta.baseHash !== base.revisao
+      if (token !== geracao.current || contextoAtual.current !== chaveSemanticaContexto(contexto)) return;
+      if (chaveSemanticaContexto(resposta.contexto) !== chaveSemanticaContexto(contexto) || resposta.baseHash !== base.revisao
         || resposta.apac.estado !== "RASCUNHO" || resposta.apac.resultadoExterno !== null || resposta.permiteExportar !== false)
         throw new Error("BASE_APAC_ALTERADA");
       setPrevia({ resposta, fingerprint: fingerprintPedido });
@@ -179,7 +183,7 @@ export function PrepararApacConsulta({ porta, contexto, aberto, ocupado = false,
         expectedRevision: resposta.revision, conteudoHash: resposta.conteudoHash,
         idempotencyKey: tentativaConfirmacao.current.id });
       const confirmada = ApacRascunhoConfirmadoSchema.parse(await porta.confirmarApacRascunho(pedido));
-      if (token !== geracao.current || contextoAtual.current !== JSON.stringify(contexto)) return;
+      if (token !== geracao.current || contextoAtual.current !== chaveSemanticaContexto(contexto)) return;
       if (confirmada.apacId !== resposta.apac.apacId || confirmada.versao !== resposta.apac.versao
         || confirmada.estado !== "RASCUNHO" || confirmada.permiteExportar !== false)
         throw new Error("APAC_CONFIRMACAO_DIVERGENTE");

@@ -238,3 +238,21 @@ it("fechar e reabrir durante a carga ignora resposta antiga e libera a nova base
   expect((await screen.findByLabelText("Procedimento principal") as HTMLInputElement).value).toBe("");
   expect((screen.getByRole("button", { name: /Preparar.*exata da APAC/ }) as HTMLButtonElement).disabled).toBe(false);
 });
+
+it("preserva a base e a edicao quando o mesmo contexto chega em outra ordem de propriedades", async () => {
+  const f = fixture();
+  const view = render(<PrepararApacConsulta porta={f.porta} contexto={contexto} aberto aoAtualizarClinico={vi.fn()} />);
+  const procedimento = await screen.findByLabelText("Procedimento principal") as HTMLInputElement;
+  fireEvent.change(procedimento, { target: { value: "PROC-ORDEM-SINTETICO" } });
+  const contextoMesmosValoresOrdemDiferente = {
+    tumorLotId: contexto.tumorLotId,
+    encounterId: contexto.encounterId,
+    patientId: contexto.patientId,
+  };
+
+  view.rerender(<PrepararApacConsulta porta={f.porta} contexto={contextoMesmosValoresOrdemDiferente} aberto aoAtualizarClinico={vi.fn()} />);
+
+  expect(await screen.findByLabelText("Procedimento principal")).toBeTruthy();
+  expect((screen.getByLabelText("Procedimento principal") as HTMLInputElement).value).toBe("PROC-ORDEM-SINTETICO");
+  expect(f.ler).toHaveBeenCalledTimes(1);
+});
