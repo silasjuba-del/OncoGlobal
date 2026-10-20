@@ -324,6 +324,77 @@ it("limites em mg aceitam conversão dimensional exata sem alterar a dose da ord
   expect(dadosEvento(ciclo).itens).toMatchObject([{ doseMg: 5.1 }]);
 });
 
+it.each([
+  { modalidade: "CX", selecionado: false }, { modalidade: "CX", selecionado: true },
+  { modalidade: "RT", selecionado: false }, { modalidade: "RT", selecionado: true },
+])("episódio $modalidade selecionado=$selecionado exige nova linha QT sem apagar histórico", async ({ modalidade, selecionado }) => {
+  const a = await abrir();
+  const episodioId = `episodio-${modalidade}-sintetico`;
+  const id = a.seed("TreatmentEpisode", { episodioId, tumorLotId: contexto.tumorLotId, modalidade,
+    intencao: "PALIATIVA", intentModifier: null, linha: 1, esquemaId: "protocolo-manual-sintetico",
+    inicio: ausente<string>(), fim: ausente<string>() });
+  const original = a.eventos().find(e => e.eventId === id)!;
+  if (selecionado) a.seed("FATO", { campo: "planejamento.episodioSelecionado", valor: { episodioId, motivo: "Seleção sintética" } });
+  const base = await carregarBase(a), antes = a.eventos();
+  const indevida = await a.request(PREPARAR, { contexto, expectedBaseHash: base.revisao,
+    idempotencyKey: "tentar-reutilizar-outra-modalidade", edicao: edicao({
+      planejamento: { modo: "NOVO_CICLO", linha: 1, intencao: "PALIATIVA", numeroCiclo: 1 },
+    }) });
+  if (indevida.status === 200) {
+    const p = PrescricaoExecutavelPreparada.parse(indevida.data);
+    const tentativa = await a.request(CONFIRMAR, { contexto, draftId: p.draftId, expectedRevision: p.revision,
+      conteudoHash: p.conteudoHash, idempotencyKey: "assinar-sob-modalidade-indevida" });
+    expect(tentativa.status).toBe(409);
+  }
+  expect(indevida.status).toBe(409);
+  expect(a.eventos()).toEqual(antes);
+  expect(base.episodio).toBeNull();
+  expect(base.pendencias).toEqual([]);
+  const nova = await a.request(PREPARAR, { contexto, expectedBaseHash: base.revisao,
+    idempotencyKey: "nova-linha-QT-apos-outra-modalidade", edicao: edicao({ protocoloId: "novo-protocolo-QT-sintetico" }) });
+  expect(nova.status).toBe(200);
+  const assinada = await assinar(a, PrescricaoExecutavelPreparada.parse(nova.data), "assinar-nova-linha-QT");
+  expect(assinada.episodioId).not.toBe(episodioId);
+  const episodioQt = a.eventos().find(e => e.tipo === "TreatmentEpisode" && dadosEvento(e).episodioId === assinada.episodioId)!;
+  expect(dadosEvento(episodioQt).modalidade).toBe("QT");
+  expect(a.eventos().find(e => e.eventId === id)).toEqual(original);
+  expect(a.eventos().some(e => e.supersedesEventId === id)).toBe(false);
+  expect(a.eventos().filter(e => e.tipo === "TreatmentAdministration")).toHaveLength(0);
+});
+
+it.each(["CX", "RT"])("ciclo legado vinculado a %s não é reescrito como prescrição QT", async modalidade => {
+  const a = await abrir();
+  a.seed("TreatmentEpisode", { episodioId: "episodio-legado", tumorLotId: contexto.tumorLotId, modalidade,
+    intencao: "PALIATIVA", intentModifier: null, linha: 1, esquemaId: "protocolo-manual-sintetico",
+    inicio: ausente<string>(), fim: ausente<string>() });
+  a.seed("Ciclo", { cicloId: "ciclo-legado", episodioId: "episodio-legado", numero: 1, previstoEm: "2026-10-20",
+    pesoKg: presente(70), origemPeso: "MEDIDO", ciclosSemPesoConsecutivos: 0, comMedico: true,
+    prescricaoRef: null, itens: [{ item: 1, droga: "Fármaco sintético", doseMg: 1.5, reducaoPct: null }] });
+  const base = await carregarBase(a), antes = a.eventos();
+  const r = await a.request(PREPARAR, { contexto, expectedBaseHash: base.revisao,
+    idempotencyKey: "revisar-ciclo-de-outra-modalidade", edicao: edicao({
+      planejamento: { modo: "CICLO_ATUAL", linha: 1, intencao: "PALIATIVA", numeroCiclo: 1 },
+    }) });
+  expect(r.status).toBe(409);
+  expect(a.eventos()).toEqual(antes);
+});
+
+it("episódio QT aberto continua reutilizável para novo ciclo", async () => {
+  const a = await abrir();
+  a.seed("TreatmentEpisode", { episodioId: "episodio-QT", tumorLotId: contexto.tumorLotId, modalidade: "QT",
+    intencao: "PALIATIVA", intentModifier: null, linha: 1, esquemaId: "protocolo-manual-sintetico",
+    inicio: ausente<string>(), fim: ausente<string>() });
+  const base = await carregarBase(a);
+  const r = await a.request(PREPARAR, { contexto, expectedBaseHash: base.revisao,
+    idempotencyKey: "novo-ciclo-QT-valido", edicao: edicao({
+      planejamento: { modo: "NOVO_CICLO", linha: 1, intencao: "PALIATIVA", numeroCiclo: 1 },
+    }) });
+  expect(r.status).toBe(200);
+  const assinada = await assinar(a, PrescricaoExecutavelPreparada.parse(r.data), "assinar-ciclo-QT-valido");
+  expect(assinada.episodioId).toBe("episodio-QT");
+  expect(a.eventos().filter(e => e.tipo === "TreatmentEpisode")).toHaveLength(1);
+});
+
 it("prepara uma nova linha sem criar fato; assina documento, episódio e ciclo sem registrar administração", async () => {
   const a = await abrir();
   const antes = a.eventos();
