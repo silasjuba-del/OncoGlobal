@@ -1,3 +1,4 @@
+import { garantirColunas } from "../kernel/ledger/migracao.js";
 // S-F2-03 · Caixa clínica, integração com pré-consulta/cabeçalho, leitura local de mídia
 // e autorização específica no servidor para resposta pelo Action Gateway.
 import { createHash } from "node:crypto";
@@ -54,8 +55,12 @@ function eventoConsentimentoAtual(db:DatabaseSync,contatoId:string):string|null 
   return row?.eventoId??null;
 }
 
-function garantirTabelasS03(db: DatabaseSync): void {
-  garantirSchema(db);
+const schemasS03Prontos=new WeakSet<DatabaseSync>();
+function garantirTabelasS03(db:DatabaseSync):void {
+ if(schemasS03Prontos.has(db))return;const externa=db.isTransaction;garantirSchema(db);
+ transacao(db,()=>prepararTabelasS03(db));if(!externa)schemasS03Prontos.add(db);
+}
+function prepararTabelasS03(db: DatabaseSync): void {
   db.exec(`
     CREATE TABLE IF NOT EXISTS canal_midia_lida (
       mensagemId TEXT PRIMARY KEY REFERENCES canal_mensagem(mensagemId),
@@ -104,8 +109,7 @@ function garantirTabelasS03(db: DatabaseSync): void {
     CREATE TRIGGER IF NOT EXISTS canal_resposta_envio_no_delete BEFORE DELETE ON canal_resposta_envio
       BEGIN SELECT RAISE(ABORT, 'canal_resposta_envio append-only'); END;
   `);
-  const colunas=db.prepare('PRAGMA table_info(canal_resposta_envio)').all() as {name:string}[];
-  if(!colunas.some(c=>c.name==='providerReceiptId'))db.exec('ALTER TABLE canal_resposta_envio ADD COLUMN providerReceiptId TEXT');
+  garantirColunas(db,[['canal_resposta_envio','providerReceiptId','TEXT']]);
 }
 
 function obterSessaoMedicaValida(acesso: AcessoCanal): Sessao | null {
