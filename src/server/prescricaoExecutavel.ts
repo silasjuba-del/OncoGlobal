@@ -124,8 +124,8 @@ function hashPreparacao(p: DadosPreparacao): string {
 }
 
 function validarOrigem(deps: Deps, edicao: EdicaoPrescricaoExecutavel, base: BasePrescricaoExecutavelResposta,
-  atorId: string, em: string): { codigo: string | null; avisos: string[] } {
-  if (edicao.origemProposta !== null) return validarOrigemFicha(deps, edicao, base.contexto, atorId, em);
+  atorId: string, em: string, token: string): { codigo: string | null; avisos: string[] } {
+  if (edicao.origemProposta !== null) return validarOrigemFicha(deps, edicao, base.contexto, atorId, em, token);
   for (const { itemId, item } of edicao.itens) {
     if (item.source !== "PROTOCOL") continue;
     const original = base.vigente?.itens.find(i => i.itemId === itemId)?.item;
@@ -155,7 +155,7 @@ function preparar(deps: Deps, token: string, raw: unknown, contexto: Contexto, a
   if (base.pendencias.length) return negar("BASE_PRESCRICAO_PENDENTE", 409, base.pendencias);
   const reutilizacao = validarEpisodioReutilizado(entrada.edicao, base);
   if (reutilizacao) return negar(reutilizacao);
-  const origem = validarOrigem(deps, entrada.edicao, base, atorId, em);
+  const origem = validarOrigem(deps, entrada.edicao, base, atorId, em, token);
   if (origem.codigo) return negar(origem.codigo);
   const anterior = lerDraft(deps.db, draftId);
   if (anterior) {
@@ -291,7 +291,7 @@ function confirmar(deps: Deps, token: string, raw: unknown, contexto: Contexto, 
   if (base.revisao !== r.baseHash || base.pendencias.length) return negar("BASE_PRESCRICAO_ALTERADA");
   const reutilizacao = validarEpisodioReutilizado(salvo.edicao, base, r.conteudo.contexto.episodioId);
   if (reutilizacao) return negar(reutilizacao);
-  const origem = validarOrigem(deps, salvo.edicao, base, atorId, em);
+  const origem = validarOrigem(deps, salvo.edicao, base, atorId, em, token);
   if (origem.codigo) return negar(origem.codigo);
   const avaliacao = avaliarDocumentoExecutavel(r.conteudo);
   if (!avaliacao.ok) return negar("PRESCRICAO_INCOMPLETA", 409, avaliacao.pendencias);

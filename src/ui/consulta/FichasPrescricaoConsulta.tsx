@@ -14,6 +14,7 @@ export function mensagemErroFicha(erro: unknown): string {
     ORIGEM_FICHA_INVALIDA: "Não foi possível validar a origem. Selecione novamente a ficha para esta consulta.",
     ORIGEM_FICHA_FORA_DO_CONTEXTO: "A origem pertence a outro atendimento. Selecione a ficha nesta consulta.",
     ORIGEM_FICHA_FATOS_ALTERADOS: "Os dados clínicos mudaram depois do cálculo. Atualize a consulta e calcule a ficha novamente.",
+    ORIGEM_FICHA_CALCULO_ALTERADO: "Os parâmetros ou sua validade mudaram depois do cálculo. Atualize o catálogo e calcule a ficha novamente.",
     ORIGEM_FICHA_PROTOCOLO_ALTERADO: "O esquema foi alterado. Selecione outra ficha ou desvincule a origem para editar manualmente.",
     ORIGEM_PROTOCOLO_ALTERADA: "Um item foi alterado sem registrar a edição manual. Confira sua origem e o motivo.",
     BASE_PRESCRICAO_ALTERADA: "Os dados da prescrição mudaram. Atualize a consulta antes de preparar novamente.",
@@ -67,7 +68,7 @@ export function FichasPrescricaoConsulta({ porta, contexto, ocupado, aoInstancia
         if (!porta.listarFichasPrescricao) throw new Error("Catálogo indisponível.");
         const leitura = ++lendo.current;
         await executar(() => porta.listarFichasPrescricao!(), r => {
-          if (leitura === lendo.current) { setFichas(r.fichas); setErro(""); }
+          if (leitura === lendo.current) { tentativa.current = null; setFichas(r.fichas); setErro(""); }
         });
       }}
       aoRevisar={async pedido => {

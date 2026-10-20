@@ -29,14 +29,15 @@ const templateMgM2 = () => {
 };
 async function abrir(protocolo = template()) {
   const dir = criarDiretorio(), db = abrirLedger(":memory:");
+  let agora = AGORA;
   const sessoes = criarGerenciadorSessao({ medicoId: "medico-ficha-sintetico", crm: "CRM-SINTETICO",
-    senha: "senha-sintetica-ficha-123", duracaoMs: 60000, agora: () => AGORA });
-  const token = sessoes.login("senha-sintetica-ficha-123")!.token;
+    senha: "senha-sintetica-ficha-123", duracaoMs: 90 * 24 * 60 * 60 * 1000, agora: () => agora });
+  let token = sessoes.login("senha-sintetica-ficha-123")!.token;
   const corpus = { templatesProtocolo: [protocolo] } as NonNullable<ServidorDeps["corpus"]>;
-  const gateway = criarGateway({ agora: () => AGORA, auditar: () => {}, store: memoriaIdempotencia(), executores: {} });
-  const motorF1 = criarMotorF1(db, () => AGORA, () => ({ regras: [],
+  const gateway = criarGateway({ agora: () => agora, auditar: () => {}, store: memoriaIdempotencia(), executores: {} });
+  const motorF1 = criarMotorF1(db, () => agora, () => ({ regras: [],
     biblioteca: { id: "biblioteca-sintetica", versao: "1", hash: "hash-sintetico" } }));
-  const deps: ServidorDeps = { db, sessoes, corpus, gateway, motorF1, agora: () => AGORA, log: () => {} };
+  const deps: ServidorDeps = { db, sessoes, corpus, gateway, motorF1, agora: () => agora, log: () => {} };
   const server = createServer((req, res) => { void rotear(deps, req, res); });
   await new Promise<void>((resolve, reject) => { server.once("error", reject); server.listen(0, "127.0.0.1", resolve); });
   const address = server.address(); if (!address || typeof address === "string") throw new Error("PORTA_AUSENTE");
@@ -48,11 +49,17 @@ async function abrir(protocolo = template()) {
   }
   function entrarOutroMedico() {
     const outraSessao = criarGerenciadorSessao({ medicoId: "medico-ficha-outro-sintetico", crm: "CRM-OUTRO-SINTETICO",
-      senha: "senha-sintetica-ficha-123", duracaoMs: 60000, agora: () => AGORA });
+      senha: "senha-sintetica-ficha-123", duracaoMs: 90 * 24 * 60 * 60 * 1000, agora: () => agora });
     const outraToken = outraSessao.login("senha-sintetica-ficha-123")!.token;
     outraSessao.selecionarConsulta(outraToken, contexto);
     deps.sessoes = outraSessao;
     return outraToken;
+  }
+  function avancarRelogio(instante: string) { agora = instante; }
+  function renovarSessao() {
+    token = sessoes.login("senha-sintetica-ficha-123")!.token;
+    sessoes.selecionarConsulta(token, contexto);
+    return token;
   }
   let n = 0;
   function seed(tipo: string, payload: unknown | ((eventId: string) => unknown),
@@ -61,9 +68,9 @@ async function abrir(protocolo = template()) {
     const conteudo = typeof payload === "function" ? payload(id) : payload;
     const fontesEvento = typeof fontes === "function" ? fontes(id) : fontes;
     salvarDraft(db, { draftId: id, patientId: contexto.patientId, sourceId: id, rawRef: "referencia-local",
-      payload: {}, revision: 0, diagnostics: [], criadoEm: AGORA });
+      payload: {}, revision: 0, diagnostics: [], criadoEm: agora });
     const r = executarConfirmacao(db, { ...contexto, operationId: id, reviewDecisionId: id,
-      sessao: sessoes.obter(token)!, em: AGORA, registros: [{ eventId: id, draftId: id, expectedRevision: 0,
+      sessao: sessoes.obter(token)!, em: agora, registros: [{ eventId: id, draftId: id, expectedRevision: 0,
         tipo, payload: conteudo, fontes: fontesEvento, revisao: "CONFIRMADO" }] });
     expect(r.estado).toBe("GRAVADA");
   }
@@ -74,7 +81,8 @@ async function abrir(protocolo = template()) {
     estadiamentos: [], finalidadeApac: presente("PALIATIVA"), marcos: [] });
   sessoes.selecionarConsulta(token, contexto);
   const close = async () => { await new Promise<void>(resolve => server.close(() => resolve())); db.close(); removerDiretorio(dir); };
-  const a = { db, sessoes, token, corpus, request, seed, close, entrarOutroMedico,
+  const a = { db, sessoes, get token() { return token; }, corpus, request, seed, close, entrarOutroMedico,
+    avancarRelogio, renovarSessao,
     eventos: () => listarEventos(db, contexto.patientId) };
   ambientes.push(a); return a;
 }
@@ -109,15 +117,17 @@ async function instanciarMgM2ComAltura(opcoes: {
   }, (eventId: string) => [{ ...fonteSintetica(eventId), dataClinica: opcoes.fonteData === undefined ? "2026-10-01" : opcoes.fonteData }]);
   return { a, origem: await instancia(a) };
 }
-async function preparar(a: Ambiente, origem: Record<string, any>, alteracoes = {}, ctx = contexto, bearer?: string) {
+async function preparar(a: Ambiente, origem: Record<string, any>, alteracoes = {}, ctx = contexto, bearer?: string,
+  dataPrevista = "2026-10-20") {
   const base = (await a.request(BASE, ctx, bearer)).data;
   return a.request(PREPARAR, { contexto: ctx, expectedBaseHash: base.revisao, idempotencyKey: "preparo-ficha",
-    edicao: { protocoloId: origem.template.nome, dataPrevista: "2026-10-20", motivo: "Caso sintético revisado",
+    edicao: { protocoloId: origem.template.nome, dataPrevista, motivo: "Caso sintético revisado",
       planejamento: { modo: "NOVA_LINHA", linha: 1, intencao: "PALIATIVA", numeroCiclo: 1 },
       itens: origem.itens, origemProposta: origem.origemProposta, encaminharFarmacia: false, ...alteracoes } }, bearer);
 }
 const confirmar = (a: Ambiente, p: Record<string, any>) => a.request(CONFIRMAR, { contexto, draftId: p.draftId,
   expectedRevision: p.revision, conteudoHash: p.conteudoHash, idempotencyKey: "assinar-ficha" });
+const quantidadeDrafts = (a: Ambiente) => Number((a.db.prepare("SELECT COUNT(*) AS total FROM draft_envelope").get() as { total: number }).total);
 
 it("conferir e instanciar não gravam fatos; assinar conserva origem e dose, sem administração", async () => {
   const a = await abrir(), antes = a.eventos().length, origem = await instancia(a);
@@ -199,7 +209,9 @@ it.each([
   { caso: "sujeito terceiro", dadoData: "2026-10-01", fonteData: "2026-10-01",
     qualificadores: { polaridade: "AFIRMADA" as const, sujeito: "TERCEIRO" as const, temporalidade: "ATUAL" as const } },
 ])("não calcula MG_M2 com altura $caso", async ({ dadoData, fonteData, qualificadores }) => {
-  const { origem } = await instanciarMgM2ComAltura({ dadoData, fonteData, qualificadores });
+  const { origem } = await instanciarMgM2ComAltura({ fonteData,
+    ...(dadoData === undefined ? {} : { dadoData }),
+    ...(qualificadores === undefined ? {} : { qualificadores }) });
   expect(origem.dadosCorporais).toMatchObject({ pesoKg: 70, alturaCm: null, bsaM2: null });
   expect(origem.itens[0].item).toMatchObject({ calculatedDose: null, prescribedDose: null });
   expect(origem.pendencias.length).toBeGreaterThan(0);
@@ -210,6 +222,50 @@ it("calcula MG_M2 quando a altura atual e datada está documentada", async () =>
   expect(origem.dadosCorporais).toMatchObject({ pesoKg: 70, alturaCm: 170, bsaM2: 1.82 });
   expect(origem.itens[0].item).toMatchObject({ calculatedDose: 182, prescribedDose: 182 });
   expect(origem.pendencias).toEqual([]);
+});
+it("recusa preparar uma proposta MG_M2 quando o peso documentado expirou sem novo evento", async () => {
+  const { a, origem } = await instanciarMgM2ComAltura({ dadoData: "2026-10-01", fonteData: "2026-10-01",
+    qualificadores: { polaridade: "AFIRMADA", sujeito: "PACIENTE", temporalidade: "ATUAL" } });
+  expect(origem.dadosCorporais.pesoKg).toBe(70);
+  const eventosAntes = a.eventos().length, draftsAntes = quantidadeDrafts(a);
+  a.avancarRelogio("2026-11-10T12:00:00-03:00");
+  a.renovarSessao();
+
+  const r = await preparar(a, origem, {}, contexto, undefined, "2026-11-15");
+  expect(r.status).toBe(409);
+  expect(a.eventos()).toHaveLength(eventosAntes);
+  expect(quantidadeDrafts(a)).toBe(draftsAntes);
+});
+it("recusa confirmar MG_M2 se o peso expirar entre preparar e assinar", async () => {
+  const { a, origem } = await instanciarMgM2ComAltura({ dadoData: "2026-10-01", fonteData: "2026-10-01",
+    qualificadores: { polaridade: "AFIRMADA", sujeito: "PACIENTE", temporalidade: "ATUAL" } });
+  const p = await preparar(a, origem, {}, contexto, undefined, "2026-11-15");
+  expect(p.status, JSON.stringify(p.data)).toBe(200);
+  const eventosAntes = a.eventos().length, draftsAntes = quantidadeDrafts(a);
+  a.avancarRelogio("2026-11-10T12:00:00-03:00");
+
+  const r = await confirmar(a, p.data);
+  expect(r.status).toBe(409);
+  expect(a.eventos()).toHaveLength(eventosAntes);
+  expect(quantidadeDrafts(a)).toBe(draftsAntes);
+});
+it("mantém replay idempotente de assinatura concluída mesmo após expirar o peso", async () => {
+  const { a, origem } = await instanciarMgM2ComAltura({ dadoData: "2026-10-01", fonteData: "2026-10-01",
+    qualificadores: { polaridade: "AFIRMADA", sujeito: "PACIENTE", temporalidade: "ATUAL" } });
+  const p = await preparar(a, origem, {}, contexto, undefined, "2026-11-15");
+  expect(p.status, JSON.stringify(p.data)).toBe(200);
+  const primeira = await confirmar(a, p.data);
+  expect(primeira.status).toBe(200);
+  expect(primeira.data.codigo).toBe("GRAVADA");
+  const eventosAssinados = a.eventos().length, draftsAssinados = quantidadeDrafts(a);
+  a.avancarRelogio("2026-11-10T12:00:00-03:00");
+  a.renovarSessao();
+
+  const replay = await confirmar(a, p.data);
+  expect(replay.status).toBe(200);
+  expect(replay.data.codigo).toBe("REPLAY");
+  expect(a.eventos()).toHaveLength(eventosAssinados);
+  expect(quantidadeDrafts(a)).toBe(draftsAssinados);
 });
 it("mudança de fatos ou do conteúdo da ficha invalida origem antes da preparação", async () => {
   const a = await abrir(), origem = await instancia(a);
