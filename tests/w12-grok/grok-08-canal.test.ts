@@ -1,5 +1,5 @@
 // W12-GROK-08 · D-W9-75. Cada sinal tem orientação própria, em RASCUNHO.
-// Febre estritamente acima de 37,8. Negação não dispara. Sem dose. Sempre alerta o médico.
+// Corpus em RASCUNHO não executa. Semântica de orientação só em cópia sintética conferida.
 import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { avaliarCanalRedflags, lerCanalRedflags } from "../../src/rules/canalRedflags.js";
@@ -11,14 +11,24 @@ const json = JSON.parse(readFileSync("corpus/rulesets/canal-redflags.v1.json", "
   sinais: { id: string; orientacao: string; status: string; limiarDecimosExclusivo: number | null }[];
 };
 const canal = lerCanalRedflags(json);
+// Fixture isolada: esta cópia não altera nem aprova o corpus do aplicativo.
+const canalSinteticoConferido = { ...canal, rulesetId: 'fixture-sintetica-sem-uso-clinico',
+  sinais: canal.sinais.map(s => ({ ...s, status: 'CONFERIDA_MEDICO' })) };
 const DOSE = /\b\d+\s*mg\b|\bgotas\b|\bcomprimidos?\b|\b8\/8\b|\bposologia\b|\bml\b/i;
 const PROIBIDO = /\b(liberado|aprovado|apto)\b/i;
 
 function avaliar(relato: string) {
-  return avaliarCanalRedflags(relato, canal);
+  return avaliarCanalRedflags(relato, canalSinteticoConferido);
 }
 
 describe("W12-GROK-08 canal de red flags", () => {
+  it('o corpus real RASCUNHO permanece indisponível e não gera orientação nem alarme', () => {
+    const r = avaliarCanalRedflags('Febre 39 °C, diarreia e vômitos', canal);
+    expect(r.estado).toBe('PENDENTE');
+    expect(r.cobertura).toBe('INDISPONIVEL');
+    expect(r.respostas).toEqual([]);
+    expect(r.alertaMedico).toBe(false);
+  });
   it("versão 1.1.0, 25 sinais em RASCUNHO e os 6 candidatos antigos continuam inativos", () => {
     expect(json.header.versao).toBe("1.1.0");
     expect(canal.sinais).toHaveLength(25);

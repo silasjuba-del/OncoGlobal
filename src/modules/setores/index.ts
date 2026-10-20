@@ -47,6 +47,28 @@ const Admin = z.object({adminId:z.string().min(1),patientId:z.string().min(1),ep
 function dados(f: FatoRetrato): Record<string,unknown> {
   const v=f.dados.valor; return v && typeof v==='object' && !Array.isArray(v) ? v as Record<string,unknown> : f.dados;
 }
+/** Fronteira E (tipo × campo): portadores genéricos (FATO etc.) têm o domínio
+ * decidido pelo campo e o multidomínio legítimo é preservado. Só há conflito
+ * quando um tipo material específico (ex.: ImagingReport, PathologyReport)
+ * carrega campo de outro domínio específico (ex.: extracao.lab): esse fato
+ * não pode alimentar resultado clínico silencioso em setor alheio. */
+function dominioTipoMaterial(tipo:string):'LABORATORIO'|'IMAGEM'|'PATOLOGIA'|null {
+  const t=key(tipo);
+  if(/labresult/.test(t)) return 'LABORATORIO';
+  if(/imaging|imagem|radiolog|examelaudo/.test(t)) return 'IMAGEM';
+  if(/patholog|patolog|biopsy|biopsia/.test(t)) return 'PATOLOGIA';
+  return null;
+}
+function campoLaboratorial(f:FatoRetrato):boolean {
+  return /extracao\.lab|laborat|labresult|hemograma/.test(key(f.campo??''));
+}
+function conflitoTipoCampoLab(f:FatoRetrato):boolean {
+  const dominio=dominioTipoMaterial(f.tipo);
+  return dominio!==null && dominio!=='LABORATORIO' && campoLaboratorial(f);
+}
+function lacunaConflitoTipoCampo(o:AchadosSetor,f:FatoRetrato,setorDono:string) {
+  lacuna(o,'CONFLITO_TIPO_CAMPO',`Metadados tipo/campo divergentes: tipo ${f.tipo} (${setorDono}) com campo laboratorial ${f.campo??'não informado'}. Fato preservado no Retrato com tipo, campo e fontes originais, sem avaliação clínica derivada dele (laboratório, RECIST ou biomarcador) nem resultado VERDE a partir dele até reconciliação; nenhum fato clínico novo foi criado.`,[f]);
+}
 function inicio(r: Retrato,c: Correlacao,setor:SetorClinico,padrao:RegExp): {out:AchadosSetor; fatos:FatoRetrato[]} {
   Retrato.parse(r); Correlacao.parse(c);
   if(c.patientId!==r.patientId||c.encounterId!==r.encounterId||c.tumorLotId!==r.tumorLotId||c.revisaoFatos!==r.revisao
@@ -74,8 +96,10 @@ function proposta(o:AchadosSetor,p:PrescricaoProposta|undefined): PrescricaoProp
   return p;
 }
 export function avaliarLaboratorio(r:Retrato,c:Correlacao,op:OpcoesSetores={}):AchadosSetor {
-  const {out:o,fatos}=inicio(r,c,'LABORATORIO',/laborat|labresult|hemograma|extracao.lab/);
-  if(!fatos.length)lacuna(o,'LAB_AUSENTE','Nenhum resultado laboratorial confirmado.');
+  const {out:o,fatos:selecionados}=inicio(r,c,'LABORATORIO',/laborat|labresult|hemograma|extracao.lab/);
+  for(const f of selecionados.filter(conflitoTipoCampoLab)) lacunaConflitoTipoCampo(o,f,'domínio do tipo divergente do laboratório');
+  const fatos=selecionados.filter(f=>!conflitoTipoCampoLab(f));
+  if(!selecionados.length)lacuna(o,'LAB_AUSENTE','Nenhum resultado laboratorial confirmado.');
   if(!regra(o,op.laboratorio)){lacuna(o,'LAB_SEM_REGRA','Regras laboratoriais conferidas e versionadas ausentes.',fatos,true);return o;}
   const series=new Map<string,{f:FatoRetrato;v:z.infer<typeof Lab>}[]>();
   for(const f of fatos){const d=dados(f);const vs=Array.isArray(d.valores)?d.valores:[d];for(const raw of vs){const obj=raw && typeof raw==='object'?raw as Record<string,unknown>:{}; const p=Lab.safeParse({...obj,codigo:obj.codigo??obj.campo??obj.marker,valor:obj.value??obj.valor,unidade:obj.unit??obj.unidade});
@@ -96,9 +120,12 @@ export function avaliarLaboratorio(r:Retrato,c:Correlacao,op:OpcoesSetores={}):A
 export function avaliarImagem(r:Retrato,c:Correlacao,op:OpcoesSetores={}):AchadosSetor {
   const {out:o,fatos}=inicio(r,c,'IMAGEM',/imagem|imaging|radiolog/);
   if(!fatos.length)lacuna(o,'IMAGEM_AUSENTE','Laudo de imagem confirmado ausente.');
-  for(const f of fatos){const d=dados(f),texto=typeof d.textoLaudo==='string'?d.textoLaudo:typeof d.resumo==='string'?d.resumo:null;
+  for(const f of fatos){const contraditorio=conflitoTipoCampoLab(f);if(contraditorio)lacunaConflitoTipoCampo(o,f,'IMAGEM');
+    const d=dados(f),texto=typeof d.textoLaudo==='string'?d.textoLaudo:typeof d.resumo==='string'?d.resumo:typeof f.dados.textoLaudo==='string'?f.dados.textoLaudo:typeof f.dados.resumo==='string'?f.dados.resumo:null;
     if(!texto){lacuna(o,'LAUDO_AUSENTE','Texto do laudo necessário; imagem bruta não é laudo.',[f]);continue;}
     lacuna(o,`IMAGEM_REVISAO:${f.ref.eventId}`,`Camada 1 (laudo preservado): ${texto}. Camada 2 (estrutura): ${JSON.stringify(d.achados??{})}. Camada 3 (resposta): apenas proposta para revisão médica.`,[f]);
+    // Laudo/fontes/entradas acima ficam preservados, mas fato tipo×campo contraditório não alimenta cálculo clínico (RECIST).
+    if(contraditorio)continue;
     const rec=Recist.safeParse(d.recist);if(!regra(o,op.recist)||!rec.success){lacuna(o,'RECIST_SEM_COBERTURA','RECIST exige lesões confirmadas, baseline, nadir e regra aprovada.',[f],true);continue;}
     const v=avaliarRecist(rec.data,op.recist.conteudo);if(v.candidate_response===null)lacuna(o,'RECIST_INCOMPLETO',v.achado.motivo,[f]);else{o.cobertura.avaliados++;achado(o,`RECIST:${f.ref.eventId}`,`RECIST proposto: ${v.candidate_response}; revisão médica obrigatória.`,'PENDENTE',[f],[op.recist.referencia]);}
   }return o;
@@ -106,11 +133,14 @@ export function avaliarImagem(r:Retrato,c:Correlacao,op:OpcoesSetores={}):Achado
 export function avaliarPatologia(r:Retrato,c:Correlacao,op:OpcoesSetores={}):AchadosSetor {
   const {out:o,fatos}=inicio(r,c,'PATOLOGIA',/patolog|pathology|biomarc/);
   if(!fatos.length)lacuna(o,'PATOLOGIA_AUSENTE','Patologia e biomarcadores não documentados.');
-  for(const f of fatos){const d=dados(f);if(d.pT!=null && !['RESSECCAO','RESECTION'].includes(String(d.specimenRole??d.specimen_role)))
+  for(const f of fatos){if(conflitoTipoCampoLab(f)){lacunaConflitoTipoCampo(o,f,'PATOLOGIA');continue;}
+    const d=dados(f);if(d.pT!=null && !['RESSECCAO','RESECTION'].includes(String(d.specimenRole??d.specimen_role)))
     lacuna(o,`PT:${f.ref.eventId}`,'pT não aplicável sem peça de ressecção identificada; não promover biópsia a estadiamento patológico.',[f]);
     if(d.specimenRole==null&&d.specimen_role==null)lacuna(o,'SPECIMEN_ROLE_AUSENTE','Papel da amostra não identificado.',[f]);}
+  // Fontes excluídas por conflito tipo×campo não sustentam biomarcador, nem indiretamente.
+  const fatosValidos=fatos.filter(f=>!conflitoTipoCampoLab(f));
   if(!regra(o,op.biomarcadoresObrigatorios))lacuna(o,'BIOMARCADOR_COBERTURA','Aplicabilidade de biomarcadores sem regra aprovada para o tumor.',fatos,true);
-  else for(const nome of op.biomarcadoresObrigatorios.conteudo){const fs=fatos.filter(f=>key(String(dados(f).nome??f.campo??''))===key(nome));
+  else for(const nome of op.biomarcadoresObrigatorios.conteudo){const fs=fatosValidos.filter(f=>key(String(dados(f).nome??f.campo??''))===key(nome));
     if(!fs.length||fs.every(f=>dados(f).resultado==null&&dados(f).valor==null))lacuna(o,`BIOMARCADOR_${nome}`,'Biomarcador ausente ou não informado; ausência não é resultado negativo.',fs);
     else {o.cobertura.avaliados++;achado(o,nome,`${nome}: resultado documentado, aplicabilidade vinculada ao tumor.`,'PENDENTE',fs,[op.biomarcadoresObrigatorios.referencia]);}}
   return o;
