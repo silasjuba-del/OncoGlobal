@@ -1,8 +1,8 @@
 import { confirmar, salvarDraft } from '../../src/kernel/ledger/writeRouter.js';
 import { afterEach, expect, it } from 'vitest';
 import { existsSync, readFileSync } from 'node:fs';
-import { criarExecutorImprimir } from '../../src/app/executores/imprimir.js';
-import { criarResolverDocumentoLedger } from '../../src/app/executores/resolverDocumentoLedger.js';
+import { criarExecutorImprimir } from '../../src/kernel/gateway/executores/imprimir.js';
+import { criarResolverDocumentoLedger } from '../../src/kernel/ledger/documentos.js';
 import { criarGateway, memoriaIdempotencia } from '../../src/kernel/gateway/gateway.js';
 import { autorizarSaida } from '../../src/server/autorizacao.js';
 import { abrirAmbiente, cadastrarPaciente, carregarConsulta, criarDiretorio, removerDiretorio,

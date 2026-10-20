@@ -2,7 +2,7 @@
 import { cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { readFileSync } from "node:fs";
-import { NUMERO_CAIXA_MODELO_FLASH, CHAVE_CAIXA_MODELO_FLASH } from "../../src/config/flash.js";
+import { NUMERO_CAIXA_MODELO_FLASH, CHAVE_CAIXA_MODELO_FLASH } from "../../src/contracts/configFlash.js";
 import { CaixaNumerada } from "../../src/contracts/w10/clinico-w10.js";
 import { lerModeloFlash } from "../../src/server/flash.js";
 import { validarCatalogoApac } from "../../src/server/leituras.js";

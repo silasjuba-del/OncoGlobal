@@ -3,9 +3,9 @@
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { describe, expect, it } from "vitest";
-import { lerIdentificacaoCheckin } from "../../src/apac/campos.js";
-import { mapearCadastroModelo08, separarCidadeUf, type CadastroModelo08Entrada } from "../../src/apac/mapearCadastro.js";
-import { lerConfiguracaoServico } from "../../src/config/servico.js";
+import { lerIdentificacaoCheckin } from "../../src/modules/apac/campos.js";
+import { mapearCadastroModelo08, separarCidadeUf, type CadastroModelo08Entrada } from "../../src/modules/apac/mapearCadastro.js";
+import { lerConfiguracaoServico } from "../../src/contracts/configServico.js";
 import { CONFIGURACAO_SERVICO_PADRAO } from "../../src/contracts/w11/configuracaoServico.js";
 import {
   CONFIGURACAO_RECEITUARIO_PADRAO, montarReceitas, rotearItemReceita, type EntradaControlado, type ItemReceita,

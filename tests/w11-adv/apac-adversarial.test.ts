@@ -3,12 +3,12 @@
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { describe, expect, it } from "vitest";
-import { antiglosa, gatesCoerencia, type ContextoAntiglosa, type RegraCidSexo } from "../../src/apac/antiglosa.js";
+import { antiglosa, gatesCoerencia, type ContextoAntiglosa, type RegraCidSexo } from "../../src/modules/apac/antiglosa.js";
 import {
   aplicarIdentificacaoCheckin, lerIdentificacaoCheckin, lerCampo, type CadastroCheckin, type EntradaIbge,
-} from "../../src/apac/campos.js";
-import { BLOCOS_COMPLEMENTARES, CAMPOS_COMPLEMENTARES, preencherLaudo } from "../../src/apac/laudo.js";
-import { montarTabelaSigtap } from "../../src/apac/sigtap.js";
+} from "../../src/modules/apac/campos.js";
+import { BLOCOS_COMPLEMENTARES, CAMPOS_COMPLEMENTARES, preencherLaudo } from "../../src/modules/apac/laudo.js";
+import { montarTabelaSigtap } from "../../src/modules/apac/sigtap.js";
 import { renderizarApacComplementar, renderizarApacLaudo, type TemplateApac } from "../../src/impressao/apacLaudo.js";
 import { apac, CAIXAS, COD_QT, COD_ZERO, proc, CNS_OK, CNS_RUIM } from "../apac-w10/helpers.js";
 

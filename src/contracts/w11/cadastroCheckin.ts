@@ -1,4 +1,4 @@
-// W11-H21 · contrato do cadastro de check-in (promovido de src/apac/campos.ts). Só dados; todos os campos são OPCIONAIS.
+// W11-H21 · contrato do cadastro de check-in (promovido de src/modules/apac/campos.ts). Só dados; todos os campos são OPCIONAIS.
 // Ausente ou inválido = PENDENTE no leitor da APAC. Nada aqui é inferido.
 import { z } from "zod";
 

@@ -4,7 +4,7 @@ import { abrirLedger } from "../../src/kernel/ledger/db.js";
 import { listarEventos } from "../../src/kernel/ledger/ledger.js";
 import { salvarDraft } from "../../src/kernel/ledger/drafts.js";
 import { confirmar } from "../../src/kernel/ledger/writeRouter.js";
-import { projetarEstatistica, projetarEstatisticaLedger } from "../../src/estatistica/index.js";
+import { projetarEstatistica, projetarEstatisticaLedger } from "../../src/kernel/projections/estatistica.js";
 
 function treatment(status: "COMPLETA" | "PARCIAL" | "OMITIDA" | "INTERROMPIDA") {
   return {

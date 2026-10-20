@@ -4,7 +4,7 @@ import type { ClinicalEvent } from "../../src/contracts/operacao.js";
 import { reconciliarCampos } from "../../src/kernel/extracao/reconciliacao.js";
 import { projetarSnapshot } from "../../src/kernel/projections/snapshot.js";
 import { avaliarSerieRecist, type RecistPontoSerie, type RecistSerieInput } from "../../src/rules/recist/index.js";
-import { projetarEstatistica } from "../../src/estatistica/index.js";
+import { projetarEstatistica } from "../../src/kernel/projections/estatistica.js";
 
 function lab(id: string, value: number, date?: string): ClinicalFact {
   return {

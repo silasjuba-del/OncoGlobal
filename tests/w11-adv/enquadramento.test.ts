@@ -6,7 +6,7 @@ import {
   iniciarEnquadramento,
   registrarEnquadramento,
   type EnquadramentoRegulatorio,
-} from "../../src/apac/enquadramento.js";
+} from "../../src/modules/apac/enquadramento.js";
 
 const BASE: EnquadramentoRegulatorio = {
   cid: "C61",
