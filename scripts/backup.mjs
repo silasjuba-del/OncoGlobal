@@ -42,13 +42,24 @@ function parsePayload(value) {
 /* Referências internas conhecidas: o conteúdo já vive no snapshot SQLite do
  * ledger (payload do draft), portanto não viram entrada de arquivo. Namespace
  * com dois-pontos não basta: kind/campo do payload precisa corresponder. */
-/* Draft derivado de LLM (extracaoLlm.ts) herda o rawRef da fonte: só é
- * interno se a fonte declarada existe e tem exatamente este rawRef. */
-const derivadoLlm = (p, c) => p?.kind === "LLM_EXTRACAO_RASCUNHO"
-  && typeof p.sourceDraftId === "string" && c.porId.get(p.sourceDraftId)?.rawRef === c.ref;
+/* Os dois produtores em extracaoLlm.ts derivam de EXTRACAO_RASCUNHO.
+ * Exigir a origem correspondente também recusa autorreferência/ciclos sem original. */
+function originalPdfIntegro(payload) {
+  const original = payload?.original;
+  if (original?.tipo !== "PDF" || typeof original.bytesBase64 !== "string"
+    || typeof original.contentHash !== "string") return false;
+  const bytes = Buffer.from(original.bytesBase64, "base64");
+  return bytes.length > 0 && bytes.toString("base64") === original.bytesBase64
+    && hash(bytes) === original.contentHash;
+}
+const derivadoExtracao = (p, c) => ["LLM_EXTRACAO_RASCUNHO", "D66_TRANSCRICAO_RASCUNHO"].includes(p?.kind)
+  && typeof p.sourceDraftId === "string" && c.porId.get(p.sourceDraftId)?.rawRef === c.ref
+  && c.porId.get(p.sourceDraftId)?.payload?.kind === "EXTRACAO_RASCUNHO"
+  && (p.kind !== "D66_TRANSCRICAO_RASCUNHO" || originalPdfIntegro(c.porId.get(p.sourceDraftId)?.payload));
 const NAMESPACE_INTERNO = {
-  "upload-local": (p, c) => !!p && (["EXTRACAO_RASCUNHO", "D66_TRANSCRICAO_RASCUNHO"].includes(p.kind) || derivadoLlm(p, c)),
-  "importacao-local": (p, c) => p?.kind === "EXTRACAO_RASCUNHO" || derivadoLlm(p, c),
+  "upload-local": (p, c) => p?.kind === "EXTRACAO_RASCUNHO" || derivadoExtracao(p, c),
+  "importacao-local": (p, c) => p?.kind === "EXTRACAO_RASCUNHO"
+    || p?.kind === "LLM_EXTRACAO_RASCUNHO" && derivadoExtracao(p, c),
   "retrato-local": (p) => p?.kind === "SINTESE_RASCUNHO",
   "registro-medico": (p, c) => p?.kind === "ESTADO_DOENCA_RASCUNHO" && c.suffix === c.draftId,
   "manual": (p) => p?.campo === "medicamentos",

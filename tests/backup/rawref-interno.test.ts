@@ -2,6 +2,7 @@ import { afterEach, describe, expect, it } from "vitest";
 import { existsSync, mkdtempSync, mkdirSync, readFileSync, rmSync, symlinkSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
+import { createHash } from "node:crypto";
 // proveniência: dados sintéticos - não utilizar em produção
 import { abrirLedger } from "../../src/kernel/ledger/db.js";
 import { salvarDraft, lerDraft } from "../../src/kernel/ledger/drafts.js";
@@ -12,6 +13,9 @@ const dirs: string[] = [];
 afterEach(() => { for (const d of dirs.splice(0)) rmSync(d, { recursive: true, force: true }); });
 const SENHA = "senha-sintetica-backup";
 const EM = "2026-10-19T12:00:00Z";
+const PDF_SINTETICO = Buffer.from("%PDF-1.4\nfonte sintetica de teste de backup\n%%EOF");
+const ORIGINAL_PDF = { tipo: "PDF", bytesBase64: PDF_SINTETICO.toString("base64"),
+  contentHash: createHash("sha256").update(PDF_SINTETICO).digest("hex") };
 
 function cenario() {
   const dir = mkdtempSync(join(tmpdir(), "og-rawref-")); dirs.push(dir);
@@ -26,6 +30,50 @@ function draft(db: ReturnType<typeof abrirLedger>, draftId: string, rawRef: stri
 }
 
 describe("backup: rawRef interno conhecido vs físico vs desconhecido (ARQ-05)", () => {
+  it.each([
+    { nome: "orfao", sourceDraftId: "ausente", sourceRef: null, sourceKind: "EXTRACAO_RASCUNHO" },
+    { nome: "divergente", sourceDraftId: "origem", sourceRef: "upload-local:outro", sourceKind: "EXTRACAO_RASCUNHO" },
+    { nome: "autorref", sourceDraftId: "d66", sourceRef: null, sourceKind: "EXTRACAO_RASCUNHO" },
+    { nome: "circular", sourceDraftId: "origem", sourceRef: "upload-local:doc", sourceKind: "D66_TRANSCRICAO_RASCUNHO" },
+  ])("D66 $nome: derivado não pode omitir uma fonte sem original correspondente", async ({ nome, sourceDraftId, sourceRef, sourceKind }) => {
+    const c = cenario();
+    if (sourceRef) draft(c.db, "origem", sourceRef, { kind: sourceKind, sourceDraftId: "d66" });
+    draft(c.db, "d66", "upload-local:doc", { kind: "D66_TRANSCRICAO_RASCUNHO", sourceDraftId });
+    c.db.close();
+    await expect(criarBackup({ dbPath: c.dbPath, filesRoot: c.root, destino: c.dest, nome, senha: SENHA }))
+      .rejects.toThrow("REFERENCIA_AMBIGUA");
+    expect(existsSync(join(c.dest, `${nome}.ogbak`))).toBe(false);
+  });
+
+  it("D66 com fonte original correspondente restaura a referência e bytes do PDF", async () => {
+    const c = cenario();
+    draft(c.db, "origem", "upload-local:doc", { kind: "EXTRACAO_RASCUNHO", original: ORIGINAL_PDF });
+    draft(c.db, "d66", "upload-local:doc", { kind: "D66_TRANSCRICAO_RASCUNHO", sourceDraftId: "origem" });
+    c.db.close();
+    const arquivo = await criarBackup({ dbPath: c.dbPath, filesRoot: c.root, destino: c.dest, nome: "d66-valido", senha: SENHA });
+    const restored = restaurarBackup({ arquivo, destino: join(c.dir, "restaurado-d66"), senha: SENHA });
+    const reaberto = abrirLedger(restored.database);
+    try {
+      expect(lerDraft(reaberto, "d66")?.payload).toMatchObject({ sourceDraftId: "origem" });
+      expect(lerDraft(reaberto, "origem")?.payload).toMatchObject({ original: ORIGINAL_PDF });
+    } finally { reaberto.close(); }
+  });
+
+  it.each([
+    undefined,
+    { ...ORIGINAL_PDF, contentHash: "0".repeat(64) },
+    { ...ORIGINAL_PDF, bytesBase64: "invalido%%" },
+    { ...ORIGINAL_PDF, tipo: "IMAGEM" },
+  ])("D66 sem original íntegro na origem é recusado", async (original) => {
+    const c = cenario();
+    draft(c.db, "origem", "upload-local:doc", { kind: "EXTRACAO_RASCUNHO", original });
+    draft(c.db, "d66", "upload-local:doc", { kind: "D66_TRANSCRICAO_RASCUNHO", sourceDraftId: "origem" });
+    c.db.close();
+    await expect(criarBackup({ dbPath: c.dbPath, filesRoot: c.root, destino: c.dest, nome: "sem-original", senha: SENHA }))
+      .rejects.toThrow("REFERENCIA_AMBIGUA");
+    expect(existsSync(join(c.dest, "sem-original.ogbak"))).toBe(false);
+  });
+
   it.each<[string, unknown]>([
     ["referencia-local", { kind: "FONTE_JEV" }],
     ["consulta-flash-local", { kind: "FLASH_RASCUNHO" }],
