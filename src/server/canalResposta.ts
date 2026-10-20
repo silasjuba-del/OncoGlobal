@@ -390,8 +390,8 @@ export function confirmarRespostaCanalPeloMedico(
         return { ok: false as const, codigo: "CONTEXTO_ALTERADO_APOS_EXIBICAO" as const };
       }
       const autPrevia = db.prepare(
-        "SELECT invalidada FROM canal_resposta_autorizada WHERE respostaId = ? AND versao = ?",
-      ).get(entrada.respostaId, entrada.versao) as { invalidada: number } | undefined;
+        "SELECT autorizacaoJson, invalidada FROM canal_resposta_autorizada WHERE respostaId = ? AND versao = ?",
+      ).get(entrada.respostaId, entrada.versao) as { autorizacaoJson: string; invalidada: number } | undefined;
       if (autPrevia?.invalidada === 1) {
         return { ok: false as const, codigo: "CONTEXTO_ALTERADO_APOS_EXIBICAO" as const };
       }
@@ -457,6 +457,26 @@ export function confirmarRespostaCanalPeloMedico(
         invalidadaPorMudancaDeContexto: false,
       });
 
+      if (autPrevia) {
+        const original = AutorizacaoRespostaCanalServidor.parse(JSON.parse(autPrevia.autorizacaoJson));
+        // Revalidar o consentimento atual não permite reatribuir a autorização
+        // original a outro evento/termo, médico ou horário de tentativa.
+        if (hashCanonico(original.consentimento) !== hashCanonico(autorizacao.consentimento)) {
+          return { ok: false as const, codigo: "CONSENTIMENTO_REVOGADO_OU_AUSENTE" as const };
+        }
+        const { aprovadoPor: _autorOriginal, ...vinculoOriginal } = original;
+        const { aprovadoPor: _autorTentativa, ...vinculoTentativa } = autorizacao;
+        if (!rascunho.confirmadoPeloMedico
+          || rascunho.confirmadoPorMedicoId !== original.aprovadoPor.medicoId
+          || rascunho.confirmadoPorCrm !== original.aprovadoPor.crm
+          || rascunho.confirmadoEm !== original.aprovadoPor.em
+          || hashCanonico(vinculoOriginal) !== hashCanonico(vinculoTentativa)) {
+          return { ok: false as const, codigo: "CONTEXTO_ALTERADO_APOS_EXIBICAO" as const };
+        }
+        // Nenhum UPDATE no rascunho/autorização, inclusive depois do envio.
+        return { ok: true as const, autorizacao: original };
+      }
+
       const rascunhoConfirmado: RascunhoRespostaCanal = {
         ...rascunho,
         confirmadoPeloMedico: true,
@@ -474,10 +494,6 @@ export function confirmarRespostaCanalPeloMedico(
       db.prepare(`
         INSERT INTO canal_resposta_autorizada (respostaId, versao, autorizacaoJson, invalidada, aprovadoEm)
         VALUES (?, ?, ?, 0, ?)
-        ON CONFLICT(respostaId, versao) DO UPDATE SET
-          autorizacaoJson = excluded.autorizacaoJson,
-          invalidada = 0,
-          aprovadoEm = excluded.aprovadoEm
       `).run(autorizacao.respostaId, autorizacao.versao, JSON.stringify(autorizacao), acesso.agora);
 
       return { ok: true as const, autorizacao };
