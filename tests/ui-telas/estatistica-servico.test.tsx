@@ -3,12 +3,13 @@ import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { EstatisticaServicoResposta, type VisaoEstatisticaServico } from "../../src/contracts/api/estatisticaServico.js";
 import { PainelEstatistica } from "../../src/ui/estatistica/PainelEstatistica.js";
+import { ESTATISTICA_VERSAO } from "../../src/contracts/api/estatisticaVersao.js";
 
 afterEach(cleanup);
 
 function visao(overrides: Partial<VisaoEstatisticaServico> = {}): VisaoEstatisticaServico {
   return {
-    versao: "W10-REAUDITORIA-03",
+    versao: ESTATISTICA_VERSAO,
     escopo: "LEDGER_COMPLETO",
     periodoClinico: null,
     denominadorPacientes: 0,

@@ -45,9 +45,11 @@ function isObject(value: unknown): value is Record<string, unknown> {
 }
 
 function categoriaEvento(tipo: string): CategoriaEventoEstatistico {
-  if (tipo === "FATO") return "FATO";
-  if (tipo === "DOCUMENTO") return "DOCUMENTO";
-  if (tipo === "TreatmentAdministration") return "ADMINISTRACAO";
+  // Aliases conhecidos de esquema. Não altera o evento/fingerprint original
+  // nem interpreta automaticamente versões futuras ou tipos desconhecidos.
+  if (tipo === "FATO" || tipo === "FATO@1") return "FATO";
+  if (tipo === "DOCUMENTO" || tipo === "DOCUMENTO@1") return "DOCUMENTO";
+  if (tipo === "TreatmentAdministration" || tipo === "TreatmentAdministration@1") return "ADMINISTRACAO";
   return "OUTRO";
 }
 
@@ -64,9 +66,10 @@ function diaClinico(evento: ClinicalEventType): { dia: string | null; invalida: 
   const payload = evento.payload;
   const data = isObject(payload) && isObject(payload.data) ? payload.data : null;
   if (!data) return { dia: null, invalida: false };
-  const value = evento.tipo === "TreatmentAdministration" ? data.inicio : data.dataClinica;
+  const administracao = categoriaEvento(evento.tipo) === "ADMINISTRACAO";
+  const value = administracao ? data.inicio : data.dataClinica;
   if (value === null || value === undefined) return { dia: null, invalida: false };
-  if (evento.tipo === "TreatmentAdministration") {
+  if (administracao) {
     if (!Instante.safeParse(value).success || typeof value !== "string") return { dia: null, invalida: true };
     const civil = dataCivilDoServico(value);
     return civil.estado === "OK" ? { dia: civil.dataCivil, invalida: false } : { dia: null, invalida: true };
@@ -149,7 +152,7 @@ export function projetarEstatistica(eventos: readonly ClinicalEventType[], opcoe
   const administracoesInvalidas: ClinicalEventType[] = [];
 
   for (const evento of vigentes) {
-    if (evento.tipo !== "TreatmentAdministration") continue;
+    if (categoriaEvento(evento.tipo) !== "ADMINISTRACAO") continue;
     const payload = evento.payload;
     const data = isObject(payload) && isObject(payload.data) ? payload.data : null;
     const parsed = data ? TreatmentAdministration.safeParse(data) : null;
@@ -193,9 +196,9 @@ export function projetarEstatistica(eventos: readonly ClinicalEventType[], opcoe
     const categoria = categoriaEvento(evento.tipo);
     eventosPorCategoria[categoria] += 1;
     pacientesPorCategoria[categoria].add(evento.patientId);
-    if (evento.tipo === "TreatmentAdministration") continue;
+    if (categoria === "ADMINISTRACAO") continue;
 
-    if (evento.tipo === "DOCUMENTO" && evento.revisao === "ASSINADO") {
+    if (categoria === "DOCUMENTO" && evento.revisao === "ASSINADO") {
       const payload = evento.payload;
       const outer = isObject(payload) && isObject(payload.data) ? payload.data : null;
       const signature = outer && isObject(outer.signature) ? SignatureReference.safeParse(outer.signature) : null;

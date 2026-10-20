@@ -4,6 +4,7 @@ import type { BasePrescricaoExecutavelResposta, ConfirmarPrescricaoExecutavelPed
 import { EstatisticaServicoResposta, type VisaoEstatisticaServico } from "../../src/contracts/api/estatisticaServico.js";
 import type { ContextoAcaoComposta } from "../../src/contracts/api/acoesCompostas.js";
 import { criarPortaHttp } from "../../src/ui/api/http.js";
+import { ESTATISTICA_VERSAO } from "../../src/contracts/api/estatisticaVersao.js";
 
 afterEach(() => { vi.unstubAllGlobals(); vi.restoreAllMocks(); });
 
@@ -53,7 +54,7 @@ const confirmed: PrescricaoExecutavelConfirmada = {
 };
 
 const estatistica = (periodo: typeof period | null): VisaoEstatisticaServico => ({
-  versao: "W10-REAUDITORIA-03", escopo: periodo ? "PERIODO_CLINICO" : "LEDGER_COMPLETO", periodoClinico: periodo,
+  versao: ESTATISTICA_VERSAO, escopo: periodo ? "PERIODO_CLINICO" : "LEDGER_COMPLETO", periodoClinico: periodo,
   denominadorPacientes: 0,
   exclusoes: { eventosNaoConfirmados: 0, eventosSupersedidos: 0, linhasDuplicadas: 0,
     administracoesInvalidas: 0, administracoesConflito: 0, eventosSemDataClinica: 0,
