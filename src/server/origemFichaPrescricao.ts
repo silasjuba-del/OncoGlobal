@@ -1,8 +1,8 @@
+import { alturaDocumentada } from "./f0c/dadosDocumentados.js";
 import { z } from "zod";
-import { DataCivil, Instante, type Sessao } from "../contracts/base.js";
+import type { Sessao } from "../contracts/base.js";
 import type { Retrato } from "../contracts/f1/retrato.js";
 import type { ProtocolTemplate } from "../contracts/w10/prescricao.js";
-import { FactQualifiers } from "../contracts/w10/extracao.js";
 import { InstanciarFichaPedidoSchema, InstanciacaoFichaRespostaSchema, type InstanciacaoFichaResposta } from "../contracts/api/fichasPrescricao.js";
 import type { ContextoAcaoComposta } from "../contracts/api/acoesCompostas.js";
 import type { EdicaoPrescricaoExecutavel } from "../contracts/api/operacaoPrescricaoExecutavel.js";
@@ -10,8 +10,6 @@ import type { OrigemPropostaPrescricaoExecutavel } from "../contracts/api/prescr
 import { lerDraft, listarEventos, salvarDraft, transacao } from "../kernel/comandos/portas.js";
 import type { criarMotorF1 } from "../kernel/orquestracao/runtime.js";
 import { bsaMosteller, instanciarProtocolo } from "../rules/prescricao/instanciarProtocolo.js";
-import { dataCivilDoServico } from "../rules/tempoServico.js";
-import { montarFichaMinima } from "../modules/consulta/revisaoClinica.js";
 import { lerConsulta } from "./leituras.js";
 import { baseAjusteAnterior } from "./f0c/baseAjusteAnterior.js";
 import { hashConteudoExibido as hash } from "./sessao.js";
@@ -23,38 +21,6 @@ const Registro = z.object({
   resposta: InstanciacaoFichaRespostaSchema,
 }).strict();
 type RegistroOrigem = z.infer<typeof Registro>;
-/** A altura usada na dose deve ser a documentada na mesma visão clínica, não um escalar sem data. */
-function alturaDocumentada(retrato: Retrato, agora: string): number | null {
-  const altura = montarFichaMinima(retrato).find(c => c.id === "alturaCm");
-  const hoje = dataCivilDoServico(agora);
-  if (!altura || altura.estado !== "DOCUMENTADO" || typeof altura.valor !== "number" || hoje.estado !== "OK") return null;
-  const limite = retrato.dataClinicaEncontro && retrato.dataClinicaEncontro < hoje.dataCivil
-    ? retrato.dataClinicaEncontro : hoje.dataCivil;
-  const dataSegura = (v: unknown): boolean => {
-    if (DataCivil.safeParse(v).success) return String(v) <= limite;
-    if (!Instante.safeParse(v).success) return false;
-    const dia = dataCivilDoServico(String(v));
-    return dia.estado === "OK" && dia.dataCivil <= limite && Date.parse(String(v)) <= Date.parse(agora);
-  };
-  const afirmativa = (v: unknown): boolean => {
-    if (!v || typeof v !== "object" || Array.isArray(v)) return true;
-    const d = v as Record<string, unknown>;
-    if (d.requiresConfirmation === true || d.negado === true || d.negated === true
-      || ["INFERRED", "UNCERTAIN"].includes(String(d.evidence))) return false;
-    if (d.qualificadores !== undefined) {
-      const q = FactQualifiers.safeParse(d.qualificadores);
-      if (!q.success || q.data.polaridade !== "AFIRMADA" || q.data.sujeito !== "PACIENTE" || q.data.temporalidade !== "ATUAL") return false;
-    }
-    if (["dataClinica", "factDate", "data", "date"].some(k => d[k] !== undefined && d[k] !== null && !dataSegura(d[k]))) return false;
-    return afirmativa(d.valor);
-  };
-  if (!dataSegura(altura.data) || altura.fontes.some(f => f.dataClinica !== null && !dataSegura(f.dataClinica))
-    || !altura.fatos.length || altura.fatos.some(ref => {
-      const f = retrato.fatos.find(f => f.ref.eventId === ref.eventId && f.ref.revisao === ref.revisao);
-      return !f || retrato.integridade.some(p => p.eventoId === ref.eventId) || !afirmativa(f.dados);
-    })) return null;
-  return altura.valor;
-}
 function hashOrigem(r: RegistroOrigem): string {
   const { hash: _hash, ...pointer } = r.resposta.origemProposta;
   return hash({ ...r, resposta: { ...r.resposta, origemProposta: pointer } });

@@ -27,13 +27,16 @@ const templateMgM2 = () => {
   const base = template();
   return ProtocolTemplate.parse({ ...base, itens: [{ ...base.itens[0]!, standardDose: 100, doseBasis: "MG_M2", unit: "mg/m²" }] });
 };
-async function abrir(protocolo = template()) {
+async function abrir(protocolo = template(), dadosPaciente: { nascimento?: string; sexoCadastral?: "M" | "F" } = {}) {
   const dir = criarDiretorio(), db = abrirLedger(":memory:");
   let agora = AGORA;
   const sessoes = criarGerenciadorSessao({ medicoId: "medico-ficha-sintetico", crm: "CRM-SINTETICO",
     senha: "senha-sintetica-ficha-123", duracaoMs: 90 * 24 * 60 * 60 * 1000, agora: () => agora });
   let token = sessoes.login("senha-sintetica-ficha-123")!.token;
-  const corpus = { templatesProtocolo: [protocolo] } as NonNullable<ServidorDeps["corpus"]>;
+  const corpusParcial: Pick<NonNullable<ServidorDeps["corpus"]>, "templatesProtocolo" | "caixasTodas"> = {
+    templatesProtocolo: [protocolo], caixasTodas: [],
+  };
+  const corpus = corpusParcial as NonNullable<ServidorDeps["corpus"]>;
   const gateway = criarGateway({ agora: () => agora, auditar: () => {}, store: memoriaIdempotencia(), executores: {} });
   const motorF1 = criarMotorF1(db, () => agora, () => ({ regras: [],
     biblioteca: { id: "biblioteca-sintetica", versao: "1", hash: "hash-sintetico" } }));
@@ -75,7 +78,7 @@ async function abrir(protocolo = template()) {
     expect(r.estado).toBe("GRAVADA");
   }
   seed("Paciente", { patientId: contexto.patientId, nome: "Paciente sintético da ficha", identificadores: [],
-    nascimento: null, sexoCadastral: "NAO_INFORMADO", divergencia: false });
+    nascimento: dadosPaciente.nascimento ?? null, sexoCadastral: dadosPaciente.sexoCadastral ?? "NAO_INFORMADO", divergencia: false });
   seed("TumorLot", { patientId: contexto.patientId, tumorLotId: contexto.tumorLotId, cid: presente("C50"),
     topografia: presente("Topografia sintética"), histologia: presente("Histologia sintética"),
     estadiamentos: [], finalidadeApac: presente("PALIATIVA"), marcos: [] });
@@ -209,12 +212,15 @@ it.each([
   { caso: "sujeito terceiro", dadoData: "2026-10-01", fonteData: "2026-10-01",
     qualificadores: { polaridade: "AFIRMADA" as const, sujeito: "TERCEIRO" as const, temporalidade: "ATUAL" as const } },
 ])("não calcula MG_M2 com altura $caso", async ({ dadoData, fonteData, qualificadores }) => {
-  const { origem } = await instanciarMgM2ComAltura({ fonteData,
+  const { a, origem } = await instanciarMgM2ComAltura({ fonteData,
     ...(dadoData === undefined ? {} : { dadoData }),
     ...(qualificadores === undefined ? {} : { qualificadores }) });
   expect(origem.dadosCorporais).toMatchObject({ pesoKg: 70, alturaCm: null, bsaM2: null });
   expect(origem.itens[0].item).toMatchObject({ calculatedDose: null, prescribedDose: null });
   expect(origem.pendencias.length).toBeGreaterThan(0);
+  const consulta = await a.request("/consulta/carregar", contexto);
+  expect(consulta.status).toBe(200);
+  expect(consulta.data.avaliacaoClinica.dadosCorporais.alturaCm).toBeNull();
 });
 it("calcula MG_M2 quando a altura atual e datada está documentada", async () => {
   const { origem } = await instanciarMgM2ComAltura({ dadoData: "2026-10-01", fonteData: "2026-10-01",
@@ -286,4 +292,79 @@ it("revogação depois da prévia impede assinatura; replay assinado permanece h
   await revisao(b, "INATIVAR");
   const replay = await confirmar(b, pb.data); expect(replay.status).toBe(200); expect(replay.data.codigo).toBe("REPLAY");
   expect(b.eventos()).toHaveLength(assinados);
+});
+
+function templateAuc() {
+  const t = template();
+  return ProtocolTemplate.parse({ ...t, itens: [{ ...t.itens[0]!, doseBasis: "AUC", standardDose: 5, unit: "mg" }] });
+}
+async function abrirRenal() {
+  return abrir(templateAuc(), { nascimento: "1960-01-01", sexoCadastral: "M" });
+}
+function peso(a: Ambiente, kg: number, data: string) {
+  a.seed("Weight", (id: string) => ({ kg, origem: "MEDIDO", data, sourceId: id }),
+    id => [{ ...fonteSintetica(id), dataClinica: data }]);
+}
+function creatinina(a: Ambiente, valor: number, data: string) {
+  a.seed("LabResult", (id: string) => ({ campo: "creatinina", valor, unidade: "mg/dL", data, sourceId: id }),
+    id => [{ ...fonteSintetica(id), dataClinica: data }]);
+}
+
+it("AUC permanece pendente se creatininas discordam no mesmo dia sem ordem comprovada", async () => {
+  const a = await abrirRenal(); peso(a, 70, "2026-10-09");
+  creatinina(a, 1, "2026-10-09"); creatinina(a, 2, "2026-10-09T11:00:00-03:00");
+  const antes = a.eventos(), r = await instancia(a);
+  expect(r.dadosCorporais.clcr).toBeNull();
+  expect(r.itens[0].item.prescribedDose).toBeNull();
+  expect(a.eventos()).toEqual(antes);
+});
+
+it("AUC permanece pendente com dois pesos discordantes no mesmo dia", async () => {
+  const a = await abrirRenal();
+  peso(a, 70, "2026-10-09"); peso(a, 80, "2026-10-09");
+  creatinina(a, 1, "2026-10-09T11:00:00-03:00");
+  const r = await instancia(a);
+  expect(r.dadosCorporais).toMatchObject({ pesoKg: null, clcr: null });
+  expect(r.itens[0].item.prescribedDose).toBeNull();
+});
+
+it("laboratorio UTC no dia seguinte ao civil do servico nao provoca fallback para exame antigo", async () => {
+  const a = await abrirRenal(); a.avancarRelogio("2026-10-09T23:00:00-03:00");
+  peso(a, 70, "2026-10-09");
+  creatinina(a, 1, "2026-10-08T12:00:00-03:00"); creatinina(a, 2, "2026-10-10T01:00:00Z");
+  const consulta = await a.request("/consulta/carregar", contexto);
+  expect(consulta.status).toBe(200);
+  expect(consulta.data.avaliacaoClinica.renal.valoresUsados.creatinina.valor).toBe(2);
+  const r = await instancia(a);
+  expect(r.dadosCorporais.clcr).toBe(consulta.data.avaliacaoClinica.renal.clcrMlMin);
+});
+
+it("AUC nao usa peso ou laboratorio posteriores ao dia da consulta historica", async () => {
+  const a = await abrirRenal();
+  a.seed("AgendaEntry", { patientId: contexto.patientId, encounterId: contexto.encounterId, horario: "10:00", data: "2026-10-01" });
+  peso(a, 70, "2026-10-09"); creatinina(a, 1, "2026-10-09T11:00:00-03:00");
+  const r = await instancia(a);
+  expect(r.dadosCorporais).toMatchObject({ pesoKg: null, clcr: null });
+  expect(r.itens[0].item.prescribedDose).toBeNull();
+});
+
+it("AUC usa creatinina de instante comprovadamente posterior dentro da consulta ancorada", async () => {
+  const a = await abrirRenal();
+  a.seed("AgendaEntry", { patientId: contexto.patientId, encounterId: contexto.encounterId, horario: "12:00", data: "2026-10-09" });
+  peso(a, 70, "2026-10-09");
+  creatinina(a, 1, "2026-10-08T10:00:00-03:00"); creatinina(a, 2, "2026-10-09T10:00:00-03:00");
+  const consulta = await a.request("/consulta/carregar", contexto);
+  expect(consulta.status).toBe(200);
+  expect(consulta.data.avaliacaoClinica.renal.valoresUsados.creatinina.valor).toBe(2);
+  const r = await instancia(a);
+  expect(r.dadosCorporais.clcr).toBeGreaterThan(0);
+  expect(r.itens[0].item.prescribedDose).toBe(305);
+});
+
+it("AUC preserva conflito entre instantes equivalentes com offsets diferentes", async () => {
+  const a = await abrirRenal(); peso(a, 70, "2026-10-09");
+  creatinina(a, 1, "2026-10-09T10:00:00-03:00"); creatinina(a, 2, "2026-10-09T13:00:00Z");
+  const r = await instancia(a);
+  expect(r.dadosCorporais.clcr).toBeNull();
+  expect(r.itens[0].item.prescribedDose).toBeNull();
 });
