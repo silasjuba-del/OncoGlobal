@@ -27,10 +27,12 @@ export function edicaoDaAcao(baseEntrada: BasePrescricaoExecutavelResposta, acao
   const { ciclo, episodio, vigente } = base;
   if (base.pendencias.length || !ciclo || !episodio || !vigente)
     return falhar("É necessária uma prescrição estruturada vigente, sem pendências, neste ciclo.");
+  if (r.tipo === "TROCAR_PROTOCOLO")
+    return falhar("A troca de protocolo exige selecionar a nova ficha e preparar uma nova prescrição.");
   if (r.estado !== "PREPARADA" || r.pendencias.length || !r.antes || !r.depois)
     return falhar("A ação ainda tem pendências; confira o plano antes de usar.");
   if (!["MANTER_CICLO", "ADIAR_CICLO", "REDUZIR_DOSE"].includes(r.tipo ?? ""))
-    return falhar("A troca de protocolo exige selecionar a nova ficha e preparar uma nova prescrição.");
+    return falhar("Selecione uma ação compatível com a prescrição deste ciclo.");
   const antes = r.antes, depois = r.depois;
   if (!contextoIgual(base.contexto, antes.contexto) || !contextoIgual(base.contexto, depois.contexto)
     || !contextoIgual(base.contexto, vigente.contexto)

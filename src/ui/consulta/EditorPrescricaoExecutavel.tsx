@@ -8,6 +8,8 @@ import {
 import type { ItemPrescricaoExecutavel } from "../../contracts/api/prescricaoExecutavel.js";
 import type { DoseBasis } from "../../contracts/w10/prescricao.js";
 import type { InstanciacaoFichaResposta } from "../../contracts/api/fichasPrescricao.js";
+import type { AcaoCompostaPreparada } from "../../contracts/api/execucaoAcaoComposta.js";
+import { edicaoDaAcao } from "../../modules/prescricao/acaoParaPrescricao.js";
 import { pendenciasLimitesDeclarados } from "../../rules/prescricao/documentoExecutavel.js";
 // @ts-expect-error folha CSS pura, resolvida pelo Vite
 import "./prescricao-executavel.css";
@@ -48,6 +50,30 @@ const BASES = ["FIXED", "MG_KG", "MCG_KG", "MG_M2", "AUC", "OTHER"] as const;
 const ROTULOS_CLASSE: Record<Classe, string> = {
   PRE_QT: "Pré-QT", QT: "QT", POS_QT: "Pós-QT", NAO_ONCOLOGICA: "Não oncológica",
 };
+const ROTULOS_ACAO = {
+  MANTER_CICLO: "Manter ciclo",
+  ADIAR_CICLO: "Adiar ciclo",
+  REDUZIR_DOSE: "Reduzir dose",
+  TROCAR_PROTOCOLO: "Trocar protocolo",
+} as const;
+
+function diffAcao(acao: AcaoCompostaPreparada): string[] {
+  return acao.resultado.diff.map(mudanca => {
+    if (mudanca.campo === "doseMg")
+      return `Item ${mudanca.item}: ${mudanca.antes} mg → ${mudanca.depois} mg`;
+    if (mudanca.campo === "previstoEm")
+      return `Data prevista: ${mudanca.antes ?? "Não informada"} → ${mudanca.depois ?? "Não informada"}`;
+    if (mudanca.campo === "protocoloId")
+      return `Protocolo: ${mudanca.antes ?? "Não informado"} → ${mudanca.depois ?? "Não informado"}`;
+    return `Item ${mudanca.item}: ${mudanca.antes ?? "Não informado"} → ${mudanca.depois ?? "Não informado"}`;
+  });
+}
+
+function canonico(value: unknown): unknown {
+  if (Array.isArray(value)) return value.map(canonico);
+  if (!value || typeof value !== "object") return value;
+  return Object.fromEntries(Object.entries(value).sort(([a], [b]) => a.localeCompare(b)).map(([key, v]) => [key, canonico(v)]));
+}
 
 function uuid(): string {
   return globalThis.crypto.randomUUID();
@@ -144,13 +170,16 @@ function materializar(item: ItemDraft): ItemPrescricaoExecutavel | null {
 export interface EditorPrescricaoExecutavelProps {
   base: Base | null;
   origemFicha?: InstanciacaoFichaResposta | null;
+  origemAcao?: AcaoCompostaPreparada | null;
   ocupado?: boolean;
   aoPreparar: (edicao: Edicao) => Promise<Preparada>;
   aoAssinar: (preparacao: Preparada) => Promise<void>;
   aoAlterarPendente?: (pendente: boolean) => void;
+  aoDescartarAcao?: () => void;
 }
 
-export function EditorPrescricaoExecutavel({ base, origemFicha = null, ocupado = false, aoPreparar, aoAssinar, aoAlterarPendente }: EditorPrescricaoExecutavelProps) {
+export function EditorPrescricaoExecutavel({ base, origemFicha = null, origemAcao = null, ocupado = false,
+  aoPreparar, aoAssinar, aoAlterarPendente, aoDescartarAcao }: EditorPrescricaoExecutavelProps) {
   const [edicao, setEdicao] = useState<FormularioPrescricao>(() => inicializar(base));
   const [itens, setItens] = useState<ItemDraft[]>(() => base?.vigente?.itens.map(paraRascunho) ?? []);
   const [preparacao, setPreparacao] = useState<PreparacaoVisivel | null>(null);
@@ -164,8 +193,13 @@ export function EditorPrescricaoExecutavel({ base, origemFicha = null, ocupado =
   const montado = useRef(true);
   const pendente = useRef(false);
   const origemVista = useRef<InstanciacaoFichaResposta | null>(null);
+  const origemAcaoVista = useRef<{ origem: AcaoCompostaPreparada; chaveBase: string } | null>(null);
+  const origemAcaoIgnorada = useRef<AcaoCompostaPreparada | null>(null);
   const [fichaAplicada, setFichaAplicada] = useState<InstanciacaoFichaResposta | null>(null);
   const [fichaPendente, setFichaPendente] = useState<InstanciacaoFichaResposta | null>(null);
+  const [acaoAplicada, setAcaoAplicada] = useState<AcaoCompostaPreparada | null>(null);
+  const [acaoPendente, setAcaoPendente] = useState<AcaoCompostaPreparada | null>(null);
+  const [pendenciasAcao, setPendenciasAcao] = useState<string[]>([]);
 
   useEffect(() => {
     montado.current = true;
@@ -194,6 +228,8 @@ export function EditorPrescricaoExecutavel({ base, origemFicha = null, ocupado =
     setEdicao(inicializar(base));
     setItens(base?.vigente?.itens.map(paraRascunho) ?? []);
     setFichaAplicada(null); setFichaPendente(null);
+    setAcaoAplicada(null); setAcaoPendente(null); setPendenciasAcao([]); origemAcaoVista.current = null;
+    origemAcaoIgnorada.current = null;
     setPreparacao(null);
     setMensagem("");
     setErros([]);
@@ -203,7 +239,7 @@ export function EditorPrescricaoExecutavel({ base, origemFicha = null, ocupado =
   }, [base, aoAlterarPendente]);
 
   useEffect(() => {
-    if (!origemFicha || !base || origemVista.current === origemFicha) return;
+    if (!origemFicha || !base || origemAcao || origemVista.current === origemFicha) return;
     origemVista.current = origemFicha;
     if (origemFicha.contexto.patientId !== base.contexto.patientId
       || origemFicha.contexto.encounterId !== base.contexto.encounterId || origemFicha.contexto.tumorLotId !== base.contexto.tumorLotId) {
@@ -211,7 +247,24 @@ export function EditorPrescricaoExecutavel({ base, origemFicha = null, ocupado =
     }
     if (pendente.current) setFichaPendente(origemFicha);
     else aplicarFicha(origemFicha);
-  }, [origemFicha, base?.contexto.patientId, base?.contexto.encounterId, base?.contexto.tumorLotId]);
+  }, [origemFicha, origemAcao, base?.contexto.patientId, base?.contexto.encounterId, base?.contexto.tumorLotId]);
+
+  useEffect(() => {
+    if (!origemAcao || !base || origemAcaoIgnorada.current === origemAcao) return;
+    const chaveBase = chaveDaBase(base);
+    if (origemAcaoVista.current?.origem === origemAcao && origemAcaoVista.current.chaveBase === chaveBase) return;
+    origemAcaoVista.current = { origem: origemAcao, chaveBase };
+    if (origemAcao.resultado.baseRevisao !== base.revisao) {
+      setAcaoPendente(null);
+      setPendenciasAcao(["A base da prescrição mudou. Gere uma nova ação revisada antes de continuar."]);
+      return;
+    }
+    const proposta = edicaoDaAcao(base, origemAcao);
+    setPendenciasAcao(proposta.pendencias);
+    if (!proposta.edicao) return;
+    if (pendente.current) setAcaoPendente(origemAcao);
+    else aplicarAcao(origemAcao, proposta.edicao);
+  }, [origemAcao, base]);
 
   const protocolos = useMemo(() => [...new Set([
     base?.vigente?.protocoloId,
@@ -236,6 +289,26 @@ export function EditorPrescricaoExecutavel({ base, origemFicha = null, ocupado =
     setEdicao(anterior => ({ ...anterior, protocoloId: ficha.template.nome, origemProposta: ficha.origemProposta }));
     setItens(ficha.itens.map(paraRascunho));
     setFichaAplicada(ficha); setFichaPendente(null);
+    setAcaoAplicada(null); setAcaoPendente(null); setPendenciasAcao([]);
+  }
+
+  function aplicarAcao(acao: AcaoCompostaPreparada, proposta: Edicao) {
+    marcarEdicao();
+    setEdicao({ ...proposta });
+    setItens(proposta.itens.map(paraRascunho));
+    setFichaAplicada(null); setFichaPendente(null);
+    setAcaoAplicada(acao); setAcaoPendente(null); setPendenciasAcao([]);
+  }
+
+  function descartarAcao() {
+    if (origemAcao) origemAcaoIgnorada.current = origemAcao;
+    if (acaoAplicada) {
+      marcarEdicao();
+      setEdicao(anterior => ({ ...anterior, origemProposta: null }));
+      setAcaoAplicada(null);
+    }
+    setAcaoPendente(null); setPendenciasAcao([]);
+    aoDescartarAcao?.();
   }
 
   function alterarCampo<K extends keyof FormularioPrescricao>(campo: K, valor: FormularioPrescricao[K]) {
@@ -295,6 +368,7 @@ export function EditorPrescricaoExecutavel({ base, origemFicha = null, ocupado =
 
   function construirEdicao(): Edicao | null {
     const problemas: string[] = [];
+    if (pendenciasAcao.length) problemas.push(...pendenciasAcao);
     if (!base) problemas.push("Base da prescrição indisponível para conferir o contexto.");
     if (!edicao.protocoloId.trim()) problemas.push("Informe o protocolo ou esquema desta prescrição.");
     if (!edicao.dataPrevista) problemas.push("Informe a data prevista.");
@@ -322,6 +396,15 @@ export function EditorPrescricaoExecutavel({ base, origemFicha = null, ocupado =
     if (!parsed.success) {
       setErros(["Revise os campos estruturados da prescrição antes de preparar a prévia."]);
       return null;
+    }
+    if (acaoAplicada && base) {
+      const proposta = edicaoDaAcao(base, acaoAplicada);
+      const semFarmacia = (value: Edicao) => ({ ...value, encaminharFarmacia: false });
+      if (!proposta.edicao || JSON.stringify(canonico(semFarmacia(parsed.data)))
+        !== JSON.stringify(canonico(semFarmacia(proposta.edicao)))) {
+        setErros(["A edição mudou além da ação revisada. Desvincule a proposta para editar manualmente ou gere uma nova ação."]);
+        return null;
+      }
     }
     const limites = parsed.data.itens.flatMap(entry => pendenciasLimitesDeclarados(entry.item));
     if (limites.length) { setErros(limites); return null; }
@@ -384,6 +467,38 @@ export function EditorPrescricaoExecutavel({ base, origemFicha = null, ocupado =
   }
 
   return <section className="prescricao-executavel" aria-label="Editor de prescrição executável" aria-busy={bloqueado}>
+    {pendenciasAcao.length ? <section className="prescricao-executavel__pending" aria-label="Pendências da ação" role="status">
+      {pendenciasAcao.map((pendencia, index) => <p key={"acao-pendencia-" + index}>{pendencia}</p>)}
+      {!acaoAplicada && !acaoPendente && origemAcao ? <button type="button" disabled={bloqueado}
+        onClick={descartarAcao}>Descartar proposta de ação e seguir manualmente</button> : null}
+    </section> : null}
+    {acaoPendente ? <section className="prescricao-executavel__pending" aria-label="Substituição por ação revisada" role="alert">
+      <p>A ação {ROTULOS_ACAO[acaoPendente.resultado.tipo ?? "MANTER_CICLO"]} está pronta para substituir os campos editados.
+        Confirme para manter a origem e as mudanças revisadas.</p>
+      {diffAcao(acaoPendente).length ? <ul>{diffAcao(acaoPendente).map((item, index) =>
+        <li key={"acao-pendente-diff-" + index}>{item}</li>)}</ul> : <p>Sem alteração de dose ou data prevista.</p>}
+      <button type="button" disabled={bloqueado} onClick={() => {
+        const proposta = base ? edicaoDaAcao(base, acaoPendente)
+          : { edicao: null, pendencias: ["Base da prescrição ausente."] };
+        if (proposta.edicao) aplicarAcao(acaoPendente, proposta.edicao);
+        else setPendenciasAcao(proposta.pendencias);
+      }}>Substituir pela ação revisada</button>
+      <button type="button" disabled={bloqueado} onClick={descartarAcao}>Manter minha edição</button>
+    </section> : null}
+    {acaoAplicada && edicao.origemProposta ? <section aria-label="Origem da proposta de ação">
+      <h3>Proposta revisada: {ROTULOS_ACAO[acaoAplicada.resultado.tipo ?? "MANTER_CICLO"]}</h3>
+      <p>Motivo: {acaoAplicada.resultado.motivo}</p>
+      {diffAcao(acaoAplicada).length ? <ul>{diffAcao(acaoAplicada).map((item, index) =>
+        <li key={"acao-diff-" + index}>{item}</li>)}</ul> : <p>Sem alteração de dose ou data prevista.</p>}
+      <details><summary>Rastreabilidade da ação</summary>
+        <p>Rascunho revisado {acaoAplicada.draftId} · revisão {acaoAplicada.revision}</p>
+        <p style={{ overflowWrap: "anywhere" }}>Hash SHA-256: {acaoAplicada.conteudoHash}</p>
+        <p>Revisão da base: {acaoAplicada.resultado.baseRevisao}</p>
+        <p>Hash da base da ação: {acaoAplicada.resultado.baseHash}</p>
+      </details>
+    </section> : null}
+    {acaoAplicada && edicao.origemProposta ? <button type="button" disabled={bloqueado}
+      onClick={descartarAcao}>Desvincular ação e editar manualmente</button> : null}
     {fichaPendente ? <section aria-label="Substituição por ficha de protocolo" role="alert">
       <p>Há alterações na prescrição. A ficha {fichaPendente.template.nome} está pronta para substituir os itens atuais.</p>
       <button type="button" disabled={bloqueado} onClick={() => aplicarFicha(fichaPendente)}>Substituir itens pela ficha selecionada</button>

@@ -17,6 +17,12 @@ export function mensagemErroFicha(erro: unknown): string {
     ORIGEM_FICHA_CALCULO_ALTERADO: "Os parâmetros ou sua validade mudaram depois do cálculo. Atualize o catálogo e calcule a ficha novamente.",
     ORIGEM_FICHA_PROTOCOLO_ALTERADO: "O esquema foi alterado. Selecione outra ficha ou desvincule a origem para editar manualmente.",
     ORIGEM_PROTOCOLO_ALTERADA: "Um item foi alterado sem registrar a edição manual. Confira sua origem e o motivo.",
+    ORIGEM_ACAO_AUSENTE: "A proposta de ação não está vinculada à prescrição. Selecione novamente a ação revisada nesta consulta.",
+    ORIGEM_ACAO_INVALIDA: "Não foi possível validar a origem da ação. Gere uma nova proposta revisada.",
+    ORIGEM_ACAO_FORA_DO_CONTEXTO: "A proposta pertence a outro paciente, encontro ou lote. Gere uma nova ação nesta consulta.",
+    ORIGEM_ACAO_BASE_ALTERADA: "A prescrição ou o ciclo mudou após a proposta. Gere uma nova ação revisada.",
+    ORIGEM_ACAO_PENDENTE: "A ação tem pendências e não pode ser aplicada à prescrição. Revise a proposta antes de continuar.",
+    ORIGEM_ACAO_EDICAO_ALTERADA: "A edição mudou além da ação revisada. Desvincule a proposta para editar manualmente ou gere uma nova ação.",
     BASE_PRESCRICAO_ALTERADA: "Os dados da prescrição mudaram. Atualize a consulta antes de preparar novamente.",
     PRESCRICAO_INCOMPLETA: "Há dados de prescrição ou preparo pendentes. Confira os itens antes de preparar a prévia.",
   };
