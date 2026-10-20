@@ -394,3 +394,20 @@ it("HTTP generico nao exibe calculo como documento nem vincula revisao global ao
   expect(a.db.prepare("SELECT * FROM draft_envelope WHERE draftId=?").get(global.draftId!)).toEqual(global);
   expect(a.eventos()).toEqual(antes);
 });
+
+it.each([false, true])("ancoras de agenda concordantes ou conflitantes controlam o calculo: conflito=%s", async conflito => {
+  const a = await abrirRenal();
+  for (const data of [conflito ? "2026-10-08" : "2026-10-09", "2026-10-09"])
+    a.seed("AgendaEntry", { patientId: contexto.patientId, encounterId: contexto.encounterId, horario: "12:00", data });
+  peso(a, 70, "2026-10-09"); creatinina(a, 2, "2026-10-09T11:00:00-03:00");
+  const consulta = await a.request("/consulta/carregar", contexto);
+  expect(consulta.status).toBe(200);
+  const r = await instancia(a);
+  if (conflito) {
+    expect(consulta.data.retrato.integridade).toContainEqual(expect.objectContaining({ motivo: "DATA_ENCONTRO_AMBIGUA" }));
+    expect(r.dadosCorporais).toMatchObject({ pesoKg: null, clcr: null });
+    expect(r.itens[0].item.prescribedDose).toBeNull();
+  } else {
+    expect(r.itens[0].item.prescribedDose).toBe(305);
+  }
+});
