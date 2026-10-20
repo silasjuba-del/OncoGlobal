@@ -81,6 +81,7 @@ function preparacao(edicao: EdicaoPrescricaoExecutavel, base = basePrescricao())
   return { draftId: "prescricao-preparada-sintetica", revision: 1, conteudoHash: "d".repeat(64),
     baseHash: base.revisao,
     conteudo: { ...conteudoVigente(base.contexto.patientId), protocoloId: edicao.protocoloId,
+      documentVersion: (base.vigente?.documentVersion ?? 0) + 1,
       dataPrevista: edicao.dataPrevista, motivo: edicao.motivo, itens: edicao.itens,
       origemProposta: edicao.origemProposta },
     texto: "Prescrição sintética revisada.", avisos: [], efeitos: [] };
@@ -203,21 +204,42 @@ describe("prescrição a partir de ação revisada", () => {
     expect(aoPrepararTroca.mock.calls[0]![0].origemProposta).toBeNull();
   });
 
-  it("abre o editor a partir da proposta revisada e prepara prescrição com o ponteiro da ação", async () => {
+  it("uma nova edição não herda a proposta histórica da versão já assinada", async () => {
+    const base = basePrescricao();
+    base.vigente!.origemProposta = { draftId: "acao-historica-sintetica", revision: 0, hash: hashAcao };
+    const historico = structuredClone(base.vigente);
+    const aoPreparar = vi.fn(async (edicao: EdicaoPrescricaoExecutavel) => preparacao(edicao, base));
+    render(<EditorPrescricaoExecutavel base={base} aoPreparar={aoPreparar} aoAssinar={vi.fn()} />);
+    fireEvent.change(screen.getByLabelText("Motivo da prescrição"), { target: { value: "Nova revisão médica sintética." } });
+    fireEvent.click(screen.getByRole("button", { name: "Preparar prévia exata" }));
+    await waitFor(() => expect(aoPreparar).toHaveBeenCalledTimes(1));
+    expect(aoPreparar.mock.calls[0]![0].origemProposta).toBeNull();
+    expect(base.vigente).toEqual(historico);
+  });
+
+  it("abre, prepara e assina sem reaplicar a ação antiga na recarga da consulta", async () => {
     const porta = criarPortaFalsa();
     const resumo = baseAcao();
     const rxBase = basePrescricao();
     porta.carregarBaseAcaoComposta = vi.fn(async () => ({ base: resumo, pendencias: [] }));
     porta.prepararAcaoComposta = vi.fn(async (pedido: PrepararAcaoCompostaPedido) =>
       acao("MANTER_CICLO", pedido.pedido, resumo));
-    porta.lerBasePrescricaoExecutavel = vi.fn(async () => rxBase);
+    let assinada: PrescricaoExecutavelPreparada | null = null;
+    let preparadaAtual: PrescricaoExecutavelPreparada;
+    porta.lerBasePrescricaoExecutavel = vi.fn(async () => assinada ? {
+      ...rxBase, revisao: "e".repeat(64), vigente: assinada.conteudo,
+      ciclo: { ...rxBase.ciclo!, prescricaoRef: { documentId: assinada.conteudo.documentId,
+        documentVersion: assinada.conteudo.documentVersion } },
+    } : rxBase);
     const prepararPrescricao = vi.fn(async (pedido: PrepararPrescricaoExecutavelPedido) =>
-      preparacao(pedido.edicao, rxBase));
+      preparadaAtual = preparacao(pedido.edicao, rxBase));
     porta.prepararPrescricaoExecutavel = prepararPrescricao;
-    porta.confirmarPrescricaoExecutavel = vi.fn(async (_pedido: ConfirmarPrescricaoExecutavelPedido): Promise<PrescricaoExecutavelConfirmada> => ({
-      codigo: "GRAVADA", documentId: "doc-sintetico", documentVersion: 3, eventoId: "evento-sintetico",
-      cicloId: "ciclo-acao-1", episodioId: "episodio-acao-1",
-    }));
+    porta.confirmarPrescricaoExecutavel = vi.fn(async (_pedido: ConfirmarPrescricaoExecutavelPedido): Promise<PrescricaoExecutavelConfirmada> => {
+      assinada = preparadaAtual;
+      return { codigo: "GRAVADA", documentId: assinada.conteudo.documentId,
+        documentVersion: assinada.conteudo.documentVersion, eventoId: "evento-sintetico",
+        cicloId: assinada.conteudo.contexto.cicloId, episodioId: assinada.conteudo.contexto.episodioId };
+    });
     render(<ConsultaPersistida porta={porta} contexto={contexto} />);
 
     fireEvent.click(await screen.findByRole("button", { name: "Manter ciclo" }));
@@ -233,5 +255,10 @@ describe("prescrição a partir de ação revisada", () => {
     expect(prepararPrescricao.mock.calls[0]![0].edicao.itens.map(entry => entry.item.prescribedDose)).toEqual([100, 50]);
     expect(screen.getByRole("region", { name: "Prévia da prescrição" })).toBeTruthy();
     expect(porta.confirmarPrescricaoExecutavel).not.toHaveBeenCalled();
+    fireEvent.click(screen.getByRole("button", { name: "Confirmar e assinar prescrição" }));
+    await waitFor(() => expect(porta.lerBasePrescricaoExecutavel).toHaveBeenCalledTimes(2));
+    await waitFor(() => expect((screen.getByRole("button", { name: "Preparar prévia exata" }) as HTMLButtonElement).disabled).toBe(false));
+    expect(screen.queryByRole("status", { name: "Pendências da ação" })).toBeNull();
+    expect(screen.queryByRole("region", { name: "Origem da proposta de ação" })).toBeNull();
   });
 });

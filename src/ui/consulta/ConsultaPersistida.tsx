@@ -180,6 +180,7 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, versaoClinica
         || confirmada.episodioId !== preparacao.conteudo.contexto.episodioId)
         throw new Error("A confirmação não corresponde à prévia exibida. Confira o registro antes de concluir.");
       aoAlterarPrescricaoPendente?.(false);
+      setOrigemAcaoRx(null); setOrigemFichaRx(null);
       if (aoAtualizarClinico) aoAtualizarClinico(); else setVersao(v => v + 1);
       setMensagem("Prescrição assinada e ciclo planejado gravados. Nenhuma administração registrada.");
     } catch (error) {

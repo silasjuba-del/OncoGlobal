@@ -131,7 +131,8 @@ function inicializar(base: Base | null): FormularioPrescricao {
     dataPrevista: base?.ciclo?.previstoEm ?? "",
     motivo: "",
     planejamento: planejar(base, modo),
-    origemProposta: base?.vigente?.origemProposta ?? null,
+    // The signed version retains its historical source; a new edit starts a new proposal.
+    origemProposta: null,
     encaminharFarmacia: false,
   };
 }
