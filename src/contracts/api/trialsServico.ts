@@ -363,7 +363,7 @@ export const AvaliacaoEstudoRespostaSchema = rejectOwnUndefined(z.object({
   fatos: z.array(PatientFactSchema),
   elegivel: z.literal(false),
 }).strict().superRefine((response, context) => {
-  if (!response.estudo.review)
+  if (!response.estudo.review || response.estudo.review.decision !== "CONFIRMAR")
     context.addIssue({ code: "custom", path: ["estudo", "review"], message: "UNREVIEWED_STUDY_CANNOT_BE_EVALUATED" });
   if (response.fatos.some(fact => fact.patientId !== response.contexto.patientId))
     context.addIssue({ code: "custom", path: ["fatos"], message: "FACT_PATIENT_CONTEXT_MISMATCH" });

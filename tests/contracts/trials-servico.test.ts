@@ -195,6 +195,9 @@ describe("contratos Zod do serviço de trials", () => {
     const resposta = { contexto: context(), estudo: study({ review: review() }), revisaoFatos: hashFacts,
       resultado: matchResult(), fatos: facts, elegivel: false };
     expect(AvaliacaoEstudoRespostaSchema.parse(resposta).elegivel).toBe(false);
+    expect(AvaliacaoEstudoRespostaSchema.safeParse({
+      ...resposta, estudo: study({ review: review({ decision: "REJEITAR" }) }),
+    }).success).toBe(false);
     expect(AvaliacaoEstudoRespostaSchema.safeParse({ ...resposta, elegivel: true }).success).toBe(false);
     expect(AvaliacaoEstudoRespostaSchema.safeParse({ ...resposta, fatos: [patientFact({ patientId: "other-patient" })] }).success).toBe(false);
   });

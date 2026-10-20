@@ -9,8 +9,7 @@ import { dadosDoEvento, projetarSnapshot } from "../kernel/projections/snapshot.
 import { hashConteudoExibido as hash } from "./sessao.js";
 
 function evidencia(evento: ClinicalEvent): EvidenceRef {
-  const conteudo = { eventId: evento.eventId, data: dadosDoEvento(evento), fontes: evento.fontes,
-    revisao: evento.revisao, criadoPor: evento.criadoPor };
+  const conteudo = evento;
   return { sourceId: evento.eventId, sourceRef: `ledger:${evento.eventId}`, locator: "payload.data",
     exactText: JSON.stringify(conteudo), contentHash: hash(conteudo) };
 }
@@ -34,12 +33,12 @@ export function lerFatosTrials(db: DatabaseSync, contexto: ContextoAcaoComposta,
   const eventos = listarEventos(db, contexto.patientId).filter(e => ["CONFIRMADO", "ASSINADO"].includes(e.revisao)
     && Date.parse(e.criadoEm) <= Date.parse(agora));
   const snapshot = projetarSnapshot(eventos, contexto.patientId, contexto.tumorLotId,
-    contexto.encounterId, "trial-fatos@1");
+    contexto.encounterId, "trial-fatos@2");
   const porId = new Map(eventos.map(e => [e.eventId, e]));
   const fatos: PatientFact[] = [];
   for (const [factKey, campo] of Object.entries(snapshot.campos)) {
     const fontes = campo.eventIds.flatMap(id => porId.has(id) ? [porId.get(id)!] : []);
-    if (!fontes.length || fontes.some(e => e.patientId !== contexto.patientId)) continue;
+    if (!fontes.length || fontes.some(e => e.patientId !== contexto.patientId || !["FATO", "FATO@1"].includes(e.tipo))) continue;
     const evidencias = fontes.map(evidencia);
     if (campo.estado === "VERMELHO") {
       fatos.push({ patientId: contexto.patientId, factKey, status: "CONFLITO", sources: evidencias });

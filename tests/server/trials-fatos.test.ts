@@ -32,6 +32,7 @@ function instantOffset(seconds: number): string {
 function registrar(a: Awaited<ReturnType<typeof abrirAmbiente>>, input: {
   campo: string; valor: unknown; patientId?: string; encounterId?: string; tumorLotId?: string | null;
   em?: string; extras?: Record<string, unknown>; revisao?: "CONFIRMADO" | "ASSINADO";
+  tipo?: "FATO" | "FATO@1" | "ReviewDecision";
 }) {
   const patientId = input.patientId ?? PACIENTE;
   const encounterId = input.encounterId ?? ENCONTRO;
@@ -44,7 +45,7 @@ function registrar(a: Awaited<ReturnType<typeof abrirAmbiente>>, input: {
     payload: {}, diagnostics: [], revision: 0, criadoEm: AGORA });
   const result = executarConfirmacao(a.db, { ...ctx, operationId: id, reviewDecisionId: id,
     sessao: a.sessoes.obter(a.token)!, em, registros: [{ draftId: id, expectedRevision: 0,
-      eventId: id, tipo: "FATO", payload: { campo: input.campo, valor: input.valor, ...input.extras },
+      eventId: id, tipo: input.tipo ?? "FATO", payload: { campo: input.campo, valor: input.valor, ...input.extras },
       fontes: [fonteSintetica(id)], revisao: input.revisao ?? "CONFIRMADO" }] });
   expect(result.estado).toBe("GRAVADA");
   return id;
@@ -57,6 +58,20 @@ it("não promove draft local sem evento confirmado", async () => {
     diagnostics: [], revision: 0, criadoEm: AGORA });
 
   expect(lerFatosTrials(a.db, contexto, AGORA).fatos).toEqual([]);
+});
+
+it("uma decisão registrada de revisão não se torna um fato clínico positivo", async () => {
+  const a = await ambiente();
+  registrar(a, { tipo: "ReviewDecision", campo: "marcador-sintetico", valor: true, extras: { decisao: "REJEITAR" } });
+  expect(lerFatosTrials(a.db, contexto, AGORA).fatos).toEqual([]);
+});
+
+it("aceita o alias canônico FATO@1 com a mesma origem auditável", async () => {
+  const a = await ambiente();
+  registrar(a, { tipo: "FATO@1", campo: "marcador-sintetico", valor: "documentado" });
+  expect(lerFatosTrials(a.db, contexto, AGORA).fatos).toMatchObject([
+    { factKey: "marcador-sintetico", value: "documentado", status: "CONFIRMADO" },
+  ]);
 });
 
 it("isola paciente e lote tumoral ao projetar somente o contexto solicitado", async () => {
