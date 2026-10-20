@@ -60,6 +60,7 @@ import { AcaoRevisaoPedido, ClosureVinculoContato } from "../contracts/w10/closu
 import { criarOncoassistJev } from "../kernel/llm/jev/oncoassist.js";
 import { operarOncoassistPropostas } from "./oncoassistPropostas.js";
 import { rascunhoJevNaoPromovivel } from "../kernel/ledger/writeRouter.js";
+import { auditar } from "../kernel/ledger/ledger.js";
 import { detectarEmergencias } from "../rules/radsEmergencias.js";
 import { PlanoFlashEntrada, lerModeloFlash, prepararFinalizacaoFlash, salvarRascunhoFlash } from "./flash.js";
 import { CHAVE_CAIXA_MODELO_FLASH } from "../contracts/configFlash.js";
@@ -375,6 +376,10 @@ function confirmarBloco(deps: ServidorDeps, token: string, input: Confirmar): { 
       reviewDecisionId,sessao,em,registros:[...registros,...auxiliares.map(a=>({...a,expectedRevision:0,fontes:[],revisao:"CONFIRMADO" as const}))]});
     if(result.estado==="NEGADA")deps.db.exec("ROLLBACK TO flash_assinatura");
     deps.db.exec("RELEASE flash_assinatura");
+    // O rollback clínico desfaz qualquer auditoria gravada sob o SAVEPOINT;
+    // a negativa é registrada de novo, já fora dele, para durar sem efeito clínico.
+    if(result.estado==="NEGADA") auditar(deps.db,{ator:{tipo:"SESSAO",id:sessao.medicoId},acaoPedida:"CONFIRMAR",
+      decisao:"NEGADA",motivoCodigo:result.motivo??"CONFIRMACAO_NEGADA",politicaVersao:"W2-01",em});
     return {status:result.estado==="NEGADA"?409:200,body:{codigo:result.estado,resultRef:result.resultRef}};
   } catch(error) {deps.db.exec("ROLLBACK TO flash_assinatura");deps.db.exec("RELEASE flash_assinatura");throw error;}
 
