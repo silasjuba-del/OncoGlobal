@@ -11,9 +11,14 @@ const RELATO_TERCEIRO = new RegExp(
 const HIPOTESE = /\b(?:não se pode excluir|sugestiv[oa]s?|compat[ií]ve(?:l|is)(?:\s+com)?|prov[aá]vel(?:mente)?|poss[ií]ve(?:l|is)(?:mente)?|suspeit[oa]s?|hip[oó]tese)\b/iu;
 const NEGACAO = /\b(?:não\s+(?:há|observamos|apresenta|refere|relata|tem)|nega|negou|negativo para|sem\s+(?:dor|náusea|dormência|formigamento|sinais de|evidência(?: de)?|les(?:ão|ões)|nódul(?:o|os)|foc(?:o|os)|neoplasia|carcinoma|adenocarcinoma|tumor|metástase|expressão|amplificação|HER2|RE|RP|Ki-67|PD-L1))(?=$|[^\p{L}\p{N}_])/iu;
 const NEGADOR = /(?:^|[^\p{L}\p{N}_])(?:n[ãa]o|sem|aus[eê]ncia|ausente)(?=$|[^\p{L}\p{N}_])/iu;
-const FUTURO = /\b(?:futuro|futura|futuramente|terá|apresentará|receberá|vai\s+(?:ter|apresentar|receber|fazer)|programad[oa]\s+para)(?=$|[^\p{L}\p{N}_])/iu;
-const HISTORICO = /\b(?:tinha|tivera|havia|histórico|histórica|antecedente|anteriormente|no passado)(?=$|[^\p{L}\p{N}_])/iu;
-const ATUAL = /\b(?:atual(?:mente)?|hoje|agora|há|existe|apresenta|relata|refere)(?=$|[^\p{L}\p{N}_])/iu;
+// O mesmo vocabulário delimita predicados e qualifica o tempo; reconhecer um
+// verbo na coordenação sem reconhecer seu tempo não pode herdar o tempo anterior.
+const VERBOS_PASSADO = "(?:tinha|teve|tivera|havia|apresentou|apresentava|apresentara|relatou|relatava|referiu|referia|informou|informava|sentiu|sentia|negou)";
+const VERBOS_PRESENTE = "(?:há|existe|apresenta|relata|refere|informa|tem|sente|nega)";
+const VERBOS_FUTURO = "(?:terá|apresentará|receberá|vai\\s+(?:ter|apresentar|receber|fazer))";
+const FUTURO = new RegExp(`\\b(?:futuro|futura|futuramente|amanhã|${VERBOS_FUTURO}|programad[oa]\\s+para)${FIM_TOKEN}`, "iu");
+const HISTORICO = new RegExp(`\\b(?:${VERBOS_PASSADO}|ontem|anteontem|histórico|histórica|antecedente|anteriormente|no passado)${FIM_TOKEN}`, "iu");
+const ATUAL = new RegExp(`\\b(?:atual(?:mente)?|hoje|agora|${VERBOS_PRESENTE})${FIM_TOKEN}`, "iu");
 const SINTOMA = /\b(?:dormência|formigamento|náusea|dor)\b/giu;
 
 // Fecha somente complementos de companhia seguidos de predicado da oração
@@ -22,7 +27,7 @@ const COMPANHIA = new RegExp(
   `,?\\s*acompanhad[oa]\\s+(?:da|do|de|por|pela|pelo)\\s+(?:(?:sua|seu|a|o)\\s+)?${PARENTE}\\s*,?\\s*(?=(?:(?:e|mas)\\s+)?(?:relata|refere|apresenta|informa)\\b)`, "giu",
 );
 const SUJEITO = `(?:(?:(?:a|o|sua|seu)\\s+)?(?:paciente|eu|${PARENTE})(?:\\s+d[ao]\\s+paciente)?\\s+)?`;
-const PREDICADO = "(?:relata|refere|apresenta|informa|tem|tinha|terá|com|sem|n[ãa]o|nega|negou|aus[eê]ncia|ausente)";
+const PREDICADO = `(?:${VERBOS_PASSADO}|${VERBOS_PRESENTE}|${VERBOS_FUTURO}|com|sem|n[ãa]o|aus[eê]ncia|ausente)`;
 // Uma lista ("nega dor, náusea e formigamento") não abre outro escopo.
 const COORDENACAO = new RegExp(
   `(?:\\s*,?\\s*(?<![\\p{L}\\p{N}_])(?:e|mas|porém|contudo)\\s+|,\\s*)(?=${SUJEITO}${PREDICADO}${FIM_TOKEN})`, "iu",

@@ -8,9 +8,18 @@ import { abrirLedger } from "../../src/kernel/ledger/db.js";
 import { salvarDraft, lerDraft } from "../../src/kernel/ledger/drafts.js";
 import { criarBackup } from "../../scripts/backup.mjs";
 import { restaurarBackup } from "../../scripts/backup-restore.mjs";
+import { rotearDutos } from "../../src/server/dutos.js";
+import { criarGerenciadorSessao } from "../../src/server/sessao.js";
+import { AuditoriaOncoassist } from "../../src/contracts/api/oncoassist.js";
+import { confirmar } from "../../src/kernel/ledger/writeRouter.js";
 
 const dirs: string[] = [];
-afterEach(() => { for (const d of dirs.splice(0)) rmSync(d, { recursive: true, force: true }); });
+const bancos = new Set<ReturnType<typeof abrirLedger>>();
+afterEach(() => {
+  for (const db of bancos) { try { db.close(); } catch { /* já fechado pelo teste */ } }
+  bancos.clear();
+  for (const d of dirs.splice(0)) rmSync(d, { recursive: true, force: true });
+});
 const SENHA = "senha-sintetica-backup";
 const EM = "2026-10-19T12:00:00Z";
 const PDF_SINTETICO = Buffer.from("%PDF-1.4\nfonte sintetica de teste de backup\n%%EOF");
@@ -23,6 +32,7 @@ function cenario() {
   mkdirSync(join(root, "anexos"), { recursive: true }); mkdirSync(dest);
   writeFileSync(join(root, "anexos", "fisico.txt"), "conteudo-fisico-sintetico");
   const db = abrirLedger(dbPath);
+  bancos.add(db);
   return { dir, dbPath, root, dest, db };
 }
 function draft(db: ReturnType<typeof abrirLedger>, draftId: string, rawRef: string, payload: unknown) {
@@ -30,6 +40,44 @@ function draft(db: ReturnType<typeof abrirLedger>, draftId: string, rawRef: stri
 }
 
 describe("backup: rawRef interno conhecido vs físico vs desconhecido (ARQ-05)", () => {
+  it.each([
+    { campo: "anexo" },
+    { kind: "JEV_CLASSIFICACAO_RASCUNHO" },
+    { kind: "JEV_CLASSIFICACAO_RASCUNHO", auditoria: { draftId: "outra-fonte" } },
+    { kind: "JEV_DIVERGENCIA_RASCUNHO", propostaId: "outra-proposta" },
+    { kind: "JEV_PROPOSTA_RASCUNHO" },
+  ])("colisão com ID existente sem relação declarada não omite anexo ausente: %j", async payload => {
+    const c = cenario();
+    draft(c.db, "anexo-perdido", "importacao-local:fonte", { kind: "EXTRACAO_RASCUNHO" });
+    draft(c.db, "referenciador", "anexo-perdido", payload);
+    c.db.close();
+    await expect(criarBackup({ dbPath: c.dbPath, filesRoot: c.root, destino: c.dest, nome: "colisao", senha: SENHA }))
+      .rejects.toThrow("REFERENCIA_AMBIGUA");
+    expect(existsSync(join(c.dest, "colisao.ogbak"))).toBe(false);
+  });
+
+  it("autorreferência arbitrária também não omite anexo ausente", async () => {
+    const c = cenario();
+    draft(c.db, "anexo-perdido", "anexo-perdido", { campo: "anexo" });
+    c.db.close();
+    await expect(criarBackup({ dbPath: c.dbPath, filesRoot: c.root, destino: c.dest, nome: "self", senha: SENHA }))
+      .rejects.toThrow("REFERENCIA_AMBIGUA");
+    expect(existsSync(join(c.dest, "self.ogbak"))).toBe(false);
+  });
+
+  it.each([
+    { kind: "JEV_CLASSIFICACAO_RASCUNHO", auditoria: { draftId: "origem", propostaId: "derivado" } },
+    { kind: "JEV_DIVERGENCIA_RASCUNHO", propostaId: "origem" },
+  ])("relação declarada com produtor de destino incompatível continua ambígua: %j", async payload => {
+    const c = cenario();
+    draft(c.db, "origem", "consulta-flash-local", { kind: "FLASH_RASCUNHO" });
+    draft(c.db, "derivado", "origem", payload);
+    c.db.close();
+    await expect(criarBackup({ dbPath: c.dbPath, filesRoot: c.root, destino: c.dest, nome: "destino", senha: SENHA }))
+      .rejects.toThrow("REFERENCIA_AMBIGUA");
+    expect(existsSync(join(c.dest, "destino.ogbak"))).toBe(false);
+  });
+
   it.each([
     { nome: "orfao", sourceDraftId: "ausente", sourceRef: null, sourceKind: "EXTRACAO_RASCUNHO" },
     { nome: "divergente", sourceDraftId: "origem", sourceRef: "upload-local:outro", sourceKind: "EXTRACAO_RASCUNHO" },
@@ -97,10 +145,39 @@ describe("backup: rawRef interno conhecido vs físico vs desconhecido (ARQ-05)",
     draft(c.db, "d-triagem", "triagem-local:encontro-sintetico", { kind: "SALAO_TRIAGEM_RASCUNHO", contexto: { encounterId: "encontro-sintetico" } });
     draft(c.db, "d-manual", "manual:abc123", { campo: "medicamentos", valor: ["medicamento-sintetico"] });
     draft(c.db, "d-fonte-jev", "referencia-local", { kind: "FONTE_JEV" });
-    // Jev: rawRef é o draftId da fonte (referência entre drafts), não arquivo.
-    draft(c.db, "d-jev", "d-fonte-jev", { kind: "JEV_PROPOSTA_RASCUNHO" });
+    // Contrato real de oncoassistPropostas.ts: a auditoria aponta à extração.
+    // A fixture anterior usava um kind inexistente, sem relação declarada.
+    const auditoria = AuditoriaOncoassist.parse({
+      propostaId: "d-jev", operationId: "op-jev", patientId: "paciente-sintetico",
+      encounterId: "encontro-sintetico", tumorLotId: null, draftId: "d-upload",
+      segmentId: "segmento-sintetico", sourceId: "fonte-d-upload", fonteRevision: 0,
+      fonteSha256: "a".repeat(64), fontePayloadHash: "b".repeat(64), propostaRevision: 1,
+      politicaVersao: "OA02-JEV-MARCADORES-v1", mecanismo: "JEV_MARCADORES_DOCUMENTAIS", provedor: null,
+      capturadoPor: { tipo: "SESSAO", id: "medico-sintetico" }, capturadoEm: EM, revisaoObrigatoria: true,
+    });
+    draft(c.db, "d-jev", "d-upload", { kind: "JEV_CLASSIFICACAO_RASCUNHO", auditoria,
+      identidadeHash: "c".repeat(64), estado: "PENDENTE", resposta: null, concluidoEm: null });
+    draft(c.db, "d-divergencia", "d-jev", { kind: "JEV_DIVERGENCIA_RASCUNHO", propostaId: "d-jev" });
     draft(c.db, "d-sintese", "retrato-local:rev-sintetica", { kind: "SINTESE_RASCUNHO", snapshot: "sintetico" });
-    draft(c.db, "d-self", "d-self", { contexto: {}, valor: { campo: "sintetico" } });
+    // Autorreferência gerada pelo produtor real, não uma forma arbitrária.
+    const sessoes = criarGerenciadorSessao({ medicoId: "medico-sintetico", crm: "CRM-SINTETICO",
+      senha: SENHA, duracaoMs: 3600000, agora: () => EM });
+    const login = sessoes.login(SENHA)!;
+    const contexto = { patientId: "paciente-sintetico", encounterId: "encontro-sintetico", tumorLotId: null };
+    sessoes.selecionarConsulta(login.token, contexto);
+    const mensagem = { mensagemId: "mensagem-sintetica", ...contexto, setor: "FARMACIA",
+      autor: "farmacia-sintetica", texto: "Mensagem sintética sem decisão automática." };
+    draft(c.db, "mensagem-seed", "referencia-local", mensagem);
+    expect(confirmar(c.db, { ...contexto, operationId: "seed-mensagem", reviewDecisionId: "review-sintetica",
+      sessao: login.sessao, em: EM, registros: [{ draftId: "mensagem-seed", expectedRevision: 0,
+        eventId: "evento-mensagem", tipo: "ChatMessage", payload: mensagem, fontes: [], revisao: "CONFIRMADO" }],
+    }).estado).toBe("GRAVADA");
+    const duto = rotearDutos({ db: c.db, sessoes, agora: () => EM }, login.token, "/chat/aceitar-decisao", {
+      contexto: { ...contexto, operationId: "duto-backup-sintetico" },
+      mensagemId: "mensagem-sintetica", decisao: { campo: "observacao", valor: "texto sintético" },
+    }, login.sessao);
+    expect(duto, JSON.stringify(duto)).toMatchObject({ status: 200 });
+    const dutoId = `duto-${createHash("sha256").update("duto-backup-sintetico").digest("hex")}`;
     draft(c.db, "d-fisico", "anexos/fisico.txt", { campo: "anexo" });
     c.db.close();
     const arquivo = await criarBackup({ dbPath: c.dbPath, filesRoot: c.root, destino: c.dest, nome: "positivos", senha: SENHA });
@@ -112,7 +189,10 @@ describe("backup: rawRef interno conhecido vs físico vs desconhecido (ARQ-05)",
     try {
       expect(lerDraft(reaberto, "d-upload")?.rawRef).toBe("upload-local:doc-sintetico");
       expect((lerDraft(reaberto, "d-upload")?.payload as { original?: { bytesBase64?: string } }).original?.bytesBase64).toBe("QUFB");
-      expect(lerDraft(reaberto, "d-jev")?.rawRef).toBe("d-fonte-jev");
+      expect(lerDraft(reaberto, "d-jev")?.rawRef).toBe("d-upload");
+      expect(lerDraft(reaberto, "d-divergencia")?.rawRef).toBe("d-jev");
+      expect(lerDraft(reaberto, dutoId)).toMatchObject({ rawRef: dutoId, payload: { contexto,
+        valor: { campo: "observacao", valor: "texto sintético" } } });
       expect(lerDraft(reaberto, "d-sintese")?.rawRef).toBe("retrato-local:rev-sintetica");
       expect(lerDraft(reaberto, "d-flash")?.payload).toMatchObject({ kind: "FLASH_RASCUNHO" });
     } finally { reaberto.close(); }
