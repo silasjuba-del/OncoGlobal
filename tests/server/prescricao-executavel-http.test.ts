@@ -1,5 +1,6 @@
 // proveniência: dados sintéticos — não utilizar em produção
-import { afterEach, expect, it } from "vitest";
+import { afterEach, expect, it, vi } from "vitest";
+import * as documentoExecutavel from "../../src/rules/prescricao/documentoExecutavel.js";
 import { executarConfirmacao } from "../../src/kernel/comandos/index.js";
 import { lerDraft, listarDrafts, salvarDraft } from "../../src/kernel/comandos/portas.js";
 import { hashConteudoExibido } from "../../src/server/sessao.js";
@@ -269,6 +270,58 @@ it.each(["leitura", "assinatura", "ignora-nao-assinado"])("versões concorrentes
   expect(a.eventos().find(e => e.eventId === v3.eventoId)?.supersedesEventId).toBe(eventoV2);
   expect(a.eventos().find(e => e.eventId === documentoV1.eventId)).toEqual(documentoV1);
   expect(a.eventos().filter(e => e.tipo === "DOCUMENTO")).toHaveLength(3);
+});
+
+it.each([{ doseMaximaMg: 1 }, { taxaMaximaMgMin: 0.01 }])("HTTP recusa limite explícito excedido sem gravar: %j", async limites => {
+    const a = await abrir(), base = await carregarBase(a), antes = a.eventos();
+    const drafts = listarDrafts(a.db, PACIENTE);
+    const r = await a.request(PREPARAR, { contexto, expectedBaseHash: base.revisao,
+      idempotencyKey: "limite-explicito-excedido", edicao: edicao({
+        itens: [{ ...itemPrescrito(), item: { ...itemPrescrito().item, ...limites } }],
+      }) });
+    expect(r.status).toBe(409);
+    expect(r.data.codigo).toBe("PRESCRICAO_INCOMPLETA");
+    expect(r.data.pendencias.join(" ")).toMatch(/máxima|limite|teto/);
+    expect(a.eventos()).toEqual(antes);
+    expect(listarDrafts(a.db, PACIENTE)).toEqual(drafts);
+});
+
+it.each(["preparar", "confirmar"])("revalida limite de prévia persistida sem o gate anterior: %s", async operacao => {
+  const a = await abrir(), base = await carregarBase(a);
+  const pedido = { contexto, expectedBaseHash: base.revisao, idempotencyKey: "previa-sem-gate",
+    edicao: edicao({ itens: [{ ...itemPrescrito(), item: { ...itemPrescrito().item, doseMaximaMg: 1 } }] }) };
+  // Simula somente o avaliador da release anterior. HTTP, draft e recibo são reais.
+  const avaliar = documentoExecutavel.avaliarDocumentoExecutavel;
+  const legado = vi.spyOn(documentoExecutavel, "avaliarDocumentoExecutavel")
+    .mockImplementationOnce(entrada => {
+      const original = ConteudoPrescricaoExecutavel.parse(entrada);
+      const semLimites = { ...original, itens: original.itens.map(entry => {
+        const { doseMaximaMg: _doseMaxima, taxaMaximaMgMin: _taxaMaxima, ...sem } = entry.item;
+        return { ...entry, item: sem };
+      }) };
+      return { ...avaliar(semLimites), conteudo: original };
+    });
+  let r;
+  try { r = await a.request(PREPARAR, pedido); } finally { legado.mockRestore(); }
+  expect(r.status).toBe(200);
+  const previa = PrescricaoExecutavelPreparada.parse(r.data), antes = a.eventos();
+  const resposta = operacao === "preparar" ? await a.request(PREPARAR, pedido)
+    : await a.request(CONFIRMAR, { contexto, draftId: previa.draftId, expectedRevision: previa.revision,
+      conteudoHash: previa.conteudoHash, idempotencyKey: "confirmar-sem-gate" });
+  expect(resposta.status).toBe(409);
+  expect(a.eventos()).toEqual(antes);
+  expect(lerDraft(a.db, previa.draftId)?.revision).toBe(0);
+});
+
+it("limites em mg aceitam conversão dimensional exata sem alterar a dose da ordem", async () => {
+  const a = await abrir();
+  const { preparada } = await prepararNovaLinha(a, { edicao: { itens: [{ ...itemPrescrito(0.0051),
+    item: { ...itemPrescrito(0.0051).item, unit: "g", doseMaximaMg: 5.1, taxaMaximaMgMin: 0.17, infusionTime: "30 min" },
+  }] } });
+  expect(preparada.conteudo.itens[0]?.item).toMatchObject({ prescribedDose: 0.0051, unit: "g", doseMaximaMg: 5.1 });
+  const assinada = await assinar(a, preparada, "assinar-conversao-teto");
+  const ciclo = a.eventos().find(e => e.tipo === "Ciclo" && dadosEvento(e).cicloId === assinada.cicloId)!;
+  expect(dadosEvento(ciclo).itens).toMatchObject([{ doseMg: 5.1 }]);
 });
 
 it("prepara uma nova linha sem criar fato; assina documento, episódio e ciclo sem registrar administração", async () => {

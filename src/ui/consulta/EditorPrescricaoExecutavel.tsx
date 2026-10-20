@@ -7,6 +7,7 @@ import {
 } from "../../contracts/api/operacaoPrescricaoExecutavel.js";
 import type { ItemPrescricaoExecutavel } from "../../contracts/api/prescricaoExecutavel.js";
 import type { DoseBasis } from "../../contracts/w10/prescricao.js";
+import { pendenciasLimitesDeclarados } from "../../rules/prescricao/documentoExecutavel.js";
 // @ts-expect-error folha CSS pura, resolvida pelo Vite
 import "./prescricao-executavel.css";
 
@@ -299,6 +300,8 @@ export function EditorPrescricaoExecutavel({ base, ocupado = false, aoPreparar, 
       setErros(["Revise os campos estruturados da prescrição antes de preparar a prévia."]);
       return null;
     }
+    const limites = parsed.data.itens.flatMap(entry => pendenciasLimitesDeclarados(entry.item));
+    if (limites.length) { setErros(limites); return null; }
     setErros([]);
     return parsed.data;
   }
@@ -475,6 +478,8 @@ export function EditorPrescricaoExecutavel({ base, ocupado = false, aoPreparar, 
               onChange={event => atualizarItem(index, "observacao", event.target.value)} />
           </label>
           <p>Origem do item: {item.source}</p>
+          {item.doseMaximaMg !== undefined ? <p>Dose máxima declarada: {String(item.doseMaximaMg).replace(".", ",")} mg por administração</p> : null}
+          {item.taxaMaximaMgMin !== undefined ? <p>Taxa máxima declarada: {String(item.taxaMaximaMgMin).replace(".", ",")} mg/min</p> : null}
           {item.source === "MANUAL" ? <div className="prescricao-executavel__override">
             <label>Motivo do override · item {index + 1}
               <textarea aria-label={`Motivo do override · item ${index + 1}`} required rows={2} value={item.overrideMotivo}
