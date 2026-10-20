@@ -64,6 +64,11 @@ function fonteAtual(deps: ServidorDeps, registro: Registro): boolean {
   try { return identidade(registro.auditoria, lerFonte(deps, registro.auditoria, registro.auditoria.draftId)) === registro.identidadeHash; }
   catch (erro) { if (erro instanceof Recusa) return false; throw erro; }
 }
+function politicaAtual(registro: Registro): "MESMA_VERSAO" | "VERSAO_DIFERENTE" | "NAO_VERIFICAVEL" {
+  const capturada = registro.auditoria.politicaVersao.trim();
+  if (!capturada) return "NAO_VERIFICAVEL";
+  return capturada === POLITICA ? "MESMA_VERSAO" : "VERSAO_DIFERENTE";
+}
 function registros(deps: ServidorDeps, contexto: Contexto) {
   return listarDrafts(deps.db, contexto.patientId).flatMap(draft => {
     const p = Registro.safeParse(draft.payload);
@@ -96,6 +101,7 @@ export async function operarOncoassistPropostas(deps: ServidorDeps, token: strin
         const historico: HistoricoOncoassist = { propostas: registros(deps, parsed.data).map(({ registro }) => ({
           auditoria: registro.auditoria, estado: registro.estado, resposta: registro.resposta,
           validade: fonteAtual(deps, registro) ? "ATUAL" as const : "FONTE_ALTERADA" as const,
+          validadePolitica: politicaAtual(registro),
         })).sort((a, b) => b.auditoria.propostaRevision - a.auditoria.propostaRevision
           || a.auditoria.propostaId.localeCompare(b.auditoria.propostaId)) };
         return sucesso(historico);

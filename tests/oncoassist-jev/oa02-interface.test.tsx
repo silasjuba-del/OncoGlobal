@@ -34,6 +34,35 @@ afterEach(async () => {
 });
 
 describe("OA02 · PainelOncoassist real → porta HTTP → processo/SQLite → reabertura", () => {
+  it("expõe metadados capturados e mantém honestidade com resposta histórica sem o campo novo", async () => {
+    const app = await ambiente();
+    await app.post("/consulta/oncoassist/classificar-fonte", { ...CONTEXTO, draftId: "fonte-1", operationId: "ui-metadados-sintetica" });
+    const { porta } = await conectar(app);
+    const primeiraView = render(<PainelOncoassist porta={porta} contexto={CONTEXTO} />);
+    const primeiroHistorico = await screen.findByRole("region", { name: "Histórico de propostas documentais" });
+    expect(primeiroHistorico.textContent).toContain("Fonte preservada");
+    expect(primeiroHistorico.textContent).toContain("Política capturada: OA02-JEV-MARCADORES-v1 — mesma versão");
+    expect(primeiroHistorico.textContent).toContain("Modelo capturado: jev-1.0");
+    primeiraView.unmount();
+    const lerHistorico = porta.oncoassistHistorico!;
+    porta.oncoassistHistorico = async (...args) => {
+      const memoria = await lerHistorico(...args);
+      const item = memoria.propostas[0]!;
+      delete item.validadePolitica;
+      if (item.resposta?.status === "PROPOSTA") delete item.resposta.modelo;
+      return memoria;
+    };
+    render(<PainelOncoassist porta={porta} contexto={CONTEXTO} />);
+    const historico = await screen.findByRole("region", { name: "Histórico de propostas documentais" });
+    expect(historico.textContent).toContain("Fonte preservada");
+    expect(historico.textContent).toContain("Política capturada: OA02-JEV-MARCADORES-v1 — não verificável");
+    expect(historico.textContent).toContain("Mecanismo capturado: JEV_MARCADORES_DOCUMENTAIS");
+    expect(historico.textContent).toContain("Modelo capturado: não informado");
+    expect(historico.textContent).toContain("Provedor capturado: não informado");
+    expect(historico.textContent).toContain("A mesma política não verifica a versão do modelo.");
+    expect(await app.comando("stats")).toMatchObject({ chamadas: 1, clinicalEvents: app.baseline });
+  }, 30_000);
+
   it("fonte muda entre classificação e histórico: não exibe categoria atual e mantém a mesma proposta invalidada", async () => {
     const app = await ambiente();
     const { porta } = await conectar(app);

@@ -3,6 +3,7 @@ import {
   DICIONARIO_FARMACO, normalizarFarmaco, normalizarLateralidade, normalizarSitioAnatomico,
 } from "./normalizacao.js";
 import { farmacosMencionados } from "./reconciliacao.js";
+import { analisarEscopos } from "./escopoLinguistico.js";
 
 const aliasesFarmacos = Object.keys(DICIONARIO_FARMACO)
   .sort((a, b) => b.length - a.length)
@@ -92,7 +93,8 @@ function trechosNaoRiscados(linha: string, aberto: boolean): { trechos: string[]
   return { trechos: trechos.filter((trecho) => trecho.trim()), aberto: emRasura };
 }
 
-const NEGACAO_CLAUSULA = /\b(?:não há|não observamos|nega|negou|negativo para|sem\s+(?:sinais de|evidência(?: de)?|les(?:ão|ões)|nódul(?:o|os)|foc(?:o|os)|neoplasia|carcinoma|adenocarcinoma|tumor|metástase|expressão|amplificação|HER2|RE|RP|Ki-67|PD-L1))(?:\s|$)/iu;
+// Pontuação de sentença encerra o escopo lexical; decimal e abreviações comuns não.
+const LIMITE_SENTENCA = /(?<!\b(?:aprox|dr|dra|sr|sra|ex|p|pp|n)\.[”"’')\]]{0,3})(?<=[.!?][”"’')\]]{0,3})\s+(?=[“‘"'(\[]*\p{L})/iu;
 
 /**
  * Comparação seriada declarada pela própria fonte (ex.: "aumentado em relação à CO de 14/05/28").
@@ -113,7 +115,9 @@ export interface Extrator {
   extrair(segmento: EncounterSegment): readonly ClinicalFact[];
 }
 
-/** Dublê determinístico para textos sintéticos, não LLM, não emite ordens clínicas. */
+/** Extrator determinístico local (não é LLM): usado pelo pipeline real de
+ * upload/importação. Só propõe candidatos com trecho literal; nunca confirma
+ * fato, emite ordem clínica ou substitui revisão médica. */
 export const extratorDeterministico: Extrator = {
   extrair(segmento) {
     const result: ClinicalFact[] = [];
@@ -132,24 +136,20 @@ export const extratorDeterministico: Extrator = {
       const dataUnicaNaLinha = datasLinha.length === 1 && !referenciasNaLinha.includes(datasLinha[0]!)
         ? datasLinha[0] : null;
       for (const trecho of visiveis.trechos) {
-      // Uma nova afirmação explícita encerra a negação anterior; uma simples
-      // lista ("nega dor, náusea") continua sob a mesma negação.
-      const clausulas = trecho.split(/;|,\s*(?=(?:mas\s+)?(?:relata|refere|apresenta|informa)\b)/iu);
-      for (const clausula of clausulas) {
-      const raw = clausula.trim();
-      if (!raw) continue;
+      const clausulas = trecho.split(LIMITE_SENTENCA).flatMap(sentenca => sentenca.split(";"));
+      for (const escopo of clausulas.flatMap(analisarEscopos)) {
+      const raw = escopo.texto;
       const datasNaClausula = [...raw.matchAll(/\b\d{2}\/\d{2}\/\d{2,4}\b/giu)].map((m) => m[0]);
       const refData = comparacaoDeclarada(raw)?.refData;
       const datasNaoReferenciais = datasNaClausula.filter((data) => data !== refData);
       const dataLiteral = datasNaClausula.length > 0
         ? datasNaoReferenciais.length === 1 ? datasNaoReferenciais[0] : null
         : dataUnicaNaLinha && dataUnicaNaLinha !== refData ? dataUnicaNaLinha : null;
-      // Negação vale apenas para esta cláusula; o restante da linha continua analisável.
-      const negated = NEGACAO_CLAUSULA.test(raw);
-      const wordingUncertain = /\b(?:não se pode excluir|sugestiv[oa]s?|compat[ií]ve(?:l|is)(?:\s+com)?|prov[aá]vel(?:mente)?)\b/iu.test(raw);
+      const { negated, wordingUncertain, qualificadores } = escopo;
       const add = (domain: FactDomain, value: unknown, evidence: FactEvidence = "EXPLICIT",
-        confirmation = false, regra?: string): void => {
-        const evidenceFinal: FactEvidence = evidence === "EXPLICIT" && wordingUncertain ? "UNCERTAIN" : evidence;
+        confirmation = false, regra?: string, factQualifiers: typeof qualificadores = qualificadores,
+        factWordingUncertain = wordingUncertain): void => {
+        const evidenceFinal: FactEvidence = evidence === "EXPLICIT" && factWordingUncertain ? "UNCERTAIN" : evidence;
         const spokenNumber = segmento.sourceType === "plaud" &&
           /\b\d+(?:[.,]\d+)?\b|\b(?:quatorze|quinze|dez|vinte|trinta)\b/iu.test(raw);
         result.push({
@@ -158,11 +158,14 @@ export const extratorDeterministico: Extrator = {
           patientCandidateId: null,
           domain, value, sourceType: segmento.sourceType,
           evidence: evidenceFinal, sourceId: segmento.sourceId, rawEvidence: rawLinha,
+          qualificadores: factQualifiers,
           ...(segmento.page === undefined ? {} : { page: segmento.page }),
           ...(segmento.startMs === null ? {} : { timestampMs: segmento.startMs }),
           ...(dataLiteral ? { date: dataLiteral } : {}),
           confidence: spokenNumber ? 0.6 : evidenceFinal === "UNCERTAIN" ? 0.5 : 1,
-          requiresConfirmation: confirmation || spokenNumber || evidenceFinal === "UNCERTAIN",
+          requiresConfirmation: confirmation || spokenNumber || evidenceFinal === "UNCERTAIN"
+            || factQualifiers.polaridade !== "AFIRMADA" || factQualifiers.sujeito === "TERCEIRO"
+            || factQualifiers.temporalidade === "HISTORICA" || factQualifiers.temporalidade === "FUTURA",
           ...(regra ? { regra } : {}),
         });
       };
@@ -173,13 +176,13 @@ export const extratorDeterministico: Extrator = {
         const literal = hist?.[1]?.trim();
         if (literal && !/^(?:não (?:sei|consta|informad[oa])|pendente)\b/iu.test(literal)) add("histology", literal);
       }
-      const diagnosis = raw.match(/^\s*diagnóstico(?: oncológico)?\s*:\s*([^.;]+)/iu);
+      const diagnosis = raw.match(/^[\s“‘"'(\[]*diagnóstico(?: oncológico)?\s*:\s*([^.;]+)/iu);
       if (diagnosis && !negated && !/\bNÃO SEI\b/iu.test(raw)) {
         add("diagnosis", diagnosis[1]?.trim());
       }
       // Menção literal de neoplasia/carcinoma (ex.: "antecedente de neoplasia mamária direita"):
       // o sítio só entra quando a tabela de órgãos o reconhece; nada é inferido de "dona Maria".
-      if (!negated && !/^\s*diagn[oó]stico/iu.test(raw)) {
+      if (!negated && !/^[\s“‘"'(\[]*diagn[oó]stico/iu.test(raw)) {
         const mencao = raw.match(/\b(?:neoplasia|carcinoma|adenocarcinoma)\s+(?:de\s+|do\s+|da\s+)?([\p{L}]+(?:\s+(?:uterino|do\s+ú?tero))?)/iu);
         const sitioCanonico = mencao ? normalizarSitioAnatomico(mencao[1]) : null;
         if (mencao && sitioCanonico) {
@@ -235,8 +238,10 @@ export const extratorDeterministico: Extrator = {
         add("lab", { raw, value: null, unit: null }, "UNCERTAIN", true);
       }
 
-      if (!negated && /\b(?:dormência|formigamento|náusea|dor)\b/iu.test(raw)) {
-        add("symptom", raw);
+      for (const sintoma of escopo.sintomas) {
+        const qualificadoresSintoma = { ...qualificadores,
+          polaridade: sintoma.incerto ? "NAO_DETERMINADA" as const : "AFIRMADA" as const };
+        add("symptom", sintoma.value, "EXPLICIT", false, undefined, qualificadoresSintoma, sintoma.incerto);
       }
       // Plaud: reconhecimento lexical de fármaco conhecido + dose/frequência literal.
       // É sempre candidato UNCERTAIN; o parser não julga plausibilidade nem define conduta.

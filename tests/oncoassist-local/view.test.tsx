@@ -40,7 +40,7 @@ describe("modo local explícito OncoAssist", () => {
     expect(f.porta.login).toHaveBeenCalledWith("senha-sintetica-para-teste");
     fireEvent.change(select, { target: { value: consulta.encounterId } });
     expect(await screen.findByText(/aguardando configuração/)).toBeTruthy();
-    expect(f.porta.oncoassistStatus).toHaveBeenCalledTimes(1);
+    await waitFor(() => expect(f.porta.oncoassistStatus).toHaveBeenCalledTimes(1));
     expect(f.porta.carregarConsulta).toHaveBeenCalledWith(paciente, undefined, consulta.encounterId);
     expect(screen.queryByText("Abrir TC")).toBeNull();
     expect(screen.queryByLabelText("Senha do servidor")).toBeNull();
@@ -77,5 +77,16 @@ describe("modo local explícito OncoAssist", () => {
     expect(await screen.findByRole("button", { name: "Entrar" })).toBeTruthy();
     expect(f.porta.oncoassistStatus).not.toHaveBeenCalled();
     await waitFor(() => expect(screen.queryByLabelText("Paciente da agenda")).toBeNull());
+  });
+  it("expiração forçada descarta transcrição pendente sem abrir diálogo", async () => {
+    const f = fixture();
+    render(<OncoassistLocal fabricaPorta={f.fabrica} />); entrar();
+    fireEvent.change(await screen.findByLabelText("Paciente da agenda"), { target: { value: consulta.encounterId } });
+    const texto = await screen.findByLabelText("Texto da transcrição");
+    fireEvent.change(texto, { target: { value: "nota sintética pendente" } });
+    f.expirar();
+    expect(screen.queryByRole("dialog")).toBeNull();
+    expect(await screen.findByLabelText("Senha do servidor")).toBeTruthy();
+    expect(screen.queryByLabelText("Texto da transcrição")).toBeNull();
   });
 });

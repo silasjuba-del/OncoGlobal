@@ -1,5 +1,5 @@
 // @vitest-environment jsdom
-import { cleanup, fireEvent, render, screen } from "@testing-library/react";
+import { act, cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { ActionIntent } from "../../src/contracts/operacao.js";
 import { criarChaves } from "../../src/ui/api/chaves.js";
@@ -11,6 +11,71 @@ afterEach(() => {
 });
 
 describe("APAC em bloco por lote", () => {
+  it.each(["versao", "paciente", "encontro"] as const)(
+    "R33-03: mudar %s da APAC distingue intenção sem perder replay", async (mudanca) => {
+      const original = criarPortaFalsa(), proxima = criarPortaFalsa(), chaves = criarChaves();
+      const lista = await proxima.lotesApac();
+      vi.spyOn(proxima, "lotesApac").mockResolvedValue({
+        ...lista, itens: lista.itens.map(item => item.apac.apacId !== "apac-verde-1" ? item : {
+          ...item,
+          patientId: mudanca === "paciente" ? "paciente-sintetico-novo" : item.patientId,
+          encounterId: mudanca === "encontro" ? "encontro-sintetico-novo" : item.encounterId,
+          apac: { ...item.apac, versao: mudanca === "versao" ? item.apac.versao + 1 : item.apac.versao },
+        }),
+      });
+      const acaoOriginal = vi.spyOn(original, "acao"), acaoProxima = vi.spyOn(proxima, "acao");
+      const tela = render(<TelaApacLote porta={original} chaves={chaves} />);
+      await screen.findByLabelText("APAC por lote");
+      fireEvent.click(screen.getByRole("checkbox", { name: "selecionar apac-verde-1" }));
+      fireEvent.click(screen.getByRole("button", { name: "exportar selecionadas" }));
+      await screen.findByText(/Resultado da exportação:/);
+      const primeira = acaoOriginal.mock.calls[0]![0];
+      tela.rerender(<TelaApacLote porta={proxima} chaves={chaves} />);
+      await screen.findByLabelText("APAC por lote");
+      fireEvent.click(screen.getByRole("checkbox", { name: "selecionar apac-verde-1" }));
+      fireEvent.click(screen.getByRole("button", { name: "exportar selecionadas" }));
+      await screen.findByText(/Resultado da exportação:/);
+      const segunda = acaoProxima.mock.calls[0]![0];
+      fireEvent.click(screen.getByRole("button", { name: "exportar selecionadas" }));
+      await screen.findByText(/REPLAY/);
+      expect(acaoProxima.mock.calls[1]![0].idempotencyKey).toBe(segunda.idempotencyKey);
+      expect(segunda.idempotencyKey).not.toBe(primeira.idempotencyKey);
+      tela.rerender(<TelaApacLote porta={original} chaves={chaves} />);
+      await screen.findByLabelText("APAC por lote");
+      fireEvent.click(screen.getByRole("checkbox", { name: "selecionar apac-verde-1" }));
+      fireEvent.click(screen.getByRole("button", { name: "exportar selecionadas" }));
+      await screen.findByText(/REPLAY/);
+      expect(acaoOriginal.mock.calls[1]![0].idempotencyKey).toBe(primeira.idempotencyKey);
+    });
+
+  it.each(["troca", "desmontagem", "erro-tardio"] as const)(
+    "R33-02: %s durante primeira APAC impede despacho das seguintes", async (cenario) => {
+      const antiga = criarPortaFalsa(), chaves = criarChaves();
+      let resolver: ((value: { codigo: string; decisao: string }) => void) | undefined;
+      let rejeitar: ((reason: Error) => void) | undefined;
+      const acao = vi.spyOn(antiga, "acao")
+        .mockImplementationOnce(() => new Promise((resolve, reject) => { resolver = resolve; rejeitar = reject; }))
+        .mockResolvedValue({ codigo: "EXPORTAR_APAC", decisao: "EXECUTADA" });
+      const tela = render(<TelaApacLote porta={antiga} chaves={chaves} />);
+      await screen.findByLabelText("APAC por lote");
+      for (const id of ["apac-verde-1", "apac-verde-2"])
+        fireEvent.click(screen.getByRole("checkbox", { name: `selecionar ${id}` }));
+      fireEvent.click(screen.getByRole("button", { name: "exportar selecionadas" }));
+      expect(acao).toHaveBeenCalledTimes(1);
+      if (cenario === "desmontagem") tela.unmount();
+      else {
+        tela.rerender(<TelaApacLote porta={criarPortaFalsa()} chaves={chaves} />);
+        await screen.findByLabelText("APAC por lote");
+      }
+      await act(async () => {
+        if (cenario === "erro-tardio") rejeitar?.(new Error("falha-sintetica"));
+        else resolver?.({ codigo: "EXPORTAR_APAC", decisao: "EXECUTADA" });
+      });
+      expect(screen.queryByText(/Resultado da exportação:/)).toBeNull();
+      expect(acao).toHaveBeenCalledTimes(1);
+      expect(acao.mock.calls[0]![0].objeto.id).toBe("apac-verde-1");
+    });
+
   it("D85 avisa, D90 fica fora, negada preserva o motivo e PENDENTE não vira intenção", async () => {
     const porta = criarPortaFalsa();
     render(<TelaApacLote porta={porta} chaves={criarChaves()} />);
@@ -37,7 +102,7 @@ describe("APAC em bloco por lote", () => {
     expect(negada.textContent).not.toContain("ADJUVANTE");
   });
 
-  it("duas APAC do mesmo lote geram uma exportação e a vencida não entra", async () => {
+  it("cada APAC selecionada gera a própria intenção (apacId/versão do servidor), a vencida não entra e o resultado é visível", async () => {
     const porta = criarPortaFalsa();
     const acao = vi.spyOn(porta, "acao");
     render(<TelaApacLote porta={porta} chaves={criarChaves()} />);
@@ -47,17 +112,42 @@ describe("APAC em bloco por lote", () => {
     fireEvent.click(screen.getByRole("checkbox", { name: "selecionar apac-verde-2" }));
     fireEvent.click(screen.getByRole("checkbox", { name: "selecionar apac-multi-b" }));
     fireEvent.click(screen.getByRole("button", { name: "exportar selecionadas" }));
-    fireEvent.click(screen.getByRole("button", { name: "exportar selecionadas" }));
+    expect(await screen.findByText(/Resultado da exportação:/)).toBeTruthy();
 
     expect(acao).toHaveBeenCalledTimes(2);
     const primeira = acao.mock.calls[0]?.[0];
     const segunda = acao.mock.calls[1]?.[0];
     expect(primeira?.verbo).toBe("EXPORTAR_APAC");
-    expect(primeira?.objeto).toEqual({ tipo: "LOTE_APAC", id: "lot-verde", versao: 1 });
+    expect(primeira?.objeto).toEqual({ tipo: "APAC", id: "apac-verde-1", versao: 1 });
+    expect(segunda?.objeto).toEqual({ tipo: "APAC", id: "apac-verde-2", versao: 1 });
     expect(ActionIntent.safeParse(primeira).success).toBe(true);
     expect(primeira).not.toHaveProperty("medicoId");
     expect(JSON.stringify(primeira)).not.toContain("ADJUVANTE");
-    expect(segunda?.idempotencyKey).toBe(primeira?.idempotencyKey);
-    expect(acao.mock.calls.some((chamada) => chamada[0]?.objeto.id === "lot-multi-b")).toBe(false);
+    expect(acao.mock.calls.some((chamada) => chamada[0]?.objeto.id === "lot-multi-b"
+      || chamada[0]?.objeto.id === "apac-multi-b")).toBe(false);
+
+    fireEvent.click(screen.getByRole("button", { name: "exportar selecionadas" }));
+    expect(await screen.findByText(/REPLAY/)).toBeTruthy();
+    expect(acao).toHaveBeenCalledTimes(4);
+    expect(acao.mock.calls[2]?.[0]?.idempotencyKey).toBe(primeira?.idempotencyKey);
+    expect(acao.mock.calls[3]?.[0]?.idempotencyKey).toBe(segunda?.idempotencyKey);
+  });
+
+  it("troca de porta durante exportação não publica resultado antigo nem mantém seleção", async () => {
+    const portaAntiga = criarPortaFalsa();
+    let resolverAcao: ((valor: { codigo: string; decisao: string }) => void) | undefined;
+    vi.spyOn(portaAntiga, "acao").mockImplementation(() => new Promise((resolve) => { resolverAcao = resolve; }));
+    const chaves = criarChaves();
+    const tela = render(<TelaApacLote porta={portaAntiga} chaves={chaves} />);
+    await screen.findByLabelText("APAC por lote");
+    fireEvent.click(screen.getByRole("checkbox", { name: "selecionar apac-verde-1" }));
+    fireEvent.click(screen.getByRole("button", { name: "exportar selecionadas" }));
+
+    tela.rerender(<TelaApacLote porta={criarPortaFalsa()} chaves={chaves} />);
+    await screen.findByLabelText("APAC por lote");
+    await act(async () => { resolverAcao?.({ codigo: "EXPORTAR_APAC", decisao: "EXECUTADA" }); });
+
+    expect(screen.queryByText(/Resultado da exportação:/)).toBeNull();
+    expect((screen.getByRole("checkbox", { name: "selecionar apac-verde-1" }) as HTMLInputElement).checked).toBe(false);
   });
 });

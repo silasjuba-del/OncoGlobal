@@ -293,6 +293,7 @@ export function lerConsulta(db: DatabaseSync, patientId: string, agora: string, 
       patientCandidateId: null, domain,
       value: fact.valor, sourceType: fact.sourceType, evidence: fact.evidence, sourceId: fact.sourceId,
       rawEvidence: fact.rawEvidence, confidence: fact.confidence, requiresConfirmation: fact.requiresConfirmation,
+      ...(fact.qualificadores && typeof fact.qualificadores === "object" ? { qualificadores: fact.qualificadores } : {}),
       ...(typeof fact.factDate === "string" ? { date: fact.factDate } : {}),
       ...(typeof fact.page === "number" ? { page: fact.page } : {}),
       ...(typeof fact.regra === "string" ? { regra: fact.regra } : {}) });

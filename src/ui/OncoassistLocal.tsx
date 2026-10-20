@@ -42,6 +42,28 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp }: {
   const [versaoFontes,setVersaoFontes]=useState(0);
   const [versaoConsulta,setVersaoConsulta]=useState(0);
   const [metricas,setMetricas]=useState(metricasVazias);
+  const [transcricaoPendente,setTranscricaoPendente]=useState(false);
+  const [transcricaoSalvando,setTranscricaoSalvando]=useState(false);
+  const removerProtecaoDocumento=useRef<(() => void) | null>(null);
+  useEffect(() => {
+    if (!transcricaoPendente && !transcricaoSalvando) return;
+    const proteger = (event: BeforeUnloadEvent) => {
+      event.preventDefault();
+      event.returnValue = "";
+    };
+    window.addEventListener("beforeunload", proteger);
+    const remover = () => {
+      window.removeEventListener("beforeunload", proteger);
+      if (removerProtecaoDocumento.current === remover) removerProtecaoDocumento.current = null;
+    };
+    removerProtecaoDocumento.current = remover;
+    return remover;
+  }, [transcricaoPendente, transcricaoSalvando]);
+  const [mensagemSalvamento,setMensagemSalvamento]=useState("");
+  const [navegacaoPendente,setNavegacaoPendente]=useState<(() => void) | null>(null);
+  const dialogoNavegacao=useRef<HTMLDivElement>(null);
+  const focoAnterior=useRef<HTMLElement|null>(null);
+  const restaurarFoco=useRef(false);
   useEffect(()=>setMetricas(metricasVazias()),[contexto?.patientId,contexto?.encounterId,contexto?.tumorLotId]);
   const [mensagem, setMensagem] = useState("");
   const [tela, setTela] = useState<"consulta" | "salao" | "canal" | "apac" | "config" | "biblioteca">("consulta");
@@ -52,13 +74,67 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp }: {
   const pacienteAtivo = agenda.find((item) => item.patientId === contexto?.patientId && item.encounterId === contexto?.encounterId);
 
   const limpar = useCallback(() => {
+    removerProtecaoDocumento.current?.();
     geracao.current++;
     setSenha(""); setAutenticado(false); setAgenda([]); setSelecionado(""); setTela("consulta");
-    setContexto(null); setLotes([]); setOcupado(false); setVersaoConsulta(0); setSessao((s) => s + 1);
+    setContexto(null); setLotes([]); setOcupado(false); setVersaoConsulta(0); setTranscricaoPendente(false);
+    setTranscricaoSalvando(false); setMensagemSalvamento("");
+    setNavegacaoPendente(null); restaurarFoco.current=false; setSessao((s) => s + 1);
   }, []);
   const expirar = useCallback(() => { limpar(); setMensagem("Sessão expirada. Entre novamente."); }, [limpar]);
   const porta = useMemo(() => fabricaPorta({ onSessaoExpirada: expirar }), [fabricaPorta, expirar, sessao]);
   useEffect(() => () => { geracao.current++; }, []);
+
+  function solicitarNavegacaoVoluntaria(navegar: () => void) {
+    if (transcricaoSalvando) {
+      setMensagemSalvamento("A transcrição está sendo salva. Aguarde a conclusão antes de sair.");
+      return;
+    }
+    if (!transcricaoPendente) { navegar(); return; }
+    focoAnterior.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    restaurarFoco.current=false;
+    setNavegacaoPendente(() => navegar);
+  }
+  function navegarParaTela(proxima: "consulta" | "salao" | "canal" | "apac" | "config" | "biblioteca") {
+    if (tela === proxima) return;
+    solicitarNavegacaoVoluntaria(() => setTela(proxima));
+  }
+  function solicitarPaciente(encounterId: string) {
+    if (encounterId === selecionado && contexto?.encounterId === encounterId) return;
+    solicitarNavegacaoVoluntaria(() => void abrir(encounterId));
+  }
+  function solicitarLote(tumorLotId: string) {
+    if (tumorLotId === (contexto?.tumorLotId ?? "")) return;
+    solicitarNavegacaoVoluntaria(() => void selecionarLote(tumorLotId));
+  }
+  function continuarEditando() {
+    restaurarFoco.current=true;
+    setNavegacaoPendente(null);
+  }
+  function descartarEContinuar() {
+    if (transcricaoSalvando) return;
+    const navegar=navegacaoPendente;
+    // O descarte já foi confirmado no diálogo da aplicação. Uma saída de
+    // documento síncrona (location.assign) não deve pedir confirmação de novo.
+    removerProtecaoDocumento.current?.();
+    restaurarFoco.current=false;
+    setNavegacaoPendente(null);
+    navegar?.();
+  }
+  useEffect(() => {
+    if (!navegacaoPendente) {
+      if (restaurarFoco.current) {
+        restaurarFoco.current=false;
+        if (focoAnterior.current?.isConnected) focoAnterior.current.focus();
+      }
+      return;
+    }
+    dialogoNavegacao.current?.querySelector<HTMLElement>("button:not(:disabled)")?.focus();
+  }, [navegacaoPendente]);
+  function registrarSalvamentoTranscricao(salvando: boolean) {
+    setTranscricaoSalvando(salvando);
+    if (!salvando) setMensagemSalvamento("");
+  }
 
   async function entrar(event: FormEvent) {
     event.preventDefault();
@@ -146,33 +222,39 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp }: {
   }}>
     <header className="consulta-appbar"><div><h1>OncoAssist local</h1>
       <p>Documentos do servidor local. Sugestões aguardam revisão médica.</p></div>
-      <a href="/">Voltar à demonstração</a></header>
+      <a href="/" onClick={event=>{
+        if (!transcricaoPendente && !transcricaoSalvando) return;
+        event.preventDefault();
+        solicitarNavegacaoVoluntaria(() => window.location.assign("/"));
+      }}>Voltar à demonstração</a></header>
     {mensagem ? <p role="status">{mensagem}</p> : null}
+    {transcricaoSalvando ? <p role="status">Salvando transcrição. Aguarde a conclusão para navegar.</p> : null}
+    {mensagemSalvamento ? <p role="status">{mensagemSalvamento}</p> : null}
     {!autenticado ? <form onSubmit={(event) => void entrar(event)}>
       <label>Senha do servidor <input type="password" autoComplete="current-password" value={senha}
         minLength={12} maxLength={512} required disabled={ocupado} onChange={(e) => setSenha(e.target.value)} /></label>
       <button type="submit" disabled={ocupado || senha.length < 12}>{ocupado ? "Conectando…" : "Entrar"}</button>
     </form> : <>
-      <div className="consulta-controles"><button type="button" onClick={() => { limpar(); setMensagem(""); }}>Sair</button>
+      <div className="consulta-controles"><button type="button" disabled={transcricaoSalvando} onClick={() => solicitarNavegacaoVoluntaria(() => { limpar(); setMensagem(""); })}>Sair</button>
       {agenda.length === 0 ? <p>Nenhum paciente na agenda local de hoje.</p> : <label>Paciente da agenda
-        <select aria-label="Paciente da agenda" value={selecionado} disabled={ocupado}
-          onChange={(e) => void abrir(e.target.value)}>
+        <select aria-label="Paciente da agenda" value={selecionado} disabled={ocupado || transcricaoSalvando}
+          onChange={(e) => solicitarPaciente(e.target.value)}>
           <option value="">Selecione um paciente</option>
           {agenda.map((p) => <option key={p.encounterId} value={p.encounterId}>{p.horario} — {p.nome}</option>)}
         </select>
       </label>}
-      {lotes.length?<label>Lote tumoral <select aria-label="Lote tumoral" value={contexto?.tumorLotId??''} disabled={ocupado}
-        onChange={e=>void selecionarLote(e.target.value)}>
+      {lotes.length?<label>Lote tumoral <select aria-label="Lote tumoral" value={contexto?.tumorLotId??''} disabled={ocupado || transcricaoSalvando}
+        onChange={e=>solicitarLote(e.target.value)}>
         <option value="">Consulta sem lote selecionado</option>{lotes.map((l,i)=><option key={l.tumorLotId} value={l.tumorLotId}>
           {`Lote ${i+1} · ${l.cid.valor??'CID não informado'} · ${l.topografia.valor??l.tumorLotId}`}</option>)}
       </select></label>:null}
       <nav aria-label="Áreas clínicas">
-        <button type="button" disabled={ocupado} onClick={() => setTela("consulta")}>Consulta</button>
-        <button type="button" disabled={ocupado} onClick={() => setTela("salao")}>Salão</button>
-        <button type="button" disabled={ocupado} onClick={() => setTela("canal")}>Canal</button>
-        <button type="button" disabled={ocupado} onClick={() => setTela("apac")}>APAC</button>
-        <button type="button" disabled={ocupado} onClick={() => setTela("config")}>Configurações Flash</button>
-        <button type="button" disabled={ocupado} onClick={() => setTela("biblioteca")}>Biblioteca</button>
+        <button type="button" disabled={ocupado || transcricaoSalvando} onClick={() => navegarParaTela("consulta")}>Consulta</button>
+        <button type="button" disabled={ocupado || transcricaoSalvando} onClick={() => navegarParaTela("salao")}>Salão</button>
+        <button type="button" disabled={ocupado || transcricaoSalvando} onClick={() => navegarParaTela("canal")}>Canal</button>
+        <button type="button" disabled={ocupado || transcricaoSalvando} onClick={() => navegarParaTela("apac")}>APAC</button>
+        <button type="button" disabled={ocupado || transcricaoSalvando} onClick={() => navegarParaTela("config")}>Configurações Flash</button>
+        <button type="button" disabled={ocupado || transcricaoSalvando} onClick={() => navegarParaTela("biblioteca")}>Biblioteca</button>
       </nav>
       </div>
       {ocupado ? <p role="status">Abrindo consulta…</p> : null}
@@ -196,7 +278,8 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp }: {
         </div>
         <div id="consulta-documentos" className="consulta-secao" tabIndex={-1}>
           <UploadDocumentoLocal porta={porta} contexto={contexto} aoSalvar={()=>setVersaoFontes(v=>v+1)}/>
-          <TranscricaoLocal porta={porta} contexto={contexto} aoSalvar={()=>setVersaoFontes(v=>v+1)}/>
+          <TranscricaoLocal porta={porta} contexto={contexto} aoSalvar={()=>setVersaoFontes(v=>v+1)}
+            aoAlterarPendente={setTranscricaoPendente} aoAlterarSalvamento={registrarSalvamentoTranscricao}/>
         </div>
         <div id="consulta-revisao" className="consulta-secao" tabIndex={-1}>
         <RevisaoExtracaoLocal key={versaoFontes} porta={porta} contexto={contexto}
@@ -218,12 +301,13 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp }: {
         <div id="consulta-sintese" className="consulta-secao" tabIndex={-1}>
         <SinteseProposta key={`sintese:${versaoConsulta}`} porta={porta} contexto={contexto}/>
         </div>
-        <ConsultaPersistida versaoClinica={versaoConsulta} porta={porta} contexto={contexto} aoAbrirApac={() => setTela("apac")} />
+        <ConsultaPersistida versaoClinica={versaoConsulta} porta={porta} contexto={contexto}
+          aoAbrirApac={() => navegarParaTela("apac")} />
       </div> : null}
       {tela === "salao" ? <TelaSalao porta={porta} /> : null}
       {tela === "apac" ? <TelaApacLote porta={porta} chaves={chaves} /> : null}
       {tela === "config" ? <Configuracoes somenteFlash incluirServico porta={porta} tema="dia"
-        onTema={() => {}} onFechar={() => setTela("consulta")} /> : null}
+        onTema={() => {}} onFechar={() => navegarParaTela("consulta")} /> : null}
       {tela === "biblioteca" ? (porta.biblioteca
         ? <BibliotecaLocal api={porta.biblioteca} />
         : <section aria-label="Biblioteca"><h2>Biblioteca indisponível</h2><p>O servidor local ainda não oferece a API autenticada da biblioteca.</p></section>) : null}
@@ -231,6 +315,31 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp }: {
         ? `${pacienteAtivo.nome} · ${pacienteAtivo.patientId} · ${pacienteAtivo.encounterId}`
         : contexto ? `${contexto.patientId} · ${contexto.encounterId}` : "selecione na agenda"}</p>
         <CaixaCanal porta={porta} chaves={chaves} /></> : null}
+      {navegacaoPendente ? <div className="transcricao-navegacao-fundo" style={{ position: "fixed", inset: 0, zIndex: 1000,
+        display: "grid", placeItems: "center", padding: "1rem", background: "rgba(15, 23, 42, .56)" }}>
+        <div ref={dialogoNavegacao} role="dialog" aria-modal="true" aria-labelledby="transcricao-navegacao-titulo"
+          className="transcricao-navegacao-dialogo" tabIndex={-1} onKeyDown={event=>{
+            if (event.key === "Escape") { event.preventDefault(); continuarEditando(); return; }
+            if (event.key !== "Tab") return;
+            const controles=Array.from(event.currentTarget.querySelectorAll<HTMLElement>("button:not(:disabled), a[href], input:not(:disabled), [tabindex]:not([tabindex='-1'])"));
+            if (!controles.length) { event.preventDefault(); event.currentTarget.focus(); return; }
+            const primeiro=controles[0], ultimo=controles[controles.length-1];
+            if (event.shiftKey && (document.activeElement===primeiro || document.activeElement===event.currentTarget)) {
+              event.preventDefault(); ultimo?.focus();
+            } else if (!event.shiftKey && (document.activeElement===ultimo || document.activeElement===event.currentTarget)) {
+              event.preventDefault(); primeiro?.focus();
+            }
+          }} style={{ width: "min(32rem, 100%)", boxSizing: "border-box", padding: "1.25rem", borderRadius: ".75rem",
+            background: "var(--consulta-surface, #fff)", color: "var(--consulta-text, #172033)", boxShadow: "0 20px 60px rgba(0,0,0,.28)" }}>
+          <h2 id="transcricao-navegacao-titulo">Transcrição não salva</h2>
+          <p>Há texto de transcrição nesta consulta que ainda não foi salvo.</p>
+          <p>Para salvar, continue editando e use “Salvar transcrição para revisão clínica”.</p>
+          <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "flex-end", gap: ".75rem" }}>
+            <button type="button" onClick={continuarEditando}>Continuar editando</button>
+            <button type="button" onClick={descartarEContinuar}>Descartar e sair</button>
+          </div>
+        </div>
+      </div> : null}
     </>}
   </main>;
 }

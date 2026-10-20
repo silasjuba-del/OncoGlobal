@@ -105,7 +105,12 @@ export function reconciliarCampo(domain: FactDomain, candidatos: readonly Clinic
     && [...valoresAbaixo].some((valor) => !valoresTopo.has(valor));
   const conflict = divergenciaInterna || divergenciaHierarquica;
   const eleito = noTopo[0] ?? null;
-  const exigeRevisao = eleito !== null && (eleito.evidence !== "EXPLICIT" || eleito.requiresConfirmation);
+  const q = eleito?.qualificadores;
+  const qualificacaoImpedeFatoAtual = q !== undefined
+    && (q.polaridade === "NEGADA" || q.polaridade === "NAO_DETERMINADA"
+      || q.sujeito === "TERCEIRO" || q.temporalidade === "HISTORICA" || q.temporalidade === "FUTURA");
+  const exigeRevisao = eleito !== null
+    && (eleito.evidence !== "EXPLICIT" || eleito.requiresConfirmation || qualificacaoImpedeFatoAtual);
   return {
     domain,
     candidates: ordenados,

@@ -73,11 +73,14 @@ export function projetarContextoClinico(i: EntradaContextoClinico) {
     if (!d || typeof d.campo !== "string" || !d.campo.startsWith("extracao.toxicity")) return [];
     const f = ClinicalFact.safeParse({ id: d.factId, segmentId: `reviewed:${e.eventId}`, patientCandidateId: null,
       domain: d.domain ?? "toxicity", value: d.valor, sourceType: d.sourceType, evidence: d.evidence, sourceId: d.sourceId,
-      rawEvidence: d.rawEvidence, confidence: d.confidence, requiresConfirmation: d.requiresConfirmation });
+      rawEvidence: d.rawEvidence, confidence: d.confidence, requiresConfirmation: d.requiresConfirmation,
+      ...(d.qualificadores && typeof d.qualificadores === "object" ? { qualificadores: d.qualificadores } : {}) });
     if (!f.success || f.data.domain !== "toxicity" || f.data.evidence !== "EXPLICIT" || f.data.requiresConfirmation) return [];
+    const q = f.data.qualificadores;
+    if (q && (q.sujeito === "TERCEIRO" || q.temporalidade === "HISTORICA" || q.temporalidade === "FUTURA")) return [];
     if (typeof d.factDate === "string" && (!dia.safeParse(d.factDate).success || d.factDate > hoje)) return [];
     const o = objeto(f.data.value);
-    const negada = o?.negated === true || o?.presente === false;
+    const negada = q?.polaridade === "NEGADA" || o?.negated === true || o?.presente === false;
     const nomes = negada ? termos({ ...o, negated: false, presente: true }) : termos(f.data.value);
     return nomes.map(nome => ({ nome, negada, eventId: e.eventId, sourceIds: fontes(e), rawEvidence: f.data.rawEvidence }));
   });

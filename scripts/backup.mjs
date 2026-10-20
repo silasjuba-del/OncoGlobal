@@ -33,13 +33,119 @@ function schemaMetadata(database) {
     schemaSha256: hash(Buffer.from(JSON.stringify(rows))),
   };
 }
-function refsLedger(db, files) {
+function parsePayload(value) {
+  if (value && typeof value === "object" && !Array.isArray(value)) return value;
+  if (typeof value !== "string") return null;
+  try { const parsed = JSON.parse(value); return parsed && typeof parsed === "object" && !Array.isArray(parsed) ? parsed : null; }
+  catch { return null; }
+}
+/* Referências internas conhecidas: o conteúdo já vive no snapshot SQLite do
+ * ledger (payload do draft), portanto não viram entrada de arquivo. Namespace
+ * com dois-pontos não basta: kind/campo do payload precisa corresponder. */
+/* Os dois produtores em extracaoLlm.ts derivam de EXTRACAO_RASCUNHO.
+ * Exigir a origem correspondente também recusa autorreferência/ciclos sem original. */
+function originalPdfIntegro(payload) {
+  const original = payload?.original;
+  if (original?.tipo !== "PDF" || typeof original.bytesBase64 !== "string"
+    || typeof original.contentHash !== "string") return false;
+  const bytes = Buffer.from(original.bytesBase64, "base64");
+  return bytes.length > 0 && bytes.toString("base64") === original.bytesBase64
+    && hash(bytes) === original.contentHash;
+}
+const derivadoExtracao = (p, c) => ["LLM_EXTRACAO_RASCUNHO", "D66_TRANSCRICAO_RASCUNHO"].includes(p?.kind)
+  && typeof p.sourceDraftId === "string" && c.porId.get(p.sourceDraftId)?.rawRef === c.ref
+  && c.porId.get(p.sourceDraftId)?.payload?.kind === "EXTRACAO_RASCUNHO"
+  && (p.kind !== "D66_TRANSCRICAO_RASCUNHO" || originalPdfIntegro(c.porId.get(p.sourceDraftId)?.payload));
+const NAMESPACE_INTERNO = {
+  "upload-local": (p, c) => p?.kind === "EXTRACAO_RASCUNHO" || derivadoExtracao(p, c),
+  "importacao-local": (p, c) => p?.kind === "EXTRACAO_RASCUNHO"
+    || p?.kind === "LLM_EXTRACAO_RASCUNHO" && derivadoExtracao(p, c),
+  "retrato-local": (p) => p?.kind === "SINTESE_RASCUNHO",
+  "registro-medico": (p, c) => p?.kind === "ESTADO_DOENCA_RASCUNHO" && c.suffix === c.draftId,
+  "manual": (p) => p?.campo === "medicamentos",
+  "triagem-local": (p) => p?.kind === "SALAO_TRIAGEM_RASCUNHO",
+  "canal-link": (p) => p?.kind === "VinculoContato",
+  "review-link": (p) => p?.kind === "PATIENT_LINK_REVIEW",
+  /* rotas.ts grava revisao-local:<draftId da ORIGEM> no draft derivado
+   * (evolucao-extracao-*): exige origem declarada, existente e coincidente. */
+  "revisao-local": (p, c) => p?.kind === "EVOLUCAO_RASCUNHO"
+    && p.origem?.draftId === c.suffix && c.draftIds.has(c.suffix),
+};
+const LITERAL_INTERNO = {
+  "consulta-flash-local": (p) => !!p && ((typeof p.kind === "string" && p.kind.startsWith("FLASH_")) || typeof p.documentId === "string"),
+  "referencia-local": (p) => !!p,
+  "vinculo-operacional-local": (p) => typeof p?.contatoId === "string",
+  "proposta-prescricao-local": (p) => p?.kind === "PRESCRICAO_RASCUNHO",
+  "proposta-local": (p) => p?.schema === "PrescricaoProposta@1",
+};
+function arquivoFisicoExiste(filesRoot, ref) {
+  try { return statSync(inside(filesRoot, ref)).isFile(); } catch { return false; }
+}
+function referenciaEntreDrafts(row, payload, porId) {
+  // dutos.ts guarda o conteúdo completo em {contexto, valor}, sem arquivo.
+  // Um ID arbitrário apontando a si próprio não constitui esse produtor.
+  if (row.rawRef === row.draftId) {
+    const contexto = payload?.contexto;
+    return /^duto-[a-f0-9]{64}$/.test(row.draftId) && row.sourceId === row.draftId
+      && typeof contexto?.patientId === "string" && contexto.patientId === row.patientId
+      && typeof contexto.encounterId === "string" && contexto.encounterId.length > 0
+      && (contexto.tumorLotId === null || typeof contexto.tumorLotId === "string")
+      && typeof contexto.atorId === "string" && contexto.atorId.length > 0
+      && typeof contexto.em === "string"
+      && !!payload.valor && typeof payload.valor === "object" && !Array.isArray(payload.valor);
+  }
+  const destino = porId.get(row.rawRef)?.payload;
+  // oncoassistPropostas.ts: referência declarada na auditoria ou na divergência.
+  if (payload?.kind === "JEV_CLASSIFICACAO_RASCUNHO")
+    return payload.auditoria?.draftId === row.rawRef && payload.auditoria?.propostaId === row.draftId
+      && destino?.kind === "EXTRACAO_RASCUNHO";
+  if (payload?.kind === "JEV_DIVERGENCIA_RASCUNHO")
+    return payload.propostaId === row.rawRef && destino?.kind === "JEV_CLASSIFICACAO_RASCUNHO"
+      && destino.auditoria?.propostaId === row.rawRef;
+  return false;
+}
+function refsLedger(db, files, filesRoot) {
   let rows = [];
-  try { rows = db.prepare("SELECT rawRef FROM draft_envelope").all(); }
-  catch { /* a synthetic/minimal ledger may not define drafts */ }
-  const rawRefs = rows.map((row) => row.rawRef);
-  if (rawRefs.some((ref) => typeof ref !== "string" || !ref)) throw new Error("REFERENCIA_FORA_DA_RAIZ");
-  return [...new Set([...rawRefs, ...files])].sort();
+  let comMetadados = true;
+  try { rows = db.prepare("SELECT draftId, patientId, sourceId, rawRef, payload FROM draft_envelope").all(); }
+  catch {
+    comMetadados = false;
+    try { rows = db.prepare("SELECT rawRef FROM draft_envelope").all(); }
+    catch { /* a synthetic/minimal ledger may not define drafts */ }
+  }
+  const draftIds = new Set(rows.map((row) => row.draftId).filter((id) => typeof id === "string"));
+  const porId = new Map(rows.filter((row) => typeof row.draftId === "string")
+    .map((row) => [row.draftId, { rawRef: row.rawRef, payload: parsePayload(row.payload) }]));
+  const fisicas = new Set(files);
+  for (const row of rows) {
+    const ref = row.rawRef;
+    if (typeof ref !== "string" || !ref) throw new Error("REFERENCIA_FORA_DA_RAIZ");
+    if (!comMetadados) { fisicas.add(ref); continue; }
+    if (ref === row.draftId || draftIds.has(ref)) {
+      // Referência entre drafts cujo nome também é um arquivo físico na raiz
+      // é ambígua: recusar, nunca omitir os bytes em silêncio.
+      if (filesRoot && arquivoFisicoExiste(filesRoot, ref)) throw new Error("REFERENCIA_AMBIGUA");
+      if (!referenciaEntreDrafts(row, parsePayload(row.payload), porId)) throw new Error("REFERENCIA_AMBIGUA");
+      continue;
+    }
+    if (Object.hasOwn(LITERAL_INTERNO, ref)) {
+      if (filesRoot && arquivoFisicoExiste(filesRoot, ref)) throw new Error("REFERENCIA_AMBIGUA");
+      if (!LITERAL_INTERNO[ref](parsePayload(row.payload))) throw new Error("REFERENCIA_AMBIGUA");
+      continue;
+    }
+    const colon = ref.indexOf(":");
+    if (colon > 0) {
+      const namespace = ref.slice(0, colon), suffix = ref.slice(colon + 1);
+      if (!Object.hasOwn(NAMESPACE_INTERNO, namespace)) throw new Error("REFERENCIA_DESCONHECIDA");
+      if (!suffix || !NAMESPACE_INTERNO[namespace](parsePayload(row.payload),
+        { suffix, draftId: row.draftId, ref, draftIds, porId }))
+        throw new Error("REFERENCIA_AMBIGUA");
+      continue;
+    }
+    if (colon === 0) throw new Error("REFERENCIA_DESCONHECIDA");
+    fisicas.add(ref);
+  }
+  return [...fisicas].sort();
 }
 function validateStores(stores) {
   if (!stores || typeof stores !== "object" || Array.isArray(stores)
@@ -72,7 +178,7 @@ export async function criarBackup({ dbPath, stores, filesRoot, files = [], desti
     for (const [key, sourcePath] of Object.entries(sourceStores)) {
       const db = new DatabaseSync(sourcePath);
       try {
-        if (key === "ledger") ledgerRefs = refsLedger(db, files);
+        if (key === "ledger") ledgerRefs = refsLedger(db, files, filesRoot);
         const temp = tempPaths.get(key);
         if (!temp) throw new Error("BACKUP_TEMPORARIO_AUSENTE");
         const schema = schemaMetadata(db);
@@ -83,7 +189,9 @@ export async function criarBackup({ dbPath, stores, filesRoot, files = [], desti
     }
     const entries = ledgerRefs.map((ref) => {
       const source = inside(filesRoot, ref);
-      if (realpathSync(source) !== source || !statSync(source).isFile()) throw new Error("REFERENCIA_INVALIDA");
+      let real;
+      try { real = realpathSync(source); } catch { throw new Error("REFERENCIA_AUSENTE"); }
+      if (real !== source || !statSync(source).isFile()) throw new Error("REFERENCIA_INVALIDA");
       const data = readFileSync(source);
       return { ref, sha256: hash(data), base64: data.toString("base64") };
     });

@@ -35,9 +35,11 @@ export const RespostaOncoassist = z.discriminatedUnion("status", [
   }),
   z.object({ status: z.enum(["PENDENTE", "ERRO"]), codigo: z.string().min(1), auditoria: AuditoriaOncoassist.optional() }),
 ]);
+export const ValidadePoliticaOncoassist = z.enum(["MESMA_VERSAO", "VERSAO_DIFERENTE", "NAO_VERIFICAVEL"]);
 export const HistoricoOncoassist = z.object({ propostas: z.array(z.object({
   auditoria: AuditoriaOncoassist, estado: z.enum(["PENDENTE", "CONCLUIDA"]),
-  validade: z.enum(["ATUAL", "FONTE_ALTERADA"]), resposta: RespostaOncoassist.nullable(),
+  validade: z.enum(["ATUAL", "FONTE_ALTERADA"]), validadePolitica: ValidadePoliticaOncoassist.optional(),
+  resposta: RespostaOncoassist.nullable(),
 })) });
 export type HistoricoOncoassist = z.infer<typeof HistoricoOncoassist>;
 export type AuditoriaOncoassist = z.infer<typeof AuditoriaOncoassist>;
