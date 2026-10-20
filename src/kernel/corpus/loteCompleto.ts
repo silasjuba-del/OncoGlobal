@@ -24,7 +24,8 @@ export function montarLoteCompleto(original:unknown,arquivo:string,sha256:string
  adicionar('cenarios','/identidade/cenarios',identidade.cenarios);
  for(const [k,v] of Object.entries(obj(p.diagnostico)))adicionar(k==='patologico'?'diagnostico':'exames',`/diagnostico/${esc(k)}`,v);
  adicionar('estadiamento','/estadiamento',p.estadiamento);
- for(const [k,v] of Object.entries(obj(p.tratamento)))adicionar(CHAVES[k]??'tratamento',`/tratamento/${esc(k)}`,v);
+ // APAC/SIGTAP organiza acesso documental; o conteúdo e o ponteiro de origem permanecem intactos.
+ for(const [k,v] of Object.entries(obj(p.tratamento)))adicionar(k==='apacSigtap'?'documentos':CHAVES[k]??'tratamento',`/tratamento/${esc(k)}`,v);
  for(const [k,v] of Object.entries(obj(p.ligacoes)))adicionar(CHAVES[k]??'complementos',`/ligacoes/${esc(k)}`,v);
  const raizes:Record<string,Setor>={biomarcadores:'biomarcadores',preQt:'pre_tratamento',completudeKit:'pre_tratamento',criteriosResposta:'resposta',resposta:'resposta',seguimento:'seguimento',suporte:'suporte',pendencias:'pendencias',conflitos:'conflitos',curadoria:'fontes',correcoes:'fontes',header:'fontes'};
  for(const [k,v] of Object.entries(p))if(!['identidade','diagnostico','tratamento','ligacoes','tumor_pack_universal'].includes(k))adicionar(raizes[k]??'complementos',`/${esc(k)}`,v);
