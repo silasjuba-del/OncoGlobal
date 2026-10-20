@@ -4,7 +4,8 @@ import { act, cleanup, fireEvent, render, screen, waitFor } from "@testing-libra
 import { afterEach, expect, it, vi } from "vitest";
 import { ApacRascunhoPreparadoSchema, BaseApacRascunhoRespostaSchema,
   type BaseApacRascunhoResposta, type EdicaoApacRascunho,
-  type PrepararApacRascunhoPedido, type ConfirmarApacRascunhoPedido } from "../../src/contracts/api/apacRascunho.js";
+  type PrepararApacRascunhoPedido, type ConfirmarApacRascunhoPedido,
+  type ApacRascunhoConfirmado } from "../../src/contracts/api/apacRascunho.js";
 import type { PortaConsulta } from "../../src/contracts/api/porta.js";
 import { ConsultaPersistida } from "../../src/ui/consulta/ConsultaPersistida.js";
 import { PrepararApacConsulta } from "../../src/ui/consulta/PrepararApacConsulta.js";
@@ -61,7 +62,7 @@ function fixture(options: { withPrescription?: boolean } = {}) {
     : sourceBase;
   const ler = vi.fn(async () => source);
   const preparar = vi.fn(async (pedido: PrepararApacRascunhoPedido) => prepared(pedido));
-  const confirmar = vi.fn(async (_pedido: ConfirmarApacRascunhoPedido) => ({ codigo: "GRAVADA" as const, apacId: "apac-sintetica", versao: 1,
+  const confirmar = vi.fn(async (_pedido: ConfirmarApacRascunhoPedido): Promise<ApacRascunhoConfirmado> => ({ codigo: "GRAVADA" as const, apacId: "apac-sintetica", versao: 1,
     eventId: "evento-apac-sintetico", estado: "RASCUNHO" as const, permiteExportar: false as const }));
   porta.lerBaseApacRascunho = ler;
   porta.prepararApacRascunho = preparar;
