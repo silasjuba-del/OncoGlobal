@@ -27,7 +27,8 @@ function dados(e: ClinicalEvent): Record<string, unknown> | null {
 const normalizarChave = (s: string) => s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 const sistemicos = new Set(["alergias", "alergia", "comorbidades", "medicamentos", "medicacao", "funcaoorganica", "exposicoes", "exposicaocumulativa", "cumulativos", "dosecumulativa", "alturacm"]);
 const materiaisConhecidos = new Set(["Paciente", "TumorLot", "Weight", "ImagingReport", "Biopsy", "TreatmentEpisode", "Ciclo", "DOCUMENTO",
-  "LabResult", "TreatmentAdministration", "TreatmentCycle", "SignedDocument", "DocumentSigned"]);
+  "LabResult", "TreatmentAdministration", "TreatmentCycle", "SignedDocument", "DocumentSigned",
+  "Triagem", "Triagem@1", "TumorLot@1"]);
 function escopo(e: ClinicalEvent, d: Record<string, unknown>): FatoRetrato["escopo"] {
   const campo = normalizarChave(String(d.campo));
   return sistemicos.has(campo) || campo.startsWith("extracao.lab:") || campo === "extracao.drug"
@@ -234,6 +235,10 @@ export function projetarRetrato(eventos: readonly ClinicalEvent[], contexto: Con
     if (consulta(e)) continue;
     // Eventos de operação não são fatos clínicos. Campo clínico ou tipo material explícito.
     if (typeof d.campo !== "string" && !materiaisConhecidos.has(e.tipo)) continue;
+    if (["Triagem", "Triagem@1"].includes(e.tipo) && (!validarPayloadEvento(e.tipo, d).ok
+      || d.patientId !== e.patientId || d.encounterId !== e.encounterId)) {
+      diagnostico(e, "TRIAGEM_CONTEXTO_OU_PAYLOAD_INVALIDO"); continue;
+    }
     if (encontrosIndeterminados.has(contexto.encounterId) || encontrosIndeterminados.has(e.encounterId)) continue;
     const dataOrigem = limitesEncontros.get(e.encounterId);
     if (dataEncontroAtual && dataOrigem && dataOrigem > dataEncontroAtual) continue;

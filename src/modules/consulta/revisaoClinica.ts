@@ -17,11 +17,12 @@ const CAMPOS:[string,string,string[]][]=[
 ];
 function valores(f:FatoRetrato,aliases:string[]):{bruto:unknown;f:FatoRetrato}[]{
   if(f.campo&&aliases.some(a=>norm(a)===norm(f.campo!)))return [{bruto:f.dados.valor,f}];
-  if(f.tipo==="TumorLot"&&aliases.includes("estadiamento")){
+  const tipo=f.tipo==="Triagem@1"?"Triagem":f.tipo==="TumorLot@1"?"TumorLot":f.tipo;
+  if(tipo==="TumorLot"&&aliases.includes("estadiamento")){
     const estados=f.dados.estadiamentos;
     return Array.isArray(estados)?estados.filter(v=>Array.isArray(obj(v).usoAtivo)&&(obj(v).usoAtivo as unknown[]).includes("PROTOCOLO")).map(bruto=>({bruto,f})):[];
   }
-  if(!["TumorLot","Weight","Triagem","Paciente"].includes(f.tipo))return [];
+  if(!["TumorLot","Weight","Triagem","Paciente"].includes(tipo))return [];
   return Object.entries(f.dados).filter(([k])=>aliases.some(a=>norm(a)===norm(k))).map(([,bruto])=>({bruto,f}));
 }
 /** Campos vêm do retrato já recortado por paciente, lote e horizonte; não extraem fatos de texto. */
@@ -30,9 +31,12 @@ export function montarFichaMinima(r:Retrato):CampoFichaMinima[]{
     const base:CampoFichaMinima={id,rotulo,estado:"PENDENTE",valor:null,data:null,motivo:"Dado confirmado com fonte não disponível.",fontes:[],fatos:[]};
     let candidatos=r.fatos.flatMap(f=>valores(f,aliases)).map(c=>{
       const w=obj(c.bruto),p=Fonte.array().safeParse(w.fontes);
-      const fontes=c.f.fontes.length?c.f.fontes:["TumorLot","Triagem","Weight"].includes(c.f.tipo)&&p.success?p.data:[];
+      // A fonte e a data do subcampo Dado são mais específicas que as do contêiner.
+      const internas=Object.hasOwn(w,"fontes");
+      const fontes=internas?(p.success?p.data:[]):c.f.fontes;
       const datas=[...new Set(fontes.map(f=>f.dataClinica).filter(dataValida))];
-      const tempoClinico=dataValida(w.data)?w.data:dataValida(c.f.tempoClinico)?c.f.tempoClinico:datas.length===1?datas[0]!:null;
+      const tempoClinico=dataValida(w.data)?w.data:internas?(datas.length===1?datas[0]!:null)
+        :dataValida(c.f.tempoClinico)?c.f.tempoClinico:datas.length===1?datas[0]!:null;
       return {...c,f:{...c.f,fontes,tempoClinico}};
     }).filter(({f})=>f.fontes.length>0);
     if(!candidatos.length)return base;
