@@ -11,8 +11,9 @@ import { lerDraft, listarDraftsGlobaisPorTipo, salvarDraft, transacao } from "..
 import { hashConteudoExibido as hash, type GerenciadorSessao } from "./sessao.js";
 import { lerFatosTrials } from "./trialsFatos.js";
 import { dataCivilDoServico } from "../rules/tempoServico.js";
+import type { criarMotorF1 } from "../kernel/orquestracao/runtime.js";
 
-interface Deps { db: DatabaseSync; sessoes: GerenciadorSessao; agora: () => string }
+interface Deps { db: DatabaseSync; sessoes: GerenciadorSessao; agora: () => string; motorF1?: ReturnType<typeof criarMotorF1> }
 interface Resposta { status: number; body: unknown }
 export type OperacaoTrials = "listar" | "importar" | "revisar" | "avaliar" | "fatos";
 const negar = (codigo: string, status = 409): Resposta => ({ status, body: { codigo } });
@@ -125,7 +126,7 @@ export async function operarTrials(deps: Deps, token: string, operacao: Operacao
   const selecionado = deps.sessoes.consultaSelecionada(token);
   if (!selecionado || selecionado.patientId !== ctx.data.patientId || selecionado.encounterId !== ctx.data.encounterId
     || (selecionado.tumorLotId ?? null) !== ctx.data.tumorLotId) return negar("CONTEXTO_CONSULTA_ALTERADO");
-  const fatos = lerFatosTrials(deps.db, ctx.data, auth.em);
+  const fatos = lerFatosTrials(deps.db, ctx.data, auth.em, deps.motorF1?.retrato(ctx.data, undefined, undefined, auth.em));
   if (operacao === "fatos") return { status: 200, body: fatos };
   if (!p?.success) return negar("PAYLOAD_INVALIDO", 400);
   const registro = leitura(lerDraft(deps.db, p.data.draftId));

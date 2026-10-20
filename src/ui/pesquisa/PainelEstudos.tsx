@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState, type ChangeEvent } from "react";
+import { useEffect, useId, useMemo, useRef, useState, type ChangeEvent } from "react";
 import type { ContextoAcaoComposta } from "../../contracts/api/acoesCompostas.js";
 import {
   AvaliacaoEstudoRespostaSchema,
@@ -130,11 +130,15 @@ function idempotencyKey(): string {
 function formatarValorFact(fact: PatientFact): string {
   return fact.status === "CONFIRMADO" ? `${String(fact.value)}${fact.unit ? ` ${fact.unit}` : ""}` : "CONFLITO — valores não eleitos";
 }
+const rotulosFatos: Record<string, string> = { ecog: "ECOG", "ecog.data": "Data documentada do ECOG",
+  cid: "CID", "cid.data": "Data documentada do CID", histologia: "Histologia", "histologia.data": "Data documentada da histologia" };
+const rotuloFato = (chave: string) => rotulosFatos[chave] ?? chave;
 
 export function PainelEstudos({
   estudos, contexto, ocupado = false, fatosDisponiveis = [], aoImportar, aoRevisar, aoAvaliar,
   aoAlterarPendente, aoAlterarSalvamento,
 }: PainelEstudosProps) {
+  const fatosListId = useId();
   const [nome, setNome] = useState("");
   const [mimeType, setMimeType] = useState<ImportarEstudoPedido["mimeType"]>("text/plain");
   const [conteudo, setConteudo] = useState("");
@@ -535,7 +539,7 @@ export function PainelEstudos({
             </article>)}
             <details><summary>Fatos retornados pelo serviço</summary>
               {resultCurrent.fatos.map((fact, index) => <article key={`${fact.factKey}-${index}`}>
-                <h5>{fact.factKey} · {fact.status}</h5><p>{formatarValorFact(fact)}</p>
+                <h5>{rotuloFato(fact.factKey)} · {fact.status}</h5><p>{formatarValorFact(fact)}</p>
                 {fact.status === "CONFIRMADO" ? <EvidenceList refs={[fact.source]} /> : <EvidenceList refs={fact.sources} />}
               </article>)}
             </details>
@@ -637,7 +641,7 @@ export function PainelEstudos({
                     alterarCriterio(item.criterionId, previous => ({ ...previous, notApplicableReason: value })); }} />
               </label> : null}
               {form.expressionKind ? <label>Fato vinculado · critério {index + 1}
-                <input aria-label={`Fato vinculado · critério ${index + 1}`} value={form.factKey}
+                <input aria-label={`Fato vinculado · critério ${index + 1}`} value={form.factKey} list={fatosListId}
                   onChange={event => { const value = event.currentTarget.value;
                     alterarCriterio(item.criterionId, previous => ({ ...previous, factKey: value })); }} />
               </label> : null}
@@ -696,9 +700,14 @@ export function PainelEstudos({
       {contexto ? <section className="estudos-panel__facts" aria-label="Fatos clínicos confirmados para vinculação">
         <h4>Fatos disponíveis na consulta (somente leitura)</h4>
         <p>Os valores abaixo apenas orientam a revisão da chave do fato; não são enviados no pedido de avaliação.</p>
+        <datalist id={fatosListId}>
+          {fatosDaConsulta.map(fact => <option key={fact.factKey} value={fact.factKey}
+            label={`${rotuloFato(fact.factKey)} · ${formatarValorFact(fact)}`} />)}
+        </datalist>
         {!fatosDaConsulta.length ? <p>Nenhum fato confirmado/conflictado disponibilizado para esta consulta.</p> : null}
         {fatosDaConsulta.map((fact, index) => <article key={`${fact.factKey}-${index}`}>
-          <strong>{fact.factKey}</strong><span>{formatarValorFact(fact)}</span>
+          <strong>{rotuloFato(fact.factKey)}</strong><span>{formatarValorFact(fact)}</span>
+          <small>Chave para vincular: <code>{fact.factKey}</code></small>
           {fact.status === "CONFIRMADO" ? <EvidenceList refs={[fact.source]} /> : <EvidenceList refs={fact.sources} />}
         </article>)}
       </section> : <p>Selecione uma consulta para comparar critérios com fatos clínicos confirmados.</p>}
