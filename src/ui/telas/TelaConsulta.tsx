@@ -64,6 +64,7 @@ export function TelaConsulta({
 }) {
   const [cientes, setCientes] = useState<readonly string[]>([]);
   const [visao, setVisao] = useState<ConsultaIntegrada | null>(null);
+  useEffect(()=>setCientes([]),[patientId,visao?.encounterId,visao?.tumorLotId]);
   const [loteId, setLoteId] = useState<string | null>(null);
   const [selecionandoLote, setSelecionandoLote] = useState(false);
   const pacienteAtual = useRef(patientId);

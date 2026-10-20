@@ -46,6 +46,7 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, versaoClinica
   aoAlterarApacPendenteAtual.current = aoAlterarApacPendente;
   const aoAlterarApacSalvandoAtual = useRef(aoAlterarApacSalvando);
   aoAlterarApacSalvandoAtual.current = aoAlterarApacSalvando;
+  useEffect(()=>setCientes([]),[contexto.patientId,contexto.encounterId,contexto.tumorLotId]);
   const [consultaCarregada, setConsultaCarregada] = useState<{
     visao: ConsultaIntegrada | null; erro: string; porta: PortaConsulta;
     contexto: PedidoBundle; versao: number; versaoClinica: number;

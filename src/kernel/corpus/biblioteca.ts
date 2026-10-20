@@ -1,3 +1,4 @@
+import { garantirColunas } from "../ledger/migracao.js";
 import { transacao as transacaoLedger } from "../ledger/db.js";
 import { createHash } from 'node:crypto';
 import type { DatabaseSync } from 'node:sqlite';
@@ -128,15 +129,7 @@ export function criarBiblioteca(db: DatabaseSync, portas: PortasBiblioteca) {
     CREATE TRIGGER IF NOT EXISTS biblioteca_ativacao_no_delete BEFORE DELETE ON biblioteca_ativacao BEGIN SELECT RAISE(ABORT,'ativacao imutavel'); END;`);
   // Migração aditiva: bancos existentes preservam seu histórico sem datas; novas linhas
   // sempre recebem ator e instante. Não reescrevemos eventos anteriores nem hashes.
-  const colunas = (tabela: string): Set<string> => new Set(
-    (db.prepare(`PRAGMA table_info(${tabela})`).all() as { name: string }[]).map(c => c.name),
-  );
-  transacaoLedger(db, () => {
-    for (const [tabela, nome, tipo] of [
-      ['biblioteca_curadoria', 'registrado_em', 'TEXT'], ['biblioteca_ativacao', 'ator', 'TEXT'],
-      ['biblioteca_ativacao', 'registrado_em', 'TEXT'],
-    ] as const) if (!colunas(tabela).has(nome)) db.exec(`ALTER TABLE ${tabela} ADD COLUMN ${nome} ${tipo}`);
-  });
+  garantirColunas(db,[['biblioteca_curadoria','registrado_em','TEXT'],['biblioteca_ativacao','ator','TEXT'],['biblioteca_ativacao','registrado_em','TEXT']]);
   const agora = (): string => {
     const instante = (portas.agora ?? (() => new Date().toISOString()))();
     if (!z.iso.datetime({ offset: true }).safeParse(instante).success) throw new Error('RELOGIO_SERVICO_INVALIDO');
