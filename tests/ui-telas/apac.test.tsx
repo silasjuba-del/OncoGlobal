@@ -37,7 +37,7 @@ describe("APAC em bloco por lote", () => {
     expect(negada.textContent).not.toContain("ADJUVANTE");
   });
 
-  it("duas APAC do mesmo lote geram uma exportação e a vencida não entra", async () => {
+  it("cada APAC selecionada gera a própria intenção (apacId/versão do servidor), a vencida não entra e o resultado é visível", async () => {
     const porta = criarPortaFalsa();
     const acao = vi.spyOn(porta, "acao");
     render(<TelaApacLote porta={porta} chaves={criarChaves()} />);
@@ -47,17 +47,24 @@ describe("APAC em bloco por lote", () => {
     fireEvent.click(screen.getByRole("checkbox", { name: "selecionar apac-verde-2" }));
     fireEvent.click(screen.getByRole("checkbox", { name: "selecionar apac-multi-b" }));
     fireEvent.click(screen.getByRole("button", { name: "exportar selecionadas" }));
-    fireEvent.click(screen.getByRole("button", { name: "exportar selecionadas" }));
+    expect(await screen.findByText(/Resultado da exportação:/)).toBeTruthy();
 
     expect(acao).toHaveBeenCalledTimes(2);
     const primeira = acao.mock.calls[0]?.[0];
     const segunda = acao.mock.calls[1]?.[0];
     expect(primeira?.verbo).toBe("EXPORTAR_APAC");
-    expect(primeira?.objeto).toEqual({ tipo: "LOTE_APAC", id: "lot-verde", versao: 1 });
+    expect(primeira?.objeto).toEqual({ tipo: "APAC", id: "apac-verde-1", versao: 1 });
+    expect(segunda?.objeto).toEqual({ tipo: "APAC", id: "apac-verde-2", versao: 1 });
     expect(ActionIntent.safeParse(primeira).success).toBe(true);
     expect(primeira).not.toHaveProperty("medicoId");
     expect(JSON.stringify(primeira)).not.toContain("ADJUVANTE");
-    expect(segunda?.idempotencyKey).toBe(primeira?.idempotencyKey);
-    expect(acao.mock.calls.some((chamada) => chamada[0]?.objeto.id === "lot-multi-b")).toBe(false);
+    expect(acao.mock.calls.some((chamada) => chamada[0]?.objeto.id === "lot-multi-b"
+      || chamada[0]?.objeto.id === "apac-multi-b")).toBe(false);
+
+    fireEvent.click(screen.getByRole("button", { name: "exportar selecionadas" }));
+    expect(await screen.findByText(/REPLAY/)).toBeTruthy();
+    expect(acao).toHaveBeenCalledTimes(4);
+    expect(acao.mock.calls[2]?.[0]?.idempotencyKey).toBe(primeira?.idempotencyKey);
+    expect(acao.mock.calls[3]?.[0]?.idempotencyKey).toBe(segunda?.idempotencyKey);
   });
 });

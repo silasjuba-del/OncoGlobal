@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { apacPrazo } from "../../../rules/apac.js";
 import type { ChavesIntencao } from "../../api/chaves.js";
-import type { AcaoIntent, ItemApacVisao, LotesApacVisao, PortaConsulta } from "../../api/porta.js";
+import { ErroPorta, type AcaoIntent, type ItemApacVisao, type LotesApacVisao, type PortaConsulta } from "../../api/porta.js";
 
 function finalidadeDoLote(item: ItemApacVisao): string {
   const finalidade = item.lote.finalidadeApac;
@@ -33,6 +33,7 @@ export function TelaApacLote({
   const [visao, setVisao] = useState<LotesApacVisao | null>(null);
   const [selecionadas, setSelecionadas] = useState<readonly string[]>([]);
   const [erro, setErro] = useState<string | null>(null);
+  const [resultadoExportacao, setResultadoExportacao] = useState<string | null>(null);
 
   useEffect(() => {
     let viva = true;
@@ -62,23 +63,29 @@ export function TelaApacLote({
     ));
   }
 
-  function exportar() {
-    const porLote = new Map<string, ItemApacVisao>();
-    for (const item of visao?.itens ?? []) {
-      if (!selecionadas.includes(item.apac.apacId)) continue;
-      if (vencida(item, hoje)) continue;
-      if (!porLote.has(item.lote.tumorLotId)) porLote.set(item.lote.tumorLotId, item);
-    }
-    for (const item of porLote.values()) {
+  async function exportar() {
+    // O servidor autoriza por APAC (apacId + versao), nunca por lote: uma
+    // intenção por APAC selecionada, com o resultado visível ao médico.
+    const itens = (visao?.itens ?? []).filter((item) =>
+      selecionadas.includes(item.apac.apacId) && !vencida(item, hoje));
+    if (!itens.length) { setResultadoExportacao("Nenhuma APAC exportável selecionada."); return; }
+    const partes: string[] = [];
+    for (const item of itens) {
       const intent: AcaoIntent = {
         verbo: "EXPORTAR_APAC",
-        objeto: { tipo: "LOTE_APAC", id: item.lote.tumorLotId, versao: 1 },
+        objeto: { tipo: "APAC", id: item.apac.apacId, versao: item.apac.versao },
         escopo: { patientId: item.patientId, encounterId: item.encounterId },
         destino: null,
-        idempotencyKey: chaves.novaChaveIntencao(`exportar:${item.lote.tumorLotId}`),
+        idempotencyKey: chaves.novaChaveIntencao(`exportar:${item.apac.apacId}`),
       };
-      void porta.acao(intent);
+      try {
+        const resultado = await porta.acao(intent);
+        partes.push(`${item.apac.apacId}: ${resultado.decisao ?? resultado.codigo} (${resultado.codigo})`);
+      } catch (erro) {
+        partes.push(`${item.apac.apacId}: FALHOU (${erro instanceof ErroPorta ? erro.codigo : "ERRO_INESPERADO"})`);
+      }
     }
+    setResultadoExportacao(partes.join(" · "));
   }
 
   return (
@@ -142,7 +149,8 @@ export function TelaApacLote({
         </section>
         );
       })}
-      <button type="button" onClick={exportar}>exportar selecionadas</button>
+      <button type="button" onClick={() => { void exportar(); }}>exportar selecionadas</button>
+      {resultadoExportacao ? <p role="status">Resultado da exportação: {resultadoExportacao}</p> : null}
     </section>
   );
 }
