@@ -15,6 +15,7 @@ import { avaliarDocumentoExecutavel, doseFinalEmMg } from "../rules/prescricao/d
 import { hashConteudoExibido as hash } from "./sessao.js";
 import { verificarPrescricaoDuto } from "./dutos.js";
 import { validarOrigemFicha, type DepsOrigemFicha } from "./origemFichaPrescricao.js";
+import { validarOrigemAcao } from "./origemAcaoPrescricao.js";
 
 type Contexto = ContextoAcaoComposta;
 interface Deps extends DepsOrigemFicha {}
@@ -125,7 +126,12 @@ function hashPreparacao(p: DadosPreparacao): string {
 
 function validarOrigem(deps: Deps, edicao: EdicaoPrescricaoExecutavel, base: BasePrescricaoExecutavelResposta,
   atorId: string, em: string, token: string): { codigo: string | null; avisos: string[] } {
-  if (edicao.origemProposta !== null) return validarOrigemFicha(deps, edicao, base.contexto, atorId, em, token);
+  if (edicao.origemProposta !== null) {
+    const origem = lerDraft(deps.db, edicao.origemProposta.draftId)?.payload;
+    if (origem && typeof origem === "object" && "kind" in origem && origem.kind === "ACAO_COMPOSTA_RASCUNHO")
+      return validarOrigemAcao(deps.db, edicao, base, atorId, em);
+    return validarOrigemFicha(deps, edicao, base.contexto, atorId, em, token);
+  }
   for (const { itemId, item } of edicao.itens) {
     if (item.source !== "PROTOCOL") continue;
     const original = base.vigente?.itens.find(i => i.itemId === itemId)?.item;
