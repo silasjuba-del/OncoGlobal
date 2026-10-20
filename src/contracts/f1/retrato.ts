@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { Fonte, Id, Instante } from "../base.js";
+import { DataCivil, Fonte, Id, Instante } from "../base.js";
 import { ReferenciaFato } from "./achadosSetor.js";
 import { VersaoReferencia } from "./correlacao.js";
 
@@ -11,6 +11,7 @@ export const FatoRetrato = z.object({ ref: ReferenciaFato, tipo: Id, campo: Id.n
 export type FatoRetrato = z.infer<typeof FatoRetrato>;
 export const Retrato = z.object({ schema: z.literal("Retrato@1"), patientId: Id, encounterId: Id,
   tumorLotId: Id.nullable(), revisao: Id, versaoProjecao: Id, geradoEm: Instante,
+  dataClinicaEncontro: DataCivil.optional(),
   regras: z.array(VersaoReferencia), biblioteca: VersaoReferencia,
   fatos: z.array(FatoRetrato),
   integridade: z.array(z.object({ eventoId: Id, tipo: z.string().nullable(), motivo: Id }).strict()),
