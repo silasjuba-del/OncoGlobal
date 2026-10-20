@@ -12,11 +12,12 @@ import { executarConfirmacao } from "../kernel/comandos/index.js";
 import { lerDraft, listarEventos, salvarDraft, transacao } from "../kernel/comandos/portas.js";
 import { dadosDoEvento, eventosVigentes } from "../kernel/projections/snapshot.js";
 import { avaliarDocumentoExecutavel, doseFinalEmMg } from "../rules/prescricao/documentoExecutavel.js";
-import { hashConteudoExibido as hash, type GerenciadorSessao } from "./sessao.js";
+import { hashConteudoExibido as hash } from "./sessao.js";
 import { verificarPrescricaoDuto } from "./dutos.js";
+import { validarOrigemFicha, type DepsOrigemFicha } from "./origemFichaPrescricao.js";
 
 type Contexto = ContextoAcaoComposta;
-interface Deps { db: DatabaseSync; sessoes: GerenciadorSessao; agora: () => string }
+interface Deps extends DepsOrigemFicha {}
 interface Resposta { status: number; body: unknown }
 const negar = (codigo: string, status = 409, pendencias?: string[]): Resposta =>
   ({ status, body: { codigo, ...(pendencias ? { pendencias } : {}) } });
@@ -122,20 +123,19 @@ function hashPreparacao(p: DadosPreparacao): string {
     resposta: { draftId, revision, baseHash, conteudo, texto, avisos, efeitos } });
 }
 
-function validarOrigem(edicao: EdicaoPrescricaoExecutavel, base: BasePrescricaoExecutavelResposta): string | null {
-  // Propostas de protocolo ainda precisam de uma porta que valide o corpus.
-  // Itens manuais completos são autorados pelo médico; nunca recebem selo PROTOCOL pelo browser.
-  if (edicao.origemProposta !== null) return "ORIGEM_PROPOSTA_REQUER_VALIDACAO_DO_CORPUS";
+function validarOrigem(deps: Deps, edicao: EdicaoPrescricaoExecutavel, base: BasePrescricaoExecutavelResposta,
+  atorId: string, em: string): { codigo: string | null; avisos: string[] } {
+  if (edicao.origemProposta !== null) return validarOrigemFicha(deps, edicao, base.contexto, atorId, em);
   for (const { itemId, item } of edicao.itens) {
     if (item.source !== "PROTOCOL") continue;
     const original = base.vigente?.itens.find(i => i.itemId === itemId)?.item;
     if (!original || original.source !== "PROTOCOL" || base.vigente?.protocoloId !== edicao.protocoloId)
-      return "ORIGEM_PROTOCOLO_NAO_COMPROVADA";
+      return { codigo: "ORIGEM_PROTOCOLO_NAO_COMPROVADA", avisos: [] };
     // Uma identidade de protocolo assinada não autoriza trocar a droga/preparo e manter a origem.
     const fixos = (i: typeof item) => { const { observacao, ...resto } = i; return resto; };
-    if (hash(fixos(original)) !== hash(fixos(item))) return "ORIGEM_PROTOCOLO_ALTERADA";
+    if (hash(fixos(original)) !== hash(fixos(item))) return { codigo: "ORIGEM_PROTOCOLO_ALTERADA", avisos: [] };
   }
-  return null;
+  return { codigo: null, avisos: [] };
 }
 
 function validarEpisodioReutilizado(edicao: EdicaoPrescricaoExecutavel, base: BasePrescricaoExecutavelResposta,
@@ -155,6 +155,8 @@ function preparar(deps: Deps, token: string, raw: unknown, contexto: Contexto, a
   if (base.pendencias.length) return negar("BASE_PRESCRICAO_PENDENTE", 409, base.pendencias);
   const reutilizacao = validarEpisodioReutilizado(entrada.edicao, base);
   if (reutilizacao) return negar(reutilizacao);
+  const origem = validarOrigem(deps, entrada.edicao, base, atorId, em);
+  if (origem.codigo) return negar(origem.codigo);
   const anterior = lerDraft(deps.db, draftId);
   if (anterior) {
     const salvo = PreparacaoArmazenada.safeParse(anterior.payload);
@@ -171,8 +173,6 @@ function preparar(deps: Deps, token: string, raw: unknown, contexto: Contexto, a
     return { status: 200, body: salvo.data.resposta };
   }
   const edicao = entrada.edicao, modo = edicao.planejamento.modo;
-  const erroOrigem = validarOrigem(edicao, base);
-  if (erroOrigem) return negar(erroOrigem);
   if (modo === "CICLO_ATUAL" && (!base.ciclo || !base.episodio)) return negar("CICLO_ATUAL_AUSENTE");
   if (modo !== "CICLO_ATUAL" && base.ciclo) return negar("ATENDIMENTO_JA_TEM_CICLO");
   if (modo === "NOVO_CICLO" && !base.episodio) return negar("EPISODIO_ATUAL_AUSENTE");
@@ -235,7 +235,8 @@ function preparar(deps: Deps, token: string, raw: unknown, contexto: Contexto, a
   const texto = `${avaliacao.texto!}\n\nEFEITOS DA CONFIRMAÇÃO\n${efeitos.map(e => `- ${e}`).join("\n")}`;
   const dadosPreparacao = { contexto, atorId, requestHash, edicao, eventos: planejados,
     documentoAnteriorId: documentoAnterior?.eventId ?? null };
-  const respostaSemHash = { draftId, revision: 0, baseHash: base.revisao, conteudo, texto, avisos: avaliacao.avisos, efeitos };
+  const respostaSemHash = { draftId, revision: 0, baseHash: base.revisao, conteudo, texto,
+    avisos: [...avaliacao.avisos, ...origem.avisos], efeitos };
   const conteudoHash = hashPreparacao({ ...dadosPreparacao, resposta: respostaSemHash });
   const resposta = PrescricaoExecutavelPreparada.parse({ ...respostaSemHash, conteudoHash });
   const payload = PreparacaoArmazenada.parse({ kind: "PRESCRICAO_EXECUTAVEL_RASCUNHO", ...dadosPreparacao, resposta });
@@ -290,8 +291,8 @@ function confirmar(deps: Deps, token: string, raw: unknown, contexto: Contexto, 
   if (base.revisao !== r.baseHash || base.pendencias.length) return negar("BASE_PRESCRICAO_ALTERADA");
   const reutilizacao = validarEpisodioReutilizado(salvo.edicao, base, r.conteudo.contexto.episodioId);
   if (reutilizacao) return negar(reutilizacao);
-  const origem = validarOrigem(salvo.edicao, base);
-  if (origem) return negar(origem);
+  const origem = validarOrigem(deps, salvo.edicao, base, atorId, em);
+  if (origem.codigo) return negar(origem.codigo);
   const avaliacao = avaliarDocumentoExecutavel(r.conteudo);
   if (!avaliacao.ok) return negar("PRESCRICAO_INCOMPLETA", 409, avaliacao.pendencias);
   const key = hash(operationId), reviewDecisionId = `rx-review-${key}`, eventoId = `rx-doc-${key}`;

@@ -7,6 +7,7 @@ import {
 } from "../../contracts/api/operacaoPrescricaoExecutavel.js";
 import type { ItemPrescricaoExecutavel } from "../../contracts/api/prescricaoExecutavel.js";
 import type { DoseBasis } from "../../contracts/w10/prescricao.js";
+import type { InstanciacaoFichaResposta } from "../../contracts/api/fichasPrescricao.js";
 import { pendenciasLimitesDeclarados } from "../../rules/prescricao/documentoExecutavel.js";
 // @ts-expect-error folha CSS pura, resolvida pelo Vite
 import "./prescricao-executavel.css";
@@ -142,13 +143,14 @@ function materializar(item: ItemDraft): ItemPrescricaoExecutavel | null {
 
 export interface EditorPrescricaoExecutavelProps {
   base: Base | null;
+  origemFicha?: InstanciacaoFichaResposta | null;
   ocupado?: boolean;
   aoPreparar: (edicao: Edicao) => Promise<Preparada>;
   aoAssinar: (preparacao: Preparada) => Promise<void>;
   aoAlterarPendente?: (pendente: boolean) => void;
 }
 
-export function EditorPrescricaoExecutavel({ base, ocupado = false, aoPreparar, aoAssinar, aoAlterarPendente }: EditorPrescricaoExecutavelProps) {
+export function EditorPrescricaoExecutavel({ base, origemFicha = null, ocupado = false, aoPreparar, aoAssinar, aoAlterarPendente }: EditorPrescricaoExecutavelProps) {
   const [edicao, setEdicao] = useState<FormularioPrescricao>(() => inicializar(base));
   const [itens, setItens] = useState<ItemDraft[]>(() => base?.vigente?.itens.map(paraRascunho) ?? []);
   const [preparacao, setPreparacao] = useState<PreparacaoVisivel | null>(null);
@@ -161,6 +163,9 @@ export function EditorPrescricaoExecutavel({ base, ocupado = false, aoPreparar, 
   const baseAnterior = useRef(base);
   const montado = useRef(true);
   const pendente = useRef(false);
+  const origemVista = useRef<InstanciacaoFichaResposta | null>(null);
+  const [fichaAplicada, setFichaAplicada] = useState<InstanciacaoFichaResposta | null>(null);
+  const [fichaPendente, setFichaPendente] = useState<InstanciacaoFichaResposta | null>(null);
 
   useEffect(() => {
     montado.current = true;
@@ -188,6 +193,7 @@ export function EditorPrescricaoExecutavel({ base, ocupado = false, aoPreparar, 
     }
     setEdicao(inicializar(base));
     setItens(base?.vigente?.itens.map(paraRascunho) ?? []);
+    setFichaAplicada(null); setFichaPendente(null);
     setPreparacao(null);
     setMensagem("");
     setErros([]);
@@ -195,6 +201,17 @@ export function EditorPrescricaoExecutavel({ base, ocupado = false, aoPreparar, 
     pendente.current = false;
     aoAlterarPendente?.(false);
   }, [base, aoAlterarPendente]);
+
+  useEffect(() => {
+    if (!origemFicha || !base || origemVista.current === origemFicha) return;
+    origemVista.current = origemFicha;
+    if (origemFicha.contexto.patientId !== base.contexto.patientId
+      || origemFicha.contexto.encounterId !== base.contexto.encounterId || origemFicha.contexto.tumorLotId !== base.contexto.tumorLotId) {
+      setMensagem("A ficha calculada pertence a outro contexto. Selecione novamente."); return;
+    }
+    if (pendente.current) setFichaPendente(origemFicha);
+    else aplicarFicha(origemFicha);
+  }, [origemFicha, base?.contexto.patientId, base?.contexto.encounterId, base?.contexto.tumorLotId]);
 
   const protocolos = useMemo(() => [...new Set([
     base?.vigente?.protocoloId,
@@ -213,6 +230,12 @@ export function EditorPrescricaoExecutavel({ base, ocupado = false, aoPreparar, 
       pendente.current = true;
       aoAlterarPendente?.(true);
     }
+  }
+  function aplicarFicha(ficha: InstanciacaoFichaResposta) {
+    marcarEdicao();
+    setEdicao(anterior => ({ ...anterior, protocoloId: ficha.template.nome, origemProposta: ficha.origemProposta }));
+    setItens(ficha.itens.map(paraRascunho));
+    setFichaAplicada(ficha); setFichaPendente(null);
   }
 
   function alterarCampo<K extends keyof FormularioPrescricao>(campo: K, valor: FormularioPrescricao[K]) {
@@ -234,7 +257,7 @@ export function EditorPrescricaoExecutavel({ base, ocupado = false, aoPreparar, 
 
   function atualizarItem(index: number, campo: keyof ItemDraft, value: string) {
     marcarEdicao();
-    if (campo !== "observacao") setEdicao(anterior => ({ ...anterior, origemProposta: null }));
+    // A mudança manual de um item não apaga a origem verificável dos demais.
     setItens(previous => previous.map((item, position) => {
       if (position !== index) return item;
       if (campo === "drug" && item.drug && value !== item.drug)
@@ -287,8 +310,8 @@ export function EditorPrescricaoExecutavel({ base, ocupado = false, aoPreparar, 
     const sequencias = itens.map(item => Number(item.sequence));
     if (sequencias.some(value => !Number.isSafeInteger(value) || value < 1) || new Set(sequencias).size !== sequencias.length)
       problemas.push("A sequência dos itens deve ser positiva e única.");
-    if (itens.some(item => item.source === "MANUAL" && !item.overrideMotivo.trim()))
-      problemas.push("Informe o motivo do override de cada item manual.");
+    if (itens.some(item => item.source === "MANUAL" && item.classe === "QT" && !item.overrideMotivo.trim()))
+      problemas.push("Informe o motivo do override de cada antineoplásico manual.");
     if (problemas.length) { setErros(problemas); return null; }
     const parsed = EdicaoPrescricaoExecutavel.safeParse({
       ...edicao,
@@ -361,6 +384,26 @@ export function EditorPrescricaoExecutavel({ base, ocupado = false, aoPreparar, 
   }
 
   return <section className="prescricao-executavel" aria-label="Editor de prescrição executável" aria-busy={bloqueado}>
+    {fichaPendente ? <section aria-label="Substituição por ficha de protocolo" role="alert">
+      <p>Há alterações na prescrição. A ficha {fichaPendente.template.nome} está pronta para substituir os itens atuais.</p>
+      <button type="button" disabled={bloqueado} onClick={() => aplicarFicha(fichaPendente)}>Substituir itens pela ficha selecionada</button>
+      <button type="button" disabled={bloqueado} onClick={() => setFichaPendente(null)}>Manter minha edição</button>
+    </section> : null}
+    {fichaAplicada && edicao.origemProposta ? <section aria-label="Origem da prescrição">
+      <h3>{fichaAplicada.template.nome} · versão {fichaAplicada.template.versao}</h3>
+      <p>Fonte: {fichaAplicada.template.fonte}</p>
+      <p>Peso: {fichaAplicada.dadosCorporais.pesoKg ?? "Não informado"} kg · Altura: {fichaAplicada.dadosCorporais.alturaCm ?? "Não informada"} cm
+        {" · "}SC: {fichaAplicada.dadosCorporais.bsaM2 ?? "Não informada"} m² · ClCr: {fichaAplicada.dadosCorporais.clcr ?? "Não informado"} mL/min</p>
+      {fichaAplicada.pendencias.map((p, i) => <p key={`p-${i}`} role="alert">{p}</p>)}
+      {fichaAplicada.avisos.map((a, i) => <p key={`a-${i}`}>{a}</p>)}
+      <details><summary>Rastreabilidade da ficha</summary><p>Revisão local {fichaAplicada.revisionFicha}</p>
+        <p style={{ overflowWrap: "anywhere" }}>SHA-256: {fichaAplicada.contentHash}</p></details>
+    </section> : null}
+    {edicao.origemProposta ? <button type="button" disabled={bloqueado} onClick={() => {
+      marcarEdicao(); setEdicao(anterior => ({ ...anterior, origemProposta: null }));
+      setItens(anteriores => anteriores.map(i => ({ ...i, source: "MANUAL", overrideMotivo: "" })));
+      setFichaAplicada(null);
+    }}>Desvincular ficha e editar manualmente</button> : null}
     <header className="prescricao-executavel__header">
       <div><p className="prescricao-executavel__eyebrow">PRESCRIÇÃO · REVISÃO MÉDICA</p>
         <h2>Prescrição executável</h2>
@@ -482,7 +525,7 @@ export function EditorPrescricaoExecutavel({ base, ocupado = false, aoPreparar, 
           {item.taxaMaximaMgMin !== undefined ? <p>Taxa máxima declarada: {String(item.taxaMaximaMgMin).replace(".", ",")} mg/min</p> : null}
           {item.source === "MANUAL" ? <div className="prescricao-executavel__override">
             <label>Motivo do override · item {index + 1}
-              <textarea aria-label={`Motivo do override · item ${index + 1}`} required rows={2} value={item.overrideMotivo}
+              <textarea aria-label={`Motivo do override · item ${index + 1}`} required={item.classe === "QT"} rows={2} value={item.overrideMotivo}
                 onChange={event => atualizarItem(index, "overrideMotivo", event.target.value)} />
             </label>
             <button type="button" disabled={bloqueado || !edicao.motivo.trim()}

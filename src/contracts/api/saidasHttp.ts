@@ -1,4 +1,5 @@
 import { PropostasDoseReceitaResposta } from './propostaDoseReceita.js';
+import { CatalogoFichasRespostaSchema, FichaProtocoloCatalogoSchema, InstanciacaoFichaRespostaSchema } from "./fichasPrescricao.js";
 import { ListarEstudosRespostaSchema, EstudoServicoSchema, AvaliacaoEstudoRespostaSchema, SchemaFatosTrialsResposta } from "./trialsServico.js";
 import { BasePrescricaoExecutavelResposta, PrescricaoExecutavelPreparada, PrescricaoExecutavelConfirmada } from "./operacaoPrescricaoExecutavel.js";
 import { AcaoCompostaPreparada, BaseAcaoCompostaResposta } from "./execucaoAcaoComposta.js";
@@ -34,6 +35,9 @@ const Extracao = z.object({ draftId: Id, revision: Count, linkedPatientId: Id.nu
 
 /** Mesmos contratos no servidor e no cliente. Valida sem descartar campos adicionais da resposta legada. */
 export const SaidasHttp: Readonly<Record<string, z.ZodType>> = {
+  listarFichasPrescricao: CatalogoFichasRespostaSchema,
+  revisarFichaPrescricao: FichaProtocoloCatalogoSchema,
+  instanciarFichaPrescricao: InstanciacaoFichaRespostaSchema,
   listarEstudosTrials: ListarEstudosRespostaSchema,
   importarEstudoTrial: EstudoServicoSchema,
   revisarEstudoTrial: EstudoServicoSchema,

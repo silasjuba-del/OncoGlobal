@@ -2,6 +2,8 @@ import { nomeMedicamento } from './propostasDoseReceita.js';
 import { operarAcoesCompostas } from "./acoesCompostas.js";
 import { operarPrescricaoExecutavel } from "./prescricaoExecutavel.js";
 import { operarTrials } from "./trialsServico.js";
+import { operarFichasPrescricao } from "./fichasPrescricao.js";
+import { instanciarFichaPrescricao } from "./origemFichaPrescricao.js";
 import { lerTimelineMulticamadas } from "./timelineMulticamadas.js";
 import { ContextoAcaoComposta } from "../contracts/api/acoesCompostas.js";
 import { operarContingenciaSalao } from './salaoContingencia.js';
@@ -412,6 +414,9 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
         : ["/salao/revisar-relato-canal","/farmacia/enviar","/farmacia/conferir","/salao/registrar-administracao","/apac/validar-emissao","/chat/aceitar-decisao","/tarefas/receber","/tarefas/concluir"].includes(req.url??"") ? req.url!
         : req.url === "/consulta/upload" ? "upload"
         : req.url === "/consulta/prescricao/propor" ? "proporPrescricao"
+        : req.url === "/consulta/prescricao/fichas/listar" ? "listarFichasPrescricao"
+        : req.url === "/consulta/prescricao/fichas/revisar" ? "revisarFichaPrescricao"
+        : req.url === "/consulta/prescricao/fichas/instanciar" ? "instanciarFichaPrescricao"
         : req.url === "/consulta/acoes-compostas/base" ? "baseAcaoComposta"
         : req.url === "/consulta/acoes-compostas/preparar" ? "prepararAcaoComposta"
         : req.url === "/consulta/prescricao-executavel/base" ? "basePrescricaoExecutavel"
@@ -492,6 +497,11 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
     }
     if (rota === "baseAcaoComposta" || rota === "prepararAcaoComposta") {
       const r = operarAcoesCompostas(deps, token, rota === "baseAcaoComposta" ? "base" : "preparar", raw);
+      return reply(r.status, rota, r.body);
+    }
+    if (rota === "listarFichasPrescricao" || rota === "revisarFichaPrescricao" || rota === "instanciarFichaPrescricao") {
+      const r = rota === "instanciarFichaPrescricao" ? instanciarFichaPrescricao(deps, token, raw)
+        : operarFichasPrescricao(deps, token, rota === "listarFichasPrescricao" ? "listar" : "revisar", raw);
       return reply(r.status, rota, r.body);
     }
     if (rota === "basePrescricaoExecutavel" || rota === "prepararPrescricaoExecutavel" || rota === "confirmarPrescricaoExecutavel") {

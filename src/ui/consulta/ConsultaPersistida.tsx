@@ -20,6 +20,8 @@ import type { AcaoCompostaPreparada } from "../../contracts/api/execucaoAcaoComp
 import type { VisaoTimelineMulticamadas } from "../../contracts/api/timelineMulticamadas.js";
 import { TimelineMulticamadas } from "./TimelineMulticamadas.js";
 import { EditorPrescricaoExecutavel } from "./EditorPrescricaoExecutavel.js";
+import { FichasPrescricaoConsulta, mensagemErroFicha } from "./FichasPrescricaoConsulta.js";
+import type { InstanciacaoFichaResposta } from "../../contracts/api/fichasPrescricao.js";
 import type { BasePrescricaoExecutavelResposta, EdicaoPrescricaoExecutavel,
   PrescricaoExecutavelPreparada } from "../../contracts/api/operacaoPrescricaoExecutavel.js";
 
@@ -55,6 +57,7 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, versaoClinica
   const [linhaTempo, setLinhaTempo] = useState<{ origem: ConsultaIntegrada; dados: VisaoTimelineMulticamadas | null } | null>(null);
   const tentativaAcao = useRef<{ conteudo: string; chave: string } | null>(null);
   const [editorRx, setEditorRx] = useState(false);
+  const [origemFichaRx, setOrigemFichaRx] = useState<InstanciacaoFichaResposta | null>(null);
   const [baseRx, setBaseRx] = useState<{ origem: ConsultaIntegrada; dados: BasePrescricaoExecutavelResposta } | null>(null);
   const [erroRx, setErroRx] = useState("");
   const [rxEmCurso, setRxEmCurso] = useState(false);
@@ -89,7 +92,7 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, versaoClinica
     setLinhaTempo(null);
     setMensagem("");
     setRxEmCurso(false); aoAlterarPrescricaoSalvando?.(false); aoAlterarPrescricaoPendente?.(false);
-    setEditorRx(false); setBaseRx(null); setErroRx(""); tentativaRx.current = null; assinaturaRx.current = null;
+    setEditorRx(false); setOrigemFichaRx(null); setBaseRx(null); setErroRx(""); tentativaRx.current = null; assinaturaRx.current = null;
     return () => {
       geracao.current++;
       aoAlterarPrescricaoSalvando?.(false); aoAlterarPrescricaoPendente?.(false);
@@ -151,6 +154,8 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, versaoClinica
         expectedBaseHash: baseRx.dados.revisao, idempotencyKey: tentativaRx.current.chave, edicao });
       if (atual !== geracao.current || origem !== visaoAtual.current) throw new Error("O contexto mudou. Prepare novamente.");
       return r;
+    } catch (error) {
+      throw new Error(mensagemErroFicha(error));
     } finally {
       if (atual === geracao.current) { setRxEmCurso(false); aoAlterarPrescricaoSalvando?.(false); }
     }
@@ -176,6 +181,8 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, versaoClinica
       aoAlterarPrescricaoPendente?.(false);
       if (aoAtualizarClinico) aoAtualizarClinico(); else setVersao(v => v + 1);
       setMensagem("Prescrição assinada e ciclo planejado gravados. Nenhuma administração registrada.");
+    } catch (error) {
+      throw new Error(mensagemErroFicha(error));
     } finally {
       if (atual === geracao.current) { setRxEmCurso(false); aoAlterarPrescricaoSalvando?.(false); }
     }
@@ -449,9 +456,14 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, versaoClinica
     </>}
     {editorRx ? <section aria-label="Editor da prescrição desta consulta">
       {erroRx ? <p role="alert">{erroRx}</p> : null}
+      {porta.listarFichasPrescricao && porta.revisarFichaPrescricao && porta.instanciarFichaPrescricao
+        ? <FichasPrescricaoConsulta porta={porta} contexto={{ patientId, encounterId, tumorLotId }}
+          ocupado={ocupado || rxEmCurso || !visao || !baseRx || baseRx.origem !== visao}
+          aoInstanciar={setOrigemFichaRx}
+          aoAlterarSalvando={salvando => { setRxEmCurso(salvando); aoAlterarPrescricaoSalvando?.(salvando); }} /> : null}
       {baseRx?.dados.contexto.patientId === patientId && baseRx.dados.contexto.encounterId === encounterId
         && baseRx.dados.contexto.tumorLotId === tumorLotId ? <EditorPrescricaoExecutavel key={`${patientId}:${encounterId}:${tumorLotId ?? ""}`}
-        base={baseRx.dados} ocupado={ocupado || rxEmCurso || !visao || baseRx.origem !== visao || !!erroRx}
+        base={baseRx.dados} origemFicha={origemFichaRx} ocupado={ocupado || rxEmCurso || !visao || baseRx.origem !== visao || !!erroRx}
         aoPreparar={prepararRx} aoAssinar={assinarRx}
         {...(aoAlterarPrescricaoPendente ? { aoAlterarPendente: aoAlterarPrescricaoPendente } : {})} />
         : <p role="status">Carregando a base da prescrição…</p>}
