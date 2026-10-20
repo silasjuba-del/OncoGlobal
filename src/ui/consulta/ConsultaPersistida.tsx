@@ -1,3 +1,6 @@
+import { PropostaDoseReceita } from '../../contracts/api/propostaDoseReceita.js';
+import { FontesDoseReceita } from './FontesDoseReceita.js';
+import { documentoReceitaDosePendente } from '../../contracts/f1/receitaDose.js';
 import { InvestigacaoMinima } from './InvestigacaoMinima.js';
 import type { MinutaInvestigacao } from './InvestigacaoMinima.js';
 import { DutosClinica } from './DutosClinica.js';
@@ -12,7 +15,7 @@ import { CartaoTransversal } from "./CartaoTransversal.js";
 import { InstrumentosClinicos } from "../clinico/InstrumentosClinicos.js";
 
 type DocumentoPreview = { documentId: string; documentVersion: number; draftId: string;
-  titulo: string; texto: string; conteudoHash: string };
+  titulo: string; texto: string; conteudoHash: string; propostasDoseReceita:PropostaDoseReceita[] };
 type Preview = { preparacao: FlashPreparada; documentos: DocumentoPreview[]; operacao: string };
 
 /** Composição HTTP real. Nenhum cadastro, prescrição ou histórico de demonstração. */
@@ -129,7 +132,7 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, versaoClinica
           || typeof corpo?.texto !== "string" || (ctx?.patientId !== undefined && ctx.patientId !== patientId)
           || ctx?.encounterId !== encounterId || ctx.tumorLotId !== tumorLotId) throw new Error("CONTEUDO_NAO_EXIBIVEL");
         return { documentId: doc.documentId, documentVersion: doc.documentVersion, draftId: doc.draftId,
-          titulo: esperado.titulo, texto: corpo.texto, conteudoHash: doc.conteudoHash };
+          titulo: esperado.titulo, texto: corpo.texto, propostasDoseReceita:PropostaDoseReceita.array().parse(corpo.propostasDoseReceita??[]), conteudoHash: doc.conteudoHash };
       });
       if (new Set(documentos.map((d) => d.documentId)).size !== documentos.length) throw new Error("DOCUMENTO_DUPLICADO");
       setPreview({ preparacao, documentos, operacao }); setFlash(false);
@@ -215,6 +218,7 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, versaoClinica
   const propsFlash: ConsultaFlashProps | null = visaoParaEdicao ? {
     ...montarPropsFlash(visaoParaEdicao, null, preparar, salvar),
     ...(aoAbrirApac ? {aoAbrirApac} : {}),
+    ...(porta.proporDoseReceita?{aoProporDose:(medicamento:string)=>porta.proporDoseReceita!({patientId,encounterId,tumorLotId},medicamento)}:{}),
     ocupado: ocupado || !visaoPronta, rotuloFinalizar: "Revisar documentos para assinatura", aoSalvarRascunho: salvar, aoFinalizar: preparar,
   } : null;
   if(propsFlash&&pedidoInvestigacao&&visaoPronta?.retrato?.revisao!==pedidoRevisao){
@@ -268,8 +272,11 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, versaoClinica
       {preview.documentos.map((doc) => <article key={doc.documentId}>
         <h4>{doc.titulo} · versão {doc.documentVersion}</h4>
         <pre style={{ whiteSpace: "pre-wrap" }}>{doc.texto}</pre>
+        {'propostasDoseReceita' in doc?<FontesDoseReceita propostas={doc.propostasDoseReceita}/>:null}
       </article>)}
-      <button type="button" disabled={ocupado} onClick={assinar}>Confirmar e assinar conteúdo exibido</button>
+      {preview.documentos.some(d=>documentoReceitaDosePendente({tipoDocumento:'FLASH_CONJUNTO_IMPRESSAO',texto:d.texto}))?<p role="status">Receita com dose pendente: permanece em rascunho. Volte à edição para completar a dose.</p>:null}
+      <p>Ao confirmar, o médico valida as doses, a posologia e o conteúdo exibidos.</p>
+      <button type="button" disabled={ocupado||preview.documentos.some(d=>documentoReceitaDosePendente({tipoDocumento:'FLASH_CONJUNTO_IMPRESSAO',texto:d.texto}))} onClick={assinar}>Confirmar e assinar conteúdo exibido</button>
     </section> : null}
     {impressaoPendente ? <p>
       <button type="button" disabled={ocupado} onClick={repetirImpressao}>Solicitar impressão novamente</button>
@@ -279,7 +286,8 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, versaoClinica
         : visaoPronta.historicoDocumentos!.map((doc) => <article key={doc.eventId}>
           <h4>{doc.titulo} · versão {doc.documentVersion}</h4><p>{doc.assinadoEm} · {doc.autorId} · consulta {doc.encounterId} · tumor {doc.tumorLotId ?? "não selecionado"}</p>
           <pre style={{ whiteSpace: "pre-wrap" }}>{doc.texto}</pre>
-          <button type="button" disabled={ocupado} onClick={()=>reimprimir(doc)}>Reimprimir versão {doc.documentVersion} · {doc.titulo}</button>
+        {doc.liberacaoPendente?<p role="status">{doc.liberacaoPendente}</p>:null}
+          <button type="button" disabled={ocupado||!!doc.liberacaoPendente} onClick={()=>reimprimir(doc)}>Reimprimir versão {doc.documentVersion} · {doc.titulo}</button>
         </article>)}
     </section>
     </> : null}

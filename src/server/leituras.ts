@@ -1,3 +1,6 @@
+import { documentoReceitaDosePendente } from '../contracts/f1/receitaDose.js';
+import { avisosAdministracoesLegadasF3 } from './salaoF3.js';
+import { relatosInfusaoPendentes } from './relatosInfusaoCanal.js';
 import { validarPayloadEvento } from "../contracts/envelope.js";
 import { FUSO_SERVICO } from "../contracts/f1/relogio.js";
 import type { DatabaseSync } from "node:sqlite";
@@ -10,7 +13,7 @@ import { Contato } from "../contracts/clinico.js";
 import { dadosDoEvento, escopoDoEvento, eventosVigentes, projetarSnapshot } from "../kernel/projections/snapshot.js";
 import { apacTimeline } from "../kernel/projections/apacTimeline.js";
 import { dataCivilDoServico } from "../kernel/gateway/tempo.js";
-import { apacPrazo } from "../rules/apac.js";
+import { apacPrazo, apacRetrograda, type CodigoNegativa } from "../rules/apac.js";
 import { listarDrafts } from "../kernel/comandos/portas.js";
 import type { Sessao } from "../contracts/base.js";
 import type { SetorChat } from "../contracts/api/porta.js";
@@ -447,6 +450,7 @@ export function lerConsulta(db: DatabaseSync, patientId: string, agora: string, 
     return [{ eventId: evento.eventId, documentId: corpo.documentId,
       documentVersion: corpo.documentVersion, tumorLotId: evento.tumorLotId,
       titulo: typeof corpo.titulo === "string" ? corpo.titulo : "Documento assinado",
+      ...(documentoReceitaDosePendente(corpo)?{liberacaoPendente:'Receita histórica com dose pendente: emissão indisponível; prepare nova versão com dose validada.'}:{}),
       texto: corpo.texto, assinadoEm: evento.criadoEm, autorId: evento.criadoPor.id,
       encounterId: evento.encounterId }];
   });
@@ -565,10 +569,42 @@ export function validarCatalogoApac(caixas: readonly CaixaNumerada[]):
 export function lerApacs(db: DatabaseSync, agora: string, config: {
   caixas: readonly CaixaNumerada[]; sigtap: TabelasSigtap; cnesConfigurado: string; offsetServico?: string;
 }) {
-  const all = eventos(db), apacs = apacTimeline(all);
+  const all = eventos(db), apacsLedger = apacTimeline(all);
   const catalogoApac = validarCatalogoApac(config.caixas);
   const civil = dataCivilDoServico(agora, config.offsetServico ?? FUSO_SERVICO);
   if (civil.estado !== "OK") return { hoje: null, itens: [], estado: "PENDENTE", codigo: civil.codigo };
+  // A negativa F4 é uma decisão persistida sobre a mesma versão/conteúdo,
+  // não apenas um atalho para campoOrigem. Reutiliza a leitura única do ledger.
+  type NegativaPersistida = { apacId: string; patientId: string; tumorLotId: string;
+    comprovanteRef: string; apacNegadaJson: string; registradoEm: string };
+  let negativas: NegativaPersistida[] = [];
+  if (db.prepare("SELECT 1 FROM sqlite_master WHERE type='table' AND name='f4_apac_retrograda'").get()) {
+    negativas = db.prepare("SELECT apacId, patientId, tumorLotId, comprovanteRef, apacNegadaJson, registradoEm FROM f4_apac_retrograda")
+      .all() as NegativaPersistida[];
+  }
+  const apacs = apacsLedger.map(original => {
+    const event = all.find(e => e.eventId === original.eventId);
+    const row = negativas.find(n => n.apacId === original.apacId && n.patientId === event?.patientId
+      && n.tumorLotId === original.tumorLotId && n.tumorLotId === event?.tumorLotId);
+    if (!row || !event) return original;
+    try {
+      const parsed = Apac.safeParse(JSON.parse(row.apacNegadaJson));
+      if (!parsed.success) return original;
+      const negada = parsed.data, recebido = negada.resultadoExterno;
+      const registradoEm = Date.parse(row.registradoEm);
+      if (negada.apacId !== original.apacId || negada.tumorLotId !== original.tumorLotId
+        || negada.versao !== original.versao || negada.estado !== "NEGADA" || recebido?.valor !== "NEGADA"
+        || recebido.comprovanteRef !== row.comprovanteRef || !Number.isFinite(registradoEm)
+        || registradoEm > Date.parse(agora) || Date.parse(recebido.recebidoEm) > registradoEm
+        || Date.parse(event.criadoEm) > registradoEm) return original;
+      // Uma decisão externa posterior (ou empate ambíguo) mantém precedência.
+      if (original.resultadoExterno && Date.parse(original.resultadoExterno.recebidoEm) >= Date.parse(recebido.recebidoEm)) return original;
+      const { eventId, estado: _estado, resultadoExterno: _resultado, ...conteudoOriginal } = original;
+      const { estado: _estadoNegada, resultadoExterno: _resultadoNegada, ...conteudoNegada } = negada;
+      if (hashConteudoExibido(conteudoOriginal) !== hashConteudoExibido(conteudoNegada)) return original;
+      return { ...negada, eventId };
+    } catch { return original; } // Registro inválido nunca troca contexto ou decisão vigente.
+  });
   const lots = porTipo(all, "TumorLot", TumorLot), patients = porTipo(all, "Paciente", Paciente);
   return { hoje: civil.dataCivil, itens: apacs.flatMap((apac) => {
     const event = all.find((e) => e.eventId === apac.eventId);
@@ -587,10 +623,33 @@ export function lerApacs(db: DatabaseSync, agora: string, config: {
     const resultadoAntiglosa = catalogoApac.estado === "DISPONIVEL"
       ? antiglosa(apac, { hoje: civil.dataCivil, sigtap: config.sigtap, caixas: catalogoApac.caixas,
         cnesConfigurado: config.cnesConfigurado, apacsDoLote: doLote }) : null;
+    const motivoNegativa = apac.resultadoExterno?.valor === "NEGADA" ? apac.resultadoExterno.motivo : null;
+    const extrairCodigoNegativa = (motivo: string | null): CodigoNegativa | null => {
+      if (!motivo) return null;
+      const prefixo = motivo.split(":")[0]?.trim().toUpperCase() ?? "";
+      if (["ESTADIO_AUSENTE", "HISTOLOGIA_AUSENTE", "TOPOGRAFIA_AUSENTE", "CID_AUSENTE", "OUTRO"].includes(prefixo)) {
+        return prefixo as CodigoNegativa;
+      }
+      const norm = motivo.toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, "");
+      if (norm.includes("estadio") || norm.includes("estadiamento") || norm.includes("tnm")) return "ESTADIO_AUSENTE";
+      if (norm.includes("histologia") || norm.includes("anatomopatologico")) return "HISTOLOGIA_AUSENTE";
+      if (norm.includes("topografia")) return "TOPOGRAFIA_AUSENTE";
+      if (norm.includes("cid")) return "CID_AUSENTE";
+      return null;
+    };
+    let campoOrigemRetrograda: "estadiamentos" | "histologia" | "topografia" | "cid" | null = null;
+    const codigoExtraido = extrairCodigoNegativa(motivoNegativa);
+    if (apac.resultadoExterno?.valor === "NEGADA" && codigoExtraido && apac.resultadoExterno.comprovanteRef) {
+      campoOrigemRetrograda = apacRetrograda({
+        apacId: apac.apacId,
+        comprovanteRef: apac.resultadoExterno.comprovanteRef,
+        codigo: codigoExtraido,
+      }).campoOrigem;
+    }
     return [{ apac, lote, nomePaciente: paciente.nome, patientId: paciente.patientId,
       encounterId: event.encounterId,
-      ultimoAvisoEm, campoOrigem: null,
-      motivoNegativa: apac.resultadoExterno?.valor === "NEGADA" ? apac.resultadoExterno.motivo : null,
+      ultimoAvisoEm, campoOrigem: campoOrigemRetrograda,
+      motivoNegativa,
       prazo: prazo ? { ...prazo, estado: prazo.dias < 0 ? "PENDENTE" : prazo.estado } : { estado: "PENDENTE" },
       antiglosa: resultadoAntiglosa,
       antiglosaEstado: resultadoAntiglosa ? (config.sigtap[apac.competencia] ? "AVALIADA_COM_TABELA_SIGTAP" : "AVALIADA_COM_TABELA_SIGTAP_AUSENTE") : "PENDENTE_CATALOGO_AUSENTE" }];
@@ -657,6 +716,7 @@ export function lerSalao(db: DatabaseSync, agora: string, rulesetInput: unknown,
       nome: paciente.nome, draftId: null, revision: null, estadoRascunho: null }];
   });
   const allEvents = eventos(db);
+  const relatosInfusao = relatosInfusaoPendentes(db,allEvents,agora);
   const decisoes = allEvents.flatMap((event) => {
     if (event.tipo !== "ReviewDecision") return [];
     const value = data(event) as Record<string, unknown> | null;
@@ -670,7 +730,7 @@ export function lerSalao(db: DatabaseSync, agora: string, rulesetInput: unknown,
       hoje: null, estado: "PENDENTE" as const, motivo: "RULESET_OU_DATA_CIVIL_INDISPONIVEL",
       pacientes: [...triagensTodas.map((p) => ({ patientId: p.patientId, encounterId: p.encounterId,
       chegadaEm: p.chegadaEm, nome: p.paciente?.nome ?? "", draftId: p.draftId, revision: p.revision,
-      estadoRascunho: p.draftId ? "RASCUNHO" as const : null })), ...agendaCandidatos], cartoes: [], decisoes };
+      estadoRascunho: p.draftId ? "RASCUNHO" as const : null })), ...agendaCandidatos], cartoes: [], decisoes, relatosInfusao };
   }
   const doDia = triagensTodas.filter((item) => {
     const data = dataCivilDoServico(item.chegadaEm, offsetServico);
@@ -728,7 +788,8 @@ export function lerSalao(db: DatabaseSync, agora: string, rulesetInput: unknown,
   });
   return { hoje: civil.dataCivil, ruleset, contexto, fonte: calculados[0]?.fonte ?? null,
     cartoes, pacientes: pacientesOrdenados, decisoes: decisionesVisiveis,
-    avisos:calculados.flatMap(x=>x.avisos),
+    relatosInfusao,
+    avisos:[...calculados.flatMap(x=>x.avisos),...avisosAdministracoesLegadasF3(db)],
     estado: "PARCIAL" as const,
     pendencias: [...calculados.flatMap((x) => [...x.base.pendentes, ...x.portao.pendentes]),
       ...pacientesComTriagemDuplicada.map(() => ({ codigo: "TRIAGEM_DUPLICADA", estado: "PENDENTE" as const }))] };

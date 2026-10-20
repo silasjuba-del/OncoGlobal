@@ -25,11 +25,12 @@ const Afirmacao = z.object({ rotulo: Texto, valorTexto: Texto.nullable(), estado
   candidatos: z.array(z.object({ valorTexto: Texto, fontes: z.array(Fonte) })).optional()
 }).transform(({ candidatos, ...item }) => ({ ...item, ...(candidatos === undefined ? {} : { candidatos }) }));
 export const ConsultaResposta: z.ZodType<ConsultaIntegrada> = z.object({ hoje: DataCivil,
+  contatosCanal: z.lazy(() => CanalResposta).optional(),
   retrato: Retrato.optional(), visaoIntegrada: VisaoIntegrada.optional(), dutos: DutosClinicaVisao.optional(),
   resumoEvolucao: Texto.nullable().default(null),
   historicoDocumentos: z.array(z.object({ eventId: Texto, documentId: Texto, titulo: Texto,
     documentVersion: z.number().int().positive(), tumorLotId: Texto.nullable(),
-    texto: Texto, assinadoEm: Texto, autorId: Texto, encounterId: Texto })).default([]),
+    liberacaoPendente:Texto.optional(), texto: Texto, assinadoEm: Texto, autorId: Texto, encounterId: Texto })).default([]),
   patientId: Texto, encounterId: Texto, tumorLotId: Texto.nullable(),
   cabecalho: z.object({ hoje: DataCivil, paciente: Paciente, lotes: z.array(TumorLot), loteSelecionadoId: Texto.nullable(),
     episodio: TreatmentEpisode.nullable(), ciclo: Ciclo.nullable(), semaforo: Semaforo, pendentes: Count,
@@ -44,6 +45,8 @@ export const ConsultaResposta: z.ZodType<ConsultaIntegrada> = z.object({ hoje: D
     autorExibido: Texto, alvoImpressao: z.object({ tipo: Texto, id: Texto, versao: z.number().int().positive() }).nullable(),
     alertasVermelhos: z.array(Alerta) }),
 }).passthrough().superRefine((resposta, ctx) => {
+  if (resposta.contatosCanal?.mensagens.some(m => m.patientId !== resposta.patientId))
+    ctx.addIssue({ code: "custom", message: "CONTATOS_CANAL_FORA_CONTEXTO" });
   const r = resposta.retrato, v = resposta.visaoIntegrada;
   const d = resposta.dutos;
   if(d&&(d.contexto.patientId!==resposta.patientId||d.contexto.encounterId!==resposta.encounterId||d.contexto.tumorLotId!==resposta.tumorLotId))ctx.addIssue({code:"custom",message:"DUTOS_FORA_CONTEXTO"});
@@ -67,7 +70,10 @@ export const AgendaResposta: z.ZodType<AgendaVisao> = z.object({ hoje: DataCivil
   horario: Texto, patientId: Texto, encounterId: Texto.optional(), nome: Texto, prontuario: Texto, semaforo: Semaforo,
   pendentes: Count, preConsultaPronta: z.boolean(), contatosDesdeUltima: Count, temE1: z.boolean(),
 })) });
-export const SalaoResposta: z.ZodType<SalaoVisao> = z.object({ hoje: DataCivil, ruleset: SalaoRuleset,
+export const SalaoResposta: z.ZodType<SalaoVisao> = z.object({
+  relatosInfusao:z.array(z.object({patientId:Texto,mensagemId:Texto,payloadSha256:Texto,texto:Texto,em:Texto,
+      contextosRevisao:z.array(z.object({patientId:Texto,encounterId:Texto,tumorLotId:z.null()})).optional(),
+      contextoMensagens:z.array(z.object({mensagemId:Texto,texto:Texto,em:Texto,contatoId:Texto.optional(),canal:Texto.optional()}))})).optional(), hoje: DataCivil, ruleset: SalaoRuleset,
   contexto: ContextoTriagem, fonte: Fonte.nullable(), cartoes: z.array(z.object({ entrada: EntradaFila,
     destino: Destino, emergencia: z.boolean(), temCorte: z.boolean(), nome: Texto })),
   pacientes: z.array(z.object({ patientId: Texto, encounterId: Texto, chegadaEm: Texto, nome: Texto,
@@ -76,9 +82,25 @@ export const SalaoResposta: z.ZodType<SalaoVisao> = z.object({ hoje: DataCivil, 
   decisoes: z.array(z.object({ patientId: Texto, motivo: Texto })),
 }).passthrough();
 export const CanalResposta: z.ZodType<CaixaCanalVisao> = z.object({ mensagens: z.array(z.object({ mensagemId: Texto,
+  contextosResposta:z.array(z.object({patientId:Texto,encounterId:Texto,tumorLotId:Texto.nullable()})).optional(),
   texto: Texto, em: Texto, redFlag: z.boolean(), contatoId: Texto, patientId: Texto.nullable(), nomePaciente: Texto.nullable(),
   estadoVinculo: z.enum(["VINCULADO", "SEM_VINCULO", "CONFLITO", "REVOGADO"]).optional(),
-  candidatos: z.array(z.object({ patientId: Texto, nome: Texto })),
+  candidatos: z.array(z.object({ patientId: Texto, nome: Texto, encounterId: Texto.optional(), tumorLotId: Texto.nullable().optional() })),
+  origemCanal: z.enum(["WHATSAPP_SERVICO", "WHATSAPP_PESSOAL", "EMAIL", "TELEFONE"]).optional(),
+  pendenciaProcessamento: z.boolean().optional(),
+  reciboTecnico: z.enum(["RECEBIDA", "PROCESSADA", "ENVIADA", "ENTREGUE", "LIDA", "FALHOU"]).optional(),
+  estadoConversa: z.enum(["NOVA", "TRIADA", "AGUARDA_MEDICO", "RESPONDIDA", "ENCERRADA"]).optional(),
+  midia: z.object({
+    providerMediaId: Texto,
+    mimeType: Texto.nullable(),
+    processamento: z.enum(["NAO_PROCESSADA", "LIDA_LOCALMENTE"]),
+  }).nullable().optional(),
+  destinatarioExibido: Texto.optional(),
+  contextoExibido: z.object({
+    patientId: Texto.nullable(),
+    encounterId: Texto.nullable(),
+    versaoContexto: z.number().int().positive().optional(),
+  }).optional(),
 })) });
 // A projeção do ledger acrescenta sua referência de evento; o contrato clínico continua estrito.
 const ApacProjetada = Apac.safeExtend({ eventId: Texto.optional() }).transform(({ eventId: _eventId, ...apac }) => apac);

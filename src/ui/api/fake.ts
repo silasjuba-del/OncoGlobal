@@ -1,5 +1,6 @@
 import corpusSalao from "../../../corpus/rulesets/salao-triagem.v1.json" with { type: "json" };
 import type { Fonte } from "../../contracts/base.js";
+import type {RascunhoRespostaCanal} from '../../contracts/f2/caixaRespostaCanal.js';
 import {
   Apac,
   ConfirmarBloco,
@@ -486,6 +487,7 @@ function itemApac(
 
 /** Porta em memória. Seis pacientes sintéticos; nenhum dado real. */
 export function criarPortaFalsa(): PortaConsulta {
+  const respostasCanal=new Map<string,RascunhoRespostaCanal>();
   const fichas = montarFichas();
   const preparacoes = new Map<string,{payload:string;resultado:FlashPreparada}>();
   const documentosPreparados = new Map<string,{patientId:string;encounterId:string;tumorLotId:string|null;doc:DocumentoBundleVisao;texto:string}>();
@@ -680,7 +682,7 @@ export function criarPortaFalsa(): PortaConsulta {
   }
 
   function caixa(): CaixaCanalVisao {
-    return { mensagens: mensagens.map((m) => ({ ...m, candidatos: m.candidatos.map((c) => ({ ...c })) })) };
+    return { mensagens: mensagens.map((m) => ({ ...m,...(m.patientId&&fichas.has(m.patientId)?{contextosResposta:[{patientId:m.patientId,encounterId:fichas.get(m.patientId)!.consulta.encounterId,tumorLotId:null}]}:{}), candidatos: m.candidatos.map((c) => ({ ...c })) })) };
   }
 
   return {
@@ -830,6 +832,20 @@ export function criarPortaFalsa(): PortaConsulta {
     // [SERVIDOR_PENDENTE]
     async caixaCanal() {
       return caixa();
+    },
+    async prepararRespostaCanal(pedido){
+      contextoValido(pedido);const m=mensagens.find(m=>m.mensagemId===pedido.mensagemOrigemId&&m.patientId===pedido.patientId);
+      if(!m)throw new ErroPorta('CONTATO_NAO_VINCULADO_AO_PACIENTE');
+      const digest=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(pedido.texto));
+      const conteudoSha256=Array.from(new Uint8Array(digest),b=>b.toString(16).padStart(2,'0')).join('');
+      const p:RascunhoRespostaCanal={respostaId:pedido.respostaId,versao:pedido.versao,mensagemOrigemId:m.mensagemId,accountId:'conta-sintetica',canal:m.origemCanal==='EMAIL'?'EMAIL':'WHATSAPP_SERVICO',
+        contatoId:m.contatoId,destinatario:m.contatoId,contexto:{patientId:pedido.patientId,encounterId:pedido.encounterId,tumorLotId:pedido.tumorLotId,revisaoContexto:'revisao-sintetica'},tipoResposta:'RESPOSTA_LIVRE_MEDICA',cenarioId:null,statusCuradoriaCenario:null,texto:pedido.texto,conteudoSha256,exibidoEm:AGORA,confirmadoPeloMedico:false,confirmadoPorMedicoId:null,confirmadoPorCrm:null,confirmadoEm:null};
+      respostasCanal.set(`${p.respostaId}:${p.versao}`,p);return p;
+    },
+    async confirmarRespostaCanal(pedido){
+      const p=respostasCanal.get(`${pedido.respostaId}:${pedido.versao}`);
+      if(!p||p.destinatario!==pedido.comprovanteExibicao.destinatario||p.conteudoSha256!==pedido.comprovanteExibicao.conteudoSha256||JSON.stringify(p.contexto)!==JSON.stringify(pedido.comprovanteExibicao.contexto))throw new ErroPorta('CONFIRMACAO_DIVERGENTE');
+      p.confirmadoPeloMedico=true;return {respostaId:p.respostaId,versao:p.versao};
     },
 
     // [SERVIDOR_PENDENTE]

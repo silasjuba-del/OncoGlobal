@@ -9,11 +9,14 @@ import { carregarPacksTumor } from '../kernel/corpus/tumorPacks.js';
 import { selecionarPack } from '../modules/consulta/revisaoClinica.js';
 import {criarDitado} from '../kernel/gateway/ditado.js';
 import {cofreDeepgramWindows} from '../kernel/gateway/cofreDeepgram.js';
+import {carregarOperacaoCanal,cadastrosCanal} from './canalOperacao.js';
+import {processarPendenciasClinicasCanal} from './canalReconciliacao.js';
 
 /** Loopback only; a caller cannot override the bind address. */
 export function criarServidorLocal(deps: ServidorDeps, config: { host?: string; port?: number } = {}): Server {
   if (config.host !== undefined && config.host !== "127.0.0.1")
     throw new Error("BIND_FORA_DO_LOOPBACK");
+  const canal=deps.canal??carregarOperacaoCanal(deps.configRootDir);
   let corpus: ReturnType<typeof carregarCorpusServidor> | null = null;
   try { corpus = carregarCorpusServidor(); } catch { /* dependent readers report PENDENTE */ }
   const ownsSettings = deps.settings === undefined && !!deps.configRootDir && !!corpus;
@@ -23,6 +26,7 @@ export function criarServidorLocal(deps: ServidorDeps, config: { host?: string; 
       : null
     : deps.settings;
   const runtimeDeps: ServidorDeps = { ...deps, settings,
+    canal,
     corpus,
     salaoRuleset: deps.salaoRuleset === undefined ? corpus?.ruleset ?? null : deps.salaoRuleset };
   runtimeDeps.ditado=deps.ditado??criarDitado(deps.sessoes,{...(process.env.DEEPGRAM_API_KEY?{chave:process.env.DEEPGRAM_API_KEY}:{}),
@@ -42,13 +46,15 @@ export function criarServidorLocal(deps: ServidorDeps, config: { host?: string; 
     void acompanhado.catch(() => {}); // Os caminhos abaixo já registram erro sem conteúdo clínico.
   };
   acompanhar(runtimeDeps.motorF1.processar().catch(()=>deps.log({rota:"motor-f1",codigo:"RECUPERACAO_PENDENTE",status:503})));
+  const processarCanal = () => processarPendenciasClinicasCanal(deps.db, { agora: deps.agora(), cadastros: () => cadastrosCanal(deps.db) });
+  acompanhar(processarCanal().catch(() => deps.log({ rota: "canal", codigo: "PROCESSAMENTO_PENDENTE", status: 503 })));
   const server = createServer((req, res) => {
     if (encerrando) {
       res.writeHead(503, { "Content-Type": "application/json", "Cache-Control": "no-store" });
       res.end(JSON.stringify({ codigo: "SERVIDOR_ENCERRANDO" }));
       return;
     }
-    acompanhar(rotear(runtimeDeps, req, res).then(()=>runtimeDeps.motorF1?.processar()).catch(() => {
+    acompanhar(rotear(runtimeDeps, req, res).then(async()=>{ await processarCanal(); await runtimeDeps.motorF1?.processar(); }).catch(() => {
       // The router handles expected failures; this fallback remains PHI-free.
       runtimeDeps.log({ rota: "desconhecida", codigo: "ERRO_INTERNO", status: 500 });
       if (!res.headersSent) res.writeHead(500);

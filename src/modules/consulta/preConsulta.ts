@@ -35,6 +35,8 @@ export interface ContatoCanalVista {
   canal: string;
   resumo: string;
   em: string;
+  mensagensOriginaisIds?: readonly string[] | undefined;
+  mensagensOriginais?: readonly unknown[] | undefined;
 }
 
 export interface ApacVista {

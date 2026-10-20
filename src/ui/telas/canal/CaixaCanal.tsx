@@ -21,6 +21,7 @@ export function CaixaCanal({
   const [visao, setVisao] = useState<CaixaCanalVisao | null>(null);
   const [ocupado, setOcupado] = useState(false);
   const [mensagem, setMensagem] = useState("");
+  const [novasRespostas, setNovasRespostas] = useState<ReadonlySet<string>>(new Set());
 
   useEffect(() => {
     let viva = true;
@@ -53,10 +54,13 @@ export function CaixaCanal({
     });
   }
 
-  async function vincular(contatoId: string, patientId: string) {
+  async function vincular(contatoId: string, patientId: string, encounterId?: string, tumorLotId?: string | null) {
     if (ocupado) return;
     setOcupado(true); setMensagem("");
-    try { setVisao(await porta.pedirVinculo(contatoId, patientId)); }
+    try {
+      if (encounterId) await porta.selecionarContexto?.({ patientId, encounterId, tumorLotId: tumorLotId ?? null });
+      setVisao(await porta.pedirVinculo(contatoId, patientId));
+    }
     catch (error) { setMensagem(error instanceof ErroPorta
       ? `Vínculo não registrado (${error.codigo}). Confirme paciente e contexto.`
       : "Vínculo não registrado. A seleção foi mantida para tentar novamente."); }
@@ -71,16 +75,44 @@ export function CaixaCanal({
         <section key={grupo.patientId} aria-label={`Mensagens de ${grupo.nome}`} data-patient={grupo.patientId}>
           <h2>{grupo.nome}</h2>
           {grupo.mensagens.map((mensagem) => (
-            <article key={mensagem.mensagemId} data-mensagem={mensagem.mensagemId} className="pilha">
+          <article key={mensagem.mensagemId} data-mensagem={mensagem.mensagemId} className="pilha">
               <p>{mensagem.texto}</p>
+              <small data-meta-canal={mensagem.mensagemId}>
+                Contato: {mensagem.contatoId} · Data: {mensagem.em}
+                {mensagem.origemCanal ? ` · Origem: ${mensagem.origemCanal}` : ""}
+                {mensagem.pendenciaProcessamento ? " · Pendente de revisão" : ""}
+                {mensagem.reciboTecnico ? ` · Recibo técnico: ${mensagem.reciboTecnico}` : ""}
+                {mensagem.estadoConversa ? ` · Conversa: ${mensagem.estadoConversa}` : ""}
+              </small>
+              {mensagem.midia ? (
+                <p data-midia-status={mensagem.midia.processamento}>
+                  Mídia ({mensagem.midia.mimeType ?? "arquivo"}):{" "}
+                  {mensagem.midia.processamento === "NAO_PROCESSADA"
+                    ? "não processada — aguarda leitura local comprovada"
+                    : "lida localmente"}
+                </p>
+              ) : null}
               {mensagem.redFlag ? <p className="semaforo semaforo-vermelho">red flag</p> : null}
-              <RespostaCanal
+              {mensagem.estadoConversa === "RESPONDIDA" && !novasRespostas.has(mensagem.mensagemId) ? <div>
+                <p>Resposta médica enviada; resolução clínica não registrada automaticamente.</p>
+                <button type="button" onClick={() => setNovasRespostas(atuais => new Set([...atuais, mensagem.mensagemId]))}>Preparar nova resposta médica</button>
+              </div> : <RespostaCanal
                 porta={porta}
                 chaves={chaves}
                 mensagemId={mensagem.mensagemId}
                 patientId={mensagem.patientId}
                 redFlag={mensagem.redFlag}
-              />
+                contextos={mensagem.contextosResposta??[]}
+                origemCanal={mensagem.origemCanal??'WHATSAPP_SERVICO'}
+                aoEnviar={() => {
+                  void Promise.resolve().then(() => porta.caixaCanal()).then(proxima => {
+                    setVisao(proxima);
+                    setNovasRespostas(atuais => new Set([...atuais].filter(id => id !== mensagem.mensagemId)));
+                  }).catch(() => setMensagem("Resposta enviada; não foi possível atualizar a caixa."));
+                }}
+                {...(mensagem.destinatarioExibido !== undefined ? { destinatario: mensagem.destinatarioExibido } : { destinatario: mensagem.contatoId })}
+                {...(mensagem.contextoExibido?.encounterId !== undefined ? { encounterId: mensagem.contextoExibido.encounterId } : {})}
+              />}
             </article>
           ))}
         </section>
@@ -90,17 +122,22 @@ export function CaixaCanal({
         {soltas.length === 0 ? <p>nenhum contato sem vínculo</p> : soltas.map((mensagem) => (
           <article key={mensagem.mensagemId} data-mensagem={mensagem.mensagemId} className="pilha">
             <p>{mensagem.texto}</p>
+            <small data-meta-canal={mensagem.mensagemId}>
+              Contato: {mensagem.contatoId} · Data: {mensagem.em}
+              {mensagem.origemCanal ? ` · Origem: ${mensagem.origemCanal}` : ""}
+              {mensagem.pendenciaProcessamento ? " · Pendente de revisão" : ""}
+            </small>
             {mensagem.estadoVinculo === "CONFLITO" ? <p role="alert">Conflito de vínculos preservado. Destino pendente de decisão.</p> : null}
             {mensagem.estadoVinculo === "REVOGADO" ? <p role="alert">Contato revogado. Nenhum vínculo pode ser criado.</p> : null}
             {mensagem.estadoVinculo === "SEM_VINCULO" ? <p>Selecione explicitamente o paciente e confira o identificador exibido.</p> : null}
             {mensagem.candidatos.map((candidato) => (
-              <span key={candidato.patientId}>
+              <span key={`${candidato.patientId}:${candidato.encounterId ?? ""}:${candidato.tumorLotId ?? ""}`}>
                 <button type="button" disabled={ocupado || mensagem.estadoVinculo === "CONFLITO"
                   || mensagem.estadoVinculo === "REVOGADO"} aria-label={`vincular ${candidato.nome}`}
-                  onClick={() => void vincular(mensagem.contatoId, candidato.patientId)}>
+                  onClick={() => void vincular(mensagem.contatoId, candidato.patientId, candidato.encounterId, candidato.tumorLotId)}>
                   vincular {candidato.nome}
                 </button>
-                <small>Identificador: {candidato.patientId}</small>
+                <small>Identificador: {candidato.patientId}{candidato.encounterId ? ` · Encontro: ${candidato.encounterId}` : ""}</small>
               </span>
             ))}
           </article>

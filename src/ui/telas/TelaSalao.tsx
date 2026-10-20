@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import type { PortaConsulta, SalaoVisao } from "../api/porta.js";
 import { AgendaQt } from "../oncochart/AgendaQt.js";
+import { FilaRelatosInfusao } from "../salao/FilaRelatosInfusao.js";
 import { Triagem5Passos } from "../oncochart/Triagem5Passos.js";
 import { FormTriagem } from "../salao/FormTriagem.js";
 import { QuadroSalao } from "../salao/QuadroSalao.js";
@@ -46,7 +47,7 @@ export function TelaSalao({ porta }: { porta: PortaConsulta }) {
     <button type="button" onClick={() => setTentativa((atual) => atual + 1)}>Tentar carregar novamente</button>
   </section> : <p>carregando salão</p>;
   const escolhido = visao.pacientes.find((p) => p.patientId === patientId) ?? visao.pacientes[0];
-  if (!escolhido) return <p>salão vazio</p>;
+  if (!escolhido) return <section aria-label="Salão"><FilaRelatosInfusao porta={porta} relatos={visao.relatosInfusao ?? []} aoAtualizar={async () => setVisao(await porta.filaSalao())} /><p>salão vazio</p></section>;
   const fonteFormulario: Fonte = visao.fonte ?? { sourceId: `triagem-manual-${crypto.randomUUID()}`,
     classe: "MANUAL", localizador: "entrada manual em rascunho", dataClinica: visao.hoje,
     dataCaptura: new Date().toISOString(), versao: "triagem-form-local", contentHash: "PENDENTE_HASH_SERVIDOR" };
@@ -81,6 +82,7 @@ export function TelaSalao({ porta }: { porta: PortaConsulta }) {
       {erro ? <p role="alert">{erro}</p> : null}
       {visao.avisos?.filter(a=>a.patientId === escolhido.patientId).length ? <p role="status" aria-label="Avisos do salão">
         {visao.avisos.filter(a=>a.patientId === escolhido.patientId).map(a=>a.texto).join("; ")}</p> : null}
+      <FilaRelatosInfusao porta={porta} relatos={visao.relatosInfusao ?? []} aoAtualizar={async () => setVisao(await porta.filaSalao())} />
       <Triagem5Passos
         pacienteNome={escolhido.nome}
         onResumo={(t) => {

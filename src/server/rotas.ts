@@ -1,3 +1,11 @@
+import { nomeMedicamento } from './propostasDoseReceita.js';
+import {rotearWebhookCanal} from './canalWebhookHttp.js';
+import {type OperacaoCanal,revisaoContextoCanal,lerMensagensOperacionaisCanal,vinculoAtualCanal,cadastrosCanal,contatoRevogadoCanal} from './canalOperacao.js';
+import {processarPendenciasClinicasCanal} from './canalReconciliacao.js';
+import {detalheMensagemCanal} from './canalEntrada.js';
+import {prepararRascunhoRespostaCanal,confirmarRespostaCanalPeloMedico,executarEnvioAutorizadoCanal,revalidarAutorizacaoSaidaCanalNoLedger} from './canalResposta.js';
+import {PrepararRespostaCanal,ConfirmarRespostaCanal} from '../contracts/api/respostaCanal.js';
+import { documentoReceitaDosePendente } from '../contracts/f1/receitaDose.js';
 import { PrescriptionItem, ProtocolTemplate } from "../contracts/w10/prescricao.js";
 import {LotesPacientePedido,LotesPacienteResposta} from '../contracts/api/lotes.js';
 import { respostaHttpValida } from "../contracts/api/saidasHttp.js";
@@ -60,6 +68,7 @@ import type { criarMotorF1 } from "../kernel/orquestracao/runtime.js";
 import type {criarDitado} from '../kernel/gateway/ditado.js';
 
 export interface ServidorDeps {
+  canal?:OperacaoCanal;
   ditado?:ReturnType<typeof criarDitado>;
   db: DatabaseSync;
   sessoes: GerenciadorSessao;
@@ -255,6 +264,22 @@ function confirmarBloco(deps: ServidorDeps, token: string, input: Confirmar): { 
     return kind === "EXTRACAO_RASCUNHO" || kind === "PRESCRICAO_RASCUNHO" || kind === "EVOLUCAO_RASCUNHO"
       || kind === "FLASH_RASCUNHO" || kind === "FLASH_APAC_RASCUNHO";
   })) return { status: 409, body: { codigo: "DRAFT_AINDA_RASCUNHO" } };
+  for(const draft of drafts){
+    const corpo=draft!.payload as {propostasDoseReceita?:{id:string;hashProposta:string;fonte:{hash:string}}[]};
+    if(corpo.propostasDoseReceita?.some(p=>!(deps.corpus?.propostasDoseReceita??[]).some(c=>c.id===p.id&&c.hashProposta===p.hashProposta&&c.fonte.hash===p.fonte.hash)))
+      return {status:409,body:{codigo:'PROPOSTA_DOSE_DESATUALIZADA'}};
+  }
+  for(const draft of drafts){
+    const d=draft!.payload as {tipoDocumento?:string;documentosIncluidos?:{documentId:string;documentVersion:number}[]};
+    if(d.tipoDocumento==='FLASH_CONJUNTO_IMPRESSAO'&&Array.isArray(d.documentosIncluidos)){
+      for(const ref of d.documentosIncluidos){
+        const filho=lerDraft(deps.db,ref.documentId);
+        if(filho&&documentoReceitaDosePendente(filho.payload))return {status:409,body:{codigo:'RECEITA_DOSE_PENDENTE'}};
+      }
+    }
+  }
+  if(drafts.some(d=>documentoReceitaDosePendente(d!.payload)))
+    return {status:409,body:{codigo:'RECEITA_DOSE_PENDENTE'}};
   const consulta = deps.sessoes.consultaSelecionada(token);
   if (consulta && (consulta.patientId !== contexto.patientId || consulta.encounterId !== contexto.encounterId
     || (consulta.tumorLotId ?? null) !== contexto.tumorLotId))
@@ -353,9 +378,11 @@ function confirmarBloco(deps: ServidorDeps, token: string, input: Confirmar): { 
 }
 
 export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: ServerResponse): Promise<void> {
+  if(await rotearWebhookCanal(deps,req,res))return;
   const rota = req.url === "/login" ? "login"
     : req.url === "/consulta/ditado" ? "ditado"
     : req.url === "/consulta/bundle" ? "bundle"
+      : req.url === "/consulta/receita/propor-dose" ? "proporDoseReceita"
       : req.url === "/consulta/confirmar" ? "confirmar"
         : req.url === "/consulta/medicamentos/reconciliar" ? "reconciliarMedicamentos"
         : req.url === "/consulta/oncoassist/sintese" ? "sinteseRetratoLlm"
@@ -367,7 +394,7 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
         : req.url === "/consulta/estado-doenca/confirmar" ? "confirmarEstadoDoenca"
         : req.url === "/consulta/llm/extrair" ? "extracaoLlm"
         : ["/biblioteca/importar","/biblioteca/curar","/biblioteca/ativar","/biblioteca/rollback","/biblioteca/consultar","/biblioteca/estado"].includes(req.url??"") ? req.url!
-        : ["/farmacia/enviar","/farmacia/conferir","/salao/registrar-administracao","/apac/validar-emissao","/chat/aceitar-decisao","/tarefas/receber","/tarefas/concluir"].includes(req.url??"") ? req.url!
+        : ["/salao/revisar-relato-canal","/farmacia/enviar","/farmacia/conferir","/salao/registrar-administracao","/apac/validar-emissao","/chat/aceitar-decisao","/tarefas/receber","/tarefas/concluir"].includes(req.url??"") ? req.url!
         : req.url === "/consulta/upload" ? "upload"
         : req.url === "/consulta/prescricao/propor" ? "proporPrescricao"
         : req.url === "/consulta/extrair" ? "extrair"
@@ -387,6 +414,8 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
                 : req.url === "/consulta/agenda" ? "agenda"
                   : req.url === "/consulta/salao" ? "salao"
                     : req.url === "/consulta/canal" ? "canal"
+                      : req.url === "/consulta/canal/resposta/preparar" ? "prepararRespostaCanal"
+                      : req.url === "/consulta/canal/resposta/confirmar" ? "confirmarRespostaCanal"
                       : req.url === "/consulta/apac" ? "apac"
                         : req.url === "/consulta/chat" ? "chat"
                           : req.url === "/consulta/recist" ? "recist"
@@ -426,6 +455,23 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
     if (rota === "acao" && !contentTypeJson(req)) return reply(415, "CONTENT_TYPE_INVALIDO");
     // Conteúdo da biblioteca continua limitado a 8 MB após decodificação; envelope cobre escapes JSON/base64.
     const raw = await body(req,rota === "upload" ? 11_300_000 : rota === "/biblioteca/importar" ? 24_000_000 : 1_000_000);
+    if(rota==='prepararRespostaCanal'){
+      const p=PrepararRespostaCanal.safeParse(raw);if(!p.success)return reply(400,'PAYLOAD_INVALIDO');
+      const revisaoContexto=revisaoContextoCanal(deps.db,p.data);if(!revisaoContexto)return reply(409,'CONTEXTO_RESPOSTA_INVALIDADO');
+      const origem=detalheMensagemCanal(deps.db,{sessoes:deps.sessoes,token,agora:deps.agora()},p.data.mensagemOrigemId);
+      if(!origem.ok||!vinculoAtualCanal(deps.db,p.data.patientId,origem.mensagem.senderRef))return reply(409,'CONTATO_NAO_VINCULADO_AO_PACIENTE');
+      const {patientId,encounterId,tumorLotId,...entrada}=p.data;
+      const r=prepararRascunhoRespostaCanal(deps.db,{sessoes:deps.sessoes,token,agora:deps.agora()},{...entrada,tipoResposta:'RESPOSTA_LIVRE_MEDICA',contexto:{patientId,encounterId,tumorLotId,revisaoContexto}});
+      return r.ok?reply(200,'RESPOSTA_PREPARADA',{codigo:'RESPOSTA_PREPARADA',rascunho:r.rascunho}):reply(r.codigo==='ARMAZENAMENTO_INDISPONIVEL'?503:409,r.codigo);
+    }
+    if(rota==='confirmarRespostaCanal'){
+      const p=ConfirmarRespostaCanal.safeParse(raw);if(!p.success)return reply(400,'PAYLOAD_INVALIDO');
+      const c=p.data.comprovanteExibicao.contexto;
+      if(!vinculoAtualCanal(deps.db,c.patientId,p.data.comprovanteExibicao.destinatario))return reply(409,'CONTATO_NAO_VINCULADO_AO_PACIENTE');
+      if(revisaoContextoCanal(deps.db,c)!==c.revisaoContexto)return reply(409,'CONTEXTO_RESPOSTA_INVALIDADO');
+      const r=confirmarRespostaCanalPeloMedico(deps.db,{sessoes:deps.sessoes,token,agora:deps.agora()},p.data);
+      return r.ok?reply(200,'RESPOSTA_CONFIRMADA',{codigo:'RESPOSTA_CONFIRMADA',respostaId:r.autorizacao.respostaId,versao:r.autorizacao.versao}):reply(r.codigo==='ARMAZENAMENTO_INDISPONIVEL'?503:409,r.codigo);
+    }
     if(rota==='ditado'){
       if(!contentTypeJson(req))return reply(415,'CONTENT_TYPE_INVALIDO');
       const result=deps.ditado?.rotear(raw,token)??{status:503,body:{codigo:'DITADO_INDISPONIVEL'}};
@@ -435,6 +481,13 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
     if(rota === "sinteseRetratoLlm"){const result=await executarSinteseRetratoLlm(raw,token,deps);return reply(result.status,String(result.body.codigo),result.body);}
     if(rota === "documentoOriginalLlm"){const result=await executarDocumentoOriginalLlm(raw,token,deps);return reply(result.status,String(result.body.codigo),result.body);}
     const estadoDoenca=rotearEstadoDoenca(deps,token,rota,raw);if(estadoDoenca)return reply(estadoDoenca.status,String(estadoDoenca.body.codigo),estadoDoenca.body);
+    if(rota==='proporDoseReceita'){
+      const p=z.object({patientId:Id,encounterId:Id,tumorLotId:Id.nullable(),medicamento:z.string().trim().min(1).max(300)}).strict().safeParse(raw);
+      if(!p.success)return reply(400,'PAYLOAD_INVALIDO');
+      const c=deps.sessoes.consultaSelecionada(token);
+      if(!c||c.patientId!==p.data.patientId||c.encounterId!==p.data.encounterId||(c.tumorLotId??null)!==p.data.tumorLotId)return reply(409,'CONTEXTO_CONSULTA_ALTERADO');
+      return reply(200,'PROPOSTAS_DOSE',{propostas:(deps.corpus?.propostasDoseReceita??[]).filter(x=>nomeMedicamento(x.medicamento)===nomeMedicamento(p.data.medicamento)),autorizaTratamento:false});
+    }
     if(rota === "revisaoClinica"){
       const p=z.object({patientId:Id,encounterId:Id,tumorLotId:Id.nullable(),packId:Id.optional()}).strict().safeParse(raw);
       if(!p.success)return reply(400,"PAYLOAD_INVALIDO");
@@ -647,6 +700,30 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
       if (!contexto || contexto.patientId !== parsed.data.patientId)
         return reply(409, "CONTEXTO_CONSULTA_ALTERADO");
       if (!lerPaciente(deps.db, parsed.data.patientId)) return reply(404, "PACIENTE_NAO_ENCONTRADO");
+      const acessoCanal = { sessoes: deps.sessoes, token, agora: deps.agora() };
+      const operacionais = lerMensagensOperacionaisCanal(deps.db, acessoCanal).filter(m => m.contatoId === parsed.data.contatoId);
+      if (operacionais.length) {
+        if (operacionais.some(m => m.origemCanal !== "WHATSAPP_SERVICO" || m.estadoVinculo === "REVOGADO"
+          || m.estadoVinculo === "CONFLITO" || (m.patientId !== null && m.patientId !== parsed.data.patientId))
+          || contatoRevogadoCanal(deps.db, parsed.data.contatoId)) return reply(409, "CONFLITO_VINCULO_CONTATO");
+        if (vinculoAtualCanal(deps.db, parsed.data.patientId, parsed.data.contatoId))
+          return reply(200, "REPLAY", { mensagens: [...lerCanal(deps.db).mensagens, ...lerMensagensOperacionaisCanal(deps.db, acessoCanal)] });
+        const operationId = `canal-operacional-link-${parsed.data.idempotencyKey}`;
+        const draftId = `canal-link-${sha(operationId)}`;
+        const payload = Contato.parse({ contatoId: parsed.data.contatoId, canal: "WHATSAPP_SERVICO", endereco: parsed.data.contatoId,
+          patientId: parsed.data.patientId, relacao: "DESCONHECIDO", vinculadoEm: acessoCanal.agora, revogadoEm: null });
+        const fontes = operacionais.map(m => ({ sourceId: m.mensagemId, classe: "CHAT_TEXT" as const,
+          localizador: null, dataClinica: null, dataCaptura: acessoCanal.agora, versao: "vinculo-operacional-v1", contentHash: hashConteudoExibido(m.texto) }));
+        const existente = lerDraft(deps.db, draftId);
+        if (existente) return reply(409, "CHAVE_IDEMPOTENCIA_REUTILIZADA");
+        const draft = salvarDraft(deps.db, { draftId, patientId: parsed.data.patientId, sourceId: fontes[0]!.sourceId,
+          rawRef: "vinculo-operacional-local", payload, diagnostics: [], revision: 0, criadoEm: acessoCanal.agora });
+        const r = confirmar(deps.db, { operationId, patientId: parsed.data.patientId, encounterId: contexto.encounterId,
+          tumorLotId: contexto.tumorLotId ?? null, reviewDecisionId: operationId, sessao, em: acessoCanal.agora,
+          registros: [{ draftId, expectedRevision: draft.revision, eventId: `contato-${sha(operationId)}`, tipo: "Contato", payload, fontes, revisao: "CONFIRMADO" }] });
+        if (r.estado === "NEGADA") return reply(409, r.motivo ?? "VINCULO_CANAL_NEGADO");
+        return reply(200, "VINCULO_GRAVADO", { mensagens: [...lerCanal(deps.db).mensagens, ...lerMensagensOperacionaisCanal(deps.db, acessoCanal)] });
+      }
       const caixa = lerCanal(deps.db);
       const mensagens = caixa.mensagens.filter((item) => item.contatoId === parsed.data.contatoId);
       if (!mensagens.length) return reply(409, "MENSAGEM_CONTATO_NAO_ENCONTRADA");
@@ -1145,8 +1222,11 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
       else deps.sessoes.selecionarConsulta(token, null);
       const integrado = !("codigo" in result) && deps.motorF1
         ? await deps.motorF1.consultar({patientId:result.patientId,encounterId:result.encounterId,tumorLotId:result.tumorLotId},leituraInicial) : null;
+      if (!("codigo" in result)) await processarPendenciasClinicasCanal(deps.db, { agora: deps.agora(), cadastros: () => cadastrosCanal(deps.db, leituraInicial?.itens) });
+      const contatosCanal = !("codigo" in result) ? { mensagens: lerMensagensOperacionaisCanal(deps.db,
+        { sessoes: deps.sessoes, token, agora: deps.agora() }, leituraInicial?.itens).filter(m => m.patientId === result.patientId) } : undefined;
       return reply("codigo" in result ? 404 : 200, "codigo" in result ? result.codigo : "CONSULTA_CARREGADA",
-        integrado && !("codigo" in result) ? {...result,dutos:projetarDutos(leituraInicial?.itens??[],{patientId:result.patientId,encounterId:result.encounterId,tumorLotId:result.tumorLotId},deps.corpus),retrato:integrado.retrato,...(integrado.visaoIntegrada?{visaoIntegrada:integrado.visaoIntegrada}:{})}:result);
+        integrado && !("codigo" in result) ? {...result,contatosCanal,dutos:projetarDutos(leituraInicial?.itens??[],{patientId:result.patientId,encounterId:result.encounterId,tumorLotId:result.tumorLotId},deps.corpus),retrato:integrado.retrato,...(integrado.visaoIntegrada?{visaoIntegrada:integrado.visaoIntegrada}:{})}:"codigo" in result?result:{...result,contatosCanal});
     }
     if (rota === "rascunhoFlash" || rota === "prepararFlash") {
       const base = { patientId: Id, encounterId: Id, tumorLotId: Id.nullable(), plano: PlanoFlashEntrada };
@@ -1213,7 +1293,16 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
       if ("idempotencyKey" in parsed.data && cadastros.length !== 1)
         return reply(409,cadastros.length ? "IDENTIDADE_PACIENTE_AMBIGUA" : "IDENTIDADE_PACIENTE_AUSENTE");
       const identidadePaciente=cadastros[0];
-      const fonteS9={...(Object.keys(indicacoesInvestigacao).length?{indicacoesInvestigacao}:{}),...(identidadePaciente?{identidadePaciente}:{}),identidadeResponsavel:{medicoId:sessao.medicoId,crm:sessao.crm},medicamentos:parsed.data.plano.receitas??[],fonte:{sourceId:sourceIdS9,classe:"MANUAL" as const,localizador:resumoRef,
+      const propostasDose=[];
+      for(const ref of parsed.data.plano.propostasDoseReceita??[]){
+        // Minuta conserva sua proveniência mesmo se a fonte mudou; só a promoção exige revalidação.
+        if('expectedRevision' in parsed.data||!parsed.data.plano.receitasMarcadas.includes(ref.receitaId))continue;
+        const receita=parsed.data.plano.receitas?.find(r=>r.id===ref.receitaId);
+        const candidato=deps.corpus?.propostasDoseReceita?.find(p=>p.id===ref.propostaId&&p.fonte.hash===ref.hashFonte&&p.hashProposta===ref.hashProposta);
+        if(!receita||!candidato||nomeMedicamento(receita.medicamento)!==nomeMedicamento(candidato.medicamento))return reply(409,'PROPOSTA_DOSE_DESATUALIZADA');
+        if(parsed.data.plano.receitasMarcadas.includes(ref.receitaId))propostasDose.push(candidato);
+      }
+      const fonteS9={propostasDoseReceita:propostasDose,...(Object.keys(indicacoesInvestigacao).length?{indicacoesInvestigacao}:{}),...(identidadePaciente?{identidadePaciente}:{}),identidadeResponsavel:{medicoId:sessao.medicoId,crm:sessao.crm},medicamentos:parsed.data.plano.receitas??[],fonte:{sourceId:sourceIdS9,classe:"MANUAL" as const,localizador:resumoRef,
         dataClinica:civilS9.dataCivil,dataCaptura:capturadoEm,versao:"s9-flash@1",contentHash:hashDecisao},
         dataReferencia:civilS9.dataCivil,revisao:revisaoS9};
       const result = "expectedRevision" in parsed.data
@@ -1243,7 +1332,9 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
     if (rota === "canal") {
       const parsed = z.object({}).strict().safeParse(raw);
       if (!parsed.success) return reply(400, "PAYLOAD_INVALIDO");
-      const result = lerCanal(deps.db);
+      await processarPendenciasClinicasCanal(deps.db, { agora: deps.agora(), cadastros: () => cadastrosCanal(deps.db) });
+      const legado=lerCanal(deps.db),operacionais=lerMensagensOperacionaisCanal(deps.db,{sessoes:deps.sessoes,token,agora:deps.agora()});
+      const result={...legado,mensagens:[...legado.mensagens,...operacionais],estado:operacionais.length?'PARCIAL':legado.estado};
       return reply(200, result.estado === "FONTE_AUSENTE" ? "FONTE_CANAL_AUSENTE" : "CANAL_CARREGADO", result);
     }
     if (rota === "apac") {
@@ -1703,6 +1794,14 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
     }
     const parsed = ActionIntent.safeParse(raw);
     if (!parsed.success) return reply(400, "PAYLOAD_INVALIDO");
+    if(parsed.data.verbo==='ENVIAR_WHATSAPP'||parsed.data.verbo==='ENVIAR_EMAIL'){
+      const a=revalidarAutorizacaoSaidaCanalNoLedger(deps.db,parsed.data);if(!a.ok)return reply(409,a.codigo);
+      if(!deps.canal?.transporteSaida)return reply(409,'TRANSPORTE_CANAL_NAO_CONFIGURADO');
+      const r=await executarEnvioAutorizadoCanal(deps.db,{sessoes:deps.sessoes,token,agora:deps.agora()},{intent:parsed.data,
+        agoraAtual:deps.agora,revisaoContextoAtual:()=>revisaoContextoCanal(deps.db,a.autorizacao.contexto)??'CONTEXTO_AUSENTE',
+        validarVinculoAtual:()=>vinculoAtualCanal(deps.db,a.autorizacao.contexto.patientId,a.autorizacao.destinatarioCanonico),transporteSaida:deps.canal.transporteSaida});
+      const result=r.resultadoGateway;return reply(result.decisao==='NEGADA'?409:200,result.motivoCodigo,result);
+    }
     const autorizacao = autorizarSaida(deps.db, parsed.data,competencia=>referenciaSigtapDuto(deps.corpus,competencia));
     if (!autorizacao.ok) return reply(409, autorizacao.codigo);
     // Uma rota /acao nunca usa a idempotencia volátil do caller: o ledger local

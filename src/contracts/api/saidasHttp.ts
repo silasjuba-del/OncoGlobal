@@ -1,3 +1,5 @@
+import { PropostasDoseReceitaResposta } from './propostaDoseReceita.js';
+import {RespostaCanalPreparada,RespostaCanalConfirmada} from './respostaCanal.js';
 import { z } from "zod";
 import {DitadoResposta} from '../fase2/ditado.js';
 import { RevisaoClinicaResposta } from '../fase2/revisaoClinica.js';
@@ -27,6 +29,7 @@ const Extracao = z.object({ draftId: Id, revision: Count, linkedPatientId: Id.nu
 
 /** Mesmos contratos no servidor e no cliente. Valida sem descartar campos adicionais da resposta legada. */
 export const SaidasHttp: Readonly<Record<string, z.ZodType>> = {
+  prepararRespostaCanal:RespostaCanalPreparada,confirmarRespostaCanal:RespostaCanalConfirmada,
   ditado:DitadoResposta,
   lotesPaciente:LotesPacienteResposta,
   login: z.object({ token: z.string().min(1), expiraEm: Instante }),
@@ -39,6 +42,7 @@ export const SaidasHttp: Readonly<Record<string, z.ZodType>> = {
   avaliarInstrumento: z.object({ resultado: ResultadoInstrumentoSchema, gravado: z.literal(false), assinado: z.literal(false) }),
   oncoassistStatus: EstadoOncoassist, oncoassistFontes: FontesOncoassist, oncoassistClassificar: RespostaOncoassist,
   sinteseRetratoLlm: SintesePropostaResposta, reconciliarRascunhos: ReconciliacaoProposta, prepararRevisao: RevisaoPreparada,
+  proporDoseReceita: PropostasDoseReceitaResposta,
   rascunhoFlash: FlashRascunhoResposta, prepararFlash: FlashPreparadaResposta,
   selecionarContexto: z.object({ codigo: z.literal("CONTEXTO_SELECIONADO") }),
   reconciliarMedicamentos: Gravacao,
@@ -69,6 +73,7 @@ export const SaidasHttp: Readonly<Record<string, z.ZodType>> = {
   consultarConhecimento: z.object({ status: z.literal("OK"), modo: z.literal("LEXICAL"), algoritmo: z.literal("TOKEN_EXATO_NORMALIZADO"),
     corpus: z.object({ versao: Id, arquivos: z.array(JsonObjeto) }), vetorial: z.object({ status: z.literal("NOT_IMPLEMENTED") }),
     resultados: z.array(z.object({ referencia: JsonObjeto, scoreLexical: z.number().finite() })), topKAplicado: z.number().int().positive(), aviso: Id }),
+  "/salao/revisar-relato-canal": Gravacao,
   "/farmacia/enviar": Gravacao, "/farmacia/conferir": Gravacao, "/salao/registrar-administracao": Gravacao,
   "/apac/validar-emissao": Gravacao, "/chat/aceitar-decisao": Gravacao, "/tarefas/receber": Gravacao, "/tarefas/concluir": Gravacao,
   "/biblioteca/importar": z.object({ codigo: z.literal("PACOTE_IMPORTADO_RASCUNHO"), pacoteId: Id, hash: z.string().regex(/^[a-f0-9]{64}$/) }),

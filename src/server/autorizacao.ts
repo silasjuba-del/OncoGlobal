@@ -1,3 +1,4 @@
+import { documentoReceitaDosePendente } from '../contracts/f1/receitaDose.js';
 import type { DatabaseSync } from "node:sqlite";
 import type { ActionIntent } from "../contracts/operacao.js";
 import type { z } from "zod";
@@ -7,6 +8,7 @@ import { ValidacaoApacPersistida, type ReferenciaSigtap } from "../contracts/f1/
 import { validarReferenciaApac } from "../modules/apac/validacaoPersistida.js";
 import { resolverPrescricaoDuto } from "./dutos.js";
 import { dadosDoEvento, eventosVigentes } from "../kernel/projections/snapshot.js";
+import { revalidarAutorizacaoSaidaCanalNoLedger } from "./canalResposta.js";
 
 type Intent = z.infer<typeof ActionIntent>;
 export type Autorizacao = { ok: true } | { ok: false; codigo: string };
@@ -19,9 +21,13 @@ export type Autorizacao = { ok: true } | { ok: false; codigo: string };
 export function autorizarSaida(db: DatabaseSync, intent: Intent, sigtapAtual?: (competencia: string) => ReferenciaSigtap | null): Autorizacao {
   if (intent.verbo === "BACKUP_LOCAL")
     return intent.objeto.tipo === "BACKUP" && intent.destino === null ? { ok: true } : { ok: false, codigo: "BACKUP_INVALIDO" };
-  // A10/G-02: canal externo exige contato vinculado e consentimento persistidos; ainda não existem.
-  if (intent.verbo === "ENVIAR_WHATSAPP" || intent.verbo === "ENVIAR_EMAIL" || intent.verbo === "AGENDAR")
+  // Um controle de canal nunca habilita agendamento ou outras capacidades externas.
+  if (intent.verbo === "AGENDAR")
     return { ok: false, codigo: "CANAL_EXTERNO_NAO_HABILITADO" };
+  if (intent.verbo === "ENVIAR_WHATSAPP" || intent.verbo === "ENVIAR_EMAIL") {
+    const rev = revalidarAutorizacaoSaidaCanalNoLedger(db, intent);
+    return rev.ok ? { ok: true } : { ok: false, codigo: rev.codigo };
+  }
   if (intent.destino !== null) return { ok: false, codigo: "DESTINO_NAO_PERMITIDO" };
   const { patientId, encounterId } = intent.escopo;
   if (!patientId) return { ok: false, codigo: "ESCOPO_SEM_PACIENTE" };
@@ -52,6 +58,18 @@ export function autorizarSaida(db: DatabaseSync, intent: Intent, sigtapAtual?: (
     return sig?.documentId === intent.objeto.id && sig.documentVersion === intent.objeto.versao;
   });
   if (!assinado) return { ok: false, codigo: "ARTEFATO_NAO_ASSINADO" };
+  const corpo=dadosDoEvento(assinado)?.data;
+  if(documentoReceitaDosePendente(corpo))return {ok:false,codigo:'RECEITA_DOSE_PENDENTE'};
+  if(corpo&&typeof corpo==='object'&&'tipoDocumento' in corpo&&corpo.tipoDocumento==='FLASH_CONJUNTO_IMPRESSAO'){
+    const refs=(corpo as {documentosIncluidos?:unknown}).documentosIncluidos;
+    if(!Array.isArray(refs))return {ok:false,codigo:'CONJUNTO_INCOMPLETO'};
+    for(const ref of refs){
+      const filhos=vigentes.filter(e=>e.tipo==='DOCUMENTO'&&e.revisao==='ASSINADO'&&e.encounterId===assinado.encounterId&&e.tumorLotId===assinado.tumorLotId)
+        .map(e=>dadosDoEvento(e)?.data as Record<string,unknown>|undefined).filter(d=>d?.documentId===ref?.documentId&&d?.documentVersion===ref?.documentVersion);
+      if(filhos.length!==1||filhos[0]?.tipoDocumento==='FLASH_CONJUNTO_IMPRESSAO')return {ok:false,codigo:'CONJUNTO_INCOMPLETO'};
+      if(documentoReceitaDosePendente(filhos[0]))return {ok:false,codigo:'RECEITA_DOSE_PENDENTE'};
+    }
+  }
   // Validação de emissão APAC ainda não é persistida no ledger (pendência CP-001b): contenção explícita.
   if (intent.verbo === "EXPORTAR_APAC") return { ok: false, codigo: "VALIDACAO_APAC_NAO_PERSISTIDA" };
   return { ok: true };

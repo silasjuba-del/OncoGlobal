@@ -88,12 +88,17 @@ it("HTTP/SQLite: rascunho com duas receitas atravessa edição, salvar, reabrir 
   expect(salvo.flash?.rascunho?.plano?.receitas).toEqual([receitas[0], { ...receitas[1], orientacao: "Orientação B revisada pela UI" }]);
   cleanup(); render(<ConsultaPersistida porta={porta} contexto={contexto} />);
   fireEvent.click(await screen.findByRole("button", { name: "Consulta Flash" }, { timeout: 10_000 }));
+  // Decisão do Dr. Silas em 19/10: dose ausente continua minuta, inclusive após reabrir.
+  expect((screen.getByRole("button", { name: "Revisar documentos para assinatura" }) as HTMLButtonElement).disabled).toBe(true);
+  expect(ambiente.eventos().filter(e => e.revisao === "ASSINADO")).toHaveLength(0);
+  fireEvent.change(screen.getByLabelText("Dose da receita 2"), { target: { value: "Dose B validada pelo médico no teste" } });
   fireEvent.click(screen.getByRole("button", { name: "Revisar documentos para assinatura" }));
   // Duas requisições HTTP reais (preparação e bundle); limite de integração separado do gate CRIT-5.
   const preview = await screen.findByRole("region", { name: "Conteúdo para assinatura" }, { timeout: 10_000 });
   expect(preview.textContent).toContain(receitas[0]!.medicamento);
   expect(preview.textContent).toContain(receitas[1]!.medicamento);
   expect(preview.textContent).toContain("Orientação B revisada pela UI");
+  expect(preview.textContent).toContain("Dose B validada pelo médico no teste");
   expect(preview.textContent).toContain("Via: PENDENTE");
   expect(ambiente.eventos().filter(e => e.revisao === "ASSINADO")).toHaveLength(0);
 });

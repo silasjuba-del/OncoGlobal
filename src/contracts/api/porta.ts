@@ -1,3 +1,6 @@
+import type { PropostaDoseReceita } from './propostaDoseReceita.js';
+import type {PrepararRespostaCanal,ConfirmarRespostaCanal} from './respostaCanal.js';
+import type {RascunhoRespostaCanal} from '../f2/caixaRespostaCanal.js';
 import type { InvestigacaoConsultaVisao } from './investigacao.js';
 import type { LotesPacienteResposta } from './lotes.js';
 import type { RevisaoClinicaResposta } from '../fase2/revisaoClinica.js';
@@ -131,11 +134,12 @@ export interface FlashPreparada {
 }
 
 export interface ConsultaVisao {
+  contatosCanal?: CaixaCanalVisao | undefined;
   dutos?: DutosClinicaVisao;
   instrumentosClinicos?: readonly {instrumento:string;avaliacao:ResultadoInstrumento}[];
   resumoEvolucao?: string | null;
   historicoDocumentos?: readonly { eventId: string; documentId: string; documentVersion: number; titulo: string;
-    texto: string; assinadoEm: string; autorId: string; encounterId: string; tumorLotId: string | null }[];
+    liberacaoPendente?:string|undefined; texto: string; assinadoEm: string; autorId: string; encounterId: string; tumorLotId: string | null }[];
   hoje: string;
   patientId: string;
   encounterId: string;
@@ -220,6 +224,9 @@ export interface DecisaoLiberacaoVisao {
 }
 
 export interface SalaoVisao {
+  relatosInfusao?: readonly {patientId:string;mensagemId:string;payloadSha256:string;texto:string;em:string;
+    contextosRevisao?:readonly {patientId:string;encounterId:string;tumorLotId:null}[]|undefined;
+    contextoMensagens:readonly {mensagemId:string;texto:string;em:string;contatoId?:string|undefined;canal?:string|undefined}[]}[] | undefined;
   avisos?: readonly {patientId:string;texto:string}[];
   hoje: string;
   ruleset: SalaoRuleset;
@@ -233,9 +240,12 @@ export interface SalaoVisao {
 export interface CandidatoVinculoVisao {
   patientId: string;
   nome: string;
+  encounterId?: string | undefined;
+  tumorLotId?: string | null | undefined;
 }
 
 export interface MensagemCanalVisao {
+  contextosResposta?:readonly {patientId:string;encounterId:string;tumorLotId:string|null}[]|undefined;
   mensagemId: string;
   texto: string;
   em: string;
@@ -245,6 +255,21 @@ export interface MensagemCanalVisao {
   estadoVinculo?: "VINCULADO" | "SEM_VINCULO" | "CONFLITO" | "REVOGADO" | undefined;
   nomePaciente: string | null;
   candidatos: readonly CandidatoVinculoVisao[];
+  origemCanal?: "WHATSAPP_SERVICO" | "WHATSAPP_PESSOAL" | "EMAIL" | "TELEFONE" | undefined;
+  pendenciaProcessamento?: boolean | undefined;
+  reciboTecnico?: "RECEBIDA" | "PROCESSADA" | "ENVIADA" | "ENTREGUE" | "LIDA" | "FALHOU" | undefined;
+  estadoConversa?: "NOVA" | "TRIADA" | "AGUARDA_MEDICO" | "RESPONDIDA" | "ENCERRADA" | undefined;
+  midia?: {
+    providerMediaId: string;
+    mimeType: string | null;
+    processamento: "NAO_PROCESSADA" | "LIDA_LOCALMENTE";
+  } | null | undefined;
+  destinatarioExibido?: string | undefined;
+  contextoExibido?: {
+    patientId: string | null;
+    encounterId: string | null;
+    versaoContexto?: number | undefined;
+  } | undefined;
 }
 
 export interface CaixaCanalVisao {
@@ -338,7 +363,9 @@ export interface PortaConsulta {
   // [SERVIDOR_PENDENTE]
   agendaDoDia(): Promise<AgendaVisao>;
   // [SERVIDOR_PENDENTE]
+  proporDoseReceita?(contexto:{patientId:string;encounterId:string;tumorLotId:string|null},medicamento:string):Promise<readonly PropostaDoseReceita[]>;
   filaSalao(): Promise<SalaoVisao>;
+  revisarRelatoInfusao?(entrada:{contexto:{patientId:string;encounterId:string;tumorLotId:string|null;operationId:string};mensagemId:string;payloadSha256:string;decisao:string}):Promise<unknown>;
   // [SERVIDOR_PENDENTE]
   salvarTriagem(triagem: Triagem, expectedRevision?: number | null): Promise<SalaoVisao>;
   // [SERVIDOR_PENDENTE]
@@ -347,6 +374,8 @@ export interface PortaConsulta {
   selecionarContexto?(contexto: { patientId: string; encounterId: string; tumorLotId: string | null }): Promise<void>;
   // [SERVIDOR_PENDENTE]
   caixaCanal(): Promise<CaixaCanalVisao>;
+  prepararRespostaCanal?(pedido:PrepararRespostaCanal):Promise<RascunhoRespostaCanal>;
+  confirmarRespostaCanal?(pedido:ConfirmarRespostaCanal):Promise<{respostaId:string;versao:number}>;
   // [SERVIDOR_PENDENTE] o médico escolhe o candidato; a porta não liga por nome
   pedirVinculo(contatoId: string, patientId: string): Promise<CaixaCanalVisao>;
   // [SERVIDOR_PENDENTE]

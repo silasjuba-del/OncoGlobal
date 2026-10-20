@@ -1,3 +1,4 @@
+import { lerPropostasDoseReceita } from './propostasDoseReceita.js';
 import { readdirSync, readFileSync } from "node:fs";
 import { fileURLToPath, URL as NodeURL } from "node:url";
 import { z } from "zod";
@@ -83,7 +84,7 @@ export function carregarCorpusServidor() {
   try { limiarPlaquetas = lerLimiarAlertaPlaquetas(ler("rulesets/lab-thresholds.v1.json")); } catch { /* PENDENTE na visão */ }
   return { caixas: caixaEnvelope.caixas.filter((c) => c.chave.startsWith("config.")),
     caixasTodas: caixaEnvelope.caixas, ruleset, regulatorio: table, receitasElegiveis,
-    templatesProtocolo: lerTemplatesProtocolo(), rads, limiarPlaquetas,
+    templatesProtocolo: lerTemplatesProtocolo(), propostasDoseReceita:lerPropostasDoseReceita(), rads, limiarPlaquetas,
     interacoes: ler("rulesets/interacoes.v1.json") as RulesetSemaforo,
     catalogoInteracoes: ler("f0c/classes-farmacos.v1.json") as CatalogoInteracoes,
     feveRuleset: lerAlertaFeve(ler("rulesets/salao-feve.v1.json")),

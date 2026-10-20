@@ -11,6 +11,8 @@ import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { tmpdir } from "node:os";
 import { createServer as createViteServer } from "vite";
+import { jornadaReceitaNoNavegador } from './browser-receita.js';
+import { jornadaCanalNoNavegador,jornadaDemonstracaoCanal } from './browser-canal.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
 const MANIFEST = JSON.parse(readFileSync(join(ROOT, "corpus/manifesto/b2-fichas.v1.json"), "utf8"));
@@ -257,6 +259,10 @@ async function main() {
 
   let demo;
   let viteDev;
+  let efeitosCanal=0;
+  const segredoCanal='segredo-exclusivamente-sintetico-navegador';
+  const operacaoCanal={contasWebhook:[{accountId:'00000000',phoneNumberId:'00000000',keyId:'sintetica',canal:'WHATSAPP_SERVICO',segredo:segredoCanal,verifyToken:'token-sintetico'}],
+    transporteSaida:async()=>{efeitosCanal++;return {ok:true,providerReceiptId:'recibo-provedor-sintetico-navegador'};}};
   try {
     viteDev = await createViteServer({
       configFile: join(ROOT, "vite.config.ts"),
@@ -266,7 +272,7 @@ async function main() {
     });
     await viteDev.listen();
     const mod = await viteDev.ssrLoadModule(SERVIDOR_B2_TS);
-    demo = await mod.bootServidorDemoB2(demoDir);
+    demo = await mod.bootServidorDemoB2(demoDir,operacaoCanal);
     log({ fase: "servidor_b2_vite_ssr", manifesto: demo.manifesto, apiPort, uiPort, sqlite: join(demoDir, "ledger.sqlite") });
   } catch (e) {
     log({ erro: "SERVIDOR_NAO_SUBIU", detalhe: String(e) });
@@ -297,7 +303,7 @@ async function main() {
     await demo.app.close();
     await new Promise((r) => setTimeout(r, 500));
     const mod2 = await viteDev.ssrLoadModule(SERVIDOR_B2_TS);
-    demo = await mod2.bootServidorDemoB2(demoDir);
+    demo = await mod2.bootServidorDemoB2(demoDir,operacaoCanal);
     const manifesto2 = demo.manifesto;
     log({ prova: "REINICIO_SERVIDOR_MESMO_SQLITE", baseUrl: manifesto2.baseUrl });
     const { lerDraft } = await viteDev.ssrLoadModule("/src/kernel/ledger/drafts.ts");
@@ -319,6 +325,17 @@ async function main() {
     const qtd = await historico.locator("article").count();
     // Histórico vazio comprova somente a leitura da região após reinício, não persistência de propostas ou assinatura.
     log({ prova: "REINICIO_MESMO_SQLITE", dir: demoDir, documentosHistorico: qtd, historicoConsultado: true });
+    const {lerPropostasDoseReceita}=await viteDev.ssrLoadModule('/src/server/propostasDoseReceita.ts');
+    mod2.corpusCompartilhadoDemoB2.propostasDoseReceita.splice(0,mod2.corpusCompartilhadoDemoB2.propostasDoseReceita.length,...lerPropostasDoseReceita(JSON.stringify({header:{versao:'sintetica-navegador'},consultavel:true,status:'RASCUNHO',itens:[{id:'rx-sintetica-navegador',droga:'Medicamento sintético navegador',dose:'25',unidade:'mg',indicacao:'Teste sintético',controle344:{lista:'comum'},nota:'Condição sintética preservada',fonte:{estado:'VERIFICADO',referencia:'Fonte sintética navegador',trecho:'Trecho exclusivamente sintético'}}]})));
+    const {listarEventos}=await viteDev.ssrLoadModule('/src/kernel/ledger/ledger.ts');
+    const receita=await jornadaReceitaNoNavegador(page2,{senha:manifesto2.senhaDemo,encounterId:manifesto2.b2.encounterId,
+      lerAssinados:()=>listarEventos(demo.app.db,manifesto2.b2.patientId).filter(e=>e.tipo==='DOCUMENTO'&&e.revisao==='ASSINADO')});
+    log({prova:'RECEITA_PROPOSTA_VALIDACAO_MEDICA',...receita});
+    const {registrarConsentimentoCanal}=await viteDev.ssrLoadModule('/src/server/canalEntrada.ts');
+    const consentimento=registrarConsentimentoCanal(demo.app.db,{sessoes:demo.app.sessoes,token:demo.app.token,agora:manifesto2.agora},{contatoId:'5500'+'000007777',patientId:manifesto2.b2.patientId,referenciaTermo:'termo-sintetico-navegador',versaoTermo:'1',finalidade:['COMUNICACAO_CLINICA'],origem:'PRESENCIAL_CONSULTORIO'});
+    if(!consentimento.ok)throw new Error('CONSENTIMENTO_SINTETICO_NAO_GRAVADO');
+    log({prova:'CANAL_HTTP_UI_NAVEGADOR',...await jornadaCanalNoNavegador(page2,{baseUrl:manifesto2.baseUrl,manifesto:manifesto2,segredo:segredoCanal,efeitos:()=>efeitosCanal})});
+    log({prova:'CANAL_DEMONSTRACAO_WEBCRYPTO',...await jornadaDemonstracaoCanal(page2)});
     writeFileSync(join(evidenceDir, "resumo.json"), JSON.stringify({ manifesto: manifesto2, familias: FAMILIAS_B2, resultado, reinicio: { documentosHistorico: qtd, propostasReabertas } }, null, 2));
     await demo.app.close();
   } finally {

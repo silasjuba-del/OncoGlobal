@@ -1,3 +1,5 @@
+import { PropostasDoseReceitaResposta } from '../../contracts/api/propostaDoseReceita.js';
+import {RespostaCanalPreparada,RespostaCanalConfirmada} from '../../contracts/api/respostaCanal.js';
 import { InvestigacaoConsultaVisao } from '../../contracts/api/investigacao.js';
 import { RevisaoClinicaResposta } from '../../contracts/fase2/revisaoClinica.js';
 import { EstadoDoencaPreparado } from '../../contracts/fase2/estadoDoenca.js';
@@ -285,6 +287,14 @@ export function criarPortaHttp(opcoes: OpcoesHttp): PortaConsulta {
     },
 
     // [SERVIDOR_PENDENTE]
+    async revisarRelatoInfusao(entrada) {
+      const {status,json}=await enviar('/salao/revisar-relato-canal',entrada,true);
+      if(status!==200)throw new ErroPorta(codigoDe(json,'REVISAO_NAO_GRAVADA'));
+      return json;
+    },
+    async proporDoseReceita(contexto,medicamento){
+      return (await leitura('/consulta/receita/propor-dose',{...contexto,medicamento},PropostasDoseReceitaResposta)).propostas;
+    },
     async filaSalao() {
       return leitura("/consulta/salao", {}, SalaoResposta);
     },
@@ -303,6 +313,8 @@ export function criarPortaHttp(opcoes: OpcoesHttp): PortaConsulta {
     async caixaCanal() {
       return leitura("/consulta/canal", {}, CanalResposta);
     },
+    async prepararRespostaCanal(pedido){return (await leitura('/consulta/canal/resposta/preparar',pedido,RespostaCanalPreparada)).rascunho;},
+    async confirmarRespostaCanal(pedido){const r=await leitura('/consulta/canal/resposta/confirmar',pedido,RespostaCanalConfirmada);return {respostaId:r.respostaId,versao:r.versao};},
 
     // [SERVIDOR_PENDENTE]
     async pedirVinculo(contatoId, patientId) {
