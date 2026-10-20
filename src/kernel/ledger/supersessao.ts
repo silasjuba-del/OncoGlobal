@@ -32,7 +32,7 @@ export function supersessaoValida(anterior: ClinicalEvent, atual: ClinicalEvent)
 }
 
 /** Read legacy history defensively without rewriting it. Cyclic edges have no authority. */
-export function idsSubstituidosValidos(eventos: readonly ClinicalEvent[]): Set<string> {
+export function substituicoesValidas(eventos: readonly ClinicalEvent[]): Map<string, string> {
   const porId = new Map(eventos.map(e => [e.eventId, e]));
   const arestas = new Map<string, string>();
   for (const atual of eventos) {
@@ -53,5 +53,9 @@ export function idsSubstituidosValidos(eventos: readonly ClinicalEvent[]): Set<s
     }
     for (const membro of caminho) visitados.add(membro);
   }
-  return new Set([...arestas].filter(([origem]) => !ciclicos.has(origem)).map(([, alvo]) => alvo));
+  return new Map([...arestas].filter(([origem]) => !ciclicos.has(origem)));
+}
+
+export function idsSubstituidosValidos(eventos: readonly ClinicalEvent[]): Set<string> {
+  return new Set(substituicoesValidas(eventos).values());
 }
