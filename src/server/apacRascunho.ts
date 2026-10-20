@@ -58,8 +58,9 @@ function baseApac(deps: Deps, contexto: Contexto, sessao: Sessao, em: string) {
   const civil = dataCivilDoServico(em);
   if (civil.estado !== "OK") throw new Error("RELOGIO_INVALIDO");
   const leitura = lerLedgerIntegro(deps.db, contexto.patientId);
-  const tiposFonte = new Set(["Paciente", "TumorLot", "TreatmentEpisode", "Ciclo", "DOCUMENTO", "APAC", "FATO", "TreatmentAdministration"]);
-  const falhasFonte = leitura.pendenciasIntegridade.filter(p => p.tipo === null || tiposFonte.has(p.tipo.replace(/@1$/, "")));
+  // O tipo SQL também pode estar corrompido: não prova que uma linha inválida é irrelevante.
+  // A leitura já está restrita ao paciente; falhas de outras pessoas não entram neste bloqueio.
+  const falhasFonte = leitura.pendenciasIntegridade;
   const eventos = leitura.itens.filter(e =>
     ["CONFIRMADO", "ASSINADO"].includes(e.revisao) && Date.parse(e.criadoEm) <= Date.parse(em));
   const atuais = eventosVigentes(eventos);

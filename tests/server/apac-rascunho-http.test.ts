@@ -116,10 +116,13 @@ async function abrir() {
 
 type Ambiente = Awaited<ReturnType<typeof abrir>>;
 
-function corromperFonteSintetica(a: Ambiente, eventId: string, payload: string) {
+function corromperFonteSintetica(a: Ambiente, eventId: string, payload: string, tipo?: string) {
   // Somente a fixture :memory: simula corrupção abaixo do writer; a proteção é restaurada.
   a.db.exec("DROP TRIGGER clinical_event_no_update");
-  try { a.db.prepare("UPDATE clinical_event SET payload=? WHERE eventId=?").run(payload, eventId); }
+  try {
+    if (tipo) a.db.prepare("UPDATE clinical_event SET payload=?,tipo=? WHERE eventId=?").run(payload, tipo, eventId);
+    else a.db.prepare("UPDATE clinical_event SET payload=? WHERE eventId=?").run(payload, eventId);
+  }
   finally {
     a.db.exec(`CREATE TRIGGER clinical_event_no_update BEFORE UPDATE ON clinical_event
       BEGIN SELECT RAISE(ABORT, 'clinical_event append-only'); END;`);
@@ -316,7 +319,7 @@ it("recusa confirmar preview se a base mudar depois de preparar", async () => {
   expect(a.eventos().filter(e => e.tipo === "APAC")).toHaveLength(0);
 });
 
-it.each(["JSON_INVALIDO", "PAYLOAD_FORA_DO_CONTRATO"])("fonte APAC corrompida (%s) fica pendente e não vira nova APAC por ausência aparente", async falha => {
+it.each(["JSON_INVALIDO", "PAYLOAD_FORA_DO_CONTRATO", "TIPO_DIVERGENTE"])("fonte APAC corrompida (%s) fica pendente e não vira nova APAC por ausência aparente", async falha => {
   const a = await abrir(); await assinarRx(a);
   const base = await baseApac(a), preparada = await prepararApac(a, base);
   const salva = await confirmarApac(a, preparada.data);
@@ -324,7 +327,9 @@ it.each(["JSON_INVALIDO", "PAYLOAD_FORA_DO_CONTRATO"])("fonte APAC corrompida (%
   const eventosAntes = Number(a.db.prepare("SELECT COUNT(*) AS n FROM clinical_event").get()!.n);
   const draftsAntes = listarDrafts(a.db, contexto.patientId);
   corromperFonteSintetica(a, salva.data.eventId,
-    falha === "JSON_INVALIDO" ? "{" : JSON.stringify({ data: { ...preparada.data.apac, apacId: null } }));
+    falha === "JSON_INVALIDO" ? "{" : JSON.stringify({ data: {
+      ...preparada.data.apac, apacId: falha === "TIPO_DIVERGENTE" ? preparada.data.apac.apacId : null,
+    } }), falha === "TIPO_DIVERGENTE" ? "Contato" : undefined);
   const pendente = await baseApac(a);
   expect(pendente.prescricao).toBeNull();
   expect(pendente.pendencias).toContain("INTEGRIDADE_FONTE_APAC_PENDENTE");
