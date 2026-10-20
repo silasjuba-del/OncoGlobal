@@ -138,7 +138,10 @@ export const extratorDeterministico: Extrator = {
       for (const trecho of visiveis.trechos) {
       // Uma nova afirmação explícita encerra a negação anterior; uma simples
       // lista ("nega dor, náusea") continua sob a mesma negação.
-      const clausulas = trecho.split(LIMITE_SENTENCA)
+      // Retira somente o aposto inequívoco do texto lexical antes do split;
+      // rawEvidence abaixo continua referindo a linha original completa.
+      const trechoLexical = trecho.replace(/,\s*acompanhad[oa]\s+(?:da|do|de)\s+(?:mãe|pai|irmão|irmã|filho|filha|cônjuge|espos[oa]|avô|avó|familiar|acompanhante)\s*,\s*(?=(?:mas\s+)?(?:relata|refere|apresenta|informa)\b)/iu, " ");
+      const clausulas = trechoLexical.split(LIMITE_SENTENCA)
         .flatMap(sentenca => sentenca.split(/;|,\s*(?=(?:mas\s+)?(?:relata|refere|apresenta|informa)\b)/iu));
       for (const clausula of clausulas) {
       const raw = clausula.trim();
@@ -155,10 +158,12 @@ export const extratorDeterministico: Extrator = {
       // Conserva-se o candidato/trecho para revisão, sem adivinhar seu escopo.
       const negacaoNaoResolvida = !negated
         && /(?:^|[^\p{L}\p{N}_])(?:n[ãa]o|sem|aus[eê]ncia|ausente)(?=$|[^\p{L}\p{N}_])/iu.test(raw);
-      const wordingUncertain = negacaoNaoResolvida
+      const marcadorRelato = /\b(?:relata|refere|informa|conta)\s+que\s+(?:(?:a|o|sua|seu)\s+)?(?:mãe|pai|irmão|irmã|filho|filha|cônjuge|espos[oa]|avô|avó|familiar|acompanhante)(?=$|[^\p{L}\p{N}_])/iu;
+      const terceiroRelatado = marcadorRelato.test(raw);
+      const wordingUncertain = negacaoNaoResolvida || terceiroRelatado
         || /\b(?:não se pode excluir|sugestiv[oa]s?|compat[ií]ve(?:l|is)(?:\s+com)?|prov[aá]vel(?:mente)?|poss[ií]ve(?:l|is)(?:mente)?|suspeit[oa]s?|hip[oó]tese)\b/iu.test(raw);
       const sujeitoTerceiro = /(?:^|[^\p{L}\p{N}_])(?:mãe|pai|irmão|irmã|filho|filha|cônjuge|espos[oa]|avô|avó|familiar|acompanhante)(?=$|[^\p{L}\p{N}_])/iu.test(raw);
-      const sujeitoPaciente = /\b(?:paciente|eu|meu|minha|meus|minhas)\b/iu.test(raw);
+      const sujeitoPaciente = !sujeitoTerceiro && /\b(?:paciente|eu|meu|minha|meus|minhas)\b/iu.test(raw);
       const tempoFuturo = /\b(?:futuro|futura|futuramente|terá|apresentará|receberá|vai\s+(?:ter|apresentar|receber|fazer)|programad[oa]\s+para)(?=$|[^\p{L}\p{N}_])/iu.test(raw);
       const tempoHistorico = /\b(?:tinha|tivera|havia|histórico|histórica|antecedente|anteriormente|no passado)(?=$|[^\p{L}\p{N}_])/iu.test(raw);
       const tempoAtual = /\b(?:atual(?:mente)?|hoje|agora|há|existe|apresenta|relata|refere)(?=$|[^\p{L}\p{N}_])/iu.test(raw);
@@ -168,12 +173,10 @@ export const extratorDeterministico: Extrator = {
         temporalidade: tempoFuturo ? "FUTURA" as const : tempoHistorico ? "HISTORICA" as const
           : tempoAtual ? "ATUAL" as const : "NAO_DETERMINADA" as const,
       };
-      const exigeQualificacao = qualificadores.polaridade !== "AFIRMADA"
-        || qualificadores.sujeito === "TERCEIRO"
-        || qualificadores.temporalidade === "HISTORICA" || qualificadores.temporalidade === "FUTURA";
       const add = (domain: FactDomain, value: unknown, evidence: FactEvidence = "EXPLICIT",
-        confirmation = false, regra?: string): void => {
-        const evidenceFinal: FactEvidence = evidence === "EXPLICIT" && wordingUncertain ? "UNCERTAIN" : evidence;
+        confirmation = false, regra?: string, factQualifiers: typeof qualificadores = qualificadores,
+        factWordingUncertain = wordingUncertain): void => {
+        const evidenceFinal: FactEvidence = evidence === "EXPLICIT" && factWordingUncertain ? "UNCERTAIN" : evidence;
         const spokenNumber = segmento.sourceType === "plaud" &&
           /\b\d+(?:[.,]\d+)?\b|\b(?:quatorze|quinze|dez|vinte|trinta)\b/iu.test(raw);
         result.push({
@@ -182,12 +185,14 @@ export const extratorDeterministico: Extrator = {
           patientCandidateId: null,
           domain, value, sourceType: segmento.sourceType,
           evidence: evidenceFinal, sourceId: segmento.sourceId, rawEvidence: rawLinha,
-          qualificadores,
+          qualificadores: factQualifiers,
           ...(segmento.page === undefined ? {} : { page: segmento.page }),
           ...(segmento.startMs === null ? {} : { timestampMs: segmento.startMs }),
           ...(dataLiteral ? { date: dataLiteral } : {}),
           confidence: spokenNumber ? 0.6 : evidenceFinal === "UNCERTAIN" ? 0.5 : 1,
-          requiresConfirmation: confirmation || spokenNumber || evidenceFinal === "UNCERTAIN" || exigeQualificacao,
+          requiresConfirmation: confirmation || spokenNumber || evidenceFinal === "UNCERTAIN"
+            || factQualifiers.polaridade !== "AFIRMADA" || factQualifiers.sujeito === "TERCEIRO"
+            || factQualifiers.temporalidade === "HISTORICA" || factQualifiers.temporalidade === "FUTURA",
           ...(regra ? { regra } : {}),
         });
       };
@@ -260,7 +265,24 @@ export const extratorDeterministico: Extrator = {
         add("lab", { raw, value: null, unit: null }, "UNCERTAIN", true);
       }
 
-      if (!negated && /\b(?:dormência|formigamento|náusea|dor)\b/iu.test(raw)) {
+      const afirmacaoMista = negated ? raw.match(/\b(?:e\s+com|mas\s+com)\s+([^.;!?]+?)[.!?]?$/iu) : null;
+      const sintomasPositivos = afirmacaoMista?.[1] ?? null;
+      if (sintomasPositivos !== null) {
+        const termosAnteriores = new Set([...raw.slice(0, afirmacaoMista?.index ?? 0)
+          .matchAll(/\b(?:dormência|formigamento|náusea|dor)\b/giu)]
+          .map(match => match[0]!.toLocaleLowerCase("pt-BR")));
+        const trechoPositivo = sintomasPositivos.split(/\s*,?\s*\b(?:e|mas)\s+(?=(?:sem|n[ãa]o|nega|negou|aus[eê]ncia|ausente)\b)/iu)[0] ?? "";
+        const termosPositivos = [...new Set([...trechoPositivo.matchAll(/\b(?:dormência|formigamento|náusea|dor)\b/giu)]
+          .map(match => match[0]!.toLocaleLowerCase("pt-BR")))];
+        const incertezaNoTrechoPositivo = wordingUncertain
+          || /\b(?:sem|n[ãa]o|nega|negou|aus[eê]ncia|ausente)\b/iu.test(trechoPositivo);
+        for (const termo of termosPositivos) {
+          const incerto = incertezaNoTrechoPositivo || termosAnteriores.has(termo);
+          const qualificadoresPositivos = { ...qualificadores,
+            polaridade: incerto ? "NAO_DETERMINADA" as const : "AFIRMADA" as const };
+          add("symptom", termo, "EXPLICIT", false, undefined, qualificadoresPositivos, incerto);
+        }
+      } else if (!negated && /\b(?:dormência|formigamento|náusea|dor)\b/iu.test(raw)) {
         add("symptom", raw);
       }
       // Plaud: reconhecimento lexical de fármaco conhecido + dose/frequência literal.

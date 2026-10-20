@@ -89,6 +89,74 @@ describe("extrator: hipótese lexical não vira fato explícito (ARQ-03, recorte
     }
   });
 
+  it("mantém uma queixa afirmada coordenada depois de 'sem' sem anular uma lista negada", () => {
+    const frase = "Paciente sem dor e com náusea.";
+    const sintomas = extratorDeterministico.extrair(segment(frase, "medical_note")).filter(f => f.domain === "symptom");
+    expect(sintomas).toHaveLength(1);
+    expect(sintomas[0]).toMatchObject({
+      value: "náusea", evidence: "EXPLICIT", requiresConfirmation: false, rawEvidence: frase,
+      qualificadores: { polaridade: "AFIRMADA", sujeito: "PACIENTE", temporalidade: "NAO_DETERMINADA" },
+    });
+    expect(extratorDeterministico.extrair(segment("Paciente sem dor e sem náusea.", "medical_note"))
+      .filter(f => f.domain === "symptom")).toHaveLength(0);
+    expect(extratorDeterministico.extrair(segment("Paciente sem dor e com náusea, mas sem formigamento.", "medical_note"))
+      .filter(f => f.domain === "symptom").map(f => f.value)).toEqual(["náusea"]);
+    const terceiro = "Mãe da paciente sem dor e com náusea.";
+    expect(extratorDeterministico.extrair(segment(terceiro, "medical_note")).find(f => f.domain === "symptom"))
+      .toMatchObject({ value: "náusea", requiresConfirmation: true, rawEvidence: terceiro,
+        qualificadores: { polaridade: "AFIRMADA", sujeito: "TERCEIRO" } });
+    expect(extratorDeterministico.extrair(segment("Paciente nega dor e náusea.", "medical_note"))
+      .filter(f => f.domain === "symptom")).toHaveLength(0);
+  });
+
+  it("usa o sujeito paciente em vez de parentesco acompanhante", () => {
+    const acompanhante = "Paciente, acompanhada da filha, relata dor.";
+    const dorAcompanhada = extratorDeterministico.extrair(segment(acompanhante, "medical_note"))
+      .find(f => f.domain === "symptom");
+    expect(dorAcompanhada).toMatchObject({
+      evidence: "EXPLICIT", requiresConfirmation: false, rawEvidence: acompanhante,
+      qualificadores: { polaridade: "AFIRMADA", sujeito: "PACIENTE", temporalidade: "ATUAL" },
+    });
+  });
+
+  it.each([
+    "Paciente sem dor e com náusea ausente.",
+    "Paciente sem dor e com ausência de náusea.",
+    "Hipótese: paciente sem dor e com náusea.",
+  ])("trecho misto não apaga incerteza ou negador dentro da queixa: %s", (frase) => {
+    const sintoma = extratorDeterministico.extrair(segment(frase, "medical_note"))
+      .find(f => f.domain === "symptom");
+    expect(sintoma).toMatchObject({ evidence: "UNCERTAIN", requiresConfirmation: true,
+      qualificadores: { polaridade: "NAO_DETERMINADA" }, rawEvidence: frase });
+  });
+
+  it.each(["Paciente sem dor e com dor.", "Paciente sem dor e com náusea e dor."])(
+    "contradição do mesmo sintoma permanece incerta: %s", (frase) => {
+      const sintomas = extratorDeterministico.extrair(segment(frase, "medical_note")).filter(f => f.domain === "symptom");
+      expect(sintomas.find(f => f.value === "dor")).toMatchObject({
+        evidence: "UNCERTAIN", requiresConfirmation: true,
+        qualificadores: { polaridade: "NAO_DETERMINADA" }, rawEvidence: frase,
+      });
+      if (frase.includes("náusea")) expect(sintomas.find(f => f.value === "náusea")).toMatchObject({
+        evidence: "EXPLICIT", qualificadores: { polaridade: "AFIRMADA" },
+      });
+    },
+  );
+
+  it("mantém a mãe como sujeito quando ela relata o próprio sintoma", () => {
+    const terceiro = "Mãe da paciente relata dor.";
+    expect(extratorDeterministico.extrair(segment(terceiro, "medical_note")).find(f => f.domain === "symptom"))
+      .toMatchObject({ requiresConfirmation: true, rawEvidence: terceiro,
+        qualificadores: { sujeito: "TERCEIRO" } });
+  });
+
+  it("mantém incerta a queixa de terceiro relatada pela paciente", () => {
+    const relatado = "Paciente relata que a mãe tem dor.";
+    expect(extratorDeterministico.extrair(segment(relatado, "medical_note")).find(f => f.domain === "symptom"))
+      .toMatchObject({ evidence: "UNCERTAIN", requiresConfirmation: true, rawEvidence: relatado,
+        qualificadores: { polaridade: "NAO_DETERMINADA", sujeito: "TERCEIRO" } });
+  });
+
   it("'possível' e 'suspeita' marcam UNCERTAIN + confirmação, com trecho literal preservado", () => {
     for (const frase of ["Possível lesão em L5 medindo 12 mm.", "Suspeita de lesão em fígado medindo 10 mm."]) {
       const facts = extratorDeterministico.extrair(segment(frase, "imaging_report"));
@@ -115,24 +183,24 @@ describe("extrator: hipótese lexical não vira fato explícito (ARQ-03, recorte
     expect(negada.filter(f => f.domain === "imaging")).toHaveLength(0);
   });
 
-  it("preserva qualifiers suportados literalmente e não transforma omissão em paciente atual", () => {
-    const casos = [
-      ["Em 2020 havia lesão em L5 medindo 12 mm.", { polaridade: "AFIRMADA", sujeito: "NAO_DETERMINADO", temporalidade: "HISTORICA" }],
-      ["A mãe tinha lesão em L5 medindo 12 mm.", { polaridade: "AFIRMADA", sujeito: "TERCEIRO", temporalidade: "HISTORICA" }],
-      ["A avó tinha lesão em L5 medindo 12 mm.", { polaridade: "AFIRMADA", sujeito: "TERCEIRO", temporalidade: "HISTORICA" }],
-      ["Paciente terá lesão em L5 medindo 12 mm.", { polaridade: "AFIRMADA", sujeito: "PACIENTE", temporalidade: "FUTURA" }],
-      ["Paciente apresenta lesão em L5 medindo 12 mm em 20/10/2026.", { polaridade: "AFIRMADA", sujeito: "PACIENTE", temporalidade: "ATUAL" }],
-      ["Paciente apresenta lesão em L5 medindo 12 mm.", { polaridade: "AFIRMADA", sujeito: "PACIENTE", temporalidade: "ATUAL" }],
-      ["Lesão em L5 medindo 12 mm em 2026.", { polaridade: "AFIRMADA", sujeito: "NAO_DETERMINADO", temporalidade: "NAO_DETERMINADA" }],
-      ["Lesão em L5 medindo 12 mm.", { polaridade: "AFIRMADA", sujeito: "NAO_DETERMINADO", temporalidade: "NAO_DETERMINADA" }],
-    ] as const;
-    for (const [frase, qualificadores] of casos) {
-      const facts = extratorDeterministico.extrair(segment(frase, "imaging_report"));
-      const imagem = facts.find(f => f.domain === "imaging");
-      expect(imagem, frase).toBeDefined();
-      expect(imagem).toMatchObject({ qualificadores });
-      expect(imagem?.rawEvidence).toBe(frase);
-    }
+  it.each([
+    ["Em 2020 havia lesão em L5 medindo 12 mm.", { polaridade: "AFIRMADA", sujeito: "NAO_DETERMINADO", temporalidade: "HISTORICA" }],
+    ["A mãe tinha lesão em L5 medindo 12 mm.", { polaridade: "AFIRMADA", sujeito: "TERCEIRO", temporalidade: "HISTORICA" }],
+    ["A avó tinha lesão em L5 medindo 12 mm.", { polaridade: "AFIRMADA", sujeito: "TERCEIRO", temporalidade: "HISTORICA" }],
+    ["Paciente terá lesão em L5 medindo 12 mm.", { polaridade: "AFIRMADA", sujeito: "PACIENTE", temporalidade: "FUTURA" }],
+    ["Paciente apresenta lesão em L5 medindo 12 mm em 20/10/2026.", { polaridade: "AFIRMADA", sujeito: "PACIENTE", temporalidade: "ATUAL" }],
+    ["Paciente apresenta lesão em L5 medindo 12 mm.", { polaridade: "AFIRMADA", sujeito: "PACIENTE", temporalidade: "ATUAL" }],
+    ["Lesão em L5 medindo 12 mm em 2026.", { polaridade: "AFIRMADA", sujeito: "NAO_DETERMINADO", temporalidade: "NAO_DETERMINADA" }],
+    ["Lesão em L5 medindo 12 mm.", { polaridade: "AFIRMADA", sujeito: "NAO_DETERMINADO", temporalidade: "NAO_DETERMINADA" }],
+  ] as const)("preserva qualifiers suportados literalmente: %s", (frase, qualificadores) => {
+    const facts = extratorDeterministico.extrair(segment(frase, "imaging_report"));
+    const imagem = facts.find(f => f.domain === "imaging");
+    expect(imagem).toBeDefined();
+    expect(imagem).toMatchObject({ qualificadores });
+    expect(imagem?.rawEvidence).toBe(frase);
+  });
+
+  it("não transforma omissão em paciente atual", () => {
     expect(extratorDeterministico.extrair(segment("Não há lesão em L5 medindo 12 mm.", "imaging_report"))
       .filter(f => f.domain === "imaging")).toHaveLength(0);
   });
