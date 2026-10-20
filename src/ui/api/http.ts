@@ -1,4 +1,5 @@
 import { PropostasDoseReceitaResposta } from '../../contracts/api/propostaDoseReceita.js';
+import { CatalogoFichasRespostaSchema, FichaProtocoloCatalogoSchema, InstanciacaoFichaRespostaSchema } from "../../contracts/api/fichasPrescricao.js";
 import { EstudoServicoSchema, ListarEstudosRespostaSchema, AvaliacaoEstudoRespostaSchema,
   SchemaFatosTrialsResposta } from "../../contracts/api/trialsServico.js";
 import { AcaoCompostaPreparada, BaseAcaoCompostaResposta } from "../../contracts/api/execucaoAcaoComposta.js";
@@ -141,6 +142,33 @@ export function criarPortaHttp(opcoes: OpcoesHttp): PortaConsulta {
       const result = EstatisticaServicoResposta.safeParse(json);
       if (!result.success) throw new ErroPorta("PAYLOAD_INVALIDO");
       return result.data;
+    },
+    async listarFichasPrescricao(signal) {
+      const { status, json } = await enviar("/consulta/prescricao/fichas/listar", {}, true, signal);
+      if (status !== 200) throw new ErroPorta(codigoDe(json, "FICHAS_INDISPONIVEIS"));
+      const r = CatalogoFichasRespostaSchema.safeParse(json);
+      if (!r.success) throw new ErroPorta("PAYLOAD_INVALIDO");
+      return r.data;
+    },
+    async revisarFichaPrescricao(pedido, signal) {
+      const { status, json } = await enviar("/consulta/prescricao/fichas/revisar", pedido, true, signal);
+      if (status !== 200) throw new ErroPorta(codigoDe(json, "REVISAO_FICHA_RECUSADA"));
+      const r = FichaProtocoloCatalogoSchema.safeParse(json);
+      if (!r.success || r.data.template.templateId !== pedido.templateId || r.data.template.versao !== pedido.versao
+        || r.data.contentHash !== pedido.expectedContentHash || r.data.revision !== pedido.expectedRevision + 1
+        || r.data.revisao?.decisao !== pedido.decisao || r.data.revisao.motivo !== pedido.motivo.trim())
+        throw new ErroPorta("PAYLOAD_INVALIDO");
+      return r.data;
+    },
+    async instanciarFichaPrescricao(pedido, signal) {
+      const { status, json } = await enviar("/consulta/prescricao/fichas/instanciar", pedido, true, signal);
+      if (status !== 200) throw new ErroPorta(codigoDe(json, "FICHA_NAO_INSTANCIAVEL"));
+      const r = InstanciacaoFichaRespostaSchema.safeParse(json);
+      if (!r.success || r.data.template.templateId !== pedido.templateId || r.data.template.versao !== pedido.versao
+        || r.data.contentHash !== pedido.expectedContentHash || r.data.revisionFicha !== pedido.expectedRevision
+        || r.data.contexto.patientId !== pedido.contexto.patientId || r.data.contexto.encounterId !== pedido.contexto.encounterId
+        || r.data.contexto.tumorLotId !== pedido.contexto.tumorLotId) throw new ErroPorta("PAYLOAD_INVALIDO");
+      return r.data;
     },
     async listarEstudosTrials(signal) {
       const { status, json } = await enviar("/consulta/trials/listar", {}, true, signal);

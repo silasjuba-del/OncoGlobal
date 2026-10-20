@@ -37,6 +37,8 @@ import type { BasePrescricaoExecutavelResposta, ConfirmarPrescricaoExecutavelPed
   PrepararPrescricaoExecutavelPedido, PrescricaoExecutavelConfirmada,
   PrescricaoExecutavelPreparada } from "./operacaoPrescricaoExecutavel.js";
 import type { PeriodoClinicoEstatisticaServico, VisaoEstatisticaServico } from "./estatisticaServico.js";
+import type { CatalogoFichasResposta, FichaProtocoloCatalogo, RevisarFichaPedido,
+  InstanciarFichaPedido, InstanciacaoFichaResposta } from "./fichasPrescricao.js";
 
 export type CodigoPorta = string;
 
@@ -330,6 +332,9 @@ export interface ChatSetorVisao {
 }
 
 export interface PortaConsulta {
+  listarFichasPrescricao?(signal?: AbortSignal): Promise<CatalogoFichasResposta>;
+  revisarFichaPrescricao?(pedido: RevisarFichaPedido, signal?: AbortSignal): Promise<FichaProtocoloCatalogo>;
+  instanciarFichaPrescricao?(pedido: InstanciarFichaPedido, signal?: AbortSignal): Promise<InstanciacaoFichaResposta>;
   listarEstudosTrials?(signal?: AbortSignal): Promise<ListarEstudosResposta>;
   importarEstudoTrial?(pedido: ImportarEstudoPedido, signal?: AbortSignal): Promise<EstudoServico>;
   revisarEstudoTrial?(pedido: RevisarEstudoPedido, signal?: AbortSignal): Promise<EstudoServico>;

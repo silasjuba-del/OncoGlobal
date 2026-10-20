@@ -18,7 +18,8 @@ export function criarServidorLocal(deps: ServidorDeps, config: { host?: string; 
     throw new Error("BIND_FORA_DO_LOOPBACK");
   const canal=deps.canal??carregarOperacaoCanal(deps.configRootDir);
   let corpus: ReturnType<typeof carregarCorpusServidor> | null = null;
-  try { corpus = carregarCorpusServidor(); } catch { /* dependent readers report PENDENTE */ }
+  if (deps.corpus !== undefined) corpus = deps.corpus;
+  else try { corpus = carregarCorpusServidor(); } catch { /* dependent readers report PENDENTE */ }
   const ownsSettings = deps.settings === undefined && !!deps.configRootDir && !!corpus;
   const settings = deps.settings === undefined
     ? ownsSettings && deps.configRootDir && corpus

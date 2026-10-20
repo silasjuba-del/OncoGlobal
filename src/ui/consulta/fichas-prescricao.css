@@ -1,0 +1,101 @@
+.catalogo-fichas {
+  --cf-ink: #183247;
+  --cf-muted: #536b7a;
+  --cf-line: #d5e0e6;
+  --cf-surface: #fff;
+  --cf-soft: #f4f8fa;
+  --cf-action: #006d77;
+  --cf-pending: #9b6519;
+  --cf-danger: #9f2935;
+  display: grid;
+  gap: .9rem;
+  min-width: 0;
+  padding: 1rem;
+  color: var(--cf-ink);
+  background: var(--cf-soft);
+  border: 1px solid var(--cf-line);
+  border-radius: .75rem;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.catalogo-fichas *,
+.catalogo-fichas *::before,
+.catalogo-fichas *::after { box-sizing: border-box; }
+.catalogo-fichas :is(button, input, textarea) { max-width: 100%; font: inherit; }
+.catalogo-fichas :focus-visible { outline: 3px solid #087b86; outline-offset: 2px; }
+.catalogo-fichas :is(h2, h3, h4, h5, p) { margin-block-start: 0; }
+.catalogo-fichas h2, .catalogo-fichas h3, .catalogo-fichas h4, .catalogo-fichas h5 { line-height: 1.25; }
+
+.catalogo-fichas__header,
+.catalogo-fichas__card-header { display: flex; align-items: flex-start; justify-content: space-between; gap: .8rem; min-width: 0; }
+.catalogo-fichas__header { padding-bottom: .75rem; border-bottom: 1px solid var(--cf-line); }
+.catalogo-fichas__header h2 { margin: 0; font-size: 1.2rem; }
+.catalogo-fichas__header p:last-child { margin: .3rem 0 0; color: var(--cf-muted); }
+.catalogo-fichas__eyebrow { margin: 0 0 .25rem; color: var(--cf-muted); font-size: .7rem; font-weight: 700; letter-spacing: .1em; }
+.catalogo-fichas__search { display: grid; gap: .35rem; max-width: 38rem; font-weight: 650; }
+.catalogo-fichas__search input,
+.catalogo-fichas__review textarea {
+  width: 100%; min-width: 0; padding: .6rem .7rem; color: var(--cf-ink); background: #fff;
+  border: 1px solid #9aafbb; border-radius: .45rem;
+}
+.catalogo-fichas__review textarea { min-height: 5rem; resize: vertical; }
+.catalogo-fichas__count { margin: -.45rem 0 0; color: var(--cf-muted); font-size: .82rem; }
+.catalogo-fichas__list { display: grid; gap: .8rem; min-width: 0; }
+.catalogo-fichas__card,
+.catalogo-fichas__section,
+.catalogo-fichas__item,
+.catalogo-fichas__review {
+  display: grid; gap: .75rem; min-width: 0; margin: 0; padding: .9rem;
+  background: var(--cf-surface); border: 1px solid var(--cf-line); border-radius: .65rem;
+}
+.catalogo-fichas__card { border-left: 3px solid var(--cf-action); }
+.catalogo-fichas__card-header h3 { margin: 0; font-size: 1.05rem; overflow-wrap: anywhere; }
+.catalogo-fichas__card-header p:last-child { margin: .25rem 0 0; color: var(--cf-muted); font-size: .85rem; }
+.catalogo-fichas__badge { display: inline-flex; flex: 0 0 auto; max-width: 11rem; padding: .25rem .5rem; border-radius: 999px;
+  color: var(--cf-pending); background: #fff7e9; font-size: .75rem; font-weight: 700; overflow-wrap: anywhere; }
+.catalogo-fichas__badge--conferida { color: #176447; background: #e8f5ee; }
+.catalogo-fichas__badge--inativa { color: #5e6870; background: #edf1f3; }
+.catalogo-fichas__original-status { margin: -.35rem 0 0; color: var(--cf-muted); font-size: .8rem; }
+.catalogo-fichas :is(details, summary) { min-width: 0; }
+.catalogo-fichas summary { cursor: pointer; color: var(--cf-action); font-weight: 700; overflow-wrap: anywhere; }
+.catalogo-fichas__detail-body { display: grid; gap: .8rem; min-width: 0; padding-top: .75rem; }
+.catalogo-fichas__section h4,
+.catalogo-fichas__items h4 { margin: 0; font-size: .95rem; }
+.catalogo-fichas__fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .5rem .8rem; margin: 0; min-width: 0; }
+.catalogo-fichas__field { min-width: 0; padding-bottom: .35rem; border-bottom: 1px solid #e8eef1; }
+.catalogo-fichas__field dt { color: var(--cf-muted); font-size: .75rem; font-weight: 650; }
+.catalogo-fichas__field dd { margin: .12rem 0 0; font-weight: 600; overflow-wrap: anywhere; white-space: pre-wrap; }
+.catalogo-fichas__item { margin-top: .65rem; border-left: 3px solid #8cb6bb; }
+.catalogo-fichas__item h5 { margin: 0; font-size: .92rem; }
+.catalogo-fichas__item h5 span { color: var(--cf-muted); font-size: .8rem; font-weight: 600; }
+.catalogo-fichas__trace { padding-top: .4rem; border-top: 1px solid var(--cf-line); }
+.catalogo-fichas__review legend { padding-inline: .35rem; font-weight: 750; }
+.catalogo-fichas__review-hint { margin: 0; color: var(--cf-muted); font-size: .82rem; }
+.catalogo-fichas__review label { display: grid; gap: .35rem; min-width: 0; font-weight: 650; }
+.catalogo-fichas__ack { display: flex !important; align-items: flex-start; gap: .55rem !important; }
+.catalogo-fichas__ack input { width: 1.1rem; min-width: 1.1rem; height: 1.1rem; margin: .2rem 0 0; accent-color: var(--cf-action); }
+.catalogo-fichas__blocks { padding: .7rem; color: #8b2631; background: #fff1f2; border-left: 3px solid #b42335; border-radius: .4rem; }
+.catalogo-fichas__blocks h4 { margin: 0; font-size: .9rem; }
+.catalogo-fichas__blocks ul { margin: .35rem 0 0; padding-left: 1.2rem; }
+.catalogo-fichas__use { display: grid; gap: .55rem; padding-top: .7rem; border-top: 1px solid var(--cf-line); }
+.catalogo-fichas__use p { margin: 0; color: var(--cf-muted); font-size: .83rem; }
+.catalogo-fichas :is(button) { min-height: 2.55rem; padding: .5rem .75rem; color: var(--cf-action); background: #fff;
+  border: 1px solid #86a5ad; border-radius: .45rem; cursor: pointer; }
+.catalogo-fichas button:hover:not(:disabled) { background: #eef7f7; }
+.catalogo-fichas button:disabled { cursor: not-allowed; opacity: .55; }
+.catalogo-fichas .catalogo-fichas__primary,
+.catalogo-fichas__use button { color: #fff; background: var(--cf-action); border-color: var(--cf-action); font-weight: 700; }
+.catalogo-fichas__error { margin: 0; padding: .7rem; color: var(--cf-danger); background: #fff1f2; border-left: 3px solid #b42335; border-radius: .4rem; }
+.catalogo-fichas__message { margin: 0; padding: .7rem; color: #176447; background: #eaf6ef; border-left: 3px solid #2d8b61; border-radius: .4rem; }
+.catalogo-fichas__empty { margin: 0; padding: .8rem; color: var(--cf-muted); background: #fff; border-radius: .5rem; }
+
+@media (max-width: 650px) {
+  .catalogo-fichas { gap: .7rem; padding: .7rem; }
+  .catalogo-fichas__header { display: grid; }
+  .catalogo-fichas__header > button { width: 100%; }
+  .catalogo-fichas__card, .catalogo-fichas__section, .catalogo-fichas__item, .catalogo-fichas__review { padding: .7rem; }
+  .catalogo-fichas__card-header { display: grid; }
+  .catalogo-fichas__fields { grid-template-columns: minmax(0, 1fr); }
+  .catalogo-fichas__use button, .catalogo-fichas__primary { width: 100%; }
+}
