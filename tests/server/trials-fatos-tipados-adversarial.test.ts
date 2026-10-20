@@ -202,12 +202,21 @@ it("aceita apenas os aliases versionados Triagem@1 e ignora versões futuras des
 it("não permite que supersession genérica inválida substitua Triagem tipada", async () => {
   const a = await ambiente();
   const typedEventId = a.registrar("Triagem", a.triagem());
-  const genericEventId = a.registrar("FATO", { campo: "ecog", valor: 4 }, { supersedesEventId: typedEventId });
-  const { retrato, resposta } = ler(a);
+  const antes = a.eventos();
+  expect(() => a.registrar("FATO", { campo: "ecog", valor: 4 }, { supersedesEventId: typedEventId }))
+    .toThrow("SUPERSEDES_CONTEXT_INVALID");
+  expect(a.eventos()).toEqual(antes);
+  expect(fato(a)).toMatchObject({ status: "CONFIRMADO", value: 1 });
+  // Histórico legado inválido continua defensivo mesmo quando não passa mais pelo writer.
+  const original = antes.find(e => e.eventId === typedEventId)!;
+  const legado: ClinicalEvent = { ...original, eventId: "generic-legacy-invalid", operationId: "legacy-invalid",
+    tipo: "FATO", payload: { data: { campo: "ecog", valor: 4 } }, supersedesEventId: typedEventId };
+  const eventos = [...antes, legado], retrato = projetar(eventos);
+  const resposta = adaptarFatosTipados(eventos, contexto, AGORA, retrato);
 
   expect(retrato.fatos.some(item => item.ref.eventId === typedEventId)).toBe(true);
   expect(retrato.integridade).toContainEqual(expect.objectContaining({
-    eventoId: genericEventId, motivo: "SUPERSESSION_CONTEXTO_INVALIDO",
+    eventoId: legado.eventId, motivo: "SUPERSESSION_CONTEXTO_INVALIDO",
   }));
   expect(resposta.fatos).not.toContainEqual(expect.objectContaining({ factKey: "ecog", value: 4, status: "CONFIRMADO" }));
 });
