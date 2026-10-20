@@ -13,6 +13,12 @@ import { ConsultaFlash, type ConsultaFlashProps, type PlanoFlash } from "./Consu
 import { montarPropsFlash } from "./flashDaVisao.js";
 import { CartaoTransversal } from "./CartaoTransversal.js";
 import { InstrumentosClinicos } from "../clinico/InstrumentosClinicos.js";
+import { CockpitJEV, type ComandoJEV } from "./CockpitJEV.js";
+import { AcoesCompostas } from "./AcoesCompostas.js";
+import type { BaseAcaoComposta, PedidoAcaoComposta, TipoAcaoComposta } from "../../contracts/api/acoesCompostas.js";
+import type { AcaoCompostaPreparada } from "../../contracts/api/execucaoAcaoComposta.js";
+import type { VisaoTimelineMulticamadas } from "../../contracts/api/timelineMulticamadas.js";
+import { TimelineMulticamadas } from "./TimelineMulticamadas.js";
 
 type DocumentoPreview = { documentId: string; documentVersion: number; draftId: string;
   titulo: string; texto: string; conteudoHash: string; propostasDoseReceita:PropostaDoseReceita[] };
@@ -33,6 +39,12 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, versaoClinica
   const [mensagem, setMensagem] = useState("");
   const [ocupado, setOcupado] = useState(false);
   const [versao, setVersao] = useState(0);
+  const [tipoAcao, setTipoAcao] = useState<TipoAcaoComposta | null>(null);
+  const [baseAcao, setBaseAcao] = useState<{ origem: ConsultaIntegrada; base: BaseAcaoComposta | null } | null>(null);
+  const [acaoPreparada, setAcaoPreparada] = useState<AcaoCompostaPreparada | null>(null);
+  const [acaoRevisada, setAcaoRevisada] = useState<AcaoCompostaPreparada | null>(null);
+  const [linhaTempo, setLinhaTempo] = useState<{ origem: ConsultaIntegrada; dados: VisaoTimelineMulticamadas | null } | null>(null);
+  const tentativaAcao = useRef<{ conteudo: string; chave: string } | null>(null);
   const [impressaoPendente, setImpressaoPendente] = useState<AcaoIntent | null>(null);
   const geracao = useRef(0);
   const geracaoLeitura = useRef(0);
@@ -47,6 +59,8 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, versaoClinica
     && consultaCarregada.contexto.encounterId === encounterId && consultaCarregada.contexto.tumorLotId === tumorLotId
     ? consultaCarregada : null;
   const visao = cargaAtual?.erro ? null : cargaAtual?.visao ?? null;
+  const visaoAtual = useRef(visao);
+  visaoAtual.current = visao;
   const visaoParaEdicao = consultaCarregada?.porta === porta && consultaCarregada.contexto.patientId === patientId
     && consultaCarregada.contexto.encounterId === encounterId && consultaCarregada.contexto.tumorLotId === tumorLotId
     ? consultaCarregada.visao : null;
@@ -55,6 +69,8 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, versaoClinica
     geracao.current++;
     emCurso.current = false; setOcupado(false); setFlash(false); setPedidoInvestigacao(null); setImpressaoPendente(null);
     tentativaPreparacao.current = null;
+    tentativaAcao.current = null; setTipoAcao(null); setBaseAcao(null); setAcaoPreparada(null); setAcaoRevisada(null);
+    setLinhaTempo(null);
     return () => { geracao.current++; };
   }, [porta, patientId, encounterId, tumorLotId]);
 
@@ -76,6 +92,55 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, versaoClinica
     }, () => { if (atual === geracaoLeitura.current) falhar("Não foi possível carregar a consulta persistida."); });
     return () => { geracaoLeitura.current++; };
   }, [porta, patientId, encounterId, tumorLotId, versao, versaoClinica]);
+
+  useEffect(() => {
+    setBaseAcao(null); setAcaoPreparada(null); setAcaoRevisada(null);
+    if (!visao || !porta.carregarBaseAcaoComposta) return;
+    const origem = visao, abort = new AbortController();
+    let ativo = true;
+    void porta.carregarBaseAcaoComposta({ patientId, encounterId, tumorLotId }, abort.signal).then(r => {
+      if (ativo) setBaseAcao({ origem, base: r.base });
+    }, () => { if (ativo) setBaseAcao({ origem, base: null }); });
+    return () => { ativo = false; abort.abort(); };
+  }, [visao, porta, patientId, encounterId, tumorLotId]);
+  const baseAcaoAtual = baseAcao?.origem === visao ? baseAcao.base : null;
+
+  useEffect(() => {
+    setLinhaTempo(null);
+    if (!visao || !porta.carregarTimelineMulticamadas) return;
+    const origem = visao, abort = new AbortController();
+    let ativo = true;
+    void porta.carregarTimelineMulticamadas({ patientId, encounterId, tumorLotId }, abort.signal).then(dados => {
+      if (ativo) setLinhaTempo({ origem, dados });
+    }, () => { if (ativo) setLinhaTempo({ origem, dados: null }); });
+    return () => { ativo = false; abort.abort(); };
+  }, [visao, porta, patientId, encounterId, tumorLotId]);
+
+  function comandoJev(comando: ComandoJEV) {
+    if (ocupado) return;
+    if (comando === "ABRIR_APAC") { aoAbrirApac?.(); return; }
+    if (comando === "VER_HISTORICO") {
+      setVersao(v => v + 1);
+      document.getElementById("consulta-historico")?.scrollIntoView?.({ block: "start" });
+      return;
+    }
+    if (comando === "REVISAR_DOCUMENTOS") { setPreview(null); setPedidoInvestigacao(null); setFlash(true); return; }
+    setTipoAcao(comando); setAcaoPreparada(null); setAcaoRevisada(null);
+  }
+
+  async function prepararComposta(pedido: PedidoAcaoComposta) {
+    if (!baseAcaoAtual || !porta.prepararAcaoComposta) throw new Error("Base do ciclo indisponível.");
+    const atual = geracao.current, origem = visao, baseHash = baseAcaoAtual.baseHash;
+    const conteudo = JSON.stringify([patientId, encounterId, tumorLotId, baseHash, pedido]);
+    if (tentativaAcao.current?.conteudo !== conteudo) tentativaAcao.current = { conteudo, chave: crypto.randomUUID() };
+    const resposta = await porta.prepararAcaoComposta({ contexto: { patientId, encounterId, tumorLotId },
+      expectedBaseHash: baseHash, pedido, idempotencyKey: tentativaAcao.current.chave });
+    if (atual !== geracao.current || origem !== visaoAtual.current
+      || versaoAtual.current.versao !== versao || versaoAtual.current.versaoClinica !== versaoClinica)
+      throw new Error("O contexto mudou. Reabra a proposta.");
+    setAcaoPreparada(resposta); setAcaoRevisada(null);
+    return resposta.resultado;
+  }
 
   async function executar(acao: (atual: number) => Promise<void>) {
     if (emCurso.current) return;
@@ -237,36 +302,44 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, versaoClinica
   }
   return <section aria-label="Consulta persistida" className="consulta-persistida">
     {!visaoPronta ? <p aria-live="polite">{cargaAtual?.erro || "Carregando consulta persistida…"}</p> : <>
-    <h2>{visaoPronta.cabecalho.paciente.nome} · consulta local</h2>
-    <p>{visaoPronta.hoje} · Dados pendentes: {visaoPronta.cabecalho.pendentes}</p>
     {visaoPronta.alertas.filter((a) => a.presentationOverride).map((a) =>
       <aside role="alert" data-banner="e1" key={a.alertaId}><strong>Emergência E1</strong><p>{a.texto}</p></aside>)}
     {mensagem ? <p aria-live="polite">{mensagem}</p> : null}
-    <InvestigacaoMinima porta={porta} contexto={contexto} {...(visaoPronta.retrato?{revisaoEsperada:visaoPronta.retrato.revisao}:{})}
-      aoPrepararPedido={(p,revisao)=>{setPedidoInvestigacao(p);setPedidoRevisao(revisao);setPreview(null);setFlash(true);}} />
-    <DutosClinica {...(visaoPronta.dutos?{dados:visaoPronta.dutos}:{})} />
-    <div id="consulta-resumo" className="consulta-secao" tabIndex={-1}>
+    <CockpitJEV visao={visaoPronta} ocupado={ocupado} aoComando={comandoJev}
+      mudancasExtra={<div id="consulta-resumo" className="consulta-secao" tabIndex={-1}>
     <VisaoIntegradaMinima {...(visaoPronta.retrato ? {retrato:visaoPronta.retrato}: {})}
       {...(visaoPronta.visaoIntegrada ? {visao:visaoPronta.visaoIntegrada}: {})} />
     <h3>Evolução revisada</h3>
     <pre style={{ whiteSpace: "pre-wrap" }}>{visaoPronta.resumoEvolucao ?? "Evolução PENDENTE de revisão."}</pre>
     {visaoPronta.retratoTransversal ? <CartaoTransversal entrada={visaoPronta.retratoTransversal} />
       : <p>Cartão transversal PENDENTE de fonte estruturada.</p>}
-    </div>
+    </div>}
+      conduta={<>
     <div id="consulta-conduta" className="consulta-secao consulta-acoes" tabIndex={-1}>
     <button type="button" disabled={ocupado} onClick={() => { setPreview(null); setPedidoInvestigacao(null); setFlash(true); }}>Consulta Flash</button>
     <button type="button" disabled={ocupado} onClick={() => setVersao((v) => v + 1)}>Reabrir histórico</button>
     </div>
-    <InstrumentosClinicos key={`${patientId}:${encounterId}:${tumorLotId ?? ""}`} ocupado={ocupado}
-      aoAvaliar={async (pedido) => {
-        if (!porta.avaliarInstrumento) throw new Error("Cálculo autenticado indisponível nesta tela.");
-        return porta.avaliarInstrumento({ patientId, encounterId, tumorLotId }, pedido);
-      }} />
+    <div className="consulta-acoes" aria-label="Preparar conduta">
+      {([["MANTER_CICLO", "Manter ciclo"], ["REDUZIR_DOSE", "Reduzir dose"],
+        ["ADIAR_CICLO", "Adiar ciclo"], ["TROCAR_PROTOCOLO", "Trocar protocolo"]] as const)
+        .map(([tipo, rotulo]) => <button key={tipo} type="button" disabled={ocupado} onClick={() => comandoJev(tipo)}>{rotulo}</button>)}
+    </div>
+    {tipoAcao ? <AcoesCompostas key={`${patientId}:${encounterId}:${tumorLotId ?? ""}:${tipoAcao}`}
+      base={baseAcaoAtual} tipoInicial={tipoAcao} ocupado={ocupado} aoPreparar={prepararComposta}
+      aoUsar={resultado => {
+        if (resultado !== acaoPreparada?.resultado || resultado.baseHash !== baseAcaoAtual?.baseHash) return;
+        setAcaoRevisada(acaoPreparada);
+      }} /> : null}
+    <InvestigacaoMinima porta={porta} contexto={contexto} {...(visaoPronta.retrato?{revisaoEsperada:visaoPronta.retrato.revisao}:{})}
+      aoPrepararPedido={(p,revisao)=>{setPedidoInvestigacao(p);setPedidoRevisao(revisao);setPreview(null);setFlash(true);}} />
+    <DutosClinica {...(visaoPronta.dutos?{dados:visaoPronta.dutos}:{})} />
     </>}
-    {flash && propsFlash ? <div hidden={!visaoPronta}>
-      <ConsultaFlash key={`${patientId}:${encounterId}:${tumorLotId ?? ""}:${pedidoInvestigacao?.exameCodigo??"manual"}:${pedidoInvestigacao?.contexto??""}:${pedidoRevisao}`} {...propsFlash} />
-    </div> : null}
-    {visaoPronta ? <>
+      saida={<>
+    {acaoRevisada && acaoRevisada.resultado.baseHash === baseAcaoAtual?.baseHash ? <article aria-label="Plano de ação revisado">
+      <h3>{acaoRevisada.documentoPlano.titulo}</h3>
+      <pre style={{ whiteSpace: "pre-wrap" }}>{acaoRevisada.documentoPlano.texto}</pre>
+      <p role="status">Plano salvo para revisão da prescrição.</p>
+    </article> : null}
     {preview ? <section aria-label="Conteúdo para assinatura">
       <h3>Confira os documentos desta consulta</h3>
       {preview.documentos.map((doc) => <article key={doc.documentId}>
@@ -277,10 +350,26 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, versaoClinica
       {preview.documentos.some(d=>documentoReceitaDosePendente({tipoDocumento:'FLASH_CONJUNTO_IMPRESSAO',texto:d.texto}))?<p role="status">Receita com dose pendente: permanece em rascunho. Volte à edição para completar a dose.</p>:null}
       <p>Ao confirmar, o médico valida as doses, a posologia e o conteúdo exibidos.</p>
       <button type="button" disabled={ocupado||preview.documentos.some(d=>documentoReceitaDosePendente({tipoDocumento:'FLASH_CONJUNTO_IMPRESSAO',texto:d.texto}))} onClick={assinar}>Confirmar e assinar conteúdo exibido</button>
-    </section> : null}
+    </section> : <p>Prepare os documentos na Consulta Flash para conferir e assinar.</p>}
     {impressaoPendente ? <p>
       <button type="button" disabled={ocupado} onClick={repetirImpressao}>Solicitar impressão novamente</button>
     </p> : null}
+    </>}
+      evidenciasExtra={<InstrumentosClinicos key={`${patientId}:${encounterId}:${tumorLotId ?? ""}`} ocupado={ocupado}
+        aoAvaliar={async (pedido) => {
+          if (!porta.avaliarInstrumento) throw new Error("Cálculo autenticado indisponível nesta tela.");
+          return porta.avaliarInstrumento({ patientId, encounterId, tumorLotId }, pedido);
+        }} />}
+    />
+    {porta.carregarTimelineMulticamadas ? linhaTempo?.origem === visaoPronta
+      ? linhaTempo.dados ? <TimelineMulticamadas dados={linhaTempo.dados} />
+        : <p role="status">Não foi possível carregar a timeline deste contexto.</p>
+      : <p role="status">Carregando timeline longitudinal…</p> : null}
+    </>}
+    {flash && propsFlash ? <div hidden={!visaoPronta}>
+      <ConsultaFlash key={`${patientId}:${encounterId}:${tumorLotId ?? ""}:${pedidoInvestigacao?.exameCodigo??"manual"}:${pedidoInvestigacao?.contexto??""}:${pedidoRevisao}`} {...propsFlash} />
+    </div> : null}
+    {visaoPronta ? <>
     <section id="consulta-historico" className="consulta-secao" tabIndex={-1} aria-label="Histórico de documentos assinados"><h3>Histórico de documentos assinados</h3>
       {(visaoPronta.historicoDocumentos ?? []).length === 0 ? <p>Nenhum documento assinado neste histórico.</p>
         : visaoPronta.historicoDocumentos!.map((doc) => <article key={doc.eventId}>

@@ -1,4 +1,7 @@
 import type { PropostaDoseReceita } from './propostaDoseReceita.js';
+import type { ContextoAcaoComposta } from "./acoesCompostas.js";
+import type { AcaoCompostaPreparada, BaseAcaoCompostaResposta, PrepararAcaoCompostaPedido } from "./execucaoAcaoComposta.js";
+import type { VisaoTimelineMulticamadas } from "./timelineMulticamadas.js";
 import type {PrepararRespostaCanal,ConfirmarRespostaCanal} from './respostaCanal.js';
 import type {RascunhoRespostaCanal} from '../f2/caixaRespostaCanal.js';
 import type { InvestigacaoConsultaVisao } from './investigacao.js';
@@ -321,6 +324,9 @@ export interface ChatSetorVisao {
 }
 
 export interface PortaConsulta {
+  carregarTimelineMulticamadas?(contexto: ContextoAcaoComposta, signal?: AbortSignal): Promise<VisaoTimelineMulticamadas>;
+  carregarBaseAcaoComposta?(contexto: ContextoAcaoComposta, signal?: AbortSignal): Promise<BaseAcaoCompostaResposta>;
+  prepararAcaoComposta?(pedido: PrepararAcaoCompostaPedido, signal?: AbortSignal): Promise<AcaoCompostaPreparada>;
   ditado?(pedido:import('../fase2/ditado.js').DitadoPedido,signal?:AbortSignal):Promise<import('../fase2/ditado.js').DitadoResposta>;
   lotesPaciente?(patientId:string,signal?:AbortSignal):Promise<LotesPacienteResposta>;
   /** Biblioteca pública autenticada com a mesma sessão desta porta, quando suportada pelo servidor. */

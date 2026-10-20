@@ -1,4 +1,7 @@
 import { nomeMedicamento } from './propostasDoseReceita.js';
+import { operarAcoesCompostas } from "./acoesCompostas.js";
+import { lerTimelineMulticamadas } from "./timelineMulticamadas.js";
+import { ContextoAcaoComposta } from "../contracts/api/acoesCompostas.js";
 import { operarContingenciaSalao } from './salaoContingencia.js';
 import {rotearWebhookCanal} from './canalWebhookHttp.js';
 import {type OperacaoCanal,revisaoContextoCanal,lerMensagensOperacionaisCanal,vinculoAtualCanal,cadastrosCanal,contatoRevogadoCanal} from './canalOperacao.js';
@@ -265,7 +268,7 @@ function confirmarBloco(deps: ServidorDeps, token: string, input: Confirmar): { 
     const kind = draft?.payload && typeof draft.payload === "object" && "kind" in draft.payload
       ? draft.payload.kind : null;
     return kind === "EXTRACAO_RASCUNHO" || kind === "PRESCRICAO_RASCUNHO" || kind === "EVOLUCAO_RASCUNHO"
-      || kind === "FLASH_RASCUNHO" || kind === "FLASH_APAC_RASCUNHO";
+      || kind === "FLASH_RASCUNHO" || kind === "FLASH_APAC_RASCUNHO" || kind === "ACAO_COMPOSTA_RASCUNHO";
   })) return { status: 409, body: { codigo: "DRAFT_AINDA_RASCUNHO" } };
   for(const draft of drafts){
     const corpo=draft!.payload as {propostasDoseReceita?:{id:string;hashProposta:string;fonte:{hash:string}}[]};
@@ -406,6 +409,9 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
         : ["/salao/revisar-relato-canal","/farmacia/enviar","/farmacia/conferir","/salao/registrar-administracao","/apac/validar-emissao","/chat/aceitar-decisao","/tarefas/receber","/tarefas/concluir"].includes(req.url??"") ? req.url!
         : req.url === "/consulta/upload" ? "upload"
         : req.url === "/consulta/prescricao/propor" ? "proporPrescricao"
+        : req.url === "/consulta/acoes-compostas/base" ? "baseAcaoComposta"
+        : req.url === "/consulta/acoes-compostas/preparar" ? "prepararAcaoComposta"
+        : req.url === "/consulta/timeline-multicamadas" ? "timelineMulticamadas"
         : req.url === "/consulta/extrair" ? "extrair"
           : req.url === "/consulta/prescricao/rascunho" ? "rascunhoPrescricao"
           : req.url === "/consulta/rascunho" ? "rascunho"
@@ -466,6 +472,17 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
     if (rota === "acao" && !contentTypeJson(req)) return reply(415, "CONTENT_TYPE_INVALIDO");
     // Conteúdo da biblioteca continua limitado a 8 MB após decodificação; envelope cobre escapes JSON/base64.
     const raw = await body(req,rota === "upload" ? 11_300_000 : rota === "/biblioteca/importar" ? 24_000_000 : 1_000_000);
+    if (rota === "timelineMulticamadas") {
+      const p = ContextoAcaoComposta.safeParse(raw), c = deps.sessoes.consultaSelecionada(token);
+      if (!p.success) return reply(400, "PAYLOAD_INVALIDO");
+      if (!c || c.patientId !== p.data.patientId || c.encounterId !== p.data.encounterId
+        || (c.tumorLotId ?? null) !== p.data.tumorLotId) return reply(409, "CONTEXTO_CONSULTA_ALTERADO");
+      return reply(200, "TIMELINE_CARREGADA", lerTimelineMulticamadas(deps.db, p.data, deps.agora()));
+    }
+    if (rota === "baseAcaoComposta" || rota === "prepararAcaoComposta") {
+      const r = operarAcoesCompostas(deps, token, rota === "baseAcaoComposta" ? "base" : "preparar", raw);
+      return reply(r.status, rota, r.body);
+    }
     if (rota === "gerarContingenciaSalao" || rota === "historicoContingenciaSalao") {
       const r = operarContingenciaSalao(deps, token, rota, raw);
       return reply(r.status, "codigo" in r.body ? String(r.body.codigo) : "CONTINGENCIA_SALAO", r.body);

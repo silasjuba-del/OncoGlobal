@@ -1,4 +1,6 @@
 import { PropostasDoseReceitaResposta } from './propostaDoseReceita.js';
+import { AcaoCompostaPreparada, BaseAcaoCompostaResposta } from "./execucaoAcaoComposta.js";
+import { TimelineMulticamadasResposta } from "./timelineMulticamadas.js";
 import {RespostaCanalPreparada,RespostaCanalConfirmada} from './respostaCanal.js';
 import { z } from "zod";
 import {DitadoResposta} from '../fase2/ditado.js';
@@ -30,6 +32,9 @@ const Extracao = z.object({ draftId: Id, revision: Count, linkedPatientId: Id.nu
 
 /** Mesmos contratos no servidor e no cliente. Valida sem descartar campos adicionais da resposta legada. */
 export const SaidasHttp: Readonly<Record<string, z.ZodType>> = {
+  baseAcaoComposta: BaseAcaoCompostaResposta,
+  prepararAcaoComposta: AcaoCompostaPreparada,
+  timelineMulticamadas: TimelineMulticamadasResposta,
   gerarContingenciaSalao: ContingenciaSalaoResposta, historicoContingenciaSalao: HistoricoContingenciaSalaoResposta,
   prepararRespostaCanal:RespostaCanalPreparada,confirmarRespostaCanal:RespostaCanalConfirmada,
   ditado:DitadoResposta,

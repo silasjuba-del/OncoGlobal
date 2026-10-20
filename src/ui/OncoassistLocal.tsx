@@ -254,6 +254,8 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp }: {
           </nav>
         </section>
         <details><summary>Cliques por etapa nesta consulta</summary><ul>{Object.entries(metricas).map(([etapa,cliques])=><li key={etapa}>{etapa}: {cliques}</li>)}</ul></details>
+        <ConsultaPersistida versaoClinica={versaoConsulta} porta={porta} contexto={contexto}
+          aoAbrirApac={() => navegarParaTela("apac")} />
         <div id="consulta-fase2" className="consulta-secao" tabIndex={-1}>
           <RevisaoClinica porta={porta} contexto={contexto} versaoClinica={versaoConsulta} aoRegistrar={()=>setVersaoConsulta(v=>v+1)}/>
         </div>
@@ -282,8 +284,6 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp }: {
         <div id="consulta-sintese" className="consulta-secao" tabIndex={-1}>
         <SinteseProposta key={`sintese:${versaoConsulta}`} porta={porta} contexto={contexto}/>
         </div>
-        <ConsultaPersistida versaoClinica={versaoConsulta} porta={porta} contexto={contexto}
-          aoAbrirApac={() => navegarParaTela("apac")} />
       </div> : null}
       {tela === "salao" ? <TelaSalao porta={porta} /> : null}
       {tela === "apac" ? <TelaApacLote porta={porta} chaves={chaves} /> : null}

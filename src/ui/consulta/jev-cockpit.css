@@ -1,0 +1,144 @@
+.jev-cockpit {
+  --jev-bg: #F4F7FA;
+  --jev-surface: #FFFFFF;
+  --jev-ink: #17334A;
+  --jev-action: #006D77;
+  --jev-pending: #AD6A16;
+  --jev-critical: #B42335;
+  --jev-line: #D9E3EA;
+  color: var(--jev-ink);
+  background: var(--jev-bg);
+  font-family: "Segoe UI", system-ui, sans-serif;
+  line-height: 1.5;
+  min-width: 0;
+}
+
+.jev-cockpit :is(button, input, select) { font: inherit; }
+.jev-cockpit :is(button, input, select) { box-sizing: border-box; max-width: 100%; }
+.jev-cockpit :focus-visible { outline: 3px solid var(--jev-action); outline-offset: 3px; }
+.jev-cockpit :is(h1, h2, h3, p) { margin-block-start: 0; }
+.jev-cockpit h1, .jev-cockpit h2 { font-family: "Bahnschrift", "Segoe UI Variable", "Segoe UI", sans-serif; }
+
+.jev-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: grid;
+  gap: .75rem;
+  padding: .85rem 1rem .75rem;
+  background: var(--jev-bg);
+  border: 1px solid var(--jev-line);
+  border-left: 4px solid var(--jev-action);
+  border-radius: 0 0 .8rem .8rem;
+  box-shadow: 0 5px 16px rgb(23 51 74 / 7%);
+}
+.jev-header__identity { display: flex; justify-content: space-between; align-items: center; gap: 1rem; min-width: 0; }
+.jev-header__identity > div:first-child { min-width: 0; }
+.jev-header h1 { margin: 0; font-size: clamp(1.1rem, 1.5vw, 1.4rem); line-height: 1.2; overflow-wrap: anywhere; }
+.jev-header__context { margin: .25rem 0 0; font-size: .82rem; color: #415A6C; overflow-wrap: anywhere; }
+.jev-header code, .jev-source code { font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.jev-header__tumor { display: grid; gap: .1rem; text-align: right; min-width: 8rem; }
+.jev-header__tumor span, .jev-header__tumor small { color: #415A6C; font-size: .76rem; }
+.jev-header__tumor strong { font-size: .98rem; overflow-wrap: anywhere; }
+.jev-eyebrow { margin: 0 0 .2rem; color: #4B6578; font-size: .67rem; font-weight: 700; letter-spacing: .11em; }
+.jev-header__metrics { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: .45rem; }
+.jev-metric { display: grid; align-content: start; min-width: 0; gap: .08rem; padding: .4rem .55rem; background: var(--jev-surface); border: 1px solid var(--jev-line); border-radius: .55rem; }
+.jev-metric__label { color: #536B7A; font-size: .7rem; }
+.jev-metric__value { font-size: .82rem; overflow-wrap: anywhere; font-variant-numeric: tabular-nums; }
+.jev-metric--pendente { border-left: 3px solid var(--jev-pending); }
+.jev-metric--conflito { border-left: 3px solid var(--jev-critical); }
+.jev-metric--alerta { border-left: 3px solid var(--jev-critical); }
+.jev-metric--presente { border-left: 3px solid var(--jev-action); }
+.jev-metric__fonte { margin-top: .12rem; font-size: .68rem; }
+.jev-metric__fonte summary { color: var(--jev-action); cursor: pointer; width: fit-content; }
+.jev-source { display: grid; gap: .15rem; min-width: 0; padding: .45rem; background: #F7FAFC; border-radius: .4rem; font-size: .7rem; overflow-wrap: anywhere; }
+
+.jev-cycle-ruler { position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .7rem; padding-top: .15rem; }
+.jev-cycle-ruler::before { position: absolute; content: ""; height: 2px; left: 1rem; right: 1rem; top: .68rem; background: #C8D9DF; }
+.jev-cycle-ruler__step { position: relative; display: grid; gap: .05rem; min-width: 0; padding: .65rem .55rem .35rem; background: var(--jev-bg); }
+.jev-cycle-ruler__step::before { position: absolute; content: ""; top: .12rem; left: .58rem; width: .48rem; height: .48rem; border-radius: 50%; background: var(--jev-action); border: 2px solid var(--jev-bg); }
+.jev-cycle-ruler__step[data-track="administrado"]::before { background: #415A6C; }
+.jev-cycle-ruler__step span { color: #536B7A; font-size: .7rem; font-weight: 700; }
+.jev-cycle-ruler__step strong { overflow-wrap: anywhere; font-size: .8rem; font-variant-numeric: tabular-nums; }
+
+.jev-cockpit__toolbar { display: flex; justify-content: flex-end; padding: .7rem 0; }
+.jev-commands__trigger { display: inline-flex; align-items: center; gap: .7rem; padding: .5rem .85rem; color: #fff; background: var(--jev-action); border: 1px solid var(--jev-action); border-radius: .55rem; font-weight: 650; cursor: pointer; }
+.jev-commands__trigger kbd { padding: .06rem .35rem; color: #E2F2F3; background: rgb(0 0 0 / 16%); border-radius: .25rem; font-size: .73rem; }
+.jev-commands__trigger:disabled { opacity: .58; cursor: not-allowed; }
+
+.jev-cockpit__layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(17rem, 22rem); align-items: start; gap: .9rem; min-width: 0; }
+.jev-cockpit__layout--evidencias-fechadas { grid-template-columns: minmax(0, 1fr) 3.15rem; }
+.jev-cockpit__cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: start; gap: .75rem; min-width: 0; }
+.jev-card, .jev-evidence { min-width: 0; padding: .9rem; background: var(--jev-surface); border: 1px solid var(--jev-line); border-radius: .7rem; box-shadow: 0 2px 8px rgb(23 51 74 / 4%); }
+.jev-card { border-top: 3px solid var(--jev-action); }
+.jev-card--mudancas { border-top-color: #48758A; }
+.jev-card--conduta { border-top-color: var(--jev-action); }
+.jev-card--saida { border-top-color: #647D3E; }
+.jev-card__header { display: flex; align-items: flex-start; justify-content: space-between; gap: .5rem; margin-bottom: .7rem; }
+.jev-card__header h2, .jev-evidence h2 { margin: 0; font-size: 1.03rem; line-height: 1.25; }
+.jev-card__contexto { color: #536B7A; font-size: .72rem; text-align: right; }
+.jev-card__extra { margin-top: .7rem; padding-top: .7rem; border-top: 1px solid var(--jev-line); }
+.jev-empty { padding: .65rem; color: #536B7A; background: #F7FAFC; border-left: 3px solid var(--jev-pending); border-radius: .35rem; font-size: .85rem; }
+.jev-evidence { position: sticky; top: 20rem; max-height: calc(100vh - 21rem); overflow: auto; }
+.jev-evidence__header h2 { margin: 0; font-size: 1.05rem; }
+.jev-evidence__header { display: flex; align-items: flex-start; justify-content: space-between; gap: .35rem; }
+.jev-evidence__toggle { min-height: 2rem; padding: .25rem .45rem; color: var(--jev-action); background: #fff; border: 1px solid var(--jev-line); border-radius: .4rem; cursor: pointer; font-size: .72rem; }
+.jev-evidence--collapsed { display: grid; place-items: center; min-height: 9rem; padding: .3rem; overflow: hidden; }
+.jev-evidence--collapsed .jev-evidence__header { height: 100%; align-items: center; justify-content: center; }
+.jev-evidence--collapsed .jev-evidence__toggle { min-height: 7rem; writing-mode: vertical-rl; transform: rotate(180deg); white-space: nowrap; }
+.jev-evidence__revision { margin: .4rem 0 .75rem; color: #536B7A; font-size: .75rem; overflow-wrap: anywhere; }
+.jev-evidence__integrada, .jev-evidence__claims { border-top: 1px solid var(--jev-line); padding-top: .55rem; margin-top: .55rem; }
+.jev-evidence :is(summary, button) { cursor: pointer; }
+.jev-evidence__pending { margin: .55rem 0; color: var(--jev-pending); font-size: .82rem; }
+.jev-evidence__claims ul { list-style: none; margin: .45rem 0 0; padding: 0; }
+.jev-evidence__claim { display: grid; gap: .25rem; padding: .55rem 0; border-bottom: 1px solid #E7EDF1; font-size: .78rem; overflow-wrap: anywhere; }
+.jev-evidence__claim [data-state="CONFLITO"], .jev-evidence__critical { color: var(--jev-critical); }
+.jev-evidence__claim small { color: #536B7A; }
+.jev-evidence__extra { margin-top: .8rem; padding-top: .7rem; border-top: 1px solid var(--jev-line); }
+.jev-evidence :is(code, pre) { font-size: .7rem; overflow-wrap: anywhere; white-space: pre-wrap; }
+
+.jev-command-overlay { position: fixed; z-index: 1000; inset: 0; display: grid; place-items: start center; padding: min(14vh, 7rem) 1rem 1rem; background: rgb(13 32 48 / 50%); }
+.jev-command-sheet { width: min(36rem, calc(100vw - 2rem)); max-height: min(72vh, 42rem); overflow: auto; box-sizing: border-box; padding: 1rem; color: var(--jev-ink); background: var(--jev-surface); border: 1px solid #C9D7E0; border-radius: .8rem; box-shadow: 0 20px 60px rgb(13 32 48 / 28%); }
+.jev-command-sheet__header { display: flex; align-items: flex-start; justify-content: space-between; gap: .75rem; }
+.jev-command-sheet__header h2 { margin: 0; font-size: 1.15rem; }
+.jev-command-sheet > p { color: #4B6578; font-size: .86rem; }
+.jev-command-search { display: grid; gap: .35rem; margin: .8rem 0; font-weight: 650; }
+.jev-command-search input { width: 100%; min-height: 2.75rem; padding: .6rem .75rem; border: 1px solid #9BAFBD; border-radius: .5rem; background: #fff; color: var(--jev-ink); font-size: 1rem; }
+.jev-command-list { display: grid; gap: .35rem; list-style: none; margin: 0; padding: 0; }
+.jev-command-option { display: grid; gap: .12rem; width: 100%; padding: .6rem .7rem; text-align: left; color: var(--jev-ink); background: #fff; border: 1px solid var(--jev-line); border-radius: .5rem; cursor: pointer; }
+.jev-command-option span { color: #536B7A; font-size: .82rem; }
+.jev-command-option[aria-selected="true"], .jev-command-option:hover { border-color: var(--jev-action); background: #ECF6F6; }
+.jev-command-empty { padding: .75rem; color: var(--jev-pending); background: #FFF8EC; border-radius: .45rem; }
+
+@media (max-width: 1120px) {
+  .jev-cockpit__layout { grid-template-columns: minmax(0, 1fr); }
+  .jev-cockpit__layout--evidencias-fechadas { grid-template-columns: minmax(0, 1fr); }
+  .jev-cockpit__cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .jev-evidence { position: static; max-height: none; }
+  .jev-evidence--collapsed { justify-self: end; min-width: 2.8rem; width: 2.8rem; min-height: 2.8rem; }
+  .jev-evidence--collapsed .jev-evidence__header { height: auto; }
+  .jev-evidence--collapsed .jev-evidence__toggle { min-height: 2.2rem; writing-mode: horizontal-tb; transform: none; }
+  .jev-header__metrics { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 720px) {
+  .jev-header { padding: .65rem; gap: .5rem; }
+  .jev-header__identity { align-items: flex-start; }
+  .jev-header__tumor { min-width: 6.4rem; max-width: 42%; }
+  .jev-header__metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .jev-cycle-ruler { grid-template-columns: minmax(0, 1fr); gap: .15rem; }
+  .jev-cycle-ruler::before { width: 2px; height: auto; top: .55rem; bottom: .55rem; left: .8rem; right: auto; }
+  .jev-cycle-ruler__step { padding: .35rem .4rem .35rem 1.55rem; }
+  .jev-cycle-ruler__step::before { top: .62rem; left: .62rem; }
+  .jev-cockpit__cards { grid-template-columns: minmax(0, 1fr); }
+  .jev-cockpit__toolbar { justify-content: stretch; }
+  .jev-commands__trigger { justify-content: center; width: 100%; min-height: 2.75rem; }
+  .jev-command-overlay { place-items: center; padding: .75rem; }
+  .jev-command-sheet { width: min(36rem, calc(100vw - 1.5rem)); max-height: calc(100dvh - 1.5rem); padding: .85rem; }
+}
+@media (max-width: 390px) {
+  .jev-header__metrics { grid-template-columns: minmax(0, 1fr); }
+  .jev-header__context { font-size: .74rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .jev-cockpit *, .jev-cockpit *::before, .jev-cockpit *::after { scroll-behavior: auto !important; transition: none !important; animation: none !important; }
+}
