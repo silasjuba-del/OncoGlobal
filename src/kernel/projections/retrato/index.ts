@@ -4,6 +4,7 @@ import { validarPayloadEvento } from "../../../contracts/envelope.js";
 import { Fonte } from "../../../contracts/base.js";
 import { ClinicalEvent } from "../../../contracts/operacao.js";
 import { Retrato, type FatoRetrato } from "../../../contracts/f1/retrato.js";
+import { substituicoesValidas } from "../../ledger/supersessao.js";
 
 export interface ContextoRetrato {
   patientId: string; encounterId: string; tumorLotId: string | null; agora: string;
@@ -255,14 +256,16 @@ export function projetarRetrato(eventos: readonly ClinicalEvent[], contexto: Con
     } catch { diagnostico(e, "CONTEUDO_NAO_CANONICO"); }
   }
   const substituidos = new Map<string, ClinicalEvent>();
+  // Apply the shared causal rule only after this view's material/horizon filters.
+  const arestasValidas = substituicoesValidas(confirmados.filter(e => materiais.has(e.eventId)));
   for (const e of confirmados) {
     if (!e.supersedesEventId || !materiais.has(e.eventId)) continue;
     const anterior = porId.get(e.supersedesEventId), atual = materiais.get(e.eventId)!;
     const antigo = anterior ? materiais.get(anterior.eventId) : undefined;
     if (!anterior) { diagnostico(e, "SUPERSESSION_ALVO_AUSENTE"); continue; }
-    if (!antigo || anterior.patientId !== e.patientId || anterior.tipo !== e.tipo || antigo.campo !== atual.campo
-      || antigo.escopo !== atual.escopo || (atual.escopo === "TUMOR" && anterior.tumorLotId !== e.tumorLotId)
-      || ordem(anterior, e) >= 0) { diagnostico(e, "SUPERSESSION_CONTEXTO_INVALIDO"); continue; }
+    if (!antigo || antigo.escopo !== atual.escopo || !arestasValidas.has(e.eventId)) {
+      diagnostico(e, "SUPERSESSION_CONTEXTO_INVALIDO"); continue;
+    }
     substituidos.set(anterior.eventId, e);
   }
   const fatos = [...materiais.values()].filter(f => !substituidos.has(f.ref.eventId))

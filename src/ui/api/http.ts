@@ -1,4 +1,6 @@
 import { PropostasDoseReceitaResposta } from '../../contracts/api/propostaDoseReceita.js';
+import { AcaoCompostaPreparada, BaseAcaoCompostaResposta } from "../../contracts/api/execucaoAcaoComposta.js";
+import { TimelineMulticamadasResposta } from "../../contracts/api/timelineMulticamadas.js";
 import { GerarContingenciaSalao, ContingenciaSalaoResposta, HistoricoContingenciaSalaoResposta } from '../../contracts/api/salaoContingencia.js';
 import {RespostaCanalPreparada,RespostaCanalConfirmada} from '../../contracts/api/respostaCanal.js';
 import { InvestigacaoConsultaVisao } from '../../contracts/api/investigacao.js';
@@ -13,6 +15,9 @@ import { z } from "zod";
 import {DitadoResposta} from '../../contracts/fase2/ditado.js';
 import { ResultadoInstrumentoSchema } from "../../contracts/f0c/resultadoInstrumento.js";
 import { criarApiBiblioteca } from "./biblioteca.js";
+import { BasePrescricaoExecutavelResposta, PrescricaoExecutavelConfirmada,
+  PrescricaoExecutavelPreparada } from "../../contracts/api/operacaoPrescricaoExecutavel.js";
+import { EstatisticaServicoResposta, type PeriodoClinicoEstatisticaServico } from "../../contracts/api/estatisticaServico.js";
 import {
   ErroPorta,
   type AcaoIntent,
@@ -83,6 +88,68 @@ export function criarPortaHttp(opcoes: OpcoesHttp): PortaConsulta {
   }
 
   return {
+    async carregarTimelineMulticamadas(contexto, signal) {
+      const { status, json } = await enviar("/consulta/timeline-multicamadas", contexto, true, signal);
+      if (status !== 200) throw new ErroPorta(codigoDe(json, "TIMELINE_INDISPONIVEL"));
+      const p = TimelineMulticamadasResposta.safeParse(json);
+      if (!p.success || p.data.contexto.patientId !== contexto.patientId || p.data.contexto.encounterId !== contexto.encounterId
+        || p.data.contexto.tumorLotId !== contexto.tumorLotId
+        || p.data.eventos.some(e => e.patientId !== contexto.patientId)) throw new ErroPorta("PAYLOAD_INVALIDO");
+      return p.data;
+    },
+    async carregarBaseAcaoComposta(contexto, signal) {
+      const { status, json } = await enviar("/consulta/acoes-compostas/base", contexto, true, signal);
+      if (status !== 200) throw new ErroPorta(codigoDe(json, "BASE_ACAO_INDISPONIVEL"));
+      const p = BaseAcaoCompostaResposta.safeParse(json);
+      if (!p.success || p.data.base && (p.data.base.contexto.patientId !== contexto.patientId
+        || p.data.base.contexto.encounterId !== contexto.encounterId
+        || p.data.base.contexto.tumorLotId !== contexto.tumorLotId)) throw new ErroPorta("PAYLOAD_INVALIDO");
+      return p.data;
+    },
+    async lerBasePrescricaoExecutavel(contexto, signal) {
+      const { status, json } = await enviar("/consulta/prescricao-executavel/base", contexto, true, signal);
+      if (status !== 200) throw new ErroPorta(codigoDe(json, "BASE_PRESCRICAO_EXECUTAVEL_INDISPONIVEL"));
+      const result = BasePrescricaoExecutavelResposta.safeParse(json);
+      if (!result.success || result.data.contexto.patientId !== contexto.patientId
+        || result.data.contexto.encounterId !== contexto.encounterId
+        || result.data.contexto.tumorLotId !== contexto.tumorLotId) throw new ErroPorta("PAYLOAD_INVALIDO");
+      return result.data;
+    },
+    async prepararPrescricaoExecutavel(pedido, signal) {
+      const { status, json } = await enviar("/consulta/prescricao-executavel/preparar", pedido, true, signal);
+      if (status !== 200) throw new ErroPorta(codigoDe(json, "PRESCRICAO_EXECUTAVEL_PENDENTE"));
+      const result = PrescricaoExecutavelPreparada.safeParse(json);
+      const c = result.success ? result.data.conteudo.contexto : null;
+      if (!result.success || result.data.baseHash !== pedido.expectedBaseHash || !c
+        || c.patientId !== pedido.contexto.patientId || c.encounterId !== pedido.contexto.encounterId
+        || c.tumorLotId !== pedido.contexto.tumorLotId) throw new ErroPorta("PAYLOAD_INVALIDO");
+      return result.data;
+    },
+    async confirmarPrescricaoExecutavel(pedido, signal) {
+      const { status, json } = await enviar("/consulta/prescricao-executavel/confirmar", pedido, true, signal);
+      if (status !== 200) throw new ErroPorta(codigoDe(json, "PRESCRICAO_EXECUTAVEL_PENDENTE"));
+      const result = PrescricaoExecutavelConfirmada.safeParse(json);
+      if (!result.success) throw new ErroPorta("PAYLOAD_INVALIDO");
+      return result.data;
+    },
+    async lerEstatisticaServico(periodo: PeriodoClinicoEstatisticaServico | null, signal) {
+      const corpo = periodo === null ? {} : { periodoClinico: periodo };
+      const { status, json } = await enviar("/consulta/estatistica", corpo, true, signal);
+      if (status !== 200) throw new ErroPorta(codigoDe(json, "PAYLOAD_INVALIDO"));
+      const result = EstatisticaServicoResposta.safeParse(json);
+      if (!result.success) throw new ErroPorta("PAYLOAD_INVALIDO");
+      return result.data;
+    },
+    async prepararAcaoComposta(pedido, signal) {
+      const { status, json } = await enviar("/consulta/acoes-compostas/preparar", pedido, true, signal);
+      if (status !== 200) throw new ErroPorta(codigoDe(json, "ACAO_COMPOSTA_PENDENTE"));
+      const p = AcaoCompostaPreparada.safeParse(json);
+      const c = p.success ? p.data.resultado.antes?.contexto : null;
+      if (!p.success || !c || c.patientId !== pedido.contexto.patientId || c.encounterId !== pedido.contexto.encounterId
+        || c.tumorLotId !== pedido.contexto.tumorLotId || p.data.resultado.baseHash !== pedido.expectedBaseHash)
+        throw new ErroPorta("PAYLOAD_INVALIDO");
+      return p.data;
+    },
     async ditado(pedido,signal){
       const {status,json}=await enviar('/consulta/ditado',pedido,true,signal),p=DitadoResposta.safeParse(json);
       if(status!==200||!p.success)throw new ErroPorta(codigoDe(json,'DITADO_INDISPONIVEL'));

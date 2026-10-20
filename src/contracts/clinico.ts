@@ -123,8 +123,9 @@ export const OrigemPeso = z.enum(["MEDIDO", "ANTERIOR", "INFORMADO_PACIENTE"]);
 export const ItemPrescrito = z.object({
   item: z.number().int().min(1),
   droga: z.string().min(1),
-  doseMg: z.number().int().nonnegative(),
-  reducaoPct: z.union([z.literal(0), z.literal(20), z.literal(30), z.literal(40)]),
+  // Prescrição médica pode conter mg fracionados; não arredondar ao persistir o ciclo.
+  doseMg: z.number().finite().nonnegative(),
+  reducaoPct: z.number().int().min(0).max(99).nullable(), // null: percentual não declarado
 }).strict();
 
 export const Ciclo = z.object({

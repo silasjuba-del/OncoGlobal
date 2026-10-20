@@ -1,0 +1,28 @@
+.estatistica-servico { display: grid; gap: 1rem; color: #17324a; }
+.estatistica-cabecalho, .estatistica-resumo, .estatistica-bloco, .estatistica-filtros {
+  border: 1px solid #c7d5df; border-radius: .75rem; background: #fff; padding: 1rem;
+}
+.estatistica-cabecalho { display: flex; align-items: center; justify-content: space-between; gap: 1rem; background: #f4f8fb; }
+.estatistica-cabecalho h2, .estatistica-cabecalho p, .estatistica-resumo h3, .estatistica-bloco h3 { margin: 0 0 .4rem; }
+.estatistica-cabecalho strong { font-size: 1.25rem; white-space: nowrap; }
+.estatistica-filtros { display: flex; flex-wrap: wrap; align-items: end; gap: .75rem; }
+.estatistica-filtros label { display: grid; gap: .25rem; min-width: 12rem; }
+.estatistica-filtros input, .estatistica-filtros button { min-height: 2.75rem; padding: .5rem .75rem; font: inherit; }
+.estatistica-filtros button { border: 0; border-radius: .4rem; background: #174968; color: #fff; cursor: pointer; }
+.estatistica-filtros button:disabled, .estatistica-filtros input:disabled { cursor: not-allowed; opacity: .65; }
+.estatistica-filtros [role="alert"] { flex-basis: 100%; margin: 0; color: #8b1e24; }
+.estatistica-tabela { width: 100%; border-collapse: collapse; margin-block: .75rem; }
+.estatistica-tabela th, .estatistica-tabela td { border-bottom: 1px solid #d7e1e8; padding: .55rem; text-align: left; }
+.estatistica-tabela thead th { background: #f4f8fb; }
+.estatistica-tabela td { font-variant-numeric: tabular-nums; }
+.estatistica-grafico { display: block; width: 100%; max-width: 40rem; min-height: 4rem; overflow: visible; }
+.estatistica-grafico__rotulo, .estatistica-grafico__valor { fill: #17324a; font-size: 12px; }
+.estatistica-grafico__trilho { fill: #e7eef3; }
+.estatistica-grafico__barra { fill: #24739a; }
+.estatistica-bloco { overflow-x: auto; }
+@media (max-width: 40rem) {
+  .estatistica-cabecalho { align-items: flex-start; flex-direction: column; }
+  .estatistica-filtros { align-items: stretch; flex-direction: column; }
+  .estatistica-filtros label { min-width: 0; }
+  .estatistica-tabela { font-size: .9rem; }
+}

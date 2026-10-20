@@ -1,0 +1,1 @@
+export const ESTATISTICA_VERSAO = "W10-REAUDITORIA-04" as const;

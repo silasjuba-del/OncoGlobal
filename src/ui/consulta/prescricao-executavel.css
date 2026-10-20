@@ -1,0 +1,121 @@
+.prescricao-executavel {
+  --pe-ink: #183247;
+  --pe-muted: #536b7a;
+  --pe-line: #d5e0e6;
+  --pe-surface: #fff;
+  --pe-soft: #f4f8fa;
+  --pe-action: #006d77;
+  display: grid;
+  gap: 1rem;
+  min-width: 0;
+  padding: 1rem;
+  color: var(--pe-ink);
+  background: var(--pe-soft);
+  border: 1px solid var(--pe-line);
+  border-radius: .75rem;
+  line-height: 1.5;
+}
+
+.prescricao-executavel :is(button, input, select, textarea) {
+  box-sizing: border-box;
+  max-width: 100%;
+  font: inherit;
+}
+
+.prescricao-executavel :focus-visible {
+  outline: 3px solid var(--pe-action);
+  outline-offset: 2px;
+}
+
+.prescricao-executavel h2,
+.prescricao-executavel h3,
+.prescricao-executavel h4,
+.prescricao-executavel p { margin-block-start: 0; }
+
+.prescricao-executavel__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: .75rem;
+  padding-bottom: .75rem;
+  border-bottom: 1px solid var(--pe-line);
+}
+
+.prescricao-executavel__header h2 { margin: 0; font-size: 1.2rem; }
+.prescricao-executavel__header p:last-child { margin: .25rem 0 0; color: var(--pe-muted); overflow-wrap: anywhere; }
+.prescricao-executavel__eyebrow { margin: 0 0 .2rem; color: var(--pe-muted); font-size: .7rem; font-weight: 700; letter-spacing: .1em; }
+.prescricao-executavel__revision { color: var(--pe-muted); font-size: .75rem; overflow-wrap: anywhere; }
+.prescricao-executavel__grid { display: grid; grid-template-columns: minmax(16rem, .8fr) minmax(0, 1.5fr); align-items: start; gap: 1rem; }
+.prescricao-executavel__section,
+.prescricao-executavel__item,
+.prescricao-executavel__preview {
+  display: grid;
+  gap: .75rem;
+  min-width: 0;
+  margin: 0;
+  padding: .9rem;
+  background: var(--pe-surface);
+  border: 1px solid var(--pe-line);
+  border-radius: .65rem;
+}
+.prescricao-executavel__section legend,
+.prescricao-executavel__item legend { padding-inline: .35rem; font-weight: 700; }
+.prescricao-executavel__section label,
+.prescricao-executavel__item label { display: grid; gap: .3rem; min-width: 0; font-size: .86rem; font-weight: 600; }
+.prescricao-executavel :is(input:not([type="checkbox"]), select, textarea) {
+  width: 100%;
+  min-height: 2.65rem;
+  padding: .55rem .65rem;
+  color: var(--pe-ink);
+  background: #fff;
+  border: 1px solid #9aafbb;
+  border-radius: .4rem;
+}
+.prescricao-executavel textarea { min-height: 4.2rem; resize: vertical; }
+.prescricao-executavel__pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .65rem; align-items: start; }
+.prescricao-executavel__checkbox { display: flex !important; grid-template-columns: auto 1fr; align-items: flex-start; gap: .55rem !important; }
+.prescricao-executavel__checkbox input { width: 1.1rem; min-width: 1.1rem; height: 1.1rem; margin: .2rem 0 0; accent-color: var(--pe-action); }
+.prescricao-executavel__section-title { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .5rem; }
+.prescricao-executavel__section-title h3 { margin: 0; font-size: 1.05rem; }
+.prescricao-executavel :is(button) {
+  min-height: 2.6rem;
+  padding: .5rem .75rem;
+  color: var(--pe-action);
+  background: #fff;
+  border: 1px solid #86a5ad;
+  border-radius: .45rem;
+  cursor: pointer;
+}
+.prescricao-executavel :is(button):hover:not(:disabled) { background: #eef7f7; }
+.prescricao-executavel :is(button):disabled { cursor: not-allowed; opacity: .55; }
+.prescricao-executavel__item { border-left: 3px solid var(--pe-action); }
+.prescricao-executavel__item p { margin: 0; color: var(--pe-muted); font-size: .82rem; }
+.prescricao-executavel__override { display: grid; justify-items: start; gap: .4rem; }
+.prescricao-executavel__pending,
+.prescricao-executavel__message { margin: 0; padding: .7rem; color: #78501e; background: #fff8eb; border-left: 3px solid #b77b2c; border-radius: .4rem; }
+.prescricao-executavel__errors { margin: 0; padding: .75rem .75rem .75rem 2rem; color: #8c2531; background: #fff1f2; border-left: 3px solid #b42335; border-radius: .4rem; }
+.prescricao-executavel__actions { display: flex; justify-content: flex-end; }
+.prescricao-executavel__actions button,
+.prescricao-executavel__preview > button { color: #fff; background: var(--pe-action); border-color: var(--pe-action); font-weight: 700; }
+.prescricao-executavel__preview { border-top: 3px solid var(--pe-action); }
+.prescricao-executavel__preview h3,
+.prescricao-executavel__preview h4 { margin: 0; }
+.prescricao-executavel__preview > p { margin: 0; color: var(--pe-muted); }
+.prescricao-executavel__preview pre { max-height: 24rem; overflow: auto; margin: 0; padding: .85rem; white-space: pre-wrap; overflow-wrap: anywhere; color: var(--pe-ink); background: #f7fafb; border: 1px solid var(--pe-line); border-radius: .45rem; font: .83rem/1.55 ui-monospace, Consolas, monospace; }
+.prescricao-executavel__preview ul { margin: .35rem 0 0; padding-left: 1.25rem; overflow-wrap: anywhere; }
+
+@media (max-width: 820px) {
+  .prescricao-executavel__grid { grid-template-columns: minmax(0, 1fr); }
+}
+
+@media (max-width: 520px) {
+  .prescricao-executavel { padding: .7rem; gap: .75rem; }
+  .prescricao-executavel__header { display: grid; }
+  .prescricao-executavel__pair { grid-template-columns: minmax(0, 1fr); }
+  .prescricao-executavel__section,
+  .prescricao-executavel__item,
+  .prescricao-executavel__preview { padding: .7rem; }
+  .prescricao-executavel__actions { justify-content: stretch; }
+  .prescricao-executavel__actions button,
+  .prescricao-executavel__preview > button { width: 100%; }
+}
