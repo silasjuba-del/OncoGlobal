@@ -21,6 +21,16 @@ type TratamentoTimeline = NonNullable<EventoTimelineMulticamadas["tratamento"]>;
 type ParametrosEvento = Omit<EventoTimelineMulticamadas, "id" | "eventId" | "patientId" | "encounterId"
   | "tumorLotId" | "tipoEvento" | "revisao" | "supersedido" | "dataRegistro" | "fontes">;
 
+/** Aliases suportados pelos leitores de tratamento; conserva o tipo original na saída. */
+function tipoTimeline(tipo: string): string {
+  switch (tipo) {
+    case "TreatmentEpisode@1": return "TreatmentEpisode";
+    case "Ciclo@1": return "Ciclo";
+    case "TreatmentAdministration@1": return "TreatmentAdministration";
+    default: return tipo;
+  }
+}
+
 function objeto(valor: unknown): Dados | null {
   return valor !== null && typeof valor === "object" && !Array.isArray(valor) ? valor as Dados : null;
 }
@@ -190,7 +200,7 @@ function mapearEvento(evento: ClinicalEvent, dados: Dados,
     tipoEvento: evento.tipo, ...parametros, dataRegistro: evento.criadoEm, revisao: evento.revisao as "CONFIRMADO" | "ASSINADO",
     supersedido: false, fontes: fonteData,
   });
-  switch (evento.tipo) {
+  switch (tipoTimeline(evento.tipo)) {
     case "FATO": {
       const adiamento = mapearAdiamento(dados, fonteData);
       if (adiamento) return [make(adiamento)];
@@ -313,15 +323,16 @@ export function lerTimelineMulticamadas(db: DatabaseSync, contexto: ContextoTime
   if (hojeResult.estado !== "OK") throw new Error("INSTANTE_INVALIDO");
   const agoraMs = Date.parse(instante), hoje = hojeResult.dataCivil;
   const todosPaciente = listarEventos(db, ctx.patientId).filter(event => event.patientId === ctx.patientId);
-  const relevantes = todosPaciente.filter(event =>
-    ((event.tipo === "TreatmentAdministration" && event.tumorLotId === ctx.tumorLotId)
-      || (event.tipo !== "TreatmentAdministration" && (escopoDoEvento(event) === "PACIENTE"
-        || event.tumorLotId === ctx.tumorLotId || event.tumorLotId === null)))
-    && Date.parse(event.criadoEm) <= agoraMs
-    && (event.revisao === "CONFIRMADO" || event.revisao === "ASSINADO"));
+  const relevantes = todosPaciente.filter(event => {
+    const administracao = tipoTimeline(event.tipo) === "TreatmentAdministration";
+    return (administracao ? event.tumorLotId === ctx.tumorLotId
+      : escopoDoEvento(event) === "PACIENTE" || event.tumorLotId === ctx.tumorLotId || event.tumorLotId === null)
+      && Date.parse(event.criadoEm) <= agoraMs
+      && (event.revisao === "CONFIRMADO" || event.revisao === "ASSINADO");
+  });
   const ciclos = new Map<string, ClinicalEvent[]>();
   for (const event of relevantes) {
-    if (event.tipo !== "Ciclo") continue;
+    if (tipoTimeline(event.tipo) !== "Ciclo") continue;
     const value = objeto(dadosDoEvento(event));
     if (typeof value?.cicloId === "string") {
       const anteriores = ciclos.get(value.cicloId) ?? [];

@@ -42,6 +42,34 @@ function seed(database: ReturnType<typeof abrirLedger>, ...events: ClinicalEvent
 
 describe("timeline multicamadas real", () => {
   it.each([
+    ["TreatmentEpisode@1", "Ciclo@1", "TreatmentAdministration@1"],
+    ["TreatmentEpisode", "Ciclo@1", "TreatmentAdministration"],
+    ["TreatmentEpisode@1", "Ciclo", "TreatmentAdministration@1"],
+  ])("conserva eventos versionados e mistos: %s / %s / %s", (tipoEpisodio, tipoCiclo, tipoAdministracao) => {
+    const database = db();
+    const prescricaoRef = { documentId: "rx-versionada", documentVersion: 1 };
+    const administracao = { adminId: "admin-versionada", cicloId: "ciclo-versionado", prescricaoRef,
+      item: 1, droga: "Fármaco sintético", quantidadeEfetivaMg: 10, status: "PARCIAL",
+      motivo: "Interrupção sintética", inicio: "2026-11-10T10:00:00-03:00", fim: null, fonte: fonte("admin-versionada") };
+    seed(database,
+      evento({ id: "ep-versionado", tipo: tipoEpisodio!, dados: { episodioId: "ep", esquemaId: "protocolo-sintetico",
+        inicio: { campo: "PRESENTE", valor: "2026-10-01" } } }),
+      evento({ id: "ciclo-versionado", tipo: tipoCiclo!, criadoEm: "2026-10-20T10:00:00-03:00",
+        dados: { cicloId: "ciclo-versionado", episodioId: "ep", numero: 1, previstoEm: "2026-11-01", prescricaoRef } }),
+      evento({ id: "admin-versionada", tipo: tipoAdministracao!, criadoEm: "2026-11-10T12:00:00-03:00", dados: administracao }),
+      evento({ id: "admin-global", tipo: tipoAdministracao!, tumorLotId: null, dados: { ...administracao, adminId: "admin-global" } }),
+      evento({ id: "admin-outro-lote", tipo: tipoAdministracao!, tumorLotId: "lote-b", dados: { ...administracao, adminId: "admin-outro-lote" } }),
+      evento({ id: "schema-desconhecido", tipo: "TreatmentAdministration@2", dados: { ...administracao, adminId: "admin-desconhecida" } }),
+    );
+    const view = lerTimelineMulticamadas(database, contexto, agora);
+    expect(view.eventos.map(e => e.eventId)).toEqual(["ep-versionado", "ciclo-versionado", "admin-versionada"]);
+    expect(view.eventos.find(e => e.eventId === "admin-versionada")).toMatchObject({
+      tipoEvento: tipoAdministracao, dataPlanejada: "2026-11-01", tratamento: { estado: "ADMINISTRADO_PARCIAL", atrasoDias: 9 },
+      fontes: [fonte("source-admin-versionada")],
+    });
+  });
+
+  it.each([
     { caso: "reprogramação posterior não reescreve atraso histórico", criadoEm: "2026-11-15T10:00:00-03:00",
       versao: 1, substitui: true, lote: contexto.tumorLotId, esperada: "2026-11-01", atraso: 9 },
     { caso: "outra versão de prescrição não muda a administração original", criadoEm: "2026-11-09T10:00:00-03:00",
