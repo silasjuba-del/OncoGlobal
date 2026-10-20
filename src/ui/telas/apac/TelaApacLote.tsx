@@ -45,6 +45,7 @@ export function TelaApacLote({
     }, () => { if (viva) setErro("APAC PENDENTE: não foi possível carregar os dados."); });
     return () => {
       viva = false;
+      geracaoPorta.current += 1;
     };
   }, [porta]);
 
@@ -74,6 +75,7 @@ export function TelaApacLote({
     const geracao = geracaoPorta.current;
     const partes: string[] = [];
     for (const item of itens) {
+      if (geracaoPorta.current !== geracao) return;
       const intent: AcaoIntent = {
         verbo: "EXPORTAR_APAC",
         objeto: { tipo: "APAC", id: item.apac.apacId, versao: item.apac.versao },

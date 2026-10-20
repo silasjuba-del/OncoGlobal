@@ -11,6 +11,34 @@ afterEach(() => {
 });
 
 describe("APAC em bloco por lote", () => {
+  it.each(["troca", "desmontagem", "erro-tardio"] as const)(
+    "R33-02: %s durante primeira APAC impede despacho das seguintes", async (cenario) => {
+      const antiga = criarPortaFalsa(), chaves = criarChaves();
+      let resolver: ((value: { codigo: string; decisao: string }) => void) | undefined;
+      let rejeitar: ((reason: Error) => void) | undefined;
+      const acao = vi.spyOn(antiga, "acao")
+        .mockImplementationOnce(() => new Promise((resolve, reject) => { resolver = resolve; rejeitar = reject; }))
+        .mockResolvedValue({ codigo: "EXPORTAR_APAC", decisao: "EXECUTADA" });
+      const tela = render(<TelaApacLote porta={antiga} chaves={chaves} />);
+      await screen.findByLabelText("APAC por lote");
+      for (const id of ["apac-verde-1", "apac-verde-2"])
+        fireEvent.click(screen.getByRole("checkbox", { name: `selecionar ${id}` }));
+      fireEvent.click(screen.getByRole("button", { name: "exportar selecionadas" }));
+      expect(acao).toHaveBeenCalledTimes(1);
+      if (cenario === "desmontagem") tela.unmount();
+      else {
+        tela.rerender(<TelaApacLote porta={criarPortaFalsa()} chaves={chaves} />);
+        await screen.findByLabelText("APAC por lote");
+      }
+      await act(async () => {
+        if (cenario === "erro-tardio") rejeitar?.(new Error("falha-sintetica"));
+        else resolver?.({ codigo: "EXPORTAR_APAC", decisao: "EXECUTADA" });
+      });
+      expect(screen.queryByText(/Resultado da exportação:/)).toBeNull();
+      expect(acao).toHaveBeenCalledTimes(1);
+      expect(acao.mock.calls[0]![0].objeto.id).toBe("apac-verde-1");
+    });
+
   it("D85 avisa, D90 fica fora, negada preserva o motivo e PENDENTE não vira intenção", async () => {
     const porta = criarPortaFalsa();
     render(<TelaApacLote porta={porta} chaves={criarChaves()} />);
