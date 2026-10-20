@@ -7,7 +7,7 @@ import { FactQualifiers } from "../contracts/w10/extracao.js";
 import { validarPayloadEvento } from "../contracts/envelope.js";
 import { montarFichaMinima } from "../modules/consulta/revisaoClinica.js";
 import { dadosDoEvento } from "../kernel/projections/snapshot.js";
-import { hashCanonico } from "../kernel/projections/retrato/index.js";
+import { escopoDoEventoRetrato, hashCanonico, tempoClinicoDoEvento } from "../kernel/projections/retrato/index.js";
 import { dataCivilDoServico } from "../rules/tempoServico.js";
 import { hashConteudoExibido as hash } from "./sessao.js";
 
@@ -30,12 +30,31 @@ function subcampo(f: FatoRetrato, id: string, aliases: readonly string[]): Recor
   return objeto(f.campo && aliases.includes(chaveTrial(f.campo)) ? f.dados.valor : f.dados[id]);
 }
 /** Horizonte do subcampo: a data da fonte externa não prevalece sobre a observação. */
-function dentroDoHorizonte(f: FatoRetrato, spec: typeof campos[number], hoje: string): boolean {
+function dataNoHorizonte(valor: unknown, limiteCivil: string, agora: string): boolean {
+  if (valor === undefined || valor === null) return true;
+  if (DataCivil.safeParse(valor).success) return (valor as string) <= limiteCivil;
+  const dia = diaDocumentado(valor);
+  return dia !== null && dia <= limiteCivil && Date.parse(String(valor)) <= Date.parse(agora);
+}
+function dentroDoHorizonte(f: FatoRetrato, spec: typeof campos[number], limiteCivil: string, agora: string): boolean {
   if (f.dados.observacaoDatada === true) return false;
   const w = subcampo(f, spec.id, spec.aliases);
   if (!w) return true;
   const datas: unknown[] = [w.data, ...(Array.isArray(w.fontes) ? w.fontes.map(v => objeto(v)?.dataClinica) : [])];
-  return datas.every(d => d === undefined || d === null || diaDocumentado(d) !== null && diaDocumentado(d)! <= hoje);
+  return datas.every(d => dataNoHorizonte(d, limiteCivil, agora));
+}
+
+function materialIntegro(f: FatoRetrato, e: ClinicalEvent | undefined, contexto: ContextoAcaoComposta): boolean {
+  if (!e) return false;
+  const d = dadosDoEvento(e);
+  const escopo = escopoDoEventoRetrato(e);
+  return d !== null && f.ref.revisao === hashCanonico(e) && f.tipo === e.tipo
+    && e.patientId === contexto.patientId && (escopo === "PACIENTE" || e.tumorLotId === contexto.tumorLotId)
+    && f.escopo === escopo
+    && f.patientId === e.patientId && f.encounterId === e.encounterId && f.tumorLotId === e.tumorLotId
+    && f.tempoRegistro === e.criadoEm && f.tempoClinico === tempoClinicoDoEvento(e)
+    && f.campo === (typeof d.campo === "string" ? d.campo : null)
+    && hashCanonico(f.dados) === hashCanonico(d) && hashCanonico(f.fontes) === hashCanonico(e.fontes);
 }
 
 export function evidenciaEventoTrial(evento: ClinicalEvent): EvidenceRef {
@@ -64,6 +83,16 @@ export function adaptarFatosTipados(eventos: readonly ClinicalEvent[], contexto:
   if (civil.estado !== "OK") return { fatos, substituidas, revisao: null };
   const porId = new Map(eventos.map(e => [e.eventId, e]));
   const materiais = retrato.fatos.filter(f => tipos.has(f.tipo));
+  const { revisao, geradoEm: _geradoEm, ...conteudoRetrato } = retrato;
+  if (hashCanonico(conteudoRetrato) !== revisao || retrato.fatos.some(f => !materialIntegro(f, porId.get(f.ref.eventId), contexto))) {
+    // An inconsistent view cannot authorize a value or reopen a scalar-alias shortcut.
+    for (const spec of campos) for (const alias of spec.aliases) {
+      substituidas.add(chaveTrial(alias)); substituidas.add(chaveTrial(`${alias}.data`));
+    }
+    return { fatos, substituidas, revisao: null };
+  }
+  const limiteCivil = retrato.dataClinicaEncontro && retrato.dataClinicaEncontro < civil.dataCivil
+    ? retrato.dataClinicaEncontro : civil.dataCivil;
   const problemas = new Set(retrato.integridade.map(p => p.eventoId));
   for (const spec of campos) {
     // A presença de um campo tipado, mesmo pendente, impede um atalho por alias escalar.
@@ -73,7 +102,7 @@ export function adaptarFatosTipados(eventos: readonly ClinicalEvent[], contexto:
       // ECOG é avaliação da consulta atual. Filtrar antes de comparar evita que
       // triagens históricas do mesmo dia contaminem ou apaguem a avaliação atual.
       fatos: materiais.filter(f => (spec.id !== "ecog" || f.encounterId === contexto.encounterId)
-        && dentroDoHorizonte(f, spec, civil.dataCivil)) });
+        && dentroDoHorizonte(f, spec, limiteCivil, agora)) });
     const campo = ficha.find(f => f.id === spec.id);
     if (!campo?.fatos.length) continue;
     const refs = [...new Set(campo.fatos.map(f => f.eventId))];
@@ -90,8 +119,8 @@ export function adaptarFatosTipados(eventos: readonly ClinicalEvent[], contexto:
       return !afirmacaoAtualTrial(d) || !afirmacaoAtualTrial(d[spec.id]);
     })) continue;
     // Fonte interna do Dado não pode esconder uma data futura sob a data do contêiner.
-    if (campo.fontes.some(f => f.dataClinica !== null && (!DataCivil.safeParse(f.dataClinica).success || f.dataClinica > civil.dataCivil))) continue;
-    if (campo.data !== null && (diaDocumentado(campo.data) === null || diaDocumentado(campo.data)! > civil.dataCivil)) continue;
+    if (campo.fontes.some(f => !dataNoHorizonte(f.dataClinica, limiteCivil, agora))) continue;
+    if (!dataNoHorizonte(campo.data, limiteCivil, agora)) continue;
     const evidencias = fontes.map(evidenciaEventoTrial);
     if (campo.estado === "CONFLITANTE") {
       if (evidencias.length >= 2) fatos.push({ patientId: contexto.patientId, factKey: spec.id, status: "CONFLITO", sources: evidencias });
