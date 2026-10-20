@@ -1,3 +1,5 @@
+import {criarResolverDocumentoLedger} from "../../src/kernel/ledger/documentos.js";
+import {hashConteudoExibido} from "../../src/server/sessao.js";
 import {afterEach,expect,it} from "vitest";
 import {abrirAmbiente,cadastrarPaciente,criarDiretorio,removerDiretorio,PACIENTE,ENCONTRO,AGORA} from "../f0-fecha/fixtures/consulta-completa.js";
 import {salvarDraft} from "../../src/kernel/ledger/drafts.js";
@@ -26,4 +28,17 @@ it("decisao de contato A para B continua conflito global; retrato do paciente e 
  expect("cabecalho" in consulta && consulta.cabecalho.contatosDesdeUltima).toEqual([]);
  const ctx={patientId:PACIENTE,encounterId:ENCONTRO,tumorLotId:null,agora:AGORA,regras:[],biblioteca:{id:"sintetica",versao:"1",hash:"sintetico"}};
  expect(projetarRetrato(lerLedgerIntegro(a.db,PACIENTE).itens,ctx)).toEqual(projetarRetrato(global,ctx));
+});
+
+it("impressao e consulta rejeitam o mesmo documento fora do contrato",async()=>{
+ a=await abrirAmbiente(criarDiretorio());cadastrarPaciente(a);
+ for(const version of [0,1]){
+  const id=`doc-${version}`,doc={documentId:id,documentVersion:version,texto:"Documento sintetico"};
+  salvarDraft(a.db,{draftId:id,patientId:PACIENTE,sourceId:"fonte",rawRef:"local",payload:{},diagnostics:[],revision:0,criadoEm:AGORA});
+  confirmar(a.db,{patientId:PACIENTE,encounterId:ENCONTRO,tumorLotId:null,operationId:id,reviewDecisionId:id,sessao:a.sessoes.obter(a.token)!,em:AGORA,registros:[{draftId:id,expectedRevision:0,eventId:id,tipo:"DOCUMENTO",payload:{data:doc,signature:{documentId:id,documentVersion:version,documentHash:hashConteudoExibido(doc),reviewDecisionId:id,serverActorId:a.sessoes.obter(a.token)!.medicoId}},fontes:[],revisao:"ASSINADO"}]});
+ }
+ const leitura=lerLedgerIntegro(a.db,PACIENTE);expect(leitura.pendenciasIntegridade).toContainEqual(expect.objectContaining({eventoId:"doc-0",motivo:"PAYLOAD_FORA_DO_CONTRATO"}));
+ const resolver=criarResolverDocumentoLedger(a.db);
+ expect(await resolver.resolver({id:"doc-0",version:0})).toBeNull();
+ expect(await resolver.resolver({id:"doc-1",version:1})).toMatchObject({id:"doc-1",version:1,patientId:PACIENTE,assinado:true});
 });

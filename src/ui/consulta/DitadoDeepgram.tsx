@@ -45,7 +45,7 @@ export function DitadoDeepgram({porta,contexto,desabilitado,aoTrecho,aoAtividade
    mensagem:mensagem=>{
     if(!vigente())return;let bruto:unknown;try{bruto=JSON.parse(mensagem);}catch{fim('Resposta de ditado inválida.');return;}
     const p=EventoDitado.safeParse(bruto);if(!p.success){fim('Resposta de ditado inválida.');return;}const evento=p.data;
-    if(evento.tipo==='ERRO'){fim(`Ditado interrompido (${evento.codigo}). Confira o texto já recebido.`);return;}
+    if(evento.tipo==='ERRO'){fim(evento.codigo==='G23_COMANDO_CURTO_EXCEDIDO'?'Limite de 15 segundos atingido. O final pode estar incompleto; confira o texto recebido.':`Ditado interrompido (${evento.codigo}). Confira o texto já recebido.`);return;}
     if(evento.tipo==='CONCLUIDO'){concluido=true;fim('Ditado concluído. Confira nomes, números e negações.');return;}
     if(evento.tipo==='TRECHO'){
      if(evento.final){if(!vistos.has(evento.id)){vistos.add(evento.id);callbacks.current.aoTrecho(evento.texto);}setParcial('');}
