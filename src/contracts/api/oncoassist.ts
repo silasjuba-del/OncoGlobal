@@ -15,13 +15,32 @@ export const FontesOncoassist = z.object({ fontes: z.array(z.object({
 })), fontesSemVinculo: z.array(z.object({ draftId: z.string(), sourceId: z.string(),
   segmentId: z.string().nullable(), exceptionId: z.string().nullable(), rotulo: z.string(), criadoEm: z.string(), revision: z.number().int().nonnegative(),
   textoOriginal: z.string() })).default([]) });
+/** Proveniência documental capturada pelo servidor; nunca equivale a revisão clínica. */
+export const AuditoriaOncoassist = z.object({
+  propostaId: z.string(), operationId: z.string(),
+  patientId: z.string(), encounterId: z.string(), tumorLotId: z.string().nullable(),
+  draftId: z.string(), segmentId: z.string(), sourceId: z.string(),
+  fonteRevision: z.number().int().nonnegative(), fonteSha256: z.string(), fontePayloadHash: z.string(),
+  propostaRevision: z.number().int().positive(), politicaVersao: z.string(),
+  mecanismo: z.literal("JEV_MARCADORES_DOCUMENTAIS"), provedor: z.string().nullable(),
+  capturadoPor: z.object({ tipo: z.literal("SESSAO"), id: z.string() }), capturadoEm: z.string(),
+  revisaoObrigatoria: z.literal(true),
+});
 export const RespostaOncoassist = z.discriminatedUnion("status", [
   z.object({ status: z.literal("PROPOSTA"), revisaoObrigatoria: z.literal(true),
     fonte: z.object({ id: z.string(), sha256: z.string() }),
     categoria: z.enum(["LAB", "RADS", "PATH", "NOTA", "OUTRO", "INDETERMINADO"]),
+    modelo: z.string().optional(), confianca: z.number().optional(),
+    probabilidades: z.record(z.string(), z.number()).optional(), auditoria: AuditoriaOncoassist.optional(),
   }),
-  z.object({ status: z.enum(["PENDENTE", "ERRO"]), codigo: z.string().min(1) }),
+  z.object({ status: z.enum(["PENDENTE", "ERRO"]), codigo: z.string().min(1), auditoria: AuditoriaOncoassist.optional() }),
 ]);
+export const HistoricoOncoassist = z.object({ propostas: z.array(z.object({
+  auditoria: AuditoriaOncoassist, estado: z.enum(["PENDENTE", "CONCLUIDA"]),
+  validade: z.enum(["ATUAL", "FONTE_ALTERADA"]), resposta: RespostaOncoassist.nullable(),
+})) });
+export type HistoricoOncoassist = z.infer<typeof HistoricoOncoassist>;
+export type AuditoriaOncoassist = z.infer<typeof AuditoriaOncoassist>;
 
 export type MotivoConfigOncoassist = z.infer<typeof MotivoConfigOncoassist>;
 export type CodigoRespostaOncoassist = z.infer<typeof CodigoRespostaOncoassist>;

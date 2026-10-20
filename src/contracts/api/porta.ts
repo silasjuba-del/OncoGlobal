@@ -353,7 +353,8 @@ export interface PortaConsulta {
     fontes: FontesOncoassist["fontes"];
     fontesSemVinculo?: FontesOncoassist["fontesSemVinculo"] | undefined;
   }>;
-  oncoassistClassificar?(pedido: PedidoBundle & { draftId: string }, signal?: AbortSignal): Promise<RespostaOncoassist>;
+  oncoassistClassificar?(pedido: PedidoBundle & { draftId: string; operationId?: string }, signal?: AbortSignal): Promise<RespostaOncoassist>;
+  oncoassistHistorico?(contexto: PedidoBundle, signal?: AbortSignal): Promise<import("./oncoassist.js").HistoricoOncoassist>;
   login(senha: string): Promise<ResultadoLogin>;
   confirmar(bloco: ConfirmarBloco): Promise<ResultadoConfirmar>;
   acao(intent: AcaoIntent): Promise<ResultadoAcao>;
