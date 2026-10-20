@@ -6,7 +6,9 @@ import { dadosDoEvento, escopoDoEvento, eventosVigentes, projetarSnapshot } from
 import { labSeries, weightSeries, type PontoLab } from "../../kernel/projections/series.js";
 import { avaliarTriagem } from "../../rules/triagem.js";
 import { idadeDoDado, PESO_VALIDADE_DIAS } from "../../rules/prescricao/index.js";
-import { DataCivil } from "../../contracts/base.js";
+import { hashCanonico, projetarRetrato } from "../../kernel/projections/retrato/index.js";
+import { diaDaObservacao, observacaoNoHorizonte, observacoesMaisRecentes } from "../../modules/consulta/observacoesTemporais.js";
+import { alturaDocumentada } from "./dadosDocumentados.js";
 import type { CriterioElegibilidade } from "../../contracts/api/criterioElegibilidade.js";
 import { semaforoInteracoes, type RulesetSemaforo } from "../../rules/semaforoInteracoes.js";
 import type { CatalogoInteracoes } from "../../contracts/f0c/interacoes.js";
@@ -24,11 +26,12 @@ const sinal = (estado: SinalElegibilidade["estado"], textos: string[]): SinalEle
 const pend = (texto: string) => sinal("PENDENTE", [texto]);
 
 function labsMaisRecentes(pontos: readonly PontoLab[], campo: string, hoje: string) {
-  const candidatos = pontos.filter(p => analito(p.campo) === analito(campo) && p.data.slice(0, 10) <= hoje
-    && Number.isFinite(Date.parse(p.data)) && Number.isFinite(p.valor) && p.sourceId.trim())
-    .sort((a, b) => Date.parse(b.data) - Date.parse(a.data));
-  const primeiro = candidatos[0];
-  return primeiro ? candidatos.filter(p => Date.parse(p.data) === Date.parse(primeiro.data)) : [];
+  const candidatos = pontos.filter(p => analito(p.campo) === analito(campo)
+    && observacaoNoHorizonte(p.data, hoje, Infinity) && Number.isFinite(p.valor) && p.sourceId.trim());
+  const { atuais, data } = observacoesMaisRecentes(candidatos, p => p.data);
+  // Prefer the actual source with the least precise selected date. A matching
+  // timed observation cannot confer an invented collection time on a civil day.
+  return atuais.sort((a, b) => Number(b.data === data) - Number(a.data === data));
 }
 
 /** Seleção com conflito explícito: não faz média, não usa upload como data de coleta. */
@@ -61,8 +64,7 @@ export function horizonteDoEncontro(eventosDoPaciente: readonly ClinicalEvent[],
 
 /** Evidência medida e datada, ainda sem aplicar a validade específica do cálculo de dose. */
 export function pesosMedidosDocumentados(atuais: readonly ClinicalEvent[], hoje: string, horizonte: number) {
-  return weightSeries(atuais).filter(p => p.origem === "MEDIDO" && p.data.slice(0, 10) <= hoje
-    && DataCivil.safeParse(p.data.slice(0, 10)).success && Date.parse(p.data) <= horizonte
+  return weightSeries(atuais).filter(p => p.origem === "MEDIDO" && observacaoNoHorizonte(p.data, hoje, horizonte)
     && atuais.some(e => e.eventId === p.eventId && e.fontes.some(f => f.sourceId === p.sourceId)))
     .sort((a, b) => Date.parse(b.data) - Date.parse(a.data));
 }
@@ -71,25 +73,36 @@ export function pesosMedidosDocumentados(atuais: readonly ClinicalEvent[], hoje:
 export function avaliarConsulta(i: EntradaAvaliacaoConsulta) {
   const doPaciente = i.eventos.filter(e => e.patientId === i.patientId);
   const horizonte = horizonteDoEncontro(doPaciente, i.encounterId, i.agora);
+  const instanteHorizonte = new Date(horizonte).toISOString();
+  // Empty technical configuration: projection only, no clinical rule is asserted.
+  const retrato = projetarRetrato(doPaciente, { patientId: i.patientId, encounterId: i.encounterId,
+    tumorLotId: i.tumorLotId, agora: instanteHorizonte, regras: [],
+    biblioteca: { id: "dados-documentados", versao: "1", hash: hashCanonico([]) } });
+  const limiteClinico = [i.hoje, diaDaObservacao(instanteHorizonte)!, retrato.dataClinicaEncontro]
+    .filter((dia): dia is string => dia !== undefined).sort()[0]!;
   // Fatos sistêmicos (labs, administrações, medicamentos…) são do paciente, independentemente do lote de origem.
   const escopo = doPaciente.filter(e => (e.tumorLotId === null || e.tumorLotId === i.tumorLotId || escopoDoEvento(e) === "PACIENTE")
     && Date.parse(e.criadoEm) <= horizonte);
   const atuais = eventosVigentes(escopo);
+  // The canonical view rejects ambiguous encounter anchors. Raw measurements
+  // must not bypass that decision and silently fall back to the current day.
+  const materiaisDoRetrato = new Set(retrato.fatos.map(f => f.ref.eventId));
+  const medidasAtuais = atuais.filter(e => materiaisDoRetrato.has(e.eventId));
   const snapshot = projetarSnapshot(escopo.filter(e => e.tipo === "FATO"), i.patientId, i.tumorLotId, i.encounterId, "f0c-avaliacao-v1");
   const atuaisSnapshot=projetarSnapshot(escopo.filter(e=>e.tipo==="FATO" && e.encounterId===i.encounterId),i.patientId,i.tumorLotId,i.encounterId,"f0c-atual-v1");
   const campo = (nome: string) => {
     const campoFonte=(nome==="medicamentos" ? atuaisSnapshot : snapshot).campos[nome];
     return campoFonte?.estado === "VERDE" && campoFonte.eventIds.every(id=>atuais.some(e=>e.eventId===id && e.fontes.length>0)) ? campoFonte.valor : null;
   };
-  const labs = labSeries(atuais).filter(p => Date.parse(p.data) <= horizonte
+  const labs = labSeries(medidasAtuais).filter(p => observacaoNoHorizonte(p.data, limiteClinico, horizonte)
     && atuais.some(e => e.eventId === p.eventId && e.fontes.some(f=>f.sourceId === p.sourceId)));
   const medida = (nome: string) => {
-    const p = ultimoLab(labs, nome, i.hoje);
+    const p = ultimoLab(labs, nome, limiteClinico);
     return p && avaliarValidadeExame("BIOQUIMICA",p.data,i.agora).estado === "VALIDO"
       ? { valor: p.valor, unidade: p.unidade, fonte: p.sourceId } : null;
   };
-  const cr = ultimoLab(labs, "creatinina", i.hoje);
-  const pesos = pesosMedidosDocumentados(atuais, i.hoje, horizonte);
+  const cr = ultimoLab(labs, "creatinina", limiteClinico);
+  const pesos = pesosMedidosDocumentados(medidasAtuais, limiteClinico, horizonte);
   const peso=pesos[0];
   const pesosDia = peso ? pesos.filter(p => Date.parse(p.data) === Date.parse(peso.data)) : [];
   const idadePeso=idadeDoDado({valor:peso?.kg ?? null,fonte:peso?.sourceId ?? null,medidoEm:peso?.data ?? null},i.agora,PESO_VALIDADE_DIAS);
@@ -113,13 +126,13 @@ export function avaliarConsulta(i: EntradaAvaliacaoConsulta) {
     requisitosAplicaveis: ["pas","fc","spo2","tempDecimos","hbDgDl","anc","plq","coletaHemograma","ecog","grauCtcae"] }, rs.data) : null;
   const criticos = avaliarCriticos({ NA: medida("sodio"), K: medida("potassio"), CA_TOTAL: medida("calcio total") });
   const avisosCriticos = criticos.filter(c=>c.estado === "AVISO").map(c=>`${c.analito}: ${c.medida!.valor} ${c.medida!.unidade}`);
-  const anc = ultimoLab(labs,"neutrofilos",i.hoje), plq = ultimoLab(labs,"plaquetas",i.hoje);
+  const anc = ultimoLab(labs,"neutrofilos",limiteClinico), plq = ultimoLab(labs,"plaquetas",limiteClinico);
   const portaPendentes: string[] = [], portaAlertas: string[] = [];
   const criteriosPorta: CriterioElegibilidade[] = [];
   const regraPorta = rs.success ? { id: rs.data.header.id, versao: rs.data.header.versao, fonte: rs.data.header.fonte.referencia } : null;
   for (const [nome,p,minimo] of [["neutrófilos",anc,1500],["plaquetas",plq,100000]] as const) {
     const id = key(nome);
-    const ultimos = labsMaisRecentes(labs, nome, i.hoje);
+    const ultimos = labsMaisRecentes(labs, nome, limiteClinico);
     const conflito = new Set(ultimos.map(l => `${l.valor}|${l.unidade}`)).size > 1;
     // Um valor concordante pode ter várias evidências; a escolha numérica não descarta suas fontes.
     const fontes = ultimos.flatMap(l => atuais.find(e => e.eventId === l.eventId)!.fontes
@@ -176,12 +189,12 @@ export function avaliarConsulta(i: EntradaAvaliacaoConsulta) {
   });
   const pesoAnterior = peso ? pesos.find(p=>Date.parse(p.data)<Date.parse(peso.data)) : null;
   const variacaoPeso = peso && pesoAnterior && pesoAnterior.kg>0 ? Math.abs(peso.kg-pesoAnterior.kg)/pesoAnterior.kg : null;
-  const altura=campo("alturaCm");
-  const dadosCorporais={pesoKg:renal.valoresUsados.peso.valor,alturaCm:typeof altura === "number" && altura>0 ? altura : null,
+  const altura = alturaDocumentada(retrato, instanteHorizonte);
+  const dadosCorporais={pesoKg:renal.valoresUsados.peso.valor,alturaCm:altura,
     bsaM2:null,clcr:renal.clcrMlMin,medidoEm:peso?.data ?? null};
   // Nutrição usa a última medida documentada, sem confundir a validade para dose com ausência de medida.
   // A data/fonte acompanham a sugestão; isto não declara peso atual nem libera cálculo de dose.
-  const pesosNutricionais = pesosMedidosDocumentados(eventosVigentes(doPaciente.filter(e => Date.parse(e.criadoEm) <= horizonte)), i.hoje, horizonte);
+  const pesosNutricionais = pesosMedidosDocumentados(medidasAtuais, limiteClinico, horizonte);
   const pesoNutricional = pesosNutricionais[0];
   const concordantes = pesoNutricional ? pesosNutricionais.filter(p => p.data === pesoNutricional.data) : [];
   const dadosNutricionais = { pesoKg: pesoNutricional && new Set(concordantes.map(p => p.kg)).size === 1 ? pesoNutricional.kg : null,

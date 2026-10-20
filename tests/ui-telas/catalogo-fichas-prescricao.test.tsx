@@ -59,6 +59,27 @@ function preencherRevisao(motivo = "Conferi a ficha sintética e a fonte declara
 }
 
 describe("CatalogoFichasPrescricao", () => {
+  it.each(["conteudo", "revisao"])("nao reutiliza conferencia marcada quando muda %s da mesma ficha", caso => {
+    const { rerender, props } = renderCatalogo();
+    abrirFicha(); preencherRevisao();
+    const nova = caso === "conteudo" ? { ...ficha(), contentHash: "c".repeat(64),
+      template: { ...templateBase, fonte: "Outra fonte sintetica da mesma identidade e versao" } } : ficha("INATIVA");
+    rerender(<CatalogoFichasPrescricao {...props} fichas={[nova]} />);
+    expect((screen.getByLabelText("Confirmo a conferência integral da ficha") as HTMLInputElement).checked).toBe(false);
+    const conferir = screen.getByRole("button", { name: /Conferir e (registrar|reativar) versão/ });
+    expect(conferir.matches(":disabled")).toBe(true);
+    fireEvent.click(conferir);
+    expect(props.aoRevisar).not.toHaveBeenCalled();
+  });
+
+  it("preserva edicao quando catalogo recarrega exatamente a mesma fonte e revisao", () => {
+    const { rerender, props } = renderCatalogo();
+    abrirFicha(); preencherRevisao("Motivo sintetico em edicao");
+    rerender(<CatalogoFichasPrescricao {...props} fichas={[structuredClone(ficha())]} />);
+    expect((screen.getByLabelText("Confirmo a conferência integral da ficha") as HTMLInputElement).checked).toBe(true);
+    expect((screen.getByLabelText("Motivo da revisão") as HTMLTextAreaElement).value).toBe("Motivo sintetico em edicao");
+  });
+
   it("pesquisa nome, tumor e cenário sem esconder versões ou seu estado", () => {
     const reviewed: FichaProtocoloCatalogo = ficha("CONFERIDA", [], "2.0");
     render(<CatalogoFichasPrescricao fichas={[ficha(), reviewed]} contextoChave="ctx-1"
