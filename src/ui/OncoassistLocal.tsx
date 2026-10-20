@@ -44,6 +44,21 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp }: {
   const [metricas,setMetricas]=useState(metricasVazias);
   const [transcricaoPendente,setTranscricaoPendente]=useState(false);
   const [transcricaoSalvando,setTranscricaoSalvando]=useState(false);
+  const removerProtecaoDocumento=useRef<(() => void) | null>(null);
+  useEffect(() => {
+    if (!transcricaoPendente && !transcricaoSalvando) return;
+    const proteger = (event: BeforeUnloadEvent) => {
+      event.preventDefault();
+      event.returnValue = "";
+    };
+    window.addEventListener("beforeunload", proteger);
+    const remover = () => {
+      window.removeEventListener("beforeunload", proteger);
+      if (removerProtecaoDocumento.current === remover) removerProtecaoDocumento.current = null;
+    };
+    removerProtecaoDocumento.current = remover;
+    return remover;
+  }, [transcricaoPendente, transcricaoSalvando]);
   const [mensagemSalvamento,setMensagemSalvamento]=useState("");
   const [navegacaoPendente,setNavegacaoPendente]=useState<(() => void) | null>(null);
   const dialogoNavegacao=useRef<HTMLDivElement>(null);
@@ -59,6 +74,7 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp }: {
   const pacienteAtivo = agenda.find((item) => item.patientId === contexto?.patientId && item.encounterId === contexto?.encounterId);
 
   const limpar = useCallback(() => {
+    removerProtecaoDocumento.current?.();
     geracao.current++;
     setSenha(""); setAutenticado(false); setAgenda([]); setSelecionado(""); setTela("consulta");
     setContexto(null); setLotes([]); setOcupado(false); setVersaoConsulta(0); setTranscricaoPendente(false);
@@ -98,6 +114,9 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp }: {
   function descartarEContinuar() {
     if (transcricaoSalvando) return;
     const navegar=navegacaoPendente;
+    // O descarte já foi confirmado no diálogo da aplicação. Uma saída de
+    // documento síncrona (location.assign) não deve pedir confirmação de novo.
+    removerProtecaoDocumento.current?.();
     restaurarFoco.current=false;
     setNavegacaoPendente(null);
     navegar?.();
