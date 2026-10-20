@@ -90,11 +90,12 @@ it("prepara redução com base do servidor, persiste e repete sem promover event
   expect((await a.request("/consulta/acoes-compostas/preparar",
     { ...entrada, base: { itens: [{ doseMg: 1000 }] } })).status).toBe(400);
   const exibido = await a.request("/consulta/bundle", { ...contexto, draftIds: [primeiro.data.draftId] });
-  expect(exibido.status).toBe(200);
+  expect(exibido.status).toBe(409);
+  // Recibo legado em sessao nao autoriza promover o plano inerte.
+  a.sessoes.registrarBundleExibido(a.token, contexto, []);
   const assinatura = await a.request("/consulta/confirmar", { ...contexto, bloco: "TUDO",
     registros: [{ id: primeiro.data.draftId, expectedRevision: 0 }],
-    documentosExibidos: exibido.data.documentos.map((d: { documentId: string; documentVersion: number }) =>
-      ({ documentId: d.documentId, documentVersion: d.documentVersion })),
+    documentosExibidos: [],
     reconhecerAlertas: [], idempotencyKey: "forcar-promocao-plano" });
   expect(assinatura.status).toBe(409);
   expect(a.eventos()).toHaveLength(antes);
