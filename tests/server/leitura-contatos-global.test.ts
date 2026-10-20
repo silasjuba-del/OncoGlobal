@@ -1,3 +1,4 @@
+// Dados inteiramente sinteticos; endereco criado nesta fixture, sem transporte externo.
 import {criarResolverDocumentoLedger} from "../../src/kernel/ledger/documentos.js";
 import {hashConteudoExibido} from "../../src/server/sessao.js";
 import {afterEach,expect,it} from "vitest";

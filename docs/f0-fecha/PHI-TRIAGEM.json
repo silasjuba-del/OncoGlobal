@@ -598,14 +598,14 @@
     },
     {
       "path": "docs/PLANO-FINAL-ONCOGLOBAL-v1.1.md",
-      "sha256": "cba53c40c8318f7f23a1fa26edf025945dd4b86c30c3fe667b6a9e2b7938c2c4",
+      "sha256": "32d073c155b3e357e2c8f0ff8ec9744353561dd3383bf5f9982c7a8d864eade8",
       "items": [
         {
           "type": "email",
           "line": 207,
           "ordinal": 0,
           "status": "technical_token_false_positive",
-          "evidenceRef": "docs/PLANO-FINAL-ONCOGLOBAL-v1.1.md:207",
+          "evidenceRef": "docs/PLANO-FINAL-ONCOGLOBAL-v1.1.md:207; docs/reviews/REVISAO-PHI-REFACTOR-20261020.md",
           "reason": "Identificador de microprompt com formato de versão/arquivo; não é endereço de contato.",
           "contextTag": "microprompt_version_filename"
         },
@@ -614,7 +614,7 @@
           "line": 207,
           "ordinal": 1,
           "status": "technical_token_false_positive",
-          "evidenceRef": "docs/PLANO-FINAL-ONCOGLOBAL-v1.1.md:207",
+          "evidenceRef": "docs/PLANO-FINAL-ONCOGLOBAL-v1.1.md:207; docs/reviews/REVISAO-PHI-REFACTOR-20261020.md",
           "reason": "Identificador de microprompt com formato de versão/arquivo; não é endereço de contato.",
           "contextTag": "microprompt_version_filename"
         }
@@ -1087,14 +1087,14 @@
     },
     {
       "path": "tests/app/executores.test.ts",
-      "sha256": "b4e2d9cd5cb794efaabdc0e60c065c052b44ee73a2e44f0969cd525e32f6939c",
+      "sha256": "4da2102425154c4186ff3835b2ab8cef33139775ba84b7d4f268c76fe40ee492",
       "items": [
         {
           "type": "email",
           "line": 49,
           "ordinal": 0,
           "status": "technical_token_false_positive",
-          "evidenceRef": "src/app/executores/imprimir.ts:79; tests/app/executores.test.ts:18-27,49-50,69-70",
+          "evidenceRef": "src/kernel/gateway/executores/imprimir.ts:79; tests/app/executores.test.ts:18-27,49-50,69-70; docs/reviews/REVISAO-PHI-REFACTOR-20261020.md",
           "reason": "Nome de arquivo local identificador, versao e extensao HTML, gerado pelo executor e comparado como caminho/recibo; nao e email.",
           "contextTag": null
         },
@@ -1103,7 +1103,7 @@
           "line": 50,
           "ordinal": 0,
           "status": "technical_token_false_positive",
-          "evidenceRef": "src/app/executores/imprimir.ts:79; tests/app/executores.test.ts:18-27,49-50,69-70",
+          "evidenceRef": "src/kernel/gateway/executores/imprimir.ts:79; tests/app/executores.test.ts:18-27,49-50,69-70; docs/reviews/REVISAO-PHI-REFACTOR-20261020.md",
           "reason": "Nome de arquivo local identificador, versao e extensao HTML, gerado pelo executor e comparado como caminho/recibo; nao e email.",
           "contextTag": null
         },
@@ -1112,7 +1112,7 @@
           "line": 69,
           "ordinal": 0,
           "status": "technical_token_false_positive",
-          "evidenceRef": "src/app/executores/imprimir.ts:79; tests/app/executores.test.ts:18-27,49-50,69-70",
+          "evidenceRef": "src/kernel/gateway/executores/imprimir.ts:79; tests/app/executores.test.ts:18-27,49-50,69-70; docs/reviews/REVISAO-PHI-REFACTOR-20261020.md",
           "reason": "Nome de arquivo local identificador, versao e extensao HTML, gerado pelo executor e comparado como caminho/recibo; nao e email.",
           "contextTag": null
         },
@@ -1121,7 +1121,7 @@
           "line": 70,
           "ordinal": 0,
           "status": "technical_token_false_positive",
-          "evidenceRef": "src/app/executores/imprimir.ts:79; tests/app/executores.test.ts:18-27,49-50,69-70",
+          "evidenceRef": "src/kernel/gateway/executores/imprimir.ts:79; tests/app/executores.test.ts:18-27,49-50,69-70; docs/reviews/REVISAO-PHI-REFACTOR-20261020.md",
           "reason": "Nome de arquivo local identificador, versao e extensao HTML, gerado pelo executor e comparado como caminho/recibo; nao e email.",
           "contextTag": null
         }
@@ -1400,14 +1400,14 @@
     },
     {
       "path": "tests/muse/autoridades.test.ts",
-      "sha256": "c8335a817df71f811b6517f6f82cd5bd60208562992727156a0eabe4d7ab2546",
+      "sha256": "713ddd1e9b425a5c91e50b34f2af6535a1f4ecdd71336ff38fa43e7c18a400dd",
       "items": [
         {
           "type": "cns",
           "line": 19,
           "ordinal": 0,
           "status": "synthetic_declared",
-          "evidenceRef": "tests/muse/autoridades.test.ts:19-26,22-25",
+          "evidenceRef": "tests/muse/autoridades.test.ts:19-26,22-25; docs/reviews/REVISAO-PHI-REFACTOR-20261020.md",
           "reason": "Vetor CNS positivo/negativo dentro do teste que inclui o paciente de teste e asserts; excecao apenas aos tokens desse vetor.",
           "contextTag": null
         },
@@ -1416,7 +1416,7 @@
           "line": 19,
           "ordinal": 1,
           "status": "synthetic_declared",
-          "evidenceRef": "tests/muse/autoridades.test.ts:19-26,22-25",
+          "evidenceRef": "tests/muse/autoridades.test.ts:19-26,22-25; docs/reviews/REVISAO-PHI-REFACTOR-20261020.md",
           "reason": "Vetor CNS positivo/negativo dentro do teste que inclui o paciente de teste e asserts; excecao apenas aos tokens desse vetor.",
           "contextTag": null
         }
@@ -1952,14 +1952,14 @@
     },
     {
       "path": "tests/w11-adv/checkin-real.test.ts",
-      "sha256": "bdd761f72c13be6ddec0d7b11ca5623d38e00c6a280aa65af24eee93006b1d33",
+      "sha256": "6a531d4f9dc9b1123ac20f8fcae1fc3c1e086a282d40574327d2b6e480a3fbaf",
       "items": [
         {
           "type": "cns",
           "line": 20,
           "ordinal": 0,
           "status": "synthetic_declared",
-          "evidenceRef": "tests/w11-adv/checkin-real.test.ts:2,20,21; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
+          "evidenceRef": "tests/w11-adv/checkin-real.test.ts:2,20,21; docs/ondas/F0-FECHAMENTO-ASTRA.md:54; docs/reviews/REVISAO-PHI-REFACTOR-20261020.md",
           "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
           "contextTag": null
         },
@@ -1968,7 +1968,7 @@
           "line": 53,
           "ordinal": 0,
           "status": "synthetic_declared",
-          "evidenceRef": "tests/w11-adv/checkin-real.test.ts:2,53,54; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
+          "evidenceRef": "tests/w11-adv/checkin-real.test.ts:2,53,54; docs/ondas/F0-FECHAMENTO-ASTRA.md:54; docs/reviews/REVISAO-PHI-REFACTOR-20261020.md",
           "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
           "contextTag": null
         }
@@ -1977,14 +1977,14 @@
     },
     {
       "path": "tests/w11-adv/fuzz-regras.test.ts",
-      "sha256": "db3640d599fe87d433cfe68bc71add10a31375db0d91ad69c5e1ee41fec203a2",
+      "sha256": "1d391a0620c58d7167278de7ff983b3490334299ac0e228fbea833a02f27e19a",
       "items": [
         {
           "type": "telefone",
           "line": 42,
           "ordinal": 0,
           "status": "synthetic_declared",
-          "evidenceRef": "tests/w11-adv/fuzz-regras.test.ts:1; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
+          "evidenceRef": "tests/w11-adv/fuzz-regras.test.ts:1; docs/ondas/F0-FECHAMENTO-ASTRA.md:54; docs/reviews/REVISAO-PHI-REFACTOR-20261020.md",
           "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
           "contextTag": null
         }
@@ -7255,6 +7255,22 @@
           "evidenceRef": "corpus/fichas/vulva/cisplatina-semanal-rxt-vulva__concomitante-a-rt.json:7",
           "reason": "Token SHA-256 completo de 64 caracteres no campo JSON, conferido; não é telefone.",
           "contextTag": "json_sha256_field_64hex"
+        }
+      ]
+    },
+    {
+      "path": "tests/server/leitura-contatos-global.test.ts",
+      "sha256": "3713f46dd34932602cdb9446751506dfc77e8f84394eca864b5205becfd9ca62",
+      "hashMode": "utf8-lf",
+      "items": [
+        {
+          "type": "email",
+          "line": 19,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/server/leitura-contatos-global.test.ts:1,19; docs/reviews/REVISAO-PHI-REFACTOR-20261020.md",
+          "reason": "Endereco criado pelo Codex 2 exclusivamente na fixture de transferencia de contato; nao importado de paciente ou fonte externa. A prova usa SQLite/loopback, sem transporte para esse endereco. Disposicao apenas para esta ocorrencia e este hash.",
+          "contextTag": null
         }
       ]
     }
