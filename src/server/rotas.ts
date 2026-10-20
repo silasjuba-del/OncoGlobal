@@ -59,7 +59,6 @@ import { ClinicalFact as ClinicalFactContract, EncounterSegment, FactSourceType,
 import { AcaoRevisaoPedido, ClosureVinculoContato } from "../contracts/w10/closure.js";
 import { criarOncoassistJev } from "../kernel/llm/jev/oncoassist.js";
 import { operarOncoassistPropostas } from "./oncoassistPropostas.js";
-import { HistoricoOncoassist } from "../contracts/api/oncoassist.js";
 import { rascunhoJevNaoPromovivel } from "../kernel/ledger/writeRouter.js";
 import { detectarEmergencias } from "../rules/radsEmergencias.js";
 import { PlanoFlashEntrada, lerModeloFlash, prepararFinalizacaoFlash, salvarRascunhoFlash } from "./flash.js";
@@ -438,8 +437,7 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
                               : req.url === "/consulta/salao/liberar" ? "liberarSalao"
                                 : req.url === "/consulta/canal/vincular" ? "vincularCanal" : "desconhecida";
   const reply = (status: number, codigo: string, result: unknown = { codigo }) => {
-    const valida = rota === "oncoassistHistorico" && status >= 200 && status < 300
-      ? HistoricoOncoassist.safeParse(result).success : respostaHttpValida(rota, status, result);
+    const valida = respostaHttpValida(rota, status, result);
     if (!valida) {
       deps.log({ rota, codigo: "RESPOSTA_FORA_CONTRATO", status: 500 });
       return send(res, 500, { codigo: "RESPOSTA_FORA_CONTRATO" });
