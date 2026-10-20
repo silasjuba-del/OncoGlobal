@@ -52,14 +52,19 @@ export function lerBasePrescricaoExecutavel(db: DatabaseSync, contexto: Contexto
     && typeof selecao.episodioId === "string" ? selecao.episodioId : null;
   if (!ciclo && (selecoes.length > 1 || selecoes.length === 1 && !episodioSelecionado))
     pendencias.push("SELECAO_EPISODIO_INVALIDA_OU_AMBIGUA");
-  const episodios = vigentes.filter(e => ["TreatmentEpisode", "TreatmentEpisode@1"].includes(e.tipo)
+  const episodiosVinculados = vigentes.filter(e => ["TreatmentEpisode", "TreatmentEpisode@1"].includes(e.tipo)
     && e.tumorLotId === contexto.tumorLotId).flatMap(e => {
     const p = TreatmentEpisode.safeParse(dadosDoEvento(e));
     return p.success && p.data.tumorLotId === contexto.tumorLotId
       && (ciclo ? p.data.episodioId === ciclo.episodioId
-        : p.data.fim.valor === null && (!episodioSelecionado || p.data.episodioId === episodioSelecionado)) ? [p.data] : [];
+        : episodioSelecionado ? p.data.episodioId === episodioSelecionado : p.data.fim.valor === null) ? [p.data] : [];
   });
-  if (episodios.length > 1 || (ciclo || episodioSelecionado) && episodios.length !== 1)
+  // Encerramento explícito é um estado conhecido, não uma origem órfã. No
+  // próximo atendimento, permite NOVA_LINHA sem reabrir outro episódio antigo.
+  const selecionadoEncerrado = !ciclo && !!episodioSelecionado && episodiosVinculados.length === 1
+    && episodiosVinculados[0]!.fim.campo === "PRESENTE" && episodiosVinculados[0]!.fim.valor !== null;
+  const episodios = !ciclo ? episodiosVinculados.filter(e => e.fim.valor === null) : episodiosVinculados;
+  if (episodios.length > 1 || (ciclo || episodioSelecionado) && episodios.length !== 1 && !selecionadoEncerrado)
     pendencias.push("EPISODIO_ATUAL_AUSENTE_OU_AMBIGUO");
   const episodio = episodios.length === 1 ? episodios[0]! : null;
   let vigente: ConteudoPrescricaoExecutavel | null = null;
@@ -93,6 +98,17 @@ const PreparacaoArmazenada = z.object({
   resposta: PrescricaoExecutavelPreparada, edicao: PrepararPrescricaoExecutavelPedido.shape.edicao,
   eventos: z.array(EventoPlanejado), documentoAnteriorId: z.string().nullable(),
 }).strict();
+
+type DadosPreparacao = Omit<z.infer<typeof PreparacaoArmazenada>, "kind" | "resposta"> & {
+  resposta: Omit<z.infer<typeof PrescricaoExecutavelPreparada>, "conteudoHash">;
+};
+/** O recibo vincula também base, edição e efeitos que a confirmação consumirá. */
+function hashPreparacao(p: DadosPreparacao): string {
+  const { draftId, revision, baseHash, conteudo, texto, avisos, efeitos } = p.resposta;
+  return hash({ contexto: p.contexto, atorId: p.atorId, requestHash: p.requestHash,
+    edicao: p.edicao, eventos: p.eventos, documentoAnteriorId: p.documentoAnteriorId,
+    resposta: { draftId, revision, baseHash, conteudo, texto, avisos, efeitos } });
+}
 
 /** Apenas conversões dimensionais explícitas; unidade não suportada não vira mg por suposição. */
 function doseMg(dose: number, unidade: string): number | null {
@@ -131,6 +147,10 @@ function preparar(deps: Deps, token: string, raw: unknown, contexto: Contexto, a
     const salvo = PreparacaoArmazenada.safeParse(anterior.payload);
     if (!salvo.success || anterior.patientId !== contexto.patientId || salvo.data.requestHash !== requestHash
       || anterior.revision !== salvo.data.resposta.revision) return negar("IDEMPOTENCIA_CONFLITO");
+    if (hashPreparacao(salvo.data) !== salvo.data.resposta.conteudoHash
+      || hash(salvo.data.edicao) !== hash(entrada.edicao)
+      || salvo.data.resposta.baseHash !== entrada.expectedBaseHash)
+      return negar("CONTEUDO_ALTERADO_APOS_EXIBICAO");
     deps.sessoes.registrarBundleExibido(token, contexto, [{ documentId: salvo.data.resposta.conteudo.documentId,
       documentVersion: salvo.data.resposta.conteudo.documentVersion, conteudoHash: salvo.data.resposta.conteudoHash, draftId }]);
     return { status: 200, body: salvo.data.resposta };
@@ -200,11 +220,12 @@ function preparar(deps: Deps, token: string, raw: unknown, contexto: Contexto, a
     ...(edicao.encaminharFarmacia ? ["Enviar à fila local da farmácia para conferência; não liberar preparo ou infusão."] : []),
     "Nenhuma administração será registrada.", "A data prevista não reserva cadeira nem altera a agenda externa."];
   const texto = `${avaliacao.texto!}\n\nEFEITOS DA CONFIRMAÇÃO\n${efeitos.map(e => `- ${e}`).join("\n")}`;
-  const conteudoHash = hash({ conteudo, texto, efeitos, eventos: planejados, documentoAnteriorId: documentoAnterior?.eventId ?? null });
-  const resposta = PrescricaoExecutavelPreparada.parse({ draftId, revision: 0, conteudoHash,
-    baseHash: base.revisao, conteudo, texto, avisos: avaliacao.avisos, efeitos });
-  const payload = PreparacaoArmazenada.parse({ kind: "PRESCRICAO_EXECUTAVEL_RASCUNHO", contexto,
-    atorId, requestHash, resposta, edicao, eventos: planejados, documentoAnteriorId: documentoAnterior?.eventId ?? null });
+  const dadosPreparacao = { contexto, atorId, requestHash, edicao, eventos: planejados,
+    documentoAnteriorId: documentoAnterior?.eventId ?? null };
+  const respostaSemHash = { draftId, revision: 0, baseHash: base.revisao, conteudo, texto, avisos: avaliacao.avisos, efeitos };
+  const conteudoHash = hashPreparacao({ ...dadosPreparacao, resposta: respostaSemHash });
+  const resposta = PrescricaoExecutavelPreparada.parse({ ...respostaSemHash, conteudoHash });
+  const payload = PreparacaoArmazenada.parse({ kind: "PRESCRICAO_EXECUTAVEL_RASCUNHO", ...dadosPreparacao, resposta });
   salvarDraft(deps.db, { draftId, patientId: contexto.patientId, sourceId: "prescricao-medica-local",
     rawRef: "referencia-local", payload, revision: 0, diagnostics: ["AGUARDA_ASSINATURA_MEDICA"], criadoEm: em });
   deps.sessoes.registrarBundleExibido(token, contexto, [{ documentId: conteudo.documentId,
@@ -220,21 +241,33 @@ function confirmar(deps: Deps, token: string, raw: unknown, contexto: Contexto, 
   if (!draft || !s.success || draft.patientId !== contexto.patientId || !mesmoContexto(s.data.contexto, contexto)
     || s.data.atorId !== atorId) return negar("PREPARACAO_NAO_ENCONTRADA");
   const salvo = s.data, r = salvo.resposta;
-  if (r.conteudoHash !== entrada.conteudoHash || r.revision !== entrada.expectedRevision
-    || hash({ conteudo: r.conteudo, texto: r.texto, efeitos: r.efeitos, eventos: salvo.eventos,
-      documentoAnteriorId: salvo.documentoAnteriorId }) !== r.conteudoHash) return negar("CONTEUDO_ALTERADO_APOS_EXIBICAO");
+  if (r.conteudoHash !== entrada.conteudoHash || r.revision !== entrada.expectedRevision)
+    return negar("CONTEUDO_ALTERADO_APOS_EXIBICAO");
   const operationId = `rx-confirmar:${entrada.idempotencyKey}`, requestHash = hash({ entrada, atorId });
   const eventos = listarEventos(deps.db, contexto.patientId);
   const anteriores = eventos.filter(e => e.operationId === operationId);
-  const retorno = (codigo: "GRAVADA" | "REPLAY", eventoId: string) => ({ status: 200, body: {
-    codigo, documentId: r.conteudo.documentId, documentVersion: r.conteudo.documentVersion,
-    eventoId, cicloId: r.conteudo.contexto.cicloId, episodioId: r.conteudo.contexto.episodioId } });
+  const retorno = (codigo: "GRAVADA" | "REPLAY", eventoId: string, conteudo = r.conteudo) => ({ status: 200, body: {
+    codigo, documentId: conteudo.documentId, documentVersion: conteudo.documentVersion,
+    eventoId, cicloId: conteudo.contexto.cicloId, episodioId: conteudo.contexto.episodioId } });
   if (anteriores.length) {
     if (anteriores.some(e => e.encounterId !== contexto.encounterId || e.tumorLotId !== contexto.tumorLotId
       || e.criadoPor.id !== atorId || e.fontes[0]?.contentHash !== requestHash)) return negar("IDEMPOTENCIA_CONFLITO");
     const doc = anteriores.find(e => e.tipo === "DOCUMENTO");
-    return doc ? retorno("REPLAY", doc.eventId) : negar("OPERACAO_INCOMPLETA");
+    const dados = doc ? dadosDoEvento(doc) : null;
+    const documento = dados?.data && typeof dados.data === "object" && !Array.isArray(dados.data)
+      ? dados.data as Record<string, unknown> : null;
+    const historica = ConteudoPrescricaoExecutavel.safeParse(documento?.prescricao);
+    if (!doc || !historica.success || !verificarPrescricaoDuto([doc], contexto, {
+      documentId: historica.data.documentId, documentVersion: historica.data.documentVersion,
+    }).ok)
+      return negar("OPERACAO_INCOMPLETA");
+    const { episodioId: _episodioId, cicloId: _cicloId, ...origem } = historica.data.contexto;
+    if (!mesmoContexto(origem, contexto)) return negar("OPERACAO_INCOMPLETA");
+    // Replay de operação já confirmada lê o documento imutável. Não reexecuta
+    // efeitos nem depende do formato/estado posterior da preparação mutável.
+    return retorno("REPLAY", doc.eventId, historica.data);
   }
+  if (hashPreparacao(salvo) !== r.conteudoHash) return negar("CONTEUDO_ALTERADO_APOS_EXIBICAO");
   if (draft.revision !== entrada.expectedRevision) return negar("REVISAO_PREPARACAO_ALTERADA");
   const exibido = deps.sessoes.bundleExibido(token, contexto);
   if (!exibido?.some(e => e.draftId === draft.draftId && e.documentId === r.conteudo.documentId
