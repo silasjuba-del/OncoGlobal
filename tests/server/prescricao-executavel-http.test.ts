@@ -220,6 +220,57 @@ it("encerramento documentado do episódio selecionado permite nova linha sem rea
   expect(a.eventos().filter(e => e.tipo === "TreatmentAdministration")).toHaveLength(0);
 });
 
+it.each(["leitura", "assinatura", "ignora-nao-assinado"])("versões concorrentes usam a versão exata referenciada pelo ciclo: %s", async etapa => {
+  const a = await abrir();
+  const { preparada } = await prepararNovaLinha(a);
+  const v1 = await assinar(a, preparada, "assinar-concorrente-v1");
+  const documentoV1 = a.eventos().find(e => e.eventId === v1.eventoId)!;
+  const conteudoV2 = ConteudoPrescricaoExecutavel.parse({ ...preparada.conteudo, documentVersion: 2,
+    itens: [{ ...itemPrescrito(2.5) }] });
+  const documentoV2 = { documentId: v1.documentId, documentVersion: 2, tipoDocumento: "PRESCRICAO_QT",
+    texto: "Versão concorrente 2 sintética, dose 2,5 mg", contexto: conteudoV2.contexto, prescricao: conteudoV2 };
+  // Mesmo instante na fixture: operationId ordena o ledger. O prefixo zz põe
+  // a versão 2 depois da assinatura rx-confirmar da versão 1, sem supersedes.
+  const eventoV2 = "zz-documento-concorrente-v2";
+  salvarDraft(a.db, { draftId: eventoV2, patientId: PACIENTE, sourceId: eventoV2, rawRef: "referencia-local",
+    payload: {}, revision: 0, diagnostics: [], criadoEm: AGORA });
+  expect(executarConfirmacao(a.db, { ...contexto, operationId: eventoV2, reviewDecisionId: eventoV2,
+    sessao: a.sessoes.obter(a.token)!, em: AGORA, registros: [{ draftId: eventoV2, expectedRevision: 0,
+      eventId: eventoV2, tipo: "DOCUMENTO", revisao: "ASSINADO", fontes: [fonteSintetica(eventoV2)],
+      payload: { data: documentoV2, signature: { documentId: v1.documentId, documentVersion: 2,
+        documentHash: hashConteudoExibido(documentoV2), reviewDecisionId: eventoV2,
+        serverActorId: a.sessoes.obter(a.token)!.medicoId } },
+    }] }).estado).toBe("GRAVADA");
+  if (etapa === "ignora-nao-assinado") {
+    const registro = { ...documentoV2, prescricao: { ...conteudoV2, itens: [itemPrescrito(99)] } };
+    a.seed("DOCUMENTO", (_id: string, reviewDecisionId: string) => ({ data: registro, signature: {
+      documentId: v1.documentId, documentVersion: 2, documentHash: hashConteudoExibido(registro),
+      reviewDecisionId, serverActorId: a.sessoes.obter(a.token)!.medicoId,
+    } }), "CONFIRMADO");
+  }
+  const cicloV1 = a.eventos().find(e => e.tipo === "Ciclo" && dadosEvento(e).cicloId === v1.cicloId)!;
+  a.seed("Ciclo", { ...dadosEvento(cicloV1), prescricaoRef: { documentId: v1.documentId, documentVersion: 2 },
+    itens: [{ item: 1, droga: itemPrescrito().item.drug, doseMg: 2.5, reducaoPct: null }] }, "CONFIRMADO", cicloV1.eventId);
+  const base = await carregarBase(a);
+  expect(base.pendencias).toEqual([]);
+  if (etapa !== "assinatura") {
+    expect(base.vigente?.documentVersion).toBe(2);
+    expect(base.vigente?.itens[0]?.item.prescribedDose).toBe(2.5);
+    return;
+  }
+  const r = await a.request(PREPARAR, { contexto, expectedBaseHash: base.revisao,
+    idempotencyKey: "preparar-concorrente-v3", edicao: edicao({
+      planejamento: { modo: "CICLO_ATUAL", linha: 1, intencao: "PALIATIVA", numeroCiclo: 1 },
+      itens: [itemPrescrito(2.25)],
+    }) });
+  expect(r.status).toBe(200);
+  const v3 = await assinar(a, PrescricaoExecutavelPreparada.parse(r.data), "assinar-concorrente-v3");
+  expect(v3.documentVersion).toBe(3);
+  expect(a.eventos().find(e => e.eventId === v3.eventoId)?.supersedesEventId).toBe(eventoV2);
+  expect(a.eventos().find(e => e.eventId === documentoV1.eventId)).toEqual(documentoV1);
+  expect(a.eventos().filter(e => e.tipo === "DOCUMENTO")).toHaveLength(3);
+});
+
 it("prepara uma nova linha sem criar fato; assina documento, episódio e ciclo sem registrar administração", async () => {
   const a = await abrir();
   const antes = a.eventos();
