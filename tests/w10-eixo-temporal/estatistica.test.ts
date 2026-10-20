@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { projetarEstatistica, projetarEstatisticaLedger } from "../../src/estatistica/index.js";
+import { projetarEstatistica, projetarEstatisticaLedger } from "../../src/kernel/projections/estatistica.js";
 import { abrirLedger } from "../../src/kernel/ledger/db.js";
 import { evento, persistirFixture } from "./fixtures.js";
 

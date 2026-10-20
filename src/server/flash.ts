@@ -1,3 +1,4 @@
+import { transacao } from "../kernel/ledger/db.js";
 import { ReferenciaPropostaDose,type PropostaDoseReceita } from '../contracts/api/propostaDoseReceita.js';
 // W12-F4 · Consulta Flash no servidor: dados calculados do ledger e fechamento pelos caminhos existentes.
 // IA propõe, código calcula, médico decide e assina. Nenhum efeito externo aqui: só rascunhos no ledger local.
@@ -241,16 +242,7 @@ function montarDocumentos(chave: string, plano: PlanoFlashEntradaTipo, resumoCli
 export function prepararFinalizacaoFlash(db: DatabaseSync, agora: string, input: ContextoFlash & {
   plano: PlanoFlashEntradaTipo; idempotencyKey: string;
 }, resumoClinico: string | null = null, contextoQt: ContextoQtFlash | null = null, fonteDocumentos?: FonteDocumentosFlash): Resposta {
-  db.exec("SAVEPOINT flash_preparacao");
-  try {
-    const resultado = prepararDocumentosFlash(db, agora, input, resumoClinico, contextoQt, fonteDocumentos);
-    if (resultado.status >= 400) db.exec("ROLLBACK TO flash_preparacao");
-    db.exec("RELEASE flash_preparacao");
-    return resultado;
-  } catch (erro) {
-    db.exec("ROLLBACK TO flash_preparacao"); db.exec("RELEASE flash_preparacao");
-    throw erro;
-  }
+  return transacao(db, () => prepararDocumentosFlash(db, agora, input, resumoClinico, contextoQt, fonteDocumentos), resultado => resultado.status >= 400);
 }
 
 function prepararDocumentosFlash(db: DatabaseSync, agora: string, input: ContextoFlash & {

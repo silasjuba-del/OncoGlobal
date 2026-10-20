@@ -52,3 +52,10 @@ it.each(['origem','prazo'])('recusa conexão antes do provedor por %s',async mot
  const {ws}=a.abrir(ticket,motivo==='origem'?'https://externo.invalid':undefined);
  const falha=await new Promise<Error>(r=>ws.on('error',r));expect(falha.message).toContain('403');expect(a.conectar).not.toHaveBeenCalled();
 });
+
+it('G23 bloqueia envio de audio apos limite de comando curto',async()=>{
+ const a=await ambiente();configurar(a);const {ws,recebidos}=a.abrir(a.ticket());await vi.waitFor(()=>expect(recebidos).toHaveLength(1));
+ a.passar16s();ws.send(Buffer.from([1,2,3]));
+ await vi.waitFor(()=>expect(ws.readyState).toBe(WebSocket.CLOSED));
+ expect(a.enviar).not.toHaveBeenCalled();expect(recebidos).toContainEqual({tipo:'ERRO',codigo:'G23_COMANDO_CURTO_EXCEDIDO'});
+});

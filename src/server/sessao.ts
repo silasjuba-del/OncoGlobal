@@ -12,6 +12,8 @@ export function hashConteudoExibido(conteudo: unknown): string {
 }
 
 export interface GerenciadorSessao {
+  registrarAlertasExibidos?(token: string, contexto: ContextoExibicao, ids: readonly string[]): void;
+  alertasExibidos?(token: string, contexto: ContextoExibicao): readonly string[];
   login(senha: string): { token: string; sessao: SessaoTipo } | null;
   obter(token: string): SessaoTipo | null;
   registrarBundleExibido(token: string, contexto: ContextoExibicao,
@@ -29,7 +31,7 @@ export function criarGerenciadorSessao(config: {
   if (!config.medicoId || !config.crm || config.senha.length < 12 || config.duracaoMs <= 0)
     throw new Error("SESSAO_CONFIG_INVALIDA");
   const salt = randomBytes(16), secret = scryptSync(config.senha, salt, 32);
-  const sessions = new Map<string, { sessao: SessaoTipo; bundle?: {
+  const sessions = new Map<string, { sessao: SessaoTipo; alertas?: {contexto:ContextoExibicao;ids:readonly string[]}; bundle?: {
     contexto: ContextoExibicao;
     docs: readonly DocumentoExibido[];
   }; consulta?: { patientId: string; encounterId: string; tumorLotId?: string | null } }>();
@@ -54,6 +56,10 @@ export function criarGerenciadorSessao(config: {
       return { token, sessao };
     },
     obter,
+    registrarAlertasExibidos(token,contexto,ids){if(!obter(token))throw Error("SESSAO_EXPIRADA");sessions.get(token)!.alertas={contexto:{...contexto},ids:[...ids]};},
+    alertasExibidos(token,contexto){if(!obter(token))return [];const a=sessions.get(token)?.alertas;
+      return a && a.contexto.patientId===contexto.patientId && a.contexto.encounterId===contexto.encounterId
+        && (a.contexto.tumorLotId??null)===(contexto.tumorLotId??null) ? [...a.ids] : [];},
     registrarBundleExibido(token, contexto, docs) {
       if (!obter(token)) throw new Error("SESSAO_EXPIRADA");
       if (docs.some((d) => !/^[0-9a-f]{64}$/.test(d.conteudoHash))) throw new Error("HASH_EXIBIDO_INVALIDO");
@@ -74,7 +80,7 @@ export function criarGerenciadorSessao(config: {
       const record = sessions.get(token)!;
       if (record.consulta?.patientId !== contexto?.patientId
         || record.consulta?.encounterId !== contexto?.encounterId
-        || (record.consulta?.tumorLotId ?? null) !== (contexto?.tumorLotId ?? null)) delete record.bundle;
+        || (record.consulta?.tumorLotId ?? null) !== (contexto?.tumorLotId ?? null)) { delete record.bundle; delete record.alertas; }
       if (contexto === null) delete record.consulta;
       else record.consulta = { ...contexto };
     },

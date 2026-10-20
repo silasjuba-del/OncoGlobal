@@ -1262,7 +1262,16 @@ function persistirEntradaNaTransacao(db: DatabaseSync, entrada: {
   };
 }
 
+const schemasCanalProntos = new WeakSet<DatabaseSync>();
 export function garantirSchema(db: DatabaseSync): void {
+ if(schemasCanalProntos.has(db))return;
+ const externa=db.isTransaction;
+ if(!externa)db.exec('PRAGMA foreign_keys = ON; PRAGMA synchronous = FULL;');
+ transacao(db,()=>prepararSchemaCanal(db));
+ // Cache apenas depois de commit proprio; rollback do chamador nao pode deixar cache falso.
+ if(!externa)schemasCanalProntos.add(db);
+}
+function prepararSchemaCanal(db: DatabaseSync): void {
   if (!db.isTransaction) {
     db.exec("PRAGMA foreign_keys = ON; PRAGMA synchronous = FULL;");
   }

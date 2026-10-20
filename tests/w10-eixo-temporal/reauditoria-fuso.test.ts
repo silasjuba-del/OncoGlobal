@@ -1,5 +1,5 @@
 import { expect, it } from "vitest";
-import { projetarEstatistica } from "../../src/estatistica/index.js";
+import { projetarEstatistica } from "../../src/kernel/projections/estatistica.js";
 import { evento } from "./fixtures.js";
 const periodoClinico = { inicio: "2026-10-07", fim: "2026-10-07" };
 const admin = (inicio: string, fim: string | null = null) => ({ adminId: "admin-01", cicloId: "ciclo-01",

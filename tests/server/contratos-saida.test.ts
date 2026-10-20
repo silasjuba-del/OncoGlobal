@@ -1,3 +1,4 @@
+import { ROTAS_HTTP } from "../../src/server/rotas/catalogo.js";
 import { afterAll, beforeAll, describe, expect, it, vi } from "vitest";
 import { ambienteHttp } from "./http-fixture.js";
 import { readFileSync } from "node:fs";
@@ -7,9 +8,7 @@ import { confirmar } from "../../src/kernel/ledger/writeRouter.js";
 import { fonteSintetica, triagemBase } from "../fixtures/triagem.js";
 import { prepararAcaoComposta } from "../../src/rules/prescricao/acoesCompostas.js";
 
-const fonteRotas = readFileSync("src/server/rotas.ts", "utf8");
-const tabelaRotas = fonteRotas.slice(fonteRotas.indexOf("const rota = req.url"), fonteRotas.indexOf("const reply ="));
-const urls = [...new Set([...tabelaRotas.matchAll(/"(\/[a-z/-]+)"/g)].map(m => m[1]!))];
+const urls = ROTAS_HTTP.map(r=>r.url);
 
 describe("todas as portas públicas preservam método, autenticação e JSON", () => {
   let ambiente: Awaited<ReturnType<typeof ambienteHttp>>;
@@ -26,11 +25,8 @@ describe("todas as portas públicas preservam método, autenticação e JSON", (
 });
 
 it("toda rota pública possui contrato de saída; resposta vazia nunca é sucesso", () => {
-  const fonte = readFileSync("src/server/rotas.ts", "utf8");
-  const tabela = fonte.slice(fonte.indexOf("const rota = req.url"), fonte.indexOf("const reply ="));
-  const rotas = new Set([...tabela.matchAll(/\?\s*"([A-Za-z]+)"/g)].map(m => m[1]!));
-  for (const lista of tabela.matchAll(/(\[[^\]]+\])\.includes\(req\.url/g))
-    for (const rota of JSON.parse(lista[1]!) as string[]) rotas.add(rota);
+  const rotas = new Set<string>(ROTAS_HTTP.map(r=>r.nome));
+  expect(ROTAS_HTTP.map(r=>[r.url,r.nome]).sort()).toEqual(JSON.parse(readFileSync("tests/server/fixtures/rotas-baseline.json","utf8")));
   expect(rotas.size).toBe(80);
   for (const rota of ["listarFichasPrescricao", "revisarFichaPrescricao", "instanciarFichaPrescricao"])
     expect(rotas.has(rota), rota).toBe(true);

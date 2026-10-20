@@ -1,3 +1,4 @@
+import { transacao } from "../../kernel/ledger/db.js";
 import { mkdirSync } from "node:fs";
 import { resolve, sep } from "node:path";
 import { DatabaseSync } from "node:sqlite";
@@ -109,16 +110,14 @@ export function criarWorkspaceStore(options: { rootDir: string }): WorkspaceStor
       }
       const payload = JSON.stringify(value);
       if (payload === undefined) throw new TypeError("Valor não serializável");
-      db.exec("BEGIN IMMEDIATE");
-      try {
+      const resultado = transacao(db, () => {
         const row = db.prepare("SELECT collection, record_key, revision, payload FROM workspace_record WHERE collection=? AND record_key=?").get(c, k) as Record<string, unknown> | undefined;
         const atual = row ? decodificar<unknown>(row) : null;
         const actualRevision = atual?.revision ?? null;
         if (actualRevision !== expectedRevision) {
           db.prepare("INSERT INTO workspace_conflict(collection,record_key,expected_revision,payload) VALUES(?,?,?,?)")
             .run(c, k, expectedRevision ?? 0, payload);
-          db.exec("COMMIT");
-          throw new ConflitoPersistencia<T>({
+          return new ConflitoPersistencia<T>({
             codigo: "CONFLITO_REVISAO", collection: c, key: k,
             expectedRevision: expectedRevision ?? 0, atual, candidato: value,
           });
@@ -128,12 +127,10 @@ export function criarWorkspaceStore(options: { rootDir: string }): WorkspaceStor
           ON CONFLICT(collection,record_key) DO UPDATE SET revision=excluded.revision,payload=excluded.payload`)
           .run(c, k, revision, payload);
         db.prepare("INSERT INTO workspace_history(collection,record_key,payload) VALUES(?,?,?)").run(c, k, payload);
-        db.exec("COMMIT");
         return { collection: c, key: k, revision, value };
-      } catch (error) {
-        try { db.exec("ROLLBACK"); } catch { /* transação já encerrada */ }
-        throw error;
-      }
+      });
+      if (resultado instanceof ConflitoPersistencia) throw resultado;
+      return resultado;
     },
     listar<T>(collection: string) {
       const c = seguro(collection, "collection");

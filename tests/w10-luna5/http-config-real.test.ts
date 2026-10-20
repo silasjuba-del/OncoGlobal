@@ -188,3 +188,13 @@ describe("W10 Luna5 · configurações pela API HTTP real", () => {
   });
 });
 
+
+it("salva perfil por HTTP real e recusa revisao antiga sem perder o valor confirmado",async()=>{
+ const token=await harness.login(),antes=await harness.post("/config/perfil",{},token);
+ const perfil=structuredClone(antes.body.perfil) as {medico:{nome:string|null}};
+ perfil.medico.nome="Medico Sintetico de Teste";
+ const pedido={operationId:"perfil-http-sintetico",expectedRevision:antes.body.revision,perfil};
+ expect((await harness.post("/config/perfil/salvar",pedido,token)).status).toBe(200);
+ expect((await harness.post("/config/perfil",{},token)).body.perfil).toMatchObject({medico:{nome:"Medico Sintetico de Teste"}});
+ expect((await harness.post("/config/perfil/salvar",{...pedido,operationId:"perfil-conflito-sintetico",perfil:{...perfil,medico:{...perfil.medico,nome:"Outro nome sintetico"}}},token)).status).toBe(409);
+});

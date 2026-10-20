@@ -1,3 +1,4 @@
+import { ROTAS_HTTP } from "./rotas/catalogo.js";
 import type { DatabaseSync } from 'node:sqlite';
 import { z } from 'zod';
 import { Instante, Sessao, type Sessao as SessaoTipo } from '../contracts/base.js';
@@ -8,7 +9,7 @@ import { gravarEstimulo } from '../kernel/orquestracao/estimulos/gravar.js';
 import type { GerenciadorSessao } from './sessao.js';
 interface DepsBiblioteca { db: DatabaseSync; sessoes: GerenciadorSessao; agora: () => string }
 export interface ResultadoBiblioteca { status: number; body: Record<string, unknown> }
-const Rotas=new Set(['/biblioteca/importar','/biblioteca/curar','/biblioteca/ativar','/biblioteca/rollback','/biblioteca/consultar','/biblioteca/estado']);
+const Rotas = new Set<string>(ROTAS_HTTP.filter(r=>r.grupo==="BIBLIOTECA").map(r=>r.url));
 const Hash=z.string().regex(/^[a-f0-9]{64}$/),Id=z.string().min(1).max(250);
 const Conteudo=z.union([z.object({texto:z.string().max(1000000)}).strict(),z.object({base64:z.string().max(1400000).regex(/^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$/)}).strict()]);
 const Importar=z.object({manifesto:ManifestoBiblioteca,arquivos:z.record(z.string().regex(/^[a-zA-Z0-9_-]+\.json$/),Conteudo)}).strict();

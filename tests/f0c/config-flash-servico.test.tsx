@@ -3,8 +3,8 @@ import { cleanup,fireEvent,render,screen,waitFor } from "@testing-library/react"
 import { afterEach,describe,expect,it,vi } from "vitest";
 import { Configuracoes } from "../../src/ui/oncochart/Configuracoes.js";
 import { ConsultaFlash,type ConsultaFlashProps } from "../../src/ui/consulta/ConsultaFlash.js";
-import { lerModeloFlashConfigurado,NUMERO_CAIXA_MODELO_FLASH } from "../../src/config/flash.js";
-import { NUMERO_CAIXA_RECEITUARIO_ESPECIAL,lerConfiguracaoServico } from "../../src/config/servico.js";
+import { lerModeloFlashConfigurado,NUMERO_CAIXA_MODELO_FLASH } from "../../src/contracts/configFlash.js";
+import { NUMERO_CAIXA_RECEITUARIO_ESPECIAL,lerConfiguracaoServico } from "../../src/contracts/configServico.js";
 afterEach(cleanup);
 const flash=():ConsultaFlashProps=>({cabecalho:{},exames:[],acoesHoje:[],receitas:[],apac:{cid:"",sigtap:"",finalidade:"",competencia:"",estado:"PENDENTE",pendencias:[]},iaFala:[],retorno:{dias:null,examesAntesDoRetorno:[]},aoSalvarRascunho:vi.fn(),aoFinalizar:vi.fn()});
 describe("modelo explícito e configuração do serviço",()=>{

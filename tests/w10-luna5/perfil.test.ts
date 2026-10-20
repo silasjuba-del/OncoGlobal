@@ -2,7 +2,7 @@ import { join } from "node:path";
 import { DatabaseSync } from "node:sqlite";
 import { afterEach, describe, expect, it } from "vitest";
 import { AlteracaoCaixa } from "../../src/contracts/w10/clinico-w10.js";
-import { createSettingsService, type SettingsService } from "../../src/config/settings.js";
+import { createSettingsService, type SettingsService } from "../../src/kernel/config/settings.js";
 import { NOW, PROFILE_BOXES, SESSION, novoDiretorio, perfilVazio, removerDiretorio } from "./helpers.js";
 
 const dirs: string[] = [];

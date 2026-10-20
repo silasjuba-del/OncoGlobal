@@ -65,7 +65,7 @@ export async function iniciarOncoassistLocal(opcoes: OpcoesOncoassistLocal) {
   let fechado = false;
   const fecharDb = () => { if (!fechado) { fechado = true; db.close(); } };
   try {
-    const server = criarServidorLocal({ db, sessoes, gateway, agora, log: () => {}, configRootDir: opcoes.dataDir,
+    const server = criarServidorLocal({ db, sessoes, gateway, agora, log: registrarLogOperacional, configRootDir: opcoes.dataDir,
       extracaoLlm,
       oncoassistJev: criarOncoassistJev(),
     }, { host: "127.0.0.1", port: opcoes.port });
@@ -89,4 +89,11 @@ export async function startCLI(args = process.argv.slice(2)) {
   for (const signal of ["SIGINT", "SIGTERM"] as const)
     process.once(signal, () => { void running.encerrar().then(() => process.exit(0)); });
   return running;
+}
+
+/** Somente metadados operacionais; nunca corpo, transcricao ou credencial. */
+export function registrarLogOperacional(entry: { rota: string; codigo: string; status: number }): void {
+  console.error(JSON.stringify({ evento: "HTTP_LOCAL", rota: /^[a-zA-Z0-9_-]{1,80}$/.test(entry.rota) ? entry.rota : "desconhecida",
+    codigo: /^[A-Z0-9_]{1,100}$/.test(entry.codigo) ? entry.codigo : "CODIGO_INVALIDO",
+    status: Number.isInteger(entry.status) && entry.status >= 100 && entry.status <= 599 ? entry.status : 500 }));
 }

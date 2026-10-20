@@ -38,12 +38,12 @@ function selo(leitura: Leitura): string {
 }
 
 function valida(leitura: Leitura): boolean {
-  return CIVIL.test(leitura.data) && (leitura.hora === null || HORA.test(leitura.hora)) && Number.isFinite(leitura.valor);
+  return diferencaDiasCivis(leitura.data,leitura.data)!==null && (leitura.hora === null || HORA.test(leitura.hora)) && Number.isFinite(leitura.valor);
 }
 
 function dentro(leitura: Leitura, hoje: string, validadeDias: number): boolean {
   const dias = diferencaDiasCivis(leitura.data, hoje);
-  return dias >= 0 && dias <= validadeDias;
+  return dias !== null && dias >= 0 && dias <= validadeDias;
 }
 
 /**
@@ -56,7 +56,7 @@ export function valorAtual(pedido: PedidoValorAtual): ResultadoValorAtual {
     serie,
     bloqueiaSalvar: false as const,
   };
-  if (!CIVIL.test(pedido.hoje) || !Number.isInteger(pedido.validadeDias) || pedido.validadeDias < 0) {
+  if (diferencaDiasCivis(pedido.hoje,pedido.hoje)===null || !Number.isInteger(pedido.validadeDias) || pedido.validadeDias < 0) {
     return { ...base, estado: "PENDENTE", valorAtual: null, candidatos: [], dadoAntigo: null };
   }
 
@@ -81,7 +81,7 @@ export function valorAtual(pedido: PedidoValorAtual): ResultadoValorAtual {
 
   const vigentes = unicos.filter((item) => dentro(item, pedido.hoje, pedido.validadeDias));
   const vencidos = unicos
-    .filter((item) => diferencaDiasCivis(item.data, pedido.hoje) > pedido.validadeDias)
+    .filter((item) => {const dias=diferencaDiasCivis(item.data,pedido.hoje);return dias!==null && dias>pedido.validadeDias;})
     .sort(ordem);
   const dadoAntigo = vencidos.length === 0 ? null : vencidos[vencidos.length - 1] ?? null;
 

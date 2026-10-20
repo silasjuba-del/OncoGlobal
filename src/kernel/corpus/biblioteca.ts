@@ -1,3 +1,5 @@
+import { garantirColunas } from "../ledger/migracao.js";
+import { transacao as transacaoLedger } from "../ledger/db.js";
 import { createHash } from 'node:crypto';
 import type { DatabaseSync } from 'node:sqlite';
 import { z } from 'zod';
@@ -127,29 +129,13 @@ export function criarBiblioteca(db: DatabaseSync, portas: PortasBiblioteca) {
     CREATE TRIGGER IF NOT EXISTS biblioteca_ativacao_no_delete BEFORE DELETE ON biblioteca_ativacao BEGIN SELECT RAISE(ABORT,'ativacao imutavel'); END;`);
   // Migração aditiva: bancos existentes preservam seu histórico sem datas; novas linhas
   // sempre recebem ator e instante. Não reescrevemos eventos anteriores nem hashes.
-  const colunas = (tabela: string): Set<string> => new Set(
-    (db.prepare(`PRAGMA table_info(${tabela})`).all() as { name: string }[]).map(c => c.name),
-  );
-  db.exec('SAVEPOINT biblioteca_schema_migration');
-  try {
-    for (const [tabela, nome, tipo] of [
-      ['biblioteca_curadoria', 'registrado_em', 'TEXT'], ['biblioteca_ativacao', 'ator', 'TEXT'],
-      ['biblioteca_ativacao', 'registrado_em', 'TEXT'],
-    ] as const) if (!colunas(tabela).has(nome)) db.exec(`ALTER TABLE ${tabela} ADD COLUMN ${nome} ${tipo}`);
-    db.exec('RELEASE biblioteca_schema_migration');
-  } catch (error) {
-    db.exec('ROLLBACK TO biblioteca_schema_migration'); db.exec('RELEASE biblioteca_schema_migration'); throw error;
-  }
+  garantirColunas(db,[['biblioteca_curadoria','registrado_em','TEXT'],['biblioteca_ativacao','ator','TEXT'],['biblioteca_ativacao','registrado_em','TEXT']]);
   const agora = (): string => {
     const instante = (portas.agora ?? (() => new Date().toISOString()))();
     if (!z.iso.datetime({ offset: true }).safeParse(instante).success) throw new Error('RELOGIO_SERVICO_INVALIDO');
     return instante;
   };
-  const transacao = <T>(fn: () => T): T => {
-    db.exec('SAVEPOINT biblioteca_write');
-    try { const r = fn(); db.exec('RELEASE biblioteca_write'); return r; }
-    catch (e) { db.exec('ROLLBACK TO biblioteca_write'); db.exec('RELEASE biblioteca_write'); throw e; }
-  };
+  const transacao = <T>(fn: () => T): T => transacaoLedger(db, fn);
   const autoridade = (): string => {
     const ator = portas.autorizarCuradoria();
     if (!ator?.atorId.trim()) throw new Error('SEM_AUTORIDADE_CURADORIA');

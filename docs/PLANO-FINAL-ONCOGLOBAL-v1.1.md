@@ -778,3 +778,7 @@ Cada decisão (Q01–Q59, A1–A11) e cada K-xx aponta: **contrato → função/
 ---
 
 *PLANO FINAL v1.1 · 2026-10-05 · 59 + 11 decisões · INV-01…24 (INV-12 reescrito) · C-01…22 · FN-01…26 · AG (após cortes: 14 agentes) · G-01…28 · T-01…61 + N01…26 + A1…A14 + C1…C14 · F0…F6 · READY_FOR_CODE*
+
+## Nota de precedência documental — 20/10/2026
+
+Para autoria e coordenação de código, aplica-se a regra posterior de [AGENTS.md](../AGENTS.md), de 10/10/2026. O roster R-26/Q51 acima conserva o registro histórico. Decisões D-F0C-01 a 06 e limites da execução técnica estão indexados na [continuidade de DECISOES.md](./DECISOES.md) e no [registro de correções](./reviews/CORRECOES-AUDITORIA-20261020.md). Esta nota não muda decisões clínicas, autoriza canais externos adicionais nem constitui aprovação clínica do aplicativo.

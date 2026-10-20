@@ -1,3 +1,4 @@
+import { lerLedgerIntegro } from "./leituraIntegra.js";
 import { documentoReceitaDosePendente } from '../../contracts/f1/receitaDose.js';
 import { createHash } from "node:crypto";
 import type { DatabaseSync } from "node:sqlite";
@@ -14,10 +15,9 @@ const objeto = (v: unknown): Record<string, unknown> | null => v && typeof v ===
 /** Resolve somente a versão assinada vigente, vinculada ao conteúdo confirmado. */
 export function criarResolverDocumentoLedger(db: DatabaseSync): ResolverDocumentoImpressao {
   return { async resolver({id,version}) {
-    const eventos = db.prepare("SELECT * FROM clinical_event").all().flatMap(row => {
-      try { return [ClinicalEvent.parse({...row,payload:JSON.parse(String(row.payload)),fontes:JSON.parse(String(row.fontes)),criadoPor:JSON.parse(String(row.criadoPor))})]; }
-      catch { return []; }
-    });
+    const pacientes=db.prepare(`SELECT DISTINCT patientId FROM clinical_event WHERE tipo IN ('DOCUMENTO','DOCUMENTO@1')
+      AND CASE WHEN json_valid(payload) THEN json_extract(payload,'$.data.data.documentId') END = ?`).all(id);
+    const eventos=pacientes.flatMap(row=>typeof row.patientId==="string"?lerLedgerIntegro(db,row.patientId).itens:[]);
     const validos = eventosVigentes(eventos).filter(e=>e.revisao === "ASSINADO" && e.tipo === "DOCUMENTO").flatMap(e=>{
       const d = dadosDoEvento(e), corpo = objeto(d?.data), assinatura = objeto(d?.signature);
       if (!corpo || !assinatura || typeof corpo.documentId !== "string" || typeof corpo.documentVersion !== "number"
