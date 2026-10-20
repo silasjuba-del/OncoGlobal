@@ -13,6 +13,7 @@ import { tmpdir } from "node:os";
 import { createServer as createViteServer } from "vite";
 import { jornadaReceitaNoNavegador } from './browser-receita.js';
 import { jornadaCanalNoNavegador,jornadaDemonstracaoCanal } from './browser-canal.js';
+import { jornadaContingenciaNoNavegador } from './browser-contingencia.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
 const MANIFEST = JSON.parse(readFileSync(join(ROOT, "corpus/manifesto/b2-fichas.v1.json"), "utf8"));
@@ -335,6 +336,8 @@ async function main() {
     const consentimento=registrarConsentimentoCanal(demo.app.db,{sessoes:demo.app.sessoes,token:demo.app.token,agora:manifesto2.agora},{contatoId:'5500'+'000007777',patientId:manifesto2.b2.patientId,referenciaTermo:'termo-sintetico-navegador',versaoTermo:'1',finalidade:['COMUNICACAO_CLINICA'],origem:'PRESENCIAL_CONSULTORIO'});
     if(!consentimento.ok)throw new Error('CONSENTIMENTO_SINTETICO_NAO_GRAVADO');
     log({prova:'CANAL_HTTP_UI_NAVEGADOR',...await jornadaCanalNoNavegador(page2,{baseUrl:manifesto2.baseUrl,manifesto:manifesto2,segredo:segredoCanal,efeitos:()=>efeitosCanal})});
+    log({prova:'F3_CONTINGENCIA_HTTP_UI_NAVEGADOR',...await jornadaContingenciaNoNavegador(page2,{manifesto:manifesto2,efeitos:()=>efeitosCanal,
+      contarEventosClinicos:()=>Number(demo.app.db.prepare('SELECT COUNT(*) AS n FROM clinical_event').get().n),evidenceDir})});
     log({prova:'CANAL_DEMONSTRACAO_WEBCRYPTO',...await jornadaDemonstracaoCanal(page2)});
     writeFileSync(join(evidenceDir, "resumo.json"), JSON.stringify({ manifesto: manifesto2, familias: FAMILIAS_B2, resultado, reinicio: { documentosHistorico: qtd, propostasReabertas } }, null, 2));
     await demo.app.close();

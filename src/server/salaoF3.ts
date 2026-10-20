@@ -111,13 +111,22 @@ export function garantirSchemaSalaoF3(db: DatabaseSync): void {
       patientId TEXT NOT NULL,
       encounterId TEXT NOT NULL,
       folhaJson TEXT NOT NULL,
-      geradoEm TEXT NOT NULL
+      geradoEm TEXT NOT NULL,
+      pedidoSha256 TEXT
     );
     CREATE TRIGGER IF NOT EXISTS salao_folha_contingencia_no_update BEFORE UPDATE ON salao_folha_contingencia
       BEGIN SELECT RAISE(ABORT, 'salao_folha_contingencia append-only'); END;
     CREATE TRIGGER IF NOT EXISTS salao_folha_contingencia_no_delete BEFORE DELETE ON salao_folha_contingencia
       BEGIN SELECT RAISE(ABORT, 'salao_folha_contingencia append-only'); END;
   `);
+  const temFingerprint = () => (db.prepare("PRAGMA table_info(salao_folha_contingencia)").all() as { name: string }[])
+    .some(c => c.name === "pedidoSha256");
+  if (!temFingerprint()) {
+    // Migração aditiva serializada. Legados permanecem NULL, sem backfill.
+    transacao(db, () => {
+      if (!temFingerprint()) db.exec("ALTER TABLE salao_folha_contingencia ADD COLUMN pedidoSha256 TEXT");
+    });
+  }
 }
 
 export function registrarInterrupcaoSalaoF3(
@@ -376,6 +385,8 @@ export function gerarFolhaContingenciaSalaoF3(
   acesso: AcessoSalao,
   entrada: {
     folhaId?: string;
+    /** Interno: hash do pedido HTTP validado; nunca aceito diretamente do cliente. */
+    pedidoSha256?: string;
     patientId: string;
     nomePaciente: string;
     encounterId: string;
@@ -391,6 +402,9 @@ export function gerarFolhaContingenciaSalaoF3(
   const sessao = obterSessaoValida(acesso);
   if (!sessao) return { ok: false, codigo: "SESSAO_INVALIDA" };
   garantirSchemaSalaoF3(db);
+  if (entrada.pedidoSha256 !== undefined && !/^[a-f0-9]{64}$/.test(entrada.pedidoSha256)) {
+    return { ok: false, codigo: "ERRO_RENDERIZACAO_FOLHA" };
+  }
 
   const alertasE1 = entrada.alertasOperacionaisE1.filter((a) => a.trim().length > 0);
   const gate = g06E1Destaque({
@@ -414,7 +428,7 @@ export function gerarFolhaContingenciaSalaoF3(
     const camposHtml = Object.entries(entrada.resumoTriagem)
       .map(([k, v]) => `<div class="campo"><strong>${esc(k)}:</strong> ${esc(v)}</div>`)
       .join("");
-    const html = `<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><title>${esc(templateRaw.id)}</title></head><body><main class="documento"><header><strong>Serviço de Oncologia Local</strong><div>${esc(sessao.medicoId)} · ${esc(sessao.crm)}</div></header><h1>Folha Operacional do Salão</h1><div><strong>Paciente:</strong> ${esc(entrada.nomePaciente)}</div><div><strong>Data:</strong> ${esc(entrada.dataImpressao)}</div><div><strong>Destino:</strong> ${esc(entrada.destino)}</div>${blocoE1}<section>${camposHtml}</section></main></body></html>`;
+    const html = `<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><title>${esc(templateRaw.id)}</title></head><body><main class="documento"><header><strong>Serviço de Oncologia Local</strong><div>${esc(sessao.medicoId)} · ${esc(sessao.crm)}</div></header><h1>Folha Operacional do Salão</h1><div><strong>Paciente:</strong> ${esc(entrada.nomePaciente)}</div><div><strong>Identificador:</strong> ${esc(entrada.patientId)}</div><div><strong>Encontro:</strong> ${esc(entrada.encounterId)}</div><div><strong>Data:</strong> ${esc(entrada.dataImpressao)}</div><div><strong>Destino:</strong> ${esc(entrada.destino)}</div>${blocoE1}<section>${camposHtml}</section></main></body></html>`;
 
     const folha = FolhaContingenciaSalao.parse({
       folhaId: entrada.folhaId ?? `folha-salao-${entrada.patientId}-${entrada.encounterId}`,
@@ -432,15 +446,16 @@ export function gerarFolhaContingenciaSalaoF3(
 
     return transacao(db, () => {
       const inserida = db.prepare(`
-        INSERT INTO salao_folha_contingencia (folhaId, patientId, encounterId, folhaJson, geradoEm)
-        VALUES (?, ?, ?, ?, ?)
+        INSERT INTO salao_folha_contingencia (folhaId, patientId, encounterId, folhaJson, geradoEm, pedidoSha256)
+        VALUES (?, ?, ?, ?, ?, ?)
         ON CONFLICT(folhaId) DO NOTHING
-      `).run(folha.folhaId, folha.patientId, folha.encounterId, JSON.stringify(folha), folha.geradoEm);
+      `).run(folha.folhaId, folha.patientId, folha.encounterId, JSON.stringify(folha), folha.geradoEm, entrada.pedidoSha256 ?? null);
       if (Number(inserida.changes) === 0) {
-        const row = db.prepare("SELECT folhaJson FROM salao_folha_contingencia WHERE folhaId = ?")
-          .get(folha.folhaId) as { folhaJson: string };
+        const row = db.prepare("SELECT folhaJson, pedidoSha256 FROM salao_folha_contingencia WHERE folhaId = ?")
+          .get(folha.folhaId) as { folhaJson: string; pedidoSha256: string | null };
         const persistida = FolhaContingenciaSalao.parse(JSON.parse(row.folhaJson));
-        if (persistida.patientId !== folha.patientId || persistida.encounterId !== folha.encounterId
+        if (row.pedidoSha256 !== (entrada.pedidoSha256 ?? null)
+          || persistida.patientId !== folha.patientId || persistida.encounterId !== folha.encounterId
           || persistida.hashDocumento !== folha.hashDocumento
           || persistida.destino !== folha.destino || persistida.emergenciaAtiva !== folha.emergenciaAtiva
           || persistida.dataImpressao !== folha.dataImpressao) {

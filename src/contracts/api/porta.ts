@@ -365,6 +365,8 @@ export interface PortaConsulta {
   // [SERVIDOR_PENDENTE]
   proporDoseReceita?(contexto:{patientId:string;encounterId:string;tumorLotId:string|null},medicamento:string):Promise<readonly PropostaDoseReceita[]>;
   filaSalao(): Promise<SalaoVisao>;
+  gerarContingenciaSalao?(pedido: import("./salaoContingencia.js").GerarContingenciaSalao): Promise<import("../f3/salaoOperacional.js").FolhaContingenciaSalao>;
+  historicoContingenciaSalao?(contexto: { patientId: string; encounterId: string }): Promise<import("../f3/salaoOperacional.js").FolhaContingenciaSalao[]>;
   revisarRelatoInfusao?(entrada:{contexto:{patientId:string;encounterId:string;tumorLotId:string|null;operationId:string};mensagemId:string;payloadSha256:string;decisao:string}):Promise<unknown>;
   // [SERVIDOR_PENDENTE]
   salvarTriagem(triagem: Triagem, expectedRevision?: number | null): Promise<SalaoVisao>;

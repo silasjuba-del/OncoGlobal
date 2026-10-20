@@ -1,4 +1,5 @@
 import { PropostasDoseReceitaResposta } from '../../contracts/api/propostaDoseReceita.js';
+import { GerarContingenciaSalao, ContingenciaSalaoResposta, HistoricoContingenciaSalaoResposta } from '../../contracts/api/salaoContingencia.js';
 import {RespostaCanalPreparada,RespostaCanalConfirmada} from '../../contracts/api/respostaCanal.js';
 import { InvestigacaoConsultaVisao } from '../../contracts/api/investigacao.js';
 import { RevisaoClinicaResposta } from '../../contracts/fase2/revisaoClinica.js';
@@ -297,6 +298,12 @@ export function criarPortaHttp(opcoes: OpcoesHttp): PortaConsulta {
     },
     async filaSalao() {
       return leitura("/consulta/salao", {}, SalaoResposta);
+    },
+    async gerarContingenciaSalao(pedido) {
+      return (await leitura("/consulta/salao/contingencia/gerar", GerarContingenciaSalao.parse(pedido), ContingenciaSalaoResposta)).folha;
+    },
+    async historicoContingenciaSalao(contexto) {
+      return (await leitura("/consulta/salao/contingencia/historico", contexto, HistoricoContingenciaSalaoResposta)).folhas;
     },
 
     // [SERVIDOR_PENDENTE]
