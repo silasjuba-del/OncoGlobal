@@ -59,7 +59,32 @@ function dialogo() {
   return screen.getByRole("dialog", { name: "Transcrição não salva" });
 }
 
+function saidaDocumentoBloqueada() {
+  const evento = new Event("beforeunload", { cancelable: true });
+  return !window.dispatchEvent(evento) && evento.defaultPrevented;
+}
+
 describe("navegação com transcrição não salva", () => {
+  it("protege saída do documento com texto pendente, preserva cancelamento e libera ao limpar", async () => {
+    const f = fixture();
+    const tela = render(<OncoassistLocal fabricaPorta={f.fabrica} />);
+    entrar(); await abrirPaciente();
+    expect(saidaDocumentoBloqueada()).toBe(false);
+    await escrever("fonte sintética retida após cancelar refresh");
+    expect(saidaDocumentoBloqueada()).toBe(true);
+    expect((screen.getByLabelText("Texto da transcrição") as HTMLTextAreaElement).value)
+      .toBe("fonte sintética retida após cancelar refresh");
+    expect((screen.getByLabelText("Revisei o texto para salvar como rascunho") as HTMLInputElement).checked).toBe(true);
+    expect(f.porta.importarTranscricaoLocal).not.toHaveBeenCalled();
+
+    fireEvent.change(screen.getByLabelText("Texto da transcrição"), { target: { value: "" } });
+    expect(saidaDocumentoBloqueada()).toBe(false);
+    await escrever("nova pendência antes da desmontagem");
+    expect(saidaDocumentoBloqueada()).toBe(true);
+    tela.unmount();
+    expect(saidaDocumentoBloqueada()).toBe(false);
+  });
+
   it("preserva bytes, revisão e contexto ao continuar; Escape equivale a continuar editando", async () => {
     const f = fixture();
     render(<OncoassistLocal fabricaPorta={f.fabrica} />);
@@ -220,6 +245,7 @@ describe("navegação com transcrição não salva", () => {
     entrar(); await abrirPaciente(); await escrever("texto em salvamento");
     fireEvent.click(screen.getByRole("button", { name: "Salvar transcrição para revisão clínica" }));
     await waitFor(() => expect(f.porta.importarTranscricaoLocal).toHaveBeenCalledOnce());
+    expect(saidaDocumentoBloqueada()).toBe(true);
 
     fireEvent.click(screen.getByRole("button", { name: "APAC" }));
     expect(screen.queryByRole("dialog")).toBeNull();
@@ -229,6 +255,7 @@ describe("navegação com transcrição não salva", () => {
 
     await act(async () => resolver({ codigo: "RASCUNHO_SALVO", draftId: "save-race", revision: 0, linkedPatientId: null, requiresMedicalReview: true }));
     await screen.findByText(/Rascunho salvo/);
+    expect(saidaDocumentoBloqueada()).toBe(false);
     fireEvent.click(screen.getByRole("button", { name: "APAC" }));
     expect(screen.queryByRole("dialog")).toBeNull();
     expect(screen.queryByLabelText("Texto da transcrição")).toBeNull();
@@ -242,6 +269,7 @@ describe("navegação com transcrição não salva", () => {
     fireEvent.click(screen.getByLabelText("Revisei o texto para salvar como rascunho"));
     fireEvent.change(screen.getByLabelText("Texto da transcrição"), { target: { value: "" } });
     expect(screen.getByText("relato original capturado")).toBeTruthy();
+    expect(saidaDocumentoBloqueada()).toBe(true);
 
     fireEvent.click(screen.getByRole("button", { name: "APAC" }));
     expect(dialogo()).toBeTruthy();
@@ -267,6 +295,7 @@ describe("navegação com transcrição não salva", () => {
 
     await act(async () => rejeitar(new Error("falha sintética")));
     expect((screen.getByLabelText("Texto da transcrição") as HTMLTextAreaElement).value).toBe("texto após falha de salvamento");
+    expect(saidaDocumentoBloqueada()).toBe(true);
     fireEvent.click(screen.getByRole("button", { name: "APAC" }));
     expect(dialogo()).toBeTruthy();
   });
@@ -275,9 +304,31 @@ describe("navegação com transcrição não salva", () => {
     const f = fixture();
     render(<OncoassistLocal fabricaPorta={f.fabrica} />);
     entrar(); await abrirPaciente(); await escrever("texto sintético confidencial");
+    expect(saidaDocumentoBloqueada()).toBe(true);
     f.expirar();
     expect(screen.queryByRole("dialog")).toBeNull();
     expect(await screen.findByText("Sessão expirada. Entre novamente.")).toBeTruthy();
     expect(screen.queryByLabelText("Texto da transcrição")).toBeNull();
+    expect(saidaDocumentoBloqueada()).toBe(false);
+  });
+
+  it("expiração durante save remove guarda e resposta tardia não a reinstala", async () => {
+    const f = fixture();
+    let resolver!: (resultado: ResultadoTranscricaoLocal) => void;
+    f.porta.importarTranscricaoLocal = vi.fn(() => new Promise<ResultadoTranscricaoLocal>(resolve => { resolver = resolve; }));
+    render(<OncoassistLocal fabricaPorta={f.fabrica} />);
+    entrar(); await abrirPaciente(); await escrever("fonte sintética em save durante expiração");
+    fireEvent.click(screen.getByRole("button", { name: "Salvar transcrição para revisão clínica" }));
+    await waitFor(() => expect(f.porta.importarTranscricaoLocal).toHaveBeenCalledOnce());
+    expect(saidaDocumentoBloqueada()).toBe(true);
+    act(() => f.expirar());
+    expect(await screen.findByLabelText("Senha do servidor")).toBeTruthy();
+    expect(saidaDocumentoBloqueada()).toBe(false);
+    await act(async () => resolver({
+      codigo: "RASCUNHO_SALVO", draftId: "save-expirado", revision: 0,
+      linkedPatientId: null, requiresMedicalReview: true,
+    }));
+    expect(screen.queryByLabelText("Texto da transcrição")).toBeNull();
+    expect(saidaDocumentoBloqueada()).toBe(false);
   });
 });
