@@ -85,7 +85,7 @@ describe("CatalogoFichasPrescricao", () => {
     expect(hashes.open).toBe(false);
     for (const text of ["C50 — tumor sintético de mama", "Adjuvante", "QT"])
       expect(screen.getAllByText(text).length).toBeGreaterThan(0);
-    for (const text of ["MG_M2", "1250 mg", "Via", "VO", "d1, d14", "Limiares de bula",
+    for (const text of ["mg/m²", "1250 mg", "Via", "VO", "d1, d14", "Limiares de bula",
       "Neutrófilos mínimos", "1500 /µL", "Plaquetas mínimas", "100000 /µL",
       "Bula sintética de teste, revisão 2026-01", "Fonte sintética para teste de interface"])
       expect(screen.getByText(text)).toBeTruthy();
