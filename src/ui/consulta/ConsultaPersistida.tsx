@@ -88,8 +88,12 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, versaoClinica
     tentativaAcao.current = null; setTipoAcao(null); setBaseAcao(null); setAcaoPreparada(null); setAcaoRevisada(null);
     setLinhaTempo(null);
     setMensagem("");
+    setRxEmCurso(false); aoAlterarPrescricaoSalvando?.(false); aoAlterarPrescricaoPendente?.(false);
     setEditorRx(false); setBaseRx(null); setErroRx(""); tentativaRx.current = null; assinaturaRx.current = null;
-    return () => { geracao.current++; };
+    return () => {
+      geracao.current++;
+      aoAlterarPrescricaoSalvando?.(false); aoAlterarPrescricaoPendente?.(false);
+    };
   }, [porta, patientId, encounterId, tumorLotId]);
 
   useEffect(() => {
@@ -160,10 +164,15 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, versaoClinica
     if (assinaturaRx.current?.conteudo !== conteudo) assinaturaRx.current = { conteudo, chave: crypto.randomUUID() };
     setRxEmCurso(true); aoAlterarPrescricaoSalvando?.(true);
     try {
-      await porta.confirmarPrescricaoExecutavel({ contexto: { patientId, encounterId, tumorLotId },
+      const confirmada = await porta.confirmarPrescricaoExecutavel({ contexto: { patientId, encounterId, tumorLotId },
         draftId: preparacao.draftId, expectedRevision: preparacao.revision,
         conteudoHash: preparacao.conteudoHash, idempotencyKey: assinaturaRx.current.chave });
       if (atual !== geracao.current) return;
+      if (confirmada.documentId !== preparacao.conteudo.documentId
+        || confirmada.documentVersion !== preparacao.conteudo.documentVersion
+        || confirmada.cicloId !== preparacao.conteudo.contexto.cicloId
+        || confirmada.episodioId !== preparacao.conteudo.contexto.episodioId)
+        throw new Error("A confirmação não corresponde à prévia exibida. Confira o registro antes de concluir.");
       aoAlterarPrescricaoPendente?.(false);
       if (aoAtualizarClinico) aoAtualizarClinico(); else setVersao(v => v + 1);
       setMensagem("Prescrição assinada e ciclo planejado gravados. Nenhuma administração registrada.");
