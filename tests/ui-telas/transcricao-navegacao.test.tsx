@@ -7,7 +7,10 @@ import { criarPortaFalsa } from "../../src/ui/api/fake.js";
 import type { OpcoesHttp } from "../../src/ui/api/http.js";
 import type { PedidoBundle, ResultadoTranscricaoLocal } from "../../src/ui/api/porta.js";
 
-vi.mock("../../src/ui/consulta/DitadoDeepgram.js", () => ({ DitadoDeepgram: () => null }));
+const ditadoMock = vi.hoisted(() => ({ emitirTrecho: null as ((trecho: string) => void) | null }));
+vi.mock("../../src/ui/consulta/DitadoDeepgram.js", () => ({
+  DitadoDeepgram: (props: { aoTrecho: (trecho: string) => void }) => { ditadoMock.emitirTrecho = props.aoTrecho; return null; },
+}));
 
 afterEach(cleanup);
 
@@ -229,6 +232,24 @@ describe("navegação com transcrição não salva", () => {
     fireEvent.click(screen.getByRole("button", { name: "APAC" }));
     expect(screen.queryByRole("dialog")).toBeNull();
     expect(screen.queryByLabelText("Texto da transcrição")).toBeNull();
+  });
+
+  it("captura retida continua protegendo a navegação mesmo após limpar a transcrição editada", async () => {
+    const f = fixture();
+    render(<OncoassistLocal fabricaPorta={f.fabrica} />);
+    entrar(); await abrirPaciente();
+    act(() => ditadoMock.emitirTrecho?.("relato original capturado"));
+    fireEvent.click(screen.getByLabelText("Revisei o texto para salvar como rascunho"));
+    fireEvent.change(screen.getByLabelText("Texto da transcrição"), { target: { value: "" } });
+    expect(screen.getByText("relato original capturado")).toBeTruthy();
+
+    fireEvent.click(screen.getByRole("button", { name: "APAC" }));
+    expect(dialogo()).toBeTruthy();
+    fireEvent.click(screen.getByRole("button", { name: "Continuar editando" }));
+    expect(screen.queryByRole("dialog")).toBeNull();
+    expect((screen.getByLabelText("Texto da transcrição") as HTMLTextAreaElement).value).toBe("");
+    expect(screen.getByText("relato original capturado")).toBeTruthy();
+    expect(f.porta.importarTranscricaoLocal).not.toHaveBeenCalled();
   });
 
   it("falha durante o salvamento preserva o texto e restaura a guarda após resolver", async () => {

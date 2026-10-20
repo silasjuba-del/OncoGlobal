@@ -37,7 +37,7 @@ export function TranscricaoLocal({ porta, contexto, aoSalvar, aoAlterarPendente,
   }, [porta]);
   function alterarTexto(proximo: string) {
     setTexto(proximo); setRevisado(false); setMensagem("");
-    aoAlterarPendenteAtual.current?.(proximo.length > 0);
+    aoAlterarPendenteAtual.current?.(proximo.length > 0 || capturado.length > 0);
   }
   async function salvar() {
     if (!porta.importarTranscricaoLocal || !revisado || ditando || !texto.trim() || texto.length > 200_000 || emCurso.current) return;

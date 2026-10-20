@@ -59,7 +59,7 @@ it("cancelar instalação não abre microfone e ignora resolução tardia",async
   expect(screen.getByText(/Preparação cancelada/)).toBeTruthy();expect(ultima).toBeUndefined();
 });
 it("transcrição editada conserva captura original e só envia rascunho após revisão",async()=>{
-  const porta=criarPortaFalsa(),aoSalvar=vi.fn();
+  const porta=criarPortaFalsa(),aoSalvar=vi.fn(),aoAlterarPendente=vi.fn();
   porta.ditado=vi.fn<NonNullable<PortaConsulta['ditado']>>(async p=>p.acao==='INICIAR'
     ?{codigo:'DITADO_TICKET',ticket:'a'.repeat(64),caminho:'/consulta/ditado/stream',expiraEm:123}
     :{codigo:'DITADO_CONFIGURACAO',configurada:true,provedor:'DEEPGRAM',modelo:'nova-3',idioma:'pt-BR'});
@@ -70,13 +70,16 @@ it("transcrição editada conserva captura original e só envia rascunho após r
   let eventos!:{mensagem:(s:string)=>void};const enviar=vi.fn();
   canalDeepgram.abrir.mockImplementation((_t,e)=>{eventos=e;return{aberto:()=>true,pendentes:()=>0,enviar,fechar:vi.fn()};});
   porta.importarTranscricaoLocal=vi.fn(async()=>({codigo:"RASCUNHO_SALVO" as const,draftId:"d",revision:0,linkedPatientId:null,requiresMedicalReview:true as const}));
-  render(<TranscricaoLocal porta={porta} contexto={{patientId:"p",encounterId:"e",tumorLotId:null}} aoSalvar={aoSalvar}/>);
+  render(<TranscricaoLocal porta={porta} contexto={{patientId:"p",encounterId:"e",tumorLotId:null}} aoSalvar={aoSalvar} aoAlterarPendente={aoAlterarPendente}/>);
   await act(async()=>{});
   await act(async()=>fireEvent.click(screen.getByRole('button',{name:'Iniciar ditado Deepgram'})));
   act(()=>eventos.mensagem(JSON.stringify({tipo:'PRONTO'})));
   act(()=>eventos.mensagem(JSON.stringify({tipo:'TRECHO',id:'1',texto:'Creatinina 12',final:true,confianca:0.9})));
   fireEvent.click(screen.getByRole('button',{name:'Parar ditado'}));expect(enviar).toHaveBeenCalledWith('PARAR');
   act(()=>eventos.mensagem(JSON.stringify({tipo:'CONCLUIDO'})));expect(pararTrack).toHaveBeenCalled();
+  expect(aoAlterarPendente).toHaveBeenLastCalledWith(true);
+  fireEvent.change(screen.getByLabelText("Texto da transcrição"),{target:{value:""}});
+  expect(aoAlterarPendente).toHaveBeenLastCalledWith(true);
   fireEvent.change(screen.getByLabelText("Texto da transcrição"),{target:{value:"Creatinina 1,2; nega dor."}});
   const salvar=screen.getByRole("button",{name:"Salvar transcrição para revisão clínica"});
   expect(salvar.hasAttribute("disabled")).toBe(true);expect(porta.importarTranscricaoLocal).not.toHaveBeenCalled();
@@ -84,7 +87,7 @@ it("transcrição editada conserva captura original e só envia rascunho após r
   await screen.findByText(/Rascunho salvo/);
   expect(porta.importarTranscricaoLocal).toHaveBeenCalledWith(expect.objectContaining({rawTranscript:"Creatinina 1,2; nega dor.",
     capturedTranscript:"Creatinina 12",captureMethod:"DEEPGRAM_CLOUD",contexto:{patientId:"p",encounterId:"e",tumorLotId:null}}),expect.any(AbortSignal));
-  expect(aoSalvar).toHaveBeenCalledOnce();
+  expect(aoSalvar).toHaveBeenCalledOnce();expect(aoAlterarPendente).toHaveBeenLastCalledWith(false);
 });
 it("troca de paciente limpa ditado e ignora resposta de gravação antiga",async()=>{
   instalar();const porta=criarPortaFalsa(),aoSalvar=vi.fn();let resolver!:(x:ResultadoTranscricaoLocal)=>void;
