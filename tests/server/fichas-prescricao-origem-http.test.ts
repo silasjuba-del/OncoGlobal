@@ -23,12 +23,16 @@ const template = () => ProtocolTemplate.parse({ templateId: "ficha-sintetica", v
     calculatedDose: null, prescribedDose: null, unit: "mg", adjustmentPercent: null, adjustmentReason: null, route: "EV",
     diluent: "Diluente sintético", finalVolumeMl: 100, infusionTime: "30 min", days: ["d1"], observacao: null,
     source: "PROTOCOL", overrideMotivo: null }] });
-async function abrir() {
+const templateMgM2 = () => {
+  const base = template();
+  return ProtocolTemplate.parse({ ...base, itens: [{ ...base.itens[0]!, standardDose: 100, doseBasis: "MG_M2", unit: "mg/m²" }] });
+};
+async function abrir(protocolo = template()) {
   const dir = criarDiretorio(), db = abrirLedger(":memory:");
   const sessoes = criarGerenciadorSessao({ medicoId: "medico-ficha-sintetico", crm: "CRM-SINTETICO",
     senha: "senha-sintetica-ficha-123", duracaoMs: 60000, agora: () => AGORA });
   const token = sessoes.login("senha-sintetica-ficha-123")!.token;
-  const corpus = { templatesProtocolo: [template()] } as NonNullable<ServidorDeps["corpus"]>;
+  const corpus = { templatesProtocolo: [protocolo] } as NonNullable<ServidorDeps["corpus"]>;
   const gateway = criarGateway({ agora: () => AGORA, auditar: () => {}, store: memoriaIdempotencia(), executores: {} });
   const motorF1 = criarMotorF1(db, () => AGORA, () => ({ regras: [],
     biblioteca: { id: "biblioteca-sintetica", versao: "1", hash: "hash-sintetico" } }));
@@ -51,13 +55,16 @@ async function abrir() {
     return outraToken;
   }
   let n = 0;
-  function seed(tipo: string, payload: unknown) {
+  function seed(tipo: string, payload: unknown | ((eventId: string) => unknown),
+    fontes: ReturnType<typeof fonteSintetica>[] | ((eventId: string) => ReturnType<typeof fonteSintetica>[]) = eventId => [fonteSintetica(eventId)]) {
     const id = `ficha-seed-${++n}`;
+    const conteudo = typeof payload === "function" ? payload(id) : payload;
+    const fontesEvento = typeof fontes === "function" ? fontes(id) : fontes;
     salvarDraft(db, { draftId: id, patientId: contexto.patientId, sourceId: id, rawRef: "referencia-local",
       payload: {}, revision: 0, diagnostics: [], criadoEm: AGORA });
     const r = executarConfirmacao(db, { ...contexto, operationId: id, reviewDecisionId: id,
       sessao: sessoes.obter(token)!, em: AGORA, registros: [{ eventId: id, draftId: id, expectedRevision: 0,
-        tipo, payload, fontes: [fonteSintetica(id)], revisao: "CONFIRMADO" }] });
+        tipo, payload: conteudo, fontes: fontesEvento, revisao: "CONFIRMADO" }] });
     expect(r.estado).toBe("GRAVADA");
   }
   seed("Paciente", { patientId: contexto.patientId, nome: "Paciente sintético da ficha", identificadores: [],
@@ -87,6 +94,20 @@ async function instancia(a: Ambiente) {
   const r = await a.request(INSTANCIAR, { contexto, templateId: ficha.template.templateId, versao: ficha.template.versao,
     expectedContentHash: ficha.contentHash, expectedRevision: ficha.revision, idempotencyKey: "instanciar-ficha" });
   expect(r.status).toBe(200); return r.data;
+}
+async function instanciarMgM2ComAltura(opcoes: {
+  dadoData?: string;
+  fonteData?: string | null;
+  qualificadores?: { polaridade: "AFIRMADA"; sujeito: "PACIENTE" | "TERCEIRO"; temporalidade: "ATUAL" };
+}) {
+  const a = await abrir(templateMgM2());
+  a.seed("Weight", (eventId: string) => ({ kg: 70, origem: "MEDIDO", data: "2026-10-01", sourceId: eventId }));
+  a.seed("FATO", (eventId: string) => {
+    return { campo: "alturaCm", valor: 170,
+      ...(opcoes.dadoData === undefined ? {} : { dataClinica: opcoes.dadoData }),
+      ...(opcoes.qualificadores ? { qualificadores: opcoes.qualificadores } : {}) };
+  }, (eventId: string) => [{ ...fonteSintetica(eventId), dataClinica: opcoes.fonteData === undefined ? "2026-10-01" : opcoes.fonteData }]);
+  return { a, origem: await instancia(a) };
 }
 async function preparar(a: Ambiente, origem: Record<string, any>, alteracoes = {}, ctx = contexto, bearer?: string) {
   const base = (await a.request(BASE, ctx, bearer)).data;
@@ -169,6 +190,26 @@ it("não reabre retry de instanciação depois da inativação da ficha", async 
     idempotencyKey: "instanciar-ficha" });
   expect(retry.status).toBe(409);
   expect(retry.data.codigo).toBe("FICHA_REVISAO_ALTERADA");
+});
+it.each([
+  { caso: "data civil futura", dadoData: "2099-01-01", fonteData: "2026-10-01" },
+  { caso: "instante futuro intradia", dadoData: "2026-10-09T18:00:00-03:00", fonteData: "2026-10-01" },
+  { caso: "data clínica ausente", dadoData: undefined, fonteData: null },
+  { caso: "data clínica inválida", dadoData: "não-é-data", fonteData: "não-é-data" },
+  { caso: "sujeito terceiro", dadoData: "2026-10-01", fonteData: "2026-10-01",
+    qualificadores: { polaridade: "AFIRMADA" as const, sujeito: "TERCEIRO" as const, temporalidade: "ATUAL" as const } },
+])("não calcula MG_M2 com altura $caso", async ({ dadoData, fonteData, qualificadores }) => {
+  const { origem } = await instanciarMgM2ComAltura({ dadoData, fonteData, qualificadores });
+  expect(origem.dadosCorporais).toMatchObject({ pesoKg: 70, alturaCm: null, bsaM2: null });
+  expect(origem.itens[0].item).toMatchObject({ calculatedDose: null, prescribedDose: null });
+  expect(origem.pendencias.length).toBeGreaterThan(0);
+});
+it("calcula MG_M2 quando a altura atual e datada está documentada", async () => {
+  const { origem } = await instanciarMgM2ComAltura({ dadoData: "2026-10-01", fonteData: "2026-10-01",
+    qualificadores: { polaridade: "AFIRMADA", sujeito: "PACIENTE", temporalidade: "ATUAL" } });
+  expect(origem.dadosCorporais).toMatchObject({ pesoKg: 70, alturaCm: 170, bsaM2: 1.82 });
+  expect(origem.itens[0].item).toMatchObject({ calculatedDose: 182, prescribedDose: 182 });
+  expect(origem.pendencias).toEqual([]);
 });
 it("mudança de fatos ou do conteúdo da ficha invalida origem antes da preparação", async () => {
   const a = await abrir(), origem = await instancia(a);
