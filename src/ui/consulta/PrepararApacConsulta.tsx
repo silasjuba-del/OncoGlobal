@@ -118,9 +118,18 @@ export function PrepararApacConsulta({ porta, contexto, aberto, ocupado = false,
       setCarregando(false); setSalvando(false);
       tentativaPreparo.current = null; tentativaConfirmacao.current = null;
     }
-    if (!aberto) return;
+    if (!aberto) {
+      geracao.current++;
+      abortAtual.current?.abort();
+      setCarregando(false);
+      setSalvando(false);
+      return;
+    }
     if (!base || mudouContexto || mudouPorta) void carregarBase(false);
-    return () => { abortAtual.current?.abort(); };
+    return () => {
+      geracao.current++;
+      abortAtual.current?.abort();
+    };
   }, [porta, chaveContexto, aberto]);
 
   function alterarCompetencia(value: string) {

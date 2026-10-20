@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 // APAC e prescricao sinteticas; nenhuma emissao, exportacao ou autorizacao externa.
-import { cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { act, cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { afterEach, expect, it, vi } from "vitest";
 import { ApacRascunhoPreparadoSchema, BaseApacRascunhoRespostaSchema,
   type BaseApacRascunhoResposta, type EdicaoApacRascunho,
@@ -67,6 +67,16 @@ function fixture(options: { withPrescription?: boolean } = {}) {
   porta.prepararApacRascunho = preparar;
   porta.confirmarApacRascunho = confirmar;
   return { porta, source, ler, preparar, confirmar };
+}
+
+function deferred<T>() {
+  let resolve!: (value: T) => void;
+  let reject!: (reason?: unknown) => void;
+  const promise = new Promise<T>((resolvePromise, rejectPromise) => {
+    resolve = resolvePromise;
+    reject = rejectPromise;
+  });
+  return { promise, resolve, reject };
 }
 
 it("abre APAC apenas com as tres operacoes da porta e liga o painel ao contexto atual", async () => {
@@ -171,4 +181,59 @@ it("edicao invalida a previa e troca de porta descarta a previa e recarrega a ba
   view.rerender(<PrepararApacConsulta porta={segunda.porta} contexto={novoContexto} aberto aoAtualizarClinico={vi.fn()} />);
   await waitFor(() => expect(segunda.ler).toHaveBeenCalledTimes(2));
   expect(screen.queryByRole("region", { name: /exata da APAC/ })).toBeNull();
+});
+
+it("ignora preparo que termina depois do fechamento e nao publica previa ao reabrir", async () => {
+  const f = fixture();
+  const pendente = deferred<ReturnType<typeof prepared>>();
+  f.preparar.mockImplementation(() => pendente.promise);
+  const view = render(<PrepararApacConsulta porta={f.porta} contexto={contexto} aberto aoAtualizarClinico={vi.fn()} />);
+  await screen.findByLabelText("Procedimento principal");
+
+  fireEvent.click(screen.getByRole("button", { name: /Preparar.*exata da APAC/ }));
+  expect(f.preparar).toHaveBeenCalledTimes(1);
+  view.rerender(<PrepararApacConsulta porta={f.porta} contexto={contexto} aberto={false} aoAtualizarClinico={vi.fn()} />);
+  await act(async () => { pendente.resolve(prepared(f.preparar.mock.calls[0]![0])); });
+  view.rerender(<PrepararApacConsulta porta={f.porta} contexto={contexto} aberto aoAtualizarClinico={vi.fn()} />);
+
+  expect(screen.queryByRole("region", { name: /exata da APAC/ })).toBeNull();
+  expect((screen.getByRole("button", { name: /Preparar.*exata da APAC/ }) as HTMLButtonElement).disabled).toBe(false);
+});
+
+it("ignora confirmação que termina depois do unmount sem chamar atualização clínica", async () => {
+  const f = fixture();
+  const aoAtualizarClinico = vi.fn();
+  const pendente = deferred<Awaited<ReturnType<NonNullable<typeof f.porta.confirmarApacRascunho>>>>();
+  f.confirmar.mockImplementation(() => pendente.promise);
+  const view = render(<PrepararApacConsulta porta={f.porta} contexto={contexto} aberto aoAtualizarClinico={aoAtualizarClinico} />);
+  await screen.findByLabelText("Procedimento principal");
+  fireEvent.click(screen.getByRole("button", { name: /Preparar.*exata da APAC/ }));
+  await screen.findByRole("region", { name: /exata da APAC/ });
+  fireEvent.click(screen.getByRole("button", { name: "Salvar APAC em rascunho" }));
+  expect(f.confirmar).toHaveBeenCalledTimes(1);
+
+  view.unmount();
+  await act(async () => { pendente.resolve({ codigo: "GRAVADA", apacId: "apac-sintetica", versao: 1,
+    eventId: "evento-apac-sintetico", estado: "RASCUNHO", permiteExportar: false }); });
+
+  expect(aoAtualizarClinico).not.toHaveBeenCalled();
+});
+
+it("fechar e reabrir durante a carga ignora resposta antiga e libera a nova base", async () => {
+  const f = fixture();
+  const cargaAntiga = deferred<BaseApacRascunhoResposta>();
+  const cargaNova = deferred<BaseApacRascunhoResposta>();
+  f.ler.mockImplementationOnce(() => cargaAntiga.promise).mockImplementationOnce(() => cargaNova.promise);
+  const view = render(<PrepararApacConsulta porta={f.porta} contexto={contexto} aberto aoAtualizarClinico={vi.fn()} />);
+  expect(f.ler).toHaveBeenCalledTimes(1);
+  view.rerender(<PrepararApacConsulta porta={f.porta} contexto={contexto} aberto={false} aoAtualizarClinico={vi.fn()} />);
+  view.rerender(<PrepararApacConsulta porta={f.porta} contexto={contexto} aberto aoAtualizarClinico={vi.fn()} />);
+  expect(f.ler).toHaveBeenCalledTimes(2);
+
+  await act(async () => { cargaAntiga.resolve(baseApac({ revisao: "c".repeat(64) })); });
+  expect(screen.queryByLabelText("Procedimento principal")).toBeNull();
+  await act(async () => { cargaNova.resolve(baseApac({ revisao: "d".repeat(64) })); });
+
+  expect((await screen.findByLabelText("Procedimento principal") as HTMLInputElement).value).toBe("");
+  expect((screen.getByRole("button", { name: /Preparar.*exata da APAC/ }) as HTMLButtonElement).disabled).toBe(false);
 });
