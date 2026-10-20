@@ -11,7 +11,7 @@ vi.mock("../../src/ui/consulta/DitadoDeepgram.js", () => ({ DitadoDeepgram: () =
 
 afterEach(cleanup);
 
-const contextos: PedidoBundle[] = [
+const contextos: [PedidoBundle, PedidoBundle] = [
   { patientId: "pt-multi", encounterId: "en-multi", tumorLotId: "lot-multi-a" },
   { patientId: "pt-e1", encounterId: "en-e1", tumorLotId: "lot-e1" },
 ];

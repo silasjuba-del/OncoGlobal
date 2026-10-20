@@ -40,10 +40,10 @@ describe("qualificadores documentais de ClinicalFact", () => {
       encounterId: "encounter-synthetic", tumorLotId: null, factIds: [fact.id],
       operationId: "operation-synthetic", medicoId: "doctor-synthetic", em: "2026-10-20T12:00:00Z",
     });
-    expect(revisao.payload.facts[0]?.qualificadores).toEqual(fact.qualificadores);
+    expect(ClinicalFact.array().parse(revisao.payload.facts)[0]?.qualificadores).toEqual(fact.qualificadores);
     expect(revisao.payload.resumo).toContain("qualificadores: polaridade AFIRMADA, sujeito TERCEIRO, temporalidade HISTORICA");
     expect(revisao.registros[0]?.tipo).toBe("ReviewDecision");
-    expect(revisao.registros[0]?.payload.qualificadores).toEqual(fact.qualificadores);
+    expect(revisao.registros[0]?.payload).toMatchObject({ qualificadores: fact.qualificadores });
     expect(revisao.registros.some((registro) => registro.tipo === "FATO")).toBe(false);
   });
 });
