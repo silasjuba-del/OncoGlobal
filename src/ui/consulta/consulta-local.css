@@ -43,7 +43,7 @@
 .consulta-identidade-linha span { color: var(--consulta-muted); font-size: .875rem; }
 .consulta-identificadores { margin: .15rem 0 .5rem; font-size: .8rem; overflow-wrap: anywhere; }
 .consulta-identificadores b { font-family: Consolas, ui-monospace, monospace; font-weight: 500; }
-.consulta-ancoras { display: flex; gap: .25rem; overflow-x: auto; padding: .15rem 0; }
+.consulta-ancoras { display: flex; gap: .25rem; overflow-x: auto; padding: .4rem .5rem; scroll-padding-inline: .5rem; }
 .consulta-ancoras a { flex-shrink: 0; padding: .35rem .6rem; border-radius: 4px; text-decoration: none; font-size: .875rem; }
 .consulta-ancoras a:hover, .consulta-ancoras a:focus-visible { background: var(--consulta-soft); text-decoration: underline; }
 .consulta-secao { scroll-margin-top: 10rem; }
