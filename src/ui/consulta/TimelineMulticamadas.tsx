@@ -1,5 +1,7 @@
 import { useMemo, useState, type CSSProperties } from "react";
 import type { EventoTimelineMulticamadas, TimelineMulticamadasTrilha, VisaoTimelineMulticamadas } from "../../contracts/api/timelineMulticamadas.js";
+import { dataCivilDoServico } from "../../rules/tempoServico.js";
+import { FUSO_SERVICO } from "../../contracts/f1/relogio.js";
 // @ts-expect-error folha CSS resolvida pelo Vite
 import "./timeline-multicamadas.css";
 
@@ -18,9 +20,10 @@ function intervaloData(valor: string): [string, string] | null {
     const fim = new Date(Date.UTC(ano, mes, 0)).toISOString().slice(0, 10);
     return [`${valor}-01`, fim];
   }
-  if (/^\d{4}-\d{2}-\d{2}(?:T.*)?$/u.test(valor)) {
-    const data = valor.slice(0, 10);
-    return [data, data];
+  if (/^\d{4}-\d{2}-\d{2}$/u.test(valor)) return [valor, valor];
+  const civil = dataCivilDoServico(valor, FUSO_SERVICO);
+  if (civil.estado === "OK") {
+    return [civil.dataCivil, civil.dataCivil];
   }
   return null;
 }

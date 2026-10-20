@@ -31,6 +31,20 @@ function visao(): VisaoTimelineMulticamadas {
 }
 
 describe("TimelineMulticamadas", () => {
+  it("filtra instantes pelo mesmo dia civil do serviço usado no servidor e preserva o instante literal", () => {
+    const dados = visao();
+    dados.eventos = [evento({ dataClinica: "2026-10-11T01:00:00Z" })];
+    render(<TimelineMulticamadas dados={dados} />);
+    fireEvent.change(screen.getByLabelText("Data inicial"), { target: { value: "2026-10-10" } });
+    fireEvent.change(screen.getByLabelText("Data final"), { target: { value: "2026-10-10" } });
+    const ponto = screen.getByRole("button", { name: /cT2N1M0/ });
+    fireEvent.click(ponto);
+    expect(screen.getByRole("region", { name: "Detalhes do evento" }).textContent).toContain("2026-10-11T01:00:00Z");
+    fireEvent.change(screen.getByLabelText("Data inicial"), { target: { value: "2026-10-11" } });
+    fireEvent.change(screen.getByLabelText("Data final"), { target: { value: "2026-10-11" } });
+    expect(screen.queryByRole("button", { name: /cT2N1M0/ })).toBeNull();
+  });
+
   it("exibe as cinco trilhas e seleciona evento para detalhes, proveniência e trecho", () => {
     render(<TimelineMulticamadas dados={visao()} />);
     for (const label of ["Definidores", "Tratamento e resposta", "Fisiologia", "Sintomas", "Documentos"])
