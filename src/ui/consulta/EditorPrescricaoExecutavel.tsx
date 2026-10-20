@@ -486,7 +486,7 @@ export function EditorPrescricaoExecutavel({ base, origemFicha = null, origemAca
       }}>Substituir pela ação revisada</button>
       <button type="button" disabled={bloqueado} onClick={descartarAcao}>Manter minha edição</button>
     </section> : null}
-    {acaoAplicada && edicao.origemProposta ? <section aria-label="Origem da proposta de ação">
+    {acaoAplicada && edicao.origemProposta ? <section aria-label="Origem da proposta de ação" style={{ minWidth: 0, overflowWrap: "anywhere" }}>
       <h3>Proposta revisada: {ROTULOS_ACAO[acaoAplicada.resultado.tipo ?? "MANTER_CICLO"]}</h3>
       <p>Motivo: {acaoAplicada.resultado.motivo}</p>
       {diffAcao(acaoAplicada).length ? <ul>{diffAcao(acaoAplicada).map((item, index) =>
@@ -515,7 +515,7 @@ export function EditorPrescricaoExecutavel({ base, origemFicha = null, origemAca
       <details><summary>Rastreabilidade da ficha</summary><p>Revisão local {fichaAplicada.revisionFicha}</p>
         <p style={{ overflowWrap: "anywhere" }}>SHA-256: {fichaAplicada.contentHash}</p></details>
     </section> : null}
-    {edicao.origemProposta ? <button type="button" disabled={bloqueado} onClick={() => {
+    {fichaAplicada && edicao.origemProposta ? <button type="button" disabled={bloqueado} onClick={() => {
       marcarEdicao(); setEdicao(anterior => ({ ...anterior, origemProposta: null }));
       setItens(anteriores => anteriores.map(i => ({ ...i, source: "MANUAL", overrideMotivo: "" })));
       setFichaAplicada(null);
