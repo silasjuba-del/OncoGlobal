@@ -81,10 +81,33 @@ const LITERAL_INTERNO = {
 function arquivoFisicoExiste(filesRoot, ref) {
   try { return statSync(inside(filesRoot, ref)).isFile(); } catch { return false; }
 }
+function referenciaEntreDrafts(row, payload, porId) {
+  // dutos.ts guarda o conteúdo completo em {contexto, valor}, sem arquivo.
+  // Um ID arbitrário apontando a si próprio não constitui esse produtor.
+  if (row.rawRef === row.draftId) {
+    const contexto = payload?.contexto;
+    return /^duto-[a-f0-9]{64}$/.test(row.draftId) && row.sourceId === row.draftId
+      && typeof contexto?.patientId === "string" && contexto.patientId === row.patientId
+      && typeof contexto.encounterId === "string" && contexto.encounterId.length > 0
+      && (contexto.tumorLotId === null || typeof contexto.tumorLotId === "string")
+      && typeof contexto.atorId === "string" && contexto.atorId.length > 0
+      && typeof contexto.em === "string"
+      && !!payload.valor && typeof payload.valor === "object" && !Array.isArray(payload.valor);
+  }
+  const destino = porId.get(row.rawRef)?.payload;
+  // oncoassistPropostas.ts: referência declarada na auditoria ou na divergência.
+  if (payload?.kind === "JEV_CLASSIFICACAO_RASCUNHO")
+    return payload.auditoria?.draftId === row.rawRef && payload.auditoria?.propostaId === row.draftId
+      && destino?.kind === "EXTRACAO_RASCUNHO";
+  if (payload?.kind === "JEV_DIVERGENCIA_RASCUNHO")
+    return payload.propostaId === row.rawRef && destino?.kind === "JEV_CLASSIFICACAO_RASCUNHO"
+      && destino.auditoria?.propostaId === row.rawRef;
+  return false;
+}
 function refsLedger(db, files, filesRoot) {
   let rows = [];
   let comMetadados = true;
-  try { rows = db.prepare("SELECT draftId, rawRef, payload FROM draft_envelope").all(); }
+  try { rows = db.prepare("SELECT draftId, patientId, sourceId, rawRef, payload FROM draft_envelope").all(); }
   catch {
     comMetadados = false;
     try { rows = db.prepare("SELECT rawRef FROM draft_envelope").all(); }
@@ -102,6 +125,7 @@ function refsLedger(db, files, filesRoot) {
       // Referência entre drafts cujo nome também é um arquivo físico na raiz
       // é ambígua: recusar, nunca omitir os bytes em silêncio.
       if (filesRoot && arquivoFisicoExiste(filesRoot, ref)) throw new Error("REFERENCIA_AMBIGUA");
+      if (!referenciaEntreDrafts(row, parsePayload(row.payload), porId)) throw new Error("REFERENCIA_AMBIGUA");
       continue;
     }
     if (Object.hasOwn(LITERAL_INTERNO, ref)) {
