@@ -368,3 +368,29 @@ it("AUC preserva conflito entre instantes equivalentes com offsets diferentes", 
   expect(r.dadosCorporais.clcr).toBeNull();
   expect(r.itens[0].item.prescribedDose).toBeNull();
 });
+
+it("kernel generico nao promove artefato de calculo obtido pelo HTTP como FATO", async () => {
+  const a = await abrir(), origem = await instancia(a), antes = a.eventos();
+  const r = executarConfirmacao(a.db, { ...contexto, operationId: "promocao-generica-ficha",
+    reviewDecisionId: "revisao-generica-sintetica", sessao: a.sessoes.obter(a.token)!, em: AGORA,
+    registros: [{ draftId: origem.origemProposta.draftId, expectedRevision: origem.origemProposta.revision,
+      eventId: "fato-indevido-sintetico", tipo: "FATO", payload: { campo: "diagnostico", valor: "Texto sintetico" },
+      fontes: [fonteSintetica("promocao-generica")], revisao: "CONFIRMADO" }] });
+  expect(r).toMatchObject({ estado: "NEGADA", motivo: "PROPOSTA_DOCUMENTAL_NAO_PROMOVIVEL" });
+  expect(a.eventos()).toEqual(antes);
+  expect(a.db.prepare("SELECT operationId FROM operation WHERE operationId=?").get("promocao-generica-ficha")).toBeUndefined();
+  expect(a.db.prepare("SELECT revision FROM draft_envelope WHERE draftId=?").get(origem.origemProposta.draftId)?.revision).toBe(0);
+});
+
+it("HTTP generico nao exibe calculo como documento nem vincula revisao global ao paciente", async () => {
+  const a = await abrir(), origem = await instancia(a), antes = a.eventos();
+  const exibicao = await a.request("/consulta/bundle", { ...contexto, draftIds: [origem.origemProposta.draftId] });
+  expect(exibicao).toMatchObject({ status: 409, data: { codigo: "DRAFT_CONTEXTO_AUSENTE" } });
+  const global = a.db.prepare("SELECT * FROM draft_envelope WHERE json_extract(payload,'$.kind')='FICHA_PROTOCOLO_REVISOES'").get()!;
+  const vinculo = await a.request("/consulta/rascunho/revisar", {
+    draftId: global.draftId, expectedRevision: global.revision, patientId: contexto.patientId,
+  });
+  expect(vinculo.status).toBe(409);
+  expect(a.db.prepare("SELECT * FROM draft_envelope WHERE draftId=?").get(global.draftId!)).toEqual(global);
+  expect(a.eventos()).toEqual(antes);
+});
