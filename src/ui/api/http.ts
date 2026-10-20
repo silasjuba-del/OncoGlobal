@@ -6,7 +6,7 @@ import { RevisaoClinicaResposta } from '../../contracts/fase2/revisaoClinica.js'
 import { EstadoDoencaPreparado } from '../../contracts/fase2/estadoDoenca.js';
 import { SintesePropostaResposta } from '../../contracts/api/sinteseProposta.js';
 import { ActionIntent, ConfirmarBloco } from "../../contracts/operacao.js";
-import { EstadoOncoassist, FontesOncoassist, RespostaOncoassist } from "./oncoassist.js";
+import { EstadoOncoassist, FontesOncoassist, RespostaOncoassist, HistoricoOncoassist } from "./oncoassist.js";
 import { FonteRevisao, ReconciliacaoProposta, RevisaoPreparada } from "./revisaoExtracao.js";
 import { AcaoResposta, AgendaResposta, ApacResposta, BundleResposta, CanalResposta, ChatResposta, ConfirmacaoResposta, ConsultaResposta, FlashPreparadaResposta, FlashRascunhoResposta, SalaoResposta } from "./respostas.js";
 import { z } from "zod";
@@ -223,9 +223,16 @@ export function criarPortaHttp(opcoes: OpcoesHttp): PortaConsulta {
     async oncoassistClassificar(pedido, signal) {
       const { status, json } = await enviar("/consulta/oncoassist/classificar-fonte", pedido, true, signal);
       const codigo = codigoDe(json, "PAYLOAD_INVALIDO");
-      if (codigo === "FONTE_ALTERADA" || codigo === "CONTEXTO_CONSULTA_ALTERADO") throw new ErroPorta(codigo);
+      if (["FONTE_ALTERADA", "CONTEXTO_CONSULTA_ALTERADO", "OPERACAO_DIVERGENTE"].includes(codigo)) throw new ErroPorta(codigo);
       const result = RespostaOncoassist.safeParse(json);
       if (status !== 200 || !result.success) throw new ErroPorta("PAYLOAD_INVALIDO");
+      return result.data;
+    },
+    async oncoassistHistorico(contexto, signal) {
+      const { status, json } = await enviar("/consulta/oncoassist/historico", contexto, true, signal);
+      if (status !== 200) throw new ErroPorta(codigoDe(json, "PAYLOAD_INVALIDO"));
+      const result = HistoricoOncoassist.safeParse(json);
+      if (!result.success) throw new ErroPorta("PAYLOAD_INVALIDO");
       return result.data;
     },
     async login(senha: string): Promise<ResultadoLogin> {

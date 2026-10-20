@@ -6,6 +6,11 @@ import { auditar, gravarOperacao, hashPayload, resultadoExistente, type Gravacao
 import { transacao } from "./db.js";
 
 export { salvarDraft };
+/** Classificação documental e sua divergência jamais são promovidas pela confirmação genérica. */
+export function rascunhoJevNaoPromovivel(payload: unknown): boolean {
+  return !!payload && typeof payload === "object" && "kind" in payload
+    && (payload.kind === "JEV_CLASSIFICACAO_RASCUNHO" || payload.kind === "JEV_DIVERGENCIA_RASCUNHO");
+}
 const emissores = new WeakMap<DatabaseSync, (req:Confirmacao, eventos:readonly Evento[])=>void>();
 /** Callback síncrono, na transação da confirmação: nunca transporte ou efeito externo. */
 export function aoCommitar(db:DatabaseSync, fn:(req:Confirmacao,eventos:readonly Evento[])=>void):void { emissores.set(db,fn); }
@@ -35,6 +40,10 @@ export interface Confirmacao {
 export function confirmar(db: DatabaseSync, req: Confirmacao): Gravacao {
   if (!req.reviewDecisionId || !req.sessao.medicoId || !req.registros.length)
     throw new Error("REVIEW_DECISION_REQUIRED");
+  const promoveJev = () => req.registros.some(r => rascunhoJevNaoPromovivel(lerDraft(db, r.draftId)?.payload)
+    || rascunhoJevNaoPromovivel(r.payload) || rascunhoJevNaoPromovivel({ kind: r.tipo }));
+  // Antes inclusive de replay: mudar o tipo/payload do evento não contorna o tipo do draft.
+  if (promoveJev()) return { estado: "NEGADA", resultRef: null, motivo: "PROPOSTA_DOCUMENTAL_NAO_PROMOVIVEL" };
   const eventos = req.registros.map((r, i) => ClinicalEvent.parse({
     eventId: r.eventId, operationId: req.operationId, eventIndex: i,
     patientId: req.patientId, tumorLotId: req.tumorLotId, encounterId: req.encounterId,
@@ -49,6 +58,7 @@ export function confirmar(db: DatabaseSync, req: Confirmacao): Gravacao {
   if (replay) return replay;
   try {
     return transacao(db, () => {
+      if (promoveJev()) return { estado: "NEGADA", resultRef: null, motivo: "PROPOSTA_DOCUMENTAL_NAO_PROMOVIVEL" };
       const resultado = gravarOperacao(db, op, eventos, () => {
       for (const r of req.registros) {
         const draft = lerDraft(db, r.draftId);

@@ -9,7 +9,7 @@ import { Id, Instante } from "../base.js";
 import { ClinicalFact, ReviewException } from "../w10/extracao.js";
 import { ResultadoInstrumentoSchema } from "../f0c/resultadoInstrumento.js";
 import { InvestigacaoConsultaVisao } from "./investigacao.js";
-import { EstadoOncoassist, FontesOncoassist, RespostaOncoassist } from "./oncoassist.js";
+import { EstadoOncoassist, FontesOncoassist, HistoricoOncoassist, RespostaOncoassist } from "./oncoassist.js";
 import { ReconciliacaoProposta, RevisaoPreparada } from "./revisaoExtracao.js";
 import { SintesePropostaResposta } from "./sinteseProposta.js";
 import { AcaoResposta, AgendaResposta, ApacResposta, BundleResposta, CanalResposta, ChatResposta,
@@ -43,6 +43,7 @@ export const SaidasHttp: Readonly<Record<string, z.ZodType>> = {
   prepararEstadoDoenca: EstadoDoencaPreparado,confirmarEstadoDoenca:Gravacao,
   avaliarInstrumento: z.object({ resultado: ResultadoInstrumentoSchema, gravado: z.literal(false), assinado: z.literal(false) }),
   oncoassistStatus: EstadoOncoassist, oncoassistFontes: FontesOncoassist, oncoassistClassificar: RespostaOncoassist,
+  oncoassistHistorico: HistoricoOncoassist,
   sinteseRetratoLlm: SintesePropostaResposta, reconciliarRascunhos: ReconciliacaoProposta, prepararRevisao: RevisaoPreparada,
   proporDoseReceita: PropostasDoseReceitaResposta,
   rascunhoFlash: FlashRascunhoResposta, prepararFlash: FlashPreparadaResposta,

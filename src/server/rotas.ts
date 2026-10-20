@@ -58,6 +58,8 @@ import { ClinicalFact as ClinicalFactContract, EncounterSegment, FactSourceType,
   ReviewAction, ReviewException } from "../contracts/w10/extracao.js";
 import { AcaoRevisaoPedido, ClosureVinculoContato } from "../contracts/w10/closure.js";
 import { criarOncoassistJev } from "../kernel/llm/jev/oncoassist.js";
+import { operarOncoassistPropostas } from "./oncoassistPropostas.js";
+import { rascunhoJevNaoPromovivel } from "../kernel/ledger/writeRouter.js";
 import { detectarEmergencias } from "../rules/radsEmergencias.js";
 import { PlanoFlashEntrada, lerModeloFlash, prepararFinalizacaoFlash, salvarRascunhoFlash } from "./flash.js";
 import { CHAVE_CAIXA_MODELO_FLASH } from "../contracts/configFlash.js";
@@ -409,6 +411,7 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
             : req.url === "/consulta/contexto/selecionar" ? "selecionarContexto"
             : req.url === "/consulta/oncoassist/status" ? "oncoassistStatus"
             : req.url === "/consulta/oncoassist/classificar-fonte" ? "oncoassistClassificar"
+            : req.url === "/consulta/oncoassist/historico" ? "oncoassistHistorico"
             : req.url === "/consulta/oncoassist/fontes" ? "oncoassistFontes"
               : req.url === "/consulta/flash/rascunho" ? "rascunhoFlash"
               : req.url === "/consulta/flash/preparar" ? "prepararFlash"
@@ -434,7 +437,8 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
                               : req.url === "/consulta/salao/liberar" ? "liberarSalao"
                                 : req.url === "/consulta/canal/vincular" ? "vincularCanal" : "desconhecida";
   const reply = (status: number, codigo: string, result: unknown = { codigo }) => {
-    if (!respostaHttpValida(rota, status, result)) {
+    const valida = respostaHttpValida(rota, status, result);
+    if (!valida) {
       deps.log({ rota, codigo: "RESPOSTA_FORA_CONTRATO", status: 500 });
       return send(res, 500, { codigo: "RESPOSTA_FORA_CONTRATO" });
     }
@@ -990,9 +994,18 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
         timelines: resultado.timelines.filter((timeline) => timeline.patientId === contexto.patientId),
       });
     }
-    if (rota === "oncoassistClassificar" || rota === "oncoassistFontes") {
+    if (rota === "oncoassistClassificar" || rota === "oncoassistHistorico") {
+      const controller = new AbortController();
+      const desconectado = () => controller.abort();
+      res.once("close", desconectado);
+      try {
+        const r = await operarOncoassistPropostas(deps, token, rota, raw, controller.signal);
+        return reply(r.status, r.codigo, r.body);
+      } finally { res.off("close", desconectado); }
+    }
+    if (rota === "oncoassistFontes") {
       const parsed = z.object({ draftId: Id.optional(), patientId: Id, encounterId: Id, tumorLotId: Id.nullable() }).strict()
-        .refine((value) => rota === "oncoassistClassificar" ? !!value.draftId : value.draftId === undefined)
+        .refine((value) => value.draftId === undefined)
         .safeParse(raw);
       if (!parsed.success) return reply(400, "PAYLOAD_INVALIDO");
       const contexto = deps.sessoes.consultaSelecionada(token);
@@ -1036,44 +1049,6 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
         });
         return reply(200, "ONCOASSIST_FONTES", { fontes, fontesSemVinculo });
       }
-      const draft = lerDraft(deps.db, parsed.data.draftId!);
-      if (!draft || draft.patientId !== contexto.patientId) return reply(409, "DRAFT_FORA_DO_ESCOPO");
-      if (!escopoFonte(draft.payload)) return reply(409, "DRAFT_FORA_DO_ESCOPO");
-      const payload = z.object({ kind: z.literal("EXTRACAO_RASCUNHO"),
-        input: z.object({ sourceId: z.string().min(1), rawTranscript: z.string().min(1) }),
-        patientLinkReview: z.object({ patientId: Id, segmentId: Id }) }).safeParse(draft.payload);
-      if (!payload.success || payload.data.patientLinkReview.patientId !== contexto.patientId)
-        return reply(409, "VINCULO_PACIENTE_NAO_CONFIRMADO");
-      const draftPayload = draft.payload as Record<string, unknown>;
-      const draftState = draftPayload.state && typeof draftPayload.state === "object"
-        ? draftPayload.state as Record<string, unknown> : null;
-      const sourceSegment = Array.isArray(draftState?.segments) ? draftState.segments.find((item) => item
-        && typeof item === "object" && (item as Record<string, unknown>).id === payload.data.patientLinkReview.segmentId
-        && typeof (item as Record<string, unknown>).rawTranscript === "string") as Record<string, unknown> | undefined : undefined;
-      if (!sourceSegment) return reply(409, "SEGMENTO_VINCULADO_NAO_CONSTA");
-      const paciente = lerPaciente(deps.db, contexto.patientId);
-      if (!paciente) return reply(409, "PACIENTE_DESTINO_NAO_ENCONTRADO");
-      const controller = new AbortController();
-      const desconectado = () => controller.abort();
-      res.once("close", desconectado);
-      try {
-        const service = deps.oncoassistJev ?? criarOncoassistJev();
-        const result = await service.avaliar({ fonte: { id: payload.data.input.sourceId,
-          texto: sourceSegment.rawTranscript as string } }, { dicionario: {
-          nomes: [paciente.nome], identificadores: [paciente.patientId, sessao.medicoId, sessao.crm,
-            ...paciente.identificadores.map((item) => item.valor), ...(paciente.nascimento ? [paciente.nascimento] : [])],
-        } }, controller.signal);
-        if (!deps.sessoes.obter(token)) return reply(401, "SESSAO_INVALIDA");
-        const atual = deps.sessoes.consultaSelecionada(token);
-        const draftAtual = lerDraft(deps.db, draft.draftId);
-        if (!atual || atual.patientId !== contexto.patientId || atual.encounterId !== contexto.encounterId
-          || (atual.tumorLotId ?? null) !== (contexto.tumorLotId ?? null))
-          return reply(409, "CONTEXTO_CONSULTA_ALTERADO");
-        if (!draftAtual || draftAtual.patientId !== draft.patientId || draftAtual.revision !== draft.revision
-          || hashConteudoExibido(draftAtual.payload) !== hashConteudoExibido(draft.payload))
-          return reply(409, "FONTE_ALTERADA");
-        return reply(200, "ONCOASSIST_RESULTADO", result);
-      } finally { res.off("close", desconectado); }
     }
     if (rota === "consultarConhecimento") {
       const parsed = z.object({ query: z.string().min(1).max(240), tipos: z.array(z.string()).optional(),
@@ -1452,6 +1427,8 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
       if (!parsed.success) return reply(400, "PAYLOAD_INVALIDO");
       const draft = lerDraft(deps.db, parsed.data.draftId);
       if (!draft) return reply(404, "RASCUNHO_NAO_ENCONTRADO");
+      // Histórico Jev tem leitura própria com contexto e validade da fonte revalidados.
+      if (rascunhoJevNaoPromovivel(draft.payload)) return reply(409, "PROPOSTA_DOCUMENTAL_USAR_HISTORICO");
       const payload = draft.payload && typeof draft.payload === "object" && !Array.isArray(draft.payload)
         ? draft.payload as Record<string, unknown> : null;
       if (payload?.kind === "EXTRACAO_RASCUNHO" && draft.patientId !== null) {
@@ -1505,6 +1482,7 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
         return reply(400, "PAYLOAD_INVALIDO");
       let draft = lerDraft(deps.db, parsed.data.draftId);
       if (!draft) return reply(409, "REVISAO_RASCUNHO_CONFLITANTE");
+      if (rascunhoJevNaoPromovivel(draft.payload)) return reply(409, "PROPOSTA_DOCUMENTAL_NAO_PROMOVIVEL");
       if (draft.revision !== parsed.data.expectedRevision) {
         const payload = draft.payload && typeof draft.payload === "object" ? draft.payload as Record<string, unknown> : null;
         const link = payload?.patientLinkReview && typeof payload.patientLinkReview === "object"

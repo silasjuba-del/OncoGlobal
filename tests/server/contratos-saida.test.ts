@@ -30,7 +30,8 @@ it("toda rota pública possui contrato de saída; resposta vazia nunca é sucess
   const rotas = new Set([...tabela.matchAll(/\?\s*"([A-Za-z]+)"/g)].map(m => m[1]!));
   for (const lista of tabela.matchAll(/(\[[^\]]+\])\.includes\(req\.url/g))
     for (const rota of JSON.parse(lista[1]!) as string[]) rotas.add(rota);
-  expect(rotas.size).toBe(65);
+  expect(rotas.size).toBe(66);
+  expect(rotas.has("oncoassistHistorico")).toBe(true);
   expect(rotas.has("gerarContingenciaSalao")).toBe(true);
   expect(rotas.has("historicoContingenciaSalao")).toBe(true);
   expect(rotas.has('prepararRespostaCanal')).toBe(true);
@@ -40,6 +41,15 @@ it("toda rota pública possui contrato de saída; resposta vazia nunca é sucess
   expect([...rotas].sort()).toEqual(Object.keys(SaidasHttp).sort());
   for (const rota of rotas) expect(respostaHttpValida(rota, 200, {}), rota).toBe(false);
   expect(respostaHttpValida("rota-inexistente", 200, {})).toBe(false);
+});
+
+it('histórico OncoAssist usa o catálogo central e rejeita proposta incompleta', () => {
+  expect(respostaHttpValida('oncoassistHistorico', 200, { propostas: [] })).toBe(true);
+  expect(respostaHttpValida('oncoassistHistorico', 200, {})).toBe(false);
+  expect(respostaHttpValida('oncoassistHistorico', 200, { propostas: [{}] })).toBe(false);
+  expect(respostaHttpValida('oncoassistHistorico', 200, {
+    propostas: [{ estado: 'CONCLUIDA', validade: 'ATUAL', resposta: { status: 'PROPOSTA', categoria: 'LAB' } }],
+  })).toBe(false);
 });
 
 it("servidor recusa saída inválida de login sem transmitir dados do resultado ou do erro", async () => {
