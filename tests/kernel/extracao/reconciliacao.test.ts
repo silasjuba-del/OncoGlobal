@@ -48,6 +48,17 @@ describe("FUGU-07 · hierarquia por domínio", () => {
     expect(reconciliarCampo("lab", [falado])).toMatchObject({ resolvedFactId: null });
   });
 
+  it("qualificadores documentais impedem promoção como fato atual; legado sem metadados mantém compatibilidade", () => {
+    const legado = fato({ domain: "imaging", sourceType: "imaging_report", value: { siteRaw: "L5" } });
+    expect(reconciliarCampo("imaging", [legado]).resolvedFactId).toBe(legado.id);
+    const terceiro = fato({ domain: "imaging", sourceType: "imaging_report", value: { siteRaw: "L5" },
+      qualificadores: { polaridade: "AFIRMADA", sujeito: "TERCEIRO", temporalidade: "HISTORICA" } });
+    expect(reconciliarCampo("imaging", [terceiro])).toMatchObject({ resolvedFactId: null, candidates: [terceiro] });
+    const desconhecido = fato({ domain: "imaging", sourceType: "imaging_report", value: { siteRaw: "L5" },
+      qualificadores: { polaridade: "AFIRMADA", sujeito: "NAO_DETERMINADO", temporalidade: "NAO_DETERMINADA" } });
+    expect(reconciliarCampo("imaging", [desconhecido]).resolvedFactId).toBe(desconhecido.id);
+  });
+
   it("agrupa por campo: marcadores diferentes não disputam o mesmo valor", () => {
     const her2 = fato({ domain: "biomarker", sourceType: "pathology", value: { marker: "HER2" } });
     const re = fato({ domain: "biomarker", sourceType: "pathology", value: { marker: "RE" } });

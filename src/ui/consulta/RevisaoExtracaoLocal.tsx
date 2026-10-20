@@ -224,6 +224,9 @@ export function RevisaoExtracaoLocal({ porta, contexto, patientLabel, aoFatosCon
           <input type="checkbox" checked={ids.includes(fact.id)} onChange={(e) => {
             setPreparada(null); setIds((antes) => e.target.checked ? [...antes, fact.id] : antes.filter((id) => id !== fact.id));
           }} />{fact.rawEvidence} — {fact.evidence}{fact.requiresConfirmation ? " · confirmação adicional pendente" : ""}
+          <small>{fact.qualificadores
+            ? ` · Polaridade ${fact.qualificadores.polaridade}; sujeito ${fact.qualificadores.sujeito}; temporalidade ${fact.qualificadores.temporalidade}`
+            : " · Qualificadores não registrados (registro legado)"}</small>
         </label>)}
       </fieldset>
       <button type="button" disabled={ocupado || concluida || (ids.length === 0 && !incluirTextoOriginal)} onClick={() => void preparar()}>Preparar revisão</button>

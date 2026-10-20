@@ -31,7 +31,41 @@ describe("extrator: hipótese lexical não vira fato explícito (ARQ-03, recorte
     expect(provavel.find(f => f.domain === "imaging")).toMatchObject({ evidence: "UNCERTAIN", requiresConfirmation: true });
     const afirmativa = extratorDeterministico.extrair(segment("Lesão em L5 medindo 12 mm.", "imaging_report"));
     expect(afirmativa.find(f => f.domain === "imaging")).toMatchObject({ evidence: "EXPLICIT", requiresConfirmation: false });
+    expect(afirmativa.find(f => f.domain === "imaging")).toMatchObject({ qualificadores: {
+      polaridade: "AFIRMADA", sujeito: "NAO_DETERMINADO", temporalidade: "NAO_DETERMINADA",
+    } });
+    expect(Object.values(reconciliarCampos(afirmativa)).some(c => c.resolvedFactId === afirmativa.find(f => f.domain === "imaging")?.id)).toBe(true);
     const negada = extratorDeterministico.extrair(segment("Não há lesão em L5 medindo 24 mm.", "imaging_report"));
     expect(negada.filter(f => f.domain === "imaging")).toHaveLength(0);
+  });
+
+  it("preserva qualifiers suportados literalmente e não transforma omissão em paciente atual", () => {
+    const casos = [
+      ["Em 2020 havia lesão em L5 medindo 12 mm.", { polaridade: "AFIRMADA", sujeito: "NAO_DETERMINADO", temporalidade: "HISTORICA" }],
+      ["A mãe tinha lesão em L5 medindo 12 mm.", { polaridade: "AFIRMADA", sujeito: "TERCEIRO", temporalidade: "HISTORICA" }],
+      ["A avó tinha lesão em L5 medindo 12 mm.", { polaridade: "AFIRMADA", sujeito: "TERCEIRO", temporalidade: "HISTORICA" }],
+      ["Paciente terá lesão em L5 medindo 12 mm.", { polaridade: "AFIRMADA", sujeito: "PACIENTE", temporalidade: "FUTURA" }],
+      ["Paciente apresenta lesão em L5 medindo 12 mm em 20/10/2026.", { polaridade: "AFIRMADA", sujeito: "PACIENTE", temporalidade: "ATUAL" }],
+      ["Paciente apresenta lesão em L5 medindo 12 mm.", { polaridade: "AFIRMADA", sujeito: "PACIENTE", temporalidade: "ATUAL" }],
+      ["Lesão em L5 medindo 12 mm em 2026.", { polaridade: "AFIRMADA", sujeito: "NAO_DETERMINADO", temporalidade: "NAO_DETERMINADA" }],
+      ["Lesão em L5 medindo 12 mm.", { polaridade: "AFIRMADA", sujeito: "NAO_DETERMINADO", temporalidade: "NAO_DETERMINADA" }],
+    ] as const;
+    for (const [frase, qualificadores] of casos) {
+      const facts = extratorDeterministico.extrair(segment(frase, "imaging_report"));
+      const imagem = facts.find(f => f.domain === "imaging");
+      expect(imagem, frase).toBeDefined();
+      expect(imagem).toMatchObject({ qualificadores });
+      expect(imagem?.rawEvidence).toBe(frase);
+    }
+    expect(extratorDeterministico.extrair(segment("Não há lesão em L5 medindo 12 mm.", "imaging_report"))
+      .filter(f => f.domain === "imaging")).toHaveLength(0);
+  });
+
+  it("passado e terceiro ficam candidatos revisáveis e não resolvem campo atual", () => {
+    for (const frase of ["Em 2020 havia lesão em L5 medindo 12 mm.", "A mãe tinha lesão em L5 medindo 12 mm.", "A avó tinha lesão em L5 medindo 12 mm.", "Paciente terá lesão em L5 medindo 12 mm."]) {
+      const fact = extratorDeterministico.extrair(segment(frase, "imaging_report")).find(f => f.domain === "imaging");
+      expect(fact, frase).toMatchObject({ requiresConfirmation: true });
+      expect(Object.values(reconciliarCampos(fact ? [fact] : []))).toMatchObject([{ resolvedFactId: null }]);
+    }
   });
 });

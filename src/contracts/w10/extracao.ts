@@ -22,6 +22,13 @@ export type FactEvidence = z.infer<typeof FactEvidence>;
 export const FactProvenance = z.enum(["EXTRACTED", "DOCUMENT_CONFIRMED", "INFERRED", "UNCERTAIN", "NOT_FOUND"]);
 export type FactProvenance = z.infer<typeof FactProvenance>;
 
+export const FactQualifiers = z.object({
+  polaridade: z.enum(["AFIRMADA", "NEGADA", "NAO_DETERMINADA"]),
+  sujeito: z.enum(["PACIENTE", "TERCEIRO", "NAO_DETERMINADO"]),
+  temporalidade: z.enum(["ATUAL", "HISTORICA", "FUTURA", "NAO_DETERMINADA"]),
+}).strict();
+export type FactQualifiers = z.infer<typeof FactQualifiers>;
+
 const Confianca = z.number().min(0).max(1);
 
 /** Uma gravação/documento não é um paciente: é dividido em segmentos antes de qualquer vínculo. */
@@ -53,6 +60,8 @@ export const ClinicalFact = z.object({
   raw: z.string().optional(),
   sourceType: FactSourceType,
   evidence: FactEvidence,
+  /** Qualifiers exist only when the source supports them; omitted legacy metadata stays omitted. */
+  qualificadores: FactQualifiers.optional(),
   sourceId: Id,
   rawEvidence: z.string().min(1), // frase original obrigatória
   page: z.number().int().min(1).optional(),

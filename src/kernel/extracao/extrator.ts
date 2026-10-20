@@ -149,6 +149,20 @@ export const extratorDeterministico: Extrator = {
       // Negação vale apenas para esta cláusula; o restante da linha continua analisável.
       const negated = NEGACAO_CLAUSULA.test(raw);
       const wordingUncertain = /\b(?:não se pode excluir|sugestiv[oa]s?|compat[ií]ve(?:l|is)(?:\s+com)?|prov[aá]vel(?:mente)?|poss[ií]ve(?:l|is)(?:mente)?|suspeit[oa]s?|hip[oó]tese)\b/iu.test(raw);
+      const sujeitoTerceiro = /(?:^|[^\p{L}\p{N}_])(?:mãe|pai|irmão|irmã|filho|filha|cônjuge|espos[oa]|avô|avó|familiar|acompanhante)(?=$|[^\p{L}\p{N}_])/iu.test(raw);
+      const sujeitoPaciente = /\b(?:paciente|eu|meu|minha|meus|minhas)\b/iu.test(raw);
+      const tempoFuturo = /\b(?:futuro|futura|futuramente|terá|apresentará|receberá|vai\s+(?:ter|apresentar|receber|fazer)|programad[oa]\s+para)(?=$|[^\p{L}\p{N}_])/iu.test(raw);
+      const tempoHistorico = /\b(?:tinha|tivera|havia|histórico|histórica|antecedente|anteriormente|no passado)(?=$|[^\p{L}\p{N}_])/iu.test(raw);
+      const tempoAtual = /\b(?:atual(?:mente)?|hoje|agora|há|existe|apresenta|relata|refere)(?=$|[^\p{L}\p{N}_])/iu.test(raw);
+      const qualificadores = {
+        polaridade: negated ? "NEGADA" as const : wordingUncertain ? "NAO_DETERMINADA" as const : "AFIRMADA" as const,
+        sujeito: sujeitoTerceiro ? "TERCEIRO" as const : sujeitoPaciente ? "PACIENTE" as const : "NAO_DETERMINADO" as const,
+        temporalidade: tempoFuturo ? "FUTURA" as const : tempoHistorico ? "HISTORICA" as const
+          : tempoAtual ? "ATUAL" as const : "NAO_DETERMINADA" as const,
+      };
+      const exigeQualificacao = qualificadores.polaridade !== "AFIRMADA"
+        || qualificadores.sujeito === "TERCEIRO"
+        || qualificadores.temporalidade === "HISTORICA" || qualificadores.temporalidade === "FUTURA";
       const add = (domain: FactDomain, value: unknown, evidence: FactEvidence = "EXPLICIT",
         confirmation = false, regra?: string): void => {
         const evidenceFinal: FactEvidence = evidence === "EXPLICIT" && wordingUncertain ? "UNCERTAIN" : evidence;
@@ -160,11 +174,12 @@ export const extratorDeterministico: Extrator = {
           patientCandidateId: null,
           domain, value, sourceType: segmento.sourceType,
           evidence: evidenceFinal, sourceId: segmento.sourceId, rawEvidence: rawLinha,
+          qualificadores,
           ...(segmento.page === undefined ? {} : { page: segmento.page }),
           ...(segmento.startMs === null ? {} : { timestampMs: segmento.startMs }),
           ...(dataLiteral ? { date: dataLiteral } : {}),
           confidence: spokenNumber ? 0.6 : evidenceFinal === "UNCERTAIN" ? 0.5 : 1,
-          requiresConfirmation: confirmation || spokenNumber || evidenceFinal === "UNCERTAIN",
+          requiresConfirmation: confirmation || spokenNumber || evidenceFinal === "UNCERTAIN" || exigeQualificacao,
           ...(regra ? { regra } : {}),
         });
       };

@@ -140,6 +140,8 @@ export function prepararRevisaoExtracao(input: {
       : "fato selecionado para revisão médica";
     return { secao: secao(fact.domain), texto: `- ${literal(fact.value)}; ${estado}; evidência ${fact.evidence}; fonte ${fact.sourceId}`
       + (data ? `; data clínica ${data}` : "; data clínica não consta no fato")
+      + (fact.qualificadores ? `; qualificadores: polaridade ${fact.qualificadores.polaridade}, sujeito ${fact.qualificadores.sujeito}, temporalidade ${fact.qualificadores.temporalidade}`
+        : "; qualificadores não registrados (registro legado)")
       + `; trecho original: ${fact.rawEvidence}` };
   });
   const selectedSet = new Set(input.factIds);
@@ -169,7 +171,11 @@ export function prepararRevisaoExtracao(input: {
     ...(input.origem ? { origem: { ...input.origem } } : {}),
   };
   const registros: RevisaoExtracaoPreparada["registros"][number][] = escolhidos.map((fact) => {
-    const fatoExplicito = fact.evidence === "EXPLICIT" && !fact.requiresConfirmation;
+    const q = fact.qualificadores;
+    const qualificacaoCompativelComFatoAtual = q === undefined
+      || (q.polaridade === "AFIRMADA" && q.sujeito !== "TERCEIRO"
+        && q.temporalidade !== "HISTORICA" && q.temporalidade !== "FUTURA");
+    const fatoExplicito = fact.evidence === "EXPLICIT" && !fact.requiresConfirmation && qualificacaoCompativelComFatoAtual;
     const clinicalDate = fatoExplicito ? dataIso(fact.date) : null;
     const campo = fact.domain === "stage" ? "TNM"
       : fact.domain === "lab" ? `extracao.lab:${String(objeto(fact.value)?.marker ?? fact.id).toLocaleUpperCase("pt-BR")}`
@@ -184,13 +190,14 @@ export function prepararRevisaoExtracao(input: {
         valor: fact.value,
         sourceId: fact.sourceId, factId: fact.id, sourceType: fact.sourceType,
         evidence: fact.evidence, confidence: fact.confidence, requiresConfirmation: fact.requiresConfirmation,
+        ...(q ? { qualificadores: q } : {}),
         rawEvidence: fact.rawEvidence, ...(fact.date ? { factDate: fact.date } : {}),
         ...(fact.page === undefined ? {} : { page: fact.page }), ...(fact.regra ? { regra: fact.regra } : {}),
         ...(clinicalDate ? { dataClinica: clinicalDate,
           ...(fact.domain === "lab" ? { observacaoDatada: true } : {}) } : {}) }
         : { exceptionId: fact.id, acao: "CONFIRMAR", factId: fact.id, candidate: fact.value,
           sourceId: fact.sourceId, sourceType: fact.sourceType, evidence: fact.evidence,
-          requiresConfirmation: fact.requiresConfirmation, rawEvidence: fact.rawEvidence },
+          requiresConfirmation: fact.requiresConfirmation, ...(q ? { qualificadores: q } : {}), rawEvidence: fact.rawEvidence },
     };
   });
   // Recibo imutável da revisão deste texto e desta origem; não é documento assinado.
