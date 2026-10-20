@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { extratorDeterministico } from "../../../src/kernel/extracao/extrator.js";
 import type { EncounterSegment } from "../../../src/kernel/extracao/tipos.js";
+import { reconciliarCampos } from "../../../src/kernel/extracao/reconciliacao.js";
 
 // Somente documentos sintéticos; nenhuma decisão ou aprovação clínica.
 function extrair(rawTranscript: string) {
@@ -17,6 +18,35 @@ function sintomas(texto: string) {
 }
 
 describe("escopo linguístico: controles de contexto e proveniência", () => {
+  it.each([
+    "Paciente apresentou dor ontem.",
+    "Paciente teve dor.",
+    "Paciente apresentava dor.",
+    "Paciente relatou dor.",
+    "Paciente referiu dor.",
+    "Paciente sentiu dor.",
+    "Ontem paciente com dor.",
+    "Anteontem paciente com dor.",
+  ])("passado explícito não resolve campo como queixa atual: %s", texto => {
+    const facts = sintomas(texto);
+    expect(facts).toMatchObject([{
+      requiresConfirmation: true, rawEvidence: texto, qualificadores: { temporalidade: "HISTORICA" },
+    }]);
+    expect(Object.values(reconciliarCampos(facts))).toMatchObject([{ resolvedFactId: null }]);
+  });
+
+  it.each([
+    ["Paciente tinha dor, mas tem náusea.", "HISTORICA", "ATUAL"],
+    ["Paciente apresentou dor ontem, mas sente náusea.", "HISTORICA", "ATUAL"],
+    ["Paciente tem dor, mas apresentou náusea ontem.", "ATUAL", "HISTORICA"],
+    ["Paciente terá dor, mas tem náusea.", "FUTURA", "ATUAL"],
+  ])("novo predicado explícito atualiza o tempo da queixa: %s", (texto, tempoDor, tempoNausea) => {
+    const facts = sintomas(texto!);
+    expect(facts).toHaveLength(2);
+    expect(facts.find(f => f.value === "dor")?.qualificadores?.temporalidade).toBe(tempoDor);
+    expect(facts.find(f => f.value === "náusea")?.qualificadores?.temporalidade).toBe(tempoNausea);
+  });
+
   it.each([
     "Paciente nega dor, náusea e formigamento.",
     "Paciente sem dor, náusea e dormência.",
