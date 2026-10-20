@@ -51,3 +51,8 @@ export function listarDrafts(db: DatabaseSync, patientId?: string): Draft[] {
     : db.prepare("SELECT * FROM draft_envelope WHERE patientId=? ORDER BY draftId").all(patientId);
   return rows.map(rowToDraft);
 }
+
+/** A fila de desconhecidos não materializa conteúdo de pacientes já vinculados. */
+export function listarDraftsSemVinculo(db: DatabaseSync): Draft[] {
+  return db.prepare("SELECT * FROM draft_envelope WHERE patientId IS NULL ORDER BY draftId").all().map(rowToDraft);
+}

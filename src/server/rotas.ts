@@ -29,7 +29,7 @@ import { z } from "zod";
 import { DataCivil, Id, type Fonte } from "../contracts/base.js";
 import { Paciente, Contato, Triagem } from "../contracts/clinico.js";
 import { ActionIntent, ConfirmarBloco, type ConfirmarBloco as Confirmar } from "../contracts/operacao.js";
-import { auditar, lerDraft, listarDrafts, salvarDraft } from "../kernel/comandos/portas.js";
+import { auditar, lerDraft, listarDrafts, listarDraftsSemVinculo, salvarDraft } from "../kernel/comandos/portas.js";
 import { dadosDoEvento, eventosVigentes } from "../kernel/projections/snapshot.js";
 import { sqliteIdempotencia } from "../kernel/ledger/idempotencia.js";
 import { proporPrescricao, executarConfirmacao as confirmar } from "../kernel/comandos/index.js";
@@ -1025,7 +1025,7 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
       if (rota === "oncoassistFontes") {
         const fontes = listarDrafts(deps.db, contexto.patientId).filter((draft) => escopoFonte(draft.payload))
           .map((draft, index) => ({ draftId: draft.draftId, rotulo: `Fonte local ${index + 1}`, criadoEm: draft.criadoEm }));
-        const fontesSemVinculo = listarDrafts(deps.db).flatMap((draft, index) => {
+        const fontesSemVinculo = listarDraftsSemVinculo(deps.db).flatMap((draft, index) => {
           if (draft.patientId !== null || !draft.payload || typeof draft.payload !== "object") return [];
           const value = draft.payload as Record<string, unknown>;
           const input = value.input && typeof value.input === "object" ? value.input as Record<string, unknown> : null;
