@@ -15,6 +15,67 @@ export interface AvaliacaoDocumentoExecutavel {
 
 const numeroPtBr = (value: number): string => String(value).replace(".", ",");
 
+type Decimal = { n: bigint; e: number };
+/** Aritmética dimensional decimal; não é teto clínico nem arredondamento de dose. */
+function decimal(value: number | string): Decimal {
+  const [mantissa, expoente = "0"] = String(value).replace(",", ".").toLowerCase().split("e");
+  const [inteiro, fracao = ""] = mantissa!.split(".");
+  return { n: BigInt(`${inteiro}${fracao}`), e: Number(expoente) - fracao.length };
+}
+const produto = (a: Decimal, b: Decimal): Decimal => ({ n: a.n * b.n, e: a.e + b.e });
+function maior(a: Decimal, b: Decimal): boolean {
+  const escala = Math.min(a.e, b.e);
+  return a.n * 10n ** BigInt(a.e - escala) > b.n * 10n ** BigInt(b.e - escala);
+}
+function doseDecimalMg(dose: number | null, unidade: string): Decimal | null {
+  if (dose === null || !Number.isFinite(dose) || dose <= 0) return null;
+  const u = unidade.trim().normalize("NFKC").toLowerCase();
+  const ajuste = u === "mg" ? 0 : u === "g" ? 3 : ["mcg", "μg", "ug"].includes(u) ? -3 : null;
+  if (ajuste === null) return null;
+  const d = decimal(dose);
+  return { n: d.n, e: d.e + ajuste };
+}
+function numeroRepresentavel(d: Decimal | null): number | null {
+  if (!d) return null;
+  const n = Number(`${d.n}e${d.e}`);
+  return Number.isFinite(n) && n > 0 ? n : null;
+}
+/** Converte somente a unidade explícita, preservando a ordem e sem inferir dose. */
+export function doseFinalEmMg(dose: number, unidade: string): number | null {
+  return numeroRepresentavel(doseDecimalMg(dose, unidade));
+}
+function duracaoMinutos(texto: string | null): Decimal | null {
+  const match = /^(\d+(?:[.,]\d+)?)\s*(min(?:utos?)?|h(?:oras?)?)$/iu.exec(texto?.trim() ?? "");
+  if (!match) return null;
+  const fator = /^h/iu.test(match[2]!) ? 60 : 1;
+  const n = Number(match[1]!.replace(",", ".")) * fator;
+  return Number.isFinite(n) && n > 0 ? produto(decimal(match[1]!), decimal(fator)) : null;
+}
+
+/** Recebe item validado; compara apenas os limites fornecidos, sem mudar campos. */
+export function pendenciasLimitesDeclarados(prescrito: ItemPrescricaoExecutavel["item"]): string[] {
+  const pendencias: string[] = [];
+  const prefixo = `Item ${prescrito.sequence} · ${prescrito.drug}`;
+  if (prescrito.doseMaximaMg !== undefined || prescrito.taxaMaximaMgMin !== undefined) {
+    const dose = doseDecimalMg(prescrito.prescribedDose, prescrito.unit);
+    const comparavel = numeroRepresentavel(dose) !== null;
+    if (prescrito.doseMaximaMg !== undefined) {
+      if (!dose || !comparavel)
+        pendencias.push(`${prefixo}: dose/unidade não permite verificar o limite declarado em mg.`);
+      else if (maior(dose, decimal(prescrito.doseMaximaMg)))
+        pendencias.push(`${prefixo}: dose final excede a dose máxima declarada de ${numeroPtBr(prescrito.doseMaximaMg)} mg por administração.`);
+    }
+    if (prescrito.taxaMaximaMgMin !== undefined) {
+      const minutos = duracaoMinutos(prescrito.infusionTime);
+      if (!dose || !comparavel || !minutos)
+        pendencias.push(`${prefixo}: taxa máxima declarada exige dose convertível em mg e duração positiva inequívoca em min ou h.`);
+      else if (maior(dose, produto(decimal(prescrito.taxaMaximaMgMin), minutos)))
+        pendencias.push(`${prefixo}: taxa de infusão excede a máxima declarada de ${numeroPtBr(prescrito.taxaMaximaMgMin)} mg/min.`);
+    }
+  }
+  return pendencias;
+}
+
 function unidadePendente(unidade: string): boolean {
   const normalizada = unidade.normalize("NFKC").normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "").replace(/²/g, "2").replace(/\s+/g, "").toUpperCase();
@@ -33,6 +94,7 @@ function dadosPreparo(item: ItemPrescricaoExecutavel, pendencias: string[], avis
     pendencias.push(`${prefixo}: unidade ${prescrito.unit} ainda expressa denominador; falta dose final em unidade executável.`);
   if (!prescrito.route.trim()) pendencias.push(`${prefixo}: via ausente.`);
   if (prescrito.days.length === 0) pendencias.push(`${prefixo}: dias de administração ausentes.`);
+  pendencias.push(...pendenciasLimitesDeclarados(prescrito));
   if (prescrito.adjustmentPercent !== null) {
     if (prescrito.calculatedDose === null || prescrito.prescribedDose === null) {
       pendencias.push(`${prefixo}: percentual declarado sem dose calculada de referência e dose final.`);
@@ -82,6 +144,10 @@ function dadosPreparo(item: ItemPrescricaoExecutavel, pendencias: string[], avis
     `Base de dose: ${prescrito.doseBasis}`,
     `Fonte do item: ${prescrito.source}`,
   ];
+  if (prescrito.doseMaximaMg !== undefined)
+    lines.push(`Dose máxima declarada por administração: ${numeroPtBr(prescrito.doseMaximaMg)} mg`);
+  if (prescrito.taxaMaximaMgMin !== undefined)
+    lines.push(`Taxa máxima declarada: ${numeroPtBr(prescrito.taxaMaximaMgMin)} mg/min`);
   if (prescrito.adjustmentPercent !== null)
     lines.push(`Ajuste explícito: ${Math.abs(prescrito.adjustmentPercent)}% sobre a dose calculada de referência ${prescrito.calculatedDose === null ? "não informada" : `${numeroPtBr(prescrito.calculatedDose)} ${prescrito.unit}`}`,
       `Motivo do ajuste: ${prescrito.adjustmentReason ?? "não informado"}`);
@@ -94,7 +160,8 @@ function dadosPreparo(item: ItemPrescricaoExecutavel, pendencias: string[], avis
 
 /**
  * Validates and renders only the supplied structured order. It never infers
- * missing administration parameters, calculates doses, signs, or persists.
+ * missing administration parameters, proposes doses, signs, or persists.
+ * Explicit units are converted only to check the limits supplied in the item.
  */
 export function avaliarDocumentoExecutavel(entrada: unknown): AvaliacaoDocumentoExecutavel {
   const parsed = ConteudoPrescricaoExecutavel.safeParse(entrada);
