@@ -1,11 +1,22 @@
 // @vitest-environment jsdom
 import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
+import { useLayoutEffect } from "react";
 import { ComandosJEV } from "../../src/ui/consulta/ComandosJEV.js";
 
 afterEach(cleanup);
 
 describe("ComandosJEV", () => {
+  it("o atalho já responde no primeiro layout visível, antes dos efeitos passivos", () => {
+    const aoComando = vi.fn();
+    function PrimeiraInteracao() {
+      useLayoutEffect(() => { window.dispatchEvent(new KeyboardEvent("keydown", { key: "k", ctrlKey: true })); }, []);
+      return <ComandosJEV aoComando={aoComando} />;
+    }
+    render(<PrimeiraInteracao />);
+    expect(screen.getByRole("combobox", { name: /buscar comando/i })).toBeTruthy();
+    expect(aoComando).not.toHaveBeenCalled();
+  });
   it("Ctrl+K abre a busca, Enter cria um draft e devolve foco ao acionador", () => {
     const aoComando = vi.fn();
     render(<ComandosJEV aoComando={aoComando} />);

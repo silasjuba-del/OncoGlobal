@@ -1,4 +1,4 @@
-import { useEffect, useId, useRef, useState, type KeyboardEvent as ReactKeyboardEvent } from "react";
+import { useEffect, useId, useLayoutEffect, useRef, useState, type KeyboardEvent as ReactKeyboardEvent } from "react";
 
 export type ComandoJEV = "MANTER_CICLO" | "REDUZIR_DOSE" | "ADIAR_CICLO" | "TROCAR_PROTOCOLO"
   | "REVISAR_DOCUMENTOS" | "ABRIR_APAC" | "VER_HISTORICO";
@@ -67,7 +67,8 @@ export function ComandosJEV({ ocupado = false, aoComando }: {
     }
   }, [aberto]);
 
-  useEffect(() => {
+  // O atalho fica disponível no mesmo quadro em que o cockpit se torna visível.
+  useLayoutEffect(() => {
     function tecla(evento: KeyboardEvent) {
       if (!evento.ctrlKey || evento.key.toLowerCase() !== "k" || evento.isComposing || alvoEditavel(evento.target)) return;
       evento.preventDefault(); abrir();
