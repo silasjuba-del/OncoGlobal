@@ -12,8 +12,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  verify:
-    name: typecheck + fronteiras + testes
+  quality:
+    name: typecheck + fronteiras + corpus
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -29,8 +29,46 @@ jobs:
       - name: Instalar dependencias
         run: npm ci
 
-      - name: Verify (typecheck + fronteiras + testes)
-        run: npm run verify
+      - name: Verificar tipos, fronteiras e corpus
+        run: npm run typecheck && npm run check:boundaries && npm run check:corpus
+
+  tests:
+    name: Testes (shard ${{ matrix.shard }}/3)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [1, 2, 3]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node 24
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - name: Instalar dependencias
+        run: npm ci
+      - name: Executar shard da suite completa
+        run: npm test -- --shard=${{ matrix.shard }}/3
+
+  # Keep the protected-branch check name stable. Skipped/cancelled dependencies
+  # cannot turn this gate green, and every shard must finish successfully.
+  verify:
+    name: typecheck + fronteiras + testes
+    if: ${{ always() }}
+    needs: [quality, tests]
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Exigir todos os gates e shards aprovados
+        env:
+          QUALITY_RESULT: ${{ needs.quality.result }}
+          TESTS_RESULT: ${{ needs.tests.result }}
+        run: |
+          test "$QUALITY_RESULT" = "success"
+          test "$TESTS_RESULT" = "success"
 
   browser-b2:
     name: Jornadas B2 no Chromium
