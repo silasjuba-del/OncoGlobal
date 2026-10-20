@@ -7273,6 +7273,22 @@
           "contextTag": null
         }
       ]
+    },
+    {
+      "path": "tests/f4/pr27-apac-negativa-projecao.test.ts",
+      "sha256": "10a165b928cd75e70a864fa9628f35d4f934fd6662d6b285c37af75b9bad447a",
+      "hashMode": "utf8-lf",
+      "items": [
+        {
+          "type": "cns",
+          "line": 29,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/f4/pr27-apac-negativa-projecao.test.ts:28,29; docs/reviews/REVISAO-PHI-APAC-20261020.md",
+          "reason": "CNS ficticio criado pela equipe Codex/Luna para provar isolamento AG-10 entre pessoas e lotes sinteticos. Nao provem de paciente ou fonte externa; fixture SQLite sem transporte externo. Apenas esta ocorrencia e este hash.",
+          "contextTag": null
+        }
+      ]
     }
   ],
   "protectedPaths": []

@@ -25,8 +25,8 @@ function preparar() {
   a.seed("TumorLot", { tumorLotId: ctx.tumorLotId, patientId: ctx.patientId, cid: ausente(), topografia: ausente(), histologia: ausente(), estadiamentos: [], finalidadeApac: ausente(), marcos: [] });
   const apac = Apac.parse({ apacId: "apac-projecao-sintetica", tumorLotId: ctx.tumorLotId,
     prescricaoAssinadaRef: { documentId: "prescricao-sintetica", documentVersion: 1 }, dataGeracaoApp: "2026-10-01", competencia: "2026-10",
-    // Identificador inteiramente sintético, materializado somente na execução da fixture.
-    campos: { cidPrincipal: "C509", pacienteCns: "1" + "23456789012345", procedimentoPrincipal: "PROC-SINTETICO-27" },
+    // CNS inventado para esta fixture de duplicidade; sem paciente real ou transporte externo.
+    campos: { cidPrincipal: "C509", pacienteCns: "123456789012345", procedimentoPrincipal: "PROC-SINTETICO-27" },
     estado: "RASCUNHO", resultadoExterno: null, versao: 1, substituiApacId: null });
   a.seed("APAC", apac);
   const acesso = { ...a.acesso, agora: NEGADA_EM };
