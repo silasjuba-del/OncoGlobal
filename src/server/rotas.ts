@@ -1,3 +1,4 @@
+import { transacao } from "../kernel/ledger/db.js";
 import { registrarCienciaAlertas } from "./alertasConsulta.js";
 import { rascunhoNaoPromovivel } from "../contracts/rascunhos.js";
 import { nomeMedicamento } from './propostasDoseReceita.js';
@@ -256,6 +257,12 @@ function revisaoDocumentosFlash(deps:ServidorDeps,contexto:{patientId:string;enc
 
 /** ConfirmarBloco is strict; all clinical contents are fetched from local drafts, not HTTP input. */
 function confirmarBloco(deps: ServidorDeps, token: string, input: Confirmar): { status: number; body: unknown } {
+  const resultado=transacao(deps.db,()=>confirmarBlocoNaTransacao(deps,token,input),r=>r.status>=400);
+  if(resultado.negativa) auditar(deps.db,{ator:{tipo:"SESSAO",id:deps.sessoes.obter(token)!.medicoId},acaoPedida:"CONFIRMAR",
+    decisao:"NEGADA",motivoCodigo:resultado.negativa.motivo,politicaVersao:"W2-01",em:resultado.negativa.em});
+  return {status:resultado.status,body:resultado.body};
+}
+function confirmarBlocoNaTransacao(deps: ServidorDeps, token: string, input: Confirmar): { status: number; body: unknown; negativa?:{motivo:string;em:string} } {
   const sessao = deps.sessoes.obter(token)!;
   const contexto = { patientId: input.patientId, encounterId: input.encounterId, tumorLotId: input.tumorLotId };
   const exibidosNoServidor = deps.sessoes.bundleExibido(token, contexto);
@@ -380,22 +387,16 @@ function confirmarBloco(deps: ServidorDeps, token: string, input: Confirmar): { 
         prazo:null,estado:"CONFIRMADA",recebidoEm:null,criadoPor:sessao.medicoId,substituiTarefaId:null,dataAlvo:t.dataAlvo,pedidoRefs:t.pedidosRef,
         retornoRef:t.documentoRef,geradaPorEventoId:registros[indice]!.eventId,rulesetVersao:"documentos-consulta@1"}});
   }
-  deps.db.exec("SAVEPOINT flash_assinatura");
-  try {
+
     for(const a of auxiliares) {
       if(!lerDraft(deps.db,a.draftId))salvarDraft(deps.db,{draftId:a.draftId,patientId:input.patientId,sourceId:"flash-assinatura",rawRef:"referencia-local",payload:a.payload,diagnostics:[],revision:0,criadoEm:em});
     }
     const result=confirmar(deps.db,{operationId:input.idempotencyKey,patientId:input.patientId,tumorLotId:input.tumorLotId,encounterId:input.encounterId,
       reviewDecisionId,sessao,em,registros:[...registros,...auxiliares.map(a=>({...a,expectedRevision:0,fontes:[],revisao:"CONFIRMADO" as const}))]});
-    if(result.estado==="NEGADA")deps.db.exec("ROLLBACK TO flash_assinatura");
     if(result.estado!=="NEGADA") registrarCienciaAlertas(deps.db,contexto,input.reconhecerAlertas,sessao.medicoId,em,input.idempotencyKey);
-    deps.db.exec("RELEASE flash_assinatura");
-    // O rollback clínico desfaz qualquer auditoria gravada sob o SAVEPOINT;
-    // a negativa é registrada de novo, já fora dele, para durar sem efeito clínico.
-    if(result.estado==="NEGADA") auditar(deps.db,{ator:{tipo:"SESSAO",id:sessao.medicoId},acaoPedida:"CONFIRMAR",
-      decisao:"NEGADA",motivoCodigo:result.motivo??"CONFIRMACAO_NEGADA",politicaVersao:"W2-01",em});
-    return {status:result.estado==="NEGADA"?409:200,body:{codigo:result.estado,resultRef:result.resultRef}};
-  } catch(error) {deps.db.exec("ROLLBACK TO flash_assinatura");deps.db.exec("RELEASE flash_assinatura");throw error;}
+    return {status:result.estado==="NEGADA"?409:200,body:{codigo:result.estado,resultRef:result.resultRef},
+      ...(result.estado==="NEGADA"?{negativa:{motivo:result.motivo??"CONFIRMACAO_NEGADA",em}}:{})};
+
 
 }
 

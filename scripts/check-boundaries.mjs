@@ -36,6 +36,8 @@ const FASE_FECHAMENTO = "F1-S3";
 
 // Entrypoints de composição reais e portas de compatibilidade: pares EXATOS, sem liberar uma camada.
 const COMPOSICAO = new Map([
+  // Adapter SQLite existente: reutiliza somente a transacao, sem acesso a comandos clinicos.
+  ["src/app/persistencia/store.ts", new Set(["src/kernel/ledger/db.js"])],
   ["src/app/oncoassistLocal.ts", new Set([
     "src/kernel/ledger/db.js", "src/kernel/ledger/idempotencia.js", "src/kernel/comandos/portas.js", "src/kernel/gateway/gateway.js",
     "src/kernel/llm/jev/oncoassist.js", "src/kernel/llm/openai/runtime.js", "src/kernel/gateway/executores/imprimir.js", "src/kernel/ledger/documentos.js",

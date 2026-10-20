@@ -11,7 +11,13 @@ export function abrirLedger(caminho: string): DatabaseSync {
 /** BEGIN IMMEDIATE serializes competing writers before checking revisions. */
 let proximoSavepoint = 0;
 
-export function transacao<T>(db: DatabaseSync, fn: () => T): T {
+/** A rejeicao de dominio devolve o resultado somente depois de desfazer a unidade atomica. */
+export function transacao<T>(db: DatabaseSync, fn: () => T, rejeitar?: (resultado:T)=>boolean): T {
+  const sinal={};let rejeitado:T;
+  try { return transacaoInterna(db,()=>{const resultado=fn();if(rejeitar?.(resultado)){rejeitado=resultado;throw sinal;}return resultado;}); }
+  catch(error){if(error===sinal)return rejeitado!;throw error;}
+}
+function transacaoInterna<T>(db: DatabaseSync, fn: () => T): T {
   // Operações compostas podem reunir vários drafts em uma única unidade atômica.
   if (db.isTransaction) {
     const savepoint = `ledger_aninhado_${++proximoSavepoint}`;
