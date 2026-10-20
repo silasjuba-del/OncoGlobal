@@ -29,7 +29,7 @@ function gravar(db: ReturnType<typeof abrirLedger>, tipo: string, payload: unkno
   return confirmar(db, { operationId: `op-${sufixo}`, ...contexto, reviewDecisionId: `rev-${sufixo}`, em: agora,
     sessao: { medicoId: 'medico-sintetico', crm: 'CRM-SYN', emitidaEm: agora, expiraEm: '2026-10-19T13:00:00Z' },
     registros: [{ draftId, expectedRevision: 0, eventId: `evento-${sufixo}`, tipo, payload,
-      fontes: [{ ...fonte, sourceId: `fonte-${sufixo}` }], revisao }] });
+      fontes: [{ ...fonte, sourceId: `fonte-${sufixo}` }], revisao: revisao as "CONFIRMADO" }] });
 }
 
 describe('Biopsy canônica -> PATOLOGIA (ARQ-01)', () => {

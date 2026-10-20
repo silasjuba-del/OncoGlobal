@@ -29,7 +29,7 @@ import { z } from "zod";
 import { DataCivil, Id, type Fonte } from "../contracts/base.js";
 import { Paciente, Contato, Triagem } from "../contracts/clinico.js";
 import { ActionIntent, ConfirmarBloco, type ConfirmarBloco as Confirmar } from "../contracts/operacao.js";
-import { lerDraft, listarDrafts, salvarDraft } from "../kernel/comandos/portas.js";
+import { auditar, lerDraft, listarDrafts, salvarDraft } from "../kernel/comandos/portas.js";
 import { dadosDoEvento, eventosVigentes } from "../kernel/projections/snapshot.js";
 import { sqliteIdempotencia } from "../kernel/ledger/idempotencia.js";
 import { proporPrescricao, executarConfirmacao as confirmar } from "../kernel/comandos/index.js";
@@ -60,7 +60,6 @@ import { AcaoRevisaoPedido, ClosureVinculoContato } from "../contracts/w10/closu
 import { criarOncoassistJev } from "../kernel/llm/jev/oncoassist.js";
 import { operarOncoassistPropostas } from "./oncoassistPropostas.js";
 import { rascunhoJevNaoPromovivel } from "../kernel/ledger/writeRouter.js";
-import { auditar } from "../kernel/ledger/ledger.js";
 import { detectarEmergencias } from "../rules/radsEmergencias.js";
 import { PlanoFlashEntrada, lerModeloFlash, prepararFinalizacaoFlash, salvarRascunhoFlash } from "./flash.js";
 import { CHAVE_CAIXA_MODELO_FLASH } from "../contracts/configFlash.js";
