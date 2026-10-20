@@ -1,4 +1,6 @@
 import { PropostasDoseReceitaResposta } from '../../contracts/api/propostaDoseReceita.js';
+import { EstudoServicoSchema, ListarEstudosRespostaSchema, AvaliacaoEstudoRespostaSchema,
+  SchemaFatosTrialsResposta } from "../../contracts/api/trialsServico.js";
 import { AcaoCompostaPreparada, BaseAcaoCompostaResposta } from "../../contracts/api/execucaoAcaoComposta.js";
 import { TimelineMulticamadasResposta } from "../../contracts/api/timelineMulticamadas.js";
 import { GerarContingenciaSalao, ContingenciaSalaoResposta, HistoricoContingenciaSalaoResposta } from '../../contracts/api/salaoContingencia.js';
@@ -139,6 +141,65 @@ export function criarPortaHttp(opcoes: OpcoesHttp): PortaConsulta {
       const result = EstatisticaServicoResposta.safeParse(json);
       if (!result.success) throw new ErroPorta("PAYLOAD_INVALIDO");
       return result.data;
+    },
+    async listarEstudosTrials(signal) {
+      const { status, json } = await enviar("/consulta/trials/listar", {}, true, signal);
+      if (status !== 200) throw new ErroPorta(codigoDe(json, "ESTUDOS_INDISPONIVEIS"));
+      const p = ListarEstudosRespostaSchema.safeParse(json);
+      if (!p.success) throw new ErroPorta("PAYLOAD_INVALIDO");
+      return p.data;
+    },
+    async importarEstudoTrial(pedido, signal) {
+      const { status, json } = await enviar("/consulta/trials/importar", pedido, true, signal);
+      if (status !== 200) throw new ErroPorta(codigoDe(json, "IMPORTACAO_ESTUDO_NAO_CONCLUIDA"));
+      const p = EstudoServicoSchema.safeParse(json);
+      if (!p.success || p.data.source.originalContent !== pedido.conteudo) throw new ErroPorta("PAYLOAD_INVALIDO");
+      return p.data;
+    },
+    async revisarEstudoTrial(pedido, signal) {
+      const { status, json } = await enviar("/consulta/trials/revisar", pedido, true, signal);
+      if (status !== 200) throw new ErroPorta(codigoDe(json, "REVISAO_ESTUDO_NAO_CONCLUIDA"));
+      const p = EstudoServicoSchema.safeParse(json);
+      if (!p.success || p.data.draftId !== pedido.draftId || p.data.candidateHash !== pedido.candidateHash
+        || p.data.revision !== pedido.expectedRevision + 1 || p.data.review?.decision !== pedido.decision
+        || p.data.review.studyId !== pedido.studyId || p.data.review.title.text !== pedido.titleText)
+        throw new ErroPorta("PAYLOAD_INVALIDO");
+      const binding = (b: typeof pedido.bindings[number]) => {
+        const e = b.expression;
+        const expression = !e ? null : e.kind === "EQUALS" ? [e.kind, e.factKey, e.value]
+          : e.kind === "NUMBER" ? [e.kind, e.factKey, e.operator, e.value, e.unit]
+          : [e.kind, e.factKey, e.operator, e.value];
+        return JSON.stringify([b.criterionId, b.groupId, b.groupOperator, expression, b.applicability, b.notApplicableReason]);
+      };
+      if (p.data.review.reviewedCriteria.length !== pedido.bindings.length
+        || p.data.review.reviewedCriteria.some(c => {
+          const esperado = pedido.bindings.find(b => b.criterionId === c.criterionId);
+          return !esperado || binding(c) !== binding(esperado);
+        })
+        || JSON.stringify([...p.data.review.reviewedArmIds].sort()) !== JSON.stringify([...pedido.reviewedArmIds].sort())
+        || !p.data.review.title.evidence.some(e => e.locator === pedido.titleEvidenceLocator && e.exactText === pedido.titleText))
+        throw new ErroPorta("PAYLOAD_INVALIDO");
+      return p.data;
+    },
+    async avaliarEstudoTrial(pedido, signal) {
+      const { status, json } = await enviar("/consulta/trials/avaliar", pedido, true, signal);
+      if (status !== 200) throw new ErroPorta(codigoDe(json, "AVALIACAO_ESTUDO_INDISPONIVEL"));
+      const p = AvaliacaoEstudoRespostaSchema.safeParse(json);
+      if (!p.success || p.data.estudo.draftId !== pedido.draftId || p.data.estudo.revision !== pedido.expectedRevision
+        || p.data.estudo.review?.reviewHash !== pedido.expectedReviewHash
+        || p.data.contexto.patientId !== pedido.contexto.patientId
+        || p.data.contexto.encounterId !== pedido.contexto.encounterId
+        || p.data.contexto.tumorLotId !== pedido.contexto.tumorLotId) throw new ErroPorta("PAYLOAD_INVALIDO");
+      return p.data;
+    },
+    async lerFatosTrials(contexto, signal) {
+      const { status, json } = await enviar("/consulta/trials/fatos", contexto, true, signal);
+      if (status !== 200) throw new ErroPorta(codigoDe(json, "FATOS_ESTUDO_INDISPONIVEIS"));
+      const p = SchemaFatosTrialsResposta.safeParse(json);
+      if (!p.success || p.data.contexto.patientId !== contexto.patientId
+        || p.data.contexto.encounterId !== contexto.encounterId
+        || p.data.contexto.tumorLotId !== contexto.tumorLotId) throw new ErroPorta("PAYLOAD_INVALIDO");
+      return p.data;
     },
     async prepararAcaoComposta(pedido, signal) {
       const { status, json } = await enviar("/consulta/acoes-compostas/preparar", pedido, true, signal);

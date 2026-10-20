@@ -1,6 +1,7 @@
 import { nomeMedicamento } from './propostasDoseReceita.js';
 import { operarAcoesCompostas } from "./acoesCompostas.js";
 import { operarPrescricaoExecutavel } from "./prescricaoExecutavel.js";
+import { operarTrials } from "./trialsServico.js";
 import { lerTimelineMulticamadas } from "./timelineMulticamadas.js";
 import { ContextoAcaoComposta } from "../contracts/api/acoesCompostas.js";
 import { operarContingenciaSalao } from './salaoContingencia.js';
@@ -416,6 +417,11 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
         : req.url === "/consulta/prescricao-executavel/base" ? "basePrescricaoExecutavel"
         : req.url === "/consulta/prescricao-executavel/preparar" ? "prepararPrescricaoExecutavel"
         : req.url === "/consulta/prescricao-executavel/confirmar" ? "confirmarPrescricaoExecutavel"
+        : req.url === "/consulta/trials/listar" ? "listarEstudosTrials"
+        : req.url === "/consulta/trials/importar" ? "importarEstudoTrial"
+        : req.url === "/consulta/trials/revisar" ? "revisarEstudoTrial"
+        : req.url === "/consulta/trials/avaliar" ? "avaliarEstudoTrial"
+        : req.url === "/consulta/trials/fatos" ? "fatosTrials"
         : req.url === "/consulta/timeline-multicamadas" ? "timelineMulticamadas"
         : req.url === "/consulta/extrair" ? "extrair"
           : req.url === "/consulta/prescricao/rascunho" ? "rascunhoPrescricao"
@@ -491,6 +497,13 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
     if (rota === "basePrescricaoExecutavel" || rota === "prepararPrescricaoExecutavel" || rota === "confirmarPrescricaoExecutavel") {
       const r = operarPrescricaoExecutavel(deps, token, rota === "basePrescricaoExecutavel" ? "base"
         : rota === "prepararPrescricaoExecutavel" ? "preparar" : "confirmar", raw);
+      return reply(r.status, rota, r.body);
+    }
+    if (rota === "listarEstudosTrials" || rota === "importarEstudoTrial" || rota === "revisarEstudoTrial"
+      || rota === "avaliarEstudoTrial" || rota === "fatosTrials") {
+      const operacao = rota === "listarEstudosTrials" ? "listar" : rota === "importarEstudoTrial" ? "importar"
+        : rota === "revisarEstudoTrial" ? "revisar" : rota === "avaliarEstudoTrial" ? "avaliar" : "fatos";
+      const r = await operarTrials(deps, token, operacao, raw);
       return reply(r.status, rota, r.body);
     }
     if (rota === "gerarContingenciaSalao" || rota === "historicoContingenciaSalao") {

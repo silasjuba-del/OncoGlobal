@@ -1,4 +1,6 @@
 import type { PropostaDoseReceita } from './propostaDoseReceita.js';
+import type { ImportarEstudoPedido, RevisarEstudoPedido, AvaliarEstudoPedido, EstudoServico,
+  ListarEstudosResposta, AvaliacaoEstudoResposta, FatosTrialsResposta } from "./trialsServico.js";
 import type { ContextoAcaoComposta } from "./acoesCompostas.js";
 import type { AcaoCompostaPreparada, BaseAcaoCompostaResposta, PrepararAcaoCompostaPedido } from "./execucaoAcaoComposta.js";
 import type { VisaoTimelineMulticamadas } from "./timelineMulticamadas.js";
@@ -328,6 +330,11 @@ export interface ChatSetorVisao {
 }
 
 export interface PortaConsulta {
+  listarEstudosTrials?(signal?: AbortSignal): Promise<ListarEstudosResposta>;
+  importarEstudoTrial?(pedido: ImportarEstudoPedido, signal?: AbortSignal): Promise<EstudoServico>;
+  revisarEstudoTrial?(pedido: RevisarEstudoPedido, signal?: AbortSignal): Promise<EstudoServico>;
+  avaliarEstudoTrial?(pedido: AvaliarEstudoPedido, signal?: AbortSignal): Promise<AvaliacaoEstudoResposta>;
+  lerFatosTrials?(contexto: ContextoAcaoComposta, signal?: AbortSignal): Promise<FatosTrialsResposta>;
   carregarTimelineMulticamadas?(contexto: ContextoAcaoComposta, signal?: AbortSignal): Promise<VisaoTimelineMulticamadas>;
   carregarBaseAcaoComposta?(contexto: ContextoAcaoComposta, signal?: AbortSignal): Promise<BaseAcaoCompostaResposta>;
   prepararAcaoComposta?(pedido: PrepararAcaoCompostaPedido, signal?: AbortSignal): Promise<AcaoCompostaPreparada>;
