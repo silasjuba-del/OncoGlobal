@@ -13,6 +13,20 @@ function segment(text: string, sourceType: FactSourceType) {
 }
 
 describe("extrator: hipótese lexical não vira fato explícito (ARQ-03, recorte)", () => {
+  it.each([
+    "Diagnóstico: câncer. “Biomarcadores não disponíveis.”",
+    "Diagnóstico: câncer.) Biomarcadores não disponíveis.",
+    "“Diagnóstico: câncer.” Biomarcadores não disponíveis.",
+    "“Diagnóstico: câncer.”) Biomarcadores não disponíveis.",
+    "Diagnóstico: câncer. (Biomarcadores não disponíveis.)",
+    "Diagnóstico: câncer etc. Biomarcadores não disponíveis.",
+  ])("isola a negação posterior com aspas, parênteses ou fim de lista: %s", (frase) => {
+    expect(extratorDeterministico.extrair(segment(frase, "medical_note"))
+      .find(f => f.domain === "diagnosis")).toMatchObject({
+        evidence: "EXPLICIT", requiresConfirmation: false, rawEvidence: frase,
+      });
+  });
+
   it("negação em outra sentença não torna diagnóstico e hemoglobina explícitos incertos", () => {
     const diagnostico = "Diagnóstico oncológico: câncer de cólon metastático. Tratamento informado: FOLFIRI em curso. Biomarcadores: não disponíveis no material apresentado.";
     const laboratorio = "09/10/2026 Hemoglobina 8,2 g/dL. Neutrofilos: nao informado.";
