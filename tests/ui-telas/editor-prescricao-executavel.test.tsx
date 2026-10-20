@@ -49,6 +49,19 @@ function concluirCamposObrigatorios() {
 }
 
 describe("EditorPrescricaoExecutavel", () => {
+  it.each([{ doseMaximaMg: 1 }, { taxaMaximaMgMin: 0.01 }])("mostra e confere limite explícito recebido: %j", limites => {
+    const atual = structuredClone(base());
+    atual.vigente!.itens[0]!.item = { ...item.item, source: "MANUAL", overrideMotivo: "Escolha sintética", ...limites };
+    const aoPreparar = vi.fn(async (edicao: EdicaoPrescricaoExecutavel) => preparation(edicao));
+    render(<EditorPrescricaoExecutavel base={atual} aoPreparar={aoPreparar} aoAssinar={vi.fn()} />);
+    concluirCamposObrigatorios();
+    fireEvent.click(screen.getByRole("button", { name: "Preparar prévia exata" }));
+    expect(aoPreparar).not.toHaveBeenCalled();
+    expect(screen.getByRole("alert").textContent).toMatch(/máxima declarada/);
+    expect((screen.getByLabelText("Dose final · item 1") as HTMLInputElement).value).toBe("1.5");
+    expect(screen.getByText(/(?:Dose|Taxa) máxima declarada:/)).toBeTruthy();
+  });
+
   it("mudança de dose protocolar passa a manual e exige motivo por item", async () => {
     const aoPreparar = vi.fn(async (edicao: EdicaoPrescricaoExecutavel) => preparation(edicao));
     render(<EditorPrescricaoExecutavel base={base()} aoPreparar={aoPreparar} aoAssinar={vi.fn()} />);

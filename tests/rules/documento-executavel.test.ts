@@ -48,6 +48,49 @@ const conteudo = (overrides: Record<string, unknown> = {}) => ({
 });
 
 describe("documento executável de prescrição", () => {
+  it.each([
+    { prescribedDose: 2, doseMaximaMg: 1.5 },
+    { prescribedDose: 0.002, unit: "g", doseMaximaMg: 1.5 },
+    { prescribedDose: 2000, unit: "mcg", doseMaximaMg: 1.5 },
+    { prescribedDose: 1.5, taxaMaximaMgMin: 0.01, infusionTime: "60 min" },
+  ])("declara pendência quando o limite fornecido é excedido: %j", ajustes => {
+    const entrada = conteudo({ itens: [item(ajustes)] }), copia = structuredClone(entrada);
+    const r = avaliarDocumentoExecutavel(entrada);
+    expect(r.ok).toBe(false);
+    expect(r.pendencias.join(" ")).toMatch(/máxima|limite|teto/);
+    expect(r.texto).toContain("PENDÊNCIAS — NÃO EXECUTAR");
+    expect(entrada).toEqual(copia);
+    expect(r.conteudo?.itens[0]?.item.prescribedDose).toBe(ajustes.prescribedDose);
+  });
+
+  it.each([
+    { prescribedDose: 1.5, unit: "mg", doseMaximaMg: 1.5, taxaMaximaMgMin: 0.025, infusionTime: "60 min" },
+    { prescribedDose: 0.0051, unit: "g", doseMaximaMg: 5.1, taxaMaximaMgMin: 0.17, infusionTime: "0,5 h" },
+    { prescribedDose: 1500, unit: "mcg", doseMaximaMg: 1.5, taxaMaximaMgMin: 0.025, infusionTime: "1 hora" },
+    { prescribedDose: 1490, unit: "µg", doseMaximaMg: 1.5, taxaMaximaMgMin: 0.025, infusionTime: "60 minutos" },
+  ])("limites respeitados permanecem explícitos no texto sem ajuste automático: %j", ajustes => {
+    const entrada = conteudo({ itens: [item(ajustes)] });
+    const r = avaliarDocumentoExecutavel(entrada);
+    expect(r.ok).toBe(true);
+    expect(r.conteudo?.itens).toEqual(entrada.itens);
+    expect(r.texto).toContain("Dose máxima declarada");
+    expect(r.texto).toContain("Taxa máxima declarada");
+  });
+
+  it.each([null, "", "0 min", "-5 min", "30-60 min", "bolus", `${"9".repeat(309)} h`])(
+    "taxa máxima exige duração positiva inequívoca: %s", infusionTime => {
+      const r = avaliarDocumentoExecutavel(conteudo({ itens: [item({ taxaMaximaMgMin: 1, infusionTime })] }));
+      expect(r.ok).toBe(false);
+      expect(r.pendencias.join(" ")).toMatch(/tempo|duração|taxa/);
+    },
+  );
+
+  it.each(["UI", "mL"])("não compara unidade %s com teto em mg por suposição", unit => {
+    const r = avaliarDocumentoExecutavel(conteudo({ itens: [item({ unit, doseMaximaMg: 2 })] }));
+    expect(r.ok).toBe(false);
+    expect(r.pendencias.join(" ")).toMatch(/unidade|mg/);
+  });
+
   it("preserva item completo, itemId, fonte e dose fracionária sem mutação", () => {
     const input = conteudo();
     const before = structuredClone(input);
