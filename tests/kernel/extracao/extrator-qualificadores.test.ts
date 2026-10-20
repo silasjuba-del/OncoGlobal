@@ -14,6 +14,77 @@ function segment(text: string, sourceType: FactSourceType) {
 
 describe("extrator: hipótese lexical não vira fato explícito (ARQ-03, recorte)", () => {
   it.each([
+    "Paciente relata dor, mas não tem náusea.",
+    "Paciente relata dor e não apresenta náusea.",
+    "Paciente relata dor, mas sem náusea.",
+    "Paciente não tem náusea, mas relata dor.",
+    "Paciente com dor e sem náusea.",
+    "Paciente sem náusea, mas com dor.",
+  ])("negação coordenada afeta somente a queixa correspondente: %s", (frase) => {
+    const sintomas = extratorDeterministico.extrair(segment(frase, "medical_note"))
+      .filter(f => f.domain === "symptom");
+    expect(sintomas).toHaveLength(1);
+    expect(sintomas[0]).toMatchObject({
+      value: "dor", evidence: "EXPLICIT", requiresConfirmation: false, rawEvidence: frase,
+      qualificadores: { polaridade: "AFIRMADA", sujeito: "PACIENTE" },
+    });
+  });
+
+  it.each([
+    "Paciente veio acompanhada por sua filha e relata dor.",
+    "Paciente acompanhada da filha relata dor.",
+    "Paciente, acompanhada por sua filha, relata dor.",
+    "Paciente veio acompanhado pelo filho e refere dor.",
+    "Paciente veio acompanhada de sua mãe e relata dor.",
+  ])("complemento de companhia não substitui o sujeito: %s", (frase) => {
+    const sintomas = extratorDeterministico.extrair(segment(frase, "medical_note"))
+      .filter(f => f.domain === "symptom");
+    expect(sintomas).toHaveLength(1);
+    expect(sintomas[0]).toMatchObject({
+      evidence: "EXPLICIT", requiresConfirmation: false, rawEvidence: frase,
+      qualificadores: { polaridade: "AFIRMADA", sujeito: "PACIENTE", temporalidade: "ATUAL" },
+    });
+  });
+
+  it.each([
+    "Paciente relata dor, mas não tem dor.",
+    "Paciente não tem dor, mas relata dor.",
+    "Paciente com dor e sem dor.",
+  ])("conflito entre predicados mantém a queixa incerta: %s", (frase) => {
+    const sintomas = extratorDeterministico.extrair(segment(frase, "medical_note"))
+      .filter(f => f.domain === "symptom");
+    expect(sintomas).toHaveLength(1);
+    expect(sintomas[0]).toMatchObject({
+      value: "dor", evidence: "UNCERTAIN", requiresConfirmation: true, rawEvidence: frase,
+      qualificadores: { polaridade: "NAO_DETERMINADA" },
+    });
+    expect(Object.values(reconciliarCampos(sintomas)).every(c => c.resolvedFactId === null)).toBe(true);
+  });
+
+  it.each([
+    "Hipótese: paciente com dor, mas sem náusea.",
+    "Hipótese: paciente sem náusea, mas com dor.",
+    "Paciente com dor ausente, mas sem náusea.",
+  ])("divisão de predicados não remove incerteza: %s", (frase) => {
+    expect(extratorDeterministico.extrair(segment(frase, "medical_note"))
+      .find(f => f.domain === "symptom")).toMatchObject({
+        evidence: "UNCERTAIN", requiresConfirmation: true, rawEvidence: frase,
+        qualificadores: { polaridade: "NAO_DETERMINADA" },
+      });
+  });
+
+  it.each([
+    ["Mãe da paciente veio acompanhada da filha e relata dor.", "TERCEIRO"],
+    ["Paciente veio acompanhada da filha que relata dor.", "TERCEIRO"],
+    ["Paciente veio acompanhada da filha e relata que a mãe tem dor.", "TERCEIRO"],
+  ])("companhia não apaga sujeito terceiro nem oração subordinada: %s", (frase, sujeito) => {
+    expect(extratorDeterministico.extrair(segment(frase!, "medical_note"))
+      .find(f => f.domain === "symptom")).toMatchObject({
+        requiresConfirmation: true, rawEvidence: frase, qualificadores: { sujeito },
+      });
+  });
+
+  it.each([
     "Diagnóstico: câncer. “Biomarcadores não disponíveis.”",
     "Diagnóstico: câncer.) Biomarcadores não disponíveis.",
     "“Diagnóstico: câncer.” Biomarcadores não disponíveis.",
