@@ -6,11 +6,12 @@ import { auditar, gravarOperacao, hashPayload, resultadoExistente, type Gravacao
 import { transacao } from "./db.js";
 
 export { salvarDraft };
-/** Classificação documental e planejamento inacabado não são promovidos pela confirmação genérica. */
+/** Document classification, protocol reviews and calculation artifacts are never generic clinical facts. */
 export function rascunhoJevNaoPromovivel(payload: unknown): boolean {
   return !!payload && typeof payload === "object" && "kind" in payload
     && (payload.kind === "JEV_CLASSIFICACAO_RASCUNHO" || payload.kind === "JEV_DIVERGENCIA_RASCUNHO"
-      || payload.kind === "ACAO_COMPOSTA_RASCUNHO");
+      || payload.kind === "ACAO_COMPOSTA_RASCUNHO" || payload.kind === "FICHA_PRESCRICAO_INSTANCIADA"
+      || payload.kind === "FICHA_PROTOCOLO_REVISOES");
 }
 const emissores = new WeakMap<DatabaseSync, (req:Confirmacao, eventos:readonly Evento[])=>void>();
 /** Callback síncrono, na transação da confirmação: nunca transporte ou efeito externo. */
