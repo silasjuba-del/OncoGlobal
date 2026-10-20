@@ -71,12 +71,14 @@ export function lerBasePrescricaoExecutavel(db: DatabaseSync, contexto: Contexto
       && (ciclo ? p.data.episodioId === ciclo.episodioId
         : episodioSelecionado ? p.data.episodioId === episodioSelecionado : p.data.fim.valor === null) ? [p.data] : [];
   });
-  // Encerramento explícito é um estado conhecido, não uma origem órfã. No
-  // próximo atendimento, permite NOVA_LINHA sem reabrir outro episódio antigo.
-  const selecionadoEncerrado = !ciclo && !!episodioSelecionado && episodiosVinculados.length === 1
-    && episodiosVinculados[0]!.fim.campo === "PRESENTE" && episodiosVinculados[0]!.fim.valor !== null;
-  const episodios = !ciclo ? episodiosVinculados.filter(e => e.fim.valor === null) : episodiosVinculados;
-  if (episodios.length > 1 || (ciclo || episodioSelecionado) && episodios.length !== 1 && !selecionadoEncerrado)
+  // Seleção encerrada ou de outra modalidade é conhecida, mas não reutilizável
+  // por uma ordem QT. Sem ciclo no atendimento, permite criar NOVA_LINHA sem
+  // reabrir outro episódio antigo nem alterar CX/RT existentes.
+  const selecaoConhecidaSemQtAtual = !ciclo && !!episodioSelecionado && episodiosVinculados.length === 1
+    && (episodiosVinculados[0]!.modalidade !== "QT"
+      || episodiosVinculados[0]!.fim.campo === "PRESENTE" && episodiosVinculados[0]!.fim.valor !== null);
+  const episodios = episodiosVinculados.filter(e => e.modalidade === "QT" && (!!ciclo || e.fim.valor === null));
+  if (episodios.length > 1 || (ciclo || episodioSelecionado) && episodios.length !== 1 && !selecaoConhecidaSemQtAtual)
     pendencias.push("EPISODIO_ATUAL_AUSENTE_OU_AMBIGUO");
   const episodio = episodios.length === 1 ? episodios[0]! : null;
   let vigente: ConteudoPrescricaoExecutavel | null = null;
@@ -136,6 +138,13 @@ function validarOrigem(edicao: EdicaoPrescricaoExecutavel, base: BasePrescricaoE
   return null;
 }
 
+function validarEpisodioReutilizado(edicao: EdicaoPrescricaoExecutavel, base: BasePrescricaoExecutavelResposta,
+  episodioId?: string): string | null {
+  if (edicao.planejamento.modo === "NOVA_LINHA") return null;
+  if (!base.episodio || base.episodio.modalidade !== "QT") return "EPISODIO_QT_ATUAL_AUSENTE";
+  return episodioId !== undefined && base.episodio.episodioId !== episodioId ? "EPISODIO_QT_DIVERGENTE" : null;
+}
+
 function preparar(deps: Deps, token: string, raw: unknown, contexto: Contexto, atorId: string, em: string): Resposta {
   const p = PrepararPrescricaoExecutavelPedido.safeParse(raw);
   if (!p.success) return negar("PAYLOAD_INVALIDO", 400);
@@ -144,6 +153,8 @@ function preparar(deps: Deps, token: string, raw: unknown, contexto: Contexto, a
   const base = lerBasePrescricaoExecutavel(deps.db, contexto, em);
   if (base.revisao !== entrada.expectedBaseHash) return negar("BASE_PRESCRICAO_ALTERADA");
   if (base.pendencias.length) return negar("BASE_PRESCRICAO_PENDENTE", 409, base.pendencias);
+  const reutilizacao = validarEpisodioReutilizado(entrada.edicao, base);
+  if (reutilizacao) return negar(reutilizacao);
   const anterior = lerDraft(deps.db, draftId);
   if (anterior) {
     const salvo = PreparacaoArmazenada.safeParse(anterior.payload);
@@ -277,6 +288,8 @@ function confirmar(deps: Deps, token: string, raw: unknown, contexto: Contexto, 
     return negar("PRESCRICAO_NAO_EXIBIDA_NESTA_SESSAO");
   const base = lerBasePrescricaoExecutavel(deps.db, contexto, em);
   if (base.revisao !== r.baseHash || base.pendencias.length) return negar("BASE_PRESCRICAO_ALTERADA");
+  const reutilizacao = validarEpisodioReutilizado(salvo.edicao, base, r.conteudo.contexto.episodioId);
+  if (reutilizacao) return negar(reutilizacao);
   const origem = validarOrigem(salvo.edicao, base);
   if (origem) return negar(origem);
   const avaliacao = avaliarDocumentoExecutavel(r.conteudo);
