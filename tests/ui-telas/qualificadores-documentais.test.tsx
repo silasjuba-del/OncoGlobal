@@ -32,4 +32,7 @@ it("mostra qualificadores e identifica metadados ausentes em fatos legados", asy
   await screen.findByText(/temporalidade HISTORICA/);
   expect(screen.getByText(/Qualificadores não registrados \(registro legado\)/)).toBeTruthy();
   expect(screen.getByText("A mãe tinha lesão em L5 medindo 12 mm.")).toBeTruthy();
+  const legado = screen.getByRole("checkbox", { name: "Lesão antiga em L5. — EXPLICIT" });
+  const descricao = document.getElementById(legado.getAttribute("aria-describedby") ?? "");
+  expect(descricao?.textContent).toContain("Qualificadores não registrados");
 });

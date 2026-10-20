@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import type { PortaConsulta, PedidoBundle } from "../api/porta.js";
 import type { FonteRevisao, PedidoRevisaoExtracao, ReconciliacaoProposta, RevisaoPreparada } from "../api/revisaoExtracao.js";
 import { ErroPorta } from "../api/porta.js";
@@ -14,6 +14,7 @@ export function RevisaoExtracaoLocal({ porta, contexto, patientLabel, aoFatosCon
   porta: PortaConsulta; contexto: PedidoBundle; patientLabel?: string; aoFatosConfirmados?: (contexto: PedidoBundle) => void;
   aoConfirmarRevisao?: (revisao: RevisaoExtracaoConfirmada) => void;
 }) {
+  const qualificadoresId = useId();
   const [fontes, setFontes] = useState<Array<{ draftId: string; rotulo: string }>>([]);
   const [fontesSemVinculo, setFontesSemVinculo] = useState<Array<{ draftId: string; sourceId: string;
     segmentId: string | null; exceptionId: string | null; rotulo: string; criadoEm: string; revision: number; textoOriginal: string }>>([]);
@@ -220,14 +221,16 @@ export function RevisaoExtracaoLocal({ porta, contexto, patientLabel, aoFatosCon
         {fonte.payload.alertasRads.map((a, i) => <p key={i}>{a.nome}: {a.trecho} — fonte {a.sourceId}</p>)}
       </section> : null}
       <fieldset disabled={ocupado || concluida}><legend>Achados para revisão</legend>
-        {fonte.payload.state.facts.map((fact) => <label key={fact.id} style={{ display: "block" }}>
-          <input type="checkbox" checked={ids.includes(fact.id)} onChange={(e) => {
+        {fonte.payload.state.facts.map((fact, index) => <div key={fact.id}>
+          <label style={{ display: "block" }}>
+          <input type="checkbox" aria-describedby={`${qualificadoresId}-${index}`} checked={ids.includes(fact.id)} onChange={(e) => {
             setPreparada(null); setIds((antes) => e.target.checked ? [...antes, fact.id] : antes.filter((id) => id !== fact.id));
           }} />{fact.rawEvidence} — {fact.evidence}{fact.requiresConfirmation ? " · confirmação adicional pendente" : ""}
-          <small>{fact.qualificadores
+          </label>
+          <small id={`${qualificadoresId}-${index}`}>{fact.qualificadores
             ? ` · Polaridade ${fact.qualificadores.polaridade}; sujeito ${fact.qualificadores.sujeito}; temporalidade ${fact.qualificadores.temporalidade}`
             : " · Qualificadores não registrados (registro legado)"}</small>
-        </label>)}
+        </div>)}
       </fieldset>
       <button type="button" disabled={ocupado || concluida || (ids.length === 0 && !incluirTextoOriginal)} onClick={() => void preparar()}>Preparar revisão</button>
     {preparada ? <section aria-label="Conteúdo preparado para revisão">
