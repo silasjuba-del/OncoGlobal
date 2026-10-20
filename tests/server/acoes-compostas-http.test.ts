@@ -1,8 +1,13 @@
 // proveniência: dados sintéticos - não utilizar em produção
 import { afterEach, expect, it } from "vitest";
+import { mkdirSync } from "node:fs";
+import { join } from "node:path";
 import { abrirAmbiente, cadastrarPaciente, criarDiretorio, removerDiretorio, PACIENTE, ENCONTRO, AGORA } from "../f0-fecha/fixtures/consulta-completa.js";
 import { executarConfirmacao } from "../../src/kernel/comandos/index.js";
-import { salvarDraft, listarDrafts } from "../../src/kernel/comandos/portas.js";
+import { salvarDraft, listarDrafts, lerDraft } from "../../src/kernel/comandos/portas.js";
+import { abrirLedger } from "../../src/kernel/ledger/db.js";
+import { criarBackup } from "../../scripts/backup.mjs";
+import { restaurarBackup } from "../../scripts/backup-restore.mjs";
 import { hashConteudoExibido } from "../../src/server/sessao.js";
 import { fonteSintetica, presente, ausente } from "../fixtures/triagem.js";
 import type { BaseAcaoComposta } from "../../src/contracts/api/acoesCompostas.js";
@@ -13,11 +18,14 @@ afterEach(async () => { for (const a of ambientes.splice(0)) { await a.close(); 
 
 async function abrir(comCiclo = true) {
   const a = await abrirAmbiente(criarDiretorio()); ambientes.push(a); cadastrarPaciente(a);
+  // O cadastro desta fixture usa marcador opaco sem arquivo; declara-se o armazenamento interno.
+  for (const d of listarDrafts(a.db, PACIENTE)) if (d.rawRef === "fixture-local-sintetica")
+    salvarDraft(a.db, { ...d, revision: d.revision + 1, rawRef: "referencia-local" });
   a.sessoes.selecionarConsulta(a.token, contexto);
   let n = 0;
   const seed = (tipo: string, payload: unknown, revisao: "CONFIRMADO" | "ASSINADO" = "CONFIRMADO") => {
     const id = `acao-seed-${++n}`;
-    salvarDraft(a.db, { draftId: id, patientId: PACIENTE, sourceId: id, rawRef: id,
+    salvarDraft(a.db, { draftId: id, patientId: PACIENTE, sourceId: id, rawRef: "referencia-local",
       payload: { contexto }, diagnostics: [], revision: 0, criadoEm: AGORA });
     executarConfirmacao(a.db, { ...contexto, operationId: id, reviewDecisionId: id,
       sessao: a.sessoes.obter(a.token)!, em: AGORA,
@@ -90,4 +98,14 @@ it("prepara redução com base do servidor, persiste e repete sem promover event
     reconhecerAlertas: [], idempotencyKey: "forcar-promocao-plano" });
   expect(assinatura.status).toBe(409);
   expect(a.eventos()).toHaveLength(antes);
+  const filesRoot = join(a.dir, "files"), destino = join(a.dir, "backup");
+  mkdirSync(filesRoot); mkdirSync(destino);
+  const arquivo = await criarBackup({ dbPath: join(a.dir, "consulta.sqlite"), filesRoot, destino,
+    nome: "acoes-http", senha: "senha-sintetica-backup-acao" });
+  const restaurado = restaurarBackup({ arquivo, destino: join(a.dir, "restaurado"),
+    senha: "senha-sintetica-backup-acao" });
+  const reaberto = abrirLedger(restaurado.database);
+  try {
+    expect((lerDraft(reaberto, primeiro.data.draftId)?.payload as { resposta: unknown }).resposta).toEqual(primeiro.data);
+  } finally { reaberto.close(); }
 });

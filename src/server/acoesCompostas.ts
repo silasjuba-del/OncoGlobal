@@ -90,7 +90,7 @@ export function operarAcoesCompostas(deps: Deps, token: string, operacao: "base"
     const resposta = AcaoCompostaPreparada.parse({ draftId, revision: 0, conteudoHash,
       resultado, documentoPlano, criaEventoClinico: false, liberaTratamento: false });
     salvarDraft(deps.db, { draftId, patientId: entrada.contexto.patientId, sourceId: `plano:${draftId}`,
-      rawRef: draftId, payload: { kind: "ACAO_COMPOSTA_RASCUNHO", contexto: entrada.contexto, requestHash, resposta },
+      rawRef: "referencia-local", payload: { kind: "ACAO_COMPOSTA_RASCUNHO", contexto: entrada.contexto, requestHash, resposta },
       revision: 0, diagnostics: ["REVISAO_MEDICA_OBRIGATORIA", "EXECUCAO_CLINICA_NAO_REALIZADA"], criadoEm: deps.agora() });
     return { status: 200, body: resposta };
   });
