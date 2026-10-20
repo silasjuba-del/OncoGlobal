@@ -1,3 +1,4 @@
+import { lerLedgerIntegro, type FalhaIntegridade, type EscopoLeituraLedger } from "../kernel/ledger/leituraIntegra.js";
 import { projetarAlertasConsulta } from "./alertasConsulta.js";
 import { rascunhoVisivelNaRevisao } from "../contracts/rascunhos.js";
 import { documentoReceitaDosePendente } from '../contracts/f1/receitaDose.js';
@@ -87,30 +88,8 @@ const ChatMessage = z.object({
 }).strict();
 
 /** Pendência de integridade do ledger: evento gravado que não passa no contrato. Sem payload clínico. */
-export interface PendenciaIntegridade { eventoId: string; patientId: string | null; tipo: string | null; motivo: "JSON_INVALIDO" | "CONTRATO_INVALIDO" | "PAYLOAD_FORA_DO_CONTRATO"; schema?: string; }
-
-/** Pré-F1 (auditoria A4): nada some em silêncio. Evento malformado sai da projeção, mas fica registrado como pendência. */
-export function lerEventosComIntegridade(db: DatabaseSync) {
-  const pendenciasIntegridade: PendenciaIntegridade[] = [];
-  const itens = db.prepare("SELECT * FROM clinical_event").all().flatMap((row) => {
-    const eventoId = String(row.eventId ?? `${String(row.operationId ?? "?")}#${String(row.eventIndex ?? "?")}`);
-    const patientId = row.patientId == null ? null : String(row.patientId);
-    const tipo = row.tipo == null ? null : String(row.tipo);
-    let bruto: unknown;
-    try {
-      bruto = { ...row, payload: JSON.parse(String(row.payload)), fontes: JSON.parse(String(row.fontes)), criadoPor: JSON.parse(String(row.criadoPor)) };
-    } catch { pendenciasIntegridade.push({ eventoId, patientId, tipo, motivo: "JSON_INVALIDO" }); return []; }
-    const parsed = ClinicalEvent.safeParse(bruto);
-    if (!parsed.success) { pendenciasIntegridade.push({ eventoId, patientId, tipo, motivo: "CONTRATO_INVALIDO" }); return []; }
-    const payload = validarPayloadEvento(parsed.data.tipo, dadosDoEvento(parsed.data));
-    if (!payload.ok) {
-      pendenciasIntegridade.push({eventoId,patientId,tipo,motivo:"PAYLOAD_FORA_DO_CONTRATO",schema:payload.schema}); return [];
-    }
-    return [parsed.data];
-  }).sort((a, b) => Date.parse(a.criadoEm) - Date.parse(b.criadoEm)
-    || a.operationId.localeCompare(b.operationId) || a.eventIndex - b.eventIndex);
-  return { itens, pendenciasIntegridade };
-}
+export type PendenciaIntegridade = FalhaIntegridade;
+export function lerEventosComIntegridade(db:DatabaseSync,escopo?:EscopoLeituraLedger) { return lerLedgerIntegro(db,escopo); }
 
 function eventos(db: DatabaseSync) { return lerEventosComIntegridade(db).itens; }
 function data(e: ReturnType<typeof eventos>[number]) { return dadosDoEvento(e); }
@@ -197,7 +176,7 @@ export function lerConsulta(db: DatabaseSync, patientId: string, agora: string, 
     instrumentos?: readonly RegraInstrumento[];
     tetosCumulativos?: readonly LimiteExposicaoCumulativa[];
     condicionais?: {regras:EntradaCondicionaisClinicas["regras"];termos:NonNullable<EntradaCondicionaisClinicas["regrasTermos"]>} } = {}) {
-  const leitura = lerEventosComIntegridade(db);
+  const leitura = lerEventosComIntegridade(db,{patientId,contatosGlobais:true});
   config.aoLer?.(leitura);
   // Só as pendências com identidade deste paciente; evento sem patientId é diagnóstico global, nunca de todos os prontuários.
   const pendenciasIntegridade = leitura.pendenciasIntegridade.filter((p) => p.patientId === patientId);

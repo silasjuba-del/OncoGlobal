@@ -1,10 +1,6 @@
+import { diferencaDiasCivis } from "./datas.js";
 import type { Pesagem, SaidaPeso, SalaoRuleset } from "../contracts/regras.js";
 
-function diferencaDiasCivis(de: string, ate: string): number {
-  const a = Date.UTC(Number(de.slice(0, 4)), Number(de.slice(5, 7)) - 1, Number(de.slice(8, 10)));
-  const b = Date.UTC(Number(ate.slice(0, 4)), Number(ate.slice(5, 7)) - 1, Number(ate.slice(8, 10)));
-  return Math.trunc((b - a) / 86_400_000);
-}
 
 function acaoPesoVermelho(rs: SalaoRuleset): string[] {
   const extra = rs.pesoVermelho as { acao?: unknown };
@@ -17,11 +13,12 @@ function acaoPesoVermelho(rs: SalaoRuleset): string[] {
 /** FN-06 · janela inclusiva [hoje − janelaDias, hoje]. Perda igual ao limiar passa. */
 export function avaliarPeso(serie: readonly Pesagem[], hoje: string, rs: SalaoRuleset): SaidaPeso {
   const versao = rs.header.versao;
+  if(diferencaDiasCivis(hoje,hoje)===null||serie.some(p=>diferencaDiasCivis(p.data,hoje)===null))return {estado:"PENDENTE",perdaKg:null,motivo:"data civil invalida",acao:[],rulesetVersao:versao};
   const janela = rs.pesoVermelho.janelaDias;
   const limiar = rs.pesoVermelho.perdaKgAcimaDe;
   const naJanela = serie.filter((p) => {
     const dias = diferencaDiasCivis(p.data, hoje);
-    return dias >= 0 && dias <= janela;
+    return dias !== null && dias >= 0 && dias <= janela;
   });
 
   if (naJanela.length < 2) {
