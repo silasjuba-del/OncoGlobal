@@ -62,6 +62,7 @@ export function TelaConsulta({
   chaves: ChavesIntencao;
   onChart?: (chart: CabecalhoChart | null) => void;
 }) {
+  const [cientes, setCientes] = useState<readonly string[]>([]);
   const [visao, setVisao] = useState<ConsultaIntegrada | null>(null);
   const [loteId, setLoteId] = useState<string | null>(null);
   const [selecionandoLote, setSelecionandoLote] = useState(false);
@@ -268,7 +269,7 @@ export function TelaConsulta({
     setFlashOcupado(true);
     void porta.confirmar({ ...exibido.contexto, bloco: "TUDO", registros: [...exibido.preparada.registros],
       documentosExibidos: exibido.documentos.map(({ documentId, documentVersion }) => ({ documentId, documentVersion })),
-      reconhecerAlertas: [], idempotencyKey: `${exibido.chave}:confirmar` }).then((resultado) => {
+      reconhecerAlertas: cientes.filter(id => visao?.alertas.some(a=>a.alertaId===id)), idempotencyKey: `${exibido.chave}:confirmar` }).then((resultado) => {
         if (exibido.selo !== contextoAtivo.current) return;
         if (resultado.codigo !== "REPLAY" && !confirmacaoPreparouImpressao(resultado.codigo)) throw new ErroPorta("FLASH_RECUSADA", resultado.codigo);
         setFlashOcupado(false); setPreviewFlash(null); setAvisoFlash(CF.finalizada);
@@ -342,6 +343,7 @@ export function TelaConsulta({
       {sessaoExpirada ? <p>sessão expirada — entre de novo</p> : null}
       {acaoRevisao ? <p className="oc-flash-status" role="status">{acaoRevisao}</p> : null}
       {avisoFlash ? <p className="oc-flash-status" role="status" aria-label="status da Consulta Flash">{avisoFlash}</p> : null}
+      {visao.alertas.filter(a=>a.presentationOverride && !a.reconhecidoEm).map(a=><label key={`ciente-${a.alertaId}`}><input type="checkbox" checked={cientes.includes(a.alertaId)} onChange={e=>setCientes(prev=>e.target.checked?[...prev,a.alertaId]:prev.filter(id=>id!==a.alertaId))}/>Estou ciente: {a.texto}. A ciência será registrada ao confirmar os documentos.</label>)}
       {previewFlash ? <section aria-label="Revisão dos documentos Flash">
         {previewFlash.documentos.map((d) => <article key={d.documentId}><h3>{d.titulo}</h3>
           <pre style={{ whiteSpace: "pre-wrap" }}>{d.texto}</pre><FontesDoseReceita propostas={d.propostasDoseReceita??[]}/></article>)}

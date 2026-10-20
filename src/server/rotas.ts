@@ -1,3 +1,5 @@
+import { registrarCienciaAlertas } from "./alertasConsulta.js";
+import { rascunhoNaoPromovivel } from "../contracts/rascunhos.js";
 import { nomeMedicamento } from './propostasDoseReceita.js';
 import { operarAcoesCompostas } from "./acoesCompostas.js";
 import { operarPrescricaoExecutavel } from "./prescricaoExecutavel.js";
@@ -216,6 +218,7 @@ function exibirBundle(deps: ServidorDeps, token: string,
     const draft = lerDraft(deps.db, draftId);
     if (!draft || draft.patientId !== input.patientId)
       return { status: 409, body: { codigo: "DRAFT_NAO_ENCONTRADO" } };
+    if (rascunhoNaoPromovivel(draft.payload)) return { status: 409, body: { codigo: "DRAFT_AINDA_RASCUNHO" } };
     const contexto = contextoDraft(draft.payload);
     if (!contexto) return { status: 409, body: { codigo: "DRAFT_CONTEXTO_AUSENTE" } };
     if (contexto.encounterId !== input.encounterId)
@@ -270,12 +273,7 @@ function confirmarBloco(deps: ServidorDeps, token: string, input: Confirmar): { 
     return !contexto || contexto.encounterId !== input.encounterId || contexto.tumorLotId !== input.tumorLotId;
   })) return { status: 409, body: { codigo: "DRAFT_FORA_DO_ESCOPO" } };
   if (drafts.some((draft) => {
-    const kind = draft?.payload && typeof draft.payload === "object" && "kind" in draft.payload
-      ? draft.payload.kind : null;
-    return kind === "EXTRACAO_RASCUNHO" || kind === "PRESCRICAO_RASCUNHO" || kind === "EVOLUCAO_RASCUNHO"
-      || kind === "FLASH_RASCUNHO" || kind === "FLASH_APAC_RASCUNHO" || kind === "ACAO_COMPOSTA_RASCUNHO"
-      || kind === "PRESCRICAO_EXECUTAVEL_RASCUNHO" || kind === "PRESCRICAO_EXECUTAVEL_AUXILIAR"
-      || kind === "APAC_CONFIRMACAO_CANONICA" || rascunhoJevNaoPromovivel(draft?.payload);
+    return rascunhoNaoPromovivel(draft?.payload);
   })) return { status: 409, body: { codigo: "DRAFT_AINDA_RASCUNHO" } };
   for(const draft of drafts){
     const corpo=draft!.payload as {propostasDoseReceita?:{id:string;hashProposta:string;fonte:{hash:string}}[]};
@@ -320,6 +318,13 @@ function confirmarBloco(deps: ServidorDeps, token: string, input: Confirmar): { 
     });
     if(vencido)return {status:409,body:{codigo:"REVISAO_FATOS_ALTERADA"}};
   }
+  const consultaAlertas = lerConsulta(deps.db,input.patientId,deps.agora(),sessao,input.tumorLotId,
+    {...opcoesLeituraConsulta(deps,sessao),encounterId:input.encounterId});
+  const alertasAtuais = "alertas" in consultaAlertas ? consultaAlertas.alertas : [];
+  const exibidos = deps.sessoes.alertasExibidos?.(token,contexto) ?? [];
+  if(new Set(input.reconhecerAlertas).size !== input.reconhecerAlertas.length
+    || input.reconhecerAlertas.some(id=>!exibidos.includes(id)||!alertasAtuais.some(a=>a.alertaId===id)))
+    return {status:409,body:{codigo:"ALERTA_NAO_EXIBIDO_OU_ALTERADO"}};
   const reviewDecisionId = sha(JSON.stringify({ input, medicoId: sessao.medicoId }));
   const registros = input.registros.map((r, i) => {
     const doc = docs[i];
@@ -384,6 +389,7 @@ function confirmarBloco(deps: ServidorDeps, token: string, input: Confirmar): { 
     const result=confirmar(deps.db,{operationId:input.idempotencyKey,patientId:input.patientId,tumorLotId:input.tumorLotId,encounterId:input.encounterId,
       reviewDecisionId,sessao,em,registros:[...registros,...auxiliares.map(a=>({...a,expectedRevision:0,fontes:[],revisao:"CONFIRMADO" as const}))]});
     if(result.estado==="NEGADA")deps.db.exec("ROLLBACK TO flash_assinatura");
+    if(result.estado!=="NEGADA") registrarCienciaAlertas(deps.db,contexto,input.reconhecerAlertas,sessao.medicoId,em,input.idempotencyKey);
     deps.db.exec("RELEASE flash_assinatura");
     // O rollback clínico desfaz qualquer auditoria gravada sob o SAVEPOINT;
     // a negativa é registrada de novo, já fora dele, para durar sem efeito clínico.
@@ -1266,6 +1272,7 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
         patientId: result.patientId, encounterId: result.encounterId, tumorLotId: result.tumorLotId,
       });
       else deps.sessoes.selecionarConsulta(token, null);
+      if (!("codigo" in result)) deps.sessoes.registrarAlertasExibidos?.(token, result, result.alertas.map(a=>a.alertaId));
       const integrado = !("codigo" in result) && deps.motorF1
         ? await deps.motorF1.consultar({patientId:result.patientId,encounterId:result.encounterId,tumorLotId:result.tumorLotId},leituraInicial) : null;
       if (!("codigo" in result)) await processarPendenciasClinicasCanal(deps.db, { agora: deps.agora(), cadastros: () => cadastrosCanal(deps.db, leituraInicial?.itens) });
@@ -1363,7 +1370,7 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
     if (rota === "agenda") {
       const parsed = z.object({}).strict().safeParse(raw);
       if (!parsed.success) return reply(400, "PAYLOAD_INVALIDO");
-      const result = lerAgenda(deps.db, deps.agora());
+      const result = lerAgenda(deps.db, deps.agora(), undefined, deps.salaoRuleset);
       if (result.hoje === null) return reply(503, result.codigo, result);
       return reply(200, result.estado === "FONTE_AUSENTE" ? "FONTE_AGENDA_AUSENTE" : "AGENDA_CARREGADA", result);
     }
@@ -1412,8 +1419,7 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
         const kind = draft.payload && typeof draft.payload === "object" && "kind" in draft.payload
           ? draft.payload.kind : null;
         const contexto = contextoDraft(draft.payload);
-        return kind !== "EXTRACAO_RASCUNHO" && kind !== "PRESCRICAO_RASCUNHO"
-          && kind !== "FLASH_RASCUNHO" && kind !== "FLASH_APAC_RASCUNHO"
+        return !rascunhoNaoPromovivel(draft.payload)
           && contexto?.encounterId === pedido.data.encounterId
           && contexto.tumorLotId === pedido.data.tumorLotId && payloadDocumento(draft.payload) !== null;
       }).map((draft) => draft.draftId);
@@ -1520,7 +1526,8 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
             rawTranscript: segment.rawTranscript },
           state: { segments: [segment], facts: scopedFacts,
             confirmationRequired: scopedExceptions(state?.confirmationRequired) },
-          alertasRads: [], patientLinkReview: link,
+          alertasRads: input.sourceType === "imaging_report" && deps.corpus?.rads
+            ? detectarEmergencias(segment.rawTranscript, deps.corpus.rads).alertas.map(a => ({ ...a, sourceId: input.sourceId })) : [], patientLinkReview: link,
         } };
         return reply(200, "RASCUNHO_CARREGADO", { draft: visibleDraft });
       }

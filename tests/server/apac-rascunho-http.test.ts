@@ -6,6 +6,7 @@ import { executarConfirmacao } from "../../src/kernel/comandos/index.js";
 import { listarDrafts, listarEventos, salvarDraft } from "../../src/kernel/comandos/portas.js";
 import { Apac } from "../../src/contracts/operacao.js";
 import { registrarNegativaRetrogradaNoBancoF4 } from "../../src/server/f4Acesso.js";
+import { aoCommitar } from "../../src/kernel/ledger/writeRouter.js";
 import { criarGateway, memoriaIdempotencia } from "../../src/kernel/gateway/gateway.js";
 import { criarMotorF1 } from "../../src/kernel/orquestracao/runtime.js";
 import { BasePrescricaoExecutavelResposta, PrescricaoExecutavelPreparada } from "../../src/contracts/api/operacaoPrescricaoExecutavel.js";
@@ -305,26 +306,73 @@ it("recusa confirmar preview se a base mudar depois de preparar", async () => {
   expect(a.eventos().filter(e => e.tipo === "APAC")).toHaveLength(0);
 });
 
-it("não deixa o confirmar genérico promover o draft administrativo APAC", async () => {
+it("registro R1 barra o bundle genérico da preparação e o recibo dedicado confirma a APAC exata", async () => {
   const a = await abrir(); await assinarRx(a);
   const base = await baseApac(a), preparada = await prepararApac(a, base, edicaoApac(), "apac-gate-generico");
   expect(preparada.status).toBe(200);
   const antes = a.eventos();
-  const bundle = await a.request("/consulta/bundle", { patientId: contexto.patientId, encounterId: contexto.encounterId,
-    tumorLotId: contexto.tumorLotId, draftIds: [preparada.data.draftId] });
-  expect(bundle.status).toBe(200);
-  const exibidos = Array.isArray(bundle.data.documentos) ? bundle.data.documentos
-    .map((doc: { documentId: string; documentVersion: number }) => ({ documentId: doc.documentId, documentVersion: doc.documentVersion })) : [];
   const confirmarGenerico = await a.request("/consulta/confirmar", { patientId: contexto.patientId,
     encounterId: contexto.encounterId, tumorLotId: contexto.tumorLotId, bloco: "APAC",
     registros: [{ id: preparada.data.draftId, expectedRevision: preparada.data.revision }],
-    documentosExibidos: exibidos, reconhecerAlertas: [], idempotencyKey: "apac-generico-nao-promover" });
+    documentosExibidos: [{ documentId: preparada.data.apac.apacId, documentVersion: preparada.data.apac.versao }],
+    reconhecerAlertas: [], idempotencyKey: "apac-generico-com-recibo-real" });
   expect(confirmarGenerico.status, JSON.stringify(confirmarGenerico.data)).toBe(409);
+  expect(confirmarGenerico.data).toMatchObject({ codigo: "DRAFT_AINDA_RASCUNHO" });
   expect(a.eventos()).toEqual(antes);
   expect(a.eventos().filter(e => e.tipo === "APAC")).toHaveLength(0);
+
+  const bundle = await a.request("/consulta/bundle", { patientId: contexto.patientId, encounterId: contexto.encounterId,
+    tumorLotId: contexto.tumorLotId, draftIds: [preparada.data.draftId] });
+  expect(bundle.status, JSON.stringify(bundle.data)).toBe(409);
+  expect(bundle.data).toMatchObject({ codigo: "DRAFT_AINDA_RASCUNHO" });
+  expect(a.eventos()).toEqual(antes);
+  expect(a.eventos().filter(e => e.tipo === "APAC")).toHaveLength(0);
+
+  // A recusa do bundle não substitui a prova positiva: o recibo real do preparo dedicado
+  // continua aceito pela rota especializada para o mesmo draft, APAC e versão.
+  const confirmada = await confirmarApac(a, preparada.data, "apac-gate-dedicado-confirmar");
+  expect(confirmada.status, JSON.stringify(confirmada.data)).toBe(200);
+  expect(confirmada.data).toMatchObject({ codigo: "GRAVADA", estado: "RASCUNHO", permiteExportar: false,
+    apacId: preparada.data.apac.apacId, versao: preparada.data.apac.versao });
+  expect(a.eventos().filter(e => e.tipo === "APAC")).toHaveLength(1);
+  expect(a.eventos().find(e => e.tipo === "APAC")?.payload).toMatchObject({
+    data: { apacId: preparada.data.apac.apacId, versao: preparada.data.apac.versao, estado: "RASCUNHO" },
+  });
+  expect(a.eventos().filter(e => e.tipo === "TreatmentAdministration")).toHaveLength(0);
 });
 
-it("bloqueia reutilização do draft APAC canônico para criar FATO genérico", async () => {
+it("confirmação dedicada APAC reverte draft, operação e evento se o commit posterior falha; retry grava uma vez", async () => {
+  const a = await abrir(); await assinarRx(a);
+  const base = await baseApac(a), preparada = await prepararApac(a, base, edicaoApac(), "apac-atomic-preparo");
+  expect(preparada.status).toBe(200);
+  const chaveConfirmacao = "apac-atomic-confirmacao", operationId = `apac-confirmar:${chaveConfirmacao}`;
+  const antes = a.eventos();
+  aoCommitar(a.db, () => { throw new Error("FALHA_SINTETICA_APOS_GRAVACAO_APAC"); });
+  const interrompida = await confirmarApac(a, preparada.data, chaveConfirmacao);
+  expect(interrompida.status, JSON.stringify(interrompida.data)).toBe(409);
+  expect(interrompida.data).toMatchObject({ codigo: "APAC_TRANSACAO_NAO_CONFIRMADA" });
+  expect(a.eventos()).toEqual(antes);
+  expect(a.eventos().filter(e => e.tipo === "APAC")).toHaveLength(0);
+  expect(Number((a.db.prepare("SELECT COUNT(*) AS n FROM operation WHERE operationId=?").get(operationId) as { n: number }).n)).toBe(0);
+  expect(listarDrafts(a.db, contexto.patientId).filter(d => {
+    const payload = d.payload && typeof d.payload === "object" ? d.payload as Record<string, unknown> : null;
+    return payload?.kind === "APAC_CONFIRMACAO_CANONICA" && payload.origem === preparada.data.draftId;
+  })).toHaveLength(0);
+
+  aoCommitar(a.db, () => {});
+  const retry = await confirmarApac(a, preparada.data, chaveConfirmacao);
+  expect(retry.status, JSON.stringify(retry.data)).toBe(200);
+  expect(retry.data).toMatchObject({ codigo: "GRAVADA", estado: "RASCUNHO", permiteExportar: false,
+    apacId: preparada.data.apac.apacId, versao: preparada.data.apac.versao });
+  expect(a.eventos().filter(e => e.tipo === "APAC")).toHaveLength(1);
+  expect(Number((a.db.prepare("SELECT COUNT(*) AS n FROM operation WHERE operationId=?").get(operationId) as { n: number }).n)).toBe(1);
+  expect(listarDrafts(a.db, contexto.patientId).filter(d => {
+    const payload = d.payload && typeof d.payload === "object" ? d.payload as Record<string, unknown> : null;
+    return payload?.kind === "APAC_CONFIRMACAO_CANONICA" && payload.origem === preparada.data.draftId;
+  })).toHaveLength(1);
+});
+
+it("registro R1 barra reutilizar o draft canônico APAC no bundle genérico de FATO", async () => {
   const a = await abrir(); await assinarRx(a);
   const base = await baseApac(a), preparada = await prepararApac(a, base, edicaoApac(), "apac-canonico-reuso");
   expect(preparada.status).toBe(200);
@@ -338,20 +386,30 @@ it("bloqueia reutilização do draft APAC canônico para criar FATO genérico", 
   const antes = a.eventos();
   const bundle = await a.request("/consulta/bundle", { patientId: contexto.patientId, encounterId: contexto.encounterId,
     tumorLotId: contexto.tumorLotId, draftIds: [canonico!.draftId] });
-  expect(bundle.status).toBe(200);
-  const documentos = bundle.data.documentos.map((doc: { documentId: string; documentVersion: number }) => ({
-    documentId: doc.documentId, documentVersion: doc.documentVersion,
-  }));
+  expect(bundle.status, JSON.stringify(bundle.data)).toBe(409);
+  expect(bundle.data).toMatchObject({ codigo: "DRAFT_AINDA_RASCUNHO" });
+
+  // Simula o recibo exato que a exibição genérica emitiria para essa cópia; o gate
+  // ainda precisa recusar pela classificação R1, não por falta de bundle.
+  a.sessoes.registrarBundleExibido(a.token, contexto, [{ draftId: canonico!.draftId,
+    documentId: canonico!.draftId, documentVersion: canonico!.revision + 1,
+    conteudoHash: hashConteudoExibido(canonico!.payload) }]);
   const reuso = await a.request("/consulta/confirmar", { patientId: contexto.patientId,
     encounterId: contexto.encounterId, tumorLotId: contexto.tumorLotId, bloco: "APAC",
     registros: [{ id: canonico!.draftId, expectedRevision: canonico!.revision }],
-    documentosExibidos: documentos, reconhecerAlertas: [], idempotencyKey: "apac-canonico-como-fato" });
+    documentosExibidos: [{ documentId: canonico!.draftId, documentVersion: canonico!.revision + 1 }],
+    reconhecerAlertas: [], idempotencyKey: "apac-canonico-com-recibo-generico" });
   expect(reuso.status, JSON.stringify(reuso.data)).toBe(409);
+  expect(reuso.data).toMatchObject({ codigo: "DRAFT_AINDA_RASCUNHO" });
   expect(a.eventos()).toEqual(antes);
-  expect(a.eventos().filter(e => e.tipo === "FATO" && e.operationId === "apac-canonico-como-fato")).toHaveLength(0);
+  expect(a.eventos().filter(e => e.tipo === "FATO" && e.operationId === "apac-canonico-com-recibo-generico")).toHaveLength(0);
+  expect(listarDrafts(a.db, contexto.patientId).find(d => d.draftId === canonico!.draftId)?.revision).toBe(canonico!.revision);
+  expect(a.eventos().filter(e => e.tipo === "APAC")).toHaveLength(1);
+  expect(salva.data).toMatchObject({ apacId: preparada.data.apac.apacId, versao: preparada.data.apac.versao,
+    estado: "RASCUNHO", permiteExportar: false });
 });
 
-it("o kernel também recusa reutilizar o draft canônico APAC como FATO", async () => {
+it("o kernel só aceita a cópia canônica APAC exata, no contexto e revisão dedicados", async () => {
   const a = await abrir(); await assinarRx(a);
   const base = await baseApac(a), preparada = await prepararApac(a, base, edicaoApac(), "apac-canonico-reuso");
   expect(preparada.status).toBe(200);
@@ -363,13 +421,31 @@ it("o kernel também recusa reutilizar o draft canônico APAC como FATO", async 
   });
   expect(canonico).toBeTruthy();
   const antes = a.eventos();
-  const reuso = executarConfirmacao(a.db, { ...contexto, operationId: "apac-canonico-como-fato",
-    reviewDecisionId: "revisao-generica-sintetica", sessao: a.sessoes.obter(a.token)!, em: AGORA,
-    registros: [{ draftId: canonico!.draftId, expectedRevision: canonico!.revision,
-      eventId: "fato-invalido-apac", tipo: "FATO", payload: { campo: "apac.falso", valor: true },
-      fontes: [fonteSintetica("apac-canonico-como-fato")], revisao: "CONFIRMADO" }] });
-  expect(reuso.estado).toBe("NEGADA");
-  expect(a.eventos()).toEqual(antes);
-  expect(listarDrafts(a.db, contexto.patientId).find(d => d.draftId === canonico!.draftId)?.revision).toBe(canonico!.revision);
-  expect(a.eventos().filter(e => e.tipo === "FATO" && e.operationId === "apac-canonico-como-fato")).toHaveLength(0);
+  const payloadCanonico = canonico!.payload as { apac: unknown };
+  const apacCanonica = Apac.parse(payloadCanonico.apac);
+  const apacAlterada = Apac.parse({ ...apacCanonica, campos: { ...apacCanonica.campos,
+    justificativa: "Tentativa sintética de adulterar a cópia canônica." } });
+  const tentativas = [
+    { nome: "tipo", contexto, tipo: "FATO", expectedRevision: canonico!.revision,
+      payload: { campo: "apac.falso", valor: true } },
+    { nome: "payload", contexto, tipo: "APAC", expectedRevision: 0, payload: apacAlterada },
+    { nome: "contexto", contexto: { ...contexto, encounterId: "outro-encontro-sintetico" }, tipo: "APAC",
+      expectedRevision: 0, payload: apacCanonica },
+    { nome: "revisao", contexto, tipo: "APAC", expectedRevision: 1, payload: apacCanonica },
+  ] as const;
+  for (const tentativa of tentativas) {
+    const operationId = `apac-canonico-adulterado-${tentativa.nome}`;
+    const resultado = executarConfirmacao(a.db, { ...tentativa.contexto, operationId,
+      reviewDecisionId: `review-${operationId}`, sessao: a.sessoes.obter(a.token)!, em: AGORA,
+      registros: [{ draftId: canonico!.draftId, expectedRevision: tentativa.expectedRevision,
+        eventId: `evento-${operationId}`, tipo: tentativa.tipo, payload: tentativa.payload,
+        fontes: [fonteSintetica(operationId)], revisao: "CONFIRMADO" }] });
+    expect(resultado.estado, tentativa.nome).toBe("NEGADA");
+    expect(resultado.motivo, tentativa.nome).toBe("CONFIRMACAO_APAC_DIVERGENTE");
+    expect(a.eventos()).toEqual(antes);
+    expect(listarDrafts(a.db, contexto.patientId).find(d => d.draftId === canonico!.draftId)?.revision)
+      .toBe(canonico!.revision);
+  }
+  expect(a.eventos().filter(e => e.tipo === "FATO" && e.operationId.startsWith("apac-canonico-adulterado-") )).toHaveLength(0);
+  expect(a.eventos().filter(e => e.tipo === "APAC")).toHaveLength(1);
 });

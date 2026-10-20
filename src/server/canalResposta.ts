@@ -550,11 +550,11 @@ export function invalidarRespostasPorMudancaContextoCanal(
   return invalidadas;
 }
 
-function carregarDicionarioPacienteDoLedger(
+export function carregarDicionarioPacienteDoLedger(
   db: DatabaseSync,
   patientId: string,
   destinatario: string,
-): DicionarioPaciente {
+): DicionarioPaciente | null {
   const nomes = new Set<string>();
   const identificadores = new Set<string>();
   try {
@@ -563,16 +563,15 @@ function carregarDicionarioPacienteDoLedger(
       if (ev.tipo !== "Paciente") continue;
       const outer = ev.payload && typeof ev.payload === "object" ? ev.payload as Record<string, unknown> : null;
       const parsed = Paciente.safeParse(outer?.data ?? outer);
-      if (parsed.success) {
+      if (parsed.success && parsed.data.patientId === patientId) {
         if (parsed.data.nome.trim()) nomes.add(parsed.data.nome.trim());
         for (const id of parsed.data.identificadores) {
           if (id.valor.trim()) identificadores.add(id.valor.trim());
         }
       }
     }
-  } catch { /* fallback seguro quando a tabela de eventos está vazia */ }
-  if (nomes.size === 0) nomes.add("Paciente Sintetico Padrao");
-  if (identificadores.size === 0) identificadores.add(`ID-PACIENTE-${patientId}`);
+  } catch { return null; }
+  if (nomes.size === 0) return null;
   void destinatario;
   return {
     nomes: [...nomes],
@@ -769,9 +768,14 @@ export async function executarEnvioAutorizadoCanal(
   }
 
   const autInicial = revalidacaoPrevia.autorizacao;
-  const dic: DicionarioPaciente = opcoes.dicionarioPaciente
+  const dic = opcoes.dicionarioPaciente
     ?? carregarDicionarioPacienteDoLedger(db, autInicial.contexto.patientId, autInicial.destinatarioCanonico);
-
+  if (!dic || !dic.nomes.some(nome => nome.trim())) {
+    const motivoCodigo = "DICIONARIO_PACIENTE_INDISPONIVEL";
+    auditar(db, { ator: { tipo: "SESSAO", id: sessao.medicoId }, acaoPedida: opcoes.intent.verbo,
+      decisao: "NEGADA", motivoCodigo, politicaVersao: "F2-S03", em: agora() });
+    return { resultadoGateway: { decisao: "NEGADA", motivoCodigo }, estadoOperacional: null };
+  }
 
   let reciboAnteriorReutilizado=false;
   let reciboProvedor:string|null=null;
