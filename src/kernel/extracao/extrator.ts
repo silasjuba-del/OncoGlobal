@@ -93,6 +93,8 @@ function trechosNaoRiscados(linha: string, aberto: boolean): { trechos: string[]
 }
 
 const NEGACAO_CLAUSULA = /\b(?:não\s+(?:há|observamos|apresenta|refere|relata|tem)|nega|negou|negativo para|sem\s+(?:dor|náusea|dormência|formigamento|sinais de|evidência(?: de)?|les(?:ão|ões)|nódul(?:o|os)|foc(?:o|os)|neoplasia|carcinoma|adenocarcinoma|tumor|metástase|expressão|amplificação|HER2|RE|RP|Ki-67|PD-L1))(?=$|[^\p{L}\p{N}_])/iu;
+// Pontuação de sentença encerra o escopo lexical; decimal e abreviações comuns não.
+const LIMITE_SENTENCA = /(?<!\b(?:aprox|dr|dra|sr|sra|etc|ex|p|pp|n)\.)(?<=[.!?])\s+(?=\p{L})/iu;
 
 /**
  * Comparação seriada declarada pela própria fonte (ex.: "aumentado em relação à CO de 14/05/28").
@@ -136,7 +138,8 @@ export const extratorDeterministico: Extrator = {
       for (const trecho of visiveis.trechos) {
       // Uma nova afirmação explícita encerra a negação anterior; uma simples
       // lista ("nega dor, náusea") continua sob a mesma negação.
-      const clausulas = trecho.split(/;|,\s*(?=(?:mas\s+)?(?:relata|refere|apresenta|informa)\b)/iu);
+      const clausulas = trecho.split(LIMITE_SENTENCA)
+        .flatMap(sentenca => sentenca.split(/;|,\s*(?=(?:mas\s+)?(?:relata|refere|apresenta|informa)\b)/iu));
       for (const clausula of clausulas) {
       const raw = clausula.trim();
       if (!raw) continue;

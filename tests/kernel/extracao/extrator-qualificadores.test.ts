@@ -13,6 +13,30 @@ function segment(text: string, sourceType: FactSourceType) {
 }
 
 describe("extrator: hipótese lexical não vira fato explícito (ARQ-03, recorte)", () => {
+  it("negação em outra sentença não torna diagnóstico e hemoglobina explícitos incertos", () => {
+    const diagnostico = "Diagnóstico oncológico: câncer de cólon metastático. Tratamento informado: FOLFIRI em curso. Biomarcadores: não disponíveis no material apresentado.";
+    const laboratorio = "09/10/2026 Hemoglobina 8,2 g/dL. Neutrofilos: nao informado.";
+    expect(extratorDeterministico.extrair(segment(diagnostico, "medical_note"))
+      .find(f => f.domain === "diagnosis")).toMatchObject({
+        evidence: "EXPLICIT", requiresConfirmation: false, rawEvidence: diagnostico,
+      });
+    expect(extratorDeterministico.extrair(segment(laboratorio, "medical_note"))
+      .find(f => f.domain === "lab")).toMatchObject({
+        evidence: "EXPLICIT", requiresConfirmation: false, value: { marker: "Hemoglobina", value: "8,2" },
+      });
+  });
+
+  it("separa sentenças sem cortar decimal nem abreviação e preserva relato positivo após negação", () => {
+    const sintomas = extratorDeterministico.extrair(segment("Paciente não apresenta dor. Paciente relata náusea.", "medical_note"));
+    expect(sintomas.filter(f => f.domain === "symptom")).toHaveLength(1);
+    expect(sintomas.find(f => f.domain === "symptom")).toMatchObject({ value: "Paciente relata náusea.", evidence: "EXPLICIT" });
+    const imagem = extratorDeterministico.extrair(segment("Lesão em L5 medindo 1.2 cm. Paciente não apresenta dor.", "imaging_report"));
+    expect(imagem.find(f => f.domain === "imaging")).toMatchObject({ value: { measureRaw: "1.2", unit: "cm" }, evidence: "EXPLICIT" });
+    const abreviada = "Paciente relata dor há aprox. dois dias.";
+    expect(extratorDeterministico.extrair(segment(abreviada, "medical_note")).find(f => f.domain === "symptom"))
+      .toMatchObject({ value: abreviada, rawEvidence: abreviada });
+  });
+
   it.each([
     "Paciente não sente dor.", "Paciente não apresentou dor.", "Paciente não apresentava náusea.",
     "Paciente nao sente dor.", "Ausência de dor.", "Dor ausente.",
