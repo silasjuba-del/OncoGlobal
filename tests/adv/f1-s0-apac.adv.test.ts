@@ -1,5 +1,5 @@
 import { afterEach, expect, it } from "vitest";
-import { CAMPOS_OBRIGATORIOS_PADRAO } from "../../src/apac/antiglosa.js";
+import { CAMPOS_OBRIGATORIOS_PADRAO } from "../../src/modules/apac/antiglosa.js";
 import { DatabaseSync } from "node:sqlite";
 import { criarSchema } from "../../src/kernel/ledger/schema.js";
 import { lerConsulta, lerEventosComIntegridade, lerApacs } from "../../src/server/leituras.js";

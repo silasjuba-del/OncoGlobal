@@ -3,12 +3,12 @@
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { describe, expect, it } from "vitest";
-import { calcularCnsDefinitivo } from "../../src/apac/cns.js";
+import { calcularCnsDefinitivo } from "../../src/modules/apac/cnsRegulatorio.js";
 import {
   CHAVES_IDENTIFICACAO, aplicarIdentificacaoCheckin, dvIbge, lerCampo, lerIdentificacaoCheckin, lerTexto,
   type CadastroCheckin, type EntradaIbge,
-} from "../../src/apac/campos.js";
-import { CAMPOS_SOLICITACAO } from "../../src/apac/laudo.js";
+} from "../../src/modules/apac/campos.js";
+import { CAMPOS_SOLICITACAO } from "../../src/modules/apac/laudo.js";
 
 const RAIZ = process.cwd();
 const TABELA: EntradaIbge[] = (JSON.parse(

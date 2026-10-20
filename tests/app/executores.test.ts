@@ -4,8 +4,8 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { afterEach, describe, expect, it } from "vitest";
 import { criarGateway, memoriaIdempotencia } from "../../src/kernel/gateway/gateway.js";
-import { criarExecutorDesabilitado } from "../../src/app/executores/desabilitados.js";
-import { criarExecutorImprimir, htmlComImpressaoPorClique } from "../../src/app/executores/imprimir.js";
+import { criarExecutorDesabilitado } from "../../src/kernel/gateway/executores/desabilitados.js";
+import { criarExecutorImprimir, htmlComImpressaoPorClique } from "../../src/kernel/gateway/executores/imprimir.js";
 
 const dirs: string[] = [];
 const temp = () => {

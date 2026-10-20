@@ -3,8 +3,8 @@ import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { Apac } from "../../src/contracts/operacao.js";
 import type { CaixaNumerada } from "../../src/contracts/w10/clinico-w10.js";
-import { calcularCnsDefinitivo } from "../../src/apac/cns.js";
-import { montarTabelaSigtap, type ProcedimentoSigtap, type TabelaSigtap } from "../../src/apac/sigtap.js";
+import { calcularCnsDefinitivo } from "../../src/modules/apac/cnsRegulatorio.js";
+import { montarTabelaSigtap, type ProcedimentoSigtap, type TabelaSigtap } from "../../src/modules/apac/sigtap.js";
 
 function linhaCsv(l: string): string[] {
   const out: string[] = [];

@@ -12,8 +12,9 @@ function receber(a:ReturnType<typeof ambiente>,id:string,txt='Hoje tenho sangram
   conteudo:{tipo:'TEXT',texto:txt,contentSha256:createHash('sha256').update(txt).digest('hex')},cadastros:conhecido?cadastro(sender):[]});
  if(!r.ok)throw Error(JSON.stringify(r));return r.reciboId;
 }
-function autorizada(){
+function autorizada(comCadastro=true){
  const a=ambiente(),mensagemOrigemId=receber(a,'origem'),contexto={...ctx,revisaoContexto:'r1'};
+ if(comCadastro)a.seed('Paciente',{patientId:ctx.patientId,nome:'Paciente Sintetico Integracao',identificadores:[],nascimento:null,sexoCadastral:'NAO_INFORMADO',divergencia:false},'CONFIRMADO',{...ctx,tumorLotId:null});
  const consentir=(versaoTermo='1')=>registrarConsentimentoCanal(a.db,a.acesso,{contatoId:contato,patientId:ctx.patientId,referenciaTermo:'termo-sintetico',versaoTermo,finalidade:['COMUNICACAO_CLINICA'],origem:'PRESENCIAL_CONSULTORIO'});
  consentir();const p=prepararRascunhoRespostaCanal(a.db,a.acesso,{respostaId:'resposta-sintetica',versao:1,mensagemOrigemId,contexto,tipoResposta:'RESPOSTA_LIVRE_MEDICA',texto:'Retorno na quinta-feira.'});
  if(!p.ok)throw Error(JSON.stringify(p));expect(confirmarRespostaCanalPeloMedico(a.db,a.acesso,{respostaId:p.rascunho.respostaId,versao:1,comprovanteExibicao:{destinatario:contato,conteudoSha256:p.rascunho.conteudoSha256,contexto}}).ok).toBe(true);
@@ -50,5 +51,11 @@ it('reconciliação concorrente retorna o registro persistido vencedor',async()=
   const segunda=await reconciliarMensagemCanalPersistida(a.db,a.acesso,{mensagemId:id,cadastros:cadastro(),rulesetAlarmes:regras('vencedor')});
   liberar();const r=await primeira;expect(segunda.ok&&r.ok).toBe(true);
   if(r.ok){expect(r.replay).toBe(true);expect(r.reconciliacao).toEqual(lerReconciliacaoMensagemCanal(a.db,id));}
+ }finally{a.db.close();}
+});
+
+it('identidade ausente nega envio antes de chamar transporte e audita motivo',async()=>{
+ const a=autorizada(false);try{const r=await a.enviar('sem-identidade-local');expect(r.resultadoGateway).toMatchObject({decisao:'NEGADA',motivoCodigo:'DICIONARIO_PACIENTE_INDISPONIVEL'});expect(a.efeitos()).toBe(0);
+ expect(a.db.prepare("SELECT COUNT(*) AS n FROM audit_event WHERE motivoCodigo='DICIONARIO_PACIENTE_INDISPONIVEL'").get()?.n).toBe(1);
  }finally{a.db.close();}
 });

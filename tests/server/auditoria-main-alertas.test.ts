@@ -49,4 +49,8 @@ it("upload radiologico preserva RADS com trecho e fonte sem promover fato",async
  await abrir();const texto=readFileSync(new URL("../../docs/referencias/modelos/laudos-sinteticos/PT08-tc-abdome-pelve.txt",import.meta.url),"utf8");
  const r=await processarUploadLocal({db:a.db,sessoes:a.sessoes,agora:()=>AGORA,corpus:carregarCorpusServidor(),converterUpload:async entrada=>({status:"PRONTO",documento:{...entrada,hash:"hash-sintetico",paginas:[{n:1,texto}]}})},a.token,a.sessoes.obter(a.token)!,{patientId:PACIENTE,encounterId:ENCONTRO,tumorLotId:null,id:"rads-upload",sourceId:"fonte-rads",sourceType:"imaging_report",tipo:"PDF",bytesBase64:Buffer.from("pdf sintetico").toString("base64")});
  expect(r.status).toBe(201);const d=lerDraft(a.db,String(r.body.draftId))!;expect(d.patientId).toBeNull();expect((d.payload as any).alertasRads.map((x:any)=>x.linha)).toEqual([7,27]);expect((d.payload as any).alertasRads.every((x:any)=>x.sourceId==="fonte-rads" && texto.includes(x.trecho))).toBe(true);
+ const payload=d.payload as any;
+ salvarDraft(a.db,{...d,patientId:PACIENTE,revision:1,payload:{...payload,patientLinkReview:{patientId:PACIENTE,encounterId:ENCONTRO,tumorLotId:null,segmentId:payload.state.segments[0].id}}});
+ const reaberto=await a.request("/consulta/rascunho",{draftId:d.draftId});expect(reaberto.status).toBe(200);
+ expect(reaberto.data.draft.payload.alertasRads.map((x:any)=>x.linha)).toEqual([7,27]);
 });

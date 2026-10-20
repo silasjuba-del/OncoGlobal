@@ -3,8 +3,8 @@
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { describe, expect, it } from "vitest";
-import { antiglosa, type ContextoAntiglosa, type RegraCidSexo } from "../../src/apac/antiglosa.js";
-import { montarTabelaSigtap } from "../../src/apac/sigtap.js";
+import { antiglosa, type ContextoAntiglosa, type RegraCidSexo } from "../../src/modules/apac/antiglosa.js";
+import { montarTabelaSigtap } from "../../src/modules/apac/sigtap.js";
 import { apac, CAIXAS, COD_QT, COD_ZERO, proc } from "../apac-w10/helpers.js";
 
 const regrasCidSexo = (JSON.parse(

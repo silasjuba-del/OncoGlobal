@@ -2,7 +2,7 @@ import { mkdtempSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import type { CaixaNumerada } from "../../src/contracts/w10/clinico-w10.js";
-import type { PerfilConfiguracao } from "../../src/config/settings.js";
+import type { PerfilConfiguracao } from "../../src/kernel/config/settings.js";
 
 export const SESSION = {
   medicoId: "medico-sintetico-01", crm: "CRM-TESTE", emitidaEm: "2026-10-07T12:00:00.000Z", expiraEm: "2026-10-07T20:00:00.000Z",

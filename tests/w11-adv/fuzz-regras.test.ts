@@ -19,8 +19,8 @@ import { montarReceitas, rotearItemReceita, CONFIGURACAO_RECEITUARIO_PADRAO, typ
 import { adicionarOutro, lerMatrizUniversal, subconjunto, validarMatrizUniversal, type MatrizUniversal } from "../../src/rules/matrizUniversal.js";
 import { projetarDatasFixas } from "../../src/kernel/projections/datasFixas.js";
 import { projetarHistoricoTratamento, type FatoTratamento } from "../../src/kernel/projections/historicoTratamento.js";
-import { gatesCoerencia, type ContextoAntiglosa, type RegraCidSexo } from "../../src/apac/antiglosa.js";
-import { montarTabelaSigtap } from "../../src/apac/sigtap.js";
+import { gatesCoerencia, type ContextoAntiglosa, type RegraCidSexo } from "../../src/modules/apac/antiglosa.js";
+import { montarTabelaSigtap } from "../../src/modules/apac/sigtap.js";
 import { apac, CAIXAS, COD_QT, COD_ZERO, proc, camposOk } from "../apac-w10/helpers.js";
 import { triagemBase, presente, ausente } from "../fixtures/triagem.js";
 import { salaoRuleset } from "../fixtures/rulesets.js";
