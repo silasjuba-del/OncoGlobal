@@ -11,7 +11,7 @@ import { BasePrescricaoExecutavelResposta, ConfirmarPrescricaoExecutavelPedido,
 import { executarConfirmacao } from "../kernel/comandos/index.js";
 import { lerDraft, listarEventos, salvarDraft, transacao } from "../kernel/comandos/portas.js";
 import { dadosDoEvento, eventosVigentes } from "../kernel/projections/snapshot.js";
-import { avaliarDocumentoExecutavel } from "../rules/prescricao/documentoExecutavel.js";
+import { avaliarDocumentoExecutavel, doseFinalEmMg } from "../rules/prescricao/documentoExecutavel.js";
 import { hashConteudoExibido as hash, type GerenciadorSessao } from "./sessao.js";
 import { verificarPrescricaoDuto } from "./dutos.js";
 
@@ -120,14 +120,6 @@ function hashPreparacao(p: DadosPreparacao): string {
     resposta: { draftId, revision, baseHash, conteudo, texto, avisos, efeitos } });
 }
 
-/** Apenas conversões dimensionais explícitas; unidade não suportada não vira mg por suposição. */
-function doseMg(dose: number, unidade: string): number | null {
-  const u = unidade.trim().normalize("NFKC").toLowerCase();
-  const fator = u === "mg" ? 1 : ["mcg", "μg", "ug"].includes(u) ? 0.001 : u === "g" ? 1000 : null;
-  const n = fator === null ? null : dose * fator;
-  return n !== null && Number.isFinite(n) && n > 0 ? n : null;
-}
-
 function validarOrigem(edicao: EdicaoPrescricaoExecutavel, base: BasePrescricaoExecutavelResposta): string | null {
   // Propostas de protocolo ainda precisam de uma porta que valide o corpus.
   // Itens manuais completos são autorados pelo médico; nunca recebem selo PROTOCOL pelo browser.
@@ -161,6 +153,8 @@ function preparar(deps: Deps, token: string, raw: unknown, contexto: Contexto, a
       || hash(salvo.data.edicao) !== hash(entrada.edicao)
       || salvo.data.resposta.baseHash !== entrada.expectedBaseHash)
       return negar("CONTEUDO_ALTERADO_APOS_EXIBICAO");
+    const avaliacao = avaliarDocumentoExecutavel(salvo.data.resposta.conteudo);
+    if (!avaliacao.ok) return negar("PRESCRICAO_INCOMPLETA", 409, avaliacao.pendencias);
     deps.sessoes.registrarBundleExibido(token, contexto, [{ documentId: salvo.data.resposta.conteudo.documentId,
       documentVersion: salvo.data.resposta.conteudo.documentVersion, conteudoHash: salvo.data.resposta.conteudoHash, draftId }]);
     return { status: 200, body: salvo.data.resposta };
@@ -198,7 +192,7 @@ function preparar(deps: Deps, token: string, raw: unknown, contexto: Contexto, a
   if (!avaliacao.ok) return negar("PRESCRICAO_INCOMPLETA", 409, avaliacao.pendencias);
   const itens: Ciclo["itens"] = [];
   for (const { item } of edicao.itens) {
-    const dose = doseMg(item.prescribedDose!, item.unit);
+    const dose = doseFinalEmMg(item.prescribedDose!, item.unit);
     if (dose === null) return negar("UNIDADE_CICLO_NAO_SUPORTADA", 409, [`${item.drug}: ${item.unit}`]);
     itens.push({ item: item.sequence, droga: item.drug, doseMg: dose,
       reducaoPct: item.adjustmentPercent === null ? null : Math.abs(item.adjustmentPercent) });
@@ -285,6 +279,8 @@ function confirmar(deps: Deps, token: string, raw: unknown, contexto: Contexto, 
   if (base.revisao !== r.baseHash || base.pendencias.length) return negar("BASE_PRESCRICAO_ALTERADA");
   const origem = validarOrigem(salvo.edicao, base);
   if (origem) return negar(origem);
+  const avaliacao = avaliarDocumentoExecutavel(r.conteudo);
+  if (!avaliacao.ok) return negar("PRESCRICAO_INCOMPLETA", 409, avaliacao.pendencias);
   const key = hash(operationId), reviewDecisionId = `rx-review-${key}`, eventoId = `rx-doc-${key}`;
   const fonte: Fonte = { sourceId: draft.sourceId, classe: "MANUAL", localizador: null,
     dataClinica: null, dataCaptura: em, versao: String(r.conteudo.documentVersion), contentHash: requestHash };
