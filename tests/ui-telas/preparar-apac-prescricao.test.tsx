@@ -91,7 +91,8 @@ it("abre APAC apenas com as tres operacoes da porta e liga o painel ao contexto 
 
 it("mantem campos clinicos como fonte read-only, prepara preview exata e salva somente RASCUNHO", async () => {
   const f = fixture();
-  render(<ConsultaPersistida porta={f.porta} contexto={contexto} />);
+  const apacPendente = vi.fn();
+  render(<ConsultaPersistida porta={f.porta} contexto={contexto} aoAlterarApacPendente={apacPendente} />);
   fireEvent.click(await screen.findByRole("button", { name: /Preparar APAC da prescr/ }));
   const panel = await screen.findByRole("region", { name: /APAC em rascunho/ });
   await waitFor(() => expect(f.ler).toHaveBeenCalled());
@@ -108,6 +109,7 @@ it("mantem campos clinicos como fonte read-only, prepara preview exata e salva s
 
   fireEvent.change(screen.getByLabelText("Procedimento principal"), { target: { value: "PROC-SINTETICO-01" } });
   fireEvent.change(screen.getByLabelText("Justificativa"), { target: { value: "Justificativa administrativa sintetica." } });
+  expect(apacPendente).toHaveBeenLastCalledWith(true);
   fireEvent.click(screen.getByRole("button", { name: /Preparar.*exata da APAC/ }));
   await waitFor(() => expect(f.preparar).toHaveBeenCalledTimes(1));
   const pedido = f.preparar.mock.calls[0]![0];
@@ -130,6 +132,7 @@ it("mantem campos clinicos como fonte read-only, prepara preview exata e salva s
     idempotencyKey: expect.any(String),
   })));
   expect(screen.getAllByRole("status").some(status => /RASCUNHO/.test(status.textContent ?? ""))).toBe(true);
+  expect(apacPendente).toHaveBeenLastCalledWith(false);
   expect(f.confirmar.mock.calls[0]![0]).not.toHaveProperty("resultadoExterno");
 });
 
@@ -145,15 +148,18 @@ it("sem prescricao assinada exibe pendencia e bloqueia preparo", async () => {
 
 it("falha de preparo mantem campos editaveis e libera nova tentativa", async () => {
   const f = fixture();
+  const apacPendente = vi.fn();
   f.preparar.mockRejectedValueOnce(new Error("BASE_APAC_ALTERADA"));
-  render(<ConsultaPersistida porta={f.porta} contexto={contexto} />);
+  render(<ConsultaPersistida porta={f.porta} contexto={contexto} aoAlterarApacPendente={apacPendente} />);
   fireEvent.click(await screen.findByRole("button", { name: /Preparar APAC da prescr/ }));
   await screen.findByRole("region", { name: /APAC em rascunho/ });
   const campo = await screen.findByLabelText("Procedimento principal");
   fireEvent.change(campo, { target: { value: "PROC-ERRO-SINTETICO" } });
+  expect(apacPendente).toHaveBeenLastCalledWith(true);
   fireEvent.click(screen.getByRole("button", { name: /Preparar.*exata da APAC/ }));
   expect(await screen.findByRole("alert")).toBeTruthy();
   expect((screen.getByLabelText("Procedimento principal") as HTMLInputElement).value).toBe("PROC-ERRO-SINTETICO");
+  expect(apacPendente).toHaveBeenLastCalledWith(true);
   expect((screen.getByRole("button", { name: /Preparar.*exata da APAC/ }) as HTMLButtonElement).disabled).toBe(false);
 });
 
@@ -255,4 +261,19 @@ it("preserva a base e a edicao quando o mesmo contexto chega em outra ordem de p
   expect(await screen.findByLabelText("Procedimento principal")).toBeTruthy();
   expect((screen.getByLabelText("Procedimento principal") as HTMLInputElement).value).toBe("PROC-ORDEM-SINTETICO");
   expect(f.ler).toHaveBeenCalledTimes(1);
+});
+
+it("mantem edicao e dirty quando a identidade do callback muda no mesmo contexto", async () => {
+  const f = fixture();
+  const callbackInicial = vi.fn(), callbackAtualizado = vi.fn();
+  const props = { porta: f.porta, contexto, aberto: true, aoAlterarPendente: callbackInicial };
+  const view = render(<PrepararApacConsulta {...props} />);
+  fireEvent.change(await screen.findByLabelText("Procedimento principal"), { target: { value: "PROC-CALLBACK-SINTETICO" } });
+  expect(callbackInicial).toHaveBeenCalledWith(true);
+
+  view.rerender(<PrepararApacConsulta {...props} aoAlterarPendente={callbackAtualizado} />);
+
+  expect((screen.getByLabelText("Procedimento principal") as HTMLInputElement).value).toBe("PROC-CALLBACK-SINTETICO");
+  expect(callbackInicial).toHaveBeenLastCalledWith(true);
+  expect(callbackAtualizado).not.toHaveBeenCalledWith(false);
 });

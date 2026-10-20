@@ -49,12 +49,15 @@ function chaveSemanticaContexto(contexto: ContextoAcaoComposta): string {
   return JSON.stringify([contexto.patientId, contexto.encounterId, contexto.tumorLotId]);
 }
 
-export function PrepararApacConsulta({ porta, contexto, aberto, ocupado = false, aoAtualizarClinico }: {
+export function PrepararApacConsulta({ porta, contexto, aberto, ocupado = false, aoAtualizarClinico,
+  aoAlterarPendente, aoAlterarSalvando }: {
   porta: PortaConsulta;
   contexto: ContextoAcaoComposta;
   aberto: boolean;
   ocupado?: boolean;
   aoAtualizarClinico?: () => void;
+  aoAlterarPendente?: (pendente: boolean) => void;
+  aoAlterarSalvando?: (salvando: boolean) => void;
 }) {
   const [base, setBase] = useState<BaseApacRascunhoResposta | null>(null);
   const [edicao, setEdicao] = useState<EdicaoApacRascunho | null>(null);
@@ -64,6 +67,10 @@ export function PrepararApacConsulta({ porta, contexto, aberto, ocupado = false,
   const [carregando, setCarregando] = useState(false);
   const [salvando, setSalvando] = useState(false);
   const [salva, setSalva] = useState(false);
+  const aoAlterarPendenteAtual = useRef(aoAlterarPendente);
+  aoAlterarPendenteAtual.current = aoAlterarPendente;
+  const aoAlterarSalvandoAtual = useRef(aoAlterarSalvando);
+  aoAlterarSalvandoAtual.current = aoAlterarSalvando;
   const geracao = useRef(0);
   const chaveContexto = chaveSemanticaContexto(contexto);
   const contextoAtual = useRef(chaveContexto);
@@ -120,6 +127,7 @@ export function PrepararApacConsulta({ porta, contexto, aberto, ocupado = false,
       abortAtual.current?.abort();
       setBase(null); setEdicao(null); setPrevia(null); setMensagem(""); setErro(""); setSalva(false);
       setCarregando(false); setSalvando(false);
+      aoAlterarPendenteAtual.current?.(false); aoAlterarSalvandoAtual.current?.(false);
       tentativaPreparo.current = null; tentativaConfirmacao.current = null;
     }
     if (!aberto) {
@@ -127,23 +135,29 @@ export function PrepararApacConsulta({ porta, contexto, aberto, ocupado = false,
       abortAtual.current?.abort();
       setCarregando(false);
       setSalvando(false);
+      aoAlterarPendenteAtual.current?.(false); aoAlterarSalvandoAtual.current?.(false);
       return;
     }
     if (!base || mudouContexto || mudouPorta) void carregarBase(false);
     return () => {
       geracao.current++;
       abortAtual.current?.abort();
+      aoAlterarPendenteAtual.current?.(false); aoAlterarSalvandoAtual.current?.(false);
     };
   }, [porta, chaveContexto, aberto]);
 
   function alterarCompetencia(value: string) {
-    setEdicao(current => current ? { ...current, competencia: value } : current);
+    if (!edicao || value === edicao.competencia) return;
+    setEdicao({ ...edicao, competencia: value });
     setPrevia(null); setSalva(false); setErro(""); setMensagem("");
+    aoAlterarPendenteAtual.current?.(true);
   }
 
   function alterarCampo(campo: keyof EdicaoApacRascunho["campos"], value: string | number | null) {
-    setEdicao(current => current ? { ...current, campos: { ...current.campos, [campo]: value } } : current);
+    if (!edicao || Object.is(edicao.campos[campo], value)) return;
+    setEdicao({ ...edicao, campos: { ...edicao.campos, [campo]: value } });
     setPrevia(null); setSalva(false); setErro(""); setMensagem("");
+    aoAlterarPendenteAtual.current?.(true);
   }
 
   async function preparar() {
@@ -154,7 +168,7 @@ export function PrepararApacConsulta({ porta, contexto, aberto, ocupado = false,
     if (tentativaPreparo.current?.fingerprint !== fingerprintPedido)
       tentativaPreparo.current = { fingerprint: fingerprintPedido, id: globalThis.crypto.randomUUID() };
     const token = geracao.current;
-    setSalvando(true); setErro(""); setMensagem(""); setPrevia(null);
+    setSalvando(true); aoAlterarSalvandoAtual.current?.(true); setErro(""); setMensagem(""); setPrevia(null);
     try {
       const pedido = { contexto, expectedBaseHash: base.revisao,
         idempotencyKey: tentativaPreparo.current.id, edicao: validacao.data };
@@ -168,7 +182,7 @@ export function PrepararApacConsulta({ porta, contexto, aberto, ocupado = false,
     } catch (cause) {
       if (token === geracao.current) setErro(mensagemErroApac(cause));
     } finally {
-      if (token === geracao.current) setSalvando(false);
+      if (token === geracao.current) { setSalvando(false); aoAlterarSalvandoAtual.current?.(false); }
     }
   }
 
@@ -177,7 +191,7 @@ export function PrepararApacConsulta({ porta, contexto, aberto, ocupado = false,
     const token = geracao.current, fingerprintPedido = atual.fingerprint, resposta = atual.resposta;
     if (tentativaConfirmacao.current?.fingerprint !== fingerprintPedido)
       tentativaConfirmacao.current = { fingerprint: fingerprintPedido, id: globalThis.crypto.randomUUID() };
-    setSalvando(true); setErro(""); setMensagem("");
+    setSalvando(true); aoAlterarSalvandoAtual.current?.(true); setErro(""); setMensagem("");
     try {
       const pedido = ConfirmarApacRascunhoPedidoSchema.parse({ contexto, draftId: resposta.draftId,
         expectedRevision: resposta.revision, conteudoHash: resposta.conteudoHash,
@@ -188,6 +202,7 @@ export function PrepararApacConsulta({ porta, contexto, aberto, ocupado = false,
         || confirmada.estado !== "RASCUNHO" || confirmada.permiteExportar !== false)
         throw new Error("APAC_CONFIRMACAO_DIVERGENTE");
       setSalva(true);
+      aoAlterarPendenteAtual.current?.(false);
       setMensagem("APAC salva como RASCUNHO. Emissão, exportação e autorização são etapas separadas.");
       setBase(current => current ? { ...current, existentes: [
         ...current.existentes.filter(item => item.apacId !== confirmada.apacId),
@@ -198,7 +213,7 @@ export function PrepararApacConsulta({ porta, contexto, aberto, ocupado = false,
     } catch (cause) {
       if (token === geracao.current) setErro(mensagemErroApac(cause));
     } finally {
-      if (token === geracao.current) setSalvando(false);
+      if (token === geracao.current) { setSalvando(false); aoAlterarSalvandoAtual.current?.(false); }
     }
   }
 

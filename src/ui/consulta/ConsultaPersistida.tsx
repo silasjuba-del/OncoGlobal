@@ -32,12 +32,19 @@ type Preview = { preparacao: FlashPreparada; documentos: DocumentoPreview[]; ope
 
 /** Composição HTTP real. Nenhum cadastro, prescrição ou histórico de demonstração. */
 export function ConsultaPersistida({ porta, contexto, aoAbrirApac, versaoClinica = 0,
-  aoAlterarPrescricaoPendente, aoAlterarPrescricaoSalvando, aoAtualizarClinico }: {
+  aoAlterarPrescricaoPendente, aoAlterarPrescricaoSalvando, aoAlterarApacPendente,
+  aoAlterarApacSalvando, aoAtualizarClinico }: {
   porta: PortaConsulta; contexto: PedidoBundle; aoAbrirApac?:()=>void; versaoClinica?: number;
   aoAlterarPrescricaoPendente?: (pendente: boolean) => void;
   aoAlterarPrescricaoSalvando?: (salvando: boolean) => void;
+  aoAlterarApacPendente?: (pendente: boolean) => void;
+  aoAlterarApacSalvando?: (salvando: boolean) => void;
   aoAtualizarClinico?: () => void;
 }) {
+  const aoAlterarApacPendenteAtual = useRef(aoAlterarApacPendente);
+  aoAlterarApacPendenteAtual.current = aoAlterarApacPendente;
+  const aoAlterarApacSalvandoAtual = useRef(aoAlterarApacSalvando);
+  aoAlterarApacSalvandoAtual.current = aoAlterarApacSalvando;
   const [consultaCarregada, setConsultaCarregada] = useState<{
     visao: ConsultaIntegrada | null; erro: string; porta: PortaConsulta;
     contexto: PedidoBundle; versao: number; versaoClinica: number;
@@ -95,10 +102,12 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, versaoClinica
     setLinhaTempo(null);
     setMensagem("");
     setRxEmCurso(false); aoAlterarPrescricaoSalvando?.(false); aoAlterarPrescricaoPendente?.(false);
+    aoAlterarApacSalvandoAtual.current?.(false); aoAlterarApacPendenteAtual.current?.(false);
     setEditorRx(false); setApacRascunhoAberto(false); setOrigemFichaRx(null); setOrigemAcaoRx(null); setBaseRx(null); setErroRx(""); tentativaRx.current = null; assinaturaRx.current = null;
     return () => {
       geracao.current++;
       aoAlterarPrescricaoSalvando?.(false); aoAlterarPrescricaoPendente?.(false);
+      aoAlterarApacSalvandoAtual.current?.(false); aoAlterarApacPendenteAtual.current?.(false);
     };
   }, [porta, patientId, encounterId, tumorLotId]);
 
@@ -488,6 +497,8 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, versaoClinica
     {apacRascunhoAberto && porta.lerBaseApacRascunho && porta.prepararApacRascunho && porta.confirmarApacRascunho
       ? <PrepararApacConsulta porta={porta} contexto={{ patientId, encounterId, tumorLotId: tumorLotId ?? null }} aberto
         ocupado={ocupado || rxEmCurso}
+        {...(aoAlterarApacPendente ? { aoAlterarPendente: aoAlterarApacPendente } : {})}
+        {...(aoAlterarApacSalvando ? { aoAlterarSalvando: aoAlterarApacSalvando } : {})}
         aoAtualizarClinico={() => { if (aoAtualizarClinico) aoAtualizarClinico(); else setVersao(v => v + 1); }} /> : null}
     {flash && propsFlash ? <div hidden={!visaoPronta}>
       <ConsultaFlash key={`${patientId}:${encounterId}:${tumorLotId ?? ""}:${pedidoInvestigacao?.exameCodigo??"manual"}:${pedidoInvestigacao?.contexto??""}:${pedidoRevisao}`} {...propsFlash} />
