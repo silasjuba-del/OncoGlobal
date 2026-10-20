@@ -6,7 +6,7 @@ import { executarConfirmacao } from "../../src/kernel/comandos/index.js";
 import { listarDrafts, listarEventos, salvarDraft } from "../../src/kernel/comandos/portas.js";
 import { Apac } from "../../src/contracts/operacao.js";
 import { registrarNegativaRetrogradaNoBancoF4 } from "../../src/server/f4Acesso.js";
-import { aoCommitar } from "../../src/kernel/ledger/writeRouter.js";
+import { aoCommitar, confirmar as confirmarNoKernel } from "../../src/kernel/ledger/writeRouter.js";
 import { criarGateway, memoriaIdempotencia } from "../../src/kernel/gateway/gateway.js";
 import { criarMotorF1 } from "../../src/kernel/orquestracao/runtime.js";
 import { BasePrescricaoExecutavelResposta, PrescricaoExecutavelPreparada } from "../../src/contracts/api/operacaoPrescricaoExecutavel.js";
@@ -435,7 +435,7 @@ it("o kernel só aceita a cópia canônica APAC exata, no contexto e revisão de
   ] as const;
   for (const tentativa of tentativas) {
     const operationId = `apac-canonico-adulterado-${tentativa.nome}`;
-    const resultado = executarConfirmacao(a.db, { ...tentativa.contexto, operationId,
+    const resultado = confirmarNoKernel(a.db, { ...tentativa.contexto, operationId,
       reviewDecisionId: `review-${operationId}`, sessao: a.sessoes.obter(a.token)!, em: AGORA,
       registros: [{ draftId: canonico!.draftId, expectedRevision: tentativa.expectedRevision,
         eventId: `evento-${operationId}`, tipo: tentativa.tipo, payload: tentativa.payload,
