@@ -1,3 +1,5 @@
+import { DatabaseSync } from "node:sqlite";
+import { join } from "node:path";
 import { afterEach, describe, expect, it } from "vitest";
 // proveniência: dados sintéticos - não utilizar em produção
 import { lerDraft, salvarDraft } from "../../src/kernel/ledger/drafts.js";
@@ -42,5 +44,12 @@ describe("Flash: negativa de assinatura é auditada de forma durável, sem efeit
       "SELECT decisao, motivoCodigo FROM audit_event WHERE decisao='NEGADA'").all() as Array<{ decisao: string; motivoCodigo: string }>;
     expect(auditoria.length).toBeGreaterThanOrEqual(1);
     expect(auditoria.some(a => a.motivoCodigo === "EXPECTED_REVISION_CONFLICT")).toBe(true);
+    // Durável de verdade: nova conexão sobre o mesmo arquivo enxerga a negativa.
+    const reaberto = new DatabaseSync(join(dir, "consulta.sqlite"), { readOnly: true });
+    try {
+      const persistida = reaberto.prepare(
+        "SELECT motivoCodigo FROM audit_event WHERE decisao='NEGADA'").all() as Array<{ motivoCodigo: string }>;
+      expect(persistida.some(a => a.motivoCodigo === "EXPECTED_REVISION_CONFLICT")).toBe(true);
+    } finally { reaberto.close(); }
   });
 });

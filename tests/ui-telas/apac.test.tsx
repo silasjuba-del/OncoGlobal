@@ -1,5 +1,5 @@
 // @vitest-environment jsdom
-import { cleanup, fireEvent, render, screen } from "@testing-library/react";
+import { act, cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { ActionIntent } from "../../src/contracts/operacao.js";
 import { criarChaves } from "../../src/ui/api/chaves.js";
@@ -66,5 +66,23 @@ describe("APAC em bloco por lote", () => {
     expect(acao).toHaveBeenCalledTimes(4);
     expect(acao.mock.calls[2]?.[0]?.idempotencyKey).toBe(primeira?.idempotencyKey);
     expect(acao.mock.calls[3]?.[0]?.idempotencyKey).toBe(segunda?.idempotencyKey);
+  });
+
+  it("troca de porta durante exportação não publica resultado antigo nem mantém seleção", async () => {
+    const portaAntiga = criarPortaFalsa();
+    let resolverAcao: ((valor: { codigo: string; decisao: string }) => void) | undefined;
+    vi.spyOn(portaAntiga, "acao").mockImplementation(() => new Promise((resolve) => { resolverAcao = resolve; }));
+    const chaves = criarChaves();
+    const tela = render(<TelaApacLote porta={portaAntiga} chaves={chaves} />);
+    await screen.findByLabelText("APAC por lote");
+    fireEvent.click(screen.getByRole("checkbox", { name: "selecionar apac-verde-1" }));
+    fireEvent.click(screen.getByRole("button", { name: "exportar selecionadas" }));
+
+    tela.rerender(<TelaApacLote porta={criarPortaFalsa()} chaves={chaves} />);
+    await screen.findByLabelText("APAC por lote");
+    await act(async () => { resolverAcao?.({ codigo: "EXPORTAR_APAC", decisao: "EXECUTADA" }); });
+
+    expect(screen.queryByText(/Resultado da exportação:/)).toBeNull();
+    expect((screen.getByRole("checkbox", { name: "selecionar apac-verde-1" }) as HTMLInputElement).checked).toBe(false);
   });
 });

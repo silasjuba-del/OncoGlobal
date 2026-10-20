@@ -77,6 +77,50 @@ describe("backup: rawRef interno conhecido vs físico vs desconhecido (ARQ-05)",
     }
   });
 
+  it("positivos do produtor real: revisao-local aponta à origem e draft LLM herda upload-local da fonte", async () => {
+    const c = cenario();
+    draft(c.db, "d-origem", "upload-local:doc-sintetico", { kind: "EXTRACAO_RASCUNHO", input: { id: "doc-sintetico" }, original: { tipo: "PDF", bytesBase64: "QUFB", contentHash: "a".repeat(64) } });
+    // rotas.ts: rawRef revisao-local:<draftId da ORIGEM>, draftId próprio é o derivado.
+    draft(c.db, "evolucao-extracao-sintetica", "revisao-local:d-origem", { kind: "EVOLUCAO_RASCUNHO", origem: { draftId: "d-origem", revision: 0, conteudoHash: "b".repeat(64) }, resumo: "sintetico" });
+    // extracaoLlm.ts: draft llm:* herda rawRef da fonte, payload carrega sourceDraftId.
+    draft(c.db, "llm:sintetico", "upload-local:doc-sintetico", { kind: "LLM_EXTRACAO_RASCUNHO", operationId: "op-sintetica", sourceDraftId: "d-origem", sourceDraftHash: "c".repeat(64), resultado: { status: "PROPOSTA" } });
+    c.db.close();
+    const arquivo = await criarBackup({ dbPath: c.dbPath, filesRoot: c.root, destino: c.dest, nome: "derivados", senha: SENHA });
+    const saida = join(c.dir, "restaurado-derivados");
+    const restored = restaurarBackup({ arquivo, destino: saida, senha: SENHA });
+    const reaberto = abrirLedger(restored.database);
+    try {
+      expect(lerDraft(reaberto, "evolucao-extracao-sintetica")?.rawRef).toBe("revisao-local:d-origem");
+      expect(lerDraft(reaberto, "llm:sintetico")?.rawRef).toBe("upload-local:doc-sintetico");
+    } finally { reaberto.close(); }
+  });
+
+  it("negativos: revisao-local sem origem correspondente e LLM sem fonte correspondente são recusados", async () => {
+    const casos: Array<[string, string, string, unknown]> = [
+      ["rev-orfao", "evolucao-x", "revisao-local:d-inexistente", { kind: "EVOLUCAO_RASCUNHO", origem: { draftId: "d-inexistente" } }],
+      ["rev-divergente", "evolucao-y", "revisao-local:d-origem", { kind: "EVOLUCAO_RASCUNHO", origem: { draftId: "outra-origem" } }],
+      ["llm-orfao", "llm:y", "upload-local:doc-sintetico", { kind: "LLM_EXTRACAO_RASCUNHO", sourceDraftId: "d-inexistente" }],
+    ];
+    for (const [nome, draftId, ref, payload] of casos) {
+      const c = cenario();
+      draft(c.db, "d-origem", "upload-local:doc-sintetico", { kind: "EXTRACAO_RASCUNHO" });
+      draft(c.db, draftId, ref, payload);
+      c.db.close();
+      await expect(criarBackup({ dbPath: c.dbPath, filesRoot: c.root, destino: c.dest, nome, senha: SENHA })).rejects.toThrow(/REFERENCIA/);
+      expect(existsSync(join(c.dest, `${nome}.ogbak`))).toBe(false);
+    }
+  });
+
+  it("ambíguo: rawRef igual a draftId mas com arquivo físico homônimo na raiz é recusado, nunca omitido em silêncio", async () => {
+    const c = cenario();
+    writeFileSync(join(c.root, "d-fonte-ambigua"), "bytes-fisicos-sinteticos");
+    draft(c.db, "d-fonte-ambigua", "referencia-local", { kind: "FONTE_JEV" });
+    draft(c.db, "d-usa", "d-fonte-ambigua", { campo: "anexo" });
+    c.db.close();
+    await expect(criarBackup({ dbPath: c.dbPath, filesRoot: c.root, destino: c.dest, nome: "ambiguo", senha: SENHA })).rejects.toThrow(/REFERENCIA_AMBIGUA/);
+    expect(existsSync(join(c.dest, "ambiguo.ogbak"))).toBe(false);
+  });
+
   it("negativo: traversal e junction/symlink para fora da raiz continuam recusados", async () => {
     const c = cenario();
     draft(c.db, "d-trav", "../fora.txt", { campo: "x" });

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { apacPrazo } from "../../../rules/apac.js";
 import type { ChavesIntencao } from "../../api/chaves.js";
 import { ErroPorta, type AcaoIntent, type ItemApacVisao, type LotesApacVisao, type PortaConsulta } from "../../api/porta.js";
@@ -34,10 +34,12 @@ export function TelaApacLote({
   const [selecionadas, setSelecionadas] = useState<readonly string[]>([]);
   const [erro, setErro] = useState<string | null>(null);
   const [resultadoExportacao, setResultadoExportacao] = useState<string | null>(null);
+  const geracaoPorta = useRef(0);
 
   useEffect(() => {
     let viva = true;
-    setVisao(null); setErro(null);
+    geracaoPorta.current += 1;
+    setVisao(null); setErro(null); setSelecionadas([]); setResultadoExportacao(null);
     porta.lotesApac().then((proxima) => {
       if (viva) setVisao(proxima);
     }, () => { if (viva) setErro("APAC PENDENTE: não foi possível carregar os dados."); });
@@ -69,6 +71,7 @@ export function TelaApacLote({
     const itens = (visao?.itens ?? []).filter((item) =>
       selecionadas.includes(item.apac.apacId) && !vencida(item, hoje));
     if (!itens.length) { setResultadoExportacao("Nenhuma APAC exportável selecionada."); return; }
+    const geracao = geracaoPorta.current;
     const partes: string[] = [];
     for (const item of itens) {
       const intent: AcaoIntent = {
@@ -85,7 +88,9 @@ export function TelaApacLote({
         partes.push(`${item.apac.apacId}: FALHOU (${erro instanceof ErroPorta ? erro.codigo : "ERRO_INESPERADO"})`);
       }
     }
-    setResultadoExportacao(partes.join(" · "));
+    // Porta trocada durante a exportação: o resultado pertence ao contexto
+    // antigo e não pode ser publicado na tela nova.
+    if (geracaoPorta.current === geracao) setResultadoExportacao(partes.join(" · "));
   }
 
   return (

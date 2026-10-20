@@ -42,16 +42,23 @@ function parsePayload(value) {
 /* Referências internas conhecidas: o conteúdo já vive no snapshot SQLite do
  * ledger (payload do draft), portanto não viram entrada de arquivo. Namespace
  * com dois-pontos não basta: kind/campo do payload precisa corresponder. */
+/* Draft derivado de LLM (extracaoLlm.ts) herda o rawRef da fonte: só é
+ * interno se a fonte declarada existe e tem exatamente este rawRef. */
+const derivadoLlm = (p, c) => p?.kind === "LLM_EXTRACAO_RASCUNHO"
+  && typeof p.sourceDraftId === "string" && c.porId.get(p.sourceDraftId)?.rawRef === c.ref;
 const NAMESPACE_INTERNO = {
-  "upload-local": (p) => !!p && ["EXTRACAO_RASCUNHO", "D66_TRANSCRICAO_RASCUNHO"].includes(p.kind),
-  "importacao-local": (p) => p?.kind === "EXTRACAO_RASCUNHO",
+  "upload-local": (p, c) => !!p && (["EXTRACAO_RASCUNHO", "D66_TRANSCRICAO_RASCUNHO"].includes(p.kind) || derivadoLlm(p, c)),
+  "importacao-local": (p, c) => p?.kind === "EXTRACAO_RASCUNHO" || derivadoLlm(p, c),
   "retrato-local": (p) => p?.kind === "SINTESE_RASCUNHO",
-  "registro-medico": (p, suffix, draftId) => p?.kind === "ESTADO_DOENCA_RASCUNHO" && suffix === draftId,
+  "registro-medico": (p, c) => p?.kind === "ESTADO_DOENCA_RASCUNHO" && c.suffix === c.draftId,
   "manual": (p) => p?.campo === "medicamentos",
   "triagem-local": (p) => p?.kind === "SALAO_TRIAGEM_RASCUNHO",
   "canal-link": (p) => p?.kind === "VinculoContato",
   "review-link": (p) => p?.kind === "PATIENT_LINK_REVIEW",
-  "revisao-local": (p, suffix, draftId) => !!p && suffix === draftId,
+  /* rotas.ts grava revisao-local:<draftId da ORIGEM> no draft derivado
+   * (evolucao-extracao-*): exige origem declarada, existente e coincidente. */
+  "revisao-local": (p, c) => p?.kind === "EVOLUCAO_RASCUNHO"
+    && p.origem?.draftId === c.suffix && c.draftIds.has(c.suffix),
 };
 const LITERAL_INTERNO = {
   "consulta-flash-local": (p) => !!p && ((typeof p.kind === "string" && p.kind.startsWith("FLASH_")) || typeof p.documentId === "string"),
@@ -60,7 +67,10 @@ const LITERAL_INTERNO = {
   "proposta-prescricao-local": (p) => p?.kind === "PRESCRICAO_RASCUNHO",
   "proposta-local": (p) => p?.schema === "PrescricaoProposta@1",
 };
-function refsLedger(db, files) {
+function arquivoFisicoExiste(filesRoot, ref) {
+  try { return statSync(inside(filesRoot, ref)).isFile(); } catch { return false; }
+}
+function refsLedger(db, files, filesRoot) {
   let rows = [];
   let comMetadados = true;
   try { rows = db.prepare("SELECT draftId, rawRef, payload FROM draft_envelope").all(); }
@@ -70,12 +80,19 @@ function refsLedger(db, files) {
     catch { /* a synthetic/minimal ledger may not define drafts */ }
   }
   const draftIds = new Set(rows.map((row) => row.draftId).filter((id) => typeof id === "string"));
+  const porId = new Map(rows.filter((row) => typeof row.draftId === "string")
+    .map((row) => [row.draftId, { rawRef: row.rawRef, payload: parsePayload(row.payload) }]));
   const fisicas = new Set(files);
   for (const row of rows) {
     const ref = row.rawRef;
     if (typeof ref !== "string" || !ref) throw new Error("REFERENCIA_FORA_DA_RAIZ");
     if (!comMetadados) { fisicas.add(ref); continue; }
-    if (ref === row.draftId || draftIds.has(ref)) continue; // auto-referência / referência entre drafts
+    if (ref === row.draftId || draftIds.has(ref)) {
+      // Referência entre drafts cujo nome também é um arquivo físico na raiz
+      // é ambígua: recusar, nunca omitir os bytes em silêncio.
+      if (filesRoot && arquivoFisicoExiste(filesRoot, ref)) throw new Error("REFERENCIA_AMBIGUA");
+      continue;
+    }
     if (Object.hasOwn(LITERAL_INTERNO, ref)) {
       if (!LITERAL_INTERNO[ref](parsePayload(row.payload))) throw new Error("REFERENCIA_AMBIGUA");
       continue;
@@ -84,7 +101,8 @@ function refsLedger(db, files) {
     if (colon > 0) {
       const namespace = ref.slice(0, colon), suffix = ref.slice(colon + 1);
       if (!Object.hasOwn(NAMESPACE_INTERNO, namespace)) throw new Error("REFERENCIA_DESCONHECIDA");
-      if (!suffix || !NAMESPACE_INTERNO[namespace](parsePayload(row.payload), suffix, row.draftId))
+      if (!suffix || !NAMESPACE_INTERNO[namespace](parsePayload(row.payload),
+        { suffix, draftId: row.draftId, ref, draftIds, porId }))
         throw new Error("REFERENCIA_AMBIGUA");
       continue;
     }
@@ -124,7 +142,7 @@ export async function criarBackup({ dbPath, stores, filesRoot, files = [], desti
     for (const [key, sourcePath] of Object.entries(sourceStores)) {
       const db = new DatabaseSync(sourcePath);
       try {
-        if (key === "ledger") ledgerRefs = refsLedger(db, files);
+        if (key === "ledger") ledgerRefs = refsLedger(db, files, filesRoot);
         const temp = tempPaths.get(key);
         if (!temp) throw new Error("BACKUP_TEMPORARIO_AUSENTE");
         const schema = schemaMetadata(db);
