@@ -92,7 +92,7 @@ function trechosNaoRiscados(linha: string, aberto: boolean): { trechos: string[]
   return { trechos: trechos.filter((trecho) => trecho.trim()), aberto: emRasura };
 }
 
-const NEGACAO_CLAUSULA = /\b(?:não há|não observamos|nega|negou|negativo para|sem\s+(?:sinais de|evidência(?: de)?|les(?:ão|ões)|nódul(?:o|os)|foc(?:o|os)|neoplasia|carcinoma|adenocarcinoma|tumor|metástase|expressão|amplificação|HER2|RE|RP|Ki-67|PD-L1))(?:\s|$)/iu;
+const NEGACAO_CLAUSULA = /\b(?:não\s+(?:há|observamos|apresenta|refere|relata|tem)|nega|negou|negativo para|sem\s+(?:dor|náusea|dormência|formigamento|sinais de|evidência(?: de)?|les(?:ão|ões)|nódul(?:o|os)|foc(?:o|os)|neoplasia|carcinoma|adenocarcinoma|tumor|metástase|expressão|amplificação|HER2|RE|RP|Ki-67|PD-L1))(?=$|[^\p{L}\p{N}_])/iu;
 
 /**
  * Comparação seriada declarada pela própria fonte (ex.: "aumentado em relação à CO de 14/05/28").

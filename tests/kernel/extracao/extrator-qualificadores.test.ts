@@ -13,6 +13,29 @@ function segment(text: string, sourceType: FactSourceType) {
 }
 
 describe("extrator: hipótese lexical não vira fato explícito (ARQ-03, recorte)", () => {
+  it.each([
+    "Paciente não apresenta dor.", "Paciente não refere náusea.",
+    "Paciente não relata formigamento.", "Paciente não tem dor.",
+    "Paciente sem dor.", "Paciente sem náusea.",
+  ])("negação sintomática não vira afirmação: %s", (frase) => {
+    const facts = extratorDeterministico.extrair(segment(frase, "medical_note"));
+    expect(facts.filter(f => f.domain === "symptom")).toHaveLength(0);
+  });
+
+  it("negação de uma cláusula preserva o sintoma afirmado na cláusula seguinte", () => {
+    const frase = "Paciente não apresenta dor; paciente relata náusea.";
+    const facts = extratorDeterministico.extrair(segment(frase, "medical_note"));
+    expect(facts.filter(f => f.domain === "symptom")).toHaveLength(1);
+    expect(facts.find(f => f.domain === "symptom")).toMatchObject({
+      value: "paciente relata náusea.", evidence: "EXPLICIT", requiresConfirmation: false,
+      qualificadores: { polaridade: "AFIRMADA", sujeito: "PACIENTE", temporalidade: "ATUAL" },
+    });
+    for (const positiva of ["Paciente apresenta dor.", "Paciente refere náusea.", "Paciente relata formigamento."]) {
+      expect(extratorDeterministico.extrair(segment(positiva, "medical_note"))
+        .find(f => f.domain === "symptom")).toMatchObject({ evidence: "EXPLICIT", requiresConfirmation: false });
+    }
+  });
+
   it("'possível' e 'suspeita' marcam UNCERTAIN + confirmação, com trecho literal preservado", () => {
     for (const frase of ["Possível lesão em L5 medindo 12 mm.", "Suspeita de lesão em fígado medindo 10 mm."]) {
       const facts = extratorDeterministico.extrair(segment(frase, "imaging_report"));
