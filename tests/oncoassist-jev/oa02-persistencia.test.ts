@@ -1,11 +1,24 @@
 import { createHash } from "node:crypto";
+import { DatabaseSync } from "node:sqlite";
 import { afterEach, describe, expect, it } from "vitest";
+import { HistoricoOncoassist } from "../../src/contracts/api/oncoassist.js";
 import { CONTEXTO, iniciarProcesso } from "./oa02-reabertura-worker.js";
 
 const CLASSIFICAR = "/consulta/oncoassist/classificar-fonte";
 const HISTORICO = "/consulta/oncoassist/historico";
 const pedido = (operationId = "op-sintetica-1") => ({ ...CONTEXTO, draftId: "fonte-1", operationId });
 const ativos: Awaited<ReturnType<typeof iniciarProcesso>>[] = [];
+function alterarPoliticaCapturada(banco: string, politicaVersao: string) {
+  const db = new DatabaseSync(banco);
+  try {
+    const drafts = db.prepare("SELECT draftId, payload FROM draft_envelope").all() as Array<{ draftId: string; payload: string }>;
+    const draft = drafts.find(item => JSON.parse(item.payload).kind === "JEV_CLASSIFICACAO_RASCUNHO");
+    if (!draft) throw new Error("OA02_RASCUNHO_AUSENTE");
+    const payload = JSON.parse(draft.payload);
+    payload.auditoria.politicaVersao = politicaVersao;
+    db.prepare("UPDATE draft_envelope SET payload=? WHERE draftId=?").run(JSON.stringify(payload), draft.draftId);
+  } finally { db.close(); }
+}
 async function ambiente(opcoes: Parameters<typeof iniciarProcesso>[0] = {}) {
   const app = await iniciarProcesso(opcoes); ativos.push(app); return app;
 }
@@ -28,6 +41,7 @@ describe("OA02 · HTTP e SQLite durável com Jev sintético em processos isolado
     expect(segundo.body.auditoria.propostaId).not.toBe(primeiro.body.auditoria.propostaId);
     const historico = await app.post(HISTORICO, CONTEXTO);
     expect(historico.body.propostas.map((p: any) => p.resposta)).toEqual([segundo.body, primeiro.body]);
+    expect(historico.body.propostas.map((p: any) => p.validadePolitica)).toEqual(["MESMA_VERSAO", "MESMA_VERSAO"]);
     const stats = await app.comando("stats");
     expect(stats.chamadas).toBe(2);
     expect(stats.clinicalEvents).toBe(app.baseline);
@@ -35,6 +49,31 @@ describe("OA02 · HTTP e SQLite durável com Jev sintético em processos isolado
     expect(stats.marcadores.every((s: string) => s.startsWith("Marcadores documentais (vocabulário fechado):"))).toBe(true);
     expect(JSON.stringify(stats.logs)).not.toContain("Hemograma");
     expect(JSON.stringify(stats.drafts.filter((d: any) => d.payload.kind?.startsWith("JEV_")))).not.toContain("Hemograma sintético");
+  }, 30_000);
+
+  it("compara a política capturada na leitura do histórico sem alterar o registro nem chamar Jev", async () => {
+    const app = await ambiente();
+    const original = await app.post(CLASSIFICAR, pedido());
+    alterarPoliticaCapturada(app.banco, "OA02-JEV-MARCADORES-v0");
+    const historico = await app.post(HISTORICO, CONTEXTO);
+    expect(historico.body.propostas[0]).toMatchObject({
+      validade: "ATUAL", validadePolitica: "VERSAO_DIFERENTE", resposta: original.body,
+      auditoria: { politicaVersao: "OA02-JEV-MARCADORES-v0", mecanismo: "JEV_MARCADORES_DOCUMENTAIS" },
+    });
+    expect(await app.comando("stats")).toMatchObject({ chamadas: 1, clinicalEvents: app.baseline });
+  }, 30_000);
+
+  it("política capturada vazia é não verificável e contrato aceita histórico legado sem o campo novo", async () => {
+    const app = await ambiente();
+    const original = await app.post(CLASSIFICAR, pedido());
+    alterarPoliticaCapturada(app.banco, "");
+    const historico = await app.post(HISTORICO, CONTEXTO);
+    expect(historico.body.propostas[0]).toMatchObject({ validadePolitica: "NAO_VERIFICAVEL",
+      resposta: original.body, auditoria: { politicaVersao: "" } });
+    const legado = structuredClone(historico.body);
+    delete legado.propostas[0].validadePolitica;
+    expect(HistoricoOncoassist.parse(legado).propostas[0]?.validadePolitica).toBeUndefined();
+    expect(await app.comando("stats")).toMatchObject({ chamadas: 1, clinicalEvents: app.baseline });
   }, 30_000);
 
   it("reinicia em outro processo, recupera histórico e replay com provedor desligado e sem nova LLM", async () => {
@@ -102,7 +141,9 @@ describe("OA02 · HTTP e SQLite durável com Jev sintético em processos isolado
       const original = await app.post(CLASSIFICAR, pedido());
       await app.comando("fonte", { modo });
       expect(await app.post(CLASSIFICAR, pedido())).toMatchObject({ status: 409, body: { codigo: "FONTE_ALTERADA" } });
-      expect((await app.post(HISTORICO, CONTEXTO)).body.propostas[0]).toMatchObject({ validade: "FONTE_ALTERADA", resposta: original.body });
+      expect((await app.post(HISTORICO, CONTEXTO)).body.propostas[0]).toMatchObject({
+        validade: "FONTE_ALTERADA", validadePolitica: "MESMA_VERSAO", resposta: original.body,
+      });
       const stats = await app.comando("stats");
       expect(stats.chamadas).toBe(1);
       expect(stats.clinicalEvents).toBe(app.baseline);

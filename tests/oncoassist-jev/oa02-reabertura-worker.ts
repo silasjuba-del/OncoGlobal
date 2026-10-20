@@ -1,10 +1,13 @@
 import { fork } from "node:child_process";
 import { existsSync, mkdirSync, mkdtempSync, readFileSync } from "node:fs";
 import { join, resolve, sep } from "node:path";
+import { tmpdir } from "node:os";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { registerHooks, stripTypeScriptTypes } from "node:module";
 
-export const REPORTS = "C:/Users/silas/Projects/OncoGlobal-coordination/20261019-cursor-long-task/reports/oa02";
+export const REPORTS = resolve(process.env.OA02_REPORTS ?? process.env.ONCOGLOBAL_OA02_REPORTS
+  ?? mkdtempSync(join(tmpdir(), "oncoglobal-oa02-mission-")));
+console.info(`OA02_SYNTHETIC_REPORTS=${REPORTS}`);
 export const CONTEXTO = { patientId: "paciente-oa02-sintetico", encounterId: "encontro-oa02", tumorLotId: null };
 export const SENHA = "senha-sintetica-oa02-testes";
 
@@ -17,6 +20,7 @@ export async function iniciarProcesso(opcoes: { banco?: string; habilitado?: boo
   const child = fork(fileURLToPath(import.meta.url), [], { execArgv: [], stdio: ["ignore", "pipe", "pipe", "ipc"],
     env: { SystemRoot: process.env.SystemRoot, PATH: process.env.PATH, NODE_NO_WARNINGS: "1",
       OA02_CHILD: "1", OA02_BANCO: banco, OA02_HABILITADO: String(opcoes.habilitado ?? true),
+      OA02_REPORTS: REPORTS,
       OA02_CONTROLADO: String(opcoes.controlado ?? false) } });
   let stderr = "";
   child.stderr?.on("data", data => { stderr += String(data); });

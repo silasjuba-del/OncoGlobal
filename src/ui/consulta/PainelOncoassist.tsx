@@ -155,7 +155,14 @@ export function PainelOncoassist({ porta, contexto }: { porta: PortaConsulta; co
           ?? mensagemResultadoTecnico(item.resposta) : "Operação pendente — sem resultado; não será reexecutada ao reabrir."}
         {" · "}{item.auditoria.capturadoEm}{" · Fonte "}{item.auditoria.sourceId}
         {" · "}{item.validade === "FONTE_ALTERADA" ? "Fonte alterada — somente histórico."
-          : "Proposta para revisão."}
+          : "Fonte preservada."}
+        <br />Pol&#237;tica capturada: {item.auditoria.politicaVersao || "n\u00e3o informada"} &mdash; {
+          item.validadePolitica === "MESMA_VERSAO" ? "mesma vers\u00e3o"
+            : item.validadePolitica === "VERSAO_DIFERENTE" ? "vers\u00e3o diferente" : "n\u00e3o verific\u00e1vel"}
+        <br />Mecanismo capturado: {item.auditoria.mecanismo || "n\u00e3o informado"}
+        <br />Modelo capturado: {item.resposta?.status === "PROPOSTA" ? item.resposta.modelo || "n\u00e3o informado" : "n\u00e3o informado"}
+        <br />Provedor capturado: {item.auditoria.provedor || "n\u00e3o informado"}
+        <br />A mesma pol&#237;tica n&#227;o verifica a vers&#227;o do modelo.
       </li>)}</ul>
     </section> : null}
   </section>;
