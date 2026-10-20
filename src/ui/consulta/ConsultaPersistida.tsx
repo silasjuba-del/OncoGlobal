@@ -47,6 +47,8 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, versaoClinica
   const [ocupado, setOcupado] = useState(false);
   const [versao, setVersao] = useState(0);
   const [tipoAcao, setTipoAcao] = useState<TipoAcaoComposta | null>(null);
+  const [instanciaAcao, setInstanciaAcao] = useState(0);
+  const geracaoAcao = useRef(0);
   const [baseAcao, setBaseAcao] = useState<{ origem: ConsultaIntegrada; base: BaseAcaoComposta | null } | null>(null);
   const [acaoPreparada, setAcaoPreparada] = useState<AcaoCompostaPreparada | null>(null);
   const [acaoRevisada, setAcaoRevisada] = useState<AcaoCompostaPreparada | null>(null);
@@ -80,6 +82,7 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, versaoClinica
 
   useEffect(() => {
     geracao.current++;
+    geracaoAcao.current++;
     emCurso.current = false; setOcupado(false); setFlash(false); setPedidoInvestigacao(null); setImpressaoPendente(null);
     tentativaPreparacao.current = null;
     tentativaAcao.current = null; setTipoAcao(null); setBaseAcao(null); setAcaoPreparada(null); setAcaoRevisada(null);
@@ -109,6 +112,7 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, versaoClinica
   }, [porta, patientId, encounterId, tumorLotId, versao, versaoClinica]);
 
   useEffect(() => {
+    geracaoAcao.current++;
     setBaseAcao(null); setAcaoPreparada(null); setAcaoRevisada(null);
     if (!visao || !porta.carregarBaseAcaoComposta) return;
     const origem = visao, abort = new AbortController();
@@ -181,6 +185,7 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, versaoClinica
 
   function comandoJev(comando: ComandoJEV) {
     if (ocupado) return;
+    geracaoAcao.current++;
     if (comando === "ABRIR_APAC") { aoAbrirApac?.(); return; }
     if (comando === "VER_HISTORICO") {
       setVersao(v => v + 1);
@@ -188,17 +193,19 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, versaoClinica
       return;
     }
     if (comando === "REVISAR_DOCUMENTOS") { setPreview(null); setPedidoInvestigacao(null); setFlash(true); return; }
+    setInstanciaAcao(v => v + 1);
     setTipoAcao(comando); setAcaoPreparada(null); setAcaoRevisada(null);
   }
 
   async function prepararComposta(pedido: PedidoAcaoComposta) {
     if (!baseAcaoAtual || !porta.prepararAcaoComposta) throw new Error("Base do ciclo indisponível.");
+    const tentativaAtual = ++geracaoAcao.current;
     const atual = geracao.current, origem = visao, baseHash = baseAcaoAtual.baseHash;
     const conteudo = JSON.stringify([patientId, encounterId, tumorLotId, baseHash, pedido]);
     if (tentativaAcao.current?.conteudo !== conteudo) tentativaAcao.current = { conteudo, chave: crypto.randomUUID() };
     const resposta = await porta.prepararAcaoComposta({ contexto: { patientId, encounterId, tumorLotId },
       expectedBaseHash: baseHash, pedido, idempotencyKey: tentativaAcao.current.chave });
-    if (atual !== geracao.current || origem !== visaoAtual.current
+    if (tentativaAtual !== geracaoAcao.current || atual !== geracao.current || origem !== visaoAtual.current
       || versaoAtual.current.versao !== versao || versaoAtual.current.versaoClinica !== versaoClinica)
       throw new Error("O contexto mudou. Reabra a proposta.");
     setAcaoPreparada(resposta); setAcaoRevisada(null);
@@ -389,7 +396,7 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, versaoClinica
         ["ADIAR_CICLO", "Adiar ciclo"], ["TROCAR_PROTOCOLO", "Trocar protocolo"]] as const)
         .map(([tipo, rotulo]) => <button key={tipo} type="button" disabled={ocupado} onClick={() => comandoJev(tipo)}>{rotulo}</button>)}
     </div>
-    {tipoAcao ? <AcoesCompostas key={`${patientId}:${encounterId}:${tumorLotId ?? ""}:${tipoAcao}`}
+    {tipoAcao ? <AcoesCompostas key={`${patientId}:${encounterId}:${tumorLotId ?? ""}:${tipoAcao}:${instanciaAcao}`}
       base={baseAcaoAtual} tipoInicial={tipoAcao} ocupado={ocupado} aoPreparar={prepararComposta}
       aoUsar={resultado => {
         if (resultado !== acaoPreparada?.resultado || resultado.baseHash !== baseAcaoAtual?.baseHash) return;

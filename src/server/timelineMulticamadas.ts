@@ -12,7 +12,7 @@ import {
 import { TreatmentAdministration } from "../contracts/clinico.js";
 import { dataCivilDoServico } from "../kernel/gateway/tempo.js";
 import { listarEventos } from "../kernel/comandos/portas.js";
-import { dadosDoEvento, escopoDoEvento } from "../kernel/projections/snapshot.js";
+import { dadosDoEvento, escopoDoEvento, eventosVigentes } from "../kernel/projections/snapshot.js";
 import { FUSO_SERVICO } from "../contracts/f1/relogio.js";
 
 type ContextoTimeline = { patientId: string; encounterId: string; tumorLotId: string | null };
@@ -156,8 +156,34 @@ function mapearAdiamento(dados: Dados, fontes: readonly TipoFonte[]): Omit<Param
     tratamento: { estado: "ADIADO", atrasoDias: null } };
 }
 
+function dataPlanejadaDaAdministracao(evento: ClinicalEvent, dados: Dados,
+  administracao: TreatmentAdministration, ciclos: ReadonlyMap<string, readonly ClinicalEvent[]>): string | null {
+  // Uma data explícita inválida não autoriza substituir a fonte por outro marco.
+  if (dados.dataPrevista !== undefined && dados.dataPrevista !== null)
+    return DataCivil.safeParse(dados.dataPrevista).success ? String(dados.dataPrevista) : null;
+  // Reconstrói o planejamento conhecido no registro desta administração, com
+  // o mesmo lote e a mesma versão da prescrição; revisões posteriores não
+  // reescrevem o atraso histórico. Concorrência sem supersessão fica pendente.
+  const candidatos = (ciclos.get(administracao.cicloId) ?? []).filter(ciclo => {
+    const ref = objeto(dadosDoEvento(ciclo)?.prescricaoRef);
+    return ciclo.tumorLotId === evento.tumorLotId
+      && Date.parse(ciclo.criadoEm) <= Date.parse(evento.criadoEm)
+      && ref?.documentId === administracao.prescricaoRef.documentId
+      && ref?.documentVersion === administracao.prescricaoRef.documentVersion;
+  });
+  // Instantes iguais entre operações diferentes não provam qual veio antes.
+  // Dentro da mesma operação, eventIndex fornece a ordem persistida.
+  const mesmoInstante = (ciclo: ClinicalEvent) => Date.parse(ciclo.criadoEm) === Date.parse(evento.criadoEm);
+  if (candidatos.some(ciclo => mesmoInstante(ciclo) && ciclo.operationId !== evento.operationId)) return null;
+  const vigentes = eventosVigentes(candidatos.filter(ciclo =>
+    !mesmoInstante(ciclo) || ciclo.eventIndex < evento.eventIndex));
+  if (vigentes.length !== 1) return null;
+  const data = dadosDoEvento(vigentes[0]!)?.previstoEm;
+  return DataCivil.safeParse(data).success ? String(data) : null;
+}
+
 function mapearEvento(evento: ClinicalEvent, dados: Dados,
-  ciclos: ReadonlyMap<string, Dados>): EventoTimelineMulticamadas[] {
+  ciclos: ReadonlyMap<string, readonly ClinicalEvent[]>): EventoTimelineMulticamadas[] {
   const fonteData = evento.fontes;
   const make = (parametros: Omit<ParametrosEvento, "dataRegistro">, id = evento.eventId): EventoTimelineMulticamadas => ({
     id, eventId: evento.eventId, patientId: evento.patientId, encounterId: evento.encounterId, tumorLotId: evento.tumorLotId,
@@ -212,10 +238,8 @@ function mapearEvento(evento: ClinicalEvent, dados: Dados,
       const parsed = TreatmentAdministration.safeParse((({ dataClinica: _dataClinica, dataPrevista: _dataPrevista, ...rest }) => rest)(dados));
       if (!parsed.success) return [];
       const administration = parsed.data;
-      const ciclo = ciclos.get(administration.cicloId);
       const dataClinica = dataDoEvento(dados, ["dataClinica", "inicio"], fonteData, false);
-      const dataPlanejada = DataCivil.safeParse(dados.dataPrevista).success ? String(dados.dataPrevista)
-        : DataCivil.safeParse(ciclo?.previstoEm).success ? String(ciclo?.previstoEm) : null;
+      const dataPlanejada = dataPlanejadaDaAdministracao(evento, dados, administration, ciclos);
       const actualDay = dataClinica ? diaServico(dataClinica) : null;
       const atraso = actualDay && dataPlanejada && administration.status !== "OMITIDA"
         ? Math.max(0, Math.round((Date.parse(`${actualDay}T12:00:00Z`) - Date.parse(`${dataPlanejada}T12:00:00Z`)) / 86_400_000)) : null;
@@ -295,11 +319,15 @@ export function lerTimelineMulticamadas(db: DatabaseSync, contexto: ContextoTime
         || event.tumorLotId === ctx.tumorLotId || event.tumorLotId === null)))
     && Date.parse(event.criadoEm) <= agoraMs
     && (event.revisao === "CONFIRMADO" || event.revisao === "ASSINADO"));
-  const ciclos = new Map<string, Dados>();
+  const ciclos = new Map<string, ClinicalEvent[]>();
   for (const event of relevantes) {
     if (event.tipo !== "Ciclo") continue;
     const value = objeto(dadosDoEvento(event));
-    if (typeof value?.cicloId === "string") ciclos.set(value.cicloId, value);
+    if (typeof value?.cicloId === "string") {
+      const anteriores = ciclos.get(value.cicloId) ?? [];
+      anteriores.push(event);
+      ciclos.set(value.cicloId, anteriores);
+    }
   }
   const candidatos = relevantes.flatMap((event) => {
     const data = dadosDoEvento(event);

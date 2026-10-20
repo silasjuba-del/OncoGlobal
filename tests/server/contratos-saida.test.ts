@@ -5,6 +5,7 @@ import { SaidasHttp, respostaHttpValida } from "../../src/contracts/api/saidasHt
 import { salvarDraft, listarDrafts } from "../../src/kernel/ledger/drafts.js";
 import { confirmar } from "../../src/kernel/ledger/writeRouter.js";
 import { fonteSintetica, triagemBase } from "../fixtures/triagem.js";
+import { prepararAcaoComposta } from "../../src/rules/prescricao/acoesCompostas.js";
 
 const fonteRotas = readFileSync("src/server/rotas.ts", "utf8");
 const tabelaRotas = fonteRotas.slice(fonteRotas.indexOf("const rota = req.url"), fonteRotas.indexOf("const reply ="));
@@ -30,7 +31,9 @@ it("toda rota pública possui contrato de saída; resposta vazia nunca é sucess
   const rotas = new Set([...tabela.matchAll(/\?\s*"([A-Za-z]+)"/g)].map(m => m[1]!));
   for (const lista of tabela.matchAll(/(\[[^\]]+\])\.includes\(req\.url/g))
     for (const rota of JSON.parse(lista[1]!) as string[]) rotas.add(rota);
-  expect(rotas.size).toBe(66);
+  expect(rotas.size).toBe(69);
+  for (const rota of ["baseAcaoComposta", "prepararAcaoComposta", "timelineMulticamadas"])
+    expect(rotas.has(rota), rota).toBe(true);
   expect(rotas.has("oncoassistHistorico")).toBe(true);
   expect(rotas.has("gerarContingenciaSalao")).toBe(true);
   expect(rotas.has("historicoContingenciaSalao")).toBe(true);
@@ -41,6 +44,25 @@ it("toda rota pública possui contrato de saída; resposta vazia nunca é sucess
   expect([...rotas].sort()).toEqual(Object.keys(SaidasHttp).sort());
   for (const rota of rotas) expect(respostaHttpValida(rota, 200, {}), rota).toBe(false);
   expect(respostaHttpValida("rota-inexistente", 200, {})).toBe(false);
+});
+
+it("novas saídas de ações e timeline preservam contrato e não autorizam execução clínica", () => {
+  const contexto = { patientId: "paciente-sintetico", encounterId: "encontro-sintetico", tumorLotId: null };
+  const base = { contexto, cicloId: "ciclo-sintetico", episodioId: "episodio-sintetico",
+    protocoloId: "protocolo-sintetico", previstoEm: "2026-10-20", revisao: "r1", baseHash: "a".repeat(64),
+    itens: [{ item: 1, droga: "Fármaco sintético", doseMg: 100 }] };
+  expect(respostaHttpValida("baseAcaoComposta", 200, { base, pendencias: [] })).toBe(true);
+  expect(respostaHttpValida("baseAcaoComposta", 200, { base: null, pendencias: ["CICLO_ATUAL_AUSENTE_OU_AMBIGUO"] })).toBe(true);
+  expect(respostaHttpValida("baseAcaoComposta", 200, { base: null })).toBe(false);
+  const resposta = { draftId: "draft-sintetico", revision: 0, conteudoHash: "b".repeat(64),
+    resultado: prepararAcaoComposta(base, { tipo: "ADIAR_CICLO", motivo: "Intenção sintética", dias: 7 }),
+    documentoPlano: { titulo: "Plano sintético", texto: "Prévia para revisão" },
+    criaEventoClinico: false, liberaTratamento: false };
+  expect(respostaHttpValida("prepararAcaoComposta", 200, resposta)).toBe(true);
+  expect(respostaHttpValida("prepararAcaoComposta", 200, { ...resposta, criaEventoClinico: true })).toBe(false);
+  expect(respostaHttpValida("prepararAcaoComposta", 200, { ...resposta, liberaTratamento: true })).toBe(false);
+  expect(respostaHttpValida("timelineMulticamadas", 200, { contexto, revisao: "c".repeat(64), eventos: [] })).toBe(true);
+  expect(respostaHttpValida("timelineMulticamadas", 200, { contexto, eventos: [] })).toBe(false);
 });
 
 it('histórico OncoAssist usa o catálogo central e rejeita proposta incompleta', () => {

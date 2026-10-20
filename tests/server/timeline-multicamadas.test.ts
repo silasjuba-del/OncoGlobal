@@ -41,6 +41,53 @@ function seed(database: ReturnType<typeof abrirLedger>, ...events: ClinicalEvent
 }
 
 describe("timeline multicamadas real", () => {
+  it.each([
+    { caso: "reprogramação posterior não reescreve atraso histórico", criadoEm: "2026-11-15T10:00:00-03:00",
+      versao: 1, substitui: true, lote: contexto.tumorLotId, esperada: "2026-11-01", atraso: 9 },
+    { caso: "outra versão de prescrição não muda a administração original", criadoEm: "2026-11-09T10:00:00-03:00",
+      versao: 2, substitui: true, lote: contexto.tumorLotId, esperada: "2026-11-01", atraso: 9 },
+    { caso: "ciclo de lote nulo não substitui o planejamento do lote", criadoEm: "2026-11-09T10:00:00-03:00",
+      versao: 1, substitui: false, lote: null, esperada: "2026-11-01", atraso: 9 },
+    { caso: "planejamentos concorrentes sem substituição ficam indeterminados", criadoEm: "2026-11-09T10:00:00-03:00",
+      versao: 1, substitui: false, lote: contexto.tumorLotId, esperada: null, atraso: null },
+    { caso: "operações no mesmo instante não provam a ordem da reprogramação", criadoEm: "2026-11-10T12:00:00-03:00",
+      versao: 1, substitui: true, lote: contexto.tumorLotId, esperada: null, atraso: null },
+    { caso: "reprogramação anterior conhecida fornece a data revisada", criadoEm: "2026-11-09T10:00:00-03:00",
+      versao: 1, substitui: true, lote: contexto.tumorLotId, esperada: "2026-11-08", atraso: 2 },
+  ])("$caso", ({ criadoEm, versao, substitui, lote, esperada, atraso }) => {
+    const database = db();
+    const ciclo = { cicloId: "ciclo-historico", episodioId: "ep1", numero: 1, previstoEm: "2026-11-01",
+      prescricaoRef: { documentId: "rx-historica", documentVersion: 1 }, itens: [], comMedico: true };
+    seed(database,
+      evento({ id: "ciclo-original", tipo: "Ciclo", criadoEm: "2026-10-20T10:00:00-03:00", dados: ciclo }),
+      evento({ id: "ciclo-revisado", tipo: "Ciclo", criadoEm, tumorLotId: lote,
+        supersedesEventId: substitui ? "ciclo-original" : null,
+        dados: { ...ciclo, previstoEm: "2026-11-08",
+          prescricaoRef: { documentId: "rx-historica", documentVersion: versao } } }),
+      evento({ id: "admin-historica", tipo: "TreatmentAdministration", criadoEm: "2026-11-10T12:00:00-03:00",
+        dados: { adminId: "admin-historica", cicloId: "ciclo-historico", prescricaoRef: ciclo.prescricaoRef,
+          item: 1, droga: "Fármaco sintético", quantidadeEfetivaMg: 100, status: "COMPLETA",
+          motivo: null, inicio: "2026-11-10T10:00:00-03:00", fim: null, fonte: fonte("admin-historica") } }),
+    );
+    expect(lerTimelineMulticamadas(database, contexto, agora).eventos.find(e => e.eventId === "admin-historica"))
+      .toMatchObject({ dataPlanejada: esperada, tratamento: { atrasoDias: atraso }, dataClinica: "2026-11-10T10:00:00-03:00" });
+  });
+
+  it("data prevista explícita inválida não é substituída silenciosamente pela data do ciclo", () => {
+    const database = db();
+    const prescricaoRef = { documentId: "rx-sintetica", documentVersion: 1 };
+    seed(database,
+      evento({ id: "ciclo", tipo: "Ciclo", dados: { cicloId: "ciclo", previstoEm: "2026-11-01", prescricaoRef } }),
+      evento({ id: "admin", tipo: "TreatmentAdministration", dados: {
+        adminId: "admin", cicloId: "ciclo", prescricaoRef, item: 1, droga: "Fármaco sintético",
+        quantidadeEfetivaMg: 100, status: "COMPLETA", motivo: null, inicio: "2026-11-10T10:00:00-03:00",
+        fim: null, fonte: fonte("admin"), dataPrevista: "não consta",
+      } }),
+    );
+    expect(lerTimelineMulticamadas(database, contexto, agora).eventos.find(e => e.eventId === "admin"))
+      .toMatchObject({ dataPlanejada: null, tratamento: { atrasoDias: null } });
+  });
+
   it("mantém encontros históricos do lote, inclui escopo paciente e exclui outro paciente/lote", () => {
     const database = db();
     seed(database,
