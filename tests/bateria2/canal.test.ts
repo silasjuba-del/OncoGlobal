@@ -17,6 +17,7 @@ export function receber(a:ReturnType<typeof ambiente>,id:string,texto:string,em=
 }
 function resposta(){
  const a=ambiente(),contexto={...ctx,revisaoContexto:'revisao-b2'};
+ a.seed('Paciente',{patientId:ctx.patientId,nome:'Paciente Sintetico Bateria2',identificadores:[],nascimento:null,sexoCadastral:'NAO_INFORMADO',divergencia:false},'CONFIRMADO',{...ctx,tumorLotId:null});
  const origem=receber(a,'origem','Relato sintético');
  registrarConsentimentoCanal(a.db,a.acesso,{contatoId:remetente,patientId:ctx.patientId,referenciaTermo:'termo-sintetico',versaoTermo:'1',finalidade:['COMUNICACAO_CLINICA'],origem:'PRESENCIAL_CONSULTORIO'});
  const base={respostaId:'resposta-b2',mensagemOrigemId:origem,contexto,tipoResposta:'RESPOSTA_LIVRE_MEDICA' as const};

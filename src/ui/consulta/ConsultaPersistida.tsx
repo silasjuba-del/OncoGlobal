@@ -37,6 +37,7 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, versaoClinica
   aoAlterarPrescricaoSalvando?: (salvando: boolean) => void;
   aoAtualizarClinico?: () => void;
 }) {
+  const [cientes, setCientes] = useState<readonly string[]>([]);
   const [consultaCarregada, setConsultaCarregada] = useState<{
     visao: ConsultaIntegrada | null; erro: string; porta: PortaConsulta;
     contexto: PedidoBundle; versao: number; versaoClinica: number;
@@ -298,7 +299,7 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, versaoClinica
       const resposta = await porta.confirmar({ patientId, encounterId, tumorLotId, bloco: "TUDO",
         registros: [...exibido.preparacao.registros],
         documentosExibidos: exibido.documentos.map(({ documentId, documentVersion }) => ({ documentId, documentVersion })),
-        reconhecerAlertas: [], idempotencyKey: `${exibido.operacao}:assinar` });
+        reconhecerAlertas: cientes.filter(id => visao?.alertas.some(a=>a.alertaId===id)), idempotencyKey: `${exibido.operacao}:assinar` });
       if (atual !== geracao.current) return;
       if (resposta.codigo !== "GRAVADA" && resposta.codigo !== "REPLAY") throw new ErroPorta(resposta.codigo);
       setPreview(null);
@@ -428,6 +429,7 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, versaoClinica
       <pre style={{ whiteSpace: "pre-wrap" }}>{acaoRevisada.documentoPlano.texto}</pre>
       <p role="status">Plano salvo para revisão da prescrição.</p>
     </article> : null}
+    {visaoPronta.alertas.filter(a=>a.presentationOverride && !a.reconhecidoEm).map(a=><label key={`ciente-${a.alertaId}`}><input type="checkbox" checked={cientes.includes(a.alertaId)} onChange={e=>setCientes(prev=>e.target.checked?[...prev,a.alertaId]:prev.filter(id=>id!==a.alertaId))}/>Estou ciente: {a.texto}. A ciência será registrada ao confirmar os documentos.</label>)}
     {preview ? <section aria-label="Conteúdo para assinatura">
       <h3>Confira os documentos desta consulta</h3>
       {preview.documentos.map((doc) => <article key={doc.documentId}>

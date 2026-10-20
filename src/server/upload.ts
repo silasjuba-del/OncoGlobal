@@ -1,3 +1,4 @@
+import { detectarEmergencias } from "../rules/radsEmergencias.js";
 import { createHash } from "node:crypto";
 import { createRequire } from "node:module";
 import { z } from "zod";
@@ -23,7 +24,7 @@ export function configuracaoOcrInstalada():ConfigOcrLocal|null {
       langPath:(requireLocal("@tesseract.js-data/por") as {langPath:string}).langPath,idioma:"por",limiarConfianca:70,timeoutMs:30_000};
   }catch{return null;}
 }
-export type DepsUpload = Pick<ServidorDeps,"db"|"sessoes"|"agora"> & {
+export type DepsUpload = Pick<ServidorDeps,"db"|"sessoes"|"agora"> & Partial<Pick<ServidorDeps,"corpus">> & {
   converterUpload?: (entrada:EntradaLeitura,tipo:"PDF"|"IMAGEM")=>Promise<ResultadoLeitura>;
 };
 /** Ingestão inerte: contexto explícito não substitui conferência humana de identidade. */
@@ -66,7 +67,7 @@ export async function processarUploadLocal(deps:DepsUpload,token:string,sessao:S
   const state=executarPipelineExtracao(rawTranscript&&primeira?{...input,rawTranscript:primeira.texto,page:primeira.n,
     additionalSources:paginasLegiveis.slice(1).map(pagina=>({...input,recordingId:`${input.recordingId}#p${pagina.n}`,rawTranscript:pagina.texto,page:pagina.n}))}:input);
   const salvo=salvarDraft(deps.db,{draftId,patientId:null,sourceId:p.data.sourceId,rawRef:`upload-local:${p.data.id}`,
-    payload:{kind:"EXTRACAO_RASCUNHO",input,state,alerts:[],alertasRads:[],
+    payload:{kind:"EXTRACAO_RASCUNHO",input,state,alerts:[],alertasRads:p.data.sourceType === "imaging_report" && deps.corpus?.rads ? detectarEmergencias(rawTranscript,deps.corpus.rads).alertas.map(a=>({...a,sourceId:p.data.sourceId})) : [],
       original:{tipo:p.data.tipo,bytesBase64:base64,contentHash,documento:leitura.documento,status:leitura.status,
         confianca:"confianca" in leitura&&typeof leitura.confianca==="number"?leitura.confianca:null,
         motivo:leitura.status==="PENDENTE"?leitura.motivo:null},contextoUpload:{patientId:p.data.patientId,encounterId:p.data.encounterId,tumorLotId:p.data.tumorLotId}},

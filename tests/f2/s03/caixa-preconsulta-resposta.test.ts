@@ -1,3 +1,5 @@
+import { salvarDraft } from "../../../src/kernel/ledger/drafts.js";
+import { confirmar } from "../../../src/kernel/ledger/writeRouter.js";
 import { createHash } from "node:crypto";
 import { mkdtempSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
@@ -54,6 +56,10 @@ function ledger(): { db: DatabaseSync; caminho: string } {
   const caminho = join(pasta, "ledger.sqlite");
   const db = abrirLedger(caminho);
   abertos.push(db);
+  const acesso=sessao();
+  salvarDraft(db,{draftId:"cadastro-s03",patientId:"paciente-s03-1",sourceId:"fonte-s03",rawRef:"fixture",payload:{},diagnostics:[],revision:0,criadoEm:AGORA});
+  confirmar(db,{operationId:"cadastro-s03",patientId:"paciente-s03-1",encounterId:"encontro-s03",tumorLotId:null,reviewDecisionId:"revisao-s03",sessao:acesso.sessoes.obter(acesso.token)!,em:AGORA,
+    registros:[{draftId:"cadastro-s03",expectedRevision:0,eventId:"cadastro-s03",tipo:"Paciente",fontes:[],revisao:"CONFIRMADO",payload:{patientId:"paciente-s03-1",nome:"Paciente Sintetico S03",identificadores:[],nascimento:null,sexoCadastral:"NAO_INFORMADO",divergencia:false}}]});
   return { db, caminho };
 }
 
