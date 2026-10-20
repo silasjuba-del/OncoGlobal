@@ -33,7 +33,7 @@ export function PainelOncoassist({ porta, contexto }: { porta: PortaConsulta; co
     setEstado(null); setFontes([]); setFontesSemVinculo([]); setSelecionada("");
     setResultado(null); setFalhaConsulta(false); setContextoAlterado(false);
     setCanceladoLocal(false); setExecutando(false);
-    if (!portaOncoassist) {
+    if (!porta.oncoassistStatus) {
       setEstado({ status: "PENDENTE" }); return;
     }
     void (async () => {
@@ -41,7 +41,7 @@ export function PainelOncoassist({ porta, contexto }: { porta: PortaConsulta; co
         const status = await porta.oncoassistStatus!(controller.signal);
         if (atual !== geracao.current) return;
         setEstado(status);
-        if (status.status !== "DISPONIVEL") return;
+        if (status.status !== "DISPONIVEL" || !porta.oncoassistFontes) return;
         const lista = await porta.oncoassistFontes!({ patientId, encounterId, tumorLotId }, controller.signal);
         if (atual !== geracao.current) return;
         setFontes(lista.fontes);
