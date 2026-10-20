@@ -62,7 +62,7 @@ export function criarOncoassistJev(opcoes: OpcoesOncoassistJev = {}): Oncoassist
         return { status: "ERRO", codigo: "PHI_RESIDUAL" };
       }
       const marcadores = marcadoresDocumentoJev(texto);
-      if (!marcadores) return { status: "PENDENTE", codigo: "ENTRADA_INVALIDA" };
+      if (!marcadores) return { status: "PENDENTE", codigo: "SEM_MARCADORES" };
       const sha256 = createHash("sha256").update(fonte.texto, "utf8").digest("hex");
       const controller = new AbortController();
       let timeout = false;
