@@ -100,6 +100,24 @@ it("não usa ECOG de Triagem vinculada a outro encontro do mesmo paciente", asyn
   expect(fato(a)).toBeUndefined();
 });
 
+it.each([
+  { atual: 1, historico: 1 },
+  { atual: 1, historico: 4 },
+])("usa somente ECOG do encontro atual quando Triagem histórica é do mesmo dia: %j", async ({ atual, historico }) => {
+  const a = await ambiente();
+  const atualId = a.registrar("Triagem", a.triagem({ ecog: presente(atual) }));
+  const encontroHistorico = "encontro-anterior-mesmo-dia-sintetico";
+  const historicoId = a.registrar("Triagem", a.triagem({ encounterId: encontroHistorico, ecog: presente(historico) }), {
+    encounterId: encontroHistorico,
+  });
+
+  const resultado = fato(a);
+  expect(resultado).toMatchObject({ status: "CONFIRMADO", value: atual });
+  expect(resultado?.status === "CONFIRMADO" && resultado.source.sourceId).toBe(atualId);
+  expect(resultado?.status === "CONFIRMADO" && resultado.source.exactText).toContain(atualId);
+  expect(resultado?.status === "CONFIRMADO" && resultado.source.exactText).not.toContain(historicoId);
+});
+
 it("não transforma um único Dado internamente conflitante em fato ou conflito fabricado", async () => {
   const a = await ambiente();
   const conflitoEcog = {

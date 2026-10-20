@@ -70,7 +70,10 @@ export function adaptarFatosTipados(eventos: readonly ClinicalEvent[], contexto:
     if (!materiais.some(f => (spec.tipos as readonly string[]).includes(f.tipo) && Object.hasOwn(f.dados, spec.id))) continue;
     for (const alias of spec.aliases) { substituidas.add(chaveTrial(alias)); substituidas.add(chaveTrial(`${alias}.data`)); }
     const ficha = montarFichaMinima({ ...retrato,
-      fatos: materiais.filter(f => dentroDoHorizonte(f, spec, civil.dataCivil)) });
+      // ECOG é avaliação da consulta atual. Filtrar antes de comparar evita que
+      // triagens históricas do mesmo dia contaminem ou apaguem a avaliação atual.
+      fatos: materiais.filter(f => (spec.id !== "ecog" || f.encounterId === contexto.encounterId)
+        && dentroDoHorizonte(f, spec, civil.dataCivil)) });
     const campo = ficha.find(f => f.id === spec.id);
     if (!campo?.fatos.length) continue;
     const refs = [...new Set(campo.fatos.map(f => f.eventId))];
