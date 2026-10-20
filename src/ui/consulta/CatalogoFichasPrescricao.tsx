@@ -13,6 +13,10 @@ interface FormularioRevisao {
   motivo: string;
 }
 
+// Explicit review belongs to the exact source and revision, not just its public ID.
+const chaveFormulario = (ficha: FichaProtocoloCatalogo) =>
+  JSON.stringify([chaveFicha(ficha), ficha.contentHash, ficha.revision]);
+
 const ESTADO_LOCAL: Record<FichaProtocoloCatalogo["estado"], string> = {
   PENDENTE: "Aguardando revisão médica",
   CONFERIDA: "Protocolo conferido por médico",
@@ -143,7 +147,8 @@ export function CatalogoFichasPrescricao({ fichas, contextoChave, ocupado = fals
 
   async function revisarFicha(ficha: FichaProtocoloCatalogo, decisao: RevisarFichaPedido["decisao"]) {
     const key = fichaKey(ficha);
-    const form = formularios[key] ?? { confirmei: false, motivo: "" };
+    const formKey = chaveFormulario(ficha);
+    const form = formularios[formKey] ?? { confirmei: false, motivo: "" };
     if (bloqueado || !revisar(ficha) || !abertas[key] || !form.confirmei || !form.motivo.trim()) return;
     const base = { templateId: ficha.template.templateId, versao: ficha.template.versao,
       expectedContentHash: ficha.contentHash, expectedRevision: ficha.revision, decisao, motivo: form.motivo.trim() };
@@ -160,7 +165,7 @@ export function CatalogoFichasPrescricao({ fichas, contextoChave, ocupado = fals
         || resposta.estado !== (decisao === "CONFERIR" ? "CONFERIDA" : "INATIVA")
         || resposta.revisao?.decisao !== decisao) throw new Error("A resposta não corresponde à revisão ou alterou o template original.");
       setFichasLocais(current => ({ ...current, [key]: resposta }));
-      setFormularios(current => { const next = { ...current }; delete next[key]; return next; });
+      setFormularios(current => { const next = { ...current }; delete next[formKey]; return next; });
       setMensagem(decisao === "CONFERIR" ? "Conferência médica registrada. O template original permanece inalterado." : "Versão local inativada.");
     } catch (cause) {
       if (montado.current && token === geracao.current)
@@ -242,7 +247,8 @@ export function CatalogoFichasPrescricao({ fichas, contextoChave, ocupado = fals
     <div className="catalogo-fichas__list">
       {visiveis.map(ficha => {
         const key = fichaKey(ficha);
-        const form = formularios[key] ?? { confirmei: false, motivo: "" };
+        const formKey = chaveFormulario(ficha);
+        const form = formularios[formKey] ?? { confirmei: false, motivo: "" };
         const aberta = abertas[key] ?? false;
         const reviewable = revisar(ficha) && ficha.bloqueios.length === 0;
         const locked = bloqueado || busyKey === key;
@@ -317,13 +323,13 @@ export function CatalogoFichasPrescricao({ fichas, contextoChave, ocupado = fals
             <label className="catalogo-fichas__ack">
               <input aria-label="Confirmo a conferência integral da ficha" type="checkbox" checked={form.confirmei}
                 onChange={event => { const checked = event.currentTarget.checked;
-                  atualizarFormulario(key, current => ({ ...current, confirmei: checked })); }} />
+                  atualizarFormulario(formKey, current => ({ ...current, confirmei: checked })); }} />
               <span>Confirmo que conferi o conteúdo completo desta versão e sua fonte.</span>
             </label>
             <label>Motivo da revisão
               <textarea aria-label="Motivo da revisão" rows={3} value={form.motivo}
                 onChange={event => { const value = event.currentTarget.value;
-                  atualizarFormulario(key, current => ({ ...current, motivo: value })); }} />
+                  atualizarFormulario(formKey, current => ({ ...current, motivo: value })); }} />
             </label>
             <button type="button" className="catalogo-fichas__primary"
               disabled={locked || !aberta || !form.confirmei || !form.motivo.trim()}
