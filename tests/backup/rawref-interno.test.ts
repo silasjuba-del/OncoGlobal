@@ -26,7 +26,7 @@ function draft(db: ReturnType<typeof abrirLedger>, draftId: string, rawRef: stri
 }
 
 describe("backup: rawRef interno conhecido vs físico vs desconhecido (ARQ-05)", () => {
-  it.each([
+  it.each<[string, unknown]>([
     ["referencia-local", { kind: "FONTE_JEV" }],
     ["consulta-flash-local", { kind: "FLASH_RASCUNHO" }],
     ["vinculo-operacional-local", { contatoId: "contato-sintetico" }],
