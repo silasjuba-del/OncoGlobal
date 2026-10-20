@@ -5,6 +5,7 @@ import type { DatabaseSync } from "node:sqlite";
 import { afterEach, expect, it, vi } from "vitest";
 import { Apac } from "../../src/contracts/operacao.js";
 import { ApacResposta } from "../../src/contracts/api/respostas.js";
+import { CAMPOS_OBRIGATORIOS_PADRAO } from "../../src/modules/apac/antiglosa.js";
 import { abrirLedger } from "../../src/kernel/ledger/db.js";
 import { executarConfirmacao } from "../../src/kernel/comandos/index.js";
 import { salvarDraft } from "../../src/kernel/comandos/portas.js";
@@ -24,7 +25,8 @@ function preparar() {
   a.seed("TumorLot", { tumorLotId: ctx.tumorLotId, patientId: ctx.patientId, cid: ausente(), topografia: ausente(), histologia: ausente(), estadiamentos: [], finalidadeApac: ausente(), marcos: [] });
   const apac = Apac.parse({ apacId: "apac-projecao-sintetica", tumorLotId: ctx.tumorLotId,
     prescricaoAssinadaRef: { documentId: "prescricao-sintetica", documentVersion: 1 }, dataGeracaoApp: "2026-10-01", competencia: "2026-10",
-    campos: { cidPrincipal: "C509" }, estado: "RASCUNHO", resultadoExterno: null, versao: 1, substituiApacId: null });
+    campos: { cidPrincipal: "C509", pacienteCns: "123456789012345", procedimentoPrincipal: "PROC-SINTETICO-27" },
+    estado: "RASCUNHO", resultadoExterno: null, versao: 1, substituiApacId: null });
   a.seed("APAC", apac);
   const acesso = { ...a.acesso, agora: NEGADA_EM };
   function negar(alteracoes: { patientId?: string; apacExistente?: Apac } = {}) {
@@ -128,4 +130,36 @@ it("empate de recebimento nao substitui autorizacao por negativa F4", () => {
   a.novaApac({ ...a.apac, estado: "AUTORIZADA", resultadoExterno: { valor: "AUTORIZADA", motivo: null,
     comprovanteRef: "autorizacao-mesmo-instante", recebidoEm: NEGADA_EM } }, NEGADA_EM);
   expect(lerApacs(a.db, DEPOIS, config).itens[1]).toMatchObject({ apac: { estado: "AUTORIZADA" }, campoOrigem: null, motivoNegativa: null });
+});
+
+it("AG-10 isola APACs por paciente e lote, mas mantém detecção de duplicata no mesmo lote", () => {
+  const a = preparar();
+  const ctxMesmoPacienteOutroLote = { ...ctx, tumorLotId: "lote-sintetico-a2" };
+  const ctxOutraPessoa = { patientId: "paciente-sintetico-b", encounterId: "encontro-sintetico-b", tumorLotId: "lote-sintetico-b" };
+  const ausente = { valor: null, estado: "PENDENTE", campo: "AUSENTE", motivo: "Nao consta", fontes: [], revisao: "RAW" };
+  const lote = (patientId: string, tumorLotId: string) => ({ tumorLotId, patientId, cid: ausente,
+    topografia: ausente, histologia: ausente, estadiamentos: [], finalidadeApac: ausente, marcos: [] });
+  a.seed("TumorLot", lote(ctx.patientId, ctxMesmoPacienteOutroLote.tumorLotId), "CONFIRMADO", ctxMesmoPacienteOutroLote);
+  a.seed("Paciente", { patientId: ctxOutraPessoa.patientId, nome: "Pessoa sintetica B", identificadores: [],
+    nascimento: null, sexoCadastral: "NAO_INFORMADO", divergencia: false }, "CONFIRMADO", ctxOutraPessoa);
+  a.seed("TumorLot", lote(ctxOutraPessoa.patientId, ctxOutraPessoa.tumorLotId), "CONFIRMADO", ctxOutraPessoa);
+  a.seed("APAC", { ...a.apac, apacId: "apac-outra-pessoa-sintetica", tumorLotId: ctxOutraPessoa.tumorLotId },
+    "CONFIRMADO", ctxOutraPessoa);
+  a.seed("APAC", { ...a.apac, apacId: "apac-outro-lote-sintetico", tumorLotId: ctxMesmoPacienteOutroLote.tumorLotId },
+    "CONFIRMADO", ctxMesmoPacienteOutroLote);
+
+  const caixas = CAMPOS_OBRIGATORIOS_PADRAO.map((nome, i) => ({ numero: i + 1, chave: `apac.${nome}`, nome,
+    significado: nome, ondeAparece: ["apac"], tipo: "TEXTO" as const, editavelPor: "MEDICO" as const }));
+  const configComCaixas = { ...config, caixas };
+  const antesDaDuplicata = lerApacs(a.db, DEPOIS, configComCaixas);
+  const alvoAntes = antesDaDuplicata.itens.find(item => item.apac.apacId === a.apac.apacId);
+  expect(alvoAntes?.patientId).toBe(ctx.patientId);
+  expect(alvoAntes?.apac.tumorLotId).toBe(ctx.tumorLotId);
+  expect(alvoAntes?.antiglosa).not.toBeNull();
+  expect(alvoAntes?.antiglosa?.achados.some(achado => achado.regraId === "AG-10")).toBe(false);
+
+  a.novaApac({ ...a.apac, apacId: "apac-duplicata-mesmo-lote-sintetica" });
+  const depoisDaDuplicata = lerApacs(a.db, DEPOIS, configComCaixas);
+  const alvoDepois = depoisDaDuplicata.itens.find(item => item.apac.apacId === a.apac.apacId);
+  expect(alvoDepois?.antiglosa?.achados.some(achado => achado.regraId === "AG-10")).toBe(true);
 });

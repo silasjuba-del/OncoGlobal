@@ -551,13 +551,14 @@ export function lerApacs(db: DatabaseSync, agora: string, config: {
   caixas: readonly CaixaNumerada[]; sigtap: TabelasSigtap; cnesConfigurado: string; offsetServico?: string;
 }) {
   const all = eventos(db);
+  const eventosPorId = new Map(all.map(event => [event.eventId, event]));
   const catalogoApac = validarCatalogoApac(config.caixas);
   const civil = dataCivilDoServico(agora, config.offsetServico ?? FUSO_SERVICO);
   if (civil.estado !== "OK") return { hoje: null, itens: [], estado: "PENDENTE", codigo: civil.codigo };
   const apacs = lerApacsVigentes(db, agora, all);
   const lots = porTipo(all, "TumorLot", TumorLot, ["TumorLot@1"]), patients = porTipo(all, "Paciente", Paciente);
   return { hoje: civil.dataCivil, itens: apacs.flatMap((apac) => {
-    const event = all.find((e) => e.eventId === apac.eventId);
+    const event = eventosPorId.get(apac.eventId);
     const lote = lots.find((x) => x.value.tumorLotId === apac.tumorLotId
       && x.event.patientId === event?.patientId)?.value;
     if (!lote) return [];
@@ -569,7 +570,11 @@ export function lerApacs(db: DatabaseSync, agora: string, config: {
     const ultimoAvisoEm = avisos.at(-1)?.criadoEm ?? null;
     let prazo: ReturnType<typeof apacPrazo> | null = null;
     try { prazo = apacPrazo(apac.dataGeracaoApp, civil.dataCivil, ultimoAvisoEm); } catch { /* malformed civil date stays pending */ }
-    const doLote = apacs.filter((other) => other.competencia === apac.competencia);
+    const doLote = apacs.filter((other) => {
+      const otherEvent = eventosPorId.get(other.eventId);
+      return other.competencia === apac.competencia && other.tumorLotId === apac.tumorLotId
+        && otherEvent?.patientId === event.patientId && otherEvent.tumorLotId === event.tumorLotId;
+    });
     const resultadoAntiglosa = catalogoApac.estado === "DISPONIVEL"
       ? antiglosa(apac, { hoje: civil.dataCivil, sigtap: config.sigtap, caixas: catalogoApac.caixas,
         cnesConfigurado: config.cnesConfigurado, apacsDoLote: doLote }) : null;

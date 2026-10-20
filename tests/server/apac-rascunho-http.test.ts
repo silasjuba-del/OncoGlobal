@@ -73,9 +73,9 @@ async function abrir() {
   }
 
   function seed(tipo: string, payload: unknown | ((eventId: string, reviewDecisionId: string) => unknown),
-    options: { tumorLotId?: string | null; encounterId?: string; revisao?: "CONFIRMADO" | "ASSINADO"; supersedesEventId?: string | null } = {}) {
+    options: { patientId?: string; tumorLotId?: string | null; encounterId?: string; revisao?: "CONFIRMADO" | "ASSINADO"; supersedesEventId?: string | null } = {}) {
     const eventId = `apac-seed-${++sequence}`, reviewDecisionId = `apac-review-${eventId}`;
-    const ctx = { patientId: contexto.patientId, encounterId: options.encounterId ?? contexto.encounterId,
+    const ctx = { patientId: options.patientId ?? contexto.patientId, encounterId: options.encounterId ?? contexto.encounterId,
       tumorLotId: options.tumorLotId === undefined ? contexto.tumorLotId : options.tumorLotId };
     sessoes.selecionarConsulta(token, ctx);
     salvarDraft(db, { draftId: eventId, patientId: ctx.patientId, sourceId: eventId, rawRef: "referencia-local-sintetica",
@@ -115,6 +115,16 @@ async function abrir() {
 }
 
 type Ambiente = Awaited<ReturnType<typeof abrir>>;
+
+function corromperFonteSintetica(a: Ambiente, eventId: string, payload: string) {
+  // Somente a fixture :memory: simula corrupção abaixo do writer; a proteção é restaurada.
+  a.db.exec("DROP TRIGGER clinical_event_no_update");
+  try { a.db.prepare("UPDATE clinical_event SET payload=? WHERE eventId=?").run(payload, eventId); }
+  finally {
+    a.db.exec(`CREATE TRIGGER clinical_event_no_update BEFORE UPDATE ON clinical_event
+      BEGIN SELECT RAISE(ABORT, 'clinical_event append-only'); END;`);
+  }
+}
 
 async function assinarRx(a: Ambiente) {
   const base = await a.request(BASE_RX, contexto);
@@ -304,6 +314,39 @@ it("recusa confirmar preview se a base mudar depois de preparar", async () => {
   expect(r.status).toBe(409);
   expect(a.eventos()).toEqual(eventosAntes);
   expect(a.eventos().filter(e => e.tipo === "APAC")).toHaveLength(0);
+});
+
+it.each(["JSON_INVALIDO", "PAYLOAD_FORA_DO_CONTRATO"])("fonte APAC corrompida (%s) fica pendente e não vira nova APAC por ausência aparente", async falha => {
+  const a = await abrir(); await assinarRx(a);
+  const base = await baseApac(a), preparada = await prepararApac(a, base);
+  const salva = await confirmarApac(a, preparada.data);
+  expect(salva.status).toBe(200);
+  const eventosAntes = Number(a.db.prepare("SELECT COUNT(*) AS n FROM clinical_event").get()!.n);
+  const draftsAntes = listarDrafts(a.db, contexto.patientId);
+  corromperFonteSintetica(a, salva.data.eventId,
+    falha === "JSON_INVALIDO" ? "{" : JSON.stringify({ data: { ...preparada.data.apac, apacId: null } }));
+  const pendente = await baseApac(a);
+  expect(pendente.prescricao).toBeNull();
+  expect(pendente.pendencias).toContain("INTEGRIDADE_FONTE_APAC_PENDENTE");
+  const tentativa = await prepararApac(a, pendente, edicaoApac(), "nao-recriar-apac-corrompida");
+  expect(tentativa.status).toBe(409);
+  expect(tentativa.data.codigo).toBe("BASE_APAC_PENDENTE");
+  expect(Number(a.db.prepare("SELECT COUNT(*) AS n FROM clinical_event").get()!.n)).toBe(eventosAntes);
+  expect(listarDrafts(a.db, contexto.patientId)).toEqual(draftsAntes);
+});
+
+it("fonte corrompida de outra pessoa não contamina a base APAC selecionada", async () => {
+  const a = await abrir(); await assinarRx(a);
+  const base = await baseApac(a), preparada = await prepararApac(a, base);
+  const id = a.seed("APAC", { ...preparada.data.apac, apacId: "apac-outra-pessoa", tumorLotId: "outro-lote" },
+    { patientId: "outra-pessoa-sintetica", tumorLotId: "outro-lote" });
+  corromperFonteSintetica(a, id, "{");
+  a.selecionarConsulta(contexto);
+  expect(await baseApac(a)).toEqual(base);
+  // Trocar de pessoa invalida o recibo da sessão; a reexibição dedicada o renova.
+  expect((await prepararApac(a, base)).status).toBe(200);
+  const salva = await confirmarApac(a, preparada.data);
+  expect(salva.status, JSON.stringify(salva.data)).toBe(200);
 });
 
 it("registro R1 barra o bundle genérico da preparação e o recibo dedicado confirma a APAC exata", async () => {

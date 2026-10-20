@@ -9,6 +9,7 @@ import { BaseApacRascunhoRespostaSchema, PrepararApacRascunhoPedidoSchema,
   type EdicaoApacRascunho, type ApacRascunhoPreparado } from "../contracts/api/apacRascunho.js";
 import { executarConfirmacao } from "../kernel/comandos/index.js";
 import { lerDraft, listarEventos, salvarDraft, transacao } from "../kernel/comandos/portas.js";
+import { lerLedgerIntegro } from "../kernel/ledger/leituraIntegra.js";
 import { dadosDoEvento, eventosVigentes } from "../kernel/projections/snapshot.js";
 import { projetarRetrato, hashCanonico } from "../kernel/projections/retrato/index.js";
 import type { SettingsService } from "../kernel/config/settings.js";
@@ -16,7 +17,7 @@ import { apacGerar, validarEmissaoApac } from "../rules/apac.js";
 import { dataCivilDoServico } from "../rules/tempoServico.js";
 import { antiglosa, CAMPOS_OBRIGATORIOS_PADRAO } from "../modules/apac/antiglosa.js";
 import { lerCampo } from "../modules/apac/campos.js";
-import { lerBasePrescricaoExecutavel } from "./prescricaoExecutavel.js";
+import { projetarBasePrescricaoExecutavel } from "./prescricaoExecutavel.js";
 import { lerApacsVigentes } from "./apacsVigentes.js";
 import { hashConteudoExibido as hash, type GerenciadorSessao } from "./sessao.js";
 import type { carregarCorpusServidor } from "./corpus.js";
@@ -56,10 +57,13 @@ function hashRegistro(r: Registro): string {
 function baseApac(deps: Deps, contexto: Contexto, sessao: Sessao, em: string) {
   const civil = dataCivilDoServico(em);
   if (civil.estado !== "OK") throw new Error("RELOGIO_INVALIDO");
-  const eventos = listarEventos(deps.db, contexto.patientId).filter(e =>
+  const leitura = lerLedgerIntegro(deps.db, contexto.patientId);
+  const tiposFonte = new Set(["Paciente", "TumorLot", "TreatmentEpisode", "Ciclo", "DOCUMENTO", "APAC", "FATO", "TreatmentAdministration"]);
+  const falhasFonte = leitura.pendenciasIntegridade.filter(p => p.tipo === null || tiposFonte.has(p.tipo.replace(/@1$/, "")));
+  const eventos = leitura.itens.filter(e =>
     ["CONFIRMADO", "ASSINADO"].includes(e.revisao) && Date.parse(e.criadoEm) <= Date.parse(em));
   const atuais = eventosVigentes(eventos);
-  const rx = lerBasePrescricaoExecutavel(deps.db, contexto, em);
+  const rx = projetarBasePrescricaoExecutavel(eventos, contexto, em);
   const retrato = projetarRetrato(eventos, { ...contexto, agora: em, regras: [],
     biblioteca: { id: "apac-fontes", versao: "1", hash: hashCanonico([]) } });
   const lotes = retrato.fatos.filter(f => ["TumorLot", "TumorLot@1"].includes(f.tipo))
@@ -71,6 +75,7 @@ function baseApac(deps: Deps, contexto: Contexto, sessao: Sessao, em: string) {
   });
   const lote = lotes.length === 1 ? lotes[0]! : null, paciente = pacientes.length === 1 ? pacientes[0]! : null;
   const bloqueios = rx.pendencias.filter(p => p !== "CICLO_COM_ADMINISTRACAO_REGISTRADA");
+  if (falhasFonte.length) bloqueios.push("INTEGRIDADE_FONTE_APAC_PENDENTE");
   if (!lote) bloqueios.push("LOTE_CLINICO_AUSENTE_OU_AMBIGUO");
   if (!paciente || paciente.divergencia) bloqueios.push("IDENTIDADE_PACIENTE_PENDENTE");
   if (!rx.vigente) bloqueios.push("PRESCRICAO_ESTRUTURADA_ASSINADA_AUSENTE");
@@ -100,7 +105,7 @@ function baseApac(deps: Deps, contexto: Contexto, sessao: Sessao, em: string) {
   ];
   const revisao = hash({ eventos: eventos.map(e => ({ eventId: e.eventId, payload: e.payload, fontes: e.fontes,
     revisao: e.revisao, supersedesEventId: e.supersedesEventId })), retrato: retrato.revisao, config,
-    apacs: apacs.map(a => a.apac),
+    apacs: apacs.map(a => a.apac), falhasFonte,
     sigtap: deps.corpus?.sigtap ?? null, caixas: deps.corpus?.caixasTodas ?? null });
   const publica = BaseApacRascunhoRespostaSchema.parse({ contexto, revisao,
     prescricao: bloqueios.length || !rx.vigente ? null : { documentId: rx.vigente.documentId,

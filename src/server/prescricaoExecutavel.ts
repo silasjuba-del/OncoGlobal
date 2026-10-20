@@ -44,7 +44,14 @@ function documentoReferenciado(eventos: readonly ClinicalEvent[], contexto: Cont
 
 /** A revisão abrange os fatos do paciente, inclusive os que mudam a segurança da ordem. */
 export function lerBasePrescricaoExecutavel(db: DatabaseSync, contexto: Contexto, em: string): BasePrescricaoExecutavelResposta {
-  const eventos = eventosConfirmados(db, contexto, em), vigentes = eventosVigentes(eventos);
+  return projetarBasePrescricaoExecutavel(listarEventos(db, contexto.patientId), contexto, em);
+}
+
+/** Permite que uma operação composta use a mesma leitura íntegra para todas as suas fontes. */
+export function projetarBasePrescricaoExecutavel(fontes: readonly ClinicalEvent[], contexto: Contexto, em: string): BasePrescricaoExecutavelResposta {
+  const eventos = fontes.filter(e => e.patientId === contexto.patientId
+    && ["CONFIRMADO", "ASSINADO"].includes(e.revisao) && Date.parse(e.criadoEm) <= Date.parse(em));
+  const vigentes = eventosVigentes(eventos);
   const pendencias: string[] = [];
   const pacientes = vigentes.filter(e => e.tipo === "Paciente").flatMap(e => {
     const p = Paciente.safeParse(dadosDoEvento(e)); return p.success ? [p.data] : [];
