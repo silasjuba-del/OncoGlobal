@@ -98,7 +98,7 @@ export function TelaApacLote({
   }
 
   return (
-    <section aria-label="APAC por lote" className="pilha">
+    <section aria-label="APAC por lote" className="pilha" style={{ minWidth: 0, overflowWrap: "anywhere" }}>
       <h1>APAC por lote</h1>
       {lotes.map((lote) => {
         const primeiro = lote.itens[0];
@@ -142,8 +142,13 @@ export function TelaApacLote({
                 ) : null}
                 {item.motivoNegativa ? <p>Motivo: {item.motivoNegativa}</p> : null}
                 {item.campoOrigem ? <button type="button">campo {item.campoOrigem}</button> : null}
+                <details>
+                  <summary>Rastreabilidade da APAC</summary>
+                  <p>Identificador: {item.apac.apacId}</p>
+                  <p>Prescrição: {item.apac.prescricaoAssinadaRef.documentId} · versão {item.apac.prescricaoAssinadaRef.documentVersion}</p>
+                </details>
                 <label>
-                  selecionar {item.apac.apacId}
+                  Selecionar APAC · versão {item.apac.versao}
                   <input
                     type="checkbox"
                     aria-label={`selecionar ${item.apac.apacId}`}
