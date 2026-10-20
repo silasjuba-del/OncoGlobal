@@ -7,7 +7,7 @@ import { EstudoServicoSchema, type AvaliacaoEstudoResposta, type AvaliarEstudoPe
   type ImportarEstudoPedido, type RevisarEstudoPedido } from "../../src/contracts/api/trialsServico.js";
 import { PainelEstudos } from "../../src/ui/pesquisa/PainelEstudos.js";
 
-afterEach(cleanup);
+afterEach(() => { cleanup(); vi.unstubAllGlobals(); });
 
 const sha = (text: string) => createHash("sha256").update(text).digest("hex");
 const sourceContent = "Synthetic study title\nInclusion: age is at least 18 years.";
@@ -280,5 +280,63 @@ describe("PainelEstudos", () => {
     await act(async () => { resolve(evaluation(firstContext)); });
     expect(screen.queryByRole("region", { name: "Resultado da avaliação" })).toBeNull();
     expect(screen.queryByText("Idade 62 anos confirmada.")).toBeNull();
+  });
+
+  it.each(["antes", "depois"])("retira resultado antigo quando revisao muda %s da resposta", async (momento) => {
+    let resolver!: (value: AvaliacaoEstudoResposta) => void;
+    const aoAvaliar = vi.fn(() => new Promise<AvaliacaoEstudoResposta>(done => { resolver = done; }));
+    const reviewed = reviewedStudy();
+    const props = { contexto: patientContext, aoImportar: vi.fn(), aoRevisar: vi.fn(), aoAvaliar };
+    const view = render(<PainelEstudos {...props} estudos={[reviewed]} />);
+    fireEvent.click(screen.getByRole("button", { name: "Avaliar critérios" }));
+    if (momento === "depois") {
+      await act(async () => { resolver(evaluation()); });
+      expect(screen.getByRole("region", { name: "Resultado da avaliação" })).toBeTruthy();
+    }
+    const nova = { ...reviewed, revision: reviewed.revision + 1,
+      review: { ...reviewed.review!, version: 2, reviewHash: sha("revisao rejeitada"), decision: "REJEITAR" as const } };
+    view.rerender(<PainelEstudos {...props} estudos={[nova]} />);
+    if (momento === "antes") await act(async () => { resolver(evaluation()); });
+    expect(screen.queryByRole("region", { name: "Resultado da avaliação" })).toBeNull();
+    expect(screen.queryByText("Idade confirmada atende à regra.")).toBeNull();
+  });
+
+  it("libera leitura de arquivo ao trocar consulta e ignora retorno antigo", async () => {
+    const leitores: Array<{ result: string; onload: (() => void) | null }> = [];
+    vi.stubGlobal("FileReader", class {
+      result = ""; onload: (() => void) | null = null;
+      readAsText() { leitores.push(this); }
+    });
+    const props = { estudos: [], aoImportar: vi.fn(), aoRevisar: vi.fn(), aoAvaliar: vi.fn() };
+    const view = render(<PainelEstudos {...props} contexto={patientContext} />);
+    fireEvent.change(screen.getByLabelText("Arquivo de estudo local"), {
+      target: { files: [new File(["antigo"], "antigo.txt", { type: "text/plain" })] },
+    });
+    view.rerender(<PainelEstudos {...props} contexto={{ ...patientContext, encounterId: "encontro-2" }} />);
+    expect((screen.getByLabelText("Arquivo de estudo local") as HTMLInputElement).disabled).toBe(false);
+    fireEvent.change(screen.getByLabelText("Arquivo de estudo local"), {
+      target: { files: [new File(["novo"], "novo.txt", { type: "text/plain" })] },
+    });
+    await act(async () => { leitores[1]!.result = "novo"; leitores[1]!.onload?.(); });
+    await act(async () => { leitores[0]!.result = "antigo"; leitores[0]!.onload?.(); });
+    expect((screen.getByLabelText("Conteúdo literal da fonte") as HTMLTextAreaElement).value).toBe("novo");
+    expect((screen.getByLabelText("Arquivo de estudo local") as HTMLInputElement).disabled).toBe(false);
+  });
+
+  it("salvar uma revisao mantem o aviso de outra revisao ainda editada", async () => {
+    const pendente = vi.fn();
+    render(<PainelEstudos estudos={[study(), study({ draftId: "draft-study-2" })]} contexto={patientContext}
+      aoImportar={vi.fn()} aoRevisar={vi.fn(async () => reviewedStudy())} aoAvaliar={vi.fn()}
+      aoAlterarPendente={pendente} />);
+    fireEvent.click(screen.getAllByRole("button", { name: "Revisar estudo" })[0]!);
+    fillReviewMetadata();
+    fireEvent.click(screen.getAllByRole("button", { name: "Revisar estudo" })[1]!);
+    fireEvent.change(screen.getByLabelText("ID do estudo"), { target: { value: "edicao-pendente-2" } });
+    fireEvent.click(screen.getAllByRole("button", { name: "Revisar estudo" })[0]!);
+    fireEvent.click(screen.getByRole("button", { name: "Confirmar estudo revisado" }));
+    await screen.findByText(/Revisão humana registrada/);
+    expect(pendente).toHaveBeenLastCalledWith(true);
+    fireEvent.click(screen.getByRole("button", { name: "Revisar estudo" }));
+    expect((screen.getByLabelText("ID do estudo") as HTMLInputElement).value).toBe("edicao-pendente-2");
   });
 });

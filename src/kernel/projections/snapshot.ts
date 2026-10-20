@@ -2,6 +2,7 @@ import type { DatabaseSync } from "node:sqlite";
 import { createHash } from "node:crypto";
 import type { ClinicalEvent } from "../../contracts/operacao.js";
 import { listarEventos } from "../ledger/ledger.js";
+import { idsSubstituidosValidos } from "../ledger/supersessao.js";
 
 export interface RulesetRef { id: string; version: string; hash: string }
 export interface StageHistoryEntry {
@@ -26,7 +27,7 @@ export interface ValorProjetado {
 /** Só CONFIRMADO/ASSINADO vira fato projetado (A06); substituídos saem (A05). Usado por snapshot e séries. */
 export function eventosVigentes(eventos: readonly ClinicalEvent[]): ClinicalEvent[] {
   const confirmados = eventos.filter((e) => e.revisao === "CONFIRMADO" || e.revisao === "ASSINADO");
-  const substituidos = new Set(confirmados.map((e) => e.supersedesEventId).filter((id): id is string => !!id));
+  const substituidos = idsSubstituidosValidos(confirmados);
   return confirmados.filter((e) => !substituidos.has(e.eventId));
 }
 export interface CaseSnapshot {
@@ -77,8 +78,7 @@ function observacaoClinicaDatada(data: Record<string, unknown>): string | null {
 
 function tnmHistory(eventos: readonly ClinicalEvent[]): StageHistoryEntry[] {
   const confirmados = eventos.filter((evento) => evento.revisao === "CONFIRMADO" || evento.revisao === "ASSINADO");
-  const superseded = new Set(confirmados.map((evento) => evento.supersedesEventId)
-    .filter((id): id is string => !!id));
+  const superseded = idsSubstituidosValidos(confirmados);
   return confirmados.flatMap((evento) => {
     const data = dadosDoEvento(evento);
     if (!data || typeof data.campo !== "string" || !/^TNM$/iu.test(data.campo.trim())) return [];
