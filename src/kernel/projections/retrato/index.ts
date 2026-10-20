@@ -30,12 +30,14 @@ const sistemicos = new Set(["alergias", "alergia", "comorbidades", "medicamentos
 const materiaisConhecidos = new Set(["Paciente", "TumorLot", "Weight", "ImagingReport", "Biopsy", "TreatmentEpisode", "Ciclo", "DOCUMENTO",
   "LabResult", "TreatmentAdministration", "TreatmentCycle", "SignedDocument", "DocumentSigned",
   "Triagem", "Triagem@1", "TumorLot@1"]);
-function escopo(e: ClinicalEvent, d: Record<string, unknown>): FatoRetrato["escopo"] {
+export function escopoDoEventoRetrato(e: ClinicalEvent, d = dados(e) ?? {}): FatoRetrato["escopo"] {
   const campo = normalizarChave(String(d.campo));
   return sistemicos.has(campo) || campo.startsWith("extracao.lab:") || campo === "extracao.drug"
     || ["Paciente", "Weight", "LabResult", "TreatmentAdministration"].includes(e.tipo) ? "PACIENTE" : "TUMOR";
 }
-function tempo(d: Record<string, unknown>, e: ClinicalEvent): string | null {
+export function tempoClinicoDoEvento(e: ClinicalEvent): string | null {
+  const d = dados(e);
+  if (!d) return null;
   for (const chave of ["dataClinica", "factDate", "data", "date"]) if (typeof d[chave] === "string") return d[chave] as string;
   const datas = [...new Set(e.fontes.map(f => f.dataClinica).filter((v): v is string => v !== null))];
   return datas.length === 1 ? datas[0]! : null;
@@ -243,9 +245,9 @@ export function projetarRetrato(eventos: readonly ClinicalEvent[], contexto: Con
     if (encontrosIndeterminados.has(contexto.encounterId) || encontrosIndeterminados.has(e.encounterId)) continue;
     const dataOrigem = limitesEncontros.get(e.encounterId);
     if (dataEncontroAtual && dataOrigem && dataOrigem > dataEncontroAtual) continue;
-    const alcance = escopo(e, d);
+    const alcance = escopoDoEventoRetrato(e, d);
     if (alcance === "TUMOR" && e.tumorLotId !== contexto.tumorLotId) continue;
-    const dataClinica = tempo(d, e);
+    const dataClinica = tempoClinicoDoEvento(e);
     if (dataClinica && /^\d{4}-\d{2}-\d{2}(?:T|$)/.test(dataClinica)) {
       const civil = dataClinica.length === 10;
       if (!(civil ? DataCivil : Instante).safeParse(dataClinica).success) { diagnostico(e, "TEMPO_CLINICO_INVALIDO"); continue; }
@@ -316,6 +318,7 @@ export function projetarRetrato(eventos: readonly ClinicalEvent[], contexto: Con
     return fraseClinica(f,f.campo,f.dados.valor).map(frase=>({...frase,texto:frase.texto.replace(/\.$/,`${qualificadores(f.dados)}.`)}));
   });
   const conteudo = { schema: "Retrato@1" as const, patientId: contexto.patientId, encounterId: contexto.encounterId,
+    ...(dataEncontroAtual ? { dataClinicaEncontro: dataEncontroAtual } : {}),
     tumorLotId: contexto.tumorLotId, versaoProjecao: "retrato-f1-v3", regras: [...contexto.regras].sort((a,b)=>a.id.localeCompare(b.id)||a.versao.localeCompare(b.versao)||a.hash.localeCompare(b.hash)),
     biblioteca: contexto.biblioteca, fatos, integridade: problemas.sort((a,b)=>a.eventoId.localeCompare(b.eventoId)||a.motivo.localeCompare(b.motivo)),
     delta: { encounterAnteriorId: anterior?.encounterId ?? null, novos, substituidos: antigas }, resumo };

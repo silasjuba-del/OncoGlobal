@@ -3,6 +3,7 @@ import type { CampoFichaMinima } from "../../contracts/fase2/revisaoClinica.js";
 import type { TumorPackExtract } from "../../contracts/fase2/tumorPack.js";
 import { bsaMosteller } from "../../rules/prescricao/instanciarProtocolo.js";
 import { Fonte,DataCivil,Instante } from '../../contracts/base.js';
+import { dataCivilDoServico } from "../../rules/tempoServico.js";
 
 const norm=(s:string)=>s.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
 const obj=(v:unknown):Record<string,unknown>=>v&&typeof v==="object"&&!Array.isArray(v)?v as Record<string,unknown>:{};
@@ -24,6 +25,22 @@ function valores(f:FatoRetrato,aliases:string[]):{bruto:unknown;f:FatoRetrato}[]
   }
   if(!["TumorLot","Weight","Triagem","Paciente"].includes(tipo))return [];
   return Object.entries(f.dados).filter(([k])=>aliases.some(a=>norm(a)===norm(k))).map(([,bruto])=>({bruto,f}));
+}
+
+/** A day without a time overlaps every instant on that service day; it is not midnight. */
+function observacoesAtuais<T extends { f: FatoRetrato }>(candidatos: T[]): { atuais: T[]; data: string | null } {
+  const observacoes = candidatos.map(c => {
+    const tempo = c.f.tempoClinico!;
+    const civil = DataCivil.safeParse(tempo).success;
+    const conversao = civil ? null : dataCivilDoServico(tempo);
+    return { c, tempo, civil, dia: civil ? tempo : conversao?.estado === "OK" ? conversao.dataCivil : null };
+  });
+  if (observacoes.some(o => o.dia === null)) return { atuais: candidatos, data: null };
+  const ultimoDia = observacoes.reduce((dia, o) => o.dia! > dia ? o.dia! : dia, "");
+  const doDia = observacoes.filter(o => o.dia === ultimoDia);
+  const ultimoInstante = Math.max(...doDia.filter(o => !o.civil).map(o => Date.parse(o.tempo)));
+  const atuais = doDia.filter(o => o.civil || Date.parse(o.tempo) === ultimoInstante);
+  return { atuais: atuais.map(o => o.c), data: atuais.some(o => o.civil) ? ultimoDia : atuais[0]!.tempo };
 }
 /** Campos vêm do retrato já recortado por paciente, lote e horizonte; não extraem fatos de texto. */
 export function montarFichaMinima(r:Retrato):CampoFichaMinima[]{
@@ -48,9 +65,10 @@ export function montarFichaMinima(r:Retrato):CampoFichaMinima[]{
       candidatos=selecionados;
     }
     const datas=candidatos.map(c=>c.f.tempoClinico),todasDatadas=datas.every(d=>d!==null&&Number.isFinite(Date.parse(d)));
-    const data=todasDatadas?datas.reduce<string|null>((a,d)=>!a||Date.parse(d!)>Date.parse(a)?d:a,null):null;
+    let data=todasDatadas?datas.reduce<string|null>((a,d)=>!a||Date.parse(d!)>Date.parse(a)?d:a,null):null;
     const seriado=['ecog','kps','pesoKg','alturaCm'].includes(id);
-    const atuais=seriado&&todasDatadas?candidatos.filter(c=>c.f.tempoClinico===data):candidatos;
+    let atuais=candidatos;
+    if(seriado&&todasDatadas)({atuais,data}=observacoesAtuais(candidatos));
     base.data=data;base.fatos=atuais.map(c=>c.f.ref);base.fontes=atuais.flatMap(c=>c.f.fontes);
     const conflitante=atuais.some(c=>obj(c.bruto).campo==="CONFLITO"||obj(c.bruto).estado==="CONFLITO"||obj(c.bruto).estado==="CONFLITANTE");
     const elegiveis=atuais.filter(c=>{const w=obj(c.bruto);

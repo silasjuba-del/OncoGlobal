@@ -229,3 +229,88 @@ it("mantém FATO observacaoDatada fora do ECOG tipado atual mesmo que seja mais 
   expect(fato(a)).toMatchObject({ status: "CONFIRMADO", value: 1 });
   expect(fato(a, "ecog.data")).toMatchObject({ status: "CONFIRMADO", value: "2026-10-01" });
 });
+
+it("HTTP nao elege observacao futura no mesmo dia escondida no valor aninhado", async () => {
+  const a = await ambiente();
+  const atual = a.registrar("Triagem", a.triagem({ ecog: presente(4) }));
+  a.registrar("FATO", { campo: "ecog", valor: { ...presente(1), data: "2026-10-09T18:00:00-03:00" } });
+  const antes = a.eventos();
+  const r = await a.request("/consulta/trials/fatos", contexto);
+  expect(r.status).toBe(200);
+  expect(r.data.fatos.find((f: { factKey: string }) => f.factKey === "ecog"))
+    .toMatchObject({ status: "CONFIRMADO", value: 4, source: { sourceId: atual } });
+  expect(a.eventos()).toEqual(antes);
+});
+
+it("HTTP respeita o dia da consulta historica nas fontes internas da Triagem", async () => {
+  const a = await ambiente();
+  a.registrar("AgendaEntry", { patientId: PACIENTE, encounterId: ENCONTRO, horario: "10:00", data: "2026-10-01" });
+  a.registrar("Triagem", a.triagem({ ecog: { ...presente(1),
+    fontes: [{ ...fonteSintetica("observacao-posterior"), dataClinica: "2026-10-05" }] } }));
+  const r = await a.request("/consulta/trials/fatos", contexto);
+  expect(r.status).toBe(200);
+  expect(r.data.fatos).not.toContainEqual(expect.objectContaining({ factKey: "ecog", status: "CONFIRMADO" }));
+});
+
+it.each(["valor", "data", "tipo", "contexto", "fonte", "tempo"])("ref com hash original nao autoriza material de retrato adulterado: %s", async campo => {
+  const a = await ambiente();
+  const id = a.registrar("Triagem", a.triagem());
+  const eventos = a.eventos(), retrato = projetar(eventos);
+  const material = retrato.fatos.find(f => f.ref.eventId === id)!;
+  const ecog = material.dados.ecog as Record<string, unknown>;
+  if (campo === "valor") ecog.valor = 4;
+  if (campo === "data") ecog.fontes = [{ ...fonteSintetica("data-alterada"), dataClinica: "2026-10-08" }];
+  if (campo === "tipo") material.tipo = "TumorLot";
+  if (campo === "contexto") material.tumorLotId = "outro-lote";
+  if (campo === "fonte") material.fontes = [fonteSintetica("fonte-forjada")];
+  if (campo === "tempo") material.tempoClinico = "2026-10-08";
+  // Rehashing the view must not substitute for checking the original ledger material.
+  const { revisao: _revisao, geradoEm: _geradoEm, ...conteudo } = retrato;
+  retrato.revisao = hashCanonico(conteudo);
+  const r = adaptarFatosTipados(eventos, contexto, AGORA, retrato);
+  expect(r.fatos).toEqual([]);
+});
+
+it("evento original integro de outro lote nao pertence ao contexto solicitado", async () => {
+  const a = await ambiente(), outroLote = "lote-anterior-sintetico";
+  a.registrar("Triagem", a.triagem(), { tumorLotId: outroLote });
+  const eventos = a.eventos();
+  const retrato = projetarRetrato(eventos, { ...retratoContexto, tumorLotId: outroLote });
+  retrato.tumorLotId = contexto.tumorLotId;
+  const { revisao: _revisao, geradoEm: _geradoEm, ...conteudo } = retrato;
+  retrato.revisao = hashCanonico(conteudo);
+  expect(adaptarFatosTipados(eventos, contexto, AGORA, retrato).fatos).toEqual([]);
+});
+
+it.each(["2026-10-09", "2026-10-09T11:59:59-03:00"])("data valida %s nao recebe horario inferido ou exclusao indevida", async data => {
+  const a = await ambiente();
+  a.registrar("Triagem", a.triagem({ ecog: presente(4) }));
+  a.registrar("FATO", { campo: "ecog", valor: { ...presente(1), data } });
+  expect(fato(a)).toMatchObject({ status: "CONFIRMADO", value: 1 });
+  expect(fato(a, "ecog.data")).toMatchObject({ value: "2026-10-09" });
+});
+
+it("ancora clinica entra na revisao; retrato legado sem esse campo continua compativel", async () => {
+  const a = await ambiente();
+  a.registrar("Triagem", a.triagem());
+  const legado = projetar(a.eventos());
+  expect(legado).not.toHaveProperty("dataClinicaEncontro");
+  expect(adaptarFatosTipados(a.eventos(), contexto, AGORA, legado).fatos).toContainEqual(
+    expect.objectContaining({ factKey: "ecog", value: 1 }));
+  a.registrar("AgendaEntry", { patientId: PACIENTE, encounterId: ENCONTRO, horario: "10:00", data: "2026-10-01" });
+  const ancorado = projetar(a.eventos());
+  expect(ancorado.dataClinicaEncontro).toBe("2026-10-01");
+  const { revisao, geradoEm: _geradoEm, ...conteudo } = ancorado;
+  expect(hashCanonico(conteudo)).toBe(revisao);
+  expect(hashCanonico({ ...conteudo, dataClinicaEncontro: "2026-10-02" })).not.toBe(revisao);
+});
+
+it.each(["2026-10-09T14:00:00Z", "2026-10-09"])("HTTP conserva conflito quando data %s nao estabelece precedencia", async data => {
+  const a = await ambiente();
+  a.registrar("Triagem", a.triagem());
+  a.registrar("FATO", { campo: "ecog", valor: { ...presente(1), data: "2026-10-09T11:00:00-03:00" } });
+  a.registrar("FATO", { campo: "ecog", valor: { ...presente(4), data } });
+  const r = await a.request("/consulta/trials/fatos", contexto);
+  expect(r.status).toBe(200);
+  expect(r.data.fatos.find((f: { factKey: string }) => f.factKey === "ecog")).toMatchObject({ status: "CONFLITO" });
+});
