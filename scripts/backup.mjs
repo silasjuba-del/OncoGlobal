@@ -94,6 +94,7 @@ function refsLedger(db, files, filesRoot) {
       continue;
     }
     if (Object.hasOwn(LITERAL_INTERNO, ref)) {
+      if (filesRoot && arquivoFisicoExiste(filesRoot, ref)) throw new Error("REFERENCIA_AMBIGUA");
       if (!LITERAL_INTERNO[ref](parsePayload(row.payload))) throw new Error("REFERENCIA_AMBIGUA");
       continue;
     }

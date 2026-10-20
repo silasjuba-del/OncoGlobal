@@ -26,6 +26,22 @@ function draft(db: ReturnType<typeof abrirLedger>, draftId: string, rawRef: stri
 }
 
 describe("backup: rawRef interno conhecido vs físico vs desconhecido (ARQ-05)", () => {
+  it.each([
+    ["referencia-local", { kind: "FONTE_JEV" }],
+    ["consulta-flash-local", { kind: "FLASH_RASCUNHO" }],
+    ["vinculo-operacional-local", { contatoId: "contato-sintetico" }],
+    ["proposta-prescricao-local", { kind: "PRESCRICAO_RASCUNHO" }],
+    ["proposta-local", { schema: "PrescricaoProposta@1" }],
+  ])("R33-01: literal %s com arquivo físico homônimo é ambíguo e não gera backup incompleto", async (ref, payload) => {
+    const c = cenario();
+    writeFileSync(join(c.root, ref), "anexo-fisico-sintetico-nao-omitir");
+    draft(c.db, "d-literal", ref, payload);
+    c.db.close();
+    await expect(criarBackup({ dbPath: c.dbPath, filesRoot: c.root, destino: c.dest, nome: "literal", senha: SENHA }))
+      .rejects.toThrow("REFERENCIA_AMBIGUA");
+    expect(existsSync(join(c.dest, "literal.ogbak"))).toBe(false);
+  });
+
   it("positivos: upload, Flash, triagem, manual, Jev(entre drafts), síntese, auto-ref e físico válido restauram bytes e conteúdo lógico", async () => {
     const c = cenario();
     draft(c.db, "d-upload", "upload-local:doc-sintetico", { kind: "EXTRACAO_RASCUNHO", input: { id: "doc-sintetico" }, original: { tipo: "PDF", bytesBase64: "QUFB", contentHash: "a".repeat(64) } });
