@@ -1,6 +1,7 @@
 import { nomeMedicamento } from './propostasDoseReceita.js';
 import { operarAcoesCompostas } from "./acoesCompostas.js";
 import { operarPrescricaoExecutavel } from "./prescricaoExecutavel.js";
+import { operarApacRascunho } from "./apacRascunho.js";
 import { operarTrials } from "./trialsServico.js";
 import { operarFichasPrescricao } from "./fichasPrescricao.js";
 import { instanciarFichaPrescricao } from "./origemFichaPrescricao.js";
@@ -273,7 +274,8 @@ function confirmarBloco(deps: ServidorDeps, token: string, input: Confirmar): { 
       ? draft.payload.kind : null;
     return kind === "EXTRACAO_RASCUNHO" || kind === "PRESCRICAO_RASCUNHO" || kind === "EVOLUCAO_RASCUNHO"
       || kind === "FLASH_RASCUNHO" || kind === "FLASH_APAC_RASCUNHO" || kind === "ACAO_COMPOSTA_RASCUNHO"
-      || kind === "PRESCRICAO_EXECUTAVEL_RASCUNHO" || kind === "PRESCRICAO_EXECUTAVEL_AUXILIAR";
+      || kind === "PRESCRICAO_EXECUTAVEL_RASCUNHO" || kind === "PRESCRICAO_EXECUTAVEL_AUXILIAR"
+      || kind === "APAC_CONFIRMACAO_CANONICA" || rascunhoJevNaoPromovivel(draft?.payload);
   })) return { status: 409, body: { codigo: "DRAFT_AINDA_RASCUNHO" } };
   for(const draft of drafts){
     const corpo=draft!.payload as {propostasDoseReceita?:{id:string;hashProposta:string;fonte:{hash:string}}[]};
@@ -422,6 +424,9 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
         : req.url === "/consulta/prescricao-executavel/base" ? "basePrescricaoExecutavel"
         : req.url === "/consulta/prescricao-executavel/preparar" ? "prepararPrescricaoExecutavel"
         : req.url === "/consulta/prescricao-executavel/confirmar" ? "confirmarPrescricaoExecutavel"
+        : req.url === "/consulta/apac-rascunho/base" ? "baseApacRascunho"
+        : req.url === "/consulta/apac-rascunho/preparar" ? "prepararApacRascunho"
+        : req.url === "/consulta/apac-rascunho/confirmar" ? "confirmarApacRascunho"
         : req.url === "/consulta/trials/listar" ? "listarEstudosTrials"
         : req.url === "/consulta/trials/importar" ? "importarEstudoTrial"
         : req.url === "/consulta/trials/revisar" ? "revisarEstudoTrial"
@@ -507,6 +512,11 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
     if (rota === "basePrescricaoExecutavel" || rota === "prepararPrescricaoExecutavel" || rota === "confirmarPrescricaoExecutavel") {
       const r = operarPrescricaoExecutavel(deps, token, rota === "basePrescricaoExecutavel" ? "base"
         : rota === "prepararPrescricaoExecutavel" ? "preparar" : "confirmar", raw);
+      return reply(r.status, rota, r.body);
+    }
+    if (rota === "baseApacRascunho" || rota === "prepararApacRascunho" || rota === "confirmarApacRascunho") {
+      const r = operarApacRascunho(deps, token, rota === "baseApacRascunho" ? "base"
+        : rota === "prepararApacRascunho" ? "preparar" : "confirmar", raw);
       return reply(r.status, rota, r.body);
     }
     if (rota === "listarEstudosTrials" || rota === "importarEstudoTrial" || rota === "revisarEstudoTrial"

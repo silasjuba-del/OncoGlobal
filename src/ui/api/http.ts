@@ -21,6 +21,9 @@ import { criarApiBiblioteca } from "./biblioteca.js";
 import { BasePrescricaoExecutavelResposta, PrescricaoExecutavelConfirmada,
   PrescricaoExecutavelPreparada } from "../../contracts/api/operacaoPrescricaoExecutavel.js";
 import { EstatisticaServicoResposta, type PeriodoClinicoEstatisticaServico } from "../../contracts/api/estatisticaServico.js";
+import { BaseApacRascunhoRespostaSchema, ApacRascunhoPreparadoSchema,
+  ApacRascunhoConfirmadoSchema } from "../../contracts/api/apacRascunho.js";
+import type { BaseApacRascunhoResposta, ApacRascunhoPreparado } from "../../contracts/api/apacRascunho.js";
 import {
   ErroPorta,
   type AcaoIntent,
@@ -53,6 +56,10 @@ function codigoDe(json: unknown, fallback: string): string {
 /** Cliente local. Caminhos relativos, Bearer no header, sem cookie e sem token na URL. */
 export function criarPortaHttp(opcoes: OpcoesHttp): PortaConsulta {
   let token: string | null = null;
+  const basesApac = new Map<string, BaseApacRascunhoResposta>();
+  const preparadasApac = new Map<string, ApacRascunhoPreparado>();
+  const chaveContexto = (contexto: { patientId: string; encounterId: string; tumorLotId: string | null }) =>
+    JSON.stringify([contexto.patientId, contexto.encounterId, contexto.tumorLotId]);
 
   async function enviar(caminho: string, corpo: unknown, autenticar: boolean, signal?: AbortSignal): Promise<RespostaBruta> {
     const headers: Record<string, string> = {
@@ -134,6 +141,48 @@ export function criarPortaHttp(opcoes: OpcoesHttp): PortaConsulta {
       const result = PrescricaoExecutavelConfirmada.safeParse(json);
       if (!result.success) throw new ErroPorta("PAYLOAD_INVALIDO");
       return result.data;
+    },
+    async lerBaseApacRascunho(contexto, signal) {
+      const { status, json } = await enviar("/consulta/apac-rascunho/base", contexto, true, signal);
+      if (status !== 200) throw new ErroPorta(codigoDe(json, "BASE_APAC_INDISPONIVEL"));
+      const p = BaseApacRascunhoRespostaSchema.safeParse(json);
+      if (!p.success || p.data.contexto.patientId !== contexto.patientId
+        || p.data.contexto.encounterId !== contexto.encounterId
+        || p.data.contexto.tumorLotId !== contexto.tumorLotId) throw new ErroPorta("PAYLOAD_INVALIDO");
+      basesApac.set(chaveContexto(contexto), p.data);
+      return p.data;
+    },
+    async prepararApacRascunho(pedido, signal) {
+      const { status, json } = await enviar("/consulta/apac-rascunho/preparar", pedido, true, signal);
+      if (status !== 200) throw new ErroPorta(codigoDe(json, "APAC_RASCUNHO_PENDENTE"));
+      const p = ApacRascunhoPreparadoSchema.safeParse(json);
+      const base = basesApac.get(chaveContexto(pedido.contexto));
+      if (!p.success || p.data.contexto.patientId !== pedido.contexto.patientId
+        || p.data.contexto.encounterId !== pedido.contexto.encounterId
+        || p.data.contexto.tumorLotId !== pedido.contexto.tumorLotId
+        || p.data.baseHash !== pedido.expectedBaseHash
+        || p.data.apac.competencia !== pedido.edicao.competencia
+        || p.data.apac.tumorLotId !== pedido.contexto.tumorLotId
+        || base && (base.revisao !== pedido.expectedBaseHash || !base.prescricao
+          || p.data.apac.prescricaoAssinadaRef.documentId !== base.prescricao.documentId
+          || p.data.apac.prescricaoAssinadaRef.documentVersion !== base.prescricao.documentVersion))
+        throw new ErroPorta("PAYLOAD_INVALIDO");
+      preparadasApac.set(p.data.draftId, p.data);
+      return p.data;
+    },
+    async confirmarApacRascunho(pedido, signal) {
+      const { status, json } = await enviar("/consulta/apac-rascunho/confirmar", pedido, true, signal);
+      if (status !== 200) throw new ErroPorta(codigoDe(json, "APAC_RASCUNHO_NAO_CONFIRMADA"));
+      const p = ApacRascunhoConfirmadoSchema.safeParse(json);
+      const anterior = preparadasApac.get(pedido.draftId);
+      if (!p.success || !anterior
+        || anterior.contexto.patientId !== pedido.contexto.patientId
+        || anterior.contexto.encounterId !== pedido.contexto.encounterId
+        || anterior.contexto.tumorLotId !== pedido.contexto.tumorLotId
+        || anterior.revision !== pedido.expectedRevision || anterior.conteudoHash !== pedido.conteudoHash
+        || p.data.apacId !== anterior.apac.apacId || p.data.versao !== anterior.apac.versao)
+        throw new ErroPorta("PAYLOAD_INVALIDO");
+      return p.data;
     },
     async lerEstatisticaServico(periodo: PeriodoClinicoEstatisticaServico | null, signal) {
       const corpo = periodo === null ? {} : { periodoClinico: periodo };

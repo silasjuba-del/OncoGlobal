@@ -31,7 +31,7 @@ it("toda rota pública possui contrato de saída; resposta vazia nunca é sucess
   const rotas = new Set([...tabela.matchAll(/\?\s*"([A-Za-z]+)"/g)].map(m => m[1]!));
   for (const lista of tabela.matchAll(/(\[[^\]]+\])\.includes\(req\.url/g))
     for (const rota of JSON.parse(lista[1]!) as string[]) rotas.add(rota);
-  expect(rotas.size).toBe(80);
+  expect(rotas.size).toBe(83);
   for (const rota of ["listarFichasPrescricao", "revisarFichaPrescricao", "instanciarFichaPrescricao"])
     expect(rotas.has(rota), rota).toBe(true);
   for (const rota of ["listarEstudosTrials", "importarEstudoTrial", "revisarEstudoTrial", "avaliarEstudoTrial", "fatosTrials"])

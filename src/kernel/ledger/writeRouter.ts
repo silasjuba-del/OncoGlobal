@@ -11,7 +11,7 @@ export function rascunhoJevNaoPromovivel(payload: unknown): boolean {
   return !!payload && typeof payload === "object" && "kind" in payload
     && (payload.kind === "JEV_CLASSIFICACAO_RASCUNHO" || payload.kind === "JEV_DIVERGENCIA_RASCUNHO"
       || payload.kind === "ACAO_COMPOSTA_RASCUNHO" || payload.kind === "FICHA_PRESCRICAO_INSTANCIADA"
-      || payload.kind === "FICHA_PROTOCOLO_REVISOES");
+      || payload.kind === "FICHA_PROTOCOLO_REVISOES" || payload.kind === "APAC_PREPARACAO_RASCUNHO");
 }
 const emissores = new WeakMap<DatabaseSync, (req:Confirmacao, eventos:readonly Evento[])=>void>();
 /** Callback síncrono, na transação da confirmação: nunca transporte ou efeito externo. */
@@ -44,8 +44,16 @@ export function confirmar(db: DatabaseSync, req: Confirmacao): Gravacao {
     throw new Error("REVIEW_DECISION_REQUIRED");
   const promoveJev = () => req.registros.some(r => rascunhoJevNaoPromovivel(lerDraft(db, r.draftId)?.payload)
     || rascunhoJevNaoPromovivel(r.payload) || rascunhoJevNaoPromovivel({ kind: r.tipo }));
+  const apacCanonicaInvalida = () => req.registros.some(r => {
+    const p = lerDraft(db, r.draftId)?.payload;
+    if (!p || typeof p !== "object" || !("kind" in p) || p.kind !== "APAC_CONFIRMACAO_CANONICA") return false;
+    return r.tipo !== "APAC" || r.expectedRevision !== 0 || !("apac" in p) || !("contexto" in p)
+      || hashPayload(r.payload) !== hashPayload(p.apac)
+      || hashPayload(p.contexto) !== hashPayload({ patientId: req.patientId, encounterId: req.encounterId, tumorLotId: req.tumorLotId });
+  });
   // Antes inclusive de replay: mudar o tipo/payload do evento não contorna o tipo do draft.
   if (promoveJev()) return { estado: "NEGADA", resultRef: null, motivo: "PROPOSTA_DOCUMENTAL_NAO_PROMOVIVEL" };
+  if (apacCanonicaInvalida()) return { estado: "NEGADA", resultRef: null, motivo: "CONFIRMACAO_APAC_DIVERGENTE" };
   const eventos = req.registros.map((r, i) => ClinicalEvent.parse({
     eventId: r.eventId, operationId: req.operationId, eventIndex: i,
     patientId: req.patientId, tumorLotId: req.tumorLotId, encounterId: req.encounterId,
@@ -61,6 +69,7 @@ export function confirmar(db: DatabaseSync, req: Confirmacao): Gravacao {
   try {
     return transacao(db, () => {
       if (promoveJev()) return { estado: "NEGADA", resultRef: null, motivo: "PROPOSTA_DOCUMENTAL_NAO_PROMOVIVEL" };
+      if (apacCanonicaInvalida()) return { estado: "NEGADA", resultRef: null, motivo: "CONFIRMACAO_APAC_DIVERGENTE" };
       const resultado = gravarOperacao(db, op, eventos, () => {
       for (const r of req.registros) {
         const draft = lerDraft(db, r.draftId);
