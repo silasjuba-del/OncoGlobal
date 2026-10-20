@@ -81,7 +81,9 @@ export function TelaApacLote({
         objeto: { tipo: "APAC", id: item.apac.apacId, versao: item.apac.versao },
         escopo: { patientId: item.patientId, encounterId: item.encounterId },
         destino: null,
-        idempotencyKey: chaves.novaChaveIntencao(`exportar:${item.apac.apacId}`),
+        idempotencyKey: chaves.novaChaveIntencao(JSON.stringify([
+          "EXPORTAR_APAC", item.patientId, item.encounterId, item.apac.apacId, item.apac.versao,
+        ])),
       };
       try {
         const resultado = await porta.acao(intent);

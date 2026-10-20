@@ -11,6 +11,43 @@ afterEach(() => {
 });
 
 describe("APAC em bloco por lote", () => {
+  it.each(["versao", "paciente", "encontro"] as const)(
+    "R33-03: mudar %s da APAC distingue intenção sem perder replay", async (mudanca) => {
+      const original = criarPortaFalsa(), proxima = criarPortaFalsa(), chaves = criarChaves();
+      const lista = await proxima.lotesApac();
+      vi.spyOn(proxima, "lotesApac").mockResolvedValue({
+        ...lista, itens: lista.itens.map(item => item.apac.apacId !== "apac-verde-1" ? item : {
+          ...item,
+          patientId: mudanca === "paciente" ? "paciente-sintetico-novo" : item.patientId,
+          encounterId: mudanca === "encontro" ? "encontro-sintetico-novo" : item.encounterId,
+          apac: { ...item.apac, versao: mudanca === "versao" ? item.apac.versao + 1 : item.apac.versao },
+        }),
+      });
+      const acaoOriginal = vi.spyOn(original, "acao"), acaoProxima = vi.spyOn(proxima, "acao");
+      const tela = render(<TelaApacLote porta={original} chaves={chaves} />);
+      await screen.findByLabelText("APAC por lote");
+      fireEvent.click(screen.getByRole("checkbox", { name: "selecionar apac-verde-1" }));
+      fireEvent.click(screen.getByRole("button", { name: "exportar selecionadas" }));
+      await screen.findByText(/Resultado da exportação:/);
+      const primeira = acaoOriginal.mock.calls[0]![0];
+      tela.rerender(<TelaApacLote porta={proxima} chaves={chaves} />);
+      await screen.findByLabelText("APAC por lote");
+      fireEvent.click(screen.getByRole("checkbox", { name: "selecionar apac-verde-1" }));
+      fireEvent.click(screen.getByRole("button", { name: "exportar selecionadas" }));
+      await screen.findByText(/Resultado da exportação:/);
+      const segunda = acaoProxima.mock.calls[0]![0];
+      fireEvent.click(screen.getByRole("button", { name: "exportar selecionadas" }));
+      await screen.findByText(/REPLAY/);
+      expect(acaoProxima.mock.calls[1]![0].idempotencyKey).toBe(segunda.idempotencyKey);
+      expect(segunda.idempotencyKey).not.toBe(primeira.idempotencyKey);
+      tela.rerender(<TelaApacLote porta={original} chaves={chaves} />);
+      await screen.findByLabelText("APAC por lote");
+      fireEvent.click(screen.getByRole("checkbox", { name: "selecionar apac-verde-1" }));
+      fireEvent.click(screen.getByRole("button", { name: "exportar selecionadas" }));
+      await screen.findByText(/REPLAY/);
+      expect(acaoOriginal.mock.calls[1]![0].idempotencyKey).toBe(primeira.idempotencyKey);
+    });
+
   it.each(["troca", "desmontagem", "erro-tardio"] as const)(
     "R33-02: %s durante primeira APAC impede despacho das seguintes", async (cenario) => {
       const antiga = criarPortaFalsa(), chaves = criarChaves();
