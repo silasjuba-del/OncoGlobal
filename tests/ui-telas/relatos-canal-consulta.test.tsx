@@ -25,11 +25,12 @@ function relato(overrides: Partial<MensagemCanalVisao> = {}): MensagemCanalVisao
 it("exibe somente relato vinculado do contexto e preserva texto literal, negações e estado do canal", () => {
   const callback = vi.fn();
   const original = "<script>não executar</script>\nNão tenho febre nem dor.";
-  const view = render(<RelatosCanalConsulta contexto={contexto} aoAbrirCanal={callback} mensagens={[
+  const view = render(<RelatosCanalConsulta contexto={contexto} aoAbrirCanal={callback}
+    pendenciasSemAtribuicao={2} mensagens={[
     relato({ mensagemId: "msg-html", texto: original, redFlag: true, pendenciaProcessamento: true,
       midia: { providerMediaId: "media-opaco-sintetico", mimeType: "audio/ogg", processamento: "NAO_PROCESSADA" } }),
-    relato({ mensagemId: "msg-conflito", texto: "Conteúdo conflitante oculto", estadoVinculo: "CONFLITO" }),
-    relato({ mensagemId: "msg-revogado", texto: "Conteúdo revogado oculto", estadoVinculo: "REVOGADO" }),
+    relato({ mensagemId: "msg-conflito", texto: "Conteúdo conflitante oculto", patientId: null, estadoVinculo: "CONFLITO" }),
+    relato({ mensagemId: "msg-revogado", texto: "Conteúdo revogado oculto", patientId: null, estadoVinculo: "REVOGADO" }),
     relato({ mensagemId: "msg-terceiro", texto: "Outro paciente oculto", patientId: "pt-terceiro-sintetico" }),
     relato({ mensagemId: "msg-sem-paciente", texto: "Sem vínculo a paciente", patientId: null, estadoVinculo: "SEM_VINCULO" }),
   ]} />);
@@ -43,7 +44,8 @@ it("exibe somente relato vinculado do contexto e preserva texto literal, negaç�
   expect(panel.textContent).toContain("não processada; conteúdo não disponível aqui.");
   expect(panel.textContent).toContain("Sinalizador do canal: relato pendente de revisão médica.");
   expect(panel.textContent).toContain("Processamento pendente");
-  expect(panel.textContent).toContain("Há 2 relatos deste paciente");
+  expect(panel.textContent).toContain("Há 2 relatos na caixa do canal com vínculo não validado");
+  expect(panel.textContent).toContain("não atribuídos a este paciente");
   expect(panel.textContent).not.toContain("Nome não comprova autoria");
   expect(panel.textContent).not.toContain("Conteúdo conflitante oculto");
   expect(panel.textContent).not.toContain("Conteúdo revogado oculto");
