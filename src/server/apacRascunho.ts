@@ -8,7 +8,7 @@ import { BaseApacRascunhoRespostaSchema, PrepararApacRascunhoPedidoSchema,
   ApacRascunhoPreparadoSchema, ConfirmarApacRascunhoPedidoSchema,
   type EdicaoApacRascunho, type ApacRascunhoPreparado } from "../contracts/api/apacRascunho.js";
 import { executarConfirmacao } from "../kernel/comandos/index.js";
-import { lerDraft, listarEventos, salvarDraft, transacao } from "../kernel/comandos/portas.js";
+import { lerDraft, listarEventos, salvarDraft, transacao, hashPayload, resultadoExistente } from "../kernel/comandos/portas.js";
 import { lerLedgerIntegro } from "../kernel/ledger/leituraIntegra.js";
 import { dadosDoEvento, eventosVigentes } from "../kernel/projections/snapshot.js";
 import { projetarRetrato, hashCanonico } from "../kernel/projections/retrato/index.js";
@@ -18,7 +18,7 @@ import { dataCivilDoServico } from "../rules/tempoServico.js";
 import { antiglosa, CAMPOS_OBRIGATORIOS_PADRAO } from "../modules/apac/antiglosa.js";
 import { lerCampo } from "../modules/apac/campos.js";
 import { projetarBasePrescricaoExecutavel } from "./prescricaoExecutavel.js";
-import { lerApacsVigentes } from "./apacsVigentes.js";
+import { lerApacsVigentes, type FalhaFonteApac } from "./apacsVigentes.js";
 import { hashConteudoExibido as hash, type GerenciadorSessao } from "./sessao.js";
 import type { carregarCorpusServidor } from "./corpus.js";
 
@@ -71,8 +71,8 @@ function baseApac(deps: Deps, contexto: Contexto, sessao: Sessao, em: string) {
     .flatMap(f => { const p = TumorLot.safeParse(f.dados); return p.success && p.data.patientId === contexto.patientId
       && p.data.tumorLotId === contexto.tumorLotId && !retrato.integridade.some(i => i.eventoId === f.ref.eventId)
       ? [p.data] : []; });
-  const pacientes = atuais.filter(e => e.tipo === "Paciente").flatMap(e => {
-    const p = Paciente.safeParse(dadosDoEvento(e)); return p.success ? [p.data] : [];
+  const pacientes = atuais.filter(e => ["Paciente", "Paciente@1"].includes(e.tipo)).flatMap(e => {
+    const p = Paciente.safeParse(dadosDoEvento(e)); return p.success && p.data.patientId === contexto.patientId ? [p.data] : [];
   });
   const lote = lotes.length === 1 ? lotes[0]! : null, paciente = pacientes.length === 1 ? pacientes[0]! : null;
   const bloqueios = rx.pendencias.filter(p => p !== "CICLO_COM_ADMINISTRACAO_REGISTRADA");
@@ -92,10 +92,12 @@ function baseApac(deps: Deps, contexto: Contexto, sessao: Sessao, em: string) {
     nomeMae: null, nomeEstabelecimento: config.hospital, cnesSolicitante: config.cnes,
     solicitanteNome: config.nome, solicitanteCns: config.cns,
   } };
-  const apacs = lerApacsVigentes(deps.db, em, eventos).flatMap(({ eventId, ...apac }) => {
+  const falhasApac: FalhaFonteApac[] = [];
+  const apacs = lerApacsVigentes(deps.db, em, eventos, f=>falhasApac.push(f)).flatMap(({ eventId, ...apac }) => {
     const evento = eventos.find(e => e.eventId === eventId);
     return evento && evento.tumorLotId === contexto.tumorLotId ? [{ evento, apac }] : [];
   });
+  if(falhasApac.some(f=>f.tumorLotId===contexto.tumorLotId))bloqueios.push("INTEGRIDADE_FONTE_APAC_PENDENTE");
   const camposClinicos = [
     { chave: "pacienteNome", rotulo: "Paciente", valor: paciente?.nome ?? null },
     { chave: "cidPrincipal", rotulo: "CID documentado", valor: lote ? textoDado(lote.cid) : null },
@@ -106,7 +108,7 @@ function baseApac(deps: Deps, contexto: Contexto, sessao: Sessao, em: string) {
   ];
   const revisao = hash({ eventos: eventos.map(e => ({ eventId: e.eventId, payload: e.payload, fontes: e.fontes,
     revisao: e.revisao, supersedesEventId: e.supersedesEventId })), retrato: retrato.revisao, config,
-    apacs: apacs.map(a => a.apac), falhasFonte,
+    apacs: apacs.map(a => a.apac), falhasFonte, falhasApac,
     sigtap: deps.corpus?.sigtap ?? null, caixas: deps.corpus?.caixasTodas ?? null });
   const publica = BaseApacRascunhoRespostaSchema.parse({ contexto, revisao,
     prescricao: bloqueios.length || !rx.vigente ? null : { documentId: rx.vigente.documentId,
@@ -206,9 +208,12 @@ function confirmar(deps: Deps, token: string, raw: unknown, contexto: Contexto, 
     codigo, apacId: apac.apacId, versao: apac.versao, eventId, estado: "RASCUNHO", permiteExportar: false } });
   if (anteriores.length) {
     const e = anteriores[0]!, a = Apac.safeParse(dadosDoEvento(e));
-    if (anteriores.length !== 1 || e.tipo !== "APAC" || e.criadoPor.id !== sessao.medicoId
+    if (anteriores.length !== 1 || e.tipo !== "APAC" || e.revisao !== "CONFIRMADO"
+      || e.criadoPor.tipo !== "SESSAO" || Date.parse(e.criadoEm) > Date.parse(em) || e.criadoPor.id !== sessao.medicoId
       || e.encounterId !== contexto.encounterId || e.tumorLotId !== contexto.tumorLotId || e.fontes[0]?.contentHash !== requestHash
-      || !a.success || a.data.estado !== "RASCUNHO" || a.data.resultadoExterno !== null) return negar("IDEMPOTENCIA_CONFLITO");
+      || !a.success || a.data.tumorLotId !== contexto.tumorLotId || a.data.estado !== "RASCUNHO" || a.data.resultadoExterno !== null) return negar("IDEMPOTENCIA_CONFLITO");
+    const recibo = resultadoExistente(deps.db,{operationId,payloadHash:hashPayload(anteriores),resultRef:e.eventId,criadoEm:em});
+    if(recibo?.estado!=="REPLAY" || recibo.resultRef!==e.eventId)return negar("IDEMPOTENCIA_CONFLITO");
     return retorno("REPLAY", e.eventId, a.data);
   }
   const draft = lerDraft(deps.db, p.data.draftId), registro = Registro.safeParse(draft?.payload);
