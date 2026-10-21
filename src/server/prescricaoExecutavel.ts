@@ -9,7 +9,7 @@ import { BasePrescricaoExecutavelResposta, ConfirmarPrescricaoExecutavelPedido,
   PrepararPrescricaoExecutavelPedido, PrescricaoExecutavelPreparada,
   type EdicaoPrescricaoExecutavel } from "../contracts/api/operacaoPrescricaoExecutavel.js";
 import { executarConfirmacao } from "../kernel/comandos/index.js";
-import { lerDraft, listarEventos, salvarDraft, transacao } from "../kernel/comandos/portas.js";
+import { auditar, lerDraft, listarEventos, salvarDraft, transacao } from "../kernel/comandos/portas.js";
 import { dadosDoEvento, eventosVigentes } from "../kernel/projections/snapshot.js";
 import { avaliarDocumentoExecutavel, doseFinalEmMg } from "../rules/prescricao/documentoExecutavel.js";
 import { hashConteudoExibido as hash } from "./sessao.js";
@@ -341,7 +341,7 @@ function confirmar(deps: Deps, token: string, raw: unknown, contexto: Contexto, 
   }
   const gravado = executarConfirmacao(deps.db, { operationId, ...contexto, reviewDecisionId,
     sessao: deps.sessoes.obter(token)!, em, registros });
-  if (gravado.estado === "NEGADA") throw new Error("PRESCRICAO_TRANSACAO_NEGADA");
+  if (gravado.estado === "NEGADA") return negar(gravado.motivo ?? "PRESCRICAO_TRANSACAO_NEGADA");
   return retorno(gravado.estado, eventoId);
 }
 
@@ -356,9 +356,16 @@ export function operarPrescricaoExecutavel(deps: Deps, token: string, operacao: 
   if (!selecionado || selecionado.patientId !== c.data.patientId || selecionado.encounterId !== c.data.encounterId
     || (selecionado.tumorLotId ?? null) !== c.data.tumorLotId) return negar("CONTEXTO_CONSULTA_ALTERADO");
   try {
-    return transacao(deps.db, () => operacao === "base"
+    const resultado = transacao(deps.db, () => operacao === "base"
       ? { status: 200, body: BasePrescricaoExecutavelResposta.parse(lerBasePrescricaoExecutavel(deps.db, c.data, em)) }
       : operacao === "preparar" ? preparar(deps, token, raw, c.data, sessao.data.medicoId, em)
-      : confirmar(deps, token, raw, c.data, sessao.data.medicoId, em));
-  } catch { return negar("PRESCRICAO_TRANSACAO_NAO_CONFIRMADA"); }
+      : confirmar(deps, token, raw, c.data, sessao.data.medicoId, em), r => r.status >= 400);
+    // O rollback remove auxiliares e qualquer auditoria interna do gravador.
+    // A recusa de confirmacao persiste uma unica vez, fora da unidade desfeita.
+    if (operacao === "confirmar" && resultado.status === 409) auditar(deps.db, {
+      ator: { tipo: "SESSAO", id: sessao.data.medicoId }, acaoPedida: "CONFIRMAR", decisao: "NEGADA",
+      motivoCodigo: (resultado.body as { codigo: string }).codigo, politicaVersao: "W2-01", em,
+    });
+    return resultado;
+  } catch { return negar("PRESCRICAO_ARMAZENAMENTO_INDISPONIVEL", 503); }
 }
