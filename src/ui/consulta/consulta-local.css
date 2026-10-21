@@ -1,9 +1,9 @@
 .oncoassist-local {
-  --consulta-ink: #243945;
-  --consulta-accent: #174968;
-  --consulta-muted: #526b78;
-  --consulta-line: #d7e4e7;
-  --consulta-soft: #f3f7f8;
+  --consulta-ink: var(--cl-tinta);
+  --consulta-accent: var(--cl-acao);
+  --consulta-muted: var(--cl-apagado);
+  --consulta-line: var(--cl-linha);
+  --consulta-soft: var(--cl-suave);
   color: var(--consulta-ink);
   background: #fff;
   font-family: "Segoe UI", system-ui, sans-serif;
@@ -30,7 +30,6 @@
 .oncoassist-local button { cursor: pointer; }
 .oncoassist-local button:disabled { cursor: default; opacity: .55; }
 .oncoassist-local a { color: var(--consulta-accent); }
-.oncoassist-local :focus-visible { outline: 2px solid var(--consulta-accent); outline-offset: 3px; }
 .oncoassist-local pre { font-family: inherit; white-space: pre-wrap; overflow-wrap: anywhere; }
 .consulta-local > :not(.consulta-identidade) { margin-block: 1.5rem; }
 .consulta-identidade {
