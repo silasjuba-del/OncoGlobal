@@ -22,6 +22,7 @@ import type { VisaoTimelineMulticamadas } from "../../contracts/api/timelineMult
 import { TimelineMulticamadas } from "./TimelineMulticamadas.js";
 import { EditorPrescricaoExecutavel } from "./EditorPrescricaoExecutavel.js";
 import { FichasPrescricaoConsulta, mensagemErroFicha } from "./FichasPrescricaoConsulta.js";
+import { PrepararApacConsulta } from "./PrepararApacConsulta.js";
 import type { InstanciacaoFichaResposta } from "../../contracts/api/fichasPrescricao.js";
 import type { BasePrescricaoExecutavelResposta, EdicaoPrescricaoExecutavel,
   PrescricaoExecutavelPreparada } from "../../contracts/api/operacaoPrescricaoExecutavel.js";
@@ -32,13 +33,20 @@ type Preview = { preparacao: FlashPreparada; documentos: DocumentoPreview[]; ope
 
 /** Composição HTTP real. Nenhum cadastro, prescrição ou histórico de demonstração. */
 export function ConsultaPersistida({ porta, contexto, aoAbrirApac, versaoClinica = 0,
-  aoAlterarPrescricaoPendente, aoAlterarPrescricaoSalvando, aoAtualizarClinico }: {
+  aoAlterarPrescricaoPendente, aoAlterarPrescricaoSalvando, aoAlterarApacPendente,
+  aoAlterarApacSalvando, aoAtualizarClinico }: {
   porta: PortaConsulta; contexto: PedidoBundle; aoAbrirApac?:()=>void; versaoClinica?: number;
   aoAlterarPrescricaoPendente?: (pendente: boolean) => void;
   aoAlterarPrescricaoSalvando?: (salvando: boolean) => void;
+  aoAlterarApacPendente?: (pendente: boolean) => void;
+  aoAlterarApacSalvando?: (salvando: boolean) => void;
   aoAtualizarClinico?: () => void;
 }) {
   const [cientes, setCientes] = useCienciaAlertas(JSON.stringify([contexto.patientId,contexto.encounterId,contexto.tumorLotId]));
+  const aoAlterarApacPendenteAtual = useRef(aoAlterarApacPendente);
+  aoAlterarApacPendenteAtual.current = aoAlterarApacPendente;
+  const aoAlterarApacSalvandoAtual = useRef(aoAlterarApacSalvando);
+  aoAlterarApacSalvandoAtual.current = aoAlterarApacSalvando;
   const [consultaCarregada, setConsultaCarregada] = useState<{
     visao: ConsultaIntegrada | null; erro: string; porta: PortaConsulta;
     contexto: PedidoBundle; versao: number; versaoClinica: number;
@@ -59,6 +67,7 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, versaoClinica
   const [linhaTempo, setLinhaTempo] = useState<{ origem: ConsultaIntegrada; dados: VisaoTimelineMulticamadas | null } | null>(null);
   const tentativaAcao = useRef<{ conteudo: string; chave: string } | null>(null);
   const [editorRx, setEditorRx] = useState(false);
+  const [apacRascunhoAberto, setApacRascunhoAberto] = useState(false);
   const [origemFichaRx, setOrigemFichaRx] = useState<InstanciacaoFichaResposta | null>(null);
   const [origemAcaoRx, setOrigemAcaoRx] = useState<AcaoCompostaPreparada | null>(null);
   const [baseRx, setBaseRx] = useState<{ origem: ConsultaIntegrada; dados: BasePrescricaoExecutavelResposta } | null>(null);
@@ -95,10 +104,12 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, versaoClinica
     setLinhaTempo(null);
     setMensagem("");
     setRxEmCurso(false); aoAlterarPrescricaoSalvando?.(false); aoAlterarPrescricaoPendente?.(false);
-    setEditorRx(false); setOrigemFichaRx(null); setOrigemAcaoRx(null); setBaseRx(null); setErroRx(""); tentativaRx.current = null; assinaturaRx.current = null;
+    aoAlterarApacSalvandoAtual.current?.(false); aoAlterarApacPendenteAtual.current?.(false);
+    setEditorRx(false); setApacRascunhoAberto(false); setOrigemFichaRx(null); setOrigemAcaoRx(null); setBaseRx(null); setErroRx(""); tentativaRx.current = null; assinaturaRx.current = null;
     return () => {
       geracao.current++;
       aoAlterarPrescricaoSalvando?.(false); aoAlterarPrescricaoPendente?.(false);
+      aoAlterarApacSalvandoAtual.current?.(false); aoAlterarApacPendenteAtual.current?.(false);
     };
   }, [porta, patientId, encounterId, tumorLotId]);
 
@@ -410,6 +421,8 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, versaoClinica
     <button type="button" disabled={ocupado} onClick={() => setVersao((v) => v + 1)}>Reabrir histórico</button>
     {porta.lerBasePrescricaoExecutavel && porta.prepararPrescricaoExecutavel && porta.confirmarPrescricaoExecutavel
       ? <button type="button" disabled={ocupado || rxEmCurso} onClick={() => setEditorRx(true)}>Prescrição estruturada</button> : null}
+    {porta.lerBaseApacRascunho && porta.prepararApacRascunho && porta.confirmarApacRascunho
+      ? <button type="button" disabled={ocupado || rxEmCurso} onClick={() => setApacRascunhoAberto(true)}>Preparar APAC da prescrição</button> : null}
     </div>
     <div className="consulta-acoes" aria-label="Preparar conduta">
       {([["MANTER_CICLO", "Manter ciclo"], ["REDUZIR_DOSE", "Reduzir dose"],
@@ -484,6 +497,12 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, versaoClinica
         {...(aoAlterarPrescricaoPendente ? { aoAlterarPendente: aoAlterarPrescricaoPendente } : {})} />
         : <p role="status">Carregando a base da prescrição…</p>}
     </section> : null}
+    {apacRascunhoAberto && porta.lerBaseApacRascunho && porta.prepararApacRascunho && porta.confirmarApacRascunho
+      ? <PrepararApacConsulta porta={porta} contexto={{ patientId, encounterId, tumorLotId: tumorLotId ?? null }} aberto
+        ocupado={ocupado || rxEmCurso}
+        {...(aoAlterarApacPendente ? { aoAlterarPendente: aoAlterarApacPendente } : {})}
+        {...(aoAlterarApacSalvando ? { aoAlterarSalvando: aoAlterarApacSalvando } : {})}
+        aoAtualizarClinico={() => { if (aoAtualizarClinico) aoAtualizarClinico(); else setVersao(v => v + 1); }} /> : null}
     {flash && propsFlash ? <div hidden={!visaoPronta}>
       <ConsultaFlash key={`${patientId}:${encounterId}:${tumorLotId ?? ""}:${pedidoInvestigacao?.exameCodigo??"manual"}:${pedidoInvestigacao?.contexto??""}:${pedidoRevisao}`} {...propsFlash} />
     </div> : null}

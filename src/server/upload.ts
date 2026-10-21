@@ -1,4 +1,4 @@
-import { detectarEmergencias } from "../rules/radsEmergencias.js";
+import { avaliarRadsRascunho } from "./radsRascunho.js";
 import { createHash } from "node:crypto";
 import { createRequire } from "node:module";
 import { z } from "zod";
@@ -66,12 +66,13 @@ export async function processarUploadLocal(deps:DepsUpload,token:string,sessao:S
   // Cada página é uma entrada do pipeline; recordingId distinto por página evita colisão multifonte.
   const state=executarPipelineExtracao(rawTranscript&&primeira?{...input,rawTranscript:primeira.texto,page:primeira.n,
     additionalSources:paginasLegiveis.slice(1).map(pagina=>({...input,recordingId:`${input.recordingId}#p${pagina.n}`,rawTranscript:pagina.texto,page:pagina.n}))}:input);
+  const rads=avaliarRadsRascunho(p.data.sourceType,rawTranscript,p.data.sourceId,deps.corpus?.rads);
   const salvo=salvarDraft(deps.db,{draftId,patientId:null,sourceId:p.data.sourceId,rawRef:`upload-local:${p.data.id}`,
-    payload:{kind:"EXTRACAO_RASCUNHO",input,state,alerts:[],alertasRads:p.data.sourceType === "imaging_report" && deps.corpus?.rads ? detectarEmergencias(rawTranscript,deps.corpus.rads).alertas.map(a=>({...a,sourceId:p.data.sourceId})) : [],
+    payload:{kind:"EXTRACAO_RASCUNHO",input,state,alerts:[],alertasRads:rads.alertasRads,
       original:{tipo:p.data.tipo,bytesBase64:base64,contentHash,documento:leitura.documento,status:leitura.status,
         confianca:"confianca" in leitura&&typeof leitura.confianca==="number"?leitura.confianca:null,
         motivo:leitura.status==="PENDENTE"?leitura.motivo:null},contextoUpload:{patientId:p.data.patientId,encounterId:p.data.encounterId,tumorLotId:p.data.tumorLotId}},
-    diagnostics:["VINCULO_MEDICO_PENDENTE",...(leitura.status==="PENDENTE"?[leitura.motivo]:[]),...state.confirmationRequired.map(e=>e.kind)],revision:0,criadoEm:recebidoEm});
+    diagnostics:["VINCULO_MEDICO_PENDENTE",...rads.diagnostics,...(leitura.status==="PENDENTE"?[leitura.motivo]:[]),...state.confirmationRequired.map(e=>e.kind)],revision:0,criadoEm:recebidoEm});
   return {status:201,body:{codigo:"RASCUNHO_SALVO",draftId:salvo.draftId,revision:salvo.revision,linkedPatientId:null,
     conversionStatus:leitura.status,motivo:leitura.status==="PENDENTE"?leitura.motivo:null,
     paginasPendentes:leitura.documento.paginasPendentes??[],totalPaginas:leitura.documento.totalPaginas??null,

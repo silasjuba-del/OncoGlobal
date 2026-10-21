@@ -39,6 +39,8 @@ import type { BasePrescricaoExecutavelResposta, ConfirmarPrescricaoExecutavelPed
 import type { PeriodoClinicoEstatisticaServico, VisaoEstatisticaServico } from "./estatisticaServico.js";
 import type { CatalogoFichasResposta, FichaProtocoloCatalogo, RevisarFichaPedido,
   InstanciarFichaPedido, InstanciacaoFichaResposta } from "./fichasPrescricao.js";
+import type { BaseApacRascunhoResposta, PrepararApacRascunhoPedido, ApacRascunhoPreparado,
+  ConfirmarApacRascunhoPedido, ApacRascunhoConfirmado } from "./apacRascunho.js";
 
 export type CodigoPorta = string;
 
@@ -346,6 +348,9 @@ export interface PortaConsulta {
   lerBasePrescricaoExecutavel?(contexto: ContextoAcaoComposta, signal?: AbortSignal): Promise<BasePrescricaoExecutavelResposta>;
   prepararPrescricaoExecutavel?(pedido: PrepararPrescricaoExecutavelPedido, signal?: AbortSignal): Promise<PrescricaoExecutavelPreparada>;
   confirmarPrescricaoExecutavel?(pedido: ConfirmarPrescricaoExecutavelPedido, signal?: AbortSignal): Promise<PrescricaoExecutavelConfirmada>;
+  lerBaseApacRascunho?(contexto: ContextoAcaoComposta, signal?: AbortSignal): Promise<BaseApacRascunhoResposta>;
+  prepararApacRascunho?(pedido: PrepararApacRascunhoPedido, signal?: AbortSignal): Promise<ApacRascunhoPreparado>;
+  confirmarApacRascunho?(pedido: ConfirmarApacRascunhoPedido, signal?: AbortSignal): Promise<ApacRascunhoConfirmado>;
   lerEstatisticaServico?(periodo: PeriodoClinicoEstatisticaServico | null, signal?: AbortSignal): Promise<VisaoEstatisticaServico>;
   ditado?(pedido:import('../fase2/ditado.js').DitadoPedido,signal?:AbortSignal):Promise<import('../fase2/ditado.js').DitadoResposta>;
   lotesPaciente?(patientId:string,signal?:AbortSignal):Promise<LotesPacienteResposta>;

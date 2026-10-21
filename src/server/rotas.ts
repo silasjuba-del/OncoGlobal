@@ -6,6 +6,7 @@ import { rascunhoNaoPromovivel } from "../contracts/rascunhos.js";
 import { nomeMedicamento } from './propostasDoseReceita.js';
 import { operarAcoesCompostas } from "./acoesCompostas.js";
 import { operarPrescricaoExecutavel } from "./prescricaoExecutavel.js";
+import { operarApacRascunho } from "./apacRascunho.js";
 import { operarTrials } from "./trialsServico.js";
 import { operarFichasPrescricao } from "./fichasPrescricao.js";
 import { instanciarFichaPrescricao } from "./origemFichaPrescricao.js";
@@ -72,7 +73,7 @@ import { AcaoRevisaoPedido, ClosureVinculoContato } from "../contracts/w10/closu
 import { criarOncoassistJev } from "../kernel/llm/jev/oncoassist.js";
 import { operarOncoassistPropostas } from "./oncoassistPropostas.js";
 import { rascunhoJevNaoPromovivel } from "../kernel/ledger/writeRouter.js";
-import { detectarEmergencias } from "../rules/radsEmergencias.js";
+import { avaliarRadsRascunho } from "./radsRascunho.js";
 import { PlanoFlashEntrada, lerModeloFlash, prepararFinalizacaoFlash, salvarRascunhoFlash } from "./flash.js";
 import { CHAVE_CAIXA_MODELO_FLASH } from "../contracts/configFlash.js";
 import { confrontarNomeIdentificador } from "../rules/w8/vinculoDocumento.js";
@@ -235,6 +236,13 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
     if (rota === "basePrescricaoExecutavel" || rota === "prepararPrescricaoExecutavel" || rota === "confirmarPrescricaoExecutavel") {
       const r = operarPrescricaoExecutavel(deps, token, rota === "basePrescricaoExecutavel" ? "base"
         : rota === "prepararPrescricaoExecutavel" ? "preparar" : "confirmar", raw);
+      const codigo = r.body && typeof r.body === "object" && "codigo" in r.body && typeof r.body.codigo === "string"
+        ? r.body.codigo : rota;
+      return reply(r.status, codigo, r.body);
+    }
+    if (rota === "baseApacRascunho" || rota === "prepararApacRascunho" || rota === "confirmarApacRascunho") {
+      const r = operarApacRascunho(deps, token, rota === "baseApacRascunho" ? "base"
+        : rota === "prepararApacRascunho" ? "preparar" : "confirmar", raw);
       return reply(r.status, rota, r.body);
     }
     if (rota === "listarEstudosTrials" || rota === "importarEstudoTrial" || rota === "revisarEstudoTrial"
@@ -1177,9 +1185,8 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
       const state = executarPipelineExtracao(input);
       // Advisory chains use the approved local corpus and preserve original source.
       // They never create a clinical fact or confirm an emergency automatically.
-      const rads = parsed.data.sourceType === "imaging_report" && deps.corpus?.rads
-        ? detectarEmergencias(parsed.data.rawTranscript, deps.corpus.rads) : null;
-      const alertasRads = rads?.alertas.map((alerta) => ({ ...alerta, sourceId: parsed.data.sourceId })) ?? [];
+      const rads = avaliarRadsRascunho(parsed.data.sourceType, parsed.data.rawTranscript, parsed.data.sourceId, deps.corpus?.rads);
+      const { alertasRads } = rads;
       // Gates are advisory at draft time: absent anatomy/laterality/specimen stays
       // pending and never prevents local persistence or consultation.
       const stages = state.facts.filter((f) => f.domain === "stage" && typeof f.value === "string");
@@ -1196,7 +1203,7 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
         draftId, patientId: null, sourceId: parsed.data.sourceId,
         rawRef: `importacao-local:${parsed.data.recordingId}`,
         payload: { kind: "EXTRACAO_RASCUNHO", input: parsed.data, state, alerts, alertasRads },
-        diagnostics: ["VINCULO_MEDICO_PENDENTE", ...state.confirmationRequired.map((e) => e.kind),
+        diagnostics: ["VINCULO_MEDICO_PENDENTE", ...rads.diagnostics, ...state.confirmationRequired.map((e) => e.kind),
           ...alerts.filter((a) => a.decisao !== "PASSA").map((a) => `${a.gate}_${a.decisao}`)],
         revision: 0, criadoEm: deps.agora(),
       });
@@ -1226,20 +1233,21 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
         if (!consulta || consulta.patientId !== draft.patientId || !link
           || link.patientId !== consulta.patientId || link.encounterId !== consulta.encounterId
           || (link.tumorLotId ?? null) !== (consulta.tumorLotId ?? null)
-          || !segment || typeof segment.rawTranscript !== "string" || !input)
+          || !segment || typeof segment.rawTranscript !== "string" || !input || typeof input.sourceId !== "string")
           return reply(409, "SEGMENTO_VINCULADO_NAO_CONSTA");
         const scopedFacts = facts.filter((fact) => fact && typeof fact === "object"
           && (fact as Record<string, unknown>).segmentId === link.segmentId);
         const scopedExceptions = (value: unknown) => Array.isArray(value) ? value.filter((item) => item
           && typeof item === "object" && (item as Record<string, unknown>).segmentId === link.segmentId) : [];
-        const visibleDraft = { ...draft, payload: {
+        const rads = avaliarRadsRascunho(input.sourceType, segment.rawTranscript, input.sourceId, deps.corpus?.rads);
+        const visibleDraft = { ...draft,
+          diagnostics: [...draft.diagnostics.filter(c => c !== "RADS_NAO_AVALIADO"), ...rads.diagnostics], payload: {
           kind: "EXTRACAO_RASCUNHO", input: { recordingId: input.recordingId, sourceId: input.sourceId,
             sourceType: input.sourceType, ...(input.page === undefined ? {} : { page: input.page }),
             rawTranscript: segment.rawTranscript },
           state: { segments: [segment], facts: scopedFacts,
             confirmationRequired: scopedExceptions(state?.confirmationRequired) },
-          alertasRads: input.sourceType === "imaging_report" && deps.corpus?.rads
-            ? detectarEmergencias(segment.rawTranscript, deps.corpus.rads).alertas.map(a => ({ ...a, sourceId: input.sourceId })) : [], patientLinkReview: link,
+          alertasRads: rads.alertasRads, patientLinkReview: link,
         } };
         return reply(200, "RASCUNHO_CARREGADO", { draft: visibleDraft });
       }

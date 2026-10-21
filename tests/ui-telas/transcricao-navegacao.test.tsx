@@ -6,6 +6,8 @@ import { TranscricaoLocal } from "../../src/ui/consulta/TranscricaoLocal.js";
 import { criarPortaFalsa } from "../../src/ui/api/fake.js";
 import type { OpcoesHttp } from "../../src/ui/api/http.js";
 import type { PedidoBundle, ResultadoTranscricaoLocal } from "../../src/ui/api/porta.js";
+import type { ConfirmarApacRascunhoPedido, PrepararApacRascunhoPedido } from "../../src/contracts/api/apacRascunho.js";
+import { ApacRascunhoPreparadoSchema, BaseApacRascunhoRespostaSchema } from "../../src/contracts/api/apacRascunho.js";
 
 const ditadoMock = vi.hoisted(() => ({ emitirTrecho: null as ((trecho: string) => void) | null }));
 vi.mock("../../src/ui/consulta/DitadoDeepgram.js", () => ({
@@ -26,6 +28,30 @@ function fixture() {
     linkedPatientId: null, requiresMedicalReview: true } as ResultadoTranscricaoLocal));
   porta.oncoassistStatus = vi.fn(async () => ({ status: "PENDENTE" as const, motivo: "CHAVE_AUSENTE" }));
   porta.oncoassistFontes = vi.fn(async () => ({ fontes: [] }));
+  porta.lerBaseApacRascunho = vi.fn(async (contexto) => BaseApacRascunhoRespostaSchema.parse({
+    contexto, revisao: "a".repeat(64),
+    prescricao: { documentId: "documento-eRx-sintetico", documentVersion: 1,
+      protocoloId: "Esquema sintetico A", dataPrevista: "2026-10-20" },
+    sugestao: { competencia: "2026-10", campos: { procedimentoPrincipal: null, pacienteCns: null,
+      nomeMae: null, nomeEstabelecimento: null, cnesSolicitante: null, solicitanteNome: null,
+      solicitanteCns: null, justificativa: null, descricaoDiagnostico: null, quantidadePrincipal: null,
+      pacienteNascimento: null, pacienteSexo: null } },
+    camposClinicos: [], existentes: [], pendencias: [],
+  }));
+  porta.prepararApacRascunho = vi.fn(async (pedido: PrepararApacRascunhoPedido) => ApacRascunhoPreparadoSchema.parse({
+    contexto: pedido.contexto, draftId: "apac-preparada-sintetica", revision: 0,
+    conteudoHash: "b".repeat(64), baseHash: pedido.expectedBaseHash,
+    apac: { apacId: "apac-sintetica", tumorLotId: pedido.contexto.tumorLotId,
+      prescricaoAssinadaRef: { documentId: "documento-eRx-sintetico", documentVersion: 1 },
+      dataGeracaoApp: "2026-10-20", competencia: pedido.edicao.competencia,
+      campos: { cidPrincipal: "C50", finalidade: "PALIATIVA", qtEsquema: "Esquema sintetico A", ...pedido.edicao.campos },
+      estado: "RASCUNHO", resultadoExterno: null, versao: 1, substituiApacId: null },
+    texto: "APAC RASCUNHO sintetica.", pendencias: [], avisos: [], permiteExportar: false,
+  }));
+  porta.confirmarApacRascunho = vi.fn(async (_pedido: ConfirmarApacRascunhoPedido) => ({
+    codigo: "GRAVADA" as const, apacId: "apac-sintetica", versao: 1,
+    eventId: "evento-apac-sintetico", estado: "RASCUNHO" as const, permiteExportar: false as const,
+  }));
   let opcoes!: OpcoesHttp;
   const fabrica = vi.fn((o: OpcoesHttp) => { opcoes = o; return porta; });
   return { porta, fabrica, expirar: () => opcoes.onSessaoExpirada() };
@@ -42,6 +68,11 @@ async function abrirPaciente(encounterId = "en-multi") {
   await waitFor(() => {
     if ((screen.getByLabelText("Paciente da agenda") as HTMLSelectElement).disabled) throw new Error("agenda ainda ocupada");
   });
+}
+
+async function abrirPainelApac() {
+  fireEvent.click(await screen.findByRole("button", { name: /Preparar APAC da prescr/ }));
+  await screen.findByLabelText("Procedimento principal");
 }
 
 async function escrever(texto = "Texto sintético não salvo.") {
@@ -330,5 +361,63 @@ describe("navegação com transcrição não salva", () => {
     }));
     expect(screen.queryByLabelText("Texto da transcrição")).toBeNull();
     expect(saidaDocumentoBloqueada()).toBe(false);
+  });
+});
+
+describe("APAC navigation guard", () => {
+  it("keeps edited APAC on continue and discards only after explicit choice", async () => {
+    const f = fixture();
+    render(<OncoassistLocal fabricaPorta={f.fabrica} />);
+    entrar(); await abrirPaciente(); await abrirPainelApac();
+    const campo = screen.getByLabelText("Procedimento principal") as HTMLInputElement;
+    fireEvent.change(campo, { target: { value: "" } });
+    fireEvent.click(screen.getByRole("button", { name: "APAC" }));
+    expect(screen.queryByRole("dialog")).toBeNull();
+
+    fireEvent.click(screen.getByRole("button", { name: "Consulta" }));
+    await abrirPainelApac();
+    fireEvent.change(screen.getByLabelText("Procedimento principal"), { target: { value: "PROC-APAC-SINTETICO" } });
+    fireEvent.click(screen.getByRole("button", { name: "APAC" }));
+    expect(screen.getByRole("dialog", { name: /APAC em/ })).toBeTruthy();
+    fireEvent.click(screen.getByRole("button", { name: "Continuar editando" }));
+    expect((screen.getByLabelText("Procedimento principal") as HTMLInputElement).value).toBe("PROC-APAC-SINTETICO");
+
+    fireEvent.click(screen.getByRole("button", { name: "APAC" }));
+    expect(screen.getByRole("dialog", { name: /APAC em/ })).toBeTruthy();
+    fireEvent.click(screen.getByRole("button", { name: "Descartar e sair" }));
+    expect(screen.queryByLabelText("Procedimento principal")).toBeNull();
+    expect(screen.queryByRole("dialog")).toBeNull();
+
+    fireEvent.click(screen.getByRole("button", { name: "Consulta" }));
+    await abrirPainelApac();
+    expect((screen.getByLabelText("Procedimento principal") as HTMLInputElement).value).toBe("");
+  });
+
+  it("blocks navigation during APAC confirmation without duplicate submits", async () => {
+    const f = fixture();
+    let resolver!: (value: Awaited<ReturnType<NonNullable<typeof f.porta.confirmarApacRascunho>>>) => void;
+    const confirmar = vi.fn(() => new Promise<Awaited<ReturnType<NonNullable<typeof f.porta.confirmarApacRascunho>>>>(resolve => { resolver = resolve; }));
+    f.porta.confirmarApacRascunho = confirmar;
+    render(<OncoassistLocal fabricaPorta={f.fabrica} />);
+    entrar(); await abrirPaciente(); await abrirPainelApac();
+    fireEvent.change(screen.getByLabelText("Procedimento principal"), { target: { value: "PROC-APAC-SINTETICO" } });
+    fireEvent.click(screen.getByRole("button", { name: /Preparar.*exata da APAC/ }));
+    await screen.findByRole("region", { name: /exata da APAC/ });
+    fireEvent.click(screen.getByRole("button", { name: "Salvar APAC em rascunho" }));
+    await waitFor(() => expect(confirmar).toHaveBeenCalledOnce());
+
+    fireEvent.click(screen.getByRole("button", { name: "APAC" }));
+    expect(screen.queryByRole("dialog")).toBeNull();
+    expect(screen.getAllByRole("status").some(status => /APAC.*processad/.test(status.textContent ?? ""))).toBe(true);
+    fireEvent.click(screen.getByRole("button", { name: "Salvar APAC em rascunho" }));
+    expect(confirmar).toHaveBeenCalledOnce();
+
+    await act(async () => resolver({ codigo: "GRAVADA", apacId: "apac-sintetica", versao: 1,
+      eventId: "evento-apac-sintetico", estado: "RASCUNHO", permiteExportar: false }));
+    expect(screen.getByText(/APAC salva como RASCUNHO/)).toBeTruthy();
+    fireEvent.click(screen.getByRole("button", { name: "APAC" }));
+    expect(screen.queryByRole("dialog")).toBeNull();
+    expect(confirmar).toHaveBeenCalledOnce();
+    expect(screen.queryByLabelText("Procedimento principal")).toBeNull();
   });
 });

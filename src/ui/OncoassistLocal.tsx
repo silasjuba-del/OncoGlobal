@@ -49,10 +49,12 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp }: {
   const [transcricaoSalvando,setTranscricaoSalvando]=useState(false);
   const [prescricaoPendente,setPrescricaoPendente]=useState(false);
   const [prescricaoSalvando,setPrescricaoSalvando]=useState(false);
+  const [apacPendente,setApacPendente]=useState(false);
+  const [apacSalvando,setApacSalvando]=useState(false);
   const [estudoPendente,setEstudoPendente]=useState(false);
   const [estudoSalvando,setEstudoSalvando]=useState(false);
-  const edicaoPendente = transcricaoPendente || prescricaoPendente || estudoPendente;
-  const salvamentoEmCurso = transcricaoSalvando || prescricaoSalvando || estudoSalvando;
+  const edicaoPendente = transcricaoPendente || prescricaoPendente || apacPendente || estudoPendente;
+  const salvamentoEmCurso = transcricaoSalvando || prescricaoSalvando || apacSalvando || estudoSalvando;
   const removerProtecaoDocumento=useRef<(() => void) | null>(null);
   useEffect(() => {
     if (!edicaoPendente && !salvamentoEmCurso) return;
@@ -114,7 +116,8 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp }: {
     setSenha(""); setAutenticado(false); setAgenda([]); setSelecionado(""); setTela("consulta");
     setContexto(null); setLotes([]); setOcupado(false); setVersaoConsulta(0); setTranscricaoPendente(false);
     setTranscricaoSalvando(false); setMensagemSalvamento("");
-    setPrescricaoPendente(false); setPrescricaoSalvando(false); setEstatistica(null); setPeriodoEstatistica(null);
+    setPrescricaoPendente(false); setPrescricaoSalvando(false); setApacPendente(false); setApacSalvando(false);
+    setEstatistica(null); setPeriodoEstatistica(null);
     setEstudoPendente(false); setEstudoSalvando(false);
     setNavegacaoPendente(null); restaurarFoco.current=false; setSessao((s) => s + 1);
   }, []);
@@ -136,6 +139,7 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp }: {
   function solicitarNavegacaoVoluntaria(navegar: () => void) {
     if (salvamentoEmCurso) {
       setMensagemSalvamento(estudoSalvando ? "O estudo está sendo salvo. Aguarde a conclusão antes de sair."
+        : apacSalvando ? "A APAC está sendo processada. Aguarde a conclusão antes de sair."
         : prescricaoSalvando ? "A prescrição está sendo processada. Aguarde a conclusão antes de sair."
         : "A transcrição está sendo salva. Aguarde a conclusão antes de sair.");
       return;
@@ -167,7 +171,7 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp }: {
     // O descarte já foi confirmado no diálogo da aplicação. Uma saída de
     // documento síncrona (location.assign) não deve pedir confirmação de novo.
     removerProtecaoDocumento.current?.();
-    setPrescricaoPendente(false); setTranscricaoPendente(false);
+    setPrescricaoPendente(false); setApacPendente(false); setTranscricaoPendente(false);
     setEstudoPendente(false);
     restaurarFoco.current=false;
     setNavegacaoPendente(null);
@@ -282,6 +286,7 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp }: {
     {mensagem ? <p role="status">{mensagem}</p> : null}
     {transcricaoSalvando ? <p role="status">Salvando transcrição. Aguarde a conclusão para navegar.</p> : null}
     {prescricaoSalvando ? <p role="status">Processando prescrição. Aguarde a conclusão para navegar.</p> : null}
+    {apacSalvando ? <p role="status">A APAC está sendo processada. Aguarde a conclusão para navegar.</p> : null}
     {estudoSalvando ? <p role="status">Salvando estudo. Aguarde a conclusão para navegar.</p> : null}
     {mensagemSalvamento ? <p role="status">{mensagemSalvamento}</p> : null}
     {!autenticado ? <form onSubmit={(event) => void entrar(event)}>
@@ -334,6 +339,7 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp }: {
         <details><summary>Cliques por etapa nesta consulta</summary><ul>{Object.entries(metricas).map(([etapa,cliques])=><li key={etapa}>{etapa}: {cliques}</li>)}</ul></details>
         <ConsultaPersistida versaoClinica={versaoConsulta} porta={porta} contexto={contexto}
           aoAlterarPrescricaoPendente={setPrescricaoPendente} aoAlterarPrescricaoSalvando={setPrescricaoSalvando}
+          aoAlterarApacPendente={setApacPendente} aoAlterarApacSalvando={setApacSalvando}
           aoAtualizarClinico={() => setVersaoConsulta(v => v + 1)}
           aoAbrirApac={() => navegarParaTela("apac")} />
         <div id="consulta-fase2" className="consulta-secao" tabIndex={-1}>
@@ -400,11 +406,12 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp }: {
             }
           }} style={{ width: "min(32rem, 100%)", boxSizing: "border-box", padding: "1.25rem", borderRadius: ".75rem",
             background: "var(--consulta-surface, #fff)", color: "var(--consulta-text, #172033)", boxShadow: "0 20px 60px rgba(0,0,0,.28)" }}>
-          <h2 id="transcricao-navegacao-titulo">{estudoPendente ? "Estudo em edição"
+          <h2 id="transcricao-navegacao-titulo">{apacPendente ? "APAC em edição" : estudoPendente ? "Estudo em edição"
             : prescricaoPendente ? "Prescrição em edição" : "Transcrição não salva"}</h2>
           {transcricaoPendente ? <><p>Há texto de transcrição nesta consulta que ainda não foi salvo.</p>
             <p>Para salvar, continue editando e use “Salvar transcrição para revisão clínica”.</p></> : null}
           {prescricaoPendente ? <p>A prescrição ainda não foi assinada. Continue editando para revisar e concluir.</p> : null}
+          {apacPendente ? <p>A APAC tem alterações administrativas não salvas. Continue editando para preparar e salvar como rascunho.</p> : null}
           {estudoPendente ? <p>Há alterações no protocolo do estudo que ainda não foram salvas. Continue editando para concluir.</p> : null}
           <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "flex-end", gap: ".75rem" }}>
             <button type="button" onClick={continuarEditando}>Continuar editando</button>

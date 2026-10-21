@@ -76,6 +76,18 @@
     "apac"
   ],
   [
+    "/consulta/apac-rascunho/base",
+    "baseApacRascunho"
+  ],
+  [
+    "/consulta/apac-rascunho/confirmar",
+    "confirmarApacRascunho"
+  ],
+  [
+    "/consulta/apac-rascunho/preparar",
+    "prepararApacRascunho"
+  ],
+  [
     "/consulta/bundle",
     "bundle"
   ],

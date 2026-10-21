@@ -1,0 +1,9 @@
+# Revalidação do arquivo de teste do scanner legado
+
+A PR39 falhou no detector legado W11 porque ele consultava o manifesto de revisão apenas para e-mails. O CNS fictício da prova AG-10 já tinha uma disposição própria no manifesto canônico, vinculada ao arquivo, hash, linha e ordinal; essa revisão não era considerada pelo detector legado.
+
+O commit bfb36d4 generaliza a correspondência de ocorrência revisada para os quatro tipos já detectados. Mantém as expressões de detecção e a lista histórica de valores sintéticos. Exige hash correspondente, ocorrência reconhecida por ambos os detectores, tipo/linha/ordinal/caminho e evidência válidos. Divergência ou ambiguidade continua bloqueada. Os testes confrontam hash alterado, outra linha/tipo/ordinal/caminho, evidência ausente, estado pendente, contato público e empréstimo da revisão de uma ocorrência vizinha.
+
+Antes de alterar o manifesto, o integrador comparou independentemente o arquivo anterior em 283400d com bfb36d4, usando o detector canônico. As quarenta ocorrências permaneceram em igual ordem, tipo e ordinal, com cada linha literal idêntica. Sete ocorrências apenas mudaram de posição por causa do helper ampliado. O hash anterior do manifesto correspondia exatamente ao antecessor revisado; o novo hash foi calculado sobre o sucessor no mesmo modo utf8-lf. O mapa independente coincidiu com a prova entregue pela retaguarda.
+
+Somente o hash desse arquivo e as sete posições deslocadas foram atualizados. Nenhuma nova disposição, mudança de status, valor permitido, regex, arquivo protegido ou revisão de outro arquivo foi adicionada. A fixture AG-10 e sua disposição permaneceram intactas. Esta é uma revalidação técnica de ocorrências previamente revisadas, não uma dispensa global de identificadores nem aprovação de dados clínicos reais.

@@ -11,6 +11,7 @@ export const RASCUNHOS = Object.freeze({
   JEV_CLASSIFICACAO_RASCUNHO: "INERTE", JEV_DIVERGENCIA_RASCUNHO: "INERTE",
   ACAO_COMPOSTA_RASCUNHO: "INERTE", FICHA_PRESCRICAO_INSTANCIADA: "INERTE",
   FICHA_PROTOCOLO_REVISOES: "INERTE",
+  APAC_PREPARACAO_RASCUNHO: "INERTE", APAC_CONFIRMACAO_CANONICA: "DEDICADO",
 } as const);
 function kind(payload: unknown): keyof typeof RASCUNHOS | null {
   if (!payload || typeof payload !== "object" || !("kind" in payload)

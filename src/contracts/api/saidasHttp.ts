@@ -2,6 +2,7 @@ import { PropostasDoseReceitaResposta } from './propostaDoseReceita.js';
 import { CatalogoFichasRespostaSchema, FichaProtocoloCatalogoSchema, InstanciacaoFichaRespostaSchema } from "./fichasPrescricao.js";
 import { ListarEstudosRespostaSchema, EstudoServicoSchema, AvaliacaoEstudoRespostaSchema, SchemaFatosTrialsResposta } from "./trialsServico.js";
 import { BasePrescricaoExecutavelResposta, PrescricaoExecutavelPreparada, PrescricaoExecutavelConfirmada } from "./operacaoPrescricaoExecutavel.js";
+import { BaseApacRascunhoRespostaSchema, ApacRascunhoPreparadoSchema, ApacRascunhoConfirmadoSchema } from "./apacRascunho.js";
 import { AcaoCompostaPreparada, BaseAcaoCompostaResposta } from "./execucaoAcaoComposta.js";
 import { TimelineMulticamadasResposta } from "./timelineMulticamadas.js";
 import {RespostaCanalPreparada,RespostaCanalConfirmada} from './respostaCanal.js';
@@ -46,6 +47,9 @@ export const SaidasHttp: Readonly<Record<string, z.ZodType>> = {
   basePrescricaoExecutavel: BasePrescricaoExecutavelResposta,
   prepararPrescricaoExecutavel: PrescricaoExecutavelPreparada,
   confirmarPrescricaoExecutavel: PrescricaoExecutavelConfirmada,
+  baseApacRascunho: BaseApacRascunhoRespostaSchema,
+  prepararApacRascunho: ApacRascunhoPreparadoSchema,
+  confirmarApacRascunho: ApacRascunhoConfirmadoSchema,
   baseAcaoComposta: BaseAcaoCompostaResposta,
   prepararAcaoComposta: AcaoCompostaPreparada,
   timelineMulticamadas: TimelineMulticamadasResposta,
