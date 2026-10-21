@@ -190,7 +190,7 @@ export function lerConsulta(db: DatabaseSync, patientId: string, agora: string, 
   if (!current) return { codigo: "CONSULTA_NAO_ENCONTRADA" as const };
   const civil = dataCivilDoServico(agora, config.offsetServico ?? FUSO_SERVICO);
   if (civil.estado !== "OK") return { codigo: civil.codigo };
-  const lotes = porTipo(all, "TumorLot", TumorLot)
+  const lotes = porTipo(all, "TumorLot", TumorLot, ["TumorLot@1"])
     .filter((x) => x.value.patientId === patientId && x.event.patientId === patientId).map((x) => x.value);
   if (tumorLotId !== undefined && tumorLotId !== null && !lotes.some((lote) => lote.tumorLotId === tumorLotId))
     return { codigo: "TUMOR_LOT_FORA_DO_PACIENTE" as const };
@@ -487,7 +487,7 @@ export function lerConsulta(db: DatabaseSync, patientId: string, agora: string, 
   };
 }
 export function lerLotes(db: DatabaseSync, patientId: string) {
-  return porTipo(eventos(db), "TumorLot", TumorLot)
+  return porTipo(eventos(db), "TumorLot", TumorLot, ["TumorLot@1"])
     .filter((x) => x.event.patientId === patientId && x.value.patientId === patientId).map((x) => x.value);
 }
 export function lerAgenda(db: DatabaseSync, agora: string, offsetServico = FUSO_SERVICO, salaoRuleset?: unknown) {
