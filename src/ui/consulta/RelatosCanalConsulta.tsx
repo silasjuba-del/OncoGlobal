@@ -8,6 +8,7 @@ import "./relatos-canal.css";
 type Props = {
   contexto: ContextoAcaoComposta;
   mensagens: readonly MensagemCanalVisao[];
+  pendenciasSemAtribuicao?: number;
   aoAbrirCanal?: () => void;
 };
 const recibos: Record<NonNullable<MensagemCanalVisao["reciboTecnico"]>, string> = {
@@ -96,13 +97,11 @@ export function RelatosCanalConsulta(props: Props) {
   return <RelatosNoContexto key={chaveContexto(props.contexto)} {...props} />;
 }
 
-function RelatosNoContexto({ contexto, mensagens, aoAbrirCanal }: Props) {
+function RelatosNoContexto({ contexto, mensagens, pendenciasSemAtribuicao = 0, aoAbrirCanal }: Props) {
   const [aberto, setAberto] = useState(true);
   const listaId = useId();
   const vinculadas = ordenarPorHorarioCanal(mensagens.filter(mensagem =>
     mensagem.patientId === contexto.patientId && mensagem.estadoVinculo === "VINCULADO"));
-  const vinculosPendentes = mensagens.filter(mensagem =>
-    mensagem.patientId === contexto.patientId && mensagem.estadoVinculo !== "VINCULADO").length;
 
   function alternarExpansao() {
     setAberto(anterior => !anterior);
@@ -118,10 +117,10 @@ function RelatosNoContexto({ contexto, mensagens, aoAbrirCanal }: Props) {
       <span className="relatos-canal__contagem">{vinculadas.length} {vinculadas.length === 1 ? "relato vinculado" : "relatos vinculados"}</span>
     </header>
 
-    {vinculosPendentes > 0 ? <p className="relatos-canal__aviso" role="status">
-      {vinculosPendentes === 1
-        ? "Há um relato deste paciente com vínculo ausente, conflitante ou revogado; o conteúdo foi omitido."
-        : `Há ${vinculosPendentes} relatos deste paciente com vínculo ausente, conflitante ou revogado; o conteúdo foi omitido.`}
+    {pendenciasSemAtribuicao > 0 ? <p className="relatos-canal__aviso" role="status">
+      {pendenciasSemAtribuicao === 1
+        ? "Há 1 relato na caixa do canal com vínculo não validado; não atribuído a este paciente. Conteúdo omitido nesta consulta."
+        : `Há ${pendenciasSemAtribuicao} relatos na caixa do canal com vínculo não validado; não atribuídos a este paciente. Conteúdo omitido nesta consulta.`}
     </p> : null}
 
     <div className="relatos-canal__acoes">

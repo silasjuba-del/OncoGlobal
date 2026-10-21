@@ -528,7 +528,8 @@ export function lerCanal(db: DatabaseSync) {
     const candidatos = revogado ? [] : hasConflict
       ? [...new Set([...allTargets, ...(value.patientId ? [value.patientId] : []), event.patientId])]
       : allTargets.length ? allTargets
-      : [...new Set(all.filter((candidate) => candidate.tipo === "Paciente").map((candidate) => candidate.patientId))];
+      : [...new Set(all.filter((candidate) => candidate.tipo === "Paciente" || candidate.tipo === "Paciente@1")
+        .map((candidate) => candidate.patientId))];
     return [{ mensagemId: value.mensagemId, texto: value.texto, em: value.em, redFlag: value.redFlag,
       contatoId: value.contatoId, patientId, nomePaciente: patient?.nome ?? null,
       estadoVinculo: revogado ? "REVOGADO" as const : hasConflict ? "CONFLITO" as const
