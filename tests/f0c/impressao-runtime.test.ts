@@ -99,6 +99,10 @@ it('conjunto não imprime cópia de pedido individual supersedido depois da assi
   expect(confirmar(f.a.db,{operationId:'cancelamento-operacao',...contexto,reviewDecisionId:'revisao-cancelamento',sessao:f.a.sessoes.obter(f.a.token)!,em:AGORA,
     registros:[{draftId:'cancelamento-sintetico',expectedRevision:0,eventId:'cancelamento-evento',tipo:'DOCUMENTO',payload:{cancelado:true},
       fontes:[],revisao:'CONFIRMADO',supersedesEventId:laboratorio.eventId}]}).estado).toBe('GRAVADA');
+  const documentoLaboratorio=(laboratorio.payload as {data?:{data?:{documentId?:string;documentVersion?:number}}}).data?.data;
+  expect(documentoLaboratorio?.documentId).toBeTypeOf('string');
+  expect(documentoLaboratorio?.documentVersion).toBeTypeOf('number');
+  expect(await f.resolver.resolver({id:documentoLaboratorio!.documentId!,version:documentoLaboratorio!.documentVersion!})).toBeNull();
   expect(await f.resolver.resolver({id:f.target.id,version:1})).toBeNull();
   expect(await f.executor.executar(f.intent)).toMatchObject({ok:false,erro:'DOCUMENTO_NAO_RESOLVIDO'});
 });
