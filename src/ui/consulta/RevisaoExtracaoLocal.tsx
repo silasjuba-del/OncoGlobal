@@ -216,6 +216,7 @@ export function RevisaoExtracaoLocal({ porta, contexto, patientLabel, aoFatosCon
         || !fonte.payload.input.rawTranscript.trim() || !fonte.payload.patientLinkReview.segmentId}
         onChange={(e) => { setPreparada(null); setIncluirTextoOriginal(e.target.checked); }} />
         Incluir texto original deste trecho na evolução</label>
+      {fonte.payload.alertasRads === null ? <p role="alert">Avaliação de alertas de imagem indisponível. Revisão médica pendente.</p> : null}
       {fonte.payload.alertasRads?.length ? <section aria-label="Alertas RADS para revisão">
         <h3>Alertas de imagem — confirmação médica pendente</h3>
         {fonte.payload.alertasRads.map((a, i) => <p key={i}>{a.nome}: {a.trecho} — fonte {a.sourceId}</p>)}
