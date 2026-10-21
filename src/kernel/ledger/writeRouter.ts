@@ -1,6 +1,6 @@
 import { fonteRascunhoNaoPromovivel, rascunhoNaoPromovivel } from "../../contracts/rascunhos.js";
 import type { DatabaseSync } from "node:sqlite";
-import { type Sessao } from "../../contracts/base.js";
+import { Sessao } from "../../contracts/base.js";
 import { Apac, ClinicalEvent, type ClinicalEvent as Evento } from "../../contracts/operacao.js";
 import { lerDraft, salvarDraft } from "./drafts.js";
 import { auditar, gravarOperacao, hashPayload, resultadoExistente, type Gravacao } from "./ledger.js";
@@ -34,6 +34,18 @@ export interface Confirmacao {
   em: string;
 }
 
+/**
+ * Invariantes comuns a TODA escrita em clinical_event: sessão médica íntegra e vigente.
+ * Rotas HTTP, canal, APAC e o writer do gateway passam por aqui; camadas acima podem
+ * somar exigências (proveniência, exibição, G-07/08/09), nunca dispensá-las.
+ */
+export function motivoInvarianteEscrita(req: Pick<Confirmacao, "sessao" | "em">): string | null {
+  const sessao = Sessao.safeParse(req.sessao);
+  if (!sessao.success) return "IDENTIDADE_MEDICA_INVALIDA";
+  if (!(Date.parse(sessao.data.expiraEm) > Date.parse(req.em))) return "SESSAO_EXPIRADA";
+  return null;
+}
+
 export function confirmar(db: DatabaseSync, req: Confirmacao): Gravacao {
   if (!req.reviewDecisionId || !req.sessao.medicoId || !req.registros.length)
     throw new Error("REVIEW_DECISION_REQUIRED");
@@ -63,6 +75,13 @@ export function confirmar(db: DatabaseSync, req: Confirmacao): Gravacao {
     resultRef: eventos[0]?.eventId ?? null, criadoEm: req.em };
   const replay = resultadoExistente(db, op);
   if (replay) return replay;
+  // Replay acima devolve o recibo já gravado; escrita nova exige as invariantes comuns.
+  const invalido = motivoInvarianteEscrita(req);
+  if (invalido) {
+    auditar(db, { ator: { tipo: "SESSAO", id: req.sessao.medicoId }, acaoPedida: "CONFIRMAR", decisao: "NEGADA",
+      motivoCodigo: invalido, politicaVersao: "W2-01", em: req.em });
+    return { estado: "NEGADA", resultRef: null, motivo: invalido };
+  }
   try {
     return transacao(db, () => {
       if (promoveJev()) return { estado: "NEGADA", resultRef: null, motivo: "PROPOSTA_DOCUMENTAL_NAO_PROMOVIVEL" };
