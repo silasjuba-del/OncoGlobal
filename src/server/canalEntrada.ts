@@ -1045,6 +1045,22 @@ export function listarJanelasIndisponibilidadeCanal(db: DatabaseSync, accountId?
   }));
 }
 
+type LinhaPaginada = Linha & { cursorRowid: number };
+
+function paginaCaixaCanal(db: DatabaseSync, antes?: { ingestedAt: string; rowid: number }): LinhaPaginada[] {
+  const colunas = `rowid AS cursorRowid, mensagemId, accountId, providerMessageId, canal, senderRef,
+    providerSentAt, ingestedAt, payloadSha256, conteudo, vinculoClasse, vinculoPatientId,
+    vinculoMotivo, provaMetodo`;
+  return antes
+    ? db.prepare(`SELECT ${colunas} FROM canal_mensagem
+        WHERE ingestedAt < ? OR (ingestedAt = ? AND rowid < ?)
+        ORDER BY ingestedAt DESC, rowid DESC LIMIT ?`)
+      .all(antes.ingestedAt, antes.ingestedAt, antes.rowid, LIMITE_CAIXA) as LinhaPaginada[]
+    : db.prepare(`SELECT ${colunas} FROM canal_mensagem
+        ORDER BY ingestedAt DESC, rowid DESC LIMIT ?`)
+      .all(LIMITE_CAIXA) as LinhaPaginada[];
+}
+
 export function consultarCaixaCanal(
   db: DatabaseSync,
   acesso: AcessoCanal,
@@ -1052,12 +1068,35 @@ export function consultarCaixaCanal(
   if (!sessaoValida(acesso)) return { ok: false, codigo: "SESSAO_INVALIDA" };
   try {
     garantirSchema(db);
-    const linhas = db.prepare(
-      `SELECT mensagemId, accountId, providerMessageId, canal, senderRef, providerSentAt, ingestedAt,
-        payloadSha256, conteudo, vinculoClasse, vinculoPatientId, vinculoMotivo, provaMetodo
-       FROM canal_mensagem ORDER BY ingestedAt DESC, rowid DESC LIMIT ?`,
-    ).all(LIMITE_CAIXA) as Linha[];
+    const linhas = paginaCaixaCanal(db);
     return { ok: true, mensagens: linhas.reverse().map(itemDeLinha) };
+  } catch {
+    return falhaArmazenamento();
+  }
+}
+
+/** Histórico operacional completo, paginado pelo par estável de ingestão/rowid.
+ * A caixa interativa continua limitada aos 500 itens mais recentes. */
+export function consultarHistoricoCanal(
+  db: DatabaseSync,
+  acesso: AcessoCanal,
+): { ok: false; codigo: "SESSAO_INVALIDA" } | FalhaArmazenamento | { ok: true; mensagens: ItemCaixa[] } {
+  if (!sessaoValida(acesso)) return { ok: false, codigo: "SESSAO_INVALIDA" };
+  try {
+    garantirSchema(db);
+    const mensagens: ItemCaixa[] = [];
+    let antes: { ingestedAt: string; rowid: number } | undefined;
+    while (true) {
+      if (!sessaoValida(acesso)) return { ok: false, codigo: "SESSAO_INVALIDA" };
+      const linhas = paginaCaixaCanal(db, antes);
+      if (!linhas.length) break;
+      mensagens.push(...linhas.map(itemDeLinha));
+      const ultima = linhas[linhas.length - 1]!;
+      if (!Number.isSafeInteger(ultima.cursorRowid)) throw new Error("CURSOR_CAIXA_INVALIDO");
+      antes = { ingestedAt: ultima.ingestedAt, rowid: ultima.cursorRowid };
+      if (linhas.length < LIMITE_CAIXA) break;
+    }
+    return { ok: true, mensagens: mensagens.reverse() };
   } catch {
     return falhaArmazenamento();
   }

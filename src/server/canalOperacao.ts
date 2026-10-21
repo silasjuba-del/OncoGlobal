@@ -9,7 +9,7 @@ import {projetarVinculosContato} from '../kernel/projections/vinculosContato.js'
 import {Contato,Paciente} from '../contracts/clinico.js';
 import {hashConteudoExibido} from './sessao.js';
 import type {ContaWebhookConfigurada} from './canalEntrada.js';
-import {consultarCaixaCanal,type AcessoCanal} from './canalEntrada.js';
+import {consultarCaixaCanal,consultarHistoricoCanal,type AcessoCanal} from './canalEntrada.js';
 import {lerEventosComIntegridade} from './leituras.js';
 import type {ClinicalEvent} from '../contracts/operacao.js';
 import type {MensagemCanalVisao} from '../contracts/api/porta.js';
@@ -68,8 +68,11 @@ export function revisaoContextoCanal(db:DatabaseSync,c:{patientId:string;encount
  if(!contextosCanal(db,c.patientId).some(e=>e.encounterId===c.encounterId&&e.tumorLotId===c.tumorLotId))return null;
  return hashConteudoExibido(eventos);
 }
-export function lerMensagensOperacionaisCanal(db:DatabaseSync,acesso:AcessoCanal,snapshot?:readonly ClinicalEvent[]):MensagemCanalVisao[]{
- const caixa=consultarCaixaCanal(db,acesso);if(!caixa.ok)throw new Error(caixa.codigo);
+export function lerMensagensOperacionaisCanal(db:DatabaseSync,acesso:AcessoCanal,snapshot?:readonly ClinicalEvent[],
+  historicoCompleto=false):MensagemCanalVisao[]{
+ if(historicoCompleto&&snapshot)throw new Error('SNAPSHOT_PARCIAL_NAO_PERMITIDO');
+ const caixa=historicoCompleto?consultarHistoricoCanal(db,acesso):consultarCaixaCanal(db,acesso);
+ if(!caixa.ok)throw new Error(caixa.codigo);
  if(!caixa.mensagens.length)return [];
  const eventos=snapshot??lerEventosComIntegridade(db).itens;
  const cadastros=cadastrosCanal(db,eventos);
