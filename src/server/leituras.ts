@@ -14,7 +14,7 @@ import { Paciente, TumorLot, Triagem, TreatmentEpisode, Ciclo } from "../contrac
 import { Conversation } from "../contracts/agentes.js";
 import { Contato } from "../contracts/clinico.js";
 import { dadosDoEvento, escopoDoEvento, eventosVigentes, projetarSnapshot } from "../kernel/projections/snapshot.js";
-import { lerApacsVigentes } from "./apacsVigentes.js";
+import { lerApacsVigentes, type FalhaFonteApac } from "./apacsVigentes.js";
 import { dataCivilDoServico } from "../kernel/gateway/tempo.js";
 import { apacPrazo, apacRetrograda, type CodigoNegativa } from "../rules/apac.js";
 import { listarDrafts } from "../kernel/comandos/portas.js";
@@ -555,8 +555,9 @@ export function lerApacs(db: DatabaseSync, agora: string, config: {
   const catalogoApac = validarCatalogoApac(config.caixas);
   const civil = dataCivilDoServico(agora, config.offsetServico ?? FUSO_SERVICO);
   if (civil.estado !== "OK") return { hoje: null, itens: [], estado: "PENDENTE", codigo: civil.codigo };
-  const apacs = lerApacsVigentes(db, agora, all);
-  const lots = porTipo(all, "TumorLot", TumorLot, ["TumorLot@1"]), patients = porTipo(all, "Paciente", Paciente);
+  const falhasApac: FalhaFonteApac[] = [];
+  const apacs = lerApacsVigentes(db, agora, all, f=>falhasApac.push(f));
+  const lots = porTipo(all, "TumorLot", TumorLot, ["TumorLot@1"]), patients = porTipo(all, "Paciente", Paciente, ["Paciente@1"]);
   return { hoje: civil.dataCivil, itens: apacs.flatMap((apac) => {
     const event = eventosPorId.get(apac.eventId);
     const lote = lots.find((x) => x.value.tumorLotId === apac.tumorLotId
@@ -575,7 +576,8 @@ export function lerApacs(db: DatabaseSync, agora: string, config: {
       return other.competencia === apac.competencia && other.tumorLotId === apac.tumorLotId
         && otherEvent?.patientId === event.patientId && otherEvent.tumorLotId === event.tumorLotId;
     });
-    const resultadoAntiglosa = catalogoApac.estado === "DISPONIVEL"
+    const integridadePendente = falhasApac.some(f=>f.eventId===apac.eventId);
+    const resultadoAntiglosa = !integridadePendente && catalogoApac.estado === "DISPONIVEL"
       ? antiglosa(apac, { hoje: civil.dataCivil, sigtap: config.sigtap, caixas: catalogoApac.caixas,
         cnesConfigurado: config.cnesConfigurado, apacsDoLote: doLote }) : null;
     const motivoNegativa = apac.resultadoExterno?.valor === "NEGADA" ? apac.resultadoExterno.motivo : null;
@@ -607,7 +609,7 @@ export function lerApacs(db: DatabaseSync, agora: string, config: {
       motivoNegativa,
       prazo: prazo ? { ...prazo, estado: prazo.dias < 0 ? "PENDENTE" : prazo.estado } : { estado: "PENDENTE" },
       antiglosa: resultadoAntiglosa,
-      antiglosaEstado: resultadoAntiglosa ? (config.sigtap[apac.competencia] ? "AVALIADA_COM_TABELA_SIGTAP" : "AVALIADA_COM_TABELA_SIGTAP_AUSENTE") : "PENDENTE_CATALOGO_AUSENTE" }];
+      antiglosaEstado: integridadePendente ? "PENDENTE_INTEGRIDADE_APAC" : resultadoAntiglosa ? (config.sigtap[apac.competencia] ? "AVALIADA_COM_TABELA_SIGTAP" : "AVALIADA_COM_TABELA_SIGTAP_AUSENTE") : "PENDENTE_CATALOGO_AUSENTE" }];
   }), estado: apacs.length ? "PARCIAL" : "FONTE_AUSENTE" };
 }
 export function lerConversas(db: DatabaseSync) {
