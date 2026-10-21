@@ -497,3 +497,63 @@ it("o kernel só aceita a cópia canônica APAC exata, no contexto e revisão de
   expect(a.eventos().filter(e => e.tipo === "FATO" && e.operationId.startsWith("apac-canonico-adulterado-") )).toHaveLength(0);
   expect(a.eventos().filter(e => e.tipo === "APAC")).toHaveLength(1);
 });
+
+it("Task009 identidade do payload divergente nao vira dados administrativos de outro paciente",async()=>{
+ const a=await abrir();await assinarRx(a);
+ const cadastro=a.eventos().find(e=>e.tipo==="Paciente")!;
+ const payload=structuredClone(cadastro.payload) as any;payload.data.patientId="outra-pessoa-sintetica";payload.data.nome="Outra pessoa sintetica";
+ corromperFonteSintetica(a,cadastro.eventId,JSON.stringify(payload));
+ const base=await baseApac(a);expect(base.prescricao).toBeNull();
+ expect(base.camposClinicos.find((c:any)=>c.chave==="pacienteNome")?.valor).toBeNull();
+ const antes=a.eventos().length;expect((await prepararApac(a,base,edicaoApac(),"identidade-divergente")).status).toBe(409);expect(a.eventos()).toHaveLength(antes);
+});
+it("Task009 cadastro Paciente@1 valido continua fonte da APAC",async()=>{
+ const a=await abrir();await assinarRx(a);const cadastro=a.eventos().find(e=>e.tipo==="Paciente")!;
+ a.seed("Paciente@1",(cadastro.payload as any).data,{supersedesEventId:cadastro.eventId});
+ const base=await baseApac(a);expect(base.prescricao).not.toBeNull();expect((await prepararApac(a,base,edicaoApac(),"cadastro-v1")).status).toBe(200);
+});
+it("Task009 APAC@1 nao desaparece nem permite criar outro id ao revisar",async()=>{
+ const a=await abrir();await assinarRx(a);const p=await prepararApac(a,await baseApac(a));const salva=await confirmarApac(a,p.data);
+ const evento=a.eventos().find(e=>e.eventId===salva.data.eventId)!;
+ a.seed("APAC@1",(evento.payload as any).data,{supersedesEventId:evento.eventId});
+ const base=await baseApac(a);expect(base.existentes).toContainEqual(expect.objectContaining({apacId:p.data.apac.apacId,versao:1}));
+ const v2=await prepararApac(a,base,edicaoApac(),"alias-apac-v2");expect(v2.data.apac).toMatchObject({apacId:p.data.apac.apacId,versao:2});
+});
+it.each(["revisao","ator","futuro","conteudo"])("Task009 replay recusa recibo cuja autoridade foi corrompida: %s",async campo=>{
+ const a=await abrir();await assinarRx(a);const p=await prepararApac(a,await baseApac(a));const salvo=await confirmarApac(a,p.data,"recibo-integro");expect(salvo.status).toBe(200);
+ a.db.exec("DROP TRIGGER clinical_event_no_update");try{
+ if(campo==="revisao")a.db.prepare("UPDATE clinical_event SET revisao='ASSINADO' WHERE eventId=?").run(salvo.data.eventId);
+ if(campo==="ator")a.db.prepare("UPDATE clinical_event SET criadoPor=? WHERE eventId=?").run(JSON.stringify({tipo:"SISTEMA",id:a.sessoes.obter(a.token)!.medicoId}),salvo.data.eventId);
+ if(campo==="futuro")a.db.prepare("UPDATE clinical_event SET criadoEm='2027-10-20T12:00:00Z' WHERE eventId=?").run(salvo.data.eventId);
+ if(campo==="conteudo"){const evento=a.eventos().find(e=>e.eventId===salvo.data.eventId)!,p=structuredClone(evento.payload) as any;p.data.campos.pacienteNome="Nome substituido no recibo";a.db.prepare("UPDATE clinical_event SET payload=? WHERE eventId=?").run(JSON.stringify(p),salvo.data.eventId);}
+ }finally{a.db.exec("CREATE TRIGGER clinical_event_no_update BEFORE UPDATE ON clinical_event BEGIN SELECT RAISE(ABORT, 'clinical_event append-only'); END;");}
+ const antes=a.eventos().length;expect((await confirmarApac(a,p.data,"recibo-integro")).status).toBe(409);expect(a.eventos()).toHaveLength(antes);
+});
+it("Task009 negativa F4 ilegivel nao libera recriacao como rascunho",async()=>{
+ const a=await abrir();await assinarRx(a);const p=await prepararApac(a,await baseApac(a));expect((await confirmarApac(a,p.data)).status).toBe(200);
+ const negativa=registrarNegativaRetrogradaNoBancoF4(a.db,{sessoes:a.sessoes,token:a.token,agora:AGORA},{patientId:contexto.patientId,apacExistente:Apac.parse(p.data.apac),codigoNegativa:"OUTRO",motivoTexto:"Negativa sintetica",comprovanteRef:"comprovante-sintetico"});expect(negativa.ok).toBe(true);
+ a.db.exec("DROP TRIGGER f4_apac_retrograda_no_update");try{a.db.prepare("UPDATE f4_apac_retrograda SET apacNegadaJson=? WHERE apacId=?").run("{",p.data.apac.apacId);}finally{a.db.exec("CREATE TRIGGER f4_apac_retrograda_no_update BEFORE UPDATE ON f4_apac_retrograda BEGIN SELECT RAISE(ABORT, 'f4_apac_retrograda append-only'); END;");}
+ const base=await baseApac(a),antes=a.eventos().length;
+ expect(base.prescricao).toBeNull();expect((await prepararApac(a,base,edicaoApac(),"f4-corrompida")).status).toBe(409);expect(a.eventos()).toHaveLength(antes);
+ const lista=await a.request("/consulta/apac",{});expect(lista.status).toBe(200);expect(lista.data.itens.find((i:any)=>i.apac.apacId===p.data.apac.apacId)).toMatchObject({antiglosa:null,antiglosaEstado:"PENDENTE_INTEGRIDADE_APAC"});
+});
+
+it("Task009 lote do payload APAC divergente do envelope bloqueia nova versao",async()=>{
+ const a=await abrir();await assinarRx(a);const p=await prepararApac(a,await baseApac(a));const salva=await confirmarApac(a,p.data);
+ const evento=a.eventos().find(e=>e.eventId===salva.data.eventId)!,payload=structuredClone(evento.payload) as any;
+ payload.data.tumorLotId="outro-lote-sintetico";corromperFonteSintetica(a,evento.eventId,JSON.stringify(payload));
+ const base=await baseApac(a);expect(base.prescricao).toBeNull();expect((await prepararApac(a,base,edicaoApac(),"lote-divergente")).status).toBe(409);
+});
+it("Task009 copia canonica nao pode gravar payload de outro lote mesmo se ambas copias coincidirem",async()=>{
+ const a=await abrir();await assinarRx(a);const p=await prepararApac(a,await baseApac(a)),apac={...p.data.apac,tumorLotId:"outro-lote-sintetico"};
+ salvarDraft(a.db,{draftId:"canonica-cruzada",patientId:contexto.patientId,sourceId:"fixture",rawRef:"local",payload:{kind:"APAC_CONFIRMACAO_CANONICA",contexto,origem:p.data.draftId,conteudoHash:p.data.conteudoHash,apac},diagnostics:[],revision:0,criadoEm:AGORA});
+ const antes=a.eventos().length;
+ const r=confirmarNoKernel(a.db,{...contexto,operationId:"tentativa-canonica-cruzada",reviewDecisionId:"revisao",sessao:a.sessoes.obter(a.token)!,em:AGORA,registros:[{draftId:"canonica-cruzada",expectedRevision:0,eventId:"evento-cruzado",tipo:"APAC",payload:apac,fontes:[],revisao:"CONFIRMADO"}]});
+ expect(r.estado).toBe("NEGADA");expect(a.eventos()).toHaveLength(antes);
+});
+
+it("Task009 replay concluido continua historico depois de novos fatos sem duplicar",async()=>{
+ const a=await abrir();await assinarRx(a);const p=await prepararApac(a,await baseApac(a));const salva=await confirmarApac(a,p.data,"replay-historico");expect(salva.status).toBe(200);
+ a.seed("FATO",{campo:"observacao",valor:"Fato posterior sintetico"});const antes=a.eventos();
+ const replay=await confirmarApac(a,p.data,"replay-historico");expect(replay.status).toBe(200);expect(replay.data).toEqual({...salva.data,codigo:"REPLAY"});expect(a.eventos()).toEqual(antes);
+});
