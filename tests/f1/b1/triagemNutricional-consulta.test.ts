@@ -65,6 +65,15 @@ async function consultaCom(lotes: { id: string; topografia?: string; histologia?
 }
 
 describe("F1-B1 · triagem nutricional chega à consulta (D-F1-33, NRS-2002)", () => {
+  it("considera topografia confirmada do TumorLot@1 no horizonte do encontro selecionado", async () => {
+    const c = await consultaCom([]);
+    c.seed("TumorLot@1", { tumorLotId: "lote-alias", patientId: "Paciente Teste Nutri",
+      cid: ausente(), topografia: presente("Esôfago", "topo-alias"), histologia: ausente(),
+      estadiamentos: [], finalidadeApac: ausente(), marcos: [] }, "lote-alias");
+    const visao = await c.carregar("lote-alias");
+    expect(visao.status).toBe(200);
+    expect(visao.body.flash.sugestoesClinicas?.[0]).toContain("câncer de esôfago");
+  });
   it.each([null,"lote-outro"])("evidência tumoral de envelope %s não contamina o lote selecionado",async envelope=>{
     const c=await consultaCom([{id:"lote-mama",topografia:"Mama"}]);
     c.seed("TumorLot",{tumorLotId:"lote-mama",patientId:"Paciente Teste Nutri",cid:ausente(),histologia:ausente(),topografia:presente("Esôfago","outra-fonte"),estadiamentos:[],finalidadeApac:ausente(),marcos:[]},envelope);
