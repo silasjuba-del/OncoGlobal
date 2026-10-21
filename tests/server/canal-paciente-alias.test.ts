@@ -1,0 +1,93 @@
+import { createHash } from "node:crypto";
+import { afterEach, expect, it } from "vitest";
+import type { CadastroVinculo } from "../../src/modules/canal/vinculo.js";
+import { executarConfirmacao } from "../../src/kernel/comandos/index.js";
+import { salvarDraft } from "../../src/kernel/comandos/portas.js";
+import { abrirLedger } from "../../src/kernel/ledger/db.js";
+import { receberTransporteSintetico } from "../../src/server/canalEntrada.js";
+import { cadastrosCanal, lerMensagensOperacionaisCanal, revisaoContextoCanal } from "../../src/server/canalOperacao.js";
+import { criarGerenciadorSessao } from "../../src/server/sessao.js";
+
+const EM = "2026-10-20T12:00:00.000Z";
+const SENHA = "senha-canal-alias-sintetica";
+const CONTEXTO_A = { patientId: "paciente-alias-a", encounterId: "consulta-alias-a", tumorLotId: null };
+const CONTEXTO_B = { patientId: "paciente-alias-b", encounterId: "consulta-alias-b", tumorLotId: null };
+const SENDER = "5500000007711";
+const abertos: ReturnType<typeof abrirLedger>[] = [];
+
+afterEach(() => { for (const db of abertos.splice(0)) db.close(); });
+
+function abrir() {
+  const db = abrirLedger(":memory:");
+  abertos.push(db);
+  const sessoes = criarGerenciadorSessao({ medicoId: "medico-canal-alias", crm: "CRM-ALIAS-SINTETICO",
+    senha: SENHA, duracaoMs: 60_000, agora: () => EM });
+  const token = sessoes.login(SENHA)!.token;
+  let n = 0;
+  function seed(ctx: typeof CONTEXTO_A | typeof CONTEXTO_B, tipo: string, payload: unknown,
+    supersedesEventId: string | null = null) {
+    const eventId = `evento-canal-alias-${++n}`;
+    const draftId = `draft-${eventId}`;
+    salvarDraft(db, { draftId, patientId: ctx.patientId, sourceId: `fonte-${eventId}`,
+      rawRef: "referencia-sintetica", payload: { contexto: ctx }, revision: 0, diagnostics: [], criadoEm: EM });
+    const result = executarConfirmacao(db, { operationId: `op-${eventId}`, patientId: ctx.patientId,
+      encounterId: ctx.encounterId, tumorLotId: ctx.tumorLotId, reviewDecisionId: `review-${eventId}`,
+      sessao: sessoes.obter(token)!, em: EM,
+      registros: [{ draftId, expectedRevision: 0, eventId, tipo, payload, fontes: [], revisao: "CONFIRMADO",
+        supersedesEventId }] });
+    if (result.estado !== "GRAVADA") throw new Error(`SEED_NEGADO:${tipo}:${result.estado}`);
+    return eventId;
+  }
+  return { db, sessoes, token, seed };
+}
+
+const paciente = (patientId: string, nome: string) => ({ patientId, nome, identificadores: [], nascimento: null,
+  sexoCadastral: "NAO_INFORMADO", divergencia: false });
+const contato = (patientId: string | null, revogadoEm: string | null = null) => ({ contatoId: "contato-alias-sintetico",
+  canal: "WHATSAPP_SERVICO", endereco: SENDER, patientId, relacao: "PACIENTE",
+  vinculadoEm: EM, revogadoEm });
+
+it("projeta mensagem realmente vinculada para Paciente@1 e mantém precedência de conflito e revogação", () => {
+  const a = abrir();
+  const pacienteA = { patientId: CONTEXTO_A.patientId, nome: "Paciente A sintético", chaveDemografica: null,
+    identificadores: [{ tipo: "TELEFONE" as const, valor: SENDER }] } satisfies CadastroVinculo;
+  const cadastroAId = a.seed(CONTEXTO_A, "Paciente@1", paciente(CONTEXTO_A.patientId, pacienteA.nome));
+  const contatoAId = a.seed(CONTEXTO_A, "Contato", contato(CONTEXTO_A.patientId));
+
+  const ingresso = receberTransporteSintetico(a.db, { accountId: "conta-canal-alias-sintetica",
+    canal: "WHATSAPP_SERVICO", providerMessageId: "mensagem-alias-sintetica", senderRef: SENDER,
+    providerSentAt: EM, ingestedAt: EM,
+    conteudo: { tipo: "TEXT", texto: "Relato sintético: não houve febre.",
+      contentSha256: createHash("sha256").update("Relato sintético: não houve febre.").digest("hex") },
+    // O evento de ingresso registra o vínculo conhecido; a leitura abaixo precisa reconstruí-lo do ledger.
+    cadastros: [pacienteA] });
+  expect(ingresso.ok).toBe(true);
+  if (!ingresso.ok) throw new Error("INGRESSO_NEGADO");
+
+  const acesso = { sessoes: a.sessoes, token: a.token, agora: EM };
+  const leituraInicial = lerMensagensOperacionaisCanal(a.db, acesso);
+  expect(leituraInicial).toContainEqual(expect.objectContaining({ mensagemId: ingresso.reciboId,
+    patientId: CONTEXTO_A.patientId, estadoVinculo: "VINCULADO", texto: "Relato sintético: não houve febre." }));
+  expect(revisaoContextoCanal(a.db, CONTEXTO_A)).toEqual(expect.any(String));
+  expect(cadastrosCanal(a.db)).toContainEqual(expect.objectContaining({ patientId: CONTEXTO_A.patientId,
+    identificadores: [{ tipo: "TELEFONE", valor: SENDER }] }));
+
+  a.seed(CONTEXTO_B, "Paciente", paciente(CONTEXTO_B.patientId, "Paciente B sintético"));
+  a.seed(CONTEXTO_B, "ReviewDecision", { kind: "VinculoContato", contatoId: "contato-alias-sintetico",
+    sourceEventId: contatoAId, patientId: CONTEXTO_B.patientId, encounterId: CONTEXTO_B.encounterId, tumorLotId: null });
+  const aposTransferencia = lerMensagensOperacionaisCanal(a.db, acesso);
+  expect(aposTransferencia[0]).toMatchObject({ patientId: null });
+  expect(aposTransferencia[0]?.estadoVinculo).not.toBe("VINCULADO");
+
+  a.seed(CONTEXTO_A, "Contato", contato(CONTEXTO_A.patientId, EM), contatoAId);
+  const aposRevogacao = lerMensagensOperacionaisCanal(a.db, acesso);
+  expect(aposRevogacao[0]).toMatchObject({ patientId: null, estadoVinculo: "REVOGADO" });
+  expect(cadastroAId).toBeTruthy();
+});
+
+it("não aceita identidade de Paciente@1 divergente do patientId do evento", () => {
+  const a = abrir();
+  a.seed(CONTEXTO_A, "Paciente@1", paciente(CONTEXTO_B.patientId, "Nome B sintético"));
+  expect(cadastrosCanal(a.db)).toEqual([]);
+  expect(revisaoContextoCanal(a.db, CONTEXTO_A)).toBeNull();
+});
