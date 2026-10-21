@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 // Navegação exercitada pela jornada real OncoassistLocal; fontes e conteúdo são sintéticos.
-import { cleanup, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
+import { act, cleanup, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import { afterEach, expect, it, vi } from "vitest";
 import { OncoassistLocal } from "../../src/ui/OncoassistLocal.js";
 import { criarPortaFalsa } from "../../src/ui/api/fake.js";
@@ -159,4 +159,56 @@ it("navegar aos relatos enquanto a APAC está pendente preserva a edição e ped
   render(<OncoassistLocal fabricaPorta={f.fabrica} />);
   entrar(); await abrirConsulta(); await deixarApacPendente();
   await esperarGuard("APAC em edição", "Procedimento principal", "PROC-SINTETICO", f.porta);
+});
+
+
+it.each(["transcricao", "apac", "prescricao"])("Task010: salvamento de %s impede abrir caixa e falha preserva edicao", async modo => {
+  const f = fixture();
+  let rejeitar!: (erro: Error) => void;
+  const pendente = () => new Promise<never>((_resolve, reject) => { rejeitar = reject; });
+  const salvar = modo === "transcricao" ? vi.spyOn(f.porta, "importarTranscricaoLocal").mockImplementation(pendente)
+    : modo === "apac" ? vi.spyOn(f.porta, "prepararApacRascunho").mockImplementation(pendente)
+    : vi.spyOn(f.porta, "prepararPrescricaoExecutavel").mockImplementation(pendente);
+  render(<OncoassistLocal fabricaPorta={f.fabrica} />);
+  entrar(); await abrirConsulta();
+  const mudar = (label: string | RegExp, value: string) => fireEvent.change(screen.getByLabelText(label), { target: { value } });
+  if (modo === "transcricao") {
+    mudar(/Texto da transcri/, "Texto sintetico preservado");
+    fireEvent.click(screen.getByLabelText(/Revisei o texto/));
+    fireEvent.click(screen.getByRole("button", { name: /Salvar transcri/ }));
+  } else if (modo === "apac") {
+    await deixarApacPendente();
+    fireEvent.click(screen.getByRole("button", { name: /Preparar pr.*exata da APAC/ }));
+  } else {
+    await deixarPrescricaoPendente();
+    mudar("Protocolo ou esquema", "Esquema sintetico");
+    mudar(/Linha terap/, "1"); mudar(/Inten.*terap/, "PALIATIVA");
+    mudar(/N.*mero do ciclo/, "1"); mudar("Data prevista", "2026-10-20");
+    fireEvent.click(screen.getByRole("button", { name: "Adicionar item manual" }));
+    for (const [label, value] of [
+      [/Medicamento.*item 1/, "Farmaco sintetico"], [/Classe.*item 1/, "QT"],
+      [/Base da dose.*item 1/, "FIXED"], [/Dose final.*item 1/, "1,5"], [/Unidade.*item 1/, "mg"],
+      [/Via.*item 1/, "EV"], [/Diluente.*item 1/, "Diluente sintetico"], [/Volume final.*item 1/, "100"],
+      [/Tempo de infus.*item 1/, "30 min"], [/Dias de administra.*item 1/, "d1"],
+      [/Motivo do override.*item 1/, "Escolha sintetica"],
+    ] as const) mudar(label, value);
+    fireEvent.click(screen.getByRole("button", { name: /Preparar pr.*exata$/ }));
+  }
+  await waitFor(() => expect(salvar).toHaveBeenCalledOnce());
+  fireEvent.click(screen.getByRole("button", { name: "Abrir caixa do canal" }));
+  expect(screen.queryByRole("region", { name: "Caixa do canal" })).toBeNull();
+  expect(screen.queryByRole("dialog")).toBeNull();
+  expect(screen.getByText(/antes de sair/)).toBeTruthy();
+  expect(f.porta.caixaCanal).not.toHaveBeenCalled();
+  expect(f.porta.confirmarPrescricaoExecutavel).not.toHaveBeenCalled();
+  expect(f.porta.confirmarApacRascunho).not.toHaveBeenCalled();
+  expect(f.porta.confirmarRespostaCanal).not.toHaveBeenCalled();
+  await act(async () => rejeitar(new Error("falha sintetica controlada")));
+  expect(salvar).toHaveBeenCalledOnce();
+  const label = modo === "transcricao" ? /Texto da transcri/ : modo === "apac" ? "Procedimento principal" : /Motivo da prescr/;
+  expect(screen.getByLabelText(label)).toHaveProperty("value", modo === "transcricao"
+    ? "Texto sintetico preservado" : modo === "apac" ? "PROC-SINTETICO" : "Edi\u00e7\u00e3o sint\u00e9tica n\u00e3o conclu\u00edda");
+  fireEvent.click(screen.getByRole("button", { name: "Abrir caixa do canal" }));
+  expect(await screen.findByRole("dialog")).toBeTruthy();
+  expect(f.porta.caixaCanal).not.toHaveBeenCalled();
 });

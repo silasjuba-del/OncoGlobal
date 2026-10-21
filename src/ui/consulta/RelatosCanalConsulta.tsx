@@ -1,10 +1,15 @@
 import { useId, useState } from "react";
+import { Instante } from "../../contracts/base.js";
 import type { ContextoAcaoComposta } from "../../contracts/api/acoesCompostas.js";
 import type { MensagemCanalVisao } from "../api/porta.js";
 // @ts-expect-error folha CSS pura, resolvida pelo Vite
 import "./relatos-canal.css";
 
-type Expansao = { contexto: string; aberto: boolean };
+type Props = {
+  contexto: ContextoAcaoComposta;
+  mensagens: readonly MensagemCanalVisao[];
+  aoAbrirCanal?: () => void;
+};
 const recibos: Record<NonNullable<MensagemCanalVisao["reciboTecnico"]>, string> = {
   RECEBIDA: "recebida", PROCESSADA: "processada pelo canal", ENVIADA: "enviada",
   ENTREGUE: "entregue", LIDA: "lida", FALHOU: "falha no processamento ou envio",
@@ -18,8 +23,12 @@ function chaveContexto(contexto: ContextoAcaoComposta): string {
   return JSON.stringify([contexto.patientId, contexto.encounterId, contexto.tumorLotId]);
 }
 
+function instanteCanal(instante: string): number {
+  return Instante.safeParse(instante).success ? Date.parse(instante) : NaN;
+}
+
 function formatarHorarioCanal(instante: string): string | null {
-  const ms = Date.parse(instante);
+  const ms = instanteCanal(instante);
   if (!Number.isFinite(ms)) return null;
   return new Intl.DateTimeFormat("pt-BR", {
     dateStyle: "medium", timeStyle: "short", timeZone: "America/Sao_Paulo",
@@ -38,7 +47,7 @@ function origemHumana(origem: MensagemCanalVisao["origemCanal"]): string {
 
 function ordenarPorHorarioCanal(mensagens: readonly MensagemCanalVisao[]): MensagemCanalVisao[] {
   return mensagens.map((mensagem, indice) => ({ mensagem, indice })).sort((a, b) => {
-    const ta = Date.parse(a.mensagem.em), tb = Date.parse(b.mensagem.em);
+    const ta = instanteCanal(a.mensagem.em), tb = instanteCanal(b.mensagem.em);
     const va = Number.isFinite(ta), vb = Number.isFinite(tb);
     if (va && vb) return tb - ta || a.indice - b.indice;
     if (va !== vb) return va ? -1 : 1;
@@ -82,14 +91,13 @@ function Relato({ mensagem }: { mensagem: MensagemCanalVisao }) {
   </li>;
 }
 
-export function RelatosCanalConsulta({ contexto, mensagens, aoAbrirCanal }: {
-  contexto: ContextoAcaoComposta;
-  mensagens: readonly MensagemCanalVisao[];
-  aoAbrirCanal?: () => void;
-}) {
-  const contextoAtual = chaveContexto(contexto);
-  const [expansao, setExpansao] = useState<Expansao>({ contexto: contextoAtual, aberto: true });
-  const aberto = expansao.contexto === contextoAtual ? expansao.aberto : true;
+export function RelatosCanalConsulta(props: Props) {
+  // Remontar por contexto tambem reinicia o estado nativo de <details>.
+  return <RelatosNoContexto key={chaveContexto(props.contexto)} {...props} />;
+}
+
+function RelatosNoContexto({ contexto, mensagens, aoAbrirCanal }: Props) {
+  const [aberto, setAberto] = useState(true);
   const listaId = useId();
   const vinculadas = ordenarPorHorarioCanal(mensagens.filter(mensagem =>
     mensagem.patientId === contexto.patientId && mensagem.estadoVinculo === "VINCULADO"));
@@ -97,7 +105,7 @@ export function RelatosCanalConsulta({ contexto, mensagens, aoAbrirCanal }: {
     mensagem.patientId === contexto.patientId && mensagem.estadoVinculo !== "VINCULADO").length;
 
   function alternarExpansao() {
-    setExpansao({ contexto: contextoAtual, aberto: !aberto });
+    setAberto(anterior => !anterior);
   }
 
   return <section className="relatos-canal" aria-label="Relatos do canal">

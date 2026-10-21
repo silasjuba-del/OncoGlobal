@@ -1,3 +1,6 @@
+import { lerConsulta, lerPaciente } from "../../src/server/leituras.js";
+import { criarServidorLocal } from "../../src/server/http.js";
+import { criarGateway, memoriaIdempotencia } from "../../src/kernel/gateway/gateway.js";
 import { createHash } from "node:crypto";
 import { afterEach, expect, it } from "vitest";
 import type { CadastroVinculo } from "../../src/modules/canal/vinculo.js";
@@ -90,4 +93,39 @@ it("não aceita identidade de Paciente@1 divergente do patientId do evento", () 
   a.seed(CONTEXTO_A, "Paciente@1", paciente(CONTEXTO_B.patientId, "Nome B sintético"));
   expect(cadastrosCanal(a.db)).toEqual([]);
   expect(revisaoContextoCanal(a.db, CONTEXTO_A)).toBeNull();
+  expect(lerPaciente(a.db, CONTEXTO_A.patientId)).toBeNull();
+  expect(lerConsulta(a.db, CONTEXTO_A.patientId, EM, a.sessoes.obter(a.token)!, null,
+    { encounterId: CONTEXTO_A.encounterId })).toMatchObject({ codigo: "PACIENTE_NAO_ENCONTRADO" });
+});
+
+
+it("Task010: Paciente@1 chega a agenda e consulta HTTP com relato vinculado literal", async () => {
+  const a = abrir();
+  a.seed(CONTEXTO_A, "Paciente@1", paciente(CONTEXTO_A.patientId, "Paciente alias sintetico"));
+  a.seed(CONTEXTO_A, "Contato", contato(CONTEXTO_A.patientId));
+  a.seed(CONTEXTO_A, "AgendaEntry", { patientId: CONTEXTO_A.patientId, encounterId: CONTEXTO_A.encounterId,
+    data: "2026-10-20", horario: "09:00" });
+  const texto = "Relato sintetico literal: nao tive febre.";
+  expect(receberTransporteSintetico(a.db, { accountId: "conta-alias-http", canal: "WHATSAPP_SERVICO",
+    providerMessageId: "relato-alias-http", senderRef: SENDER, providerSentAt: EM, ingestedAt: EM,
+    conteudo: { tipo: "TEXT", texto, contentSha256: createHash("sha256").update(texto).digest("hex") },
+    cadastros: cadastrosCanal(a.db) }).ok).toBe(true);
+  const gateway = criarGateway({ agora: () => EM, auditar: () => {}, store: memoriaIdempotencia(), executores: {} });
+  const server = criarServidorLocal({ db: a.db, sessoes: a.sessoes, gateway, agora: () => EM, log: () => {} });
+  try {
+    await new Promise<void>(resolve => server.listening ? resolve() : server.once("listening", resolve));
+    const addr = server.address();
+    if (!addr || typeof addr === "string") throw new Error("PORTA_AUSENTE");
+    const post = (path: string, body: unknown) => fetch(`http://127.0.0.1:${addr.port}${path}`, {
+      method: "POST", headers: { "Content-Type": "application/json", Authorization: `Bearer ${a.token}` }, body: JSON.stringify(body),
+    });
+    const consulta = await post("/consulta/carregar", CONTEXTO_A);
+    expect(consulta.status).toBe(200);
+    const data = await consulta.json();
+    expect(data.cabecalho.paciente.nome).toBe("Paciente alias sintetico");
+    expect(data.contatosCanal.mensagens).toContainEqual(expect.objectContaining({ texto, patientId: CONTEXTO_A.patientId, estadoVinculo: "VINCULADO" }));
+    const agenda = await post("/consulta/agenda", {});
+    expect(agenda.status).toBe(200);
+    expect((await agenda.json()).itens).toContainEqual(expect.objectContaining({ patientId: CONTEXTO_A.patientId, nome: "Paciente alias sintetico" }));
+  } finally { await new Promise<void>(resolve => server.close(() => resolve())); }
 });

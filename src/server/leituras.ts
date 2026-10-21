@@ -166,7 +166,7 @@ function sinalPlaquetas(alerta: AlertaPlaquetas | null): SinalElegibilidade | nu
 }
 
 export function lerPaciente(db: DatabaseSync, patientId: string) {
-  return porTipo(eventos(db), "Paciente", Paciente)
+  return porTipo(eventos(db), "Paciente", Paciente, ["Paciente@1"])
     .filter((x) => x.value.patientId === patientId && x.event.patientId === patientId).at(-1)?.value ?? null;
 }
 export function lerConsulta(db: DatabaseSync, patientId: string, agora: string, sessao: Sessao,
@@ -180,7 +180,7 @@ export function lerConsulta(db: DatabaseSync, patientId: string, agora: string, 
   config.aoLer?.(leitura);
   // Só as pendências com identidade deste paciente; evento sem patientId é diagnóstico global, nunca de todos os prontuários.
   const pendenciasIntegridade = leitura.pendenciasIntegridade.filter((p) => p.patientId === patientId);
-  const all = leitura.itens, paciente = porTipo(all, "Paciente", Paciente)
+  const all = leitura.itens, paciente = porTipo(all, "Paciente", Paciente, ["Paciente@1"])
     .filter((x) => x.value.patientId === patientId && x.event.patientId === patientId).at(-1)?.value;
   // Cadastro corrompido não some: o 404 leva o diagnóstico, sem reconstruir identidade pelo payload inválido.
   if (!paciente) return { codigo: "PACIENTE_NAO_ENCONTRADO" as const, pendenciasIntegridade };

@@ -108,3 +108,33 @@ it("mantém expansão associada ao paciente, encontro e lote completos e oferece
   expect(screen.queryByRole("button", { name: "Abrir caixa do canal" })).toBeNull();
   expect(screen.queryByText(/ausência de sintomas|sem sintomas/i)).toBeNull();
 });
+
+
+it.each(["2026-02-30T12:00:00Z", "2026-10-20T12:00:00", "10/20/2026"])("Task010: nao inventa horario valido para %s", em => {
+  render(<RelatosCanalConsulta contexto={contexto} mensagens={[
+    relato({ mensagemId: "invalida", texto: "Relato com horario incerto", em }),
+    relato({ mensagemId: "valida", texto: "Relato com instante valido", em: "2026-01-01T12:00:00Z" }),
+  ]} />);
+  const itens = screen.getAllByRole("listitem");
+  expect(itens[0]?.textContent).toContain("Relato com instante valido");
+  expect(itens[1]?.textContent).toContain("Horário do canal ilegível");
+  expect(itens[1]?.querySelector("time")?.getAttribute("datetime")).toBe(em);
+});
+
+it("Task010: rastreabilidade aberta nao atravessa encontro/lote mesmo com a mesma mensagem", () => {
+  const view = render(<RelatosCanalConsulta contexto={contexto} mensagens={[relato()]} />);
+  const trace = view.container.querySelector("details")!;
+  fireEvent.click(within(trace).getByText("Rastreabilidade"));
+  expect(trace.open).toBe(true);
+  view.rerender(<RelatosCanalConsulta contexto={{ ...contexto, encounterId: "en-outro" }} mensagens={[relato()]} />);
+  expect(view.container.querySelector("details")!.open).toBe(false);
+});
+
+it("Task010: voltar ao contexto anterior inicia expansao nova sem ressuscitar estado antigo", () => {
+  const view = render(<RelatosCanalConsulta contexto={contexto} mensagens={[relato()]} />);
+  fireEvent.click(screen.getByRole("button", { name: "Ocultar relatos" }));
+  view.rerender(<RelatosCanalConsulta contexto={{ ...contexto, tumorLotId: "lote-outro" }} mensagens={[relato()]} />);
+  expect(screen.getByRole("button", { name: "Ocultar relatos" })).toBeTruthy();
+  view.rerender(<RelatosCanalConsulta contexto={contexto} mensagens={[relato()]} />);
+  expect(screen.getByRole("button", { name: "Ocultar relatos" })).toBeTruthy();
+});
