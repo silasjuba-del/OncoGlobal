@@ -16,6 +16,7 @@ import { montarPropsFlash } from "../../../src/ui/consulta/flashDaVisao.js";
 import { fonteSintetica } from "../../fixtures/triagem.js";
 
 const AGORA = "2026-10-14T09:00:00-03:00";
+const SENHA = "senha-sintetica-comprida";
 const dirs: string[] = []; const servers: Server[] = []; const dbs: DatabaseSync[] = [];
 afterEach(async () => {
   await Promise.all(servers.splice(0).filter(s => s.listening).map(s => new Promise<void>(r => s.close(() => r()))));
@@ -30,20 +31,24 @@ const presente = (valor: string, id: string) => ({ valor, estado: "VERDE", campo
 async function consultaCom(lotes: { id: string; topografia?: string; histologia?: string; cid?: string; encontro?: string; em?: string; fonte?: string }[], encontroAntigo?: { id: string; em: string }) {
   const root = mkdtempSync(join(tmpdir(), "f1-b1-nutri-")); dirs.push(root);
   const db = abrirLedger(join(root, "ledger.sqlite")); dbs.push(db);
-  const sessoes = criarGerenciadorSessao({ medicoId: "medico-teste", crm: "CRM-TESTE", senha: "senha-sintetica-comprida", duracaoMs: 60_000, agora: () => AGORA });
+  const sessoes = criarGerenciadorSessao({ medicoId: "medico-teste", crm: "CRM-TESTE", senha: SENHA, duracaoMs: 60_000, agora: () => AGORA });
   const server = criarServidorLocal({ db, sessoes, gateway: criarGateway({ agora: () => AGORA, auditar: () => {}, store: memoriaIdempotencia(), executores: {} }),
     agora: () => AGORA, log: () => {}, configRootDir: join(root, "config") });
   servers.push(server);
   await new Promise<void>(r => server.listening ? r() : server.once("listening", r));
   const addr = server.address(); if (!addr || typeof addr === "string") throw new Error("porta ausente");
-  const token = sessoes.login("senha-sintetica-comprida")!.token;
+  const token = sessoes.login(SENHA)!.token;
   const PAC = "Paciente Teste Nutri", ENC = "encontro-nutri-01";
   let seq = 0;
   const seed = (tipo: string, payload: unknown, tumorLotId: string | null = null, enc = ENC, em = AGORA, supersedesEventId?: string) => {
     seq += 1; const id = `nutri-${seq}`;
     salvarDraft(db, { draftId: id, patientId: PAC, sourceId: `src-${id}`, rawRef: "fixture-local", payload: {}, diagnostics: [], revision: 0, criadoEm: em });
+    // A data de registro antiga exige uma sessão antiga válida, sem retrodatação da sessão atual.
+    const sessao = em === AGORA ? sessoes.obter(token)! : criarGerenciadorSessao({
+      medicoId: "medico-teste", crm: "CRM-TESTE", senha: SENHA, duracaoMs: 60_000, agora: () => em,
+    }).login(SENHA)!.sessao;
     const r = confirmar(db, { operationId: `op-nutri-${String(seq).padStart(3, "0")}`, patientId: PAC, tumorLotId, encounterId: enc,
-      reviewDecisionId: `rev-${id}`, sessao: sessoes.obter(token)!, em,
+      reviewDecisionId: `rev-${id}`, sessao, em,
       registros: [{ draftId: id, expectedRevision: 0, eventId: `ev-${id}`, tipo, payload, fontes: [fonteSintetica("medida-nutri")], revisao: "CONFIRMADO", ...(supersedesEventId ? {supersedesEventId} : {}) }] });
     expect(r.estado).toBe("GRAVADA");
     return `ev-${id}`;

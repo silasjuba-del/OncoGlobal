@@ -27,8 +27,9 @@ it("serve seis leituras HTTP do ledger com escopo por paciente/encontro e pendê
   const db = abrirLedger(join(root, "ledger.sqlite"));
   databases.push(db);
   const agora = () => "2026-10-07T12:00:00-03:00";
+  const senha = "senha-sintetica-comprida";
   const sessoes = criarGerenciadorSessao({ medicoId: "medico-teste", crm: "CRM-TESTE",
-    senha: "senha-sintetica-comprida", duracaoMs: 60_000, agora });
+    senha, duracaoMs: 60_000, agora });
   const server = criarServidorLocal({ db, sessoes, configRootDir: join(root, "config"),
     gateway: criarGateway({ agora, auditar: () => {}, store: memoriaIdempotencia(), executores: {} }),
     agora, log: () => {} });
@@ -36,7 +37,7 @@ it("serve seis leituras HTTP do ledger com escopo por paciente/encontro e pendê
   await new Promise<void>((resolve) => server.listening ? resolve() : server.once("listening", resolve));
   const address = server.address();
   if (!address || typeof address === "string") throw new Error("porta ausente");
-  const token = sessoes.login("senha-sintetica-comprida")!.token;
+  const token = sessoes.login(senha)!.token;
   let seq = 0;
   const persistir = (patientId: string, encounterId: string, tipo: string, payload: unknown,
     tumorLotId: string | null = null, fontes = [fonteSintetica(`leitura-${seq + 1}`)], em = agora()) => {
@@ -44,8 +45,12 @@ it("serve seis leituras HTTP do ledger com escopo por paciente/encontro e pendê
     const draftId = `draft-leitura-${seq}`, operationId = `op-leitura-${String(seq).padStart(3, "0")}`;
     salvarDraft(db, { draftId, patientId, sourceId: `source-${seq}`, rawRef: "fixture-local",
       payload: {}, diagnostics: [], revision: 0, criadoEm: em });
+    // Eventos históricos são emitidos por sessões sintéticas vigentes no respectivo instante.
+    const sessao = em === agora() ? sessoes.obter(token)! : criarGerenciadorSessao({
+      medicoId: "medico-teste", crm: "CRM-TESTE", senha, duracaoMs: 60_000, agora: () => em,
+    }).login(senha)!.sessao;
     const result = confirmar(db, { operationId, patientId, tumorLotId, encounterId,
-      reviewDecisionId: `review-leitura-${seq}`, sessao: sessoes.obter(token)!, em,
+      reviewDecisionId: `review-leitura-${seq}`, sessao, em,
       registros: [{ draftId, expectedRevision: 0, eventId: `event-leitura-${seq}`, tipo,
         payload, fontes, revisao: "CONFIRMADO" }] });
     expect(result.estado).toBe("GRAVADA");
