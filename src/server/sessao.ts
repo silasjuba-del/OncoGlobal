@@ -14,6 +14,7 @@ export function hashConteudoExibido(conteudo: unknown): string {
 export interface GerenciadorSessao {
   registrarAlertasExibidos?(token: string, contexto: ContextoExibicao, ids: readonly string[]): void;
   alertasExibidos?(token: string, contexto: ContextoExibicao): readonly string[];
+  bloqueadoPorTentativas?(): boolean;
   login(senha: string): { token: string; sessao: SessaoTipo } | null;
   obter(token: string): SessaoTipo | null;
   registrarBundleExibido(token: string, contexto: ContextoExibicao,
@@ -27,10 +28,27 @@ export interface GerenciadorSessao {
 /** Single-user local login. Caller supplies the secret at startup; no default credentials. */
 export function criarGerenciadorSessao(config: {
   medicoId: string; crm: string; senha: string; duracaoMs: number; agora: () => string;
+  maxTentativasJanela?: number; janelaTentativasMs?: number;
 }): GerenciadorSessao {
-  if (!config.medicoId || !config.crm || config.senha.length < 12 || config.duracaoMs <= 0)
+  const maxTentativas = config.maxTentativasJanela ?? 5;
+  const janelaTentativasMs = config.janelaTentativasMs ?? 60_000;
+  if (!config.medicoId || !config.crm || config.senha.length < 12 || config.duracaoMs <= 0
+    || !Number.isInteger(maxTentativas) || maxTentativas < 1
+    || !Number.isFinite(janelaTentativasMs) || janelaTentativasMs <= 0)
     throw new Error("SESSAO_CONFIG_INVALIDA");
   const salt = randomBytes(16), secret = scryptSync(config.senha, salt, 32);
+  const falhasRecentes: number[] = [];
+  const podarFalhas = (agoraMs: number) => {
+    while (falhasRecentes.length > 0 && (agoraMs - falhasRecentes[0]! >= janelaTentativasMs || agoraMs < falhasRecentes[0]!)) {
+      falhasRecentes.shift();
+    }
+  };
+  const bloqueadoPorTentativas = (): boolean => {
+    const agoraMs = Date.parse(config.agora());
+    if (!Number.isFinite(agoraMs)) return false;
+    podarFalhas(agoraMs);
+    return falhasRecentes.length >= maxTentativas;
+  };
   const sessions = new Map<string, { sessao: SessaoTipo; alertas?: {contexto:ContextoExibicao;ids:readonly string[]}; bundle?: {
     contexto: ContextoExibicao;
     docs: readonly DocumentoExibido[];
@@ -45,9 +63,20 @@ export function criarGerenciadorSessao(config: {
     return record.sessao;
   };
   return {
+    bloqueadoPorTentativas,
     login(senha) {
+      if (bloqueadoPorTentativas()) return null;
+      const agoraMs = Date.parse(config.agora());
+      if (typeof senha !== "string" || senha.length === 0 || senha.length > 512) {
+        if (Number.isFinite(agoraMs)) falhasRecentes.push(agoraMs);
+        return null;
+      }
       const candidate = scryptSync(senha, salt, 32);
-      if (!timingSafeEqual(secret, candidate)) return null;
+      if (!timingSafeEqual(secret, candidate)) {
+        if (Number.isFinite(agoraMs)) falhasRecentes.push(agoraMs);
+        return null;
+      }
+      falhasRecentes.length = 0;
       const emitidaEm = config.agora();
       const sessao = Sessao.parse({ medicoId: config.medicoId, crm: config.crm,
         emitidaEm, expiraEm: new Date(Date.parse(emitidaEm) + config.duracaoMs).toISOString() });
