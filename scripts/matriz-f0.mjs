@@ -166,6 +166,8 @@ const decisionOwner = new Map([
   ["D-W9-34a", { file: "src/kernel/extracao/patient-resolver.ts", symbol: "rankearPacientes" }],
 ]);
 const consumerOverride = new Map([
+  // Rotas e upload chamam o helper; o helper e o consumidor direto do detector RADS.
+  ["T-38", "src/server/radsRascunho.ts"],
   ["Q52", "src/kernel/llm/jev/oncoassist.ts"],
   ["FN-24", "src/kernel/llm/jev/oncoassist.ts"],
   ["T-42", "src/kernel/llm/jev/oncoassist.ts"],
@@ -220,7 +222,7 @@ const consumerOverride = new Map([
   ["D-W9-10", "tests/w10-grok/grok-13-apac-snapshot.test.ts"],
   ["D-W9-12", "tests/w10-grok/grok-13-apac-snapshot.test.ts"],
   ["D-W9-58", "tests/leitura/pdf-digital.test.ts"],
-  ["D-W9-68", "src/server/rotas.ts"],
+  ["D-W9-68", "src/server/radsRascunho.ts"],
   ["D-W9-15", "src/server/rotas.ts"],
   ["A3", "tests/kernel/extracao/reconciliacao.test.ts"],
   ["D-W9-22a", "tests/w12-grok/grok-02-corpo.test.ts"],
@@ -260,7 +262,7 @@ const consumerOverride = new Map([
   ["D-W9-10", "tests/w10-grok/grok-13-apac-snapshot.test.ts"],
   ["D-W9-12", "tests/w10-grok/grok-13-apac-snapshot.test.ts"],
   ["D-W9-58", "tests/leitura/pdf-digital.test.ts"],
-  ["D-W9-68", "src/server/rotas.ts"],
+  ["D-W9-68", "src/server/radsRascunho.ts"],
   ["G-15", "tests/orchestration/ork.test.ts"],
   ["T-53", "tests/apac/apac.test.ts"],
   ["Q11", "tests/orchestration/ork.test.ts"],
@@ -518,7 +520,7 @@ const gateSymbol = new Map([
 ]);
 const functionConsumer = new Map([
   ["FN-22", "src/server/leituras.ts"], ["FN-23", "src/kernel/extracao/pipeline.ts"],
-  ["FN-20", "src/server/rotas.ts"], ["FN-18", "src/server/leituras.ts"],
+  ["FN-20", "src/server/radsRascunho.ts"], ["FN-18", "src/server/leituras.ts"],
 ]);
 const forceTestConsumer = new Set([
   "FN-10", "FN-11", "FN-13", "FN-17", "FN-19", "FN-21", "FN-25", "FN-26",
