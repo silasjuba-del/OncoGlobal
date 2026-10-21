@@ -9,6 +9,7 @@ import { salvarDraft } from "../../src/kernel/comandos/portas.js";
 import { abrirLedger } from "../../src/kernel/ledger/db.js";
 import { receberTransporteSintetico } from "../../src/server/canalEntrada.js";
 import { cadastrosCanal, lerMensagensOperacionaisCanal, revisaoContextoCanal } from "../../src/server/canalOperacao.js";
+import { carregarDicionarioPacienteDoLedger } from "../../src/server/canalResposta.js";
 import { criarGerenciadorSessao } from "../../src/server/sessao.js";
 
 const EM = "2026-10-20T12:00:00.000Z";
@@ -92,6 +93,7 @@ it("não aceita identidade de Paciente@1 divergente do patientId do evento", () 
   const a = abrir();
   a.seed(CONTEXTO_A, "Paciente@1", paciente(CONTEXTO_B.patientId, "Nome B sintético"));
   expect(cadastrosCanal(a.db)).toEqual([]);
+  expect(carregarDicionarioPacienteDoLedger(a.db, CONTEXTO_A.patientId, SENDER)).toBeNull();
   expect(revisaoContextoCanal(a.db, CONTEXTO_A)).toBeNull();
   expect(lerPaciente(a.db, CONTEXTO_A.patientId)).toBeNull();
   expect(lerConsulta(a.db, CONTEXTO_A.patientId, EM, a.sessoes.obter(a.token)!, null,
