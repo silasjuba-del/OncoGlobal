@@ -359,7 +359,7 @@ export function lerConsulta(db: DatabaseSync, patientId: string, agora: string, 
       && d.fontes.length > 0 && typeof d.valor === "string" && d.valor.trim() ? d.valor : null;
   // Armadilha (a): encontro reaberto não usa a versão do lote confirmada em encontro POSTERIOR.
   const lotesNoHorizonte = lote ? porTipo(all.filter((e) => e.patientId === patientId && Date.parse(e.criadoEm) <= horizontePlaquetas),
-    "TumorLot", TumorLot).filter((x) => x.event.tumorLotId === lote.tumorLotId && x.value.patientId === patientId && x.value.tumorLotId === lote.tumorLotId) : [];
+    "TumorLot", TumorLot, ["TumorLot@1"]).filter((x) => x.event.tumorLotId === lote.tumorLotId && x.value.patientId === patientId && x.value.tumorLotId === lote.tumorLotId) : [];
   // Evidências diferentes podem confirmar o mesmo conteúdo. Ignorar apenas a proveniência na
   // comparação; valores, estados, revisão, estadiamentos e marcos continuam distintos.
   // Os lotes originais, com todas as fontes, permanecem em cabecalho.lotes e no ledger.

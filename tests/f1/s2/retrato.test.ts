@@ -35,6 +35,35 @@ describe("S2 Retrato longitudinal", () => {
     expect(r.resumo.some(f=>f.texto.includes("prosa médica preservada"))).toBe(false);
     expect(r.resumo.some(f=>f.texto.includes("Lesão indeterminada"))).toBe(true);
   });
+  it("projeta Paciente@1 como fato do paciente e TumorLot@1 apenas no lote selecionado", () => {
+    const ausente = { campo: "AUSENTE", valor: null, estado: "PENDENTE", motivo: "não consta",
+      fontes: [], revisao: "RAW" };
+    const topografia = { campo: "PRESENTE", valor: "Esôfago", estado: "VERDE", motivo: "laudo sintético",
+      fontes: evento("fonte").fontes, revisao: "CONFIRMADO" };
+    const cadastro = evento("paciente-alias", "", { tipo: "Paciente@1", tumorLotId: null,
+      payload: { data: { patientId: "p1", nome: "Pessoa sintética", identificadores: [],
+        nascimento: null, sexoCadastral: "F", divergencia: false } } });
+    const lote = evento("lote-alias", "", { tipo: "TumorLot@1",
+      payload: { data: { patientId: "p1", tumorLotId: "t2", cid: ausente,
+        topografia, histologia: ausente, estadiamentos: [], finalidadeApac: ausente, marcos: [] } } });
+    const retrato = projetarRetrato([cadastro, lote], contexto);
+    expect(retrato.fatos).toEqual(expect.arrayContaining([
+      expect.objectContaining({ tipo: "Paciente@1", escopo: "PACIENTE" }),
+      expect.objectContaining({ tipo: "TumorLot@1", escopo: "TUMOR" }),
+    ]));
+    expect(retrato.resumo.some(f => f.texto.includes("Pessoa sintética"))).toBe(true);
+    expect(retrato.resumo.some(f => f.texto.includes("Esôfago"))).toBe(true);
+  });
+  it("não promove alias com identidade do payload divergente do envelope", () => {
+    const alias = evento("alias-divergente", "", { tipo: "Paciente@1", tumorLotId: null,
+      payload: { data: { patientId: "outro-paciente", nome: "Nome de outro paciente", identificadores: [],
+        nascimento: null, sexoCadastral: "F", divergencia: false } } });
+    const retrato = projetarRetrato([alias], contexto);
+    expect(retrato.fatos).toEqual([]);
+    expect(retrato.integridade).toContainEqual(expect.objectContaining({
+      eventoId: "alias-divergente", motivo: "ALIAS_CONTEXTO_OU_PAYLOAD_INVALIDO",
+    }));
+  });
   it("exposição cumulativa e labs extraídos atravessam tumor sem perder factDate", () => {
     const r = projetarRetrato([evento("cum", "exposicaoCumulativa", {tumorLotId: "t1"}),
       evento("lab", "extracao.lab:HB", {tumorLotId: "t1", payload: {data: {campo: "extracao.lab:HB", domain: "lab", valor: {marker: "HB", value: 10, unit: "g/dL"}, factDate: "2026-10-08"}}})], contexto);
