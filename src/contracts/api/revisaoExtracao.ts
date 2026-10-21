@@ -7,7 +7,7 @@ export const FonteRevisao = z.object({ draft: z.object({
     input: z.object({ sourceId: z.string(), rawTranscript: z.string() }),
     state: z.object({ facts: z.array(ClinicalFact) }),
     alertasRads: z.array(z.object({ nome: z.string(), trecho: z.string(), sourceId: z.string(),
-      confirmadoPeloMedico: z.literal(false), bloqueiaSalvar: z.literal(false) })).optional(),
+      confirmadoPeloMedico: z.literal(false), bloqueiaSalvar: z.literal(false) })).nullable().optional(),
     patientLinkReview: z.object({ patientId: z.string(), encounterId: z.string(), tumorLotId: z.string().nullable(),
       segmentId: z.string().optional() }),
   }),
