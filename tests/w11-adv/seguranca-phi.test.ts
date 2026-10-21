@@ -67,19 +67,33 @@ const PADROES_PHI: { tipo: TipoPhi; re: RegExp }[] = [
   { tipo: "EMAIL", re: /[A-Za-z0-9._%+-]+@[A-Za-z][A-Za-z0-9-]*(?:\.[A-Za-z0-9-]+)*\.[A-Za-z]{2,}/g },
 ];
 
-// Metadados que parecem e-mail só passam se a linha inteira foi revisada por
-// ocorrência e o arquivo conserva o SHA aprovado. A detecção histórica permanece.
-function emailRevisado(texto: string, caminho: string, indice: number, manifesto: PhiManifest): boolean {
+// A dispensa continua vinculada ao arquivo e a uma ocorrencia reconhecida pelos dois detectores.
+// Divergencia/ambiguidade entre regex legado e candidato canonico permanece bloqueada.
+function ocorrenciaRevisada(texto: string, caminho: string, indice: number, manifesto: PhiManifest,
+  tipo: TipoPhi = "EMAIL"): boolean {
   const registro = manifesto.files.find((item) => item.path === caminho);
-  if (!registro) return false;
-  const hash = sha256(Buffer.from(texto, "utf8"), registro.hashMode ?? "raw", caminho);
+  if (!registro || !Number.isSafeInteger(indice) || indice < 0 || indice >= texto.length) return false;
+  let hash: string;
+  try { hash = sha256(Buffer.from(texto, "utf8"), registro.hashMode ?? "raw", caminho); }
+  catch { return false; }
   if (hash !== registro.sha256) return false;
+  const padrao = PADROES_PHI.find(p => p.tipo === tipo)!;
+  const alvo = [...texto.matchAll(padrao.re)].find(m => m.index === indice);
+  if (!alvo) return false;
+  const tipoCanonico = tipo.toLowerCase();
+  if (findTextCandidates(alvo[0], caminho).filter(c => c.type === tipoCanonico).length !== 1) return false;
   const linha = texto.slice(0, indice).split(/\r?\n/).length;
-  const candidatos = findTextCandidates(texto, caminho).filter((item) => item.type === "email" && item.line === linha);
+  const daLinha = (conteudo: string) => findTextCandidates(conteudo, caminho)
+    .filter(c => c.type === tipoCanonico && c.line === linha);
+  const candidatos = daLinha(texto);
+  const ordinal = daLinha(texto.slice(0, indice)).length;
+  const candidato = candidatos.find(c => c.ordinal === ordinal);
+  const semAlvo = texto.slice(0, indice) + " ".repeat(alvo[0].length) + texto.slice(indice + alvo[0].length);
+  if (!candidato || daLinha(semAlvo).length !== candidatos.length - 1) return false;
   const revisados = scanText(texto, caminho, { sha256: hash, manifest: manifesto }).dispositionsApplied;
-  return candidatos.length > 0 && candidatos.every((item) => revisados.some((rev) => rev.type === "email"
-    && rev.line === item.line && rev.ordinal === item.ordinal
-    && (rev.status === "technical_token_false_positive" || rev.status === "synthetic_declared")));
+  return revisados.some(rev => rev.type === candidato.type && rev.path === caminho
+    && rev.line === candidato.line && rev.ordinal === candidato.ordinal
+    && (rev.status === "technical_token_false_positive" || rev.status === "synthetic_declared"));
 }
 
 describe("W11-H30 · (a) varredura de PHI no repositório", () => {
@@ -89,10 +103,10 @@ describe("W11-H30 · (a) varredura de PHI no repositório", () => {
     const manifesto: PhiManifest = { schemaVersion: 1, files: [{ path: caminho, sha256: sha256(Buffer.from(texto)),
       items: [{ type: "email", line: 1, ordinal: 0, status: "synthetic_declared",
         evidenceRef: "fixture sintética deste teste", reason: "endereço reservado de teste" }] }] };
-    expect(emailRevisado(texto, caminho, 20, { schemaVersion: 1, files: [] })).toBe(false);
-    expect(emailRevisado(texto, caminho, 20, manifesto)).toBe(true);
-    expect(emailRevisado(texto + " alterado", caminho, 20, manifesto)).toBe(false);
-    expect(emailRevisado(texto, caminho, 20, { ...manifesto, files: [{ ...manifesto.files[0]!, items: [] }] })).toBe(false);
+    expect(ocorrenciaRevisada(texto, caminho, 20, { schemaVersion: 1, files: [] })).toBe(false);
+    expect(ocorrenciaRevisada(texto, caminho, 20, manifesto)).toBe(true);
+    expect(ocorrenciaRevisada(texto + " alterado", caminho, 20, manifesto)).toBe(false);
+    expect(ocorrenciaRevisada(texto, caminho, 20, { ...manifesto, files: [{ ...manifesto.files[0]!, items: [] }] })).toBe(false);
   });
   it("só aparecem CPF, CNS, telefone e e-mail sintéticos já declarados", () => {
     const achados: string[] = [];
@@ -103,7 +117,7 @@ describe("W11-H30 · (a) varredura de PHI no repositório", () => {
       for (const { tipo, re } of PADROES_PHI)
         for (const m of texto.matchAll(re))
           if (!(SINTETICOS[tipo] as readonly string[]).includes(m[0])
-            && !(tipo === "EMAIL" && emailRevisado(texto, relative(RAIZ, caminho).replaceAll("\\", "/"), m.index!, manifesto)))
+            && !ocorrenciaRevisada(texto, relative(RAIZ, caminho).replaceAll("\\", "/"), m.index!, manifesto, tipo))
             achados.push(`${relative(RAIZ, caminho)}: ${tipo} ${m[0]}`);
     }
     expect(achados).toEqual([]);
@@ -332,4 +346,51 @@ describe("W11-H30 · (e) erros e logs sem chave nem PHI", () => {
       expect(corpoErrado).not.toContain(proibido);
     }
   }));
+});
+
+// Vetores ja declarados acima: nenhuma nova allowlist ou ocorrencia literal de PHI.
+const VETORES_REVISAO = [
+  {tipo:"CPF",valor:SINTETICOS.CPF[7]}, {tipo:"CNS",valor:SINTETICOS.CNS[3]},
+  {tipo:"TELEFONE",valor:SINTETICOS.TELEFONE[4]}, {tipo:"EMAIL",valor:SINTETICOS.EMAIL[0]},
+] as const;
+function fixtureRevisao(tipo:TipoPhi,valor:string) {
+  const texto=`Cabecalho da fixture\n${valor} ${valor}\nFim`;
+  const caminho="fixture-ocorrencias.txt";
+  const candidatos=findTextCandidates(texto,caminho).filter(c=>c.type===tipo.toLowerCase());
+  expect(candidatos).toHaveLength(2);
+  const manifesto:PhiManifest={schemaVersion:1,files:[{path:caminho,hashMode:"utf8-lf",sha256:sha256(Buffer.from(texto),"utf8-lf",caminho),
+    items:candidatos.map(c=>({type:c.type,line:c.line,ordinal:c.ordinal,status:"synthetic_declared",evidenceRef:"vetor sintetico deste teste",reason:"prova de vinculo exato"}))}]};
+  return {texto,caminho,manifesto,indices:[texto.indexOf(valor),texto.lastIndexOf(valor)]};
+}
+describe.each(VETORES_REVISAO)("disposicao exata de $tipo",({tipo,valor})=>{
+  it("admite cada ocorrencia revisada, inclusive CRLF no modo aprovado",()=>{
+    const f=fixtureRevisao(tipo,valor);
+    for(const indice of f.indices)expect(ocorrenciaRevisada(f.texto,f.caminho,indice,f.manifesto,tipo)).toBe(true);
+    const crlf=f.texto.replaceAll("\n","\r\n");expect(ocorrenciaRevisada(crlf,f.caminho,crlf.indexOf(valor),f.manifesto,tipo)).toBe(true);
+  });
+  it.each(["hash","linha","tipo","ordinal","evidencia","pendente","status_publico","caminho"])("recusa %s divergente",ataque=>{
+    const f=fixtureRevisao(tipo,valor),m=structuredClone(f.manifesto),r=m.files[0]!,i=r.items![0]!;
+    if(ataque==="hash")r.sha256="0".repeat(64);
+    if(ataque==="linha")i.line++;
+    if(ataque==="tipo")i.type=tipo==="CNS"?"email":"cns";
+    if(ataque==="ordinal")i.ordinal++;
+    if(ataque==="evidencia")i.evidenceRef="";
+    if(ataque==="pendente")i.status="PENDENTE";
+    if(ataque==="status_publico")i.status="public_contact_metadata";
+    if(ataque==="caminho")r.path="outro-arquivo.txt";
+    expect(ocorrenciaRevisada(f.texto,f.caminho,f.indices[0]!,m,tipo)).toBe(false);
+  });
+  it("nao empresta a disposicao da outra ocorrencia nem aceita um offset interno",()=>{
+    const f=fixtureRevisao(tipo,valor);f.manifesto.files[0]!.items!.splice(0,1);
+    expect(ocorrenciaRevisada(f.texto,f.caminho,f.indices[0]!,f.manifesto,tipo)).toBe(false);
+    expect(ocorrenciaRevisada(f.texto,f.caminho,f.indices[1]!,f.manifesto,tipo)).toBe(true);
+    expect(ocorrenciaRevisada(f.texto,f.caminho,f.indices[1]!+1,f.manifesto,tipo)).toBe(false);
+    expect(ocorrenciaRevisada(f.texto+" alterado",f.caminho,f.indices[1]!,f.manifesto,tipo)).toBe(false);
+  });
+});
+it("deteccao legada nao reconhecida pelo canonico nao herda revisao de vizinho",()=>{
+  const f=fixtureRevisao("CPF",SINTETICOS.CPF[7]);
+  const texto=SINTETICOS.CPF[0]+" "+f.texto;
+  const m:PhiManifest={schemaVersion:1,files:[{path:f.caminho,sha256:sha256(Buffer.from(texto)),items:findTextCandidates(texto,f.caminho).filter(c=>c.type==="cpf").map(c=>({type:c.type,line:c.line,ordinal:c.ordinal,status:"synthetic_declared",evidenceRef:"vetor sintetico",reason:"controle"}))}]};
+  expect(ocorrenciaRevisada(texto,f.caminho,0,m,"CPF")).toBe(false);
 });
