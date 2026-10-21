@@ -403,9 +403,10 @@
   box-shadow: var(--shadow);
 }
 
+/* Foco: geometria vem de tema/base.css; a cor segue o acento do tema do oncochart. */
 .oc-app :focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
+  outline: var(--foco-largura) solid var(--accent);
+  outline-offset: var(--foco-offset);
 }
 
 @media (prefers-reduced-motion: reduce) {

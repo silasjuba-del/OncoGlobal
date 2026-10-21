@@ -1,0 +1,27 @@
+/* Camada comum da interface: paleta clínica e foco de teclado. Importada pelas duas entradas. */
+
+:root {
+  /* Paleta clínica fixa (ainda não temável). Os prefixos --consulta-, --cf-, --pe-, --jev- e --estudos- apontam para cá. */
+  --cl-tinta: #183247;
+  --cl-apagado: #536b7a;
+  --cl-linha: #d5e0e6;
+  --cl-superficie: #ffffff;
+  --cl-suave: #f4f8fa;
+  --cl-acao: #006d77;
+  --cl-aviso: #9b6519;
+  --cl-critico: #9f2935;
+
+  /* Foco de teclado: uma cor, uma espessura, um recuo. */
+  --foco-cor: var(--cl-acao);
+  --foco-largura: 3px;
+  --foco-offset: 2px;
+}
+
+[data-tema="contraste"] {
+  --foco-cor: var(--cor-destaque);
+}
+
+:focus-visible {
+  outline: var(--foco-largura) solid var(--foco-cor);
+  outline-offset: var(--foco-offset);
+}
