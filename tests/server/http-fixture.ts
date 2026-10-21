@@ -1,10 +1,11 @@
 // Fixture HTTP do RED@5e1093d, confinada a loopback e dados sintéticos.
 import { abrirLedger } from "../../src/kernel/ledger/db.js";
 import { criarGateway, memoriaIdempotencia } from "../../src/kernel/gateway/gateway.js";
+import type { ServidorDeps } from "../../src/server/rotas.js";
 import { criarServidorLocal } from "../../src/server/http.js";
 import { criarGerenciadorSessao } from "../../src/server/sessao.js";
 
-export async function ambienteHttp(opcoes: { salaoRuleset?: unknown } = {}) {
+export async function ambienteHttp(opcoes: Pick<ServidorDeps, "salaoRuleset" | "corpus"> = {}) {
   let agora = "2026-10-05T12:00:00Z";
   const db = abrirLedger(":memory:");
   let efeitos = 0;
