@@ -1,3 +1,4 @@
+import { Alerta } from "./operacao.js";
 import { z } from "zod";
 import { DataCivil, Fonte, Id, Instante } from "./base.js";
 import { Paciente, TumorLot, Triagem, Contato, TreatmentEpisode, Ciclo, TreatmentAdministration } from "./clinico.js";
@@ -53,7 +54,7 @@ export const RecistSeriePayload = z.object({
     fonteIds: z.array(z.string()) }).strict()),
 }).strict();
 const schemas: Readonly<Record<string, z.ZodType>> = Object.freeze({
-  Paciente, TumorLot, Triagem, Contato, TreatmentEpisode, Ciclo, TreatmentAdministration, APAC: Apac,
+  Alerta, Paciente, TumorLot, Triagem, Contato, TreatmentEpisode, Ciclo, TreatmentAdministration, APAC: Apac,
   Conversation, AgendaEntry, FATO: Campo, DOCUMENTO: Documento, ReviewDecision: Revisao, LabResult,
   Tarefa,
   ConsultaConfirmada: z.object({ dataClinica:DataCivil,documentoIds:z.array(z.object({documentId:Id,documentVersion:z.number().int().positive()}).strict()).min(1) }).strict(),

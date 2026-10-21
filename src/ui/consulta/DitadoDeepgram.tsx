@@ -45,7 +45,7 @@ export function DitadoDeepgram({porta,contexto,desabilitado,aoTrecho,aoAtividade
    mensagem:mensagem=>{
     if(!vigente())return;let bruto:unknown;try{bruto=JSON.parse(mensagem);}catch{fim('Resposta de ditado inválida.');return;}
     const p=EventoDitado.safeParse(bruto);if(!p.success){fim('Resposta de ditado inválida.');return;}const evento=p.data;
-    if(evento.tipo==='ERRO'){fim(`Ditado interrompido (${evento.codigo}). Confira o texto já recebido.`);return;}
+    if(evento.tipo==='ERRO'){fim(evento.codigo==='G23_COMANDO_CURTO_EXCEDIDO'?'Limite de 15 segundos atingido. O final pode estar incompleto; confira o texto recebido.':`Ditado interrompido (${evento.codigo}). Confira o texto já recebido.`);return;}
     if(evento.tipo==='CONCLUIDO'){concluido=true;fim('Ditado concluído. Confira nomes, números e negações.');return;}
     if(evento.tipo==='TRECHO'){
      if(evento.final){if(!vistos.has(evento.id)){vistos.add(evento.id);callbacks.current.aoTrecho(evento.texto);}setParcial('');}
@@ -65,7 +65,7 @@ export function DitadoDeepgram({porta,contexto,desabilitado,aoTrecho,aoAtividade
  }
  const ativo=estado!=='PARADO';
  return <div aria-label="Ditado Deepgram">
-  <p>Deepgram · português brasileiro. Ao iniciar, o áudio será enviado à Deepgram. O texto permanece como rascunho para revisão.</p>
+  <p>Deepgram · português brasileiro · comando curto de até 15 segundos. Ao iniciar, o áudio será enviado à Deepgram. O texto permanece como rascunho para revisão.</p>
   <details><summary>Configurar chave Deepgram · {origem==='SESSAO'?'temporária nesta sessão':origem==='AMBIENTE'?'configurada no ambiente':salva?'salva com segurança':configurada?'configurada nesta sessão':'pendente'}</summary>
    <p>{persistencia?'Salve a chave protegida pela sua conta do Windows para recuperá-la automaticamente ao reabrir este app. O valor não é exibido nem armazenado no navegador.':'Armazenamento protegido indisponível neste servidor. A chave pode ser usada somente nesta sessão ou configurada no ambiente do servidor.'}</p>
    <label>Chave Deepgram <input type="password" autoComplete="off" value={chave} disabled={ativo||configurando} onChange={e=>setChave(e.target.value)}/></label>

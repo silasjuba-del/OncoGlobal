@@ -36,6 +36,8 @@ const FASE_FECHAMENTO = "F1-S3";
 
 // Entrypoints de composição reais e portas de compatibilidade: pares EXATOS, sem liberar uma camada.
 const COMPOSICAO = new Map([
+  // Adapter SQLite existente: reutiliza somente a transacao, sem acesso a comandos clinicos.
+  ["src/app/persistencia/store.ts", new Set(["src/kernel/ledger/db.js"])],
   ["src/app/oncoassistLocal.ts", new Set([
     "src/kernel/ledger/db.js", "src/kernel/ledger/idempotencia.js", "src/kernel/comandos/portas.js", "src/kernel/gateway/gateway.js",
     "src/kernel/llm/jev/oncoassist.js", "src/kernel/llm/openai/runtime.js", "src/kernel/gateway/executores/imprimir.js", "src/kernel/ledger/documentos.js",
@@ -50,13 +52,6 @@ const COMPATIBILIDADE = new Map([
   ["src/modules/base.ts", ["src/contracts/dominoBase.js", "src/rules/estruturaSecao.js"]],
   ["src/modules/tipos.ts", ["src/contracts/dominoBase.js", "src/rules/estruturaSecao.js", "src/rules/conteudoCanonico.js"]],
   ["src/modules/hash.ts", ["src/rules/conteudoCanonico.js"]],
-  ["src/config/settings.ts", ["src/kernel/config/settings.js"]],
-  ["src/config/flash.ts", ["src/contracts/configFlash.js"]],
-  ["src/config/servico.ts", ["src/contracts/configServico.js"]],
-  ["src/estatistica/index.ts", ["src/kernel/projections/estatistica.js"]],
-  ["src/app/executores/imprimir.ts", ["src/kernel/gateway/executores/imprimir.js"]],
-  ["src/app/executores/desabilitados.ts", ["src/kernel/gateway/executores/desabilitados.js"]],
-  ["src/app/executores/resolverDocumentoLedger.ts", ["src/kernel/ledger/documentos.js"]],
   ["src/app/oncoassist.ts", ["src/kernel/llm/jev/oncoassist.js"]],
   ["src/app/marcadoresDocumentoJev.ts", ["src/kernel/llm/jev/marcadoresDocumentoJev.js"]],
   ["src/app/oncoboard/index.ts", ["src/kernel/llm/oncoboard.js"]],

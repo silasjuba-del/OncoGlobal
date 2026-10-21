@@ -1,3 +1,5 @@
+import { createServer } from "node:http";
+import { rotear } from "../../../src/server/rotas.js";
 import { createHash } from "node:crypto";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { criarRuntimeExtracaoLlm } from "../../../src/kernel/llm/openai/runtime.js";
@@ -114,7 +116,11 @@ describe("D-W9-66 técnica offline, separada e desligada por padrão", () => {
       const gateway = criarGateway({ agora: () => agora, auditar: () => {}, store: memoriaIdempotencia(), executores: { LLM_EXTRACAO: runtime.executor }, validarDocumentoOriginalLlm: runtime.validarDocumentoOriginalLlm });
       const deps: ServidorDeps = { db, sessoes, gateway, extracaoLlm: runtime, agora: () => agora, log: () => {},
         motorF1: criarMotorF1(db, () => agora, () => ({ regras: [], biblioteca: corr.biblioteca })) };
-      const r = await executarDocumentoOriginalLlm({ ...ctx, draftId: "original", idempotencyKey: intent.idempotencyKey }, login.token, deps);
+      const server=createServer((req,res)=>{void rotear(deps,req,res);});
+      server.listen(0,"127.0.0.1");await new Promise<void>(r=>server.once("listening",r));
+      const address=server.address();if(!address||typeof address==="string")throw Error("PORTA");
+      let r:{status:number};try{const response=await fetch(`http://127.0.0.1:${address.port}/consulta/llm/documento-original`,{method:"POST",headers:{"Content-Type":"application/json",Authorization:`Bearer ${login.token}`},body:JSON.stringify({...ctx,draftId:"original",idempotencyKey:intent.idempotencyKey})});await response.json();r={status:response.status};}
+      finally{server.closeIdleConnections();await new Promise<void>(r=>server.close(()=>r()));}
       expect(r.status).toBe(mudar ? 409 : 201); expect(db.prepare("SELECT count(*) AS n FROM clinical_event").get()!.n).toBe(antes);
       expect(listarDrafts(db).filter(d => (d.payload as {kind?:string}).kind === "D66_TRANSCRICAO_RASCUNHO")).toHaveLength(mudar ? 0 : 1);
       expect(extrair).toHaveBeenCalledOnce();

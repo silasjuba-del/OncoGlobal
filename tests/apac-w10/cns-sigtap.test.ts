@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { calcularCnsDefinitivo, validarCns } from "../../src/apac/cns.js";
-import { buscarProcedimento, montarTabelaSigtap } from "../../src/apac/sigtap.js";
+import { calcularCnsDefinitivo, validarCns } from "../../src/modules/apac/cnsRegulatorio.js";
+import { buscarProcedimento, montarTabelaSigtap } from "../../src/modules/apac/sigtap.js";
 import { CNS_OK, CNS_RUIM, lerCsvSigtapReferencia, proc } from "./helpers.js";
 
 describe("W10-INT-APAC-01 · CNS", () => {

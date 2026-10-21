@@ -2,8 +2,8 @@
 // Regras: PREENCHIDO ou PENDENTE por caixa; RT vazia sem solicitação; nefrologia vazia; autorização em branco;
 // uma linha por esquema anterior (nunca por ciclo); render com RASCUNHO até assinatura e sem termos de IA.
 import { describe, expect, it } from "vitest";
-import { preencherLaudo, BLOCOS_COMPLEMENTARES, CAMPOS_COMPLEMENTARES, type LaudoApac } from "../../src/apac/laudo.js";
-import { montarTabelaSigtap } from "../../src/apac/sigtap.js";
+import { preencherLaudo, BLOCOS_COMPLEMENTARES, CAMPOS_COMPLEMENTARES, type LaudoApac } from "../../src/modules/apac/laudo.js";
+import { montarTabelaSigtap } from "../../src/modules/apac/sigtap.js";
 import { renderizarApacComplementar, type EntradaPagina2 } from "../../src/impressao/apacLaudo.js";
 import { apac, COD_QT, proc } from "../apac-w10/helpers.js";
 

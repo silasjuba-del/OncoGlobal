@@ -4,7 +4,7 @@ import * as triagem from "../../src/rules/triagem.js";
 import * as w8 from "../../src/rules/w8/index.js";
 import * as identidade from "../../src/rules/w8/identificadores.js";
 import { validarCns, calcularCnsDefinitivo } from "../../src/rules/cns.js";
-import { validarCns as apac } from "../../src/apac/cns.js";
+import { validarCns as apac } from "../../src/modules/apac/cnsRegulatorio.js";
 import { validarCns as modulo } from "../../src/modules/apac/cns.js";
 import { cnsValido as llm, desidentificar } from "../../src/kernel/llm/desidentificar.js";
 import { vincularDocumentoAoPaciente } from "../../src/rules/w8/vinculoDocumento.js";

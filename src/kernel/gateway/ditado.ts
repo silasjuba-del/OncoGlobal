@@ -1,3 +1,4 @@
+import { g23ComandoDeepgram } from "../harness/gates.js";
 import {randomBytes} from 'node:crypto';
 import type {Server} from 'node:http';
 import {WebSocketServer,WebSocket} from 'ws';
@@ -82,14 +83,13 @@ export function criarDitado(sessoes:SessoesDitado,opcoes:{chave?:string;cofre?:C
   });
  }
  function iniciar(ws:WebSocket,t:Ticket){
-  const abort=new AbortController();let canal:CanalVoz|undefined,pronto=false,terminando=false,fechado=false,bytes=0,letras=0,ultimoKeep=agora();
+  const abort=new AbortController();let canal:CanalVoz|undefined,pronto=false,terminando=false,fechado=false,bytes=0,letras=0,ultimoKeep=agora(),inicioAudio:number|null=null;
   const vistos=new Set<string>();let finalTimer:ReturnType<typeof setTimeout>|undefined;
   function enviar(e:EventoDitado){if(ws.readyState===WebSocket.OPEN)ws.send(JSON.stringify(e));}
   function fechar(codigo?:string){if(fechado)return;fechado=true;clearInterval(vigia);clearTimeout(conexaoTimer);clearTimeout(finalTimer);abort.abort();canal?.fechar();ativos.delete(t.token);if(codigo)enviar({tipo:'ERRO',codigo});ws.close();const timer=setTimeout(()=>ws.terminate(),1000);timer.unref();}
-  function guard(){if(!valido(t)){fechar('CONTEXTO_CONSULTA_ALTERADO');return false;}return !fechado;}
+  function guard(){if(inicioAudio !== null && !terminando && g23ComandoDeepgram(agora()===inicioAudio ? 0.001 : (agora()-inicioAudio)/1000,15).decisao !== 'PASSA'){fechar('G23_COMANDO_CURTO_EXCEDIDO');return false;}if(!valido(t)){fechar('CONTEXTO_CONSULTA_ALTERADO');return false;}return !fechado;}
   const conexaoTimer=setTimeout(()=>fechar('DEEPGRAM_CONEXAO_EXPIRADA'),12_000);
-  const inicio=agora();
-  const vigia=setInterval(()=>{if(!guard())return;if(agora()-inicio>600_000){fechar('DITADO_LIMITE_DE_TEMPO');return;}
+  const vigia=setInterval(()=>{if(!guard())return;
    if(pronto&&!terminando&&agora()-ultimoKeep>=4000){try{canal?.manter();ultimoKeep=agora();}catch{fechar('DEEPGRAM_CONEXAO_INTERROMPIDA');}}},250);
   ativos.set(t.token,()=>fechar('DITADO_CANCELADO'));
   ws.on('error',()=>fechar('DITADO_CONEXAO_INTERROMPIDA'));ws.on('close',()=>fechar());
@@ -104,7 +104,7 @@ export function criarDitado(sessoes:SessoesDitado,opcoes:{chave?:string;cofre?:C
    }catch{fechar('DEEPGRAM_CONEXAO_INTERROMPIDA');}
   });
   void conectar(t.chave,abort.signal,{
-   pronto:()=>{if(guard()){pronto=true;clearTimeout(conexaoTimer);enviar({tipo:'PRONTO'});}},
+   pronto:()=>{if(guard()){pronto=true;inicioAudio??=agora();clearTimeout(conexaoTimer);enviar({tipo:'PRONTO'});}},
    erro:()=>fechar('DEEPGRAM_FALHA_DE_CONEXAO'),
    fechado:()=>{if(!guard())return;if(terminando){enviar({tipo:'CONCLUIDO'});fechar();}else fechar('DEEPGRAM_CONEXAO_INTERROMPIDA');},
    mensagem:m=>{if(!guard())return;const p=Resultado.safeParse(m);if(!p.success){if(m&&typeof m==='object'&&'type' in m&&m.type==='Error')fechar('DEEPGRAM_ERRO');return;}

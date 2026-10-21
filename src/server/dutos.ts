@@ -1,3 +1,4 @@
+import { ROTAS_HTTP } from "./rotas/catalogo.js";
 import { relatosInfusaoPendentes } from './relatosInfusaoCanal.js';
 import { lerEventosComIntegridade } from './leituras.js';
 import { createHash } from 'node:crypto';
@@ -37,7 +38,7 @@ const ApacPedido = z.object({ ...Base, apacId: Id, apacVersao: z.number().int().
 const ChatPedido = z.object({ ...Base, mensagemId: Id, decisao: z.object({ campo: Id, valor: z.unknown() }).strict().refine(v => Object.hasOwn(v, 'valor')) }).strict();
 const RevisaoRelatoPedido=z.object({...Base,mensagemId:Id,payloadSha256:z.string().regex(/^[a-f0-9]{64}$/),decisao:z.string().trim().min(1)}).strict();
 const TarefaPedido = z.object({ ...Base, tarefaId: Id }).strict();
-const Rotas = new Set(['/salao/revisar-relato-canal','/farmacia/enviar','/farmacia/conferir','/salao/registrar-administracao','/apac/validar-emissao','/chat/aceitar-decisao','/tarefas/receber','/tarefas/concluir']);
+const Rotas = new Set<string>(ROTAS_HTTP.filter(r=>r.grupo==="DUTOS").map(r=>r.url));
 const negar = (codigo: string, status = 409): ResultadoDuto => ({ status, body: { codigo } });
 
 export type DiagnosticoPrescricaoDuto = {ok:true;prescricao:PrescricaoAssinadaRef}|{ok:false;codigo:string};

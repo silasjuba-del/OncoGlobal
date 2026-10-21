@@ -2,8 +2,8 @@ import { mkdtempSync, readFileSync, realpathSync, rmSync, statSync } from "node:
 import { tmpdir } from "node:os";
 import { basename, dirname, join, sep } from "node:path";
 import { expect, it } from "vitest";
-import { criarExecutorImprimir } from "../../../src/app/executores/imprimir.js";
-import { criarResolverDocumentoLedger } from "../../../src/app/executores/resolverDocumentoLedger.js";
+import { criarExecutorImprimir } from "../../../src/kernel/gateway/executores/imprimir.js";
+import { criarResolverDocumentoLedger } from "../../../src/kernel/ledger/documentos.js";
 import { criarGateway } from "../../../src/kernel/gateway/gateway.js";
 import { abrirLedger } from "../../../src/kernel/ledger/db.js";
 import { salvarDraft } from "../../../src/kernel/ledger/drafts.js";

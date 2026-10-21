@@ -1,3 +1,4 @@
+import { fonteRascunhoNaoPromovivel, rascunhoNaoPromovivel } from "../../contracts/rascunhos.js";
 import type { DatabaseSync } from "node:sqlite";
 import { type Sessao } from "../../contracts/base.js";
 import { ClinicalEvent, type ClinicalEvent as Evento } from "../../contracts/operacao.js";
@@ -6,13 +7,7 @@ import { auditar, gravarOperacao, hashPayload, resultadoExistente, type Gravacao
 import { transacao } from "./db.js";
 
 export { salvarDraft };
-/** Document classification, protocol reviews and calculation artifacts are never generic clinical facts. */
-export function rascunhoJevNaoPromovivel(payload: unknown): boolean {
-  return !!payload && typeof payload === "object" && "kind" in payload
-    && (payload.kind === "JEV_CLASSIFICACAO_RASCUNHO" || payload.kind === "JEV_DIVERGENCIA_RASCUNHO"
-      || payload.kind === "ACAO_COMPOSTA_RASCUNHO" || payload.kind === "FICHA_PRESCRICAO_INSTANCIADA"
-      || payload.kind === "FICHA_PROTOCOLO_REVISOES");
-}
+export { rascunhoInerte as rascunhoJevNaoPromovivel } from "../../contracts/rascunhos.js";
 const emissores = new WeakMap<DatabaseSync, (req:Confirmacao, eventos:readonly Evento[])=>void>();
 /** Callback síncrono, na transação da confirmação: nunca transporte ou efeito externo. */
 export function aoCommitar(db:DatabaseSync, fn:(req:Confirmacao,eventos:readonly Evento[])=>void):void { emissores.set(db,fn); }
@@ -42,8 +37,8 @@ export interface Confirmacao {
 export function confirmar(db: DatabaseSync, req: Confirmacao): Gravacao {
   if (!req.reviewDecisionId || !req.sessao.medicoId || !req.registros.length)
     throw new Error("REVIEW_DECISION_REQUIRED");
-  const promoveJev = () => req.registros.some(r => rascunhoJevNaoPromovivel(lerDraft(db, r.draftId)?.payload)
-    || rascunhoJevNaoPromovivel(r.payload) || rascunhoJevNaoPromovivel({ kind: r.tipo }));
+  const promoveJev = () => req.registros.some(r => fonteRascunhoNaoPromovivel(lerDraft(db, r.draftId)?.payload)
+    || rascunhoNaoPromovivel(r.payload) || rascunhoNaoPromovivel({ kind: r.tipo }));
   // Antes inclusive de replay: mudar o tipo/payload do evento não contorna o tipo do draft.
   if (promoveJev()) return { estado: "NEGADA", resultRef: null, motivo: "PROPOSTA_DOCUMENTAL_NAO_PROMOVIVEL" };
   const eventos = req.registros.map((r, i) => ClinicalEvent.parse({

@@ -93,6 +93,7 @@ export function avaliarIntervaloPosQt(entrada: EntradaIntervaloCivil, limites: L
     return saida("PENDENTE", null, "data civil ausente; instante sem fuso não entra na conta", limites);
   }
   const dias = diferencaDiasCivis(entrada.ultimaQt, entrada.dataAlvo);
+  if (dias === null) return saida("PENDENTE",null,"data civil invalida",limites);
   if (dias >= limites.dias) return saida("PASSA", dias, `intervalo de ${limites.dias} dias respeitado`, limites);
   return saida("AVISO", dias, `intervalo menor que ${limites.dias} dias (aviso)`, limites);
 }

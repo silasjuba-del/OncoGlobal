@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import type { PortaConsulta, SalaoVisao } from "../api/porta.js";
-import { AgendaQt } from "../oncochart/AgendaQt.js";
 import { ContingenciaSalao } from "../salao/ContingenciaSalao.js";
 import { FilaRelatosInfusao } from "../salao/FilaRelatosInfusao.js";
 import { Triagem5Passos } from "../oncochart/Triagem5Passos.js";
@@ -148,7 +147,6 @@ export function TelaSalao({ porta }: { porta: PortaConsulta }) {
       {contextoContingencia === `${escolhido.patientId}:${escolhido.encounterId}` &&
         <ContingenciaSalao key={contextoContingencia} porta={porta}
           patientId={escolhido.patientId} encounterId={escolhido.encounterId} nome={escolhido.nome} />}
-      <AgendaQt />
       <section aria-label="Decisões do médico">
         <h2>Decisões do médico</h2>
         {visao.decisoes.length === 0 ? (

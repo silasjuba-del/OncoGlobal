@@ -1,3 +1,4 @@
+import { transacao } from "../ledger/db.js";
 // W10-LUNA5 · configuração local e alterações globais fora do ledger clínico.
 import { createHash } from "node:crypto";
 import { mkdirSync } from "node:fs";
@@ -182,12 +183,6 @@ function validarCatalogo(catalogo: readonly CaixaNumeradaTipo[]): Map<number, Ca
     porNumero.set(caixa.numero, caixa); chaves.add(caixa.chave);
   }
   return porNumero;
-}
-
-function transacao<T>(db: DatabaseSync, fn: () => T): T {
-  db.exec("BEGIN IMMEDIATE");
-  try { const value = fn(); db.exec("COMMIT"); return value; }
-  catch (error) { try { db.exec("ROLLBACK"); } catch { /* transaction already ended */ } throw error; }
 }
 
 export interface SettingsService {

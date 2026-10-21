@@ -1,7 +1,7 @@
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { expect, it } from 'vitest';
-import { carregarCompetenciaSigtap, buscarProcedimento, buscarProcedimentoApac } from '../../src/apac/sigtap.js';
+import { carregarCompetenciaSigtap, buscarProcedimento, buscarProcedimentoApac } from '../../src/modules/apac/sigtap.js';
 import { parseSigtapOficial } from '../../scripts/sigtap-import.mjs';
 import { lerArquivosSigtapZip } from '../../scripts/sigtap-zip.mjs';
 const root = new URL('../../corpus/f0c/sigtap/',import.meta.url);

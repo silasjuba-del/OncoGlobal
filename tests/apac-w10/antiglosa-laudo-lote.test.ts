@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest";
-import { antiglosa, type ContextoAntiglosa } from "../../src/apac/antiglosa.js";
-import { preencherLaudo } from "../../src/apac/laudo.js";
-import { exportadorSia, montarLotesDoDia } from "../../src/apac/lote.js";
-import { montarTabelaSigtap } from "../../src/apac/sigtap.js";
+import { antiglosa, type ContextoAntiglosa } from "../../src/modules/apac/antiglosa.js";
+import { preencherLaudo } from "../../src/modules/apac/laudo.js";
+import { exportadorSia, montarLotesDoDia } from "../../src/modules/apac/loteRegulatorio.js";
+import { montarTabelaSigtap } from "../../src/modules/apac/sigtap.js";
 import { apac, CAIXAS, CNS_OK, CNS_OK2, CNS_RUIM, COD_QT, proc } from "./helpers.js";
 
 const sigtap = { "2026-09": montarTabelaSigtap("2026-09", [proc()]) };

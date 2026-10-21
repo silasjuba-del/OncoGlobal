@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { projetarEstatistica } from "../../src/estatistica/index.js";
+import { projetarEstatistica } from "../../src/kernel/projections/estatistica.js";
 import { EstatisticaServicoResposta } from "../../src/contracts/api/estatisticaServico.js";
 import { hashConteudoExibido } from "../../src/server/sessao.js";
 import { ambienteHttp } from "../server/http-fixture.js";

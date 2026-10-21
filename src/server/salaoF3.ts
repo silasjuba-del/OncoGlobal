@@ -1,3 +1,4 @@
+import { garantirColunas } from "../kernel/ledger/migracao.js";
 // F3 · Persistência, eventos operacionais, liberação justificada, administração efetiva e contingência impressa do Salão.
 import { createHash, randomUUID } from "node:crypto";
 import { readFileSync } from "node:fs";
@@ -119,14 +120,7 @@ export function garantirSchemaSalaoF3(db: DatabaseSync): void {
     CREATE TRIGGER IF NOT EXISTS salao_folha_contingencia_no_delete BEFORE DELETE ON salao_folha_contingencia
       BEGIN SELECT RAISE(ABORT, 'salao_folha_contingencia append-only'); END;
   `);
-  const temFingerprint = () => (db.prepare("PRAGMA table_info(salao_folha_contingencia)").all() as { name: string }[])
-    .some(c => c.name === "pedidoSha256");
-  if (!temFingerprint()) {
-    // Migração aditiva serializada. Legados permanecem NULL, sem backfill.
-    transacao(db, () => {
-      if (!temFingerprint()) db.exec("ALTER TABLE salao_folha_contingencia ADD COLUMN pedidoSha256 TEXT");
-    });
-  }
+  garantirColunas(db,[['salao_folha_contingencia','pedidoSha256','TEXT']]);
 }
 
 export function registrarInterrupcaoSalaoF3(

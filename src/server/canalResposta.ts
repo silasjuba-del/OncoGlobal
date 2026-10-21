@@ -1,3 +1,4 @@
+import { garantirColunas } from "../kernel/ledger/migracao.js";
 // S-F2-03 · Caixa clínica, integração com pré-consulta/cabeçalho, leitura local de mídia
 // e autorização específica no servidor para resposta pelo Action Gateway.
 import { createHash } from "node:crypto";
@@ -54,8 +55,12 @@ function eventoConsentimentoAtual(db:DatabaseSync,contatoId:string):string|null 
   return row?.eventoId??null;
 }
 
-function garantirTabelasS03(db: DatabaseSync): void {
-  garantirSchema(db);
+const schemasS03Prontos=new WeakSet<DatabaseSync>();
+function garantirTabelasS03(db:DatabaseSync):void {
+ if(schemasS03Prontos.has(db))return;const externa=db.isTransaction;garantirSchema(db);
+ transacao(db,()=>prepararTabelasS03(db));if(!externa)schemasS03Prontos.add(db);
+}
+function prepararTabelasS03(db: DatabaseSync): void {
   db.exec(`
     CREATE TABLE IF NOT EXISTS canal_midia_lida (
       mensagemId TEXT PRIMARY KEY REFERENCES canal_mensagem(mensagemId),
@@ -104,8 +109,7 @@ function garantirTabelasS03(db: DatabaseSync): void {
     CREATE TRIGGER IF NOT EXISTS canal_resposta_envio_no_delete BEFORE DELETE ON canal_resposta_envio
       BEGIN SELECT RAISE(ABORT, 'canal_resposta_envio append-only'); END;
   `);
-  const colunas=db.prepare('PRAGMA table_info(canal_resposta_envio)').all() as {name:string}[];
-  if(!colunas.some(c=>c.name==='providerReceiptId'))db.exec('ALTER TABLE canal_resposta_envio ADD COLUMN providerReceiptId TEXT');
+  garantirColunas(db,[['canal_resposta_envio','providerReceiptId','TEXT']]);
 }
 
 function obterSessaoMedicaValida(acesso: AcessoCanal): Sessao | null {
@@ -550,11 +554,11 @@ export function invalidarRespostasPorMudancaContextoCanal(
   return invalidadas;
 }
 
-function carregarDicionarioPacienteDoLedger(
+export function carregarDicionarioPacienteDoLedger(
   db: DatabaseSync,
   patientId: string,
   destinatario: string,
-): DicionarioPaciente {
+): DicionarioPaciente | null {
   const nomes = new Set<string>();
   const identificadores = new Set<string>();
   try {
@@ -563,16 +567,15 @@ function carregarDicionarioPacienteDoLedger(
       if (ev.tipo !== "Paciente") continue;
       const outer = ev.payload && typeof ev.payload === "object" ? ev.payload as Record<string, unknown> : null;
       const parsed = Paciente.safeParse(outer?.data ?? outer);
-      if (parsed.success) {
+      if (parsed.success && parsed.data.patientId === patientId) {
         if (parsed.data.nome.trim()) nomes.add(parsed.data.nome.trim());
         for (const id of parsed.data.identificadores) {
           if (id.valor.trim()) identificadores.add(id.valor.trim());
         }
       }
     }
-  } catch { /* fallback seguro quando a tabela de eventos está vazia */ }
-  if (nomes.size === 0) nomes.add("Paciente Sintetico Padrao");
-  if (identificadores.size === 0) identificadores.add(`ID-PACIENTE-${patientId}`);
+  } catch { return null; }
+  if (nomes.size === 0) return null;
   void destinatario;
   return {
     nomes: [...nomes],
@@ -769,9 +772,14 @@ export async function executarEnvioAutorizadoCanal(
   }
 
   const autInicial = revalidacaoPrevia.autorizacao;
-  const dic: DicionarioPaciente = opcoes.dicionarioPaciente
+  const dic = opcoes.dicionarioPaciente
     ?? carregarDicionarioPacienteDoLedger(db, autInicial.contexto.patientId, autInicial.destinatarioCanonico);
-
+  if (!dic || !dic.nomes.some(nome => nome.trim())) {
+    const motivoCodigo = "DICIONARIO_PACIENTE_INDISPONIVEL";
+    auditar(db, { ator: { tipo: "SESSAO", id: sessao.medicoId }, acaoPedida: opcoes.intent.verbo,
+      decisao: "NEGADA", motivoCodigo, politicaVersao: "F2-S03", em: agora() });
+    return { resultadoGateway: { decisao: "NEGADA", motivoCodigo }, estadoOperacional: null };
+  }
 
   let reciboAnteriorReutilizado=false;
   let reciboProvedor:string|null=null;

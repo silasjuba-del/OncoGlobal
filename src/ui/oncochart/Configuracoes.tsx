@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { NUMERO_CAIXA_MODELO_FLASH, LABS_MODELO_FLASH, RAD_MODELO_FLASH, lerModeloFlashConfigurado, type ModeloFlash } from "../../config/flash.js";
-import { NUMERO_CAIXA_RECEITUARIO_ESPECIAL, lerConfiguracaoServico } from "../../config/servico.js";
+import { NUMERO_CAIXA_MODELO_FLASH, LABS_MODELO_FLASH, RAD_MODELO_FLASH, lerModeloFlashConfigurado, type ModeloFlash } from "../../contracts/configFlash.js";
+import { NUMERO_CAIXA_RECEITUARIO_ESPECIAL, lerConfiguracaoServico } from "../../contracts/configServico.js";
 import type { PortaConsulta } from "../api/porta.js";
 import type { TemaOnco } from "./tema.js";
 
