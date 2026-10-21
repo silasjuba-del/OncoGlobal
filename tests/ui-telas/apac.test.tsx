@@ -151,3 +151,13 @@ describe("APAC em bloco por lote", () => {
     expect((screen.getByRole("checkbox", { name: "selecionar apac-verde-1" }) as HTMLInputElement).checked).toBe(false);
   });
 });
+
+it("Task009 fonte APAC inconsistente fica visivel e nao produz intencao de exportar",async()=>{
+ const porta=criarPortaFalsa(),v=await porta.lotesApac(),item=v.itens.find(i=>i.apac.apacId==="apac-verde-1")!;
+ vi.spyOn(porta,"lotesApac").mockResolvedValue({...v,itens:[{...item,antiglosa:null,antiglosaEstado:"PENDENTE_INTEGRIDADE_APAC"}]});
+ const acao=vi.spyOn(porta,"acao");render(<TelaApacLote porta={porta} chaves={criarChaves()}/>);
+ const escolha=await screen.findByRole("checkbox",{name:"selecionar apac-verde-1"}) as HTMLInputElement;
+ expect(escolha.disabled).toBe(true);expect(screen.getByRole("alert").textContent).toMatch(/fonte/i);
+ fireEvent.click(escolha);fireEvent.click(screen.getByRole("button",{name:"exportar selecionadas"}));
+ expect(acao).not.toHaveBeenCalled();
+});

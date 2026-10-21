@@ -70,7 +70,7 @@ export function TelaApacLote({
     // O servidor autoriza por APAC (apacId + versao), nunca por lote: uma
     // intenção por APAC selecionada, com o resultado visível ao médico.
     const itens = (visao?.itens ?? []).filter((item) =>
-      selecionadas.includes(item.apac.apacId) && !vencida(item, hoje));
+      selecionadas.includes(item.apac.apacId) && !vencida(item, hoje) && item.antiglosaEstado !== "PENDENTE_INTEGRIDADE_APAC");
     if (!itens.length) { setResultadoExportacao("Nenhuma APAC exportável selecionada."); return; }
     const geracao = geracaoPorta.current;
     const partes: string[] = [];
@@ -110,6 +110,7 @@ export function TelaApacLote({
           {lote.itens.map((item) => {
             const prazo = prazoDe(item, hoje);
             const bloqueada = vencida(item, hoje);
+            const integridadePendente = item.antiglosaEstado === "PENDENTE_INTEGRIDADE_APAC";
             const estado = estadoTravado(item)
               ? item.apac.estado
               : prazo.estado === "VENCIDA" ? "VENCIDA" : item.apac.estado;
@@ -122,6 +123,7 @@ export function TelaApacLote({
                 <p>Estado: {estado}</p>
                 <section aria-label={`Antiglosa ${item.apac.apacId}`}>
                   <h4>Antiglosa · conferência do rascunho</h4>
+                  {integridadePendente ? <p role="alert">Fonte da APAC com integridade pendente. Confira os registros antes de revisar ou exportar.</p> : null}
                   {item.antiglosa ? <>
                     <p>{item.antiglosa.exportavel ? "Conferência disponível; exportação depende da validação do servidor."
                       : "Exportação bloqueada pelos achados abaixo. A consulta segue."}</p>
@@ -152,9 +154,9 @@ export function TelaApacLote({
                   <input
                     type="checkbox"
                     aria-label={`selecionar ${item.apac.apacId}`}
-                    disabled={bloqueada}
+                    disabled={bloqueada || integridadePendente}
                     checked={selecionadas.includes(item.apac.apacId)}
-                    onChange={() => alternar(item.apac.apacId, bloqueada)}
+                    onChange={() => alternar(item.apac.apacId, bloqueada || integridadePendente)}
                   />
                 </label>
               </article>
