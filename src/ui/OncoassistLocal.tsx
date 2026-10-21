@@ -341,7 +341,7 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp }: {
           aoAlterarPrescricaoPendente={setPrescricaoPendente} aoAlterarPrescricaoSalvando={setPrescricaoSalvando}
           aoAlterarApacPendente={setApacPendente} aoAlterarApacSalvando={setApacSalvando}
           aoAtualizarClinico={() => setVersaoConsulta(v => v + 1)}
-          aoAbrirApac={() => navegarParaTela("apac")} />
+          aoAbrirApac={() => navegarParaTela("apac")} aoAbrirCanal={() => navegarParaTela("canal")} />
         <div id="consulta-fase2" className="consulta-secao" tabIndex={-1}>
           <RevisaoClinica porta={porta} contexto={contexto} versaoClinica={versaoConsulta} aoRegistrar={()=>setVersaoConsulta(v=>v+1)}/>
         </div>

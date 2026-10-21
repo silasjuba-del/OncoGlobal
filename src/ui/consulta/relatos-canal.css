@@ -1,0 +1,78 @@
+.relatos-canal {
+  display: grid;
+  gap: .75rem;
+  min-width: 0;
+  padding: .9rem;
+  color: #183247;
+  background: #fff;
+  border: 1px solid #d5e0e6;
+  border-radius: .65rem;
+}
+
+.relatos-canal :is(button, time, summary) { font: inherit; }
+.relatos-canal :focus-visible { outline: 3px solid #006d77; outline-offset: 2px; }
+.relatos-canal__cabecalho {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: .6rem 1rem;
+}
+.relatos-canal__cabecalho h3 { margin: 0; font-size: 1rem; }
+.relatos-canal__cabecalho p { margin: .25rem 0 0; color: #536b7a; }
+.relatos-canal__eyebrow { margin: 0 0 .2rem !important; font-size: .68rem; font-weight: 700; letter-spacing: .1em; }
+.relatos-canal__contagem { color: #536b7a; font-size: .8rem; font-weight: 650; }
+.relatos-canal__acoes { display: flex; flex-wrap: wrap; gap: .5rem; }
+.relatos-canal__acoes button {
+  min-height: 2.5rem;
+  padding: .45rem .7rem;
+  color: #006d77;
+  background: #fff;
+  border: 1px solid #86a5ad;
+  border-radius: .4rem;
+  cursor: pointer;
+}
+.relatos-canal__acoes button:hover { background: #eef7f7; }
+.relatos-canal__aviso,
+.relatos-canal__vazio {
+  margin: 0;
+  padding: .65rem;
+  color: #536b7a;
+  background: #f4f8fa;
+  border-radius: .4rem;
+}
+.relatos-canal__lista { display: grid; gap: .65rem; margin: 0; padding: 0; list-style: none; }
+.relatos-canal__relato {
+  display: grid;
+  gap: .6rem;
+  min-width: 0;
+  padding: .75rem;
+  background: #f8fafb;
+  border: 1px solid #d5e0e6;
+  border-radius: .5rem;
+}
+.relatos-canal__meta { display: flex; flex-wrap: wrap; gap: .25rem .8rem; color: #536b7a; font-size: .8rem; }
+.relatos-canal__autoria,
+.relatos-canal__status,
+.relatos-canal__midia { margin: 0; color: #536b7a; font-size: .82rem; overflow-wrap: anywhere; }
+.relatos-canal__texto {
+  min-width: 0;
+  margin: 0;
+  color: #183247;
+  font: inherit;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.relatos-canal__sinal { margin: 0; padding: .55rem; color: #78501e; background: #fff8eb; border-left: 3px solid #b77b2c; }
+.relatos-canal__rastreabilidade { min-width: 0; color: #536b7a; font-size: .78rem; }
+.relatos-canal__rastreabilidade summary { color: #006d77; cursor: pointer; font-weight: 650; }
+.relatos-canal__rastreabilidade dl { display: grid; grid-template-columns: minmax(8rem, .6fr) minmax(0, 1.4fr); gap: .3rem .65rem; margin: .5rem 0 0; }
+.relatos-canal__rastreabilidade dt { font-weight: 650; }
+.relatos-canal__rastreabilidade dd { min-width: 0; margin: 0; overflow-wrap: anywhere; }
+
+@media (max-width: 520px) {
+  .relatos-canal__acoes { display: grid; grid-template-columns: minmax(0, 1fr); }
+  .relatos-canal__acoes button { width: 100%; }
+  .relatos-canal__rastreabilidade dl { grid-template-columns: minmax(0, 1fr); gap: .1rem; }
+  .relatos-canal__rastreabilidade dd { margin-bottom: .35rem; }
+}

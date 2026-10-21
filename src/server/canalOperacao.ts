@@ -35,10 +35,15 @@ export function carregarOperacaoCanal(root?:string):OperacaoCanal {
     return {contasWebhook:c.contasWebhook,...(c.whatsappSaida.length?{transporteSaida:criarTransporteWhatsApp(c.whatsappSaida)}:{})};
   }catch{throw new Error('CONFIGURACAO_CANAL_INVALIDA');}
 }
+function pacienteDoEvento(evento:ClinicalEvent){
+ if(!['Paciente','Paciente@1'].includes(evento.tipo)||!['CONFIRMADO','ASSINADO'].includes(evento.revisao))return null;
+ const paciente=Paciente.safeParse(dadosDoEvento(evento));
+ return paciente.success&&paciente.data.patientId===evento.patientId?paciente.data:null;
+}
 /** Somente contatos explicitamente vinculados no prontuário; nome e From não provam identidade. */
 export function cadastrosCanal(db:DatabaseSync, snapshot?:readonly ClinicalEvent[]){
  const eventos=eventosVigentes(snapshot??lerEventosComIntegridade(db).itens);
- const pacientes=eventos.filter(e=>['CONFIRMADO','ASSINADO'].includes(e.revisao)&&e.tipo==='Paciente').flatMap(e=>{const p=Paciente.safeParse(dadosDoEvento(e));return p.success&&p.data.patientId===e.patientId?[p.data]:[];});
+ const pacientes=eventos.flatMap(e=>{const p=pacienteDoEvento(e);return p?[p]:[];});
  const contatos=eventos.filter(e=>e.tipo==='Contato'&&['CONFIRMADO','ASSINADO'].includes(e.revisao)).flatMap(event=>{const p=Contato.safeParse(dadosDoEvento(event));return p.success?[{event,value:p.data}]:[];});
  const projetados=projetarVinculosContato(contatos,eventos);
  return pacientes.map(p=>({patientId:p.patientId,nome:p.nome,chaveDemografica:null,identificadores:projetados.filter(c=>c.estadoVinculo==='VINCULADO'&&c.patientIdResolvido===p.patientId&&c.value.revogadoEm===null&&c.value.canal==='WHATSAPP_SERVICO')
@@ -59,7 +64,7 @@ export function vinculoAtualCanal(db:DatabaseSync,patientId:string,endereco:stri
 }
 export function revisaoContextoCanal(db:DatabaseSync,c:{patientId:string;encounterId:string;tumorLotId:string|null}):string|null {
  const eventos=eventosVigentes(listarEventos(db,c.patientId));
- if(!eventos.some(e=>e.tipo==='Paciente'&&['CONFIRMADO','ASSINADO'].includes(e.revisao)))return null;
+ if(!eventos.some(e=>pacienteDoEvento(e)?.patientId===c.patientId))return null;
  if(!contextosCanal(db,c.patientId).some(e=>e.encounterId===c.encounterId&&e.tumorLotId===c.tumorLotId))return null;
  return hashConteudoExibido(eventos);
 }
