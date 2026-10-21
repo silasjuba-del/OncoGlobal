@@ -236,7 +236,9 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
     if (rota === "basePrescricaoExecutavel" || rota === "prepararPrescricaoExecutavel" || rota === "confirmarPrescricaoExecutavel") {
       const r = operarPrescricaoExecutavel(deps, token, rota === "basePrescricaoExecutavel" ? "base"
         : rota === "prepararPrescricaoExecutavel" ? "preparar" : "confirmar", raw);
-      return reply(r.status, rota, r.body);
+      const codigo = r.body && typeof r.body === "object" && "codigo" in r.body && typeof r.body.codigo === "string"
+        ? r.body.codigo : rota;
+      return reply(r.status, codigo, r.body);
     }
     if (rota === "baseApacRascunho" || rota === "prepararApacRascunho" || rota === "confirmarApacRascunho") {
       const r = operarApacRascunho(deps, token, rota === "baseApacRascunho" ? "base"

@@ -1,5 +1,10 @@
 // proveniência: dados sintéticos — não utilizar em produção
 import { afterEach, expect, it, vi } from "vitest";
+import { join } from "node:path";
+import { abrirLedger } from "../../src/kernel/ledger/db.js";
+import { operarPrescricaoExecutavel } from "../../src/server/prescricaoExecutavel.js";
+import * as comandos from "../../src/kernel/comandos/index.js";
+import * as portas from "../../src/kernel/comandos/portas.js";
 import * as documentoExecutavel from "../../src/rules/prescricao/documentoExecutavel.js";
 import { executarConfirmacao } from "../../src/kernel/comandos/index.js";
 import { lerDraft, listarDrafts, salvarDraft } from "../../src/kernel/comandos/portas.js";
@@ -19,6 +24,7 @@ const PREPARAR = "/consulta/prescricao-executavel/preparar";
 const CONFIRMAR = "/consulta/prescricao-executavel/confirmar";
 
 afterEach(async () => {
+  vi.restoreAllMocks();
   for (const ambiente of ambientes.splice(0)) {
     await ambiente.close();
     removerDiretorio(ambiente.dir);
@@ -64,8 +70,8 @@ function edicao(overrides: Record<string, unknown> = {}) {
   };
 }
 
-async function abrir() {
-  const ambiente = await abrirAmbiente(criarDiretorio());
+async function abrir(log?: Parameters<typeof abrirAmbiente>[1]) {
+  const ambiente = await abrirAmbiente(criarDiretorio(), log);
   ambientes.push(ambiente);
   cadastrarPaciente(ambiente);
   // A fixture inicial aponta para um marcador opaco; o teste usa referência local sintética.
@@ -830,4 +836,150 @@ it("não mantém origem PROTOCOL ao alterar dose final sem conversão manual exp
   expect(resposta.status).toBe(409);
   expect(a.eventos()).toEqual(antes);
   expect(listarDrafts(a.db, PACIENTE).some(draft => draft.draftId.startsWith("rx-preparada:"))).toBe(false);
+});
+
+
+it.each(["revisao", "gravador"])("RT01: negativa %s permanece auditada depois do rollback integral", async ataque => {
+  const a = await abrir();
+  const { preparada } = await prepararNovaLinha(a, { edicao: { encaminharFarmacia: true } });
+  if (ataque === "revisao") {
+    const d = lerDraft(a.db, preparada.draftId)!;
+    salvarDraft(a.db, { ...d, revision: d.revision + 1 });
+  } else {
+    const original = comandos.executarConfirmacao;
+    vi.spyOn(comandos, "executarConfirmacao").mockImplementation((db, req) => original(db, {
+      ...req, registros: req.registros.map((r, i) => i ? r : { ...r, expectedRevision: r.expectedRevision + 1 }),
+    }));
+  }
+  const antes = a.eventos(), drafts = listarDrafts(a.db, PACIENTE);
+  const audits = Number(a.db.prepare("SELECT count(*) AS n FROM audit_event").get()!.n);
+  const r = await a.request(CONFIRMAR, { contexto, draftId: preparada.draftId,
+    expectedRevision: preparada.revision, conteudoHash: preparada.conteudoHash, idempotencyKey: `rt01-${ataque}` });
+  expect(r.status).toBe(409);
+  expect(a.eventos()).toEqual(antes);
+  expect(listarDrafts(a.db, PACIENTE)).toEqual(drafts);
+  expect(listarDrafts(a.db, PACIENTE).filter(d => d.draftId.startsWith("rx-aux-"))).toEqual([]);
+  const audit = a.db.prepare("SELECT * FROM audit_event").all().slice(audits);
+  expect(audit).toHaveLength(1);
+  expect(audit[0]).toMatchObject({ decisao: "NEGADA", motivoCodigo: ataque === "revisao"
+    ? "REVISAO_PREPARACAO_ALTERADA" : "EXPECTED_REVISION_CONFLICT" });
+});
+
+it("RT02: falha SQLite apos primeiro auxiliar retorna 503 e um log seguro sem efeitos", async () => {
+  const log = vi.fn(), a = await abrir(log);
+  const { preparada } = await prepararNovaLinha(a, { edicao: { encaminharFarmacia: true } });
+  const antes = a.eventos(), drafts = listarDrafts(a.db, PACIENTE);
+  const audits = a.db.prepare("SELECT * FROM audit_event").all();
+  const original = portas.salvarDraft;
+  let auxiliares = 0;
+  vi.spyOn(portas, "salvarDraft").mockImplementation((db, draft) => {
+    if (draft.draftId.startsWith("rx-aux-") && ++auxiliares === 2)
+      throw new Error("SQLITE_BUSY: segredo-sintetico-nao-logar");
+    return original(db, draft);
+  });
+  log.mockClear();
+  const r = await a.request(CONFIRMAR, { contexto, draftId: preparada.draftId,
+    expectedRevision: preparada.revision, conteudoHash: preparada.conteudoHash, idempotencyKey: "rt02-sqlite" });
+  expect(auxiliares).toBe(2);
+  expect(r).toEqual({ status: 503, data: { codigo: "PRESCRICAO_ARMAZENAMENTO_INDISPONIVEL" } });
+  expect(log.mock.calls).toEqual([[{ rota: "confirmarPrescricaoExecutavel",
+    codigo: "PRESCRICAO_ARMAZENAMENTO_INDISPONIVEL", status: 503 }]]);
+  expect(a.eventos()).toEqual(antes);
+  expect(listarDrafts(a.db, PACIENTE)).toEqual(drafts);
+  expect(a.db.prepare("SELECT * FROM audit_event").all()).toEqual(audits);
+});
+
+
+it("RT02: recibo confirmado sobrevive a resposta incerta e retry devolve REPLAY", async () => {
+  const log = vi.fn(), a = await abrir(log);
+  const { preparada } = await prepararNovaLinha(a);
+  const pedido = { contexto, draftId: preparada.draftId, expectedRevision: preparada.revision,
+    conteudoHash: preparada.conteudoHash, idempotencyKey: "rt02-resposta-incerta" };
+  const original = portas.transacao;
+  const spy = vi.spyOn(portas, "transacao").mockImplementationOnce((...args) => {
+    original(...args);
+    throw new Error("resposta-perdida-segredo-sintetico");
+  });
+  log.mockClear();
+  const incerta = await a.request(CONFIRMAR, pedido);
+  spy.mockRestore();
+  expect(incerta.status).toBe(503);
+  const confirmados = a.eventos();
+  expect(confirmados.filter(e => e.tipo === "DOCUMENTO")).toHaveLength(1);
+  expect(log.mock.calls).toEqual([[{ rota: "confirmarPrescricaoExecutavel",
+    codigo: "PRESCRICAO_ARMAZENAMENTO_INDISPONIVEL", status: 503 }]]);
+  const retry = await a.request(CONFIRMAR, pedido);
+  expect(retry.status).toBe(200);
+  expect(retry.data.codigo).toBe("REPLAY");
+  expect(a.eventos()).toEqual(confirmados);
+});
+
+it("RT09: duas conexoes excluem escritor durante leitura e recusam segunda base obsoleta", async () => {
+  const a = await abrir();
+  const { preparada: primeira, pedido: preparo } = await prepararNovaLinha(a);
+  const pr = await a.request(PREPARAR, { ...preparo, idempotencyKey: "rt09-previa-b" });
+  const segunda = PrescricaoExecutavelPreparada.parse(pr.data);
+  const exibidos = a.sessoes.bundleExibido(a.token, contexto)!;
+  a.sessoes.registrarBundleExibido(a.token, contexto, [...exibidos, {
+    documentId: primeira.conteudo.documentId, documentVersion: primeira.conteudo.documentVersion,
+    conteudoHash: primeira.conteudoHash, draftId: primeira.draftId,
+  }]);
+  const b = abrirLedger(join(a.dir, "consulta.sqlite"));
+  b.exec("PRAGMA busy_timeout = 0");
+  const pedidoB = { contexto, draftId: segunda.draftId, expectedRevision: segunda.revision,
+    conteudoHash: segunda.conteudoHash, idempotencyKey: "rt09-confirmar-b" };
+  const depsB = { db: b, sessoes: a.sessoes, agora: () => AGORA };
+  let disputou = false;
+  const original = portas.lerDraft;
+  const spy = vi.spyOn(portas, "lerDraft").mockImplementation((db, id) => {
+    if (db === a.db && id === primeira.draftId && !disputou) {
+      disputou = true;
+      expect(a.db.isTransaction).toBe(true);
+      expect(operarPrescricaoExecutavel(depsB, a.token, "confirmar", pedidoB)).toMatchObject({
+        status: 503, body: { codigo: "PRESCRICAO_ARMAZENAMENTO_INDISPONIVEL" },
+      });
+    }
+    return original(db, id);
+  });
+  try {
+    const gravada = await assinar(a, primeira, "rt09-confirmar-a");
+    spy.mockRestore();
+    expect(disputou).toBe(true);
+    expect(gravada.codigo).toBe("GRAVADA");
+    expect(operarPrescricaoExecutavel(depsB, a.token, "confirmar", pedidoB)).toMatchObject({
+      status: 409, body: { codigo: "BASE_PRESCRICAO_ALTERADA" },
+    });
+    expect(a.eventos().filter(e => e.tipo === "DOCUMENTO")).toHaveLength(1);
+    expect(a.eventos().filter(e => e.tipo === "Ciclo")).toHaveLength(1);
+    expect(listarDrafts(a.db, PACIENTE).find(d => d.draftId === segunda.draftId)?.revision).toBe(0);
+  } finally { spy.mockRestore(); b.close(); }
+});
+
+it.each([
+  { dose: 1e21, unidade: "mg", mg: 1e21 },
+  { dose: 0.0000001, unidade: "mg", mg: 0.0000001 },
+  { dose: 1.5, unidade: "MG", mg: 1.5 },
+  { dose: 1.5, unidade: "\u03bcg", mg: 0.0015 },
+  { dose: 1.5, unidade: "\u00b5g", mg: 0.0015 },
+  { dose: "1,5", unidade: "mg", mg: null },
+  { dose: 1e308, unidade: "g", mg: null },
+  { dose: Number.MIN_VALUE, unidade: "mcg", mg: null },
+])("RT10: fronteira de dose $dose $unidade preserva valor ou recusa", async ({ dose, unidade, mg }) => {
+  const a = await abrir(), base = await carregarBase(a);
+  const item = itemPrescrito();
+  const antes = a.eventos();
+  const r = await a.request(PREPARAR, { contexto, expectedBaseHash: base.revisao, idempotencyKey: "rt10-fronteira",
+    edicao: edicao({ itens: [{ ...item, item: { ...item.item, prescribedDose: dose, unit: unidade } }] }) });
+  if (mg === null) {
+    expect([400, 409]).toContain(r.status);
+    expect(a.eventos()).toEqual(antes);
+    return;
+  }
+  expect(r.status).toBe(200);
+  const preparada = PrescricaoExecutavelPreparada.parse(r.data);
+  expect(preparada.conteudo.itens[0]!.item.prescribedDose).toBe(dose);
+  await assinar(a, preparada, "rt10-confirmar");
+  const ciclo = dadosEvento(a.eventos().find(e => e.tipo === "Ciclo")!);
+  expect((ciclo.itens as { doseMg: number }[])[0]!.doseMg).toBe(mg);
+  expect(Number.isFinite((ciclo.itens as { doseMg: number }[])[0]!.doseMg)).toBe(true);
 });

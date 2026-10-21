@@ -29,13 +29,13 @@ export function criarDiretorio(): string {
   return mkdtempSync(join(tmpdir(), "f0-e6b-consulta-"));
 }
 
-export async function abrirAmbiente(dir: string) {
+export async function abrirAmbiente(dir: string, log: (entry: { rota: string; codigo: string; status: number }) => void = () => {}) {
   const db = abrirLedger(join(dir, "consulta.sqlite"));
   const sessoes = criarGerenciadorSessao({ medicoId: "medico-teste-e6b", crm: "CRM-TESTE-E6B",
     senha: SENHA, duracaoMs: 60_000, agora: () => AGORA });
   const gateway = criarGateway({ agora: () => AGORA, auditar: () => {},
     store: memoriaIdempotencia(), executores: {} });
-  const server = criarServidorLocal({ db, sessoes, gateway, agora: () => AGORA, log: () => {},
+  const server = criarServidorLocal({ db, sessoes, gateway, agora: () => AGORA, log,
     configRootDir: join(dir, "config") });
   await new Promise<void>((resolve, reject) => {
     if (server.listening) return resolve();
