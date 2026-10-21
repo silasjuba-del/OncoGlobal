@@ -27,6 +27,16 @@ function pedido(db: ReturnType<typeof abrirLedger>, id: string, extra: Partial<C
 // RT-ADV-04: rotas HTTP chamam writeRouter.confirmar direto; as invariantes do writer
 // clínico precisam valer ali, não só no gateway.
 describe("RT-ADV-04 · funil único de escrita clínica", () => {
+  it("nega carimbo anterior à emissão da sessão médica", () => {
+    const db = abrirLedger(":memory:");
+    try {
+      const r = confirmar(db, pedido(db, "antes-da-sessao", { em: "2026-10-07T09:59:59.000Z" }));
+      expect(r).toEqual({ estado: "NEGADA", resultRef: null, motivo: "SESSAO_NAO_INICIADA" });
+      expect(listarEventos(db, PACIENTE)).toEqual([]);
+      expect(db.prepare("SELECT motivoCodigo FROM audit_event").all()).toEqual([{ motivoCodigo: "SESSAO_NAO_INICIADA" }]);
+    } finally { db.close(); }
+  });
+
   it("nega sessão expirada mesmo sem passar pelo writer do gateway", () => {
     const db = abrirLedger(":memory:");
     try {

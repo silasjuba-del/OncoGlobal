@@ -201,7 +201,7 @@ describe("HARNESS DE RUNTIME · Verificação determinística independente, áud
   });
 
   it("detecta inversão de qualificador, normalização divergente, falha de identidade e cobertura não verificada", () => {
-    const docTexto = "Paciente: Outro Paciente Sintetico\nCPF: 123.456.789-01\nNega dispneia. Creatinina 1,2 mg/dL.";
+    const docTexto = "Paciente: Outro Paciente Sintetico\nCPF: 000.000.000-00\nNega dispneia. Creatinina 1,2 mg/dL.";
     const hashDoc = sha256(docTexto);
 
     const veredito = verificarPropostaNoHarnessRuntime({
@@ -238,7 +238,8 @@ describe("HARNESS DE RUNTIME · Verificação determinística independente, áud
           identidadeEsperadaPaciente: {
             patientId: PACIENTE,
             nome: PACIENTE,
-            identificadores: [{ tipo: "CPF", valor: "111.444.777-35" }],
+            // O conflito é de nome; nenhum identificador com aparência de CPF real entra na fixture.
+            identificadores: [],
           },
         },
         {

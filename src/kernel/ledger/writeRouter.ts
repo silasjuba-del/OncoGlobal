@@ -42,6 +42,7 @@ export interface Confirmacao {
 export function motivoInvarianteEscrita(req: Pick<Confirmacao, "sessao" | "em">): string | null {
   const sessao = Sessao.safeParse(req.sessao);
   if (!sessao.success) return "IDENTIDADE_MEDICA_INVALIDA";
+  if (!(Date.parse(sessao.data.emitidaEm) <= Date.parse(req.em))) return "SESSAO_NAO_INICIADA";
   if (!(Date.parse(sessao.data.expiraEm) > Date.parse(req.em))) return "SESSAO_EXPIRADA";
   return null;
 }

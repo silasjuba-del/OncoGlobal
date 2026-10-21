@@ -574,4 +574,3 @@ export {
   type ResultadoWriterClinico,
   type WriterClinicoGateway,
 } from "./writerClinico.js";
-
