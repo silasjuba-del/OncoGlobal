@@ -17,8 +17,20 @@ export function criarResolverDocumentoLedger(db: DatabaseSync): ResolverDocument
   return { async resolver({id,version}) {
     const pacientes=db.prepare(`SELECT DISTINCT patientId FROM clinical_event WHERE tipo IN ('DOCUMENTO','DOCUMENTO@1')
       AND CASE WHEN json_valid(payload) THEN json_extract(payload,'$.data.data.documentId') END = ?`).all(id);
-    const eventos=pacientes.flatMap(row=>typeof row.patientId==="string"?lerLedgerIntegro(db,row.patientId).itens:[]);
-    const validos = eventosVigentes(eventos).filter(e=>e.revisao === "ASSINADO" && e.tipo === "DOCUMENTO").flatMap(e=>{
+    const leituras=pacientes.flatMap(row=>{
+      if(typeof row.patientId!=="string")return [];
+      const leitura=lerLedgerIntegro(db,row.patientId), recusados=leitura.pendenciasIntegridade.map(p=>p.eventoId);
+      const edges=recusados.length?db.prepare(`SELECT rejected.supersedesEventId FROM clinical_event AS rejected
+        JOIN clinical_event AS target ON target.eventId=rejected.supersedesEventId AND target.patientId=rejected.patientId
+        WHERE rejected.patientId=? AND rejected.eventId IN (${recusados.map(()=>"?").join(",")})
+          AND rejected.supersedesEventId IS NOT NULL`).all(row.patientId,...recusados):[];
+      return [{leitura,alvosNegados:edges.flatMap(edge=>typeof edge.supersedesEventId==="string"?[edge.supersedesEventId]:[])}];
+    });
+    const eventos=leituras.flatMap(item=>item.leitura.itens);
+    // Rejected envelopes cannot authorize supersession, but their stored edge prevents reviving the target.
+    const alvosNegados=new Set(leituras.flatMap(item=>item.alvosNegados));
+    const validos = eventosVigentes(eventos).filter(e=>!alvosNegados.has(e.eventId)
+      && e.revisao === "ASSINADO" && e.tipo === "DOCUMENTO").flatMap(e=>{
       const d = dadosDoEvento(e), corpo = objeto(d?.data), assinatura = objeto(d?.signature);
       if (!corpo || !assinatura || typeof corpo.documentId !== "string" || typeof corpo.documentVersion !== "number"
         || assinatura.documentId !== corpo.documentId || assinatura.documentVersion !== corpo.documentVersion
