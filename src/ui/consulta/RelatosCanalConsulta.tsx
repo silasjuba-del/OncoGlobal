@@ -5,6 +5,14 @@ import type { MensagemCanalVisao } from "../api/porta.js";
 import "./relatos-canal.css";
 
 type Expansao = { contexto: string; aberto: boolean };
+const recibos: Record<NonNullable<MensagemCanalVisao["reciboTecnico"]>, string> = {
+  RECEBIDA: "recebida", PROCESSADA: "processada pelo canal", ENVIADA: "enviada",
+  ENTREGUE: "entregue", LIDA: "lida", FALHOU: "falha no processamento ou envio",
+};
+const conversas: Record<NonNullable<MensagemCanalVisao["estadoConversa"]>, string> = {
+  NOVA: "nova", TRIADA: "triada", AGUARDA_MEDICO: "aguardando médico",
+  RESPONDIDA: "respondida", ENCERRADA: "encerrada",
+};
 
 function chaveContexto(contexto: ContextoAcaoComposta): string {
   return JSON.stringify([contexto.patientId, contexto.encounterId, contexto.tumorLotId]);
@@ -59,17 +67,14 @@ function Relato({ mensagem }: { mensagem: MensagemCanalVisao }) {
           ? "não processada; conteúdo não disponível aqui."
           : "marcada como lida localmente."}
       </p> : null}
-      {(mensagem.reciboTecnico || mensagem.estadoConversa) ? <p className="relatos-canal__status">
-        {mensagem.reciboTecnico ? <>Estado técnico: {mensagem.reciboTecnico}</> : null}
-        {mensagem.reciboTecnico && mensagem.estadoConversa ? " · " : null}
-        {mensagem.estadoConversa ? <>Estado da conversa: {mensagem.estadoConversa}</> : null}
-      </p> : null}
+      {mensagem.estadoConversa ? <p className="relatos-canal__status">Conversa: {conversas[mensagem.estadoConversa]}</p> : null}
       <details className="relatos-canal__rastreabilidade">
         <summary>Rastreabilidade</summary>
         <dl>
           <dt>Identificador do relato</dt><dd>{mensagem.mensagemId}</dd>
           <dt>Contato</dt><dd>{mensagem.contatoId}</dd>
           <dt>Horário original do canal</dt><dd>{mensagem.em}</dd>
+          {mensagem.reciboTecnico ? <><dt>Recibo da mensagem</dt><dd>{recibos[mensagem.reciboTecnico]}</dd></> : null}
           {mensagem.midia ? <><dt>Identificador da mídia</dt><dd>{mensagem.midia.providerMediaId}</dd></> : null}
         </dl>
       </details>
