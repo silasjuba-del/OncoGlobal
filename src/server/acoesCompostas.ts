@@ -1,6 +1,6 @@
 import type { DatabaseSync } from "node:sqlite";
 import { Ciclo, TreatmentEpisode } from "../contracts/clinico.js";
-import { ContextoAcaoComposta, type BaseAcaoComposta, type ResultadoAcaoComposta } from "../contracts/api/acoesCompostas.js";
+import { ContextoAcaoComposta, PedidoAcaoComposta, type BaseAcaoComposta, type ResultadoAcaoComposta } from "../contracts/api/acoesCompostas.js";
 import { AcaoCompostaPreparada, BaseAcaoCompostaResposta, PrepararAcaoCompostaPedido } from "../contracts/api/execucaoAcaoComposta.js";
 import { lerDraft, listarEventos, salvarDraft, transacao } from "../kernel/comandos/portas.js";
 import { dadosDoEvento, eventosVigentes } from "../kernel/projections/snapshot.js";
@@ -63,7 +63,8 @@ function documentoDoPlano(r: ResultadoAcaoComposta) {
 
 /** Persiste uma intenção revisável. A assinatura/execução clínica é uma operação separada. */
 export function operarAcoesCompostas(deps: Deps, token: string, operacao: "base" | "preparar", raw: unknown): Resposta {
-  if (!deps.sessoes.obter(token)) return negar("SESSAO_INVALIDA", 401);
+  const sessao = deps.sessoes.obter(token);
+  if (!sessao) return negar("SESSAO_INVALIDA", 401);
   const pedido = operacao === "preparar" ? PrepararAcaoCompostaPedido.safeParse(raw) : null;
   const p = ContextoAcaoComposta.safeParse(pedido?.success ? pedido.data.contexto : raw);
   if (!p.success || operacao === "preparar" && !pedido?.success) return negar("PAYLOAD_INVALIDO", 400);
@@ -77,22 +78,37 @@ export function operarAcoesCompostas(deps: Deps, token: string, operacao: "base"
   const entrada = pedido.data;
   const resultado = prepararAcaoComposta(leitura.base, entrada.pedido);
   const documentoPlano = documentoDoPlano(resultado);
+  const conteudoHash = hashConteudoExibido({ contexto: entrada.contexto, atorId: sessao.medicoId,
+    pedido: entrada.pedido, resultado, documentoPlano });
   const requestHash = hashConteudoExibido(entrada);
   const draftId = `acao-composta:${hashConteudoExibido([entrada.contexto, entrada.idempotencyKey])}`;
   return transacao(deps.db, () => {
     const anterior = lerDraft(deps.db, draftId);
     if (anterior) {
-      const payload = anterior.payload as { kind?: unknown; requestHash?: unknown; resposta?: unknown };
+      if (!anterior.payload || typeof anterior.payload !== "object" || Array.isArray(anterior.payload))
+        return negar("IDEMPOTENCIA_CONFLITO");
+      const payload = anterior.payload as { kind?: unknown; requestHash?: unknown; resposta?: unknown; atorId?: unknown;
+        contexto?: unknown; pedido?: unknown };
       const resposta = AcaoCompostaPreparada.safeParse(payload.resposta);
+      const contextoSalvo = ContextoAcaoComposta.safeParse(payload.contexto);
+      const pedidoSalvo = PedidoAcaoComposta.safeParse(payload.pedido);
       if (anterior.patientId !== entrada.contexto.patientId || payload.kind !== "ACAO_COMPOSTA_RASCUNHO"
-        || payload.requestHash !== requestHash || !resposta.success) return negar("IDEMPOTENCIA_CONFLITO");
+        || payload.requestHash !== requestHash || payload.atorId !== sessao.medicoId || !resposta.success
+        || !contextoSalvo.success || !pedidoSalvo.success
+        || hashConteudoExibido(contextoSalvo.data) !== hashConteudoExibido(entrada.contexto)
+        || hashConteudoExibido(pedidoSalvo.data) !== hashConteudoExibido(entrada.pedido)
+        || resposta.data.draftId !== draftId || resposta.data.revision !== anterior.revision
+        || resposta.data.conteudoHash !== conteudoHash
+        || hashConteudoExibido(resposta.data.resultado) !== hashConteudoExibido(resultado)
+        || hashConteudoExibido(resposta.data.documentoPlano) !== hashConteudoExibido(documentoPlano))
+        return negar("IDEMPOTENCIA_CONFLITO");
       return { status: 200, body: resposta.data };
     }
-    const conteudoHash = hashConteudoExibido({ contexto: entrada.contexto, resultado, documentoPlano });
     const resposta = AcaoCompostaPreparada.parse({ draftId, revision: 0, conteudoHash,
       resultado, documentoPlano, criaEventoClinico: false, liberaTratamento: false });
     salvarDraft(deps.db, { draftId, patientId: entrada.contexto.patientId, sourceId: `plano:${draftId}`,
-      rawRef: "referencia-local", payload: { kind: "ACAO_COMPOSTA_RASCUNHO", contexto: entrada.contexto, requestHash, resposta },
+      rawRef: "referencia-local", payload: { kind: "ACAO_COMPOSTA_RASCUNHO", contexto: entrada.contexto,
+        atorId: sessao.medicoId, pedido: entrada.pedido, requestHash, resposta },
       revision: 0, diagnostics: ["REVISAO_MEDICA_OBRIGATORIA", "EXECUCAO_CLINICA_NAO_REALIZADA"], criadoEm: deps.agora() });
     return { status: 200, body: resposta };
   });

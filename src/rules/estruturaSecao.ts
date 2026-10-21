@@ -25,4 +25,3 @@ export { diferencaDiasCivis } from "./datas.js";
 export function fonteInformada(fonte: string | null | undefined): boolean {
   return typeof fonte === "string" && fonte.trim().length > 0;
 }
-

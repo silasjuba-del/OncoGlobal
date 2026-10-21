@@ -170,16 +170,20 @@ export function AcoesCompostas({ base, tipoInicial, ocupado = false, aoPreparar,
           <p>Estado: {preview.estado === "PREPARADA" ? "preparada" : "pendente"}</p>
           <p>Ação: {preview.tipo ? rotuloTipo[preview.tipo] : "não informada"}</p>
           <p>Motivo: {preview.motivo || "não informado"}</p>
-          <p>Base: {preview.baseRevisao ?? "não informada"} · protocolo {preview.antes?.protocoloId ?? "não informado"}</p>
+          <p>Protocolo atual: {preview.antes?.protocoloId ?? "não informado"}</p>
           <p>Resultado: protocolo {preview.depois?.protocoloId ?? "não informado"}; previsão {preview.depois?.previstoEm ?? "não informada"}</p>
           <ul aria-label="Diff da ação">
             {preview.diff.length === 0 && <li>Sem alterações nos dados da base.</li>}
             {preview.diff.map((change, index) => (
               <li key={`${change.campo}-${change.item ?? "geral"}-${index}`}>
-                {change.campo}{change.item === null ? "" : ` · item ${change.item}`}: <span>{formatarValor(change.antes)}</span>{" → "}<span>{formatarValor(change.depois)}</span>
+                {{ doseMg: "Dose", previstoEm: "Data prevista", protocoloId: "Protocolo", item: "Item" }[change.campo]}
+                {change.item === null ? "" : ` · item ${change.item}`}: <span>{formatarValor(change.antes)}</span>{" → "}<span>{formatarValor(change.depois)}</span>
               </li>
             ))}
           </ul>
+          <details><summary>Rastreabilidade da proposta</summary>
+            <p style={{ overflowWrap: "anywhere" }}>Revisão da base: {preview.baseRevisao ?? "não informada"}</p>
+          </details>
           {preview.pendencias.length > 0 && <ul aria-label="Pendências">
             {preview.pendencias.map((item, index) => <li key={`${index}-${item}`}>{item}</li>)}
           </ul>}
