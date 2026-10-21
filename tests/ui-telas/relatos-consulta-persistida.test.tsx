@@ -50,7 +50,7 @@ it("mostra o original vinculado no cartão real de pré-consulta e mantém a abe
   const carregar = porta.carregarConsulta.bind(porta);
   porta.carregarConsulta = vi.fn(async (patientId: string, tumorLotId?: string | null, encounterId?: string) => {
     const consulta = await carregar(patientId, tumorLotId, encounterId);
-    return { ...consulta, contatosCanal: { mensagens: [relatoElegivel], pendenciasSemAtribuicao: 1 } };
+    return { ...consulta, contatosCanal: { mensagens: [relatoElegivel], pendenciasVinculoIngresso: 1 } };
   });
   const confirmar = vi.spyOn(porta, "confirmar");
   const acao = vi.spyOn(porta, "acao");
@@ -61,7 +61,7 @@ it("mostra o original vinculado no cartão real de pré-consulta e mantém a abe
   await within(preConsulta).findByRole("heading", { name: "Relatos do canal" });
   expect(within(preConsulta).getByText(relatoElegivel.texto, { normalizer: texto => texto }).textContent).toBe(relatoElegivel.texto);
   expect(within(preConsulta).queryByText(relatoSemVinculo.texto)).toBeNull();
-  expect(within(preConsulta).getByText(/Há 1 relato na caixa do canal com vínculo não validado/)).toBeTruthy();
+  expect(within(preConsulta).getByText(/Há 1 relato anteriormente associado a este cadastro/)).toBeTruthy();
   expect(screen.getByText(/autoria.*conferir|conteúdo relatado/i)).toBeTruthy();
 
   fireEvent.click(within(preConsulta).getByRole("button", { name: /abrir.*caixa/i }));

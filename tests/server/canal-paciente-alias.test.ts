@@ -8,7 +8,7 @@ import type { CadastroVinculo } from "../../src/modules/canal/vinculo.js";
 import { executarConfirmacao } from "../../src/kernel/comandos/index.js";
 import { salvarDraft } from "../../src/kernel/comandos/portas.js";
 import { abrirLedger } from "../../src/kernel/ledger/db.js";
-import { consultarCaixaCanal, consultarHistoricoCanal, receberTransporteSintetico } from "../../src/server/canalEntrada.js";
+import { consultarCaixaCanal, consultarHistoricoCanalPaciente, receberTransporteSintetico } from "../../src/server/canalEntrada.js";
 import { cadastrosCanal, lerMensagensOperacionaisCanal, revisaoContextoCanal } from "../../src/server/canalOperacao.js";
 import { carregarDicionarioPacienteDoLedger } from "../../src/server/canalResposta.js";
 import { criarGerenciadorSessao } from "../../src/server/sessao.js";
@@ -147,15 +147,14 @@ it("não atribui mensagem ambígua ao paciente aberto quando outro cadastro comp
   const consulta = await carregarConsultaHttp(a);
   expect(consulta.status).toBe(200);
   expect(consulta.data.contatosCanal.mensagens).toEqual([]);
-  expect(consulta.data.contatosCanal.pendenciasSemAtribuicao).toBe(1);
+  expect(consulta.data.contatosCanal.pendenciasVinculoIngresso).toBe(0);
   expect(JSON.stringify(consulta.data.contatosCanal)).not.toContain(texto);
 });
 
 it("consulta mantém relato vinculado anterior a 501 mensagens mais recentes de outras origens", async () => {
   const a = abrir();
   a.seed(CONTEXTO_A, "Paciente@1", paciente(CONTEXTO_A.patientId, "Paciente A sintético"));
-  a.seed(CONTEXTO_A, "Contato", contato(CONTEXTO_A.patientId));
-  const cadastros = cadastrosCanal(a.db);
+  let cadastros = cadastrosCanal(a.db);
   const ingressar = (id: string, senderRef: string, texto: string) => {
     const r = receberTransporteSintetico(a.db, { accountId: "conta-historico-sintetica",
       canal: "WHATSAPP_SERVICO", providerMessageId: id, senderRef,
@@ -165,21 +164,43 @@ it("consulta mantém relato vinculado anterior a 501 mensagens mais recentes de 
   };
   const original = "Relato sintético antigo vinculado ao paciente A.";
   ingressar("msg-antiga-a", SENDER, original);
+  a.seed(CONTEXTO_A, "Contato", contato(CONTEXTO_A.patientId));
+  cadastros = cadastrosCanal(a.db);
   for (let i = 0; i < 501; i++) ingressar(`msg-recente-${i}`, "5500000009999", `Mensagem sintética sem vínculo ${i}.`);
   const acesso = { sessoes: a.sessoes, token: a.token, agora: EM };
   const caixa = consultarCaixaCanal(a.db, acesso);
-  const historico = consultarHistoricoCanal(a.db, acesso);
+  const historico = consultarHistoricoCanalPaciente(a.db, acesso, CONTEXTO_A.patientId, [SENDER]);
   expect(caixa.ok && caixa.mensagens).toHaveLength(500);
-  expect(historico.ok && historico.mensagens).toHaveLength(502);
-  expect(consultarHistoricoCanal(a.db, { ...acesso, token: "sessao-invalida" }))
+  expect(historico.ok && historico.mensagens).toHaveLength(1);
+  expect(consultarHistoricoCanalPaciente(a.db, { ...acesso, token: "sessao-invalida" }, CONTEXTO_A.patientId, [SENDER]))
     .toMatchObject({ ok: false, codigo: "SESSAO_INVALIDA" });
   const consulta = await carregarConsultaHttp(a);
   expect(consulta.status).toBe(200);
   expect(consulta.data.contatosCanal.mensagens).toContainEqual(expect.objectContaining({
     texto: original, patientId: CONTEXTO_A.patientId, estadoVinculo: "VINCULADO",
   }));
-  expect(consulta.data.contatosCanal.pendenciasSemAtribuicao).toBe(501);
+  expect(consulta.data.contatosCanal.pendenciasVinculoIngresso).toBe(0);
   expect(JSON.stringify(consulta.data.contatosCanal)).not.toContain("Mensagem sintética sem vínculo 0.");
+});
+
+it("pagina mais de 500 relatos do mesmo paciente sem truncar o histórico da consulta", async () => {
+  const a = abrir();
+  a.seed(CONTEXTO_A, "Paciente@1", paciente(CONTEXTO_A.patientId, "Paciente A sintético"));
+  a.seed(CONTEXTO_A, "Contato", contato(CONTEXTO_A.patientId));
+  const cadastros = cadastrosCanal(a.db);
+  for (let i = 0; i < 501; i++) {
+    const texto = `Relato sintético do paciente A ${i}.`;
+    const ingresso = receberTransporteSintetico(a.db, { accountId: "conta-historico-a-sintetica",
+      canal: "WHATSAPP_SERVICO", providerMessageId: `msg-a-${i}`, senderRef: SENDER,
+      providerSentAt: EM, ingestedAt: EM, conteudo: { tipo: "TEXT", texto,
+        contentSha256: createHash("sha256").update(texto).digest("hex") }, cadastros });
+    if (!ingresso.ok) throw new Error(`INGRESSO_NEGADO:msg-a-${i}`);
+  }
+  const consulta = await carregarConsultaHttp(a);
+  expect(consulta.status).toBe(200);
+  expect(consulta.data.contatosCanal.mensagens).toHaveLength(501);
+  expect(consulta.data.contatosCanal.mensagens[0].texto).toBe("Relato sintético do paciente A 0.");
+  expect(consulta.data.contatosCanal.pendenciasVinculoIngresso).toBe(0);
 });
 
 it("Task010: Paciente@1 chega a agenda e consulta HTTP com relato vinculado literal", async () => {
@@ -212,8 +233,8 @@ it("Task010: Paciente@1 chega a agenda e consulta HTTP com relato vinculado lite
     expect(consultaRevogada.status).toBe(200);
     const aposRevogacao = await consultaRevogada.json();
     expect(aposRevogacao.contatosCanal.mensagens).toEqual([]);
-    expect(aposRevogacao.contatosCanal.pendenciasSemAtribuicao).toBe(1);
-    expect(ConsultaResposta.parse(aposRevogacao).contatosCanal?.pendenciasSemAtribuicao).toBe(1);
+    expect(aposRevogacao.contatosCanal.pendenciasVinculoIngresso).toBe(1);
+    expect(ConsultaResposta.parse(aposRevogacao).contatosCanal?.pendenciasVinculoIngresso).toBe(1);
     expect(JSON.stringify(aposRevogacao.contatosCanal)).not.toContain(texto);
     const agenda = await post("/consulta/agenda", {});
     expect(agenda.status).toBe(200);

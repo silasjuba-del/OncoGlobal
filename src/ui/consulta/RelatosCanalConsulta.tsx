@@ -8,7 +8,7 @@ import "./relatos-canal.css";
 type Props = {
   contexto: ContextoAcaoComposta;
   mensagens: readonly MensagemCanalVisao[];
-  pendenciasSemAtribuicao?: number;
+  pendenciasVinculoIngresso?: number;
   aoAbrirCanal?: () => void;
 };
 const recibos: Record<NonNullable<MensagemCanalVisao["reciboTecnico"]>, string> = {
@@ -97,7 +97,7 @@ export function RelatosCanalConsulta(props: Props) {
   return <RelatosNoContexto key={chaveContexto(props.contexto)} {...props} />;
 }
 
-function RelatosNoContexto({ contexto, mensagens, pendenciasSemAtribuicao = 0, aoAbrirCanal }: Props) {
+function RelatosNoContexto({ contexto, mensagens, pendenciasVinculoIngresso = 0, aoAbrirCanal }: Props) {
   const [aberto, setAberto] = useState(true);
   const listaId = useId();
   const vinculadas = ordenarPorHorarioCanal(mensagens.filter(mensagem =>
@@ -117,10 +117,10 @@ function RelatosNoContexto({ contexto, mensagens, pendenciasSemAtribuicao = 0, a
       <span className="relatos-canal__contagem">{vinculadas.length} {vinculadas.length === 1 ? "relato vinculado" : "relatos vinculados"}</span>
     </header>
 
-    {pendenciasSemAtribuicao > 0 ? <p className="relatos-canal__aviso" role="status">
-      {pendenciasSemAtribuicao === 1
-        ? "Há 1 relato na caixa do canal com vínculo não validado; não atribuído a este paciente. Conteúdo omitido nesta consulta."
-        : `Há ${pendenciasSemAtribuicao} relatos na caixa do canal com vínculo não validado; não atribuídos a este paciente. Conteúdo omitido nesta consulta.`}
+    {pendenciasVinculoIngresso > 0 ? <p className="relatos-canal__aviso" role="status">
+      {pendenciasVinculoIngresso === 1
+        ? "Há 1 relato anteriormente associado a este cadastro com vínculo atual não validado; não é relato confirmado deste paciente. Conteúdo omitido nesta consulta."
+        : `Há ${pendenciasVinculoIngresso} relatos anteriormente associados a este cadastro com vínculo atual não validado; não são relatos confirmados deste paciente. Conteúdo omitido nesta consulta.`}
     </p> : null}
 
     <div className="relatos-canal__acoes">
