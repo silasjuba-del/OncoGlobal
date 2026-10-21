@@ -21,20 +21,36 @@ it.each(["inicializacao", "apos-resposta"])("close aguarda trabalho do motor: %s
       iniciar(); return trabalho;
     }) } as never });
   await new Promise<void>(resolve => server.listening ? resolve() : server.once("listening", resolve));
-  if (fase === "apos-resposta") {
-    const endereco = server.address();
-    if (!endereco || typeof endereco === "string") throw new Error("PORTA_AUSENTE");
-    const r = await fetch(`http://127.0.0.1:${endereco.port}/login`, { method: "POST", body: JSON.stringify({ senha: "senha-sintetica-comprida" }) });
-    expect(r.status).toBe(200); await r.json();
-  }
-  await iniciado;
   let fechou = false;
-  const fechado = new Promise<void>(resolve => server.close(() => { fechou = true; resolve(); }));
+  let fechado: Promise<void> | undefined;
+  const fecharServidor = () => {
+    fechado ??= new Promise<void>(resolve => server.close(() => { fechou = true; resolve(); }));
+    return fechado;
+  };
   try {
+    if (fase === "apos-resposta") {
+      const endereco = server.address();
+      if (!endereco || typeof endereco === "string") throw new Error("PORTA_AUSENTE");
+      const token = sessoes.login("senha-sintetica-comprida")!.token;
+      const r = await fetch(`http://127.0.0.1:${endereco.port}/consulta/extrair`, {
+        method: "POST",
+        headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+        body: JSON.stringify({ recordingId: "gravacao-sintetica", sourceId: "fonte-sintetica",
+          sourceType: "medical_note", rawTranscript: "Nota sintética para teste de encerramento." }),
+      });
+      expect(r.status).toBe(201);
+      await r.json();
+    }
+    await iniciado;
+    const encerramento = fecharServidor();
     await new Promise<void>(resolve => setImmediate(resolve));
     expect(fechou).toBe(false);
     concluir();
-    await fechado;
+    await encerramento;
     expect(fechou).toBe(true);
-  } finally { concluir(); await fechado; db.close(); }
+  } finally {
+    concluir();
+    await fecharServidor();
+    db.close();
+  }
 });

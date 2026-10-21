@@ -22,3 +22,13 @@ G-24 está especificado no plano e referenciado na implementação FN-24. A pres
 As declarações `.d.mts` necessárias para tipar módulos `.mjs` foram preservadas. Módulos clínicos sem consumidor atual não foram ativados ou apagados por conveniência. Referências históricas em documentos e no manifesto congelado de exceções não foram reescritas como se fossem novas decisões.
 
 Evidências detalhadas, comandos, resultados RED/GREEN e commits constam de `OncoGlobal-coordination/20261020-pr33-review-cursor-next10/train/ASTRA-CORRECOES.md`. Testes locais, integração e aprovação clínica são estados distintos.
+
+## Correções após a CI da PR40
+
+A CI reproduziu três falhas que foram corrigidas pela frente com agentes Luna:
+
+- Um sucessor documental rejeitado pelo leitor íntegro podia fazer a cópia antiga reaparecer para impressão. As arestas de supersessão dos registros rejeitados agora servem exclusivamente para negar o alvo correspondente, limitado ao mesmo paciente. O conteúdo inválido não é promovido nem autoriza a impressão. O pedido individual e o conjunto que o referencia são recusados; um documento independente válido continua resolvido.
+- O teste de encerramento após resposta usava login, que não dispara processamento de escrita no catálogo. Agora exercita uma extração HTTP sintética autenticada e conserva a garantia de que o fechamento aguarda o trabalho pendente, com cleanup também nos caminhos de falha.
+- O teste do Salão ainda esperava a agenda hardcoded removida. Preserva a jornada de navegação/triagem, exige a ausência dessa agenda e acrescenta uma prova positiva de aviso e salvamento com paciente/encontro recebidos pela Porta.
+
+As três falhas foram reproduzidas localmente antes das correções. Os cinco arquivos focais ficaram aprovados em rodadas complementares, sem alterar a expectativa de impressão do documento independente nem aumentar timeouts. Tipos e fronteiras passaram; a CI completa é executada novamente no novo commit.
