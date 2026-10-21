@@ -54,7 +54,8 @@ export function projetarBasePrescricaoExecutavel(fontes: readonly ClinicalEvent[
   const vigentes = eventosVigentes(eventos);
   const pendencias: string[] = [];
   const pacientes = vigentes.filter(e => ["Paciente", "Paciente@1"].includes(e.tipo)).flatMap(e => {
-    const p = Paciente.safeParse(dadosDoEvento(e)); return p.success && p.data.patientId === contexto.patientId ? [p.data] : [];
+    const p = Paciente.safeParse(dadosDoEvento(e));
+    return p.success && p.data.patientId === contexto.patientId ? [p.data] : [];
   });
   if (pacientes.length !== 1) pendencias.push("PACIENTE_AUSENTE_OU_AMBIGUO");
   const lotes = vigentes.filter(e => ["TumorLot", "TumorLot@1"].includes(e.tipo))
