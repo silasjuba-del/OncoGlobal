@@ -557,3 +557,16 @@ it("Task009 replay concluido continua historico depois de novos fatos sem duplic
  a.seed("FATO",{campo:"observacao",valor:"Fato posterior sintetico"});const antes=a.eventos();
  const replay=await confirmarApac(a,p.data,"replay-historico");expect(replay.status).toBe(200);expect(replay.data).toEqual({...salva.data,codigo:"REPLAY"});expect(a.eventos()).toEqual(antes);
 });
+
+it.each([false,true])('APAC recupera em sessão nova sem duplicar: gravada=%s',async gravada=>{
+ const a=await abrir();await assinarRx(a);const base=await baseApac(a),p=await prepararApac(a,base);
+ const pedido={contexto,draftId:p.data.draftId,expectedRevision:p.data.revision,conteudoHash:p.data.conteudoHash,idempotencyKey:'apac-reload'};
+ if(gravada)expect((await a.request(CONFIRMAR_APAC,pedido)).status).toBe(200);
+ const token=a.sessoes.login(SENHA)!.token;a.sessoes.selecionarConsulta(token,contexto);const antes=a.eventos();
+ const r=await a.request('/consulta/confirmacao/recuperar',{tipo:'APAC',pedido},token);
+ expect(r.status).toBe(200);expect(r.data.estado).toBe(gravada?'CONFIRMADA':'PREVIA');expect(a.eventos()).toEqual(antes);
+ expect((await a.request(CONFIRMAR_APAC,pedido,token)).status).toBe(200);
+ expect(a.eventos().filter(e=>e.operationId==='apac-confirmar:apac-reload')).toHaveLength(1);
+ const cancel=await a.request('/consulta/confirmacao/recuperar',{tipo:'APAC',pedido,cancelar:true},token);
+ expect(cancel.data.estado).toBe('CONFIRMADA');expect(a.eventos().filter(e=>e.tipo==='APAC')).toHaveLength(1);
+});

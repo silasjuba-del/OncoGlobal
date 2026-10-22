@@ -983,3 +983,38 @@ it.each([
   expect((ciclo.itens as { doseMg: number }[])[0]!.doseMg).toBe(mg);
   expect(Number.isFinite((ciclo.itens as { doseMg: number }[])[0]!.doseMg)).toBe(true);
 });
+
+it.each([false,true])('recupera eRx após sessão nova, com commit antes da resposta perdida: %s',async gravada=>{
+ const a=await abrir(),{preparada}=await prepararNovaLinha(a);
+ const pedido={contexto,draftId:preparada.draftId,expectedRevision:preparada.revision,conteudoHash:preparada.conteudoHash,idempotencyKey:'rx-recuperar-reload'};
+ if(gravada)expect((await a.request(CONFIRMAR,pedido)).status).toBe(200);
+ const token=a.sessoes.login(SENHA)!.token;a.sessoes.selecionarConsulta(token,contexto);
+ const antes=a.eventos();const r=await a.request('/consulta/confirmacao/recuperar',{tipo:'PRESCRICAO',pedido},token);
+ expect(r.status).toBe(200);expect(r.data.estado).toBe(gravada?'CONFIRMADA':'PREVIA');expect(a.eventos()).toEqual(antes);
+ expect((await a.request(CONFIRMAR,pedido,token)).status).toBe(200);
+ expect(a.eventos().filter(e=>e.operationId==='rx-confirmar:rx-recuperar-reload'&&e.tipo==='DOCUMENTO')).toHaveLength(1);
+ const doc=await a.request('/consulta/documento-impressao',{...contexto,documentId:preparada.conteudo.documentId,documentVersion:preparada.conteudo.documentVersion},token);
+ expect(doc.status).toBe(200);expect(doc.data.html).toContain('Fármaco citotóxico sintético');
+ a.sessoes.selecionarConsulta(token,{...contexto,patientId:'outro'});
+ expect((await a.request('/consulta/confirmacao/recuperar',{tipo:'PRESCRICAO',pedido},token)).status).toBe(409);
+ expect((await a.request('/consulta/documento-impressao',{...contexto,documentId:preparada.conteudo.documentId,documentVersion:1},token)).status).toBe(409);
+});
+it('cancelar eRx ainda não gravada impede tentativa atrasada; não desfaz assinatura',async()=>{
+ const a=await abrir(),{preparada}=await prepararNovaLinha(a);
+ const pedido={contexto,draftId:preparada.draftId,expectedRevision:preparada.revision,conteudoHash:preparada.conteudoHash,idempotencyKey:'rx-cancelar'};
+ const antes=a.eventos();expect((await a.request('/consulta/confirmacao/recuperar',{tipo:'PRESCRICAO',pedido,cancelar:true})).data.estado).toBe('CANCELADA');
+ expect((await a.request(CONFIRMAR,pedido)).data.codigo).toBe('INTENCAO_CANCELADA');expect(a.eventos()).toEqual(antes);
+ expect(()=>a.db.exec('DELETE FROM confirmation_cancel')).toThrow(/append-only/);
+});
+
+it('ciclo assinado conserva o peso medido usado na preparação, data e fonte, sem herdar peso antigo',async()=>{
+ const a=await abrir();a.seed('Weight',(id:string)=>({kg:72,origem:'MEDIDO',data:AGORA.slice(0,10),sourceId:id}));
+ const {preparada}=await prepararNovaLinha(a);await assinar(a,preparada,'assinar-peso-documentado');
+ const ciclo=a.eventos().filter(e=>e.tipo==='Ciclo').map(dadosEvento)[0]!;
+ expect(ciclo.pesoKg).toMatchObject({valor:72,campo:'PRESENTE',fontes:expect.arrayContaining([expect.objectContaining({dataClinica:AGORA.slice(0,10)})])});
+ expect(ciclo.origemPeso).toBe('MEDIDO');
+});
+it('todas as rotas catalogadas, inclusive recuperação e download, exigem autenticação',async()=>{
+ const {ROTAS_HTTP}=await import('../../src/server/rotas/catalogo.js');const a=await abrir();
+ for(const rota of ROTAS_HTTP.filter(r=>r.nome!=='login'))expect((await a.request(rota.url,{},'')).status,rota.url).toBe(401);
+});

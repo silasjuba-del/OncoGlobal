@@ -25,6 +25,7 @@ const Afirmacao = z.object({ rotulo: Texto, valorTexto: Texto.nullable(), estado
   candidatos: z.array(z.object({ valorTexto: Texto, fontes: z.array(Fonte) })).optional()
 }).transform(({ candidatos, ...item }) => ({ ...item, ...(candidatos === undefined ? {} : { candidatos }) }));
 export const ConsultaResposta: z.ZodType<ConsultaIntegrada> = z.object({ hoje: DataCivil,
+  medicamentosAtuais: z.object({eventId: Texto.nullable(), medicamentos: z.array(Texto), conflito: z.boolean()}).optional(),
   contatosCanal: z.lazy(() => CanalResposta).optional(),
   retrato: Retrato.optional(), visaoIntegrada: VisaoIntegrada.optional(), dutos: DutosClinicaVisao.optional(),
   resumoEvolucao: Texto.nullable().default(null),

@@ -1,3 +1,5 @@
+import {RecuperacaoConfirmacao} from "../../contracts/api/recuperacaoConfirmacao.js";
+import {guardarPendente,concluirPendente,exigirSemPendente} from "./confirmacoesPendentes.js";
 import { PropostasDoseReceitaResposta } from '../../contracts/api/propostaDoseReceita.js';
 import { CatalogoFichasRespostaSchema, FichaProtocoloCatalogoSchema, InstanciacaoFichaRespostaSchema } from "../../contracts/api/fichasPrescricao.js";
 import { EstudoServicoSchema, ListarEstudosRespostaSchema, AvaliacaoEstudoRespostaSchema,
@@ -98,6 +100,12 @@ export function criarPortaHttp(opcoes: OpcoesHttp): PortaConsulta {
   }
 
   return {
+    async recuperarConfirmacao(pedido) {
+      const r=await leitura('/consulta/confirmacao/recuperar',pedido,RecuperacaoConfirmacao);
+      if(r.estado==='CONFIRMADA'||r.estado==='CANCELADA')concluirPendente(pedido);
+      return r;
+    },
+    async documentoImpressao(pedido) { return leitura('/consulta/documento-impressao',pedido,z.object({html:z.string().min(1)}).strict()); },
     async carregarTimelineMulticamadas(contexto, signal) {
       const { status, json } = await enviar("/consulta/timeline-multicamadas", contexto, true, signal);
       if (status !== 200) throw new ErroPorta(codigoDe(json, "TIMELINE_INDISPONIVEL"));
@@ -126,6 +134,7 @@ export function criarPortaHttp(opcoes: OpcoesHttp): PortaConsulta {
       return result.data;
     },
     async prepararPrescricaoExecutavel(pedido, signal) {
+      exigirSemPendente("PRESCRICAO",pedido.contexto);
       const { status, json } = await enviar("/consulta/prescricao-executavel/preparar", pedido, true, signal);
       if (status !== 200) throw new ErroPorta(codigoDe(json, "PRESCRICAO_EXECUTAVEL_PENDENTE"));
       const result = PrescricaoExecutavelPreparada.safeParse(json);
@@ -136,10 +145,12 @@ export function criarPortaHttp(opcoes: OpcoesHttp): PortaConsulta {
       return result.data;
     },
     async confirmarPrescricaoExecutavel(pedido, signal) {
+      guardarPendente({tipo:"PRESCRICAO",pedido});
       const { status, json } = await enviar("/consulta/prescricao-executavel/confirmar", pedido, true, signal);
       if (status !== 200) throw new ErroPorta(codigoDe(json, "PRESCRICAO_EXECUTAVEL_PENDENTE"));
       const result = PrescricaoExecutavelConfirmada.safeParse(json);
       if (!result.success) throw new ErroPorta("PAYLOAD_INVALIDO");
+      concluirPendente({tipo:"PRESCRICAO",pedido});
       return result.data;
     },
     async lerBaseApacRascunho(contexto, signal) {
@@ -153,6 +164,7 @@ export function criarPortaHttp(opcoes: OpcoesHttp): PortaConsulta {
       return p.data;
     },
     async prepararApacRascunho(pedido, signal) {
+      exigirSemPendente("APAC",pedido.contexto);
       const { status, json } = await enviar("/consulta/apac-rascunho/preparar", pedido, true, signal);
       if (status !== 200) throw new ErroPorta(codigoDe(json, "APAC_RASCUNHO_PENDENTE"));
       const p = ApacRascunhoPreparadoSchema.safeParse(json);
@@ -171,17 +183,18 @@ export function criarPortaHttp(opcoes: OpcoesHttp): PortaConsulta {
       return p.data;
     },
     async confirmarApacRascunho(pedido, signal) {
+      guardarPendente({tipo:"APAC",pedido});
       const { status, json } = await enviar("/consulta/apac-rascunho/confirmar", pedido, true, signal);
       if (status !== 200) throw new ErroPorta(codigoDe(json, "APAC_RASCUNHO_NAO_CONFIRMADA"));
       const p = ApacRascunhoConfirmadoSchema.safeParse(json);
       const anterior = preparadasApac.get(pedido.draftId);
-      if (!p.success || !anterior
-        || anterior.contexto.patientId !== pedido.contexto.patientId
+      if (!p.success || anterior && (anterior.contexto.patientId !== pedido.contexto.patientId
         || anterior.contexto.encounterId !== pedido.contexto.encounterId
         || anterior.contexto.tumorLotId !== pedido.contexto.tumorLotId
         || anterior.revision !== pedido.expectedRevision || anterior.conteudoHash !== pedido.conteudoHash
-        || p.data.apacId !== anterior.apac.apacId || p.data.versao !== anterior.apac.versao)
+        || p.data.apacId !== anterior.apac.apacId || p.data.versao !== anterior.apac.versao))
         throw new ErroPorta("PAYLOAD_INVALIDO");
+      concluirPendente({tipo:"APAC",pedido});
       return p.data;
     },
     async lerEstatisticaServico(periodo: PeriodoClinicoEstatisticaServico | null, signal) {

@@ -8,7 +8,7 @@ import {dadosDoEvento,eventosVigentes} from '../kernel/projections/snapshot.js';
 import {hashCanonico} from '../rules/conteudoCanonico.js';
 import {dataCivilDoServico} from '../rules/tempoServico.js';
 const Id=z.string().trim().min(1).max(200);
-const Pedido=z.object({patientId:Id,encounterId:Id,tumorLotId:Id.nullable(),operationId:Id,medicamentos:z.array(z.string().trim().min(1).max(200)).max(100),listaAtualCompleta:z.literal(true)}).strict();
+const Pedido=z.object({patientId:Id,encounterId:Id,tumorLotId:Id.nullable(),operationId:Id,expectedEventId:Id.nullable(),medicamentos:z.array(z.string().trim().min(1).max(200)).max(100),listaAtualCompleta:z.literal(true)}).strict();
 export interface DepsMedicamentos {db:DatabaseSync;sessoes:GerenciadorSessao;agora:()=>string;}
 /** Lista inteira atestada pelo médico; nunca derivada de receita ou prosa. */
 export function reconciliarMedicamentos(raw:unknown,token:string,deps:DepsMedicamentos):{status:number;body:{codigo:string;eventId?:string|null;refs?:string[]}}{
@@ -30,6 +30,7 @@ export function reconciliarMedicamentos(raw:unknown,token:string,deps:DepsMedica
   if(anteriores.length>1)return negar('LISTA_MEDICAMENTOS_CONFLITANTE',409,anteriores.map(e=>e.eventId));
   const anterior=anteriores[0];const valorAnterior=anterior?dadosDoEvento(anterior)?.valor:undefined;
   if(anterior&&(!Array.isArray(valorAnterior)||valorAnterior.some(v=>typeof v!=='string'||!v.trim())))return negar('LISTA_MEDICAMENTOS_ANTERIOR_FORA_DO_CONTRATO',409,[anterior.eventId]);
+  if ((anterior?.eventId ?? null) !== p.expectedEventId) return negar('LISTA_MEDICAMENTOS_ALTERADA',409,anteriores.map(e=>e.eventId));
   const payload={campo:'medicamentos',valor:p.medicamentos,listaAtualCompleta:true,escopo:'PACIENTE'};
   const data=dataCivilDoServico(em);if(data.estado!=='OK')throw new Error('RELOGIO_INVALIDO');
   const fonte={sourceId:`manual-${eventId}`,classe:'MANUAL' as const,localizador:null,dataClinica:data.dataCivil,dataCaptura:em,versao:'F1-MED-RECONC@1',contentHash:hash};

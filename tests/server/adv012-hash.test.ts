@@ -53,3 +53,16 @@ describe("ADV-012 · um hash canônico entre módulo, render e servidor", () => 
     expect(hashConteudoExibido(material)).toBe(render.hash);
   });
 });
+
+it('canon v1 distingue ausência de null explícito e preserva números e strings assinadas',()=>{
+ expect(hashCanonico({x:undefined})).toBe(hashCanonico({x:null}));
+ expect(hashCanonico({x:undefined})).not.toBe(hashCanonico({}));
+ expect(hashCanonico(1)).toBe(hashCanonico(1.0));
+ expect(hashCanonico('2026-10-01T10:00:00Z')).not.toBe(hashCanonico('2026-10-01T07:00:00-03:00'));
+});
+it('Date não colide com outro instante nem objeto vazio; fusos equivalentes têm mesmo ISO',()=>{
+ expect(hashCanonico(new Date('2026-10-01T10:00:00Z'))).toBe(hashCanonico(new Date('2026-10-01T07:00:00-03:00')));
+ expect(hashCanonico(new Date('2026-10-01'))).not.toBe(hashCanonico(new Date('2026-10-02')));
+ expect(hashCanonico(new Date('2026-10-01'))).not.toBe(hashCanonico({}));
+ expect(()=>hashCanonico(new Date('inválida'))).toThrow('DATA_CANONICA_INVALIDA');
+});

@@ -1,3 +1,4 @@
+import {confirmacaoCancelada,cancelarConfirmacao} from "../kernel/comandos/portas.js";
 import { z } from "zod";
 import type { DatabaseSync } from "node:sqlite";
 import { Sessao, type Fonte } from "../contracts/base.js";
@@ -203,6 +204,7 @@ function confirmar(deps: Deps, token: string, raw: unknown, contexto: Contexto, 
   const p = ConfirmarApacRascunhoPedidoSchema.safeParse(raw);
   if (!p.success) return negar("PAYLOAD_INVALIDO", 400);
   const operationId = `apac-confirmar:${p.data.idempotencyKey}`, requestHash = hash({ entrada: p.data, atorId: sessao.medicoId });
+  if(confirmacaoCancelada(deps.db,operationId))return negar("INTENCAO_CANCELADA");
   const anteriores = listarEventos(deps.db, contexto.patientId).filter(e => e.operationId === operationId);
   const retorno = (codigo: "GRAVADA" | "REPLAY", eventId: string, apac: Apac): Resposta => ({ status: 200, body: {
     codigo, apacId: apac.apacId, versao: apac.versao, eventId, estado: "RASCUNHO", permiteExportar: false } });
@@ -250,7 +252,23 @@ function confirmar(deps: Deps, token: string, raw: unknown, contexto: Contexto, 
   return retorno(gravacao.estado, eventId, resposta.apac);
 }
 
-export function operarApacRascunho(deps: Deps, token: string, operacao: "base" | "preparar" | "confirmar", raw: unknown): Resposta {
+function recuperar(deps:Deps,token:string,raw:unknown,ctx:Contexto,sessao:Sessao,em:string,cancelar=false):Resposta {
+ const p=ConfirmarApacRascunhoPedidoSchema.safeParse(raw);if(!p.success)return negar("PAYLOAD_INVALIDO",400);
+ if(listarEventos(deps.db,ctx.patientId).some(e=>e.operationId===`apac-confirmar:${p.data.idempotencyKey}`)) {
+   const r=confirmar(deps,token,raw,ctx,sessao,em);return r.status===200?{status:200,body:{estado:"CONFIRMADA",resultado:r.body}}:r;
+ }
+ if(confirmacaoCancelada(deps.db,`apac-confirmar:${p.data.idempotencyKey}`))return {status:200,body:{estado:"CANCELADA"}};
+ const d=lerDraft(deps.db,p.data.draftId),v=Registro.safeParse(d?.payload);
+ if(!d||!v.success||d.patientId!==ctx.patientId||hash(v.data.contexto)!==hash(ctx)||v.data.atorId!==sessao.medicoId
+   ||d.revision!==p.data.expectedRevision||v.data.resposta.revision!==p.data.expectedRevision
+   ||v.data.resposta.conteudoHash!==p.data.conteudoHash||hashRegistro(v.data)!==p.data.conteudoHash)return negar("PREPARACAO_APAC_NAO_ENCONTRADA");
+ if(cancelar){cancelarConfirmacao(deps.db,`apac-confirmar:${p.data.idempotencyKey}`,sessao.medicoId,em);return {status:200,body:{estado:"CANCELADA"}};}
+ const r=v.data.resposta;
+ deps.sessoes.registrarBundleExibido(token,ctx,[{documentId:r.apac.apacId,documentVersion:r.apac.versao,conteudoHash:r.conteudoHash,draftId:d.draftId}]);
+ return {status:200,body:{estado:"PREVIA",texto:r.texto,avisos:[...r.avisos,...r.pendencias]}};
+}
+
+export function operarApacRascunho(deps: Deps, token: string, operacao: "base" | "preparar" | "confirmar" | "recuperar" | "cancelar", raw: unknown): Resposta {
   const em = deps.agora(), sessao = Sessao.safeParse(deps.sessoes.obter(token));
   if (!sessao.success || !Number.isFinite(Date.parse(em)) || Date.parse(sessao.data.emitidaEm) > Date.parse(em)
     || Date.parse(sessao.data.expiraEm) <= Date.parse(em)) return negar("SESSAO_INVALIDA", 401);
@@ -263,6 +281,7 @@ export function operarApacRascunho(deps: Deps, token: string, operacao: "base" |
   try {
     return transacao(deps.db, () => operacao === "base" ? { status: 200, body: baseApac(deps, c.data, sessao.data, em).publica }
       : operacao === "preparar" ? preparar(deps, token, raw, c.data, sessao.data, em)
+      : (operacao === "recuperar" || operacao === "cancelar") ? recuperar(deps,token,raw,c.data,sessao.data,em,operacao === "cancelar")
       : confirmar(deps, token, raw, c.data, sessao.data, em));
   } catch (error) {
     const codigo = error instanceof Error ? error.message : "";

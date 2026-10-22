@@ -1,3 +1,4 @@
+import {normalizarDataCivil} from "../../extracao/normalizacao.js";
 import { createHash } from "node:crypto";
 import { z } from "zod";
 import { Correlacao } from "../../../contracts/f1/correlacao.js";
@@ -19,6 +20,7 @@ export interface TransporteOpenAi { extrair(payload: Readonly<Record<string, unk
 export interface OpcoesOpenAi {
   env?: Readonly<Record<string, string | undefined>>;
   transporte?: TransporteOpenAi;
+  agora?: () => string;
   auditar?: (evento: Readonly<{ codigo: string; promptId: string; fonteHash: string; status: string }>) => void;
 }
 export interface ContextoServidorOpenAi { dicionario: DicionarioPaciente; payloadAutorizado?: string }
@@ -122,6 +124,15 @@ export function criarExtratorOpenAi(opcoes: OpcoesOpenAi = {}) {
           || c.unidade !== null && !c.referencia.trecho.includes(c.unidade) || c.dataClinica !== null && !c.referencia.trecho.includes(c.dataClinica))
         || validada.data.resumo.some(r => r.referencias.some(ref => !refValida(ref)) || !r.referencias.some(ref => ref.trecho.includes(r.texto))))
         return pendente("REFERENCIA_SEM_EVIDENCIA_LITERAL");
+      // Esta porta extrai texto literal, não medidas clínicas tipadas. Peso/altura e ECOG
+      // devem usar revisão estruturada; jamais converter texto do modelo em dose ou biometria.
+      if (validada.data.candidatos.some(c => /\b(?:peso|altura|ecog)\b/i.test(`${c.valor} ${c.referencia.trecho}`) || c.unidade?.toLowerCase() === "kg"))
+        return pendente("MEDIDA_CLINICA_EXIGE_REVISAO_ESTRUTURADA");
+      const agora = (opcoes.agora ?? (()=>new Date().toISOString()))();
+      if (!Number.isFinite(Date.parse(agora))) return pendente("RELOGIO_INVALIDO");
+      if (validada.data.candidatos.some(c => c.dataClinica !== null && (()=>{
+        const data=normalizarDataCivil(c.dataClinica);return !data || data > agora.slice(0,10);
+      })())) return pendente("DATA_CLINICA_INVALIDA_OU_FUTURA");
       const saidaLimpa = sanitizarArtefato({ tipo: "TEXTO", artefatoId: "SAIDA_LLM", texto: JSON.stringify(validada.data), detectorPhi: texto => contemPhiResidual(texto, dic.data) || detectarPhiEstrutural(texto).length > 0 });
       if (saidaLimpa.report.riscoResidual !== "BAIXO") return pendente("G27_SAIDA_PHI");
       reportar("PROPOSTA_LITERAL", "PROPOSTA");

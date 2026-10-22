@@ -108,7 +108,7 @@ describe("W12-F4 UI", () => {
     fireEvent.click(screen.getByRole("button", { name: "CONFIRMAR E IMPRIMIR" }));
     await waitFor(() => expect(screen.queryByRole("dialog", { name: "Consulta Flash" })).toBeNull());
     expect(ordem).toEqual(["preparar", "exibir", "confirmar"]);
-    expect(screen.getByLabelText("status da Consulta Flash").textContent).toContain("finalizada");
+    expect(screen.getByLabelText("status da Consulta Flash").textContent).toContain("Documentos selecionados");
   });
 
   it("erro ao finalizar: mostra o erro, mantém o overlay aberto e preserva as marcações; nada é confirmado", async () => {

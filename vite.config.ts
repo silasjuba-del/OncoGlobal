@@ -45,7 +45,7 @@ export default defineConfig(async () => {
   const target = apiPort ? `http://127.0.0.1:${Number(apiPort)}` : undefined;
   return {
     plugins,
-    build: { outDir: "dist/ui", rollupOptions: { input: { demonstracao: "index.html", oncoassist: "oncoassist.html" } } },
+    build: { outDir: "dist/ui", rollupOptions: { input: { atendimento: "index.html", demonstracao: "demonstracao.html", oncoassist: "oncoassist.html" } } },
     ...(target ? { server: { host: "127.0.0.1", proxy: { "/login": { target }, "/consulta": { target, ws:true },
       "/config": { target }, "/acao": { target }, "/biblioteca": { target }, "/salao": { target } } } } : {}),
     test: {

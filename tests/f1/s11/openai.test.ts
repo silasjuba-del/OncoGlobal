@@ -103,3 +103,14 @@ describe("D-F1-40: LLM só local também para documento original", () => {
     expect(t.status()).toMatchObject({ status: "PENDENTE", codigo: "D_F1_40_LLM_SO_LOCAL" });
   });
 });
+
+it.each(['peso 700 kg','ECOG 7','altura 900 cm'])('medida literal %s fica para revisão estruturada e não vira biometria',async valor=>{
+ const texto=`Medida: ${valor}.`,r=await criarExtratorOpenAi({env,agora:()=> '2026-10-22T12:00:00Z',transporte:{extrair:async()=>({candidatos:[{id:'c',campo:'LAB',valor,unidade:null,dataClinica:null,referencia:{fonteId:'FONTE_1',pagina:1,trecho:texto}}],resumo:[]})}})
+ .extrair({...entrada,fonte:{...entrada.fonte,paginas:[{n:1,texto}]}},dic);
+ expect(r).toMatchObject({status:'PENDENTE',codigo:'MEDIDA_CLINICA_EXIGE_REVISAO_ESTRUTURADA'});
+});
+it('data futura literal é recusada mesmo que o JSON e o trecho sejam válidos',async()=>{
+ const texto='Creatinina 1 em 2099-01-01.',r=await criarExtratorOpenAi({env,agora:()=> '2026-10-22T12:00:00Z',transporte:{extrair:async()=>({candidatos:[{id:'c',campo:'LAB',valor:'1',unidade:null,dataClinica:'2099-01-01',referencia:{fonteId:'FONTE_1',pagina:1,trecho:texto}}],resumo:[]})}})
+ .extrair({...entrada,fonte:{...entrada.fonte,paginas:[{n:1,texto}]}},dic);
+ expect(r).toMatchObject({status:'PENDENTE',codigo:'DATA_CLINICA_INVALIDA_OU_FUTURA'});
+});

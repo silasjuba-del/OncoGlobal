@@ -43,6 +43,8 @@ export const ROTAS_HTTP = [
   {"url":"/consulta/llm/documento-original","nome":"documentoOriginalLlm","grava":true,"grupo":"CONSULTA"},
   {"url":"/consulta/llm/extrair","nome":"extracaoLlm","grava":true,"grupo":"CONSULTA"},
   {"url":"/consulta/lotes","nome":"lotesPaciente","grava":false,"grupo":"CONSULTA"},
+  {"url":"/consulta/confirmacao/recuperar","nome":"recuperarConfirmacao","grava":true,"grupo":"CONSULTA"},
+  {"url":"/consulta/documento-impressao","nome":"documentoImpressao","grava":false,"grupo":"CONSULTA"},
   {"url":"/consulta/medicamentos/reconciliar","nome":"reconciliarMedicamentos","grava":true,"grupo":"CONSULTA"},
   {"url":"/consulta/oncoassist/classificar-fonte","nome":"oncoassistClassificar","grava":true,"grupo":"CONSULTA"},
   {"url":"/consulta/oncoassist/fontes","nome":"oncoassistFontes","grava":true,"grupo":"CONSULTA"},
