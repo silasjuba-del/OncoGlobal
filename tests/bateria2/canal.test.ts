@@ -15,9 +15,9 @@ export function receber(a:ReturnType<typeof ambiente>,id:string,texto:string,em=
   conteudo:{tipo:'TEXT',texto,contentSha256:createHash('sha256').update(texto).digest('hex')},cadastros});
  if(!r.ok)throw Error(JSON.stringify(r));return r.reciboId;
 }
-function resposta(){
+function resposta(tipoCadastro: 'Paciente' | 'Paciente@1' = 'Paciente'){
  const a=ambiente(),contexto={...ctx,revisaoContexto:'revisao-b2'};
- a.seed('Paciente',{patientId:ctx.patientId,nome:'Paciente Sintetico Bateria2',identificadores:[],nascimento:null,sexoCadastral:'NAO_INFORMADO',divergencia:false},'CONFIRMADO',{...ctx,tumorLotId:null});
+ a.seed(tipoCadastro,{patientId:ctx.patientId,nome:'Paciente Sintetico Bateria2',identificadores:[],nascimento:null,sexoCadastral:'NAO_INFORMADO',divergencia:false},'CONFIRMADO',{...ctx,tumorLotId:null});
  const origem=receber(a,'origem','Relato sintético');
  registrarConsentimentoCanal(a.db,a.acesso,{contatoId:remetente,patientId:ctx.patientId,referenciaTermo:'termo-sintetico',versaoTermo:'1',finalidade:['COMUNICACAO_CLINICA'],origem:'PRESENCIAL_CONSULTORIO'});
  const base={respostaId:'resposta-b2',mensagemOrigemId:origem,contexto,tipoResposta:'RESPOSTA_LIVRE_MEDICA' as const};
@@ -27,6 +27,17 @@ function resposta(){
  const enviar=(versao:number,acesso=a.acesso)=>executarEnvioAutorizadoCanal(a.db,acesso,{intent:{verbo:'ENVIAR_WHATSAPP',objeto:{tipo:'MENSAGEM_CANAL',id:base.respostaId,versao},escopo:{patientId:ctx.patientId,encounterId:ctx.encounterId},destino:remetente,idempotencyKey:`envio-sintetico-${versao}`},transporteSaida:async e=>{enviados.push(e.texto);return {ok:true,providerReceiptId:'recibo-sintetico'};}});
  return {...a,preparar,confirmar,enviar,enviados};
 }
+it('cadastro somente Paciente@1 permite envio depois de confirmacao medica',async()=>{
+ const a=resposta('Paciente@1');try{
+  const texto='Resposta sintetica revisada pelo medico.';
+  const preparada=a.preparar(1,texto);
+  expect(a.enviados).toEqual([]);
+  expect(a.confirmar(1,preparada).ok).toBe(true);
+  const envio=await a.enviar(1);
+  expect(envio.resultadoGateway.decisao,JSON.stringify(envio)).toBe('EXECUTADA');
+  expect(a.enviados).toEqual([texto]);
+ }finally{a.db.close();}
+});
 it('5A política vigente congelada: v2 pendente invalida envio de v1; nenhuma é enviada',async()=>{
  const a=resposta();try{
   expect(a.confirmar(1,a.preparar(1,'mantenha a enoxaparina')).ok).toBe(true);

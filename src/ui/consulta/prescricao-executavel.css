@@ -1,10 +1,10 @@
 .prescricao-executavel {
-  --pe-ink: #183247;
-  --pe-muted: #536b7a;
-  --pe-line: #d5e0e6;
-  --pe-surface: #fff;
-  --pe-soft: #f4f8fa;
-  --pe-action: #006d77;
+  --pe-ink: var(--cl-tinta);
+  --pe-muted: var(--cl-apagado);
+  --pe-line: var(--cl-linha);
+  --pe-surface: var(--cl-superficie);
+  --pe-soft: var(--cl-suave);
+  --pe-action: var(--cl-acao);
   display: grid;
   gap: 1rem;
   min-width: 0;
@@ -20,11 +20,6 @@
   box-sizing: border-box;
   max-width: 100%;
   font: inherit;
-}
-
-.prescricao-executavel :focus-visible {
-  outline: 3px solid var(--pe-action);
-  outline-offset: 2px;
 }
 
 .prescricao-executavel h2,

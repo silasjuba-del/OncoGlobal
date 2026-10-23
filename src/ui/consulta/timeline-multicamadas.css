@@ -73,9 +73,6 @@
 .tm-detalhes dd { margin: 0; overflow-wrap: anywhere; }
 .tm-detalhes h4 { margin-bottom: .35rem; }
 .tm-detalhes pre { white-space: pre-wrap; overflow-wrap: anywhere; max-height: 18rem; overflow: auto; }
-.tm-evento:focus-visible,
-.tm-controles :focus-visible { outline: 3px solid #1d5fa7; outline-offset: 2px; }
-
 @media (min-width: 68rem) {
   .tm-trilhas { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }

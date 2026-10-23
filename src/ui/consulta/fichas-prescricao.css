@@ -1,12 +1,12 @@
 .catalogo-fichas {
-  --cf-ink: #183247;
-  --cf-muted: #536b7a;
-  --cf-line: #d5e0e6;
-  --cf-surface: #fff;
-  --cf-soft: #f4f8fa;
-  --cf-action: #006d77;
-  --cf-pending: #9b6519;
-  --cf-danger: #9f2935;
+  --cf-ink: var(--cl-tinta);
+  --cf-muted: var(--cl-apagado);
+  --cf-line: var(--cl-linha);
+  --cf-surface: var(--cl-superficie);
+  --cf-soft: var(--cl-suave);
+  --cf-action: var(--cl-acao);
+  --cf-pending: var(--cl-aviso);
+  --cf-danger: var(--cl-critico);
   display: grid;
   gap: .9rem;
   min-width: 0;
@@ -23,7 +23,6 @@
 .catalogo-fichas *::before,
 .catalogo-fichas *::after { box-sizing: border-box; }
 .catalogo-fichas :is(button, input, textarea) { max-width: 100%; font: inherit; }
-.catalogo-fichas :focus-visible { outline: 3px solid #087b86; outline-offset: 2px; }
 .catalogo-fichas :is(h2, h3, h4, h5, p) { margin-block-start: 0; }
 .catalogo-fichas h2, .catalogo-fichas h3, .catalogo-fichas h4, .catalogo-fichas h5 { line-height: 1.25; }
 

@@ -21,11 +21,16 @@ import {
   type OperacaoCanal,
   revisaoContextoCanal,
   lerMensagensOperacionaisCanal,
+  lerRelatosConsultaCanal,
   vinculoAtualCanal,
   cadastrosCanal,
+  contatoRevogadoCanal,
 } from "./canalOperacao.js";
 import { processarPendenciasClinicasCanal } from "./canalReconciliacao.js";
-import { executarEnvioAutorizadoCanal, revalidarAutorizacaoSaidaCanalNoLedger } from "./canalResposta.js";
+import { detalheMensagemCanal } from "./canalEntrada.js";
+import { prepararRascunhoRespostaCanal, confirmarRespostaCanalPeloMedico,
+  executarEnvioAutorizadoCanal, revalidarAutorizacaoSaidaCanalNoLedger } from "./canalResposta.js";
+import { PrepararRespostaCanal, ConfirmarRespostaCanal } from "../contracts/api/respostaCanal.js";
 import { LotesPacientePedido, LotesPacienteResposta } from "../contracts/api/lotes.js";
 import { respostaHttpValida } from "../contracts/api/saidasHttp.js";
 import { projetarDutos } from "./projecaoDutos.js";
@@ -371,26 +376,17 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
         patientId: result.patientId, encounterId: result.encounterId, tumorLotId: result.tumorLotId,
       });
       else deps.sessoes.selecionarConsulta(token, null);
-      if (!("codigo" in result)) deps.sessoes.registrarAlertasExibidos?.(token, result, result.alertas.map(a => a.alertaId));
-      const integrado = !("codigo" in result) && deps.motorF1
-        ? await deps.motorF1.consultar({ patientId: result.patientId, encounterId: result.encounterId, tumorLotId: result.tumorLotId }, leituraInicial) : null;
-      if (!("codigo" in result)) await processarPendenciasClinicasCanal(deps.db, { agora: deps.agora(), cadastros: () => cadastrosCanal(deps.db, leituraInicial?.itens) });
-      const contatosCanal = !("codigo" in result) ? {
-        mensagens: lerMensagensOperacionaisCanal(deps.db, { sessoes: deps.sessoes, token, agora: deps.agora() }, leituraInicial?.itens)
-          .filter(m => m.patientId === result.patientId),
-      } : undefined;
-      return reply(
-        "codigo" in result ? 404 : 200,
-        "codigo" in result ? result.codigo : "CONSULTA_CARREGADA",
-        integrado && !("codigo" in result)
-          ? {
-            ...result, contatosCanal,
-            dutos: projetarDutos(leituraInicial?.itens ?? [], { patientId: result.patientId, encounterId: result.encounterId, tumorLotId: result.tumorLotId }, deps.corpus),
-            retrato: integrado.retrato,
-            ...(integrado.visaoIntegrada ? { visaoIntegrada: integrado.visaoIntegrada } : {}),
-          }
-          : "codigo" in result ? result : { ...result, contatosCanal },
-      );
+      if (!("codigo" in result)) deps.sessoes.registrarAlertasExibidos?.(token, result, result.alertas.map(a=>a.alertaId));
+       const leituraClinica=leituraInicial && { ...leituraInicial, itens:leituraInicial.itens.filter(e=>
+         e.patientId===parsed.data.patientId || ['Contato','Contato@1','ReviewDecision','ReviewDecision@1'].includes(e.tipo)) };
+       const integrado = !("codigo" in result) && deps.motorF1
+         ? await deps.motorF1.consultar({patientId:result.patientId,encounterId:result.encounterId,tumorLotId:result.tumorLotId},leituraClinica) : null;
+      // Recuperação da caixa usa cadastros globais no servidor/rota do canal; abrir consulta é leitura,
+      // sem processar pendências de todos os pacientes nem atribuir contato por snapshot parcial.
+      const contatosCanal = !("codigo" in result) ? lerRelatosConsultaCanal(deps.db,
+         { sessoes: deps.sessoes, token, agora: deps.agora() }, result.patientId, leituraInicial?.itens) : undefined;
+      return reply("codigo" in result ? 404 : 200, "codigo" in result ? result.codigo : "CONSULTA_CARREGADA",
+         integrado && !("codigo" in result) ? {...result,contatosCanal,dutos:projetarDutos(leituraClinica?.itens??[],{patientId:result.patientId,encounterId:result.encounterId,tumorLotId:result.tumorLotId},deps.corpus),retrato:integrado.retrato,...(integrado.visaoIntegrada?{visaoIntegrada:integrado.visaoIntegrada}:{})}:"codigo" in result?result:{...result,contatosCanal});
     }
     if (rota === "agenda") {
       const parsed = z.object({}).strict().safeParse(raw);

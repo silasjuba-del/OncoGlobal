@@ -1,11 +1,11 @@
 .jev-cockpit {
-  --jev-bg: #F4F7FA;
-  --jev-surface: #FFFFFF;
-  --jev-ink: #17334A;
-  --jev-action: #006D77;
-  --jev-pending: #AD6A16;
-  --jev-critical: #B42335;
-  --jev-line: #D9E3EA;
+  --jev-bg: var(--cl-suave);
+  --jev-surface: var(--cl-superficie);
+  --jev-ink: var(--cl-tinta);
+  --jev-action: var(--cl-acao);
+  --jev-pending: var(--cl-aviso);
+  --jev-critical: var(--cl-critico);
+  --jev-line: var(--cl-linha);
   color: var(--jev-ink);
   background: var(--jev-bg);
   font-family: "Segoe UI", system-ui, sans-serif;
@@ -15,7 +15,6 @@
 
 .jev-cockpit :is(button, input, select) { font: inherit; }
 .jev-cockpit :is(button, input, select) { box-sizing: border-box; max-width: 100%; }
-.jev-cockpit :focus-visible { outline: 3px solid var(--jev-action); outline-offset: 3px; }
 .jev-cockpit :is(h1, h2, h3, p) { margin-block-start: 0; }
 .jev-cockpit h1, .jev-cockpit h2 { font-family: "Bahnschrift", "Segoe UI Variable", "Segoe UI", sans-serif; }
 

@@ -564,7 +564,7 @@ export function carregarDicionarioPacienteDoLedger(
   try {
     const eventos = listarEventos(db, patientId);
     for (const ev of eventos) {
-      if (ev.tipo !== "Paciente") continue;
+      if (ev.tipo !== "Paciente" && ev.tipo !== "Paciente@1") continue;
       const outer = ev.payload && typeof ev.payload === "object" ? ev.payload as Record<string, unknown> : null;
       const parsed = Paciente.safeParse(outer?.data ?? outer);
       if (parsed.success && parsed.data.patientId === patientId) {

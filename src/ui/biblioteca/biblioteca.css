@@ -6,7 +6,6 @@
 .biblioteca-local :is(button, select, input:not([type=checkbox])) { border: 1px solid var(--consulta-line, #d7e4e7); border-radius: 6px; padding: .45rem .65rem; max-width: 100%; background: white; color: inherit; }
 .biblioteca-local button { cursor: pointer; }
 .biblioteca-local button:disabled { cursor: default; opacity: .55; }
-.biblioteca-local :focus-visible { outline: 2px solid var(--consulta-accent, #174968); outline-offset: 3px; }
 .biblioteca-controles label, .biblioteca-local label { display: inline-flex; align-items: center; flex-wrap: wrap; gap: .5rem; }
 .biblioteca-pacote, .biblioteca-local > section[aria-label="Consultar biblioteca"] { border: 1px solid var(--consulta-line, #d7e4e7); border-radius: 8px; padding: 1rem; }
 .biblioteca-pacote dl { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: .2rem .75rem; }

@@ -287,6 +287,8 @@ export interface MensagemCanalVisao {
 
 export interface CaixaCanalVisao {
   mensagens: readonly MensagemCanalVisao[];
+  /** Vínculo de ingresso previamente associado ao cadastro, hoje não validado; não prova identidade clínica. */
+  pendenciasVinculoIngresso?: number | undefined;
 }
 
 export type CampoOrigemApac = "estadiamentos" | "histologia" | "topografia" | "cid" | null;
