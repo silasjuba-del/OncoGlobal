@@ -94,6 +94,15 @@ export function executarHarnessAvaliacao(entrada: EntradaHarnessAvaliacao): Rela
       detalhe: "Um stub testa apenas o HARNESS; é proibido reportá-lo como avaliação de prontidão do extrator.",
     });
   }
+  // A entrada contém resultados autorrelatados; não há executor autenticado neste
+  // contrato. Métricas podem ser calculadas, mas não atestam prontidão do extrator.
+  if (entrada.tipoSujeito === "EXTRATOR") {
+    violacoesFatais.push({
+      codigo: "EXTRATOR_NAO_VERIFICADO",
+      casoId: null,
+      detalhe: "Não há vínculo verificado entre o artefato executor e as saídas observadas da avaliação.",
+    });
+  }
 
   // 2. Separação estrita entre dev e test_congelado
   const casosDev = entrada.casos.filter((c) => c.split === "dev");

@@ -73,6 +73,68 @@ it("rejeita Fonte de outro documento mesmo com sintaxe válida e conteúdo exibi
   } finally { db.close(); }
 });
 
+it("não persiste mistura de proveniência confiável A com Fonte B fabricada", () => {
+  const db = abrirLedger(":memory:");
+  try {
+    const payload = { campo: "creatinina", valor: 1.1 };
+    salvarDraft(db, { draftId: "draft-misto-a", patientId: PACIENTE, sourceId: "fonte-a",
+      rawRef: "referencia-sintetica", payload, diagnostics: [], revision: 0, criadoEm: AGORA });
+    const hashA = sha256("Fonte A: creatinina 1,1 mg/dL");
+    const writer = criarWriterClinicoGateway({ db, agora: () => AGORA,
+      hashFonteOriginal: () => hashA });
+    const r = writer.persistir({
+      operationId: "op-misto-ab", reviewDecisionId: "rev-misto-ab",
+      ator: { tipo: "SESSAO", id: "medico-sintetico" },
+      sessao: { medicoId: "medico-sintetico", crm: "CRM-SINTETICO",
+        emitidaEm: AGORA, expiraEm: "2026-10-07T14:00:00.000Z" },
+      acaoMedicaExplicita: true,
+      contexto: { patientId: PACIENTE, encounterId: "encontro-pr45", tumorLotId: null },
+      bundleExibidoNoServidor: [{ documentId: "draft-misto-a", documentVersion: 1,
+        draftId: "draft-misto-a", conteudoHash: hashCanonico(payload) }],
+      documentosAssinadosNoPedido: [{ documentId: "draft-misto-a", documentVersion: 1 }],
+      registros: [{ draftId: "draft-misto-a", expectedRevision: 0, eventId: "ev-misto-ab",
+        tipo: "FATO", payload, revisao: "CONFIRMADO",
+        fontes: [
+          { sourceId: "fonte-a", classe: "LAB_FEED", localizador: "linha-1",
+            dataClinica: "2026-10-07", dataCaptura: AGORA, versao: "v1", contentHash: hashA },
+          { sourceId: "fonte-b", classe: "LAB_FEED", localizador: "linha-2",
+            dataClinica: "2026-10-07", dataCaptura: AGORA, versao: "v1",
+            contentHash: sha256("Fonte B: não verificada") },
+        ] }],
+    });
+    expect(r.motivoCodigo).toBe("PROVENIENCIA_OBRIGATORIA_AUSENTE");
+    expect(listarEventos(db, PACIENTE)).toEqual([]);
+  } finally { db.close(); }
+});
+
+it("repete operação idêntica com relógio posterior sem conflito de hash", () => {
+  const db = abrirLedger(":memory:");
+  try {
+    const payload = { patientId: PACIENTE, encounterId: "encontro-pr45", horario: "08:00", data: "2026-10-07" };
+    salvarDraft(db, { draftId: "draft-replay-pr45", patientId: PACIENTE, sourceId: "fonte-manual",
+      rawRef: "referencia-sintetica", payload, diagnostics: [], revision: 0, criadoEm: AGORA });
+    let agora = AGORA;
+    const writer = criarWriterClinicoGateway({ db, agora: () => agora });
+    const pedido = {
+      operationId: "op-replay-pr45", reviewDecisionId: "rev-replay-pr45",
+      ator: { tipo: "SESSAO" as const, id: "medico-sintetico" },
+      sessao: { medicoId: "medico-sintetico", crm: "CRM-SINTETICO",
+        emitidaEm: AGORA, expiraEm: "2026-10-07T14:00:00.000Z" },
+      acaoMedicaExplicita: true,
+      contexto: { patientId: PACIENTE, encounterId: "encontro-pr45", tumorLotId: null },
+      bundleExibidoNoServidor: [{ documentId: "draft-replay-pr45", documentVersion: 1,
+        draftId: "draft-replay-pr45", conteudoHash: hashCanonico(payload) }],
+      documentosAssinadosNoPedido: [{ documentId: "draft-replay-pr45", documentVersion: 1 }],
+      registros: [{ draftId: "draft-replay-pr45", expectedRevision: 0, eventId: "ev-replay-pr45",
+        tipo: "AgendaEntry", payload, fontes: [], revisao: "CONFIRMADO" as const }],
+    };
+    expect(writer.persistir(pedido).decisao).toBe("PERSISTIDA");
+    agora = "2026-10-07T12:01:00.000Z";
+    expect(writer.persistir(pedido).decisao).toBe("REPLAY");
+    expect(listarEventos(db, PACIENTE)).toHaveLength(1);
+  } finally { db.close(); }
+});
+
 it("não grava draft exibido fora do conjunto autorizado pelo médico", () => {
   const db = abrirLedger(":memory:");
   try {

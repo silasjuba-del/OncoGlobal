@@ -504,9 +504,12 @@ describe("HARNESS DE AVALIAÇÃO · Splits dev vs test congelado, denominadores/
       hashTestCongeladoEsperado: hashCongelado,
       casos: casosBase,
     });
-    expect(relExtrator.statusGlobal).toBe("APROVADO");
-    expect(relExtrator.relatorioValidoParaExtrator).toBe(true);
-    expect(relExtrator.rotuloEscopoSujeito).toBe("AVALIACAO_DO_EXTRATOR");
+    expect(relExtrator.statusGlobal).toBe("FALHA_FECHADA");
+    expect(relExtrator.relatorioValidoParaExtrator).toBe(false);
+    expect(relExtrator.rotuloEscopoSujeito).toBe("INVALIDO_BLOQUEADO");
+    expect(relExtrator.violacoesFatais).toContainEqual(expect.objectContaining({
+      codigo: "EXTRATOR_NAO_VERIFICADO",
+    }));
     const metricaCp = relExtrator.metricasPorClasse.find((m) => m.classeErro === "CONTROLE_POSITIVO_SILENCIOSO")!;
     expect(metricaCp.numeradorErros).toBe(0);
     expect(metricaCp.denominadorTotal).toBe(2);

@@ -168,12 +168,17 @@ export function criarWriterClinicoGateway(deps: {
         if (reg.tipo === "FATO" || reg.exigeProveniencia) {
           const hashConfiavel = deps.hashFonteOriginal?.(draft);
           if (!provenienciaValida(reg.fontes) || !hashConfiavel
-            || !reg.fontes.some(f => f.sourceId === draft.sourceId && f.contentHash === hashConfiavel))
+            || !reg.fontes.every(f => f.sourceId === draft.sourceId && f.contentHash === hashConfiavel))
             return negar(atorAuditavel, "PROVENIENCIA_OBRIGATORIA_AUSENTE", em);
         }
       }
 
       // 7. Validação de schema (ClinicalEvent.parse em confirmar) e persistência transacional no ledger.
+      // Retries usam o carimbo da operação já persistida; o relógio corrente
+      // continua validando a sessão acima, mas não altera o hash idempotente.
+      const operacaoAnterior = deps.db.prepare("SELECT criadoEm FROM operation WHERE operationId=?")
+        .get(pedido.operationId) as { criadoEm: string } | undefined;
+      const emEscrita = operacaoAnterior?.criadoEm ?? em;
       let gravacao;
       try {
         gravacao = confirmar(deps.db, {
@@ -183,7 +188,7 @@ export function criarWriterClinicoGateway(deps: {
           tumorLotId: pedido.contexto.tumorLotId,
           reviewDecisionId: pedido.reviewDecisionId,
           sessao: sessaoParsed.data,
-          em,
+          em: emEscrita,
           registros: pedido.registros.map(({ exigeProveniencia: _omit, ...r }) => r),
         });
       } catch {
