@@ -27,6 +27,7 @@ export interface ReferenciaCandidataBrainOs {
   status: "CONSULTAVEL" | "RASCUNHO" | "OBSOLETO" | "ALERTA";
   escopoCompativel: boolean;
   provenienciaCompleta: boolean;
+  dependenciasAprovadas?: boolean;
   termosChave: readonly string[];
   motivoInclusaoSeAplicavel: string;
 }
@@ -98,6 +99,7 @@ export function produzirPropostaBrainOs(entrada: unknown): PropostaBrainOs {
     if (!fonte.sourceId || !fonte.versao || typeof fonte.conteudo !== "string" || !fonte.conteudo.trim()) {
       throw new Error("BRAIN_OS_FONTE_INVALIDA");
     }
+    if (mapaFontes.has(fonte.sourceId)) throw new Error("BRAIN_OS_SOURCE_ID_DUPLICADO");
     mapaFontes.set(fonte.sourceId, {
       sourceId: fonte.sourceId,
       versao: fonte.versao,
@@ -109,10 +111,15 @@ export function produzirPropostaBrainOs(entrada: unknown): PropostaBrainOs {
 
   const inclusoesMesa: InclusaoMesaBrain[] = [];
   const referenciasExcluidas: ExclusaoReferenciaBrain[] = [];
-  const textoCombinado = raw.fontes.map((f) => f.conteudo.toLocaleLowerCase("pt-BR")).join("\n");
   const versoesConsultaveisPorId = new Map<string, string>();
+  const assinaturasReferencias = new Map<string, Set<string>>();
+  const referenciasIncluidas = new Set<string>();
   for (const ref of raw.referenciasCandidatas ?? []) {
-    if (ref.status === "CONSULTAVEL" && ref.provenienciaCompleta && ref.escopoCompativel) {
+    const chave = JSON.stringify([ref.referenciaId, ref.versao]);
+    const assinaturas = assinaturasReferencias.get(chave) ?? new Set<string>();
+    assinaturas.add(JSON.stringify([ref.status, ref.provenienciaCompleta, ref.escopoCompativel, ref.dependenciasAprovadas ?? true, ref.termosChave, ref.motivoInclusaoSeAplicavel]));
+    assinaturasReferencias.set(chave, assinaturas);
+    if (ref.status === "CONSULTAVEL" && ref.provenienciaCompleta && ref.escopoCompativel && ref.dependenciasAprovadas !== false) {
       const atual = versoesConsultaveisPorId.get(ref.referenciaId);
       if (!atual || ref.versao.localeCompare(atual, undefined, { numeric: true }) > 0) {
         versoesConsultaveisPorId.set(ref.referenciaId, ref.versao);
@@ -121,6 +128,17 @@ export function produzirPropostaBrainOs(entrada: unknown): PropostaBrainOs {
   }
 
   for (const ref of raw.referenciasCandidatas ?? []) {
+    const chave = JSON.stringify([ref.referenciaId, ref.versao]);
+    if ((assinaturasReferencias.get(chave)?.size ?? 0) > 1) {
+      referenciasExcluidas.push({ referenciaId: ref.referenciaId, versao: ref.versao,
+        motivoCodigo: "CONFLITO_MESMA_VERSAO", detalhe: "Metadados divergentes para a mesma referência e versão; nenhuma variante foi escolhida." });
+      continue;
+    }
+    if (referenciasIncluidas.has(chave)) {
+      referenciasExcluidas.push({ referenciaId: ref.referenciaId, versao: ref.versao,
+        motivoCodigo: "DUPLICADA_MESMA_VERSAO", detalhe: "Repetição idêntica de referência já incluída; não constitui corroboração independente." });
+      continue;
+    }
     if (!ref.provenienciaCompleta) {
       referenciasExcluidas.push({
         referenciaId: ref.referenciaId,
@@ -148,6 +166,11 @@ export function produzirPropostaBrainOs(entrada: unknown): PropostaBrainOs {
       });
       continue;
     }
+    if (ref.dependenciasAprovadas === false) {
+      referenciasExcluidas.push({ referenciaId: ref.referenciaId, versao: ref.versao,
+        motivoCodigo: "DEPENDENCIA_NAO_APROVADA", detalhe: "Referência depende de item sem aprovação vigente; não utilizada na mesa." });
+      continue;
+    }
     const versaoMaisRecente = versoesConsultaveisPorId.get(ref.referenciaId);
     if (versaoMaisRecente && versaoMaisRecente !== ref.versao) {
       referenciasExcluidas.push({
@@ -158,8 +181,18 @@ export function produzirPropostaBrainOs(entrada: unknown): PropostaBrainOs {
       });
       continue;
     }
-    const termoEncontrado = ref.termosChave.find((t) => t.trim().length > 0 && textoCombinado.includes(t.toLocaleLowerCase("pt-BR")));
-    if (!termoEncontrado) {
+    let correspondencia: { fonte: FonteEntradaBrainOs; indice: number; tamanho: number } | undefined;
+    for (const termo of ref.termosChave) {
+      if (!termo.trim()) continue;
+      const literal = termo.trim().replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      const padrao = new RegExp(`(?<![\\p{L}\\p{N}_])${literal}(?![\\p{L}\\p{N}_])`, "iu");
+      for (const fonte of raw.fontes) {
+        const match = padrao.exec(fonte.conteudo);
+        if (match) { correspondencia = { fonte, indice: match.index, tamanho: match[0].length }; break; }
+      }
+      if (correspondencia) break;
+    }
+    if (!correspondencia) {
       referenciasExcluidas.push({
         referenciaId: ref.referenciaId,
         versao: ref.versao,
@@ -168,16 +201,17 @@ export function produzirPropostaBrainOs(entrada: unknown): PropostaBrainOs {
       });
       continue;
     }
-    const fonteMatch = raw.fontes.find((f) => f.conteudo.toLocaleLowerCase("pt-BR").includes(termoEncontrado.toLocaleLowerCase("pt-BR"))) ?? raw.fontes[0]!;
-    const indiceTermo = fonteMatch.conteudo.toLocaleLowerCase("pt-BR").indexOf(termoEncontrado.toLocaleLowerCase("pt-BR"));
-    const inicioTrecho = Math.max(0, indiceTermo - 80);
-    const fimTrecho = Math.min(fonteMatch.conteudo.length, Math.max(inicioTrecho + 240, indiceTermo + termoEncontrado.length));
+    const fonteMatch = correspondencia.fonte;
+    const posicaoTermo = correspondencia.indice;
+    const inicioTrecho = Math.max(0, posicaoTermo - 80);
+    const fimTrecho = Math.min(fonteMatch.conteudo.length, Math.max(inicioTrecho + 240, posicaoTermo + correspondencia.tamanho));
     inclusoesMesa.push({
       referenciaId: ref.referenciaId,
       versao: ref.versao,
       motivoInclusao: ref.motivoInclusaoSeAplicavel,
       trechoCitado: fonteMatch.conteudo.slice(inicioTrecho, fimTrecho),
     });
+    referenciasIncluidas.add(chave);
   }
 
   // Agrupamento por campo para detectar ambiguidades/conflitos sem escolher silenciosamente
@@ -233,7 +267,8 @@ export function produzirPropostaBrainOs(entrada: unknown): PropostaBrainOs {
 
     const primeiro = lista[0]!;
     const qualificador = inferirQualificadorNoTrecho(primeiro.trecho, primeiro.qualificador);
-    const criticoNumero = primeiro.criticoNumero ?? (typeof primeiro.valor === "number" || /\d/.test(String(primeiro.valor)));
+    const criticoNumero = lista.some(c => c.criticoNumero === true)
+      || typeof primeiro.valor === "number" || /\d/.test(String(primeiro.valor));
     const citacoes = lista.map((c) => {
       const fonte = mapaFontes.get(c.sourceId)!;
       return {

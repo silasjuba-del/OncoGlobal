@@ -7,6 +7,9 @@ import { AcaoCompostaPreparada, BaseAcaoCompostaResposta } from "./execucaoAcaoC
 import { TimelineMulticamadasResposta } from "./timelineMulticamadas.js";
 import {RespostaCanalPreparada,RespostaCanalConfirmada} from './respostaCanal.js';
 import { z } from "zod";
+import { ResultadoCognitivoOncoassist } from "./oncoassist.js";
+import { LeituraPubMedResposta, ListaRascunhosPubMedResposta } from "../leituraPubMed.js";
+import { ResultadoSkillClinica } from "../skillsClinicas.js";
 import {DitadoResposta} from '../fase2/ditado.js';
 import { RevisaoClinicaResposta } from '../fase2/revisaoClinica.js';
 import { LotesPacienteResposta } from './lotes.js';
@@ -36,6 +39,10 @@ const Extracao = z.object({ draftId: Id, revision: Count, linkedPatientId: Id.nu
 
 /** Mesmos contratos no servidor e no cliente. Valida sem descartar campos adicionais da resposta legada. */
 export const SaidasHttp: Readonly<Record<string, z.ZodType>> = {
+  skillsClinicas: ResultadoSkillClinica,
+  resultadoExtracaoLlm: ResultadoCognitivoOncoassist,
+  leituraPubMed: LeituraPubMedResposta,
+  listarRascunhosPubMed: ListaRascunhosPubMedResposta,
   listarFichasPrescricao: CatalogoFichasRespostaSchema,
   revisarFichaPrescricao: FichaProtocoloCatalogoSchema,
   instanciarFichaPrescricao: InstanciacaoFichaRespostaSchema,

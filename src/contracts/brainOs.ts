@@ -25,6 +25,9 @@ export const ExclusaoReferenciaBrainSchema = z.object({
     "PROVENIENCIA_INCOMPLETA",
     "SEM_CORRESPONDENCIA_NA_FONTE",
     "DUPLICADA_POR_VERSAO_SUPERIOR",
+    "DUPLICADA_MESMA_VERSAO",
+    "CONFLITO_MESMA_VERSAO",
+    "DEPENDENCIA_NAO_APROVADA",
   ]),
   detalhe: z.string().min(1).max(500),
 }).strict();

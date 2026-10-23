@@ -57,7 +57,17 @@ describe("RT-04 · número falado (Plaud) e decimais", () => {
       evidence: "EXPLICIT", sourceId: "doc", rawEvidence: "Hb 9,8 g/dL",
       confidence: 1, requiresConfirmation: false,
     });
-    expect(parse).toThrow(/número falado \(Plaud\) exige confirmação/iu);
+    expect(parse).toThrow(/número falado exige confirmação/iu);
+  });
+
+  it("contrato Zod: ditado local em nota médica também exige confirmação do número falado", () => {
+    const parse = () => ClinicalFactSchema.parse({
+      id: "f2", segmentId: "s1", patientCandidateId: null, domain: "lab",
+      value: { marker: "Hb", value: "9,8", unit: "g/dL" }, sourceType: "medical_note", captureMethod: "LOCAL_DICTATION",
+      evidence: "EXPLICIT", sourceId: "doc", rawEvidence: "Hb 9,8 g/dL",
+      confidence: 1, requiresConfirmation: false,
+    });
+    expect(parse).toThrow(/número falado exige confirmação/iu);
   });
 
   it("'1,4' fica como texto cru com unidade — nada converte nem arredonda em silêncio", () => {

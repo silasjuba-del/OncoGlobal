@@ -1,4 +1,5 @@
 import type { EncounterSegment, FactSourceType } from "./tipos.js";
+import type { MetodoCapturaTranscricao } from "../../contracts/capturaTranscricao.js";
 import { normalizarLateralidade, normalizarSitioAnatomico } from "./normalizacao.js";
 
 // Sinais/limiares de fronteira não implicam vínculo de paciente (D-W9-34a).
@@ -12,6 +13,7 @@ export interface SegmentationInput {
   readonly recordingId: string;
   readonly sourceId: string;
   readonly sourceType: FactSourceType;
+  readonly captureMethod?: MetodoCapturaTranscricao;
   readonly page?: number;
   readonly turns: readonly TranscriptTurn[];
 }
@@ -99,6 +101,7 @@ export function segmentarTranscricao(input: SegmentationInput): readonly Encount
       recordingId: input.recordingId,
       sourceId: input.sourceId,
       sourceType: input.sourceType,
+      ...(input.captureMethod ? { captureMethod: input.captureMethod } : {}),
       ...(input.page === undefined ? {} : { page: input.page }),
       startMs: group[0]?.startMs ?? null,
       endMs: group.at(-1)?.endMs ?? null,

@@ -6,14 +6,84 @@ import { lerDraft, listarDrafts, salvarDraft } from "../kernel/comandos/portas.j
 import type { ServidorDeps } from "./rotas.js";
 import type { criarRuntimeExtracaoLlm } from "../kernel/llm/openai/runtime.js";
 import { lerPaciente } from "./leituras.js";
+import { avaliarExtracaoCognitiva } from "../kernel/llm/cognitivoExtracao.js";
+import { RelatorioCognitivoExtracaoSchema } from "../contracts/cognitivoExtracao.js";
+import { FiltrosConhecimentoBrainSchema } from "../contracts/conhecimentoBrain.js";
+import { lerConhecimentoBrain } from "./conhecimentoBrain.js";
+import { fonteDeVoz, MetodoCapturaTranscricao } from "../contracts/capturaTranscricao.js";
+import { PaginacaoExtracoesCognitivas, type PaginaExtracoesCognitivas } from "../contracts/api/oncoassist.js";
 
 const Pedido = z.object({ draftId: Id, patientId: Id, encounterId: Id, tumorLotId: Id.nullable(), idempotencyKey: Id }).strict();
 const PedidoSintese = Pedido.omit({ draftId: true });
+const PedidoLeitura = Pedido.omit({ idempotencyKey: true });
+const PedidoExtracao = Pedido.extend({ filtrosBiblioteca: FiltrosConhecimentoBrainSchema.optional() });
+const RegistroExtracao = z.object({ kind: z.literal("LLM_EXTRACAO_RASCUNHO"), sourceDraftId: Id, sourceDraftHash: z.string(),
+  resultado: z.object({ correlacao: Correlacao }).passthrough(), cognitivo: z.unknown().optional() });
 type DepsExtracao = ServidorDeps & { extracaoLlm?: ReturnType<typeof criarRuntimeExtracaoLlm> };
 const hash = (v: unknown) => createHash("sha256").update(JSON.stringify(v ?? null)).digest("hex");
+
+/** Leitura contextual do rascunho inerte; não abre a via genérica de confirmação. */
+export function lerResultadoExtracaoLlm(raw: unknown, token: string, deps: DepsExtracao): { status: number; body: Record<string, unknown> } {
+  const responder = (status: number, codigo: string, extra: Record<string, unknown> = {}) => ({ status, body: { codigo, ...extra } });
+  const p = PedidoLeitura.safeParse(raw); if (!p.success) return responder(400, "PAYLOAD_INVALIDO");
+  if (!deps.sessoes.obter(token)) return responder(401, "SESSAO_EXPIRADA");
+  const ctx = deps.sessoes.consultaSelecionada(token);
+  if (!ctx || ctx.patientId !== p.data.patientId || ctx.encounterId !== p.data.encounterId || (ctx.tumorLotId ?? null) !== p.data.tumorLotId)
+    return responder(409, "CONTEXTO_CONSULTA_ALTERADO");
+  const draft = lerDraft(deps.db, p.data.draftId);
+  const registro = RegistroExtracao.safeParse(draft?.payload);
+  if (!draft || draft.patientId !== ctx.patientId || !registro.success) return responder(409, "DRAFT_FORA_DO_ESCOPO");
+  const { correlacao } = registro.data.resultado;
+  if (correlacao.patientId !== ctx.patientId || correlacao.encounterId !== ctx.encounterId || correlacao.tumorLotId !== (ctx.tumorLotId ?? null))
+    return responder(409, "DRAFT_FORA_DO_ESCOPO");
+  const atual = deps.motorF1?.retrato({ patientId: ctx.patientId, encounterId: ctx.encounterId, tumorLotId: ctx.tumorLotId ?? null });
+  const relatorio = RelatorioCognitivoExtracaoSchema.safeParse(registro.data.cognitivo);
+  return responder(200, "PROPOSTA_LLM_CARREGADA", { draftId: draft.draftId, criaEventoClinico: false,
+    proposta: registro.data.resultado, cognitivo: relatorio.success ? relatorio.data : null,
+    validadeFonte: hash(lerDraft(deps.db, registro.data.sourceDraftId)) === registro.data.sourceDraftHash ? "ATUAL" : "FONTE_ALTERADA",
+    validadeContexto: atual && hash([atual.revisao, atual.regras, atual.biblioteca]) === hash([correlacao.revisaoFatos, correlacao.regras, correlacao.biblioteca])
+      ? "ATUAL" : "CONTEXTO_ALTERADO",
+    validadePolitica: relatorio.success ? "MESMA_VERSAO" : "NAO_VERIFICAVEL" });
+}
+
+/** Projeção do mesmo ledger, sem fila paralela e sem conteúdo clínico na listagem. */
+export function listarExtracoesCognitivas(raw: unknown, token: string, deps: DepsExtracao):
+  { status: number; codigo: string; pagina?: PaginaExtracoesCognitivas } {
+  const pedido = PedidoLeitura.omit({ draftId: true }).extend(PaginacaoExtracoesCognitivas.shape).safeParse(raw);
+  if (!pedido.success) return { status: 400, codigo: "PAYLOAD_INVALIDO" };
+  if (!deps.sessoes.obter(token)) return { status: 401, codigo: "SESSAO_EXPIRADA" };
+  const ctx = deps.sessoes.consultaSelecionada(token), p = pedido.data;
+  const mesmo = (c: { patientId: string; encounterId: string; tumorLotId?: string | null }) =>
+    c.patientId === p.patientId && c.encounterId === p.encounterId && (c.tumorLotId ?? null) === p.tumorLotId;
+  if (!ctx || !mesmo(ctx)) return { status: 409, codigo: "CONTEXTO_CONSULTA_ALTERADO" };
+  const registros = listarDrafts(deps.db, ctx.patientId).flatMap(draft => {
+    const r = RegistroExtracao.safeParse(draft.payload);
+    return r.success && mesmo(r.data.resultado.correlacao) ? [{ draft, registro: r.data }] : [];
+  }).sort((a, b) => Date.parse(b.draft.criadoEm) - Date.parse(a.draft.criadoEm) || b.draft.draftId.localeCompare(a.draft.draftId));
+  const indice = p.cursorExtracoes === undefined ? -1 : registros.findIndex(r => r.draft.draftId === p.cursorExtracoes);
+  if (p.cursorExtracoes !== undefined && indice === -1) return { status: 400, codigo: "CURSOR_EXTRACOES_INVALIDO" };
+  const selecionados = registros.slice(indice + 1, indice + 1 + (p.limiteExtracoes ?? 20));
+  const retrato = deps.motorF1?.retrato({ patientId: p.patientId, encounterId: p.encounterId, tumorLotId: p.tumorLotId });
+  const atual = retrato ? hash([retrato.revisao, retrato.regras, retrato.biblioteca]) : null;
+  const itens: PaginaExtracoesCognitivas["itens"] = selecionados.map(({ draft, registro }) => {
+    const r = RelatorioCognitivoExtracaoSchema.safeParse(registro.cognitivo);
+    const c = registro.resultado.correlacao;
+    const avaliado = r.success && r.data.estado === "AVALIADO" ? r.data : null;
+    return { draftId: draft.draftId, sourceDraftId: registro.sourceDraftId, sourceId: draft.sourceId, criadoEm: draft.criadoEm,
+      status: avaliado?.harness.status ?? "NAO_VERIFICADO",
+      validadeFonte: hash(lerDraft(deps.db, registro.sourceDraftId)) === registro.sourceDraftHash ? "ATUAL" : "FONTE_ALTERADA",
+      validadeContexto: atual === hash([c.revisaoFatos, c.regras, c.biblioteca]) ? "ATUAL" : "CONTEXTO_ALTERADO",
+      validadePolitica: r.success ? "MESMA_VERSAO" : "NAO_VERIFICAVEL",
+      alegacoes: avaliado?.proposta.itensPropostos.length ?? 0, pendencias: avaliado?.harness.manifestacoes.length ?? 0,
+      criaEventoClinico: false };
+  });
+  return { status: 200, codigo: "EXTRACOES_COGNITIVAS_LISTADAS", pagina: { itens,
+    proximoCursor: indice + 1 + selecionados.length < registros.length ? selecionados.at(-1)?.draft.draftId ?? null : null } };
+}
 export async function executarExtracaoLlm(raw: unknown, token: string, deps: DepsExtracao): Promise<{ status: number; body: Record<string, unknown> }> {
   const responder = (status: number, codigo: string, extra: Record<string, unknown> = {}) => ({ status, body: { codigo, ...extra } });
-  const p = Pedido.safeParse(raw); if (!p.success) return responder(400, "PAYLOAD_INVALIDO");
+  const p = PedidoExtracao.safeParse(raw); if (!p.success) return responder(400, "PAYLOAD_INVALIDO");
+  const filtrosBiblioteca = p.data.filtrosBiblioteca ?? {};
   const sessao = deps.sessoes.obter(token); if (!sessao) return responder(401, "SESSAO_EXPIRADA");
   const ctx = deps.sessoes.consultaSelecionada(token);
   if (!ctx || ctx.patientId !== p.data.patientId || ctx.encounterId !== p.data.encounterId || (ctx.tumorLotId ?? null) !== p.data.tumorLotId)
@@ -48,9 +118,13 @@ export async function executarExtracaoLlm(raw: unknown, token: string, deps: Dep
     return v?.kind === "LLM_EXTRACAO_RASCUNHO" && v.operationId === p.data.idempotencyKey && v.sourceDraftHash === fonteAntes;
   });
   if (jaSalvo) {
+    if (hash((jaSalvo.payload as { filtrosBiblioteca?: unknown }).filtrosBiblioteca ?? {}) !== hash(filtrosBiblioteca))
+      return responder(409, "FILTROS_BIBLIOTECA_DIVERGENTES");
     const anterior = (jaSalvo.payload as { resultado?: { correlacao?: unknown } }).resultado?.correlacao;
     if (hash(anterior) !== hash(correlacao)) return responder(409, "PROPOSTA_LLM_DESATUALIZADA");
-    return responder(200, "PROPOSTA_LLM_REPLAY", { draftId: jaSalvo.draftId, criaEventoClinico: false });
+    const relatorio = RelatorioCognitivoExtracaoSchema.safeParse((jaSalvo.payload as Record<string, unknown>).cognitivo);
+    return responder(200, "PROPOSTA_LLM_REPLAY", { draftId: jaSalvo.draftId, criaEventoClinico: false,
+      ...(relatorio.success ? { cognitivo: relatorio.data } : {}) });
   }
   const preparo = runtime.preparar(p.data.idempotencyKey,
     { fonte: { id: draft.sourceId, paginas: [{ n: 1, texto: segmento.data.rawTranscript }] }, correlacao },
@@ -64,10 +138,28 @@ export async function executarExtracaoLlm(raw: unknown, token: string, deps: Dep
     const resultado = runtime.resultado(p.data.idempotencyKey);
     if (!resultado || resultado.status !== "PROPOSTA" || (g.decisao !== "EXECUTADA" && g.decisao !== "REPLAY"))
       return responder(409, "PENDENTE", { motivo: resultado?.status === "PENDENTE" ? resultado.codigo : g.motivoCodigo });
+    const origem = (payload.input as { sourceType?: string; captureMethod?: string; rawTranscript?: string; capturedTranscript?: string } | undefined) ?? {};
+    const metodo = MetodoCapturaTranscricao.safeParse(origem.captureMethod);
+    const hashTexto = (s: string) => createHash("sha256").update(s, "utf8").digest("hex");
+    const captura = metodo.success ? { metodo: metodo.data,
+      transcricaoOriginalHash: typeof origem.capturedTranscript === "string" ? hashTexto(origem.capturedTranscript) : null,
+      transcricaoRevisadaHash: hashTexto(origem.rawTranscript ?? segmento.data.rawTranscript),
+      transcricaoEditada: typeof origem.capturedTranscript === "string" ? origem.capturedTranscript !== origem.rawTranscript : null,
+      audioConferido: false as const } : undefined;
+    const conhecimento = lerConhecimentoBrain(deps.db, filtrosBiblioteca);
+    const cognitivo = avaliarExtracaoCognitiva({ resultado, agora: deps.agora(), ...conhecimento, ...(captura ? { captura } : {}), fonte: {
+      sourceId: draft.sourceId, versao: String(draft.revision),
+      modalidade: fonteDeVoz(origem) ? "AUDIO" : "TEXTO",
+      conteudoOriginal: segmento.data.rawTranscript,
+      // Página 1 é o envelope enviado ao modelo, não a numeração física do documento.
+      localizadores: [{ localizador: `segmento:${vinculo.data.segmentId}`, trecho: segmento.data.rawTranscript }],
+      contentHash: createHash("sha256").update(segmento.data.rawTranscript, "utf8").digest("hex"),
+    } });
     const salvo = salvarDraft(deps.db, { draftId: `llm:${hash(p.data.idempotencyKey)}`, patientId: ctx.patientId, sourceId: draft.sourceId,
-      rawRef: draft.rawRef, revision: 0, criadoEm: deps.agora(), diagnostics: ["REVISAO_MEDICA_OBRIGATORIA"],
-      payload: { kind: "LLM_EXTRACAO_RASCUNHO", operationId: p.data.idempotencyKey, sourceDraftId: draft.draftId, sourceDraftHash: fonteAntes, resultado } });
-    return responder(201, "PROPOSTA_LLM_SALVA", { draftId: salvo.draftId, revision: salvo.revision, proposta: resultado, criaEventoClinico: false });
+      rawRef: draft.rawRef, revision: 0, criadoEm: deps.agora(), diagnostics: ["REVISAO_MEDICA_OBRIGATORIA",
+        cognitivo.estado === "AVALIADO" ? cognitivo.harness.status : cognitivo.codigo],
+      payload: { kind: "LLM_EXTRACAO_RASCUNHO", operationId: p.data.idempotencyKey, sourceDraftId: draft.draftId, sourceDraftHash: fonteAntes, resultado, cognitivo, filtrosBiblioteca } });
+    return responder(201, "PROPOSTA_LLM_SALVA", { draftId: salvo.draftId, revision: salvo.revision, proposta: resultado, cognitivo, criaEventoClinico: false });
   } finally { runtime.descartar(p.data.idempotencyKey); }
 }
 

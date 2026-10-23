@@ -9,6 +9,7 @@ export const FonteOriginalPreservadaSchema = z.object({
   modalidade: ModalidadeFonteOriginalSchema,
   conteudoOriginal: z.string().nullable(),
   contentHash: z.string().regex(/^[0-9a-f]{64}$/).nullable(),
+  localizadores: z.array(z.object({ localizador: z.string().min(1).max(240), trecho: z.string().min(1) }).strict()).optional(),
   trechoAudioConferidoHumano: z.boolean().optional(),
   identidadeEsperadaPaciente: z.object({
     patientId: Id,

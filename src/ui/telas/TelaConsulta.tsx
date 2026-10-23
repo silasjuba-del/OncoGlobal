@@ -12,6 +12,7 @@ import {
   confirmacaoPreparouImpressao,
   validarComExibicao,
 } from "../consulta/validarComExibicao.js";
+import { ListaRascunhosPubMed } from "../consulta/ListaRascunhosPubMed.js";
 import { PainelOncoassist } from "../consulta/PainelOncoassist.js";
 import { CardEvidencia } from "../evidencia/CardEvidencia.js";
 import type { ChavesIntencao } from "../api/chaves.js";
@@ -380,6 +381,7 @@ export function TelaConsulta({
       />
       <PainelOncoassist key={`${patientId}:${visao.encounterId}:${loteId ?? ""}`} porta={porta}
         contexto={{ patientId, encounterId: visao.encounterId, tumorLotId: loteId }} />
+      <ListaRascunhosPubMed key={`pubmed:${patientId}:${visao.encounterId}:${loteId ?? ""}`} porta={porta} />
       <button type="button" className="oc-btn-primary" style={{ alignSelf: "flex-start" }} onClick={() => setViewer(true)}>
         Abrir TC
       </button>

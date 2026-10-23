@@ -4,6 +4,7 @@
 import type { ClinicalFact } from "./tipos.js";
 import { componenteM, normalizarDataCivil } from "./normalizacao.js";
 import { literalDoEstagio } from "./reconciliacao.js";
+import { fonteDeVoz } from "../../contracts/capturaTranscricao.js";
 
 export interface ViolacaoInvariante {
   /** Número do invariante na spec §5 (1..7). */
@@ -82,12 +83,12 @@ function inv3(fact: ClinicalFact): ViolacaoInvariante | null {
 
 /** Invariante 4 · número falado exige confirmação. */
 function inv4(fact: ClinicalFact): ViolacaoInvariante | null {
-  if (fact.sourceType !== "plaud" || !DOMINIOS_COM_NUMERO.has(fact.domain)) return null;
+  if (!fonteDeVoz(fact) || !DOMINIOS_COM_NUMERO.has(fact.domain)) return null;
   if (!NUMERICO.test(texto(fact))) return null;
   if (fact.requiresConfirmation && fact.confidence < 0.7) return null;
   return {
     invariante: 4, nome: "numero-falado-confirma", factId: fact.id,
-    motivo: "número vindo de Plaud exige confidence < 0,7 e requiresConfirmation = true",
+    motivo: "número vindo de voz exige confidence < 0,7 e requiresConfirmation = true",
   };
 }
 

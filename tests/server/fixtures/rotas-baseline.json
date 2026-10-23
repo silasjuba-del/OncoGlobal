@@ -160,12 +160,24 @@
     "investigacao"
   ],
   [
+    "/consulta/leitura",
+    "leituraPubMed"
+  ],
+  [
+    "/consulta/leitura/rascunhos",
+    "listarRascunhosPubMed"
+  ],
+  [
     "/consulta/llm/documento-original",
     "documentoOriginalLlm"
   ],
   [
     "/consulta/llm/extrair",
     "extracaoLlm"
+  ],
+  [
+    "/consulta/llm/resultado",
+    "resultadoExtracaoLlm"
   ],
   [
     "/consulta/lotes",
@@ -274,6 +286,10 @@
   [
     "/consulta/salao/triagem",
     "salvarTriagemSalao"
+  ],
+  [
+    "/consulta/skills",
+    "skillsClinicas"
   ],
   [
     "/consulta/timeline-multicamadas",

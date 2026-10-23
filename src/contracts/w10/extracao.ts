@@ -2,6 +2,7 @@
 // Fatos são PROPOSTAS com origem; só viram Dado<T> confirmado por regra documental ou decisão médica.
 import { z } from "zod";
 import { Id, Instante } from "../base.js";
+import { MetodoCapturaTranscricao, fonteDeVoz } from "../capturaTranscricao.js";
 
 export const FactDomain = z.enum([
   "diagnosis", "histology", "stage", "biomarker", "metastasis", "drug", "regimen",
@@ -37,6 +38,7 @@ export const EncounterSegment = z.object({
   recordingId: Id,
   sourceId: Id,
   sourceType: FactSourceType,
+  captureMethod: MetodoCapturaTranscricao.optional(),
   page: z.number().int().min(1).optional(),
   startMs: z.number().int().min(0).nullable(),
   endMs: z.number().int().min(0).nullable(),
@@ -59,6 +61,7 @@ export const ClinicalFact = z.object({
   /** Texto bruto antes da normalização (ex.: fármaco foneticamente incerto). */
   raw: z.string().optional(),
   sourceType: FactSourceType,
+  captureMethod: MetodoCapturaTranscricao.optional(),
   evidence: FactEvidence,
   /** Qualifiers exist only when the source supports them; omitted legacy metadata stays omitted. */
   qualificadores: FactQualifiers.optional(),
@@ -74,8 +77,8 @@ export const ClinicalFact = z.object({
 }).strict().superRefine((f, ctx) => {
   if ((f.evidence === "DERIVED" || f.evidence === "INFERRED") && !f.regra)
     ctx.addIssue({ code: "custom", message: "DERIVED/INFERRED exige regra nomeada" });
-  if (f.sourceType === "plaud" && ["lab", "cycle"].includes(f.domain) && !f.requiresConfirmation)
-    ctx.addIssue({ code: "custom", message: "número falado (Plaud) exige confirmação" });
+  if (fonteDeVoz(f) && ["lab", "cycle"].includes(f.domain) && !f.requiresConfirmation)
+    ctx.addIssue({ code: "custom", message: "número falado exige confirmação" });
 });
 export type ClinicalFact = z.infer<typeof ClinicalFact>;
 

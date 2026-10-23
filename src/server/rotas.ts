@@ -4,6 +4,7 @@ import { rotaHttp } from "./rotas/catalogo.js";
 import { servirUiLocal } from "./rotas/uiLocal.js";
 import { rotearSalaoECanal } from "./rotas/salaoCanal.js";
 import { rotearPrescricaoFlashConfig } from "./rotas/prescricaoFlash.js";
+import { rotearCognitivo } from "./rotas/cognitivo.js";
 import { rotearExtracaoERevisao } from "./rotas/extracaoRevisao.js";
 import { rascunhoNaoPromovivel } from "../contracts/rascunhos.js";
 import { nomeMedicamento } from "./propostasDoseReceita.js";
@@ -52,7 +53,7 @@ import { DataCivil, Id } from "../contracts/base.js";
 import { ActionIntent, ConfirmarBloco } from "../contracts/operacao.js";
 import { listarDrafts } from "../kernel/comandos/portas.js";
 import { sqliteIdempotencia } from "../kernel/ledger/idempotencia.js";
-import type { criarGateway } from "../kernel/gateway/gateway.js";
+import type { criarGateway, ReadTransport } from "../kernel/gateway/gateway.js";
 import { autorizarSaida } from "./autorizacao.js";
 import type { GerenciadorSessao } from "./sessao.js";
 import { lerAgenda, lerApacs, lerCanal, lerConsulta, lerLotes, lerMensagensChat, lerPaciente, lerRecist, lerSalao, lerTriagens } from "./leituras.js";
@@ -81,6 +82,7 @@ export interface ServidorDeps {
   motorF1?: ReturnType<typeof criarMotorF1>;
   catalogoTumorPacks?: CatalogoTumorPacks;
   extracaoLlm?: ReturnType<typeof criarRuntimeExtracaoLlm>;
+  transportePubMed?: ReadTransport;
   packInvestigacao?: NonNullable<DepsInvestigacao["packInvestigacao"]>;
   agora: () => string;
   log: (entry: { rota: string; codigo: string; status: number }) => void;
@@ -245,6 +247,8 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
       return reply(200, result.codigo, result);
     }
     if (rota === "extracaoLlm") { const result = await executarExtracaoLlm(raw, token, deps); return reply(result.status, String(result.body.codigo), result.body); }
+    const cognitivo = await rotearCognitivo(deps, token, rota, raw, req, res);
+    if (cognitivo) return reply(cognitivo.status, cognitivo.codigo, cognitivo.body);
     const biblioteca = rotearBiblioteca(deps, token, rota, raw, sessao);
     if (biblioteca) return reply(biblioteca.status, String((biblioteca.body as { codigo?: string }).codigo ?? "BIBLIOTECA_CONSULTADA"), biblioteca.body);
     const duto = rotearDutos(deps, token, rota, raw, sessao);

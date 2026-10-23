@@ -54,11 +54,14 @@ export interface EntradaHarnessRuntime {
   camposCriticosObrigatorios?: readonly string[];
 }
 
+const temNegacao = (texto: string): boolean => /\b(?:nega|negou|sem\s+evidencia|ausencia\s+de|negativo\s+para|nao\s+(?:apresenta|ha|tem|refere)|sem\s+sinais\s+de)\b/iu
+  .test(texto.normalize("NFD").replace(/\p{Diacritic}/gu, ""));
+
 function qualificadorDeterministicoDoTrecho(
   trecho: string,
 ): "AFIRMADO" | "NEGADO" | "INCERTO" | "HISTORICO" | "TERCEIRO" {
   if (/\b(?:mae|mãe|pai|irm[aã]o?|tia|av[oó]|familiar)\b/iu.test(trecho)) return "TERCEIRO";
-  if (/\b(?:nega|sem\s+evid[eê]ncia|aus[eê]ncia\s+de|negativo\s+para|nao\s+apresenta|não\s+apresenta|sem\s+sinais\s+de)\b/iu.test(trecho)) {
+  if (temNegacao(trecho)) {
     return "NEGADO";
   }
   if (/\b(?:hip[oó]tese|suspeita|poss[ií]vel|duvidoso|interrogad[oa]|a\s+esclarecer|prov[aá]vel)\b/iu.test(trecho)) {
@@ -70,32 +73,53 @@ function qualificadorDeterministicoDoTrecho(
   return "AFIRMADO";
 }
 
-function extrairNumerosDoTrecho(trecho: string): number[] {
-  const matches = [...trecho.matchAll(/-?\d+(?:[.,]\d+)?/g)];
-  return matches
-    .map((m) => Number(m[0].replace(",", ".")))
-    .filter((n) => Number.isFinite(n));
+/** A citação pode cortar uma negação; conferir todas as ocorrências no contexto preservado. */
+function qualificadoresNaFonte(texto: string, trecho: string): Set<ReturnType<typeof qualificadorDeterministicoDoTrecho>> {
+  const resultado = new Set<ReturnType<typeof qualificadorDeterministicoDoTrecho>>();
+  const limite = (i: number) => /[\n\r;!?]/.test(texto[i] ?? "")
+    || texto[i] === "." && !( /\d/.test(texto[i - 1] ?? "") && /\d/.test(texto[i + 1] ?? ""));
+  for (let pos = texto.indexOf(trecho); pos !== -1; pos = texto.indexOf(trecho, pos + 1)) {
+    let inicio = pos, fim = pos + trecho.length;
+    while (inicio > 0 && !limite(inicio - 1)) inicio--;
+    // Se o próprio trecho já termina uma sentença, não anexar a próxima.
+    if (!limite(fim - 1)) while (fim < texto.length && !limite(fim)) fim++;
+    const contexto = texto.slice(inicio, fim);
+    resultado.add(qualificadorDeterministicoDoTrecho(contexto));
+    const bordasOmitidas = texto.slice(inicio, pos) + texto.slice(pos + trecho.length, fim);
+    if (/(?<!\d),(?!\d)|\b(?:mas|porem|porém|contudo)\b/iu.test(bordasOmitidas)) {
+      // Não há prova de que a polaridade atravessa uma fronteira de oração/lista.
+      resultado.add(qualificadorDeterministicoDoTrecho(trecho));
+    }
+    // O enum singular não representa simultaneamente sujeito terceiro e polaridade.
+    // Expor a incompatibilidade em vez de atestar que uma dimensão preserva a outra.
+    if (temNegacao(contexto)) resultado.add("NEGADO");
+  }
+  return resultado;
 }
 
 function verificarValorContraTrechoOriginal(valorProposto: string | number, unidade: string | null | undefined, trecho: string): boolean {
-  if (typeof valorProposto === "number") {
-    const numeros = extrairNumerosDoTrecho(trecho);
-    const numeroPresente = numeros.some((n) => Math.abs(n - valorProposto) < 1e-6);
-    if (!numeroPresente) return false;
-  } else {
-    const valorLimpo = valorProposto.trim();
-    if (!valorLimpo) return false;
-    const numConvertido = Number(valorLimpo.replace(",", "."));
-    if (Number.isFinite(numConvertido) && /^-?\d+(?:[.,]\d+)?$/.test(valorLimpo)) {
-      const numeros = extrairNumerosDoTrecho(trecho);
-      if (!numeros.some((n) => Math.abs(n - numConvertido) < 1e-6)) return false;
-    } else if (!trecho.toLocaleLowerCase("pt-BR").includes(valorLimpo.toLocaleLowerCase("pt-BR"))) {
-      return false;
-    }
+  const valorLimpo = String(valorProposto).trim();
+  if (!valorLimpo) return false;
+  const numerico = typeof valorProposto === "number" || /^[+-]?\d+(?:[.,]\d+)?$/.test(valorLimpo);
+  const unidadeLimpa = unidade?.trim().toLocaleLowerCase("pt-BR");
+  if (numerico) {
+    const numero = Number(valorLimpo.replace(",", "."));
+    // Consumir o token completo evita que 1.000.000 ou 1e3 sustentem o valor 1.
+    // Não inferir conversão de unidade, expoente ou separador de milhar.
+    return [...trecho.matchAll(/(?<![\p{L}\p{N}])[-+]?\d+(?:[.,]\d+)*(?:[eE][-+]?\d+)?/gu)].some(m => {
+      if (!/^[+-]?\d+(?:[.,]\d+)?$/.test(m[0])) return false;
+      if (/^[+-]?[1-9]\d{0,2}\.\d{3}$/.test(m[0])) return false;
+      if (!Number.isFinite(numero) || Number(m[0].replace(",", ".")) !== numero) return false;
+      const depois = trecho.slice(m.index! + m[0].length);
+      const unidadeLocal = /^\s*([\p{L}µμ°%/][\p{L}\p{N}µμ°%/^³²·]*)/u.exec(depois)?.[1];
+      if (!unidadeLimpa) return !unidadeLocal || !/^(?:mg|g|kg|mcg|µg|μg|ng|ml|dl|l|mm|cm|m|ui|u|mmol|mol|meq|%|°c)(?:$|\/)/iu.test(unidadeLocal);
+      return unidadeLocal?.toLocaleLowerCase("pt-BR") === unidadeLimpa;
+    });
   }
-  if (unidade && unidade.trim().length > 0) {
-    const u = unidade.trim().toLocaleLowerCase("pt-BR");
-    if (!trecho.toLocaleLowerCase("pt-BR").includes(u)) return false;
+  if (!trecho.toLocaleLowerCase("pt-BR").includes(valorLimpo.toLocaleLowerCase("pt-BR"))) return false;
+  if (unidadeLimpa) {
+    const tokens = trecho.match(/[\p{L}µμ°%/][\p{L}\p{N}µμ°%/^³²·]*/gu) ?? [];
+    if (!tokens.some(t => t.toLocaleLowerCase("pt-BR") === unidadeLimpa)) return false;
   }
   return true;
 }
@@ -131,6 +155,12 @@ export function verificarPropostaNoHarnessRuntime(entrada: EntradaHarnessRuntime
   const manifestacoes: ManifestacaoHarnessRuntime[] = [];
 
   for (const fonte of fontesOriginais) {
+    if (mapaFontes.has(fonte.sourceId)) {
+      fontesNaoVerificaveis.push({ sourceId: fonte.sourceId, motivo: "Identificador de fonte duplicado; nenhuma versão foi escolhida silenciosamente." });
+      manifestacoes.push({ tipo: "CITACAO_NAO_SUSTENTADA", campo: "sourceId", sourceId: fonte.sourceId,
+        detalhe: "Identificador de fonte duplicado impede resolução inequívoca das citações.", trechoOriginal: null });
+      continue;
+    }
     mapaFontes.set(fonte.sourceId, fonte);
     if (fonte.identidadeEsperadaPaciente && proposta.patientId !== fonte.identidadeEsperadaPaciente.patientId) {
       fontesNaoVerificaveis.push({
@@ -161,7 +191,15 @@ export function verificarPropostaNoHarnessRuntime(entrada: EntradaHarnessRuntime
       continue;
     }
     if (fonte.identidadeEsperadaPaciente) {
+      if (proposta.patientId !== fonte.identidadeEsperadaPaciente.patientId) {
+        manifestacoes.push({ tipo: "FALHA_IDENTIDADE", campo: "patientId", sourceId: fonte.sourceId,
+          detalhe: "Paciente da proposta não corresponde ao paciente esperado da fonte preservada.", trechoOriginal: null });
+      }
       const evidencia = extrairIdentidadeDocumental(fonte.conteudoOriginal);
+      if (!evidencia.identificador) {
+        manifestacoes.push({ tipo: "AMBIGUIDADE", campo: "patientIdentity", sourceId: fonte.sourceId,
+          detalhe: "Fonte sem identificador documental; nome isolado não comprova vínculo com o paciente da proposta.", trechoOriginal: evidencia.trecho });
+      }
       if (evidencia.nomeDocumento || evidencia.identificador) {
         const confronto = confrontarNomeIdentificador({
           nomeDocumento: evidencia.nomeDocumento,
@@ -187,7 +225,7 @@ export function verificarPropostaNoHarnessRuntime(entrada: EntradaHarnessRuntime
   const valoresPorCampo = new Map<string, { valor: string; sourceId: string; trecho: string }[]>();
 
   for (const item of proposta.itensPropostos) {
-    const criticoNumero = item.criticoNumero ?? (typeof item.valorProposto === "number" || /\d/.test(String(item.valorProposto)));
+    const criticoNumero = item.criticoNumero === true || typeof item.valorProposto === "number" || /\d/.test(String(item.valorProposto));
     const usaAudio = item.citacoes.some((c) => mapaFontes.get(c.sourceId)?.modalidade === "AUDIO");
 
     if (item.validado === true || item.requerConfirmacaoMedica === false) {
@@ -202,7 +240,18 @@ export function verificarPropostaNoHarnessRuntime(entrada: EntradaHarnessRuntime
 
     let citacaoSustentada = item.citacoes.length > 0;
     let qualificadorDet: "AFIRMADO" | "NEGADO" | "INCERTO" | "HISTORICO" | "TERCEIRO" | null = null;
+    const qualificadoresEncontrados = new Set<ReturnType<typeof qualificadorDeterministicoDoTrecho>>();
     let verificacaoIndependenteOk = true;
+
+    if (item.citacoes.length === 0) {
+      manifestacoes.push({
+        tipo: "CITACAO_NAO_SUSTENTADA",
+        campo: item.campo,
+        sourceId: null,
+        detalhe: "Item proposto sem citação para verificação independente.",
+        trechoOriginal: null,
+      });
+    }
 
     for (const citacao of item.citacoes) {
       const fonte = mapaFontes.get(citacao.sourceId);
@@ -225,7 +274,7 @@ export function verificarPropostaNoHarnessRuntime(entrada: EntradaHarnessRuntime
         }
         continue;
       }
-      if (fonte.versao !== citacao.versao || fonte.contentHash !== citacao.contentHash || !fonte.conteudoOriginal.includes(citacao.trecho)) {
+      if (!citacao.trecho.trim() || fonte.versao !== citacao.versao || fonte.contentHash !== citacao.contentHash || !fonte.conteudoOriginal.includes(citacao.trecho)) {
         citacaoSustentada = false;
         verificacaoIndependenteOk = false;
         manifestacoes.push({
@@ -238,15 +287,28 @@ export function verificarPropostaNoHarnessRuntime(entrada: EntradaHarnessRuntime
         continue;
       }
 
-      const qTrecho = qualificadorDeterministicoDoTrecho(citacao.trecho);
-      qualificadorDet = qTrecho;
-      if (qTrecho !== item.qualificador) {
+      if (citacao.localizador) {
+        const localizados = fonte.localizadores?.filter(l => l.localizador === citacao.localizador) ?? [];
+        if (localizados.length !== 1 || !fonte.conteudoOriginal.includes(localizados[0]!.trecho)
+          || !localizados[0]!.trecho.includes(citacao.trecho)) {
+          citacaoSustentada = false;
+          verificacaoIndependenteOk = false;
+          manifestacoes.push({ tipo: "CITACAO_NAO_SUSTENTADA", campo: item.campo, sourceId: citacao.sourceId,
+            detalhe: "Localizador citado não foi comprovado no mapa da fonte original preservada.", trechoOriginal: citacao.trecho });
+          continue;
+        }
+      }
+
+      const qualificadores = qualificadoresNaFonte(fonte.conteudoOriginal, citacao.trecho);
+      for (const q of qualificadores) qualificadoresEncontrados.add(q);
+      const qTrecho = qualificadores.size === 1 ? [...qualificadores][0]! : null;
+      if (qTrecho === null || qTrecho !== item.qualificador) {
         verificacaoIndependenteOk = false;
         manifestacoes.push({
           tipo: "QUALIFICADOR_DIVERGENTE",
           campo: item.campo,
           sourceId: citacao.sourceId,
-          detalhe: `Qualificador proposto (${item.qualificador}) diverge da verificação determinística (${qTrecho}) no trecho original.`,
+          detalhe: `Qualificador proposto (${item.qualificador}) diverge do contexto original (${[...qualificadores].join(" / ")}); nenhuma ocorrência foi escolhida silenciosamente.`,
           trechoOriginal: citacao.trecho,
         });
       }
@@ -271,6 +333,7 @@ export function verificarPropostaNoHarnessRuntime(entrada: EntradaHarnessRuntime
       valoresPorCampo.set(item.campo, listaCampo);
     }
 
+    qualificadorDet = qualificadoresEncontrados.size === 1 ? [...qualificadoresEncontrados][0]! : null;
     const qualificadorConfere = qualificadorDet !== null && qualificadorDet === item.qualificador;
     itensVerificados.push({
       itemId: item.itemId,
@@ -356,7 +419,8 @@ export function verificarPropostaNoHarnessRuntime(entrada: EntradaHarnessRuntime
   const acuraciaAudioDeclarada = fontesAudio.length > 0
     && fontesAudio.every((f) => f.trechoAudioConferidoHumano === true && !idsNaoVerificaveis.has(f.sourceId));
 
-  const cobertura = fontesOriginais.length === 0 || fontesNaoVerificaveis.length === fontesOriginais.length
+  const fontesVerificaveis = [...mapaFontes.keys()].filter(id => !idsNaoVerificaveis.has(id)).length;
+  const cobertura = fontesVerificaveis === 0
     ? "COBERTURA_NAO_VERIFICADA" as const
     : fontesNaoVerificaveis.length > 0
       ? "PARCIALMENTE_VERIFICADA" as const
@@ -372,7 +436,7 @@ export function verificarPropostaNoHarnessRuntime(entrada: EntradaHarnessRuntime
 
   const status = temFalhaCritica || cobertura === "COBERTURA_NAO_VERIFICADA"
     ? "BLOQUEADO_FALHA_CRITICA" as const
-    : manifestacoes.length > 0
+    : manifestacoes.length > 0 || cobertura === "PARCIALMENTE_VERIFICADA"
       ? "REQUER_RESOLUCAO_MEDICA" as const
       : "APTO_PARA_REVISAO_HUMANA" as const;
 

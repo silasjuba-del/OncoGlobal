@@ -215,6 +215,7 @@ export function criarBiblioteca(db: DatabaseSync, portas: PortasBiblioteca) {
     anteriorValida,
     ativa,
     estado,
+    manifesto(id: string) { return structuredClone(lerPacote(id).manifesto); },
     listar(id: string) {
       const pacote = lerPacote(id);
       const curadoria = new Map(listarCuradoriaAtual(db,id).map(r=>[r.item,r]));

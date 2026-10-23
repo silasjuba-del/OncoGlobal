@@ -1,6 +1,7 @@
 import { randomUUID } from "node:crypto";
 import { z } from "zod";
 import { Id, type Sessao } from "../../contracts/base.js";
+import { MetodoCapturaTranscricao } from "../../contracts/capturaTranscricao.js";
 import { AcaoRevisaoPedido } from "../../contracts/w10/closure.js";
 import {
   ClinicalFact as ClinicalFactContract,
@@ -193,11 +194,14 @@ export function rotearExtracaoERevisao(
         ...(identity.data.versao == null ? {} : { versao: identity.data.versao }),
       } : undefined;
       const page = Number.isInteger(input.page) ? input.page as number : undefined;
+      const captureMethod = MetodoCapturaTranscricao.safeParse(input.captureMethod);
+      if (input.captureMethod !== undefined && !captureMethod.success) return reply(409, "PROVENIENCIA_DIVERGENTE");
       fontesValidadas.push({
         draftId, sourceId: input.sourceId, recordingId: input.recordingId,
         segmentId: segment.id, dataClinica: validDates[0]!, factIds: factsForSegment.map((fact) => fact.id),
         source: {
           recordingId: input.recordingId, sourceId: input.sourceId, sourceType: sourceType.data,
+          ...(captureMethod.success ? { captureMethod: captureMethod.data } : {}),
           rawTranscript: input.rawTranscript, contexto: { encounterId: contexto.encounterId, dataClinica: validDates[0]! },
           ...(page === undefined ? {} : { page }),
           ...(examIdentity === undefined ? {} : { examIdentity }),
@@ -327,7 +331,7 @@ export function rotearExtracaoERevisao(
       sourceType: z.enum(["pathology", "imaging_report", "prescription", "medical_note", "nursing", "plaud", "administration"]),
       page: z.number().int().nonnegative().optional(), rawTranscript: z.string().min(1).max(200_000),
       contexto: z.object({ patientId: z.string().min(1), encounterId: z.string().min(1), tumorLotId: z.string().nullable() }).strict().optional(),
-      captureMethod: z.enum(["LOCAL_DICTATION", "DEEPGRAM_CLOUD", "PASTED_TEXT"]).optional(),
+      captureMethod: MetodoCapturaTranscricao.optional(),
       capturedTranscript: z.string().max(200_000).optional(),
     }).strict();
     const parsed = inputSchema.safeParse(raw);
@@ -335,6 +339,8 @@ export function rotearExtracaoERevisao(
     if (!parsed.data.rawTranscript.trim()) return reply(400, "TRANSCRICAO_VAZIA");
     if (parsed.data.captureMethod && (!parsed.data.contexto || parsed.data.capturedTranscript === undefined))
       return reply(400, "PROVENIENCIA_TRANSCRICAO_INCOMPLETA");
+    if ((parsed.data.captureMethod === "LOCAL_DICTATION" || parsed.data.captureMethod === "DEEPGRAM_CLOUD")
+      && !parsed.data.capturedTranscript?.trim()) return reply(400, "PROVENIENCIA_TRANSCRICAO_INCOMPLETA");
     if (parsed.data.contexto) {
       const atual = deps.sessoes.consultaSelecionada(token), pedido = parsed.data.contexto;
       if (!atual || atual.patientId !== pedido.patientId || atual.encounterId !== pedido.encounterId || (atual.tumorLotId ?? null) !== pedido.tumorLotId)
@@ -343,6 +349,7 @@ export function rotearExtracaoERevisao(
     const input = {
       recordingId: parsed.data.recordingId, sourceId: parsed.data.sourceId,
       sourceType: parsed.data.sourceType, rawTranscript: parsed.data.rawTranscript,
+      ...(parsed.data.captureMethod ? { captureMethod: parsed.data.captureMethod } : {}),
       ...(parsed.data.page === undefined ? {} : { page: parsed.data.page }),
     };
     const draftId = parsed.data.captureMethod ? `transcricao-${sha(JSON.stringify([
@@ -422,6 +429,12 @@ export function rotearExtracaoERevisao(
           kind: "EXTRACAO_RASCUNHO", input: {
             recordingId: input.recordingId, sourceId: input.sourceId,
             sourceType: input.sourceType, ...(input.page === undefined ? {} : { page: input.page }),
+            ...(input.captureMethod ? { captureMethod: input.captureMethod } : {}),
+            // O original completo continua no ledger; não expor outros segmentos por esta leitura vinculada.
+            ...(typeof input.capturedTranscript === "string" ? {
+              capturedTranscriptHash: sha(input.capturedTranscript),
+              transcriptEdited: input.capturedTranscript !== input.rawTranscript,
+            } : {}),
             rawTranscript: segment.rawTranscript,
           },
           state: {
@@ -737,6 +750,8 @@ export function rotearExtracaoERevisao(
       revisao = prepararRevisaoExtracao({
         draftId: draft.draftId, sourceId: extractionInput.sourceId,
         rawTranscript: linkedSegment.rawTranscript, sourceType: extractionInput.sourceType, vinculoConfirmado: true,
+        ...(MetodoCapturaTranscricao.safeParse(extractionInput.captureMethod).success
+          ? { captureMethod: MetodoCapturaTranscricao.parse(extractionInput.captureMethod) } : {}),
         facts: factsForLinkedSegment,
         exceptions: extractionState.confirmationRequired.filter((value) => value && typeof value === "object"
           && (value as Record<string, unknown>).segmentId === linkedSegmentId),
@@ -751,7 +766,7 @@ export function rotearExtracaoERevisao(
       });
     } catch (error) {
       const code = error instanceof Error ? error.message : "EXTRACAO_RASCUNHO_INVALIDO";
-      return reply(409, ["FACT_IDS_INVALIDOS", "PROVENIENCIA_DIVERGENTE", "FATO_NAO_ENCONTRADO", "TEXTO_ORIGINAL_INVALIDO"].includes(code)
+      return reply(409, ["FACT_IDS_INVALIDOS", "PROVENIENCIA_DIVERGENTE", "FATO_NAO_ENCONTRADO", "TEXTO_ORIGINAL_INVALIDO", "REPROCESSAMENTO_VOZ_NECESSARIO"].includes(code)
         ? code : "EXTRACAO_RASCUNHO_INVALIDO");
     }
     if (operacaoExistente && !summaryDraft)

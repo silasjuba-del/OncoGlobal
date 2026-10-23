@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
   CodigoRespostaOncoassist, RespostaOncoassist,
   classificarCapacidade, classificarFontes, mensagemCapacidade, mensagemResultadoTecnico, rotuloCategoria,
+  rotuloCodigoCognitivoNaoVerificado, rotuloStatusExtracaoCognitiva,
 } from "../../src/contracts/api/oncoassist.js";
 
 describe("OA-01 — contrato OncoAssist e estados operacionais", () => {
@@ -35,6 +36,15 @@ describe("OA-01 — contrato OncoAssist e estados operacionais", () => {
     });
     expect(rotuloCategoria(proposta)).toBe("Laboratório");
     expect(mensagemResultadoTecnico(proposta)).toMatch(/sugestão para revisão/);
+  });
+
+  it("status cognitivo não usa vocabulário de liberação", () => {
+    for (const status of ["APTO_PARA_REVISAO_HUMANA", "REQUER_RESOLUCAO_MEDICA", "BLOQUEADO_FALHA_CRITICA", "NAO_VERIFICADO"] as const) {
+      const texto = rotuloStatusExtracaoCognitiva(status);
+      expect(texto).toMatch(/não é fato|Não usar|somente histórico/i);
+      expect(texto).not.toMatch(/aprovad|liberad|\bapto\b/i);
+    }
+    expect(rotuloCodigoCognitivoNaoVerificado("CITACAO_NAO_LITERAL_NA_FONTE_ORIGINAL")).toMatch(/fonte original/);
   });
 
   it("código legado desconhecido permanece no contrato com mensagem genérica", () => {

@@ -6,6 +6,7 @@ import { criarChaves } from "./api/chaves.js";
 import type { PedidoBundle, PortaConsulta } from "./api/porta.js";
 import {ErroPorta} from './api/porta.js';
 import {LotesPacienteResposta} from '../contracts/api/lotes.js';
+import { ListaRascunhosPubMed } from "./consulta/ListaRascunhosPubMed.js";
 import { PainelOncoassist } from "./consulta/PainelOncoassist.js";
 import { ReconciliarMedicamentos } from "./consulta/ReconciliarMedicamentos.js";
 import { SinteseProposta } from "./consulta/SinteseProposta.js";
@@ -361,6 +362,7 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp }: {
           {...(pacienteAtivo ? { patientLabel: pacienteAtivo.nome } : {})} />
         </div>
         <PainelOncoassist key={`painel:${versaoConsulta}`} porta={porta} contexto={contexto} />
+        <ListaRascunhosPubMed key={`pubmed:${versaoConsulta}`} porta={porta} />
         <div id="consulta-medicamentos" className="consulta-secao" tabIndex={-1}>
         <ReconciliarMedicamentos porta={porta} contexto={{...contexto,tumorLotId:contexto.tumorLotId??null}} aoFatosConfirmados={(confirmado)=>{
           const c=contextoAtual.current;
