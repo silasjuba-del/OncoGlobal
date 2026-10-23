@@ -23,6 +23,14 @@ import { EstudosConsulta } from "./pesquisa/EstudosConsulta.js";
 import type { VisaoEstatisticaServico, PeriodoClinicoEstatisticaServico } from "../contracts/api/estatisticaServico.js";
 import { RevisaoClinica } from './consulta/RevisaoClinica.js';
 import { contarClique, etapaDoClique, metricasVazias } from './consulta/metricasConsulta.js';
+import {
+  estadoInicialGruposConsulta,
+  gravarCombinacao21st,
+  lerCombinacao21st,
+  type Combinacao21stId,
+  type GrupoConsultaId,
+} from "./oncochart/combinacoes21st.js";
+import { MenuRapido21st, SecaoAcordeon21st } from "./oncochart/PainelCombinacoes21st.js";
 // @ts-expect-error folha CSS pura, resolvida pelo Vite
 import "./consulta/consulta-local.css";
 
@@ -45,6 +53,30 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp }: {
   const [versaoFontes,setVersaoFontes]=useState(0);
   const [versaoConsulta,setVersaoConsulta]=useState(0);
   const [metricas,setMetricas]=useState(metricasVazias);
+  const [combo21st, setCombo21st] = useState<Combinacao21stId>(lerCombinacao21st);
+  const [gruposAbertos, setGruposAbertos] = useState<Record<GrupoConsultaId, boolean>>(estadoInicialGruposConsulta);
+  useEffect(() => { gravarCombinacao21st(combo21st); }, [combo21st]);
+  const alternarGrupo = useCallback((id: GrupoConsultaId) => {
+    setGruposAbertos((atual) => ({ ...atual, [id]: !atual[id] }));
+  }, []);
+  const focarGrupo = useCallback((id: GrupoConsultaId) => {
+    setGruposAbertos({
+      "consulta-fase2": id === "consulta-fase2",
+      "consulta-documentos": id === "consulta-documentos",
+      "consulta-revisao": id === "consulta-revisao",
+      "consulta-medicamentos": id === "consulta-medicamentos",
+      "consulta-sintese": id === "consulta-sintese",
+    });
+  }, []);
+  const alternarTodosGrupos = useCallback((abrirTodos: boolean) => {
+    setGruposAbertos({
+      "consulta-fase2": abrirTodos,
+      "consulta-documentos": abrirTodos,
+      "consulta-revisao": abrirTodos,
+      "consulta-medicamentos": abrirTodos,
+      "consulta-sintese": abrirTodos,
+    });
+  }, []);
   const [transcricaoPendente,setTranscricaoPendente]=useState(false);
   const [transcricaoSalvando,setTranscricaoSalvando]=useState(false);
   const [prescricaoPendente,setPrescricaoPendente]=useState(false);
@@ -270,7 +302,7 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp }: {
     finally{if(atual===geracao.current)setOcupado(false);}
   }
 
-  return <main aria-label="OncoAssist local" className="oncoassist-local" onClickCapture={event=>{
+  return <main aria-label="OncoAssist local" className="oncoassist-local" data-combo-21st={combo21st} onClickCapture={event=>{
     // Deixa o evento do controle concluir antes de renderizar a telemetria local.
     // Atualização síncrona no capture restaura checked antes do onChange no navegador.
     const etapa=etapaDoClique(event.target),atual=geracao.current;
@@ -278,11 +310,23 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp }: {
   }}>
     <header className="consulta-appbar"><div><h1>OncoAssist local</h1>
       <p>Documentos do servidor local. Sugestões aguardam revisão médica.</p></div>
-      <a href="/" onClick={event=>{
-        if (!edicaoPendente && !salvamentoEmCurso) return;
-        event.preventDefault();
-        solicitarNavegacaoVoluntaria(() => window.location.assign("/"));
-      }}>Voltar à demonstração</a></header>
+      <div className="consulta-appbar-direita">
+        <MenuRapido21st
+          combinacao={combo21st}
+          aoMudarCombinacao={setCombo21st}
+          {...(autenticado && tela === "consulta" && contexto ? {
+            gruposAbertos,
+            aoAlternarTodosGrupos: alternarTodosGrupos,
+            aoFocarGrupo: focarGrupo,
+            metricas,
+          } : {})}
+        />
+        <a href="/" onClick={event=>{
+          if (!edicaoPendente && !salvamentoEmCurso) return;
+          event.preventDefault();
+          solicitarNavegacaoVoluntaria(() => window.location.assign("/"));
+        }}>Voltar à demonstração</a>
+      </div></header>
     {mensagem ? <p role="status">{mensagem}</p> : null}
     {transcricaoSalvando ? <p role="status">Salvando transcrição. Aguarde a conclusão para navegar.</p> : null}
     {prescricaoSalvando ? <p role="status">Processando prescrição. Aguarde a conclusão para navegar.</p> : null}
@@ -328,7 +372,13 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp }: {
             <span>{pacienteAtivo?.horario ? `Agenda ${pacienteAtivo.horario}` : "Consulta selecionada"}</span></div>
           <p className="consulta-identificadores">Paciente <b>{contexto.patientId}</b> · Encontro <b>{contexto.encounterId}</b>
             {contexto.tumorLotId ? <> · Lote <b>{contexto.tumorLotId}</b></> : " · Lote tumoral não vinculado"}</p>
-          <nav ref={ancorasConsulta} aria-label="Navegar nesta consulta" className="consulta-ancoras">
+          <nav ref={ancorasConsulta} aria-label="Navegar nesta consulta" className="consulta-ancoras" onClick={(e) => {
+            const link = (e.target as HTMLElement | null)?.closest?.("a");
+            const hash = link?.getAttribute("href")?.slice(1);
+            if (hash && hash in gruposAbertos) {
+              setGruposAbertos((atual) => ({ ...atual, [hash]: true }));
+            }
+          }}>
             <a href="#consulta-documentos">Documentos</a><a href="#consulta-revisao">Revisão da fonte</a>
             <a href="#consulta-fase2">Ficha e packs</a>
             <a href="#consulta-medicamentos">Medicamentos</a><a href="#consulta-sintese">Síntese proposta</a>
@@ -342,15 +392,39 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp }: {
           aoAlterarApacPendente={setApacPendente} aoAlterarApacSalvando={setApacSalvando}
           aoAtualizarClinico={() => setVersaoConsulta(v => v + 1)}
           aoAbrirApac={() => navegarParaTela("apac")} aoAbrirCanal={() => navegarParaTela("canal")} />
-        <div id="consulta-fase2" className="consulta-secao" tabIndex={-1}>
+        <SecaoAcordeon21st
+          id="consulta-fase2"
+          numero="01"
+          titulo="Ficha clínica & Tumor-packs"
+          resumo="Revisão estruturada do lote tumoral, estadiamento e diretrizes locais"
+          aberto={gruposAbertos["consulta-fase2"]}
+          aoAlternar={() => alternarGrupo("consulta-fase2")}
+          aoFocarSomenteEste={() => focarGrupo("consulta-fase2")}
+        >
           <RevisaoClinica porta={porta} contexto={contexto} versaoClinica={versaoConsulta} aoRegistrar={()=>setVersaoConsulta(v=>v+1)}/>
-        </div>
-        <div id="consulta-documentos" className="consulta-secao" tabIndex={-1}>
+        </SecaoAcordeon21st>
+        <SecaoAcordeon21st
+          id="consulta-documentos"
+          numero="02"
+          titulo="Captura & Entrada única (PDF / Voz / Texto)"
+          resumo="Upload de exames locais, transcrição e ditado em um só bloco"
+          aberto={gruposAbertos["consulta-documentos"]}
+          aoAlternar={() => alternarGrupo("consulta-documentos")}
+          aoFocarSomenteEste={() => focarGrupo("consulta-documentos")}
+        >
           <UploadDocumentoLocal porta={porta} contexto={contexto} aoSalvar={()=>setVersaoFontes(v=>v+1)}/>
           <TranscricaoLocal porta={porta} contexto={contexto} aoSalvar={()=>setVersaoFontes(v=>v+1)}
             aoAlterarPendente={setTranscricaoPendente} aoAlterarSalvamento={registrarSalvamentoTranscricao}/>
-        </div>
-        <div id="consulta-revisao" className="consulta-secao" tabIndex={-1}>
+        </SecaoAcordeon21st>
+        <SecaoAcordeon21st
+          id="consulta-revisao"
+          numero="03"
+          titulo="Revisão de fontes & Alertas RADS"
+          resumo="Conferência humana de achados extraídos, vínculo e emergências radiológicas"
+          aberto={gruposAbertos["consulta-revisao"]}
+          aoAlternar={() => alternarGrupo("consulta-revisao")}
+          aoFocarSomenteEste={() => focarGrupo("consulta-revisao")}
+        >
         <RevisaoExtracaoLocal key={versaoFontes} porta={porta} contexto={contexto}
           aoFatosConfirmados={(confirmado)=>{
             const ativo=contextoAtual.current;
@@ -359,17 +433,33 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp }: {
             setVersaoConsulta(v=>v+1);
           }}
           {...(pacienteAtivo ? { patientLabel: pacienteAtivo.nome } : {})} />
-        </div>
+        </SecaoAcordeon21st>
         <PainelOncoassist key={`painel:${versaoConsulta}`} porta={porta} contexto={contexto} />
-        <div id="consulta-medicamentos" className="consulta-secao" tabIndex={-1}>
+        <SecaoAcordeon21st
+          id="consulta-medicamentos"
+          numero="04"
+          titulo="Reconciliação de medicamentos"
+          resumo="Confronto entre medicamentos em uso, prescrição e propostas"
+          aberto={gruposAbertos["consulta-medicamentos"]}
+          aoAlternar={() => alternarGrupo("consulta-medicamentos")}
+          aoFocarSomenteEste={() => focarGrupo("consulta-medicamentos")}
+        >
         <ReconciliarMedicamentos porta={porta} contexto={{...contexto,tumorLotId:contexto.tumorLotId??null}} aoFatosConfirmados={(confirmado)=>{
           const c=contextoAtual.current;
           if(geracao.current===geracaoTela&&c?.patientId===confirmado.patientId&&c.encounterId===confirmado.encounterId&&(c.tumorLotId??null)===(confirmado.tumorLotId??null)&&agenda.some(item=>item.patientId===c.patientId&&item.encounterId===c.encounterId))setVersaoConsulta(v=>v+1);
         }}/>
-        </div>
-        <div id="consulta-sintese" className="consulta-secao" tabIndex={-1}>
+        </SecaoAcordeon21st>
+        <SecaoAcordeon21st
+          id="consulta-sintese"
+          numero="05"
+          titulo="Síntese clínica proposta"
+          resumo="Retrato consolidado para apoio à evolução médica"
+          aberto={gruposAbertos["consulta-sintese"]}
+          aoAlternar={() => alternarGrupo("consulta-sintese")}
+          aoFocarSomenteEste={() => focarGrupo("consulta-sintese")}
+        >
         <SinteseProposta key={`sintese:${versaoConsulta}`} porta={porta} contexto={contexto}/>
-        </div>
+        </SecaoAcordeon21st>
       </div> : null}
       {tela === "salao" ? <TelaSalao porta={porta} /> : null}
       {tela === "estudos" ? <EstudosConsulta key={`${contexto?.patientId}:${contexto?.encounterId}:${contexto?.tumorLotId}`}
