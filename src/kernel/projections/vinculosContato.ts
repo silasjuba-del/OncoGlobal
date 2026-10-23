@@ -14,7 +14,7 @@ export interface ContatoProjetado extends ContatoOrigem {
 export function projetarVinculosContato(contatos: readonly ContatoOrigem[], eventos: readonly ClinicalEvent[]): ContatoProjetado[] {
   return contatos.map((origem) => {
     const decisoes = eventos.flatMap((event) => {
-      if (event.tipo !== "ReviewDecision" || (event.revisao !== "CONFIRMADO" && event.revisao !== "ASSINADO")
+      if (!["ReviewDecision","ReviewDecision@1"].includes(event.tipo) || (event.revisao !== "CONFIRMADO" && event.revisao !== "ASSINADO")
         || event.criadoPor.tipo !== "SESSAO") return [];
       const outer = event.payload && typeof event.payload === "object" && !Array.isArray(event.payload)
         ? event.payload as Record<string, unknown> : null;

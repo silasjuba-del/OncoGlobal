@@ -81,7 +81,8 @@ export const SalaoResposta: z.ZodType<SalaoVisao> = z.object({
     estadoRascunho: z.enum(["RASCUNHO", "DECISAO_REGISTRADA"]).nullable().optional() })),
   decisoes: z.array(z.object({ patientId: Texto, motivo: Texto })),
 }).passthrough();
-export const CanalResposta: z.ZodType<CaixaCanalVisao> = z.object({ mensagens: z.array(z.object({ mensagemId: Texto,
+export const CanalResposta: z.ZodType<CaixaCanalVisao> = z.object({ pendenciasVinculoIngresso: Count.optional(),
+  mensagens: z.array(z.object({ mensagemId: Texto,
   contextosResposta:z.array(z.object({patientId:Texto,encounterId:Texto,tumorLotId:Texto.nullable()})).optional(),
   texto: Texto, em: Texto, redFlag: z.boolean(), contatoId: Texto, patientId: Texto.nullable(), nomePaciente: Texto.nullable(),
   estadoVinculo: z.enum(["VINCULADO", "SEM_VINCULO", "CONFLITO", "REVOGADO"]).optional(),

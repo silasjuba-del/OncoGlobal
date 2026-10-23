@@ -23,6 +23,7 @@ import { TimelineMulticamadas } from "./TimelineMulticamadas.js";
 import { EditorPrescricaoExecutavel } from "./EditorPrescricaoExecutavel.js";
 import { FichasPrescricaoConsulta, mensagemErroFicha } from "./FichasPrescricaoConsulta.js";
 import { PrepararApacConsulta } from "./PrepararApacConsulta.js";
+import { RelatosCanalConsulta } from "./RelatosCanalConsulta.js";
 import type { InstanciacaoFichaResposta } from "../../contracts/api/fichasPrescricao.js";
 import type { BasePrescricaoExecutavelResposta, EdicaoPrescricaoExecutavel,
   PrescricaoExecutavelPreparada } from "../../contracts/api/operacaoPrescricaoExecutavel.js";
@@ -32,10 +33,11 @@ type DocumentoPreview = { documentId: string; documentVersion: number; draftId: 
 type Preview = { preparacao: FlashPreparada; documentos: DocumentoPreview[]; operacao: string };
 
 /** Composição HTTP real. Nenhum cadastro, prescrição ou histórico de demonstração. */
-export function ConsultaPersistida({ porta, contexto, aoAbrirApac, versaoClinica = 0,
+export function ConsultaPersistida({ porta, contexto, aoAbrirApac, aoAbrirCanal, versaoClinica = 0,
   aoAlterarPrescricaoPendente, aoAlterarPrescricaoSalvando, aoAlterarApacPendente,
   aoAlterarApacSalvando, aoAtualizarClinico }: {
   porta: PortaConsulta; contexto: PedidoBundle; aoAbrirApac?:()=>void; versaoClinica?: number;
+  aoAbrirCanal?: () => void;
   aoAlterarPrescricaoPendente?: (pendente: boolean) => void;
   aoAlterarPrescricaoSalvando?: (salvando: boolean) => void;
   aoAlterarApacPendente?: (pendente: boolean) => void;
@@ -408,6 +410,9 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, versaoClinica
     {mensagem ? <p aria-live="polite">{mensagem}</p> : null}
     <CockpitJEV visao={visaoPronta} ocupado={ocupado || rxEmCurso} aoComando={comandoJev}
       mudancasExtra={<div id="consulta-resumo" className="consulta-secao" tabIndex={-1}>
+    <RelatosCanalConsulta contexto={contexto} mensagens={visaoPronta.contatosCanal?.mensagens ?? []}
+      pendenciasVinculoIngresso={visaoPronta.contatosCanal?.pendenciasVinculoIngresso ?? 0}
+      {...(aoAbrirCanal ? { aoAbrirCanal } : {})} />
     <VisaoIntegradaMinima {...(visaoPronta.retrato ? {retrato:visaoPronta.retrato}: {})}
       {...(visaoPronta.visaoIntegrada ? {visao:visaoPronta.visaoIntegrada}: {})} />
     <h3>Evolução revisada</h3>

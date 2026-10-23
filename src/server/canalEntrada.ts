@@ -1045,6 +1045,32 @@ export function listarJanelasIndisponibilidadeCanal(db: DatabaseSync, accountId?
   }));
 }
 
+type LinhaPaginada = Linha & { cursorRowid: number };
+
+function paginaCaixaCanal(db: DatabaseSync, antes?: { ingestedAt: string; rowid: number },
+  filtro?: { patientId: string; enderecos: readonly string[] }): LinhaPaginada[] {
+  const colunas = `rowid AS cursorRowid, mensagemId, accountId, providerMessageId, canal, senderRef,
+    providerSentAt, ingestedAt, payloadSha256, conteudo, vinculoClasse, vinculoPatientId,
+    vinculoMotivo, provaMetodo`;
+  const condicoes: string[] = [];
+  const parametros: (string | number)[] = [];
+  if (filtro) {
+    const enderecos = [...new Set(filtro.enderecos)];
+    condicoes.push(enderecos.length
+      ? `((canal = 'WHATSAPP_SERVICO' AND senderRef IN (${enderecos.map(() => "?").join(",")})) OR vinculoPatientId = ?)`
+      : "vinculoPatientId = ?");
+    parametros.push(...enderecos, filtro.patientId);
+  }
+  if (antes) {
+    condicoes.push("(ingestedAt < ? OR (ingestedAt = ? AND rowid < ?))");
+    parametros.push(antes.ingestedAt, antes.ingestedAt, antes.rowid);
+  }
+  const where = condicoes.length ? ` WHERE ${condicoes.join(" AND ")}` : "";
+  return db.prepare(`SELECT ${colunas} FROM canal_mensagem${where}
+    ORDER BY ingestedAt DESC, rowid DESC LIMIT ?`)
+    .all(...parametros, LIMITE_CAIXA) as LinhaPaginada[];
+}
+
 export function consultarCaixaCanal(
   db: DatabaseSync,
   acesso: AcessoCanal,
@@ -1052,12 +1078,37 @@ export function consultarCaixaCanal(
   if (!sessaoValida(acesso)) return { ok: false, codigo: "SESSAO_INVALIDA" };
   try {
     garantirSchema(db);
-    const linhas = db.prepare(
-      `SELECT mensagemId, accountId, providerMessageId, canal, senderRef, providerSentAt, ingestedAt,
-        payloadSha256, conteudo, vinculoClasse, vinculoPatientId, vinculoMotivo, provaMetodo
-       FROM canal_mensagem ORDER BY ingestedAt DESC, rowid DESC LIMIT ?`,
-    ).all(LIMITE_CAIXA) as Linha[];
+    const linhas = paginaCaixaCanal(db);
     return { ok: true, mensagens: linhas.reverse().map(itemDeLinha) };
+  } catch {
+    return falhaArmazenamento();
+  }
+}
+
+/** Histórico do contato atual ou de vínculo prévio de ingresso com o paciente.
+ * Não lê mensagens dos demais remetentes; pagina sem truncar relatos antigos. */
+export function consultarHistoricoCanalPaciente(
+  db: DatabaseSync,
+  acesso: AcessoCanal,
+  patientId: string,
+  enderecos: readonly string[],
+): { ok: false; codigo: "SESSAO_INVALIDA" } | FalhaArmazenamento | { ok: true; mensagens: ItemCaixa[] } {
+  if (!sessaoValida(acesso)) return { ok: false, codigo: "SESSAO_INVALIDA" };
+  try {
+    garantirSchema(db);
+    const mensagens: ItemCaixa[] = [];
+    let antes: { ingestedAt: string; rowid: number } | undefined;
+    while (true) {
+      if (!sessaoValida(acesso)) return { ok: false, codigo: "SESSAO_INVALIDA" };
+      const linhas = paginaCaixaCanal(db, antes, { patientId, enderecos });
+      if (!linhas.length) break;
+      mensagens.push(...linhas.map(itemDeLinha));
+      const ultima = linhas[linhas.length - 1]!;
+      if (!Number.isSafeInteger(ultima.cursorRowid)) throw new Error("CURSOR_CAIXA_INVALIDO");
+      antes = { ingestedAt: ultima.ingestedAt, rowid: ultima.cursorRowid };
+      if (linhas.length < LIMITE_CAIXA) break;
+    }
+    return { ok: true, mensagens: mensagens.reverse() };
   } catch {
     return falhaArmazenamento();
   }
@@ -1293,6 +1344,8 @@ function prepararSchemaCanal(db: DatabaseSync): void {
       provaKeyId TEXT NOT NULL,
       UNIQUE (accountId, providerMessageId)
     );
+    CREATE INDEX IF NOT EXISTS idx_canal_mensagem_remetente ON canal_mensagem(canal, senderRef, ingestedAt DESC);
+    CREATE INDEX IF NOT EXISTS idx_canal_mensagem_vinculo_ingresso ON canal_mensagem(vinculoPatientId, ingestedAt DESC);
     CREATE TRIGGER IF NOT EXISTS canal_mensagem_no_update BEFORE UPDATE ON canal_mensagem
       BEGIN SELECT RAISE(ABORT, 'canal_mensagem append-only'); END;
     CREATE TRIGGER IF NOT EXISTS canal_mensagem_no_delete BEFORE DELETE ON canal_mensagem

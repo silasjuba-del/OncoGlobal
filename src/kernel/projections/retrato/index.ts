@@ -26,14 +26,15 @@ function dados(e: ClinicalEvent): Record<string, unknown> | null {
   return data && typeof data === "object" && !Array.isArray(data) ? data as Record<string, unknown> : null;
 }
 const normalizarChave = (s: string) => s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+const tipoMaterial = (tipo: string) => tipo === "Paciente@1" ? "Paciente" : tipo === "TumorLot@1" ? "TumorLot" : tipo;
 const sistemicos = new Set(["alergias", "alergia", "comorbidades", "medicamentos", "medicacao", "funcaoorganica", "exposicoes", "exposicaocumulativa", "cumulativos", "dosecumulativa", "alturacm"]);
 const materiaisConhecidos = new Set(["Paciente", "TumorLot", "Weight", "ImagingReport", "Biopsy", "TreatmentEpisode", "Ciclo", "DOCUMENTO",
   "LabResult", "TreatmentAdministration", "TreatmentCycle", "SignedDocument", "DocumentSigned",
-  "Triagem", "Triagem@1", "TumorLot@1"]);
+  "Triagem", "Triagem@1"]);
 export function escopoDoEventoRetrato(e: ClinicalEvent, d = dados(e) ?? {}): FatoRetrato["escopo"] {
   const campo = normalizarChave(String(d.campo));
   return sistemicos.has(campo) || campo.startsWith("extracao.lab:") || campo === "extracao.drug"
-    || ["Paciente", "Weight", "LabResult", "TreatmentAdministration"].includes(e.tipo) ? "PACIENTE" : "TUMOR";
+    || ["Paciente", "Weight", "LabResult", "TreatmentAdministration"].includes(tipoMaterial(e.tipo)) ? "PACIENTE" : "TUMOR";
 }
 export function tempoClinicoDoEvento(e: ClinicalEvent): string | null {
   const d = dados(e);
@@ -237,7 +238,12 @@ export function projetarRetrato(eventos: readonly ClinicalEvent[], contexto: Con
     if (!d) { diagnostico(e, "PAYLOAD_SEM_DADOS"); continue; }
     if (consulta(e)) continue;
     // Eventos de operação não são fatos clínicos. Campo clínico ou tipo material explícito.
-    if (typeof d.campo !== "string" && !materiaisConhecidos.has(e.tipo)) continue;
+    if (typeof d.campo !== "string" && !materiaisConhecidos.has(tipoMaterial(e.tipo))) continue;
+    if ((e.tipo === "Paciente@1" || e.tipo === "TumorLot@1")
+      && (!validarPayloadEvento(e.tipo, d).ok || d.patientId !== e.patientId
+        || (e.tipo === "TumorLot@1" && d.tumorLotId !== e.tumorLotId))) {
+      diagnostico(e, "ALIAS_CONTEXTO_OU_PAYLOAD_INVALIDO"); continue;
+    }
     if (["Triagem", "Triagem@1"].includes(e.tipo) && (!validarPayloadEvento(e.tipo, d).ok
       || d.patientId !== e.patientId || d.encounterId !== e.encounterId)) {
       diagnostico(e, "TRIAGEM_CONTEXTO_OU_PAYLOAD_INVALIDO"); continue;
@@ -311,7 +317,7 @@ export function projetarRetrato(eventos: readonly ClinicalEvent[], contexto: Con
         LabResult: ["campo", "valor", "unidade", "data", "valores"],
         TreatmentAdministration: ["droga", "quantidadeEfetivaMg", "status", "motivo", "inicio", "fim"],
       };
-      return (camposPorTipo[f.tipo] ?? []).flatMap(campo => !Object.hasOwn(f.dados,campo)?[]:fraseClinica(f,campo,f.dados[campo]));
+      return (camposPorTipo[tipoMaterial(f.tipo)] ?? []).flatMap(campo => !Object.hasOwn(f.dados,campo)?[]:fraseClinica(f,campo,f.dados[campo]));
     }
     if (!Object.hasOwn(f.dados, "valor") || f.dados.valor === null) return [];
     // Renderização literal: confirmação documental não transforma uma suspeita em diagnóstico.

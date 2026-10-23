@@ -9,7 +9,7 @@ import {projetarVinculosContato} from '../kernel/projections/vinculosContato.js'
 import {Contato,Paciente} from '../contracts/clinico.js';
 import {hashConteudoExibido} from './sessao.js';
 import type {ContaWebhookConfigurada} from './canalEntrada.js';
-import {consultarCaixaCanal,type AcessoCanal} from './canalEntrada.js';
+import {consultarCaixaCanal,consultarHistoricoCanalPaciente,type AcessoCanal,type ItemCaixa} from './canalEntrada.js';
 import {lerEventosComIntegridade} from './leituras.js';
 import type {ClinicalEvent} from '../contracts/operacao.js';
 import type {MensagemCanalVisao} from '../contracts/api/porta.js';
@@ -35,18 +35,23 @@ export function carregarOperacaoCanal(root?:string):OperacaoCanal {
     return {contasWebhook:c.contasWebhook,...(c.whatsappSaida.length?{transporteSaida:criarTransporteWhatsApp(c.whatsappSaida)}:{})};
   }catch{throw new Error('CONFIGURACAO_CANAL_INVALIDA');}
 }
+function pacienteDoEvento(evento:ClinicalEvent){
+ if(!['Paciente','Paciente@1'].includes(evento.tipo)||!['CONFIRMADO','ASSINADO'].includes(evento.revisao))return null;
+ const paciente=Paciente.safeParse(dadosDoEvento(evento));
+ return paciente.success&&paciente.data.patientId===evento.patientId?paciente.data:null;
+}
 /** Somente contatos explicitamente vinculados no prontuário; nome e From não provam identidade. */
 export function cadastrosCanal(db:DatabaseSync, snapshot?:readonly ClinicalEvent[]){
  const eventos=eventosVigentes(snapshot??lerEventosComIntegridade(db).itens);
- const pacientes=eventos.filter(e=>['CONFIRMADO','ASSINADO'].includes(e.revisao)&&e.tipo==='Paciente').flatMap(e=>{const p=Paciente.safeParse(dadosDoEvento(e));return p.success&&p.data.patientId===e.patientId?[p.data]:[];});
- const contatos=eventos.filter(e=>e.tipo==='Contato'&&['CONFIRMADO','ASSINADO'].includes(e.revisao)).flatMap(event=>{const p=Contato.safeParse(dadosDoEvento(event));return p.success?[{event,value:p.data}]:[];});
+ const pacientes=eventos.flatMap(e=>{const p=pacienteDoEvento(e);return p?[p]:[];});
+ const contatos=eventos.filter(e=>['Contato','Contato@1'].includes(e.tipo)&&['CONFIRMADO','ASSINADO'].includes(e.revisao)).flatMap(event=>{const p=Contato.safeParse(dadosDoEvento(event));return p.success?[{event,value:p.data}]:[];});
  const projetados=projetarVinculosContato(contatos,eventos);
  return pacientes.map(p=>({patientId:p.patientId,nome:p.nome,chaveDemografica:null,identificadores:projetados.filter(c=>c.estadoVinculo==='VINCULADO'&&c.patientIdResolvido===p.patientId&&c.value.revogadoEm===null&&c.value.canal==='WHATSAPP_SERVICO')
    .map(c=>({tipo:'TELEFONE' as const,valor:c.value.endereco}))}));
 }
 export function contatoRevogadoCanal(db:DatabaseSync,endereco:string,snapshot?:readonly ClinicalEvent[]):boolean {
  return eventosVigentes(snapshot??lerEventosComIntegridade(db).itens).some(e=>{
-  if(e.tipo!=='Contato'||!['CONFIRMADO','ASSINADO'].includes(e.revisao))return false;
+  if(!['Contato','Contato@1'].includes(e.tipo)||!['CONFIRMADO','ASSINADO'].includes(e.revisao))return false;
   const c=Contato.safeParse(dadosDoEvento(e));return c.success&&c.data.endereco===endereco&&c.data.revogadoEm!==null;
  });
 }
@@ -59,18 +64,16 @@ export function vinculoAtualCanal(db:DatabaseSync,patientId:string,endereco:stri
 }
 export function revisaoContextoCanal(db:DatabaseSync,c:{patientId:string;encounterId:string;tumorLotId:string|null}):string|null {
  const eventos=eventosVigentes(listarEventos(db,c.patientId));
- if(!eventos.some(e=>e.tipo==='Paciente'&&['CONFIRMADO','ASSINADO'].includes(e.revisao)))return null;
+ if(!eventos.some(e=>pacienteDoEvento(e)?.patientId===c.patientId))return null;
  if(!contextosCanal(db,c.patientId).some(e=>e.encounterId===c.encounterId&&e.tumorLotId===c.tumorLotId))return null;
  return hashConteudoExibido(eventos);
 }
-export function lerMensagensOperacionaisCanal(db:DatabaseSync,acesso:AcessoCanal,snapshot?:readonly ClinicalEvent[]):MensagemCanalVisao[]{
- const caixa=consultarCaixaCanal(db,acesso);if(!caixa.ok)throw new Error(caixa.codigo);
- if(!caixa.mensagens.length)return [];
- const eventos=snapshot??lerEventosComIntegridade(db).itens;
- const cadastros=cadastrosCanal(db,eventos);
+function projetarMensagensOperacionaisCanal(db:DatabaseSync,mensagens:readonly ItemCaixa[],
+  eventos:readonly ClinicalEvent[],cadastros:ReturnType<typeof cadastrosCanal>):MensagemCanalVisao[]{
+ if(!mensagens.length)return [];
  const colunas=db.prepare('PRAGMA table_info(canal_resposta_envio)').all() as {name:string}[];
  const temRecibos=colunas.some(c=>c.name==='providerReceiptId');
- return caixa.mensagens.map(m=>{
+ return mensagens.map(m=>{
   const reconciliacao=lerReconciliacaoMensagemCanal(db,m.mensagemId);
   const atual=m.canal==='WHATSAPP_SERVICO'?classificarRemetente(m.senderRef,'TELEFONE',cadastros):null;
   const revogado=contatoRevogadoCanal(db,m.senderRef,eventos);
@@ -99,4 +102,28 @@ export function lerMensagensOperacionaisCanal(db:DatabaseSync,acesso:AcessoCanal
    ...(paciente&&patientId?{contextosResposta:contextosCanal(db,patientId,eventos)}:{}),destinatarioExibido:m.senderRef,
    midia:m.conteudo.tipo==='MEDIA_UNPROCESSED'?{providerMediaId:m.conteudo.providerMediaId,mimeType:m.conteudo.mimeType,processamento:'NAO_PROCESSADA'}:null};
  });
+}
+
+export function lerMensagensOperacionaisCanal(db:DatabaseSync,acesso:AcessoCanal,snapshot?:readonly ClinicalEvent[]):MensagemCanalVisao[]{
+ const caixa=consultarCaixaCanal(db,acesso);if(!caixa.ok)throw new Error(caixa.codigo);
+ if(!caixa.mensagens.length)return [];
+ const eventos=snapshot??lerEventosComIntegridade(db).itens;
+ return projetarMensagensOperacionaisCanal(db,caixa.mensagens,eventos,cadastrosCanal(db,eventos));
+}
+
+/** A consulta recebe só relatos vinculados agora e conta vínculos de ingresso
+ *  anteriormente atribuídos a este cadastro mas não validados no presente. */
+export function lerRelatosConsultaCanal(db:DatabaseSync,acesso:AcessoCanal,patientId:string,snapshot?:readonly ClinicalEvent[]){
+ const eventos=snapshot??lerEventosComIntegridade(db).itens;
+ const cadastros=cadastrosCanal(db,eventos);
+ const enderecos=[...new Set(cadastros.filter(c=>c.patientId===patientId).flatMap(c=>
+   c.identificadores.filter(i=>i.tipo==='TELEFONE').map(i=>i.valor)))];
+ const caixa=consultarHistoricoCanalPaciente(db,acesso,patientId,enderecos);
+ if(!caixa.ok)throw new Error(caixa.codigo);
+ const projetadas=projetarMensagensOperacionaisCanal(db,caixa.mensagens,eventos,cadastros);
+ return {
+   mensagens:projetadas.filter(m=>m.patientId===patientId&&m.estadoVinculo==='VINCULADO'),
+   pendenciasVinculoIngresso:projetadas.reduce((total,m,i)=>total+
+     (m.patientId===null&&caixa.mensagens[i]?.vinculo.patientId===patientId?1:0),0),
+ };
 }
