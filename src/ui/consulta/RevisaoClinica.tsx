@@ -45,8 +45,9 @@ export function RevisaoClinica({
   const [ocupado, setOcupado] = useState(false);
   const [filtroFicha, setFiltroFicha] = useState<FiltroFicha>("TODOS");
   const [modalFontesAberto, setModalFontesAberto] = useState(false);
-  // null = abertura inicial motivada pelos dados; boolean = escolha explícita do usuário.
-  const [subsecoesAbertas, setSubsecoesAbertas] = useState<boolean | null>(null);
+  // Ausência da chave = abertura inicial motivada pelos dados; toggle nativo
+  // e botão global atualizam a mesma fonte de verdade por subseção.
+  const [subsecoes, setSubsecoes] = useState<Partial<Record<"preQt" | "resposta" | "historico", boolean>>>({});
   const geracao = useRef(0);
   const chave = JSON.stringify([contexto.patientId, contexto.encounterId, contexto.tumorLotId]);
   const packId = selecao.chave === chave ? selecao.id : "";
@@ -57,7 +58,7 @@ export function RevisaoClinica({
     setDados(null);
     setErro("");
     setModalFontesAberto(false);
-    setSubsecoesAbertas(null);
+    setSubsecoes({});
     if (!porta.revisaoClinica) {
       setErro("Revisão integrada ainda indisponível.");
       return;
@@ -101,9 +102,13 @@ export function RevisaoClinica({
   // Lista e contador usam o mesmo predicado: o rótulo nunca diverge do que é exibido.
   const fichaVisivel = atual ? atual.ficha.filter((f) => filtroFicha === "TODOS" || grupoFicha(f) === filtroFicha) : [];
   const qtdPorGrupo = (g: Exclude<FiltroFicha, "TODOS">) => atual ? atual.ficha.filter((f) => grupoFicha(f) === g).length : 0;
-  const haSubsecaoInicialAberta = !!atual && (atual.respostaTumoral.series.length > 0
-    || atual.respostaTumoral.patologica.length > 0 || atual.estadosDoenca.length > 0);
-  const algumaSubsecaoAberta = subsecoesAbertas ?? haSubsecaoInicialAberta;
+  const preQtAberta = subsecoes.preQt ?? false;
+  const respostaAberta = subsecoes.resposta ?? (!!atual && (atual.respostaTumoral.series.length > 0
+    || atual.respostaTumoral.patologica.length > 0));
+  const historicoAberto = subsecoes.historico ?? (!!atual && atual.estadosDoenca.length > 0);
+  const algumaSubsecaoAberta = preQtAberta || respostaAberta || historicoAberto;
+  const registrarToggle = (chave: "preQt" | "resposta" | "historico", aberto: boolean) =>
+    setSubsecoes(atual => atual[chave] === aberto ? atual : { ...atual, [chave]: aberto });
 
   return (
     <section aria-label="Ficha e revisão clínica" className="revisao-clinica-bento" aria-busy={ocupado}>
@@ -140,7 +145,8 @@ export function RevisaoClinica({
             <button
               type="button"
               className="oc21-quick-btn"
-              onClick={() => setSubsecoesAbertas(!algumaSubsecaoAberta)}
+              onClick={() => setSubsecoes({ preQt: !algumaSubsecaoAberta,
+                resposta: !algumaSubsecaoAberta, historico: !algumaSubsecaoAberta })}
             >
               {algumaSubsecaoAberta ? "Recolher subseções" : "Expandir subseções"}
             </button>
@@ -199,7 +205,8 @@ export function RevisaoClinica({
           </table>
 
           <div className="revisao-clinica-acordeoes">
-            <details className="oc21-details-card" open={subsecoesAbertas === true}>
+            <details className="oc21-details-card" open={preQtAberta}
+              onToggle={e => registrarToggle("preQt", e.currentTarget.open)}>
               <summary>Pré-QT · {atual.preQt.estado}</summary>
               <div className="oc21-details-body">
                 <p>Completude documental e avaliações do esquema aguardam decisão médica.</p>
@@ -213,8 +220,8 @@ export function RevisaoClinica({
 
             <details
               className="oc21-details-card"
-              open={subsecoesAbertas ?? (atual.respostaTumoral.series.length > 0
-                || atual.respostaTumoral.patologica.length > 0)}
+              open={respostaAberta}
+              onToggle={e => registrarToggle("resposta", e.currentTarget.open)}
             >
               <summary>Resposta tumoral e patológica</summary>
               <div className="oc21-details-body">
@@ -279,7 +286,8 @@ export function RevisaoClinica({
 
             <details
               className="oc21-details-card"
-              open={subsecoesAbertas ?? (atual.estadosDoenca.length > 0)}
+              open={historicoAberto}
+              onToggle={e => registrarToggle("historico", e.currentTarget.open)}
             >
               <summary>Histórico de remissão e recidiva</summary>
               <div className="oc21-details-body">
@@ -411,8 +419,8 @@ export function RevisaoClinica({
                           {f.fontes.map((fonte, idx) => (
                             <li key={idx}>
                               {fonte.sourceId}
-                              {fonte.localizador ? ` — ${fonte.localizador}` : ""} · versão{" "}
-                              {fonte.versao}
+                               {fonte.localizador ? ` — ${fonte.localizador}` : ""} · data clínica{" "}
+                               {fonte.dataClinica ?? "não consta"} · versão {fonte.versao}
                             </li>
                           ))}
                         </ul>

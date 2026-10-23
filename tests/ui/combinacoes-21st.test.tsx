@@ -186,6 +186,10 @@ describe("Aparência, agrupamento de seções e revisão clínica", () => {
     const secaoResposta = within(regiaoFicha).getByText("Resposta tumoral e patológica")
       .closest("details")!;
     expect(secaoResposta.open).toBe(true);
+    fireEvent.click(within(secaoResposta).getByText("Resposta tumoral e patológica"));
+    expect(secaoResposta.open).toBe(false);
+    fireEvent.click(await within(regiaoFicha).findByRole("button", { name: "Expandir subseções" }));
+    expect(secaoResposta.open).toBe(true);
     fireEvent.click(within(regiaoFicha).getByRole("button", { name: "Recolher subseções" }));
     expect(secaoResposta.open).toBe(false);
     expect(within(regiaoFicha).getByRole("button", { name: "Expandir subseções" })).toBeTruthy();
@@ -215,6 +219,7 @@ describe("Aparência, agrupamento de seções e revisão clínica", () => {
     fireEvent.click(abrir);
     const dialogo = screen.getByRole("dialog", { name: "Fontes consolidadas da ficha clínica" });
     expect(screen.getByText("ECOG confirmado pelo médico")).toBeTruthy();
+    expect(within(dialogo).getByText(/data clínica 2026-10-20/)).toBeTruthy();
     const fechar = within(dialogo).getByRole("button", { name: "Fechar" });
     expect(document.activeElement).toBe(fechar);
     fireEvent.keyDown(document, { key: "Tab", shiftKey: true });
