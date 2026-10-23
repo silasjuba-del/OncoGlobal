@@ -2,7 +2,7 @@
 import { createHash } from "node:crypto";
 import { expect, it } from "vitest";
 import { criarWriterClinicoGateway } from "../../src/kernel/gateway/writerClinico.js";
-import { executarHarnessAvaliacao } from "../../src/kernel/harness/avaliacao.js";
+import { calcularHashTestCongelado, executarHarnessAvaliacao } from "../../src/kernel/harness/avaliacao.js";
 import { verificarPropostaNoHarnessRuntime } from "../../src/kernel/harness/runtime.js";
 import { abrirLedger } from "../../src/kernel/ledger/db.js";
 import { salvarDraft } from "../../src/kernel/ledger/drafts.js";
@@ -41,6 +41,66 @@ it("nega gravação de payload diverso do draft cujo hash foi exibido", () => {
     });
     expect(r).toMatchObject({ decisao: "NEGADA", motivoCodigo: "CONTEUDO_ALTERADO_APOS_EXIBICAO" });
     expect(listarEventos(db, PACIENTE)).toEqual([]);
+  } finally { db.close(); }
+});
+
+it("rejeita Fonte de outro documento mesmo com sintaxe válida e conteúdo exibido intacto", () => {
+  const db = abrirLedger(":memory:");
+  try {
+    const payload = { campo: "creatinina", valor: 1.1 };
+    salvarDraft(db, { draftId: "draft-origem-a", patientId: PACIENTE, sourceId: "fonte-a",
+      rawRef: "referencia-sintetica", payload, diagnostics: [], revision: 0, criadoEm: AGORA });
+    const writer = criarWriterClinicoGateway({ db, agora: () => AGORA,
+      hashFonteOriginal: (draft) => draft.sourceId === "fonte-a" ? sha256("Fonte A: creatinina 1,1 mg/dL") : null });
+    const r = writer.persistir({
+      operationId: "op-origem-b", reviewDecisionId: "rev-origem-b",
+      ator: { tipo: "SESSAO", id: "medico-sintetico" },
+      sessao: { medicoId: "medico-sintetico", crm: "CRM-SINTETICO", emitidaEm: AGORA,
+        expiraEm: "2026-10-07T14:00:00.000Z" },
+      acaoMedicaExplicita: true,
+      contexto: { patientId: PACIENTE, encounterId: "encontro-pr45", tumorLotId: null },
+      bundleExibidoNoServidor: [{ documentId: "draft-origem-a", documentVersion: 1,
+        draftId: "draft-origem-a", conteudoHash: hashCanonico(payload) }],
+      documentosAssinadosNoPedido: [],
+      registros: [{ draftId: "draft-origem-a", expectedRevision: 0, eventId: "ev-origem-b",
+        tipo: "FATO", payload, revisao: "CONFIRMADO",
+        fontes: [{ sourceId: "fonte-b", classe: "LAB_FEED", localizador: "linha-1",
+          dataClinica: "2026-10-07", dataCaptura: AGORA, versao: "v1",
+          contentHash: sha256("Fonte B: outro documento") }] }],
+    });
+    expect(r).toMatchObject({ decisao: "NEGADA", motivoCodigo: "PROVENIENCIA_OBRIGATORIA_AUSENTE" });
+    expect(listarEventos(db, PACIENTE)).toEqual([]);
+  } finally { db.close(); }
+});
+
+it("G-07/G-08 são alertas revisáveis, não veto irreversível após confirmação específica", () => {
+  const db = abrirLedger(":memory:");
+  try {
+    const payload = { patientId: PACIENTE, encounterId: "encontro-pr45", horario: "08:00", data: "2026-10-07" };
+    salvarDraft(db, { draftId: "draft-alertas", patientId: PACIENTE, sourceId: "fonte-manual",
+      rawRef: "referencia-sintetica", payload, diagnostics: [], revision: 0, criadoEm: AGORA });
+    const writer = criarWriterClinicoGateway({ db, agora: () => AGORA });
+    const pedido = {
+      operationId: "op-alertas", reviewDecisionId: "rev-alertas",
+      ator: { tipo: "SESSAO" as const, id: "medico-sintetico" },
+      sessao: { medicoId: "medico-sintetico", crm: "CRM-SINTETICO", emitidaEm: AGORA,
+        expiraEm: "2026-10-07T14:00:00.000Z" },
+      acaoMedicaExplicita: true,
+      contexto: { patientId: PACIENTE, encounterId: "encontro-pr45", tumorLotId: null },
+      bundleExibidoNoServidor: [{ documentId: "draft-alertas", documentVersion: 1,
+        draftId: "draft-alertas", conteudoHash: hashCanonico(payload) }],
+      documentosAssinadosNoPedido: [],
+      regrasDeterministicas: { lateralidade: { orgao: "mama", path: "DIREITA", rads: "ESQUERDA" },
+        anatomiaSexo: { anatomia: "prostata", sexoCadastral: "F" } },
+      registros: [{ draftId: "draft-alertas", expectedRevision: 0, eventId: "ev-alertas",
+        tipo: "AgendaEntry", payload, fontes: [], revisao: "CONFIRMADO" as const }],
+    };
+    expect(writer.persistir(pedido).motivoCodigo).toBe("ALERTA_G07_REQUER_REVISAO_MEDICA");
+    expect(writer.persistir({ ...pedido, alertasDeterministicosRevisados: ["G-07"] }).motivoCodigo)
+      .toBe("ALERTA_G08_REQUER_REVISAO_MEDICA");
+    expect(writer.persistir({ ...pedido, alertasDeterministicosRevisados: ["G-07", "G-08"] }).decisao)
+      .toBe("PERSISTIDA");
+    expect(listarEventos(db, PACIENTE)).toHaveLength(1);
   } finally { db.close(); }
 });
 
@@ -107,6 +167,21 @@ it("sem hash esperado, avaliação de test_congelado falha fechada", () => {
   expect(relatorio.violacoesFatais).toContainEqual(expect.objectContaining({
     codigo: "TEST_CONGELADO_HASH_DIVERGENTE",
   }));
+});
+
+it("hash forjado pelo próprio avaliador não substitui pin da suíte versionada", () => {
+  const casos = [{ casoId: "caso-trocado", versaoControle: "ctrl@1.0.0", sinteticoDeclarado: true,
+    split: "test_congelado" as const, patientIdEsperado: PACIENTE,
+    saidaObservada: { alertasEmitidos: [], conflitosManifestados: [], omissoesCriticasManifestadas: [],
+      itensExtraidos: [] } }];
+  const relatorio = executarHarnessAvaliacao({
+    versaoSuite: "suite-sintetica@1.0.0", versaoControlesPositivos: "ctrl@1.0.0",
+    finalidadeExecucao: "AVALIACAO", tipoSujeito: "EXTRATOR", casos,
+    hashTestCongeladoEsperado: calcularHashTestCongelado(casos),
+  });
+  expect(relatorio.separacaoSplits.testCongeladoIntegro).toBe(false);
+  expect(relatorio.statusGlobal).toBe("FALHA_FECHADA");
+  expect(relatorio.relatorioValidoParaExtrator).toBe(false);
 });
 
 it("cita o trecho que contém o termo clínico mesmo após 240 caracteres", () => {

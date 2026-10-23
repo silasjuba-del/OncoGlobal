@@ -5,6 +5,7 @@ import { lerDraft } from "../ledger/drafts.js";
 import { auditar, listarEventos } from "../ledger/ledger.js";
 import { confirmar, motivoInvarianteEscrita, type RegistroConfirmacao } from "../ledger/writeRouter.js";
 import { hashCanonico } from "../../modules/tipos.js";
+import type { DraftEnvelope } from "../../contracts/base.js";
 
 export interface ComprovanteExibicaoMedica {
   documentId: string;
@@ -31,6 +32,8 @@ export interface PedidoEscritaGatewayClinico {
     anatomiaSexo?: Parameters<typeof g08AnatomiaSexo>[0];
     ptBiopsia?: Parameters<typeof g09PtDeBiopsia>[0];
   };
+  /** Confirmação específica dos alertas exibidos e revisados pelo médico autenticado. */
+  alertasDeterministicosRevisados?: readonly ("G-07" | "G-08")[];
   registros: readonly (RegistroConfirmacao & {
     exigeProveniencia?: boolean;
   })[];
@@ -66,6 +69,8 @@ export function criarWriterClinicoGateway(deps: {
   db: DatabaseSync;
   agora: () => string;
   politicaVersao?: string;
+  /** Resolver do acervo confiável: hash dos bytes originais vinculados ao sourceId do draft. */
+  hashFonteOriginal?: (draft: DraftEnvelope) => string | null;
 }): WriterClinicoGateway {
   const politicaVersao = deps.politicaVersao ?? "gateway-writer-clinico-v1";
 
@@ -119,11 +124,17 @@ export function criarWriterClinicoGateway(deps: {
       // 5. Regras determinísticas independentes (G-07, G-08, G-09).
       if (pedido.regrasDeterministicas?.lateralidade) {
         const v07 = g07Lateralidade(pedido.regrasDeterministicas.lateralidade);
-        if (v07.decisao !== "PASSA") return negar(atorAuditavel, "REGRA_DETERMINISTICA_G07_REPROVADA", em);
+        if (v07.decisao === "ALERTA") {
+          if (!pedido.alertasDeterministicosRevisados?.includes("G-07"))
+            return negar(atorAuditavel, "ALERTA_G07_REQUER_REVISAO_MEDICA", em);
+        } else if (v07.decisao !== "PASSA") return negar(atorAuditavel, "REGRA_DETERMINISTICA_G07_REPROVADA", em);
       }
       if (pedido.regrasDeterministicas?.anatomiaSexo) {
         const v08 = g08AnatomiaSexo(pedido.regrasDeterministicas.anatomiaSexo);
-        if (v08.decisao !== "PASSA") return negar(atorAuditavel, "REGRA_DETERMINISTICA_G08_REPROVADA", em);
+        if (v08.decisao === "ALERTA") {
+          if (!pedido.alertasDeterministicosRevisados?.includes("G-08"))
+            return negar(atorAuditavel, "ALERTA_G08_REQUER_REVISAO_MEDICA", em);
+        } else if (v08.decisao !== "PASSA") return negar(atorAuditavel, "REGRA_DETERMINISTICA_G08_REPROVADA", em);
       }
       if (pedido.regrasDeterministicas?.ptBiopsia) {
         const v09 = g09PtDeBiopsia(pedido.regrasDeterministicas.ptBiopsia);
@@ -150,8 +161,11 @@ export function criarWriterClinicoGateway(deps: {
         if (hashCanonico(reg.payload) !== hashAtual) {
           return negar(atorAuditavel, "CONTEUDO_ALTERADO_APOS_EXIBICAO", em);
         }
-        if ((reg.exigeProveniencia ?? reg.tipo === "FATO") && !provenienciaValida(reg.fontes)) {
-          return negar(atorAuditavel, "PROVENIENCIA_OBRIGATORIA_AUSENTE", em);
+        if (reg.tipo === "FATO" || reg.exigeProveniencia) {
+          const hashConfiavel = deps.hashFonteOriginal?.(draft);
+          if (!provenienciaValida(reg.fontes) || !hashConfiavel
+            || !reg.fontes.some(f => f.sourceId === draft.sourceId && f.contentHash === hashConfiavel))
+            return negar(atorAuditavel, "PROVENIENCIA_OBRIGATORIA_AUSENTE", em);
         }
       }
 

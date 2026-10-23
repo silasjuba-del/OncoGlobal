@@ -272,7 +272,9 @@ describe("GATEWAY · Único writer clínico com validação de identidade, permi
   it("bloqueia escrita por BRAIN_OS/AGENTE, exige proveniência e regras determinísticas, e persiste após autorização médica", () => {
     const db = abrirLedger(":memory:");
     try {
-      const writer = criarWriterClinicoGateway({ db, agora: () => AGORA });
+      const writer = criarWriterClinicoGateway({ db, agora: () => AGORA,
+        hashFonteOriginal: (draft) => draft.sourceId === "fonte-lab-01"
+          ? sha256("Creatinina 1,1 mg/dL") : null });
       expect(writer.funilEscrita).toBe("ledger.writeRouter.confirmar");
 
       const payloadFato = { campo: "creatinina", valor: 1.1, unidade: "mg/dL" };

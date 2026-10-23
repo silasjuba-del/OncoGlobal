@@ -1,4 +1,5 @@
 import { createHash } from "node:crypto";
+import { hashTestCongeladoPinado } from "./pinsTestCongelado.js";
 import {
   CLASSES_ERRO_ORDEM,
   intervaloWilson95,
@@ -98,15 +99,16 @@ export function executarHarnessAvaliacao(entrada: EntradaHarnessAvaliacao): Rela
   const casosDev = entrada.casos.filter((c) => c.split === "dev");
   const casosTest = entrada.casos.filter((c) => c.split === "test_congelado");
   const hashTestCongelado = calcularHashTestCongelado(entrada.casos);
+  const hashConfiavel = hashTestCongeladoPinado(entrada.versaoSuite, entrada.versaoControlesPositivos);
   const testCongeladoIntegro = casosTest.length === 0
-    || (typeof entrada.hashTestCongeladoEsperado === "string"
-      && entrada.hashTestCongeladoEsperado === hashTestCongelado);
+    || (hashConfiavel !== null && entrada.hashTestCongeladoEsperado === hashConfiavel
+      && hashTestCongelado === hashConfiavel);
 
   if (!testCongeladoIntegro) {
     violacoesFatais.push({
       codigo: "TEST_CONGELADO_HASH_DIVERGENTE",
       casoId: null,
-      detalhe: "Hash esperado ausente ou conjunto test_congelado modificado em relação ao hash congelado versionado.",
+      detalhe: "Hash esperado ausente, suíte sem pin confiável ou conjunto test_congelado modificado em relação ao hash versionado.",
     });
   }
 
