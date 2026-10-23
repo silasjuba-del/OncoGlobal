@@ -1,5 +1,7 @@
 // @vitest-environment jsdom
 import { cleanup, fireEvent, render, screen, within } from "@testing-library/react";
+import { readFileSync } from "node:fs";
+import { resolve } from "node:path";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { OncoassistLocal } from "../../src/ui/OncoassistLocal.js";
 import { criarPortaFalsa, ID } from "../../src/ui/api/fake.js";
@@ -63,13 +65,33 @@ describe("Aparência, agrupamento de seções e revisão clínica", () => {
     const dialog = screen.getByRole("dialog", { name: "Aparência da tela e organização das seções" });
     expect(dialog.contains(document.activeElement)).toBe(true);
     expect(COMBINACOES_21ST).toHaveLength(4);
-    fireEvent.click(screen.getByText("Âmbar operacional"));
+    const card = within(dialog).getByRole("button", { name: /Âmbar operacional/ });
+    expect(card.tabIndex).toBe(0);
+    card.focus();
+    fireEvent.click(card);
     expect(main.getAttribute("data-combo-21st")).toBe("amber-glow");
     fireEvent.keyDown(document, { key: "Escape" });
     expect(screen.queryByRole("dialog", { name: "Aparência da tela e organização das seções" })).toBeNull();
     expect(document.activeElement).toBe(abrir);
+
+    // O alvo recolhido só recebe rolagem/foco depois da expansão e do fechamento do diálogo.
+    fireEvent.click(screen.getByRole("button", { name: "Recolher painéis" }));
+    expect(secaoDocs.style.display).toBe("none");
+    const scroll = vi.fn();
+    secaoDocs.scrollIntoView = scroll;
+    fireEvent.click(abrir);
+    fireEvent.click(within(screen.getByRole("dialog")).getByRole("button", { name: /Captura/ }));
+    expect(secaoDocs.style.display).not.toBe("none");
+    expect(scroll).toHaveBeenCalledOnce();
+    expect(document.activeElement).toBe(secaoDocs);
+
     // Nenhum jargão de design na superfície clínica.
     expect(document.body.textContent).not.toMatch(/21st|Bento|1 clique|Estúdio/);
+  });
+
+  it("impressão expande os corpos clínicos apesar do estilo inline de recolhimento", () => {
+    const css = readFileSync(resolve(process.cwd(), "src/ui/consulta/consulta-local.css"), "utf8");
+    expect(css).toMatch(/@media print\s*\{[\s\S]*?\.oncoassist-local \.oc21-acordeon-body\s*\{\s*display:\s*block\s*!important;\s*\}/);
   });
 
   it("RT-ADV-03: filtra a ficha pelo estado real e o diálogo de fontes tem Esc, Tab preso e foco restaurado", async () => {

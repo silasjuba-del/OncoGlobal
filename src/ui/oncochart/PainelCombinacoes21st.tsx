@@ -28,6 +28,7 @@ export function MenuRapido21st({
 }) {
   const [dropdownAberto, setDropdownAberto] = useState(false);
   const [modalAberto, setModalAberto] = useState(false);
+  const [grupoParaFocar, setGrupoParaFocar] = useState<GrupoConsultaId | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
   const atual = COMBINACOES_21ST.find((c) => c.id === combinacao) ?? COMBINACOES_21ST[0]!;
@@ -50,6 +51,22 @@ export function MenuRapido21st({
       document.removeEventListener("keydown", aoTeclar);
     };
   }, [dropdownAberto]);
+
+  // Navegar só depois de a seção expandida e o diálogo fechado estarem no DOM.
+  // O cleanup do diálogo devolve o foco ao opener; este efeito o transfere ao destino.
+  useEffect(() => {
+    if (!grupoParaFocar || modalAberto || !gruposAbertos?.[grupoParaFocar]) return;
+    const destino = document.getElementById(grupoParaFocar);
+    if (!destino) return;
+    destino.focus({ preventScroll: true });
+    destino.scrollIntoView?.({ behavior: "smooth", block: "start" });
+    setGrupoParaFocar(null);
+  }, [grupoParaFocar, gruposAbertos, modalAberto]);
+
+  const focarEIrParaGrupo = (id: GrupoConsultaId) => {
+    setGrupoParaFocar(id);
+    aoFocarGrupo?.(id);
+  };
 
   return (
     <div className="oc21-toolbar" ref={containerRef}>
@@ -138,9 +155,8 @@ export function MenuRapido21st({
                     type="button"
                     className="oc21-focus-chip"
                     onClick={() => {
-                      aoFocarGrupo(g.id);
+                       focarEIrParaGrupo(g.id);
                       setDropdownAberto(false);
-                      document.getElementById(g.id)?.scrollIntoView?.({ behavior: "smooth", block: "start" });
                     }}
                   >
                     <span>{g.numero}</span> {g.titulo.split(" & ")[0]}
@@ -171,7 +187,7 @@ export function MenuRapido21st({
           aoMudarCombinacao={aoMudarCombinacao}
           gruposAbertos={gruposAbertos}
           aoAlternarTodosGrupos={aoAlternarTodosGrupos}
-          aoFocarGrupo={aoFocarGrupo}
+           aoFocarGrupo={focarEIrParaGrupo}
           metricas={metricas}
           aoFechar={() => setModalAberto(false)}
         />
@@ -230,10 +246,12 @@ function ModalCombinacoes21st({
           {COMBINACOES_21ST.map((item) => {
             const ativo = item.id === combinacao;
             return (
-              <article
+               <button
                 key={item.id}
+                 type="button"
                 className="oc21-combo-card"
                 data-ativo={ativo ? "1" : "0"}
+                 aria-pressed={ativo}
                 onClick={() => aoMudarCombinacao(item.id)}
               >
                 <div className="oc21-combo-card-top">
@@ -245,13 +263,13 @@ function ModalCombinacoes21st({
                     aria-hidden="true"
                   />
                   <div>
-                    <h3>{item.nome}</h3>
+                     <strong>{item.nome}</strong>
                     <small>{item.subtitulo}</small>
                   </div>
                   <span className="oc21-state-pill">{ativo ? "Ativa" : "Aplicar"}</span>
                 </div>
                 <p>{item.descricaoCurta}</p>
-              </article>
+               </button>
             );
           })}
         </section>
@@ -283,7 +301,6 @@ function ModalCombinacoes21st({
                     onClick={() => {
                       aoFocarGrupo(g.id);
                       aoFechar();
-                      document.getElementById(g.id)?.scrollIntoView?.({ behavior: "smooth", block: "start" });
                     }}
                   >
                     <span className="oc21-group-num">{g.numero}</span>
