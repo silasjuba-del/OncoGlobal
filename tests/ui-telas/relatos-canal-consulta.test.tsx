@@ -26,7 +26,7 @@ it("exibe somente relato vinculado do contexto e preserva texto literal, negaç�
   const callback = vi.fn();
   const original = "<script>não executar</script>\nNão tenho febre nem dor.";
   const view = render(<RelatosCanalConsulta contexto={contexto} aoAbrirCanal={callback}
-    pendenciasSemAtribuicao={2} mensagens={[
+    pendenciasVinculoIngresso={2} mensagens={[
     relato({ mensagemId: "msg-html", texto: original, redFlag: true, pendenciaProcessamento: true,
       midia: { providerMediaId: "media-opaco-sintetico", mimeType: "audio/ogg", processamento: "NAO_PROCESSADA" } }),
     relato({ mensagemId: "msg-conflito", texto: "Conteúdo conflitante oculto", patientId: null, estadoVinculo: "CONFLITO" }),
@@ -44,8 +44,8 @@ it("exibe somente relato vinculado do contexto e preserva texto literal, negaç�
   expect(panel.textContent).toContain("não processada; conteúdo não disponível aqui.");
   expect(panel.textContent).toContain("Sinalizador do canal: relato pendente de revisão médica.");
   expect(panel.textContent).toContain("Processamento pendente");
-  expect(panel.textContent).toContain("Há 2 relatos na caixa do canal com vínculo não validado");
-  expect(panel.textContent).toContain("não atribuídos a este paciente");
+  expect(panel.textContent).toContain("Há 2 relatos anteriormente associados a este cadastro");
+  expect(panel.textContent).toContain("não são relatos confirmados deste paciente");
   expect(panel.textContent).not.toContain("Nome não comprova autoria");
   expect(panel.textContent).not.toContain("Conteúdo conflitante oculto");
   expect(panel.textContent).not.toContain("Conteúdo revogado oculto");
