@@ -132,6 +132,20 @@ export function verificarPropostaNoHarnessRuntime(entrada: EntradaHarnessRuntime
 
   for (const fonte of fontesOriginais) {
     mapaFontes.set(fonte.sourceId, fonte);
+    if (fonte.identidadeEsperadaPaciente && proposta.patientId !== fonte.identidadeEsperadaPaciente.patientId) {
+      fontesNaoVerificaveis.push({
+        sourceId: fonte.sourceId,
+        motivo: "Identidade da proposta não coincide com o paciente vinculado à fonte.",
+      });
+      manifestacoes.push({
+        tipo: "FALHA_IDENTIDADE",
+        campo: "patientIdentity",
+        sourceId: fonte.sourceId,
+        detalhe: "Paciente da proposta diverge do cadastro vinculado à fonte original.",
+        trechoOriginal: null,
+      });
+      continue;
+    }
     if (!fonte.conteudoOriginal || !fonte.conteudoOriginal.trim() || !fonte.contentHash) {
       fontesNaoVerificaveis.push({
         sourceId: fonte.sourceId,

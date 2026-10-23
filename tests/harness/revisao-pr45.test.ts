@@ -66,6 +66,32 @@ it("bloqueia proposta com fonte válida e citação adicional desconhecida", () 
   }));
 });
 
+it("não valida fonte de A para proposta atribuída ao paciente B", () => {
+  const texto = "Paciente: Paciente A Sintético\nAdenocarcinoma confirmado.";
+  const proposta = produzirPropostaBrainOs({
+    propostaId: "pr45-paciente-b", patientId: "paciente-b-sintetico",
+    encounterId: "encontro-b-sintetico", agora: AGORA,
+    fontes: [{ sourceId: "documento-a", versao: "v1", conteudo: texto }],
+    candidatos: [{ campo: "histologia", valor: "Adenocarcinoma",
+      sourceId: "documento-a", trecho: "Adenocarcinoma confirmado." }],
+  });
+  const veredito = verificarPropostaNoHarnessRuntime({
+    proposta,
+    fontesOriginais: [{ sourceId: "documento-a", versao: "v1", modalidade: "DOCUMENTO",
+      conteudoOriginal: texto, contentHash: sha256(texto),
+      identidadeEsperadaPaciente: { patientId: "paciente-a-sintetico",
+        nome: "Paciente A Sintético", identificadores: [] } }],
+  });
+  expect(veredito.status).toBe("BLOQUEADO_FALHA_CRITICA");
+  expect(veredito.itensVerificados[0]?.verificacaoDeterministicaIndependenteOk).toBe(false);
+  expect(veredito.manifestacoes).toContainEqual(expect.objectContaining({
+    tipo: "FALHA_IDENTIDADE", sourceId: "documento-a",
+  }));
+  expect(veredito.manifestacoes).toContainEqual(expect.objectContaining({
+    tipo: "CITACAO_NAO_SUSTENTADA", sourceId: "documento-a",
+  }));
+});
+
 it("sem hash esperado, avaliação de test_congelado falha fechada", () => {
   const relatorio = executarHarnessAvaliacao({
     versaoSuite: "suite-pr45@1", versaoControlesPositivos: "ctrl-pr45@1",
