@@ -100,15 +100,18 @@ export function executarHarnessAvaliacao(entrada: EntradaHarnessAvaliacao): Rela
   const casosTest = entrada.casos.filter((c) => c.split === "test_congelado");
   const hashTestCongelado = calcularHashTestCongelado(entrada.casos);
   const hashConfiavel = hashTestCongeladoPinado(entrada.versaoSuite, entrada.versaoControlesPositivos);
-  const testCongeladoIntegro = casosTest.length === 0
-    || (hashConfiavel !== null && entrada.hashTestCongeladoEsperado === hashConfiavel
-      && hashTestCongelado === hashConfiavel);
+  const exigeCongelado = entrada.tipoSujeito === "EXTRATOR" && entrada.finalidadeExecucao === "AVALIACAO";
+  const testCongeladoIntegro = casosTest.length === 0 ? !exigeCongelado
+    : hashConfiavel !== null && entrada.hashTestCongeladoEsperado === hashConfiavel
+      && hashTestCongelado === hashConfiavel;
 
   if (!testCongeladoIntegro) {
     violacoesFatais.push({
-      codigo: "TEST_CONGELADO_HASH_DIVERGENTE",
+      codigo: casosTest.length === 0 ? "TEST_CONGELADO_AUSENTE" : "TEST_CONGELADO_HASH_DIVERGENTE",
       casoId: null,
-      detalhe: "Hash esperado ausente, suíte sem pin confiável ou conjunto test_congelado modificado em relação ao hash versionado.",
+      detalhe: casosTest.length === 0
+        ? "Avaliação de extrator sem casos test_congelado não demonstra prontidão."
+        : "Hash esperado ausente, suíte sem pin confiável ou conjunto test_congelado modificado em relação ao hash versionado.",
     });
   }
 

@@ -61,7 +61,7 @@ it("rejeita Fonte de outro documento mesmo com sintaxe válida e conteúdo exibi
       contexto: { patientId: PACIENTE, encounterId: "encontro-pr45", tumorLotId: null },
       bundleExibidoNoServidor: [{ documentId: "draft-origem-a", documentVersion: 1,
         draftId: "draft-origem-a", conteudoHash: hashCanonico(payload) }],
-      documentosAssinadosNoPedido: [],
+      documentosAssinadosNoPedido: [{ documentId: "draft-origem-a", documentVersion: 1 }],
       registros: [{ draftId: "draft-origem-a", expectedRevision: 0, eventId: "ev-origem-b",
         tipo: "FATO", payload, revisao: "CONFIRMADO",
         fontes: [{ sourceId: "fonte-b", classe: "LAB_FEED", localizador: "linha-1",
@@ -69,6 +69,37 @@ it("rejeita Fonte de outro documento mesmo com sintaxe válida e conteúdo exibi
           contentHash: sha256("Fonte B: outro documento") }] }],
     });
     expect(r).toMatchObject({ decisao: "NEGADA", motivoCodigo: "PROVENIENCIA_OBRIGATORIA_AUSENTE" });
+    expect(listarEventos(db, PACIENTE)).toEqual([]);
+  } finally { db.close(); }
+});
+
+it("não grava draft exibido fora do conjunto autorizado pelo médico", () => {
+  const db = abrirLedger(":memory:");
+  try {
+    const payload = { patientId: PACIENTE, encounterId: "encontro-pr45", horario: "08:00", data: "2026-10-07" };
+    salvarDraft(db, { draftId: "draft-fora-escopo", patientId: PACIENTE, sourceId: "manual",
+      rawRef: "referencia-sintetica", payload, diagnostics: [], revision: 0, criadoEm: AGORA });
+    const writer = criarWriterClinicoGateway({ db, agora: () => AGORA });
+    const base = {
+      operationId: "op-fora-escopo", reviewDecisionId: "rev-fora-escopo",
+      ator: { tipo: "SESSAO" as const, id: "medico-sintetico" },
+      sessao: { medicoId: "medico-sintetico", crm: "CRM-SINTETICO",
+        emitidaEm: AGORA, expiraEm: "2026-10-07T14:00:00.000Z" },
+      acaoMedicaExplicita: true,
+      contexto: { patientId: PACIENTE, encounterId: "encontro-pr45", tumorLotId: null },
+      bundleExibidoNoServidor: [
+        { documentId: "draft-fora-escopo", documentVersion: 1,
+          draftId: "draft-fora-escopo", conteudoHash: hashCanonico(payload) },
+        { documentId: "documento-a", documentVersion: 1, conteudoHash: "a".repeat(64) },
+      ],
+      registros: [{ draftId: "draft-fora-escopo", expectedRevision: 0, eventId: "ev-fora-escopo",
+        tipo: "AgendaEntry", payload, fontes: [], revisao: "CONFIRMADO" as const }],
+    };
+    expect(writer.persistir({ ...base, documentosAssinadosNoPedido: [] }).motivoCodigo)
+      .toBe("ESCOPO_ASSINATURA_INVALIDO");
+    expect(writer.persistir({ ...base, documentosAssinadosNoPedido: [
+      { documentId: "documento-a", documentVersion: 1 },
+    ] }).motivoCodigo).toBe("ESCOPO_ASSINATURA_INVALIDO");
     expect(listarEventos(db, PACIENTE)).toEqual([]);
   } finally { db.close(); }
 });
@@ -89,7 +120,7 @@ it("G-07/G-08 são alertas revisáveis, não veto irreversível após confirmaç
       contexto: { patientId: PACIENTE, encounterId: "encontro-pr45", tumorLotId: null },
       bundleExibidoNoServidor: [{ documentId: "draft-alertas", documentVersion: 1,
         draftId: "draft-alertas", conteudoHash: hashCanonico(payload) }],
-      documentosAssinadosNoPedido: [],
+      documentosAssinadosNoPedido: [{ documentId: "draft-alertas", documentVersion: 1 }],
       regrasDeterministicas: { lateralidade: { orgao: "mama", path: "DIREITA", rads: "ESQUERDA" },
         anatomiaSexo: { anatomia: "prostata", sexoCadastral: "F" } },
       registros: [{ draftId: "draft-alertas", expectedRevision: 0, eventId: "ev-alertas",
@@ -182,6 +213,25 @@ it("hash forjado pelo próprio avaliador não substitui pin da suíte versionada
   expect(relatorio.separacaoSplits.testCongeladoIntegro).toBe(false);
   expect(relatorio.statusGlobal).toBe("FALHA_FECHADA");
   expect(relatorio.relatorioValidoParaExtrator).toBe(false);
+});
+
+it.each([{ variante: "vazia", casos: [] }, { variante: "só desenvolvimento", casos: [{
+  casoId: "dev-pr45", versaoControle: "ctrl@1.0.0", sinteticoDeclarado: true,
+  split: "dev" as const, patientIdEsperado: PACIENTE,
+  saidaObservada: { alertasEmitidos: [], conflitosManifestados: [],
+    omissoesCriticasManifestadas: [], itensExtraidos: [] },
+}] }])("não aprova extrator sem casos congelados ($variante)", ({ casos }) => {
+  const relatorio = executarHarnessAvaliacao({
+    versaoSuite: "suite-sintetica@1.0.0", versaoControlesPositivos: "ctrl@1.0.0",
+    finalidadeExecucao: "AVALIACAO", tipoSujeito: "EXTRATOR", casos,
+    hashTestCongeladoEsperado: calcularHashTestCongelado(casos),
+  });
+  expect(relatorio.separacaoSplits.testCongeladoIntegro).toBe(false);
+  expect(relatorio.statusGlobal).toBe("FALHA_FECHADA");
+  expect(relatorio.relatorioValidoParaExtrator).toBe(false);
+  expect(relatorio.violacoesFatais).toContainEqual(expect.objectContaining({
+    codigo: "TEST_CONGELADO_AUSENTE",
+  }));
 });
 
 it("cita o trecho que contém o termo clínico mesmo após 240 caracteres", () => {

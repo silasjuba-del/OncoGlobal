@@ -156,6 +156,10 @@ export function criarWriterClinicoGateway(deps: {
         if (!comprovante) {
           return negar(atorAuditavel, "CONTEUDO_ALTERADO_APOS_EXIBICAO", em);
         }
+        if (!pedido.documentosAssinadosNoPedido.some(d =>
+          d.documentId === comprovante.documentId && d.documentVersion === comprovante.documentVersion)) {
+          return negar(atorAuditavel, "ESCOPO_ASSINATURA_INVALIDO", em);
+        }
         // O evento gravado deve ser exatamente o conteúdo cuja exibição foi comprovada.
         // Hash do draft sozinho não vincula o payload fornecido no pedido de escrita.
         if (hashCanonico(reg.payload) !== hashAtual) {
