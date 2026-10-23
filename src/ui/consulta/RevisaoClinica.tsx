@@ -45,7 +45,8 @@ export function RevisaoClinica({
   const [ocupado, setOcupado] = useState(false);
   const [filtroFicha, setFiltroFicha] = useState<FiltroFicha>("TODOS");
   const [modalFontesAberto, setModalFontesAberto] = useState(false);
-  const [subsecoesAbertas, setSubsecoesAbertas] = useState(false);
+  // null = abertura inicial motivada pelos dados; boolean = escolha explícita do usuário.
+  const [subsecoesAbertas, setSubsecoesAbertas] = useState<boolean | null>(null);
   const geracao = useRef(0);
   const chave = JSON.stringify([contexto.patientId, contexto.encounterId, contexto.tumorLotId]);
   const packId = selecao.chave === chave ? selecao.id : "";
@@ -56,6 +57,7 @@ export function RevisaoClinica({
     setDados(null);
     setErro("");
     setModalFontesAberto(false);
+    setSubsecoesAbertas(null);
     if (!porta.revisaoClinica) {
       setErro("Revisão integrada ainda indisponível.");
       return;
@@ -99,6 +101,9 @@ export function RevisaoClinica({
   // Lista e contador usam o mesmo predicado: o rótulo nunca diverge do que é exibido.
   const fichaVisivel = atual ? atual.ficha.filter((f) => filtroFicha === "TODOS" || grupoFicha(f) === filtroFicha) : [];
   const qtdPorGrupo = (g: Exclude<FiltroFicha, "TODOS">) => atual ? atual.ficha.filter((f) => grupoFicha(f) === g).length : 0;
+  const haSubsecaoInicialAberta = !!atual && (atual.respostaTumoral.series.length > 0
+    || atual.respostaTumoral.patologica.length > 0 || atual.estadosDoenca.length > 0);
+  const algumaSubsecaoAberta = subsecoesAbertas ?? haSubsecaoInicialAberta;
 
   return (
     <section aria-label="Ficha e revisão clínica" className="revisao-clinica-bento" aria-busy={ocupado}>
@@ -135,9 +140,9 @@ export function RevisaoClinica({
             <button
               type="button"
               className="oc21-quick-btn"
-              onClick={() => setSubsecoesAbertas((v) => !v)}
+              onClick={() => setSubsecoesAbertas(!algumaSubsecaoAberta)}
             >
-              {subsecoesAbertas ? "Recolher subseções" : "Expandir subseções"}
+              {algumaSubsecaoAberta ? "Recolher subseções" : "Expandir subseções"}
             </button>
             <button
               type="button"
@@ -194,7 +199,7 @@ export function RevisaoClinica({
           </table>
 
           <div className="revisao-clinica-acordeoes">
-            <details className="oc21-details-card" open={subsecoesAbertas || undefined}>
+            <details className="oc21-details-card" open={subsecoesAbertas === true}>
               <summary>Pré-QT · {atual.preQt.estado}</summary>
               <div className="oc21-details-body">
                 <p>Completude documental e avaliações do esquema aguardam decisão médica.</p>
@@ -208,12 +213,8 @@ export function RevisaoClinica({
 
             <details
               className="oc21-details-card"
-              open={
-                subsecoesAbertas ||
-                atual.respostaTumoral.series.length > 0 ||
-                atual.respostaTumoral.patologica.length > 0 ||
-                undefined
-              }
+              open={subsecoesAbertas ?? (atual.respostaTumoral.series.length > 0
+                || atual.respostaTumoral.patologica.length > 0)}
             >
               <summary>Resposta tumoral e patológica</summary>
               <div className="oc21-details-body">
@@ -278,7 +279,7 @@ export function RevisaoClinica({
 
             <details
               className="oc21-details-card"
-              open={subsecoesAbertas || atual.estadosDoenca.length > 0 || undefined}
+              open={subsecoesAbertas ?? (atual.estadosDoenca.length > 0)}
             >
               <summary>Histórico de remissão e recidiva</summary>
               <div className="oc21-details-body">

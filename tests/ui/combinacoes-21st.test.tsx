@@ -169,7 +169,8 @@ describe("Aparência, agrupamento de seções e revisão clínica", () => {
       respostaTumoral: {
         criterio: "RECIST_1_1",
         aplicabilidade: "CONFERIR_CRITERIO_DO_TUMOR",
-        series: [],
+        series: [{ eventId: "serie-sintetica", episodioId: "episodio-sintetico",
+          tumorLotId: null, avaliacoes: [], pendencias: [] }],
         patologica: [],
         pendencias: [],
       },
@@ -182,6 +183,14 @@ describe("Aparência, agrupamento de seções e revisão clínica", () => {
 
     await screen.findByRole("button", { name: "Todos (5)" });
     const regiaoFicha = screen.getByRole("region", { name: "Ficha e revisão clínica" });
+    const secaoResposta = within(regiaoFicha).getByText("Resposta tumoral e patológica")
+      .closest("details")!;
+    expect(secaoResposta.open).toBe(true);
+    fireEvent.click(within(regiaoFicha).getByRole("button", { name: "Recolher subseções" }));
+    expect(secaoResposta.open).toBe(false);
+    expect(within(regiaoFicha).getByRole("button", { name: "Expandir subseções" })).toBeTruthy();
+    fireEvent.click(within(regiaoFicha).getByRole("button", { name: "Expandir subseções" }));
+    expect(secaoResposta.open).toBe(true);
     const contagens = { Documentados: 1, Calculados: 1, Conflitantes: 1, Pendentes: 2 };
     for (const [rotulo, n] of Object.entries(contagens))
       expect(within(regiaoFicha).getByRole("button", { name: `${rotulo} (${n})` })).toBeTruthy();
