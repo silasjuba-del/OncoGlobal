@@ -3,6 +3,7 @@ import { DatabaseSync } from "node:sqlite";
 import { existsSync, mkdirSync, readFileSync, renameSync, rmSync, statSync, writeFileSync } from "node:fs";
 import { basename, dirname, isAbsolute, join, resolve, sep } from "node:path";
 import { pathToFileURL } from "node:url";
+import { refsLedger } from "./backup.mjs";
 
 const hash = (data) => createHash("sha256").update(data).digest("hex");
 const STORE_NAMES = new Set(["ledger.sqlite", "config-w10.sqlite", "workspace.sqlite"]);
@@ -46,6 +47,18 @@ function validarBanco(path, expected) {
     }
   } finally { db.close(); }
 }
+function validarReferenciasLedger(ledgerPath, stagingRoot, refsVistas) {
+  const db = new DatabaseSync(ledgerPath);
+  try {
+    const fisicas = refsLedger(db, [], stagingRoot);
+    for (const ref of fisicas) {
+      const relative = ref.split(/[\\/]/).join("/").toLowerCase();
+      if (!refsVistas.has(relative)) throw new Error("REFERENCIA_AUSENTE");
+      const target = fileTarget(stagingRoot, ref);
+      if (!existsSync(target) || !statSync(target).isFile()) throw new Error("REFERENCIA_AUSENTE");
+    }
+  } finally { db.close(); }
+}
 function decodificarBanco(item, expectedName) {
   if (!exactKeys(item, ["base64", "name", "schemaSha256", "sha256", "userVersion"])
     || item.name !== expectedName || !Number.isInteger(item.userVersion) || item.userVersion < 0
@@ -56,7 +69,7 @@ function decodificarBanco(item, expectedName) {
   return { data, expected: { userVersion: item.userVersion, schemaSha256: item.schemaSha256 } };
 }
 
-/** All authentication, manifest, hash and SQLite checks finish in staging before destination appears. */
+/** All authentication, manifest, hash, referential and SQLite checks finish in staging before destination appears. */
 export function restaurarBackup({ arquivo, destino, senha }) {
   validLocal(arquivo); validLocal(destino);
   if (typeof senha !== "string" || senha.length < 12) throw new Error("SENHA_INSUFICIENTE");
@@ -121,6 +134,7 @@ export function restaurarBackup({ arquivo, destino, senha }) {
       mkdirSync(dirname(stagedPath), { recursive: true });
       writeFileSync(stagedPath, item.data, { flag: "wx", mode: 0o600 });
     }
+    validarReferenciasLedger(join(staging, "ledger.sqlite"), staging, refsVistas);
     renameSync(staging, destino);
     const database = join(destino, "ledger.sqlite");
     return multi

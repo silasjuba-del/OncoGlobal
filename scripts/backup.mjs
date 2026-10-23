@@ -33,6 +33,21 @@ function schemaMetadata(database) {
     schemaSha256: hash(Buffer.from(JSON.stringify(rows))),
   };
 }
+function storeDigest(database) {
+  const schema = schemaMetadata(database);
+  const tables = database.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%' ORDER BY name").all();
+  const dump = tables.map(({ name }) => {
+    const escaped = String(name).replaceAll('"', '""');
+    let rows;
+    try { rows = database.prepare(`SELECT * FROM "${escaped}" ORDER BY rowid`).all(); }
+    catch { rows = database.prepare(`SELECT * FROM "${escaped}"`).all(); }
+    return { name, rows };
+  });
+  return {
+    ...schema,
+    contentSha256: hash(Buffer.from(JSON.stringify({ schema, dump }))),
+  };
+}
 function parsePayload(value) {
   if (value && typeof value === "object" && !Array.isArray(value)) return value;
   if (typeof value !== "string") return null;
@@ -104,7 +119,7 @@ function referenciaEntreDrafts(row, payload, porId) {
       && destino.auditoria?.propostaId === row.rawRef;
   return false;
 }
-function refsLedger(db, files, filesRoot) {
+export function refsLedger(db, files, filesRoot) {
   let rows = [];
   let comMetadados = true;
   try { rows = db.prepare("SELECT draftId, patientId, sourceId, rawRef, payload FROM draft_envelope").all(); }
@@ -156,9 +171,18 @@ function validateStores(stores) {
     if (!statSync(path).isFile()) throw new Error("STORE_INVALIDO");
   }
 }
+function readAttachment(filesRoot, ref) {
+  const source = inside(filesRoot, ref);
+  let real;
+  try { real = realpathSync(source); } catch { throw new Error("REFERENCIA_AUSENTE"); }
+  if (real !== source || !statSync(source).isFile()) throw new Error("REFERENCIA_INVALIDA");
+  const data = readFileSync(source);
+  return { ref, sha256: hash(data), base64: data.toString("base64") };
+}
 
-/** SQLite backup API includes committed pages and uncheckpointed WAL for each named store. */
-export async function criarBackup({ dbPath, stores, filesRoot, files = [], destino, senha, nome }) {
+/** SQLite backup API includes committed pages and uncheckpointed WAL for each named store,
+ *  and verifies cross-store + cross-file consistency before/during/after capture. */
+export async function criarBackup({ dbPath, stores, filesRoot, files = [], destino, senha, nome, aoCapturarStore }) {
   local(filesRoot); local(destino);
   if (!senha || senha.length < 12) throw new Error("SENHA_INSUFICIENTE");
   if (!statSync(destino).isDirectory() || !statSync(filesRoot).isDirectory()) throw new Error("DIRETORIO_INVALIDO");
@@ -173,28 +197,75 @@ export async function criarBackup({ dbPath, stores, filesRoot, files = [], desti
   const tempPaths = new Map(Object.keys(sourceStores).map((key) => [key, join(destino, `${nome}-${key}-${randomBytes(8).toString("hex")}.sqlite`)]));
   let written = false;
   try {
-    const metadata = [];
+    const preDigests = new Map();
     let ledgerRefs = [];
     for (const [key, sourcePath] of Object.entries(sourceStores)) {
       const db = new DatabaseSync(sourcePath);
       try {
         if (key === "ledger") ledgerRefs = refsLedger(db, files, filesRoot);
-        const temp = tempPaths.get(key);
-        if (!temp) throw new Error("BACKUP_TEMPORARIO_AUSENTE");
-        const schema = schemaMetadata(db);
-        await backup(db, temp);
-        const data = readFileSync(temp);
-        metadata.push({ name: STORE_NAMES[key] ?? basename(sourcePath), ...schema, sha256: hash(data), base64: data.toString("base64") });
+        preDigests.set(key, storeDigest(db));
       } finally { db.close(); }
     }
-    const entries = ledgerRefs.map((ref) => {
-      const source = inside(filesRoot, ref);
-      let real;
-      try { real = realpathSync(source); } catch { throw new Error("REFERENCIA_AUSENTE"); }
-      if (real !== source || !statSync(source).isFile()) throw new Error("REFERENCIA_INVALIDA");
-      const data = readFileSync(source);
-      return { ref, sha256: hash(data), base64: data.toString("base64") };
-    });
+    const entries = ledgerRefs.map((ref) => readAttachment(filesRoot, ref));
+    const metadata = [];
+    for (const [key, sourcePath] of Object.entries(sourceStores)) {
+      const db = new DatabaseSync(sourcePath);
+      try {
+        const temp = tempPaths.get(key);
+        if (!temp) throw new Error("BACKUP_TEMPORARIO_AUSENTE");
+        await backup(db, temp);
+        if (typeof aoCapturarStore === "function") await aoCapturarStore(key);
+        const tempDb = new DatabaseSync(temp);
+        try {
+          const snapDigest = storeDigest(tempDb);
+          const expectedDigest = preDigests.get(key);
+          if (!expectedDigest || snapDigest.contentSha256 !== expectedDigest.contentSha256
+            || snapDigest.schemaSha256 !== expectedDigest.schemaSha256
+            || snapDigest.userVersion !== expectedDigest.userVersion)
+            throw new Error("CONSISTENCIA_BACKUP_VIOLADA");
+          if (key === "ledger") {
+            const snapRefs = refsLedger(tempDb, files, filesRoot);
+            if (snapRefs.join("\u0000") !== ledgerRefs.join("\u0000"))
+              throw new Error("CONSISTENCIA_BACKUP_VIOLADA");
+          }
+        } finally { tempDb.close(); }
+        const data = readFileSync(temp);
+        const expected = preDigests.get(key);
+        metadata.push({
+          name: STORE_NAMES[key] ?? basename(sourcePath),
+          userVersion: expected.userVersion,
+          schemaSha256: expected.schemaSha256,
+          sha256: hash(data),
+          base64: data.toString("base64"),
+        });
+      } finally { db.close(); }
+    }
+    // Re-conferência pós-captura de todos os stores e anexos físicos para comprovar corte consistente.
+    for (const [key, sourcePath] of Object.entries(sourceStores)) {
+      const db = new DatabaseSync(sourcePath);
+      try {
+        const postDigest = storeDigest(db);
+        const expectedDigest = preDigests.get(key);
+        if (!expectedDigest || postDigest.contentSha256 !== expectedDigest.contentSha256
+          || postDigest.schemaSha256 !== expectedDigest.schemaSha256
+          || postDigest.userVersion !== expectedDigest.userVersion)
+          throw new Error("CONSISTENCIA_BACKUP_VIOLADA");
+        if (key === "ledger") {
+          let postRefs;
+          try { postRefs = refsLedger(db, files, filesRoot); }
+          catch { throw new Error("CONSISTENCIA_BACKUP_VIOLADA"); }
+          if (postRefs.join("\u0000") !== ledgerRefs.join("\u0000"))
+            throw new Error("CONSISTENCIA_BACKUP_VIOLADA");
+        }
+      } finally { db.close(); }
+    }
+    for (const entry of entries) {
+      let postEntry;
+      try { postEntry = readAttachment(filesRoot, entry.ref); }
+      catch { throw new Error("CONSISTENCIA_BACKUP_VIOLADA"); }
+      if (postEntry.sha256 !== entry.sha256)
+        throw new Error("CONSISTENCIA_BACKUP_VIOLADA");
+    }
     const plaintext = Buffer.from(JSON.stringify(v2
       ? { format: "oncoglobal-local-backup-v2", manifestVersion: 2, capturedAt, completedAt: new Date().toISOString(), stores: metadata, files: entries }
       : { format: "oncoglobal-local-backup-v1", database: metadata[0] && { sha256: metadata[0].sha256, base64: metadata[0].base64 }, files: entries }));
