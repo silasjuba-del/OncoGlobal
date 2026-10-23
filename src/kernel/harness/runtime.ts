@@ -195,6 +195,13 @@ export function verificarPropostaNoHarnessRuntime(entrada: EntradaHarnessRuntime
       if (!fonte || idsNaoVerificaveis.has(citacao.sourceId) || !fonte.conteudoOriginal) {
         citacaoSustentada = false;
         verificacaoIndependenteOk = false;
+        manifestacoes.push({
+          tipo: "CITACAO_NAO_SUSTENTADA",
+          campo: item.campo,
+          sourceId: citacao.sourceId,
+          detalhe: `A fonte citada para '${item.campo}' não está disponível para verificação independente.`,
+          trechoOriginal: citacao.trecho,
+        });
         if (fonte && !idsNaoVerificaveis.has(citacao.sourceId)) {
           fontesNaoVerificaveis.push({
             sourceId: citacao.sourceId,

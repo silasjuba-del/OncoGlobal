@@ -98,14 +98,15 @@ export function executarHarnessAvaliacao(entrada: EntradaHarnessAvaliacao): Rela
   const casosDev = entrada.casos.filter((c) => c.split === "dev");
   const casosTest = entrada.casos.filter((c) => c.split === "test_congelado");
   const hashTestCongelado = calcularHashTestCongelado(entrada.casos);
-  const testCongeladoIntegro = entrada.hashTestCongeladoEsperado === undefined
-    || entrada.hashTestCongeladoEsperado === hashTestCongelado;
+  const testCongeladoIntegro = casosTest.length === 0
+    || (typeof entrada.hashTestCongeladoEsperado === "string"
+      && entrada.hashTestCongeladoEsperado === hashTestCongelado);
 
   if (!testCongeladoIntegro) {
     violacoesFatais.push({
       codigo: "TEST_CONGELADO_HASH_DIVERGENTE",
       casoId: null,
-      detalhe: "O conjunto test_congelado foi modificado em relação ao hash congelado versionado.",
+      detalhe: "Hash esperado ausente ou conjunto test_congelado modificado em relação ao hash congelado versionado.",
     });
   }
 

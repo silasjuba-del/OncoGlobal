@@ -145,6 +145,11 @@ export function criarWriterClinicoGateway(deps: {
         if (!comprovante) {
           return negar(atorAuditavel, "CONTEUDO_ALTERADO_APOS_EXIBICAO", em);
         }
+        // O evento gravado deve ser exatamente o conteúdo cuja exibição foi comprovada.
+        // Hash do draft sozinho não vincula o payload fornecido no pedido de escrita.
+        if (hashCanonico(reg.payload) !== hashAtual) {
+          return negar(atorAuditavel, "CONTEUDO_ALTERADO_APOS_EXIBICAO", em);
+        }
         if ((reg.exigeProveniencia ?? reg.tipo === "FATO") && !provenienciaValida(reg.fontes)) {
           return negar(atorAuditavel, "PROVENIENCIA_OBRIGATORIA_AUSENTE", em);
         }

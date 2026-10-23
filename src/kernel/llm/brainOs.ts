@@ -169,11 +169,14 @@ export function produzirPropostaBrainOs(entrada: unknown): PropostaBrainOs {
       continue;
     }
     const fonteMatch = raw.fontes.find((f) => f.conteudo.toLocaleLowerCase("pt-BR").includes(termoEncontrado.toLocaleLowerCase("pt-BR"))) ?? raw.fontes[0]!;
+    const indiceTermo = fonteMatch.conteudo.toLocaleLowerCase("pt-BR").indexOf(termoEncontrado.toLocaleLowerCase("pt-BR"));
+    const inicioTrecho = Math.max(0, indiceTermo - 80);
+    const fimTrecho = Math.min(fonteMatch.conteudo.length, Math.max(inicioTrecho + 240, indiceTermo + termoEncontrado.length));
     inclusoesMesa.push({
       referenciaId: ref.referenciaId,
       versao: ref.versao,
       motivoInclusao: ref.motivoInclusaoSeAplicavel,
-      trechoCitado: fonteMatch.conteudo.slice(0, 240),
+      trechoCitado: fonteMatch.conteudo.slice(inicioTrecho, fimTrecho),
     });
   }
 
