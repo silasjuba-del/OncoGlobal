@@ -993,14 +993,16 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
       });
       else deps.sessoes.selecionarConsulta(token, null);
       if (!("codigo" in result)) deps.sessoes.registrarAlertasExibidos?.(token, result, result.alertas.map(a=>a.alertaId));
-      const integrado = !("codigo" in result) && deps.motorF1
-        ? await deps.motorF1.consultar({patientId:result.patientId,encounterId:result.encounterId,tumorLotId:result.tumorLotId},leituraInicial) : null;
+       const leituraClinica=leituraInicial && { ...leituraInicial, itens:leituraInicial.itens.filter(e=>
+         e.patientId===parsed.data.patientId || ['Contato','Contato@1','ReviewDecision','ReviewDecision@1'].includes(e.tipo)) };
+       const integrado = !("codigo" in result) && deps.motorF1
+         ? await deps.motorF1.consultar({patientId:result.patientId,encounterId:result.encounterId,tumorLotId:result.tumorLotId},leituraClinica) : null;
       // Recuperação da caixa usa cadastros globais no servidor/rota do canal; abrir consulta é leitura,
       // sem processar pendências de todos os pacientes nem atribuir contato por snapshot parcial.
       const contatosCanal = !("codigo" in result) ? lerRelatosConsultaCanal(deps.db,
-        { sessoes: deps.sessoes, token, agora: deps.agora() }, result.patientId) : undefined;
+         { sessoes: deps.sessoes, token, agora: deps.agora() }, result.patientId, leituraInicial?.itens) : undefined;
       return reply("codigo" in result ? 404 : 200, "codigo" in result ? result.codigo : "CONSULTA_CARREGADA",
-        integrado && !("codigo" in result) ? {...result,contatosCanal,dutos:projetarDutos(leituraInicial?.itens??[],{patientId:result.patientId,encounterId:result.encounterId,tumorLotId:result.tumorLotId},deps.corpus),retrato:integrado.retrato,...(integrado.visaoIntegrada?{visaoIntegrada:integrado.visaoIntegrada}:{})}:"codigo" in result?result:{...result,contatosCanal});
+         integrado && !("codigo" in result) ? {...result,contatosCanal,dutos:projetarDutos(leituraClinica?.itens??[],{patientId:result.patientId,encounterId:result.encounterId,tumorLotId:result.tumorLotId},deps.corpus),retrato:integrado.retrato,...(integrado.visaoIntegrada?{visaoIntegrada:integrado.visaoIntegrada}:{})}:"codigo" in result?result:{...result,contatosCanal});
     }
     if (rota === "rascunhoFlash" || rota === "prepararFlash") {
       const base = { patientId: Id, encounterId: Id, tumorLotId: Id.nullable(), plano: PlanoFlashEntrada };

@@ -74,7 +74,7 @@ it("projeta mensagem realmente vinculada para Paciente@1 e mantém precedência 
   const pacienteA = { patientId: CONTEXTO_A.patientId, nome: "Paciente A sintético", chaveDemografica: null,
     identificadores: [{ tipo: "TELEFONE" as const, valor: SENDER }] } satisfies CadastroVinculo;
   const cadastroAId = a.seed(CONTEXTO_A, "Paciente@1", paciente(CONTEXTO_A.patientId, pacienteA.nome));
-  const contatoAId = a.seed(CONTEXTO_A, "Contato", contato(CONTEXTO_A.patientId));
+  const contatoAId = a.seed(CONTEXTO_A, "Contato@1", contato(CONTEXTO_A.patientId));
 
   const ingresso = receberTransporteSintetico(a.db, { accountId: "conta-canal-alias-sintetica",
     canal: "WHATSAPP_SERVICO", providerMessageId: "mensagem-alias-sintetica", senderRef: SENDER,
@@ -95,13 +95,13 @@ it("projeta mensagem realmente vinculada para Paciente@1 e mantém precedência 
     identificadores: [{ tipo: "TELEFONE", valor: SENDER }] }));
 
   a.seed(CONTEXTO_B, "Paciente", paciente(CONTEXTO_B.patientId, "Paciente B sintético"));
-  a.seed(CONTEXTO_B, "ReviewDecision", { kind: "VinculoContato", contatoId: "contato-alias-sintetico",
+  a.seed(CONTEXTO_B, "ReviewDecision@1", { kind: "VinculoContato", contatoId: "contato-alias-sintetico",
     sourceEventId: contatoAId, patientId: CONTEXTO_B.patientId, encounterId: CONTEXTO_B.encounterId, tumorLotId: null });
   const aposTransferencia = lerMensagensOperacionaisCanal(a.db, acesso);
   expect(aposTransferencia[0]).toMatchObject({ patientId: null });
   expect(aposTransferencia[0]?.estadoVinculo).not.toBe("VINCULADO");
 
-  a.seed(CONTEXTO_A, "Contato", contato(CONTEXTO_A.patientId, EM), contatoAId);
+  a.seed(CONTEXTO_A, "Contato@1", contato(CONTEXTO_A.patientId, EM), contatoAId);
   const aposRevogacao = lerMensagensOperacionaisCanal(a.db, acesso);
   expect(aposRevogacao[0]).toMatchObject({ patientId: null, estadoVinculo: "REVOGADO" });
   expect(cadastroAId).toBeTruthy();
@@ -135,7 +135,7 @@ it("não atribui mensagem ambígua ao paciente aberto quando outro cadastro comp
   const a = abrir();
   a.seed(CONTEXTO_A, "Paciente@1", paciente(CONTEXTO_A.patientId, "Paciente A sintético"));
   a.seed(CONTEXTO_B, "Paciente@1", paciente(CONTEXTO_B.patientId, "Paciente B sintético"));
-  a.seed(CONTEXTO_A, "Contato", contato(CONTEXTO_A.patientId));
+  a.seed(CONTEXTO_A, "Contato@1", contato(CONTEXTO_A.patientId));
   a.seed(CONTEXTO_B, "Contato", { ...contato(CONTEXTO_B.patientId), contatoId: "contato-b-sintetico" });
   const texto = "Relato sintético sem atribuição segura.";
   const ingresso = receberTransporteSintetico(a.db, { accountId: "conta-ambigua-sintetica",

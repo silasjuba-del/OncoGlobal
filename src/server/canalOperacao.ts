@@ -44,14 +44,14 @@ function pacienteDoEvento(evento:ClinicalEvent){
 export function cadastrosCanal(db:DatabaseSync, snapshot?:readonly ClinicalEvent[]){
  const eventos=eventosVigentes(snapshot??lerEventosComIntegridade(db).itens);
  const pacientes=eventos.flatMap(e=>{const p=pacienteDoEvento(e);return p?[p]:[];});
- const contatos=eventos.filter(e=>e.tipo==='Contato'&&['CONFIRMADO','ASSINADO'].includes(e.revisao)).flatMap(event=>{const p=Contato.safeParse(dadosDoEvento(event));return p.success?[{event,value:p.data}]:[];});
+ const contatos=eventos.filter(e=>['Contato','Contato@1'].includes(e.tipo)&&['CONFIRMADO','ASSINADO'].includes(e.revisao)).flatMap(event=>{const p=Contato.safeParse(dadosDoEvento(event));return p.success?[{event,value:p.data}]:[];});
  const projetados=projetarVinculosContato(contatos,eventos);
  return pacientes.map(p=>({patientId:p.patientId,nome:p.nome,chaveDemografica:null,identificadores:projetados.filter(c=>c.estadoVinculo==='VINCULADO'&&c.patientIdResolvido===p.patientId&&c.value.revogadoEm===null&&c.value.canal==='WHATSAPP_SERVICO')
    .map(c=>({tipo:'TELEFONE' as const,valor:c.value.endereco}))}));
 }
 export function contatoRevogadoCanal(db:DatabaseSync,endereco:string,snapshot?:readonly ClinicalEvent[]):boolean {
  return eventosVigentes(snapshot??lerEventosComIntegridade(db).itens).some(e=>{
-  if(e.tipo!=='Contato'||!['CONFIRMADO','ASSINADO'].includes(e.revisao))return false;
+  if(!['Contato','Contato@1'].includes(e.tipo)||!['CONFIRMADO','ASSINADO'].includes(e.revisao))return false;
   const c=Contato.safeParse(dadosDoEvento(e));return c.success&&c.data.endereco===endereco&&c.data.revogadoEm!==null;
  });
 }
@@ -113,8 +113,8 @@ export function lerMensagensOperacionaisCanal(db:DatabaseSync,acesso:AcessoCanal
 
 /** A consulta recebe só relatos vinculados agora e conta vínculos de ingresso
  *  anteriormente atribuídos a este cadastro mas não validados no presente. */
-export function lerRelatosConsultaCanal(db:DatabaseSync,acesso:AcessoCanal,patientId:string){
- const eventos=lerEventosComIntegridade(db).itens;
+export function lerRelatosConsultaCanal(db:DatabaseSync,acesso:AcessoCanal,patientId:string,snapshot?:readonly ClinicalEvent[]){
+ const eventos=snapshot??lerEventosComIntegridade(db).itens;
  const cadastros=cadastrosCanal(db,eventos);
  const enderecos=[...new Set(cadastros.filter(c=>c.patientId===patientId).flatMap(c=>
    c.identificadores.filter(i=>i.tipo==='TELEFONE').map(i=>i.valor)))];
