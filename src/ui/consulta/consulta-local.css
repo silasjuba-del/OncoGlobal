@@ -82,3 +82,781 @@
   .consulta-ancoras, .consulta-controles, .consulta-appbar a { display: none; }
   .revisao-colunas { grid-template-columns: 1fr; }
 }
+
+/* ============ 21st.dev Combinações, Acordeões, Dropdowns e Modal ============ */
+.oncoassist-local {
+  --oc21-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --oc21-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --oc21-radius: 14px;
+  --oc21-glow: rgba(110, 86, 207, 0.12);
+  transition: background-color 0.28s var(--oc21-ease-out), color 0.28s var(--oc21-ease-out);
+}
+
+.oncoassist-local[data-combo-21st="violet-halo"] {
+  --consulta-ink: #1e1b38;
+  --consulta-accent: #5b43c6;
+  --consulta-accent-hover: #4732a8;
+  --consulta-muted: #56527a;
+  --consulta-line: #dcd8f6;
+  --consulta-soft: #f5f4ff;
+  --consulta-surface: #fcfcff;
+  --oc21-glow: rgba(110, 86, 207, 0.14);
+}
+
+.oncoassist-local[data-combo-21st="accessible-teal"] {
+  --consulta-ink: #132a28;
+  --consulta-accent: #0f6b63;
+  --consulta-accent-hover: #0a524c;
+  --consulta-muted: #3e5e5b;
+  --consulta-line: #c2e2de;
+  --consulta-soft: #effaf8;
+  --consulta-surface: #fbfefd;
+  --oc21-glow: rgba(15, 118, 110, 0.13);
+}
+
+.oncoassist-local[data-combo-21st="violet-dusk-linen"] {
+  --consulta-ink: #1a1b25;
+  --consulta-accent: #523ec8;
+  --consulta-accent-hover: #3f2ea6;
+  --consulta-muted: #5a5a75;
+  --consulta-line: #e2e2f2;
+  --consulta-soft: #f3f2fc;
+  --consulta-surface: #fbfbff;
+  --oc21-glow: rgba(132, 111, 235, 0.12);
+}
+
+.oncoassist-local[data-combo-21st="amber-glow"] {
+  --consulta-ink: #241914;
+  --consulta-accent: #b84214;
+  --consulta-accent-hover: #94320c;
+  --consulta-muted: #664c40;
+  --consulta-line: #edd6c8;
+  --consulta-soft: #fdf5ef;
+  --consulta-surface: #fffdfb;
+  --oc21-glow: rgba(217, 83, 30, 0.13);
+}
+
+.consulta-appbar-direita {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.oc21-toolbar {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.oc21-trigger-pill,
+.oc21-quick-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 38px;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid var(--consulta-line, #cfe0e6);
+  background: var(--consulta-surface, #ffffff);
+  color: var(--consulta-ink, #1d313d);
+  font-size: 1rem;
+  font-weight: 600;
+  box-shadow: 0 2px 8px -2px rgba(15, 23, 42, 0.08);
+  transition: transform 0.18s var(--oc21-spring), border-color 0.18s var(--oc21-ease-out), box-shadow 0.18s var(--oc21-ease-out);
+}
+
+.oc21-trigger-pill:hover,
+.oc21-quick-btn:hover {
+  transform: translateY(-1px);
+  border-color: var(--consulta-accent, #144563);
+  box-shadow: 0 6px 16px -4px var(--oc21-glow, rgba(20, 69, 99, 0.16));
+}
+
+.oc21-quick-btn--accent {
+  background: var(--consulta-soft, #f2f7f9);
+  color: var(--consulta-accent, #144563);
+}
+
+.oc21-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.8);
+}
+
+.oc21-chevron,
+.oc21-acordeon-icon {
+  display: inline-block;
+  transition: transform 0.25s var(--oc21-spring);
+}
+
+.oc21-chevron[data-aberto="1"],
+.oc21-acordeon-icon[data-aberto="1"] {
+  transform: rotate(180deg);
+}
+
+.oc21-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 60;
+  width: min(390px, calc(100vw - 2rem));
+  padding: 0.85rem;
+  border-radius: 16px;
+  border: 1px solid var(--consulta-line, #cfe0e6);
+  background: var(--consulta-surface, #ffffff);
+  color: var(--consulta-ink, #1d313d);
+  box-shadow: 0 20px 48px -12px rgba(15, 23, 42, 0.24);
+  display: grid;
+  gap: 0.75rem;
+}
+
+.oc21-dropdown-sec {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.oc21-dropdown-label {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--consulta-muted, #46606e);
+}
+
+.oc21-combo-list {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.oc21-combo-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  text-align: left;
+  padding: 0.5rem 0.65rem;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  background: var(--consulta-soft, #f2f7f9);
+}
+
+.oc21-combo-item[data-ativo="1"] {
+  border-color: var(--consulta-accent, #144563);
+  background: var(--consulta-surface, #ffffff);
+  box-shadow: 0 2px 10px -2px var(--oc21-glow);
+}
+
+.oc21-combo-txt {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.oc21-combo-txt strong {
+  font-size: 1rem;
+}
+
+.oc21-combo-txt small {
+  font-size: 1rem;
+  color: var(--consulta-muted, #46606e);
+}
+
+.oc21-focus-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.oc21-focus-chip {
+  font-size: 1rem;
+  padding: 0.3rem 0.55rem;
+  border-radius: 8px;
+}
+
+.oc21-focus-chip span {
+  font-family: Consolas, ui-monospace, monospace;
+  color: var(--consulta-accent, #144563);
+  margin-right: 0.25rem;
+}
+
+.oc21-dropdown-foot {
+  border-top: 1px solid var(--consulta-line, #cfe0e6);
+  padding-top: 0.55rem;
+}
+
+.oc21-open-modal-btn {
+  width: 100%;
+  text-align: center;
+  font-size: 1rem;
+}
+
+/* Acordeão elástico inspirado em BeUI Bouncy Accordion (#16042) */
+.oc21-acordeon {
+  border: 1px solid var(--consulta-line, #cfe0e6);
+  border-radius: 16px;
+  background: var(--consulta-surface, #ffffff);
+  box-shadow: 0 6px 22px -10px rgba(15, 23, 42, 0.09);
+  overflow: hidden;
+  transition: border-color 0.22s var(--oc21-ease-out), box-shadow 0.22s var(--oc21-ease-out);
+}
+
+.oc21-acordeon[data-acordeon-aberto="1"] {
+  border-color: var(--consulta-accent, #144563);
+  box-shadow: 0 12px 28px -12px var(--oc21-glow, rgba(20, 69, 99, 0.14));
+}
+
+.oc21-acordeon-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.65rem;
+  padding: 0.65rem 1rem;
+  background: var(--consulta-soft, #f2f7f9);
+  border-bottom: 1px solid var(--consulta-line, #cfe0e6);
+}
+
+.oc21-acordeon[data-acordeon-aberto="0"] .oc21-acordeon-bar {
+  border-bottom-color: transparent;
+}
+
+.oc21-acordeon-trigger {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-align: left;
+  border: 0 !important;
+  background: transparent !important;
+  padding: 0.25rem !important;
+}
+
+.oc21-acordeon-num {
+  display: inline-grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  background: var(--consulta-accent, #144563);
+  color: #ffffff;
+  font-family: Consolas, ui-monospace, monospace;
+  font-size: 1rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.oc21-acordeon-titles {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.oc21-acordeon-titles strong {
+  font-size: 1.05rem;
+}
+
+.oc21-acordeon-titles small {
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--consulta-muted, #46606e);
+}
+
+.oc21-focus-only-btn {
+  flex-shrink: 0;
+  font-size: 1rem !important;
+  padding: 0.35rem 0.65rem !important;
+  border-radius: 999px !important;
+}
+
+.oc21-acordeon-body {
+  padding: 1rem 1.25rem 1.25rem;
+}
+
+/* Modal Progressive Blur (#4667) */
+.oc21-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  background: rgba(15, 23, 42, 0.52);
+  backdrop-filter: blur(8px);
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+}
+
+.oc21-modal-card {
+  width: min(880px, 100%);
+  max-height: calc(100dvh - 2rem);
+  overflow: auto;
+  border-radius: 20px;
+  border: 1px solid var(--consulta-line, #cfe0e6);
+  background: var(--consulta-surface, #ffffff);
+  color: var(--consulta-ink, #1d313d);
+  box-shadow: 0 28px 70px -16px rgba(15, 23, 42, 0.36);
+  padding: 1.35rem;
+  display: grid;
+  gap: 1.15rem;
+}
+
+.oc21-modal-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  border-bottom: 1px solid var(--consulta-line, #cfe0e6);
+  padding-bottom: 0.85rem;
+}
+
+.oc21-modal-head h2 {
+  margin: 0.25rem 0;
+  font-size: 1.35rem;
+}
+
+.oc21-modal-head p {
+  margin: 0;
+  font-size: 1rem;
+  color: var(--consulta-muted, #46606e);
+}
+
+.oc21-badge {
+  display: inline-block;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  background: var(--consulta-soft, #f2f7f9);
+  color: var(--consulta-accent, #144563);
+}
+
+.oc21-modal-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+  gap: 0.85rem;
+}
+
+.oc21-combo-card {
+  border: 1.5px solid var(--consulta-line, #cfe0e6);
+  border-radius: 14px;
+  padding: 0.95rem;
+  background: var(--consulta-soft, #f2f7f9);
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  width: 100%;
+  cursor: pointer;
+  display: grid;
+  gap: 0.55rem;
+  transition: transform 0.18s var(--oc21-spring), border-color 0.18s var(--oc21-ease-out);
+}
+
+.oc21-combo-card:hover {
+  transform: translateY(-2px);
+}
+
+.oc21-combo-card:focus-visible {
+  outline: 3px solid var(--consulta-accent, #144563);
+  outline-offset: 2px;
+}
+
+.oc21-combo-card[data-ativo="1"] {
+  border-color: var(--consulta-accent, #144563);
+  background: var(--consulta-surface, #ffffff);
+  box-shadow: 0 8px 24px -8px var(--oc21-glow);
+}
+
+.oc21-combo-card-top {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.oc21-combo-card-top strong {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.oc21-combo-card-top small {
+  color: var(--consulta-muted, #46606e);
+  font-size: 1rem;
+}
+
+.oc21-swatch {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  flex-shrink: 0;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.oc21-state-pill {
+  margin-left: auto;
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  background: var(--consulta-soft, #f2f7f9);
+  color: var(--consulta-accent, #144563);
+}
+
+.oc21-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.oc21-comp-chip {
+  font-size: 1rem;
+  padding: 0.18rem 0.5rem;
+  border-radius: 6px;
+  border: 1px solid var(--consulta-line, #cfe0e6);
+  background: var(--consulta-surface, #ffffff);
+}
+
+.oc21-modal-sec {
+  border-top: 1px solid var(--consulta-line, #cfe0e6);
+  padding-top: 0.85rem;
+  display: grid;
+  gap: 0.65rem;
+}
+
+.oc21-sec-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.oc21-sec-header h3 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.oc21-sec-actions {
+  display: flex;
+  gap: 0.45rem;
+}
+
+.oc21-group-matrix {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+  gap: 0.5rem;
+}
+
+.oc21-group-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-align: left;
+}
+
+.oc21-group-btn div {
+  display: flex;
+  flex-direction: column;
+}
+
+.oc21-group-btn small {
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--consulta-muted, #46606e);
+}
+
+.oc21-group-num {
+  font-family: Consolas, ui-monospace, monospace;
+  font-weight: 700;
+  color: var(--consulta-accent, #144563);
+}
+
+/* Partition Bar (#26545) */
+.oc21-partition-bar {
+  display: flex;
+  gap: 4px;
+  border-radius: 10px;
+  overflow: hidden;
+  padding: 4px;
+  background: var(--consulta-soft, #f2f7f9);
+  border: 1px solid var(--consulta-line, #cfe0e6);
+}
+
+.oc21-partition-seg {
+  min-width: 68px;
+  padding: 0.4rem 0.55rem;
+  border-radius: 7px;
+  background: var(--consulta-surface, #ffffff);
+  border: 1px solid var(--consulta-line, #cfe0e6);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.35rem;
+  font-size: 1rem;
+}
+
+/* ============ Bento Grid de Dados Mínimos (RevisaoClinica) & Sub-acordeões ============ */
+.revisao-clinica-bento {
+  display: grid;
+  gap: 1.15rem;
+}
+
+.revisao-clinica-topo {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  padding-bottom: 0.65rem;
+  border-bottom: 1px solid var(--consulta-line, #cfe0e6);
+}
+
+.revisao-clinica-topo h2 {
+  margin: 0;
+}
+
+.revisao-clinica-sub {
+  margin: 0.2rem 0 0;
+  color: var(--consulta-muted, #46606e);
+  font-size: 1rem;
+}
+
+.revisao-clinica-toolbar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.oc21-segmented {
+  display: inline-flex;
+  padding: 3px;
+  border-radius: 999px;
+  background: var(--consulta-soft, #f2f7f9);
+  border: 1px solid var(--consulta-line, #cfe0e6);
+  gap: 2px;
+}
+
+.oc21-segmented button {
+  border: 0 !important;
+  border-radius: 999px !important;
+  background: transparent !important;
+  padding: 0.35rem 0.75rem !important;
+  font-size: 1rem;
+  color: var(--consulta-muted, #46606e);
+  transition: background-color 0.18s var(--oc21-ease-out), color 0.18s var(--oc21-ease-out), box-shadow 0.18s var(--oc21-ease-out);
+}
+
+.oc21-segmented button[data-ativo="1"] {
+  background: var(--consulta-surface, #ffffff) !important;
+  color: var(--consulta-accent, #144563) !important;
+  box-shadow: 0 2px 8px -2px rgba(15, 23, 42, 0.12);
+}
+
+.ficha-bento-table {
+  display: block;
+  width: 100%;
+  border-collapse: separate;
+}
+
+.ficha-bento-table caption {
+  display: block;
+  text-align: left;
+  font-weight: 700;
+  color: var(--consulta-muted, #46606e);
+  margin-bottom: 0.65rem;
+  font-size: 1rem;
+}
+
+.ficha-bento-table thead {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.ficha-bento-table tbody {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 16.5rem), 1fr));
+  gap: 0.75rem;
+}
+
+.ficha-bento-table tbody tr {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.45rem;
+  padding: 0.85rem 1rem;
+  border-radius: 14px;
+  border: 1px solid var(--consulta-line, #cfe0e6);
+  background: var(--consulta-soft, #f2f7f9);
+  transition: transform 0.18s var(--oc21-spring), border-color 0.18s var(--oc21-ease-out), box-shadow 0.18s var(--oc21-ease-out);
+}
+
+.ficha-bento-table tbody tr:hover {
+  transform: translateY(-2px);
+  border-color: var(--consulta-accent, #144563);
+  background: var(--consulta-surface, #ffffff);
+  box-shadow: 0 10px 24px -10px var(--oc21-glow, rgba(20, 69, 99, 0.14));
+}
+
+.ficha-bento-table tbody th {
+  text-align: left;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--consulta-accent, #144563);
+}
+
+.ficha-bento-table tbody td {
+  font-size: 1rem;
+}
+
+.ficha-bento-table tbody td[data-vazio="0"] {
+  font-weight: 600;
+}
+
+.ficha-bento-table tbody td[data-vazio="1"] {
+  color: var(--consulta-muted, #46606e);
+}
+
+.ficha-estado-pill {
+  display: inline-block;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 600;
+  background: var(--consulta-surface, #ffffff);
+  border: 1px solid var(--consulta-line, #cfe0e6);
+  margin-right: 0.5rem;
+}
+
+.ficha-fonte-details {
+  display: inline-block;
+  margin-top: 0.25rem;
+}
+
+.ficha-fonte-details summary {
+  cursor: pointer;
+  color: var(--consulta-accent, #144563);
+  font-weight: 600;
+}
+
+/* Acordeões de <details> em RevisaoClinica e demais áreas */
+.revisao-clinica-acordeoes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 24rem), 1fr));
+  gap: 0.75rem;
+  align-items: start;
+}
+
+.oc21-details-card,
+.revisao-clinica-acordeoes > details {
+  border: 1px solid var(--consulta-line, #cfe0e6);
+  border-radius: 14px;
+  background: var(--consulta-surface, #ffffff);
+  padding: 0.75rem 1rem;
+  box-shadow: 0 4px 14px -6px rgba(15, 23, 42, 0.06);
+  transition: border-color 0.2s var(--oc21-ease-out), box-shadow 0.2s var(--oc21-ease-out);
+}
+
+.oc21-details-card[open],
+.revisao-clinica-acordeoes > details[open] {
+  border-color: var(--consulta-accent, #144563);
+  box-shadow: 0 10px 26px -10px var(--oc21-glow, rgba(20, 69, 99, 0.14));
+}
+
+.oc21-details-card > summary,
+.revisao-clinica-acordeoes > details > summary {
+  cursor: pointer;
+  font-weight: 700;
+  color: var(--consulta-ink, #1d313d);
+  padding: 0.2rem 0;
+}
+
+.oc21-details-body {
+  margin-top: 0.65rem;
+  padding-top: 0.65rem;
+  border-top: 1px solid var(--consulta-line, #cfe0e6);
+}
+
+.revisao-pack-selector {
+  padding: 0.85rem 1rem;
+  border-radius: 14px;
+  background: var(--consulta-soft, #f2f7f9);
+  border: 1px solid var(--consulta-line, #cfe0e6);
+}
+
+.revisao-pack-card {
+  padding: 1rem 1.2rem;
+  border-radius: 14px;
+  border: 1px solid var(--consulta-line, #cfe0e6);
+  background: var(--consulta-surface, #ffffff);
+  display: grid;
+  gap: 0.65rem;
+}
+
+/* Seção 02 (#consulta-documentos): Upload e Transcrição lado a lado em Bento Grid */
+#consulta-documentos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 25rem), 1fr));
+  gap: 1.15rem;
+  align-items: start;
+}
+
+#consulta-documentos > section {
+  padding: 1.1rem 1.25rem;
+  border-radius: 14px;
+  border: 1px solid var(--consulta-line, #cfe0e6);
+  background: var(--consulta-soft, #f2f7f9);
+  display: grid;
+  gap: 0.75rem;
+}
+
+#consulta-documentos > section h3 {
+  margin: 0;
+}
+
+#consulta-documentos > section p {
+  margin: 0;
+}
+
+#consulta-documentos textarea {
+  width: 100%;
+  min-height: 7rem;
+}
+
+/* OncoAssist e Medicamentos em cards modernos */
+section[aria-label="OncoAssist — documentos"],
+section[aria-label="Reconciliação de medicamentos"] {
+  padding: 1.1rem 1.25rem;
+  border-radius: 14px;
+  border: 1px solid var(--consulta-line, #cfe0e6);
+  background: var(--consulta-soft, #f2f7f9);
+  display: grid;
+  gap: 0.75rem;
+}
+
+section[aria-label="Reconciliação de medicamentos"] textarea {
+  width: 100%;
+  min-height: 5.5rem;
+}
+
+/* Impressão clínica nunca herda o display:none dos acordeões recolhidos. */
+@media print {
+  .oncoassist-local .oc21-acordeon-body { display: block !important; }
+  .oncoassist-local .oc21-details-card > .oc21-details-body,
+  .oncoassist-local .revisao-clinica-acordeoes > details > .oc21-details-body { display: block !important; }
+  .oncoassist-local .oc21-toolbar,
+  .oncoassist-local .oc21-focus-only-btn,
+  .oncoassist-local .oc21-acordeon-icon,
+  .oncoassist-local .oc21-modal-backdrop { display: none !important; }
+}
