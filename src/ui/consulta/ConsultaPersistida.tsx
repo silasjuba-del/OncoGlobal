@@ -411,7 +411,7 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, aoAbrirCanal,
     <CockpitJEV visao={visaoPronta} ocupado={ocupado || rxEmCurso} aoComando={comandoJev}
       mudancasExtra={<div id="consulta-resumo" className="consulta-secao" tabIndex={-1}>
     <RelatosCanalConsulta contexto={contexto} mensagens={visaoPronta.contatosCanal?.mensagens ?? []}
-      pendenciasSemAtribuicao={visaoPronta.contatosCanal?.pendenciasSemAtribuicao ?? 0}
+      pendenciasVinculoIngresso={visaoPronta.contatosCanal?.pendenciasVinculoIngresso ?? 0}
       {...(aoAbrirCanal ? { aoAbrirCanal } : {})} />
     <VisaoIntegradaMinima {...(visaoPronta.retrato ? {retrato:visaoPronta.retrato}: {})}
       {...(visaoPronta.visaoIntegrada ? {visao:visaoPronta.visaoIntegrada}: {})} />

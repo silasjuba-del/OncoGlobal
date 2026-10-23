@@ -176,11 +176,15 @@ export function lerConsulta(db: DatabaseSync, patientId: string, agora: string, 
     instrumentos?: readonly RegraInstrumento[];
     tetosCumulativos?: readonly LimiteExposicaoCumulativa[];
     condicionais?: {regras:EntradaCondicionaisClinicas["regras"];termos:NonNullable<EntradaCondicionaisClinicas["regrasTermos"]>} } = {}) {
-  const leitura = lerEventosComIntegridade(db,{patientId,contatosGlobais:true});
+  const leitura = lerEventosComIntegridade(db,{patientId,contatosGlobais:true,pacientesGlobais:true});
   config.aoLer?.(leitura);
   // Só as pendências com identidade deste paciente; evento sem patientId é diagnóstico global, nunca de todos os prontuários.
   const pendenciasIntegridade = leitura.pendenciasIntegridade.filter((p) => p.patientId === patientId);
-  const all = leitura.itens, paciente = porTipo(all, "Paciente", Paciente, ["Paciente@1"])
+  // O cadastro global serve apenas à reconciliação do canal; o prontuário
+  // e o motor clínico não devem receber a identidade de outros pacientes.
+  const all = leitura.itens.filter(e => e.patientId === patientId
+    || ['Contato','Contato@1','ReviewDecision','ReviewDecision@1'].includes(e.tipo));
+  const paciente = porTipo(all, "Paciente", Paciente, ["Paciente@1"])
     .filter((x) => x.value.patientId === patientId && x.event.patientId === patientId).at(-1)?.value;
   // Cadastro corrompido não some: o 404 leva o diagnóstico, sem reconstruir identidade pelo payload inválido.
   if (!paciente) return { codigo: "PACIENTE_NAO_ENCONTRADO" as const, pendenciasIntegridade };

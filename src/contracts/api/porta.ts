@@ -287,8 +287,8 @@ export interface MensagemCanalVisao {
 
 export interface CaixaCanalVisao {
   mensagens: readonly MensagemCanalVisao[];
-  /** Contagem geral da caixa, sem atribuição clínica ao paciente da consulta. */
-  pendenciasSemAtribuicao?: number | undefined;
+  /** Vínculo de ingresso previamente associado ao cadastro, hoje não validado; não prova identidade clínica. */
+  pendenciasVinculoIngresso?: number | undefined;
 }
 
 export type CampoOrigemApac = "estadiamentos" | "histologia" | "topografia" | "cid" | null;
