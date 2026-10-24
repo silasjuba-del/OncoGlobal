@@ -245,7 +245,7 @@ function confirmar(deps: Deps, token: string, raw: unknown, contexto: Contexto, 
     revision: 0, diagnostics: [], criadoEm: em });
   const fonte: Fonte = { sourceId: draft.sourceId, classe: "MANUAL", localizador: null, dataClinica: base.hoje,
     dataCaptura: em, versao: String(resposta.apac.versao), contentHash: requestHash };
-  const gravacao = executarConfirmacao(deps.db, { operationId, ...contexto, reviewDecisionId: revisaoId,
+  const gravacao = executarConfirmacao(deps.db, { autorizadoEm: deps.agora(), operationId, ...contexto, reviewDecisionId: revisaoId,
     sessao, em, registros: [{ draftId: canonicoId, expectedRevision: 0, eventId, tipo: "APAC",
       payload: resposta.apac, fontes: [fonte], revisao: "CONFIRMADO", supersedesEventId: r.anteriorEventId }] });
   if (gravacao.estado === "NEGADA") throw new Error("APAC_TRANSACAO_NEGADA");

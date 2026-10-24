@@ -181,7 +181,7 @@ export function criarWriterClinicoGateway(deps: {
       const emEscrita = operacaoAnterior?.criadoEm ?? em;
       let gravacao;
       try {
-        gravacao = confirmar(deps.db, {
+        gravacao = confirmar(deps.db, { autorizadoEm: deps.agora(), 
           operationId: pedido.operationId,
           patientId: pedido.contexto.patientId,
           encounterId: pedido.contexto.encounterId,

@@ -624,7 +624,7 @@ export function rotearExtracaoERevisao(
         sourceId: fonteVinculoId, rawRef: `review-link:${rascunhoFonte.draftId}`, payload: reviewPayload,
         diagnostics: ["DECISAO_DE_VINCULO_MEDICO"], revision: 0, criadoEm: em,
       });
-      const resultadoVinculo = confirmar(deps.db, {
+      const resultadoVinculo = confirmar(deps.db, { autorizadoEm: deps.agora(), 
         operationId, patientId: parsed.data.patientId,
         tumorLotId: identityOnly ? null : consultaVinculo.tumorLotId ?? null, encounterId: consultaVinculo.encounterId,
         reviewDecisionId: operationId, sessao, em, registros: [{
@@ -813,7 +813,7 @@ export function rotearExtracaoERevisao(
     if (comprovante.conteudoHash !== documento.conteudoHash || !exibidos.some((item) =>
       item.documentId === documento.documentId && item.documentVersion === documento.documentVersion
       && item.conteudoHash === documento.conteudoHash)) return reply(409, "CONTEUDO_ALTERADO_APOS_EXIBICAO");
-    const result = confirmar(deps.db, {
+    const result = confirmar(deps.db, { autorizadoEm: deps.agora(), 
       operationId, patientId: parsed.data.patientId,
       tumorLotId: contexto.tumorLotId ?? null, encounterId: contexto.encounterId,
       reviewDecisionId: operationId, sessao, em,

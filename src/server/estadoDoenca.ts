@@ -63,7 +63,7 @@ export function rotearEstadoDoenca(deps:ServidorDeps,token:string,rota:string,ra
   const exibido=deps.sessoes.bundleExibido(token,contexto)?.some(d=>d.documentId===draft.draftId&&d.documentVersion===1&&d.conteudoHash===s.conteudoHash);
   if(!exibido)return falha(409,"CONTEUDO_NAO_EXIBIDO");
   const eventId=`evento-${draft.draftId}`;
-  const resultado=confirmar(deps.db,{...contexto,operationId:s.operationId,reviewDecisionId:s.operationId,sessao,em:deps.agora(),
+  const resultado=confirmar(deps.db, { autorizadoEm: deps.agora(), ...contexto,operationId:s.operationId,reviewDecisionId:s.operationId,sessao,em:deps.agora(),
     registros:[{draftId:draft.draftId,expectedRevision:0,eventId,tipo:"FATO",payload:esperado,fontes:[s.fonte],revisao:"CONFIRMADO"}]});
   return resultado.estado==="NEGADA"?falha(409,resultado.motivo??"REGISTRO_NEGADO"):{status:200,body:{codigo:resultado.estado,eventId}};
 }

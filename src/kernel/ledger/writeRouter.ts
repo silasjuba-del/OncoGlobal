@@ -31,7 +31,10 @@ export interface Confirmacao {
   reviewDecisionId: string;
   sessao: Sessao;
   registros: readonly RegistroConfirmacao[];
+  /** Instante dos eventos de uma escrita nova; num replay vale o criadoEm já gravado da operação. */
   em: string;
+  /** Relógio atual da requisição, em que a sessão é autorizada (inclusive no replay); ausente = em. */
+  autorizadoEm?: string;
 }
 
 /**
@@ -64,25 +67,29 @@ export function confirmar(db: DatabaseSync, req: Confirmacao): Gravacao {
   // Antes inclusive de replay: mudar o tipo/payload do evento não contorna o tipo do draft.
   if (promoveJev()) return { estado: "NEGADA", resultRef: null, motivo: "PROPOSTA_DOCUMENTAL_NAO_PROMOVIVEL" };
   if (apacCanonicaInvalida()) return { estado: "NEGADA", resultRef: null, motivo: "CONFIRMACAO_APAC_DIVERGENTE" };
+  // A sessão é autorizada no relógio atual antes de qualquer replay; o instante histórico não a valida.
+  const autorizadoEm = req.autorizadoEm ?? req.em;
+  const invalido = motivoInvarianteEscrita({ sessao: req.sessao, em: autorizadoEm });
+  if (invalido) {
+    auditar(db, { ator: { tipo: "SESSAO", id: req.sessao.medicoId }, acaoPedida: "CONFIRMAR", decisao: "NEGADA",
+      motivoCodigo: invalido, politicaVersao: "W2-01", em: autorizadoEm });
+    return { estado: "NEGADA", resultRef: null, motivo: invalido };
+  }
+  // Identidade da operação: num replay, os eventos são remontados com o criadoEm já gravado.
+  const criadoEm = (db.prepare("SELECT criadoEm FROM operation WHERE operationId=?")
+    .get(req.operationId) as { criadoEm: string } | undefined)?.criadoEm ?? req.em;
   const eventos = req.registros.map((r, i) => ClinicalEvent.parse({
     eventId: r.eventId, operationId: req.operationId, eventIndex: i,
     patientId: req.patientId, tumorLotId: req.tumorLotId, encounterId: req.encounterId,
     tipo: r.tipo, payload: { reviewDecisionId: req.reviewDecisionId, data: r.payload },
-    fontes: r.fontes, revisao: r.revisao, criadoEm: req.em,
+    fontes: r.fontes, revisao: r.revisao, criadoEm,
     criadoPor: { tipo: "SESSAO", id: req.sessao.medicoId },
     supersedesEventId: r.supersedesEventId ?? null,
   }));
   const op = { operationId: req.operationId, payloadHash: hashPayload(eventos),
-    resultRef: eventos[0]?.eventId ?? null, criadoEm: req.em };
+    resultRef: eventos[0]?.eventId ?? null, criadoEm };
   const replay = resultadoExistente(db, op);
   if (replay) return replay;
-  // Replay acima devolve o recibo já gravado; escrita nova exige as invariantes comuns.
-  const invalido = motivoInvarianteEscrita(req);
-  if (invalido) {
-    auditar(db, { ator: { tipo: "SESSAO", id: req.sessao.medicoId }, acaoPedida: "CONFIRMAR", decisao: "NEGADA",
-      motivoCodigo: invalido, politicaVersao: "W2-01", em: req.em });
-    return { estado: "NEGADA", resultRef: null, motivo: invalido };
-  }
   try {
     return transacao(db, () => {
       if (promoveJev()) return { estado: "NEGADA", resultRef: null, motivo: "PROPOSTA_DOCUMENTAL_NAO_PROMOVIVEL" };

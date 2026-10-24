@@ -6,7 +6,8 @@ import { lerDraft } from "../ledger/drafts.js";
 
 /** Única porta de confirmação: a sessão é resolvida pelo servidor, nunca pelo corpo HTTP. */
 export function executarConfirmacao(db:DatabaseSync,req:Confirmacao) {
-  const sessao=Sessao.safeParse(req.sessao), agora=Date.parse(req.em);
+  // Autoriza no relógio atual da requisição; o instante histórico da operação não valida a sessão.
+  const sessao=Sessao.safeParse(req.sessao), agora=Date.parse(req.autorizadoEm ?? req.em);
   if(!sessao.success || !Number.isFinite(agora) || Date.parse(sessao.data.emitidaEm)>agora || Date.parse(sessao.data.expiraEm)<=agora)
     throw new Error("SESSAO_INVALIDA");
   if(!req.patientId.trim() || !req.encounterId.trim()) throw new Error("CONTEXTO_EXPLICITO_OBRIGATORIO");
