@@ -236,7 +236,7 @@ function confirmarBlocoNaTransacao(deps: ServidorDeps, token: string, input: Con
     for(const a of auxiliares) {
       if(!lerDraft(deps.db,a.draftId))salvarDraft(deps.db,{draftId:a.draftId,patientId:input.patientId,sourceId:"flash-assinatura",rawRef:"referencia-local",payload:a.payload,diagnostics:[],revision:0,criadoEm:em});
     }
-    const result=confirmar(deps.db,{operationId:input.idempotencyKey,patientId:input.patientId,tumorLotId:input.tumorLotId,encounterId:input.encounterId,
+    const result=confirmar(deps.db, { autorizadoEm: deps.agora(), operationId:input.idempotencyKey,patientId:input.patientId,tumorLotId:input.tumorLotId,encounterId:input.encounterId,
       reviewDecisionId,sessao,em,registros:[...registros,...auxiliares.map(a=>({...a,expectedRevision:0,fontes:[],revisao:"CONFIRMADO" as const}))]});
     if(result.estado!=="NEGADA") registrarCienciaAlertas(deps.db,contexto,input.reconhecerAlertas,sessao.medicoId,em,input.idempotencyKey);
     return {status:result.estado==="NEGADA"?409:200,body:{codigo:result.estado,resultRef:result.resultRef},

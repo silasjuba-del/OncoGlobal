@@ -363,7 +363,7 @@ function confirmar(deps: Deps, token: string, raw: unknown, contexto: Contexto, 
     registros.push({ draftId, expectedRevision: 0, eventId: `rx-event-${key}-${i}`, tipo: e.tipo,
       payload: e.payload, fontes: [fonte], revisao: "CONFIRMADO", supersedesEventId: e.supersedesEventId });
   }
-  const gravado = executarConfirmacao(deps.db, { operationId, ...contexto, reviewDecisionId,
+  const gravado = executarConfirmacao(deps.db, { autorizadoEm: deps.agora(), operationId, ...contexto, reviewDecisionId,
     sessao: deps.sessoes.obter(token)!, em, registros });
   if (gravado.estado === "NEGADA") return negar(gravado.motivo ?? "PRESCRICAO_TRANSACAO_NEGADA");
   return retorno(gravado.estado, eventoId);

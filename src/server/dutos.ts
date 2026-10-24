@@ -182,7 +182,7 @@ function executarDuto(deps: DepsDutos, token: string, rota: string, entrada: unk
  const fonte:Fonte={sourceId:`duto-${key}`,classe:'MANUAL',localizador:null,dataClinica:em.slice(0,10),dataCaptura:em,versao:'1',contentHash:requestHash};
  const draft=salvarDraft(deps.db,{draftId,patientId:c.patientId,sourceId:fonte.sourceId,rawRef:draftId,payload:{contexto,valor:payload},diagnostics:[],revision:0,criadoEm:em});
  try{
-  const r=executarConfirmacao(deps.db,{operationId:c.operationId,patientId:c.patientId,encounterId:c.encounterId,tumorLotId:c.tumorLotId,reviewDecisionId:`duto-review-${key}`,sessao:auth.data,em,
+  const r=executarConfirmacao(deps.db, { autorizadoEm: deps.agora(), operationId:c.operationId,patientId:c.patientId,encounterId:c.encounterId,tumorLotId:c.tumorLotId,reviewDecisionId:`duto-review-${key}`,sessao:auth.data,em,
    registros:[{draftId:draft.draftId,expectedRevision:draft.revision,eventId,tipo,payload,fontes:tipo==='TreatmentAdministration'?[fonte,AdminPedido.parse(entrada).administracao.fonte]:[fonte],revisao:'CONFIRMADO',supersedesEventId}]});
   return r.estado==='NEGADA'?negar(r.motivo??'DUTO_COMANDO_NEGADO'):{status:200,body:{codigo:r.estado,eventId}};
  }catch{throw new Error('DUTO_COMANDO_NAO_CONFIRMADO');}

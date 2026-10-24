@@ -65,15 +65,10 @@ describe("G2 · Cenário 1: Replay com relógio avançado e pinagem de criadoEm 
       expect(replayMesmoInstante).toEqual({ estado: "REPLAY", resultRef: "ev-c1-direto" });
       expect(listarEventos(db, G2_CONTEXTO.patientId)).toHaveLength(1);
 
-      // Defeito conhecido OG-001 / D-03: se um chamador não pinar `em` da operação existente e passar `G2_INSTANTE_RETRY`,
-      // `writeRouter.ts:71,75` embute `criadoEm: req.em` no `ClinicalEvent` antes de calcular `hashPayload(eventos)`,
-      // gerando `OPERATION_HASH_CONFLICT` mesmo com payload clínico idêntico.
+      // Invertido em G3c (OG-001 / D-03 corrigidos): o kernel remonta o replay com o criadoEm já gravado da
+      // operação; um chamador que não pine `em` e passe `G2_INSTANTE_RETRY` obtém REPLAY (antes: OPERATION_HASH_CONFLICT).
       const retryRelogioAvancadoSemPino = confirmar(db, { ...baseReq, em: G2_INSTANTE_RETRY });
-      expect(retryRelogioAvancadoSemPino).toEqual({
-        estado: "NEGADA",
-        resultRef: null,
-        motivo: "OPERATION_HASH_CONFLICT",
-      });
+      expect(retryRelogioAvancadoSemPino).toEqual({ estado: "REPLAY", resultRef: "ev-c1-direto" });
       // Invariante preservada: mesmo quando negado, o evento original não é duplicado nem alterado.
       expect(listarEventos(db, G2_CONTEXTO.patientId)).toHaveLength(1);
     } finally {
@@ -514,18 +509,18 @@ describe("G2 · Cenário 4: Sessão expirada / não iniciada no instante da tent
       // 2) Escrita original com sessão válida grava:
       expect(confirmar(db, req)).toEqual({ estado: "GRAVADA", resultRef: "ev-c4-sessao" });
 
-      // 3) Defeito conhecido OG-001 (`writeRouter.ts:77-80`):
-      // Como `resultadoExistente(db, op)` é chamado ANTES de `motivoInvarianteEscrita(req)`,
-      // e `ClinicalEvent` armazena apenas `criadoPor: { tipo: "SESSAO", id: req.sessao.medicoId }` (sem `expiraEm`),
-      // chamar `confirmar` diretamente com uma sessão já expirada (mas mesmo `medicoId` e `em` pinado) retorna `REPLAY`!
+      // 3) Invertido em G3c (OG-001 corrigido): a sessão é validada antes do replay, no relógio da requisição
+      // (`autorizadoEm`, ausente = `em`). Replay direto no kernel com sessão expirada é negado (antes: REPLAY).
       const replayComSessaoExpiradaDiretoNoKernel = confirmar(db, {
         ...req,
         sessao: sessaoExpiradaNaOrigem,
       });
       expect(replayComSessaoExpiradaDiretoNoKernel).toEqual({
-        estado: "REPLAY",
-        resultRef: "ev-c4-sessao",
+        estado: "NEGADA",
+        resultRef: null,
+        motivo: "SESSAO_EXPIRADA",
       });
+      expect(listarEventos(db, G2_CONTEXTO.patientId)).toHaveLength(1);
 
       // 4) Já no `writerClinico.persistir` (`writerClinico.ts:108`), a sessão é validada contra o relógio atual (`deps.agora()`)
       // ANTES de consultar `operation.criadoEm` e chamar `confirmar`:
