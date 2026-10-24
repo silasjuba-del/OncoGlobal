@@ -299,7 +299,7 @@ export const COPY_PT_BR = {
   },
   flashFechamento: {
     rascunhoSalvo: "Rascunho da Consulta Flash salvo",
-    finalizada: "Consulta Flash finalizada e assinada pelo médico",
+    finalizada: "Documentos selecionados da Consulta Flash assinados pelo médico",
     erroRascunho: "Não foi possível salvar o rascunho",
     erroFinalizar: "Não foi possível finalizar",
     salvando: "Salvando…",

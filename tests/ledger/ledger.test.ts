@@ -64,7 +64,7 @@ describe("W2-01 ledger", () => {
     });
     expect(lerDraft(db, "a")?.payload).toEqual(draft("a").payload);
     expect(listarEventos(db, "Paciente Teste 01")).toHaveLength(1);
-    expect(db.prepare("SELECT motivoCodigo FROM audit_event").get()?.motivoCodigo).toBe("EXPECTED_REVISION_CONFLICT");
+    expect(db.prepare("SELECT motivoCodigo FROM audit_event WHERE decisao='NEGADA'").get()?.motivoCodigo).toBe("EXPECTED_REVISION_CONFLICT");
     db.close();
   });
 
@@ -87,7 +87,7 @@ describe("W2-01 ledger", () => {
       estado: "NEGADA", motivo: "OPERATION_HASH_CONFLICT",
     });
     expect(listarEventos(db, "Paciente Teste 01")).toHaveLength(1);
-    expect(db.prepare("SELECT motivoCodigo FROM audit_event").get()?.motivoCodigo).toBe("OPERATION_HASH_CONFLICT");
+    expect(db.prepare("SELECT motivoCodigo FROM audit_event WHERE decisao='NEGADA'").get()?.motivoCodigo).toBe("OPERATION_HASH_CONFLICT");
     db.close();
   });
 

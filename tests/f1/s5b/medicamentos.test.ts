@@ -12,20 +12,28 @@ function fixture(){const db=new DatabaseSync(':memory:');criarSchema(db);dbs.pus
  const ctx={patientId:'paciente-sintetico',encounterId:'consulta-sintetica',tumorLotId:null};sessoes.selecionarConsulta(token,ctx);
  return {db,sessoes,agora,token,ctx,avancar:()=>{em='2026-10-12T10:01:00Z';}};}
 it('lista completa confirmada substitui anterior, emite commit uma vez e replay conserva bytes',()=>{const f=fixture();let commits=0;aoCommitar(f.db,()=>commits++);
- const pedido={...f.ctx,operationId:'med-primeira',medicamentos:['Pemetrexede'],listaAtualCompleta:true};expect(reconciliarMedicamentos(pedido,f.token,f)).toMatchObject({status:201,body:{codigo:'GRAVADA'}});
+ const pedido={...f.ctx,operationId:'med-primeira',medicamentos:['Pemetrexede'],expectedEventId:null,listaAtualCompleta:true};expect(reconciliarMedicamentos(pedido,f.token,f)).toMatchObject({status:201,body:{codigo:'GRAVADA'}});
  const original=listarEventos(f.db,f.ctx.patientId);f.avancar();expect(reconciliarMedicamentos(pedido,f.token,f)).toMatchObject({status:200,body:{codigo:'REPLAY'}});expect(listarEventos(f.db,f.ctx.patientId)).toEqual(original);expect(commits).toBe(1);
- expect(reconciliarMedicamentos({...pedido,operationId:'med-segunda',medicamentos:['Pemetrexede','Ibuprofeno']},f.token,f).status).toBe(201);
+ expect(reconciliarMedicamentos({...pedido,expectedEventId:original[0]!.eventId,operationId:'med-segunda',medicamentos:['Pemetrexede','Ibuprofeno']},f.token,f).status).toBe(201);
  const todos=listarEventos(f.db,f.ctx.patientId);expect(todos[1]!.supersedesEventId).toBe(todos[0]!.eventId);expect(eventosVigentes(todos).map(e=>dadosDoEvento(e)?.valor)).toEqual([['Pemetrexede','Ibuprofeno']]);expect(todos[1]!.criadoPor.id).toBe('medico-real');expect(todos[1]!.fontes[0]!.classe).toBe('MANUAL');
 });
-it('vazia explícita é conhecida; não confirmar, corpo extra e contexto divergente não escrevem',()=>{const f=fixture(),p={...f.ctx,operationId:'med-vazia',medicamentos:[],listaAtualCompleta:true};
+it('vazia explícita é conhecida; não confirmar, corpo extra e contexto divergente não escrevem',()=>{const f=fixture(),p={...f.ctx,operationId:'med-vazia',medicamentos:[],expectedEventId:null,listaAtualCompleta:true};
  for(const bad of [{...p,listaAtualCompleta:false},{...p,atorId:'falso'},{...p,encounterId:'outra'}])expect(reconciliarMedicamentos(bad,f.token,f).status).toBeGreaterThanOrEqual(400);
  expect(listarEventos(f.db,f.ctx.patientId)).toHaveLength(0);expect(reconciliarMedicamentos(p,f.token,f).status).toBe(201);expect(dadosDoEvento(listarEventos(f.db,f.ctx.patientId)[0]!)?.valor).toEqual([]);
  expect(reconciliarMedicamentos({...p,medicamentos:['Outro']},f.token,f)).toMatchObject({status:409,body:{codigo:'OPERATION_ID_CONFLITO'}});
 });
-it('hook falho desfaz draft e evento atomicamente',()=>{const f=fixture();aoCommitar(f.db,()=>{throw new Error('MOTOR_INDISPONIVEL');});expect(reconciliarMedicamentos({...f.ctx,operationId:'med-rollback',medicamentos:['Ibuprofeno'],listaAtualCompleta:true},f.token,f)).toMatchObject({status:409,body:{codigo:'MOTOR_INDISPONIVEL'}});expect(listarEventos(f.db,f.ctx.patientId)).toEqual([]);expect(f.db.prepare('SELECT COUNT(*) as n FROM draft_envelope').get()!.n).toBe(0);});
-it('duas listas vigentes não elegem vencedora; lista de paciente substitui entre lotes',()=>{const f=fixture(),p={...f.ctx,operationId:'med-inicial',medicamentos:['Um'],listaAtualCompleta:true};reconciliarMedicamentos(p,f.token,f);
+it('hook falho desfaz draft e evento atomicamente',()=>{const f=fixture();aoCommitar(f.db,()=>{throw new Error('MOTOR_INDISPONIVEL');});expect(reconciliarMedicamentos({...f.ctx,operationId:'med-rollback',medicamentos:['Ibuprofeno'],expectedEventId:null,listaAtualCompleta:true},f.token,f)).toMatchObject({status:409,body:{codigo:'MOTOR_INDISPONIVEL'}});expect(listarEventos(f.db,f.ctx.patientId)).toEqual([]);expect(f.db.prepare('SELECT COUNT(*) as n FROM draft_envelope').get()!.n).toBe(0);});
+it('duas listas vigentes não elegem vencedora; lista de paciente substitui entre lotes',()=>{const f=fixture(),p={...f.ctx,operationId:'med-inicial',medicamentos:['Um'],expectedEventId:null,listaAtualCompleta:true};reconciliarMedicamentos(p,f.token,f);
  const original=listarEventos(f.db,f.ctx.patientId)[0]!;f.sessoes.selecionarConsulta(f.token,{...f.ctx,tumorLotId:'outro-lote'});
- expect(reconciliarMedicamentos({...p,tumorLotId:'outro-lote',operationId:'med-outrolote'},f.token,f).status).toBe(201);const atual=listarEventos(f.db,f.ctx.patientId)[1]!;expect(atual.supersedesEventId).toBe(original.eventId);
+ expect(reconciliarMedicamentos({...p,expectedEventId:original.eventId,tumorLotId:'outro-lote',operationId:'med-outrolote'},f.token,f).status).toBe(201);const atual=listarEventos(f.db,f.ctx.patientId)[1]!;expect(atual.supersedesEventId).toBe(original.eventId);
  f.sessoes.selecionarConsulta(f.token,f.ctx);f.db.prepare('INSERT INTO operation VALUES (?,?,?,?)').run('legado','hash',null,f.agora());f.db.prepare('INSERT INTO clinical_event VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)').run('legado','legado',0,f.ctx.patientId,null,f.ctx.encounterId,'FATO',JSON.stringify({data:{campo:'medicamentos',valor:['Dois']}}),'[]','CONFIRMADO',f.agora(),JSON.stringify({tipo:'SESSAO',id:'medico-real'}),null);
  expect(reconciliarMedicamentos({...p,operationId:'med-conflito'},f.token,f)).toMatchObject({status:409,body:{codigo:'LISTA_MEDICAMENTOS_CONFLITANTE',refs:expect.arrayContaining([atual.eventId,'legado'])}});
+});
+
+it('duas abas com mesma base: a segunda não apaga medicamentos; replay conserva a primeira',()=>{
+ const f=fixture(),p={...f.ctx,operationId:'aba-a',expectedEventId:null,medicamentos:['Varfarina'],listaAtualCompleta:true};
+ expect(reconciliarMedicamentos(p,f.token,f).status).toBe(201);
+ expect(reconciliarMedicamentos({...p,operationId:'aba-b',medicamentos:['Capecitabina']},f.token,f)).toMatchObject({status:409,body:{codigo:'LISTA_MEDICAMENTOS_ALTERADA'}});
+ expect(reconciliarMedicamentos(p,f.token,f).body.codigo).toBe('REPLAY');
+ expect(eventosVigentes(listarEventos(f.db,f.ctx.patientId)).map(e=>dadosDoEvento(e)?.valor)).toEqual([['Varfarina']]);
 });

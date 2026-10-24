@@ -116,6 +116,10 @@
     "chat"
   ],
   [
+    "/consulta/confirmacao/recuperar",
+    "recuperarConfirmacao"
+  ],
+  [
     "/consulta/confirmar",
     "confirmar"
   ],
@@ -126,6 +130,10 @@
   [
     "/consulta/ditado",
     "ditado"
+  ],
+  [
+    "/consulta/documento-impressao",
+    "documentoImpressao"
   ],
   [
     "/consulta/estado-doenca/confirmar",

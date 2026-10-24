@@ -26,6 +26,10 @@ it("consulta e agenda exibem alerta confirmado; ciencia e duravel sem virar evol
  expect((await a.request("/consulta/confirmar",{...pedido,reconhecerAlertas:["outro-paciente"]})).status).toBe(409);
  expect((await a.request("/consulta/confirmar",pedido)).status).toBe(200);
  expect((await a.request("/consulta/confirmar",pedido)).status).toBe(200);
+ expect(()=>a.db.prepare('UPDATE alerta_reconhecimento SET medicoId=?').run('outro')).toThrow(/append-only/);
+ expect(()=>a.db.exec('DELETE FROM alerta_reconhecimento')).toThrow(/append-only/);
+ const ciencias=a.db.prepare("SELECT * FROM audit_event WHERE acaoPedida LIKE 'CIENCIA_ALERTA:%'").all();expect(ciencias).toHaveLength(1);
+ expect(ciencias[0]).toMatchObject({em:AGORA,politicaVersao:'F2-CIENCIA-ALERTA@1'});
  const rows=a.db.prepare("SELECT * FROM alerta_reconhecimento").all();expect(rows).toHaveLength(1);expect(rows[0]).toMatchObject({alertaId:id,patientId:PACIENTE,encounterId:ENCONTRO,medicoId:a.sessoes.obter(a.token)!.medicoId});
  const recarregado=await carregarConsulta(a);expect(recarregado.data.alertas[0].reconhecidoEm).toBe(AGORA);
  const nova=new DatabaseSync(`${a.dir}/consulta.sqlite`,{readOnly:true});try{expect(nova.prepare("SELECT COUNT(*) AS n FROM alerta_reconhecimento").get()?.n).toBe(1);}finally{nova.close();}

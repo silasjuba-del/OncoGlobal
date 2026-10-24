@@ -321,7 +321,7 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, aoAbrirCanal,
       setPreview(null);
       const alvo = exibido.preparacao.alvoImpressao;
       if (!alvo) {
-        setMensagem("Consulta finalizada. Documentos assinados e preservados no histórico.");
+        setMensagem("Documentos selecionados assinados e preservados no histórico. Os demais rascunhos continuam pendentes.");
         setVersao((v) => v + 1);
         return;
       }
@@ -364,6 +364,18 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, aoAbrirCanal,
       }
       setImpressaoPendente(null);
       setMensagem("Arquivo HTML imprimível gerado no servidor local. Isso não comprova impressão física.");
+    });
+  }
+
+  function baixarImpressao(doc: NonNullable<ConsultaIntegrada["historicoDocumentos"]>[number]) {
+    if(!porta.documentoImpressao)return;
+    void executar(async atual=>{
+      const r=await porta.documentoImpressao!({patientId,encounterId:doc.encounterId,tumorLotId:doc.tumorLotId,documentId:doc.documentId,documentVersion:doc.documentVersion});
+      if(atual!==geracao.current)return;
+      const url=URL.createObjectURL(new Blob([r.html],{type:'text/html;charset=utf-8'}));
+      const a=document.createElement('a');a.href=url;a.download='documento-assinado.html';a.click();
+      setTimeout(()=>URL.revokeObjectURL(url),1000);
+      setMensagem('Documento assinado entregue ao navegador. Abra o arquivo e use Imprimir.');
     });
   }
 
@@ -518,6 +530,7 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, aoAbrirCanal,
           <h4>{doc.titulo} · versão {doc.documentVersion}</h4><p>{doc.assinadoEm} · {doc.autorId} · consulta {doc.encounterId} · tumor {doc.tumorLotId ?? "não selecionado"}</p>
           <pre style={{ whiteSpace: "pre-wrap" }}>{doc.texto}</pre>
         {doc.liberacaoPendente?<p role="status">{doc.liberacaoPendente}</p>:null}
+          {porta.documentoImpressao&&<button type="button" disabled={ocupado||!!doc.liberacaoPendente} onClick={()=>baixarImpressao(doc)}>Baixar documento imprimível · {doc.titulo}</button>}
           <button type="button" disabled={ocupado||!!doc.liberacaoPendente} onClick={()=>reimprimir(doc)}>Reimprimir versão {doc.documentVersion} · {doc.titulo}</button>
         </article>)}
     </section>

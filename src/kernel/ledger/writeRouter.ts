@@ -96,7 +96,11 @@ export function confirmar(db: DatabaseSync, req: Confirmacao): Gravacao {
       for (const r of req.registros)
         db.prepare("UPDATE draft_envelope SET revision=revision+1 WHERE draftId=?").run(r.draftId);
       });
-      if (resultado.estado === "GRAVADA") emissores.get(db)?.(req,eventos);
+      if (resultado.estado === "GRAVADA") {
+        auditar(db, {ator:{tipo:"SESSAO",id:req.sessao.medicoId},acaoPedida:`CONFIRMAR:${req.operationId}`,
+          decisao:"PERMITIDA",motivoCodigo:"REVISAO_MEDICA_CONFIRMADA",politicaVersao:"F2-CONFIRMACAO@1",em:req.em});
+        emissores.get(db)?.(req,eventos);
+      }
       return resultado;
     });
   } catch (error) {

@@ -29,6 +29,9 @@ type LeituraIntegra = ReturnType<typeof lerLedgerIntegro>;
 export function criarMotorF1(db:DatabaseSync,agora:()=>string,config:()=>ConfigMotor) {
   let consumo:Promise<void>|null=null;
   aoCommitar(db,(req,eventos)=>{
+    // Snapshot no instante do commit; processamento posterior não pode atribuir regras novas à assinatura antiga.
+    const c=config();
+    db.prepare('INSERT INTO confirmation_rules VALUES(?,?,?,?,?,?,?)').run(req.operationId,'F2-CONFIRMACAO@1',hash(c),JSON.stringify(c.regras),JSON.stringify(c.biblioteca),req.sessao.medicoId,req.em);
     const tipo=eventos.some(e=>e.tipo==="TreatmentAdministration")?"ADMINISTRACAO_REGISTRADA"
       :eventos.some(e=>dadosDoEvento(e)?.campo==="medicamentos")?"MED_RECONCILIADO":"FATO_CONFIRMADO";
     gravarEstimulo(db,{schema:"EstimuloTecnico@1",id:`op:${req.operationId}`,operationId:req.operationId,tipo,

@@ -1,3 +1,4 @@
+import {RecuperarConfirmacoes} from "./consulta/RecuperarConfirmacoes.js";
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState, type FormEvent } from "react";
 import { z } from "zod";
 import { TumorLot } from '../contracts/clinico.js';
@@ -322,10 +323,10 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp }: {
             metricas,
           } : {})}
         />
-        <a href="/" onClick={event=>{
+        <a href="/demonstracao.html" onClick={event=>{
           if (!edicaoPendente && !salvamentoEmCurso) return;
           event.preventDefault();
-          solicitarNavegacaoVoluntaria(() => window.location.assign("/"));
+          solicitarNavegacaoVoluntaria(() => window.location.assign("/demonstracao.html"));
         }}>Voltar à demonstração</a>
       </div></header>
     {mensagem ? <p role="status">{mensagem}</p> : null}
@@ -435,6 +436,7 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp }: {
           }}
           {...(pacienteAtivo ? { patientLabel: pacienteAtivo.nome } : {})} />
         </SecaoAcordeon21st>
+        <RecuperarConfirmacoes key={`recuperar:${contexto.patientId}:${contexto.encounterId}:${contexto.tumorLotId}`} porta={porta} contexto={contexto} aoAtualizar={()=>setVersaoConsulta(v=>v+1)}/>
         <PainelOncoassist key={`painel:${versaoConsulta}`} porta={porta} contexto={contexto} />
         <ListaRascunhosPubMed key={`pubmed:${versaoConsulta}`} porta={porta} />
         <SecaoAcordeon21st
@@ -446,7 +448,7 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp }: {
           aoAlternar={() => alternarGrupo("consulta-medicamentos")}
           aoFocarSomenteEste={() => focarGrupo("consulta-medicamentos")}
         >
-        <ReconciliarMedicamentos porta={porta} contexto={{...contexto,tumorLotId:contexto.tumorLotId??null}} aoFatosConfirmados={(confirmado)=>{
+        <ReconciliarMedicamentos key={`medicamentos:${contexto.patientId}:${contexto.encounterId}:${contexto.tumorLotId}`} porta={porta} contexto={{...contexto,tumorLotId:contexto.tumorLotId??null}} aoFatosConfirmados={(confirmado)=>{
           const c=contextoAtual.current;
           if(geracao.current===geracaoTela&&c?.patientId===confirmado.patientId&&c.encounterId===confirmado.encounterId&&(c.tumorLotId??null)===(confirmado.tumorLotId??null)&&agenda.some(item=>item.patientId===c.patientId&&item.encounterId===c.encounterId))setVersaoConsulta(v=>v+1);
         }}/>

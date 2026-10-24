@@ -4,7 +4,7 @@ import { Sessao } from "../contracts/base.js";
 import { ProtocolTemplate } from "../contracts/w10/prescricao.js";
 import { CatalogoFichasRespostaSchema, FichaProtocoloCatalogoSchema, RevisaoFichaProtocoloSchema,
   RevisarFichaPedidoSchema, type FichaProtocoloCatalogo } from "../contracts/api/fichasPrescricao.js";
-import { lerDraft, salvarDraft, transacao } from "../kernel/comandos/portas.js";
+import { auditar, lerDraft, salvarDraft, transacao } from "../kernel/comandos/portas.js";
 import { hashConteudoExibido as hash, type GerenciadorSessao } from "./sessao.js";
 
 export interface DepsFichas {
@@ -15,6 +15,7 @@ export interface RespostaFicha { status: number; body: unknown }
 export const recusarFicha = (codigo: string, status = 409): RespostaFicha => ({ status, body: { codigo } });
 const Registro = z.object({
   kind: z.literal("FICHA_PROTOCOLO_REVISOES"), templateId: z.string(), versao: z.string(),
+  auditoriaDesde: z.number().int().positive().optional(),
   historico: z.array(z.object({ operationId: z.string(), requestHash: z.string(),
     template: ProtocolTemplate, revisao: RevisaoFichaProtocoloSchema }).strict()),
 }).strict();
@@ -43,6 +44,9 @@ function lerRegistro(deps: DepsFichas, templateId: string, versao: string): Regi
       || item.template.templateId !== templateId || item.template.versao !== versao
       || r.contentHash !== hash(item.template) || reviewHash !== hashRevisao(r, anterior) || chaves.has(item.operationId))
       throw new Error("REVISAO_FICHA_CORROMPIDA");
+    if(p.data.auditoriaDesde!==undefined&&r.revision>=p.data.auditoriaDesde
+      &&!deps.db.prepare("SELECT 1 FROM audit_event WHERE acaoPedida=? AND politicaVersao=? AND em=? AND json_extract(ator,'$.id')=?")
+        .get(`REVISAR_FICHA:${reviewHash}`,"FICHA_PROTOCOLO_REVISOES@1",r.em,r.medicoId))throw new Error("REVISAO_FICHA_SEM_AUDITORIA");
     chaves.add(item.operationId); anterior = reviewHash;
   }
   return p.data;
@@ -110,7 +114,9 @@ export function operarFichasPrescricao(deps: DepsFichas, token: string, operacao
       const historico = [...registro.historico, { operationId: entrada.idempotencyKey, requestHash, template: ficha.template, revisao }];
       salvarDraft(deps.db, { draftId: idRegistro(entrada.templateId, entrada.versao), patientId: null,
         sourceId: `ficha-fonte:${ficha.contentHash}`, rawRef: "referencia-local", revision: historico.length,
-        criadoEm: auth.em, diagnostics: [], payload: { ...registro, historico } });
+        criadoEm: auth.em, diagnostics: [], payload: { ...registro, auditoriaDesde:registro.auditoriaDesde??historico.length, historico } });
+      auditar(deps.db,{ator:{tipo:"SESSAO",id:auth.sessao.medicoId},acaoPedida:`REVISAR_FICHA:${revisao.reviewHash}`,
+        decisao:"PERMITIDA",motivoCodigo:entrada.decisao,politicaVersao:"FICHA_PROTOCOLO_REVISOES@1",em:auth.em});
       return { status: 200, body: FichaProtocoloCatalogoSchema.parse({ ...ficha, revision: revisao.revision, revisao,
         estado: revisao.decisao === "CONFERIR" ? "CONFERIDA" : "INATIVA" }) };
     });

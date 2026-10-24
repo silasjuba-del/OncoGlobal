@@ -1,7 +1,7 @@
 // @vitest-environment jsdom
 import { cleanup, fireEvent, render, screen, within } from "@testing-library/react";
 import { afterEach, describe, expect, it } from "vitest";
-import { App } from "../../src/ui/App.js";
+import { DemonstracaoApp as App } from "../../src/ui/DemonstracaoApp.js";
 
 afterEach(() => {
   cleanup();

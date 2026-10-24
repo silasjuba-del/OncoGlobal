@@ -100,3 +100,27 @@ describe("horizonte do encontro e escopo do paciente (P1 PR #13)",()=>{
   expect(atual.criticos.find(c=>c.analito==="NA")?.estado).toBe("AVISO");
  });
 });
+
+it('10% desde o ciclo anterior não é ocultado pela pesagem intermediária',()=>{
+ const ciclo={cicloId:'c2',episodioId:'ep1',numero:2,previstoEm:base.hoje,pesoKg:presente(72),origemPeso:'MEDIDO' as const,ciclosSemPesoConsecutivos:0,prescricaoRef:null,itens:[],comMedico:true};
+ const anterior={...ciclo,cicloId:'c1',numero:1,previstoEm:'2026-10-01',pesoKg:presente(80)};
+ const pesos=[['2026-10-01',80],['2026-10-05',79],['2026-10-10',72]] as const;
+ const eventos=[evento('ciclo1','Ciclo',anterior),...pesos.map(([data,kg],i)=>evento(`p${i}`,'Weight',{kg,origem:'MEDIDO',data,sourceId:'fonte-medida'}))];
+ const r=avaliarConsulta({...base,ciclo,eventos});
+ expect(r.variacaoPeso).toBeLessThan(.10);expect(r.variacaoPesoCiclo).toBe(.10);
+ expect(r.avisosFlash.join(' ')).toContain('10% desde o ciclo anterior');
+ const outro=avaliarConsulta({...base,ciclo,eventos:[{...eventos[0]!,payload:{data:{...anterior,episodioId:'outro'}}},...eventos.slice(1)]});
+ expect(outro.variacaoPesoCiclo).toBeNull();expect(outro.avisosFlash.join(' ')).toContain('Comparação de peso com o ciclo anterior indisponível');
+});
+it('peso não medido hoje permanece datado no aviso, sem fingir atualização',()=>{
+ const r=avaliarConsulta({...base,eventos:[evento('peso','Weight',{kg:80,origem:'MEDIDO',data:'2026-10-01',sourceId:'fonte-medida'})]});
+ expect(r.dadosCorporais.medidoEm).toBe('2026-10-01');expect(r.avisosFlash.join(' ')).toContain('não foi medido hoje');
+});
+
+it('antes de preparar novo ciclo compara com o último ciclo do encontro anterior',()=>{
+ const ciclo={cicloId:'c1',episodioId:'ep1',numero:1,previstoEm:'2026-10-01',pesoKg:presente(80),origemPeso:'MEDIDO' as const,ciclosSemPesoConsecutivos:0,prescricaoRef:null,itens:[],comMedico:true};
+ const anterior={...evento('c1-event','Ciclo',ciclo),encounterId:'encontro-anterior',criadoEm:'2026-10-01T10:00:00-03:00'};
+ const atual=evento('peso-atual','Weight',{kg:72,origem:'MEDIDO',data:'2026-10-10',sourceId:'fonte-medida'});
+ const r=avaliarConsulta({...base,ciclo,eventos:[anterior,atual]});
+ expect(r.variacaoPesoCiclo).toBe(.10);expect(r.avisosFlash.join(' ')).toContain('10% desde o ciclo anterior');
+});

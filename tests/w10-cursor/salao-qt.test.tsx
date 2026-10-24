@@ -3,7 +3,7 @@ import { cleanup, fireEvent, render, screen, waitFor, within } from "@testing-li
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
-import { App } from "../../src/ui/App.js";
+import { DemonstracaoApp as App } from "../../src/ui/DemonstracaoApp.js";
 import { TelaSalao } from "../../src/ui/telas/TelaSalao.js";
 import { criarPortaFalsa } from "../../src/ui/api/fake.js";
 import type { SalaoVisao } from "../../src/ui/api/porta.js";

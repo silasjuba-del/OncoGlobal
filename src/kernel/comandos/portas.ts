@@ -3,3 +3,6 @@ export { lerDraft, listarDrafts, listarDraftsSemVinculo, listarDraftsGlobaisPorT
 export { listarEventos, auditar, hashPayload, resultadoExistente } from "../ledger/ledger.js";
 
 export { transacao } from "../ledger/db.js";
+
+export {criarResolverDocumentoLedger} from "../ledger/documentos.js";
+export {confirmacaoCancelada,cancelarConfirmacao} from "../ledger/cancelamentoConfirmacao.js";
