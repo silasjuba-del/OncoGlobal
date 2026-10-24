@@ -5,7 +5,7 @@
 // extrair 201 como escrita real; e extrair 400 / carregarConsulta 401 como falhas 4xx), e NÃO todas as 89 rotas via HTTP.
 // Base: 52b8f7a04c2e467c5c3b3cb93bc38a7673cc4c93 (codex/estabilizacao-g01-reconciliacao).
 import { describe, expect, it, vi } from "vitest";
-import { ROTAS_HTTP, rotaHttp } from "../../src/server/rotas/catalogo.js";
+import { POLITICA_WEBHOOK_CANAL, ROTAS_HTTP, politicaProcessamento, rotaHttp } from "../../src/server/rotas/catalogo.js";
 import * as canalReconciliacao from "../../src/server/canalReconciliacao.js";
 import {
   abrirServidorHttpG2,
@@ -17,7 +17,7 @@ describe("G2 · Cenário 7: Disparos de pós-processamento por rota HTTP (OG-003
   it("caracteriza o catálogo ROTAS_HTTP (89 rotas) quanto ao metadado grava: true vs grava: false", () => {
     expect(ROTAS_HTTP).toHaveLength(89);
 
-    const semGrava = ROTAS_HTTP.filter((r) => !r.grava).map((r) => r.nome);
+    const semGrava = ROTAS_HTTP.filter((r) => r.processamento === "NENHUM").map((r) => r.nome);
     expect(semGrava).toEqual([
       "/biblioteca/consultar",
       "/biblioteca/estado",
@@ -57,12 +57,18 @@ describe("G2 · Cenário 7: Disparos de pós-processamento por rota HTTP (OG-003
       "/consulta/revisao-clinica",
       "/consulta/receita/propor-dose",
     ]) {
-      expect(rotaHttp(urlLeituraComGravaTrue)?.grava, urlLeituraComGravaTrue).toBe(true);
+      expect(rotaHttp(urlLeituraComGravaTrue)?.processamento, urlLeituraComGravaTrue).toBe("PENDENCIAS_E_MOTOR");
     }
 
     // Inverso também caracterizado (OG-004): `/consulta/bundle` muta estado de sessão (`registrarBundleExibido`),
     // mas declara `grava: false` para não disparar o hook global de pós-processamento.
-    expect(rotaHttp("/consulta/bundle")?.grava).toBe(false);
+    expect(rotaHttp("/consulta/bundle")?.processamento).toBe("NENHUM");
+
+    // EST-03: a política do webhook (fora do catálogo) é explícita, não um default implícito.
+    expect(politicaProcessamento("/canal/webhook/chave-sintetica")).toBe(POLITICA_WEBHOOK_CANAL);
+    expect(politicaProcessamento("/canal/webhook/chave-sintetica?evento=1")).toBe("PENDENCIAS_E_MOTOR");
+    expect(politicaProcessamento("/rota/inexistente")).toBe("NENHUM");
+    for (const rota of ROTAS_HTTP) expect(politicaProcessamento(rota.url), rota.url).toBe(rota.processamento);
   });
 
   it("executa amostra representativa via HTTP (não todas as 89 rotas) medindo processarPendenciasClinicasCanal e motorF1.processar em grava:false, leituras grava:true, escrita 201 e falhas 4xx", async () => {
