@@ -26,15 +26,22 @@ describe("G2 · Cenário 7: Disparos de pós-processamento por rota HTTP (OG-003
       "lerPerfil",
       "baseAcaoComposta",
       "agenda",
+      "apac",
       "bundle",
+      "canal",
+      "chat",
+      "selecionarContexto",
       "estatistica",
       "listarRascunhosPubMed",
       "resultadoExtracaoLlm",
       "lotesPaciente",
       "documentoImpressao",
+      "oncoassistStatus",
       "basePrescricaoExecutavel",
       "listarFichasPrescricao",
+      "rascunho",
       "recist",
+      "salao",
       "historicoContingenciaSalao",
       "timelineMulticamadas",
       "fatosTrials",
@@ -42,16 +49,11 @@ describe("G2 · Cenário 7: Disparos de pós-processamento por rota HTTP (OG-003
       "login",
     ]);
 
-    // Defeito conhecido OG-003 / OG-004 caracterizado antes de G5:
-    // Rotas predominantemente de leitura/consulta estão marcadas `grava: true` no catálogo
-    // e por isso disparam `processarPendenciasClinicasCanal` + `motorF1.processar()` após cada POST 2xx:
+    // OG-003 / OG-004: invertido em EST-03b para as leituras comprovadamente sem escrita (apac, canal, salão,
+    // chat, status do OncoAssist, seleção de contexto e leitura de rascunho), agora NENHUM acima. Estas
+    // continuam disparando: carregarConsulta escreve; as demais não foram verificadas como só leitura.
     for (const urlLeituraComGravaTrue of [
       "/consulta/carregar",
-      "/consulta/apac",
-      "/consulta/canal",
-      "/consulta/salao",
-      "/consulta/chat",
-      "/consulta/oncoassist/status",
       "/consulta/oncoassist/fontes",
       "/consulta/investigacao",
       "/consulta/revisao-clinica",
@@ -101,15 +103,16 @@ describe("G2 · Cenário 7: Disparos de pós-processamento por rota HTTP (OG-003
       expect(spyCanal).toHaveBeenCalledTimes(0);
       expect(spyMotor).toHaveBeenCalledTimes(0);
 
-      // 3) Comportamento atual (OG-003): leituras com `grava: true` (`/consulta/oncoassist/status` e `/consulta/carregar`)
-      //    disparam o hook pós-resposta em `http.ts:59` quando retornam 200:
+      // 3) Invertido em EST-03b (OG-003): a leitura sem escrita `/consulta/oncoassist/status` não dispara mais
+      //    o processamento global; `/consulta/carregar` escreve e continua disparando.
       expect((await srv.post("/consulta/oncoassist/status", {})).status).toBe(200);
-      await vi.waitFor(() => expect(spyMotor).toHaveBeenCalledTimes(1));
-      expect(spyCanal).toHaveBeenCalledTimes(1);
+      await new Promise<void>((r) => setImmediate(r));
+      expect(spyMotor).toHaveBeenCalledTimes(0);
+      expect(spyCanal).toHaveBeenCalledTimes(0);
 
       expect((await srv.post("/consulta/carregar", G2_CONTEXTO)).status).toBe(200);
-      await vi.waitFor(() => expect(spyMotor).toHaveBeenCalledTimes(2));
-      expect(spyCanal).toHaveBeenCalledTimes(2);
+      await vi.waitFor(() => expect(spyMotor).toHaveBeenCalledTimes(1));
+      expect(spyCanal).toHaveBeenCalledTimes(1);
 
       // 4) Rota de escrita real (`/consulta/extrair` -> 201) dispara `processarCanal` + `motorF1.processar`:
       const ext = await srv.post("/consulta/extrair", {
@@ -119,8 +122,8 @@ describe("G2 · Cenário 7: Disparos de pós-processamento por rota HTTP (OG-003
         rawTranscript: "10/10/2026 Hemoglobina 11,5 g/dL",
       });
       expect(ext.status).toBe(201);
-      await vi.waitFor(() => expect(spyMotor).toHaveBeenCalledTimes(3));
-      expect(spyCanal).toHaveBeenCalledTimes(3);
+      await vi.waitFor(() => expect(spyMotor).toHaveBeenCalledTimes(2));
+      expect(spyCanal).toHaveBeenCalledTimes(2);
     } finally {
       spyMotor.mockRestore();
       spyCanal.mockRestore();
