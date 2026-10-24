@@ -1,6 +1,6 @@
 import {expect,it} from 'vitest';
-import {readFileSync, mkdtempSync, cpSync, writeFileSync} from 'node:fs';
-import {join} from 'node:path';
+import {readFileSync, mkdtempSync, cpSync, writeFileSync, realpathSync, rmSync} from 'node:fs';
+import {join, dirname, basename} from 'node:path';
 import {tmpdir} from 'node:os';
 import {spawnSync} from 'node:child_process';
 import {RulesetHeader} from '../../../src/contracts/agentes.js';
@@ -34,14 +34,20 @@ it('rascunhos B2 não atribuem curador nem aprovação médica',()=>{
 });
 it('remover o schema de rascunho não contorna o validador B2 integrado ao check:corpus',()=>{
  const root=mkdtempSync(join(tmpdir(),'b2-header-'));
- cpSync('corpus',join(root,'corpus'),{recursive:true});
- const arquivo=join(root,'corpus/6-pack-tumor/ewing/pack-ewing.v2.RASCUNHO.json');
- const p=JSON.parse(readFileSync(arquivo,'utf8'));
- p.header={id:'fixture',versao:'1.0.0',vigenteDesde:'2026-10-17',fonte:{tipo:'DECISAO_MEDICA',referencia:'fixture',trecho:null,edicao:null},curador:'fixture',aprovadoEm:'2026-10-17'};
- writeFileSync(arquivo,JSON.stringify(p));
- const resultado=spawnSync(process.execPath,['--input-type=module','-e',"import {verificarB2} from './scripts/corpus-b2.mjs'; console.log(JSON.stringify(verificarB2(process.argv[1])));",root],{encoding:'utf8'});
- expect(resultado.status,resultado.stderr).toBe(0);
- expect(JSON.parse(resultado.stdout)).toContain('pack ewing atribui aprovação indevida ao rascunho');
+ try {
+  cpSync('corpus',join(root,'corpus'),{recursive:true});
+  const arquivo=join(root,'corpus/6-pack-tumor/ewing/pack-ewing.v2.RASCUNHO.json');
+  const p=JSON.parse(readFileSync(arquivo,'utf8'));
+  p.header={id:'fixture',versao:'1.0.0',vigenteDesde:'2026-10-17',fonte:{tipo:'DECISAO_MEDICA',referencia:'fixture',trecho:null,edicao:null},curador:'fixture',aprovadoEm:'2026-10-17'};
+  writeFileSync(arquivo,JSON.stringify(p));
+  const resultado=spawnSync(process.execPath,['--input-type=module','-e',"import {verificarB2} from './scripts/corpus-b2.mjs'; console.log(JSON.stringify(verificarB2(process.argv[1])));",root],{encoding:'utf8'});
+  expect(resultado.status,resultado.stderr).toBe(0);
+  expect(JSON.parse(resultado.stdout)).toContain('pack ewing atribui aprovação indevida ao rascunho');
+ } finally {
+  const real=realpathSync(root);
+  if(dirname(real)!==realpathSync(tmpdir())||basename(real)!==basename(root)||!basename(real).startsWith('b2-header-'))throw new Error('TEMP_FORA_ESCOPO');
+  rmSync(real,{recursive:true,force:true});
+ }
 });
 it('fase VDC limita doxorrubicina a cinco administrações e continua em VC sem antraciclina',()=>{
  const vdc=fichas.find((f:any)=>f.nome.startsWith('Ewing VDC'));
