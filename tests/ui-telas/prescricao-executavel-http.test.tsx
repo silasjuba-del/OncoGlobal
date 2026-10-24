@@ -33,6 +33,9 @@ it("prescreve dose fracionada pelo consultório real, protege a revisão e atual
         fontes: [fonteSintetica(id)], revisao: "CONFIRMADO" }] });
   };
   seed("AgendaEntry", { patientId: PACIENTE, encounterId: ENCONTRO, horario: "10:00", data: AGORA.slice(0, 10) }, null);
+  seed("Alerta", {alertaId:"rx-ui-vermelho",alvo:{patientId:PACIENTE},natureza:"AMEACA_IMEDIATA",classeRisco:null,
+    texto:"Alerta sintético para ciência da prescrição",origemRegra:"regra-sintetica",evidencias:[],
+    presentationOverride:true,authorityOverride:false,reconhecidoEm:null,destino:"CHAT"}, null);
   seed("TumorLot", { patientId: PACIENTE, tumorLotId, cid: presente("C50"),
     topografia: presente("Topografia sintética"), histologia: presente("Histologia sintética"),
     estadiamentos: [], finalidadeApac: presente("PALIATIVA"), marcos: [] }, tumorLotId);
@@ -86,8 +89,13 @@ it("prescreve dose fracionada pelo consultório real, protege a revisão e atual
   expect(await screen.findByRole("dialog", { name: "Prescrição em edição" })).toBeTruthy();
   fireEvent.click(screen.getByRole("button", { name: "Continuar editando" }));
   expect(screen.getByRole("region", { name: "Prévia da prescrição" }).textContent).toContain("1,5 mg");
-  fireEvent.click(screen.getByRole("button", { name: "Confirmar e assinar prescrição" }));
+  const assinar=screen.getByRole("button", { name: "Confirmar e assinar prescrição" }) as HTMLButtonElement;
+  expect(assinar.disabled).toBe(true);
+  fireEvent.click(screen.getByRole("checkbox", { name: /Estou ciente: Alerta sintético para ciência da prescrição/ }));
+  await waitFor(()=>expect(assinar.disabled).toBe(false));
+  fireEvent.click(assinar);
   await waitFor(() => expect(a.eventos().filter(e => e.tipo === "DOCUMENTO")).toHaveLength(1));
+  expect(a.db.prepare("SELECT COUNT(*) AS n FROM alerta_reconhecimento").get()!.n).toBe(1);
   const ciclo = a.eventos().find(e => e.tipo === "Ciclo")!;
   expect(dadosDoEvento(ciclo)?.itens).toMatchObject([{ doseMg: 1.5 }]);
   expect(a.eventos().filter(e => e.tipo === "TreatmentAdministration")).toHaveLength(0);

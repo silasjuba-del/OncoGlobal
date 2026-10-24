@@ -181,13 +181,14 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, aoAbrirCanal,
     if (!baseRx || baseRx.origem !== visao || preparacao.baseHash !== baseRx.dados.revisao
       || !porta.confirmarPrescricaoExecutavel) throw new Error("A base mudou. Prepare novamente.");
     const atual = geracao.current;
-    const conteudo = JSON.stringify([preparacao.draftId, preparacao.revision, preparacao.conteudoHash]);
+    const reconhecerAlertas = cientes.filter(id => visao?.alertas.some(a => a.alertaId === id));
+    const conteudo = JSON.stringify([preparacao.draftId, preparacao.revision, preparacao.conteudoHash, reconhecerAlertas]);
     if (assinaturaRx.current?.conteudo !== conteudo) assinaturaRx.current = { conteudo, chave: crypto.randomUUID() };
     setRxEmCurso(true); aoAlterarPrescricaoSalvando?.(true);
     try {
       const confirmada = await porta.confirmarPrescricaoExecutavel({ contexto: { patientId, encounterId, tumorLotId },
         draftId: preparacao.draftId, expectedRevision: preparacao.revision,
-        conteudoHash: preparacao.conteudoHash, idempotencyKey: assinaturaRx.current.chave });
+        conteudoHash: preparacao.conteudoHash, reconhecerAlertas, idempotencyKey: assinaturaRx.current.chave });
       if (atual !== geracao.current) return;
       if (confirmada.documentId !== preparacao.conteudo.documentId
         || confirmada.documentVersion !== preparacao.conteudo.documentVersion
@@ -199,6 +200,10 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, aoAbrirCanal,
       if (aoAtualizarClinico) aoAtualizarClinico(); else setVersao(v => v + 1);
       setMensagem("Prescrição assinada e ciclo planejado gravados. Nenhuma administração registrada.");
     } catch (error) {
+      if (error instanceof Error && error.message === "CIENCIA_ALERTA_OBRIGATORIA")
+        throw new Error("Marque a ciência de todos os alertas vermelhos exibidos antes de assinar a prescrição.");
+      if (error instanceof Error && error.message === "ALERTA_NOVO_NAO_EXIBIDO")
+        throw new Error("Surgiu um alerta vermelho novo. Confira a confirmação pendente no painel de recuperação; se não foi confirmada, cancele-a. Depois reabra o histórico, confira o alerta e prepare uma nova prévia.");
       throw new Error(mensagemErroFicha(error));
     } finally {
       if (atual === geracao.current) { setRxEmCurso(false); aoAlterarPrescricaoSalvando?.(false); }
@@ -252,6 +257,8 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, aoAbrirCanal,
     try { await acao(atual); }
     catch (erro) { if (atual === geracao.current) setMensagem(erro instanceof ErroPorta
       ? erro.message === "FLASH_JA_FINALIZADA" ? "Este conteúdo já foi finalizado. Reabra o histórico para conferir."
+        : erro.message === "CIENCIA_ALERTA_OBRIGATORIA" ? "Assinatura não concluída: falta a ciência de um alerta vermelho exibido."
+        : erro.message === "ALERTA_NOVO_NAO_EXIBIDO" ? "Assinatura não concluída: surgiu um alerta vermelho novo. Recarregue a consulta para vê-lo."
         : `Operação não concluída (${erro.codigo}). Reabra o conteúdo para conferir.`
       : "Operação não concluída. O conteúdo permanece pendente de revisão."); }
     finally { if (atual === geracao.current) { emCurso.current = false; setOcupado(false); } }
@@ -395,6 +402,8 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, aoAbrirCanal,
 
   const visaoPronta = visao && visao.patientId === patientId && visao.encounterId === encounterId
     && visao.tumorLotId === tumorLotId ? visao : null;
+  // M10: a assinatura só é oferecida com ciência de todo alerta vermelho exibido e ainda não reconhecido.
+  const cienciaPendente = (visaoPronta?.alertas ?? []).some(a=>a.presentationOverride && !a.reconhecidoEm && !cientes.includes(a.alertaId));
   const propsFlash: ConsultaFlashProps | null = visaoParaEdicao ? {
     ...montarPropsFlash(visaoParaEdicao, null, preparar, salvar),
     ...(aoAbrirApac ? {aoAbrirApac} : {}),
@@ -482,7 +491,8 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, aoAbrirCanal,
       </article>)}
       {preview.documentos.some(d=>documentoReceitaDosePendente({tipoDocumento:'FLASH_CONJUNTO_IMPRESSAO',texto:d.texto}))?<p role="status">Receita com dose pendente: permanece em rascunho. Volte à edição para completar a dose.</p>:null}
       <p>Ao confirmar, o médico valida as doses, a posologia e o conteúdo exibidos.</p>
-      <button type="button" disabled={ocupado||preview.documentos.some(d=>documentoReceitaDosePendente({tipoDocumento:'FLASH_CONJUNTO_IMPRESSAO',texto:d.texto}))} onClick={assinar}>Confirmar e assinar conteúdo exibido</button>
+      {cienciaPendente ? <p role="status">Marque a ciência de todos os alertas vermelhos acima para assinar.</p> : null}
+      <button type="button" disabled={ocupado||cienciaPendente||preview.documentos.some(d=>documentoReceitaDosePendente({tipoDocumento:'FLASH_CONJUNTO_IMPRESSAO',texto:d.texto}))} onClick={assinar}>Confirmar e assinar conteúdo exibido</button>
     </section> : <p>Prepare os documentos na Consulta Flash para conferir e assinar.</p>}
     {impressaoPendente ? <p>
       <button type="button" disabled={ocupado} onClick={repetirImpressao}>Solicitar impressão novamente</button>
@@ -509,7 +519,7 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, aoAbrirCanal,
       {baseRx?.dados.contexto.patientId === patientId && baseRx.dados.contexto.encounterId === encounterId
         && baseRx.dados.contexto.tumorLotId === tumorLotId ? <EditorPrescricaoExecutavel key={`${patientId}:${encounterId}:${tumorLotId ?? ""}`}
         base={baseRx.dados} origemFicha={origemFichaRx} origemAcao={origemAcaoRx} ocupado={ocupado || rxEmCurso || !visao || baseRx.origem !== visao || !!erroRx}
-        aoPreparar={prepararRx} aoAssinar={assinarRx}
+        aoPreparar={prepararRx} aoAssinar={assinarRx} cienciaPendente={cienciaPendente}
         aoDescartarAcao={() => setOrigemAcaoRx(null)}
         {...(aoAlterarPrescricaoPendente ? { aoAlterarPendente: aoAlterarPrescricaoPendente } : {})} />
         : <p role="status">Carregando a base da prescrição…</p>}

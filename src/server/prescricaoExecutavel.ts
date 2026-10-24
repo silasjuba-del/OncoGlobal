@@ -19,9 +19,10 @@ import { hashConteudoExibido as hash } from "./sessao.js";
 import { verificarPrescricaoDuto } from "./dutos.js";
 import { validarOrigemFicha, type DepsOrigemFicha } from "./origemFichaPrescricao.js";
 import { validarOrigemAcao } from "./origemAcaoPrescricao.js";
+import { projetarAlertasConsulta, registrarCienciaAlertas, validarCienciaAlertas } from "./alertasConsulta.js";
 
 type Contexto = ContextoAcaoComposta;
-interface Deps extends DepsOrigemFicha {}
+interface Deps extends DepsOrigemFicha { salaoRuleset?: unknown }
 interface Resposta { status: number; body: unknown }
 const negar = (codigo: string, status = 409, pendencias?: string[]): Resposta =>
   ({ status, body: { codigo, ...(pendencias ? { pendencias } : {}) } });
@@ -320,6 +321,11 @@ function confirmar(deps: Deps, token: string, raw: unknown, contexto: Contexto, 
   if (!exibido?.some(e => e.draftId === draft.draftId && e.documentId === r.conteudo.documentId
     && e.documentVersion === r.conteudo.documentVersion && e.conteudoHash === r.conteudoHash))
     return negar("PRESCRICAO_NAO_EXIBIDA_NESTA_SESSAO");
+  const civil = dataCivilDoServico(em, "-03:00");
+  if (civil.estado !== "OK") return negar(civil.codigo);
+  const alertas = projetarAlertasConsulta(deps.db, eventos, contexto, civil.dataCivil, em, deps.salaoRuleset);
+  const ciencia = validarCienciaAlertas(alertas, deps.sessoes.alertasExibidos?.(token, contexto) ?? [], entrada.reconhecerAlertas ?? []);
+  if (ciencia) return negar(ciencia);
   const base = lerBasePrescricaoExecutavel(deps.db, contexto, em);
   if (base.revisao !== r.baseHash || base.pendencias.length) return negar("BASE_PRESCRICAO_ALTERADA");
   if(salvo.regraPeso){
@@ -366,6 +372,7 @@ function confirmar(deps: Deps, token: string, raw: unknown, contexto: Contexto, 
   const gravado = executarConfirmacao(deps.db, { autorizadoEm: deps.agora(), operationId, ...contexto, reviewDecisionId,
     sessao: deps.sessoes.obter(token)!, em, registros });
   if (gravado.estado === "NEGADA") return negar(gravado.motivo ?? "PRESCRICAO_TRANSACAO_NEGADA");
+  if (gravado.estado === "GRAVADA") registrarCienciaAlertas(deps.db, contexto, entrada.reconhecerAlertas ?? [], atorId, em, operationId);
   return retorno(gravado.estado, eventoId);
 }
 
