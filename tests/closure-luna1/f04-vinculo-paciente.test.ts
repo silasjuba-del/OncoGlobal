@@ -16,12 +16,13 @@ async function post<T>(ambiente: Awaited<ReturnType<typeof ambienteHttp>>, rota:
 
 function cadastrarPaciente(ambiente: Awaited<ReturnType<typeof ambienteHttp>>, nome: string,
   identificadores: Array<{ tipo: "CNS" | "CPF" | "PRONTUARIO"; valor: string }> = []) {
+  const sessao = ambiente.sessoes.obter(ambiente.token)!;
   salvarDraft(ambiente.db, { draftId: "seed-paciente-f04", patientId: PACIENTE,
     sourceId: "source-seed-f04", rawRef: "fixture-local-sintetica", payload: {}, diagnostics: [], revision: 0,
-    criadoEm: AGORA });
+    criadoEm: sessao.emitidaEm });
   confirmar(ambiente.db, { operationId: "op-seed-f04", patientId: PACIENTE, tumorLotId: null,
-    encounterId: ENCONTRO, reviewDecisionId: "review-seed-f04", sessao: ambiente.sessoes.obter(ambiente.token)!,
-    em: AGORA, registros: [{ draftId: "seed-paciente-f04", expectedRevision: 0, eventId: "event-paciente-f04",
+    encounterId: ENCONTRO, reviewDecisionId: "review-seed-f04", sessao,
+    em: sessao.emitidaEm, registros: [{ draftId: "seed-paciente-f04", expectedRevision: 0, eventId: "event-paciente-f04",
       tipo: "Paciente", payload: { patientId: PACIENTE, identificadores, nome, nascimento: null,
         sexoCadastral: "NAO_INFORMADO", divergencia: false }, fontes: [], revisao: "CONFIRMADO" }] });
 }

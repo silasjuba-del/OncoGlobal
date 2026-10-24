@@ -1,9 +1,13 @@
+import { PedidoRecuperacaoConfirmacao } from "../contracts/api/recuperacaoConfirmacao.js";
+import { criarResolverDocumentoLedger, listarDrafts, listarEventos } from "../kernel/comandos/portas.js";
+import { dadosDoEvento } from "../kernel/projections/snapshot.js";
 import { opcoesLeituraConsulta, ExibirBundle, contextoDraft, payloadDocumento, exibirBundle, confirmarBloco } from "./rotas/confirmacao.js";
 export { g08AnatomiaSexo, g09PtDeBiopsia, g25EscopoAssinatura } from "../kernel/harness/gates.js";
 import { rotaHttp } from "./rotas/catalogo.js";
 import { servirUiLocal } from "./rotas/uiLocal.js";
 import { rotearSalaoECanal } from "./rotas/salaoCanal.js";
 import { rotearPrescricaoFlashConfig } from "./rotas/prescricaoFlash.js";
+import { rotearCognitivo } from "./rotas/cognitivo.js";
 import { rotearExtracaoERevisao } from "./rotas/extracaoRevisao.js";
 import { rascunhoNaoPromovivel } from "../contracts/rascunhos.js";
 import { nomeMedicamento } from "./propostasDoseReceita.js";
@@ -50,9 +54,8 @@ import type { DatabaseSync } from "node:sqlite";
 import { z } from "zod";
 import { DataCivil, Id } from "../contracts/base.js";
 import { ActionIntent, ConfirmarBloco } from "../contracts/operacao.js";
-import { listarDrafts } from "../kernel/comandos/portas.js";
 import { sqliteIdempotencia } from "../kernel/ledger/idempotencia.js";
-import type { criarGateway } from "../kernel/gateway/gateway.js";
+import type { criarGateway, ReadTransport } from "../kernel/gateway/gateway.js";
 import { autorizarSaida } from "./autorizacao.js";
 import type { GerenciadorSessao } from "./sessao.js";
 import { lerAgenda, lerApacs, lerCanal, lerConsulta, lerLotes, lerMensagensChat, lerPaciente, lerRecist, lerSalao, lerTriagens } from "./leituras.js";
@@ -81,6 +84,7 @@ export interface ServidorDeps {
   motorF1?: ReturnType<typeof criarMotorF1>;
   catalogoTumorPacks?: CatalogoTumorPacks;
   extracaoLlm?: ReturnType<typeof criarRuntimeExtracaoLlm>;
+  transportePubMed?: ReadTransport;
   packInvestigacao?: NonNullable<DepsInvestigacao["packInvestigacao"]>;
   agora: () => string;
   log: (entry: { rota: string; codigo: string; status: number }) => void;
@@ -156,6 +160,28 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
     if (rota === "acao" && !contentTypeJson(req)) return reply(415, "CONTENT_TYPE_INVALIDO");
     // Conteúdo da biblioteca continua limitado a 8 MB após decodificação; envelope cobre escapes JSON/base64.
     const raw = await body(req, rota === "upload" ? 11_300_000 : rota === "/biblioteca/importar" ? 24_000_000 : 1_000_000);
+    if (rota === "recuperarConfirmacao") {
+      const p = PedidoRecuperacaoConfirmacao.safeParse(raw); if (!p.success) return reply(400, "PAYLOAD_INVALIDO");
+      const r = p.data.tipo === "PRESCRICAO" ? operarPrescricaoExecutavel(deps, token, p.data.cancelar ? "cancelar" : "recuperar", p.data.pedido) : operarApacRascunho(deps, token, p.data.cancelar ? "cancelar" : "recuperar", p.data.pedido);
+      return reply(r.status, "RECUPERACAO_CONFIRMACAO", r.body);
+    }
+    if (rota === "documentoImpressao") {
+      const p = ContextoAcaoComposta.extend({ documentId: Id, documentVersion: z.number().int().positive() }).strict().safeParse(raw);
+      if (!p.success) return reply(400, "PAYLOAD_INVALIDO");
+      const c = deps.sessoes.consultaSelecionada(token), v = p.data;
+      if (!c || c.patientId !== v.patientId || c.encounterId !== v.encounterId || (c.tumorLotId ?? null) !== v.tumorLotId) return reply(409, "CONTEXTO_CONSULTA_ALTERADO");
+      const docs = listarEventos(deps.db, v.patientId).filter(e => e.tipo === "DOCUMENTO" && e.revisao === "ASSINADO"
+        && e.encounterId === v.encounterId && e.tumorLotId === v.tumorLotId);
+      if (!docs.some(e => { const d = dadosDoEvento(e)?.data as Record<string, unknown> | undefined; return d?.documentId === v.documentId && d.documentVersion === v.documentVersion; })) return reply(409, "DOCUMENTO_FORA_CONTEXTO");
+      const intent = { verbo: "IMPRIMIR" as const, objeto: { tipo: "DOCUMENTO" as const, id: v.documentId, versao: v.documentVersion }, escopo: { patientId: v.patientId, encounterId: v.encounterId }, destino: null, idempotencyKey: "leitura-impressao" };
+      const autorizacao = autorizarSaida(deps.db, intent);
+      if (!autorizacao.ok) return reply(409, autorizacao.codigo);
+      const doc = await criarResolverDocumentoLedger(deps.db).resolver({ id: v.documentId, version: v.documentVersion });
+      const atual = deps.sessoes.consultaSelecionada(token);
+      if (!deps.sessoes.obter(token) || !atual || JSON.stringify(atual) !== JSON.stringify(c)) return reply(409, "CONTEXTO_CONSULTA_ALTERADO");
+      if (!doc || doc.patientId !== v.patientId) return reply(409, "DOCUMENTO_INDISPONIVEL");
+      return reply(200, "DOCUMENTO_IMPRIMIVEL", { html: doc.html });
+    }
     if (rota === "timelineMulticamadas") {
       const p = ContextoAcaoComposta.safeParse(raw), c = deps.sessoes.consultaSelecionada(token);
       if (!p.success) return reply(400, "PAYLOAD_INVALIDO");
@@ -245,6 +271,8 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
       return reply(200, result.codigo, result);
     }
     if (rota === "extracaoLlm") { const result = await executarExtracaoLlm(raw, token, deps); return reply(result.status, String(result.body.codigo), result.body); }
+    const cognitivo = await rotearCognitivo(deps, token, rota, raw, req, res);
+    if (cognitivo) return reply(cognitivo.status, cognitivo.codigo, cognitivo.body);
     const biblioteca = rotearBiblioteca(deps, token, rota, raw, sessao);
     if (biblioteca) return reply(biblioteca.status, String((biblioteca.body as { codigo?: string }).codigo ?? "BIBLIOTECA_CONSULTADA"), biblioteca.body);
     const duto = rotearDutos(deps, token, rota, raw, sessao);

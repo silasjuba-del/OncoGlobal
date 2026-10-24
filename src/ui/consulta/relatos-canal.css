@@ -10,7 +10,6 @@
 }
 
 .relatos-canal :is(button, time, summary) { font: inherit; }
-.relatos-canal :focus-visible { outline: 3px solid #006d77; outline-offset: 2px; }
 .relatos-canal__cabecalho {
   display: flex;
   align-items: flex-start;

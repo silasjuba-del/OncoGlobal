@@ -4,6 +4,11 @@ import type { DatabaseSync } from "node:sqlite";
 export function criarSchema(db: DatabaseSync): void {
   db.exec(`
     PRAGMA foreign_keys = ON;
+    CREATE TABLE IF NOT EXISTS confirmation_cancel (operationId TEXT PRIMARY KEY, atorId TEXT NOT NULL, em TEXT NOT NULL);
+    CREATE TRIGGER IF NOT EXISTS confirmation_cancel_no_update BEFORE UPDATE ON confirmation_cancel
+      BEGIN SELECT RAISE(ABORT,'confirmation_cancel append-only'); END;
+    CREATE TRIGGER IF NOT EXISTS confirmation_cancel_no_delete BEFORE DELETE ON confirmation_cancel
+      BEGIN SELECT RAISE(ABORT,'confirmation_cancel append-only'); END;
     CREATE TABLE IF NOT EXISTS operation (
       operationId TEXT PRIMARY KEY,
       payloadHash TEXT NOT NULL,
@@ -28,6 +33,15 @@ export function criarSchema(db: DatabaseSync): void {
     );
     CREATE INDEX IF NOT EXISTS clinical_event_context
       ON clinical_event(patientId, tumorLotId, encounterId, criadoEm, operationId, eventIndex);
+    CREATE TABLE IF NOT EXISTS confirmation_rules (
+      operationId TEXT PRIMARY KEY REFERENCES operation(operationId),
+      contratoVersao TEXT NOT NULL, configHash TEXT NOT NULL, regras TEXT NOT NULL, biblioteca TEXT NOT NULL,
+      medicoId TEXT NOT NULL, em TEXT NOT NULL
+    );
+    CREATE TRIGGER IF NOT EXISTS confirmation_rules_no_update BEFORE UPDATE ON confirmation_rules
+      BEGIN SELECT RAISE(ABORT,'confirmation_rules append-only'); END;
+    CREATE TRIGGER IF NOT EXISTS confirmation_rules_no_delete BEFORE DELETE ON confirmation_rules
+      BEGIN SELECT RAISE(ABORT,'confirmation_rules append-only'); END;
     CREATE TABLE IF NOT EXISTS draft_envelope (
       draftId TEXT PRIMARY KEY,
       patientId TEXT,

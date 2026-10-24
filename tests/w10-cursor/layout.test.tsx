@@ -3,7 +3,7 @@ import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { act, cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { App } from "../../src/ui/App.js";
+import { DemonstracaoApp as App } from "../../src/ui/DemonstracaoApp.js";
 import { revelarTema } from "../../src/ui/oncochart/revelacao.js";
 
 afterEach(() => {

@@ -20,7 +20,7 @@ function cadastrarPaciente(ambiente: Awaited<ReturnType<typeof ambienteHttp>>) {
     revision: 0, criadoEm: AGORA });
   confirmar(ambiente.db, { operationId: "seed-recon-operation", patientId: PACIENTE, tumorLotId: null,
     encounterId: ENCONTRO, reviewDecisionId: "seed-recon-review", sessao: ambiente.sessoes.obter(ambiente.token)!,
-    em: AGORA, registros: [{ draftId: "seed-recon-paciente", expectedRevision: 0,
+    em: ambiente.sessoes.obter(ambiente.token)!.emitidaEm, registros: [{ draftId: "seed-recon-paciente", expectedRevision: 0,
       eventId: "seed-recon-paciente-event", tipo: "Paciente", payload: { patientId: PACIENTE,
         identificadores: [], nome: "Paciente Sintético Reconciliação", nascimento: null,
         sexoCadastral: "NAO_INFORMADO", divergencia: false }, fontes: [], revisao: "CONFIRMADO" }] });

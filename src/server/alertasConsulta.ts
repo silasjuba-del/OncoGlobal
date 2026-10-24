@@ -1,3 +1,4 @@
+import {auditar, transacao} from "../kernel/comandos/portas.js";
 import type { DatabaseSync } from "node:sqlite";
 import { Alerta, type ClinicalEvent } from "../contracts/operacao.js";
 import { Triagem } from "../contracts/clinico.js";
@@ -42,9 +43,19 @@ export function projetarAlertasConsulta(db: DatabaseSync, eventos: readonly Clin
 }
 export function registrarCienciaAlertas(db:DatabaseSync, contexto:Contexto, ids:readonly string[], medicoId:string, em:string, operationId:string):void {
   if(!ids.length)return;
+  transacao(db,()=>{
   db.exec(`CREATE TABLE IF NOT EXISTS alerta_reconhecimento(operationId TEXT NOT NULL,alertaId TEXT NOT NULL,
     patientId TEXT NOT NULL,encounterId TEXT NOT NULL,tumorLotId TEXT NOT NULL,medicoId TEXT NOT NULL,reconhecidoEm TEXT NOT NULL,
-    PRIMARY KEY(operationId,alertaId))`);
+    PRIMARY KEY(operationId,alertaId));
+    CREATE TRIGGER IF NOT EXISTS alerta_reconhecimento_no_update BEFORE UPDATE ON alerta_reconhecimento
+      BEGIN SELECT RAISE(ABORT, 'alerta_reconhecimento append-only'); END;
+    CREATE TRIGGER IF NOT EXISTS alerta_reconhecimento_no_delete BEFORE DELETE ON alerta_reconhecimento
+      BEGIN SELECT RAISE(ABORT, 'alerta_reconhecimento append-only'); END;`);
   const inserir=db.prepare("INSERT OR IGNORE INTO alerta_reconhecimento VALUES(?,?,?,?,?,?,?)");
-  for(const id of new Set(ids))inserir.run(operationId,id,contexto.patientId,contexto.encounterId,contexto.tumorLotId??"",medicoId,em);
+  for(const id of new Set(ids)) {
+    const r=inserir.run(operationId,id,contexto.patientId,contexto.encounterId,contexto.tumorLotId??"",medicoId,em);
+    if(r.changes)auditar(db,{ator:{tipo:"SESSAO",id:medicoId},acaoPedida:`CIENCIA_ALERTA:${operationId}:${id}`,
+      decisao:"PERMITIDA",motivoCodigo:"CIENCIA_EXPLICITA",politicaVersao:"F2-CIENCIA-ALERTA@1",em});
+  }
+  });
 }

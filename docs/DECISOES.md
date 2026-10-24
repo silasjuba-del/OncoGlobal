@@ -416,3 +416,10 @@ As decisões D-F0C abaixo já tinham fonte documental em 10/10 e passam a ser in
 | D-F0C-06 | Recorte dos novos avisos laboratoriais | [Registro original, inclusive ressalvas de unidade e proveniência](./_arquivo/f0-complemento/INICIO-CODEX-2026-10-10.md) |
 
 INV-12 deve ser lido com as exceções expressamente delimitadas na seção 0.2 do [plano v1.1](./PLANO-FINAL-ONCOGLOBAL-v1.1.md), sem deduzir novas saídas externas. O estado das correções técnicas e seus limites está em [Correções da auditoria](./reviews/CORRECOES-AUDITORIA-20261020.md). O questionário pendente não foi respondido por inferência.
+
+### D-F2-ASSINATURA-SELECAO — 2026-10-22
+
+- Decisão do Dr. Silas: finalizar a consulta significa **assinar os documentos selecionados**. Não encerra um agregado de atendimento, não promove outros rascunhos e não pressupõe ciência de alertas não selecionados. Correções de documentos assinados continuam por nova versão; não há operação de reabertura clínica implícita.
+- Implementação autorizada: corrigir os achados da auditoria F2. Entrada principal usa HTTP autenticado; demonstração fica em `demonstracao.html`, identificada como simulação. Reconciliação de medicamentos exige o evento-base visto pelo médico. Recuperação de confirmação conserva a intenção original; cancelar só é possível antes da confirmação, sob a mesma transação SQLite.
+- Peso: manter a validade e a natureza de aviso das decisões D-W9-63/D-F1 vigentes; explicitar a data da medida e comparar também com o peso documentado do ciclo anterior no mesmo episódio/lote. Não criar bloqueio clínico nem arredondamento por frasco. Ausência/conflito da referência permanece explícita.
+- Canon persistido v1 preserva strings literalmente (inclusive representação de fuso) e distingue chave ausente de null/undefined explícito; não reescrever hashes de documentos já assinados. Objetos Date passam a usar ISO UTC, eliminando colisão com objeto vazio.

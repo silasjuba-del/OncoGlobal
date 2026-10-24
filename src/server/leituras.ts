@@ -415,6 +415,10 @@ export function lerConsulta(db: DatabaseSync, patientId: string, agora: string, 
   const historicoClinico = projetarHistoricoClinico({ eventos:all,patientId,tumorLotId:lote?.tumorLotId ?? null,
     encounterId:current.encounterId,agora });
   const historicoSistemico = historicoDaConsulta(eventosDaConsulta);
+  const listasMedicamentos = eventosVigentes(all).filter(e => ["CONFIRMADO","ASSINADO"].includes(e.revisao) && /^FATO(?:@1)?$/.test(e.tipo) && data(e)?.campo === "medicamentos");
+  const listaMedicamentos = listasMedicamentos[0], valorMedicamentos = listaMedicamentos ? data(listaMedicamentos)?.valor : [];
+  const medicamentosAtuais = {eventId: listaMedicamentos?.eventId ?? null, medicamentos: Array.isArray(valorMedicamentos) && valorMedicamentos.every(v=>typeof v === "string") ? valorMedicamentos as string[] : [], conflito: listasMedicamentos.length > 1 || !Array.isArray(valorMedicamentos) || valorMedicamentos.some(v=>typeof v !== "string")};
+  const documentosVigentes = new Set(eventosVigentes(eventosDaConsulta).map(e=>e.eventId));
   let documentosComIntegridadePendente = 0;
   const historicoDocumentos = eventosDaConsulta.filter((evento) => evento.tipo === "DOCUMENTO"
     && evento.revisao === "ASSINADO").flatMap((evento) => {
@@ -434,6 +438,7 @@ export function lerConsulta(db: DatabaseSync, patientId: string, agora: string, 
     return [{ eventId: evento.eventId, documentId: corpo.documentId,
       documentVersion: corpo.documentVersion, tumorLotId: evento.tumorLotId,
       titulo: typeof corpo.titulo === "string" ? corpo.titulo : "Documento assinado",
+      ...(!documentosVigentes.has(evento.eventId)?{liberacaoPendente:"Versão substituída: disponível para consulta no histórico; emissão desabilitada. Use a versão vigente."}:{}),
       ...(documentoReceitaDosePendente(corpo)?{liberacaoPendente:'Receita histórica com dose pendente: emissão indisponível; prepare nova versão com dose validada.'}:{}),
       texto: corpo.texto, assinadoEm: evento.criadoEm, autorId: evento.criadoPor.id,
       encounterId: evento.encounterId }];
@@ -461,7 +466,7 @@ export function lerConsulta(db: DatabaseSync, patientId: string, agora: string, 
     resumoConfirmadoParaDocumento,
     retratoTransversal: projetarRetratoTransversal({ patientId, tumorLotId: lote?.tumorLotId ?? null,
       fatos: fatosRevisados }),
-    historicoDocumentos,
+    historicoDocumentos, medicamentosAtuais,
     conflitosRevisaoExtracao,
     fechamento: { blocoAtual: "EVOLUCAO" as const,
       registros: drafts.map((d) => ({ id: d.draftId, expectedRevision: d.revision })),

@@ -1,4 +1,30 @@
 import { z } from "zod";
+import { Id, Instante } from "../base.js";
+import { RelatorioCognitivoExtracaoSchema } from "../cognitivoExtracao.js";
+
+export const ResultadoCognitivoOncoassist = z.object({
+  codigo: z.literal("PROPOSTA_LLM_CARREGADA"), draftId: Id, criaEventoClinico: z.literal(false),
+  proposta: z.record(z.string(), z.json()), cognitivo: RelatorioCognitivoExtracaoSchema.nullable(),
+  validadeFonte: z.enum(["ATUAL", "FONTE_ALTERADA"]), validadeContexto: z.enum(["ATUAL", "CONTEXTO_ALTERADO"]),
+  validadePolitica: z.enum(["MESMA_VERSAO", "NAO_VERIFICAVEL"]),
+});
+export type ResultadoCognitivoOncoassist = z.infer<typeof ResultadoCognitivoOncoassist>;
+
+export const PaginacaoExtracoesCognitivas = z.object({
+  cursorExtracoes: Id.optional(), limiteExtracoes: z.number().int().min(1).max(50).optional(),
+});
+export const PaginaExtracoesCognitivas = z.object({
+  itens: z.array(z.object({
+    draftId: Id, sourceDraftId: Id, sourceId: Id, criadoEm: Instante,
+    status: z.enum(["APTO_PARA_REVISAO_HUMANA", "REQUER_RESOLUCAO_MEDICA", "BLOQUEADO_FALHA_CRITICA", "NAO_VERIFICADO"]),
+    validadeFonte: z.enum(["ATUAL", "FONTE_ALTERADA"]), validadeContexto: z.enum(["ATUAL", "CONTEXTO_ALTERADO"]),
+    validadePolitica: z.enum(["MESMA_VERSAO", "NAO_VERIFICAVEL"]),
+    alegacoes: z.number().int().nonnegative(), pendencias: z.number().int().nonnegative(),
+    criaEventoClinico: z.literal(false),
+  }).strict()).max(50),
+  proximoCursor: Id.nullable(),
+}).strict();
+export type PaginaExtracoesCognitivas = z.infer<typeof PaginaExtracoesCognitivas>;
 
 export const MotivoConfigOncoassist = z.enum(["DESABILITADO", "CHAVE_AUSENTE"]);
 export const CodigoRespostaOncoassist = z.enum([
@@ -40,7 +66,7 @@ export const HistoricoOncoassist = z.object({ propostas: z.array(z.object({
   auditoria: AuditoriaOncoassist, estado: z.enum(["PENDENTE", "CONCLUIDA"]),
   validade: z.enum(["ATUAL", "FONTE_ALTERADA"]), validadePolitica: ValidadePoliticaOncoassist.optional(),
   resposta: RespostaOncoassist.nullable(),
-})) });
+})), extracoesCognitivas: PaginaExtracoesCognitivas.optional() });
 export type HistoricoOncoassist = z.infer<typeof HistoricoOncoassist>;
 export type AuditoriaOncoassist = z.infer<typeof AuditoriaOncoassist>;
 
@@ -118,4 +144,25 @@ export function mensagemResultadoTecnico(resposta: RespostaOncoassist): string |
 
 export function rotuloCategoria(resposta: RespostaOncoassist): string | null {
   return resposta.status === "PROPOSTA" ? nomesCategoria[resposta.categoria] : null;
+}
+
+const rotulosStatusExtracao = {
+  APTO_PARA_REVISAO_HUMANA: "Pronta para revisão humana. Não é fato do prontuário.",
+  REQUER_RESOLUCAO_MEDICA: "Exige resolução médica. Não é fato do prontuário.",
+  BLOQUEADO_FALHA_CRITICA: "Bloqueada por falha crítica. Não usar como proposta clínica.",
+  NAO_VERIFICADO: "Não verificada. O rascunho permanece somente histórico.",
+} as const;
+
+/** Rótulo operacional. O estado interno não autoriza uso clínico. */
+export function rotuloStatusExtracaoCognitiva(status: PaginaExtracoesCognitivas["itens"][number]["status"]): string {
+  return rotulosStatusExtracao[status];
+}
+
+export function rotuloCodigoCognitivoNaoVerificado(codigo: "SEM_ALEGACOES" | "CITACAO_NAO_LITERAL_NA_FONTE_ORIGINAL" | "CONTRATO_COGNITIVO_INCOMPATIVEL"): string {
+  const porCodigo = {
+    SEM_ALEGACOES: "Nenhuma alegação foi verificada.",
+    CITACAO_NAO_LITERAL_NA_FONTE_ORIGINAL: "A citação não confere literalmente com a fonte original.",
+    CONTRATO_COGNITIVO_INCOMPATIVEL: "O contrato cognitivo não pôde ser aplicado.",
+  } as const;
+  return porCodigo[codigo];
 }

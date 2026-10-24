@@ -3,6 +3,7 @@ import { hashCanonico } from "../../modules/tipos.js";
 import { ClinicalFact, FactSourceType, type ClinicalFact as FatoClinico } from "../../contracts/w10/extracao.js";
 import type { Fonte } from "../../contracts/base.js";
 import { normalizarDataCivil } from "./normalizacao.js";
+import { fonteDeVoz, type MetodoCapturaTranscricao } from "../../contracts/capturaTranscricao.js";
 
 export interface RevisaoExtracaoPreparada {
   readonly draftId: string;
@@ -84,6 +85,7 @@ export function prepararRevisaoExtracao(input: {
   readonly sourceId: string;
   readonly rawTranscript: string;
   readonly sourceType: string;
+  readonly captureMethod?: MetodoCapturaTranscricao;
   /** Prova resolvida pelo servidor após verificar ReviewDecision de vínculo e hash da fonte. */
   readonly vinculoConfirmado?: boolean;
   readonly facts: readonly unknown[];
@@ -104,6 +106,10 @@ export function prepararRevisaoExtracao(input: {
   if (input.incluirTextoOriginal === true && (!input.rawTranscript.trim() || input.rawTranscript.length > 200_000
     || !input.segmentoVinculado?.id)) throw new Error("TEXTO_ORIGINAL_INVALIDO");
   FactSourceType.parse(input.sourceType);
+  if (fonteDeVoz(input) && input.facts.some(f => {
+    const fact = objeto(f);
+    return fact && !fonteDeVoz(fact);
+  })) throw new Error("REPROCESSAMENTO_VOZ_NECESSARIO");
   const facts = input.facts.map((fact) => ClinicalFact.parse(fact));
   if (facts.some((fact) => fact.sourceId !== input.sourceId || fact.sourceType !== input.sourceType))
     throw new Error("PROVENIENCIA_DIVERGENTE");
@@ -189,6 +195,7 @@ export function prepararRevisaoExtracao(input: {
       payload: fatoExplicito ? { campo, domain: fact.domain,
         valor: fact.value,
         sourceId: fact.sourceId, factId: fact.id, sourceType: fact.sourceType,
+        ...(fact.captureMethod ? { captureMethod: fact.captureMethod } : {}),
         evidence: fact.evidence, confidence: fact.confidence, requiresConfirmation: fact.requiresConfirmation,
         ...(q ? { qualificadores: q } : {}),
         rawEvidence: fact.rawEvidence, ...(fact.date ? { factDate: fact.date } : {}),
@@ -197,6 +204,7 @@ export function prepararRevisaoExtracao(input: {
           ...(fact.domain === "lab" ? { observacaoDatada: true } : {}) } : {}) }
         : { exceptionId: fact.id, acao: "CONFIRMAR", factId: fact.id, candidate: fact.value,
           sourceId: fact.sourceId, sourceType: fact.sourceType, evidence: fact.evidence,
+          ...(fact.captureMethod ? { captureMethod: fact.captureMethod } : {}),
           requiresConfirmation: fact.requiresConfirmation, ...(q ? { qualificadores: q } : {}), rawEvidence: fact.rawEvidence },
     };
   });

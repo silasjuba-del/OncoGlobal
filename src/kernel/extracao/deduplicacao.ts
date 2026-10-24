@@ -3,6 +3,7 @@
 // ou decisão clínica é criado pela comparação de textos/identificadores.
 import { gerarChaveDedupe, type EntradaExameDedupe } from "../../rules/w8/dedupeExame.js";
 import type { ClinicalFact, FactSourceType } from "./tipos.js";
+import type { MetodoCapturaTranscricao } from "../../contracts/capturaTranscricao.js";
 import { normalizarDataCivil } from "./normalizacao.js";
 
 export type IdentidadeExame = Readonly<Pick<EntradaExameDedupe,
@@ -15,6 +16,7 @@ export interface FonteParaDedupe {
   readonly recordingId: string;
   readonly sourceId: string;
   readonly sourceType: FactSourceType;
+  readonly captureMethod?: MetodoCapturaTranscricao;
   readonly page?: number;
   readonly rawTranscript: string;
   /** Identidade do exame fornecida pelo importador; nunca inferida da conclusão. */

@@ -47,7 +47,7 @@ function calcularAtual(deps: DepsOrigemFicha, contexto: ContextoAcaoComposta, or
   if (!calculo.ok) throw new Error("FICHA_NAO_INSTANCIAVEL");
   const itens = calculo.itens.map((i, index) => ({ itemId: `item-ficha:${hash([draftId, index, i.item.sequence])}`, item: i.item }));
   const pendencias = calculo.itens.flatMap(i => i.motivo ? [`${i.item.drug}: ${i.motivo}`] : []);
-  const avisos = calculo.itens.flatMap(i => i.aviso ? [`${i.item.drug}: ${i.aviso}`] : []);
+  const avisos = [...consulta.avaliacaoClinica.avisosFlash, ...calculo.itens.flatMap(i => i.aviso ? [`${i.item.drug}: ${i.aviso}`] : [])];
   avisos.push("Cálculo proposto a partir da ficha conferida. Revise a indicação, os dados corporais, os exames e o preparo antes de assinar.");
   return { itens, pendencias, avisos, dadosCorporais };
 }

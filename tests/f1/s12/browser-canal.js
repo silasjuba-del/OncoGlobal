@@ -25,7 +25,7 @@ export async function jornadaCanalNoNavegador(page,{baseUrl,manifesto,segredo,ef
 }
 
 export async function jornadaDemonstracaoCanal(page){
- await page.goto(new URL('/',page.url()).href);
+ await page.goto(new URL('/demonstracao.html',page.url()).href);
  await page.getByRole('button',{name:'Canal',exact:true}).click();
  const mensagem=page.locator('[data-mensagem="msg-red"]');
  const seletor=mensagem.getByLabel('Encontro para a resposta',{exact:true});

@@ -75,3 +75,15 @@ describe('S5b runtime SQLite causal, temporal e persistente',()=>{
   expect(v.visaoIntegrada).not.toBeNull();expect(spy.mock.calls.filter(([s])=>/SELECT \* FROM clinical_event/.test(s))).toHaveLength(0);spy.mockClear();db.close();
  });
 });
+
+it('snapshot de regras da confirmação é imutável, atômico e não muda no replay',()=>{
+ const db=abrirLedger(':memory:');let c=config();criarMotorF1(db,()=> '2026-10-12T10:29:59-03:00',()=>c);
+ try{const req=gravar(db);const row=db.prepare('SELECT * FROM confirmation_rules').get()!;
+ expect(JSON.parse(String(row.regras))).toEqual([ref]);expect(row.medicoId).toBe(req.sessao.medicoId);expect(row.em).toBe(req.em);
+ c={...c,regras:[{...ref,versao:'2',hash:'h2'}]};expect(confirmar(db,req).estado).toBe('REPLAY');
+ expect(db.prepare('SELECT * FROM confirmation_rules').all()).toEqual([row]);
+ expect(()=>db.exec('DELETE FROM confirmation_rules')).toThrow(/append-only/);
+ db.exec("CREATE TRIGGER falhar_regras BEFORE INSERT ON confirmation_rules BEGIN SELECT RAISE(ABORT,'falha regras'); END;");
+ expect(()=>gravar(db,'outra')).toThrow('falha regras');expect(db.prepare("SELECT 1 FROM operation WHERE operationId='outra'").get()).toBeUndefined();
+ }finally{db.close();}
+});

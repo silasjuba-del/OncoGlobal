@@ -1,6 +1,6 @@
 import type { ClinicalEvent } from "../../contracts/operacao.js";
 import type { Paciente, Ciclo, TreatmentEpisode } from "../../contracts/clinico.js";
-import { Triagem } from "../../contracts/clinico.js";
+import { Ciclo as CicloSchema, Triagem } from "../../contracts/clinico.js";
 import { SalaoRuleset } from "../../contracts/regras.js";
 import { dadosDoEvento, escopoDoEvento, eventosVigentes, projetarSnapshot } from "../../kernel/projections/snapshot.js";
 import { labSeries, weightSeries, type PontoLab } from "../../kernel/projections/series.js";
@@ -189,6 +189,23 @@ export function avaliarConsulta(i: EntradaAvaliacaoConsulta) {
   });
   const pesoAnterior = peso ? pesos.find(p=>Date.parse(p.data)<Date.parse(peso.data)) : null;
   const variacaoPeso = peso && pesoAnterior && pesoAnterior.kg>0 ? Math.abs(peso.kg-pesoAnterior.kg)/pesoAnterior.kg : null;
+  // O peso de referência pertence ao ciclo anterior do mesmo episódio/lote, não à penúltima pesagem.
+  const eventoCiclo = i.ciclo ? atuais.find(e=>/^Ciclo(?:@1)?$/.test(e.tipo)&&e.tumorLotId===i.tumorLotId&&dadosDoEvento(e)?.cicloId===i.ciclo!.cicloId) : null;
+  // Antes de planejar o próximo ciclo, a consulta ainda projeta o último ciclo do encontro anterior.
+  const numeroReferencia = i.ciclo ? i.ciclo.numero - (eventoCiclo && eventoCiclo.encounterId !== i.encounterId ? 0 : 1) : null;
+  const ciclosAnteriores = i.ciclo && numeroReferencia !== null && numeroReferencia > 0 ? atuais.filter(e => e.tumorLotId === i.tumorLotId && /^Ciclo(?:@1)?$/.test(e.tipo)
+    && ["CONFIRMADO","ASSINADO"].includes(e.revisao)).flatMap(e => {
+      const c = CicloSchema.safeParse(dadosDoEvento(e));
+      return c.success && c.data.episodioId === i.ciclo!.episodioId && c.data.numero === numeroReferencia ? [c.data] : [];
+    }) : [];
+  const cicloAnterior = ciclosAnteriores.length === 1 ? ciclosAnteriores[0]! : null;
+  const dadoPesoAnterior = cicloAnterior?.pesoKg;
+  const fontePesoAnterior = dadoPesoAnterior?.fontes.find(f => f.dataClinica && observacaoNoHorizonte(f.dataClinica,limiteClinico,horizonte));
+  const pesoAnteriorCiclo = cicloAnterior?.origemPeso === "MEDIDO" && dadoPesoAnterior?.campo === "PRESENTE"
+    && ["CONFIRMADO","ASSINADO"].includes(dadoPesoAnterior.revisao) && fontePesoAnterior && dadoPesoAnterior.valor !== null
+    ? {kg:dadoPesoAnterior.valor,medidoEm:fontePesoAnterior.dataClinica!,cicloId:cicloAnterior.cicloId} : null;
+  const variacaoPesoCiclo = peso && new Set(pesosDia.map(p=>p.kg)).size === 1 && pesoAnteriorCiclo
+    ? Math.abs(peso.kg-pesoAnteriorCiclo.kg)/pesoAnteriorCiclo.kg : null;
   const altura = alturaDocumentada(retrato, instanteHorizonte);
   const dadosCorporais={pesoKg:renal.valoresUsados.peso.valor,alturaCm:altura,
     bsaM2:null,clcr:renal.clcrMlMin,medidoEm:peso?.data ?? null};
@@ -202,6 +219,9 @@ export function avaliarConsulta(i: EntradaAvaliacaoConsulta) {
     fontes: concordantes.flatMap(p => doPaciente.find(e => e.eventId === p.eventId)!.fontes
       .map(f => ({eventId:p.eventId,sourceId:f.sourceId,medidoEm:p.data}))) };
   const avisosFlash = [...avisosCriticos,
+    ...(peso && diaDaObservacao(peso.data) !== i.hoje ? [`Peso documentado em ${peso.data}: não foi medido hoje; confira antes de prescrever.`] : []),
+    ...(variacaoPesoCiclo !== null && variacaoPesoCiclo >= 0.10 ? [`Variação de peso de pelo menos 10% desde o ciclo anterior (${pesoAnteriorCiclo!.kg} kg em ${pesoAnteriorCiclo!.medidoEm}): revisar prescrição`] : []),
+    ...(numeroReferencia !== null && numeroReferencia > 0 && variacaoPesoCiclo === null ? ["Comparação de peso com o ciclo anterior indisponível: revisar a referência documentada."] : []),
     ...(variacaoPeso !== null && variacaoPeso>=0.10 ? ["Variação de peso de pelo menos 10%: revisar prescrição"] : []),
     ...(interacoes.estado === "VERMELHO" ? [interacoes.motivo] : []),
     ...(grau !== null && grau >= 2 ? ["Toxicidade registrada: revisar antes da decisão do ciclo"] : []),
@@ -209,6 +229,6 @@ export function avaliarConsulta(i: EntradaAvaliacaoConsulta) {
     ...(hbv.faltantes.length ? [`Verificar sorologias: ${hbv.faltantes.join(", ")}`] : []),
     ...(i.cumulativo?.estado === "VERMELHO" ? i.cumulativo.motivos.map(m => m.texto) : [])];
   const sugestoesLaboratorio = [...(interacoes.achados.some(a=>key(a.drogaA).includes("capecitabina") && key(a.drogaBouClasse).includes("varfarina")) ? ["INR"] : []),...hbv.faltantes];
-  return { elegibilidade, renal, dadosCorporais, dadosNutricionais, variacaoPeso, criticos, hbv, interacoes, emergencia, avisosFlash, sugestoesLaboratorio,
+  return { elegibilidade, renal, dadosCorporais, dadosNutricionais, variacaoPeso, variacaoPesoCiclo, pesoAnteriorCiclo, criticos, hbv, interacoes, emergencia, avisosFlash, sugestoesLaboratorio,
     lembrete: elegibilidade.motivos.map(m=>m.texto).filter((t,index,a)=>a.indexOf(t)===index).join("; ") };
 }

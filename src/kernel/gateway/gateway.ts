@@ -566,3 +566,11 @@ export function autorizarLeitura(
   if (veredito.decisao !== "PASSA") return negar("G02_PHI_NA_CONSULTA");
   return { decisao: "PERMITIDA", classe: "READ", motivoCodigo: "OK" };
 }
+
+export {
+  criarWriterClinicoGateway,
+  type ComprovanteExibicaoMedica,
+  type PedidoEscritaGatewayClinico,
+  type ResultadoWriterClinico,
+  type WriterClinicoGateway,
+} from "./writerClinico.js";

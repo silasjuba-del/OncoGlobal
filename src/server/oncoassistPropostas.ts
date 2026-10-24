@@ -1,7 +1,8 @@
 import { createHash } from "node:crypto";
 import { z } from "zod";
 import { Id, type DraftEnvelope } from "../contracts/base.js";
-import { AuditoriaOncoassist, RespostaOncoassist, type HistoricoOncoassist } from "../contracts/api/oncoassist.js";
+import { AuditoriaOncoassist, RespostaOncoassist, PaginacaoExtracoesCognitivas, type HistoricoOncoassist } from "../contracts/api/oncoassist.js";
+import { listarExtracoesCognitivas } from "./extracaoLlm.js";
 import { lerDraft, listarDrafts, salvarDraft, transacao } from "../kernel/comandos/portas.js";
 import { criarOncoassistJev } from "../kernel/llm/jev/oncoassist.js";
 import { hashConteudoExibido } from "./sessao.js";
@@ -94,16 +95,18 @@ export async function operarOncoassistPropostas(deps: ServidorDeps, token: strin
   rota: "oncoassistClassificar" | "oncoassistHistorico", raw: unknown, signal: AbortSignal): Promise<Saida> {
   try {
     if (rota === "oncoassistHistorico") {
-      const parsed = Contexto.strict().safeParse(raw);
+      const parsed = Contexto.extend(PaginacaoExtracoesCognitivas.shape).strict().safeParse(raw);
       if (!parsed.success) throw new Recusa("PAYLOAD_INVALIDO", 400);
       return transacao(deps.db, () => {
         validarContexto(deps, token, parsed.data);
+        const extracoes = listarExtracoesCognitivas(parsed.data, token, deps);
+        if (!extracoes.pagina) throw new Recusa(extracoes.codigo, extracoes.status);
         const historico: HistoricoOncoassist = { propostas: registros(deps, parsed.data).map(({ registro }) => ({
           auditoria: registro.auditoria, estado: registro.estado, resposta: registro.resposta,
           validade: fonteAtual(deps, registro) ? "ATUAL" as const : "FONTE_ALTERADA" as const,
           validadePolitica: politicaAtual(registro),
         })).sort((a, b) => b.auditoria.propostaRevision - a.auditoria.propostaRevision
-          || a.auditoria.propostaId.localeCompare(b.auditoria.propostaId)) };
+          || a.auditoria.propostaId.localeCompare(b.auditoria.propostaId)), extracoesCognitivas: extracoes.pagina };
         return sucesso(historico);
       });
     }

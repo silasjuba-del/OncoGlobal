@@ -1,3 +1,5 @@
+import {RecuperacaoConfirmacao} from "../../contracts/api/recuperacaoConfirmacao.js";
+import {guardarPendente,concluirPendente,exigirSemPendente} from "./confirmacoesPendentes.js";
 import { PropostasDoseReceitaResposta } from '../../contracts/api/propostaDoseReceita.js';
 import { CatalogoFichasRespostaSchema, FichaProtocoloCatalogoSchema, InstanciacaoFichaRespostaSchema } from "../../contracts/api/fichasPrescricao.js";
 import { EstudoServicoSchema, ListarEstudosRespostaSchema, AvaliacaoEstudoRespostaSchema,
@@ -11,11 +13,14 @@ import { RevisaoClinicaResposta } from '../../contracts/fase2/revisaoClinica.js'
 import { EstadoDoencaPreparado } from '../../contracts/fase2/estadoDoenca.js';
 import { SintesePropostaResposta } from '../../contracts/api/sinteseProposta.js';
 import { ActionIntent, ConfirmarBloco } from "../../contracts/operacao.js";
-import { EstadoOncoassist, FontesOncoassist, RespostaOncoassist, HistoricoOncoassist } from "./oncoassist.js";
+import { EstadoOncoassist, FontesOncoassist, RespostaOncoassist, HistoricoOncoassist, ResultadoCognitivoOncoassist } from "./oncoassist.js";
 import { FonteRevisao, ReconciliacaoProposta, RevisaoPreparada } from "./revisaoExtracao.js";
 import { AcaoResposta, AgendaResposta, ApacResposta, BundleResposta, CanalResposta, ChatResposta, ConfirmacaoResposta, ConsultaResposta, FlashPreparadaResposta, FlashRascunhoResposta, SalaoResposta } from "./respostas.js";
 import { z } from "zod";
 import {DitadoResposta} from '../../contracts/fase2/ditado.js';
+import { ResultadoSkillClinica } from '../../contracts/skillsClinicas.js';
+import { LeituraPubMedResposta, ListaRascunhosPubMedResposta } from "../../contracts/leituraPubMed.js";
+import { montarPedidoPubMed } from "./pesquisaPubMed.js";
 import { ResultadoInstrumentoSchema } from "../../contracts/f0c/resultadoInstrumento.js";
 import { criarApiBiblioteca } from "./biblioteca.js";
 import { BasePrescricaoExecutavelResposta, PrescricaoExecutavelConfirmada,
@@ -98,6 +103,12 @@ export function criarPortaHttp(opcoes: OpcoesHttp): PortaConsulta {
   }
 
   return {
+    async recuperarConfirmacao(pedido) {
+      const r=await leitura('/consulta/confirmacao/recuperar',pedido,RecuperacaoConfirmacao);
+      if(r.estado==='CONFIRMADA'||r.estado==='CANCELADA')concluirPendente(pedido);
+      return r;
+    },
+    async documentoImpressao(pedido) { return leitura('/consulta/documento-impressao',pedido,z.object({html:z.string().min(1)}).strict()); },
     async carregarTimelineMulticamadas(contexto, signal) {
       const { status, json } = await enviar("/consulta/timeline-multicamadas", contexto, true, signal);
       if (status !== 200) throw new ErroPorta(codigoDe(json, "TIMELINE_INDISPONIVEL"));
@@ -126,6 +137,7 @@ export function criarPortaHttp(opcoes: OpcoesHttp): PortaConsulta {
       return result.data;
     },
     async prepararPrescricaoExecutavel(pedido, signal) {
+      exigirSemPendente("PRESCRICAO",pedido.contexto);
       const { status, json } = await enviar("/consulta/prescricao-executavel/preparar", pedido, true, signal);
       if (status !== 200) throw new ErroPorta(codigoDe(json, "PRESCRICAO_EXECUTAVEL_PENDENTE"));
       const result = PrescricaoExecutavelPreparada.safeParse(json);
@@ -136,10 +148,12 @@ export function criarPortaHttp(opcoes: OpcoesHttp): PortaConsulta {
       return result.data;
     },
     async confirmarPrescricaoExecutavel(pedido, signal) {
+      guardarPendente({tipo:"PRESCRICAO",pedido});
       const { status, json } = await enviar("/consulta/prescricao-executavel/confirmar", pedido, true, signal);
       if (status !== 200) throw new ErroPorta(codigoDe(json, "PRESCRICAO_EXECUTAVEL_PENDENTE"));
       const result = PrescricaoExecutavelConfirmada.safeParse(json);
       if (!result.success) throw new ErroPorta("PAYLOAD_INVALIDO");
+      concluirPendente({tipo:"PRESCRICAO",pedido});
       return result.data;
     },
     async lerBaseApacRascunho(contexto, signal) {
@@ -153,6 +167,7 @@ export function criarPortaHttp(opcoes: OpcoesHttp): PortaConsulta {
       return p.data;
     },
     async prepararApacRascunho(pedido, signal) {
+      exigirSemPendente("APAC",pedido.contexto);
       const { status, json } = await enviar("/consulta/apac-rascunho/preparar", pedido, true, signal);
       if (status !== 200) throw new ErroPorta(codigoDe(json, "APAC_RASCUNHO_PENDENTE"));
       const p = ApacRascunhoPreparadoSchema.safeParse(json);
@@ -171,17 +186,18 @@ export function criarPortaHttp(opcoes: OpcoesHttp): PortaConsulta {
       return p.data;
     },
     async confirmarApacRascunho(pedido, signal) {
+      guardarPendente({tipo:"APAC",pedido});
       const { status, json } = await enviar("/consulta/apac-rascunho/confirmar", pedido, true, signal);
       if (status !== 200) throw new ErroPorta(codigoDe(json, "APAC_RASCUNHO_NAO_CONFIRMADA"));
       const p = ApacRascunhoConfirmadoSchema.safeParse(json);
       const anterior = preparadasApac.get(pedido.draftId);
-      if (!p.success || !anterior
-        || anterior.contexto.patientId !== pedido.contexto.patientId
+      if (!p.success || anterior && (anterior.contexto.patientId !== pedido.contexto.patientId
         || anterior.contexto.encounterId !== pedido.contexto.encounterId
         || anterior.contexto.tumorLotId !== pedido.contexto.tumorLotId
         || anterior.revision !== pedido.expectedRevision || anterior.conteudoHash !== pedido.conteudoHash
-        || p.data.apacId !== anterior.apac.apacId || p.data.versao !== anterior.apac.versao)
+        || p.data.apacId !== anterior.apac.apacId || p.data.versao !== anterior.apac.versao))
         throw new ErroPorta("PAYLOAD_INVALIDO");
+      concluirPendente({tipo:"APAC",pedido});
       return p.data;
     },
     async lerEstatisticaServico(periodo: PeriodoClinicoEstatisticaServico | null, signal) {
@@ -292,6 +308,15 @@ export function criarPortaHttp(opcoes: OpcoesHttp): PortaConsulta {
       const {status,json}=await enviar('/consulta/ditado',pedido,true,signal),p=DitadoResposta.safeParse(json);
       if(status!==200||!p.success)throw new ErroPorta(codigoDe(json,'DITADO_INDISPONIVEL'));
       return p.data;
+    },
+    async skillsClinicas(pedido, signal) {
+      const {status, json} = await enviar('/consulta/skills', pedido, true, signal);
+      if (status !== 200) throw new ErroPorta(codigoDe(json, 'SKILL_INDISPONIVEL'));
+      const r = ResultadoSkillClinica.safeParse(json);
+      if (!r.success) throw new ErroPorta('PAYLOAD_INVALIDO');
+      if ('contexto' in pedido && 'execucao' in r.data && (chaveContexto(r.data.execucao.contexto) !== chaveContexto(pedido.contexto)
+        || r.data.documentos.some(d => chaveContexto(d.contexto) !== chaveContexto(pedido.contexto)))) throw new ErroPorta('CONTEXTO_CONSULTA_ALTERADO');
+      return r.data;
     },
     biblioteca: criarApiBiblioteca((rota, corpo, signal) => enviar(rota, corpo, true, signal)),
     async reconciliarMedicamentos(pedido, signal) {
@@ -441,6 +466,33 @@ export function criarPortaHttp(opcoes: OpcoesHttp): PortaConsulta {
       if (status !== 200) throw new ErroPorta(codigoDe(json, "PAYLOAD_INVALIDO"));
       const result = HistoricoOncoassist.safeParse(json);
       if (!result.success) throw new ErroPorta("PAYLOAD_INVALIDO");
+      return result.data;
+    },
+    async listarRascunhosPubMed(signal) {
+      const { status, json } = await enviar("/consulta/leitura/rascunhos", {}, true, signal);
+      if (status !== 200) throw new ErroPorta(codigoDe(json, "RASCUNHOS_PUBMED_INDISPONIVEIS"));
+      const parsed = ListaRascunhosPubMedResposta.safeParse(json);
+      if (!parsed.success) throw new ErroPorta("PAYLOAD_INVALIDO");
+      return parsed.data;
+    },
+    async pesquisarPubMed(consulta, signal) {
+      let pedido;
+      try { pedido = montarPedidoPubMed(consulta); }
+      catch { throw new ErroPorta("PAYLOAD_INVALIDO"); }
+      const { status, json } = await enviar("/consulta/leitura", pedido, true, signal);
+      if (status !== 200 && status !== 201) throw new ErroPorta(codigoDe(json, "PESQUISA_PUBMED_NAO_CONCLUIDA"));
+      const parsed = LeituraPubMedResposta.safeParse(json);
+      if (!parsed.success) throw new ErroPorta("PAYLOAD_INVALIDO");
+      return parsed.data;
+    },
+    async oncoassistResultadoCognitivo(pedido, signal) {
+      const { status, json } = await enviar("/consulta/llm/resultado", pedido, true, signal);
+      if (status !== 200) throw new ErroPorta(codigoDe(json, "PAYLOAD_INVALIDO"));
+      const result = ResultadoCognitivoOncoassist.safeParse(json);
+      const c = result.success ? result.data.proposta.correlacao : null;
+      if (!result.success || result.data.draftId !== pedido.draftId || !c || typeof c !== "object" || Array.isArray(c)
+        || c.patientId !== pedido.patientId || c.encounterId !== pedido.encounterId || c.tumorLotId !== (pedido.tumorLotId ?? null))
+        throw new ErroPorta("CONTEXTO_CONSULTA_ALTERADO");
       return result.data;
     },
     async login(senha: string): Promise<ResultadoLogin> {

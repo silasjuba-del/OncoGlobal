@@ -1,3 +1,6 @@
+import {avaliarConsulta} from "./f0c/avaliacaoConsulta.js";
+import {dataCivilDoServico} from "../rules/tempoServico.js";
+import {confirmacaoCancelada,cancelarConfirmacao} from "../kernel/comandos/portas.js";
 import type { DatabaseSync } from "node:sqlite";
 import { z } from "zod";
 import { Sessao, type Fonte } from "../contracts/base.js";
@@ -112,10 +115,23 @@ export function projetarBasePrescricaoExecutavel(fontes: readonly ClinicalEvent[
       revisao: e.revisao, supersedesEventId: e.supersedesEventId }))) };
 }
 
+function pesoDocumentadoDoCiclo(deps:Deps,contexto:Contexto,base:BasePrescricaoExecutavelResposta,em:string) {
+ const eventos=eventosConfirmados(deps.db,contexto,em),vigentes=eventosVigentes(eventos),civil=dataCivilDoServico(em);
+ const paciente=vigentes.filter(e=>/^Paciente(?:@1)?$/.test(e.tipo)).flatMap(e=>{const p=Paciente.safeParse(dadosDoEvento(e));return p.success?[p.data]:[];});
+ if(civil.estado!=='OK'||paciente.length!==1)throw new Error('BASE_PESO_INDISPONIVEL');
+ const anteriores=vigentes.filter(e=>/^Ciclo(?:@1)?$/.test(e.tipo)&&e.tumorLotId===contexto.tumorLotId)
+  .flatMap(e=>{const c=Ciclo.safeParse(dadosDoEvento(e));return c.success&&c.data.episodioId===base.episodio?.episodioId?[c.data]:[];}).sort((a,b)=>a.numero-b.numero);
+ const a=avaliarConsulta({eventos,...contexto,agora:em,hoje:civil.dataCivil,paciente:paciente[0]!,ciclo:base.ciclo??anteriores.at(-1)??null,episodio:base.episodio,plaquetas:null});
+ const fontes=a.dadosNutricionais.fontes.flatMap(ref=>eventos.find(e=>e.eventId===ref.eventId)?.fontes.filter(f=>f.sourceId===ref.sourceId).map(f=>({...f,dataClinica:ref.medidoEm}))??[]);
+ const pesoKg:Ciclo['pesoKg']=a.dadosCorporais.pesoKg!==null&&fontes.length ? {valor:a.dadosCorporais.pesoKg,estado:'VERDE',campo:'PRESENTE',motivo:`Peso medido em ${a.dadosCorporais.medidoEm}`,fontes,revisao:'CONFIRMADO'} : {...ausente,motivo:'Peso medido válido ausente ou conflitante nesta preparação'};
+ return {pesoKg,origemPeso:pesoKg.valor===null?null:'MEDIDO' as const,avisos:a.avisosFlash.filter(v=>/peso/i.test(v))};
+}
+
 const EventoPlanejado = z.object({ tipo: z.enum(["Ciclo", "TreatmentEpisode", "FATO"]),
   payload: z.unknown(), supersedesEventId: z.string().nullable() }).strict();
 const PreparacaoArmazenada = z.object({
   kind: z.literal("PRESCRICAO_EXECUTAVEL_RASCUNHO"),
+  regraPeso:z.literal("PESO-CICLO@1").optional(),
   contexto: ContextoAcaoComposta, atorId: z.string(), requestHash: z.string(),
   resposta: PrescricaoExecutavelPreparada, edicao: PrepararPrescricaoExecutavelPedido.shape.edicao,
   eventos: z.array(EventoPlanejado), documentoAnteriorId: z.string().nullable(),
@@ -129,6 +145,7 @@ function hashPreparacao(p: DadosPreparacao): string {
   const { draftId, revision, baseHash, conteudo, texto, avisos, efeitos } = p.resposta;
   return hash({ contexto: p.contexto, atorId: p.atorId, requestHash: p.requestHash,
     edicao: p.edicao, eventos: p.eventos, documentoAnteriorId: p.documentoAnteriorId,
+    ...(p.regraPeso ? {regraPeso:p.regraPeso} : {}),
     resposta: { draftId, revision, baseHash, conteudo, texto, avisos, efeitos } });
 }
 
@@ -236,9 +253,10 @@ function preparar(deps: Deps, token: string, raw: unknown, contexto: Contexto, a
   }
   const cicloAnterior = modo === "CICLO_ATUAL" ? vigentes.find(e => ["Ciclo", "Ciclo@1"].includes(e.tipo)
     && e.encounterId === contexto.encounterId && e.tumorLotId === contexto.tumorLotId && dadosDoEvento(e)?.cicloId === cicloId) : null;
+  const pesoAtual=pesoDocumentadoDoCiclo(deps,contexto,base,em);
   planejados.push({ tipo: "Ciclo", supersedesEventId: cicloAnterior?.eventId ?? null,
     payload: Ciclo.parse({ cicloId, episodioId, numero: modo === "CICLO_ATUAL" ? base.ciclo!.numero : edicao.planejamento.numeroCiclo,
-      previstoEm: edicao.dataPrevista, pesoKg: base.ciclo?.pesoKg ?? ausente, origemPeso: base.ciclo?.origemPeso ?? null,
+      previstoEm: edicao.dataPrevista, pesoKg:pesoAtual.pesoKg, origemPeso:pesoAtual.origemPeso,
       ciclosSemPesoConsecutivos: base.ciclo?.ciclosSemPesoConsecutivos ?? 0,
       prescricaoRef: { documentId: conteudo.documentId, documentVersion: conteudo.documentVersion }, itens, comMedico: true }) });
   const efeitos = [`Assinar prescrição versão ${conteudo.documentVersion}.`,
@@ -247,10 +265,10 @@ function preparar(deps: Deps, token: string, raw: unknown, contexto: Contexto, a
     ...(edicao.encaminharFarmacia ? ["Enviar à fila local da farmácia para conferência; não liberar preparo ou infusão."] : []),
     "Nenhuma administração será registrada.", "A data prevista não reserva cadeira nem altera a agenda externa."];
   const texto = `${avaliacao.texto!}\n\nEFEITOS DA CONFIRMAÇÃO\n${efeitos.map(e => `- ${e}`).join("\n")}`;
-  const dadosPreparacao = { contexto, atorId, requestHash, edicao, eventos: planejados,
+  const dadosPreparacao = { regraPeso:"PESO-CICLO@1" as const, contexto, atorId, requestHash, edicao, eventos: planejados,
     documentoAnteriorId: documentoAnterior?.eventId ?? null };
   const respostaSemHash = { draftId, revision: 0, baseHash: base.revisao, conteudo, texto,
-    avisos: [...avaliacao.avisos, ...origem.avisos], efeitos };
+    avisos: [...avaliacao.avisos, ...origem.avisos,...pesoAtual.avisos], efeitos };
   const conteudoHash = hashPreparacao({ ...dadosPreparacao, resposta: respostaSemHash });
   const resposta = PrescricaoExecutavelPreparada.parse({ ...respostaSemHash, conteudoHash });
   const payload = PreparacaoArmazenada.parse({ kind: "PRESCRICAO_EXECUTAVEL_RASCUNHO", ...dadosPreparacao, resposta });
@@ -272,6 +290,7 @@ function confirmar(deps: Deps, token: string, raw: unknown, contexto: Contexto, 
   if (r.conteudoHash !== entrada.conteudoHash || r.revision !== entrada.expectedRevision)
     return negar("CONTEUDO_ALTERADO_APOS_EXIBICAO");
   const operationId = `rx-confirmar:${entrada.idempotencyKey}`, requestHash = hash({ entrada, atorId });
+  if(confirmacaoCancelada(deps.db,operationId))return negar("INTENCAO_CANCELADA");
   const eventos = listarEventos(deps.db, contexto.patientId);
   const anteriores = eventos.filter(e => e.operationId === operationId);
   const retorno = (codigo: "GRAVADA" | "REPLAY", eventoId: string, conteudo = r.conteudo) => ({ status: 200, body: {
@@ -303,6 +322,11 @@ function confirmar(deps: Deps, token: string, raw: unknown, contexto: Contexto, 
     return negar("PRESCRICAO_NAO_EXIBIDA_NESTA_SESSAO");
   const base = lerBasePrescricaoExecutavel(deps.db, contexto, em);
   if (base.revisao !== r.baseHash || base.pendencias.length) return negar("BASE_PRESCRICAO_ALTERADA");
+  if(salvo.regraPeso){
+    const atual=pesoDocumentadoDoCiclo(deps,contexto,base,em),planejado=salvo.eventos.find(e=>e.tipo==='Ciclo');
+    const ciclo=Ciclo.safeParse(planejado?.payload);
+    if(!ciclo.success||hash(ciclo.data.pesoKg)!==hash(atual.pesoKg)||ciclo.data.origemPeso!==atual.origemPeso)return negar('PESO_ALTERADO_APOS_PREVIA');
+  }
   const reutilizacao = validarEpisodioReutilizado(salvo.edicao, base, r.conteudo.contexto.episodioId);
   if (reutilizacao) return negar(reutilizacao);
   const origem = validarOrigem(deps, salvo.edicao, base, atorId, em, token);
@@ -345,7 +369,23 @@ function confirmar(deps: Deps, token: string, raw: unknown, contexto: Contexto, 
   return retorno(gravado.estado, eventoId);
 }
 
-export function operarPrescricaoExecutavel(deps: Deps, token: string, operacao: "base" | "preparar" | "confirmar", raw: unknown): Resposta {
+function recuperar(deps:Deps,token:string,raw:unknown,ctx:Contexto,atorId:string,em:string,cancelar=false):Resposta {
+ const p=ConfirmarPrescricaoExecutavelPedido.safeParse(raw);if(!p.success)return negar("PAYLOAD_INVALIDO",400);
+ if(listarEventos(deps.db,ctx.patientId).some(e=>e.operationId===`rx-confirmar:${p.data.idempotencyKey}`)) {
+   const r=confirmar(deps,token,raw,ctx,atorId,em);return r.status===200?{status:200,body:{estado:"CONFIRMADA",resultado:r.body}}:r;
+ }
+ if(confirmacaoCancelada(deps.db,`rx-confirmar:${p.data.idempotencyKey}`))return {status:200,body:{estado:"CANCELADA"}};
+ const d=lerDraft(deps.db,p.data.draftId),v=PreparacaoArmazenada.safeParse(d?.payload);
+ if(!d||!v.success||d.patientId!==ctx.patientId||!mesmoContexto(v.data.contexto,ctx)||v.data.atorId!==atorId
+   ||d.revision!==p.data.expectedRevision||v.data.resposta.revision!==p.data.expectedRevision
+   ||v.data.resposta.conteudoHash!==p.data.conteudoHash||hashPreparacao(v.data)!==p.data.conteudoHash)return negar("PREPARACAO_NAO_ENCONTRADA");
+ if(cancelar){cancelarConfirmacao(deps.db,`rx-confirmar:${p.data.idempotencyKey}`,atorId,em);return {status:200,body:{estado:"CANCELADA"}};}
+ const r=v.data.resposta;
+ deps.sessoes.registrarBundleExibido(token,ctx,[{documentId:r.conteudo.documentId,documentVersion:r.conteudo.documentVersion,conteudoHash:r.conteudoHash,draftId:d.draftId}]);
+ return {status:200,body:{estado:"PREVIA",texto:r.texto,avisos:r.avisos}};
+}
+
+export function operarPrescricaoExecutavel(deps: Deps, token: string, operacao: "base" | "preparar" | "confirmar" | "recuperar" | "cancelar", raw: unknown): Resposta {
   const em = deps.agora(), sessao = Sessao.safeParse(deps.sessoes.obter(token));
   if (!sessao.success || !Number.isFinite(Date.parse(em)) || Date.parse(sessao.data.emitidaEm) > Date.parse(em)
     || Date.parse(sessao.data.expiraEm) <= Date.parse(em)) return negar("SESSAO_INVALIDA", 401);
@@ -359,6 +399,7 @@ export function operarPrescricaoExecutavel(deps: Deps, token: string, operacao: 
     const resultado = transacao(deps.db, () => operacao === "base"
       ? { status: 200, body: BasePrescricaoExecutavelResposta.parse(lerBasePrescricaoExecutavel(deps.db, c.data, em)) }
       : operacao === "preparar" ? preparar(deps, token, raw, c.data, sessao.data.medicoId, em)
+      : (operacao === "recuperar" || operacao === "cancelar") ? recuperar(deps,token,raw,c.data,sessao.data.medicoId,em,operacao === "cancelar")
       : confirmar(deps, token, raw, c.data, sessao.data.medicoId, em), r => r.status >= 400);
     // O rollback remove auxiliares e qualquer auditoria interna do gravador.
     // A recusa de confirmacao persiste uma unica vez, fora da unidade desfeita.

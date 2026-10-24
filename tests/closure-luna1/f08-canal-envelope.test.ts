@@ -7,7 +7,8 @@ import { ambienteHttp } from "../server/http-fixture.js";
 it("não projeta mensagem para outro paciente quando envelope e payload divergem", async () => {
   const ambiente = await ambienteHttp();
   try {
-    const em = "2026-10-08T12:00:00Z";
+    const sessao = ambiente.sessoes.obter(ambiente.token)!;
+    const em = sessao.emitidaEm;
     let seq = 0;
     const persistir = (patientId: string, encounterId: string, tipo: string, payload: unknown) => {
       const n = ++seq;
@@ -15,7 +16,7 @@ it("não projeta mensagem para outro paciente quando envelope e payload divergem
       salvarDraft(ambiente.db, { draftId, patientId, sourceId: `source-f08-${n}`,
         rawRef: "fixture-local-sintetica", payload: {}, diagnostics: [], revision: 0, criadoEm: em });
       confirmar(ambiente.db, { operationId: `op-f08-${n}`, patientId, tumorLotId: null, encounterId,
-        reviewDecisionId: `review-f08-${n}`, sessao: ambiente.sessoes.obter(ambiente.token)!, em,
+        reviewDecisionId: `review-f08-${n}`, sessao, em,
         registros: [{ draftId, expectedRevision: 0, eventId: `event-f08-${n}`, tipo, payload,
           fontes: [], revisao: "CONFIRMADO" }] });
     };

@@ -3,6 +3,7 @@ export const ClasseRascunho = z.enum(["INERTE", "DEDICADO", "EXTRACAO", "RESUMO"
 /** Registro unico. Todos vedados no bundle generico. INERTE/EXTRACAO vedam a origem no kernel;
  * DEDICADO/RESUMO exigem payload reconstruido pelo fluxo especializado. RESUMO continua legivel na consulta. */
 export const RASCUNHOS = Object.freeze({
+  SKILL_EXECUCAO_RASCUNHO: "INERTE", SKILL_DOCUMENTO_RASCUNHO: "INERTE",
   SINTESE_RASCUNHO: "INERTE", LLM_EXTRACAO_RASCUNHO: "INERTE", D66_TRANSCRICAO_RASCUNHO: "INERTE",
   EXTRACAO_RASCUNHO: "EXTRACAO", PRESCRICAO_RASCUNHO: "DEDICADO",
   EVOLUCAO_RASCUNHO: "RESUMO", FLASH_RASCUNHO: "DEDICADO", FLASH_APAC_RASCUNHO: "DEDICADO",

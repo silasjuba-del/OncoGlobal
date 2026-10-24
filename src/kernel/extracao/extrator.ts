@@ -4,6 +4,7 @@ import {
 } from "./normalizacao.js";
 import { farmacosMencionados } from "./reconciliacao.js";
 import { analisarEscopos } from "./escopoLinguistico.js";
+import { fonteDeVoz } from "../../contracts/capturaTranscricao.js";
 
 const aliasesFarmacos = Object.keys(DICIONARIO_FARMACO)
   .sort((a, b) => b.length - a.length)
@@ -150,13 +151,14 @@ export const extratorDeterministico: Extrator = {
         confirmation = false, regra?: string, factQualifiers: typeof qualificadores = qualificadores,
         factWordingUncertain = wordingUncertain): void => {
         const evidenceFinal: FactEvidence = evidence === "EXPLICIT" && factWordingUncertain ? "UNCERTAIN" : evidence;
-        const spokenNumber = segmento.sourceType === "plaud" &&
+        const spokenNumber = fonteDeVoz(segmento) &&
           /\b\d+(?:[.,]\d+)?\b|\b(?:quatorze|quinze|dez|vinte|trinta)\b/iu.test(raw);
         result.push({
           id: `${segmento.id}:f${lineIndex}:${result.length}`,
           segmentId: segmento.id,
           patientCandidateId: null,
           domain, value, sourceType: segmento.sourceType,
+          ...(segmento.captureMethod ? { captureMethod: segmento.captureMethod } : {}),
           evidence: evidenceFinal, sourceId: segmento.sourceId, rawEvidence: rawLinha,
           qualificadores: factQualifiers,
           ...(segmento.page === undefined ? {} : { page: segmento.page }),
@@ -233,7 +235,7 @@ export const extratorDeterministico: Extrator = {
           ...(numeroAmbiguo ? { raw: `${lab[2]} ${lab[3]}` } : {}),
         }, numeroAmbiguo ? "UNCERTAIN" : "EXPLICIT", numeroAmbiguo);
       }
-      if (segmento.sourceType === "plaud" &&
+      if (fonteDeVoz(segmento) &&
           /\b(?:creatinina|hemoglobina|PSA|CEA)\s+(?:quatorze|quinze|vinte)\b/iu.test(raw)) {
         add("lab", { raw, value: null, unit: null }, "UNCERTAIN", true);
       }
@@ -245,7 +247,7 @@ export const extratorDeterministico: Extrator = {
       }
       // Plaud: reconhecimento lexical de fármaco conhecido + dose/frequência literal.
       // É sempre candidato UNCERTAIN; o parser não julga plausibilidade nem define conduta.
-      const farmacoFalado = segmento.sourceType === "plaud" ? raw.match(padraoFarmacoPlaud) : null;
+      const farmacoFalado = fonteDeVoz(segmento) ? raw.match(padraoFarmacoPlaud) : null;
       if (farmacoFalado && !negated) {
         const alias = Object.keys(DICIONARIO_FARMACO)
           .find((nome) => chaveFarmaco(nome) === chaveFarmaco(farmacoFalado[1] ?? ""));

@@ -16,7 +16,8 @@ it('HTTP autenticado confirma novo medicamento, estímulo MED_RECONC e callback 
  const porta=criarPortaHttp({onSessaoExpirada:()=>{}});expect((await porta.login(SENHA)).ok).toBe(true);await porta.carregarConsulta(PACIENTE,null,ENCONTRO);
  const callback=vi.fn(()=>{const r=motor.retrato(ctx);expect(r.revisao).not.toBe(antes.revisao);expect(r.fatos.some(f=>f.campo==='medicamentos'&&JSON.stringify(f.dados.valor)==='["Pemetrexede","Ibuprofeno"]')).toBe(true);});
  render(<ReconciliarMedicamentos porta={porta} contexto={ctx} aoFatosConfirmados={callback}/>);
- fireEvent.change(screen.getByLabelText('Lista de medicamentos'),{target:{value:'Pemetrexede\nIbuprofeno'}});fireEvent.click(screen.getByRole('checkbox'));fireEvent.click(screen.getByRole('button'));
+ await waitFor(()=>expect((screen.getByRole('checkbox') as HTMLInputElement).disabled).toBe(false));
+ fireEvent.change(screen.getByLabelText('Lista de medicamentos'),{target:{value:'Pemetrexede\nIbuprofeno'}});fireEvent.click(screen.getByRole('checkbox'));fireEvent.click(screen.getByRole('button',{name:'Confirmar lista atual'}));
  await waitFor(()=>expect(callback).toHaveBeenCalledWith(ctx));expect(ambiente.eventos().filter(e=>e.tipo==='FATO')).toHaveLength(1);
  expect(ambiente.db.prepare("SELECT conteudo FROM estimulo_tecnico WHERE json_extract(conteudo,'$.tipo')='MED_RECONCILIADO'").all()).toHaveLength(1);
  await motor.processar();const atual=await motor.consultar(ctx);expect(atual.visaoIntegrada?.correlacao.revisaoFatos).toBe(atual.retrato.revisao);

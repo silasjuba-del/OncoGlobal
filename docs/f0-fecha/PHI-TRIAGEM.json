@@ -7289,6 +7289,21 @@
           "contextTag": null
         }
       ]
+    },
+    {
+      "path": "docs/planejamento/G2-CARACTERIZACAO-INTEGRIDADE.md",
+      "sha256": "8ecd850d63ea5ea17a5ca2d162ef8aa0e1b8abc70022da8950c9cf627aa1886e",
+      "items": [
+        {
+          "type": "telefone",
+          "line": 90,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/planejamento/G2-CARACTERIZACAO-INTEGRIDADE.md:90",
+          "reason": "Match contido em token hash SHA-256 hexadecimal completo de 64 caracteres.",
+          "contextTag": "commit_hash_40_or_64_hex"
+        }
+      ]
     }
   ],
   "protectedPaths": []

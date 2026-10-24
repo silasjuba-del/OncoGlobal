@@ -147,6 +147,7 @@ export interface FlashPreparada {
 }
 
 export interface ConsultaVisao {
+  medicamentosAtuais?: { eventId: string | null; medicamentos: string[]; conflito: boolean } | undefined;
   contatosCanal?: CaixaCanalVisao | undefined;
   dutos?: DutosClinicaVisao;
   instrumentosClinicos?: readonly {instrumento:string;avaliacao:ResultadoInstrumento}[];
@@ -336,6 +337,8 @@ export interface ChatSetorVisao {
 }
 
 export interface PortaConsulta {
+  recuperarConfirmacao?(pedido:import('./recuperacaoConfirmacao.js').ConfirmacaoPendente & {cancelar?:true}):Promise<import('./recuperacaoConfirmacao.js').RecuperacaoConfirmacao>;
+  documentoImpressao?(pedido:{patientId:string;encounterId:string;tumorLotId:string|null;documentId:string;documentVersion:number}):Promise<{html:string}>;
   listarFichasPrescricao?(signal?: AbortSignal): Promise<CatalogoFichasResposta>;
   revisarFichaPrescricao?(pedido: RevisarFichaPedido, signal?: AbortSignal): Promise<FichaProtocoloCatalogo>;
   instanciarFichaPrescricao?(pedido: InstanciarFichaPedido, signal?: AbortSignal): Promise<InstanciacaoFichaResposta>;
@@ -358,7 +361,7 @@ export interface PortaConsulta {
   lotesPaciente?(patientId:string,signal?:AbortSignal):Promise<LotesPacienteResposta>;
   /** Biblioteca pública autenticada com a mesma sessão desta porta, quando suportada pelo servidor. */
   biblioteca?: ApiBiblioteca;
-  reconciliarMedicamentos?(pedido: {patientId:string;encounterId:string;tumorLotId:string|null;operationId:string;medicamentos:string[];listaAtualCompleta:true}, signal?:AbortSignal):Promise<{codigo:"GRAVADA"|"REPLAY";eventId:string}>;
+  reconciliarMedicamentos?(pedido: {patientId:string;encounterId:string;tumorLotId:string|null;operationId:string;expectedEventId:string|null;medicamentos:string[];listaAtualCompleta:true}, signal?:AbortSignal):Promise<{codigo:"GRAVADA"|"REPLAY";eventId:string}>;
   sintetizarRetrato?(contexto: { patientId: string; encounterId: string; tumorLotId: string | null; idempotencyKey: string }, signal?: AbortSignal): Promise<import("./sinteseProposta.js").SintesePropostaResposta>;
   investigacao?(contexto: PedidoBundle, signal?: AbortSignal): Promise<InvestigacaoConsultaVisao>;
   avaliarInstrumento?(contexto:{patientId:string;encounterId:string;tumorLotId:string|null},pedido:unknown):Promise<ResultadoInstrumento>;
@@ -387,7 +390,11 @@ export interface PortaConsulta {
     fontesSemVinculo?: FontesOncoassist["fontesSemVinculo"] | undefined;
   }>;
   oncoassistClassificar?(pedido: PedidoBundle & { draftId: string; operationId?: string }, signal?: AbortSignal): Promise<RespostaOncoassist>;
-  oncoassistHistorico?(contexto: PedidoBundle, signal?: AbortSignal): Promise<import("./oncoassist.js").HistoricoOncoassist>;
+  oncoassistHistorico?(contexto: PedidoBundle & { cursorExtracoes?: string; limiteExtracoes?: number }, signal?: AbortSignal): Promise<import("./oncoassist.js").HistoricoOncoassist>;
+  oncoassistResultadoCognitivo?(pedido: PedidoBundle & { draftId: string }, signal?: AbortSignal): Promise<import("./oncoassist.js").ResultadoCognitivoOncoassist>;
+  listarRascunhosPubMed?(signal?: AbortSignal): Promise<import("../leituraPubMed.js").ListaRascunhosPubMedResposta>;
+  pesquisarPubMed?(consulta: string, signal?: AbortSignal): Promise<import("../leituraPubMed.js").LeituraPubMedResposta>;
+  skillsClinicas?(pedido: import("../skillsClinicas.js").PedidoSkillClinica, signal?: AbortSignal): Promise<import("../skillsClinicas.js").ResultadoSkillClinica>;
   login(senha: string): Promise<ResultadoLogin>;
   confirmar(bloco: ConfirmarBloco): Promise<ResultadoConfirmar>;
   acao(intent: AcaoIntent): Promise<ResultadoAcao>;

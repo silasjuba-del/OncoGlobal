@@ -16,10 +16,11 @@ function semearPaciente(f: Awaited<ReturnType<typeof ambienteHttp>>, patientId: 
   const id = ++seq;
   const draftId = `identidade-paciente-draft-${id}`;
   const operationId = `identidade-paciente-op-${id}`;
+  const sessao = f.sessoes.obter(f.token)!;
   salvarDraft(f.db, { draftId, patientId, sourceId: `identidade-source-${id}`, rawRef: "fixture-local",
-    payload: {}, diagnostics: [], revision: 0, criadoEm: AGORA });
+    payload: {}, diagnostics: [], revision: 0, criadoEm: sessao.emitidaEm });
   const result = confirmar(f.db, { operationId, patientId, tumorLotId: null, encounterId,
-    reviewDecisionId: `identidade-review-${id}`, sessao: f.sessoes.obter(f.token)!, em: AGORA,
+    reviewDecisionId: `identidade-review-${id}`, sessao, em: sessao.emitidaEm,
     registros: [{ draftId, expectedRevision: 0, eventId: `identidade-event-${id}`, tipo: "Paciente",
       payload: { patientId, identificadores: [], nome: patientId, nascimento: null,
         sexoCadastral: "NAO_INFORMADO", divergencia: false }, fontes: [], revisao: "CONFIRMADO" }] });

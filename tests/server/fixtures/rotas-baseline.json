@@ -116,6 +116,10 @@
     "chat"
   ],
   [
+    "/consulta/confirmacao/recuperar",
+    "recuperarConfirmacao"
+  ],
+  [
     "/consulta/confirmar",
     "confirmar"
   ],
@@ -126,6 +130,10 @@
   [
     "/consulta/ditado",
     "ditado"
+  ],
+  [
+    "/consulta/documento-impressao",
+    "documentoImpressao"
   ],
   [
     "/consulta/estado-doenca/confirmar",
@@ -160,12 +168,24 @@
     "investigacao"
   ],
   [
+    "/consulta/leitura",
+    "leituraPubMed"
+  ],
+  [
+    "/consulta/leitura/rascunhos",
+    "listarRascunhosPubMed"
+  ],
+  [
     "/consulta/llm/documento-original",
     "documentoOriginalLlm"
   ],
   [
     "/consulta/llm/extrair",
     "extracaoLlm"
+  ],
+  [
+    "/consulta/llm/resultado",
+    "resultadoExtracaoLlm"
   ],
   [
     "/consulta/lotes",
@@ -274,6 +294,10 @@
   [
     "/consulta/salao/triagem",
     "salvarTriagemSalao"
+  ],
+  [
+    "/consulta/skills",
+    "skillsClinicas"
   ],
   [
     "/consulta/timeline-multicamadas",

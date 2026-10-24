@@ -13,6 +13,12 @@ it.each(['LOCAL_DICTATION','DEEPGRAM_CLOUD'])("ditado %s mantém original, ediç
   const a=await abrir(),r=await a.request("/consulta/extrair",pedido);expect(r.status).toBe(201);
   const draft=lerDraft(a.db,r.data.draftId)!;expect(draft.patientId).toBeNull();
   expect(draft.payload).toMatchObject({kind:"EXTRACAO_RASCUNHO",input:pedido});
+  const labs = r.data.facts.filter((f: { domain: string }) => f.domain === "lab");
+  expect(labs.length).toBeGreaterThan(0);
+  for (const lab of labs) {
+    expect(lab).toMatchObject({ sourceType: "medical_note", captureMethod, requiresConfirmation: true });
+    expect(r.data.exceptions.some((e: { kind: string; factIds: string[] }) => e.kind === "SPOKEN_NUMBER" && e.factIds.includes(lab.id))).toBe(true);
+  }
   expect(a.eventos().filter(e=>e.revisao==="ASSINADO")).toHaveLength(0);
   const replay=await a.request("/consulta/extrair",pedido);expect(replay.status,JSON.stringify(replay.data)).toBe(200);
   expect(replay.data).toMatchObject({codigo:"REPLAY",draftId:draft.draftId,requiresMedicalReview:true,linkedPatientId:null});
@@ -27,5 +33,6 @@ it("recusa contexto antigo, metadados incompletos e transcrição vazia",async()
   const a=await abrir();
   expect((await a.request("/consulta/extrair",{...pedido,contexto:{...pedido.contexto,encounterId:"outro"}})).status).toBe(409);
   expect((await a.request("/consulta/extrair",{...pedido,capturedTranscript:undefined})).status).toBe(400);
+  expect((await a.request("/consulta/extrair",{...pedido,capturedTranscript:"   "})).status).toBe(400);
   expect((await a.request("/consulta/extrair",{...pedido,rawTranscript:"   "})).status).toBe(400);
 });

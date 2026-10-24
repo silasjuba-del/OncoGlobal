@@ -9,6 +9,7 @@ import {
   ClinicalFact as ClinicalFactContract, ReviewAction as ReviewActionContract,
 } from "../../contracts/w10/extracao.js";
 import { createHash } from "node:crypto";
+import { fonteDeVoz } from "../../contracts/capturaTranscricao.js";
 import type { PatientTimeline } from "../../contracts/w10/clinico-w10.js";
 import { segmentarTranscricao } from "./segmenter.js";
 import { rankearPacientes, type IdentityHints, type RegistryPatient } from "./patient-resolver.js";
@@ -142,6 +143,7 @@ export function segmentar(state: ExtractionState): ExtractionState {
         recordingId: fonte.recordingId,
         sourceId: fonte.sourceId,
         sourceType: fonte.sourceType,
+        ...(fonte.captureMethod ? { captureMethod: fonte.captureMethod } : {}),
         ...(fonte.page === undefined ? {} : { page: fonte.page }),
         turns: fonte.rawTranscript.split(/\r?\n/).map((text) => ({ text, startMs: null, endMs: null })),
       }) : []),
@@ -331,7 +333,7 @@ export function classificarExcecoes(state: ExtractionState): ExtractionState {
     boundaryReviewRequired: segment.boundaryReviewRequired,
   }));
   const numerosFalados = state.facts
-    .filter((f) => f.sourceType === "plaud" && f.requiresConfirmation
+    .filter((f) => fonteDeVoz(f) && f.requiresConfirmation
       && (f.domain === "lab" || f.domain === "cycle" || f.domain === "imaging"))
     .map(excecaoDeNumeroFalado);
   const farmacosIncertos = state.facts.filter((f) => f.domain === "drug" && f.requiresConfirmation
