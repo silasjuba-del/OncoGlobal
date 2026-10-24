@@ -67,6 +67,8 @@ it("G-25 rejeita assinatura fora do bundle; validação grava N eventos e não i
     sourceId: "sintetico", rawRef: `opaco-${id}`, payload: { campo: id, valor: "sintético",
       contexto: { encounterId: "e1", tumorLotId: "t1" } },
     diagnostics: [], revision: 0, criadoEm: f.em });
+  // A confirmação exige a consulta aberta na sessão (EST-02), como no consultório real.
+  f.sessoes.selecionarConsulta(f.token, { patientId: "Paciente Teste 01", encounterId: "e1", tumorLotId: "t1" });
   // Positive path must actually display both facts through the HTTP route.
   expect((await f.post("/consulta/bundle", { patientId: "Paciente Teste 01", encounterId: "e1",
     tumorLotId: "t1", draftIds: ["d1", "d2"] }, f.token)).status).toBe(200);
@@ -125,6 +127,7 @@ it("servidor recusa bind externo antes de ouvir", async () => {
 });
 it("A13 assina só o conteúdo exato exibido; draft alterado após exibição → 409", async () => {
   const f = await fixture();
+  f.sessoes.selecionarConsulta(f.token, { patientId: "Paciente Teste 01", encounterId: "e1", tumorLotId: "t1" }); // EST-02
   const draft = { draftId: "doc-d", patientId: "Paciente Teste 01", sourceId: "sintetico", rawRef: "opaco-doc",
     payload: { documentId: "doc-1", documentVersion: 1, documentHash: "declarado", texto: "texto sintético exibido",
       contexto: { encounterId: "e1", tumorLotId: "t1" } },

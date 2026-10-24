@@ -143,8 +143,10 @@ function confirmarBlocoNaTransacao(deps: ServidorDeps, token: string, input: Con
   if(drafts.some(d=>documentoReceitaDosePendente(d!.payload)))
     return {status:409,body:{codigo:'RECEITA_DOSE_PENDENTE'}};
   const consulta = deps.sessoes.consultaSelecionada(token);
-  if (consulta && (consulta.patientId !== contexto.patientId || consulta.encounterId !== contexto.encounterId
-    || (consulta.tumorLotId ?? null) !== contexto.tumorLotId))
+  // A assinatura exige a consulta aberta na sessão, como as demais escritas clínicas.
+  if (!consulta) return { status: 409, body: { codigo: "CONTEXTO_CONSULTA_NAO_SELECIONADO" } };
+  if (consulta.patientId !== contexto.patientId || consulta.encounterId !== contexto.encounterId
+    || consulta.tumorLotId !== contexto.tumorLotId)
     return { status: 409, body: { codigo: "CONTEXTO_CONSULTA_ALTERADO" } };
   const escolhidos = input.documentosExibidos;
   const docs = drafts.map((d) => payloadDocumento(d!.payload));

@@ -64,6 +64,7 @@ async function iniciar(dir: string, instante: string) {
     const login = await post("/login", { senha: "senha-sintetica-reabertura-s9" });
     if (login.status !== 200 || typeof login.body.token !== "string") throw new Error("LOGIN_SINTETICO_FALHOU");
     const token = login.body.token;
+    sessoes.selecionarConsulta(token, contexto); // confirmação exige a consulta aberta (EST-02)
     const persistir = (docs: DocumentoConsulta[]) => {
       for (const d of docs) salvarDraft(db, {
         draftId: d.documentId, patientId: d.contexto.patientId, sourceId: "decisao-s9", rawRef: "fonte-s9",
