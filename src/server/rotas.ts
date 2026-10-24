@@ -6,6 +6,7 @@ export { g08AnatomiaSexo, g09PtDeBiopsia, g25EscopoAssinatura } from "../kernel/
 import { rotaHttp } from "./rotas/catalogo.js";
 import { servirUiLocal } from "./rotas/uiLocal.js";
 import { rotearSalaoECanal } from "./rotas/salaoCanal.js";
+import { rotearConfiguracao } from "./rotas/configuracao.js";
 import { rotearPrescricaoFlashConfig } from "./rotas/prescricaoFlash.js";
 import { rotearCognitivo } from "./rotas/cognitivo.js";
 import { rotearExtracaoERevisao } from "./rotas/extracaoRevisao.js";
@@ -316,6 +317,8 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
     }
     const salaoCanal = rotearSalaoECanal(deps, token, sessao, rota, raw);
     if (salaoCanal) return reply(salaoCanal.status, salaoCanal.codigo, salaoCanal.body);
+    const configuracao = rotearConfiguracao(deps, sessao, rota, raw);
+    if (configuracao) return reply(configuracao.status, configuracao.codigo, configuracao.body);
     const prescricaoFlash = rotearPrescricaoFlashConfig(deps, token, sessao, rota, raw);
     if (prescricaoFlash) return reply(prescricaoFlash.status, prescricaoFlash.codigo, prescricaoFlash.body);
     const extracaoRevisao = rotearExtracaoERevisao(deps, token, sessao, rota, raw);

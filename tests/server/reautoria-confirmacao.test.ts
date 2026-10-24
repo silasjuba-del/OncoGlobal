@@ -12,6 +12,8 @@ const envelope = (id: string, payload: Record<string, unknown>) => ({ draftId: i
 it.each(["vazio", "fato-oculto", "documento-oculto", "desmarcado", "duplicado", "lote", "alias"])(
   "reauditoria: rejeita %s atomicamente", async (cenario) => {
     const f = await ambienteHttp();
+    // A confirmação exige a consulta aberta na sessão (EST-02), como no consultório real.
+    f.sessoes.selecionarConsulta(f.token, scope);
     const post = (path: string, payload: unknown) => f.request(path, "POST", JSON.stringify(payload), f.token, "application/json");
     try {
       salvarDraft(f.db, envelope("visivel", doc));
@@ -38,6 +40,8 @@ it.each(["vazio", "fato-oculto", "documento-oculto", "desmarcado", "duplicado", 
 
 it("fato genérico exibido e selecionado pode ser confirmado, sem assinatura documental", async () => {
   const f = await ambienteHttp();
+  // A confirmação exige a consulta aberta na sessão (EST-02), como no consultório real.
+  f.sessoes.selecionarConsulta(f.token, scope);
   const post = (path: string, payload: unknown) => f.request(path, "POST", JSON.stringify(payload), f.token, "application/json");
   try {
     salvarDraft(f.db, envelope("fato", { campo: "sintetico", valor: "revisado" }));

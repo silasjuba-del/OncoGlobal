@@ -22,6 +22,8 @@ const confirmar = (key: string, docId = "doc-bundle", rev = 0) => ({
 
 it("ADV-002 · bundle deve ser exibido por rota real antes de qualquer confirmação (K-25/A13)", async () => {
   const f = await ambienteHttp();
+  // A confirmação exige a consulta aberta na sessão (EST-02), como no consultório real.
+  f.sessoes.selecionarConsulta(f.token, { patientId, encounterId, tumorLotId: "tumor-teste" });
   try {
     salvarDraft(f.db, draft());
     const r = await f.request("/consulta/bundle", "POST", JSON.stringify(pedidoBundle()),
@@ -34,6 +36,8 @@ it("ADV-002 · bundle deve ser exibido por rota real antes de qualquer confirma�
 
 it("ADV-002 · RESISTIU: ausência da rota não libera assinatura sem bundle exibido", async () => {
   const f = await ambienteHttp();
+  // A confirmação exige a consulta aberta na sessão (EST-02), como no consultório real.
+  f.sessoes.selecionarConsulta(f.token, { patientId, encounterId, tumorLotId: "tumor-teste" });
   try {
     const payload = { patientId, tumorLotId: "tumor-teste", encounterId, bloco: "TUDO",
       registros: [{ id: "draft-teste", expectedRevision: 0 }],
@@ -48,6 +52,8 @@ it("ADV-002 · RESISTIU: ausência da rota não libera assinatura sem bundle exi
 
 it("W4-03 · login → bundle → confirmar usa hash servidor e grava assinatura sem imprimir", async () => {
   const f = await ambienteHttp();
+  // A confirmação exige a consulta aberta na sessão (EST-02), como no consultório real.
+  f.sessoes.selecionarConsulta(f.token, { patientId, encounterId, tumorLotId: "tumor-teste" });
   try {
     salvarDraft(f.db, draft());
     const r = await f.request("/consulta/bundle", "POST", JSON.stringify(pedidoBundle()),
@@ -72,6 +78,8 @@ it("W4-03 · login → bundle → confirmar usa hash servidor e grava assinatura
 
 it("W4-03/A13 · draft alterado depois da exibição não é assinado", async () => {
   const f = await ambienteHttp();
+  // A confirmação exige a consulta aberta na sessão (EST-02), como no consultório real.
+  f.sessoes.selecionarConsulta(f.token, { patientId, encounterId, tumorLotId: "tumor-teste" });
   try {
     salvarDraft(f.db, draft());
     expect((await f.request("/consulta/bundle", "POST", JSON.stringify(pedidoBundle()),
@@ -89,6 +97,8 @@ it("W4-03/A13 · draft alterado depois da exibição não é assinado", async ()
 
 it("W4-03 · escopo de paciente, documento e sessão não é ampliado pelo cliente", async () => {
   const f = await ambienteHttp();
+  // A confirmação exige a consulta aberta na sessão (EST-02), como no consultório real.
+  f.sessoes.selecionarConsulta(f.token, { patientId, encounterId, tumorLotId: "tumor-teste" });
   try {
     salvarDraft(f.db, draft("Paciente Teste 02"));
     expect((await f.request("/consulta/bundle", "POST", JSON.stringify(pedidoBundle()),
@@ -105,6 +115,8 @@ it("W4-03 · escopo de paciente, documento e sessão não é ampliado pelo clien
 
 it("W4-03/G-25 · documento fora do bundle segue rejeitado", async () => {
   const f = await ambienteHttp();
+  // A confirmação exige a consulta aberta na sessão (EST-02), como no consultório real.
+  f.sessoes.selecionarConsulta(f.token, { patientId, encounterId, tumorLotId: "tumor-teste" });
   try {
     salvarDraft(f.db, draft());
     expect((await f.request("/consulta/bundle", "POST", JSON.stringify(pedidoBundle()),
@@ -113,5 +125,20 @@ it("W4-03/G-25 · documento fora do bundle segue rejeitado", async () => {
       JSON.stringify(confirmar("bundle-forjado-01", "doc-nao-exibido")), f.token, "application/json");
     expect(r.status).toBe(409);
     expect(JSON.parse(r.body).codigo).toBe("ESCOPO_ASSINATURA_INVALIDO");
+  } finally { await f.close(); }
+});
+
+it("EST-02 · sem consulta aberta na sessão a assinatura é recusada sem gravar, mesmo com bundle exibido", async () => {
+  const f = await ambienteHttp();
+  try {
+    salvarDraft(f.db, draft());
+    // Bundle exibido sem selecionar a consulta: o atalho de API que antes permitia assinar.
+    expect((await f.request("/consulta/bundle", "POST", JSON.stringify(pedidoBundle()), f.token, "application/json")).status).toBe(200);
+    const recusado = await f.request("/consulta/confirmar", "POST", JSON.stringify(confirmar("bundle-sem-consulta")),
+      f.token, "application/json");
+    expect(recusado.status).toBe(409);
+    expect(JSON.parse(recusado.body).codigo).toBe("CONTEXTO_CONSULTA_NAO_SELECIONADO");
+    expect(listarEventos(f.db, patientId)).toEqual([]);
+    expect(f.db.prepare("SELECT COUNT(*) AS n FROM operation WHERE operationId='bundle-sem-consulta'").get()).toMatchObject({ n: 0 });
   } finally { await f.close(); }
 });

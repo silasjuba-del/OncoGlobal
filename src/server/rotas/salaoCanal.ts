@@ -3,7 +3,7 @@ import { Id, type Fonte, type Sessao } from "../../contracts/base.js";
 import { Contato, Triagem } from "../../contracts/clinico.js";
 import { ConfirmarRespostaCanal, PrepararRespostaCanal } from "../../contracts/api/respostaCanal.js";
 import { ClosureVinculoContato } from "../../contracts/w10/closure.js";
-import { lerDraft, salvarDraft } from "../../kernel/comandos/portas.js";
+import { auditar, lerDraft, salvarDraft, transacao } from "../../kernel/comandos/portas.js";
 import { executarConfirmacao as confirmar } from "../../kernel/comandos/index.js";
 import { dataCivilDoServico } from "../../kernel/gateway/tempo.js";
 import { detalheMensagemCanal } from "../canalEntrada.js";
@@ -29,6 +29,9 @@ export function rotearSalaoECanal(
   raw: unknown,
 ): RespostaRota | null {
   const reply = (status: number, codigo: string, body: unknown = { codigo }): RespostaRota => ({ status, codigo, body });
+  // O rollback de um vínculo recusado também desfaz a auditoria gravada pelo kernel; ela é refeita fora da transação.
+  const auditarRecusaDesfeita = (motivo: string | undefined) => auditar(deps.db, { ator: { tipo: "SESSAO", id: sessao.medicoId },
+    acaoPedida: "CONFIRMAR", decisao: "NEGADA", motivoCodigo: motivo ?? "VINCULO_CANAL_NEGADO", politicaVersao: "W2-01", em: deps.agora() });
 
   if (rota === "prepararRespostaCanal") {
     const p = PrepararRespostaCanal.safeParse(raw);
@@ -168,7 +171,8 @@ export function rotearSalaoECanal(
       return reply(409, "REVISAO_RASCUNHO_CONFLITANTE");
     const card = projected.cartoes.find((item) => item.entrada.patientId === contexto.patientId);
     if (!card?.temCorte) return reply(409, "CORTE_AUSENTE");
-    const em = existing?.criadoEm ?? agoraSalao;
+    // Num replay, o kernel remonta os eventos com o criadoEm já gravado da operação.
+    const em = agoraSalao;
     const payload = {
       campo: "liberacaoComCorteSalao", patientId: contexto.patientId,
       encounterId: contexto.encounterId, triagemDraftId: draft.draftId,
@@ -176,7 +180,7 @@ export function rotearSalaoECanal(
       triagemHash: (draft.payload as { contentHash?: string })?.contentHash ?? hashConteudoExibido(draft.payload),
       motivo: parsed.data.motivo,
     };
-    const result = confirmar(deps.db, { autorizadoEm: deps.agora(), 
+    const result = confirmar(deps.db, { autorizadoEm: deps.agora(),
       operationId, patientId: contexto.patientId,
       tumorLotId: null, encounterId: contexto.encounterId,
       reviewDecisionId: operationId, sessao, em, registros: [{
@@ -216,16 +220,22 @@ export function rotearSalaoECanal(
       }));
       const existente = lerDraft(deps.db, draftId);
       if (existente) return reply(409, "CHAVE_IDEMPOTENCIA_REUTILIZADA");
-      const draft = salvarDraft(deps.db, {
-        draftId, patientId: parsed.data.patientId, sourceId: fontes[0]!.sourceId,
-        rawRef: "vinculo-operacional-local", payload, diagnostics: [], revision: 0, criadoEm: acessoCanal.agora,
-      });
-      const r = confirmar(deps.db, { autorizadoEm: deps.agora(), 
-        operationId, patientId: parsed.data.patientId, encounterId: contexto.encounterId,
-        tumorLotId: contexto.tumorLotId ?? null, reviewDecisionId: operationId, sessao, em: acessoCanal.agora,
-        registros: [{ draftId, expectedRevision: draft.revision, eventId: `contato-${sha(operationId)}`, tipo: "Contato", payload, fontes, revisao: "CONFIRMADO" }],
-      });
-      if (r.estado === "NEGADA") return reply(409, r.motivo ?? "VINCULO_CANAL_NEGADO");
+      // Rascunho e vínculo formam uma unidade: recusa não deixa rascunho órfão nem trava o retry.
+      const r = transacao(deps.db, () => {
+        const draft = salvarDraft(deps.db, {
+          draftId, patientId: parsed.data.patientId, sourceId: fontes[0]!.sourceId,
+          rawRef: "vinculo-operacional-local", payload, diagnostics: [], revision: 0, criadoEm: acessoCanal.agora,
+        });
+        return confirmar(deps.db, { autorizadoEm: deps.agora(),
+          operationId, patientId: parsed.data.patientId, encounterId: contexto.encounterId,
+          tumorLotId: contexto.tumorLotId ?? null, reviewDecisionId: operationId, sessao, em: acessoCanal.agora,
+          registros: [{ draftId, expectedRevision: draft.revision, eventId: `contato-${sha(operationId)}`, tipo: "Contato", payload, fontes, revisao: "CONFIRMADO" }],
+        });
+      }, (gravacao) => gravacao.estado === "NEGADA");
+      if (r.estado === "NEGADA") {
+        auditarRecusaDesfeita(r.motivo);
+        return reply(409, r.motivo ?? "VINCULO_CANAL_NEGADO");
+      }
       return reply(200, "VINCULO_GRAVADO", { mensagens: [...lerCanal(deps.db).mensagens, ...lerMensagensOperacionaisCanal(deps.db, acessoCanal)] });
     }
     const caixa = lerCanal(deps.db);
@@ -296,21 +306,27 @@ export function rotearSalaoECanal(
     const current = lerDraft(deps.db, draftId);
     if (current && (current.patientId !== parsed.data.patientId || JSON.stringify(current.payload) !== JSON.stringify(payload)))
       return reply(409, "CHAVE_IDEMPOTENCIA_REUTILIZADA");
-    if (!current) salvarDraft(deps.db, {
-      draftId, patientId: parsed.data.patientId,
-      sourceId: fontes[0]!.sourceId, rawRef: `canal-link:${parsed.data.contatoId}`, payload,
-      diagnostics: ["VINCULO_EXPLICITO_PENDENTE"], revision: 0, criadoEm: em,
-    });
-    const result = confirmar(deps.db, { autorizadoEm: deps.agora(), 
-      operationId, patientId: parsed.data.patientId,
-      tumorLotId: contexto.tumorLotId ?? null, encounterId: contexto.encounterId,
-      reviewDecisionId: operationId, sessao, em, registros: [{
-        draftId, expectedRevision: 0,
-        eventId: `canal-link-event-${sha(operationId).slice(0, 32)}`, tipo: "ReviewDecision", payload,
-        fontes, revisao: "CONFIRMADO",
-      }],
-    });
-    if (result.estado === "NEGADA") return reply(409, result.motivo ?? "VINCULO_CANAL_NEGADO");
+    // Rascunho e decisão formam uma unidade: recusa do kernel não deixa rascunho órfão.
+    const result = transacao(deps.db, () => {
+      if (!current) salvarDraft(deps.db, {
+        draftId, patientId: parsed.data.patientId,
+        sourceId: fontes[0]!.sourceId, rawRef: `canal-link:${parsed.data.contatoId}`, payload,
+        diagnostics: ["VINCULO_EXPLICITO_PENDENTE"], revision: 0, criadoEm: em,
+      });
+      return confirmar(deps.db, { autorizadoEm: deps.agora(),
+        operationId, patientId: parsed.data.patientId,
+        tumorLotId: contexto.tumorLotId ?? null, encounterId: contexto.encounterId,
+        reviewDecisionId: operationId, sessao, em, registros: [{
+          draftId, expectedRevision: 0,
+          eventId: `canal-link-event-${sha(operationId).slice(0, 32)}`, tipo: "ReviewDecision", payload,
+          fontes, revisao: "CONFIRMADO",
+        }],
+      });
+    }, (gravacao) => gravacao.estado === "NEGADA");
+    if (result.estado === "NEGADA") {
+      auditarRecusaDesfeita(result.motivo);
+      return reply(409, result.motivo ?? "VINCULO_CANAL_NEGADO");
+    }
     return reply(200, result.estado, { ...lerCanal(deps.db), codigo: result.estado });
   }
 

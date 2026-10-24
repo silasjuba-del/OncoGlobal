@@ -76,6 +76,7 @@ it("F4 sintetico: caixa -> ORK fake -> draft -> revisao -> ledger -> delta -> bu
     const login = await post(port, "/login", { senha: "senha-sintetica-local" });
     expect(login.status).toBe(200);
     const token = login.json.token as string;
+    sessoes.selecionarConsulta(token, { patientId, encounterId: "consulta-teste-01", tumorLotId }); // confirmação exige a consulta aberta (EST-02)
 
     // Snapshot N-1: uma revisao humana anterior feita pela rota real, sem assinatura de documento.
     salvarDraft(db, { draftId: "historico-teste", patientId, sourceId: "fonte-manual-teste",
@@ -123,6 +124,8 @@ it("F4 sintetico: caixa -> ORK fake -> draft -> revisao -> ledger -> delta -> bu
     salvarDraft(db, { draftId: "fato-teste", patientId, sourceId: envelope.sourceId,
       rawRef: envelope.rawRef, payload: { ...extraido, contexto: { encounterId, tumorLotId } },
       diagnostics: [], revision: 0, criadoEm: em });
+    // Consulta atual aberta na sessão (EST-02), como o médico faz antes de revisar.
+    sessoes.selecionarConsulta(token, { patientId, encounterId, tumorLotId });
     // Exibicao do fato sintetico pela rota real, no mesmo lote, antes de confirmar.
     const exibicaoRevisao = await post(port, "/consulta/bundle", {
       patientId, tumorLotId, encounterId, draftIds: ["fato-teste"],
