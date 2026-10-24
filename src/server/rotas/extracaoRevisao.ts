@@ -11,7 +11,7 @@ import {
   ReviewException,
 } from "../../contracts/w10/extracao.js";
 import { executarConfirmacao as confirmar } from "../../kernel/comandos/index.js";
-import { lerDraft, listarDrafts, listarDraftsSemVinculo, listarEventos, salvarDraft } from "../../kernel/comandos/portas.js";
+import { auditar, lerDraft, listarDrafts, listarDraftsSemVinculo, listarEventos, salvarDraft, transacao } from "../../kernel/comandos/portas.js";
 import { normalizarDataCivil } from "../../kernel/extracao/normalizacao.js";
 import { executarPipelineExtracao, type ExtractionInput } from "../../kernel/extracao/pipeline.js";
 import { prepararRevisaoExtracao } from "../../kernel/extracao/prepararRevisao.js";
@@ -610,16 +610,20 @@ export function rotearExtracaoERevisao(
       if (reviewDraft && (reviewDraft.patientId !== parsed.data.patientId
         || JSON.stringify(reviewDraft.payload) !== JSON.stringify(reviewPayload)))
         return reply(409, "CHAVE_IDEMPOTENCIA_REUTILIZADA");
-      if (!reviewDraft) salvarDraft(deps.db, {
-        draftId: reviewDraftId, patientId: parsed.data.patientId,
-        sourceId: extractionInput.sourceId, rawRef: `review-link:${draft.draftId}`, payload: reviewPayload,
-        diagnostics: ["DECISAO_DE_VINCULO_MEDICO"], revision: 0, criadoEm: em,
-      });
       const fonte = {
         sourceId: extractionInput.sourceId, classe: "DOCUMENT" as const,
         localizador: identidade.trecho, dataClinica: null, dataCaptura: em,
         versao: `draft-r${draft.revision}`, contentHash: sourceHash,
       };
+      // Decisão, rascunho da decisão e rascunho revisado formam uma unidade: qualquer recusa
+      // desfaz as três escritas, e nenhum 409 sai depois de um ReviewDecision gravado.
+      const rascunhoFonte = draft, fonteVinculoId = extractionInput.sourceId;
+      const vinculo = transacao(deps.db, () => {
+      if (!reviewDraft) salvarDraft(deps.db, {
+        draftId: reviewDraftId, patientId: parsed.data.patientId,
+        sourceId: fonteVinculoId, rawRef: `review-link:${rascunhoFonte.draftId}`, payload: reviewPayload,
+        diagnostics: ["DECISAO_DE_VINCULO_MEDICO"], revision: 0, criadoEm: em,
+      });
       const resultadoVinculo = confirmar(deps.db, {
         operationId, patientId: parsed.data.patientId,
         tumorLotId: identityOnly ? null : consultaVinculo.tumorLotId ?? null, encounterId: consultaVinculo.encounterId,
@@ -634,27 +638,36 @@ export function rotearExtracaoERevisao(
           fontes: [fonte], revisao: "CONFIRMADO",
         }],
       });
-      if (resultadoVinculo.estado === "NEGADA") return reply(409, resultadoVinculo.motivo ?? "VINCULO_NEGADO");
-      const atual = lerDraft(deps.db, draft.draftId);
+      if (resultadoVinculo.estado === "NEGADA")
+        return { falha: resultadoVinculo.motivo ?? "VINCULO_NEGADO", negadaPeloKernel: true } as const;
+      const atual = lerDraft(deps.db, rascunhoFonte.draftId);
       if (!atual || atual.revision !== parsed.data.expectedRevision || atual.patientId !== null)
-        return reply(409, "REVISAO_RASCUNHO_CONFLITANTE");
+        return { falha: "REVISAO_RASCUNHO_CONFLITANTE", negadaPeloKernel: false } as const;
       const reviewed = salvarDraft(deps.db, {
         ...atual, patientId: parsed.data.patientId,
-        revision: draft.revision + 1,
+        revision: rascunhoFonte.revision + 1,
         payload: {
           ...payloadOriginal, patientLinkReview: {
             patientId: parsed.data.patientId,
             encounterId: consultaVinculo.encounterId, tumorLotId: identityOnly ? null : consultaVinculo.tumorLotId ?? null,
             medicoId: sessao.medicoId, em, reviewDecisionId: operationId,
             exceptionId: action.data.exceptionId, segmentId, identityOnly,
-            sourceId: extractionInput.sourceId, sourceHash,
+            sourceId: fonteVinculoId, sourceHash,
           },
         },
-        diagnostics: [...draft.diagnostics, "VINCULO_PACIENTE_CONFIRMADO_POR_MEDICO"],
+        diagnostics: [...rascunhoFonte.diagnostics, "VINCULO_PACIENTE_CONFIRMADO_POR_MEDICO"],
       });
       if (reviewed.diagnostics.includes("EXPECTED_REVISION_CONFLICT"))
-        return reply(409, "REVISAO_RASCUNHO_CONFLITANTE");
-      draft = reviewed;
+        return { falha: "REVISAO_RASCUNHO_CONFLITANTE", negadaPeloKernel: false } as const;
+      return { reviewed } as const;
+      }, (resultado) => "falha" in resultado);
+      if ("falha" in vinculo) {
+        // O rollback também desfaz a auditoria gravada pelo kernel; a recusa é auditada de novo fora dela.
+        if (vinculo.negadaPeloKernel) auditar(deps.db, { ator: { tipo: "SESSAO", id: sessao.medicoId },
+          acaoPedida: "CONFIRMAR", decisao: "NEGADA", motivoCodigo: vinculo.falha, politicaVersao: "W2-01", em: deps.agora() });
+        return reply(409, vinculo.falha);
+      }
+      draft = vinculo.reviewed;
     } else if (linkReview?.patientId !== parsed.data.patientId) {
       return reply(409, "VINCULO_PACIENTE_NAO_CONFIRMADO");
     } else {
