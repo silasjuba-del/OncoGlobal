@@ -9,6 +9,8 @@ import { FonteRevisao, RevisaoPreparada } from "../../../src/ui/api/revisaoExtra
 import type { ConsultaVisao, PedidoBundle, PortaConsulta } from "../../../src/ui/api/porta.js";
 import type { Retrato } from "../../../src/contracts/f1/retrato.js";
 import type { VisaoIntegrada } from "../../../src/contracts/f1/visaoIntegrada.js";
+import { usarEsperaDeJornadaHttpCompleta } from "../../fixtures/espera-jornada-http.js";
+usarEsperaDeJornadaHttpCompleta();
 
 afterEach(cleanup);
 const antiga = "Nenhum resultado laboratorial confirmado.";
