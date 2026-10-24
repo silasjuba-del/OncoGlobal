@@ -5,9 +5,10 @@ import type { ServidorDeps } from "../../src/server/rotas.js";
 import { criarServidorLocal } from "../../src/server/http.js";
 import { criarGerenciadorSessao } from "../../src/server/sessao.js";
 
-export async function ambienteHttp(opcoes: Pick<ServidorDeps, "salaoRuleset" | "corpus" | "transportePubMed"> = {}) {
+export async function ambienteHttp(opcoes: Pick<ServidorDeps, "salaoRuleset" | "corpus" | "transportePubMed"> = {},
+  caminhoLedger = ":memory:") {
   let agora = "2026-10-05T12:00:00Z";
-  const db = abrirLedger(":memory:");
+  const db = abrirLedger(caminhoLedger);
   let efeitos = 0;
   const logs: { rota: string; codigo: string; status: number }[] = [];
   const sessoes = criarGerenciadorSessao({ medicoId: "medico-teste", crm: "CRM-TESTE",
