@@ -1,4 +1,4 @@
-import { rotaHttp } from "./rotas/catalogo.js";
+import { politicaProcessamento } from "./rotas/catalogo.js";
 import { createServer, type Server } from "node:http";
 import { rotear, type ServidorDeps } from "./rotas.js";
 import { createSettingsService } from "../kernel/config/settings.js";
@@ -56,7 +56,7 @@ export function criarServidorLocal(deps: ServidorDeps, config: { host?: string; 
       res.end(JSON.stringify({ codigo: "SERVIDOR_ENCERRANDO" }));
       return;
     }
-    acompanhar(rotear(runtimeDeps, req, res).then(async()=>{ if(req.method==="POST" && res.statusCode>=200 && res.statusCode<300 && (rotaHttp(req.url)?.grava??true)){ await processarCanal(); await runtimeDeps.motorF1?.processar(); } }).catch(() => {
+    acompanhar(rotear(runtimeDeps, req, res).then(async()=>{ if(req.method==="POST" && res.statusCode>=200 && res.statusCode<300 && politicaProcessamento(req.url)==="PENDENCIAS_E_MOTOR"){ await processarCanal(); await runtimeDeps.motorF1?.processar(); } }).catch(() => {
       // The router handles expected failures; this fallback remains PHI-free.
       runtimeDeps.log({ rota: "desconhecida", codigo: "ERRO_INTERNO", status: 500 });
       if (!res.headersSent) res.writeHead(500);
