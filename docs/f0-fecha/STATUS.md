@@ -1,3 +1,5 @@
+> Preservação de 24/10/2026: logs brutos e capturas de demonstração citados neste fechamento foram exportados, sem perda, para o arquivo não clínico. As referências abaixo descrevem evidências históricas, não arquivos presentes no checkout. [Inventário com hashes e recuperação](../_arquivo/LIMPEZA-NAO-CLINICA-20261024.md). PHI-TRIAGEM.json e os relatórios permanecem ativos.
+
 # F0 — painel de fechamento
 
 **FINAL — F0 pronta para merge humano no PR #4.** Evidência de código em `dc2e78c`; o último CI do PR é conferido antes da entrega. Missão: `docs/ondas/F0-FECHAMENTO-ASTRA.md`, D-W9-80. Astra é writer único de `f0/w1-integrado`; merge na main exclusivo do Dr. Silas.

@@ -1,3 +1,5 @@
+> Preservação de 24/10/2026: os assets e o protótipo executável foram exportados da árvore ativa. Esta especificação de design permanece integral abaixo. Originais e recuperação: [inventário não clínico](../../_arquivo/NAO-CLINICO-20261024.json) e [guia](../../_arquivo/LIMPEZA-NAO-CLINICA-20261024.md).
+
 # Handoff: OncoChart · Jornada Oncológica 3D + OncoAssist
 
 ## Overview
