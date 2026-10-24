@@ -27,6 +27,7 @@ async function ambiente() {
   const address = server.address();
   if (!address || typeof address === "string") throw new Error("PORTA_AUSENTE");
   const token = sessoes.login("senha-sintetica-s9")!.token;
+  sessoes.selecionarConsulta(token, contexto); // confirmação exige a consulta aberta (EST-02)
   const post = async (path: string, body: unknown) => {
     const response = await fetch(`http://127.0.0.1:${address.port}${path}`, {
       method: "POST", headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` }, body: JSON.stringify(body),

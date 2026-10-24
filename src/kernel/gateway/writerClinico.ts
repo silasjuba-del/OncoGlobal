@@ -174,21 +174,18 @@ export function criarWriterClinicoGateway(deps: {
       }
 
       // 7. Validação de schema (ClinicalEvent.parse em confirmar) e persistência transacional no ledger.
-      // Retries usam o carimbo da operação já persistida; o relógio corrente
-      // continua validando a sessão acima, mas não altera o hash idempotente.
-      const operacaoAnterior = deps.db.prepare("SELECT criadoEm FROM operation WHERE operationId=?")
-        .get(pedido.operationId) as { criadoEm: string } | undefined;
-      const emEscrita = operacaoAnterior?.criadoEm ?? em;
+      // Retries: o kernel remonta o replay com o criadoEm já gravado da operação; o relógio
+      // corrente valida a sessão (autorizadoEm) e não altera o hash idempotente.
       let gravacao;
       try {
-        gravacao = confirmar(deps.db, { autorizadoEm: deps.agora(), 
+        gravacao = confirmar(deps.db, { autorizadoEm: deps.agora(),
           operationId: pedido.operationId,
           patientId: pedido.contexto.patientId,
           encounterId: pedido.contexto.encounterId,
           tumorLotId: pedido.contexto.tumorLotId,
           reviewDecisionId: pedido.reviewDecisionId,
           sessao: sessaoParsed.data,
-          em: emEscrita,
+          em,
           registros: pedido.registros.map(({ exigeProveniencia: _omit, ...r }) => r),
         });
       } catch {

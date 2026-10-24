@@ -88,6 +88,7 @@ it("não confirma em lote um rascunho clínico não exibido e mantém o document
   try {
     const patientId = "Paciente Teste 73", encounterId = "encontro-73";
     semearPaciente(f, patientId, encounterId);
+    f.sessoes.selecionarConsulta(f.token, { patientId, encounterId, tumorLotId: null }); // confirmação exige a consulta aberta (EST-02)
     salvarRascunho(f, { draftId: "documento-73", patientId,
       payload: { documentId: "documento-73", documentVersion: 1, documentHash: "a".repeat(64), texto:"Documento sintético para revisão", encounterId, tumorLotId: null } });
     salvarRascunho(f, { draftId: "extracao-73", patientId,
