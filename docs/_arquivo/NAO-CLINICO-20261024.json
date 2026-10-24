@@ -418,27 +418,6 @@
       "motivo": "Saida bruta historica de verificacao; nao e codigo nem dado clinico"
     },
     {
-      "caminho": "docs/f0-fecha/E6b-final-1.log",
-      "bytes": 184,
-      "sha256": "5434603b1840ad24115bf3d3035544c82748ac0731d163b807977ac16171ba93",
-      "blobGit": "404dac52859fb56349c342490e8e7ce02792893f",
-      "motivo": "Saida bruta historica de verificacao; nao e codigo nem dado clinico"
-    },
-    {
-      "caminho": "docs/f0-fecha/E6b-final-2.log",
-      "bytes": 439,
-      "sha256": "b85bf2960f4345caf1cc67609be358067dd4ee4077bcb94cbaa4303484aef663",
-      "blobGit": "2f37dacee51fd73e9372d7392257342751771dba",
-      "motivo": "Saida bruta historica de verificacao; nao e codigo nem dado clinico"
-    },
-    {
-      "caminho": "docs/f0-fecha/E6b-final-3.log",
-      "bytes": 183,
-      "sha256": "804adc12f7f727cfd6d141b5f28ff1ee2f75925ca5edba40dcfd49d65a89cf43",
-      "blobGit": "f4b9231e7a77c7b4e3c1cd8d982fc8eff68a8826",
-      "motivo": "Saida bruta historica de verificacao; nao e codigo nem dado clinico"
-    },
-    {
       "caminho": "docs/f0-fecha/E6b-final-metricas.log",
       "bytes": 1764,
       "sha256": "24d4eda121500695737ca502778e5e5151086575f493d611cbdc2bd32962026e",
@@ -493,69 +472,6 @@
       "sha256": "a3ba1c00377fd8b97d7ba747aa92b1b8bfefedc987bd7b780653167d1325262f",
       "blobGit": "18779569ea247d4aee7d62a1e145f0aa4c7c9ffe",
       "motivo": "Saida bruta historica de verificacao; nao e codigo nem dado clinico"
-    },
-    {
-      "caminho": "docs/f0-fecha/demo/01-salao.png",
-      "bytes": 113069,
-      "sha256": "77343a68076f61941fdad3be3a19b1c161473ff7a2699823a1a28e2c08751721",
-      "blobGit": "81273b7b44ed02b6d64de493583040ad7ea8ae33",
-      "motivo": "Captura sintetica de demonstracao historica, sem consumidor executavel"
-    },
-    {
-      "caminho": "docs/f0-fecha/demo/02-conflito.png",
-      "bytes": 170280,
-      "sha256": "77be47fcd0a3bb535c2c741cb71f996264eb3196eafd1648f12d60355920e0f5",
-      "blobGit": "5397d321eebb68344fc676f5700b1e06b151b878",
-      "motivo": "Captura sintetica de demonstracao historica, sem consumidor executavel"
-    },
-    {
-      "caminho": "docs/f0-fecha/demo/03-revisao.png",
-      "bytes": 218269,
-      "sha256": "b4656732d0848c51e63b3cc9a6034d67974252f2f9dee03df1ce83036bd1309a",
-      "blobGit": "31787f362364aa8d0c018dcdaa09c5728fe363b2",
-      "motivo": "Captura sintetica de demonstracao historica, sem consumidor executavel"
-    },
-    {
-      "caminho": "docs/f0-fecha/demo/04-cartao.png",
-      "bytes": 247038,
-      "sha256": "0e38bc5af4d46df1a94bcee27f8f49fa00644b34f009f7f21db7c9e05f0e0888",
-      "blobGit": "fc19fa4baf209a2e37e21c9ffd4a9fc92299a287",
-      "motivo": "Captura sintetica de demonstracao historica, sem consumidor executavel"
-    },
-    {
-      "caminho": "docs/f0-fecha/demo/05-modelo.png",
-      "bytes": 33517,
-      "sha256": "08557eaecf97c1fc874f86a64ce8beac5f98b7777b0c23db8650ad6ea546f4d2",
-      "blobGit": "e0751255e6bdd8ac14efcb38088d357b3936fadc",
-      "motivo": "Captura sintetica de demonstracao historica, sem consumidor executavel"
-    },
-    {
-      "caminho": "docs/f0-fecha/demo/06-exibicao.png",
-      "bytes": 221510,
-      "sha256": "b70c66eb35f75d3d3210e303975cd659aa31826e0c42ac2bcfd81ce20e285e78",
-      "blobGit": "4c42973309dd8412dee407980cb758a1cd2df911",
-      "motivo": "Captura sintetica de demonstracao historica, sem consumidor executavel"
-    },
-    {
-      "caminho": "docs/f0-fecha/demo/07-historico.png",
-      "bytes": 226303,
-      "sha256": "da80b84567d05bb63b0c4280beaa431c447b5bac56f262a36d1e94fa8283dcb0",
-      "blobGit": "d1bfb95ecac9403fe9f9c55f1b9b17fe3f5a8fb3",
-      "motivo": "Captura sintetica de demonstracao historica, sem consumidor executavel"
-    },
-    {
-      "caminho": "docs/f0-fecha/demo/08-apac.png",
-      "bytes": 116100,
-      "sha256": "b3489f132de05f576f6ef5c284434d2cb23014ca06abced6823785085883269f",
-      "blobGit": "4af5d4f8e13f6b2f336a45faa2495df79b3099de",
-      "motivo": "Captura sintetica de demonstracao historica, sem consumidor executavel"
-    },
-    {
-      "caminho": "docs/f0-fecha/demo/09-reabertura.png",
-      "bytes": 223213,
-      "sha256": "f16d342d3f03f17b348b71b9681c6387b2036abaa6424fc50d667744fd14df31",
-      "blobGit": "7ccc68ef70f31ad19ca88b9faac77c02a3f5e295",
-      "motivo": "Captura sintetica de demonstracao historica, sem consumidor executavel"
     },
     {
       "caminho": "docs/referencias/externos/manual-paciente-oncologico-2023.pdf",

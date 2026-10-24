@@ -1,4 +1,4 @@
-> Preservação de 24/10/2026: logs brutos e capturas de demonstração citados neste fechamento foram exportados, sem perda, para o arquivo não clínico. As referências abaixo descrevem evidências históricas, não arquivos presentes no checkout. [Inventário com hashes e recuperação](../_arquivo/LIMPEZA-NAO-CLINICA-20261024.md). PHI-TRIAGEM.json e os relatórios permanecem ativos.
+> Preservação de 24/10/2026: logs brutos sem vínculo no recibo Q50 foram exportados, sem perda, para o arquivo não clínico. As nove capturas da demonstração e os três logs E6b vinculados a Q50 permanecem ativos. As referências abaixo descrevem evidências históricas, não arquivos presentes no checkout. [Inventário com hashes e recuperação](../_arquivo/LIMPEZA-NAO-CLINICA-20261024.md). PHI-TRIAGEM.json e os relatórios permanecem ativos.
 
 # F0 — painel de fechamento
 
