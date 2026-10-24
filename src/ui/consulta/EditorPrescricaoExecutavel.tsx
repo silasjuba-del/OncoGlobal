@@ -173,13 +173,14 @@ export interface EditorPrescricaoExecutavelProps {
   origemFicha?: InstanciacaoFichaResposta | null;
   origemAcao?: AcaoCompostaPreparada | null;
   ocupado?: boolean;
+  cienciaPendente?: boolean;
   aoPreparar: (edicao: Edicao) => Promise<Preparada>;
   aoAssinar: (preparacao: Preparada) => Promise<void>;
   aoAlterarPendente?: (pendente: boolean) => void;
   aoDescartarAcao?: () => void;
 }
 
-export function EditorPrescricaoExecutavel({ base, origemFicha = null, origemAcao = null, ocupado = false,
+export function EditorPrescricaoExecutavel({ base, origemFicha = null, origemAcao = null, ocupado = false, cienciaPendente = false,
   aoPreparar, aoAssinar, aoAlterarPendente, aoDescartarAcao }: EditorPrescricaoExecutavelProps) {
   const [edicao, setEdicao] = useState<FormularioPrescricao>(() => inicializar(base));
   const [itens, setItens] = useState<ItemDraft[]>(() => base?.vigente?.itens.map(paraRascunho) ?? []);
@@ -448,7 +449,7 @@ export function EditorPrescricaoExecutavel({ base, origemFicha = null, origemAca
   }
 
   async function assinar() {
-    if (!atual || bloqueado) return;
+    if (!atual || bloqueado || cienciaPendente) return;
     const token = geracao.current;
     const revisaoBase = base?.revisao;
     const chaveSolicitada = chaveDaBase(base);
@@ -675,7 +676,8 @@ export function EditorPrescricaoExecutavel({ base, origemFicha = null, origemAca
         <section aria-label="Avisos da prescrição"><h4>Avisos</h4>{atual.avisos.length ? <ul>{atual.avisos.map((warning, index) => <li key={`${index}-${warning}`}>{warning}</li>)}</ul> : <p>Nenhum aviso retornado.</p>}</section>
         <section aria-label="Efeitos datados"><h4>Efeitos datados</h4>{atual.efeitos.length ? <ul>{atual.efeitos.map((effect, index) => <li key={`${index}-${effect}`}>{effect}</li>)}</ul> : <p>Nenhum efeito datado retornado.</p>}</section>
       </div>
-      <button type="button" disabled={bloqueado} onClick={assinar}>Confirmar e assinar prescrição</button>
+      {cienciaPendente ? <p role="status">Marque a ciência dos alertas vermelhos da consulta antes de assinar.</p> : null}
+      <button type="button" disabled={bloqueado || cienciaPendente} onClick={assinar}>Confirmar e assinar prescrição</button>
     </section> : null}
   </section>;
 }

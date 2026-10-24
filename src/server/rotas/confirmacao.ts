@@ -1,5 +1,5 @@
 import { transacao } from "../../kernel/ledger/db.js";
-import { registrarCienciaAlertas } from "../alertasConsulta.js";
+import { registrarCienciaAlertas, validarCienciaAlertas } from "../alertasConsulta.js";
 import { rascunhoNaoPromovivel } from "../../contracts/rascunhos.js";
 import { documentoReceitaDosePendente } from "../../contracts/f1/receitaDose.js";
 import { createHash } from "node:crypto";
@@ -170,21 +170,14 @@ function confirmarBlocoNaTransacao(deps: ServidorDeps, token: string, input: Con
       return meta&&typeof meta==="object"&&"revisao" in meta&&meta.revisao!==revisaoAtual;
     });
     if(vencido)return {status:409,body:{codigo:"REVISAO_FATOS_ALTERADA"}};
+    // O writer ainda confere a identidade imutável do pedido no replay.
+    const consultaAlertas = lerConsulta(deps.db,input.patientId,deps.agora(),sessao,input.tumorLotId,
+      {...opcoesLeituraConsulta(deps,sessao),encounterId:input.encounterId});
+    const alertasAtuais = "alertas" in consultaAlertas ? consultaAlertas.alertas : [];
+    const exibidos = deps.sessoes.alertasExibidos?.(token,contexto) ?? [];
+    const ciencia = validarCienciaAlertas(alertasAtuais, exibidos, input.reconhecerAlertas);
+    if (ciencia) return {status:409,body:{codigo:ciencia}};
   }
-  const consultaAlertas = lerConsulta(deps.db,input.patientId,deps.agora(),sessao,input.tumorLotId,
-    {...opcoesLeituraConsulta(deps,sessao),encounterId:input.encounterId});
-  const alertasAtuais = "alertas" in consultaAlertas ? consultaAlertas.alertas : [];
-  const exibidos = deps.sessoes.alertasExibidos?.(token,contexto) ?? [];
-  if(new Set(input.reconhecerAlertas).size !== input.reconhecerAlertas.length
-    || input.reconhecerAlertas.some(id=>!exibidos.includes(id)||!alertasAtuais.some(a=>a.alertaId===id)))
-    return {status:409,body:{codigo:"ALERTA_NAO_EXIBIDO_OU_ALTERADO"}};
-  // M10 (Dr. Silas, 24/10/2026): todo vermelho vigente ainda sem ciência precisa ter sido exibido (Q2)
-  // e reconhecido nesta assinatura. Ciência é só "ciente"; não autoriza conduta.
-  const vermelhosPendentes = alertasAtuais.filter(a=>a.presentationOverride && !a.reconhecidoEm).map(a=>a.alertaId);
-  if(vermelhosPendentes.some(id=>!exibidos.includes(id)))
-    return {status:409,body:{codigo:"ALERTA_NOVO_NAO_EXIBIDO"}};
-  if(vermelhosPendentes.some(id=>!input.reconhecerAlertas.includes(id)))
-    return {status:409,body:{codigo:"CIENCIA_ALERTA_OBRIGATORIA"}};
   const reviewDecisionId = sha(JSON.stringify({ input, medicoId: sessao.medicoId }));
   const registros = input.registros.map((r, i) => {
     const doc = docs[i];
@@ -247,7 +240,7 @@ function confirmarBlocoNaTransacao(deps: ServidorDeps, token: string, input: Con
     }
     const result=confirmar(deps.db, { autorizadoEm: deps.agora(), operationId:input.idempotencyKey,patientId:input.patientId,tumorLotId:input.tumorLotId,encounterId:input.encounterId,
       reviewDecisionId,sessao,em,registros:[...registros,...auxiliares.map(a=>({...a,expectedRevision:0,fontes:[],revisao:"CONFIRMADO" as const}))]});
-    if(result.estado!=="NEGADA") registrarCienciaAlertas(deps.db,contexto,input.reconhecerAlertas,sessao.medicoId,em,input.idempotencyKey);
+    if(result.estado==="GRAVADA") registrarCienciaAlertas(deps.db,contexto,input.reconhecerAlertas,sessao.medicoId,em,input.idempotencyKey);
     return {status:result.estado==="NEGADA"?409:200,body:{codigo:result.estado,resultRef:result.resultRef},
       ...(result.estado==="NEGADA"?{negativa:{motivo:result.motivo??"CONFIRMACAO_NEGADA",em}}:{})};
 

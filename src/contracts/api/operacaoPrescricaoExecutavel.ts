@@ -57,6 +57,8 @@ export const ConfirmarPrescricaoExecutavelPedido = z.object({
   expectedRevision: z.number().int().nonnegative(),
   conteudoHash: z.string().regex(/^[a-f0-9]{64}$/),
   idempotencyKey: Id,
+  // Pedidos legados sem alertas continuam válidos; ausência não dá ciência de nenhum alerta.
+  reconhecerAlertas: z.array(Id).optional(),
 }).strict();
 export type ConfirmarPrescricaoExecutavelPedido = z.infer<typeof ConfirmarPrescricaoExecutavelPedido>;
 export const PrescricaoExecutavelConfirmada = z.object({

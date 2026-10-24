@@ -32,6 +32,22 @@ const nCiencias=()=>a.db.prepare("SELECT name FROM sqlite_master WHERE type='tab
  ? a.db.prepare("SELECT COUNT(*) AS n FROM alerta_reconhecimento").get()!.n as number : 0;
 const nDocumentos=()=>a.eventos().filter(e=>e.tipo==="DOCUMENTO").length;
 
+it("M10 replay preserva resultado após vermelho novo sem gravar ciência ou eventos novamente",async()=>{
+ await abrir();gravarAlerta("vermelho-original");const ids=await exibidos();
+ const pedido=await pedidoAssinatura("m10-replay",[ids.get("vermelho-original")!]);
+ const primeira=await a.request("/consulta/confirmar",pedido);expect(primeira.status).toBe(200);
+ gravarAlerta("vermelho-posterior");
+ const eventos=a.eventos(),ciencias=nCiencias();
+ const auditorias=a.db.prepare("SELECT COUNT(*) AS n FROM audit_event").get()!.n;
+ const replay=await a.request("/consulta/confirmar",pedido);
+ expect(replay.status).toBe(200);expect(replay.data.codigo).toBe("REPLAY");
+ expect(replay.data.resultRef).toBe(primeira.data.resultRef);
+ expect(a.eventos()).toEqual(eventos);expect(nCiencias()).toBe(ciencias);
+ expect(a.db.prepare("SELECT COUNT(*) AS n FROM audit_event").get()!.n).toBe(auditorias);
+ const adulterado=await a.request("/consulta/confirmar",{...pedido,reconhecerAlertas:[]});
+ expect(adulterado.status).toBe(409);expect(a.eventos()).toEqual(eventos);expect(nCiencias()).toBe(ciencias);
+});
+
 it("M10-01 recusa assinatura sem ciência quando há alerta vermelho exibido, sem gravar nada",async()=>{
  await abrir();gravarAlerta("vermelho-1");
  expect((await exibidos()).size).toBe(1);

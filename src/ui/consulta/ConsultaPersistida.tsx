@@ -181,13 +181,14 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, aoAbrirCanal,
     if (!baseRx || baseRx.origem !== visao || preparacao.baseHash !== baseRx.dados.revisao
       || !porta.confirmarPrescricaoExecutavel) throw new Error("A base mudou. Prepare novamente.");
     const atual = geracao.current;
-    const conteudo = JSON.stringify([preparacao.draftId, preparacao.revision, preparacao.conteudoHash]);
+    const reconhecerAlertas = cientes.filter(id => visao?.alertas.some(a => a.alertaId === id));
+    const conteudo = JSON.stringify([preparacao.draftId, preparacao.revision, preparacao.conteudoHash, reconhecerAlertas]);
     if (assinaturaRx.current?.conteudo !== conteudo) assinaturaRx.current = { conteudo, chave: crypto.randomUUID() };
     setRxEmCurso(true); aoAlterarPrescricaoSalvando?.(true);
     try {
       const confirmada = await porta.confirmarPrescricaoExecutavel({ contexto: { patientId, encounterId, tumorLotId },
         draftId: preparacao.draftId, expectedRevision: preparacao.revision,
-        conteudoHash: preparacao.conteudoHash, idempotencyKey: assinaturaRx.current.chave });
+        conteudoHash: preparacao.conteudoHash, reconhecerAlertas, idempotencyKey: assinaturaRx.current.chave });
       if (atual !== geracao.current) return;
       if (confirmada.documentId !== preparacao.conteudo.documentId
         || confirmada.documentVersion !== preparacao.conteudo.documentVersion
@@ -199,6 +200,10 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, aoAbrirCanal,
       if (aoAtualizarClinico) aoAtualizarClinico(); else setVersao(v => v + 1);
       setMensagem("Prescrição assinada e ciclo planejado gravados. Nenhuma administração registrada.");
     } catch (error) {
+      if (error instanceof Error && error.message === "CIENCIA_ALERTA_OBRIGATORIA")
+        throw new Error("Marque a ciência de todos os alertas vermelhos exibidos antes de assinar a prescrição.");
+      if (error instanceof Error && error.message === "ALERTA_NOVO_NAO_EXIBIDO")
+        throw new Error("Surgiu um alerta vermelho novo. Confira a confirmação pendente no painel de recuperação; se não foi confirmada, cancele-a. Depois reabra o histórico, confira o alerta e prepare uma nova prévia.");
       throw new Error(mensagemErroFicha(error));
     } finally {
       if (atual === geracao.current) { setRxEmCurso(false); aoAlterarPrescricaoSalvando?.(false); }
@@ -514,7 +519,7 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, aoAbrirCanal,
       {baseRx?.dados.contexto.patientId === patientId && baseRx.dados.contexto.encounterId === encounterId
         && baseRx.dados.contexto.tumorLotId === tumorLotId ? <EditorPrescricaoExecutavel key={`${patientId}:${encounterId}:${tumorLotId ?? ""}`}
         base={baseRx.dados} origemFicha={origemFichaRx} origemAcao={origemAcaoRx} ocupado={ocupado || rxEmCurso || !visao || baseRx.origem !== visao || !!erroRx}
-        aoPreparar={prepararRx} aoAssinar={assinarRx}
+        aoPreparar={prepararRx} aoAssinar={assinarRx} cienciaPendente={cienciaPendente}
         aoDescartarAcao={() => setOrigemAcaoRx(null)}
         {...(aoAlterarPrescricaoPendente ? { aoAlterarPendente: aoAlterarPrescricaoPendente } : {})} />
         : <p role="status">Carregando a base da prescrição…</p>}

@@ -8,6 +8,17 @@ import { dadosDoEvento, eventosVigentes } from "../kernel/projections/snapshot.j
 import { hashConteudoExibido } from "./sessao.js";
 
 type Contexto = { patientId: string; encounterId: string; tumorLotId: string | null };
+/** Ciência só acompanha escrita nova; replay autentica e recupera a operação imutável. */
+export function validarCienciaAlertas(atual: readonly Alerta[], exibidos: readonly string[], reconhecer: readonly string[]):
+  "ALERTA_NAO_EXIBIDO_OU_ALTERADO" | "ALERTA_NOVO_NAO_EXIBIDO" | "CIENCIA_ALERTA_OBRIGATORIA" | null {
+  if (new Set(reconhecer).size !== reconhecer.length
+    || reconhecer.some(id => !exibidos.includes(id) || !atual.some(a => a.alertaId === id)))
+    return "ALERTA_NAO_EXIBIDO_OU_ALTERADO";
+  const pendentes = atual.filter(a => a.presentationOverride && !a.reconhecidoEm);
+  if (pendentes.some(a => !exibidos.includes(a.alertaId))) return "ALERTA_NOVO_NAO_EXIBIDO";
+  if (pendentes.some(a => !reconhecer.includes(a.alertaId))) return "CIENCIA_ALERTA_OBRIGATORIA";
+  return null;
+}
 /** Somente eventos confirmados deste encontro; rascunhos nunca geram E1. */
 export function projetarAlertasConsulta(db: DatabaseSync, eventos: readonly ClinicalEvent[], contexto: Contexto,
   hoje: string, agora: string, ruleset?: unknown): Alerta[] {

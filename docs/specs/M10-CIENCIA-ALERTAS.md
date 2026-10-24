@@ -2,6 +2,21 @@
 
 Estado: **IMPLEMENTADO** (PR em rascunho, sem merge). Decisões do Dr. Silas em 24/10/2026: Q1 = só alertas vermelhos; Q2 = recusar vermelho novo não exibido. Não é aprovação clínica nem integração.
 
+## Complemento autorizado em 24/10/2026 — replay e prescrição executável
+
+Base da correção: `10408bf1b823541f33a4e9ec56d573456853fc78`, PR #66. Execução pelo Codex em worktree isolada, branch `codex/pr66-replay-ciencia`.
+
+- Objetivo: recuperar assinatura já concluída apesar de alertas posteriores e aplicar a mesma ciência à prescrição executável, incluindo a interface e a recuperação de pedidos pendentes.
+- Regra clínica preservada: somente vermelhos vigentes ainda não reconhecidos exigem ciência; vermelho não exibido recusa escrita nova. Ciência não autoriza conduta. Não alterar corpus, doses, limiares, demo congelada ou fluxo de APAC em rascunho.
+- Replay continua sujeito à sessão válida, contexto e identidade do pedido. A lista de ciência integra a identidade da operação. Não grava ciência novamente nem reconhece alertas posteriores.
+- Prescrição: `reconhecerAlertas` opcional para compatibilidade com pedidos anteriores; omissão equivale a nenhuma ciência, jamais a reconhecimento automático. O recibo de exibição pertence à sessão/contexto. A ciência é persistida na transação da assinatura; falha desfaz assinatura e auxiliares.
+- UI: o botão de assinatura da prescrição aguarda ciência explícita; a preparação permanece disponível. O pedido enviado e guardado para recuperação inclui os IDs reconhecidos.
+- WRITE_SET: `src/server/alertasConsulta.ts`, `src/server/rotas/confirmacao.ts`, `src/server/prescricaoExecutavel.ts`, `src/contracts/api/operacaoPrescricaoExecutavel.ts`, `src/ui/consulta/{ConsultaPersistida,EditorPrescricaoExecutavel}.tsx`, os testes M10/HTTP de prescrição e este documento.
+- Aceite: replay sem novos efeitos; pedido adulterado recusado; ausência/ciência parcial/duplicada/não exibida recusadas; vermelho posterior e isolamento de sessão; exceções para não vermelhos e já reconhecidos; atomicidade sob falha de persistência; jornada UI/HTTP/SQLite. Typecheck, fronteiras, corpus e CI no head final.
+- Reprodução inicial: 2 falhas esperadas e 68 testes passando. Replay devolveu 409 em vez de 200; prescrição sem ciência devolveu 200 em vez de 409. A jornada UI também demonstrou botão liberado indevidamente.
+- Verificação local: typecheck, fronteiras (572 arquivos) e corpus (241 arquivos) passaram; prescrição executável isolada passou 70/70. Uma execução Windows abortou worker com `0xC0000409`; não foi contada como validação concluída. Regressão ampliada e CI final ainda em andamento.
+- Revisão independente: favorável após corrigir a orientação de recuperação da intenção pendente; sem achados restantes nem decisão clínica nova identificada. Merge condicionado aos checks finais no head exato, conforme autorização do Dr. Silas.
+
 ## Situação atual (lida no código)
 
 - A tela registra os alertas exibidos por sessão e contexto: `src/server/rotas.ts:410` → `sessao.ts:89-92`.

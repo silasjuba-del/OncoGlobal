@@ -9,6 +9,7 @@ import * as documentoExecutavel from "../../src/rules/prescricao/documentoExecut
 import { executarConfirmacao } from "../../src/kernel/comandos/index.js";
 import { lerDraft, listarDrafts, salvarDraft } from "../../src/kernel/comandos/portas.js";
 import { hashConteudoExibido } from "../../src/server/sessao.js";
+import { registrarCienciaAlertas } from "../../src/server/alertasConsulta.js";
 import { BasePrescricaoExecutavelResposta, ConfirmarPrescricaoExecutavelPedido,
   PrepararPrescricaoExecutavelPedido, PrescricaoExecutavelConfirmada,
   PrescricaoExecutavelPreparada } from "../../src/contracts/api/operacaoPrescricaoExecutavel.js";
@@ -102,6 +103,102 @@ async function abrir(log?: Parameters<typeof abrirAmbiente>[1]) {
 }
 
 type Ambiente = Awaited<ReturnType<typeof abrir>>;
+
+function alertaCiencia(a: Ambiente, id: string, vermelho = true) {
+ a.seed("Alerta", { alertaId:id, alvo:{patientId:PACIENTE}, natureza:"AMEACA_IMEDIATA",classeRisco:null,
+  texto:`Alerta sintético ${id}`,origemRegra:"regra-sintetica",evidencias:[],presentationOverride:vermelho,
+  authorityOverride:false,reconhecidoEm:null,destino:"CHAT" });
+}
+async function exibirAlertasCiencia(a: Ambiente) {
+ const r=await a.request("/consulta/carregar",contexto);
+ expect(r.status).toBe(200);
+ return (r.data.alertas as {alertaId:string}[]).map(x=>x.alertaId);
+}
+it("M10 prescrição recusa ausência de ciência antes de gravar e permite corrigir o mesmo pedido",async()=>{
+ const a=await abrir();alertaCiencia(a,"rx-vermelho");
+ const ids=await exibirAlertasCiencia(a);
+ const {preparada}=await prepararNovaLinha(a);
+ const pedido={contexto,draftId:preparada.draftId,expectedRevision:preparada.revision,
+  conteudoHash:preparada.conteudoHash,idempotencyKey:"rx-ciencia"};
+ const antes=a.eventos();
+ const r=await a.request(CONFIRMAR,pedido);
+ expect(r.status).toBe(409);expect(r.data.codigo).toBe("CIENCIA_ALERTA_OBRIGATORIA");
+ expect(a.eventos()).toEqual(antes);
+ expect(a.db.prepare("SELECT 1 FROM operation WHERE operationId=?").get("rx-confirmar:rx-ciencia")).toBeUndefined();
+ const corrigido={...pedido,reconhecerAlertas:ids};
+ const ok=await a.request(CONFIRMAR,corrigido);expect(ok.status).toBe(200);
+ expect(a.db.prepare("SELECT COUNT(*) AS n FROM alerta_reconhecimento").get()!.n).toBe(1);
+ alertaCiencia(a,"rx-posterior");const depois=a.eventos();
+ const auditorias=a.db.prepare("SELECT COUNT(*) AS n FROM audit_event").get()!.n;
+ const replay=await a.request(CONFIRMAR,corrigido);
+ expect(replay.status).toBe(200);expect(replay.data.codigo).toBe("REPLAY");
+ expect(replay.data.eventoId).toBe(ok.data.eventoId);expect(a.eventos()).toEqual(depois);
+ expect(a.db.prepare("SELECT COUNT(*) AS n FROM alerta_reconhecimento").get()!.n).toBe(1);
+ expect(a.db.prepare("SELECT COUNT(*) AS n FROM audit_event").get()!.n).toBe(auditorias);
+ const recuperada=await a.request("/consulta/confirmacao/recuperar",{tipo:"PRESCRICAO",pedido:corrigido});
+ expect(recuperada.status).toBe(200);expect(recuperada.data.estado).toBe("CONFIRMADA");
+ expect(recuperada.data.resultado.eventoId).toBe(ok.data.eventoId);expect(a.eventos()).toEqual(depois);
+ const adulterado=await a.request(CONFIRMAR,{...corrigido,reconhecerAlertas:[]});
+ expect(adulterado.status).toBe(409);expect(adulterado.data.codigo).toBe("IDEMPOTENCIA_CONFLITO");
+});
+
+it.each(["parcial","duplicado","desconhecido","nao-exibido"] as const)("M10 prescrição recusa ciência %s sem efeito clínico",async caso=>{
+ const a=await abrir();alertaCiencia(a,"rx-1");alertaCiencia(a,"rx-2");
+ const ids=caso==="nao-exibido"?[]:await exibirAlertasCiencia(a);
+ const {preparada}=await prepararNovaLinha(a);
+ const reconhecerAlertas=caso==="parcial"?ids.slice(0,1):caso==="duplicado"?[...ids,ids[0]!]:caso==="desconhecido"?[...ids,"id-inexistente"]:[];
+ const antes=a.eventos();const drafts=listarDrafts(a.db,PACIENTE);
+ const r=await a.request(CONFIRMAR,{contexto,draftId:preparada.draftId,expectedRevision:preparada.revision,
+  conteudoHash:preparada.conteudoHash,idempotencyKey:`rx-ciencia-${caso}`,reconhecerAlertas});
+ expect(r.status).toBe(409);
+ expect(r.data.codigo).toBe(caso==="parcial"?"CIENCIA_ALERTA_OBRIGATORIA":caso==="nao-exibido"?"ALERTA_NOVO_NAO_EXIBIDO":"ALERTA_NAO_EXIBIDO_OU_ALTERADO");
+ expect(a.eventos()).toEqual(antes);expect(listarDrafts(a.db,PACIENTE)).toEqual(drafts);
+});
+
+it("M10 prescrição recusa vermelho surgido após preparação",async()=>{
+ const a=await abrir();const {preparada}=await prepararNovaLinha(a);
+ alertaCiencia(a,"novo-apos-previa");
+ const pedido={contexto,draftId:preparada.draftId,expectedRevision:preparada.revision,
+  conteudoHash:preparada.conteudoHash,idempotencyKey:"rx-vermelho-novo"};
+ const antes=a.eventos();const r=await a.request(CONFIRMAR,pedido);
+ expect(r.status).toBe(409);expect(r.data.codigo).toBe("ALERTA_NOVO_NAO_EXIBIDO");expect(a.eventos()).toEqual(antes);
+});
+
+it.each(["nao-vermelho","reconhecido"] as const)("M10 prescrição permite lista vazia com alerta %s",async caso=>{
+ const a=await abrir();alertaCiencia(a,"rx-sem-pendencia",caso==="reconhecido");
+ const ids=await exibirAlertasCiencia(a);
+ if(caso==="reconhecido")registrarCienciaAlertas(a.db,contexto,ids,a.sessoes.obter(a.token)!.medicoId,AGORA,"ciencia-anterior");
+ const {preparada}=await prepararNovaLinha(a);
+ await assinar(a,preparada,`rx-${caso}`);
+});
+
+it("M10 prescrição exige alerta exibido na sessão que assina",async()=>{
+ const a=await abrir();alertaCiencia(a,"rx-sessao");const ids=await exibirAlertasCiencia(a);
+ const outro=a.sessoes.login(SENHA)!.token;a.sessoes.selecionarConsulta(outro,contexto);
+ const base=await carregarBase(a);
+ const r=await a.request(PREPARAR,{contexto,expectedBaseHash:base.revisao,idempotencyKey:"rx-outra-sessao",edicao:edicao()},outro);
+ expect(r.status).toBe(200);const preparada=PrescricaoExecutavelPreparada.parse(r.data);
+ const antes=a.eventos();
+ const resposta=await a.request(CONFIRMAR,{contexto,draftId:preparada.draftId,expectedRevision:preparada.revision,
+  conteudoHash:preparada.conteudoHash,idempotencyKey:"rx-assina-outra-sessao",reconhecerAlertas:ids},outro);
+ expect(resposta.status).toBe(409);expect(resposta.data.codigo).toBe("ALERTA_NAO_EXIBIDO_OU_ALTERADO");
+ expect(a.eventos()).toEqual(antes);
+});
+
+it("M10 falha ao persistir ciência desfaz assinatura, auxiliares e revisões",async()=>{
+ const a=await abrir();alertaCiencia(a,"rx-atomicidade");const ids=await exibirAlertasCiencia(a);
+ // Inicializa a tabela com ciência de outro identificador sintético, sem reconhecer o alerta vigente.
+ registrarCienciaAlertas(a.db,contexto,["anterior-sintetico"],a.sessoes.obter(a.token)!.medicoId,AGORA,"ciencia-anterior");
+ a.db.exec("CREATE TRIGGER falha_ciencia_sintetica BEFORE INSERT ON alerta_reconhecimento BEGIN SELECT RAISE(ABORT,'falha sintética'); END;");
+ const {preparada}=await prepararNovaLinha(a);const antes=a.eventos(),drafts=listarDrafts(a.db,PACIENTE);
+ const auditorias=a.db.prepare("SELECT COUNT(*) AS n FROM audit_event").get()!.n;
+ const r=await a.request(CONFIRMAR,{contexto,draftId:preparada.draftId,expectedRevision:preparada.revision,
+  conteudoHash:preparada.conteudoHash,idempotencyKey:"rx-atomicidade",reconhecerAlertas:ids});
+ expect(r.status).toBe(503);expect(a.eventos()).toEqual(antes);expect(listarDrafts(a.db,PACIENTE)).toEqual(drafts);
+ expect(a.db.prepare("SELECT COUNT(*) AS n FROM audit_event").get()!.n).toBe(auditorias);
+ expect(a.db.prepare("SELECT 1 FROM operation WHERE operationId=?").get("rx-confirmar:rx-atomicidade")).toBeUndefined();
+ expect(a.db.prepare("SELECT COUNT(*) AS n FROM alerta_reconhecimento").get()!.n).toBe(1);
+});
 
 async function carregarBase(a: Ambiente) {
   const resposta = await a.request(BASE, contexto);
