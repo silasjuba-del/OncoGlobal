@@ -1,3 +1,5 @@
+> Preservação de 24/10/2026: a referência visual e os demais assets do protótipo estão preservados fora da árvore ativa, com SHA-256 no [inventário](../../_arquivo/NAO-CLINICO-20261024.json). A decisão de design abaixo não foi revogada. Recuperação: [guia](../../_arquivo/LIMPEZA-NAO-CLINICA-20261024.md).
+
 # OncoChart = UI-alvo do OncoGlobal (D-W9-35)
 
 > Dr. Silas, 2026-10-06: "ESSA É A UI QUE QUERO". Fonte: `C:\Users\silas\GENSPARK-CODE\project (1)` (handoff de design, dados 100% fictícios). Copiado aqui integralmente (README = especificação pixel a pixel). Referência visual: `assets/ref.png`.

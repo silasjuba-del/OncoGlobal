@@ -6,3 +6,6 @@ data/
 .env
 canal.local.json
 dist/
+
+# Saídas locais de execução; os logs históricos já rastreados não são afetados.
+*.log
