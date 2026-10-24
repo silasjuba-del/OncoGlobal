@@ -336,7 +336,7 @@ describe("G2 · Cenário 6C: Operações por encontro/paciente em salaoCanal e s
       semearPacienteELoteG2(srv.db, srv.sessao, srv.obterAgora(), G2_CONTEXTO);
       semearPacienteELoteG2(srv.db, srv.sessao, srv.obterAgora(), G2_OUTRO_CONTEXTO);
 
-      const telefone = "+5511988887777";
+      const telefone = "+55-00-0000-0000"; // telefone sintético já declarado na varredura de PHI
       const texto = "Relato sintético para caracterização de vínculo G2.";
       const ing = receberTransporteSintetico(srv.db, {
         accountId: "conta-g2",

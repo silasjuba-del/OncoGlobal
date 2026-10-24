@@ -92,6 +92,8 @@ Nenhuma função sob teste (`hashPayload`, `hashCanonico`, `confirmar`, `gravarO
 | `tests/server/g2-contratos-contexto-http.test.ts` | `9b53d765281ec9b51d8c91edccd5ebab54a1cf91684b8067886d1b58f459f047` |
 | `tests/server/g2-processamento-http.test.ts` | `0b0492953d0560cda4518dbcd14344a5997a973e8343961e3c35203ada9a8eff` |
 
+Hashes da versão entregue por Argon em CR-006. Correção posterior na PR #49 (revisão do Codex): `g2-contratos-contexto-http.test.ts` usava o telefone `+55` não declarado como sintético, recusado pelas varreduras de PHI; passou a usar o sintético declarado `+55-00-0000-0000`, sem mudar asserções. Hash atual desse arquivo: `3424577af30401c2d323d3ae7ea2f5e2b0d18798e666082f7545f4e059406d6e`.
+
 ### 5.2. Resultados da Execução Isolada (`G2_TESTES_INICIADOS` → `G2_TESTES_ENCERRADOS`)
 
 - **Ambiente:** Windows nativo (`win32 10.0.26300`), Node `v24.15.0`, `TEMP`/`TMP` isolados em `C:\Users\silas\AppData\Local\Temp\oncoglobal-g2-argon-run\tmp`, portas TCP efêmeras `127.0.0.1:0`.
