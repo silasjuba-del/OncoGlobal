@@ -168,7 +168,8 @@ export function rotearSalaoECanal(
       return reply(409, "REVISAO_RASCUNHO_CONFLITANTE");
     const card = projected.cartoes.find((item) => item.entrada.patientId === contexto.patientId);
     if (!card?.temCorte) return reply(409, "CORTE_AUSENTE");
-    const em = existing?.criadoEm ?? agoraSalao;
+    // Num replay, o kernel remonta os eventos com o criadoEm já gravado da operação.
+    const em = agoraSalao;
     const payload = {
       campo: "liberacaoComCorteSalao", patientId: contexto.patientId,
       encounterId: contexto.encounterId, triagemDraftId: draft.draftId,
@@ -176,7 +177,7 @@ export function rotearSalaoECanal(
       triagemHash: (draft.payload as { contentHash?: string })?.contentHash ?? hashConteudoExibido(draft.payload),
       motivo: parsed.data.motivo,
     };
-    const result = confirmar(deps.db, { autorizadoEm: deps.agora(), 
+    const result = confirmar(deps.db, { autorizadoEm: deps.agora(),
       operationId, patientId: contexto.patientId,
       tumorLotId: null, encounterId: contexto.encounterId,
       reviewDecisionId: operationId, sessao, em, registros: [{
@@ -220,7 +221,7 @@ export function rotearSalaoECanal(
         draftId, patientId: parsed.data.patientId, sourceId: fontes[0]!.sourceId,
         rawRef: "vinculo-operacional-local", payload, diagnostics: [], revision: 0, criadoEm: acessoCanal.agora,
       });
-      const r = confirmar(deps.db, { autorizadoEm: deps.agora(), 
+      const r = confirmar(deps.db, { autorizadoEm: deps.agora(),
         operationId, patientId: parsed.data.patientId, encounterId: contexto.encounterId,
         tumorLotId: contexto.tumorLotId ?? null, reviewDecisionId: operationId, sessao, em: acessoCanal.agora,
         registros: [{ draftId, expectedRevision: draft.revision, eventId: `contato-${sha(operationId)}`, tipo: "Contato", payload, fontes, revisao: "CONFIRMADO" }],
@@ -301,7 +302,7 @@ export function rotearSalaoECanal(
       sourceId: fontes[0]!.sourceId, rawRef: `canal-link:${parsed.data.contatoId}`, payload,
       diagnostics: ["VINCULO_EXPLICITO_PENDENTE"], revision: 0, criadoEm: em,
     });
-    const result = confirmar(deps.db, { autorizadoEm: deps.agora(), 
+    const result = confirmar(deps.db, { autorizadoEm: deps.agora(),
       operationId, patientId: parsed.data.patientId,
       tumorLotId: contexto.tumorLotId ?? null, encounterId: contexto.encounterId,
       reviewDecisionId: operationId, sessao, em, registros: [{
