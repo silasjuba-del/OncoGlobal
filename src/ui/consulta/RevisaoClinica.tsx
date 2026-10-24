@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
+import { flushSync } from "react-dom";
 import { RevisaoClinicaResposta, type CampoFichaMinima } from "../../contracts/fase2/revisaoClinica.js";
 import { BLOCOS_TUMOR_PACK } from "../../contracts/fase2/tumorPack.js";
 import type { PedidoBundle, PortaConsulta } from "../api/porta.js";
@@ -48,21 +49,17 @@ export function RevisaoClinica({
   // Ausência da chave = abertura inicial motivada pelos dados; toggle nativo
   // e botão global atualizam a mesma fonte de verdade por subseção.
   const [subsecoes, setSubsecoes] = useState<Partial<Record<"preQt" | "resposta" | "historico", boolean>>>({});
+  const [blocosAbertos, setBlocosAbertos] = useState<Partial<Record<string, boolean>>>({});
   const [imprimindo, setImprimindo] = useState(false);
-  const imprimindoRef = useRef(false);
   const geracao = useRef(0);
   const chave = JSON.stringify([contexto.patientId, contexto.encounterId, contexto.tumorLotId]);
   const packId = selecao.chave === chave ? selecao.id : "";
 
   useEffect(() => {
-    const antesDeImprimir = () => {
-      imprimindoRef.current = true;
-      setImprimindo(true);
-    };
-    const depoisDeImprimir = () => {
-      imprimindoRef.current = false;
-      setImprimindo(false);
-    };
+    // O navegador monta a página impressa logo após beforeprint, antes de qualquer
+    // render agendado: sem flushSync os <details> fechados saem vazios no papel.
+    const antesDeImprimir = () => flushSync(() => setImprimindo(true));
+    const depoisDeImprimir = () => flushSync(() => setImprimindo(false));
     window.addEventListener("beforeprint", antesDeImprimir);
     window.addEventListener("afterprint", depoisDeImprimir);
     return () => {
@@ -78,6 +75,7 @@ export function RevisaoClinica({
     setErro("");
     setModalFontesAberto(false);
     setSubsecoes({});
+    setBlocosAbertos({});
     if (!porta.revisaoClinica) {
       setErro("Revisão integrada ainda indisponível.");
       return;
@@ -126,9 +124,15 @@ export function RevisaoClinica({
     || atual.respostaTumoral.patologica.length > 0));
   const historicoAberto = subsecoes.historico ?? (!!atual && atual.estadosDoenca.length > 0);
   const algumaSubsecaoAberta = preQtAberta || respostaAberta || historicoAberto;
-  const registrarToggle = (chave: "preQt" | "resposta" | "historico", aberto: boolean) => {
-    if (imprimindoRef.current) return;
+  // O evento toggle é assíncrono: os gerados pela impressão chegam depois de afterprint,
+  // já iguais ao estado renderizado. Só a divergência do renderizado é ação do usuário.
+  const registrarToggle = (chave: "preQt" | "resposta" | "historico", aberto: boolean, renderizado: boolean) => {
+    if (aberto === renderizado) return;
     setSubsecoes(atual => atual[chave] === aberto ? atual : { ...atual, [chave]: aberto });
+  };
+  const registrarToggleBloco = (nome: string, aberto: boolean, renderizado: boolean) => {
+    if (aberto === renderizado) return;
+    setBlocosAbertos(atual => atual[nome] === aberto ? atual : { ...atual, [nome]: aberto });
   };
 
   return (
@@ -227,7 +231,7 @@ export function RevisaoClinica({
 
           <div className="revisao-clinica-acordeoes">
             <details className="oc21-details-card" open={imprimindo || preQtAberta}
-              onToggle={e => registrarToggle("preQt", e.currentTarget.open)}>
+              onToggle={e => registrarToggle("preQt", e.currentTarget.open, imprimindo || preQtAberta)}>
               <summary>Pré-QT · {atual.preQt.estado}</summary>
               <div className="oc21-details-body">
                 <p>Completude documental e avaliações do esquema aguardam decisão médica.</p>
@@ -242,7 +246,7 @@ export function RevisaoClinica({
             <details
               className="oc21-details-card"
               open={imprimindo || respostaAberta}
-              onToggle={e => registrarToggle("resposta", e.currentTarget.open)}
+              onToggle={e => registrarToggle("resposta", e.currentTarget.open, imprimindo || respostaAberta)}
             >
               <summary>Resposta tumoral e patológica</summary>
               <div className="oc21-details-body">
@@ -308,7 +312,7 @@ export function RevisaoClinica({
             <details
               className="oc21-details-card"
               open={imprimindo || historicoAberto}
-              onToggle={e => registrarToggle("historico", e.currentTarget.open)}
+              onToggle={e => registrarToggle("historico", e.currentTarget.open, imprimindo || historicoAberto)}
             >
               <summary>Histórico de remissão e recidiva</summary>
               <div className="oc21-details-body">
@@ -377,8 +381,11 @@ export function RevisaoClinica({
                   lote={atual.loteCompleto}
                 />
               ) : (
-                BLOCOS_TUMOR_PACK.map((nome) => (
-                  <details key={nome} className="oc21-details-card" open={imprimindo ? true : undefined}>
+                BLOCOS_TUMOR_PACK.map((nome) => {
+                  const blocoAberto = imprimindo || (blocosAbertos[nome] ?? false);
+                  return (
+                  <details key={nome} className="oc21-details-card" open={blocoAberto}
+                    onToggle={e => registrarToggleBloco(nome, e.currentTarget.open, blocoAberto)}>
                     <summary>
                       {ROTULOS_BLOCOS[nome]} · {atual.pack!.blocos[nome].estado}
                     </summary>
@@ -397,7 +404,8 @@ export function RevisaoClinica({
                       )}
                     </div>
                   </details>
-                ))
+                  );
+                })
               )}
             </div>
           ) : null}

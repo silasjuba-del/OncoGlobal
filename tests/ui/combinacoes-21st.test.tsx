@@ -1,8 +1,9 @@
 // @vitest-environment jsdom
-import { cleanup, fireEvent, render, screen, within } from "@testing-library/react";
+import { act, cleanup, fireEvent, render, screen, within } from "@testing-library/react";
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { afterEach, describe, expect, it, vi } from "vitest";
+import { BLOCOS_TUMOR_PACK } from "../../src/contracts/fase2/tumorPack.js";
 import { OncoassistLocal } from "../../src/ui/OncoassistLocal.js";
 import { criarPortaFalsa, ID } from "../../src/ui/api/fake.js";
 import { COMBINACOES_21ST } from "../../src/ui/oncochart/combinacoes21st.js";
@@ -11,6 +12,25 @@ afterEach(() => {
   cleanup();
   localStorage.clear();
 });
+
+/** Dispara como o navegador: fora de act(), que anteciparia o render que a impressão real não espera. */
+function eventoDeImpressao(tipo: "beforeprint" | "afterprint") {
+  const ambiente = globalThis as { IS_REACT_ACT_ENVIRONMENT?: boolean | undefined };
+  const anterior = ambiente.IS_REACT_ACT_ENVIRONMENT;
+  ambiente.IS_REACT_ACT_ENVIRONMENT = false;
+  try { window.dispatchEvent(new Event(tipo)); } finally { ambiente.IS_REACT_ACT_ENVIRONMENT = anterior; }
+}
+
+/** O evento toggle é assíncrono como no navegador: entrega os pendentes. */
+async function entregarToggles() {
+  await act(async () => { await new Promise(resolver => setTimeout(resolver, 0)); });
+}
+
+/** Os toggle gerados pela impressão chegam depois de afterprint; entrega os pendentes e reenvia um tardio por details. */
+async function togglesTardios(elementos: Element[]) {
+  await entregarToggles();
+  for (const elemento of elementos) fireEvent(elemento, new Event("toggle"));
+}
 
 describe("Aparência, agrupamento de seções e revisão clínica", () => {
   it("alterna entre as 4 aparências pelo menu e pelo diálogo e agrupa seções", async () => {
@@ -195,10 +215,13 @@ describe("Aparência, agrupamento de seções e revisão clínica", () => {
       .closest("details")!;
     expect(secaoPreQt.open).toBe(false);
     expect(secaoResposta.open).toBe(true);
-    fireEvent(window, new Event("beforeprint"));
+    eventoDeImpressao("beforeprint");
     expect(secaoPreQt.open).toBe(true);
     expect(secaoResposta.open).toBe(true);
-    fireEvent(window, new Event("afterprint"));
+    eventoDeImpressao("afterprint");
+    expect(secaoPreQt.open).toBe(false);
+    expect(secaoResposta.open).toBe(true);
+    await togglesTardios([secaoPreQt, secaoResposta]);
     expect(secaoPreQt.open).toBe(false);
     expect(secaoResposta.open).toBe(true);
     fireEvent.click(within(secaoResposta).getByText("Resposta tumoral e patológica"));
@@ -242,5 +265,76 @@ describe("Aparência, agrupamento de seções e revisão clínica", () => {
     fireEvent.keyDown(document, { key: "Escape" });
     expect(screen.queryByRole("dialog", { name: "Fontes consolidadas da ficha clínica" })).toBeNull();
     expect(document.activeElement).toBe(abrir);
+  });
+
+  it("impressão abre todos os blocos do pack e devolve a cada um o estado escolhido pelo médico", async () => {
+    const porta = criarPortaFalsa();
+    porta.login = async () => ({ ok: true, expiraEm: null });
+    porta.revisaoClinica = async (ctx) => ({
+      codigo: "REVISAO_CLINICA_CARREGADA",
+      contexto: ctx,
+      revisao: "r-pack",
+      ficha: [],
+      preQt: { estado: "PENDENTE", autorizaTratamento: false, pendencias: [] },
+      packs: [{ id: "pack-sintetico", titulo: "Pack sintético", estado: "RASCUNHO", cids: ["C50"] }],
+      pack: {
+        schema: "tumor-pack-extract.v2",
+        referencia: { id: "pack-sintetico", versao: "v1", hash: "h-pack-sintetico" },
+        titulo: "Pack sintético",
+        cids: ["C50"],
+        estado: "RASCUNHO",
+        original: { arquivo: "pack-sintetico.md", hash: "a".repeat(64), estado: "VIGENTE" },
+        revisaoClinica: null,
+        blocos: Object.fromEntries(BLOCOS_TUMOR_PACK.map(nome => [nome, {
+          estado: "DOCUMENTADO" as const,
+          itens: [{ localizador: `${nome}-1`, conteudo: { texto: `Conteúdo sintético ${nome}` } }],
+        }])) as never,
+        requisitos: [],
+        pendencias: [],
+      },
+      pendencias: [],
+      estadosDoenca: [],
+      respostaTumoral: {
+        criterio: "RECIST_1_1",
+        aplicabilidade: "CONFERIR_CRITERIO_DO_TUMOR",
+        series: [],
+        patologica: [],
+        pendencias: [],
+      },
+    });
+
+    render(<OncoassistLocal fabricaPorta={() => porta} />);
+    fireEvent.change(screen.getByLabelText("Senha do servidor"), { target: { value: "senha-sintetica-local" } });
+    fireEvent.click(screen.getByRole("button", { name: "Entrar" }));
+    fireEvent.change(await screen.findByLabelText("Paciente da agenda"), { target: { value: "en-verde" } });
+
+    const card = await screen.findByLabelText("Pack documental selecionado");
+    const blocos = [...card.querySelectorAll("details.oc21-details-card")] as HTMLDetailsElement[];
+    expect(blocos).toHaveLength(BLOCOS_TUMOR_PACK.length);
+    expect(blocos.every(b => !b.open)).toBe(true);
+    const escolhido = within(card).getByText(/^Diagnóstico ·/).closest("details")!;
+    fireEvent.click(within(escolhido).getByText(/^Diagnóstico ·/));
+    await entregarToggles();
+    expect(escolhido.open).toBe(true);
+
+    eventoDeImpressao("beforeprint");
+    expect(blocos.every(b => b.open)).toBe(true);
+    eventoDeImpressao("afterprint");
+    await togglesTardios(blocos);
+    expect(escolhido.open).toBe(true);
+    expect(blocos.filter(b => b !== escolhido).every(b => !b.open)).toBe(true);
+
+    // Depois da impressão, a escolha do médico continua sendo registrada.
+    const outro = within(card).getByText(/^Estadiamento ·/).closest("details")!;
+    fireEvent.click(within(outro).getByText(/^Estadiamento ·/));
+    fireEvent.click(within(escolhido).getByText(/^Diagnóstico ·/));
+    await entregarToggles();
+    expect(outro.open).toBe(true);
+    expect(escolhido.open).toBe(false);
+    eventoDeImpressao("beforeprint");
+    eventoDeImpressao("afterprint");
+    await togglesTardios(blocos);
+    expect(outro.open).toBe(true);
+    expect(escolhido.open).toBe(false);
   });
 });
