@@ -204,7 +204,9 @@ export function EditorPrescricaoExecutavel({ base, origemFicha = null, origemAca
 
   useEffect(() => {
     montado.current = true;
-    aoAlterarPendente?.(false);
+    // Informa o estado real: uma edição pode ter chegado antes deste efeito, e
+    // marcarEdicao só avisa a transição; um "false" fixo apagaria a proteção.
+    aoAlterarPendente?.(pendente.current);
     return () => { montado.current = false; geracao.current += 1; };
   }, []);
 

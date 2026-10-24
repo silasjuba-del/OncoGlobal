@@ -213,8 +213,10 @@ export function PainelEstudos({
 
   useEffect(() => {
     mounted.current = true;
-    aoAlterarPendente?.(false);
-    aoAlterarSalvamento?.(false);
+    // Estado já reportado, não "false" fixo: um aviso anterior a este efeito não pode ser desfeito
+    // em silêncio, pois reportarPendente/reportarSalvamento só avisam transições.
+    aoAlterarPendente?.(pendingReported.current);
+    aoAlterarSalvamento?.(savingReported.current);
     return () => { mounted.current = false; generation.current += 1; actionGeneration.current += 1; };
   }, []);
 
