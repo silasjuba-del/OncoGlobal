@@ -252,6 +252,8 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, aoAbrirCanal,
     try { await acao(atual); }
     catch (erro) { if (atual === geracao.current) setMensagem(erro instanceof ErroPorta
       ? erro.message === "FLASH_JA_FINALIZADA" ? "Este conteúdo já foi finalizado. Reabra o histórico para conferir."
+        : erro.message === "CIENCIA_ALERTA_OBRIGATORIA" ? "Assinatura não concluída: falta a ciência de um alerta vermelho exibido."
+        : erro.message === "ALERTA_NOVO_NAO_EXIBIDO" ? "Assinatura não concluída: surgiu um alerta vermelho novo. Recarregue a consulta para vê-lo."
         : `Operação não concluída (${erro.codigo}). Reabra o conteúdo para conferir.`
       : "Operação não concluída. O conteúdo permanece pendente de revisão."); }
     finally { if (atual === geracao.current) { emCurso.current = false; setOcupado(false); } }
@@ -395,6 +397,8 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, aoAbrirCanal,
 
   const visaoPronta = visao && visao.patientId === patientId && visao.encounterId === encounterId
     && visao.tumorLotId === tumorLotId ? visao : null;
+  // M10: a assinatura só é oferecida com ciência de todo alerta vermelho exibido e ainda não reconhecido.
+  const cienciaPendente = (visaoPronta?.alertas ?? []).some(a=>a.presentationOverride && !a.reconhecidoEm && !cientes.includes(a.alertaId));
   const propsFlash: ConsultaFlashProps | null = visaoParaEdicao ? {
     ...montarPropsFlash(visaoParaEdicao, null, preparar, salvar),
     ...(aoAbrirApac ? {aoAbrirApac} : {}),
@@ -482,7 +486,8 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, aoAbrirCanal,
       </article>)}
       {preview.documentos.some(d=>documentoReceitaDosePendente({tipoDocumento:'FLASH_CONJUNTO_IMPRESSAO',texto:d.texto}))?<p role="status">Receita com dose pendente: permanece em rascunho. Volte à edição para completar a dose.</p>:null}
       <p>Ao confirmar, o médico valida as doses, a posologia e o conteúdo exibidos.</p>
-      <button type="button" disabled={ocupado||preview.documentos.some(d=>documentoReceitaDosePendente({tipoDocumento:'FLASH_CONJUNTO_IMPRESSAO',texto:d.texto}))} onClick={assinar}>Confirmar e assinar conteúdo exibido</button>
+      {cienciaPendente ? <p role="status">Marque a ciência de todos os alertas vermelhos acima para assinar.</p> : null}
+      <button type="button" disabled={ocupado||cienciaPendente||preview.documentos.some(d=>documentoReceitaDosePendente({tipoDocumento:'FLASH_CONJUNTO_IMPRESSAO',texto:d.texto}))} onClick={assinar}>Confirmar e assinar conteúdo exibido</button>
     </section> : <p>Prepare os documentos na Consulta Flash para conferir e assinar.</p>}
     {impressaoPendente ? <p>
       <button type="button" disabled={ocupado} onClick={repetirImpressao}>Solicitar impressão novamente</button>

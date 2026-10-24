@@ -178,6 +178,13 @@ function confirmarBlocoNaTransacao(deps: ServidorDeps, token: string, input: Con
   if(new Set(input.reconhecerAlertas).size !== input.reconhecerAlertas.length
     || input.reconhecerAlertas.some(id=>!exibidos.includes(id)||!alertasAtuais.some(a=>a.alertaId===id)))
     return {status:409,body:{codigo:"ALERTA_NAO_EXIBIDO_OU_ALTERADO"}};
+  // M10 (Dr. Silas, 24/10/2026): todo vermelho vigente ainda sem ciência precisa ter sido exibido (Q2)
+  // e reconhecido nesta assinatura. Ciência é só "ciente"; não autoriza conduta.
+  const vermelhosPendentes = alertasAtuais.filter(a=>a.presentationOverride && !a.reconhecidoEm).map(a=>a.alertaId);
+  if(vermelhosPendentes.some(id=>!exibidos.includes(id)))
+    return {status:409,body:{codigo:"ALERTA_NOVO_NAO_EXIBIDO"}};
+  if(vermelhosPendentes.some(id=>!input.reconhecerAlertas.includes(id)))
+    return {status:409,body:{codigo:"CIENCIA_ALERTA_OBRIGATORIA"}};
   const reviewDecisionId = sha(JSON.stringify({ input, medicoId: sessao.medicoId }));
   const registros = input.registros.map((r, i) => {
     const doc = docs[i];

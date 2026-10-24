@@ -27,7 +27,9 @@ async function pedidoAssinatura(chave:string,reconhecerAlertas:string[]){
   documentosExibidos:preparada.data.documentos.map((d:{documentId:string;documentVersion:number})=>({documentId:d.documentId,documentVersion:d.documentVersion})),
   reconhecerAlertas,idempotencyKey:`${chave}:assinar`};
 }
-const nCiencias=()=>a.db.prepare("SELECT COUNT(*) AS n FROM alerta_reconhecimento").get()!.n as number;
+/** A tabela de ciência é criada na primeira ciência; ausência da tabela significa zero ciências. */
+const nCiencias=()=>a.db.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name='alerta_reconhecimento'").get()
+ ? a.db.prepare("SELECT COUNT(*) AS n FROM alerta_reconhecimento").get()!.n as number : 0;
 const nDocumentos=()=>a.eventos().filter(e=>e.tipo==="DOCUMENTO").length;
 
 it("M10-01 recusa assinatura sem ciência quando há alerta vermelho exibido, sem gravar nada",async()=>{
@@ -72,6 +74,18 @@ it("M10-06 o que já era recusado continua recusado (id não exibido)",async()=>
  expect(r.status).toBe(409);expect(r.data.codigo).toBe("ALERTA_NAO_EXIBIDO_OU_ALTERADO");
 });
 
-// Dependem de decisão do Dr. Silas (ver docs/specs/M10-CIENCIA-ALERTAS.md, perguntas Q1 e Q2).
-it.todo("M10-07 [Q1] alerta não vermelho exibido: exige ou não ciência");
-it.todo("M10-08 [Q2] alerta vermelho vigente que surgiu depois da exibição: recusar até ser exibido");
+// Decisões do Dr. Silas (24/10/2026): Q1 só vermelhos; Q2 recusar vermelho novo não exibido.
+it("M10-07 [Q1] alerta não vermelho exibido não exige ciência",async()=>{
+ await abrir();gravarAlerta("amarelo-1",false);await exibidos();
+ const r=await a.request("/consulta/confirmar",await pedidoAssinatura("ciencia-m10-07",[]));
+ expect(r.status).toBe(200);expect(nCiencias()).toBe(0);
+});
+
+it("M10-08 [Q2] vermelho novo, vigente mas não exibido, recusa a assinatura sem gravar nada",async()=>{
+ await abrir();gravarAlerta("vermelho-1");const ids=await exibidos();
+ const pedido=await pedidoAssinatura("ciencia-m10-08",[ids.get("vermelho-1")!]);
+ gravarAlerta("vermelho-novo");const antes=nDocumentos();
+ const r=await a.request("/consulta/confirmar",pedido);
+ expect(r.status).toBe(409);expect(r.data.codigo).toBe("ALERTA_NOVO_NAO_EXIBIDO");
+ expect(nDocumentos()).toBe(antes);expect(nCiencias()).toBe(0);
+});

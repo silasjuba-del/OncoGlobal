@@ -1,6 +1,6 @@
 # M10 — Assinatura exige ciência de todo alerta vermelho exibido
 
-Estado: **ESPECIFICAÇÃO + TESTES VERMELHOS** (rodado em 24/10/2026: 2 falham como esperado, 4 passam, 2 pendentes de decisão; ~10 s, um worker, TEMP próprio). Nada implementado. Base: main 7d7ae2d. Decisão do Dr. Silas em 24/10/2026: "assinar exige ciência de todos os alertas exibidos".
+Estado: **IMPLEMENTADO** (PR em rascunho, sem merge). Decisões do Dr. Silas em 24/10/2026: Q1 = só alertas vermelhos; Q2 = recusar vermelho novo não exibido. Não é aprovação clínica nem integração.
 
 ## Situação atual (lida no código)
 
@@ -16,16 +16,17 @@ Estado: **ESPECIFICAÇÃO + TESTES VERMELHOS** (rodado em 24/10/2026: 2 falham c
 Ao confirmar, calcular `obrigatorios` = alertas que estão **exibidos nesta sessão e contexto** E **vigentes** E **vermelhos** (`presentationOverride`) E **ainda não reconhecidos** (`reconhecidoEm === null`).
 
 1. Se algum `obrigatorio` faltar em `reconhecerAlertas` → **409 `CIENCIA_ALERTA_OBRIGATORIA`**, antes de qualquer gravação (nem evento, nem ciência, nem auditoria de assinatura).
-2. Regra atual mantida: id duplicado, não exibido ou não vigente → 409 `ALERTA_NAO_EXIBIDO_OU_ALTERADO`.
-3. Sem `obrigatorios`, lista vazia continua válida.
-4. A ciência continua sendo só "ciente": não autoriza conduta, não muda o alerta, não vira evolução.
+2. **Q2:** vermelho vigente ainda sem ciência que **não foi exibido** nesta sessão → **409 `ALERTA_NOVO_NAO_EXIBIDO`**, antes de qualquer gravação.
+3. Regra atual mantida: id duplicado, não exibido ou não vigente → 409 `ALERTA_NAO_EXIBIDO_OU_ALTERADO`.
+4. Sem `obrigatorios`, lista vazia continua válida.
+5. A ciência continua sendo só "ciente": não autoriza conduta, não muda o alerta, não vira evolução.
 
 ## Arquivos a alterar (na implementação, depois da aprovação)
 
 | Arquivo | Mudança |
 |---|---|
 | `src/server/rotas/confirmacao.ts` | calcular `obrigatorios` e recusar com o código novo |
-| `src/contracts/api/saidasHttp.ts` | aceitar o código `CIENCIA_ALERTA_OBRIGATORIA` na rota `confirmar` |
+| `src/contracts/api/saidasHttp.ts` | **sem mudança**: respostas de erro não são validadas por esquema (`respostaHttpValida`, linha 134) |
 | `src/ui/consulta/ConsultaPersistida.tsx` | desabilitar "Assinar" enquanto faltar ciência de vermelho exibido; mensagem clara para o 409 |
 | `src/ui/consulta/BarraFechamento.tsx` | sem mudança esperada (já envia todos); confirmar por teste |
 | `src/ui/telas/TelaConsulta.tsx` | **não tocar** (demo congelada, D2); verificar se a demo usa servidor real e se algum teste dela quebra |
@@ -42,8 +43,8 @@ Ao confirmar, calcular `obrigatorios` = alertas que estão **exibidos nesta sess
 | M10-04 | sem vermelho, `[]` → 200 | passa | passa |
 | M10-05 | vermelho com ciência já registrada (`registrarCienciaAlertas`), assinatura com `[]` → 200 | passa | passa |
 | M10-06 | id não exibido continua 409 `ALERTA_NAO_EXIBIDO_OU_ALTERADO` | passa | passa |
-| M10-07 | [Q1] alerta não vermelho | todo | conforme decisão |
-| M10-08 | [Q2] vermelho novo, ainda não exibido | todo | conforme decisão |
+| M10-07 | [Q1] alerta não vermelho exibido, `[]` → 200 | — | passa |
+| M10-08 | [Q2] vermelho novo não exibido → 409 `ALERTA_NOVO_NAO_EXIBIDO`, nada gravado | — | passa |
 
 Mais, na implementação: teste de UI em `tests/ui/` para o botão "Assinar" bloqueado até marcar todos os vermelhos; rodar `tests/server/auditoria-main-alertas.test.ts` e `tests/ui/fechamento.test.tsx` (consumidores atuais). CI completo no head.
 
@@ -58,3 +59,10 @@ Mais, na implementação: teste de UI em `tests/ui/` para o botão "Assinar" blo
 - A demo congelada pode ter fluxo que assina sem ciência; não alterar a demo, registrar.
 
 Nota de fixture: uma segunda assinatura no mesmo encontro é recusada na preparação (409), por isso M10-05 grava a ciência anterior pelo mesmo mecanismo da rota em vez de assinar duas vezes.
+
+## Verificação da implementação (24/10/2026)
+
+- `tests/server/m10-ciencia-alertas.test.ts` (8) e `tests/ui/m10-ciencia-assinatura.test.tsx` (1): 9/9 passam.
+- Regressão dirigida: 43 arquivos que usam a confirmação ou a ciência; 41 passam, 2 pulados por `skipIf` preexistente; 412/415 testes passam, 3 pulados, 0 falhas.
+- `typecheck`, `check:boundaries` (572 arquivos, 0 exceções) e `check:corpus` (241 arquivos) verdes.
+- A demo congelada (`TelaConsulta.tsx`, D2) não foi alterada.
