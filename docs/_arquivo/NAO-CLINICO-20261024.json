@@ -1,0 +1,491 @@
+{
+  "schema": "ArquivoNaoClinico@1",
+  "base": "3fb1b3824f690f518a68442ffbdd8e416538a9d0",
+  "data": "2026-10-24",
+  "recuperacao": "git cat-file blob <blobGit> (a partir do historico preservado; comando de restauracao verifica SHA-256)",
+  "arquivos": [
+    {
+      "caminho": "docs/design/oncochart/OncoChart.html",
+      "bytes": 11280,
+      "sha256": "7e328b9d0367c2f2f9f9caac830289f94a632fb47688d8449ebaeaefa5bb6b76",
+      "blobGit": "6375f07f2524b1acbe320bf903b8c86effc8aa1f",
+      "motivo": "Asset ou prototipo documental de design, fora das entradas do build e sem consumidor executavel"
+    },
+    {
+      "caminho": "docs/design/oncochart/assets/annot.png",
+      "bytes": 131096,
+      "sha256": "893f9af87f3bb669875a3813a3797c832b6e20ea0bbad195ad9ab3082d8c6742",
+      "blobGit": "a23510cb434a5a66500fb587f29a03d69726d116",
+      "motivo": "Asset ou prototipo documental de design, fora das entradas do build e sem consumidor executavel"
+    },
+    {
+      "caminho": "docs/design/oncochart/assets/crop-header.png",
+      "bytes": 57927,
+      "sha256": "e41b629780a98b193e03157a01f78bdf30eb2e076d58ad573c2ebbf9f5b120ee",
+      "blobGit": "480b0d15ea825d64fb87a4e6d51830feae88b2da",
+      "motivo": "Asset ou prototipo documental de design, fora das entradas do build e sem consumidor executavel"
+    },
+    {
+      "caminho": "docs/design/oncochart/assets/crop-right.png",
+      "bytes": 47888,
+      "sha256": "87cb5d21bb0726f5e867fa1fdeee773156ba869ae757720427200c30e87ce66b",
+      "blobGit": "27675a8fdcd212a006e95622c0012e3ae26e84e5",
+      "motivo": "Asset ou prototipo documental de design, fora das entradas do build e sem consumidor executavel"
+    },
+    {
+      "caminho": "docs/design/oncochart/assets/crop-timeline.png",
+      "bytes": 33392,
+      "sha256": "3beeecca12706bac18b458fd13d773552f7d6b4272d550853458732c7eca2054",
+      "blobGit": "95fc4adbd8befd94636850f628a297e9a9c184d7",
+      "motivo": "Asset ou prototipo documental de design, fora das entradas do build e sem consumidor executavel"
+    },
+    {
+      "caminho": "docs/design/oncochart/assets/ct-abdome.jpg",
+      "bytes": 16519,
+      "sha256": "8550da8965873bf7104ce9557a267b7ece3c30f1d3cbeadfaa5143df3fab7049",
+      "blobGit": "c8abf80c879e7f6171f30df42397a5ad7d1f1bc6",
+      "motivo": "Asset ou prototipo documental de design, fora das entradas do build e sem consumidor executavel"
+    },
+    {
+      "caminho": "docs/design/oncochart/assets/ct-torax.jpg",
+      "bytes": 30953,
+      "sha256": "3ef79b483fdad6d3b2ce5f0f918c237ea2617aac2867e39930f2bcf9ad001192",
+      "blobGit": "6fea6a30938e52206e83854719d3ce7dd114cc08",
+      "motivo": "Asset ou prototipo documental de design, fora das entradas do build e sem consumidor executavel"
+    },
+    {
+      "caminho": "docs/design/oncochart/assets/ref.png",
+      "bytes": 775623,
+      "sha256": "756053a9410456062a683531d98b2931554cca75efa991fe8a4d2ebd0b93b630",
+      "blobGit": "f45607d0efcd161002edf4305e194bb2894786f1",
+      "motivo": "Asset ou prototipo documental de design, fora das entradas do build e sem consumidor executavel"
+    },
+    {
+      "caminho": "docs/design/oncochart/avatar.jsx",
+      "bytes": 2246,
+      "sha256": "44fdaae17716d7c434cc92fcc3dc9a6576580815a93236720a4c911ad6134d81",
+      "blobGit": "45dd8ea97fd008fd0d90b3cca2e67481c5a171e2",
+      "motivo": "Asset ou prototipo documental de design, fora das entradas do build e sem consumidor executavel"
+    },
+    {
+      "caminho": "docs/design/oncochart/chart3d.jsx",
+      "bytes": 5121,
+      "sha256": "9d6e11fe9d920a09bd46fc069805687464ae82f3cbf3f5057f1b3fa5640e2925",
+      "blobGit": "68a2daf48a3d18f4344fb5f9c7ba156bcdb60247",
+      "motivo": "Asset ou prototipo documental de design, fora das entradas do build e sem consumidor executavel"
+    },
+    {
+      "caminho": "docs/design/oncochart/data.js",
+      "bytes": 15571,
+      "sha256": "f3e986e71d33a697b145550296560dc026423843ae0e05ef34a70d33e5ceef6a",
+      "blobGit": "ec24b0dc388dc695a4e4e639b8edfde6ce1bb57e",
+      "motivo": "Asset ou prototipo documental de design, fora das entradas do build e sem consumidor executavel"
+    },
+    {
+      "caminho": "docs/design/oncochart/journey3d.jsx",
+      "bytes": 18362,
+      "sha256": "cd2075004832d51ecbb06b2eb708e6a84c90694b5a97edec3588efab83c9a592",
+      "blobGit": "3b4ea81f799bb4e0873228ddd81d45c9389f79a5",
+      "motivo": "Asset ou prototipo documental de design, fora das entradas do build e sem consumidor executavel"
+    },
+    {
+      "caminho": "docs/design/oncochart/overlays.jsx",
+      "bytes": 27828,
+      "sha256": "91d7f96c2e3f9c9613309b62881ae5d70508c71b359723bcd4a04d1376462db4",
+      "blobGit": "e659a1306f3b2f32cb6440ebd15dd5e772483ede",
+      "motivo": "Asset ou prototipo documental de design, fora das entradas do build e sem consumidor executavel"
+    },
+    {
+      "caminho": "docs/design/oncochart/panels.jsx",
+      "bytes": 10503,
+      "sha256": "16d350db37345fc829016a809f812e0377b05f1ce4e36adc58fec374dcfa5aec",
+      "blobGit": "bb6006d806c663c614a5b2bb287a841d9fb04200",
+      "motivo": "Asset ou prototipo documental de design, fora das entradas do build e sem consumidor executavel"
+    },
+    {
+      "caminho": "docs/design/oncochart/patient.jsx",
+      "bytes": 14947,
+      "sha256": "54684135e9b0a3152988a2c815c0859f6dddfba67948b1852c06dde5b1f3035d",
+      "blobGit": "7e8190faf04933b8e5c25085fa5f180031b22451",
+      "motivo": "Asset ou prototipo documental de design, fora das entradas do build e sem consumidor executavel"
+    },
+    {
+      "caminho": "docs/design/oncochart/side.jsx",
+      "bytes": 13385,
+      "sha256": "53c0e67f48c0e74fe3eaa1a86be5f8b48e4e05f63f90862c75b8f71a8e22b706",
+      "blobGit": "c7e8c8f15fe4079fe9b66f2f209c693035159f7f",
+      "motivo": "Asset ou prototipo documental de design, fora das entradas do build e sem consumidor executavel"
+    },
+    {
+      "caminho": "docs/design/oncochart/styles.css",
+      "bytes": 40772,
+      "sha256": "4121c537dbaedaf9aa8e8c938cf1a432279ec27a0bac5da35570458491113812",
+      "blobGit": "e9d1f909e5e0e202165ca581230626537f6ac1a1",
+      "motivo": "Asset ou prototipo documental de design, fora das entradas do build e sem consumidor executavel"
+    },
+    {
+      "caminho": "docs/design/oncochart/styles3d.css",
+      "bytes": 14874,
+      "sha256": "1d1fc5d5b063d7108f4af9326b2f3d6971a899e95915fa131dae84977ef54f72",
+      "blobGit": "68fcfbb51b0b59e5033a0b5e39ac8edc728b765c",
+      "motivo": "Asset ou prototipo documental de design, fora das entradas do build e sem consumidor executavel"
+    },
+    {
+      "caminho": "docs/design/oncochart/tabs.jsx",
+      "bytes": 18562,
+      "sha256": "25e2597f35d14121d8ac6819382ed802dcb49cc541a893653861c90086da113d",
+      "blobGit": "8e2f2e908ecacb7f2aa4e4b4abbca227b2bb0a50",
+      "motivo": "Asset ou prototipo documental de design, fora das entradas do build e sem consumidor executavel"
+    },
+    {
+      "caminho": "docs/design/oncochart/ui.jsx",
+      "bytes": 12857,
+      "sha256": "a6f7b0b08432cacdcc95ba1c8ae1b2540c71f80c78b385c25f98e4489bffc138",
+      "blobGit": "706adb2bfea75e0711aa2234aae777ce1a41b234",
+      "motivo": "Asset ou prototipo documental de design, fora das entradas do build e sem consumidor executavel"
+    },
+    {
+      "caminho": "docs/design/prototipos/agenda.html",
+      "bytes": 14122,
+      "sha256": "6ab98b41b66bff222c4d01eaf08f0613f58219d0e7436818e5abd8abc1df2da1",
+      "blobGit": "2d187546c1cf050524296dd63bd40847642f69f1",
+      "motivo": "Asset ou prototipo documental de design, fora das entradas do build e sem consumidor executavel"
+    },
+    {
+      "caminho": "docs/design/prototipos/apac.html",
+      "bytes": 15927,
+      "sha256": "989b0a5486ec46611158255188f99b50685771392370637b863d21b1ae0b3dec",
+      "blobGit": "a4a58575960534610c4a08b483c82f65412da4df",
+      "motivo": "Asset ou prototipo documental de design, fora das entradas do build e sem consumidor executavel"
+    },
+    {
+      "caminho": "docs/design/prototipos/centro-comando.html",
+      "bytes": 14465,
+      "sha256": "73cc77c2edbff0e706a957126b0562fa6c3a033bfd1d705446ebd8a0b17887a2",
+      "blobGit": "495f2d11db1e2cd902af542c29a9b882bc9e03b9",
+      "motivo": "Asset ou prototipo documental de design, fora das entradas do build e sem consumidor executavel"
+    },
+    {
+      "caminho": "docs/design/prototipos/consulta.html",
+      "bytes": 54305,
+      "sha256": "ae74c3f693016d4e1bacf3c5c6ca49254e5d6e9ef2fe7d619b859be7da89cd8d",
+      "blobGit": "9b803ae7e8f648b037141a2824f89db7ffe0821e",
+      "motivo": "Asset ou prototipo documental de design, fora das entradas do build e sem consumidor executavel"
+    },
+    {
+      "caminho": "docs/design/prototipos/impressos.html",
+      "bytes": 21181,
+      "sha256": "5848e99e341fade9cbe41d01b6d7535a4b337a1c352b8315aea6261c6890ca52",
+      "blobGit": "e426b2766db699275306e21b256db8d454d9bd29",
+      "motivo": "Asset ou prototipo documental de design, fora das entradas do build e sem consumidor executavel"
+    },
+    {
+      "caminho": "docs/design/prototipos/salao.html",
+      "bytes": 14459,
+      "sha256": "0d34a911d76d5a2ae43c08d84308ac838fc3dc1c6b99bcc9e810e6e249947f3b",
+      "blobGit": "725ef6632c0ee9ce757df59ee802c0b98008bbfc",
+      "motivo": "Asset ou prototipo documental de design, fora das entradas do build e sem consumidor executavel"
+    },
+    {
+      "caminho": "docs/design/tokens-oncomed.css",
+      "bytes": 6528,
+      "sha256": "f90c108ef7f4d9bf1a046b6296c0bcbc4c4b7626937cef5afbfdd5a1319e9867",
+      "blobGit": "b18107aae0a678be39d717f7160e0787973b0e1e",
+      "motivo": "Asset ou prototipo documental de design, fora das entradas do build e sem consumidor executavel"
+    },
+    {
+      "caminho": "docs/f0-fecha/A3-correcao-foco.log",
+      "bytes": 196,
+      "sha256": "fb59ff268b720e14c15c91a06f134b1f074312a44384d8366262127a261d75a5",
+      "blobGit": "3537e7231fc9a38a5e78c26d80366ebf3b969e4a",
+      "motivo": "Saida bruta historica de verificacao; nao e codigo nem dado clinico"
+    },
+    {
+      "caminho": "docs/f0-fecha/A3-correcao-ui.log",
+      "bytes": 403,
+      "sha256": "c45422eb5d062512caaaf5213ced8871b70f24dc5f018999f39409ba67439420",
+      "blobGit": "41e785a72473f4f0a0eef3bddfe2564e251a529a",
+      "motivo": "Saida bruta historica de verificacao; nao e codigo nem dado clinico"
+    },
+    {
+      "caminho": "docs/f0-fecha/A3-foco.log",
+      "bytes": 2755,
+      "sha256": "98760a46a9c5072266859559efe239f0c975851dd16c769da2026515d80b0489",
+      "blobGit": "7100e9cb89fe69391ed2a83fa11ac6b863d248dd",
+      "motivo": "Saida bruta historica de verificacao; nao e codigo nem dado clinico"
+    },
+    {
+      "caminho": "docs/f0-fecha/A3-layout-isolado.log",
+      "bytes": 201,
+      "sha256": "d8c8d35b73d25f1ecb5a74ec8822d594773a1d3e58168ba827d921d38c819a7b",
+      "blobGit": "45e51a984687eda33f3966de57f122b48fa9bf5e",
+      "motivo": "Saida bruta historica de verificacao; nao e codigo nem dado clinico"
+    },
+    {
+      "caminho": "docs/f0-fecha/A3-ui-final.log",
+      "bytes": 23666,
+      "sha256": "9698f5f39fb25baa2487e655549eda5d741e501c22dbfbefea490555e8455104",
+      "blobGit": "95dcded4a6213804bddd31767c8d8fc1076e1ca6",
+      "motivo": "Saida bruta historica de verificacao; nao e codigo nem dado clinico"
+    },
+    {
+      "caminho": "docs/f0-fecha/A3-ui-reataque.log",
+      "bytes": 420,
+      "sha256": "8e3288ce218760ff6024ea39ef4e2c230f85ce1fdd7fef4043831a17ad899df1",
+      "blobGit": "4afd5362de3663086236ad2b20fde6f18217229c",
+      "motivo": "Saida bruta historica de verificacao; nao e codigo nem dado clinico"
+    },
+    {
+      "caminho": "docs/f0-fecha/A4-sobras.log",
+      "bytes": 497,
+      "sha256": "15aa52940148aa5c3062e697986e5fc683189463f3e56fe1e34a86268b4e7297",
+      "blobGit": "8894f9a8176dbcf89a8eecb8355c121e965e2438",
+      "motivo": "Saida bruta historica de verificacao; nao e codigo nem dado clinico"
+    },
+    {
+      "caminho": "docs/f0-fecha/AUDITORIA-escopo-01.log",
+      "bytes": 9423,
+      "sha256": "1190cd302aac36faa4e20a7905b67f1b4d5f1611d1b882c47bb8f58c37d22d0d",
+      "blobGit": "9d1d89df1696efeb1261ce6916cfd8c01f96b60b",
+      "motivo": "Saida bruta historica de verificacao; nao e codigo nem dado clinico"
+    },
+    {
+      "caminho": "docs/f0-fecha/AUDITORIA-escopo-02.log",
+      "bytes": 416,
+      "sha256": "d042b1f9b58912e5667b5bfbc6ca764f338e119bd9c4f7700bfdef574b8a5dd4",
+      "blobGit": "e4041007168e15f673ac92a2bf8ed989068f9290",
+      "motivo": "Saida bruta historica de verificacao; nao e codigo nem dado clinico"
+    },
+    {
+      "caminho": "docs/f0-fecha/AUDITORIA-escopo-e2e.log",
+      "bytes": 201,
+      "sha256": "66bb696e1c30878c534e592543267593c8166a66f5281cf58715d925a546bab1",
+      "blobGit": "5a249bdb9df87177d3213d0489cc354802bb6c76",
+      "motivo": "Saida bruta historica de verificacao; nao e codigo nem dado clinico"
+    },
+    {
+      "caminho": "docs/f0-fecha/AUDITORIA-fronteiras.log",
+      "bytes": 29,
+      "sha256": "cf9389fb8034a6ecfacb871ea4aeb20500b573a2d32258726e8b7c54431fd0fb",
+      "blobGit": "2ef6b482af8df3d9c80b9b9da5693d7826ef5ab5",
+      "motivo": "Saida bruta historica de verificacao; nao e codigo nem dado clinico"
+    },
+    {
+      "caminho": "docs/f0-fecha/AUDITORIA-typecheck.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "blobGit": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "motivo": "Saida bruta historica de verificacao; nao e codigo nem dado clinico"
+    },
+    {
+      "caminho": "docs/f0-fecha/C2-apac-08.log",
+      "bytes": 1620,
+      "sha256": "807cff99c1951b2b7dc4370a8fbd2e8a9d2db0f1146ca2c23543e9c7a7a2ad13",
+      "blobGit": "c17116e7c0ada87313e71c52822a72a01f41ab8b",
+      "motivo": "Saida bruta historica de verificacao; nao e codigo nem dado clinico"
+    },
+    {
+      "caminho": "docs/f0-fecha/C2-apac-11.log",
+      "bytes": 1456,
+      "sha256": "ab223fc85eed73a847cfe91aadf48966ddd1cc7cf3f41c361bde5eb36db795c5",
+      "blobGit": "c05eafb58f422762f575e96cab9cee5d5b20c25f",
+      "motivo": "Saida bruta historica de verificacao; nao e codigo nem dado clinico"
+    },
+    {
+      "caminho": "docs/f0-fecha/C2-e6b-05.log",
+      "bytes": 466,
+      "sha256": "979843e780ec48e63ddef9c36cbd5a5d5bb715adb2649fe90bf6668b059d751b",
+      "blobGit": "ca71a318af012fe43cacaeb2383ceee4152d922d",
+      "motivo": "Saida bruta historica de verificacao; nao e codigo nem dado clinico"
+    },
+    {
+      "caminho": "docs/f0-fecha/C2-foco-01.log",
+      "bytes": 21768,
+      "sha256": "a16b85dae223f08def171967e489710684e26ac6d159d9ab4e4a57ad96205067",
+      "blobGit": "65f45c1cc504b6d2b038bf1e06c6a42041947e48",
+      "motivo": "Saida bruta historica de verificacao; nao e codigo nem dado clinico"
+    },
+    {
+      "caminho": "docs/f0-fecha/C2-foco-04.log",
+      "bytes": 1596,
+      "sha256": "d47b0bb0aeeee26717149b626d82c4866e66d90c7df602083810fd105e4d08c1",
+      "blobGit": "cb81e27ee21ae0efdc731a398d0d89dd057865b7",
+      "motivo": "Saida bruta historica de verificacao; nao e codigo nem dado clinico"
+    },
+    {
+      "caminho": "docs/f0-fecha/C2-foco-07.log",
+      "bytes": 1340,
+      "sha256": "cb7a1bed4b40722b7839a022d84e6250b1164a77acfaa7a69d91cefd848bce0e",
+      "blobGit": "0f9f54d1f550d8293b0bc4bb89aa06257b77ca44",
+      "motivo": "Saida bruta historica de verificacao; nao e codigo nem dado clinico"
+    },
+    {
+      "caminho": "docs/f0-fecha/C2-fronteiras-13.log",
+      "bytes": 29,
+      "sha256": "dd777d8a6bab86b6da3b9ed9f4c47d03880b4265ddf5b7d3aa8ef104faf06b0e",
+      "blobGit": "106a5f00a87c73df305d41f692a60f44ac386937",
+      "motivo": "Saida bruta historica de verificacao; nao e codigo nem dado clinico"
+    },
+    {
+      "caminho": "docs/f0-fecha/C2-phi-revisado-16.log",
+      "bytes": 34877,
+      "sha256": "d938b37b85db0dabf5ef7d60f9af0ac0fadc864ccb5d4ea83a911ce7c0c366a6",
+      "blobGit": "0b6e79dc69bbb364196327e29322e281c4c91c88",
+      "motivo": "Saida bruta historica de verificacao; nao e codigo nem dado clinico"
+    },
+    {
+      "caminho": "docs/f0-fecha/C2-phi-revisado-17.log",
+      "bytes": 198,
+      "sha256": "65ecb96c6ec7c8bc43e0878bfee9e801ddf9375dc8523978352356f14287b851",
+      "blobGit": "92cf57d088620bb7ef43c37348e0d7b6d8f1602d",
+      "motivo": "Saida bruta historica de verificacao; nao e codigo nem dado clinico"
+    },
+    {
+      "caminho": "docs/f0-fecha/C2-retomada-14.log",
+      "bytes": 35916,
+      "sha256": "92f5cba95018022de99bd6e354d2f8173c34cac838a4ef9086232f620aea0dcb",
+      "blobGit": "72054237cae4ede35426f2fb4959f826fe8db4d9",
+      "motivo": "Saida bruta historica de verificacao; nao e codigo nem dado clinico"
+    },
+    {
+      "caminho": "docs/f0-fecha/C2-retomada-15.log",
+      "bytes": 418,
+      "sha256": "1849e4035fa09101eaec0382bf1ea27ab67d5069127fc0196c6709c0e0eb73b2",
+      "blobGit": "3b9452164a503c2b827a46043e635074fc69f676",
+      "motivo": "Saida bruta historica de verificacao; nao e codigo nem dado clinico"
+    },
+    {
+      "caminho": "docs/f0-fecha/C2-tsc-06.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "blobGit": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "motivo": "Saida bruta historica de verificacao; nao e codigo nem dado clinico"
+    },
+    {
+      "caminho": "docs/f0-fecha/C2-tsc-09.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "blobGit": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "motivo": "Saida bruta historica de verificacao; nao e codigo nem dado clinico"
+    },
+    {
+      "caminho": "docs/f0-fecha/C2-tsc-13.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "blobGit": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "motivo": "Saida bruta historica de verificacao; nao e codigo nem dado clinico"
+    },
+    {
+      "caminho": "docs/f0-fecha/C2-ui-02.log",
+      "bytes": 4189,
+      "sha256": "2a211efece72c66a40e79a75784df8eab58461ec9b3e495815bd773f3f35846e",
+      "blobGit": "dc0c13cfc94222b81ff6e730bfc22b01d6178cc6",
+      "motivo": "Saida bruta historica de verificacao; nao e codigo nem dado clinico"
+    },
+    {
+      "caminho": "docs/f0-fecha/C2-ui-03.log",
+      "bytes": 218,
+      "sha256": "222c844b292557584e7a9af2050eeb0e8ca948367b34e982c8c9eb7702248879",
+      "blobGit": "0502871e616ac0234f446040eff72cd2f838d83f",
+      "motivo": "Saida bruta historica de verificacao; nao e codigo nem dado clinico"
+    },
+    {
+      "caminho": "docs/f0-fecha/C2-ui-10.log",
+      "bytes": 1361,
+      "sha256": "512f09f5d8680c114045d013064f6fed2b33bc39cdfa3faabb3c7dae61d419a5",
+      "blobGit": "32242692914d2fc920fcdbd729b52fee494bc3aa",
+      "motivo": "Saida bruta historica de verificacao; nao e codigo nem dado clinico"
+    },
+    {
+      "caminho": "docs/f0-fecha/C2-ui-12.log",
+      "bytes": 417,
+      "sha256": "e51f8a3cdb96c7520f4ff787d887e6d462298d6f0e6afec97ac345a93ad0bec0",
+      "blobGit": "59105638a116f5f4d2b964c4f4c2ba9b12b08e6b",
+      "motivo": "Saida bruta historica de verificacao; nao e codigo nem dado clinico"
+    },
+    {
+      "caminho": "docs/f0-fecha/D41-fonte.log",
+      "bytes": 194,
+      "sha256": "3e2291b3bab1828e44c78f7ccf40ceb99b3d244cd48f261776569850625a9937",
+      "blobGit": "f9aaaeee5c6ed9086f39a8583d87f9b67eb6fe06",
+      "motivo": "Saida bruta historica de verificacao; nao e codigo nem dado clinico"
+    },
+    {
+      "caminho": "docs/f0-fecha/DEMO-build-api.log",
+      "bytes": 224,
+      "sha256": "3781c5a7eeb4eb64d953d5923921f44d5e72eb726db292e26f8ed2d4520ec6ee",
+      "blobGit": "3dc0e61a336c53ba39581e4089ce7921f28a77b1",
+      "motivo": "Saida bruta historica de verificacao; nao e codigo nem dado clinico"
+    },
+    {
+      "caminho": "docs/f0-fecha/E6b-final-metricas.log",
+      "bytes": 1764,
+      "sha256": "24d4eda121500695737ca502778e5e5151086575f493d611cbdc2bd32962026e",
+      "blobGit": "d0ad00a7bb8c921daac0b2a2dab95bd78d225d9c",
+      "motivo": "Saida bruta historica de verificacao; nao e codigo nem dado clinico"
+    },
+    {
+      "caminho": "docs/f0-fecha/FECHAMENTO-documental.log",
+      "bytes": 494,
+      "sha256": "37b911ff018bb020772e7881ff88317e2f941d4e9edd9c55b1f173c9c7e96674",
+      "blobGit": "2afcc4f78128011db892cc9e61c01bf0aa0cd91d",
+      "motivo": "Saida bruta historica de verificacao; nao e codigo nem dado clinico"
+    },
+    {
+      "caminho": "docs/f0-fecha/PHI-integrado-01.log",
+      "bytes": 61724,
+      "sha256": "a5a30ebb402835fef0718b629888205eb7d5822c8c872f44b86ad5b2c8cfccbe",
+      "blobGit": "8c68c8c17049d0e27d3c56c56591d0c7eedf5446",
+      "motivo": "Saida bruta historica de verificacao; nao e codigo nem dado clinico"
+    },
+    {
+      "caminho": "docs/f0-fecha/PHI-integrado-02.log",
+      "bytes": 36693,
+      "sha256": "6c67e91c3a6892591231ee0f2770c21ad6bf6ff9c1f8fc1f33d4cc4473777b2b",
+      "blobGit": "4e6c87f542dff29f05eacb4682edabaff962a039",
+      "motivo": "Saida bruta historica de verificacao; nao e codigo nem dado clinico"
+    },
+    {
+      "caminho": "docs/f0-fecha/PHI-integrado-03.log",
+      "bytes": 285,
+      "sha256": "57ff4a07f16c3739db551ffd642a293c83c5f8b812d4ca66c2aac70eef633a5e",
+      "blobGit": "c88cd3d0ddcfaceb9602dfbf549c7aec89d6803b",
+      "motivo": "Saida bruta historica de verificacao; nao e codigo nem dado clinico"
+    },
+    {
+      "caminho": "docs/f0-fecha/PHI-legado-reataque.log",
+      "bytes": 494,
+      "sha256": "ecd3b306ab797614a9ba6f0704c094fff34e0d56e494a93425ece8ed5ded208b",
+      "blobGit": "bc1b679ef95a36759672b981a41f99a39dabae8a",
+      "motivo": "Saida bruta historica de verificacao; nao e codigo nem dado clinico"
+    },
+    {
+      "caminho": "docs/f0-fecha/PHI-matriz-final-01.log",
+      "bytes": 38604,
+      "sha256": "cf23bdcc6024a0b1c7c907a2b6ef5f2a44d2643264123f66c383e669bc478d94",
+      "blobGit": "0439fe6153e574dd820139d9631b637a1491b52a",
+      "motivo": "Saida bruta historica de verificacao; nao e codigo nem dado clinico"
+    },
+    {
+      "caminho": "docs/f0-fecha/PHI-matriz-final-02.log",
+      "bytes": 494,
+      "sha256": "a3ba1c00377fd8b97d7ba747aa92b1b8bfefedc987bd7b780653167d1325262f",
+      "blobGit": "18779569ea247d4aee7d62a1e145f0aa4c7c9ffe",
+      "motivo": "Saida bruta historica de verificacao; nao e codigo nem dado clinico"
+    },
+    {
+      "caminho": "docs/referencias/externos/manual-paciente-oncologico-2023.pdf",
+      "bytes": 5401482,
+      "sha256": "bf00163cdf23c4ae29423deaa8a5c0037b4f04b397542464626a21859150220c",
+      "blobGit": "bba215a8459aeea65931f0ae63aa4be53a593e31",
+      "motivo": "PDF externo de consulta manual; sem carregamento pelo produto; fonte preservada integralmente"
+    },
+    {
+      "caminho": "docs/referencias/externos/manual-quimioterapia-orientacoes.pdf",
+      "bytes": 5335927,
+      "sha256": "03d26c2767c305fcdd91bf473e61b9c51f18332ca35b02805290d1faa017c6bc",
+      "blobGit": "e63dcad793c38958335aef5df7f2330ed9b68d84",
+      "motivo": "PDF externo de consulta manual; sem carregamento pelo produto; fonte preservada integralmente"
+    }
+  ]
+}

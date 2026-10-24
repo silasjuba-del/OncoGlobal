@@ -52,126 +52,6 @@
       "hashMode": "utf8-lf"
     },
     {
-      "path": "docs/design/oncochart/assets/annot.png",
-      "sha256": "893f9af87f3bb669875a3813a3797c832b6e20ea0bbad195ad9ab3082d8c6742",
-      "category": "synthetic_visual_review",
-      "magic": "png_signature",
-      "evidenceRef": "docs/design/oncochart/DECISAO-UI-ALVO.md:3",
-      "reason": "Revisao visual root: crop do mock ficticio; sem alegacao universal de anonimato.",
-      "items": []
-    },
-    {
-      "path": "docs/design/oncochart/assets/crop-header.png",
-      "sha256": "e41b629780a98b193e03157a01f78bdf30eb2e076d58ad573c2ebbf9f5b120ee",
-      "category": "synthetic_visual_review",
-      "magic": "png_signature",
-      "evidenceRef": "docs/design/oncochart/DECISAO-UI-ALVO.md:3",
-      "reason": "Revisao visual root: crop do mock ficticio; sem alegacao universal de anonimato.",
-      "items": []
-    },
-    {
-      "path": "docs/design/oncochart/assets/crop-right.png",
-      "sha256": "87cb5d21bb0726f5e867fa1fdeee773156ba869ae757720427200c30e87ce66b",
-      "category": "synthetic_visual_review",
-      "magic": "png_signature",
-      "evidenceRef": "docs/design/oncochart/DECISAO-UI-ALVO.md:3",
-      "reason": "Revisao visual root: crop do mock ficticio; sem alegacao universal de anonimato.",
-      "items": []
-    },
-    {
-      "path": "docs/design/oncochart/assets/crop-timeline.png",
-      "sha256": "3beeecca12706bac18b458fd13d773552f7d6b4272d550853458732c7eca2054",
-      "category": "synthetic_visual_review",
-      "magic": "png_signature",
-      "evidenceRef": "docs/design/oncochart/DECISAO-UI-ALVO.md:3",
-      "reason": "Revisao visual root: crop do mock ficticio; sem alegacao universal de anonimato.",
-      "items": []
-    },
-    {
-      "path": "docs/design/oncochart/assets/ct-abdome.jpg",
-      "sha256": "8550da8965873bf7104ce9557a267b7ece3c30f1d3cbeadfaa5143df3fab7049",
-      "category": "synthetic_visual_review",
-      "magic": "jpeg_signature",
-      "evidenceRef": "docs/design/oncochart/README.md:144",
-      "reason": "Revisao visual root: placeholder CT sem identificacao visivel; nao afirma anonimato universal.",
-      "items": []
-    },
-    {
-      "path": "docs/design/oncochart/assets/ct-torax.jpg",
-      "sha256": "3ef79b483fdad6d3b2ce5f0f918c237ea2617aac2867e39930f2bcf9ad001192",
-      "category": "synthetic_visual_review",
-      "magic": "jpeg_signature",
-      "evidenceRef": "docs/design/oncochart/README.md:144",
-      "reason": "Revisao visual root: placeholder CT sem identificacao visivel; nao afirma anonimato universal.",
-      "items": []
-    },
-    {
-      "path": "docs/design/oncochart/assets/ref.png",
-      "sha256": "756053a9410456062a683531d98b2931554cca75efa991fe8a4d2ebd0b93b630",
-      "category": "synthetic_visual_review",
-      "magic": "png_signature",
-      "evidenceRef": "docs/design/oncochart/DECISAO-UI-ALVO.md:3",
-      "reason": "Revisao visual root: rodape de demonstracao/dados ficticios; sem alegacao universal de anonimato.",
-      "items": []
-    },
-    {
-      "path": "docs/design/prototipos/apac.html",
-      "sha256": "989b0a5486ec46611158255188f99b50685771392370637b863d21b1ae0b3dec",
-      "items": [
-        {
-          "type": "cns",
-          "line": 163,
-          "ordinal": 0,
-          "status": "synthetic_declared",
-          "evidenceRef": "docs/design/prototipos/apac.html:46,117,123,129,142,143",
-          "reason": "Campo ID no mesmo prototipo HTML que declara a amostra Paciente Teste; excecao por hash/linha/token.",
-          "contextTag": null
-        },
-        {
-          "type": "cns",
-          "line": 169,
-          "ordinal": 0,
-          "status": "synthetic_declared",
-          "evidenceRef": "docs/design/prototipos/apac.html:46,163,166,169",
-          "reason": "Campo ID no mesmo prototipo HTML que declara a amostra Paciente Teste; excecao por hash/linha/token.",
-          "contextTag": null
-        }
-      ],
-      "hashMode": "utf8-lf"
-    },
-    {
-      "path": "docs/design/prototipos/consulta.html",
-      "sha256": "ae74c3f693016d4e1bacf3c5c6ca49254e5d6e9ef2fe7d619b859be7da89cd8d",
-      "items": [
-        {
-          "type": "cns",
-          "line": 318,
-          "ordinal": 0,
-          "status": "synthetic_declared",
-          "evidenceRef": "docs/design/prototipos/consulta.html:173,279,437,486",
-          "reason": "Campo ID no prototipo HTML com declaracao de amostra ficticia no mesmo artifact; excecao por hash/linha/token.",
-          "contextTag": null
-        }
-      ],
-      "hashMode": "utf8-lf"
-    },
-    {
-      "path": "docs/design/prototipos/impressos.html",
-      "sha256": "5848e99e341fade9cbe41d01b6d7535a4b337a1c352b8315aea6261c6890ca52",
-      "items": [
-        {
-          "type": "cns",
-          "line": 216,
-          "ordinal": 0,
-          "status": "synthetic_declared",
-          "evidenceRef": "docs/design/prototipos/impressos.html:32,193,215",
-          "reason": "Campo ID adjacente a declaracao Paciente Teste no mesmo prototipo de impressos; excecao por hash/linha/token.",
-          "contextTag": null
-        }
-      ],
-      "hashMode": "utf8-lf"
-    },
-    {
       "path": "docs/f0-fecha/inventario-A2.json",
       "sha256": "cf7ed4c47ced6803804bdc6c7b53c539c87b3f9fbad528b996c4b9715aed83c0",
       "items": [
@@ -711,141 +591,6 @@
         }
       ],
       "hashMode": "utf8-lf"
-    },
-    {
-      "path": "docs/referencias/externos/manual-paciente-oncologico-2023.pdf",
-      "sha256": "bf00163cdf23c4ae29423deaa8a5c0037b4f04b397542464626a21859150220c",
-      "items": [
-        {
-          "type": "nome_cabecalho_laudo",
-          "line": 1,
-          "ordinal": 0,
-          "page": 2,
-          "status": "technical_token_false_positive",
-          "evidenceRef": "docs/referencias/externos/manual-paciente-oncologico-2023.pdf:pagina2; revisao layout L3 em 2026-10-09",
-          "reason": "Leitura local com layout preservado por pdfplumber: campo Nome seguido de linhas vazias antes do proximo rotulo. O extrator simples uniu rotulos e gerou falso nome.",
-          "contextTag": null
-        }
-      ],
-      "coverageReviews": [
-        {
-          "kind": "pdf_visual_review",
-          "sha256": "bf00163cdf23c4ae29423deaa8a5c0037b4f04b397542464626a21859150220c",
-          "status": "manual_review_complete",
-          "evidenceRef": "docs/f0-fecha/REVISAO-BINARIOS.md",
-          "reason": "Páginas renderizadas e abertas: formulário em branco ou material editorial público; não há laudo individual preenchido nas páginas revisadas.",
-          "pages": [
-            1,
-            3,
-            4,
-            5,
-            6,
-            7,
-            8,
-            11
-          ]
-        }
-      ]
-    },
-    {
-      "path": "docs/referencias/externos/manual-quimioterapia-orientacoes.pdf",
-      "sha256": "03d26c2767c305fcdd91bf473e61b9c51f18332ca35b02805290d1faa017c6bc",
-      "items": [
-        {
-          "type": "telefone",
-          "line": 1,
-          "ordinal": 0,
-          "page": 3,
-          "status": "public_contact_metadata",
-          "evidenceRef": "docs/referencias/externos/manual-quimioterapia-orientacoes.pdf:page3; rotulo editorial telefone/tel; referencia externa",
-          "reason": "Contato editorial de manual externo com rótulo explícito; não é dado de paciente.",
-          "contextTag": null
-        },
-        {
-          "type": "telefone",
-          "line": 1,
-          "ordinal": 1,
-          "page": 3,
-          "status": "public_contact_metadata",
-          "evidenceRef": "docs/referencias/externos/manual-quimioterapia-orientacoes.pdf:page3; rotulo editorial telefone/tel; referencia externa",
-          "reason": "Contato editorial de manual externo com rótulo explícito; não é dado de paciente.",
-          "contextTag": null
-        },
-        {
-          "type": "telefone",
-          "line": 1,
-          "ordinal": 2,
-          "page": 3,
-          "status": "public_contact_metadata",
-          "evidenceRef": "docs/referencias/externos/manual-quimioterapia-orientacoes.pdf:page3; rotulo editorial telefone/tel; referencia externa",
-          "reason": "Contato editorial de manual externo com rótulo explícito; não é dado de paciente.",
-          "contextTag": null
-        },
-        {
-          "type": "telefone",
-          "line": 1,
-          "ordinal": 3,
-          "page": 3,
-          "status": "public_contact_metadata",
-          "evidenceRef": "docs/referencias/externos/manual-quimioterapia-orientacoes.pdf:page3; rotulo editorial telefone/tel; referencia externa",
-          "reason": "Contato editorial de manual externo com rótulo explícito; não é dado de paciente.",
-          "contextTag": null
-        },
-        {
-          "type": "telefone",
-          "line": 1,
-          "ordinal": 0,
-          "page": 32,
-          "status": "public_contact_metadata",
-          "evidenceRef": "docs/referencias/externos/manual-quimioterapia-orientacoes.pdf:pagina32",
-          "reason": "Telefones publicos rotulados Central de Relacionamento e Ouvidoria no expediente institucional; revisao local por L3.",
-          "contextTag": null
-        },
-        {
-          "type": "telefone",
-          "line": 1,
-          "ordinal": 1,
-          "page": 32,
-          "status": "public_contact_metadata",
-          "evidenceRef": "docs/referencias/externos/manual-quimioterapia-orientacoes.pdf:pagina32",
-          "reason": "Telefones publicos rotulados Central de Relacionamento e Ouvidoria no expediente institucional; revisao local por L3.",
-          "contextTag": null
-        },
-        {
-          "type": "email",
-          "line": 1,
-          "ordinal": 0,
-          "page": 32,
-          "status": "public_contact_metadata",
-          "evidenceRef": "docs/referencias/externos/manual-quimioterapia-orientacoes.pdf:pagina32; revisao layout L3 em 2026-10-09",
-          "reason": "Contato no bloco da Ouvidoria institucional, apos horario; dominio coincide com site editorial impresso. Revisao local com layout preservado, nao dado de paciente.",
-          "contextTag": null
-        }
-      ],
-      "coverageReviews": [
-        {
-          "kind": "pdf_visual_review",
-          "sha256": "03d26c2767c305fcdd91bf473e61b9c51f18332ca35b02805290d1faa017c6bc",
-          "status": "manual_review_complete",
-          "evidenceRef": "docs/f0-fecha/REVISAO-BINARIOS.md",
-          "reason": "Páginas renderizadas e abertas: formulário em branco ou material editorial público; não há laudo individual preenchido nas páginas revisadas.",
-          "pages": [
-            3,
-            4,
-            8,
-            10,
-            11,
-            12,
-            13,
-            14,
-            15,
-            26,
-            29,
-            30,
-            31
-          ]
-        }
-      ]
     },
     {
       "path": "docs/referencias/onco-referencia/07-tumor-packs-6-10.md",
@@ -2588,87 +2333,6 @@
           "evidenceRef": "docs/f0-fecha/PORTABILIDADE-PHI.md; tests/f0-fecha/phi-repo.test.ts:278"
         }
       ]
-    },
-    {
-      "path": "docs/f0-fecha/demo/01-salao.png",
-      "sha256": "77343a68076f61941fdad3be3a19b1c161473ff7a2699823a1a28e2c08751721",
-      "category": "synthetic_visual_review",
-      "magic": "png_signature",
-      "evidenceRef": "docs/F0-DEMO.md",
-      "reason": "Captura da demo local com Paciente Teste 92, médico e textos sintéticos; aberta e inspecionada pela Astra em 09/10/2026.",
-      "items": []
-    },
-    {
-      "path": "docs/f0-fecha/demo/02-conflito.png",
-      "sha256": "77be47fcd0a3bb535c2c741cb71f996264eb3196eafd1648f12d60355920e0f5",
-      "category": "synthetic_visual_review",
-      "magic": "png_signature",
-      "evidenceRef": "docs/F0-DEMO.md",
-      "reason": "Captura da demo local com Paciente Teste 92, médico e textos sintéticos; aberta e inspecionada pela Astra em 09/10/2026.",
-      "items": []
-    },
-    {
-      "path": "docs/f0-fecha/demo/03-revisao.png",
-      "sha256": "b4656732d0848c51e63b3cc9a6034d67974252f2f9dee03df1ce83036bd1309a",
-      "category": "synthetic_visual_review",
-      "magic": "png_signature",
-      "evidenceRef": "docs/F0-DEMO.md",
-      "reason": "Captura da demo local com Paciente Teste 92, médico e textos sintéticos; aberta e inspecionada pela Astra em 09/10/2026.",
-      "items": []
-    },
-    {
-      "path": "docs/f0-fecha/demo/04-cartao.png",
-      "sha256": "0e38bc5af4d46df1a94bcee27f8f49fa00644b34f009f7f21db7c9e05f0e0888",
-      "category": "synthetic_visual_review",
-      "magic": "png_signature",
-      "evidenceRef": "docs/F0-DEMO.md",
-      "reason": "Captura da demo local com Paciente Teste 92, médico e textos sintéticos; aberta e inspecionada pela Astra em 09/10/2026.",
-      "items": []
-    },
-    {
-      "path": "docs/f0-fecha/demo/05-modelo.png",
-      "sha256": "08557eaecf97c1fc874f86a64ce8beac5f98b7777b0c23db8650ad6ea546f4d2",
-      "category": "synthetic_visual_review",
-      "magic": "png_signature",
-      "evidenceRef": "docs/F0-DEMO.md",
-      "reason": "Captura da demo local com Paciente Teste 92, médico e textos sintéticos; aberta e inspecionada pela Astra em 09/10/2026.",
-      "items": []
-    },
-    {
-      "path": "docs/f0-fecha/demo/06-exibicao.png",
-      "sha256": "b70c66eb35f75d3d3210e303975cd659aa31826e0c42ac2bcfd81ce20e285e78",
-      "category": "synthetic_visual_review",
-      "magic": "png_signature",
-      "evidenceRef": "docs/F0-DEMO.md",
-      "reason": "Captura da demo local com Paciente Teste 92, médico e textos sintéticos; aberta e inspecionada pela Astra em 09/10/2026.",
-      "items": []
-    },
-    {
-      "path": "docs/f0-fecha/demo/07-historico.png",
-      "sha256": "da80b84567d05bb63b0c4280beaa431c447b5bac56f262a36d1e94fa8283dcb0",
-      "category": "synthetic_visual_review",
-      "magic": "png_signature",
-      "evidenceRef": "docs/F0-DEMO.md",
-      "reason": "Captura da demo local com Paciente Teste 92, médico e textos sintéticos; aberta e inspecionada pela Astra em 09/10/2026.",
-      "items": []
-    },
-    {
-      "path": "docs/f0-fecha/demo/08-apac.png",
-      "sha256": "b3489f132de05f576f6ef5c284434d2cb23014ca06abced6823785085883269f",
-      "category": "synthetic_visual_review",
-      "magic": "png_signature",
-      "evidenceRef": "docs/F0-DEMO.md",
-      "reason": "Captura da demo local com Paciente Teste 92, médico e textos sintéticos; aberta e inspecionada pela Astra em 09/10/2026.",
-      "items": []
-    },
-    {
-      "path": "docs/f0-fecha/demo/09-reabertura.png",
-      "sha256": "f16d342d3f03f17b348b71b9681c6387b2036abaa6424fc50d667744fd14df31",
-      "category": "synthetic_visual_review",
-      "magic": "png_signature",
-      "evidenceRef": "docs/F0-DEMO.md",
-      "reason": "Captura da demo local com Paciente Teste 92, médico e textos sintéticos; aberta e inspecionada pela Astra em 09/10/2026.",
-      "items": []
     },
     {
       "path": "docs/referencias/apac-laudo-solicitacao-autorizacao.pdf",
@@ -7302,6 +6966,156 @@
           "evidenceRef": "docs/planejamento/G2-CARACTERIZACAO-INTEGRIDADE.md:90",
           "reason": "Match contido em token hash SHA-256 hexadecimal completo de 64 caracteres.",
           "contextTag": "commit_hash_40_or_64_hex"
+        }
+      ]
+    },
+    {
+      "path": "docs/f0-fecha/demo/01-salao.png",
+      "sha256": "77343a68076f61941fdad3be3a19b1c161473ff7a2699823a1a28e2c08751721",
+      "category": "synthetic_visual_review",
+      "magic": "png_signature",
+      "evidenceRef": "docs/F0-DEMO.md",
+      "reason": "Captura da demo local com Paciente Teste 92, médico e textos sintéticos; aberta e inspecionada pela Astra em 09/10/2026.",
+      "items": []
+    },
+    {
+      "path": "docs/f0-fecha/demo/02-conflito.png",
+      "sha256": "77be47fcd0a3bb535c2c741cb71f996264eb3196eafd1648f12d60355920e0f5",
+      "category": "synthetic_visual_review",
+      "magic": "png_signature",
+      "evidenceRef": "docs/F0-DEMO.md",
+      "reason": "Captura da demo local com Paciente Teste 92, médico e textos sintéticos; aberta e inspecionada pela Astra em 09/10/2026.",
+      "items": []
+    },
+    {
+      "path": "docs/f0-fecha/demo/03-revisao.png",
+      "sha256": "b4656732d0848c51e63b3cc9a6034d67974252f2f9dee03df1ce83036bd1309a",
+      "category": "synthetic_visual_review",
+      "magic": "png_signature",
+      "evidenceRef": "docs/F0-DEMO.md",
+      "reason": "Captura da demo local com Paciente Teste 92, médico e textos sintéticos; aberta e inspecionada pela Astra em 09/10/2026.",
+      "items": []
+    },
+    {
+      "path": "docs/f0-fecha/demo/04-cartao.png",
+      "sha256": "0e38bc5af4d46df1a94bcee27f8f49fa00644b34f009f7f21db7c9e05f0e0888",
+      "category": "synthetic_visual_review",
+      "magic": "png_signature",
+      "evidenceRef": "docs/F0-DEMO.md",
+      "reason": "Captura da demo local com Paciente Teste 92, médico e textos sintéticos; aberta e inspecionada pela Astra em 09/10/2026.",
+      "items": []
+    },
+    {
+      "path": "docs/f0-fecha/demo/05-modelo.png",
+      "sha256": "08557eaecf97c1fc874f86a64ce8beac5f98b7777b0c23db8650ad6ea546f4d2",
+      "category": "synthetic_visual_review",
+      "magic": "png_signature",
+      "evidenceRef": "docs/F0-DEMO.md",
+      "reason": "Captura da demo local com Paciente Teste 92, médico e textos sintéticos; aberta e inspecionada pela Astra em 09/10/2026.",
+      "items": []
+    },
+    {
+      "path": "docs/f0-fecha/demo/06-exibicao.png",
+      "sha256": "b70c66eb35f75d3d3210e303975cd659aa31826e0c42ac2bcfd81ce20e285e78",
+      "category": "synthetic_visual_review",
+      "magic": "png_signature",
+      "evidenceRef": "docs/F0-DEMO.md",
+      "reason": "Captura da demo local com Paciente Teste 92, médico e textos sintéticos; aberta e inspecionada pela Astra em 09/10/2026.",
+      "items": []
+    },
+    {
+      "path": "docs/f0-fecha/demo/07-historico.png",
+      "sha256": "da80b84567d05bb63b0c4280beaa431c447b5bac56f262a36d1e94fa8283dcb0",
+      "category": "synthetic_visual_review",
+      "magic": "png_signature",
+      "evidenceRef": "docs/F0-DEMO.md",
+      "reason": "Captura da demo local com Paciente Teste 92, médico e textos sintéticos; aberta e inspecionada pela Astra em 09/10/2026.",
+      "items": []
+    },
+    {
+      "path": "docs/f0-fecha/demo/08-apac.png",
+      "sha256": "b3489f132de05f576f6ef5c284434d2cb23014ca06abced6823785085883269f",
+      "category": "synthetic_visual_review",
+      "magic": "png_signature",
+      "evidenceRef": "docs/F0-DEMO.md",
+      "reason": "Captura da demo local com Paciente Teste 92, médico e textos sintéticos; aberta e inspecionada pela Astra em 09/10/2026.",
+      "items": []
+    },
+    {
+      "path": "docs/f0-fecha/demo/09-reabertura.png",
+      "sha256": "f16d342d3f03f17b348b71b9681c6387b2036abaa6424fc50d667744fd14df31",
+      "category": "synthetic_visual_review",
+      "magic": "png_signature",
+      "evidenceRef": "docs/F0-DEMO.md",
+      "reason": "Captura da demo local com Paciente Teste 92, médico e textos sintéticos; aberta e inspecionada pela Astra em 09/10/2026.",
+      "items": []
+    },
+    {
+      "path": "docs/_arquivo/NAO-CLINICO-20261024.json",
+      "sha256": "e9f493cbef2818918efcb9a3d027104f3e764f9808c59b6ccca2313ee313154a",
+      "hashMode": "utf8-lf",
+      "items": [
+        {
+          "type": "telefone",
+          "line": 59,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/_arquivo/NAO-CLINICO-20261024.json:59",
+          "reason": "Sequencia numerica em linha que contem exclusivamente um campo SHA-256 hexadecimal de 64 caracteres de um original preservado e verificado; nao e identificador pessoal.",
+          "contextTag": "json_sha256_field_64hex"
+        },
+        {
+          "type": "telefone",
+          "line": 66,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/_arquivo/NAO-CLINICO-20261024.json:66",
+          "reason": "Sequencia numerica em linha que contem exclusivamente um campo SHA-256 hexadecimal de 64 caracteres de um original preservado e verificado; nao e identificador pessoal.",
+          "contextTag": "json_sha256_field_64hex"
+        },
+        {
+          "type": "telefone",
+          "line": 199,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/_arquivo/NAO-CLINICO-20261024.json:199",
+          "reason": "Sequencia numerica em linha que contem exclusivamente um campo SHA-256 hexadecimal de 64 caracteres de um original preservado e verificado; nao e identificador pessoal.",
+          "contextTag": "json_sha256_field_64hex"
+        },
+        {
+          "type": "telefone",
+          "line": 388,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/_arquivo/NAO-CLINICO-20261024.json:388",
+          "reason": "Sequencia numerica em linha que contem exclusivamente um campo SHA-256 hexadecimal de 64 caracteres de um original preservado e verificado; nao e identificador pessoal.",
+          "contextTag": "json_sha256_field_64hex"
+        },
+        {
+          "type": "cns",
+          "line": 409,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/_arquivo/NAO-CLINICO-20261024.json:409",
+          "reason": "Sequencia numerica em linha que contem exclusivamente um campo SHA-256 hexadecimal de 64 caracteres de um original preservado e verificado; nao e identificador pessoal."
+        },
+        {
+          "type": "telefone",
+          "line": 423,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/_arquivo/NAO-CLINICO-20261024.json:423",
+          "reason": "Sequencia numerica em linha que contem exclusivamente um campo SHA-256 hexadecimal de 64 caracteres de um original preservado e verificado; nao e identificador pessoal.",
+          "contextTag": "json_sha256_field_64hex"
+        },
+        {
+          "type": "telefone",
+          "line": 444,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/_arquivo/NAO-CLINICO-20261024.json:444",
+          "reason": "Sequencia numerica em linha que contem exclusivamente um campo SHA-256 hexadecimal de 64 caracteres de um original preservado e verificado; nao e identificador pessoal.",
+          "contextTag": "json_sha256_field_64hex"
         }
       ]
     }
