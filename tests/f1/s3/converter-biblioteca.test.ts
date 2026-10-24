@@ -1,12 +1,12 @@
 // F1-N · Ponte ExportacaoConsultaCorpus@1 → PacoteBiblioteca@1 — bateria obrigatória do adendo ao eixo N.
 // Snapshot sempre gerado pelo exportador REAL; conversão sempre pelo conversor REAL; importação sempre
 // pela API pública interna (criarBiblioteca().importarPacote) ou pelo HTTP real (rotearBiblioteca).
-import { describe, it, expect } from 'vitest';
+import { afterEach, describe, it, expect } from 'vitest';
 import { createServer } from 'node:http';
 import type { AddressInfo } from 'node:net';
-import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, existsSync, readdirSync } from 'node:fs';
+import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, existsSync, readdirSync, realpathSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
-import { join, dirname } from 'node:path';
+import { join, dirname, basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { DatabaseSync } from 'node:sqlite';
 import { exportarBiblioteca } from '../../../scripts/exportar-biblioteca.mjs';
@@ -17,6 +17,31 @@ import { criarGerenciadorSessao } from '../../../src/server/sessao.js';
 import { rotearBiblioteca, hashCuradoriaPacote } from '../../../src/server/biblioteca.js';
 
 const AGORA = '2026-10-14T12:00:00Z';
+const DIRETORIOS_TEMPORARIOS = new Set<string>();
+
+function criarTempTeste(prefixo: string) {
+  const diretorio = mkdtempSync(join(tmpdir(), prefixo));
+  DIRETORIOS_TEMPORARIOS.add(diretorio);
+  return diretorio;
+}
+
+afterEach(() => {
+  const raizTemp = realpathSync(tmpdir());
+  const erros: unknown[] = [];
+  for (const diretorio of DIRETORIOS_TEMPORARIOS) {
+    try {
+      const real = realpathSync(diretorio);
+      const nome = basename(real);
+      if (dirname(real) !== raizTemp || nome !== basename(diretorio) || !/^(conv-|fgts-escopo-)/.test(nome))
+        throw new Error('TEMP_FORA_ESCOPO');
+      rmSync(real, { recursive: true, force: true });
+    } catch (erro) {
+      erros.push(erro);
+    }
+  }
+  DIRETORIOS_TEMPORARIOS.clear();
+  if (erros.length) throw new AggregateError(erros, 'FALHA_LIMPEZA_TEMP_TESTE');
+});
 it('não atribui o arquivo inteiro à primeira fonte: exige e respeita a seção mapeada', async () => {
   const caminho = 'corpus/1-exames/labs/composto.json';
   const root = criarRoot({ [caminho]: painel('composto', { painels: [
@@ -40,7 +65,7 @@ const CPF_SINTETICO = ['123', '456', '789', '09'].join('.');
 const RAIZ = dirname(dirname(dirname(fileURLToPath(import.meta.url)))); // raiz do repo
 
 function criarRoot(arquivos: Record<string, unknown>) {
-  const root = mkdtempSync(join(tmpdir(), 'conv-root-'));
+  const root = criarTempTeste('conv-root-');
   for (const [caminho, conteudo] of Object.entries(arquivos))
     { mkdirSync(dirname(join(root, caminho)), { recursive: true }); writeFileSync(join(root, caminho), typeof conteudo === 'string' ? conteudo : JSON.stringify(conteudo, null, 1)); }
   return root;
@@ -50,7 +75,7 @@ const painel = (id: string, extra: Record<string, unknown> = {}) => ({
   nota: 'fixture sintética sem dados pessoais', ...extra,
 });
 function mapeamento(itens: Record<string, { aplicabilidade?: Record<string, string[]>; url?: string; escopoFonte?: string }>, verificacoes: string[]) {
-  const dir = mkdtempSync(join(tmpdir(), 'conv-map-'));
+  const dir = criarTempTeste('conv-map-');
   const m = {
     schema: 'ConversorBibliotecaMapeamento@1', versao: '1.0.0', itens: Object.fromEntries(Object.entries(itens).map(([caminho, i]) => [caminho, {
       pilar: 1, aplicabilidade: i.aplicabilidade ?? { tumor: [], histologia: [], estadio: [], biomarcador: [], linha: [] },
@@ -63,7 +88,7 @@ function mapeamento(itens: Record<string, { aplicabilidade?: Record<string, stri
   const arquivo = join(dir, 'mapeamento.json'); writeFileSync(arquivo, JSON.stringify(m)); return arquivo;
 }
 async function converter(root: string, nome: string, opcoes: { itens?: Record<string, { aplicabilidade?: Record<string, string[]>; url?: string; escopoFonte?: string }>; versao?: string; verificacoes?: string[] } = {}) {
-  const base = mkdtempSync(join(tmpdir(), 'conv-out-'));
+  const base = criarTempTeste('conv-out-');
   const snap = join(base, `${nome}-snap`), destino = join(base, `${nome}-pac`);
   exportarBiblioteca(root, snap);
   const resultado = await converterBiblioteca(snap, destino, { mapeamento: mapeamento(opcoes.itens ?? {}, opcoes.verificacoes ?? ['https://example.org/fonte']), agora: AGORA, idPacote: 'corpus-sintetico', versao: opcoes.versao ?? '1.0.0' });
@@ -74,7 +99,7 @@ const lerItem = (destino: string, arquivo: string) => JSON.parse(readFileSync(jo
 it.each([undefined, '', 'escopo não conferido'])('não converte escopo vazio em universal sem declaração: %s', async nota => {
   const caminho = 'corpus/1-exames/labs/painel.json';
   const root = criarRoot({[caminho]: painel('painel')});
-  const base = mkdtempSync(join(tmpdir(), 'conv-universal-'));
+  const base = criarTempTeste('conv-universal-');
   const snap = join(base, 'snap'); exportarBiblioteca(root, snap);
   const arquivo = mapeamento({[caminho]: {}}, ['https://example.org/fonte']);
   const m = JSON.parse(readFileSync(arquivo, 'utf8')); m.itens[caminho].aplicabilidadeNota = nota;
@@ -103,7 +128,7 @@ describe('proveniência temporal documental', () => {
       id: 'temporal', versao: '1.0.0', vigenteDesde: '2026-10-16',
       fonte: { referencia: 'Fonte sintética, acesso 11/10/2026', trecho: 'texto sintético', ...fonte },
     } }), [controle]: painel('controle') });
-    const base = mkdtempSync(join(tmpdir(), 'conv-temporal-'));
+    const base = criarTempTeste('conv-temporal-');
     const snap = join(base, 'snap'), destino = join(base, 'pac');
     exportarBiblioteca(root, snap);
     const arquivo = mapeamento({ [caminho]: {}, [controle]: {} }, ['https://example.org/fonte']);
@@ -226,7 +251,7 @@ function importarEmBanco(manifesto: unknown, destino: string) {
 it('FGTS publica só a base legal e fica localizável por tumor sem declarar elegibilidade',async()=>{
  const caminho='corpus/3-laudos/fgts/laudo-fgts.v1.RASCUNHO.json';
  const root=criarRoot({[caminho]:JSON.parse(readFileSync(caminho,'utf8'))});
- const dir=mkdtempSync(join(tmpdir(),'fgts-escopo-')),snap=join(dir,'snap'),destino=join(dir,'pacote');
+ const dir=criarTempTeste('fgts-escopo-'),snap=join(dir,'snap'),destino=join(dir,'pacote');
  exportarBiblioteca(root,snap);
  await converterBiblioteca(snap,destino,{mapeamento:join(process.cwd(),'scripts/converter-biblioteca-mapeamento.json'),agora:AGORA,idPacote:'fgts-sintetico',versao:'1.0.0'});
  const m=JSON.parse(readFileSync(join(destino,'pacote/manifesto.json'),'utf8'));
@@ -243,7 +268,7 @@ it('DailyMed do painel real usa publicação da SPL 2, preservando o acesso regi
   const caminho = 'corpus/1-exames/labs/labs-por-esquema.v1.RASCUNHO.json';
   const original = readFileSync(caminho, 'utf8');
   const root = criarRoot({ [caminho]: JSON.parse(original) });
-  const base = mkdtempSync(join(tmpdir(), 'conv-dailymed-'));
+  const base = criarTempTeste('conv-dailymed-');
   const snap = join(base, 'snap'), destino = join(base, 'pac');
   exportarBiblioteca(root, snap);
   await converterBiblioteca(snap, destino, { agora: AGORA });
@@ -365,7 +390,7 @@ describe('F1-N ponte snapshot→PacoteBiblioteca', () => {
 
   it('colisão de id/arquivo aborta sem persistência parcial; destino existente é recusado', async () => {
     const root = criarRoot({ 'corpus/1-exames/labs/x-a.json': painel('x-a'), 'corpus/1-exames/labs/x.a.json': painel('x-b') });
-    const base = mkdtempSync(join(tmpdir(), 'conv-col-')); const snap = join(base, 'snap');
+    const base = criarTempTeste('conv-col-'); const snap = join(base, 'snap');
     exportarBiblioteca(root, snap);
     const destino = join(base, 'pac');
     await expect(converterBiblioteca(snap, destino, { mapeamento: mapeamento({ 'corpus/1-exames/labs/x-a.json': {}, 'corpus/1-exames/labs/x.a.json': {} }, ['https://example.org/fonte']), agora: AGORA })).rejects.toThrow('COLISAO');
@@ -377,10 +402,10 @@ describe('F1-N ponte snapshot→PacoteBiblioteca', () => {
 
   it('PHI não atravessa: exportação recusa texto e rótulo estrutural; snapshot adulterado falha na revalidação', async () => {
     const comCpf = criarRoot({ 'corpus/1-exames/labs/p.json': painel('p', { nota: `ligar para ${CPF_SINTETICO}` }) });
-    const base1 = mkdtempSync(join(tmpdir(), 'conv-phi1-'));
+    const base1 = criarTempTeste('conv-phi1-');
     expect(() => exportarBiblioteca(comCpf, join(base1, 'snap'))).toThrow();
     const comRotulo = criarRoot({ 'corpus/1-exames/labs/q.json': { header: painel('q').header, paciente: { nome: 'alguma coisa' } } });
-    const base2 = mkdtempSync(join(tmpdir(), 'conv-phi2-'));
+    const base2 = criarTempTeste('conv-phi2-');
     expect(() => exportarBiblioteca(comRotulo, join(base2, 'snap'))).toThrow();
     const root = criarRoot({ 'corpus/1-exames/labs/painel-a.json': painel('painel-a') });
     const { snap } = await converter(root, 'phi3', { itens: { 'corpus/1-exames/labs/painel-a.json': {} } });
@@ -390,7 +415,7 @@ describe('F1-N ponte snapshot→PacoteBiblioteca', () => {
     const m = JSON.parse(readFileSync(join(snap, 'manifesto.json'), 'utf8'));
     m.arquivos.find((a: any) => a.caminho === 'corpus/1-exames/labs/painel-a.json').sha256 = sha256Biblioteca(adulterado);
     writeFileSync(join(snap, 'manifesto.json'), JSON.stringify(m));
-    const out = mkdtempSync(join(tmpdir(), 'conv-phi3-out-'));
+    const out = criarTempTeste('conv-phi3-out-');
     await expect(converterBiblioteca(snap, join(out, 'pac'), { mapeamento: mapeamento({ 'corpus/1-exames/labs/painel-a.json': {} }, ['https://example.org/fonte']), agora: AGORA })).rejects.toThrow();
   });
 
