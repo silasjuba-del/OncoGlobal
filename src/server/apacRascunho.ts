@@ -9,7 +9,7 @@ import { BaseApacRascunhoRespostaSchema, PrepararApacRascunhoPedidoSchema,
   ApacRascunhoPreparadoSchema, ConfirmarApacRascunhoPedidoSchema,
   type EdicaoApacRascunho, type ApacRascunhoPreparado } from "../contracts/api/apacRascunho.js";
 import { executarConfirmacao } from "../kernel/comandos/index.js";
-import { lerDraft, listarEventos, salvarDraft, transacao, hashPayload, resultadoExistente } from "../kernel/comandos/portas.js";
+import { depoisDoCommit, lerDraft, listarEventos, salvarDraft, transacao, hashPayload, resultadoExistente } from "../kernel/comandos/portas.js";
 import { lerLedgerIntegro } from "../kernel/ledger/leituraIntegra.js";
 import { dadosDoEvento, eventosVigentes } from "../kernel/projections/snapshot.js";
 import { projetarRetrato, hashCanonico } from "../kernel/projections/retrato/index.js";
@@ -195,8 +195,8 @@ function preparar(deps: Deps, token: string, raw: unknown, contexto: Contexto, s
       || hash(salvo.data) !== hash(registro)) return negar("IDEMPOTENCIA_CONFLITO");
   } else salvarDraft(deps.db, { draftId, patientId: contexto.patientId, sourceId: `apac-fonte:${base.publica.revisao}`,
     rawRef: "referencia-local", payload: registro, revision: 0, diagnostics: resposta.pendencias, criadoEm: em });
-  deps.sessoes.registrarBundleExibido(token, contexto, [{ documentId: resposta.apac.apacId,
-    documentVersion: resposta.apac.versao, conteudoHash: resposta.conteudoHash, draftId }]);
+  depoisDoCommit(deps.db, () => deps.sessoes.registrarBundleExibido(token, contexto, [{ documentId: resposta.apac.apacId,
+    documentVersion: resposta.apac.versao, conteudoHash: resposta.conteudoHash, draftId }]));
   return { status: 200, body: resposta };
 }
 
@@ -264,7 +264,7 @@ function recuperar(deps:Deps,token:string,raw:unknown,ctx:Contexto,sessao:Sessao
    ||v.data.resposta.conteudoHash!==p.data.conteudoHash||hashRegistro(v.data)!==p.data.conteudoHash)return negar("PREPARACAO_APAC_NAO_ENCONTRADA");
  if(cancelar){cancelarConfirmacao(deps.db,`apac-confirmar:${p.data.idempotencyKey}`,sessao.medicoId,em);return {status:200,body:{estado:"CANCELADA"}};}
  const r=v.data.resposta;
- deps.sessoes.registrarBundleExibido(token,ctx,[{documentId:r.apac.apacId,documentVersion:r.apac.versao,conteudoHash:r.conteudoHash,draftId:d.draftId}]);
+ depoisDoCommit(deps.db, () => deps.sessoes.registrarBundleExibido(token,ctx,[{documentId:r.apac.apacId,documentVersion:r.apac.versao,conteudoHash:r.conteudoHash,draftId:d.draftId}]));
  return {status:200,body:{estado:"PREVIA",texto:r.texto,avisos:[...r.avisos,...r.pendencias]}};
 }
 

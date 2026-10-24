@@ -42,14 +42,14 @@ describe("G2 · Cenário 6A: GerenciadorSessao (consultaSelecionada, bundleExibi
     expect(sessoes.bundleExibido(token, { ...G2_CONTEXTO, encounterId: "outro-encontro" })).toBeNull();
     expect(sessoes.bundleExibido(token, { ...G2_CONTEXTO, patientId: "outro-paciente" })).toBeNull();
 
-    // Comportamento caracterizado em `src/server/sessao.ts:102-103`:
-    // Quando `contexto.tumorLotId === undefined` (propriedade omitida), `sessao.ts` NÃO compara `tumorLotId`!
+    // Invertido em G3b: o lote é obrigatório no tipo da sessão e a ausência não é curinga.
+    // Um chamador sem tipos que omita `tumorLotId` deixa de casar com o comprovante (antes: retornava [doc]).
     expect(
       sessoes.bundleExibido(token, {
         patientId: G2_CONTEXTO.patientId,
         encounterId: G2_CONTEXTO.encounterId,
-      }),
-    ).toEqual([doc]);
+      } as unknown as Parameters<typeof sessoes.bundleExibido>[1]),
+    ).toBeNull();
 
     // Trocar o lote na seleção de consulta apaga o bundle e os alertas exibidos (`sessao.ts:110-112`):
     sessoes.selecionarConsulta(token, { ...G2_CONTEXTO_SEM_LOTE });

@@ -11,7 +11,7 @@ import {
   ReviewException,
 } from "../../contracts/w10/extracao.js";
 import { executarConfirmacao as confirmar } from "../../kernel/comandos/index.js";
-import { auditar, lerDraft, listarDrafts, listarDraftsSemVinculo, listarEventos, salvarDraft, transacao } from "../../kernel/comandos/portas.js";
+import { auditar, depoisDoCommit, lerDraft, listarDrafts, listarDraftsSemVinculo, listarEventos, salvarDraft, transacao } from "../../kernel/comandos/portas.js";
 import { normalizarDataCivil } from "../../kernel/extracao/normalizacao.js";
 import { executarPipelineExtracao, type ExtractionInput } from "../../kernel/extracao/pipeline.js";
 import { prepararRevisaoExtracao } from "../../kernel/extracao/prepararRevisao.js";
@@ -798,7 +798,7 @@ export function rotearExtracaoERevisao(
         sourceId: revisao.sourceId, rawRef: `revisao-local:${draft.draftId}`, payload: revisao.payload,
         diagnostics: ["EVOLUCAO_RASCUNHO", "REVISAO_MEDICA_PENDENTE"], revision: 0, criadoEm: em,
       });
-      deps.sessoes.registrarBundleExibido(token, escopo, [documento]);
+      depoisDoCommit(deps.db, () => deps.sessoes.registrarBundleExibido(token, escopo, [documento]));
       return reply(200, "REVISAO_PREPARADA", {
         codigo: "REVISAO_PREPARADA",
         conteudo: revisao.payload, comprovanteExibicao: documento, criaEventoClinico: false,

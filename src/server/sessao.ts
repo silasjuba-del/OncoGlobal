@@ -4,7 +4,8 @@ import { hashCanonico } from "../modules/tipos.js";
 
 /** Documento exibido = id + versão + hash do CONTEÚDO exato mostrado ao médico (A13). */
 export interface DocumentoExibido { documentId: string; documentVersion: number; conteudoHash: string; draftId?: string }
-type ContextoExibicao = { patientId: string; encounterId: string; tumorLotId?: string | null };
+/** Contexto de consulta: lote sempre explícito (string ou null); ausência não é curinga nem vira null. */
+type ContextoExibicao = { patientId: string; encounterId: string; tumorLotId: string | null };
 
 /** Único canon SHA-256 do módulo, mantendo a API pública do servidor. */
 export function hashConteudoExibido(conteudo: unknown): string {
@@ -21,8 +22,8 @@ export interface GerenciadorSessao {
     docs: readonly DocumentoExibido[]): void;
   bundleExibido(token: string, contexto: ContextoExibicao):
     readonly DocumentoExibido[] | null;
-  selecionarConsulta(token: string, contexto: { patientId: string; encounterId: string; tumorLotId?: string | null } | null): void;
-  consultaSelecionada(token: string): { patientId: string; encounterId: string; tumorLotId?: string | null } | null;
+  selecionarConsulta(token: string, contexto: ContextoExibicao | null): void;
+  consultaSelecionada(token: string): ContextoExibicao | null;
 }
 
 /** Single-user local login. Caller supplies the secret at startup; no default credentials. */
@@ -52,7 +53,7 @@ export function criarGerenciadorSessao(config: {
   const sessions = new Map<string, { sessao: SessaoTipo; alertas?: {contexto:ContextoExibicao;ids:readonly string[]}; bundle?: {
     contexto: ContextoExibicao;
     docs: readonly DocumentoExibido[];
-  }; consulta?: { patientId: string; encounterId: string; tumorLotId?: string | null } }>();
+  }; consulta?: ContextoExibicao }>();
   const obter = (token: string): SessaoTipo | null => {
     const record = sessions.get(token);
     if (!record) return null;
@@ -88,7 +89,7 @@ export function criarGerenciadorSessao(config: {
     registrarAlertasExibidos(token,contexto,ids){if(!obter(token))throw Error("SESSAO_EXPIRADA");sessions.get(token)!.alertas={contexto:{...contexto},ids:[...ids]};},
     alertasExibidos(token,contexto){if(!obter(token))return [];const a=sessions.get(token)?.alertas;
       return a && a.contexto.patientId===contexto.patientId && a.contexto.encounterId===contexto.encounterId
-        && (a.contexto.tumorLotId??null)===(contexto.tumorLotId??null) ? [...a.ids] : [];},
+        && a.contexto.tumorLotId===contexto.tumorLotId ? [...a.ids] : [];},
     registrarBundleExibido(token, contexto, docs) {
       if (!obter(token)) throw new Error("SESSAO_EXPIRADA");
       if (docs.some((d) => !/^[0-9a-f]{64}$/.test(d.conteudoHash))) throw new Error("HASH_EXIBIDO_INVALIDO");
@@ -100,8 +101,7 @@ export function criarGerenciadorSessao(config: {
       const bundle = sessions.get(token)?.bundle;
       if (!bundle || bundle.contexto.patientId !== contexto.patientId
         || bundle.contexto.encounterId !== contexto.encounterId
-        || (contexto.tumorLotId !== undefined
-          && (bundle.contexto.tumorLotId ?? null) !== contexto.tumorLotId)) return null;
+        || bundle.contexto.tumorLotId !== contexto.tumorLotId) return null;
       return bundle.docs.map((d) => ({ ...d }));
     },
     selecionarConsulta(token, contexto) {

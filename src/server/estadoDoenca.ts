@@ -3,7 +3,7 @@ import { z } from "zod";
 import { Fonte,Id } from "../contracts/base.js";
 import { ContextoDutosVisao } from "../contracts/api/dutos.js";
 import { PedidoEstadoDoenca,ConfirmacaoEstadoDoenca } from "../contracts/fase2/estadoDoenca.js";
-import { salvarDraft,lerDraft } from "../kernel/comandos/portas.js";
+import { depoisDoCommit,salvarDraft,lerDraft } from "../kernel/comandos/portas.js";
 import { lerLedgerIntegro } from '../kernel/ledger/leituraIntegra.js';
 import { confirmar } from "../kernel/ledger/writeRouter.js";
 import { dataCivilDoServico } from "../kernel/gateway/tempo.js";
@@ -39,7 +39,7 @@ export function rotearEstadoDoenca(deps:ServidorDeps,token:string,rota:string,ra
     salvarDraft(deps.db,{draftId,patientId:contexto.patientId,sourceId:fonte.sourceId,rawRef:`registro-medico:${draftId}`,
       payload,
       diagnostics:["REVISAO_MEDICA_PENDENTE"],revision:0,criadoEm:agora});
-    deps.sessoes.registrarBundleExibido(token,contexto,[{documentId:draftId,documentVersion:1,conteudoHash,draftId}]);
+    depoisDoCommit(deps.db, () => deps.sessoes.registrarBundleExibido(token,contexto,[{documentId:draftId,documentVersion:1,conteudoHash,draftId}]));
     return {status:200,body:{codigo:"ESTADO_DOENCA_PREPARADO",contexto,draftId,conteudoHash,texto,criaEventoClinico:false}};
   }
   const pedido=ConfirmacaoEstadoDoenca.parse(raw),draft=lerDraft(deps.db,pedido.draftId),salvo=Payload.safeParse(draft?.payload);

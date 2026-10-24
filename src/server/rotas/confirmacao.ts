@@ -6,7 +6,7 @@ import { createHash } from "node:crypto";
 import { z } from "zod";
 import { DataCivil, Id } from "../../contracts/base.js";
 import type { ConfirmarBloco as Confirmar } from "../../contracts/operacao.js";
-import { auditar, lerDraft, listarEventos, salvarDraft } from "../../kernel/comandos/portas.js";
+import { auditar, depoisDoCommit, lerDraft, listarEventos, salvarDraft } from "../../kernel/comandos/portas.js";
 import { executarConfirmacao as confirmar } from "../../kernel/comandos/index.js";
 import { g25EscopoAssinatura } from "../../kernel/harness/gates.js";
 import { hashConteudoExibido } from "../sessao.js";
@@ -82,10 +82,10 @@ export function exibirBundle(deps: ServidorDeps, token: string,
       conteudo: draft.payload, conteudoHash: hashConteudoExibido(draft.payload),
     });
   }
-  deps.sessoes.registrarBundleExibido(token,
+  depoisDoCommit(deps.db, () => deps.sessoes.registrarBundleExibido(token,
     { patientId: input.patientId, encounterId: input.encounterId, tumorLotId: input.tumorLotId ?? null },
     documentos.map(({ draftId, documentId, documentVersion, conteudoHash }) =>
-      ({ draftId, documentId, documentVersion, conteudoHash })));
+      ({ draftId, documentId, documentVersion, conteudoHash }))));
   return { status: 200, body: { patientId: input.patientId, encounterId: input.encounterId, documentos } };
 }
 /** Fatos e resumos com recibo válido compõem a revisão documental; o relógio não a altera. */
