@@ -12,7 +12,7 @@ import { BasePrescricaoExecutavelResposta, ConfirmarPrescricaoExecutavelPedido,
   PrepararPrescricaoExecutavelPedido, PrescricaoExecutavelPreparada,
   type EdicaoPrescricaoExecutavel } from "../contracts/api/operacaoPrescricaoExecutavel.js";
 import { executarConfirmacao } from "../kernel/comandos/index.js";
-import { auditar, lerDraft, listarEventos, salvarDraft, transacao } from "../kernel/comandos/portas.js";
+import { auditar, depoisDoCommit, lerDraft, listarEventos, salvarDraft, transacao } from "../kernel/comandos/portas.js";
 import { dadosDoEvento, eventosVigentes } from "../kernel/projections/snapshot.js";
 import { avaliarDocumentoExecutavel, doseFinalEmMg } from "../rules/prescricao/documentoExecutavel.js";
 import { hashConteudoExibido as hash } from "./sessao.js";
@@ -199,8 +199,8 @@ function preparar(deps: Deps, token: string, raw: unknown, contexto: Contexto, a
       return negar("CONTEUDO_ALTERADO_APOS_EXIBICAO");
     const avaliacao = avaliarDocumentoExecutavel(salvo.data.resposta.conteudo);
     if (!avaliacao.ok) return negar("PRESCRICAO_INCOMPLETA", 409, avaliacao.pendencias);
-    deps.sessoes.registrarBundleExibido(token, contexto, [{ documentId: salvo.data.resposta.conteudo.documentId,
-      documentVersion: salvo.data.resposta.conteudo.documentVersion, conteudoHash: salvo.data.resposta.conteudoHash, draftId }]);
+    depoisDoCommit(deps.db, () => deps.sessoes.registrarBundleExibido(token, contexto, [{ documentId: salvo.data.resposta.conteudo.documentId,
+      documentVersion: salvo.data.resposta.conteudo.documentVersion, conteudoHash: salvo.data.resposta.conteudoHash, draftId }]));
     return { status: 200, body: salvo.data.resposta };
   }
   const edicao = entrada.edicao, modo = edicao.planejamento.modo;
@@ -274,8 +274,8 @@ function preparar(deps: Deps, token: string, raw: unknown, contexto: Contexto, a
   const payload = PreparacaoArmazenada.parse({ kind: "PRESCRICAO_EXECUTAVEL_RASCUNHO", ...dadosPreparacao, resposta });
   salvarDraft(deps.db, { draftId, patientId: contexto.patientId, sourceId: "prescricao-medica-local",
     rawRef: "referencia-local", payload, revision: 0, diagnostics: ["AGUARDA_ASSINATURA_MEDICA"], criadoEm: em });
-  deps.sessoes.registrarBundleExibido(token, contexto, [{ documentId: conteudo.documentId,
-    documentVersion: conteudo.documentVersion, conteudoHash, draftId }]);
+  depoisDoCommit(deps.db, () => deps.sessoes.registrarBundleExibido(token, contexto, [{ documentId: conteudo.documentId,
+    documentVersion: conteudo.documentVersion, conteudoHash, draftId }]));
   return { status: 200, body: resposta };
 }
 
@@ -381,7 +381,7 @@ function recuperar(deps:Deps,token:string,raw:unknown,ctx:Contexto,atorId:string
    ||v.data.resposta.conteudoHash!==p.data.conteudoHash||hashPreparacao(v.data)!==p.data.conteudoHash)return negar("PREPARACAO_NAO_ENCONTRADA");
  if(cancelar){cancelarConfirmacao(deps.db,`rx-confirmar:${p.data.idempotencyKey}`,atorId,em);return {status:200,body:{estado:"CANCELADA"}};}
  const r=v.data.resposta;
- deps.sessoes.registrarBundleExibido(token,ctx,[{documentId:r.conteudo.documentId,documentVersion:r.conteudo.documentVersion,conteudoHash:r.conteudoHash,draftId:d.draftId}]);
+ depoisDoCommit(deps.db, () => deps.sessoes.registrarBundleExibido(token,ctx,[{documentId:r.conteudo.documentId,documentVersion:r.conteudo.documentVersion,conteudoHash:r.conteudoHash,draftId:d.draftId}]));
  return {status:200,body:{estado:"PREVIA",texto:r.texto,avisos:r.avisos}};
 }
 

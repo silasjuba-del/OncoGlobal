@@ -570,3 +570,61 @@ it.each([false,true])('APAC recupera em sessão nova sem duplicar: gravada=%s',a
  const cancel=await a.request('/consulta/confirmacao/recuperar',{tipo:'APAC',pedido,cancelar:true},token);
  expect(cancel.data.estado).toBe('CONFIRMADA');expect(a.eventos().filter(e=>e.tipo==='APAC')).toHaveLength(1);
 });
+
+/** COMMIT recusado de verdade: FK deferida em tabelas só do teste, violada por qualquer rascunho novo. */
+function falharProximoCommit(a: Ambiente) {
+  a.db.exec(`CREATE TABLE g3b_pai (id TEXT PRIMARY KEY);
+    CREATE TABLE g3b_filho (paiId TEXT REFERENCES g3b_pai(id) DEFERRABLE INITIALLY DEFERRED);
+    CREATE TRIGGER g3b_falha_commit AFTER INSERT ON draft_envelope BEGIN INSERT INTO g3b_filho VALUES ('inexistente'); END;`);
+  return () => a.db.exec("DROP TRIGGER g3b_falha_commit; DROP TABLE g3b_filho; DROP TABLE g3b_pai;");
+}
+const rascunhosPreparados = (a: Ambiente, prefixo: string) =>
+  listarDrafts(a.db).filter(d => d.draftId.startsWith(prefixo)).map(d => d.draftId).sort();
+
+it("G3b · APAC: COMMIT recusado depois de preparar não publica comprovante na sessão nem apaga o anterior", async () => {
+  const a = await abrir(); await assinarRx(a); const base = await baseApac(a);
+  const primeira = await prepararApac(a, base, edicaoApac(), "apac-g3b-1");
+  expect(primeira.status, JSON.stringify(primeira.data)).toBe(200);
+  const comprovanteValido = a.sessoes.bundleExibido(a.token, contexto);
+  expect(comprovanteValido?.map(d => d.draftId)).toEqual([primeira.data.draftId]);
+  const rascunhosAntes = rascunhosPreparados(a, "apac-preparar:");
+
+  const restaurar = falharProximoCommit(a);
+  const falha = await prepararApac(a, base, edicaoApac({ competencia: "2026-11" }), "apac-g3b-2");
+  restaurar();
+  expect(falha.status).toBeGreaterThanOrEqual(400);
+  expect(rascunhosPreparados(a, "apac-preparar:")).toEqual(rascunhosAntes);
+  expect(a.sessoes.bundleExibido(a.token, contexto)).toEqual(comprovanteValido);
+
+  const retry = await prepararApac(a, base, edicaoApac({ competencia: "2026-11" }), "apac-g3b-2");
+  expect(retry.status, JSON.stringify(retry.data)).toBe(200);
+  expect(a.sessoes.bundleExibido(a.token, contexto)?.map(d => d.draftId)).toEqual([retry.data.draftId]);
+  expect((await confirmarApac(a, retry.data, "apac-g3b-confirmar")).status).toBe(200);
+});
+
+it("G3b · prescrição: COMMIT recusado depois de preparar não publica comprovante na sessão nem apaga o anterior", async () => {
+  const a = await abrir();
+  const base = await a.request(BASE_RX, contexto);
+  expect(base.status).toBe(200);
+  const preparar = (key: string) => a.request(PREPARAR_RX, { contexto, expectedBaseHash: base.data.revisao,
+    idempotencyKey: key, edicao: edicaoRx() });
+  const primeira = await preparar("rx-g3b-1");
+  expect(primeira.status, JSON.stringify(primeira.data)).toBe(200);
+  const comprovanteValido = a.sessoes.bundleExibido(a.token, contexto);
+  expect(comprovanteValido?.map(d => d.draftId)).toEqual([primeira.data.draftId]);
+  const rascunhosAntes = rascunhosPreparados(a, "rx-preparada:");
+
+  const restaurar = falharProximoCommit(a);
+  const falha = await preparar("rx-g3b-2");
+  restaurar();
+  expect(falha.status).toBeGreaterThanOrEqual(400);
+  expect(rascunhosPreparados(a, "rx-preparada:")).toEqual(rascunhosAntes);
+  expect(a.sessoes.bundleExibido(a.token, contexto)).toEqual(comprovanteValido);
+
+  const retry = await preparar("rx-g3b-2");
+  expect(retry.status, JSON.stringify(retry.data)).toBe(200);
+  expect(a.sessoes.bundleExibido(a.token, contexto)?.map(d => d.draftId)).toEqual([retry.data.draftId]);
+  const assinada = await a.request(CONFIRMAR_RX, { contexto, draftId: retry.data.draftId,
+    expectedRevision: retry.data.revision, conteudoHash: retry.data.conteudoHash, idempotencyKey: "rx-g3b-assinar" });
+  expect(assinada.status, JSON.stringify(assinada.data)).toBe(200);
+});
