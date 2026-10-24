@@ -5,6 +5,8 @@ import { ConsultaPersistida } from "../../../src/ui/consulta/ConsultaPersistida.
 import { criarPortaHttp } from "../../../src/ui/api/http.js";
 import { listarDrafts } from "../../../src/kernel/ledger/drafts.js";
 import { abrirAmbiente, cadastrarPaciente, criarDiretorio, removerDiretorio, ENCONTRO, PACIENTE, SENHA } from "../../f0-fecha/fixtures/consulta-completa.js";
+import { usarEsperaDeJornadaHttpCompleta } from "../../fixtures/espera-jornada-http.js";
+usarEsperaDeJornadaHttpCompleta();
 
 let ambiente:Awaited<ReturnType<typeof abrirAmbiente>>|undefined;
 afterEach(async()=>{cleanup();vi.unstubAllGlobals();if(ambiente){await ambiente.close();removerDiretorio(ambiente.dir);ambiente=undefined;}});

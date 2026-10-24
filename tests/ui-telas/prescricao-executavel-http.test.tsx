@@ -9,6 +9,8 @@ import { dadosDoEvento } from "../../src/kernel/projections/snapshot.js";
 import { abrirAmbiente, cadastrarPaciente, criarDiretorio, removerDiretorio,
   PACIENTE, ENCONTRO, SENHA, AGORA } from "../f0-fecha/fixtures/consulta-completa.js";
 import { fonteSintetica, presente } from "../fixtures/triagem.js";
+import { usarEsperaDeJornadaHttpCompleta } from "../fixtures/espera-jornada-http.js";
+usarEsperaDeJornadaHttpCompleta();
 
 const ambientes: Awaited<ReturnType<typeof abrirAmbiente>>[] = [];
 afterEach(async () => {

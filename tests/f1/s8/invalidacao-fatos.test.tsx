@@ -8,6 +8,8 @@ import { criarPortaFalsa } from "../../../src/ui/api/fake.js";
 import { salvarDraft } from "../../../src/kernel/ledger/drafts.js";
 import { confirmar } from "../../../src/kernel/ledger/writeRouter.js";
 import { abrirAmbiente,cadastrarPaciente,criarDiretorio,removerDiretorio,PACIENTE,ENCONTRO,SENHA,AGORA } from "../../f0-fecha/fixtures/consulta-completa.js";
+import { usarEsperaDeJornadaHttpCompleta } from "../../fixtures/espera-jornada-http.js";
+usarEsperaDeJornadaHttpCompleta();
 let ambiente:Awaited<ReturnType<typeof abrirAmbiente>>|undefined;
 afterEach(async()=>{cleanup();vi.unstubAllGlobals();if(ambiente){await ambiente.close();removerDiretorio(ambiente.dir);ambiente=undefined;}});
 it("confirmação HTTP de laboratório atualiza irmã consulta automaticamente; preparação não invalida",async()=>{

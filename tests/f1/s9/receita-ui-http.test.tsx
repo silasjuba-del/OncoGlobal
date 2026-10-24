@@ -11,6 +11,8 @@ import {criarResolverDocumentoLedger} from "../../../src/kernel/ledger/documento
 import {autorizarSaida} from "../../../src/server/autorizacao.js";
 import {readFileSync} from "node:fs";
 import {abrirAmbiente,cadastrarPaciente,criarDiretorio,removerDiretorio,ENCONTRO,PACIENTE,SENHA} from "../../f0-fecha/fixtures/consulta-completa.js";
+import { usarEsperaDeJornadaHttpCompleta } from "../../fixtures/espera-jornada-http.js";
+usarEsperaDeJornadaHttpCompleta();
 let ambiente:Awaited<ReturnType<typeof abrirAmbiente>>|undefined;
 afterEach(async()=>{cleanup();vi.unstubAllGlobals();if(ambiente){await ambiente.close();removerDiretorio(ambiente.dir);ambiente=undefined;}});
 it("decisão literal Pantoprazol + HMG/Cr + retorno14 entra em prévia, assinatura e tarefa sem inferir via/quantidade",async()=>{
