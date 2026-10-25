@@ -20,7 +20,7 @@ function listarTsTsx(dir: string): string[] {
   return saida;
 }
 
-const contexto = { patientId: "pt-verde", encounterId: "en-verde", tumorLotId: "lot-verde" };
+const contexto = { patientId: "pt-verde", encounterId: "en-verde", tumorLotId: null };
 
 describe("U-H6 · entrada hostil em campos livres (ChatAnotacao e editor de evolução) e ausência de innerHTML", () => {
   it("nenhum arquivo em src/ui usa dangerouslySetInnerHTML ou innerHTML", () => {
