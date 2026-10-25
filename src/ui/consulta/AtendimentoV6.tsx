@@ -1,6 +1,7 @@
 import { useEffect,useRef,useState } from "react";
 import type { PortaConsulta } from "../api/porta.js";
 import { AtendimentoV6Resposta, type EntradaAtendimentoV6 } from "../../contracts/api/atendimentoV6.js";
+import { ChatAnotacao } from "./ChatAnotacao.js";
 
 const nomes={RESUMO:"Resumo do caso",EVOLUCAO:"Evolução por diferenças",EXAMES:"Pedido de exames",RETORNO:"Retorno",PRESCRICAO:"Prescrição"} as const;
 const vazio=():EntradaAtendimentoV6=>({hoje:"",decisao:"",saidas:["RESUMO","EVOLUCAO"]});
@@ -57,6 +58,7 @@ export function AtendimentoV6({porta,contexto}:{porta:PortaConsulta;contexto:{pa
    <p>Informe o que mudou e sua decisão. O histórico acessível já vem do prontuário.</p></div><span className="atendimento-v6__badge">Rascunhos · revisão médica</span></header>
   {atual?<><div className="atendimento-v6__contexto"><strong>{atual.base.pacienteNome}</strong><span>Referência: {atual.base.dataReferencia??"data do encontro não informada"}</span><span>{atual.base.citacoes.length} trechos recuperados com referências</span></div>
    <p className="atendimento-v6__origem">As entradas abaixo pertencem ao atendimento de {atual.base.dataReferencia??"data clínica ainda não informada"}.</p>
+   {porta.aceitarDecisaoChat?<ChatAnotacao key={contextoChave} porta={porta} contexto={contexto} bloqueado={ocupado} aoRegistrar={()=>recuperar(true)}/>:null}
    {atual.base.anotacoesChat?.length?<section aria-label="Anotações médicas aceitas do chat"><h3>Anotações médicas aceitas do chat</h3>
     {atual.base.anotacoesChat.map(n=><article key={n.eventId}><p>{n.texto}</p><small>Autor: {n.autor} · Registro: {n.em} · Mensagem: {n.mensagemId}</small></article>)}
    </section>:null}

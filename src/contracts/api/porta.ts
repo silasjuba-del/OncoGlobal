@@ -329,6 +329,7 @@ export interface PrescricaoChatVisao {
 }
 
 export interface ChatSetorVisao {
+  tumorLotId?: string | null | undefined;
   setor: SetorChat;
   patientId: string;
   encounterId: string;
@@ -337,6 +338,7 @@ export interface ChatSetorVisao {
 }
 
 export interface PortaConsulta {
+  aceitarDecisaoChat?(pedido:{contexto:{patientId:string;encounterId:string;tumorLotId:string|null;operationId:string};mensagemId:string;decisao:{campo:"observacao";valor:string}},signal?:AbortSignal):Promise<{codigo:"GRAVADA"|"REPLAY";eventId:string}>;
   recuperarConfirmacao?(pedido:import('./recuperacaoConfirmacao.js').ConfirmacaoPendente & {cancelar?:true}):Promise<import('./recuperacaoConfirmacao.js').RecuperacaoConfirmacao>;
   documentoImpressao?(pedido:{patientId:string;encounterId:string;tumorLotId:string|null;documentId:string;documentVersion:number}):Promise<{html:string}>;
   listarFichasPrescricao?(signal?: AbortSignal): Promise<CatalogoFichasResposta>;

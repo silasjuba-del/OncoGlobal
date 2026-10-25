@@ -66,6 +66,7 @@
 .atendimento-v6__header p { margin:0 0 20px; color:#526672; }.atendimento-v6__badge { background:#e7f1f0; color:#23554f; border-radius:20px; padding:4px 12px; font-size:.8rem; }
 .atendimento-v6__contexto { display:flex; flex-wrap:wrap; gap:8px 24px; padding:12px 16px; background:#f1f5f7; border-radius:8px; font-size:.9rem; margin-bottom:20px; }
 .atendimento-v6__entrada { display:grid; grid-template-columns:1fr 1fr; gap:20px; }.atendimento-v6__entrada label { display:grid; gap:8px; font-weight:600; }
+.atendimento-v6__chat-editor { grid-template-columns:minmax(0,1fr); margin-top:16px; }
 .atendimento-v6 textarea { resize:vertical; width:100%; box-sizing:border-box; min-height:110px; padding:12px; border:1px solid #9caeb8; border-radius:7px; font:inherit; font-weight:400; color:inherit; background:#fff; }
 .atendimento-v6 textarea:focus-visible,.atendimento-v6 button:focus-visible { outline:3px solid #2c7197; outline-offset:2px; }
 .atendimento-v6__saidas { border:0; padding:16px 0; margin:8px 0; display:flex; gap:12px 20px; flex-wrap:wrap; }.atendimento-v6__saidas legend { padding:0; font-weight:600; }.atendimento-v6__saidas label { display:flex; align-items:center; gap:7px; }

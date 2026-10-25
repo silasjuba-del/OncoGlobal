@@ -9,6 +9,18 @@ let a:Awaited<ReturnType<typeof abrirAmbiente>>|undefined;
 afterEach(async()=>{if(a){await a.close();removerDiretorio(a.dir);a=undefined;}});
 async function abrir(){a=await abrirAmbiente(criarDiretorio());cadastrarPaciente(a);await carregarConsulta(a);return a;}
 const entrada={hoje:"Fadiga G2 informada; sem febre referida.",decisao:"Conduta sintética explicitamente informada pelo médico.",saidas:["RESUMO","EVOLUCAO","PRESCRICAO"]};
+it("chat só oferece mensagens do lote atualmente selecionado",async()=>{
+ const a=await abrir();
+ for(const lote of [null,"lote-a","lote-b"]){
+  const id=`chat-${lote??"geral"}`;
+  salvarDraft(a.db,{draftId:id,patientId:PACIENTE,sourceId:id,rawRef:id,payload:{},diagnostics:[],revision:0,criadoEm:AGORA});
+  executarConfirmacao(a.db,{...ctx,tumorLotId:lote,operationId:id,reviewDecisionId:id,sessao:a.sessoes.obter(a.token)!,em:AGORA,registros:[{
+   draftId:id,expectedRevision:0,eventId:id,tipo:"ChatMessage",revisao:"CONFIRMADO",fontes:[],payload:{mensagemId:id,patientId:PACIENTE,encounterId:ENCONTRO,setor:"MEDICO",autor:"m",texto:id}}]});
+ }
+ a.sessoes.selecionarConsulta(a.token,{...ctx,tumorLotId:"lote-a"});
+ const r=await a.request("/consulta/chat",{setor:"MEDICO"});expect(r.status).toBe(200);
+ expect(r.data.tumorLotId).toBe("lote-a");expect(r.data.mensagens).toEqual([{mensagemId:"chat-lote-a",autor:"m",texto:"chat-lote-a"}]);
+});
 async function mensagemChat(a:Awaited<ReturnType<typeof abrir>>,encontro=ENCONTRO){
  salvarDraft(a.db,{draftId:"chat-seed",patientId:PACIENTE,sourceId:"chat",rawRef:"chat",payload:{},diagnostics:[],revision:0,criadoEm:AGORA});
  executarConfirmacao(a.db,{...ctx,operationId:"chat-seed",reviewDecisionId:"chat-seed",sessao:a.sessoes.obter(a.token)!,em:AGORA,registros:[{

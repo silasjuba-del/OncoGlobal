@@ -761,10 +761,11 @@ export function lerSalao(db: DatabaseSync, agora: string, rulesetInput: unknown,
     pendencias: [...calculados.flatMap((x) => [...x.base.pendentes, ...x.portao.pendentes]),
       ...pacientesComTriagemDuplicada.map(() => ({ codigo: "TRIAGEM_DUPLICADA", estado: "PENDENTE" as const }))] };
 }
-export function lerMensagensChat(db: DatabaseSync, setor: SetorChat, contexto: { patientId: string; encounterId: string }) {
+export function lerMensagensChat(db: DatabaseSync, setor: SetorChat, contexto: { patientId: string; encounterId: string; tumorLotId?:string|null }) {
   return porTipo(eventos(db), "ChatMessage", ChatMessage).filter((m) => m.value.setor === setor
     && m.value.patientId === contexto.patientId && m.value.encounterId === contexto.encounterId
-    && m.event.patientId === contexto.patientId && m.event.encounterId === contexto.encounterId)
+    && m.event.patientId === contexto.patientId && m.event.encounterId === contexto.encounterId
+    && m.event.tumorLotId === (contexto.tumorLotId??null))
     .map((m) => ({ mensagemId: m.value.mensagemId, autor: m.value.autor, texto: m.value.texto }));
 }
 export function lerRecist(db: DatabaseSync, patientId: string, contexto?:{encounterId:string;tumorLotId:string|null;agora:string}) {
