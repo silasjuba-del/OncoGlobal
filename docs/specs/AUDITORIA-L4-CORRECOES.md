@@ -1,5 +1,7 @@
 # Auditoria L4 — correções verificáveis
 
+Referência adicional solicitada pelo responsável: [formato de resumo Oncologia v6.0](../referencias/prompt-oncologia-v6/README.md). Incorporar entrada por diferenças (Hoje/Decisão/Saídas), recuperação antes de perguntas e pendências por documento aos próximos lotes. Inclusão documental não significa implementação da interface, execução da matriz de avaliação ou aprovação clínica.
+
 Base: main `3010f0d0c803d6d2cddae774806421670a286b3f` (PR #66 integrada e CI verde). Autorização de 24/10/2026: continuar conferência e correção, orquestrando Luna. Codex é o único escritor; Luna pesquisa/revisa em modo somente leitura.
 
 ## Estado e sequência

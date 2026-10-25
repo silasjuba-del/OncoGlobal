@@ -1,8 +1,16 @@
 import { useEffect, useRef, useState } from "react";
 import type { PortaConsulta } from "../api/porta.js";
 import { SintesePropostaResposta } from "../../contracts/api/sinteseProposta.js";
+import { AtendimentoV6 } from "./AtendimentoV6.js";
 
 export function SinteseProposta({ porta, contexto }: { porta: PortaConsulta; contexto: { patientId: string; encounterId: string; tumorLotId?: string | null } }) {
+  if(porta.recuperarAtendimentoV6&&porta.prepararAtendimentoV6)return <>
+    <AtendimentoV6 key={JSON.stringify([contexto.patientId,contexto.encounterId,contexto.tumorLotId??null])} porta={porta} contexto={{...contexto,tumorLotId:contexto.tumorLotId??null}}/>
+    <details><summary>Síntese literal por LLM · opcional</summary><SinteseCitada porta={porta} contexto={contexto}/></details>
+  </>;
+  return <SinteseCitada porta={porta} contexto={contexto}/>;
+}
+function SinteseCitada({ porta, contexto }: { porta: PortaConsulta; contexto: { patientId: string; encounterId: string; tumorLotId?: string | null } }) {
   const [resultado, setResultado] = useState<SintesePropostaResposta | null>(null);
   const [ocupado, setOcupado] = useState(false); const [erro, setErro] = useState("");
   const geracao = useRef(0), aborto = useRef<AbortController | null>(null), emCurso = useRef(false);

@@ -88,6 +88,14 @@
     "prepararApacRascunho"
   ],
   [
+    "/consulta/atendimento/preparar",
+    "prepararAtendimentoV6"
+  ],
+  [
+    "/consulta/atendimento/recuperar",
+    "recuperarAtendimentoV6"
+  ],
+  [
     "/consulta/bundle",
     "bundle"
   ],
