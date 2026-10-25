@@ -1,5 +1,5 @@
 // @vitest-environment jsdom
-import { cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { act, cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { createHash } from "node:crypto";
 import { once } from "node:events";
 import { expect, it, vi } from "vitest";
@@ -51,15 +51,21 @@ it.each([false, true])("revisa paciente fora da agenda sem trocar foco da triage
     const porta = criarPortaHttp({ onSessaoExpirada: () => {} });
     expect((await porta.login("senha-sintetica-bateria2")).ok).toBe(true);
     const registrar = vi.spyOn(porta, "revisarRelatoInfusao");
+    const carregarFila = vi.spyOn(porta, "filaSalao");
     render(<TelaSalao porta={porta} />);
     await screen.findByText(/Tive coceira na infusão/);
     expect(screen.getByText(/O cuidador relata/)).toBeTruthy();
     expect(screen.getByText(new RegExp(`contato ${sender}`))).toBeTruthy();
     expect(screen.getByText(new RegExp(`contato ${cuidador}`))).toBeTruthy();
-    if (outroAgendado) await waitFor(() => expect(selecionar.mock.calls.some(([, c]) => c?.patientId === outro.patientId)).toBe(true));
+    if (outroAgendado) {
+      await waitFor(() => expect(selecionar.mock.calls.some(([, c]) => c?.patientId === outro.patientId)).toBe(true));
+      await waitFor(() => expect(carregarFila.mock.results).toHaveLength(2));
+      await act(async () => { await carregarFila.mock.results[1]!.value; });
+    }
     else expect(screen.getByText("salão vazio")).toBeTruthy();
     const antes = selecionar.mock.calls.length;
     fireEvent.change(screen.getByLabelText("Decisão médica sobre o relato"), { target: { value: "Relato revisto pelo médico sintético, sem atribuir agente causal." } });
+    await waitFor(() => expect((screen.getByRole("button", { name: "Registrar revisão deste relato" }) as HTMLButtonElement).disabled).toBe(false));
     fireEvent.click(screen.getByRole("button", { name: "Registrar revisão deste relato" }));
     await waitFor(() => expect(screen.queryByLabelText("Relato de infusão pendente")).toBeNull());
     expect(selecionar.mock.calls).toHaveLength(antes);

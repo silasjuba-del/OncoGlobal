@@ -89,4 +89,20 @@ CI inicial da PR73 identificou fixtures que não faziam leitura prévia e envelo
 
 Revisão independente do delta: Luna validou G08/G09 e adiamento dos recibos até resposta HTTP 2xx concluída, incluindo contrato inválido e novo E1 em replay. Recibo comprova entrega HTTP do conteúdo, não percepção visual humana. Expiração no flush mantém falha fechada. Bateria dirigida atual: 20/20 (gates, dutos e E1), typecheck aprovado; suites de integração e CI ainda pendentes. Loader de ruleset em jornada jsdom corrigido por caminho nativo, sem curadoria/ativação de sinais.
 
-Validação adicional por Luna: 42/42 testes (seis jornadas de vínculo e três baterias administração/exposição/canal), F3 5/5 e erro UI canal 1/1. Bateria root de cinco arquivos: 34/35; fixture S03 corrigida por carregar ruleset real no lugar de null, rerun pendente. Bateria ampla root ainda em execução e sinalizou uma falha; não liberar merge até diagnóstico e reexecução.
+Validação adicional histórica por Luna: 42/42 testes (seis jornadas de vínculo e três baterias administração/exposição/canal), F3 5/5 e erro UI canal 1/1. Bateria root de cinco arquivos: 34/35; fixture S03 corrigida por carregar ruleset real no lugar de null, rerun pendente naquela passagem. A bateria ampla sinalizou uma falha; esse registro histórico não indica processo ainda ativo.
+
+## Retomada aprovada — lotes A–F, 25/10/2026
+
+Plano apresentado no chat e aprovado explicitamente por Silas: executar A–F, integrar PR73 após todos os gates e disponibilizar versão sintética isolada para UI/UX. Base confirmada: main b3909b745bf655e4598af7b2bbbd2d4e076e92d4; branch codex/l4-fechamento, HEAD inicial fc91c33f0a26f38fdbbe63e7ff6854f8ce96c1a5. Codex escreve produto/documentação; Luna revisa independentemente e executa provas. Perguntar somente nova decisão clínica.
+
+- A: preservar os três testes WIP; S9 deve recusar dose pendente mesmo diante de recibo de replay existente; A13 deve exigir conteúdo entregue, código exato de adulteração e nenhuma escrita clínica/operação. PR27 aguarda fila/contexto e botão habilitado. Investigar S8 e eRx sem aumentar timeout.
+- B/C: revisão independente do diff de proveniência, recibos HTTP, contexto, gates e projeções; corrigir apenas causas demonstradas. F3/F4/F5/F6 permanecem inativos conforme decisões registradas.
+- D: jornadas HTTP/UI, replay, persistência/reabertura, isolamento e respostas tardias; dados sintéticos e recursos isolados.
+- E: matriz de 42 IDs com prova final, revisão independente do delta final, CI atual e merge normal sem bypass, preservando branches.
+- F: build do commit integrado, nova demonstração sintética isolada; conferir processo, versão, dados, URL e reabertura antes de declarar disponibilidade para UI/UX.
+
+WRITE_SET da retomada: três testes WIP; tests/f1/s8/revisao-atualiza-consulta.test.tsx (Luna responsável exclusivo por eventual correção de sincronização, Codex revisa), este documento; tests/server/prescricao-executavel-http.test.ts e módulos causais somente se houver defeito demonstrado. Demais arquivos de produto da PR73 permanecem sob Codex. Corpus, demonstração congelada e cinco documentos não rastreados da main preservados. Evidências históricas não substituem gates do HEAD final.
+
+Estado: lote A em execução; revisões B/C e preparação somente leitura de F em paralelo. CI inicial bloqueada por mocks sem res.once, sincronização PR27/S8 e gate agregado. Próxima prova: S9/A13/PR27 dirigidos, S8/eRx por Luna; depois baterias e CI finais.
+
+Primeiro marco da retomada: S9/A13/PR27 passaram 13/13 por HTTP real, incluindo replay legado recusado antes do gateway e adulteração com código exato/ledger preservado. Typecheck, fronteiras (585 arquivos, zero exceções) e corpus (241 arquivos) passaram. S8 passou 14/14 por Luna sem alteração; eRx e bateria B/C ainda em execução. Estes resultados não liberam merge antes da revisão independente e CI final.

@@ -5,8 +5,8 @@ import { cumulativos } from "../../src/kernel/projections/cumulativos.js";
 import { projetarSnapshot } from "../../src/kernel/projections/snapshot.js";
 import { TreatmentAdministration } from "../../src/contracts/clinico.js";
 import { administracaoCompleta, eventoQt } from "./fixtures.js";
-import { Readable } from "node:stream";
-import type { IncomingMessage, ServerResponse } from "node:http";
+import { createServer } from "node:http";
+import { once } from "node:events";
 import { abrirLedger } from "../../src/kernel/ledger/db.js";
 import { salvarDraft } from "../../src/kernel/ledger/drafts.js";
 import { gravarOperacao, hashPayload, listarEventos } from "../../src/kernel/ledger/ledger.js";
@@ -102,18 +102,42 @@ describe("Achados adversariais fora da propriedade W3 - expectativas de seguranc
       const sessoes = criarGerenciadorSessao({ medicoId: "m", crm: "CRM-TESTE", senha: "senha-sintetica-teste", duracaoMs: 60000, agora: () => agora });
       const token = sessoes.login("senha-sintetica-teste")!.token;
       const draft = { draftId: "d", patientId: "p", sourceId: "s", rawRef: "opaco", diagnostics: [], revision: 0, criadoEm: agora,
-        payload: { documentId: "doc", documentVersion: 1, documentHash: "hash-exibido", texto: "conteudo-exibido" } };
+        payload: { documentId: "doc", documentVersion: 1, documentHash: "hash-exibido", texto: "conteudo-exibido",
+          contexto: { encounterId: "e", tumorLotId: "t" } } };
       salvarDraft(db, draft);
-      sessoes.registrarBundleExibido(token, { patientId: "p", encounterId: "e", tumorLotId: "t" }, [{ documentId: "doc", documentVersion: 1, conteudoHash: hashConteudoExibido(draft.payload) }]);
-      salvarDraft(db, { ...draft, revision: 1, payload: { ...draft.payload, documentHash: "hash-alterado", texto: "conteudo-nao-exibido" } });
-      const comando = { patientId: "p", tumorLotId: "t", encounterId: "e", bloco: "TUDO", registros: [{ id: "d", expectedRevision: 1 }],
-        documentosExibidos: [{ documentId: "doc", documentVersion: 1 }], reconhecerAlertas: [], idempotencyKey: "operacao-auditoria-13" };
-      const req = Object.assign(Readable.from([JSON.stringify(comando)]), { method: "POST", url: "/consulta/confirmar", headers: { authorization: `Bearer ${token}` } }) as unknown as IncomingMessage;
-      let status = 0;
-      const res = { writeHead(s: number) { status = s; return this; }, end() {} } as unknown as ServerResponse;
-      const gateway = criarGateway({ agora: () => agora, auditar: () => {}, store: memoriaIdempotencia(), executores: {} });
-      await rotear({ db, sessoes, gateway, agora: () => agora, log: () => {} }, req, res);
-      expect(status).toBe(409);
+      sessoes.selecionarConsulta(token, { patientId: "p", encounterId: "e", tumorLotId: "t" });
+      let chamadas = 0;
+      const gateway = criarGateway({ agora: () => agora, auditar: () => {}, store: memoriaIdempotencia(), executores: {
+        IMPRIMIR: { executar: async () => { chamadas++; return { ok: true, recibo: "impressao-sintetica" }; } },
+      } });
+      const deps = { db, sessoes, gateway, agora: () => agora, log: () => {} };
+      const server = createServer((req, res) => { void rotear(deps, req, res); });
+      server.listen(0, "127.0.0.1");
+      await once(server, "listening");
+      try {
+        const address = server.address();
+        if (!address || typeof address === "string") throw new Error("PORTA_AUSENTE");
+        const post = async (path: string, body: unknown) => {
+          const response = await fetch(`http://127.0.0.1:${address.port}${path}`, { method: "POST",
+            headers: { authorization: `Bearer ${token}`, "Content-Type": "application/json" }, body: JSON.stringify(body) });
+          return { status: response.status, data: await response.json() as { codigo?: string } };
+        };
+        const bundle = await post("/consulta/bundle", { patientId: "p", encounterId: "e", tumorLotId: "t", draftIds: ["d"] });
+        expect(bundle.status).toBe(200);
+        expect(bundle.data).toMatchObject({ documentos: [{ draftId: "d", documentId: "doc", documentVersion: 1,
+          conteudo: draft.payload, conteudoHash: hashConteudoExibido(draft.payload) }] });
+        salvarDraft(db, { ...draft, revision: 1, payload: { ...draft.payload, documentHash: "hash-alterado", texto: "conteudo-nao-exibido" } });
+        const eventosAntes = db.prepare("SELECT * FROM clinical_event").all();
+        const operacoesAntes = db.prepare("SELECT * FROM operation").all();
+        const comando = { patientId: "p", tumorLotId: "t", encounterId: "e", bloco: "TUDO", registros: [{ id: "d", expectedRevision: 1 }],
+          documentosExibidos: [{ documentId: "doc", documentVersion: 1 }], reconhecerAlertas: [], idempotencyKey: "operacao-auditoria-13" };
+        const response = await post("/consulta/confirmar", comando);
+        expect(response.status).toBe(409);
+        expect(response.data.codigo).toBe("CONTEUDO_ALTERADO_APOS_EXIBICAO");
+        expect(db.prepare("SELECT * FROM clinical_event").all()).toEqual(eventosAntes);
+        expect(db.prepare("SELECT * FROM operation").all()).toEqual(operacoesAntes);
+        expect(chamadas).toBe(0);
+      } finally { await new Promise<void>(resolve => server.close(() => resolve())); }
     } finally { db.close(); }
   });
 });
