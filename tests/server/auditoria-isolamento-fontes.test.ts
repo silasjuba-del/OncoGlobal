@@ -41,7 +41,7 @@ it("RECIST exige encontro explícito e recusa consulta divergente",async()=>{
  expect(lerRecist(a.db,PACIENTE)).toMatchObject({estado:"PENDENTE",codigo:"CONTEXTO_ENCONTRO_OBRIGATORIO",series:[]});
 });
 
-it("RECIST histórico filtra medição futura e mantém proposta sem escrita",async()=>{
+it.each([null,"sem-data","2030-02-30"])("RECIST filtra futuro conhecido e preserva incerteza de data inválida: %s",async dataInvalida=>{
  const a=await abrir(),tumorLotId="lote-recist",episodioId="episodio-recist";
  const contexto={...ctx,tumorLotId};a.sessoes.selecionarConsulta(a.token,contexto);
  const seed=(id:string,data:unknown,criadoEm:string,tipo="FATO",encounterId=ENCONTRO)=>persistirFixture(a.db,
@@ -55,10 +55,14 @@ it("RECIST histórico filtra medição futura e mantém proposta sem escrita",as
  seed("futuro",{campo:"imagem",valor:"sintetica"},"2026-09-20T12:00:00Z","FATO","consulta-seguinte");
  const serie:RecistSerieInput={patientId:PACIENTE,tumorLotId,episodioId,baselineEventId:"baseline",
   alvos:[{codigo:"L1",tipo:"NAO_NODAL",eixo:"MAIOR",orgaoId:"orgao-sintetico",elegibilidadeBasal:"ELEGIVEL",fonteElegibilidadeIds:["fonte-baseline"]}],
-  pontos:[ponto("baseline","2026-09-01",20),ponto("futuro","2026-09-20",30)]};
+  pontos:[ponto("baseline","2026-09-01",20),ponto("futuro","2026-09-20",30),...(dataInvalida?[ponto("data-ilegivel",dataInvalida,21)]:[])]};
+ if(dataInvalida)seed("data-ilegivel",{campo:"imagem",valor:"sintetica"},"2026-09-03T12:00:00Z");
  seed("serie",serie,"2026-09-02T12:00:00Z","RecistSerie");
  const antes=a.eventos();const r=await a.request("/consulta/recist",contexto);
  expect(r.status).toBe(200);
- expect(r.data.series[0].resultado.pontos.map((p:{eventId:string})=>p.eventId)).toEqual(["baseline"]);
+ if(dataInvalida){
+  expect(r.data.series[0].resultado).toMatchObject({estado:"PENDENTE",pendencias:expect.arrayContaining(["DATA_INVALIDA"])});
+  expect(r.data.series[0].resultado.pontos.map((p:{eventId:string})=>p.eventId)).toContain("data-ilegivel");
+ }else expect(r.data.series[0].resultado.pontos.map((p:{eventId:string})=>p.eventId)).toEqual(["baseline"]);
  expect(r.data.series[0].categoriaNuncaAssinada).toBe(true);expect(a.eventos()).toEqual(antes);
 });

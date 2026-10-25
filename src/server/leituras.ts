@@ -782,7 +782,9 @@ export function lerRecist(db: DatabaseSync, patientId: string, contexto?:{encoun
   if (!series.length) return { estado: "PENDENTE", codigo: "SERIE_RECIST_AUSENTE", series: [] };
   const byId = new Map(all.map((e) => [e.eventId, e]));
   return { estado: "PARCIAL", series: series.map(({ event:serieEvento,value:original }) => {
-    const value={...original,pontos:original.pontos.filter(p=>Date.parse(p.data)<=horizonte)};
+    // Só excluir futuro demonstrável. Data ilegível continua na avaliação como DATA_INVALIDA.
+    const noHorizonte=(data:string)=>!DataCivil.safeParse(data).success || Date.parse(data)<=horizonte;
+    const value={...original,pontos:original.pontos.filter(p=>noHorizonte(p.data))};
     const identidade={eventId:serieEvento.eventId,tumorLotId:value.tumorLotId,episodioId:value.episodioId};
     const sourceIds = new Set(patientEvents.filter(e=>e.tumorLotId===value.tumorLotId||e.tumorLotId===null&&escopoDoEvento(e)==="PACIENTE")
       .flatMap(e=>e.fontes.map(f=>f.sourceId)));
@@ -790,7 +792,7 @@ export function lerRecist(db: DatabaseSync, patientId: string, contexto?:{encoun
       const event = byId.get(p.eventId);
       return p.patientId === patientId && event?.patientId === patientId
         && event.tumorLotId === p.tumorLotId && p.tumorLotId === value.tumorLotId
-        && p.episodioId === value.episodioId&&(!contexto||Date.parse(p.data)<=horizonte);
+        && p.episodioId === value.episodioId&&noHorizonte(p.data);
     });
     const provenance = [...value.alvos.flatMap((a) => a.fonteElegibilidadeIds),
       ...value.pontos.flatMap((p) => [...p.fonteIds, ...p.lesoes.flatMap((l) => l.fonteIds)])];
