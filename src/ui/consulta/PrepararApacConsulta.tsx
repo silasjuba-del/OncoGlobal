@@ -66,6 +66,7 @@ export function PrepararApacConsulta({ porta, contexto, aberto, ocupado = false,
   const [erro, setErro] = useState("");
   const [carregando, setCarregando] = useState(false);
   const [salvando, setSalvando] = useState(false);
+  const salvandoRef = useRef(false);
   const [salva, setSalva] = useState(false);
   const aoAlterarPendenteAtual = useRef(aoAlterarPendente);
   aoAlterarPendenteAtual.current = aoAlterarPendente;
@@ -126,7 +127,7 @@ export function PrepararApacConsulta({ porta, contexto, aberto, ocupado = false,
       geracao.current++;
       abortAtual.current?.abort();
       setBase(null); setEdicao(null); setPrevia(null); setMensagem(""); setErro(""); setSalva(false);
-      setCarregando(false); setSalvando(false);
+      setCarregando(false); setSalvando(false); salvandoRef.current = false;
       aoAlterarPendenteAtual.current?.(false); aoAlterarSalvandoAtual.current?.(false);
       tentativaPreparo.current = null; tentativaConfirmacao.current = null;
     }
@@ -135,6 +136,7 @@ export function PrepararApacConsulta({ porta, contexto, aberto, ocupado = false,
       abortAtual.current?.abort();
       setCarregando(false);
       setSalvando(false);
+      salvandoRef.current = false;
       aoAlterarPendenteAtual.current?.(false); aoAlterarSalvandoAtual.current?.(false);
       return;
     }
@@ -161,13 +163,14 @@ export function PrepararApacConsulta({ porta, contexto, aberto, ocupado = false,
   }
 
   async function preparar() {
-    if (bloqueado || !base || !edicao || !base.prescricao || !porta.prepararApacRascunho) return;
+    if (bloqueado || salvandoRef.current || !base || !edicao || !base.prescricao || !porta.prepararApacRascunho) return;
     const validacao = EdicaoApacRascunhoSchema.safeParse(edicao);
     if (!validacao.success) { setErro("Revise competência e campos administrativos antes de preparar a prévia."); return; }
     const fingerprintPedido = fingerprint(contexto, base.revisao, validacao.data);
     if (tentativaPreparo.current?.fingerprint !== fingerprintPedido)
       tentativaPreparo.current = { fingerprint: fingerprintPedido, id: globalThis.crypto.randomUUID() };
     const token = geracao.current;
+    salvandoRef.current = true;
     setSalvando(true); aoAlterarSalvandoAtual.current?.(true); setErro(""); setMensagem(""); setPrevia(null);
     try {
       const pedido = { contexto, expectedBaseHash: base.revisao,
@@ -182,15 +185,16 @@ export function PrepararApacConsulta({ porta, contexto, aberto, ocupado = false,
     } catch (cause) {
       if (token === geracao.current) setErro(mensagemErroApac(cause));
     } finally {
-      if (token === geracao.current) { setSalvando(false); aoAlterarSalvandoAtual.current?.(false); }
+      if (token === geracao.current) { salvandoRef.current = false; setSalvando(false); aoAlterarSalvandoAtual.current?.(false); }
     }
   }
 
   async function confirmar() {
-    if (!atual || !base || !edicao || !porta.confirmarApacRascunho || bloqueado) return;
+    if (!atual || !base || !edicao || !porta.confirmarApacRascunho || bloqueado || salvandoRef.current) return;
     const token = geracao.current, fingerprintPedido = atual.fingerprint, resposta = atual.resposta;
     if (tentativaConfirmacao.current?.fingerprint !== fingerprintPedido)
       tentativaConfirmacao.current = { fingerprint: fingerprintPedido, id: globalThis.crypto.randomUUID() };
+    salvandoRef.current = true;
     setSalvando(true); aoAlterarSalvandoAtual.current?.(true); setErro(""); setMensagem("");
     try {
       const pedido = ConfirmarApacRascunhoPedidoSchema.parse({ contexto, draftId: resposta.draftId,
@@ -213,7 +217,7 @@ export function PrepararApacConsulta({ porta, contexto, aberto, ocupado = false,
     } catch (cause) {
       if (token === geracao.current) setErro(mensagemErroApac(cause));
     } finally {
-      if (token === geracao.current) { setSalvando(false); aoAlterarSalvandoAtual.current?.(false); }
+      if (token === geracao.current) { salvandoRef.current = false; setSalvando(false); aoAlterarSalvandoAtual.current?.(false); }
     }
   }
 

@@ -186,6 +186,7 @@ export function EditorPrescricaoExecutavel({ base, origemFicha = null, origemAca
   const [itens, setItens] = useState<ItemDraft[]>(() => base?.vigente?.itens.map(paraRascunho) ?? []);
   const [preparacao, setPreparacao] = useState<PreparacaoVisivel | null>(null);
   const [ocupadoLocal, setOcupadoLocal] = useState(false);
+  const emCursoLocal = useRef(false);
   const [mensagem, setMensagem] = useState("");
   const [erros, setErros] = useState<string[]>([]);
   const geracao = useRef(0);
@@ -226,6 +227,7 @@ export function EditorPrescricaoExecutavel({ base, origemFicha = null, origemAca
       setPreparacao(null);
       setMensagem("A base mudou. Os campos editados foram preservados; revise-os e prepare uma nova prévia.");
       setErros([]);
+      emCursoLocal.current = false;
       setOcupadoLocal(false);
       return;
     }
@@ -237,6 +239,7 @@ export function EditorPrescricaoExecutavel({ base, origemFicha = null, origemAca
     setPreparacao(null);
     setMensagem("");
     setErros([]);
+    emCursoLocal.current = false;
     setOcupadoLocal(false);
     pendente.current = false;
     aoAlterarPendente?.(false);
@@ -417,13 +420,14 @@ export function EditorPrescricaoExecutavel({ base, origemFicha = null, origemAca
   }
 
   async function preparar() {
-    if (bloqueado) return;
+    if (bloqueado || emCursoLocal.current) return;
     const payload = construirEdicao();
     if (!payload) return;
     const token = geracao.current;
     const revisaoBase = base?.revisao;
     const chaveSolicitada = chaveDaBase(base);
     if (!revisaoBase || chaveAtual !== chaveSolicitada) return;
+    emCursoLocal.current = true;
     setOcupadoLocal(true); setMensagem(""); setPreparacao(null);
     try {
       const response = await aoPreparar(payload);
@@ -444,16 +448,18 @@ export function EditorPrescricaoExecutavel({ base, origemFicha = null, origemAca
       if (montado.current && geracao.current === token && baseAtual.current === chaveSolicitada)
         setMensagem(error instanceof Error ? error.message : "Não foi possível preparar a prévia da prescrição.");
     } finally {
+      emCursoLocal.current = false;
       if (montado.current) setOcupadoLocal(false);
     }
   }
 
   async function assinar() {
-    if (!atual || bloqueado || cienciaPendente) return;
+    if (!atual || bloqueado || cienciaPendente || emCursoLocal.current) return;
     const token = geracao.current;
     const revisaoBase = base?.revisao;
     const chaveSolicitada = chaveDaBase(base);
     const snapshot = atual;
+    emCursoLocal.current = true;
     setOcupadoLocal(true); setMensagem("");
     try {
       await aoAssinar(snapshot);
@@ -466,6 +472,7 @@ export function EditorPrescricaoExecutavel({ base, origemFicha = null, origemAca
       if (montado.current && geracao.current === token && baseAtual.current === chaveSolicitada)
         setMensagem(error instanceof Error ? error.message : "Não foi possível concluir a assinatura da prescrição.");
     } finally {
+      emCursoLocal.current = false;
       if (montado.current) setOcupadoLocal(false);
     }
   }

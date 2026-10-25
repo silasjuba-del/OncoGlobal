@@ -1,6 +1,6 @@
 import type { AlvoImpressao } from '../../contracts/api/impressao.js';
 export type { AlvoImpressao } from '../../contracts/api/impressao.js';
-import { useState } from "react";
+import { useRef, useState } from "react";
 import type { z } from "zod";
 import { ActionIntent, ConfirmarBloco, type Alerta } from "../../contracts/operacao.js";
 import { Bundle, marcadoInicialmente, type DocumentoBundleVisao } from "./Bundle.js";
@@ -78,9 +78,11 @@ export function BarraFechamento({
 }) {
   const [marcados, setMarcados] = useState(() => marcacaoInicial(documentos));
   const [aviso, setAviso] = useState<string | null>(null);
+  const emDisparoValidar = useRef(false);
+  const emDisparoImprimir = useRef(false);
 
   function entregar(bloco: Bloco) {
-    if (ocupado) return;
+    if (ocupado || emDisparoValidar.current) return;
     const payload = montarConfirmarBloco({
       patientId,
       tumorLotId,
@@ -97,11 +99,16 @@ export function BarraFechamento({
       setAviso("comando incompleto");
       return;
     }
+    emDisparoValidar.current = true;
+    queueMicrotask(() => {
+      emDisparoValidar.current = false;
+    });
     setAviso(null);
     onValidar(parsed.data);
   }
 
   function imprimir() {
+    if (ocupado || emDisparoImprimir.current) return;
     if (!alvoImpressao) {
       setAviso("nada selecionado para imprimir");
       return;
@@ -118,6 +125,10 @@ export function BarraFechamento({
       setAviso("comando incompleto");
       return;
     }
+    emDisparoImprimir.current = true;
+    queueMicrotask(() => {
+      emDisparoImprimir.current = false;
+    });
     setAviso(null);
     onImprimir(parsed.data);
   }
