@@ -768,15 +768,23 @@ export function lerMensagensChat(db: DatabaseSync, setor: SetorChat, contexto: {
     .map((m) => ({ mensagemId: m.value.mensagemId, autor: m.value.autor, texto: m.value.texto }));
 }
 export function lerRecist(db: DatabaseSync, patientId: string, contexto?:{encounterId:string;tumorLotId:string|null;agora:string}) {
+  if (!contexto || !contexto.encounterId.trim() || !Number.isFinite(Date.parse(contexto.agora)))
+    return { estado: "PENDENTE", codigo: "CONTEXTO_ENCONTRO_OBRIGATORIO", series: [] };
   const originais=eventos(db),doPaciente=originais.filter(e=>e.patientId===patientId);
-  const horizonte=contexto?horizonteDoEncontro(doPaciente,contexto.encounterId,contexto.agora):Infinity;
+  if (!doPaciente.length) return { estado: "PENDENTE", codigo: "PACIENTE_NAO_ENCONTRADO", series: [] };
+  if (!doPaciente.some(e=>e.encounterId===contexto.encounterId))
+    return { estado: "PENDENTE", codigo: "ENCONTRO_FORA_DO_ESCOPO", series: [] };
+  const horizonte=horizonteDoEncontro(doPaciente,contexto.encounterId,contexto.agora);
   const all=originais.filter(e=>Date.parse(e.criadoEm)<=horizonte),patientEvents=all.filter(e=>e.patientId===patientId);
   const series = porTipo(all, "RecistSerie", RecistSerieSchema).filter(({ event, value }) =>
-    event.patientId === patientId && value.patientId === patientId&&(!contexto||value.tumorLotId===contexto.tumorLotId&&event.tumorLotId===contexto.tumorLotId));
+    event.patientId === patientId && value.patientId === patientId&&value.tumorLotId===contexto.tumorLotId&&event.tumorLotId===contexto.tumorLotId);
   if (!patientEvents.length) return { estado: "PENDENTE", codigo: "PACIENTE_NAO_ENCONTRADO", series: [] };
   if (!series.length) return { estado: "PENDENTE", codigo: "SERIE_RECIST_AUSENTE", series: [] };
   const byId = new Map(all.map((e) => [e.eventId, e]));
-  return { estado: "PARCIAL", series: series.map(({ event:serieEvento,value }) => {
+  return { estado: "PARCIAL", series: series.map(({ event:serieEvento,value:original }) => {
+    // Só excluir futuro demonstrável. Data ilegível continua na avaliação como DATA_INVALIDA.
+    const noHorizonte=(data:string)=>!DataCivil.safeParse(data).success || Date.parse(data)<=horizonte;
+    const value={...original,pontos:original.pontos.filter(p=>noHorizonte(p.data))};
     const identidade={eventId:serieEvento.eventId,tumorLotId:value.tumorLotId,episodioId:value.episodioId};
     const sourceIds = new Set(patientEvents.filter(e=>e.tumorLotId===value.tumorLotId||e.tumorLotId===null&&escopoDoEvento(e)==="PACIENTE")
       .flatMap(e=>e.fontes.map(f=>f.sourceId)));
@@ -784,7 +792,7 @@ export function lerRecist(db: DatabaseSync, patientId: string, contexto?:{encoun
       const event = byId.get(p.eventId);
       return p.patientId === patientId && event?.patientId === patientId
         && event.tumorLotId === p.tumorLotId && p.tumorLotId === value.tumorLotId
-        && p.episodioId === value.episodioId&&(!contexto||Date.parse(p.data)<=horizonte);
+        && p.episodioId === value.episodioId&&noHorizonte(p.data);
     });
     const provenance = [...value.alvos.flatMap((a) => a.fonteElegibilidadeIds),
       ...value.pontos.flatMap((p) => [...p.fonteIds, ...p.lesoes.flatMap((l) => l.fonteIds)])];

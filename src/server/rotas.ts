@@ -367,9 +367,15 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
       );
     }
     if (rota === "recist") {
-      const parsed = z.object({ patientId: Id }).strict().safeParse(raw);
+      const parsed = z.object({ patientId: Id, encounterId: Id.optional(), tumorLotId: Id.nullable().optional() }).strict().safeParse(raw);
       if (!parsed.success) return reply(400, "PAYLOAD_INVALIDO");
-      const result = lerRecist(deps.db, parsed.data.patientId);
+      if (parsed.data.encounterId === undefined || parsed.data.tumorLotId === undefined)
+        return reply(409, "CONTEXTO_ENCONTRO_OBRIGATORIO");
+      const atual = deps.sessoes.consultaSelecionada(token);
+      if (!atual || atual.patientId !== parsed.data.patientId || atual.encounterId !== parsed.data.encounterId
+        || (atual.tumorLotId ?? null) !== parsed.data.tumorLotId) return reply(409, "CONTEXTO_CONSULTA_ALTERADO");
+      const result = lerRecist(deps.db, parsed.data.patientId, {encounterId: parsed.data.encounterId,
+        tumorLotId: parsed.data.tumorLotId, agora: deps.agora()});
       return reply(
         result.estado === "PENDENTE" ? 404 : 200,
         "codigo" in result ? result.codigo : "RECIST_PROPOSTO",

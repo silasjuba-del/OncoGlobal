@@ -146,6 +146,7 @@ export function RevisaoExtracaoLocal({ porta, contexto, patientLabel, aoFatosCon
     {mensagem ? <p role="status">{mensagem}</p> : null}
     {fontesSemVinculo.length ? <section aria-label="Fontes sem vínculo">
       <h3>Trechos sem paciente vinculado</h3>
+      <p>Fila global de documentos sem vínculo: estes trechos ainda não pertencem à consulta aberta.</p>
       <p>O vínculo exige sua escolha explícita. Confira o trecho original antes de associá-lo a {patientLabel ?? patientId} ({patientId}).</p>
       <label>Trecho sem vínculo <select aria-label="Trecho sem vínculo" disabled={ocupado}
         value={fontePendenteId} onChange={(e) => setFontePendenteId(e.target.value)}>
