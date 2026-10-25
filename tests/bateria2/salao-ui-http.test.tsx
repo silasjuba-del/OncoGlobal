@@ -42,6 +42,7 @@ it.each([false,true])('6A/6B: HTTP + tela real + SQLite preservam relato até de
   expect(await screen.findByText(/fiquei toda vermelha/)).toBeTruthy();expect(screen.getByText(/melhorou, esquece/)).toBeTruthy();
   cleanup();render(<TelaSalao porta={porta}/>);expect(await screen.findByText(/fiquei toda vermelha/)).toBeTruthy();
   fireEvent.change(screen.getByLabelText('Decisão médica sobre o relato'),{target:{value:'Relato revisto; orientação documentada na consulta sintética.'}});
+  await waitFor(()=>expect((screen.getByRole('button',{name:'Registrar revisão deste relato'}) as HTMLButtonElement).disabled).toBe(false));
   fireEvent.click(screen.getByRole('button',{name:'Registrar revisão deste relato'}));
   await waitFor(()=>expect(screen.queryByLabelText('Relato de infusão pendente')).toBeNull());
   expect(listarEventos(db,ctx.patientId).filter(e=>e.tipo==='ReviewDecision')).toHaveLength(1);

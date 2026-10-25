@@ -7,9 +7,18 @@ import { relatosInfusaoPendentes } from '../../src/server/relatosInfusaoCanal.js
 import { rotearDutos } from '../../src/server/dutos.js';
 import { listarEventos } from '../../src/kernel/comandos/portas.js';
 import { ambiente,ctx,EM } from './fixtures.js';
+import { hashCanonico } from '../../src/rules/conteudoCanonico.js';
+import type { RelatoInfusaoPendente } from '../../src/server/relatosInfusaoCanal.js';
 
 const remetente='+55'+'00000008888';
 const cadastros=[{patientId:ctx.patientId,identificadores:[{tipo:'TELEFONE' as const,valor:remetente}],chaveDemografica:null,nome:"Paciente Sintético Bateria2"}];
+function exibirRelato(a:ReturnType<typeof ambiente>,relato:RelatoInfusaoPendente){
+ const contexto=relato.contextosRevisao.find(c=>c.patientId===ctx.patientId&&c.encounterId===ctx.encounterId&&c.tumorLotId===null);
+ if(!contexto)throw Error('CONTEXTO_NULL_DO_RELATO_AUSENTE');
+ const registrar=a.acesso.sessoes.registrarConteudoExibido;
+ if(!registrar)throw Error('RECIBO_DE_EXIBICAO_INDISPONIVEL');
+ registrar.call(a.acesso.sessoes,a.acesso.token,contexto,'RELATO_INFUSAO',relato.mensagemId,hashCanonico(relato));
+}
 export function receber(a:ReturnType<typeof ambiente>,id:string,texto:string,em=EM){
  const r=receberTransporteSintetico(a.db,{accountId:'bateria2-sintetica',canal:'WHATSAPP_SERVICO',providerMessageId:id,senderRef:remetente,providerSentAt:em,ingestedAt:em,
   conteudo:{tipo:'TEXT',texto,contentSha256:createHash('sha256').update(texto).digest('hex')},cadastros});
@@ -71,6 +80,7 @@ it('6A retratação e processamento administrativo não apagam relato; somente d
   expect(relatosInfusaoPendentes(a.db,listarEventos(a.db,ctx.patientId),'2026-11-09T18:00:00Z')).toHaveLength(1);
   expect(ler()).toHaveLength(1);expect(ler()[0]!.contextoMensagens.map(m=>m.texto).join(' ')).toContain('esquece');
   const r=ler()[0]!;
+  exibirRelato(a,r);
   const decisao={contexto:{...ctx,tumorLotId:null,operationId:'revisao-sintetica'},mensagemId:id,payloadSha256:r.payloadSha256,decisao:'Relato revisto; conduta registrada pelo médico sintético.'};
   expect(rotearDutos({db:a.db,sessoes:a.acesso.sessoes,agora:()=>EM},a.acesso.token,'/salao/revisar-relato-canal',decisao,a.login.sessao)?.status).toBe(200);
   expect(ler()).toHaveLength(0);

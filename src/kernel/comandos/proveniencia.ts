@@ -8,6 +8,7 @@ import { prepararRevisaoExtracao } from "../extracao/prepararRevisao.js";
 import { hashCanonico } from "../../modules/tipos.js";
 import { lerDraft } from "../ledger/drafts.js";
 import type { Confirmacao } from "../ledger/writeRouter.js";
+import {contextoGatesExtracao} from './contextoGates.js';
 
 /** Leitura histórica continua usando Fonte. Esta exigência vale para novas declarações. */
 export const FonteNovaDeclarada = Fonte.refine(f=>f.sourceId.trim().length>0&&f.versao.trim().length>0
@@ -65,9 +66,11 @@ function validarRevisaoDocumental(db:DatabaseSync,req:Confirmacao,draft:DraftEnv
     const exceptions=fonte.state.confirmationRequired.filter(e=>e&&typeof e==="object"&&"segmentId" in e&&e.segmentId===link.segmentId);
     const reconstruida=prepararRevisaoExtracao({draftId:original.draftId,sourceId:original.sourceId,sourceType:fonte.input.sourceType,
       rawTranscript:segmento.rawTranscript,...(fonte.input.captureMethod?{captureMethod:fonte.input.captureMethod}:{}),vinculoConfirmado:true,
-      facts,exceptions,...contexto,factIds:resumo.selectedFactIds,operationId:resumo.review.operationId,medicoId:resumo.review.medicoId,em:resumo.review.em,
+      facts,exceptions,...contexto,contextoGates:contextoGatesExtracao(db,contexto,req.autorizadoEm??req.em),factIds:resumo.selectedFactIds,operationId:resumo.review.operationId,medicoId:resumo.review.medicoId,em:resumo.review.em,
       ...(resumo.incluirTextoOriginal?{incluirTextoOriginal:true,segmentoVinculado:{id:segmento.id,...(segmento.page?{page:segmento.page}:{})}}:{}),origem:resumo.origem});
     if(reconstruida.draftId!==draft.draftId||hashCanonico(reconstruida.payload)!==hashCanonico(draft.payload))return negar();
+    const ciencias=(reconstruida.payload.verificacoesClinicas??[]).filter(g=>['G-07','G-08'].includes(g.gate)&&g.decisao==='ALERTA').map(g=>g.id);
+    if(ciencias.length&&(!Array.isArray(req.cienciasGates)||!ciencias.every(id=>req.cienciasGates!.includes(id))))throw new ErroProveniencia('CIENCIA_GATES_OBRIGATORIA');
     const registros=req.registros.filter(r=>r.draftId===draft.draftId);
     if(registros.length!==req.registros.length||registros.length!==reconstruida.registros.length)return negar();
     for(const [i,r] of registros.entries()){

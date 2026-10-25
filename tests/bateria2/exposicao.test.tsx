@@ -18,8 +18,9 @@ it('revisão independente: replay histórico não soma duas vezes, conflito não
 });
 it('revisão independente: administração legada sem fonte no envelope torna total pendente',()=>{
  const a=ambiente();try {
-  a.assinar();const antiga=entrada('legada',102).administracao;
+  const fontes=a.assinar();const antiga=entrada('legada',102).administracao;
   a.seed('TreatmentAdministration',{...antiga,fonte:{...fonte,sourceId:'fonte-legada-separada'}});
+  a.exibirFontesDuto([fontes.documentoEventId,fontes.cicloEventId]);
   const nova=entrada('nova',102);Object.assign(nova.administracao,{superficieCorporalNoDia:{valorM2:1.7,fonte}});
   expect(registrar(a.db,a.acesso,nova).ok).toBe(true);
   const exposicao=projetarDutos(listarEventos(a.db,ctx.patientId),ctx).exposicoesLocais![0]!;
@@ -36,7 +37,7 @@ it('7A: número externo sem unidade/fármaco/origem não vira total confirmado',
 it('7B: tela soma somente 102+102+45,9 mg / SC histórica 1,70, não usa SC nova 1,62',()=>{
  const a=ambiente();try{
   for(const [i,dose] of [102,102,45.9].entries()){
-   const ciclo=`c${i+1}`;a.assinar(ciclo);
+   const ciclo=`c${i+1}`,fontes=a.assinar(ciclo);a.exibirFontesDuto([fontes.documentoEventId,fontes.cicloEventId]);
    const p=entrada(`a${i+1}`,dose,ciclo);
    Object.assign(p.administracao,{medidaInformada:{unidade:'mg',valor:dose},superficieCorporalNoDia:{valorM2:1.70,fonte}});
    if(i===2)Object.assign(p.administracao,{status:'INTERROMPIDA',motivo:'Interrupção sintética documentada'});
@@ -52,7 +53,8 @@ it('7B: tela soma somente 102+102+45,9 mg / SC histórica 1,70, não usa SC nova
 });
 it('8A/8B: IDs distintos preservados com aviso; unidade ausente nunca fica silenciosa',()=>{
  const a=ambiente();try {
-  a.assinar();expect(registrar(a.db,a.acesso,entrada('a1',64)).ok).toBe(true);expect(registrar(a.db,a.acesso,entrada('a2',64)).ok).toBe(true);
+  const fontes=a.assinar();a.exibirFontesDuto([fontes.documentoEventId,fontes.cicloEventId]);
+  expect(registrar(a.db,a.acesso,entrada('a1',64)).ok).toBe(true);expect(registrar(a.db,a.acesso,entrada('a2',64)).ok).toBe(true);
   const v=projetarDutos(listarEventos(a.db,ctx.patientId),ctx);expect(v.administracoes).toHaveLength(2);
   expect(v.administracoes.every(x=>x.avisos?.some(t=>t.includes('Unidade de entrada não documentada')))).toBe(true);
   expect(v.administracoes.every(x=>x.avisos?.some(t=>t.includes('registros preservados')))).toBe(true);
@@ -60,7 +62,8 @@ it('8A/8B: IDs distintos preservados com aviso; unidade ausente nunca fica silen
 });
 it('8B: volume exige concentração da solução e fonte; nunca usa concentração do frasco implícita',()=>{
  const a=ambiente();try{
-  a.assinar();const p=entrada('a1',126);
+  const fontes=a.assinar();a.exibirFontesDuto([fontes.documentoEventId,fontes.cicloEventId]);
+  const p=entrada('a1',126);
   Object.assign(p.administracao,{medidaInformada:{unidade:'mL',valor:6.3}});
   expect(registrar(a.db,a.acesso,p).ok).toBe(false);
   Object.assign(p.administracao,{medidaInformada:{unidade:'mL',valor:6.3,concentracaoSolucaoMgMl:20,fonteConcentracao:fonte}});

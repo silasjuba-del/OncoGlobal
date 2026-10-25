@@ -4,6 +4,7 @@ import { ClinicalFact, FactSourceType, type ClinicalFact as FatoClinico } from "
 import type { Fonte } from "../../contracts/base.js";
 import { normalizarDataCivil } from "./normalizacao.js";
 import { fonteDeVoz, type MetodoCapturaTranscricao } from "../../contracts/capturaTranscricao.js";
+import {avaliarGatesExtracao,type AvisoGate,type ContextoGates} from './gatesClinicos.js';
 
 export interface RevisaoExtracaoPreparada {
   readonly draftId: string;
@@ -13,6 +14,9 @@ export interface RevisaoExtracaoPreparada {
     readonly contexto: { readonly patientId: string; readonly encounterId: string; readonly tumorLotId: string | null };
     readonly status: "RASCUNHO";
     readonly resumo: string;
+    readonly politicaGates?:'L4-GATES@1';
+    readonly verificacoesClinicas?:readonly AvisoGate[];
+    readonly contextoGates?:ContextoGates;
     readonly incluirTextoOriginal?: true;
     readonly selectedFactIds: readonly string[];
     readonly facts: readonly FatoClinico[];
@@ -81,6 +85,9 @@ function secao(domain: FatoClinico["domain"]): string {
 
 /** Builds a physician-selected review from the server's persisted extraction draft. */
 export function prepararRevisaoExtracao(input: {
+  readonly contextoGates?:ContextoGates;
+  /** Compatibilidade exclusiva de replay já persistido; operações novas sempre aplicam gates. */
+  readonly aplicarGates?:boolean;
   readonly draftId: string;
   readonly sourceId: string;
   readonly rawTranscript: string;
@@ -119,6 +126,8 @@ export function prepararRevisaoExtracao(input: {
   const selected = input.factIds.map((id) => byId.get(id));
   if (selected.some((fact) => !fact)) throw new Error("FATO_NAO_ENCONTRADO");
   const escolhidos = selected as FatoClinico[];
+  const gates=input.aplicarGates===false?[]:avaliarGatesExtracao(escolhidos,input.rawTranscript,input.contextoGates).filter(g=>g.decisao!=='PASSA');
+  const cienciaExigida=gates.filter(g=>['G-07','G-08'].includes(g.gate)&&g.decisao==='ALERTA').map(g=>g.id);
   const contentHash = hash(input.rawTranscript);
   const sourceClass = classeFonte(input.sourceType);
   const fonteDoFato = (fact: FatoClinico): Fonte => {
@@ -140,7 +149,7 @@ export function prepararRevisaoExtracao(input: {
 
   const linhas = escolhidos.map((fact) => {
     const data = dataIso(fact.date);
-    const incerto = fact.requiresConfirmation || fact.evidence === "UNCERTAIN" || fact.evidence === "INFERRED";
+    const incerto = fact.requiresConfirmation || fact.evidence === "UNCERTAIN" || fact.evidence === "INFERRED"||gates.some(g=>g.gate==='G-09'&&g.factIds.includes(fact.id));
     const estado = incerto
       ? "candidato selecionado para revisão; incerteza original preservada e requer confirmação clínica adicional"
       : "fato selecionado para revisão médica";
@@ -160,6 +169,7 @@ export function prepararRevisaoExtracao(input: {
   const blocos = [...new Set(linhas.map((item) => item.secao))].map((titulo) =>
     [titulo, ...linhas.filter((item) => item.secao === titulo).map((item) => item.texto)].join("\n"));
   const resumo = ["Evolução clínica — rascunho de revisão médica", ...blocos,
+    ...(gates.length?['Verificações clínicas',...gates.map(g=>`${g.gate} · ${g.decisao}: ${g.motivo} · fontes: ${g.sourceIds.join(', ')}`)]:[]),
     ...(input.incluirTextoOriginal === true ? ["Texto original do trecho vinculado — inclusão selecionada pelo médico",
       `Fonte ${input.sourceId}; segmento ${input.segmentoVinculado!.id}; transcrição literal, sem conversão em fatos.`,
       input.rawTranscript] : []),
@@ -172,6 +182,7 @@ export function prepararRevisaoExtracao(input: {
     kind: "EVOLUCAO_RASCUNHO",
     contexto: { patientId: input.patientId, encounterId: input.encounterId, tumorLotId: input.tumorLotId },
     status: "RASCUNHO", resumo, selectedFactIds: [...input.factIds], facts: escolhidos,
+    ...(gates.length?{politicaGates:'L4-GATES@1' as const,verificacoesClinicas:gates,contextoGates:input.contextoGates??{sexoCadastral:null,fatos:[],referencias:[]}}:{}),
     ...(input.incluirTextoOriginal === true ? { incluirTextoOriginal: true as const } : {}),
     fontes, review: { medicoId: input.medicoId, em: input.em, operationId: input.operationId },
     ...(input.origem ? { origem: { ...input.origem } } : {}),
@@ -181,7 +192,8 @@ export function prepararRevisaoExtracao(input: {
     const qualificacaoCompativelComFatoAtual = q === undefined
       || (q.polaridade === "AFIRMADA" && q.sujeito !== "TERCEIRO"
         && q.temporalidade !== "HISTORICA" && q.temporalidade !== "FUTURA");
-    const fatoExplicito = fact.evidence === "EXPLICIT" && !fact.requiresConfirmation && qualificacaoCompativelComFatoAtual;
+    const fatoExplicito = fact.evidence === "EXPLICIT" && !fact.requiresConfirmation && qualificacaoCompativelComFatoAtual
+      &&!gates.some(g=>g.gate==='G-09'&&g.factIds.includes(fact.id));
     const clinicalDate = fatoExplicito ? dataIso(fact.date) : null;
     const campo = fact.domain === "stage" ? "TNM"
       : fact.domain === "lab" ? `extracao.lab:${String(objeto(fact.value)?.marker ?? fact.id).toLocaleUpperCase("pt-BR")}`
@@ -193,6 +205,7 @@ export function prepararRevisaoExtracao(input: {
       sourceId: fact.sourceId,
       fontes: [source],
       payload: fatoExplicito ? { campo, domain: fact.domain,
+        ...(gates.some(g=>g.factIds.includes(fact.id))?{verificacoesClinicas:gates.filter(g=>g.factIds.includes(fact.id))}:{}),
         valor: fact.value,
         sourceId: fact.sourceId, factId: fact.id, sourceType: fact.sourceType,
         ...(fact.captureMethod ? { captureMethod: fact.captureMethod } : {}),
@@ -213,6 +226,7 @@ export function prepararRevisaoExtracao(input: {
   registros.push({ eventId: `review-summary-${hash(input.operationId).slice(0, 32)}`,
     tipo: "ReviewDecision", sourceId: input.sourceId, fontes,
     payload: { kind: "ExtracaoResumoRevisado", draftId, draftRevision: registros.length + 1,
+      ...(cienciaExigida.length?{cienciasGatesConfirmadas:cienciaExigida}:{}),
       conteudoHash: hashCanonico(payload), sourceId: input.sourceId, sourceContentHash: contentHash,
       origem: input.origem ? { ...input.origem } : null } });
   return { draftId, sourceId: input.sourceId, payload, registros };

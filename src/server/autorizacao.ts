@@ -9,6 +9,7 @@ import { validarReferenciaApac } from "../modules/apac/validacaoPersistida.js";
 import { resolverPrescricaoDuto } from "./dutos.js";
 import { dadosDoEvento, eventosVigentes } from "../kernel/projections/snapshot.js";
 import { revalidarAutorizacaoSaidaCanalNoLedger } from "./canalResposta.js";
+import { provarDocumentoAssinado } from '../kernel/ledger/provaDocumento.js';
 
 type Intent = z.infer<typeof ActionIntent>;
 export type Autorizacao = { ok: true } | { ok: false; codigo: string };
@@ -50,13 +51,9 @@ export function autorizarSaida(db: DatabaseSync, intent: Intent, sigtapAtual?: (
       return {ok:true};
     }
   }
-  const assinado = vigentes.find((e) => {
-    if (e.revisao !== "ASSINADO" || e.encounterId !== encounterId) return false;
-    // writeRouter guarda { reviewDecisionId, data: { data, signature } } (ver rotas.confirmarBloco).
-    type Sig = { documentId?: unknown; documentVersion?: unknown };
-    const sig = (e.payload as { data?: { signature?: Sig } } | null)?.data?.signature;
-    return sig?.documentId === intent.objeto.id && sig.documentVersion === intent.objeto.versao;
-  });
+  const candidatos=vigentes.filter(e=>{if(e.encounterId!==encounterId)return false;const prova=provarDocumentoAssinado(e);
+    return prova?.corpo.documentId===intent.objeto.id&&prova.corpo.documentVersion===intent.objeto.versao;});
+  const assinado=candidatos.length===1?candidatos[0]:null;
   if (!assinado) return { ok: false, codigo: "ARTEFATO_NAO_ASSINADO" };
   const corpo=dadosDoEvento(assinado)?.data;
   if(documentoReceitaDosePendente(corpo))return {ok:false,codigo:'RECEITA_DOSE_PENDENTE'};
@@ -65,7 +62,7 @@ export function autorizarSaida(db: DatabaseSync, intent: Intent, sigtapAtual?: (
     if(!Array.isArray(refs))return {ok:false,codigo:'CONJUNTO_INCOMPLETO'};
     for(const ref of refs){
       const filhos=vigentes.filter(e=>e.tipo==='DOCUMENTO'&&e.revisao==='ASSINADO'&&e.encounterId===assinado.encounterId&&e.tumorLotId===assinado.tumorLotId)
-        .map(e=>dadosDoEvento(e)?.data as Record<string,unknown>|undefined).filter(d=>d?.documentId===ref?.documentId&&d?.documentVersion===ref?.documentVersion);
+        .map(e=>provarDocumentoAssinado(e)?.corpo).filter(d=>d?.documentId===ref?.documentId&&d?.documentVersion===ref?.documentVersion);
       if(filhos.length!==1||filhos[0]?.tipoDocumento==='FLASH_CONJUNTO_IMPRESSAO')return {ok:false,codigo:'CONJUNTO_INCOMPLETO'};
       if(documentoReceitaDosePendente(filhos[0]))return {ok:false,codigo:'RECEITA_DOSE_PENDENTE'};
     }

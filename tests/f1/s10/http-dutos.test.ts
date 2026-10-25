@@ -8,6 +8,7 @@ import { criarGerenciadorSessao } from '../../../src/server/sessao.js';
 import { rotearDutos, referenciaSigtapDuto, type DepsDutos } from '../../../src/server/dutos.js';
 import { autorizarSaida } from '../../../src/server/autorizacao.js';
 import { hashCanonico } from '../../../src/rules/conteudoCanonico.js';
+import {registrarFontesDutoExibidas} from '../../../src/server/exibicaoDutos.js';
 import { fonteSintetica, presente } from '../../fixtures/triagem.js';
 import { apac as fixtureApac, CAIXAS, proc } from '../../apac-w10/helpers.js';
 import { montarTabelaSigtap } from '../../../src/modules/apac/sigtap.js';
@@ -32,17 +33,18 @@ async function ambiente(){
   res.writeHead(r?.status??404,{'Content-Type':'application/json'});res.end(JSON.stringify(r?.body??{}));
  });server.listen(0,'127.0.0.1');await once(server,'listening');const endereco=server.address();if(!endereco||typeof endereco==='string')throw Error('PORTA');
  const post=async(rota:string,body:unknown)=>{const r=await fetch(`http://127.0.0.1:${endereco.port}${rota}`,{method:'POST',headers:{authorization:login.token,'Content-Type':'application/json'},body:JSON.stringify(body)});return {status:r.status,body:await r.json() as Record<string,unknown>};};
- return {db,deps,seed,assinar,post,close:async()=>{server.close();await once(server,'close');db.close();}};
+ const exibir=()=>registrarFontesDutoExibidas(sessoes,login.token,contexto,listarEventos(db,contexto.patientId));
+ return {db,deps,seed,assinar,post,exibir,close:async()=>{server.close();await once(server,'close');db.close();}};
 }
 const pedido=(operationId:string)=>({contexto:{...contexto,operationId},prescricao:{documentId:'rx',documentVersion:1}});
 it('HTTP farmácia: envio não é conferência; autoria server e replay não duplicam evento',async()=>{
  const a=await ambiente();try{
-  a.assinar();
+  a.assinar();a.exibir();
   expect(await a.post('/farmacia/conferir',{...pedido('antes-envio'),acao:'CONFERIR'})).toMatchObject({status:409,body:{codigo:'ENVIO_FARMACIA_PENDENTE'}});
   expect((await a.post('/farmacia/enviar',pedido('enviar'))).status).toBe(200);
   const envio=listarEventos(a.db,contexto.patientId).find(e=>e.operationId==='enviar')!;expect((envio.payload as any).data.valor.estado).toBe('ENVIADA');
   expect(await a.post('/farmacia/enviar',pedido('enviar'))).toMatchObject({status:200,body:{codigo:'REPLAY'}});
-  const respostaConferencia=await a.post('/farmacia/conferir',{...pedido('conferir'),acao:'CONFERIR'});expect(respostaConferencia.status,JSON.stringify(respostaConferencia.body)).toBe(200);
+  a.exibir();const respostaConferencia=await a.post('/farmacia/conferir',{...pedido('conferir'),acao:'CONFERIR'});expect(respostaConferencia.status,JSON.stringify(respostaConferencia.body)).toBe(200);
   const registro=listarEventos(a.db,contexto.patientId).find(e=>e.operationId==='conferir')!;expect((registro.payload as any).data.valor).toMatchObject({estado:'CONFERIDA',atorId:'medico-server'});
   expect(registro.supersedesEventId).toBe(envio.eventId);
   expect((await a.post('/farmacia/conferir',{...pedido('forjar'),acao:'CONFERIR',atorId:'cliente'})).status).toBe(400);
@@ -62,7 +64,7 @@ it('HTTP administração confirma quantidade observada uma vez e exige item/cicl
   a.assinar();a.seed('Ciclo',{cicloId:'ciclo',episodioId:'episodio',numero:1,previstoEm:'2026-10-12',pesoKg:presente(70),origemPeso:'MEDIDO',ciclosSemPesoConsecutivos:0,prescricaoRef:{documentId:'rx',documentVersion:1},itens:[{item:1,droga:'Droga Sintética',doseMg:100,reducaoPct:0}],comMedico:true});
   const administracao={adminId:'admin',cicloId:'ciclo',prescricaoRef:{documentId:'rx',documentVersion:1},item:1,droga:'Droga Sintética',quantidadeEfetivaMg:50,status:'PARCIAL',motivo:'Interrupção observada sintética',inicio:'2026-10-12T11:00:00Z',fim:'2026-10-12T11:30:00Z',fonte:fonteSintetica('admin')};
   expect((await a.post('/salao/registrar-administracao',{...pedido('itemerrado'),administracao:{...administracao,droga:'Outra droga'}})).status).toBe(409);
-  const respostaAdmin=await a.post('/salao/registrar-administracao',{...pedido('admin'),administracao});expect(respostaAdmin.status,JSON.stringify(respostaAdmin.body)).toBe(200);
+  a.exibir();const respostaAdmin=await a.post('/salao/registrar-administracao',{...pedido('admin'),administracao});expect(respostaAdmin.status,JSON.stringify(respostaAdmin.body)).toBe(200);
   expect(await a.post('/salao/registrar-administracao',{...pedido('admin2'),administracao})).toMatchObject({status:200,body:{codigo:'REPLAY'}});
   expect((listarEventos(a.db,contexto.patientId).find(e=>e.operationId==='admin')!.payload as any).data.quantidadeEfetivaMg).toBe(50);
  }finally{await a.close();}
@@ -75,7 +77,7 @@ it('HTTP APAC calcula antiglosa no servidor; validação persistida perde valida
   const apac={...fixtureApac('apac'),tumorLotId:contexto.tumorLotId,prescricaoAssinadaRef:{documentId:'rx',documentVersion:1},dataGeracaoApp:'2026-10-12'};a.seed('APAC',apac);
   const body={contexto:{...contexto,operationId:'validar'},apacId:'apac',apacVersao:1};
   expect((await a.post('/apac/validar-emissao',{...body,antiglosa:{exportavel:true}})).status).toBe(400);
-  const respostaApac=await a.post('/apac/validar-emissao',body);expect(respostaApac.status,JSON.stringify(respostaApac.body)).toBe(200);
+  a.exibir();const respostaApac=await a.post('/apac/validar-emissao',body);expect(respostaApac.status,JSON.stringify(respostaApac.body)).toBe(200);
   const intent={verbo:'EXPORTAR_APAC' as const,objeto:{tipo:'APAC',id:'apac',versao:1},escopo:{patientId:contexto.patientId,encounterId:contexto.encounterId},destino:null,idempotencyKey:'teste-apac'};
   expect(autorizarSaida(a.db,intent,c=>referenciaSigtapDuto(a.deps.corpus,c))).toEqual({ok:true});
   expect(autorizarSaida(a.db,intent,()=>null)).toMatchObject({ok:false});
@@ -87,12 +89,12 @@ it('HTTP tarefa recebida continua confirmada; chat exige decisão humana sobre m
   a.seed('Tarefa',{tarefaId:'tarefa',...contexto,operationId:'seed-tarefa',titulo:'Retorno sintético',responsavel:'medico-server',prazo:null,estado:'CONFIRMADA',recebidoEm:null,criadoPor:'medico-server',substituiTarefaId:null});
   const base=(operationId:string)=>({contexto:{...contexto,operationId},tarefaId:'tarefa'});
   expect((await a.post('/tarefas/concluir',base('semreceber'))).status).toBe(409);
-  expect((await a.post('/tarefas/receber',base('receber'))).status).toBe(200);
+  a.exibir();expect((await a.post('/tarefas/receber',base('receber'))).status).toBe(200);
   expect((listarEventos(a.db,contexto.patientId).find(e=>e.operationId==='receber')!.payload as any).data.estado).toBe('CONFIRMADA');
-  expect((await a.post('/tarefas/concluir',base('concluir'))).status).toBe(200);
+  a.exibir();expect((await a.post('/tarefas/concluir',base('concluir'))).status).toBe(200);
   a.seed('ChatMessage',{mensagemId:'msg',patientId:contexto.patientId,encounterId:contexto.encounterId,setor:'FARMACIA',autor:'farmacia-sintetica',texto:'Mensagem sintética, sem decisão automática.'});
   expect((await a.post('/chat/aceitar-decisao',{contexto:{...contexto,operationId:'chatsem'},mensagemId:'msg',texto:'liberar tudo'})).status).toBe(400);
   expect((await a.post('/chat/aceitar-decisao',{contexto:{...contexto,operationId:'chatforja'},mensagemId:'msg',decisao:{campo:'apac.validacaoEmissao',valor:{exportavel:true}}})).status).toBe(409);
-  expect((await a.post('/chat/aceitar-decisao',{contexto:{...contexto,operationId:'chat'},mensagemId:'msg',decisao:{campo:'observacao',valor:'Registro explícito sintético'}})).status).toBe(200);
+  a.exibir();expect((await a.post('/chat/aceitar-decisao',{contexto:{...contexto,operationId:'chat'},mensagemId:'msg',decisao:{campo:'observacao',valor:'Registro explícito sintético'}})).status).toBe(200);
  }finally{await a.close();}
 });

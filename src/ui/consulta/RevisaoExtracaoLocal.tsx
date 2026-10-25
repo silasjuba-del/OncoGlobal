@@ -19,10 +19,12 @@ export function RevisaoExtracaoLocal({ porta, contexto, patientLabel, aoFatosCon
   const [fontesSemVinculo, setFontesSemVinculo] = useState<Array<{ draftId: string; sourceId: string;
     segmentId: string | null; exceptionId: string | null; rotulo: string; criadoEm: string; revision: number; textoOriginal: string }>>([]);
   const [fontePendenteId, setFontePendenteId] = useState("");
+  const [previaPendente,setPreviaPendente]=useState<{draftId:string;sourceId:string;segmentId:string;revision:number;textoOriginal:string}|null>(null);
   const [fonte, setFonte] = useState<FonteRevisao["draft"] | null>(null);
   const [ids, setIds] = useState<string[]>([]);
   const [incluirTextoOriginal, setIncluirTextoOriginal] = useState(false);
   const [preparada, setPreparada] = useState<{ pedido: PedidoRevisaoExtracao; resposta: RevisaoPreparada } | null>(null);
+  const [cienciasGates,setCienciasGates]=useState<string[]>([]);
   const [fontesSelecionadas, setFontesSelecionadas] = useState<string[]>([]);
   const [reconciliacao, setReconciliacao] = useState<ReconciliacaoProposta | null>(null);
   const [ocupado, setOcupado] = useState(false);
@@ -38,7 +40,7 @@ export function RevisaoExtracaoLocal({ porta, contexto, patientLabel, aoFatosCon
     const abort = new AbortController();
     controller.current = abort;
     setFonte(null); setIds([]); setIncluirTextoOriginal(false); setPreparada(null); setConcluida(false); setFontes([]);
-    setFontesSemVinculo([]); setFontePendenteId(""); setFontesSelecionadas([]); setReconciliacao(null); setMensagem("");
+    setFontesSemVinculo([]); setFontePendenteId("");setPreviaPendente(null); setFontesSelecionadas([]); setReconciliacao(null); setMensagem("");
     emCurso.current = false; setOcupado(false);
     if (porta.oncoassistFontes && porta.carregarFonteRevisao) {
       void porta.oncoassistFontes({ patientId, encounterId, tumorLotId }, abort.signal)
@@ -79,7 +81,7 @@ export function RevisaoExtracaoLocal({ porta, contexto, patientLabel, aoFatosCon
 
   async function vincularFontePendente() {
     const pendente = fontesSemVinculo.find((item) => item.draftId === fontePendenteId);
-    if (!pendente || !porta.vincularFonteRevisao) return;
+    if (!pendente || !porta.vincularFonteRevisao||previaPendente?.draftId!==pendente.draftId||previaPendente.revision!==pendente.revision) return;
     if (!pendente.exceptionId) { setMensagem("A exceção de vínculo não consta nesta fonte; o vínculo segue pendente."); return; }
     await executar(async (atual) => {
       const idempotencyKey = ["review-link", pendente.draftId, pendente.revision, patientId,
@@ -98,7 +100,20 @@ export function RevisaoExtracaoLocal({ porta, contexto, patientLabel, aoFatosCon
     });
   }
 
+  async function abrirPendente(draftId:string){
+    setFontePendenteId(draftId);setPreviaPendente(null);
+    const item=fontesSemVinculo.find(f=>f.draftId===draftId);
+    if(!item?.segmentId||!porta.carregarFonteSemVinculo)return;
+    await executar(async(atual)=>{
+      const p=await porta.carregarFonteSemVinculo!(draftId,item.segmentId!,controller.current?.signal);
+      if(atual!==geracao.current)return;
+      if(p.sourceId!==item.sourceId||p.segmentId!==item.segmentId||p.revision!==item.revision)throw Error('FONTE_ALTERADA_RECARREGAR');
+      setPreviaPendente(p);
+    });
+  }
+
   async function preparar() {
+    setCienciasGates([]);
     if (!fonte || (!ids.length && !incluirTextoOriginal) || !porta.prepararRevisaoExtracao) return;
     setPreparada(null);
     const pedido = { draftId: fonte.draftId, expectedRevision: fonte.revision, patientId,
@@ -130,6 +145,7 @@ export function RevisaoExtracaoLocal({ porta, contexto, patientLabel, aoFatosCon
     if (!preparada || !porta.confirmarRevisaoExtracao || concluida) return;
     await executar(async (atual) => {
       const resultado = await porta.confirmarRevisaoExtracao!({ ...preparada.pedido,
+        ...(cienciasGates.length?{cienciasGates}:{}),
         comprovanteExibicao: preparada.resposta.comprovanteExibicao }, controller.current?.signal);
       if (atual !== geracao.current) return;
       if (resultado.codigo !== "GRAVADA" && resultado.codigo !== "REPLAY") throw new ErroPorta("REVISAO_NAO_CONFIRMADA");
@@ -149,15 +165,15 @@ export function RevisaoExtracaoLocal({ porta, contexto, patientLabel, aoFatosCon
       <p>Fila global de documentos sem vínculo: estes trechos ainda não pertencem à consulta aberta.</p>
       <p>O vínculo exige sua escolha explícita. Confira o trecho original antes de associá-lo a {patientLabel ?? patientId} ({patientId}).</p>
       <label>Trecho sem vínculo <select aria-label="Trecho sem vínculo" disabled={ocupado}
-        value={fontePendenteId} onChange={(e) => setFontePendenteId(e.target.value)}>
+        value={fontePendenteId} onChange={(e) => void abrirPendente(e.target.value)}>
         <option value="">Selecione uma fonte</option>
         {fontesSemVinculo.map((item) => <option key={item.draftId} value={item.draftId}>{item.rotulo} · {item.sourceId}</option>)}
       </select></label>
       {fontesSemVinculo.find((item) => item.draftId === fontePendenteId) ? <>
         <h4>Texto original da fonte</h4>
-        <pre style={{ whiteSpace: "pre-wrap" }}>{fontesSemVinculo.find((item) => item.draftId === fontePendenteId)!.textoOriginal}</pre>
+        <pre style={{ whiteSpace: "pre-wrap" }}>{previaPendente?.draftId===fontePendenteId?previaPendente.textoOriginal:'Carregue a fonte selecionada antes de confirmar o vínculo.'}</pre>
         <button type="button" disabled={ocupado || !porta.vincularFonteRevisao
-          || !fontesSemVinculo.find((item) => item.draftId === fontePendenteId)?.exceptionId}
+          || previaPendente?.draftId!==fontePendenteId||!fontesSemVinculo.find((item) => item.draftId === fontePendenteId)?.exceptionId}
           onClick={() => void vincularFontePendente()}>Confirmar vínculo deste trecho com {patientLabel ?? patientId} · {patientId}</button>
       </> : null}
     </section> : null}
@@ -237,10 +253,15 @@ export function RevisaoExtracaoLocal({ porta, contexto, patientLabel, aoFatosCon
       <button type="button" disabled={ocupado || concluida || (ids.length === 0 && !incluirTextoOriginal)} onClick={() => void preparar()}>Preparar revisão</button>
     {preparada ? <section aria-label="Conteúdo preparado para revisão">
       <h3>Resumo dos achados selecionados</h3><pre style={{ whiteSpace: "pre-wrap" }}>{preparada.resposta.conteudo.resumo}</pre>
+      {(preparada.resposta.conteudo.verificacoesClinicas??[]).filter(g=>['G-07','G-08'].includes(g.gate)&&g.decisao==='ALERTA').map(g=><label key={g.id}>
+        <input type="checkbox" checked={cienciasGates.includes(g.id)} disabled={ocupado||concluida}
+          onChange={e=>setCienciasGates(atual=>e.target.checked?[...atual,g.id]:atual.filter(id=>id!==g.id))}/>
+        Revisei a divergência: {g.motivo}. As fontes permanecem preservadas.
+      </label>)}
       <details><summary>Fatos, fontes e contexto desta revisão</summary>
         <pre style={{ whiteSpace: "pre-wrap" }}>{JSON.stringify(preparada.resposta.conteudo, null, 2)}</pre>
       </details>
-      <button type="button" disabled={ocupado || concluida} onClick={() => void confirmar()}>Confirmar revisão exibida</button>
+      <button type="button" disabled={ocupado || concluida||(preparada.resposta.conteudo.verificacoesClinicas??[]).some(g=>['G-07','G-08'].includes(g.gate)&&g.decisao==='ALERTA'&&!cienciasGates.includes(g.id))} onClick={() => void confirmar()}>Confirmar revisão exibida</button>
     </section> : null}
       </div>
     </div> : null}

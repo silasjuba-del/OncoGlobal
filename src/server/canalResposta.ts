@@ -23,7 +23,7 @@ import type { EstadoReciboCanal, EstadoVinculoContatoEntrada } from "../contract
 import { criarGateway, type EvidenciaSaidaExterna, type ResultadoGateway } from "../kernel/gateway/gateway.js";
 import { sqliteIdempotencia } from "../kernel/ledger/idempotencia.js";
 import { auditar, listarEventos } from "../kernel/comandos/portas.js";
-import { transacao } from "../kernel/ledger/db.js";
+import { transacao, depoisDoCommit } from "../kernel/ledger/db.js";
 import { contemPhiResidual, sanitizarArtefato, type DicionarioPaciente } from "../kernel/llm/desidentificar.js";
 import {
   montarResumosContatoPreConsulta,
@@ -308,7 +308,7 @@ export function prepararRascunhoRespostaCanal(
 
   try {
     garantirTabelasS03(db);
-    return transacao(db, () => {
+    const resultado=transacao(db, () => {
       const existente = db.prepare(
         "SELECT invalidada, rascunhoJson FROM canal_resposta_rascunho WHERE respostaId = ? AND versao = ?",
       ).get(parsed.data.respostaId, parsed.data.versao) as { invalidada: number; rascunhoJson: string } | undefined;
@@ -345,6 +345,9 @@ export function prepararRascunhoRespostaCanal(
       `).run(parsed.data.respostaId, parsed.data.versao, JSON.stringify(parsed.data), acesso.agora);
       return { ok: true as const, rascunho: parsed.data };
     });
+    if(resultado.ok)depoisDoCommit(db,()=>acesso.sessoes.registrarConteudoExibido?.(acesso.token,resultado.rascunho.contexto,
+      "RESPOSTA_CANAL",`${resultado.rascunho.respostaId}:${resultado.rascunho.versao}`,hashCanonico(resultado.rascunho)));
+    return resultado;
   } catch {
     return { ok: false, codigo: "ARMAZENAMENTO_INDISPONIVEL", recuperavel: true, persistida: false };
   }
@@ -375,6 +378,7 @@ export function confirmarRespostaCanalPeloMedico(
       | "DESTINATARIO_ALTERADO_APOS_EXIBICAO"
       | "CONTEUDO_ALTERADO_APOS_EXIBICAO"
       | "CONTEXTO_ALTERADO_APOS_EXIBICAO"
+      | "CONTEUDO_NAO_EXIBIDO_NESTA_SESSAO"
       | "CONSENTIMENTO_REVOGADO_OU_AUSENTE"
       | "CONTATO_REVOGADO";
   }
@@ -483,6 +487,8 @@ export function confirmarRespostaCanalPeloMedico(
         return { ok: true as const, autorizacao: original };
       }
 
+      if(!acesso.sessoes.conteudoFoiExibido?.(acesso.token,rascunho.contexto,"RESPOSTA_CANAL",`${rascunho.respostaId}:${rascunho.versao}`,hashCanonico(rascunho)))
+        return {ok:false as const,codigo:"CONTEUDO_NAO_EXIBIDO_NESTA_SESSAO" as const};
       const rascunhoConfirmado: RascunhoRespostaCanal = {
         ...rascunho,
         confirmadoPeloMedico: true,

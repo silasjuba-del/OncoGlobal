@@ -14,8 +14,12 @@ import { lerConsulta } from "./leituras.js";
 import { baseAjusteAnterior } from "./f0c/baseAjusteAnterior.js";
 import { hashConteudoExibido as hash } from "./sessao.js";
 import { autenticarFichas, erroFicha, fichaAtual, recusarFicha, type DepsFichas, type RespostaFicha } from "./fichasPrescricao.js";
+import type {ServidorDeps} from './rotas.js';
+import {opcoesLeituraConsulta} from './rotas/confirmacao.js';
 
-export interface DepsOrigemFicha extends DepsFichas { motorF1?: ReturnType<typeof criarMotorF1> }
+export interface DepsOrigemFicha extends DepsFichas { motorF1?: ReturnType<typeof criarMotorF1>;
+ corpus?:NonNullable<DepsFichas['corpus']>&Partial<NonNullable<ServidorDeps['corpus']>>|null;
+ settings?:ServidorDeps['settings'];salaoRuleset?:ServidorDeps['salaoRuleset']; }
 const Registro = z.object({
   kind: z.literal("FICHA_PRESCRICAO_INSTANCIADA"), atorId: z.string(), requestHash: z.string(),
   resposta: InstanciacaoFichaRespostaSchema,
@@ -35,7 +39,7 @@ function lerOrigem(deps: DepsOrigemFicha, pointer: OrigemPropostaPrescricaoExecu
 }
 function calcularAtual(deps: DepsOrigemFicha, contexto: ContextoAcaoComposta, original: ProtocolTemplate,
   sessao: Sessao, em: string, retrato: Retrato, draftId: string) {
-  const consulta = lerConsulta(deps.db, contexto.patientId, em, sessao, contexto.tumorLotId, { encounterId: contexto.encounterId });
+  const consulta = lerConsulta(deps.db, contexto.patientId, em, sessao, contexto.tumorLotId, { ...opcoesLeituraConsulta(deps,sessao),encounterId: contexto.encounterId });
   if ("codigo" in consulta) throw new Error("DADOS_CLINICOS_INDISPONIVEIS");
   const medidos = consulta.avaliacaoClinica.dadosCorporais;
   const alturaCm = alturaDocumentada(retrato, em);
@@ -47,7 +51,7 @@ function calcularAtual(deps: DepsOrigemFicha, contexto: ContextoAcaoComposta, or
   if (!calculo.ok) throw new Error("FICHA_NAO_INSTANCIAVEL");
   const itens = calculo.itens.map((i, index) => ({ itemId: `item-ficha:${hash([draftId, index, i.item.sequence])}`, item: i.item }));
   const pendencias = calculo.itens.flatMap(i => i.motivo ? [`${i.item.drug}: ${i.motivo}`] : []);
-  const avisos = [...consulta.avaliacaoClinica.avisosFlash, ...calculo.itens.flatMap(i => i.aviso ? [`${i.item.drug}: ${i.aviso}`] : [])];
+  const avisos = [...consulta.flash.avisos, ...calculo.itens.flatMap(i => i.aviso ? [`${i.item.drug}: ${i.aviso}`] : [])];
   avisos.push("Cálculo proposto a partir da ficha conferida. Revise a indicação, os dados corporais, os exames e o preparo antes de assinar.");
   return { itens, pendencias, avisos, dadosCorporais };
 }

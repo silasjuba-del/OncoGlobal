@@ -2,8 +2,9 @@ import { useState } from "react";
 import type { PortaConsulta, SalaoVisao } from "../api/porta.js";
 
 /** Revisão local explícita; relato nunca confirma alergia, droga ou tratamento executado. */
-export function FilaRelatosInfusao({ porta, relatos, aoAtualizar }: {
+export function FilaRelatosInfusao({ porta, relatos, aoAtualizar, bloqueado=false }: {
   porta: PortaConsulta; relatos: NonNullable<SalaoVisao["relatosInfusao"]>; aoAtualizar: () => Promise<void>;
+  bloqueado?:boolean;
 }) {
   const [decisoes, setDecisoes] = useState<Record<string, string>>({});
   const [contextos, setContextos] = useState<Record<string, string>>({});
@@ -23,7 +24,7 @@ export function FilaRelatosInfusao({ porta, relatos, aoAtualizar }: {
         <ul>{r.contextoMensagens.map(m => <li key={m.mensagemId}>{m.em} · {m.texto}
           <small> · contato {m.contatoId ?? "não informado"} · {m.canal ?? "origem não informada"} · fonte {m.mensagemId}</small></li>)}</ul>
         {porta.revisarRelatoInfusao && <form onSubmit={async e => {
-          e.preventDefault(); if (ocupado || !valor) return;
+          e.preventDefault(); if (ocupado || bloqueado || !valor) return;
           const contexto = opcoes.find(c => JSON.stringify(c) === valor);
           if (!contexto || contexto.patientId !== r.patientId) return;
           setOcupado(true); setErro(null);
@@ -41,7 +42,7 @@ export function FilaRelatosInfusao({ porta, relatos, aoAtualizar }: {
           </select></label>
           <label>Decisão médica sobre o relato<textarea required maxLength={2000} disabled={ocupado} value={decisoes[r.mensagemId] ?? ""}
             onChange={e => setDecisoes(v => ({ ...v, [r.mensagemId]: e.target.value }))} /></label>
-          <button type="submit" disabled={ocupado || !valor}>Registrar revisão deste relato</button>
+          <button type="submit" disabled={ocupado || bloqueado || !valor}>Registrar revisão deste relato</button>
         </form>}
       </section>;
     })}

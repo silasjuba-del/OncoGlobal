@@ -152,6 +152,7 @@ export function ConsultaFlash(props: ConsultaFlashProps) {
           {item.candidatos?.map(p=><button type="button" key={p.id} onClick={()=>setReceitas(atuais=>atuais.map(r=>r.conteudo.id===item.conteudo.id?aplicarProposta(r,p):r))}>Usar proposta: {p.indicacao} · {p.dose} · {p.via}</button>)}
           {item.referencia&&!item.proposta&&!item.candidatos?.some(p=>p.id===item.referencia?.propostaId&&p.hashProposta===item.referencia.hashProposta&&p.fonte.hash===item.referencia.hashFonte)
             ?item.candidatos?.map(p=><button type="button" key={`substituir-${p.id}`} onClick={()=>setReceitas(atuais=>atuais.map(r=>r.conteudo.id===item.conteudo.id?aplicarProposta({...r,referencia:undefined,conteudo:{...r.conteudo,dose:null,via:null,orientacao:null,duracao:null}},p):r))}>Substituir campos pela nova proposta: {p.indicacao}</button>):null}
+          {item.proposta?.fonte.curadoria==='RASCUNHO'?<p role="status">CHECAR DOSE</p>:null}
           {item.proposta?<details><summary>Fonte e contexto da dose proposta</summary><p>{item.proposta.indicacao}</p>
             <p>{item.proposta.fonte.referencia} · versão {item.proposta.fonte.versao} · {item.proposta.fonte.curadoria}</p>
             <blockquote>{item.proposta.fonte.trecho}</blockquote><ul>{item.proposta.restricoes.map((r,i)=><li key={i}>{r}</li>)}</ul></details>:null}

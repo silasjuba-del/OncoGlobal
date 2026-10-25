@@ -6,6 +6,7 @@ import type { DatabaseSync } from "node:sqlite";
 import { ambienteHttp } from "../server/http-fixture.js";
 import { salvarDraft } from "../../src/kernel/ledger/drafts.js";
 import { confirmar } from "../../src/kernel/ledger/writeRouter.js";
+import { hashCanonico } from "../../src/rules/conteudoCanonico.js";
 
 const PACIENTE = "p1", ENCONTRO = "e1";
 
@@ -15,14 +16,15 @@ function assinarVersao(db: DatabaseSync, o: { documentId: string; versao: number
   const em = "2026-10-05T12:00:00.000Z";
   const eventId = `ev-assina-${o.documentId}-${o.versao}`;
   const draftId = `draft-${o.documentId}-${o.versao}`;
+  const data = { documentId: o.documentId, documentVersion: o.versao, texto: `documento sintético v${o.versao}` };
   salvarDraft(db, { draftId, patientId: PACIENTE, sourceId: "sintetico", rawRef: "opaco", diagnostics: [],
     revision: 0, criadoEm: em, payload: { documentId: o.documentId, documentVersion: o.versao } });
   confirmar(db, { operationId: `op-assina-${o.documentId}-${o.versao}`, patientId: PACIENTE, tumorLotId: null,
     encounterId: ENCONTRO, reviewDecisionId: `revisao-${o.documentId}-${o.versao}`, em,
     sessao: { medicoId: "medico-teste", crm: "CRM-TESTE", emitidaEm: em, expiraEm: "2099-01-01T00:00:00.000Z" },
     registros: [{ draftId, expectedRevision: 0, eventId, tipo: "DOCUMENTO",
-      payload: { data: { texto: `documento sintético v${o.versao}` }, signature: { documentId: o.documentId,
-        documentVersion: o.versao, documentHash: "0".repeat(64),
+      payload: { data, signature: { documentId: o.documentId,
+        documentVersion: o.versao, documentHash: hashCanonico(data),
         reviewDecisionId: `revisao-${o.documentId}-${o.versao}`, serverActorId: "medico-teste" } },
       fontes: [], revisao: "ASSINADO", supersedesEventId: o.supersedesEventId ?? null }] });
   return eventId;

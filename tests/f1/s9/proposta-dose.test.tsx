@@ -12,6 +12,7 @@ const props=():ConsultaFlashProps=>({cabecalho:{},exames:[],acoesHoje:[],receita
 it('proposta preserva dose e fonte literais; veto local e fonte incompleta não são consumidos',()=>{
  const raw=catalogo([item,{...item,id:'vetado',politicaLocal:{propor:false}},{...item,id:'sem-fonte',fonte:{referencia:'Sem trecho'}},{...item,id:'pendente',dose:'PENDENTE'}]);
  const antes=raw;const p=lerPropostasDoseReceita(raw);
+ expect(p[0]?.restricoes).toContain('CHECAR DOSE');
  expect(p).toHaveLength(1);expect(p[0]).toMatchObject({dose:'25 mg',doseOriginal:'25',unidade:'mg',restricoes:expect.arrayContaining([item.nota,item.pendencia,item.orientacaoPaciente,'População sintética delimitada']),estado:'PROPOSTA',requerValidacaoMedica:true,fonte:{curadoria:'RASCUNHO',trecho:item.fonte.trecho}});expect(raw).toBe(antes);
 });
 it('preenche uma fonte única ao sair do medicamento, mas não finaliza nem inclui automaticamente',async()=>{

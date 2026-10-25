@@ -1,4 +1,5 @@
 import { lerLedgerIntegro, type FalhaIntegridade, type EscopoLeituraLedger } from "../kernel/ledger/leituraIntegra.js";
+import { provarDocumentoAssinado } from '../kernel/ledger/provaDocumento.js';
 import { projetarAlertasConsulta } from "./alertasConsulta.js";
 import { rascunhoVisivelNaRevisao } from "../contracts/rascunhos.js";
 import { documentoReceitaDosePendente } from '../contracts/f1/receitaDose.js';
@@ -340,6 +341,8 @@ export function lerConsulta(db: DatabaseSync, patientId: string, agora: string, 
     if (!avisos.length) return undefined;
     return {estado:"VERMELHO" as const,motivos:avisos.map(a=>({texto:`${a.droga}: dose acumulada chegou no teto. Revisão médica, sem bloqueio.`}))};
   })();
+  const avisosCumulativoPendente=(ciclos.at(-1)?.numero??0)>=4
+    ? cumulativo.avaliacoes.filter(a=>a.avaliacao.estado==='PENDENTE').map(a=>`Ciclo ${ciclos.at(-1)!.numero}: ${a.droga} — exposição cumulativa indeterminada. Conferir histórico e doses.`) : [];
   const parciaisCumulativos=cumulativo.avaliacoes.filter(a=>a.avaliacao.estado==="ALARANJADO")
     .map(a=>`${a.droga}: item parcial, abaixo do teto.`);
   const avaliacao = avaliarConsulta({ eventos: all, patientId, tumorLotId: lote?.tumorLotId ?? null,
@@ -416,25 +419,19 @@ export function lerConsulta(db: DatabaseSync, patientId: string, agora: string, 
     encounterId:current.encounterId,agora });
   const historicoSistemico = historicoDaConsulta(eventosDaConsulta);
   const listasMedicamentos = eventosVigentes(all).filter(e => ["CONFIRMADO","ASSINADO"].includes(e.revisao) && /^FATO(?:@1)?$/.test(e.tipo) && data(e)?.campo === "medicamentos");
-  const listaMedicamentos = listasMedicamentos[0], valorMedicamentos = listaMedicamentos ? data(listaMedicamentos)?.valor : [];
-  const medicamentosAtuais = {eventId: listaMedicamentos?.eventId ?? null, medicamentos: Array.isArray(valorMedicamentos) && valorMedicamentos.every(v=>typeof v === "string") ? valorMedicamentos as string[] : [], conflito: listasMedicamentos.length > 1 || !Array.isArray(valorMedicamentos) || valorMedicamentos.some(v=>typeof v !== "string")};
+  const listaMedicamentos = listasMedicamentos.find(e=>e.encounterId===current.encounterId), valorMedicamentos = listaMedicamentos ? data(listaMedicamentos)?.valor : [];
+  // A referência de concorrência conserva a linhagem; a lista visível só contém atestação deste encontro.
+  const medicamentosAtuais = {eventId: listasMedicamentos[0]?.eventId ?? null, confirmadoNesteEncontro:!!listaMedicamentos,
+    medicamentos: Array.isArray(valorMedicamentos) && valorMedicamentos.every(v=>typeof v === "string") ? valorMedicamentos as string[] : [], conflito: listasMedicamentos.length > 1 || !Array.isArray(valorMedicamentos) || valorMedicamentos.some(v=>typeof v !== "string")};
   const documentosVigentes = new Set(eventosVigentes(eventosDaConsulta).map(e=>e.eventId));
   let documentosComIntegridadePendente = 0;
   const historicoDocumentos = eventosDaConsulta.filter((evento) => evento.tipo === "DOCUMENTO"
     && evento.revisao === "ASSINADO").flatMap((evento) => {
-    const envelope = data(evento);
-    const corpo = envelope?.data && typeof envelope.data === "object" && !Array.isArray(envelope.data)
-      ? envelope.data as Record<string, unknown> : null;
-    const assinatura = envelope?.signature && typeof envelope.signature === "object"
-      ? envelope.signature as Record<string, unknown> : null;
-    if (!corpo || typeof corpo.documentId !== "string" || typeof corpo.texto !== "string"
-      || typeof corpo.documentVersion !== "number" || !Number.isInteger(corpo.documentVersion) || corpo.documentVersion < 1
-      || !assinatura || assinatura.documentId !== corpo.documentId
-      || assinatura.documentVersion !== corpo.documentVersion
-      || assinatura.serverActorId !== evento.criadoPor.id
-      || assinatura.documentHash !== hashConteudoExibido(corpo)) {
+    const prova=provarDocumentoAssinado(evento);
+    if (!prova) {
       documentosComIntegridadePendente++; return [];
     }
+    const {corpo,assinatura}=prova;
     return [{ eventId: evento.eventId, documentId: corpo.documentId,
       documentVersion: corpo.documentVersion, tumorLotId: evento.tumorLotId,
       titulo: typeof corpo.titulo === "string" ? corpo.titulo : "Documento assinado",
@@ -457,7 +454,7 @@ export function lerConsulta(db: DatabaseSync, patientId: string, agora: string, 
         return contacts.map((x) => contatoUnico(x.value.contatoId, patientId, projected))
           .filter((x): x is Contato => x !== null);
       })(),
-      alergiasPaciente: contextoClinico.flash.alergia === "Não informada" ? [] : [contextoClinico.flash.alergia],
+      alergiasPaciente: contextoClinico.alergias.itens,situacaoAlergias:{estado:contextoClinico.alergias.estado,fontes:contextoClinico.alergias.fontes},
       comorbidadesPaciente: Array.isArray(contextoClinico.campos.comorbidades.valor)
         ? contextoClinico.campos.comorbidades.valor.filter((v):v is string=>typeof v === "string") : [] },
     alertas, delta, evidencias: [],
@@ -481,7 +478,7 @@ export function lerConsulta(db: DatabaseSync, patientId: string, agora: string, 
     // W12-F4: Flash calculada do ledger; a data de referência é a do servidor, passada explicitamente.
     flash: { ...projetarFlash(eventosDaConsulta, civil.dataCivil, config.modeloFlash ?? null,
       rascunhoFlashDoContexto(db, { patientId, encounterId: current.encounterId, tumorLotId: lote?.tumorLotId ?? null })),
-      ...contextoClinico.flash, avisos:[...avaliacao.avisosFlash,...avisosCondicionais,...avisosInteracoesCondicionadas.map(r=>r.motivo)],sugestoesLaboratorio:avaliacao.sugestoesLaboratorio,
+      ...contextoClinico.flash, avisos:[...avaliacao.avisosFlash,...avisosCondicionais,...avisosInteracoesCondicionadas.map(r=>r.motivo),...avisosCumulativoPendente],sugestoesLaboratorio:avaliacao.sugestoesLaboratorio,
       ...(parciaisCumulativos.length ? {parciaisCumulativos} : {}),
       ...(sugestaoNutricional ? {sugestoesClinicas:[sugestaoNutricional]} : {}) },
     elegibilidade: avaliacao.elegibilidade,
@@ -727,7 +724,17 @@ export function lerSalao(db: DatabaseSync, agora: string, rulesetInput: unknown,
     const destino = temCorte || temPendencia ? "FILA_MEDICO" as const : base.destino;
     return [{ card: { entrada: { patientId: p.patientId, ecog: p.triagem.ecog.valor,
       recurso: p.triagem.recurso, idadeAnos: p.triagem.idadeAnos, chegadaEm: p.chegadaEm },
-      destino, emergencia: base.emergencia, temCorte, nome: p.paciente.nome },
+      destino, emergencia: base.emergencia, temCorte, nome: p.paciente.nome,
+      revisaoCorte:{motivos:[...base.cortes,...portao.motivos].map(m=>m.texto),pendencias:[...base.pendentes,...portao.pendentes].map(m=>m.texto),
+        dados:[`Triagem: ${p.chegadaEm}`,`Captura da fonte: ${p.fontes[0].dataCaptura}`,`PAS: ${p.triagem.pas.valor??'não informada'} mmHg`,`FC: ${p.triagem.fc.valor??'não informada'} bpm`,
+          `SpO2: ${p.triagem.spo2.valor??'não informada'} %`,`Temperatura (décimos de °C): ${p.triagem.tempDecimos.valor??'não informada'}`,
+          `Hb (décimos de g/dL): ${p.triagem.hbDgDl.valor??'não informada'}`,`Neutrófilos: ${p.triagem.anc.valor??'não informados'}`,
+          `Plaquetas: ${p.triagem.plq.valor??'não informadas'}`,`Coleta: ${p.triagem.coletaHemograma.valor??'não informada'}`,
+          `ECOG: ${p.triagem.ecog.valor??'não informado'}`,`CTCAE: ${p.triagem.grauCtcae.valor??'não informado'}`,
+          `PAD: ${fontesSalao.pad??'não documentada'} mmHg`,
+          fontesSalao.creatininaObservada?`Creatinina: ${fontesSalao.creatininaObservada.valor} ${fontesSalao.creatininaObservada.unidade} · ${fontesSalao.creatininaObservada.data}`:'Creatinina não documentada',
+          `Referências adicionais: ${Object.values(fontesSalao.fontes).flat().join(', ')||'não disponíveis'}`],
+        fonteId:p.fontes[0].sourceId,versaoRegra:ruleset.header.versao} },
       base, portao, fonte: p.fontes[0], avisos:fontesSalao.avisos.map(texto=>({patientId:p.patientId,texto})) }];
   });
   const ordenadas = ordenarFila(calculados.map((x) => x.card.entrada), ruleset);

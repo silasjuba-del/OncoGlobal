@@ -48,6 +48,12 @@ function confirmar(a: ReturnType<typeof preparar>) {
   const r = confirmarRespostaCanalPeloMedico(a.db, a.acesso, a.pedido);
   expect(r.ok).toBe(true); return r;
 }
+it("nega primeira confirmação por sessão que apenas copiou o comprovante",()=>{
+ const a=preparar(),antes=a.snapshot();
+ expect(confirmarRespostaCanalPeloMedico(a.db,acessoB(),a.pedido)).toMatchObject({ok:false,codigo:"CONTEUDO_NAO_EXIBIDO_NESTA_SESSAO"});
+ expect(a.snapshot()).toEqual(antes);
+ expect(confirmarRespostaCanalPeloMedico(a.db,a.acesso,a.pedido).ok).toBe(true);
+});
 
 it.each(["sql","json","contrato","tabela-ausente"])("revogação indeterminada (%s) bloqueia autorização e envio sem declarar revogação",async caso=>{
  const a=preparar();confirmar(a);const antes=a.snapshot();
@@ -106,9 +112,10 @@ it.each(["mesmos-metadados", "novo-termo", "revogar-renovar"])("novo consentimen
   expect(confirmarRespostaCanalPeloMedico(a.db, acessoB(), a.pedido)).toEqual({ ok: false, codigo: "CONSENTIMENTO_REVOGADO_OU_AUSENTE" });
   expect(a.snapshot()).toEqual(antes);
   expect(revalidarAutorizacaoSaidaCanalNoLedger(a.db, a.intent)).toEqual({ ok: false, codigo: "CONSENTIMENTO_REVOGADO_OU_AUSENTE" });
-  const nova = prepararRascunhoRespostaCanal(a.db, acessoB(), { ...a.entrada, versao: 2 });
+  const sessaoNova=acessoB();
+  const nova = prepararRascunhoRespostaCanal(a.db, sessaoNova, { ...a.entrada, versao: 2 });
   expect(nova.ok).toBe(true); if (!nova.ok) throw Error("NOVA_VERSAO_FALHOU");
-  const novaAut = confirmarRespostaCanalPeloMedico(a.db, acessoB(), { ...a.pedido, versao: 2, comprovanteExibicao: { destinatario: nova.rascunho.destinatario, conteudoSha256: nova.rascunho.conteudoSha256, contexto } });
+  const novaAut = confirmarRespostaCanalPeloMedico(a.db, sessaoNova, { ...a.pedido, versao: 2, comprovanteExibicao: { destinatario: nova.rascunho.destinatario, conteudoSha256: nova.rascunho.conteudoSha256, contexto } });
   expect(novaAut).toMatchObject({ ok: true, autorizacao: { versao: 2, aprovadoPor: { medicoId: "medico-b-sintetico", em: DEPOIS } } });
   const row = a.db.prepare("SELECT autorizacaoJson FROM canal_resposta_autorizada WHERE versao=1").get() as { autorizacaoJson: string };
   expect(JSON.parse(row.autorizacaoJson)).toEqual(original.ok && original.autorizacao);
@@ -154,11 +161,12 @@ it("consentimento legado sem eventoId nao e atualizado por reconfirmacao", () =>
 
 it("duas conexoes serializam confirmacoes e preservam o medico que gravou primeiro", () => {
   const a = preparar(), b = abrirLedger(a.caminho); bancos.push(b); b.exec("PRAGMA busy_timeout=0");
+  const sessaoB=acessoB();expect(prepararRascunhoRespostaCanal(b,sessaoB,a.entrada).ok).toBe(true);
   const exec = a.db.exec.bind(a.db); let intercalou = false;
   let vencedor: ReturnType<typeof confirmarRespostaCanalPeloMedico> | undefined;
   vi.spyOn(a.db, "exec").mockImplementation(sql => {
     if (sql === "BEGIN IMMEDIATE" && !intercalou) {
-      intercalou = true; vencedor = confirmarRespostaCanalPeloMedico(b, acessoB(), a.pedido);
+      intercalou = true; vencedor = confirmarRespostaCanalPeloMedico(b, sessaoB, a.pedido);
     }
     return exec(sql);
   });

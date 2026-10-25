@@ -100,6 +100,9 @@ async function extrairEVincular(ambiente: Ambiente): Promise<{ selecao: Selecao;
   expect(fato).toMatchObject({ evidence: "EXPLICIT", requiresConfirmation: false });
   expect(fato.rawEvidence).toContain("creatinina 1,2 mg/dL");
 
+  const leitura = await post<{ draft: { draftId: string } }>(ambiente, "/consulta/rascunho", { draftId: extracao.data.draftId });
+  expect(leitura.status).toBe(200);
+  expect(leitura.data.draft.draftId).toBe(extracao.data.draftId);
   const vinculo = await post<Codigo & { revision: number; fatosConfirmados: number;
     criaEventoClinico: boolean }>(ambiente, "/consulta/rascunho/revisar", {
     draftId: extracao.data.draftId, expectedRevision: 0, patientId: PACIENTE,

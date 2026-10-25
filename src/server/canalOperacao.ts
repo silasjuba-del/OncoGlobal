@@ -69,7 +69,7 @@ export function revisaoContextoCanal(db:DatabaseSync,c:{patientId:string;encount
  return hashConteudoExibido(eventos);
 }
 function projetarMensagensOperacionaisCanal(db:DatabaseSync,mensagens:readonly ItemCaixa[],
-  eventos:readonly ClinicalEvent[],cadastros:ReturnType<typeof cadastrosCanal>):MensagemCanalVisao[]{
+  eventos:readonly ClinicalEvent[],cadastros:ReturnType<typeof cadastrosCanal>,patientIdCandidato?:string):MensagemCanalVisao[]{
  if(!mensagens.length)return [];
  const colunas=db.prepare('PRAGMA table_info(canal_resposta_envio)').all() as {name:string}[];
  const temRecibos=colunas.some(c=>c.name==='providerReceiptId');
@@ -97,7 +97,7 @@ function projetarMensagensOperacionaisCanal(db:DatabaseSync,mensagens:readonly I
   });
   return {mensagemId:m.mensagemId,texto:m.conteudo.tipo==='TEXT'?m.conteudo.texto:'Mídia recebida; aguarda leitura local.',em:m.providerSentAt??m.ingestedAt,
    redFlag:!!reconciliacao?.alarmes.alarmesAtivos.length,contatoId:m.senderRef,patientId:paciente?patientId:null,nomePaciente:paciente?.nome??null,
-   candidatos:!paciente&&!revogado&&!conflito&&m.canal==='WHATSAPP_SERVICO'?cadastros.flatMap(c=>[...new Set(contextosCanal(db,c.patientId,eventos).map(ctx=>ctx.encounterId))].map(encounterId=>({patientId:c.patientId,nome:c.nome??c.patientId,encounterId,tumorLotId:null}))):[],
+   candidatos:!paciente&&!revogado&&!conflito&&m.canal==='WHATSAPP_SERVICO'?cadastros.filter(c=>c.patientId===patientIdCandidato).flatMap(c=>[...new Set(contextosCanal(db,c.patientId,eventos).map(ctx=>ctx.encounterId))].map(encounterId=>({patientId:c.patientId,nome:c.nome??c.patientId,encounterId,tumorLotId:null}))):[],
    estadoVinculo:revogado?'REVOGADO':conflito?'CONFLITO':paciente?'VINCULADO':'SEM_VINCULO',origemCanal:m.canal,pendenciaProcessamento:!reconciliacao,estadoConversa:respondida?'RESPONDIDA':'AGUARDA_MEDICO',reciboTecnico:recibo.success?recibo.data:envios.length?'ENVIADA':reconciliacao?'PROCESSADA':m.reciboTecnico,
    ...(paciente&&patientId?{contextosResposta:contextosCanal(db,patientId,eventos)}:{}),destinatarioExibido:m.senderRef,
    midia:m.conteudo.tipo==='MEDIA_UNPROCESSED'?{providerMediaId:m.conteudo.providerMediaId,mimeType:m.conteudo.mimeType,processamento:'NAO_PROCESSADA'}:null};
@@ -108,7 +108,7 @@ export function lerMensagensOperacionaisCanal(db:DatabaseSync,acesso:AcessoCanal
  const caixa=consultarCaixaCanal(db,acesso);if(!caixa.ok)throw new Error(caixa.codigo);
  if(!caixa.mensagens.length)return [];
  const eventos=snapshot??lerEventosComIntegridade(db).itens;
- return projetarMensagensOperacionaisCanal(db,caixa.mensagens,eventos,cadastrosCanal(db,eventos));
+ return projetarMensagensOperacionaisCanal(db,caixa.mensagens,eventos,cadastrosCanal(db,eventos),acesso.sessoes.consultaSelecionada(acesso.token)?.patientId);
 }
 
 /** A consulta recebe só relatos vinculados agora e conta vínculos de ingresso

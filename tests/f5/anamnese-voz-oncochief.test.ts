@@ -319,7 +319,11 @@ describe("FASE F5 · Anamnese Guiada (AG-19), Voz no Canal e Revisão Cruzada On
     };
 
     // Caso 1: sem reprovação determinística do código -> APROVADO_PARA_REVISAO_MEDICA
+    const semVerificacao=await executarRevisaoCruzadaOncoChiefF5({patientRef:'pt-f5-1',pergunta:'Revisão sintética',personas:['oncologista_clinico'],fontes,adapter:adapterSimulado,agora:AGORA});
+    expect(semVerificacao.vereditoFinalCodigoPrevalece).toBe('BLOQUEADO_POR_CODIGO');
+    expect(semVerificacao.reprovacoesDeterministicasCodigo).toContain('VERIFICACAO_DETERMINISTICA_NAO_EXECUTADA');
     const revOk = await executarRevisaoCruzadaOncoChiefF5({
+      reprovacoesDeterministicasCodigo: [],
       patientRef: "pt-f5-1",
       pergunta: "Quais dados faltam para a discussão adjuvante?",
       personas: ["oncologista_clinico", "cirurgiao_oncologico"],

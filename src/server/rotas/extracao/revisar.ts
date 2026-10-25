@@ -6,6 +6,7 @@ import { ClinicalFact as ClinicalFactContract, EncounterSegment, ReviewAction } 
 import { executarConfirmacao as confirmar } from "../../../kernel/comandos/index.js";
 import { auditar, depoisDoCommit, lerDraft, salvarDraft, transacao } from "../../../kernel/comandos/portas.js";
 import { prepararRevisaoExtracao } from "../../../kernel/extracao/prepararRevisao.js";
+import {contextoGatesExtracao} from '../../../kernel/comandos/contextoGates.js';
 import { g25EscopoAssinatura } from "../../../kernel/harness/gates.js";
 import { rascunhoInerte as rascunhoJevNaoPromovivel } from "../../../contracts/rascunhos.js";
 import { confrontarNomeIdentificador } from "../../../rules/w8/vinculoDocumento.js";
@@ -35,6 +36,7 @@ function chaveVinculoLegado(input: {
 }
 
 const PedidoRevisao = z.object({
+  cienciasGates:z.array(Id).optional(),
   draftId: z.string().min(1), expectedRevision: z.number().int().nonnegative(),
   patientId: Id, factIds: z.array(Id).optional(), operationId: z.string().min(8).optional(),
   incluirTextoOriginal: z.boolean().optional(),
@@ -120,6 +122,8 @@ function vincularPacienteAoRascunho(
     sourceId: extractionInput.sourceId, trecho: identidade.trecho, exigeDecisaoMedica: true,
   });
   const sourceHash = hashConteudoExibido(draft.payload);
+  if(!deps.sessoes.conteudoFoiExibido?.(token,consultaVinculo,"VINCULO_DOCUMENTAL",draft.draftId,hashConteudoExibido(draft)))
+    return reply(409,"FONTE_NAO_EXIBIDA_NESTA_SESSAO");
   const operationId = `review-link-${sha(action.data.idempotencyKey).slice(0, 40)}`;
   const existingOperation = deps.db.prepare("SELECT criadoEm FROM operation WHERE operationId=?").get(operationId) as { criadoEm?: string } | undefined;
   const em = existingOperation?.criadoEm ?? deps.agora();
@@ -289,7 +293,11 @@ const em = typeof operacaoExistente?.criadoEm === "string" ? operacaoExistente.c
   : summaryDraft?.criadoEm ?? deps.agora();
 let revisao: ReturnType<typeof prepararRevisaoExtracao>;
 try {
+  const historica=summaryDraft?.payload as ReturnType<typeof prepararRevisaoExtracao>['payload']|undefined;
+  const contextoClinicoGates=operacaoExistente?historica?.contextoGates:contextoGatesExtracao(deps.db,{...contexto,tumorLotId:contexto.tumorLotId??null},deps.agora());
   revisao = prepararRevisaoExtracao({
+    ...(contextoClinicoGates?{contextoGates:contextoClinicoGates}:{}),
+    ...(operacaoExistente&&!historica?.politicaGates?{aplicarGates:false}:{}),
     draftId: draft.draftId, sourceId: extractionInput.sourceId,
     rawTranscript: linkedSegment.rawTranscript, sourceType: extractionInput.sourceType, vinculoConfirmado: true,
     ...(MetodoCapturaTranscricao.safeParse(extractionInput.captureMethod).success
@@ -343,6 +351,7 @@ if (comprovante.conteudoHash !== documento.conteudoHash || !exibidos.some((item)
   item.documentId === documento.documentId && item.documentVersion === documento.documentVersion
   && item.conteudoHash === documento.conteudoHash)) return reply(409, "CONTEUDO_ALTERADO_APOS_EXIBICAO");
 const result = confirmar(deps.db, { autorizadoEm: deps.agora(), 
+  ...(pedido.cienciasGates?{cienciasGates:pedido.cienciasGates}:{}),
   operationId, patientId: pedido.patientId,
   tumorLotId: contexto.tumorLotId ?? null, encounterId: contexto.encounterId,
   reviewDecisionId: operationId, sessao, em,

@@ -24,7 +24,7 @@ export function lerPropostasDoseReceita(bruto?:string):PropostaDoseReceita[] {
    if(!str(item.id)||!str(item.droga)||!str(item.indicacao)||!str(fonte.referencia)||!str(fonte.trecho)||!str(header.versao)||doseReceitaPendente(item.unidade))return [];
    const dados={id:String(item.id),medicamento:String(item.droga),dose:doseComUnidade(String(item.dose),String(item.unidade)),doseOriginal:String(item.dose),unidade:String(item.unidade),via:str(item.via),
     orientacao:str(item.frequencia),duracao:str(item.duracao),indicacao:String(item.indicacao),
-    restricoes:[raiz.nota,item.gatilho,item.ajusteRenal,item.ajusteHepatico,item.interacoesCriticas,item.nota,item.pendencia,item.orientacaoPaciente,politica.motivo].flatMap(x=>str(x)?[String(x)]:[]),
+    restricoes:[...(raiz.status==='RASCUNHO'?['CHECAR DOSE']:[]),raiz.nota,item.gatilho,item.ajusteRenal,item.ajusteHepatico,item.interacoesCriticas,item.nota,item.pendencia,item.orientacaoPaciente,politica.motivo].flatMap(x=>str(x)?[String(x)]:[]),
     estado:'PROPOSTA' as const,requerValidacaoMedica:true as const,
     fonte:{arquivo,versao:String(header.versao),hash,localizador:`/itens/${i}`,referencia:String(fonte.referencia),trecho:String(fonte.trecho),curadoria:String(raiz.status??'NAO_INFORMADA')}};
    return [PropostaDoseReceita.parse({...dados,hashProposta:hashCanonico(dados)})];

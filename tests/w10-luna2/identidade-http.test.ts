@@ -66,6 +66,9 @@ it("vincula apenas EXTRAÇÃO_RASCUNHO não vinculada a paciente existente e con
     });
     expect(extracao.status).toBe(201);
     expect((await post(f, "/consulta/carregar", { patientId: pacienteB, encounterId: "encontro-72" })).status).toBe(200);
+    const leitura = await post(f, "/consulta/rascunho", { draftId: extracao.data.draftId });
+    expect(leitura.status).toBe(200);
+    expect(leitura.data.draft.draftId).toBe(extracao.data.draftId);
     const real = await post(f, "/consulta/rascunho/revisar", {
       draftId: extracao.data.draftId, expectedRevision: 0, patientId: pacienteB,
     });

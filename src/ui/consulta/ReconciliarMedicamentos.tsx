@@ -3,7 +3,7 @@ import {ErroPorta,type PortaConsulta,type PedidoBundle} from '../api/porta.js';
 /** Declaração manual da lista inteira. Checkbox nunca vem marcado por inferência. */
 export function ReconciliarMedicamentos({porta,contexto,aoFatosConfirmados}:{porta:PortaConsulta;contexto:PedidoBundle;aoFatosConfirmados?:(ctx:PedidoBundle)=>void}){
  const [texto,setTexto]=useState(''),[completa,setCompleta]=useState(false),[ocupado,setOcupado]=useState(false),[mensagem,setMensagem]=useState('');
- const [base,setBase]=useState<{eventId:string|null;medicamentos:string[];conflito:boolean}|null>(null);
+ const [base,setBase]=useState<{eventId:string|null;medicamentos:string[];conflito:boolean;confirmadoNesteEncontro?:boolean|undefined}|null>(null);
  const [recarregar,setRecarregar]=useState(0);
  const geracao=useRef(0),controller=useRef<AbortController|null>(null),operacao=useRef<string|null>(null),emCurso=useRef(false);
  const {patientId,encounterId,tumorLotId}=contexto;
@@ -22,11 +22,12 @@ export function ReconciliarMedicamentos({porta,contexto,aoFatosConfirmados}:{por
   try{const r=await porta.reconciliarMedicamentos({patientId,encounterId,tumorLotId:tumorLotId??null,operationId:operacao.current,expectedEventId:base.eventId,medicamentos:texto.split('\n').map(s=>s.trim()).filter(Boolean),listaAtualCompleta:true},abort.signal);
    if(atual!==geracao.current)return;
    if(r.codigo!=='GRAVADA'&&r.codigo!=='REPLAY')throw new ErroPorta('RECONCILIACAO_MEDICAMENTOS_NEGADA');
-   setBase({...base,eventId:r.eventId,medicamentos:texto.split('\n').map(s=>s.trim()).filter(Boolean)});setMensagem('Lista atual completa confirmada.');setCompleta(false);aoFatosConfirmados?.({...contexto});
+   setBase({...base,eventId:r.eventId,confirmadoNesteEncontro:true,medicamentos:texto.split('\n').map(s=>s.trim()).filter(Boolean)});setMensagem('Lista atual completa confirmada.');setCompleta(false);aoFatosConfirmados?.({...contexto});
   }catch(e){if(atual===geracao.current)setMensagem(e instanceof ErroPorta?`${e.codigo}${e.detalhe?` · Referências: ${e.detalhe}`:''}`:'Não foi possível confirmar a lista.');}
   finally{if(atual===geracao.current){emCurso.current=false;setOcupado(false);}}
  }
  return <section aria-label="Reconciliação de medicamentos"><h3>Medicamentos atuais</h3><p>Digite um nome por linha. Lista vazia confirmada significa nenhum medicamento informado pelo médico.</p>
+  {base?.confirmadoNesteEncontro===false?<p>Nenhuma lista confirmada neste encontro. Isso não significa ausência de uso ou suspensão dos medicamentos anteriores.</p>:null}
   <label>Lista de medicamentos<textarea aria-label="Lista de medicamentos" value={texto} disabled={ocupado||!base||base.conflito} onChange={e=>{setTexto(e.target.value);alterar();}}/></label>
   <label><input type="checkbox" checked={completa} disabled={ocupado||!base||base.conflito} onChange={e=>{setCompleta(e.target.checked);alterar();}}/>Lista atual completa, inclusive se vazia</label>
   <button type="button" disabled={!base||base.conflito||!completa||ocupado||!porta.reconciliarMedicamentos} onClick={()=>void confirmar()}>{ocupado?'Confirmando lista…':'Confirmar lista atual'}</button>

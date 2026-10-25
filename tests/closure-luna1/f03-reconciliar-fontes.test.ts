@@ -33,6 +33,9 @@ async function vincularFonte(ambiente: Awaited<ReturnType<typeof ambienteHttp>>,
     confirmationRequired: Array<{ id: string; kind: string }> } };
   const exception = payload.state.confirmationRequired.find((item) => item.kind === "UNLINKED_PATIENT");
   if (!exception) throw new Error("EXCECAO_UNLINKED_PENDENTE_AUSENTE");
+  const leitura = await post<{ draft: { draftId: string } }>(ambiente, "/consulta/rascunho", { draftId });
+  expect(leitura.status).toBe(200);
+  expect(leitura.data.draft.draftId).toBe(draftId);
   const response = await post<{ codigo: string }>(ambiente, "/consulta/rascunho/revisar", {
     exceptionId: exception.id, acao: "LIGAR_PACIENTE", patientId: PACIENTE,
     sourceId: payload.input.sourceId, draftId, expectedRevision: 0,

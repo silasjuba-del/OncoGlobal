@@ -24,6 +24,7 @@ export interface RegistroConfirmacao {
 }
 
 export interface Confirmacao {
+  cienciasGates?:readonly string[];
   operationId: string;
   patientId: string;
   tumorLotId: string | null;

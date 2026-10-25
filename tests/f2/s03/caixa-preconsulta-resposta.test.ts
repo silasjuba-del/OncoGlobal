@@ -25,7 +25,7 @@ import {
   registrarLeituraLocalMidiaCanal,
 } from "../../../src/server/canalResposta.js";
 import { criarGerenciadorSessao } from "../../../src/server/sessao.js";
-import { reconciliarMensagemCanalPersistida } from "../../../src/server/canalReconciliacao.js";
+import { reconciliarMensagemCanalPersistida, carregarRulesetAlarmeCanalPadrao } from "../../../src/server/canalReconciliacao.js";
 
 const AGORA = "2026-10-16T10:00:00.000Z";
 const SENHA = "senha-sintetica-12";
@@ -104,7 +104,7 @@ describe("S-F2-03 · Caixa clínica, pré-consulta, mídia não processada e res
     const antes = integrarCanalNaPreConsultaECabecalho(db, { entradaPreConsulta, ultimaConsultaConfirmadaEm: null });
     expect(antes.filaRevisao).toHaveLength(1);
     const reconciliada = await reconciliarMensagemCanalPersistida(db, sessao(), {
-      mensagemId: ack.reciboId, cadastros: [], rulesetAlarmes: null,
+      mensagemId: ack.reciboId, cadastros: [], rulesetAlarmes: carregarRulesetAlarmeCanalPadrao(),
       statusContatoExistente: { contatoId: senderRef, endereco: senderRef, canal: "WHATSAPP_SERVICO",
         revogadoEm: null, patientIdVinculadoManual: "paciente-s03-1" },
     });

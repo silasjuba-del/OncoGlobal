@@ -33,7 +33,7 @@ export function CaixaCanal({
     };
   }, [porta]);
 
-  if (!visao) return <p>carregando canal</p>;
+  if (!visao) return mensagem ? <p role="alert">{mensagem}</p> : <p>carregando canal</p>;
 
   const grupos: GrupoCanal[] = [];
   const soltas: MensagemCanalVisao[] = [];

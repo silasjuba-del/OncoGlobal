@@ -47,6 +47,8 @@ async function vincularFonte(amb: Awaited<ReturnType<typeof abrirAmbienteColon>>
   const exception = (draft?.payload as { state?: { confirmationRequired?: Array<{ id: string; kind: string }> } })
     ?.state?.confirmationRequired?.find((e) => e.kind === "UNLINKED_PATIENT");
   if (!exception) throw new Error(`VINCULO_EXPLICITO_NAO_OFERTADO:${sourceId}`);
+  const leitura = await amb.request("/consulta/rascunho", { draftId });
+  expect(leitura.status).toBe(200);
   return amb.request("/consulta/rascunho/revisar", {
     exceptionId: exception.id, acao: "LIGAR_PACIENTE", draftId, expectedRevision,
     patientId: PACIENTE_ID, sourceId, encounterId: ENCONTRO_ATUAL, tumorLotId: TUMOR_LOT_ID,

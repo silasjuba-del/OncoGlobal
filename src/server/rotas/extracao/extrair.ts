@@ -4,7 +4,7 @@ import { type Sessao } from "../../../contracts/base.js";
 import { MetodoCapturaTranscricao } from "../../../contracts/capturaTranscricao.js";
 import { lerDraft, salvarDraft } from "../../../kernel/comandos/portas.js";
 import { executarPipelineExtracao } from "../../../kernel/extracao/pipeline.js";
-import { g07Lateralidade, g08AnatomiaSexo, g09PtDeBiopsia } from "../../../kernel/harness/gates.js";
+import { avaliarGatesExtracao } from '../../../kernel/extracao/gatesClinicos.js';
 import { avaliarRadsRascunho } from "../../radsRascunho.js";
 import type { ServidorDeps } from "../../rotas.js";
 import { sha } from "../confirmacao.js";
@@ -52,18 +52,7 @@ export function extrairRascunho(deps: ServidorDeps, token: string, sessao: Sessa
   const state = executarPipelineExtracao(input);
   const rads = avaliarRadsRascunho(parsed.data.sourceType, parsed.data.rawTranscript, parsed.data.sourceId, deps.corpus?.rads);
   const { alertasRads } = rads;
-  const stages = state.facts.filter((f) => f.domain === "stage" && typeof f.value === "string");
-  const alerts = [
-    g07Lateralidade({}),
-    g08AnatomiaSexo({}),
-    ...stages.map((f) => {
-      const prefix = String(f.value).match(/(?:^|\s)(yp|p|c)t/i)?.[1] ?? "";
-      return g09PtDeBiopsia({
-        prefixo: prefix, tnmExplicito: true,
-        specimen: parsed.data.sourceType === "pathology" ? "DESCONHECIDO" : undefined,
-      });
-    }),
-  ];
+  const alerts=avaliarGatesExtracao(state.facts,parsed.data.rawTranscript);
   const saved = salvarDraft(deps.db, {
     draftId, patientId: null, sourceId: parsed.data.sourceId,
     rawRef: `importacao-local:${parsed.data.recordingId}`,

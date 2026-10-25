@@ -623,11 +623,12 @@ describe("FASE F4 · APAC, Farmácia, Estoque e Documentação de Acesso/Judicia
     }
 
     // 4. Tentativa de assinatura por AGENTE/IA é bloqueada pelo gate G-03
-    expect(assinarMinutaLaudoAcessoJudicialF4(db, acesso, {
+    const assinaturaForjada={
       minutaId: "laudo-valido-1",
       versao: 1,
       atorOverrideParaTesteAdversarial: { tipo: "AGENTE", crm: null },
-    })).toEqual({ ok: false, codigo: "G03_ASSINATURA_NEGADA" });
+    };
+    expect(assinarMinutaLaudoAcessoJudicialF4(db, acesso, assinaturaForjada)).toEqual({ ok: false, codigo: "G03_ASSINATURA_NEGADA" });
 
     // 5. Assinatura pelo médico autenticado na sessão (SESSAO + CRM) promove a ASSINADO e impede sobrescrita posterior na mesma versão
     const assinada = assinarMinutaLaudoAcessoJudicialF4(db, acesso, {

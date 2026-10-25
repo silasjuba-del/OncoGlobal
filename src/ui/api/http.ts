@@ -434,6 +434,15 @@ export function criarPortaHttp(opcoes: OpcoesHttp): PortaConsulta {
       if (!parsed.success) throw new ErroPorta("PAYLOAD_INVALIDO");
       return parsed.data;
     },
+    async carregarFonteSemVinculo(draftId,segmentId,signal){
+      const {status,json}=await enviar('/consulta/rascunho',{draftId},true,signal);
+      const r=z.object({draft:z.object({draftId:z.literal(draftId),sourceId:z.string().min(1),patientId:z.null(),revision:z.number().int().nonnegative(),
+        payload:z.object({kind:z.literal('EXTRACAO_RASCUNHO'),state:z.object({segments:z.array(z.object({id:z.string(),sourceId:z.string(),rawTranscript:z.string()}))})})})}).safeParse(json);
+      if(status!==200||!r.success)throw new ErroPorta(codigoDe(json,'FONTE_SEM_VINCULO_INVALIDA'));
+      const segmento=r.data.draft.payload.state.segments.find(s=>s.id===segmentId&&s.sourceId===r.data.draft.sourceId);
+      if(!segmento)throw new ErroPorta('SEGMENTO_VINCULADO_NAO_CONSTA');
+      return {draftId,sourceId:r.data.draft.sourceId,segmentId,revision:r.data.draft.revision,textoOriginal:segmento.rawTranscript};
+    },
     async vincularFonteRevisao(pedido, signal) {
       const { status, json } = await enviar("/consulta/rascunho/revisar", pedido, true, signal);
       const result = z.object({ codigo: z.literal("VINCULO_REVISTO"), revision: z.number().int().nonnegative() }).safeParse(json);

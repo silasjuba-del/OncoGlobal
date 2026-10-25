@@ -163,6 +163,13 @@ describe("W10 Luna5 · configurações pela API HTTP real", () => {
     expect((profile.body.perfil as { instituicao: { cnes: string | null } }).instituicao.cnes).toBe("00009876");
     expect((history.body.itens as unknown[])).toHaveLength(1);
   });
+  it('exige intenção médica explícita para caixa REGRA_CLINICA, sem gravar recusa',async()=>{
+    const token=await harness.login(),pedido={numero:17,valorNovo:{laboratorio:false,imagem:false},expectedRevision:0,operationId:'regra-clinica-explicita'};
+    const antes=await harness.post('/config/historico',{},token);
+    expect(await harness.post('/config/caixa/alterar',pedido,token)).toMatchObject({status:409,body:{codigo:'AUTORIZACAO_MEDICA_EXPLICITA_OBRIGATORIA'}});
+    expect((await harness.post('/config/historico',{},token)).body).toEqual(antes.body);
+    expect((await harness.post('/config/caixa/alterar',{...pedido,autorizacaoMedica:true},token)).body.estado).toBe('GRAVADA');
+  });
 
   it("nega caixa APAC sem contexto de paciente sem alterar snapshot nem histórico global", async () => {
     const token = await harness.login();

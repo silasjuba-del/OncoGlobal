@@ -18,8 +18,8 @@ import { CHAVE_CAIXA_MODELO_FLASH } from "../../contracts/configFlash.js";
 import type { ServidorDeps } from "../rotas.js";
 
 type SessaoLeitura = Parameters<NonNullable<ServidorDeps["settings"]>["readBox"]>[1];
-export function opcoesLeituraConsulta(deps: ServidorDeps, sessao: SessaoLeitura) {
-  const numeroModelo = deps.corpus?.caixasTodas.find((c) => c.chave === CHAVE_CAIXA_MODELO_FLASH)?.numero ?? null;
+export function opcoesLeituraConsulta(deps: {settings?:ServidorDeps['settings'];salaoRuleset?:ServidorDeps['salaoRuleset'];corpus?:Partial<NonNullable<ServidorDeps['corpus']>>|null|undefined}, sessao: SessaoLeitura) {
+  const numeroModelo = deps.corpus?.caixasTodas?.find((c) => c.chave === CHAVE_CAIXA_MODELO_FLASH)?.numero ?? null;
   let modeloFlash = null as ReturnType<typeof lerModeloFlash>;
   if (numeroModelo !== null && deps.settings) {
     try { modeloFlash = lerModeloFlash(deps.settings.readBox(numeroModelo, sessao).value); } catch { modeloFlash = null; }

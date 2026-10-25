@@ -27,6 +27,12 @@ function compilar(respostas: RespostaPassoAnamnese[]) {
   return compilarResumoEstruturadoAnamnese({ sessaoAnamneseId: "sessao-fontes", patientId: "paciente-sintetico",
     contatoId: "contato-sintetico", roteiro, respostas, geradoEm: agora });
 }
+it('alerta arbitrário do chamador fica como relato não verificado, sem virar alarme calculado',()=>{
+ const r=compilarResumoEstruturadoAnamnese({sessaoAnamneseId:'s',patientId:'p',contatoId:'c',roteiro,respostas:[negada],geradoEm:agora,alertasRedFlag:['Alerta arbitrário sintético']});
+ expect(r.alertasEscalonamentoMedico).not.toContain('Alerta arbitrário sintético');
+ expect(r.alertasInformadosNaoVerificados).toEqual(['Alerta arbitrário sintético']);
+ expect(r.revisao).toBe('REVISAR');
+});
 
 it.each([[negada, afirmada], [afirmada, negada]])("preserva os relatos e fontes em qualquer ordem: %j", (primeira, segunda) => {
   const resumo = compilar([primeira, segunda]);

@@ -1,7 +1,9 @@
 import { abrirLedger } from '../../src/kernel/ledger/db.js';
 import { executarConfirmacao } from '../../src/kernel/comandos/index.js';
 import { salvarDraft } from '../../src/kernel/comandos/portas.js';
+import { listarEventos } from '../../src/kernel/ledger/ledger.js';
 import { criarGerenciadorSessao } from '../../src/server/sessao.js';
+import { registrarFontesDutoExibidas } from '../../src/server/exibicaoDutos.js';
 import { hashCanonico } from '../../src/rules/conteudoCanonico.js';
 import { fonteSintetica, presente } from '../fixtures/triagem.js';
 
@@ -23,10 +25,16 @@ export function ambiente(caminho=':memory:') {
  function assinar(ciclo='c1',droga='doxorrubicina',doseMg=102,contexto=ctx) {
   const documentId=`rx-${ciclo}`,reviewDecisionId=`review-b2-seed-${n+1}`;
   const data={documentId,documentVersion:1,tipoDocumento:'PRESCRICAO_QT',texto:'Documento inteiramente sintético'};
-  seed('DOCUMENTO',{data,signature:{documentId,documentVersion:1,documentHash:hashCanonico(data),reviewDecisionId,serverActorId:login.sessao.medicoId}},'ASSINADO',contexto);
-  seed('Ciclo',{cicloId:ciclo,episodioId:'episodio-b2',numero:1,previstoEm:'2026-10-19',pesoKg:presente(70),origemPeso:'MEDIDO',ciclosSemPesoConsecutivos:0,prescricaoRef:{documentId,documentVersion:1},itens:[{item:1,droga,doseMg,reducaoPct:0}],comMedico:true},'CONFIRMADO',contexto);
+  const documentoEventId=seed('DOCUMENTO',{data,signature:{documentId,documentVersion:1,documentHash:hashCanonico(data),reviewDecisionId,serverActorId:login.sessao.medicoId}},'ASSINADO',contexto);
+  const cicloEventId=seed('Ciclo',{cicloId:ciclo,episodioId:'episodio-b2',numero:1,previstoEm:'2026-10-19',pesoKg:presente(70),origemPeso:'MEDIDO',ciclosSemPesoConsecutivos:0,prescricaoRef:{documentId,documentVersion:1},itens:[{item:1,droga,doseMg,reducaoPct:0}],comMedico:true},'CONFIRMADO',contexto);
+  return {documentoEventId,cicloEventId};
  }
- return {db,acesso,login,seed,assinar};
+ function exibirFontesDuto(eventIds:readonly string[]) {
+  const ids=new Set(eventIds),eventos=listarEventos(db,ctx.patientId).filter(e=>ids.has(e.eventId));
+  if(eventos.length!==ids.size)throw Error('FONTE_DUTO_SINTETICA_AUSENTE');
+  registrarFontesDutoExibidas(sessoes,login.token,ctx,eventos);
+ }
+ return {db,acesso,login,seed,assinar,exibirFontesDuto};
 }
 export function entrada(adminId='a1',quantidadeEfetivaMg=64,ciclo='c1',droga='doxorrubicina') {
  const prescricaoRef={documentId:`rx-${ciclo}`,documentVersion:1};

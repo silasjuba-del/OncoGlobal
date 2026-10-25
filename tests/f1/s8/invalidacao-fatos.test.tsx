@@ -19,6 +19,8 @@ it("confirmação HTTP de laboratório atualiza irmã consulta automaticamente; 
  await ambiente.request("/consulta/carregar",{patientId:PACIENTE,encounterId:ENCONTRO});
  const source=await ambiente.request("/consulta/extrair",{sourceId:"fonte-refresh",recordingId:"recording-refresh",sourceType:"medical_note",rawTranscript:"09/10/2026 Creatinina 1,2 mg/dL"});
  expect(source.status).toBe(201);
+ const leitura=await ambiente.request<{draft:{draftId:string}}>("/consulta/rascunho",{draftId:source.data.draftId});
+ expect(leitura.status).toBe(200);expect(leitura.data.draft.draftId).toBe(source.data.draftId);
  expect((await ambiente.request("/consulta/rascunho/revisar",{draftId:source.data.draftId,expectedRevision:0,patientId:PACIENTE})).status).toBe(200);
  const http=globalThis.fetch,base=ambiente.baseUrl;
  vi.stubGlobal("fetch",(input:Parameters<typeof fetch>[0],init?:Parameters<typeof fetch>[1])=>http(typeof input==="string"&&input.startsWith("/")?`${base}${input}`:input,init));

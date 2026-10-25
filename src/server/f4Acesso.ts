@@ -264,7 +264,6 @@ export function assinarMinutaLaudoAcessoJudicialF4(
   entrada: {
     minutaId: string;
     versao: number;
-    atorOverrideParaTesteAdversarial?: { tipo: "SESSAO" | "AGENTE" | "SISTEMA" | "EXECUTOR"; crm?: string | null };
   },
 ):
   | { ok: true; minutaAssinada: MinutaLaudoAcessoJudicial }
@@ -273,7 +272,8 @@ export function assinarMinutaLaudoAcessoJudicialF4(
   if (!sessao) return { ok: false, codigo: "SESSAO_INVALIDA" };
   garantirSchemaF4(db);
 
-  const atorVerificado = entrada.atorOverrideParaTesteAdversarial ?? {
+  if(Object.hasOwn(entrada,'atorOverrideParaTesteAdversarial'))return {ok:false,codigo:'G03_ASSINATURA_NEGADA'};
+  const atorVerificado = {
     tipo: "SESSAO" as const,
     crm: sessao.crm,
   };

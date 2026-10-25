@@ -40,7 +40,7 @@ export function TelaSalao({ porta }: { porta: PortaConsulta }) {
       if (primeira && porta.selecionarContexto) {
         try { await porta.selecionarContexto({ patientId: primeira.patientId,
           encounterId: primeira.encounterId, tumorLotId: null });
-          if (viva) setContextoContingencia(`${primeira.patientId}:${primeira.encounterId}`); }
+          if (viva){setContextoContingencia(`${primeira.patientId}:${primeira.encounterId}`);const atualizada=await porta.filaSalao();if(viva)setVisao(atualizada);} }
         catch (error) { if (viva) setErro(textoErro(error)); }
       }
       if (viva) { contextoEmVoo.current = false; setSelecionandoContexto(false); }
@@ -82,6 +82,7 @@ export function TelaSalao({ porta }: { porta: PortaConsulta }) {
                   encounterId: proximo.encounterId, tumorLotId: null });
                 setPatientId(proximo.patientId);
                 setContextoContingencia(`${proximo.patientId}:${proximo.encounterId}`);
+                setVisao(await porta.filaSalao());
               } catch (error) { setErro(textoErro(error)); }
               finally { contextoEmVoo.current = false; setSelecionandoContexto(false); }
             })();
@@ -97,7 +98,7 @@ export function TelaSalao({ porta }: { porta: PortaConsulta }) {
       {erro ? <p role="alert">{erro}</p> : null}
       {visao.avisos?.filter(a=>a.patientId === escolhido.patientId).length ? <p role="status" aria-label="Avisos do salão">
         {visao.avisos.filter(a=>a.patientId === escolhido.patientId).map(a=>a.texto).join("; ")}</p> : null}
-      <FilaRelatosInfusao porta={porta} relatos={visao.relatosInfusao ?? []} aoAtualizar={async () => setVisao(await porta.filaSalao())} />
+      <FilaRelatosInfusao porta={porta} bloqueado={selecionandoContexto} relatos={visao.relatosInfusao ?? []} aoAtualizar={async () => setVisao(await porta.filaSalao())} />
       <Triagem5Passos
         pacienteNome={escolhido.nome}
         onResumo={(t) => {

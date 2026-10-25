@@ -39,7 +39,9 @@ export function CabecalhoPaciente({
       ) : null}
 
       <section aria-label="Alergias e comorbidades do paciente">
-        <p>Alergias: {listaOuPendente(visao.alergiasPaciente)}</p>
+        <p>Alergias: {visao.situacaoAlergias?.estado==='NEGADAS'?'Negadas explicitamente'
+          :visao.situacaoAlergias?.estado==='CONFLITO'?'A CONFERIR — fontes divergentes'
+          :listaOuPendente(visao.alergiasPaciente)}</p>
         <p>Comorbidades: {listaOuPendente(visao.comorbidadesPaciente)}</p>
       </section>
 
