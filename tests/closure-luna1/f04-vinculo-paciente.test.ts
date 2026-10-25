@@ -14,6 +14,12 @@ async function post<T>(ambiente: Awaited<ReturnType<typeof ambienteHttp>>, rota:
   return { status: response.status, data: JSON.parse(response.body) as T };
 }
 
+async function exibirFonte(ambiente: Awaited<ReturnType<typeof ambienteHttp>>, draftId: string) {
+  const leitura = await post<{ draft: { draftId: string } }>(ambiente, "/consulta/rascunho", { draftId });
+  expect(leitura.status).toBe(200);
+  expect(leitura.data.draft.draftId).toBe(draftId);
+}
+
 function cadastrarPaciente(ambiente: Awaited<ReturnType<typeof ambienteHttp>>, nome: string,
   identificadores: Array<{ tipo: "CNS" | "CPF" | "PRONTUARIO"; valor: string }> = []) {
   const sessao = ambiente.sessoes.obter(ambiente.token)!;
@@ -57,6 +63,7 @@ describe("closure F04 · vínculo documental explicitamente revisado", () => {
         patientId: PACIENTE, encounterId: ENCONTRO, tumorLotId: null,
       });
       expect(contexto.status).toBe(200);
+      await exibirFonte(ambiente, extracted.data.draftId);
       const gravado = await post<{ codigo: string; revision: number }>(ambiente, "/consulta/rascunho/revisar", pedido);
       expect(gravado).toMatchObject({ status: 200, data: { codigo: "VINCULO_REVISTO", revision: 1 } });
       expect(lerDraft(ambiente.db, pedido.draftId)?.payload).toMatchObject({ patientLinkReview: {
@@ -84,6 +91,7 @@ describe("closure F04 · vínculo documental explicitamente revisado", () => {
       const sourceDraft = lerDraft(ambiente.db, extracted.data.draftId)!;
       const exception = (sourceDraft.payload as { state: { confirmationRequired: Array<{ id: string; kind: string }> } })
         .state.confirmationRequired.find((item) => item.kind === "UNLINKED_PATIENT")!;
+      await exibirFonte(ambiente, extracted.data.draftId);
       const response = await post<{ codigo: string }>(ambiente, "/consulta/rascunho/revisar", {
         exceptionId: exception.id, acao: "LIGAR_PACIENTE", draftId: extracted.data.draftId,
         expectedRevision: 0, patientId: PACIENTE, sourceId: "documento-sintetico-conflict",
@@ -110,6 +118,7 @@ describe("closure F04 · vínculo documental explicitamente revisado", () => {
       const sourceDraft = lerDraft(ambiente.db, extracted.data.draftId)!;
       const exception = (sourceDraft.payload as { state: { confirmationRequired: Array<{ id: string; kind: string }> } })
         .state.confirmationRequired.find((item) => item.kind === "UNLINKED_PATIENT")!;
+      await exibirFonte(ambiente, extracted.data.draftId);
       const response = await post<{ codigo: string; motivo: string }>(ambiente, "/consulta/rascunho/revisar", {
         exceptionId: exception.id, acao: "LIGAR_PACIENTE", draftId: extracted.data.draftId,
         expectedRevision: 0, patientId: PACIENTE, sourceId: "documento-sintetico-cns-trocado",
@@ -133,6 +142,7 @@ describe("closure F04 · vínculo documental explicitamente revisado", () => {
       });
       const contexto = {patientId: PACIENTE, encounterId: ENCONTRO, tumorLotId: null};
       expect(await post(ambiente, "/consulta/contexto/selecionar", contexto)).toMatchObject({status: 200});
+      await exibirFonte(ambiente, extracted.data.draftId);
       const response = await post<{ codigo: string; fatosConfirmados: number }>(ambiente,
         "/consulta/rascunho/revisar", { draftId: extracted.data.draftId, expectedRevision: 0, patientId: PACIENTE });
       expect(response).toMatchObject({ status: 200, data: { codigo: "VINCULO_REVISTO", fatosConfirmados: 0 } });
@@ -166,6 +176,7 @@ describe("closure F04 · vínculo documental explicitamente revisado", () => {
       const otherFact = extracted.data.facts.find((fact) => fact.segmentId !== firstSegmentId);
       expect(otherFact).toBeDefined();
       if (!otherFact) throw new Error("FATO_SINTETICO_DO_SEGMENTO_NAO_LIGADO_AUSENTE");
+      await exibirFonte(ambiente, draft.draftId);
       const linked = await post<{ codigo: string }>(ambiente, "/consulta/rascunho/revisar", {
         exceptionId: exception.id, acao: "LIGAR_PACIENTE", draftId: draft.draftId,
         expectedRevision: 0, patientId: PACIENTE, sourceId: "source-multisegment-f04",

@@ -12,7 +12,7 @@ const pacienteId="pt-opaque-uuid-001",assinadoEm="2026-10-10T08:00:00-03:00";
 function db(){const d=new DatabaseSync(":memory:");criarSchema(d);dbs.push(d);return d;}
 function evento(d:DatabaseSync,id:string,tipo:string,data:unknown,em:string,patientId=pacienteId,revisao="CONFIRMADO"){
  d.prepare("INSERT INTO operation VALUES (?,?,?,?)").run(id,"hash",null,em);
- d.prepare("INSERT INTO clinical_event VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)").run(id,id,0,patientId,null,"encontro-opaco",tipo,JSON.stringify({data}),"[]",revisao,em,JSON.stringify({tipo:"SESSAO",id:"medico-opaco"}),null);
+ d.prepare("INSERT INTO clinical_event VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)").run(id,id,0,patientId,null,"encontro-opaco",tipo,JSON.stringify({reviewDecisionId:'review',data}),"[]",revisao,em,JSON.stringify({tipo:"SESSAO",id:"medico-opaco"}),null);
 }
 function cadastro(d:DatabaseSync,id:string,nome:string,em:string,patientId=pacienteId){evento(d,id,"Paciente",{patientId,nome,identificadores:[],nascimento:null,sexoCadastral:"NAO_INFORMADO",divergencia:false},em,patientId);}
 function documento(d:DatabaseSync,extra:Record<string,unknown>={}){

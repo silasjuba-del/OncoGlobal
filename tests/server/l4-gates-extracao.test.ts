@@ -7,7 +7,7 @@ let a:Awaited<ReturnType<typeof abrirAmbiente>>|undefined;
 afterEach(async()=>{if(a){await a.close();removerDiretorio(a.dir);a=undefined;}});
 async function abrir(){a=await abrirAmbiente(criarDiretorio());cadastrarPaciente(a);await carregarConsulta(a);return a;}
 it.each([['biópsia',false],['ressecção cirúrgica',true],['não informado',false]])('pTNM de %s não é promovido sem prova; laboratório independente segue',async(material,promove)=>{
- const a=await abrir();const e=await extrair(a,{sourceId:'path-sintetico',sourceType:'pathology',text:`Paciente: ${PACIENTE}\nMaterial: ${material}\npT2N0M0\n09/10/2026 Hemoglobina 11,5 g/dL.`});
+ const a=await abrir();const e=await extrair(a,{sourceId:'path-sintetico',sourceType:'pathology',text:`Paciente: ${PACIENTE}\nMaterial: ${material}\nPaciente atualmente com pT2N0M0\n09/10/2026 Hemoglobina 11,5 g/dL.`});
  const ids=e.facts.filter(f=>['stage','lab'].includes(f.domain)).map(f=>f.id);expect(ids.length).toBeGreaterThan(1);
  const fluxo=await confirmarFatos(a,e,ids,`g09-${material}`);expect(fluxo.preview.status).toBe(200);
  const r=await fluxo.confirmar(fluxo.preview.data.comprovanteExibicao);expect(r.status).toBe(200);

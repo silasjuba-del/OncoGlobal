@@ -195,7 +195,8 @@ it("M10 falha ao persistir ciência desfaz assinatura, auxiliares e revisões",a
  const r=await a.request(CONFIRMAR,{contexto,draftId:preparada.draftId,expectedRevision:preparada.revision,
   conteudoHash:preparada.conteudoHash,idempotencyKey:"rx-atomicidade",reconhecerAlertas:ids});
  expect(r.status).toBe(503);expect(a.eventos()).toEqual(antes);expect(listarDrafts(a.db,PACIENTE)).toEqual(drafts);
- expect(a.db.prepare("SELECT COUNT(*) AS n FROM audit_event").get()!.n).toBe(auditorias);
+ expect(Number(a.db.prepare("SELECT COUNT(*) AS n FROM audit_event").get()!.n)).toBe(Number(auditorias)+1);
+ expect(a.db.prepare('SELECT motivoCodigo,decisao FROM audit_event ORDER BY auditId DESC LIMIT 1').get()).toMatchObject({motivoCodigo:'PRESCRICAO_ARMAZENAMENTO_INDISPONIVEL',decisao:'NEGADA'});
  expect(a.db.prepare("SELECT 1 FROM operation WHERE operationId=?").get("rx-confirmar:rx-atomicidade")).toBeUndefined();
  expect(a.db.prepare("SELECT COUNT(*) AS n FROM alerta_reconhecimento").get()!.n).toBe(1);
 });
@@ -983,7 +984,9 @@ it("RT02: falha SQLite apos primeiro auxiliar retorna 503 e um log seguro sem ef
     codigo: "PRESCRICAO_ARMAZENAMENTO_INDISPONIVEL", status: 503 }]]);
   expect(a.eventos()).toEqual(antes);
   expect(listarDrafts(a.db, PACIENTE)).toEqual(drafts);
-  expect(a.db.prepare("SELECT * FROM audit_event").all()).toEqual(audits);
+  const depois=a.db.prepare("SELECT * FROM audit_event").all();expect(depois.slice(0,-1)).toEqual(audits);
+  expect(depois.at(-1)).toMatchObject({decisao:'NEGADA',motivoCodigo:'PRESCRICAO_ARMAZENAMENTO_INDISPONIVEL',politicaVersao:'L4-PRESCRICAO@1'});
+  expect(JSON.stringify(depois)).not.toContain('segredo-sintetico-nao-logar');
 });
 
 

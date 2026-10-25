@@ -75,6 +75,11 @@ async function revisarComExibicao(app: Awaited<ReturnType<typeof iniciar>>, pedi
   const exibida = await exibirRevisao(app, pedido);
   return app.request("/consulta/rascunho/revisar", exibida);
 }
+async function exibirFonteParaVinculo(app: Awaited<ReturnType<typeof iniciar>>, draftId: string) {
+  const leitura = await app.request("/consulta/rascunho", { draftId });
+  expect(leitura.status).toBe(200);
+  expect(leitura.data.draft.draftId).toBe(draftId);
+}
 
 /** O recibo atesta o resumo exato; não é um segundo fato nem uma decisão sobre um candidato. */
 function verificarRecibo(db: ReturnType<typeof abrirLedger>, operationId: string) {
@@ -121,6 +126,7 @@ describe("W10 entrega · extração, revisão explícita e recuperação HTTP", 
       expect(target38).toBeDefined(); expect(target14).toBeDefined();
       expect(facts.some((fact) => fact.domain === "stage")).toBe(false);
 
+      await exibirFonteParaVinculo(app, extracted.data.draftId);
       const link = await app.request("/consulta/rascunho/revisar", { draftId: extracted.data.draftId,
         expectedRevision: 0, patientId: PATIENT });
       expect(link.status).toBe(200);
@@ -216,6 +222,7 @@ describe("W10 entrega · extração, revisão explícita e recuperação HTTP", 
       semearPaciente(db, app.token, app.sessoes);
       expect((await app.request("/consulta/carregar", { patientId: PATIENT, encounterId: ENCOUNTER })).status).toBe(200);
       const spokenFact = spoken.data.facts.find((fact: { domain: string }) => fact.domain === "lab");
+      await exibirFonteParaVinculo(app, spoken.data.draftId);
       await app.request("/consulta/rascunho/revisar", { draftId: spoken.data.draftId,
         expectedRevision: 0, patientId: PATIENT });
       const spokenReview = await revisarComExibicao(app, { draftId: spoken.data.draftId,
@@ -253,6 +260,7 @@ describe("W10 entrega · extração, revisão explícita e recuperação HTTP", 
       const facts = result.data.facts as Array<{ id: string; domain: string; date?: string; value: any }>;
       expect(result.status).toBe(201);
       expect(facts).toHaveLength(3);
+      await exibirFonteParaVinculo(app, result.data.draftId);
       const link = await app.request("/consulta/rascunho/revisar", { draftId: result.data.draftId,
         expectedRevision: 0, patientId: PATIENT });
       expect(link.status).toBe(200);
@@ -283,6 +291,7 @@ describe("W10 entrega · extração, revisão explícita e recuperação HTTP", 
       const first = await app.request("/consulta/extrair", { recordingId: "nota-a-88", sourceId: "nota-a-source-88",
         sourceType: "medical_note", rawTranscript: "Diagnóstico: adenocarcinoma de pulmão" });
       const factA = first.data.facts.find((fact: { domain: string }) => fact.domain === "diagnosis");
+      await exibirFonteParaVinculo(app, first.data.draftId);
       await app.request("/consulta/rascunho/revisar", { draftId: first.data.draftId,
         expectedRevision: 0, patientId: PATIENT });
       let before = await app.request("/consulta/carregar", { patientId: PATIENT, encounterId: ENCOUNTER });
@@ -295,6 +304,7 @@ describe("W10 entrega · extração, revisão explícita e recuperação HTTP", 
       const second = await app.request("/consulta/extrair", { recordingId: "nota-b-88", sourceId: "nota-b-source-88",
         sourceType: "medical_note", rawTranscript: "Diagnóstico: carcinoma de mama" });
       const factB = second.data.facts.find((fact: { domain: string }) => fact.domain === "diagnosis");
+      await exibirFonteParaVinculo(app, second.data.draftId);
       await app.request("/consulta/rascunho/revisar", { draftId: second.data.draftId,
         expectedRevision: 0, patientId: PATIENT });
       const reviewedB = await revisarComExibicao(app, { draftId: second.data.draftId,
@@ -321,6 +331,7 @@ describe("W10 entrega · extração, revisão explícita e recuperação HTTP", 
         sourceId: "laudo-stage-88", sourceType: "medical_note", rawTranscript: "Estadiamento cT2N0M0 em 10/09/2026" });
       const stage = extracted.data.facts.find((fact: { domain: string }) => fact.domain === "stage");
       expect(stage).toMatchObject({ evidence: "EXPLICIT", requiresConfirmation: false, date: "2026-09-10" });
+      await exibirFonteParaVinculo(app, extracted.data.draftId);
       await app.request("/consulta/rascunho/revisar", { draftId: extracted.data.draftId,
         expectedRevision: 0, patientId: PATIENT });
       const reviewed = await revisarComExibicao(app, { draftId: extracted.data.draftId,

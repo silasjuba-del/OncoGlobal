@@ -1,6 +1,7 @@
 import { PedidoRecuperacaoConfirmacao } from "../contracts/api/recuperacaoConfirmacao.js";
 import { ErroProveniencia } from "../kernel/comandos/proveniencia.js";
 import { registrarSalaoExibido } from './exibicaoSalao.js';
+import {adiarExibicoesHttp} from './exibicaoHttp.js';
 import {registrarFontesDutoExibidas} from './exibicaoDutos.js';
 import { operarAtendimentoV6 } from "./atendimentoV6.js";
 import { criarResolverDocumentoLedger, listarDrafts, listarEventos } from "../kernel/comandos/portas.js";
@@ -135,6 +136,13 @@ async function body(req: IncomingMessage, limite = 1_000_000): Promise<unknown> 
 export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: ServerResponse): Promise<void> {
   if (await rotearWebhookCanal(deps, req, res)) return;
   if (servirUiLocal(deps, req, res)) return;
+  const exibicao=adiarExibicoesHttp(deps.sessoes);
+  deps={...deps,sessoes:exibicao.sessoes};
+  res.once('finish',()=>{
+    if(res.statusCode<200||res.statusCode>=300||res.destroyed){exibicao.descartar();return;}
+    try{exibicao.confirmar();}catch{deps.log({rota:'exibicao',codigo:'RECIBO_EXIBICAO_NAO_REGISTRADO',status:503});}
+  });
+  res.once('close',()=>exibicao.descartar());
   const rota = rotaHttp(req.url)?.nome ?? "desconhecida";
   const reply = (status: number, codigo: string, result: unknown = { codigo }) => {
     const valida = respostaHttpValida(rota, status, result);

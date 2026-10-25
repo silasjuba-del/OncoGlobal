@@ -11,6 +11,7 @@ import { afterEach, describe, expect, it } from "vitest";
 import { DoseRuleset, SalaoRuleset } from "../../src/contracts/regras.js";
 import { g07Lateralidade, g09PtDeBiopsia, g13Letra } from "../../src/kernel/harness/gates.js";
 import { abrirLedger } from "../../src/kernel/ledger/db.js";
+import { listarEventos } from "../../src/kernel/ledger/ledger.js";
 import { antiglosa } from "../../src/modules/apac/antiglosa.js";
 import {
   avaliarDoseECicloSalao,
@@ -30,6 +31,7 @@ import {
   registrarLiberacaoComCorteSalaoF3,
 } from "../../src/server/salaoF3.js";
 import { criarGerenciadorSessao } from "../../src/server/sessao.js";
+import { registrarFontesDutoExibidas } from "../../src/server/exibicaoDutos.js";
 import { criarPortaFalsa } from "../../src/ui/api/fake.js";
 import { TelaSalao } from "../../src/ui/telas/TelaSalao.js";
 import { CalculadoraDose } from "../../src/ui/tratamento/CalculadoraDose.js";
@@ -457,6 +459,11 @@ describe("FASE F3 · Salão de Quimioterapia (S-F3-01 a S-F3-04 e casos clínico
         expect(executarConfirmacao(db,{...contexto,operationId:id,reviewDecisionId:`rev-f3-${n}-${tipo}`,sessao:sessaoMedica,em:AGORA,
           registros:[{draftId:id,expectedRevision:0,eventId:id,tipo,payload,fontes:[fonte],revisao:tipo==='DOCUMENTO'?'ASSINADO':'CONFIRMADO'}]}).estado).toBe('GRAVADA');
       }
+      // A conferência da administração exige que a prescrição assinada e o ciclo
+      // sejam entregues ao médico no mesmo contexto antes do registro efetivo.
+      const visiveis=listarEventos(db,contexto.patientId).filter(e=>
+        e.eventId===`seed-f3-${n}-DOCUMENTO`||e.eventId===`seed-f3-${n}-Ciclo`);
+      registrarFontesDutoExibidas(acesso.sessoes,acesso.token,contexto,visiveis);
     }
     prepararContexto(1);
     const rAdm1 = registrarAdministracaoEfetivaSalaoF3(db, acesso, {

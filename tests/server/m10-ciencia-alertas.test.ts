@@ -29,6 +29,8 @@ it('contingência deriva E1 do servidor mesmo com flag cliente falsa e recusa re
  const atual=await a.request('/consulta/salao/contingencia/gerar',{...p,operationId:'contingencia-com-e1'});
  expect(atual.status).toBe(200);expect(atual.data.folha.emergenciaAtiva).toBe(true);
  expect(atual.data.folha.htmlImprimivel).toContain('E1 — EMERGÊNCIA ATIVA');
+ gravarAlerta('e1-servidor-posterior');
+ expect(await a.request('/consulta/salao/contingencia/gerar',{...p,operationId:'contingencia-com-e1'})).toMatchObject({status:409,data:{codigo:'FOLHA_DESATUALIZADA_POR_E1'}});
 });
 async function pedidoAssinatura(chave:string,reconhecerAlertas:string[]){
  const {context,preparada}=await finalizarFlash(a,chave);expect(preparada.status).toBe(200);

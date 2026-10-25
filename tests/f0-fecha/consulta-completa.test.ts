@@ -145,6 +145,9 @@ describe("F0 E6b · consulta completa com HTTP real e SQLite temporário", () =>
       const fact = extraido.facts.find((candidate) => candidate.domain === "lab");
       expect(fact).toBeDefined();
       if (!fact) throw new Error(`CANDIDATO_LAB_AUSENTE:${item.sourceId}`);
+      const leitura = await ambiente.request<{ draft: { draftId: string } }>("/consulta/rascunho", { draftId: extraido.draftId });
+      expect(leitura.status).toBe(200);
+      expect(leitura.data.draft.draftId).toBe(extraido.draftId);
       const linked = await ambiente.request<Record<string, any>>("/consulta/rascunho/revisar", {
         exceptionId: extraido.exceptions.find((exception) => exception.kind === "UNLINKED_PATIENT")!.id,
         acao: "LIGAR_PACIENTE", draftId: extraido.draftId, expectedRevision: 0,

@@ -98,7 +98,7 @@ export function TelaSalao({ porta }: { porta: PortaConsulta }) {
       {erro ? <p role="alert">{erro}</p> : null}
       {visao.avisos?.filter(a=>a.patientId === escolhido.patientId).length ? <p role="status" aria-label="Avisos do salão">
         {visao.avisos.filter(a=>a.patientId === escolhido.patientId).map(a=>a.texto).join("; ")}</p> : null}
-      <FilaRelatosInfusao porta={porta} relatos={visao.relatosInfusao ?? []} aoAtualizar={async () => setVisao(await porta.filaSalao())} />
+      <FilaRelatosInfusao porta={porta} bloqueado={selecionandoContexto} relatos={visao.relatosInfusao ?? []} aoAtualizar={async () => setVisao(await porta.filaSalao())} />
       <Triagem5Passos
         pacienteNome={escolhido.nome}
         onResumo={(t) => {

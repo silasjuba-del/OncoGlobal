@@ -53,7 +53,7 @@ export function operarContingenciaSalao(deps: ServidorDeps, token: string, rota:
       if(dataServidor.estado!=='OK')return {status:503,body:{codigo:'DATA_SERVICO_INDISPONIVEL'}};
       const e1Servidor=projetarAlertasConsulta(deps.db,listarEventos(deps.db,ctx.patientId),ctx,dataServidor.dataCivil,agora,deps.salaoRuleset)
         .filter(a=>a.natureza==='AMEACA_IMEDIATA');
-      if(persistida&&e1Servidor.length&&!persistida.emergenciaAtiva)return {status:409,body:{codigo:'FOLHA_DESATUALIZADA_POR_E1'}};
+      if(persistida&&e1Servidor.some(a=>!persistida.emergenciaAtiva||!persistida.alertasOperacionaisE1.includes(a.texto)))return {status:409,body:{codigo:'FOLHA_DESATUALIZADA_POR_E1'}};
       if (row && (row.patientId !== ctx.patientId || row.encounterId !== ctx.encounterId
         || persistida?.folhaId !== folhaId || persistida.patientId !== ctx.patientId || persistida.encounterId !== ctx.encounterId)) {
         return { status: 409, body: { codigo: "FOLHA_ID_CONFLITANTE" } };

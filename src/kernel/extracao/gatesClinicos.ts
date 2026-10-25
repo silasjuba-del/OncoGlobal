@@ -30,13 +30,13 @@ export function avaliarGatesExtracao(fatos:readonly FatoGate[],texto:string,cont
  const grupos=new Map<string,FatoGate[]>();
  for(const f of [...fatos,...contexto?.fatos??[]]){
   if(!['diagnosis','histology','imaging','procedure'].includes(f.domain))continue;
+  const v=objeto(f.value),orgao=typeof v.sitioCanonico==='string'?v.sitioCanonico:typeof v.anatomia==='string'?v.anatomia:'';
+  if(!orgao)continue;
   if(!atual(f)){
    if(f.qualificadores?.sujeito!=='TERCEIRO'&&f.qualificadores?.polaridade!=='NEGADA'&& !['HISTORICA','FUTURA'].includes(f.qualificadores?.temporalidade??''))
     incluir({gate:'G-08',decisao:'PENDENTE',motivo:'Sujeito/temporalidade/evidência não determinam aplicabilidade; conferir a fonte.'},[f]);
    continue;
   }
-  const v=objeto(f.value),orgao=typeof v.sitioCanonico==='string'?v.sitioCanonico:typeof v.anatomia==='string'?v.anatomia:'';
-  if(!orgao){incluir(g08AnatomiaSexo({}),[f]);continue;}
   incluir(g08AnatomiaSexo({anatomia:orgao,sexoCadastral:contexto?.sexoCadastral}),[f]);
   // Relação só quando a fonte nomeia a mesma lesão. Mesmo órgão sozinho não prova identidade da lesão.
   const lesao=/^\s*les[aã]o\s+(?:id\s*:\s*)?([\p{L}\d_-]+)\s*:/iu.exec(f.rawEvidence)?.[1];
@@ -57,6 +57,12 @@ export function avaliarGatesExtracao(fatos:readonly FatoGate[],texto:string,cont
  }
  for(const f of fatos.filter(f=>f.domain==='stage')){
   const tnm=literal(f),prefixo=/^(yp|[cp])T/iu.exec(tnm.trim())?.[1]??'';
+  if(['p','yp'].includes(prefixo.toLowerCase())&&(!atual(f)||/\b(?:antig[oa]|anterior|hist[oó]ric[oa]|pr[eé]vi[oa])\b/iu.test(f.rawEvidence))){
+   incluir({gate:'G-09',decisao:'PENDENTE',motivo:'Sujeito ou temporalidade não sustentam associação do pTNM à peça atual.'},[f]);continue;
+  }
+  if(['p','yp'].includes(prefixo.toLowerCase())&&!materialExplicito(f.rawEvidence)&&new Set(fatos.filter(n=>n.domain==='stage').map(literal)).size>1){
+   incluir({gate:'G-09',decisao:'PENDENTE',motivo:'Múltiplos TNM sem material individualizado por trecho; conferir a origem.'},[f]);continue;
+  }
   const v=objeto(f.value),tipoEsperado=prefixo.toLowerCase()==='p'?'PATOLOGICO':prefixo.toLowerCase()==='yp'?'POS_TRATAMENTO':'CLINICO';
   if(typeof v.prefixo==='string'&&v.prefixo.toLowerCase()!==prefixo.toLowerCase()||typeof v.tipo==='string'&&v.tipo!==tipoEsperado){
    incluir({gate:'G-09',decisao:'PENDENTE',motivo:'Prefixo/tipo estruturado diverge do TNM literal; conferir a fonte.'},[f]);continue;

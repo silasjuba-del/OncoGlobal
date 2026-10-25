@@ -3,6 +3,8 @@
 // Não remove o bloqueio de envio externo (CANAL_EXTERNO_NAO_HABILITADO preservado em S-F2-02).
 import type { DatabaseSync } from "node:sqlite";
 import { readFileSync } from "node:fs";
+import {dirname,resolve} from 'node:path';
+import {fileURLToPath} from 'node:url';
 import { ReconciliacaoClinicaCanal, type PropostaClassificacaoLlmBruta } from "../contracts/f2/reconciliacaoCanal.js";
 import { g02PhiEgress } from "../kernel/harness/gates.js";
 import { desidentificar, type DicionarioPaciente } from "../kernel/llm/desidentificar.js";
@@ -38,7 +40,7 @@ export type ClassificadorCanalLlm = (entrada: {
 let rulesetPadraoCache: RulesetAlarmeCanalEntrada | null = null;
 
 function carregarCorpusCtcae(): unknown {
-  try { return JSON.parse(readFileSync(new URL("../../corpus/rulesets/salao-ctcae.v1.json", import.meta.url), "utf8")); }
+  try { return JSON.parse(readFileSync(resolve(dirname(fileURLToPath(import.meta.url)),"../../corpus/rulesets/salao-ctcae.v1.json"), "utf8")); }
   catch { return null; }
 }
 
@@ -46,7 +48,7 @@ export function carregarRulesetAlarmeCanalPadrao(): RulesetAlarmeCanalEntrada | 
   if (rulesetPadraoCache) return rulesetPadraoCache;
   try {
     const raw = JSON.parse(
-      readFileSync(new URL("../../corpus/rulesets/canal-redflags.v1.json", import.meta.url), "utf8"),
+      readFileSync(resolve(dirname(fileURLToPath(import.meta.url)),"../../corpus/rulesets/canal-redflags.v1.json"), "utf8"),
     ) as Record<string, unknown>;
     const lido = lerCanalRedflags(raw);
     const sinaisBrutos = Array.isArray(raw.sinais) ? raw.sinais as Array<Record<string, unknown>> : [];

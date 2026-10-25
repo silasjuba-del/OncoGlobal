@@ -35,7 +35,7 @@ async function montar(configurada=true){
   return {status:response.status,data:await response.json() as any,raw};
  };
  const consentir=()=>registrarConsentimentoCanal(a.db,{...a.acesso,agora},{contatoId:SENDER,patientId:ctx.patientId,referenciaTermo:'termo-sintetico',versaoTermo:'1',finalidade:['COMUNICACAO_CLINICA'],origem:'PRESENCIAL_CONSULTORIO'});
- const preparar=async()=>{await receber();consentir();const caixa=await post('/consulta/canal',{});const mensagem=caixa.data.mensagens.find((m:any)=>m.contatoId===SENDER);expect(mensagem.contextosResposta).toContainEqual(ctx);
+ const preparar=async()=>{await receber();consentir();const caixa=await post('/consulta/canal',{});expect(caixa.status,JSON.stringify(caixa.data)).toBe(200);const mensagem=caixa.data.mensagens.find((m:any)=>m.contatoId===SENDER);expect(mensagem.contextosResposta).toContainEqual(ctx);
   const r=await post('/consulta/canal/resposta/preparar',{...ctx,mensagemOrigemId:mensagem.mensagemId,respostaId:'resposta-http-sintetica',versao:1,texto:'Retorno na quinta-feira.'});expect(r.status,JSON.stringify(r.data)).toBe(200);return r.data.rascunho;};
  const confirmar=async(p:any)=>post('/consulta/canal/resposta/confirmar',{respostaId:p.respostaId,versao:p.versao,comprovanteExibicao:{destinatario:p.destinatario,conteudoSha256:p.conteudoSha256,contexto:p.contexto}});
  const intent=(p:any,key='tentativa-sintetica')=>({verbo:'ENVIAR_WHATSAPP' as const,objeto:{tipo:'MENSAGEM_CANAL',id:p.respostaId,versao:p.versao},escopo:{patientId:ctx.patientId,encounterId:ctx.encounterId},destino:p.destinatario,idempotencyKey:key});
@@ -54,6 +54,7 @@ it('mensagem desconhecida recebe vínculo médico pela tela e resposta autorizad
  expect((await e.receber('desconhecida','Dúvida sintética sobre retorno',sender)).status).toBe(200);
  const realFetch=globalThis.fetch;vi.stubGlobal('fetch',(input:string|URL|Request,init?:RequestInit)=>realFetch(typeof input==='string'&&input.startsWith('/')?e.base+input:input,init));
  const porta=criarPortaHttp({onSessaoExpirada:()=>{}});expect((await porta.login('senha-sintetica-bateria2')).ok).toBe(true);
+ await porta.carregarConsulta(ctx.patientId,null,ctx.encounterId);
  render(<CaixaCanal porta={porta} chaves={criarChaves()}/>);
  fireEvent.click(await screen.findByRole('button',{name:'vincular Paciente Sintético HTTP F2'}));
  await waitFor(()=>expect(screen.getByRole('region',{name:'Mensagens de Paciente Sintético HTTP F2'})).toBeTruthy());

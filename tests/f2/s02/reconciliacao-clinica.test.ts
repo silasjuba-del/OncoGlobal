@@ -113,7 +113,7 @@ afterEach(() => {
 describe("S-F2-02 · Vínculo, classificação e reconciliação clínica", () => {
   it('ruleset indisponível mantém mensagem pendente, sem recibo PROCESSADA',async()=>{
     const {db}=ledger(),acesso=sessao();
-    const ack=receberTransporteSintetico(db,{accountId:'wa-1',canal:'WHATSAPP_SERVICO',providerMessageId:'ruleset-ausente',senderRef:'+5500000001111',providerSentAt:ENVIADO,ingestedAt:AGORA,conteudo:textoConteudo('Relato sintético de febre.'),cadastros:CADASTROS});
+    const ack=receberTransporteSintetico(db,{accountId:'wa-1',canal:'WHATSAPP_SERVICO',providerMessageId:'ruleset-ausente',senderRef:CADASTROS[0]!.identificadores[0]!.valor,providerSentAt:ENVIADO,ingestedAt:AGORA,conteudo:textoConteudo('Relato sintético de febre.'),cadastros:CADASTROS});
     if(!ack.ok)throw Error('INGRESSO_FALHOU');
     expect(await reconciliarMensagemCanalPersistida(db,acesso,{mensagemId:ack.reciboId,cadastros:CADASTROS,rulesetAlarmes:null}))
       .toMatchObject({ok:false,codigo:'RULESET_RED_FLAGS_INDISPONIVEL'});

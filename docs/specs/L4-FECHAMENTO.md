@@ -82,3 +82,11 @@ Correções novas abaixo estão implementadas na worktree e aguardam revisão in
 | 42 | Lista visível só traz confirmação deste encontro. Referência interna conserva concorrência/linhagem sem mostrar a lista anterior; nova lista exige atestação. Ausência não suspende medicamentos por inferência. `l4-dominios-projecao`. |
 
 WRITE_SET expandido conforme causas demonstradas: gates de extração/porta comum e contratos de revisão; autorização/resolver de documentos; configuração; projeções de alergias/medicamentos/cumulativo; origem de ficha; contingência; canal; helpers F4/F5 sem ativação; testes e fixtures dessas jornadas. Codex revisa e integra as contribuições de testes dos Lunas.
+
+Decisão final de integração dos órfãos: Silas escolheu manter F3/F4/F5 inativos e documentar o limite de integração; F6 continua parado. Não há nova ativação autorizada neste lote.
+
+CI inicial da PR73 identificou fixtures que não faziam leitura prévia e envelopes sintéticos de assinatura sem reviewDecisionId. Corrigir setups pela jornada real/contrato atual, preservando assertions e controles negativos. A revisão independente também encontrou ruído G08 sem anatomia e associação indevida de material atual com TNM histórico/indeterminado: corrigidos com aplicabilidade explícita e teste adversarial; múltiplos TNM sem material individualizado permanecem pendentes.
+
+Revisão independente do delta: Luna validou G08/G09 e adiamento dos recibos até resposta HTTP 2xx concluída, incluindo contrato inválido e novo E1 em replay. Recibo comprova entrega HTTP do conteúdo, não percepção visual humana. Expiração no flush mantém falha fechada. Bateria dirigida atual: 20/20 (gates, dutos e E1), typecheck aprovado; suites de integração e CI ainda pendentes. Loader de ruleset em jornada jsdom corrigido por caminho nativo, sem curadoria/ativação de sinais.
+
+Validação adicional por Luna: 42/42 testes (seis jornadas de vínculo e três baterias administração/exposição/canal), F3 5/5 e erro UI canal 1/1. Bateria root de cinco arquivos: 34/35; fixture S03 corrigida por carregar ruleset real no lugar de null, rerun pendente. Bateria ampla root ainda em execução e sinalizou uma falha; não liberar merge até diagnóstico e reexecução.

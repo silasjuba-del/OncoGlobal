@@ -47,7 +47,8 @@ it.each(["medical_note", "imaging_report"] as const)("persiste extração %s com
     alerts: { gate: string; decisao: string }[] };
   expect(response.status).toBe(201);
   expect(result.linkedPatientId).toBeNull();
-  expect(result.alerts.some((a) => a.gate === "G-07" && a.decisao === "PENDENTE")).toBe(true);
+  // Sem lateralidade aplicável documentada, não fabricar o antigo G07({}) pendente.
+  expect(result.alerts.filter((a) => a.gate === "G-07")).toEqual([]);
   const patientDraft = { draftId: "paciente-31", patientId: "Paciente Teste 31", sourceId: "fonte-local",
     rawRef: "local-record", payload: {}, diagnostics: [], revision: 0, criadoEm: agora() };
   const { salvarDraft } = await import("../../src/kernel/ledger/drafts.js");

@@ -145,7 +145,7 @@ export function RevisaoExtracaoLocal({ porta, contexto, patientLabel, aoFatosCon
     if (!preparada || !porta.confirmarRevisaoExtracao || concluida) return;
     await executar(async (atual) => {
       const resultado = await porta.confirmarRevisaoExtracao!({ ...preparada.pedido,
-        cienciasGates,
+        ...(cienciasGates.length?{cienciasGates}:{}),
         comprovanteExibicao: preparada.resposta.comprovanteExibicao }, controller.current?.signal);
       if (atual !== geracao.current) return;
       if (resultado.codigo !== "GRAVADA" && resultado.codigo !== "REPLAY") throw new ErroPorta("REVISAO_NAO_CONFIRMADA");
