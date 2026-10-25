@@ -1,4 +1,5 @@
 import {RecuperacaoConfirmacao} from "./recuperacaoConfirmacao.js";
+import {AtendimentoV6Resposta} from "./atendimentoV6.js";
 import { PropostasDoseReceitaResposta } from './propostaDoseReceita.js';
 import { CatalogoFichasRespostaSchema, FichaProtocoloCatalogoSchema, InstanciacaoFichaRespostaSchema } from "./fichasPrescricao.js";
 import { ListarEstudosRespostaSchema, EstudoServicoSchema, AvaliacaoEstudoRespostaSchema, SchemaFatosTrialsResposta } from "./trialsServico.js";
@@ -77,6 +78,7 @@ export const SaidasHttp: Readonly<Record<string, z.ZodType>> = {
   avaliarInstrumento: z.object({ resultado: ResultadoInstrumentoSchema, gravado: z.literal(false), assinado: z.literal(false) }),
   oncoassistStatus: EstadoOncoassist, oncoassistFontes: FontesOncoassist, oncoassistClassificar: RespostaOncoassist,
   oncoassistHistorico: HistoricoOncoassist,
+  recuperarAtendimentoV6:AtendimentoV6Resposta,prepararAtendimentoV6:AtendimentoV6Resposta,
   sinteseRetratoLlm: SintesePropostaResposta, reconciliarRascunhos: ReconciliacaoProposta, prepararRevisao: RevisaoPreparada,
   proporDoseReceita: PropostasDoseReceitaResposta,
   rascunhoFlash: FlashRascunhoResposta, prepararFlash: FlashPreparadaResposta,

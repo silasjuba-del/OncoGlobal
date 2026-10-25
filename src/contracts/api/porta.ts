@@ -363,6 +363,8 @@ export interface PortaConsulta {
   biblioteca?: ApiBiblioteca;
   reconciliarMedicamentos?(pedido: {patientId:string;encounterId:string;tumorLotId:string|null;operationId:string;expectedEventId:string|null;medicamentos:string[];listaAtualCompleta:true}, signal?:AbortSignal):Promise<{codigo:"GRAVADA"|"REPLAY";eventId:string}>;
   sintetizarRetrato?(contexto: { patientId: string; encounterId: string; tumorLotId: string | null; idempotencyKey: string }, signal?: AbortSignal): Promise<import("./sinteseProposta.js").SintesePropostaResposta>;
+  recuperarAtendimentoV6?(contexto:{patientId:string;encounterId:string;tumorLotId:string|null},signal?:AbortSignal):Promise<import("./atendimentoV6.js").AtendimentoV6Resposta>;
+  prepararAtendimentoV6?(pedido:import("./atendimentoV6.js").PrepararAtendimentoV6,signal?:AbortSignal):Promise<import("./atendimentoV6.js").AtendimentoV6Resposta>;
   investigacao?(contexto: PedidoBundle, signal?: AbortSignal): Promise<InvestigacaoConsultaVisao>;
   avaliarInstrumento?(contexto:{patientId:string;encounterId:string;tumorLotId:string|null},pedido:unknown):Promise<ResultadoInstrumento>;
   uploadDocumentoLocal?(pedido:PedidoUploadLocal,signal?:AbortSignal):Promise<ResultadoUploadLocal>;

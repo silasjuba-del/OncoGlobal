@@ -1,0 +1,46 @@
+// @vitest-environment jsdom
+import { act,cleanup,fireEvent,render,screen,waitFor } from "@testing-library/react";
+import { afterEach,expect,it,vi } from "vitest";
+import { SinteseProposta } from "../../src/ui/consulta/SinteseProposta.js";
+import { criarPortaHttp } from "../../src/ui/api/http.js";
+import { abrirAmbiente,cadastrarPaciente,criarDiretorio,removerDiretorio,PACIENTE,ENCONTRO,SENHA } from "../f0-fecha/fixtures/consulta-completa.js";
+let a:Awaited<ReturnType<typeof abrirAmbiente>>|undefined;
+afterEach(async()=>{cleanup();vi.restoreAllMocks();vi.unstubAllGlobals();if(a){await a.close();removerDiretorio(a.dir);a=undefined;}});
+it("Hoje/Decisão/Saídas gera resumo e evolução reais, mostra pendência por documento e recupera após remontar",async()=>{
+ a=await abrirAmbiente(criarDiretorio());cadastrarPaciente(a);const baseUrl=a.baseUrl,realFetch=globalThis.fetch;
+ vi.stubGlobal("fetch",(input:Parameters<typeof fetch>[0],init?:Parameters<typeof fetch>[1])=>realFetch(typeof input==="string"&&input.startsWith("/")?baseUrl+input:input,init));
+ const porta=criarPortaHttp({onSessaoExpirada:()=>{}});await porta.login(SENHA);await porta.carregarConsulta(PACIENTE,null,ENCONTRO);
+ const contexto={patientId:PACIENTE,encounterId:ENCONTRO,tumorLotId:null};
+ const tela=render(<SinteseProposta porta={porta} contexto={contexto}/>);
+ const hoje=await screen.findByLabelText("Hoje — somente o que mudou");
+ fireEvent.change(hoje,{target:{value:"Fadiga G2 informada; sem febre referida."}});
+ fireEvent.change(screen.getByLabelText("Decisão médica de hoje"),{target:{value:"Decisão sintética explícita."}});
+ fireEvent.click(screen.getByRole("checkbox",{name:"Prescrição"}));
+ const antes=a.eventos();fireEvent.click(screen.getByRole("button",{name:"Preparar rascunhos"}));
+ await screen.findByText(/Rascunho salvo e recuperável/);
+ expect(screen.getByRole("region",{name:"Resumo do caso · rascunho"}).textContent).toContain("Decisão sintética explícita.");
+ expect(screen.getByRole("region",{name:"Evolução por diferenças · rascunho"}).textContent).toContain("sem febre referida");
+ expect(screen.getByRole("region",{name:"Prescrição · pendências"}).textContent).toContain("fluxo específico");
+ expect(a.eventos()).toEqual(antes);tela.unmount();render(<SinteseProposta porta={porta} contexto={contexto}/>);
+ await waitFor(()=>expect((screen.getByLabelText("Decisão médica de hoje") as HTMLTextAreaElement).value).toBe("Decisão sintética explícita."));
+ fireEvent.change(screen.getByLabelText("Decisão médica de hoje"),{target:{value:"Outra decisão local"}});
+ expect(screen.queryByRole("region",{name:"Resumo do caso · rascunho"})).toBeNull();
+ expect(screen.getByText(/Alterações locais ainda não preparadas/)).toBeTruthy();
+ vi.spyOn(porta,"prepararAtendimentoV6").mockRejectedValueOnce(new TypeError("rede sintética indisponível"));
+ fireEvent.click(screen.getByRole("button",{name:"Preparar rascunhos"}));
+ await screen.findByText(/salvamento desta tentativa não está confirmado/);
+ expect((screen.getByLabelText("Decisão médica de hoje") as HTMLTextAreaElement).value).toBe("Outra decisão local");
+});
+it("recuperação tardia do paciente anterior não preenche o atendimento atual",async()=>{
+ a=await abrirAmbiente(criarDiretorio());cadastrarPaciente(a);cadastrarPaciente(a,"93");const baseUrl=a.baseUrl,realFetch=globalThis.fetch;
+ vi.stubGlobal("fetch",(input:Parameters<typeof fetch>[0],init?:Parameters<typeof fetch>[1])=>realFetch(typeof input==="string"&&input.startsWith("/")?baseUrl+input:input,init));
+ const porta=criarPortaHttp({onSessaoExpirada:()=>{}});await porta.login(SENHA);await porta.carregarConsulta(PACIENTE,null,ENCONTRO);
+ const contexto={patientId:PACIENTE,encounterId:ENCONTRO,tumorLotId:null};const anterior=await porta.recuperarAtendimentoV6!(contexto);
+ let liberar!:(r:typeof anterior)=>void;const tardia=new Promise<typeof anterior>(resolve=>{liberar=resolve;});
+ vi.spyOn(porta,"recuperarAtendimentoV6").mockImplementationOnce(()=>tardia);
+ const tela=render(<SinteseProposta porta={porta} contexto={contexto}/>);
+ const novo={patientId:"Paciente Teste 93",encounterId:"encontro-teste-93",tumorLotId:null};
+ await porta.carregarConsulta(novo.patientId,null,novo.encounterId);tela.rerender(<SinteseProposta porta={porta} contexto={novo}/>);
+ await screen.findByText(novo.patientId);await act(async()=>liberar(anterior));
+ expect(screen.queryByText(PACIENTE)).toBeNull();expect((screen.getByLabelText("Hoje — somente o que mudou") as HTMLTextAreaElement).value).toBe("");
+});

@@ -1,4 +1,5 @@
 import { PedidoRecuperacaoConfirmacao } from "../contracts/api/recuperacaoConfirmacao.js";
+import { operarAtendimentoV6 } from "./atendimentoV6.js";
 import { criarResolverDocumentoLedger, listarDrafts, listarEventos } from "../kernel/comandos/portas.js";
 import { dadosDoEvento } from "../kernel/projections/snapshot.js";
 import { opcoesLeituraConsulta, ExibirBundle, contextoDraft, payloadDocumento, exibirBundle, confirmarBloco } from "./rotas/confirmacao.js";
@@ -160,6 +161,10 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
     const token = auth?.startsWith("Bearer ") ? auth.slice(7) : "";
     const sessao = deps.sessoes.obter(token);
     if (!sessao) return reply(401, "SESSAO_INVALIDA");
+    if(rota==="recuperarAtendimentoV6"||rota==="prepararAtendimentoV6"){
+      const r=operarAtendimentoV6(deps,token,rota==="recuperarAtendimentoV6"?"recuperar":"preparar",await body(req));
+      return reply(r.status,r.body.codigo,r.body);
+    }
     // A rota de efeito externo não aceita JSON sob um tipo de mídia diferente.
     // O gate de autenticação continua anterior a esta checagem.
     if (rota === "acao" && !contentTypeJson(req)) return reply(415, "CONTENT_TYPE_INVALIDO");

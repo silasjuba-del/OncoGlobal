@@ -12,6 +12,7 @@ import { InvestigacaoConsultaVisao } from '../../contracts/api/investigacao.js';
 import { RevisaoClinicaResposta } from '../../contracts/fase2/revisaoClinica.js';
 import { EstadoDoencaPreparado } from '../../contracts/fase2/estadoDoenca.js';
 import { SintesePropostaResposta } from '../../contracts/api/sinteseProposta.js';
+import { AtendimentoV6Resposta } from '../../contracts/api/atendimentoV6.js';
 import { ActionIntent, ConfirmarBloco } from "../../contracts/operacao.js";
 import { EstadoOncoassist, FontesOncoassist, RespostaOncoassist, HistoricoOncoassist, ResultadoCognitivoOncoassist } from "./oncoassist.js";
 import { FonteRevisao, ReconciliacaoProposta, RevisaoPreparada } from "./revisaoExtracao.js";
@@ -333,6 +334,18 @@ export function criarPortaHttp(opcoes: OpcoesHttp): PortaConsulta {
       if (r.data.contexto.patientId !== contexto.patientId || r.data.contexto.encounterId !== contexto.encounterId || r.data.contexto.tumorLotId !== contexto.tumorLotId)
         throw new ErroPorta("SINTESE_FORA_CONTEXTO");
       return r.data;
+    },
+    async recuperarAtendimentoV6(contexto,signal){
+      const {status,json}=await enviar('/consulta/atendimento/recuperar',contexto,true,signal);
+      if(status!==200)throw new ErroPorta(codigoDe(json,'ATENDIMENTO_INDISPONIVEL'));
+      const r=AtendimentoV6Resposta.parse(json);
+      if(r.contexto.patientId!==contexto.patientId||r.contexto.encounterId!==contexto.encounterId||r.contexto.tumorLotId!==contexto.tumorLotId)throw new ErroPorta('CONTEXTO_CONSULTA_ALTERADO');return r;
+    },
+    async prepararAtendimentoV6(pedido,signal){
+      const {status,json}=await enviar('/consulta/atendimento/preparar',pedido,true,signal);
+      if(status!==200&&status!==201)throw new ErroPorta(codigoDe(json,'ATENDIMENTO_INDISPONIVEL'));
+      const r=AtendimentoV6Resposta.parse(json);
+      if(r.contexto.patientId!==pedido.patientId||r.contexto.encounterId!==pedido.encounterId||r.contexto.tumorLotId!==pedido.tumorLotId)throw new ErroPorta('CONTEXTO_CONSULTA_ALTERADO');return r;
     },
     async prepararEstadoDoenca(pedido,signal){
       const {status,json}=await enviar('/consulta/estado-doenca/preparar',pedido,true,signal),p=EstadoDoencaPreparado.safeParse(json);

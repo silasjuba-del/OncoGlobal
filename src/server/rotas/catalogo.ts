@@ -61,6 +61,8 @@ export const ROTAS_HTTP = [
   {"url":"/consulta/oncoassist/fontes","nome":"oncoassistFontes","processamento":"PENDENCIAS_E_MOTOR","grupo":"CONSULTA"},
   {"url":"/consulta/oncoassist/historico","nome":"oncoassistHistorico","processamento":"PENDENCIAS_E_MOTOR","grupo":"CONSULTA"},
   {"url":"/consulta/oncoassist/sintese","nome":"sinteseRetratoLlm","processamento":"PENDENCIAS_E_MOTOR","grupo":"CONSULTA"},
+  {"url":"/consulta/atendimento/recuperar","nome":"recuperarAtendimentoV6","processamento":"NENHUM","grupo":"CONSULTA"},
+  {"url":"/consulta/atendimento/preparar","nome":"prepararAtendimentoV6","processamento":"NENHUM","grupo":"CONSULTA"},
   {"url":"/consulta/oncoassist/status","nome":"oncoassistStatus","processamento":"NENHUM","grupo":"CONSULTA"},
   {"url":"/consulta/prescricao-executavel/base","nome":"basePrescricaoExecutavel","processamento":"NENHUM","grupo":"CONSULTA"},
   {"url":"/consulta/prescricao-executavel/confirmar","nome":"confirmarPrescricaoExecutavel","processamento":"PENDENCIAS_E_MOTOR","grupo":"CONSULTA"},
