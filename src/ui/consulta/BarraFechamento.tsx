@@ -160,7 +160,7 @@ export function BarraFechamento({
           </ul>
         </section>
       ) : null}
-      {aviso ? <p>{aviso}</p> : null}
+      {aviso ? <p role="alert">{aviso}</p> : null}
       <button type="button" disabled={ocupado} onClick={() => entregar("TUDO")}>
         validar tudo
       </button>
