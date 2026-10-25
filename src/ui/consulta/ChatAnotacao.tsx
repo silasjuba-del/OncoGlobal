@@ -27,15 +27,15 @@ export function ChatAnotacao({porta,contexto,bloqueado,aoRegistrar}:{porta:Porta
   }catch{if(g===geracao.current)setAviso('Registro não confirmado. Seu texto foi preservado; tente novamente com a mesma anotação.');}
   finally{trava.current=false;if(g===geracao.current)setOcupado(false);}
  }
- return <section aria-label="Aceite do chat para evolução" className="atendimento-v6__documento" aria-busy={ocupado}>
-  <h3>Chat do atendimento</h3><p>Revise a mensagem e registre sua anotação na evolução. Alergias, medicamentos e TNM permanecem nos fluxos próprios.</p>
+ return <section aria-label="Aceite do chat para evolução" className="atendimento-v6__documento atendimento-v6__chat" aria-busy={ocupado}>
+  <header><h3>Chat do atendimento</h3>
   <label>Setor do chat <select value={setor} disabled={ocupado||bloqueado} onChange={e=>setSetor(e.target.value as SetorChat)}>
    <option value="MEDICO">Médico</option><option value="FARMACIA">Farmácia</option><option value="TRIAGEM">Triagem</option><option value="SECRETARIA">Secretaria</option>
-  </select></label>
+  </select></label></header><p className="atendimento-v6__chat-ajuda">Revise e registre somente na evolução.</p>
   {chat?.mensagens.length===0?<p>Nenhuma mensagem neste setor e atendimento.</p>:null}
-  {chat?.mensagens.map(m=><article key={m.mensagemId}><p><strong>{m.autor}</strong> · {m.texto}</p>
-   <button type="button" disabled={ocupado||bloqueado||mensagem!==null} onClick={()=>{setMensagem(m.mensagemId);setTexto(m.texto);setAviso('');}}>Revisar para evolução</button></article>)}
-  {mensagem?<><div className="atendimento-v6__entrada atendimento-v6__chat-editor"><label>Anotação para evolução<textarea value={texto} rows={4} maxLength={12000} disabled={ocupado||bloqueado} onChange={e=>setTexto(e.target.value)}/></label></div><div className="atendimento-v6__acoes">
+  {chat?.mensagens.map(m=><article className="atendimento-v6__chat-mensagem" key={m.mensagemId}><p><strong>{m.autor}</strong><br/>{m.texto}</p>
+   {mensagem!==m.mensagemId?<button type="button" disabled={ocupado||bloqueado||mensagem!==null} onClick={()=>{setMensagem(m.mensagemId);setTexto(m.texto);setAviso('');}}>Revisar para evolução</button>:null}</article>)}
+  {mensagem?<><div className="atendimento-v6__entrada atendimento-v6__chat-editor"><label>Anotação para evolução<textarea value={texto} rows={2} maxLength={12000} disabled={ocupado||bloqueado} onChange={e=>setTexto(e.target.value)}/></label></div><div className="atendimento-v6__acoes">
    <button type="button" className="atendimento-v6__principal" disabled={ocupado||bloqueado||!texto.trim()} onClick={()=>void registrar()}>Registrar na evolução</button>
    <button type="button" disabled={ocupado||bloqueado} onClick={()=>{setMensagem(null);setTexto('');}}>Cancelar</button></div></>:null}
   <p role="status">{aviso}</p>

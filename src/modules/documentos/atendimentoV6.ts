@@ -33,6 +33,8 @@ export function comporDocumentosAtendimentoV6(base:BaseAtendimentoV6,entrada:Ent
    ?`AGORA\n${recuperado}\n\nMUDOU\n${mudou}\n${hoje}\n\n${decisao}`
    :`S — atualização informada\n${hoje}\n\nO — dados recuperados, com suas datas\n${recuperado}\nExame físico de hoje não acrescentado automaticamente.\n\nA — diferenças documentadas\n${mudou}\n${base.delta.substituidos.length?`${base.delta.substituidos.length} referência(s) substituída(s); conferir a retificação.\n`:""}\nP — decisão explícita\n${decisao}`;
   return {tipo,titulo:TITULOS_V6[tipo],estado:pendencias.length?"PENDENTE" as const:"PRONTO_PARA_REVISAO" as const,pendencias,
+   apresentacao:{textoClinico:`RASCUNHO — revisão e assinatura pendentes\n${referencia}\n\n${corpo}${tipo==="EVOLUCAO"&&notas?`\n\nANOTAÇÕES MÉDICAS ACEITAS DO CHAT\n${(base.anotacoesChat??[]).map(n=>n.texto).join("\n\n")}`:""}`,
+    detalhes:[...fontes,...(tipo==="EVOLUCAO"?(base.anotacoesChat??[]).map((n,i)=>`Anotação ${i+1} · Autor: ${n.autor} · registro: ${n.em} · mensagem: ${n.mensagemId} (${n.mensagemEventId}) · anotação: ${n.eventId}`):[])]},
    texto:`RASCUNHO — revisão e assinatura pendentes\n${referencia}\n\n${corpo}${tipo==="EVOLUCAO"&&notas?`\n\nANOTAÇÕES MÉDICAS ACEITAS DO CHAT\n${notas}`:""}${fontes.length?`\n\nFONTES E PROVENIÊNCIA\n${fontes.join("\n")}`:""}`};
  });
 }

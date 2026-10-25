@@ -6,6 +6,15 @@ const base=BaseAtendimentoV6.parse({revisao:"a".repeat(64),pacienteNome:"Pacient
  citacoes:[{texto:"Exame anterior documentado.",referencias:[{ref:antiga,tempoClinico:"2026-09-01",tempoRegistro:"2026-09-02T12:00:00Z",unidade:null,fontes:[]}]},
  {texto:"Novo resultado documentado.",referencias:[{ref:nova,tempoClinico:"2026-10-10",tempoRegistro:"2026-10-11T12:00:00Z",unidade:null,fontes:[]}]}],
  delta:{encounterAnteriorId:"consulta-anterior",novos:[nova],substituidos:[]},integridade:[]});
+it("separa metadados sem apagar linhas clínicas que parecem marcadores técnicos",()=>{
+ const texto="Autor: relato do paciente.\nFONTES E PROVENIÊNCIA\nNega febre; informação a conferir.";
+ const [d]=comporDocumentosAtendimentoV6({...base,anotacoesChat:[{texto,autor:"medico-sintetico",em:"2026-10-24T12:00:00Z",mensagemId:"msg",mensagemEventId:"origem",eventId:"nota",hashMensagem:"b".repeat(64)}]},
+  {hoje:texto,decisao:"Decisão explicitamente informada.",saidas:["EVOLUCAO"]});
+ expect(d!.apresentacao!.textoClinico).toContain(texto);expect(d!.texto).toContain(texto);
+ expect(d!.apresentacao!.textoClinico).not.toContain("medico-sintetico");
+ expect(d!.apresentacao!.detalhes.join('\n')).toContain("medico-sintetico");
+ expect(d!.texto).toContain("medico-sintetico");
+});
 it("mudanças mostram somente diferenças demonstradas; declaração atual mantém a data do encontro histórico",()=>{
  const docs=comporDocumentosAtendimentoV6(base,{hoje:"Sem mudanças no sintoma apresentado.",decisao:"Decisão sintética explícita.",saidas:["RESUMO","EVOLUCAO"]});
  const resumo=docs[0]!.texto,delta=resumo.split("MUDOU\n")[1]!;

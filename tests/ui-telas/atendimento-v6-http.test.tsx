@@ -41,6 +41,12 @@ it("Hoje/Decisão/Saídas gera resumo e evolução reais, mostra pendência por 
  expect(screen.getByRole("region",{name:"Resumo do caso · rascunho"}).textContent).not.toContain("Anotação sintética aceita");
  expect(screen.getByRole("region",{name:"Evolução por diferenças · rascunho"}).textContent).toContain("sem febre referida");
  expect(screen.getByRole("region",{name:"Evolução por diferenças · rascunho"}).textContent).toContain("Anotação sintética aceita, sem atualizar alergias.");
+ const evolucao=screen.getByRole("region",{name:"Evolução por diferenças · rascunho"});
+ expect(evolucao.querySelector('.atendimento-v6__texto-clinico')?.textContent).not.toContain('duto-event-');
+ const detalhes=evolucao.querySelector('details')!;
+ expect(detalhes.open).toBe(false);expect(detalhes.querySelector('summary')?.textContent).toBe('Detalhes');
+ expect(detalhes.textContent).toContain('duto-event-');expect(detalhes.textContent).toContain('Autor:');
+ fireEvent.click(detalhes.querySelector('summary')!);expect(detalhes.open).toBe(true);
  expect(screen.getByRole("region",{name:"Prescrição · pendências"}).textContent).toContain("fluxo específico");
  expect(a.eventos()).toEqual(antes);tela.unmount();render(<SinteseProposta porta={porta} contexto={contexto}/>);
  await waitFor(()=>expect((screen.getByLabelText("Decisão médica de hoje") as HTMLTextAreaElement).value).toBe("Decisão sintética explícita."));
