@@ -4,7 +4,7 @@ import { lerDraft } from "../../../kernel/comandos/portas.js";
 import { rascunhoJevNaoPromovivel } from "../../../kernel/ledger/writeRouter.js";
 import { avaliarRadsRascunho } from "../../radsRascunho.js";
 import type { ServidorDeps } from "../../rotas.js";
-import { sha } from "../confirmacao.js";
+import { contextoDraft, sha } from "../confirmacao.js";
 import type { RespostaRota } from "../salaoCanal.js";
 
 /** Leitura de um rascunho de extração. */
@@ -62,6 +62,12 @@ export function lerRascunho(deps: ServidorDeps, token: string, sessao: Sessao, r
     };
     return reply(200, "RASCUNHO_CARREGADO", { draft: visibleDraft });
   }
+  if (draft.patientId !== null) {
+    const consulta = deps.sessoes.consultaSelecionada(token), contexto = contextoDraft(draft.payload);
+    if (!consulta || !contexto || consulta.patientId !== draft.patientId
+      || consulta.encounterId !== contexto.encounterId || (consulta.tumorLotId ?? null) !== contexto.tumorLotId
+      || !z.object({patientId:z.literal(draft.patientId).optional()}).safeParse(payload?.contexto ?? payload).success)
+      return reply(409, "DRAFT_FORA_DO_ESCOPO");
+  } else if (payload?.kind !== "EXTRACAO_RASCUNHO") return reply(409, "DRAFT_FORA_DO_ESCOPO");
   return reply(200, "RASCUNHO_CARREGADO", { draft });
-  return null;
 }

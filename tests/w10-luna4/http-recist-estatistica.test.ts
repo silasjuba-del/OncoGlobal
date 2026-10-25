@@ -82,7 +82,8 @@ describe("W10-LUNA4 · consumidores HTTP RECIST e estatística", () => {
       expect(confirmar(env.db, write).estado).toBe("GRAVADA");
       expect(confirmar(env.db, write).estado).toBe("REPLAY");
 
-      const recist = await postJson(env.request, "/consulta/recist", env.token, { patientId: pacienteId });
+      const contexto={patientId:pacienteId,encounterId,tumorLotId};env.sessoes.selecionarConsulta(env.token,contexto);
+      const recist = await postJson(env.request, "/consulta/recist", env.token, contexto);
       expect(recist.status).toBe(200);
       const recistBody = recist.body as { series: Array<{
         estado: string; categoriaNuncaAssinada: boolean;
@@ -116,7 +117,8 @@ describe("W10-LUNA4 · consumidores HTTP RECIST e estatística", () => {
     try {
       const write = await gravarSerieReal(env.db, "fonte-ausente-sintetica", false);
       expect(confirmar(env.db, write).estado).toBe("GRAVADA");
-      const result = await postJson(env.request, "/consulta/recist", env.token, { patientId: pacienteId });
+      const contexto={patientId:pacienteId,encounterId,tumorLotId};env.sessoes.selecionarConsulta(env.token,contexto);
+      const result = await postJson(env.request, "/consulta/recist", env.token, contexto);
       expect(result.status).toBe(200);
       const body = result.body as { series: Array<{ estado: string; codigo: string; resultado: unknown }> };
       expect(body.series[0]?.estado).toBe("PENDENTE");

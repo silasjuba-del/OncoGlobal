@@ -27,7 +27,8 @@ describe("F07 — cálculo RECIST no consumidor real permanece proposto", () => 
           elegibilidadeBasal: "ELEGIVEL", fonteElegibilidadeIds: ["fonte-baseline"] }], pontos };
       persistirFixture(db, evento("serie", serie, { tipo: "RecistSerie" }));
       const antes = db.prepare("SELECT * FROM clinical_event").all();
-      const resposta = lerRecist(db, patientId);
+      const contexto={encounterId:"consulta-sintetica",tumorLotId,agora:"2026-10-07T12:00:00Z"};
+      const resposta = lerRecist(db, patientId, contexto);
       const calculo = resposta.series[0]?.resultado;
       const atual = calculo?.pontos.find((p) => p.eventId === "atual");
       expect(atual).toMatchObject({ categoriaGlobal: "PD", categoriaGlobalRevisao: "PROPOSTO",
@@ -38,7 +39,7 @@ describe("F07 — cálculo RECIST no consumidor real permanece proposto", () => 
         treatments: [], recist: atual?.avaliacao ? [atual.avaliacao] : [], missingRequiredData: [], unresolvedConflicts: [] });
       expect(secoes.recist.estado).toBe("PENDENTE");
       expect(secoes.recist.itens[0]?.revisao).toBe("PROPOSTO");
-      expect(lerRecist(db, "outro-paciente")).toMatchObject({ codigo: "PACIENTE_NAO_ENCONTRADO", series: [] });
+      expect(lerRecist(db, "outro-paciente",contexto)).toMatchObject({ codigo: "PACIENTE_NAO_ENCONTRADO", series: [] });
       expect(db.prepare("SELECT * FROM clinical_event").all()).toEqual(antes);
     } finally { db.close(); }
   });
