@@ -1,9 +1,10 @@
-import { afterEach,expect,it } from "vitest";
+import { afterEach,expect,it,vi } from "vitest";
+import * as comandos from "../../src/kernel/comandos/index.js";
 import { abrirAmbienteColon,cadastrarCasoColon,criarDiretorioColon,removerDiretorioColon,PACIENTE_ID,ENCONTRO_ATUAL,TUMOR_LOT_ID } from "../f0-fecha/fixtures/colon-e2e.js";
 import { listarEventos } from "../../src/kernel/ledger/ledger.js";
 import { lerDraft } from "../../src/kernel/ledger/drafts.js";
 let a:Awaited<ReturnType<typeof abrirAmbienteColon>>|undefined;
-afterEach(async()=>{if(a){await a.close();removerDiretorioColon(a.dir);a=undefined;}});
+afterEach(async()=>{vi.restoreAllMocks();if(a){await a.close();removerDiretorioColon(a.dir);a=undefined;}});
 const ctx={patientId:PACIENTE_ID,encounterId:ENCONTRO_ATUAL,tumorLotId:TUMOR_LOT_ID};
 async function abrir(){a=await abrirAmbienteColon(criarDiretorioColon());cadastrarCasoColon(a);await a.request("/consulta/carregar",ctx);return a;}
 const pedido={...ctx,estado:"REMISSAO",data:"2026-10-12",fundamento:"Avaliação médica sintética, somente fixture."};
@@ -32,4 +33,12 @@ it("sem evidência de exibição da sessão não confirma",async()=>{
   const app=await abrir(),p=await app.request("/consulta/estado-doenca/preparar",pedido);expect(p.status).toBe(200);
   app.sessoes.registrarBundleExibido(app.token,ctx,[]);
   expect((await app.request("/consulta/estado-doenca/confirmar",{...ctx,draftId:p.data.draftId,conteudoHash:p.data.conteudoHash})).data.codigo).toBe("CONTEUDO_NAO_EXIBIDO");
+});
+it.each(["SESSAO_INVALIDA","PAYLOAD_FORA_DO_CONTRATO"])("recusa da porta comum retorna diagnóstico estável, sem gravar: %s",async codigo=>{
+ const app=await abrir(),p=await app.request("/consulta/estado-doenca/preparar",pedido);expect(p.status).toBe(200);
+ const antes=listarEventos(app.db,PACIENTE_ID);
+ vi.spyOn(comandos,"executarConfirmacao").mockImplementationOnce(()=>{throw Error(codigo);});
+ const r=await app.request("/consulta/estado-doenca/confirmar",{...ctx,draftId:p.data.draftId,conteudoHash:p.data.conteudoHash});
+ expect(r.status).toBe(codigo==="SESSAO_INVALIDA"?401:409);expect(r.data.codigo).toBe(codigo);
+ expect(listarEventos(app.db,PACIENTE_ID)).toEqual(antes);
 });

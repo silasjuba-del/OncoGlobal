@@ -2,7 +2,7 @@ import { z } from "zod";
 import { type Sessao } from "../../../contracts/base.js";
 import { PrescricaoProposta } from "../../../contracts/f1/prescricaoProposta.js";
 import { lerDraft } from "../../../kernel/comandos/portas.js";
-import { rascunhoJevNaoPromovivel } from "../../../kernel/ledger/writeRouter.js";
+import { rascunhoInerte as rascunhoJevNaoPromovivel } from "../../../contracts/rascunhos.js";
 import { avaliarRadsRascunho } from "../../radsRascunho.js";
 import type { ServidorDeps } from "../../rotas.js";
 import { contextoDraft, sha } from "../confirmacao.js";

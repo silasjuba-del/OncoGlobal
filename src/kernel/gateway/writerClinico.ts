@@ -1,9 +1,11 @@
 import type { DatabaseSync } from "node:sqlite";
-import { Sessao, type Fonte, type Sessao as SessaoTipo } from "../../contracts/base.js";
+import { Sessao, Fonte, type Sessao as SessaoTipo } from "../../contracts/base.js";
 import { g07Lateralidade, g08AnatomiaSexo, g09PtDeBiopsia, g25EscopoAssinatura } from "../harness/gates.js";
 import { lerDraft } from "../ledger/drafts.js";
 import { auditar, listarEventos } from "../ledger/ledger.js";
-import { confirmar, motivoInvarianteEscrita, type RegistroConfirmacao } from "../ledger/writeRouter.js";
+import { motivoInvarianteEscrita, type RegistroConfirmacao } from "../ledger/writeRouter.js";
+import { executarConfirmacao as confirmar } from "../comandos/index.js";
+import { ErroProveniencia, FonteNovaDeclarada } from "../comandos/proveniencia.js";
 import { hashCanonico } from "../../modules/tipos.js";
 import type { DraftEnvelope } from "../../contracts/base.js";
 
@@ -53,9 +55,8 @@ export interface WriterClinicoGateway {
   trilhaAuditoria(): readonly Record<string, unknown>[];
 }
 
-function provenienciaValida(fontes: readonly Fonte[]): boolean {
-  return fontes.length > 0 && fontes.every((f) => f.sourceId.trim().length > 0 && f.versao.trim().length > 0
-    && f.contentHash.trim().length >= 8 && Number.isFinite(Date.parse(f.dataCaptura)));
+function provenienciaValida(fontes: readonly Fonte[],historica=false): boolean {
+  return fontes.length > 0 && (historica?Fonte:FonteNovaDeclarada).array().safeParse(fontes).success;
 }
 
 /**
@@ -142,6 +143,7 @@ export function criarWriterClinicoGateway(deps: {
       }
 
       // 6. Proveniência, vínculo ao paciente e hash exibido de cada registro.
+      const operacaoExistente=!!deps.db.prepare("SELECT 1 FROM operation WHERE operationId=?").get(pedido.operationId);
       for (const reg of pedido.registros) {
         const draft = lerDraft(deps.db, reg.draftId);
         if (!draft) return negar(atorAuditavel, "DRAFT_NAO_ENCONTRADO", em);
@@ -165,9 +167,9 @@ export function criarWriterClinicoGateway(deps: {
         if (hashCanonico(reg.payload) !== hashAtual) {
           return negar(atorAuditavel, "CONTEUDO_ALTERADO_APOS_EXIBICAO", em);
         }
-        if (reg.tipo === "FATO" || reg.exigeProveniencia) {
+        if (/^FATO(?:@1)?$/.test(reg.tipo) || reg.exigeProveniencia) {
           const hashConfiavel = deps.hashFonteOriginal?.(draft);
-          if (!provenienciaValida(reg.fontes) || !hashConfiavel
+          if (!provenienciaValida(reg.fontes,operacaoExistente) || !hashConfiavel
             || !reg.fontes.every(f => f.sourceId === draft.sourceId && f.contentHash === hashConfiavel))
             return negar(atorAuditavel, "PROVENIENCIA_OBRIGATORIA_AUSENTE", em);
         }
@@ -188,7 +190,10 @@ export function criarWriterClinicoGateway(deps: {
           em,
           registros: pedido.registros.map(({ exigeProveniencia: _omit, ...r }) => r),
         });
-      } catch {
+      } catch (erro) {
+        if(erro instanceof ErroProveniencia)return negar(atorAuditavel,erro.codigo,em);
+        if(erro instanceof Error&&["DRAFT_ENCONTRO_DIVERGENTE","DRAFT_LOTE_DIVERGENTE","SESSAO_INVALIDA","CONTEXTO_EXPLICITO_OBRIGATORIO"].includes(erro.message))
+          return negar(atorAuditavel,erro.message,em);
         return negar(atorAuditavel, "SCHEMA_EVENTO_CLINICO_INVALIDO", em);
       }
 

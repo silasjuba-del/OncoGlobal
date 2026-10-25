@@ -6,6 +6,8 @@ Base: main `3010f0d0c803d6d2cddae774806421670a286b3f` (PR #66 integrada e CI ver
 
 ## Estado e sequência
 
+Atualização em 25/10/2026: PRs #67 (isolamento/RECIST), #68 (sessões/canal) e #69 (entrada v6 e rascunhos por diferenças) integradas; base atual `64d03c9`. O lote ativo é [proveniência e porta comum de escrita](L4-PROVENIENCIA-ESCRITA.md), cobrindo F4-02 e F4-07 sem declarar encerrados F4-05/12/13. Os parágrafos de reprodução abaixo preservam o histórico do lote de isolamento.
+
 1. PR #66: ciência dos vermelhos na confirmação e prescrição, replay e atomicidade concluídos. Não reimplementar.
 2. Lote atual: isolamento da leitura de drafts e contexto/horizonte do RECIST (F4-10, F4-20/A-09). Preservar intake sem vínculo e fontes; não inferir identidade. WRITE_SET: rotas/extracao/rascunho.ts, rotas.ts, leituras.ts e testes dirigidos; este documento acompanha o estado.
 3. Segurança operacional: relógio/sessão, revogação de contato, retomada sem processador e atribuição de relatos (F4-14/18/32/33/41). Reproduzir antes de alterar; falha de leitura não pode autorizar envio ou declarar processamento inexistente.

@@ -7,7 +7,7 @@ import { executarConfirmacao as confirmar } from "../../../kernel/comandos/index
 import { auditar, depoisDoCommit, lerDraft, salvarDraft, transacao } from "../../../kernel/comandos/portas.js";
 import { prepararRevisaoExtracao } from "../../../kernel/extracao/prepararRevisao.js";
 import { g25EscopoAssinatura } from "../../../kernel/harness/gates.js";
-import { rascunhoJevNaoPromovivel } from "../../../kernel/ledger/writeRouter.js";
+import { rascunhoInerte as rascunhoJevNaoPromovivel } from "../../../contracts/rascunhos.js";
 import { confrontarNomeIdentificador } from "../../../rules/w8/vinculoDocumento.js";
 import { lerConsulta, lerPaciente } from "../../leituras.js";
 import type { ServidorDeps } from "../../rotas.js";

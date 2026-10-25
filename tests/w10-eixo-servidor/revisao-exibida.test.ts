@@ -15,7 +15,7 @@ const CONTEXTO = { patientId: PATIENT, encounterId: "consulta-teste-91", tumorLo
 const cleanups: Array<() => Promise<void>> = [];
 afterEach(async () => { for (const close of cleanups.splice(0)) await close(); });
 
-async function fixture(oncoassistJev?: ServidorDeps["oncoassistJev"]) {
+async function fixture(oncoassistJev?: ServidorDeps["oncoassistJev"], prepararOrigem?: (payload:unknown)=>unknown) {
   let now = NOW;
   const db = abrirLedger(":memory:");
   const sessoes = criarGerenciadorSessao({ medicoId: "medico-teste-91", crm: "CRM-TESTE-91",
@@ -47,6 +47,11 @@ async function fixture(oncoassistJev?: ServidorDeps["oncoassistJev"]) {
   expect(extracted.status).toBe(201);
   expect(extracted.data.facts).toHaveLength(2);
   const draftId = extracted.data.draftId as string;
+  if(prepararOrigem){
+    const origem=lerDraft(db,draftId)!;
+    db.prepare("UPDATE draft_envelope SET payload=? WHERE draftId=?")
+      .run(JSON.stringify(prepararOrigem(structuredClone(origem.payload))),draftId);
+  }
   const linked = await request("/consulta/rascunho/revisar", { draftId, patientId: PATIENT, expectedRevision: 0 });
   expect(linked.status).toBe(200);
   const pedido = { draftId, patientId: PATIENT, expectedRevision: 1,
@@ -125,14 +130,14 @@ describe("G25 · revisão da extração exige conteúdo preparado e exibido na m
   });
 
   it("mantém INFERRED e UNCERTAIN como decisões de revisão, nunca FATO confirmado", async () => {
-    const app = await fixture();
-    const draft = lerDraft(app.db, app.pedido.draftId)!;
-    const payload = structuredClone(draft.payload) as any;
-    payload.state.facts[0].evidence = "INFERRED";
-    payload.state.facts[0].regra = "inferência sintética para provar ausência de promoção";
-    payload.state.facts[1].evidence = "UNCERTAIN";
-    app.db.prepare("UPDATE draft_envelope SET payload=? WHERE draftId=?")
-      .run(JSON.stringify(payload), draft.draftId);
+    // A origem sintética é construída antes do vínculo médico que fixa seu hash.
+    const app = await fixture(undefined,original=>{
+      const payload=original as {state:{facts:Array<{evidence:string;regra?:string}>}};
+      payload.state.facts[0]!.evidence="INFERRED";
+      payload.state.facts[0]!.regra="inferência sintética para provar ausência de promoção";
+      payload.state.facts[1]!.evidence="UNCERTAIN";
+      return payload;
+    });
     const prepared = await app.request("/consulta/rascunho/preparar-revisao", app.pedido);
     expect(prepared.status).toBe(200);
     expect((await app.request("/consulta/rascunho/revisar", { ...app.pedido,

@@ -5,7 +5,7 @@ import { ContextoDutosVisao } from "../contracts/api/dutos.js";
 import { PedidoEstadoDoenca,ConfirmacaoEstadoDoenca } from "../contracts/fase2/estadoDoenca.js";
 import { depoisDoCommit,salvarDraft,lerDraft } from "../kernel/comandos/portas.js";
 import { lerLedgerIntegro } from '../kernel/ledger/leituraIntegra.js';
-import { confirmar } from "../kernel/ledger/writeRouter.js";
+import { executarConfirmacao as confirmar } from "../kernel/comandos/index.js";
 import { dataCivilDoServico } from "../kernel/gateway/tempo.js";
 import { hashCanonico } from "../rules/conteudoCanonico.js";
 import type { ServidorDeps } from "./rotas.js";
@@ -63,7 +63,14 @@ export function rotearEstadoDoenca(deps:ServidorDeps,token:string,rota:string,ra
   const exibido=deps.sessoes.bundleExibido(token,contexto)?.some(d=>d.documentId===draft.draftId&&d.documentVersion===1&&d.conteudoHash===s.conteudoHash);
   if(!exibido)return falha(409,"CONTEUDO_NAO_EXIBIDO");
   const eventId=`evento-${draft.draftId}`;
-  const resultado=confirmar(deps.db, { autorizadoEm: deps.agora(), ...contexto,operationId:s.operationId,reviewDecisionId:s.operationId,sessao,em:deps.agora(),
-    registros:[{draftId:draft.draftId,expectedRevision:0,eventId,tipo:"FATO",payload:esperado,fontes:[s.fonte],revisao:"CONFIRMADO"}]});
+  const agoraConfirmacao=deps.agora();
+  let resultado:ReturnType<typeof confirmar>;
+  try {resultado=confirmar(deps.db, { autorizadoEm: agoraConfirmacao, ...contexto,operationId:s.operationId,reviewDecisionId:s.operationId,sessao,em:agoraConfirmacao,
+    registros:[{draftId:draft.draftId,expectedRevision:0,eventId,tipo:"FATO",payload:esperado,fontes:[s.fonte],revisao:"CONFIRMADO"}]});}
+  catch(error){
+    if(error instanceof Error&&error.message==="SESSAO_INVALIDA")return falha(401,"SESSAO_INVALIDA");
+    if(error instanceof Error&&["PAYLOAD_FORA_DO_CONTRATO","DRAFT_ENCONTRO_DIVERGENTE","DRAFT_LOTE_DIVERGENTE","CONTEXTO_EXPLICITO_OBRIGATORIO"].includes(error.message))return falha(409,error.message);
+    throw error;
+  }
   return resultado.estado==="NEGADA"?falha(409,resultado.motivo??"REGISTRO_NEGADO"):{status:200,body:{codigo:resultado.estado,eventId}};
 }
