@@ -1,3 +1,4 @@
+import { createHash } from "node:crypto";
 import type { EntradaDocumentosConsulta, MaterialDocumento } from "../../../src/modules/documentos/consulta.js";
 
 // Dados inteiramente sintéticos; a frase é decisão já estruturada pelo dono da revisão.
@@ -5,7 +6,8 @@ export const contexto = { patientId: "paciente-s9", encounterId: "encontro-s9", 
 export const fonte = {
   sourceId: "decisao-s9", classe: "MANUAL" as const, localizador: "decisão médica",
   dataClinica: "2026-10-12", dataCaptura: "2026-10-12T10:00:00-03:00", versao: "1",
-  contentHash: "fonte-sintetica-1",
+  // Conteúdo sintético da fonte; não representa hash do documento de saída.
+  contentHash: createHash("sha256").update("fonte-sintetica-1", "utf8").digest("hex"),
 };
 
 export function entradaCanonica(): EntradaDocumentosConsulta {
