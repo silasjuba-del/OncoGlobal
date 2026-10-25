@@ -11,6 +11,10 @@ Base: `3010f0d`. Lote independente de isolamento/RECIST (PR #67), em worktree pr
 
 WRITE_SET: `src/server/{sessao,canalEntrada,canalResposta,relatosInfusaoCanal}.ts`, `src/kernel/gateway/gateway.ts`, testes dirigidos de sessão/canal e este documento. Não ligar F6, não mudar processamento clínico de red flags, não alterar templates/doses ou credenciais.
 
+Ampliação necessária pela regressão de CI: `src/server/rotas.ts` preserva 503 de relógio indisponível antes de autenticar; resposta contém somente diagnóstico, nunca dados clínicos. Fixtures positivas de `tests/bateria2/{canal,salao-ui-http}.test.*` passaram a registrar Contato corrente explícito; referências de cadastro no ingresso sozinhas não constituem vínculo corrente. Expectativas de preservação/revisão dos relatos mantidas.
+
+Regressão das falhas do CI: 116/116 testes em quatro arquivos, typecheck verde. Prova adicional sem bearer/credenciais: 3/3 respostas 503 sem dados clínicos e sem efeitos. Revisão Luna do delta favorável; a política preexistente de revogação histórica não foi relaxada.
+
 ## Provas
 
 Reprodução antes da correção: relógio inválido desbloqueava tentativas; NaN/Infinity eram aceitos como duração; gateway executava com emissão futura; retomada sem callback resolvia uma pendência; falha SQL de revogação retornava autorização válida; vínculo antigo atribuía relato sem contato atual. Um erro inicial de fixture foi corrigido para passar patientId ao listarEventos e a falha funcional foi então reproduzida.

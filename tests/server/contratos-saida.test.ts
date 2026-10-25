@@ -94,6 +94,16 @@ it("servidor recusa saída inválida de login sem transmitir dados do resultado 
   } finally { vi.restoreAllMocks(); await a.close(); }
 });
 
+it.each(["/login","/consulta/agenda","/consulta/confirmar"])("%s recusa relógio indisponível sem bearer e sem dados clínicos",async rota=>{
+ const a=await ambienteHttp();try{
+  a.now("invalido");const r=await a.request(rota,"POST","{}");
+  expect(r.status).toBe(503);
+  expect(JSON.parse(r.body)).toEqual(rota==="/consulta/agenda"
+   ?{hoje:null,itens:[],estado:"PENDENTE",codigo:"INSTANTE_INVALIDO"}:{codigo:"INSTANTE_INVALIDO"});
+  expect(a.efeitos()).toBe(0);
+ }finally{await a.close();}
+});
+
 it.each(["/consulta/agenda", "/consulta/apac"])("%s conserva o motivo da pendência quando a data do serviço está indisponível", async rota => {
   const a = await ambienteHttp();
   try {
