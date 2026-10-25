@@ -82,6 +82,13 @@
   gap: var(--espaco);
 }
 
+@media (max-width: 768px) {
+  .colunas,
+  .lado-a-lado {
+    grid-template-columns: 1fr;
+  }
+}
+
 button,
 input,
 select {
