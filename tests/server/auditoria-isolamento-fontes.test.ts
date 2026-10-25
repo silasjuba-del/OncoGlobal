@@ -28,6 +28,12 @@ it("rascunho genérico do contexto selecionado permanece legível",async()=>{
  expect(r.data.draft.payload.texto).toBe("conteudo-local");
 });
 
+it("proposta com contrato inválido não usa contexto genérico para ocultar correlação divergente",async()=>{
+ const a=await abrir();salvarDraft(a.db,{draftId:"proposta-invalida",patientId:PACIENTE,sourceId:"sintetica",rawRef:"referencia-local",
+  revision:0,diagnostics:[],criadoEm:AGORA,payload:{schema:"PrescricaoProposta@1",contexto:ctx,correlacao:{...ctx,patientId:"outro"},itens:[]}});
+ expect((await a.request("/consulta/rascunho",{draftId:"proposta-invalida"})).status).toBe(409);
+});
+
 it("RECIST exige encontro explícito e recusa consulta divergente",async()=>{
  const a=await abrir();
  expect((await a.request("/consulta/recist",{patientId:PACIENTE})).status).toBe(409);

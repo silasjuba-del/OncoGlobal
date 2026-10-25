@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { type Sessao } from "../../../contracts/base.js";
+import { PrescricaoProposta } from "../../../contracts/f1/prescricaoProposta.js";
 import { lerDraft } from "../../../kernel/comandos/portas.js";
 import { rascunhoJevNaoPromovivel } from "../../../kernel/ledger/writeRouter.js";
 import { avaliarRadsRascunho } from "../../radsRascunho.js";
@@ -63,10 +64,14 @@ export function lerRascunho(deps: ServidorDeps, token: string, sessao: Sessao, r
     return reply(200, "RASCUNHO_CARREGADO", { draft: visibleDraft });
   }
   if (draft.patientId !== null) {
-    const consulta = deps.sessoes.consultaSelecionada(token), contexto = contextoDraft(draft.payload);
+    // A proposta tipada guarda o contexto em correlacao, não em contexto.
+    const proposta = PrescricaoProposta.safeParse(draft.payload);
+    if (payload?.schema === "PrescricaoProposta@1" && !proposta.success) return reply(409, "DRAFT_FORA_DO_ESCOPO");
+    const contextoBruto = proposta.success ? proposta.data.correlacao : payload?.contexto ?? payload;
+    const consulta = deps.sessoes.consultaSelecionada(token), contexto = contextoDraft(contextoBruto);
     if (!consulta || !contexto || consulta.patientId !== draft.patientId
       || consulta.encounterId !== contexto.encounterId || (consulta.tumorLotId ?? null) !== contexto.tumorLotId
-      || !z.object({patientId:z.literal(draft.patientId).optional()}).safeParse(payload?.contexto ?? payload).success)
+      || !z.object({patientId:z.literal(draft.patientId).optional()}).safeParse(contextoBruto).success)
       return reply(409, "DRAFT_FORA_DO_ESCOPO");
   } else if (payload?.kind !== "EXTRACAO_RASCUNHO") return reply(409, "DRAFT_FORA_DO_ESCOPO");
   return reply(200, "RASCUNHO_CARREGADO", { draft });

@@ -26,3 +26,5 @@ Base: main `3010f0d0c803d6d2cddae774806421670a286b3f` (PR #66 integrada e CI ver
 
 - Primeira reprodução RECIST: endpoint sem encontro retornou 404 em vez de recusa contextual; endpoint com contexto completo rejeitou o contrato (400). Sem código de produto alterado nessa reprodução.
 - Ajuste da fixture do draft: tipo desconhecido era recusado por proteção distinta. Usar FLASH_RASCUNHO para exercitar o fallback real, sem confundir gates.
+- CI inicial revelou dois consumidores legítimos de PrescricaoProposta@1, cujo contexto fica em correlacao. A leitura agora valida esse contrato estrito antes de extrair o contexto; discriminador declarado com payload inválido é recusado, sem fallback genérico. Os dois testes de regressão e o teste adversarial desse discriminador passaram (12/12 na bateria final). Typecheck passou.
+- Regressões dirigidas anteriores: 32/32 (RECIST, fila, PDF e UI) e 20/20 (isolamento/extração/alertas). Revisão Luna independente encerrou os achados de draft sem paciente e identidade interna divergente. CI final necessário antes de merge.
