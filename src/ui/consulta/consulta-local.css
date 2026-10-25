@@ -895,3 +895,14 @@ section[aria-label="Reconciliação de medicamentos"] textarea {
   .oncoassist-local .oc21-acordeon-icon,
   .oncoassist-local .oc21-modal-backdrop { display: none !important; }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .oncoassist-local,
+  .oncoassist-local *,
+  .oncoassist-local *::before,
+  .oncoassist-local *::after {
+    transition: none !important;
+    animation: none !important;
+    scroll-behavior: auto !important;
+  }
+}
