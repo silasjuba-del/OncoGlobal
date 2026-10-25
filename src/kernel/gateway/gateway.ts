@@ -3,6 +3,7 @@
 import { createHash, randomUUID } from "node:crypto";
 import type { z } from "zod";
 import { ActionIntent, Sessao as SessaoSchema, type Sessao } from "../../contracts/index.js";
+import { Instante } from "../../contracts/base.js";
 import {
   ReadContext as ReadContextSchema,
   ReadIntent as ReadIntentSchema,
@@ -388,8 +389,11 @@ export function criarGateway(deps: {
       const acao = intent.verbo;
       if (!sessao) return negar(acao, "SEM_SESSAO"); // autorização vem do servidor
       // A03: compara INSTANTES (offsets diferentes), nunca strings; data inválida = expirada.
-      const expira = instante(sessao.expiraEm), agoraMs = instante(deps.agora());
-      if (!Number.isFinite(expira) || !Number.isFinite(agoraMs) || expira <= agoraMs) return negar(acao, "SESSAO_EXPIRADA");
+      const agora=deps.agora(),expira = instante(sessao.expiraEm), agoraMs = instante(agora);
+      if (!Instante.safeParse(agora).success || !Number.isFinite(expira) || !Number.isFinite(agoraMs) || expira <= agoraMs) return negar(acao, "SESSAO_EXPIRADA");
+      const emitida = instante(sessao.emitidaEm);
+      if (!SessaoSchema.safeParse(sessao).success || !Number.isFinite(emitida) || emitida > agoraMs || emitida >= expira)
+        return negar(acao, "SESSAO_INVALIDA");
       const proibido = HARD_FORBIDDEN.find((h) => h.teste(intent));
       if (proibido) return negar(acao, `HARD_FORBIDDEN:${proibido.id}`);
 
@@ -543,7 +547,10 @@ export function autorizarLeitura(
   if (!sessao) return negar("SEM_SESSAO");
   const expira = Date.parse(sessao.expiraEm);
   const instante = Date.parse(agora);
-  if (!Number.isFinite(expira) || !Number.isFinite(instante) || expira <= instante) return negar("SESSAO_EXPIRADA");
+  if (!Instante.safeParse(agora).success || !Number.isFinite(expira) || !Number.isFinite(instante) || expira <= instante) return negar("SESSAO_EXPIRADA");
+  const emitida=Date.parse(sessao.emitidaEm);
+  if (!SessaoSchema.safeParse(sessao).success || !Number.isFinite(emitida) || emitida>instante || emitida>=expira)
+    return negar("SESSAO_INVALIDA");
   if (politica?.conexoesExternasHabilitadas !== true) return negar("LEITURA_EXTERNA_DESLIGADA");
   if (!pedido || typeof pedido !== "object") return negar("PEDIDO_LEITURA_INVALIDO");
   const { fonteId, consulta, dicionarioPaciente } = pedido as Record<string, unknown>;

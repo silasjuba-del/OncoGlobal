@@ -63,6 +63,7 @@ it.each(['mantenha enoxaparina 80 mg à noite','não mantenha enoxaparina 40 mg 
 });
 it('6A retratação e processamento administrativo não apagam relato; somente decisão médica referenciada',()=>{
  const a=ambiente();try{
+  a.seed('Contato',{contatoId:'contato-corrente-b2',canal:'WHATSAPP_SERVICO',endereco:remetente,patientId:ctx.patientId,relacao:'PACIENTE',vinculadoEm:EM,revogadoEm:null});
   a.seed('Paciente',{patientId:ctx.patientId,nome:'Paciente Sintético Bateria2',identificadores:[],nascimento:null,sexoCadastral:'NAO_INFORMADO',divergencia:false},'CONFIRMADO',{...ctx,tumorLotId:null});
   const id=receber(a,'reacao','fiquei toda vermelha e com coceira no braço na infusão de ontem, acho que foi a platina','2026-10-18T12:00:00Z');
   receber(a,'retracao','melhorou, deve ter sido o calor da sala, esquece','2026-10-18T20:00:00Z');
@@ -81,6 +82,7 @@ it('6A retratação e processamento administrativo não apagam relato; somente d
 });
 it('6B alergia prévia e prescrição assinada não escondem novo relato nem atribuem droga',()=>{
  const a=ambiente();try{
+  a.seed('Contato',{contatoId:'contato-corrente-b2',canal:'WHATSAPP_SERVICO',endereco:remetente,patientId:ctx.patientId,relacao:'PACIENTE',vinculadoEm:EM,revogadoEm:null});
   a.assinar();a.seed('FATO',{campo:'alergias',valor:['dipirona']});
   const relato='fiquei toda empolada, a garganta apertou e a voz mudou, foi logo depois do remédio da veia';receber(a,'novo',relato);
   const r=relatosInfusaoPendentes(a.db,listarEventos(a.db,ctx.patientId),EM);

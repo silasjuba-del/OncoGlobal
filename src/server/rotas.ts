@@ -143,6 +143,10 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
   };
   if (req.method !== "POST" || rota === "desconhecida") return reply(404, "ROTA_NAO_ENCONTRADA");
   try {
+    // Relógio indisponível impede autenticação/efeitos, mas não é credencial incorreta.
+    const tempoServico=dataCivilDoServico(deps.agora(),"-03:00");
+    if(tempoServico.estado!=="OK")return reply(503,tempoServico.codigo,
+      rota==="agenda"||rota==="apac"?{hoje:null,itens:[],estado:"PENDENTE",codigo:tempoServico.codigo}:{codigo:tempoServico.codigo});
     if (rota === "login") {
       const parsed = z.object({ senha: z.string() }).strict().safeParse(await body(req));
       if (!parsed.success) return reply(400, "PAYLOAD_INVALIDO");

@@ -741,10 +741,9 @@ export function retomarPendenciasCanal(
       `);
 
       for (const row of pendentes) {
+        if (!opcoes.processador) break;
         const item = itemDeLinha(row);
-        const resultado = opcoes.processador
-          ? opcoes.processador(item)
-          : { reciboTecnico: "PROCESSADA", vinculoClasse: item.vinculo.classe, processadoLocalmente: true };
+        const resultado = opcoes.processador(item);
         insertResolucao.run(row.mensagemId, opcoes.agora, JSON.stringify(resultado));
         processadasIds.push(row.mensagemId);
       }

@@ -31,7 +31,7 @@ export function relatosInfusaoPendentes(db:DatabaseSync,eventos:readonly Clinica
   if(contatosAtuais.some(c=>c.value.revogadoEm!==null||c.estadoVinculo==='CONFLITO'))return [];
   const alvos=[...new Set(contatosAtuais.flatMap(c=>c.patientIdResolvido?[c.patientIdResolvido]:[]))];
   if(alvos.length>1)return [];
-  const patientId=alvos[0]??(r.vinculoClasse==='CONHECIDO'?r.vinculoPatientId:null);
+  const patientId=alvos[0];
   if(!patientId||(r.vinculoPatientId&&r.vinculoPatientId!==patientId))return [];
   try {const c=JSON.parse(r.conteudo) as {tipo?:string;texto?:string};
    return c.tipo==='TEXT'&&typeof c.texto==='string'?[{patientId,mensagemId:r.mensagemId,payloadSha256:r.payloadSha256,texto:c.texto,em:r.ingestedAt,contatoId:r.senderRef,canal:r.canal}]:[];

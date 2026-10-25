@@ -22,6 +22,7 @@ it.each([false,true])('6A/6B: HTTP + tela real + SQLite preservam relato até de
  a.seed('Paciente',{patientId:ctx.patientId,nome:'Paciente Sintético B2',identificadores:[],nascimento:null,sexoCadastral:'NAO_INFORMADO',divergencia:false},'CONFIRMADO',c);
  a.seed('AgendaEntry',{patientId:ctx.patientId,encounterId:ctx.encounterId,horario:'15:00',data:'2026-10-19'},'CONFIRMADO',c);
  const remetente='+55'+'00000009999';
+ if(!vinculoPosterior)a.seed('Contato',{contatoId:'contato-corrente-b2-http',canal:'WHATSAPP_SERVICO',endereco:remetente,patientId:ctx.patientId,relacao:'PACIENTE',vinculadoEm:EM,revogadoEm:null},'CONFIRMADO',c);
  for(const [id,texto] of [['reacao','fiquei toda vermelha e com coceira na infusão de ontem'],['retracao','melhorou, esquece']]){
   expect(receberTransporteSintetico(a.db,{accountId:'b2-sintetico',canal:'WHATSAPP_SERVICO',providerMessageId:id!,senderRef:remetente,providerSentAt:EM,ingestedAt:EM,
    conteudo:{tipo:'TEXT',texto:texto!,contentSha256:createHash('sha256').update(texto!).digest('hex')},cadastros:vinculoPosterior?[]:[{patientId:ctx.patientId,nome:'Paciente Sintético B2',identificadores:[{tipo:'TELEFONE',valor:remetente}],chaveDemografica:null}]}).ok).toBe(true);

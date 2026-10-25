@@ -516,9 +516,14 @@ describe("S-F2-01 · Ingresso seguro e recuperável (WhatsApp, IMAP, idempotênc
       expect.objectContaining({ estado: "PENDENTE_PROCESSAMENTO" }),
     ]);
 
+    expect(retomarPendenciasCanal(dbReaberto, {agora:"2026-10-15T12:10:00.000Z"}))
+      .toMatchObject({ok:true,retomadas:0,pendentesRestantes:1});
+    const processadas:string[]=[];
     const retomada = retomarPendenciasCanal(dbReaberto, {
       agora: "2026-10-15T12:10:00.000Z",
+      processador:mensagem=>{processadas.push(mensagem.mensagemId);return {reciboTecnico:"PROCESSADA",mensagemId:mensagem.mensagemId};},
     });
+    expect(processadas).toHaveLength(1);
     expect(retomada).toMatchObject({
       ok: true,
       retomadas: 1,

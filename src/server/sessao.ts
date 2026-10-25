@@ -1,5 +1,5 @@
 import { randomBytes, scryptSync, timingSafeEqual } from "node:crypto";
-import { Sessao, type Sessao as SessaoTipo } from "../contracts/base.js";
+import { Instante, Sessao, type Sessao as SessaoTipo } from "../contracts/base.js";
 import { hashCanonico } from "../modules/tipos.js";
 
 /** Documento exibido = id + versão + hash do CONTEÚDO exato mostrado ao médico (A13). */
@@ -33,7 +33,7 @@ export function criarGerenciadorSessao(config: {
 }): GerenciadorSessao {
   const maxTentativas = config.maxTentativasJanela ?? 5;
   const janelaTentativasMs = config.janelaTentativasMs ?? 60_000;
-  if (!config.medicoId || !config.crm || config.senha.length < 12 || config.duracaoMs <= 0
+  if (!config.medicoId || !config.crm || config.senha.length < 12 || !Number.isFinite(config.duracaoMs) || config.duracaoMs <= 0
     || !Number.isInteger(maxTentativas) || maxTentativas < 1
     || !Number.isFinite(janelaTentativasMs) || janelaTentativasMs <= 0)
     throw new Error("SESSAO_CONFIG_INVALIDA");
@@ -44,11 +44,14 @@ export function criarGerenciadorSessao(config: {
       falhasRecentes.shift();
     }
   };
-  const bloqueadoPorTentativas = (): boolean => {
-    const agoraMs = Date.parse(config.agora());
-    if (!Number.isFinite(agoraMs)) return false;
+  const bloqueadoEm = (agoraMs: number): boolean => {
+    if (!Number.isFinite(agoraMs)) return true;
     podarFalhas(agoraMs);
     return falhasRecentes.length >= maxTentativas;
+  };
+  const bloqueadoPorTentativas = (): boolean => {
+    const agora=config.agora();
+    return !Instante.safeParse(agora).success || bloqueadoEm(Date.parse(agora));
   };
   const sessions = new Map<string, { sessao: SessaoTipo; alertas?: {contexto:ContextoExibicao;ids:readonly string[]}; bundle?: {
     contexto: ContextoExibicao;
@@ -57,7 +60,12 @@ export function criarGerenciadorSessao(config: {
   const obter = (token: string): SessaoTipo | null => {
     const record = sessions.get(token);
     if (!record) return null;
-    if (Date.parse(record.sessao.expiraEm) <= Date.parse(config.agora())) {
+    const agora=config.agora(), instante=Date.parse(agora);
+    if (!Instante.safeParse(agora).success || !Number.isFinite(instante)
+      || !Sessao.safeParse(record.sessao).success
+      || Date.parse(record.sessao.expiraEm)<=Date.parse(record.sessao.emitidaEm)
+      || Date.parse(record.sessao.emitidaEm)>instante) return null;
+    if (Date.parse(record.sessao.expiraEm) <= instante) {
       sessions.delete(token);
       return null;
     }
@@ -66,8 +74,8 @@ export function criarGerenciadorSessao(config: {
   return {
     bloqueadoPorTentativas,
     login(senha) {
-      if (bloqueadoPorTentativas()) return null;
-      const agoraMs = Date.parse(config.agora());
+      const emitidaEm=config.agora(),agoraMs=Date.parse(emitidaEm);
+      if (!Instante.safeParse(emitidaEm).success || bloqueadoEm(agoraMs)) return null;
       if (typeof senha !== "string" || senha.length === 0 || senha.length > 512) {
         if (Number.isFinite(agoraMs)) falhasRecentes.push(agoraMs);
         return null;
@@ -78,9 +86,10 @@ export function criarGerenciadorSessao(config: {
         return null;
       }
       falhasRecentes.length = 0;
-      const emitidaEm = config.agora();
+      const expiracao=new Date(agoraMs+config.duracaoMs);
+      if (!Number.isFinite(expiracao.getTime()) || expiracao.getTime()<=agoraMs) return null;
       const sessao = Sessao.parse({ medicoId: config.medicoId, crm: config.crm,
-        emitidaEm, expiraEm: new Date(Date.parse(emitidaEm) + config.duracaoMs).toISOString() });
+        emitidaEm, expiraEm: expiracao.toISOString() });
       const token = randomBytes(32).toString("hex");
       sessions.set(token, { sessao });
       return { token, sessao };

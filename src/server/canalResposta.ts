@@ -417,7 +417,9 @@ export function confirmarRespostaCanalPeloMedico(
         return { ok: false as const, codigo: "CONTEXTO_ALTERADO_APOS_EXIBICAO" as const };
       }
 
-      if (contatoFoiRevogadoNoLedger(db, rascunho.contatoId, rascunho.destinatario)) {
+      const revogacao=estadoRevogacaoContatoNoLedger(db, rascunho.contatoId, rascunho.destinatario);
+      if (revogacao === "INDETERMINADO") throw new Error("CONTATO_REVOGACAO_INDISPONIVEL");
+      if (revogacao === "REVOGADO") {
         return { ok: false as const, codigo: "CONTATO_REVOGADO" as const };
       }
 
@@ -583,25 +585,26 @@ export function carregarDicionarioPacienteDoLedger(
   };
 }
 
-function contatoFoiRevogadoNoLedger(db: DatabaseSync, contatoId: string, endereco: string): boolean {
+function estadoRevogacaoContatoNoLedger(db: DatabaseSync, contatoId: string, endereco: string): "REVOGADO" | "NAO_REVOGADO" | "INDETERMINADO" {
   try {
     const temTabela = db.prepare(
       "SELECT 1 AS ok FROM sqlite_master WHERE type='table' AND name='clinical_event'",
     ).get();
-    if (!temTabela) return false;
+    if (!temTabela) return "INDETERMINADO";
     const rows = db.prepare(
       "SELECT payload FROM clinical_event WHERE tipo = 'Contato'",
     ).all() as Array<{ payload: string }>;
     for (const r of rows) {
       const outer = JSON.parse(String(r.payload)) as Record<string, unknown>;
       const parsed = Contato.safeParse(outer.data ?? outer);
+      if (!parsed.success) return "INDETERMINADO";
       if (parsed.success && (parsed.data.contatoId === contatoId || parsed.data.endereco === endereco)) {
-        if (parsed.data.revogadoEm !== null) return true;
+        if (parsed.data.revogadoEm !== null) return "REVOGADO";
       }
     }
-    return false;
+    return "NAO_REVOGADO";
   } catch {
-    return false;
+    return "INDETERMINADO";
   }
 }
 
@@ -666,7 +669,9 @@ export function revalidarAutorizacaoSaidaCanalNoLedger(
     if (opcoes?.textoEnviado !== undefined && sha256(opcoes.textoEnviado) !== aut.conteudoSha256) {
       return { ok: false, codigo: "CONTEUDO_ALTERADO_APOS_CONFIRMACAO" };
     }
-    if (contatoFoiRevogadoNoLedger(db, aut.contatoId, aut.destinatarioCanonico)) {
+    const revogacao=estadoRevogacaoContatoNoLedger(db, aut.contatoId, aut.destinatarioCanonico);
+    if (revogacao === "INDETERMINADO") return {ok:false,codigo:"CONTATO_REVOGACAO_INDISPONIVEL"};
+    if (revogacao === "REVOGADO") {
       return { ok: false, codigo: "CONTATO_REVOGADO" };
     }
 
@@ -1018,8 +1023,9 @@ export function integrarCanalNaPreConsultaECabecalho(
       l = { ...l, vinculoClasse: "DESCONHECIDO", vinculoPatientId: null };
     }
     const rawConteudo = JSON.parse(l.conteudo) as Record<string, unknown>;
-    const revogado = vinculoReconciliado?.estado === "REVOGADO"
-      || contatoFoiRevogadoNoLedger(db, l.senderRef, l.senderRef);
+    const revogacao=estadoRevogacaoContatoNoLedger(db, l.senderRef, l.senderRef);
+    const revogado = vinculoReconciliado?.estado === "REVOGADO" || revogacao === "REVOGADO";
+    if (revogacao === "INDETERMINADO") l={...l,vinculoClasse:"DESCONHECIDO",vinculoPatientId:null};
     const estadoVinculo: EstadoVinculoContatoEntrada = revogado
       ? "REVOGADO"
       : l.vinculoClasse === "CONHECIDO" && l.vinculoPatientId

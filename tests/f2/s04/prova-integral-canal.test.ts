@@ -412,7 +412,10 @@ describe("S-F2-04 · Prova integral e fechamento da F2 (bateria adversarial, fal
     db.close();
 
     const dbPosReinicio = reabrir(caminho);
-    const retomadas = retomarPendenciasCanal(dbPosReinicio, { agora: "2026-10-18T15:01:00.000Z" });
+    const processadas:string[]=[];
+    const retomadas = retomarPendenciasCanal(dbPosReinicio, { agora: "2026-10-18T15:01:00.000Z",
+      processador:mensagem=>{processadas.push(mensagem.mensagemId);return {reciboTecnico:"PROCESSADA",mensagemId:mensagem.mensagemId};} });
+    expect(processadas).toHaveLength(1);
     expect(retomadas).toMatchObject({ ok: true, retomadas: 1, pendentesRestantes: 0 });
     const caixaPosReinicio = consultarCaixaCanal(dbPosReinicio, acesso);
     expect(caixaPosReinicio.ok && caixaPosReinicio.mensagens).toHaveLength(1);

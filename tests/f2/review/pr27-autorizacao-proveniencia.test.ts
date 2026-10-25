@@ -48,6 +48,27 @@ function confirmar(a: ReturnType<typeof preparar>) {
   const r = confirmarRespostaCanalPeloMedico(a.db, a.acesso, a.pedido);
   expect(r.ok).toBe(true); return r;
 }
+
+it.each(["sql","json","contrato","tabela-ausente"])("revogação indeterminada (%s) bloqueia autorização e envio sem declarar revogação",async caso=>{
+ const a=preparar();confirmar(a);const antes=a.snapshot();
+ if(caso==="tabela-ausente")a.db.exec("ALTER TABLE clinical_event RENAME TO clinical_event_indisponivel_sintetico");
+ const original=a.db.prepare.bind(a.db);
+ vi.spyOn(a.db,"prepare").mockImplementation(sql=>{
+  if(sql.includes("SELECT payload FROM clinical_event WHERE tipo = 'Contato'")){
+   if(caso==="sql")throw Error("falha sintética de leitura");
+   if(caso==="json")return original("SELECT '{json-invalido' AS payload");
+   if(caso==="contrato")return original("SELECT '{}' AS payload");
+  }
+  return original(sql);
+ });
+ const rev=revalidarAutorizacaoSaidaCanalNoLedger(a.db,a.intent);
+ expect(rev).toEqual({ok:false,codigo:"CONTATO_REVOGACAO_INDISPONIVEL"});
+ expect(confirmarRespostaCanalPeloMedico(a.db,a.acesso,a.pedido)).toMatchObject({ok:false,codigo:"ARMAZENAMENTO_INDISPONIVEL"});
+ let efeitos=0;
+ const envio=await executarEnvioAutorizadoCanal(a.db,a.acesso,{intent:a.intent,revisaoContextoAtual:contexto.revisaoContexto,
+  transporteSaida:async()=>{efeitos++;return {ok:true,providerReceiptId:"nao-deve-enviar"};}});
+ expect(envio.resultadoGateway.decisao).toBe("NEGADA");expect(efeitos).toBe(0);expect(a.snapshot()).toEqual(antes);
+});
 afterEach(() => {
   vi.restoreAllMocks();
   for (const db of bancos.splice(0)) { try { db.close(); } catch { /* ja fechado */ } }
