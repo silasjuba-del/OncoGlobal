@@ -137,7 +137,10 @@ export async function executarOrk(plano: Plano, agentes: Readonly<Record<string,
       && visao.data.cobertura.setoresEsperados.every(s => visao.data.cobertura.setoresAvaliados.includes(s)
         || visao.data.lacunas.some(l => l.setor === s));
     run.estado = completa ? "PRONTO" : "FALHOU";
-  } else run.estado = run.resultados.some((r) => r.resultado === "ok") ? "PRONTO" : "FALHOU";
+  } else {
+    const resultadoFinal = final ? run.resultados.find((r) => r.id === final.id) : undefined;
+    run.estado = resultadoFinal?.resultado === "ok" ? "PRONTO" : "FALHOU";
+  }
   run.etapa = "JOIN";
   return run;
 }
