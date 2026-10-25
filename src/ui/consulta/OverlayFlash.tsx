@@ -11,7 +11,7 @@ export function OverlayFlash({ flash, onFechar, erro = null }: {
     function teclado(e: KeyboardEvent) {
       if (e.key === "Escape" && !flash.ocupado) { e.preventDefault(); onFechar(); }
       if (e.key === "Tab") {
-        const itens = Array.from(card.current?.querySelectorAll<HTMLElement>('button:not(:disabled), input:not(:disabled), [tabindex="0"]') ?? []);
+        const itens = Array.from(card.current?.querySelectorAll<HTMLElement>('button:not(:disabled), input:not(:disabled), select:not(:disabled), textarea:not(:disabled), [tabindex="0"]') ?? []);
         const primeiro = itens[0], ultimo = itens[itens.length - 1];
         if (e.shiftKey && document.activeElement === primeiro) { e.preventDefault(); ultimo?.focus(); }
         else if (!e.shiftKey && document.activeElement === ultimo) { e.preventDefault(); primeiro?.focus(); }

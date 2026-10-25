@@ -11,9 +11,10 @@ export function useDialogoAcessivel<T extends HTMLElement>(aoFechar: () => void)
   const fechar = useRef(aoFechar);
   fechar.current = aoFechar;
   useEffect(() => {
-    const anterior = document.activeElement instanceof HTMLElement ? document.activeElement : null;
     const raiz = ref.current;
-    (raiz?.querySelector<HTMLElement>(FOCAVEIS) ?? raiz)?.focus();
+    if (!raiz) return;
+    const anterior = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    (raiz.querySelector<HTMLElement>(FOCAVEIS) ?? raiz).focus();
     const aoTeclar = (e: KeyboardEvent) => {
       if (e.key === "Escape") { e.preventDefault(); fechar.current(); return; }
       if (e.key !== "Tab" || !raiz) return;
