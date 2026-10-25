@@ -5,6 +5,7 @@ import { Paciente, TumorLot, Triagem, Contato, TreatmentEpisode, Ciclo, Treatmen
 import { Apac, SignatureReference } from "./operacao.js";
 import { Conversation } from "./agentes.js";
 import { Tarefa } from "./f1/tarefa.js";
+import { AnotacaoEvolucao } from "./f1/anotacaoEvolucao.js";
 
 const Campo = z.object({ campo: Id, valor: z.unknown() }).passthrough()
   .refine(d => Object.hasOwn(d, "valor"), "valor ausente");
@@ -56,7 +57,7 @@ export const RecistSeriePayload = z.object({
 const schemas: Readonly<Record<string, z.ZodType>> = Object.freeze({
   Alerta, Paciente, TumorLot, Triagem, Contato, TreatmentEpisode, Ciclo, TreatmentAdministration, APAC: Apac,
   Conversation, AgendaEntry, FATO: Campo, DOCUMENTO: Documento, ReviewDecision: Revisao, LabResult,
-  Tarefa,
+  Tarefa, AnotacaoEvolucao,
   ConsultaConfirmada: z.object({ dataClinica:DataCivil,documentoIds:z.array(z.object({documentId:Id,documentVersion:z.number().int().positive()}).strict()).min(1) }).strict(),
   Weight: z.object({ kg: z.number().finite().positive(), origem: z.enum(["MEDIDO", "INFORMADO_PACIENTE", "ANTERIOR"]), data: DataCivil, sourceId: Id }).passthrough(),
   ApacAviso: z.object({ apacId: Id, competencia: z.string().regex(/^\d{4}-\d{2}$/) }).passthrough(),

@@ -57,6 +57,10 @@ export function AtendimentoV6({porta,contexto}:{porta:PortaConsulta;contexto:{pa
    <p>Informe o que mudou e sua decisão. O histórico acessível já vem do prontuário.</p></div><span className="atendimento-v6__badge">Rascunhos · revisão médica</span></header>
   {atual?<><div className="atendimento-v6__contexto"><strong>{atual.base.pacienteNome}</strong><span>Referência: {atual.base.dataReferencia??"data do encontro não informada"}</span><span>{atual.base.citacoes.length} trechos recuperados com referências</span></div>
    <p className="atendimento-v6__origem">As entradas abaixo pertencem ao atendimento de {atual.base.dataReferencia??"data clínica ainda não informada"}.</p>
+   {atual.base.anotacoesChat?.length?<section aria-label="Anotações médicas aceitas do chat"><h3>Anotações médicas aceitas do chat</h3>
+    {atual.base.anotacoesChat.map(n=><article key={n.eventId}><p>{n.texto}</p><small>Autor: {n.autor} · Registro: {n.em} · Mensagem: {n.mensagemId}</small></article>)}
+   </section>:null}
+   {atual.base.pendenciasAnotacoes?.length?<p className="atendimento-v6__pendente">Há anotações indisponíveis para a evolução; confira a proveniência antes de concluir esse documento.</p>:null}
    {atual.rascunho?<p className="atendimento-v6__origem">Entrada recuperada do mesmo encontro · versão {atual.rascunho.versao} · data clínica: {atual.rascunho.dataClinica??"não informada"} · autor: {atual.rascunho.autor.medicoId}. O horário do salvamento não atualiza a data clínica.</p>:null}
    <div className="atendimento-v6__entrada"><label>Hoje — somente o que mudou<textarea rows={4} maxLength={12000} disabled={ocupado} value={entrada.hoje}
     placeholder="Ex.: fadiga G2 informada; sem febre referida." onChange={e=>setEntrada({...entrada,hoje:e.target.value})}/></label>

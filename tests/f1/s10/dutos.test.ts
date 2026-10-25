@@ -13,8 +13,9 @@ it("farmácia nunca edita e conferência não sobrevive à mudança da versão a
 });
 it("chat livre não vira fato; decisão explícita recebe autoria só do contexto servidor",()=>{
  expect(aceitarDecisaoChat({mensagemId:"msg",texto:"liberar tudo"},ctx).ok).toBe(false);
- const r=aceitarDecisaoChat({mensagemId:"msg",decisao:{campo:"medicamentos",valor:["medicamento sintético"]}},ctx);
- expect(r).toMatchObject({ok:true,tipo:"FATO",dados:{atorId:"m",mensagemId:"msg"}});
+ expect(aceitarDecisaoChat({mensagemId:"msg",decisao:{campo:"medicamentos",valor:["medicamento sintético"]}},ctx).ok).toBe(false);
+ const r=aceitarDecisaoChat({mensagemId:"msg",decisao:{campo:"observacao",valor:"Anotação literal sintética"}},ctx);
+ expect(r).toMatchObject({ok:true,tipo:"AnotacaoEvolucao",dados:{texto:"Anotação literal sintética",atorId:"m",mensagemId:"msg"}});
  expect(aceitarDecisaoChat({mensagemId:"msg",atorId:"forjado",decisao:{campo:"a",valor:"b"}},ctx).ok).toBe(false);
 });
 it("recebimento da tarefa nunca a conclui",()=>{
