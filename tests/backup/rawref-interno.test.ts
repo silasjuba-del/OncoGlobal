@@ -165,7 +165,7 @@ describe("backup: rawRef interno conhecido vs físico vs desconhecido (ARQ-05)",
     const login = sessoes.login(SENHA)!;
     const contexto = { patientId: "paciente-sintetico", encounterId: "encontro-sintetico", tumorLotId: null };
     sessoes.selecionarConsulta(login.token, contexto);
-    const mensagem = { mensagemId: "mensagem-sintetica", ...contexto, setor: "FARMACIA",
+    const mensagem = { mensagemId: "mensagem-sintetica", patientId: contexto.patientId, encounterId: contexto.encounterId, setor: "FARMACIA",
       autor: "farmacia-sintetica", texto: "Mensagem sintética sem decisão automática." };
     draft(c.db, "mensagem-seed", "referencia-local", mensagem);
     expect(confirmar(c.db, { ...contexto, operationId: "seed-mensagem", reviewDecisionId: "review-sintetica",
@@ -192,7 +192,8 @@ describe("backup: rawRef interno conhecido vs físico vs desconhecido (ARQ-05)",
       expect(lerDraft(reaberto, "d-jev")?.rawRef).toBe("d-upload");
       expect(lerDraft(reaberto, "d-divergencia")?.rawRef).toBe("d-jev");
       expect(lerDraft(reaberto, dutoId)).toMatchObject({ rawRef: dutoId, payload: { contexto,
-        valor: { campo: "observacao", valor: "texto sintético" } } });
+        valor: { texto: "texto sintético", atorId: "medico-sintetico", aceitaEm: EM, contexto,
+          mensagemId: "mensagem-sintetica", origemMensagem: { eventId: "evento-mensagem", contentHash: expect.stringMatching(/^[a-f0-9]{64}$/) } } } });
       expect(lerDraft(reaberto, "d-sintese")?.rawRef).toBe("retrato-local:rev-sintetica");
       expect(lerDraft(reaberto, "d-flash")?.payload).toMatchObject({ kind: "FLASH_RASCUNHO" });
     } finally { reaberto.close(); }

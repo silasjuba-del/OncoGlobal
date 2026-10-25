@@ -5,6 +5,7 @@ import { createHash } from 'node:crypto';
 import type { DatabaseSync } from 'node:sqlite';
 import { z } from 'zod';
 import { Id, Sessao, Instante, type Fonte } from '../contracts/base.js';
+import { validarPayloadEvento } from '../contracts/envelope.js';
 import { Apac, SignatureReference, type ClinicalEvent } from '../contracts/operacao.js';
 import { TreatmentAdministration } from '../contracts/clinico.js';
 import { ConferenciaFarmacia, type PrescricaoAssinadaRef, type ReferenciaSigtap, type ContextoDutoServidor } from '../contracts/f1/dutos.js';
@@ -171,7 +172,11 @@ function executarDuto(deps: DepsDutos, token: string, rota: string, entrada: unk
   const p=ChatPedido.parse(entrada),mensagens=vigentes.filter(e=>e.tipo==='ChatMessage'&&dadosDoEvento(e)?.mensagemId===p.mensagemId);
   if(mensagens.length!==1)return negar('MENSAGEM_CHAT_NAO_ENCONTRADA');
   if(['farmacia.conferencia','apac.validacaoEmissao'].includes(p.decisao.campo))return negar('CAMPO_DE_DUTO_RESERVADO');
-  const r=aceitarDecisaoChat({mensagemId:p.mensagemId,decisao:p.decisao},contexto);if(!r.ok)return negar(r.codigo);payload=r.dados;
+  const mensagem=mensagens[0]!,dadosMensagem=dadosDoEvento(mensagem);
+  if(!validarPayloadEvento('ChatMessage',dadosMensagem).ok||dadosMensagem?.patientId!==c.patientId
+    ||dadosMensagem.encounterId!==c.encounterId)return negar('MENSAGEM_CHAT_FORA_CONTEXTO');
+  const r=aceitarDecisaoChat({mensagemId:p.mensagemId,decisao:p.decisao},contexto);if(!r.ok)return negar(r.codigo);
+  tipo=r.tipo;payload={...r.dados,contexto:r.contexto,origemMensagem:{eventId:mensagem.eventId,contentHash:hashCanonico(mensagem)}};
  }else{
   const p=TarefaPedido.parse(entrada),ts=vigentes.filter(e=>e.tipo==='Tarefa').flatMap(e=>{const t=Tarefa.safeParse(dadosDoEvento(e));return t.success&&t.data.tarefaId===p.tarefaId?[{e,t:t.data}]:[];});
   if(ts.length!==1)return negar('TAREFA_VIGENTE_NAO_ENCONTRADA');

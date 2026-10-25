@@ -3,7 +3,9 @@ import { act,cleanup,fireEvent,render,screen,waitFor } from "@testing-library/re
 import { afterEach,expect,it,vi } from "vitest";
 import { SinteseProposta } from "../../src/ui/consulta/SinteseProposta.js";
 import { criarPortaHttp } from "../../src/ui/api/http.js";
-import { abrirAmbiente,cadastrarPaciente,criarDiretorio,removerDiretorio,PACIENTE,ENCONTRO,SENHA } from "../f0-fecha/fixtures/consulta-completa.js";
+import { abrirAmbiente,cadastrarPaciente,criarDiretorio,removerDiretorio,PACIENTE,ENCONTRO,SENHA,AGORA } from "../f0-fecha/fixtures/consulta-completa.js";
+import { salvarDraft } from "../../src/kernel/comandos/portas.js";
+import { executarConfirmacao } from "../../src/kernel/comandos/index.js";
 let a:Awaited<ReturnType<typeof abrirAmbiente>>|undefined;
 afterEach(async()=>{cleanup();vi.restoreAllMocks();vi.unstubAllGlobals();if(a){await a.close();removerDiretorio(a.dir);a=undefined;}});
 it("Hoje/Decisão/Saídas gera resumo e evolução reais, mostra pendência por documento e recupera após remontar",async()=>{
@@ -11,8 +13,14 @@ it("Hoje/Decisão/Saídas gera resumo e evolução reais, mostra pendência por 
  vi.stubGlobal("fetch",(input:Parameters<typeof fetch>[0],init?:Parameters<typeof fetch>[1])=>realFetch(typeof input==="string"&&input.startsWith("/")?baseUrl+input:input,init));
  const porta=criarPortaHttp({onSessaoExpirada:()=>{}});await porta.login(SENHA);await porta.carregarConsulta(PACIENTE,null,ENCONTRO);
  const contexto={patientId:PACIENTE,encounterId:ENCONTRO,tumorLotId:null};
+ a.sessoes.selecionarConsulta(a.token,contexto);
+ salvarDraft(a.db,{draftId:"chat-ui",patientId:PACIENTE,sourceId:"chat-ui",rawRef:"chat-ui",payload:{},diagnostics:[],revision:0,criadoEm:AGORA});
+ executarConfirmacao(a.db,{...contexto,operationId:"chat-ui",reviewDecisionId:"chat-ui",sessao:a.sessoes.obter(a.token)!,em:AGORA,registros:[{
+  draftId:"chat-ui",expectedRevision:0,eventId:"chat-ui",tipo:"ChatMessage",revisao:"CONFIRMADO",fontes:[],payload:{mensagemId:"chat-ui",patientId:PACIENTE,encounterId:ENCONTRO,setor:"MEDICO",autor:"medico-sintetico",texto:"Mensagem sintética"}}]});
+ expect((await a.request("/chat/aceitar-decisao",{contexto:{...contexto,operationId:"anotacao-ui"},mensagemId:"chat-ui",decisao:{campo:"observacao",valor:"Anotação sintética aceita, sem atualizar alergias."}})).status).toBe(200);
  const tela=render(<SinteseProposta porta={porta} contexto={contexto}/>);
  const hoje=await screen.findByLabelText("Hoje — somente o que mudou");
+ expect(screen.getByRole("region",{name:"Anotações médicas aceitas do chat"}).textContent).toContain("Anotação sintética aceita, sem atualizar alergias.");
  fireEvent.change(hoje,{target:{value:"Fadiga G2 informada; sem febre referida."}});
  fireEvent.change(screen.getByLabelText("Decisão médica de hoje"),{target:{value:"Decisão sintética explícita."}});
  fireEvent.click(screen.getByRole("checkbox",{name:"Prescrição"}));
@@ -20,6 +28,7 @@ it("Hoje/Decisão/Saídas gera resumo e evolução reais, mostra pendência por 
  await screen.findByText(/Rascunho salvo e recuperável/);
  expect(screen.getByRole("region",{name:"Resumo do caso · rascunho"}).textContent).toContain("Decisão sintética explícita.");
  expect(screen.getByRole("region",{name:"Evolução por diferenças · rascunho"}).textContent).toContain("sem febre referida");
+ expect(screen.getByRole("region",{name:"Evolução por diferenças · rascunho"}).textContent).toContain("Anotação sintética aceita, sem atualizar alergias.");
  expect(screen.getByRole("region",{name:"Prescrição · pendências"}).textContent).toContain("fluxo específico");
  expect(a.eventos()).toEqual(antes);tela.unmount();render(<SinteseProposta porta={porta} contexto={contexto}/>);
  await waitFor(()=>expect((screen.getByLabelText("Decisão médica de hoje") as HTMLTextAreaElement).value).toBe("Decisão sintética explícita."));

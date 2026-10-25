@@ -17,8 +17,10 @@ export function comporDocumentosAtendimentoV6(base:BaseAtendimentoV6,entrada:Ent
  const dataDeclaracao=base.dataReferencia??"data clínica não informada";
  const hoje=entrada.hoje?`Atualização informada pelo médico para ${dataDeclaracao}: ${entrada.hoje}`:"Atualização não informada; não equivale a ausência de sintomas.";
  const decisao=entrada.decisao?`Decisão médica informada para ${dataDeclaracao}: ${entrada.decisao}`:"Decisão médica de hoje: não informada.";
+ const notas=(base.anotacoesChat??[]).map(n=>`${n.texto}\nAutor: ${n.autor} · registro: ${n.em} · mensagem: ${n.mensagemId} (${n.mensagemEventId}) · anotação: ${n.eventId}`).join("\n\n");
  return entrada.saidas.map(tipo=>{
   const pendencias=[...base.integridade];
+  if(tipo==="EVOLUCAO")pendencias.push(...base.pendenciasAnotacoes??[]);
   if(tipo!=="RESUMO"&&tipo!=="EVOLUCAO")return {tipo,titulo:TITULOS_V6[tipo],estado:"FLUXO_ESPECIFICO_NECESSARIO" as const,
    texto:`${TITULOS_V6[tipo]} — preparação pendente\n${referencia}\n${decisao}`,
    pendencias:[`Concluir ${TITULOS_V6[tipo].toLowerCase()} no fluxo específico, com seus campos e validações. Esta síntese não emite esse documento.`]};
@@ -31,6 +33,6 @@ export function comporDocumentosAtendimentoV6(base:BaseAtendimentoV6,entrada:Ent
    ?`AGORA\n${recuperado}\n\nMUDOU\n${mudou}\n${hoje}\n\n${decisao}`
    :`S — atualização informada\n${hoje}\n\nO — dados recuperados, com suas datas\n${recuperado}\nExame físico de hoje não acrescentado automaticamente.\n\nA — diferenças documentadas\n${mudou}\n${base.delta.substituidos.length?`${base.delta.substituidos.length} referência(s) substituída(s); conferir a retificação.\n`:""}\nP — decisão explícita\n${decisao}`;
   return {tipo,titulo:TITULOS_V6[tipo],estado:pendencias.length?"PENDENTE" as const:"PRONTO_PARA_REVISAO" as const,pendencias,
-   texto:`RASCUNHO — revisão e assinatura pendentes\n${referencia}\n\n${corpo}${fontes.length?`\n\nFONTES E PROVENIÊNCIA\n${fontes.join("\n")}`:""}`};
+   texto:`RASCUNHO — revisão e assinatura pendentes\n${referencia}\n\n${corpo}${tipo==="EVOLUCAO"&&notas?`\n\nANOTAÇÕES MÉDICAS ACEITAS DO CHAT\n${notas}`:""}${fontes.length?`\n\nFONTES E PROVENIÊNCIA\n${fontes.join("\n")}`:""}`};
  });
 }
