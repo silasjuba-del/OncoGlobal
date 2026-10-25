@@ -131,7 +131,7 @@ export function compilarResumoEstruturadoAnamnese(entrada: {
   const lacunasExplicitas: string[] = [];
   const incertezasExplicitas: string[] = [];
   const negacoesPreservadas: string[] = [];
-  const alertasEscalonamentoMedico: string[] = [...(entrada.alertasRedFlag ?? [])];
+  const alertasEscalonamentoMedico: string[] = [];
 
   for (const passo of entrada.roteiro.passos) {
     const respostas = respostasPorPasso.get(passo.passoId) ?? [];
@@ -201,6 +201,7 @@ export function compilarResumoEstruturadoAnamnese(entrada: {
     incertezasExplicitas: incertezasExplicitas.flatMap(texto => dividirTexto(texto, 500)),
     negacoesPreservadas: negacoesPreservadas.flatMap(texto => dividirTexto(texto, 500)),
     alertasEscalonamentoMedico: alertasEscalonamentoMedico.flatMap(texto => dividirTexto(texto, 500)),
+    alertasInformadosNaoVerificados:(entrada.alertasRedFlag??[]).filter(t=>t.trim().length>0).flatMap(t=>dividirTexto(t,500)),
     // Curadoria não comprova entrega ao paciente.
     orientacoesFixasEntreguesIds: [],
     avaliacaoMedicaConcluida: false,

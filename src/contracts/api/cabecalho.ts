@@ -12,6 +12,7 @@ export interface CabecalhoVisao {
   pendentes: number;
   contatosDesdeUltima: readonly Contato[];
   alergiasPaciente: readonly string[];
+  situacaoAlergias?:{estado:'CONFLITO'|'NEGADAS'|'PRESENTES'|'NAO_INFORMADAS';fontes:string[]}|undefined;
   comorbidadesPaciente: readonly string[];
 }
 

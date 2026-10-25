@@ -5,6 +5,7 @@ import { lerDraft } from "../../../kernel/comandos/portas.js";
 import { rascunhoInerte as rascunhoJevNaoPromovivel } from "../../../contracts/rascunhos.js";
 import { avaliarRadsRascunho } from "../../radsRascunho.js";
 import type { ServidorDeps } from "../../rotas.js";
+import { hashConteudoExibido } from "../../sessao.js";
 import { contextoDraft, sha } from "../confirmacao.js";
 import type { RespostaRota } from "../salaoCanal.js";
 
@@ -74,5 +75,8 @@ export function lerRascunho(deps: ServidorDeps, token: string, sessao: Sessao, r
       || !z.object({patientId:z.literal(draft.patientId).optional()}).safeParse(contextoBruto).success)
       return reply(409, "DRAFT_FORA_DO_ESCOPO");
   } else if (payload?.kind !== "EXTRACAO_RASCUNHO") return reply(409, "DRAFT_FORA_DO_ESCOPO");
+  const contexto=deps.sessoes.consultaSelecionada(token);
+  if(draft.patientId===null&&payload?.kind==="EXTRACAO_RASCUNHO"&&contexto)
+    deps.sessoes.registrarConteudoExibido?.(token,contexto,"VINCULO_DOCUMENTAL",draft.draftId,hashConteudoExibido(draft));
   return reply(200, "RASCUNHO_CARREGADO", { draft });
 }

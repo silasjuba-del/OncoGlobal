@@ -93,7 +93,7 @@ export function Configuracoes({
     if(revisaoServico===null || servicoOcupado || !porta?.alterarCaixaConfiguracao) return;
     setServicoOcupado(true);
     try {
-      const r=await porta.alterarCaixaConfiguracao({numero:NUMERO_CAIXA_RECEITUARIO_ESPECIAL,
+      const r=await porta.alterarCaixaConfiguracao({numero:NUMERO_CAIXA_RECEITUARIO_ESPECIAL,autorizacaoMedica:true,
         valorNovo:{servicoTemReceituarioEspecial:especial},expectedRevision:revisaoServico,
         operationId:`servico-receituario-${Date.now()}-${++sequenciaOperacaoFlash}`});
       setRevisaoServico(r.revision);setMensagemServico("Configuração do serviço gravada.");
@@ -110,7 +110,7 @@ export function Configuracoes({
       const imagem=[...new Set([...(modeloFlash.solicitacoes?.imagem ?? []).filter(x=>RAD_MODELO_FLASH.includes(x)),...outros(outrosRad)])];
       const novo:ModeloFlash={laboratorio:laboratorio.length>0,imagem:imagem.length>0,solicitacoes:{laboratorio,imagem}};
       if(!lerModeloFlashConfigurado(novo)) throw new Error("Use até 50 itens por seção, com até 200 caracteres por item.");
-      const alteracao = await porta.alterarCaixaConfiguracao({ numero: NUMERO_CAIXA_MODELO_FLASH,
+      const alteracao = await porta.alterarCaixaConfiguracao({ numero: NUMERO_CAIXA_MODELO_FLASH,autorizacaoMedica:true,
         valorNovo: novo, expectedRevision: revisaoFlash,
         operationId: `flash-modelo-${Date.now()}-${++sequenciaOperacaoFlash}` });
       setRevisaoFlash(alteracao.revision);

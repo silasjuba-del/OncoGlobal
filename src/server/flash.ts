@@ -286,7 +286,7 @@ function prepararDocumentosFlash(db: DatabaseSync, agora: string, input: Context
     const lab = input.plano.solicitacoes?.laboratorio ?? (essencial ? [] : input.plano.retorno.examesAntesDoRetorno);
     const imagem = input.plano.solicitacoes?.imagem ?? [];
     const pedidos = [...lab.map((exame,i)=>({id:`laboratorio_${i}`,exame,indicacao:fonteDocumentos.indicacoesInvestigacao?.[`LABORATORIO|${exame}`]??null})),
-      ...imagem.map((exame,i)=>({id:`imagem_${i}`,exame,indicacao:fonteDocumentos.indicacoesInvestigacao?.[`IMAGEM|${exame}`]??resumoClinico}))];
+      ...imagem.map((exame,i)=>({id:`imagem_${i}`,exame,indicacao:fonteDocumentos.indicacoesInvestigacao?.[`IMAGEM|${exame}`]??null}))];
     preparacaoDocumentos = prepararDocumentosConsulta({ contexto:contextoCompleto,
       operationId:input.idempotencyKey,revisao:fonteDocumentos.revisao,dataReferencia:fonteDocumentos.dataReferencia,
       fuso:"America/Fortaleza", materiais:[], decisao:{decisaoId:`flash-decisao-${chave}`,contexto:contextoCompleto,

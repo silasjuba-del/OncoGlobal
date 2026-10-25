@@ -85,6 +85,7 @@ export const ResumoEstruturadoAnamnese = z.object({
   incertezasExplicitas: z.array(z.string().min(1).max(500)),
   negacoesPreservadas: z.array(z.string().min(1).max(500)),
   alertasEscalonamentoMedico: z.array(z.string().min(1).max(500)),
+  alertasInformadosNaoVerificados:z.array(z.string().min(1).max(500)).optional(),
   orientacoesFixasEntreguesIds: z.array(Id),
   avaliacaoMedicaConcluida: z.literal(false),
   defineDiagnostico: z.literal(false),

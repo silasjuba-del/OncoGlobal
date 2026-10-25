@@ -309,6 +309,11 @@ describe("G2 · Cenário 6C: Operações por encontro/paciente em salaoCanal e s
         { triagem: triagemComCorte, expectedRevision: null },
       );
       expect(salvarTriagemRes.status).toBe(200);
+      srv.sessoes.selecionarConsulta(srv.token,null);srv.sessoes.selecionarConsulta(srv.token,{...G2_CONTEXTO});
+      expect(await srv.post('/consulta/salao/liberar',{patientId:G2_CONTEXTO.patientId,encounterId:G2_CONTEXTO.encounterId,
+        expectedRevision:salvarTriagemRes.data.rascunho.revision,motivo:'Revisar corte',idempotencyKey:'sem-exibicao-g2'}))
+        .toMatchObject({status:409,data:{codigo:'CORTE_NAO_EXIBIDO_NESTA_SESSAO'}});
+      expect((await srv.post('/consulta/salao',{})).status).toBe(200);
 
       const liberarRes = await srv.post("/consulta/salao/liberar", {
         patientId: G2_CONTEXTO.patientId,

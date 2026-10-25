@@ -34,6 +34,7 @@ export function rotearConfiguracao(deps: ServidorDeps, sessao: Sessao, rota: str
   }
   if (rota === "alterarCaixa") {
     const parsed = z.object({
+      autorizacaoMedica:z.boolean().optional(),
       numero: z.number().int().positive(), valorNovo: z.unknown(),
       expectedRevision: z.number().int().nonnegative(), operationId: z.string().min(8),
       motivo: z.string().max(1000).nullable().optional(),
@@ -43,9 +44,10 @@ export function rotearConfiguracao(deps: ServidorDeps, sessao: Sessao, rota: str
     if (!catalog) return reply(404, "CAIXA_DESCONHECIDA");
     if (catalog.chave.startsWith("apac.")) return reply(409, "CONTEXTO_PACIENTE_OBRIGATORIO");
     if (!catalog.chave.startsWith("config.")) return reply(409, "CAIXA_FORA_DA_CONFIGURACAO_GLOBAL");
+    if(catalog.tipo==='REGRA_CLINICA'&&parsed.data.autorizacaoMedica!==true)return reply(409,'AUTORIZACAO_MEDICA_EXPLICITA_OBRIGATORIA');
     const result = deps.settings.changeBox({
       ...parsed.data, motivo: parsed.data.motivo ?? null,
-      autorizacaoMedica: true,
+      autorizacaoMedica: catalog.tipo==='REGRA_CLINICA'?parsed.data.autorizacaoMedica===true:true,
     }, sessao);
     return reply(result.estado === "CONFLITO" || result.estado === "NEGADA" ? 409 : 200, result.estado, result);
   }

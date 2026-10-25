@@ -113,12 +113,14 @@ it("assinatura guardada exige REVISAR no UPDATE; replay nao tenta atualizar auto
 it("G03 e sessao continuam obrigatorios, inclusive em replay de documento assinado", () => {
   const { a, b, minuta } = ambiente();
   const ac = acesso("medico-a");
-  for (const tipo of ["AGENTE", "SISTEMA", "EXECUTOR"] as const) {
-    expect(assinarMinutaLaudoAcessoJudicialF4(a, ac, { ...pedido, atorOverrideParaTesteAdversarial: { tipo, crm: "CRM-SINTETICO" } })).toEqual({ ok: false, codigo: "G03_ASSINATURA_NEGADA" });
+  for (const tipo of ["AGENTE", "SISTEMA", "EXECUTOR", "SESSAO"] as const) {
+    const forjado={...pedido,atorOverrideParaTesteAdversarial:{tipo,crm:'CRM-FORJADO'}};
+    expect(assinarMinutaLaudoAcessoJudicialF4(a, ac, forjado)).toEqual({ ok: false, codigo: "G03_ASSINATURA_NEGADA" });
   }
   expect(lerMinutaLaudoAcessoJudicialF4(b, pedido.minutaId)).toEqual(minuta);
   expect(assinarMinutaLaudoAcessoJudicialF4(a, ac, { ...pedido, minutaId: "ausente" })).toEqual({ ok: false, codigo: "MINUTA_AUSENTE" });
   expect(assinarMinutaLaudoAcessoJudicialF4(a, ac, pedido).ok).toBe(true);
   expect(assinarMinutaLaudoAcessoJudicialF4(b, { ...ac, token: "invalido" }, pedido)).toEqual({ ok: false, codigo: "SESSAO_INVALIDA" });
-  expect(assinarMinutaLaudoAcessoJudicialF4(b, ac, { ...pedido, atorOverrideParaTesteAdversarial: { tipo: "AGENTE" } })).toEqual({ ok: false, codigo: "G03_ASSINATURA_NEGADA" });
+  const replayForjado={...pedido,atorOverrideParaTesteAdversarial:{tipo:'AGENTE'}};
+  expect(assinarMinutaLaudoAcessoJudicialF4(b, ac, replayForjado)).toEqual({ ok: false, codigo: "G03_ASSINATURA_NEGADA" });
 });

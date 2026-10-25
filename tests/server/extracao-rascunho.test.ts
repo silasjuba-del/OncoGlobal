@@ -67,6 +67,8 @@ it.each(["medical_note", "imaging_report"] as const)("persiste extração %s com
     headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
     body: JSON.stringify({patientId: paciente.patientId, encounterId: "encontro-31"}) });
   expect(selecao.status).toBe(200);
+  const exibicao=await fetch(`http://127.0.0.1:${address.port}/consulta/rascunho`,{method:'POST',headers:{Authorization:`Bearer ${token}`,'Content-Type':'application/json'},body:JSON.stringify({draftId:result.draftId})});
+  expect(exibicao.status).toBe(200);
   const review = await fetch(`http://127.0.0.1:${address.port}/consulta/rascunho/revisar`, { method: "POST",
     headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
     body: JSON.stringify({ draftId: result.draftId, expectedRevision: 0, patientId: paciente.patientId }) });

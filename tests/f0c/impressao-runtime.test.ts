@@ -72,6 +72,7 @@ it('hash da assinatura adulterado é recusado pelo resolver e pelo executor',asy
   expect(adulterar).toThrow(); // O ledger impede mutação normal.
   // Simula exclusivamente neste banco sintético corrupção externa do arquivo restaurado.
   f.a.db.exec('DROP TRIGGER clinical_event_no_update'); adulterar();
+  expect(autorizarSaida(f.a.db,f.intent).ok).toBe(false);
   expect(await f.resolver.resolver({id:f.target.id,version:1})).toBeNull();
   expect(await f.executor.executar(f.intent)).toMatchObject({ok:false,erro:'DOCUMENTO_NAO_RESOLVIDO'});
 });

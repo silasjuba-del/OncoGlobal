@@ -1,5 +1,7 @@
 import { PedidoRecuperacaoConfirmacao } from "../contracts/api/recuperacaoConfirmacao.js";
 import { ErroProveniencia } from "../kernel/comandos/proveniencia.js";
+import { registrarSalaoExibido } from './exibicaoSalao.js';
+import {registrarFontesDutoExibidas} from './exibicaoDutos.js';
 import { operarAtendimentoV6 } from "./atendimentoV6.js";
 import { criarResolverDocumentoLedger, listarDrafts, listarEventos } from "../kernel/comandos/portas.js";
 import { dadosDoEvento } from "../kernel/projections/snapshot.js";
@@ -432,8 +434,15 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
       // sem processar pendências de todos os pacientes nem atribuir contato por snapshot parcial.
       const contatosCanal = !("codigo" in result) ? lerRelatosConsultaCanal(deps.db,
          { sessoes: deps.sessoes, token, agora: deps.agora() }, result.patientId, leituraInicial?.itens) : undefined;
+      const dutos=integrado&&!("codigo" in result)?projetarDutos(leituraClinica?.itens??[],{patientId:result.patientId,encounterId:result.encounterId,tumorLotId:result.tumorLotId},deps.corpus):undefined;
+      if(!('codigo' in result)){
+        const ids=new Set([...result.historicoDocumentos.map(d=>d.eventId),...dutos?.farmacia.map(d=>d.eventId)??[],
+          ...dutos?.tarefas.map(d=>d.eventId)??[],...dutos?.apacs.map(d=>d.eventId)??[]]);
+        registrarFontesDutoExibidas(deps.sessoes,token,result,(leituraInicial?.itens??[]).filter(e=>ids.has(e.eventId)
+          ||e.tipo==='Ciclo'&&dadosDoEvento(e)?.cicloId===result.cabecalho.ciclo?.cicloId));
+      }
       return reply("codigo" in result ? 404 : 200, "codigo" in result ? result.codigo : "CONSULTA_CARREGADA",
-         integrado && !("codigo" in result) ? {...result,contatosCanal,dutos:projetarDutos(leituraClinica?.itens??[],{patientId:result.patientId,encounterId:result.encounterId,tumorLotId:result.tumorLotId},deps.corpus),retrato:integrado.retrato,...(integrado.visaoIntegrada?{visaoIntegrada:integrado.visaoIntegrada}:{})}:"codigo" in result?result:{...result,contatosCanal});
+         integrado && !("codigo" in result) ? {...result,contatosCanal,dutos,retrato:integrado.retrato,...(integrado.visaoIntegrada?{visaoIntegrada:integrado.visaoIntegrada}:{})}:"codigo" in result?result:{...result,contatosCanal});
     }
     if (rota === "agenda") {
       const parsed = z.object({}).strict().safeParse(raw);
@@ -448,6 +457,7 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
       const result = lerSalao(deps.db, deps.agora(), deps.salaoRuleset);
       if ("estado" in result && result.estado === "PENDENTE")
         return reply(503, result.codigo, result);
+      registrarSalaoExibido(deps,token,result);
       return reply(200, "SALAO_CARREGADO", result);
     }
     if (rota === "canal") {
@@ -475,6 +485,8 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
       const contexto = deps.sessoes.consultaSelecionada(token);
       if (!contexto) return reply(409, "CONTEXTO_CHAT_NAO_SELECIONADO", { setor: parsed.data.setor, mensagens: [] });
       const mensagens = lerMensagensChat(deps.db, parsed.data.setor, contexto);
+      registrarFontesDutoExibidas(deps.sessoes,token,contexto,listarEventos(deps.db,contexto.patientId).filter(e=>e.tipo==='ChatMessage'
+        &&e.encounterId===contexto.encounterId&&e.tumorLotId===contexto.tumorLotId&&mensagens.some(m=>m.mensagemId===dadosDoEvento(e)?.mensagemId)));
       return reply(200, "CHAT_CARREGADO", { ...contexto, setor: parsed.data.setor, mensagens, prescricao: null });
     }
     if (rota === "bundle") {

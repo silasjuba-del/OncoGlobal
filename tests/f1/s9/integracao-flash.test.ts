@@ -7,6 +7,14 @@ const agora="2026-10-12T08:00:00-03:00";
 const contexto={patientId:"p",encounterId:"e",tumorLotId:null};
 const plano={acoesMarcadas:[],receitasMarcadas:[],apac:{cid:"",sigtap:"",finalidade:"",competencia:"",estado:"PENDENTE" as const,pendencias:[],emitir:false as const},retorno:{dias:14,examesAntesDoRetorno:[]},solicitacoes:{laboratorio:["Hemograma","Creatinina"],imagem:[]}};
 const fonte={fonte:fonteSintetica("decisao-medica-flash"),dataReferencia:"2026-10-12",revisao:"retrato-confirmado-v1"};
+it('indicação de imagem ausente permanece pendente, sem copiar resumo clínico',()=>{
+ const db=abrirLedger(':memory:');try{
+  const r=prepararFinalizacaoFlash(db,agora,{...contexto,plano:{...plano,solicitacoes:{laboratorio:[],imagem:['Exame sintético']}},idempotencyKey:'imagem-indicacao-ausente'},'Resumo não é indicação',null,fonte);
+  expect(r.status).toBe(200);
+  const doc=r.preparacaoDocumentos?.documentos.find(d=>d.tipoDocumento==='PEDIDO_EXAME');
+  expect(doc?.texto).toContain('Indicação: PENDENTE');expect(doc?.texto).not.toContain('Indicação: Resumo não é indicação');
+ }finally{db.close();}
+});
 it("Flash usa gerador S9 com fontes do servidor e retorna tarefa ligada aos documentos reais sem gravá-la",()=>{
  const db=abrirLedger(":memory:");try{
   const r=prepararFinalizacaoFlash(db,agora,{...contexto,plano,idempotencyKey:"s9-flash-integracao"},"Resumo sintético confirmado",null,fonte);

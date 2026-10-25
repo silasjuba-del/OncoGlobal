@@ -284,7 +284,7 @@ export async function executarRevisaoCruzadaOncoChiefF5(entrada: {
     });
   }
 
-  const reprovacoes = [...(entrada.reprovacoesDeterministicasCodigo ?? [])];
+  const reprovacoes = [...(entrada.reprovacoesDeterministicasCodigo ?? ['VERIFICACAO_DETERMINISTICA_NAO_EXECUTADA'])];
   const vereditoFinalCodigoPrevalece = reprovacoes.length > 0
     ? "BLOQUEADO_POR_CODIGO"
     : "APROVADO_PARA_REVISAO_MEDICA";

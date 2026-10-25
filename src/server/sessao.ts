@@ -13,6 +13,8 @@ export function hashConteudoExibido(conteudo: unknown): string {
 }
 
 export interface GerenciadorSessao {
+  registrarConteudoExibido?(token:string,contexto:ContextoExibicao,finalidade:string,recursoId:string,conteudoHash:string):void;
+  conteudoFoiExibido?(token:string,contexto:ContextoExibicao,finalidade:string,recursoId:string,conteudoHash:string):boolean;
   registrarAlertasExibidos?(token: string, contexto: ContextoExibicao, ids: readonly string[]): void;
   alertasExibidos?(token: string, contexto: ContextoExibicao): readonly string[];
   bloqueadoPorTentativas?(): boolean;
@@ -53,7 +55,7 @@ export function criarGerenciadorSessao(config: {
     const agora=config.agora();
     return !Instante.safeParse(agora).success || bloqueadoEm(Date.parse(agora));
   };
-  const sessions = new Map<string, { sessao: SessaoTipo; alertas?: {contexto:ContextoExibicao;ids:readonly string[]}; bundle?: {
+  const sessions = new Map<string, { sessao: SessaoTipo; exibicoes?:Map<string,string>; alertas?: {contexto:ContextoExibicao;ids:readonly string[]}; bundle?: {
     contexto: ContextoExibicao;
     docs: readonly DocumentoExibido[];
   }; consulta?: ContextoExibicao }>();
@@ -95,6 +97,18 @@ export function criarGerenciadorSessao(config: {
       return { token, sessao };
     },
     obter,
+    registrarConteudoExibido(token,contexto,finalidade,recursoId,conteudoHash){
+      if(!obter(token))throw Error("SESSAO_EXPIRADA");
+      if(!/^[a-f0-9]{64}$/.test(conteudoHash))throw Error("HASH_EXIBIDO_INVALIDO");
+      const record=sessions.get(token)!,map=record.exibicoes??=new Map<string,string>();
+      const chave=JSON.stringify([contexto.patientId,contexto.encounterId,contexto.tumorLotId,finalidade,recursoId]);
+      map.delete(chave);map.set(chave,conteudoHash);
+      if(map.size>128)map.delete(map.keys().next().value!);
+    },
+    conteudoFoiExibido(token,contexto,finalidade,recursoId,conteudoHash){
+      if(!obter(token))return false;
+      return sessions.get(token)?.exibicoes?.get(JSON.stringify([contexto.patientId,contexto.encounterId,contexto.tumorLotId,finalidade,recursoId]))===conteudoHash;
+    },
     registrarAlertasExibidos(token,contexto,ids){if(!obter(token))throw Error("SESSAO_EXPIRADA");sessions.get(token)!.alertas={contexto:{...contexto},ids:[...ids]};},
     alertasExibidos(token,contexto){if(!obter(token))return [];const a=sessions.get(token)?.alertas;
       return a && a.contexto.patientId===contexto.patientId && a.contexto.encounterId===contexto.encounterId
@@ -118,7 +132,7 @@ export function criarGerenciadorSessao(config: {
       const record = sessions.get(token)!;
       if (record.consulta?.patientId !== contexto?.patientId
         || record.consulta?.encounterId !== contexto?.encounterId
-        || (record.consulta?.tumorLotId ?? null) !== (contexto?.tumorLotId ?? null)) { delete record.bundle; delete record.alertas; }
+        || (record.consulta?.tumorLotId ?? null) !== (contexto?.tumorLotId ?? null)) { delete record.bundle; delete record.alertas; delete record.exibicoes; }
       if (contexto === null) delete record.consulta;
       else record.consulta = { ...contexto };
     },

@@ -18,6 +18,7 @@ import { lerCanal, lerPaciente, lerSalao } from "../leituras.js";
 import type { ServidorDeps } from "../rotas.js";
 import { hashConteudoExibido } from "../sessao.js";
 import { sha } from "./confirmacao.js";
+import { registrarSalaoExibido,hashExibicaoCorte } from '../exibicaoSalao.js';
 
 export type RespostaRota = { status: number; codigo: string; body?: unknown };
 
@@ -93,8 +94,10 @@ export function rotearSalaoECanal(
       && (existente.payload as { contentHash?: string } | null)?.contentHash === contentHash;
     const retryDaMesmaGravacao = mesmoConteudo && (parsed.data.expectedRevision === null
       ? existente!.revision === 0 : existente!.revision === parsed.data.expectedRevision + 1);
-    if (retryDaMesmaGravacao)
+    if (retryDaMesmaGravacao){
+      registrarSalaoExibido(deps,token,salaoAntes);
       return reply(200, "REPLAY", { ...salaoAntes, codigo: "REPLAY" });
+    }
     if ((existente?.revision ?? null) !== parsed.data.expectedRevision)
       return reply(409, "REVISAO_RASCUNHO_CONFLITANTE");
     const em = existente ? existente.criadoEm : agoraSalao;
@@ -127,8 +130,9 @@ export function rotearSalaoECanal(
       }, diagnostics: ["AGUARDA_DECISAO_MEDICA"],
       revision: (existente?.revision ?? -1) + 1, criadoEm: agoraSalao,
     });
+    const visaoSalao=lerSalao(deps.db,agoraSalao,deps.salaoRuleset);registrarSalaoExibido(deps,token,visaoSalao);
     return reply(200, "RASCUNHO_SALVO", {
-      ...lerSalao(deps.db, agoraSalao, deps.salaoRuleset),
+      ...visaoSalao,
       codigo: "RASCUNHO_SALVO", rascunho: { draftId: saved.draftId, revision: saved.revision, criaEventoClinico: false },
     });
   }
@@ -171,6 +175,8 @@ export function rotearSalaoECanal(
       return reply(409, "REVISAO_RASCUNHO_CONFLITANTE");
     const card = projected.cartoes.find((item) => item.entrada.patientId === contexto.patientId);
     if (!card?.temCorte) return reply(409, "CORTE_AUSENTE");
+    if(!deps.sessoes.conteudoFoiExibido?.(token,contexto,'SALAO_CORTE',draft.draftId,hashExibicaoCorte(draft,card,projected.ruleset)))
+      return reply(409,'CORTE_NAO_EXIBIDO_NESTA_SESSAO');
     // Num replay, o kernel remonta os eventos com o criadoEm já gravado da operação.
     const em = agoraSalao;
     const payload = {

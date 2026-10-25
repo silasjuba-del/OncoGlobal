@@ -29,13 +29,14 @@ function cadastrarPaciente(ambiente: Ambiente) {
         sexoCadastral: "NAO_INFORMADO", divergencia: false }, fontes: [], revisao: "CONFIRMADO" }] });
 }
 
-async function extrairSemVinculo(ambiente: Ambiente, sufixo: string) {
+async function extrairSemVinculo(ambiente: Ambiente, sufixo: string, exibir=true) {
   const extraido = await post<{ draftId: string }>(ambiente, "/consulta/extrair", {
     recordingId: `recording-sintetico-g3a-${sufixo}`, sourceId: `documento-sintetico-g3a-${sufixo}`,
     sourceType: "medical_note",
     rawTranscript: "Nome do paciente: Maria Alves de Souza\nResumo sintético para revisão.",
   });
   expect(extraido.status).toBe(201);
+  if(exibir)expect((await post(ambiente,"/consulta/rascunho",{draftId:extraido.data.draftId})).status).toBe(200);
   const fonte = lerDraft(ambiente.db, extraido.data.draftId)!;
   const excecao = (fonte.payload as { state: { confirmationRequired: Array<{ id: string; kind: string }> } })
     .state.confirmationRequired.find((item) => item.kind === "UNLINKED_PATIENT")!;
@@ -45,6 +46,18 @@ async function extrairSemVinculo(ambiente: Ambiente, sufixo: string) {
 const contar = (ambiente: Ambiente, sql: string) => Number((ambiente.db.prepare(sql).get() as { n: number }).n);
 
 describe("G3a · vínculo de paciente é atômico", () => {
+  it('recusa vínculo sem entrega da fonte na sessão e permite depois da leitura',async()=>{
+    const a=await ambienteHttp();try{
+      cadastrarPaciente(a);await post(a,'/consulta/contexto/selecionar',{patientId:PACIENTE,encounterId:ENCONTRO,tumorLotId:null});
+      const {fonte}=await extrairSemVinculo(a,'sem-exibicao',false);
+      const pedido={draftId:fonte.draftId,patientId:PACIENTE,expectedRevision:0};
+      const antes=contar(a,'SELECT COUNT(*) AS n FROM clinical_event');
+      expect(await post(a,'/consulta/rascunho/revisar',pedido)).toMatchObject({status:409,data:{codigo:'FONTE_NAO_EXIBIDA_NESTA_SESSAO'}});
+      expect(contar(a,'SELECT COUNT(*) AS n FROM clinical_event')).toBe(antes);expect(lerDraft(a.db,fonte.draftId)?.revision).toBe(0);
+      expect((await post(a,'/consulta/rascunho',{draftId:fonte.draftId})).status).toBe(200);
+      expect((await post(a,'/consulta/rascunho/revisar',pedido)).status).toBe(200);
+    }finally{await a.close();}
+  });
   it("falha entre a decisão gravada e a atualização do rascunho não deixa gravação parcial; retry conclui", async () => {
     const ambiente = await ambienteHttp();
     try {
@@ -118,6 +131,7 @@ describe("G3a · vínculo de paciente é atômico", () => {
       ambiente = await ambienteHttp({}, arquivo);
       try {
         await post(ambiente, "/consulta/contexto/selecionar", { patientId: PACIENTE, encounterId: ENCONTRO, tumorLotId: null });
+        expect((await post(ambiente,"/consulta/rascunho",{draftId:fonteId})).status).toBe(200);
         const ok = await post<{ codigo: string; revision: number }>(ambiente, "/consulta/rascunho/revisar", pedido);
         expect(ok).toMatchObject({ status: 200, data: { codigo: "VINCULO_REVISTO", revision: 1 } });
       } finally { await ambiente.close(); }

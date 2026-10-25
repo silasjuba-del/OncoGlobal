@@ -25,10 +25,12 @@ it("não transforma vazio em negação e preserva negação explícita, conflito
   expect(projetarContextoClinico({ ...base, eventos: [] }).flash.alergia).toBe("Não informada");
   const negada = evento("negada", "FATO", { campo: "alergias", valor: { negated: true } });
   expect(projetarContextoClinico({ ...base, eventos: [negada] }).flash.alergia).toBe("Negada explicitamente");
+  expect(projetarContextoClinico({...base,eventos:[negada]}).alergias).toEqual({estado:'NEGADAS',itens:[],fontes:['negada']});
   const r = projetarContextoClinico({ ...base, eventos: [negada, evento("positiva", "FATO", { campo: "alergias", valor: ["dipirona"] })] });
   expect(r.campos.alergias.estado).toBe("VERMELHO");
   expect(r.campos.alergias.sourceIds.sort()).toEqual(["negada", "positiva"]);
   expect(r.flash.alergia).toContain("A CONFERIR");
+  expect(r.alergias).toMatchObject({estado:'CONFLITO',itens:[]});
 });
 it("toxicidades só da consulta atual e explicitamente presentes; negações e incerteza não são sintomas", () => {
   const tox = (id: string, valor: unknown, extra: Record<string, unknown> = {}) => evento(id, "FATO", {

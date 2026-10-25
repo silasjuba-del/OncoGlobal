@@ -32,6 +32,9 @@ it("chat grava só anotação rastreável e a recupera na evolução, sem altera
  const corpo={...ctx,expectedBaseHash:base.data.base.revisao,expectedVersion:null,idempotencyKey:"antes-chat",entrada};
  expect((await a.request("/consulta/atendimento/preparar",corpo)).status).toBe(201);
  const pedido={contexto:{...ctx,operationId:"aceite-chat"},mensagemId:"msg",decisao:{campo:"observacao",valor:"Não refere febre; conferir relato na próxima avaliação."}};
+ expect(await a.request('/chat/aceitar-decisao',pedido)).toMatchObject({status:409,data:{codigo:'CONTEUDO_DUTO_NAO_EXIBIDO'}});
+ expect(a.eventos()).toEqual(antes);
+ expect((await a.request('/consulta/chat',{setor:'MEDICO'})).status).toBe(200);
  for(const campo of ["alergias","medicamentos","tnm","estadoDoenca"]){
   expect((await a.request("/chat/aceitar-decisao",{...pedido,decisao:{campo,valor:"não aplicar"}})).status).toBe(409);
   expect(a.eventos()).toEqual(antes);

@@ -12,6 +12,8 @@ import { rotearDutos } from "../../src/server/dutos.js";
 import { criarGerenciadorSessao } from "../../src/server/sessao.js";
 import { AuditoriaOncoassist } from "../../src/contracts/api/oncoassist.js";
 import { confirmar } from "../../src/kernel/ledger/writeRouter.js";
+import {listarEventos} from '../../src/kernel/ledger/ledger.js';
+import {registrarFontesDutoExibidas} from '../../src/server/exibicaoDutos.js';
 
 const dirs: string[] = [];
 const bancos = new Set<ReturnType<typeof abrirLedger>>();
@@ -172,6 +174,7 @@ describe("backup: rawRef interno conhecido vs físico vs desconhecido (ARQ-05)",
       sessao: login.sessao, em: EM, registros: [{ draftId: "mensagem-seed", expectedRevision: 0,
         eventId: "evento-mensagem", tipo: "ChatMessage", payload: mensagem, fontes: [], revisao: "CONFIRMADO" }],
     }).estado).toBe("GRAVADA");
+    registrarFontesDutoExibidas(sessoes,login.token,contexto,listarEventos(c.db,contexto.patientId).filter(e=>e.eventId==='evento-mensagem'));
     const duto = rotearDutos({ db: c.db, sessoes, agora: () => EM }, login.token, "/chat/aceitar-decisao", {
       contexto: { ...contexto, operationId: "duto-backup-sintetico" },
       mensagemId: "mensagem-sintetica", decisao: { campo: "observacao", valor: "texto sintético" },

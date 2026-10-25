@@ -89,6 +89,12 @@ export function QuadroSalao({
       </section>
       {aberto ? (
         <section aria-label="Liberar com corte">
+          {porId.get(aberto)?.revisaoCorte?<div aria-label="Cortes e dados da triagem">
+            <p>Regra: {porId.get(aberto)!.revisaoCorte!.versaoRegra} · Fonte: {porId.get(aberto)!.revisaoCorte!.fonteId}</p>
+            <ul>{porId.get(aberto)!.revisaoCorte!.motivos.map((m,i)=><li key={`c-${i}`}>{m}</li>)}</ul>
+            <p>{porId.get(aberto)!.revisaoCorte!.dados.join(' · ')}</p>
+            {porId.get(aberto)!.revisaoCorte!.pendencias.length?<p>Pendências: {porId.get(aberto)!.revisaoCorte!.pendencias.join('; ')}</p>:null}
+          </div>:null}
           <label>
             Motivo
             <input value={motivo} onChange={(e) => setMotivo(e.target.value)} />

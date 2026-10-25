@@ -40,12 +40,16 @@ it("UI → HTTP real → revisão exibida → ledger: exige seleção e segundo 
     const raw = "01/09/2026 Creatinina 1,2 mg/dL; Hb 11,2 g/dL";
     const extracted = await post("/consulta/extrair", { sourceId: "fonte-95", recordingId: "gravacao-95",
       sourceType: "medical_note", rawTranscript: raw }) as { draftId: string };
-    await post("/consulta/rascunho/revisar", { draftId: extracted.draftId, patientId: contexto.patientId, expectedRevision: 0 });
     const porta = criarPortaHttp({ onSessaoExpirada: () => {} });
     await porta.login(senha);
     await porta.carregarConsulta(contexto.patientId, undefined, contexto.encounterId);
     const fatos = () => listarEventos(db, contexto.patientId).filter((e) => e.tipo === "FATO");
     const { rerender } = render(<RevisaoExtracaoLocal porta={porta} contexto={contexto} />);
+    await screen.findByRole('option',{name:/Trecho sem vínculo 1/});
+    fireEvent.change(screen.getByLabelText('Trecho sem vínculo'),{target:{value:extracted.draftId}});
+    await waitFor(()=>expect((screen.getByRole('button',{name:/Confirmar vínculo deste trecho/}) as HTMLButtonElement).disabled).toBe(false));
+    expect(screen.getByText(raw)).toBeTruthy();
+    fireEvent.click(screen.getByRole('button',{name:/Confirmar vínculo deste trecho/}));
     await screen.findByRole("option", { name: "Fonte local 1" });
     fireEvent.change(screen.getByLabelText("Fonte para revisão"), { target: { value: extracted.draftId } });
     await screen.findByText(raw);

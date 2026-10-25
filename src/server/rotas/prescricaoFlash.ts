@@ -113,9 +113,11 @@ export function rotearPrescricaoFlashConfig(
       return reply(409, "CONTEXTO_CONSULTA_ALTERADO");
     const hoje = dataCivilDoServico(deps.agora(), "-03:00");
     if (parsed.data.templateId) {
-      const template = deps.corpus?.templatesProtocolo.find((t) => t.templateId === parsed.data.templateId);
+      const candidatas=deps.corpus?.templatesProtocolo.filter(t=>t.templateId===parsed.data.templateId)??[];
+      if(candidatas.length>1)return reply(409,'TEMPLATE_AMBIGUO');
+      const template = candidatas[0];
       if (!template) return reply(404, "TEMPLATE_NAO_ENCONTRADO");
-      const consultaCorporal = lerConsulta(deps.db, contexto.patientId, deps.agora(), sessao, contexto.tumorLotId, { encounterId: contexto.encounterId });
+      const consultaCorporal = lerConsulta(deps.db, contexto.patientId, deps.agora(), sessao, contexto.tumorLotId, { ...opcoesLeituraConsulta(deps,sessao),encounterId: contexto.encounterId });
       const dadosCorporais = "codigo" in consultaCorporal
         ? { pesoKg: null, alturaCm: null, bsaM2: null, clcr: null, medidoEm: null }
         : consultaCorporal.avaliacaoClinica.dadosCorporais;

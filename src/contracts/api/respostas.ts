@@ -25,7 +25,7 @@ const Afirmacao = z.object({ rotulo: Texto, valorTexto: Texto.nullable(), estado
   candidatos: z.array(z.object({ valorTexto: Texto, fontes: z.array(Fonte) })).optional()
 }).transform(({ candidatos, ...item }) => ({ ...item, ...(candidatos === undefined ? {} : { candidatos }) }));
 export const ConsultaResposta: z.ZodType<ConsultaIntegrada> = z.object({ hoje: DataCivil,
-  medicamentosAtuais: z.object({eventId: Texto.nullable(), medicamentos: z.array(Texto), conflito: z.boolean()}).optional(),
+  medicamentosAtuais: z.object({eventId: Texto.nullable(), medicamentos: z.array(Texto), conflito: z.boolean(),confirmadoNesteEncontro:z.boolean().optional()}).optional(),
   contatosCanal: z.lazy(() => CanalResposta).optional(),
   retrato: Retrato.optional(), visaoIntegrada: VisaoIntegrada.optional(), dutos: DutosClinicaVisao.optional(),
   resumoEvolucao: Texto.nullable().default(null),
@@ -35,7 +35,8 @@ export const ConsultaResposta: z.ZodType<ConsultaIntegrada> = z.object({ hoje: D
   patientId: Texto, encounterId: Texto, tumorLotId: Texto.nullable(),
   cabecalho: z.object({ hoje: DataCivil, paciente: Paciente, lotes: z.array(TumorLot), loteSelecionadoId: Texto.nullable(),
     episodio: TreatmentEpisode.nullable(), ciclo: Ciclo.nullable(), semaforo: Semaforo, pendentes: Count,
-    contatosDesdeUltima: z.array(Contato), alergiasPaciente: z.array(Texto), comorbidadesPaciente: z.array(Texto) }),
+    contatosDesdeUltima: z.array(Contato), alergiasPaciente: z.array(Texto),
+    situacaoAlergias:z.object({estado:z.enum(['CONFLITO','NEGADAS','PRESENTES','NAO_INFORMADAS']),fontes:z.array(Texto)}).optional(),comorbidadesPaciente: z.array(Texto) }),
   alertas: z.array(Alerta), delta: z.object({ temSnapshotAnterior: z.boolean(), itens: z.array(z.object({
     id: Texto, rotulo: Texto, kind: DeltaKind, estado: Semaforo, direcao: DeltaDirecao.optional(),
     candidatos: z.array(z.object({ rotulo: Texto, valorTexto: Texto })).optional(),
@@ -76,7 +77,8 @@ export const SalaoResposta: z.ZodType<SalaoVisao> = z.object({
       contextosRevisao:z.array(z.object({patientId:Texto,encounterId:Texto,tumorLotId:z.null()})).optional(),
       contextoMensagens:z.array(z.object({mensagemId:Texto,texto:Texto,em:Texto,contatoId:Texto.optional(),canal:Texto.optional()}))})).optional(), hoje: DataCivil, ruleset: SalaoRuleset,
   contexto: ContextoTriagem, fonte: Fonte.nullable(), cartoes: z.array(z.object({ entrada: EntradaFila,
-    destino: Destino, emergencia: z.boolean(), temCorte: z.boolean(), nome: Texto })),
+    destino: Destino, emergencia: z.boolean(), temCorte: z.boolean(), nome: Texto,
+    revisaoCorte:z.object({motivos:z.array(Texto),pendencias:z.array(Texto),dados:z.array(Texto),fonteId:Texto,versaoRegra:Texto}).optional() })),
   pacientes: z.array(z.object({ patientId: Texto, encounterId: Texto, chegadaEm: Texto, nome: Texto,
     draftId: Texto.nullable().optional(), revision: z.number().int().nonnegative().nullable().optional(),
     estadoRascunho: z.enum(["RASCUNHO", "DECISAO_REGISTRADA"]).nullable().optional() })),

@@ -1,4 +1,5 @@
 import { lerLedgerIntegro } from "./leituraIntegra.js";
+import { provarDocumentoAssinado } from './provaDocumento.js';
 import { documentoReceitaDosePendente } from '../../contracts/f1/receitaDose.js';
 import { createHash } from "node:crypto";
 import type { DatabaseSync } from "node:sqlite";
@@ -31,11 +32,8 @@ export function criarResolverDocumentoLedger(db: DatabaseSync): ResolverDocument
     const alvosNegados=new Set(leituras.flatMap(item=>item.alvosNegados));
     const validos = eventosVigentes(eventos).filter(e=>!alvosNegados.has(e.eventId)
       && e.revisao === "ASSINADO" && e.tipo === "DOCUMENTO").flatMap(e=>{
-      const d = dadosDoEvento(e), corpo = objeto(d?.data), assinatura = objeto(d?.signature);
-      if (!corpo || !assinatura || typeof corpo.documentId !== "string" || typeof corpo.documentVersion !== "number"
-        || assinatura.documentId !== corpo.documentId || assinatura.documentVersion !== corpo.documentVersion
-        || assinatura.serverActorId !== e.criadoPor.id || assinatura.documentHash !== hashConteudoExibido(corpo)
-        || typeof corpo.texto !== "string") return [];
+      const prova=provarDocumentoAssinado(e);if(!prova)return [];
+      const {corpo}=prova;
       return [{e,corpo}];
     });
     const candidatos = validos.filter(v=>v.corpo.documentId === id && v.corpo.documentVersion === version);

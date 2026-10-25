@@ -37,6 +37,7 @@ async function fonte(a: Awaited<ReturnType<typeof ambiente>>, id = "literal", te
   salvarDraft(a.db, { draftId, patientId: null, sourceId, rawRef: "fixture-local-sintetica", revision: 0, criadoEm: AGORA,
     diagnostics: [], payload: { kind: "EXTRACAO_RASCUNHO", input,
       state: { ...estado, segments: segmentos, facts, confirmationRequired: excecoes } } });
+  expect((await a.request('/consulta/rascunho',{draftId})).status).toBe(200);
   const vinculo = await a.request("/consulta/rascunho/revisar", { ...contexto, draftId, sourceId, expectedRevision: 0,
     exceptionId: excecoes[0]!.id, acao: "LIGAR_PACIENTE", idempotencyKey: `link-literal-${id}` });
   expect(vinculo.status).toBe(200);

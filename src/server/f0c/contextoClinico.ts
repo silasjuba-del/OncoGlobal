@@ -111,7 +111,12 @@ export function projetarContextoClinico(i: EntradaContextoClinico) {
   const ultimo = administracoes[0], ultimoCiclo = ultimo ? ciclos.find(c => c.cicloId === ultimo.cicloId) : null;
   const pendencias = [ ...((campos.toxicidades.estado === "VERMELHO" || conflitoTox) ? ["TOXICIDADES_DIVERGENTES"] : []),
     ...(templates.length > 1 ? ["TEMPLATE_AMBIGUO"] : []), ...(totais.length > 1 || (totais.length === 1 && ciclosPrevistos === undefined) ? ["TOTAL_CICLOS_DIVERGENTE"] : []), ...(laboratoriosFonte.some(p => p.conflito) ? ["LABORATORIOS_DIVERGENTES"] : []) ];
-  return { flash: { exames, laboratorios, alergia: resumoCampo(campos.alergias),
+  const valorAlergia=objeto(campos.alergias.valor);
+  const estadoAlergias=campos.alergias.estado==='VERMELHO'?'CONFLITO' as const
+    :valorAlergia?.negated===true||valorAlergia?.negado===true||valorAlergia?.presente===false?'NEGADAS' as const
+    :termos(campos.alergias.valor).length?'PRESENTES' as const:'NAO_INFORMADAS' as const;
+  return { alergias:{estado:estadoAlergias,itens:estadoAlergias==='PRESENTES'?termos(campos.alergias.valor):[],fontes:campos.alergias.sourceIds},
+    flash: { exames, laboratorios, alergia: resumoCampo(campos.alergias),
     toxicidades: [...new Set(positivas.filter(nome => !negadas.has(chaveNome(nome))))],
     ...(episodio?.esquemaId ? { protocolo: template?.nome ?? episodio.esquemaId } : {}),
     ...(ciclo ? { cicloAtual: ciclo.numero } : {}), ...(ciclosPrevistos ? { ciclosPrevistos } : {}),

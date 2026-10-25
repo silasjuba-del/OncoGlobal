@@ -145,7 +145,7 @@ async function reconciliarItemCanalPersistido(
     rulesetAlarmes?: RulesetAlarmeCanalEntrada | null;
   },
 ): Promise<
-  | { ok: false; codigo: "SESSAO_INVALIDA" | "MENSAGEM_AUSENTE" | "PHI_EGRESS_BLOQUEADO" | "VINCULO_EMAIL_REQUER_REVISAO" | "RECONCILIACAO_REQUER_REPROCESSAMENTO" }
+  | { ok: false; codigo: "SESSAO_INVALIDA" | "MENSAGEM_AUSENTE" | "PHI_EGRESS_BLOQUEADO" | "VINCULO_EMAIL_REQUER_REVISAO" | "RECONCILIACAO_REQUER_REPROCESSAMENTO" | "RULESET_RED_FLAGS_INDISPONIVEL" }
   | FalhaArmazenamento
   | { ok: true; reconciliacao: ReconciliacaoClinicaCanal; replay: boolean }
 > {
@@ -250,6 +250,7 @@ async function reconciliarItemCanalPersistido(
   const ruleset = opcoes.rulesetAlarmes === undefined
     ? carregarRulesetAlarmeCanalPadrao()
     : opcoes.rulesetAlarmes;
+  if(!ruleset)return {ok:false,codigo:'RULESET_RED_FLAGS_INDISPONIVEL'};
 
   const alarmes = avaliarAlarmesCanalConferidos({
     textoOriginal,

@@ -40,7 +40,7 @@ export function TelaSalao({ porta }: { porta: PortaConsulta }) {
       if (primeira && porta.selecionarContexto) {
         try { await porta.selecionarContexto({ patientId: primeira.patientId,
           encounterId: primeira.encounterId, tumorLotId: null });
-          if (viva) setContextoContingencia(`${primeira.patientId}:${primeira.encounterId}`); }
+          if (viva){setContextoContingencia(`${primeira.patientId}:${primeira.encounterId}`);const atualizada=await porta.filaSalao();if(viva)setVisao(atualizada);} }
         catch (error) { if (viva) setErro(textoErro(error)); }
       }
       if (viva) { contextoEmVoo.current = false; setSelecionandoContexto(false); }
@@ -82,6 +82,7 @@ export function TelaSalao({ porta }: { porta: PortaConsulta }) {
                   encounterId: proximo.encounterId, tumorLotId: null });
                 setPatientId(proximo.patientId);
                 setContextoContingencia(`${proximo.patientId}:${proximo.encounterId}`);
+                setVisao(await porta.filaSalao());
               } catch (error) { setErro(textoErro(error)); }
               finally { contextoEmVoo.current = false; setSelecionandoContexto(false); }
             })();

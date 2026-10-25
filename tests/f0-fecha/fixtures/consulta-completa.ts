@@ -88,7 +88,7 @@ export async function carregarConsulta(ambiente: Awaited<ReturnType<typeof abrir
 }
 
 export async function extrair(ambiente: Awaited<ReturnType<typeof abrirAmbiente>>, input: {
-  sourceId: string; sourceType: "pathology" | "medical_note" | "nursing"; text: string;
+  sourceId: string; sourceType: "pathology" | "medical_note" | "nursing" | "imaging_report"; text: string;
 }): Promise<Extracao> {
   const result = await ambiente.request<Extracao>("/consulta/extrair", {
     recordingId: `gravacao-${input.sourceId}`, sourceId: input.sourceId,
@@ -103,6 +103,7 @@ export async function vincular(ambiente: Awaited<ReturnType<typeof abrirAmbiente
   sourceId: string, patientId = PACIENTE, encounterId = ENCONTRO) {
   const exception = extracao.exceptions.find((item) => item.kind === "UNLINKED_PATIENT");
   if (!exception) throw new Error(`EXCECAO_DE_VINCULO_AUSENTE:${sourceId}`);
+  await ambiente.request('/consulta/rascunho',{draftId:extracao.draftId});
   return ambiente.request<Codigo & { revision: number; linkedPatientId: string }>("/consulta/rascunho/revisar", {
     exceptionId: exception.id, acao: "LIGAR_PACIENTE", draftId: extracao.draftId,
     expectedRevision: extracao.revision, patientId, sourceId, encounterId, tumorLotId: null,

@@ -6,6 +6,8 @@ import { dataCivilDoServico } from "../kernel/gateway/tempo.js";
 import { transacao } from "../kernel/ledger/db.js";
 import { hashCanonico } from "../modules/hash.js";
 import { lerPaciente } from "./leituras.js";
+import {listarEventos} from '../kernel/comandos/portas.js';
+import {projetarAlertasConsulta} from './alertasConsulta.js';
 import { garantirSchemaSalaoF3, gerarFolhaContingenciaSalaoF3, listarFolhasContingenciaSalaoF3 } from "./salaoF3.js";
 import type { ServidorDeps } from "./rotas.js";
 
@@ -47,6 +49,11 @@ export function operarContingenciaSalao(deps: ServidorDeps, token: string, rota:
       const row = deps.db.prepare("SELECT patientId, encounterId, folhaJson, pedidoSha256 FROM salao_folha_contingencia WHERE folhaId = ?")
         .get(folhaId) as { patientId: string; encounterId: string; folhaJson: string; pedidoSha256: string | null } | undefined;
       const persistida = row ? FolhaContingenciaSalao.parse(JSON.parse(row.folhaJson)) : null;
+      const dataServidor=dataCivilDoServico(agora,'-03:00');
+      if(dataServidor.estado!=='OK')return {status:503,body:{codigo:'DATA_SERVICO_INDISPONIVEL'}};
+      const e1Servidor=projetarAlertasConsulta(deps.db,listarEventos(deps.db,ctx.patientId),ctx,dataServidor.dataCivil,agora,deps.salaoRuleset)
+        .filter(a=>a.natureza==='AMEACA_IMEDIATA');
+      if(persistida&&e1Servidor.length&&!persistida.emergenciaAtiva)return {status:409,body:{codigo:'FOLHA_DESATUALIZADA_POR_E1'}};
       if (row && (row.patientId !== ctx.patientId || row.encounterId !== ctx.encounterId
         || persistida?.folhaId !== folhaId || persistida.patientId !== ctx.patientId || persistida.encounterId !== ctx.encounterId)) {
         return { status: 409, body: { codigo: "FOLHA_ID_CONFLITANTE" } };
@@ -64,7 +71,7 @@ export function operarContingenciaSalao(deps: ServidorDeps, token: string, rota:
         // Legados NULL usam apenas a comparação estrita anterior, sem atribuir fingerprint.
         ...(row ? {} : { pedidoSha256 }),
         nomePaciente: paciente.nome, dataImpressao: persistida?.dataImpressao ?? data.dataCivil, destino: entrada.destino,
-        emergenciaAtiva: entrada.emergenciaAtiva, alertasOperacionaisE1: entrada.alertasOperacionaisE1,
+        emergenciaAtiva: entrada.emergenciaAtiva||e1Servidor.length>0, alertasOperacionaisE1: [...new Set([...entrada.alertasOperacionaisE1,...e1Servidor.map(a=>a.texto)])],
         resumoTriagem: { ...entrada.resumoTriagem, Origem: "Registro operacional informado pelo médico; não substitui prescrição assinada." },
       });
       if (!resultado.ok) return { status: resultado.codigo === "ERRO_RENDERIZACAO_FOLHA" ? 503 : 409,

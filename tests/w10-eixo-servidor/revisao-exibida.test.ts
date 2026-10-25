@@ -52,6 +52,7 @@ async function fixture(oncoassistJev?: ServidorDeps["oncoassistJev"], prepararOr
     db.prepare("UPDATE draft_envelope SET payload=? WHERE draftId=?")
       .run(JSON.stringify(prepararOrigem(structuredClone(origem.payload))),draftId);
   }
+  expect((await request('/consulta/rascunho',{draftId})).status).toBe(200);
   const linked = await request("/consulta/rascunho/revisar", { draftId, patientId: PATIENT, expectedRevision: 0 });
   expect(linked.status).toBe(200);
   const pedido = { draftId, patientId: PATIENT, expectedRevision: 1,

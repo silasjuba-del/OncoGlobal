@@ -6,6 +6,7 @@ import type { DatabaseSync } from 'node:sqlite';
 import { z } from 'zod';
 import { Id, Sessao, Instante, type Fonte } from '../contracts/base.js';
 import { validarPayloadEvento } from '../contracts/envelope.js';
+import {fonteDutoFoiExibida} from './exibicaoDutos.js';
 import { AnotacaoEvolucao } from '../contracts/f1/anotacaoEvolucao.js';
 import { Apac, SignatureReference, type ClinicalEvent } from '../contracts/operacao.js';
 import { TreatmentAdministration } from '../contracts/clinico.js';
@@ -129,10 +130,18 @@ function executarDuto(deps: DepsDutos, token: string, rota: string, entrada: unk
   return {status:200,body:{codigo:'REPLAY',eventId:replay[0]!.eventId}};
  }
  let tipo='FATO',payload:unknown,supersedesEventId:string|null=null;
+ const exibida=(e:ClinicalEvent)=>fonteDutoFoiExibida(deps.sessoes,token,c,e);
+ if(prescricao){
+  const fonte=vigentes.find(e=>e.tipo==='DOCUMENTO'&&e.revisao==='ASSINADO'&&
+    (dadosDoEvento(e)?.data as {documentId?:unknown}|undefined)?.documentId===prescricao.documentId&&
+    (dadosDoEvento(e)?.data as {documentVersion?:unknown}|undefined)?.documentVersion===prescricao.documentVersion);
+  if(!fonte||!exibida(fonte))return negar('CONTEUDO_DUTO_NAO_EXIBIDO');
+ }
  const fato=(campo:string)=>vigentes.filter(e=>e.tipo==='FATO'&&dadosDoEvento(e)?.campo===campo);
  if(rota==='/salao/revisar-relato-canal'){
   const p=RevisaoRelatoPedido.parse(entrada);
   if(!relatoAtual)return negar('RELATO_PENDENTE_NAO_ENCONTRADO');
+  if(!deps.sessoes.conteudoFoiExibido?.(token,c,'RELATO_INFUSAO',p.mensagemId,hashCanonico(relatoAtual)))return negar('CONTEUDO_DUTO_NAO_EXIBIDO');
   tipo='ReviewDecision';payload={campo:'revisaoRelatoInfusaoCanal',mensagemId:p.mensagemId,payloadSha256:p.payloadSha256,decisao:p.decisao,
     contatoId:relatoAtual.contatoId,canal:relatoAtual.canal};
  }else if(rota.startsWith('/farmacia/')){
@@ -144,6 +153,7 @@ function executarDuto(deps: DepsDutos, token: string, rota: string, entrada: unk
    payload={campo:'farmacia.conferencia',valor:{prescricao,estado:'ENVIADA',motivo:null,atorId:auth.data.medicoId,em}};
   }else{
    if(!anterior)return negar('ENVIO_FARMACIA_PENDENTE');
+   if(!exibida(anterior.e))return negar('CONTEUDO_DUTO_NAO_EXIBIDO');
    const p=FarmaciaPedido.parse(entrada);const r=conferirPrescricao({prescricao,acao:p.acao,...(p.motivo?{motivo:p.motivo}:{}),anterior:anterior.registro},contexto);
    if(!r.ok)return negar(r.codigo);payload={campo:'farmacia.conferencia',valor:r.registro};
   }
@@ -154,6 +164,7 @@ function executarDuto(deps: DepsDutos, token: string, rota: string, entrada: unk
   const medida=validarMedidaAdministracao(p.administracao);if(!medida.ok)return negar(medida.codigo);
   const ciclos=vigentes.filter(e=>e.tipo==='Ciclo'&&dadosDoEvento(e)?.cicloId===p.administracao.cicloId);
   if(ciclos.length!==1)return negar('CICLO_CONFIRMADO_NAO_ENCONTRADO');
+  if(!exibida(ciclos[0]!))return negar('CONTEUDO_DUTO_NAO_EXIBIDO');
   const ciclo=dadosDoEvento(ciclos[0]!);
   const refCiclo=ciclo?.prescricaoRef as {documentId?:unknown;documentVersion?:unknown}|null;
   const itens=Array.isArray(ciclo?.itens)?ciclo.itens:[];
@@ -163,6 +174,8 @@ function executarDuto(deps: DepsDutos, token: string, rota: string, entrada: unk
  }else if(rota==='/apac/validar-emissao'){
   const p=ApacPedido.parse(entrada), candidatas=vigentes.filter(e=>e.tipo==='APAC').flatMap(e=>{const a=Apac.safeParse(dadosDoEvento(e));return a.success&&a.data.apacId===p.apacId?[a.data]:[];});
   if(candidatas.length!==1||candidatas[0]!.versao!==p.apacVersao)return negar('APAC_VIGENTE_NAO_ENCONTRADA');
+  const fonteApac=vigentes.find(e=>e.tipo==='APAC'&&dadosDoEvento(e)?.apacId===p.apacId);
+  if(!fonteApac||!exibida(fonteApac))return negar('CONTEUDO_DUTO_NAO_EXIBIDO');
   const apac=candidatas[0]!,rx=resolverPrescricaoDuto(eventos,contexto,apac.prescricaoAssinadaRef),sigtap=referenciaSigtapDuto(deps.corpus,apac.competencia),civil=dataCivilDoServico(em);
   if(!rx||!sigtap||civil.estado!=='OK'||!deps.corpus)return negar('PRESCRICAO_OU_SIGTAP_PENDENTE');
   const r=criarValidacaoPersistida({apac,prescricao:rx,sigtap,antiglosa:antiglosa(apac,{hoje:civil.dataCivil,sigtap:deps.corpus.sigtap,caixas:deps.corpus.caixasTodas,cnesConfigurado:deps.settings?.readProfile(auth.data).perfil.instituicao.cnes??''})},contexto);
@@ -186,10 +199,12 @@ function executarDuto(deps: DepsDutos, token: string, rota: string, entrada: unk
     &&n.data.contexto.patientId===c.patientId&&n.data.contexto.encounterId===c.encounterId&&n.data.contexto.tumorLotId===c.tumorLotId;
   });
   if(existente)return {status:200,body:{codigo:'REPLAY',eventId:existente.eventId}};
+  if(!exibida(mensagem))return negar('CONTEUDO_DUTO_NAO_EXIBIDO');
   tipo=r.tipo;payload={...r.dados,contexto:r.contexto,origemMensagem:{eventId:mensagem.eventId,contentHash:hashCanonico(mensagem)}};
  }else{
   const p=TarefaPedido.parse(entrada),ts=vigentes.filter(e=>e.tipo==='Tarefa').flatMap(e=>{const t=Tarefa.safeParse(dadosDoEvento(e));return t.success&&t.data.tarefaId===p.tarefaId?[{e,t:t.data}]:[];});
   if(ts.length!==1)return negar('TAREFA_VIGENTE_NAO_ENCONTRADA');
+  if(!exibida(ts[0]!.e))return negar('CONTEUDO_DUTO_NAO_EXIBIDO');
   const r=rota==='/tarefas/receber'?receberTarefa(ts[0]!.t,contexto):concluirTarefa(ts[0]!.t,contexto);if(!r.ok)return negar(r.codigo);
   tipo='Tarefa';payload=r.tarefa;supersedesEventId=ts[0]!.e.eventId;
  }

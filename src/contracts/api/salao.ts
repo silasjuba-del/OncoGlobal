@@ -7,4 +7,5 @@ export interface CartaoSalaoVisao {
   emergencia: boolean;
   temCorte: boolean;
   nome: string;
+  revisaoCorte?: {motivos:string[];pendencias:string[];dados:string[];fonteId:string;versaoRegra:string} | undefined;
 }

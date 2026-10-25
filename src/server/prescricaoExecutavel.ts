@@ -394,14 +394,20 @@ function recuperar(deps:Deps,token:string,raw:unknown,ctx:Contexto,atorId:string
 
 export function operarPrescricaoExecutavel(deps: Deps, token: string, operacao: "base" | "preparar" | "confirmar" | "recuperar" | "cancelar", raw: unknown): Resposta {
   const em = deps.agora(), sessao = Sessao.safeParse(deps.sessoes.obter(token));
+  const recusarAuditado=(codigo:string,status=409)=>{
+    try{auditar(deps.db,{ator:sessao.success?{tipo:'SESSAO',id:sessao.data.medicoId}:{tipo:'SISTEMA',id:'prescricao-executavel'},
+      acaoPedida:`PRESCRICAO:${operacao}`,decisao:'NEGADA',motivoCodigo:codigo,politicaVersao:'L4-PRESCRICAO@1',em});}
+    catch{return negar(codigo,status,['AUDITORIA_INDISPONIVEL']);}
+    return negar(codigo,status);
+  };
   if (!sessao.success || !Number.isFinite(Date.parse(em)) || Date.parse(sessao.data.emitidaEm) > Date.parse(em)
-    || Date.parse(sessao.data.expiraEm) <= Date.parse(em)) return negar("SESSAO_INVALIDA", 401);
+    || Date.parse(sessao.data.expiraEm) <= Date.parse(em)) return recusarAuditado("SESSAO_INVALIDA", 401);
   const c = ContextoAcaoComposta.safeParse(operacao === "base" ? raw :
     raw && typeof raw === "object" && "contexto" in raw ? raw.contexto : null);
-  if (!c.success) return negar("PAYLOAD_INVALIDO", 400);
+  if (!c.success) return recusarAuditado("PAYLOAD_INVALIDO", 400);
   const selecionado = deps.sessoes.consultaSelecionada(token);
   if (!selecionado || selecionado.patientId !== c.data.patientId || selecionado.encounterId !== c.data.encounterId
-    || (selecionado.tumorLotId ?? null) !== c.data.tumorLotId) return negar("CONTEXTO_CONSULTA_ALTERADO");
+    || (selecionado.tumorLotId ?? null) !== c.data.tumorLotId) return recusarAuditado("CONTEXTO_CONSULTA_ALTERADO");
   try {
     const resultado = transacao(deps.db, () => operacao === "base"
       ? { status: 200, body: BasePrescricaoExecutavelResposta.parse(lerBasePrescricaoExecutavel(deps.db, c.data, em)) }
@@ -415,5 +421,9 @@ export function operarPrescricaoExecutavel(deps: Deps, token: string, operacao: 
       motivoCodigo: (resultado.body as { codigo: string }).codigo, politicaVersao: "W2-01", em,
     });
     return resultado;
-  } catch { return negar("PRESCRICAO_ARMAZENAMENTO_INDISPONIVEL", 503); }
+  } catch(error) {
+    if(error instanceof Error&&error.message==='SESSAO_INVALIDA')return recusarAuditado('SESSAO_INVALIDA',401);
+    if(error instanceof Error&&['CONTEXTO_CONSULTA_ALTERADO','DRAFT_ENCONTRO_DIVERGENTE','DRAFT_LOTE_DIVERGENTE'].includes(error.message))return recusarAuditado(error.message);
+    return recusarAuditado("PRESCRICAO_ARMAZENAMENTO_INDISPONIVEL",503);
+  }
 }

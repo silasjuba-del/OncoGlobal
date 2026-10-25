@@ -20,6 +20,16 @@ function gravarAlerta(id:string,vermelho=true){
  const payload={alertaId:id,alvo:{patientId:PACIENTE},natureza:"AMEACA_IMEDIATA",classeRisco:null,texto:`Alerta sintetico ${id}`,origemRegra:"regra-sintetica",evidencias:[],presentationOverride:vermelho,authorityOverride:false,reconhecidoEm:null,destino:"CHAT"};
  gravar(id,"Alerta",payload);
 }
+it('contingência deriva E1 do servidor mesmo com flag cliente falsa e recusa replay desatualizado',async()=>{
+ await abrir();
+ const p={patientId:PACIENTE,encounterId:ENCONTRO,operationId:'contingencia-sem-e1',destino:'SALAO',emergenciaAtiva:false,alertasOperacionaisE1:[],resumoTriagem:{observacao:'Registro sintético'}};
+ expect((await a.request('/consulta/salao/contingencia/gerar',p)).status).toBe(200);
+ gravarAlerta('e1-servidor');
+ expect(await a.request('/consulta/salao/contingencia/gerar',p)).toMatchObject({status:409,data:{codigo:'FOLHA_DESATUALIZADA_POR_E1'}});
+ const atual=await a.request('/consulta/salao/contingencia/gerar',{...p,operationId:'contingencia-com-e1'});
+ expect(atual.status).toBe(200);expect(atual.data.folha.emergenciaAtiva).toBe(true);
+ expect(atual.data.folha.htmlImprimivel).toContain('E1 — EMERGÊNCIA ATIVA');
+});
 async function pedidoAssinatura(chave:string,reconhecerAlertas:string[]){
  const {context,preparada}=await finalizarFlash(a,chave);expect(preparada.status).toBe(200);
  await a.request("/consulta/bundle",context);

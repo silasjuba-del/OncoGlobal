@@ -147,7 +147,7 @@ export interface FlashPreparada {
 }
 
 export interface ConsultaVisao {
-  medicamentosAtuais?: { eventId: string | null; medicamentos: string[]; conflito: boolean } | undefined;
+  medicamentosAtuais?: { eventId: string | null; medicamentos: string[]; conflito: boolean;confirmadoNesteEncontro?:boolean|undefined } | undefined;
   contatosCanal?: CaixaCanalVisao | undefined;
   dutos?: DutosClinicaVisao;
   instrumentosClinicos?: readonly {instrumento:string;avaliacao:ResultadoInstrumento}[];
@@ -376,8 +376,9 @@ export interface PortaConsulta {
   importarTranscricaoLocal?(pedido:PedidoTranscricaoLocal,signal?:AbortSignal):Promise<ResultadoTranscricaoLocal>;
   /** Configuração global autenticada; ausente quando a porta não oferece persistência. */
   lerCaixaConfiguracao?(numero: number): Promise<CaixaConfiguracaoFlash>;
-  alterarCaixaConfiguracao?(pedido: { numero: number; valorNovo: unknown; expectedRevision: number; operationId: string }): Promise<AlteracaoConfiguracaoFlash>;
+  alterarCaixaConfiguracao?(pedido: { numero: number; valorNovo: unknown; expectedRevision: number; operationId: string;autorizacaoMedica?:boolean }): Promise<AlteracaoConfiguracaoFlash>;
   carregarFonteRevisao?(draftId: string, signal?: AbortSignal): Promise<import("./revisaoExtracao.js").FonteRevisao>;
+  carregarFonteSemVinculo?(draftId:string,segmentId:string,signal?:AbortSignal):Promise<{draftId:string;sourceId:string;segmentId:string;revision:number;textoOriginal:string}>;
   vincularFonteRevisao?(pedido: { exceptionId: string; acao: "LIGAR_PACIENTE"; patientId: string;
     sourceId: string; draftId: string; expectedRevision: number; encounterId: string;
     tumorLotId: string | null; idempotencyKey: string }, signal?: AbortSignal): Promise<{ codigo: "VINCULO_REVISTO"; revision: number }>;
