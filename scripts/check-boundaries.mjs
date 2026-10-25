@@ -15,6 +15,7 @@ const RULES = [
   { from: "src/modules/", forbid: ["src/"], allow: ["src/contracts/", "src/rules/"], why: "satélite só depende de contratos, regras e de si" },
   // Pré-F1 (auditoria consolidada A2/A3): fronteiras para as camadas que antes só tinham vigilância de rede.
   { from: "src/server/", forbid: ["src/"], allow: ["src/kernel/", "src/contracts/", "src/modules/", "src/rules/", "src/server/"], why: "servidor: kernel, contratos, módulos e regras" },
+  { from: "src/server/", forbid: ["src/kernel/ledger/writeRouter"], allow: [], why: "servidor usa a porta comum de confirmação" },
   { from: "src/app/", forbid: ["src/"], allow: ["src/contracts/", "src/modules/", "src/rules/", "src/app/"], why: "app segue a regra de módulos" },
   { from: "src/orchestration/", forbid: ["src/"], allow: ["src/contracts/", "src/modules/", "src/rules/", "src/orchestration/"], why: "orquestração segue a regra de módulos" },
   { from: "src/apac/", forbid: ["src/"], allow: ["src/contracts/", "src/modules/", "src/rules/", "src/apac/"], why: "apac segue a regra de módulos" },

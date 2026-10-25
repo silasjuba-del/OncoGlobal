@@ -4,7 +4,8 @@ import { rascunhoNaoPromovivel } from "../../contracts/rascunhos.js";
 import { documentoReceitaDosePendente } from "../../contracts/f1/receitaDose.js";
 import { createHash } from "node:crypto";
 import { z } from "zod";
-import { DataCivil, Id } from "../../contracts/base.js";
+import { DataCivil, Fonte, Id } from "../../contracts/base.js";
+import { ErroProveniencia, fontesDeclaradasNoRascunho } from "../../kernel/comandos/proveniencia.js";
 import type { ConfirmarBloco as Confirmar } from "../../contracts/operacao.js";
 import { auditar, depoisDoCommit, lerDraft, listarEventos, salvarDraft } from "../../kernel/comandos/portas.js";
 import { executarConfirmacao as confirmar } from "../../kernel/comandos/index.js";
@@ -179,6 +180,18 @@ function confirmarBlocoNaTransacao(deps: ServidorDeps, token: string, input: Con
     if (ciencia) return {status:409,body:{codigo:ciencia}};
   }
   const reviewDecisionId = sha(JSON.stringify({ input, medicoId: sessao.medicoId }));
+  let fontesPorRegistro:Fonte[][];
+  try {
+    fontesPorRegistro=drafts.map((draft,i)=>{
+      if(operacaoExistente){
+        const antigo=deps.db.prepare("SELECT fontes FROM clinical_event WHERE operationId=? AND eventId=? AND patientId=?")
+          .get(input.idempotencyKey,sha(`${input.idempotencyKey}:${input.registros[i]!.id}:${i}`),input.patientId);
+        if(!antigo)throw new ErroProveniencia("OPERACAO_INCOMPLETA");
+        return Fonte.array().parse(JSON.parse(String(antigo.fontes)));
+      }
+      return fontesDeclaradasNoRascunho(draft!.payload)??[];
+    });
+  } catch(e){return {status:409,body:{codigo:e instanceof ErroProveniencia?e.codigo:"PROVENIENCIA_INVALIDA"}};}
   const registros = input.registros.map((r, i) => {
     const doc = docs[i];
     const selected = doc && escolhidos.some((e) =>
@@ -190,7 +203,7 @@ function confirmarBlocoNaTransacao(deps: ServidorDeps, token: string, input: Con
         signature: { documentId: doc.documentId, documentVersion: doc.documentVersion,
           documentHash: hashes[i]!, declaredHash: doc.documentHash, reviewDecisionId, serverActorId: sessao.medicoId } }
         : draft.payload,
-      fontes: [], revisao: selected ? "ASSINADO" as const : "CONFIRMADO" as const };
+      fontes: fontesPorRegistro[i]!, revisao: selected ? "ASSINADO" as const : "CONFIRMADO" as const };
   });
   // Marcador e tarefa pertencem à mesma operação da assinatura e não são HTTP input.
   const referencias = z.object({documentId:Id,documentVersion:z.number().int().positive()}).strict();

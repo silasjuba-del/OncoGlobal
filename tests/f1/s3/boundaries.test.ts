@@ -33,6 +33,14 @@ it('servidor pode importar createServer e scanner não contém U+0008',()=>{
  expect(avaliar("import { createServer } from 'node:http';",'src/server/entrada.ts').status).toBe(0);
  expect(readFileSync(new URL('../../../scripts/check-boundaries.mjs',import.meta.url),'utf8')).not.toContain(String.fromCharCode(8));
 });
+it.each(["import { confirmar } from '../kernel/ledger/writeRouter.js';",
+ "import { confirmar as escrever } from '../kernel/ledger/writeRouter.js';",
+ "export { confirmar } from '../kernel/ledger/writeRouter.js';"])("servidor não contorna a porta comum de confirmação: %s",codigo=>{
+ const r=avaliar(codigo,'src/server/escrita.ts');expect(r.status).toBe(1);expect(r.texto).toContain('porta comum de confirmação');
+});
+it('servidor usa a porta comum de confirmação sem exceção de fronteira',()=>{
+ expect(avaliar("import { executarConfirmacao } from '../kernel/comandos/index.js';",'src/server/escrita.ts').status).toBe(0);
+});
 it('manifesto simultaneamente ampliado não permite reintroduzir exceção sem violação de import',()=>{
  const ex={arquivo:'src/modules/renal/index.ts',import:'src/contracts/base.js',expira:'F1-S3',motivo:'ataque'};
  const r=avaliar("export const x=1;",'src/modules/renal/index.ts',s=>s.replace('const EXCECOES = [];',`const EXCECOES = ${JSON.stringify([ex])};`),s=>{const m=JSON.parse(s);m.pares.push(ex);return JSON.stringify(m);});

@@ -1,4 +1,5 @@
 import { PedidoRecuperacaoConfirmacao } from "../contracts/api/recuperacaoConfirmacao.js";
+import { ErroProveniencia } from "../kernel/comandos/proveniencia.js";
 import { operarAtendimentoV6 } from "./atendimentoV6.js";
 import { criarResolverDocumentoLedger, listarDrafts, listarEventos } from "../kernel/comandos/portas.js";
 import { dadosDoEvento } from "../kernel/projections/snapshot.js";
@@ -521,6 +522,7 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
     const result = await deps.gateway.withStore(sqliteIdempotencia(deps.db)).executar(parsed.data, sessao);
     return reply(result.decisao === "NEGADA" ? 409 : 200, result.motivoCodigo, result);
   } catch (error) {
+    if(error instanceof ErroProveniencia)return reply(409,error.codigo);
     if (error instanceof Error && error.message === "BODY_TOO_LARGE") return reply(413, "UPLOAD_EXCESSIVO");
     if (error instanceof JsonInvalido) return reply(400, "JSON_INVALIDO");
     if (error instanceof Error && error.message === "CONTEXTO_PACIENTE_OBRIGATORIO")

@@ -280,7 +280,7 @@ describe("G2 · Cenário 3: Divergência de ator, patientId, encounterId e tumor
     }
   });
 
-  it("caracteriza diferença entre executarConfirmacao (checa encontro/lote do draft) e writerClinico (só checa patientId do draft — D-01/D-04)", () => {
+  it("porta comum e writerClinico recusam divergência de paciente, encontro e lote do draft", () => {
     const db = criarBancoMemoriaG2();
     try {
       const sessao = criarSessaoSinteticaG2();
@@ -353,7 +353,7 @@ describe("G2 · Cenário 3: Divergência de ator, patientId, encounterId e tumor
       ).toThrow("DRAFT_LOTE_DIVERGENTE");
 
       // 2) Caminho `writerClinico.persistir` (`src/kernel/gateway/writerClinico.ts:146-150`):
-      // Confere `draft.patientId !== pedido.contexto.patientId`, mas NÃO confere `draft.payload.contexto.encounterId` nem `tumorLotId`!
+      // Também passa pela porta comum: paciente, encontro e lote do draft precisam coincidir.
       const hashFonte = "3".repeat(64);
       const writer = criarWriterClinicoGateway({
         db,
@@ -399,8 +399,7 @@ describe("G2 · Cenário 3: Divergência de ator, patientId, encounterId e tumor
         resultRef: null,
       });
 
-      // Comportamento atual caracterizado (lacuna E1 a fechar em G3):
-      // Se `pedido.contexto` tiver outro `encounterId` e `tumorLotId`, `writerClinico` aceita e grava no encontro/lote do pedido!
+      // L4: a lacuna caracterizada passa a ser uma recusa, sem evento gravado.
       const aceitoEncontroDivergenteNoWriter = writer.persistir({
         operationId: "op-c3-writer-enc-div",
         reviewDecisionId: "rev-c3-writer-enc-div",
@@ -433,7 +432,8 @@ describe("G2 · Cenário 3: Divergência de ator, patientId, encounterId e tumor
           },
         ],
       });
-      expect(aceitoEncontroDivergenteNoWriter.decisao).toBe("PERSISTIDA");
+      expect(aceitoEncontroDivergenteNoWriter).toMatchObject({decisao:"NEGADA",motivoCodigo:"DRAFT_ENCONTRO_DIVERGENTE"});
+      expect(listarEventos(db,G2_CONTEXTO.patientId).some(e=>e.operationId==="op-c3-writer-enc-div")).toBe(false);
     } finally {
       db.close();
     }
