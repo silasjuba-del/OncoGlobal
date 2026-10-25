@@ -5,6 +5,7 @@ import { cleanup, fireEvent, render, screen, waitFor } from "@testing-library/re
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { AtendimentoV6 } from "../../../src/ui/consulta/AtendimentoV6.js";
 import { criarPortaFalsa } from "../../../src/ui/api/fake.js";
+import type { PortaConsulta } from "../../../src/ui/api/porta.js";
 import type { AtendimentoV6Resposta, BaseAtendimentoV6 } from "../../../src/contracts/api/atendimentoV6.js";
 
 afterEach(cleanup);
@@ -58,7 +59,9 @@ describe("U-H6 · entrada hostil em campos livres (ChatAnotacao e editor de evol
       assinado: false,
     };
 
-    const aceitarDecisaoChat = vi.fn(async () => ({ codigo: "GRAVADA" as const, eventId: "ev-chat-uh6" }));
+    const aceitarDecisaoChat = vi.fn<NonNullable<PortaConsulta["aceitarDecisaoChat"]>>(
+      async () => ({ codigo: "GRAVADA" as const, eventId: "ev-chat-uh6" }),
+    );
     const prepararAtendimentoV6 = vi.fn(async (pedido) => ({
       ...respostaInicial,
       codigo: "ATENDIMENTO_PREPARADO" as const,
@@ -97,7 +100,7 @@ describe("U-H6 · entrada hostil em campos livres (ChatAnotacao e editor de evol
     const campoDecisao = screen.getByLabelText("Decisão médica de hoje") as HTMLTextAreaElement;
 
     const payloadXssRtlEmoji =
-      '<img src=x onerror=alert(1)>\nLinha 2 🧬🩺⚠️\r\nLinha 3 RTL \u202Eنص تجريبي SINTETICO\u202C ';
+      '<img src=x onerror=alert(1)>\nLinha 2 🧬🩺⚠️\nLinha 3 RTL \u202Eنص تجريبي SINTETICO\u202C ';
     const payload10k = payloadXssRtlEmoji + "X".repeat(10_000 - payloadXssRtlEmoji.length);
     expect(payload10k.length).toBe(10_000);
 
