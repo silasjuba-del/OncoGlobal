@@ -6,6 +6,7 @@ import type { DatabaseSync } from 'node:sqlite';
 import { z } from 'zod';
 import { Id, Sessao, Instante, type Fonte } from '../contracts/base.js';
 import { validarPayloadEvento } from '../contracts/envelope.js';
+import { AnotacaoEvolucao } from '../contracts/f1/anotacaoEvolucao.js';
 import { Apac, SignatureReference, type ClinicalEvent } from '../contracts/operacao.js';
 import { TreatmentAdministration } from '../contracts/clinico.js';
 import { ConferenciaFarmacia, type PrescricaoAssinadaRef, type ReferenciaSigtap, type ContextoDutoServidor } from '../contracts/f1/dutos.js';
@@ -176,6 +177,15 @@ function executarDuto(deps: DepsDutos, token: string, rota: string, entrada: unk
   if(!validarPayloadEvento('ChatMessage',dadosMensagem).ok||dadosMensagem?.patientId!==c.patientId
     ||dadosMensagem.encounterId!==c.encounterId)return negar('MENSAGEM_CHAT_FORA_CONTEXTO');
   const r=aceitarDecisaoChat({mensagemId:p.mensagemId,decisao:p.decisao},contexto);if(!r.ok)return negar(r.codigo);
+  // Reabrir a tela perde a chave local, mas não torna a mesma anotação uma nova decisão.
+  const existente=vigentes.find(e=>{
+   if(e.tipo!=='AnotacaoEvolucao'||e.criadoPor.tipo!=='SESSAO'||e.criadoPor.id!==auth.data.medicoId)return false;
+   const n=AnotacaoEvolucao.safeParse(dadosDoEvento(e));return n.success&&n.data.atorId===auth.data.medicoId
+    &&n.data.texto===r.dados.texto&&n.data.mensagemId===p.mensagemId&&n.data.origemMensagem.eventId===mensagem.eventId
+    &&n.data.origemMensagem.contentHash===hashCanonico(mensagem)
+    &&n.data.contexto.patientId===c.patientId&&n.data.contexto.encounterId===c.encounterId&&n.data.contexto.tumorLotId===c.tumorLotId;
+  });
+  if(existente)return {status:200,body:{codigo:'REPLAY',eventId:existente.eventId}};
   tipo=r.tipo;payload={...r.dados,contexto:r.contexto,origemMensagem:{eventId:mensagem.eventId,contentHash:hashCanonico(mensagem)}};
  }else{
   const p=TarefaPedido.parse(entrada),ts=vigentes.filter(e=>e.tipo==='Tarefa').flatMap(e=>{const t=Tarefa.safeParse(dadosDoEvento(e));return t.success&&t.data.tarefaId===p.tarefaId?[{e,t:t.data}]:[];});

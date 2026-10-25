@@ -341,6 +341,12 @@ export function criarPortaHttp(opcoes: OpcoesHttp): PortaConsulta {
       const r=AtendimentoV6Resposta.parse(json);
       if(r.contexto.patientId!==contexto.patientId||r.contexto.encounterId!==contexto.encounterId||r.contexto.tumorLotId!==contexto.tumorLotId)throw new ErroPorta('CONTEXTO_CONSULTA_ALTERADO');return r;
     },
+    async aceitarDecisaoChat(pedido,signal){
+      const {status,json}=await enviar('/chat/aceitar-decisao',pedido,true,signal);
+      const r=z.object({codigo:z.enum(['GRAVADA','REPLAY']),eventId:z.string().min(1)}).safeParse(json);
+      if(status!==200||!r.success)throw new ErroPorta(codigoDe(json,'ANOTACAO_NAO_CONFIRMADA'));
+      return r.data;
+    },
     async prepararAtendimentoV6(pedido,signal){
       const {status,json}=await enviar('/consulta/atendimento/preparar',pedido,true,signal);
       if(status!==200&&status!==201)throw new ErroPorta(codigoDe(json,'ATENDIMENTO_INDISPONIVEL'));

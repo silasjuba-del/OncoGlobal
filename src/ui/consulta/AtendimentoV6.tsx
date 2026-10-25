@@ -1,12 +1,15 @@
 import { useEffect,useRef,useState } from "react";
 import type { PortaConsulta } from "../api/porta.js";
 import { AtendimentoV6Resposta, type EntradaAtendimentoV6 } from "../../contracts/api/atendimentoV6.js";
+import { ChatAnotacao } from "./ChatAnotacao.js";
 
 const nomes={RESUMO:"Resumo do caso",EVOLUCAO:"Evolução por diferenças",EXAMES:"Pedido de exames",RETORNO:"Retorno",PRESCRICAO:"Prescrição"} as const;
 const vazio=():EntradaAtendimentoV6=>({hoje:"",decisao:"",saidas:["RESUMO","EVOLUCAO"]});
-function TextoRascunho({texto}:{texto:string}){
+function TextoRascunho({texto,apresentacao}:{texto:string;apresentacao?:{textoClinico:string;detalhes:string[]}|undefined}){
+ if(apresentacao)return <><pre className="atendimento-v6__texto-clinico">{apresentacao.textoClinico}</pre>
+  <details className="atendimento-v6__fontes-documento"><summary>Detalhes</summary><pre>{apresentacao.detalhes.join("\n\n")||"Sem referências adicionais neste rascunho."}</pre></details></>;
  const marcador="\n\nFONTES E PROVENIÊNCIA\n",indice=texto.lastIndexOf(marcador);
- return <><pre>{indice<0?texto:texto.slice(0,indice)}</pre>{indice>=0?<details className="atendimento-v6__fontes-documento"><summary>Fontes deste rascunho</summary><pre>{texto.slice(indice+marcador.length)}</pre></details>:null}</>;
+ return <><pre>{indice<0?texto:texto.slice(0,indice)}</pre>{indice>=0?<details className="atendimento-v6__fontes-documento"><summary>Detalhes</summary><pre>{texto.slice(indice+marcador.length)}</pre></details>:null}</>;
 }
 const mensagem=(e:unknown)=>{
  const c=e instanceof Error?e.message:"";
@@ -57,8 +60,9 @@ export function AtendimentoV6({porta,contexto}:{porta:PortaConsulta;contexto:{pa
    <p>Informe o que mudou e sua decisão. O histórico acessível já vem do prontuário.</p></div><span className="atendimento-v6__badge">Rascunhos · revisão médica</span></header>
   {atual?<><div className="atendimento-v6__contexto"><strong>{atual.base.pacienteNome}</strong><span>Referência: {atual.base.dataReferencia??"data do encontro não informada"}</span><span>{atual.base.citacoes.length} trechos recuperados com referências</span></div>
    <p className="atendimento-v6__origem">As entradas abaixo pertencem ao atendimento de {atual.base.dataReferencia??"data clínica ainda não informada"}.</p>
+   {porta.aceitarDecisaoChat?<ChatAnotacao key={contextoChave} porta={porta} contexto={contexto} bloqueado={ocupado} aoRegistrar={()=>recuperar(true)}/>:null}
    {atual.base.anotacoesChat?.length?<section aria-label="Anotações médicas aceitas do chat"><h3>Anotações médicas aceitas do chat</h3>
-    {atual.base.anotacoesChat.map(n=><article key={n.eventId}><p>{n.texto}</p><small>Autor: {n.autor} · Registro: {n.em} · Mensagem: {n.mensagemId}</small></article>)}
+    {atual.base.anotacoesChat.map(n=><article key={n.eventId}><p>{n.texto}</p><details className="atendimento-v6__fontes-documento"><summary>Detalhes</summary><small>Autor: {n.autor} · Registro: {n.em} · Mensagem: {n.mensagemId} · {n.eventId}</small></details></article>)}
    </section>:null}
    {atual.base.pendenciasAnotacoes?.length?<p className="atendimento-v6__pendente">Há anotações indisponíveis para a evolução; confira a proveniência antes de concluir esse documento.</p>:null}
    {atual.rascunho?<p className="atendimento-v6__origem">Entrada recuperada do mesmo encontro · versão {atual.rascunho.versao} · data clínica: {atual.rascunho.dataClinica??"não informada"} · autor: {atual.rascunho.autor.medicoId}. O horário do salvamento não atualiza a data clínica.</p>:null}
@@ -78,7 +82,7 @@ export function AtendimentoV6({porta,contexto}:{porta:PortaConsulta;contexto:{pa
    {exibivel?<div className="atendimento-v6__documentos"><h3>Pronto para revisar</h3>{exibivel.documentos.map(d=><section key={d.tipo} aria-label={`${d.titulo} · ${d.estado==="FLUXO_ESPECIFICO_NECESSARIO"?"pendências":"rascunho"}`} className="atendimento-v6__documento">
     <header><h4>{d.titulo}</h4><span className={d.estado==="PRONTO_PARA_REVISAO"?"atendimento-v6__badge":"atendimento-v6__pendente"}>{d.estado==="PRONTO_PARA_REVISAO"?"Rascunho para revisão":d.estado==="PENDENTE"?"Pendência neste documento":"Fluxo específico necessário"}</span></header>
     {d.pendencias.length?<ul>{d.pendencias.map(p=><li key={p}>{p}</li>)}</ul>:null}
-    {d.estado!=="FLUXO_ESPECIFICO_NECESSARIO"?<TextoRascunho texto={d.texto}/>:<p>{entrada.decisao?`Decisão disponível: ${entrada.decisao}`:"Decisão médica não informada."}</p>}
+    {d.estado!=="FLUXO_ESPECIFICO_NECESSARIO"?<TextoRascunho texto={d.texto} apresentacao={d.apresentacao}/>:<p>{entrada.decisao?`Decisão disponível: ${entrada.decisao}`:"Decisão médica não informada."}</p>}
    </section>)}<p className="atendimento-v6__estado"><strong>Estado da entrega:</strong> versão {exibivel.versao} · data clínica {exibivel.dataClinica??"não informada"} · salva em {exibivel.salvoEm}. Texto informado por {exibivel.autor.medicoId}. Nenhum fato confirmado, assinatura ou envio criado.</p></div>:null}
   </>:<p>{ocupado?"Recuperando dados deste contexto…":"Dados indisponíveis. Tente recuperar novamente."}</p>}
   {!atual&&!ocupado?<button type="button" onClick={()=>void recuperar()}>Recuperar dados</button>:null}

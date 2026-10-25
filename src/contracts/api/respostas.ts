@@ -113,6 +113,7 @@ export const ApacResposta: z.ZodType<LotesApacVisao> = z.object({ hoje: DataCivi
   campoOrigem: z.enum(["estadiamentos", "histologia", "topografia", "cid"]).nullable(), motivoNegativa: Texto.nullable(),
 })) });
 export const ChatResposta: z.ZodType<ChatSetorVisao> = z.object({ setor: z.enum(["TRIAGEM", "FARMACIA", "SECRETARIA", "MEDICO"]),
+  tumorLotId: z.string().min(1).nullable().optional(),
   patientId: Texto, encounterId: Texto, mensagens: z.array(z.object({ mensagemId: Texto, autor: Texto, texto: Texto })),
   prescricao: z.object({ conteudoPrescricaoId: Texto, estado: z.enum(ESTADOS_FARMACIA),
     texto: Texto, proposta: Texto.nullable(), chip: z.object({ estado: z.enum(["DISPONIVEL", "INDISPONIVEL", "DESCONHECIDO"]),

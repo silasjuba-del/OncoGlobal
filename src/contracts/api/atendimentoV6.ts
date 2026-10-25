@@ -20,6 +20,7 @@ export const BaseAtendimentoV6=z.object({revisao:Hash,pacienteNome:Id,dataRefere
  integridade:z.array(Id)}).strict();
 export type BaseAtendimentoV6=z.infer<typeof BaseAtendimentoV6>;
 export const DocumentoAtendimentoV6=z.object({tipo:SaidaAtendimentoV6,titulo:Id,texto:Id,
+ apresentacao:z.object({textoClinico:Id,detalhes:z.array(z.string())}).strict().optional(),
  estado:z.enum(["PRONTO_PARA_REVISAO","PENDENTE","FLUXO_ESPECIFICO_NECESSARIO"]),pendencias:z.array(Id)}).strict();
 export type DocumentoAtendimentoV6=z.infer<typeof DocumentoAtendimentoV6>;
 export const RascunhoAtendimentoV6=z.object({id:Id,versao:z.number().int().positive(),revisaoBase:Hash,
