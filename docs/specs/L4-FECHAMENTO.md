@@ -13,7 +13,7 @@ Critério por achado: reproduzir e corrigir com prova; ou demonstrar que não é
 
 WRITE_SET inicial: `src/server/sessao.ts`, helper de exibição, `rotas/salaoCanal.ts`, `rotas/extracao/{rascunho,revisar}.ts`, `canalResposta.ts`, consumidores de leitura/UI necessários e testes associados. Expansões por causa demonstrada devem ser registradas neste documento antes da integração. Arquivos compartilhados sempre sob responsabilidade de Codex.
 
-## Estado da revalidação
+## Estado inicial da revalidação (histórico; fechamento abaixo)
 
 | IDs | Estado conhecido nesta base |
 |---|---|
@@ -34,7 +34,7 @@ Limite da prova de exibição: o servidor comprova que entregou o conteúdo na s
 
 ## Matriz de tratamento dos 42 achados
 
-Correções novas abaixo estão implementadas na worktree e aguardam revisão independente final/CI. As referências de testes são provas a executar no head de integração, não substituem esse gate. Nenhum arquivo em corpus foi alterado.
+A matriz abaixo registra o tratamento de cada ID. O estado inicial aguardava revisão/CI; os resultados da retomada estão na seção final deste documento. Nenhum arquivo em corpus foi alterado. A integração exige que os checks também aprovem o HEAD que contém o registro final.
 
 | ID | Tratamento / prova |
 |---|---|
@@ -103,6 +103,42 @@ Plano apresentado no chat e aprovado explicitamente por Silas: executar A–F, i
 
 WRITE_SET da retomada: três testes WIP; tests/f1/s8/revisao-atualiza-consulta.test.tsx (Luna responsável exclusivo por eventual correção de sincronização, Codex revisa), este documento; tests/server/prescricao-executavel-http.test.ts e módulos causais somente se houver defeito demonstrado. Demais arquivos de produto da PR73 permanecem sob Codex. Corpus, demonstração congelada e cinco documentos não rastreados da main preservados. Evidências históricas não substituem gates do HEAD final.
 
-Estado: lote A em execução; revisões B/C e preparação somente leitura de F em paralelo. CI inicial bloqueada por mocks sem res.once, sincronização PR27/S8 e gate agregado. Próxima prova: S9/A13/PR27 dirigidos, S8/eRx por Luna; depois baterias e CI finais.
+Estado na passagem inicial (histórico): lote A em execução; revisões B/C e preparação somente leitura de F em paralelo. CI inicial bloqueada por mocks sem res.once, sincronização PR27/S8 e gate agregado. Próxima prova naquela passagem: S9/A13/PR27 dirigidos, S8/eRx por Luna; depois baterias e CI finais.
 
-Primeiro marco da retomada: S9/A13/PR27 passaram 13/13 por HTTP real, incluindo replay legado recusado antes do gateway e adulteração com código exato/ledger preservado. Typecheck, fronteiras (585 arquivos, zero exceções) e corpus (241 arquivos) passaram. S8 passou 14/14 por Luna sem alteração; eRx e bateria B/C ainda em execução. Estes resultados não liberam merge antes da revisão independente e CI final.
+Primeiro marco histórico da retomada: S9/A13/PR27 passaram 13/13 por HTTP real, incluindo replay legado recusado antes do gateway e adulteração com código exato/ledger preservado. Typecheck, fronteiras (585 arquivos, zero exceções) e corpus (241 arquivos) passaram. S8 passou 14/14 por Luna sem alteração; eRx e bateria B/C ainda estavam em execução. Estes resultados isolados não liberavam merge antes da revisão independente e CI final.
+
+## Fechamento técnico da revisão e das provas — base 026c708 e correção residual G-09
+
+No commit 026c708, o código de produto não divergia de fc91c33; esse commit incorporou deliberadamente os três testes WIP e o registro de continuidade. Depois dessa validação inicial, o reataque demonstrou o residual G-09, corrigido no delta descrito abaixo e sujeito a nova CI completa. Revisores independentes gpt-6-luna: agente mapa para produto B/C e delta G-09; agente fontes para testes S9/W3/PR27, bateria B/C e documentação; agente catalogo para S8/eRx/Chromium. Nenhum revisor escreveu produto ou aprovou clinicamente o sistema.
+
+| Estado dos 42 IDs (sem duplicação) | IDs |
+|---|---|
+| Correção já integrada antes da PR73, regressão incluída na suíte completa | 02,07,10,12,14,18,20,32,33,41 |
+| Implementação da PR73 revisada; validação inicial 026c708 complementada pelo RED/correção/revalidação G-09 (04/05); integração condicionada à nova CI do HEAD final | 01,03,04,05,06,09,11,13,15,17,19,21,24,25,27,28,29,35,42 |
+| Não defeito conforme contrato documentado; controles preservados | 08,26,31,40 |
+| Decisão médica recebida e comportamento preservado, sem nova aprovação clínica inferida | 16,22,30,34 |
+| Módulo legado/inativo: correções internas e limites registrados, nenhuma ativação | 23,36,37,38,39 |
+
+A relação acima contém exatamente 42 IDs únicos (10+19+4+4+5). As descrições e referências de prova por ID estão na matriz de tratamento. O relatório original integral da auditoria não foi localizado nesta retomada; o cotejo usa a matriz existente, os documentos auxiliares e o diff. Não foi inventado conteúdo do relatório ausente. As declarações de pendência nos documentos históricos L4-PROVENIENCIA-ESCRITA e AUDITORIA-L4-CORRECOES descrevem suas bases anteriores; esta seção e o resultado de integração da PR73 governam o estado atual.
+
+### Evidências executadas
+
+- Codex: S9/A13/PR27 13/13; typecheck; fronteiras 585 arquivos/zero exceções; corpus 241 arquivos.
+- Luna: S8 14/14; prescrição eletrônica HTTP 70/70, incluindo recuperação após nova sessão/resposta perdida. Os dois arquivos não precisaram de alteração; a falha histórica não se reproduziu na execução dirigida.
+- Luna: bateria de 11 arquivos B/C/D com 32/36 testes inicialmente; quatro falhas em M10 sob execução concorrente com navegador (dois timeouts e duas divergências de fixture). M10 isolado, após fim do navegador: 10/10, sem aumentar timeout. A variável global de ambiente nos helpers e a continuidade de promises após timeout são hipótese de contaminação da fixture, não causa comprovada. Preservar este limite; não reportar a primeira bateria como totalmente verde.
+- Luna: Chromium local via npm run test:b2, exit 0, seis famílias, três propostas reabertas com trilha no mesmo SQLite, nenhuma assinatura indevida, jornadas eRx/canal/contingência e WebCrypto, zero egresso externo. Evidências persistidas fora do Git em C:/Users/silas/.codex/outputs/2026-10-25/l4-fechamento-execucao/026c708-browser-b2/.
+- GitHub Actions, HEAD 026c708db8ac5cefbeaf7bcbaf34aa6441b4f4fe: runs [40194380123](https://github.com/silasjuba-del/OncoGlobal/actions/runs/40194380123) e [40194377432](https://github.com/silasjuba-del/OncoGlobal/actions/runs/40194377432), ambos concluídos com sucesso: quality, três shards, B2, adversariais W10/W8/F1 e gate agregado. O gate adversarial inclui verify:f1; verify isolado não o substitui.
+
+Revisão independente dos testes 026c708: sem bloqueadores ou expectativas enfraquecidas. S9 demonstra que recibo legado seria REPLAY no gateway isolado, mas HTTP recusa antes dele; A13 valida conteúdo/hash entregue, adulteração e motivo exato com eventos/operações invariantes; PR27 conserva foco, paciente correto, decisão única e replay idempotente. Revisão de produto focada em recibos finish/close, gates, contexto/proveniência e projeções sem bloqueador confirmado. Limite: entrega HTTP não prova percepção humana.
+
+### Integração e entrega sintética
+
+Revisão residual G-09 (gate clínico, distinto do ID F4-09): Luna identificou trecho com "História oncológica" e qualificador ATUAL contraditório. Codex reproduziu antes da correção: o teste do gate recebeu PASSA em vez de PENDENTE. WRITE_SET ampliado por esta causa para src/kernel/extracao/gatesClinicos.ts, tests/kernel/extracao/l4-gates.test.ts e tests/server/l4-gates-extracao.test.ts. Corrigir a guarda de temporalidade da evidência, preservando controle positivo de ressecção atual, laboratório independente e replay; executar novamente provas e revisão do delta. Não inventar regra clínica nem associar automaticamente TNM histórico à peça atual.
+
+Resultado do residual: guarda corrigida somente para a expressão específica "história oncológica", tratada como temporalidade insuficiente para associar o TNM à peça atual (PENDENTE); "história da doença atual" continua com controle positivo PASSA. RED do gate e da preparação HTTP observado antes da correção. Após correção, 21/21 testes em três arquivos (gate, jornada HTTP e proveniência) passaram: pTNM permanece candidato, laboratório independente persiste e replay não altera eventos. Luna mapa revisou o diff efetivo e não encontrou bloqueador. Não foi necessário obter nova decisão clínica; trata-se da consistência de proveniência já exigida por F4-04/05.
+
+Lacunas adicionais separadas do fechamento: (1) prioridade de manutenção: helpers globais mutáveis da fixture M10 podem permitir contaminação após timeout; impacto observado apenas sob carga, causa não comprovada e rerun/CI aprovados; proposta futura de ambientes locais por teste, sem aumentar timeout. (2) limite semântico: regras lexicais não demonstram todas as relações entre peças e TNM em prosa arbitrária; preservar revisão médica e candidaturas pendentes, ampliando corpus sintético adversarial se novos casos forem demonstrados. Nenhum módulo ou roadmap adicional foi ativado por esses registros.
+
+Autorizada por Silas após aprovação do plano A–F. Este commit documental ainda deve passar CI no próprio HEAD; só então PR73 sai de rascunho e recebe merge normal, sem admin/bypass/force e sem apagar branches. Conferir main e CI pós-merge, preservando os cinco arquivos não rastreados de terceiros.
+
+A demonstração antiga não está em execução em 5197 e não será modificada. A entrega F usará checkout do commit integrado, diretório sintético novo fora do repositório, sem providers externos, e URL/processo/versão comprovados. O manifesto local de entrega registrará SHA integrado, diretório, comando de início/parada e evidência de persistência/reabertura. Disponibilidade UI/UX não significa disponibilização em produção nem aprovação clínica.

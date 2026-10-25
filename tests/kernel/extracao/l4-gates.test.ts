@@ -24,5 +24,9 @@ it('pTNM normalizado requer material e literal explícitos; não infere peça de
  expect(avaliarGatesExtracao([{...f,value:{literal:'cT2N0M0',prefixo:'p'}}],'Material: ressecção cirúrgica')[0]?.decisao).toBe('PENDENTE');
  expect(avaliarGatesExtracao([{...f,qualificadores:{...q,temporalidade:'NAO_DETERMINADA'},rawEvidence:'Laudo antigo pT2N0M0'}],'Material: ressecção cirúrgica')[0]?.decisao).toBe('PENDENTE');
  expect(avaliarGatesExtracao([{...f,qualificadores:{...q,temporalidade:'HISTORICA'}}],'Material: ressecção cirúrgica')[0]?.decisao).toBe('PENDENTE');
+ expect(avaliarGatesExtracao([{...f,rawEvidence:'História oncológica: pT2N0M0.'}],
+  'Material: ressecção cirúrgica\nHistória oncológica: pT2N0M0.')[0]?.decisao).toBe('PENDENTE');
+ expect(avaliarGatesExtracao([{...f,rawEvidence:'História da doença atual: paciente atualmente com pT2N0M0.'}],
+  'Material: ressecção cirúrgica\nHistória da doença atual: paciente atualmente com pT2N0M0.')[0]?.decisao).toBe('PASSA');
  expect(avaliarGatesExtracao([{...f,domain:'histology',value:'carcinoma ductal'}],'')).toEqual([]);
 });

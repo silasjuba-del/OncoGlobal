@@ -16,6 +16,23 @@ it.each([['biópsia',false],['ressecção cirúrgica',true],['não informado',fa
  expect(fatos.some(f=>f.domain==='lab'),JSON.stringify(e.facts)).toBe(true);expect(fatos.some(f=>f.domain==='stage')).toBe(promove);
  expect((await fluxo.confirmar(fluxo.preview.data.comprovanteExibicao)).data.codigo).toBe('REPLAY');
 });
+it('história oncológica não associa pTNM à peça atual mesmo com marcador atual contraditório',async()=>{
+ const a=await abrir();
+ const e=await extrair(a,{sourceId:'path-historico-sintetico',sourceType:'pathology',
+  text:`Paciente: ${PACIENTE}\nMaterial: ressecção cirúrgica\nHistória oncológica: paciente atualmente com pT2N0M0.\n09/10/2026 Hemoglobina 11,5 g/dL.`});
+ const stages=e.facts.filter(f=>f.domain==='stage');expect(stages).toHaveLength(1);
+ const ids=e.facts.filter(f=>['stage','lab'].includes(f.domain)).map(f=>f.id);
+ const fluxo=await confirmarFatos(a,e,ids,'g09-historia');expect(fluxo.preview.status).toBe(200);
+ const previa=RevisaoPreparada.parse(fluxo.preview.data);
+ expect(previa.conteudo.verificacoesClinicas?.find(g=>g.gate==='G-09')?.decisao).toBe('PENDENTE');
+ expect((await fluxo.confirmar(previa.comprovanteExibicao)).status).toBe(200);
+ const fatos=a.eventos().filter(e=>e.operationId==='g09-historia'&&e.tipo==='FATO');
+ expect(fatos.some(e=>(e.payload as {data:{domain:string}}).data.domain==='stage')).toBe(false);
+ expect(fatos.some(e=>(e.payload as {data:{domain:string}}).data.domain==='lab')).toBe(true);
+ const antes=a.eventos();
+ expect((await fluxo.confirmar(previa.comprovanteExibicao)).data.codigo).toBe('REPLAY');
+ expect(a.eventos()).toEqual(antes);
+});
 it('divergência G08 exige ciência específica e preserva o alerta no fato e no recibo',async()=>{
  const a=await abrir(),cadastro=a.eventos().find(e=>e.tipo==='Paciente')!;
  salvarDraft(a.db,{draftId:'sexo-cadastro',patientId:PACIENTE,sourceId:'cadastro',rawRef:'cadastro',payload:{},revision:0,diagnostics:[],criadoEm:AGORA});

@@ -57,7 +57,8 @@ export function avaliarGatesExtracao(fatos:readonly FatoGate[],texto:string,cont
  }
  for(const f of fatos.filter(f=>f.domain==='stage')){
   const tnm=literal(f),prefixo=/^(yp|[cp])T/iu.exec(tnm.trim())?.[1]??'';
-  if(['p','yp'].includes(prefixo.toLowerCase())&&(!atual(f)||/\b(?:antig[oa]|anterior|hist[oó]ric[oa]|pr[eé]vi[oa])\b/iu.test(f.rawEvidence))){
+  // História oncológica não individualiza a peça atual; não confundir com história da doença atual.
+  if(['p','yp'].includes(prefixo.toLowerCase())&&(!atual(f)||/\b(?:antig[oa]|anterior|hist[oó]ric[oa]|hist[oó]ria\s+oncol[oó]gica|pr[eé]vi[oa])\b/iu.test(f.rawEvidence))){
    incluir({gate:'G-09',decisao:'PENDENTE',motivo:'Sujeito ou temporalidade não sustentam associação do pTNM à peça atual.'},[f]);continue;
   }
   if(['p','yp'].includes(prefixo.toLowerCase())&&!materialExplicito(f.rawEvidence)&&new Set(fatos.filter(n=>n.domain==='stage').map(literal)).size>1){
