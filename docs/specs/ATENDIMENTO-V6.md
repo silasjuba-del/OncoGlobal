@@ -36,6 +36,7 @@ Não alterar corpus, calculadoras, templates clínicos, perfil do serviço, cred
 - RED: três casos HTTP inicialmente 404; UI sem campos. Provas adicionais demonstraram ausência de âncora clínica, unidade e metadados de fonte, e leitura de contexto adulterado antes das correções.
 - Bateria integrada: 120/120 testes em cinco arquivos, incluindo novos casos e contratos HTTP/síntese legada; typecheck aprovado.
 - Luna executou regressão existente: 12/12 testes em dois arquivos, sem edição.
+- CI inicial encontrou um segundo inventário fixado em 89 rotas. Atualizado para as 91 rotas reais, mantendo a lista exata e acrescentando prova HTTP de que preparar/recuperar v6 não disparam reconciliação clínica nem motor de pós-processamento: 3/3 testes passaram.
 - Fronteiras: 576 arquivos, zero exceções. Corpus: 241 arquivos, aprovado tecnicamente pelo verificador.
 - Preview no Chromium: app real com servidor/SQLite sintéticos, entradas preenchidas, rascunhos gerados, screenshots desktop/documentos/mobile. Sem erros JavaScript observados. Artefatos temporários em `output/playwright/atendimento-v6/`, fora dos commits.
 - Revisão independente e CI do head final acompanham a PR. Merge permanece pendente da revisão visual solicitada pelo responsável.

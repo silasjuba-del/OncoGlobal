@@ -1,12 +1,13 @@
 // G2 · Caracterização de Pós-processamento HTTP por Rota e Drenagem no close() (Cenários 7 e 8 · OG-003 / OG-004).
-// ESCOPO EXPLÍCITO DO CENÁRIO 7 (CX-006): inspeciona estaticamente todas as 89 entradas do catálogo ROTAS_HTTP
-// (21 com grava: false e 68 com grava: true), mas executa via HTTP uma amostra representativa de endpoints
+// ESCOPO EXPLÍCITO DO CENÁRIO 7 (CX-006): inspeciona as 91 entradas do catálogo ROTAS_HTTP
+// e suas políticas de pós-processamento, mas executa via HTTP uma amostra representativa de endpoints
 // (agenda, lotes e estatistica com grava: false; oncoassistStatus e carregarConsulta como leituras com grava: true;
-// extrair 201 como escrita real; e extrair 400 / carregarConsulta 401 como falhas 4xx), e NÃO todas as 89 rotas via HTTP.
+// extrair 201 como escrita real; e extrair 400 / carregarConsulta 401 como falhas 4xx), e NÃO todas as rotas via HTTP.
 // Base: 52b8f7a04c2e467c5c3b3cb93bc38a7673cc4c93 (codex/estabilizacao-g01-reconciliacao).
 import { describe, expect, it, vi } from "vitest";
 import { POLITICA_WEBHOOK_CANAL, ROTAS_HTTP, politicaProcessamento, rotaHttp } from "../../src/server/rotas/catalogo.js";
 import * as canalReconciliacao from "../../src/server/canalReconciliacao.js";
+import type { AtendimentoV6Resposta } from "../../src/contracts/api/atendimentoV6.js";
 import {
   abrirServidorHttpG2,
   G2_CONTEXTO,
@@ -14,8 +15,8 @@ import {
 } from "../fixtures/g2-integridade.js";
 
 describe("G2 · Cenário 7: Disparos de pós-processamento por rota HTTP (OG-003 / OG-004)", () => {
-  it("caracteriza o catálogo ROTAS_HTTP (89 rotas) quanto ao metadado grava: true vs grava: false", () => {
-    expect(ROTAS_HTTP).toHaveLength(89);
+  it("caracteriza o catálogo ROTAS_HTTP (91 rotas) quanto à política de pós-processamento", () => {
+    expect(ROTAS_HTTP).toHaveLength(91);
 
     const semGrava = ROTAS_HTTP.filter((r) => r.processamento === "NENHUM").map((r) => r.nome);
     expect(semGrava).toEqual([
@@ -36,6 +37,8 @@ describe("G2 · Cenário 7: Disparos de pós-processamento por rota HTTP (OG-003
       "resultadoExtracaoLlm",
       "lotesPaciente",
       "documentoImpressao",
+      "recuperarAtendimentoV6",
+      "prepararAtendimentoV6",
       "oncoassistStatus",
       "basePrescricaoExecutavel",
       "listarFichasPrescricao",
@@ -73,7 +76,7 @@ describe("G2 · Cenário 7: Disparos de pós-processamento por rota HTTP (OG-003
     for (const rota of ROTAS_HTTP) expect(politicaProcessamento(rota.url), rota.url).toBe(rota.processamento);
   });
 
-  it("executa amostra representativa via HTTP (não todas as 89 rotas) medindo processarPendenciasClinicasCanal e motorF1.processar em grava:false, leituras grava:true, escrita 201 e falhas 4xx", async () => {
+  it("executa amostra representativa via HTTP medindo processarPendenciasClinicasCanal e motorF1.processar em grava:false, leituras grava:true, escrita 201 e falhas 4xx", async () => {
     const spyCanal = vi.spyOn(canalReconciliacao, "processarPendenciasClinicasCanal");
     const srv = await abrirServidorHttpG2();
     const spyMotor = vi.spyOn(srv.motorF1, "processar");
@@ -92,6 +95,11 @@ describe("G2 · Cenário 7: Disparos de pós-processamento por rota HTTP (OG-003
       expect((await srv.post("/consulta/agenda", {})).status).toBe(200);
       expect((await srv.post("/consulta/lotes", { patientId: G2_CONTEXTO.patientId })).status).toBe(200);
       expect((await srv.post("/consulta/estatistica", {})).status).toBe(200);
+      const atendimento=await srv.post<AtendimentoV6Resposta>("/consulta/atendimento/recuperar",G2_CONTEXTO);
+      expect(atendimento.status).toBe(200);
+      expect((await srv.post("/consulta/atendimento/preparar",{...G2_CONTEXTO,
+        expectedBaseHash:atendimento.data.base.revisao,expectedVersion:null,idempotencyKey:"v6-pos-processamento",
+        entrada:{hoje:"Atualização sintética",decisao:"",saidas:["RESUMO"]}})).status).toBe(201);
       await new Promise<void>((r) => setImmediate(r));
       expect(spyCanal).toHaveBeenCalledTimes(0);
       expect(spyMotor).toHaveBeenCalledTimes(0);
