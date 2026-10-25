@@ -33,17 +33,17 @@ function oklchParaRgb(spec: string): Rgb {
   const a = C * Math.cos(hRad);
   const b = C * Math.sin(hRad);
 
-  const l_ = L + 0.3963377774 * a + 0.2158037573 * b;
-  const m_ = L - 0.1055613458 * a - 0.0638541728 * b;
-  const s_ = L - 0.0894841775 * a - 1.291485548 * b;
+  const l_ = L + 0.3963378 * a + 0.2158038 * b;
+  const m_ = L - 0.1055613 * a - 0.0638542 * b;
+  const s_ = L - 0.0894842 * a - 1.2914855 * b;
 
   const l = l_ * l_ * l_;
   const mCube = m_ * m_ * m_;
   const s = s_ * s_ * s_;
 
-  const rLin = +4.0767416621 * l - 3.3077115913 * mCube + 0.2309699292 * s;
-  const gLin = -1.2684380046 * l + 2.6097574011 * mCube - 0.3413193965 * s;
-  const bLin = -0.0041960863 * l - 0.7034186147 * mCube + 1.707614701 * s;
+  const rLin = +4.0767417 * l - 3.3077116 * mCube + 0.2309699 * s;
+  const gLin = -1.268438 * l + 2.6097574 * mCube - 0.3413194 * s;
+  const bLin = -0.0041961 * l - 0.7034186 * mCube + 1.7076147 * s;
 
   const paraSrgb = (c: number) => {
     const cl = clamp01(c);
