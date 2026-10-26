@@ -138,8 +138,9 @@ export async function executarOrk(plano: Plano, agentes: Readonly<Record<string,
         || visao.data.lacunas.some(l => l.setor === s));
     run.estado = completa ? "PRONTO" : "FALHOU";
   } else {
-    const resultadoFinal = final ? run.resultados.find((r) => r.id === final.id) : undefined;
-    run.estado = resultadoFinal?.resultado === "ok" ? "PRONTO" : "FALHOU";
+    // Terminal = nenhum passo depende dele; a posição no array não tem significado no grafo.
+    const terminais = plano.passos.filter((p) => !plano.passos.some((q) => q.dependsOn.includes(p.id)));
+    run.estado = terminais.some((t) => run.resultados.find((r) => r.id === t.id)?.resultado === "ok") ? "PRONTO" : "FALHOU";
   }
   run.etapa = "JOIN";
   return run;
