@@ -57,15 +57,19 @@ Sem mudança destrutiva de esquema nem reescrita de eventos. Fontes PDFForge ori
 
 Implementação integrada na branch de entrega, ainda não integrada em main. Revisão independente de servidor e parecer Cursor usados para corrigir configuração inválida, troca de contexto, rascunho reaplicado, proteção de navegação e instalador sobre junção.
 
+Entrega: [PR #76](https://github.com/silasjuba-del/OncoGlobal/pull/76), base na branch do #75 ainda aberto. Após integrar a dependência por decisão humana, retargetar para main e repetir os gates; não mesclar automaticamente na branch intermediária.
+
 Evidências locais em 26/10/2026:
 - `npm run typecheck`: passou.
 - Fronteiras: 604 arquivos, zero exceções; corpus: 241 verificações aprovadas.
 - `npm run ui:build` e build da cópia PDFForge: passaram.
 - Suite M123: 11 arquivos / 56 testes aprovados, incluindo IPC com API Electron simulada e backup/restauração real comparando drafts, eventos e operações.
+- Contratos HTTP: 124 testes aprovados após atualizar o inventário revisado. PDFForge na cópia isolada: 6 arquivos / 132 testes aprovados, incluindo a bateria adversarial existente.
 - `node scripts/test-medico-m123.mjs`: jornada Chromium concluída (round10, sem HMR), evidência local `medico-m123-evidence-YHZhJm/resumo.json`. Cadastro → pré-consulta → importação original/derivado → revisão → conversa HTTP/SSE sintética com cancelamento → dieta → cinco documentos assinados explicitamente → retorno em 14 dias → reinício do SQLite e recuperação. Hash lógico dos documentos: `1e9778073e7fd61c71a7e28463692dee0f49b68fe83440724ddf679fdc478655`.
 - Testes de retorno/assinatura: 34 aprovados. Retorno sem exames agora cria tarefa de retorno após assinatura, sem criar exames ou tarefa de coleta; teste antigo atualizado para esse novo requisito explícito.
 - Backup: produtores novos usam `rawRef=referencia-local` para payload incorporado no SQLite; nenhuma proteção do backup foi relaxada.
 - Inventário HTTP: 110 rotas, preservadas as 91 anteriores e adicionadas 19 rotas deste lote; baseline revisado.
 - Preservação por SHA256: 18 arquivos WIP do checkout principal e 83 originais PDFForge sem divergências do manifesto externo.
+- Reexecução final Chromium após os ajustes de backup: `medico-m123-evidence-oD1VeZ/resumo.json`, `M123_E2E_APROVADO`, hash lógico `9676b2f81ebf8863dab1938587eee7362fad9656f73d02711bb829179e6a71c0`. Revisão independente final estática: nenhum bloqueador concreto, sem equivaler a aprovação clínica.
 
 Limites: smoke Electron nativo não aprovado neste Windows (crash GPU/timeout). Build, mock IPC e importação no Chromium não comprovam o botão desktop. Modelo clínico real não foi instalado/avaliado; o E2E usa transporte real e resposta sintética. Aprovação clínica, merge e produção não são alegados. CI integral/adversarial e nova execução Chromium devem ser conferidos no PR antes da decisão de merge.

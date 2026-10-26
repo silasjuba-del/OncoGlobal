@@ -60,6 +60,3 @@ it("troca de paciente descarta resposta tardia mesmo se o transporte ignorar abo
   await waitFor(() => expect(screen.queryByLabelText("Texto da proposta para revisão")).toBeNull());
   expect(screen.queryByText("Proposta SINTETICA revisável")).toBeNull();
 });
-
-
-

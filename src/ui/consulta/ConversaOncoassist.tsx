@@ -135,4 +135,3 @@ export function ConversaOncoassist({ api, contexto, aoAbrirFonte, aoUsarTexto, a
     {erro ? <p role="alert">{erro}</p> : null}
   </section>;
 }
-
