@@ -64,10 +64,15 @@ describe("U-H9 · prefers-reduced-motion: animações e transições desligam", 
             falhas.push(`${sel}: ausente`);
             continue;
           }
-          const st = window.getComputedStyle(el);
-          const duracoes = st.transitionDuration.split(",").map((s) => s.trim());
-          if (duracoes.some((d) => d !== "0s" && d !== "0ms")) {
-            falhas.push(`${sel}: transitionDuration=${st.transitionDuration}`);
+          for (const pseudo of [null, "::before", "::after"]) {
+            const st = window.getComputedStyle(el, pseudo);
+            if (st.animationName.split(",").some(name => name.trim() !== "none")) {
+              falhas.push(`${sel}${pseudo ?? ""}: animationName=${st.animationName}`);
+            }
+            const duracoes = st.transitionDuration.split(",").map((s) => s.trim());
+            if (duracoes.some((d) => d !== "0s" && d !== "0ms")) {
+              falhas.push(`${sel}${pseudo ?? ""}: transitionDuration=${st.transitionDuration}`);
+            }
           }
         }
         return falhas;

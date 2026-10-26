@@ -1,4 +1,5 @@
-import { useEffect, type ReactNode } from "react";
+import { type ReactNode } from "react";
+import { useDialogoAcessivel } from "./dialogoAcessivel.js";
 import { classeSemaforo } from "../tema/temas.js";
 
 export type OverlayId =
@@ -21,16 +22,10 @@ function Shell({
   onFechar: () => void;
   children: ReactNode;
 }) {
-  useEffect(() => {
-    function k(e: KeyboardEvent) {
-      if (e.key === "Escape") onFechar();
-    }
-    document.addEventListener("keydown", k);
-    return () => document.removeEventListener("keydown", k);
-  }, [onFechar]);
+  const dialogo = useDialogoAcessivel<HTMLDivElement>(onFechar);
 
   return (
-    <div className="oc-ov" role="dialog" aria-label={titulo}>
+    <div ref={dialogo} className="oc-ov" role="dialog" aria-modal="true" aria-label={titulo}>
       <button type="button" className="oc-ov-backdrop" aria-label="Fechar overlay" onClick={onFechar} />
       <div className="oc-ov-card">
         <header className="oc-ov-h">

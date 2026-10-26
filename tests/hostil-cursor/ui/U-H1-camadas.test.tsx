@@ -6,6 +6,10 @@ import { Configuracoes } from "../../../src/ui/oncochart/Configuracoes.js";
 import { ImageViewerOncoAssist } from "../../../src/ui/oncochart/ImageViewerOncoAssist.js";
 import type { ConsultaFlashProps } from "../../../src/ui/consulta/ConsultaFlash.js";
 
+import { OverlayAtivo } from "../../../src/ui/oncochart/Overlays.js";
+import { Jornada3D } from "../../../src/ui/oncochart/Jornada3D.js";
+import { timelineSintetica } from "../../../src/ui/oncochart/timeline-visao.js";
+
 afterEach(cleanup);
 
 const apacBase = {
@@ -85,4 +89,38 @@ describe("U-H1 · diálogos empilhados", () => {
     expect(fecharCfg).toHaveBeenCalledTimes(1);
     expect(fecharFlash).not.toHaveBeenCalled();
   });
+});
+
+for (const inferior of ["overlay", "jornada"] as const) {
+  it(`Configurações cobre ${inferior}: Escape só fecha a camada superior`, () => {
+    const fecharInferior = vi.fn(), fecharCfg = vi.fn();
+    render(<>{inferior === "overlay"
+      ? <OverlayAtivo id="interacoes" onFechar={fecharInferior} onAbrirPaleta={() => {}} />
+      : <Jornada3D visao={timelineSintetica("SINTETICO", "2026-10-05")} onFechar={fecharInferior} />}
+      <Configuracoes tema="dia" onTema={() => {}} onFechar={fecharCfg} /></>);
+    fireEvent.keyDown(document, { key: "Escape" });
+    expect(fecharCfg).toHaveBeenCalledTimes(1);
+    expect(fecharInferior).not.toHaveBeenCalled();
+  });
+}
+
+it("Jornada acima da Flash recebe Escape mesmo aparecendo antes no DOM", () => {
+  const fecharJornada = vi.fn(), fecharFlash = vi.fn();
+  render(<><Jornada3D visao={timelineSintetica("SINTETICO", "2026-10-05")} onFechar={fecharJornada} />
+    <OverlayFlash flash={flashFixture} onFechar={fecharFlash} /></>);
+  screen.getByRole("dialog", { name: "Jornada oncológica 3D" }).style.zIndex = "60";
+  screen.getByRole("dialog", { name: "Consulta Flash" }).style.zIndex = "55";
+  fireEvent.keyDown(document, { key: "Escape" });
+  expect(fecharJornada).toHaveBeenCalledTimes(1);
+  expect(fecharFlash).not.toHaveBeenCalled();
+});
+
+it("Jornada mantém navegação por setas com foco em botão", () => {
+  render(<Jornada3D visao={timelineSintetica("SINTETICO", "2026-10-05")} onFechar={() => {}} />);
+  const parada = () => document.querySelector('[aria-current="true"]')?.textContent;
+  const anterior = parada();
+  const botao = screen.getByRole("button", { name: "Fechar jornada" });
+  botao.focus();
+  fireEvent.keyDown(botao, { key: "ArrowLeft" });
+  expect(parada()).not.toBe(anterior);
 });

@@ -633,7 +633,15 @@
 /* ============ Bento Grid de Dados Mínimos (RevisaoClinica) & Sub-acordeões ============ */
 .revisao-clinica-bento {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 1.15rem;
+}
+
+.revisao-clinica-bento > *,
+.revisao-clinica-topo > * {
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
 }
 
 .revisao-clinica-topo {

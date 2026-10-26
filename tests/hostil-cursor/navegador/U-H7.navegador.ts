@@ -2,10 +2,25 @@
 // Uso: npx vitest run --config tests/hostil-cursor/navegador/vitest.config.ts
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
-import { describe, expect, it } from "vitest";
+import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { chromium } from "playwright";
+import { createServer } from "vite";
 
 describe("U-H7 · layout em 320 px, 768 px, 1280 px e zoom 200% sem rolagem horizontal nem alvo < 24x24 px", () => {
+  let server: Awaited<ReturnType<typeof createServer>>;
+  let browser: Awaited<ReturnType<typeof chromium.launch>>;
+  let url: string;
+  beforeAll(async () => {
+    server = await createServer({ configFile: false, root: process.cwd(), server: { host: "127.0.0.1", port: 0 } });
+    await server.listen();
+    url = server.resolvedUrls!.local[0]! + "tests/hostil-cursor/navegador/layout.html";
+    browser = await chromium.launch({ headless: true });
+    const page = await browser.newPage();
+    await page.goto(url);
+    await page.getByRole("group", { name: "Filtrar dados da ficha" }).waitFor();
+    await page.close();
+  });
+  afterAll(async () => { await browser?.close(); await server?.close(); });
   it("Playwright em 320 px, 768 px, 1280 px e zoom 200%: sem rolagem horizontal da página e alvos >= 24x24 px", async () => {
     const baseCss = readFileSync(join(process.cwd(), "src/ui/tema/base.css"), "utf8");
     const tokensCss = readFileSync(join(process.cwd(), "src/ui/tema/tokens.css"), "utf8");
@@ -84,9 +99,9 @@ describe("U-H7 · layout em 320 px, 768 px, 1280 px e zoom 200% sem rolagem hori
 </body>
 </html>`;
 
-    const browser = await chromium.launch({ headless: true });
+    const page = await browser.newPage();
     try {
-      const page = await browser.newPage();
+
       for (const vp of [
         { width: 320, height: 640, zoom: 1 },
         { width: 768, height: 1024, zoom: 1 },
@@ -117,9 +132,29 @@ describe("U-H7 · layout em 320 px, 768 px, 1280 px e zoom 200% sem rolagem hori
           `Overflow horizontal em ${vp.width}px (zoom ${vp.zoom * 100}%): scrollWidth=${medidas.scrollWidth} > clientWidth=${medidas.clientWidth}`,
         ).toBeLessThanOrEqual(medidas.clientWidth);
         expect(medidas.botoesMenores24).toEqual([]);
+        await page.goto(url);
+        await page.getByRole("group", { name: "Filtrar dados da ficha" }).waitFor();
+        await page.evaluate(z => { document.documentElement.style.zoom = String(z); }, vp.zoom);
+        const defeitos = await page.evaluate(() => {
+          const erros: string[] = [];
+          if (document.documentElement.scrollWidth > document.documentElement.clientWidth) erros.push("overflow da página: " + [...document.querySelectorAll("body *")].filter(el => el.getBoundingClientRect().right > innerWidth + 1).map(el => el.className).join(","));
+          const controles = [...document.querySelectorAll<HTMLElement>(".consulta-appbar button, .oc21-segmented button")];
+          for (const el of controles) {
+            const r = el.getBoundingClientRect();
+            if (el.scrollWidth > el.clientWidth + 1 || el.scrollHeight > el.clientHeight + 1) erros.push(`texto cortado: ${el.textContent}`);
+            if (r.width < 24 || r.height < 24) erros.push(`alvo pequeno: ${el.textContent}`);
+          }
+          for (let i = 0; i < controles.length; i++) for (let j = i + 1; j < controles.length; j++) {
+            const a = controles[i]!.getBoundingClientRect(), b = controles[j]!.getBoundingClientRect();
+            if (Math.min(a.right,b.right) - Math.max(a.left,b.left) > 1 && Math.min(a.bottom,b.bottom) - Math.max(a.top,b.top) > 1)
+              erros.push(`sobreposição: ${controles[i]!.textContent} / ${controles[j]!.textContent}`);
+          }
+          return erros;
+        });
+        expect(defeitos, `componentes reais: ${vp.width}px zoom ${vp.zoom}`).toEqual([]);
       }
     } finally {
-      await browser.close();
+      await page.close();
     }
   });
 });

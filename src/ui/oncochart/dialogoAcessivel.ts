@@ -3,12 +3,16 @@ import { useEffect, useRef } from "react";
 const FOCAVEIS = 'a[href],button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])';
 
 /**
- * Camada do topo = último diálogo do documento (nas telas, a ordem no DOM acompanha o z-index).
+ * A camada com maior z-index recebe o teclado; empates seguem a ordem do DOM.
  * Uma camada coberta não reage a Esc nem a Tab; senão um Esc fecharia duas camadas de uma vez.
  */
 export function camadaCoberta(raiz: Element): boolean {
-  const dialogos = document.querySelectorAll('[role="dialog"]');
-  const topo = dialogos[dialogos.length - 1];
+  const dialogos = [...document.querySelectorAll<HTMLElement>('[role="dialog"]')]
+    .filter(el => !el.hidden && getComputedStyle(el).display !== "none" && getComputedStyle(el).visibility !== "hidden");
+  const topo = dialogos.reduce<HTMLElement | undefined>((atual, el) => {
+    const z = (item: HTMLElement) => Number.parseInt(getComputedStyle(item).zIndex, 10) || 0;
+    return !atual || z(el) >= z(atual) ? el : atual;
+  }, undefined);
   return !!topo && topo !== raiz && !topo.contains(raiz);
 }
 
