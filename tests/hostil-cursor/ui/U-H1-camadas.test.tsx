@@ -124,3 +124,24 @@ it("Jornada mantém navegação por setas com foco em botão", () => {
   fireEvent.keyDown(botao, { key: "ArrowLeft" });
   expect(parada()).not.toBe(anterior);
 });
+
+it("abrir Flash abaixo da Jornada não rouba foco; fechar Jornada foca Flash", () => {
+  const view = render(<><style>{`.oc-j3 { z-index:60 } .oc-ov { z-index:55 }`}</style>
+    <Jornada3D visao={timelineSintetica("SINTETICO", "2026-10-05")} onFechar={() => {}} />
+    <OverlayFlash flash={flashFixture} onFechar={() => {}} /></>);
+  const jornada = screen.getByRole("dialog", { name: "Jornada oncológica 3D" });
+  expect(document.activeElement).toBe(jornada);
+  view.rerender(<><style>{`.oc-j3 { z-index:60 } .oc-ov { z-index:55 }`}</style>
+    {null}<OverlayFlash flash={flashFixture} onFechar={() => {}} /></>);
+  expect(screen.getByRole("dialog", { name: "Consulta Flash" }).contains(document.activeElement)).toBe(true);
+});
+
+it("Espaço no foco inicial da Jornada inicia tour sem fechar o diálogo", () => {
+  const fechar = vi.fn();
+  render(<Jornada3D visao={timelineSintetica("SINTETICO", "2026-10-05")} onFechar={fechar} />);
+  const jornada = screen.getByRole("dialog", { name: "Jornada oncológica 3D" });
+  expect(document.activeElement).toBe(jornada);
+  fireEvent.keyDown(jornada, { key: " " });
+  expect(fechar).not.toHaveBeenCalled();
+  expect(screen.getByRole("button", { name: /pausar/i })).toBeTruthy();
+});

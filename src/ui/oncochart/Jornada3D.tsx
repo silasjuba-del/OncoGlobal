@@ -40,7 +40,7 @@ export function Jornada3D({
   const [tour, setTour] = useState(false);
   const [reduzir] = useState(preferReducedMotion);
   const camEl = useRef<HTMLDivElement>(null);
-  const dialogo = useDialogoAcessivel<HTMLDivElement>(onFechar);
+  const dialogo = useDialogoAcessivel<HTMLDivElement>(onFechar, true);
   const cam = useRef({ x: 0, yaw: -10, tilt: -26, dist: 650 });
   const tgt = useRef({ ...cam.current });
 
@@ -127,7 +127,7 @@ export function Jornada3D({
   const totalCaixasEstimado = boxCountBars + boxCountStops + 20; // chart separado
 
   return (
-    <div ref={dialogo} className="oc-j3" role="dialog" aria-modal="true" aria-label="Jornada oncológica 3D" data-reduced={reduzir ? "1" : "0"}>
+    <div ref={dialogo} tabIndex={-1} className="oc-j3" role="dialog" aria-modal="true" aria-label="Jornada oncológica 3D" data-reduced={reduzir ? "1" : "0"}>
       <button type="button" className="oc-j3-backdrop" aria-label="Fechar jornada" onClick={onFechar} />
       <div className="oc-j3-panel">
         <div className="oc-j3-scene">
