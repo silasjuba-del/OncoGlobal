@@ -46,7 +46,7 @@ export function useDialogoAcessivel<T extends HTMLElement>(aoFechar: () => void,
       if (!itens.length) { e.preventDefault(); raiz.focus(); return; }
       const primeiro = itens[0]!, ultimo = itens[itens.length - 1]!;
       const ativo = document.activeElement;
-      if (e.shiftKey && (ativo === primeiro || !raiz.contains(ativo))) { e.preventDefault(); ultimo.focus(); }
+      if (e.shiftKey && (ativo === raiz || ativo === primeiro || !raiz.contains(ativo))) { e.preventDefault(); ultimo.focus(); }
       else if (!e.shiftKey && (ativo === ultimo || !raiz.contains(ativo))) { e.preventDefault(); primeiro.focus(); }
     };
     document.addEventListener("keydown", aoTeclar);

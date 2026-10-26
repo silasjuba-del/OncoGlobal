@@ -145,3 +145,12 @@ it("Espaço no foco inicial da Jornada inicia tour sem fechar o diálogo", () =>
   expect(fechar).not.toHaveBeenCalled();
   expect(screen.getByRole("button", { name: /pausar/i })).toBeTruthy();
 });
+
+it("Shift+Tab no foco inicial da Jornada circula para o último controle", () => {
+  render(<Jornada3D visao={timelineSintetica("SINTETICO", "2026-10-05")} onFechar={() => {}} />);
+  const jornada = screen.getByRole("dialog", { name: "Jornada oncológica 3D" });
+  const ultimo = [...jornada.querySelectorAll<HTMLButtonElement>("button:not(:disabled)")].at(-1);
+  expect(document.activeElement).toBe(jornada);
+  expect(fireEvent.keyDown(jornada, { key: "Tab", shiftKey: true })).toBe(false);
+  expect(document.activeElement).toBe(ultimo);
+});
