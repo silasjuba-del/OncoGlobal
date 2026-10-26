@@ -1,6 +1,6 @@
 # Consulta confiável de ponta a ponta — plano de refatoração
 
-Estado: EM EXECUÇÃO. Autorizado por Silas em 2026-10-26; entrega por PR, sem merge automático.
+Estado: IMPLEMENTADO, EM VALIDAÇÃO DE CI. Autorizado por Silas em 2026-10-26; entrega pelo [PR #75](https://github.com/silasjuba-del/OncoGlobal/pull/75), sem merge automático. A descrição e os checks do PR registram o estado posterior deste marco.
 Base: `2c0b652a35b9b892936591649efd0cc5ad582468` (PR #74 integrado).
 Branch: `codex/consulta-confiavel-e2e`.
 
@@ -60,9 +60,12 @@ O checkout principal pode estar em uma base anterior com WIP; ele não deve ser 
 ### Marco de integração
 
 - ORK: avaliação extraída em `conclusao.ts`; Maestro declara política e devolve cópias isoladas. O diagnóstico é retornado em memória pelo ORK, sem payload clínico; o runtime existente não passa a persistir esse diagnóstico.
-- Camadas: cinco falhas reproduzidas na base em sete cenários iniciais; controlador único em implementação/validação. Ajuste de setup em U-H1 abre o `details` antes de focar um campo; a asserção permanece e há regressão para campo fechado versus aberto.
+- Camadas: cinco falhas reproduzidas na base em sete cenários iniciais; controlador único aprovado em testes focados e Chromium real. Ajuste de setup em U-H1 abre o `details` antes de focar um campo; a asserção permanece e há regressão para campo fechado versus aberto.
 - CI: shell do gate testado com `BROWSER_RESULT=success/failure/cancelled/skipped`; somente sucesso aprovou.
-- Primeira jornada integrada aprovada: fonte revisada, quatro documentos sintéticos, falha de rede com texto preservado, um salvamento sob reentrada e mesmo hash lógico após reinício. Evidência local fora do Git: `s12-b2-evidence-dY5Owy/resumo.json` no Temp. Segunda rodada acrescenta repetição da confirmação e identificadores de eventos validados.
-- Revisão independente ORK/CI: sem bloqueios, condicionada às provas integradas. Revisão de camadas em andamento.
+- Jornada final aprovada com HTTP e SQLite reais: quatro documentos sintéticos, uma operação de salvar e uma de confirmar sob repetição, zero assinaturas após a prévia, mesmos IDs/hash lógico depois do reinício, fonte original reaberta pela UI com trecho, data literal e vínculo. Evidência local fora do Git: `s12-b2-evidence-BUS64T/resumo.json` no Temp; hash lógico dos documentos antes/depois `1287c1058f1044c39ddfd7d6ac5209856d0f59f6ed40f0b4262c8a0244271bea`.
+- Verificação integrada local: typecheck aprovado, fronteiras 587 arquivos/zero exceções, corpus 241 arquivos; 24 arquivos/113 testes focados aprovados. `npm run test:b2` final aprovado, incluindo jornadas anteriores.
+- Revisões independentes ORK/CI e UI/E2E: sem bloqueios remanescentes. Duas lacunas de prova apontadas na revisão foram corrigidas e executadas: ausência de assinatura depois da prévia e recuperação explícita da fonte depois do reinício.
 
-Próxima ação: concluir provas de navegador de camadas, consolidar testes locais e CI integral; registrar evidência final e abrir PR sem merge.
+Limites: diagnóstico ORK em memória; controlador de camadas restrito aos contextos CSS documentados no módulo; prova clínica sintética local, sem impressão física, serviço externo ou troca de paciente durante uma resposta retida. A fonte recupera a data literal do documento; a prova não inventa nem promove uma data clínica estruturada ausente.
+
+Próxima ação de entrega: conferir a suíte integral/adversarial e Chromium no CI do PR; apresentar o resultado para decisão de merge do Dr. Silas. Nenhum merge está autorizado neste lote.
