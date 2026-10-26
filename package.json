@@ -18,7 +18,8 @@
     "oncoassist:local": "node scripts/iniciar-oncoassist.mjs",
     "ui:build": "vite build",
     "test:f1": "vitest run --config tests/adv/vitest.f1.config.ts",
-    "verify:f1": "npm run check:boundaries:fechar-f1-s3 && npm run test:f1"
+    "verify:f1": "npm run check:boundaries:fechar-f1-s3 && npm run test:f1",
+    "test:medico-m123": "node scripts/test-medico-m123.mjs"
   },
   "repository": {
     "type": "git",

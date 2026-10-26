@@ -208,7 +208,7 @@ function confirmarBlocoNaTransacao(deps: ServidorDeps, token: string, input: Con
   // Marcador e tarefa pertencem à mesma operação da assinatura e não são HTTP input.
   const referencias = z.object({documentId:Id,documentVersion:z.number().int().positive()}).strict();
   const tarefaRefSchema=z.object({tarefaId:Id,contexto:z.object({patientId:Id,encounterId:Id,tumorLotId:Id.nullable()}).strict(),
-    documentoRef:referencias,pedidosRef:z.array(referencias).min(1),dataAlvo:DataCivil,motivo:z.string().nullable()}).strict();
+    documentoRef:referencias,pedidosRef:z.array(referencias),dataAlvo:DataCivil,motivo:z.string().nullable()}).strict();
   let tarefaReferenciaInvalida=false;
   const tarefas=drafts.flatMap(d=>{
     const p=d!.payload as Record<string,unknown>;
@@ -243,7 +243,7 @@ function confirmarBlocoNaTransacao(deps: ServidorDeps, token: string, input: Con
     if(existente&&existente.operationId!==input.idempotencyKey)continue;
     const indice=refs.findIndex(d=>d.documentId===t.documentoRef.documentId&&d.documentVersion===t.documentoRef.documentVersion);
     auxiliares.push({draftId:`flash-tarefa-assinada-${sha(t.tarefaId)}`,eventId:sha(`${input.idempotencyKey}:tarefa:${t.tarefaId}`),tipo:"Tarefa",
-      payload:{tarefaId:t.tarefaId,...contexto,operationId:input.idempotencyKey,titulo:"Retorno e exames de controle",responsavel:sessao.medicoId,
+      payload:{tarefaId:t.tarefaId,...contexto,operationId:input.idempotencyKey,titulo:t.pedidosRef.length?"Retorno e exames de controle":"Retorno médico",responsavel:sessao.medicoId,
         prazo:null,estado:"CONFIRMADA",recebidoEm:null,criadoPor:sessao.medicoId,substituiTarefaId:null,dataAlvo:t.dataAlvo,pedidoRefs:t.pedidosRef,
         retornoRef:t.documentoRef,geradaPorEventoId:registros[indice]!.eventId,rulesetVersao:"documentos-consulta@1"}});
   }

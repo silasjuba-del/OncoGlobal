@@ -25,7 +25,7 @@ it("confirmação HTTP de laboratório atualiza irmã consulta automaticamente; 
  const http=globalThis.fetch,base=ambiente.baseUrl;
  vi.stubGlobal("fetch",(input:Parameters<typeof fetch>[0],init?:Parameters<typeof fetch>[1])=>http(typeof input==="string"&&input.startsWith("/")?`${base}${input}`:input,init));
  let porta!:ReturnType<typeof criarPortaHttp>;let recargas=0;let liberar: (()=>void)|undefined;
- render(<OncoassistLocal fabricaPorta={opcoes=>{
+ render(<OncoassistLocal perfil="LEGADO" fabricaPorta={opcoes=>{
   porta=criarPortaHttp(opcoes);const original=porta.carregarConsulta.bind(porta);
   porta.carregarConsulta=async(...args)=>{recargas++;if(recargas===4)await new Promise<void>(r=>{liberar=r;});return original(...args);};return porta;
  }} />);

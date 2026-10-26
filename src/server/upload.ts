@@ -41,7 +41,8 @@ export async function processarUploadLocal(deps:DepsUpload,token:string,sessao:S
   if(bytes.toString("base64")!==base64)return {status:400,body:{codigo:"UPLOAD_BASE64_INVALIDO"}};
   if(!bytes.length||bytes.length>MAX_BYTES)return {status:413,body:{codigo:"UPLOAD_LIMITE_8MB"}};
   const contentHash=hash(bytes),draftId=`upload-${hash(JSON.stringify([ctx,p.data.id,p.data.sourceId])).slice(0,40)}`;
-  const existente=lerDraft(deps.db,draftId);
+  const replay = (): {status:number;body:Record<string,unknown>} | null => {
+    const existente=lerDraft(deps.db,draftId);
   if(existente){const payload=existente.payload as Record<string,unknown>,original=payload.original as Record<string,unknown>|undefined;
     const input=payload.input as Record<string,unknown>|undefined;
     if(original?.contentHash!==contentHash||original.tipo!==p.data.tipo||input?.sourceType!==p.data.sourceType)return {status:409,body:{codigo:"UPLOAD_ID_CONFLITANTE"}};
@@ -50,6 +51,9 @@ export async function processarUploadLocal(deps:DepsUpload,token:string,sessao:S
       conversionStatus:original.status==="PRONTO"?"PRONTO":"PENDENTE",motivo:typeof original.motivo==="string"?original.motivo:null,
       paginasPendentes:documento?.paginasPendentes??[],totalPaginas:documento?.totalPaginas??null}};
   }
+    return null;
+  };
+  const anterior = replay(); if (anterior) return anterior;
   const recebidoEm=deps.agora(),entrada:EntradaLeitura={id:p.data.id,tipo:p.data.tipo==="PDF"?"PDF_DIGITAL":"IMAGEM",conteudo:new Uint8Array(bytes),recebidoEm};
   const config=configuracaoOcrInstalada();
   let leitura:ResultadoLeitura;
@@ -57,6 +61,13 @@ export async function processarUploadLocal(deps:DepsUpload,token:string,sessao:S
     :p.data.tipo==="PDF"?await converterPdfLocal(entrada,config?{ocrConfig:config}:{})
     :config?await ocrLocal(entrada,config):{status:"PENDENTE",documento:{id:entrada.id,tipo:entrada.tipo,paginas:[],hash:contentHash,recebidoEm},motivo:"OCR_LOCAL_SEM_ASSETS"};}
   catch {leitura={status:"PENDENTE",documento:{id:entrada.id,tipo:entrada.tipo,paginas:[],hash:contentHash,recebidoEm},motivo:"CONVERSAO_LOCAL_PENDENTE"};}
+  // Conversão pode aguardar OCR. A sessão/contexto não conservam autoridade durante essa espera.
+  const sessaoAtual=deps.sessoes.obter(token),contextoAtual=deps.sessoes.consultaSelecionada(token);
+  if(!sessaoAtual||sessaoAtual.medicoId!==sessao.medicoId)return {status:401,body:{codigo:"SESSAO_EXPIRADA"}};
+  if(!contextoAtual||contextoAtual.patientId!==ctx.patientId||contextoAtual.encounterId!==ctx.encounterId
+    ||contextoAtual.tumorLotId!==ctx.tumorLotId)return {status:409,body:{codigo:"CONTEXTO_UPLOAD_DIVERGENTE"}};
+  // Outra requisição pode ter gravado o mesmo upload enquanto a conversão estava em curso.
+  const concorrente=replay();if(concorrente)return concorrente;
   const textoIntegral=leitura.documento.paginas.map(p=>p.texto).join("\n");
   if(textoIntegral.length>200_000)leitura={status:"PENDENTE",documento:leitura.documento,motivo:"TEXTO_LIMITE_PIPELINE_REVISAR_ORIGINAL"};
   const rawTranscript=textoIntegral.length>200_000?"":textoIntegral;

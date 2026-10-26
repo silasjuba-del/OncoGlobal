@@ -1,3 +1,4 @@
+import { LIMITE_TEXTO_DOCUMENTO_MANUAL } from "../../contracts/api/flash.js";
 import { doseReceitaPendente } from '../../contracts/f1/receitaDose.js';
 import type { PropostaDoseReceita } from '../../contracts/api/propostaDoseReceita.js';
 import type { SituacaoExame, ExameRecenteFlash, ItemFlash, EstadoApacFlash, ApacFlash, RetornoFlash, TarefasRetornoFlash, ConsultaFlashProps, PlanoFlash,ReceitaManualFlash,DocumentoManualFlash } from '../../contracts/api/flash.js';
@@ -38,7 +39,21 @@ const camposReceita = [["medicamento", "Medicamento"], ["dose", "Dose"], ["orien
 export function ConsultaFlash(props: ConsultaFlashProps) {
   const { cabecalho: c, planoInicial: inicial } = props;
   const [documentos,setDocumentos]=useState<DocumentoManualFlash[]>(()=>structuredClone([...(inicial?.documentosManuais??[])]));
-  const documentoInvalido=documentos.some(d=>!d.titulo.trim()||!d.texto.trim()||d.tipo==='ENCAMINHAMENTO'&&!d.destino?.trim());
+  const propostaAplicada = useRef<string | null>(null);
+  const [propostaConflitante,setPropostaConflitante]=useState<DocumentoManualFlash|null>(null);
+  const pendenteAtual = useRef(props.aoAlterarPendente); pendenteAtual.current = props.aoAlterarPendente;
+  useEffect(() => {
+    const p = props.documentoProposto;
+    if (!p || propostaAplicada.current === p.solicitacaoId) return;
+    propostaAplicada.current = p.solicitacaoId;
+    const { solicitacaoId: _id, ...documento } = p;
+    const existente = documentos.find(d=>d.id===documento.id);
+    if(existente && JSON.stringify(existente)!==JSON.stringify(documento)) setPropostaConflitante(documento);
+    else setDocumentos(atuais => [...atuais.filter(d => d.id !== documento.id), documento]);
+    props.aoConsumirDocumentoProposto?.(p.solicitacaoId);
+  }, [props.documentoProposto,props.aoConsumirDocumentoProposto]);
+  useEffect(() => () => pendenteAtual.current?.(false), []);
+  const documentoInvalido=!!propostaConflitante||documentos.some(d=>!d.titulo.trim()||!d.texto.trim()||d.tipo==='ENCAMINHAMENTO'&&!d.destino?.trim());
   const selecaoInicial = inicial ? inicial.solicitacoes : props.modeloSolicitacoes;
   const [labs, setLabs] = useState<string[]>(() => selecaoInicial?.laboratorio.filter(x => LAB.includes(x)) ?? []);
   const [rad, setRad] = useState<string[]>(() => selecaoInicial?.imagem.filter(x => RAD.includes(x)) ?? []);
@@ -101,6 +116,10 @@ export function ConsultaFlash(props: ConsultaFlashProps) {
       tarefasRetorno: { retorno: true, laboratorio: laboratorio.length > 0, imagem: imagem.length > 0 },
       solicitacoes: { laboratorio, imagem }, decisaoQt: { solicitarCiclo: ciclo, data: data || null } };
   }
+  const estadoEditado = JSON.stringify(plano());
+  const estadoSalvo = useRef(estadoEditado);
+  useEffect(() => { estadoSalvo.current = estadoEditado; pendenteAtual.current?.(false); }, [props.revisaoSalva]);
+  useEffect(() => { pendenteAtual.current?.(!!propostaConflitante || estadoEditado !== estadoSalvo.current); }, [estadoEditado, props.revisaoSalva, propostaConflitante]);
   function selecao(titulo: string, nomes: string[], valores: string[], alterar: (v: string[]) => void, outros: string, alterarOutros: (v: string) => void, rotulo: string) {
     const todos = nomes.every(x => valores.includes(x));
     return <section className="flash-coluna" aria-label={rotulo}>
@@ -111,6 +130,13 @@ export function ConsultaFlash(props: ConsultaFlashProps) {
   }
   return <section className="consulta-flash" aria-label="Conteúdo da Consulta Flash">
     <header className="flash-cabecalho"><strong>Consulta Flash</strong>{props.pacienteNome && <span>{props.pacienteNome}</span>}{props.aoAbrirApac && <button type="button" onClick={props.aoAbrirApac}>Abrir APAC ↗</button>}</header>
+    {propostaConflitante && <section role="alert" aria-label="Revisar substituição de documento">
+      <h3>Já existe um texto revisado neste documento</h3><p>Compare antes de substituir. Nenhum texto foi sobrescrito.</p>
+      <details><summary>Comparar os textos</summary><h4>Texto atual</h4><pre style={{whiteSpace:"pre-wrap"}}>{documentos.find(d=>d.id===propostaConflitante.id)?.texto}</pre>
+        <h4>Texto proposto</h4><pre style={{whiteSpace:"pre-wrap"}}>{propostaConflitante.texto}</pre></details>
+      <button type="button" onClick={()=>setPropostaConflitante(null)}>Manter texto atual</button>
+      <button type="button" onClick={()=>{setDocumentos(atuais=>[...atuais.filter(d=>d.id!==propostaConflitante.id),propostaConflitante]);setPropostaConflitante(null);}}>Substituir pelo texto proposto</button>
+    </section>}
     <div className="flash-corpo">
       <section aria-label="Revisão rápida"><h3>DIAGNÓSTICO</h3><p className="flash-diagnostico">{presente(c.diagnostico)} · TNM {presente(c.tnm)} · Estádio {presente(c.estadio)}</p>
         <p className="flash-evidencias" aria-label="Biópsia e imagem">{props.exames.length ? props.exames.map(e => `${e.data} · ${e.nome}: ${e.fraseLaudo || "PENDENTE"}`).join(" | ") : "Biópsia e imagem: PENDENTE"}</p>
@@ -167,7 +193,7 @@ export function ConsultaFlash(props: ConsultaFlashProps) {
               onChange={e=>setDocumentos(atuais=>atuais.map(a=>a.id===d.id?{...a,titulo:e.target.value}:a))}/></label>
             {d.tipo==='ENCAMINHAMENTO'?<label>Destino <input aria-label={`Destino do encaminhamento ${i+1}`} placeholder="Especialidade ou serviço" value={d.destino??''} maxLength={200}
               onChange={e=>setDocumentos(atuais=>atuais.map(a=>a.id===d.id?{...a,destino:e.target.value}:a))}/></label>:null}
-            <label>Conteúdo escrito pelo médico <textarea aria-label={`Conteúdo do documento ${i+1}`} value={d.texto} maxLength={8000}
+            <label>Conteúdo escrito pelo médico <textarea aria-label={`Conteúdo do documento ${i+1}`} value={d.texto} maxLength={LIMITE_TEXTO_DOCUMENTO_MANUAL}
               onChange={e=>setDocumentos(atuais=>atuais.map(a=>a.id===d.id?{...a,texto:e.target.value}:a))}/></label>
             <button type="button" onClick={()=>setDocumentos(atuais=>atuais.filter(a=>a.id!==d.id))}>Remover documento {i+1}</button>
           </section>)}
@@ -178,7 +204,7 @@ export function ConsultaFlash(props: ConsultaFlashProps) {
         </fieldset>
       </details>
     </div>
-    <footer className="flash-rodape"><label>Retorno em <input type="number" aria-label="Prazo do retorno em dias" min={1} max={3650} value={prazo} disabled={props.ocupado} aria-invalid={invalido} onChange={e => setPrazo(e.target.value)} /> dias</label><div><button type="button" disabled={props.ocupado || invalido} onClick={() => props.aoSalvarRascunho(plano())}>SALVAR RASCUNHO</button><button type="button" disabled={props.ocupado || invalido || documentoInvalido || dosePendente} onClick={() => props.aoFinalizar(plano())}>{props.rotuloFinalizar ?? "REVISAR · IMPRIMIR"}</button></div></footer>
+    <footer className="flash-rodape"><label>Retorno em <input type="number" aria-label="Prazo do retorno em dias" min={1} max={3650} value={prazo} disabled={props.ocupado} aria-invalid={invalido} onChange={e => setPrazo(e.target.value)} /> dias</label><div><button type="button" disabled={props.ocupado || invalido || !!propostaConflitante} onClick={() => props.aoSalvarRascunho(plano())}>SALVAR RASCUNHO</button><button type="button" disabled={props.ocupado || invalido || documentoInvalido || dosePendente} onClick={() => props.aoFinalizar(plano())}>{props.rotuloFinalizar ?? "REVISAR · IMPRIMIR"}</button></div></footer>
     {dosePendente&&<p role="status">Dose pendente: a receita permanece em rascunho. Complete e valide a dose antes de assinar.</p>}
     {prazoInvalido && <p role="alert">Informe um número inteiro entre 1 e 3650 dias, ou deixe vazio para PENDENTE.</p>}
     {receitaInvalida && <p role="alert">Informe o medicamento ou remova a linha para continuar. Os outros campos serão preservados.</p>}

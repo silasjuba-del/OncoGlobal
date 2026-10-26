@@ -1,3 +1,6 @@
+import type { ApiDocumental } from "./importacaoDocumental.js";
+import type { ApiConsultorioMedico } from "./consultorioMedico.js";
+import type { ApiConversaOncoassist } from "./conversaOncoassist.js";
 import type { PropostaDoseReceita } from './propostaDoseReceita.js';
 import type { ImportarEstudoPedido, RevisarEstudoPedido, AvaliarEstudoPedido, EstudoServico,
   ListarEstudosResposta, AvaliacaoEstudoResposta, FatosTrialsResposta } from "./trialsServico.js";
@@ -338,6 +341,9 @@ export interface ChatSetorVisao {
 }
 
 export interface PortaConsulta {
+  documental?: ApiDocumental;
+  consultorio?: ApiConsultorioMedico;
+  assistente?: ApiConversaOncoassist;
   aceitarDecisaoChat?(pedido:{contexto:{patientId:string;encounterId:string;tumorLotId:string|null;operationId:string};mensagemId:string;decisao:{campo:"observacao";valor:string}},signal?:AbortSignal):Promise<{codigo:"GRAVADA"|"REPLAY";eventId:string}>;
   recuperarConfirmacao?(pedido:import('./recuperacaoConfirmacao.js').ConfirmacaoPendente & {cancelar?:true}):Promise<import('./recuperacaoConfirmacao.js').RecuperacaoConfirmacao>;
   documentoImpressao?(pedido:{patientId:string;encounterId:string;tumorLotId:string|null;documentId:string;documentVersion:number}):Promise<{html:string}>;

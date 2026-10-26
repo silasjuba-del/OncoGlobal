@@ -98,7 +98,26 @@ export const ROTAS_HTTP = [
   {"url":"/salao/registrar-administracao","nome":"/salao/registrar-administracao","processamento":"PENDENCIAS_E_MOTOR","grupo":"DUTOS"},
   {"url":"/salao/revisar-relato-canal","nome":"/salao/revisar-relato-canal","processamento":"PENDENCIAS_E_MOTOR","grupo":"DUTOS"},
   {"url":"/tarefas/concluir","nome":"/tarefas/concluir","processamento":"PENDENCIAS_E_MOTOR","grupo":"DUTOS"},
-  {"url":"/tarefas/receber","nome":"/tarefas/receber","processamento":"PENDENCIAS_E_MOTOR","grupo":"DUTOS"}
+  {"url":"/tarefas/receber","nome":"/tarefas/receber","processamento":"PENDENCIAS_E_MOTOR","grupo":"DUTOS"},
+  {"url":"/consulta/documental/importar","nome":"/consulta/documental/importar","processamento":"NENHUM","grupo":"CONSULTA"},
+  {"url":"/consulta/documental/listar","nome":"/consulta/documental/listar","processamento":"NENHUM","grupo":"CONSULTA"},
+  {"url":"/consulta/documental/abrir","nome":"/consulta/documental/abrir","processamento":"NENHUM","grupo":"CONSULTA"},
+  {"url":"/medico/agenda","nome":"/medico/agenda","processamento":"NENHUM","grupo":"CONSULTA"},
+  {"url":"/medico/paciente/cadastrar","nome":"/medico/paciente/cadastrar","processamento":"PENDENCIAS_E_MOTOR","grupo":"CONSULTA"},
+  {"url":"/medico/agenda/agendar","nome":"/medico/agenda/agendar","processamento":"PENDENCIAS_E_MOTOR","grupo":"CONSULTA"},
+  {"url":"/medico/agenda/alterar","nome":"/medico/agenda/alterar","processamento":"PENDENCIAS_E_MOTOR","grupo":"CONSULTA"},
+  {"url":"/medico/preconsulta","nome":"/medico/preconsulta","processamento":"NENHUM","grupo":"CONSULTA"},
+  {"url":"/medico/preconsulta/salvar","nome":"/medico/preconsulta/salvar","processamento":"NENHUM","grupo":"CONSULTA"},
+  {"url":"/medico/preconsulta/confirmar","nome":"/medico/preconsulta/confirmar","processamento":"PENDENCIAS_E_MOTOR","grupo":"CONSULTA"},
+  {"url":"/medico/nutricao","nome":"/medico/nutricao","processamento":"NENHUM","grupo":"CONSULTA"},
+  {"url":"/medico/nutricao/salvar","nome":"/medico/nutricao/salvar","processamento":"NENHUM","grupo":"CONSULTA"},
+  {"url":"/consulta/assistente/historico","nome":"/consulta/assistente/historico","processamento":"NENHUM","grupo":"CONSULTA"},
+  {"url":"/consulta/assistente/configurar","nome":"/consulta/assistente/configurar","processamento":"NENHUM","grupo":"CONSULTA"},
+  {"url":"/consulta/assistente/responder","nome":"/consulta/assistente/responder","processamento":"NENHUM","grupo":"CONSULTA"},
+  {"url":"/consulta/assistente/responder-stream","nome":"/consulta/assistente/responder-stream","processamento":"NENHUM","grupo":"CONSULTA"},
+  {"url":"/consulta/assistente/cancelar","nome":"/consulta/assistente/cancelar","processamento":"NENHUM","grupo":"CONSULTA"},
+  {"url":"/medico/paciente/ler","nome":"/medico/paciente/ler","processamento":"NENHUM","grupo":"CONSULTA"},
+  {"url":"/medico/paciente/alterar","nome":"/medico/paciente/alterar","processamento":"PENDENCIAS_E_MOTOR","grupo":"CONSULTA"},
 ] as const;
 const porUrl = new Map<string, (typeof ROTAS_HTTP)[number]>(ROTAS_HTTP.map(r=>[r.url,r]));
 export function rotaHttp(url:string|undefined) { return porUrl.get(url??'')??null; }

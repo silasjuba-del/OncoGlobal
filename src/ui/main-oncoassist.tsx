@@ -4,4 +4,5 @@ import "./tema/base.css";
 import { OncoassistLocal } from "./OncoassistLocal.js";
 
 const root = document.getElementById("root");
-if (root) createRoot(root).render(<OncoassistLocal />);
+const perfilLegado = (import.meta as ImportMeta & { env?: { VITE_ONCOGLOBAL_PERFIL?: string } }).env?.VITE_ONCOGLOBAL_PERFIL === "LEGADO";
+if (root) createRoot(root).render(<OncoassistLocal perfil={perfilLegado ? "LEGADO" : "MEDICO"} />);

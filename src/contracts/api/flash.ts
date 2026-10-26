@@ -1,5 +1,6 @@
 import type { PropostaDoseReceita } from './propostaDoseReceita.js';
 import type { MarcacaoTarefasRetorno } from './tarefas.js';
+export const LIMITE_TEXTO_DOCUMENTO_MANUAL = 8000;
 
 export type SituacaoExame = "DENTRO_DO_LIMITE" | "FORA_DO_LIMITE" | "SEM_REFERENCIA";
 
@@ -16,6 +17,10 @@ export interface RetornoFlash { dias: number | null; motivo?: string; examesAnte
 export interface TarefasRetornoFlash { modeloPadraoSalvo: boolean; retorno: ItemFlash; laboratorio: ItemFlash; imagem: ItemFlash }
 
 export interface ConsultaFlashProps {
+  documentoProposto?: DocumentoManualFlash & { solicitacaoId: string };
+  aoConsumirDocumentoProposto?: (solicitacaoId: string) => void;
+  aoAlterarPendente?: (pendente: boolean) => void;
+  revisaoSalva?: number;
   aoProporDose?:(medicamento:string)=>Promise<readonly PropostaDoseReceita[]>;
   cabecalho: { diagnostico?: string; tnm?: string; estadio?: string; biomarcador?: string; antecedentes?: string; medicacoesUso?: string; alergia?: string; ecog?: string; tratamentoAtual?: string; linha?: string; cicloDia?: string; ultimoAdministrado?: string };
   exames: readonly ExameRecenteFlash[];

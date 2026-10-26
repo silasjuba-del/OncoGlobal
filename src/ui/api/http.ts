@@ -1,3 +1,6 @@
+import { criarApiDocumental } from "./documental.js";
+import { criarApiConsultorioMedico } from "./consultorioMedico.js";
+import { criarApiConversaOncoassist, lerStreamConversa } from "./conversaOncoassist.js";
 import {RecuperacaoConfirmacao} from "../../contracts/api/recuperacaoConfirmacao.js";
 import {guardarPendente,concluirPendente,exigirSemPendente} from "./confirmacoesPendentes.js";
 import { PropostasDoseReceitaResposta } from '../../contracts/api/propostaDoseReceita.js';
@@ -103,7 +106,17 @@ export function criarPortaHttp(opcoes: OpcoesHttp): PortaConsulta {
     return parsed.data;
   }
 
+  const enviarAutenticado = (url: string, corpo: unknown, signal?: AbortSignal) => enviar(url, corpo, true, signal);
   return {
+    documental: criarApiDocumental(enviarAutenticado),
+    consultorio: criarApiConsultorioMedico(enviarAutenticado),
+    assistente: criarApiConversaOncoassist(enviarAutenticado, async (url, corpo, signal, evento) => {
+      const resposta = await fetch(url, { method: "POST", credentials: "omit",
+        headers: { "Content-Type": "application/json", Accept: "application/x-ndjson", ...(token ? { Authorization: `Bearer ${token}` } : {}) },
+        body: JSON.stringify(corpo), ...(signal ? { signal } : {}) });
+      if (resposta.status === 401) { opcoes.onSessaoExpirada(); throw new ErroPorta("SESSAO_EXPIRADA"); }
+      return lerStreamConversa(resposta, evento);
+    }),
     async recuperarConfirmacao(pedido) {
       const r=await leitura('/consulta/confirmacao/recuperar',pedido,RecuperacaoConfirmacao);
       if(r.estado==='CONFIRMADA'||r.estado==='CANCELADA')concluirPendente(pedido);

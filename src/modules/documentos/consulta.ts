@@ -175,7 +175,7 @@ export function prepararDocumentosConsulta(bruta: EntradaDocumentosConsulta): Do
       else {
         const pedidosRef = documentos.filter(d => d.tipoDocumento === "PEDIDO_EXAME")
           .map(d => ({ documentId: d.documentId, documentVersion: d.documentVersion }));
-        if (pedidosRef.length) tarefas.push({ tarefaId: retorno.tarefaId, contexto: { ...entrada.contexto },
+        tarefas.push({ tarefaId: retorno.tarefaId, contexto: { ...entrada.contexto },
           documentoRef: { documentId: documento.documentId, documentVersion: 1 }, pedidosRef,
           dataAlvo: calculado.dataAlvo, motivo: retorno.motivo });
       }

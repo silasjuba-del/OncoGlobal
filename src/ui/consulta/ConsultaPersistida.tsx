@@ -1,3 +1,4 @@
+import type { DocumentoManualFlash } from "../../contracts/api/flash.js";
 import { useCienciaAlertas } from "./useCienciaAlertas.js";
 import { PropostaDoseReceita } from '../../contracts/api/propostaDoseReceita.js';
 import { FontesDoseReceita } from './FontesDoseReceita.js';
@@ -35,7 +36,7 @@ type Preview = { preparacao: FlashPreparada; documentos: DocumentoPreview[]; ope
 /** Composição HTTP real. Nenhum cadastro, prescrição ou histórico de demonstração. */
 export function ConsultaPersistida({ porta, contexto, aoAbrirApac, aoAbrirCanal, versaoClinica = 0,
   aoAlterarPrescricaoPendente, aoAlterarPrescricaoSalvando, aoAlterarApacPendente,
-  aoAlterarApacSalvando, aoAtualizarClinico }: {
+  aoAlterarApacSalvando, aoAtualizarClinico, documentoProposto, aoAlterarFlashPendente, aoAlterarFlashSalvando, aoConsumirDocumentoProposto }: {
   porta: PortaConsulta; contexto: PedidoBundle; aoAbrirApac?:()=>void; versaoClinica?: number;
   aoAbrirCanal?: () => void;
   aoAlterarPrescricaoPendente?: (pendente: boolean) => void;
@@ -43,6 +44,10 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, aoAbrirCanal,
   aoAlterarApacPendente?: (pendente: boolean) => void;
   aoAlterarApacSalvando?: (salvando: boolean) => void;
   aoAtualizarClinico?: () => void;
+  documentoProposto?: DocumentoManualFlash & {solicitacaoId:string};
+  aoConsumirDocumentoProposto?: (solicitacaoId:string)=>void;
+  aoAlterarFlashPendente?: (pendente:boolean)=>void;
+  aoAlterarFlashSalvando?: (ocupado:boolean)=>void;
 }) {
   const [cientes, setCientes] = useCienciaAlertas(JSON.stringify([contexto.patientId,contexto.encounterId,contexto.tumorLotId]));
   const aoAlterarApacPendenteAtual = useRef(aoAlterarApacPendente);
@@ -54,11 +59,13 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, aoAbrirCanal,
     contexto: PedidoBundle; versao: number; versaoClinica: number;
   } | null>(null);
   const [flash, setFlash] = useState(false);
+  const [revisaoFlashSalva,setRevisaoFlashSalva]=useState(0);
   const [pedidoInvestigacao,setPedidoInvestigacao]=useState<MinutaInvestigacao|null>(null);
   const [pedidoRevisao,setPedidoRevisao]=useState("");
   const [preview, setPreview] = useState<Preview | null>(null);
   const [mensagem, setMensagem] = useState("");
   const [ocupado, setOcupado] = useState(false);
+  useEffect(()=>{aoAlterarFlashSalvando?.(ocupado);return()=>aoAlterarFlashSalvando?.(false);},[ocupado,aoAlterarFlashSalvando]);
   const [versao, setVersao] = useState(0);
   const [tipoAcao, setTipoAcao] = useState<TipoAcaoComposta | null>(null);
   const [instanciaAcao, setInstanciaAcao] = useState(0);
@@ -114,6 +121,8 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, aoAbrirCanal,
       aoAlterarApacSalvandoAtual.current?.(false); aoAlterarApacPendenteAtual.current?.(false);
     };
   }, [porta, patientId, encounterId, tumorLotId]);
+
+  useEffect(()=>{if(documentoProposto){setFlash(true);setPreview(null);}},[documentoProposto?.solicitacaoId]);
 
   useEffect(() => {
     const atual = ++geracaoLeitura.current;
@@ -270,7 +279,7 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, aoAbrirCanal,
       const resultado = await porta.salvarRascunhoFlash!({ patientId, encounterId, tumorLotId, plano,
         expectedRevision: visao.flash?.rascunho?.revision ?? null });
       if (atual !== geracao.current) return;
-      setMensagem("Rascunho salvo; sem assinatura.");
+      setMensagem("Rascunho salvo; sem assinatura.");setRevisaoFlashSalva(v=>v+1);aoAlterarFlashPendente?.(false);
       setConsultaCarregada((carregada) => carregada?.visao?.flash ? { ...carregada,
         visao: { ...carregada.visao, flash: { ...carregada.visao.flash,
           rascunho: { draftId: resultado.draftId, revision: resultado.revision, plano } } } } : carregada);
@@ -406,6 +415,10 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, aoAbrirCanal,
   const cienciaPendente = (visaoPronta?.alertas ?? []).some(a=>a.presentationOverride && !a.reconhecidoEm && !cientes.includes(a.alertaId));
   const propsFlash: ConsultaFlashProps | null = visaoParaEdicao ? {
     ...montarPropsFlash(visaoParaEdicao, null, preparar, salvar),
+    ...(documentoProposto ? {documentoProposto} : {}),
+    ...(aoConsumirDocumentoProposto ? {aoConsumirDocumentoProposto} : {}),
+    ...(aoAlterarFlashPendente ? {aoAlterarPendente:aoAlterarFlashPendente} : {}),
+    revisaoSalva:revisaoFlashSalva,
     ...(aoAbrirApac ? {aoAbrirApac} : {}),
     ...(porta.proporDoseReceita?{aoProporDose:(medicamento:string)=>porta.proporDoseReceita!({patientId,encounterId,tumorLotId},medicamento)}:{}),
     ocupado: ocupado || !visaoPronta, rotuloFinalizar: "Revisar documentos para assinatura", aoSalvarRascunho: salvar, aoFinalizar: preparar,

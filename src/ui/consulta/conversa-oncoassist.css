@@ -1,0 +1,12 @@
+.oa-conversa { display:grid; gap:1rem; min-width:0; border:1px solid var(--consulta-line,#cfe0e6); border-radius:14px; padding:1.2rem; background:var(--consulta-surface,#fff); }
+.oa-conversa header { display:flex; align-items:start; justify-content:space-between; gap:1rem; flex-wrap:wrap; }
+.oa-conversa h2 { margin:.25rem 0; }
+.oa-conversa__marca { color:var(--consulta-accent,#144563); font-weight:700; }
+.oa-conversa label { display:grid; gap:.4rem; margin:.6rem 0; }
+.oa-conversa input:not([type=checkbox]), .oa-conversa select, .oa-conversa textarea { width:100%; max-width:100%; box-sizing:border-box; padding:.6rem; font:inherit; }
+.oa-conversa label:has(input[type=checkbox]) { display:flex; align-items:baseline; }
+.oa-conversa__acoes { display:flex; flex-wrap:wrap; gap:.6rem; }
+.oa-conversa__fonte, .oa-conversa__turno { padding:.75rem 0; border-bottom:1px solid var(--consulta-line,#cfe0e6); }
+.oa-conversa small { display:block; }
+.oa-conversa pre, .oa-conversa blockquote { white-space:pre-wrap; overflow-wrap:anywhere; font:inherit; }
+.oa-conversa summary { cursor:pointer; font-weight:600; padding:.4rem 0; }
