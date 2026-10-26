@@ -79,7 +79,7 @@ describe("U-H1 · diálogos empilhados", () => {
       .filter((el) => !el.closest(".oc-ov-backdrop") && el.tabIndex !== -1);
     focaveis.at(-1)!.focus();
     fireEvent.keyDown(document, { key: "Tab" });
-    expect(flash.contains(document.activeElement)).toBe(true);
+    expect(document.activeElement).toBe(focaveis[0]);
   });
 
   it("Esc com Configurações sobre a Consulta Flash fecha só Configurações", () => {

@@ -69,7 +69,7 @@ function razaoContraste(corA: string, corB: string): number {
   const l2 = luminanciaRelativa(corParaRgb(corB));
   const maior = Math.max(l1, l2);
   const menor = Math.min(l1, l2);
-  return Number(((maior + 0.05) / (menor + 0.05)).toFixed(2));
+  return (maior + 0.05) / (menor + 0.05);
 }
 
 function extrairVarsBloco(css: string, seletorRegex: RegExp): Record<string, string> {

@@ -105,6 +105,7 @@ describe("U-H7 · layout em 320 px, 768 px, 1280 px e zoom 200% sem rolagem hori
       for (const vp of [
         { width: 320, height: 640, zoom: 1 },
         { width: 768, height: 1024, zoom: 1 },
+        { width: 640, height: 800, zoom: 1 },
         { width: 1280, height: 800, zoom: 1 },
         { width: 1280, height: 800, zoom: 2 },
       ]) {
@@ -119,7 +120,7 @@ describe("U-H7 · layout em 320 px, 768 px, 1280 px e zoom 200% sem rolagem hori
           const doc = document.documentElement;
           const botoes = Array.from(document.querySelectorAll<HTMLElement>("button")).map((b) => {
             const r = b.getBoundingClientRect();
-            return { texto: (b.textContent ?? "").trim(), w: Math.round(r.width), h: Math.round(r.height) };
+            return { texto: (b.textContent ?? "").trim(), w: r.width, h: r.height };
           });
           return {
             scrollWidth: doc.scrollWidth,
