@@ -18,6 +18,9 @@ import type {OperacaoCanal} from '../../../../src/server/canalOperacao.js';
 
 export const PACIENTE_B2 = "paciente-s12-b2-jornada-001";
 export const ENCONTRO_B2 = "encontro-s12-b2-jornada-001";
+export const PACIENTE_CONFIAVEL = "paciente-sintetico-consulta-confiavel";
+export const ENCONTRO_CONFIAVEL = "encontro-sintetico-consulta-confiavel";
+export const NOME_CONFIAVEL = "Paciente SINTETICO Consulta Confiavel";
 export const NOME_B2 = "Paciente Sintético Jornada B2";
 export const SENHA_B2 = "senha-sintetica-e2e-colon-01";
 
@@ -156,6 +159,10 @@ export async function bootServidorDemoB2(dirArg?: string,canal?:OperacaoCanal) {
   }
 
   if (novo) {
+    seed(PACIENTE_CONFIAVEL, ENCONTRO_CONFIAVEL, "cadastro-consulta-confiavel", "Paciente",
+      { patientId: PACIENTE_CONFIAVEL, identificadores: [], nome: NOME_CONFIAVEL, nascimento: "1970-01-01", sexoCadastral: "F", divergencia: false }, []);
+    seed(PACIENTE_CONFIAVEL, ENCONTRO_CONFIAVEL, "agenda-consulta-confiavel", "AgendaEntry",
+      { patientId: PACIENTE_CONFIAVEL, encounterId: ENCONTRO_CONFIAVEL, data: AGORA.slice(0, 10), horario: "11:30" }, []);
     seed(PACIENTE_B2, ENCONTRO_B2, "cadastro-b2-s12", "Paciente",
       { patientId: PACIENTE_B2, identificadores: [], nome: NOME_B2, nascimento: "1970-01-01",
         sexoCadastral: "F", divergencia: false }, []);
@@ -177,6 +184,7 @@ export async function bootServidorDemoB2(dirArg?: string,canal?:OperacaoCanal) {
   mkdirSync(join(dir, "config"), { recursive: true });
   const manifesto = {
     sintético: true, providerExterno: false, dir, baseUrl: app.baseUrl, agora: AGORA, senhaDemo: SENHA_B2,
+    consultaConfiavel: { patientId: PACIENTE_CONFIAVEL, encounterId: ENCONTRO_CONFIAVEL, nome: NOME_CONFIAVEL },
     b2: { patientId: PACIENTE_B2, encounterId: ENCONTRO_B2, nome: NOME_B2 },
     promovidasEmMemoria: [...promovidasEmMemoria],
     hashManifesto: createHash("sha256").update("demo-b2-s12").digest("hex"),

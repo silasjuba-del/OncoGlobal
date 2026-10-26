@@ -96,6 +96,18 @@ com reabertura; não valida serviços clínicos externos. Registre SHA, comando,
 code e falhas. Um reteste isolado verde não torna verde a execução integral que
 falhou. CI, revisão técnica, integração e aprovação clínica são evidências distintas.
 
+O check protegido `typecheck + fronteiras + testes` exige também sucesso do job
+`Jornadas B2 no Chromium`. Falha, cancelamento ou salto desse job impede a aprovação
+do consolidado. A jornada de consulta confiável usa documentos e pacientes sintéticos
+na interface real, com falhas HTTP controladas e reabertura do mesmo SQLite.
+
+Para aceite ou demonstração, use um checkout limpo do SHA integrado ou do PR em
+avaliação. Confira `git rev-parse HEAD` e `git status --short` antes de iniciar. Um
+checkout com WIP pode conter comportamento ainda não revisado; não o resete nem
+incorpore suas mudanças automaticamente para reproduzir um resultado. O plano do
+lote e suas evidências ficam em
+[`docs/planejamento/CONSULTA-CONFIAVEL-REFATORACAO-20261026.md`](docs/planejamento/CONSULTA-CONFIAVEL-REFATORACAO-20261026.md).
+
 ## Estrutura
 ```
 src/contracts/   contratos Zod (congelados por onda; só o tech lead edita)
