@@ -6,7 +6,8 @@ const plano = (evento: string, waves: readonly (readonly string[])[]): Plano => 
   const passos = waves.flatMap((wave, idx) => wave.map((id) => ({
     id, dependsOn: idx === 0 ? [] : [...waves[idx - 1]!], timeoutMs: 2000,
   })));
-  return { evento, passos };
+  return { evento, passos, conclusao: passos.some(p => p.id === "RECONCILIADOR")
+    ? { tipo: "RECONCILIADOR", passoId: "RECONCILIADOR" } : { tipo: "ALGUM_TERMINAL" } };
 };
 
 /** R-14 deterministic event table. No text/LLM can alter the ACTIVE_SET. */
@@ -30,5 +31,5 @@ const TABELA: Readonly<Record<string, Plano>> = Object.freeze({
 export function maestro(evento: string): Plano | null {
   if (!Object.hasOwn(TABELA, evento)) return null;
   const selected = TABELA[evento];
-  return selected ? { evento, passos: selected.passos.map((p) => ({ ...p, dependsOn: [...p.dependsOn] })) } : null;
+  return selected ? { evento, ...(selected.conclusao ? { conclusao: { ...selected.conclusao } } : {}), passos: selected.passos.map((p) => ({ ...p, dependsOn: [...p.dependsOn] })) } : null;
 }

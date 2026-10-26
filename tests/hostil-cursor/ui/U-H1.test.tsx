@@ -66,6 +66,8 @@ describe("U-H1 · navegação por teclado, foco preso em diálogos e devolução
 
     const card = screen.getByRole("dialog", { name: "Consulta Flash" });
     const textareaDoc = screen.getByLabelText("Conteúdo do documento 1");
+    // O documento pertence a uma seção recolhida; só conteúdo visível participa do foco.
+    for (let secao = textareaDoc.closest("details"); secao; secao = secao.parentElement?.closest("details") ?? null) secao.open = true;
     // Desabilita os botões/inputs posteriores do rodapé para que o textarea seja o último focável ativo do card
     const todosBotoesInputs = Array.from(
       card.querySelectorAll<HTMLElement>("button, input, textarea, select"),

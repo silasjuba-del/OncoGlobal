@@ -1,7 +1,7 @@
 import type { AgenteFake, Plano, ResultadoPasso, RunOrk, Passo, OpcoesOrk } from "./tipos.js";
 import { AsyncLocalStorage } from "node:async_hooks";
 import { z } from "zod";
-import { VisaoIntegrada } from "../contracts/f1/visaoIntegrada.js";
+import { avaliarConclusao, politicaConclusao, validarConclusao } from "./conclusao.js";
 
 const emAgente = new AsyncLocalStorage<boolean>();
 /** Clone data without retaining executable capabilities returned by a legacy agent. */
@@ -28,7 +28,11 @@ function snapshotSaida(value: unknown): unknown {
 const planoSchema = z.object({ evento: z.string().min(1), passos: z.array(z.object({
   id: z.string().min(1), dependsOn: z.array(z.string().min(1)),
   timeoutMs: z.number().finite().int().positive().max(2_147_483_647),
-}).strict()) }).strict();
+}).strict()), conclusao: z.discriminatedUnion("tipo", [
+  z.object({ tipo: z.literal("RECONCILIADOR"), passoId: z.string().min(1) }).strict(),
+  z.object({ tipo: z.literal("ALGUM_TERMINAL") }).strict(),
+  z.object({ tipo: z.literal("TODOS_TERMINAIS") }).strict(),
+]).optional() }).strict();
 
 /** Reentrada pelo ORK é proibida dentro do contexto assíncrono de um agente. */
 export function verificarChamadaAgente(): { decisao: "PASSA" | "REJEITA" } {
@@ -101,10 +105,15 @@ export async function executarOrk(plano: Plano, agentes: Readonly<Record<string,
   const parsed = planoSchema.safeParse(plano);
   if (!parsed.success) throw new Error("PLANO_INVALIDO");
   // Snapshot before any asynchronous callback; caller mutation cannot add steps.
-  plano = structuredClone(parsed.data);
+  const snapshot = structuredClone(parsed.data);
+  plano = { evento: snapshot.evento, passos: snapshot.passos,
+    ...(snapshot.conclusao ? { conclusao: snapshot.conclusao } : {}) };
   agentes = { ...agentes };
   opcoes = { ...opcoes };
   validarPlano(plano);
+  validarConclusao(plano);
+  const politica = politicaConclusao(plano);
+  const reconciliador = politica.tipo === "RECONCILIADOR" ? politica.passoId : null;
   const run: RunOrk = { estado: "RECEBIDO", etapa: "RECEBIDO", resultados: [] };
   run.estado = "EM_CURSO";
   const pending = new Map(plano.passos.map((p) => [p.id, p]));
@@ -112,7 +121,7 @@ export async function executarOrk(plano: Plano, agentes: Readonly<Record<string,
     const ready = [...pending.values()].filter((p) => p.dependsOn.every((id) =>
       run.resultados.some((result) => result.id === id)));
     if (!ready.length) throw new Error("PLANO_CICLICO");
-    const successful = ready.filter((p) => p.id === "RECONCILIADOR" || p.dependsOn.every((id) =>
+    const successful = ready.filter((p) => p.id === reconciliador || p.dependsOn.every((id) =>
       run.resultados.find((r) => r.id === id)?.resultado === "ok"));
     for (const step of ready.filter((p) => !successful.includes(p))) {
       run.resultados.push({ id: step.id, resultado: "unattempted", motivo: "DEPENDENCIA_INDISPONIVEL", tentativas: 0 });
@@ -128,20 +137,8 @@ export async function executarOrk(plano: Plano, agentes: Readonly<Record<string,
       pending.delete(step.id);
     }
   }
-  const final = plano.passos.at(-1);
-  if (final?.id === "RECONCILIADOR") {
-    const resultado = run.resultados.find(r => r.id === final.id);
-    const visao = resultado?.resultado === "ok" ? VisaoIntegrada.safeParse(resultado.saida) : null;
-    const setores = plano.passos.filter(p => p.id !== "RECONCILIADOR").map(p => p.id);
-    const completa = visao?.success && setores.every(s => visao.data.cobertura.setoresEsperados.some(setor => setor === s))
-      && visao.data.cobertura.setoresEsperados.every(s => visao.data.cobertura.setoresAvaliados.includes(s)
-        || visao.data.lacunas.some(l => l.setor === s));
-    run.estado = completa ? "PRONTO" : "FALHOU";
-  } else {
-    // Terminal = nenhum passo depende dele; a posição no array não tem significado no grafo.
-    const terminais = plano.passos.filter((p) => !plano.passos.some((q) => q.dependsOn.includes(p.id)));
-    run.estado = terminais.some((t) => run.resultados.find((r) => r.id === t.id)?.resultado === "ok") ? "PRONTO" : "FALHOU";
-  }
+  run.diagnosticoConclusao = avaliarConclusao(plano, run.resultados);
+  run.estado = run.diagnosticoConclusao.criterioAtendido ? "PRONTO" : "FALHOU";
   run.etapa = "JOIN";
   return run;
 }

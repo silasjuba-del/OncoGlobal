@@ -8,7 +8,7 @@ import { defineConfig } from "vitest/config";
 export default defineConfig({
   root: fileURLToPath(new URL("../../..", import.meta.url)),
   test: {
-    include: ["tests/hostil-cursor/navegador/**/*.navegador.ts"],
+    include: ["tests/hostil-cursor/navegador/**/*.navegador.ts", "tests/consulta-confiavel/camadas/**/*.navegador.ts"],
     pool: process.platform === "win32" ? "forks" : "threads",
     maxWorkers: 1,
     fileParallelism: false,

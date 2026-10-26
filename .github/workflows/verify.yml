@@ -54,11 +54,11 @@ jobs:
         run: npm test -- --shard=${{ matrix.shard }}/3
 
   # Keep the protected-branch check name stable. Skipped/cancelled dependencies
-  # cannot turn this gate green, and every shard must finish successfully.
+  # cannot turn this gate green; every shard and the real browser journeys must succeed.
   verify:
     name: typecheck + fronteiras + testes
     if: ${{ always() }}
-    needs: [quality, tests]
+    needs: [quality, tests, browser-b2]
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -66,9 +66,11 @@ jobs:
         env:
           QUALITY_RESULT: ${{ needs.quality.result }}
           TESTS_RESULT: ${{ needs.tests.result }}
+          BROWSER_RESULT: ${{ needs.browser-b2.result }}
         run: |
           test "$QUALITY_RESULT" = "success"
           test "$TESTS_RESULT" = "success"
+          test "$BROWSER_RESULT" = "success"
 
   browser-b2:
     name: Jornadas B2 no Chromium

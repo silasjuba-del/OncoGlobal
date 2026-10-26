@@ -14,6 +14,7 @@ import { createServer as createViteServer } from "vite";
 import { jornadaReceitaNoNavegador } from './browser-receita.js';
 import { jornadaCanalNoNavegador,jornadaDemonstracaoCanal } from './browser-canal.js';
 import { jornadaContingenciaNoNavegador } from './browser-contingencia.js';
+import { jornadaConsultaConfiavel, TEXTO_FONTE_CONFIAVEL } from './browser-consulta-confiavel.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
 const MANIFEST = JSON.parse(readFileSync(join(ROOT, "corpus/manifesto/b2-fichas.v1.json"), "utf8"));
@@ -338,8 +339,20 @@ async function main() {
     log({prova:'CANAL_HTTP_UI_NAVEGADOR',...await jornadaCanalNoNavegador(page2,{baseUrl:manifesto2.baseUrl,manifesto:manifesto2,segredo:segredoCanal,efeitos:()=>efeitosCanal})});
     log({prova:'F3_CONTINGENCIA_HTTP_UI_NAVEGADOR',...await jornadaContingenciaNoNavegador(page2,{manifesto:manifesto2,efeitos:()=>efeitosCanal,
       contarEventosClinicos:()=>Number(demo.app.db.prepare('SELECT COUNT(*) AS n FROM clinical_event').get().n),evidenceDir})});
+    const { pdfDigital } = await viteDev.ssrLoadModule('/tests/f0-fecha/fixtures/colon-e2e.ts');
+    const consultaConfiavel = await jornadaConsultaConfiavel(page2, {
+      manifesto: manifesto2,
+      pdf: pdfDigital(['Documento SINTETICO - data clinica 2026-10-09', TEXTO_FONTE_CONFIAVEL]),
+      lerEventos: () => listarEventos(demo.app.db, manifesto2.consultaConfiavel.patientId),
+      reiniciar: async () => {
+        await demo.app.close();
+        demo = await mod2.bootServidorDemoB2(demoDir, operacaoCanal);
+      },
+      evidenceDir,
+    });
+    log({ prova: 'CONSULTA_CONFIAVEL_PONTA_A_PONTA', ...consultaConfiavel });
     log({prova:'CANAL_DEMONSTRACAO_WEBCRYPTO',...await jornadaDemonstracaoCanal(page2)});
-    writeFileSync(join(evidenceDir, "resumo.json"), JSON.stringify({ manifesto: manifesto2, familias: FAMILIAS_B2, resultado, reinicio: { documentosHistorico: qtd, propostasReabertas } }, null, 2));
+    writeFileSync(join(evidenceDir, "resumo.json"), JSON.stringify({ manifesto: manifesto2, familias: FAMILIAS_B2, resultado, consultaConfiavel, reinicio: { documentosHistorico: qtd, propostasReabertas } }, null, 2));
     await demo.app.close();
   } finally {
     await browser?.close();
