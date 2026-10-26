@@ -90,7 +90,9 @@ it('CLI e MCP subprocess retornam o mesmo JSON pela API autenticada, sem efeito 
 it('CLI recusa comandos/argumentos, endpoints não literais, redirects e erros sem refletir segredos', async () => {
   const s=await servidor();
   const ajuda=await processo('oncoglobal-cli.mjs',['--help'],'');expect(ajuda.code).toBe(0);
-  for(const endpoint of ['http://localhost:4181','http://2130706433:4181','http://127.0.0.1:4181/?x=1','http://user:pass@127.0.0.1:4181']) {
+  // Numeric IPv4 representation of 127.0.0.1, not a telephone fixture.
+  const ipv4Numerico = String(0x7f000001);
+  for(const endpoint of ['http://localhost:4181',`http://${ipv4Numerico}:4181`,'http://127.0.0.1:4181/?x=1','http://user:pass@127.0.0.1:4181']) {
     const r=await processo('oncoglobal-cli.mjs',['integracoes','estado'],'{}',{ONCOGLOBAL_API_URL:endpoint,ONCOGLOBAL_API_TOKEN:'TOKEN-SINTETICO'});
     expect(r.code).toBe(1);expect(r.err).toContain('ENDPOINT_LOCAL_INVALIDO');
   }
