@@ -189,6 +189,7 @@ export async function operarConversa(deps: ServidorDeps, token: string, url: str
       if (!d || d.revision !== 0 || registro(d.payload).turno.estado !== "EM_CURSO") throw new Recusa("CONVERSA_CANCELADA");
     };
     try {
+      aoEvento?.({ tipo: "inicio", turnoId: id });
       let saida: { texto: string; citacoes: { fonteId: string; trecho: string }[] };
       if (p.modo === "BRIEFING") {
         const limite = config.preferencias.extensao === "BREVE" ? 400 : 1000;

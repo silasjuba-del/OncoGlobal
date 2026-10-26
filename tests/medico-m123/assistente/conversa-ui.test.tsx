@@ -13,6 +13,31 @@ function api(): ApiConversaOncoassist {
 }
 afterEach(cleanup);
 
+it("cancelamento aguarda confirmação durável antes de abortar transporte e ignora final concorrente", async () => {
+  const porta = api(); let evento!: (e: EventoConversa) => void;
+  let finalizar!: (r: RespostaConversa) => void, confirmar!: (r: RespostaConversa) => void;
+  let transporte!: AbortSignal;
+  porta.responder = vi.fn((_p, signal, onEvento) => { transporte = signal!; evento = onEvento!; return new Promise<RespostaConversa>(resolve => { finalizar = resolve; }); });
+  porta.cancelar = vi.fn(() => new Promise<RespostaConversa>(resolve => { confirmar = resolve; }));
+  render(<ConversaOncoassist api={porta} contexto={ctx} />);
+  fireEvent.change(await screen.findByLabelText("Pergunta ao OncoAssist"), { target: { value: "Pergunta preservada" } });
+  fireEvent.click(screen.getByRole("button", { name: "Perguntar ao modelo local" }));
+  expect((screen.getByRole("button", { name: "Cancelar resposta" }) as HTMLButtonElement).disabled).toBe(true);
+  evento({ tipo: "inicio", turnoId: "turno" });
+  await waitFor(() => expect((screen.getByRole("button", { name: "Cancelar resposta" }) as HTMLButtonElement).disabled).toBe(false));
+  fireEvent.click(screen.getByRole("button", { name: "Cancelar resposta" }));
+  expect(porta.cancelar).toHaveBeenCalledWith({ ...ctx, turnoId: "turno" });
+  expect(transporte.aborted).toBe(false);
+  finalizar(resposta());
+  await screen.findByRole("button", { name: "Confirmando cancelamento…" });
+  expect(screen.queryByLabelText("Texto da proposta para revisão")).toBeNull();
+  const r = resposta(); confirmar({ ...r, turno: { ...r.turno, estado: "CANCELADA", texto: "" } });
+  await screen.findByText(/Operação cancelada\./);
+  await waitFor(() => expect(transporte.aborted).toBe(true));
+  expect((screen.getByLabelText("Pergunta ao OncoAssist") as HTMLTextAreaElement).value).toBe("Pergunta preservada");
+  expect(screen.queryByLabelText("Texto da proposta para revisão")).toBeNull();
+});
+
 it("ditado só acrescenta rascunho uma vez, preserva edição e sinaliza pendência", async () => {
   const porta = api(), pendente = vi.fn();
   const v = render(<ConversaOncoassist api={porta} contexto={ctx} aoAlterarPendente={pendente} />);

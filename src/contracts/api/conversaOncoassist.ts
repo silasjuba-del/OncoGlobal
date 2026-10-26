@@ -33,6 +33,7 @@ export const RespostaConversa = z.object({ codigo: z.enum(["CONVERSA_CONCLUIDA",
 export type RespostaConversa = z.infer<typeof RespostaConversa>;
 export const ConfiguracaoConversaResposta = z.object({ codigo: z.literal("CONVERSA_CONFIGURADA"), configuracao: ConfiguracaoConversa }).strict();
 export const EventoConversa = z.discriminatedUnion("tipo", [
+  z.object({ tipo: z.literal("inicio"), turnoId: Id }).strict(),
   z.object({ tipo: z.literal("delta"), texto: z.string().max(60000), parcialNaoValidado: z.literal(true) }).strict(),
   z.object({ tipo: z.literal("final"), resposta: RespostaConversa }).strict(),
   z.object({ tipo: z.literal("erro"), codigo: Id }).strict(),

@@ -29,6 +29,8 @@ export function ConversaOncoassist({ api, contexto, aoAbrirFonte, aoUsarTexto, a
   const perguntaPersistida = useRef(""), ditadoRecebido = useRef(textoDitado?.id), avisos = useRef({ aoAlterarPendente, aoAtividade });
   avisos.current = { aoAlterarPendente, aoAtividade };
   const [transferido, setTransferido] = useState("");
+  const [turnoAtivo, setTurnoAtivo] = useState<string | null>(null), [cancelando, setCancelando] = useState(false);
+  const cancelamento = useRef<Promise<void> | null>(null);
   useEffect(() => {
     if (!textoDitado || textoDitado.id === ditadoRecebido.current) return;
     ditadoRecebido.current = textoDitado.id;
@@ -48,6 +50,7 @@ export function ConversaOncoassist({ api, contexto, aoAbrirFonte, aoUsarTexto, a
   }
   useEffect(() => {
     const g = ++geracao.current, abort = new AbortController(); controle.current?.abort(); controle.current = abort;
+    cancelamento.current = null; setTurnoAtivo(null); setCancelando(false);
     emCurso.current = false; perguntaPersistida.current = ""; setTransferido(""); setOcupado(false); setBase(null); setResultado(null); setEdicao(""); setParcial(""); setErro(""); setSelecionadas([]); setPergunta("");
     void carregar(g, abort.signal).catch(() => { if (!abort.signal.aborted && g === geracao.current) setErro("Não foi possível recuperar a conversa. Tente novamente."); });
     return () => { abort.abort(); controle.current?.abort(); };
@@ -59,16 +62,34 @@ export function ConversaOncoassist({ api, contexto, aoAbrirFonte, aoUsarTexto, a
     const g = geracao.current, abort = new AbortController(); controle.current?.abort(); controle.current = abort;
     emCurso.current = true; setOcupado(true); setErro("");
     try { await acao(g, abort.signal); }
-    catch (e) { if (g === geracao.current) { setParcial(""); setErro(abort.signal.aborted ? "Operação cancelada. A pergunta foi preservada; nenhuma proposta foi aceita." : e instanceof Error ? e.message : "Conversa indisponível."); } }
-    finally { if (g === geracao.current) { emCurso.current = false; setOcupado(false); } }
+    catch (e) { if (!cancelamento.current && g === geracao.current) { setParcial(""); setErro(abort.signal.aborted ? "Transporte interrompido. Confira o estado da operação no histórico." : e instanceof Error ? e.message : "Conversa indisponível."); } }
+    finally {
+      await cancelamento.current;
+      if (g === geracao.current) { emCurso.current = false; setOcupado(false); setTurnoAtivo(null); setCancelando(false); cancelamento.current = null; }
+    }
+  }
+  function cancelarResposta() {
+    if (!turnoAtivo || cancelamento.current) return;
+    const g = geracao.current, abort = controle.current;
+    setCancelando(true);
+    cancelamento.current = (async () => {
+      try {
+        const r = await api.cancelar({ ...contexto, turnoId: turnoAtivo });
+        if (r.turno.estado !== "CANCELADA") throw Error("Cancelamento não confirmado. Confira o histórico.");
+        if (g === geracao.current) { setResultado(null); setParcial(""); setErro("Operação cancelada. A pergunta foi preservada; nenhuma proposta foi aceita."); }
+      } catch (e) { if (g === geracao.current) setErro(e instanceof Error ? e.message : "Cancelamento não confirmado. Confira o histórico."); }
+      finally { abort?.abort(); }
+    })();
   }
   function responder(modo: "BRIEFING" | "MODELO_LOCAL") {
     if (propostaEditada) return;
     void operar(async (g, signal) => {
       setResultado(null); setEdicao(""); setParcial("");
       const resposta = await api.responder({ ...contexto, operationId: crypto.randomUUID(), pergunta: pergunta.trim() || "Organize as fontes e as pendências desta consulta.", fontesIds: selecionadas, modo }, signal, e => {
+        if (g === geracao.current && !signal.aborted && e.tipo === "inicio") setTurnoAtivo(e.turnoId);
         if (g === geracao.current && !signal.aborted && e.tipo === "delta") setParcial(t => t + e.texto);
       });
+      if (cancelamento.current) return;
       if (g !== geracao.current || signal.aborted || JSON.stringify(resposta.contexto) !== chave) return;
       if (resposta.turno.estado !== "CONCLUIDA") throw Error(resposta.turno.codigo ?? "Operação ainda em curso; consulte o histórico.");
       if (resposta.turno.validadeFontes !== "ATUAIS") throw Error("Fontes alteradas. Refaça a proposta sobre as fontes atuais antes de usá-la.");
@@ -110,7 +131,7 @@ export function ConversaOncoassist({ api, contexto, aoAbrirFonte, aoUsarTexto, a
       <div className="oa-conversa__acoes"><button type="button" disabled={ocupado || propostaEditada} onClick={() => responder("BRIEFING")}>Preparar briefing documental</button>
         <button type="button" disabled={ocupado || propostaEditada || !atual.configuracao.modelo || !pergunta.trim()} onClick={() => responder("MODELO_LOCAL")}>Perguntar ao modelo local</button>
         {aoDitar ? <button type="button" disabled={ocupado} onClick={aoDitar}>Ditar rascunho</button> : null}
-        {ocupado ? <button type="button" onClick={() => controle.current?.abort()}>Cancelar resposta</button> : null}</div>
+        {ocupado ? <button type="button" disabled={!turnoAtivo || cancelando} onClick={cancelarResposta}>{cancelando ? "Confirmando cancelamento…" : "Cancelar resposta"}</button> : null}</div>
       {parcial ? <section aria-label="Resposta parcial não validada"><p role="status">Recebendo proposta — conteúdo parcial ainda não validado.</p><pre>{parcial}</pre></section> : null}
       {resultado ? <section aria-label="Proposta do OncoAssist"><p>{resultado.modo === "BRIEFING" ? "Briefing documental determinístico" : `Proposta do modelo local ${resultado.modelo}`} · revisão médica obrigatória</p>
         <label>Texto da proposta para revisão<textarea aria-label="Texto da proposta para revisão" rows={9} value={edicao} onChange={e => setEdicao(e.target.value)} /></label>
