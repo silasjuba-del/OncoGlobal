@@ -1,4 +1,6 @@
 import { SaidasConsultorioMedico } from "./consultorioMedico.js";
+import { SaidasConsultaAcervo } from "./consultaAcervo.js";
+import { EstadoIntegracoes } from "./integracoesEstado.js";
 import { SaidasConversaOncoassist } from "./conversaOncoassist.js";
 import { ImportacaoDocumentalResposta, DocumentosDocumentaisResposta, DocumentoDocumentalResposta } from "./importacaoDocumental.js";
 import {RecuperacaoConfirmacao} from "./recuperacaoConfirmacao.js";
@@ -44,6 +46,8 @@ const Extracao = z.object({ draftId: Id, revision: Count, linkedPatientId: Id.nu
 
 /** Mesmos contratos no servidor e no cliente. Valida sem descartar campos adicionais da resposta legada. */
 export const SaidasHttp: Readonly<Record<string, z.ZodType>> = {
+  ...SaidasConsultaAcervo,
+  "/integracoes/estado": EstadoIntegracoes,
   recuperarConfirmacao: RecuperacaoConfirmacao,
   documentoImpressao: z.object({html:z.string().min(1)}).strict(),
   skillsClinicas: ResultadoSkillClinica,

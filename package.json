@@ -19,7 +19,9 @@
     "ui:build": "vite build",
     "test:f1": "vitest run --config tests/adv/vitest.f1.config.ts",
     "verify:f1": "npm run check:boundaries:fechar-f1-s3 && npm run test:f1",
-    "test:medico-m123": "node scripts/test-medico-m123.mjs"
+    "test:medico-m123": "node scripts/test-medico-m123.mjs",
+    "cli": "node scripts/oncoglobal-cli.mjs",
+    "mcp": "node scripts/oncoglobal-mcp.mjs"
   },
   "repository": {
     "type": "git",

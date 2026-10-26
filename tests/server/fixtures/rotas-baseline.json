@@ -4,6 +4,14 @@
     "acao"
   ],
   [
+    "/acervo/buscar",
+    "/acervo/buscar"
+  ],
+  [
+    "/acervo/ler",
+    "/acervo/ler"
+  ],
+  [
     "/apac/validar-emissao",
     "/apac/validar-emissao"
   ],
@@ -374,6 +382,10 @@
   [
     "/farmacia/enviar",
     "/farmacia/enviar"
+  ],
+  [
+    "/integracoes/estado",
+    "/integracoes/estado"
   ],
   [
     "/login",

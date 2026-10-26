@@ -1,5 +1,5 @@
 // G2 · Caracterização de Pós-processamento HTTP por Rota e Drenagem no close() (Cenários 7 e 8 · OG-003 / OG-004).
-// ESCOPO EXPLÍCITO DO CENÁRIO 7 (CX-006): inspeciona as 110 entradas do catálogo ROTAS_HTTP
+// ESCOPO EXPLÍCITO DO CENÁRIO 7 (CX-006): inspeciona as 113 entradas do catálogo ROTAS_HTTP
 // e suas políticas de pós-processamento, mas executa via HTTP uma amostra representativa de endpoints
 // (agenda, lotes e estatistica com grava: false; oncoassistStatus e carregarConsulta como leituras com grava: true;
 // extrair 201 como escrita real; e extrair 400 / carregarConsulta 401 como falhas 4xx), e NÃO todas as rotas via HTTP.
@@ -15,8 +15,8 @@ import {
 } from "../fixtures/g2-integridade.js";
 
 describe("G2 · Cenário 7: Disparos de pós-processamento por rota HTTP (OG-003 / OG-004)", () => {
-  it("caracteriza o catálogo ROTAS_HTTP (110 rotas) quanto à política de pós-processamento", () => {
-    expect(ROTAS_HTTP).toHaveLength(110);
+  it("caracteriza o catálogo ROTAS_HTTP (113 rotas) quanto à política de pós-processamento", () => {
+    expect(ROTAS_HTTP).toHaveLength(113);
 
     const semGrava = ROTAS_HTTP.filter((r) => r.processamento === "NENHUM").map((r) => r.nome);
     expect(semGrava).toEqual([
@@ -64,6 +64,9 @@ describe("G2 · Cenário 7: Disparos de pós-processamento por rota HTTP (OG-003
       "/consulta/assistente/responder-stream",
       "/consulta/assistente/cancelar",
       "/medico/paciente/ler",
+      "/acervo/buscar",
+      "/acervo/ler",
+      "/integracoes/estado",
     ]);
 
     // OG-003 / OG-004: invertido em EST-03b para as leituras comprovadamente sem escrita (apac, canal, salão,
