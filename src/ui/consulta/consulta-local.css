@@ -608,6 +608,7 @@
 /* Partition Bar (#26545) */
 .oc21-partition-bar {
   display: flex;
+  flex-wrap: wrap;
   gap: 4px;
   border-radius: 10px;
   overflow: hidden;
@@ -632,7 +633,15 @@
 /* ============ Bento Grid de Dados Mínimos (RevisaoClinica) & Sub-acordeões ============ */
 .revisao-clinica-bento {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 1.15rem;
+}
+
+.revisao-clinica-bento > *,
+.revisao-clinica-topo > * {
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
 }
 
 .revisao-clinica-topo {
@@ -664,6 +673,8 @@
 
 .oc21-segmented {
   display: inline-flex;
+  flex-wrap: wrap;
+  max-width: 100%;
   padding: 3px;
   border-radius: 999px;
   background: var(--consulta-soft, #f2f7f9);
@@ -672,6 +683,8 @@
 }
 
 .oc21-segmented button {
+  min-height: 24px;
+  min-width: 24px;
   border: 0 !important;
   border-radius: 999px !important;
   background: transparent !important;
@@ -889,4 +902,15 @@ section[aria-label="Reconciliação de medicamentos"] textarea {
   .oncoassist-local .oc21-focus-only-btn,
   .oncoassist-local .oc21-acordeon-icon,
   .oncoassist-local .oc21-modal-backdrop { display: none !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .oncoassist-local,
+  .oncoassist-local *,
+  .oncoassist-local *::before,
+  .oncoassist-local *::after {
+    transition: none !important;
+    animation: none !important;
+    scroll-behavior: auto !important;
+  }
 }

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { NUMERO_CAIXA_MODELO_FLASH, LABS_MODELO_FLASH, RAD_MODELO_FLASH, lerModeloFlashConfigurado, type ModeloFlash } from "../../contracts/configFlash.js";
 import { NUMERO_CAIXA_RECEITUARIO_ESPECIAL, lerConfiguracaoServico } from "../../contracts/configServico.js";
 import type { PortaConsulta } from "../api/porta.js";
+import { useDialogoAcessivel } from "./dialogoAcessivel.js";
 import type { TemaOnco } from "./tema.js";
 
 let sequenciaOperacaoFlash = 0;
@@ -47,6 +48,7 @@ export function Configuracoes({
   const [estadoFlash, setEstadoFlash] = useState<"CARREGANDO" | "PRONTO" | "ERRO">("CARREGANDO");
   const [mensagemFlash, setMensagemFlash] = useState("Carregando configuração autenticada…");
   const [salvandoFlash, setSalvandoFlash] = useState(false);
+  const dialogoRef = useDialogoAcessivel<HTMLDivElement>(onFechar);
 
   useEffect(() => {
     let ativa = true;
@@ -156,7 +158,7 @@ export function Configuracoes({
   if (somenteFlash) return <section aria-label="Configurações da Consulta Flash">{painelFlash}{incluirServico ? painelServico : null}</section>;
 
   return (
-    <div className="oc-cfg" role="dialog" aria-label="Configurações">
+    <div ref={dialogoRef} className="oc-cfg" role="dialog" aria-modal="true" aria-label="Configurações">
       <header className="oc-cfg-h">
         <h2>Configurações</h2>
         <button type="button" onClick={onFechar} aria-label="Fechar configurações">

@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Box3D } from "./Box3D.js";
+import { camadaCoberta, useDialogoAcessivel } from "./dialogoAcessivel.js";
 import { Chart3D } from "./Chart3D.js";
 import type { ModoChart3D } from "./chart3d-visao.js";
 import { JORNADA_WORLD_W, montarParadasJornada } from "./jornada-visao.js";
@@ -39,6 +40,7 @@ export function Jornada3D({
   const [tour, setTour] = useState(false);
   const [reduzir] = useState(preferReducedMotion);
   const camEl = useRef<HTMLDivElement>(null);
+  const dialogo = useDialogoAcessivel<HTMLDivElement>(onFechar, true);
   const cam = useRef({ x: 0, yaw: -10, tilt: -26, dist: 650 });
   const tgt = useRef({ ...cam.current });
 
@@ -84,17 +86,15 @@ export function Jornada3D({
 
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
-      if (e.key === "Escape") {
-        onFechar();
-        return;
-      }
+      if (!dialogo.current || camadaCoberta(dialogo.current)) return;
+      if (e.target instanceof HTMLElement && e.target.closest('input,select,textarea,[contenteditable="true"]')) return;
       if (e.key === "ArrowRight") {
         setSel((s) => Math.min(paradas.length - 1, (s == null ? -1 : s) + 1));
       }
       if (e.key === "ArrowLeft") {
         setSel((s) => Math.max(0, (s == null ? 1 : s) - 1));
       }
-      if (e.key === " ") {
+      if (e.key === " " && !(e.target instanceof HTMLElement && e.target.closest("button,a[href]"))) {
         e.preventDefault();
         setTour((t) => !t);
       }
@@ -127,7 +127,7 @@ export function Jornada3D({
   const totalCaixasEstimado = boxCountBars + boxCountStops + 20; // chart separado
 
   return (
-    <div className="oc-j3" role="dialog" aria-label="Jornada oncológica 3D" data-reduced={reduzir ? "1" : "0"}>
+    <div ref={dialogo} tabIndex={-1} className="oc-j3" role="dialog" aria-modal="true" aria-label="Jornada oncológica 3D" data-reduced={reduzir ? "1" : "0"}>
       <button type="button" className="oc-j3-backdrop" aria-label="Fechar jornada" onClick={onFechar} />
       <div className="oc-j3-panel">
         <div className="oc-j3-scene">

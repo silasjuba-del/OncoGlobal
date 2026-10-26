@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { classeSemaforo } from "../tema/temas.js";
+import { useDialogoAcessivel } from "./dialogoAcessivel.js";
 
 /** OncoAssist narra laudo e achados já extraídos — sem diagnosticar, medir ou conduzir (D-W9-40). */
 export function ImageViewerOncoAssist({
@@ -21,6 +22,7 @@ export function ImageViewerOncoAssist({
   const [narracao, setNarracao] = useState<string | null>(null);
   const [morfo, setMorfo] = useState<string | null>(null);
   const [pontos, setPontos] = useState(0);
+  const dialogoRef = useDialogoAcessivel<HTMLDivElement>(onFechar);
 
   function narrar() {
     const texto = [
@@ -38,7 +40,7 @@ export function ImageViewerOncoAssist({
   }
 
   return (
-    <div className="oc-viewer" role="dialog" aria-label="Visualizador de imagem">
+    <div ref={dialogoRef} className="oc-viewer" role="dialog" aria-modal="true" aria-label="Visualizador de imagem">
       <header className="oc-viewer-h">
         <h3>{exameTitulo}</h3>
         <button type="button" onClick={onFechar} aria-label="Fechar visualizador">

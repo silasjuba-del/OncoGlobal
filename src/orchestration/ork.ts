@@ -83,8 +83,8 @@ async function executarUm(p: Passo, plano: Plano, agentes: Readonly<Record<strin
       }
       // In particular outcome.state has no authority over the run state.
       return { id: p.id, resultado: "ok", saida: snapshotSaida(outcome), tentativas: tentativa };
-    } catch (err) {
-      if (err instanceof Error && err.message === "TIMEOUT")
+    } catch {
+      if (expirou)
         return { id: p.id, resultado: "unattempted", motivo: "TIMEOUT", tentativas: tentativa };
       if (tentativa === 2)
         return { id: p.id, resultado: "error", motivo: "AGENTE_ERRO", tentativas: tentativa };
@@ -137,7 +137,11 @@ export async function executarOrk(plano: Plano, agentes: Readonly<Record<string,
       && visao.data.cobertura.setoresEsperados.every(s => visao.data.cobertura.setoresAvaliados.includes(s)
         || visao.data.lacunas.some(l => l.setor === s));
     run.estado = completa ? "PRONTO" : "FALHOU";
-  } else run.estado = run.resultados.some((r) => r.resultado === "ok") ? "PRONTO" : "FALHOU";
+  } else {
+    // Terminal = nenhum passo depende dele; a posição no array não tem significado no grafo.
+    const terminais = plano.passos.filter((p) => !plano.passos.some((q) => q.dependsOn.includes(p.id)));
+    run.estado = terminais.some((t) => run.resultados.find((r) => r.id === t.id)?.resultado === "ok") ? "PRONTO" : "FALHOU";
+  }
   run.etapa = "JOIN";
   return run;
 }

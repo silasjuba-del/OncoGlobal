@@ -39,11 +39,15 @@ export function AcoesCompostas({ base, tipoInicial, ocupado = false, aoPreparar,
   const identidadeBase = `${base?.revisao ?? "ausente"}:${base?.baseHash ?? "ausente"}`;
   const identidadePreview = useRef(identidadeBase);
   const sequencia = useRef(0);
+  const emPreparo = useRef(false);
+  const emUso = useRef(false);
 
   useEffect(() => {
     if (identidadePreview.current !== identidadeBase) {
       identidadePreview.current = identidadeBase;
       sequencia.current += 1;
+      emPreparo.current = false;
+      emUso.current = false;
       setPreview(null);
       setErro(null);
       setPreparando(false);
@@ -77,7 +81,9 @@ export function AcoesCompostas({ base, tipoInicial, ocupado = false, aoPreparar,
   };
 
   const preparar = async () => {
-    if (!pedido || !base || ocupado || preparando) return;
+    if (!pedido || !base || ocupado || preparando || emPreparo.current) return;
+    emPreparo.current = true;
+    emUso.current = false;
     const tarefa = ++sequencia.current;
     const identidadeDaSolicitacao = identidadeBase;
     setPreparando(true);
@@ -91,17 +97,24 @@ export function AcoesCompostas({ base, tipoInicial, ocupado = false, aoPreparar,
       if (tarefa !== sequencia.current) return;
       setErro(cause instanceof Error ? cause.message : "Não foi possível preparar a prévia.");
     } finally {
-      if (tarefa === sequencia.current) setPreparando(false);
+      if (tarefa === sequencia.current) {
+        emPreparo.current = false;
+        setPreparando(false);
+      }
     }
   };
 
   const usar = () => {
-    if (!preview || preview.estado !== "PREPARADA" || !base) return;
+    if (!preview || preview.estado !== "PREPARADA" || !base || ocupado || emUso.current) return;
     if (preview.baseHash !== base.baseHash || preview.baseRevisao !== base.revisao) {
       setPreview(null);
       setErro("A base mudou. Prepare uma nova prévia para revisar.");
       return;
     }
+    emUso.current = true;
+    queueMicrotask(() => {
+      emUso.current = false;
+    });
     aoUsar(preview);
   };
 

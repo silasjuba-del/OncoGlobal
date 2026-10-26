@@ -425,7 +425,10 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, aoAbrirCanal,
     propsFlash.planoInicial=antigo?{...antigo,solicitacoes,propostasInvestigacao:referencias}:{acoesMarcadas:[],receitasMarcadas:[],apac:{...propsFlash.apac,emitir:false},retorno:propsFlash.retorno,solicitacoes,propostasInvestigacao:referencias};
   }
   return <section aria-label="Consulta persistida" className="consulta-persistida">
-    {!visaoPronta ? <p aria-live="polite">{cargaAtual?.erro || "Carregando consulta persistida…"}</p> : <>
+    {!visaoPronta ? <>
+      <p {...(cargaAtual?.erro ? { role: "alert" } : {})} aria-live="polite">{cargaAtual?.erro || "Carregando consulta persistida…"}</p>
+      {cargaAtual?.erro ? <button type="button" onClick={() => setVersao((v) => v + 1)}>Recarregar consulta</button> : null}
+    </> : <>
     {visaoPronta.alertas.filter((a) => a.presentationOverride).map((a) =>
       <aside role="alert" data-banner="e1" key={a.alertaId}><strong>Emergência E1</strong><p>{a.texto}</p></aside>)}
     {mensagem ? <p aria-live="polite">{mensagem}</p> : null}
@@ -522,7 +525,7 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, aoAbrirCanal,
         aoPreparar={prepararRx} aoAssinar={assinarRx} cienciaPendente={cienciaPendente}
         aoDescartarAcao={() => setOrigemAcaoRx(null)}
         {...(aoAlterarPrescricaoPendente ? { aoAlterarPendente: aoAlterarPrescricaoPendente } : {})} />
-        : <p role="status">Carregando a base da prescrição…</p>}
+        : !erroRx ? <p role="status">Carregando a base da prescrição…</p> : null}
     </section> : null}
     {apacRascunhoAberto && porta.lerBaseApacRascunho && porta.prepararApacRascunho && porta.confirmarApacRascunho
       ? <PrepararApacConsulta porta={porta} contexto={{ patientId, encounterId, tumorLotId: tumorLotId ?? null }} aberto

@@ -90,6 +90,8 @@ jobs:
         env:
           TMPDIR: ${{ runner.temp }}
         run: npm run test:b2
+      - name: Validar layout e movimento reduzido no Chromium
+        run: node node_modules/vitest/vitest.mjs run --config tests/hostil-cursor/navegador/vitest.config.ts
       - name: Guardar evidencias sinteticas
         if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v4
