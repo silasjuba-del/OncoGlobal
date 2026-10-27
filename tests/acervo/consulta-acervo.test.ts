@@ -15,10 +15,10 @@ function ambiente() {
   const token = sessoes.login("senha-sintetica-acervo")!.token;
   const lib = criarBiblioteca(db, { autorizarCuradoria: () => ({ atorId: "MEDICO-SINTETICO" }), agora, emitir: () => {} });
   const deps = { db, sessoes, agora };
-  function importar(itens: { id: string; texto: string; curado?: boolean }[], versao = "1.0.0") {
+  function importar(itens: { id: string; texto: string; curado?: boolean; tumor?: string[] }[], versao = "1.0.0") {
     const arquivos = new Map(itens.map(i => [i.id + ".json", JSON.stringify({ schema: "ItemBiblioteca@1", id: i.id, versao, pilar: 1,
       tipo: "REFERENCIA", titulo: `Documento sintético ${i.id}`, texto: i.texto,
-      aplicabilidade: { tumor: [], histologia: [], estadio: [], biomarcador: [], linha: [] },
+      aplicabilidade: { tumor: i.tumor ?? [], histologia: [], estadio: [], biomarcador: [], linha: [] },
       proveniencia: { fonte: "https://example.org/sintetico", trecho: "Trecho sintético de referência", publicadoEm: "2026-01-01", recuperadoEm: "2026-10-26T12:00:00Z", licenca: "SINTETICA" }, dependencias: [] })]));
     const id = lib.importarPacote({ schema: "PacoteBiblioteca@1", id: "pacote-sintetico", versao, origem: "CURADOR_LOCAL", classificacao: "PUBLIC", criadoEm: agora(),
       itens: itens.map(i => ({ id: i.id, versao, arquivo: i.id + ".json", sha256: sha256Biblioteca(arquivos.get(i.id + ".json")!) })) }, n => arquivos.get(n)!);
@@ -52,6 +52,13 @@ describe("acervo textual curado — serviço único de leitura", () => {
     expect(BuscaAcervoResposta.parse(a.buscar("agulha").body)).toMatchObject({ codigo: "ACERVO_VAZIO", referenciaBiblioteca: null });
     a.importar([{ id: "curado", texto: "Texto público SINTETICO" }, { id: "rascunho", texto: "agulha", curado: false }]);
     expect(BuscaAcervoResposta.parse(a.buscar("agulha").body)).toMatchObject({ codigo: "ACERVO_SEM_RESULTADOS", resultados: [], cobertura: { itensConsultaveis: 1, completudeFontesExternas: "NAO_GARANTIDA" } });
+  });
+  it("inclui item curado com aplicabilidade específica sem aplicar filtro clínico", () => {
+    const a = ambiente();
+    a.importar([{ id: "tumor-especifico", texto: "Referência SINTETICA para tumor", tumor: ["sintetico"] }]);
+    const ref = BuscaAcervoResposta.parse(a.buscar("Referência SINTETICA").body).resultados[0]!;
+    expect(ref.itemId).toBe("tumor-especifico");
+    expect(a.ler(ref).status).toBe(200);
   });
   it("revisão de curadoria ou ativação invalida referências antigas inclusive volta ao mesmo estado", () => {
     const a = ambiente(), pacote = a.importar([{ id: "um", texto: "Texto alvo SINTETICO" }]);

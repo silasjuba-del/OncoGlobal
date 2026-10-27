@@ -1,11 +1,10 @@
 import type { DatabaseSync } from "node:sqlite";
 import { z } from "zod";
 import { Instante, Sessao } from "../contracts/base.js";
-import { BibliotecaConsulta, type ItemBibliotecaConteudo } from "../contracts/api/biblioteca.js";
+import { BibliotecaEstado, ItemBibliotecaConteudo, type ItemBibliotecaConteudo as ItemBibliotecaConteudoTipo } from "../contracts/api/biblioteca.js";
 import { BuscaAcervoResposta, DocumentRef, LeituraAcervoResposta, PedidoBuscaAcervo, PedidoLeituraAcervo,
   type LocalizadorAcervo } from "../contracts/api/consultaAcervo.js";
 import { hashCanonico } from "../modules/hash.js";
-import { listarCuradoriaAtual } from "../kernel/corpus/biblioteca.js";
 import { hashCuradoriaPacote, rotearBiblioteca } from "./biblioteca.js";
 import type { GerenciadorSessao } from "./sessao.js";
 
@@ -33,12 +32,21 @@ export function operarConsultaAcervo(deps: DepsConsultaAcervo, token: string, ro
     if (!sessao.success || Date.parse(sessao.data.emitidaEm) > Date.parse(em) || Date.parse(sessao.data.expiraEm) <= Date.parse(em))
       return { status: 401, body: { codigo: "SESSAO_INVALIDA" } };
     const pedido = rota === "/acervo/buscar" ? PedidoBuscaAcervo.parse(raw) : PedidoLeituraAcervo.parse(raw);
-    const resposta = rotearBiblioteca(deps, token, "/biblioteca/consultar", { filtros: {}, modo: "CONSULTA" }, sessao.data);
+    const resposta = rotearBiblioteca(deps, token, "/biblioteca/estado", {}, sessao.data);
     if (!resposta || resposta.status !== 200) return resposta ?? { status: 503, body: { codigo: "ACERVO_INDISPONIVEL" } };
-    const consulta = BibliotecaConsulta.parse(resposta.body), ref = consulta.referencia;
+    const estado = BibliotecaEstado.parse(resposta.body), ref = estado.referencia;
     const pacoteId = ref ? `${ref.id}@${ref.versao}` : null;
-    const curados = new Set(pacoteId ? listarCuradoriaAtual(deps.db, pacoteId).filter(i => i.estado === "CONSULTAVEL").map(i => i.item) : []);
-    const itens = consulta.itens.filter(i => curados.has(i.id));
+    const porId = new Map(estado.itens.map(item => [item.id, item]));
+    function aprovado(id: string, caminho = new Set<string>()): boolean {
+      const item = porId.get(id);
+      if (!item || !["CONSULTAVEL", "ALERTA"].includes(item.estado) || caminho.has(id)) return false;
+      caminho.add(id);
+      const resultado = item.dependencias.every(dep => porId.get(dep.id)?.versao === dep.versao && aprovado(dep.id, caminho));
+      caminho.delete(id);
+      return resultado;
+    }
+    const itens: ItemBibliotecaConteudoTipo[] = estado.itens.filter(i => i.estado === "CONSULTAVEL" && aprovado(i.id))
+      .map(i => ItemBibliotecaConteudo.parse(i));
     const revisaoAcervo = ref && pacoteId ? hashCanonico({ referencia: ref, curadoriaHash: hashCuradoriaPacote(deps.db, pacoteId),
       ativacao: deps.db.prepare('SELECT max(seq) AS seq FROM biblioteca_ativacao').get()?.seq ?? null }) : null;
     const ordenados = [...itens].sort((a, b) => a.id < b.id ? -1 : a.id > b.id ? 1 : 0);

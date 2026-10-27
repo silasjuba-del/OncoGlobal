@@ -21,9 +21,11 @@ export function catalogo() {
 export function configuracao(env = process.env) {
   const endereco = env.ONCOGLOBAL_API_URL ?? 'http://127.0.0.1:4181';
   // Explicit literal host and port; URL normalization alone would accept integer/hex hosts.
-  if (!/^http:\/\/(127\.0\.0\.1|\[::1\]):[0-9]{1,5}\/?$/.test(endereco)) throw Error('ENDPOINT_LOCAL_INVALIDO');
+  const endpoint = endereco.match(/^http:\/\/(?:127\.0\.0\.1|\[::1\]):([0-9]{1,5})\/?$/);
+  if (!endpoint) throw Error('ENDPOINT_LOCAL_INVALIDO');
+  const porta = Number(endpoint[1]);
+  if (porta < 1 || porta > 65535) throw Error('ENDPOINT_LOCAL_INVALIDO');
   const url = new URL(endereco);
-  if (!url.port || Number(url.port) < 1 || Number(url.port) > 65535) throw Error('ENDPOINT_LOCAL_INVALIDO');
   const token = env.ONCOGLOBAL_API_TOKEN;
   if (!token || !/^[\x21-\x7e]{1,4096}$/.test(token)) throw Error('TOKEN_LOCAL_AUSENTE_OU_INVALIDO');
   return { url: url.origin, token };

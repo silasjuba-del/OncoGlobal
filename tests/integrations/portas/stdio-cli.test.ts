@@ -8,7 +8,7 @@ import { z } from 'zod';
 import { PedidoBuscaAcervo, PedidoLeituraAcervo, BuscaAcervoResposta, LeituraAcervoResposta } from '../../../src/contracts/api/consultaAcervo.js';
 import { EstadoIntegracoes } from '../../../src/contracts/api/integracoesEstado.js';
 // @ts-expect-error CLI JavaScript executable, tested as subprocess and schema boundary.
-import { catalogo } from '../../../scripts/integrations/leitura-local.mjs';
+import { catalogo, configuracao } from '../../../scripts/integrations/leitura-local.mjs';
 
 const servidores: Server[] = [];
 const proveniencia={fonte:'SINTETICO',trecho:'Trecho sintético',publicadoEm:'2026-10-26',recuperadoEm:'2026-10-26',licenca:'SINTETICA'};
@@ -89,6 +89,8 @@ it('CLI e MCP subprocess retornam o mesmo JSON pela API autenticada, sem efeito 
 
 it('CLI recusa comandos/argumentos, endpoints não literais, redirects e erros sem refletir segredos', async () => {
   const s=await servidor();
+  expect(configuracao({ONCOGLOBAL_API_URL:'http://127.0.0.1:80',ONCOGLOBAL_API_TOKEN:'TOKEN-SINTETICO'}).url).toBe('http://127.0.0.1');
+  expect(configuracao({ONCOGLOBAL_API_URL:'http://[::1]:80',ONCOGLOBAL_API_TOKEN:'TOKEN-SINTETICO'}).url).toBe('http://[::1]');
   const ajuda=await processo('oncoglobal-cli.mjs',['--help'],'');expect(ajuda.code).toBe(0);
   // Numeric IPv4 representation of 127.0.0.1, not a telephone fixture.
   const ipv4Numerico = String(0x7f000001);
