@@ -91,9 +91,9 @@ export function exibirBundle(deps: ServidorDeps, token: string,
 }
 /** Fatos e resumos com recibo válido compõem a revisão documental; o relógio não a altera. */
 export function revisaoDocumentosFlash(deps:ServidorDeps,contexto:{patientId:string;encounterId:string;tumorLotId:string|null},
-  sessao: Parameters<typeof lerConsulta>[3]):string {
+  sessao: Parameters<typeof lerConsulta>[3], consultaLida?: ReturnType<typeof lerConsulta>):string {
   const retrato = deps.motorF1?.retrato(contexto).revisao ?? hashConteudoExibido(listarEventos(deps.db,contexto.patientId));
-  const consulta = lerConsulta(deps.db, contexto.patientId, deps.agora(), sessao, contexto.tumorLotId,
+  const consulta = consultaLida ?? lerConsulta(deps.db, contexto.patientId, deps.agora(), sessao, contexto.tumorLotId,
     { ...opcoesLeituraConsulta(deps, sessao), encounterId: contexto.encounterId });
   if ("codigo" in consulta) return retrato;
   const resumos = consulta.evolucoesRascunho.filter((e) => e.revisaoRegistrada)

@@ -60,11 +60,11 @@ describe("Aparência, agrupamento de seções e revisão clínica", () => {
     fireEvent.change(await screen.findByLabelText("Paciente da agenda"), { target: { value: "en-verde" } });
     await screen.findByRole("region", { name: "Identificação da consulta" });
 
-    // Todas as 5 seções começam abertas por padrão
+    // O pack documental começa recolhido; demais seções mantêm o comportamento.
     const secaoDocs = document.getElementById("consulta-documentos")!;
     const secaoFase2 = document.getElementById("consulta-fase2")!;
     expect(secaoDocs.style.display).not.toBe("none");
-    expect(secaoFase2.style.display).not.toBe("none");
+    expect(secaoFase2.style.display).toBe("none");
 
     // 3. Clicar em "Focar grupo" na seção 02 (Captura & Entrada única) recolhe as outras em 1 clique
     const botoesFocar = screen.getAllByRole("button", { name: "Focar grupo" });
@@ -208,6 +208,7 @@ describe("Aparência, agrupamento de seções e revisão clínica", () => {
     fireEvent.click(screen.getByRole("button", { name: "Entrar" }));
     fireEvent.change(await screen.findByLabelText("Paciente da agenda"), { target: { value: "en-verde" } });
 
+    fireEvent.click(await screen.findByRole("link", { name: "Ficha e packs" }));
     await screen.findByRole("button", { name: "Todos (5)" });
     const regiaoFicha = screen.getByRole("region", { name: "Ficha e revisão clínica" });
     const secaoPreQt = within(regiaoFicha).getByText(/Pré-QT ·/).closest("details")!;
@@ -308,6 +309,7 @@ describe("Aparência, agrupamento de seções e revisão clínica", () => {
     fireEvent.click(screen.getByRole("button", { name: "Entrar" }));
     fireEvent.change(await screen.findByLabelText("Paciente da agenda"), { target: { value: "en-verde" } });
 
+    fireEvent.click(await screen.findByRole("link", { name: "Ficha e packs" }));
     const card = await screen.findByLabelText("Pack documental selecionado");
     const blocos = [...card.querySelectorAll("details.oc21-details-card")] as HTMLDetailsElement[];
     expect(blocos).toHaveLength(BLOCOS_TUMOR_PACK.length);

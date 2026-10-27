@@ -224,6 +224,10 @@
     "oncoassistStatus"
   ],
   [
+    "/consulta/pack/fonte",
+    "fontePack"
+  ],
+  [
     "/consulta/prescricao-executavel/base",
     "basePrescricaoExecutavel"
   ],

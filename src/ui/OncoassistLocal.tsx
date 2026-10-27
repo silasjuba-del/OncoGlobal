@@ -56,7 +56,7 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp }: {
   const [versaoConsulta,setVersaoConsulta]=useState(0);
   const [metricas,setMetricas]=useState(metricasVazias);
   const [combo21st, setCombo21st] = useState<Combinacao21stId>(lerCombinacao21st);
-  const [gruposAbertos, setGruposAbertos] = useState<Record<GrupoConsultaId, boolean>>(estadoInicialGruposConsulta);
+  const [gruposAbertos, setGruposAbertos] = useState<Record<GrupoConsultaId, boolean>>(() => ({ ...estadoInicialGruposConsulta(), "consulta-fase2": false }));
   useEffect(() => { gravarCombinacao21st(combo21st); }, [combo21st]);
   const alternarGrupo = useCallback((id: GrupoConsultaId) => {
     setGruposAbertos((atual) => ({ ...atual, [id]: !atual[id] }));
@@ -396,6 +396,8 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp }: {
           aoAbrirApac={() => navegarParaTela("apac")} aoAbrirCanal={() => navegarParaTela("canal")} />
         <SecaoAcordeon21st
           id="consulta-fase2"
+          key={`pack:${contexto.patientId}:${contexto.encounterId}:${contexto.tumorLotId}`}
+          sobDemanda
           numero="01"
           titulo="Ficha clínica & Tumor-packs"
           resumo="Revisão estruturada do lote tumoral, estadiamento e diretrizes locais"

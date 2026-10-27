@@ -228,7 +228,7 @@ function montarDocumentos(chave: string, plano: PlanoFlashEntradaTipo, resumoCli
   if (essencial) {
     // Cópia fixa dos documentos selecionados; o conjunto também exige exibição e assinatura.
     const documentosIncluidos = docs.map(d => ({ documentId: d.documentId, documentVersion: 1, titulo: d.titulo }));
-    const textoConjunto = docs.map(d => `${d.titulo}\n${d.texto}`).join("\n\n---\n\n");
+    const textoConjunto = ""; // Composto uma única vez, depois dos textos e da identidade finais.
     docs.push({ documentId: id("conjunto"), titulo: "Conjunto da Consulta Flash", tipoDocumento: TIPO_DOC.conjunto,
       texto: textoConjunto, extra: { documentosIncluidos } });
   }
@@ -318,16 +318,20 @@ function prepararDocumentosFlash(db: DatabaseSync, agora: string, input: Context
     preparacaoDocumentos={...preparacaoDocumentos,tarefas};
     const retorno=docs.find(d=>d.tipoDocumento===TIPO_DOC.retorno);
     if(retorno)retorno.extra={...retorno.extra,tarefasRetornoS9:tarefas};
-    const conjunto=docs.find(d=>d.tipoDocumento===TIPO_DOC.conjunto);
-    if(conjunto){const incluidos=docs.filter(d=>d!==conjunto);conjunto.texto=incluidos.map(d=>`${d.titulo}\n${d.texto}`).join("\n\n---\n\n");conjunto.extra={...conjunto.extra,documentosIncluidos:incluidos.map(d=>({documentId:d.documentId,documentVersion:1,titulo:d.titulo}))};}
+
   }
   if(fonteDocumentos?.identidadePaciente){
     const identidadePaciente=fonteDocumentos.identidadePaciente;
     for(const d of docs){d.texto=`Paciente: ${identidadePaciente.nome} · ${identidadePaciente.patientId}\n\n${d.texto}`;d.extra={...d.extra,identidadePaciente};}
-    const conjunto=docs.find(d=>d.tipoDocumento===TIPO_DOC.conjunto);
-    if(conjunto)conjunto.texto=docs.filter(d=>d!==conjunto).map(d=>`${d.titulo}\n${d.texto}`).join("\n\n---\n\n");
+
   }
   if(fonteDocumentos?.identidadeResponsavel)for(const d of docs)d.extra={...d.extra,identidadeResponsavel:fonteDocumentos.identidadeResponsavel};
+  const conjuntoFinal = docs.find(d => d.tipoDocumento === TIPO_DOC.conjunto);
+  if (conjuntoFinal) {
+    const incluidos = docs.filter(d => d !== conjuntoFinal);
+    conjuntoFinal.texto = incluidos.map(d => `${d.titulo}\n${d.texto}`).join("\n\n---\n\n");
+    conjuntoFinal.extra = { ...conjuntoFinal.extra, documentosIncluidos: incluidos.map(d => ({ documentId: d.documentId, documentVersion: 1, titulo: d.titulo })) };
+  }
   const draftsDocs = docs.map((d) => ({
     doc: d,
     payload: {

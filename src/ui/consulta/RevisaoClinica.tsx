@@ -82,7 +82,7 @@ export function RevisaoClinica({
     }
     setOcupado(true);
     void porta
-      .revisaoClinica(contexto, packId || undefined, abort.signal)
+      .revisaoClinica(contexto, packId || undefined, abort.signal, !!porta.fontePack)
       .then((bruto) => {
         if (atual !== geracao.current) return;
         const r = RevisaoClinicaResposta.safeParse(bruto);
@@ -135,6 +135,7 @@ export function RevisaoClinica({
     setBlocosAbertos(atual => atual[nome] === aberto ? atual : { ...atual, [nome]: aberto });
   };
 
+  const blocos = atual?.pack && "blocos" in atual.pack ? atual.pack.blocos : null;
   return (
     <section aria-label="Ficha e revisão clínica" className="revisao-clinica-bento" aria-busy={ocupado}>
       <div className="revisao-clinica-topo">
@@ -379,19 +380,21 @@ export function RevisaoClinica({
                 <LoteTumoralCompleto
                   key={atual.loteCompleto.original.sha256}
                   lote={atual.loteCompleto}
+                  carregarFonte={porta.fontePack ? signal => porta.fontePack!({...contexto,
+                    packId:atual.pack!.referencia.id,hashOriginal:atual.pack!.original.hash},signal) : undefined}
                 />
               ) : (
-                BLOCOS_TUMOR_PACK.map((nome) => {
+                blocos ? BLOCOS_TUMOR_PACK.map((nome) => {
                   const blocoAberto = imprimindo || (blocosAbertos[nome] ?? false);
                   return (
                   <details key={nome} className="oc21-details-card" open={blocoAberto}
                     onToggle={e => registrarToggleBloco(nome, e.currentTarget.open, blocoAberto)}>
                     <summary>
-                      {ROTULOS_BLOCOS[nome]} · {atual.pack!.blocos[nome].estado}
+                      {ROTULOS_BLOCOS[nome]} · {blocos[nome].estado}
                     </summary>
                     <div className="oc21-details-body">
-                      {atual.pack!.blocos[nome].itens.length ? (
-                        atual.pack!.blocos[nome].itens.map((item) => (
+                      {blocos[nome].itens.length ? (
+                        blocos[nome].itens.map((item) => (
                           <section key={item.localizador}>
                             <h4>{item.localizador}</h4>
                             <pre style={{ whiteSpace: "pre-wrap", overflowWrap: "anywhere" }}>
@@ -405,7 +408,7 @@ export function RevisaoClinica({
                     </div>
                   </details>
                   );
-                })
+                }) : <p>Apresentação documental indisponível.</p>
               )}
             </div>
           ) : null}

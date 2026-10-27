@@ -207,6 +207,11 @@ export function rotearPrescricaoFlashConfig(
     const consultaRevisada = lerConsulta(deps.db, parsed.data.patientId, deps.agora(), sessao, parsed.data.tumorLotId,
       { ...opcoesLeituraConsulta(deps, sessao), encounterId: parsed.data.encounterId });
     if ("codigo" in consultaRevisada) return reply(409, consultaRevisada.codigo);
+    // Rascunho não prepara documentos nem varre suas fontes/histórico de assinatura.
+    if ("expectedRevision" in parsed.data) {
+      const result = salvarRascunhoFlash(deps.db, deps.agora(), parsed.data);
+      return reply(result.status, String(result.body.codigo), result.body);
+    }
     const resumoClinico = consultaRevisada.resumoConfirmadoParaDocumento;
     const contextoS9 = { patientId: parsed.data.patientId, encounterId: parsed.data.encounterId, tumorLotId: parsed.data.tumorLotId };
     const indicacoesInvestigacao: Record<string, string> = {};
@@ -218,14 +223,14 @@ export function rotearPrescricaoFlashConfig(
         const proposta = candidatas.length === 1 ? candidatas[0] : null;
         if (atual.revisao !== escolhida.revisaoFatos || !proposta || !["LABORATORIO", "IMAGEM"].includes(proposta.categoria ?? ""))
           return reply(409, "INVESTIGACAO_ALTERADA_REPREPARAR");
-        const itens = proposta.categoria === "IMAGEM" ? parsed.data.plano.solicitacoes?.imagem : parsed.data.plano.solicitacoes?.laboratorio;
+        const itens: readonly string[] | undefined = proposta.categoria === "IMAGEM" ? parsed.data.plano.solicitacoes?.imagem : parsed.data.plano.solicitacoes?.laboratorio;
         if (!itens?.includes(proposta.exameCodigo)) return reply(409, "PROPOSTA_FORA_DO_PEDIDO");
         const chave = `${proposta.categoria}|${proposta.exameCodigo}`;
         if (indicacoesInvestigacao[chave]) return reply(409, "PROPOSTA_INVESTIGACAO_DUPLICADA");
         indicacoesInvestigacao[chave] = `${proposta.justificativa} Referência: ${escolhida.referencia.id} v${escolhida.referencia.versao}.`;
       }
     }
-    const revisaoS9 = revisaoDocumentosFlash(deps, contextoS9, sessao);
+    const revisaoS9 = revisaoDocumentosFlash(deps, contextoS9, sessao, consultaRevisada);
     const civilS9 = dataCivilDoServico(deps.agora(), "-03:00");
     if (civilS9.estado !== "OK") return reply(409, civilS9.codigo);
     const hashDecisao = hashConteudoExibido({ contexto: contextoS9, plano: parsed.data.plano, revisao: revisaoS9 });
@@ -282,9 +287,7 @@ export function rotearPrescricaoFlashConfig(
       },
       dataReferencia: civilS9.dataCivil, revisao: revisaoS9,
     };
-    const result = "expectedRevision" in parsed.data
-      ? salvarRascunhoFlash(deps.db, deps.agora(), parsed.data)
-      : prepararFinalizacaoFlash(
+    const result = prepararFinalizacaoFlash(
         deps.db, deps.agora(), parsed.data, resumoClinico,
         consultaRevisada.cabecalho.episodio && consultaRevisada.cabecalho.ciclo
           ? {

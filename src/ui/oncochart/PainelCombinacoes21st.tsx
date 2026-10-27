@@ -364,7 +364,9 @@ export function SecaoAcordeon21st({
   aoAlternar,
   aoFocarSomenteEste,
   children,
+  sobDemanda = false,
 }: {
+  sobDemanda?: boolean;
   id: GrupoConsultaId;
   numero: string;
   titulo: string;
@@ -374,6 +376,8 @@ export function SecaoAcordeon21st({
   aoFocarSomenteEste: () => void;
   children: ReactNode;
 }) {
+  const [visitado, setVisitado] = useState(aberto);
+  useEffect(() => { if (aberto) setVisitado(true); }, [aberto]);
   return (
     <div
       className="oc21-acordeon"
@@ -411,7 +415,7 @@ export function SecaoAcordeon21st({
         tabIndex={-1}
         style={aberto ? undefined : { display: "none" }}
       >
-        {children}
+        {!sobDemanda || aberto || visitado ? children : null}
       </div>
     </div>
   );
