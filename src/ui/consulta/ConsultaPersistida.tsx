@@ -34,9 +34,10 @@ type DocumentoPreview = { documentId: string; documentVersion: number; draftId: 
 type Preview = { preparacao: FlashPreparada; documentos: DocumentoPreview[]; operacao: string };
 
 /** Composição HTTP real. Nenhum cadastro, prescrição ou histórico de demonstração. */
-export function ConsultaPersistida({ porta, contexto, aoAbrirApac, aoAbrirCanal, versaoClinica = 0,
+export function ConsultaPersistida({ pedidoAberturaFlash = 0, porta, contexto, aoAbrirApac, aoAbrirCanal, versaoClinica = 0,
   aoAlterarPrescricaoPendente, aoAlterarPrescricaoSalvando, aoAlterarApacPendente,
   aoAlterarApacSalvando, aoAtualizarClinico }: {
+  pedidoAberturaFlash?: number;
   porta: PortaConsulta; contexto: PedidoBundle; aoAbrirApac?:()=>void; versaoClinica?: number;
   aoAbrirCanal?: () => void;
   aoAlterarPrescricaoPendente?: (pendente: boolean) => void;
@@ -55,6 +56,8 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, aoAbrirCanal,
     contexto: PedidoBundle; versao: number; versaoClinica: number;
   } | null>(null);
   const [flash, setFlash] = useState(false);
+  useEffect(() => { if (pedidoAberturaFlash > 0) setFlash(true); }, [pedidoAberturaFlash]);
+  useEffect(() => { if (flash && pedidoAberturaFlash > 0) document.getElementById("consulta-flash-integrada")?.scrollIntoView?.({ block: "start" }); }, [flash, pedidoAberturaFlash]);
   const [pedidoInvestigacao,setPedidoInvestigacao]=useState<MinutaInvestigacao|null>(null);
   const [pedidoRevisao,setPedidoRevisao]=useState("");
   const [preview, setPreview] = useState<Preview | null>(null);
@@ -393,6 +396,7 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, aoAbrirCanal,
   const cienciaPendente = (visaoPronta?.alertas ?? []).some(a=>a.presentationOverride && !a.reconhecidoEm && !cientes.includes(a.alertaId));
   const propsFlash: ConsultaFlashProps | null = visaoParaEdicao ? {
     ...montarPropsFlash(visaoParaEdicao, null, preparar, salvar),
+    ...(porta.recuperarAtendimentoV6 ? { carregarAtendimento: () => porta.recuperarAtendimentoV6!({ patientId, encounterId, tumorLotId }) } : {}),
     ...(aoAbrirApac ? {aoAbrirApac} : {}),
     ...(porta.proporDoseReceita?{aoProporDose:(medicamento:string)=>porta.proporDoseReceita!({patientId,encounterId,tumorLotId},medicamento)}:{}),
     ocupado: ocupado || !visaoPronta, rotuloFinalizar: "Revisar documentos para assinatura", aoSalvarRascunho: salvar, aoFinalizar: preparar,
@@ -520,7 +524,7 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, aoAbrirCanal,
         {...(aoAlterarApacPendente ? { aoAlterarPendente: aoAlterarApacPendente } : {})}
         {...(aoAlterarApacSalvando ? { aoAlterarSalvando: aoAlterarApacSalvando } : {})}
         aoAtualizarClinico={() => { if (aoAtualizarClinico) aoAtualizarClinico(); else setVersao(v => v + 1); }} /> : null}
-    {flash && propsFlash ? <div hidden={!visaoPronta}>
+    {flash && propsFlash ? <div id="consulta-flash-integrada" hidden={!visaoPronta}>
       <ConsultaFlash key={`${patientId}:${encounterId}:${tumorLotId ?? ""}:${pedidoInvestigacao?.exameCodigo??"manual"}:${pedidoInvestigacao?.contexto??""}:${pedidoRevisao}`} {...propsFlash} />
     </div> : null}
     {visaoPronta ? <>

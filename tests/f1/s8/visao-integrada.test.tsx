@@ -28,7 +28,11 @@ it("mostra resumo, avaliação transversal primeiro, cobertura e sete setores ex
   expect(screen.getByText("Hemoglobina: 9 g/dL.")).toBeTruthy();
   expect(screen.getByLabelText("Cobertura").textContent).toContain("1 de 7");
   expect(screen.getAllByText(/FEVE não disponível/).length).toBe(2);
-  expect(document.querySelectorAll("details")).toHaveLength(9);
+  expect(document.querySelectorAll("details")).toHaveLength(10);
+  const lacunas = screen.getByText("Lacunas · 1 para conferir").closest("details")!;
+  expect(lacunas.open).toBe(false);
+  fireEvent.click(screen.getByText("Lacunas · 1 para conferir"));
+  expect(lacunas.open).toBe(true); expect(lacunas.textContent).toContain("FEVE não disponível.");
   const citacao=screen.getAllByRole("link",{name:"evento-lab"})[0]!;fireEvent.click(citacao);
   expect(screen.getByText(/Fonte fonte-HMG/).closest("details")?.open).toBe(true);
   expect(document.getElementById(citacao.getAttribute("href")!.slice(1))?.textContent).toContain("página 2");

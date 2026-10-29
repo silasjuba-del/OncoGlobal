@@ -20,6 +20,7 @@ import { lerConsulta } from "../leituras.js";
 import { nomeMedicamento } from "../propostasDoseReceita.js";
 import type { ServidorDeps } from "../rotas.js";
 import { hashConteudoExibido } from "../sessao.js";
+import { resolverEvolucaoFlash } from "../atendimentoV6.js";
 import { contextoDraft, opcoesLeituraConsulta, revisaoDocumentosFlash, sha } from "./confirmacao.js";
 import type { RespostaRota } from "./salaoCanal.js";
 
@@ -214,6 +215,9 @@ export function rotearPrescricaoFlashConfig(
     }
     const resumoClinico = consultaRevisada.resumoConfirmadoParaDocumento;
     const contextoS9 = { patientId: parsed.data.patientId, encounterId: parsed.data.encounterId, tumorLotId: parsed.data.tumorLotId };
+    const evolucaoAtendimento = parsed.data.plano.evolucaoAtendimento
+      ? resolverEvolucaoFlash(deps, token, contextoS9, parsed.data.plano.evolucaoAtendimento) : null;
+    if (parsed.data.plano.evolucaoAtendimento && !evolucaoAtendimento) return reply(409, "EVOLUCAO_ALTERADA_OU_PENDENTE");
     const indicacoesInvestigacao: Record<string, string> = {};
     if (rota === "prepararFlash" && parsed.data.plano.propostasInvestigacao?.length) {
       const atual = obterInvestigacao(deps, contextoS9);
@@ -276,6 +280,7 @@ export function rotearPrescricaoFlashConfig(
       if (parsed.data.plano.receitasMarcadas.includes(ref.receitaId)) propostasDose.push(candidato);
     }
     const fonteS9 = {
+      ...(evolucaoAtendimento ? { evolucaoAtendimento } : {}),
       propostasDoseReceita: propostasDose,
       ...(Object.keys(indicacoesInvestigacao).length ? { indicacoesInvestigacao } : {}),
       ...(identidadePaciente ? { identidadePaciente } : {}),

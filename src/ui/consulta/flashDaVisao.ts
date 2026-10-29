@@ -25,6 +25,10 @@ export function montarPropsFlash(visao: ConsultaIntegrada, _chart: CabecalhoChar
   const dx = texto(lote?.topografia) ?? texto(lote?.histologia);
   const tnm = est ? `${est.prefixo ?? ""}${est.T ?? "?"}${est.N ?? "?"}${est.M ?? "?"}` : undefined;
   const f = visao.flash;
+  const qualificadas = visao.evidencias.filter(e => ["CONFIRMADO", "ASSINADO"].includes(e.revisao));
+  const formatar = (e: typeof qualificadas[number]) => `${e.rotulo}: ${e.campo === "CONFLITO" ? "A CONFERIR" : e.campo === "PRESENTE" ? e.valorTexto ?? "PENDENTE" : "PENDENTE"} (${e.fontes.map(f => `${f.sourceId} · ${f.dataClinica ?? "data não informada"}`).join("; ") || "fonte não informada"})`;
+  const ecog = qualificadas.filter(e => /^(ECOG|Performance status ECOG)$/i.test(e.rotulo));
+  const biomarcadores = qualificadas.filter(e => /biomarcador|pd-?l1/i.test(e.rotulo));
   const confirmados = fatosConfirmadosFlash({ ...visao, diagnostico: dx,
     conflitoCabecalho: [lote?.topografia, lote?.histologia].some(d => d?.campo === "CONFLITO"),
     laboratorios: f?.laboratorios ?? [] });
@@ -32,6 +36,12 @@ export function montarPropsFlash(visao: ConsultaIntegrada, _chart: CabecalhoChar
   return {
     pacienteNome: visao.cabecalho.paciente.nome, hoje: visao.hoje,
     cabecalho: {
+      ...(ecog.length ? { ecog: ecog.map(formatar).join("; ") } : {}),
+      ...(biomarcadores.length ? { biomarcador: biomarcadores.map(formatar).join("; ") } : {}),
+      ...(visao.cabecalho.episodio ? { linha: String(visao.cabecalho.episodio.linha) } : {}),
+      ...(visao.cabecalho.comorbidadesPaciente.length ? { antecedentes: visao.cabecalho.comorbidadesPaciente.join("; ") } : {}),
+      ...(visao.medicamentosAtuais?.conflito ? { medicacoesUso: "A CONFERIR: informações conflitantes" }
+        : visao.medicamentosAtuais?.medicamentos.length ? { medicacoesUso: visao.medicamentosAtuais.medicamentos.join("; ") } : {}),
       ...(confirmados.diagnostico ? {diagnostico: confirmados.diagnostico} : {}), ...(tnm ? {tnm} : {}), ...(est?.grupo ? {estadio: est.grupo} : {}),
       ...(f?.protocolo ? {tratamentoAtual: f.protocolo} : {}), ...(ciclo ? {cicloDia: ciclo} : {}),
       ...(f?.ultimoAdministrado ? {ultimoAdministrado: f.ultimoAdministrado} : {}), ...(f?.alergia ? {alergia: f.alergia} : {}),

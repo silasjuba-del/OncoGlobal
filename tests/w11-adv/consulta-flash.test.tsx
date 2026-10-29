@@ -91,7 +91,7 @@ describe("Flash essencial · invariantes adversariais", () => {
   });
   it("decisão QT nasce desmarcada mesmo com ação legada preMarcada", () => {
     render(<ConsultaFlash {...props()} />);
-    expect(checkbox("Liberar ciclo C3D1").checked).toBe(false);
+    expect(checkbox("Registrar decisão de solicitar ciclo C3D1").checked).toBe(false);
     expect(marcadoInicialFlash(ACOES[0]!)).toBe(false);
   });
   it("receitas legadas não entram silenciosamente no plano", () => {

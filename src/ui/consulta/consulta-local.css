@@ -914,3 +914,13 @@ section[aria-label="Reconciliação de medicamentos"] textarea {
     scroll-behavior: auto !important;
   }
 }
+
+/* Limites intrínsecos de selects/arquivos não podem alargar a consulta no celular. */
+.consulta-controles > label, #consulta-documentos > section, #consulta-documentos label { min-width: 0; max-width: 100%; }
+.consulta-controles select { min-width: 0; width: 100%; }
+#consulta-documentos > section { box-sizing: border-box; }
+.consulta-persistida .jev-header { position: static; }
+@media (max-width: 650px) {
+  .consulta-identidade { position: static; }
+  .consulta-secao { scroll-margin-top: 1rem; }
+}

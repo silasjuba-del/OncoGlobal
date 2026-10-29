@@ -615,6 +615,7 @@ export function TelaConsulta({
         <OverlayFlash
           flash={{
             ...montarPropsFlash(visao, chart, finalizarFlash, salvarRascunhoFlash),
+            ...(porta.recuperarAtendimentoV6 ? { carregarAtendimento: () => porta.recuperarAtendimentoV6!(contextoFlash) } : {}),
             ...(porta.proporDoseReceita?{aoProporDose:(medicamento:string)=>porta.proporDoseReceita!(contextoFlash,medicamento)}:{}),
             ocupado: flashOcupado,
           }}

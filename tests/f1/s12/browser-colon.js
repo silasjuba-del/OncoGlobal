@@ -54,7 +54,7 @@ async (page) => {
     const flash = p.getByRole("region", { name: "Conteúdo da Consulta Flash", exact: true });
     const flashTexto = await flash.innerText();
     if (!flashTexto.includes("câncer de cólon metastático") || !flashTexto.includes("8.2 g/dL")) throw new Error("FLASH_DESATUALIZADA");
-    if (await p.getByRole("checkbox", { name: "Liberar ciclo", exact: true }).isChecked()) throw new Error("LIBERACAO_PRESELECIONADA");
+    if (await p.getByRole("checkbox", { name: "Registrar decisão de solicitar ciclo", exact: true }).isChecked()) throw new Error("LIBERACAO_PRESELECIONADA");
     await p.getByRole("button", { name: "Revisar documentos para assinatura", exact: true }).click();
     const preview = p.getByRole("region", { name: "Conteúdo para assinatura", exact: true });
     await preview.waitFor(); const texto = await preview.innerText();

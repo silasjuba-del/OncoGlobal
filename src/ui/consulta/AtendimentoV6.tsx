@@ -17,7 +17,7 @@ const mensagem=(e:unknown)=>{
  if(c==="RETRATO_ALTERADO_RECARREGAR")return "O prontuário mudou. Atualize a base antes de preparar novamente; sua entrada local será preservada.";
  return "Não foi possível concluir. O texto local foi preservado; o salvamento desta tentativa não está confirmado.";
 };
-export function AtendimentoV6({porta,contexto}:{porta:PortaConsulta;contexto:{patientId:string;encounterId:string;tumorLotId:string|null}}){
+export function AtendimentoV6({porta,contexto,aoAbrirFlash}:{aoAbrirFlash?: (() => void) | undefined;porta:PortaConsulta;contexto:{patientId:string;encounterId:string;tumorLotId:string|null}}){
  const [dados,setDados]=useState<AtendimentoV6Resposta|null>(null),[entrada,setEntrada]=useState(vazio);
  const [ocupado,setOcupado]=useState(true),[aviso,setAviso]=useState("");
  const geracao=useRef(0),controlador=useRef<AbortController|null>(null),emCurso=useRef(false),origem=useRef<PortaConsulta|null>(null);
@@ -79,7 +79,7 @@ export function AtendimentoV6({porta,contexto}:{porta:PortaConsulta;contexto:{pa
    <details className="atendimento-v6__fontes"><summary>AGORA · fontes e datas recuperadas</summary>{atual.base.citacoes.map((c,i)=><article key={i}><p>{c.texto}</p>
     {c.referencias.map(f=><small key={f.ref.eventId}>Data clínica: {f.tempoClinico??"não informada"} · Registro: {f.tempoRegistro}{f.unidade?` · Unidade: ${f.unidade}`:""} · Fonte: {f.fontes.map(s=>`${s.sourceId} (${s.classe}) · ${s.localizador??"localizador não informado"} · versão ${s.versao} · data da fonte ${s.dataClinica??"não informada"} · captura ${s.dataCaptura}`).join("; ")||"não disponível"} · {f.ref.eventId}<br/></small>)}</article>)}</details>
    <p className="atendimento-v6__mudou"><strong>MUDOU</strong> · {atual.base.delta.encounterAnteriorId?`${atual.base.delta.novos.length} novas referências e ${atual.base.delta.substituidos.length} substituições desde o encontro anterior.`:"Sem comparação confirmada com encontro anterior. Isso não significa ausência de mudanças."}</p>
-   {exibivel?<div className="atendimento-v6__documentos"><h3>Pronto para revisar</h3>{exibivel.documentos.map(d=><section key={d.tipo} aria-label={`${d.titulo} · ${d.estado==="FLUXO_ESPECIFICO_NECESSARIO"?"pendências":"rascunho"}`} className="atendimento-v6__documento">
+   {exibivel?<div className="atendimento-v6__documentos"><h3>Pronto para revisar</h3>{aoAbrirFlash && exibivel.documentos.some(d => d.tipo === "EVOLUCAO" && d.estado === "PRONTO_PARA_REVISAO") && <button type="button" disabled={ocupado} onClick={aoAbrirFlash}>Continuar na Flash para revisar e assinar</button>}{exibivel.documentos.map(d=><section key={d.tipo} aria-label={`${d.titulo} · ${d.estado==="FLUXO_ESPECIFICO_NECESSARIO"?"pendências":"rascunho"}`} className="atendimento-v6__documento">
     <header><h4>{d.titulo}</h4><span className={d.estado==="PRONTO_PARA_REVISAO"?"atendimento-v6__badge":"atendimento-v6__pendente"}>{d.estado==="PRONTO_PARA_REVISAO"?"Rascunho para revisão":d.estado==="PENDENTE"?"Pendência neste documento":"Fluxo específico necessário"}</span></header>
     {d.pendencias.length?<ul>{d.pendencias.map(p=><li key={p}>{p}</li>)}</ul>:null}
     {d.estado!=="FLUXO_ESPECIFICO_NECESSARIO"?<TextoRascunho texto={d.texto} apresentacao={d.apresentacao}/>:<p>{entrada.decisao?`Decisão disponível: ${entrada.decisao}`:"Decisão médica não informada."}</p>}

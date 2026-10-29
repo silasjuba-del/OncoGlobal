@@ -39,8 +39,9 @@ export function VisaoIntegradaMinima({retrato,visao}: {retrato?:Retrato;visao?:V
       <p aria-label="Cobertura">{v.cobertura.setoresAvaliados.length} de {v.cobertura.setoresEsperados.length} setores avaliados · {v.cobertura.avaliados} avaliações · {v.cobertura.semRegraAprovada} sem regra aprovada.</p>
       <h4>Achados entre setores</h4>
       {v.achados.some(a=>a.setores.length>1) ? <ul>{v.achados.filter(a=>a.setores.length>1).map(renderAchado)}</ul> : <p>Nenhum achado transversal disponível. Isso não comprova ausência de risco.</p>}
-      <h4>Lacunas</h4>
+      <details><summary>Lacunas · {v.lacunas.length} para conferir</summary>
       {!v.lacunas.length ? <p>Nenhuma lacuna registrada nesta avaliação.</p> : <ul>{v.lacunas.map((l,i)=><li key={`${l.codigo}-${i}`}>{labels[l.setor]}: {l.texto}<div>{l.fatos.map(referencia)}</div></li>)}</ul>}
+      </details>
       {SetorClinico.options.map(setor=><details key={setor}><summary>{labels[setor]} · {v.cobertura.setoresAvaliados.includes(setor) ? "avaliado" : "pendente"}</summary>
         {!v.achados.some(a=>a.setores.includes(setor)) ? <p>Nenhum achado informado para este setor.</p> : <ul>{v.achados.filter(a=>a.setores.includes(setor)).map(renderAchado)}</ul>}
         {v.lacunas.filter(l=>l.setor===setor).map((l,i)=><p key={`${l.codigo}-${i}`}>{l.texto} {l.fatos.map(referencia)}</p>)}

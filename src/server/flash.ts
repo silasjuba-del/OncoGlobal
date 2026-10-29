@@ -97,6 +97,7 @@ const ApacFlashEntrada = z.object({
 }).strict();
 
 export const PlanoFlashEntrada = z.object({
+  evolucaoAtendimento: z.object({ id: Id, versao: z.number().int().positive(), conteudoHash: z.string().regex(/^[a-f0-9]{64}$/) }).strict().optional(),
   propostasDoseReceita:z.array(ReferenciaPropostaDose).max(50).refine(xs=>new Set(xs.map(x=>x.receitaId)).size===xs.length,'PROPOSTA_RECEITA_DUPLICADA').optional(),
   documentosManuais:z.array(z.object({id:z.string().regex(/^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,100}$/),tipo:z.enum(['ENCAMINHAMENTO','LAUDO','ORIENTACOES']),
     titulo:z.string().max(200),destino:z.string().max(200).nullable(),texto:z.string().max(8000)}).strict()).max(10).refine(v=>new Set(v.map(d=>d.id)).size===v.length,'DOCUMENTO_ID_DUPLICADO').optional(),
@@ -129,7 +130,7 @@ export type PlanoFlashEntradaTipo = z.infer<typeof PlanoFlashEntrada>;
 
 /** O contrato da visão omite opcionais ausentes, inclusive no objeto retorno. */
 function planoParaVisao(plano: PlanoFlashEntradaTipo): PlanoFlash {
-  return { acoesMarcadas: plano.acoesMarcadas, receitasMarcadas: plano.receitasMarcadas, apac: plano.apac,
+  return { ...(plano.evolucaoAtendimento ? { evolucaoAtendimento: plano.evolucaoAtendimento } : {}), acoesMarcadas: plano.acoesMarcadas, receitasMarcadas: plano.receitasMarcadas, apac: plano.apac,
     ...(plano.documentosManuais===undefined?{}:{documentosManuais:plano.documentosManuais}),
     ...(plano.propostasInvestigacao===undefined?{}:{propostasInvestigacao:plano.propostasInvestigacao}),
     ...(plano.receitas===undefined?{}:{receitas:plano.receitas}),
@@ -146,6 +147,7 @@ export interface ContextoFlash { patientId: string; encounterId: string; tumorLo
 interface Resposta { status: number; body: Record<string, unknown>; preparacaoDocumentos?: DocumentosConsultaPreparados }
 /** Fonte/versão resolvidas pelo servidor; jamais desserializar esta porta a partir do HTTP. */
 export interface FonteDocumentosFlash {
+  evolucaoAtendimento?: { referencia: NonNullable<PlanoFlash["evolucaoAtendimento"]>; texto: string; autor: { medicoId: string; crm: string }; dataClinica: string | null };
   propostasDoseReceita?:readonly PropostaDoseReceita[];
   indicacoesInvestigacao?:Readonly<Record<string,string>>;
   fonte: Fonte; dataReferencia: string; revisao: string;
@@ -248,6 +250,9 @@ export function prepararFinalizacaoFlash(db: DatabaseSync, agora: string, input:
 function prepararDocumentosFlash(db: DatabaseSync, agora: string, input: ContextoFlash & {
   plano: PlanoFlashEntradaTipo; idempotencyKey: string;
 }, resumoClinico: string | null, contextoQt: ContextoQtFlash | null, fonteDocumentos?: FonteDocumentosFlash): Resposta {
+  if (input.plano.evolucaoAtendimento && (!fonteDocumentos?.evolucaoAtendimento
+    || hashConteudoExibido(input.plano.evolucaoAtendimento) !== hashConteudoExibido(fonteDocumentos.evolucaoAtendimento.referencia)))
+    return { status: 409, body: { codigo: "EVOLUCAO_ALTERADA_OU_PENDENTE" } };
   const medicamentos = fonteDocumentos?.medicamentos ?? [];
   if(input.plano.documentosManuais?.some(d=>!d.titulo.trim()||!d.texto.trim()||d.tipo==='ENCAMINHAMENTO'&&!d.destino?.trim()))
     return {status:409,body:{codigo:'DOCUMENTO_MANUAL_INCOMPLETO'}};
@@ -319,6 +324,11 @@ function prepararDocumentosFlash(db: DatabaseSync, agora: string, input: Context
     const retorno=docs.find(d=>d.tipoDocumento===TIPO_DOC.retorno);
     if(retorno)retorno.extra={...retorno.extra,tarefasRetornoS9:tarefas};
 
+  }
+  if (fonteDocumentos?.evolucaoAtendimento) {
+    const evolucao = docs.find(d => d.tipoDocumento === TIPO_DOC.evolucao)!;
+    evolucao.texto = `${fonteDocumentos.evolucaoAtendimento.texto}\n\nCONDUTA E DOCUMENTOS DA FLASH\n${evolucao.texto}`;
+    for (const d of docs) d.extra = { ...d.extra, evolucaoAtendimento: { referencia: fonteDocumentos.evolucaoAtendimento.referencia, autor: fonteDocumentos.evolucaoAtendimento.autor, dataClinica: fonteDocumentos.evolucaoAtendimento.dataClinica } };
   }
   if(fonteDocumentos?.identidadePaciente){
     const identidadePaciente=fonteDocumentos.identidadePaciente;

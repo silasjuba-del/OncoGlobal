@@ -16,6 +16,7 @@ export interface RetornoFlash { dias: number | null; motivo?: string; examesAnte
 export interface TarefasRetornoFlash { modeloPadraoSalvo: boolean; retorno: ItemFlash; laboratorio: ItemFlash; imagem: ItemFlash }
 
 export interface ConsultaFlashProps {
+  carregarAtendimento?: () => Promise<import("./atendimentoV6.js").AtendimentoV6Resposta>;
   aoProporDose?:(medicamento:string)=>Promise<readonly PropostaDoseReceita[]>;
   cabecalho: { diagnostico?: string; tnm?: string; estadio?: string; biomarcador?: string; antecedentes?: string; medicacoesUso?: string; alergia?: string; ecog?: string; tratamentoAtual?: string; linha?: string; cicloDia?: string; ultimoAdministrado?: string };
   exames: readonly ExameRecenteFlash[];
@@ -36,6 +37,7 @@ export interface ConsultaFlashProps {
 }
 
 export interface PlanoFlash {
+  evolucaoAtendimento?: { id: string; versao: number; conteudoHash: string };
   propostasDoseReceita?:readonly {receitaId:string;propostaId:string;hashFonte:string;hashProposta:string}[];
   documentosManuais?: readonly DocumentoManualFlash[];
   propostasInvestigacao?: readonly {exameCodigo:string;contexto:string;revisaoFatos:string;referencia:{id:string;versao:string;hash:string}}[];

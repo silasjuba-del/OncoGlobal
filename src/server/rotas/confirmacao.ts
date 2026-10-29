@@ -1,3 +1,4 @@
+import { resolverEvolucaoFlash } from "../atendimentoV6.js";
 import { transacao } from "../../kernel/ledger/db.js";
 import { registrarCienciaAlertas, validarCienciaAlertas } from "../alertasConsulta.js";
 import { rascunhoNaoPromovivel } from "../../contracts/rascunhos.js";
@@ -165,6 +166,16 @@ function confirmarBlocoNaTransacao(deps: ServidorDeps, token: string, input: Con
   const operacaoExistente = deps.db.prepare("SELECT criadoEm FROM operation WHERE operationId=?").get(input.idempotencyKey);
   const em = operacaoExistente?.criadoEm as string | undefined ?? deps.agora();
   if(!operacaoExistente) {
+    const evolucoesConferidas = new Set<string>();
+    for (const draft of drafts) {
+      const ref = (draft!.payload as { evolucaoAtendimento?: { referencia: NonNullable<import("../../contracts/api/flash.js").PlanoFlash["evolucaoAtendimento"]> } }).evolucaoAtendimento;
+      if (!ref) continue;
+      const chave = hashConteudoExibido(ref.referencia);
+      if (evolucoesConferidas.has(chave)) continue;
+      if (!resolverEvolucaoFlash(deps, token, contexto, ref.referencia))
+        return { status: 409, body: { codigo: "EVOLUCAO_ALTERADA_OU_PENDENTE" } };
+      evolucoesConferidas.add(chave);
+    }
     const revisaoAtual=revisaoDocumentosFlash(deps,contexto,sessao);
     const vencido=drafts.some(d=>{
       const p=d!.payload as Record<string,unknown>,meta=p.preparacaoS9;
