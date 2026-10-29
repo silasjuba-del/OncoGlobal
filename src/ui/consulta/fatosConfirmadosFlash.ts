@@ -1,3 +1,4 @@
+import { montarFichaMinima } from "../../modules/consulta/revisaoClinica.js";
 import { DataCivil, Instante } from "../../contracts/base.js";
 import { Retrato, type FatoRetrato } from "../../contracts/f1/retrato.js";
 import type { ExameRecenteFlash } from "../../contracts/api/flash.js";
@@ -148,4 +149,28 @@ export function fatosConfirmadosFlash(i: Contexto & { retrato?: unknown; diagnos
     }
   }
   return { diagnostico, laboratorios: combinarLaboratorios(legadosNoRetrato, novos), avisos };
+}
+
+/** Contexto documentado, com datas visíveis; não avalia aptidão ao tratamento. */
+export function contextoDocumentadoFlash(i: Contexto & { retrato?: unknown }): { ecog?: string; biomarcador?: string } {
+  const parsed = Retrato.safeParse(i.retrato);
+  if (!parsed.success) return {};
+  const r = parsed.data;
+  if (r.patientId !== i.patientId || r.encounterId !== i.encounterId || r.tumorLotId !== i.tumorLotId
+    || r.fatos.some(f => f.patientId !== i.patientId || f.escopo === "TUMOR" && f.tumorLotId !== i.tumorLotId)) return {};
+  const fatos = r.fatos.filter(f => !r.integridade.some(p => p.eventoId === f.ref.eventId)
+    && (f.tempoClinico === null || dataValida(f.tempoClinico, i, r)));
+  const ecog = montarFichaMinima({ ...r, fatos }).find(f => f.id === "ecog");
+  const marcadores = fatos.filter(f => f.tipo === "FATO" && f.dados.domain === "biomarker"
+    && f.campo?.startsWith("extracao.biomarker") && f.fontes.length
+    && (f.tumorLotId !== null ? f.tumorLotId === i.tumorLotId : f.encounterId === i.encounterId)).flatMap(f => {
+    const v = objeto(f.dados.valor), literal = texto(v?.raw) || (texto(v?.marker) && (typeof v?.value === "string" || typeof v?.value === "number") ? `${v.marker}: ${v.value}` : "");
+    if (!literal) return [];
+    const conferir = qualificado(f.dados) || !!v && qualificado(v) || f.dados.requiresConfirmation !== false || f.dados.evidence !== "EXPLICIT";
+    return [`${conferir ? "A CONFERIR: " : ""}${literal} · ${f.tempoClinico ?? "data não informada"} · fontes: ${referencias(f).join(", ")}`];
+  });
+  return {
+    ...(ecog && ecog.estado !== "PENDENTE" ? { ecog: `${ecog.estado === "CONFLITANTE" ? "A CONFERIR" : String(ecog.valor)} · ${ecog.data ?? "data não informada"} · fontes: ${ecog.fontes.map(f => f.sourceId).join(", ")}` } : {}),
+    ...(marcadores.length ? { biomarcador: marcadores.join(" | ") } : {}),
+  };
 }

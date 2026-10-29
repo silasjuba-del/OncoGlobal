@@ -294,3 +294,25 @@ describe("Flash · exibição de fatos de extração confirmados", () => {
       fatos: [v.retrato!.fatos.find(f => f.ref.eventId === "a")!.ref, v.retrato!.fatos.find(f => f.ref.eventId === "b")!.ref] });
   });
 });
+
+it("contexto Flash usa retrato real mesmo com evidências vazias e preserva biomarcador/data/fonte", async () => {
+ const marcador = evento("her2", { campo: "extracao.biomarker:HER2", domain: "biomarker", valor: { marker: "HER2", raw: "HER2 negativo", value: "negativo" }, sourceId: "fonte-her2", evidence: "EXPLICIT", requiresConfirmation: false, dataClinica: "2026-10-09" });
+ const v = await visao([evento("ecog", { campo: "ecog", valor: 2, dataClinica: "2026-10-09" }), marcador]);
+ v.evidencias = [];
+ expect(props(v).cabecalho.ecog).toContain("2 · 2026-10-09");
+ expect(props(v).cabecalho.biomarcador).toContain("HER2 negativo");
+ expect(props(v).cabecalho.biomarcador).toContain("fonte-her2");
+ for (const campo of ["patientId", "encounterId", "tumorLotId"] as const) {
+  const outro = { ...v, retrato: { ...v.retrato!, [campo]: "outro-contexto" } };
+  expect(props(outro).cabecalho.ecog).toBeUndefined(); expect(props(outro).cabecalho.biomarcador).toBeUndefined();
+ }
+});
+
+it("contexto Flash não arbitra ECOG conflitante nem oculta biomarcador incerto", async () => {
+ const v = await visao([evento("ecog-a", { campo: "ecog", valor: 1, dataClinica: "2026-10-09" }),
+  evento("ecog-b", { campo: "ecog", valor: 3, dataClinica: "2026-10-09" }),
+  evento("marcador-incerto", { campo: "extracao.biomarker", domain: "biomarker", valor: { marker: "HER2", raw: "HER2 a confirmar" }, evidence: "UNCERTAIN", requiresConfirmation: true, dataClinica: "2026-10-09" })]);
+ v.evidencias = [];
+ expect(props(v).cabecalho.ecog).toContain("A CONFERIR");
+ expect(props(v).cabecalho.biomarcador).toContain("A CONFERIR: HER2 a confirmar");
+});
