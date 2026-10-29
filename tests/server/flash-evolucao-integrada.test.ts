@@ -54,3 +54,16 @@ it("referência adulterada ou de contexto diferente não prepara documentos", as
  }
  expect(amb.eventos().filter(e => e.tipo === "DOCUMENTO")).toEqual([]);
 });
+
+it("repetir preparação assinada informa finalização, sem confundir com evolução desatualizada", async () => {
+ const amb = await abrir(), ref = await evolucao(amb), preparada = await preparar(amb, ref), input = await exibir(amb, preparada);
+ expect((await amb.request("/consulta/confirmar", input)).data.codigo).toBe("GRAVADA");
+ const antes = amb.eventos();
+ for (const idempotencyKey of ["flash-integrada-preparar", "nova-chave-apos-assinatura"]) {
+  expect(await amb.request("/consulta/flash/preparar", { ...contexto, plano: { ...plano, evolucaoAtendimento: ref }, idempotencyKey }))
+   .toMatchObject({ status: 409, data: { codigo: "FLASH_JA_FINALIZADA" } });
+ }
+ expect(amb.eventos()).toEqual(antes);
+ expect(await amb.request("/consulta/flash/preparar", { ...contexto, plano: { ...plano, retorno: { dias: 21, examesAntesDoRetorno: [] }, evolucaoAtendimento: ref }, idempotencyKey: "plano-diferente" }))
+  .toMatchObject({ status: 409, data: { codigo: "EVOLUCAO_ALTERADA_OU_PENDENTE" } });
+});

@@ -113,3 +113,7 @@ referem-se aos cenários executados e não provam ausência universal de defeito
 Próximo passo: revisão independente/reconciliação. O piloto clínico de um pack não
 foi antecipado. Preservar o papel do Dr. Silas na definição do conteúdo e não usar
 esta otimização técnica como aprovação clínica.
+
+## Reconciliação das contagens de fronteiras — revisão PR #79
+
+As contagens são de fotografias diferentes, pelo mesmo `scripts/check-boundaries.mjs`: a otimização de 27/10 (commit original `29e247c1`, incorporado como `cb602d05`) tinha 590 arquivos de fonte verificados. A integração de 29/10 (`35e6d6f6`) acrescentou `src/ui/consulta/EvolucaoNaFlash.tsx`, totalizando 591. Alterações de layout nos arquivos existentes não acrescentaram arquivos a essa contagem. Ambos os resultados tinham zero exceções; não são contagens de testes nem de todo o repositório.

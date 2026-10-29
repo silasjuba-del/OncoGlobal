@@ -215,6 +215,23 @@ export function rotearPrescricaoFlashConfig(
     }
     const resumoClinico = consultaRevisada.resumoConfirmadoParaDocumento;
     const contextoS9 = { patientId: parsed.data.patientId, encounterId: parsed.data.encounterId, tumorLotId: parsed.data.tumorLotId };
+    const resumoRef = `resumo-revisado:${hashConteudoExibido(resumoClinico)}`;
+    if ("idempotencyKey" in parsed.data) {
+      const eventosAssinados = listarEventos(deps.db, parsed.data.patientId).filter(e => e.tipo === "DOCUMENTO" && e.revisao === "ASSINADO");
+      const finalizada = listarDrafts(deps.db, parsed.data.patientId).some(d => {
+        if (d.revision === 0 || !d.payload || typeof d.payload !== "object") return false;
+        const p = d.payload as Record<string, unknown>, meta = p.preparacaoS9;
+        if (!meta || typeof meta !== "object" || !("revisao" in meta) || typeof meta.revisao !== "string" || !Array.isArray(p.fontes)) return false;
+        const anterior = hashConteudoExibido({ contexto: contextoS9, plano: parsed.data!.plano, revisao: meta.revisao });
+        return p.fontes.some(f => f && typeof f === "object" && "contentHash" in f && f.contentHash === anterior
+          && "localizador" in f && (f.localizador === resumoRef || f.localizador === null))
+          && eventosAssinados.some(e => e.payload && typeof e.payload === "object" && "data" in e.payload
+            && e.payload.data && typeof e.payload.data === "object" && "data" in e.payload.data
+            && e.payload.data.data && typeof e.payload.data.data === "object" && "documentId" in e.payload.data.data
+            && e.payload.data.data.documentId === p.documentId);
+      });
+      if (finalizada) return reply(409, "FLASH_JA_FINALIZADA");
+    }
     const evolucaoAtendimento = parsed.data.plano.evolucaoAtendimento
       ? resolverEvolucaoFlash(deps, token, contextoS9, parsed.data.plano.evolucaoAtendimento) : null;
     if (parsed.data.plano.evolucaoAtendimento && !evolucaoAtendimento) return reply(409, "EVOLUCAO_ALTERADA_OU_PENDENTE");
@@ -244,23 +261,6 @@ export function rotearPrescricaoFlashConfig(
       return Array.isArray(fs) ? fs.flatMap(f => f && typeof f === "object" && (f as Record<string, unknown>).sourceId === sourceIdS9
         && typeof (f as Record<string, unknown>).dataCaptura === "string" ? [(f as Record<string, unknown>).dataCaptura as string] : []) : [];
     }).sort((a, b) => Date.parse(a) - Date.parse(b))[0] ?? deps.agora();
-    const resumoRef = `resumo-revisado:${hashConteudoExibido(resumoClinico)}`;
-    if ("idempotencyKey" in parsed.data) {
-      const eventosAssinados = listarEventos(deps.db, parsed.data.patientId).filter(e => e.tipo === "DOCUMENTO" && e.revisao === "ASSINADO");
-      const finalizada = listarDrafts(deps.db, parsed.data.patientId).some(d => {
-        if (d.revision === 0 || !d.payload || typeof d.payload !== "object") return false;
-        const p = d.payload as Record<string, unknown>, meta = p.preparacaoS9;
-        if (!meta || typeof meta !== "object" || !("revisao" in meta) || typeof meta.revisao !== "string" || !Array.isArray(p.fontes)) return false;
-        const anterior = hashConteudoExibido({ contexto: contextoS9, plano: parsed.data!.plano, revisao: meta.revisao });
-        return p.fontes.some(f => f && typeof f === "object" && "contentHash" in f && f.contentHash === anterior
-          && "localizador" in f && (f.localizador === resumoRef || f.localizador === null))
-          && eventosAssinados.some(e => e.payload && typeof e.payload === "object" && "data" in e.payload
-            && e.payload.data && typeof e.payload.data === "object" && "data" in e.payload.data
-            && e.payload.data.data && typeof e.payload.data.data === "object" && "documentId" in e.payload.data.data
-            && e.payload.data.data.documentId === p.documentId);
-      });
-      if (finalizada) return reply(409, "FLASH_JA_FINALIZADA");
-    }
     const cadastros = eventosVigentes(listarEventos(deps.db, parsed.data.patientId).filter(e => Date.parse(e.criadoEm) <= Date.parse(deps.agora())))
       .filter(e => ["Paciente", "Paciente@1"].includes(e.tipo) && ["CONFIRMADO", "ASSINADO"].includes(e.revisao)).flatMap(e => {
         const p = Paciente.safeParse(dadosDoEvento(e));
