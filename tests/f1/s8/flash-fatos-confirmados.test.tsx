@@ -316,3 +316,36 @@ it("contexto Flash não arbitra ECOG conflitante nem oculta biomarcador incerto"
  expect(props(v).cabecalho.ecog).toContain("A CONFERIR");
  expect(props(v).cabecalho.biomarcador).toContain("A CONFERIR: HER2 a confirmar");
 });
+
+function biomarcadorFlash(id: string, raw: string, value: string, extra: Record<string, unknown> = {}) {
+ return evento(id, { campo: "extracao.biomarker:HER2", domain: "biomarker", valor: { marker: "HER2", raw, value },
+  evidence: "EXPLICIT", requiresConfirmation: false, dataClinica: "2026-10-09", sourceId: `fonte-${id}`, ...extra });
+}
+it("biomarcador com fonte declarada divergente não é atribuído a outra fonte", async () => {
+ const v = await visao([biomarcadorFlash("errado", "HER2 positivo", "positivo", { sourceId: "fonte-alheia" })]);
+ expect(props(v).cabecalho.biomarcador).toBeUndefined();
+});
+it("biomarcador legado sem sourceId preserva a fonte do evento", async () => {
+ const e = biomarcadorFlash("legado-bio", "HER2 negativo", "negativo");
+ delete (e.payload as { data: Record<string, unknown> }).data.sourceId;
+ expect(props(await visao([e])).cabecalho.biomarcador).toContain("fonte-legado-bio");
+});
+it.each(["HER2 suspeito", "HER2 inconclusivo", "HER2 a confirmar"])("literal incerto %s não vira resultado definitivo", async raw => {
+ expect(props(await visao([biomarcadorFlash("incerto-bio", raw, "incerto")])).cabecalho.biomarcador).toContain(`A CONFERIR: ${raw}`);
+});
+it("resultado negativo definitivo não é rotulado como incerto", async () => {
+ expect(props(await visao([biomarcadorFlash("negativo-bio", "HER2 negativo", "negativo")])).cabecalho.biomarcador).not.toContain("A CONFERIR");
+});
+it("biomarcadores divergentes da mesma data preservam ambas as fontes e sinalizam conferência", async () => {
+ const texto = props(await visao([biomarcadorFlash("bio-a", "HER2 positivo", "positivo"), biomarcadorFlash("bio-b", "HER2 negativo", "negativo")])).cabecalho.biomarcador!;
+ expect(texto).toContain("A CONFERIR: HER2 positivo"); expect(texto).toContain("A CONFERIR: HER2 negativo");
+ expect(texto).toContain("fonte-bio-a"); expect(texto).toContain("fonte-bio-b"); expect(texto.match(/2026-10-09/g)).toHaveLength(2);
+});
+it("mesmo valor com grafias literais diferentes não cria conflito", async () => {
+ const texto = props(await visao([biomarcadorFlash("bio-a", "HER2 negativo", "negativo"), biomarcadorFlash("bio-b", "HER2: negativo", "negativo")])).cabecalho.biomarcador!;
+ expect(texto).not.toContain("A CONFERIR");
+});
+it("valores em datas diferentes permanecem datados sem conflito simultâneo", async () => {
+ const texto = props(await visao([biomarcadorFlash("bio-a", "HER2 positivo", "positivo"), biomarcadorFlash("bio-b", "HER2 negativo", "negativo", { dataClinica: "2026-10-10" })])).cabecalho.biomarcador!;
+ expect(texto).not.toContain("A CONFERIR"); expect(texto).toContain("2026-10-10");
+});

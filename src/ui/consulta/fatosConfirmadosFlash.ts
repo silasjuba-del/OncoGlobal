@@ -161,13 +161,27 @@ export function contextoDocumentadoFlash(i: Contexto & { retrato?: unknown }): {
   const fatos = r.fatos.filter(f => !r.integridade.some(p => p.eventoId === f.ref.eventId)
     && (f.tempoClinico === null || dataValida(f.tempoClinico, i, r)));
   const ecog = montarFichaMinima({ ...r, fatos }).find(f => f.id === "ecog");
-  const marcadores = fatos.filter(f => f.tipo === "FATO" && f.dados.domain === "biomarker"
+  const candidatos = fatos.filter(f => f.tipo === "FATO" && f.dados.domain === "biomarker"
     && f.campo?.startsWith("extracao.biomarker") && f.fontes.length
+    && (!Object.hasOwn(f.dados, "sourceId") || f.fontes.some(fonte => fonte.sourceId === f.dados.sourceId))
     && (f.tumorLotId !== null ? f.tumorLotId === i.tumorLotId : f.encounterId === i.encounterId)).flatMap(f => {
     const v = objeto(f.dados.valor), literal = texto(v?.raw) || (texto(v?.marker) && (typeof v?.value === "string" || typeof v?.value === "number") ? `${v.marker}: ${v.value}` : "");
     if (!literal) return [];
-    const conferir = qualificado(f.dados) || !!v && qualificado(v) || f.dados.requiresConfirmation !== false || f.dados.evidence !== "EXPLICIT";
-    return [`${conferir ? "A CONFERIR: " : ""}${literal} · ${f.tempoClinico ?? "data não informada"} · fontes: ${referencias(f).join(", ")}`];
+    const conferir = qualificado(f.dados) || !!v && qualificado(v) || f.dados.requiresConfirmation !== false || f.dados.evidence !== "EXPLICIT"
+      || /\?|\b(?:suspeit[oa]s?|inconclusiv[oa]s?|indeterminad[oa]s?|incert[oa]s?|equivoc[oa]s?|possivel|duvidos[oa]s?|pendente|a confirmar|a esclarecer)\b/.test(chave(literal));
+    const marcador = texto(v?.marker);
+    const valor = typeof v?.value === "string" ? chave(v.value) : typeof v?.value === "number" ? String(v.value) : chave(literal);
+    return [{ f, literal, conferir, valor, grupo: marcador && f.tempoClinico ? JSON.stringify([chave(marcador), f.tempoClinico]) : null }];
+  });
+  const valoresPorGrupo = new Map<string, Set<string>>();
+  for (const c of candidatos) {
+    if (!c.grupo) continue;
+    const valores = valoresPorGrupo.get(c.grupo) ?? new Set<string>();
+    valores.add(c.valor); valoresPorGrupo.set(c.grupo, valores);
+  }
+  const marcadores = candidatos.map(c => {
+    const conflito = c.grupo !== null && (valoresPorGrupo.get(c.grupo)?.size ?? 0) > 1;
+    return `${c.conferir || conflito ? "A CONFERIR: " : ""}${c.literal} · ${c.f.tempoClinico ?? "data não informada"} · fontes: ${referencias(c.f).join(", ")}`;
   });
   return {
     ...(ecog && ecog.estado !== "PENDENTE" ? { ecog: `${ecog.estado === "CONFLITANTE" ? "A CONFERIR" : String(ecog.valor)} · ${ecog.data ?? "data não informada"} · fontes: ${ecog.fontes.map(f => f.sourceId).join(", ")}` } : {}),
