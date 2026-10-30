@@ -5,6 +5,8 @@ import { criarSchema } from "../../src/kernel/ledger/schema.js";
 import { criarGerenciadorSessao } from "../../src/server/sessao.js";
 import { criarGateway, memoriaIdempotencia } from "../../src/kernel/gateway/gateway.js";
 import { criarServidorLocal } from "../../src/server/http.js";
+import { confirmarBloco } from "../../src/server/rotas/confirmacao.js";
+import * as ledgerDb from "../../src/kernel/ledger/db.js";
 
 const dbs: DatabaseSync[] = [];
 const fechar: Array<() => Promise<void>> = [];
@@ -66,6 +68,25 @@ it("A1: RETRATO_* conhecido permanece 409 REVISAO_CLINICA_PENDENTE", async () =>
   });
   const r = await a.request("/consulta/revisao-clinica", a.ctx);
   expect(r).toEqual({ status: 409, data: { codigo: "REVISAO_CLINICA_PENDENTE" } });
+});
+
+it("CC-001: negativa com sessão ausente continua 409 e audita como SISTEMA", () => {
+  const { db, sessoes, agora } = sessaoMemoria();
+  vi.spyOn(ledgerDb, "transacao").mockReturnValue({
+    status: 409, body: { codigo: "NEGADA" },
+    negativa: { motivo: "TESTE_NEGADA_SINTETICA", em: agora() },
+  } as never);
+  sessoes.obter = () => null;
+  const r = confirmarBloco({ db, sessoes, agora, log: () => {}, gateway: {} as never }, "token-ausente", {
+    patientId: "p", encounterId: "e", tumorLotId: null, idempotencyKey: "k",
+    reviewDecisionId: "r", registros: [], documentosExibidos: [], reconhecerAlertas: [],
+  } as never);
+  expect(r.status).toBe(409);
+  const auditoria = db.prepare("SELECT ator, decisao, motivoCodigo FROM audit_event").get() as {
+    ator: string; decisao: string; motivoCodigo: string;
+  };
+  expect(JSON.parse(auditoria.ator)).toEqual({ tipo: "SISTEMA", id: "confirmacao" });
+  expect(auditoria).toMatchObject({ decisao: "NEGADA", motivoCodigo: "TESTE_NEGADA_SINTETICA" });
 });
 
 it("A1: exceção desconhecida em revisaoClinica é 500 ERRO_INTERNO", async () => {
