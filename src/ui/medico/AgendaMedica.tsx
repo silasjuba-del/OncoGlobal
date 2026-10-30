@@ -18,7 +18,8 @@ export function AgendaMedica({ api, onSelecionar, aoAtualizar, aoAlterarPendente
   const [tipoId, setTipoId] = useState<"PRONTUARIO" | "CPF" | "CNS">("PRONTUARIO"), [identificador, setIdentificador] = useState("");
   const [data, setData] = useState(hojeLocal), [horario, setHorario] = useState("09:00"), [tarefaRetornoId, setTarefaRetornoId] = useState<string | null>(null);
   const [edicao, setEdicao] = useState<Item | null>(null), [motivo, setMotivo] = useState("");
-  const [pendente, setPendente] = useState(false);
+  const [pendenteCadastro, setPendenteCadastro] = useState(false), [pendenteAlteracao, setPendenteAlteracao] = useState(false);
+  const pendente = pendenteCadastro || pendenteAlteracao;
   useEffect(() => { aoAlterarPendente?.(pendente); return () => aoAlterarPendente?.(false); }, [pendente, aoAlterarPendente]);
   useEffect(() => { aoAlterarSalvando?.(ocupado); return () => aoAlterarSalvando?.(false); }, [ocupado, aoAlterarSalvando]);
   const emCurso = useRef(false), geracao = useRef(0), tentativa = useRef<{ fingerprint: string; operationId: string } | null>(null);
@@ -47,7 +48,7 @@ export function AgendaMedica({ api, onSelecionar, aoAtualizar, aoAlterarPendente
         : await api.agendar({ patientId, data, horario, operationId, ...(tarefaRetornoId ? { tarefaRetornoId } : {}) });
       setAviso("Paciente e encontro gravados. Abra a consulta quando desejar.");
       setPatientId(r.contexto.patientId); setNovo(false); setTarefaRetornoId(null); tentativa.current = null;
-      setPendente(false); setVersao(v => v + 1); aoAtualizar?.();
+      setPendenteCadastro(false); setVersao(v => v + 1); aoAtualizar?.();
     } catch (e) { setErro(`${e instanceof Error ? e.message : "Operação não concluída"}. Os campos foram preservados.`); }
     finally { emCurso.current = false; setOcupado(false); }
   }
@@ -59,7 +60,7 @@ export function AgendaMedica({ api, onSelecionar, aoAtualizar, aoAlterarPendente
     try {
       await api.alterarAgenda({ ...pedido, operationId: chave(pedido) });
       setAviso(acao === "REMARCAR" ? "Encontro remarcado; histórico preservado." : "Encontro cancelado; prontuário e histórico preservados.");
-      setPendente(false); setEdicao(null); tentativa.current = null; setVersao(v => v + 1); aoAtualizar?.();
+      setPendenteAlteracao(false); setEdicao(null); tentativa.current = null; setVersao(v => v + 1); aoAtualizar?.();
     } catch (e) { setErro(e instanceof Error ? e.message : "Operação não concluída."); }
     finally { emCurso.current = false; setOcupado(false); }
   }
@@ -69,7 +70,8 @@ export function AgendaMedica({ api, onSelecionar, aoAtualizar, aoAlterarPendente
       <label>Fim da agenda<input type="date" value={fim} onChange={e => setFim(e.target.value)} /></label>
       <button type="button" onClick={() => setVersao(v => v + 1)}>Atualizar agenda</button></div>
     {erro ? <p role="alert">{erro}</p> : null}{aviso ? <p role="status">{aviso}</p> : null}
-    <form onChange={() => setPendente(true)} onSubmit={salvar} aria-label="Cadastrar ou agendar paciente">
+    <form onChange={e => { const campo = (e.target as HTMLInputElement).name;
+      if (edicao && ["data-encontro", "horario-encontro"].includes(campo)) setPendenteAlteracao(true); else setPendenteCadastro(true); }} onSubmit={salvar} aria-label="Cadastrar ou agendar paciente">
       <label><input type="checkbox" checked={novo} disabled={ocupado} onChange={e => { setNovo(e.target.checked); setTarefaRetornoId(null); }} />Cadastrar novo paciente</label>
       {novo ? <div className="medico-campos">
         <label>Nome do paciente<input required value={nome} disabled={ocupado} onChange={e => setNome(e.target.value)} /></label>
@@ -82,8 +84,8 @@ export function AgendaMedica({ api, onSelecionar, aoAtualizar, aoAlterarPendente
         <p>Nome semelhante não une prontuários. Confira a identidade antes de cadastrar.</p>
       </div> : <label>Paciente para agendamento<select required value={patientId} disabled={ocupado} onChange={e => { setPatientId(e.target.value); setTarefaRetornoId(null); }}>
         <option value="">Selecione</option>{visao?.pacientes.map(p => <option key={p.patientId} value={p.patientId}>{p.nome} · {p.patientId}</option>)}</select></label>}
-      <div className="medico-campos"><label>Data do encontro<input type="date" required value={data} disabled={ocupado} onChange={e => setData(e.target.value)} /></label>
-        <label>Horário do encontro<input type="time" required value={horario} disabled={ocupado} onChange={e => setHorario(e.target.value)} /></label></div>
+      <div className="medico-campos"><label>Data do encontro<input name="data-encontro" type="date" required value={data} disabled={ocupado} onChange={e => setData(e.target.value)} /></label>
+        <label>Horário do encontro<input name="horario-encontro" type="time" required value={horario} disabled={ocupado} onChange={e => setHorario(e.target.value)} /></label></div>
       {tarefaRetornoId ? <p>Retorno selecionado: {tarefaRetornoId}. Confira a data e o horário.</p> : null}
       <button disabled={ocupado} type="submit">{novo ? "Cadastrar e agendar" : "Confirmar agendamento"}</button>
     </form>
@@ -92,15 +94,15 @@ export function AgendaMedica({ api, onSelecionar, aoAtualizar, aoAlterarPendente
       <label>Motivo da alteração<input value={motivo} disabled={ocupado} onChange={e => setMotivo(e.target.value)} /></label>
       <div className="medico-acoes"><button disabled={ocupado || !motivo.trim()} onClick={() => void alterar("REMARCAR")}>Confirmar remarcação</button>
         <button disabled={ocupado || !motivo.trim()} onClick={() => void alterar("CANCELAR")}>Confirmar cancelamento do encontro</button>
-        <button disabled={ocupado} onClick={() => setEdicao(null)}>Manter encontro</button></div></section> : null}
+        <button disabled={ocupado} onClick={() => { setEdicao(null); setPendenteAlteracao(false); }}>Manter encontro</button></div></section> : null}
     <ul className="medico-lista">{visao?.itens.map(item => <li key={item.eventId}>
       <strong>{item.data} · {item.horario} · {item.nome}</strong><span>{item.cancelado ? `Cancelado: ${item.motivo}` : `Pré-consulta: ${item.preConsulta}`}</span>
       <div className="medico-acoes"><button disabled={ocupado} onClick={() => onSelecionar({ patientId: item.patientId, encounterId: item.encounterId, tumorLotId: null }, item.nome)}>Abrir consulta de {item.nome}</button>
-        {!item.cancelado ? <button disabled={ocupado} onClick={() => { setPendente(true); setEdicao(item); setData(item.data); setHorario(item.horario); setMotivo(""); }}>Remarcar ou cancelar</button> : null}</div>
+        {!item.cancelado ? <button disabled={ocupado} onClick={() => { setPendenteAlteracao(true); setEdicao(item); setData(item.data); setHorario(item.horario); setMotivo(""); }}>Remarcar ou cancelar</button> : null}</div>
     </li>)}</ul>
     {visao && !visao.itens.length ? <p>Nenhum encontro neste intervalo.</p> : null}
     {visao?.retornos.length ? <section aria-label="Retornos a agendar"><h3>Retornos propostos em documentos</h3>
       <ul>{visao.retornos.map(t => <li key={t.tarefaId}>{visao.pacientes.find(p => p.patientId === t.patientId)?.nome ?? t.patientId} · {t.titulo} · {t.dataAlvo ?? "Data a definir"}
-        <button disabled={ocupado} onClick={() => { setPendente(true); setNovo(false); setPatientId(t.patientId); setTarefaRetornoId(t.tarefaId); if (t.dataAlvo) setData(t.dataAlvo); }}>Preparar agendamento do retorno</button></li>)}</ul></section> : null}
+        <button disabled={ocupado} onClick={() => { setPendenteCadastro(true); setNovo(false); setPatientId(t.patientId); setTarefaRetornoId(t.tarefaId); if (t.dataAlvo) setData(t.dataAlvo); }}>Preparar agendamento do retorno</button></li>)}</ul></section> : null}
   </section>;
 }

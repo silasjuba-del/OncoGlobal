@@ -127,3 +127,20 @@ it("agenda comunica edicao pendente e salvamento sem perder campos na falha", as
   expect(salvando).toHaveBeenLastCalledWith(false);
   expect(pendente).toHaveBeenLastCalledWith(true);
 });
+
+it("cancelar outro encontro nao libera cadastro ainda nao salvo", async () => {
+  const pendente = vi.fn();
+  const api = apiCom({ agenda: vi.fn().mockResolvedValue({ codigo: "AGENDA_MEDICA", pacientes: [], retornos: [], itens: [
+    { ...contexto, nome: "Pessoa ja cadastrada", eventId: "agenda-existente", data: "2026-10-29", horario: "10:00", cancelado: false, motivo: null, preConsulta: "AUSENTE" }
+  ] }), alterarAgenda: vi.fn().mockResolvedValue({ codigo: "GRAVADA", contexto, eventId: "cancelamento" }) });
+  render(<AgendaMedica api={api} onSelecionar={vi.fn()} aoAlterarPendente={pendente} />);
+  await screen.findByRole("button", { name: "Remarcar ou cancelar" });
+  fireEvent.click(screen.getByLabelText("Cadastrar novo paciente"));
+  fireEvent.change(screen.getByLabelText("Nome do paciente"), { target: { value: "Novo SINTETICO nao salvo" } });
+  fireEvent.click(screen.getByRole("button", { name: "Remarcar ou cancelar" }));
+  fireEvent.change(screen.getByLabelText("Motivo da alteração"), { target: { value: "Pedido sintetico" } });
+  fireEvent.click(screen.getByRole("button", { name: "Confirmar cancelamento do encontro" }));
+  await screen.findByText("Encontro cancelado; prontuário e histórico preservados.");
+  expect((screen.getByLabelText("Nome do paciente") as HTMLInputElement).value).toBe("Novo SINTETICO nao salvo");
+  expect(pendente).toHaveBeenLastCalledWith(true);
+});
