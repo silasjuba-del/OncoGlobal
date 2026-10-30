@@ -1,7 +1,7 @@
 {
   "name": "oncoglobal",
   "version": "0.0.1",
-  "description": "OncoGlobal WORK \u00e2\u20ac\u201d motor longitudinal de contexto oncol\u00c3\u00b3gico (PLANO v1.1)",
+  "description": "OncoGlobal WORK — motor longitudinal de contexto oncológico (PLANO v1.1)",
   "directories": {
     "doc": "docs",
     "test": "tests"

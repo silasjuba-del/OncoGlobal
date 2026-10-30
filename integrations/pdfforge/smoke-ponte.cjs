@@ -53,6 +53,13 @@ app.on('browser-window-created', (_event, win) => {
         ferramentas.value='edit';ferramentas.dispatchEvent(new Event('change',{bubbles:true}));
         await esperar(()=>ativo()?.querySelector('.ed-layers'));
         if(!ativo().textContent.includes('Nenhuma edição nesta página.') || localStorage.getItem(legacyKey)!==antigo) throw Error('RASCUNHO_LEGADO_REATRIBUIDO_OU_PERDIDO');
+        // Fecha o primeiro editor antes de simular um rascunho persistido para reabertura.
+        // Uma aba ainda montada pode salvar seu proprio estado durante a troca de abas.
+        const primeiroEditor=document.querySelector('.tab.active');
+        primeiroEditor.querySelector('.tab-close').click();
+        await esperar(()=>!primeiroEditor.isConnected);
+        [...document.querySelectorAll('[role="tab"]')].find(t=>t.title==='documento-SINTETICO.pdf').click();
+        await esperar(()=>ativo()?.querySelector('.viewer'));
         const digest=await crypto.subtle.digest('SHA-256',bytes);
         const key='pdfforge-editor:sha256:'+Array.from(new Uint8Array(digest),b=>b.toString(16).padStart(2,'0')).join('');
         localStorage.setItem(key,JSON.stringify([{id:'vinculado',type:'note',page:0,x:10,y:10,text:'NOTA_SINTETICA_DO_CONTEUDO'}]));
