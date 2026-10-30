@@ -5,6 +5,8 @@ import { criarSchema } from "../../src/kernel/ledger/schema.js";
 import { criarGerenciadorSessao } from "../../src/server/sessao.js";
 import { criarGateway, memoriaIdempotencia } from "../../src/kernel/gateway/gateway.js";
 import { criarServidorLocal } from "../../src/server/http.js";
+import { reconciliarMedicamentos } from "../../src/server/medicamentos.js";
+import { aoCommitar } from "../../src/kernel/ledger/writeRouter.js";
 import { confirmarBloco } from "../../src/server/rotas/confirmacao.js";
 import * as ledgerDb from "../../src/kernel/ledger/db.js";
 
@@ -91,6 +93,18 @@ it("CC-001: negativa com sessão ausente continua 409 e audita como SISTEMA", ()
   };
   expect(JSON.parse(auditoria.ator)).toEqual({ tipo: "SISTEMA", id: "confirmacao" });
   expect(auditoria).toMatchObject({ decisao: "NEGADA", motivoCodigo: "TESTE_NEGADA_SINTETICA" });
+});
+
+it("CC-005: exceção inesperada não vaza o texto no código HTTP", () => {
+  const { db, sessoes, agora, token, ctx } = sessaoMemoria();
+  aoCommitar(db, () => { throw new TypeError("Cannot read properties of undefined (reading 'hash')"); });
+  const r = reconciliarMedicamentos({
+    ...ctx, operationId: "med-vazamento", medicamentos: ["Fármaco sintético"],
+    expectedEventId: null, listaAtualCompleta: true,
+  }, token, { db, sessoes, agora });
+  expect(r.status).toBe(409);
+  expect(r.body.codigo).toBe("RECONCILIACAO_NEGADA");
+  expect(r.body.codigo).not.toContain("Cannot read");
 });
 
 it("CC-004: TypeError em fontePack é 500 ERRO_INTERNO", async () => {
