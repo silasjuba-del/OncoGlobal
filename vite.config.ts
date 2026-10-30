@@ -46,13 +46,14 @@ export default defineConfig(async () => {
   return {
     plugins,
     build: { outDir: "dist/ui", rollupOptions: { input: { atendimento: "index.html", demonstracao: "demonstracao.html", oncoassist: "oncoassist.html" } } },
-    ...(target ? { server: { host: "127.0.0.1", proxy: { "/login": { target }, "/consulta": { target, ws:true },
+    ...(target ? { server: { host: "127.0.0.1", proxy: { "/login": { target }, "/medico": { target }, "/consulta": { target, ws:true },
       "/config": { target }, "/acao": { target }, "/biblioteca": { target }, "/salao": { target }, "/chat": { target } } } } : {}),
     test: {
       // Preserva o exclude padrao; filtro explicito habilita apenas o reataque real,
       // exceto se o comando for executado na propria fixture controlada.
       exclude: [
         ...configDefaults.exclude,
+        "apps/pdfforge/**", // Suite propria: npm run pdfforge:test (React 18 / Vitest 2).
         ...(comAdv ? (raizFixture ? [] : [`**/${PASTA_FIXTURE}/${PASTA_ADV}/**`])
           : [`**/${PASTA_ADV}/**`]),
       ],

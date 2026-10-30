@@ -322,21 +322,26 @@ export function conflitoLateralidade(fatos: readonly ClinicalFact[]): ReviewExce
 /** TNM incompatível entre avaliações do mesmo tipo (ex.: cT2 e cT4 coexistentes). */
 export function conflitoTnm(fatos: readonly ClinicalFact[]): ReviewException | null {
   const stages = fatos.filter((f) => f.domain === "stage");
-  const literais = new Set(stages.map((f) => JSON.stringify(f.value ?? "")));
+  const literais = new Set(stages.map((f) => literalDoEstagio(f)));
   if (literais.size < 2) return null;
-  const tipos = new Set(stages.map((f) => {
+  const porTipo = new Map<string | null, ClinicalFact[]>();
+  for (const f of stages) {
     const v = typeof f.value === "object" && f.value !== null ? f.value as Record<string, unknown> : {};
-    return typeof v.tipo === "string" ? v.tipo : "CLINICO";
-  }));
-  if (tipos.size > 1) return null; // avaliações coexistem (A3): não é conflito
-  const primeiro = stages[0]!;
+    const tipo = typeof v.tipo === "string" ? v.tipo : null;
+    porTipo.set(tipo, [...(porTipo.get(tipo) ?? []), f]);
+  }
+  // A3 permite coexistencia entre tipos, sem ocultar divergencias dentro do mesmo tipo.
+  const conflitantes = porTipo.has(null) ? stages
+    : [...porTipo.values()].filter(grupo => new Set(grupo.map(literalDoEstagio)).size > 1).flat();
+  if (!conflitantes.length) return null;
+  const primeiro = conflitantes[0]!;
   return {
     id: novoId("CONFLICT", primeiro.segmentId, 3),
     kind: "CONFLICT",
     segmentId: primeiro.segmentId,
-    factIds: stages.map((f) => f.id),
-    reason: "TNM incompatível entre fontes do mesmo tipo de avaliação",
-    sourceIds: [...new Set(stages.map((f) => f.sourceId))],
+    factIds: conflitantes.map((f) => f.id),
+    reason: porTipo.has(null) ? "TNM divergente com tipo de avaliação não informado: conferir fontes" : "TNM incompatível entre fontes do mesmo tipo de avaliação",
+    sourceIds: [...new Set(conflitantes.map((f) => f.sourceId))],
   };
 }
 

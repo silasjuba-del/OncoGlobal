@@ -67,7 +67,7 @@
 
 .jev-cockpit__layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(17rem, 22rem); align-items: start; gap: .9rem; min-width: 0; }
 .jev-cockpit__layout--evidencias-fechadas { grid-template-columns: minmax(0, 1fr) 3.15rem; }
-.jev-cockpit__cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: start; gap: .75rem; min-width: 0; }
+.jev-cockpit__cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; gap: .75rem; min-width: 0; }
 .jev-card, .jev-evidence { min-width: 0; padding: .9rem; background: var(--jev-surface); border: 1px solid var(--jev-line); border-radius: .7rem; box-shadow: 0 2px 8px rgb(23 51 74 / 4%); }
 .jev-card { border-top: 3px solid var(--jev-action); overflow-wrap: anywhere; }
 .jev-card--mudancas { border-top-color: #48758A; }
@@ -141,3 +141,9 @@
 @media (prefers-reduced-motion: reduce) {
   .jev-cockpit *, .jev-cockpit *::before, .jev-cockpit *::after { scroll-behavior: auto !important; transition: none !important; animation: none !important; }
 }
+
+/* O prontuário usa a largura do painel; ações não ficam presas à altura do histórico. */
+.jev-card--mudancas { grid-column: 1 / -1; order: 2; }
+.jev-card--conduta { order: 0; }
+.jev-card--saida { order: 1; }
+.jev-card__extra pre { white-space: pre-wrap; overflow-wrap: anywhere; }

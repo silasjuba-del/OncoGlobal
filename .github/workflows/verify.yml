@@ -58,7 +58,7 @@ jobs:
   verify:
     name: typecheck + fronteiras + testes
     if: ${{ always() }}
-    needs: [quality, tests, browser-b2]
+    needs: [quality, tests, browser-b2, adversarial, pdfforge]
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -67,10 +67,14 @@ jobs:
           QUALITY_RESULT: ${{ needs.quality.result }}
           TESTS_RESULT: ${{ needs.tests.result }}
           BROWSER_RESULT: ${{ needs.browser-b2.result }}
+          ADVERSARIAL_RESULT: ${{ needs.adversarial.result }}
+          PDFFORGE_RESULT: ${{ needs.pdfforge.result }}
         run: |
           test "$QUALITY_RESULT" = "success"
           test "$TESTS_RESULT" = "success"
           test "$BROWSER_RESULT" = "success"
+          test "$ADVERSARIAL_RESULT" = "success"
+          test "$PDFFORGE_RESULT" = "success"
 
   browser-b2:
     name: Jornadas B2 no Chromium
@@ -92,6 +96,14 @@ jobs:
         env:
           TMPDIR: ${{ runner.temp }}
         run: npm run test:b2
+      - name: Validar consultório monousuário e ponte PDFForge ponta a ponta
+        env:
+          TMPDIR: ${{ runner.temp }}
+        run: npm run test:medico-m123
+      - name: Validar Flash, evolução e prontuário após reinício
+        env:
+          TMPDIR: ${{ runner.temp }}
+        run: node tests/f1/s12/browser-flash-evolucao.mjs
       - name: Validar layout e movimento reduzido no Chromium
         run: node node_modules/vitest/vitest.mjs run --config tests/hostil-cursor/navegador/vitest.config.ts
       - name: Guardar evidencias sinteticas
@@ -99,7 +111,11 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: jornadas-b2-${{ github.run_id }}-${{ github.run_attempt }}
-          path: ${{ runner.temp }}/s12-b2-evidence-*/
+          path: |
+            ${{ runner.temp }}/s12-b2-evidence-*/
+            ${{ runner.temp }}/medico-m123-evidence-*/
+            ${{ runner.temp }}/flash-evolucao-sintetica-*/resultado.json
+            ${{ runner.temp }}/flash-evolucao-sintetica-*/*.png
           if-no-files-found: warn
           retention-days: 7
 
@@ -125,3 +141,23 @@ jobs:
       - name: F1 — fechamento sem exceções e bateria completa (inclui .adv.ts)
         if: ${{ !cancelled() }}
         run: npm run verify:f1
+
+  pdfforge:
+    name: PDFforge original e ponte Electron
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: apps/pdfforge/package-lock.json
+      - run: npm run pdfforge:install
+      - run: npm run pdfforge:test
+      - run: npm run pdfforge:build
+      - name: Configurar sandbox nativo do Electron no runner
+        run: |
+          sudo chown root:root apps/pdfforge/node_modules/electron/dist/chrome-sandbox
+          sudo chmod 4755 apps/pdfforge/node_modules/electron/dist/chrome-sandbox
+      - run: xvfb-run -a npm run pdfforge:smoke

@@ -7118,6 +7118,49 @@
           "contextTag": "json_sha256_field_64hex"
         }
       ]
+    },
+    {
+      "path": "integrations/pdfforge/original-sha256.json",
+      "sha256": "2c656e795405f24a32c9f2c7e13ad66e65e6d3f635fd9eff94f73cb0ef13729b",
+      "hashMode": "utf8-lf",
+      "items": [
+        {
+          "type": "telefone",
+          "line": 31,
+          "ordinal": 0,
+          "contextTag": "commit_hash_40_or_64_hex",
+          "status": "technical_token_false_positive",
+          "evidenceRef": "integrations/pdfforge/original-sha256.json:31",
+          "reason": "Sequencia numerica contida em SHA-256 hexadecimal integral de arquivo original PDFforge, conferido contra os bytes locais. Nao representa contato."
+        },
+        {
+          "type": "telefone",
+          "line": 32,
+          "ordinal": 0,
+          "contextTag": "commit_hash_40_or_64_hex",
+          "status": "technical_token_false_positive",
+          "evidenceRef": "integrations/pdfforge/original-sha256.json:32",
+          "reason": "Sequencia numerica contida em SHA-256 hexadecimal integral de arquivo original PDFforge, conferido contra os bytes locais. Nao representa contato."
+        },
+        {
+          "type": "telefone",
+          "line": 36,
+          "ordinal": 0,
+          "contextTag": "commit_hash_40_or_64_hex",
+          "status": "technical_token_false_positive",
+          "evidenceRef": "integrations/pdfforge/original-sha256.json:36",
+          "reason": "Sequencia numerica contida em SHA-256 hexadecimal integral de arquivo original PDFforge, conferido contra os bytes locais. Nao representa contato."
+        },
+        {
+          "type": "telefone",
+          "line": 64,
+          "ordinal": 0,
+          "contextTag": "commit_hash_40_or_64_hex",
+          "status": "technical_token_false_positive",
+          "evidenceRef": "integrations/pdfforge/original-sha256.json:64",
+          "reason": "Sequencia numerica contida em SHA-256 hexadecimal integral de arquivo original PDFforge, conferido contra os bytes locais. Nao representa contato."
+        }
+      ]
     }
   ],
   "protectedPaths": []

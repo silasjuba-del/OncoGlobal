@@ -18,7 +18,7 @@ describe("modelo explícito e configuração do serviço",()=>{
   const {unmount}=render(<ConsultaFlash {...p} modeloSolicitacoes={modelo}/>);
   expect((screen.getByRole("checkbox",{name:"HMG"}) as HTMLInputElement).checked).toBe(true);
   expect((screen.getByLabelText("Outros LAB") as HTMLInputElement).value).toBe("INR");
-  expect((screen.getByRole("checkbox",{name:/Liberar ciclo/}) as HTMLInputElement).checked).toBe(false);
+  expect((screen.getByRole("checkbox",{name:/Registrar decisão de solicitar ciclo/}) as HTMLInputElement).checked).toBe(false);
   unmount();render(<ConsultaFlash {...p} modeloSolicitacoes={modelo} planoInicial={{acoesMarcadas:[],receitasMarcadas:[],apac:{...p.apac,emitir:false},retorno:p.retorno,solicitacoes:{laboratorio:[],imagem:[]}}}/>);
   expect((screen.getByRole("checkbox",{name:"HMG"}) as HTMLInputElement).checked).toBe(false);
   expect((screen.getByLabelText("Outros LAB") as HTMLInputElement).value).toBe("");

@@ -1,4 +1,6 @@
-import {useState} from 'react';
+import {useMemo,useState} from 'react';
+import type { LotePackLeitura, FontePackResposta } from '../../contracts/fase2/leituraPack.js';
+import { FonteIntegralPack } from './FonteIntegralPack.js';
 import type {LoteCompleto,ItemLoteCompleto} from '../../contracts/fase2/loteCompleto.js';
 
 const FASES={
@@ -19,12 +21,13 @@ function Item({item}:{item:ItemLoteCompleto}){
   <small>{item.origem} · {item.localizador}</small><Conteudo valor={item.conteudo}/>
  </>:null}</details>;
 }
-export function LoteTumoralCompleto({lote}:{lote:LoteCompleto}){
- const [fase,setFase]=useState<keyof typeof FASES>('primeira'),[busca,setBusca]=useState(''),[original,setOriginal]=useState(false);
+export function LoteTumoralCompleto({lote,carregarFonte}:{lote:LoteCompleto|LotePackLeitura;carregarFonte?:((signal:AbortSignal)=>Promise<FontePackResposta>)|undefined}){
+ const [fase,setFase]=useState<keyof typeof FASES>('primeira'),[busca,setBusca]=useState('');
  const ordem=FASES[fase].ordem;
  const setores=[...lote.setores].sort((a,b)=>(ordem.includes(a.id)?ordem.indexOf(a.id):99)-(ordem.includes(b.id)?ordem.indexOf(b.id):99));
  const consulta=busca.trim().normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase('pt-BR');
- const contem=(s:string)=>s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase('pt-BR').includes(consulta);
+ const normalizar=(s:string)=>s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase('pt-BR');
+ const indice=useMemo(()=>new Map(lote.setores.flatMap(s=>s.itens.map(i=>[i.id,normalizar(i.titulo+' '+JSON.stringify(i.conteudo))] as const))),[lote]);
  return <section aria-label="Lote tumoral completo">
   <h3>{lote.titulo} · pack completo</h3>
   <p>{lote.protocolosLegados} protocolos legados preservados · {lote.itensUniversais} itens da extensão NCCN · {lote.setores.length} setores</p>
@@ -33,13 +36,10 @@ export function LoteTumoralCompleto({lote}:{lote:LoteCompleto}){
   <p>A fase altera a ordem de leitura. Todos os setores e protocolos continuam disponíveis.</p>
   <label>Buscar no pack completo <input type="search" value={busca} onChange={e=>setBusca(e.target.value)}/></label>{busca?<button onClick={()=>setBusca('')}>Limpar busca</button>:null}
   <p>Acesso SUS/privado: confira a disponibilidade e a fonte de cada item. Informação não verificada permanece pendente.</p>
-  {setores.map(setor=>{const itens=consulta?setor.itens.filter(i=>contem(i.titulo)||contem(JSON.stringify(i.conteudo))):setor.itens;
+  {setores.map(setor=>{const itens=consulta?setor.itens.filter(i=>indice.get(i.id)?.includes(consulta)):setor.itens;
    return <details key={setor.id} open={consulta?itens.length>0:undefined}><summary>{setor.titulo} · {itens.length}{consulta?` de ${setor.itens.length}`:''} itens</summary>
     {itens.length?itens.map(item=><Item key={item.id} item={item}/>):<p>{consulta?'Nenhum resultado nesta busca.':'Não consta conteúdo estruturado neste setor; conferir lacunas e fonte integral.'}</p>}
    </details>;})}
-  <details onToggle={e=>setOriginal(e.currentTarget.open)}><summary>Fonte integral, versão e preservação</summary>
-   <p>{lote.original.arquivo} · versão {lote.original.versao}</p><p>SHA-256: {lote.original.sha256}</p>
-   {original?<pre style={{whiteSpace:'pre-wrap',overflowWrap:'anywhere'}}>{JSON.stringify(lote.conteudoIntegral,null,2)}</pre>:null}
-  </details>
+  <FonteIntegralPack key={`${lote.packId}:${lote.original.sha256}`} lote={lote} carregar={carregarFonte}/>
  </section>;
 }

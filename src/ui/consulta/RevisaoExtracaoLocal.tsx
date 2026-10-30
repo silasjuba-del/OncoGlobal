@@ -10,9 +10,11 @@ export type RevisaoExtracaoConfirmada = {
 };
 
 /** Linked sources are reviewed locally, independently of provider availability. */
-export function RevisaoExtracaoLocal({ porta, contexto, patientLabel, aoFatosConfirmados, aoConfirmarRevisao }: {
+export function RevisaoExtracaoLocal({ porta, contexto, patientLabel, aoFatosConfirmados, aoConfirmarRevisao, fonteSolicitada, aoConsumirFonteSolicitada }: {
   porta: PortaConsulta; contexto: PedidoBundle; patientLabel?: string; aoFatosConfirmados?: (contexto: PedidoBundle) => void;
   aoConfirmarRevisao?: (revisao: RevisaoExtracaoConfirmada) => void;
+  aoConsumirFonteSolicitada?: (id: string) => void;
+  fonteSolicitada?: {draftId:string;solicitacaoId:string};
 }) {
   const qualificadoresId = useId();
   const [fontes, setFontes] = useState<Array<{ draftId: string; rotulo: string }>>([]);
@@ -52,6 +54,15 @@ export function RevisaoExtracaoLocal({ porta, contexto, patientLabel, aoFatosCon
     return () => { geracao.current++; abort.abort(); };
   }, [porta, patientId, encounterId, tumorLotId]);
 
+  const solicitacaoAtendida = useRef<string | null>(null);
+  useEffect(()=>{
+    if(!fonteSolicitada || solicitacaoAtendida.current === fonteSolicitada.solicitacaoId) return;
+    if(fontes.some(f=>f.draftId===fonteSolicitada.draftId)) {
+      solicitacaoAtendida.current=fonteSolicitada.solicitacaoId;aoConsumirFonteSolicitada?.(fonteSolicitada.solicitacaoId);void abrir(fonteSolicitada.draftId);
+    } else if(fontesSemVinculo.some(f=>f.draftId===fonteSolicitada.draftId)) {
+      solicitacaoAtendida.current=fonteSolicitada.solicitacaoId;aoConsumirFonteSolicitada?.(fonteSolicitada.solicitacaoId);void abrirPendente(fonteSolicitada.draftId);
+    }
+  },[fonteSolicitada,fontes,fontesSemVinculo]);
   function mesmoContexto(c: { patientId: string; encounterId: string; tumorLotId: string | null }) {
     return c.patientId === patientId && c.encounterId === encounterId && c.tumorLotId === (tumorLotId ?? null);
   }

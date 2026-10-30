@@ -294,3 +294,58 @@ describe("Flash · exibição de fatos de extração confirmados", () => {
       fatos: [v.retrato!.fatos.find(f => f.ref.eventId === "a")!.ref, v.retrato!.fatos.find(f => f.ref.eventId === "b")!.ref] });
   });
 });
+
+it("contexto Flash usa retrato real mesmo com evidências vazias e preserva biomarcador/data/fonte", async () => {
+ const marcador = evento("her2", { campo: "extracao.biomarker:HER2", domain: "biomarker", valor: { marker: "HER2", raw: "HER2 negativo", value: "negativo" }, sourceId: "fonte-her2", evidence: "EXPLICIT", requiresConfirmation: false, dataClinica: "2026-10-09" });
+ const v = await visao([evento("ecog", { campo: "ecog", valor: 2, dataClinica: "2026-10-09" }), marcador]);
+ v.evidencias = [];
+ expect(props(v).cabecalho.ecog).toContain("2 · 2026-10-09");
+ expect(props(v).cabecalho.biomarcador).toContain("HER2 negativo");
+ expect(props(v).cabecalho.biomarcador).toContain("fonte-her2");
+ for (const campo of ["patientId", "encounterId", "tumorLotId"] as const) {
+  const outro = { ...v, retrato: { ...v.retrato!, [campo]: "outro-contexto" } };
+  expect(props(outro).cabecalho.ecog).toBeUndefined(); expect(props(outro).cabecalho.biomarcador).toBeUndefined();
+ }
+});
+
+it("contexto Flash não arbitra ECOG conflitante nem oculta biomarcador incerto", async () => {
+ const v = await visao([evento("ecog-a", { campo: "ecog", valor: 1, dataClinica: "2026-10-09" }),
+  evento("ecog-b", { campo: "ecog", valor: 3, dataClinica: "2026-10-09" }),
+  evento("marcador-incerto", { campo: "extracao.biomarker", domain: "biomarker", valor: { marker: "HER2", raw: "HER2 a confirmar" }, evidence: "UNCERTAIN", requiresConfirmation: true, dataClinica: "2026-10-09" })]);
+ v.evidencias = [];
+ expect(props(v).cabecalho.ecog).toContain("A CONFERIR");
+ expect(props(v).cabecalho.biomarcador).toContain("A CONFERIR: HER2 a confirmar");
+});
+
+function biomarcadorFlash(id: string, raw: string, value: string, extra: Record<string, unknown> = {}) {
+ return evento(id, { campo: "extracao.biomarker:HER2", domain: "biomarker", valor: { marker: "HER2", raw, value },
+  evidence: "EXPLICIT", requiresConfirmation: false, dataClinica: "2026-10-09", sourceId: `fonte-${id}`, ...extra });
+}
+it("biomarcador com fonte declarada divergente não é atribuído a outra fonte", async () => {
+ const v = await visao([biomarcadorFlash("errado", "HER2 positivo", "positivo", { sourceId: "fonte-alheia" })]);
+ expect(props(v).cabecalho.biomarcador).toBeUndefined();
+});
+it("biomarcador legado sem sourceId preserva a fonte do evento", async () => {
+ const e = biomarcadorFlash("legado-bio", "HER2 negativo", "negativo");
+ delete (e.payload as { data: Record<string, unknown> }).data.sourceId;
+ expect(props(await visao([e])).cabecalho.biomarcador).toContain("fonte-legado-bio");
+});
+it.each(["HER2 suspeito", "HER2 inconclusivo", "HER2 a confirmar"])("literal incerto %s não vira resultado definitivo", async raw => {
+ expect(props(await visao([biomarcadorFlash("incerto-bio", raw, "incerto")])).cabecalho.biomarcador).toContain(`A CONFERIR: ${raw}`);
+});
+it("resultado negativo definitivo não é rotulado como incerto", async () => {
+ expect(props(await visao([biomarcadorFlash("negativo-bio", "HER2 negativo", "negativo")])).cabecalho.biomarcador).not.toContain("A CONFERIR");
+});
+it("biomarcadores divergentes da mesma data preservam ambas as fontes e sinalizam conferência", async () => {
+ const texto = props(await visao([biomarcadorFlash("bio-a", "HER2 positivo", "positivo"), biomarcadorFlash("bio-b", "HER2 negativo", "negativo")])).cabecalho.biomarcador!;
+ expect(texto).toContain("A CONFERIR: HER2 positivo"); expect(texto).toContain("A CONFERIR: HER2 negativo");
+ expect(texto).toContain("fonte-bio-a"); expect(texto).toContain("fonte-bio-b"); expect(texto.match(/2026-10-09/g)).toHaveLength(2);
+});
+it("mesmo valor com grafias literais diferentes não cria conflito", async () => {
+ const texto = props(await visao([biomarcadorFlash("bio-a", "HER2 negativo", "negativo"), biomarcadorFlash("bio-b", "HER2: negativo", "negativo")])).cabecalho.biomarcador!;
+ expect(texto).not.toContain("A CONFERIR");
+});
+it("valores em datas diferentes permanecem datados sem conflito simultâneo", async () => {
+ const texto = props(await visao([biomarcadorFlash("bio-a", "HER2 positivo", "positivo"), biomarcadorFlash("bio-b", "HER2 negativo", "negativo", { dataClinica: "2026-10-10" })])).cabecalho.biomarcador!;
+ expect(texto).not.toContain("A CONFERIR"); expect(texto).toContain("2026-10-10");
+});

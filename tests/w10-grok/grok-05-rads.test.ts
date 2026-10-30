@@ -110,3 +110,29 @@ describe("GROK-05 detectarEmergencias", () => {
     expect(detectarEmergencias(abdome, semLitica).alertas.map((a) => a.linha)).toEqual([7]);
   });
 });
+
+describe("campanha adversarial · negação não atravessa a fronteira da oração (Caso A)", () => {
+  const linhas = (t: string) => detectarEmergencias(t, rs).alertas.map((a) => a.linha);
+  it("achado afirmado após conectivo adversativo, ponto e vírgula ou exceção alerta", () => {
+    for (const t of [
+      "Sem derrame pleural, porém massa epidural com compressão medular em T6.",
+      "Sem derrame pleural, mas massa epidural com compressão medular em T6.",
+      "Sem fraturas, entretanto há massa epidural com compressão medular em T9.",
+      "Não há derrame pleural, contudo massa epidural com compressão medular.",
+      "Sem derrame pleural; massa epidural com compressão medular em T6.",
+      "Coluna: sem alterações, exceto massa epidural com compressão medular em T4.",
+      "Ausência de derrame pleural e presença de massa epidural com compressão medular.",
+    ]) expect(linhas(t), t).toContain(1);
+  });
+  it("negação real coordenada continua anulando os elos (sem falso positivo)", () => {
+    for (const t of [
+      "Sem massa epidural, apagamento do saco dural ou compressão medular.",
+      "Não há massa epidural ou compressão medular.",
+      "Sem massa epidural nem compressão medular, mas com espondilose degenerativa.",
+      "Sem massas, sem compressão medular.",
+    ]) expect(linhas(t), t).not.toContain(1);
+  });
+  it("'mas' não corta palavra que começa com as mesmas letras (massa)", () => {
+    expect(linhas("Sem massa epidural ou compressão medular.")).not.toContain(1);
+  });
+});

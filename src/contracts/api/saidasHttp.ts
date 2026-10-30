@@ -1,3 +1,8 @@
+import { SaidasConsultorioMedico } from "./consultorioMedico.js";
+import { SaidasConsultaAcervo } from "./consultaAcervo.js";
+import { EstadoIntegracoes } from "./integracoesEstado.js";
+import { SaidasConversaOncoassist } from "./conversaOncoassist.js";
+import { ImportacaoDocumentalResposta, DocumentosDocumentaisResposta, DocumentoDocumentalResposta } from "./importacaoDocumental.js";
 import {RecuperacaoConfirmacao} from "./recuperacaoConfirmacao.js";
 import {AtendimentoV6Resposta} from "./atendimentoV6.js";
 import { PropostasDoseReceitaResposta } from './propostaDoseReceita.js';
@@ -13,6 +18,7 @@ import { ResultadoCognitivoOncoassist } from "./oncoassist.js";
 import { LeituraPubMedResposta, ListaRascunhosPubMedResposta } from "../leituraPubMed.js";
 import { ResultadoSkillClinica } from "../skillsClinicas.js";
 import {DitadoResposta} from '../fase2/ditado.js';
+import { FontePackResposta } from '../fase2/leituraPack.js';
 import { RevisaoClinicaResposta } from '../fase2/revisaoClinica.js';
 import { LotesPacienteResposta } from './lotes.js';
 import { EstadoDoencaPreparado } from '../fase2/estadoDoenca.js';
@@ -41,6 +47,8 @@ const Extracao = z.object({ draftId: Id, revision: Count, linkedPatientId: Id.nu
 
 /** Mesmos contratos no servidor e no cliente. Valida sem descartar campos adicionais da resposta legada. */
 export const SaidasHttp: Readonly<Record<string, z.ZodType>> = {
+  ...SaidasConsultaAcervo,
+  "/integracoes/estado": EstadoIntegracoes,
   recuperarConfirmacao: RecuperacaoConfirmacao,
   documentoImpressao: z.object({html:z.string().min(1)}).strict(),
   skillsClinicas: ResultadoSkillClinica,
@@ -67,13 +75,18 @@ export const SaidasHttp: Readonly<Record<string, z.ZodType>> = {
   gerarContingenciaSalao: ContingenciaSalaoResposta, historicoContingenciaSalao: HistoricoContingenciaSalaoResposta,
   prepararRespostaCanal:RespostaCanalPreparada,confirmarRespostaCanal:RespostaCanalConfirmada,
   ditado:DitadoResposta,
+  ...SaidasConsultorioMedico,
+  ...SaidasConversaOncoassist,
+  "/consulta/documental/importar": ImportacaoDocumentalResposta,
+  "/consulta/documental/listar": DocumentosDocumentaisResposta,
+  "/consulta/documental/abrir": DocumentoDocumentalResposta,
   lotesPaciente:LotesPacienteResposta,
   login: z.object({ token: z.string().min(1), expiraEm: Instante }),
   carregarConsulta: ConsultaResposta, agenda: AgendaResposta, apac: ApacResposta, canal: CanalResposta,
   salao: SalaoResposta, salvarTriagemSalao: SalaoResposta, liberarSalao: SalaoResposta,
   vincularCanal: CanalResposta, chat: ChatResposta, bundle: BundleResposta, confirmar: ConfirmacaoResposta,
   acao: AcaoResposta, investigacao: InvestigacaoConsultaVisao,
-  revisaoClinica: RevisaoClinicaResposta,
+  revisaoClinica: RevisaoClinicaResposta, fontePack: FontePackResposta,
   prepararEstadoDoenca: EstadoDoencaPreparado,confirmarEstadoDoenca:Gravacao,
   avaliarInstrumento: z.object({ resultado: ResultadoInstrumentoSchema, gravado: z.literal(false), assinado: z.literal(false) }),
   oncoassistStatus: EstadoOncoassist, oncoassistFontes: FontesOncoassist, oncoassistClassificar: RespostaOncoassist,

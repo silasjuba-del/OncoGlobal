@@ -1,5 +1,7 @@
+import type { ProvenienciaDocumentoConversa } from './conversaOncoassist.js';
 import type { PropostaDoseReceita } from './propostaDoseReceita.js';
 import type { MarcacaoTarefasRetorno } from './tarefas.js';
+export const LIMITE_TEXTO_DOCUMENTO_MANUAL = 8000;
 
 export type SituacaoExame = "DENTRO_DO_LIMITE" | "FORA_DO_LIMITE" | "SEM_REFERENCIA";
 
@@ -16,6 +18,11 @@ export interface RetornoFlash { dias: number | null; motivo?: string; examesAnte
 export interface TarefasRetornoFlash { modeloPadraoSalvo: boolean; retorno: ItemFlash; laboratorio: ItemFlash; imagem: ItemFlash }
 
 export interface ConsultaFlashProps {
+  documentoProposto?: DocumentoManualFlash & { solicitacaoId: string };
+  aoConsumirDocumentoProposto?: (solicitacaoId: string) => void;
+  aoAlterarPendente?: (pendente: boolean) => void;
+  revisaoSalva?: number;
+  carregarAtendimento?: () => Promise<import("./atendimentoV6.js").AtendimentoV6Resposta>;
   aoProporDose?:(medicamento:string)=>Promise<readonly PropostaDoseReceita[]>;
   cabecalho: { diagnostico?: string; tnm?: string; estadio?: string; biomarcador?: string; antecedentes?: string; medicacoesUso?: string; alergia?: string; ecog?: string; tratamentoAtual?: string; linha?: string; cicloDia?: string; ultimoAdministrado?: string };
   exames: readonly ExameRecenteFlash[];
@@ -36,6 +43,7 @@ export interface ConsultaFlashProps {
 }
 
 export interface PlanoFlash {
+  evolucaoAtendimento?: { id: string; versao: number; conteudoHash: string };
   propostasDoseReceita?:readonly {receitaId:string;propostaId:string;hashFonte:string;hashProposta:string}[];
   documentosManuais?: readonly DocumentoManualFlash[];
   propostasInvestigacao?: readonly {exameCodigo:string;contexto:string;revisaoFatos:string;referencia:{id:string;versao:string;hash:string}}[];
@@ -46,4 +54,4 @@ export interface PlanoFlash {
   decisaoQt?: { solicitarCiclo: boolean; data: string | null };
 }
 export interface ReceitaManualFlash {id:string;medicamento:string;dose:string|null;orientacao:string|null;duracao:string|null;via:string|null;quantidade:string|null}
-export interface DocumentoManualFlash {id:string;tipo:"ENCAMINHAMENTO"|"LAUDO"|"ORIENTACOES";titulo:string;destino:string|null;texto:string}
+export interface DocumentoManualFlash {id:string;tipo:"ENCAMINHAMENTO"|"LAUDO"|"ORIENTACOES";titulo:string;destino:string|null;texto:string;proveniencia?:ProvenienciaDocumentoConversa}

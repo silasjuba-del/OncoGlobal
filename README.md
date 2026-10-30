@@ -23,6 +23,14 @@ npm run verify   # typecheck + fronteiras de import + testes
 
 ## Operação local
 
+O perfil padrão da interface é médico monousuário: agenda/cadastro, pré-consulta,
+documentos, conversa OncoAssist e orientações dietéticas. Os módulos adiados
+continuam preservados; `VITE_ONCOGLOBAL_PERFIL=LEGADO` mantém o percurso anterior.
+O plano e os limites da entrega estão em
+[`MACROFATIAS-123-EXECUCAO.md`](docs/planejamento/MACROFATIAS-123-EXECUCAO.md).
+`npm run test:medico-m123` verifica a jornada com dados sintéticos, modelo local
+simulado no transporte HTTP/SSE e recuperação do SQLite após reinício.
+
 Use Node 24 e as dependências do lockfile. `npm run oncoassist:local` abre o aplicativo
 com servidor HTTP e ledger locais; a demonstração de `npm run ui:dev` usa outro
 percurso e não comprova persistência clínica.

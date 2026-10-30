@@ -36,6 +36,6 @@ export async function ambienteHttp(opcoes: Pick<ServidorDeps, "salaoRuleset" | "
     await new Promise<void>((resolve) => server.close(() => resolve()));
     db.close();
   };
-  return { db, sessoes, request, token, efeitos: () => efeitos, logs,
+  return { db, sessoes, request, token, base, efeitos: () => efeitos, logs,
     now: (instante: string) => { agora = instante; }, close };
 }

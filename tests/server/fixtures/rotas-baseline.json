@@ -4,6 +4,14 @@
     "acao"
   ],
   [
+    "/acervo/buscar",
+    "/acervo/buscar"
+  ],
+  [
+    "/acervo/ler",
+    "/acervo/ler"
+  ],
+  [
     "/apac/validar-emissao",
     "/apac/validar-emissao"
   ],
@@ -88,6 +96,26 @@
     "prepararApacRascunho"
   ],
   [
+    "/consulta/assistente/cancelar",
+    "/consulta/assistente/cancelar"
+  ],
+  [
+    "/consulta/assistente/configurar",
+    "/consulta/assistente/configurar"
+  ],
+  [
+    "/consulta/assistente/historico",
+    "/consulta/assistente/historico"
+  ],
+  [
+    "/consulta/assistente/responder",
+    "/consulta/assistente/responder"
+  ],
+  [
+    "/consulta/assistente/responder-stream",
+    "/consulta/assistente/responder-stream"
+  ],
+  [
     "/consulta/atendimento/preparar",
     "prepararAtendimentoV6"
   ],
@@ -138,6 +166,18 @@
   [
     "/consulta/ditado",
     "ditado"
+  ],
+  [
+    "/consulta/documental/abrir",
+    "/consulta/documental/abrir"
+  ],
+  [
+    "/consulta/documental/importar",
+    "/consulta/documental/importar"
+  ],
+  [
+    "/consulta/documental/listar",
+    "/consulta/documental/listar"
   ],
   [
     "/consulta/documento-impressao",
@@ -222,6 +262,10 @@
   [
     "/consulta/oncoassist/status",
     "oncoassistStatus"
+  ],
+  [
+    "/consulta/pack/fonte",
+    "fontePack"
   ],
   [
     "/consulta/prescricao-executavel/base",
@@ -344,8 +388,56 @@
     "/farmacia/enviar"
   ],
   [
+    "/integracoes/estado",
+    "/integracoes/estado"
+  ],
+  [
     "/login",
     "login"
+  ],
+  [
+    "/medico/agenda",
+    "/medico/agenda"
+  ],
+  [
+    "/medico/agenda/agendar",
+    "/medico/agenda/agendar"
+  ],
+  [
+    "/medico/agenda/alterar",
+    "/medico/agenda/alterar"
+  ],
+  [
+    "/medico/nutricao",
+    "/medico/nutricao"
+  ],
+  [
+    "/medico/nutricao/salvar",
+    "/medico/nutricao/salvar"
+  ],
+  [
+    "/medico/paciente/alterar",
+    "/medico/paciente/alterar"
+  ],
+  [
+    "/medico/paciente/cadastrar",
+    "/medico/paciente/cadastrar"
+  ],
+  [
+    "/medico/paciente/ler",
+    "/medico/paciente/ler"
+  ],
+  [
+    "/medico/preconsulta",
+    "/medico/preconsulta"
+  ],
+  [
+    "/medico/preconsulta/confirmar",
+    "/medico/preconsulta/confirmar"
+  ],
+  [
+    "/medico/preconsulta/salvar",
+    "/medico/preconsulta/salvar"
   ],
   [
     "/salao/registrar-administracao",

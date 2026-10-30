@@ -51,3 +51,15 @@ describe("FUGU-10 · timeline → seções da tela (sem tocar em src/modules)", 
     expect(Object.values(secoes).every((s) => ["VERDE", "VERMELHO", "PENDENTE"].includes(s.estado))).toBe(true);
   });
 });
+it("estadiamento incompleto conserva o literal e sinaliza pendência na seção", () => {
+ const secoes = secoesDaTimeline(timeline({ stageHistory: [{ ...estagio, tipo: null, sistema: null }] }));
+ expect(secoes.estadiamento.estado).toBe("PENDENTE");
+ expect(secoes.estadiamento.itens[0]?.valor).toBe("cT2N0M0");
+});
+
+it("data ou ciclo desconhecido permanece pendente na seção, sem ocultar tratamento", () => {
+ for (const item of [{ ...tratamento, cycle: null }, { ...tratamento, em: null }]) {
+  const secao = secoesDaTimeline(timeline({ treatments: [item] })).tratamento;
+  expect(secao.estado).toBe("PENDENTE"); expect(secao.itens).toEqual([item]);
+ }
+});

@@ -4,7 +4,7 @@ import type { BundleExibidoVisao, FlashPreparada } from "../api/porta.js";
 export interface DocumentoPreviewFlash { documentId: string; documentVersion: number; titulo: string; texto: string; propostasDoseReceita?:PropostaDoseReceita[] }
 /** Valida o conteúdo que será de fato renderizado. Buscar um bundle não equivale a mostrá-lo. */
 export function conferirPreviewFlash(preparada: FlashPreparada, bundle: BundleExibidoVisao,
-  contexto: { patientId: string; encounterId: string; tumorLotId: string | null }): DocumentoPreviewFlash[] {
+  contexto: { patientId: string; encounterId: string; tumorLotId: string | null }): (DocumentoPreviewFlash & { draftId: string; conteudoHash: string; propostasDoseReceita: PropostaDoseReceita[] })[] {
   if (bundle.patientId !== contexto.patientId || bundle.encounterId !== contexto.encounterId
     || !preparada.documentos.length || bundle.documentos.length !== preparada.documentos.length)
     throw new Error("BUNDLE_DIVERGENTE");
@@ -21,6 +21,6 @@ export function conferirPreviewFlash(preparada: FlashPreparada, bundle: BundleEx
       || ctx.tumorLotId !== contexto.tumorLotId
       || (ctx.patientId !== undefined && ctx.patientId !== contexto.patientId)) throw new Error("CONTEUDO_NAO_EXIBIVEL");
     ids.add(doc.documentId);
-    return { documentId: doc.documentId, documentVersion: doc.documentVersion, titulo: esperado.titulo, texto: corpo.texto, propostasDoseReceita:PropostaDoseReceita.array().parse(corpo.propostasDoseReceita??[]) };
+    return { documentId: doc.documentId, documentVersion: doc.documentVersion, draftId: doc.draftId, conteudoHash: doc.conteudoHash, titulo: esperado.titulo, texto: corpo.texto, propostasDoseReceita:PropostaDoseReceita.array().parse(corpo.propostasDoseReceita??[]) };
   });
 }

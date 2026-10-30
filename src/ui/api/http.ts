@@ -1,3 +1,6 @@
+import { criarApiDocumental } from "./documental.js";
+import { criarApiConsultorioMedico } from "./consultorioMedico.js";
+import { criarApiConversaOncoassist, lerStreamConversa } from "./conversaOncoassist.js";
 import {RecuperacaoConfirmacao} from "../../contracts/api/recuperacaoConfirmacao.js";
 import {guardarPendente,concluirPendente,exigirSemPendente} from "./confirmacoesPendentes.js";
 import { PropostasDoseReceitaResposta } from '../../contracts/api/propostaDoseReceita.js';
@@ -9,6 +12,7 @@ import { TimelineMulticamadasResposta } from "../../contracts/api/timelineMultic
 import { GerarContingenciaSalao, ContingenciaSalaoResposta, HistoricoContingenciaSalaoResposta } from '../../contracts/api/salaoContingencia.js';
 import {RespostaCanalPreparada,RespostaCanalConfirmada} from '../../contracts/api/respostaCanal.js';
 import { InvestigacaoConsultaVisao } from '../../contracts/api/investigacao.js';
+import { FontePackResposta } from '../../contracts/fase2/leituraPack.js';
 import { RevisaoClinicaResposta } from '../../contracts/fase2/revisaoClinica.js';
 import { EstadoDoencaPreparado } from '../../contracts/fase2/estadoDoenca.js';
 import { SintesePropostaResposta } from '../../contracts/api/sinteseProposta.js';
@@ -103,7 +107,17 @@ export function criarPortaHttp(opcoes: OpcoesHttp): PortaConsulta {
     return parsed.data;
   }
 
+  const enviarAutenticado = (url: string, corpo: unknown, signal?: AbortSignal) => enviar(url, corpo, true, signal);
   return {
+    documental: criarApiDocumental(enviarAutenticado),
+    consultorio: criarApiConsultorioMedico(enviarAutenticado),
+    assistente: criarApiConversaOncoassist(enviarAutenticado, async (url, corpo, signal, evento) => {
+      const resposta = await fetch(url, { method: "POST", credentials: "omit",
+        headers: { "Content-Type": "application/json", Accept: "application/x-ndjson", ...(token ? { Authorization: `Bearer ${token}` } : {}) },
+        body: JSON.stringify(corpo), ...(signal ? { signal } : {}) });
+      if (resposta.status === 401) { opcoes.onSessaoExpirada(); throw new ErroPorta("SESSAO_EXPIRADA"); }
+      return lerStreamConversa(resposta, evento);
+    }),
     async recuperarConfirmacao(pedido) {
       const r=await leitura('/consulta/confirmacao/recuperar',pedido,RecuperacaoConfirmacao);
       if(r.estado==='CONFIRMADA'||r.estado==='CANCELADA')concluirPendente(pedido);
@@ -363,9 +377,18 @@ export function criarPortaHttp(opcoes: OpcoesHttp): PortaConsulta {
       const p=z.object({codigo:z.enum(['GRAVADA','REPLAY']),eventId:z.string().min(1)}).safeParse(json);
       if(status!==200||!p.success)throw new ErroPorta(codigoDe(json,'ESTADO_DOENCA_PENDENTE'));return p.data;
     },
-    async revisaoClinica(contexto,packId,signal){
+    async fontePack(pedido,signal){
+      const {status,json}=await enviar('/consulta/pack/fonte',pedido,true,signal);
+      const r=FontePackResposta.safeParse(json);
+      if(status!==200||!r.success)throw new ErroPorta(codigoDe(json,'FONTE_PACK_INDISPONIVEL'));
+      if(r.data.packId!==pedido.packId||r.data.original.sha256!==pedido.hashOriginal
+        ||r.data.contexto.patientId!==pedido.patientId||r.data.contexto.encounterId!==pedido.encounterId
+        ||r.data.contexto.tumorLotId!==pedido.tumorLotId)throw new ErroPorta('FONTE_PACK_ALTERADA');
+      return r.data;
+    },
+    async revisaoClinica(contexto,packId,signal,compacta){
       const {status,json}=await enviar('/consulta/revisao-clinica',{patientId:contexto.patientId,encounterId:contexto.encounterId,
-        tumorLotId:contexto.tumorLotId,...(packId?{packId}:{})},true,signal);
+        tumorLotId:contexto.tumorLotId,...(packId?{packId}:{}),...(compacta?{compacta:true}:{})},true,signal);
       const r=RevisaoClinicaResposta.safeParse(json);
       if(status!==200||!r.success)throw new ErroPorta(codigoDe(json,'REVISAO_CLINICA_PENDENTE'));
       if(r.data.contexto.patientId!==contexto.patientId||r.data.contexto.encounterId!==contexto.encounterId||r.data.contexto.tumorLotId!==contexto.tumorLotId)throw new ErroPorta('REVISAO_FORA_CONTEXTO');

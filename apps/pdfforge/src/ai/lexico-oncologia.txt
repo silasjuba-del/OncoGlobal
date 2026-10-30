@@ -1,0 +1,177 @@
+# Léxico de transcrição — PDFForge / Browser IA OncoGlobal
+# Uma entrada por linha.
+#   termo                → vocabulário preferido (vai como contexto para o motor de transcrição)
+#   errado => certo      → correção aplicada depois da transcrição (sem diferenciar maiúsculas)
+# Linhas iniciadas com # são comentários. Edite em Configurações → Transcrição.
+
+## Escalas, estadiamento e resposta
+ECOG
+Karnofsky
+TNM
+RECIST 1.1
+iRECIST
+PERCIST
+Lugano
+Deauville
+CTCAE
+AJCC
+BCLC
+Gleason
+ISUP
+FIGO
+Breslow
+
+## Biomarcadores
+HER2
+HER2-low
+PD-L1
+CPS
+TPS
+TMB
+MSI-H
+dMMR
+EGFR
+ALK
+ROS1
+KRAS G12C
+BRAF V600E
+NTRK
+RET
+MET
+BRCA1
+BRCA2
+HRD
+PIK3CA
+ESR1
+Ki-67
+CA 15-3
+CA 19-9
+CEA
+PSA
+AFP
+beta-HCG
+LDH
+
+## Esquemas
+FOLFOX
+FOLFIRI
+FOLFIRINOX
+CAPOX
+XELOX
+AC-T
+TC
+TCHP
+R-CHOP
+ABVD
+BEP
+EP
+MAP
+VDC/IE
+FLOT
+gemcitabina + nab-paclitaxel
+
+## Fármacos
+pembrolizumabe
+nivolumabe
+atezolizumabe
+durvalumabe
+ipilimumabe
+cemiplimabe
+trastuzumabe
+pertuzumabe
+trastuzumabe deruxtecana
+trastuzumabe entansina
+sacituzumabe govitecana
+bevacizumabe
+cetuximabe
+panitumumabe
+ramucirumabe
+osimertinibe
+alectinibe
+lorlatinibe
+sotorasibe
+olaparibe
+niraparibe
+palbociclibe
+ribociclibe
+abemaciclibe
+letrozol
+anastrozol
+exemestano
+tamoxifeno
+fulvestranto
+enzalutamida
+abiraterona
+apalutamida
+darolutamida
+carboplatina
+cisplatina
+oxaliplatina
+paclitaxel
+docetaxel
+nab-paclitaxel
+capecitabina
+5-fluorouracil
+irinotecano
+gemcitabina
+pemetrexede
+etoposídeo
+doxorrubicina
+ciclofosfamida
+ifosfamida
+metotrexato
+vincristina
+temozolomida
+lenvatinibe
+sorafenibe
+cabozantinibe
+regorafenibe
+denosumabe
+ácido zoledrônico
+filgrastim
+pegfilgrastim
+ondansetrona
+dexametasona
+aprepitanto
+olanzapina
+
+## Termos clínicos
+neoplasia
+adenocarcinoma
+carcinoma epidermoide
+carcinoma ductal invasivo
+linfonodo
+linfonodomegalia
+metástase
+carcinomatose peritoneal
+neutropenia febril
+mucosite
+neuropatia periférica
+síndrome mão-pé
+síndrome de lise tumoral
+derrame pleural
+ascite
+caquexia
+PET-CT
+SUVmax
+ressonância magnética
+tomografia computadorizada
+cintilografia óssea
+anatomopatológico
+imuno-histoquímica
+
+## Correções frequentes
+pembrolizumab => pembrolizumabe
+nivolumab => nivolumabe
+trastuzumab => trastuzumabe
+osimertinib => osimertinibe
+folfox => FOLFOX
+folfirinox => FOLFIRINOX
+péte cete => PET-CT
+pet ct => PET-CT
+ecog => ECOG
+recist => RECIST
+her 2 => HER2
+pd l1 => PD-L1
+ca dezenove nove => CA 19-9
+ca quinze três => CA 15-3

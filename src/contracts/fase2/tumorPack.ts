@@ -15,10 +15,13 @@ export const TumorPackExtract = z.object({schema:z.literal("tumor-pack-extract.v
   revisaoClinica:z.object({medicoId:Id,em:Instante,hashOriginal:z.string().regex(/^[a-f0-9]{64}$/),hashExtracao:z.string().regex(/^[a-f0-9]{64}$/)}).strict().nullable(),
   blocos:z.object(blocos).strict(),requisitos:z.array(PackInvestigacaoSchema.shape.requisitos.element),
   pendencias:z.array(Id),
-}).strict().superRefine((p,c)=>{
+}).strict().superRefine(conferirEstadoPack);
+export function conferirEstadoPack(p: {estado:string;revisaoClinica:{hashOriginal:string;hashExtracao:string}|null;
+  original:{hash:string;estado:string};referencia:{hash:string};requisitos:readonly {id:string}[]}, c:z.RefinementCtx) {
   if(p.estado==="ATIVO"&&(!p.revisaoClinica||p.revisaoClinica.hashOriginal!==p.original.hash||p.revisaoClinica.hashExtracao!==p.referencia.hash||!p.requisitos.length))
     c.addIssue({code:"custom",message:"ATIVACAO_EXIGE_REVISAO_DO_ORIGINAL"});
   if(p.estado==="ATIVO"&&["OBSOLETO","INATIVO","ALERTA"].includes(p.original.estado))c.addIssue({code:"custom",message:"ORIGINAL_NAO_ATIVAVEL"});
   if(new Set(p.requisitos.map(r=>r.id)).size!==p.requisitos.length)c.addIssue({code:"custom",message:"REQUISITOS_DUPLICADOS"});
-});
+}
+
 export type TumorPackExtract = z.infer<typeof TumorPackExtract>;

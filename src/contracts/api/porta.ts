@@ -1,3 +1,6 @@
+import type { ApiDocumental } from "./importacaoDocumental.js";
+import type { ApiConsultorioMedico } from "./consultorioMedico.js";
+import type { ApiConversaOncoassist } from "./conversaOncoassist.js";
 import type { PropostaDoseReceita } from './propostaDoseReceita.js';
 import type { ImportarEstudoPedido, RevisarEstudoPedido, AvaliarEstudoPedido, EstudoServico,
   ListarEstudosResposta, AvaliacaoEstudoResposta, FatosTrialsResposta } from "./trialsServico.js";
@@ -8,6 +11,7 @@ import type {PrepararRespostaCanal,ConfirmarRespostaCanal} from './respostaCanal
 import type {RascunhoRespostaCanal} from '../f2/caixaRespostaCanal.js';
 import type { InvestigacaoConsultaVisao } from './investigacao.js';
 import type { LotesPacienteResposta } from './lotes.js';
+import type { PedidoFontePack, FontePackResposta } from '../fase2/leituraPack.js';
 import type { RevisaoClinicaResposta } from '../fase2/revisaoClinica.js';
 import type { PedidoEstadoDoenca,EstadoDoencaPreparado,ConfirmacaoEstadoDoenca } from '../fase2/estadoDoenca.js';
 import type { DutosClinicaVisao } from './dutos.js';
@@ -338,6 +342,9 @@ export interface ChatSetorVisao {
 }
 
 export interface PortaConsulta {
+  documental?: ApiDocumental;
+  consultorio?: ApiConsultorioMedico;
+  assistente?: ApiConversaOncoassist;
   aceitarDecisaoChat?(pedido:{contexto:{patientId:string;encounterId:string;tumorLotId:string|null;operationId:string};mensagemId:string;decisao:{campo:"observacao";valor:string}},signal?:AbortSignal):Promise<{codigo:"GRAVADA"|"REPLAY";eventId:string}>;
   recuperarConfirmacao?(pedido:import('./recuperacaoConfirmacao.js').ConfirmacaoPendente & {cancelar?:true}):Promise<import('./recuperacaoConfirmacao.js').RecuperacaoConfirmacao>;
   documentoImpressao?(pedido:{patientId:string;encounterId:string;tumorLotId:string|null;documentId:string;documentVersion:number}):Promise<{html:string}>;
@@ -370,7 +377,8 @@ export interface PortaConsulta {
   investigacao?(contexto: PedidoBundle, signal?: AbortSignal): Promise<InvestigacaoConsultaVisao>;
   avaliarInstrumento?(contexto:{patientId:string;encounterId:string;tumorLotId:string|null},pedido:unknown):Promise<ResultadoInstrumento>;
   uploadDocumentoLocal?(pedido:PedidoUploadLocal,signal?:AbortSignal):Promise<ResultadoUploadLocal>;
-  revisaoClinica?(contexto:PedidoBundle,packId?:string,signal?:AbortSignal):Promise<RevisaoClinicaResposta>;
+  fontePack?(pedido:PedidoFontePack,signal?:AbortSignal):Promise<FontePackResposta>;
+  revisaoClinica?(contexto:PedidoBundle,packId?:string,signal?:AbortSignal,compacta?:boolean):Promise<RevisaoClinicaResposta>;
   prepararEstadoDoenca?(pedido:PedidoEstadoDoenca,signal?:AbortSignal):Promise<EstadoDoencaPreparado>;
   confirmarEstadoDoenca?(pedido:ConfirmacaoEstadoDoenca,signal?:AbortSignal):Promise<{codigo:"GRAVADA"|"REPLAY";eventId:string}>;
   importarTranscricaoLocal?(pedido:PedidoTranscricaoLocal,signal?:AbortSignal):Promise<ResultadoTranscricaoLocal>;

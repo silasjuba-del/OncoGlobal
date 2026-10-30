@@ -27,7 +27,7 @@ describe("todas as portas públicas preservam método, autenticação e JSON", (
 it("toda rota pública possui contrato de saída; resposta vazia nunca é sucesso", () => {
   const rotas = new Set<string>(ROTAS_HTTP.map(r=>r.nome));
   expect(ROTAS_HTTP.map(r=>[r.url,r.nome]).sort()).toEqual(JSON.parse(readFileSync("tests/server/fixtures/rotas-baseline.json","utf8")));
-  expect(rotas.size).toBe(91);
+  expect(rotas.size).toBe(114);
   expect(rotas.has("recuperarAtendimentoV6")).toBe(true);
   expect(rotas.has("prepararAtendimentoV6")).toBe(true);
   expect(rotas.has("skillsClinicas")).toBe(true);

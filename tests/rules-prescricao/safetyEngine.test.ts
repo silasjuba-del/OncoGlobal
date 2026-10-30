@@ -102,3 +102,24 @@ describe("W10-INT-PRESC-06 · safetyEngine", () => {
     expect(JSON.stringify([itens, l])).toBe(a);
   });
 });
+
+describe("campanha adversarial · data de calendário inexistente (Caso B)", () => {
+  it("data inexistente na medida ou em 'hoje' ⇒ NOT_EVALUABLE, nunca deslocada para o mês seguinte", () => {
+    for (const medidoEm of ["2026-02-30", "2026-02-29", "2026-13-01", "2026-10-00", "2026-04-31"]) {
+      const v = run([docetaxel()], reqDoce, labsOk({ peso: m(70, medidoEm) }), null);
+      expect(v.resultado, medidoEm).toBe("NOT_EVALUABLE");
+      expect(v.motivos.map((x) => x.codigo)).toContain("PESO_SEM_DATA");
+    }
+    expect(run([docetaxel()], reqDoce, labsOk({ hoje: "2026-02-30" }), null).resultado).toBe("NOT_EVALUABLE");
+  });
+  it("29/02 de ano bissexto continua válido", () => {
+    const d = (valor: number) => m(valor, "2028-02-29");
+    const bissexto: LabsEntrada = { hoje: "2028-03-02", peso: d(70), altura: d(170), bsa: d(1.8), neutrofilos: d(2000), plaquetas: d(150000) };
+    expect(run([docetaxel()], reqDoce, bissexto, null).resultado).toBe("PASS");
+  });
+  it("limiar de bula com data inexistente: o motivo de data ilegível fica visível", () => {
+    const v = run([docetaxel()], reqDoce, labsOk({ neutrofilos: m(2000, "2026-09-31") }), lim());
+    expect(v.resultado).toBe("NOT_EVALUABLE");
+    expect(v.motivos.map((x) => x.codigo)).toContain("NEUTROFILOS_SEM_DATA");
+  });
+});

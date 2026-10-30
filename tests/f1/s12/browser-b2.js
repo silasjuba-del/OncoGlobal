@@ -16,6 +16,9 @@ import { jornadaCanalNoNavegador,jornadaDemonstracaoCanal } from './browser-cana
 import { jornadaContingenciaNoNavegador } from './browser-contingencia.js';
 import { jornadaConsultaConfiavel, TEXTO_FONTE_CONFIAVEL } from './browser-consulta-confiavel.js';
 
+// Perfil completo preserva regressões dos módulos adiados; nova jornada M123 usa perfil MEDICO.
+process.env.VITE_ONCOGLOBAL_PERFIL = "LEGADO";
+
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
 const MANIFEST = JSON.parse(readFileSync(join(ROOT, "corpus/manifesto/b2-fichas.v1.json"), "utf8"));
 

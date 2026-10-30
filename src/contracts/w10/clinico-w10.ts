@@ -58,9 +58,9 @@ export type VereditoAntiglosa = z.infer<typeof VereditoAntiglosa>;
 
 /** TNM é histórico imutável: cada avaliação é uma entrada (A3, D-W9-07). */
 export const StageEntry = z.object({
-  tipo: z.enum(["CLINICO", "PATOLOGICO", "POS_TRATAMENTO"]),
+  tipo: z.enum(["CLINICO", "PATOLOGICO", "POS_TRATAMENTO"]).nullable(),
   valor: z.string().min(1), // literal da fonte, com prefixo (cT2 cN1 cM0, ypT2N1a…)
-  sistema: z.string().min(1), // "AJCC 8", "AJCC 9", "FIGO 2018"…
+  sistema: z.string().min(1).nullable(), // "AJCC 8", "AJCC 9", "FIGO 2018"…
   data: DataCivil.nullable(),
   sourceId: Id,
 }).strict();

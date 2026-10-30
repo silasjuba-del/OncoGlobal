@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import type { ClinicalFact, FactDomain, FactSourceType } from "../../../src/kernel/extracao/tipos.js";
 import {
   chaveDoFato, detectarConflitos, farmacosMencionados, HIERARQUIA_TEXTO, reconciliarCampo,
-  reconciliarCampos, reconciliarTratamento,
+  reconciliarCampos, reconciliarTratamento, conflitoTnm,
 } from "../../../src/kernel/extracao/reconciliacao.js";
 
 let sequencia = 0;
@@ -151,4 +151,20 @@ describe("FUGU-07 · conflitos clínicos detectados", () => {
     const a = fato({ domain: "histology", sourceType: "pathology", value: "adenocarcinoma" });
     expect(detectarConflitos([a])).toEqual([]);
   });
+});
+
+it("mesmo literal TNM com metadados de sistema distintos nao cria incompatibilidade", () => {
+  const a = fato({ domain: "stage", sourceType: "medical_note", value: { literal: "cT2N0M0", tipo: "CLINICO", sistema: "AJCC 8" } });
+  const b = fato({ ...a, id: "outra-fonte", sourceId: "outra-fonte", value: { literal: "cT2N0M0", tipo: "CLINICO", sistema: "AJCC 9" } });
+  expect(detectarConflitos([a, b]).some(c => /TNM/.test(c.reason))).toBe(false);
+});
+
+it("tipo patologico coexistente nao oculta divergencia entre duas avaliacoes clinicas", () => {
+  const a = fato({ domain: "stage", sourceType: "medical_note", sourceId: "A", value: { literal: "cT2N0M0", tipo: "CLINICO" } });
+  const b = fato({ domain: "stage", sourceType: "medical_note", sourceId: "B", value: { literal: "cT3N1M0", tipo: "CLINICO" } });
+  const c = fato({ domain: "stage", sourceType: "pathology", sourceId: "C", value: { literal: "pT2N0M0", tipo: "PATOLOGICO" } });
+  expect(conflitoTnm([a, b, c])).toMatchObject({ kind: "CONFLICT", factIds: [a.id, b.id], sourceIds: ["A", "B"] });
+  expect(conflitoTnm([a, c])).toBeNull();
+  const desconhecido = fato({ ...b, value: { literal: "T3N1M0" } });
+  expect(conflitoTnm([a, desconhecido, c])?.factIds).toEqual([a.id, desconhecido.id, c.id]);
 });

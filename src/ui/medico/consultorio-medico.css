@@ -1,0 +1,12 @@
+.consultorio-medico { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1rem; }
+.consultorio-medico form, .consultorio-medico > section { padding: 1rem; border: 1px solid var(--consulta-line, #cfe0e6); border-radius: 12px; }
+.consultorio-medico label { display: grid; gap: .35rem; min-width: 0; }
+.consultorio-medico label:has(> input[type="checkbox"]) { display: flex; align-items: center; gap: .5rem; }
+.consultorio-medico input[type="checkbox"] { width: 1.1rem; min-width: 1.1rem; margin: .2rem; }
+.consultorio-medico input:not([type="checkbox"]), .consultorio-medico textarea, .consultorio-medico select { width: 100%; box-sizing: border-box; }
+.consultorio-medico textarea { min-height: 6rem; resize: vertical; }
+.medico-campos { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); gap: .8rem; margin: .7rem 0; align-items: end; }
+.medico-acoes { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: .6rem; }
+.medico-lista { display: grid; gap: .7rem; list-style: none; padding: 0; }
+.medico-lista > li { display: grid; gap: .4rem; padding: .8rem; border: 1px solid var(--consulta-line, #cfe0e6); border-radius: 10px; overflow-wrap: anywhere; }
+.consultorio-medico pre { white-space: pre-wrap; overflow-wrap: anywhere; font: inherit; }

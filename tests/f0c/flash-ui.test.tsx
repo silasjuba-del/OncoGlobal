@@ -13,7 +13,7 @@ describe("Flash essencial definida pelo médico", () => {
   expect(screen.getByLabelText("Toxicidades e alergia").textContent).toContain("Diarreia · Vômito");
   expect(screen.getByLabelText("Toxicidades e alergia").textContent).toContain("Penicilina");
   expect(screen.queryByText("APAC / SUS")).toBeNull();
-  expect((screen.getByRole("checkbox", {name:"Liberar ciclo 03/08"}) as HTMLInputElement).checked).toBe(false);
+  expect((screen.getByRole("checkbox", {name:"Registrar decisão de solicitar ciclo 03/08"}) as HTMLInputElement).checked).toBe(false);
  });
  it("agrupa seleção real e outros sem inferir medicamentos nem decisões QT", () => {
   const p=props(); render(<ConsultaFlash {...p} />);
@@ -28,6 +28,6 @@ describe("Flash essencial definida pelo médico", () => {
   render(<ConsultaFlash {...p} />);
   expect((screen.getByLabelText("Prazo do retorno em dias") as HTMLInputElement).value).toBe("");
   expect((screen.getByLabelText("Outros LAB") as HTMLInputElement).value).toBe("INR");
-  expect((screen.getByRole("checkbox",{name:"Liberar ciclo 03/08"}) as HTMLInputElement).checked).toBe(true);
+  expect((screen.getByRole("checkbox",{name:"Registrar decisão de solicitar ciclo 03/08"}) as HTMLInputElement).checked).toBe(true);
  });
 });

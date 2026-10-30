@@ -42,7 +42,8 @@ it("prescreve dose fracionada pelo consultório real, protege a revisão e atual
   const transporte = globalThis.fetch;
   vi.stubGlobal("fetch", (input: Parameters<typeof fetch>[0], init?: Parameters<typeof fetch>[1]) =>
     transporte(typeof input === "string" && input.startsWith("/") ? `${a.baseUrl}${input}` : input, init));
-  render(<OncoassistLocal />);
+  // Jornada histórica no perfil completo; perfil médico tem E2E próprio M123.
+  render(<OncoassistLocal perfil="LEGADO" />);
   alterar("Senha do servidor", SENHA);
   fireEvent.click(screen.getByRole("button", { name: "Entrar" }));
   await screen.findByLabelText("Paciente da agenda");
