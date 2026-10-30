@@ -1,9 +1,10 @@
+import { useChatRequests } from '../../ai/useChatRequests';
 import { answerWithSources } from '../../ai/answerSources';
 // Biblioteca Memo-RAG: acervo local de PDFs, transcrições, respostas e anotações, com busca e perguntas com citação.
 import { useMemo, useState } from 'react';
 import { useActions } from '../../app/actions';
 import { attachmentPages, textAttachment, type Attachment } from '../../ai/attachments';
-import { aiAvailable, chatStream, PROVIDERS, type Provider } from '../../ai/bridge';
+import { aiAvailable, PROVIDERS, type Provider } from '../../ai/bridge';
 import { addDoc, docText, docTitle, removeDoc, searchLibrary, useLibrary, type DocKind } from '../../ai/library';
 import { buildContext, RAG_SYSTEM, type Hit } from '../../ai/rag';
 import { toWord } from '../../ai/share';
@@ -34,6 +35,7 @@ function kindOf(a: Attachment): DocKind {
 
 export function LibraryPage() {
   const actions = useActions();
+  const chatStream = useChatRequests();
   const lib = useLibrary();
   const { settings } = useAppState();
   const [query, setQuery] = useState('');

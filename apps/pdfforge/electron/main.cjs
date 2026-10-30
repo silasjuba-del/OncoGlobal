@@ -189,3 +189,11 @@ app.whenReady().then(() => {
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit();
 });
+
+// O renderer avisa sobre rascunhos; o processo principal tambem conclui escritas ja recebidas.
+app.on('before-quit', (event) => {
+  const library = require('./services/plugins.cjs');
+  if (!library.libraryWritesPending()) return;
+  event.preventDefault();
+  library.flushLibrary().then(() => app.quit()).catch(error => console.error('BIBLIOTECA_NAO_SALVA', error.code || 'ERRO_DE_ESCRITA'));
+});

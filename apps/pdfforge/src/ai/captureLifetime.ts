@@ -11,6 +11,7 @@ export function createCaptureLifetime() {
     },
     setStopRecording(fn: () => void) { if (!active) { fn(); return; } stop(); stopRecording = fn; },
     stop,
+    disconnect: clear,
     dispose() { active = false; clear(); },
   };
 }

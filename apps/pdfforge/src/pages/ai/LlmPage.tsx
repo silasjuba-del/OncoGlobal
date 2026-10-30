@@ -1,8 +1,9 @@
+import { useChatRequests } from '../../ai/useChatRequests';
 import { answerWithSources, appendSourceContext } from '../../ai/answerSources';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useActions, type ChatInit } from '../../app/actions';
 import { approxTokens, docsText, imageBlocks, type Attachment } from '../../ai/attachments';
-import { aiAvailable, chatStream, keyStatus, providerInfo, type ChatBlock, type ChatMessage, type KeyStatus, type Provider } from '../../ai/bridge';
+import { aiAvailable, keyStatus, providerInfo, type ChatBlock, type ChatMessage, type KeyStatus, type Provider } from '../../ai/bridge';
 import { allTemplates, docTitle, searchLibrary, useLibrary } from '../../ai/library';
 import { fillTemplate } from '../../ai/prompts';
 import { RAG_SYSTEM } from '../../ai/rag';
@@ -76,6 +77,7 @@ function Chat({ provider, init, initSeq, keys }: { provider: Provider; init?: Ch
   const actions = useActions();
   const { settings } = useAppState();
   const lib = useLibrary();
+  const chatStream = useChatRequests();
   const [msgs, setMsgs] = useState<Msg[]>([]);
   const sourceEntries = useRef<readonly string[]>([]);
   const [attachments, setAttachments] = useState<Attachment[]>([]);

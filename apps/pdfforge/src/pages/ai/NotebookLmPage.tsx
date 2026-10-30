@@ -1,8 +1,9 @@
+import { useChatRequests } from '../../ai/useChatRequests';
 // NotebookLM não tem API pública: o app monta as fontes (texto bruto ou reescritas por IA) e o usuário as importa no site.
 import { useState } from 'react';
 import { useActions } from '../../app/actions';
 import { docsText, type Attachment } from '../../ai/attachments';
-import { aiAvailable, chatStream, PROVIDERS, type Provider } from '../../ai/bridge';
+import { aiAvailable, PROVIDERS, type Provider } from '../../ai/bridge';
 import { BUILTIN_PROMPTS, fillTemplate } from '../../ai/prompts';
 import { toDrive, toFile, toWord } from '../../ai/share';
 import { setAi, useAppState } from '../../store/store';
@@ -15,13 +16,17 @@ export function NotebookLmPage() {
   const actions = useActions();
   const { settings } = useAppState();
   const mode = settings.ai.modes.notebooklm;
+  const chatStream = useChatRequests(mode);
   const [atts, setAtts] = useState<Attachment[]>([]);
   const [provider, setProvider] = useState<Provider>('claude');
   const [output, setOutput] = useState('');
+  const [outputTitle, setOutputTitle] = useState('');
   const [busy, setBusy] = useState(false);
   const { documento, titulo } = docsText(atts);
 
   const rewrite = () => {
+    if (busy) return;
+    setOutputTitle(titulo);
     const tpl = BUILTIN_PROMPTS.find((p) => p.id === 'notebooklm')!;
     setBusy(true);
     setOutput('');
@@ -35,10 +40,11 @@ export function NotebookLmPage() {
       },
       (d) => setOutput((acc += d)),
     )
-      .done.catch((e: Error) => actions.toast(e.message, 'error'))
+      .done.catch((e: Error) => { if (e.name !== 'AbortError') actions.toast(e.message, 'error'); })
       .finally(() => setBusy(false));
   };
 
+  const sourceTitle = output ? outputTitle : titulo;
   const source = output || (documento ? `# ${titulo}\n\n${documento}` : '');
 
   return (
@@ -93,15 +99,16 @@ export function NotebookLmPage() {
                 {busy ? 'Gerando…' : 'Gerar fonte com IA'}
               </button>
             </div>
-            <textarea className="nb-output" value={source} onChange={(e) => setOutput(e.target.value)} placeholder="A fonte aparece aqui (texto bruto ou reescrito). Você pode editar." aria-label="Fonte para o NotebookLM" />
+            {output && <p>Saida referente a: {outputTitle}</p>}
+            <textarea className="nb-output" value={source} onChange={(e) => { if (!output) setOutputTitle(titulo); setOutput(e.target.value); }} placeholder="A fonte aparece aqui (texto bruto ou reescrito). Você pode editar." aria-label="Fonte para o NotebookLM" />
             <div className="row">
-              <button className="btn btn-primary btn-sm" disabled={!source} onClick={() => toDrive(`NotebookLM ${titulo}`, source, actions.toast, true)}>
+              <button className="btn btn-primary btn-sm" disabled={!source} onClick={() => toDrive(`NotebookLM ${sourceTitle}`, source, actions.toast, true)}>
                 Salvar no Drive (.docx)
               </button>
-              <button className="btn btn-sm" disabled={!source} onClick={() => toFile(`NotebookLM ${titulo}`, source, 'md')}>
+              <button className="btn btn-sm" disabled={!source} onClick={() => toFile(`NotebookLM ${sourceTitle}`, source, 'md')}>
                 Baixar .md
               </button>
-              <button className="btn btn-sm" disabled={!source} onClick={() => toWord(`NotebookLM ${titulo}`, source, actions.toast)}>
+              <button className="btn btn-sm" disabled={!source} onClick={() => toWord(`NotebookLM ${sourceTitle}`, source, actions.toast)}>
                 Word
               </button>
               <a className="btn btn-sm btn-ghost" href={NOTEBOOK_URL} target="_blank" rel="noopener noreferrer">

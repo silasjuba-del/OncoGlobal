@@ -1,3 +1,4 @@
+import { createSaveTracker } from './saveTracker';
 // Biblioteca Memo-RAG: documentos fragmentados, anotações por página e prompts/skills do usuário.
 // Persistida em userData/pdfforge-library.json (desktop) ou localStorage (navegador).
 import { useSyncExternalStore } from 'react';
@@ -36,27 +37,34 @@ export interface LibraryState {
 
 let state: LibraryState = { version: 1, docs: [], annotations: [], prompts: [] };
 const listeners = new Set<() => void>();
-let timer: ReturnType<typeof setTimeout> | undefined;
+const persistence = createSaveTracker<LibraryState>(saveLibraryRaw);
+let hydration: Promise<void> | null = null;
 let hydrated = false;
 
 const uid = () => `${Date.now().toString(36)}${Math.random().toString(36).slice(2, 7)}`;
 
 function set(next: LibraryState) {
+  if (!hydrated) throw new Error('Biblioteca ainda nao foi carregada.');
   state = next;
   listeners.forEach((l) => l());
-  clearTimeout(timer);
-  timer = setTimeout(() => void saveLibraryRaw(state), 400);
+  void persistence.write(state).catch(() => {}); // Falha permanece visivel no estado de persistencia.
 }
 
-export async function hydrateLibrary() {
-  if (hydrated) return;
-  hydrated = true;
-  const saved = (await loadLibraryRaw()) as LibraryState | null;
-  if (saved?.version === 1) {
-    state = { version: 1, docs: saved.docs ?? [], annotations: saved.annotations ?? [], prompts: saved.prompts ?? [] };
-    listeners.forEach((l) => l());
-  }
+export function hydrateLibrary(): Promise<void> {
+  if (hydrated) return Promise.resolve();
+  if (hydration) return hydration;
+  hydration = (async () => {
+    const saved = (await loadLibraryRaw()) as LibraryState | null;
+    if (saved !== null && (saved.version !== 1 || !Array.isArray(saved.docs ?? []) || !Array.isArray(saved.annotations ?? []) || !Array.isArray(saved.prompts ?? [])))
+      throw new Error('Biblioteca invalida: arquivo preservado, carregamento interrompido.');
+    if (saved) state = { version: 1, docs: saved.docs ?? [], annotations: saved.annotations ?? [], prompts: saved.prompts ?? [] };
+    hydrated = true; listeners.forEach(l => l());
+  })().finally(() => { hydration = null; });
+  return hydration;
 }
+export const useLibraryPersistence = () => useSyncExternalStore(persistence.subscribe, persistence.getSnapshot);
+export const librarySaveBlocked = () => persistence.getSnapshot().pending > 0 || persistence.getSnapshot().error !== null;
+export const retryLibrarySave = () => { void persistence.write(state).catch(() => {}); };
 
 export function useLibrary(): LibraryState {
   return useSyncExternalStore(

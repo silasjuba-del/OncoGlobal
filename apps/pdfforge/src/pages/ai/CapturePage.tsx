@@ -183,7 +183,7 @@ export function CapturePage() {
               ['frames', 'Frames TC/RM'],
             ] as const
           ).map(([m, l]) => (
-            <button key={m} role="radio" aria-checked={mode === m} className={mode === m ? 'on' : ''} onClick={() => setMode(m)}>
+            <button key={m} role="radio" aria-checked={mode === m} className={mode === m ? 'on' : ''} disabled={!!recording} onClick={() => { if (m !== mode) { lifetime.current?.disconnect(); setStream(null); } setMode(m); setDrag(null); }}>
               {l}
             </button>
           ))}
@@ -192,7 +192,7 @@ export function CapturePage() {
       <div className="chat-layout">
         <div className="chat-main capture-main">
           <div className="row">
-            <select value={sourceId} onChange={(e) => setSourceId(e.target.value)} aria-label="Tela ou janela">
+            <select value={sourceId} disabled={!!recording} onChange={(e) => setSourceId(e.target.value)} aria-label="Tela ou janela">
               {(sources ?? []).map((s) => (
                 <option key={s.id} value={s.id}>
                   {s.name}
@@ -204,14 +204,14 @@ export function CapturePage() {
             </button>
             {mode === 'video' && (
               <label className="check small">
-                <input type="checkbox" checked={withAudio} onChange={(e) => setWithAudio(e.target.checked)} />
+                <input type="checkbox" checked={withAudio} disabled={!!recording} onChange={(e) => { lifetime.current?.disconnect(); setStream(null); setWithAudio(e.target.checked); }} />
                 <span>Áudio do sistema</span>
               </label>
             )}
-            <button className="btn btn-sm btn-primary" disabled={!sourceId} onClick={connect}>
+            <button className="btn btn-sm btn-primary" disabled={!sourceId || !!recording} onClick={connect}>
               {stream ? 'Trocar fonte' : 'Conectar'}
             </button>
-            {crop && (
+            {mode !== 'video' && crop && (
               <button className="btn btn-sm btn-ghost" onClick={() => setCrop(null)}>
                 Limpar região
               </button>
@@ -227,12 +227,13 @@ export function CapturePage() {
               ))}
             </div>
           )}
+          {mode === 'video' && <p role="status">Video grava toda a tela ou janela selecionada. Recorte de regiao aplica-se somente a fotos e frames.</p>}
           {stream && (
             <div
               className="capture-preview"
-              onMouseDown={(e) => !recording && setDrag(rel(e))}
+              onMouseDown={(e) => mode !== 'video' && !recording && setDrag(rel(e))}
               onMouseMove={(e) => {
-                if (!drag) return;
+                if (!drag || mode === 'video') return;
                 const p = rel(e);
                 setCrop({ x: Math.min(drag.x, p.x), y: Math.min(drag.y, p.y), w: Math.abs(p.x - drag.x), h: Math.abs(p.y - drag.y) });
               }}
@@ -242,8 +243,8 @@ export function CapturePage() {
               }}
             >
               <video ref={videoRef} autoPlay muted />
-              {crop && <div className="crop-rect" style={{ left: `${crop.x * 100}%`, top: `${crop.y * 100}%`, width: `${crop.w * 100}%`, height: `${crop.h * 100}%` }} />}
-              {!crop && !recording && <span className="crop-hint">Arraste para escolher a região (ex.: só a imagem do exame)</span>}
+              {mode !== 'video' && crop && <div className="crop-rect" style={{ left: `${crop.x * 100}%`, top: `${crop.y * 100}%`, width: `${crop.w * 100}%`, height: `${crop.h * 100}%` }} />}
+              {mode !== 'video' && !crop && !recording && <span className="crop-hint">Arraste para escolher a região (ex.: só a imagem do exame)</span>}
             </div>
           )}
           {stream && (

@@ -16,7 +16,7 @@ import { LibraryPage } from '../pages/ai/LibraryPage';
 import { PromptsPage } from '../pages/ai/PromptsPage';
 import { SettingsPage } from '../pages/ai/SettingsPage';
 import { providerInfo } from '../ai/bridge';
-import { hydrateLibrary } from '../ai/library';
+import { hydrateLibrary, useLibraryPersistence, librarySaveBlocked, retryLibrarySave } from '../ai/library';
 
 import { RoundPage } from '../pages/ai/RoundPage';
 import { CapturePage } from '../pages/ai/CapturePage';
@@ -54,6 +54,13 @@ interface Toast {
 let tabSeq = 0;
 
 export function App() {
+  const libraryPersistence = useLibraryPersistence();
+  const [libraryReady, setLibraryReady] = useState(false), [libraryError, setLibraryError] = useState('');
+  const loadLibrary = useCallback(async () => {
+    setLibraryError('');
+    try { await hydrateLibrary(); setLibraryReady(true); }
+    catch (error) { setLibraryError(error instanceof Error ? error.message : 'Falha ao carregar biblioteca.'); }
+  }, []);
   const { settings } = useAppState();
   const [tabs, setTabs] = useState<Tab[]>([{ id: 'home', kind: 'home' }]);
   const [active, setActive] = useState('home');
@@ -83,8 +90,13 @@ export function App() {
   }, [ui.accent, ui.radius, ui.fontSize, ui.density, ui.cardSize, ui.appName]);
 
   useEffect(() => {
-    void hydrateLibrary();
-  }, []);
+    void loadLibrary();
+    const preventClose = (event: BeforeUnloadEvent) => {
+      if (librarySaveBlocked()) { event.preventDefault(); event.returnValue = ''; }
+    };
+    window.addEventListener('beforeunload', preventClose);
+    return () => window.removeEventListener('beforeunload', preventClose);
+  }, [loadLibrary]);
 
   const toast = useCallback((message: string, kind: Toast['kind'] = 'info') => {
     const id = Date.now() + Math.random();
@@ -254,6 +266,8 @@ export function App() {
     if (!pdfs.length && !images.length) toast('Formato não suportado. Use PDF ou imagens.', 'error');
   };
 
+  if (!libraryReady) return <main><p role={libraryError ? 'alert' : 'status'}>{libraryError || 'Carregando biblioteca preservada...'}</p>
+    {libraryError && <button onClick={() => void loadLibrary()}>Tentar carregar novamente</button>}</main>;
   return (
     <ActionsContext.Provider value={actions}>
       <div
@@ -269,6 +283,9 @@ export function App() {
         }}
         onDrop={onDrop}
       >
+        {libraryPersistence.pending > 0 && <p role="status">Salvando biblioteca. Aguarde antes de fechar.</p>}
+        {libraryPersistence.error && <div role="alert">Biblioteca ainda nao salva: {libraryPersistence.error}
+          <button disabled={libraryPersistence.pending > 0} onClick={retryLibrarySave}>Tentar salvar novamente</button></div>}
         <header className="tabbar">
           <div className="brand">
             <Logo />

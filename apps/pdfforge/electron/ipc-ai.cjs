@@ -1,3 +1,4 @@
+const path = require('node:path');
 // IPC do Lote 2: LLMs, chaves, transcrição, YouTube/Reels, plugins, biblioteca e sites embutidos (webview).
 const { app, ipcMain, session, BrowserWindow, desktopCapturer, shell } = require('electron');
 const llm = require('./services/llm.cjs');
@@ -94,9 +95,11 @@ function register(getWindow, isAppOrigin) {
   ipcMain.handle('folder:read', wrap((_e, filePath) => plugins.readFolderFile(filePath)));
   ipcMain.handle(
     'folder:write',
-    wrap(async (_e, dir, name, content, asDocx) => {
+    wrap(async (_e, dir, name, content, asDocx, subdirectory) => {
+      if (subdirectory !== undefined && subdirectory !== 'PDFForge') throw Error('SUBPASTA_INVALIDA');
+      const destino = subdirectory ? path.join(dir, subdirectory) : dir;
       const data = asDocx ? await plugins.wordToBuffer({ title: name, markdown: content }) : content;
-      return plugins.writeFolderFile(dir, asDocx ? name.replace(/\.[^.]+$/, '') + '.docx' : name, data);
+      return plugins.writeFolderFile(destino, asDocx ? name.replace(/\.[^.]+$/, '') + '.docx' : name, data);
     }),
   );
   ipcMain.handle('share:whatsapp', wrap((_e, text) => plugins.shareWhatsApp(text)));
@@ -188,9 +191,12 @@ function registerCapture() {
   app.whenReady().then(() => {
     // getDisplayMedia() do app usa a fonte escolhida no seletor próprio; áudio do sistema por loopback (Windows).
     session.defaultSession.setDisplayMediaRequestHandler(async (_request, callback) => {
-      const sources = await desktopCapturer.getSources({ types: ['screen', 'window'] });
-      const source = sources.find((s) => s.id === pendingSource) ?? sources[0];
+      let sources;
+      try { sources = await desktopCapturer.getSources({ types: ['screen', 'window'] }); }
+      catch { pendingSource = null; callback({}); return; }
+      const source = sources.find((s) => s.id === pendingSource);
       pendingSource = null;
+      if (!source) { callback({}); return; } // Fonte desaparecida exige nova escolha.
       callback(process.platform === 'win32' ? { video: source, audio: 'loopback' } : { video: source });
     });
   });

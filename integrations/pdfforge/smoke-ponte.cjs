@@ -46,6 +46,8 @@ app.on('browser-window-created', (_event, win) => {
         await esperar(()=>[...ativo().querySelectorAll('button')].some(b=>b.textContent.includes('Enviar ao OncoGlobal')&&!b.disabled));
         [...ativo().querySelectorAll('button')].find(b=>b.textContent.includes('Enviar ao OncoGlobal')).click();
         await esperar(()=>ativo().textContent.includes('Pacote local salvo em'));
+        const drive=await window.pdfforge.plugins.writeFolderFile(${JSON.stringify(path.join(dados, 'Drive-sintetico'))},'fonte-sintetica.md','FONTE SINTETICA INTEGRAL',false,'PDFForge');
+        if(!drive.ok)throw Error('DRIVE_SINTETICO_NAO_GRAVADO');
         const legacyKey='pdfforge-editor:documento-SINTETICO.pdf:'+bytes.length;
         const antigo=JSON.stringify([{id:'legado',type:'note',page:0,x:10,y:10,text:'NOTA_LEGADA_NAO_VINCULAR'}]);
         localStorage.setItem(legacyKey,antigo);
@@ -75,6 +77,9 @@ app.on('browser-window-created', (_event, win) => {
         || pacote.original.sha256 !== createHash('sha256').update(bytes).digest('hex')
         || !Buffer.from(pacote.original.bytesBase64, 'base64').equals(bytes)
         || pacote.anotacoes.length !== 1 || pacote.anotacoes[0].texto !== 'Anotacao SINTETICA vinculada aos bytes.') throw Error('PACOTE_DIVERGENTE');
+      if (fs.readFileSync(path.join(dados,'Drive-sintetico','PDFForge','fonte-sintetica.md'),'utf8') !== 'FONTE SINTETICA INTEGRAL') throw Error('DRIVE_FORA_DA_PASTA');
+      const library=JSON.parse(fs.readFileSync(path.join(dados,'pdfforge-library.json'),'utf8'));
+      if(!library.annotations.some(a=>a.text==='Anotacao SINTETICA vinculada aos bytes.')) throw Error('ANOTACAO_NAO_PERSISTIDA');
       concluido = true; clearTimeout(prazo);
       console.log(JSON.stringify({ prova: 'PDFFORGE_UI_IPC_EXPORT_REAL', ok: true, pacoteId: pacote.pacoteId, sha256: pacote.original.sha256, userDataSintetico: dados }));
       app.exit(0);

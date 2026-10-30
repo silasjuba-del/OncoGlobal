@@ -40,7 +40,7 @@ contextBridge.exposeInMainWorld('pdfforge', {
     pickFolder: (title) => ipcRenderer.invoke('folder:pick', title),
     listFolder: (dir) => ipcRenderer.invoke('folder:list', dir),
     readFolderFile: (filePath) => ipcRenderer.invoke('folder:read', filePath),
-    writeFolderFile: (dir, name, content, asDocx) => ipcRenderer.invoke('folder:write', dir, name, content, asDocx),
+    writeFolderFile: (dir, name, content, asDocx, subdirectory) => ipcRenderer.invoke('folder:write', dir, name, content, asDocx, subdirectory),
     whatsapp: (text) => ipcRenderer.invoke('share:whatsapp', text),
     libraryGet: () => ipcRenderer.invoke('library:get'),
     librarySet: (value) => ipcRenderer.invoke('library:set', value),

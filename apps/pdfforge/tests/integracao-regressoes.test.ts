@@ -1,3 +1,10 @@
+import { createRequestLifetime } from '../src/ai/requestLifetime';
+import { createSaveTracker } from '../src/ai/saveTracker';
+import { shareWhatsApp } from '../src/ai/bridge';
+import { createRequire } from 'node:module';
+import { mkdtemp, readFile, readdir, rm, writeFile } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 import { answerWithSources, appendSourceContext } from '../src/ai/answerSources';
 import { describe, expect, it, vi } from 'vitest';
 import { createHash } from 'node:crypto';
@@ -65,4 +72,53 @@ it('continuacao sem RAG conserva fontes e segunda busca usa numeros distintos', 
   expect(second.snapshot).toContain('FONTE SINTETICA B');
   a.chunk.text = 'ALTERADO APOS RESPOSTA';
   expect(second.snapshot).not.toContain('ALTERADO');
+});
+
+it('fecha todas as chamadas paralelas e impede resposta tardia de gravar anotacao', async () => {
+  const resolvers: ((result: { text: string; stopReason: null; model: string }) => void)[] = [];
+  const abort = vi.fn(), delta = vi.fn(), persistir = vi.fn();
+  const lifetime = createRequestLifetime((_request, onDelta) => {
+    onDelta('parcial');
+    return { abort, done: new Promise(resolve => resolvers.push(resolve)) };
+  });
+  const request = { provider: 'claude' as const, model: 'SINTETICO', messages: [] };
+  const tasks = [lifetime.start(request, delta), lifetime.start(request, delta)];
+  const outcomes = tasks.map(t => t.done.then(persistir));
+  const settled = Promise.allSettled(outcomes);
+  lifetime.dispose();
+  resolvers.forEach(resolve => resolve({ text: 'tardio', stopReason: null, model: 'SINTETICO' }));
+  expect((await settled).every(r => r.status === 'rejected')).toBe(true);
+  expect(abort).toHaveBeenCalledTimes(2); expect(persistir).not.toHaveBeenCalled();
+  expect(() => lifetime.start(request, delta)).toThrow();
+});
+it('falha e gravacao pendente permanecem visiveis ate persistencia confirmada', async () => {
+  let fail!: (error: Error) => void, ok!: () => void;
+  const save = vi.fn().mockImplementationOnce(() => new Promise<void>((_resolve, reject) => { fail = reject; }))
+    .mockImplementationOnce(() => new Promise<void>(resolve => { ok = resolve; }));
+  const tracker = createSaveTracker(save);
+  const first = tracker.write({ nota: 'SINTETICA' });
+  expect(tracker.getSnapshot().pending).toBe(1);
+  fail(Error('DISCO_INDISPONIVEL')); await expect(first).rejects.toThrow('DISCO_INDISPONIVEL');
+  expect(tracker.getSnapshot()).toEqual({ pending: 0, error: 'DISCO_INDISPONIVEL' });
+  const retry = tracker.write({ nota: 'SINTETICA' });
+  expect(tracker.getSnapshot().pending).toBe(1); ok(); await retry;
+  expect(tracker.getSnapshot()).toEqual({ pending: 0, error: null });
+});
+it('biblioteca nativa serializa snapshots e preserva arquivo invalido para recuperacao', async () => {
+  const require = createRequire(import.meta.url);
+  const { createJsonStore } = require('../electron/services/json-store.cjs');
+  const dir = await mkdtemp(join(tmpdir(), 'pdfforge-integracao-'));
+  try {
+    const file = join(dir, 'biblioteca.json'), store = createJsonStore(file);
+    const writes = Array.from({ length: 20 }, (_, i) => store.write({ numero: i, nota: 'SINTETICA' }));
+    expect(store.pending()).toBe(20); await Promise.all(writes); await store.idle();
+    expect(await store.read()).toEqual({ numero: 19, nota: 'SINTETICA' });
+    expect(await readdir(dir)).toEqual(['biblioteca.json']);
+    await writeFile(file, 'CONTEUDO_INVALIDO_PRESERVAR');
+    await expect(store.read()).rejects.toThrow();
+    expect(await readFile(file, 'utf8')).toBe('CONTEUDO_INVALIDO_PRESERVAR');
+  } finally { await rm(dir, { recursive: true, force: true }); }
+});
+it('WhatsApp recusa texto longo antes de acessar qualquer integracao', async () => {
+  await expect(shareWhatsApp('S'.repeat(3501))).rejects.toThrow('arquivo completo');
 });

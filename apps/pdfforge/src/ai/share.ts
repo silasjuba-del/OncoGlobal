@@ -36,7 +36,7 @@ export async function toDrive(title: string, markdown: string, toast: Toast, asD
     return;
   }
   try {
-    const p = await writeFolderFile(`${dir}\\PDFForge`, `${slug(title)}.${asDocx ? 'docx' : 'md'}`, markdown, asDocx);
+    const p = await writeFolderFile(dir, `${slug(title)}.${asDocx ? 'docx' : 'md'}`, markdown, asDocx, 'PDFForge');
     toast(`Salvo no Drive: ${p}`, 'success');
   } catch (e) {
     toast((e as Error).message, 'error');

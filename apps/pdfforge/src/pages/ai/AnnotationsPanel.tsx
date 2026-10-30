@@ -1,9 +1,10 @@
+import { useChatRequests } from '../../ai/useChatRequests';
 // Anotações ao lado do PDF: por página, manuais ou geradas por IA; exportáveis para Word e biblioteca.
 import { useEffect, useState } from 'react';
 import type { PDFDocumentProxy } from 'pdfjs-dist';
 import { useActions } from '../../app/actions';
 import { attachmentPages, pdfAttachment } from '../../ai/attachments';
-import { aiAvailable, chatStream, PROVIDERS, type Provider } from '../../ai/bridge';
+import { aiAvailable, PROVIDERS, type Provider } from '../../ai/bridge';
 import { addAnnotation, addDoc, docKeyOf, removeAnnotation, updateAnnotation, useLibrary } from '../../ai/library';
 import { toLibrary, toWord } from '../../ai/share';
 import type { FilePayload } from '../../platform/platform';
@@ -16,6 +17,7 @@ async function pageText(doc: PDFDocumentProxy, n: number) {
 
 export function AnnotationsPanel({ file, doc, page, onGoTo }: { file: FilePayload; doc: PDFDocumentProxy; page: number; onGoTo(n: number): void }) {
   const actions = useActions();
+  const chatStream = useChatRequests(file);
   const lib = useLibrary();
   const { settings } = useAppState();
   const [identidade, setIdentidade] = useState<{ file: FilePayload; key: string } | null>(null);
@@ -55,7 +57,7 @@ export function AnnotationsPanel({ file, doc, page, onGoTo }: { file: FilePayloa
       items.forEach((t) => addAnnotation({ docKey: key, docName: file.name, page, text: t, source: 'ai' }));
       actions.toast(`${items.length} anotações geradas para a página ${page}.`, 'success');
     } catch (e) {
-      actions.toast((e as Error).message, 'error');
+      if ((e as Error).name !== 'AbortError') actions.toast((e as Error).message, 'error');
     } finally {
       setBusy(false);
     }

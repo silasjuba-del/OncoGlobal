@@ -83,7 +83,7 @@ interface PluginsBridge {
   pickFolder(title: string): Promise<Wrapped<string | null>>;
   listFolder(dir: string): Promise<Wrapped<FolderFile[]>>;
   readFolderFile(path: string): Promise<Wrapped<FolderFileContent>>;
-  writeFolderFile(dir: string, name: string, content: string | Uint8Array, asDocx?: boolean): Promise<Wrapped<string>>;
+  writeFolderFile(dir: string, name: string, content: string | Uint8Array, asDocx?: boolean, subdirectory?: 'PDFForge'): Promise<Wrapped<string>>;
   whatsapp(text: string): Promise<Wrapped<'desktop' | 'web'>>;
   libraryGet(): Promise<unknown>;
   librarySet(value: unknown): Promise<boolean>;
@@ -182,13 +182,14 @@ export const detectDrive = () => unwrap(plugins()?.detectDrive());
 export const pickFolder = (title: string) => unwrap(plugins()?.pickFolder(title));
 export const listFolder = (dir: string) => unwrap(plugins()?.listFolder(dir));
 export const readFolderFile = (path: string) => unwrap(plugins()?.readFolderFile(path));
-export const writeFolderFile = (dir: string, name: string, content: string | Uint8Array, asDocx = false) =>
-  unwrap(plugins()?.writeFolderFile(dir, name, content, asDocx));
+export const writeFolderFile = (dir: string, name: string, content: string | Uint8Array, asDocx = false, subdirectory?: 'PDFForge') =>
+  unwrap(plugins()?.writeFolderFile(dir, name, content, asDocx, subdirectory));
 
 export async function shareWhatsApp(text: string): Promise<'desktop' | 'web'> {
+  if (text.length > 3500) throw new Error('Texto longo: exporte o arquivo completo para compartilhar sem perder fontes.');
   const p = plugins();
   if (p) return unwrap(p.whatsapp(text));
-  window.open(`https://wa.me/?text=${encodeURIComponent(text.slice(0, 3500))}`, '_blank', 'noopener');
+  window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank', 'noopener');
   return 'web';
 }
 
@@ -197,25 +198,17 @@ const LIB_KEY = 'pdfforge-library';
 export async function loadLibraryRaw(): Promise<unknown> {
   const p = plugins();
   if (p) return p.libraryGet();
-  try {
-    const raw = localStorage.getItem(LIB_KEY);
-    return raw ? JSON.parse(raw) : null;
-  } catch {
-    return null;
-  }
+  const raw = localStorage.getItem(LIB_KEY);
+  return raw ? JSON.parse(raw) : null;
 }
 
 export async function saveLibraryRaw(value: unknown): Promise<void> {
   const p = plugins();
   if (p) {
-    await p.librarySet(value);
+    if (await p.librarySet(value) !== true) throw new Error('Biblioteca nao confirmou a gravacao.');
     return;
   }
-  try {
-    localStorage.setItem(LIB_KEY, JSON.stringify(value));
-  } catch {
-    // Armazenamento cheio/indisponível no navegador: segue sem persistir.
-  }
+  localStorage.setItem(LIB_KEY, JSON.stringify(value));
 }
 
 // ---------- Navegador interno e captura de tela ----------

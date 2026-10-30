@@ -150,9 +150,8 @@ async function writeFolderFile(dir, name, content) {
 // ---------- WhatsApp ----------
 
 async function shareWhatsApp(text) {
-  const max = 3500;
-  const body = text.length > max ? `${text.slice(0, max)}\n\n[…texto cortado; arquivo completo salvo no PDFForge]` : text;
-  const encoded = encodeURIComponent(body);
+  if (text.length > 3500) throw Error('Texto longo: exporte o arquivo completo para compartilhar sem perder fontes.');
+  const encoded = encodeURIComponent(text);
   try {
     await shell.openExternal(`whatsapp://send?text=${encoded}`);
     return 'desktop';
@@ -166,22 +165,16 @@ async function shareWhatsApp(text) {
 
 const libraryFile = () => path.join(app.getPath('userData'), 'pdfforge-library.json');
 
-async function libraryGet() {
-  try {
-    return JSON.parse(await fs.readFile(libraryFile(), 'utf8'));
-  } catch {
-    return null;
-  }
-}
-
-async function librarySet(value) {
-  const tmp = libraryFile() + '.tmp';
-  await fs.writeFile(tmp, JSON.stringify(value), 'utf8');
-  await fs.rename(tmp, libraryFile());
-  return true;
-}
+const { createJsonStore } = require('./json-store.cjs');
+let libraryStore;
+const store = () => libraryStore ??= createJsonStore(libraryFile());
+const libraryGet = () => store().read();
+const librarySet = value => store().write(value);
+const libraryWritesPending = () => store().pending();
+const flushLibrary = () => store().idle();
 
 module.exports = {
+  libraryWritesPending, flushLibrary,
   wordExport,
   wordImport,
   wordToBuffer,

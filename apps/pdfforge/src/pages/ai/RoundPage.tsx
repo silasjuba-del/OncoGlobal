@@ -1,8 +1,9 @@
+import { useChatRequests } from '../../ai/useChatRequests';
 // IA-Round: uma pergunta → até 4 LLMs em paralelo → rodada de confronto opcional → reconciliação por skill.
 import { useState } from 'react';
 import { useActions } from '../../app/actions';
 import { docsText, imageBlocks, type Attachment } from '../../ai/attachments';
-import { aiAvailable, chatStream, PROVIDERS, providerInfo, type ChatBlock, type Provider } from '../../ai/bridge';
+import { aiAvailable, PROVIDERS, providerInfo, type ChatBlock, type Provider } from '../../ai/bridge';
 import { allTemplates } from '../../ai/library';
 import { fillTemplate } from '../../ai/prompts';
 import { toLibrary, toWord } from '../../ai/share';
@@ -21,12 +22,14 @@ const SYSTEM = 'Responda em português do Brasil, com fundamentação explícita
 
 export function RoundPage() {
   const actions = useActions();
+  const chatStream = useChatRequests();
   const { settings } = useAppState();
   const [question, setQuestion] = useState('');
   const [submittedQuestion, setSubmittedQuestion] = useState('');
   const [atts, setAtts] = useState<Attachment[]>([]);
   const [selected, setSelected] = useState<Provider[]>(PROVIDERS.map((p) => p.id));
   const [judge, setJudge] = useState<Provider>('claude');
+  const [mergedProvider, setMergedProvider] = useState<Provider>('claude');
   const [lanes, setLanes] = useState<Lane[]>([]);
   const [merged, setMerged] = useState('');
   const [merging, setMerging] = useState(false);
@@ -78,6 +81,7 @@ export function RoundPage() {
   };
 
   const reconcile = () => {
+    setMergedProvider(judge);
     const tpl = allTemplates('prompt').find((t) => t.id === 'reconciliar')!;
     const documento = lanes
       .filter((l) => l.status === 'done')
@@ -170,7 +174,7 @@ export function RoundPage() {
           {merged && (
             <section className="merged">
               <header className="row space">
-                <h2>Síntese reconciliada ({providerInfo(judge).name})</h2>
+                <h2>Síntese reconciliada ({providerInfo(mergedProvider).name})</h2>
                 {!merging && (
                   <div className="row">
                     <button className="link" onClick={() => navigator.clipboard.writeText(merged)}>
