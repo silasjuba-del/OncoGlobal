@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import JSZip from 'jszip';
+import { zipOutputs } from '../engine/archive';
 import { useActions } from '../app/actions';
 import { IconClose, IconDownload, IconGlobe, IconLock, IconPlus } from '../components/icons';
 import { OptionsForm } from '../components/OptionsForm';
@@ -352,9 +352,7 @@ function ResultView({
   };
 
   const saveZip = async () => {
-    const zip = new JSZip();
-    outputs.forEach((o) => zip.file(o.name, o.bytes));
-    const bytes = await zip.generateAsync({ type: 'uint8array' });
+    const bytes = await zipOutputs(outputs);
     const p = await saveFile(`${tool.id}_${outputs.length}_arquivos.zip`, bytes);
     if (p) {
       onSaved([p]);

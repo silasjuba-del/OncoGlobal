@@ -1,5 +1,5 @@
 // Anotações ao lado do PDF: por página, manuais ou geradas por IA; exportáveis para Word e biblioteca.
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { PDFDocumentProxy } from 'pdfjs-dist';
 import { useActions } from '../../app/actions';
 import { attachmentPages, pdfAttachment } from '../../ai/attachments';
@@ -18,7 +18,14 @@ export function AnnotationsPanel({ file, doc, page, onGoTo }: { file: FilePayloa
   const actions = useActions();
   const lib = useLibrary();
   const { settings } = useAppState();
-  const key = docKeyOf(file);
+  const [identidade, setIdentidade] = useState<{ file: FilePayload; key: string } | null>(null);
+  const key = identidade?.file === file ? identidade.key : null;
+  useEffect(() => {
+    let ativo = true;
+    void docKeyOf(file).then(key => { if (ativo) setIdentidade({ file, key }); })
+      .catch(() => { if (ativo) actions.toast('Nao foi possivel conferir o conteudo do documento.', 'error'); });
+    return () => { ativo = false; };
+  }, [file]);
   const notes = lib.annotations.filter((a) => a.docKey === key).sort((a, b) => a.page - b.page || a.createdAt - b.createdAt);
   const [draft, setDraft] = useState('');
   const [scope, setScope] = useState<'page' | 'all'>('page');
@@ -28,6 +35,7 @@ export function AnnotationsPanel({ file, doc, page, onGoTo }: { file: FilePayloa
   const visible = scope === 'page' ? notes.filter((n) => n.page === page) : notes;
 
   const generate = async () => {
+    if (!key) return;
     setBusy(true);
     try {
       const text = await pageText(doc, page);
@@ -72,17 +80,19 @@ export function AnnotationsPanel({ file, doc, page, onGoTo }: { file: FilePayloa
           </button>
         </div>
       </div>
+      {lib.annotations.some(a => a.docKey === (file.path ?? `${file.name}:${file.bytes.length}`)) &&
+        <p role="status">Anotacoes antigas preservadas na biblioteca, sem vinculo confirmado ao conteudo atual.</p>}
       <form
         className="note-add"
         onSubmit={(e) => {
           e.preventDefault();
-          if (!draft.trim()) return;
+          if (!draft.trim() || !key) return;
           addAnnotation({ docKey: key, docName: file.name, page, text: draft.trim(), source: 'user' });
           setDraft('');
         }}
       >
         <textarea value={draft} onChange={(e) => setDraft(e.target.value)} rows={3} placeholder={`Anotar na página ${page}…`} aria-label="Nova anotação" />
-        <button className="btn btn-sm btn-primary" disabled={!draft.trim()}>
+        <button className="btn btn-sm btn-primary" disabled={!draft.trim() || !key}>
           Anotar
         </button>
       </form>
@@ -94,7 +104,7 @@ export function AnnotationsPanel({ file, doc, page, onGoTo }: { file: FilePayloa
             </option>
           ))}
         </select>
-        <button className="btn btn-sm" disabled={busy || !aiAvailable()} onClick={generate} title={aiAvailable() ? '' : 'Disponível no app desktop'}>
+        <button className="btn btn-sm" disabled={busy || !key || !aiAvailable()} onClick={generate} title={aiAvailable() ? '' : 'Disponível no app desktop'}>
           {busy ? 'Gerando…' : 'IA: anotar página'}
         </button>
       </div>

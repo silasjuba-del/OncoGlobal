@@ -109,8 +109,11 @@ export function removeAnnotation(id: string) {
   set({ ...state, annotations: state.annotations.filter((a) => a.id !== id) });
 }
 
-/** Chave estável de um documento aberto: caminho no disco ou nome+tamanho. */
-export const docKeyOf = (file: { name: string; path?: string | null; bytes: Uint8Array }) => file.path ?? `${file.name}:${file.bytes.length}`;
+/** Identidade por conteudo; notas legadas permanecem guardadas, sem atribuicao automatica. */
+export async function docKeyOf(file: { name: string; path?: string | null; bytes: Uint8Array }): Promise<string> {
+  const digest = await crypto.subtle.digest('SHA-256', new Uint8Array(file.bytes));
+  return `sha256:${Array.from(new Uint8Array(digest), b => b.toString(16).padStart(2, '0')).join('')}`;
+}
 
 // ---------- prompts e skills ----------
 

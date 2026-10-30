@@ -31,6 +31,13 @@ app.on('browser-window-created', (_event, win) => {
         for(const tipo of ['dragover','drop'])document.querySelector('.app').dispatchEvent(new DragEvent(tipo,{bubbles:true,cancelable:true,dataTransfer:dt}));
         const ativo=()=>document.querySelector('.tab-panel:not([hidden])');
         await esperar(()=>ativo()?.querySelector('[aria-label="Autor da exportação"]'));
+        await esperar(()=>ativo()?.querySelector('[aria-label="Nova anotação"]'));
+        const nota=ativo().querySelector('[aria-label="Nova anotação"]');
+        Object.getOwnPropertyDescriptor(HTMLTextAreaElement.prototype,'value').set.call(nota,'Anotacao SINTETICA vinculada aos bytes.');
+        nota.dispatchEvent(new Event('input',{bubbles:true}));
+        await esperar(()=>[...ativo().querySelectorAll('button')].some(b=>b.textContent.trim()==='Anotar'&&!b.disabled));
+        [...ativo().querySelectorAll('button')].find(b=>b.textContent.trim()==='Anotar').click();
+        await esperar(()=>ativo().querySelector('.notes')?.textContent.includes('Anotacao SINTETICA vinculada aos bytes.'));
         const input=ativo().querySelector('[aria-label="Autor da exportação"]');
         Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set.call(input,'Autor SINTETICO');
         input.dispatchEvent(new Event('input',{bubbles:true}));
@@ -44,7 +51,8 @@ app.on('browser-window-created', (_event, win) => {
       const pacote = JSON.parse(fs.readFileSync(path.join(dados, 'oncoglobal-export', arquivos[0]), 'utf8'));
       if (pacote.schema !== 'oncoglobal.import.v1' || pacote.autor !== 'Autor SINTETICO'
         || pacote.original.sha256 !== createHash('sha256').update(bytes).digest('hex')
-        || !Buffer.from(pacote.original.bytesBase64, 'base64').equals(bytes)) throw Error('PACOTE_DIVERGENTE');
+        || !Buffer.from(pacote.original.bytesBase64, 'base64').equals(bytes)
+        || pacote.anotacoes.length !== 1 || pacote.anotacoes[0].texto !== 'Anotacao SINTETICA vinculada aos bytes.') throw Error('PACOTE_DIVERGENTE');
       concluido = true; clearTimeout(prazo);
       console.log(JSON.stringify({ prova: 'PDFFORGE_UI_IPC_EXPORT_REAL', ok: true, pacoteId: pacote.pacoteId, sha256: pacote.original.sha256, userDataSintetico: dados }));
       app.exit(0);

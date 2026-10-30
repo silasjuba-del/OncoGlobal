@@ -50,3 +50,8 @@ O editor pode incluir um PDF derivado com hash próprio e referência ao hash or
 `tests/medico-m123/documental/exportador.test.ts` confronta o exporter real com o schema do importador. `npm run test:medico-m123` usa esse mesmo exporter e a interface real até persistência, assinatura e reabertura. `smoke-ponte.cjs` testa o botão/IPC em Electron real com userData temporário sintético; executar com o binário Electron da cópia e o caminho da cópia como argumento, depois do build. Não usa chaves de produção.
 
 Em 26/10/2026, build da cópia e jornada Chromium do OncoGlobal passaram. O smoke nativo Electron **não passou** neste Windows: crash do processo GPU e timeout na tentativa sem aceleração. O teste IPC automatizado simula a API Electron e usa filesystem/exporter reais; não substitui a validação do botão no desktop. Essa validação continua pendente antes de declarar a ponte desktop operacional.
+
+
+## Correcoes da revisao de incorporacao
+
+A copia integrada vincula anotacoes ao SHA-256 dos bytes do PDF, nunca somente ao caminho/nome. Anotacoes legadas continuam armazenadas, mas nao sao reatribuidas automaticamente a um documento possivelmente substituido; a interface informa essa pendencia. Markdown parcial nao bloqueia streaming; arquivos homonimos conservam entradas distintas no ZIP; fechar captura encerra gravador e faixas; confronto/reconciliacao usam a pergunta originalmente submetida.

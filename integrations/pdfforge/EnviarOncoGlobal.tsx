@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
 import type { PDFDocumentProxy } from 'pdfjs-dist';
 import type { FilePayload } from '../platform/platform';
-import { getLibrary, docKeyOf } from '../ai/library';
+import { getLibrary } from '../ai/library';
 
 export function EnviarOncoGlobal({ original, documento, obterDerivado }: {
   original: FilePayload; documento: PDFDocumentProxy | null;
@@ -26,14 +26,17 @@ export function EnviarOncoGlobal({ original, documento, obterDerivado }: {
         if (totalTexto > 200000) { textoOmitido = true; paginasExtraidas = []; }
         else paginasExtraidas.push({ pagina: n, texto });
       }
-      const anotacoes = getLibrary().annotations.filter(a => a.docKey === docKeyOf(original)).map(a => ({
+      const digest = await crypto.subtle.digest('SHA-256', new Uint8Array(original.bytes));
+      const chaveDocumento = `sha256:${Array.from(new Uint8Array(digest), b => b.toString(16).padStart(2, '0')).join('')}`;
+      const notasLegadas = getLibrary().annotations.some(a => a.docKey === (original.path ?? `${original.name}:${original.bytes.length}`));
+      const anotacoes = getLibrary().annotations.filter(a => a.docKey === chaveDocumento).map(a => ({
         id: a.id, pagina: a.page, texto: a.text, autorTipo: a.source === 'ai' ? 'IA' as const : 'USUARIO' as const,
         autor: a.source === 'ai' ? 'Proposta IA não revisada' : autor.trim(), criadoEm: new Date(a.createdAt).toISOString(),
       }));
       const derivado = await obterDerivado?.();
       const resultado = await ponte({ original, autor: autor.trim(), paginasExtraidas, anotacoes, ...(derivado ? { derivado } : {}) });
       if (!resultado.ok) throw Error(resultado.codigo ?? 'EXPORTACAO_FALHOU');
-      setMensagem(`Pacote local salvo em ${resultado.caminho}.${textoOmitido ? " Texto auxiliar excedeu o limite e foi omitido; PDF original preservado integralmente." : ""} No OncoGlobal, selecione o encontro e importe em Documentos. Recebido não significa revisado.`);
+      setMensagem(`Pacote local salvo em ${resultado.caminho}.${textoOmitido ? " Texto auxiliar excedeu o limite e foi omitido; PDF original preservado integralmente." : ""} ${notasLegadas ? "Anotacoes antigas sem vinculo por conteudo nao foram incluidas; permanecem preservadas na biblioteca. " : ""}No OncoGlobal, selecione o encontro e importe em Documentos. Recebido não significa revisado.`);
     } catch (erro) { setMensagem(erro instanceof Error ? erro.message : 'EXPORTACAO_FALHOU'); }
     finally { emCurso.current = false; setOcupado(false); }
   }

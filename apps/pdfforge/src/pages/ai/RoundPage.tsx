@@ -23,6 +23,7 @@ export function RoundPage() {
   const actions = useActions();
   const { settings } = useAppState();
   const [question, setQuestion] = useState('');
+  const [submittedQuestion, setSubmittedQuestion] = useState('');
   const [atts, setAtts] = useState<Attachment[]>([]);
   const [selected, setSelected] = useState<Provider[]>(PROVIDERS.map((p) => p.id));
   const [judge, setJudge] = useState<Provider>('claude');
@@ -51,6 +52,8 @@ export function RoundPage() {
   };
 
   const start = async () => {
+    if (running || merging) return;
+    setSubmittedQuestion(question);
     setMerged('');
     setLanes(selected.map((p) => ({ provider: p, text: '', status: 'running', round: 1 })));
     const blocks = userBlocks();
@@ -66,7 +69,7 @@ export function RoundPage() {
           .map((o) => `### ${providerInfo(o.provider).name}\n${o.text}`)
           .join('\n\n');
         const text =
-          `Pergunta original: ${question}\n\nSua resposta anterior:\n${lane.text}\n\nRespostas dos outros modelos:\n${others}\n\n` +
+          `Pergunta original: ${submittedQuestion}\n\nSua resposta anterior:\n${lane.text}\n\nRespostas dos outros modelos:\n${others}\n\n` +
           'Confronte: aponte erros e lacunas das outras respostas e da sua, com justificativa. Depois entregue sua resposta REVISADA. ' +
           'Mantenha o que estava certo; mude só o que tiver motivo.';
         return run(lane.provider, [{ type: 'text', text }], lane.round + 1);
@@ -88,7 +91,7 @@ export function RoundPage() {
         provider: judge,
         model: settings.ai.models[judge],
         effort: settings.ai.effort,
-        messages: [{ role: 'user', content: [{ type: 'text', text: fillTemplate(tpl.template, { documento, entrada: question }) }] }],
+        messages: [{ role: 'user', content: [{ type: 'text', text: fillTemplate(tpl.template, { documento, entrada: submittedQuestion }) }] }],
       },
       (d) => setMerged((acc += d)),
     )
@@ -126,10 +129,10 @@ export function RoundPage() {
                 </label>
               ))}
               {atts.length > 0 && <span className="muted small">{atts.length} anexo(s)</span>}
-              <button className="btn btn-primary btn-sm" disabled={!question.trim() || !selected.length || running} onClick={start}>
+              <button className="btn btn-primary btn-sm" disabled={!question.trim() || !selected.length || running || merging} onClick={start}>
                 Disparar rodada
               </button>
-              <button className="btn btn-sm" disabled={doneCount < 2 || running} onClick={confront} title="Cada modelo critica os outros e revisa a própria resposta">
+              <button className="btn btn-sm" disabled={doneCount < 2 || running || merging} onClick={confront} title="Cada modelo critica os outros e revisa a própria resposta">
                 Rodada de confronto
               </button>
               <span className="muted small">Reconciliar com</span>
@@ -145,6 +148,7 @@ export function RoundPage() {
               </button>
             </div>
           </div>
+          {lanes.length > 0 && <p>Rodada referente a: {submittedQuestion}</p>}
           <div className="lanes" style={{ gridTemplateColumns: `repeat(${Math.max(1, lanes.length)}, minmax(0, 1fr))` }}>
             {lanes.map((l) => (
               <section key={l.provider} className={`lane lane-${l.status}`}>
@@ -172,10 +176,10 @@ export function RoundPage() {
                     <button className="link" onClick={() => navigator.clipboard.writeText(merged)}>
                       Copiar
                     </button>
-                    <button className="link" onClick={() => toWord(`IA-Round — ${question.slice(0, 50)}`, merged, actions.toast)}>
+                    <button className="link" onClick={() => toWord(`IA-Round — ${submittedQuestion.slice(0, 50)}`, merged, actions.toast)}>
                       Word
                     </button>
-                    <button className="link" onClick={() => toLibrary(`IA-Round — ${question.slice(0, 60)}`, merged, 'resposta', actions.toast)}>
+                    <button className="link" onClick={() => toLibrary(`IA-Round — ${submittedQuestion.slice(0, 60)}`, merged, 'resposta', actions.toast)}>
                       + Biblioteca
                     </button>
                   </div>

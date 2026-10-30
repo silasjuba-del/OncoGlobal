@@ -10,7 +10,7 @@ interface Block {
   lines: string[];
 }
 
-function parse(md: string): Block[] {
+export function parse(md: string): Block[] {
   const lines = md.replace(/\r/g, '').split('\n');
   const blocks: Block[] = [];
   let i = 0;
@@ -60,7 +60,8 @@ function parse(md: string): Block[] {
       continue;
     }
     const para: string[] = [];
-    while (i < lines.length && lines[i].trim() && !/^(```|#{1,4}\s|\s*\||\s*([-*•]|\d+[.)])\s+|>)/.test(lines[i])) para.push(lines[i++]);
+    while (i < lines.length && lines[i].trim() && !/^(```|#{1,4}\s|\s*([-*•]|\d+[.)])\s+|>)/.test(lines[i]) && !/^\s*\|.*\|\s*$/.test(lines[i])) para.push(lines[i++]);
+    if (!para.length) para.push(lines[i++]); // Todo bloco consome entrada, inclusive streaming incompleto.
     blocks.push({ type: 'para', lines: para });
   }
   return blocks;

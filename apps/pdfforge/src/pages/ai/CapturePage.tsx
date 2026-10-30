@@ -1,3 +1,4 @@
+import { createCaptureLifetime } from '../../ai/captureLifetime';
 // Captura de tela: foto, vídeo (com áudio do sistema no Windows) e gravador de frames de 10–20 s para rolagem de
 // TC/RM. Tudo fica local até o usuário enviar à IA; a análise de frames é rotulada como apoio, não laudo.
 import { useEffect, useRef, useState } from 'react';
@@ -49,7 +50,7 @@ export function CapturePage() {
   const [frames, setFrames] = useState<Frame[]>([]);
   const [busy, setBusy] = useState<string | null>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const stopRef = useRef<() => void>(() => {});
+  const lifetime = useRef<ReturnType<typeof createCaptureLifetime> | null>(null);
 
   const loadSources = async () => {
     try {
@@ -62,8 +63,9 @@ export function CapturePage() {
   };
 
   useEffect(() => {
+    const recursos = createCaptureLifetime(); lifetime.current = recursos;
     void loadSources();
-    return () => stream?.getTracks().forEach((t) => t.stop());
+    return () => recursos.dispose();
     // Carrega as fontes uma vez; o fluxo é encerrado ao fechar a aba.
   }, []);
 
@@ -79,8 +81,9 @@ export function CapturePage() {
 
   const connect = async () => {
     try {
-      stream?.getTracks().forEach((t) => t.stop());
+      const recursos = lifetime.current;
       const s = await openCaptureStream(sourceId, mode === 'video' && withAudio);
+      if (!recursos || !recursos.replaceStream(s)) { if (!recursos) s.getTracks().forEach(t => t.stop()); return; }
       setStream(s);
       setCrop(null);
     } catch (e) {
@@ -106,36 +109,41 @@ export function CapturePage() {
   const takePhoto = async () => setPhoto(await grab());
 
   const recordFrames = () => {
+    const recursos = lifetime.current;
     const out: Frame[] = [];
     const start = Date.now();
     setFrames([]);
     setRecording({ until: start + seconds * 1000 });
     const iv = setInterval(async () => {
       const f = await grab('image/jpeg', 0.9);
+      if (!recursos?.isActive()) return;
       out.push({ ...f, t: (Date.now() - start) / 1000, keep: true });
       setFrames([...out]);
     }, 1000 / fps);
     const stop = () => {
       clearInterval(iv);
       clearTimeout(to);
-      setRecording(null);
+      if (recursos?.isActive()) setRecording(null);
     };
     const to = setTimeout(stop, seconds * 1000);
-    stopRef.current = stop;
+    recursos?.setStopRecording(stop);
   };
 
   const recordVideo = () => {
+    const recursos = lifetime.current;
     const rec = new MediaRecorder(stream!, { mimeType: MediaRecorder.isTypeSupported('video/webm;codecs=vp9,opus') ? 'video/webm;codecs=vp9,opus' : 'video/webm' });
     const chunks: Blob[] = [];
     rec.ondataavailable = (e) => e.data.size && chunks.push(e.data);
     rec.onstop = async () => {
       const blob = new Blob(chunks, { type: 'video/webm' });
-      setVideo({ url: URL.createObjectURL(blob), bytes: new Uint8Array(await blob.arrayBuffer()) });
+      const bytes = new Uint8Array(await blob.arrayBuffer());
+      if (!recursos?.isActive()) return;
+      setVideo({ url: URL.createObjectURL(blob), bytes });
       setRecording(null);
     };
     rec.start(1000);
     setRecording({ until: Date.now() + 10 * 60 * 1000 });
-    stopRef.current = () => rec.state !== 'inactive' && rec.stop();
+    recursos?.setStopRecording(() => { if (rec.state !== 'inactive') rec.stop(); });
   };
 
   const run = async (label: string, fn: () => Promise<void>) => {
@@ -264,7 +272,7 @@ export function CapturePage() {
                       Gravar frames ({seconds * fps})
                     </button>
                   ) : (
-                    <button className="btn" onClick={() => stopRef.current()}>
+                    <button className="btn" onClick={() => lifetime.current?.stop()}>
                       Parar ({Math.max(0, Math.ceil((recording.until - now) / 1000))} s)
                     </button>
                   )}
@@ -277,7 +285,7 @@ export function CapturePage() {
                     Gravar vídeo
                   </button>
                 ) : (
-                  <button className="btn" onClick={() => stopRef.current()}>
+                  <button className="btn" onClick={() => lifetime.current?.stop()}>
                     Parar gravação
                   </button>
                 ))}
