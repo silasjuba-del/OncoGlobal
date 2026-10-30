@@ -56,3 +56,10 @@ it("estadiamento incompleto conserva o literal e sinaliza pendência na seção"
  expect(secoes.estadiamento.estado).toBe("PENDENTE");
  expect(secoes.estadiamento.itens[0]?.valor).toBe("cT2N0M0");
 });
+
+it("data ou ciclo desconhecido permanece pendente na seção, sem ocultar tratamento", () => {
+ for (const item of [{ ...tratamento, cycle: null }, { ...tratamento, em: null }]) {
+  const secao = secoesDaTimeline(timeline({ treatments: [item] })).tratamento;
+  expect(secao.estado).toBe("PENDENTE"); expect(secao.itens).toEqual([item]);
+ }
+});

@@ -23,7 +23,7 @@ export function secoesDaTimeline(timeline: PatientTimeline): SecoesTimeline {
     : secaoVazia<StageEntry>("sem estadiamento documentado: PENDENTE (ausência nunca é M0 nem Mx)");
 
   const tratamento = timeline.treatments.length
-    ? secaoDe("VERDE", `${timeline.treatments.length} entrada(s) de tratamento (proposto→concluído)`, timeline.treatments)
+    ? secaoDe(timeline.treatments.some(e => e.em === null || e.sourceIds.length === 0 || (e.status === "PRESCRITO" || e.status === "ADMINISTRADO") && e.cycle === null) ? "PENDENTE" : "VERDE", `${timeline.treatments.length} entrada(s) de tratamento (proposto→concluído); dados ausentes exigem conferência`, timeline.treatments)
     : secaoVazia<TreatmentEntry>("sem tratamento documentado: PENDENTE");
 
   const recist = timeline.recist.length
