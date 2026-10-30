@@ -14,8 +14,9 @@ import { semaforoInteracoes, type RulesetSemaforo } from "../../rules/semaforoIn
 import type { CatalogoInteracoes } from "../../contracts/f0c/interacoes.js";
 import { elegibilidadeCiclo, type SinalElegibilidade } from "../../rules/elegibilidadeCiclo.js";
 import { alertarFeve, type RulesetAlertaFeve } from "../../rules/alertaFeve.js";
-import { avaliarCriticos, avaliarValidadeExame, cockcroftGault, lembrarHbvC1D1,
+import { analitosSemCortePorDroga, avaliarCriticos, avaliarValidadeExame, cockcroftGault, lembrarHbvC1D1,
   type RegistroHbv, type SorologiaHbv } from "../../rules/f0c/clinica.js";
+import { preRequisitosC1 } from "../../rules/preRequisitosC1.js";
 
 const key = (s: string) => s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 const aliases: Record<string, string> = { cr: "creatinina", creat: "creatinina", na: "sodio", k: "potassio",
@@ -109,8 +110,10 @@ export function avaliarConsulta(i: EntradaAvaliacaoConsulta) {
   const nascimento = i.paciente.nascimento;
   const idade = nascimento ? Number(i.hoje.slice(0,4)) - Number(nascimento.slice(0,4)) - (i.hoje.slice(5) < nascimento.slice(5) ? 1 : 0) : null;
   const crValidade = avaliarValidadeExame("BIOQUIMICA", cr?.data ?? null, i.agora);
+  const alturaParaRenal = alturaDocumentada(retrato, instanteHorizonte);
   const renal = cockcroftGault({ idadeAnos: idade,
     sexoFormula: i.paciente.sexoCadastral === "M" ? "MASCULINO" : i.paciente.sexoCadastral === "F" ? "FEMININO" : null,
+    alturaCm: alturaParaRenal,
     peso: { valor: peso && idadePeso.desatualizado===false && new Set(pesosDia.map(p=>p.kg)).size === 1 ? peso.kg : null, unidade: "kg", fonte: peso?.sourceId ?? null },
     creatinina: { valor: crValidade.estado === "VALIDO" ? cr?.valor ?? null : null, unidade: cr?.unidade ?? null, fonte: cr?.sourceId ?? null } });
   const medicamentosRaw = campo("medicamentos");
@@ -150,6 +153,9 @@ export function avaliarConsulta(i: EntradaAvaliacaoConsulta) {
     if (p.valor < minimo) portaAlertas.push(`${nome} abaixo do corte do serviço (${minimo}/µL)`);
     if (avaliarValidadeExame("HEMOGRAMA",p.data,i.agora).estado !== "VALIDO") portaPendentes.push(`${nome}: validade não confirmada`);
   }
+  for (const tarefa of preRequisitosC1((i.ciclo?.itens ?? []).map((item) => item.droga), i.ciclo?.numero ?? null)) {
+    if (tarefa.id === "AUDIOMETRIA_BASAL") portaPendentes.push(tarefa.texto);
+  }
   const dadoGrau = triagem?.grauCtcae;
   const grau = dadoGrau?.campo === "PRESENTE" && (dadoGrau.revisao === "CONFIRMADO" || dadoGrau.revisao === "ASSINADO")
     ? dadoGrau.valor : null;
@@ -158,7 +164,8 @@ export function avaliarConsulta(i: EntradaAvaliacaoConsulta) {
   const eco = obj(campo("feve"));
   const feve = i.feveRuleset ? alertarFeve({ hoje:i.hoje, feve: { percentual: typeof eco?.percentual === "number" ? eco.percentual : null,
     metodo: typeof eco?.metodo === "string" ? eco.metodo : null, data: typeof eco?.data === "string" ? eco.data : null },
-    programados: (i.ciclo?.itens ?? []).map(item=>({nome:item.droga,classe:null})) },i.feveRuleset) : null;
+    programados: (i.ciclo?.itens ?? []).map(item=>({nome:item.droga,classe:null})),
+    numeroCiclo: i.ciclo?.numero ?? null },i.feveRuleset) : null;
   const registrosHbv: Partial<Record<SorologiaHbv,RegistroHbv>> = {};
   for (const nome of ["HBsAg","anti-HBc","anti-HBs"] as const) {
     const v = campo(nome), f = snapshot.campos[nome];
@@ -179,7 +186,16 @@ export function avaliarConsulta(i: EntradaAvaliacaoConsulta) {
     triagem: avalTriagem ? sinal(avalTriagem.cortes.length ? "VERMELHO" : avalTriagem.pendentes.length ? "PENDENTE" : "VERDE",
       [...avalTriagem.cortes,...avalTriagem.pendentes].map(m=>m.texto)) : pend("triagem ausente ou ambígua"),
     ctcae, interacoes:sinalInteracoes,
-    funcaoOrganica: renal.estado === "CALCULADO" ? pend("função renal calculada; limites renal/hepático por fármaco exigem ficha curada") : pend(`função renal: ${renal.motivo ?? crValidade.motivo}`),
+    funcaoOrganica: renal.estado === "CALCULADO"
+      ? pend(["função renal calculada; limites renal/hepático por fármaco exigem ficha curada", ...analitosSemCortePorDroga(i.ciclo?.itens.map((item) => item.droga) ?? [], new Set([
+        ...(ultimoLab(labs, "bilirrubina", limiteClinico) ? ["BILI"] : []),
+        ...(ultimoLab(labs, "tgo", limiteClinico) ? ["AST"] : []),
+        ...(ultimoLab(labs, "tgp", limiteClinico) ? ["ALT"] : []),
+        ...(ultimoLab(labs, "magnesio", limiteClinico) ? ["MG"] : []),
+        ...(ultimoLab(labs, "potassio", limiteClinico) ? ["K"] : []),
+        ...(ultimoLab(labs, "calcio total", limiteClinico) ? ["CA"] : []),
+      ])).map((a) => a.motivo)].join("; "))
+      : pend(`função renal: ${renal.motivo ?? crValidade.motivo}`),
     emergencia: emergencia ? sinal("VERMELHO",["emergência na triagem"]) : avalTriagem ? sinal("VERDE",[]) : pend("triagem de emergência ausente"),
     ...(avisosCriticos.length ? {intercorrencia:sinal("VERMELHO",avisosCriticos)} : {}),
     feve: !i.ciclo ? pend("esquema do ciclo não definido para avaliar FEVE") : feve

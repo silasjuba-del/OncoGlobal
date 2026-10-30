@@ -179,6 +179,10 @@ export function avaliarDoseECicloSalao(entrada: {
   dosePlanejadaProtocoloMg: number | null;
   dosePrescritaAssinadaMg: number | null;
   doseAdministradaCicloAnteriorMg: number | null;
+  referenciaProtocoloMgM2?: number | null;
+  scAnteriorM2?: number | null;
+  nivelDose?: 0 | -1 | -2 | null;
+  percentualDoNivel?: number | null;
   reducaoPct: 0 | 20 | 30 | 40;
   resultadoTriagem: ResultadoTriagem;
   doseRuleset: DoseRuleset;
@@ -201,6 +205,11 @@ export function avaliarDoseECicloSalao(entrada: {
       pesoKg: pesoEfetivo,
       origemPeso: origemPeso ?? "MEDIDO",
       ciclosSemPesoAnteriores: entrada.ciclosSemPesoAnteriores,
+      alturaCm: entrada.alturaCm,
+      ...(entrada.referenciaProtocoloMgM2 !== undefined ? { referenciaMgM2: entrada.referenciaProtocoloMgM2 } : {}),
+      ...(entrada.scAnteriorM2 !== undefined ? { scAnteriorM2: entrada.scAnteriorM2 } : {}),
+      ...(entrada.nivelDose !== undefined ? { nivelDose: entrada.nivelDose } : {}),
+      ...(entrada.percentualDoNivel !== undefined ? { percentualDoNivel: entrada.percentualDoNivel } : {}),
     },
     entrada.doseRuleset,
   );

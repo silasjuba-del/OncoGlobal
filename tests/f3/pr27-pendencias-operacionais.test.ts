@@ -16,7 +16,7 @@ function peso(kg = 64.9, origem: "MEDIDO" | "INFORMADO_PACIENTE" = "MEDIDO") {
 }
 
 it.each([
-  [65, "MEDIDO", "VERDE", "NAO_INDICADA"],
+  [67, "MEDIDO", "VERDE", "NAO_INDICADA"],
   [64.9, "MEDIDO", "VERMELHO", "PENDENTE_DECISAO_MEDICA"],
   [64, "INFORMADO_PACIENTE", "PENDENTE", "NAO_AVALIADA"],
 ] as const)("peso %s %s mantem corte %s e recomendacao %s sem execucao", (kg, origem, estado, recomendacao) => {

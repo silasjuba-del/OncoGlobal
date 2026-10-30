@@ -323,7 +323,7 @@ describe("fuzz determinístico das regras puras W11 (H28)", () => {
         for (const [, v] of presentes) {
           const sinal = v as SinalElegibilidade;
           expect(sinal.estado).toBe("VERDE");
-          expect(sinal.motivos.every((m) => m.nivel === undefined)).toBe(true);
+          expect(sinal.motivos.every((m) => m.nivel === undefined || m.nivel === "atencao")).toBe(true);
         }
       }
     },

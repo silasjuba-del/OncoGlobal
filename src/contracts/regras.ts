@@ -66,6 +66,13 @@ export interface EntradaDose {
   origemPeso: "MEDIDO" | "ANTERIOR" | "INFORMADO_PACIENTE" | null;
   /** quantos ciclos imediatamente anteriores ficaram sem peso */
   ciclosSemPesoAnteriores: number;
+  /** mg/m² do protocolo. Quando presente com peso e altura, a conta usa SC atual. Sem isso, vale a dose anterior. */
+  referenciaMgM2?: number | null;
+  alturaCm?: number | null;
+  scAnteriorM2?: number | null;
+  nivelDose?: 0 | -1 | -2 | null;
+  /** Percentual do protocolo para o nível −1 ou −2. Tem de estar em reducoesPct. */
+  percentualDoNivel?: number | null;
 }
 export interface SaidaDose {
   doseMg: number | null; // inteiro, meio para cima, arredondado uma vez após a redução
@@ -75,7 +82,7 @@ export interface SaidaDose {
   rulesetVersao: string;
 }
 
-export interface Pesagem { data: string; kg: number; origem: "MEDIDO" | "INFORMADO_PACIENTE" }
+export interface Pesagem { data: string; kg: number; origem: "MEDIDO" | "INFORMADO_PACIENTE"; alturaCm?: number | null }
 export interface SaidaPeso {
   estado: Semaforo; // VERMELHO = perda > limiar só com pesos MEDIDOS; envolve informado ⇒ PENDENTE (incerta, A2)
   perdaKg: number | null;

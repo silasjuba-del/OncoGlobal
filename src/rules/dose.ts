@@ -28,6 +28,36 @@ export function calcularDose(e: EntradaDose, rs: DoseRuleset): SaidaDose {
     };
   }
 
+  if (typeof e.referenciaMgM2 === "number" && e.referenciaMgM2 > 0 && e.pesoKg !== null && typeof e.alturaCm === "number" && e.alturaCm > 0) {
+    const produto = e.alturaCm * e.pesoKg;
+    const bsa = Number.isFinite(produto) ? Math.round(Math.sqrt(produto / 3600) * 100) / 100 : null;
+    if (bsa === null || bsa <= 0) return {
+      doseMg: null, estado: "PENDENTE", motivo: "SC atual não calculável",
+      ciclosSemPesoConsecutivos, rulesetVersao: versao,
+    };
+    let pct: number = e.reducaoPct;
+    if (e.nivelDose === 0) pct = 0;
+    if (e.nivelDose === -1 || e.nivelDose === -2) {
+      if (typeof e.percentualDoNivel !== "number" || !rs.reducoesPct.includes(e.percentualDoNivel)) {
+        return { doseMg: null, estado: "PENDENTE", motivo: "nível de dose sem percentual do protocolo",
+          ciclosSemPesoConsecutivos, rulesetVersao: versao };
+      }
+      pct = e.percentualDoNivel;
+    }
+    const pelaReferencia = arredondaMg(e.referenciaMgM2 * bsa, pct);
+    if (!Number.isSafeInteger(pelaReferencia) || pelaReferencia <= 0) return {
+      doseMg: null, estado: "PENDENTE", motivo: "resultado da referência do protocolo fora de mg inteiro",
+      ciclosSemPesoConsecutivos, rulesetVersao: versao,
+    };
+    const anterior = e.doseAdministradaAnteriorMg === null ? "dose anterior ausente" : `dose anterior ${e.doseAdministradaAnteriorMg} mg ao lado`;
+    const nivel = e.nivelDose === undefined || e.nivelDose === null ? "" : `; nível ${e.nivelDose}`;
+    let motivo = `referência do protocolo × SC atual ${bsa} m²; ${anterior}${nivel}`;
+    if (typeof e.scAnteriorM2 === "number" && e.scAnteriorM2 > 0 && Math.abs(bsa - e.scAnteriorM2) / e.scAnteriorM2 >= 0.1 - 1e-9) {
+      motivo += " — alerta: SC variou ≥ 10%";
+    }
+    return { doseMg: pelaReferencia, estado: "VERDE", motivo, ciclosSemPesoConsecutivos: 0, rulesetVersao: versao };
+  }
+
   if (e.doseAdministradaAnteriorMg === null) {
     return {
       doseMg: null,
