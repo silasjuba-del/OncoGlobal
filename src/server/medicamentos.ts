@@ -38,5 +38,5 @@ export function reconciliarMedicamentos(raw:unknown,token:string,deps:DepsMedica
   const r=executarConfirmacao(deps.db, { autorizadoEm: deps.agora(), operationId:p.operationId,patientId:p.patientId,encounterId:p.encounterId,tumorLotId:p.tumorLotId,sessao:sessao.data,em,reviewDecisionId:`review-${eventId}`,registros:[{draftId,expectedRevision:1,eventId,tipo:'FATO',payload,fontes:[fonte],revisao:'CONFIRMADO',supersedesEventId:anterior?.eventId??null}]});
   if(r.estado==='NEGADA')throw new Error(r.motivo??'RECONCILIACAO_NEGADA');
   return {status:r.estado==='GRAVADA'?201:200,body:{codigo:r.estado,eventId:r.resultRef}};
- });}catch(error){return negar(error instanceof Error?error.message:'RECONCILIACAO_NEGADA');}
+ });}catch(error){const codigo=error instanceof Error&&/^[A-Z][A-Z0-9_]*$/.test(error.message)?error.message:'RECONCILIACAO_NEGADA';return negar(codigo);}
 }
