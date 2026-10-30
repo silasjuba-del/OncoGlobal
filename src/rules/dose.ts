@@ -57,9 +57,10 @@ export function calcularDose(e: EntradaDose, rs: DoseRuleset): SaidaDose {
     };
   }
 
-  const motivo = e.origemPeso === "INFORMADO_PACIENTE"
-    ? "dose calculada com peso informado pelo paciente"
-    : "dose calculada";
+  const base = e.reducaoPct === 0 ? "dose anterior mantida" : "percentual aplicado à dose anterior";
+  const motivo = (e.origemPeso === "INFORMADO_PACIENTE"
+    ? `${base} com peso informado pelo paciente`
+    : base) + " — SC não recalculada";
 
   return {
     doseMg,
