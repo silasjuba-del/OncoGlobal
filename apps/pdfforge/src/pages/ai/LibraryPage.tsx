@@ -1,3 +1,4 @@
+import { answerWithSources } from '../../ai/answerSources';
 // Biblioteca Memo-RAG: acervo local de PDFs, transcrições, respostas e anotações, com busca e perguntas com citação.
 import { useMemo, useState } from 'react';
 import { useActions } from '../../app/actions';
@@ -114,10 +115,10 @@ export function LibraryPage() {
               <details><summary>Fontes desta resposta</summary><pre style={{ whiteSpace: 'pre-wrap' }}>{answerSource.context}</pre></details>
               {!busy && (
                 <div className="msg-actions">
-                  <button className="link" onClick={() => navigator.clipboard.writeText(answer)}>
+                  <button className="link" onClick={() => navigator.clipboard.writeText(answerWithSources({ display: answer, sourceSnapshot: answerSource.context }))}>
                     Copiar
                   </button>
-                  <button className="link" onClick={() => toWord(`Biblioteca — ${answerSource.question}`, answer, actions.toast)}>
+                  <button className="link" onClick={() => toWord(`Biblioteca — ${answerSource.question}`, answerWithSources({ display: answer, sourceSnapshot: answerSource.context }), actions.toast)}>
                     Word
                   </button>
                 </div>

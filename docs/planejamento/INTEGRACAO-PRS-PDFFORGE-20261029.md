@@ -34,3 +34,6 @@ Revisao automatica do PDFforge original: corrigidos travamento de Markdown parci
 
 
 Revisao complementar: rascunhos do editor agora tambem sao ligados ao SHA-256, com montagem isolada por conteudo e autosave somente apos restauracao. Rascunhos legados por caminho permanecem preservados sem reaplicacao automatica. Biblioteca conserva pergunta e contexto literal das fontes associados a cada resposta, independentemente de buscas posteriores. Smoke Electron testa ausencia de reaplicacao legada e restauracao de rascunho ligado aos mesmos bytes.
+
+
+Revisao final de estado concorrente e fontes: cadastro/agendamento e remarcacao usam datas/horarios independentes; regressao preserva o cadastro enquanto outro encontro e cancelado. Microfone usa ciclo de recursos com encerramento no unmount e rejeicao de captura tardia, sem iniciar transcricao na limpeza. Chat conserva fontes numeradas com IDs monotonicos e snapshots cumulativos por conversa, exibidos e incluidos nos exports, inclusive continuacao sem nova busca; nova conversa limpa esse registro. Biblioteca tambem exporta o contexto literal capturado. Revisao independente confirmou a correcao desses pontos. Suite PDFforge: 53 testes; interface medica: 8 testes aprovados.

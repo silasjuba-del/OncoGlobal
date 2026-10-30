@@ -1,10 +1,11 @@
+import { answerWithSources, appendSourceContext } from '../../ai/answerSources';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useActions, type ChatInit } from '../../app/actions';
 import { approxTokens, docsText, imageBlocks, type Attachment } from '../../ai/attachments';
 import { aiAvailable, chatStream, keyStatus, providerInfo, type ChatBlock, type ChatMessage, type KeyStatus, type Provider } from '../../ai/bridge';
 import { allTemplates, docTitle, searchLibrary, useLibrary } from '../../ai/library';
 import { fillTemplate } from '../../ai/prompts';
-import { buildContext, RAG_SYSTEM } from '../../ai/rag';
+import { RAG_SYSTEM } from '../../ai/rag';
 import { toDrive, toFile, toLibrary, toWhatsApp, toWord } from '../../ai/share';
 import { Markdown } from '../../components/Markdown';
 import { MicButton } from '../../components/MicButton';
@@ -21,6 +22,7 @@ interface Msg {
   blocks: ChatBlock[];
   chips?: string[];
   meta?: string;
+  sourceSnapshot?: string;
   error?: boolean;
   streaming?: boolean;
 }
@@ -75,6 +77,7 @@ function Chat({ provider, init, initSeq, keys }: { provider: Provider; init?: Ch
   const { settings } = useAppState();
   const lib = useLibrary();
   const [msgs, setMsgs] = useState<Msg[]>([]);
+  const sourceEntries = useRef<readonly string[]>([]);
   const [attachments, setAttachments] = useState<Attachment[]>([]);
   const [input, setInput] = useState('');
   const [promptId, setPromptId] = useState('');
@@ -109,6 +112,7 @@ function Chat({ provider, init, initSeq, keys }: { provider: Provider; init?: Ch
     let display: string;
     let chips = attachments.map((a) => a.name);
     let system = SYSTEM;
+    let contextSources = appendSourceContext(sourceEntries.current, [], docTitle);
     if (override) {
       userText = override.text;
       display = override.display;
@@ -121,16 +125,19 @@ function Chat({ provider, init, initSeq, keys }: { provider: Provider; init?: Ch
       if (useRag) {
         const hits = searchLibrary(input || prompt?.name || titulo, 8);
         if (hits.length) {
-          userText = `Trechos da biblioteca:\n${buildContext(hits, docTitle)}\n\n---\n${userText}`;
+          contextSources = appendSourceContext(sourceEntries.current, hits, docTitle);
+          userText = `Trechos da biblioteca:\n${contextSources.current}\n\n---\n${userText}`;
           system = `${SYSTEM}\n\n${RAG_SYSTEM}`;
           chips = [...chips, `biblioteca: ${hits.length} trechos`];
         } else chips = [...chips, 'biblioteca: nada encontrado'];
       }
     }
     if (!userText.trim() && !attachments.some((a) => a.kind === 'image')) return;
+    sourceEntries.current = contextSources.entries;
+    const sourceSnapshot = contextSources.snapshot;
     const blocks: ChatBlock[] = [...(override ? [] : imageBlocks(attachments)), { type: 'text', text: userText || 'Analise as imagens anexadas.' }];
     const userMsg: Msg = { id: mid(), role: 'user', display: display || '(anexos)', blocks, chips };
-    const botMsg: Msg = { id: mid(), role: 'assistant', display: '', blocks: [], streaming: true };
+    const botMsg: Msg = { id: mid(), role: 'assistant', display: '', blocks: [], streaming: true, sourceSnapshot };
     const history: ChatMessage[] = [...msgs.filter((m) => !m.error && m.blocks.length), userMsg].map((m) => ({ role: m.role, content: m.blocks }));
     setMsgs((cur) => [...cur, userMsg, botMsg]);
     if (!override) {
@@ -205,21 +212,22 @@ function Chat({ provider, init, initSeq, keys }: { provider: Provider; init?: Ch
               ) : (
                 <Markdown text={m.display} />
               )}
+              {m.sourceSnapshot && <details><summary>Fontes desta resposta</summary><pre style={{ whiteSpace: 'pre-wrap' }}>{m.sourceSnapshot}</pre></details>}
               {m.role === 'assistant' && !m.streaming && !m.error && (
                 <div className="msg-actions">
-                  <button className="link" onClick={() => navigator.clipboard.writeText(m.display)}>
+                  <button className="link" onClick={() => navigator.clipboard.writeText(answerWithSources(m))}>
                     Copiar
                   </button>
-                  <button className="link" onClick={() => toWord(titleOf(m), m.display, actions.toast)}>
+                  <button className="link" onClick={() => toWord(titleOf(m), answerWithSources(m), actions.toast)}>
                     Word
                   </button>
-                  <button className="link" onClick={() => toDrive(titleOf(m), m.display, actions.toast)}>
+                  <button className="link" onClick={() => toDrive(titleOf(m), answerWithSources(m), actions.toast)}>
                     Drive
                   </button>
-                  <button className="link" onClick={() => toWhatsApp(m.display, actions.toast)}>
+                  <button className="link" onClick={() => toWhatsApp(answerWithSources(m), actions.toast)}>
                     WhatsApp
                   </button>
-                  <button className="link" onClick={() => toLibrary(titleOf(m), m.display, 'resposta', actions.toast)}>
+                  <button className="link" onClick={() => toLibrary(titleOf(m), answerWithSources(m), 'resposta', actions.toast)}>
                     + Biblioteca
                   </button>
                   {m.meta && <span className="muted small">{m.meta}</span>}
@@ -310,7 +318,7 @@ function Chat({ provider, init, initSeq, keys }: { provider: Provider; init?: Ch
         <h2>Fontes</h2>
         <SourcesPanel onAdd={(a) => setAttachments((l) => [...l, ...a])} toast={actions.toast} />
         {msgs.length > 0 && (
-          <button className="btn btn-sm btn-ghost" onClick={() => setMsgs([])}>
+          <button className="btn btn-sm btn-ghost" onClick={() => { setMsgs([]); sourceEntries.current = []; }}>
             Nova conversa
           </button>
         )}

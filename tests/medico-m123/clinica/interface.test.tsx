@@ -137,10 +137,14 @@ it("cancelar outro encontro nao libera cadastro ainda nao salvo", async () => {
   await screen.findByRole("button", { name: "Remarcar ou cancelar" });
   fireEvent.click(screen.getByLabelText("Cadastrar novo paciente"));
   fireEvent.change(screen.getByLabelText("Nome do paciente"), { target: { value: "Novo SINTETICO nao salvo" } });
+  fireEvent.change(screen.getByLabelText("Data do encontro"), { target: { value: "2026-11-20" } });
+  fireEvent.change(screen.getByLabelText("Horário do encontro"), { target: { value: "15:45" } });
   fireEvent.click(screen.getByRole("button", { name: "Remarcar ou cancelar" }));
   fireEvent.change(screen.getByLabelText("Motivo da alteração"), { target: { value: "Pedido sintetico" } });
   fireEvent.click(screen.getByRole("button", { name: "Confirmar cancelamento do encontro" }));
   await screen.findByText("Encontro cancelado; prontuário e histórico preservados.");
   expect((screen.getByLabelText("Nome do paciente") as HTMLInputElement).value).toBe("Novo SINTETICO nao salvo");
+  expect((screen.getByLabelText("Data do encontro") as HTMLInputElement).value).toBe("2026-11-20");
+  expect((screen.getByLabelText("Horário do encontro") as HTMLInputElement).value).toBe("15:45");
   expect(pendente).toHaveBeenLastCalledWith(true);
 });

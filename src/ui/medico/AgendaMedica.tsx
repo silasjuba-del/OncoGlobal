@@ -17,6 +17,7 @@ export function AgendaMedica({ api, onSelecionar, aoAtualizar, aoAlterarPendente
   const [nome, setNome] = useState(""), [nascimento, setNascimento] = useState(""), [sexo, setSexo] = useState<"F" | "M" | "OUTRO" | "NAO_INFORMADO">("NAO_INFORMADO");
   const [tipoId, setTipoId] = useState<"PRONTUARIO" | "CPF" | "CNS">("PRONTUARIO"), [identificador, setIdentificador] = useState("");
   const [data, setData] = useState(hojeLocal), [horario, setHorario] = useState("09:00"), [tarefaRetornoId, setTarefaRetornoId] = useState<string | null>(null);
+  const [dataEdicao, setDataEdicao] = useState(""), [horarioEdicao, setHorarioEdicao] = useState("");
   const [edicao, setEdicao] = useState<Item | null>(null), [motivo, setMotivo] = useState("");
   const [pendenteCadastro, setPendenteCadastro] = useState(false), [pendenteAlteracao, setPendenteAlteracao] = useState(false);
   const pendente = pendenteCadastro || pendenteAlteracao;
@@ -55,7 +56,7 @@ export function AgendaMedica({ api, onSelecionar, aoAtualizar, aoAlterarPendente
   async function alterar(acao: "REMARCAR" | "CANCELAR") {
     if (!edicao || !motivo.trim() || emCurso.current) return;
     const pedido = { patientId: edicao.patientId, encounterId: edicao.encounterId, expectedEventId: edicao.eventId,
-      acao, motivo: motivo.trim(), ...(acao === "REMARCAR" ? { data, horario } : {}) };
+      acao, motivo: motivo.trim(), ...(acao === "REMARCAR" ? { data: dataEdicao, horario: horarioEdicao } : {}) };
     emCurso.current = true; setOcupado(true); setErro(""); setAviso("");
     try {
       await api.alterarAgenda({ ...pedido, operationId: chave(pedido) });
@@ -70,8 +71,7 @@ export function AgendaMedica({ api, onSelecionar, aoAtualizar, aoAlterarPendente
       <label>Fim da agenda<input type="date" value={fim} onChange={e => setFim(e.target.value)} /></label>
       <button type="button" onClick={() => setVersao(v => v + 1)}>Atualizar agenda</button></div>
     {erro ? <p role="alert">{erro}</p> : null}{aviso ? <p role="status">{aviso}</p> : null}
-    <form onChange={e => { const campo = e.target.getAttribute("name") ?? "";
-      if (edicao && ["data-encontro", "horario-encontro"].includes(campo)) setPendenteAlteracao(true); else setPendenteCadastro(true); }} onSubmit={salvar} aria-label="Cadastrar ou agendar paciente">
+    <form onChange={() => setPendenteCadastro(true)} onSubmit={salvar} aria-label="Cadastrar ou agendar paciente">
       <label><input type="checkbox" checked={novo} disabled={ocupado} onChange={e => { setNovo(e.target.checked); setTarefaRetornoId(null); }} />Cadastrar novo paciente</label>
       {novo ? <div className="medico-campos">
         <label>Nome do paciente<input required value={nome} disabled={ocupado} onChange={e => setNome(e.target.value)} /></label>
@@ -90,7 +90,9 @@ export function AgendaMedica({ api, onSelecionar, aoAtualizar, aoAlterarPendente
       <button disabled={ocupado} type="submit">{novo ? "Cadastrar e agendar" : "Confirmar agendamento"}</button>
     </form>
     {edicao ? <section aria-label="Alterar encontro"><h3>Alterar encontro de {edicao.nome}</h3>
-      <p>Atual: {edicao.data} às {edicao.horario}. Para remarcar, ajuste Data e Horário do encontro acima.</p>
+      <p>Atual: {edicao.data} às {edicao.horario}. Para remarcar, ajuste os campos deste encontro.</p>
+      <label>Nova data do encontro<input type="date" value={dataEdicao} disabled={ocupado} onChange={e => { setDataEdicao(e.target.value); setPendenteAlteracao(true); }} /></label>
+      <label>Novo horário do encontro<input type="time" value={horarioEdicao} disabled={ocupado} onChange={e => { setHorarioEdicao(e.target.value); setPendenteAlteracao(true); }} /></label>
       <label>Motivo da alteração<input value={motivo} disabled={ocupado} onChange={e => setMotivo(e.target.value)} /></label>
       <div className="medico-acoes"><button disabled={ocupado || !motivo.trim()} onClick={() => void alterar("REMARCAR")}>Confirmar remarcação</button>
         <button disabled={ocupado || !motivo.trim()} onClick={() => void alterar("CANCELAR")}>Confirmar cancelamento do encontro</button>
@@ -98,7 +100,7 @@ export function AgendaMedica({ api, onSelecionar, aoAtualizar, aoAlterarPendente
     <ul className="medico-lista">{visao?.itens.map(item => <li key={item.eventId}>
       <strong>{item.data} · {item.horario} · {item.nome}</strong><span>{item.cancelado ? `Cancelado: ${item.motivo}` : `Pré-consulta: ${item.preConsulta}`}</span>
       <div className="medico-acoes"><button disabled={ocupado} onClick={() => onSelecionar({ patientId: item.patientId, encounterId: item.encounterId, tumorLotId: null }, item.nome)}>Abrir consulta de {item.nome}</button>
-        {!item.cancelado ? <button disabled={ocupado} onClick={() => { setPendenteAlteracao(true); setEdicao(item); setData(item.data); setHorario(item.horario); setMotivo(""); }}>Remarcar ou cancelar</button> : null}</div>
+        {!item.cancelado ? <button disabled={ocupado} onClick={() => { setPendenteAlteracao(true); setEdicao(item); setDataEdicao(item.data); setHorarioEdicao(item.horario); setMotivo(""); }}>Remarcar ou cancelar</button> : null}</div>
     </li>)}</ul>
     {visao && !visao.itens.length ? <p>Nenhum encontro neste intervalo.</p> : null}
     {visao?.retornos.length ? <section aria-label="Retornos a agendar"><h3>Retornos propostos em documentos</h3>
