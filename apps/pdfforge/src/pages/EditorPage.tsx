@@ -1,3 +1,4 @@
+import { docKeyOf } from '../ai/library';
 // Editor visual de PDF: texto, imagens, formas, caneta, marca-texto, corretor, assinatura e notas,
 // com desfazer/refazer, camadas, zoom, miniaturas e rascunho automático. Aplica com src/engine/edit.ts.
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState, type PointerEvent as RPointerEvent } from 'react';
@@ -91,8 +92,27 @@ interface Drag {
 }
 
 export function EditorPage({ file }: { file: FilePayload }) {
+  const [identity, setIdentity] = useState<{ file: FilePayload; key: string; legacy: boolean } | null>(null);
+  const [error, setError] = useState('');
+  useEffect(() => {
+    let active = true; setError('');
+    void docKeyOf(file).then(key => {
+      if (!active) return;
+      let legacy = false;
+      try { legacy = localStorage.getItem(`pdfforge-editor:${file.path ?? `${file.name}:${file.bytes.length}`}`) !== null; } catch { /* armazenamento indisponivel */ }
+      setIdentity({ file, key: `pdfforge-editor:${key}`, legacy });
+    }).catch(() => { if (active) setError('Nao foi possivel conferir a identidade do PDF.'); });
+    return () => { active = false; };
+  }, [file]);
+  if (error) return <p role="alert">{error}</p>;
+  if (identity?.file !== file) return <p>Conferindo conteudo do PDF...</p>;
+  return <>{identity.legacy && <p role="status">Rascunho antigo preservado, sem vinculo confirmado ao conteudo deste PDF. Nao foi aplicado automaticamente.</p>}
+    <EditorConteudo key={identity.key} file={file} draftKey={identity.key} /></>;
+}
+
+function EditorConteudo({ file, draftKey }: { file: FilePayload; draftKey: string }) {
   const actions = useActions();
-  const draftKey = `pdfforge-editor:${file.path ?? `${file.name}:${file.bytes.length}`}`;
+  const [draftPronto, setDraftPronto] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);
   const [password, setPassword] = useState<string | undefined>();
@@ -164,9 +184,11 @@ export function EditorPage({ file }: { file: FilePayload }) {
     } catch {
       /* rascunho indisponível */
     }
+    setDraftPronto(true);
   }, [draftKey]);
 
   useEffect(() => {
+    if (!draftPronto) return;
     try {
       if (ops.length) localStorage.setItem(draftKey, JSON.stringify(ops));
       else localStorage.removeItem(draftKey);
@@ -176,7 +198,7 @@ export function EditorPage({ file }: { file: FilePayload }) {
         actions.toast('Rascunho grande demais para salvar automaticamente (imagens). Salve o PDF para não perder o trabalho.', 'error');
       }
     }
-  }, [ops, draftKey, actions]);
+  }, [ops, draftKey, draftPronto, actions]);
 
   // ---------- histórico ----------
   const commit = useCallback(

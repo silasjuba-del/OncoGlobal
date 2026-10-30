@@ -31,3 +31,6 @@ Atualização de validação: revisão independente identificou P2 na limpeza co
 
 
 Revisao automatica do PDFforge original: corrigidos travamento de Markdown parcial, vinculo de anotacoes por SHA-256 (legadas preservadas sem reatribuicao), encerramento dos recursos da captura, colisoes de nomes no ZIP e pergunta da rodada preservada tambem nos exports. Suite PDFforge ampliada: 50 testes aprovados; smoke real agora exige anotacao criada pela UI no pacote. Scanner PHI identificou quatro sequencias dentro de hashes do manifesto original: disposicoes tecnicas exatas por hash/linha/ordinal/contexto adicionadas ao manifesto existente, sem alterar scanner ou omitir arquivos. CI deve repetir no novo HEAD.
+
+
+Revisao complementar: rascunhos do editor agora tambem sao ligados ao SHA-256, com montagem isolada por conteudo e autosave somente apos restauracao. Rascunhos legados por caminho permanecem preservados sem reaplicacao automatica. Biblioteca conserva pergunta e contexto literal das fontes associados a cada resposta, independentemente de buscas posteriores. Smoke Electron testa ausencia de reaplicacao legada e restauracao de rascunho ligado aos mesmos bytes.

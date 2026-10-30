@@ -39,13 +39,17 @@ export function LibraryPage() {
   const [hits, setHits] = useState<Hit[] | null>(null);
   const [provider, setProvider] = useState<Provider>('claude');
   const [answer, setAnswer] = useState('');
+  const [answerSource, setAnswerSource] = useState({ question: '', context: '' });
   const [busy, setBusy] = useState(false);
   const [filter, setFilter] = useState<DocKind | ''>('');
   const docs = useMemo(() => lib.docs.filter((d) => !filter || d.kind === filter), [lib.docs, filter]);
   const totalChunks = lib.docs.reduce((s, d) => s + d.chunks.length, 0);
 
   const ask = () => {
+    if (busy) return;
     const found = searchLibrary(query, 8);
+    const snapshot = { question: query, context: buildContext(found, docTitle) };
+    setAnswerSource(snapshot);
     setHits(found);
     if (!found.length) {
       setAnswer('Nada relevante encontrado na biblioteca para essa pergunta.');
@@ -60,7 +64,7 @@ export function LibraryPage() {
         model: settings.ai.models[provider],
         effort: settings.ai.effort,
         system: RAG_SYSTEM,
-        messages: [{ role: 'user', content: [{ type: 'text', text: `Trechos:\n${buildContext(found, docTitle)}\n\nPergunta: ${query}` }] }],
+        messages: [{ role: 'user', content: [{ type: 'text', text: `Trechos:\n${snapshot.context}\n\nPergunta: ${snapshot.question}` }] }],
       },
       (d) => setAnswer((acc += d)),
     )
@@ -105,13 +109,15 @@ export function LibraryPage() {
           </form>
           {answer && (
             <div className="lib-answer">
+              <p>Pergunta desta resposta: {answerSource.question}</p>
               <Markdown text={answer} />
+              <details><summary>Fontes desta resposta</summary><pre style={{ whiteSpace: 'pre-wrap' }}>{answerSource.context}</pre></details>
               {!busy && (
                 <div className="msg-actions">
                   <button className="link" onClick={() => navigator.clipboard.writeText(answer)}>
                     Copiar
                   </button>
-                  <button className="link" onClick={() => toWord(`Biblioteca — ${query}`, answer, actions.toast)}>
+                  <button className="link" onClick={() => toWord(`Biblioteca — ${answerSource.question}`, answer, actions.toast)}>
                     Word
                   </button>
                 </div>
@@ -120,7 +126,7 @@ export function LibraryPage() {
           )}
           {hits && (
             <section>
-              <h2 className="sub">Trechos encontrados ({hits.length})</h2>
+              <h2 className="sub">Resultados da busca atual — trechos encontrados ({hits.length})</h2>
               {hits.length === 0 && <p className="muted">Nenhum trecho contém esses termos.</p>}
               <ol className="hits">
                 {hits.map((h, i) => (
