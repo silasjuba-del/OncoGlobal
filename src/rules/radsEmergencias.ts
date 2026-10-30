@@ -160,6 +160,15 @@ interface Ocorrencia {
   len: number;
 }
 
+/** Fronteira de oração: a negação de um achado não alcança o achado afirmado depois do conectivo. */
+const BARREIRAS_NEGACAO = ["porem", "mas", "entretanto", "contudo", "todavia", "no entanto", "exceto", "salvo", "e presenca de"];
+
+function barreiraEm(folded: string, pos: number): boolean {
+  if (folded[pos] === ";") return true;
+  if (pos > 0 && /[a-z0-9]/.test(folded[pos - 1] ?? "")) return false;
+  return BARREIRAS_NEGACAO.some((b) => folded.startsWith(b, pos) && !/[a-z0-9]/.test(folded[pos + b.length] ?? " "));
+}
+
 function spansNegacao(folded: string, frases: readonly string[], alcance: number): Array<[number, number]> {
   const ordenadas = [...frases].map(dobrar).sort((a, b) => b.length - a.length);
   const spans: Array<[number, number]> = [];
@@ -175,7 +184,7 @@ function spansNegacao(folded: string, frases: readonly string[], alcance: number
         const teto = Math.min(folded.length, ini + alcance);
         while (fim < teto) {
           const ch = folded[fim];
-          if (ch === "." || ch === "\n" || ch === "!" || ch === "?") break;
+          if (ch === "." || ch === "\n" || ch === "!" || ch === "?" || barreiraEm(folded, fim)) break;
           fim++;
         }
         spans.push([ini, fim]);
