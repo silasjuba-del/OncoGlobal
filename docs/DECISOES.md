@@ -424,3 +424,13 @@ INV-12 deve ser lido com as exceções expressamente delimitadas na seção 0.2 
 - Implementação autorizada: corrigir os achados da auditoria F2. Entrada principal usa HTTP autenticado; demonstração fica em `demonstracao.html`, identificada como simulação. Reconciliação de medicamentos exige o evento-base visto pelo médico. Recuperação de confirmação conserva a intenção original; cancelar só é possível antes da confirmação, sob a mesma transação SQLite.
 - Peso: manter a validade e a natureza de aviso das decisões D-W9-63/D-F1 vigentes; explicitar a data da medida e comparar também com o peso documentado do ciclo anterior no mesmo episódio/lote. Não criar bloqueio clínico nem arredondamento por frasco. Ausência/conflito da referência permanece explícita.
 - Canon persistido v1 preserva strings literalmente (inclusive representação de fuso) e distingue chave ausente de null/undefined explícito; não reescrever hashes de documentos já assinados. Objetos Date passam a usar ISO UTC, eliminando colisão com objeto vazio.
+
+
+## Continuidade e simplificação — Dr. Silas, 30/10/2026
+
+- Qualquer LLM pode implementar o escopo autorizado pelo Dr. Silas; um escritor por arquivo durante trabalho concorrente. Não mudar a direção do projeto apenas por sugestão de outra LLM: confrontar proposta, código, decisões e testes.
+- Lote dos seis defeitos autorizado com preservação de WIP e testes; revisão e preparação de PR autorizadas, sem merge. Remodelar mecanismos existentes, sem novas camadas ou etapas administrativas.
+- Rastro da recusa 409 pertence ao contexto em tela, com IDs de tela/proposta, momento e motivo, sem copiar conteúdo clínico do outro paciente. Observação sem data/fonte permanece explícita e pendente, sem inventar origem.
+- Dose permanece [AGUARDA DECISÃO]; sem nova regra de arredondamento. Cadeia de hash, conectores externos e reestruturação do pipeline não fazem parte deste lote.
+- Registro compartilhável deve usar a PR e os documentos existentes. Preservação local não é inexistência; não impor push de todo WIP nem compartilhar cópias sem triagem de PHI. Limpeza depende de escopo, dependências e preservação verificada; prazo não prova abandono.
+- Os registros locais das Fases 1–3 foram preservados fora do repositório para recuperação; não constituem novos portões executáveis nem autorização geral para implementar suas propostas.

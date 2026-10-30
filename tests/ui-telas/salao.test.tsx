@@ -56,3 +56,13 @@ it("troca de paciente descarta sinais locais do paciente anterior", async () => 
  fireEvent.change(sel,{target:{value:outro.value}});
  await vi.waitFor(()=>expect((screen.getByLabelText("PA sistólica (mmHg)") as HTMLInputElement).value).toBe(""));
 });
+
+it("troca de paciente também reinicia identificação no assistente de triagem",async()=>{
+ const porta=criarPortaFalsa();render(<TelaSalao porta={porta}/>);
+ const sel=await screen.findByLabelText("Paciente em triagem") as HTMLSelectElement;
+ await vi.waitFor(()=>expect(sel.disabled).toBe(false));
+ fireEvent.change(screen.getByLabelText("Nome na triagem"),{target:{value:"NOME SINTÉTICO ANTERIOR"}});
+ const outro=[...sel.options].find(o=>o.value && o.value!==sel.value)!;
+ fireEvent.change(sel,{target:{value:outro.value}});
+ await vi.waitFor(()=>expect((screen.getByLabelText("Nome na triagem") as HTMLInputElement).value).not.toBe("NOME SINTÉTICO ANTERIOR"));
+});
