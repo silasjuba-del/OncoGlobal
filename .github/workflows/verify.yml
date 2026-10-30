@@ -156,4 +156,8 @@ jobs:
       - run: npm run pdfforge:install
       - run: npm run pdfforge:test
       - run: npm run pdfforge:build
+      - name: Configurar sandbox nativo do Electron no runner
+        run: |
+          sudo chown root:root apps/pdfforge/node_modules/electron/dist/chrome-sandbox
+          sudo chmod 4755 apps/pdfforge/node_modules/electron/dist/chrome-sandbox
       - run: xvfb-run -a npm run pdfforge:smoke
