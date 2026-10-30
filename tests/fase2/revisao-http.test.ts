@@ -22,6 +22,14 @@ it("HTTP real carrega packs legados consultáveis e ficha ausente sem promover r
   expect(pack.data.loteCompleto.original.sha256).toBe(pack.data.pack.original.hash);
   expect(pack.data.loteCompleto.autorizaTratamento).toBe(false);
   expect(pack.data.pack.revisaoClinica).toBeNull();expect(a.eventos()).toHaveLength(antes);
+  const compacta=await a.request("/consulta/revisao-clinica",{...ctx,packId:parsed.packs[0]!.id,compacta:true});
+  expect(compacta.status).toBe(200);expect(RevisaoClinicaResposta.safeParse(compacta.data).success).toBe(true);
+  expect(compacta.data.pack).not.toHaveProperty('blocos');expect(compacta.data.loteCompleto).not.toHaveProperty('conteudoIntegral');
+  expect(compacta.data.loteCompleto.setores).toEqual(pack.data.loteCompleto.setores);
+  const fonte=await a.request('/consulta/pack/fonte',{...ctx,packId:compacta.data.pack.referencia.id,hashOriginal:compacta.data.pack.original.hash});
+  expect(fonte.status).toBe(200);expect(fonte.data.conteudoIntegral).toEqual(pack.data.loteCompleto.conteudoIntegral);
+  expect(a.eventos()).toHaveLength(antes);
+
   expect((await a.request("/consulta/revisao-clinica",{...ctx,encounterId:"outro"})).status).toBe(409);
   expect((await a.request("/consulta/revisao-clinica",{...ctx,estado:"ATIVO"})).status).toBe(400);
 });

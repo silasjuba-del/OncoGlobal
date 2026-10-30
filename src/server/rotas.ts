@@ -54,6 +54,8 @@ import { rotearBiblioteca } from "./biblioteca.js";
 import { rotearDutos, referenciaSigtapDuto } from "./dutos.js";
 import { reconciliarMedicamentos } from "./medicamentos.js";
 import { obterInvestigacao, type DepsInvestigacao } from "./investigacao.js";
+import { PedidoFontePack } from '../contracts/fase2/leituraPack.js';
+import { compactarRevisaoClinica, lerFontePack } from './leituraPack.js';
 import { obterRevisaoClinica } from "./revisaoClinica.js";
 import { rotearEstadoDoenca } from "./estadoDoenca.js";
 import type { CatalogoTumorPacks } from "../kernel/corpus/tumorPacks.js";
@@ -306,15 +308,25 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
         autorizaTratamento: false,
       });
     }
+    if (rota === "fontePack") {
+      const p = PedidoFontePack.safeParse(raw);
+      if (!p.success) return reply(400, "PAYLOAD_INVALIDO");
+      const ctx = deps.sessoes.consultaSelecionada(token);
+      if (!ctx || ctx.patientId !== p.data.patientId || ctx.encounterId !== p.data.encounterId
+        || (ctx.tumorLotId ?? null) !== p.data.tumorLotId) return reply(409, "CONTEXTO_CONSULTA_ALTERADO");
+      if (!deps.catalogoTumorPacks) return reply(409, "FONTE_PACK_INDISPONIVEL");
+      try { const r = lerFontePack(deps.catalogoTumorPacks, p.data); return reply(200, r.codigo, r); }
+      catch (e) { return reply(409, e instanceof Error && e.message === "FONTE_PACK_ALTERADA" ? e.message : "FONTE_PACK_INDISPONIVEL"); }
+    }
     if (rota === "revisaoClinica") {
-      const p = z.object({ patientId: Id, encounterId: Id, tumorLotId: Id.nullable(), packId: Id.optional() }).strict().safeParse(raw);
+      const p = z.object({ patientId: Id, encounterId: Id, tumorLotId: Id.nullable(), packId: Id.optional(), compacta: z.boolean().optional() }).strict().safeParse(raw);
       if (!p.success) return reply(400, "PAYLOAD_INVALIDO");
       const ctx = deps.sessoes.consultaSelecionada(token);
       if (!ctx || ctx.patientId !== p.data.patientId || ctx.encounterId !== p.data.encounterId || (ctx.tumorLotId ?? null) !== p.data.tumorLotId)
         return reply(409, "CONTEXTO_CONSULTA_ALTERADO");
       if (!deps.motorF1 || !deps.catalogoTumorPacks) return reply(409, "REVISAO_CLINICA_INDISPONIVEL");
       try {
-        const { packId, ...contexto } = p.data;
+        const { packId, compacta, ...contexto } = p.data;
         const result = await obterRevisaoClinica(
           deps.motorF1, deps.catalogoTumorPacks, contexto, packId,
           () => lerRecist(deps.db, contexto.patientId, { encounterId: contexto.encounterId, tumorLotId: contexto.tumorLotId, agora: deps.agora() }),
@@ -322,7 +334,7 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
         const atual = deps.sessoes.consultaSelecionada(token);
         if (!deps.sessoes.obter(token) || !atual || atual.patientId !== contexto.patientId || atual.encounterId !== contexto.encounterId || (atual.tumorLotId ?? null) !== contexto.tumorLotId)
           return reply(409, "CONTEXTO_CONSULTA_ALTERADO");
-        return reply(200, result.codigo, result);
+        return reply(200, result.codigo, compacta ? compactarRevisaoClinica(result) : result);
       } catch { return reply(409, "REVISAO_CLINICA_PENDENTE"); }
     }
     if (rota === "investigacao") {

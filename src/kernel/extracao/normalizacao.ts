@@ -262,37 +262,26 @@ export function normalizarFarmaco(texto: string): FarmacoNormalizado {
 
 // ── TNM por sistema e edição ─────────────────────────────────────────────────
 export interface TnmNormalizado {
-  /** Literal da fonte, nunca reescrito. */
   literal: string;
-  /** "c" | "p" | "yp" | null (sem prefixo na fonte). */
   prefixo: string | null;
-  tipo: "CLINICO" | "PATOLOGICO" | "POS_TRATAMENTO";
-  sistema: "AJCC 8" | "AJCC 9";
-  edicao: "8" | "9";
-  /** true quando a edição depende de HPV/peça ainda não comprovados. */
+  tipo: "CLINICO" | "PATOLOGICO" | "POS_TRATAMENTO" | null;
+  sistema: string | null;
+  edicao: string | null;
   pendenteConfirmacao: boolean;
+  tipoConflitante: boolean;
 }
 
-/**
- * AJCC 8/9 por sítio e data: orofaringe com HPV positivo é AJCC 9 desde 2026-01-01;
- * sem HPV comprovado a edição fica 8 e o fato é marcado como pendente (nada inferido).
- */
-export function normalizarTnm(
-  literal: string,
-  contexto: Readonly<{ sitio?: string | null; data?: string | null; hpvPositivo?: boolean | null }> = {},
-): TnmNormalizado {
-  const prefixo = /^(yp|[cp])/i.exec(literal.trim())?.[1]?.toLocaleLowerCase("pt-BR") ?? null;
-  const tipo = prefixo === "yp" ? "POS_TRATAMENTO" : prefixo === "p" ? "PATOLOGICO" : "CLINICO";
-  const sitio = orgaoCanonico(contexto.sitio ?? null);
-  const data = normalizarDataCivil(contexto.data ?? null);
-  const vigenciaAjcc9 = data !== null && data >= "2026-01-01";
-  if (sitio === "orofaringe") {
-    if (contexto.hpvPositivo === true && vigenciaAjcc9) {
-      return { literal, prefixo, tipo, sistema: "AJCC 9", edicao: "9", pendenteConfirmacao: false };
-    }
-    return { literal, prefixo, tipo, sistema: "AJCC 8", edicao: "8", pendenteConfirmacao: true };
-  }
-  return { literal, prefixo, tipo, sistema: "AJCC 8", edicao: "8", pendenteConfirmacao: false };
+/** Normalização documental: sítio, HPV e data não identificam a edição usada pela fonte. */
+export function normalizarTnm(literal: string,
+  contexto: Readonly<{ sitio?: string | null; data?: string | null; hpvPositivo?: boolean | null;
+    sistema?: string | null; tipo?: string | null }> = {}): TnmNormalizado {
+  const prefixo = /^(yp|[cp])(?=[TNM])/i.exec(literal.trim())?.[1]?.toLowerCase() ?? null;
+  const peloPrefixo = prefixo === "yp" ? "POS_TRATAMENTO" : prefixo === "p" ? "PATOLOGICO" : prefixo === "c" ? "CLINICO" : null;
+  const declarado = contexto.tipo === "CLINICO" || contexto.tipo === "PATOLOGICO" || contexto.tipo === "POS_TRATAMENTO" ? contexto.tipo : null;
+  const tipo = declarado && peloPrefixo && declarado !== peloPrefixo ? null : declarado ?? peloPrefixo;
+  const sistema = contexto.sistema?.trim() || null;
+  const edicao = sistema ? /\b(?:AJCC|FIGO)\s+(\d{1,4})\b/i.exec(sistema)?.[1] ?? null : null;
+  return { literal, prefixo, tipo, sistema, edicao, tipoConflitante: !!(declarado && peloPrefixo && declarado !== peloPrefixo), pendenteConfirmacao: tipo === null || sistema === null };
 }
 
 /** Componente M de um literal TNM ("cT2N0M0" ⇒ "0"). null quando o literal não traz M. */
@@ -349,8 +338,11 @@ export function normalizarFatos(fatos: readonly ClinicalFact[]): readonly Clinic
     if (fact.domain === "stage") {
       const literal = typeof fact.value === "string" ? fact.value : String(valorDe(fact).literal ?? "");
       if (!literal) return fact;
-      const tnm = normalizarTnm(literal, { data: fact.date ?? null });
-      return { ...fact, value: { ...tnm }, raw: literal };
+      const v = valorDe(fact);
+      const sistemas = [...new Set([...fact.rawEvidence.matchAll(/\b(?:AJCC|FIGO)\s+\d{1,4}\b/gi)].map(m => m[0].toUpperCase()))];
+      const sistema = typeof v.sistema === "string" ? v.sistema : sistemas.length === 1 ? sistemas[0]! : null;
+      const tnm = normalizarTnm(literal, { sistema, tipo: typeof v.tipo === "string" ? v.tipo : null });
+      return { ...fact, value: { ...valorDe(fact), ...tnm, tipo: valorDe(fact).tipoConflitante === true ? null : tnm.tipo, tipoConflitante: valorDe(fact).tipoConflitante === true || tnm.tipoConflitante, pendenteConfirmacao: valorDe(fact).tipoConflitante === true || tnm.pendenteConfirmacao }, raw: literal };
     }
     if (fact.domain === "imaging") {
       const v = valorDe(fact);

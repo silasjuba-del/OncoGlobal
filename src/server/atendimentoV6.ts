@@ -84,3 +84,18 @@ export function operarAtendimentoV6(deps:ServidorDeps,token:string,operacao:"rec
   return {status:201,body:resposta("ATENDIMENTO_PREPARADO",rascunho)};
  });}catch(e){return {status:e instanceof Recusa?e.status:503,body:{codigo:e instanceof Recusa?e.codigo:"ATENDIMENTO_INDISPONIVEL"}};}
 }
+
+/** Resolve a versão escolhida sem aceitar texto clínico enviado pelo cliente. */
+export function resolverEvolucaoFlash(deps: ServidorDeps, token: string,
+ contexto: import("./flash.js").ContextoFlash,
+ referencia: NonNullable<import("../contracts/api/flash.js").PlanoFlash["evolucaoAtendimento"]>) {
+ const resultado = operarAtendimentoV6(deps, token, "recuperar", contexto);
+ const leitura = AtendimentoV6Resposta.safeParse(resultado.body);
+ if (!leitura.success || leitura.data.estadoRascunho !== "ATUAL") return null;
+ const r = leitura.data.rascunho;
+ if (!r || r.id !== referencia.id || r.versao !== referencia.versao || r.conteudoHash !== referencia.conteudoHash) return null;
+ const documento = r.documentos.find(d => d.tipo === "EVOLUCAO");
+ if (!documento || documento.estado !== "PRONTO_PARA_REVISAO") return null;
+ return { referencia, texto: documento.texto.replace(/^RASCUNHO — revisão e assinatura pendentes\n/, ""),
+  autor: r.autor, dataClinica: r.dataClinica };
+}

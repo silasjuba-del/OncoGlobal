@@ -45,7 +45,7 @@ describe("FUGU-10 · timeline longitudinal", () => {
     const tratamentos = tratamentoLongitudinal([prescricao, administracao, ciclo]);
     expect(tratamentos.map((t) => t.status).sort()).toEqual(["ADMINISTRADO", "PRESCRITO"]);
     expect(tratamentos.every((t) => t.intent === null && t.templateId === null)).toBe(true);
-    expect(tratamentos.every((t) => t.cycle === 4)).toBe(true);
+    expect(tratamentos.every((t) => t.cycle === null)).toBe(true); // ciclo de outra fonte não pertence a estes tratamentos
   });
 
   it("pendências e conflitos entram sem deduplicar o conflito", () => {
@@ -66,4 +66,41 @@ describe("FUGU-10 · timeline longitudinal", () => {
       patientId: "  ", fatos: [], conflitos: [], missingRequiredData: [],
     })).toThrow("patientId");
   });
+});
+it("não inventa tipo/sistema e mantém prefixos e edição explícitos", () => {
+ const r = historicoDeEstagios([fato({ domain: "stage", value: { literal: "T2N0M0" } }), fato({ domain: "stage", value: { literal: "ypT2N0M0", sistema: "AJCC 9" } })]);
+ expect(r).toEqual(expect.arrayContaining([expect.objectContaining({ valor: "T2N0M0", tipo: null, sistema: null }), expect.objectContaining({ valor: "ypT2N0M0", tipo: "POS_TRATAMENTO", sistema: "AJCC 9" })]));
+});
+it("data/ciclo/fonte ficam ligados ao trecho e estado de cada tratamento", () => {
+ const p = fato({ domain: "drug", sourceType: "prescription", sourceId: "rx-a", rawEvidence: "A", date: "01/02/2026", value: { normalizado: "CARBOPLATINA" } });
+ const q = fato({ domain: "drug", sourceType: "administration", sourceId: "adm-b", rawEvidence: "B", date: "02/03/2026", value: { normalizado: "CISPLATINA" } });
+ const r = tratamentoLongitudinal([p, q, fato({ ...p, id: "c-a", domain: "cycle", value: "2" }), fato({ ...q, id: "c-b", domain: "cycle", value: "8" })]);
+ expect(r).toEqual([expect.objectContaining({ regimen: "CARBOPLATINA", cycle: 2, em: "2026-02-01", sourceIds: ["rx-a"], status: "PRESCRITO" }), expect.objectContaining({ regimen: "CISPLATINA", cycle: 8, em: "2026-03-02", sourceIds: ["adm-b"], status: "ADMINISTRADO" })]);
+});
+it("ciclo contraditório ou de outro trecho permanece desconhecido", () => {
+ const p = fato({ domain: "drug", sourceType: "prescription", sourceId: "rx", rawEvidence: "A", value: { normalizado: "CARBOPLATINA" } });
+ const c = fato({ ...p, domain: "cycle", value: "2" });
+ expect(tratamentoLongitudinal([p, c, fato({ ...c, value: "5" })])[0]?.cycle).toBeNull();
+ expect(tratamentoLongitudinal([p, fato({ ...c, rawEvidence: "outro trecho" })])[0]?.cycle).toBeNull();
+ expect(tratamentoLongitudinal([p, fato({ ...c, segmentId: "outro-paciente" })])[0]?.cycle).toBeNull();
+});
+it("mesmo fármaco em dias distintos conserva observações, sem ciclo global", () => {
+ const p = fato({ domain: "drug", sourceType: "prescription", sourceId: "rx", value: { normalizado: "CARBOPLATINA" }, date: "01/02/2026" });
+ expect(tratamentoLongitudinal([p, fato({ ...p, date: "02/02/2026" })]).map(e => e.em)).toEqual(["2026-02-01", "2026-02-02"]);
+});
+it("esquema nominal explícito preserva sua observação e ciclo local", () => {
+ const p = fato({ domain: "regimen", sourceType: "prescription", sourceId: "rx", value: "Esquema sintético A" });
+ expect(tratamentoLongitudinal([p, fato({ ...p, domain: "cycle", value: "3" })])[0]).toMatchObject({ regimen: "Esquema sintético A", cycle: 3, sourceIds: ["rx"], em: null });
+});
+
+it("ciclos de outra página e trecho com múltiplos tratamentos não são arbitrados", () => {
+ const p = fato({ domain: "drug", sourceType: "prescription", sourceId: "rx", page: 1, value: { normalizado: "CARBOPLATINA" } });
+ const c = fato({ ...p, domain: "cycle", value: "3", page: 2 });
+ expect(tratamentoLongitudinal([p, c])[0]?.cycle).toBeNull();
+ const q = fato({ ...p, id: "outra-droga", value: { normalizado: "CISPLATINA" } });
+ expect(tratamentoLongitudinal([p, q, { ...c, page: 1 }]).every(t => t.cycle === null)).toBe(true);
+});
+it("mesmo nome/data/fonte em segmentos distintos não é fundido", () => {
+ const p = fato({ domain: "drug", sourceType: "prescription", sourceId: "rx", value: { normalizado: "CARBOPLATINA" } });
+ expect(tratamentoLongitudinal([p, fato({ ...p, segmentId: "outro-episodio" })])).toHaveLength(2);
 });

@@ -65,9 +65,10 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp, perfil = "MEDIC
   const [ocupado, setOcupado] = useState(false);
   const [versaoFontes,setVersaoFontes]=useState(0);
   const [versaoConsulta,setVersaoConsulta]=useState(0);
+  const [aberturaFlash, setAberturaFlash] = useState<{ contexto: string; sequencia: number } | null>(null);
   const [metricas,setMetricas]=useState(metricasVazias);
   const [combo21st, setCombo21st] = useState<Combinacao21stId>(lerCombinacao21st);
-  const [gruposAbertos, setGruposAbertos] = useState<Record<GrupoConsultaId, boolean>>(estadoInicialGruposConsulta);
+  const [gruposAbertos, setGruposAbertos] = useState<Record<GrupoConsultaId, boolean>>(() => ({ ...estadoInicialGruposConsulta(), "consulta-fase2": false }));
   useEffect(() => { gravarCombinacao21st(combo21st); }, [combo21st]);
   const alternarGrupo = useCallback((id: GrupoConsultaId) => {
     setGruposAbertos((atual) => ({ ...atual, [id]: !atual[id] }));
@@ -474,7 +475,7 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp, perfil = "MEDIC
           </nav>
         </section>
         <details><summary>Cliques por etapa nesta consulta</summary><ul>{Object.entries(metricas).map(([etapa,cliques])=><li key={etapa}>{etapa}: {cliques}</li>)}</ul></details>
-        <ConsultaPersistida versaoClinica={versaoConsulta} porta={porta} contexto={contexto}
+        <ConsultaPersistida pedidoAberturaFlash={aberturaFlash?.contexto === JSON.stringify(contexto) ? aberturaFlash.sequencia : 0} versaoClinica={versaoConsulta} porta={porta} contexto={contexto}
           aoAlterarPrescricaoPendente={setPrescricaoPendente} aoAlterarPrescricaoSalvando={setPrescricaoSalvando}
           aoAlterarApacPendente={setApacPendente} aoAlterarApacSalvando={setApacSalvando}
           aoAtualizarClinico={() => setVersaoConsulta(v => v + 1)}
@@ -482,6 +483,8 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp, perfil = "MEDIC
           {...(documentoVigente ? {documentoProposto:documentoVigente} : {})} aoConsumirDocumentoProposto={id=>setDocumentoProposto(d=>d?.solicitacaoId===id?null:d)} {...(modoMedico ? {aoAlterarFlashPendente:setFlashPendente,aoAlterarFlashSalvando:setFlashSalvando} : {})} />
         <SecaoAcordeon21st
           id="consulta-fase2"
+          key={`pack:${contexto.patientId}:${contexto.encounterId}:${contexto.tumorLotId}`}
+          sobDemanda
           numero="01"
           titulo="Ficha clínica & Tumor-packs"
           resumo="Revisão estruturada do lote tumoral, estadiamento e diretrizes locais"
@@ -548,7 +551,7 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp, perfil = "MEDIC
           aoAlternar={() => alternarGrupo("consulta-sintese")}
           aoFocarSomenteEste={() => focarGrupo("consulta-sintese")}
         >
-        <SinteseProposta key={`sintese:${versaoConsulta}`} porta={porta} contexto={contexto}/>
+        <SinteseProposta key={`sintese:${versaoConsulta}`} porta={porta} contexto={contexto} aoAbrirFlash={() => { setAberturaFlash(a => ({ contexto: JSON.stringify(contexto), sequencia: (a?.sequencia ?? 0) + 1 })); }}/>
         </SecaoAcordeon21st>
       </div> : null}
       {tela === "salao" ? <TelaSalao porta={porta} /> : null}

@@ -1,4 +1,5 @@
 import { LIMITE_TEXTO_DOCUMENTO_MANUAL } from "../../contracts/api/flash.js";
+import { EvolucaoNaFlash } from "./EvolucaoNaFlash.js";
 import { doseReceitaPendente } from '../../contracts/f1/receitaDose.js';
 import type { PropostaDoseReceita } from '../../contracts/api/propostaDoseReceita.js';
 import type { SituacaoExame, ExameRecenteFlash, ItemFlash, EstadoApacFlash, ApacFlash, RetornoFlash, TarefasRetornoFlash, ConsultaFlashProps, PlanoFlash,ReceitaManualFlash,DocumentoManualFlash } from '../../contracts/api/flash.js';
@@ -38,6 +39,7 @@ const camposReceita = [["medicamento", "Medicamento"], ["dose", "Dose"], ["orien
 
 export function ConsultaFlash(props: ConsultaFlashProps) {
   const { cabecalho: c, planoInicial: inicial } = props;
+  const [evolucao, setEvolucao] = useState(inicial?.evolucaoAtendimento);
   const [documentos,setDocumentos]=useState<DocumentoManualFlash[]>(()=>structuredClone([...(inicial?.documentosManuais??[])]));
   const propostaAplicada = useRef<string | null>(null);
   const [propostaConflitante,setPropostaConflitante]=useState<DocumentoManualFlash|null>(null);
@@ -106,7 +108,7 @@ export function ConsultaFlash(props: ConsultaFlashProps) {
     const laboratorio = [...new Set([...labs, ...limparOutros(outrosLab)])];
     const imagem = [...new Set([...rad, ...limparOutros(outrosRad)])];
     const preenchidas = receitas.filter(r => r.conteudo.medicamento.trim());
-    return { acoesMarcadas: [], receitasMarcadas: preenchidas.filter(r => r.incluir).map(r => r.conteudo.id),
+    return { ...(evolucao ? { evolucaoAtendimento: evolucao } : {}), acoesMarcadas: [], receitasMarcadas: preenchidas.filter(r => r.incluir).map(r => r.conteudo.id),
       ...(documentos.length?{documentosManuais:documentos}:{}),
       ...(inicial?.propostasInvestigacao?{propostasInvestigacao:inicial.propostasInvestigacao.filter(p=>[...laboratorio,...imagem].includes(p.exameCodigo))}:{}),
       ...(preenchidas.some(r=>r.referencia)?{propostasDoseReceita:preenchidas.flatMap(r=>r.referencia?[r.referencia]:[])}:{}),
@@ -142,6 +144,7 @@ export function ConsultaFlash(props: ConsultaFlashProps) {
         <p className="flash-evidencias" aria-label="Biópsia e imagem">{props.exames.length ? props.exames.map(e => `${e.data} · ${e.nome}: ${e.fraseLaudo || "PENDENTE"}`).join(" | ") : "Biópsia e imagem: PENDENTE"}</p>
       </section>
       <section className="flash-linha" aria-label="Resultados laboratoriais"><h3>LABS <small>· últimos resultados</small></h3><div className="flash-resultados">{props.laboratorios?.length ? props.laboratorios.map((e, i) => <span key={`${e.nome}-${i}`} title={situacao[e.situacao]}>{e.nome}: {e.fraseLaudo || "PENDENTE"} <small>({e.data}) · {situacao[e.situacao]}</small></span>) : <span>PENDENTE</span>}</div></section>
+      <section className="flash-linha" aria-label="Contexto clínico"><h3>CONTEXTO</h3><p>Biomarcadores: {presente(c.biomarcador)} · ECOG: {presente(c.ecog)} · Linha: {presente(c.linha)}</p><p>Antecedentes: {presente(c.antecedentes)} · Medicações em uso: {presente(c.medicacoesUso)}</p></section>
       <section className="flash-linha" aria-label="Tratamento vigente"><h3>QT</h3><p><strong>{presente(c.tratamentoAtual)} · ciclo {presente(c.cicloDia)}</strong> <small>Previsto · último administrado: {presente(c.ultimoAdministrado)}</small></p></section>
       <section className="flash-seguranca" aria-label="Toxicidades e alergia"><div><strong>TOX</strong> {props.toxicidades?.length ? props.toxicidades.join(" · ") : "Informação estruturada PENDENTE"}</div><div><strong>ALERGIA</strong> {c.alergia?.trim() || "Não informada"}</div></section>
       {props.avisos?.length ? <p role="alert" aria-label="Lembretes agrupados">{props.avisos.join("; ")}</p> : null}
@@ -151,11 +154,12 @@ export function ConsultaFlash(props: ConsultaFlashProps) {
         [...new Set([...limparOutros(atual),...props.sugestoesLaboratorio!])].join("; "))}>
         Incluir exames sugeridos: {props.sugestoesLaboratorio.join(", ")}</button> : null}
       {props.iaFala.length > 0 && <p className="flash-linha" aria-label="Pendências e alertas">{props.iaFala.join("; ")}</p>}
+      {props.carregarAtendimento && <EvolucaoNaFlash carregar={props.carregarAtendimento} selecionada={evolucao} aoSelecionar={setEvolucao} ocupado={props.ocupado} />}
       <h3 className="flash-conduta">CONDUTA MÉDICA</h3>
       <fieldset className="flash-edicao" disabled={props.ocupado}><legend className="flash-sr">Solicitações e decisão médica</legend><div className="flash-colunas">
         {selecao("LAB", LAB, labs, setLabs, outrosLab, setOutrosLab, "Solicitações laboratoriais")}
         {selecao("RAD", RAD, rad, setRad, outrosRad, setOutrosRad, "Solicitações de imagem")}
-        <section className="flash-coluna" aria-label="Decisão médica sobre o ciclo"><h3>QT</h3><p>{presente(c.tratamentoAtual)} · {presente(c.cicloDia)}</p><label className="flash-check"><input type="checkbox" checked={ciclo} onChange={e => setCiclo(e.target.checked)} />Liberar ciclo {c.cicloDia ?? ""}</label><label className="flash-outros">Data<input type="date" aria-label="Data do ciclo" value={data} onChange={e => setData(e.target.value)} /></label><small>Decisão do médico</small></section>
+        <section className="flash-coluna" aria-label="Decisão médica sobre o ciclo"><h3>QT</h3><p>{presente(c.tratamentoAtual)} · {presente(c.cicloDia)}</p><label className="flash-check"><input type="checkbox" checked={ciclo} onChange={e => setCiclo(e.target.checked)} />Registrar decisão de solicitar ciclo {c.cicloDia ?? ""}</label><label className="flash-outros">Data<input type="date" aria-label="Data do ciclo" value={data} onChange={e => setData(e.target.value)} /></label><small>Registra a decisão médica após revisão e assinatura. Prescrição, autorização e administração têm registros próprios.</small></section>
       </div></fieldset>
       <fieldset className="flash-edicao flash-receitas" disabled={props.ocupado} aria-label="Receita manual"><legend>Receitas — médico escreve</legend>
         {receitas.map((item, indice) => <section className="flash-receita" aria-label={`Receita ${indice + 1}`} key={item.conteudo.id}>

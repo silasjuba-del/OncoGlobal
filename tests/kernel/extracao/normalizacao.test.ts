@@ -87,22 +87,21 @@ describe("FUGU-06 · lateralidade, sítio e fármaco", () => {
 });
 
 describe("FUGU-06 · TNM por sistema e edição", () => {
-  it("prefixo define o tipo e a edição padrão é AJCC 8", () => {
+  it("prefixo documentado define o tipo, mas não inventa sistema/edição", () => {
     expect(normalizarTnm("cT2N0M0")).toMatchObject({
-      literal: "cT2N0M0", prefixo: "c", tipo: "CLINICO", sistema: "AJCC 8", edicao: "8",
-      pendenteConfirmacao: false,
+      literal: "cT2N0M0", prefixo: "c", tipo: "CLINICO", sistema: null, edicao: null,
+      pendenteConfirmacao: true,
     });
     expect(normalizarTnm("ypT2N1a")).toMatchObject({ prefixo: "yp", tipo: "POS_TRATAMENTO" });
     expect(normalizarTnm("pT3N0")).toMatchObject({ prefixo: "p", tipo: "PATOLOGICO" });
   });
 
-  it("orofaringe só é AJCC 9 com HPV comprovado e vigência; senão fica 8 e pendente", () => {
+  it("sítio/HPV/data não identificam sistema; edição literal é preservada", () => {
     expect(normalizarTnm("cT2N1M0", { sitio: "orofaringe", data: "01/05/2026", hpvPositivo: true }))
+      .toMatchObject({ sistema: null, edicao: null, pendenteConfirmacao: true });
+    expect(normalizarTnm("cT2N1M0", { sistema: "AJCC 9" }))
       .toMatchObject({ sistema: "AJCC 9", edicao: "9", pendenteConfirmacao: false });
-    expect(normalizarTnm("cT2N1M0", { sitio: "orofaringe", data: "01/05/2026" }))
-      .toMatchObject({ sistema: "AJCC 8", pendenteConfirmacao: true });
-    expect(normalizarTnm("cT2N1M0", { sitio: "orofaringe", data: "01/05/2025", hpvPositivo: true }))
-      .toMatchObject({ sistema: "AJCC 8", pendenteConfirmacao: true });
+    expect(normalizarTnm("T2N1M0")).toMatchObject({ tipo: null, sistema: null });
   });
 });
 
@@ -115,7 +114,7 @@ describe("FUGU-06 · aplicação sobre os fatos", () => {
       fato({ id: "f4", domain: "drug", value: "carboplatna", rawEvidence: "carboplatna" }),
     ]);
     expect(fatos[0]!.value).toMatchObject({ marker: "Hb", value: 11.2, unit: "g/dL", normalizado: true });
-    expect(fatos[1]!.value).toMatchObject({ literal: "cT2N0M0", sistema: "AJCC 8" });
+    expect(fatos[1]!.value).toMatchObject({ literal: "cT2N0M0", sistema: null });
     expect(fatos[1]!.raw).toBe("cT2N0M0");
     expect(fatos[2]!.value).toMatchObject({ sitioCanonico: null, lateralidade: "ESQUERDO", measureMm: 24 });
     expect(fatos[3]!.value).toMatchObject({ normalizado: "CARBOPLATINA", incerto: true });
@@ -133,4 +132,15 @@ describe("FUGU-06 · aplicação sobre os fatos", () => {
     expect(drug!.raw).toBe("letrum");
     expect(drug!.evidence).toBe("EXPLICIT");
   });
+});
+
+it("normalização conserva sistema declarado e conflito de tipo após releitura", () => {
+ const f = fato({ domain: "stage", value: { literal: "pT2N0M0", tipo: "CLINICO", sistema: "AJCC 9" }, rawEvidence: "Estadiamento pT2N0M0" });
+ const primeira = normalizarFatos([f]);
+ expect(primeira[0]?.value).toMatchObject({ sistema: "AJCC 9", tipo: null, tipoConflitante: true });
+ expect(normalizarFatos(primeira)[0]?.value).toEqual(primeira[0]?.value);
+});
+it("edição literal na fonte é preservada sem regra por sítio", () => {
+ const f = fato({ domain: "stage", value: "cT2N0M0", rawEvidence: "cT2N0M0 AJCC 8" });
+ expect(normalizarFatos([f])[0]?.value).toMatchObject({ sistema: "AJCC 8", edicao: "8" });
 });

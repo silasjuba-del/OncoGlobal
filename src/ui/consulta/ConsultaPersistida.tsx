@@ -1,4 +1,5 @@
 import type { DocumentoManualFlash } from "../../contracts/api/flash.js";
+import { conferirPreviewFlash } from "./previewFlash.js";
 import { useCienciaAlertas } from "./useCienciaAlertas.js";
 import { PropostaDoseReceita } from '../../contracts/api/propostaDoseReceita.js';
 import { FontesDoseReceita } from './FontesDoseReceita.js';
@@ -34,9 +35,10 @@ type DocumentoPreview = { documentId: string; documentVersion: number; draftId: 
 type Preview = { preparacao: FlashPreparada; documentos: DocumentoPreview[]; operacao: string };
 
 /** Composição HTTP real. Nenhum cadastro, prescrição ou histórico de demonstração. */
-export function ConsultaPersistida({ porta, contexto, aoAbrirApac, aoAbrirCanal, versaoClinica = 0,
+export function ConsultaPersistida({ pedidoAberturaFlash = 0, porta, contexto, aoAbrirApac, aoAbrirCanal, versaoClinica = 0,
   aoAlterarPrescricaoPendente, aoAlterarPrescricaoSalvando, aoAlterarApacPendente,
   aoAlterarApacSalvando, aoAtualizarClinico, documentoProposto, aoAlterarFlashPendente, aoAlterarFlashSalvando, aoConsumirDocumentoProposto }: {
+  pedidoAberturaFlash?: number;
   porta: PortaConsulta; contexto: PedidoBundle; aoAbrirApac?:()=>void; versaoClinica?: number;
   aoAbrirCanal?: () => void;
   aoAlterarPrescricaoPendente?: (pendente: boolean) => void;
@@ -60,6 +62,8 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, aoAbrirCanal,
   } | null>(null);
   const [flash, setFlash] = useState(false);
   const [revisaoFlashSalva,setRevisaoFlashSalva]=useState(0);
+  useEffect(() => { if (pedidoAberturaFlash > 0) setFlash(true); }, [pedidoAberturaFlash]);
+  useEffect(() => { if (flash && pedidoAberturaFlash > 0) document.getElementById("consulta-flash-integrada")?.scrollIntoView?.({ block: "start" }); }, [flash, pedidoAberturaFlash]);
   const [pedidoInvestigacao,setPedidoInvestigacao]=useState<MinutaInvestigacao|null>(null);
   const [pedidoRevisao,setPedidoRevisao]=useState("");
   const [preview, setPreview] = useState<Preview | null>(null);
@@ -73,6 +77,7 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, aoAbrirCanal,
   const [baseAcao, setBaseAcao] = useState<{ origem: ConsultaIntegrada; base: BaseAcaoComposta | null } | null>(null);
   const [acaoPreparada, setAcaoPreparada] = useState<AcaoCompostaPreparada | null>(null);
   const [acaoRevisada, setAcaoRevisada] = useState<AcaoCompostaPreparada | null>(null);
+  const [timelineAberta, setTimelineAberta] = useState(false);
   const [linhaTempo, setLinhaTempo] = useState<{ origem: ConsultaIntegrada; dados: VisaoTimelineMulticamadas | null } | null>(null);
   const tentativaAcao = useRef<{ conteudo: string; chave: string } | null>(null);
   const [editorRx, setEditorRx] = useState(false);
@@ -110,7 +115,7 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, aoAbrirCanal,
     emCurso.current = false; setOcupado(false); setFlash(false); setPedidoInvestigacao(null); setImpressaoPendente(null);
     tentativaPreparacao.current = null;
     tentativaAcao.current = null; setTipoAcao(null); setBaseAcao(null); setAcaoPreparada(null); setAcaoRevisada(null);
-    setLinhaTempo(null);
+    setLinhaTempo(null); setTimelineAberta(false);
     setMensagem("");
     setRxEmCurso(false); aoAlterarPrescricaoSalvando?.(false); aoAlterarPrescricaoPendente?.(false);
     aoAlterarApacSalvandoAtual.current?.(false); aoAlterarApacPendenteAtual.current?.(false);
@@ -146,14 +151,14 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, aoAbrirCanal,
   useEffect(() => {
     geracaoAcao.current++;
     setBaseAcao(null); setAcaoPreparada(null); setAcaoRevisada(null);
-    if (!visao || !porta.carregarBaseAcaoComposta) return;
+    if (!tipoAcao || !visao || !porta.carregarBaseAcaoComposta) return;
     const origem = visao, abort = new AbortController();
     let ativo = true;
     void porta.carregarBaseAcaoComposta({ patientId, encounterId, tumorLotId }, abort.signal).then(r => {
       if (ativo) setBaseAcao({ origem, base: r.base });
     }, () => { if (ativo) setBaseAcao({ origem, base: null }); });
     return () => { ativo = false; abort.abort(); };
-  }, [visao, porta, patientId, encounterId, tumorLotId]);
+  }, [tipoAcao, visao, porta, patientId, encounterId, tumorLotId]);
   const baseAcaoAtual = baseAcao?.origem === visao ? baseAcao.base : null;
 
   useEffect(() => {
@@ -221,14 +226,14 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, aoAbrirCanal,
 
   useEffect(() => {
     setLinhaTempo(null);
-    if (!visao || !porta.carregarTimelineMulticamadas) return;
+    if (!timelineAberta || !visao || !porta.carregarTimelineMulticamadas) return;
     const origem = visao, abort = new AbortController();
     let ativo = true;
     void porta.carregarTimelineMulticamadas({ patientId, encounterId, tumorLotId }, abort.signal).then(dados => {
       if (ativo) setLinhaTempo({ origem, dados });
     }, () => { if (ativo) setLinhaTempo({ origem, dados: null }); });
     return () => { ativo = false; abort.abort(); };
-  }, [visao, porta, patientId, encounterId, tumorLotId]);
+  }, [timelineAberta, visao, porta, patientId, encounterId, tumorLotId]);
 
   function comandoJev(comando: ComandoJEV) {
     if (ocupado) return;
@@ -303,22 +308,7 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, aoAbrirCanal,
         draftIds: preparacao.registros.map((r) => r.id) });
       if (atual !== geracao.current || versaoAtual.current.versao !== versao
         || versaoAtual.current.versaoClinica !== versaoClinica) return;
-      if (bundle.patientId !== patientId || bundle.encounterId !== encounterId
-        || bundle.documentos.length !== preparacao.documentos.length) throw new Error("BUNDLE_DIVERGENTE");
-      const documentos = bundle.documentos.map((doc): DocumentoPreview => {
-        const esperado = preparacao.documentos.find((d) => d.documentId === doc.documentId
-          && d.documentVersion === doc.documentVersion);
-        const corpo = doc.conteudo && typeof doc.conteudo === "object" && !Array.isArray(doc.conteudo)
-          ? doc.conteudo as Record<string, unknown> : null;
-        const ctx = corpo?.contexto as Record<string, unknown> | undefined;
-        if (!esperado || !doc.draftId || !preparacao.registros.some((r) => r.id === doc.draftId)
-          || !doc.conteudoHash || !/^[a-f0-9]{64}$/.test(doc.conteudoHash)
-          || typeof corpo?.texto !== "string" || (ctx?.patientId !== undefined && ctx.patientId !== patientId)
-          || ctx?.encounterId !== encounterId || ctx.tumorLotId !== tumorLotId) throw new Error("CONTEUDO_NAO_EXIBIVEL");
-        return { documentId: doc.documentId, documentVersion: doc.documentVersion, draftId: doc.draftId,
-          titulo: esperado.titulo, texto: corpo.texto, propostasDoseReceita:PropostaDoseReceita.array().parse(corpo.propostasDoseReceita??[]), conteudoHash: doc.conteudoHash };
-      });
-      if (new Set(documentos.map((d) => d.documentId)).size !== documentos.length) throw new Error("DOCUMENTO_DUPLICADO");
+      const documentos = conferirPreviewFlash(preparacao, bundle, { patientId, encounterId, tumorLotId });
       setPreview({ preparacao, documentos, operacao }); setFlash(false);
     });
   }
@@ -419,6 +409,7 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, aoAbrirCanal,
     ...(aoConsumirDocumentoProposto ? {aoConsumirDocumentoProposto} : {}),
     ...(aoAlterarFlashPendente ? {aoAlterarPendente:aoAlterarFlashPendente} : {}),
     revisaoSalva:revisaoFlashSalva,
+    ...(porta.recuperarAtendimentoV6 ? { carregarAtendimento: () => porta.recuperarAtendimentoV6!({ patientId, encounterId, tumorLotId }) } : {}),
     ...(aoAbrirApac ? {aoAbrirApac} : {}),
     ...(porta.proporDoseReceita?{aoProporDose:(medicamento:string)=>porta.proporDoseReceita!({patientId,encounterId,tumorLotId},medicamento)}:{}),
     ocupado: ocupado || !visaoPronta, rotuloFinalizar: "Revisar documentos para assinatura", aoSalvarRascunho: salvar, aoFinalizar: preparar,
@@ -520,7 +511,7 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, aoAbrirCanal,
           return porta.avaliarInstrumento({ patientId, encounterId, tumorLotId }, pedido);
         }} />}
     />
-    {porta.carregarTimelineMulticamadas ? linhaTempo?.origem === visaoPronta
+    {porta.carregarTimelineMulticamadas ? !timelineAberta ? <button type="button" onClick={() => setTimelineAberta(true)}>Carregar timeline longitudinal</button> : linhaTempo?.origem === visaoPronta
       ? linhaTempo.dados ? <TimelineMulticamadas dados={linhaTempo.dados} />
         : <p role="status">Não foi possível carregar a timeline deste contexto.</p>
       : <p role="status">Carregando timeline longitudinal…</p> : null}
@@ -546,7 +537,7 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, aoAbrirCanal,
         {...(aoAlterarApacPendente ? { aoAlterarPendente: aoAlterarApacPendente } : {})}
         {...(aoAlterarApacSalvando ? { aoAlterarSalvando: aoAlterarApacSalvando } : {})}
         aoAtualizarClinico={() => { if (aoAtualizarClinico) aoAtualizarClinico(); else setVersao(v => v + 1); }} /> : null}
-    {flash && propsFlash ? <div hidden={!visaoPronta}>
+    {flash && propsFlash ? <div id="consulta-flash-integrada" hidden={!visaoPronta}>
       <ConsultaFlash key={`${patientId}:${encounterId}:${tumorLotId ?? ""}:${pedidoInvestigacao?.exameCodigo??"manual"}:${pedidoInvestigacao?.contexto??""}:${pedidoRevisao}`} {...propsFlash} />
     </div> : null}
     {visaoPronta ? <>

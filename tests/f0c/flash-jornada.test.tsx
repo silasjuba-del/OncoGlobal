@@ -54,7 +54,7 @@ it("salva seleção real, reabre após reinício e exibe documentos antes da ass
   expect((screen.getByRole("checkbox",{name:"TC tórax"}) as HTMLInputElement).checked).toBe(true);
   expect((screen.getByLabelText("Outros LAB") as HTMLInputElement).value).toBe("INR");
   expect((screen.getByLabelText("Prazo do retorno em dias") as HTMLInputElement).value).toBe("21");
-  expect((screen.getByRole("checkbox",{name:/Liberar ciclo/}) as HTMLInputElement).checked).toBe(false);
+  expect((screen.getByRole("checkbox",{name:/Registrar decisão de solicitar ciclo/}) as HTMLInputElement).checked).toBe(false);
   fireEvent.click(screen.getByRole("button",{name:"REVISAR · IMPRIMIR"}));
   const confirmar=await screen.findByRole("button",{name:"CONFIRMAR E IMPRIMIR"});
   expect(ambiente.eventos().filter(e=>e.revisao==="ASSINADO")).toHaveLength(0);

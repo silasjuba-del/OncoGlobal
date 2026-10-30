@@ -1,3 +1,6 @@
+import { mkdtempSync, rmSync } from "node:fs";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { executarPipelineExtracao } from "../../src/orchestration/pipeline-extracao.js";
 import { normalizarDataCivil } from "../../src/kernel/extracao/normalizacao.js";
@@ -150,4 +153,36 @@ describe("F03 HTTP · reconciliação local de fontes explicitamente vinculadas"
       expect(ambiente.db.prepare("SELECT COUNT(*) AS n FROM clinical_event").get()).toMatchObject({ n: beforeEvents });
     } finally { await ambiente.close(); }
   });
+});
+
+it("fonte → extração → vínculo → reconciliação HTTP → releitura conserva sistema desconhecido e ciclos por fonte", async () => {
+ const dir = mkdtempSync(join(tmpdir(), "oncoglobal-timeline-"));
+ const banco = join(dir, "ledger.sqlite");
+ let ambiente = await ambienteHttp({}, banco);
+ try {
+  cadastrarPaciente(ambiente);
+  await post(ambiente, "/consulta/contexto/selecionar", { patientId: PACIENTE, encounterId: ENCONTRO, tumorLotId: null });
+  for (const [id, texto] of [["rx-a", "Carboplatina ciclo 2 em 08/10/2026. cT2N0M0 em 08/10/2026."], ["rx-b", "Cisplatina ciclo 7 em 08/10/2026. pT3N1M0 em 08/10/2026."]] as const) {
+   salvarFonte(ambiente, { draftId: id, recordingId: `recording-${id}`, sourceId: id, sourceType: "prescription", texto, dataClinica: "2026-10-08" });
+   await vincularFonte(ambiente, id);
+  }
+  const before = ambiente.db.prepare("SELECT COUNT(*) AS n FROM clinical_event").get();
+  const chamar = () => post<{ timelines: import("../../src/contracts/w10/clinico-w10.js").PatientTimeline[] }>(ambiente, "/consulta/rascunho/reconciliar", { draftIds: ["rx-a", "rx-b"] });
+  const r = await chamar(); expect(r.status).toBe(200);
+  const tratamentos = r.data.timelines.flatMap(t => t.treatments), estagios = r.data.timelines.flatMap(t => t.stageHistory);
+  expect(tratamentos, JSON.stringify(r.data)).toEqual(expect.arrayContaining([expect.objectContaining({ regimen: "CARBOPLATINA", cycle: 2, em: "2026-10-08", sourceIds: ["rx-a"] }), expect.objectContaining({ regimen: "CISPLATINA", cycle: 7, em: "2026-10-08", sourceIds: ["rx-b"] })]));
+  expect(estagios).toHaveLength(2); expect(estagios.every(e => e.sistema === null)).toBe(true);
+  expect(estagios.map(e => e.tipo).sort()).toEqual(["CLINICO", "PATOLOGICO"]);
+  expect((await chamar()).data.timelines).toEqual(r.data.timelines);
+  for (const draftId of ["rx-a", "rx-b"]) {
+   const recuperado = await post<{ draft: { payload: { state: { facts: Array<{ domain: string; value: { sistema?: string | null } }> } } } }>(ambiente, "/consulta/rascunho", { draftId });
+   expect(recuperado.status).toBe(200);
+   expect(recuperado.data.draft.payload.state.facts.filter(f => f.domain === "stage").every(f => f.value.sistema === null)).toBe(true);
+  }
+  expect(ambiente.db.prepare("SELECT COUNT(*) AS n FROM clinical_event").get()).toEqual(before);
+  await ambiente.close(); ambiente = await ambienteHttp({}, banco);
+  await post(ambiente, "/consulta/contexto/selecionar", { patientId: PACIENTE, encounterId: ENCONTRO, tumorLotId: null });
+  expect((await chamar()).data.timelines).toEqual(r.data.timelines);
+  expect(ambiente.db.prepare("SELECT COUNT(*) AS n FROM clinical_event").get()).toEqual(before);
+ } finally { await ambiente.close(); rmSync(dir, { recursive: true, force: true }); }
 });

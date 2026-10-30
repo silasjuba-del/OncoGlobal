@@ -8,10 +8,12 @@ export const LoteCompleto=z.object({schema:z.literal('LoteTumoralCompleto@1'),pa
  setores:z.array(z.object({id:z.enum(SETORES_PACK),titulo:Id,itens:z.array(ItemLoteCompleto)}).strict()),
  protocolosLegados:z.number().int().nonnegative(),itensUniversais:z.number().int().nonnegative(),
  conteudoIntegral:z.json(),avisos:z.array(Id),autorizaTratamento:z.literal(false),
-}).strict().superRefine((l,c)=>{
+}).strict().superRefine(conferirSetoresPack);
+export function conferirSetoresPack(l:{setores:{id:string;itens:{id:string;setor:string}[]}[]}, c:z.RefinementCtx) {
  if(l.setores.length!==SETORES_PACK.length||new Set(l.setores.map(s=>s.id)).size!==SETORES_PACK.length)c.addIssue({code:'custom',message:'SETORES_INCOMPLETOS'});
  const itens=l.setores.flatMap(s=>s.itens);if(new Set(itens.map(i=>i.id)).size!==itens.length)c.addIssue({code:'custom',message:'ITEM_DUPLICADO'});
  if(l.setores.some(s=>s.itens.some(i=>i.setor!==s.id)))c.addIssue({code:'custom',message:'SETOR_DIVERGENTE'});
-});
+}
+
 export type LoteCompleto=z.infer<typeof LoteCompleto>;
 export type ItemLoteCompleto=z.infer<typeof ItemLoteCompleto>;
