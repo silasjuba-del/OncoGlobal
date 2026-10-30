@@ -31,7 +31,10 @@ function sessaoMemoria() {
   return { db, sessoes, agora, token, ctx };
 }
 
-async function httpCom(motor: { consultar: () => Promise<unknown>; retrato: () => unknown }) {
+async function httpCom(
+  motor: { consultar: () => Promise<unknown>; retrato: () => unknown },
+  extra: Record<string, unknown> = {},
+) {
   const { db, sessoes, agora, token, ctx } = sessaoMemoria();
   const gateway = criarGateway({ agora, store: memoriaIdempotencia(), auditar: () => {}, executores: {} });
   const server = criarServidorLocal({
@@ -39,6 +42,7 @@ async function httpCom(motor: { consultar: () => Promise<unknown>; retrato: () =
     motorF1: { processar: async () => {}, ...motor },
     catalogoTumorPacks: { packs: [], lotes: {}, rejeitados: [] },
     corpus: null,
+    ...extra,
   } as never, { host: "127.0.0.1", port: 0 });
   await new Promise<void>((ok, fail) => {
     const aoErro = () => { server.off("listening", aoOk); fail(new Error("SERVIDOR_LOCAL_INDISPONIVEL")); };
@@ -87,6 +91,25 @@ it("CC-001: negativa com sessão ausente continua 409 e audita como SISTEMA", ()
   };
   expect(JSON.parse(auditoria.ator)).toEqual({ tipo: "SISTEMA", id: "confirmacao" });
   expect(auditoria).toMatchObject({ decisao: "NEGADA", motivoCodigo: "TESTE_NEGADA_SINTETICA" });
+});
+
+it("CC-004: TypeError em fontePack é 500 ERRO_INTERNO", async () => {
+  const a = await httpCom({
+    consultar: async () => { throw new Error("nao-usado"); },
+    retrato: () => { throw new Error("nao-usado"); },
+  }, {
+    catalogoTumorPacks: {
+      packs: Object.assign([], {
+        find() { throw new TypeError("catalogo.find sintético"); },
+        filter() { return []; },
+      }),
+      lotes: {}, rejeitados: [],
+    },
+  });
+  const r = await a.request("/consulta/pack/fonte", {
+    ...a.ctx, packId: "pack-sintetico", hashOriginal: "a".repeat(64),
+  });
+  expect(r).toEqual({ status: 500, data: { codigo: "ERRO_INTERNO" } });
 });
 
 it("A1: exceção desconhecida em revisaoClinica é 500 ERRO_INTERNO", async () => {

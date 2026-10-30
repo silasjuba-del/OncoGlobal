@@ -316,7 +316,11 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
         || (ctx.tumorLotId ?? null) !== p.data.tumorLotId) return reply(409, "CONTEXTO_CONSULTA_ALTERADO");
       if (!deps.catalogoTumorPacks) return reply(409, "FONTE_PACK_INDISPONIVEL");
       try { const r = lerFontePack(deps.catalogoTumorPacks, p.data); return reply(200, r.codigo, r); }
-      catch (e) { return reply(409, e instanceof Error && e.message === "FONTE_PACK_ALTERADA" ? e.message : "FONTE_PACK_INDISPONIVEL"); }
+      catch (e) {
+        if (e instanceof Error && (e.message === "FONTE_PACK_INDISPONIVEL" || e.message === "FONTE_PACK_ALTERADA"))
+          return reply(409, e.message);
+        throw e;
+      }
     }
     if (rota === "revisaoClinica") {
       const p = z.object({ patientId: Id, encounterId: Id, tumorLotId: Id.nullable(), packId: Id.optional(), compacta: z.boolean().optional() }).strict().safeParse(raw);
