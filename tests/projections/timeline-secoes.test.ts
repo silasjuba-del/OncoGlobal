@@ -51,3 +51,8 @@ describe("FUGU-10 · timeline → seções da tela (sem tocar em src/modules)", 
     expect(Object.values(secoes).every((s) => ["VERDE", "VERMELHO", "PENDENTE"].includes(s.estado))).toBe(true);
   });
 });
+it("estadiamento incompleto conserva o literal e sinaliza pendência na seção", () => {
+ const secoes = secoesDaTimeline(timeline({ stageHistory: [{ ...estagio, tipo: null, sistema: null }] }));
+ expect(secoes.estadiamento.estado).toBe("PENDENTE");
+ expect(secoes.estadiamento.itens[0]?.valor).toBe("cT2N0M0");
+});

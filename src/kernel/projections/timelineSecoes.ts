@@ -19,7 +19,7 @@ export interface SecoesTimeline {
  */
 export function secoesDaTimeline(timeline: PatientTimeline): SecoesTimeline {
   const estadiamento = timeline.stageHistory.length
-    ? secaoDe("VERDE", `${timeline.stageHistory.length} avaliação(ões) de estadiamento com fonte`, timeline.stageHistory)
+    ? secaoDe(timeline.stageHistory.some(e => e.tipo === null || e.sistema === null || e.data === null) ? "PENDENTE" : "VERDE", `${timeline.stageHistory.length} avaliação(ões) de estadiamento com fonte; tipo, sistema ou data ausentes permanecem pendentes`, timeline.stageHistory)
     : secaoVazia<StageEntry>("sem estadiamento documentado: PENDENTE (ausência nunca é M0 nem Mx)");
 
   const tratamento = timeline.treatments.length

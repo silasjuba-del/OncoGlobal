@@ -326,16 +326,16 @@ export function conflitoTnm(fatos: readonly ClinicalFact[]): ReviewException | n
   if (literais.size < 2) return null;
   const tipos = new Set(stages.map((f) => {
     const v = typeof f.value === "object" && f.value !== null ? f.value as Record<string, unknown> : {};
-    return typeof v.tipo === "string" ? v.tipo : "CLINICO";
+    return typeof v.tipo === "string" ? v.tipo : null;
   }));
-  if (tipos.size > 1) return null; // avaliações coexistem (A3): não é conflito
+  if (tipos.size > 1 && !tipos.has(null)) return null; // avaliações conhecidas coexistem (A3): não é conflito
   const primeiro = stages[0]!;
   return {
     id: novoId("CONFLICT", primeiro.segmentId, 3),
     kind: "CONFLICT",
     segmentId: primeiro.segmentId,
     factIds: stages.map((f) => f.id),
-    reason: "TNM incompatível entre fontes do mesmo tipo de avaliação",
+    reason: tipos.has(null) ? "TNM divergente com tipo de avaliação não informado: conferir fontes" : "TNM incompatível entre fontes do mesmo tipo de avaliação",
     sourceIds: [...new Set(stages.map((f) => f.sourceId))],
   };
 }
