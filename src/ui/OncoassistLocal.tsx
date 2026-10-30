@@ -314,32 +314,41 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp, perfil = "MEDIC
     setSelecionado(encounterId); setContexto(null); setLotes([]); setMensagem("");
     if (!patientId) return;
     setOcupado(true);
+    let prazo: ReturnType<typeof setTimeout> | undefined;
+    const comPrazo = <T,>(pedido: Promise<T>) => new Promise<T>((resolve, reject) => {
+      clearTimeout(prazo);
+      prazo = setTimeout(() => reject(new Error("CONSULTA_PRAZO")), 20_000);
+      pedido.then((valor) => { clearTimeout(prazo); resolve(valor); }, (erro) => { clearTimeout(prazo); reject(erro); });
+    });
     try {
       try {
-        const consulta = consultaSchema.safeParse(await porta.carregarConsulta(patientId, undefined, encounterId));
+        const consulta = consultaSchema.safeParse(await comPrazo(porta.carregarConsulta(patientId, undefined, encounterId)));
         if (atual !== geracao.current) return;
         if (consulta.success && consulta.data.patientId === patientId && consulta.data.encounterId === encounterId) {
           setLotes((consulta.data.cabecalho?.lotes??[]).filter(l=>l.patientId===patientId));
           setContexto({patientId:consulta.data.patientId,encounterId:consulta.data.encounterId,tumorLotId:consulta.data.tumorLotId}); return;
         }
-      } catch { /* An active appointment can start a new encounter without prior clinical events. */ }
+      } catch (erro) {
+        if (erro instanceof Error && erro.message === "CONSULTA_PRAZO") throw erro;
+        /* An active appointment can start a new encounter without prior clinical events. */
+      }
       if(atual!==geracao.current)return;
       const agendaEntry = entrada;
       if (!agendaEntry?.encounterId || !porta.selecionarContexto) {
         setMensagem("Consulta local indisponível para este paciente."); return;
       }
       if(porta.lotesPaciente){
-        const resposta=await porta.lotesPaciente(patientId);if(atual!==geracao.current)return;
+        const resposta=await comPrazo(porta.lotesPaciente(patientId));if(atual!==geracao.current)return;
         const lista=LotesPacienteResposta.parse(resposta);if(lista.patientId!==patientId)throw Error('LOTES_FORA_DO_PACIENTE');
         setLotes(lista.lotes);
       }
-      await porta.selecionarContexto({ patientId, encounterId: agendaEntry.encounterId, tumorLotId: null });
+      await comPrazo(porta.selecionarContexto({ patientId, encounterId: agendaEntry.encounterId, tumorLotId: null }));
       if (atual !== geracao.current) return;
       setContexto({ patientId, encounterId: agendaEntry.encounterId, tumorLotId: null });
       setMensagem("Contexto da agenda selecionado. A revisão continua pendente até a decisão médica.");
     } catch {
       if (atual === geracao.current) setMensagem("Não foi possível abrir a consulta local.");
-    } finally { if (atual === geracao.current) setOcupado(false); }
+    } finally { clearTimeout(prazo); if (atual === geracao.current) setOcupado(false); }
   }
 
   async function selecionarLote(tumorLotId:string){
