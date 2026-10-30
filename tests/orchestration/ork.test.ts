@@ -50,3 +50,10 @@ it("A4 JSON com state não muda os cinco estados do run", async () => {
   expect(run.resultados[0]).toMatchObject({ resultado: "ok" });
   expect(() => concluirRun({ ...run, estado: "ENTREGUE" as never })).toThrow();
 });
+
+it.each(["timeout", null, "desconhecida"])("falha declarada %s nunca Ã© sucesso", async failure => {
+ const r = await executarOrk({evento:"TESTE", passos:[{id:"A",dependsOn:[],timeoutMs:100}]}, {A:async()=>({failure})});
+ expect(r.resultados[0]?.resultado).not.toBe("ok");
+ expect(r.resultados[0]).toHaveProperty("motivo");
+ expect(r.estado).not.toBe("PRONTO");
+});

@@ -3,8 +3,8 @@ import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync } from 'nod
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { spawnSync } from 'node:child_process';
-function scanner(arquivos: Record<string,string>) {
-  const dir=mkdtempSync(join(tmpdir(),'f1-fronteiras-'));
+function scanner(arquivos: Record<string,string>, prefixo = 'f1-fronteiras-') {
+  const dir=mkdtempSync(join(tmpdir(),prefixo));
   try {
     for(const [nome,conteudo] of Object.entries({
       'scripts/check-boundaries.mjs':readFileSync(new URL('../../../scripts/check-boundaries.mjs',import.meta.url),'utf8'),
@@ -34,3 +34,10 @@ it('entrypoint legado só pode reexportar porta pública declarada',()=>{
  expect(scanner({'src/app/oncoassist.ts':"export * from '../kernel/llm/jev/oncoassist.js'; export const x = 1;"}).status).toBe(1);
  expect(scanner({'src/app/oncoassist.ts':"export * from '../kernel/ledger/ledger.js';"}).status).toBe(1);
 });
+
+it.each(['fronteiras com espaço-', 'fronteiras-á-'])('detecta violação em %s', prefixo => {
+ const r=scanner({'src/rules/errado.ts':"import { x } from '../server/x.js';"}, prefixo);
+ expect(r.status).toBe(1); expect(r.texto).toContain('errado.ts');
+});
+it('raiz sem src não passa como zero arquivos',()=>expect(scanner({}).status).toBe(1));
+it('src sem fontes não passa como zero arquivos',()=>expect(scanner({'src/README.md':'vazio'}).status).toBe(1));

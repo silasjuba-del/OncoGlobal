@@ -1,3 +1,4 @@
+import { analisarEscopos } from "../../../src/kernel/extracao/escopoLinguistico.js";
 import { describe, expect, it } from "vitest";
 import { extratorDeterministico } from "../../../src/kernel/extracao/extrator.js";
 import type { EncounterSegment } from "../../../src/kernel/extracao/tipos.js";
@@ -137,4 +138,25 @@ describe("escopo linguístico: controles de contexto e proveniência", () => {
       qualificadores: { sujeito: "NAO_DETERMINADO", temporalidade: "NAO_DETERMINADA" },
     });
   });
+});
+
+it.each(["descartado tumor", "afastado tumor", "exclui-se tumor", "livre de tumor"])("negação clínica: %s", texto => {
+ expect(analisarEscopos(texto)[0]?.qualificadores.polaridade).toBe("NEGADA");
+});
+it.each(["investigação de tumor", "rastreio de tumor", "HD de tumor", "tumor?"])("incerteza clínica: %s", texto => {
+ expect(analisarEscopos(texto)[0]?.qualificadores.polaridade).toBe("NAO_DETERMINADA");
+});
+
+it.each(["tumor não descartado", "tumor não foi afastado"])("negação de exclusão mantém incerteza: %s", texto=>{
+ expect(analisarEscopos(texto)[0]?.qualificadores.polaridade).toBe("NAO_DETERMINADA");
+});
+it.each(["mas", "porém", "contudo"])("adversativa %s separa achado afirmado", termo=>{
+ const r=analisarEscopos(`nega dor ${termo} apresenta náusea`);
+ expect(r.map(e=>e.qualificadores.polaridade)).toEqual(["NEGADA","AFIRMADA"]);
+});
+
+it.each(["Investigação de adenocarcinoma de pulmão", "HD de adenocarcinoma de pulmão", "adenocarcinoma de pulmão?"])("extração conserva hipótese sem promover diagnóstico: %s", texto=>{
+ const fatos=extrair(texto).filter(f=>f.domain==="diagnosis");
+ expect(fatos.length).toBeGreaterThan(0);
+ expect(fatos.every(f=>f.requiresConfirmation)).toBe(true);
 });

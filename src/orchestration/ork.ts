@@ -84,6 +84,7 @@ async function executarUm(p: Passo, plano: Plano, agentes: Readonly<Record<strin
           if (tentativa === 1) continue;
           return { id: p.id, resultado: "error", motivo: "AGENTE_ERRO", tentativas: tentativa };
         }
+        return { id: p.id, resultado: "error", motivo: "AGENTE_FALHA_NAO_RECONHECIDA", tentativas: tentativa };
       }
       // In particular outcome.state has no authority over the run state.
       return { id: p.id, resultado: "ok", saida: snapshotSaida(outcome), tentativas: tentativa };

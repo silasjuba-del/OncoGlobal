@@ -216,3 +216,21 @@ describe("OA02 · HTTP e SQLite durável com Jev sintético em processos isolado
     expect((await app.comando("stats")).chamadas).toBe(1);
   }, 30_000);
 });
+
+it("409 entre pacientes deixa rastro apenas no contexto em tela, sem conteúdo clínico", async () => {
+ const app=await ambiente(); await app.post(CLASSIFICAR,pedido());
+ const antes=await app.comando("stats"); const outro={...CONTEXTO,patientId:"outro-contexto"};
+ await app.comando("selecionar",{contexto:outro});
+ expect((await app.post(CLASSIFICAR,{...pedido(),...outro})).status).toBe(409);
+ expect((await app.post(CLASSIFICAR,{...pedido(),...outro})).status).toBe(409);
+ const depois=await app.comando("stats");
+ const novos=depois.drafts.filter((d:any)=>!antes.drafts.some((a:any)=>a.draftId===d.draftId));
+ expect(novos).toHaveLength(1);
+ expect(novos[0].patientId).toBe(outro.patientId);
+ expect(novos[0].payload).toMatchObject({pacientePropostaId:CONTEXTO.patientId,pacienteTelaId:outro.patientId});
+ expect(novos[0].payload.capturadoEm).toBeTruthy();
+ expect(novos[0].payload.motivo).toBeTruthy();
+ expect(JSON.stringify(novos)).not.toContain("Hemograma");
+ expect(depois.drafts.filter((d:any)=>d.patientId===CONTEXTO.patientId)).toEqual(antes.drafts.filter((d:any)=>d.patientId===CONTEXTO.patientId));
+ expect(depois.clinicalEvents).toBe(antes.clinicalEvents);
+},30000);

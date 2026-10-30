@@ -110,7 +110,7 @@ export function TelaSalao({ porta }: { porta: PortaConsulta }) {
       />
       {resumoFlash ? <p role="status">{resumoFlash}</p> : null}
       <div className="colunas">
-        <FormTriagem
+        <FormTriagem key={`${escolhido.patientId}:${escolhido.encounterId}`}
           patientId={escolhido.patientId}
           encounterId={escolhido.encounterId}
           chegadaEm={escolhido.chegadaEm}
