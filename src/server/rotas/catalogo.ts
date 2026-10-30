@@ -118,6 +118,9 @@ export const ROTAS_HTTP = [
   {"url":"/consulta/assistente/cancelar","nome":"/consulta/assistente/cancelar","processamento":"NENHUM","grupo":"CONSULTA"},
   {"url":"/medico/paciente/ler","nome":"/medico/paciente/ler","processamento":"NENHUM","grupo":"CONSULTA"},
   {"url":"/medico/paciente/alterar","nome":"/medico/paciente/alterar","processamento":"PENDENCIAS_E_MOTOR","grupo":"CONSULTA"},
+  {"url":"/acervo/buscar","nome":"/acervo/buscar","processamento":"NENHUM","grupo":"CONSULTA"},
+  {"url":"/acervo/ler","nome":"/acervo/ler","processamento":"NENHUM","grupo":"CONSULTA"},
+  {"url":"/integracoes/estado","nome":"/integracoes/estado","processamento":"NENHUM","grupo":"CONSULTA"},
 ] as const;
 const porUrl = new Map<string, (typeof ROTAS_HTTP)[number]>(ROTAS_HTTP.map(r=>[r.url,r]));
 export function rotaHttp(url:string|undefined) { return porUrl.get(url??'')??null; }

@@ -1,4 +1,6 @@
 import { operarDocumental } from "./importacaoDocumental.js";
+import { operarConsultaAcervo } from "./consultaAcervo.js";
+import { operarEstadoIntegracoes } from "./integracoesEstado.js";
 import { operarConsultorio } from "./consultorioMedico.js";
 import { operarConversa } from "./conversaOncoassist.js";
 import { EventoConversa, RespostaConversa } from "../contracts/api/conversaOncoassist.js";
@@ -185,6 +187,14 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
     if (rota === "acao" && !contentTypeJson(req)) return reply(415, "CONTENT_TYPE_INVALIDO");
     // Conteúdo da biblioteca continua limitado a 8 MB após decodificação; envelope cobre escapes JSON/base64.
     const raw = await body(req, rota === "/consulta/documental/importar" ? 13 * 1024 * 1024 : rota === "upload" ? 11_300_000 : rota === "/biblioteca/importar" ? 24_000_000 : 1_000_000);
+    if (rota === "/integracoes/estado") {
+      const r = operarEstadoIntegracoes(deps, token, raw);
+      return reply(r.status, "INTEGRACOES_RESPOSTA", r.body);
+    }
+    if (rota.startsWith("/acervo/")) {
+      const r = operarConsultaAcervo(deps, token, rota, raw);
+      return reply(r.status, "ACERVO_RESPOSTA", r.body);
+    }
     if (rota.startsWith("/medico/")) {
       const r = operarConsultorio(deps, token, rota, raw);
       if (r) return reply(r.status, "CONSULTORIO_RESPOSTA", r.body);

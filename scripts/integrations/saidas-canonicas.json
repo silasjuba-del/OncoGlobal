@@ -1,0 +1,693 @@
+{
+  "acervo_buscar": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "properties": {
+      "codigo": {
+        "type": "string",
+        "enum": [
+          "ACERVO_RESULTADOS",
+          "ACERVO_SEM_RESULTADOS",
+          "ACERVO_VAZIO"
+        ]
+      },
+      "referenciaBiblioteca": {
+        "anyOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 400
+              },
+              "versao": {
+                "type": "string",
+                "pattern": "^\\d+\\.\\d+\\.\\d+$"
+              },
+              "hash": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              }
+            },
+            "required": [
+              "id",
+              "versao",
+              "hash"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "revisaoAcervo": {
+        "anyOf": [
+          {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "cobertura": {
+        "type": "object",
+        "properties": {
+          "escopo": {
+            "type": "string",
+            "const": "ITENS_CONSULTAVEIS_DO_PACOTE_ATIVO"
+          },
+          "metodo": {
+            "type": "string",
+            "const": "LITERAL_SENSIVEL_A_CAIXA"
+          },
+          "completudeFontesExternas": {
+            "type": "string",
+            "const": "NAO_GARANTIDA"
+          },
+          "itensConsultaveis": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 9007199254740991
+          },
+          "encontrados": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 9007199254740991
+          },
+          "retornados": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 9007199254740991
+          },
+          "truncado": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "escopo",
+          "metodo",
+          "completudeFontesExternas",
+          "itensConsultaveis",
+          "encontrados",
+          "retornados",
+          "truncado"
+        ],
+        "additionalProperties": false
+      },
+      "resultados": {
+        "maxItems": 50,
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "schema": {
+              "type": "string",
+              "const": "DocumentRef@1"
+            },
+            "docId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 400
+            },
+            "pacoteId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 400
+            },
+            "itemId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 400
+            },
+            "versao": {
+              "type": "string",
+              "pattern": "^\\d+\\.\\d+\\.\\d+$"
+            },
+            "hashSha256": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            },
+            "revisaoAcervo": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            },
+            "titulo": {
+              "type": "string"
+            },
+            "natureza": {
+              "type": "string",
+              "const": "ITEM_TEXTUAL_CURADO"
+            },
+            "classificacao": {
+              "type": "string",
+              "const": "NAO_DECLARADA"
+            },
+            "originalBinarioDisponivel": {
+              "type": "boolean",
+              "const": false
+            },
+            "localizador": {
+              "type": "object",
+              "properties": {
+                "campo": {
+                  "type": "string",
+                  "enum": [
+                    "TEXTO",
+                    "TITULO",
+                    "TRECHO_FONTE"
+                  ]
+                },
+                "inicio": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 9007199254740991
+                },
+                "fim": {
+                  "type": "integer",
+                  "exclusiveMinimum": 0,
+                  "maximum": 9007199254740991
+                },
+                "unidade": {
+                  "type": "string",
+                  "const": "UTF16"
+                }
+              },
+              "required": [
+                "campo",
+                "inicio",
+                "fim",
+                "unidade"
+              ],
+              "additionalProperties": false
+            },
+            "trecho": {
+              "type": "string",
+              "minLength": 1
+            },
+            "proveniencia": {
+              "type": "object",
+              "properties": {
+                "fonte": {
+                  "type": "string"
+                },
+                "trecho": {
+                  "type": "string"
+                },
+                "publicadoEm": {
+                  "type": "string"
+                },
+                "recuperadoEm": {
+                  "type": "string"
+                },
+                "licenca": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "fonte",
+                "trecho",
+                "publicadoEm",
+                "recuperadoEm",
+                "licenca"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "schema",
+            "docId",
+            "pacoteId",
+            "itemId",
+            "versao",
+            "hashSha256",
+            "revisaoAcervo",
+            "titulo",
+            "natureza",
+            "classificacao",
+            "originalBinarioDisponivel",
+            "localizador",
+            "trecho",
+            "proveniencia"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    "required": [
+      "codigo",
+      "referenciaBiblioteca",
+      "revisaoAcervo",
+      "cobertura",
+      "resultados"
+    ],
+    "additionalProperties": false
+  },
+  "acervo_ler": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "properties": {
+      "codigo": {
+        "type": "string",
+        "const": "ACERVO_DOCUMENTO"
+      },
+      "referenciaBiblioteca": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 400
+          },
+          "versao": {
+            "type": "string",
+            "pattern": "^\\d+\\.\\d+\\.\\d+$"
+          },
+          "hash": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          }
+        },
+        "required": [
+          "id",
+          "versao",
+          "hash"
+        ],
+        "additionalProperties": false
+      },
+      "revisaoAcervo": {
+        "type": "string",
+        "pattern": "^[a-f0-9]{64}$"
+      },
+      "documento": {
+        "type": "object",
+        "properties": {
+          "schema": {
+            "type": "string",
+            "const": "DocumentRef@1"
+          },
+          "docId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 400
+          },
+          "pacoteId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 400
+          },
+          "itemId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 400
+          },
+          "versao": {
+            "type": "string",
+            "pattern": "^\\d+\\.\\d+\\.\\d+$"
+          },
+          "hashSha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "revisaoAcervo": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "titulo": {
+            "type": "string"
+          },
+          "natureza": {
+            "type": "string",
+            "const": "ITEM_TEXTUAL_CURADO"
+          },
+          "classificacao": {
+            "type": "string",
+            "const": "NAO_DECLARADA"
+          },
+          "originalBinarioDisponivel": {
+            "type": "boolean",
+            "const": false
+          },
+          "localizador": {
+            "type": "object",
+            "properties": {
+              "campo": {
+                "type": "string",
+                "enum": [
+                  "TEXTO",
+                  "TITULO",
+                  "TRECHO_FONTE"
+                ]
+              },
+              "inicio": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 9007199254740991
+              },
+              "fim": {
+                "type": "integer",
+                "exclusiveMinimum": 0,
+                "maximum": 9007199254740991
+              },
+              "unidade": {
+                "type": "string",
+                "const": "UTF16"
+              }
+            },
+            "required": [
+              "campo",
+              "inicio",
+              "fim",
+              "unidade"
+            ],
+            "additionalProperties": false
+          },
+          "trecho": {
+            "type": "string",
+            "minLength": 1
+          },
+          "proveniencia": {
+            "type": "object",
+            "properties": {
+              "fonte": {
+                "type": "string"
+              },
+              "trecho": {
+                "type": "string"
+              },
+              "publicadoEm": {
+                "type": "string"
+              },
+              "recuperadoEm": {
+                "type": "string"
+              },
+              "licenca": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "fonte",
+              "trecho",
+              "publicadoEm",
+              "recuperadoEm",
+              "licenca"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "schema",
+          "docId",
+          "pacoteId",
+          "itemId",
+          "versao",
+          "hashSha256",
+          "revisaoAcervo",
+          "titulo",
+          "natureza",
+          "classificacao",
+          "originalBinarioDisponivel",
+          "localizador",
+          "trecho",
+          "proveniencia"
+        ],
+        "additionalProperties": false
+      },
+      "conteudo": {
+        "type": "object",
+        "properties": {
+          "schema": {
+            "type": "string",
+            "const": "ItemBiblioteca@1"
+          },
+          "id": {
+            "type": "string"
+          },
+          "versao": {
+            "type": "string",
+            "pattern": "^\\d+\\.\\d+\\.\\d+$"
+          },
+          "pilar": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991
+          },
+          "tipo": {
+            "type": "string",
+            "enum": [
+              "REFERENCIA",
+              "REGRA",
+              "TRIAL"
+            ]
+          },
+          "titulo": {
+            "type": "string"
+          },
+          "texto": {
+            "type": "string"
+          },
+          "aplicabilidade": {
+            "type": "object",
+            "properties": {
+              "tumor": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "histologia": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "estadio": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "biomarcador": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "linha": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "tumor",
+              "histologia",
+              "estadio",
+              "biomarcador",
+              "linha"
+            ],
+            "additionalProperties": false
+          },
+          "proveniencia": {
+            "type": "object",
+            "properties": {
+              "fonte": {
+                "type": "string"
+              },
+              "trecho": {
+                "type": "string"
+              },
+              "publicadoEm": {
+                "type": "string"
+              },
+              "recuperadoEm": {
+                "type": "string"
+              },
+              "licenca": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "fonte",
+              "trecho",
+              "publicadoEm",
+              "recuperadoEm",
+              "licenca"
+            ],
+            "additionalProperties": false
+          },
+          "dependencias": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "versao": {
+                  "type": "string",
+                  "pattern": "^\\d+\\.\\d+\\.\\d+$"
+                }
+              },
+              "required": [
+                "id",
+                "versao"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": [
+          "schema",
+          "id",
+          "versao",
+          "pilar",
+          "tipo",
+          "titulo",
+          "texto",
+          "aplicabilidade",
+          "proveniencia",
+          "dependencias"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "codigo",
+      "referenciaBiblioteca",
+      "revisaoAcervo",
+      "documento",
+      "conteudo"
+    ],
+    "additionalProperties": false
+  },
+  "integracoes_estado": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "properties": {
+      "codigo": {
+        "type": "string",
+        "const": "INTEGRACOES_ESTADO"
+      },
+      "whatsapp": {
+        "type": "object",
+        "properties": {
+          "ingressoConfigurado": {
+            "type": "boolean"
+          },
+          "saidaConfigurada": {
+            "type": "boolean"
+          },
+          "contasIngresso": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 9007199254740991
+          },
+          "conectividade": {
+            "type": "string",
+            "const": "NAO_TESTADA"
+          },
+          "envioExecutadoNesteDiagnostico": {
+            "type": "boolean",
+            "const": false
+          },
+          "transporteNativo": {
+            "type": "string",
+            "const": "TEXTO"
+          },
+          "documentos": {
+            "type": "string",
+            "const": "NAO_IMPLEMENTADO"
+          },
+          "requerAutorizacaoPorEnvio": {
+            "type": "boolean",
+            "const": true
+          }
+        },
+        "required": [
+          "ingressoConfigurado",
+          "saidaConfigurada",
+          "contasIngresso",
+          "conectividade",
+          "envioExecutadoNesteDiagnostico",
+          "transporteNativo",
+          "documentos",
+          "requerAutorizacaoPorEnvio"
+        ],
+        "additionalProperties": false
+      },
+      "extensoes": {
+        "type": "object",
+        "properties": {
+          "skillsNativas": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "versao": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id",
+                "versao"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "pluginsExternos": {
+            "type": "string",
+            "const": "ADAPTADOR_DE_ADMISSAO_NAO_CONFIGURADO"
+          },
+          "instalacaoAutomatica": {
+            "type": "boolean",
+            "const": false
+          }
+        },
+        "required": [
+          "skillsNativas",
+          "pluginsExternos",
+          "instalacaoAutomatica"
+        ],
+        "additionalProperties": false
+      },
+      "acervo": {
+        "type": "object",
+        "properties": {
+          "escopo": {
+            "type": "string",
+            "const": "ITENS_TEXTUAIS_CURADOS"
+          },
+          "drive": {
+            "type": "string",
+            "const": "NAO_CONFIGURADO"
+          },
+          "originaisBinarios": {
+            "type": "string",
+            "const": "NAO_DISPONIVEIS_NESTA_PORTA"
+          }
+        },
+        "required": [
+          "escopo",
+          "drive",
+          "originaisBinarios"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "codigo",
+      "whatsapp",
+      "extensoes",
+      "acervo"
+    ],
+    "additionalProperties": false
+  }
+}
