@@ -1,0 +1,42 @@
+import { useRef, useState } from 'react';
+import type { PDFDocumentProxy } from 'pdfjs-dist';
+import type { FilePayload } from '../platform/platform';
+import { getLibrary, docKeyOf } from '../ai/library';
+
+export function EnviarOncoGlobal({ original, documento, obterDerivado }: {
+  original: FilePayload; documento: PDFDocumentProxy | null;
+  obterDerivado?: () => Promise<{ name: string; bytes: Uint8Array; descricao: string } | undefined>;
+}) {
+  const [autor, setAutor] = useState('');
+  const [mensagem, setMensagem] = useState('');
+  const [ocupado, setOcupado] = useState(false);
+  const emCurso = useRef(false);
+  async function exportar() {
+    if (!autor.trim() || !documento || emCurso.current) return;
+    const ponte = window.pdfforge?.exportarOncoGlobal;
+    if (!ponte) { setMensagem('Abra no aplicativo desktop para exportar o pacote local.'); return; }
+    emCurso.current = true; setOcupado(true); setMensagem('');
+    try {
+      const paginasExtraidas: { pagina: number; texto: string }[] = [];
+      for (let n = 1; n <= documento.numPages; n++) {
+        const conteudo = await (await documento.getPage(n)).getTextContent();
+        paginasExtraidas.push({ pagina: n, texto: conteudo.items.map(x => 'str' in x ? x.str : '').join(' ') });
+      }
+      const anotacoes = getLibrary().annotations.filter(a => a.docKey === docKeyOf(original)).map(a => ({
+        id: a.id, pagina: a.page, texto: a.text, autorTipo: a.source === 'ai' ? 'IA' as const : 'USUARIO' as const,
+        autor: a.source === 'ai' ? 'Proposta IA não revisada' : autor.trim(), criadoEm: new Date(a.createdAt).toISOString(),
+      }));
+      const derivado = await obterDerivado?.();
+      const resultado = await ponte({ original, autor: autor.trim(), paginasExtraidas, anotacoes, ...(derivado ? { derivado } : {}) });
+      if (!resultado.ok) throw Error(resultado.codigo ?? 'EXPORTACAO_FALHOU');
+      setMensagem(`Pacote local salvo em ${resultado.caminho}. No OncoGlobal, selecione o encontro e importe em Documentos. Recebido não significa revisado.`);
+    } catch (erro) { setMensagem(erro instanceof Error ? erro.message : 'EXPORTACAO_FALHOU'); }
+    finally { emCurso.current = false; setOcupado(false); }
+  }
+  return <section aria-label="Enviar ao OncoGlobal" className="notice">
+    <label>Autor declarado da exportação <input aria-label="Autor da exportação" value={autor} maxLength={160} onChange={e => setAutor(e.target.value)} disabled={ocupado} /></label>
+    <button className="btn btn-primary" disabled={ocupado || !autor.trim() || !documento} onClick={() => void exportar()}>Enviar ao OncoGlobal — pacote local</button>
+    <small>Contém o documento original. Não envia à nuvem, não vincula paciente e não assina.</small>
+    {mensagem ? <p role="status">{mensagem}</p> : null}
+  </section>;
+}

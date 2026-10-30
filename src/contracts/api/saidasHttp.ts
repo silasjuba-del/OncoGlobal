@@ -1,3 +1,6 @@
+import { SaidasConsultorioMedico } from "./consultorioMedico.js";
+import { SaidasConversaOncoassist } from "./conversaOncoassist.js";
+import { ImportacaoDocumentalResposta, DocumentosDocumentaisResposta, DocumentoDocumentalResposta } from "./importacaoDocumental.js";
 import {RecuperacaoConfirmacao} from "./recuperacaoConfirmacao.js";
 import {AtendimentoV6Resposta} from "./atendimentoV6.js";
 import { PropostasDoseReceitaResposta } from './propostaDoseReceita.js';
@@ -67,6 +70,11 @@ export const SaidasHttp: Readonly<Record<string, z.ZodType>> = {
   gerarContingenciaSalao: ContingenciaSalaoResposta, historicoContingenciaSalao: HistoricoContingenciaSalaoResposta,
   prepararRespostaCanal:RespostaCanalPreparada,confirmarRespostaCanal:RespostaCanalConfirmada,
   ditado:DitadoResposta,
+  ...SaidasConsultorioMedico,
+  ...SaidasConversaOncoassist,
+  "/consulta/documental/importar": ImportacaoDocumentalResposta,
+  "/consulta/documental/listar": DocumentosDocumentaisResposta,
+  "/consulta/documental/abrir": DocumentoDocumentalResposta,
   lotesPaciente:LotesPacienteResposta,
   login: z.object({ token: z.string().min(1), expiraEm: Instante }),
   carregarConsulta: ConsultaResposta, agenda: AgendaResposta, apac: ApacResposta, canal: CanalResposta,

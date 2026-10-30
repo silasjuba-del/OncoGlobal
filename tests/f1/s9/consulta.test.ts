@@ -114,6 +114,21 @@ describe("F1-S9 · decisão confirmada → documentos em revisão", () => {
 
   it("retorno sem pedidos não propõe tarefa de coleta", () => {
     const entrada = entradaCanonica(); entrada.decisao!.pedidos = [];
-    expect(prepararDocumentosConsulta(entrada).tarefas).toEqual([]);
+    const tarefas = prepararDocumentosConsulta(entrada).tarefas;
+    // M123 acompanha o retorno explicitamente decidido; não inventa pedido/coleta.
+    expect(tarefas).toHaveLength(1);
+    expect(tarefas[0]!.pedidosRef).toEqual([]);
   });
+});
+
+it("retorno explicitamente decidido gera referência de tarefa mesmo sem exames", () => {
+  const entrada = entradaCanonica();
+  entrada.decisao!.pedidos = [];
+  entrada.decisao!.medicamentos = [];
+  const r = prepararDocumentosConsulta(entrada);
+  expect(r.documentos.map(d=>d.tipoDocumento)).toEqual(["RETORNO"]);
+  expect(r.tarefas).toEqual([expect.objectContaining({ tarefaId:"tarefa-retorno-s9",dataAlvo:"2026-10-26",pedidosRef:[],
+    documentoRef:{documentId:r.documentos[0]!.documentId,documentVersion:1} })]);
+  entrada.decisao!.retorno!.dias=null;
+  expect(prepararDocumentosConsulta(entrada).tarefas).toEqual([]);
 });

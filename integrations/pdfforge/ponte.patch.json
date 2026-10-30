@@ -1,0 +1,73 @@
+{
+  "formato": "PDFForgeBridge@1",
+  "arquivos": [
+    {
+      "arquivo": "electron/main.cjs",
+      "sha256Antes": "29d8a70a5b87e0d1bb980019b9dc2636410f108375106733c6e338b507d9330f",
+      "sha256Depois": "2b2ec1fbfcba311f38bdc0954aa99cc1234684bcea5e963603ea952fb1ae30e8",
+      "substituicoes": [
+        {
+          "antes": "require('./ipc-ai.cjs').register(() => mainWindow, isAppOrigin);",
+          "depois": "require('./ipc-ai.cjs').register(() => mainWindow, isAppOrigin);\nrequire('./services/oncoglobal-export.cjs').registrar(() => mainWindow, DEV_URL);"
+        }
+      ]
+    },
+    {
+      "arquivo": "electron/preload.cjs",
+      "sha256Antes": "4229e34ad023ea831c0cb5cfe235f8bd3cffcbd403f7b0138cb777df37566599",
+      "sha256Depois": "733049228ab328ccd5744ed2fccb2bebba7ee9d8ca9f249b457dc3422bfc06ed",
+      "substituicoes": [
+        {
+          "antes": "contextBridge.exposeInMainWorld('pdfforge', {",
+          "depois": "contextBridge.exposeInMainWorld('pdfforge', {\n  exportarOncoGlobal: (entrada) => ipcRenderer.invoke('oncoglobal:export', entrada),"
+        }
+      ]
+    },
+    {
+      "arquivo": "src/platform/platform.ts",
+      "sha256Antes": "12b38a8d40d84aac24c26c68cc8ce4fba40b3a3d641850b7a37f52e2aeab992b",
+      "sha256Depois": "f48aecaeda00966586e1c9ab86204fa55e3cd755511e39577b04d8936ecafe37",
+      "substituicoes": [
+        {
+          "antes": "interface ElectronBridge {",
+          "depois": "interface ElectronBridge {\n  exportarOncoGlobal?: (entrada: unknown) => Promise<{ ok: boolean; caminho?: string; codigo?: string; pacoteId?: string }>;"
+        }
+      ]
+    },
+    {
+      "arquivo": "src/pages/ViewerPage.tsx",
+      "sha256Antes": "fa613f89a52bc5f52522c00d898f4f9df4940f87becaf1fda29ab20f5b991180",
+      "sha256Depois": "ae1e192eb88fdd9faa06acbe420cc737a2a841d20c7461485b73c163e150847c",
+      "substituicoes": [
+        {
+          "antes": "import { useEffect, useRef, useState } from 'react';",
+          "depois": "import { useEffect, useRef, useState } from 'react';\nimport { EnviarOncoGlobal } from '../integrations/EnviarOncoGlobal';"
+        },
+        {
+          "antes": "<div className=\"viewer-main\">",
+          "depois": "<div className=\"viewer-main\">\n        <EnviarOncoGlobal original={file} documento={doc} />"
+        }
+      ]
+    },
+    {
+      "arquivo": "src/pages/EditorPage.tsx",
+      "sha256Antes": "45a2f02459c6dd7bf6a3cbb350960c1ff6068e23576ed0af6b7f32fa504e6717",
+      "sha256Depois": "2d4d1f7edc56337ca0288a8c85d6f5427607f934234da80603a67a60d334a664",
+      "substituicoes": [
+        {
+          "antes": "import type { PDFDocumentProxy } from 'pdfjs-dist';",
+          "depois": "import type { PDFDocumentProxy } from 'pdfjs-dist';\nimport { EnviarOncoGlobal } from '../integrations/EnviarOncoGlobal';"
+        },
+        {
+          "antes": "<div className=\"ed-toolbar\" role=\"toolbar\" aria-label=\"Ferramentas de edição\">",
+          "depois": "<EnviarOncoGlobal original={file} documento={doc} obterDerivado={async () => {\n        if (!ops.length) return undefined;\n        const [out] = await applyEdits({ name: file.name, bytes: file.bytes, path: file.path, password }, ops);\n        if (!out) throw new Error('DERIVADO_INDISPONIVEL');\n        return { name: out.name, bytes: out.bytes, descricao: 'Edições locais do PDFForge; original preservado separadamente.' };\n      }} />\n      <div className=\"ed-toolbar\" role=\"toolbar\" aria-label=\"Ferramentas de edição\">"
+        }
+      ]
+    }
+  ],
+  "novos": {
+    "exportar-pacote.cjs": "electron/services/exportar-pacote.cjs",
+    "oncoglobal-export.cjs": "electron/services/oncoglobal-export.cjs",
+    "EnviarOncoGlobal.tsx": "src/integrations/EnviarOncoGlobal.tsx"
+  }
+}

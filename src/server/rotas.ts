@@ -1,3 +1,7 @@
+import { operarDocumental } from "./importacaoDocumental.js";
+import { operarConsultorio } from "./consultorioMedico.js";
+import { operarConversa } from "./conversaOncoassist.js";
+import { EventoConversa, RespostaConversa } from "../contracts/api/conversaOncoassist.js";
 import { PedidoRecuperacaoConfirmacao } from "../contracts/api/recuperacaoConfirmacao.js";
 import { ErroProveniencia } from "../kernel/comandos/proveniencia.js";
 import { registrarSalaoExibido } from './exibicaoSalao.js';
@@ -180,7 +184,36 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
     // O gate de autenticação continua anterior a esta checagem.
     if (rota === "acao" && !contentTypeJson(req)) return reply(415, "CONTENT_TYPE_INVALIDO");
     // Conteúdo da biblioteca continua limitado a 8 MB após decodificação; envelope cobre escapes JSON/base64.
-    const raw = await body(req, rota === "upload" ? 11_300_000 : rota === "/biblioteca/importar" ? 24_000_000 : 1_000_000);
+    const raw = await body(req, rota === "/consulta/documental/importar" ? 13 * 1024 * 1024 : rota === "upload" ? 11_300_000 : rota === "/biblioteca/importar" ? 24_000_000 : 1_000_000);
+    if (rota.startsWith("/medico/")) {
+      const r = operarConsultorio(deps, token, rota, raw);
+      if (r) return reply(r.status, "CONSULTORIO_RESPOSTA", r.body);
+    }
+    if (rota.startsWith("/consulta/documental/")) {
+      const r = await operarDocumental(deps, token, rota, raw);
+      return reply(r.status, "DOCUMENTAL_RESPOSTA", r.body);
+    }
+    if (rota.startsWith("/consulta/assistente/")) {
+      const abort = new AbortController(); const cancelar = () => abort.abort();
+      res.once("close", cancelar);
+      const stream = rota.endsWith("responder-stream");
+      const emitir = (evento: unknown) => {
+        const e = EventoConversa.parse(evento);
+        if (res.destroyed || abort.signal.aborted) return;
+        if (!res.headersSent) res.writeHead(200, { "Content-Type": "application/x-ndjson; charset=utf-8", "Cache-Control": "no-store", "X-Content-Type-Options": "nosniff" });
+        res.write(JSON.stringify(e) + "\n");
+      };
+      try {
+        const r = await operarConversa(deps, token, rota, raw, abort.signal, stream ? emitir : undefined);
+        if (!stream) return reply(r.status, "CONVERSA_RESPOSTA", r.body);
+        if (r.status >= 400) {
+          if (!res.headersSent) return reply(r.status, "CONVERSA_RECUSADA", r.body);
+          const erro = r.body as { codigo?: string }; emitir({ tipo: "erro", codigo: erro.codigo ?? "CONVERSA_INDISPONIVEL" });
+        } else emitir({ tipo: "final", resposta: RespostaConversa.parse(r.body) });
+        if (!res.destroyed) res.end();
+        return;
+      } finally { res.off("close", cancelar); }
+    }
     if (rota === "recuperarConfirmacao") {
       const p = PedidoRecuperacaoConfirmacao.safeParse(raw); if (!p.success) return reply(400, "PAYLOAD_INVALIDO");
       const r = p.data.tipo === "PRESCRICAO" ? operarPrescricaoExecutavel(deps, token, p.data.cancelar ? "cancelar" : "recuperar", p.data.pedido) : operarApacRascunho(deps, token, p.data.cancelar ? "cancelar" : "recuperar", p.data.pedido);

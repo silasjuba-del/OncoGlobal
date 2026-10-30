@@ -37,3 +37,18 @@ it("falha na gravação da tarefa reverte documentos, marcador e drafts auxiliar
  expect(a.db.prepare("SELECT * FROM draft_envelope ORDER BY draftId").all()).toEqual(antes);
  expect(a.db.prepare("SELECT * FROM operation WHERE operationId='s9-atomic-assinar'").get()).toBeUndefined();
 });
+
+it("retorno sem exames só gera tarefa após assinatura explícita e replay não duplica",async()=>{
+ a=await abrirAmbiente(criarDiretorio());cadastrarPaciente(a);await carregarConsulta(a);
+ const semExames={...plano,solicitacoes:{laboratorio:[],imagem:[]},retorno:{dias:14,examesAntesDoRetorno:[]}};
+ const preparada=await a.request("/consulta/flash/preparar",{...contexto,plano:semExames,idempotencyKey:"retorno-sem-exames-preparar"});
+ expect(preparada.status).toBe(200);
+ expect(a.eventos().filter(e=>e.tipo==="Tarefa")).toEqual([]);
+ await a.request("/consulta/bundle",{...contexto,draftIds:preparada.data.registros.map((r:{id:string})=>r.id)});
+ const pedido={...contexto,bloco:"TUDO",registros:preparada.data.registros,documentosExibidos:preparada.data.documentos.map((d:{documentId:string;documentVersion:number})=>({documentId:d.documentId,documentVersion:d.documentVersion})),reconhecerAlertas:[],idempotencyKey:"retorno-sem-exames-assinar"};
+ expect((await a.request("/consulta/confirmar",pedido)).status).toBe(200);
+ const tarefas=a.eventos().filter(e=>e.tipo==="Tarefa");expect(tarefas).toHaveLength(1);
+ expect(tarefas[0]!.payload).toMatchObject({data:{titulo:"Retorno médico",pedidoRefs:[],estado:"CONFIRMADA"}});
+ expect((await a.request("/consulta/confirmar",pedido)).status).toBe(200);
+ expect(a.eventos().filter(e=>e.tipo==="Tarefa")).toEqual(tarefas);
+});

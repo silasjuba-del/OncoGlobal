@@ -92,6 +92,10 @@ jobs:
         env:
           TMPDIR: ${{ runner.temp }}
         run: npm run test:b2
+      - name: Validar consultório monousuário e ponte PDFForge ponta a ponta
+        env:
+          TMPDIR: ${{ runner.temp }}
+        run: npm run test:medico-m123
       - name: Validar layout e movimento reduzido no Chromium
         run: node node_modules/vitest/vitest.mjs run --config tests/hostil-cursor/navegador/vitest.config.ts
       - name: Guardar evidencias sinteticas
@@ -99,7 +103,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: jornadas-b2-${{ github.run_id }}-${{ github.run_attempt }}
-          path: ${{ runner.temp }}/s12-b2-evidence-*/
+          path: |
+            ${{ runner.temp }}/s12-b2-evidence-*/
+            ${{ runner.temp }}/medico-m123-evidence-*/
           if-no-files-found: warn
           retention-days: 7
 
