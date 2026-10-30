@@ -16,12 +16,13 @@ try {
  demo = await mod.bootServidorDemoB2(demoDir);
  browser = await chromium.launch({ headless: true });
  const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
+ await page.clock.setFixedTime(new Date(demo.manifesto.agora));
  const base = vite.resolvedUrls.local[0];
  const entrar = async () => {
   await page.goto(`${base}oncoassist.html`);
   await page.getByLabel("Senha do servidor").fill(demo.manifesto.senhaDemo);
   await page.getByRole("button", { name: "Entrar", exact: true }).click();
-  await page.getByLabel("Paciente da agenda").selectOption(demo.manifesto.consultaConfiavel.encounterId);
+  await page.getByRole("region", { name: "Agenda médica", exact: true }).getByRole("button", { name: `Abrir consulta de ${demo.manifesto.consultaConfiavel.nome}`, exact: true }).click();
   await page.getByRole("region", { name: "Consulta persistida", exact: true }).waitFor();
  };
  await entrar();

@@ -70,7 +70,7 @@ export function AgendaMedica({ api, onSelecionar, aoAtualizar, aoAlterarPendente
       <label>Fim da agenda<input type="date" value={fim} onChange={e => setFim(e.target.value)} /></label>
       <button type="button" onClick={() => setVersao(v => v + 1)}>Atualizar agenda</button></div>
     {erro ? <p role="alert">{erro}</p> : null}{aviso ? <p role="status">{aviso}</p> : null}
-    <form onChange={e => { const campo = (e.target as HTMLInputElement).name;
+    <form onChange={e => { const campo = e.target.getAttribute("name") ?? "";
       if (edicao && ["data-encontro", "horario-encontro"].includes(campo)) setPendenteAlteracao(true); else setPendenteCadastro(true); }} onSubmit={salvar} aria-label="Cadastrar ou agendar paciente">
       <label><input type="checkbox" checked={novo} disabled={ocupado} onChange={e => { setNovo(e.target.checked); setTarefaRetornoId(null); }} />Cadastrar novo paciente</label>
       {novo ? <div className="medico-campos">
