@@ -104,3 +104,17 @@ it("mesmo nome/data/fonte em segmentos distintos não é fundido", () => {
  const p = fato({ domain: "drug", sourceType: "prescription", sourceId: "rx", value: { normalizado: "CARBOPLATINA" } });
  expect(tratamentoLongitudinal([p, fato({ ...p, segmentId: "outro-episodio" })])).toHaveLength(2);
 });
+
+it("data ausente mantém a observação e sinaliza checar origem na timeline", () => {
+ const f = fato({domain:"plan", value:"tratamento concluído"});
+ const r = projetarTimelinePaciente({patientId:"P-sintetico",fatos:[f],conflitos:[],missingRequiredData:[]});
+ expect(r.treatments[0]).toMatchObject({status:"CONCLUIDO",em:null,sourceIds:[f.sourceId]});
+ expect(r.missingRequiredData).toContain("TRATAMENTO_DATA_A_CONFERIR");
+});
+
+it("fonte ausente não é inventada e fica pendente sem perder observação",()=>{
+ const f=fato({domain:"plan",value:"tratamento concluído",sourceId:"",date:"01/02/2026"});
+ const r=projetarTimelinePaciente({patientId:"P-sintetico",fatos:[f],conflitos:[],missingRequiredData:[]});
+ expect(r.treatments[0]?.sourceIds).toEqual([]);
+ expect(r.missingRequiredData).toContain("TRATAMENTO_FONTE_A_CONFERIR");
+});

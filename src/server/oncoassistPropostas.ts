@@ -85,9 +85,11 @@ function divergencia(deps: ServidorDeps, original: DraftEnvelope, tentativaHash:
   tentativa: { contexto: Contexto; draftId: string; fonte: Omit<FonteLocal, "texto"> | null }) {
   const draftId = `jev-divergencia-${sha(`${original.draftId}:${tentativaHash}`)}`;
   if (lerDraft(deps.db, draftId)) return;
-  salvarDraft(deps.db, { draftId, patientId: original.patientId, sourceId: original.sourceId,
+  salvarDraft(deps.db, { draftId, patientId: tentativa.contexto.patientId, sourceId: tentativa.fonte?.sourceId ?? draftId,
     rawRef: original.draftId, revision: 0, criadoEm: deps.agora(), diagnostics: ["OPERACAO_DIVERGENTE"],
     payload: { kind: "JEV_DIVERGENCIA_RASCUNHO", propostaId: original.draftId, tentativaHash, tentativa,
+      pacientePropostaId: original.patientId, pacienteTelaId: tentativa.contexto.patientId,
+      motivo: "A proposta não corresponde ao contexto ou à fonte selecionada; conferir a origem antes de usar.",
       capturadoPor: { tipo: "SESSAO", id: ator }, capturadoEm: deps.agora(), revisaoObrigatoria: true } });
 }
 

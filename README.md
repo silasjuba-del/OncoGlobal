@@ -104,7 +104,7 @@ com reabertura; não valida serviços clínicos externos. Registre SHA, comando,
 code e falhas. Um reteste isolado verde não torna verde a execução integral que
 falhou. CI, revisão técnica, integração e aprovação clínica são evidências distintas.
 
-O check protegido `typecheck + fronteiras + testes` exige também sucesso do job
+O check agregador `typecheck + fronteiras + testes` exige também sucesso do job
 `Jornadas B2 no Chromium`. Falha, cancelamento ou salto desse job impede a aprovação
 do consolidado. A jornada de consulta confiável usa documentos e pacientes sintéticos
 na interface real, com falhas HTTP controladas e reabertura do mesmo SQLite.
@@ -118,10 +118,20 @@ lote e suas evidências ficam em
 
 ## Estrutura
 ```
-src/contracts/   contratos Zod (congelados por onda; só o tech lead edita)
+src/contracts/   contratos Zod (mudanças no escopo autorizado e com revisão)
 src/rules/       funções puras (sem I/O)
 src/kernel/      ledger · projections · identity · harness · gateway · llm
-corpus/rulesets/ regras clínicas versionadas com fonte (nunca no código)
+corpus/rulesets/ regras clínicas versionadas com fonte; há regras legadas no código
 tests/           testes positivos, negativos e de borda
-docs/            plano, decisões, manifestos e relatórios por fase
+docs/            decisões e specs vigentes; histórico preservado em docs/_arquivo
 ```
+
+## Estado integrado e trabalho em revisão — 30/10/2026
+
+O main confirmado antes deste lote é `d5850b40` (PR #81): incorpora as PRs #76, #78, #79 e #80, a jornada do consultório, integrações documentais e o aplicativo PDFforge original em `apps/pdfforge`. A ponte do consultório fica em `integrations/pdfforge`; a presença do desktop não comprova validação nativa Windows nem autorização de conectores externos. O smoke Windows permanece não confirmado.
+
+Esta branch corrige seis pontos: falha declarada do ORK nunca vira sucesso; troca de paciente/encontro reinicia ambos os formulários do Salão; recusa 409 conserva rastro no contexto em tela sem copiar texto clínico; fronteiras falham em erro de leitura/raiz vazia e aceitam caminhos com espaço/acento; extração distingue as expressões de hipótese/negação cobertas pelos testes; timeline conserva observações sem data/fonte com pendência explícita. Dose, cadeia de hash do ledger e pipeline geral não foram alterados. Só considerar integrado após merge da PR.
+
+Validação técnica é separada de aprovação clínica. Permanecem pendências previamente auditadas em RECIST, dose, PHI, backup e segurança do servidor; não interpretar este lote como fechamento global. Gate/CI verde não equivale a proteção de branch: em 30/10/2026, a API do GitHub informou `main.protected=false`.
+
+Para assumir trabalho, consultar PRs e SHA remoto, e conferir o status do worktree escolhido. O checkout principal pode estar atrás e conter WIP protegido; não fazer pull/reset por cima dele. Frentes ainda locais devem ser declaradas, preservadas e triadas antes de compartilhamento. Draft PR ajuda na coordenação, mas não substitui a inspeção do disco nem justifica publicar todo WIP. Não há sincronização, rebase, merge ou alerta periódico automático instalado por este lote.

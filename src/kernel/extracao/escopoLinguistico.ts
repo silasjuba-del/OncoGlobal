@@ -8,8 +8,12 @@ const PACIENTE = /\b(?:paciente|eu|meu|minha|meus|minhas)\b/iu;
 const RELATO_TERCEIRO = new RegExp(
   `\\b(?:relata|refere|informa|conta)\\s+que\\s+(?:(?:a|o|sua|seu)\\s+)?${PARENTE}${FIM_TOKEN}`, "iu",
 );
-const HIPOTESE = /\b(?:não se pode excluir|sugestiv[oa]s?|compat[ií]ve(?:l|is)(?:\s+com)?|prov[aá]vel(?:mente)?|poss[ií]ve(?:l|is)(?:mente)?|suspeit[oa]s?|hip[oó]tese)\b/iu;
+const HIPOTESE = /\b(?:investiga[çc][ãa]o de|rastreio(?: de)?|HD de|não se pode excluir|sugestiv[oa]s?|compat[ií]ve(?:l|is)(?:\s+com)?|prov[aá]vel(?:mente)?|poss[ií]ve(?:l|is)(?:mente)?|suspeit[oa]s?|hip[oó]tese)\b/iu;
 const NEGACAO = /\b(?:não\s+(?:há|observamos|apresenta|refere|relata|tem)|nega|negou|negativo para|sem\s+(?:dor|náusea|dormência|formigamento|sinais de|evidência(?: de)?|les(?:ão|ões)|nódul(?:o|os)|foc(?:o|os)|neoplasia|carcinoma|adenocarcinoma|tumor|metástase|expressão|amplificação|HER2|RE|RP|Ki-67|PD-L1))(?=$|[^\p{L}\p{N}_])/iu;
+// Exclusão clínica exige objeto clínico; afastamento laboral não nega doença.
+const OBJETO_CLINICO = "(?:tumor|neoplasia|carcinoma|adenocarcinoma|metástase|doença|diagnóstico|hipótese|lesão|lesões|dor|náusea)";
+const EXCLUSAO_CLINICA = new RegExp(`(?:\\b(?:descartad[oa]s?|afastad[oa]s?|exclui-se|livre de)\\s+(?:(?:o|a|os|as)\\s+)?${OBJETO_CLINICO}\\b|\\b${OBJETO_CLINICO}\\s+(?:foi\\s+)?(?:descartad[oa]|afastad[oa])\\b)`, "iu");
+const EXCLUSAO_INCERTA = /\bn[ãa]o\b[^,;.!?]*\b(?:livre de|descartar|descartad[oa]s?|afastar|afastad[oa]s?|excluir|exclu[ií]d[oa]s?)\b/iu;
 const NEGADOR = /(?:^|[^\p{L}\p{N}_])(?:n[ãa]o|sem|aus[eê]ncia|ausente)(?=$|[^\p{L}\p{N}_])/iu;
 // O mesmo vocabulário delimita predicados e qualifica o tempo; reconhecer um
 // verbo na coordenação sem reconhecer seu tempo não pode herdar o tempo anterior.
@@ -58,7 +62,7 @@ export function analisarEscopos(texto: string): readonly EscopoLinguistico[] {
   // Uma hipótese introdutória governa também os predicados coordenados.
   const hipoteseInicial = HIPOTESE.test(partes[0] ?? "");
   const escopos = partes.map(parte => {
-    const negated = NEGACAO.test(parte);
+    const negated = NEGACAO.test(parte) || (EXCLUSAO_CLINICA.test(parte) && !EXCLUSAO_INCERTA.test(parte));
     const terceiro = TERCEIRO.test(parte);
     const paciente = !terceiro && PACIENTE.test(parte);
     if (terceiro || paciente) {
@@ -73,7 +77,7 @@ export function analisarEscopos(texto: string): readonly EscopoLinguistico[] {
     tempo = FUTURO.test(parte) ? "FUTURA" : HISTORICO.test(parte) ? "HISTORICA"
       : ATUAL.test(parte) ? "ATUAL" : tempo;
     const wordingUncertain = (!negated && NEGADOR.test(parte))
-      || hipoteseInicial || HIPOTESE.test(parte) || contextoIncerto;
+      || hipoteseInicial || HIPOTESE.test(parte) || parte.includes("?") || contextoIncerto;
     const qualificadores: Qualificadores = {
       polaridade: negated ? "NEGADA" : wordingUncertain ? "NAO_DETERMINADA" : "AFIRMADA",
       sujeito, temporalidade: tempo,

@@ -81,6 +81,7 @@ export function TelaSalao({ porta }: { porta: PortaConsulta }) {
                 await porta.selecionarContexto?.({ patientId: proximo.patientId,
                   encounterId: proximo.encounterId, tumorLotId: null });
                 setPatientId(proximo.patientId);
+                setResumoFlash(null);
                 setContextoContingencia(`${proximo.patientId}:${proximo.encounterId}`);
                 setVisao(await porta.filaSalao());
               } catch (error) { setErro(textoErro(error)); }
@@ -99,7 +100,7 @@ export function TelaSalao({ porta }: { porta: PortaConsulta }) {
       {visao.avisos?.filter(a=>a.patientId === escolhido.patientId).length ? <p role="status" aria-label="Avisos do salão">
         {visao.avisos.filter(a=>a.patientId === escolhido.patientId).map(a=>a.texto).join("; ")}</p> : null}
       <FilaRelatosInfusao porta={porta} bloqueado={selecionandoContexto} relatos={visao.relatosInfusao ?? []} aoAtualizar={async () => setVisao(await porta.filaSalao())} />
-      <Triagem5Passos
+      <Triagem5Passos key={`${escolhido.patientId}:${escolhido.encounterId}`}
         pacienteNome={escolhido.nome}
         onResumo={(t) => {
           setResumoFlash("resumo copiado");
@@ -110,7 +111,7 @@ export function TelaSalao({ porta }: { porta: PortaConsulta }) {
       />
       {resumoFlash ? <p role="status">{resumoFlash}</p> : null}
       <div className="colunas">
-        <FormTriagem
+        <FormTriagem key={`${escolhido.patientId}:${escolhido.encounterId}`}
           patientId={escolhido.patientId}
           encounterId={escolhido.encounterId}
           chegadaEm={escolhido.chegadaEm}

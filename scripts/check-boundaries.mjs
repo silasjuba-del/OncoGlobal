@@ -2,7 +2,8 @@
 import { readFileSync, readdirSync, statSync } from "node:fs";
 import { join, relative, sep } from "node:path";
 
-const ROOT = new URL("..", import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1");
+import { fileURLToPath } from "node:url";
+const ROOT = fileURLToPath(new URL("..", import.meta.url));
 const SRC = join(ROOT, "src");
 const RULES = [
   { from: "src/contracts/", forbid: ["src/"], allow: ["src/contracts/"], why: "contratos só dependem de si" },
@@ -81,7 +82,8 @@ const UI_API_PROIBIDO = /["'`](https?:|wss?:)?\/\/|new\s+WebSocket|XMLHttpReques
 
 const files = [];
 const walk = (d) => { for (const f of readdirSync(d)) { const p = join(d, f); statSync(p).isDirectory() ? walk(p) : /\.(ts|tsx|mjs)$/.test(f) && files.push(p); } };
-try { walk(SRC); } catch { /* src vazio */ }
+try { walk(SRC); } catch { console.error("Fronteiras: não foi possível ler src"); process.exit(1); }
+if (files.length === 0) { console.error("Fronteiras: nenhum arquivo analisável em src"); process.exit(1); }
 
 const erros = [];
 for (const file of files) {

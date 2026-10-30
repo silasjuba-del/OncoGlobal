@@ -75,25 +75,29 @@ export function tratamentoLongitudinal(fatos: readonly ClinicalFact[]) {
     const cycle = (status === "PRESCRITO" || status === "ADMINISTRADO") && nomesNoTrecho.size === 1
       && numeros.length > 0 && numeros.every(n => Number.isInteger(n) && n > 0) && unico.size === 1 ? numeros[0]! : null;
     return { regimen, templateId: null, intent: null, line: null, cycle, status,
-      em: normalizarDataCivil(f.date ?? null), sourceIds: [f.sourceId] };
+      em: normalizarDataCivil(f.date ?? null), sourceIds: f.sourceId.trim() ? [f.sourceId] : [] };
   });
   return entradas
     .sort((a, b) => (a.em ?? "9999").localeCompare(b.em ?? "9999") || a.regimen.localeCompare(b.regimen)
-      || a.status.localeCompare(b.status) || a.sourceIds[0]!.localeCompare(b.sourceIds[0]!));
+      || a.status.localeCompare(b.status) || (a.sourceIds[0] ?? "").localeCompare(b.sourceIds[0] ?? ""));
 }
 
 /** Projeta a timeline do paciente e valida contra o contrato W10 (falha alto se divergir). */
 export function projetarTimelinePaciente(entrada: EntradaTimeline): PatientTimeline {
   if (!entrada.patientId.trim()) throw new Error("Timeline exige patientId");
+  const treatments = tratamentoLongitudinal(entrada.fatos);
+  const pendencias = [...entrada.missingRequiredData];
+  if (treatments.some(t => t.em === null)) pendencias.push("TRATAMENTO_DATA_A_CONFERIR");
+  if (treatments.some(t => !t.sourceIds.length || t.sourceIds.some(id => !id.trim()))) pendencias.push("TRATAMENTO_FONTE_A_CONFERIR");
   const candidato = {
     patientId: entrada.patientId,
     stageHistory: historicoDeEstagios(entrada.fatos),
     historicalMetastaticDisease: entrada.historicalMetastaticDiseaseAnterior === true
       || historicalMetastaticDisease(entrada.fatos),
-    treatments: tratamentoLongitudinal(entrada.fatos),
+    treatments,
     // RECIST é calculado por código em src/rules/recist (faixa Astra/Grok): aqui não se calcula.
     recist: [],
-    missingRequiredData: [...new Set(entrada.missingRequiredData)].sort(),
+    missingRequiredData: [...new Set(pendencias)].sort(),
     unresolvedConflicts: [...new Set(entrada.conflitos.map((c) => c.id))].sort(),
   };
   return PatientTimeline.parse(candidato);
