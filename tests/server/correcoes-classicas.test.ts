@@ -7,6 +7,9 @@ import { criarGateway, memoriaIdempotencia } from "../../src/kernel/gateway/gate
 import { criarServidorLocal } from "../../src/server/http.js";
 import { reconciliarMedicamentos } from "../../src/server/medicamentos.js";
 import { aoCommitar } from "../../src/kernel/ledger/writeRouter.js";
+import * as portas from "../../src/kernel/comandos/portas.js";
+import { abrirAmbiente, cadastrarPaciente, criarDiretorio, removerDiretorio,
+  PACIENTE, ENCONTRO } from "../f0-fecha/fixtures/consulta-completa.js";
 import { confirmarBloco } from "../../src/server/rotas/confirmacao.js";
 import * as ledgerDb from "../../src/kernel/ledger/db.js";
 
@@ -93,6 +96,51 @@ it("CC-001: negativa com sessão ausente continua 409 e audita como SISTEMA", ()
   };
   expect(JSON.parse(auditoria.ator)).toEqual({ tipo: "SISTEMA", id: "confirmacao" });
   expect(auditoria).toMatchObject({ decisao: "NEGADA", motivoCodigo: "TESTE_NEGADA_SINTETICA" });
+});
+
+it("CC-006: REVISAO_ESTUDO_ALTERADA não vira REVISAO_ESTUDO_INVALIDA", async () => {
+  const dir = criarDiretorio();
+  const a = await abrirAmbiente(dir);
+  fechar.push(async () => { await a.close(); removerDiretorio(dir); });
+  cadastrarPaciente(a);
+  const contexto = { patientId: PACIENTE, encounterId: ENCONTRO, tumorLotId: null };
+  a.sessoes.selecionarConsulta(a.token, contexto);
+  const fonte = {
+    nome: "estudo-sintetico.json", mimeType: "application/json",
+    conteudo: JSON.stringify({
+      title: "Estudo inteiramente sintético", inclusionCriteria: ["ECOG igual a 1"],
+      exclusionCriteria: [], arms: [], outcomes: ["Desfecho sintético para documentação"],
+    }),
+    idempotencyKey: "importar-estudo-sintetico-cc006",
+  };
+  const importado = await a.request("/consulta/trials/importar", fonte);
+  expect(importado.status).toBe(200);
+  const estudo = importado.data as {
+    draftId: string; revision: number; candidateHash: string;
+    candidate: { title: { text: string; evidence: { locator: string }[] };
+      inclusionCriteria: { criterionId: string }[] };
+  };
+  const orig = portas.salvarDraft;
+  vi.spyOn(portas, "salvarDraft").mockImplementation((db, draft) => {
+    const salvo = orig(db, draft);
+    if (Array.isArray(draft.diagnostics) && draft.diagnostics.some((d) => d.startsWith("PROTOCOLO_")))
+      return { ...salvo, draftId: `${salvo.draftId}-mutado` };
+    return salvo;
+  });
+  const r = await a.request("/consulta/trials/revisar", {
+    draftId: estudo.draftId, expectedRevision: estudo.revision, candidateHash: estudo.candidateHash,
+    studyId: "ESTUDO-SINTETICO-AUD", decision: "CONFIRMAR",
+    titleText: estudo.candidate.title.text,
+    titleEvidenceLocator: estudo.candidate.title.evidence[0]!.locator,
+    bindings: estudo.candidate.inclusionCriteria.map((c) => ({
+      criterionId: c.criterionId, groupId: null, groupOperator: null,
+      expression: { kind: "EQUALS", factKey: "ecog", value: 1 },
+      applicability: "APLICAVEL", notApplicableReason: null,
+    })),
+    reviewedArmIds: [], idempotencyKey: "revisar-estudo-sintetico-cc006",
+  });
+  expect(r.status).toBe(409);
+  expect((r.data as { codigo: string }).codigo).toBe("REVISAO_ESTUDO_ALTERADA");
 });
 
 it("CC-005: exceção inesperada não vaza o texto no código HTTP", () => {
