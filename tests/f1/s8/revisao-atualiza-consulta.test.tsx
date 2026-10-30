@@ -178,10 +178,22 @@ it("recarga tardia do paciente anterior não substitui a visão do paciente atua
   await abrir(f);
   const botao = await prepararRevisao(f);
   const recarga = adiada<ConsultaVisao>();
-  f.carregar.mockImplementationOnce(() => recarga.promise);
+  const atual = f.carregar.getMockImplementation();
+  if (!atual) throw new Error("CARREGAR_SEM_IMPLEMENTACAO");
+  let pendurar = true;
+  f.carregar.mockImplementation(async (p, t, e) => {
+    if (pendurar && p === f.contexto.patientId && e === f.contexto.encounterId) {
+      pendurar = false;
+      return recarga.promise;
+    }
+    return atual(p, t, e);
+  });
+  const chamadasAntes = f.carregar.mock.calls.length;
   fireEvent.click(botao);
-  await screen.findByText(/Revisão registrada/);
+  await waitFor(() => expect(f.carregar.mock.calls.length).toBeGreaterThan(chamadasAntes));
+  expect(f.carregar).toHaveBeenLastCalledWith(f.contexto.patientId, f.contexto.tumorLotId, f.contexto.encounterId);
   fireEvent.change(screen.getByLabelText("Paciente da agenda"), { target: { value: f.outra.encounterId } });
+  await waitFor(() => expect(screen.queryByText("Abrindo consulta…")).toBeNull());
   await screen.findByRole("button", { name: "Reabrir histórico" });
   await act(async () => recarga.resolve(await f.snapshot(true)));
   expect(screen.getByRole("region", { name: "Visão clínica integrada" }).textContent).toContain(`Paciente ${f.outra.patientId}`);
