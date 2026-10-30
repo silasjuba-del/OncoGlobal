@@ -48,7 +48,12 @@ function diasEntre(hoje: string, medido: string): number | null {
   const a = /^(\d{4})-(\d{2})-(\d{2})/.exec(hoje);
   const b = /^(\d{4})-(\d{2})-(\d{2})/.exec(medido);
   if (!a || !b) return null;
-  const ms = (m: RegExpExecArray): number => Date.UTC(Number(m[1]), Number(m[2]) - 1, Number(m[3]));
+  // Date.UTC normaliza 30/02 para 02/03; data de calendário inexistente é ilegível (PENDENTE), nunca deslocada.
+  const ms = (m: RegExpExecArray): number => {
+    const ano = Number(m[1]), mes = Number(m[2]), dia = Number(m[3]);
+    const t = Date.UTC(ano, mes - 1, dia), d = new Date(t);
+    return d.getUTCFullYear() === ano && d.getUTCMonth() === mes - 1 && d.getUTCDate() === dia ? t : Number.NaN;
+  };
   const da = ms(a), db = ms(b);
   if (Number.isNaN(da) || Number.isNaN(db)) return null;
   return Math.round((da - db) / 86_400_000);
