@@ -110,3 +110,20 @@ it("resposta cadastral antiga não substitui o paciente selecionado depois", asy
   resolver({ codigo: "CADASTRO_MEDICO", contexto, eventId: "cadastro-A", historico: [], paciente: { patientId: contexto.patientId, nome: "Paciente A" } });
   await waitFor(() => expect((nome as HTMLInputElement).value).toBe("Paciente B"));
 });
+
+it("agenda comunica edicao pendente e salvamento sem perder campos na falha", async () => {
+  const pendente = vi.fn(), salvando = vi.fn();
+  let rejeitar!: (e: Error) => void;
+  const api = apiCom({ agenda: vi.fn().mockResolvedValue({ codigo: "AGENDA_MEDICA", itens: [], pacientes: [], retornos: [] }),
+    cadastrar: vi.fn().mockImplementation(() => new Promise((_ok, erro) => { rejeitar = erro; })) });
+  render(<AgendaMedica api={api} onSelecionar={vi.fn()} aoAlterarPendente={pendente} aoAlterarSalvando={salvando} />);
+  fireEvent.click(screen.getByLabelText("Cadastrar novo paciente"));
+  fireEvent.change(screen.getByLabelText("Nome do paciente"), { target: { value: "Paciente SINTETICO" } });
+  expect(pendente).toHaveBeenLastCalledWith(true);
+  fireEvent.click(screen.getByRole("button", { name: "Cadastrar e agendar" }));
+  expect(salvando).toHaveBeenLastCalledWith(true);
+  rejeitar(Error("REDE_INDISPONIVEL"));
+  await screen.findByRole("alert");
+  expect(salvando).toHaveBeenLastCalledWith(false);
+  expect(pendente).toHaveBeenLastCalledWith(true);
+});

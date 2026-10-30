@@ -1,7 +1,7 @@
 {
   "name": "oncoglobal",
   "version": "0.0.1",
-  "description": "OncoGlobal WORK — motor longitudinal de contexto oncológico (PLANO v1.1)",
+  "description": "OncoGlobal WORK \u00e2\u20ac\u201d motor longitudinal de contexto oncol\u00c3\u00b3gico (PLANO v1.1)",
   "directories": {
     "doc": "docs",
     "test": "tests"
@@ -21,7 +21,12 @@
     "verify:f1": "npm run check:boundaries:fechar-f1-s3 && npm run test:f1",
     "test:medico-m123": "node scripts/test-medico-m123.mjs",
     "cli": "node scripts/oncoglobal-cli.mjs",
-    "mcp": "node scripts/oncoglobal-mcp.mjs"
+    "mcp": "node scripts/oncoglobal-mcp.mjs",
+    "pdfforge:install": "npm ci --prefix apps/pdfforge",
+    "pdfforge:build": "npm run build --prefix apps/pdfforge",
+    "pdfforge:test": "npm test --prefix apps/pdfforge",
+    "pdfforge:start": "npm start --prefix apps/pdfforge",
+    "pdfforge:smoke": "node scripts/test-pdfforge.mjs"
   },
   "repository": {
     "type": "git",

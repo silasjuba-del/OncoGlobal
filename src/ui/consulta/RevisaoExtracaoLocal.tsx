@@ -10,9 +10,10 @@ export type RevisaoExtracaoConfirmada = {
 };
 
 /** Linked sources are reviewed locally, independently of provider availability. */
-export function RevisaoExtracaoLocal({ porta, contexto, patientLabel, aoFatosConfirmados, aoConfirmarRevisao, fonteSolicitada }: {
+export function RevisaoExtracaoLocal({ porta, contexto, patientLabel, aoFatosConfirmados, aoConfirmarRevisao, fonteSolicitada, aoConsumirFonteSolicitada }: {
   porta: PortaConsulta; contexto: PedidoBundle; patientLabel?: string; aoFatosConfirmados?: (contexto: PedidoBundle) => void;
   aoConfirmarRevisao?: (revisao: RevisaoExtracaoConfirmada) => void;
+  aoConsumirFonteSolicitada?: (id: string) => void;
   fonteSolicitada?: {draftId:string;solicitacaoId:string};
 }) {
   const qualificadoresId = useId();
@@ -57,9 +58,9 @@ export function RevisaoExtracaoLocal({ porta, contexto, patientLabel, aoFatosCon
   useEffect(()=>{
     if(!fonteSolicitada || solicitacaoAtendida.current === fonteSolicitada.solicitacaoId) return;
     if(fontes.some(f=>f.draftId===fonteSolicitada.draftId)) {
-      solicitacaoAtendida.current=fonteSolicitada.solicitacaoId;void abrir(fonteSolicitada.draftId);
+      solicitacaoAtendida.current=fonteSolicitada.solicitacaoId;aoConsumirFonteSolicitada?.(fonteSolicitada.solicitacaoId);void abrir(fonteSolicitada.draftId);
     } else if(fontesSemVinculo.some(f=>f.draftId===fonteSolicitada.draftId)) {
-      solicitacaoAtendida.current=fonteSolicitada.solicitacaoId;void abrirPendente(fonteSolicitada.draftId);
+      solicitacaoAtendida.current=fonteSolicitada.solicitacaoId;aoConsumirFonteSolicitada?.(fonteSolicitada.solicitacaoId);void abrirPendente(fonteSolicitada.draftId);
     }
   },[fonteSolicitada,fontes,fontesSemVinculo]);
   function mesmoContexto(c: { patientId: string; encounterId: string; tumorLotId: string | null }) {

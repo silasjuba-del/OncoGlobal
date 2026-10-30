@@ -17,10 +17,14 @@ export function EnviarOncoGlobal({ original, documento, obterDerivado }: {
     if (!ponte) { setMensagem('Abra no aplicativo desktop para exportar o pacote local.'); return; }
     emCurso.current = true; setOcupado(true); setMensagem('');
     try {
-      const paginasExtraidas: { pagina: number; texto: string }[] = [];
-      for (let n = 1; n <= documento.numPages; n++) {
+      let paginasExtraidas: { pagina: number; texto: string }[] = [];
+      let textoOmitido = documento.numPages > 1000, totalTexto = 0;
+      for (let n = 1; n <= documento.numPages && !textoOmitido; n++) {
         const conteudo = await (await documento.getPage(n)).getTextContent();
-        paginasExtraidas.push({ pagina: n, texto: conteudo.items.map(x => 'str' in x ? x.str : '').join(' ') });
+        const texto = conteudo.items.map(x => 'str' in x ? x.str : '').join(' ');
+        totalTexto += texto.length;
+        if (totalTexto > 200000) { textoOmitido = true; paginasExtraidas = []; }
+        else paginasExtraidas.push({ pagina: n, texto });
       }
       const anotacoes = getLibrary().annotations.filter(a => a.docKey === docKeyOf(original)).map(a => ({
         id: a.id, pagina: a.page, texto: a.text, autorTipo: a.source === 'ai' ? 'IA' as const : 'USUARIO' as const,
@@ -29,7 +33,7 @@ export function EnviarOncoGlobal({ original, documento, obterDerivado }: {
       const derivado = await obterDerivado?.();
       const resultado = await ponte({ original, autor: autor.trim(), paginasExtraidas, anotacoes, ...(derivado ? { derivado } : {}) });
       if (!resultado.ok) throw Error(resultado.codigo ?? 'EXPORTACAO_FALHOU');
-      setMensagem(`Pacote local salvo em ${resultado.caminho}. No OncoGlobal, selecione o encontro e importe em Documentos. Recebido não significa revisado.`);
+      setMensagem(`Pacote local salvo em ${resultado.caminho}.${textoOmitido ? " Texto auxiliar excedeu o limite e foi omitido; PDF original preservado integralmente." : ""} No OncoGlobal, selecione o encontro e importe em Documentos. Recebido não significa revisado.`);
     } catch (erro) { setMensagem(erro instanceof Error ? erro.message : 'EXPORTACAO_FALHOU'); }
     finally { emCurso.current = false; setOcupado(false); }
   }

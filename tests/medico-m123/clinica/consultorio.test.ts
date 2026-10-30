@@ -148,7 +148,13 @@ it("agendamento de retorno exige ação explícita, usa a tarefa e não a agenda
   expect(a.agenda().itens).toHaveLength(2);
   expect(a.call("/medico/agenda/agendar", pedido).status).toBe(200);
   expect(a.call("/medico/agenda/agendar", { ...pedido, operationId: "outro-retorno" }).status).toBe(409);
-  expect(a.agenda().itens).toHaveLength(2);
+  const agendado = OperacaoAgendaResposta.parse(a.call("/medico/agenda/agendar", pedido).body);
+  expect(a.call("/medico/agenda/alterar", { patientId: agendado.contexto.patientId, encounterId: agendado.contexto.encounterId,
+    operationId: "cancelar-retorno", expectedEventId: agendado.eventId, acao: "CANCELAR", motivo: "Pedido sintetico" }).status).toBe(201);
+  expect(a.agenda().retornos).toHaveLength(1);
+  expect(a.call("/medico/agenda/agendar", { ...pedido, operationId: "retorno-reagendado" }).status).toBe(201);
+  expect(a.agenda().retornos).toHaveLength(0);
+  expect(a.agenda().itens).toHaveLength(3);
 });
 
 it("recibo adulterado não confirma replay de outra identidade", () => {

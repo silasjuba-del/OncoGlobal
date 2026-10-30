@@ -59,7 +59,14 @@ function fontesDoContexto(deps: ServidorDeps, contexto: ContextoConversa, inclui
       const fato = retrato!.fatos.find(f => mesmo(f.ref, ref));
       if (!fato) throw new Recusa("REFERENCIA_NAO_VIGENTE");
       const id = `evento:${ref.eventId}`;
-      if (fontes.some(f => f.id === id)) continue;
+      const existente = fontes.find(f => f.id === id);
+      if (existente) {
+        const texto = `${existente.texto}\n${resumo.texto}`;
+        if (texto.length > 12000) throw new Recusa("FONTES_EXCESSIVAS_SELECIONE_MENOS");
+        existente.texto = texto;
+        existente.hash = hash({ fato, texto });
+        continue;
+      }
       fontes.push(FonteConversa.parse({ id, tipo: "PRONTUARIO", titulo: fato.campo ?? fato.tipo,
         texto: resumo.texto.slice(0, 12000), hash: hash(fato), revisao: `CONFIRMADO · ${ref.revisao}`,
         eventId: ref.eventId, draftId: null, sourceId: fato.fontes[0]?.sourceId ?? null, pagina: null,
@@ -183,7 +190,8 @@ export async function operarConversa(deps: ServidorDeps, token: string, url: str
     transacao(deps.db, () => { if (lerDraft(deps.db, id)) throw new Recusa("OPERACAO_EM_CURSO"); persistir(turno, 0); });
     const controller = new AbortController();
     const mapa = ativas.get(deps.db) ?? new Map<string, AbortController>(); mapa.set(id, controller); ativas.set(deps.db, mapa);
-    const abort = AbortSignal.any([controller.signal, ...(signal ? [signal] : []), AbortSignal.timeout(45_000)]);
+    const timeout = AbortSignal.timeout(45_000);
+    const abort = AbortSignal.any([controller.signal, ...(signal ? [signal] : []), timeout]);
     const exigirReserva = () => {
       const d = lerDraft(deps.db, id);
       if (!d || d.revision !== 0 || registro(d.payload).turno.estado !== "EM_CURSO") throw new Recusa("CONVERSA_CANCELADA");
@@ -214,11 +222,12 @@ export async function operarConversa(deps: ServidorDeps, token: string, url: str
         return { status: 200, body: RespostaConversa.parse({ codigo: "CONVERSA_CONCLUIDA", contexto, turno: final }) };
       });
     } catch (error) {
-      const codigo = error instanceof Recusa ? error.codigo : abort.aborted ? "CONVERSA_CANCELADA"
+      const cancelada = controller.signal.aborted || signal?.aborted === true;
+      const codigo = timeout.aborted && !cancelada ? "MODELO_LOCAL_TIMEOUT" : error instanceof Recusa ? error.codigo : abort.aborted ? "CONVERSA_CANCELADA"
         : error instanceof Error && codigosModelo.has(error.message) ? error.message : "CONVERSA_RESPOSTA_INVALIDA";
       const atual = lerDraft(deps.db, id);
       if (atual?.revision === 0 && registro(atual.payload).turno.estado === "EM_CURSO")
-        persistir(TurnoConversa.parse({ ...turno, estado: abort.aborted ? "CANCELADA" : "FALHOU", codigo, concluidoEm: deps.agora() }), 1);
+        persistir(TurnoConversa.parse({ ...turno, estado: cancelada ? "CANCELADA" : "FALHOU", codigo, concluidoEm: deps.agora() }), 1);
       throw new Recusa(codigo);
     } finally { mapa.delete(id); if (!mapa.size) ativas.delete(deps.db); }
   } catch (error) {

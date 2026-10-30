@@ -54,7 +54,7 @@ export async function responderModeloLocal(config: ModeloConversa, pergunta: str
     const saida = Saida.parse(JSON.parse(conteudo));
     for (const c of saida.citacoes) {
       const fonte = fontes.find(f => f.id === c.fonteId);
-      if (!fonte || !fonte.texto.includes(c.trecho)) throw Error("CITACAO_NAO_SUSTENTADA");
+      if (!fonte || !c.trecho.trim() || !fonte.texto.includes(c.trecho)) throw Error("CITACAO_NAO_SUSTENTADA");
     }
     return saida;
   } finally { await reader.cancel().catch(() => {}); }

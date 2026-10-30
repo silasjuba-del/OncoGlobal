@@ -1,4 +1,22 @@
-# Ponte documental PDFForge
+# PDFforge completo integrado ao OncoGlobal
+
+O aplicativo original do Claude foi incorporado em `apps/pdfforge`, conservando Electron, editor, ferramentas PDF, biblioteca e telas existentes. `original-sha256.json` registra os 88 arquivos recebidos antes da ponte; não inclui dependências, builds, configurações pessoais nem documentos de pacientes. A pasta original externa não foi alterada.
+
+Da raiz do OncoGlobal:
+
+```powershell
+npm run pdfforge:install
+npm run pdfforge:build
+npm run pdfforge:start
+```
+
+Use o botão **Enviar ao OncoGlobal — pacote local** do visualizador/editor e importe o arquivo em **Documentos e PDF** no encontro selecionado. O aplicativo desktop mantém suas funções originais; a ponte transporta original, derivado e anotações sem promover fatos, assinar ou transmitir à nuvem. As funções opcionais de IA/sites do aplicativo original são separadas desse transporte e mantêm sua configuração explícita. O aplicativo completo não é exclusivamente offline quando essas funções são utilizadas.
+
+Verificação: `npm run pdfforge:test` executa a suíte própria (React 18/Vitest 2); `npm run pdfforge:smoke` usa Electron real com PDF e userData sintéticos. A CI exige os dois, o build e as jornadas HTTP do OncoGlobal. A suíte raiz não coleta a suíte Electron porque as versões são diferentes; ambas são gates obrigatórios.
+
+Abaixo, o contrato da ponte e o histórico de validação anterior à incorporação.
+
+# Contrato da ponte documental
 
 Esta pasta contém a ponte revisável; não incorpora o app Electron inteiro nem muda suas dependências. O original PDFForge sem Git foi preservado. A cópia de teste local está no diretório de coordenação indicado no plano M123.
 

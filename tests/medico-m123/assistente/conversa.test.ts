@@ -2,7 +2,7 @@ import { mkdtempSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { createServer, type ServerResponse } from "node:http";
-import { afterEach, describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import { abrirLedger } from "../../../src/kernel/ledger/db.js";
 import { confirmar } from "../../../src/kernel/ledger/writeRouter.js";
 import { lerDraft, listarDrafts, listarEventos, salvarDraft } from "../../../src/kernel/comandos/portas.js";
@@ -225,4 +225,35 @@ it("preserva instantes do servidor com offset na conversa e na reabertura", asyn
   const h = HistoricoConversa.parse((await a.post("historico", contexto)).body);
   expect(h.turnos[0]?.id).toBe(turno.id);
   expect(h.turnos[0]?.estado).toBe("CONCLUIDA");
+});
+
+it("timeout do modelo fica FALHOU, distinto de cancelamento medico", async () => {
+  const a = ambiente(), controlador = new AbortController();
+  const m = await modelo(() => controlador.abort(new DOMException("Prazo excedido", "TimeoutError")));
+  await configurar(a, m.endpoint);
+  const spy = vi.spyOn(AbortSignal, "timeout").mockReturnValue(controlador.signal);
+  try {
+    const r = await a.post("responder", pedido("timeout", "MODELO_LOCAL"));
+    expect(r.body).toEqual({ codigo: "MODELO_LOCAL_TIMEOUT" });
+    const h = HistoricoConversa.parse((await a.post("historico", contexto)).body);
+    expect(h.turnos[0]).toMatchObject({ estado: "FALHOU", codigo: "MODELO_LOCAL_TIMEOUT" });
+  } finally { spy.mockRestore(); }
+});
+it("citacao somente em branco e recusada", async () => {
+  const a = ambiente();
+  const m = await modelo(res => { res.writeHead(200, { "Content-Type": "text/event-stream" });
+    emitir(res, JSON.stringify({ texto: "Proposta sintetica", citacoes: [{ fonteId: "documento:fonte", trecho: " " }] })); fim(res); });
+  await configurar(a, m.endpoint);
+  expect((await a.post("responder", pedido("branco", "MODELO_LOCAL"))).body).toEqual({ codigo: "CITACAO_NAO_SUSTENTADA" });
+});
+it("todas as entradas de resumo do mesmo evento chegam a fonte e briefing", async () => {
+  const a = ambiente();
+  const ref = { eventId: "evento-composto", revisao: "CONFIRMADO" };
+  Object.assign(a.deps, { motorF1: { retrato: () => ({ ...contexto,
+    resumo: [{ texto: "CID SINTETICO", fatos: [ref] }, { texto: "Histologia SINTETICA", fatos: [ref] }, { texto: "Estadio SINTETICO", fatos: [ref] }],
+    fatos: [{ ref, campo: "tumor", tipo: "TumorLot", fontes: [], tempoClinico: null }] }) } });
+  const h = HistoricoConversa.parse((await a.post("historico", contexto)).body);
+  expect(h.fontes.find(f => f.eventId === ref.eventId)?.texto).toBe("CID SINTETICO\nHistologia SINTETICA\nEstadio SINTETICO");
+  const r = RespostaConversa.parse((await a.post("responder", { ...pedido("composto"), fontesIds: ["evento:evento-composto"] })).body);
+  expect(r.turno.texto).toContain("Histologia SINTETICA"); expect(r.turno.texto).toContain("Estadio SINTETICO");
 });

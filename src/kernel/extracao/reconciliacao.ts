@@ -322,7 +322,7 @@ export function conflitoLateralidade(fatos: readonly ClinicalFact[]): ReviewExce
 /** TNM incompatível entre avaliações do mesmo tipo (ex.: cT2 e cT4 coexistentes). */
 export function conflitoTnm(fatos: readonly ClinicalFact[]): ReviewException | null {
   const stages = fatos.filter((f) => f.domain === "stage");
-  const literais = new Set(stages.map((f) => JSON.stringify(f.value ?? "")));
+  const literais = new Set(stages.map((f) => literalDoEstagio(f)));
   if (literais.size < 2) return null;
   const tipos = new Set(stages.map((f) => {
     const v = typeof f.value === "object" && f.value !== null ? f.value as Record<string, unknown> : {};

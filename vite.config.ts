@@ -53,6 +53,7 @@ export default defineConfig(async () => {
       // exceto se o comando for executado na propria fixture controlada.
       exclude: [
         ...configDefaults.exclude,
+        "apps/pdfforge/**", // Suite propria: npm run pdfforge:test (React 18 / Vitest 2).
         ...(comAdv ? (raizFixture ? [] : [`**/${PASTA_FIXTURE}/${PASTA_ADV}/**`])
           : [`**/${PASTA_ADV}/**`]),
       ],

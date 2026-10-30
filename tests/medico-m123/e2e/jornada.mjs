@@ -76,7 +76,7 @@ export async function executarJornadaMedicoM123() {
     });
     await new Promise((ok, falha) => { modelo.once('error', falha); modelo.listen(0, '127.0.0.1', ok); });
     const endpointModelo = `http://127.0.0.1:${modelo.address().port}/v1`;
-    vite = await criarVite({ root: ROOT, configFile: join(ROOT, 'vite.config.ts'), cacheDir: join(evidencias, 'vite-cache'),
+    vite = await criarVite({ root: ROOT, configFile: join(ROOT, 'vite.config.ts'), cacheDir: join(dir, 'vite-cache'),
       server: { host: '127.0.0.1', port: uiPort, strictPort: true } });
     await vite.listen();
     const fixture = await vite.ssrLoadModule('/tests/f1/s12/fixtures/servidor-demo-b2.ts');

@@ -99,6 +99,7 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp, perfil = "MEDIC
   const [apacSalvando,setApacSalvando]=useState(false);
   const [estudoPendente,setEstudoPendente]=useState(false);
   const [estudoSalvando,setEstudoSalvando]=useState(false);
+  const [agendaPendente,setAgendaPendente]=useState(false), [agendaSalvando,setAgendaSalvando]=useState(false);
   const [cadastroPendente,setCadastroPendente]=useState(false);
   const [prePendente,setPrePendente]=useState(false), [nutricaoPendente,setNutricaoPendente]=useState(false);
   const [assistentePendente,setAssistentePendente]=useState(false), [assistenteOcupado,setAssistenteOcupado]=useState(false);
@@ -115,8 +116,8 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp, perfil = "MEDIC
   useEffect(()=>{setDocumentoProposto(null);setFonteSolicitada(null);setEvidencia(null);setTextoDitado(null);setDitadoAberto(false);
     setCadastroPendente(false);setPrePendente(false);setNutricaoPendente(false);setAssistentePendente(false);setFlashPendente(false);
   },[contexto?.patientId,contexto?.encounterId,contexto?.tumorLotId]);
-  const edicaoPendente = cadastroPendente || prePendente || nutricaoPendente || assistentePendente || flashPendente || transcricaoPendente || prescricaoPendente || apacPendente || estudoPendente;
-  const salvamentoEmCurso = documentalOcupado || transferindo || flashSalvando || assistenteOcupado || transcricaoSalvando || prescricaoSalvando || apacSalvando || estudoSalvando;
+  const edicaoPendente = agendaPendente || cadastroPendente || prePendente || nutricaoPendente || assistentePendente || flashPendente || transcricaoPendente || prescricaoPendente || apacPendente || estudoPendente;
+  const salvamentoEmCurso = agendaSalvando || documentalOcupado || transferindo || flashSalvando || assistenteOcupado || transcricaoSalvando || prescricaoSalvando || apacSalvando || estudoSalvando;
   const removerProtecaoDocumento=useRef<(() => void) | null>(null);
   useEffect(() => {
     if (!edicaoPendente && !salvamentoEmCurso) return;
@@ -213,7 +214,7 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp, perfil = "MEDIC
     try {
       const h = await porta.assistente.historico(c);
       if (g !== geracao.current || contextoAtual.current !== c) return;
-      const f = h.fontes.find(x => (ref.draftId && x.draftId === ref.draftId) || (ref.eventId && x.eventId === ref.eventId) || (ref.sourceId && x.sourceId === ref.sourceId));
+      const f = h.fontes.find(x => ref.draftId ? x.draftId === ref.draftId : ref.eventId ? x.eventId === ref.eventId : !!ref.sourceId && x.sourceId === ref.sourceId);
       if (!f) throw Error("FONTE_NAO_VIGENTE");setEvidencia(f);
     } catch { if(g===geracao.current)setMensagem("A fonte não está disponível nesta revisão do encontro."); }
   }
@@ -435,7 +436,7 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp, perfil = "MEDIC
       </nav>
       </div>
       {ocupado ? <p role="status">Abrindo consulta…</p> : null}
-      {modoMedico && tela === "agenda" && porta.consultorio && <AgendaMedica api={porta.consultorio} onSelecionar={(c,nome)=>solicitarNavegacaoVoluntaria(()=>{
+      {modoMedico && tela === "agenda" && porta.consultorio && <AgendaMedica aoAlterarPendente={setAgendaPendente} aoAlterarSalvando={setAgendaSalvando} api={porta.consultorio} onSelecionar={(c,nome)=>solicitarNavegacaoVoluntaria(()=>{
         const entrada={patientId:c.patientId,encounterId:c.encounterId,nome:nome??c.patientId,horario:""};
         setAgenda(a=>[...a.filter(x=>x.encounterId!==c.encounterId),entrada]);setTela("consulta");void abrir(c.encounterId,entrada);
       })} />}
@@ -516,7 +517,7 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp, perfil = "MEDIC
           aoAlternar={() => alternarGrupo("consulta-revisao")}
           aoFocarSomenteEste={() => focarGrupo("consulta-revisao")}
         >
-        <RevisaoExtracaoLocal key={versaoFontes} porta={porta} contexto={contexto} {...(fonteSolicitada ? {fonteSolicitada} : {})}
+        <RevisaoExtracaoLocal aoConsumirFonteSolicitada={id=>setFonteSolicitada(atual=>atual?.solicitacaoId===id?null:atual)} key={versaoFontes} porta={porta} contexto={contexto} {...(fonteSolicitada ? {fonteSolicitada} : {})}
           aoFatosConfirmados={(confirmado)=>{
             const ativo=contextoAtual.current;
             if(geracao.current!==geracaoTela||!ativo||ativo.patientId!==confirmado.patientId||ativo.encounterId!==confirmado.encounterId
@@ -589,8 +590,9 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp, perfil = "MEDIC
             }
           }} style={{ width: "min(32rem, 100%)", boxSizing: "border-box", padding: "1.25rem", borderRadius: ".75rem",
             background: "var(--consulta-surface, #fff)", color: "var(--consulta-text, #172033)", boxShadow: "0 20px 60px rgba(0,0,0,.28)" }}>
-          <h2 id="transcricao-navegacao-titulo">{cadastroPendente || prePendente || nutricaoPendente || assistentePendente || flashPendente ? "Alterações não salvas" : apacPendente ? "APAC em edição" : estudoPendente ? "Estudo em edição"
+          <h2 id="transcricao-navegacao-titulo">{agendaPendente || cadastroPendente || prePendente || nutricaoPendente || assistentePendente || flashPendente ? "Alterações não salvas" : apacPendente ? "APAC em edição" : estudoPendente ? "Estudo em edição"
             : prescricaoPendente ? "Prescrição em edição" : "Transcrição não salva"}</h2>
+          {agendaPendente ? <p>A agenda possui dados ainda nao salvos.</p> : null}
           {cadastroPendente ? <p>Há alterações cadastrais não salvas. Continue editando para revisar e salvar a correção.</p> : null}
           {prePendente ? <p>A pré-consulta contém texto ainda não salvo.</p> : null}
           {nutricaoPendente ? <p>A orientação dietética contém alterações ainda não salvas.</p> : null}

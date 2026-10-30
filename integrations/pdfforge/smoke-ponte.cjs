@@ -6,8 +6,9 @@ const os = require('node:os');
 const { createHash } = require('node:crypto');
 // O teste não exige GPU; evita dependência do driver gráfico da estação Windows.
 app.disableHardwareAcceleration();
-const raiz = path.resolve(process.argv[2] || '');
-if (!process.argv[2] || !fs.existsSync(path.join(raiz, 'electron/services/oncoglobal-export.cjs'))) throw Error('COPIA_COM_PONTE_OBRIGATORIA');
+const destino = process.env.PDFFORGE_SMOKE_ROOT || process.argv[2];
+const raiz = path.resolve(destino || '');
+if (!destino || !fs.existsSync(path.join(raiz, 'electron/services/oncoglobal-export.cjs'))) throw Error('COPIA_COM_PONTE_OBRIGATORIA');
 const dados = fs.mkdtempSync(path.join(os.tmpdir(), 'pdfforge-m123-smoke-'));
 app.setPath('userData', dados);
 process.env.PDFFORGE_LLM_MOCK = '1';

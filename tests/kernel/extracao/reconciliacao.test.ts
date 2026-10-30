@@ -152,3 +152,9 @@ describe("FUGU-07 · conflitos clínicos detectados", () => {
     expect(detectarConflitos([a])).toEqual([]);
   });
 });
+
+it("mesmo literal TNM com metadados de sistema distintos nao cria incompatibilidade", () => {
+  const a = fato({ domain: "stage", sourceType: "medical_note", value: { literal: "cT2N0M0", tipo: "CLINICO", sistema: "AJCC 8" } });
+  const b = fato({ ...a, id: "outra-fonte", sourceId: "outra-fonte", value: { literal: "cT2N0M0", tipo: "CLINICO", sistema: "AJCC 9" } });
+  expect(detectarConflitos([a, b]).some(c => /TNM/.test(c.reason))).toBe(false);
+});

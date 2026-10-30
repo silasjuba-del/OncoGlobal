@@ -18,6 +18,14 @@ import type { ClinicalEvent } from "../contracts/operacao.js";
 import type { ServidorDeps } from "./rotas.js";
 
 class Recusa extends Error { constructor(readonly codigo: string, readonly status = 409) { super(codigo); } }
+function retornosAgendados(vigentes: readonly ClinicalEvent[], todos: readonly ClinicalEvent[]) {
+  return new Set(vigentes.filter(e => e.tipo === "ReviewDecision").flatMap(e => {
+    const d = dadosDoEvento(e);
+    if (d?.acao !== "AGENDAR_RETORNO" || !d.tarefaRetornoId) return [];
+    return vigentes.some(a => a.tipo === "AgendaEntry" && a.patientId === e.patientId
+      && a.encounterId === d.encounterId && agendaCancelada(a, todos) === null) ? [d.tarefaRetornoId] : [];
+  }));
+}
 const AgendaEvento = z.object({ patientId: z.string(), encounterId: z.string(), data: z.iso.date(), horario: z.string() }).strict();
 const Cancelamento = z.object({ campo: z.literal("agenda"), acao: z.literal("CANCELAR"), agendaEventId: z.string(),
   patientId: z.string(), encounterId: z.string(), motivo: z.string(), atorId: z.string(), em: Instante }).strict();
@@ -187,7 +195,7 @@ export function operarConsultorio(deps: ServidorDeps, token: string, rota: strin
           return [{ ...a.data, nome: ps[0]!.nome, eventId: e.eventId, cancelado: motivo !== null, motivo,
             preConsulta: !r ? "AUSENTE" : nota ? "REGISTRADA" : "RASCUNHO" }];
         }).sort((a, b) => `${a.data} ${a.horario}`.localeCompare(`${b.data} ${b.horario}`));
-        const agendados = new Set(vigentes.filter(e => e.tipo === "ReviewDecision").map(e => dadosDoEvento(e)?.tarefaRetornoId));
+        const agendados = retornosAgendados(vigentes, todos);
         const retornos = vigentes.filter(e => e.tipo === "Tarefa").flatMap(e => {
           const t = Tarefa.safeParse(dadosDoEvento(e));
           return t.success && t.data.retornoRef && ["CONFIRMADA", "RASCUNHO"].includes(t.data.estado) && !agendados.has(t.data.tarefaId)
@@ -232,7 +240,7 @@ export function operarConsultorio(deps: ServidorDeps, token: string, rota: strin
             const candidatas = vigentes.filter(e => e.tipo === "Tarefa" && e.patientId === pedido.patientId && dadosDoEvento(e)?.tarefaId === pedido.tarefaRetornoId);
             if (candidatas.length !== 1 || !Tarefa.parse(dadosDoEvento(candidatas[0]!)).retornoRef
               || !["CONFIRMADA", "RASCUNHO"].includes(Tarefa.parse(dadosDoEvento(candidatas[0]!)).estado)
-              || vigentes.some(e => e.tipo === "ReviewDecision" && dadosDoEvento(e)?.tarefaRetornoId === pedido.tarefaRetornoId)) throw new Recusa("RETORNO_JA_AGENDADO_OU_INVALIDO");
+              || retornosAgendados(vigentes, todos).has(pedido.tarefaRetornoId)) throw new Recusa("RETORNO_JA_AGENDADO_OU_INVALIDO");
             registros.push({ tipo: "ReviewDecision", payload: { campo: "agenda", acao: "AGENDAR_RETORNO", tarefaRetornoId: pedido.tarefaRetornoId,
               encounterId: contexto.encounterId, patientId: contexto.patientId, atorId: sessao.medicoId, em } });
           }
