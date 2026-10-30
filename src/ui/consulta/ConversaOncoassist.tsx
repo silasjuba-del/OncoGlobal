@@ -1,3 +1,4 @@
+import { provenienciaDoTurno, type ProvenienciaDocumentoConversa } from "../../contracts/api/conversaOncoassist.js";
 import { LIMITE_TEXTO_DOCUMENTO_MANUAL } from "../../contracts/api/flash.js";
 import { useEffect, useRef, useState } from "react";
 import type { ApiConversaOncoassist, ContextoConversa, FonteConversa, HistoricoConversa, PreferenciasConversa, TurnoConversa } from "../../contracts/api/conversaOncoassist.js";
@@ -13,7 +14,7 @@ export interface ConversaOncoassistProps {
   api: ApiConversaOncoassist;
   contexto: ContextoConversa;
   aoAbrirFonte?: (fonte: { draftId?: string; eventId?: string; sourceId?: string }) => void;
-  aoUsarTexto?: (texto: string) => void | boolean | Promise<void | boolean>;
+  aoUsarTexto?: (texto: string, proveniencia: ProvenienciaDocumentoConversa) => void | boolean | Promise<void | boolean>;
   aoDitar?: () => void;
   textoDitado?: { id: string; texto: string };
   aoAlterarPendente?: (pendente: boolean) => void;
@@ -141,7 +142,7 @@ export function ConversaOncoassist({ api, contexto, aoAbrirFonte, aoUsarTexto, a
           {f?.tipo === "BIBLIOTECA" && urlBibliografica(f.url) ? <a href={urlBibliografica(f.url)!} target="_blank" rel="noopener noreferrer">Conferir referência bibliográfica</a> : null}</li>; })}</ul>
         {edicao.length > LIMITE_TEXTO_DOCUMENTO_MANUAL ? <p role="alert">O documento aceita até 8.000 caracteres. Revise ou selecione um trecho; nada será cortado automaticamente.</p> : null}
         {aoUsarTexto ? <button type="button" disabled={ocupado || !edicao.trim() || edicao.length > LIMITE_TEXTO_DOCUMENTO_MANUAL} onClick={async () => {
-          try { const aceito = await aoUsarTexto(edicao); if (aceito !== false) setTransferido(edicao); }
+          try { const aceito = await aoUsarTexto(edicao, provenienciaDoTurno(contexto, resultado)); if (aceito !== false) setTransferido(edicao); }
           catch { setErro("O documento não foi preparado; a edição foi preservada."); }
         }}>Preparar documento com texto revisado</button> : null}
       </section> : null}

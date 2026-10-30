@@ -1,3 +1,4 @@
+import { appendCaptureFrame, type CaptureFrame as Frame } from '../../ai/captureFrames';
 import { createCaptureLifetime } from '../../ai/captureLifetime';
 // Captura de tela: foto, vídeo (com áudio do sistema no Windows) e gravador de frames de 10–20 s para rolagem de
 // TC/RM. Tudo fica local até o usuário enviar à IA; a análise de frames é rotulada como apoio, não laudo.
@@ -21,12 +22,6 @@ interface Rect {
   y: number;
   w: number;
   h: number;
-}
-interface Frame {
-  url: string;
-  bytes: Uint8Array;
-  t: number;
-  keep: boolean;
 }
 
 const toBytes = (canvas: HTMLCanvasElement, type: string, q?: number) =>
@@ -110,17 +105,22 @@ export function CapturePage() {
 
   const recordFrames = () => {
     const recursos = lifetime.current;
-    const out: Frame[] = [];
+    let stopped = false, capturing = false;
     const start = Date.now();
     setFrames([]);
     setRecording({ until: start + seconds * 1000 });
     const iv = setInterval(async () => {
-      const f = await grab('image/jpeg', 0.9);
-      if (!recursos?.isActive()) return;
-      out.push({ ...f, t: (Date.now() - start) / 1000, keep: true });
-      setFrames([...out]);
+      if (capturing || stopped) return;
+      capturing = true; const capturedAt = (Date.now() - start) / 1000;
+      try {
+        const f = await grab('image/jpeg', 0.9);
+        if (stopped || !recursos?.isActive()) return;
+        setFrames(current => appendCaptureFrame(current, { ...f, t: capturedAt }));
+      } catch (error) { stop(); if (recursos?.isActive()) actions.toast((error as Error).message, 'error'); }
+      finally { capturing = false; }
     }, 1000 / fps);
     const stop = () => {
+      stopped = true;
       clearInterval(iv);
       clearTimeout(to);
       if (recursos?.isActive()) setRecording(null);

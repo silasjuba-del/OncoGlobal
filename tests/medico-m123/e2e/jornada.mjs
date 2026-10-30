@@ -308,6 +308,13 @@ export async function executarJornadaMedicoM123() {
     await previa.getByRole('button', { name: 'Confirmar e assinar conteúdo exibido', exact: true }).click();
     const historico = page.getByRole('region', { name: 'Histórico de documentos assinados', exact: true });
     await historico.getByText(TEXTO_ORIENTACAO_ASSINADA, { exact: false }).first().waitFor();
+    const documentoAssistente = assinados().map(e => e.payload.data?.data).find(d => d?.documentoManual?.proveniencia);
+    assert.ok(documentoAssistente, 'documento assinado conserva snapshot de proveniencia do assistente');
+    const proveniencia = documentoAssistente.documentoManual.proveniencia;
+    assert.equal(documentoAssistente.origemConteudo, 'PROPOSTA_ASSISTENTE_REVISADA');
+    assert.deepEqual(proveniencia.contexto, contexto);
+    assert.ok(proveniencia.citacoes.some(c => c.trecho === TEXTO_FONTE));
+    assert.ok(documentoAssistente.texto.includes(proveniencia.turnoId));
     const ids = assinados().map(e => e.eventId).sort(), hashDocumentos = sha(assinados());
     assert.ok(ids.length > 0 && ids.every(id => typeof id === 'string' && id.length)); assert.equal(new Set(ids).size, ids.length);
     log({ etapa, falhaRedePreservouOrientacao: true, documentos: ids.length, assinaturaExplicita: true });
@@ -346,7 +353,7 @@ export async function executarJornadaMedicoM123() {
     await page.getByRole('region', { name: 'Agenda médica', exact: true }).locator('li').filter({ hasText: `${dataRetorno} ·` }).filter({ hasText: PACIENTE }).waitFor();
     assert.deepEqual(errosPagina, []); assert.deepEqual(requisicoesExternas, []);
     const resultado = { codigo: 'M123_E2E_APROVADO', contexto, pacoteId: pacote.pacoteId, sourceId, documentos: ids.length,
-      hashDocumentos, upstreamChamadas: chamadasModelo, dataRetorno, cancelamentoDuravel: true, navegacaoProtegida: true, originalReaberto: true, derivadoConferido: true, metadadoDivergenteRecusado: true, preConsultaReaberta: true,
+      hashDocumentos, upstreamChamadas: chamadasModelo, dataRetorno, cancelamentoDuravel: true, navegacaoProtegida: true, provenienciaAssistentePreservada: true, originalReaberto: true, derivadoConferido: true, metadadoDivergenteRecusado: true, preConsultaReaberta: true,
       orientacaoReaberta: true, edicaoFlashPreservada: true, conversaReaberta: true, assinaturaExplicita: true, modulosAdiadosForaNavegacao: true };
     writeFileSync(join(evidencias, 'resumo.json'), JSON.stringify(resultado, null, 2));
     log({ etapa: 'concluida', evidencias, ...resultado });

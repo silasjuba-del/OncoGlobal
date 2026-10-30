@@ -1,3 +1,4 @@
+import { appendCaptureFrame } from '../src/ai/captureFrames';
 import { createRequestLifetime } from '../src/ai/requestLifetime';
 import { createSaveTracker } from '../src/ai/saveTracker';
 import { shareWhatsApp } from '../src/ai/bridge';
@@ -121,4 +122,13 @@ it('biblioteca nativa serializa snapshots e preserva arquivo invalido para recup
 });
 it('WhatsApp recusa texto longo antes de acessar qualquer integracao', async () => {
   await expect(shareWhatsApp('S'.repeat(3501))).rejects.toThrow('arquivo completo');
+});
+
+it('novos frames nao reincluem imagens excluidas pelo usuario', () => {
+  const first = { url: 'sintetico-a', bytes: new Uint8Array([1]), t: 0 };
+  let frames = appendCaptureFrame([], first).map(f => ({ ...f, keep: false }));
+  for (let i = 1; i <= 5; i++) frames = appendCaptureFrame(frames, { url: `sintetico-${i}`, bytes: new Uint8Array([i]), t: i });
+  expect(frames[0].keep).toBe(false);
+  expect(frames.filter(f => f.keep).map(f => f.url)).not.toContain('sintetico-a');
+  expect(frames[0].bytes).toEqual(first.bytes);
 });

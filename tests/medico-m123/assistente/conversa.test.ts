@@ -1,3 +1,6 @@
+import { provenienciaDoTurno } from "../../../src/contracts/api/conversaOncoassist.js";
+import { conferirProvenienciaConversa } from "../../../src/server/provenienciaConversa.js";
+import { PlanoFlashEntrada, prepararFinalizacaoFlash, salvarRascunhoFlash } from "../../../src/server/flash.js";
 import { mkdtempSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
@@ -256,4 +259,29 @@ it("todas as entradas de resumo do mesmo evento chegam a fonte e briefing", asyn
   expect(h.fontes.find(f => f.eventId === ref.eventId)?.texto).toBe("CID SINTETICO\nHistologia SINTETICA\nEstadio SINTETICO");
   const r = RespostaConversa.parse((await a.post("responder", { ...pedido("composto"), fontesIds: ["evento:evento-composto"] })).body);
   expect(r.turno.texto).toContain("Histologia SINTETICA"); expect(r.turno.texto).toContain("Estadio SINTETICO");
+});
+
+it("documento preserva evidencias do turno e recusa fonte adulterada ou outro contexto", async () => {
+  const a = ambiente();
+  const r = RespostaConversa.parse((await a.post("responder", pedido("doc-proveniencia"))).body);
+  const p = provenienciaDoTurno(contexto, r.turno);
+  expect(conferirProvenienciaConversa(a.deps.db, contexto, p)).toBe(true);
+  const adulterada = structuredClone(p); adulterada.fontes[0]!.hash = "f".repeat(64);
+  expect(conferirProvenienciaConversa(a.deps.db, contexto, adulterada)).toBe(false);
+  expect(conferirProvenienciaConversa(a.deps.db, { ...contexto, patientId: "OUTRO" }, p)).toBe(false);
+  const plano = PlanoFlashEntrada.parse({ acoesMarcadas: [], receitasMarcadas: [],
+    apac: { cid: "", sigtap: "", finalidade: "", competencia: "", estado: "PENDENTE", pendencias: [], emitir: false },
+    retorno: { dias: null, examesAntesDoRetorno: [] },
+    documentosManuais: [{ id: "proposta-sintetica", tipo: "LAUDO", titulo: "Documento SINTETICO", destino: null, texto: "Texto revisto", proveniencia: p }] });
+  const invalido = { ...plano, documentosManuais: [{ ...plano.documentosManuais![0]!, proveniencia: adulterada }] };
+  const antes = listarDrafts(a.deps.db).length;
+  expect(salvarRascunhoFlash(a.deps.db, agora, { ...contexto, plano: invalido, expectedRevision: null }).status).toBe(409);
+  expect(prepararFinalizacaoFlash(a.deps.db, agora, { ...contexto, plano: invalido, idempotencyKey: "invalido" }).status).toBe(409);
+  expect(listarDrafts(a.deps.db)).toHaveLength(antes);
+  expect(prepararFinalizacaoFlash(a.deps.db, agora, { ...contexto, plano, idempotencyKey: "valido" }).status).toBe(200);
+  const doc = listarDrafts(a.deps.db).map(d => d.payload as { origemConteudo?: string; documentoManual?: { proveniencia: typeof p }; texto?: string })
+    .find(d => d.origemConteudo === "PROPOSTA_ASSISTENTE_REVISADA")!;
+  expect(doc.documentoManual?.proveniencia).toEqual(p);
+  expect(doc.texto).toContain(p.turnoId); expect(doc.texto).toContain(textoFonte); expect(doc.texto).toContain(p.fontes[0]!.hash);
+  a.reabrir(); expect(conferirProvenienciaConversa(a.deps.db, contexto, p)).toBe(true);
 });

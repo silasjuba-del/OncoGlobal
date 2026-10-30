@@ -16,6 +16,7 @@ const isAppOrigin = (url) => String(url).startsWith('app://pdfforge') || (DEV_UR
 const storePath = () => path.join(app.getPath('userData'), 'pdfforge-store.json');
 
 let mainWindow;
+let discardLibraryOnExit = false, waitingForLibrary = false;
 
 function createWindow() {
   mainWindow = new BrowserWindow({
@@ -35,6 +36,16 @@ function createWindow() {
       // Abas "Site" (claude.ai, chatgpt.com…) usam <webview> isolado; ver electron/ipc-ai.cjs.
       webviewTag: true,
     },
+  });
+  mainWindow.webContents.on('did-finish-load', () => { discardLibraryOnExit = false; });
+  mainWindow.webContents.on('will-prevent-unload', event => {
+    if (discardLibraryOnExit) { event.preventDefault(); return; }
+    const choice = dialog.showMessageBoxSync(mainWindow, {
+      type: 'warning', buttons: ['Continuar no aplicativo', 'Sair sem salvar'], defaultId: 0, cancelId: 0,
+      message: 'A biblioteca tem alteracoes ainda nao salvas.',
+      detail: 'Aguarde a gravacao ou tente salvar novamente. Sair agora pode descartar essas alteracoes.',
+    });
+    if (choice === 1) { discardLibraryOnExit = true; event.preventDefault(); }
   });
   if (DEV_URL) mainWindow.loadURL(DEV_URL);
   else mainWindow.loadURL('app://pdfforge/index.html');
@@ -190,10 +201,22 @@ app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit();
 });
 
-// O renderer avisa sobre rascunhos; o processo principal tambem conclui escritas ja recebidas.
-app.on('before-quit', (event) => {
+// O renderer protege alteracoes; o main conclui escritas recebidas antes de sair.
+app.on('before-quit', event => {
+  if (discardLibraryOnExit) return;
+  if (waitingForLibrary) { event.preventDefault(); return; }
   const library = require('./services/plugins.cjs');
   if (!library.libraryWritesPending()) return;
-  event.preventDefault();
-  library.flushLibrary().then(() => app.quit()).catch(error => console.error('BIBLIOTECA_NAO_SALVA', error.code || 'ERRO_DE_ESCRITA'));
+  event.preventDefault(); waitingForLibrary = true;
+  library.flushLibrary().then(() => { waitingForLibrary = false; app.quit(); }, async () => {
+    const win = BrowserWindow.getAllWindows().find(w => !w.isDestroyed());
+    const options = { type: 'error', buttons: ['Continuar no aplicativo', 'Sair sem salvar'], defaultId: 0, cancelId: 0,
+      message: 'Nao foi possivel salvar a biblioteca.', detail: 'As ultimas alteracoes nao foram confirmadas em disco. Continue para tentar recuperar ou saia sem salva-las.' };
+    try {
+      const choice = win ? await dialog.showMessageBox(win, options) : await dialog.showMessageBox(options);
+      if (choice.response === 1) { discardLibraryOnExit = true; waitingForLibrary = false; app.quit(); }
+      else if (!win || win.isDestroyed()) createWindow();
+      else { win.show(); win.focus(); }
+    } finally { waitingForLibrary = false; }
+  });
 });

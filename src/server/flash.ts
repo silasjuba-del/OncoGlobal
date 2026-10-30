@@ -1,3 +1,5 @@
+import { ProvenienciaDocumentoConversa } from "../contracts/api/conversaOncoassist.js";
+import { conferirProvenienciaConversa, textoProvenienciaConversa } from "./provenienciaConversa.js";
 import { LIMITE_TEXTO_DOCUMENTO_MANUAL } from "../contracts/api/flash.js";
 import { transacao } from "../kernel/ledger/db.js";
 import { ReferenciaPropostaDose,type PropostaDoseReceita } from '../contracts/api/propostaDoseReceita.js';
@@ -101,7 +103,7 @@ export const PlanoFlashEntrada = z.object({
   evolucaoAtendimento: z.object({ id: Id, versao: z.number().int().positive(), conteudoHash: z.string().regex(/^[a-f0-9]{64}$/) }).strict().optional(),
   propostasDoseReceita:z.array(ReferenciaPropostaDose).max(50).refine(xs=>new Set(xs.map(x=>x.receitaId)).size===xs.length,'PROPOSTA_RECEITA_DUPLICADA').optional(),
   documentosManuais:z.array(z.object({id:z.string().regex(/^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,100}$/),tipo:z.enum(['ENCAMINHAMENTO','LAUDO','ORIENTACOES']),
-    titulo:z.string().max(200),destino:z.string().max(200).nullable(),texto:z.string().max(LIMITE_TEXTO_DOCUMENTO_MANUAL)}).strict()).max(10).refine(v=>new Set(v.map(d=>d.id)).size===v.length,'DOCUMENTO_ID_DUPLICADO').optional(),
+    titulo:z.string().max(200),destino:z.string().max(200).nullable(),texto:z.string().max(LIMITE_TEXTO_DOCUMENTO_MANUAL),proveniencia:ProvenienciaDocumentoConversa.optional()}).strict()).max(10).refine(v=>new Set(v.map(d=>d.id)).size===v.length,'DOCUMENTO_ID_DUPLICADO').optional(),
   propostasInvestigacao:z.array(z.object({exameCodigo:Id,contexto:Id,revisaoFatos:Id,referencia:VersaoReferencia}).strict()).max(50).optional(),
   acoesMarcadas: z.array(Id).max(50),
   receitasMarcadas: z.array(Id).max(50),
@@ -132,7 +134,7 @@ export type PlanoFlashEntradaTipo = z.infer<typeof PlanoFlashEntrada>;
 /** O contrato da visão omite opcionais ausentes, inclusive no objeto retorno. */
 function planoParaVisao(plano: PlanoFlashEntradaTipo): PlanoFlash {
   return { ...(plano.evolucaoAtendimento ? { evolucaoAtendimento: plano.evolucaoAtendimento } : {}), acoesMarcadas: plano.acoesMarcadas, receitasMarcadas: plano.receitasMarcadas, apac: plano.apac,
-    ...(plano.documentosManuais===undefined?{}:{documentosManuais:plano.documentosManuais}),
+    ...(plano.documentosManuais===undefined?{}:{documentosManuais:plano.documentosManuais.map(({proveniencia,...d})=>({...d,...(proveniencia?{proveniencia}:{})}))}),
     ...(plano.propostasInvestigacao===undefined?{}:{propostasInvestigacao:plano.propostasInvestigacao}),
     ...(plano.receitas===undefined?{}:{receitas:plano.receitas}),
     ...(plano.propostasDoseReceita===undefined?{}:{propostasDoseReceita:plano.propostasDoseReceita}),
@@ -166,6 +168,8 @@ const MENSAGEM_APAC = "APAC: rascunho, não emitida";
 export function salvarRascunhoFlash(db: DatabaseSync, agora: string, input: ContextoFlash & {
   plano: PlanoFlashEntradaTipo; expectedRevision: number | null;
 }): Resposta {
+  if (input.plano.documentosManuais?.some(d => d.proveniencia && !conferirProvenienciaConversa(db, input, d.proveniencia)))
+    return { status: 409, body: { codigo: "PROVENIENCIA_CONVERSA_INVALIDA" } };
   const draftId = `flash-rascunho-${chaveContexto(input).slice(0, 24)}`;
   const atual = lerDraft(db, draftId);
   const revisionAtual = atual ? atual.revision : null;
@@ -225,8 +229,8 @@ function montarDocumentos(chave: string, plano: PlanoFlashEntradaTipo, resumoCli
   for(const documento of plano.documentosManuais??[]){
     docs.push({documentId:id(`manual-${documento.id}`),titulo:documento.titulo.trim(),tipoDocumento:`FLASH_${documento.tipo}`,
       texto:[documento.titulo.trim(),...(documento.destino?.trim()?[`Destino: ${documento.destino.trim()}`]:[]),
-        ...(resumoClinico?["Resumo clínico confirmado",resumoClinico]:[]),"Registro do médico",documento.texto.trim()].join("\n\n"),
-      extra:{documentoManual:documento,origemConteudo:"DECISAO_MEDICA"}});
+        ...(resumoClinico?["Resumo clínico confirmado",resumoClinico]:[]),"Registro do médico",documento.texto.trim(),...(documento.proveniencia ? [textoProvenienciaConversa(documento.proveniencia)] : [])].join("\n\n"),
+      extra:{documentoManual:documento,origemConteudo:documento.proveniencia?"PROPOSTA_ASSISTENTE_REVISADA":"DECISAO_MEDICA"}});
   }
   if (essencial) {
     // Cópia fixa dos documentos selecionados; o conjunto também exige exibição e assinatura.
@@ -254,6 +258,10 @@ function prepararDocumentosFlash(db: DatabaseSync, agora: string, input: Context
   if (input.plano.evolucaoAtendimento && (!fonteDocumentos?.evolucaoAtendimento
     || hashConteudoExibido(input.plano.evolucaoAtendimento) !== hashConteudoExibido(fonteDocumentos.evolucaoAtendimento.referencia)))
     return { status: 409, body: { codigo: "EVOLUCAO_ALTERADA_OU_PENDENTE" } };
+  for (const documento of input.plano.documentosManuais ?? []) {
+    if (documento.proveniencia && !conferirProvenienciaConversa(db, input, documento.proveniencia))
+      return { status: 409, body: { codigo: "PROVENIENCIA_CONVERSA_INVALIDA" } };
+  }
   const medicamentos = fonteDocumentos?.medicamentos ?? [];
   if(input.plano.documentosManuais?.some(d=>!d.titulo.trim()||!d.texto.trim()||d.tipo==='ENCAMINHAMENTO'&&!d.destino?.trim()))
     return {status:409,body:{codigo:'DOCUMENTO_MANUAL_INCOMPLETO'}};

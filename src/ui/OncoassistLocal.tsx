@@ -1,3 +1,4 @@
+import type { ProvenienciaDocumentoConversa } from "../contracts/api/conversaOncoassist.js";
 import { criarDocumentoMedicoProposto } from "./medico/documentoProposto.js";
 import { CadastroMedico } from "./medico/CadastroMedico.js";
 import { AgendaMedica } from "./medico/AgendaMedica.js";
@@ -188,12 +189,12 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp, perfil = "MEDIC
   const porta = useMemo(() => fabricaPorta({ onSessaoExpirada: expirar }), [fabricaPorta, expirar, sessao]);
   const modoMedico = perfil === "MEDICO" && !!porta.consultorio;
   const transferenciaEmCurso = useRef(false);
-  async function proporDocumento(texto: string, tipo: "ORIENTACOES" | "LAUDO"): Promise<boolean> {
+  async function proporDocumento(texto: string, tipo: "ORIENTACOES" | "LAUDO", proveniencia?: ProvenienciaDocumentoConversa): Promise<boolean> {
     if (!contexto || transferenciaEmCurso.current) return false;
     const c = contexto, g = geracao.current;
     transferenciaEmCurso.current = true;setTransferindo(true);
     try {
-      const documento = await criarDocumentoMedicoProposto(c, tipo, texto);
+      const documento = await criarDocumentoMedicoProposto(c, tipo, texto, proveniencia);
       if (g !== geracao.current || contextoAtual.current !== c) { setMensagem("Transferência cancelada porque o contexto mudou. Nenhum documento foi preparado no novo encontro.");return false; }
       setDocumentoProposto({...documento,solicitacaoId:crypto.randomUUID(),contextoChave:JSON.stringify(c)});
       setTela("consulta");return true;
@@ -446,7 +447,7 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp, perfil = "MEDIC
         {tela === "documentos" && porta.documental && <DocumentosMedicos api={porta.documental} contexto={contexto} aoAtividade={setDocumentalOcupado} aoSelecionarFonte={solicitarFonte} aoImportar={()=>setVersaoFontes(v=>v+1)} />}
         {tela === "nutricao" && porta.consultorio && <NutricaoMedica api={porta.consultorio} contexto={contexto} aoAlterarPendente={setNutricaoPendente} aoUsarOrientacao={t=>proporDocumento(t,"ORIENTACOES")} />}
         {tela === "oncoassist" && porta.assistente && <>
-          <ConversaOncoassist api={porta.assistente} contexto={contexto} aoAbrirFonte={ref=>void abrirEvidencia(ref)} aoUsarTexto={t=>proporDocumento(t,"LAUDO")}
+          <ConversaOncoassist api={porta.assistente} contexto={contexto} aoAbrirFonte={ref=>void abrirEvidencia(ref)} aoUsarTexto={(t,p)=>proporDocumento(t,"LAUDO",p)}
             aoDitar={()=>setDitadoAberto(v=>!v)} {...(textoDitado ? {textoDitado} : {})} aoAlterarPendente={setAssistentePendente} aoAtividade={setAssistenteOcupado} />
           {ditadoAberto && <DitadoDeepgram porta={porta} contexto={contexto} desabilitado={assistenteOcupado} aoAtividade={setTranscricaoSalvando}
             aoTrecho={texto=>setTextoDitado({id:crypto.randomUUID(),texto})} />}

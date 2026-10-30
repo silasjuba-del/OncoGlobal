@@ -1,3 +1,4 @@
+import type { ProvenienciaDocumentoConversa } from './conversaOncoassist.js';
 import type { PropostaDoseReceita } from './propostaDoseReceita.js';
 import type { MarcacaoTarefasRetorno } from './tarefas.js';
 export const LIMITE_TEXTO_DOCUMENTO_MANUAL = 8000;
@@ -53,4 +54,4 @@ export interface PlanoFlash {
   decisaoQt?: { solicitarCiclo: boolean; data: string | null };
 }
 export interface ReceitaManualFlash {id:string;medicamento:string;dose:string|null;orientacao:string|null;duracao:string|null;via:string|null;quantidade:string|null}
-export interface DocumentoManualFlash {id:string;tipo:"ENCAMINHAMENTO"|"LAUDO"|"ORIENTACOES";titulo:string;destino:string|null;texto:string}
+export interface DocumentoManualFlash {id:string;tipo:"ENCAMINHAMENTO"|"LAUDO"|"ORIENTACOES";titulo:string;destino:string|null;texto:string;proveniencia?:ProvenienciaDocumentoConversa}

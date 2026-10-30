@@ -52,3 +52,26 @@ export interface ApiConversaOncoassist {
   configurar(pedido: z.infer<typeof SalvarConfiguracaoConversa>, signal?: AbortSignal): Promise<z.infer<typeof ConfiguracaoConversaResposta>>;
   cancelar(pedido: z.infer<typeof CancelarConversa>, signal?: AbortSignal): Promise<RespostaConversa>;
 }
+
+
+/** Snapshot documental da proposta; nao confirma fatos nem transfere autoridade clinica. */
+export const ProvenienciaDocumentoConversa = z.object({
+  origem: z.literal("CONVERSA_ONCOASSIST"), contexto: ContextoConversa, turnoId: Id,
+  modo: z.enum(["BRIEFING", "MODELO_LOCAL"]), modelo: z.string().nullable(), atorId: Id,
+  criadoEm: Instante, concluidoEm: Instante.nullable(),
+  citacoes: z.array(CitacaoConversa).max(100), fontes: z.array(FonteConversa).max(100),
+}).strict().superRefine((p, ctx) => {
+  for (const c of p.citacoes) {
+    const f = p.fontes.find(f => f.id === c.fonteId);
+    if (!c.trecho.trim() || !f || !f.texto.includes(c.trecho))
+      ctx.addIssue({ code: "custom", message: "CITACAO_DOCUMENTAL_SEM_FONTE" });
+  }
+});
+export type ProvenienciaDocumentoConversa = z.infer<typeof ProvenienciaDocumentoConversa>;
+export function provenienciaDoTurno(contexto: ContextoConversa, turno: TurnoConversa): ProvenienciaDocumentoConversa {
+  if (turno.estado !== "CONCLUIDA") throw Error("PROPOSTA_NAO_CONCLUIDA");
+  const usadas = new Set(turno.citacoes.map(c => c.fonteId));
+  return ProvenienciaDocumentoConversa.parse({ origem: "CONVERSA_ONCOASSIST", contexto, turnoId: turno.id,
+    modo: turno.modo, modelo: turno.modelo, atorId: turno.atorId, criadoEm: turno.criadoEm, concluidoEm: turno.concluidoEm,
+    citacoes: turno.citacoes, fontes: turno.fontes.filter(f => usadas.has(f.id)) });
+}

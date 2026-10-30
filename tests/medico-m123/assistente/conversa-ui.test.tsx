@@ -71,7 +71,7 @@ it("delta parcial não pode ser aceito; texto só segue por ação explícita de
   expect(porta.responder).toHaveBeenCalledTimes(1);
   expect((editar as HTMLTextAreaElement).value).toBe("Texto explicitamente revisto");
   fireEvent.click(screen.getByRole("button", { name: "Preparar documento com texto revisado" }));
-  expect(usar).toHaveBeenCalledWith("Texto explicitamente revisto");
+  expect(usar).toHaveBeenCalledWith("Texto explicitamente revisto", expect.objectContaining({ origem: "CONVERSA_ONCOASSIST", turnoId: "turno", contexto: ctx }));
 });
 
 it("troca de paciente descarta resposta tardia mesmo se o transporte ignorar abort", async () => {
