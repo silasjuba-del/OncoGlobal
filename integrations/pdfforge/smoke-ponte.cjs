@@ -16,6 +16,7 @@ let concluido = false;
 const prazo = setTimeout(() => { console.error('SMOKE_PONTE_TIMEOUT'); app.exit(1); }, 45000);
 app.on('browser-window-created', (_event, win) => {
   win.hide();
+  win.webContents.on('console-message', (_event, level, message) => { if (level >= 2 || message.startsWith('SMOKE_ETAPA')) console.log('RENDERER', message); });
   win.webContents.once('did-finish-load', async () => {
     if (concluido) return;
     try {
@@ -24,7 +25,8 @@ app.on('browser-window-created', (_event, win) => {
       doc.addPage().drawText('Documento SINTETICO M123; nega febre. A CONFERIR.', { x: 30, y: 700, font, size: 12 });
       const bytes = Buffer.from(await doc.save()), b64 = bytes.toString('base64');
       await win.webContents.executeJavaScript(`(async () => {
-        const esperar = async (predicado) => { for(let i=0;i<100;i++){if(predicado())return;await new Promise(r=>setTimeout(r,100));}throw Error('UI_SINTETICA_INDISPONIVEL'); };
+        let etapa=0;
+        const esperar = async (predicado) => { const atual=++etapa;console.log('SMOKE_ETAPA '+atual);for(let i=0;i<100;i++){if(predicado())return;await new Promise(r=>setTimeout(r,100));}throw Error('UI_SINTETICA_INDISPONIVEL_ETAPA_'+atual+' '+document.body.innerText.slice(0,1200)); };
         await esperar(()=>document.querySelector('.app'));
         const bytes=Uint8Array.from(atob(${JSON.stringify(b64)}),c=>c.charCodeAt(0));
         const dt=new DataTransfer();dt.items.add(new File([bytes],'documento-SINTETICO.pdf',{type:'application/pdf'}));
