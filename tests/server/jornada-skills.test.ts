@@ -53,6 +53,9 @@ it('suspeita radiológica interrompe propostas eletivas sem apagar fonte nem vir
  expect(r.data.execucao.jornada.estado).toBe('URGENTE');
  expect(r.data.execucao.jornada.alertas[0].sourceId).toBe('laudo-jornada-sintetico');
  expect(r.data.execucao.jornada.cartoes).toEqual([]);expect(r.data.execucao.jornada.acoes).toEqual([]);
+ expect(r.data.execucao.jornada.fontes).toEqual([]);expect(r.data.execucao.jornada.divergencias).toEqual([]);
+ expect(r.data.execucao.jornada.criterios.map((c:{id:string})=>c.id)).not.toContain('aplicabilidade:PUL-26');
+ expect(r.data.documentos.find((d:{tipo:string})=>d.tipo==='EVOLUCAO').texto).not.toContain('PUL-26');
  expect(r.data.documentos.find((d:{tipo:string})=>d.tipo==='PEDIDO_EXAMES').texto).toContain('interrompidas');
 });
 it('referência inventada ou corpus indisponível não vira seleção aceita',async()=>{
@@ -67,5 +70,15 @@ it('mudança de regra RADS invalida rascunho mesmo com fonte e ledger inalterado
  const pedido={acao:'LER',contexto,execucaoId:r.data.execucao.execucaoId};
  expect(operarSkillsClinicas(pedido,a.app.token,deps).body).toMatchObject({validade:'ATUAL'});
  corpus.rads.versao='versao-sintetica-alterada';
+ expect(operarSkillsClinicas(pedido,a.app.token,deps).body).toMatchObject({validade:'ENTRADA_ALTERADA'});
+});
+it('mudança das condicionais do corpus invalida o rascunho da jornada',async()=>{
+ const a=await abrir();const r=await a.app.request('/consulta/skills',a.pedido);expect(r.status).toBe(200);
+ const corpus=carregarCorpusServidor();
+ const deps:ServidorDeps={db:a.app.db,sessoes:a.app.sessoes,agora:()=>AGORA,log:()=>{},corpus,salaoRuleset:corpus.ruleset,
+  gateway:criarGateway({agora:()=>AGORA,auditar:()=>{},store:memoriaIdempotencia(),executores:{}})};
+ const pedido={acao:'LER',contexto,execucaoId:r.data.execucao.execucaoId};
+ expect(operarSkillsClinicas(pedido,a.app.token,deps).body).toMatchObject({validade:'ATUAL'});
+ corpus.condicionais={...corpus.condicionais,regras:corpus.condicionais.regras.map((r,i)=>i===0?{...r,versao:'versao-sintetica-alterada'}:r)};
  expect(operarSkillsClinicas(pedido,a.app.token,deps).body).toMatchObject({validade:'ENTRADA_ALTERADA'});
 });

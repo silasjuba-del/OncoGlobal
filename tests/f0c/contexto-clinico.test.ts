@@ -51,6 +51,14 @@ it("biópsia/imagem mantêm origem e data, sem misturar outro tumor ou inferir r
     evento("outro", "Biopsy", { dataClinica: "2026-10-01", fraseLaudo: "Outro tumor" }, { tumorLotId: "lote-b" })] });
   expect(r.flash.exames.map(x => x.eventId)).toEqual(["imagem", "biopsia"]);
 });
+it("laudo negado ou incerto não entra na Flash como exame afirmado", () => {
+  const r = projetarContextoClinico({ ...base, eventos: [
+    evento("ok", "ImagingReport", { nome: "TC", dataClinica: "2026-10-05", fraseLaudo: "Laudo afirmado" }),
+    evento("neg", "ImagingReport", { nome: "TC", dataClinica: "2026-10-04", fraseLaudo: "massa descrita", negado: true }),
+    evento("inc", "Biopsy", { nome: "BX", dataClinica: "2026-10-03", fraseLaudo: "talvez carcinoma", evidence: "UNCERTAIN" }),
+  ]});
+  expect(r.flash.exames.map(x => x.eventId)).toEqual(["ok"]);
+});
 const episodio = { episodioId: "ep", tumorLotId: "lote-a", modalidade: "QT", intencao: "ADJUVANTE", intentModifier: null,
   linha: 1, esquemaId: "CAPOX", inicio: ausente(), fim: ausente() };
 const ciclo = { cicloId: "c3", episodioId: "ep", numero: 3, previstoEm: "2026-10-10", pesoKg: ausente(), origemPeso: null,

@@ -8,28 +8,32 @@ export function prepararJornadaClinica(input: {
   configuracao: ConfiguracaoPrimeiraConsulta; fontes: ExecucaoSkill["fontes"]; facts: readonly ClinicalFact[];
   pendenciasFontes: readonly string[]; corpus: CorpusJornada | null; corpusHash: string | null; ledgerHash: string; avaliacaoHash: string;
   alertas: ResultadoJornada["alertas"]; seguranca: string[]; mudancas: string[]; historico: string[];
+  avaliacaoIndisponivel?: boolean;
 }) {
   const tipo = input.skillId === "retorno" ? "RETORNO" : input.skillId === "follow-up" ? "FOLLOW_UP" : "PRIMEIRA_CONSULTA";
   const selecao = input.configuracao.jornada;
-  const cartoes = input.corpus?.cartoes.filter(c => selecao?.cartoesIds.includes(c.id)) ?? [];
-  const acoes = input.corpus?.acoes_consulta.filter(a => selecao?.acoesIds.includes(a.id)) ?? [];
+  const urgente = input.alertas.length > 0;
+  const cartoes = urgente ? [] : input.corpus?.cartoes.filter(c => selecao?.cartoesIds.includes(c.id)) ?? [];
+  const acoes = urgente ? [] : input.corpus?.acoes_consulta.filter(a => selecao?.acoesIds.includes(a.id)) ?? [];
   const divIds = new Set(cartoes.flatMap(c => c.divergencias));
   const divergencias = input.corpus?.divergencias.filter(d => divIds.has(d.id)) ?? [];
   const fonteIds = new Set([...cartoes.flatMap(c => [...c.fontes, ...Object.values(c.linhas).flatMap(l => l.fontes)]),
     ...acoes.flatMap(a => a.fontes), ...divergencias.flatMap(d => d.fontes)].map(f => f.fonte));
   const fontes = input.corpus?.fontes.filter(f => fonteIds.has(f.id)) ?? [];
-  const urgente = input.alertas.length > 0;
   const pendencias = [...input.pendenciasFontes,
     "Aplicabilidade dos cartões depende de revisão médica de estadiamento, subtipo, exposições e condições; a seleção não confirma fatos.",
     "Edição TNM não é presumida; recidiva pós-adjuvância não equivale automaticamente a L2.",
     ...(input.corpus ? [] : ["CORPUS INDISPONÍVEL: não há referência terapêutica recuperável."]),
     ...(divergencias.length ? ["DIVERGÊNCIAS DE FONTE: revisar antes de aplicar as opções."] : []),
     ...(urgente ? ["SUSPEITA URGENTE: avaliação médica prioritária; propostas eletivas interrompidas."] : []),
+    ...(input.avaliacaoIndisponivel ? ["AVALIAÇÃO CLÍNICA INDISPONÍVEL: urgência do prontuário não foi checada."] : []),
   ];
   const etapas: ResultadoJornada["etapas"] = [];
   const etapa = (id: string, titulo: string, estado: ResultadoJornada["etapas"][number]["estado"], motivo: string) => etapas.push({id,titulo,estado,motivo});
   etapa("S00", "Identidade e proveniência", "EXECUTADA", "Fontes vinculadas ao encontro por decisão registrada, revisão e hash conferidos pelo servidor.");
-  etapa("S01", "Urgência clínica e radiológica", urgente ? "PENDENTE" : "EXECUTADA", urgente
+  etapa("S01", "Urgência clínica e radiológica", input.avaliacaoIndisponivel || urgente ? "PENDENTE" : "EXECUTADA", input.avaliacaoIndisponivel
+    ? "Avaliação clínica indisponível; a checagem de urgência não foi executada."
+    : urgente
     ? "Sinal identificado; exige avaliação imediata. Não é diagnóstico confirmado."
     : "Regras disponíveis avaliadas; ausência de achado não exclui emergências fora da cobertura.");
   etapa("S02", "Extração e reconciliação", "EXECUTADA", `${input.facts.length} informações recebidas com fonte; valores divergentes e temporalidade preservados.`);
@@ -46,7 +50,7 @@ export function prepararJornadaClinica(input: {
   etapa("S13", "Decisão médica", "PENDENTE", "Revisar, corrigir e assinar pelo fluxo próprio; a skill não libera tratamento nem envia mensagens.");
   const jornada = ResultadoJornada.parse({ versao:"1.0.0", tipo, estado:urgente ? "URGENTE" : "PARCIAL",
     corpusHash:input.corpusHash, ledgerHash:input.ledgerHash, avaliacaoHash:input.avaliacaoHash, etapas, alertas:input.alertas, seguranca:input.seguranca,
-    mudancas:input.mudancas, cartoes:urgente ? [] : cartoes, acoes:urgente ? [] : acoes, fontes, divergencias,
+    mudancas:input.mudancas, cartoes, acoes, fontes, divergencias,
     criterios:[...cartoes.map(c=>({id:`aplicabilidade:${c.id}`,tipo:"ELEGIBILIDADE",estado:"INDETERMINADO",texto:`Verificar condições: ${c.subtipo}; ${c.estadiamento}. Critério decisivo: ${c.condicoes_e_limites.join("; ") || "escolha médica; a fonte não define preferência única"}`})),
       {id:"seguranca-integrada",tipo:"SEGURANCA",estado:urgente?"NAO_ATENDE":"INDETERMINADO",texto:urgente?"Avaliação urgente prioritária":"Verificar riscos e pendências; ausência de alerta não comprova segurança."}],
     pendencias:[...new Set(pendencias)],autorizaTratamento:false });

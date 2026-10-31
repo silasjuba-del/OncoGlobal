@@ -55,16 +55,17 @@ export function operarSkillsClinicas(raw: unknown, token: string, deps: Servidor
     const corpusHash = hashCanonico({ conhecimento:corpus, rads:deps.corpus?.rads ?? null,
       feve:deps.corpus?.feveRuleset ?? null, salao:deps.salaoRuleset ?? null,
       interacoes:deps.corpus?.interacoes ?? null, catalogo:deps.corpus?.catalogoInteracoes ?? null,
-      tetos:deps.corpus?.tetosCumulativos ?? null });
+      tetos:deps.corpus?.tetosCumulativos ?? null, condicionais:deps.corpus?.condicionais ?? null });
     const ledgerHash = () => hashCanonico(listarEventos(deps.db, contexto.patientId));
     const avaliacaoAtual = () => {
       const c = lerConsulta(deps.db, contexto.patientId, deps.agora(), sessao, contexto.tumorLotId,
         {encounterId:contexto.encounterId, salaoRuleset:deps.salaoRuleset,
           ...(deps.corpus ? {interacoes:deps.corpus.interacoes,catalogo:deps.corpus.catalogoInteracoes,
             feveRuleset:deps.corpus.feveRuleset,limiarPlaquetas:deps.corpus.limiarPlaquetas,
-            tetosCumulativos:deps.corpus.tetosCumulativos,templates:deps.corpus.templatesProtocolo} : {})});
+            tetosCumulativos:deps.corpus.tetosCumulativos,templates:deps.corpus.templatesProtocolo,
+            ...(deps.corpus.condicionais ? {condicionais:deps.corpus.condicionais} : {})} : {})});
       if (!("avaliacaoClinica" in c) || !c.avaliacaoClinica || !c.elegibilidade || !c.delta || !c.historicoTratamento)
-        return {seguranca:["AVALIAÇÃO CLÍNICA INDISPONÍVEL"],mudancas:[] as string[],historico:[] as string[],urgente:false};
+        return {seguranca:["AVALIAÇÃO CLÍNICA INDISPONÍVEL"],mudancas:[] as string[],historico:[] as string[],urgente:false,indisponivel:true};
       const renal = c.avaliacaoClinica.renal;
       return {seguranca:[...c.elegibilidade.motivos.map(m=>m.texto),
         `Função renal: ${renal.estado}; Cockcroft peso real ${renal.clcrMlMin ?? "PENDENTE"}; peso ajustado ${renal.clcrPesoAjustadoMlMin ?? "não disponível"}. ${renal.aviso ?? ""}`],
@@ -72,7 +73,7 @@ export function operarSkillsClinicas(raw: unknown, token: string, deps: Servidor
           .map(d=>`${d.rotulo}: ${d.candidatos.map(v=>`${v.rotulo}: ${valorClinico(v.valorTexto)}`).join(" → ")}`),
         historico:[...(c.resumoConfirmadoParaDocumento ? [`Resumo previamente revisado: ${c.resumoConfirmadoParaDocumento}`] : []),
           ...c.historicoTratamento.linhas.map(l=>`${l.data ?? l.periodo?.inicio ?? "data não informada"}: ${l.tipo}; ${l.protocoloOuTipo ?? l.topografia ?? "descrição pendente"}${l.ciclo===null?"":`; ciclo ${l.ciclo}`}; ${l.estado}. ${l.observacao}`),
-          ...(c.flash.ultimoAdministrado ? [`Último administrado: ${c.flash.ultimoAdministrado}`] : [])],urgente:c.avaliacaoClinica.emergencia};
+          ...(c.flash.ultimoAdministrado ? [`Último administrado: ${c.flash.ultimoAdministrado}`] : [])],urgente:c.avaliacaoClinica.emergencia,indisponivel:false};
     };
     if (p.acao === "FONTES") return ok({codigo:"SKILL_FONTES",fontes:listarDrafts(deps.db,contexto.patientId).flatMap(d=>{
       const f=Fonte.safeParse(d.payload);
@@ -160,7 +161,8 @@ export function operarSkillsClinicas(raw: unknown, token: string, deps: Servidor
       }
       const preparados = prepararJornadaClinica({ execucaoId, contexto: p.contexto, nome: paciente.nome,skillId:p.skillId,
         configuracao: p.configuracao, fontes, facts, pendenciasFontes: pendencias,corpus,corpusHash,ledgerHash:hashLedger,
-        avaliacaoHash:hashCanonico(clinica),alertas,seguranca:clinica.seguranca,mudancas:clinica.mudancas,historico:clinica.historico });
+        avaliacaoHash:hashCanonico(clinica),alertas,seguranca:clinica.seguranca,mudancas:clinica.mudancas,historico:clinica.historico,
+        avaliacaoIndisponivel:clinica.indisponivel });
       const criadoEm = deps.agora();
       const execucao = ExecucaoSkill.parse({ kind: "SKILL_EXECUCAO_RASCUNHO", execucaoId, contexto: p.contexto,
         skillId: p.skillId, versao: p.versao, mecanismo: "COMPOSICAO_LOCAL_DETERMINISTICA", operationId: p.operationId,

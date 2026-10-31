@@ -8,7 +8,7 @@ import { avaliarTriagem } from "../../rules/triagem.js";
 import { idadeDoDado, PESO_VALIDADE_DIAS } from "../../rules/prescricao/index.js";
 import { hashCanonico, projetarRetrato } from "../../kernel/projections/retrato/index.js";
 import { diaDaObservacao, observacaoNoHorizonte, observacoesMaisRecentes } from "../../modules/consulta/observacoesTemporais.js";
-import { alturaDocumentada, exameBasalDocumentado } from "./dadosDocumentados.js";
+import { alturaDocumentada, exameBasalDocumentado, metadadosDoFatoImpedemUso } from "./dadosDocumentados.js";
 import type { CriterioElegibilidade } from "../../contracts/api/criterioElegibilidade.js";
 import { semaforoInteracoes, type RulesetSemaforo } from "../../rules/semaforoInteracoes.js";
 import type { CatalogoInteracoes } from "../../contracts/f0c/interacoes.js";
@@ -161,7 +161,14 @@ export function avaliarConsulta(i: EntradaAvaliacaoConsulta) {
     if (avaliarValidadeExame("HEMOGRAMA",p.data,i.agora).estado !== "VALIDO") portaPendentes.push(`${nome}: validade não confirmada`);
   }
   const episodioBasal = i.ciclo?.episodioId ?? i.episodio?.episodioId ?? null;
-  const audiometria = exameBasalDocumentado(campo("audiometriaBasal"), episodioBasal, limiteClinico);
+  const basalDocumentado = (nome: string) => {
+    const fonte = snapshot.campos[nome];
+    if (!fonte || fonte.estado !== "VERDE" || !fonte.eventIds.every(id => atuais.some(e => e.eventId === id && e.fontes.length > 0))) return null;
+    const eventos = fonte.eventIds.map(id => atuais.find(e => e.eventId === id)!);
+    if (eventos.some(e => metadadosDoFatoImpedemUso(dadosDoEvento(e)))) return null;
+    return exameBasalDocumentado(fonte.valor, episodioBasal, limiteClinico);
+  };
+  const audiometria = basalDocumentado("audiometriaBasal");
   const audioDocumentada = audiometria && typeof audiometria.resultado === "string" && audiometria.resultado.trim()
     && audiometria.estado === "REALIZADO";
   for (const tarefa of preRequisitosC1((i.ciclo?.itens ?? []).map((item) => item.droga), i.ciclo?.numero ?? null)) {
@@ -173,7 +180,7 @@ export function avaliarConsulta(i: EntradaAvaliacaoConsulta) {
   const ctcae = grau === null ? pend("toxicidade atual não graduada") : grau >= 2
     ? sinal("VERMELHO", ["toxicidade G2 ou maior: revisão médica, sem ajuste automático"]): sinal("VERDE",[]);
   const eco = obj(campo("feve"));
-  const ecoBasal = exameBasalDocumentado(campo("feveBasal"), episodioBasal, limiteClinico);
+  const ecoBasal = basalDocumentado("feveBasal");
   const feve = i.feveRuleset ? alertarFeve({ hoje:i.hoje, feve: { percentual: typeof eco?.percentual === "number" ? eco.percentual : null,
     metodo: typeof eco?.metodo === "string" ? eco.metodo : null, data: typeof eco?.data === "string" ? eco.data : null },
     feveBasal: ecoBasal ? { percentual: typeof ecoBasal.percentual === "number" ? ecoBasal.percentual : null,

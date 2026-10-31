@@ -19,6 +19,7 @@ import type { FlashVisao } from "../contracts/api/porta.js";
 import { hashConteudoExibido } from "./sessao.js";
 import { VersaoReferencia } from '../contracts/f1/correlacao.js';
 import { lerModeloFlashConfigurado, type ModeloFlash } from "../contracts/configFlash.js";
+import { metadadosDoFatoImpedemUso } from "./f0c/dadosDocumentados.js";
 export type { ModeloFlash } from "../contracts/configFlash.js";
 
 /** Tipos de evento que carregam laudo com frase (data.dataClinica, data.fraseLaudo, data.nome). */
@@ -65,6 +66,7 @@ export function projetarFlash(
     const d = dadosDoEvento(e);
     if (!d || typeof d.dataClinica !== "string" || !DATA_CIVIL.test(d.dataClinica) || d.dataClinica > dataReferencia) return [];
     if (typeof d.fraseLaudo !== "string" || d.fraseLaudo.trim().length === 0) return [];
+    if (metadadosDoFatoImpedemUso(d)) return [];
     const nome = typeof d.nome === "string" && d.nome.trim().length > 0 ? d.nome.trim() : e.tipo;
     return [{ data: d.dataClinica, nome, fraseLaudo: d.fraseLaudo.trim(), situacao: situacaoDe(d.situacao), eventId: e.eventId }];
   }).sort((a, b) => b.data.localeCompare(a.data) || a.eventId.localeCompare(b.eventId))

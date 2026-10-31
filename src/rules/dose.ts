@@ -58,6 +58,7 @@ export function calcularDose(e: EntradaDose, rs: DoseRuleset): SaidaDose {
     const anterior = e.doseAdministradaAnteriorMg === null ? "dose anterior ausente" : `dose anterior ${e.doseAdministradaAnteriorMg} mg ao lado`;
     const nivel = e.nivelDose === undefined || e.nivelDose === null ? "" : `; nível ${e.nivelDose}`;
     let motivo = `referência do protocolo × SC atual ${bsa.toFixed(2)} m²; ${anterior}${nivel}`;
+    if (e.origemPeso === "INFORMADO_PACIENTE") motivo += "; peso informado pelo paciente";
     if (typeof e.scAnteriorM2 === "number" && e.scAnteriorM2 > 0 && Math.abs(bsa - e.scAnteriorM2) / e.scAnteriorM2 >= 0.1 - 1e-9) {
       motivo += " — alerta: SC variou ≥ 10%";
     }

@@ -4,6 +4,19 @@ import { FactQualifiers } from "../../contracts/w10/extracao.js";
 import { montarFichaMinima } from "../../modules/consulta/revisaoClinica.js";
 import { dataCivilDoServico } from "../../rules/tempoServico.js";
 
+/** Negação, incerteza ou terceiro no evento (irmão de `valor`) impedem tratar o fato como exame aceito. */
+export function metadadosDoFatoImpedemUso(data: Record<string, unknown> | null | undefined): boolean {
+  if (!data) return true;
+  if (data.negado === true || data.negated === true || data.requiresConfirmation === true) return true;
+  if (data.evidence === "INFERRED" || data.evidence === "UNCERTAIN") return true;
+  if (data.qualificadores !== undefined) {
+    const q = FactQualifiers.safeParse(data.qualificadores);
+    if (!q.success || q.data.polaridade !== "AFIRMADA" || q.data.sujeito !== "PACIENTE"
+      || ["FUTURA", "NAO_DETERMINADA"].includes(q.data.temporalidade)) return true;
+  }
+  return false;
+}
+
 /** Basal explicitamente atribuído ao episódio. Presença de arquivo não prova exame realizado. */
 export function exameBasalDocumentado(raw: unknown, episodioId: string | null, limite: string): Record<string, unknown> | null {
   if (!raw || typeof raw !== "object" || Array.isArray(raw) || !episodioId) return null;
