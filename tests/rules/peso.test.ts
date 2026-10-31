@@ -1,3 +1,4 @@
+import { SalaoRuleset } from "../../src/contracts/regras.js";
 // FN-06 avaliarPeso — T-23 (Q24–Q25, A2). VERMELHO só com pesos MEDIDOS; informado ⇒ PENDENTE.
 import { describe, expect, it } from "vitest";
 import type { Pesagem } from "../../src/contracts/index.js";
@@ -48,4 +49,10 @@ describe("FN-06 tendência de peso (alerta em ≥ 5% na janela de 90 dias)", () 
   });
   it("saída carrega a versão do ruleset do salão (1.1.0 desde D-W9-58)", () =>
     expect(avaliarPeso([pesagem("2026-08-10", 80), pesagem("2026-10-01", 75)], HOJE, salaoRuleset).rulesetVersao).toBe(salaoRuleset.header.versao));
+});
+
+it('valida parâmetros percentuais e informa o corte efetivamente configurado',()=>{
+ for(const campo of ['perdaPctAcimaDe','perdaPctSeImcAbaixoDe','imcAbaixoDe'])for(const valor of ['5',-1,0,Infinity])expect(SalaoRuleset.safeParse({...salaoRuleset,pesoVermelho:{...salaoRuleset.pesoVermelho,[campo]:valor}}).success).toBe(false);
+ const rs=SalaoRuleset.parse({...salaoRuleset,pesoVermelho:{...salaoRuleset.pesoVermelho,perdaPctAcimaDe:7}});
+ expect(avaliarPeso([pesagem('2026-08-10',80),pesagem('2026-10-01',70)],HOJE,rs).motivo).toContain('corte de 7%');
 });

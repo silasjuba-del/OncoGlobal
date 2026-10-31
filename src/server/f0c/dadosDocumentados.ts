@@ -59,3 +59,10 @@ export function alturaDocumentada(retrato: Retrato, agora: string): number | nul
     })) return null;
   return altura.valor;
 }
+
+/** Reutiliza a barreira de proveniência da auditoria para os laudos do Flash. */
+export function metadadosDoFatoImpedemUso(raw: unknown): boolean {
+  if (!raw || typeof raw !== "object" || Array.isArray(raw)) return true;
+  const d = raw as Record<string, unknown>;
+  return !evidenciaBasalAfirmada({ ...d, valor: typeof d.valor === "object" && d.valor !== null ? d.valor : undefined });
+}

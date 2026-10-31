@@ -1,3 +1,4 @@
+import { metadadosDoFatoImpedemUso } from "./dadosDocumentados.js";
 import { z } from "zod";
 import { horizonteDoEncontro } from "./avaliacaoConsulta.js";
 import type { ClinicalEvent } from "../../contracts/operacao.js";
@@ -133,7 +134,7 @@ export function projetarEquivalenteClinico(i: EntradaCumulativoClinico) {
   }));
   const rt=projetarSnapshot(vigentes.filter(e=>e.tipo==='FATO'&&dadosDoEvento(e)?.campo==='rtMediastino')
     .map(e=>({...e,tumorLotId:i.tumorLotId,encounterId:i.encounterId})),i.patientId,i.tumorLotId,i.encounterId,'equivalente-rt-v1').campos.rtMediastino;
-  const rtValida=rt?.estado==='VERDE' && typeof rt.valor==='boolean' && rt.eventIds.every(id=>vigentes.some(e=>e.eventId===id&&e.fontes.length));
+  const rtValida=rt?.estado==='VERDE' && typeof rt.valor==='boolean' && rt.eventIds.every(id=>vigentes.some(e=>e.eventId===id&&e.fontes.length&&!metadadosDoFatoImpedemUso(dadosDoEvento(e))));
   const pendencias=[...totais.pendencias,...drogas.filter(d=>unidadesIncompativeis.has(d)).map(d=>`UNIDADE_EQUIVALENTE_INVALIDA:${d}`),...(!rtValida?['RT_MEDIASTINAL_NAO_CONFERIDA']:[])];
   // O subtotal documentado é um limite inferior: incompletude nunca apaga um limiar já atingido.
   const doses=totais.avaliacoes.filter(a=>!unidadesIncompativeis.has(chaveDroga(a.droga)) && a.avaliacao.totalConhecidoMgM2 !== null)

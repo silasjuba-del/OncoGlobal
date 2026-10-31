@@ -20,7 +20,11 @@ export const SalaoRuleset = z.object({
   hemogramaValidadeDias: z.number().int(),
   frente: z.object({ recursos: z.array(z.string()), idadeAcimaDe: z.number().int() }).passthrough(),
   filaOrdem: z.array(z.string()),
-  pesoVermelho: z.object({ perdaKgAcimaDe: z.number(), janelaDias: z.number().int() }).passthrough(),
+  pesoVermelho: z.object({ perdaKgAcimaDe: z.number(), janelaDias: z.number().int(),
+    perdaPctAcimaDe: z.number().finite().positive().optional(),
+    perdaPctSeImcAbaixoDe: z.number().finite().positive().optional(),
+    imcAbaixoDe: z.number().finite().positive().optional(),
+  }).passthrough(),
 }).passthrough();
 export type SalaoRuleset = z.infer<typeof SalaoRuleset>;
 

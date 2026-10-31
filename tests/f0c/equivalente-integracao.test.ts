@@ -32,3 +32,9 @@ it.each([[600,480,'AVISO'],[325,260,'ALARANJADO'],[100,80,'PENDENTE']] as const)
  expect(r?.pendencias.length).toBeGreaterThan(0);
  expect(r?.motivo).toContain('subtotal');
 });
+
+it.each([{evidence:'UNCERTAIN'},{requiresConfirmation:true},{qualificadores:{polaridade:'AFIRMADA',sujeito:'TERCEIRO',temporalidade:'ATUAL'}}])('RT não conferida não vira ausência documentada: %j',meta=>{
+ const rt=fato('rtMediastino',false);rt.payload={data:{campo:'rtMediastino',valor:false,...meta}};
+ const r=projetarEquivalenteClinico({...base,eventos:[dose('doxorrubicina',100),rt]});
+ expect(r?.estado).toBe('PENDENTE');expect(r?.pendencias).toContain('RT_MEDIASTINAL_NAO_CONFERIDA');
+});
