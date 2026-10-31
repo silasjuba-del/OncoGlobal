@@ -52,7 +52,7 @@ Fatos confirmados `feveBasal` usam `{episodioId, data, percentual, metodo}`; `au
 
 ## Limites clínicos preservados
 
-Os dados do corpus continuam em RASCUNHO; L4/L5 sem evidência estruturada, acesso NCCN/ONCO PRO, tabela TNM para cálculo, cortes não curados e cobertura farmacológica incompleta permanecem explícitos. Critérios de elegibilidade e segurança são separados; nenhum estado indeterminado autoriza tratamento. Não há emissão de pedido, assinatura, administração ou mensagem ao paciente pela skill.
+O catálogo de pulmão está ativo para consulta com fontes. Fichas de prescrição e requisitos clínicos dos packs conservam curadoria por item/versão/hash; os originais permanecem íntegros. L4/L5 sem evidência estruturada, acesso NCCN/ONCO PRO, tabela TNM para cálculo, cortes não curados e cobertura farmacológica incompleta permanecem explícitos. Critérios de elegibilidade e segurança são separados; nenhum estado indeterminado autoriza tratamento. Não há emissão de pedido, assinatura, administração ou mensagem ao paciente pela skill.
 
 ## Auditoria final — 31/10/2026
 
@@ -70,3 +70,41 @@ As regressões sintéticas reproduziram 11 falhas em quatro arquivos antes das c
 - Referências Q24/FN-06 na matriz corrigidas para o limiar vigente; Q25 conserva a ação na linha 47 e referencia também o limiar atual. A sugestão de mover a disposição PHI da linha 42 para 39 foi rejeitada: no arquivo e SHA examinados, o divisor sintético está na linha 42. As referências D-W9-75b/77d já apontavam para as linhas corretas.
 
 Cobertura de aceite ampliada: primeira consulta, retorno e follow-up por HTTP e Chromium; persistência após reinício, replay, leitura histórica após mudança de política, isolamento entre pacientes, alerta condicional preservado, urgência e ausência de assinatura/envio/administração. As evidências finais e o SHA entregue são registrados na descrição do PR; aprovação técnica não é aprovação clínica.
+
+## Integração operacional autorizada — 31/10/2026
+
+Objetivo: conectar as capacidades existentes ao aplicativo e tornar o corpus utilizável no fluxo real. Base: PR #86 em 7e3a7b4c; contribuições do #87 em 2553eb3b reconciliadas seletivamente, preservando a auditoria mais recente. Escritor único: Codex; worktree isolada, sem merge em main.
+
+Lote em execução:
+1. Reconciliar #87, corrigir a D-F1-52 e alimentar a revisão/Evolução com dados confirmados do encontro.
+2. Ligar segurança da prescrição, radiologia, canal e capacidades administrativas/anamnese ao servidor e às telas; identificar equivalentes já usados antes de duplicar rotas.
+3. Ativar o corpus como referência operacional rastreável, separando disponibilidade do catálogo de aprovação médica de fichas/doses e assinatura de documentos. Lacunas e divergências continuam visíveis.
+4. Eliminar leituras repetidas por requisição; carregamento de PDF/abas sob demanda e cache apenas de assets estáticos versionados.
+5. Provar jornadas sintéticas de primeira consulta, retorno e follow-up, persistência, isolamento, segurança, fronteiras, build e compatibilidade remota.
+
+Aceite: capacidades acionáveis pelo app, sem atalhos por importações só em testes; fontes e estados médicos preservados; ausência de falsa liberação; nenhum envio externo ou assinatura automática; mudanças revisáveis em PR sem merge. O progresso e as provas serão atualizados nesta seção.
+
+### Estado da integração em execução
+
+Implementado nesta branch, ainda em verificação: reconciliação seletiva do #87; função única D-F1-52 nas reduções e cálculos em mg (µg conserva sua regra dimensional); snapshot por requisição em agenda/canal/triagem/salão; telas/PDF sob demanda e cache de assets versionados; navegação operacional ampliada no modo médico; referência de pulmão ATIVO_PARA_CONSULTA 1.1.0; revisão alimentada pelo retrato confirmado; progressão intervalar conectada à regra/corpus; SafetyEngine na preparação/replay/confirmação da prescrição; mensuração 2D/volume disponível junto ao documento original; laudo de acesso F4 com HTTP, fontes, persistência, replay, assinatura explícita e histórico; anamnese F5 com roteiro conferido na interface e respostas oriundas do canal consentido; auditoria RBAC F6 ligada às novas rotas usando apenas a sessão médica autenticada.
+
+Provas parciais: 150 testes em 14 arquivos e build UI passaram antes das últimas integrações; depois, 33 testes em 4 arquivos passaram, incluindo fluxo HTTP do laudo. Typecheck e fronteiras passaram após a ligação F5. Uma execução Windows do arquivo prescricao-executavel-http encerrou o worker com 0xC0000409; exige diagnóstico/verificação, não é aprovação.
+
+Em andamento: testes novos de anamnese, revisão, mensuração, snapshot e navegação; bateria completa, browser e CI remoto; revisão dos hashes e da documentação D-F1-52; reconciliação da entrega em PR sem merge.
+
+Distinções confirmadas: TelaConsulta/PrescricaoPainel/ImageViewerOncoAssist são usados por DemonstracaoApp, não pelo fluxo operacional ConsultaPersistida. Não conectar exemplos sintéticos ao prontuário. A estatística F6 histórica termina em PENDENTE_ISOLAMENTO_WORK_STUDY; preservar a estatística operacional já existente, sem trocar por esse stub. A autenticação atual é médica (CRM); não inventar contas de enfermagem/farmácia/secretaria ou ativar envio externo. ProtocolTemplate e TumorPack com aprovação clínica por item/hash não foram promovidos por simples troca de rótulo; a ativação de referência do corpus não fabrica essas aprovações.
+
+### Provas e ligações adicionais
+
+- PR #85: incorporados apenas os dois componentes e o teste do prazo de 20 s para abertura da consulta; nenhum merge e nenhum prompt de auditoria incorporado. PR #83 permanece separado (não foi integrado silenciosamente).
+- Jornada → Flash: evolução, pedido de exames, encaminhamento e orientação podem ser adotados por ação médica, com execução/documento/hash/contexto e fontes revalidados. Receita da skill não entra por essa via; QT continua no editor estruturado. Testes das três jornadas passaram, preservando o original não assinado.
+- M123 Chromium passou com Salão, Canal, APAC, Estatísticas, Estudos, Laudo e Anamnese disponíveis na navegação médica; abrir módulos não cria fatos; a jornada existente preservou fonte, cancelamento, recuperação e assinatura explícita.
+- F4/F5 HTTP: preparo, recuperação, assinatura/hash/contexto do laudo e curadoria explícita de roteiro, conflito entre respostas, fonte literal, replay e revogação de consentimento da anamnese testados.
+- Snapshot: teste confirmou uma leitura do ledger por agenda/salão com dez entradas, preservando E1.
+- Inventário revisável em `CORPUS-INVENTARIO-OPERACIONAL.json`: 44 cartões de pulmão ativos para consulta, 35 packs consultáveis, 97 fichas válidas de prescrição, zero packs rejeitados pelo carregador. O estado RASCUNHO dos arquivos de ficha não determina a curadoria efetiva, que é registrada por item/versão/hash no banco local. Esse banco de produção não foi alterado.
+
+### Fechamento técnico para revisão
+
+As capacidades e os handoffs descritos acima estão implementados na branch de integração, sem merge em main. O SafetyEngine também recebe limites declarados na ficha conferida e laboratórios no horizonte do encontro: ausência, unidade não compatível, data futura ou horário insuficiente não viram resultado aprovado. A revisão usa os prazos já existentes (sem criar cortes clínicos). A progressão intervalar preserva alertas de exames datados diante de notas sem data e compara com o exame anterior pertinente, sem transformar pedido de RM em exame realizado.
+
+A bateria exploratória completa revelou regressões de integração, expectativas anteriores de navegação/rotas e triagem de hashes; foram tratadas com provas focais. O inventário contém apenas metadados de corpus: suas 15 ocorrências detectadas como possíveis identificadores foram verificadas como trechos de SHA-256, com disposição vinculada ao arquivo e hash em PHI-TRIAGEM.json. Não foi relaxado o detector. Contagens finais, SHA e verificações remotas ficam na descrição do PR, evitando atribuir ao código uma aprovação clínica.

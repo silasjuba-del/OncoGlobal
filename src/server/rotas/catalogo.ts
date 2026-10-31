@@ -8,6 +8,8 @@ export type PoliticaProcessamento = "NENHUM" | "PENDENCIAS_E_MOTOR";
 
 /** Rotas HTTP locais. */
 export const ROTAS_HTTP = [
+  {"url":"/consulta/anamnese-guiada","nome":"anamneseGuiada","processamento":"PENDENCIAS_E_MOTOR","grupo":"CONSULTA"},
+  {"url":"/consulta/laudo-acesso","nome":"laudoAcesso","processamento":"PENDENCIAS_E_MOTOR","grupo":"CONSULTA"},
   {"url":"/acao","nome":"acao","processamento":"PENDENCIAS_E_MOTOR","grupo":"CONSULTA"},
   {"url":"/apac/validar-emissao","nome":"/apac/validar-emissao","processamento":"PENDENCIAS_E_MOTOR","grupo":"DUTOS"},
   {"url":"/biblioteca/ativar","nome":"/biblioteca/ativar","processamento":"PENDENCIAS_E_MOTOR","grupo":"BIBLIOTECA"},

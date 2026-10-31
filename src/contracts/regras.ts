@@ -75,7 +75,7 @@ export interface EntradaDose {
   percentualDoNivel?: number | null;
 }
 export interface SaidaDose {
-  doseMg: number | null; // inteiro, meio para cima, arredondado uma vez após a redução
+  doseMg: number | null; // D-F1-52: empate preservado, dose positiva não zerada
   estado: Semaforo;
   motivo: string;
   ciclosSemPesoConsecutivos: number;

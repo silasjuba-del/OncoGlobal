@@ -7161,6 +7161,148 @@
           "reason": "Sequencia numerica contida em SHA-256 hexadecimal integral de arquivo original PDFforge, conferido contra os bytes locais. Nao representa contato."
         }
       ]
+    },
+    {
+      "path": "docs/specs/CORPUS-INVENTARIO-OPERACIONAL.json",
+      "sha256": "4e0aa6ca462a4d46ea9f402fb5d31fc42646460d3ae10d012439f80586700041",
+      "hashMode": "utf8-lf",
+      "items": [
+        {
+          "type": "telefone",
+          "line": 60,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "contextTag": "commit_hash_40_or_64_hex",
+          "evidenceRef": "docs/specs/CORPUS-INVENTARIO-OPERACIONAL.json:60",
+          "reason": "Ocorrência inteiramente dentro de SHA-256 de corpus, não identificador clínico. Hashes de ficha recalculados pelo mesmo hashConteudoExibido da curadoria; hashes de arquivo conferidos contra os blobs Git selecionados. Não há dado de paciente neste inventário."
+        },
+        {
+          "type": "cns",
+          "line": 179,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "contextTag": null,
+          "evidenceRef": "docs/specs/CORPUS-INVENTARIO-OPERACIONAL.json:179",
+          "reason": "Ocorrência inteiramente dentro de SHA-256 de corpus, não identificador clínico. Hashes de ficha recalculados pelo mesmo hashConteudoExibido da curadoria; hashes de arquivo conferidos contra os blobs Git selecionados. Não há dado de paciente neste inventário."
+        },
+        {
+          "type": "telefone",
+          "line": 229,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "contextTag": "commit_hash_40_or_64_hex",
+          "evidenceRef": "docs/specs/CORPUS-INVENTARIO-OPERACIONAL.json:229",
+          "reason": "Ocorrência inteiramente dentro de SHA-256 de corpus, não identificador clínico. Hashes de ficha recalculados pelo mesmo hashConteudoExibido da curadoria; hashes de arquivo conferidos contra os blobs Git selecionados. Não há dado de paciente neste inventário."
+        },
+        {
+          "type": "telefone",
+          "line": 240,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "contextTag": "commit_hash_40_or_64_hex",
+          "evidenceRef": "docs/specs/CORPUS-INVENTARIO-OPERACIONAL.json:240",
+          "reason": "Ocorrência inteiramente dentro de SHA-256 de corpus, não identificador clínico. Hashes de ficha recalculados pelo mesmo hashConteudoExibido da curadoria; hashes de arquivo conferidos contra os blobs Git selecionados. Não há dado de paciente neste inventário."
+        },
+        {
+          "type": "telefone",
+          "line": 339,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "contextTag": "commit_hash_40_or_64_hex",
+          "evidenceRef": "docs/specs/CORPUS-INVENTARIO-OPERACIONAL.json:339",
+          "reason": "Ocorrência inteiramente dentro de SHA-256 de corpus, não identificador clínico. Hashes de ficha recalculados pelo mesmo hashConteudoExibido da curadoria; hashes de arquivo conferidos contra os blobs Git selecionados. Não há dado de paciente neste inventário."
+        },
+        {
+          "type": "telefone",
+          "line": 429,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "contextTag": "commit_hash_40_or_64_hex",
+          "evidenceRef": "docs/specs/CORPUS-INVENTARIO-OPERACIONAL.json:429",
+          "reason": "Ocorrência inteiramente dentro de SHA-256 de corpus, não identificador clínico. Hashes de ficha recalculados pelo mesmo hashConteudoExibido da curadoria; hashes de arquivo conferidos contra os blobs Git selecionados. Não há dado de paciente neste inventário."
+        },
+        {
+          "type": "telefone",
+          "line": 589,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "contextTag": "commit_hash_40_or_64_hex",
+          "evidenceRef": "docs/specs/CORPUS-INVENTARIO-OPERACIONAL.json:589",
+          "reason": "Ocorrência inteiramente dentro de SHA-256 de corpus, não identificador clínico. Hashes de ficha recalculados pelo mesmo hashConteudoExibido da curadoria; hashes de arquivo conferidos contra os blobs Git selecionados. Não há dado de paciente neste inventário."
+        },
+        {
+          "type": "telefone",
+          "line": 770,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "contextTag": "commit_hash_40_or_64_hex",
+          "evidenceRef": "docs/specs/CORPUS-INVENTARIO-OPERACIONAL.json:770",
+          "reason": "Ocorrência inteiramente dentro de SHA-256 de corpus, não identificador clínico. Hashes de ficha recalculados pelo mesmo hashConteudoExibido da curadoria; hashes de arquivo conferidos contra os blobs Git selecionados. Não há dado de paciente neste inventário."
+        },
+        {
+          "type": "telefone",
+          "line": 919,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "contextTag": "commit_hash_40_or_64_hex",
+          "evidenceRef": "docs/specs/CORPUS-INVENTARIO-OPERACIONAL.json:919",
+          "reason": "Ocorrência inteiramente dentro de SHA-256 de corpus, não identificador clínico. Hashes de ficha recalculados pelo mesmo hashConteudoExibido da curadoria; hashes de arquivo conferidos contra os blobs Git selecionados. Não há dado de paciente neste inventário."
+        },
+        {
+          "type": "telefone",
+          "line": 991,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "contextTag": "json_sha256_field_64hex",
+          "evidenceRef": "docs/specs/CORPUS-INVENTARIO-OPERACIONAL.json:991",
+          "reason": "Ocorrência inteiramente dentro de SHA-256 de corpus, não identificador clínico. Hashes de ficha recalculados pelo mesmo hashConteudoExibido da curadoria; hashes de arquivo conferidos contra os blobs Git selecionados. Não há dado de paciente neste inventário."
+        },
+        {
+          "type": "telefone",
+          "line": 1102,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "contextTag": "commit_hash_40_or_64_hex",
+          "evidenceRef": "docs/specs/CORPUS-INVENTARIO-OPERACIONAL.json:1102",
+          "reason": "Ocorrência inteiramente dentro de SHA-256 de corpus, não identificador clínico. Hashes de ficha recalculados pelo mesmo hashConteudoExibido da curadoria; hashes de arquivo conferidos contra os blobs Git selecionados. Não há dado de paciente neste inventário."
+        },
+        {
+          "type": "telefone",
+          "line": 1111,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "contextTag": "json_sha256_field_64hex",
+          "evidenceRef": "docs/specs/CORPUS-INVENTARIO-OPERACIONAL.json:1111",
+          "reason": "Ocorrência inteiramente dentro de SHA-256 de corpus, não identificador clínico. Hashes de ficha recalculados pelo mesmo hashConteudoExibido da curadoria; hashes de arquivo conferidos contra os blobs Git selecionados. Não há dado de paciente neste inventário."
+        },
+        {
+          "type": "telefone",
+          "line": 1135,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "contextTag": "json_sha256_field_64hex",
+          "evidenceRef": "docs/specs/CORPUS-INVENTARIO-OPERACIONAL.json:1135",
+          "reason": "Ocorrência inteiramente dentro de SHA-256 de corpus, não identificador clínico. Hashes de ficha recalculados pelo mesmo hashConteudoExibido da curadoria; hashes de arquivo conferidos contra os blobs Git selecionados. Não há dado de paciente neste inventário."
+        },
+        {
+          "type": "telefone",
+          "line": 1270,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "contextTag": "commit_hash_40_or_64_hex",
+          "evidenceRef": "docs/specs/CORPUS-INVENTARIO-OPERACIONAL.json:1270",
+          "reason": "Ocorrência inteiramente dentro de SHA-256 de corpus, não identificador clínico. Hashes de ficha recalculados pelo mesmo hashConteudoExibido da curadoria; hashes de arquivo conferidos contra os blobs Git selecionados. Não há dado de paciente neste inventário."
+        },
+        {
+          "type": "telefone",
+          "line": 1318,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "contextTag": "commit_hash_40_or_64_hex",
+          "evidenceRef": "docs/specs/CORPUS-INVENTARIO-OPERACIONAL.json:1318",
+          "reason": "Ocorrência inteiramente dentro de SHA-256 de corpus, não identificador clínico. Hashes de ficha recalculados pelo mesmo hashConteudoExibido da curadoria; hashes de arquivo conferidos contra os blobs Git selecionados. Não há dado de paciente neste inventário."
+        }
+      ]
     }
   ],
   "protectedPaths": []

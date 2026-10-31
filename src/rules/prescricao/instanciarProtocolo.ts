@@ -1,9 +1,9 @@
-// W10-INT-PRESC-02 · template conferido → itens com dose calculada (D-W9-45, D-W9-22b, FN-04).
+import { arredondarDoseMg } from "../../contracts/doseReducao.js";
+// W10-INT-PRESC-02 · template conferido → itens com dose calculada (D-W9-45, D-W9-22b).
 // IA propõe, CÓDIGO calcula, médico decide. Função pura.
 //
-// Reaproveitamento de FN-04: src/rules só pode importar src/contracts e não pode importar irmãos,
-// então a regra de arredondamento é COPIADA aqui (meio para cima em inteiros, uma única vez) e o teste
-// tests/rules-prescricao/instanciarProtocolo.test.ts prova equivalência com calcularDose (src/rules/dose.ts).
+// A conta protocolar (mg/m², mg/kg, AUC) arredonda o produto aqui e não chama a redução
+// da dose anterior (D-F1-52, src/contracts/doseReducao.ts).
 // D-F0C-01: SC real, sem piso/teto; se ausente, calculada por Mosteller com peso real.
 // Calvert: dose(mg) = AUC × (ClCr + 25), com ClCr LIMITADO a 125 mL/min (D-W9-60), com aviso visível.
 export const CLCR_MAX_CALVERT = 125;
@@ -55,7 +55,8 @@ export type ResultadoInstanciacao =
   | { ok: true; templateId: string; templateVersao: string; itens: ItemInstanciado[]; pendentes: number }
   | { ok: false; recusa: RecusaInstanciacao };
 
-/** Cópia mínima da regra de arredondamento de FN-04 (meio para cima, inteiro). O round(×1e6) só remove ruído de ponto flutuante.
+/** Meio para cima do produto protocolar (mg/m² × SC, mg/kg, AUC). Não é a redução da dose anterior.
+ * O round(×1e6) só remove ruído de ponto flutuante.
  * Finitude (FUGU-R2 F): entrada não finita ⇒ null (o chamador devolve PENDENTE estruturada). Se o ×1e6 transbordaria,
  * o double já é inteiro exato nessa magnitude e o arredondamento é a identidade: devolve o valor finito sem escala, sem teto. */
 export function arredondaMeioParaCima(x: number): number | null {
@@ -82,7 +83,7 @@ function calcular(item: PrescriptionItem, d: DadosCorporais): { dose: number | n
       if (/µg|μg|mcg|ug/i.test(item.unit)) return { dose: null, unidade: item.unit, motivo: "unidade micrograma incompatível com base MG_KG" };
       if (std === null) return { dose: null, unidade: "mg", motivo: "dose padrão ausente na ficha" };
       if (!valido(d.pesoKg)) return { dose: null, unidade: "mg", motivo: "mg/kg sem peso" };
-      const doseKg = arredondaMeioParaCima(std * d.pesoKg);
+      const doseKg = arredondarDoseMg(std * d.pesoKg);
       return doseKg === null
         ? { dose: null, unidade: "mg", motivo: "cálculo mg/kg não finito (overflow no produto dose × peso)" }
         : { dose: doseKg, unidade: "mg", motivo: null };
@@ -101,7 +102,7 @@ function calcular(item: PrescriptionItem, d: DadosCorporais): { dose: number | n
       if (!valido(d.pesoKg) || !valido(d.alturaCm)) return { dose: null, unidade: "mg", motivo: "mg/m² sem peso/altura" };
       const bsaBase = valido(d.bsaM2) ? d.bsaM2 : bsaMosteller(d.pesoKg, d.alturaCm);
       if (bsaBase === null) return { dose: null, unidade: "mg", motivo: "mg/m² sem superfície corporal" };
-      const doseM2 = arredondaMeioParaCima(std * bsaBase);
+      const doseM2 = arredondarDoseMg(std * bsaBase);
       return doseM2 === null
         ? { dose: null, unidade: "mg", motivo: "cálculo mg/m² não finito (overflow no produto dose × SC)", aviso: null }
         : { dose: doseM2, unidade: "mg", motivo: null, aviso: null };
@@ -111,7 +112,7 @@ function calcular(item: PrescriptionItem, d: DadosCorporais): { dose: number | n
       if (d.clcr === null || !Number.isFinite(d.clcr) || d.clcr < 0) return { dose: null, unidade: "mg", motivo: "AUC (Calvert) sem clearance de creatinina" };
       { const clcr = Math.min(CLCR_MAX_CALVERT, d.clcr);
         const aviso = clcr !== d.clcr ? `ClCr ${d.clcr} mL/min limitado a ${CLCR_MAX_CALVERT} no Calvert (D-W9-60)` : null;
-        const doseAuc = arredondaMeioParaCima(std * (clcr + 25));
+        const doseAuc = arredondarDoseMg(std * (clcr + 25));
         return doseAuc === null
           ? { dose: null, unidade: "mg", motivo: "cálculo Calvert não finito (overflow no produto AUC × (ClCr + 25))", aviso }
           : { dose: doseAuc, unidade: "mg", motivo: null, aviso }; }

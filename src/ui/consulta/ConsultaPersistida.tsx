@@ -136,6 +136,11 @@ export function ConsultaPersistida({ pedidoAberturaFlash = 0, porta, contexto, a
     const falhar = (erro: string) => setConsultaCarregada((anterior) => ({ ...carga, erro,
       visao: anterior?.porta === porta && anterior.contexto.patientId === patientId
         && anterior.contexto.encounterId === encounterId && anterior.contexto.tumorLotId === tumorLotId ? anterior.visao : null }));
+    const prazo = setTimeout(() => {
+      if (atual !== geracaoLeitura.current) return;
+      geracaoLeitura.current++;
+      falhar("Não foi possível carregar a consulta persistida.");
+    }, 20_000);
     void porta.carregarConsulta(patientId, tumorLotId, encounterId).then((bruto) => {
       if (atual !== geracaoLeitura.current) return;
       const r = ConsultaResposta.safeParse(bruto);
@@ -144,8 +149,9 @@ export function ConsultaPersistida({ pedidoAberturaFlash = 0, porta, contexto, a
         falhar("Consulta completa PENDENTE: contexto ou dados ainda indisponíveis."); return;
       }
       setConsultaCarregada({ ...carga, visao: r.data, erro: "" });
-    }, () => { if (atual === geracaoLeitura.current) falhar("Não foi possível carregar a consulta persistida."); });
-    return () => { geracaoLeitura.current++; };
+    }, () => { if (atual === geracaoLeitura.current) falhar("Não foi possível carregar a consulta persistida."); })
+      .finally(() => clearTimeout(prazo));
+    return () => { clearTimeout(prazo); geracaoLeitura.current++; };
   }, [porta, patientId, encounterId, tumorLotId, versao, versaoClinica]);
 
   useEffect(() => {

@@ -93,13 +93,18 @@ export function medirLesao(e: EntradaMorfometria): SaidaMorfometria {
     return recusa("sem régua clínica gravada no quadro nem geometria DICOM: medida em pixel não vira mm");
   }
   if (!pos(r.comprimentoMm) || !pos(r.comprimentoPx)) return recusa("régua inválida: comprimento em mm e em px devem ser positivos");
+  if (!["HORIZONTAL", "VERTICAL", "OBLIQUA", "ISOTROPICA"].includes(r.direcao)) return recusa("direção da régua inválida");
+  if (e.medida && !["HORIZONTAL", "VERTICAL", "OBLIQUA"].includes(e.medida.direcao)) return recusa("direção da medida inválida");
   const fator = r.comprimentoMm / r.comprimentoPx;
+  if (!Number.isFinite(fator) || fator <= 0) return recusa("escala não representável; conferir régua e unidades");
   if (!e.medida) return ok({ fator, nota: "régua válida; nenhuma medida a converter" });
   if (!pos(e.medida.comprimentoPx)) return recusa("medida inválida: comprimento em px deve ser positivo");
   const mesmaDirecao = r.direcao === e.medida.direcao;
   if (!mesmaDirecao && r.isotropicaDemonstrada !== true)
     return recusa(`régua ${r.direcao.toLowerCase()} isolada não calibra a direção ${e.medida.direcao.toLowerCase()}: sem escala isotrópica demonstrada, restringir à direção calibrada ou exigir calibração bidimensional (skill §6.2)`);
-  return ok({ fator, medidaMm: e.medida.comprimentoPx * fator });
+  const medidaMm = e.medida.comprimentoPx * fator;
+  if (!Number.isFinite(medidaMm) || medidaMm <= 0) return recusa("medida não representável; conferir escala e unidades");
+  return ok({ fator, medidaMm });
 }
 export const morfometria = medirLesao;
 
@@ -117,6 +122,7 @@ export function calcularVolume(e: EntradaMorfometria): SaidaMorfometria {
   if (a[0] !== 0 || a[a.length - 1] !== 0) return recusa("extremos sem área zero observada: polos incompletos");
   let v = 0;
   for (let i = 0; i < a.length - 1; i++) v += 0.5 * (a[i]! + a[i + 1]!) * (z[i + 1]! - z[i]!);
+  if (!Number.isFinite(v)) return recusa("volume não representável; conferir áreas, posições e unidades");
   return ok({ volumeMm3: v });
 }
 

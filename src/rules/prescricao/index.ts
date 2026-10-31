@@ -1,3 +1,4 @@
+import { arredondarDoseMg } from "../../contracts/doseReducao.js";
 // W10-INT-PRESC-03..05 · fachada de prescrição segura (RT-08a–e, RT-11b). Funções puras.
 // src/rules só importa src/contracts (R-08): este arquivo é AUTOSSUFICIENTE; a regra de arredondamento/BSA/Calvert
 // é cópia de instanciarProtocolo.ts e tests/rules-prescricao/index.test.ts prova a equivalência.
@@ -130,7 +131,7 @@ function calcularDoseEmMg(e: Exclude<EntradaDose, { basis: "MCG_KG" }>): SaidaDo
     case "MG_KG": {
       const f = [!pos(e.mgKg) && "mgKg", !pos(e.pesoKg) && "pesoKg"].filter((x): x is string => x !== false);
       if (f.length) return pend(f);
-      const dose = meioParaCima(e.mgKg! * e.pesoKg!);
+      const dose = arredondarDoseMg(e.mgKg! * e.pesoKg!);
       return dose === null
         ? pend(["dose (resultado não finito)"])
         : { estado: "PRONTO", doseMg: dose, pendente: null, aviso: null };
@@ -142,7 +143,7 @@ function calcularDoseEmMg(e: Exclude<EntradaDose, { basis: "MCG_KG" }>): SaidaDo
       const produto = e.alturaCm! * e.pesoKg!;
       const base = pos(e.bsaM2) ? e.bsaM2 : Number.isFinite(produto) ? Math.round(Math.sqrt(produto / 3600) * 100) / 100 : null;
       if (base === null) return pend(["bsaM2 (Mosteller não finito)"]);
-      const dose = meioParaCima(e.mgM2! * base);
+      const dose = arredondarDoseMg(e.mgM2! * base);
       return dose === null
         ? pend(["dose (resultado não finito)"])
         : { estado: "PRONTO", doseMg: dose, pendente: null, aviso: null };
@@ -151,7 +152,7 @@ function calcularDoseEmMg(e: Exclude<EntradaDose, { basis: "MCG_KG" }>): SaidaDo
       if (!pos(e.auc)) return pend(["auc"]);
       if (e.clearance === null || !Number.isFinite(e.clearance) || e.clearance < 0) return pend(["clearance"]);
       const clcr = Math.min(CLCR_MAX, e.clearance);
-      const dose = meioParaCima(e.auc * (clcr + 25));
+      const dose = arredondarDoseMg(e.auc * (clcr + 25));
       if (dose === null) return pend(["dose (resultado não finito)"]);
       return { estado: "PRONTO", doseMg: dose, pendente: null,
         aviso: clcr !== e.clearance ? `ClCr ${e.clearance} mL/min limitado a ${CLCR_MAX} no Calvert (D-W9-60)` : null };

@@ -1,3 +1,4 @@
+import * as segurancaPrescricao from "../../src/rules/prescricao/safetyEngine.js";
 // proveniência: dados sintéticos — não utilizar em produção
 import { afterEach, expect, it, vi } from "vitest";
 import { join } from "node:path";
@@ -394,7 +395,8 @@ it.each(["preparar", "confirmar"])("revalida limite de prévia persistida sem o 
   const a = await abrir(), base = await carregarBase(a);
   const pedido = { contexto, expectedBaseHash: base.revisao, idempotencyKey: "previa-sem-gate",
     edicao: edicao({ itens: [{ ...itemPrescrito(), item: { ...itemPrescrito().item, doseMaximaMg: 1 } }] }) };
-  // Simula somente o avaliador da release anterior. HTTP, draft e recibo são reais.
+  // Simula a release histórica, anterior às duas barreiras de limite. HTTP, draft e recibo são reais.
+  const segurancaLegada = vi.spyOn(segurancaPrescricao, "safetyEngine").mockReturnValueOnce({ resultado: "PASS", motivos: [] });
   const avaliar = documentoExecutavel.avaliarDocumentoExecutavel;
   const legado = vi.spyOn(documentoExecutavel, "avaliarDocumentoExecutavel")
     .mockImplementationOnce(entrada => {
@@ -406,7 +408,7 @@ it.each(["preparar", "confirmar"])("revalida limite de prévia persistida sem o 
       return { ...avaliar(semLimites), conteudo: original };
     });
   let r;
-  try { r = await a.request(PREPARAR, pedido); } finally { legado.mockRestore(); }
+  try { r = await a.request(PREPARAR, pedido); } finally { legado.mockRestore(); segurancaLegada.mockRestore(); }
   expect(r.status).toBe(200);
   const previa = PrescricaoExecutavelPreparada.parse(r.data), antes = a.eventos();
   const resposta = operacao === "preparar" ? await a.request(PREPARAR, pedido)

@@ -8,11 +8,11 @@ const Linha = z.object({ opcoes: z.array(Texto), fontes: z.array(ReferenciaJorna
 export const CartaoJornada = z.object({ id: Texto, grupo: Texto, estadiamento: Texto, subtipo: Texto,
   modalidades: z.array(Texto).min(1), papeis: z.array(Texto).min(1), trilha: Texto,
   fontes: z.array(ReferenciaJornada).min(1), linhas: z.object({ "1": Linha, "2": Linha, "3": Linha, "4": Linha, "5": Linha }).strict(),
-  condicoes_e_limites: z.array(Texto), divergencias: z.array(Texto), estado: z.literal("RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL") }).strict();
+  condicoes_e_limites: z.array(Texto), divergencias: z.array(Texto), estado: z.enum(["RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL", "ATIVO_PARA_CONSULTA"]) }).strict();
 export const AcaoCorpusJornada = z.object({ id: Texto, contexto: Texto, rascunho: Texto, condicao: Texto,
   fontes: z.array(ReferenciaJornada).min(1), pendencia: z.string(), estado: z.literal("PROPOSTA_PARA_MEDICO"), executado: z.literal(false) }).strict();
 export const CorpusJornada = z.object({ schema: z.literal("CorpusJornada@1"), versao: Texto,
-  estado: z.literal("RASCUNHO"), fontes: z.array(FonteJornada).min(1), cartoes: z.array(CartaoJornada).min(1),
+  estado: z.enum(["RASCUNHO", "ATIVO_PARA_CONSULTA"]), fontes: z.array(FonteJornada).min(1), cartoes: z.array(CartaoJornada).min(1),
   acoes_consulta: z.array(AcaoCorpusJornada), divergencias: z.array(z.object({ id: Texto, posicao_a: Texto, posicao_b: Texto,
     tratamento: Texto, fontes: z.array(ReferenciaJornada).min(1) }).strict()), limites: z.array(Texto),
 }).strict().superRefine((c, ctx) => {

@@ -1,3 +1,4 @@
+import { safetyEngine } from "../rules/prescricao/safetyEngine.js";
 import {avaliarConsulta} from "./f0c/avaliacaoConsulta.js";
 import {dataCivilDoServico} from "../rules/tempoServico.js";
 import {confirmacaoCancelada,cancelarConfirmacao} from "../kernel/comandos/portas.js";
@@ -20,6 +21,21 @@ import { verificarPrescricaoDuto } from "./dutos.js";
 import { validarOrigemFicha, type DepsOrigemFicha } from "./origemFichaPrescricao.js";
 import { validarOrigemAcao } from "./origemAcaoPrescricao.js";
 import { projetarAlertasConsulta, registrarCienciaAlertas, validarCienciaAlertas } from "./alertasConsulta.js";
+
+/** Segurança estrutural é reavaliada na preparação, replay e confirmação da ordem. */
+function avaliarDocumentoComSeguranca(raw: unknown) {
+  const documento = avaliarDocumentoExecutavel(raw);
+  if (!documento.conteudo) return documento;
+  const seguranca = safetyEngine(documento.conteudo.itens.map(({ item }) => ({ ...item,
+    prescribedDose: item.prescribedDose === null ? null : doseFinalEmMg(item.prescribedDose, item.unit),
+    calculatedDose: item.calculatedDose === null ? null : doseFinalEmMg(item.calculatedDose, item.unit), unit: "mg" })), [], { hoje: documento.conteudo.dataPrevista });
+  const bloqueia = seguranca.resultado === "BLOCK_ARTEFATO" || seguranca.resultado === "NOT_EVALUABLE";
+  const motivos = seguranca.motivos.map(m => `${m.codigo}: ${m.texto} (${m.fonte})`);
+  return { ...documento, ok: documento.ok && !bloqueia,
+    pendencias: [...documento.pendencias, ...(bloqueia ? motivos : [])],
+    avisos: [...documento.avisos, ...(seguranca.resultado === "WARNING" ? motivos : [])],
+    texto: bloqueia ? null : documento.texto };
+}
 
 type Contexto = ContextoAcaoComposta;
 interface Deps extends DepsOrigemFicha { salaoRuleset?: unknown }
@@ -198,7 +214,7 @@ function preparar(deps: Deps, token: string, raw: unknown, contexto: Contexto, a
       || hash(salvo.data.edicao) !== hash(entrada.edicao)
       || salvo.data.resposta.baseHash !== entrada.expectedBaseHash)
       return negar("CONTEUDO_ALTERADO_APOS_EXIBICAO");
-    const avaliacao = avaliarDocumentoExecutavel(salvo.data.resposta.conteudo);
+    const avaliacao = avaliarDocumentoComSeguranca(salvo.data.resposta.conteudo);
     if (!avaliacao.ok) return negar("PRESCRICAO_INCOMPLETA", 409, avaliacao.pendencias);
     depoisDoCommit(deps.db, () => deps.sessoes.registrarBundleExibido(token, contexto, [{ documentId: salvo.data.resposta.conteudo.documentId,
       documentVersion: salvo.data.resposta.conteudo.documentVersion, conteudoHash: salvo.data.resposta.conteudoHash, draftId }]));
@@ -231,7 +247,7 @@ function preparar(deps: Deps, token: string, raw: unknown, contexto: Contexto, a
     contexto: { ...contexto, episodioId, cicloId }, documentId: refAnterior?.documentId ?? `prescricao-${chave}`,
     documentVersion: (refAnterior?.documentVersion ?? 0) + 1, protocoloId: edicao.protocoloId,
     dataPrevista: edicao.dataPrevista, motivo: edicao.motivo, itens: edicao.itens, origemProposta: edicao.origemProposta });
-  const avaliacao = avaliarDocumentoExecutavel(conteudo);
+  const avaliacao = avaliarDocumentoComSeguranca(conteudo);
   if (!avaliacao.ok) return negar("PRESCRICAO_INCOMPLETA", 409, avaliacao.pendencias);
   const itens: Ciclo["itens"] = [];
   for (const { item } of edicao.itens) {
@@ -337,7 +353,7 @@ function confirmar(deps: Deps, token: string, raw: unknown, contexto: Contexto, 
   if (reutilizacao) return negar(reutilizacao);
   const origem = validarOrigem(deps, salvo.edicao, base, atorId, em, token);
   if (origem.codigo) return negar(origem.codigo);
-  const avaliacao = avaliarDocumentoExecutavel(r.conteudo);
+  const avaliacao = avaliarDocumentoComSeguranca(r.conteudo);
   if (!avaliacao.ok) return negar("PRESCRICAO_INCOMPLETA", 409, avaliacao.pendencias);
   const key = hash(operationId), reviewDecisionId = `rx-review-${key}`, eventoId = `rx-doc-${key}`;
   const fonte: Fonte = { sourceId: draft.sourceId, classe: "MANUAL", localizador: null,

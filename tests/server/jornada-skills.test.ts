@@ -1,3 +1,6 @@
+import { PlanoFlashEntrada, prepararFinalizacaoFlash, salvarRascunhoFlash } from "../../src/server/flash.js";
+import { conferirProvenienciaSkill } from "../../src/server/provenienciaSkill.js";
+import { listarDrafts } from "../../src/kernel/comandos/portas.js";
 import {afterEach,it,expect} from 'vitest';
 import {abrirAmbiente,cadastrarPaciente,carregarConsulta,criarDiretorio,removerDiretorio,extrair,vincular,PACIENTE,ENCONTRO,AGORA} from '../f0-fecha/fixtures/consulta-completa.js';
 import {ResultadoSkillClinica} from '../../src/contracts/skillsClinicas.js';
@@ -137,4 +140,27 @@ it('retorno conserva o alerta condicional que já existe na consulta e a políti
  expect(operarSkillsClinicas(ler,a.app.token,deps).body).toMatchObject({validade:'ATUAL'});
  corpus.condicionais.regras[0]!.versao='auditoria-versao-alterada';
  expect(operarSkillsClinicas(ler,a.app.token,deps).body).toMatchObject({validade:'ENTRADA_ALTERADA'});
+});
+
+it.each(['primeira-consulta','retorno','follow-up'])('%s leva documento ao Flash com fonte verificável, sem promover o original', async skillId => {
+ const a=await abrir();const r=await a.app.request('/consulta/skills',{...a.pedido,skillId});expect(r.status).toBe(200);
+ const d=r.data.documentos.find((d:{tipo:string})=>d.tipo==='EVOLUCAO');
+ const origemSkill={contexto,execucaoId:r.data.execucao.execucaoId,documentId:d.documentId,
+   hash:r.data.execucao.documentos.find((x:{documentId:string})=>x.documentId===d.documentId).hash};
+ expect(conferirProvenienciaSkill(a.app.db,contexto,origemSkill)).toBe(true);
+ expect(conferirProvenienciaSkill(a.app.db,{...contexto,patientId:'OUTRO'},origemSkill)).toBe(false);
+ const plano=PlanoFlashEntrada.parse({acoesMarcadas:[],receitasMarcadas:[],
+   apac:{cid:'',sigtap:'',finalidade:'',competencia:'',estado:'PENDENTE',pendencias:[],emitir:false},
+   retorno:{dias:null,examesAntesDoRetorno:[]},documentosManuais:[{id:'skill-'+origemSkill.hash,tipo:'EVOLUCAO',titulo:d.titulo,destino:null,texto:d.texto,origemSkill}]});
+ const antes=a.app.eventos().length;
+ const flash=prepararFinalizacaoFlash(a.app.db,AGORA,{...contexto,plano,idempotencyKey:'adocao-'+skillId});
+ expect(flash.status,JSON.stringify(flash.body)).toBe(200);
+ const adotado=listarDrafts(a.app.db,PACIENTE).map(d=>d.payload as {origemConteudo?:string;texto?:string;documentoManual?:unknown})
+   .find(d=>d.origemConteudo==='PROPOSTA_SKILL_REVISADA');
+ expect(adotado?.texto).toContain(origemSkill.execucaoId);expect(adotado?.texto).toContain(origemSkill.hash);
+ expect(lerDraft(a.app.db,d.documentId)?.payload).toMatchObject({estado:'RASCUNHO',assinatura:null});
+ expect(a.app.eventos()).toHaveLength(antes);
+ const fonte=lerDraft(a.app.db,a.pedido.fontes[0]!.draftId)!;
+ salvarDraft(a.app.db,{...fonte,revision:fonte.revision+1});
+ expect(salvarRascunhoFlash(a.app.db,AGORA,{...contexto,plano,expectedRevision:null}).status).toBe(409);
 });

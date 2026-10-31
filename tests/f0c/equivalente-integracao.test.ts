@@ -19,6 +19,14 @@ it('dose sem unidade compatível ou futura não vira soma tranquilizadora',()=>{
   expect(r?.estado).toBe('PENDENTE');expect(r?.equivalenteMgM2).toBeNull();
  }
 });
+it('histórico incompleto conserva o subtotal conhecido acima do limiar',()=>{
+ const incompleto=dose('epirrubicina',600);
+ (incompleto.payload as {data:{valor:{historicoCompleto:boolean}}}).data.valor.historicoCompleto=false;
+ const r=projetarEquivalenteClinico({...base,programados:['epirrubicina'],eventos:[incompleto,fato('rtMediastino',false)]});
+ expect(r?.equivalenteMgM2).toBe(480);
+ expect(r?.estado).toBe('AVISO');
+ expect(r?.pendencias.join(' ')).toContain('HISTORICO_LONGITUDINAL_INCOMPLETO');
+});
 it('agravante desconhecido permanece pendente; RT documentada mantém aviso',()=>{
  const d=dose('doxorrubicina',100);
  expect(projetarEquivalenteClinico({...base,eventos:[d]})?.estado).toBe('PENDENTE');

@@ -1,4 +1,6 @@
 // PROVISORIO-W10: trocar por PrescriptionItem em src/contracts/w10 + dose via porta.
+import { aplicarAjuste } from "../../rules/prescricao/aplicarAjuste.js";
+import type { PrescriptionItem } from "../../contracts/w10/prescricao.js";
 
 export type ClassePrescricao = "PRE_QT" | "QT" | "POS_QT" | "NAO_ONCO";
 
@@ -84,15 +86,26 @@ export function prescricaoSintetica(): PrescricaoVisao {
   };
 }
 
+function itemParaReducao(dose: number, unidade: string): PrescriptionItem {
+  return {
+    drug: "linha", classe: "PRE_QT", sequence: 1, standardDose: dose, doseBasis: "FIXED",
+    calculatedDose: dose, prescribedDose: dose, unit: unidade, adjustmentPercent: null, adjustmentReason: null,
+    route: "não informada", diluent: null, finalVolumeMl: null, infusionTime: null, days: ["d1"],
+    observacao: null, source: "PROTOCOL", overrideMotivo: null,
+  };
+}
+
+/** Uma aplicação de −20/−30/−40 sobre a dose de entrada. O inteiro sai da função da prescrição. */
 export function aplicarAjustePercentual(
   dosePresc: string,
   pct: 20 | 30 | 40,
 ): string {
   const n = Number.parseFloat(dosePresc.replace(",", "."));
-  if (!Number.isFinite(n)) return dosePresc;
+  if (!Number.isFinite(n) || n <= 0) return dosePresc;
   const unidade = dosePresc.replace(/^[\d.,\s]+/, "").trim() || "mg";
-  const novo = Math.round(n * (1 - pct / 100) * 10) / 10;
-  return `${novo} ${unidade}`.trim();
+  const r = aplicarAjuste(itemParaReducao(n, unidade), -pct, "redução deste ciclo", { doseBase: n });
+  if (!r.ok || r.item.prescribedDose === null) return dosePresc;
+  return `${r.item.prescribedDose} ${unidade}`.trim();
 }
 
 export function rotuloClasse(c: ClassePrescricao): string {

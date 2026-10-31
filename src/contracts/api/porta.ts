@@ -1,3 +1,5 @@
+import type { PedidoAnamneseGuiada, RespostaAnamneseGuiada } from "./anamneseGuiada.js";
+import type { PedidoLaudoAcesso, RespostaLaudoAcesso } from "./laudoAcesso.js";
 import type { ApiDocumental } from "./importacaoDocumental.js";
 import type { ApiConsultorioMedico } from "./consultorioMedico.js";
 import type { ApiConversaOncoassist } from "./conversaOncoassist.js";
@@ -378,6 +380,8 @@ export interface PortaConsulta {
   avaliarInstrumento?(contexto:{patientId:string;encounterId:string;tumorLotId:string|null},pedido:unknown):Promise<ResultadoInstrumento>;
   uploadDocumentoLocal?(pedido:PedidoUploadLocal,signal?:AbortSignal):Promise<ResultadoUploadLocal>;
   fontePack?(pedido:PedidoFontePack,signal?:AbortSignal):Promise<FontePackResposta>;
+  anamneseGuiada?(pedido: PedidoAnamneseGuiada, signal?: AbortSignal): Promise<RespostaAnamneseGuiada>;
+  laudoAcesso?(pedido: PedidoLaudoAcesso, signal?: AbortSignal): Promise<RespostaLaudoAcesso>;
   revisaoClinica?(contexto:PedidoBundle,packId?:string,signal?:AbortSignal,compacta?:boolean):Promise<RevisaoClinicaResposta>;
   prepararEstadoDoenca?(pedido:PedidoEstadoDoenca,signal?:AbortSignal):Promise<EstadoDoencaPreparado>;
   confirmarEstadoDoenca?(pedido:ConfirmacaoEstadoDoenca,signal?:AbortSignal):Promise<{codigo:"GRAVADA"|"REPLAY";eventId:string}>;

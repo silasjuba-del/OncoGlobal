@@ -1,7 +1,8 @@
 // W10-INT-PRESC-03 · ajuste de dose pelos botões −20/−30/−40 (D-W9-26, Q29). Função pura.
-// Base = dose efetivamente prescrita no ciclo anterior (K-06). Mesmo arredondamento de FN-04:
-// floor((base × (100 − r) + 50) / 100), uma única vez. Qualquer outro percentual é RECUSADO.
+// Base = dose de entrada do ciclo anterior (K-06). A conta é mgAposReducao (D-F1-52), uma vez.
+// Qualquer outro percentual é RECUSADO. Não recalcula mg/m², mg/kg nem AUC.
 import type { PrescriptionItem } from "../../contracts/w10/prescricao.js";
+import { mgAposReducao } from "../../contracts/doseReducao.js";
 
 export type RecusaAjuste = {
   codigo: "PERCENTUAL_INVALIDO" | "MOTIVO_AUSENTE" | "DOSE_ANTERIOR_AUSENTE" | "AJUSTE_JA_APLICADO" | "DOSE_RESULTANTE_INVALIDA";
@@ -33,8 +34,9 @@ export function aplicarAjuste(
   const base = temBaseExplicita ? (opcoes?.doseBase ?? null) : item.prescribedDose;
   if (base === null || !Number.isFinite(base) || base <= 0)
     return { ok: false, recusa: { codigo: "DOSE_ANTERIOR_AUSENTE", texto: "sem dose do ciclo anterior para ajustar (PENDENTE)" } };
+  if (item.unit !== "mg") return { ok: false, recusa: { codigo: "DOSE_RESULTANTE_INVALIDA", texto: "redução em mg exige dose absoluta em mg; conferir unidade" } };
   const r = -percentual; // 20 | 30 | 40
-  const dose = Math.floor((base * (100 - r) + 50) / 100);
+  const dose = mgAposReducao(base, r);
   if (!(dose > 0))
     return { ok: false, recusa: { codigo: "DOSE_RESULTANTE_INVALIDA", texto: "dose após o ajuste não é positiva" } };
   return {
