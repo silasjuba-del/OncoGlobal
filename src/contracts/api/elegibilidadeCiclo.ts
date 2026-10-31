@@ -14,7 +14,7 @@ export type OrigemElegibilidade =
 
 export interface MotivoEntradaElegibilidade {
   texto: string;
-  /** Nível de interação/alerta. "atencao" corresponde à interação moderada. Qualquer nível torna a entrada VERMELHO. */
+  /** "atencao" fica como nota e não pinta o ciclo de vermelho. "importante" e "contraindicacao" continuam vermelhos. */
   nivel?: NivelMotivoElegibilidade;
 }
 

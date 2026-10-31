@@ -129,8 +129,8 @@ export function criarEventoInterrupcaoSalao(entrada: {
 
 /**
  * S-F3-02 · Avalia tendência de peso no salão (FN-06 / Q24–Q25 / A2):
- * - Perda > 5,0 kg em 60 dias (ambas medidas) -> VERMELHO + recomendações de nutrição/adiamento pendentes de decisão médica;
- * - Perda exatamente 5,0 kg -> VERDE (passa);
+ * - Perda ≥5% em 90 dias, ou ≥2% com IMC <20, -> VERMELHO + recomendações pendentes de decisão médica;
+ * - Quilos absolutos não decidem mais a cor (decisão 30/10/2026);
  * - Peso informado × medido divergente -> PENDENTE (diferença incerta, médico confirma; nunca dispara vermelho sozinho).
  */
 export function avaliarDesfechoPesoSalao(entrada: {
@@ -179,6 +179,10 @@ export function avaliarDoseECicloSalao(entrada: {
   dosePlanejadaProtocoloMg: number | null;
   dosePrescritaAssinadaMg: number | null;
   doseAdministradaCicloAnteriorMg: number | null;
+  referenciaProtocoloMgM2?: number | null;
+  scAnteriorM2?: number | null;
+  nivelDose?: 0 | -1 | -2 | null;
+  percentualDoNivel?: number | null;
   reducaoPct: 0 | 20 | 30 | 40;
   resultadoTriagem: ResultadoTriagem;
   doseRuleset: DoseRuleset;
@@ -201,6 +205,11 @@ export function avaliarDoseECicloSalao(entrada: {
       pesoKg: pesoEfetivo,
       origemPeso: origemPeso ?? "MEDIDO",
       ciclosSemPesoAnteriores: entrada.ciclosSemPesoAnteriores,
+      alturaCm: entrada.alturaCm,
+      ...(entrada.referenciaProtocoloMgM2 !== undefined ? { referenciaMgM2: entrada.referenciaProtocoloMgM2 } : {}),
+      ...(entrada.scAnteriorM2 !== undefined ? { scAnteriorM2: entrada.scAnteriorM2 } : {}),
+      ...(entrada.nivelDose !== undefined ? { nivelDose: entrada.nivelDose } : {}),
+      ...(entrada.percentualDoNivel !== undefined ? { percentualDoNivel: entrada.percentualDoNivel } : {}),
     },
     entrada.doseRuleset,
   );

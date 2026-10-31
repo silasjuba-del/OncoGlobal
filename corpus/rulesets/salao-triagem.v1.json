@@ -38,7 +38,7 @@
   "filaOrdem": ["ECOG_4", "ECOG_3", "CAMA", "CADEIRA", "IDADE_80"],
   "filaEmpate": ["ECOG_MAIOR", "CHEGADA"],
   "emergenciaAlteraFila": false,
-  "pesoVermelho": { "perdaKgAcimaDe": 5, "janelaDias": 60, "informadoDisparaSozinho": false, "acao": ["NUTRICAO", "QT_ADIADA", "CONSULTA_MEDICA"] },
+  "pesoVermelho": { "perdaKgAcimaDe": 5, "janelaDias": 90, "perdaPctAcimaDe": 5, "perdaPctSeImcAbaixoDe": 2, "imcAbaixoDe": 20, "informadoDisparaSozinho": false, "acao": ["NUTRICAO", "QT_ADIADA", "CONSULTA_MEDICA"], "nota": "2026-10-30: a cor usa percentual na janela de 90 dias. 5 kg absolutos não decidem mais. A ação é alerta, não bloqueio de salvar." },
   "aplicaSemMedicoSe": ["SEM_CORTE", "SEM_PENDENCIA", "PRESCRICAO_VIGENTE"],
   "ciclosLiberadosPorPrescricao": 2,
   "portoes": {

@@ -7,18 +7,26 @@ import { HOJE } from "../fixtures/triagem.js";
 
 const pesagem = (data: string, kg: number, origem: Pesagem["origem"] = "MEDIDO"): Pesagem => ({ data, kg, origem });
 
-describe("FN-06 tendência de peso (igual passa; janela 60 dias; limiar >5 kg)", () => {
-  it("dois MEDIDOS com perda de 5,0 kg em 60 dias → VERDE", () => {
-    const r = avaliarPeso([pesagem("2026-08-10", 80), pesagem("2026-10-01", 75)], HOJE, salaoRuleset);
+describe("FN-06 tendência de peso (alerta em ≥ 5% na janela de 90 dias)", () => {
+  it("perda de 3,75% com dois MEDIDOS → VERDE", () => {
+    const r = avaliarPeso([pesagem("2026-08-10", 80), pesagem("2026-10-01", 77)], HOJE, salaoRuleset);
     expect(r.estado).toBe("VERDE");
-    expect(r.perdaKg).toBeCloseTo(5.0, 5);
+    expect(r.perdaKg).toBeCloseTo(3, 5);
     expect(r.rulesetVersao).toBe(salaoRuleset.header.versao);
   });
-  it("perda de 5,1 kg com dois MEDIDOS → VERMELHO + ação [NUTRICAO, QT_ADIADA, CONSULTA_MEDICA]", () => {
-    const r = avaliarPeso([pesagem("2026-08-10", 80), pesagem("2026-10-01", 74.9)], HOJE, salaoRuleset);
+  it("45 kg perdendo 4,9 kg (quase 11%) → VERMELHO; 120 kg perdendo 5,1 kg (cerca de 4%) → VERDE", () => {
+    const magro = avaliarPeso([pesagem("2026-08-10", 45), pesagem("2026-10-01", 40.1)], HOJE, salaoRuleset);
+    expect(magro.estado).toBe("VERMELHO");
+    expect(magro.acao).toEqual(["NUTRICAO", "QT_ADIADA", "CONSULTA_MEDICA"]);
+    const obeso = avaliarPeso([pesagem("2026-08-10", 120), pesagem("2026-10-01", 114.9)], HOJE, salaoRuleset);
+    expect(obeso.estado).toBe("VERDE");
+  });
+  it("IMC abaixo de 20 alerta a partir de 2%", () => {
+    const r = avaliarPeso([
+      { data: "2026-08-10", kg: 52, origem: "MEDIDO", alturaCm: 170 },
+      { data: "2026-10-01", kg: 50, origem: "MEDIDO", alturaCm: 170 },
+    ], HOJE, salaoRuleset);
     expect(r.estado).toBe("VERMELHO");
-    expect(r.perdaKg).toBeCloseTo(5.1, 5);
-    expect(r.acao).toEqual(["NUTRICAO", "QT_ADIADA", "CONSULTA_MEDICA"]);
   });
   it("perda de 9 kg envolvendo INFORMADO_PACIENTE → PENDENTE (incerta, A2)", () => {
     const r = avaliarPeso(
@@ -27,7 +35,7 @@ describe("FN-06 tendência de peso (igual passa; janela 60 dias; limiar >5 kg)",
     );
     expect(r.estado).toBe("PENDENTE");
   });
-  it("pesagem fora da janela de 60 dias é ignorada (sobra 1 na janela) → PENDENTE", () => {
+  it("pesagem fora da janela de 90 dias é ignorada (sobra 1 na janela) → PENDENTE", () => {
     const r = avaliarPeso([pesagem("2026-07-01", 80), pesagem("2026-10-01", 74)], HOJE, salaoRuleset);
     expect(r.estado).toBe("PENDENTE");
     expect(r.estado).not.toBe("VERMELHO"); // a perda de 6 kg não pode ser calculada sem a pesagem antiga

@@ -4,6 +4,7 @@ import type { ClinicalEvent } from "../../contracts/operacao.js";
 import { dadosDoEvento, eventosVigentes, projetarSnapshot } from "../../kernel/projections/snapshot.js";
 import { avaliarTetosExposicao, calcularTotalExposicao, chaveDroga, type EntradaExposicaoCumulativa,
   type LimiteExposicaoCumulativa } from "../../rules/cumulativoAlerta.js";
+import { equivalenteDoxorrubicina } from "../../rules/equivalenteDoxorrubicina.js";
 
 const id = z.string().trim().min(1);
 const fonte = id.nullable();
@@ -110,4 +111,36 @@ export function projetarCumulativoClinico(i: EntradaCumulativoClinico) {
       origens: vigentes.map((e) => ({ eventId: e.eventId, tumorLotId: e.tumorLotId, encounterId: e.encounterId })) };
   });
   return { avaliacoes, pendencias: [...new Set(pendencias)], invalidEventIds: invalidos };
+}
+
+/** Equivalente adicional: conserva tetos individuais e usa apenas doses normalizadas e as-of. */
+export function projetarEquivalenteClinico(i: EntradaCumulativoClinico) {
+  const nomes = new Set(["doxorrubicina","epirrubicina","daunorrubicina","daunorubicina","idarrubicina","idarubicina","mitoxantrona","mitoxantrone"]);
+  const instante=horizonteDoEncontro(i.eventos.filter(e=>e.patientId===i.patientId),i.encounterId,i.agora);
+  const vigentes=eventosVigentes(i.eventos.filter(e=>e.patientId===i.patientId && Date.parse(e.criadoEm)<=instante
+    && ["CONFIRMADO","ASSINADO"].includes(e.revisao)));
+  const historicas=vigentes.flatMap(e=>{
+    const d=dadosDoEvento(e);
+    const v=d?.campo==="exposicaoCumulativa" ? ExposicaoCumulativaDados.safeParse(d.valor) : null;
+    return v?.success ? [v.data.droga] : [];
+  });
+  const drogas=[...new Set([...(i.programados??[]),...historicas].map(chaveDroga).filter(d=>nomes.has(d)))];
+  if(!drogas.length)return null;
+  const totais=projetarCumulativoClinico({...i,programados:drogas,somenteTotal:true});
+  const unidadesIncompativeis=new Set(vigentes.flatMap(e=>{
+    const d=dadosDoEvento(e),p=d?.campo==='exposicaoCumulativa'?ExposicaoCumulativaDados.safeParse(d.valor):null;
+    return p?.success&&p.data.administracoes.some(a=>a.unidade!=='mg/m2')?[chaveDroga(p.data.droga)]:[];
+  }));
+  const rt=projetarSnapshot(vigentes.filter(e=>e.tipo==='FATO'&&dadosDoEvento(e)?.campo==='rtMediastino')
+    .map(e=>({...e,tumorLotId:i.tumorLotId,encounterId:i.encounterId})),i.patientId,i.tumorLotId,i.encounterId,'equivalente-rt-v1').campos.rtMediastino;
+  const rtValida=rt?.estado==='VERDE' && typeof rt.valor==='boolean' && rt.eventIds.every(id=>vigentes.some(e=>e.eventId===id&&e.fontes.length));
+  const pendencias=[...totais.pendencias,...drogas.filter(d=>unidadesIncompativeis.has(d)).map(d=>`UNIDADE_EQUIVALENTE_INVALIDA:${d}`),...(!rtValida?['RT_MEDIASTINAL_NAO_CONFERIDA']:[])];
+  // O subtotal documentado é um limite inferior: incompletude nunca apaga um limiar já atingido.
+  const doses=totais.avaliacoes.filter(a=>!unidadesIncompativeis.has(chaveDroga(a.droga)) && a.avaliacao.totalConhecidoMgM2 !== null)
+    .map(a=>({droga:a.droga,mgM2:a.avaliacao.totalConhecidoMgM2!}));
+  const r=equivalenteDoxorrubicina(doses,rtValida&&rt!.valor===true);
+  return {...r,estado:pendencias.length && r.estado==='SEM_AVISO'?'PENDENTE' as const:r.estado,
+    pendencias:[...new Set([...r.pendencias,...pendencias])],
+    motivo:r.motivo+(pendencias.length?' Valor é subtotal conhecido; histórico ou agravantes incompletos: não concluir baixo risco.':''),
+    fontes:totais.avaliacoes.flatMap(a=>a.sourceIds)};
 }

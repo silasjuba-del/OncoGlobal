@@ -48,7 +48,7 @@ import type { RegraInstrumento } from "../contracts/f0c/instrumentos.js";
 import { projetarCondicionaisClinicas, type EntradaCondicionaisClinicas } from "./f0c/condicionaisClinicas.js";
 import { projetarIntervaloCiclo } from "./f0c/intervaloCiclo.js";
 import { avaliarInteracoesCondicionadasDaConsulta } from "./f0c/interacoesCondicionadas.js";
-import { projetarCumulativoClinico } from "./f0c/cumulativoClinico.js";
+import { projetarCumulativoClinico, projetarEquivalenteClinico } from "./f0c/cumulativoClinico.js";
 import { chaveDroga, type LimiteExposicaoCumulativa } from "../rules/cumulativoAlerta.js";
 import { imcDeMedidas, sugerirTriagemNutricional, textoSugestaoNutricional } from "../rules/index.js";
 
@@ -336,6 +336,8 @@ export function lerConsulta(db: DatabaseSync, patientId: string, agora: string, 
   const cumulativo=projetarCumulativoClinico({eventos:all,patientId,tumorLotId:lote?.tumorLotId ?? null,
     encounterId:current.encounterId,agora,limites:tetos.filter(t=>vigiadas.some(d=>chaveDroga(t.droga)===chaveDroga(d))),
     programados:vigiadas});
+  const equivalente = projetarEquivalenteClinico({eventos:all,patientId,tumorLotId:lote?.tumorLotId ?? null,
+    encounterId:current.encounterId,agora,limites:tetos,programados:drogasCiclo});
   const sinalCumulativo=(() => {
     const avisos=cumulativo.avaliacoes.filter(a=>a.avaliacao.estado==="AVISO");
     if (!avisos.length) return undefined;
@@ -478,7 +480,7 @@ export function lerConsulta(db: DatabaseSync, patientId: string, agora: string, 
     // W12-F4: Flash calculada do ledger; a data de referência é a do servidor, passada explicitamente.
     flash: { ...projetarFlash(eventosDaConsulta, civil.dataCivil, config.modeloFlash ?? null,
       rascunhoFlashDoContexto(db, { patientId, encounterId: current.encounterId, tumorLotId: lote?.tumorLotId ?? null })),
-      ...contextoClinico.flash, avisos:[...avaliacao.avisosFlash,...avisosCondicionais,...avisosInteracoesCondicionadas.map(r=>r.motivo),...avisosCumulativoPendente],sugestoesLaboratorio:avaliacao.sugestoesLaboratorio,
+      ...contextoClinico.flash, avisos:[...avaliacao.avisosFlash,...avisosCondicionais,...avisosInteracoesCondicionadas.map(r=>r.motivo),...avisosCumulativoPendente,...(equivalente ? [equivalente.motivo] : [])],sugestoesLaboratorio:avaliacao.sugestoesLaboratorio,
       ...(parciaisCumulativos.length ? {parciaisCumulativos} : {}),
       ...(sugestaoNutricional ? {sugestoesClinicas:[sugestaoNutricional]} : {}) },
     elegibilidade: avaliacao.elegibilidade,
@@ -487,6 +489,7 @@ export function lerConsulta(db: DatabaseSync, patientId: string, agora: string, 
     interacoesCondicionadas,
     intervaloCiclo:intervalo,
     cumulativoClinico:cumulativo,
+    equivalenteDoxorrubicina:equivalente,
     camposClinicos: contextoClinico.campos,
     instrumentosClinicos:projetarInstrumentosClinicos({eventos:all,patientId,tumorLotId:lote?.tumorLotId ?? null,
       encounterId:current.encounterId,agora,regras:config.instrumentos ?? []}).avaliacoes,

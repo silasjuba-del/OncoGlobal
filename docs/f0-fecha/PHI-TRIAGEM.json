@@ -1722,7 +1722,7 @@
     },
     {
       "path": "tests/w11-adv/fuzz-regras.test.ts",
-      "sha256": "1d391a0620c58d7167278de7ff983b3490334299ac0e228fbea833a02f27e19a",
+      "sha256": "3f2926519bacfd63cf44640ed67290908b519bfea543f168f344ae8dd42e5567",
       "items": [
         {
           "type": "telefone",
@@ -1730,7 +1730,7 @@
           "ordinal": 0,
           "status": "synthetic_declared",
           "evidenceRef": "tests/w11-adv/fuzz-regras.test.ts:1; docs/ondas/F0-FECHAMENTO-ASTRA.md:54; docs/reviews/REVISAO-PHI-REFACTOR-20261020.md",
-          "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
+          "reason": "Revisado em 30/10/2026: linha 42 é o divisor 2^32 do PRNG sintético, não telefone. Mudança do PR 86 está na expectativa do nível atenção; token preservado. Disposição limitada ao hash e à linha.",
           "contextTag": null
         }
       ],

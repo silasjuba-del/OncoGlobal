@@ -1,4 +1,5 @@
 import {LoteCompleto,SETORES_PACK,TITULOS_SETORES,type ItemLoteCompleto} from '../../contracts/fase2/loteCompleto.js';
+import {ehMetadadoTecnico} from '../../contracts/metadadosTecnicos.js';
 type Setor=typeof SETORES_PACK[number];
 const obj=(v:unknown):Record<string,unknown>=>v&&typeof v==='object'&&!Array.isArray(v)?v as Record<string,unknown>:{};
 const str=(v:unknown)=>typeof v==='string'?v.trim():'';
@@ -27,8 +28,8 @@ export function montarLoteCompleto(original:unknown,arquivo:string,sha256:string
  // APAC/SIGTAP organiza acesso documental; o conteúdo e o ponteiro de origem permanecem intactos.
  for(const [k,v] of Object.entries(obj(p.tratamento)))adicionar(k==='apacSigtap'?'documentos':CHAVES[k]??'tratamento',`/tratamento/${esc(k)}`,v);
  for(const [k,v] of Object.entries(obj(p.ligacoes)))adicionar(CHAVES[k]??'complementos',`/ligacoes/${esc(k)}`,v);
- const raizes:Record<string,Setor>={biomarcadores:'biomarcadores',preQt:'pre_tratamento',completudeKit:'pre_tratamento',criteriosResposta:'resposta',resposta:'resposta',seguimento:'seguimento',suporte:'suporte',pendencias:'pendencias',conflitos:'conflitos',curadoria:'fontes',correcoes:'fontes',header:'fontes'};
- for(const [k,v] of Object.entries(p))if(!['identidade','diagnostico','tratamento','ligacoes','tumor_pack_universal'].includes(k))adicionar(raizes[k]??'complementos',`/${esc(k)}`,v);
+ const raizes:Record<string,Setor>={biomarcadores:'biomarcadores',preQt:'pre_tratamento',completudeKit:'pre_tratamento',criteriosResposta:'resposta',resposta:'resposta',seguimento:'seguimento',suporte:'suporte',pendencias:'pendencias',conflitos:'conflitos',curadoria:'fontes',correcoes:'fontes',header:'fontes',auditoria:'fontes',reconciliacao:'fontes',indice_itens_legados:'fontes'};
+ for(const [k,v] of Object.entries(p))if(!['identidade','diagnostico','tratamento','ligacoes','tumor_pack_universal'].includes(k))adicionar(raizes[k]??(ehMetadadoTecnico(k)?'fontes':'complementos'),`/${esc(k)}`,v);
  const novos=Array.isArray(u.itens_nccn)?u.itens_nccn:[];
  novos.forEach((v,i)=>adicionar(DOMINIOS[Number(obj(v).dominio_principal)]??'complementos',`/tumor_pack_universal/itens_nccn/${i}`,v,'UNIVERSAL'));
  for(const [k,v] of Object.entries(u))if(k!=='itens_nccn'){

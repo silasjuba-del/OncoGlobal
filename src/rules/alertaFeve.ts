@@ -17,6 +17,8 @@ export interface EntradaAlertaFeve {
   feve: EcoFeve;
   programados: readonly FarmacoProgramado[];
   hoje?: string;
+  feveBasal?: EcoFeve | null;
+  numeroCiclo?: number | null;
 }
 
 export interface ClasseCardiotoxica {
@@ -211,20 +213,35 @@ export function alertarFeve(entrada: EntradaAlertaFeve, rs: RulesetAlertaFeve): 
       pendentes: [motivo("pendente.feve.valor", `FEVE inválida (${String(bruto)}) com ${nomes} programado (${classes}); conferir valor`, rs), ...pendentes],
     };
   }
+  const motivos: MotivoFeve[] = [];
   if (percentual < rs.limiteExclusivo) {
     const metodoTxt = metodo ?? "método ausente";
     const dataTxt = data ?? "data ausente";
-    return {
-      ...base,
-      estado: "ALERTA",
-      percentual,
-      pendentes,
-      motivos: [motivo(
-        "alerta.feve.baixa",
-        `FEVE ${percentual}% (${metodoTxt}, ${dataTxt}) com ${nomes} programado (${classes}); limite ${rs.limiteExclusivo}%`,
-        rs,
-      )],
-    };
+    motivos.push(motivo(
+      "alerta.feve.baixa",
+      `FEVE ${percentual}% (${metodoTxt}, ${dataTxt}) com ${nomes} programado (${classes}); limite ${rs.limiteExclusivo}%`,
+      rs,
+    ));
   }
+  const basalBruto = entrada.feveBasal?.percentual;
+  const basalData = entrada.feveBasal?.data;
+  const basalValido = DataCivil.safeParse(basalData).success && limpo(entrada.feveBasal?.metodo ?? null) !== null
+    && data !== null && basalData! <= data && (entrada.hoje === undefined || basalData! <= entrada.hoje);
+  const basal = basalBruto === undefined || !basalValido ? null : percentualUtil(basalBruto);
+  if (entrada.feveBasal && basal === null) pendentes.push(motivo("pendente.feve.basalInvalido", "eco basal sem valor, método ou data válida anterior ao exame atual", rs));
+  if (entrada.numeroCiclo === 1 && basal === null) {
+    pendentes.push(motivo("pendente.feve.basal", `eco basal ausente antes do C1 com ${nomes} programado (${classes})`, rs));
+  }
+  if (basal !== null) {
+    const queda = basal - percentual;
+    if (queda >= 10) {
+      motivos.push(motivo(
+        "alerta.feve.queda",
+        `FEVE caiu ${queda} pontos em relação ao basal (${basal}% → ${percentual}%) com ${nomes} programado`,
+        rs,
+      ));
+    }
+  }
+  if (motivos.length) return { ...base, estado: "ALERTA", percentual, pendentes, motivos };
   return { ...base, estado: pendentes.length ? "PENDENTE" : "SEM_ALERTA", percentual, motivos: [], pendentes };
 }

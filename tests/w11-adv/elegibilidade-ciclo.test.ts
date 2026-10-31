@@ -66,12 +66,16 @@ describe("elegibilidade de ciclo (cruzamento sem amarelo)", () => {
     expect(saida.motivos.map((m) => m.origem)).toEqual(["portaCiclo", "plaquetas"]);
   });
 
-  it("interação moderada/atenção vira VERMELHO com o nível no texto", () => {
+  it("atenção fica como nota e não pinta o ciclo de vermelho", () => {
     const saida = elegibilidadeCiclo({ ...todasVerdes(), interacoes: moderada });
-    expect(saida.cor).toBe("VERMELHO");
+    expect(saida.cor).toBe("VERDE");
     expect(saida.motivos).toEqual([
       { origem: "interacoes", texto: "interação com varfarina (nível: atenção (moderada))", nivel: "atencao" },
     ]);
+  });
+
+  it("sem o núcleo mínimo o ciclo fica pendente, mesmo com uma entrada verde", () => {
+    expect(elegibilidadeCiclo({ portaCiclo: verde } as EntradasElegibilidadeCiclo).cor).toBe("PENDENTE");
   });
 
   it("intercorrência opcional: omitida não altera o resultado; informada segue as mesmas regras", () => {

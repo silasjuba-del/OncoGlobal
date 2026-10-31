@@ -8,14 +8,16 @@ import { avaliarTriagem } from "../../rules/triagem.js";
 import { idadeDoDado, PESO_VALIDADE_DIAS } from "../../rules/prescricao/index.js";
 import { hashCanonico, projetarRetrato } from "../../kernel/projections/retrato/index.js";
 import { diaDaObservacao, observacaoNoHorizonte, observacoesMaisRecentes } from "../../modules/consulta/observacoesTemporais.js";
-import { alturaDocumentada } from "./dadosDocumentados.js";
+import { alturaDocumentada, exameBasalDocumentado, evidenciaBasalAfirmada } from "./dadosDocumentados.js";
 import type { CriterioElegibilidade } from "../../contracts/api/criterioElegibilidade.js";
 import { semaforoInteracoes, type RulesetSemaforo } from "../../rules/semaforoInteracoes.js";
 import type { CatalogoInteracoes } from "../../contracts/f0c/interacoes.js";
 import { elegibilidadeCiclo, type SinalElegibilidade } from "../../rules/elegibilidadeCiclo.js";
 import { alertarFeve, type RulesetAlertaFeve } from "../../rules/alertaFeve.js";
-import { avaliarCriticos, avaliarValidadeExame, cockcroftGault, lembrarHbvC1D1,
+import { analitosSemCortePorDroga, avaliarCriticos, avaliarValidadeExame, cockcroftGault, lembrarHbvC1D1,
   type RegistroHbv, type SorologiaHbv } from "../../rules/f0c/clinica.js";
+import { preRequisitosC1 } from "../../rules/preRequisitosC1.js";
+import { avaliarPeso } from "../../rules/peso.js";
 
 const key = (s: string) => s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 const aliases: Record<string, string> = { cr: "creatinina", creat: "creatinina", na: "sodio", k: "potassio",
@@ -92,6 +94,10 @@ export function avaliarConsulta(i: EntradaAvaliacaoConsulta) {
   const atuaisSnapshot=projetarSnapshot(escopo.filter(e=>e.tipo==="FATO" && e.encounterId===i.encounterId),i.patientId,i.tumorLotId,i.encounterId,"f0c-atual-v1");
   const campo = (nome: string) => {
     const campoFonte=(nome==="medicamentos" ? atuaisSnapshot : snapshot).campos[nome];
+    if (["feveBasal","audiometriaBasal"].includes(nome) && (!campoFonte?.eventIds.length || campoFonte.eventIds.some(id=>{
+      const evento=atuais.find(e=>e.eventId===id);
+      return !evento || !["CONFIRMADO","ASSINADO"].includes(evento.revisao) || !evidenciaBasalAfirmada(dadosDoEvento(evento));
+    }))) return null;
     return campoFonte?.estado === "VERDE" && campoFonte.eventIds.every(id=>atuais.some(e=>e.eventId===id && e.fontes.length>0)) ? campoFonte.valor : null;
   };
   const labs = labSeries(medidasAtuais).filter(p => observacaoNoHorizonte(p.data, limiteClinico, horizonte)
@@ -109,8 +115,10 @@ export function avaliarConsulta(i: EntradaAvaliacaoConsulta) {
   const nascimento = i.paciente.nascimento;
   const idade = nascimento ? Number(i.hoje.slice(0,4)) - Number(nascimento.slice(0,4)) - (i.hoje.slice(5) < nascimento.slice(5) ? 1 : 0) : null;
   const crValidade = avaliarValidadeExame("BIOQUIMICA", cr?.data ?? null, i.agora);
+  const alturaParaRenal = alturaDocumentada(retrato, instanteHorizonte);
   const renal = cockcroftGault({ idadeAnos: idade,
     sexoFormula: i.paciente.sexoCadastral === "M" ? "MASCULINO" : i.paciente.sexoCadastral === "F" ? "FEMININO" : null,
+    alturaCm: alturaParaRenal,
     peso: { valor: peso && idadePeso.desatualizado===false && new Set(pesosDia.map(p=>p.kg)).size === 1 ? peso.kg : null, unidade: "kg", fonte: peso?.sourceId ?? null },
     creatinina: { valor: crValidade.estado === "VALIDO" ? cr?.valor ?? null : null, unidade: cr?.unidade ?? null, fonte: cr?.sourceId ?? null } });
   const medicamentosRaw = campo("medicamentos");
@@ -122,6 +130,12 @@ export function avaliarConsulta(i: EntradaAvaliacaoConsulta) {
     .flatMap(e => { const p = Triagem.safeParse(dadosDoEvento(e)); return p.success && p.data.patientId===i.patientId && p.data.encounterId===i.encounterId ? [p.data] : []; });
   const triagem = triagens.length === 1 ? triagens[0]! : null;
   const rs = SalaoRuleset.safeParse(i.salaoRuleset);
+  const tendenciaPeso = rs.success ? avaliarPeso(pesos.flatMap(p=>{
+    const data=diaDaObservacao(p.data);
+    return data ? [{data,kg:p.kg,origem:"MEDIDO" as const,alturaCm:alturaParaRenal}] : [];
+  }),limiteClinico,rs.data) : null;
+  const avisoPeso = tendenciaPeso?.estado === "VERMELHO"
+    ? `Perda ponderal: ${tendenciaPeso.motivo}. Avaliação nutricional e decisão médica sobre QT; sem adiamento automático.` : null;
   const avalTriagem = triagem && rs.success ? avaliarTriagem(triagem, { hoje: i.hoje, prescricaoVigente: null,
     requisitosAplicaveis: ["pas","fc","spo2","tempDecimos","hbDgDl","anc","plq","coletaHemograma","ecog","grauCtcae"] }, rs.data) : null;
   const criticos = avaliarCriticos({ NA: medida("sodio"), K: medida("potassio"), CA_TOTAL: medida("calcio total") });
@@ -150,15 +164,26 @@ export function avaliarConsulta(i: EntradaAvaliacaoConsulta) {
     if (p.valor < minimo) portaAlertas.push(`${nome} abaixo do corte do serviço (${minimo}/µL)`);
     if (avaliarValidadeExame("HEMOGRAMA",p.data,i.agora).estado !== "VALIDO") portaPendentes.push(`${nome}: validade não confirmada`);
   }
+  const episodioBasal = i.ciclo?.episodioId ?? i.episodio?.episodioId ?? null;
+  const audiometria = exameBasalDocumentado(campo("audiometriaBasal"), episodioBasal, limiteClinico);
+  const audioDocumentada = audiometria && typeof audiometria.resultado === "string" && audiometria.resultado.trim()
+    && audiometria.estado === "REALIZADO";
+  for (const tarefa of preRequisitosC1((i.ciclo?.itens ?? []).map((item) => item.droga), i.ciclo?.numero ?? null)) {
+    if (tarefa.id === "AUDIOMETRIA_BASAL" && !audioDocumentada) portaPendentes.push(tarefa.texto);
+  }
   const dadoGrau = triagem?.grauCtcae;
   const grau = dadoGrau?.campo === "PRESENTE" && (dadoGrau.revisao === "CONFIRMADO" || dadoGrau.revisao === "ASSINADO")
     ? dadoGrau.valor : null;
   const ctcae = grau === null ? pend("toxicidade atual não graduada") : grau >= 2
     ? sinal("VERMELHO", ["toxicidade G2 ou maior: revisão médica, sem ajuste automático"]): sinal("VERDE",[]);
   const eco = obj(campo("feve"));
+  const ecoBasal = exameBasalDocumentado(campo("feveBasal"), episodioBasal, limiteClinico);
   const feve = i.feveRuleset ? alertarFeve({ hoje:i.hoje, feve: { percentual: typeof eco?.percentual === "number" ? eco.percentual : null,
     metodo: typeof eco?.metodo === "string" ? eco.metodo : null, data: typeof eco?.data === "string" ? eco.data : null },
-    programados: (i.ciclo?.itens ?? []).map(item=>({nome:item.droga,classe:null})) },i.feveRuleset) : null;
+    feveBasal: ecoBasal ? { percentual: typeof ecoBasal.percentual === "number" ? ecoBasal.percentual : null,
+      metodo: typeof ecoBasal.metodo === "string" ? ecoBasal.metodo : null, data: String(ecoBasal.data) } : null,
+    programados: (i.ciclo?.itens ?? []).map(item=>({nome:item.droga,classe:null})),
+    numeroCiclo: i.ciclo?.numero ?? null },i.feveRuleset) : null;
   const registrosHbv: Partial<Record<SorologiaHbv,RegistroHbv>> = {};
   for (const nome of ["HBsAg","anti-HBc","anti-HBs"] as const) {
     const v = campo(nome), f = snapshot.campos[nome];
@@ -179,9 +204,18 @@ export function avaliarConsulta(i: EntradaAvaliacaoConsulta) {
     triagem: avalTriagem ? sinal(avalTriagem.cortes.length ? "VERMELHO" : avalTriagem.pendentes.length ? "PENDENTE" : "VERDE",
       [...avalTriagem.cortes,...avalTriagem.pendentes].map(m=>m.texto)) : pend("triagem ausente ou ambígua"),
     ctcae, interacoes:sinalInteracoes,
-    funcaoOrganica: renal.estado === "CALCULADO" ? pend("função renal calculada; limites renal/hepático por fármaco exigem ficha curada") : pend(`função renal: ${renal.motivo ?? crValidade.motivo}`),
+    funcaoOrganica: renal.estado === "CALCULADO"
+      ? pend(["função renal calculada; limites renal/hepático por fármaco exigem ficha curada", ...analitosSemCortePorDroga(i.ciclo?.itens.map((item) => item.droga) ?? [], new Set([
+        ...(ultimoLab(labs, "bilirrubina", limiteClinico) ? ["BILI"] : []),
+        ...(ultimoLab(labs, "tgo", limiteClinico) ? ["AST"] : []),
+        ...(ultimoLab(labs, "tgp", limiteClinico) ? ["ALT"] : []),
+        ...(ultimoLab(labs, "magnesio", limiteClinico) ? ["MG"] : []),
+        ...(ultimoLab(labs, "potassio", limiteClinico) ? ["K"] : []),
+        ...(ultimoLab(labs, "calcio total", limiteClinico) ? ["CA"] : []),
+      ])).map((a) => a.motivo)].join("; "))
+      : pend(`função renal: ${renal.motivo ?? crValidade.motivo}`),
     emergencia: emergencia ? sinal("VERMELHO",["emergência na triagem"]) : avalTriagem ? sinal("VERDE",[]) : pend("triagem de emergência ausente"),
-    ...(avisosCriticos.length ? {intercorrencia:sinal("VERMELHO",avisosCriticos)} : {}),
+    ...(avisosCriticos.length || avisoPeso ? {intercorrencia:sinal("VERMELHO",[...avisosCriticos,...(avisoPeso?[avisoPeso]:[])])} : {}),
     feve: !i.ciclo ? pend("esquema do ciclo não definido para avaliar FEVE") : feve
       ? sinal(feve.estado === "ALERTA" ? "VERMELHO" : feve.estado === "PENDENTE" || feve.pendentes.length ? "PENDENTE" : "VERDE",[...feve.motivos,...feve.pendentes].map(m=>m.texto)) : pend("regra FEVE indisponível"),
     ...(hbv.aplicavel ? {basal: hbv.faltantes.length ? pend(`HBV: verificar ${hbv.faltantes.join(", ")}`) : sinal("VERDE",[])} : {}),
@@ -218,7 +252,7 @@ export function avaliarConsulta(i: EntradaAvaliacaoConsulta) {
     alturaCm: dadosCorporais.alturaCm, medidoEm: pesoNutricional?.data ?? null, sourceId: pesoNutricional?.sourceId ?? null,
     fontes: concordantes.flatMap(p => doPaciente.find(e => e.eventId === p.eventId)!.fontes
       .map(f => ({eventId:p.eventId,sourceId:f.sourceId,medidoEm:p.data}))) };
-  const avisosFlash = [...avisosCriticos,
+  const avisosFlash = [...avisosCriticos,...(avisoPeso?[avisoPeso]:[]),
     ...(peso && diaDaObservacao(peso.data) !== i.hoje ? [`Peso documentado em ${peso.data}: não foi medido hoje; confira antes de prescrever.`] : []),
     ...(variacaoPesoCiclo !== null && variacaoPesoCiclo >= 0.10 ? [`Variação de peso de pelo menos 10% desde o ciclo anterior (${pesoAnteriorCiclo!.kg} kg em ${pesoAnteriorCiclo!.medidoEm}): revisar prescrição`] : []),
     ...(numeroReferencia !== null && numeroReferencia > 0 && variacaoPesoCiclo === null ? ["Comparação de peso com o ciclo anterior indisponível: revisar a referência documentada."] : []),
@@ -228,7 +262,9 @@ export function avaliarConsulta(i: EntradaAvaliacaoConsulta) {
     ...(feve?.estado === "ALERTA" ? feve.motivos.map(m=>m.texto) : []),
     ...(hbv.faltantes.length ? [`Verificar sorologias: ${hbv.faltantes.join(", ")}`] : []),
     ...(i.cumulativo?.estado === "VERMELHO" ? i.cumulativo.motivos.map(m => m.texto) : [])];
-  const sugestoesLaboratorio = [...(interacoes.achados.some(a=>key(a.drogaA).includes("capecitabina") && key(a.drogaBouClasse).includes("varfarina")) ? ["INR"] : []),...hbv.faltantes];
-  return { elegibilidade, renal, dadosCorporais, dadosNutricionais, variacaoPeso, variacaoPesoCiclo, pesoAnteriorCiclo, criticos, hbv, interacoes, emergencia, avisosFlash, sugestoesLaboratorio,
+  const sugestoesLaboratorio = [...(interacoes.achados.some(a=>key(a.drogaA).includes("capecitabina") && key(a.drogaBouClasse).includes("varfarina")) ? ["INR"] : []),...hbv.faltantes,
+    ...(!audioDocumentada && preRequisitosC1((i.ciclo?.itens ?? []).map(item=>item.droga), i.ciclo?.numero ?? null).some(t=>t.id === "AUDIOMETRIA_BASAL") ? ["Audiometria basal"] : [])];
+  return { elegibilidade, renal, dadosCorporais, dadosNutricionais, tendenciaPeso, variacaoPeso, variacaoPesoCiclo, pesoAnteriorCiclo, criticos, hbv, interacoes, emergencia,
+    urgenciaAvaliada: avalTriagem !== null && avalTriagem.pendentes.length === 0, avisosFlash, sugestoesLaboratorio,
     lembrete: elegibilidade.motivos.map(m=>m.texto).filter((t,index,a)=>a.indexOf(t)===index).join("; ") };
 }
