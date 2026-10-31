@@ -117,7 +117,10 @@ export async function operarTrials(deps: Deps, token: string, operacao: Operacao
           diagnostics: [review.decision === "CONFIRMAR" ? "PROTOCOLO_REVISADO" : "PROTOCOLO_REJEITADO"] });
         if (salvo.draftId !== draft.draftId) throw new Error("REVISAO_ESTUDO_ALTERADA");
         return { status: 200, body: estudo };
-      } catch { return negar("REVISAO_ESTUDO_INVALIDA"); }
+      } catch (e) {
+        if (e instanceof Error && e.message === "REVISAO_ESTUDO_ALTERADA") return negar(e.message);
+        return negar("REVISAO_ESTUDO_INVALIDA");
+      }
     });
   }
   const p = operacao === "avaliar" ? AvaliarEstudoPedidoSchema.safeParse(raw) : null;

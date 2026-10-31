@@ -106,8 +106,8 @@ export function revisaoDocumentosFlash(deps:ServidorDeps,contexto:{patientId:str
 /** ConfirmarBloco is strict; all clinical contents are fetched from local drafts, not HTTP input. */
 export function confirmarBloco(deps: ServidorDeps, token: string, input: Confirmar): { status: number; body: unknown } {
   const resultado=transacao(deps.db,()=>confirmarBlocoNaTransacao(deps,token,input),r=>r.status>=400);
-  if(resultado.negativa) auditar(deps.db,{ator:{tipo:"SESSAO",id:deps.sessoes.obter(token)!.medicoId},acaoPedida:"CONFIRMAR",
-    decisao:"NEGADA",motivoCodigo:resultado.negativa.motivo,politicaVersao:"W2-01",em:resultado.negativa.em});
+  if(resultado.negativa){const sessao=deps.sessoes.obter(token);auditar(deps.db,{ator:sessao?{tipo:"SESSAO",id:sessao.medicoId}:{tipo:"SISTEMA",id:"confirmacao"},acaoPedida:"CONFIRMAR",
+    decisao:"NEGADA",motivoCodigo:resultado.negativa.motivo,politicaVersao:"W2-01",em:resultado.negativa.em});}
   return {status:resultado.status,body:resultado.body};
 }
 function confirmarBlocoNaTransacao(deps: ServidorDeps, token: string, input: Confirmar): { status: number; body: unknown; negativa?:{motivo:string;em:string} } {
