@@ -42,5 +42,13 @@ describe("CURSOR-04 Abas e cards", () => {
 
     fireEvent.click(within(abas).getByRole("tab", { name: /^Quimioterapia/ }));
     expect(screen.getByRole("region", { name: "Prescrição" })).toBeTruthy();
+    fireEvent.click(within(abas).getByRole("tab", { name: "Evolução" }));
+    const pontos = screen.getByRole("region", { name: "Pontos da consulta" });
+    for (const ponto of ["Problema:", "Diagnóstico:", "Estadiamento:", "ECOG:", "RECIST:", "CTCAE:", "Exames:", "Tratamento:", "Cirurgia e radioterapia:", "Medicamentos:", "Comorbidades:", "Alergias:"]) {
+      expect(within(pontos).getByText(new RegExp(ponto))).toBeTruthy();
+    }
+    expect(pontos.textContent).toMatch(/Exames:/);
+    expect(screen.getByRole("region", { name: "Setores da clínica" })).toBeTruthy();
+    expect(screen.getByRole("region", { name: "Histórico de documentos assinados" })).toBeTruthy();
   }, 30_000);
 });

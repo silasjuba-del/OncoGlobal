@@ -3,6 +3,7 @@ import { adaptarPackDocumental } from '../../src/kernel/corpus/tumorPacks.js';
 import { montarLoteCompleto } from '../../src/kernel/corpus/loteCompleto.js';
 import { contexto, packOriginal } from '../fase2/fixtures.js';
 import type { RevisaoClinicaResposta } from '../../src/contracts/fase2/revisaoClinica.js';
+import { montarTelaRevisao } from '../../src/modules/consulta/telaRevisao.js';
 export { contexto };
 export function fixturePack() {
   const original = { ...packOriginal, tratamento: { protocolos: [
@@ -17,7 +18,8 @@ export function fixturePack() {
     ficha: [], preQt: { estado: 'PENDENTE', autorizaTratamento: false, pendencias: [] },
     packs: [{ id: pack.referencia.id, titulo: pack.titulo, estado: pack.estado, cids: pack.cids }],
     pack, loteCompleto: lote, pendencias: [], estadosDoenca: [],
-    respostaTumoral: { criterio: 'RECIST_1_1', aplicabilidade: 'CONFERIR_CRITERIO_DO_TUMOR', series: [], patologica: [], pendencias: [] } };
+    respostaTumoral: { criterio: 'RECIST_1_1', aplicabilidade: 'CONFERIR_CRITERIO_DO_TUMOR', series: [], patologica: [], pendencias: [] },
+    tela: montarTelaRevisao({}) };
   return { original, pack, lote, catalogo, resposta,
     pedido: { ...contexto, packId: pack.referencia.id, hashOriginal: hash } };
 }

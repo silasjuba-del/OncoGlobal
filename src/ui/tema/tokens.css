@@ -70,6 +70,12 @@
 
 .pilha > * + * { margin-top: 0.75rem; }
 
+.dose-reducao button + button { margin-left: 0.5rem; }
+.dose-reducao button[aria-pressed="true"] {
+  outline: 2px solid var(--cor-destaque);
+  font-weight: 650;
+}
+
 .colunas {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));

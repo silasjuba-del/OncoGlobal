@@ -88,6 +88,16 @@ export function PainelSkillsClinicas({porta,contexto}:{porta:PortaConsulta;conte
         <p role="status">{resultado.validade==='ATUAL'?'Rascunhos preparados — revisão médica pendente.':'Entradas alteradas — somente consulta histórica; prepare nova versão.'}</p>
         {resultado.execucao.jornada?.estado==='URGENTE'&&<p role="alert">Suspeita urgente: avaliação médica prioritária. Propostas eletivas interrompidas.</p>}
         <ol>{resultado.execucao.jornada?.etapas.map(e=><li key={e.id}>{e.titulo}: {e.estado}. {e.motivo}</li>)}</ol>
+        {!!resultado.execucao.jornada?.cartoes.length&&<section aria-label="Linhas de referência sem dose">
+          <p>Referência em revisão. O cartão nomeia o esquema e não traz dose.</p>
+          {resultado.execucao.jornada.cartoes.map(c=><article key={c.id}>
+            <h4>{c.id} · {c.estadiamento} · {c.subtipo}</h4>
+            <ul>{Object.entries(c.linhas).flatMap(([n,l])=>{
+              if(!l.opcoes.length&&(n==='4'||n==='5'))return [];
+              return [<li key={`${c.id}-L${n}`}><strong>L{n}.</strong> {l.opcoes.length?l.opcoes.join(' ou '):`Sem opção extraída. ${l.condicao}`}{l.opcoes.length&&l.condicao?` ${l.condicao}`:''} Sem dose.</li>];
+            })}</ul>
+          </article>)}
+        </section>}
         {resultado.documentos.map(d=><details key={d.documentId}><summary>{d.titulo}</summary><div style={{whiteSpace:'pre-wrap'}}>{d.texto}</div></details>)}
       </article>}
       {!!historico.length&&<section aria-label="Histórico das jornadas"><h4>Rascunhos salvos</h4>{historico.map(h=><p key={h.execucaoId}>

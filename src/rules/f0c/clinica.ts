@@ -161,8 +161,8 @@ export function lembrarHbvC1D1(ciclo: number | null, dia: number | null, registr
     aplicavel, faltantes, consultaSegue: true as const };
 }
 
-const HEPATICOS = ["paclitaxel", "docetaxel", "cabazitaxel", "irinotecano", "doxorrubicina", "epirrubicina", "daunorrubicina", "idarrubicina", "gencitabina"];
-const ELETROLITOS = ["cisplatina", "cetuximabe"];
+const HEPATICOS = ["paclitaxel", "docetaxel", "cabazitaxel", "irinotecano", "irinotecan", "doxorrubicina", "epirrubicina", "daunorrubicina", "idarrubicina", "gencitabina"];
+const ELETROLITOS = ["cisplatina", "cetuximabe", "cetuximab"];
 
 function drogaChave(nome: string): string {
   return nome.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();

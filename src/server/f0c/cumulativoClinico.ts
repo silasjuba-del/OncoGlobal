@@ -135,7 +135,7 @@ export function projetarEquivalenteClinico(i: EntradaCumulativoClinico) {
     .map(e=>({...e,tumorLotId:i.tumorLotId,encounterId:i.encounterId})),i.patientId,i.tumorLotId,i.encounterId,'equivalente-rt-v1').campos.rtMediastino;
   const rtValida=rt?.estado==='VERDE' && typeof rt.valor==='boolean' && rt.eventIds.every(id=>vigentes.some(e=>e.eventId===id&&e.fontes.length));
   const pendencias=[...totais.pendencias,...drogas.filter(d=>unidadesIncompativeis.has(d)).map(d=>`UNIDADE_EQUIVALENTE_INVALIDA:${d}`),...(!rtValida?['RT_MEDIASTINAL_NAO_CONFERIDA']:[])];
-  const doses=totais.avaliacoes.map(a=>({droga:a.droga,mgM2:unidadesIncompativeis.has(chaveDroga(a.droga))?Number.NaN:a.avaliacao.totalMgM2 ?? Number.NaN}));
+  const doses=totais.avaliacoes.map(a=>({droga:a.droga,mgM2:unidadesIncompativeis.has(chaveDroga(a.droga))?Number.NaN:(a.avaliacao.totalMgM2 ?? a.avaliacao.totalConhecidoMgM2 ?? Number.NaN)}));
   const r=equivalenteDoxorrubicina(doses,rtValida&&rt!.valor===true);
   return {...r,estado:pendencias.length && r.estado!=='AVISO'?'PENDENTE' as const:r.estado,
     pendencias:[...new Set([...r.pendencias,...pendencias])],

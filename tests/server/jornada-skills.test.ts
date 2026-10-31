@@ -53,6 +53,9 @@ it('suspeita radiológica interrompe propostas eletivas sem apagar fonte nem vir
  expect(r.data.execucao.jornada.estado).toBe('URGENTE');
  expect(r.data.execucao.jornada.alertas[0].sourceId).toBe('laudo-jornada-sintetico');
  expect(r.data.execucao.jornada.cartoes).toEqual([]);expect(r.data.execucao.jornada.acoes).toEqual([]);
+ expect(r.data.execucao.jornada.fontes).toEqual([]);expect(r.data.execucao.jornada.divergencias).toEqual([]);
+ expect(r.data.execucao.jornada.criterios.map((c:{id:string})=>c.id)).not.toContain('aplicabilidade:PUL-26');
+ expect(r.data.documentos.find((d:{tipo:string})=>d.tipo==='EVOLUCAO').texto).not.toContain('PUL-26');
  expect(r.data.documentos.find((d:{tipo:string})=>d.tipo==='PEDIDO_EXAMES').texto).toContain('interrompidas');
 });
 it('referência inventada ou corpus indisponível não vira seleção aceita',async()=>{
@@ -68,4 +71,44 @@ it('mudança de regra RADS invalida rascunho mesmo com fonte e ledger inalterado
  expect(operarSkillsClinicas(pedido,a.app.token,deps).body).toMatchObject({validade:'ATUAL'});
  corpus.rads.versao='versao-sintetica-alterada';
  expect(operarSkillsClinicas(pedido,a.app.token,deps).body).toMatchObject({validade:'ENTRADA_ALTERADA'});
+});
+it('mudança das condicionais do corpus invalida o rascunho da jornada',async()=>{
+ const a=await abrir();const r=await a.app.request('/consulta/skills',a.pedido);expect(r.status).toBe(200);
+ const corpus=carregarCorpusServidor();
+ const deps:ServidorDeps={db:a.app.db,sessoes:a.app.sessoes,agora:()=>AGORA,log:()=>{},corpus,salaoRuleset:corpus.ruleset,
+  gateway:criarGateway({agora:()=>AGORA,auditar:()=>{},store:memoriaIdempotencia(),executores:{}})};
+ const pedido={acao:'LER',contexto,execucaoId:r.data.execucao.execucaoId};
+ expect(operarSkillsClinicas(pedido,a.app.token,deps).body).toMatchObject({validade:'ATUAL'});
+ corpus.condicionais={...corpus.condicionais,regras:corpus.condicionais.regras.map((r,i)=>i===0?{...r,versao:'versao-sintetica-alterada'}:r)};
+ expect(operarSkillsClinicas(pedido,a.app.token,deps).body).toMatchObject({validade:'ENTRADA_ALTERADA'});
+});
+it('router da skill entrega L1 e L2 sem dose e conserva a linha vazia',async()=>{
+ const a=await abrir();
+ const base={...a.pedido,operationId:'jornada-linhas-001',skillId:'retorno',configuracao:{documentos:['RESUMO_CASO','EVOLUCAO'],
+  jornada:{cartoesIds:['PUL-26','PUL-30'],discutirTratamento:true}}};
+ const r=await a.app.request('/consulta/skills',base);
+ expect(r.status,JSON.stringify(r.data)).toBe(200);
+ const evo=r.data.documentos.find((d:{tipo:string})=>d.tipo==='EVOLUCAO').texto as string;
+ expect(evo).toContain('L1: Osimertinibe');
+ expect(evo).toContain('L2: Após TKI');
+ expect(evo).toContain('L2: sem opção extraída. Não completar por analogia.');
+ expect(evo).toContain('Sem dose neste cartão');
+ const linhas=evo.split('\n').filter((l:string)=>/^L[123]:/.test(l));
+ expect(linhas.some((l:string)=>l.startsWith('L1: Osimertinibe'))).toBe(true);
+ expect(linhas.some((l:string)=>l.startsWith('L2: Após TKI'))).toBe(true);
+ expect(linhas.join('\n')).not.toMatch(/\d+\s*mg|\bAUC\b/i);
+ expect(evo).toContain('pemetrexede 500 mg');
+ expect(evo).toContain('não derivar prescrição');
+ expect(evo).not.toMatch(/\bL[45]:/);
+ const fu=await a.app.request('/consulta/skills',{...base,skillId:'follow-up',operationId:'jornada-linhas-fu',
+  configuracao:{documentos:['RESUMO_CASO','EVOLUCAO'],jornada:{cartoesIds:['PUL-26']}}});
+ expect(fu.status).toBe(200);
+ expect(fu.data.execucao.jornada.tipo).toBe('FOLLOW_UP');
+ expect(fu.data.execucao.jornada.etapas.map((e:{id:string})=>e.id)).toContain('S09');
+ expect(fu.data.execucao.jornada.etapas.map((e:{id:string})=>e.id)).not.toContain('S08');
+ expect(fu.data.documentos.find((d:{tipo:string})=>d.tipo==='EVOLUCAO').texto).toContain('L1: Osimertinibe');
+ const ruim=await a.app.request('/consulta/skills',{...base,skillId:'inventada',operationId:'jornada-linhas-ruim'});
+ expect(ruim.status).toBe(400);expect(ruim.data.codigo).toBe('PEDIDO_SKILL_INVALIDO');
+ const fora=await a.app.request('/consulta/skill-inexistente',base);
+ expect(fora.status).toBe(404);expect(fora.data.codigo).toBe('ROTA_NAO_ENCONTRADA');
 });

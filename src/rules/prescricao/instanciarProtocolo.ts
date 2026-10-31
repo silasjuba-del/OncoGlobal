@@ -1,9 +1,8 @@
-// W10-INT-PRESC-02 · template conferido → itens com dose calculada (D-W9-45, D-W9-22b, FN-04).
+// W10-INT-PRESC-02 · template conferido → itens com dose calculada (D-W9-45, D-W9-22b).
 // IA propõe, CÓDIGO calcula, médico decide. Função pura.
 //
-// Reaproveitamento de FN-04: src/rules só pode importar src/contracts e não pode importar irmãos,
-// então a regra de arredondamento é COPIADA aqui (meio para cima em inteiros, uma única vez) e o teste
-// tests/rules-prescricao/instanciarProtocolo.test.ts prova equivalência com calcularDose (src/rules/dose.ts).
+// A conta protocolar (mg/m², mg/kg, AUC) arredonda o produto aqui e não chama a redução
+// da dose anterior (D-F1-52, src/contracts/doseReducao.ts).
 // D-F0C-01: SC real, sem piso/teto; se ausente, calculada por Mosteller com peso real.
 // Calvert: dose(mg) = AUC × (ClCr + 25), com ClCr LIMITADO a 125 mL/min (D-W9-60), com aviso visível.
 export const CLCR_MAX_CALVERT = 125;
@@ -55,7 +54,8 @@ export type ResultadoInstanciacao =
   | { ok: true; templateId: string; templateVersao: string; itens: ItemInstanciado[]; pendentes: number }
   | { ok: false; recusa: RecusaInstanciacao };
 
-/** Cópia mínima da regra de arredondamento de FN-04 (meio para cima, inteiro). O round(×1e6) só remove ruído de ponto flutuante.
+/** Meio para cima do produto protocolar (mg/m² × SC, mg/kg, AUC). Não é a redução da dose anterior.
+ * O round(×1e6) só remove ruído de ponto flutuante.
  * Finitude (FUGU-R2 F): entrada não finita ⇒ null (o chamador devolve PENDENTE estruturada). Se o ×1e6 transbordaria,
  * o double já é inteiro exato nessa magnitude e o arredondamento é a identidade: devolve o valor finito sem escala, sem teto. */
 export function arredondaMeioParaCima(x: number): number | null {

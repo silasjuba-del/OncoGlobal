@@ -1,9 +1,5 @@
 import type { DoseRuleset, EntradaDose, SaidaDose } from "../contracts/regras.js";
-
-/** Meio para cima em inteiros: floor((base × (100 − r) + 50) / 100). */
-function arredondaMg(base: number, reducaoPct: number): number {
-  return Math.floor((base * (100 - reducaoPct) + 50) / 100);
-}
+import { mgAposReducao } from "../contracts/doseReducao.js";
 
 /** FN-04 · cálculo aritmético do percentual informado, nunca recomendação clínica de ajuste. */
 export function calcularDose(e: EntradaDose, rs: DoseRuleset): SaidaDose {
@@ -50,7 +46,7 @@ export function calcularDose(e: EntradaDose, rs: DoseRuleset): SaidaDose {
       }
       pct = e.percentualDoNivel;
     }
-    const pelaReferencia = arredondaMg(e.referenciaMgM2 * bsa, pct);
+    const pelaReferencia = mgAposReducao(e.referenciaMgM2 * bsa, pct);
     if (!Number.isSafeInteger(pelaReferencia) || pelaReferencia <= 0) return {
       doseMg: null, estado: "PENDENTE", motivo: "resultado da referência do protocolo fora de mg inteiro",
       ciclosSemPesoConsecutivos, rulesetVersao: versao,
@@ -58,6 +54,7 @@ export function calcularDose(e: EntradaDose, rs: DoseRuleset): SaidaDose {
     const anterior = e.doseAdministradaAnteriorMg === null ? "dose anterior ausente" : `dose anterior ${e.doseAdministradaAnteriorMg} mg ao lado`;
     const nivel = e.nivelDose === undefined || e.nivelDose === null ? "" : `; nível ${e.nivelDose}`;
     let motivo = `referência do protocolo × SC atual ${bsa.toFixed(2)} m²; ${anterior}${nivel}`;
+    if (e.origemPeso === "INFORMADO_PACIENTE") motivo += "; peso informado pelo paciente";
     if (typeof e.scAnteriorM2 === "number" && e.scAnteriorM2 > 0 && Math.abs(bsa - e.scAnteriorM2) / e.scAnteriorM2 >= 0.1 - 1e-9) {
       motivo += " — alerta: SC variou ≥ 10%";
     }
@@ -74,7 +71,7 @@ export function calcularDose(e: EntradaDose, rs: DoseRuleset): SaidaDose {
     };
   }
 
-  const doseMg = arredondaMg(e.doseAdministradaAnteriorMg, e.reducaoPct);
+  const doseMg = mgAposReducao(e.doseAdministradaAnteriorMg, e.reducaoPct);
   if (!Number.isSafeInteger(doseMg) || doseMg < 0) return {
     doseMg: null, estado: "PENDENTE", motivo: "resultado fora da precisão de mg inteiro; conferir base",
     ciclosSemPesoConsecutivos, rulesetVersao: versao,

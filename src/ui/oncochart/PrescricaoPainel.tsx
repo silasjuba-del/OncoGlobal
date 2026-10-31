@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import {
   aplicarAjustePercentual,
   rotuloClasse,
+  type LinhaAntineo,
   type PrescricaoVisao,
   type ProdutoPrescricao,
 } from "./prescricao-visao.js";
@@ -18,35 +19,56 @@ export function PrescricaoPainel({
     inicial.linhas.find((l) => l.excecao)?.id ?? null,
   );
   const [msg, setMsg] = useState<string | null>(null);
+  const [ajusteLinha, setAjusteLinha] = useState<Record<string, 20 | 30 | 40>>({});
+  const entrada = useRef(new Map(inicial.linhas.map((l) => [l.id, { dosePresc: l.dosePresc, excecao: l.excecao, motivoExcecao: l.motivoExcecao }])));
 
   function setProduto(p: ProdutoPrescricao) {
     setVisao((v) => ({ ...v, produto: p }));
   }
 
+  function restaurar(id: string, linhas: readonly LinhaAntineo[]): LinhaAntineo[] {
+    const o = entrada.current.get(id);
+    return linhas.map((l) => {
+      if (l.id !== id || !o) return l;
+      const { motivoExcecao: _motivo, ...resto } = l;
+      return o.motivoExcecao === undefined
+        ? { ...resto, dosePresc: o.dosePresc, excecao: o.excecao }
+        : { ...resto, dosePresc: o.dosePresc, excecao: o.excecao, motivoExcecao: o.motivoExcecao };
+    });
+  }
+
   function ajustar(pct: 20 | 30 | 40) {
     if (!linhaSel) {
-      setMsg("Selecione uma linha-exceção");
+      setMsg("Selecione a linha da exceção.");
+      return;
+    }
+    if (ajusteLinha[linhaSel] === pct) {
+      setVisao((v) => ({ ...v, linhas: restaurar(linhaSel, v.linhas) }));
+      setAjusteLinha((a) => { const n = { ...a }; delete n[linhaSel]; return n; });
+      setMsg("Redução retirada. A dose da linha voltou ao valor de entrada.");
       return;
     }
     if (!motivo.trim()) {
-      setMsg("Motivo obrigatório para −" + pct + "%");
+      setMsg("Informe o motivo antes de reduzir.");
       return;
     }
-    // Ajuste percentual sintético = stub da função de dose (equipe interna).
+    const base = entrada.current.get(linhaSel)?.dosePresc;
+    if (!base || !Number.isFinite(Number.parseFloat(base.replace(",", ".")))) {
+      setMsg("A dose desta linha não está em número. Nada foi alterado.");
+      return;
+    }
+    const dosePresc = aplicarAjustePercentual(base, pct);
+    if (dosePresc === base) {
+      setMsg("A conta não alterou a dose. Nada foi aplicado.");
+      return;
+    }
+    const motivoLinha = motivo.trim();
     setVisao((v) => ({
       ...v,
-      linhas: v.linhas.map((l) => {
-        if (l.id !== linhaSel) return l;
-        const dosePresc = aplicarAjustePercentual(l.dosePresc, pct);
-        return {
-          ...l,
-          dosePresc,
-          excecao: true,
-          motivoExcecao: motivo.trim(),
-        };
-      }),
+      linhas: v.linhas.map((l) => l.id === linhaSel ? { ...l, dosePresc, excecao: true, motivoExcecao: motivoLinha } : l),
     }));
-    setMsg(`ajuste −${pct}% aplicado via função sintética`);
+    setAjusteLinha((a) => ({ ...a, [linhaSel]: pct }));
+    setMsg(`Redução −${pct}% neste ciclo, sobre a dose de entrada da linha. Motivo registrado. Não libera a aplicação.`);
   }
 
   const excecoes = visao.linhas.filter((l) => l.excecao);
@@ -56,7 +78,7 @@ export function PrescricaoPainel({
       <header className="oc-rx-h">
         <h3>Prescrição</h3>
         <p className="oc-muted">
-          {visao.protocolo} · {visao.ciclo} — doses vêm da função (não calculadas aqui)
+          {visao.protocolo} · {visao.ciclo}. A dose do protocolo permanece. A redução deste ciclo sai da função da prescrição.
         </p>
       </header>
 
@@ -155,8 +177,9 @@ export function PrescricaoPainel({
             />
           </label>
           <div className="oc-rx-ajustes" role="group" aria-label="Ajuste percentual">
+            <p className="oc-muted">Redução neste ciclo: {linhaSel && ajusteLinha[linhaSel] ? `−${ajusteLinha[linhaSel]}%` : "nenhuma"}. O segundo clique no mesmo botão desfaz.</p>
             {([20, 30, 40] as const).map((p) => (
-              <button key={p} type="button" onClick={() => ajustar(p)}>
+              <button key={p} type="button" aria-pressed={linhaSel !== null && ajusteLinha[linhaSel] === p} onClick={() => ajustar(p)}>
                 −{p}
               </button>
             ))}

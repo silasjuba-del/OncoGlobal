@@ -26,6 +26,11 @@ describe("CURSOR-10 Prescrição UI", () => {
     });
     fireEvent.click(within(rx).getByRole("button", { name: "−20" }));
     expect(within(rx).getByRole("status").textContent).toMatch(/−20%/);
+    expect(within(rx).getByRole("button", { name: "−20" }).getAttribute("aria-pressed")).toBe("true");
+    expect(within(rx).getByText("8 mg")).toBeTruthy();
+    fireEvent.click(within(rx).getByRole("button", { name: "−20" }));
+    expect(within(rx).getByText("10 mg")).toBeTruthy();
+    expect(within(rx).queryByText("8 mg")).toBeNull();
     fireEvent.click(within(rx).getByRole("tab", { name: "Receita pós-QT / VO" }));
     expect(within(rx).getByDisplayValue(/ONDANSETRONA/)).toBeTruthy();
     fireEvent.click(within(rx).getByRole("tab", { name: "EV avulsa" }));

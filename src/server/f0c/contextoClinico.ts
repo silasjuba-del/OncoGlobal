@@ -1,5 +1,6 @@
 import { dataCivilNoOffset } from "../../rules/intervaloQt.js";
 import { horizonteDoEncontro } from "./avaliacaoConsulta.js";
+import { metadadosDoFatoImpedemUso } from "./dadosDocumentados.js";
 import { z } from "zod";
 import { Ciclo, TreatmentEpisode } from "../../contracts/clinico.js";
 import type { ClinicalEvent } from "../../contracts/operacao.js";
@@ -64,6 +65,7 @@ export function projetarContextoClinico(i: EntradaContextoClinico) {
   const exames = vigentes.filter(e => e.tumorLotId === i.tumorLotId && ["Biopsy", "ImagingReport"].includes(e.tipo)).flatMap(e => {
     const d = dadosDoEvento(e);
     if (!d || !dia.safeParse(d.dataClinica).success || String(d.dataClinica) > hoje || typeof d.fraseLaudo !== "string" || !d.fraseLaudo.trim()) return [];
+    if (metadadosDoFatoImpedemUso(d)) return [];
     return [{ data: String(d.dataClinica), nome: typeof d.nome === "string" ? d.nome : e.tipo,
       fraseLaudo: d.fraseLaudo, situacao: d.situacao === "DENTRO_DO_LIMITE" ? "DENTRO_DO_LIMITE" as const
         : d.situacao === "FORA_DO_LIMITE" ? "FORA_DO_LIMITE" as const : "SEM_REFERENCIA" as const, eventId: e.eventId, sourceIds: fontes(e) }];
