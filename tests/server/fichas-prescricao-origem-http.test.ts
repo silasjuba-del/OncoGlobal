@@ -67,7 +67,7 @@ async function abrir(protocolo = template(), dadosPaciente: { nascimento?: strin
   }
   let n = 0;
   function seed(tipo: string, payload: unknown | ((eventId: string) => unknown),
-    fontes: ReturnType<typeof fonteSintetica>[] | ((eventId: string) => ReturnType<typeof fonteSintetica>[]) = eventId => [fonteSintetica(eventId)]) {
+    fontes: ReturnType<typeof fonteSintetica>[] | ((eventId: string) => ReturnType<typeof fonteSintetica>[]) = eventId => [fonteSintetica(eventId)], supersedesEventId: string | null = null) {
     const id = `ficha-seed-${++n}`;
     const conteudo = typeof payload === "function" ? payload(id) : payload;
     const fontesEvento = typeof fontes === "function" ? fontes(id) : fontes;
@@ -75,8 +75,9 @@ async function abrir(protocolo = template(), dadosPaciente: { nascimento?: strin
       payload: {}, revision: 0, diagnostics: [], criadoEm: agora });
     const r = executarConfirmacao(db, { ...contexto, operationId: id, reviewDecisionId: id,
       sessao: sessoes.obter(token)!, em: agora, registros: [{ eventId: id, draftId: id, expectedRevision: 0,
-        tipo, payload: conteudo, fontes: fontesEvento, revisao: "CONFIRMADO" }] });
+        tipo, payload: conteudo, fontes: fontesEvento, revisao: "CONFIRMADO", supersedesEventId }] });
     expect(r.estado).toBe("GRAVADA");
+    return id;
   }
   seed("Paciente", { patientId: contexto.patientId, nome: "Paciente sintético da ficha", identificadores: [],
     nascimento: dadosPaciente.nascimento ?? null, sexoCadastral: dadosPaciente.sexoCadastral ?? "NAO_INFORMADO", divergencia: false });
@@ -431,4 +432,12 @@ it('SafetyEngine aplica somente limiar declarado e aceita plaquetas válidas aci
  const t=template();t.limiaresBula={neutrofilosMin:null,plaquetasMin:100000,clcrMinMlMin:null,fevePctMin:null,fonte:'Limiar exclusivamente sintético'};
  const a=await abrir(t);a.seed('LabResult',(id:string)=>({campo:'plaquetas',valor:150000,unidade:'/µL',data:AGORA,sourceId:id}),id=>[{...fonteSintetica(id),dataClinica:AGORA}]);
  const origem=await instancia(a);expect(origem.pendencias,JSON.stringify(spy.mock.calls.map(c=>c[2]))).toEqual([]);expect((await preparar(a,origem)).status).toBe(200);
+});
+
+it('[pre-merge] correção incerta não ressuscita plaquetas substituídas',async()=>{
+ const t=template();t.limiaresBula={neutrofilosMin:null,plaquetasMin:100000,clcrMinMlMin:null,fevePctMin:null,fonte:'Limiar exclusivamente sintético'};
+ const a=await abrir(t);const anterior=a.seed('LabResult',(id:string)=>({campo:'plaquetas',valor:150000,unidade:'/µL',data:AGORA,sourceId:id}),id=>[{...fonteSintetica(id),dataClinica:AGORA}]);
+ a.seed('LabResult',(id:string)=>({campo:'plaquetas',valor:30000,unidade:'/µL',data:AGORA,sourceId:id,requiresConfirmation:true}),id=>[{...fonteSintetica(id),dataClinica:AGORA}],anterior);
+ const origem=await instancia(a);expect(origem.pendencias.join(' ')).toContain('SEGURANCA_FICHA:');
+ const antes=a.eventos();expect((await preparar(a,origem)).status).toBe(409);expect(a.eventos()).toEqual(antes);
 });

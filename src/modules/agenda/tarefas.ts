@@ -19,7 +19,9 @@ export function atualizarResultadoPedido(tarefa:Tarefa, contexto:ContextoDutoSer
  const anterior=tarefa.acompanhamentoPedidos.find(r=>igual(r.pedido));
  const ordem=["SOLICITADO","REALIZADO","RESULTADO_DISPONIVEL","REVISADO"];
  if(ordem.indexOf(proximo.estado)!==ordem.indexOf(anterior?.estado??"SOLICITADO")+1)return {ok:false as const,codigo:"TRANSICAO_RESULTADO_INVALIDA"};
- if(proximo.resultado&&proximo.resultado.encounterId!==contexto.encounterId)return {ok:false as const,codigo:"RESULTADO_FORA_ENCONTRO"};
+ const mesmaFonte = anterior?.resultado && proximo.resultado && (["draftId","revision","sourceId","hash","encounterId"] as const).every(k=>anterior.resultado![k]===proximo.resultado![k]);
+ if(proximo.estado==="REVISADO"&&!mesmaFonte)return {ok:false as const,codigo:"RESULTADO_ALTERADO"};
+ if(proximo.resultado&&proximo.resultado.encounterId!==contexto.encounterId&&!(proximo.estado==="REVISADO"&&mesmaFonte))return {ok:false as const,codigo:"RESULTADO_FORA_ENCONTRO"};
  if(proximo.estado==="REVISADO"&&(proximo.revisadoPor!==contexto.atorId||proximo.revisadoEm!==contexto.em))return {ok:false as const,codigo:"REVISAO_NAO_AUTORIZADA"};
  const p=Tarefa.safeParse({...tarefa,atualizadoNoEncontroId:contexto.encounterId,acompanhamentoPedidos:[...tarefa.acompanhamentoPedidos.filter(r=>!igual(r.pedido)),proximo]});
  return p.success?{ok:true as const,tarefa:p.data}:{ok:false as const,codigo:"RESULTADO_INVALIDO"};

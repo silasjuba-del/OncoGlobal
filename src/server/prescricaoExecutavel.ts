@@ -26,9 +26,16 @@ import { projetarAlertasConsulta, registrarCienciaAlertas, validarCienciaAlertas
 function avaliarDocumentoComSeguranca(raw: unknown) {
   const documento = avaliarDocumentoExecutavel(raw);
   if (!documento.conteudo) return documento;
-  const seguranca = safetyEngine(documento.conteudo.itens.map(({ item }) => ({ ...item,
-    prescribedDose: item.prescribedDose === null ? null : doseFinalEmMg(item.prescribedDose, item.unit),
-    calculatedDose: item.calculatedDose === null ? null : doseFinalEmMg(item.calculatedDose, item.unit), unit: "mg" })), [], { hoje: documento.conteudo.dataPrevista });
+  const conversoesInvalidas = documento.conteudo.itens.filter(({ item }) => item.prescribedDose !== null
+    && doseFinalEmMg(1, item.unit) !== null && doseFinalEmMg(item.prescribedDose, item.unit) === null);
+  if (conversoesInvalidas.length) return { ...documento, ok: false, texto: null,
+    pendencias: [...documento.pendencias, ...conversoesInvalidas.map(({ item }) => `${item.drug}: conversão para mg fora da representação numérica; conferir quantidade e unidade.`)] };
+  const seguranca = safetyEngine(documento.conteudo.itens.map(({ item }) => {
+    const mg = item.prescribedDose === null ? null : doseFinalEmMg(item.prescribedDose, item.unit);
+    // Sem conversão de massa, conservar quantidade e unidade; não inventar concentração.
+    return mg === null ? item : { ...item, prescribedDose: mg,
+      calculatedDose: item.calculatedDose === null ? null : doseFinalEmMg(item.calculatedDose, item.unit), unit: "mg" };
+  }), [], { hoje: documento.conteudo.dataPrevista });
   const bloqueia = seguranca.resultado === "BLOCK_ARTEFATO" || seguranca.resultado === "NOT_EVALUABLE";
   const motivos = seguranca.motivos.map(m => `${m.codigo}: ${m.texto} (${m.fonte})`);
   return { ...documento, ok: documento.ok && !bloqueia,
@@ -252,8 +259,8 @@ function preparar(deps: Deps, token: string, raw: unknown, contexto: Contexto, a
   const itens: Ciclo["itens"] = [];
   for (const { item } of edicao.itens) {
     const dose = doseFinalEmMg(item.prescribedDose!, item.unit);
-    if (dose === null) return negar("UNIDADE_CICLO_NAO_SUPORTADA", 409, [`${item.drug}: ${item.unit}`]);
     itens.push({ item: item.sequence, droga: item.drug, doseMg: dose,
+      ...(dose === null ? { doseOriginal: { valor: item.prescribedDose!, unidade: item.unit } } : {}),
       reducaoPct: item.adjustmentPercent === null ? null : Math.abs(item.adjustmentPercent) });
   }
   const planejados: z.infer<typeof EventoPlanejado>[] = [];

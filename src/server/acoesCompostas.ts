@@ -34,7 +34,7 @@ export function lerBaseAcaoComposta(db: DatabaseSync, contexto: Contexto, agora:
   if (atuais.some(e => ["TreatmentAdministration", "TreatmentAdministration@1"].includes(e.tipo)
     && dadosDoEvento(e)?.cicloId === ciclo.cicloId)) return pendente("CICLO_COM_ADMINISTRACAO_REGISTRADA");
   if (!ciclo.itens.length) return pendente("PRESCRICAO_SEM_ITENS_ESTRUTURADOS");
-  if (ciclo.itens.some(i => !Number.isFinite(i.doseMg) || i.doseMg < 0 || i.doseMg > Number.MAX_SAFE_INTEGER))
+  if (ciclo.itens.some(i => i.doseMg !== null && (!Number.isFinite(i.doseMg) || i.doseMg < 0 || i.doseMg > Number.MAX_SAFE_INTEGER)))
     return pendente("DOSE_FORA_PRECISAO_NUMERICA");
   const prescricao = ciclo.prescricaoRef ? verificarPrescricaoDuto(eventos, contexto, ciclo.prescricaoRef) : null;
   const pendencias = prescricao?.ok ? [] : [prescricao?.codigo ?? "PRESCRICAO_ASSINADA_AUSENTE"];

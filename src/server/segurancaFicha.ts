@@ -19,8 +19,8 @@ export function avaliarSegurancaFicha(template: ProtocolTemplate, itens: readonl
   retrato: Retrato, eventos: readonly ClinicalEvent[], agora: string) {
   const hoje = retrato.dataClinicaEncontro ?? diaDaObservacao(agora)!;
   const atuais = eventosVigentes(eventos.filter(e => e.patientId === retrato.patientId && ["CONFIRMADO", "ASSINADO"].includes(e.revisao)
-    && Date.parse(e.criadoEm) <= Date.parse(agora) && (escopoDoEvento(e) === "PACIENTE" || e.tumorLotId === retrato.tumorLotId)
-    && !metadadosDoFatoImpedemUso(dadosDoEvento(e))));
+    && Date.parse(e.criadoEm) <= Date.parse(agora) && (escopoDoEvento(e) === "PACIENTE" || e.tumorLotId === retrato.tumorLotId)))
+    .filter(e => !metadadosDoFatoImpedemUso(dadosDoEvento(e)));
   const pontos = labSeries(atuais);
   const hemograma = (nome: string): Medida => {
     const p = ultimoLab(pontos, nome, hoje), unidade = p?.unidade?.normalize("NFKC").toLowerCase();

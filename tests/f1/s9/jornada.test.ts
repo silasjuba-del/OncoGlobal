@@ -142,3 +142,11 @@ it("S9 adversarial: HTML recebido como texto nunca vira script no impresso", asy
     expect(documento!.html).not.toContain("<script");
   } finally { await a.close(); }
 });
+
+it('[pre-merge] replay da assinatura preserva as tarefas de resultado',async()=>{
+ const a=await ambiente();try{const docs=prepararDocumentosConsulta(entradaCanonica()).documentos;a.persistir(docs);expect((await a.exibir(docs)).status).toBe(200);
+ expect((await a.confirmar(docs,'assinatura-replay-resultado')).body.codigo).toBe('GRAVADA');const antes=listarEventos(a.db,contexto.patientId);
+ const replay=await a.confirmar(docs,'assinatura-replay-resultado');expect(replay.status).toBe(200);expect(replay.body.codigo).toBe('REPLAY');
+ expect(listarEventos(a.db,contexto.patientId)).toEqual(antes);
+ }finally{await a.close();}
+});
