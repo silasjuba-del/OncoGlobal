@@ -443,6 +443,10 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp, perfil = "MEDIC
         {<button type="button" disabled={ocupado || transcricaoSalvando} onClick={() => navegarParaTela("canal")}>Canal</button>}
         {<button type="button" disabled={ocupado || transcricaoSalvando} onClick={() => navegarParaTela("apac")}>APAC</button>}
         {porta.anamneseGuiada && <button type="button" disabled={!contexto || salvamentoEmCurso} onClick={() => navegarParaTela("anamnese")}>Anamnese guiada</button>}
+        <button type="button" disabled={!contexto || salvamentoEmCurso} onClick={() => contexto && solicitarNavegacaoVoluntaria(() => {
+          setDocumentoProposto({ id: `pericia-${crypto.randomUUID()}`, tipo: "RELATORIO_PERICIAL", titulo: "Relatório médico para perícia", texto: "", destino: null,
+            solicitacaoId: crypto.randomUUID(), contextoChave: JSON.stringify(contexto) }); setTela("consulta");
+        })}>Relatório para perícia</button>
         {porta.laudoAcesso && <button type="button" disabled={!contexto || salvamentoEmCurso} onClick={() => navegarParaTela("laudo")}>Laudo de acesso</button>}
         <button type="button" disabled={ocupado || transcricaoSalvando} onClick={() => navegarParaTela("config")}>Configurações Flash</button>
         <button type="button" disabled={ocupado || transcricaoSalvando} onClick={() => navegarParaTela("biblioteca")}>Biblioteca</button>

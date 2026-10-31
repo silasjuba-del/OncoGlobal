@@ -108,3 +108,35 @@ Distinções confirmadas: TelaConsulta/PrescricaoPainel/ImageViewerOncoAssist s�
 As capacidades e os handoffs descritos acima estão implementados na branch de integração, sem merge em main. O SafetyEngine também recebe limites declarados na ficha conferida e laboratórios no horizonte do encontro: ausência, unidade não compatível, data futura ou horário insuficiente não viram resultado aprovado. A revisão usa os prazos já existentes (sem criar cortes clínicos). A progressão intervalar preserva alertas de exames datados diante de notas sem data e compara com o exame anterior pertinente, sem transformar pedido de RM em exame realizado.
 
 A bateria exploratória completa revelou regressões de integração, expectativas anteriores de navegação/rotas e triagem de hashes; foram tratadas com provas focais. O inventário contém apenas metadados de corpus: suas 15 ocorrências detectadas como possíveis identificadores foram verificadas como trechos de SHA-256, com disposição vinculada ao arquivo e hash em PHI-TRIAGEM.json. Não foi relaxado o detector. Contagens finais, SHA e verificações remotas ficam na descrição do PR, evitando atribuir ao código uma aprovação clínica.
+
+## Fechamento da auditoria E2E #88 — 31/10/2026
+
+Base cde769f9, branch isolada codex/fechamento-jornadas-pr88. Regressão de Claude copiada sem alterar asserções: SHA-256 original c40877ff45bc60a239c022394a512667a9e2acd6938b59aaa8d1a0e370d501bf. Baseline reproduzida: 19 PASSOU e 3 FALHOU. O script retorna zero mesmo com falhas; corrigir apenas o sinal de saída para a CI.
+
+Decisões explícitas de Silas nesta execução: µg mantém o produto exato, sem arredondamento; PATH-MOL usa o modelo geral de exames e sinais de alarme o de orientações. Não alterar fichas nem aprovações clínicas.
+
+Lotes: (1) produto exato em µg e eliminação das cópias antigas; (2) histórico assinado e fontes anteriores com contexto/proveniência; (3) pedido → realizado → resultado disponível → revisado, vínculo documental e recuperação; (4) perícia operacional, RESUMO_CASO próprio e evolução única; (5) E2E incorporado à CI.
+
+Refatorações dirigidas: separar matemática/unidade de decisão clínica; uma leitura longitudinal por contexto; transições e vínculo pedido–resultado num contrato comum; composição documental compartilhada com finalidade própria; núcleo de cenários de corpus comum, extensões tumorais e catálogo referenciado. Não unificar fichas por nome parecido e não impor linha a CX/RT/vigilância. Provar núcleo com pulmão e comparação estrutural gastrointestinal sem mudar conteúdo/curadoria dos packs.
+
+### Pontos de refatoração e fronteiras
+
+| Ponto | Resultado esperado e prova |
+|---|---|
+| Matemática e unidade | `doseReducao` concentra as funções compartilhadas. mg conserva a D-F1-52; µg mantém produto decimal sem arredondamento clínico. Provar 0,005 × 70 = 0,35 e impedir PRONTO com zero por perda de representação. |
+| Contexto longitudinal | Uma consulta recebe paciente, tumor e encontro explícitos. Fontes anteriores precisam de vínculo comprovado e precedência documentada; encontros com ordem ambígua permanecem indisponíveis para seleção automática. Não sobrescrever a avaliação assinada. |
+| Pedido e resultado | Contrato comum de quatro estados, referência à versão assinada do pedido e referência/hash do resultado. A tarefa mantém o encontro de origem e registra o encontro da atualização. Revisão do vínculo não confirma valores como fatos clínicos. |
+| Documentos | Composição, edição, assinatura e recuperação compartilhadas; RESUMO_CASO e RELATORIO_PERICIAL têm identidade própria. PATH-MOL reutiliza pedido de exames; alarmes reutilizam orientação. Uma evolução por finalização, substituição explícita no editor. |
+| Corpus | Extrair somente a estrutura comum de cenário: tumor/subtipo/extensão, modalidades, finalidade, sequência, linha quando aplicável, condições e fontes. Regras específicas permanecem nos módulos tumorais. Não remover conteúdo nem completar linhas sem fonte. |
+| Catálogo terapêutico | Referenciar identidade e versão exatas do protocolo. Nome parecido não prova equivalência de dose, população, finalidade ou aprovação. Preservar todos os arquivos e estados de curadoria existentes. |
+| Router de skills | Roteamento por intenção da jornada e dados disponíveis, com entradas/saídas tipadas e passagem explícita entre módulos. Avaliações transversais reutilizam motores existentes; erro ou ausência de dados aparece como pendência. Não duplicar regras em prompts. |
+| Memory/Brain/Harness | Recuperação fornece contexto com fontes e versões; não assina nem promove sugestões a fatos. O harness testa contexto, isolamento, replay, reinício e falhas; não substitui aprovação clínica. |
+| CI e compatibilidade | Mesmas provas de jornada no Chromium local e no CI, retorno não zero diante de falha/bloqueio. Comparar os SHAs testados antes de atribuir resultado ao remoto. |
+
+A generalização do corpus é direção de refatoração, não afirmação de implementação concluída nesta correção. O lote atual modifica apenas os contratos e integrações necessários às lacunas da auditoria; fichas RASCUNHO e aprovações clínicas permanecem intactas.
+
+### Evidência local do fechamento
+
+Os cinco lotes foram implementados. A suíte original foi preservada e ampliada: 24 provas E2E passaram no Chromium, com código de saída zero. Foram comprovados seleção da fonte anterior, evolução única na finalização, resumo com tipo próprio, perícia editada/assinada/reaberta, pedido assinado vinculado a resultado do retorno, revisão explícita, recusa de outro paciente/encontro, replay sem duplicação e recuperação após reinício. As transições de resultado não criaram nem alteraram fatos clínicos.
+
+Também passaram 280 testes de regressão em 14 arquivos, 15 testes focais de produto em µg e estados de resultado, typecheck, build da interface, fronteiras e validação do corpus. O scanner de PHI dos arquivos preparados retornou findings/pending/unscanned vazios. A primeira tentativa ampliada parou na abertura do navegador; a seguinte identificou um seletor inexato do novo teste. O seletor foi corrigido sem alterar timeout ou afrouxar asserções. Resultado remoto e SHA de entrega devem ser conferidos no PR; estes testes locais não constituem aprovação clínica nem merge.

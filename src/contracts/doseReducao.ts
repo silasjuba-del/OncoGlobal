@@ -18,3 +18,16 @@ export function mgAposReducao(baseMg: number, reducaoPct: number): number {
   if (reducaoPct === 0) return baseMg;
   return arredondarDoseMg(baseMg * ((100 - reducaoPct) / 100)) ?? Number.NaN;
 }
+
+/** µg: decisão explícita de Silas em 31/10/2026. Produto decimal sem arredondamento clínico.
+ * Zero por underflow ou resultado não finito permanece pendente, nunca PRONTO. */
+export function produtoDoseExata(a: number, b: number): number | null {
+  if (!Number.isFinite(a) || !Number.isFinite(b) || a <= 0 || b <= 0) return null;
+  const decimal = (n: number) => {
+    const [mantissa, expoente = "0"] = String(n).toLowerCase().split("e");
+    const [inteiro, fracao = ""] = mantissa!.split(".");
+    return { n: BigInt(`${inteiro}${fracao}`), e: Number(expoente) - fracao.length };
+  };
+  const x = decimal(a), y = decimal(b), valor = Number(`${x.n * y.n}e${x.e + y.e}`);
+  return Number.isFinite(valor) && valor > 0 ? valor : null;
+}

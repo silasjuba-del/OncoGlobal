@@ -1,4 +1,4 @@
-import { arredondarDoseMg } from "../../contracts/doseReducao.js";
+import { arredondarDoseMg, produtoDoseExata } from "../../contracts/doseReducao.js";
 // W10-INT-PRESC-02 · template conferido → itens com dose calculada (D-W9-45, D-W9-22b).
 // IA propõe, CÓDIGO calcula, médico decide. Função pura.
 //
@@ -55,17 +55,6 @@ export type ResultadoInstanciacao =
   | { ok: true; templateId: string; templateVersao: string; itens: ItemInstanciado[]; pendentes: number }
   | { ok: false; recusa: RecusaInstanciacao };
 
-/** Meio para cima do produto protocolar (mg/m² × SC, mg/kg, AUC). Não é a redução da dose anterior.
- * O round(×1e6) só remove ruído de ponto flutuante.
- * Finitude (FUGU-R2 F): entrada não finita ⇒ null (o chamador devolve PENDENTE estruturada). Se o ×1e6 transbordaria,
- * o double já é inteiro exato nessa magnitude e o arredondamento é a identidade: devolve o valor finito sem escala, sem teto. */
-export function arredondaMeioParaCima(x: number): number | null {
-  if (!Number.isFinite(x)) return null;
-  const escalonado = x * 1e6;
-  if (!Number.isFinite(escalonado)) return x;
-  return Math.floor(Math.round(escalonado) / 1e6 + 0.5);
-}
-
 const norm = (t: string): string => t.normalize("NFD").replace(/[̀-ͯ]/g, "").trim().toUpperCase();
 const valido = (n: number | null): n is number => n !== null && Number.isFinite(n) && n > 0;
 
@@ -92,7 +81,7 @@ function calcular(item: PrescriptionItem, d: DadosCorporais): { dose: number | n
       if (!/^(?:µg|μg|mcg|ug)(?:\/kg)?$/i.test(item.unit.trim()))
         return { dose: null, unidade: item.unit, motivo: "unidade incompatível com base MCG_KG; conferir microgramas por kg" };
       if (std === null || !valido(d.pesoKg)) return { dose: null, unidade: "µg", motivo: "µg/kg sem dose padrão ou peso" };
-      const doseMcg = arredondaMeioParaCima(std * d.pesoKg);
+      const doseMcg = produtoDoseExata(std, d.pesoKg);
       return doseMcg === null
         ? { dose: null, unidade: "µg", motivo: "cálculo µg/kg não finito (overflow no produto dose × peso)" }
         : { dose: doseMcg, unidade: "µg", motivo: null };

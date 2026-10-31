@@ -462,5 +462,9 @@
   [
     "/tarefas/receber",
     "/tarefas/receber"
+  ],
+  [
+    "/tarefas/resultados",
+    "/tarefas/resultados"
   ]
 ]

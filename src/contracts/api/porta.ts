@@ -1,3 +1,4 @@
+import type { PedidoResultadoExame, ResultadosPedidosResposta } from "./resultadosPedidos.js";
 import type { PedidoAnamneseGuiada, RespostaAnamneseGuiada } from "./anamneseGuiada.js";
 import type { PedidoLaudoAcesso, RespostaLaudoAcesso } from "./laudoAcesso.js";
 import type { ApiDocumental } from "./importacaoDocumental.js";
@@ -381,6 +382,7 @@ export interface PortaConsulta {
   uploadDocumentoLocal?(pedido:PedidoUploadLocal,signal?:AbortSignal):Promise<ResultadoUploadLocal>;
   fontePack?(pedido:PedidoFontePack,signal?:AbortSignal):Promise<FontePackResposta>;
   anamneseGuiada?(pedido: PedidoAnamneseGuiada, signal?: AbortSignal): Promise<RespostaAnamneseGuiada>;
+  resultadosPedidos?(pedido: PedidoResultadoExame, signal?: AbortSignal): Promise<ResultadosPedidosResposta>;
   laudoAcesso?(pedido: PedidoLaudoAcesso, signal?: AbortSignal): Promise<RespostaLaudoAcesso>;
   revisaoClinica?(contexto:PedidoBundle,packId?:string,signal?:AbortSignal,compacta?:boolean):Promise<RevisaoClinicaResposta>;
   prepararEstadoDoenca?(pedido:PedidoEstadoDoenca,signal?:AbortSignal):Promise<EstadoDoencaPreparado>;

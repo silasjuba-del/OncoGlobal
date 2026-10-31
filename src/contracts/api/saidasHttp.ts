@@ -1,3 +1,4 @@
+import { ResultadosPedidosResposta } from "./resultadosPedidos.js";
 import { RespostaAnamneseGuiada } from "./anamneseGuiada.js";
 import { RespostaLaudoAcesso } from "./laudoAcesso.js";
 import { SaidasConsultorioMedico } from "./consultorioMedico.js";
@@ -54,6 +55,7 @@ export const SaidasHttp: Readonly<Record<string, z.ZodType>> = {
   recuperarConfirmacao: RecuperacaoConfirmacao,
   documentoImpressao: z.object({html:z.string().min(1)}).strict(),
   anamneseGuiada: RespostaAnamneseGuiada,
+  "/tarefas/resultados": ResultadosPedidosResposta,
   laudoAcesso: RespostaLaudoAcesso,
   skillsClinicas: ResultadoSkillClinica,
   resultadoExtracaoLlm: ResultadoCognitivoOncoassist,

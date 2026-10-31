@@ -47,7 +47,7 @@ export default defineConfig(async () => {
     plugins,
     build: { outDir: "dist/ui", rollupOptions: { input: { atendimento: "index.html", demonstracao: "demonstracao.html", oncoassist: "oncoassist.html" } } },
     ...(target ? { server: { host: "127.0.0.1", proxy: { "/login": { target }, "/medico": { target }, "/consulta": { target, ws:true },
-      "/config": { target }, "/acao": { target }, "/biblioteca": { target }, "/salao": { target }, "/chat": { target } } } } : {}),
+      "/config": { target }, "/acao": { target }, "/biblioteca": { target }, "/salao": { target }, "/chat": { target }, "/tarefas": { target } } } } : {}),
     test: {
       // Preserva o exclude padrao; filtro explicito habilita apenas o reataque real,
       // exceto se o comando for executado na propria fixture controlada.

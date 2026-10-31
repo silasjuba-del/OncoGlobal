@@ -57,7 +57,7 @@ export const ResultadoSkillClinica = z.discriminatedUnion("codigo", [
   z.object({ codigo: z.literal("SKILLS_DISPONIVEIS"), skills: z.array(z.object({ id: Id, versao: Id, titulo: Id,
     origem: z.literal("NATIVA_DO_APP"), documentos: z.array(TipoDocumentoSkill) }).strict()),
     pacotesExternos: z.literal("ADAPTADOR_DE_ADMISSAO_NAO_CONFIGURADO"), corpus: CorpusJornada.nullable().optional() }).strict(),
-  z.object({ codigo: z.literal("SKILL_FONTES"), fontes: z.array(z.object({ draftId: Id, revision: z.number().int().nonnegative(), sourceId: Id }).strict()) }).strict(),
+  z.object({ codigo: z.literal("SKILL_FONTES"), fontes: z.array(z.object({ draftId: Id, revision: z.number().int().nonnegative(), sourceId: Id, encounterId: Id.optional(), registradoEm: Instante.optional() }).strict()) }).strict(),
   z.object({ codigo: z.enum(["SKILL_PREPARADA", "SKILL_REPLAY", "SKILL_CARREGADA"]), execucao: ExecucaoSkill,
     documentos: z.array(DocumentoSkill), validade: z.enum(["ATUAL", "ENTRADA_ALTERADA"]), criaEventoClinico: z.literal(false) }).strict(),
   z.object({ codigo: z.literal("SKILLS_HISTORICO"), execucoes: z.array(z.object({ execucaoId: Id, skillId: Id,

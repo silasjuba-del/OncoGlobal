@@ -1,3 +1,4 @@
+import { ResultadosPedidosRetorno } from "./TarefasRetorno.js";
 import type { DocumentoManualFlash } from "../../contracts/api/flash.js";
 import { conferirPreviewFlash } from "./previewFlash.js";
 import { useCienciaAlertas } from "./useCienciaAlertas.js";
@@ -69,7 +70,8 @@ export function ConsultaPersistida({ pedidoAberturaFlash = 0, porta, contexto, a
   const [preview, setPreview] = useState<Preview | null>(null);
   const [mensagem, setMensagem] = useState("");
   const [ocupado, setOcupado] = useState(false);
-  useEffect(()=>{aoAlterarFlashSalvando?.(ocupado);return()=>aoAlterarFlashSalvando?.(false);},[ocupado,aoAlterarFlashSalvando]);
+  const [resultadoEmCurso,setResultadoEmCurso]=useState(false);
+  useEffect(()=>{aoAlterarFlashSalvando?.(ocupado||resultadoEmCurso);return()=>aoAlterarFlashSalvando?.(false);},[ocupado,resultadoEmCurso,aoAlterarFlashSalvando]);
   const [versao, setVersao] = useState(0);
   const [tipoAcao, setTipoAcao] = useState<TipoAcaoComposta | null>(null);
   const [instanciaAcao, setInstanciaAcao] = useState(0);
@@ -449,6 +451,7 @@ export function ConsultaPersistida({ pedidoAberturaFlash = 0, porta, contexto, a
       {...(aoAbrirCanal ? { aoAbrirCanal } : {})} />
     <VisaoIntegradaMinima {...(visaoPronta.retrato ? {retrato:visaoPronta.retrato}: {})}
       {...(visaoPronta.visaoIntegrada ? {visao:visaoPronta.visaoIntegrada}: {})} />
+    <ResultadosPedidosRetorno key={JSON.stringify(contexto)} porta={porta} contexto={contexto} aoOcupado={setResultadoEmCurso}/>
     <h3>Evolução revisada</h3>
     <pre style={{ whiteSpace: "pre-wrap" }}>{visaoPronta.resumoEvolucao ?? "Evolução PENDENTE de revisão."}</pre>
     {visaoPronta.retratoTransversal ? <CartaoTransversal entrada={visaoPronta.retratoTransversal} />

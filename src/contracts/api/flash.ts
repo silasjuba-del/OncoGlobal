@@ -55,4 +55,4 @@ export interface PlanoFlash {
   decisaoQt?: { solicitarCiclo: boolean; data: string | null };
 }
 export interface ReceitaManualFlash {id:string;medicamento:string;dose:string|null;orientacao:string|null;duracao:string|null;via:string|null;quantidade:string|null}
-export interface DocumentoManualFlash {id:string;tipo:"ENCAMINHAMENTO"|"LAUDO"|"ORIENTACOES"|"EVOLUCAO"|"PEDIDO_EXAMES";titulo:string;destino:string|null;texto:string;proveniencia?:ProvenienciaDocumentoConversa;origemSkill?:ProvenienciaDocumentoSkill}
+export interface DocumentoManualFlash {id:string;tipo:"ENCAMINHAMENTO"|"LAUDO"|"ORIENTACOES"|"EVOLUCAO"|"PEDIDO_EXAMES"|"RESUMO_CASO"|"RELATORIO_PERICIAL";titulo:string;destino:string|null;texto:string;proveniencia?:ProvenienciaDocumentoConversa;origemSkill?:ProvenienciaDocumentoSkill}

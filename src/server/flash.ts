@@ -106,8 +106,8 @@ const ApacFlashEntrada = z.object({
 export const PlanoFlashEntrada = z.object({
   evolucaoAtendimento: z.object({ id: Id, versao: z.number().int().positive(), conteudoHash: z.string().regex(/^[a-f0-9]{64}$/) }).strict().optional(),
   propostasDoseReceita:z.array(ReferenciaPropostaDose).max(50).refine(xs=>new Set(xs.map(x=>x.receitaId)).size===xs.length,'PROPOSTA_RECEITA_DUPLICADA').optional(),
-  documentosManuais:z.array(z.object({id:z.string().regex(/^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,100}$/),tipo:z.enum(['ENCAMINHAMENTO','LAUDO','ORIENTACOES','EVOLUCAO','PEDIDO_EXAMES']),
-    titulo:z.string().max(200),destino:z.string().max(200).nullable(),texto:z.string().max(LIMITE_TEXTO_DOCUMENTO_MANUAL),proveniencia:ProvenienciaDocumentoConversa.optional(),origemSkill:ProvenienciaDocumentoSkill.optional()}).strict()).max(10).refine(v=>new Set(v.map(d=>d.id)).size===v.length,'DOCUMENTO_ID_DUPLICADO').optional(),
+  documentosManuais:z.array(z.object({id:z.string().regex(/^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,100}$/),tipo:z.enum(['ENCAMINHAMENTO','LAUDO','ORIENTACOES','EVOLUCAO','PEDIDO_EXAMES','RESUMO_CASO','RELATORIO_PERICIAL']),
+    titulo:z.string().max(200),destino:z.string().max(200).nullable(),texto:z.string().max(LIMITE_TEXTO_DOCUMENTO_MANUAL),proveniencia:ProvenienciaDocumentoConversa.optional(),origemSkill:ProvenienciaDocumentoSkill.optional()}).strict()).max(10).refine(v=>new Set(v.map(d=>d.id)).size===v.length,'DOCUMENTO_ID_DUPLICADO').refine(v=>v.filter(d=>d.tipo==='EVOLUCAO').length<=1,'EVOLUCAO_DUPLICADA_REVISAR').optional(),
   propostasInvestigacao:z.array(z.object({exameCodigo:Id,contexto:Id,revisaoFatos:Id,referencia:VersaoReferencia}).strict()).max(50).optional(),
   acoesMarcadas: z.array(Id).max(50),
   receitasMarcadas: z.array(Id).max(50),
@@ -209,7 +209,8 @@ function montarDocumentos(chave: string, plano: PlanoFlashEntradaTipo, resumoCli
   const apac = plano.apac.pendencias.length > 0
     ? `${MENSAGEM_APAC}; pendências: ${plano.apac.pendencias.join("; ")}` : MENSAGEM_APAC;
   const id = (tipo: string) => `flash-${tipo}-${chave.slice(0, 20)}`;
-  const docs: DocumentoFlash[] = [
+  const possuiEvolucaoMedica = plano.documentosManuais?.some(d => d.tipo === "EVOLUCAO") ?? false;
+  const docs: DocumentoFlash[] = possuiEvolucaoMedica ? [] : [
     { documentId: id("evolucao"), titulo: "Evolução da Consulta Flash", tipoDocumento: TIPO_DOC.evolucao,
       texto: [...(resumoClinico ? [resumoClinico, ""] : []), (essencial ? "Consulta Flash: plano proposto pelo médico para revisão e assinatura." : "Consulta Flash: plano confirmado pelo médico."), `Retorno: ${prazo}.`,
         `Laboratório: ${lab ? "pedido gerado" : "não solicitado"}.`, `Imagem: ${img ? "pedido gerado" : "não solicitada"}.`,
@@ -233,10 +234,10 @@ function montarDocumentos(chave: string, plano: PlanoFlashEntradaTipo, resumoCli
     texto: `Retorno ${prazo}.${plano.retorno.motivo ? `\nMotivo: ${plano.retorno.motivo}` : ""}`,
     extra: { retornoDias: dias, retornoEstado: dias === null ? "PENDENTE" : "DEFINIDO" } });
   for(const documento of plano.documentosManuais??[]){
-    docs.push({documentId:id(`manual-${documento.id}`),titulo:documento.titulo.trim(),tipoDocumento:`FLASH_${documento.tipo}`,
+    docs.push({documentId:documento.tipo === "EVOLUCAO" ? id("evolucao") : id(`manual-${documento.id}`),titulo:documento.titulo.trim(),tipoDocumento:`FLASH_${documento.tipo}`,
       texto:[documento.titulo.trim(),...(documento.destino?.trim()?[`Destino: ${documento.destino.trim()}`]:[]),
         ...(resumoClinico?["Resumo clínico confirmado",resumoClinico]:[]),"Registro do médico",documento.texto.trim(),...(documento.proveniencia ? [textoProvenienciaConversa(documento.proveniencia)] : []), ...(documento.origemSkill ? [textoProvenienciaSkill(documento.origemSkill)] : [])].join("\n\n"),
-      extra:{documentoManual:documento,origemConteudo:documento.origemSkill?"PROPOSTA_SKILL_REVISADA":documento.proveniencia?"PROPOSTA_ASSISTENTE_REVISADA":"DECISAO_MEDICA"}});
+      extra:{documentoManual:documento,...(documento.tipo === "RELATORIO_PERICIAL" ? {modeloId:"relatorio-pericial",finalidade:"SUBSIDIAR_AVALIACAO_PERICIAL"} : {}),origemConteudo:documento.origemSkill?"PROPOSTA_SKILL_REVISADA":documento.proveniencia?"PROPOSTA_ASSISTENTE_REVISADA":"DECISAO_MEDICA"}});
   }
   if (essencial) {
     // Cópia fixa dos documentos selecionados; o conjunto também exige exibição e assinatura.

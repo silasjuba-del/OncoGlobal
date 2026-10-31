@@ -77,7 +77,7 @@ export function PainelSkillsClinicas({porta,contexto,aoUsarDocumento}:{porta:Por
       <fieldset disabled={ocupado} style={{minWidth:0,maxWidth:'100%',boxSizing:'border-box'}}><legend>Laudos e exames vinculados</legend>
         {!fontes.length&&<p>Vincule e revise as fontes da consulta para preparar a jornada.</p>}
         {fontes.map(f=><label key={f.draftId} style={{display:'block'}}><input type="checkbox" checked={selecionadas.includes(f.draftId)}
-          onChange={e=>{setSelecionadas(s=>e.target.checked?[...s,f.draftId]:s.filter(id=>id!==f.draftId));setResultado(null);}}/>{f.sourceId} · revisão {f.revision}</label>)}
+          onChange={e=>{setSelecionadas(s=>e.target.checked?[...s,f.draftId]:s.filter(id=>id!==f.draftId));setResultado(null);}}/>{f.sourceId} · revisão {f.revision}{f.encounterId&&<small> · atendimento anterior · registrado em {f.registradoEm}</small>}</label>)}
       </fieldset>
       <label style={{display:'block'}}>Cenários do corpus — referências em revisão <select aria-label="Cenários de pulmão" multiple value={cartoes} disabled={ocupado}
         style={{display:'block',width:'100%',minWidth:0,maxWidth:'100%',boxSizing:'border-box',margin:0}}
@@ -110,7 +110,7 @@ export function PainelSkillsClinicas({porta,contexto,aoUsarDocumento}:{porta:Por
         {resultado.documentos.map(d=><details key={d.documentId}><summary>{d.titulo}</summary><div style={{whiteSpace:'pre-wrap'}}>{d.texto}</div>
           {aoUsarDocumento && d.tipo !== 'RECEITA' && <button type="button" disabled={ocupado || resultado.validade !== 'ATUAL' || d.texto.length > LIMITE_TEXTO_DOCUMENTO_MANUAL}
             onClick={() => { const ref = resultado.execucao.documentos.find(r => r.documentId === d.documentId); if (!ref) return;
-              aoUsarDocumento({ id: `skill-${ref.hash}`, tipo: d.tipo === 'RESUMO_CASO' ? 'LAUDO' : d.tipo as DocumentoManualFlash['tipo'], titulo: d.titulo,
+              aoUsarDocumento({ id: `skill-${ref.hash}`, tipo: d.tipo as DocumentoManualFlash['tipo'], titulo: d.titulo,
                 destino: null, texto: d.texto, origemSkill: { contexto: ctx, execucaoId: d.execucaoId, documentId: d.documentId, hash: ref.hash } });
             }}>Revisar documento no Flash</button>}
         </details>)}

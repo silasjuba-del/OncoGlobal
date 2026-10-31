@@ -1,3 +1,4 @@
+import { dadosDoEvento } from "../../kernel/projections/snapshot.js";
 import { resolverEvolucaoFlash } from "../atendimentoV6.js";
 import { transacao } from "../../kernel/ledger/db.js";
 import { registrarCienciaAlertas, validarCienciaAlertas } from "../alertasConsulta.js";
@@ -246,10 +247,11 @@ function confirmarBlocoNaTransacao(deps: ServidorDeps, token: string, input: Con
     auxiliares.push({draftId:`flash-consulta-confirmada-${sha(input.idempotencyKey)}`,eventId:sha(`${input.idempotencyKey}:consulta-confirmada`),tipo:"ConsultaConfirmada",
       payload:{dataClinica:civil.dataCivil,documentoIds:escolhidos}});
   }
+  const eventosDoPaciente = listarEventos(deps.db,input.patientId);
   const vistos=new Set<string>();
   for(const t of tarefas) {
     if(vistos.has(t.tarefaId))continue;vistos.add(t.tarefaId);
-    const existente=listarEventos(deps.db,input.patientId).find(e=>e.tipo==="Tarefa"&&e.payload&&typeof e.payload==="object"&&"data" in e.payload
+    const existente=eventosDoPaciente.find(e=>e.tipo==="Tarefa"&&e.payload&&typeof e.payload==="object"&&"data" in e.payload
       &&e.payload.data&&typeof e.payload.data==="object"&&"tarefaId" in e.payload.data&&e.payload.data.tarefaId===t.tarefaId);
     if(existente&&existente.operationId!==input.idempotencyKey)continue;
     const indice=refs.findIndex(d=>d.documentId===t.documentoRef.documentId&&d.documentVersion===t.documentoRef.documentVersion);
@@ -259,6 +261,22 @@ function confirmarBlocoNaTransacao(deps: ServidorDeps, token: string, input: Con
         retornoRef:t.documentoRef,geradaPorEventoId:registros[indice]!.eventId,rulesetVersao:"documentos-consulta@1"}});
   }
 
+  // Cada pedido assinado tem acompanhamento, mesmo sem data de retorno.
+  const cobertos = new Set(tarefas.flatMap(t => t.pedidosRef.map(p => `${p.documentId}@${p.documentVersion}`)));
+  for (const [indice,d] of drafts.entries()) {
+    const p = d!.payload as Record<string,unknown>;
+    if (!["FLASH_LABORATORIO","FLASH_IMAGEM","FLASH_PEDIDO_EXAMES","PEDIDO_EXAME"].includes(String(p.tipoDocumento))) continue;
+    const ref = referencias.safeParse({documentId:p.documentId,documentVersion:p.documentVersion});
+    if (!ref.success || !escolhidos.some(e=>e.documentId===ref.data.documentId&&e.documentVersion===ref.data.documentVersion)) continue;
+    const chave = `${ref.data.documentId}@${ref.data.documentVersion}`;
+    if (cobertos.has(chave)) continue; cobertos.add(chave);
+    const tarefaId = `resultado:${sha(JSON.stringify([contexto,ref.data]))}`;
+    if (eventosDoPaciente.some(e=>e.tipo==="Tarefa"&&dadosDoEvento(e)?.tarefaId===tarefaId)) continue;
+    auxiliares.push({draftId:`resultado-tarefa-${sha(tarefaId)}`,eventId:sha(`${input.idempotencyKey}:resultado:${tarefaId}`),tipo:"Tarefa",
+      payload:{tarefaId,...contexto,operationId:input.idempotencyKey,titulo:`Acompanhar resultado — ${String(p.titulo??"Pedido de exame")}`,
+        responsavel:sessao.medicoId,prazo:null,estado:"CONFIRMADA",recebidoEm:null,criadoPor:sessao.medicoId,substituiTarefaId:null,
+        dataAlvo:null,pedidoRefs:[ref.data],retornoRef:null,geradaPorEventoId:registros[indice]!.eventId,rulesetVersao:"pedido-resultado@1"}});
+  }
     for(const a of auxiliares) {
       if(!lerDraft(deps.db,a.draftId))salvarDraft(deps.db,{draftId:a.draftId,patientId:input.patientId,sourceId:"flash-assinatura",rawRef:"referencia-local",payload:a.payload,diagnostics:[],revision:0,criadoEm:em});
     }

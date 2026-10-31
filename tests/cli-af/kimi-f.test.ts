@@ -1,10 +1,11 @@
+import { arredondarDoseMg } from "../../src/contracts/doseReducao.js";
 // FUGU-R2 seção F (BSA-OVERFLOW) · regressão da fatia AF-F nas duas fachadas de cálculo de dose.
 // Fixtures SINTÉTICAS. Oráculo: PRONTO só com resultado finito; falha de finitude ⇒ PENDENTE estruturada
 // (dose null + motivo/pendente), nunca exceção genérica, nunca Infinity escondido por teto.
 import { describe, expect, it } from "vitest";
 import { PrescriptionItem } from "../../src/contracts/w10/prescricao.js";
 import {
-  arredondaMeioParaCima, bsaMosteller, instanciarProtocolo, type DadosCorporais,
+  bsaMosteller, instanciarProtocolo, type DadosCorporais,
 } from "../../src/rules/prescricao/instanciarProtocolo.js";
 import { calcularDoseBasis, calcularDosePorBase } from "../../src/rules/prescricao/index.js";
 import { item, template } from "../rules-prescricao/_fixtures.js";
@@ -163,14 +164,14 @@ describe("FUGU-R2 F · overflow de intermediários nas duas fachadas", () => {
     expect(auc.doseMg).toBeNull();
   });
 
-  it("arredondaMeioParaCima: não finito ⇒ null; finito gigante é exato; casos válidos intactos", () => {
-    expect(arredondaMeioParaCima(Infinity)).toBeNull();
-    expect(arredondaMeioParaCima(NaN)).toBeNull();
-    expect(arredondaMeioParaCima(-Infinity)).toBeNull();
-    expect(arredondaMeioParaCima(1e303)).toBe(1e303);
-    expect(arredondaMeioParaCima(390.5)).toBe(391);
-    expect(arredondaMeioParaCima(129.49)).toBe(129);
-    expect(arredondaMeioParaCima(75 * 1.73)).toBe(130);
+  it("arredondarDoseMg: não finito ⇒ null; finito gigante é exato; casos válidos intactos", () => {
+    expect(arredondarDoseMg(Infinity)).toBeNull();
+    expect(arredondarDoseMg(NaN)).toBeNull();
+    expect(arredondarDoseMg(-Infinity)).toBeNull();
+    expect(arredondarDoseMg(1e303)).toBe(1e303);
+    expect(arredondarDoseMg(390.5)).toBe(390.5);
+    expect(arredondarDoseMg(129.49)).toBe(129);
+    expect(arredondarDoseMg(75 * 1.73)).toBe(130);
   });
 
   it("taxa máxima legítima continua ampliando a duração com aviso (sem corte)", () => {
@@ -200,16 +201,16 @@ describe("FUGU-R2 F · controles válidos preservados", () => {
     expect(r.pendentes).toBe(1);
   });
 
-  it("F-R2-VALID-ROUNDING-PROVENANCE: 390,5 µg ⇒ 391 µg uma vez; 0,391 mg; unidade/fonte preservadas", () => {
+  it("F-R2-VALID-ROUNDING-PROVENANCE: 390,5 µg sem arredondamento; 0,3905 mg; unidade/fonte preservadas", () => {
     const d = calcularDosePorBase({ basis: "MCG_KG", mcgKg: 5.5, pesoKg: 71 });
-    expect(d).toMatchObject({ estado: "PRONTO", dose: 391, doseMg: 0.391, unidade: "µg" });
+    expect(d).toMatchObject({ estado: "PRONTO", dose: 390.5, doseMg: 0.3905, unidade: "µg" });
     const t = instanciarProtocolo(
       template([item({ drug: "FARMACO_SINTETICO_R2", doseBasis: "MCG_KG", standardDose: 5.5, unit: "mcg/kg" })]),
       corpo({ pesoKg: 71 }),
     );
     expect(t.ok).toBe(true);
     if (!t.ok) return;
-    expect(t.itens[0]!.item.calculatedDose).toBe(391);
+    expect(t.itens[0]!.item.calculatedDose).toBe(390.5);
     expect(t.itens[0]!.item.unit).toBe("µg");
     expect(t.itens[0]!.unidadePadrao).toBe("mcg/kg");
     expect(t.itens[0]!.medidoEm).toBe("2026-10-19");
