@@ -60,7 +60,7 @@ export function avaliarPeso(serie: readonly Pesagem[], hoje: string, rs: SalaoRu
   if (perdaPct + 1e-9 >= limiarPct) {
     const medidas = pico.origem === "MEDIDO" && recente.origem === "MEDIDO";
     if (medidas) {
-      const imcTxt = bmi === null ? "IMC não calculado (altura ausente); vale o corte de 5%" : `IMC ${bmi.toFixed(1)}`;
+      const imcTxt = bmi === null ? `IMC não calculado (altura ausente); vale o corte de ${limiarPct}%` : `IMC ${bmi.toFixed(1)}`;
       return {
         estado: "VERMELHO",
         perdaKg,

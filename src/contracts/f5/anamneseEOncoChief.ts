@@ -51,7 +51,8 @@ export type RoteiroAnamneseTumor = z.infer<typeof RoteiroAnamneseTumor>;
 export const RespostaPassoAnamnese = z.object({
   passoId: Id,
   mensagemIdOrigem: Id,
-  respostaLiteral: z.string().min(1).max(5000),
+  // Mesmo limite textual do canal; o resumo é fragmentado, e a origem permanece integral.
+  respostaLiteral: z.string().min(1).max(250_000),
   polaridade: z.enum(["AFIRMADO", "NEGADO", "INCERTO_DUVIDA", "NAO_RESPONDIDO"]),
   documentoOuFotoRef: Id.nullable(),
   fonte: Fonte,

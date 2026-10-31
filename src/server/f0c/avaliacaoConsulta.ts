@@ -92,11 +92,17 @@ export function avaliarConsulta(i: EntradaAvaliacaoConsulta) {
   const medidasAtuais = atuais.filter(e => materiaisDoRetrato.has(e.eventId));
   const snapshot = projetarSnapshot(escopo.filter(e => e.tipo === "FATO"), i.patientId, i.tumorLotId, i.encounterId, "f0c-avaliacao-v1");
   const atuaisSnapshot=projetarSnapshot(escopo.filter(e=>e.tipo==="FATO" && e.encounterId===i.encounterId),i.patientId,i.tumorLotId,i.encounterId,"f0c-atual-v1");
+  const episodioBasal = i.ciclo?.episodioId ?? i.episodio?.episodioId ?? null;
+  // Resolver supersessão primeiro; comparar somente basais do episódio e horizonte selecionados.
+  const basaisSnapshot = projetarSnapshot(atuais.filter(e => e.tipo === "FATO" && materiaisDoRetrato.has(e.eventId)
+    && ["feveBasal", "audiometriaBasal"].includes(String(dadosDoEvento(e)?.campo))
+    && episodioBasal !== null && obj(dadosDoEvento(e)?.valor)?.episodioId === episodioBasal),
+    i.patientId, i.tumorLotId, i.encounterId, "f0c-basais-episodio-v1");
   const campo = (nome: string) => {
-    const campoFonte=(nome==="medicamentos" ? atuaisSnapshot : snapshot).campos[nome];
+    const campoFonte=(["feveBasal","audiometriaBasal"].includes(nome) ? basaisSnapshot : nome==="medicamentos" ? atuaisSnapshot : snapshot).campos[nome];
     if (["feveBasal","audiometriaBasal"].includes(nome) && (!campoFonte?.eventIds.length || campoFonte.eventIds.some(id=>{
       const evento=atuais.find(e=>e.eventId===id);
-      return !evento || !["CONFIRMADO","ASSINADO"].includes(evento.revisao) || !evidenciaBasalAfirmada(dadosDoEvento(evento));
+      return !evento || !materiaisDoRetrato.has(id) || !["CONFIRMADO","ASSINADO"].includes(evento.revisao) || !evidenciaBasalAfirmada(dadosDoEvento(evento));
     }))) return null;
     return campoFonte?.estado === "VERDE" && campoFonte.eventIds.every(id=>atuais.some(e=>e.eventId===id && e.fontes.length>0)) ? campoFonte.valor : null;
   };
@@ -164,7 +170,6 @@ export function avaliarConsulta(i: EntradaAvaliacaoConsulta) {
     if (p.valor < minimo) portaAlertas.push(`${nome} abaixo do corte do serviço (${minimo}/µL)`);
     if (avaliarValidadeExame("HEMOGRAMA",p.data,i.agora).estado !== "VALIDO") portaPendentes.push(`${nome}: validade não confirmada`);
   }
-  const episodioBasal = i.ciclo?.episodioId ?? i.episodio?.episodioId ?? null;
   const audiometria = exameBasalDocumentado(campo("audiometriaBasal"), episodioBasal, limiteClinico);
   const audioDocumentada = audiometria && typeof audiometria.resultado === "string" && audiometria.resultado.trim()
     && audiometria.estado === "REALIZADO";

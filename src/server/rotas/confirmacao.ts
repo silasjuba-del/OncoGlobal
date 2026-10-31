@@ -271,7 +271,9 @@ function confirmarBlocoNaTransacao(deps: ServidorDeps, token: string, input: Con
     const chave = `${ref.data.documentId}@${ref.data.documentVersion}`;
     if (cobertos.has(chave)) continue; cobertos.add(chave);
     const tarefaId = `resultado:${sha(JSON.stringify([contexto,ref.data]))}`;
-    if (eventosDoPaciente.some(e=>e.tipo==="Tarefa"&&dadosDoEvento(e)?.tarefaId===tarefaId)) continue;
+    const existentes = eventosDoPaciente.filter(e=>e.tipo==="Tarefa"&&dadosDoEvento(e)?.tarefaId===tarefaId);
+    // Reproduzir o mesmo conjunto de registros no retry da assinatura, inclusive tarefas já gravadas.
+    if (existentes.length && !existentes.some(e=>e.operationId===input.idempotencyKey)) continue;
     auxiliares.push({draftId:`resultado-tarefa-${sha(tarefaId)}`,eventId:sha(`${input.idempotencyKey}:resultado:${tarefaId}`),tipo:"Tarefa",
       payload:{tarefaId,...contexto,operationId:input.idempotencyKey,titulo:`Acompanhar resultado — ${String(p.titulo??"Pedido de exame")}`,
         responsavel:sessao.medicoId,prazo:null,estado:"CONFIRMADA",recebidoEm:null,criadoPor:sessao.medicoId,substituiTarefaId:null,

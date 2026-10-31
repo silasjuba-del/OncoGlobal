@@ -38,3 +38,14 @@ describe("Pedido e resultado longitudinal",()=>{
   expect(r.ok).toBe(true); if(r.ok)expect(r.tarefa.acompanhamentoPedidos[0]?.estado).toBe("REALIZADO");
  });
 });
+
+it('revisão posterior preserva a fonte já vinculada sem aceitar sua substituição',()=>{
+ const a=atualizarResultadoPedido(tarefa(),contexto,realizado());if(!a.ok)throw Error(a.codigo);
+ const disponivel={...realizado(),estado:'RESULTADO_DISPONIVEL' as const,resultado:fonte,disponivelEm:contexto.em};
+ const b=atualizarResultadoPedido(a.tarefa,contexto,disponivel);if(!b.ok)throw Error(b.codigo);
+ const posterior={...contexto,encounterId:'retorno-posterior',em:'2026-11-01T12:00:00Z'};
+ const revisado={...disponivel,estado:'REVISADO' as const,revisadoEm:posterior.em,revisadoPor:posterior.atorId};
+ const c=atualizarResultadoPedido(b.tarefa,posterior,revisado);expect(c.ok).toBe(true);
+ if(c.ok){expect(c.tarefa.acompanhamentoPedidos[0]?.resultado).toEqual(fonte);expect(c.tarefa.atualizadoNoEncontroId).toBe(posterior.encounterId);}
+ expect(atualizarResultadoPedido(b.tarefa,posterior,{...revisado,resultado:{...fonte,hash:'b'.repeat(64)}}).ok).toBe(false);
+});

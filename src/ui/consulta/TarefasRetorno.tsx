@@ -92,7 +92,7 @@ export function ResultadosPedidosRetorno({porta,contexto,aoOcupado}:{porta:Porta
     {estado==="SOLICITADO"&&<><label>Data de realização do exame<input type="date" value={datas[k]??""} onChange={e=>setDatas(ds=>({...ds,[k]:e.target.value}))}/></label>
      <button type="button" disabled={!datas[k]} onClick={()=>void executar({...base,acao:"REALIZADO",realizadoEm:datas[k]!})}>Registrar realização</button></>}
     {estado==="REALIZADO"&&<><label>Documento do resultado<select value={selecoes[k]??""} onChange={e=>setSelecoes(s=>({...s,[k]:e.target.value}))}><option value="">Selecione uma fonte deste encontro</option>
-     {dados.fontes.map(f=><option key={f.draftId} value={f.draftId}>{f.sourceId} · versão {f.revision}</option>)}</select></label>
+     {dados.fontes.filter(f=>f.encounterId===contexto.encounterId).map(f=><option key={f.draftId} value={f.draftId}>{f.sourceId} · versão {f.revision}</option>)}</select></label>
      <button type="button" disabled={!fonte} onClick={()=>{if(!fonte)return;const {texto:_t,registradoEm:_r,...ref}=fonte;void executar({...base,acao:"RESULTADO_DISPONIVEL",fonte:ref});}}>Vincular resultado disponível</button></>}
     {a?.resultado&&<p>Fonte: {a.resultado.sourceId} · versão {a.resultado.revision} · hash {a.resultado.hash}</p>}
     {fonte&&<details><summary>Conferir fonte do resultado</summary><pre style={{whiteSpace:"pre-wrap"}}>{fonte.texto}</pre></details>}

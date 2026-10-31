@@ -1,3 +1,4 @@
+import { presente } from "../fixtures/triagem.js";
 import { expect, it } from "vitest";
 import { entradaRevisaoDoRetrato } from "../../src/modules/consulta/entradaRevisao.js";
 import { montarTelaRevisao } from "../../src/modules/consulta/telaRevisao.js";
@@ -33,4 +34,12 @@ it("bioquímica sem unidade não se transforma em creatinina mg/dL", () => {
 it("registro sem data não é descartado para eleger silenciosamente um valor antigo", () => {
  const r=entradaRevisaoDoRetrato(retrato([fato("linha",1),fato("linha",2,{tempoClinico:null,ref:{eventId:"sem-data",revisao:"1"}})]));
  expect(r.entrada.linha).toBeUndefined();expect(r.pendencias.join(" ")).toContain("A CONFERIR");
+});
+
+it('[pre-merge] datas de início divergentes conservam conflito e fontes',()=>{
+ const r0=retrato();const ep=fato('episodio',null,{tipo:'TreatmentEpisode',campo:null,dados:{episodioId:'ep-sintetico',tumorLotId:r0.tumorLotId,modalidade:'QT',intencao:'PALIATIVA',intentModifier:null,linha:1,esquemaId:'esquema-sintetico',inicio:presente('2026-10-10'),fim:presente('2026-10-16')}});
+ const r=entradaRevisaoDoRetrato(retrato([ep,fato('dataDiagnosticoAP','2026-10-01'),fato('dataInicioTratamento','2026-10-15')]));
+ expect(r.entrada.dataInicioTratamento).toBeUndefined();expect(r.pendencias.join(' ')).toContain('A CONFERIR');
+ expect(r.pendencias.join(' ')).toContain('2026-10-10');expect(r.pendencias.join(' ')).toContain('2026-10-15');
+ expect(montarTelaRevisao(r.entrada).identidade.datasSUS.diasDecorridos.valor).toBeNull();
 });

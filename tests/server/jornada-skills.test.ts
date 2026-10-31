@@ -1,3 +1,4 @@
+import { rotearPrescricaoFlashConfig } from "../../src/server/rotas/prescricaoFlash.js";
 import { PlanoFlashEntrada, prepararFinalizacaoFlash, salvarRascunhoFlash } from "../../src/server/flash.js";
 import { conferirProvenienciaSkill } from "../../src/server/provenienciaSkill.js";
 import { listarDrafts } from "../../src/kernel/comandos/portas.js";
@@ -163,4 +164,16 @@ it.each(['primeira-consulta','retorno','follow-up'])('%s leva documento ao Flash
  const fonte=lerDraft(a.app.db,a.pedido.fontes[0]!.draftId)!;
  salvarDraft(a.app.db,{...fonte,revision:fonte.revision+1});
  expect(salvarRascunhoFlash(a.app.db,AGORA,{...contexto,plano,expectedRevision:null}).status).toBe(409);
+});
+
+it.each(['rascunhoFlash','prepararFlash'])('adoção em %s recusa avaliação de skill desatualizada',async rota=>{
+ const a=await abrir();const corpus=carregarCorpusServidor(),sessao=a.app.sessoes.obter(a.app.token)!;
+ const deps:ServidorDeps={db:a.app.db,sessoes:a.app.sessoes,agora:()=>AGORA,log:()=>{},corpus,salaoRuleset:corpus.ruleset,gateway:criarGateway({agora:()=>AGORA,auditar:()=>{},store:memoriaIdempotencia(),executores:{}})};
+ const r=ResultadoSkillClinica.parse(operarSkillsClinicas(a.pedido,a.app.token,deps).body);if(!('execucao' in r))throw Error('execução ausente');
+ const d=r.documentos.find(d=>d.tipo==='EVOLUCAO')!;const origemSkill={contexto,execucaoId:r.execucao.execucaoId,documentId:d.documentId,hash:r.execucao.documentos.find(x=>x.documentId===d.documentId)!.hash};
+ expect(operarSkillsClinicas({acao:'LER',contexto,execucaoId:r.execucao.execucaoId},a.app.token,deps).body).toMatchObject({validade:'ATUAL'});
+ corpus.condicionais.regras[0]!.versao='nova-regra-sintetica';
+ const plano=PlanoFlashEntrada.parse({acoesMarcadas:[],receitasMarcadas:[],apac:{cid:'',sigtap:'',finalidade:'',competencia:'',estado:'PENDENTE',pendencias:[],emitir:false},retorno:{dias:null,examesAntesDoRetorno:[]},documentosManuais:[{id:'documento-sintetico',tipo:'EVOLUCAO',titulo:d.titulo,destino:null,texto:d.texto,origemSkill}]});
+ const antes=listarDrafts(a.app.db,PACIENTE);const resposta=rotearPrescricaoFlashConfig(deps,a.app.token,sessao,rota,{...contexto,plano,...(rota==='rascunhoFlash'?{expectedRevision:null}:{idempotencyKey:'preparar-skill-desatualizada'})});
+ expect(resposta).toMatchObject({status:409,codigo:'PROVENIENCIA_SKILL_DESATUALIZADA'});expect(listarDrafts(a.app.db,PACIENTE)).toEqual(antes);
 });

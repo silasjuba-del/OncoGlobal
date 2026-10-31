@@ -25,7 +25,7 @@ export function operarResultadosPedidos(deps: DepsDutos, token: string, raw: unk
       const t = Tarefa.safeParse(dadosDoEvento(e));
       return t.success && encontroNoHistorico(eventos, { ...t.data, encounterId: t.data.atualizadoNoEncontroId ?? t.data.encounterId }, ctx);
     }));
-    const fontes = fontesPaciente(deps.db, eventos, ctx, false).map(({ draft, fonte, texto }) => ({
+    const fontesDoPaciente = fontesPaciente(deps.db, eventos, ctx, true).map(({ draft, fonte, texto }) => ({
       draftId: draft.draftId, revision: draft.revision, sourceId: draft.sourceId, hash: fonte.patientLinkReview.sourceHash,
       encounterId: fonte.patientLinkReview.encounterId, texto, registradoEm: draft.criadoEm,
     }));
@@ -41,6 +41,10 @@ export function operarResultadosPedidos(deps: DepsDutos, token: string, raw: unk
       });
       return t.data.pedidoRefs.length ? [{ eventId: e.eventId, tarefa: t.data, pedidos }] : [];
     });
+    // Fontes históricas só são expostas aqui se já estiverem vinculadas a um pedido.
+    const fontes = fontesDoPaciente.filter(f => f.encounterId === ctx.encounterId || tarefas.some(t =>
+      t.tarefa.acompanhamentoPedidos.some(a => a.resultado?.draftId === f.draftId && a.resultado.sourceId === f.sourceId
+        && a.resultado.revision === f.revision && a.resultado.hash === f.hash && a.resultado.encounterId === f.encounterId)));
     const resposta = () => {
       const provas = tarefas.map(t => ({ id:t.eventId, hash:hashCanonico(t) }));
       depoisDoCommit(deps.db, () => {
@@ -67,8 +71,10 @@ export function operarResultadosPedidos(deps: DepsDutos, token: string, raw: unk
       proximo.realizadoEm = pedido.realizadoEm;
     } else {
       const referencia = pedido.acao === "RESULTADO_DISPONIVEL" ? pedido.fonte : anterior?.resultado;
-      const fonte = fontes.find(f => f.draftId === referencia?.draftId && f.sourceId === referencia.sourceId && f.hash === referencia.hash && f.revision === referencia.revision && f.encounterId === ctx.encounterId);
-      if (!fonte || !referencia || referencia.encounterId !== ctx.encounterId) return negar("RESULTADO_FORA_CONTEXTO_OU_ALTERADO");
+      const fonte = fontes.find(f => f.draftId === referencia?.draftId && f.sourceId === referencia.sourceId && f.hash === referencia.hash && f.revision === referencia.revision && f.encounterId === referencia.encounterId);
+      const historicoRevisavel = pedido.acao === "REVISADO" && referencia
+        && encontroNoHistorico(eventos, { ...ctx, encounterId: referencia.encounterId }, ctx);
+      if (!fonte || !referencia || (referencia.encounterId !== ctx.encounterId && !historicoRevisavel)) return negar("RESULTADO_FORA_CONTEXTO_OU_ALTERADO");
       if (pedido.acao === "RESULTADO_DISPONIVEL") { proximo.resultado = pedido.fonte; proximo.disponivelEm = em; }
       else {
         if (pedido.expectedFonteHash !== fonte.hash) return negar("RESULTADO_ALTERADO");

@@ -1,3 +1,5 @@
+import { operarSkillsClinicas } from "../skillsClinicas.js";
+import { ResultadoSkillClinica } from "../../contracts/skillsClinicas.js";
 import { randomUUID } from "node:crypto";
 import { z } from "zod";
 import { Id, type Sessao } from "../../contracts/base.js";
@@ -205,6 +207,14 @@ export function rotearPrescricaoFlashConfig(
     if (contexto.patientId !== parsed.data.patientId || contexto.encounterId !== parsed.data.encounterId
       || (contexto.tumorLotId ?? null) !== parsed.data.tumorLotId)
       return reply(409, "CONTEXTO_CONSULTA_ALTERADO");
+    // Reutilizar a leitura completa da skill: inclui regras atuais, relógio, fontes e ledger.
+    for (const execucaoId of new Set(parsed.data.plano.documentosManuais?.flatMap(d => d.origemSkill ? [d.origemSkill.execucaoId] : []) ?? [])) {
+      const atual = operarSkillsClinicas({ acao: "LER", contexto: { patientId: parsed.data.patientId,
+        encounterId: parsed.data.encounterId, tumorLotId: parsed.data.tumorLotId }, execucaoId }, token, deps);
+      const r = ResultadoSkillClinica.safeParse(atual.body);
+      if (atual.status !== 200 || !r.success || !("validade" in r.data) || r.data.validade !== "ATUAL")
+        return reply(409, "PROVENIENCIA_SKILL_DESATUALIZADA");
+    }
     const consultaRevisada = lerConsulta(deps.db, parsed.data.patientId, deps.agora(), sessao, parsed.data.tumorLotId,
       { ...opcoesLeituraConsulta(deps, sessao), encounterId: parsed.data.encounterId });
     if ("codigo" in consultaRevisada) return reply(409, consultaRevisada.codigo);

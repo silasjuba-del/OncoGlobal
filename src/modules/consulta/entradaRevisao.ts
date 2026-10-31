@@ -52,7 +52,16 @@ export function entradaRevisaoDoRetrato(r: Retrato): { entrada: EntradaTelaRevis
     else e.linha = informado(linha.valor);
   }
   for (const chave of ["dataDiagnosticoAP", "dataInicioTratamento", "validadeAPAC", "proximoCiclo", "dataReestadiamento"] as const) {
-    const f = campo(chave); if (f && typeof f.valor === "string") e[chave] = informado(f.valor);
+    const antes = pendencias.length, f = campo(chave);
+    if (chave === "dataInicioTratamento") {
+      if (pendencias.length > antes) { delete e.dataInicioTratamento; continue; }
+      const anterior = e.dataInicioTratamento?.valor;
+      if (f && typeof f.valor === "string" && typeof anterior === "string" && anterior !== f.valor) {
+        pendencias.push(`Data de início: A CONFERIR — episódio ${anterior} (${episodio?.fato.ref.eventId ?? "origem do episódio"}) e fato ${f.valor} (${f.fato.ref.eventId}) divergem.`);
+        delete e.dataInicioTratamento; continue;
+      }
+    }
+    if (f && typeof f.valor === "string") e[chave] = informado(f.valor);
   }
   for (const chave of ["idadeAnos", "pesoAnteriorKg"] as const) {
     const f = campo(chave); if (f && typeof f.valor === "number") e[chave] = informado(f.valor);

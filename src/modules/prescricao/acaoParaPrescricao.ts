@@ -54,7 +54,10 @@ export function edicaoDaAcao(baseEntrada: BasePrescricaoExecutavelResposta, acao
     const posterior = depois.itens.find(i => i.item === item.sequence);
     const atual = ciclo.itens.find(i => i.item === item.sequence);
     const mg = item.prescribedDose === null ? null : doseFinalEmMg(item.prescribedDose, item.unit);
-    if (!anterior || !posterior || !atual || mg === null || mg !== anterior.doseMg || mg !== atual.doseMg
+    const quantidadeOriginalConfere = mg !== null || !!atual?.doseOriginal
+      && atual.doseOriginal.valor === item.prescribedDose && atual.doseOriginal.unidade === item.unit
+      && posterior?.doseMg === null;
+    if (!anterior || !posterior || !atual || !quantidadeOriginalConfere || mg !== anterior.doseMg || mg !== atual.doseMg
       || item.drug !== anterior.droga || item.drug !== posterior.droga || item.drug !== atual.droga)
       return falhar("A dose, a unidade ou a identidade de um item mudou desde a proposta.");
   }

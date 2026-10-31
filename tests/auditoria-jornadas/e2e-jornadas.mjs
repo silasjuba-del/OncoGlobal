@@ -378,7 +378,7 @@ export async function executar() {
       };
       let atual=await ler();assert.ok(atual.dados.tarefas.length>0,'pedido assinado tem acompanhamento');
       const semVinculos = () => eventos(ctx.A.patientId).filter(e=>!['Tarefa','ReviewDecision'].includes(e.tipo)).map(e=>[e.eventId,sha(e)]);
-      const fatosAntes=semVinculos();
+      let fatosAntes=semVinculos();
       const t=atual.dados.tarefas.find(t=>t.pedidos.length>0),pedido=t.pedidos[0],contexto=atual.dados.contexto;
       const linha=sec.getByRole('article',{name:`Acompanhamento ${pedido.titulo}`,exact:true}).first();
       assert.ok((await linha.innerText()).includes('SOLICITADO'));
@@ -398,6 +398,16 @@ export async function executar() {
       await linha.getByRole('combobox',{name:/^Documento do resultado/}).selectOption(ctx.fonteResultadoA.draftId);
       r=page.waitForResponse(x=>x.url().endsWith('/tarefas/resultados')&&x.request().postDataJSON()?.acao==='RESULTADO_DISPONIVEL');
       await linha.getByRole('button',{name:'Vincular resultado disponível',exact:true}).click();rr=await r;assert.equal(rr.status(),200,await rr.text());
+      assert.deepEqual(semVinculos(),fatosAntes,'vincular resultado não promove fatos');
+      // O laudo chegou no retorno 2; a revisão médica ocorre no retorno 3.
+      await navegar('Agenda e pacientes');
+      await page.getByLabel('Cadastrar novo paciente',{exact:true}).uncheck();
+      await page.getByRole('combobox',{name:/^Paciente para agendamento/}).selectOption(ctx.A.patientId);
+      const posterior='2026-10-27';await page.getByLabel('Data do encontro',{exact:true}).fill(posterior);
+      await page.getByLabel('Horário do encontro',{exact:true}).fill('13:00');
+      const agendar=page.waitForResponse(x=>x.url().endsWith('/medico/agenda/agendar'));
+      await page.getByRole('button',{name:'Confirmar agendamento',exact:true}).click();assert.equal((await agendar).status(),201);
+      ctx.dataRetorno=posterior;await abrirRetornoA();await ler();fatosAntes=semVinculos();
       await linha.getByText('Conferir fonte do resultado',{exact:true}).click();
       await linha.getByText('Documento exclusivamente sintético para vínculo de resultado.',{exact:false}).waitFor();
       r=page.waitForResponse(x=>x.url().endsWith('/tarefas/resultados')&&x.request().postDataJSON()?.acao==='REVISADO');

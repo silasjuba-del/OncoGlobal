@@ -64,3 +64,18 @@ it('audiometria realizada e atribuída ao episódio resolve a pendência de C1; 
     expect(r.elegibilidade.motivos.some(m=>m.texto.includes('audiometria'))).toBe(!presente);
   }
 });
+
+it('seleciona o episódio antes de comparar basais e preserva o histórico anterior',()=>{
+ const anterior=fato('feveBasal',{...basal,episodioId:'ep-anterior',percentual:55},'basal-anterior');
+ const eventos=[atual,anterior,fato('feveBasal',basal)];const copia=JSON.stringify(eventos);
+ const r=avaliarConsulta({...base,eventos});expect(r.avisosFlash.join(' ')).toContain('16 pontos');expect(JSON.stringify(eventos)).toBe(copia);
+ const ciclo={...base.ciclo!,itens:[{item:1,droga:'cisplatina',doseMg:100,reducaoPct:0}]};
+ const audio={estado:'REALIZADO',resultado:'Laudo sintético',data:'2026-10-08',episodioId:'ep-basal'};
+ const a=avaliarConsulta({...base,ciclo,eventos:[fato('audiometriaBasal',audio,'audio-atual'),fato('audiometriaBasal',{...audio,episodioId:'ep-anterior'},'audio-anterior')]});
+ expect(a.sugestoesLaboratorio).not.toContain('Audiometria basal');
+});
+it('data clínica futura do envelope não é legitimada pela data antiga dentro do valor basal',()=>{
+ const b=fato('feveBasal',basal);b.payload={data:{campo:'feveBasal',valor:basal,dataClinica:'2027-01-01'}};
+ const r=avaliarConsulta({...base,eventos:[atual,b]});expect(r.avisosFlash.join(' ')).not.toContain('16 pontos');
+ expect(r.elegibilidade.motivos.some(m=>m.texto.includes('basal'))).toBe(true);
+});
