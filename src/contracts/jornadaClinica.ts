@@ -1,7 +1,7 @@
 import { z } from "zod";
 const Texto = z.string().trim().min(1);
 export const FonteJornada = z.object({ id: Texto, titulo: Texto, arquivo: Texto.nullable(), url: z.url().nullable(),
-  sha256: z.string().regex(/^[a-f0-9]{64}$/).nullable(), estado: Texto }).strict();
+  sha256: z.string().regex(/^[a-f0-9]{64}$/).nullable(), edicao: Texto.nullable(), consultadoEm: z.iso.date().nullable(), estado: Texto }).strict();
 export const ReferenciaJornada = z.object({ fonte: Texto, paginas_pdf: z.array(z.number().int().positive()).min(1).optional(), secao: Texto.nullable().optional() }).strict();
 const Linha = z.object({ opcoes: z.array(Texto), fontes: z.array(ReferenciaJornada), condicao: z.string(),
   estado: z.enum(["EXTRAIDO_PARA_REVISAO", "SEM_FONTE_ESTRUTURADA", "NAO_APLICAVEL"]) }).strict();

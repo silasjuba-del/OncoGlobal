@@ -1,6 +1,6 @@
 {
   "schema": "CorpusJornada@1",
-  "versao": "1.0.0",
+  "versao": "1.0.1",
   "estado": "RASCUNHO",
   "fontes": [
     {
@@ -9,7 +9,9 @@
       "arquivo": "-Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.pdf",
       "url": null,
       "sha256": "dfb93ca0cd4fc42b20e5e29f5cfb1a2c76eca9ad9838c788e462ff26f9496e0c",
-      "estado": "EXTRACAO_TEXTUAL_NAO_APROVACAO_CLINICA"
+      "estado": "EXTRACAO_TEXTUAL_NAO_APROVACAO_CLINICA",
+      "edicao": "2026, colaboração v4",
+      "consultadoEm": "2026-10-30"
     },
     {
       "id": "SBOC-AVANCADO",
@@ -17,7 +19,9 @@
       "arquivo": "-Pulmao-avancada-v5-VERSAO-PARA-COLABORACAO.pdf",
       "url": null,
       "sha256": "80b72813584bc87e80b322e740e0050cdd4d80475382e6b784508475d3e4867d",
-      "estado": "EXTRACAO_TEXTUAL_NAO_APROVACAO_CLINICA"
+      "estado": "EXTRACAO_TEXTUAL_NAO_APROVACAO_CLINICA",
+      "edicao": "2026, colaboração v5",
+      "consultadoEm": "2026-10-30"
     },
     {
       "id": "SBOC-NET",
@@ -25,7 +29,9 @@
       "arquivo": "Diretrizes-SBOC-2026-NET-pulmonares-v3-VERSAO-PARA-COLABORACAO.pdf",
       "url": null,
       "sha256": "cb50bab3356d9a39810cf454b7ff5606347f0d3ec7c8d6c6b02aebca5d79fbec",
-      "estado": "EXTRACAO_TEXTUAL_NAO_APROVACAO_CLINICA"
+      "estado": "EXTRACAO_TEXTUAL_NAO_APROVACAO_CLINICA",
+      "edicao": "2026, colaboração v3",
+      "consultadoEm": "2026-10-30"
     },
     {
       "id": "SONHE",
@@ -33,7 +39,9 @@
       "arquivo": "Protocolos-SOnHe-2024-Modelo-7.pdf",
       "url": null,
       "sha256": "d201d11819acaf92a019bba22733abd55356012bce60b147728bfe4a5575d71d",
-      "estado": "EXTRACAO_TEXTUAL_NAO_APROVACAO_CLINICA"
+      "estado": "EXTRACAO_TEXTUAL_NAO_APROVACAO_CLINICA",
+      "edicao": "2024",
+      "consultadoEm": "2026-10-30"
     },
     {
       "id": "AULA-PULMAO-1",
@@ -41,7 +49,9 @@
       "arquivo": "Pulmão  2  2.pdf",
       "url": null,
       "sha256": "5385ded31a39b9b200fcf66533d6d8a57b43ba212e6392d8bbba9396d931527a",
-      "estado": "EXTRACAO_TEXTUAL_NAO_APROVACAO_CLINICA"
+      "estado": "EXTRACAO_TEXTUAL_NAO_APROVACAO_CLINICA",
+      "edicao": "Transcrição datada 22/11/2025",
+      "consultadoEm": "2026-10-30"
     },
     {
       "id": "AULA-PULMAO-2",
@@ -49,7 +59,9 @@
       "arquivo": "Pulmão  2 .pdf",
       "url": null,
       "sha256": "5385ded31a39b9b200fcf66533d6d8a57b43ba212e6392d8bbba9396d931527a",
-      "estado": "EXTRACAO_TEXTUAL_NAO_APROVACAO_CLINICA"
+      "estado": "EXTRACAO_TEXTUAL_NAO_APROVACAO_CLINICA",
+      "edicao": "Transcrição datada 22/11/2025",
+      "consultadoEm": "2026-10-30"
     },
     {
       "id": "AULA-METASTATICO",
@@ -57,7 +69,9 @@
       "arquivo": "Aula 3 . TORÁCICOS - Câncer Pulmão de Células Não Pequenas Metastática ( - AKNAR FREIRE DE CARVALHO CALABRICH.pdf",
       "url": null,
       "sha256": "f129ebcdee8ee8ce2ec4b765bdf18005b828885354b0326a77ec1e1b16991f54",
-      "estado": "EXTRACAO_TEXTUAL_NAO_APROVACAO_CLINICA"
+      "estado": "EXTRACAO_TEXTUAL_NAO_APROVACAO_CLINICA",
+      "edicao": null,
+      "consultadoEm": "2026-10-30"
     },
     {
       "id": "MOC-LOCAL",
@@ -65,7 +79,9 @@
       "arquivo": "4 . Pulmão. Células.txt",
       "url": null,
       "sha256": "0e1e934dc7ab98fa482521de5b6bca4ee50ca777ccb7410aff14090f55cf4015",
-      "estado": "TRECHOS_SELECIONADOS_LIDOS_ORIGINAL_WEB_NAO_CONFERIDO"
+      "estado": "TRECHOS_SELECIONADOS_LIDOS_ORIGINAL_WEB_NAO_CONFERIDO",
+      "edicao": "Atualização declarada 27/07/2026 na cópia local",
+      "consultadoEm": "2026-10-30"
     },
     {
       "id": "TNM-NDRS",
@@ -73,7 +89,9 @@
       "arquivo": null,
       "url": "https://digital.nhs.uk/ndrs/data/cancer-data-training-materials/staging-sheets-v9/lung",
       "sha256": null,
-      "estado": "CONFERENCIA_EXTERNA_PONTUAL"
+      "estado": "CONFERENCIA_EXTERNA_PONTUAL",
+      "edicao": "TNM 9",
+      "consultadoEm": "2026-10-30"
     },
     {
       "id": "FDA-LAURA",
@@ -81,7 +99,9 @@
       "arquivo": null,
       "url": "https://www.fda.gov/drugs/resources-information-approved-drugs/fda-approves-osimertinib-locally-advanced-unresectable-stage-iii-non-small-cell-lung-cancer",
       "sha256": null,
-      "estado": "CONFERENCIA_EXTERNA_PONTUAL"
+      "estado": "CONFERENCIA_EXTERNA_PONTUAL",
+      "edicao": "Comunicado de 25/09/2024",
+      "consultadoEm": "2026-10-30"
     },
     {
       "id": "FDA-ADRIATIC",
@@ -89,7 +109,9 @@
       "arquivo": null,
       "url": "https://www.fda.gov/drugs/resources-information-approved-drugs/fda-approves-durvalumab-limited-stage-small-cell-lung-cancer",
       "sha256": null,
-      "estado": "CONFERENCIA_EXTERNA_PONTUAL"
+      "estado": "CONFERENCIA_EXTERNA_PONTUAL",
+      "edicao": "Comunicado de 04/12/2024",
+      "consultadoEm": "2026-10-30"
     },
     {
       "id": "FDA-TARLATAMAB",
@@ -97,7 +119,9 @@
       "arquivo": null,
       "url": "https://www.fda.gov/drugs/resources-information-approved-drugs/fda-grants-traditional-approval-tarlatamab-dlle-extensive-stage-small-cell-lung-cancer",
       "sha256": null,
-      "estado": "CONFERENCIA_EXTERNA_PONTUAL"
+      "estado": "CONFERENCIA_EXTERNA_PONTUAL",
+      "edicao": "Comunicado de 19/11/2025",
+      "consultadoEm": "2026-10-30"
     },
     {
       "id": "NICE-MSCC",
@@ -105,7 +129,9 @@
       "arquivo": null,
       "url": "https://www.nice.org.uk/guidance/ng234/chapter/recommendations",
       "sha256": null,
-      "estado": "CONFERENCIA_EXTERNA_PONTUAL"
+      "estado": "CONFERENCIA_EXTERNA_PONTUAL",
+      "edicao": "NG234",
+      "consultadoEm": "2026-10-30"
     },
     {
       "id": "EVIQ-NF",
@@ -113,7 +139,9 @@
       "arquivo": null,
       "url": "https://www.eviq.org.au/clinical-resources/oncological-emergencies/123-neutropenic-fever-patient-evaluation-risk-as",
       "sha256": null,
-      "estado": "CONFERENCIA_EXTERNA_PONTUAL"
+      "estado": "CONFERENCIA_EXTERNA_PONTUAL",
+      "edicao": null,
+      "consultadoEm": "2026-10-30"
     },
     {
       "id": "EVIQ-SVCO",
@@ -121,7 +149,9 @@
       "arquivo": null,
       "url": "https://www.eviq.org.au/radiation-oncology/palliative/295-respiratory-superior-vena-cava-obstruction-pal",
       "sha256": null,
-      "estado": "CONFERENCIA_EXTERNA_PONTUAL"
+      "estado": "CONFERENCIA_EXTERNA_PONTUAL",
+      "edicao": null,
+      "consultadoEm": "2026-10-30"
     }
   ],
   "cartoes": [

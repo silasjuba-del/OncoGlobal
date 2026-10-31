@@ -62,7 +62,7 @@ export function prepararJornadaClinica(input: {
     "Avaliações de segurança",...input.seguranca,
     "Cartão por estadiamento + subtipo — referência em revisão",...textosCartoes,
     ...divergencias.map(d=>`${d.id}: ${d.posicao_a} / ${d.posicao_b} ${d.tratamento} Fontes: ${refs(d.fontes)}`),
-    ...fontes.map(f=>`Fonte ${f.id}: ${f.titulo}; ${f.url ?? f.arquivo ?? "localizador pendente"}; ${f.estado}`),
+    ...fontes.map(f=>`Fonte ${f.id}: ${f.titulo}; edição ${f.edicao ?? "não declarada"}; consulta ${f.consultadoEm ?? "não registrada"}; ${f.url ?? f.arquivo ?? "localizador pendente"}; ${f.estado}`),
     ...input.alertas.map(a=>`URGENTE: ${a.texto}; fonte ${a.sourceId ?? "prontuário"}; ${a.trecho ?? ""}`),
   ].join("\n\n");
   for (const d of preparados.documentos) {
