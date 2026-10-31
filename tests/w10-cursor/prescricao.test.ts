@@ -12,6 +12,7 @@ describe("CURSOR-10 prescrição visão", () => {
     expect(rotuloClasse("NAO_ONCO")).toBe("NÃO ONCOLÓGICAS");
     expect(p.linhas.some((l) => l.excecao)).toBe(true);
     expect(aplicarAjustePercentual("100 mg", 20)).toBe("80 mg");
-    expect(aplicarAjustePercentual("144 mg", 30)).toBe("100.8 mg");
+    expect(aplicarAjustePercentual("144 mg", 30)).toBe("101 mg");
+    expect(aplicarAjustePercentual("pendente", 20)).toBe("pendente");
   });
 });
