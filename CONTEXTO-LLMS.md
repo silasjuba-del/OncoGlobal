@@ -177,7 +177,7 @@ Registrar um marco por lote, não um diário por comando: **data/hora com fuso |
 | Abertura registrada: codex-seguranca-pre-merge-pr88 | 2026-10-31 15:28:54 -03:00; Codex | Diretório criado nesta tarefa e worktree registrado no Git | Data observada no sistema de arquivos; nenhum horário antigo foi fabricado |
 | Abertura registrada: main-validado-20261031 | 2026-10-31 16:03:12 -03:00; Codex | Diretório criado nesta tarefa e worktree registrado no Git | Data observada no sistema de arquivos; nenhum horário antigo foi fabricado |
 
-Artefatos locais de auditoria/preservação: C:\Users\silas\Documents\Codex\auditoria-contexto-20261031. Manifestos: inventario-documentos-worktrees.json, documentos-so-locais.json, preservacao\manifesto-documentos.json, preservacao\manifesto-wip.json e preservacao\refs-antes-integracao.bundle. Não publicar esses materiais sem triagem. Os originais permanecem nos worktrees.
+Artefatos locais de auditoria/preservação: C:\Users\silas\Documents\Codex\auditoria-contexto-20261031. Manifestos: inventario-documentos-worktrees.json, documentos-so-locais.json, preservacao\manifesto-documentos.json, preservacao\manifesto-wip.json e preservacao\refs-antes-integracao.bundle. Não publicar esses materiais sem triagem. O código WIP permanece nos worktrees. Quando documentos de entrada forem reconciliados com a main, seus bytes anteriores continuam recuperáveis no manifesto/backup; não confundir o arquivo atual no endereço de origem com a versão preservada.
 
 ## 9. Alcance da busca por trabalho não visível no GitHub
 
@@ -189,7 +189,7 @@ Escopo: .md, .mdx, .txt e .rst, incluindo ocultos/não rastreados/ignorados, sem
 
 ## 10. Endereços dos 42 conteúdos anteriores preservados
 
-Estado comum: **conteúdo local identificado e preservado; integração/atualidade de cada texto ainda exige triagem**. Não atribuir autoria pelo nome da branch. A assinatura de Codex vale somente para o levantamento/cópia verificada. A fonte original completa e o hash estão no manifesto local.
+Estado comum: **conteúdo local identificado e preservado; integração/atualidade de cada texto ainda exige triagem**. Não atribuir autoria pelo nome da branch. A assinatura de Codex vale somente para o levantamento/cópia verificada. A fonte original completa, a cópia preservada e o hash estão no manifesto local. O endereço de origem abaixo pode receber uma versão documental reconciliada posteriormente.
 
 | Arquivo fora da referência compartilhada | Estado |
 |---|---|
