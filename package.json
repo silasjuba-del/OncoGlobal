@@ -26,7 +26,8 @@
     "pdfforge:build": "npm run build --prefix apps/pdfforge",
     "pdfforge:test": "npm test --prefix apps/pdfforge",
     "pdfforge:start": "npm start --prefix apps/pdfforge",
-    "pdfforge:smoke": "node scripts/test-pdfforge.mjs"
+    "pdfforge:smoke": "node scripts/test-pdfforge.mjs",
+    "contexto:check": "node scripts/verificar-contexto-llms.mjs"
   },
   "repository": {
     "type": "git",

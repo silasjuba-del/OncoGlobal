@@ -139,3 +139,10 @@ Esta branch corrige seis pontos: falha declarada do ORK nunca vira sucesso; troc
 Validação técnica é separada de aprovação clínica. Permanecem pendências previamente auditadas em RECIST, dose, PHI, backup e segurança do servidor; não interpretar este lote como fechamento global. Gate/CI verde não equivale a proteção de branch: em 30/10/2026, a API do GitHub informou `main.protected=false`.
 
 Para assumir trabalho, consultar PRs e SHA remoto, e conferir o status do worktree escolhido. O checkout principal pode estar atrás e conter WIP protegido; não fazer pull/reset por cima dele. Frentes ainda locais devem ser declaradas, preservadas e triadas antes de compartilhamento. Draft PR ajuda na coordenação, mas não substitui a inspeção do disco nem justifica publicar todo WIP. Não há sincronização, rebase, merge ou alerta periódico automático instalado por este lote.
+
+
+<!-- ONCOGLOBAL-CONTEXTO-LLMS:BEGIN -->
+## Entrada para LLMs
+
+Leia primeiro [CONTEXTO-LLMS.md](CONTEXTO-LLMS.md) e [AGENTS.md](AGENTS.md). O contexto único contém fontes, estado datado da entrega, separação OncoGlobal/oncoMed, vetos e inventário de worktrees. Após atualizar as referências com `git fetch origin --no-prune`, execute `node scripts/verificar-contexto-llms.mjs --referencia origin/main --remoto`; o comando apenas compara e informa divergências, sem sobrescrever WIP. Não confundir o checkout local com a versão validada ou com produção.
+<!-- ONCOGLOBAL-CONTEXTO-LLMS:END -->
