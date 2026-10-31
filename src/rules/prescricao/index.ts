@@ -1,3 +1,4 @@
+import { arredondarDoseMg, produtoDoseExata } from "../../contracts/doseReducao.js";
 // W10-INT-PRESC-03..05 · fachada de prescrição segura (RT-08a–e, RT-11b). Funções puras.
 // src/rules só importa src/contracts (R-08): este arquivo é AUTOSSUFICIENTE; a regra de arredondamento/BSA/Calvert
 // é cópia de instanciarProtocolo.ts e tests/rules-prescricao/index.test.ts prova a equivalência.
@@ -90,15 +91,6 @@ export async function carregarFicha(
 /* ───────────── RT-08c · dose por base (código, nunca LLM; CANONICA §6) ───────────── */
 
 const CLCR_MAX = 125;
-/** Meio para cima em inteiros com ruído de ponto flutuante removido pelo round(×1e6). Finitude (FUGU-R2 F):
- * entrada não finita ⇒ null (PENDENTE estruturada); se o ×1e6 transbordaria, o double já é inteiro exato
- * nessa magnitude e o valor finito é devolvido sem escala, sem teto. */
-const meioParaCima = (x: number): number | null => {
-  if (!Number.isFinite(x)) return null;
-  const escalonado = x * 1e6;
-  if (!Number.isFinite(escalonado)) return x;
-  return Math.floor(Math.round(escalonado) / 1e6 + 0.5);
-};
 const pos = (n: number | null | undefined): n is number => typeof n === "number" && Number.isFinite(n) && n > 0;
 
 export type EntradaDose =
@@ -130,7 +122,7 @@ function calcularDoseEmMg(e: Exclude<EntradaDose, { basis: "MCG_KG" }>): SaidaDo
     case "MG_KG": {
       const f = [!pos(e.mgKg) && "mgKg", !pos(e.pesoKg) && "pesoKg"].filter((x): x is string => x !== false);
       if (f.length) return pend(f);
-      const dose = meioParaCima(e.mgKg! * e.pesoKg!);
+      const dose = arredondarDoseMg(e.mgKg! * e.pesoKg!);
       return dose === null
         ? pend(["dose (resultado não finito)"])
         : { estado: "PRONTO", doseMg: dose, pendente: null, aviso: null };
@@ -142,7 +134,7 @@ function calcularDoseEmMg(e: Exclude<EntradaDose, { basis: "MCG_KG" }>): SaidaDo
       const produto = e.alturaCm! * e.pesoKg!;
       const base = pos(e.bsaM2) ? e.bsaM2 : Number.isFinite(produto) ? Math.round(Math.sqrt(produto / 3600) * 100) / 100 : null;
       if (base === null) return pend(["bsaM2 (Mosteller não finito)"]);
-      const dose = meioParaCima(e.mgM2! * base);
+      const dose = arredondarDoseMg(e.mgM2! * base);
       return dose === null
         ? pend(["dose (resultado não finito)"])
         : { estado: "PRONTO", doseMg: dose, pendente: null, aviso: null };
@@ -151,7 +143,7 @@ function calcularDoseEmMg(e: Exclude<EntradaDose, { basis: "MCG_KG" }>): SaidaDo
       if (!pos(e.auc)) return pend(["auc"]);
       if (e.clearance === null || !Number.isFinite(e.clearance) || e.clearance < 0) return pend(["clearance"]);
       const clcr = Math.min(CLCR_MAX, e.clearance);
-      const dose = meioParaCima(e.auc * (clcr + 25));
+      const dose = arredondarDoseMg(e.auc * (clcr + 25));
       if (dose === null) return pend(["dose (resultado não finito)"]);
       return { estado: "PRONTO", doseMg: dose, pendente: null,
         aviso: clcr !== e.clearance ? `ClCr ${e.clearance} mL/min limitado a ${CLCR_MAX} no Calvert (D-W9-60)` : null };
@@ -165,10 +157,10 @@ export function calcularDosePorBase(e: EntradaDose): SaidaDose {
   if (e.basis === "MCG_KG") {
     const faltantes = [!pos(e.mcgKg) && "mcgKg", !pos(e.pesoKg) && "pesoKg"].filter((x): x is string => x !== false);
     if (faltantes.length) return { ...pend(faltantes), dose: null, unidade: "µg" };
-    const dose = meioParaCima(e.mcgKg! * e.pesoKg!);
+    const dose = produtoDoseExata(e.mcgKg!, e.pesoKg!);
     if (dose === null) return { ...pend(["dose (resultado não finito)"]), dose: null, unidade: "µg" };
     const doseMg = dose / 1000;
-    if (!Number.isFinite(doseMg)) return { ...pend(["doseMg (conversão µg→mg não finita)"]), dose: null, unidade: "µg" };
+    if (!Number.isFinite(doseMg) || doseMg <= 0) return { ...pend(["doseMg (conversão µg→mg não finita)"]), dose: null, unidade: "µg" };
     return { estado: "PRONTO", dose, unidade: "µg", doseMg, pendente: null, aviso: null };
   }
   const r = calcularDoseEmMg(e);

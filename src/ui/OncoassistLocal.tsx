@@ -1,16 +1,19 @@
+import { LimiteModulo } from "./consulta/LimiteModulo.js";
+import { AnamneseGuiada } from "./consulta/AnamneseGuiada.js";
+import { LaudoAcesso } from "./consulta/LaudoAcesso.js";
 import type { ProvenienciaDocumentoConversa } from "../contracts/api/conversaOncoassist.js";
 import { criarDocumentoMedicoProposto } from "./medico/documentoProposto.js";
 import { CadastroMedico } from "./medico/CadastroMedico.js";
 import { AgendaMedica } from "./medico/AgendaMedica.js";
 import { PreConsultaMedica } from "./medico/PreConsultaMedica.js";
 import { NutricaoMedica } from "./medico/NutricaoMedica.js";
-import { DocumentosMedicos } from "./consulta/DocumentosMedicos.js";
+const DocumentosMedicos = lazy(() => import("./consulta/DocumentosMedicos.js").then(m => ({ default: m.DocumentosMedicos })));
 import { ConversaOncoassist } from "./consulta/ConversaOncoassist.js";
 import { DitadoDeepgram } from "./consulta/DitadoDeepgram.js";
 import type { DocumentoManualFlash } from "../contracts/api/flash.js";
 import type { FonteConversa } from "../contracts/api/conversaOncoassist.js";
 import {RecuperarConfirmacoes} from "./consulta/RecuperarConfirmacoes.js";
-import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState, type FormEvent } from "react";
+import { lazy, Suspense, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState, type FormEvent } from "react";
 import { z } from "zod";
 import { TumorLot } from '../contracts/clinico.js';
 import { criarPortaHttp, type OpcoesHttp } from "./api/http.js";
@@ -23,16 +26,16 @@ import { PainelOncoassist } from "./consulta/PainelOncoassist.js";
 import { ReconciliarMedicamentos } from "./consulta/ReconciliarMedicamentos.js";
 import { SinteseProposta } from "./consulta/SinteseProposta.js";
 import { RevisaoExtracaoLocal } from "./consulta/RevisaoExtracaoLocal.js";
-import { TelaSalao } from "./telas/TelaSalao.js";
+const TelaSalao = lazy(() => import("./telas/TelaSalao.js").then(m => ({ default: m.TelaSalao })));
 import { CaixaCanal } from "./telas/canal/CaixaCanal.js";
 import { ConsultaPersistida } from "./consulta/ConsultaPersistida.js";
-import { TelaApacLote } from "./telas/apac/TelaApacLote.js";
-import { Configuracoes } from "./oncochart/Configuracoes.js";
+const TelaApacLote = lazy(() => import("./telas/apac/TelaApacLote.js").then(m => ({ default: m.TelaApacLote })));
+const Configuracoes = lazy(() => import("./oncochart/Configuracoes.js").then(m => ({ default: m.Configuracoes })));
 import { BibliotecaLocal } from "./biblioteca/BibliotecaLocal.js";
 import { UploadDocumentoLocal } from "./consulta/UploadDocumentoLocal.js";
 import { TranscricaoLocal } from "./consulta/TranscricaoLocal.js";
-import { PainelEstatistica } from "./estatistica/PainelEstatistica.js";
-import { EstudosConsulta } from "./pesquisa/EstudosConsulta.js";
+const PainelEstatistica = lazy(() => import("./estatistica/PainelEstatistica.js").then(m => ({ default: m.PainelEstatistica })));
+const EstudosConsulta = lazy(() => import("./pesquisa/EstudosConsulta.js").then(m => ({ default: m.EstudosConsulta })));
 import type { VisaoEstatisticaServico, PeriodoClinicoEstatisticaServico } from "../contracts/api/estatisticaServico.js";
 import { RevisaoClinica } from './consulta/RevisaoClinica.js';
 import { contarClique, etapaDoClique, metricasVazias } from './consulta/metricasConsulta.js';
@@ -96,6 +99,7 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp, perfil = "MEDIC
   const [transcricaoSalvando,setTranscricaoSalvando]=useState(false);
   const [prescricaoPendente,setPrescricaoPendente]=useState(false);
   const [prescricaoSalvando,setPrescricaoSalvando]=useState(false);
+  const [formularioClinicoPendente, setFormularioClinicoPendente] = useState(false), [formularioClinicoSalvando, setFormularioClinicoSalvando] = useState(false);
   const [apacPendente,setApacPendente]=useState(false);
   const [apacSalvando,setApacSalvando]=useState(false);
   const [estudoPendente,setEstudoPendente]=useState(false);
@@ -117,8 +121,8 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp, perfil = "MEDIC
   useEffect(()=>{setDocumentoProposto(null);setFonteSolicitada(null);setEvidencia(null);setTextoDitado(null);setDitadoAberto(false);
     setCadastroPendente(false);setPrePendente(false);setNutricaoPendente(false);setAssistentePendente(false);setFlashPendente(false);
   },[contexto?.patientId,contexto?.encounterId,contexto?.tumorLotId]);
-  const edicaoPendente = agendaPendente || cadastroPendente || prePendente || nutricaoPendente || assistentePendente || flashPendente || transcricaoPendente || prescricaoPendente || apacPendente || estudoPendente;
-  const salvamentoEmCurso = agendaSalvando || documentalOcupado || transferindo || flashSalvando || assistenteOcupado || transcricaoSalvando || prescricaoSalvando || apacSalvando || estudoSalvando;
+  const edicaoPendente = agendaPendente || cadastroPendente || prePendente || nutricaoPendente || assistentePendente || flashPendente || transcricaoPendente || prescricaoPendente || apacPendente || formularioClinicoPendente || estudoPendente;
+  const salvamentoEmCurso = agendaSalvando || documentalOcupado || transferindo || flashSalvando || assistenteOcupado || transcricaoSalvando || prescricaoSalvando || apacSalvando || formularioClinicoSalvando || estudoSalvando;
   const removerProtecaoDocumento=useRef<(() => void) | null>(null);
   useEffect(() => {
     if (!edicaoPendente && !salvamentoEmCurso) return;
@@ -142,7 +146,7 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp, perfil = "MEDIC
   const restaurarFoco=useRef(false);
   useEffect(()=>setMetricas(metricasVazias()),[contexto?.patientId,contexto?.encounterId,contexto?.tumorLotId]);
   const [mensagem, setMensagem] = useState("");
-  const [tela, setTela] = useState<"consulta" | "salao" | "canal" | "apac" | "config" | "biblioteca" | "estatistica" | "estudos" | "agenda" | "preconsulta" | "documentos" | "oncoassist" | "nutricao">("consulta");
+  const [tela, setTela] = useState<"consulta" | "salao" | "canal" | "apac" | "config" | "biblioteca" | "estatistica" | "estudos" | "agenda" | "preconsulta" | "documentos" | "oncoassist" | "nutricao" | "laudo" | "anamnese">("consulta");
   const [estatistica, setEstatistica] = useState<VisaoEstatisticaServico | null>(null);
   const [periodoEstatistica, setPeriodoEstatistica] = useState<PeriodoClinicoEstatisticaServico | null>(null);
   const [estatisticaCarregando, setEstatisticaCarregando] = useState(false);
@@ -180,7 +184,7 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp, perfil = "MEDIC
     setSenha(""); setAutenticado(false); setAgenda([]); setSelecionado(""); setTela("consulta");
     setContexto(null); setLotes([]); setOcupado(false); setVersaoConsulta(0); setTranscricaoPendente(false);
     setTranscricaoSalvando(false); setMensagemSalvamento("");
-    setPrescricaoPendente(false); setPrescricaoSalvando(false); setApacPendente(false); setApacSalvando(false);
+    setPrescricaoPendente(false); setPrescricaoSalvando(false); setApacPendente(false); setFormularioClinicoPendente(false); setApacSalvando(false); setFormularioClinicoSalvando(false);
     setEstatistica(null); setPeriodoEstatistica(null);
     setEstudoPendente(false); setEstudoSalvando(false);
     setNavegacaoPendente(null); restaurarFoco.current=false; setSessao((s) => s + 1);
@@ -235,6 +239,7 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp, perfil = "MEDIC
   function solicitarNavegacaoVoluntaria(navegar: () => void) {
     if (salvamentoEmCurso || transferenciaEmCurso.current) {
       setMensagemSalvamento(documentalOcupado || transferindo || assistenteOcupado || flashSalvando || transferenciaEmCurso.current ? "A operação atual está em andamento. Aguarde a conclusão antes de navegar." : estudoSalvando ? "O estudo está sendo salvo. Aguarde a conclusão antes de sair."
+        : formularioClinicoSalvando ? "O formulário clínico está sendo processado. Aguarde a conclusão antes de sair."
         : apacSalvando ? "A APAC está sendo processada. Aguarde a conclusão antes de sair."
         : prescricaoSalvando ? "A prescrição está sendo processada. Aguarde a conclusão antes de sair."
         : "A transcrição está sendo salva. Aguarde a conclusão antes de sair.");
@@ -245,7 +250,7 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp, perfil = "MEDIC
     restaurarFoco.current=false;
     setNavegacaoPendente(() => navegar);
   }
-  function navegarParaTela(proxima: "consulta" | "salao" | "canal" | "apac" | "config" | "biblioteca" | "estatistica" | "estudos" | "agenda" | "preconsulta" | "documentos" | "oncoassist" | "nutricao") {
+  function navegarParaTela(proxima: "consulta" | "salao" | "canal" | "apac" | "config" | "biblioteca" | "estatistica" | "estudos" | "agenda" | "preconsulta" | "documentos" | "oncoassist" | "nutricao" | "laudo" | "anamnese") {
     if (tela === proxima) return;
     solicitarNavegacaoVoluntaria(() => setTela(proxima));
   }
@@ -267,7 +272,7 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp, perfil = "MEDIC
     // O descarte já foi confirmado no diálogo da aplicação. Uma saída de
     // documento síncrona (location.assign) não deve pedir confirmação de novo.
     removerProtecaoDocumento.current?.();
-    setPrescricaoPendente(false); setApacPendente(false); setTranscricaoPendente(false);
+    setPrescricaoPendente(false); setApacPendente(false); setFormularioClinicoPendente(false); setTranscricaoPendente(false);
     setEstudoPendente(false);setCadastroPendente(false);setPrePendente(false);setNutricaoPendente(false);setAssistentePendente(false);setFlashPendente(false);
     restaurarFoco.current=false;
     setNavegacaoPendente(null);
@@ -314,32 +319,41 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp, perfil = "MEDIC
     setSelecionado(encounterId); setContexto(null); setLotes([]); setMensagem("");
     if (!patientId) return;
     setOcupado(true);
+    let prazo: ReturnType<typeof setTimeout> | undefined;
+    const comPrazo = <T,>(pedido: Promise<T>) => new Promise<T>((resolve, reject) => {
+      clearTimeout(prazo);
+      prazo = setTimeout(() => reject(new Error("CONSULTA_PRAZO")), 20_000);
+      pedido.then((valor) => { clearTimeout(prazo); resolve(valor); }, (erro) => { clearTimeout(prazo); reject(erro); });
+    });
     try {
       try {
-        const consulta = consultaSchema.safeParse(await porta.carregarConsulta(patientId, undefined, encounterId));
+        const consulta = consultaSchema.safeParse(await comPrazo(porta.carregarConsulta(patientId, undefined, encounterId)));
         if (atual !== geracao.current) return;
         if (consulta.success && consulta.data.patientId === patientId && consulta.data.encounterId === encounterId) {
           setLotes((consulta.data.cabecalho?.lotes??[]).filter(l=>l.patientId===patientId));
           setContexto({patientId:consulta.data.patientId,encounterId:consulta.data.encounterId,tumorLotId:consulta.data.tumorLotId}); return;
         }
-      } catch { /* An active appointment can start a new encounter without prior clinical events. */ }
+      } catch (erro) {
+        if (erro instanceof Error && erro.message === "CONSULTA_PRAZO") throw erro;
+        /* An active appointment can start a new encounter without prior clinical events. */
+      }
       if(atual!==geracao.current)return;
       const agendaEntry = entrada;
       if (!agendaEntry?.encounterId || !porta.selecionarContexto) {
         setMensagem("Consulta local indisponível para este paciente."); return;
       }
       if(porta.lotesPaciente){
-        const resposta=await porta.lotesPaciente(patientId);if(atual!==geracao.current)return;
+        const resposta=await comPrazo(porta.lotesPaciente(patientId));if(atual!==geracao.current)return;
         const lista=LotesPacienteResposta.parse(resposta);if(lista.patientId!==patientId)throw Error('LOTES_FORA_DO_PACIENTE');
         setLotes(lista.lotes);
       }
-      await porta.selecionarContexto({ patientId, encounterId: agendaEntry.encounterId, tumorLotId: null });
+      await comPrazo(porta.selecionarContexto({ patientId, encounterId: agendaEntry.encounterId, tumorLotId: null }));
       if (atual !== geracao.current) return;
       setContexto({ patientId, encounterId: agendaEntry.encounterId, tumorLotId: null });
       setMensagem("Contexto da agenda selecionado. A revisão continua pendente até a decisão médica.");
     } catch {
       if (atual === geracao.current) setMensagem("Não foi possível abrir a consulta local.");
-    } finally { if (atual === geracao.current) setOcupado(false); }
+    } finally { clearTimeout(prazo); if (atual === geracao.current) setOcupado(false); }
   }
 
   async function selecionarLote(tumorLotId:string){
@@ -425,14 +439,20 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp, perfil = "MEDIC
           <button type="button" disabled={!contexto} onClick={()=>navegarParaTela("nutricao")}>Orientações dietéticas</button>
         </>}
         <button type="button" disabled={ocupado || transcricaoSalvando} onClick={() => navegarParaTela("consulta")}>Consulta</button>
-        {!modoMedico && <button type="button" disabled={ocupado || transcricaoSalvando} onClick={() => navegarParaTela("salao")}>Salão</button>}
-        {!modoMedico && <button type="button" disabled={ocupado || transcricaoSalvando} onClick={() => navegarParaTela("canal")}>Canal</button>}
-        {!modoMedico && <button type="button" disabled={ocupado || transcricaoSalvando} onClick={() => navegarParaTela("apac")}>APAC</button>}
+        {<button type="button" disabled={ocupado || transcricaoSalvando} onClick={() => navegarParaTela("salao")}>Salão</button>}
+        {<button type="button" disabled={ocupado || transcricaoSalvando} onClick={() => navegarParaTela("canal")}>Canal</button>}
+        {<button type="button" disabled={ocupado || transcricaoSalvando} onClick={() => navegarParaTela("apac")}>APAC</button>}
+        {porta.anamneseGuiada && <button type="button" disabled={!contexto || salvamentoEmCurso} onClick={() => navegarParaTela("anamnese")}>Anamnese guiada</button>}
+        <button type="button" disabled={!contexto || salvamentoEmCurso} onClick={() => contexto && solicitarNavegacaoVoluntaria(() => {
+          setDocumentoProposto({ id: `pericia-${crypto.randomUUID()}`, tipo: "RELATORIO_PERICIAL", titulo: "Relatório médico para perícia", texto: "", destino: null,
+            solicitacaoId: crypto.randomUUID(), contextoChave: JSON.stringify(contexto) }); setTela("consulta");
+        })}>Relatório para perícia</button>
+        {porta.laudoAcesso && <button type="button" disabled={!contexto || salvamentoEmCurso} onClick={() => navegarParaTela("laudo")}>Laudo de acesso</button>}
         <button type="button" disabled={ocupado || transcricaoSalvando} onClick={() => navegarParaTela("config")}>Configurações Flash</button>
         <button type="button" disabled={ocupado || transcricaoSalvando} onClick={() => navegarParaTela("biblioteca")}>Biblioteca</button>
-        {!modoMedico && porta.lerEstatisticaServico ? <button type="button" disabled={ocupado || salvamentoEmCurso}
+        {porta.lerEstatisticaServico ? <button type="button" disabled={ocupado || salvamentoEmCurso}
           onClick={() => navegarParaTela("estatistica")}>Estatísticas</button> : null}
-        {!modoMedico && porta.listarEstudosTrials ? <button type="button" disabled={ocupado || salvamentoEmCurso}
+        {porta.listarEstudosTrials ? <button type="button" disabled={ocupado || salvamentoEmCurso}
           onClick={() => navegarParaTela("estudos")}>Estudos clínicos</button> : null}
       </nav>
       </div>
@@ -444,7 +464,7 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp, perfil = "MEDIC
       {modoMedico && contexto && <>
         {tela === "preconsulta" && porta.consultorio && <><CadastroMedico api={porta.consultorio} contexto={contexto} aoAlterarPendente={setCadastroPendente}
           aoAtualizar={nome=>{setAgenda(a=>a.map(x=>x.patientId===contexto.patientId?{...x,nome}:x));setVersaoConsulta(v=>v+1);}} /><PreConsultaMedica api={porta.consultorio} contexto={contexto} aoRegistrar={()=>setVersaoConsulta(v=>v+1)} aoAlterarPendente={setPrePendente} /></>}
-        {tela === "documentos" && porta.documental && <DocumentosMedicos api={porta.documental} contexto={contexto} aoAtividade={setDocumentalOcupado} aoSelecionarFonte={solicitarFonte} aoImportar={()=>setVersaoFontes(v=>v+1)} />}
+        {tela === "documentos" && porta.documental && <LimiteModulo><Suspense fallback={<p role="status">Carregando módulo…</p>}><DocumentosMedicos api={porta.documental} contexto={contexto} aoAtividade={setDocumentalOcupado} aoSelecionarFonte={solicitarFonte} aoImportar={()=>setVersaoFontes(v=>v+1)} /></Suspense></LimiteModulo>}
         {tela === "nutricao" && porta.consultorio && <NutricaoMedica api={porta.consultorio} contexto={contexto} aoAlterarPendente={setNutricaoPendente} aoUsarOrientacao={t=>proporDocumento(t,"ORIENTACOES")} />}
         {tela === "oncoassist" && porta.assistente && <>
           <ConversaOncoassist api={porta.assistente} contexto={contexto} aoAbrirFonte={ref=>void abrirEvidencia(ref)} aoUsarTexto={(t,p)=>proporDocumento(t,"LAUDO",p)}
@@ -528,7 +548,11 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp, perfil = "MEDIC
           {...(pacienteAtivo ? { patientLabel: pacienteAtivo.nome } : {})} />
         </SecaoAcordeon21st>
         <RecuperarConfirmacoes key={`recuperar:${contexto.patientId}:${contexto.encounterId}:${contexto.tumorLotId}`} porta={porta} contexto={contexto} aoAtualizar={()=>setVersaoConsulta(v=>v+1)}/>
-        <PainelOncoassist key={`painel:${versaoConsulta}`} porta={porta} contexto={contexto} />
+        <PainelOncoassist key={`painel:${versaoConsulta}`} porta={porta} contexto={contexto} aoUsarDocumento={documento => {
+          const origem = documento.origemSkill?.contexto;
+          if (origem && (origem.patientId !== contexto.patientId || origem.encounterId !== contexto.encounterId || origem.tumorLotId !== contexto.tumorLotId)) return;
+          solicitarNavegacaoVoluntaria(() => { setDocumentoProposto({ ...documento, solicitacaoId: crypto.randomUUID(), contextoChave: JSON.stringify(contexto) }); setTela("consulta"); });
+        }} />
         <ListaRascunhosPubMed key={`pubmed:${versaoConsulta}`} porta={porta} />
         <SecaoAcordeon21st
           id="consulta-medicamentos"
@@ -556,18 +580,20 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp, perfil = "MEDIC
         <SinteseProposta key={`sintese:${versaoConsulta}`} porta={porta} contexto={contexto} aoAbrirFlash={() => { setAberturaFlash(a => ({ contexto: JSON.stringify(contexto), sequencia: (a?.sequencia ?? 0) + 1 })); }}/>
         </SecaoAcordeon21st>
       </div> : null}
-      {tela === "salao" ? <TelaSalao porta={porta} /> : null}
-      {tela === "estudos" ? <EstudosConsulta key={`${contexto?.patientId}:${contexto?.encounterId}:${contexto?.tumorLotId}`}
+      {tela === "anamnese" && contexto && <AnamneseGuiada key={JSON.stringify(contexto)} porta={porta} contexto={contexto} aoPendente={setFormularioClinicoPendente} aoSalvando={setFormularioClinicoSalvando} />}
+      {tela === "laudo" && contexto && <LaudoAcesso key={JSON.stringify(contexto)} porta={porta} contexto={contexto} aoPendente={setFormularioClinicoPendente} aoSalvando={setFormularioClinicoSalvando} />}
+      {tela === "salao" ? <LimiteModulo><Suspense fallback={<p role="status">Carregando módulo…</p>}><TelaSalao porta={porta} /></Suspense></LimiteModulo> : null}
+      {tela === "estudos" ? <LimiteModulo><Suspense fallback={<p role="status">Carregando módulo…</p>}><EstudosConsulta key={`${contexto?.patientId}:${contexto?.encounterId}:${contexto?.tumorLotId}`}
         porta={porta} contexto={contexto}
-        aoAlterarPendente={setEstudoPendente} aoAlterarSalvamento={setEstudoSalvando} /> : null}
+        aoAlterarPendente={setEstudoPendente} aoAlterarSalvamento={setEstudoSalvando} /></Suspense></LimiteModulo> : null}
       {tela === "estatistica" ? <section aria-label="Estatísticas do serviço local">
         {estatisticaErro ? <p role="alert">{estatisticaErro}</p> : null}
-        {estatistica ? <PainelEstatistica dados={estatistica} ocupado={estatisticaCarregando} aoPeriodo={setPeriodoEstatistica} />
+        {estatistica ? <LimiteModulo><Suspense fallback={<p role="status">Carregando módulo…</p>}><PainelEstatistica dados={estatistica} ocupado={estatisticaCarregando} aoPeriodo={setPeriodoEstatistica} /></Suspense></LimiteModulo>
           : estatisticaCarregando ? <p role="status">Carregando estatísticas…</p> : null}
       </section> : null}
-      {tela === "apac" ? <TelaApacLote porta={porta} chaves={chaves} /> : null}
-      {tela === "config" ? <Configuracoes somenteFlash incluirServico porta={porta} tema="dia"
-        onTema={() => {}} onFechar={() => navegarParaTela("consulta")} /> : null}
+      {tela === "apac" ? <LimiteModulo><Suspense fallback={<p role="status">Carregando módulo…</p>}><TelaApacLote porta={porta} chaves={chaves} /></Suspense></LimiteModulo> : null}
+      {tela === "config" ? <LimiteModulo><Suspense fallback={<p role="status">Carregando módulo…</p>}><Configuracoes somenteFlash incluirServico porta={porta} tema="dia"
+        onTema={() => {}} onFechar={() => navegarParaTela("consulta")} /></Suspense></LimiteModulo> : null}
       {tela === "biblioteca" ? (porta.biblioteca
         ? <BibliotecaLocal api={porta.biblioteca} />
         : <section aria-label="Biblioteca"><h2>Biblioteca indisponível</h2><p>O servidor local ainda não oferece a API autenticada da biblioteca.</p></section>) : null}
@@ -602,6 +628,7 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp, perfil = "MEDIC
           {transcricaoPendente ? <><p>Há texto de transcrição nesta consulta que ainda não foi salvo.</p>
             <p>Para salvar, continue editando e use “Salvar transcrição para revisão clínica”.</p></> : null}
           {prescricaoPendente ? <p>A prescrição ainda não foi assinada. Continue editando para revisar e concluir.</p> : null}
+          {formularioClinicoPendente && <p>O formulário clínico tem alterações não salvas. Continue editando para preparar e salvar.</p>}
           {apacPendente ? <p>A APAC tem alterações administrativas não salvas. Continue editando para preparar e salvar como rascunho.</p> : null}
           {estudoPendente ? <p>Há alterações no protocolo do estudo que ainda não foram salvas. Continue editando para concluir.</p> : null}
           <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "flex-end", gap: ".75rem" }}>

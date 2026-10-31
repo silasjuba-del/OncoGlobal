@@ -1383,7 +1383,11 @@
   padding: 0 8px;
   width: 100%;
 }
-.oc-rx-ajustes { display: flex; gap: 6px; }
+.oc-rx-ajustes { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+.oc-rx-ajustes button[aria-pressed="true"] {
+  outline: 2px solid var(--accent);
+  font-weight: 650;
+}
 .oc-rx-ajustes button {
   min-height: 36px;
   min-width: 52px;

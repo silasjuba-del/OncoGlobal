@@ -1,3 +1,4 @@
+import { LIMITE_TEXTO_DOCUMENTO_MANUAL, type DocumentoManualFlash } from "../../contracts/api/flash.js";
 import { useEffect, useRef, useState } from "react";
 import type { PortaConsulta, PedidoBundle } from "../api/porta.js";
 import type { ResultadoSkillClinica, PedidoSkillClinica } from "../../contracts/skillsClinicas.js";
@@ -7,7 +8,7 @@ type Fontes = Extract<ResultadoSkillClinica,{codigo:"SKILL_FONTES"}>["fontes"];
 type Historico = Extract<ResultadoSkillClinica,{codigo:"SKILLS_HISTORICO"}>["execucoes"];
 type Preparado = Extract<ResultadoSkillClinica,{codigo:"SKILL_PREPARADA"|"SKILL_REPLAY"|"SKILL_CARREGADA"}>;
 
-export function PainelSkillsClinicas({porta,contexto}:{porta:PortaConsulta;contexto:PedidoBundle}) {
+export function PainelSkillsClinicas({porta,contexto,aoUsarDocumento}:{porta:PortaConsulta;contexto:PedidoBundle;aoUsarDocumento?:(d:DocumentoManualFlash)=>void}) {
   const [aberto,setAberto]=useState(false), [catalogo,setCatalogo]=useState<Catalogo|null>(null);
   const [fontes,setFontes]=useState<Fontes>([]),[historico,setHistorico]=useState<Historico>([]);
   const [selecionadas,setSelecionadas]=useState<string[]>([]),[cartoes,setCartoes]=useState<string[]>([]),[acoes,setAcoes]=useState<string[]>([]);
@@ -76,7 +77,7 @@ export function PainelSkillsClinicas({porta,contexto}:{porta:PortaConsulta;conte
       <fieldset disabled={ocupado} style={{minWidth:0,maxWidth:'100%',boxSizing:'border-box'}}><legend>Laudos e exames vinculados</legend>
         {!fontes.length&&<p>Vincule e revise as fontes da consulta para preparar a jornada.</p>}
         {fontes.map(f=><label key={f.draftId} style={{display:'block'}}><input type="checkbox" checked={selecionadas.includes(f.draftId)}
-          onChange={e=>{setSelecionadas(s=>e.target.checked?[...s,f.draftId]:s.filter(id=>id!==f.draftId));setResultado(null);}}/>{f.sourceId} · revisão {f.revision}</label>)}
+          onChange={e=>{setSelecionadas(s=>e.target.checked?[...s,f.draftId]:s.filter(id=>id!==f.draftId));setResultado(null);}}/>{f.sourceId} · revisão {f.revision}{f.encounterId&&<small> · atendimento anterior · registrado em {f.registradoEm}</small>}</label>)}
       </fieldset>
       <label style={{display:'block'}}>Cenários do corpus — referências em revisão <select aria-label="Cenários de pulmão" multiple value={cartoes} disabled={ocupado}
         style={{display:'block',width:'100%',minWidth:0,maxWidth:'100%',boxSizing:'border-box',margin:0}}
@@ -96,7 +97,23 @@ export function PainelSkillsClinicas({porta,contexto}:{porta:PortaConsulta;conte
         <p role="status">{resultado.validade==='ATUAL'?'Rascunhos preparados — revisão médica pendente.':'Entradas alteradas — somente consulta histórica; prepare nova versão.'}</p>
         {resultado.execucao.jornada?.estado==='URGENTE'&&<p role="alert">Suspeita urgente: avaliação médica prioritária. Propostas eletivas interrompidas.</p>}
         <ol>{resultado.execucao.jornada?.etapas.map(e=><li key={e.id}>{e.titulo}: {e.estado}. {e.motivo}</li>)}</ol>
-        {resultado.documentos.map(d=><details key={d.documentId}><summary>{d.titulo}</summary><div style={{whiteSpace:'pre-wrap'}}>{d.texto}</div></details>)}
+        {!!resultado.execucao.jornada?.cartoes.length&&<section aria-label="Linhas de referência sem dose">
+          <p>Corpus disponível para consulta com fontes. A indicação individual e a prescrição dependem da revisão médica.</p>
+          {resultado.execucao.jornada.cartoes.map(c=><article key={c.id}>
+            <h4>{c.id} · {c.estadiamento} · {c.subtipo}</h4>
+            <ul>{Object.entries(c.linhas).flatMap(([n,l])=>{
+              if(!l.opcoes.length&&(n==='4'||n==='5'))return [];
+              return [<li key={`${c.id}-L${n}`}><strong>L{n}.</strong> {l.opcoes.length?l.opcoes.join(' ou '):`Sem opção extraída. ${l.condicao}`}{l.opcoes.length&&l.condicao?` ${l.condicao}`:''} Sem dose.</li>];
+            })}</ul>
+          </article>)}
+        </section>}
+        {resultado.documentos.map(d=><details key={d.documentId}><summary>{d.titulo}</summary><div style={{whiteSpace:'pre-wrap'}}>{d.texto}</div>
+          {aoUsarDocumento && d.tipo !== 'RECEITA' && <button type="button" disabled={ocupado || resultado.validade !== 'ATUAL' || d.texto.length > LIMITE_TEXTO_DOCUMENTO_MANUAL}
+            onClick={() => { const ref = resultado.execucao.documentos.find(r => r.documentId === d.documentId); if (!ref) return;
+              aoUsarDocumento({ id: `skill-${ref.hash}`, tipo: d.tipo as DocumentoManualFlash['tipo'], titulo: d.titulo,
+                destino: null, texto: d.texto, origemSkill: { contexto: ctx, execucaoId: d.execucaoId, documentId: d.documentId, hash: ref.hash } });
+            }}>Revisar documento no Flash</button>}
+        </details>)}
       </article>}
       {!!historico.length&&<section aria-label="Histórico das jornadas"><h4>Rascunhos salvos</h4>{historico.map(h=><p key={h.execucaoId}>
         {h.skillId} · {h.criadoEm} <button type="button" disabled={ocupado} onClick={()=>void executar({acao:'LER',contexto:ctx,execucaoId:h.execucaoId})}>Reabrir jornada</button>

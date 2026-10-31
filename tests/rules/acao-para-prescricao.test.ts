@@ -227,3 +227,13 @@ describe("edicaoDaAcao: projeção segura para o editor executável", () => {
     expect(resultado.pendencias.length).toBeGreaterThan(0);
   });
 });
+
+it('ações em mg preservam quantidade de suporte em mL e recusam redução desse item',()=>{
+ const b=base();b.vigente!.itens.push(item('suporte-5',{sequence:5,classe:'PRE_QT',unit:'mL',standardDose:10,calculatedDose:10,prescribedDose:10}));
+ b.ciclo!.itens.push({item:5,droga:'Fármaco sintético suporte-5',doseMg:null,doseOriginal:{valor:10,unidade:'mL'},reducaoPct:null});
+ for(const pedido of [{tipo:'MANTER_CICLO',motivo:'Conservar prescrição sintética'},{tipo:'REDUZIR_DOSE',motivo:'Ajuste sintético do item em mg',itensSelecionados:[1],reducaoPct:20}]){
+  const r=edicaoDaAcao(b,acao(b,pedido));expect(r.pendencias).toEqual([]);expect(r.edicao?.itens[4]?.item).toMatchObject({prescribedDose:10,unit:'mL'});
+ }
+ expect(acao(b,{tipo:'REDUZIR_DOSE',motivo:'Tentativa indevida de reduzir volume como mg',itensSelecionados:[5],reducaoPct:20}).resultado.estado).toBe('PENDENTE');
+ b.ciclo!.itens[4]!.doseOriginal!.valor=99;expect(edicaoDaAcao(b,acao(b,{tipo:'MANTER_CICLO',motivo:'Conferir divergência'})).edicao).toBeNull();
+});

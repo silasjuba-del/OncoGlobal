@@ -12,13 +12,19 @@ const base = item({ drug: "Docetaxel", doseBasis: "MG_M2", standardDose: 75, cal
 describe("W10-INT-PRESC-03 · aplicarAjuste", () => {
   it("−20/−30/−40 sobre a dose anterior, igual a FN-04", () => {
     for (const [p, r] of [[-20, 20], [-30, 30], [-40, 40]] as const) {
-      for (const b of [1, 7, 135, 129, 1001]) {
+      for (const b of [7, 135, 129, 1001]) {
         const it = item({ drug: "X", prescribedDose: b, calculatedDose: b });
         const res = aplicarAjuste(it, p, "neutropenia");
         const fn04 = calcularDose({ doseAdministradaAnteriorMg: b, reducaoPct: r, pesoKg: 70, origemPeso: "MEDIDO", ciclosSemPesoAnteriores: 0 }, rs);
         expect(res.ok && res.item.prescribedDose).toBe(fn04.doseMg);
       }
     }
+  });
+  it("D-F1-52: resultado calculado 0,7 mg sobe para 1 sem zerar", () => {
+    const it = item({ drug: "X", prescribedDose: 1, calculatedDose: 1 });
+    expect(aplicarAjuste(it, -30, "m")).toMatchObject({ ok: true, item: { prescribedDose: 1 } });
+    const fn04 = calcularDose({ doseAdministradaAnteriorMg: 1, reducaoPct: 30, pesoKg: 70, origemPeso: "MEDIDO", ciclosSemPesoAnteriores: 0 }, rs);
+    expect(fn04).toMatchObject({ doseMg: 1, estado: "VERDE" });
   });
   it("resultado conhecido e item continua válido no contrato", () => {
     const r = aplicarAjuste(base, -20, "mucosite G3");
@@ -49,8 +55,8 @@ describe("W10-INT-PRESC-03 · aplicarAjuste", () => {
     const r2 = aplicarAjuste(r1.item, -40, "troca", { doseBase: 135 });
     expect(r2.ok && r2.item.prescribedDose).toBe(81);
   });
-  it("dose que arredonda a zero é recusada", () => {
+  it("D-F1-52: dose positiva pequena não vira zero", () => {
     const pequena = item({ drug: "X", prescribedDose: 0.5 });
-    expect(aplicarAjuste(pequena, -40, "m")).toMatchObject({ ok: false, recusa: { codigo: "DOSE_RESULTANTE_INVALIDA" } });
+    expect(aplicarAjuste(pequena, -40, "m")).toMatchObject({ ok: true, item: { prescribedDose: 0.3 } });
   });
 });

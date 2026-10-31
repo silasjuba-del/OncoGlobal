@@ -3,13 +3,14 @@ import { RevisaoClinica } from "../../../src/ui/consulta/RevisaoClinica.js";
 import { MenuRapido21st } from "../../../src/ui/oncochart/PainelCombinacoes21st.js";
 import { criarPortaFalsa } from "../../../src/ui/api/fake.js";
 import type { RevisaoClinicaResposta } from "../../../src/contracts/fase2/revisaoClinica.js";
+import { montarTelaRevisao } from "../../../src/modules/consulta/telaRevisao.js";
 const contexto = { patientId: "pt-multi", encounterId: "en-multi", tumorLotId: "lot-multi-a" };
 const dados: RevisaoClinicaResposta = {
   codigo: "REVISAO_CLINICA_CARREGADA", contexto, revisao: "SINTETICO", packs: [], pack: null,
   ficha: [{ id: "sintetico", rotulo: "Campo SINTETICO", valor: "Informação sintética para revisão", estado: "DOCUMENTADO", motivo: "Teste sintético", data: "2026-10-05", fatos: [], fontes: [] }],
   preQt: { estado: "PENDENTE", autorizaTratamento: false, pendencias: [] },
   respostaTumoral: { criterio: "RECIST_1_1", aplicabilidade: "CONFERIR_CRITERIO_DO_TUMOR", series: [], patologica: [], pendencias: [] },
-  estadosDoenca: [], pendencias: [],
+  estadosDoenca: [], pendencias: [], tela: montarTelaRevisao({}),
 };
 const porta = { ...criarPortaFalsa(), revisaoClinica: async () => dados };
 createRoot(document.getElementById("root")!).render(

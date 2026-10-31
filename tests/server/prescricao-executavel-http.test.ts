@@ -1,3 +1,4 @@
+import * as segurancaPrescricao from "../../src/rules/prescricao/safetyEngine.js";
 // proveniência: dados sintéticos — não utilizar em produção
 import { afterEach, expect, it, vi } from "vitest";
 import { join } from "node:path";
@@ -215,7 +216,7 @@ async function prepararNovaLinha(a: Ambiente, ajustes: {
   const pedido = PrepararPrescricaoExecutavelPedido.parse({ contexto, expectedBaseHash: base.revisao,
     idempotencyKey: "preparar-prescricao-sintetica", edicao: edicao(ajustes.edicao) });
   const resposta = await a.request(PREPARAR, { ...pedido, ...ajustes.pedido });
-  expect(resposta.status).toBe(200);
+  expect(resposta.status,JSON.stringify(resposta.data)).toBe(200);
   return { base, pedido, preparada: PrescricaoExecutavelPreparada.parse(resposta.data) };
 }
 
@@ -394,7 +395,8 @@ it.each(["preparar", "confirmar"])("revalida limite de prévia persistida sem o 
   const a = await abrir(), base = await carregarBase(a);
   const pedido = { contexto, expectedBaseHash: base.revisao, idempotencyKey: "previa-sem-gate",
     edicao: edicao({ itens: [{ ...itemPrescrito(), item: { ...itemPrescrito().item, doseMaximaMg: 1 } }] }) };
-  // Simula somente o avaliador da release anterior. HTTP, draft e recibo são reais.
+  // Simula a release histórica, anterior às duas barreiras de limite. HTTP, draft e recibo são reais.
+  const segurancaLegada = vi.spyOn(segurancaPrescricao, "safetyEngine").mockReturnValueOnce({ resultado: "PASS", motivos: [] });
   const avaliar = documentoExecutavel.avaliarDocumentoExecutavel;
   const legado = vi.spyOn(documentoExecutavel, "avaliarDocumentoExecutavel")
     .mockImplementationOnce(entrada => {
@@ -406,7 +408,7 @@ it.each(["preparar", "confirmar"])("revalida limite de prévia persistida sem o 
       return { ...avaliar(semLimites), conteudo: original };
     });
   let r;
-  try { r = await a.request(PREPARAR, pedido); } finally { legado.mockRestore(); }
+  try { r = await a.request(PREPARAR, pedido); } finally { legado.mockRestore(); segurancaLegada.mockRestore(); }
   expect(r.status).toBe(200);
   const previa = PrescricaoExecutavelPreparada.parse(r.data), antes = a.eventos();
   const resposta = operacao === "preparar" ? await a.request(PREPARAR, pedido)
@@ -1117,4 +1119,19 @@ it('ciclo assinado conserva o peso medido usado na preparação, data e fonte, s
 it('todas as rotas catalogadas, inclusive recuperação e download, exigem autenticação',async()=>{
  const {ROTAS_HTTP}=await import('../../src/server/rotas/catalogo.js');const a=await abrir();
  for(const rota of ROTAS_HTTP.filter(r=>r.nome!=='login'))expect((await a.request(rota.url,{},'')).status,rota.url).toBe(401);
+});
+
+it('[pre-merge] dose de suporte em mL permanece executável com sua unidade',async()=>{
+ const a=await abrir();const suporte=itemPrescrito(10);suporte.itemId='suporte-volume';
+ const {preparada}=await prepararNovaLinha(a,{edicao:{itens:[itemPrescrito(),{...suporte,item:{...suporte.item,drug:'Suporte sintético em volume',classe:'PRE_QT',sequence:2,unit:'mL'}}]}});
+ expect(preparada.conteudo.itens[1]?.item).toMatchObject({prescribedDose:10,unit:'mL'});
+ expect((await assinar(a,preparada,'volume-sintetico')).codigo).toBe('GRAVADA');
+ const reaberta=await carregarBase(a);expect(reaberta.ciclo?.itens[1]).toMatchObject({doseMg:null,doseOriginal:{valor:10,unidade:'mL'}});
+ expect(reaberta.vigente?.itens[1]?.item).toMatchObject({prescribedDose:10,unit:'mL'});
+});
+
+it('[pre-merge] volume não contorna teto declarado em mg sem concentração',async()=>{
+ const a=await abrir(),b=await carregarBase(a),suporte=itemPrescrito(10);
+ const r=await a.request(PREPARAR,{contexto,expectedBaseHash:b.revisao,idempotencyKey:'volume-teto-sintetico',edicao:edicao({itens:[{...suporte,item:{...suporte.item,classe:'PRE_QT',unit:'mL',doseMaximaMg:5}}]})});
+ expect(r.status).toBe(409);expect(r.data.codigo).toBe('PRESCRICAO_INCOMPLETA');
 });

@@ -1,3 +1,5 @@
+import { operarAnamneseGuiada } from "./anamneseGuiada.js";
+import { operarLaudoAcesso } from "./laudoAcesso.js";
 import { operarDocumental } from "./importacaoDocumental.js";
 import { operarConsultaAcervo } from "./consultaAcervo.js";
 import { operarEstadoIntegracoes } from "./integracoesEstado.js";
@@ -318,6 +320,8 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
       try { const r = lerFontePack(deps.catalogoTumorPacks, p.data); return reply(200, r.codigo, r); }
       catch (e) { return reply(409, e instanceof Error && e.message === "FONTE_PACK_ALTERADA" ? e.message : "FONTE_PACK_INDISPONIVEL"); }
     }
+    if (rota === "anamneseGuiada") { const r = operarAnamneseGuiada(raw, token, deps); return reply(r.status, "ANAMNESE_GUIADA", r.body); }
+    if (rota === "laudoAcesso") { const r = operarLaudoAcesso(raw, token, deps); return reply(r.status, "LAUDO_ACESSO", r.body); }
     if (rota === "revisaoClinica") {
       const p = z.object({ patientId: Id, encounterId: Id, tumorLotId: Id.nullable(), packId: Id.optional(), compacta: z.boolean().optional() }).strict().safeParse(raw);
       if (!p.success) return reply(400, "PAYLOAD_INVALIDO");
@@ -330,6 +334,7 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
         const result = await obterRevisaoClinica(
           deps.motorF1, deps.catalogoTumorPacks, contexto, packId,
           () => lerRecist(deps.db, contexto.patientId, { encounterId: contexto.encounterId, tumorLotId: contexto.tumorLotId, agora: deps.agora() }),
+          () => lerConsulta(deps.db, contexto.patientId, deps.agora(), sessao, contexto.tumorLotId, { ...opcoesLeituraConsulta(deps, sessao), encounterId: contexto.encounterId }),
         );
         const atual = deps.sessoes.consultaSelecionada(token);
         if (!deps.sessoes.obter(token) || !atual || atual.patientId !== contexto.patientId || atual.encounterId !== contexto.encounterId || (atual.tumorLotId ?? null) !== contexto.tumorLotId)

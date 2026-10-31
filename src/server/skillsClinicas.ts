@@ -1,6 +1,6 @@
+import { FontePaciente as Fonte, encontroNoHistorico, fontesPaciente } from "./fontesPaciente.js";
 import { z } from "zod";
-import { ClinicalFact, EncounterSegment } from "../contracts/w10/extracao.js";
-import { MetodoCapturaTranscricao } from "../contracts/capturaTranscricao.js";
+import { ClinicalFact } from "../contracts/w10/extracao.js";
 import { PedidoSkillClinica, ExecucaoSkill, DocumentoSkill, ContextoSkill, TipoDocumentoSkill, ResultadoSkillClinica, SkillClinicaId } from "../contracts/skillsClinicas.js";
 import type { ResultadoJornada } from "../contracts/jornadaClinica.js";
 import { ehMetadadoTecnico } from "../contracts/metadadosTecnicos.js";
@@ -14,16 +14,8 @@ import { lerPaciente, lerConsulta } from "./leituras.js";
 import { opcoesLeituraConsulta } from "./rotas/confirmacao.js";
 import type { ServidorDeps } from "./rotas.js";
 
-const Fonte = z.object({ kind: z.literal("EXTRACAO_RASCUNHO"),
-  input: z.object({ recordingId: z.string(), sourceId: z.string(), sourceType: ClinicalFact.shape.sourceType,
-    captureMethod: MetodoCapturaTranscricao.optional(), rawTranscript: z.string().min(1) }),
-  state: z.object({ segments: z.array(EncounterSegment) }),
-  patientLinkReview: ContextoSkill.extend({ segmentId: z.string(), sourceId: z.string(), sourceHash: z.string(),
-    reviewDecisionId: z.string(), exceptionId: z.string(), medicoId: z.string() }).strip(),
-});
 class RecusaSkill extends Error { constructor(readonly codigo: string, readonly status = 409) { super(codigo); } }
 const mesmo = (a: z.infer<typeof ContextoSkill>, b: z.infer<typeof ContextoSkill>) => hashCanonico(a) === hashCanonico(b);
-const contextoDe = (v: z.infer<typeof ContextoSkill>) => ContextoSkill.parse({ patientId: v.patientId, encounterId: v.encounterId, tumorLotId: v.tumorLotId });
 function valorClinico(texto: string): string {
   try {
     const v: unknown = JSON.parse(texto);
@@ -55,9 +47,11 @@ export function operarSkillsClinicas(raw: unknown, token: string, deps: Servidor
     const opcoesLeitura = opcoesLeituraConsulta(deps,sessao);
     // A política de segurança também faz parte da entrada: uma regra RADS nova
     // precisa invalidar o rascunho antigo mesmo se o paciente e o texto não mudaram.
-    const corpusHash = hashCanonico({ politicaJornada:"JORNADA-SEGURANCA@2", conhecimento:corpus,
+    const corpusHash = hashCanonico({ politicaJornada:"JORNADA-SEGURANCA@3-LONGITUDINAL", conhecimento:corpus,
       rads:deps.corpus?.rads ?? null, leitura:opcoesLeitura });
     const ledgerHash = () => hashCanonico(listarEventos(deps.db, contexto.patientId));
+    const eventosPaciente = listarEventos(deps.db, contexto.patientId);
+    const fonteNoEscopo = (link: z.infer<typeof Fonte>["patientLinkReview"]) => encontroNoHistorico(eventosPaciente, link, contexto);
     const avaliacaoAtual = () => {
       const c = lerConsulta(deps.db, contexto.patientId, deps.agora(), sessao, contexto.tumorLotId,
         {...opcoesLeitura,encounterId:contexto.encounterId});
@@ -68,16 +62,17 @@ export function operarSkillsClinicas(raw: unknown, token: string, deps: Servidor
         `Função renal: ${renal.estado}; Cockcroft peso real ${renal.clcrMlMin ?? "PENDENTE"}; peso ajustado ${renal.clcrPesoAjustadoMlMin ?? "não disponível"}. ${renal.aviso ?? ""}`])],
         mudancas:c.delta.itens.filter(d=>!ehMetadadoTecnico(d.rotulo))
           .map(d=>`${d.rotulo}: ${d.candidatos.map(v=>`${v.rotulo}: ${valorClinico(v.valorTexto)}`).join(" → ")}`),
-        historico:[...(c.resumoConfirmadoParaDocumento ? [`Resumo previamente revisado: ${c.resumoConfirmadoParaDocumento}`] : []),
+        historico:[...c.historicoDocumentos.filter(d => d.encounterId !== contexto.encounterId).map(d =>
+          `Documento assinado: ${d.titulo} · versão ${d.documentVersion} · assinatura ${d.assinadoEm} · autor ${d.autorId}\nFonte: documento ${d.documentId}; evento ${d.eventId}; encontro ${d.encounterId}${d.liberacaoPendente ? ` · ${d.liberacaoPendente}` : ""}\n${d.texto}`),
+          ...(c.resumoConfirmadoParaDocumento ? [`Resumo previamente revisado: ${c.resumoConfirmadoParaDocumento}`] : []),
           ...c.historicoTratamento.linhas.map(l=>`${l.data ?? l.periodo?.inicio ?? "data não informada"}: ${l.tipo}; ${l.protocoloOuTipo ?? l.topografia ?? "descrição pendente"}${l.ciclo===null?"":`; ciclo ${l.ciclo}`}; ${l.estado}. ${l.observacao}`),
           ...(c.flash.ultimoAdministrado ? [`Último administrado: ${c.flash.ultimoAdministrado}`] : [])],urgente:c.avaliacaoClinica.emergencia,
         urgenciaAvaliada:c.avaliacaoClinica.urgenciaAvaliada};
     };
-    if (p.acao === "FONTES") return ok({codigo:"SKILL_FONTES",fontes:listarDrafts(deps.db,contexto.patientId).flatMap(d=>{
-      const f=Fonte.safeParse(d.payload);
-      return f.success && mesmo(contextoDe(f.data.patientLinkReview),contexto)
-        ? [{draftId:d.draftId,revision:d.revision,sourceId:d.sourceId}] : [];
-    })});
+    if (p.acao === "FONTES") return ok({codigo:"SKILL_FONTES",fontes:fontesPaciente(deps.db,eventosPaciente,contexto,true).map(({draft:d,fonte:f}) => ({
+      draftId:d.draftId,revision:d.revision,sourceId:d.sourceId,
+      ...(f.patientLinkReview.encounterId !== contexto.encounterId ? {encounterId:f.patientLinkReview.encounterId,registradoEm:d.criadoEm} : {})
+    }))});
     if (p.acao === "HISTORICO") {
       const registros = listarDrafts(deps.db, p.contexto.patientId).flatMap(d => {
         const r = ExecucaoSkill.safeParse(d.payload);
@@ -117,7 +112,7 @@ export function operarSkillsClinicas(raw: unknown, token: string, deps: Servidor
         if (!draft || draft.patientId !== p.contexto.patientId || draft.revision !== ref.expectedRevision || !fonte.success)
           throw new RecusaSkill("FONTE_SKILL_NAO_VINCULADA_OU_ALTERADA");
         const f = fonte.data, link = f.patientLinkReview;
-        if (!mesmo(contextoDe(link), p.contexto) || link.sourceId !== draft.sourceId || f.input.sourceId !== draft.sourceId)
+        if (!fonteNoEscopo(link) || link.sourceId !== draft.sourceId || f.input.sourceId !== draft.sourceId)
           throw new RecusaSkill("FONTE_SKILL_FORA_DO_ESCOPO");
         const original = { ...(draft.payload as Record<string, unknown>) }; delete original.patientLinkReview;
         if (hashCanonico(original) !== link.sourceHash) throw new RecusaSkill("FONTE_SKILL_ALTERADA");
@@ -129,8 +124,8 @@ export function operarSkillsClinicas(raw: unknown, token: string, deps: Servidor
           .map(a=>({texto:a.nome,sourceId:draft.sourceId,trecho:a.trecho})));
         const prova = recibos.filter(e => {
           const dado = dadosDoEvento(e), source = dado?.source as Record<string, unknown> | undefined;
-          return e.tipo === "ReviewDecision" && e.operationId === link.reviewDecisionId && e.encounterId === p.contexto.encounterId
-            && e.tumorLotId === p.contexto.tumorLotId && e.criadoPor.tipo === "SESSAO" && e.criadoPor.id === link.medicoId
+          return e.tipo === "ReviewDecision" && e.revisao === "CONFIRMADO" && e.operationId === link.reviewDecisionId && e.encounterId === link.encounterId
+            && e.tumorLotId === link.tumorLotId && e.criadoPor.tipo === "SESSAO" && e.criadoPor.id === link.medicoId
             && dado?.acao === "LIGAR_PACIENTE" && dado.patientId === p.contexto.patientId && dado.segmentId === link.segmentId
             && dado.exceptionId === link.exceptionId && source?.draftId === draft.draftId && source.sourceId === draft.sourceId
             && source.contentHash === link.sourceHash && source.revision === draft.revision - 1;

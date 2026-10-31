@@ -1,3 +1,6 @@
+import { ResultadosPedidosResposta } from "../../contracts/api/resultadosPedidos.js";
+import { RespostaAnamneseGuiada } from "../../contracts/api/anamneseGuiada.js";
+import { RespostaLaudoAcesso } from "../../contracts/api/laudoAcesso.js";
 import { criarApiDocumental } from "./documental.js";
 import { criarApiConsultorioMedico } from "./consultorioMedico.js";
 import { criarApiConversaOncoassist, lerStreamConversa } from "./conversaOncoassist.js";
@@ -384,6 +387,27 @@ export function criarPortaHttp(opcoes: OpcoesHttp): PortaConsulta {
       if(r.data.packId!==pedido.packId||r.data.original.sha256!==pedido.hashOriginal
         ||r.data.contexto.patientId!==pedido.patientId||r.data.contexto.encounterId!==pedido.encounterId
         ||r.data.contexto.tumorLotId!==pedido.tumorLotId)throw new ErroPorta('FONTE_PACK_ALTERADA');
+      return r.data;
+    },
+    async anamneseGuiada(pedido, signal) {
+      const { status, json } = await enviar("/consulta/anamnese-guiada", pedido, true, signal);
+      const r = RespostaAnamneseGuiada.safeParse(json);
+      if (status !== 200 || !r.success) throw new ErroPorta(codigoDe(json, "ANAMNESE_GUIADA_PENDENTE"));
+      if (chaveContexto(r.data.contexto) !== chaveContexto(pedido.contexto)) throw new ErroPorta("ANAMNESE_FORA_CONTEXTO");
+      return r.data;
+    },
+    async resultadosPedidos(pedido, signal) {
+      const {status,json}=await enviar("/tarefas/resultados",pedido,true,signal);
+      const p=ResultadosPedidosResposta.safeParse(json);
+      if(status!==200||!p.success)throw new ErroPorta(codigoDe(json,"RESULTADO_PEDIDO_PENDENTE"));
+      if(chaveContexto(p.data.contexto)!==chaveContexto(pedido.contexto))throw new ErroPorta("RESULTADO_FORA_CONTEXTO");
+      return p.data;
+    },
+    async laudoAcesso(pedido, signal) {
+      const { status, json } = await enviar("/consulta/laudo-acesso", pedido, true, signal);
+      const r = RespostaLaudoAcesso.safeParse(json);
+      if (status !== 200 || !r.success) throw new ErroPorta(codigoDe(json, "LAUDO_ACESSO_PENDENTE"));
+      if (chaveContexto(r.data.contexto) !== chaveContexto(pedido.contexto)) throw new ErroPorta("LAUDO_FORA_CONTEXTO");
       return r.data;
     },
     async revisaoClinica(contexto,packId,signal,compacta){

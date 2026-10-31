@@ -1,7 +1,7 @@
 {
   "schema": "CorpusJornada@1",
-  "versao": "1.0.1",
-  "estado": "RASCUNHO",
+  "versao": "1.1.0",
+  "estado": "ATIVO_PARA_CONSULTA",
   "fontes": [
     {
       "id": "SBOC-LOCAL",
@@ -218,7 +218,7 @@
         "A observação descrita é pós-tratamento local; não interpretar como indicação de não tratar um tumor cIA não operado."
       ],
       "divergencias": [],
-      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+      "estado": "ATIVO_PARA_CONSULTA"
     },
     {
       "id": "PUL-02",
@@ -292,7 +292,7 @@
         "DIV-TNM",
         "DIV-IB"
       ],
-      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+      "estado": "ATIVO_PARA_CONSULTA"
     },
     {
       "id": "PUL-03",
@@ -362,7 +362,7 @@
       "divergencias": [
         "DIV-IB"
       ],
-      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+      "estado": "ATIVO_PARA_CONSULTA"
     },
     {
       "id": "PUL-04",
@@ -432,7 +432,7 @@
       "divergencias": [
         "DIV-TNM"
       ],
-      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+      "estado": "ATIVO_PARA_CONSULTA"
     },
     {
       "id": "PUL-05",
@@ -502,7 +502,7 @@
       "divergencias": [
         "DIV-TNM"
       ],
-      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+      "estado": "ATIVO_PARA_CONSULTA"
     },
     {
       "id": "PUL-06",
@@ -563,7 +563,7 @@
         "A fonte distingue ALINA sem QT no braço experimental da discussão sobre QT adjuvante."
       ],
       "divergencias": [],
-      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+      "estado": "ATIVO_PARA_CONSULTA"
     },
     {
       "id": "PUL-07",
@@ -631,7 +631,7 @@
       "divergencias": [
         "DIV-TNM"
       ],
-      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+      "estado": "ATIVO_PARA_CONSULTA"
     },
     {
       "id": "PUL-08",
@@ -697,7 +697,7 @@
         "Duração/posologia não são intercambiáveis entre protocolos adjuvantes e perioperatórios; conferir ficha do regime."
       ],
       "divergencias": [],
-      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+      "estado": "ATIVO_PARA_CONSULTA"
     },
     {
       "id": "PUL-09",
@@ -770,7 +770,7 @@
         "DIV-RCP",
         "DIV-TNM"
       ],
-      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+      "estado": "ATIVO_PARA_CONSULTA"
     },
     {
       "id": "PUL-10",
@@ -831,7 +831,7 @@
         "Osimertinibe só para variante EGFR elegível; alectinibe para ALK."
       ],
       "divergencias": [],
-      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+      "estado": "ATIVO_PARA_CONSULTA"
     },
     {
       "id": "PUL-11",
@@ -891,7 +891,7 @@
         "A frase da fonte inclui EGFR/ALK mas a sequência com osimertinibe é condicionada a EGFR; não aplicá-la a ALK."
       ],
       "divergencias": [],
-      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+      "estado": "ATIVO_PARA_CONSULTA"
     },
     {
       "id": "PUL-12",
@@ -953,7 +953,7 @@
         "Não preencher a lacuna usando a sequência EGFR."
       ],
       "divergencias": [],
-      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+      "estado": "ATIVO_PARA_CONSULTA"
     },
     {
       "id": "PUL-13",
@@ -1012,7 +1012,7 @@
         "Não usar cT2 genérico para redefinir o estádio I sem conferir edição e tamanho."
       ],
       "divergencias": [],
-      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+      "estado": "ATIVO_PARA_CONSULTA"
     },
     {
       "id": "PUL-14",
@@ -1071,7 +1071,7 @@
         "Extrapolação declarada pela fonte; não converter em equivalência automática."
       ],
       "divergencias": [],
-      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+      "estado": "ATIVO_PARA_CONSULTA"
     },
     {
       "id": "PUL-15",
@@ -1141,7 +1141,7 @@
       "divergencias": [
         "DIV-JANELA"
       ],
-      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+      "estado": "ATIVO_PARA_CONSULTA"
     },
     {
       "id": "PUL-16",
@@ -1208,7 +1208,7 @@
       "divergencias": [
         "DIV-REGULATORIO"
       ],
-      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+      "estado": "ATIVO_PARA_CONSULTA"
     },
     {
       "id": "PUL-17",
@@ -1268,7 +1268,7 @@
         "Ausência de recomendação não é demonstração de contraindicação absoluta."
       ],
       "divergencias": [],
-      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+      "estado": "ATIVO_PARA_CONSULTA"
     },
     {
       "id": "PUL-18",
@@ -1327,7 +1327,7 @@
         "Distinguir inoperabilidade de incapacidade para QT e de irressecabilidade anatômica."
       ],
       "divergencias": [],
-      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+      "estado": "ATIVO_PARA_CONSULTA"
     },
     {
       "id": "PUL-19",
@@ -1387,7 +1387,7 @@
         "Não extrapolar a todos os tumores apicais; revisão multidisciplinar."
       ],
       "divergencias": [],
-      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+      "estado": "ATIVO_PARA_CONSULTA"
     },
     {
       "id": "IV-Não-escamoso-PD0",
@@ -1501,7 +1501,7 @@
         "DIV-POSEIDON",
         "DIV-GRADUACAO"
       ],
-      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+      "estado": "ATIVO_PARA_CONSULTA"
     },
     {
       "id": "IV-Não-escamoso-PD1",
@@ -1616,7 +1616,7 @@
         "DIV-POSEIDON",
         "DIV-GRADUACAO"
       ],
-      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+      "estado": "ATIVO_PARA_CONSULTA"
     },
     {
       "id": "IV-Não-escamoso-PD50",
@@ -1733,7 +1733,7 @@
         "DIV-POSEIDON",
         "DIV-GRADUACAO"
       ],
-      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+      "estado": "ATIVO_PARA_CONSULTA"
     },
     {
       "id": "IV-Escamoso-PD0",
@@ -1843,7 +1843,7 @@
         "DIV-POSEIDON",
         "DIV-GRADUACAO"
       ],
-      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+      "estado": "ATIVO_PARA_CONSULTA"
     },
     {
       "id": "IV-Escamoso-PD1",
@@ -1954,7 +1954,7 @@
         "DIV-POSEIDON",
         "DIV-GRADUACAO"
       ],
-      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+      "estado": "ATIVO_PARA_CONSULTA"
     },
     {
       "id": "IV-Escamoso-PD50",
@@ -2067,7 +2067,7 @@
         "DIV-POSEIDON",
         "DIV-GRADUACAO"
       ],
-      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+      "estado": "ATIVO_PARA_CONSULTA"
     },
     {
       "id": "PUL-26",
@@ -2177,7 +2177,7 @@
         "DIV-GRADUACAO",
         "DIV-POSOLOGIA"
       ],
-      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+      "estado": "ATIVO_PARA_CONSULTA"
     },
     {
       "id": "PUL-27",
@@ -2271,7 +2271,7 @@
         "DIV-POSOLOGIA",
         "DIV-GRADUACAO"
       ],
-      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+      "estado": "ATIVO_PARA_CONSULTA"
     },
     {
       "id": "PUL-28",
@@ -2374,7 +2374,7 @@
       "divergencias": [
         "DIV-ALK"
       ],
-      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+      "estado": "ATIVO_PARA_CONSULTA"
     },
     {
       "id": "PUL-29",
@@ -2465,7 +2465,7 @@
         "Lacunas de L2–L5 não são contraindicações ao tratamento."
       ],
       "divergencias": [],
-      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+      "estado": "ATIVO_PARA_CONSULTA"
     },
     {
       "id": "PUL-30",
@@ -2548,7 +2548,7 @@
         "Lacunas de L2–L5 não são contraindicações ao tratamento."
       ],
       "divergencias": [],
-      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+      "estado": "ATIVO_PARA_CONSULTA"
     },
     {
       "id": "PUL-31",
@@ -2618,7 +2618,7 @@
         "Lacunas de L2–L5 não são contraindicações ao tratamento."
       ],
       "divergencias": [],
-      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+      "estado": "ATIVO_PARA_CONSULTA"
     },
     {
       "id": "PUL-32",
@@ -2700,7 +2700,7 @@
         "Lacunas de L2–L5 não são contraindicações ao tratamento."
       ],
       "divergencias": [],
-      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+      "estado": "ATIVO_PARA_CONSULTA"
     },
     {
       "id": "PUL-33",
@@ -2785,7 +2785,7 @@
         "Lacunas de L2–L5 não são contraindicações ao tratamento."
       ],
       "divergencias": [],
-      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+      "estado": "ATIVO_PARA_CONSULTA"
     },
     {
       "id": "PUL-34",
@@ -2871,7 +2871,7 @@
       "divergencias": [
         "DIV-KRAS"
       ],
-      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+      "estado": "ATIVO_PARA_CONSULTA"
     },
     {
       "id": "PUL-35",
@@ -2967,7 +2967,7 @@
         "DIV-HER2",
         "DIV-REGULATORIO"
       ],
-      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+      "estado": "ATIVO_PARA_CONSULTA"
     },
     {
       "id": "PUL-36",
@@ -3035,7 +3035,7 @@
       "divergencias": [
         "DIV-HER2"
       ],
-      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+      "estado": "ATIVO_PARA_CONSULTA"
     },
     {
       "id": "PUL-37",
@@ -3093,7 +3093,7 @@
         "SEM_FONTE_ESTRUTURADA para seleção de terapia específica neste lote; a lista do painel não prova uma indicação."
       ],
       "divergencias": [],
-      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+      "estado": "ATIVO_PARA_CONSULTA"
     },
     {
       "id": "PUL-38",
@@ -3154,7 +3154,7 @@
         "Não incrementar linha só porque houve tratamento local."
       ],
       "divergencias": [],
-      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+      "estado": "ATIVO_PARA_CONSULTA"
     },
     {
       "id": "PC-01",
@@ -3219,7 +3219,7 @@
         "Atualização FDA separada do manual local; acesso Anvisa/ANS não verificado."
       ],
       "divergencias": [],
-      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+      "estado": "ATIVO_PARA_CONSULTA"
     },
     {
       "id": "PC-02",
@@ -3303,7 +3303,7 @@
         "RT torácica, PCI/vigilância por RM e manutenção: completar com fonte atual específica."
       ],
       "divergencias": [],
-      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+      "estado": "ATIVO_PARA_CONSULTA"
     },
     {
       "id": "NET-01",
@@ -3365,7 +3365,7 @@
         "Não aplicar esta recomendação de adjuvância a CPPC ou grandes células neuroendócrinas."
       ],
       "divergencias": [],
-      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+      "estado": "ATIVO_PARA_CONSULTA"
     },
     {
       "id": "NET-02",
@@ -3448,7 +3448,7 @@
       },
       "condicoes_e_limites": [],
       "divergencias": [],
-      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+      "estado": "ATIVO_PARA_CONSULTA"
     },
     {
       "id": "NET-03",
@@ -3506,7 +3506,7 @@
         "Controle hormonal não define sozinho troca de linha antitumoral."
       ],
       "divergencias": [],
-      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+      "estado": "ATIVO_PARA_CONSULTA"
     },
     {
       "id": "NET-04",
@@ -3566,7 +3566,7 @@
         "Não usar automaticamente algoritmo de carcinoide ou de CPNPC."
       ],
       "divergencias": [],
-      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+      "estado": "ATIVO_PARA_CONSULTA"
     }
   ],
   "acoes_consulta": [

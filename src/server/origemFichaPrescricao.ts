@@ -1,3 +1,4 @@
+import { avaliarSegurancaFicha } from "./segurancaFicha.js";
 import { alturaDocumentada } from "./f0c/dadosDocumentados.js";
 import { z } from "zod";
 import type { Sessao } from "../contracts/base.js";
@@ -51,7 +52,9 @@ function calcularAtual(deps: DepsOrigemFicha, contexto: ContextoAcaoComposta, or
   if (!calculo.ok) throw new Error("FICHA_NAO_INSTANCIAVEL");
   const itens = calculo.itens.map((i, index) => ({ itemId: `item-ficha:${hash([draftId, index, i.item.sequence])}`, item: i.item }));
   const pendencias = calculo.itens.flatMap(i => i.motivo ? [`${i.item.drug}: ${i.motivo}`] : []);
-  const avisos = [...consulta.flash.avisos, ...calculo.itens.flatMap(i => i.aviso ? [`${i.item.drug}: ${i.aviso}`] : [])];
+  const seguranca = avaliarSegurancaFicha(template, calculo.itens.map(i => i.item), consulta, retrato, listarEventos(deps.db, contexto.patientId), em);
+  if (["BLOCK_ARTEFATO", "NOT_EVALUABLE"].includes(seguranca.resultado)) pendencias.push(...seguranca.motivos.map(m => `SEGURANCA_FICHA: ${m.codigo}: ${m.texto} (${m.fonte})`));
+  const avisos = [...(seguranca.resultado === "WARNING" ? seguranca.motivos.map(m => `${m.codigo}: ${m.texto}`) : []), ...consulta.flash.avisos, ...calculo.itens.flatMap(i => i.aviso ? [`${i.item.drug}: ${i.aviso}`] : [])];
   avisos.push("Cálculo proposto a partir da ficha conferida. Revise a indicação, os dados corporais, os exames e o preparo antes de assinar.");
   return { itens, pendencias, avisos, dadosCorporais };
 }
@@ -76,6 +79,7 @@ export function validarOrigemFicha(deps: DepsOrigemFicha, edicao: EdicaoPrescric
     const r = lerOrigem(deps, edicao.origemProposta);
     revalidarOrigem(deps, r, contexto, auth.sessao, em);
     if (edicao.protocoloId !== r.resposta.template.nome) throw new Error("ORIGEM_FICHA_PROTOCOLO_ALTERADO");
+    if (r.resposta.pendencias.some(p => p.startsWith("SEGURANCA_FICHA:"))) return { codigo: "SEGURANCA_FICHA_PENDENTE", avisos: r.resposta.pendencias };
     for (const atual of edicao.itens) {
       if (atual.item.source !== "PROTOCOL") continue;
       const original = r.resposta.itens.find(i => i.itemId === atual.itemId);

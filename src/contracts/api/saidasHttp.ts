@@ -1,3 +1,6 @@
+import { ResultadosPedidosResposta } from "./resultadosPedidos.js";
+import { RespostaAnamneseGuiada } from "./anamneseGuiada.js";
+import { RespostaLaudoAcesso } from "./laudoAcesso.js";
 import { SaidasConsultorioMedico } from "./consultorioMedico.js";
 import { SaidasConsultaAcervo } from "./consultaAcervo.js";
 import { EstadoIntegracoes } from "./integracoesEstado.js";
@@ -51,6 +54,9 @@ export const SaidasHttp: Readonly<Record<string, z.ZodType>> = {
   "/integracoes/estado": EstadoIntegracoes,
   recuperarConfirmacao: RecuperacaoConfirmacao,
   documentoImpressao: z.object({html:z.string().min(1)}).strict(),
+  anamneseGuiada: RespostaAnamneseGuiada,
+  "/tarefas/resultados": ResultadosPedidosResposta,
+  laudoAcesso: RespostaLaudoAcesso,
   skillsClinicas: ResultadoSkillClinica,
   resultadoExtracaoLlm: ResultadoCognitivoOncoassist,
   leituraPubMed: LeituraPubMedResposta,

@@ -113,7 +113,7 @@ export async function executarJornadaMedicoM123() {
       await page.getByRole('region', { name: 'Agenda médica', exact: true }).waitFor();
     };
     await entrar();
-    for (const nome of ['Salão', 'Canal', 'APAC', 'Estatísticas', 'Estudos clínicos']) assert.equal(await nav().getByRole('button', { name: nome, exact: true }).count(), 0, `${nome} fora da navegação médica`);
+    for (const nome of ['Salão', 'Canal', 'APAC', 'Estatísticas', 'Estudos clínicos', 'Laudo de acesso', 'Anamnese guiada']) assert.equal(await nav().getByRole('button', { name: nome, exact: true }).count(), 1, `${nome} acessível na navegação médica`);
     etapa = 'cadastro';
     await page.getByLabel('Cadastrar novo paciente', { exact: true }).check();
     await page.getByLabel('Nome do paciente', { exact: true }).fill(PACIENTE);
@@ -130,6 +130,17 @@ export async function executarJornadaMedicoM123() {
     assert.equal(eventos().filter(e => e.tipo === 'AgendaEntry').length, 1);
     await page.getByRole('button', { name: `Abrir consulta de ${PACIENTE}`, exact: true }).click();
     await page.getByRole('region', { name: 'Consulta persistida', exact: true }).waitFor();
+    etapa = 'integracoes-nativas';
+    const antesIntegracoes = eventos().length;
+    await navegar('Laudo de acesso');
+    await page.getByRole('region', { name: 'Laudo de acesso ao tratamento', exact: true }).waitFor();
+    await page.getByText('Prescrição assinada não disponível neste encontro.', { exact: true }).waitFor();
+    assert.equal(await page.getByRole('button', { name: 'Preparar e salvar laudo', exact: true }).isDisabled(), true);
+    await navegar('Anamnese guiada');
+    await page.getByRole('region', { name: 'Anamnese guiada', exact: true }).waitFor();
+    await page.getByText('Não há mensagens vinculadas com consentimento vigente. Confira os vínculos e consentimentos na área Canal.', { exact: true }).waitFor();
+    assert.equal(eventos().length, antesIntegracoes, 'Abrir capacidades não cria fatos clínicos');
+    await navegar('Consulta');
     etapa = 'preconsulta'; await navegar('Pré-consulta');
     await page.getByLabel('Queixa principal', { exact: true }).fill('Queixa SINTETICA para consulta.');
     await page.getByLabel('História e sintomas relatados', { exact: true }).fill(TEXTO_FONTE);
@@ -354,7 +365,7 @@ export async function executarJornadaMedicoM123() {
     assert.deepEqual(errosPagina, []); assert.deepEqual(requisicoesExternas, []);
     const resultado = { codigo: 'M123_E2E_APROVADO', contexto, pacoteId: pacote.pacoteId, sourceId, documentos: ids.length,
       hashDocumentos, upstreamChamadas: chamadasModelo, dataRetorno, cancelamentoDuravel: true, navegacaoProtegida: true, provenienciaAssistentePreservada: true, originalReaberto: true, derivadoConferido: true, metadadoDivergenteRecusado: true, preConsultaReaberta: true,
-      orientacaoReaberta: true, edicaoFlashPreservada: true, conversaReaberta: true, assinaturaExplicita: true, modulosAdiadosForaNavegacao: true };
+      orientacaoReaberta: true, edicaoFlashPreservada: true, conversaReaberta: true, assinaturaExplicita: true, modulosOperacionaisNaNavegacao: true };
     writeFileSync(join(evidencias, 'resumo.json'), JSON.stringify(resultado, null, 2));
     log({ etapa: 'concluida', evidencias, ...resultado });
     return resultado;

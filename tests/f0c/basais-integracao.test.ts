@@ -47,6 +47,14 @@ it('basais conflitantes não elegem um percentual e outro paciente não completa
     expect(r.elegibilidade.motivos.some(m=>m.texto.includes('basal'))).toBe(true);
   }
 });
+it('qualificador irmão do valor não confirma eco basal',()=>{
+  const evento=fato('feveBasal',basal);
+  (evento.payload as {data:Record<string,unknown>}).data.qualificadores={polaridade:'NEGADA',sujeito:'PACIENTE',temporalidade:'ATUAL'};
+  (evento.payload as {data:Record<string,unknown>}).data.evidence='EXPLICIT';
+  const r=avaliarConsulta({...base,eventos:[atual,evento]});
+  expect(r.avisosFlash.join(' ')).not.toContain('16 pontos');
+  expect(r.elegibilidade.motivos.some(m=>m.texto.includes('basal'))).toBe(true);
+});
 it('audiometria realizada e atribuída ao episódio resolve a pendência de C1; agendada não',()=>{
   const ciclo={...base.ciclo!,itens:[{item:1,droga:'cisplatina',doseMg:100,reducaoPct:0}]};
   const audio={estado:'REALIZADO',resultado:'Laudo sintético disponível',data:'2026-10-08',episodioId:'ep-basal'};

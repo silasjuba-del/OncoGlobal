@@ -1,6 +1,8 @@
+import rulesetIntervalo from "../../../corpus/rulesets/rads-interval.v1.json" with { type: "json" };
+import { intervalProgression, lerIntervalo } from "../../rules/intervalProgression.js";
 // FUGU-11a · Radiologia longitudinal + porta INTERVAL_PROGRESSION (D-W9-43; modelo 10).
 // Regras de projeção puras. A regra clínica em si é do Grok (`src/rules`, GROK-06):
-// aqui existe só a PORTA e um dublê determinístico; a ligação canônica vai em PEDIDOS.
+// a porta usa a implementação canônica com o corpus versionado local.
 import type { ClinicalFact, ReviewException } from "../extracao/tipos.js";
 import { normalizarDataCivil, normalizarMedidaMm, normalizarSitioAnatomico } from "../extracao/normalizacao.js";
 
@@ -123,6 +125,7 @@ export interface EntradaProgressao {
   readonly atualMm: number | null;
   /** A própria fonte declara aumento seriado no mesmo sítio (ex.: cintilografia × cintilografia). */
   readonly aumentoDeclarado: boolean;
+  readonly comparacaoAtual?: TipoComparacao | null;
 }
 
 export interface VereditoProgressao {
@@ -135,35 +138,18 @@ export interface RegraProgressao {
   avaliar(entrada: EntradaProgressao): VereditoProgressao;
 }
 
-/**
- * Dublê determinístico de D-W9-43 enquanto GROK-06 não publica a regra canônica:
- * mesmo sítio + mesmo método + aumento ⇒ eleva suspeição (ALERTA + exame dirigido),
- * NUNCA metástase automática.
- */
+/** D-W9-43: regra canônica, sem classificação automática de metástase. */
+const intervalo = lerIntervalo(rulesetIntervalo);
 export const regraProgressaoIntervalar: RegraProgressao = {
-  avaliar(entrada) {
-    const regra = "D-W9-43";
-    if (entrada.aumentoDeclarado) {
-      return { decisao: "ALERTA", regra,
-        motivo: `INTERVAL_PROGRESSION em ${entrada.sitio}: aumento seriado no mesmo sítio declarado pela fonte `
-          + "eleva suspeição; exame dirigido recomendado; nunca metástase automática" };
-    }
-    if (entrada.anteriorMm === null || entrada.atualMm === null) {
-      return { decisao: "PENDENTE", regra,
-        motivo: "medida ausente em um dos exames: não é possível comparar (PENDENTE)" };
-    }
-    if (entrada.metodoAnterior !== null && entrada.metodoAtual !== null
-        && entrada.metodoAnterior !== entrada.metodoAtual) {
-      return { decisao: "PENDENTE", regra,
-        motivo: `métodos diferentes (${entrada.metodoAnterior} × ${entrada.metodoAtual}): não compara` };
-    }
-    if (entrada.atualMm > entrada.anteriorMm) {
-      return { decisao: "ALERTA", regra,
-        motivo: `INTERVAL_PROGRESSION em ${entrada.sitio}: mesmo sítio + mesmo método + aumento `
-          + `(${entrada.anteriorMm} mm → ${entrada.atualMm} mm) eleva suspeição; exame dirigido recomendado; `
-          + "nunca metástase automática" };
-    }
-    return { decisao: "PASSA", regra, motivo: "sem aumento no mesmo sítio e método" };
+  avaliar(e) {
+    const r = intervalProgression(
+      { data: null, sitio: e.sitio, metodo: e.metodoAnterior, lateralidade: null, medidaMm: e.anteriorMm, descricao: null, exameDirigido: null },
+      { data: null, sitio: e.sitio, metodo: e.metodoAtual, lateralidade: null, medidaMm: e.atualMm,
+        descricao: e.comparacaoAtual === "ESTAVEL" ? "estável" : e.comparacaoAtual === "REDUCAO" ? "reduzido" : e.aumentoDeclarado ? "aumento" : null,
+        exameDirigido: null }, intervalo);
+    return { decisao: r.estado === "ALERTA" ? "ALERTA" : r.estado === "PENDENTE" ? "PENDENTE" : "PASSA",
+      motivo: [...r.motivos, ...r.pendencias].map(m => m.texto).join("; ") || "sem aumento no mesmo sítio e método",
+      regra: r.decisao };
   },
 };
 
@@ -174,18 +160,24 @@ export function excecoesProgressao(
 ): readonly ReviewException[] {
   const excecoes: ReviewException[] = [];
   for (const serie of series) {
-    const atual = serie.pontos.at(-1);
+    // Notas sem data, inclusive pedidos de RM, não substituem o exame datado mais recente.
+    const datados = serie.pontos.filter(p => p.data !== null);
+    const atual = datados.at(-1);
     if (!atual) continue;
-    const anterior = serie.pontos.length >= 2 ? serie.pontos[0]! : null;
-    const aumentoDeclarado = serie.pontos.some((p) => p.comparacao?.tipo === "AUMENTO");
+    const anterior = atual.comparacao?.refData
+      ? datados.find(p => p !== atual && p.data === atual.comparacao!.refData) ?? null
+      : datados.at(-2) ?? null;
+    const texto = atual.rawEvidence.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+    const metodoReferido = /(?:em relacao (?:a|ao)|comparad[oa] (?:com|a|ao))\s+(?:a\s+|o\s+)?(co|tc|rm|cintilografia(?: ossea)?|tomografia|ressonancia|mamografia|ultrassonografia)\b/.exec(texto)?.[1] ?? null;
+    const aumentoDeclarado = atual.comparacao?.tipo === "AUMENTO";
     if (!anterior && !aumentoDeclarado) continue;
     const veredito = regra.avaliar({
       sitio: serie.sitio,
-      metodoAnterior: anterior?.metodo ?? atual.metodo,
+      metodoAnterior: anterior?.metodo ?? metodoReferido,
       metodoAtual: atual.metodo,
       anteriorMm: anterior?.medidaMm ?? null,
       atualMm: atual.medidaMm,
-      aumentoDeclarado,
+      aumentoDeclarado, comparacaoAtual: atual.comparacao?.tipo ?? null,
     });
     if (veredito.decisao !== "ALERTA") continue;
     excecoes.push({

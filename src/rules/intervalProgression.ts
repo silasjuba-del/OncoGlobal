@@ -386,6 +386,8 @@ export function intervalProgression(
     ));
   }
 
+  if (!mesmo) pendencias.push(achado("pendente.comparabilidade", "sítio ou método diferentes; comparação não avaliável", rs));
+  if (medida === "ausente" && textoCmp === "ausente") pendencias.push(achado("pendente.medidas", "medida ou comparação declarada ausente", rs));
   if (!mesmo || !aumento || ladoConflita) {
     const estado = pendencias.length > 0 ? "PENDENTE" : "SEM_ALERTA";
     return { ...base, flag: null, estado, motivos: [], pendencias };
