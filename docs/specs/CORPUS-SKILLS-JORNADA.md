@@ -38,7 +38,7 @@ Implementados: corpus pulmão (44 cartões, 19 ações, 13 divergências), contr
 
 Corrigidos: fronteira do equivalente; matriz de peso; tetos multiunidade; contagem dos sinais em rascunho; disposição PHI do divisor numérico do PRNG, após inspeção; FEVE basal ligada ao episódio e validada temporalmente; audiometria realizada que resolve pendência; referência de dose inválida que não pode cair na dose anterior; chaves React distintas nos dois formulários do salão. A precisão Mosteller de duas casas permanece alinhada ao prescritor.
 
-Provas dirigidas passaram: basais ausentes/futuros/conflitantes, equivalente histórico/unidade, dose, corpus órfão, HTTP/persistência/reinício, isolamento de contexto da UI. Chromium executou `CORPUS_SKILLS_HTTP_UI_SQLITE`: fonte vinculada → cartão PUL-26 + ações EX-08/EN-01 → rascunhos → reabertura idêntica, sem novo evento clínico. Bateria completa e CI ainda em verificação nesta revisão do documento.
+Provas dirigidas: basais ausentes/futuros/conflitantes, equivalente histórico/unidade, dose, corpus órfão, HTTP/persistência/reinício, isolamento de contexto da UI e soma sem limite que recusa unidades incompatíveis. Chromium executa `CORPUS_SKILLS_HTTP_UI_SQLITE`: fonte vinculada → cartão PUL-26 + ações EX-08/EN-01 → rascunhos → reabertura idêntica, sem novo evento clínico. O PR registra os resultados da bateria completa e do CI vinculados ao SHA entregue; aprovação técnica não é aprovação clínica.
 
 ## Como usar
 
