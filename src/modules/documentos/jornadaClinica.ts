@@ -57,7 +57,11 @@ export function prepararJornadaClinica(input: {
   const preparados = prepararPrimeiraConsulta({ ...input, pendenciasFontes:jornada.pendencias });
   const refs = (rs: {fonte:string;paginas_pdf?:number[]|undefined;secao?:string|null|undefined}[]) => rs.map(r=>`${r.fonte}${r.paginas_pdf ? ` p.${r.paginas_pdf.join(",")}` : r.secao ? ` — ${r.secao}` : ""}`).join("; ");
   const textosCartoes = jornada.cartoes.map(c=>`${c.id} — ${c.estadiamento} — ${c.subtipo}\n${c.modalidades.join(" + ")} | ${c.papeis.join(" / ")}\n${c.trilha}\n`
-    + Object.entries(c.linhas).map(([n,l])=>`L${n}: ${l.opcoes.length ? l.opcoes.join(" OU ") : l.estado}${l.opcoes.length ? `; ${l.condicao}; ${refs(l.fontes)}` : ""}`).join("\n")
+    + Object.entries(c.linhas).flatMap(([n,l]) => {
+      if (!l.opcoes.length && (n === "4" || n === "5")) return [];
+      if (!l.opcoes.length) return [`L${n}: sem opção extraída. ${l.condicao || l.estado} Sem dose neste cartão.`];
+      return [`L${n}: ${l.opcoes.join(" OU ")}; ${l.condicao || "condição a conferir"}; ${refs(l.fontes)}. Sem dose neste cartão.`];
+    }).join("\n")
     + `\nCondições: ${c.condicoes_e_limites.join("; ")}\nFontes: ${refs(c.fontes)}`);
   const textoJornada = ["Etapa 0 — workup, biomarcadores, segurança e decisão multidisciplinar",
     ...etapas.map(e=>`${e.id} ${e.titulo}: ${e.estado}. ${e.motivo}`),
