@@ -57,7 +57,7 @@ export function PainelSkillsClinicas({porta,contexto}:{porta:PortaConsulta;conte
     void executar({...base,configuracao:{...base.configuracao,documentos:[...base.configuracao.documentos]},operationId:tentativa.current.operationId});
   }
   if(!porta.skillsClinicas)return null;
-  return <section aria-label="Jornada clínica por skills">
+  return <section aria-label="Jornada clínica por skills" style={{minWidth:0,maxWidth:'100%',overflowWrap:'anywhere'}}>
     <button type="button" className="oc-btn-secondary" aria-expanded={aberto} onClick={()=>setAberto(!aberto)}>Jornada por skills</button>
     {aberto&&<>
       <p>Organizar laudos, referências e rascunhos para revisão médica. Não assina documentos nem libera tratamento.</p>
@@ -65,16 +65,18 @@ export function PainelSkillsClinicas({porta,contexto}:{porta:PortaConsulta;conte
       <label>Encontro <select aria-label="Tipo de jornada" value={skill} disabled={ocupado} onChange={e=>{setSkill(e.target.value as typeof skill);setResultado(null);}}>
         <option value="primeira-consulta">Primeira consulta</option><option value="retorno">Retorno</option><option value="follow-up">Follow-up</option>
       </select></label>
-      <fieldset disabled={ocupado}><legend>Laudos e exames vinculados</legend>
+      <fieldset disabled={ocupado} style={{minWidth:0,maxWidth:'100%',boxSizing:'border-box'}}><legend>Laudos e exames vinculados</legend>
         {!fontes.length&&<p>Vincule e revise as fontes da consulta para preparar a jornada.</p>}
         {fontes.map(f=><label key={f.draftId} style={{display:'block'}}><input type="checkbox" checked={selecionadas.includes(f.draftId)}
           onChange={e=>setSelecionadas(s=>e.target.checked?[...s,f.draftId]:s.filter(id=>id!==f.draftId))}/>{f.sourceId} · revisão {f.revision}</label>)}
       </fieldset>
-      <label>Cenários do corpus — referências em revisão <select aria-label="Cenários de pulmão" multiple value={cartoes} disabled={ocupado}
+      <label style={{display:'block'}}>Cenários do corpus — referências em revisão <select aria-label="Cenários de pulmão" multiple value={cartoes} disabled={ocupado}
+        style={{display:'block',width:'100%',minWidth:0,maxWidth:'100%',boxSizing:'border-box',margin:0}}
         onChange={e=>setCartoes(Array.from(e.target.selectedOptions,o=>o.value))}>
         {catalogo?.corpus?.cartoes.map(c=><option key={c.id} value={c.id}>{c.id} · {c.estadiamento} · {c.subtipo}</option>)}
       </select></label>
-      <label>Exames e encaminhamentos — propostas condicionais <select aria-label="Ações da jornada" multiple value={acoes} disabled={ocupado}
+      <label style={{display:'block'}}>Exames e encaminhamentos — propostas condicionais <select aria-label="Ações da jornada" multiple value={acoes} disabled={ocupado}
+        style={{display:'block',width:'100%',minWidth:0,maxWidth:'100%',boxSizing:'border-box',margin:0}}
         onChange={e=>setAcoes(Array.from(e.target.selectedOptions,o=>o.value))}>
         {catalogo?.corpus?.acoes_consulta.map(a=><option key={a.id} value={a.id}>{a.id} · {a.contexto} · {a.rascunho}</option>)}
       </select></label>

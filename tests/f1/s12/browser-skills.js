@@ -9,6 +9,10 @@ export async function jornadaSkillsNoNavegador(page,{manifesto,lerEventos,eviden
   await painel.getByRole('group',{name:'Laudos e exames vinculados',exact:true}).getByRole('checkbox').first().check();
   await painel.getByLabel('Cenários de pulmão',{exact:true}).selectOption(['PUL-26']);
   await painel.getByLabel('Ações da jornada',{exact:true}).selectOption(['EX-08','EN-01']);
+  const largura=await painel.evaluate(el=>({cliente:el.clientWidth,conteudo:el.scrollWidth,
+    elementos:[...el.querySelectorAll('*')].filter(x=>x.getBoundingClientRect().right>el.getBoundingClientRect().right+1)
+      .map(x=>({tag:x.tagName,aria:x.getAttribute('aria-label'),largura:x.getBoundingClientRect().width}))}));
+  assert.equal(largura.conteudo<=largura.cliente+1,true,`referências longas não escapam da largura do painel: ${JSON.stringify(largura)}`);
   const resposta=page.waitForResponse(r=>r.url().endsWith('/consulta/skills')&&r.request().postDataJSON()?.acao==='EXECUTAR');
   await painel.getByRole('button',{name:'Preparar rascunhos da jornada',exact:true}).click();
   const http=await resposta;assert.equal(http.status(),200);const r=await http.json();
