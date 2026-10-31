@@ -144,5 +144,5 @@ Para assumir trabalho, consultar PRs e SHA remoto, e conferir o status do worktr
 <!-- ONCOGLOBAL-CONTEXTO-LLMS:BEGIN -->
 ## Entrada para LLMs
 
-Leia primeiro [CONTEXTO-LLMS.md](CONTEXTO-LLMS.md) e [AGENTS.md](AGENTS.md). O contexto único contém fontes, estado datado da entrega, separação OncoGlobal/oncoMed, vetos e inventário de worktrees. Não confundir o checkout local com a versão validada ou com produção.
+Leia primeiro [CONTEXTO-LLMS.md](CONTEXTO-LLMS.md) e [AGENTS.md](AGENTS.md). O contexto único contém fontes, estado datado da entrega, separação OncoGlobal/oncoMed, vetos e inventário de worktrees. Após atualizar as referências com `git fetch origin --no-prune`, execute `node scripts/verificar-contexto-llms.mjs --referencia origin/main --remoto`; o comando apenas compara e informa divergências, sem sobrescrever WIP. Não confundir o checkout local com a versão validada ou com produção.
 <!-- ONCOGLOBAL-CONTEXTO-LLMS:END -->

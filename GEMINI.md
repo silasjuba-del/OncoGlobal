@@ -1,3 +1,6 @@
+@./AGENTS.md
+@./CONTEXTO-LLMS.md
+
 # Entrada obrigatória — OncoGlobal
 
 Antes de planejar ou executar qualquer tarefa, leia integralmente [o contexto único](CONTEXTO-LLMS.md) e [as regras do repositório](AGENTS.md). Respeite o pedido atual e as instruções superiores.
