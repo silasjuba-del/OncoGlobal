@@ -6,7 +6,7 @@ export async function jornadaSkillsNoNavegador(page,{manifesto,lerEventos,eviden
   const antes=lerEventos().map(e=>e.eventId).sort();
   await page.getByRole('button',{name:'Jornada por skills',exact:true}).click();
   const painel=page.getByRole('region',{name:'Jornada clínica por skills',exact:true});
-  await painel.getByRole('checkbox').first().check();
+  await painel.getByRole('group',{name:'Laudos e exames vinculados',exact:true}).getByRole('checkbox').first().check();
   await painel.getByLabel('Cenários de pulmão',{exact:true}).selectOption(['PUL-26']);
   await painel.getByLabel('Ações da jornada',{exact:true}).selectOption(['EX-08','EN-01']);
   const resposta=page.waitForResponse(r=>r.url().endsWith('/consulta/skills')&&r.request().postDataJSON()?.acao==='EXECUTAR');
