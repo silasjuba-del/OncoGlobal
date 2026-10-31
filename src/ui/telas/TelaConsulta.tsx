@@ -42,6 +42,7 @@ import { timelineDaConsulta } from "../oncochart/timelineDaConsulta.js";
 import { InstrumentosClinicos } from "../clinico/InstrumentosClinicos.js";
 import { ConsultaResposta, type ConsultaIntegrada } from "../api/respostas.js";
 import { VisaoIntegradaMinima } from "../consulta/VisaoIntegradaMinima.js";
+import { DutosClinica } from "../consulta/DutosClinica.js";
 
 // @ts-expect-error folha CSS pura, resolvida pelo Vite
 import "./consulta.css";
@@ -186,7 +187,13 @@ export function TelaConsulta({
   }
 
   const cabecalho = { ...visao.cabecalho, loteSelecionadoId: loteId };
-
+  const tnmTexto = chart.diagnostico.t
+    ? `${chart.diagnostico.tnmPrefixo ?? ""}${chart.diagnostico.t}${chart.diagnostico.n ?? ""}${chart.diagnostico.m ?? ""}`
+    : null;
+  const juntar = (partes: readonly (string | null | undefined)[]) => {
+    const v = partes.filter((p): p is string => typeof p === "string" && p.trim().length > 0);
+    return v.length ? v.join(" · ") : "PENDENTE";
+  };
   const CF = COPY_PT_BR.flashFechamento;
   const contextoFlash = { patientId: visao.patientId, encounterId: visao.encounterId, tumorLotId: loteId };
   const textoErroFlash = (base: string, erro: unknown): string => {
@@ -397,11 +404,7 @@ export function TelaConsulta({
                 <CardsVisaoGeral
                   protocolo={cabecalho.episodio?.esquemaId ?? null}
                   ciclo={chart.cicloNumero != null ? `C${chart.cicloNumero}` : null}
-                  tnm={
-                    chart.diagnostico.t
-                      ? `${chart.diagnostico.tnmPrefixo ?? ""}${chart.diagnostico.t}${chart.diagnostico.n ?? ""}${chart.diagnostico.m ?? ""}`
-                      : null
-                  }
+                  tnm={tnmTexto}
                   recist={null}
                   ecog={chart.diagnostico.ecog != null ? String(chart.diagnostico.ecog) : null}
                   ctcae={null}
@@ -457,7 +460,41 @@ export function TelaConsulta({
                 }} />
             </>;
           }
-          return <p className="oc-aba-placeholder">Evolução — rascunho também na Visão geral</p>;
+          return (
+            <section aria-label="Pontos da consulta">
+              <h3>Pontos desta consulta</h3>
+              <p>Cada ponto mostra só o que já está no prontuário. Vazio fica pendente. Nada aqui libera tratamento.</p>
+              <ul>
+                <li>Problema: {visao.alertas.length ? visao.alertas.map((a) => a.texto).join("; ") : "PENDENTE"}</li>
+                <li>Diagnóstico: {juntar([chart.diagnostico.cid, chart.diagnostico.histologia, chart.diagnostico.titulo])}</li>
+                <li>Estadiamento: {juntar([tnmTexto, chart.diagnostico.estadio])}</li>
+                <li>ECOG: {chart.diagnostico.ecog != null ? String(chart.diagnostico.ecog) : "PENDENTE"}</li>
+                <li>RECIST: PENDENTE</li>
+                <li>CTCAE: PENDENTE</li>
+                <li>Exames: {visao.evidencias.length ? visao.evidencias.map((e) => e.rotulo).join(", ") : "PENDENTE. Laboratório, imagem, endoscopia e patologia não vieram nesta abertura."}</li>
+                <li>Tratamento: {juntar([cabecalho.episodio?.esquemaId, chart.cicloNumero != null ? `C${chart.cicloNumero}` : null])}</li>
+                <li>Cirurgia e radioterapia: PENDENTE nesta abertura. A aba de quimioterapia não substitui essas modalidades.</li>
+                <li>Medicamentos: {visao.medicamentosAtuais?.medicamentos.length ? visao.medicamentosAtuais.medicamentos.join(", ") : "PENDENTE"}</li>
+                <li>Comorbidades: {cabecalho.comorbidadesPaciente.length ? cabecalho.comorbidadesPaciente.join(", ") : "PENDENTE"}</li>
+                <li>Alergias: {cabecalho.alergiasPaciente.length ? cabecalho.alergiasPaciente.join(", ") : "PENDENTE"}</li>
+                <li>Bloco em fechamento: {visao.fechamento.blocoAtual}</li>
+              </ul>
+              <h3>Evolução revisada</h3>
+              <pre style={{ whiteSpace: "pre-wrap" }}>{visao.resumoEvolucao ?? "Evolução PENDENTE de revisão."}</pre>
+              <section aria-label="Histórico de documentos assinados">
+                <h3>Documentos já assinados</h3>
+                {(visao.historicoDocumentos ?? []).length === 0 ? <p>Nenhum documento assinado neste histórico.</p>
+                  : (visao.historicoDocumentos ?? []).map((doc) => (
+                    <article key={doc.eventId}>
+                      <h4>{doc.titulo} · versão {doc.documentVersion}</h4>
+                      <p>{doc.assinadoEm}</p>
+                      <pre style={{ whiteSpace: "pre-wrap" }}>{doc.texto}</pre>
+                    </article>
+                  ))}
+              </section>
+              <DutosClinica {...(visao.dutos ? { dados: visao.dutos } : {})} />
+            </section>
+          );
         }}
       </AbasChart>
       {cabecalho.lotes.length > 1 ? (

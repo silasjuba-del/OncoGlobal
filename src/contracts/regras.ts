@@ -20,7 +20,11 @@ export const SalaoRuleset = z.object({
   hemogramaValidadeDias: z.number().int(),
   frente: z.object({ recursos: z.array(z.string()), idadeAcimaDe: z.number().int() }).passthrough(),
   filaOrdem: z.array(z.string()),
-  pesoVermelho: z.object({ perdaKgAcimaDe: z.number(), janelaDias: z.number().int() }).passthrough(),
+  pesoVermelho: z.object({ perdaKgAcimaDe: z.number(), janelaDias: z.number().int(),
+    perdaPctAcimaDe: z.number().finite().positive().optional(),
+    perdaPctSeImcAbaixoDe: z.number().finite().positive().optional(),
+    imcAbaixoDe: z.number().finite().positive().optional(),
+  }).passthrough(),
 }).passthrough();
 export type SalaoRuleset = z.infer<typeof SalaoRuleset>;
 
@@ -66,16 +70,23 @@ export interface EntradaDose {
   origemPeso: "MEDIDO" | "ANTERIOR" | "INFORMADO_PACIENTE" | null;
   /** quantos ciclos imediatamente anteriores ficaram sem peso */
   ciclosSemPesoAnteriores: number;
+  /** mg/m² do protocolo. Quando presente com peso e altura, a conta usa SC atual. Sem isso, vale a dose anterior. */
+  referenciaMgM2?: number | null;
+  alturaCm?: number | null;
+  scAnteriorM2?: number | null;
+  nivelDose?: 0 | -1 | -2 | null;
+  /** Percentual do protocolo para o nível −1 ou −2. Tem de estar em reducoesPct. */
+  percentualDoNivel?: number | null;
 }
 export interface SaidaDose {
-  doseMg: number | null; // inteiro, meio para cima, arredondado uma vez após a redução
+  doseMg: number | null; // D-F1-52: empate preservado, dose positiva não zerada
   estado: Semaforo;
   motivo: string;
   ciclosSemPesoConsecutivos: number;
   rulesetVersao: string;
 }
 
-export interface Pesagem { data: string; kg: number; origem: "MEDIDO" | "INFORMADO_PACIENTE" }
+export interface Pesagem { data: string; kg: number; origem: "MEDIDO" | "INFORMADO_PACIENTE"; alturaCm?: number | null }
 export interface SaidaPeso {
   estado: Semaforo; // VERMELHO = perda > limiar só com pesos MEDIDOS; envolve informado ⇒ PENDENTE (incerta, A2)
   perdaKg: number | null;

@@ -124,9 +124,14 @@ export const ItemPrescrito = z.object({
   item: z.number().int().min(1),
   droga: z.string().min(1),
   // Prescrição médica pode conter mg fracionados; não arredondar ao persistir o ciclo.
-  doseMg: z.number().finite().nonnegative(),
+  doseMg: z.number().finite().nonnegative().nullable(),
+  // Quantidade executável em unidade não mássica, sem concentração/conversão presumida.
+  doseOriginal: z.object({ valor: z.number().finite().positive(), unidade: z.string().trim().min(1).max(64) }).strict().optional(),
   reducaoPct: z.number().int().min(0).max(99).nullable(), // null: percentual não declarado
-}).strict();
+}).strict().superRefine((i, ctx) => {
+  if ((i.doseMg === null) !== (i.doseOriginal !== undefined))
+    ctx.addIssue({ code: "custom", message: "Dose em mg ou quantidade original: declarar uma representação inequívoca" });
+});
 
 export const Ciclo = z.object({
   cicloId: Id,

@@ -37,6 +37,14 @@ describe("W12-F4 · projetarFlash", () => {
     expect(r.exames[0]).toMatchObject({ nome: "Biopsy", situacao: "SEM_REFERENCIA" });
   });
 
+  it("laudo negado não entra como exame afirmado", () => {
+    const r = projetarFlash([
+      ev("ok", "ImagingReport", { dataClinica: "2026-10-01", nome: "TC", fraseLaudo: "afirmado" }),
+      ev("neg", "ImagingReport", { dataClinica: "2026-10-01", nome: "TC", fraseLaudo: "massa", negado: true }),
+    ], "2026-10-08", null, null);
+    expect(r.exames.map((e) => e.fraseLaudo)).toEqual(["afirmado"]);
+  });
+
   it("retorno: último plano vigente; valor inválido vira null", () => {
     const doc = (id: string, dias: unknown, t: string) => ev(id, "DOCUMENTO",
       { data: { tipoDocumento: "FLASH_RETORNO", retornoDias: dias }, signature: {} }, { revisao: "ASSINADO", criadoEm: t });

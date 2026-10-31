@@ -1,4 +1,6 @@
+import type { DocumentoManualFlash } from "../../contracts/api/flash.js";
 import { useEffect, useRef, useState } from "react";
+import { PainelSkillsClinicas } from "./PainelSkillsClinicas.js";
 import { ErroPorta, type PortaConsulta, type PedidoBundle } from "../api/porta.js";
 import {
   classificarCapacidade, classificarFontes, mensagemCapacidade, mensagemResultadoTecnico, rotuloCategoria,
@@ -8,7 +10,7 @@ import {
 } from "../api/oncoassist.js";
 
 /** Organização documental proposta; não confirma fatos nem altera o prontuário. */
-export function PainelOncoassist({ porta, contexto }: { porta: PortaConsulta; contexto: PedidoBundle }) {
+export function PainelOncoassist({ porta, contexto, aoUsarDocumento }: { porta: PortaConsulta; contexto: PedidoBundle; aoUsarDocumento?: (d:DocumentoManualFlash)=>void }) {
   const [estado, setEstado] = useState<EstadoOncoassist | null>(null);
   const [fontes, setFontes] = useState<FontesOncoassist["fontes"]>([]);
   const [fontesSemVinculo, setFontesSemVinculo] = useState<FontesOncoassist["fontesSemVinculo"]>([]);
@@ -205,6 +207,7 @@ export function PainelOncoassist({ porta, contexto }: { porta: PortaConsulta; co
 
   return <section aria-label="OncoAssist — documentos">
     <h3>OncoAssist</h3>
+    <PainelSkillsClinicas key={`${patientId}:${encounterId}:${tumorLotId ?? ""}`} porta={porta} contexto={contexto} {...(aoUsarDocumento ? {aoUsarDocumento} : {})} />
     {mensagemSituacao ? <p role="status">{mensagemSituacao}</p> : null}
     {prontoParaClassificar ? <>
       <label>Documento <select aria-label="Documento para o OncoAssist" value={selecionada} disabled={executando}

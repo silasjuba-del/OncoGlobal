@@ -1,6 +1,7 @@
+import { arredondarDoseMg } from "../../src/contracts/doseReducao.js";
 import { doseRuleset } from "../fixtures/rulesets.js";
 import { describe, expect, it } from "vitest";
-import { arredondaMeioParaCima, instanciarProtocolo, type DadosCorporais } from "../../src/rules/prescricao/instanciarProtocolo.js";
+import { instanciarProtocolo, type DadosCorporais } from "../../src/rules/prescricao/instanciarProtocolo.js";
 import { calcularDose } from "../../src/rules/dose.js";
 import type { DoseRuleset } from "../../src/contracts/regras.js";
 import { item, template } from "./_fixtures.js";
@@ -90,10 +91,21 @@ describe("W10-INT-PRESC-02 · instanciarProtocolo", () => {
   it("arredondamento é o mesmo de FN-04 (calcularDose, redução 0)", () => {
     for (const base of [0, 1, 50, 99, 100, 129, 135, 524, 1000, 1234]) {
       const fn04 = calcularDose({ doseAdministradaAnteriorMg: base, reducaoPct: 0, pesoKg: 70, origemPeso: "MEDIDO", ciclosSemPesoAnteriores: 0 }, rs);
-      expect(arredondaMeioParaCima(base)).toBe(fn04.doseMg);
+      expect(arredondarDoseMg(base)).toBe(fn04.doseMg);
     }
-    expect(arredondaMeioParaCima(129.5)).toBe(130);
-    expect(arredondaMeioParaCima(129.49)).toBe(129);
-    expect(arredondaMeioParaCima(75 * 1.73)).toBe(130); // 129,75 sem ruído de ponto flutuante
+    expect(arredondarDoseMg(129.5)).toBe(129.5);
+    expect(arredondarDoseMg(129.49)).toBe(129);
+    expect(arredondarDoseMg(75 * 1.73)).toBe(130); // 129,75 sem ruído de ponto flutuante
+  });
+});
+
+
+describe("µg sem arredondamento — decisão médica 31/10/2026", () => {
+  it.each([[0.005,70,0.35],[5.5,71,390.5],[0.1,3,0.3],[1e-7,70,0.000007]])("preserva %s µg/kg × %s kg = %s µg", (standardDose,pesoKg,esperado) => {
+    const r = instanciarProtocolo(template([item({drug:"Droga sintética µg",doseBasis:"MCG_KG",standardDose,unit:"µg/kg"})]),dados({pesoKg}));
+    if(!r.ok) throw Error("Instanciação recusada");
+    expect(r.itens[0]?.estado).toBe("PRONTO");
+    expect(r.itens[0]?.item.calculatedDose).toBe(esperado);
+    expect(r.itens[0]?.item.prescribedDose).toBe(esperado);
   });
 });

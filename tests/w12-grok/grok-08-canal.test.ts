@@ -29,9 +29,9 @@ describe("W12-GROK-08 canal de red flags", () => {
     expect(r.respostas).toEqual([]);
     expect(r.alertaMedico).toBe(false);
   });
-  it("versão 1.1.0, 25 sinais em RASCUNHO e os 6 candidatos antigos continuam inativos", () => {
+  it("versão 1.1.0, 27 sinais em RASCUNHO e os 6 candidatos antigos continuam inativos", () => {
     expect(json.header.versao).toBe("1.1.0");
-    expect(canal.sinais).toHaveLength(25);
+    expect(canal.sinais).toHaveLength(27);
     expect(canal.sinais.every((s) => s.status === "RASCUNHO")).toBe(true);
     expect(json.redflags).toHaveLength(6);
     expect(json.redflags.every((r) => r.ativo === false && r.fonte === "[VERIFICAR]" && r.respostaFixaTemplateId === null)).toBe(true);

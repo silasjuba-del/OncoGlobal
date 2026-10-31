@@ -37,6 +37,8 @@
     { "id": "redflag-22-imuno-cansaco", "termo": "Imunoterapia: cansaço extremo ou intolerância ao clima", "termos": ["cansaço extremo", "intolerância a calor", "intolerância a frio"], "limiarDecimosExclusivo": null, "orientacao": "Reportar à equipe.", "status": "RASCUNHO", "fonte": "D-W9-28" },
     { "id": "redflag-23-imuno-figado", "termo": "Imunoterapia: dor no hipocôndrio ou icterícia", "termos": ["hipocôndrio", "icterícia"], "limiarDecimosExclusivo": null, "orientacao": "Reportar à equipe.", "status": "RASCUNHO", "fonte": "D-W9-28" },
     { "id": "redflag-24-imuno-digestivo", "termo": "Imunoterapia: sangue nas fezes ou artralgia", "termos": ["sangue nas fezes", "artralgia"], "limiarDecimosExclusivo": null, "orientacao": "Reportar à equipe.", "status": "RASCUNHO", "fonte": "D-W9-28" },
-    { "id": "redflag-25-triagem", "termo": "Sinais a relatar na triagem do salão", "termos": ["resfriado", "ardência ao urinar"], "limiarDecimosExclusivo": null, "orientacao": "Informar antes da infusão.", "status": "RASCUNHO", "fonte": "D-W9-28" }
+    { "id": "redflag-25-triagem", "termo": "Sinais a relatar na triagem do salão", "termos": ["resfriado", "ardência ao urinar"], "limiarDecimosExclusivo": null, "orientacao": "Informar antes da infusão.", "status": "RASCUNHO", "fonte": "D-W9-28" },
+    { "id": "redflag-26-compressao-medular", "termo": "Compressão medular: dor nas costas com fraqueza ou retenção", "termos": ["dor nas costas e fraqueza", "dor dorsal e não consigo urinar", "retenção urinária e dor nas costas"], "limiarDecimosExclusivo": null, "orientacao": "Ir ao PS.", "status": "RASCUNHO", "fonte": "D-W9-28" },
+    { "id": "redflag-27-imuno-diarreia", "termo": "Imunoterapia: diarreia", "termos": ["diarreia na imunoterapia", "muitas evacuações no imunoterápico"], "limiarDecimosExclusivo": null, "orientacao": "Reportar à equipe.", "status": "RASCUNHO", "fonte": "D-W9-28" }
   ]
 }

@@ -80,6 +80,9 @@ const NET_SAIDA = /\bfrom\s+["'](node:https|node:net|undici|axios|node-fetch)["'
 // src/ui/api/** é o ÚNICO cliente HTTP da UI: só caminho relativo ao servidor local (mesma origem).
 const UI_API_PROIBIDO = /["'`](https?:|wss?:)?\/\/|new\s+WebSocket|XMLHttpRequest|sendBeacon|EventSource|\bimport\(/;
 
+// Imports assíncronos literais e locais da composição UI; destinos dinâmicos continuam proibidos.
+const TELAS_SOB_DEMANDA = ["./consulta/DocumentosMedicos.js", "./telas/TelaSalao.js", "./telas/apac/TelaApacLote.js", "./oncochart/Configuracoes.js", "./estatistica/PainelEstatistica.js", "./pesquisa/EstudosConsulta.js"];
+
 const files = [];
 const walk = (d) => { for (const f of readdirSync(d)) { const p = join(d, f); statSync(p).isDirectory() ? walk(p) : /\.(ts|tsx|mjs)$/.test(f) && files.push(p); } };
 try { walk(SRC); } catch { console.error("Fronteiras: não foi possível ler src"); process.exit(1); }
@@ -89,6 +92,9 @@ const erros = [];
 for (const file of files) {
   const rel = relative(ROOT, file).split(sep).join("/");
   const code = readFileSync(file, "utf8");
+  const codeRede = rel === "src/ui/OncoassistLocal.tsx"
+    ? TELAS_SOB_DEMANDA.reduce((texto, caminho) => texto.replaceAll(`import("${caminho}")`, "moduloLocalVerificado"), code)
+    : code;
   if (COMPATIBILIDADE.has(rel) && !somenteReexports(code)) erros.push(`${rel} entrypoint legado contém implementação (deve só reexportar a porta pública)`);
   const referencias = [...code.matchAll(/(?:from\s*|import\s*)["']([^"']+)["']/g)].map((m) => m[1]);
   for (const ref of referencias) {
@@ -125,7 +131,7 @@ for (const file of files) {
     if (UI_API_PROIBIDO.test(local)) erros.push(`${rel} cliente da UI fora da mesma origem (só caminho relativo "/...")`);
   }
   else if (servidor && (NET_SAIDA.test(code) || IMPORT_HTTP_CLIENTE.test(code) || referencias.some(ref => MODULOS_REDE.has(ref) && !["http", "node:http"].includes(ref)))) erros.push(`${rel} faz rede de saída (servidor só de entrada local)`);
-  else if (!servidor && !rel.startsWith("src/kernel/gateway/") && !rel.startsWith("src/kernel/llm/") && (NET.test(code) || referencias.some(ref => MODULOS_REDE.has(ref))))
+  else if (!servidor && !rel.startsWith("src/kernel/gateway/") && !rel.startsWith("src/kernel/llm/") && (NET.test(codeRede) || referencias.some(ref => MODULOS_REDE.has(ref))))
     erros.push(`${rel} usa rede fora do gateway/llm (INV-05)`);
 }
 // Exceções datadas (pré-F1): cada uma nomeada e com prazo. A lista só encolhe: exceção sem prazo, ou que não é

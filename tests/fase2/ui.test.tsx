@@ -6,12 +6,22 @@ import { BotaoVoz,type ReconhecimentoLocal } from "../../src/ui/telas/importar/B
 import { etapaDoClique,contarClique,metricasVazias } from "../../src/ui/consulta/metricasConsulta.js";
 import { criarPortaFalsa } from "../../src/ui/api/fake.js";
 import type { RevisaoClinicaResposta } from "../../src/contracts/fase2/revisaoClinica.js";
+import { montarTelaRevisao } from "../../src/modules/consulta/telaRevisao.js";
 import { contexto } from "./fixtures.js";
 import { ConsultaFlash } from '../../src/ui/consulta/ConsultaFlash.js';
 import type { ConsultaFlashProps } from '../../src/contracts/api/flash.js';
 afterEach(()=>{cleanup();vi.unstubAllGlobals();});
 const resposta:RevisaoClinicaResposta={codigo:"REVISAO_CLINICA_CARREGADA",contexto,revisao:"r",ficha:[],preQt:{estado:"PENDENTE",autorizaTratamento:false,pendencias:["Paciente antigo sintético"]},packs:[],pack:null,pendencias:[],estadosDoenca:[],
-  respostaTumoral:{criterio:"RECIST_1_1",aplicabilidade:"CONFERIR_CRITERIO_DO_TUMOR",series:[],patologica:[],pendencias:[]}};
+  respostaTumoral:{criterio:"RECIST_1_1",aplicabilidade:"CONFERIR_CRITERIO_DO_TUMOR",series:[],patologica:[],pendencias:[]},tela:montarTelaRevisao({})};
+it("a revisão da consulta mostra identidade, aptidão de hoje e fechamento", async () => {
+  const porta = criarPortaFalsa();
+  porta.revisaoClinica = vi.fn(async () => resposta);
+  render(<RevisaoClinica porta={porta} contexto={contexto} versaoClinica={0} />);
+  expect(await screen.findByRole("region", { name: "Identidade" })).toBeTruthy();
+  expect(screen.getByRole("region", { name: "Aptidão de hoje" })).toBeTruthy();
+  expect(screen.getByRole("region", { name: "Fechamento" })).toBeTruthy();
+  expect(screen.getByText(/Ausência confirmada não é o mesmo que não informado/)).toBeTruthy();
+});
 it("resposta tardia de outro paciente não entra na ficha atual",async()=>{
   const porta=criarPortaFalsa();let resolver!:(r:RevisaoClinicaResposta)=>void;
   porta.revisaoClinica=vi.fn(()=>new Promise<RevisaoClinicaResposta>(r=>{resolver=r;}));

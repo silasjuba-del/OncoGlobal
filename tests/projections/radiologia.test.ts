@@ -49,7 +49,7 @@ describe("FUGU-11a · séries de imagem por sítio", () => {
   });
 });
 
-describe("FUGU-11a · porta INTERVAL_PROGRESSION (dublê de D-W9-43)", () => {
+describe("FUGU-11a · porta INTERVAL_PROGRESSION (regra canônica D-W9-43)", () => {
   const avaliar = (over: Partial<Parameters<typeof regraProgressaoIntervalar.avaliar>[0]>) =>
     regraProgressaoIntervalar.avaliar({
       sitio: "L5", metodoAnterior: "CINTILOGRAFIA", metodoAtual: "CINTILOGRAFIA",
@@ -60,7 +60,7 @@ describe("FUGU-11a · porta INTERVAL_PROGRESSION (dublê de D-W9-43)", () => {
     const veredito = avaliar({});
     expect(veredito.decisao).toBe("ALERTA");
     expect(veredito.regra).toBe("D-W9-43");
-    expect(veredito.motivo).toContain("nunca metástase automática");
+    expect(veredito.motivo).toContain("Não gera M1");
   });
 
   it("aumento declarado pela fonte também eleva suspeição", () => {
@@ -110,4 +110,11 @@ describe("FUGU-11a · M1 visceral nunca vira M0", () => {
     expect(veredito.estado).toBe("SUSPEITO");
     expect(veredito.motivo).toContain("não classificar como metástase");
   });
+});
+it("nota sem data não apaga aumento declarado num exame datado e redução posterior não revive aumento antigo",()=>{
+ const valor={sitioCanonico:"L5",metodo:"TC",measureMm:10};
+ const series=seriesDeImagem([imagem({date:"2026-01-01",value:valor}),imagem({date:"2026-02-01",value:{...valor,measureMm:20}}),imagem({value:{...valor,metodo:"RM",measureMm:null},rawEvidence:"RM dirigida como proposta sem data"})]);
+ expect(excecoesProgressao(series)).toHaveLength(1);
+ const reducao=seriesDeImagem([imagem({date:"2026-01-01",value:valor}),imagem({date:"2026-02-01",value:{...valor,measureMm:20}}),imagem({date:"2026-03-01",value:{...valor,measureMm:15}})]);
+ expect(excecoesProgressao(reducao)).toEqual([]);
 });

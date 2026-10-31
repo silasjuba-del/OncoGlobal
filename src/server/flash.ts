@@ -1,3 +1,5 @@
+import { ProvenienciaDocumentoSkill } from "../contracts/api/provenienciaSkill.js";
+import { conferirProvenienciaSkill, textoProvenienciaSkill } from "./provenienciaSkill.js";
 import { ProvenienciaDocumentoConversa } from "../contracts/api/conversaOncoassist.js";
 import { conferirProvenienciaConversa, textoProvenienciaConversa } from "./provenienciaConversa.js";
 import { LIMITE_TEXTO_DOCUMENTO_MANUAL } from "../contracts/api/flash.js";
@@ -19,6 +21,7 @@ import type { FlashVisao } from "../contracts/api/porta.js";
 import { hashConteudoExibido } from "./sessao.js";
 import { VersaoReferencia } from '../contracts/f1/correlacao.js';
 import { lerModeloFlashConfigurado, type ModeloFlash } from "../contracts/configFlash.js";
+import { metadadosDoFatoImpedemUso } from "./f0c/dadosDocumentados.js";
 export type { ModeloFlash } from "../contracts/configFlash.js";
 
 /** Tipos de evento que carregam laudo com frase (data.dataClinica, data.fraseLaudo, data.nome). */
@@ -65,6 +68,7 @@ export function projetarFlash(
     const d = dadosDoEvento(e);
     if (!d || typeof d.dataClinica !== "string" || !DATA_CIVIL.test(d.dataClinica) || d.dataClinica > dataReferencia) return [];
     if (typeof d.fraseLaudo !== "string" || d.fraseLaudo.trim().length === 0) return [];
+    if (metadadosDoFatoImpedemUso(d)) return [];
     const nome = typeof d.nome === "string" && d.nome.trim().length > 0 ? d.nome.trim() : e.tipo;
     return [{ data: d.dataClinica, nome, fraseLaudo: d.fraseLaudo.trim(), situacao: situacaoDe(d.situacao), eventId: e.eventId }];
   }).sort((a, b) => b.data.localeCompare(a.data) || a.eventId.localeCompare(b.eventId))
@@ -102,8 +106,8 @@ const ApacFlashEntrada = z.object({
 export const PlanoFlashEntrada = z.object({
   evolucaoAtendimento: z.object({ id: Id, versao: z.number().int().positive(), conteudoHash: z.string().regex(/^[a-f0-9]{64}$/) }).strict().optional(),
   propostasDoseReceita:z.array(ReferenciaPropostaDose).max(50).refine(xs=>new Set(xs.map(x=>x.receitaId)).size===xs.length,'PROPOSTA_RECEITA_DUPLICADA').optional(),
-  documentosManuais:z.array(z.object({id:z.string().regex(/^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,100}$/),tipo:z.enum(['ENCAMINHAMENTO','LAUDO','ORIENTACOES']),
-    titulo:z.string().max(200),destino:z.string().max(200).nullable(),texto:z.string().max(LIMITE_TEXTO_DOCUMENTO_MANUAL),proveniencia:ProvenienciaDocumentoConversa.optional()}).strict()).max(10).refine(v=>new Set(v.map(d=>d.id)).size===v.length,'DOCUMENTO_ID_DUPLICADO').optional(),
+  documentosManuais:z.array(z.object({id:z.string().regex(/^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,100}$/),tipo:z.enum(['ENCAMINHAMENTO','LAUDO','ORIENTACOES','EVOLUCAO','PEDIDO_EXAMES','RESUMO_CASO','RELATORIO_PERICIAL']),
+    titulo:z.string().max(200),destino:z.string().max(200).nullable(),texto:z.string().max(LIMITE_TEXTO_DOCUMENTO_MANUAL),proveniencia:ProvenienciaDocumentoConversa.optional(),origemSkill:ProvenienciaDocumentoSkill.optional()}).strict()).max(10).refine(v=>new Set(v.map(d=>d.id)).size===v.length,'DOCUMENTO_ID_DUPLICADO').refine(v=>v.filter(d=>d.tipo==='EVOLUCAO').length<=1,'EVOLUCAO_DUPLICADA_REVISAR').optional(),
   propostasInvestigacao:z.array(z.object({exameCodigo:Id,contexto:Id,revisaoFatos:Id,referencia:VersaoReferencia}).strict()).max(50).optional(),
   acoesMarcadas: z.array(Id).max(50),
   receitasMarcadas: z.array(Id).max(50),
@@ -134,7 +138,7 @@ export type PlanoFlashEntradaTipo = z.infer<typeof PlanoFlashEntrada>;
 /** O contrato da visão omite opcionais ausentes, inclusive no objeto retorno. */
 function planoParaVisao(plano: PlanoFlashEntradaTipo): PlanoFlash {
   return { ...(plano.evolucaoAtendimento ? { evolucaoAtendimento: plano.evolucaoAtendimento } : {}), acoesMarcadas: plano.acoesMarcadas, receitasMarcadas: plano.receitasMarcadas, apac: plano.apac,
-    ...(plano.documentosManuais===undefined?{}:{documentosManuais:plano.documentosManuais.map(({proveniencia,...d})=>({...d,...(proveniencia?{proveniencia}:{})}))}),
+    ...(plano.documentosManuais===undefined?{}:{documentosManuais:plano.documentosManuais.map(({proveniencia,origemSkill,...d})=>({...d,...(proveniencia?{proveniencia}:{}),...(origemSkill?{origemSkill}:{})}))}),
     ...(plano.propostasInvestigacao===undefined?{}:{propostasInvestigacao:plano.propostasInvestigacao}),
     ...(plano.receitas===undefined?{}:{receitas:plano.receitas}),
     ...(plano.propostasDoseReceita===undefined?{}:{propostasDoseReceita:plano.propostasDoseReceita}),
@@ -168,6 +172,8 @@ const MENSAGEM_APAC = "APAC: rascunho, não emitida";
 export function salvarRascunhoFlash(db: DatabaseSync, agora: string, input: ContextoFlash & {
   plano: PlanoFlashEntradaTipo; expectedRevision: number | null;
 }): Resposta {
+  if (input.plano.documentosManuais?.some(d => d.origemSkill && !conferirProvenienciaSkill(db, input, d.origemSkill)))
+    return { status: 409, body: { codigo: "PROVENIENCIA_SKILL_INVALIDA" } };
   if (input.plano.documentosManuais?.some(d => d.proveniencia && !conferirProvenienciaConversa(db, input, d.proveniencia)))
     return { status: 409, body: { codigo: "PROVENIENCIA_CONVERSA_INVALIDA" } };
   const draftId = `flash-rascunho-${chaveContexto(input).slice(0, 24)}`;
@@ -203,7 +209,8 @@ function montarDocumentos(chave: string, plano: PlanoFlashEntradaTipo, resumoCli
   const apac = plano.apac.pendencias.length > 0
     ? `${MENSAGEM_APAC}; pendências: ${plano.apac.pendencias.join("; ")}` : MENSAGEM_APAC;
   const id = (tipo: string) => `flash-${tipo}-${chave.slice(0, 20)}`;
-  const docs: DocumentoFlash[] = [
+  const possuiEvolucaoMedica = plano.documentosManuais?.some(d => d.tipo === "EVOLUCAO") ?? false;
+  const docs: DocumentoFlash[] = possuiEvolucaoMedica ? [] : [
     { documentId: id("evolucao"), titulo: "Evolução da Consulta Flash", tipoDocumento: TIPO_DOC.evolucao,
       texto: [...(resumoClinico ? [resumoClinico, ""] : []), (essencial ? "Consulta Flash: plano proposto pelo médico para revisão e assinatura." : "Consulta Flash: plano confirmado pelo médico."), `Retorno: ${prazo}.`,
         `Laboratório: ${lab ? "pedido gerado" : "não solicitado"}.`, `Imagem: ${img ? "pedido gerado" : "não solicitada"}.`,
@@ -227,10 +234,10 @@ function montarDocumentos(chave: string, plano: PlanoFlashEntradaTipo, resumoCli
     texto: `Retorno ${prazo}.${plano.retorno.motivo ? `\nMotivo: ${plano.retorno.motivo}` : ""}`,
     extra: { retornoDias: dias, retornoEstado: dias === null ? "PENDENTE" : "DEFINIDO" } });
   for(const documento of plano.documentosManuais??[]){
-    docs.push({documentId:id(`manual-${documento.id}`),titulo:documento.titulo.trim(),tipoDocumento:`FLASH_${documento.tipo}`,
+    docs.push({documentId:documento.tipo === "EVOLUCAO" ? id("evolucao") : id(`manual-${documento.id}`),titulo:documento.titulo.trim(),tipoDocumento:`FLASH_${documento.tipo}`,
       texto:[documento.titulo.trim(),...(documento.destino?.trim()?[`Destino: ${documento.destino.trim()}`]:[]),
-        ...(resumoClinico?["Resumo clínico confirmado",resumoClinico]:[]),"Registro do médico",documento.texto.trim(),...(documento.proveniencia ? [textoProvenienciaConversa(documento.proveniencia)] : [])].join("\n\n"),
-      extra:{documentoManual:documento,origemConteudo:documento.proveniencia?"PROPOSTA_ASSISTENTE_REVISADA":"DECISAO_MEDICA"}});
+        ...(resumoClinico?["Resumo clínico confirmado",resumoClinico]:[]),"Registro do médico",documento.texto.trim(),...(documento.proveniencia ? [textoProvenienciaConversa(documento.proveniencia)] : []), ...(documento.origemSkill ? [textoProvenienciaSkill(documento.origemSkill)] : [])].join("\n\n"),
+      extra:{documentoManual:documento,...(documento.tipo === "RELATORIO_PERICIAL" ? {modeloId:"relatorio-pericial",finalidade:"SUBSIDIAR_AVALIACAO_PERICIAL"} : {}),origemConteudo:documento.origemSkill?"PROPOSTA_SKILL_REVISADA":documento.proveniencia?"PROPOSTA_ASSISTENTE_REVISADA":"DECISAO_MEDICA"}});
   }
   if (essencial) {
     // Cópia fixa dos documentos selecionados; o conjunto também exige exibição e assinatura.
@@ -259,6 +266,8 @@ function prepararDocumentosFlash(db: DatabaseSync, agora: string, input: Context
     || hashConteudoExibido(input.plano.evolucaoAtendimento) !== hashConteudoExibido(fonteDocumentos.evolucaoAtendimento.referencia)))
     return { status: 409, body: { codigo: "EVOLUCAO_ALTERADA_OU_PENDENTE" } };
   for (const documento of input.plano.documentosManuais ?? []) {
+    if (documento.origemSkill && !conferirProvenienciaSkill(db, input, documento.origemSkill))
+      return { status: 409, body: { codigo: "PROVENIENCIA_SKILL_INVALIDA" } };
     if (documento.proveniencia && !conferirProvenienciaConversa(db, input, documento.proveniencia))
       return { status: 409, body: { codigo: "PROVENIENCIA_CONVERSA_INVALIDA" } };
   }

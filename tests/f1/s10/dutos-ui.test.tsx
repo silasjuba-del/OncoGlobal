@@ -11,7 +11,7 @@ it('UI mantém envio e conferência distintos e expõe dados pendentes',()=>{
  expect(screen.getByText('ENVIADA')).toBeTruthy();expect(screen.queryByText('CONFERIDA')).toBeNull();expect(screen.getByRole('region',{name:'Setores da clínica'})).toBeTruthy();
 });
 it('UI mostra quantidade efetiva e recebimento sem transformar tarefa em concluída',()=>{
- render(<DutosClinica dados={{...base,tarefas:[{eventId:'t',tarefa:{tarefaId:'t',...ctx,operationId:'op',titulo:'Retorno sintético',responsavel:'m',prazo:null,estado:'CONFIRMADA',recebidoEm:em,criadoPor:'m',substituiTarefaId:null,dataAlvo:null,pedidoRefs:[],retornoRef:null,geradaPorEventoId:null,rulesetVersao:null}}]}}/>);
+ render(<DutosClinica dados={{...base,tarefas:[{eventId:'t',tarefa:{tarefaId:'t',...ctx,operationId:'op',titulo:'Retorno sintético',responsavel:'m',prazo:null,estado:'CONFIRMADA',recebidoEm:em,criadoPor:'m',substituiTarefaId:null,dataAlvo:null,acompanhamentoPedidos:[],atualizadoNoEncontroId:null,pedidoRefs:[],retornoRef:null,geradaPorEventoId:null,rulesetVersao:null}}]}}/>);
  expect(screen.getByText('CONFIRMADA')).toBeTruthy();expect(screen.queryByText('CONCLUIDA')).toBeNull();expect(screen.getByText(/Recebida em/)).toBeTruthy();
 });
 it('UI não apresenta conferência antiga como válida; dados malformados ficam pendentes',()=>{

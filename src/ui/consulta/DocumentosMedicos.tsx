@@ -1,3 +1,4 @@
+import { MedidasDocumento } from "./MedidasDocumento.js";
 import { useEffect, useRef, useState } from "react";
 import { getDocument, GlobalWorkerOptions, type PDFDocumentProxy } from "pdfjs-dist";
 // @ts-expect-error URL do worker local resolvida pelo Vite, sem CDN.
@@ -68,6 +69,7 @@ function Documento({ valor, aoRevisar }: { valor: DocumentoDocumentalResposta; a
       <button type="button" disabled={pagina >= total} onClick={() => setPagina(p => p + 1)}>Próxima página</button>
     </div>
     <PaginaPdf base64={arquivo.bytesBase64} pagina={pagina} nome={arquivo.nome} aoTotal={setTotal} />
+    <MedidasDocumento key={`${valor.pacote.pacoteId}:${pagina}:${derivado}`} fonte={`${arquivo.nome} · página ${pagina}`} />
     <details><summary>Texto extraído localmente do original</summary>
       {valor.textoLocal.length ? valor.textoLocal.map(p => <section key={p.pagina}><strong>Página {p.pagina}</strong><pre style={{ whiteSpace: "pre-wrap", overflowWrap: "anywhere" }}>{p.texto}</pre></section>)
         : <p>Conversão pendente ou sem texto legível. Revise o original.</p>}

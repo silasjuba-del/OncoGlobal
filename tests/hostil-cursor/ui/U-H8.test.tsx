@@ -7,6 +7,7 @@ import { comporDocumentosAtendimentoV6 } from "../../../src/modules/documentos/a
 import { criarPortaFalsa } from "../../../src/ui/api/fake.js";
 import type { AtendimentoV6Resposta, BaseAtendimentoV6 } from "../../../src/contracts/api/atendimentoV6.js";
 import type { RevisaoClinicaResposta } from "../../../src/contracts/fase2/revisaoClinica.js";
+import { montarTelaRevisao } from "../../../src/modules/consulta/telaRevisao.js";
 
 afterEach(cleanup);
 
@@ -186,6 +187,7 @@ describe("U-H8 · proveniência recolhida (PR #72): fonte, trecho e data alcanç
       },
       estadosDoenca: [],
       pendencias: [],
+      tela: montarTelaRevisao({}),
     };
 
     const porta = {

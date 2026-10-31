@@ -1,5 +1,6 @@
+import * as motorSeguranca from "../../src/rules/prescricao/safetyEngine.js";
 // Somente fichas, fármacos e pacientes sintéticos; HTTP e SQLite reais locais.
-import { afterEach, expect, it } from "vitest";
+import { afterEach, expect, it, vi } from "vitest";
 import { createServer } from "node:http";
 import { abrirLedger } from "../../src/kernel/ledger/db.js";
 import { executarConfirmacao } from "../../src/kernel/comandos/index.js";
@@ -15,7 +16,7 @@ import { criarDiretorio, removerDiretorio, AGORA } from "../f0-fecha/fixtures/co
 
 const contexto = { patientId: "paciente-ficha-sintetico", encounterId: "consulta-ficha-sintetica", tumorLotId: "lote-ficha-sintetico" };
 const ambientes: { close: () => Promise<void> }[] = [];
-afterEach(async () => { for (const a of ambientes.splice(0)) await a.close(); });
+afterEach(async () => { vi.restoreAllMocks(); for (const a of ambientes.splice(0)) await a.close(); });
 const template = () => ProtocolTemplate.parse({ templateId: "ficha-sintetica", versao: "1",
   hash: "rotulo-legado-sintetico", status: "RASCUNHO", nome: "Protocolo sintético", tumor: "Tumor sintético", cenario: "Cenário sintético",
   codigoInstitucional: null, intervaloDias: 21, ciclos: null, fonte: "Documento inteiramente sintético", limiaresBula: null,
@@ -66,7 +67,7 @@ async function abrir(protocolo = template(), dadosPaciente: { nascimento?: strin
   }
   let n = 0;
   function seed(tipo: string, payload: unknown | ((eventId: string) => unknown),
-    fontes: ReturnType<typeof fonteSintetica>[] | ((eventId: string) => ReturnType<typeof fonteSintetica>[]) = eventId => [fonteSintetica(eventId)]) {
+    fontes: ReturnType<typeof fonteSintetica>[] | ((eventId: string) => ReturnType<typeof fonteSintetica>[]) = eventId => [fonteSintetica(eventId)], supersedesEventId: string | null = null) {
     const id = `ficha-seed-${++n}`;
     const conteudo = typeof payload === "function" ? payload(id) : payload;
     const fontesEvento = typeof fontes === "function" ? fontes(id) : fontes;
@@ -74,8 +75,9 @@ async function abrir(protocolo = template(), dadosPaciente: { nascimento?: strin
       payload: {}, revision: 0, diagnostics: [], criadoEm: agora });
     const r = executarConfirmacao(db, { ...contexto, operationId: id, reviewDecisionId: id,
       sessao: sessoes.obter(token)!, em: agora, registros: [{ eventId: id, draftId: id, expectedRevision: 0,
-        tipo, payload: conteudo, fontes: fontesEvento, revisao: "CONFIRMADO" }] });
+        tipo, payload: conteudo, fontes: fontesEvento, revisao: "CONFIRMADO", supersedesEventId }] });
     expect(r.estado).toBe("GRAVADA");
+    return id;
   }
   seed("Paciente", { patientId: contexto.patientId, nome: "Paciente sintético da ficha", identificadores: [],
     nascimento: dadosPaciente.nascimento ?? null, sexoCadastral: dadosPaciente.sexoCadastral ?? "NAO_INFORMADO", divergencia: false });
@@ -410,4 +412,32 @@ it.each([false, true])("ancoras de agenda concordantes ou conflitantes controlam
   } else {
     expect(r.itens[0].item.prescribedDose).toBe(305);
   }
+});
+
+it.each(['ausente','abaixo','unidade','futuro','sem-horario'] as const)('SafetyEngine da ficha recusa artefato com plaquetas %s e conserva o prontuário', async caso => {
+ const t=template();t.limiaresBula={neutrofilosMin:null,plaquetasMin:100000,clcrMinMlMin:null,fevePctMin:null,fonte:'Limiar exclusivamente sintético'};
+ const a=await abrir(t);
+ if(caso!=='ausente'){
+  const data=caso==='futuro'?'2030-01-01T12:00:00Z':caso==='sem-horario'?AGORA.slice(0,10):AGORA;
+  a.seed('LabResult',(id:string)=>({campo:'plaquetas',valor:caso==='abaixo'?50000:150000,unidade:caso==='unidade'?'10^9/L':'/µL',data,sourceId:id}),
+   id=>[{...fonteSintetica(id),dataClinica:data}]);
+ }
+ const origem=await instancia(a);expect(origem.pendencias.join(' ')).toContain('SEGURANCA_FICHA:');
+ if(caso==='abaixo')expect(origem.pendencias.join(' ')).toContain('PLAQUETAS_ABAIXO_BULA');
+ else expect(origem.pendencias.join(' ')).not.toContain('ABAIXO_BULA');
+ const antes=a.eventos();const r=await preparar(a,origem);expect(r.status).toBe(409);expect(r.data.codigo).toBe('SEGURANCA_FICHA_PENDENTE');expect(a.eventos()).toEqual(antes);
+});
+it('SafetyEngine aplica somente limiar declarado e aceita plaquetas válidas acima dele',async()=>{
+ const spy=vi.spyOn(motorSeguranca,'safetyEngine');
+ const t=template();t.limiaresBula={neutrofilosMin:null,plaquetasMin:100000,clcrMinMlMin:null,fevePctMin:null,fonte:'Limiar exclusivamente sintético'};
+ const a=await abrir(t);a.seed('LabResult',(id:string)=>({campo:'plaquetas',valor:150000,unidade:'/µL',data:AGORA,sourceId:id}),id=>[{...fonteSintetica(id),dataClinica:AGORA}]);
+ const origem=await instancia(a);expect(origem.pendencias,JSON.stringify(spy.mock.calls.map(c=>c[2]))).toEqual([]);expect((await preparar(a,origem)).status).toBe(200);
+});
+
+it('[pre-merge] correção incerta não ressuscita plaquetas substituídas',async()=>{
+ const t=template();t.limiaresBula={neutrofilosMin:null,plaquetasMin:100000,clcrMinMlMin:null,fevePctMin:null,fonte:'Limiar exclusivamente sintético'};
+ const a=await abrir(t);const anterior=a.seed('LabResult',(id:string)=>({campo:'plaquetas',valor:150000,unidade:'/µL',data:AGORA,sourceId:id}),id=>[{...fonteSintetica(id),dataClinica:AGORA}]);
+ a.seed('LabResult',(id:string)=>({campo:'plaquetas',valor:30000,unidade:'/µL',data:AGORA,sourceId:id,requiresConfirmation:true}),id=>[{...fonteSintetica(id),dataClinica:AGORA}],anterior);
+ const origem=await instancia(a);expect(origem.pendencias.join(' ')).toContain('SEGURANCA_FICHA:');
+ const antes=a.eventos();expect((await preparar(a,origem)).status).toBe(409);expect(a.eventos()).toEqual(antes);
 });

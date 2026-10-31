@@ -1,3 +1,4 @@
+import { arredondarDoseMg } from "../../../src/contracts/doseReducao.js";
 // F1-B2 · Jornadas das fichas novas (D-F1-49) — para CADA ficha do manifesto:
 // (1) carregada pelo loader real do servidor; (2) RASCUNHO recusada com TEMPLATE_NAO_CONFERIDO
 // (incompletude/falta de aprovação VISÍVEL, com templateId+status); (3) em fixture isolada de teste
@@ -10,7 +11,7 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { ProtocolTemplate } from "../../../src/contracts/w10/prescricao.js";
-import { instanciarProtocolo, arredondaMeioParaCima, type DadosCorporais } from "../../../src/rules/prescricao/instanciarProtocolo.js";
+import { instanciarProtocolo, type DadosCorporais } from "../../../src/rules/prescricao/instanciarProtocolo.js";
 import { doseRuleset } from "../../fixtures/rulesets.js";
 
 const RAIZ = fileURLToPath(new URL("../../../", import.meta.url));
@@ -56,8 +57,8 @@ describe("F1-B2 · jornadas das 22 fichas novas (D-F1-49)", () => {
         for (const i of r.itens) if (i.estado !== "PRONTO") expect(i.item.calculatedDose ?? null, `${f.arquivo} ${i.item.drug}`).toBeNull();
       }
       for (const i of r.itens.filter((x) => x.estado === "PRONTO" && x.item.classe === "QT" && x.item.standardDose !== null && !/^Manitol/.test(x.item.drug))) {
-        const esperado = i.item.doseBasis === "MG_M2" ? arredondaMeioParaCima(i.item.standardDose! * 1.8)
-          : i.item.doseBasis === "AUC" ? arredondaMeioParaCima(i.item.standardDose! * (Math.min(80, 125) + 25))
+        const esperado = i.item.doseBasis === "MG_M2" ? arredondarDoseMg(i.item.standardDose! * 1.8)
+          : i.item.doseBasis === "AUC" ? arredondarDoseMg(i.item.standardDose! * (Math.min(80, 125) + 25))
           : i.item.standardDose;
         expect(i.item.calculatedDose, `${f.arquivo} ${i.item.drug}`).toBe(Math.min(esperado!, i.item.doseMaximaMg ?? Infinity));
       }

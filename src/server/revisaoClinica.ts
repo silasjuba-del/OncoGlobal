@@ -1,10 +1,12 @@
+import { entradaRevisaoDoRetrato } from "../modules/consulta/entradaRevisao.js";
 import { Retrato } from "../contracts/f1/retrato.js";
 import { RevisaoClinicaResposta } from "../contracts/fase2/revisaoClinica.js";
 import { montarFichaMinima, selecionarPack, packCorrespondeAoCid, cidsDaFicha } from "../modules/consulta/revisaoClinica.js";
+import { montarTelaRevisao } from "../modules/consulta/telaRevisao.js";
 import type { CatalogoTumorPacks } from "../kernel/corpus/tumorPacks.js";
 import type { criarMotorF1 } from "../kernel/orquestracao/runtime.js";
 import { obterInvestigacao } from "./investigacao.js";
-import type { lerRecist } from './leituras.js';
+import type { lerRecist, lerConsulta } from './leituras.js';
 import { RegistroEstadoDoenca } from '../contracts/fase2/estadoDoenca.js';
 import { hashCanonico } from '../modules/hash.js';
 
@@ -24,7 +26,7 @@ export function projetarRespostaPatologica(r:Retrato):RevisaoClinicaResposta['re
 }
 
 export async function obterRevisaoClinica(motor:Pick<ReturnType<typeof criarMotorF1>,"retrato"|"consultar">,catalogo:CatalogoTumorPacks,
-  contexto:RevisaoClinicaResposta["contexto"],packId?:string,recist?:()=>ReturnType<typeof lerRecist>):Promise<RevisaoClinicaResposta> {
+  contexto:RevisaoClinicaResposta["contexto"],packId?:string,recist?:()=>ReturnType<typeof lerRecist>, consulta?:()=>ReturnType<typeof lerConsulta>):Promise<RevisaoClinicaResposta> {
   const avaliacao=await motor.consultar(contexto),r=Retrato.parse(avaliacao.retrato);
   if(r.patientId!==contexto.patientId||r.encounterId!==contexto.encounterId||r.tumorLotId!==contexto.tumorLotId)throw Error("RETRATO_FORA_CONTEXTO");
   if(motor.retrato(contexto).revisao!==r.revisao)throw Error("RETRATO_ALTERADO");
@@ -65,8 +67,26 @@ export async function obterRevisaoClinica(motor:Pick<ReturnType<typeof criarMoto
       pendencias:s.resultado?[...s.resultado.pendencias]:["ESCOPO_OU_PROVENIENCIA_INVALIDA"]}))??[],
     patologica:projetarRespostaPatologica(r),
     pendencias:resposta?.estado==="PARCIAL"?[]:["Série RECIST confirmada com medidas e fontes não disponível."]};
+  const dadosTela = entradaRevisaoDoRetrato(r);
+  const leitura = consulta?.();
+  if (leitura && "avaliacaoClinica" in leitura) {
+    if (leitura.patientId !== contexto.patientId || leitura.encounterId !== contexto.encounterId || leitura.tumorLotId !== contexto.tumorLotId) throw Error("LEITURA_FORA_CONTEXTO");
+    const usados = leitura.avaliacaoClinica.renal.valoresUsados;
+    // Reutiliza a seleção de medidas/fonte/validade da consulta, sem segunda política renal.
+    if (usados.idadeAnos !== null) dadosTela.entrada.idadeAnos = { estado: "INFORMADO", valor: usados.idadeAnos };
+    if (usados.sexoFormula !== null) dadosTela.entrada.sexoFormula = { estado: "INFORMADO", valor: usados.sexoFormula };
+    if (leitura.avaliacaoClinica.renal.estado === "CALCULADO" && usados.creatinina.unidade === "mg/dL" && usados.creatinina.valor !== null && usados.creatinina.fonte) {
+      dadosTela.entrada.creatininaMgDl = { estado: "INFORMADO", valor: usados.creatinina.valor };
+      dadosTela.entrada.fonteCreatinina = usados.creatinina.fonte;
+    } else { delete dadosTela.entrada.creatininaMgDl; delete dadosTela.entrada.fonteCreatinina; }
+    if (usados.peso.unidade === "kg" && usados.peso.valor !== null && usados.peso.fonte) {
+      dadosTela.entrada.pesoKg = { estado: "INFORMADO", valor: usados.peso.valor }; dadosTela.entrada.fontePeso = usados.peso.fonte;
+    } else { delete dadosTela.entrada.pesoKg; delete dadosTela.entrada.fontePeso; }
+  }
+  pendencias.push(...dadosTela.pendencias);
+  preQt.push(...dadosTela.pendencias);
   return RevisaoClinicaResposta.parse({codigo:"REVISAO_CLINICA_CARREGADA",contexto,revisao:r.revisao,ficha,
     preQt:{estado:preQt.length?"PENDENTE":"AGUARDA_DECISAO_MEDICA",autorizaTratamento:false,pendencias:preQt},
     packs:catalogo.packs.map(p=>({id:p.referencia.id,titulo:p.titulo,estado:p.estado,cids:p.cids})),pack,
-    loteCompleto,pendencias,respostaTumoral,estadosDoenca});
+    loteCompleto,pendencias,respostaTumoral,estadosDoenca,tela:montarTelaRevisao(dadosTela.entrada)});
 }
