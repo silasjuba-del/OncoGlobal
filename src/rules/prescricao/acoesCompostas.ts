@@ -1,3 +1,4 @@
+import { mgAposReducao } from "../../contracts/doseReducao.js";
 import {
   BaseAcaoComposta,
   PedidoAcaoComposta,
@@ -96,9 +97,9 @@ export function prepararAcaoComposta(baseEntrada: unknown | null, pedidoEntrada:
     const reduzidos = new Map<number, number>();
     for (const itemId of pedido.itensSelecionados) {
       const doseBase = itensBase.get(itemId)!.doseMg!;
-      // Base inteira validada: centésimos exatos evitam overflow intermediário e arredondam uma vez.
-      const calculada = Number((BigInt(doseBase) * BigInt(100 - pedido.reducaoPct) + 50n) / 100n);
-      if (!Number.isSafeInteger(calculada) || calculada <= 0)
+      // D-F1-52: redução única; preserva meio mg e resultados positivos pequenos.
+      const calculada = mgAposReducao(doseBase, pedido.reducaoPct);
+      if (!Number.isFinite(calculada) || calculada > Number.MAX_SAFE_INTEGER || calculada <= 0)
         return pending({ base, tipo: pedido.tipo, motivo: pedido.motivo,
           pendencias: [`Dose após redução não é uma quantidade positiva representável para o item ${itemId}.`] });
       reduzidos.set(itemId, calculada);

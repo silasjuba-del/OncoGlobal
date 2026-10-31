@@ -2,6 +2,7 @@
 import { describe, expect, it } from "vitest";
 import type { EntradaDose, ReducaoPct } from "../../src/contracts/index.js";
 import { calcularDose } from "../../src/rules/index.js";
+import { mgAposReducao } from "../../src/contracts/doseReducao.js";
 import { doseRuleset } from "../fixtures/rulesets.js";
 
 const entradaDose = (over: Partial<EntradaDose> = {}): EntradaDose => ({
@@ -35,8 +36,17 @@ describe("FN-04 reduções e arredondamento", () => {
       expect(r.rulesetVersao).toBe(doseRuleset.header.versao);
     }
   });
-  it("base 125 com redução 30 → 88 (87,5 arredonda para cima, uma vez, após a redução)", () => {
-    expect(calcularDose(entradaDose({ doseAdministradaAnteriorMg: 125, reducaoPct: 30 }), doseRuleset).doseMg).toBe(88);
+  it("D-F1-52: base 125 com redução 30 preserva 87,5 mg", () => {
+    expect(mgAposReducao(125, 30)).toBe(87.5);
+    expect(calcularDose(entradaDose({ doseAdministradaAnteriorMg: 125, reducaoPct: 30 }), doseRuleset).doseMg).toBe(87.5);
+  });
+  it("D-F1-52: redução não zera dose pequena; sem redução mantém a entrada", () => {
+    expect(mgAposReducao(0.7, 0)).toBe(0.7);
+    expect(mgAposReducao(1, 30)).toBe(1);
+    expect(mgAposReducao(0.5, 40)).toBe(0.3);
+    const r = calcularDose(entradaDose({ doseAdministradaAnteriorMg: 0.7, reducaoPct: 0 }), doseRuleset);
+    expect(r.doseMg).toBe(0.7);
+    expect(r.estado).toBe("VERDE");
   });
   it("base null → doseMg null e PENDENTE (nunca inventa)", () => {
     const r = calcularDose(entradaDose({ doseAdministradaAnteriorMg: null }), doseRuleset);

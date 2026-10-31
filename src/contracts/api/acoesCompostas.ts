@@ -20,7 +20,7 @@ export type ContextoAcaoComposta = z.infer<typeof ContextoAcaoComposta>;
 export const ItemBaseAcaoComposta = z.object({
   item: InteiroSeguroPositivo,
   droga: z.string().trim().min(1).max(300),
-  doseMg: InteiroSeguroNaoNegativo.nullable(),
+  doseMg: z.number().nonnegative().max(Number.MAX_SAFE_INTEGER).nullable(),
 }).strict();
 export type ItemBaseAcaoComposta = z.infer<typeof ItemBaseAcaoComposta>;
 

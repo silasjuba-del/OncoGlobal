@@ -80,7 +80,8 @@ export function servirUiLocal(
   res.writeHead(200, {
     "Content-Type": contentType,
     "Content-Length": String(bytes.byteLength),
-    "Cache-Control": "no-store",
+    "Cache-Control": somenteDist && /-[A-Za-z0-9_-]{8,}\.(?:js|mjs|css|woff2?)$/.test(relativo)
+      ? "public, max-age=31536000, immutable" : "no-store",
     "X-Content-Type-Options": "nosniff",
   });
   res.end(req.method === "HEAD" ? undefined : bytes);

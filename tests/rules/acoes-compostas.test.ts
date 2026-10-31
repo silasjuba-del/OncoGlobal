@@ -69,7 +69,7 @@ describe("motor puro de ações compostas INOV-04a", () => {
     expect(semMotivo).toMatchObject({ estado: "PENDENTE", depois: null, diff: [] });
   });
 
-  it("não produz dose se a base selecionada é ausente, zero ou arredonda para zero", () => {
+  it("recusa base ausente/zero e preserva resultado pequeno pela D-F1-52", () => {
     const ausente = prepararAcaoComposta(null, { tipo: "MANTER_CICLO", motivo: "Sem base clínica." });
     const nula = prepararAcaoComposta(base({ itens: [{ item: 1, droga: "Fármaco alfa", doseMg: null }] }),
       { tipo: "REDUZIR_DOSE", motivo: "Motivo sintético.", reducaoPct: 20, itensSelecionados: [1] });
@@ -78,7 +78,8 @@ describe("motor puro de ações compostas INOV-04a", () => {
     const arredondadaZero = prepararAcaoComposta(base({ itens: [{ item: 1, droga: "Fármaco alfa", doseMg: 1 }] }),
       { tipo: "REDUZIR_DOSE", motivo: "Motivo sintético.", reducaoPct: 99, itensSelecionados: [1] });
 
-    for (const resultado of [ausente, nula, zero, arredondadaZero])
+    expect(arredondadaZero).toMatchObject({ estado: "PREPARADA", depois: { itens: [{ doseMg: 0.01 }] } });
+    for (const resultado of [ausente, nula, zero])
       expect(resultado).toMatchObject({ estado: "PENDENTE", depois: null, diff: [] });
   });
 

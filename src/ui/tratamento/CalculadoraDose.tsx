@@ -31,14 +31,17 @@ export function CalculadoraDose({
     <section aria-label="Calculadora de dose" className="cartao pilha">
       <p>Cálculo aritmético do percentual escolhido pelo médico. Não recomenda redução ou suspensão por toxicidade.</p>
       <p>Protocolo, fonte e cenário do ajuste: A CONFERIR. Resultado não autoriza prescrição ou administração.</p>
-      <p>Fórmula: dose administrada anterior × (100 − redução %) / 100; arredondamento final para mg inteiro.</p>
+      <p>{typeof base.referenciaMgM2 === "number" && base.referenciaMgM2 > 0
+        ? `Base desta conta: referência do protocolo ${base.referenciaMgM2} mg/m² × superfície atual. Não é a dose em mg. A dose anterior fica ao lado.`
+        : "Base desta conta: dose administrada no ciclo anterior. A superfície não é recalculada."}</p>
       <p>Dose do ciclo anterior: {doseAnterior}</p>
       <p>Origem do peso: {rotuloOrigem(base.origemPeso)}</p>
       <p>Ciclos sem peso: {saida.ciclosSemPesoConsecutivos}</p>
       {base.origemPeso === "INFORMADO_PACIENTE" ? <p>diferença incerta — confirme</p> : null}
-      <div>
+      <div className="dose-reducao" role="group" aria-label="Redução neste ciclo">
+        <p>Redução neste ciclo: {reducaoPct === 0 ? "nenhuma" : `−${reducaoPct}%`}.</p>
         {REDUCOES.map((r) => (
-          <button key={r} type="button" onClick={() => setReducaoPct(r)}>
+          <button key={r} type="button" aria-pressed={reducaoPct === r} onClick={() => setReducaoPct(reducaoPct === r ? 0 : r)}>
             −{r}
           </button>
         ))}

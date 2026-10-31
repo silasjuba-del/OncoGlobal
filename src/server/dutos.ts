@@ -1,3 +1,4 @@
+import { operarResultadosPedidos } from "./resultadosPedidos.js";
 import { ROTAS_HTTP } from "./rotas/catalogo.js";
 import { relatosInfusaoPendentes } from './relatosInfusaoCanal.js';
 import { lerEventosComIntegridade } from './leituras.js';
@@ -86,6 +87,7 @@ export function referenciaSigtapDuto(corpus: DepsDutos['corpus'], competencia: s
 /** Roteador local: a sessão já resolvida é novamente vinculada ao token e ao encontro selecionado. */
 function executarDuto(deps: DepsDutos, token: string, rota: string, entrada: unknown, sessaoResolvida: z.infer<typeof Sessao>): ResultadoDuto | null {
  if(!Rotas.has(rota))return null;
+ if(rota==='/tarefas/resultados')return operarResultadosPedidos(deps,token,entrada,sessaoResolvida);
  const parsed=(rota==='/salao/revisar-relato-canal'?RevisaoRelatoPedido:rota==='/farmacia/enviar'?RxPedido:rota==='/farmacia/conferir'?FarmaciaPedido:rota==='/salao/registrar-administracao'?AdminPedido:rota==='/apac/validar-emissao'?ApacPedido:rota==='/chat/aceitar-decisao'?ChatPedido:TarefaPedido).safeParse(entrada);
  if(!parsed.success)return negar('DUTO_PEDIDO_INVALIDO',400);
  const em=deps.agora(); if(!Instante.safeParse(em).success)return negar('RELOGIO_INVALIDO');

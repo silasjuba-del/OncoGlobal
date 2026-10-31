@@ -30,7 +30,7 @@ describe("FUGU-12 · ponta a ponta com o Modelo 10 (PT10 sintético)", () => {
     expect(kinds).toContain("UNLINKED_PATIENT");
     const progressao = r.caixaRevisao.itens.find((i) => i.kind === "INTERVAL_PROGRESSION")!;
     expect(progressao.reason).toContain("L5");
-    expect(progressao.reason).toContain("nunca metástase automática");
+    expect(progressao.reason).toContain("Não gera M1");
 
     // NÃO SEI obrigatório: histologia, TNM (estadiamento) e RE/RP/HER2 da mama
     const faltantes = r.caixaRevisao.itens.filter((i) => i.kind === "MISSING_REQUIRED")

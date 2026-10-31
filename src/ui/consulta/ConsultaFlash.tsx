@@ -49,13 +49,13 @@ export function ConsultaFlash(props: ConsultaFlashProps) {
     if (!p || propostaAplicada.current === p.solicitacaoId) return;
     propostaAplicada.current = p.solicitacaoId;
     const { solicitacaoId: _id, ...documento } = p;
-    const existente = documentos.find(d=>d.id===documento.id);
+    const existente = documentos.find(d=>d.id===documento.id||(d.tipo==='EVOLUCAO'&&documento.tipo==='EVOLUCAO'));
     if(existente && JSON.stringify(existente)!==JSON.stringify(documento)) setPropostaConflitante(documento);
     else setDocumentos(atuais => [...atuais.filter(d => d.id !== documento.id), documento]);
     props.aoConsumirDocumentoProposto?.(p.solicitacaoId);
   }, [props.documentoProposto,props.aoConsumirDocumentoProposto]);
   useEffect(() => () => pendenteAtual.current?.(false), []);
-  const documentoInvalido=!!propostaConflitante||documentos.some(d=>!d.titulo.trim()||!d.texto.trim()||d.tipo==='ENCAMINHAMENTO'&&!d.destino?.trim());
+  const documentoInvalido=!!propostaConflitante||documentos.filter(d=>d.tipo==='EVOLUCAO').length>1||documentos.some(d=>!d.titulo.trim()||!d.texto.trim()||d.tipo==='ENCAMINHAMENTO'&&!d.destino?.trim());
   const selecaoInicial = inicial ? inicial.solicitacoes : props.modeloSolicitacoes;
   const [labs, setLabs] = useState<string[]>(() => selecaoInicial?.laboratorio.filter(x => LAB.includes(x)) ?? []);
   const [rad, setRad] = useState<string[]>(() => selecaoInicial?.imagem.filter(x => RAD.includes(x)) ?? []);
@@ -134,10 +134,10 @@ export function ConsultaFlash(props: ConsultaFlashProps) {
     <header className="flash-cabecalho"><strong>Consulta Flash</strong>{props.pacienteNome && <span>{props.pacienteNome}</span>}{props.aoAbrirApac && <button type="button" onClick={props.aoAbrirApac}>Abrir APAC ↗</button>}</header>
     {propostaConflitante && <section role="alert" aria-label="Revisar substituição de documento">
       <h3>Já existe um texto revisado neste documento</h3><p>Compare antes de substituir. Nenhum texto foi sobrescrito.</p>
-      <details><summary>Comparar os textos</summary><h4>Texto atual</h4><pre style={{whiteSpace:"pre-wrap"}}>{documentos.find(d=>d.id===propostaConflitante.id)?.texto}</pre>
+      <details><summary>Comparar os textos</summary><h4>Texto atual</h4><pre style={{whiteSpace:"pre-wrap"}}>{documentos.filter(d=>d.id===propostaConflitante.id||(d.tipo==='EVOLUCAO'&&propostaConflitante.tipo==='EVOLUCAO')).map(d=>d.texto).join("\n\n")}</pre>
         <h4>Texto proposto</h4><pre style={{whiteSpace:"pre-wrap"}}>{propostaConflitante.texto}</pre></details>
       <button type="button" onClick={()=>setPropostaConflitante(null)}>Manter texto atual</button>
-      <button type="button" onClick={()=>{setDocumentos(atuais=>[...atuais.filter(d=>d.id!==propostaConflitante.id),propostaConflitante]);setPropostaConflitante(null);}}>Substituir pelo texto proposto</button>
+      <button type="button" onClick={()=>{setDocumentos(atuais=>[...atuais.filter(d=>d.id!==propostaConflitante.id&&!(d.tipo==='EVOLUCAO'&&propostaConflitante.tipo==='EVOLUCAO')),propostaConflitante]);setPropostaConflitante(null);}}>Substituir pelo texto proposto</button>
     </section>}
     <div className="flash-corpo">
       <section aria-label="Revisão rápida"><h3>DIAGNÓSTICO</h3><p className="flash-diagnostico">{presente(c.diagnostico)} · TNM {presente(c.tnm)} · Estádio {presente(c.estadio)}</p>
@@ -197,13 +197,13 @@ export function ConsultaFlash(props: ConsultaFlashProps) {
               onChange={e=>setDocumentos(atuais=>atuais.map(a=>a.id===d.id?{...a,titulo:e.target.value}:a))}/></label>
             {d.tipo==='ENCAMINHAMENTO'?<label>Destino <input aria-label={`Destino do encaminhamento ${i+1}`} placeholder="Especialidade ou serviço" value={d.destino??''} maxLength={200}
               onChange={e=>setDocumentos(atuais=>atuais.map(a=>a.id===d.id?{...a,destino:e.target.value}:a))}/></label>:null}
-            <label>Conteúdo escrito pelo médico <textarea aria-label={`Conteúdo do documento ${i+1}`} value={d.texto} maxLength={LIMITE_TEXTO_DOCUMENTO_MANUAL}
+            <label>Conteúdo escrito pelo médico <textarea aria-label={`Conteúdo do documento ${i+1}`} value={d.texto} placeholder={d.tipo==='RELATORIO_PERICIAL'?'Finalidade da perícia, atividade profissional, achados e limitações documentados, conclusão médica e prazo quando aplicável.':undefined} maxLength={LIMITE_TEXTO_DOCUMENTO_MANUAL}
               onChange={e=>setDocumentos(atuais=>atuais.map(a=>a.id===d.id?{...a,texto:e.target.value}:a))}/></label>
             <button type="button" onClick={()=>setDocumentos(atuais=>atuais.filter(a=>a.id!==d.id))}>Remover documento {i+1}</button>
           </section>)}
-          {(['ENCAMINHAMENTO','LAUDO','ORIENTACOES'] as const).map(tipo=><button type="button" key={tipo} disabled={documentos.length>=10}
-            onClick={()=>setDocumentos(atuais=>[...atuais,{id:`doc-${crypto.randomUUID()}`,tipo,titulo:tipo==='ENCAMINHAMENTO'?'Encaminhamento':tipo==='LAUDO'?'Laudo clínico':'Orientações',destino:null,texto:''}])}>
-            {tipo==='ENCAMINHAMENTO'?'Adicionar encaminhamento':tipo==='LAUDO'?'Adicionar laudo':'Adicionar orientações'}</button>)}
+          {(['ENCAMINHAMENTO','LAUDO','ORIENTACOES','RESUMO_CASO','RELATORIO_PERICIAL'] as const).map(tipo=><button type="button" key={tipo} disabled={documentos.length>=10}
+            onClick={()=>setDocumentos(atuais=>[...atuais,{id:`doc-${crypto.randomUUID()}`,tipo,titulo:tipo==='ENCAMINHAMENTO'?'Encaminhamento':tipo==='LAUDO'?'Laudo clínico':tipo==='RESUMO_CASO'?'Resumo do caso':tipo==='RELATORIO_PERICIAL'?'Relatório médico para perícia':'Orientações',destino:null,texto:''}])}>
+            {tipo==='ENCAMINHAMENTO'?'Adicionar encaminhamento':tipo==='LAUDO'?'Adicionar laudo':tipo==='RESUMO_CASO'?'Adicionar resumo do caso':tipo==='RELATORIO_PERICIAL'?'Adicionar relatório pericial':'Adicionar orientações'}</button>)}
           <p>O resumo clínico confirmado será incorporado à prévia. Conteúdo e destino dependem da decisão médica.</p>
         </fieldset>
       </details>

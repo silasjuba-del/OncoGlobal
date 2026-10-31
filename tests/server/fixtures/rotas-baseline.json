@@ -80,6 +80,10 @@
     "agenda"
   ],
   [
+    "/consulta/anamnese-guiada",
+    "anamneseGuiada"
+  ],
+  [
     "/consulta/apac",
     "apac"
   ],
@@ -214,6 +218,10 @@
   [
     "/consulta/investigacao",
     "investigacao"
+  ],
+  [
+    "/consulta/laudo-acesso",
+    "laudoAcesso"
   ],
   [
     "/consulta/leitura",
@@ -454,5 +462,9 @@
   [
     "/tarefas/receber",
     "/tarefas/receber"
+  ],
+  [
+    "/tarefas/resultados",
+    "/tarefas/resultados"
   ]
 ]

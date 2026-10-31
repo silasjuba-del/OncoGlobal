@@ -1,11 +1,42 @@
 {
-  "header": { "id": "dose", "versao": "1.1.0", "vigenteDesde": "2026-10-10",
-    "fonte": { "tipo": "DECISAO_MEDICA", "referencia": "Q29-Q32 + A2 + K-06", "trecho": null, "edicao": null }, "curador": "Dr. Silas Negrão", "aprovadoEm": "2026-10-05" },
-  "reducoesPct": [0, 20, 30, 40],
+  "header": {
+    "id": "dose",
+    "versao": "1.2.0",
+    "vigenteDesde": "2026-10-30",
+    "fonte": {
+      "tipo": "DECISAO_MEDICA",
+      "referencia": "Q29-Q32 + A2 + K-06 + D-F1-52",
+      "trecho": "Dose fixa permanece fixa. Dose calculada: fração menor que 0,5 desce; exatamente 0,5 mantém; acima de 0,5 sobe. Resultado positivo não arredonda para zero.",
+      "edicao": null
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-30"
+  },
+  "reducoesPct": [
+    0,
+    20,
+    30,
+    40
+  ],
   "base": "DOSE_ADMINISTRADA_CICLO_ANTERIOR",
-  "arredondamento": "inteiro mg, meio para cima, uma vez, após a redução",
+  "arredondamento": "D-F1-52: empate mantém, positivo não zera; uma vez após o cálculo; sem redução conserva dose anterior",
   "semPeso": "DOSE_ANTERIOR_COM_SINAL",
   "semPesoConsecutivosVermelho": 2,
   "ciclo1SemBalanca": "PESO_INFORMADO_PACIENTE",
-  "AC": { "esquemas": ["AC", "AC-T"], "ciclosComMedico": [1, 2, 4], "ciclo3SaltaSe": ["SEM_CORTE", "SEM_PENDENCIA", "PRESCRICAO_VIGENTE"] }
+  "AC": {
+    "esquemas": [
+      "AC",
+      "AC-T"
+    ],
+    "ciclosComMedico": [
+      1,
+      2,
+      4
+    ],
+    "ciclo3SaltaSe": [
+      "SEM_CORTE",
+      "SEM_PENDENCIA",
+      "PRESCRICAO_VIGENTE"
+    ]
+  }
 }

@@ -124,7 +124,8 @@ it("agenda comunica edicao pendente e salvamento sem perder campos na falha", as
   expect(salvando).toHaveBeenLastCalledWith(true);
   rejeitar(Error("REDE_INDISPONIVEL"));
   await screen.findByRole("alert");
-  expect(salvando).toHaveBeenLastCalledWith(false);
+  // O aviso renderiza antes de o efeito comunicar o fim da gravação ao pai.
+  await waitFor(() => expect(salvando).toHaveBeenLastCalledWith(false));
   expect(pendente).toHaveBeenLastCalledWith(true);
 });
 

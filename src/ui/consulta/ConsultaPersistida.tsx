@@ -1,3 +1,4 @@
+import { ResultadosPedidosRetorno } from "./TarefasRetorno.js";
 import type { DocumentoManualFlash } from "../../contracts/api/flash.js";
 import { conferirPreviewFlash } from "./previewFlash.js";
 import { useCienciaAlertas } from "./useCienciaAlertas.js";
@@ -69,7 +70,8 @@ export function ConsultaPersistida({ pedidoAberturaFlash = 0, porta, contexto, a
   const [preview, setPreview] = useState<Preview | null>(null);
   const [mensagem, setMensagem] = useState("");
   const [ocupado, setOcupado] = useState(false);
-  useEffect(()=>{aoAlterarFlashSalvando?.(ocupado);return()=>aoAlterarFlashSalvando?.(false);},[ocupado,aoAlterarFlashSalvando]);
+  const [resultadoEmCurso,setResultadoEmCurso]=useState(false);
+  useEffect(()=>{aoAlterarFlashSalvando?.(ocupado||resultadoEmCurso);return()=>aoAlterarFlashSalvando?.(false);},[ocupado,resultadoEmCurso,aoAlterarFlashSalvando]);
   const [versao, setVersao] = useState(0);
   const [tipoAcao, setTipoAcao] = useState<TipoAcaoComposta | null>(null);
   const [instanciaAcao, setInstanciaAcao] = useState(0);
@@ -136,6 +138,11 @@ export function ConsultaPersistida({ pedidoAberturaFlash = 0, porta, contexto, a
     const falhar = (erro: string) => setConsultaCarregada((anterior) => ({ ...carga, erro,
       visao: anterior?.porta === porta && anterior.contexto.patientId === patientId
         && anterior.contexto.encounterId === encounterId && anterior.contexto.tumorLotId === tumorLotId ? anterior.visao : null }));
+    const prazo = setTimeout(() => {
+      if (atual !== geracaoLeitura.current) return;
+      geracaoLeitura.current++;
+      falhar("Não foi possível carregar a consulta persistida.");
+    }, 20_000);
     void porta.carregarConsulta(patientId, tumorLotId, encounterId).then((bruto) => {
       if (atual !== geracaoLeitura.current) return;
       const r = ConsultaResposta.safeParse(bruto);
@@ -144,8 +151,9 @@ export function ConsultaPersistida({ pedidoAberturaFlash = 0, porta, contexto, a
         falhar("Consulta completa PENDENTE: contexto ou dados ainda indisponíveis."); return;
       }
       setConsultaCarregada({ ...carga, visao: r.data, erro: "" });
-    }, () => { if (atual === geracaoLeitura.current) falhar("Não foi possível carregar a consulta persistida."); });
-    return () => { geracaoLeitura.current++; };
+    }, () => { if (atual === geracaoLeitura.current) falhar("Não foi possível carregar a consulta persistida."); })
+      .finally(() => clearTimeout(prazo));
+    return () => { clearTimeout(prazo); geracaoLeitura.current++; };
   }, [porta, patientId, encounterId, tumorLotId, versao, versaoClinica]);
 
   useEffect(() => {
@@ -443,6 +451,7 @@ export function ConsultaPersistida({ pedidoAberturaFlash = 0, porta, contexto, a
       {...(aoAbrirCanal ? { aoAbrirCanal } : {})} />
     <VisaoIntegradaMinima {...(visaoPronta.retrato ? {retrato:visaoPronta.retrato}: {})}
       {...(visaoPronta.visaoIntegrada ? {visao:visaoPronta.visaoIntegrada}: {})} />
+    <ResultadosPedidosRetorno key={JSON.stringify(contexto)} porta={porta} contexto={contexto} aoOcupado={setResultadoEmCurso}/>
     <h3>Evolução revisada</h3>
     <pre style={{ whiteSpace: "pre-wrap" }}>{visaoPronta.resumoEvolucao ?? "Evolução PENDENTE de revisão."}</pre>
     {visaoPronta.retratoTransversal ? <CartaoTransversal entrada={visaoPronta.retratoTransversal} />

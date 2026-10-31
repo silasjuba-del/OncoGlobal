@@ -33,6 +33,8 @@ it("bilirrubina e eletrólito sem corte curado não ficam verdes", () => {
     { codigo: "K", estado: "PENDENTE", motivo: "K ausente para a droga em curso; corte ainda não curado" },
     { codigo: "CA", estado: "PENDENTE", motivo: "CA ausente para a droga em curso; corte ainda não curado" },
   ]);
+  expect(analitosSemCortePorDroga(["irinotecan"], new Set()).map((a) => a.codigo)).toEqual(["BILI", "AST", "ALT"]);
+  expect(analitosSemCortePorDroga(["cetuximab"], new Set()).map((a) => a.codigo)).toEqual(["MG", "K", "CA"]);
 });
 
 it("C1 de cisplatina gera a tarefa de audiometria sem bloquear", () => {

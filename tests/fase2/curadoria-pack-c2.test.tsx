@@ -6,6 +6,7 @@ import { RevisaoClinica } from '../../src/ui/consulta/RevisaoClinica.js';
 import { adaptarPackDocumental } from '../../src/kernel/corpus/tumorPacks.js';
 import { montarLoteCompleto } from '../../src/kernel/corpus/loteCompleto.js';
 import type { RevisaoClinicaResposta } from '../../src/contracts/fase2/revisaoClinica.js';
+import { montarTelaRevisao } from '../../src/modules/consulta/telaRevisao.js';
 import type { PortaConsulta } from '../../src/contracts/api/porta.js';
 
 afterEach(cleanup);
@@ -24,7 +25,8 @@ function fixture(consultavel: boolean, revisado = false) {
     ficha: [], preQt: { estado: 'PENDENTE', autorizaTratamento: false, pendencias: [] },
     packs: [{ id: pack.referencia.id, titulo: pack.titulo, estado: pack.estado, cids: pack.cids }],
     pack, loteCompleto: montarLoteCompleto(original, arquivo, hash), pendencias: [], estadosDoenca: [],
-    respostaTumoral: { criterio: 'RECIST_1_1', aplicabilidade: 'CONFERIR_CRITERIO_DO_TUMOR', series: [], patologica: [], pendencias: [] } };
+    respostaTumoral: { criterio: 'RECIST_1_1', aplicabilidade: 'CONFERIR_CRITERIO_DO_TUMOR', series: [], patologica: [], pendencias: [] },
+    tela: montarTelaRevisao({}) };
   const porta = { revisaoClinica: async () => resposta } as unknown as PortaConsulta;
   return { resposta, porta };
 }

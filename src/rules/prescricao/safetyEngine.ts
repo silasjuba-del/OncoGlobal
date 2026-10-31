@@ -75,8 +75,10 @@ function ler(m: Medida | null | undefined, cod: string, rotulo: string, hoje: st
   return { ok: true, valor: m.valor };
 }
 
+type ItemSeguranca = Omit<PrescriptionItem, "adjustmentPercent"> & { adjustmentPercent: number | null };
+
 export function safetyEngine(
-  itens: readonly PrescriptionItem[],
+  itens: readonly ItemSeguranca[],
   requisitos: readonly ValidationRequirement[],
   labs: LabsEntrada,
   limiares?: LimiaresBula | null,
@@ -111,7 +113,7 @@ export function safetyEngine(
   }
 
   // 2) requisitos declarados, só para os fármacos a que se aplicam
-  const aplicaveis = (it: PrescriptionItem): ValidationRequirement[] =>
+  const aplicaveis = (it: ItemSeguranca): ValidationRequirement[] =>
     requisitos.filter((r) => r.drug === "*" || norm(r.drug) === norm(it.drug));
   const exigencias: Array<[keyof ValidationRequirement, string, string, keyof LabsEntrada]> = [
     ["requiresWeight", "PESO", "peso", "peso"],

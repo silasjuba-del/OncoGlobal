@@ -1,0 +1,1408 @@
+{
+  "schema": "InventarioCorpusOperacional@1",
+  "data": "2026-10-31",
+  "uso": "Inventário revisável; não é aprovação médica nem substitui os registros de curadoria do banco local.",
+  "jornada": {
+    "arquivo": "corpus/jornadas/pulmao.v1.json",
+    "versao": "1.1.0",
+    "estado": "ATIVO_PARA_CONSULTA",
+    "cartoes": 44,
+    "sha256Arquivo": "3309076672165c6d08014226e02e29cc291420730c3629ede3beca53e61f23f8"
+  },
+  "fichas": [
+    {
+      "arquivo": "corpus/fichas/cabeca-e-pescoco/carboplatina-docetaxel__nao-especificado.json",
+      "id": "FICHA.cabeca-e-pescoco.carboplatina-docetaxel__nao-especificado@1.0.0",
+      "versao": "1.0.0",
+      "nome": "Carboplatina + Docetaxel",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "7faed7051f147c419babd2480aec4b1a1dde87660e9a70c590e6fee2bdcec115",
+      "sha256Arquivo": "ec399899e1b1c7a5ef0d81047a30aef8e49543773c44f80906af3f7eb48c37b7",
+      "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); ficha real P1456 (docs/referencias/modelos/05; mesma droga e dose também em pulmão); decisões D-W9-23, D-W9-34, D-W9-50."
+    },
+    {
+      "arquivo": "corpus/fichas/cabeca-e-pescoco/carboplatina-paclitaxel__nao-especificado.json",
+      "id": "FICHA.cabeca-e-pescoco.carboplatina-paclitaxel__nao-especificado@1.0.0",
+      "versao": "1.0.0",
+      "nome": "Carboplatina + Paclitaxel",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "291a9bc1c585cc4cf0c87315d2221bb6883123e2ff87cf6e0dc4210c107aa5ee",
+      "sha256Arquivo": "769bc95e554d667fc9aa988f3de7393f83db11c6d18a2b5bc0178a75311adcb0",
+      "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); decisões D-W9-23, D-W9-34, D-W9-50."
+    },
+    {
+      "arquivo": "corpus/fichas/cabeca-e-pescoco/carboplatina-paclitaxel-semanal__nao-especificado.json",
+      "id": "FICHA.cabeca-e-pescoco.carboplatina-paclitaxel-semanal__nao-especificado@1.0.0",
+      "versao": "1.0.0",
+      "nome": "Carboplatina + Paclitaxel semanal",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "a2509b0b77c50fc09c9fadbcc5ce0e86779ff956ed5c3883fde7ef56a4b29e2d",
+      "sha256Arquivo": "6f5f7877c497be4d1f115d724f6f8a79611d28c43301656feb717a7d6478af90",
+      "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); SOnHe 2024 (secundária, setor privado): Colo de útero \"Carboplatina + Paclitaxel semanal (indução)\" p. 51; uso real em cabeça e pescoço em AVALIACAO-CONSULTAS-E-CONSOLIDADO §4 (paclitaxel 80 + carboplatina AUC 1,5 em um caso); AUC 2 decidida pelo Dr. Silas (D-W9-61); o SOnHe não traz carbotaxol semanal de cabeça e pescoço: paclitaxel 80 e AUC 2 tomados do esquema semanal do SOnHe de colo (p. 51) e de mama (p. 21); decisões D-W9-23, D-W9-34, D-W9-50. D-F1-28 (diluente do paclitaxel semanal). F1-B2 (D-F1-49): dose e indicação locais preservadas, sem confirmação por protocolos mamários; monografia BC (EXT-LEG-013) sustenta somente filtro e materiais. Elegibilidade e dose nesta indicação permanecem sob curadoria específica."
+    },
+    {
+      "arquivo": "corpus/fichas/cabeca-e-pescoco/cisplatina-5-fluorouracil-pf__nao-especificado.json",
+      "id": "FICHA.cabeca-e-pescoco.cisplatina-5-fluorouracil-pf__nao-especificado@1.0.0",
+      "versao": "1.0.0",
+      "nome": "Cisplatina + 5-Fluorouracil (PF)",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "ca52bca457eacc81a4296f083035e1f998283a1c7e2a2197f31bb1ecd327b6a3",
+      "sha256Arquivo": "2a595d56747445d2201a829aafc1afc7b51deba1a9e22ad324a10dad3dabf095",
+      "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); decisões D-W9-23, D-W9-34, D-W9-50."
+    },
+    {
+      "arquivo": "corpus/fichas/cabeca-e-pescoco/cisplatina-rxt__concomitante-a-rt.json",
+      "id": "FICHA.cabeca-e-pescoco.cisplatina-rxt__concomitante-a-rt@1.0.0",
+      "versao": "1.0.0",
+      "nome": "Cisplatina + RxT",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "ca0cc1ac2e3a3bdc7c67f9b4aaaa825f20e5da278552921ef6fed73195b3c43b",
+      "sha256Arquivo": "e92c91aef02c6ce4f0238e114bfcf3cf4b4421ac7d6ef9c5fe4a3c7587276325",
+      "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); SOnHe 2024 (secundária, setor privado): Cabeça e pescoço \"CDDP q21d (+RT)\" p. 297; decisões D-W9-23, D-W9-34, D-W9-50."
+    },
+    {
+      "arquivo": "corpus/fichas/cabeca-e-pescoco/docetaxel-monoterapia__paliativo-metastatico.json",
+      "id": "FICHA.cabeca-e-pescoco.docetaxel-monoterapia__paliativo-metastatico@1.0.0",
+      "versao": "1.0.0",
+      "nome": "Docetaxel monoterapia",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "7ced8f9f57341f6dba2a03576f0fdec09a3252c6bf7b0b84142f14b286c45859",
+      "sha256Arquivo": "becdfbb4b82431baec5866a35ea9df3095b14e161a7ac1b919650e7e67e07862",
+      "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); SOnHe 2024 (secundária, setor privado): Cabeça e pescoço \"Docetaxel monoterapia\" p. 300; decisões D-W9-23, D-W9-34, D-W9-50."
+    },
+    {
+      "arquivo": "corpus/fichas/cabeca-e-pescoco/metotrexato-semanal__paliativo-metastatico.json",
+      "id": "FICHA.cabeca-e-pescoco.metotrexato-semanal__paliativo-metastatico@1.0.0",
+      "versao": "1.0.0",
+      "nome": "Metotrexato semanal",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "f5756dc4c65f905959784afb4d8e02120a9f5faca4d046f6a7bd4e714c9a5ae0",
+      "sha256Arquivo": "01c10636e689c457fc1c973858d04ebb8cbd3b62dd6101fce8dd2ca232b97628",
+      "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); SOnHe 2024 (secundária, setor privado): Cabeça e pescoço \"Metotrexato monoterapia\" p. 300; decisões D-W9-23, D-W9-34, D-W9-50."
+    },
+    {
+      "arquivo": "corpus/fichas/cec-de-pele-cutaneo/carboplatina-paclitaxel-21-21-dias-cec-de-pele__nao-especificado.json",
+      "id": "FICHA.cec-de-pele-cutaneo.carboplatina-paclitaxel-21-21-dias-cec-de-pele__nao-especificado@1.0.0",
+      "versao": "1.0.0",
+      "nome": "Carboplatina + Paclitaxel 21/21 dias (CEC de pele)",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "4365271bfdf1475e99116f6299dc5348382f9d3087a2bb6e8e830c96d6287608",
+      "sha256Arquivo": "3e241c5e2c8373d0576889bd1df0454d74d224da38feae44de1a8116e244a350",
+      "fonte": "D-F1-34 e D-F1-49. Protocolo operacional (população CECP R/M — extrapolação explícita): EXT-CNV-008 (eviQ, ID 3579 — Head and neck SCC recurrent/metastatic CARBOplatin and PACLitaxel, acesso 2026-10-14, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json). Material local: LOC-SONHE (SOnHe, Protocolos SOnHe 2024, p. 313–318 (sarcomas); p. 89–91 (vulva); p. 236–238 (CEC pele); p. 314/317 (Ewing institucional)) (p. 236–238, opções incluem cemiplimabe preferencial)."
+    },
+    {
+      "arquivo": "corpus/fichas/cec-de-pele-cutaneo/cemiplimabe__localmente-avancado-metastatico-inelegivel-a-cirurgia-rt-curativas.json",
+      "id": "FICHA.cec-de-pele-cutaneo.cemiplimabe__localmente-avancado-metastatico-inelegivel-a-cirurgia-rt-curativas@1.0.0",
+      "versao": "1.0.0",
+      "nome": "Cemiplimabe",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "20049c6267f64bbdd8021cb3b3b342d4b13082933b3d22ff1d6c86d46ae116b4",
+      "sha256Arquivo": "83b293c89bfcfa824d9e246980ebb9308a7d6a97a99b0727bc58910b7023bb3d",
+      "fonte": "D-F1-34 e D-F1-49. Protocolo operacional: EXT-CNV-001 (eviQ, ID 4151 — Cemiplimab monotherapy, v5 (review due 31/12/2028), acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json) (página viva v5, 02/09/2026; PDF capturado v1) + BC SMAVCEM (rev 08/2025) + DailyMed LIBTAYO SPL (setid 4347ae1f…). Sem pré-medicação de rotina (eviQ/BC). Limite operacional: até 35 administrações q21d (D0 a D714), derivado do teto de 2 anos do Treatment schedule eviQ 4151, reconferido 17/10/2026; não é contagem literal do estudo. Interromper antes por progressão, toxicidade ou 2 anos de calendário; atrasos exigem reavaliar o total, não estender o prazo."
+    },
+    {
+      "arquivo": "corpus/fichas/cec-de-pele-cutaneo/cisplatina-semanal-rxt-cec-de-pele__concomitante-a-rt.json",
+      "id": "FICHA.cec-de-pele-cutaneo.cisplatina-semanal-rxt-cec-de-pele__concomitante-a-rt@1.0.0",
+      "versao": "1.0.0",
+      "nome": "Cisplatina semanal + RxT (CEC de pele)",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "84abe34743527ede2b0d6772fa545a4fc3160ce3616d78bf7a0c7d96ddbe32e7",
+      "sha256Arquivo": "b5a863b2ca031a66fd96897943707731011b965a4e318db8497fef8005ef384e",
+      "fonte": "D-F1-34 e D-F1-49. Protocolo operacional (CECP localmente avançado — extrapolação explícita): EXT-CNV-016 (eviQ, ID 292 — Head and neck locally advanced ciSplatin weekly with radiation therapy, v10 (PDF v8), acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json)."
+    },
+    {
+      "arquivo": "corpus/fichas/cec-de-pele-cutaneo/pembrolizumabe__localmente-avancado-metastatico-inelegivel-a-cirurgia-rt-curativas.json",
+      "id": "FICHA.cec-de-pele-cutaneo.pembrolizumabe__localmente-avancado-metastatico-inelegivel-a-cirurgia-rt-curativas@1.0.0",
+      "versao": "1.0.0",
+      "nome": "Pembrolizumabe",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "bff89780136188aa5dff98f8da170a347d83182a833bc90e2fc84df960762628",
+      "sha256Arquivo": "7f60c946b21c60a1db44baf99f462d08424bee6c6782f8747d46bb4a8cf9697a",
+      "fonte": "D-F1-34, D-F1-49 e D-F1-50 (criação). Protocolo operacional: EXT-SARC-008 (eviQ, ID 5066 — Tumour-agnostic advanced or metastatic pembrolizumab, v1 (acesso 2026-10-14), acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json) (200 mg IV q21d OU 400 mg q42d, em 50–100 mL SF 0,9% em 30 min, até 24 meses). Indicação em CEC pela diretriz NCCN CSCC v1.2026 (pembro preferido 2A com cemiplimabe) e KEYNOTE-629 — registrados na rodada v2 (RELATORIO-F1-B2-PENDENCIAS-V2 §E3). Ressalva: EMA negativa para esta indicação."
+    },
+    {
+      "arquivo": "corpus/fichas/colo-do-utero/cisplatina-semanal-rxt__concomitante-a-rt.json",
+      "id": "FICHA.colo-do-utero.cisplatina-semanal-rxt__concomitante-a-rt@1.0.0",
+      "versao": "1.0.0",
+      "nome": "Cisplatina semanal + RxT",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "f901bf1b949f584f70a2d7f1e77b536d928afe329684365528588af2d2a3141f",
+      "sha256Arquivo": "22b98cecf4ec76375c81adc96d96cedba267b2aeafc01ae6a39b5cd5919273aa",
+      "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); SOnHe 2024 (secundária, setor privado): Colo de útero \"CDDP semanal\" p. 51; decisões D-W9-23, D-W9-34, D-W9-50."
+    },
+    {
+      "arquivo": "corpus/fichas/colo-do-utero/ifosfamida-mesna__paliativo-metastatico.json",
+      "id": "FICHA.colo-do-utero.ifosfamida-mesna__paliativo-metastatico@1.0.0",
+      "versao": "1.0.0",
+      "nome": "Ifosfamida + Mesna",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "10b7f588803f94b00b2d526080e970c0b9846a168ddf2d3a7e07d3c8aadef4ea",
+      "sha256Arquivo": "5e8999690bfd9ec85a37d9a1a133a9e55db37c9e7a48ecd31401541f6e1ba3dd",
+      "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); SOnHe 2024 (secundária, setor privado): Colo de útero \"Ifosfamida monoterapia\" p. 54; decisões D-W9-23, D-W9-34, D-W9-50."
+    },
+    {
+      "arquivo": "corpus/fichas/colon-reto/5-fu-leucovorina-mayo-clinic__nao-especificado.json",
+      "id": "FICHA.colon-reto.5-fu-leucovorina-mayo-clinic__nao-especificado@1.0.0",
+      "versao": "1.0.0",
+      "nome": "5-FU + Leucovorina (Mayo Clinic)",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "96475064cdfbe80446c329d3c3a2ba0c53677040c1571fedf0ec88d6f9315f2b",
+      "sha256Arquivo": "02e65e12ee7238d51b85d6e47f752ae05b4222c7352504d49261875f9b508a81",
+      "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); SOnHe 2024 (secundária, setor privado): Pâncreas \"5FU/LV\" p. 150; decisões D-W9-23, D-W9-34, D-W9-50."
+    },
+    {
+      "arquivo": "corpus/fichas/colon-reto/5-fu-leucovorina-roswell-park__nao-especificado.json",
+      "id": "FICHA.colon-reto.5-fu-leucovorina-roswell-park__nao-especificado@1.0.0",
+      "versao": "1.0.0",
+      "nome": "5-FU + Leucovorina (Roswell Park)",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "ea92e1b9202c27bbc00828099c0091ebe990cb940f93204be177d6d2ab82900e",
+      "sha256Arquivo": "9e2f05e2ffd5904fb02d33d0a9bf0e3bac12d9da8dce57b5d0c8c7d9f196829e",
+      "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); SOnHe 2024 (secundária, setor privado): Cólon \"Esquema Roswell-Park\" p. 101; decisões D-W9-23, D-W9-34, D-W9-50."
+    },
+    {
+      "arquivo": "corpus/fichas/colon-reto/capox-xelox__adjuvante.json",
+      "id": "FICHA.colon-reto.capox-xelox__adjuvante@1.0.0",
+      "versao": "1.0.0",
+      "nome": "CAPOX (XELOX)",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "7b62f8bfd59a5f806015a59ef288bcdb6b9e31a06b681f1a628cf0c37eb6459c",
+      "sha256Arquivo": "326525bfe9412efa82bae6ed3bdf76964a791417e7b2f147bfa324fb101aad1a",
+      "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); SOnHe 2024 (secundária, setor privado): Cólon \"Esquema CapOx\" p. 102; decisões D-W9-23, D-W9-34, D-W9-50."
+    },
+    {
+      "arquivo": "corpus/fichas/colon-reto/folfiri__paliativo-metastatico.json",
+      "id": "FICHA.colon-reto.folfiri__paliativo-metastatico@1.0.0",
+      "versao": "1.0.0",
+      "nome": "FOLFIRI",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "7dbeeefd2168316ff0f16aa5874b877c07428f096dd9fb9ec815767212454093",
+      "sha256Arquivo": "18676bfb84e6ec36a8f5cda2007ea26472576bd2cc711dc1949af551f112c789",
+      "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); SOnHe 2024 (secundária, setor privado): Cólon \"Esquema FOLFIRI\" p. 103; decisões D-W9-23, D-W9-34, D-W9-50."
+    },
+    {
+      "arquivo": "corpus/fichas/colon-reto/folfiri-bevacizumabe__paliativo-metastatico.json",
+      "id": "FICHA.colon-reto.folfiri-bevacizumabe__paliativo-metastatico@1.0.0",
+      "versao": "1.0.0",
+      "nome": "FOLFIRI + Bevacizumabe",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "5160fdcd64f46a7cc70bdea29b82f3f5992128e99b1c0b33224588f87faba5a4",
+      "sha256Arquivo": "487a0f142c23b123e6b427c29cc498b057729c237ed5b31a636865ea7bd8c6fa",
+      "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); SOnHe 2024 (secundária, setor privado): Cólon \"Esquema FOLFIRI\" p. 103; Cólon \"Bevacizumabe (isolado ou em combinação)\" p. 104; decisões D-W9-23, D-W9-34, D-W9-50."
+    },
+    {
+      "arquivo": "corpus/fichas/colon-reto/folfox__paliativo-metastatico.json",
+      "id": "FICHA.colon-reto.folfox__paliativo-metastatico@1.0.0",
+      "versao": "1.0.0",
+      "nome": "FOLFOX",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "901c3d025fe190187b74eae82234a2a9f87ac4cc61f652cf6046b2386eacb595",
+      "sha256Arquivo": "750a1d0e6ce3d76a1974718b5c8478aab09922ffc854e43c4cb2631ea970cad1",
+      "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); SOnHe 2024 (secundária, setor privado): Cólon \"Esquema FOLFOX\" p. 102; decisões D-W9-23, D-W9-34, D-W9-50."
+    },
+    {
+      "arquivo": "corpus/fichas/colon-reto/folfox4-com-port__paliativo-metastatico.json",
+      "id": "FICHA.colon-reto.folfox4-com-port__paliativo-metastatico@1.0.0",
+      "versao": "1.0.0",
+      "nome": "FOLFOX4 — com port-a-cath",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "c943b16061c85f8db19375d0606781ece293399f976e488f126b5bc4f89ea642",
+      "sha256Arquivo": "615b201f456b1e7488a360dcd05bff9dd76382a70ad239f2ec1e5ea673d4a693",
+      "fonte": "DECISAO_MEDICA do Dr. Silas em 2026-10-08, transcrita como dado de ficha: \"FOLFOX COM E SEM PORT = FOLFOX4: Oxaliplatina 85 mg/m² IV em 2h · Leucovorina 200 mg/m² IV em 2h · 5-FU 400 mg/m² em bolus, seguido de 600 mg/m² em infusão de 22h (repetido no Dia 2) · A cada 14 dias.\" Pré-QT, antiemese e hidratação copiados da ficha FOLFOX (padrão local)."
+    },
+    {
+      "arquivo": "corpus/fichas/colon-reto/folfox4-sem-port__paliativo-metastatico.json",
+      "id": "FICHA.colon-reto.folfox4-sem-port__paliativo-metastatico@1.0.0",
+      "versao": "1.0.0",
+      "nome": "FOLFOX4 — sem port-a-cath",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "9be204a084d6e079a276bbb55e12219a30f1a4d8608f83be8692a247f443d8b0",
+      "sha256Arquivo": "801e577d64008c0840af51f53bbf7a54b6ca1984aac41371f6b4cfdd7b0a2f17",
+      "fonte": "DECISAO_MEDICA do Dr. Silas em 2026-10-08, transcrita como dado de ficha: \"FOLFOX COM E SEM PORT = FOLFOX4: Oxaliplatina 85 mg/m² IV em 2h · Leucovorina 200 mg/m² IV em 2h · 5-FU 400 mg/m² em bolus, seguido de 600 mg/m² em infusão de 22h (repetido no Dia 2) · A cada 14 dias.\" Pré-QT, antiemese e hidratação copiados da ficha FOLFOX (padrão local)."
+    },
+    {
+      "arquivo": "corpus/fichas/colon-reto/folfoxiri__paliativo-metastatico.json",
+      "id": "FICHA.colon-reto.folfoxiri__paliativo-metastatico@1.0.0",
+      "versao": "1.0.0",
+      "nome": "FOLFOXIRI",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "c17ba3eee8c3398793250d0d5c5ed1f812b34f66530c4fd732bd65cc77258b98",
+      "sha256Arquivo": "856801ecd9bfce8d54b1ffbe62ac118b7d230eb49518846fdd93f581870aa47e",
+      "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); SOnHe 2024 (secundária, setor privado): Cólon \"Esquema FOLFOXIRI\" p. 103; decisões D-W9-23, D-W9-34, D-W9-50."
+    },
+    {
+      "arquivo": "corpus/fichas/colon-reto/irinotecano-monoterapia__nao-especificado.json",
+      "id": "FICHA.colon-reto.irinotecano-monoterapia__nao-especificado@1.0.0",
+      "versao": "1.0.0",
+      "nome": "Irinotecano monoterapia",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "d31f4044a85d9445ad88afaabfe0a5f0618882f5c365c5ff5217e80fab8ee1ff",
+      "sha256Arquivo": "b9897644acd0b6279eee37c09a610db7577da4609274375c27f76f6817cd35b5",
+      "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); decisões D-W9-23, D-W9-34, D-W9-50."
+    },
+    {
+      "arquivo": "corpus/fichas/esofago/5-fu-leucovorina-lv5fu2__nao-especificado.json",
+      "id": "FICHA.esofago.5-fu-leucovorina-lv5fu2__nao-especificado@1.0.0",
+      "versao": "1.0.0",
+      "nome": "5-FU + Leucovorina (LV5FU2)",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "219998904de9be07f054dd2f95008a908d4fdc5133a106a94b6b4a1553d02f1b",
+      "sha256Arquivo": "1b14435c4ed2cea949ae266f28c24ce475a53fbb3020ae463b115fcfce538acc",
+      "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); decisões D-W9-23, D-W9-34, D-W9-50."
+    },
+    {
+      "arquivo": "corpus/fichas/esofago/carboplatina-paclitaxel-21-21-dias__nao-especificado.json",
+      "id": "FICHA.esofago.carboplatina-paclitaxel-21-21-dias__nao-especificado@1.0.0",
+      "versao": "1.0.0",
+      "nome": "Carboplatina + Paclitaxel 21/21 dias",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "8af387085ea07bdc230093a2ac2444baadda9aa1be98fbab2f9802d0cb47c988",
+      "sha256Arquivo": "1d7c659f235e5e792850a681d31e64d31b623090bebb838d61744bd9e1fccafd",
+      "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); decisões D-W9-23, D-W9-34, D-W9-50."
+    },
+    {
+      "arquivo": "corpus/fichas/esofago/carboplatina-paclitaxel-semanal-cross-rxt__concomitante-a-rt.json",
+      "id": "FICHA.esofago.carboplatina-paclitaxel-semanal-cross-rxt__concomitante-a-rt@1.0.0",
+      "versao": "1.0.0",
+      "nome": "Carboplatina + Paclitaxel semanal (CROSS + RxT)",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "064db6d2440c0ae94c3c85e326daef160068f9ac3abec4a9f02741da7a0fe751",
+      "sha256Arquivo": "640640e77c7c8dad733979b7617c66bc561bb000bca82089e23fe54d06e87dcc",
+      "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); SOnHe 2024 (secundária, setor privado): Esôfago \"Esquema CROSS\" p. 119; decisões D-W9-23, D-W9-34, D-W9-50. D-F1-28 (diluente do paclitaxel semanal). F1-B2 (D-F1-49): CROSS mantém paclitaxel 50 mg/m² da ficha. Fontes mamárias 80 mg/m² não confirmam dose/indicação CROSS; monografia BC (EXT-LEG-013) sustenta somente filtro e materiais."
+    },
+    {
+      "arquivo": "corpus/fichas/esofago/docetaxel-monoterapia__nao-especificado.json",
+      "id": "FICHA.esofago.docetaxel-monoterapia__nao-especificado@1.0.0",
+      "versao": "1.0.0",
+      "nome": "Docetaxel monoterapia",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "e30a3a608c17c983e7da89c05fc7cb3d551e24ed426c9527e544313e569ec75c",
+      "sha256Arquivo": "3e5b161d5d646ced343ade0dc6f4ade7bd8d83b10e1c7540fb9d6b17aa4e9486",
+      "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); decisões D-W9-23, D-W9-34, D-W9-50."
+    },
+    {
+      "arquivo": "corpus/fichas/esofago/flot__nao-especificado.json",
+      "id": "FICHA.esofago.flot__nao-especificado@1.0.0",
+      "versao": "1.0.0",
+      "nome": "FLOT",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "d6363e75e58baa9450598fb0b11cbce4063ade9cfb513e1c132ac838a0173956",
+      "sha256Arquivo": "45dd5eb5bbfa340b71e02ac1ae25777dbdb915ba9ed2ed91fa27dc7cd2049a7c",
+      "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); decisões D-W9-23, D-W9-34, D-W9-50."
+    },
+    {
+      "arquivo": "corpus/fichas/esofago/folfox__nao-especificado.json",
+      "id": "FICHA.esofago.folfox__nao-especificado@1.0.0",
+      "versao": "1.0.0",
+      "nome": "FOLFOX",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "60cbba602c9ae8db4fdef7ed0e84af9368cfe3de9c738bb00281b828600037f6",
+      "sha256Arquivo": "be6842f86eb65096df9d6febc45c362a572ad478f17c0030edda5af4537f3278",
+      "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); decisões D-W9-23, D-W9-34, D-W9-50."
+    },
+    {
+      "arquivo": "corpus/fichas/esofago/irinotecano-monoterapia__nao-especificado.json",
+      "id": "FICHA.esofago.irinotecano-monoterapia__nao-especificado@1.0.0",
+      "versao": "1.0.0",
+      "nome": "Irinotecano monoterapia",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "a803148872ac3f67d110f1065271afcf73a3a4c948809da82615bda25abf6dfd",
+      "sha256Arquivo": "9cf967659621ba36d849585dc930af47bc9f39d3b07a09afbb0392f1dc6e3288",
+      "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); decisões D-W9-23, D-W9-34, D-W9-50."
+    },
+    {
+      "arquivo": "corpus/fichas/estomago-jeg/dcf-modificado-institucional__nao-especificado.json",
+      "id": "FICHA.estomago-jeg.dcf-modificado-institucional__nao-especificado@1.0.0",
+      "versao": "1.0.0",
+      "nome": "DCF modificado (institucional)",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "93e178e2a3c24cc264cb2ad1e03d78bd60c4701a05ace2be6275011a84c5f997",
+      "sha256Arquivo": "ba28bc5be38d1a0ba8936c2a3caceae88606d36179e39c2e3558fc1170e23976",
+      "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); SOnHe 2024 (secundária, setor privado): Estômago \"Esquema mDCF\" p. 132; decisões D-W9-23, D-W9-34, D-W9-50."
+    },
+    {
+      "arquivo": "corpus/fichas/estomago-jeg/docetaxel-monoterapia__paliativo-metastatico.json",
+      "id": "FICHA.estomago-jeg.docetaxel-monoterapia__paliativo-metastatico@1.0.0",
+      "versao": "1.0.0",
+      "nome": "Docetaxel monoterapia",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "7cc92b978ef2a04374b68c546261cb253f41277ca322e6df8e267d777b34f0aa",
+      "sha256Arquivo": "9176c287f137a2611f2bf18aba1ec93b92c15ca0dc526906747bb3386d7f303d",
+      "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); SOnHe 2024 (secundária, setor privado): Estômago \"Docetaxel monoterapia\" p. 134; decisões D-W9-23, D-W9-34, D-W9-50."
+    },
+    {
+      "arquivo": "corpus/fichas/estomago-jeg/flot__paliativo-metastatico.json",
+      "id": "FICHA.estomago-jeg.flot__paliativo-metastatico@1.0.0",
+      "versao": "1.0.0",
+      "nome": "FLOT",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "8697f712390d6825e5bfe1a29c67798f9b58d3d8494160485d9c72d0a236ec59",
+      "sha256Arquivo": "52d4ef682c6e153459a3a0273f16e14003507d9b95084d966894a3d90cf61e6a",
+      "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); SOnHe 2024 (secundária, setor privado): Estômago \"Esquema FLOT\" p. 128; decisões D-W9-23, D-W9-34, D-W9-50."
+    },
+    {
+      "arquivo": "corpus/fichas/estomago-jeg/folfiri__nao-especificado.json",
+      "id": "FICHA.estomago-jeg.folfiri__nao-especificado@1.0.0",
+      "versao": "1.0.0",
+      "nome": "FOLFIRI",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "82774b88c0a8832695e86ac722a971d7d8b8ce9cca67360205528aa138ed92e6",
+      "sha256Arquivo": "afc6a02b2ecc8f69531472e492335763a2eb0f51e9abfa459c3aa1dc497e10f7",
+      "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); decisões D-W9-23, D-W9-34, D-W9-50."
+    },
+    {
+      "arquivo": "corpus/fichas/estomago-jeg/folfox__paliativo-metastatico.json",
+      "id": "FICHA.estomago-jeg.folfox__paliativo-metastatico@1.0.0",
+      "versao": "1.0.0",
+      "nome": "FOLFOX",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "447d8003ecf1e7fb61e2da009aa861bada823e6026636d0002425fbe1aa2c97e",
+      "sha256Arquivo": "5d81758cf195521bebb08f9bbf38c64080f203eb60b203f76102cb23679c9b1a",
+      "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); SOnHe 2024 (secundária, setor privado): Estômago \"Esquema FOLFOX\" p. 131; decisões D-W9-23, D-W9-34, D-W9-50."
+    },
+    {
+      "arquivo": "corpus/fichas/estomago-jeg/irinotecano-monoterapia__paliativo-metastatico.json",
+      "id": "FICHA.estomago-jeg.irinotecano-monoterapia__paliativo-metastatico@1.0.0",
+      "versao": "1.0.0",
+      "nome": "Irinotecano monoterapia",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "5a22b8f91d26abe3dead7535df4aa49e4cd0c2974142b19eedb352f969274f9a",
+      "sha256Arquivo": "c1de00c71c3e9413e5201c1105fb19fa7e1c5aac1a24c5d01834ddcf3dc2b69f",
+      "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); SOnHe 2024 (secundária, setor privado): Estômago \"Irinotecano monoterapia\" p. 134; decisões D-W9-23, D-W9-34, D-W9-50."
+    },
+    {
+      "arquivo": "corpus/fichas/estomago-jeg/xelox-capox__adjuvante.json",
+      "id": "FICHA.estomago-jeg.xelox-capox__adjuvante@1.0.0",
+      "versao": "1.0.0",
+      "nome": "XELOX (CAPOX)",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "0f4b4ce0475f5a21c01ff0e8410f1d4b1c28d4e29a4cf5d70842650e6e3e9ea4",
+      "sha256Arquivo": "d115ec928a51eee99417cf74be7d90fb67d1f042764847394455b0144375749d",
+      "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); SOnHe 2024 (secundária, setor privado): Estômago \"Esquema CapOx\" p. 129; decisões D-W9-23, D-W9-34, D-W9-50."
+    },
+    {
+      "arquivo": "corpus/fichas/ewing/ewing-ie-ciclo-b-alternado-ao-vdc__1-linha-dose-denso-q14.json",
+      "id": "FICHA.ewing.ewing-ie-ciclo-b-alternado-ao-vdc__1-linha-dose-denso-q14@1.0.0",
+      "versao": "1.0.0",
+      "nome": "Ewing IE (ciclo B — alternado ao VDC)",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "99530e381e02e9bb540b24af35186fac64d25c04d69daafc4f493784222422fc",
+      "sha256Arquivo": "2f5cfc25f881e4931f4d067226eafaaab522b642e0c7a75fdd8994fc08bbefc9",
+      "fonte": "D-F1-34 e D-F1-49. Protocolo operacional: EXT-SARC-003 (eviQ, ID 3465 — Ewing sarcoma IE (part 2), v8 (PDF v5 conferido), acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json); EXT-SARC-001 (eviQ, ID 3464 — Ewing sarcoma VDC/IE overview, v2 (review due 31/12/2026), acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json). Elegibilidade SAALT2W <30 anos; cautelas eviQ (LVEF <45%, CrCl <60)."
+    },
+    {
+      "arquivo": "corpus/fichas/ewing/ewing-vc-fase-final-sem-doxorrubicina__1-linha-dose-denso-q14.json",
+      "id": "FICHA.ewing.ewing-vc-fase-final-sem-doxorrubicina__1-linha-dose-denso-q14@1.0.0",
+      "versao": "1.0.0",
+      "nome": "Ewing VC (fase final sem doxorrubicina)",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "c4d555913f30630e05e072702fb11f7ff017ba2a8fe8d50be0d51d776611a9c9",
+      "sha256Arquivo": "5d046a5e561f4d86c45c8c2543abeff71150ac996ec3b9eadb4d86731f94bf7c",
+      "fonte": "D-F1-34 e D-F1-49. Base do q2sem: Womer 2012 (AEWS0031) — EXT-SARC-022 (J Clin Oncol (Womer RB et al. — AEWS0031), Interval-compressed chemotherapy for Ewing sarcoma (JCO 2012;30(33):4148-54), PMID 23091096, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json) (correção: 'Whelan JCO 2018' é Euro-E.W.I.N.G. 99/BuMel, não VDC/IE dose-denso). Protocolos operacionais: EXT-SARC-001 (eviQ, ID 3464 — Ewing sarcoma VDC/IE overview, v2 (review due 31/12/2026), acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json); EXT-SARC-002 (eviQ, ID 1916 — Ewing sarcoma VDC (part 1), v8 (PDF v6 conferido), acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json); EXT-SARC-009 (BC Cancer, SAALT2W — Ewing/EFT interval-compressed (2-week) alternation com filgrastim, rev 01/08/2026, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json). Diretriz local: LOC-SBOC-OSSEOS (SBOC, Diretrizes SBOC 2026 — Sarcomas Ósseos v5 (VERSÃO PARA COLABORAÇÃO), p. 12 (MAP e AP); p. 14–15 (recidivas)). Teto cumulativo de doxorrubicina 375 mg/m² (eviQ/BC): ao atingir, omitir (BC mantém VC; eviQ substitui por dactinomicina 1,25 mg/m² D1 só se cardiotoxicidade). Terapia local após 6 ciclos (eviQ 3464). Representação por fase: até 5 administrações VDC (75 mg/m² cada); as 2 restantes estão na ficha VC sem doxorrubicina. Fonte eviQ 1916, conferida 2026-10-15: https://www.eviq.org.au/p/1916 . Histórico cumulativo e decisão individual continuam sob revisão médica. Ficha VC corresponde somente às 2 administrações finais sem antraciclina, não a um novo esquema aprovado."
+    },
+    {
+      "arquivo": "corpus/fichas/ewing/ewing-vdc-ciclo-a-alternado-ao-ie__1-linha-dose-denso-q14.json",
+      "id": "FICHA.ewing.ewing-vdc-ciclo-a-alternado-ao-ie__1-linha-dose-denso-q14@1.0.0",
+      "versao": "1.0.0",
+      "nome": "Ewing VDC (ciclo A — alternado ao IE)",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "32ddf5e11e0a2912151e059b2a9df46a5d9892412e64bddaef714dbbaaf07dc3",
+      "sha256Arquivo": "c131d68a784a0c0e5c437f9c83390cf84ba633773529bfaf7bb428e6de7f4911",
+      "fonte": "D-F1-34 e D-F1-49. Base do q2sem: Womer 2012 (AEWS0031) — EXT-SARC-022 (J Clin Oncol (Womer RB et al. — AEWS0031), Interval-compressed chemotherapy for Ewing sarcoma (JCO 2012;30(33):4148-54), PMID 23091096, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json) (correção: 'Whelan JCO 2018' é Euro-E.W.I.N.G. 99/BuMel, não VDC/IE dose-denso). Protocolos operacionais: EXT-SARC-001 (eviQ, ID 3464 — Ewing sarcoma VDC/IE overview, v2 (review due 31/12/2026), acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json); EXT-SARC-002 (eviQ, ID 1916 — Ewing sarcoma VDC (part 1), v8 (PDF v6 conferido), acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json); EXT-SARC-009 (BC Cancer, SAALT2W — Ewing/EFT interval-compressed (2-week) alternation com filgrastim, rev 01/08/2026, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json). Diretriz local: LOC-SBOC-OSSEOS (SBOC, Diretrizes SBOC 2026 — Sarcomas Ósseos v5 (VERSÃO PARA COLABORAÇÃO), p. 12 (MAP e AP); p. 14–15 (recidivas)). Teto cumulativo de doxorrubicina 375 mg/m² (eviQ/BC): ao atingir, omitir (BC mantém VC; eviQ substitui por dactinomicina 1,25 mg/m² D1 só se cardiotoxicidade). Terapia local após 6 ciclos (eviQ 3464). Representação por fase: até 5 administrações VDC (75 mg/m² cada); as 2 restantes estão na ficha VC sem doxorrubicina. Fonte eviQ 1916, conferida 2026-10-15: https://www.eviq.org.au/p/1916 . Histórico cumulativo e decisão individual continuam sob revisão médica."
+    },
+    {
+      "arquivo": "corpus/fichas/gliomas/temozolomida-monoterapia-ciclo-1__adjuvante.json",
+      "id": "FICHA.gliomas.temozolomida-monoterapia-ciclo-1__adjuvante@1.0.0",
+      "versao": "1.0.0",
+      "nome": "Temozolomida monoterapia (ciclo 1)",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "456fd2fc13b3c4a1feb8b5a1e7664c80c1effbf7cfe61e4f205364901c3b9a47",
+      "sha256Arquivo": "fc17545c0163b9cb3b571c1128aa1bad11c35f4fd91f668ab32f984ec9908c3a",
+      "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); SOnHe 2024 (secundária, setor privado): Gliomas \"Temozolamida monoterapia 200\" p. 369; decisões D-W9-23, D-W9-34, D-W9-50."
+    },
+    {
+      "arquivo": "corpus/fichas/gliomas/temozolomida-monoterapia-ciclos-2-em-diante__adjuvante.json",
+      "id": "FICHA.gliomas.temozolomida-monoterapia-ciclos-2-em-diante__adjuvante@1.0.0",
+      "versao": "1.0.0",
+      "nome": "Temozolomida monoterapia (ciclos 2 em diante)",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "4eb83b8f6abbda38e1bf4313ced31cfcd4fcfffcca34d1d2011c5f3183260990",
+      "sha256Arquivo": "5c53032483f37f17f856dcc0a6fd6f4772390df3a7121ccc6cc0971db3ff1265",
+      "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); SOnHe 2024 (secundária, setor privado): Gliomas \"Temozolamida monoterapia 200\" p. 369; decisões D-W9-23, D-W9-34, D-W9-50."
+    },
+    {
+      "arquivo": "corpus/fichas/mama/ac-ct-fase-ac__neo-adjuvante.json",
+      "id": "FICHA.mama.ac-ct-fase-ac__neo-adjuvante@1.0.0",
+      "versao": "1.0.0",
+      "nome": "AC-CT (fase AC)",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "fa10d90394b61e34891831820285fcf0ce03db40782a769d051cbad387239a36",
+      "sha256Arquivo": "5d5595645e38b4f96a141f5a12d3611b6f639719b60295bcb3ba373758e45b4f",
+      "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); SOnHe 2024 (secundária, setor privado): Mama \"Esquema AC convencional\" p. 20; decisões D-W9-23, D-W9-34, D-W9-50."
+    },
+    {
+      "arquivo": "corpus/fichas/mama/ac-ct-fase-ct-carboplatina-paclitaxel-semanal__neo-adjuvante.json",
+      "id": "FICHA.mama.ac-ct-fase-ct-carboplatina-paclitaxel-semanal__neo-adjuvante@1.0.0",
+      "versao": "1.0.0",
+      "nome": "AC-CT (fase CT — carboplatina + paclitaxel semanal)",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "a04eadecd08ac1ebdb51b9e6723b8042334ecf818950af029c8b7a4719283bc2",
+      "sha256Arquivo": "a8ce921990ec7f4acd1833ed472cbba840fc946cfc7f6b9a7afd978647d530dc",
+      "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); SOnHe 2024 (secundária, setor privado): Mama \"Esquema Carbotaxol semanal\" p. 21; decisões D-W9-23, D-W9-34, D-W9-50. D-F1-28 (diluente do paclitaxel semanal). F1-B2 (D-F1-49, 2026-10-14): fontes externas do paclitaxel semanal — EXT-LEG-008 (eviQ, ID 4103 — Breast cancer neo/adjuvant weekly paclitaxel, v3, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json); EXT-LEG-009 (eviQ, ID 42 — Breast cancer metastatic weekly paclitaxel, v10, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json); EXT-LEG-012 (BC Cancer, BRAVTW — Paclitaxel weekly (palliative), rev 2014, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json); EXT-LEG-013 (BC Cancer, Monografia — Paclitaxel, rev 30/12/2019, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json). Conferido: 80 mg/m² q7d (eviQ 4103/42; 'usual' 80 na monografia BC; BRAVTW usa 90 [variante]); infusão 60 min; filtro inline ≤0,22 µm e materiais não-PVC/DEHP-free; hipersensibilidade típica nos 10 primeiros minutos das 2 primeiras infusões. Divergência de diluente REGISTRADA e não aplicada: eviQ 250 mL × decisão local SF 0,9% 500 mL (D-F1-28, mantida). Premeds das fontes (loratadina+dexa VO no eviQ; dexa+difenidramina+famotidina IV no BC) divergem do padrão local (D-W9-34c/D-F1-48) — padrão local mantido."
+    },
+    {
+      "arquivo": "corpus/fichas/mama/ac-t-fase-ac__neo-adjuvante.json",
+      "id": "FICHA.mama.ac-t-fase-ac__neo-adjuvante@1.0.0",
+      "versao": "1.0.0",
+      "nome": "AC-T (fase AC)",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "06fab40434c4a33e4831b356dded90e7ac34c7ea74464b5c37f54256a5ffd907",
+      "sha256Arquivo": "d53e24a3027f367416c47bedc547afd89d6b0d051c0cc5f3e8d14e762f15f5a4",
+      "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); SOnHe 2024 (secundária, setor privado): Mama \"Esquema AC convencional\" p. 20; decisões D-W9-23, D-W9-34, D-W9-50."
+    },
+    {
+      "arquivo": "corpus/fichas/mama/ac-t-fase-t-paclitaxel-semanal__adjuvante.json",
+      "id": "FICHA.mama.ac-t-fase-t-paclitaxel-semanal__adjuvante@1.0.0",
+      "versao": "1.0.0",
+      "nome": "AC-T (fase T — paclitaxel semanal)",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "7d045b93127db6f750219d38970acac1b295cabf0ff7603be3dd7d022862f257",
+      "sha256Arquivo": "49f551adac4010de9bf4240fdab6d1816a41fed1346513ac343e19e654eed765",
+      "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); SOnHe 2024 (secundária, setor privado): Mama \"Esquema T (Paclitaxel semanal adjuvante)\" p. 20; ficha real P1393 (docs/referencias/modelos/05); decisões D-W9-23, D-W9-34, D-W9-50. D-F1-28 (diluente do paclitaxel semanal). F1-B2 (D-F1-49, 2026-10-14): fontes externas do paclitaxel semanal — EXT-LEG-008 (eviQ, ID 4103 — Breast cancer neo/adjuvant weekly paclitaxel, v3, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json); EXT-LEG-009 (eviQ, ID 42 — Breast cancer metastatic weekly paclitaxel, v10, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json); EXT-LEG-012 (BC Cancer, BRAVTW — Paclitaxel weekly (palliative), rev 2014, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json); EXT-LEG-013 (BC Cancer, Monografia — Paclitaxel, rev 30/12/2019, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json). Conferido: 80 mg/m² q7d (eviQ 4103/42; 'usual' 80 na monografia BC; BRAVTW usa 90 [variante]); infusão 60 min; filtro inline ≤0,22 µm e materiais não-PVC/DEHP-free; hipersensibilidade típica nos 10 primeiros minutos das 2 primeiras infusões. Divergência de diluente REGISTRADA e não aplicada: eviQ 250 mL × decisão local SF 0,9% 500 mL (D-F1-28, mantida). Premeds das fontes (loratadina+dexa VO no eviQ; dexa+difenidramina+famotidina IV no BC) divergem do padrão local (D-W9-34c/D-F1-48) — padrão local mantido."
+    },
+    {
+      "arquivo": "corpus/fichas/mama/ac-th-fase-ac__neo-adjuvante.json",
+      "id": "FICHA.mama.ac-th-fase-ac__neo-adjuvante@1.0.0",
+      "versao": "1.0.0",
+      "nome": "AC-TH (fase AC)",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "5699e8302145bebc373850672e0bc6f5f88992149599307073059de42c8ec2dd",
+      "sha256Arquivo": "2565adb093a4afa30910193407b6df8bc04f65e107ed336ab23a18d990fb6221",
+      "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); SOnHe 2024 (secundária, setor privado): Mama \"Esquema AC convencional\" p. 20; SBOC 2026 mama (docs/referencias/evidencias/SBOC-2026-MAMA-NEOADJUVANCIA-RESUMO.md): ACTH(P) como alternativa HER2+; decisões D-W9-23, D-W9-34, D-W9-50."
+    },
+    {
+      "arquivo": "corpus/fichas/mama/ac-th-fase-th-paclitaxel-semanal-trastuzumabe__neo-adjuvante.json",
+      "id": "FICHA.mama.ac-th-fase-th-paclitaxel-semanal-trastuzumabe__neo-adjuvante@1.0.0",
+      "versao": "1.0.0",
+      "nome": "AC-TH (fase TH — paclitaxel semanal + trastuzumabe)",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "67d2babd4af0cb8f57859ef69b7401bb034ffbdd19579443a05e96e5381c4683",
+      "sha256Arquivo": "8963344b3de25ff73d2df4e93d95af3a0bfac4e5728cffff3bdc62808254c95b",
+      "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); SOnHe 2024 (secundária, setor privado): Mama \"Esquema TH\" p. 21; SBOC 2026 mama (docs/referencias/evidencias/SBOC-2026-MAMA-NEOADJUVANCIA-RESUMO.md): trastuzumabe ataque 8 mg/kg, depois 6 mg/kg; decisões D-W9-23, D-W9-34, D-W9-50. D-F1-28 (diluente do paclitaxel semanal). F1-B2 (D-F1-49, 2026-10-14): fontes externas do paclitaxel semanal — EXT-LEG-008 (eviQ, ID 4103 — Breast cancer neo/adjuvant weekly paclitaxel, v3, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json); EXT-LEG-009 (eviQ, ID 42 — Breast cancer metastatic weekly paclitaxel, v10, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json); EXT-LEG-012 (BC Cancer, BRAVTW — Paclitaxel weekly (palliative), rev 2014, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json); EXT-LEG-013 (BC Cancer, Monografia — Paclitaxel, rev 30/12/2019, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json). Conferido: 80 mg/m² q7d (eviQ 4103/42; 'usual' 80 na monografia BC; BRAVTW usa 90 [variante]); infusão 60 min; filtro inline ≤0,22 µm e materiais não-PVC/DEHP-free; hipersensibilidade típica nos 10 primeiros minutos das 2 primeiras infusões. Divergência de diluente REGISTRADA e não aplicada: eviQ 250 mL × decisão local SF 0,9% 500 mL (D-F1-28, mantida). Premeds das fontes (loratadina+dexa VO no eviQ; dexa+difenidramina+famotidina IV no BC) divergem do padrão local (D-W9-34c/D-F1-48) — padrão local mantido."
+    },
+    {
+      "arquivo": "corpus/fichas/mama/capecitabina-docetaxel-xt__paliativo-metastatico.json",
+      "id": "FICHA.mama.capecitabina-docetaxel-xt__paliativo-metastatico@1.0.0",
+      "versao": "1.0.0",
+      "nome": "Capecitabina + Docetaxel (XT)",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "4502adb128ecdd1e9a1ddb705dab9fb7f3cc2fb78d2bb868bd7a5ad07e71a26b",
+      "sha256Arquivo": "03a8d5bd5bf68f4a4e6811920b105f744819eea989dfc01931814e58d12171f9",
+      "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); SOnHe 2024 (secundária, setor privado): Mama \"Docetaxel + Capecitabina\" p. 38; decisões D-W9-23, D-W9-34, D-W9-50."
+    },
+    {
+      "arquivo": "corpus/fichas/mama/capecitabina-monoterapia__paliativo-metastatico.json",
+      "id": "FICHA.mama.capecitabina-monoterapia__paliativo-metastatico@1.0.0",
+      "versao": "1.0.0",
+      "nome": "Capecitabina monoterapia",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "8fb0a1600186b5748675ad3318d41c0858cf85786364d3e1c02fa204703abf9d",
+      "sha256Arquivo": "fa9c8ca37074120b6c44da2e33862764f70caff59105521861a26d4be40dd6f0",
+      "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); SOnHe 2024 (secundária, setor privado): Mama \"Capecitabina\" p. 40; decisões D-W9-23, D-W9-34, D-W9-50."
+    },
+    {
+      "arquivo": "corpus/fichas/mama/carboplatina-gemcitabina__nao-especificado.json",
+      "id": "FICHA.mama.carboplatina-gemcitabina__nao-especificado@1.0.0",
+      "versao": "1.0.0",
+      "nome": "Carboplatina + Gemcitabina",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "bc15177c1cab16cb1160497e5c47f900f54ec0abdbd590d86256755b8bc4ef77",
+      "sha256Arquivo": "b60bdfd9ce8d5c6d87097e42b09dfa4630375063416fa5dec4aa171166b47a6f",
+      "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); decisões D-W9-23, D-W9-34, D-W9-50."
+    },
+    {
+      "arquivo": "corpus/fichas/mama/carboplatina-paclitaxel-21-21-dias__paliativo-metastatico.json",
+      "id": "FICHA.mama.carboplatina-paclitaxel-21-21-dias__paliativo-metastatico@1.0.0",
+      "versao": "1.0.0",
+      "nome": "Carboplatina + Paclitaxel 21/21 dias",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "992d3ecb2082fb21bce759d9f1aa7bb742e78d0d5c0226d7dead260f961460e5",
+      "sha256Arquivo": "d1d473b0a2286b50833ae20555f436ab16b0994e5c389bc8c23dc7f0335fcaf3",
+      "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); SOnHe 2024 (secundária, setor privado): Mama \"Carboplatina + Paclitaxel\" p. 39; decisões D-W9-23, D-W9-34, D-W9-50."
+    },
+    {
+      "arquivo": "corpus/fichas/mama/cmf__nao-especificado.json",
+      "id": "FICHA.mama.cmf__nao-especificado@1.0.0",
+      "versao": "1.0.0",
+      "nome": "CMF",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "d53970cde391ee842ae7f863380eca8ad1a72eabb2dc6004fea1542b0ab7c096",
+      "sha256Arquivo": "459e64645d10ba3c9d15fa904fccb5aa861892e6ed219da9fd96c6db89f62984",
+      "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); decisões D-W9-23, D-W9-34, D-W9-50."
+    },
+    {
+      "arquivo": "corpus/fichas/mama/docetaxel-monoterapia__paliativo-metastatico.json",
+      "id": "FICHA.mama.docetaxel-monoterapia__paliativo-metastatico@1.0.0",
+      "versao": "1.0.0",
+      "nome": "Docetaxel monoterapia",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "51f61ff41f2e807a146de352ac58f43bbf7669fa545ca6ebfc7ea0ef5a3a0851",
+      "sha256Arquivo": "0804d313304cb363dcd4dca9b6ea4a71f2c92ebfa0dcd3659546863f80776bb2",
+      "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); SOnHe 2024 (secundária, setor privado): Mama \"Docetaxel\" p. 39; decisões D-W9-23, D-W9-34, D-W9-50."
+    },
+    {
+      "arquivo": "corpus/fichas/mama/doxorrubicina-paclitaxel-at__nao-especificado.json",
+      "id": "FICHA.mama.doxorrubicina-paclitaxel-at__nao-especificado@1.0.0",
+      "versao": "1.0.0",
+      "nome": "Doxorrubicina + Paclitaxel (AT)",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "c611c5dad115d86eea1dd3becbcd63de178f068162fde6c99e939972e9c14ed7",
+      "sha256Arquivo": "ba94cee4e52fa451269ac066b2082732f76b6e82659032c7ab8f078c6376cc65",
+      "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); ficha real P1603 (docs/referencias/modelos/05); decisões D-W9-23, D-W9-34, D-W9-50."
+    },
+    {
+      "arquivo": "corpus/fichas/mama/gemcitabina__paliativo-metastatico.json",
+      "id": "FICHA.mama.gemcitabina__paliativo-metastatico@1.0.0",
+      "versao": "1.0.0",
+      "nome": "Gemcitabina",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "010c855f3486ca00a8be6b321fff5647193a7e1f43b225d3c75e07f5324800bb",
+      "sha256Arquivo": "bf69c3850562d88589abd9c23fc946adeb46f0ea47f87b0caf9eedee044743aa",
+      "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); SOnHe 2024 (secundária, setor privado): Mama \"Gencitabina\" p. 40; decisões D-W9-23, D-W9-34, D-W9-50."
+    },
+    {
+      "arquivo": "corpus/fichas/mama/paclitaxel-monoterapia-21-21-dias__nao-especificado.json",
+      "id": "FICHA.mama.paclitaxel-monoterapia-21-21-dias__nao-especificado@1.0.0",
+      "versao": "1.0.0",
+      "nome": "Paclitaxel monoterapia 21/21 dias",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "db96c0be65ead3b733d5cdada4dbb9550c83e4d2accaa0da71708819527cbabe",
+      "sha256Arquivo": "08ef1bf130b702cc27c6183814ef4af7c44844ce78ebc2cb433edab5f26d963e",
+      "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); decisões D-W9-23, D-W9-34, D-W9-50."
+    },
+    {
+      "arquivo": "corpus/fichas/mama/tc__neo-adjuvante.json",
+      "id": "FICHA.mama.tc__neo-adjuvante@1.0.0",
+      "versao": "1.0.0",
+      "nome": "TC",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "f7faa0a129517743e587419c23b298d090897fe549d2a3ac8802184199f898fd",
+      "sha256Arquivo": "0dec98d93414d85d5d905f420d3ba186fed00fedefed00e5965a5e1211d6d446",
+      "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); SOnHe 2024 (secundária, setor privado): Mama \"Esquema TC\" p. 19; decisões D-W9-23, D-W9-34, D-W9-50."
+    },
+    {
+      "arquivo": "corpus/fichas/nao-informado-ficha-institucional/cisplatina-gemcitabina-d1-e-d8__nao-especificado.json",
+      "id": "FICHA.nao-informado-ficha-institucional.cisplatina-gemcitabina-d1-e-d8__nao-especificado@1.0.0",
+      "versao": "1.0.0",
+      "nome": "Cisplatina + Gemcitabina (D1 e D8)",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "0fd66bb6457883fc005fcae167384856f497dc7c0b9e4728737bac7d737f3c0e",
+      "sha256Arquivo": "5a6951b8aa6f2bb48e9cb98f361250f4a0389ab607c28d8505b9b18cb00cac87",
+      "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); ficha real P1477 (docs/referencias/modelos/05), sem equivalente na planilha; tumor e doses não informados na ficha; decisões D-W9-23, D-W9-34, D-W9-50."
+    },
+    {
+      "arquivo": "corpus/fichas/nao-informado-ficha-institucional/folinato-5-fu-semanal-p1577__nao-especificado.json",
+      "id": "FICHA.nao-informado-ficha-institucional.folinato-5-fu-semanal-p1577__nao-especificado@1.0.0",
+      "versao": "1.0.0",
+      "nome": "Folinato + 5-FU semanal (P1577)",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "6e7491d75fa0f10850f4e074dc6fda9474e43f15e64a7cc57392f4c67ec5e96f",
+      "sha256Arquivo": "d1affb05ac5ffacb83df9343c0bd611dc7d8dea515eb1bdb7b145c96be22c627",
+      "fonte": "D-F1-26 (identidade: folinato 20 + 5-FU semanal D1–D36, sem vínculo com Roswell Park); D-F1-49; D-F1-50 (dose do 5-FU = 425 mg/m²). Fonte que casa com a identidade (2026-10-14): EXT-LEG-019 (Northern Cancer Alliance (NHS, Reino Unido), CR004 v1.4 — Weekly 5-Fluorouracil and Folinic Acid (CRP09), v1.4, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json) — folinato 20 mg/m² IV bolus + 5-FU 425 mg/m² IV bolus (reduzível a 370; 300 com RT), semanal. Variantes não adotadas: EXT-LEG-001 (eviQ (Cancer Institute NSW), ID 1494 — Colorectal cancer adjuvant QUASAR weekly fluorouracil and folinic acid, v7, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json); EXT-LEG-004 (eviQ, ID 1271 — Colorectal cancer adjuvant Roswell Park, v6, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json)."
+    },
+    {
+      "arquivo": "corpus/fichas/nao-informado-ficha-institucional/gemox__paliativo-metastatico.json",
+      "id": "FICHA.nao-informado-ficha-institucional.gemox__paliativo-metastatico@1.0.0",
+      "versao": "1.0.0",
+      "nome": "GEMOX",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "b8c303a5b9e66e2b875f362244749b994f5f85f498da56bbb8aa2fbf3232d234",
+      "sha256Arquivo": "ea99e6d2f4d362370dba63c0c62ddfb53781b4fc7a917b55e9adfc57755582e3",
+      "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); SOnHe 2024 (secundária, setor privado): Testículo \"GemOx\" p. 227; tumor da ficha não definido: o único GemOx do SOnHe está no capítulo de testículo; uso real citado em AVALIACAO-CONSULTAS-E-CONSOLIDADO §4 (oxaliplatina ~100, gemcitabina ~1000); decisões D-W9-23, D-W9-34, D-W9-50."
+    },
+    {
+      "arquivo": "corpus/fichas/nao-informado-ficha-institucional/ifosfamida-gemcitabina__nao-especificado.json",
+      "id": "FICHA.nao-informado-ficha-institucional.ifosfamida-gemcitabina__nao-especificado@1.0.0",
+      "versao": "1.0.0",
+      "nome": "Ifosfamida + Gemcitabina",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "d1c3eb7bd958b69cfc1b55a0119bf5fa79c60b476cc41ea2334cb0dec81857b0",
+      "sha256Arquivo": "93ef3fe9d694cb6dcd494ddfb7817e3e46c1163eff2702a4d8b1dcaddce3ae48",
+      "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); esquema sem fonte de dose/dias no SOnHe (só ifosfamida e gemcitabina em monoterapia); uso real citado em AVALIACAO-CONSULTAS-E-CONSOLIDADO §4 sem doses auditadas; decisões D-W9-23, D-W9-34, D-W9-50."
+    },
+    {
+      "arquivo": "corpus/fichas/nao-informado-ficha-institucional/ifosfamida-topotecana__nao-especificado.json",
+      "id": "FICHA.nao-informado-ficha-institucional.ifosfamida-topotecana__nao-especificado@1.0.0",
+      "versao": "1.0.0",
+      "nome": "Ifosfamida + Topotecana",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "eb6de9c805c908bcbcee2767ac51a89ebe3cddf7fbc150e124efa39823129840",
+      "sha256Arquivo": "ea6638d3d1c5587e7d3fed14df167bdc6364e421a07799877d1ab640e25558a9",
+      "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); esquema sem fonte de dose/dias no SOnHe (só ifosfamida e topotecano em monoterapia: colo p. 54, 1,5 mg/m² D1-D5); o topotecano de 1.200 mg/m² do capítulo de endométrio é erro do manual e não entra (D-W9-50); decisões D-W9-23, D-W9-34, D-W9-50."
+    },
+    {
+      "arquivo": "corpus/fichas/nao-informado-ficha-institucional/lv5fu2-5-fu-folinato-p1512__nao-especificado.json",
+      "id": "FICHA.nao-informado-ficha-institucional.lv5fu2-5-fu-folinato-p1512__nao-especificado@1.0.0",
+      "versao": "1.0.0",
+      "nome": "LV5FU2 — 5-FU + folinato (P1512)",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "0c1ebed337fe60f4337f7b6fd772bcc232e3f1b75446e1bd1cb99410a166f3c3",
+      "sha256Arquivo": "00a338058d39f354ad167db0673e06a6be517e2c08006e85a6876c1eeea77340",
+      "fonte": "D-F1-27 (P1512 = 5-FU + folinato em D1 E D2) e D-F1-49; D-F1-50 (mapeamento como LV5FU2 — doses da DECISAO_MEDICA 2026-10-08 do FOLFOX4 sem a oxaliplatina, corroborado pelo LV5FU2 das diretrizes digestivas na rodada v2). Contexto externo: EXT-LEG-006 (eviQ, ID 79 — Colorectal cancer adjuvant Mayo Clinic (DESCONTINUADO), v3 (descontinuado), acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json); EXT-LEG-004 (eviQ, ID 1271 — Colorectal cancer adjuvant Roswell Park, v6, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json)."
+    },
+    {
+      "arquivo": "corpus/fichas/neoplasia-trofoblastica-gestacional/dactinomicina-em-pulso-baixo-risco__baixo-risco-escore-figo-0-4-d-f1-50.json",
+      "id": "FICHA.neoplasia-trofoblastica-gestacional.dactinomicina-em-pulso-baixo-risco__baixo-risco-escore-figo-0-4-d-f1-50@1.0.0",
+      "versao": "1.0.0",
+      "nome": "Dactinomicina em pulso (baixo risco)",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "f6aeb3e814f9131321f680ca9f865c902628a34b47764f74606ca938c5a2ac1e",
+      "sha256Arquivo": "454fc3597e9b0448e77dd2d459931d1f7be613091003bb7cd0be3e1f98f49f24",
+      "fonte": "D-F1-34 e D-F1-49. Protocolo operacional: EXT-CNV-027 (eviQ, ID 1018 — GTN low risk dactinomycin, acesso 2026-10-14, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json). Diretriz: EXT-CNV-031 (J Clin Oncol (Lok C et al. — EOTTD/ESGO/ISSTD/GCIG), Practical Guidelines for the Treatment of Gestational Trophoblastic Disease (JCO 2025;43(18); DOI 10.1200/JCO-24-02326) — Tabela A5 e Figura A4, 2025 (pós-print ORBi 2268/340461), acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json)."
+    },
+    {
+      "arquivo": "corpus/fichas/neoplasia-trofoblastica-gestacional/ema-co-alto-risco__alto-risco-escore-figo-7.json",
+      "id": "FICHA.neoplasia-trofoblastica-gestacional.ema-co-alto-risco__alto-risco-escore-figo-7@1.0.0",
+      "versao": "1.0.0",
+      "nome": "EMA-CO (alto risco)",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "1937bf269d1fd2cfba4a56a491dbd2a025b2551ca11621df5a3eb9d9d8e21fb4",
+      "sha256Arquivo": "1be9535225425638981702658867475386e6cc73cf6f21b4fa41f38abaccde20",
+      "fonte": "D-F1-34 e D-F1-49. Protocolo operacional: EXT-CNV-028 (eviQ, ID 599 — GTN high risk EMA-CO, v8 (PDF v5), acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json) (D1: ETO+MTX 12 h+dactino; D2: ETO+dactino+folínico 24 h pós-MTX; D8: VCR+CTX; filgrastim D3–5 e D9–11; q14d). Diretriz: EXT-CNV-031 (J Clin Oncol (Lok C et al. — EOTTD/ESGO/ISSTD/GCIG), Practical Guidelines for the Treatment of Gestational Trophoblastic Disease (JCO 2025;43(18); DOI 10.1200/JCO-24-02326) — Tabela A5 e Figura A4, 2025 (pós-print ORBi 2268/340461), acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json)."
+    },
+    {
+      "arquivo": "corpus/fichas/neoplasia-trofoblastica-gestacional/ema-ep-resistencia-ao-ema-co__resistente-ao-ema-co.json",
+      "id": "FICHA.neoplasia-trofoblastica-gestacional.ema-ep-resistencia-ao-ema-co__resistente-ao-ema-co@1.0.0",
+      "versao": "1.0.0",
+      "nome": "EMA/EP (resistência ao EMA-CO)",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "d24a2846b906b19d4335d6fb9e7b958dde29b749e8bd149d705711a1e2ce6a26",
+      "sha256Arquivo": "b242a2ef0abf12fa757c903d87252aea7a862fa1bb3572d853006036071d9b55",
+      "fonte": "D-F1-34 e D-F1-49. Diretriz ORIGINAL verificada (duas cópias independentes: ORBi + Radboud, dupla leitura visual + camada de texto): EXT-CNV-031 (J Clin Oncol (Lok C et al. — EOTTD/ESGO/ISSTD/GCIG), Practical Guidelines for the Treatment of Gestational Trophoblastic Disease (JCO 2025;43(18); DOI 10.1200/JCO-24-02326) — Tabela A5 e Figura A4, 2025 (pós-print ORBi 2268/340461), acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json). Equivalente operacional: EXT-CNV-029 (eviQ, ID 1378 — GTN EP-EMA (equivalente operacional do EMA/EP), v8 (PDF v5), acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json) (EP-EMA: D1 EP 150/75; D8 EMA; D9 folínico; filgrastim D2–4 e D9–11)."
+    },
+    {
+      "arquivo": "corpus/fichas/neoplasia-trofoblastica-gestacional/ep-de-inducao-escore-ultra-alto__escore-alto-ultra-alto-figo-12-d-f1-50-inducao.json",
+      "id": "FICHA.neoplasia-trofoblastica-gestacional.ep-de-inducao-escore-ultra-alto__escore-alto-ultra-alto-figo-12-d-f1-50-inducao@1.0.0",
+      "versao": "1.0.0",
+      "nome": "EP de indução (escore ultra-alto)",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "573bf96f6351132b0246194b22fc333e0bcbe343e022ad0328799d7008c884ab",
+      "sha256Arquivo": "e75ad6f3842498f382b672aa5ca5c414e71c4aa0acff006687cf244d55be5093",
+      "fonte": "D-F1-34 e D-F1-49. Protocolo operacional: EXT-CNV-030 (eviQ, ID 1347 — GTN low dose EP (indução, escore alto/ultra-alto), v5 (PDF v2), acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json). Diretriz: EXT-CNV-031 (J Clin Oncol (Lok C et al. — EOTTD/ESGO/ISSTD/GCIG), Practical Guidelines for the Treatment of Gestational Trophoblastic Disease (JCO 2025;43(18); DOI 10.1200/JCO-24-02326) — Tabela A5 e Figura A4, 2025 (pós-print ORBi 2268/340461), acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json) (Low-dose EP once weekly: etoposídeo 100 + cisplatina 20, D1–D2)."
+    },
+    {
+      "arquivo": "corpus/fichas/neoplasia-trofoblastica-gestacional/metotrexato-acido-folinico-baixo-risco__baixo-risco-escore-figo-0-4-d-f1-50.json",
+      "id": "FICHA.neoplasia-trofoblastica-gestacional.metotrexato-acido-folinico-baixo-risco__baixo-risco-escore-figo-0-4-d-f1-50@1.0.0",
+      "versao": "1.0.0",
+      "nome": "Metotrexato + ácido folínico (baixo risco)",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "92aa961c5545b81c0541f980414cee8b70309f1f828e30b9134a8c7edddeb26b",
+      "sha256Arquivo": "156824ae1300b71a56ac9f64d813829558f479bba2ec87529ccbf30cb7f01d7c",
+      "fonte": "D-F1-34, D-F1-49 e D-F1-50 (corte 0–4; MTX 50 mg fixa; folínico 7,5 mg 24 h). Protocolo operacional: EXT-CNV-026 (eviQ, ID 668 — Gestational trophoblastic neoplasia low risk methotrexate and folinic acid, v4 (PDF v3), acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json). Diretriz original: EXT-CNV-031 (J Clin Oncol (Lok C et al. — EOTTD/ESGO/ISSTD/GCIG), Practical Guidelines for the Treatment of Gestational Trophoblastic Disease (JCO 2025;43(18); DOI 10.1200/JCO-24-02326) — Tabela A5 e Figura A4, 2025 (pós-print ORBi 2268/340461), acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json). Consolidação: 3 ciclos além da normalização do β-hCG."
+    },
+    {
+      "arquivo": "corpus/fichas/osteossarcoma/ap-doxorrubicina-cisplatina__nao-especificado.json",
+      "id": "FICHA.osteossarcoma.ap-doxorrubicina-cisplatina__nao-especificado@1.0.0",
+      "versao": "1.0.0",
+      "nome": "AP (doxorrubicina + cisplatina)",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "a0e5c6fefa1b0516404b5310289ca311780a79cd52a1ea10ca4ed33c30b779c9",
+      "sha256Arquivo": "d0a0a76af96a8fbcf76345a039f7d5ee0180c71e3ad07d04db62752cdb90e80b",
+      "fonte": "D-F1-34 e D-F1-49. Fonte operacional: EXT-SARC-015 (BC Cancer, SAAVAP — Advanced osteosarcoma DOXOrubicin + CISplatin, rev 01/03/2022, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json). Diretriz local: LOC-SBOC-OSSEOS (SBOC, Diretrizes SBOC 2026 — Sarcomas Ósseos v5 (VERSÃO PARA COLABORAÇÃO), p. 12 (MAP e AP); p. 14–15 (recidivas)) (AP para >25 anos — corte sem apoio externo). Nota eviQ 1901: considerar AP sem HDMTX acima de 40 anos."
+    },
+    {
+      "arquivo": "corpus/fichas/osteossarcoma/map-ciclos-1-4__nao-especificado.json",
+      "id": "FICHA.osteossarcoma.map-ciclos-1-4__nao-especificado@1.0.0",
+      "versao": "1.0.0",
+      "nome": "MAP (ciclos 1–4)",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "19e1b096704c4996714c3a95c75a896f3c56cdb4e06c3d1c33dc883723eb7020",
+      "sha256Arquivo": "7fe140e70272fad0b1b0b94f3b0e34b0146e5267f8d4b69933a91a22719ff4e0",
+      "fonte": "D-F1-34 e D-F1-49. Diretriz local: LOC-SBOC-OSSEOS (SBOC, Diretrizes SBOC 2026 — Sarcomas Ósseos v5 (VERSÃO PARA COLABORAÇÃO), p. 12 (MAP e AP); p. 14–15 (recidivas)) — MAP: cisplatina 60 D1–D2 + doxorrubicina 25 D1–D3 + MTX 12 g/m². Protocolo operacional: EXT-SARC-004 (eviQ, ID 1901 — Osteosarcoma MAP, v6 (PDF v5 conferido), acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json); EXT-SARC-014 (BC Cancer, SANAHDMAP — Osteosarcoma high-dose MTX + DOXOrubicin + CISplatin, rev 01/06/2026, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json). Estrutura de ciclos (C1–4 = 35 d com MTX D22/D29; C5–6 = 28 d sem cisplatina com MTX D15/D22) e cirurgia entre C2–C3 segundo eviQ/BC. G-CSF primário obrigatório (BC). D-F1-50: idade-limite local = 40 anos."
+    },
+    {
+      "arquivo": "corpus/fichas/osteossarcoma/map-ciclos-5-6-sem-cisplatina__nao-especificado.json",
+      "id": "FICHA.osteossarcoma.map-ciclos-5-6-sem-cisplatina__nao-especificado@1.0.0",
+      "versao": "1.0.0",
+      "nome": "MAP (ciclos 5–6 — sem cisplatina)",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "fdd84b9f2cabb73c2b98232d26fc6ace0a1b210235f65f67d3c9b8f6cf6a13a8",
+      "sha256Arquivo": "7ad0d66364a6869f34483812063004252fddce7105ed80d4a5ab03bfb99cfed8",
+      "fonte": "D-F1-34 e D-F1-49. Estrutura eviQ 1901 (C5–6 de 28 d: doxo semana 1 + MTX semanas 3–4, SEM cisplatina): EXT-SARC-004 (eviQ, ID 1901 — Osteosarcoma MAP, v6 (PDF v5 conferido), acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json); EXT-SARC-014 (BC Cancer, SANAHDMAP — Osteosarcoma high-dose MTX + DOXOrubicin + CISplatin, rev 01/06/2026, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json)."
+    },
+    {
+      "arquivo": "corpus/fichas/pancreas/folfirinox__paliativo-metastatico.json",
+      "id": "FICHA.pancreas.folfirinox__paliativo-metastatico@1.0.0",
+      "versao": "1.0.0",
+      "nome": "FOLFIRINOX",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "50f74f1f7c8b3a8a28b47c50035694447973e505761ad7d5c571761e31b4ec8e",
+      "sha256Arquivo": "568f69bf64b12f9d0fdac66e1a02a18f9e3220033a207f25e4f96a2969f54310",
+      "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); SOnHe 2024 (secundária, setor privado): Pâncreas \"Esquema mFOLFIRINOX\" p. 149; decisões D-W9-23, D-W9-34, D-W9-50."
+    },
+    {
+      "arquivo": "corpus/fichas/pancreas/gemcitabina-capecitabina__nao-especificado.json",
+      "id": "FICHA.pancreas.gemcitabina-capecitabina__nao-especificado@1.0.0",
+      "versao": "1.0.0",
+      "nome": "Gemcitabina + Capecitabina",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "00b93a773e75f1b84a76e4db0cf43e0217c9196da1b46f37abe8a0e7e8b25a28",
+      "sha256Arquivo": "94aa06b8991b6a7c4abc707d7c4d95a5f65b5cfab47dbeec39c91590eb5c48bd",
+      "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); SOnHe 2024 (secundária, setor privado): Pâncreas \"Gencitabina + Capecitabina\" p. 149; decisões D-W9-23, D-W9-34, D-W9-50."
+    },
+    {
+      "arquivo": "corpus/fichas/pancreas/gemcitabina-monoterapia__adjuvante.json",
+      "id": "FICHA.pancreas.gemcitabina-monoterapia__adjuvante@1.0.0",
+      "versao": "1.0.0",
+      "nome": "Gemcitabina monoterapia",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "1ef847ce651754e79adf27619a5be542e4b0fb51d0d40079c6559a76f25938b0",
+      "sha256Arquivo": "05357478439d0c9c2a0a39a34e9b9f090c727f7ca8d1db88a68d55baa033dfb1",
+      "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); SOnHe 2024 (secundária, setor privado): Pâncreas \"Gencitabina monoterapia\" p. 149; decisões D-W9-23, D-W9-34, D-W9-50."
+    },
+    {
+      "arquivo": "corpus/fichas/primario-desconhecido-cup/carboplatina-paclitaxel-21-21-dias__nao-especificado.json",
+      "id": "FICHA.primario-desconhecido-cup.carboplatina-paclitaxel-21-21-dias__nao-especificado@1.0.0",
+      "versao": "1.0.0",
+      "nome": "Carboplatina + Paclitaxel 21/21 dias",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "e7ebfbb919aacfe3a88bb13704188399823e3f148bea24634969c8d86814ac0d",
+      "sha256Arquivo": "e66d84298cb7f9b7718045858ee6803f59425f34feaea264565481f41bad0f54",
+      "fonte": "D-F1-36 e D-F1-49. Variante preparada: PUCAT/HeCOG. Fontes: EXT-CUP-004 (BC Cancer, PUCAT — Primary Treatment of Cancer of Unknown Primary using CARBOplatin and PACLitaxel, rev 01/12/2024, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json); EXT-CUP-006 (J Clin Oncol (HeCOG — Briasoulis E et al.), Carboplatin plus paclitaxel in unknown primary carcinoma: phase II (JCO 2000;18(17):3101-7), PMID 10963638, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json). Variante local SOnHe (AUC 5 + 175) documentada em Protocolos SOnHe 2024, p. 379 (sha256 d201d11819ac…). Diluente/materiais do paclitaxel: não-PVC/DEHP-free + filtro ≤0,22 µm (PUCAT)."
+    },
+    {
+      "arquivo": "corpus/fichas/primario-desconhecido-cup/cisplatina-5-fluorouracil-cup-escamoso__escamoso-metastatico-primario-oculto.json",
+      "id": "FICHA.primario-desconhecido-cup.cisplatina-5-fluorouracil-cup-escamoso__escamoso-metastatico-primario-oculto@1.0.0",
+      "versao": "1.0.0",
+      "nome": "Cisplatina + 5-Fluorouracil (CUP escamoso)",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "97429f4431922709720b2744455b5431bb1654258e84b23f0c7992e9744fb850",
+      "sha256Arquivo": "381660258633f5d54ec2db21ad0b8f5a662687fdbba641b1d2d147b6b5a90134",
+      "fonte": "D-F1-36 e D-F1-49. Fonte: EXT-CUP-010 (Cancer Invest (Khansur T et al.), Cisplatin and 5-fluorouracil for metastatic squamous cell carcinoma from unknown primary (1995;13(3):263-6), PMID 7743377, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json). Protocolo operacional análogo (população distinta — H&N): EXT-CUP-011 (eviQ, ID 288 — Head and neck SCC recurrent/metastatic ciSplatin and fluorouracil, v5, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json). População da variante preparada: escamosa, com investigação H&N completa negativa."
+    },
+    {
+      "arquivo": "corpus/fichas/primario-desconhecido-cup/cisplatina-docetaxel__nao-especificado.json",
+      "id": "FICHA.primario-desconhecido-cup.cisplatina-docetaxel__nao-especificado@1.0.0",
+      "versao": "1.0.0",
+      "nome": "Cisplatina + Docetaxel",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "b1501844dce34a4ecbfd0aa1f6cb3eb12f4685ba8aa57cbda8ab48dc773dda82",
+      "sha256Arquivo": "d3f556dfbd159c9b1d31e041fc6587ffe67b98bec27062fb790e743fc7d60294",
+      "fonte": "D-F1-36 (lista de esquemas de CUP) e D-F1-49. Variante preparada: Greco 2000 (75/75 q3sem, máx 8 ciclos). Fontes: EXT-CUP-001 (Annals of Oncology (Minnie Pearl Network — Greco FA et al.), Carcinoma of unknown primary site: phase II trials with docetaxel plus cisplatin or carboplatin (Ann Oncol 2000;11(2):211-5), PMID 10761758, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json); EXT-CUP-003 (Am J Clin Oncol (Mukai H et al.), Safety and efficacy of docetaxel and cisplatin in unknown primary cancer (Am J Clin Oncol 2010;33(1):32-5), PMID 19786850, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json). Antiemese/hidratação: padrão local (D-W9-23c/34c, D-F1-30)."
+    },
+    {
+      "arquivo": "corpus/fichas/primario-desconhecido-cup/docetaxel-gemcitabina__nao-especificado.json",
+      "id": "FICHA.primario-desconhecido-cup.docetaxel-gemcitabina__nao-especificado@1.0.0",
+      "versao": "1.0.0",
+      "nome": "Docetaxel + Gemcitabina",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "b0119bbee5913758879f7f3d0e0a9ec36c483c72bdc1725059baa14719713312",
+      "sha256Arquivo": "c2cbcaeb6496a897c487288a72d33de6d86bd0ffecfa9973968d7957e635d621",
+      "fonte": "D-F1-36 e D-F1-49. Fonte: EXT-CUP-009 (Cancer (Pouessel D et al.), Gemcitabine and docetaxel as front-line chemotherapy in unknown primary (Cancer 2004;100(6):1257-61), PMID 15022294, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json). Correção de citação registrada: o estudo original de CUP é Pouessel 2004, não Hainsworth."
+    },
+    {
+      "arquivo": "corpus/fichas/prostata/carboplatina-paclitaxel-21-21-dias__nao-especificado.json",
+      "id": "FICHA.prostata.carboplatina-paclitaxel-21-21-dias__nao-especificado@1.0.0",
+      "versao": "1.0.0",
+      "nome": "Carboplatina + Paclitaxel 21/21 dias",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "505b6cabea6ae7bb17e9325f9088a2233241edcee9c1920dbcd226521f4602df",
+      "sha256Arquivo": "dc0d183ede8c5db3e2798308d9ecfe67a2c8a1072c9041563883effddd078c84",
+      "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); decisões D-W9-23, D-W9-34, D-W9-50."
+    },
+    {
+      "arquivo": "corpus/fichas/prostata/carboplatina-paclitaxel-semanal__nao-especificado.json",
+      "id": "FICHA.prostata.carboplatina-paclitaxel-semanal__nao-especificado@1.0.0",
+      "versao": "1.0.0",
+      "nome": "Carboplatina + Paclitaxel semanal",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "e7d7f2c0fe998f4ac28483d62228f62d413fbb925f3918b469c86dba46a91c56",
+      "sha256Arquivo": "8acee018223f620cee63fdd07d4ff9e832ded328359351ea6df03923dda2f04c",
+      "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); decisões D-W9-23, D-W9-34, D-W9-50. D-F1-28 (diluente do paclitaxel semanal). F1-B2 (D-F1-49): dose e indicação locais preservadas, sem confirmação por protocolos mamários; monografia BC (EXT-LEG-013) sustenta somente filtro e materiais. Elegibilidade e dose nesta indicação permanecem sob curadoria específica."
+    },
+    {
+      "arquivo": "corpus/fichas/prostata/docetaxel-21-21-dias__paliativo-metastatico.json",
+      "id": "FICHA.prostata.docetaxel-21-21-dias__paliativo-metastatico@1.0.0",
+      "versao": "1.0.0",
+      "nome": "Docetaxel 21/21 dias",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "30c7e24c3593401e48abde57fb7eaa2d174655393b40a10776c4cb849ce42bf8",
+      "sha256Arquivo": "766a0c530c7aae37e2a2e7e8a8179257b27a9b1f289cb3ff4b7593d6761c17ad",
+      "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); SOnHe 2024 (secundária, setor privado): Próstata \"Docetaxel q21d\" p. 200; decisões D-W9-23, D-W9-34, D-W9-50."
+    },
+    {
+      "arquivo": "corpus/fichas/prostata/docetaxel-quinzenal__paliativo-metastatico.json",
+      "id": "FICHA.prostata.docetaxel-quinzenal__paliativo-metastatico@1.0.0",
+      "versao": "1.0.0",
+      "nome": "Docetaxel quinzenal",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "5b8327b236f67310623a1531a5e3252f17b5604c59c84b0d374a0d2f1b5db366",
+      "sha256Arquivo": "0f16bbc21faa5aac4cc4d32d2d34c2993ca88515860266e83a01686c3efcc633",
+      "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); SOnHe 2024 (secundária, setor privado): Próstata \"Docetaxel quinzenal\" p. 201; decisões D-W9-23, D-W9-34, D-W9-50."
+    },
+    {
+      "arquivo": "corpus/fichas/pulmao-cpnpc/carboplatina-docetaxel__nao-especificado.json",
+      "id": "FICHA.pulmao-cpnpc.carboplatina-docetaxel__nao-especificado@1.0.0",
+      "versao": "1.0.0",
+      "nome": "Carboplatina + Docetaxel",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "1257b5bb9566ebffd2583b32ad88c07003903632ac3061c76074fcb1c4338ac5",
+      "sha256Arquivo": "89d1f739ce09d328c06be61d98247f0e6aeec513a69449cf9bdfd7c4e28bf675",
+      "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); ficha real P1456 (docs/referencias/modelos/05; mesma droga e dose também em cabeça e pescoço); decisões D-W9-23, D-W9-34, D-W9-50."
+    },
+    {
+      "arquivo": "corpus/fichas/pulmao-cpnpc/carboplatina-gemcitabina__nao-especificado.json",
+      "id": "FICHA.pulmao-cpnpc.carboplatina-gemcitabina__nao-especificado@1.0.0",
+      "versao": "1.0.0",
+      "nome": "Carboplatina + Gemcitabina",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "f48617e8ec0dc8b75986ce7ab3dcb41bd7311c42e302eddc10b24e669c33c0c0",
+      "sha256Arquivo": "26af286322884606de59d180f252924bf830164261c010f149d40e2373d8ec47",
+      "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); SOnHe 2024 (secundária, setor privado): Pulmão CPNPC \"Carboplatina + Gencitabina\" p. 270; decisões D-W9-23, D-W9-34, D-W9-50."
+    },
+    {
+      "arquivo": "corpus/fichas/pulmao-cpnpc/carboplatina-paclitaxel-21-21-dias__paliativo-metastatico.json",
+      "id": "FICHA.pulmao-cpnpc.carboplatina-paclitaxel-21-21-dias__paliativo-metastatico@1.0.0",
+      "versao": "1.0.0",
+      "nome": "Carboplatina + Paclitaxel 21/21 dias",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "0a98c0a7dbbb91d9f2297ab8de547a0ef9d6e97432d5e5131663ada1f66bc796",
+      "sha256Arquivo": "becac5a2a28255f06715ab024629c7acda505f28aeaa5228045cb931465bfc0b",
+      "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); SOnHe 2024 (secundária, setor privado): Pulmão CPNPC \"Carboplatina + Paclitaxel q21d\" p. 269; decisões D-W9-23, D-W9-34, D-W9-50."
+    },
+    {
+      "arquivo": "corpus/fichas/pulmao-cpnpc/carboplatina-pemetrexede-nao-escamoso__paliativo-metastatico.json",
+      "id": "FICHA.pulmao-cpnpc.carboplatina-pemetrexede-nao-escamoso__paliativo-metastatico@1.0.0",
+      "versao": "1.0.0",
+      "nome": "Carboplatina + Pemetrexede (não escamoso)",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "f379f7b5695730fdf9443553da7df6b5710fe9b68a5c52f2bfd63e2a351b7900",
+      "sha256Arquivo": "4aca494bd680a34e15c1a793b4d85fb2a52140ef06f149dba57177db93f7a085",
+      "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); SOnHe 2024 (secundária, setor privado): Pulmão CPNPC \"Carboplatina + Pemetrexede\" p. 269; decisões D-W9-23, D-W9-34, D-W9-50."
+    },
+    {
+      "arquivo": "corpus/fichas/pulmao-cpnpc/cisplatina-docetaxel__nao-especificado.json",
+      "id": "FICHA.pulmao-cpnpc.cisplatina-docetaxel__nao-especificado@1.0.0",
+      "versao": "1.0.0",
+      "nome": "Cisplatina + Docetaxel",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "c2322eed7e6ebaca45e14cc72fd78eb2bc1ef5d9f145a851e67704a5d5440d65",
+      "sha256Arquivo": "14973b4feb91f1aebd4bf713f89f0f320383249876ffce203c2e1e2a378e15c8",
+      "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); ficha real P1426 (docs/referencias/modelos/05); decisões D-W9-23, D-W9-34, D-W9-50. D-F1-43 (dipirona e cimetidina como item se necessário)."
+    },
+    {
+      "arquivo": "corpus/fichas/pulmao-cpnpc/cisplatina-gemcitabina__nao-especificado.json",
+      "id": "FICHA.pulmao-cpnpc.cisplatina-gemcitabina__nao-especificado@1.0.0",
+      "versao": "1.0.0",
+      "nome": "Cisplatina + Gemcitabina",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "bb998ef2a5a8dbfdf0f5cfe9ecba78d58a949a5728a6fc40fab4a60b3b01a194",
+      "sha256Arquivo": "6c3f16bff194cff287b4477e1e0e3f9f6589136cde3598b72b1e47d27b891b14",
+      "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); SOnHe 2024 (secundária, setor privado): Pulmão CPNPC \"CDDP + Gencitabina\" p. 270; decisões D-W9-23, D-W9-34, D-W9-50."
+    },
+    {
+      "arquivo": "corpus/fichas/pulmao-cpnpc/cisplatina-paclitaxel__nao-especificado.json",
+      "id": "FICHA.pulmao-cpnpc.cisplatina-paclitaxel__nao-especificado@1.0.0",
+      "versao": "1.0.0",
+      "nome": "Cisplatina + Paclitaxel",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "88ad2f3d85438cb3298ab66039ef41f8cbb79ad86a70709b6fb08bb6bcf2e61f",
+      "sha256Arquivo": "828708d690b2e1c9fa3122d5a7c55a2ed5217c9c2652aa5c226982665e012a90",
+      "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); decisões D-W9-23, D-W9-34, D-W9-50."
+    },
+    {
+      "arquivo": "corpus/fichas/pulmao-cpnpc/cisplatina-pemetrexede-nao-escamoso__paliativo-metastatico.json",
+      "id": "FICHA.pulmao-cpnpc.cisplatina-pemetrexede-nao-escamoso__paliativo-metastatico@1.0.0",
+      "versao": "1.0.0",
+      "nome": "Cisplatina + Pemetrexede (não escamoso)",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "44043caedd31a392e4f1e90ea908269aabd16ac17c7e7453472836e7a7b15550",
+      "sha256Arquivo": "34f9845f39144338c8b0acefe7bead776b5c07e81bf7414caeea6cf7b801584a",
+      "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); SOnHe 2024 (secundária, setor privado): Pulmão CPNPC \"CDDP + Pemetrexede (paliativo)\" p. 268; decisões D-W9-23, D-W9-34, D-W9-50."
+    },
+    {
+      "arquivo": "corpus/fichas/pulmao-cpnpc/cisplatina-vinorelbina__nao-especificado.json",
+      "id": "FICHA.pulmao-cpnpc.cisplatina-vinorelbina__nao-especificado@1.0.0",
+      "versao": "1.0.0",
+      "nome": "Cisplatina + Vinorelbina",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "228292afeb3f34ee986f9036395be48aa5b9365faa0b56e18c3b640b7246b6c9",
+      "sha256Arquivo": "49be03934a13b663f07d42aaab71057cd7a47cf7eda5cdce14e7dd5edd4927ea",
+      "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); SOnHe 2024 (secundária, setor privado): Pulmão CPNPC \"CDDP + Vinorelbine VO (adjuvante)\" p. 267; decisões D-W9-23, D-W9-34, D-W9-50."
+    },
+    {
+      "arquivo": "corpus/fichas/pulmao-cpnpc/docetaxel-monoterapia__paliativo-metastatico.json",
+      "id": "FICHA.pulmao-cpnpc.docetaxel-monoterapia__paliativo-metastatico@1.0.0",
+      "versao": "1.0.0",
+      "nome": "Docetaxel monoterapia",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "caea5aa53a9f23d416fba8cee53e490742e946a580bf7abc710304752f24127a",
+      "sha256Arquivo": "4fa8683ebfb56440c6b1415e04dccf1189a8f177e4fa62d48c8098bc7e631521",
+      "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); SOnHe 2024 (secundária, setor privado): Pulmão CPNPC \"Docetaxel monoterapia\" p. 271; decisões D-W9-23, D-W9-34, D-W9-50."
+    },
+    {
+      "arquivo": "corpus/fichas/pulmao-cpnpc/gemcitabina-monoterapia__nao-especificado.json",
+      "id": "FICHA.pulmao-cpnpc.gemcitabina-monoterapia__nao-especificado@1.0.0",
+      "versao": "1.0.0",
+      "nome": "Gemcitabina monoterapia",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "0936c74d6f213448b25062dde88a5bd6271d950d8820e5560be8bf4ed1b1b20d",
+      "sha256Arquivo": "ed6bd3a24707986e69eb438eec5732527b9cef4da14dfc521390b54063c57f9f",
+      "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); decisões D-W9-23, D-W9-34, D-W9-50."
+    },
+    {
+      "arquivo": "corpus/fichas/reto/capecitabina-rxt-radiossensibilizacao__concomitante-a-rt.json",
+      "id": "FICHA.reto.capecitabina-rxt-radiossensibilizacao__concomitante-a-rt@1.0.0",
+      "versao": "1.0.0",
+      "nome": "Capecitabina + RxT (radiossensibilização)",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "6865ae60d1f422461ed8534f7e52e47a83fd3a676947d0932b7f03016c12735b",
+      "sha256Arquivo": "63d7d0b34b19ca6237dc19b220572a53b82731c91831496762af04ac06bb47db",
+      "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); SOnHe 2024 (secundária, setor privado): Reto \"Capecitabina (+ RT)\" p. 112; decisões D-W9-23, D-W9-34, D-W9-50."
+    },
+    {
+      "arquivo": "corpus/fichas/vulva/carboplatina-paclitaxel-21-21-dias-vulva__nao-especificado.json",
+      "id": "FICHA.vulva.carboplatina-paclitaxel-21-21-dias-vulva__nao-especificado@1.0.0",
+      "versao": "1.0.0",
+      "nome": "Carboplatina + Paclitaxel 21/21 dias (vulva)",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "1ef7ec5439556be9d28953f3412afda8c966ff8bda3356b151e619c95df8e5c8",
+      "sha256Arquivo": "0142ce12f83affd032942dbf77148fc9aa14c5130d6b99176b48c79852f7d78e",
+      "fonte": "D-F1-35 e D-F1-49. Protocolo BC que INCLUI vulva na elegibilidade: EXT-CNV-024 (BC Cancer, GOCXCAT — Gynecologic CARBOplatin + PACLitaxel (inclui vulva), rev 01/10/2025, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json). Material local: LOC-SONHE (SOnHe, Protocolos SOnHe 2024, p. 313–318 (sarcomas); p. 89–91 (vulva); p. 236–238 (CEC pele); p. 314/317 (Ewing institucional)) (p. 89–91, AUC 5 + 175)."
+    },
+    {
+      "arquivo": "corpus/fichas/vulva/cisplatina-semanal-rxt-vulva__concomitante-a-rt.json",
+      "id": "FICHA.vulva.cisplatina-semanal-rxt-vulva__concomitante-a-rt@1.0.0",
+      "versao": "1.0.0",
+      "nome": "Cisplatina semanal + RxT (vulva)",
+      "estadoNoArquivo": "RASCUNHO",
+      "hashConteudo": "a2893d6120d5c548e3e70fd5d6279f77745cae3ed456e183fa8ce9e8673a3d35",
+      "sha256Arquivo": "db987f03e8bbd55d5e94ac0af63286eb9734f4049ac637f8c5454702d284cd4f",
+      "fonte": "D-F1-35 e D-F1-49. Protocolo ESPECÍFICO de vulva: EXT-CNV-021 (eviQ, ID 1529 — Vulval SCC locally advanced ciPlatin (weekly) chemoradiation, v9 (11/02/2026; PDF v6 arquivado), acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json). Protocolo BC que inclui vulva: EXT-CNV-023 (BC Cancer, GOCXCRT — Gynecologic locally advanced CISplatin weekly ×5 com RT (inclui vulva), rev 01/08/2026, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json). Material local: LOC-SONHE (SOnHe, Protocolos SOnHe 2024, p. 313–318 (sarcomas); p. 89–91 (vulva); p. 236–238 (CEC pele); p. 314/317 (Ewing institucional)) (p. 89–91)."
+    }
+  ],
+  "packs": [
+    {
+      "id": "pack-adrenal-extract",
+      "titulo": "Carcinoma do córtex da adrenal (CCA), feocromocitoma e paraganglioma",
+      "estadoOperacional": "CONSULTAVEL",
+      "original": {
+        "arquivo": "corpus/6-pack-tumor/adrenal/pack-adrenal.v2.RASCUNHO.json",
+        "hash": "5db24b4371a610636aac948779cc8020c80b84a9102748087d37f87d39dc3677",
+        "estado": "RASCUNHO"
+      },
+      "hashExtracao": "ba9ff5ee0306e9bfb89021a612e05283bbebbe3f3db92b3ad36abcf7d2923543",
+      "possuiRevisaoClinica": false
+    },
+    {
+      "id": "pack-bexiga-extract",
+      "titulo": "Carcinoma urotelial de bexiga",
+      "estadoOperacional": "CONSULTAVEL",
+      "original": {
+        "arquivo": "corpus/6-pack-tumor/bexiga/pack-bexiga.v2.RASCUNHO.json",
+        "hash": "b144efbe70727197285e7f33dde41e54a77c18852e0d7cc832b43e3e26c0c516",
+        "estado": "RASCUNHO"
+      },
+      "hashExtracao": "8e5611f11a779f2ccd5f9b2eb9089f224036f279e3b753fa48fa006a365c1fd3",
+      "possuiRevisaoClinica": false
+    },
+    {
+      "id": "pack-cabeca-pescoco-extract",
+      "titulo": "Carcinoma epidermoide (CEC) de cabeça e pescoço — cavidade oral, orofaringe, laringe, hipofaringe e nasofaringe",
+      "estadoOperacional": "CONSULTAVEL",
+      "original": {
+        "arquivo": "corpus/6-pack-tumor/cabeca-pescoco/pack-cabeca-pescoco.v2.RASCUNHO.json",
+        "hash": "9f76b2b1fc53e1a6607bcc6c137283fa28c1237226f2baf769a7b89d4edbe864",
+        "estado": "RASCUNHO"
+      },
+      "hashExtracao": "c87e0ce3068bdf72300c16dceca83cad0fbc668875d621c278dad18d3f4265fa",
+      "possuiRevisaoClinica": false
+    },
+    {
+      "id": "pack-canal-anal-extract",
+      "titulo": "Carcinoma espinocelular (CEC) do canal anal",
+      "estadoOperacional": "CONSULTAVEL",
+      "original": {
+        "arquivo": "corpus/6-pack-tumor/canal-anal/pack-canal-anal.v2.RASCUNHO.json",
+        "hash": "a17f5e68d477ccd019991276dc5e507862db3a08ed159b91f06c70dd20f6d235",
+        "estado": "RASCUNHO"
+      },
+      "hashExtracao": "720f8f172bb2e0abbdcf778a9a9db6709c7f7e8aaf35b15fa594d62166c01866",
+      "possuiRevisaoClinica": false
+    },
+    {
+      "id": "pack-cec-pele-extract",
+      "titulo": "Carcinoma epidermoide cutâneo (CEC) avançado",
+      "estadoOperacional": "CONSULTAVEL",
+      "original": {
+        "arquivo": "corpus/6-pack-tumor/cec-pele/pack-cec-pele.v2.RASCUNHO.json",
+        "hash": "aabdb1bff3bf6ecf4726818b8a73a05895b7828524030337fbc92292b4657beb",
+        "estado": "RASCUNHO"
+      },
+      "hashExtracao": "801c223fad2d2b79a2c4b65f069b297a67412e377bec0306523761e007c24c52",
+      "possuiRevisaoClinica": false
+    },
+    {
+      "id": "pack-chc-extract",
+      "titulo": "Carcinoma hepatocelular (CHC)",
+      "estadoOperacional": "CONSULTAVEL",
+      "original": {
+        "arquivo": "corpus/6-pack-tumor/chc/pack-chc.v2.RASCUNHO.json",
+        "hash": "d2de7816abfd3414ad23ca345d3894b1c4762c734358cb66e1d50ad144918941",
+        "estado": "RASCUNHO"
+      },
+      "hashExtracao": "f46f3b11a46102b4fc910a5f812a5471b43a07fd8c4f31cb6aab02f49d60ec72",
+      "possuiRevisaoClinica": false
+    },
+    {
+      "id": "pack-colo-utero-extract",
+      "titulo": "Câncer do colo do útero",
+      "estadoOperacional": "CONSULTAVEL",
+      "original": {
+        "arquivo": "corpus/6-pack-tumor/colo-utero/pack-colo-utero.v2.RASCUNHO.json",
+        "hash": "2bfeba10dc138e9d3652f2aaae5075af193981d45709b6f6339dbe28cd759115",
+        "estado": "RASCUNHO"
+      },
+      "hashExtracao": "f4c03f0f267737ba0c24c9e8e9d64146d89d7de54ce35d0a9154a8971ee38a3c",
+      "possuiRevisaoClinica": false
+    },
+    {
+      "id": "pack-colorretal-extract",
+      "titulo": "Adenocarcinoma colorretal (cólon e reto, cenários separados)",
+      "estadoOperacional": "CONSULTAVEL",
+      "original": {
+        "arquivo": "corpus/6-pack-tumor/colorretal/pack-colorretal.v2.RASCUNHO.json",
+        "hash": "0881005a7edf37a05344ce46e705d67cf31949a44bad8ff1914cf5a443f5c82c",
+        "estado": "RASCUNHO"
+      },
+      "hashExtracao": "c32673395037a0a75e566348590f082f791ba3fc7f89b98fcd706046b26c27b8",
+      "possuiRevisaoClinica": false
+    },
+    {
+      "id": "pack-cup-extract",
+      "titulo": "Carcinoma de primário desconhecido (CUP)",
+      "estadoOperacional": "CONSULTAVEL",
+      "original": {
+        "arquivo": "corpus/6-pack-tumor/cup/pack-cup.v2.RASCUNHO.json",
+        "hash": "6d21af08aa7d2ac36703e3229472b758e35c037453a76af9da830248fa7bbaab",
+        "estado": "RASCUNHO"
+      },
+      "hashExtracao": "f81e668b374517833796cfc6d18e644682455f49eacd4fac11000f7aef25a8e7",
+      "possuiRevisaoClinica": false
+    },
+    {
+      "id": "pack-endometrio-extract",
+      "titulo": "Carcinoma de endométrio",
+      "estadoOperacional": "CONSULTAVEL",
+      "original": {
+        "arquivo": "corpus/6-pack-tumor/endometrio/pack-endometrio.v2.RASCUNHO.json",
+        "hash": "251952e0067b47b647cbce19f8d631a508c4deeb3278b7315b269fe1a2c54925",
+        "estado": "RASCUNHO"
+      },
+      "hashExtracao": "91297453132aaebef0a98f1f9cdbe776c60611b14144be05082c1822312746ad",
+      "possuiRevisaoClinica": false
+    },
+    {
+      "id": "pack-esofago-extract",
+      "titulo": "Câncer de esôfago e da junção esofagogástrica (JEG)",
+      "estadoOperacional": "CONSULTAVEL",
+      "original": {
+        "arquivo": "corpus/6-pack-tumor/esofago/pack-esofago.v2.RASCUNHO.json",
+        "hash": "9221f525376d59ff4274269680eae72e9a5b0c22632dcab51aabb8be179047b4",
+        "estado": "RASCUNHO"
+      },
+      "hashExtracao": "36d1da18e35866c497c9e0d2c5d9d1ecab818257f7fa5fb1137a750aabaa4c2e",
+      "possuiRevisaoClinica": false
+    },
+    {
+      "id": "pack-ewing-extract",
+      "titulo": "Sarcoma de Ewing (ósseo e extraósseo, incl. PNET)",
+      "estadoOperacional": "CONSULTAVEL",
+      "original": {
+        "arquivo": "corpus/6-pack-tumor/ewing/pack-ewing.v2.RASCUNHO.json",
+        "hash": "680d0fafed0ad97950bab42a18f443924bf9dd19452d61b48e15845dae40859e",
+        "estado": "RASCUNHO"
+      },
+      "hashExtracao": "08b594022dc8cb7b3e1c6a72a584d4a91b28c5253e34f7f71a25f4ec41aaff13",
+      "possuiRevisaoClinica": false
+    },
+    {
+      "id": "pack-gastrico-extract",
+      "titulo": "Adenocarcinoma gástrico e da transição esofagogástrica (TEG/JEG Siewert III)",
+      "estadoOperacional": "CONSULTAVEL",
+      "original": {
+        "arquivo": "corpus/6-pack-tumor/gastrico/pack-gastrico.v2.RASCUNHO.json",
+        "hash": "b3c09d9b9ae3284da47b053d8032403df2bce82cee7ea4e7c7760678035b15c7",
+        "estado": "RASCUNHO"
+      },
+      "hashExtracao": "fe6a98041c42b09cf0c2629639c2cd73afa17b7bfeb539c8a45e00a7759d820d",
+      "possuiRevisaoClinica": false
+    },
+    {
+      "id": "pack-gist-extract",
+      "titulo": "Tumor estromal gastrointestinal (GIST)",
+      "estadoOperacional": "CONSULTAVEL",
+      "original": {
+        "arquivo": "corpus/6-pack-tumor/gist/pack-gist.v2.RASCUNHO.json",
+        "hash": "b43d92b90f2311c9cf90e050de871d884ad434bd17bb6efa3238309fe1ade476",
+        "estado": "RASCUNHO"
+      },
+      "hashExtracao": "ab138eb48ce2b833bef0e4b354261bf0c85c3ac4f9e08b0ff599e2d51b4dc74c",
+      "possuiRevisaoClinica": false
+    },
+    {
+      "id": "pack-gliomas-extract",
+      "titulo": "Gliomas difusos do tipo adulto (SNC)",
+      "estadoOperacional": "CONSULTAVEL",
+      "original": {
+        "arquivo": "corpus/6-pack-tumor/gliomas/pack-gliomas.v2.RASCUNHO.json",
+        "hash": "b48c1a3f2fcdb44477c7b9dc09093264f5dd98fbafe833a0441fdd3dd8c699c8",
+        "estado": "RASCUNHO"
+      },
+      "hashExtracao": "93b3550d72310661e9f162469d85b3e59b0b48ee308a2eb5fa5e4454bbace5e7",
+      "possuiRevisaoClinica": false
+    },
+    {
+      "id": "pack-ldgcb-extract",
+      "titulo": "Linfoma difuso de grandes células B (LDGCB), adulto",
+      "estadoOperacional": "CONSULTAVEL",
+      "original": {
+        "arquivo": "corpus/6-pack-tumor/ldgcb/pack-ldgcb.v2.RASCUNHO.json",
+        "hash": "3855b1b8bf7bcbde98704c9044bf206820fb3da22e0f25f25209c5848b476789",
+        "estado": "RASCUNHO"
+      },
+      "hashExtracao": "d9d1d2f5e56990e786fcfe60b949e4817c772250ac367198ed427f6876e20443",
+      "possuiRevisaoClinica": false
+    },
+    {
+      "id": "pack-linfoma-folicular-extract",
+      "titulo": "Linfoma folicular (LF), adulto",
+      "estadoOperacional": "CONSULTAVEL",
+      "original": {
+        "arquivo": "corpus/6-pack-tumor/linfoma-folicular/pack-linfoma-folicular.v2.RASCUNHO.json",
+        "hash": "37a52d1b61e8e0da1e3e7159a8a5f9e932c47cd7593d7472f44beec40d170792",
+        "estado": "RASCUNHO"
+      },
+      "hashExtracao": "ed86a0325b82abca17623635dd9987f9f39da1c5dd5ec947d4721e11ab38ae41",
+      "possuiRevisaoClinica": false
+    },
+    {
+      "id": "pack-linfoma-hodgkin-extract",
+      "titulo": "Linfoma de Hodgkin (adulto)",
+      "estadoOperacional": "CONSULTAVEL",
+      "original": {
+        "arquivo": "corpus/6-pack-tumor/linfoma-hodgkin/pack-linfoma-hodgkin.v2.RASCUNHO.json",
+        "hash": "87aa295fb925a3669f73e3b47efab11aac4aa0954ea2fd1163273c09c9a100a9",
+        "estado": "RASCUNHO"
+      },
+      "hashExtracao": "0d3e2f194dbe54409b120a34c1f738b59fba58452707fb9bf3b2de5ee3120aeb",
+      "possuiRevisaoClinica": false
+    },
+    {
+      "id": "pack-mama-extract",
+      "titulo": "Câncer de mama (carcinoma invasivo e CDIS)",
+      "estadoOperacional": "CONSULTAVEL",
+      "original": {
+        "arquivo": "corpus/6-pack-tumor/mama/pack-mama.v2.RASCUNHO.json",
+        "hash": "746aba4fef08ee15dec3bb15d1c0e98fa7289311f8023e359e745842f22da60e",
+        "estado": "RASCUNHO"
+      },
+      "hashExtracao": "ff3770369f502e174b337f31c21aa251d98c39a13402edc7e7f9f06ff480717a",
+      "possuiRevisaoClinica": false
+    },
+    {
+      "id": "pack-melanoma-extract",
+      "titulo": "Melanoma cutâneo",
+      "estadoOperacional": "CONSULTAVEL",
+      "original": {
+        "arquivo": "corpus/6-pack-tumor/melanoma/pack-melanoma.v2.RASCUNHO.json",
+        "hash": "2c051a3ff3f54551d0c221bf001c3183daf91f7a94f48fa42cd21b9b920cde7a",
+        "estado": "RASCUNHO"
+      },
+      "hashExtracao": "95fb837891bb283c14b75b8ff7be2bc78c1685e15e1bb99fce0a691dd6e0c7c1",
+      "possuiRevisaoClinica": false
+    },
+    {
+      "id": "pack-mieloma-extract",
+      "titulo": "Mieloma múltiplo (MM)",
+      "estadoOperacional": "CONSULTAVEL",
+      "original": {
+        "arquivo": "corpus/6-pack-tumor/mieloma/pack-mieloma.v2.RASCUNHO.json",
+        "hash": "d3f4bdad50e3490aa30dfa97e1b5f7f17a7e7d85c14f9e8c581aa95d6f2e3a57",
+        "estado": "RASCUNHO"
+      },
+      "hashExtracao": "309f846324ec6b762705522ca2cd45e17055f81fda9570dfd22076f292492853",
+      "possuiRevisaoClinica": false
+    },
+    {
+      "id": "pack-neuroendocrinos-extract",
+      "titulo": "Tumores neuroendócrinos bem diferenciados gastroenteropancreáticos (GEP-NET) e pulmonares (carcinoide típico/atípico)",
+      "estadoOperacional": "CONSULTAVEL",
+      "original": {
+        "arquivo": "corpus/6-pack-tumor/neuroendocrinos/pack-neuroendocrinos.v2.RASCUNHO.json",
+        "hash": "e2d18be7beb4161d90b833fbbf84c5e4b14060fccd3538f1cf00379f898d2629",
+        "estado": "RASCUNHO"
+      },
+      "hashExtracao": "71aa13bdacd537ea32251f6a90309e4aaf3ddac42935069ab9334c74b8bd35f5",
+      "possuiRevisaoClinica": false
+    },
+    {
+      "id": "pack-ntg-extract",
+      "titulo": "Neoplasia trofoblástica gestacional (NTG)",
+      "estadoOperacional": "CONSULTAVEL",
+      "original": {
+        "arquivo": "corpus/6-pack-tumor/ntg/pack-ntg.v2.RASCUNHO.json",
+        "hash": "2b878e2f7f3133a41cdd046764e383df8d786e752a3dc202eb83036668ba899e",
+        "estado": "RASCUNHO"
+      },
+      "hashExtracao": "8746ce3ea2b04d155d654eed1b91e6d2fb645313b468cc5f9da6c8e251cf1890",
+      "possuiRevisaoClinica": false
+    },
+    {
+      "id": "pack-osteossarcoma-extract",
+      "titulo": "Osteossarcoma",
+      "estadoOperacional": "CONSULTAVEL",
+      "original": {
+        "arquivo": "corpus/6-pack-tumor/osteossarcoma/pack-osteossarcoma.v2.RASCUNHO.json",
+        "hash": "3124b10c5a2e92f1d7275526e84ab26fed170bfc094a1a085c01f8cf56cb0e9a",
+        "estado": "RASCUNHO"
+      },
+      "hashExtracao": "85606b0e058f450eaa49b710861a7abc6b87f5a15921638473c6f4ac186abebd",
+      "possuiRevisaoClinica": false
+    },
+    {
+      "id": "pack-ovario-extract",
+      "titulo": "Câncer de ovário, tuba uterina e peritônio primário — epitelial e germinativo (cenários separados)",
+      "estadoOperacional": "CONSULTAVEL",
+      "original": {
+        "arquivo": "corpus/6-pack-tumor/ovario/pack-ovario.v2.RASCUNHO.json",
+        "hash": "38f038c2229eae44fdca737edb2955f95a10948e919b89b00d7b406f4c60dc7b",
+        "estado": "RASCUNHO"
+      },
+      "hashExtracao": "7af0cff23a66ae5fb0e1a702472046ba5e99c7639622ee5e8fdb0e0e6632386a",
+      "possuiRevisaoClinica": false
+    },
+    {
+      "id": "pack-pancreas-extract",
+      "titulo": "Adenocarcinoma ductal de pâncreas",
+      "estadoOperacional": "CONSULTAVEL",
+      "original": {
+        "arquivo": "corpus/6-pack-tumor/pancreas/pack-pancreas.v2.RASCUNHO.json",
+        "hash": "be1c0f4ca0307c1e3a5ea7855734ab7c475abd04a46439f4afb9145b9a1c7cf7",
+        "estado": "RASCUNHO"
+      },
+      "hashExtracao": "ea838456846f9d87988cead3850baddd3c82e62ecd4616c5e831d77846109ba2",
+      "possuiRevisaoClinica": false
+    },
+    {
+      "id": "pack-penis-extract",
+      "titulo": "Carcinoma epidermoide (espinocelular) de pênis",
+      "estadoOperacional": "CONSULTAVEL",
+      "original": {
+        "arquivo": "corpus/6-pack-tumor/penis/pack-penis.v2.RASCUNHO.json",
+        "hash": "03c5872c28aec9dd15a0e98300c688d5e8366af72e983ae201b0d942bfd3ffdd",
+        "estado": "RASCUNHO"
+      },
+      "hashExtracao": "2d81c80e934b2a948c7a2193339cc05d6bdf6d50ab07f51951c8d8afcdb31a17",
+      "possuiRevisaoClinica": false
+    },
+    {
+      "id": "pack-prostata-extract",
+      "titulo": "Adenocarcinoma de próstata",
+      "estadoOperacional": "CONSULTAVEL",
+      "original": {
+        "arquivo": "corpus/6-pack-tumor/prostata/pack-prostata.v2.RASCUNHO.json",
+        "hash": "39e38d25ad802e53d0676906d729b1d540716afb28d644275f420571d0c7993b",
+        "estado": "RASCUNHO"
+      },
+      "hashExtracao": "8e8c5b1c5fe6d9358626953af731dd73efb1a736de387c607fbd48b038ec26ee",
+      "possuiRevisaoClinica": false
+    },
+    {
+      "id": "pack-pulmao-extract",
+      "titulo": "Câncer de pulmão (CPNPC e CPPC)",
+      "estadoOperacional": "CONSULTAVEL",
+      "original": {
+        "arquivo": "corpus/6-pack-tumor/pulmao/pack-pulmao.v2.RASCUNHO.json",
+        "hash": "b8004148140a76c508d34a77b6cb0803e6c6749d2325221367e19169ebe444aa",
+        "estado": "RASCUNHO"
+      },
+      "hashExtracao": "32f049c5324fe8abaa37b2f76f578dae2b70a8343ff6f86e763c6e9cfffeae4d",
+      "possuiRevisaoClinica": false
+    },
+    {
+      "id": "pack-rim-extract",
+      "titulo": "Carcinoma de células renais (rim)",
+      "estadoOperacional": "CONSULTAVEL",
+      "original": {
+        "arquivo": "corpus/6-pack-tumor/rim/pack-rim.v2.RASCUNHO.json",
+        "hash": "9e511c38b1f62e165335a38c70b2495990b10632fbecf9b2b89afabeab0ddafb",
+        "estado": "RASCUNHO"
+      },
+      "hashExtracao": "945a3d54dd71e0d2a05afaffc8beb4e6a97a847fc1114f17beade752e7e3f723",
+      "possuiRevisaoClinica": false
+    },
+    {
+      "id": "pack-sarcomas-extract",
+      "titulo": "Sarcomas de partes moles e sarcomas ósseos (adulto)",
+      "estadoOperacional": "CONSULTAVEL",
+      "original": {
+        "arquivo": "corpus/6-pack-tumor/sarcomas/pack-sarcomas.v2.RASCUNHO.json",
+        "hash": "03de86a869caee0226cc850f367737a9543cadfa3daaaf0349004fb0c44a9f1f",
+        "estado": "RASCUNHO"
+      },
+      "hashExtracao": "9225b3e97055731503afc4bec538af6d31f0b753b591fe14a8b2b9fbb86ecc27",
+      "possuiRevisaoClinica": false
+    },
+    {
+      "id": "pack-testiculo-extract",
+      "titulo": "Tumores de células germinativas do testículo (seminoma e não seminoma)",
+      "estadoOperacional": "CONSULTAVEL",
+      "original": {
+        "arquivo": "corpus/6-pack-tumor/testiculo/pack-testiculo.v2.RASCUNHO.json",
+        "hash": "f07ff3e08afc49a3f0d609761002e41db4315214c5c1ab19fab3f2695423a3fb",
+        "estado": "RASCUNHO"
+      },
+      "hashExtracao": "e3110b29a336cf81f18cf9b0147f795bbe86a411ecd9f633f71580b0a399faeb",
+      "possuiRevisaoClinica": false
+    },
+    {
+      "id": "pack-tireoide-extract",
+      "titulo": "Carcinoma de tireoide",
+      "estadoOperacional": "CONSULTAVEL",
+      "original": {
+        "arquivo": "corpus/6-pack-tumor/tireoide/pack-tireoide.v2.RASCUNHO.json",
+        "hash": "ea6a23ab4ef99652f28debbda59436cfda761a72e2c01f39f2cfac1beaef6af6",
+        "estado": "RASCUNHO"
+      },
+      "hashExtracao": "92e452f037cb1bcab52d64bacc8362ce4caa03e2c824d104ba92878307033783",
+      "possuiRevisaoClinica": false
+    },
+    {
+      "id": "pack-vias-biliares-extract",
+      "titulo": "Câncer de vias biliares (colangiocarcinoma intra-hepático, peri-hilar, distal; vesícula biliar; ampola de Vater)",
+      "estadoOperacional": "CONSULTAVEL",
+      "original": {
+        "arquivo": "corpus/6-pack-tumor/vias-biliares/pack-vias-biliares.v2.RASCUNHO.json",
+        "hash": "16865b3173a94bff39e4a71739908fd673cbb2eb890293175ff4977e1403d072",
+        "estado": "RASCUNHO"
+      },
+      "hashExtracao": "9fbcb4700828ae17867e8a8bd7368213b9d8f85add88d1c2f365c2a0696b4810",
+      "possuiRevisaoClinica": false
+    },
+    {
+      "id": "pack-vulva-extract",
+      "titulo": "Carcinoma epidermoide de vulva",
+      "estadoOperacional": "CONSULTAVEL",
+      "original": {
+        "arquivo": "corpus/6-pack-tumor/vulva/pack-vulva.v2.RASCUNHO.json",
+        "hash": "4fe4f41dddb0385a0f8ec8c830e0c85012156894a32da887e881ecacdf1be3ea",
+        "estado": "RASCUNHO"
+      },
+      "hashExtracao": "0b7f7afafebe521f0ac2a9ac15f4cfba535151ecf4df2930c56aa990351ed992",
+      "possuiRevisaoClinica": false
+    }
+  ],
+  "rejeitados": [],
+  "hashesDeArquivos": "SHA-256 dos blobs Git selecionados; hashConteudo é a impressão digital semântica usada pela curadoria nativa."
+}
