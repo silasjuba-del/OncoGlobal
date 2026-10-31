@@ -171,10 +171,13 @@ export async function executar() {
         if (!(await usar.count())) continue;
         await usar.click(); usados.push(titulo);
         await page.getByRole('region', { name: 'Conteúdo da Consulta Flash', exact: true }).waitFor();
+        // A região já pode estar aberta: aguardar a adoção deste documento, não somente o contêiner.
+        await page.waitForFunction(t => [...document.querySelectorAll('input[aria-label^="Título do documento"]')].some(el => el.value === t), titulo);
         // Fluxo do médico: salvar o rascunho do Flash antes de trazer o próximo documento.
         const destinosAbertos = page.getByRole('textbox', { name: /^Destino do encaminhamento/ });
         const conteudos = page.getByRole('textbox', { name: /^Conteúdo do documento/ });
         if (!(await conteudos.count())) await page.getByText('Encaminhamentos, laudos e orientações', { exact: true }).click();
+        assert.equal(await conteudos.count(), usados.length, 'cada documento adotado deve estar no editor antes de salvar');
         for (let i = 0; i < await destinosAbertos.count(); i++) if (!(await destinosAbertos.nth(i).inputValue())) await destinosAbertos.nth(i).fill('Pneumologia SINTETICA');
         const salvo = page.waitForResponse(x => x.url().endsWith('/consulta/flash/rascunho'));
         await page.getByRole('button', { name: 'SALVAR RASCUNHO', exact: true }).click();

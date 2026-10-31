@@ -1,3 +1,4 @@
+import { Tarefa } from "../../../src/contracts/f1/tarefa.js";
 import { mkdtempSync, readFileSync, realpathSync, rmSync, statSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { basename, dirname, join, sep } from "node:path";
@@ -99,8 +100,21 @@ it("S9 HTTP/SQLite: reabrir arquivo e nova sessão preserva assinatura históric
     })).toMatchObject({ status: 200, body: { codigo: "GRAVADA" } });
 
     const historico = listarEventos(runtime.db, contexto.patientId);
-    expect(historico).toHaveLength(4);
-    expect(historico.every(e => e.tipo === "DOCUMENTO" && e.revisao === "ASSINADO")).toBe(true);
+    expect(historico).toHaveLength(6); // quatro documentos + dois acompanhamentos de pedidos assinados
+    const assinados = historico.filter(e => e.tipo === "DOCUMENTO");
+    expect(assinados).toHaveLength(4);
+    expect(assinados.every(e => e.revisao === "ASSINADO")).toBe(true);
+    const eventosTarefa = historico.filter(e => e.tipo === "Tarefa");
+    expect(eventosTarefa).toHaveLength(2);
+    expect(eventosTarefa.every(e => e.revisao === "CONFIRMADO")).toBe(true);
+    const acompanhamentos = eventosTarefa.map(e => Tarefa.parse(dadosDoEvento(e)));
+    const refs = documentos.filter(d => d.tipoDocumento === "PEDIDO_EXAME").map(d => ({documentId:d.documentId,documentVersion:d.documentVersion}));
+    expect(acompanhamentos.flatMap(t => t.pedidoRefs).sort((a,b)=>a.documentId.localeCompare(b.documentId)))
+      .toEqual(refs.sort((a,b)=>a.documentId.localeCompare(b.documentId)));
+    for (const t of acompanhamentos) {
+      expect(t).toMatchObject({...contexto,estado:"CONFIRMADA",retornoRef:null,dataAlvo:null,acompanhamentoPedidos:[]});
+      expect(assinados.some(e => e.eventId === t.geradaPorEventoId)).toBe(true);
+    }
     expect(new Set(historico.map(e => e.encounterId))).toEqual(new Set([contexto.encounterId]));
     const documentoHistorico = historico.find(e =>
       (dadosDoEvento(e)?.data as { documentId?: unknown } | undefined)?.documentId === receita.documentId)!;
