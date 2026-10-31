@@ -5,8 +5,18 @@ import {expect,it} from 'vitest';
 import {carregarPacksTumor} from '../../src/kernel/corpus/tumorPacks.js';
 import {montarLoteCompleto} from '../../src/kernel/corpus/loteCompleto.js';
 import {SETORES_PACK} from '../../src/contracts/fase2/loteCompleto.js';
+import {ehMetadadoTecnico} from '../../src/contracts/metadadosTecnicos.js';
 const raiz=resolve('.'),catalogo=carregarPacksTumor(raiz);
 const arquivos=readdirSync(join(raiz,'corpus/6-pack-tumor'),{recursive:true}).filter((f):f is string=>typeof f==='string'&&/pack-.+\.v2\..+\.json$/.test(f));
+it('índices clínicos e Hashimoto não são confundidos com metadados técnicos',()=>{
+ for(const k of ['indiceMitotico','indiceProliferacao','hashimoto'])expect(ehMetadadoTecnico(k)).toBe(false);
+ for(const k of ['auditoria','reconciliacao','indice_itens_legados','hashSha256'])expect(ehMetadadoTecnico(k)).toBe(true);
+ const original={header:{id:'sintetico',versao:'1'},identidade:{tumor:'Sintético',cid10:[]},indiceMitotico:{valor:2},auditoria:{estado:'rascunho'}};
+ const l=montarLoteCompleto(original,'sintetico.json','a'.repeat(64));
+ expect(l.setores.find(s=>s.id==='complementos')?.itens.some(i=>i.localizador==='/indiceMitotico')).toBe(true);
+ expect(l.setores.find(s=>s.id==='fontes')?.itens.some(i=>i.localizador==='/auditoria')).toBe(true);
+ expect(l.conteudoIntegral).toEqual(original);
+});
 it('todos os packs originais têm lote completo, sem rejeição nem promoção clínica',()=>{
  expect(arquivos.length).toBeGreaterThanOrEqual(35);expect(catalogo.rejeitados).toEqual([]);
  expect(Object.keys(catalogo.lotes??{})).toHaveLength(arquivos.length);

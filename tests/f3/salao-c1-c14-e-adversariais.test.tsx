@@ -175,7 +175,7 @@ describe("FASE F3 · Salão de Quimioterapia (S-F3-01 a S-F3-04 e casos clínico
     );
   });
 
-  it("S-F3-02 & C4–C5, C7 · fila ordenada (ECOG4 antes de ECOG3 em cadeira), frente exige zero corte/pendência, eventos de alergia/vômito, peso (-5,0 kg passa; -5,1 kg -> recomendações pendentes + consulta) e liberação médica justificada", () => {
+  it("S-F3-02 & C4–C5, C7 · fila ordenada (ECOG4 antes de ECOG3 em cadeira), frente exige zero corte/pendência, eventos de alergia/vômito, peso (abaixo de 5% passa; a partir de 5% -> recomendações pendentes + consulta) e liberação médica justificada", () => {
     const { db } = ledger();
     const acesso = sessao();
 
@@ -242,7 +242,7 @@ describe("FASE F3 · Salão de Quimioterapia (S-F3-01 a S-F3-04 e casos clínico
       },
     });
 
-    // C4: perda de exatamente 5,0 kg em 60 dias passa (VERDE)
+    // C4: perda de 3 kg em 70 (cerca de 4%) fica abaixo de 5% (VERDE)
     const c4Peso = registrarDesfechoPesoSalaoF3(db, acesso, {
       patientId: "pt-c4",
       encounterId: "enc-c4",
@@ -250,7 +250,7 @@ describe("FASE F3 · Salão de Quimioterapia (S-F3-01 a S-F3-04 e casos clínico
       ruleset: SALAO_RS,
       pesagens: [
         { data: "2026-09-01", kg: 70.0, origem: "MEDIDO" },
-        { data: HOJE, kg: 65.0, origem: "MEDIDO" },
+        { data: HOJE, kg: 67.0, origem: "MEDIDO" },
       ],
     });
     expect(c4Peso).toMatchObject({
@@ -259,7 +259,7 @@ describe("FASE F3 · Salão de Quimioterapia (S-F3-01 a S-F3-04 e casos clínico
         estadoPeso: "VERDE",
         recomendacaoNutricao: "NAO_INDICADA",
         recomendacaoAdiamentoQt: "NAO_INDICADA",
-        perdaKg: 5.0,
+        perdaKg: 3,
         tarefaNutricaoCriada: false,
         qtAdiada: false,
         passaEmConsultaMedica: true,

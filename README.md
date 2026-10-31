@@ -1,5 +1,9 @@
 # OncoGlobal
 
+### Jornada clínica por skills
+
+Na consulta, **Jornada por skills** organiza primeira consulta, retorno e follow-up a partir de fontes vinculadas e do prontuário. Inclui consulta ao corpus de pulmão por estadiamento/subtipo, propostas de exames e encaminhamentos, avaliações de segurança e rascunhos persistentes. Conteúdo em revisão não libera tratamento. Uso, contratos e provas em [Corpus e skills de jornada](docs/specs/CORPUS-SKILLS-JORNADA.md).
+
 Repo autônomo, do zero. Isolado. Não é ONCOMED.
 
 **OncoGlobal (WORK)** é um motor longitudinal de contexto oncológico, centrado na consulta paciente ↔ médico. A IA propõe, o código calcula e valida, e o médico decide, corrige e assina. O app alerta e nunca bloqueia o clínico. Os dados do paciente ficam no PC.

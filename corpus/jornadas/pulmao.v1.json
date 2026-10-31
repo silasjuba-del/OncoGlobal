@@ -1,0 +1,4191 @@
+{
+  "schema": "CorpusJornada@1",
+  "versao": "1.0.1",
+  "estado": "RASCUNHO",
+  "fontes": [
+    {
+      "id": "SBOC-LOCAL",
+      "titulo": "-Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.pdf",
+      "arquivo": "-Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.pdf",
+      "url": null,
+      "sha256": "dfb93ca0cd4fc42b20e5e29f5cfb1a2c76eca9ad9838c788e462ff26f9496e0c",
+      "estado": "EXTRACAO_TEXTUAL_NAO_APROVACAO_CLINICA",
+      "edicao": "2026, colaboração v4",
+      "consultadoEm": "2026-10-30"
+    },
+    {
+      "id": "SBOC-AVANCADO",
+      "titulo": "-Pulmao-avancada-v5-VERSAO-PARA-COLABORACAO.pdf",
+      "arquivo": "-Pulmao-avancada-v5-VERSAO-PARA-COLABORACAO.pdf",
+      "url": null,
+      "sha256": "80b72813584bc87e80b322e740e0050cdd4d80475382e6b784508475d3e4867d",
+      "estado": "EXTRACAO_TEXTUAL_NAO_APROVACAO_CLINICA",
+      "edicao": "2026, colaboração v5",
+      "consultadoEm": "2026-10-30"
+    },
+    {
+      "id": "SBOC-NET",
+      "titulo": "Diretrizes-SBOC-2026-NET-pulmonares-v3-VERSAO-PARA-COLABORACAO.pdf",
+      "arquivo": "Diretrizes-SBOC-2026-NET-pulmonares-v3-VERSAO-PARA-COLABORACAO.pdf",
+      "url": null,
+      "sha256": "cb50bab3356d9a39810cf454b7ff5606347f0d3ec7c8d6c6b02aebca5d79fbec",
+      "estado": "EXTRACAO_TEXTUAL_NAO_APROVACAO_CLINICA",
+      "edicao": "2026, colaboração v3",
+      "consultadoEm": "2026-10-30"
+    },
+    {
+      "id": "SONHE",
+      "titulo": "Protocolos-SOnHe-2024-Modelo-7.pdf",
+      "arquivo": "Protocolos-SOnHe-2024-Modelo-7.pdf",
+      "url": null,
+      "sha256": "d201d11819acaf92a019bba22733abd55356012bce60b147728bfe4a5575d71d",
+      "estado": "EXTRACAO_TEXTUAL_NAO_APROVACAO_CLINICA",
+      "edicao": "2024",
+      "consultadoEm": "2026-10-30"
+    },
+    {
+      "id": "AULA-PULMAO-1",
+      "titulo": "Pulmão  2  2.pdf",
+      "arquivo": "Pulmão  2  2.pdf",
+      "url": null,
+      "sha256": "5385ded31a39b9b200fcf66533d6d8a57b43ba212e6392d8bbba9396d931527a",
+      "estado": "EXTRACAO_TEXTUAL_NAO_APROVACAO_CLINICA",
+      "edicao": "Transcrição datada 22/11/2025",
+      "consultadoEm": "2026-10-30"
+    },
+    {
+      "id": "AULA-PULMAO-2",
+      "titulo": "Pulmão  2 .pdf",
+      "arquivo": "Pulmão  2 .pdf",
+      "url": null,
+      "sha256": "5385ded31a39b9b200fcf66533d6d8a57b43ba212e6392d8bbba9396d931527a",
+      "estado": "EXTRACAO_TEXTUAL_NAO_APROVACAO_CLINICA",
+      "edicao": "Transcrição datada 22/11/2025",
+      "consultadoEm": "2026-10-30"
+    },
+    {
+      "id": "AULA-METASTATICO",
+      "titulo": "Aula 3 . TORÁCICOS - Câncer Pulmão de Células Não Pequenas Metastática ( - AKNAR FREIRE DE CARVALHO CALABRICH.pdf",
+      "arquivo": "Aula 3 . TORÁCICOS - Câncer Pulmão de Células Não Pequenas Metastática ( - AKNAR FREIRE DE CARVALHO CALABRICH.pdf",
+      "url": null,
+      "sha256": "f129ebcdee8ee8ce2ec4b765bdf18005b828885354b0326a77ec1e1b16991f54",
+      "estado": "EXTRACAO_TEXTUAL_NAO_APROVACAO_CLINICA",
+      "edicao": null,
+      "consultadoEm": "2026-10-30"
+    },
+    {
+      "id": "MOC-LOCAL",
+      "titulo": "4 . Pulmão. Células.txt",
+      "arquivo": "4 . Pulmão. Células.txt",
+      "url": null,
+      "sha256": "0e1e934dc7ab98fa482521de5b6bca4ee50ca777ccb7410aff14090f55cf4015",
+      "estado": "TRECHOS_SELECIONADOS_LIDOS_ORIGINAL_WEB_NAO_CONFERIDO",
+      "edicao": "Atualização declarada 27/07/2026 na cópia local",
+      "consultadoEm": "2026-10-30"
+    },
+    {
+      "id": "TNM-NDRS",
+      "titulo": "TNM 9: stage groupings; referência externa de conferência, não cópia da tabela SBOC",
+      "arquivo": null,
+      "url": "https://digital.nhs.uk/ndrs/data/cancer-data-training-materials/staging-sheets-v9/lung",
+      "sha256": null,
+      "estado": "CONFERENCIA_EXTERNA_PONTUAL",
+      "edicao": "TNM 9",
+      "consultadoEm": "2026-10-30"
+    },
+    {
+      "id": "FDA-LAURA",
+      "titulo": "Indicação FDA em 25/09/2024; não comprova disponibilidade no Brasil",
+      "arquivo": null,
+      "url": "https://www.fda.gov/drugs/resources-information-approved-drugs/fda-approves-osimertinib-locally-advanced-unresectable-stage-iii-non-small-cell-lung-cancer",
+      "sha256": null,
+      "estado": "CONFERENCIA_EXTERNA_PONTUAL",
+      "edicao": "Comunicado de 25/09/2024",
+      "consultadoEm": "2026-10-30"
+    },
+    {
+      "id": "FDA-ADRIATIC",
+      "titulo": "Atualização FDA em 04/12/2024 posterior ao manual SOnHe 2024",
+      "arquivo": null,
+      "url": "https://www.fda.gov/drugs/resources-information-approved-drugs/fda-approves-durvalumab-limited-stage-small-cell-lung-cancer",
+      "sha256": null,
+      "estado": "CONFERENCIA_EXTERNA_PONTUAL",
+      "edicao": "Comunicado de 04/12/2024",
+      "consultadoEm": "2026-10-30"
+    },
+    {
+      "id": "FDA-TARLATAMAB",
+      "titulo": "Aprovação tradicional FDA em 19/11/2025; progressão após platina",
+      "arquivo": null,
+      "url": "https://www.fda.gov/drugs/resources-information-approved-drugs/fda-grants-traditional-approval-tarlatamab-dlle-extensive-stage-small-cell-lung-cancer",
+      "sha256": null,
+      "estado": "CONFERENCIA_EXTERNA_PONTUAL",
+      "edicao": "Comunicado de 19/11/2025",
+      "consultadoEm": "2026-10-30"
+    },
+    {
+      "id": "NICE-MSCC",
+      "titulo": "Reconhecimento e avaliação urgente de suspeita de compressão medular",
+      "arquivo": null,
+      "url": "https://www.nice.org.uk/guidance/ng234/chapter/recommendations",
+      "sha256": null,
+      "estado": "CONFERENCIA_EXTERNA_PONTUAL",
+      "edicao": "NG234",
+      "consultadoEm": "2026-10-30"
+    },
+    {
+      "id": "EVIQ-NF",
+      "titulo": "Neutropenia febril: avaliação e manejo imediato",
+      "arquivo": null,
+      "url": "https://www.eviq.org.au/clinical-resources/oncological-emergencies/123-neutropenic-fever-patient-evaluation-risk-as",
+      "sha256": null,
+      "estado": "CONFERENCIA_EXTERNA_PONTUAL",
+      "edicao": null,
+      "consultadoEm": "2026-10-30"
+    },
+    {
+      "id": "EVIQ-SVCO",
+      "titulo": "Emergência com edema laríngeo/cerebral; não converter achado em RT automática",
+      "arquivo": null,
+      "url": "https://www.eviq.org.au/radiation-oncology/palliative/295-respiratory-superior-vena-cava-obstruction-pal",
+      "sha256": null,
+      "estado": "CONFERENCIA_EXTERNA_PONTUAL",
+      "edicao": null,
+      "consultadoEm": "2026-10-30"
+    }
+  ],
+  "cartoes": [
+    {
+      "id": "PUL-01",
+      "grupo": "CPNPC",
+      "estadiamento": "pIA ressecado",
+      "subtipo": "CPNPC",
+      "modalidades": [
+        "CX",
+        "OBSERVACAO"
+      ],
+      "papeis": [
+        "ADJUVANTE"
+      ],
+      "trilha": "Após ressecção: seguimento; sem tratamento sistêmico adjuvante na fonte.",
+      "fontes": [
+        {
+          "fonte": "SBOC-LOCAL",
+          "paginas_pdf": [
+            14
+          ]
+        },
+        {
+          "fonte": "SONHE",
+          "paginas_pdf": [
+            255
+          ]
+        }
+      ],
+      "linhas": {
+        "1": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "2": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "3": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "4": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "5": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        }
+      },
+      "condicoes_e_limites": [
+        "A observação descrita é pós-tratamento local; não interpretar como indicação de não tratar um tumor cIA não operado."
+      ],
+      "divergencias": [],
+      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+    },
+    {
+      "id": "PUL-02",
+      "grupo": "CPNPC",
+      "estadiamento": "pIB ressecado",
+      "subtipo": "EGFR del19/L858R",
+      "modalidades": [
+        "CX",
+        "SISTEMICO"
+      ],
+      "papeis": [
+        "ADJUVANTE"
+      ],
+      "trilha": "Considerar osimertinibe adjuvante por 3 anos; fonte SBOC cita tumor ≥3 cm; MOC individualiza 3–4 cm.",
+      "fontes": [
+        {
+          "fonte": "SBOC-LOCAL",
+          "paginas_pdf": [
+            14,
+            16
+          ]
+        },
+        {
+          "fonte": "SONHE",
+          "paginas_pdf": [
+            255
+          ]
+        },
+        {
+          "fonte": "MOC-LOCAL",
+          "secao": "TRATAMENTO ADJUVANTE"
+        }
+      ],
+      "linhas": {
+        "1": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "2": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "3": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "4": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "5": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        }
+      },
+      "condicoes_e_limites": [
+        "Os estudos adjuvantes citados empregaram TNM 7; não transportar critérios apenas pelo nome do estádio.",
+        "Revisar o limite exato de tamanho: ≥3 na recomendação e >3 na descrição do estudo."
+      ],
+      "divergencias": [
+        "DIV-TNM",
+        "DIV-IB"
+      ],
+      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+    },
+    {
+      "id": "PUL-03",
+      "grupo": "CPNPC",
+      "estadiamento": "pIB ressecado",
+      "subtipo": "Sem indicação molecular adjuvante documentada",
+      "modalidades": [
+        "CX",
+        "OBSERVACAO"
+      ],
+      "papeis": [
+        "ADJUVANTE"
+      ],
+      "trilha": "Seguimento na SBOC; avaliar individualmente fatores de risco e a divergência com MOC que considera adjuvância em IB/IIA.",
+      "fontes": [
+        {
+          "fonte": "SBOC-LOCAL",
+          "paginas_pdf": [
+            14,
+            15
+          ]
+        },
+        {
+          "fonte": "SONHE",
+          "paginas_pdf": [
+            255
+          ]
+        },
+        {
+          "fonte": "MOC-LOCAL",
+          "secao": "TRATAMENTO ADJUVANTE"
+        }
+      ],
+      "linhas": {
+        "1": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "2": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "3": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "4": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "5": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        }
+      },
+      "condicoes_e_limites": [],
+      "divergencias": [
+        "DIV-IB"
+      ],
+      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+    },
+    {
+      "id": "PUL-04",
+      "grupo": "CPNPC",
+      "estadiamento": "pIIA e pIIB–IIIA (pN0–1); pIIIA/IIIB com pN2 incidental, conforme fonte",
+      "subtipo": "CPNPC",
+      "modalidades": [
+        "CX",
+        "SISTEMICO"
+      ],
+      "papeis": [
+        "ADJUVANTE"
+      ],
+      "trilha": "CX → QT adjuvante: cisplatina + vinorelbina OU docetaxel OU gencitabina; cisplatina + pemetrexede apenas não escamoso; carboplatina + paclitaxel se contraindicação à cisplatina.",
+      "fontes": [
+        {
+          "fonte": "SBOC-LOCAL",
+          "paginas_pdf": [
+            12,
+            14,
+            15
+          ]
+        },
+        {
+          "fonte": "SONHE",
+          "paginas_pdf": [
+            256
+          ]
+        }
+      ],
+      "linhas": {
+        "1": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "2": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "3": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "4": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "5": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        }
+      },
+      "condicoes_e_limites": [
+        "Alternativas dentro da mesma etapa, não cinco etapas sucessivas.",
+        "Elegibilidade e tolerabilidade dependem de recuperação pós-operatória, função orgânica e revisão médica."
+      ],
+      "divergencias": [
+        "DIV-TNM"
+      ],
+      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+    },
+    {
+      "id": "PUL-05",
+      "grupo": "CPNPC",
+      "estadiamento": "pIIA e demais cenários ressecados elegíveis do capítulo",
+      "subtipo": "EGFR del19/L858R",
+      "modalidades": [
+        "CX",
+        "SISTEMICO"
+      ],
+      "papeis": [
+        "ADJUVANTE"
+      ],
+      "trilha": "QT adjuvante quando indicada → osimertinibe por 3 anos.",
+      "fontes": [
+        {
+          "fonte": "SBOC-LOCAL",
+          "paginas_pdf": [
+            14,
+            15,
+            16
+          ]
+        },
+        {
+          "fonte": "SONHE",
+          "paginas_pdf": [
+            256
+          ]
+        }
+      ],
+      "linhas": {
+        "1": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "2": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "3": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "4": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "5": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        }
+      },
+      "condicoes_e_limites": [
+        "Não usar esta linha para qualquer variante EGFR.",
+        "Conferir elegibilidade original do estudo, margens e edição TNM."
+      ],
+      "divergencias": [
+        "DIV-TNM"
+      ],
+      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+    },
+    {
+      "id": "PUL-06",
+      "grupo": "CPNPC",
+      "estadiamento": "CPNPC ressecado elegível; pIIA e cenários do capítulo",
+      "subtipo": "Fusão ALK",
+      "modalidades": [
+        "CX",
+        "SISTEMICO"
+      ],
+      "papeis": [
+        "ADJUVANTE"
+      ],
+      "trilha": "Alectinibe adjuvante por 2 anos. QT adjuvante permanece questão de discussão na SBOC, não etapa obrigatória inferida.",
+      "fontes": [
+        {
+          "fonte": "SBOC-LOCAL",
+          "paginas_pdf": [
+            14,
+            15,
+            16
+          ]
+        }
+      ],
+      "linhas": {
+        "1": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "2": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "3": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "4": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "5": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        }
+      },
+      "condicoes_e_limites": [
+        "A fonte distingue ALINA sem QT no braço experimental da discussão sobre QT adjuvante."
+      ],
+      "divergencias": [],
+      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+    },
+    {
+      "id": "PUL-07",
+      "grupo": "CPNPC",
+      "estadiamento": "II–IIIA ressecado e outros cenários pN2 descritos",
+      "subtipo": "Sem EGFR/ALK; PD-L1 ≥1%",
+      "modalidades": [
+        "CX",
+        "SISTEMICO"
+      ],
+      "papeis": [
+        "ADJUVANTE"
+      ],
+      "trilha": "Após QT adjuvante: considerar atezolizumabe; pembrolizumabe é alternativa com critérios próprios.",
+      "fontes": [
+        {
+          "fonte": "SBOC-LOCAL",
+          "paginas_pdf": [
+            15,
+            16
+          ]
+        },
+        {
+          "fonte": "SONHE",
+          "paginas_pdf": [
+            257
+          ]
+        }
+      ],
+      "linhas": {
+        "1": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "2": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "3": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "4": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "5": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        }
+      },
+      "condicoes_e_limites": [
+        "Não atribuir uma graduação única: atezolizumabe FR fraca em IIA e forte no bloco IIB–IIIA/pN2; pembrolizumabe FR fraca na SBOC."
+      ],
+      "divergencias": [
+        "DIV-TNM"
+      ],
+      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+    },
+    {
+      "id": "PUL-08",
+      "grupo": "CPNPC",
+      "estadiamento": "Ressecado elegível após QT",
+      "subtipo": "Sem EGFR/ALK; qualquer expressão PD-L1",
+      "modalidades": [
+        "CX",
+        "SISTEMICO"
+      ],
+      "papeis": [
+        "ADJUVANTE"
+      ],
+      "trilha": "Considerar pembrolizumabe adjuvante independentemente do PD-L1, nos cenários elegíveis do capítulo.",
+      "fontes": [
+        {
+          "fonte": "SBOC-LOCAL",
+          "paginas_pdf": [
+            15,
+            16
+          ]
+        },
+        {
+          "fonte": "SONHE",
+          "paginas_pdf": [
+            257
+          ]
+        }
+      ],
+      "linhas": {
+        "1": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "2": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "3": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "4": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "5": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        }
+      },
+      "condicoes_e_limites": [
+        "Duração/posologia não são intercambiáveis entre protocolos adjuvantes e perioperatórios; conferir ficha do regime."
+      ],
+      "divergencias": [],
+      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+    },
+    {
+      "id": "PUL-09",
+      "grupo": "CPNPC",
+      "estadiamento": "cIIA–IIIB ressecável, N0–N2, conforme fonte",
+      "subtipo": "Sem EGFR/ALK",
+      "modalidades": [
+        "SISTEMICO",
+        "CX"
+      ],
+      "papeis": [
+        "NEOADJUVANTE",
+        "ADJUVANTE"
+      ],
+      "trilha": "Discussão multidisciplinar → QT + nivolumabe neoadjuvante (CM816) OU estratégia perioperatória com pembrolizumabe, durvalumabe ou nivolumabe → CX → etapa pós-operatória conforme protocolo escolhido.",
+      "fontes": [
+        {
+          "fonte": "SBOC-LOCAL",
+          "paginas_pdf": [
+            17,
+            18
+          ]
+        },
+        {
+          "fonte": "SONHE",
+          "paginas_pdf": [
+            256,
+            257
+          ]
+        }
+      ],
+      "linhas": {
+        "1": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "2": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "3": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "4": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "5": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        }
+      },
+      "condicoes_e_limites": [
+        "Não usar neoadjuvância como conversão de tumor inicialmente irressecável.",
+        "Ressecabilidade não é determinada só pelo grupo de estádio.",
+        "RCp não implica retirada automática de adjuvância."
+      ],
+      "divergencias": [
+        "DIV-RCP",
+        "DIV-TNM"
+      ],
+      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+    },
+    {
+      "id": "PUL-10",
+      "grupo": "CPNPC",
+      "estadiamento": "Ressecável N0–N1",
+      "subtipo": "EGFR ou ALK",
+      "modalidades": [
+        "CX",
+        "SISTEMICO"
+      ],
+      "papeis": [
+        "ADJUVANTE"
+      ],
+      "trilha": "Fonte favorece CX → adjuvância conforme alteração molecular e cenário patológico.",
+      "fontes": [
+        {
+          "fonte": "SBOC-LOCAL",
+          "paginas_pdf": [
+            18,
+            14,
+            15
+          ]
+        }
+      ],
+      "linhas": {
+        "1": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "2": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "3": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "4": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "5": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        }
+      },
+      "condicoes_e_limites": [
+        "Osimertinibe só para variante EGFR elegível; alectinibe para ALK."
+      ],
+      "divergencias": [],
+      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+    },
+    {
+      "id": "PUL-11",
+      "grupo": "CPNPC",
+      "estadiamento": "N2 potencialmente ressecável",
+      "subtipo": "EGFR del19/L858R",
+      "modalidades": [
+        "CX",
+        "SISTEMICO"
+      ],
+      "papeis": [
+        "NEOADJUVANTE",
+        "ADJUVANTE"
+      ],
+      "trilha": "Após decisão multidisciplinar: CX → QT adjuvante → osimertinibe; alternativa documental: QT neoadjuvante sem IO → CX → osimertinibe.",
+      "fontes": [
+        {
+          "fonte": "SBOC-LOCAL",
+          "paginas_pdf": [
+            18
+          ]
+        }
+      ],
+      "linhas": {
+        "1": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "2": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "3": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "4": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "5": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        }
+      },
+      "condicoes_e_limites": [
+        "A frase da fonte inclui EGFR/ALK mas a sequência com osimertinibe é condicionada a EGFR; não aplicá-la a ALK."
+      ],
+      "divergencias": [],
+      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+    },
+    {
+      "id": "PUL-12",
+      "grupo": "CPNPC",
+      "estadiamento": "N2 potencialmente ressecável",
+      "subtipo": "Fusão ALK",
+      "modalidades": [
+        "CX",
+        "SISTEMICO"
+      ],
+      "papeis": [
+        "NEOADJUVANTE",
+        "ADJUVANTE"
+      ],
+      "trilha": "Decisão multidisciplinar; adjuvância com alectinibe descrita no capítulo. Sequência neoadjuvante específica ALK não estruturada de modo inequívoco no trecho N2.",
+      "fontes": [
+        {
+          "fonte": "SBOC-LOCAL",
+          "paginas_pdf": [
+            14,
+            15,
+            18
+          ]
+        }
+      ],
+      "linhas": {
+        "1": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "2": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "3": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "4": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "5": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        }
+      },
+      "condicoes_e_limites": [
+        "Não preencher a lacuna usando a sequência EGFR."
+      ],
+      "divergencias": [],
+      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+    },
+    {
+      "id": "PUL-13",
+      "grupo": "CPNPC",
+      "estadiamento": "Estádio I inoperável; cT1N0–cT2N0 conforme seção",
+      "subtipo": "CPNPC",
+      "modalidades": [
+        "RT"
+      ],
+      "papeis": [
+        "DEFINITIVO"
+      ],
+      "trilha": "Considerar SBRT, com fracionamento conforme localização e volume.",
+      "fontes": [
+        {
+          "fonte": "SBOC-LOCAL",
+          "paginas_pdf": [
+            18
+          ]
+        }
+      ],
+      "linhas": {
+        "1": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "2": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "3": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "4": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "5": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        }
+      },
+      "condicoes_e_limites": [
+        "Documento cita 3–8 sessões; dose e plano radioterápico dependem do radio-oncologista.",
+        "Não usar cT2 genérico para redefinir o estádio I sem conferir edição e tamanho."
+      ],
+      "divergencias": [],
+      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+    },
+    {
+      "id": "PUL-14",
+      "grupo": "CPNPC",
+      "estadiamento": "Estádio II irressecável/inoperável",
+      "subtipo": "CPNPC",
+      "modalidades": [
+        "SISTEMICO",
+        "RT"
+      ],
+      "papeis": [
+        "DEFINITIVO"
+      ],
+      "trilha": "Fonte sugere considerar o tratamento do estádio III irressecável, reconhecendo ausência de estudos randomizados específicos.",
+      "fontes": [
+        {
+          "fonte": "SBOC-LOCAL",
+          "paginas_pdf": [
+            18
+          ]
+        }
+      ],
+      "linhas": {
+        "1": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "2": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "3": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "4": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "5": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        }
+      },
+      "condicoes_e_limites": [
+        "Extrapolação declarada pela fonte; não converter em equivalência automática."
+      ],
+      "divergencias": [],
+      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+    },
+    {
+      "id": "PUL-15",
+      "grupo": "CPNPC",
+      "estadiamento": "III irressecável/inoperável, incluindo IIIC",
+      "subtipo": "Sem EGFR/ALK",
+      "modalidades": [
+        "SISTEMICO",
+        "RT"
+      ],
+      "papeis": [
+        "DEFINITIVO",
+        "CONSOLIDACAO"
+      ],
+      "trilha": "QT + RT concomitantes → reavaliação → durvalumabe por 12 meses se sem progressão e elegível.",
+      "fontes": [
+        {
+          "fonte": "SBOC-LOCAL",
+          "paginas_pdf": [
+            18,
+            19
+          ]
+        },
+        {
+          "fonte": "SONHE",
+          "paginas_pdf": [
+            257
+          ]
+        }
+      ],
+      "linhas": {
+        "1": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "2": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "3": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "4": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "5": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        }
+      },
+      "condicoes_e_limites": [
+        "Opções QT: cisplatina/etoposídeo; carboplatina/paclitaxel; cisplatina/pemetrexede apenas não escamoso.",
+        "Janela de início permanece atribuída à fonte; não impor ≤14 dias como requisito universal."
+      ],
+      "divergencias": [
+        "DIV-JANELA"
+      ],
+      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+    },
+    {
+      "id": "PUL-16",
+      "grupo": "CPNPC",
+      "estadiamento": "III irressecável após QTRT sem progressão",
+      "subtipo": "EGFR del19/L858R",
+      "modalidades": [
+        "SISTEMICO",
+        "RT"
+      ],
+      "papeis": [
+        "DEFINITIVO",
+        "CONSOLIDACAO"
+      ],
+      "trilha": "QTRT → osimertinibe até progressão conforme SBOC; revisar tolerabilidade e elegibilidade.",
+      "fontes": [
+        {
+          "fonte": "SBOC-LOCAL",
+          "paginas_pdf": [
+            19
+          ]
+        },
+        {
+          "fonte": "FDA-LAURA",
+          "secao": null
+        }
+      ],
+      "linhas": {
+        "1": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "2": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "3": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "4": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "5": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        }
+      },
+      "condicoes_e_limites": [
+        "Não é adjuvância de duração fixa de 3 anos.",
+        "Menção histórica da SBOC à Anvisa não comprova situação regulatória atual."
+      ],
+      "divergencias": [
+        "DIV-REGULATORIO"
+      ],
+      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+    },
+    {
+      "id": "PUL-17",
+      "grupo": "CPNPC",
+      "estadiamento": "III irressecável",
+      "subtipo": "Fusão ALK",
+      "modalidades": [
+        "SISTEMICO",
+        "RT"
+      ],
+      "papeis": [
+        "DEFINITIVO"
+      ],
+      "trilha": "QTRT; consolidação específica ALK não estruturada nas fontes locais selecionadas. A recomendação de durvalumabe SBOC exclui ALK.",
+      "fontes": [
+        {
+          "fonte": "SBOC-LOCAL",
+          "paginas_pdf": [
+            18,
+            19
+          ]
+        }
+      ],
+      "linhas": {
+        "1": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "2": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "3": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "4": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "5": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        }
+      },
+      "condicoes_e_limites": [
+        "Ausência de recomendação não é demonstração de contraindicação absoluta."
+      ],
+      "divergencias": [],
+      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+    },
+    {
+      "id": "PUL-18",
+      "grupo": "CPNPC",
+      "estadiamento": "III sem condição para QTRT concomitante",
+      "subtipo": "CPNPC",
+      "modalidades": [
+        "SISTEMICO",
+        "RT"
+      ],
+      "papeis": [
+        "DEFINITIVO"
+      ],
+      "trilha": "Alternativa: QT de indução → RT; RT isolada para condições muito comprometidas, segundo avaliação individual.",
+      "fontes": [
+        {
+          "fonte": "SBOC-LOCAL",
+          "paginas_pdf": [
+            20
+          ]
+        }
+      ],
+      "linhas": {
+        "1": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "2": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "3": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "4": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "5": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        }
+      },
+      "condicoes_e_limites": [
+        "Distinguir inoperabilidade de incapacidade para QT e de irressecabilidade anatômica."
+      ],
+      "divergencias": [],
+      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+    },
+    {
+      "id": "PUL-19",
+      "grupo": "CPNPC",
+      "estadiamento": "IIIA, sulco superior/Pancoast",
+      "subtipo": "CPNPC",
+      "modalidades": [
+        "SISTEMICO",
+        "RT",
+        "CX"
+      ],
+      "papeis": [
+        "NEOADJUVANTE"
+      ],
+      "trilha": "QTRT neoadjuvante → CX quando indicada; mediastino extenso comprovado direciona à QTRT definitiva no capítulo.",
+      "fontes": [
+        {
+          "fonte": "SBOC-LOCAL",
+          "paginas_pdf": [
+            20
+          ]
+        }
+      ],
+      "linhas": {
+        "1": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "2": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "3": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "4": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "5": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        }
+      },
+      "condicoes_e_limites": [
+        "Não extrapolar a todos os tumores apicais; revisão multidisciplinar."
+      ],
+      "divergencias": [],
+      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+    },
+    {
+      "id": "IV-Não-escamoso-PD0",
+      "grupo": "CPNPC",
+      "estadiamento": "IV / avançado",
+      "subtipo": "Sem alteração acionável conhecida; Não escamoso; PD-L1 <1% ou desconhecido",
+      "modalidades": [
+        "SISTEMICO"
+      ],
+      "papeis": [
+        "PALIATIVO",
+        "MANUTENCAO"
+      ],
+      "trilha": "L1 selecionada por histologia/PD-L1 → manutenção do regime quando prevista → reavaliar exposição e resposta antes das linhas subsequentes.",
+      "fontes": [
+        {
+          "fonte": "SBOC-AVANCADO",
+          "paginas_pdf": [
+            7,
+            8,
+            12,
+            13,
+            14
+          ]
+        },
+        {
+          "fonte": "SONHE",
+          "paginas_pdf": [
+            264
+          ]
+        }
+      ],
+      "linhas": {
+        "1": {
+          "opcoes": [
+            "Platina + pemetrexede + pembrolizumabe",
+            "Carboplatina + paclitaxel + bevacizumabe + atezolizumabe",
+            "Carboplatina + nab-paclitaxel + atezolizumabe",
+            "Platina + pemetrexede + cemiplimabe",
+            "Platina + pemetrexede + nivolumabe + ipilimumabe",
+            "Platina + pemetrexede + durvalumabe + tremelimumabe"
+          ],
+          "fontes": [
+            {
+              "fonte": "SBOC-AVANCADO",
+              "paginas_pdf": [
+                7,
+                8
+              ]
+            }
+          ],
+          "condicao": "Driver ausente após investigação adequada; NGS pendente não equivale a negativo.",
+          "estado": "EXTRAIDO_PARA_REVISAO"
+        },
+        "2": {
+          "opcoes": [
+            "Após IO isolada: dupla de platina apropriada à histologia",
+            "Após QT+IO: docetaxel isolado ou + ramucirumabe",
+            "Sem IO prévia: avaliar nivolumabe, atezolizumabe, pembrolizumabe se PD-L1 ≥1%, ou tislelizumabe no contexto pós-platina",
+            "Docetaxel + nintedanibe",
+            "Pemetrexede se não exposto",
+            "Paclitaxel + bevacizumabe"
+          ],
+          "fontes": [
+            {
+              "fonte": "SBOC-AVANCADO",
+              "paginas_pdf": [
+                12,
+                13,
+                14
+              ]
+            }
+          ],
+          "condicao": "Escolha condicionada à L1, PS, comorbidades e toxicidades.",
+          "estado": "EXTRAIDO_PARA_REVISAO"
+        },
+        "3": {
+          "opcoes": [
+            "Docetaxel + ramucirumabe ou docetaxel; no não escamoso, docetaxel + nintedanibe conforme histórico"
+          ],
+          "fontes": [
+            {
+              "fonte": "SONHE",
+              "paginas_pdf": [
+                264
+              ]
+            }
+          ],
+          "condicao": "SOnHe 2024; alternativas não expostas/adequadas, sem sequência universal.",
+          "estado": "EXTRAIDO_PARA_REVISAO"
+        },
+        "4": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "SEM_FONTE_ESTRUTURADA"
+        },
+        "5": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "SEM_FONTE_ESTRUTURADA"
+        }
+      },
+      "condicoes_e_limites": [
+        "SOnHe agrupa PD-L1 <50% sem delimitar todas as alternativas: não transportar IO isolada para PD-L1 negativo.",
+        "Os regimes têm fases de manutenção diferentes; não gerar uma manutenção genérica."
+      ],
+      "divergencias": [
+        "DIV-PDL1",
+        "DIV-POSEIDON",
+        "DIV-GRADUACAO"
+      ],
+      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+    },
+    {
+      "id": "IV-Não-escamoso-PD1",
+      "grupo": "CPNPC",
+      "estadiamento": "IV / avançado",
+      "subtipo": "Sem alteração acionável conhecida; Não escamoso; PD-L1 1–49%",
+      "modalidades": [
+        "SISTEMICO"
+      ],
+      "papeis": [
+        "PALIATIVO",
+        "MANUTENCAO"
+      ],
+      "trilha": "L1 selecionada por histologia/PD-L1 → manutenção do regime quando prevista → reavaliar exposição e resposta antes das linhas subsequentes.",
+      "fontes": [
+        {
+          "fonte": "SBOC-AVANCADO",
+          "paginas_pdf": [
+            7,
+            8,
+            12,
+            13,
+            14
+          ]
+        },
+        {
+          "fonte": "SONHE",
+          "paginas_pdf": [
+            264
+          ]
+        }
+      ],
+      "linhas": {
+        "1": {
+          "opcoes": [
+            "Platina + pemetrexede + pembrolizumabe",
+            "Carboplatina + paclitaxel + bevacizumabe + atezolizumabe",
+            "Carboplatina + nab-paclitaxel + atezolizumabe",
+            "Platina + pemetrexede + cemiplimabe",
+            "Platina + pemetrexede + nivolumabe + ipilimumabe",
+            "Platina + pemetrexede + durvalumabe + tremelimumabe",
+            "Pembrolizumabe isolado: opção de FR fraca; avaliar condição para QT e discussão clínica"
+          ],
+          "fontes": [
+            {
+              "fonte": "SBOC-AVANCADO",
+              "paginas_pdf": [
+                7,
+                8
+              ]
+            }
+          ],
+          "condicao": "Driver ausente após investigação adequada; NGS pendente não equivale a negativo.",
+          "estado": "EXTRAIDO_PARA_REVISAO"
+        },
+        "2": {
+          "opcoes": [
+            "Após IO isolada: dupla de platina apropriada à histologia",
+            "Após QT+IO: docetaxel isolado ou + ramucirumabe",
+            "Sem IO prévia: avaliar nivolumabe, atezolizumabe, pembrolizumabe se PD-L1 ≥1%, ou tislelizumabe no contexto pós-platina",
+            "Docetaxel + nintedanibe",
+            "Pemetrexede se não exposto",
+            "Paclitaxel + bevacizumabe"
+          ],
+          "fontes": [
+            {
+              "fonte": "SBOC-AVANCADO",
+              "paginas_pdf": [
+                12,
+                13,
+                14
+              ]
+            }
+          ],
+          "condicao": "Escolha condicionada à L1, PS, comorbidades e toxicidades.",
+          "estado": "EXTRAIDO_PARA_REVISAO"
+        },
+        "3": {
+          "opcoes": [
+            "Docetaxel + ramucirumabe ou docetaxel; no não escamoso, docetaxel + nintedanibe conforme histórico"
+          ],
+          "fontes": [
+            {
+              "fonte": "SONHE",
+              "paginas_pdf": [
+                264
+              ]
+            }
+          ],
+          "condicao": "SOnHe 2024; alternativas não expostas/adequadas, sem sequência universal.",
+          "estado": "EXTRAIDO_PARA_REVISAO"
+        },
+        "4": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "SEM_FONTE_ESTRUTURADA"
+        },
+        "5": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "SEM_FONTE_ESTRUTURADA"
+        }
+      },
+      "condicoes_e_limites": [
+        "SOnHe agrupa PD-L1 <50% sem delimitar todas as alternativas: não transportar IO isolada para PD-L1 negativo.",
+        "Os regimes têm fases de manutenção diferentes; não gerar uma manutenção genérica."
+      ],
+      "divergencias": [
+        "DIV-PDL1",
+        "DIV-POSEIDON",
+        "DIV-GRADUACAO"
+      ],
+      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+    },
+    {
+      "id": "IV-Não-escamoso-PD50",
+      "grupo": "CPNPC",
+      "estadiamento": "IV / avançado",
+      "subtipo": "Sem alteração acionável conhecida; Não escamoso; PD-L1 ≥50%",
+      "modalidades": [
+        "SISTEMICO"
+      ],
+      "papeis": [
+        "PALIATIVO",
+        "MANUTENCAO"
+      ],
+      "trilha": "L1 selecionada por histologia/PD-L1 → manutenção do regime quando prevista → reavaliar exposição e resposta antes das linhas subsequentes.",
+      "fontes": [
+        {
+          "fonte": "SBOC-AVANCADO",
+          "paginas_pdf": [
+            7,
+            8,
+            12,
+            13,
+            14
+          ]
+        },
+        {
+          "fonte": "SONHE",
+          "paginas_pdf": [
+            264
+          ]
+        }
+      ],
+      "linhas": {
+        "1": {
+          "opcoes": [
+            "Platina + pemetrexede + pembrolizumabe",
+            "Carboplatina + paclitaxel + bevacizumabe + atezolizumabe",
+            "Carboplatina + nab-paclitaxel + atezolizumabe",
+            "Platina + pemetrexede + cemiplimabe",
+            "Platina + pemetrexede + nivolumabe + ipilimumabe",
+            "Platina + pemetrexede + durvalumabe + tremelimumabe",
+            "Pembrolizumabe isolado",
+            "Atezolizumabe isolado",
+            "Cemiplimabe isolado"
+          ],
+          "fontes": [
+            {
+              "fonte": "SBOC-AVANCADO",
+              "paginas_pdf": [
+                7,
+                8
+              ]
+            }
+          ],
+          "condicao": "Driver ausente após investigação adequada; NGS pendente não equivale a negativo.",
+          "estado": "EXTRAIDO_PARA_REVISAO"
+        },
+        "2": {
+          "opcoes": [
+            "Após IO isolada: dupla de platina apropriada à histologia",
+            "Após QT+IO: docetaxel isolado ou + ramucirumabe",
+            "Sem IO prévia: avaliar nivolumabe, atezolizumabe, pembrolizumabe se PD-L1 ≥1%, ou tislelizumabe no contexto pós-platina",
+            "Docetaxel + nintedanibe",
+            "Pemetrexede se não exposto",
+            "Paclitaxel + bevacizumabe"
+          ],
+          "fontes": [
+            {
+              "fonte": "SBOC-AVANCADO",
+              "paginas_pdf": [
+                12,
+                13,
+                14
+              ]
+            }
+          ],
+          "condicao": "Escolha condicionada à L1, PS, comorbidades e toxicidades.",
+          "estado": "EXTRAIDO_PARA_REVISAO"
+        },
+        "3": {
+          "opcoes": [
+            "Docetaxel + ramucirumabe ou docetaxel; no não escamoso, docetaxel + nintedanibe conforme histórico"
+          ],
+          "fontes": [
+            {
+              "fonte": "SONHE",
+              "paginas_pdf": [
+                264
+              ]
+            }
+          ],
+          "condicao": "SOnHe 2024; alternativas não expostas/adequadas, sem sequência universal.",
+          "estado": "EXTRAIDO_PARA_REVISAO"
+        },
+        "4": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "SEM_FONTE_ESTRUTURADA"
+        },
+        "5": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "SEM_FONTE_ESTRUTURADA"
+        }
+      },
+      "condicoes_e_limites": [
+        "SOnHe agrupa PD-L1 <50% sem delimitar todas as alternativas: não transportar IO isolada para PD-L1 negativo.",
+        "Os regimes têm fases de manutenção diferentes; não gerar uma manutenção genérica."
+      ],
+      "divergencias": [
+        "DIV-PDL1",
+        "DIV-POSEIDON",
+        "DIV-GRADUACAO"
+      ],
+      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+    },
+    {
+      "id": "IV-Escamoso-PD0",
+      "grupo": "CPNPC",
+      "estadiamento": "IV / avançado",
+      "subtipo": "Sem alteração acionável conhecida; Escamoso; PD-L1 <1% ou desconhecido",
+      "modalidades": [
+        "SISTEMICO"
+      ],
+      "papeis": [
+        "PALIATIVO",
+        "MANUTENCAO"
+      ],
+      "trilha": "L1 selecionada por histologia/PD-L1 → manutenção do regime quando prevista → reavaliar exposição e resposta antes das linhas subsequentes.",
+      "fontes": [
+        {
+          "fonte": "SBOC-AVANCADO",
+          "paginas_pdf": [
+            8,
+            8,
+            12,
+            13,
+            14
+          ]
+        },
+        {
+          "fonte": "SONHE",
+          "paginas_pdf": [
+            267
+          ]
+        }
+      ],
+      "linhas": {
+        "1": {
+          "opcoes": [
+            "Carboplatina + paclitaxel/nab-paclitaxel + pembrolizumabe",
+            "Carboplatina + paclitaxel + nivolumabe + ipilimumabe",
+            "Carboplatina + paclitaxel + cemiplimabe",
+            "Platina + gencitabina + durvalumabe + tremelimumabe"
+          ],
+          "fontes": [
+            {
+              "fonte": "SBOC-AVANCADO",
+              "paginas_pdf": [
+                8,
+                8
+              ]
+            }
+          ],
+          "condicao": "Driver ausente após investigação adequada; NGS pendente não equivale a negativo.",
+          "estado": "EXTRAIDO_PARA_REVISAO"
+        },
+        "2": {
+          "opcoes": [
+            "Após IO isolada: dupla de platina apropriada à histologia",
+            "Após QT+IO: docetaxel isolado ou + ramucirumabe",
+            "Sem IO prévia: avaliar nivolumabe, atezolizumabe, pembrolizumabe se PD-L1 ≥1%, ou tislelizumabe no contexto pós-platina",
+            "Afatinibe listado com FR fraca e ressalva da própria SBOC sobre não ser a melhor opção"
+          ],
+          "fontes": [
+            {
+              "fonte": "SBOC-AVANCADO",
+              "paginas_pdf": [
+                12,
+                13,
+                14
+              ]
+            }
+          ],
+          "condicao": "Escolha condicionada à L1, PS, comorbidades e toxicidades.",
+          "estado": "EXTRAIDO_PARA_REVISAO"
+        },
+        "3": {
+          "opcoes": [
+            "Docetaxel + ramucirumabe ou docetaxel; no não escamoso, docetaxel + nintedanibe conforme histórico"
+          ],
+          "fontes": [
+            {
+              "fonte": "SONHE",
+              "paginas_pdf": [
+                267
+              ]
+            }
+          ],
+          "condicao": "SOnHe 2024; alternativas não expostas/adequadas, sem sequência universal.",
+          "estado": "EXTRAIDO_PARA_REVISAO"
+        },
+        "4": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "SEM_FONTE_ESTRUTURADA"
+        },
+        "5": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "SEM_FONTE_ESTRUTURADA"
+        }
+      },
+      "condicoes_e_limites": [
+        "SOnHe agrupa PD-L1 <50% sem delimitar todas as alternativas: não transportar IO isolada para PD-L1 negativo.",
+        "Os regimes têm fases de manutenção diferentes; não gerar uma manutenção genérica."
+      ],
+      "divergencias": [
+        "DIV-PDL1",
+        "DIV-POSEIDON",
+        "DIV-GRADUACAO"
+      ],
+      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+    },
+    {
+      "id": "IV-Escamoso-PD1",
+      "grupo": "CPNPC",
+      "estadiamento": "IV / avançado",
+      "subtipo": "Sem alteração acionável conhecida; Escamoso; PD-L1 1–49%",
+      "modalidades": [
+        "SISTEMICO"
+      ],
+      "papeis": [
+        "PALIATIVO",
+        "MANUTENCAO"
+      ],
+      "trilha": "L1 selecionada por histologia/PD-L1 → manutenção do regime quando prevista → reavaliar exposição e resposta antes das linhas subsequentes.",
+      "fontes": [
+        {
+          "fonte": "SBOC-AVANCADO",
+          "paginas_pdf": [
+            8,
+            8,
+            12,
+            13,
+            14
+          ]
+        },
+        {
+          "fonte": "SONHE",
+          "paginas_pdf": [
+            267
+          ]
+        }
+      ],
+      "linhas": {
+        "1": {
+          "opcoes": [
+            "Carboplatina + paclitaxel/nab-paclitaxel + pembrolizumabe",
+            "Carboplatina + paclitaxel + nivolumabe + ipilimumabe",
+            "Carboplatina + paclitaxel + cemiplimabe",
+            "Platina + gencitabina + durvalumabe + tremelimumabe",
+            "Pembrolizumabe isolado: opção de FR fraca; avaliar condição para QT e discussão clínica"
+          ],
+          "fontes": [
+            {
+              "fonte": "SBOC-AVANCADO",
+              "paginas_pdf": [
+                8,
+                8
+              ]
+            }
+          ],
+          "condicao": "Driver ausente após investigação adequada; NGS pendente não equivale a negativo.",
+          "estado": "EXTRAIDO_PARA_REVISAO"
+        },
+        "2": {
+          "opcoes": [
+            "Após IO isolada: dupla de platina apropriada à histologia",
+            "Após QT+IO: docetaxel isolado ou + ramucirumabe",
+            "Sem IO prévia: avaliar nivolumabe, atezolizumabe, pembrolizumabe se PD-L1 ≥1%, ou tislelizumabe no contexto pós-platina",
+            "Afatinibe listado com FR fraca e ressalva da própria SBOC sobre não ser a melhor opção"
+          ],
+          "fontes": [
+            {
+              "fonte": "SBOC-AVANCADO",
+              "paginas_pdf": [
+                12,
+                13,
+                14
+              ]
+            }
+          ],
+          "condicao": "Escolha condicionada à L1, PS, comorbidades e toxicidades.",
+          "estado": "EXTRAIDO_PARA_REVISAO"
+        },
+        "3": {
+          "opcoes": [
+            "Docetaxel + ramucirumabe ou docetaxel; no não escamoso, docetaxel + nintedanibe conforme histórico"
+          ],
+          "fontes": [
+            {
+              "fonte": "SONHE",
+              "paginas_pdf": [
+                267
+              ]
+            }
+          ],
+          "condicao": "SOnHe 2024; alternativas não expostas/adequadas, sem sequência universal.",
+          "estado": "EXTRAIDO_PARA_REVISAO"
+        },
+        "4": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "SEM_FONTE_ESTRUTURADA"
+        },
+        "5": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "SEM_FONTE_ESTRUTURADA"
+        }
+      },
+      "condicoes_e_limites": [
+        "SOnHe agrupa PD-L1 <50% sem delimitar todas as alternativas: não transportar IO isolada para PD-L1 negativo.",
+        "Os regimes têm fases de manutenção diferentes; não gerar uma manutenção genérica."
+      ],
+      "divergencias": [
+        "DIV-PDL1",
+        "DIV-POSEIDON",
+        "DIV-GRADUACAO"
+      ],
+      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+    },
+    {
+      "id": "IV-Escamoso-PD50",
+      "grupo": "CPNPC",
+      "estadiamento": "IV / avançado",
+      "subtipo": "Sem alteração acionável conhecida; Escamoso; PD-L1 ≥50%",
+      "modalidades": [
+        "SISTEMICO"
+      ],
+      "papeis": [
+        "PALIATIVO",
+        "MANUTENCAO"
+      ],
+      "trilha": "L1 selecionada por histologia/PD-L1 → manutenção do regime quando prevista → reavaliar exposição e resposta antes das linhas subsequentes.",
+      "fontes": [
+        {
+          "fonte": "SBOC-AVANCADO",
+          "paginas_pdf": [
+            8,
+            8,
+            12,
+            13,
+            14
+          ]
+        },
+        {
+          "fonte": "SONHE",
+          "paginas_pdf": [
+            267
+          ]
+        }
+      ],
+      "linhas": {
+        "1": {
+          "opcoes": [
+            "Carboplatina + paclitaxel/nab-paclitaxel + pembrolizumabe",
+            "Carboplatina + paclitaxel + nivolumabe + ipilimumabe",
+            "Carboplatina + paclitaxel + cemiplimabe",
+            "Platina + gencitabina + durvalumabe + tremelimumabe",
+            "Pembrolizumabe isolado",
+            "Atezolizumabe isolado",
+            "Cemiplimabe isolado"
+          ],
+          "fontes": [
+            {
+              "fonte": "SBOC-AVANCADO",
+              "paginas_pdf": [
+                8,
+                8
+              ]
+            }
+          ],
+          "condicao": "Driver ausente após investigação adequada; NGS pendente não equivale a negativo.",
+          "estado": "EXTRAIDO_PARA_REVISAO"
+        },
+        "2": {
+          "opcoes": [
+            "Após IO isolada: dupla de platina apropriada à histologia",
+            "Após QT+IO: docetaxel isolado ou + ramucirumabe",
+            "Sem IO prévia: avaliar nivolumabe, atezolizumabe, pembrolizumabe se PD-L1 ≥1%, ou tislelizumabe no contexto pós-platina",
+            "Afatinibe listado com FR fraca e ressalva da própria SBOC sobre não ser a melhor opção"
+          ],
+          "fontes": [
+            {
+              "fonte": "SBOC-AVANCADO",
+              "paginas_pdf": [
+                12,
+                13,
+                14
+              ]
+            }
+          ],
+          "condicao": "Escolha condicionada à L1, PS, comorbidades e toxicidades.",
+          "estado": "EXTRAIDO_PARA_REVISAO"
+        },
+        "3": {
+          "opcoes": [
+            "Docetaxel + ramucirumabe ou docetaxel; no não escamoso, docetaxel + nintedanibe conforme histórico"
+          ],
+          "fontes": [
+            {
+              "fonte": "SONHE",
+              "paginas_pdf": [
+                267
+              ]
+            }
+          ],
+          "condicao": "SOnHe 2024; alternativas não expostas/adequadas, sem sequência universal.",
+          "estado": "EXTRAIDO_PARA_REVISAO"
+        },
+        "4": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "SEM_FONTE_ESTRUTURADA"
+        },
+        "5": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "SEM_FONTE_ESTRUTURADA"
+        }
+      },
+      "condicoes_e_limites": [
+        "SOnHe agrupa PD-L1 <50% sem delimitar todas as alternativas: não transportar IO isolada para PD-L1 negativo.",
+        "Os regimes têm fases de manutenção diferentes; não gerar uma manutenção genérica."
+      ],
+      "divergencias": [
+        "DIV-PDL1",
+        "DIV-POSEIDON",
+        "DIV-GRADUACAO"
+      ],
+      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+    },
+    {
+      "id": "PUL-26",
+      "grupo": "CPNPC",
+      "estadiamento": "IV / avançado",
+      "subtipo": "EGFR del19/L858R",
+      "modalidades": [
+        "SISTEMICO"
+      ],
+      "papeis": [
+        "PALIATIVO",
+        "MANUTENCAO"
+      ],
+      "trilha": "Terapia dirigida L1; na progressão, discriminar agente prévio e mecanismo de resistência.",
+      "fontes": [
+        {
+          "fonte": "SBOC-AVANCADO",
+          "paginas_pdf": [
+            15,
+            16,
+            17,
+            23
+          ]
+        },
+        {
+          "fonte": "SONHE",
+          "paginas_pdf": [
+            258
+          ]
+        }
+      ],
+      "linhas": {
+        "1": {
+          "opcoes": [
+            "Osimertinibe",
+            "Osimertinibe + platina + pemetrexede",
+            "Amivantamabe + lazertinibe",
+            "Alternativas da SBOC: gefitinibe, erlotinibe, afatinibe ou erlotinibe + ramucirumabe"
+          ],
+          "fontes": [
+            {
+              "fonte": "SBOC-AVANCADO",
+              "paginas_pdf": [
+                15
+              ]
+            }
+          ],
+          "condicao": "",
+          "estado": "EXTRAIDO_PARA_REVISAO"
+        },
+        "2": {
+          "opcoes": [
+            "Após TKI 1ª/2ª geração e T790M+: osimertinibe",
+            "Após osimertinibe: carboplatina + pemetrexede + amivantamabe",
+            "Doublet de platina ± bevacizumabe",
+            "Carboplatina + paclitaxel + bevacizumabe + atezolizumabe"
+          ],
+          "fontes": [
+            {
+              "fonte": "SBOC-AVANCADO",
+              "paginas_pdf": [
+                15,
+                17,
+                23
+              ]
+            }
+          ],
+          "condicao": "Reavaliar resistência e transformação; alternativas não se aplicam indistintamente.",
+          "estado": "EXTRAIDO_PARA_REVISAO"
+        },
+        "3": {
+          "opcoes": [
+            "Opções de QT subsequente conforme exposição; SOnHe lista docetaxel ± ramucirumabe, docetaxel+nintedanibe e outras opções não utilizadas"
+          ],
+          "fontes": [
+            {
+              "fonte": "SBOC-AVANCADO",
+              "paginas_pdf": [
+                15
+              ]
+            },
+            {
+              "fonte": "SONHE",
+              "paginas_pdf": [
+                258
+              ]
+            }
+          ],
+          "condicao": "SBOC não favorece IO neste cenário.",
+          "estado": "EXTRAIDO_PARA_REVISAO"
+        },
+        "4": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "SEM_FONTE_ESTRUTURADA"
+        },
+        "5": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "SEM_FONTE_ESTRUTURADA"
+        }
+      },
+      "condicoes_e_limites": [],
+      "divergencias": [
+        "DIV-GRADUACAO",
+        "DIV-POSOLOGIA"
+      ],
+      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+    },
+    {
+      "id": "PUL-27",
+      "grupo": "CPNPC",
+      "estadiamento": "IV / avançado",
+      "subtipo": "EGFR inserção éxon 20",
+      "modalidades": [
+        "SISTEMICO"
+      ],
+      "papeis": [
+        "PALIATIVO",
+        "MANUTENCAO"
+      ],
+      "trilha": "Distinguir inserção éxon 20 de del19/L858R.",
+      "fontes": [
+        {
+          "fonte": "SBOC-AVANCADO",
+          "paginas_pdf": [
+            16,
+            18,
+            23
+          ]
+        },
+        {
+          "fonte": "SONHE",
+          "paginas_pdf": [
+            259
+          ]
+        }
+      ],
+      "linhas": {
+        "1": {
+          "opcoes": [
+            "Carboplatina + pemetrexede + amivantamabe"
+          ],
+          "fontes": [
+            {
+              "fonte": "SBOC-AVANCADO",
+              "paginas_pdf": [
+                16,
+                18
+              ]
+            }
+          ],
+          "condicao": "",
+          "estado": "EXTRAIDO_PARA_REVISAO"
+        },
+        "2": {
+          "opcoes": [
+            "Amivantamabe se não utilizado anteriormente",
+            "SOnHe lista docetaxel ± ramucirumabe ou docetaxel+nintedanibe"
+          ],
+          "fontes": [
+            {
+              "fonte": "SBOC-AVANCADO",
+              "paginas_pdf": [
+                16
+              ]
+            },
+            {
+              "fonte": "SONHE",
+              "paginas_pdf": [
+                259
+              ]
+            }
+          ],
+          "condicao": "Não repetir amivantamabe automaticamente após exposição.",
+          "estado": "EXTRAIDO_PARA_REVISAO"
+        },
+        "3": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "SEM_FONTE_ESTRUTURADA"
+        },
+        "4": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "SEM_FONTE_ESTRUTURADA"
+        },
+        "5": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "SEM_FONTE_ESTRUTURADA"
+        }
+      },
+      "condicoes_e_limites": [],
+      "divergencias": [
+        "DIV-POSOLOGIA",
+        "DIV-GRADUACAO"
+      ],
+      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+    },
+    {
+      "id": "PUL-28",
+      "grupo": "CPNPC",
+      "estadiamento": "IV / avançado",
+      "subtipo": "Fusão ALK",
+      "modalidades": [
+        "SISTEMICO"
+      ],
+      "papeis": [
+        "PALIATIVO"
+      ],
+      "trilha": "Escolher inibidor conforme eficácia, SNC, toxicidade e comorbidades; progressão depende do agente anterior.",
+      "fontes": [
+        {
+          "fonte": "SBOC-AVANCADO",
+          "paginas_pdf": [
+            18,
+            19,
+            23
+          ]
+        },
+        {
+          "fonte": "SONHE",
+          "paginas_pdf": [
+            259,
+            260
+          ]
+        }
+      ],
+      "linhas": {
+        "1": {
+          "opcoes": [
+            "Alectinibe",
+            "Brigatinibe",
+            "Lorlatinibe",
+            "Crizotinibe se indisponíveis os preferenciais"
+          ],
+          "fontes": [
+            {
+              "fonte": "SBOC-AVANCADO",
+              "paginas_pdf": [
+                18,
+                19
+              ]
+            }
+          ],
+          "condicao": "SOnHe favorece lorlatinibe; SBOC oferece três preferenciais.",
+          "estado": "EXTRAIDO_PARA_REVISAO"
+        },
+        "2": {
+          "opcoes": [
+            "Após crizotinibe: alectinibe, brigatinibe ou lorlatinibe",
+            "Após alectinibe/brigatinibe: avaliar lorlatinibe e mecanismo de resistência",
+            "Platina+pemetrexede quando TKI não é opção",
+            "Atezolizumabe+bevacizumabe+QT aparece com evidência limitada"
+          ],
+          "fontes": [
+            {
+              "fonte": "SBOC-AVANCADO",
+              "paginas_pdf": [
+                18,
+                19,
+                23
+              ]
+            }
+          ],
+          "condicao": "Composição QT divergente entre tabela e texto SBOC; não prescrever pela tabela isolada.",
+          "estado": "EXTRAIDO_PARA_REVISAO"
+        },
+        "3": {
+          "opcoes": [
+            "SOnHe: docetaxel ± ramucirumabe; platina+pemetrexede se duas linhas anti-ALK anteriores"
+          ],
+          "fontes": [
+            {
+              "fonte": "SONHE",
+              "paginas_pdf": [
+                260
+              ]
+            }
+          ],
+          "condicao": "Condicionar às exposições; não sequência obrigatória.",
+          "estado": "EXTRAIDO_PARA_REVISAO"
+        },
+        "4": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "SEM_FONTE_ESTRUTURADA"
+        },
+        "5": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "SEM_FONTE_ESTRUTURADA"
+        }
+      },
+      "condicoes_e_limites": [],
+      "divergencias": [
+        "DIV-ALK"
+      ],
+      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+    },
+    {
+      "id": "PUL-29",
+      "grupo": "CPNPC",
+      "estadiamento": "IV / avançado",
+      "subtipo": "Fusão ROS1",
+      "modalidades": [
+        "SISTEMICO"
+      ],
+      "papeis": [
+        "PALIATIVO"
+      ],
+      "trilha": "Terapia dirigida conforme alteração específica; linhas seguintes só quando sustentadas pela fonte.",
+      "fontes": [
+        {
+          "fonte": "SBOC-AVANCADO",
+          "paginas_pdf": [
+            20,
+            21
+          ]
+        },
+        {
+          "fonte": "SONHE",
+          "paginas_pdf": [
+            260
+          ]
+        }
+      ],
+      "linhas": {
+        "2": {
+          "opcoes": [
+            "Platina + pemetrexede; alternativas citotóxicas do capítulo"
+          ],
+          "fontes": [
+            {
+              "fonte": "SONHE",
+              "paginas_pdf": [
+                260
+              ]
+            }
+          ],
+          "condicao": "Fonte 2024; novos inibidores e acesso atual a conferir.",
+          "estado": "EXTRAIDO_PARA_REVISAO"
+        },
+        "1": {
+          "opcoes": [
+            "Crizotinibe; SOnHe também lista entrectinibe/lorlatinibe com nota de disponibilidade"
+          ],
+          "fontes": [
+            {
+              "fonte": "SBOC-AVANCADO",
+              "paginas_pdf": [
+                20,
+                21
+              ]
+            },
+            {
+              "fonte": "SONHE",
+              "paginas_pdf": [
+                260
+              ]
+            }
+          ],
+          "condicao": "",
+          "estado": "EXTRAIDO_PARA_REVISAO"
+        },
+        "3": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "SEM_FONTE_ESTRUTURADA"
+        },
+        "4": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "SEM_FONTE_ESTRUTURADA"
+        },
+        "5": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "SEM_FONTE_ESTRUTURADA"
+        }
+      },
+      "condicoes_e_limites": [
+        "Não confundir mutação, fusão, amplificação e hiperexpressão.",
+        "Lacunas de L2–L5 não são contraindicações ao tratamento."
+      ],
+      "divergencias": [],
+      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+    },
+    {
+      "id": "PUL-30",
+      "grupo": "CPNPC",
+      "estadiamento": "IV / avançado",
+      "subtipo": "BRAF V600E",
+      "modalidades": [
+        "SISTEMICO"
+      ],
+      "papeis": [
+        "PALIATIVO"
+      ],
+      "trilha": "Terapia dirigida conforme alteração específica; linhas seguintes só quando sustentadas pela fonte.",
+      "fontes": [
+        {
+          "fonte": "SBOC-AVANCADO",
+          "paginas_pdf": [
+            20,
+            21
+          ]
+        },
+        {
+          "fonte": "SONHE",
+          "paginas_pdf": [
+            261
+          ]
+        }
+      ],
+      "linhas": {
+        "1": {
+          "opcoes": [
+            "Dabrafenibe + trametinibe",
+            "Encorafenibe + binimetinibe"
+          ],
+          "fontes": [
+            {
+              "fonte": "SBOC-AVANCADO",
+              "paginas_pdf": [
+                20,
+                21
+              ]
+            },
+            {
+              "fonte": "SONHE",
+              "paginas_pdf": [
+                261
+              ]
+            }
+          ],
+          "condicao": "",
+          "estado": "EXTRAIDO_PARA_REVISAO"
+        },
+        "2": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "SEM_FONTE_ESTRUTURADA"
+        },
+        "3": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "SEM_FONTE_ESTRUTURADA"
+        },
+        "4": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "SEM_FONTE_ESTRUTURADA"
+        },
+        "5": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "SEM_FONTE_ESTRUTURADA"
+        }
+      },
+      "condicoes_e_limites": [
+        "Não confundir mutação, fusão, amplificação e hiperexpressão.",
+        "Lacunas de L2–L5 não são contraindicações ao tratamento."
+      ],
+      "divergencias": [],
+      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+    },
+    {
+      "id": "PUL-31",
+      "grupo": "CPNPC",
+      "estadiamento": "IV / avançado",
+      "subtipo": "Fusão RET",
+      "modalidades": [
+        "SISTEMICO"
+      ],
+      "papeis": [
+        "PALIATIVO"
+      ],
+      "trilha": "Terapia dirigida conforme alteração específica; linhas seguintes só quando sustentadas pela fonte.",
+      "fontes": [
+        {
+          "fonte": "SBOC-AVANCADO",
+          "paginas_pdf": [
+            20,
+            21
+          ]
+        }
+      ],
+      "linhas": {
+        "1": {
+          "opcoes": [
+            "Selpercatinibe"
+          ],
+          "fontes": [
+            {
+              "fonte": "SBOC-AVANCADO",
+              "paginas_pdf": [
+                20,
+                21
+              ]
+            }
+          ],
+          "condicao": "",
+          "estado": "EXTRAIDO_PARA_REVISAO"
+        },
+        "2": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "SEM_FONTE_ESTRUTURADA"
+        },
+        "3": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "SEM_FONTE_ESTRUTURADA"
+        },
+        "4": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "SEM_FONTE_ESTRUTURADA"
+        },
+        "5": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "SEM_FONTE_ESTRUTURADA"
+        }
+      },
+      "condicoes_e_limites": [
+        "Não confundir mutação, fusão, amplificação e hiperexpressão.",
+        "Lacunas de L2–L5 não são contraindicações ao tratamento."
+      ],
+      "divergencias": [],
+      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+    },
+    {
+      "id": "PUL-32",
+      "grupo": "CPNPC",
+      "estadiamento": "IV / avançado",
+      "subtipo": "Fusão NTRK",
+      "modalidades": [
+        "SISTEMICO"
+      ],
+      "papeis": [
+        "PALIATIVO"
+      ],
+      "trilha": "Terapia dirigida conforme alteração específica; linhas seguintes só quando sustentadas pela fonte.",
+      "fontes": [
+        {
+          "fonte": "SBOC-AVANCADO",
+          "paginas_pdf": [
+            20,
+            21
+          ]
+        },
+        {
+          "fonte": "SONHE",
+          "paginas_pdf": [
+            261
+          ]
+        }
+      ],
+      "linhas": {
+        "1": {
+          "opcoes": [
+            "Larotrectinibe; SOnHe lista entrectinibe como alternativa"
+          ],
+          "fontes": [
+            {
+              "fonte": "SBOC-AVANCADO",
+              "paginas_pdf": [
+                20,
+                21
+              ]
+            },
+            {
+              "fonte": "SONHE",
+              "paginas_pdf": [
+                261
+              ]
+            }
+          ],
+          "condicao": "",
+          "estado": "EXTRAIDO_PARA_REVISAO"
+        },
+        "2": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "SEM_FONTE_ESTRUTURADA"
+        },
+        "3": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "SEM_FONTE_ESTRUTURADA"
+        },
+        "4": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "SEM_FONTE_ESTRUTURADA"
+        },
+        "5": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "SEM_FONTE_ESTRUTURADA"
+        }
+      },
+      "condicoes_e_limites": [
+        "Não confundir mutação, fusão, amplificação e hiperexpressão.",
+        "Lacunas de L2–L5 não são contraindicações ao tratamento."
+      ],
+      "divergencias": [],
+      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+    },
+    {
+      "id": "PUL-33",
+      "grupo": "CPNPC",
+      "estadiamento": "IV / avançado",
+      "subtipo": "MET skipping éxon 14",
+      "modalidades": [
+        "SISTEMICO"
+      ],
+      "papeis": [
+        "PALIATIVO"
+      ],
+      "trilha": "Terapia dirigida conforme alteração específica; linhas seguintes só quando sustentadas pela fonte.",
+      "fontes": [
+        {
+          "fonte": "SBOC-AVANCADO",
+          "paginas_pdf": [
+            20,
+            21,
+            22
+          ]
+        },
+        {
+          "fonte": "SONHE",
+          "paginas_pdf": [
+            261
+          ]
+        }
+      ],
+      "linhas": {
+        "1": {
+          "opcoes": [
+            "Capmatinibe",
+            "Tepotinibe"
+          ],
+          "fontes": [
+            {
+              "fonte": "SBOC-AVANCADO",
+              "paginas_pdf": [
+                20,
+                21,
+                22
+              ]
+            },
+            {
+              "fonte": "SONHE",
+              "paginas_pdf": [
+                261
+              ]
+            }
+          ],
+          "condicao": "",
+          "estado": "EXTRAIDO_PARA_REVISAO"
+        },
+        "2": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "SEM_FONTE_ESTRUTURADA"
+        },
+        "3": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "SEM_FONTE_ESTRUTURADA"
+        },
+        "4": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "SEM_FONTE_ESTRUTURADA"
+        },
+        "5": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "SEM_FONTE_ESTRUTURADA"
+        }
+      },
+      "condicoes_e_limites": [
+        "Não confundir mutação, fusão, amplificação e hiperexpressão.",
+        "Lacunas de L2–L5 não são contraindicações ao tratamento."
+      ],
+      "divergencias": [],
+      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+    },
+    {
+      "id": "PUL-34",
+      "grupo": "CPNPC",
+      "estadiamento": "IV / avançado",
+      "subtipo": "KRAS G12C",
+      "modalidades": [
+        "SISTEMICO"
+      ],
+      "papeis": [
+        "PALIATIVO"
+      ],
+      "trilha": "Tratamento inicial sistêmico → terapia dirigida após tratamento prévio elegível.",
+      "fontes": [
+        {
+          "fonte": "SBOC-AVANCADO",
+          "paginas_pdf": [
+            20,
+            22
+          ]
+        },
+        {
+          "fonte": "SONHE",
+          "paginas_pdf": [
+            261
+          ]
+        }
+      ],
+      "linhas": {
+        "1": {
+          "opcoes": [
+            "QT + IO conforme histologia, PD-L1 e elegibilidade"
+          ],
+          "fontes": [
+            {
+              "fonte": "SONHE",
+              "paginas_pdf": [
+                261
+              ]
+            }
+          ],
+          "condicao": "Não aplicar a regra genérica de alvo em L1.",
+          "estado": "EXTRAIDO_PARA_REVISAO"
+        },
+        "2": {
+          "opcoes": [
+            "Sotorasibe"
+          ],
+          "fontes": [
+            {
+              "fonte": "SBOC-AVANCADO",
+              "paginas_pdf": [
+                20,
+                22
+              ]
+            }
+          ],
+          "condicao": "Após falha a platina combinada ou não a IO; revisar data da última IO e risco hepático.",
+          "estado": "EXTRAIDO_PARA_REVISAO"
+        },
+        "3": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "SEM_FONTE_ESTRUTURADA"
+        },
+        "4": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "SEM_FONTE_ESTRUTURADA"
+        },
+        "5": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "SEM_FONTE_ESTRUTURADA"
+        }
+      },
+      "condicoes_e_limites": [
+        "A fonte permite sotorasibe em L2 ou mais; não há cinco escolhas ordenadas."
+      ],
+      "divergencias": [
+        "DIV-KRAS"
+      ],
+      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+    },
+    {
+      "id": "PUL-35",
+      "grupo": "CPNPC",
+      "estadiamento": "IV / avançado",
+      "subtipo": "HER2 mutado",
+      "modalidades": [
+        "SISTEMICO"
+      ],
+      "papeis": [
+        "PALIATIVO"
+      ],
+      "trilha": "Preservar variante/domínio; separar de hiperexpressão.",
+      "fontes": [
+        {
+          "fonte": "SBOC-AVANCADO",
+          "paginas_pdf": [
+            20,
+            22
+          ]
+        },
+        {
+          "fonte": "SONHE",
+          "paginas_pdf": [
+            261,
+            262
+          ]
+        },
+        {
+          "fonte": "MOC-LOCAL",
+          "secao": "ESTÁDIO IV — HER2 mutado"
+        }
+      ],
+      "linhas": {
+        "1": {
+          "opcoes": [
+            "QT com ou sem IO conforme contexto do capítulo SOnHe"
+          ],
+          "fontes": [
+            {
+              "fonte": "SONHE",
+              "paginas_pdf": [
+                261,
+                262
+              ]
+            }
+          ],
+          "condicao": "Não transportar cemiplimabe isolado sem conferir PD-L1/indicação.",
+          "estado": "EXTRAIDO_PARA_REVISAO"
+        },
+        "2": {
+          "opcoes": [
+            "Trastuzumabe deruxtecana",
+            "MOC local: zongertinibe ou sevabertinibe se disponíveis, preferencialmente antes do ADC"
+          ],
+          "fontes": [
+            {
+              "fonte": "SBOC-AVANCADO",
+              "paginas_pdf": [
+                20,
+                22
+              ]
+            },
+            {
+              "fonte": "MOC-LOCAL",
+              "secao": "ESTÁDIO IV — HER2 mutado"
+            }
+          ],
+          "condicao": "TKIs: indicação e domínio elegível precisam ser conferidos; disponibilidade brasileira atual não verificada.",
+          "estado": "EXTRAIDO_PARA_REVISAO"
+        },
+        "3": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "SEM_FONTE_ESTRUTURADA"
+        },
+        "4": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "SEM_FONTE_ESTRUTURADA"
+        },
+        "5": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "SEM_FONTE_ESTRUTURADA"
+        }
+      },
+      "condicoes_e_limites": [],
+      "divergencias": [
+        "DIV-HER2",
+        "DIV-REGULATORIO"
+      ],
+      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+    },
+    {
+      "id": "PUL-36",
+      "grupo": "CPNPC",
+      "estadiamento": "IV / avançado previamente tratado",
+      "subtipo": "HER2 hiperexpresso",
+      "modalidades": [
+        "SISTEMICO"
+      ],
+      "papeis": [
+        "PALIATIVO"
+      ],
+      "trilha": "HER2 IHQ não substitui teste de mutação.",
+      "fontes": [
+        {
+          "fonte": "SBOC-AVANCADO",
+          "paginas_pdf": [
+            20,
+            22
+          ]
+        }
+      ],
+      "linhas": {
+        "2": {
+          "opcoes": [
+            "Trastuzumabe deruxtecana para cenário IHQ 3+ descrito no texto"
+          ],
+          "fontes": [
+            {
+              "fonte": "SBOC-AVANCADO",
+              "paginas_pdf": [
+                22
+              ]
+            }
+          ],
+          "condicao": "Tabela genérica e evidência IHQ 2+/3+ não autorizam ampliar a indicação para todo IHQ 2+.",
+          "estado": "EXTRAIDO_PARA_REVISAO"
+        },
+        "1": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "SEM_FONTE_ESTRUTURADA"
+        },
+        "3": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "SEM_FONTE_ESTRUTURADA"
+        },
+        "4": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "SEM_FONTE_ESTRUTURADA"
+        },
+        "5": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "SEM_FONTE_ESTRUTURADA"
+        }
+      },
+      "condicoes_e_limites": [],
+      "divergencias": [
+        "DIV-HER2"
+      ],
+      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+    },
+    {
+      "id": "PUL-37",
+      "grupo": "CPNPC",
+      "estadiamento": "IV / avançado",
+      "subtipo": "EGFR incomum; NRG1; outras alterações sem trilha consolidada neste lote",
+      "modalidades": [
+        "SISTEMICO"
+      ],
+      "papeis": [
+        "PALIATIVO"
+      ],
+      "trilha": "Revisão molecular específica; não usar trilha de EGFR clássico nem presumir ausência de alvo.",
+      "fontes": [
+        {
+          "fonte": "SBOC-AVANCADO",
+          "paginas_pdf": [
+            6
+          ]
+        }
+      ],
+      "linhas": {
+        "1": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "SEM_FONTE_ESTRUTURADA"
+        },
+        "2": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "SEM_FONTE_ESTRUTURADA"
+        },
+        "3": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "SEM_FONTE_ESTRUTURADA"
+        },
+        "4": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "SEM_FONTE_ESTRUTURADA"
+        },
+        "5": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "SEM_FONTE_ESTRUTURADA"
+        }
+      },
+      "condicoes_e_limites": [
+        "SEM_FONTE_ESTRUTURADA para seleção de terapia específica neste lote; a lista do painel não prova uma indicação."
+      ],
+      "divergencias": [],
+      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+    },
+    {
+      "id": "PUL-38",
+      "grupo": "CPNPC",
+      "estadiamento": "Avançado em tratamento; oligoprogressão",
+      "subtipo": "EGFR/ALK ou outro subtipo com contexto definido",
+      "modalidades": [
+        "SISTEMICO",
+        "RT",
+        "CX"
+      ],
+      "papeis": [
+        "PALIATIVO"
+      ],
+      "trilha": "SBOC admite postergar troca sistêmica em oligoprogressão lenta/pontual; intervenção local exige decisão e fonte específica.",
+      "fontes": [
+        {
+          "fonte": "SBOC-AVANCADO",
+          "paginas_pdf": [
+            17
+          ]
+        }
+      ],
+      "linhas": {
+        "1": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "SEM_FONTE_ESTRUTURADA"
+        },
+        "2": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "SEM_FONTE_ESTRUTURADA"
+        },
+        "3": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "SEM_FONTE_ESTRUTURADA"
+        },
+        "4": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "SEM_FONTE_ESTRUTURADA"
+        },
+        "5": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "SEM_FONTE_ESTRUTURADA"
+        }
+      },
+      "condicoes_e_limites": [
+        "A fonte não define aqui dose de RT, cirurgia ou critérios completos de ablação.",
+        "Não incrementar linha só porque houve tratamento local."
+      ],
+      "divergencias": [],
+      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+    },
+    {
+      "id": "PC-01",
+      "grupo": "CPPC",
+      "estadiamento": "Doença limitada",
+      "subtipo": "CPPC",
+      "modalidades": [
+        "SISTEMICO",
+        "RT"
+      ],
+      "papeis": [
+        "DEFINITIVO",
+        "CONSOLIDACAO"
+      ],
+      "trilha": "SOnHe 2024: cisplatina + etoposídeo + RT; alternativa carboplatina + etoposídeo + RT. Atualização FDA posterior: durvalumabe após QTRT concomitante sem progressão.",
+      "fontes": [
+        {
+          "fonte": "SONHE",
+          "paginas_pdf": [
+            285
+          ]
+        },
+        {
+          "fonte": "FDA-ADRIATIC",
+          "secao": null
+        }
+      ],
+      "linhas": {
+        "1": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "2": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "3": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "4": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "5": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        }
+      },
+      "condicoes_e_limites": [
+        "TNM, critérios de doença limitada, cirurgia em casos selecionados e estratégia de SNC precisam de complementação.",
+        "Atualização FDA separada do manual local; acesso Anvisa/ANS não verificado."
+      ],
+      "divergencias": [],
+      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+    },
+    {
+      "id": "PC-02",
+      "grupo": "CPPC",
+      "estadiamento": "Doença extensa",
+      "subtipo": "CPPC",
+      "modalidades": [
+        "SISTEMICO"
+      ],
+      "papeis": [
+        "PALIATIVO"
+      ],
+      "trilha": "SOnHe 2024 descreve QT+IO inicial e alternativas de QT; atualizar elegibilidade antes de aplicação.",
+      "fontes": [
+        {
+          "fonte": "SONHE",
+          "paginas_pdf": [
+            286
+          ]
+        }
+      ],
+      "linhas": {
+        "1": {
+          "opcoes": [
+            "Platina + etoposídeo + durvalumabe",
+            "Carboplatina + etoposídeo + atezolizumabe",
+            "Alternativas QT do manual: platina+etoposídeo ou platina+irinotecano"
+          ],
+          "fontes": [
+            {
+              "fonte": "SONHE",
+              "paginas_pdf": [
+                286
+              ]
+            }
+          ],
+          "condicao": "",
+          "estado": "EXTRAIDO_PARA_REVISAO"
+        },
+        "2": {
+          "opcoes": [
+            "Recidiva/progressão: topotecano; alternativas QT descritas no manual",
+            "FDA posterior: tarlatamab após progressão em/após platina"
+          ],
+          "fontes": [
+            {
+              "fonte": "SONHE",
+              "paginas_pdf": [
+                286
+              ]
+            },
+            {
+              "fonte": "FDA-TARLATAMAB",
+              "secao": null
+            }
+          ],
+          "condicao": "Recaída sensível/refratária, intervalo e acesso precisam ser considerados; manual não constrói uma hierarquia atual completa.",
+          "estado": "EXTRAIDO_PARA_REVISAO"
+        },
+        "3": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "SEM_FONTE_ESTRUTURADA"
+        },
+        "4": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "SEM_FONTE_ESTRUTURADA"
+        },
+        "5": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "SEM_FONTE_ESTRUTURADA"
+        }
+      },
+      "condicoes_e_limites": [
+        "L2 é organização editorial do cenário pós-L1; a fonte local o denomina recidiva/progressão.",
+        "RT torácica, PCI/vigilância por RM e manutenção: completar com fonte atual específica."
+      ],
+      "divergencias": [],
+      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+    },
+    {
+      "id": "NET-01",
+      "grupo": "TNE_PULMONAR_BEM_DIFERENCIADO",
+      "estadiamento": "Localizado/ressecável; capítulo usa AJCC 8",
+      "subtipo": "Carcinoide típico/atípico",
+      "modalidades": [
+        "CX",
+        "OBSERVACAO"
+      ],
+      "papeis": [
+        "INICIAL",
+        "ADJUVANTE"
+      ],
+      "trilha": "Ressecção anatômica/linfonodal conforme contexto; alternativas limitadas para típico periférico pequeno e R0; fonte não recomenda adjuvância de rotina.",
+      "fontes": [
+        {
+          "fonte": "SBOC-NET",
+          "paginas_pdf": [
+            4,
+            7,
+            8
+          ]
+        }
+      ],
+      "linhas": {
+        "1": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "2": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "3": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "4": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        },
+        "5": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "NAO_APLICAVEL"
+        }
+      },
+      "condicoes_e_limites": [
+        "Não aplicar esta recomendação de adjuvância a CPPC ou grandes células neuroendócrinas."
+      ],
+      "divergencias": [],
+      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+    },
+    {
+      "id": "NET-02",
+      "grupo": "TNE_PULMONAR_BEM_DIFERENCIADO",
+      "estadiamento": "Metastático/irressecável",
+      "subtipo": "Carcinoide típico/atípico, não funcionante",
+      "modalidades": [
+        "SISTEMICO",
+        "MEDICINA_NUCLEAR",
+        "OBSERVACAO"
+      ],
+      "papeis": [
+        "PALIATIVO"
+      ],
+      "trilha": "Sequência depende de SSTR, volume, velocidade, sintomas e tratamentos prévios; não há L1–L5 universal.",
+      "fontes": [
+        {
+          "fonte": "SBOC-NET",
+          "paginas_pdf": [
+            9,
+            10
+          ]
+        }
+      ],
+      "linhas": {
+        "1": {
+          "opcoes": [
+            "Observação em doença indolente/baixo volume",
+            "Análogo de somatostatina se SSTR positivo",
+            "Everolimo quando sem expressão SSTR2, conforme fonte"
+          ],
+          "fontes": [
+            {
+              "fonte": "SBOC-NET",
+              "paginas_pdf": [
+                9
+              ]
+            }
+          ],
+          "condicao": "Posição L1 é organização condicionada; a fonte não numera todas as opções.",
+          "estado": "EXTRAIDO_PARA_REVISAO"
+        },
+        "2": {
+          "opcoes": [
+            "Everolimo após progressão a análogo",
+            "Cabozantinibe após tratamento sistêmico prévio",
+            "QT selecionada: temozolomida ± capecitabina ou capecitabina+oxaliplatina",
+            "PRRT em SSTR positivo em progressão, com evidência limitada"
+          ],
+          "fontes": [
+            {
+              "fonte": "SBOC-NET",
+              "paginas_pdf": [
+                9,
+                10
+              ]
+            }
+          ],
+          "condicao": "São opções subsequentes; não equivalem a L2 obrigatória nem a uma ordem fixa.",
+          "estado": "EXTRAIDO_PARA_REVISAO"
+        },
+        "3": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "SEM_FONTE_ESTRUTURADA"
+        },
+        "4": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "SEM_FONTE_ESTRUTURADA"
+        },
+        "5": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "SEM_FONTE_ESTRUTURADA"
+        }
+      },
+      "condicoes_e_limites": [],
+      "divergencias": [],
+      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+    },
+    {
+      "id": "NET-03",
+      "grupo": "TNE_PULMONAR_BEM_DIFERENCIADO",
+      "estadiamento": "Avançado/funcionante",
+      "subtipo": "Carcinoide com síndrome funcional",
+      "modalidades": [
+        "SISTEMICO"
+      ],
+      "papeis": [
+        "PALIATIVO"
+      ],
+      "trilha": "Análogos de somatostatina para controle funcional; capítulo discute associação com terapia-alvo em situações selecionadas.",
+      "fontes": [
+        {
+          "fonte": "SBOC-NET",
+          "paginas_pdf": [
+            10
+          ]
+        }
+      ],
+      "linhas": {
+        "1": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "SEM_FONTE_ESTRUTURADA"
+        },
+        "2": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "SEM_FONTE_ESTRUTURADA"
+        },
+        "3": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "SEM_FONTE_ESTRUTURADA"
+        },
+        "4": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "SEM_FONTE_ESTRUTURADA"
+        },
+        "5": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "SEM_FONTE_ESTRUTURADA"
+        }
+      },
+      "condicoes_e_limites": [
+        "Controle hormonal não define sozinho troca de linha antitumoral."
+      ],
+      "divergencias": [],
+      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+    },
+    {
+      "id": "NET-04",
+      "grupo": "CNGC",
+      "estadiamento": "A definir",
+      "subtipo": "Carcinoma neuroendócrino de grandes células",
+      "modalidades": [
+        "SISTEMICO",
+        "CX",
+        "RT"
+      ],
+      "papeis": [
+        "PALIATIVO"
+      ],
+      "trilha": "Classificação identificada; trilha terapêutica específica não consolidada neste lote.",
+      "fontes": [
+        {
+          "fonte": "SBOC-NET",
+          "paginas_pdf": [
+            7
+          ]
+        }
+      ],
+      "linhas": {
+        "1": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "SEM_FONTE_ESTRUTURADA"
+        },
+        "2": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "SEM_FONTE_ESTRUTURADA"
+        },
+        "3": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "SEM_FONTE_ESTRUTURADA"
+        },
+        "4": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "SEM_FONTE_ESTRUTURADA"
+        },
+        "5": {
+          "opcoes": [],
+          "fontes": [],
+          "condicao": "Não completar por analogia.",
+          "estado": "SEM_FONTE_ESTRUTURADA"
+        }
+      },
+      "condicoes_e_limites": [
+        "Não usar automaticamente algoritmo de carcinoide ou de CPNPC."
+      ],
+      "divergencias": [],
+      "estado": "RASCUNHO_DOCUMENTAL_NAO_EXECUTAVEL"
+    }
+  ],
+  "acoes_consulta": [
+    {
+      "id": "EX-01",
+      "contexto": "PRIMEIRA_CONSULTA",
+      "rascunho": "Revisar AP/IHQ, material e diagnóstico; solicitar complemento quando insuficiente.",
+      "condicao": "Antes de escolher trilha; preservar histologia, negação e incerteza.",
+      "fontes": [
+        {
+          "fonte": "SBOC-AVANCADO",
+          "paginas_pdf": [
+            6
+          ]
+        },
+        {
+          "fonte": "SBOC-NET",
+          "paginas_pdf": [
+            7
+          ]
+        }
+      ],
+      "pendencia": "",
+      "estado": "PROPOSTA_PARA_MEDICO",
+      "executado": false
+    },
+    {
+      "id": "EX-02",
+      "contexto": "ESTADIAMENTO_LOCAL",
+      "rascunho": "TC de tórax e abdome com contraste; RM do encéfalo conforme cenário e sintomas.",
+      "condicao": "Checar exames recentes, função renal, contraste e indicação individual.",
+      "fontes": [
+        {
+          "fonte": "SBOC-LOCAL",
+          "paginas_pdf": [
+            9
+          ]
+        }
+      ],
+      "pendencia": "Contraste/alergias não podem ser presumidos seguros.",
+      "estado": "PROPOSTA_PARA_MEDICO",
+      "executado": false
+    },
+    {
+      "id": "EX-03",
+      "contexto": "ESTADIAMENTO_LOCAL",
+      "rascunho": "PET/CT; avaliar confirmação de lesão única suspeita ou achado que altere intenção.",
+      "condicao": "Candidato a tratamento curativo; confirmação conforme situação do capítulo.",
+      "fontes": [
+        {
+          "fonte": "SBOC-LOCAL",
+          "paginas_pdf": [
+            10
+          ]
+        }
+      ],
+      "pendencia": "",
+      "estado": "PROPOSTA_PARA_MEDICO",
+      "executado": false
+    },
+    {
+      "id": "EX-04",
+      "contexto": "MEDIASTINO",
+      "rascunho": "Avaliação invasiva com EBUS/EUS preferencial se disponível ou mediastinoscopia.",
+      "condicao": "Tumor central, periférico ≥3 cm, cN1 ou suspeita mediastinal; suspeita forte pode exigir investigação após exame negativo.",
+      "fontes": [
+        {
+          "fonte": "SBOC-LOCAL",
+          "paginas_pdf": [
+            10
+          ]
+        }
+      ],
+      "pendencia": "",
+      "estado": "PROPOSTA_PARA_MEDICO",
+      "executado": false
+    },
+    {
+      "id": "EX-05",
+      "contexto": "CX",
+      "rascunho": "Prova de função pulmonar e avaliação cirúrgica.",
+      "condicao": "Candidato à cirurgia; resultado não substitui decisão de operabilidade.",
+      "fontes": [
+        {
+          "fonte": "SBOC-LOCAL",
+          "paginas_pdf": [
+            9,
+            10
+          ]
+        }
+      ],
+      "pendencia": "",
+      "estado": "PROPOSTA_PARA_MEDICO",
+      "executado": false
+    },
+    {
+      "id": "EX-06",
+      "contexto": "DERRAME",
+      "rascunho": "Avaliar toracocentese/pleuroscopia diagnóstica.",
+      "condicao": "Derrame suspeito; não classificar todo derrame como maligno.",
+      "fontes": [
+        {
+          "fonte": "SBOC-LOCAL",
+          "paginas_pdf": [
+            11
+          ]
+        }
+      ],
+      "pendencia": "",
+      "estado": "PROPOSTA_PARA_MEDICO",
+      "executado": false
+    },
+    {
+      "id": "EX-07",
+      "contexto": "ESTADIAMENTO_IV",
+      "rascunho": "PET/CT ou alternativa TC tórax/abdome/pelve + cintilografia se PET indisponível; RM de crânio.",
+      "condicao": "Conforme cenário de doença avançada da fonte.",
+      "fontes": [
+        {
+          "fonte": "SBOC-AVANCADO",
+          "paginas_pdf": [
+            5
+          ]
+        }
+      ],
+      "pendencia": "",
+      "estado": "PROPOSTA_PARA_MEDICO",
+      "executado": false
+    },
+    {
+      "id": "EX-08",
+      "contexto": "BIOMARCADORES",
+      "rascunho": "NGS preferencialmente DNA+RNA; PD-L1 e HER2 IHQ conforme fonte.",
+      "condicao": "Não escamoso; considerar avaliação molecular em escamoso jovem/não fumante/baixa carga tabágica. Preservar clone, TPS, material e datas.",
+      "fontes": [
+        {
+          "fonte": "SBOC-AVANCADO",
+          "paginas_pdf": [
+            6
+          ]
+        }
+      ],
+      "pendencia": "",
+      "estado": "PROPOSTA_PARA_MEDICO",
+      "executado": false
+    },
+    {
+      "id": "EX-09",
+      "contexto": "BIOPSIA_LIQUIDA",
+      "rascunho": "Avaliar tecido se ctDNA sem alteração detectável.",
+      "condicao": "Plasma negativo não exclui alteração tumoral; registrar inviabilidade de obtenção se houver.",
+      "fontes": [
+        {
+          "fonte": "SBOC-AVANCADO",
+          "paginas_pdf": [
+            6
+          ]
+        }
+      ],
+      "pendencia": "",
+      "estado": "PROPOSTA_PARA_MEDICO",
+      "executado": false
+    },
+    {
+      "id": "EX-10",
+      "contexto": "PRE_TRATAMENTO",
+      "rascunho": "Hemograma, funções renal/hepática, eletrólitos; avaliações adicionais dirigidas ao regime.",
+      "condicao": "Antes da proposta de tratamento; validade temporal e limiares por protocolo ainda a definir.",
+      "fontes": [
+        {
+          "fonte": "SBOC-LOCAL",
+          "paginas_pdf": [
+            10
+          ]
+        },
+        {
+          "fonte": "SBOC-AVANCADO",
+          "paginas_pdf": [
+            5
+          ]
+        }
+      ],
+      "pendencia": "Sem política validada de validade temporal não declarar exames válidos.",
+      "estado": "PROPOSTA_PARA_MEDICO",
+      "executado": false
+    },
+    {
+      "id": "EX-11",
+      "contexto": "IMUNOTERAPIA",
+      "rascunho": "Avaliar perfil hormonal e sorologias conforme contexto; revisar autoimunidade, transplante e corticoides.",
+      "condicao": "Revisão individual; diferenciar triagem de confirmação diagnóstica.",
+      "fontes": [
+        {
+          "fonte": "SBOC-LOCAL",
+          "paginas_pdf": [
+            10
+          ]
+        },
+        {
+          "fonte": "SBOC-AVANCADO",
+          "paginas_pdf": [
+            5
+          ]
+        },
+        {
+          "fonte": "MOC-LOCAL",
+          "secao": "ESTÁDIO IV — contraindicações à imunoterapia"
+        }
+      ],
+      "pendencia": "",
+      "estado": "PROPOSTA_PARA_MEDICO",
+      "executado": false
+    },
+    {
+      "id": "EN-01",
+      "contexto": "PRIMEIRA_CONSULTA",
+      "rascunho": "Discussão multidisciplinar: oncologia, cirurgia torácica, radioterapia, pneumologia/broncoscopia, radiologia e patologia.",
+      "condicao": "Acionar especialidades pertinentes à dúvida concreta; não encaminhar todos automaticamente.",
+      "fontes": [
+        {
+          "fonte": "SBOC-LOCAL",
+          "paginas_pdf": [
+            9,
+            17
+          ]
+        }
+      ],
+      "pendencia": "",
+      "estado": "PROPOSTA_PARA_MEDICO",
+      "executado": false
+    },
+    {
+      "id": "EN-02",
+      "contexto": "SUPORTE",
+      "rascunho": "Nutrição, psicossocial, enfermagem, farmácia; cessação do tabagismo e avaliação geriátrica quando pertinente.",
+      "condicao": "Registrar necessidade, motivo e profissional responsável.",
+      "fontes": [
+        {
+          "fonte": "SBOC-LOCAL",
+          "paginas_pdf": [
+            11
+          ]
+        }
+      ],
+      "pendencia": "",
+      "estado": "PROPOSTA_PARA_MEDICO",
+      "executado": false
+    },
+    {
+      "id": "EN-03",
+      "contexto": "AVANCADO",
+      "rascunho": "Cuidados paliativos precoces junto ao tratamento antitumoral.",
+      "condicao": "Doença avançada; não restringir ao esgotamento da L5.",
+      "fontes": [
+        {
+          "fonte": "SBOC-AVANCADO",
+          "paginas_pdf": [
+            7
+          ]
+        }
+      ],
+      "pendencia": "",
+      "estado": "PROPOSTA_PARA_MEDICO",
+      "executado": false
+    },
+    {
+      "id": "FU-01",
+      "contexto": "FOLLOW_UP_CURATIVO",
+      "rascunho": "SBOC: TC tórax/abdome + RM crânio em intervalos de 3–6 meses nos primeiros 2 anos; depois 6–12 meses do 3º ao 5º, ajustados ao risco.",
+      "condicao": "Rotina documental a escolher pelo médico; não emitir automaticamente.",
+      "fontes": [
+        {
+          "fonte": "SBOC-LOCAL",
+          "paginas_pdf": [
+            21
+          ]
+        }
+      ],
+      "pendencia": "Divergente de SOnHe e do próprio trecho pIIA na SBOC: DIV-FOLLOWUP.",
+      "estado": "PROPOSTA_PARA_MEDICO",
+      "executado": false
+    },
+    {
+      "id": "FU-02",
+      "contexto": "FOLLOW_UP_I_II",
+      "rascunho": "SOnHe: consultas trimestrais e TC semestral nos 2 primeiros anos; consultas semestrais e TC anual no 3º–5º.",
+      "condicao": "Proposta alternativa atribuída ao manual 2024.",
+      "fontes": [
+        {
+          "fonte": "SONHE",
+          "paginas_pdf": [
+            281
+          ]
+        }
+      ],
+      "pendencia": "Não mesclar intervalos com FU-01.",
+      "estado": "PROPOSTA_PARA_MEDICO",
+      "executado": false
+    },
+    {
+      "id": "FU-03",
+      "contexto": "FOLLOW_UP_III",
+      "rascunho": "SOnHe: consulta/TC trimestrais no 1º ano; quadrimestrais no 2º; semestrais no 3º–5º; anuais após o 5º.",
+      "condicao": "Revisar contexto clínico e risco; não implica atualização de diretriz.",
+      "fontes": [
+        {
+          "fonte": "SONHE",
+          "paginas_pdf": [
+            281
+          ]
+        }
+      ],
+      "pendencia": "DIV-FOLLOWUP.",
+      "estado": "PROPOSTA_PARA_MEDICO",
+      "executado": false
+    },
+    {
+      "id": "FU-04",
+      "contexto": "RETORNO_EM_TRATAMENTO",
+      "rascunho": "Reconciliar administrações, toxicidades, exames novos e imagem comparativa antes de propor manter/trocar linha.",
+      "condicao": "Contrato de execução proposto; frequência de imagem por regime não foi extraída como regra universal.",
+      "fontes": [
+        {
+          "fonte": "SBOC-AVANCADO",
+          "paginas_pdf": [
+            13,
+            17,
+            19
+          ]
+        }
+      ],
+      "pendencia": "Não chamar de RECIST sem medições e critérios necessários.",
+      "estado": "PROPOSTA_PARA_MEDICO",
+      "executado": false
+    },
+    {
+      "id": "FU-05",
+      "contexto": "FOLLOW_UP_CPPC",
+      "rascunho": "SOnHe: consultas e TC tórax/abdome + RM crânio trimestrais no 1º ano, semestrais do 2º ao 5º.",
+      "condicao": "Referência histórica específica de CPPC; revisar após atualização terapêutica.",
+      "fontes": [
+        {
+          "fonte": "SONHE",
+          "paginas_pdf": [
+            290
+          ]
+        }
+      ],
+      "pendencia": "Não copiar para CPNPC.",
+      "estado": "PROPOSTA_PARA_MEDICO",
+      "executado": false
+    }
+  ],
+  "divergencias": [
+    {
+      "id": "DIV-TNM",
+      "posicao_a": "SBOC-LOCAL pp.7–8 usa linfonodos em vez de estações para N2a/b e traz agrupamentos divergentes, incluindo M1b IVB.",
+      "posicao_b": "Referência externa NDRS TNM9: T1N1 IIA, T1N2a IIB, T1N2b IIIA; T4N2a IIIB; T3/T4N3 IIIC; M1b IVA.",
+      "tratamento": "Tabela local preservada como evidência, não usada como calculadora.",
+      "fontes": [
+        {
+          "fonte": "SBOC-LOCAL",
+          "paginas_pdf": [
+            7,
+            8
+          ]
+        },
+        {
+          "fonte": "TNM-NDRS",
+          "secao": null
+        }
+      ]
+    },
+    {
+      "id": "DIV-IB",
+      "posicao_a": "SBOC p.14 considera osimertinibe em IB ≥3 cm; descrição ADAURA p.16 cita >3 cm e TNM7.",
+      "posicao_b": "MOC individualiza 3–4 cm e considera adjuvância IB/IIA com ressalvas.",
+      "tratamento": "Preservar limiar e edição; decisão clínica sobre elegibilidade.",
+      "fontes": [
+        {
+          "fonte": "SBOC-LOCAL",
+          "paginas_pdf": [
+            14,
+            16
+          ]
+        },
+        {
+          "fonte": "MOC-LOCAL",
+          "secao": "TRATAMENTO ADJUVANTE"
+        }
+      ]
+    },
+    {
+      "id": "DIV-RCP",
+      "posicao_a": "MOC favorece possibilidade de omitir fase adjuvante após RCp.",
+      "posicao_b": "SBOC descreve protocolos perioperatórios com fase adjuvante; não estabelece omissão automática por RCp.",
+      "tratamento": "Não transformar posição editorial em gatilho obrigatório.",
+      "fontes": [
+        {
+          "fonte": "SBOC-LOCAL",
+          "paginas_pdf": [
+            17
+          ]
+        },
+        {
+          "fonte": "MOC-LOCAL",
+          "secao": "TRATAMENTO PRÉ-OPERATÓRIO"
+        }
+      ]
+    },
+    {
+      "id": "DIV-JANELA",
+      "posicao_a": "MOC sugere durvalumabe até 14 dias e não após 28.",
+      "posicao_b": "SOnHe p.257 cita até 42 dias; SBOC não fixa janela no trecho.",
+      "tratamento": "Expor as posições; não bloquear pela janela mais curta sem decisão médica.",
+      "fontes": [
+        {
+          "fonte": "MOC-LOCAL",
+          "secao": "TRATAMENTO DEFINITIVO"
+        },
+        {
+          "fonte": "SONHE",
+          "paginas_pdf": [
+            257
+          ]
+        },
+        {
+          "fonte": "SBOC-LOCAL",
+          "paginas_pdf": [
+            18,
+            19
+          ]
+        }
+      ]
+    },
+    {
+      "id": "DIV-PDL1",
+      "posicao_a": "SOnHe pp.262/266 lista pembrolizumabe isolado sob PD-L1 <50%, sem separar negativo.",
+      "posicao_b": "SBOC separa <1%, 1–49% e ≥50%.",
+      "tratamento": "Não estender monoterapia a PD-L1 negativo por agrupamento amplo.",
+      "fontes": [
+        {
+          "fonte": "SONHE",
+          "paginas_pdf": [
+            262,
+            266
+          ]
+        },
+        {
+          "fonte": "SBOC-AVANCADO",
+          "paginas_pdf": [
+            7,
+            8
+          ]
+        }
+      ]
+    },
+    {
+      "id": "DIV-POSEIDON",
+      "posicao_a": "Rascunho anterior dizia MOC não indicar POSEIDON em escamoso.",
+      "posicao_b": "A cópia MOC local contém regime escamoso e inclui POSEIDON entre combinações; também discute preferências por subgrupo.",
+      "tratamento": "Descartar a alegação categórica do rascunho anterior; preservar contexto e conferir original.",
+      "fontes": [
+        {
+          "fonte": "SBOC-AVANCADO",
+          "paginas_pdf": [
+            8
+          ]
+        },
+        {
+          "fonte": "MOC-LOCAL",
+          "secao": "ESTÁDIO IV — Histologia escamosa com PD-L1 <50%"
+        }
+      ]
+    },
+    {
+      "id": "DIV-GRADUACAO",
+      "posicao_a": "SBOC texto e fluxograma divergem: EGFR QT±bevacizumabe/IMpower150 (p.15 versus p.23), amivantamabe ex20 L2 (p.16 versus p.23), paclitaxel+bevacizumabe (p.12 versus p.14).",
+      "posicao_b": "Não há graduação única segura para copiar nesses itens.",
+      "tratamento": "Exibir ambas no exame da fonte; não graduar globalmente a trilha.",
+      "fontes": [
+        {
+          "fonte": "SBOC-AVANCADO",
+          "paginas_pdf": [
+            12,
+            14,
+            15,
+            16,
+            23
+          ]
+        }
+      ]
+    },
+    {
+      "id": "DIV-POSOLOGIA",
+      "posicao_a": "SBOC pp.15–16 apresenta campos problemáticos: pemetrexede 500 mg sem m² e amivantamabe a cada 3 ciclos; p.14 local contém via EC.",
+      "posicao_b": "Preservar original; não derivar prescrição desses campos. D1–D21 q3 semanas não prova interrupção do osimertinibe.",
+      "tratamento": "Conferir bula/protocolo para dose, unidade, via e intervalo antes de qualquer ficha prescritiva.",
+      "fontes": [
+        {
+          "fonte": "SBOC-AVANCADO",
+          "paginas_pdf": [
+            15,
+            16
+          ]
+        },
+        {
+          "fonte": "SBOC-LOCAL",
+          "paginas_pdf": [
+            14
+          ]
+        }
+      ]
+    },
+    {
+      "id": "DIV-ALK",
+      "posicao_a": "SOnHe favorece lorlatinibe; SBOC lista três preferenciais. A tabela SBOC p.18 cita carboplatina+pemetrexede+bevacizumabe+atezolizumabe.",
+      "posicao_b": "O texto p.19 e fluxograma p.23 usam paclitaxel no IMpower150.",
+      "tratamento": "Não normalizar silenciosamente o componente QT; escolha e composição a conferir.",
+      "fontes": [
+        {
+          "fonte": "SBOC-AVANCADO",
+          "paginas_pdf": [
+            18,
+            19,
+            23
+          ]
+        },
+        {
+          "fonte": "SONHE",
+          "paginas_pdf": [
+            259,
+            260
+          ]
+        }
+      ]
+    },
+    {
+      "id": "DIV-KRAS",
+      "posicao_a": "Texto SBOC p.22: falha a platina combinada ou não a IO.",
+      "posicao_b": "Fluxograma p.23: falha a platina e IO.",
+      "tratamento": "Não exigir IO prévia apenas pela formulação do fluxograma.",
+      "fontes": [
+        {
+          "fonte": "SBOC-AVANCADO",
+          "paginas_pdf": [
+            22,
+            23
+          ]
+        }
+      ]
+    },
+    {
+      "id": "DIV-HER2",
+      "posicao_a": "Tabela agrupa mutação e superexpressão; estudo inclui IHQ2+/3+.",
+      "posicao_b": "Texto p.22 delimita opção por superexpressão em IHQ3+; MOC cita TKIs para mutação, com nota regulatória histórica.",
+      "tratamento": "Separar mutação, domínio, IHQ e indicação; não intercambiar.",
+      "fontes": [
+        {
+          "fonte": "SBOC-AVANCADO",
+          "paginas_pdf": [
+            20,
+            22
+          ]
+        },
+        {
+          "fonte": "MOC-LOCAL",
+          "secao": "ESTÁDIO IV — HER2"
+        }
+      ]
+    },
+    {
+      "id": "DIV-FOLLOWUP",
+      "posicao_a": "SBOC p.21 sugere TC+RM 3–6 meses nos primeiros 2 anos; p.14 sugere TC semestral em IIA.",
+      "posicao_b": "SOnHe p.281 estratifica I/II e III com intervalos diferentes.",
+      "tratamento": "O médico escolhe a rotina contextual; não criar pedidos cumulativos das duas fontes.",
+      "fontes": [
+        {
+          "fonte": "SBOC-LOCAL",
+          "paginas_pdf": [
+            14,
+            21
+          ]
+        },
+        {
+          "fonte": "SONHE",
+          "paginas_pdf": [
+            281
+          ]
+        }
+      ]
+    },
+    {
+      "id": "DIV-REGULATORIO",
+      "posicao_a": "Fontes locais contêm declarações datadas sobre Anvisa/ANS e disponibilidade.",
+      "posicao_b": "Consulta FDA comprova apenas a situação e indicação nos EUA relatadas naquela página.",
+      "tratamento": "Status brasileiro atual permanece NÃO_VERIFICADO.",
+      "fontes": [
+        {
+          "fonte": "SBOC-LOCAL",
+          "paginas_pdf": [
+            19
+          ]
+        },
+        {
+          "fonte": "MOC-LOCAL",
+          "secao": "ESTÁDIO IV — HER2"
+        },
+        {
+          "fonte": "FDA-LAURA",
+          "secao": null
+        }
+      ]
+    }
+  ],
+  "limites": [
+    "Não é prescrição, liberação de QT, estadiamento automático ou aprovação clínica.",
+    "L4/L5 são lacunas quando não estruturadas; não foram preenchidas por memória.",
+    "NCCN e pastas ONCO ET AL sem arquivos acessíveis na enumeração; aulas disponíveis sob DIRETRIZES têm autoria preservada e não são automaticamente ONCO PRO.",
+    "CPPC e carcinoides são ramos separados; CPPC inclui atualização externa explícita, não apresentada como conteúdo do SOnHe."
+  ]
+}

@@ -9,18 +9,31 @@ export interface EntradaCockcroftGault {
   sexoFormula: "MASCULINO" | "FEMININO" | null;
   peso: MedidaClinica;
   creatinina: MedidaClinica;
+  /** Opcional. Sem altura não há IMC nem peso ajustado; o ClCr principal continua no peso real. */
+  alturaCm?: number | null;
 }
 export interface ResultadoCockcroftGault {
   estado: "CALCULADO" | "PENDENTE";
   clcrMlMin: number | null;
+  /** Cockcroft com peso ajustado (Devine + 0,4), só quando IMC ≥ 30. O médico escolhe qual usar. */
+  clcrPesoAjustadoMlMin: number | null;
   metodo: "COCKCROFT_GAULT_PESO_REAL";
   valoresUsados: EntradaCockcroftGault;
   fatorSexo: number | null;
   motivo: string | null;
+  aviso: string | null;
   consultaSegue: true;
 }
 const positivo = (n: number | null): n is number => typeof n === "number" && Number.isFinite(n) && n > 0;
 const temFonte = (m: MedidaClinica): boolean => typeof m.fonte === "string" && m.fonte.trim().length > 0;
+
+function pesoAjustadoDevine(sexo: "MASCULINO" | "FEMININO", pesoKg: number, alturaCm: number): number | null {
+  const polegadas = alturaCm / 2.54;
+  if (!Number.isFinite(polegadas) || polegadas <= 60) return null;
+  const ideal = (sexo === "MASCULINO" ? 50 : 45.5) + 2.3 * (polegadas - 60);
+  if (!Number.isFinite(ideal) || ideal <= 0 || pesoKg <= ideal) return null;
+  return ideal + 0.4 * (pesoKg - ideal);
+}
 
 /** Peso da balança inclusive em obesos; resultado sem teto (o teto pertence ao Calvert). */
 export function cockcroftGault(e: EntradaCockcroftGault): ResultadoCockcroftGault {
@@ -31,9 +44,23 @@ export function cockcroftGault(e: EntradaCockcroftGault): ResultadoCockcroftGaul
   else if (!positivo(e.creatinina.valor) || e.creatinina.unidade !== "mg/dL" || !temFonte(e.creatinina)) motivo = "CREATININA_INVALIDA_OU_SEM_FONTE";
   const valor = motivo === null ? ((140 - e.idadeAnos!) * e.peso.valor! * fator!) / (72 * e.creatinina.valor!) : null;
   if (valor !== null && (!Number.isFinite(valor) || valor <= 0)) motivo = "RESULTADO_INVALIDO";
+  const altura = e.alturaCm;
+  const metros = typeof altura === "number" && altura > 0 ? altura / 100 : null;
+  const bmi = motivo === null && metros !== null ? e.peso.valor! / (metros * metros) : null;
+  let clcrPesoAjustadoMlMin: number | null = null;
+  if (motivo === null && bmi !== null && bmi >= 30 && fator !== null && e.sexoFormula !== null && typeof altura === "number") {
+    const ajustado = pesoAjustadoDevine(e.sexoFormula, e.peso.valor!, altura);
+    if (ajustado !== null) clcrPesoAjustadoMlMin = ((140 - e.idadeAnos!) * ajustado * fator) / (72 * e.creatinina.valor!);
+  }
+  const avisos: string[] = [];
+  if (motivo === null && e.creatinina.valor! < 0.7) {
+    avisos.push("creatinina < 0,7 mg/dL: considerar 0,7–0,8 ou CKD-EPI desindexado; o ClCr acima usa o valor medido");
+  }
+  if (clcrPesoAjustadoMlMin !== null) avisos.push("IMC ≥ 30: ClCr com peso ajustado está ao lado; o médico escolhe");
   return { estado: motivo === null ? "CALCULADO" : "PENDENTE", clcrMlMin: motivo === null ? valor : null,
+    clcrPesoAjustadoMlMin: motivo === null ? clcrPesoAjustadoMlMin : null,
     metodo: "COCKCROFT_GAULT_PESO_REAL", valoresUsados: { ...e, peso: { ...e.peso }, creatinina: { ...e.creatinina } },
-    fatorSexo: fator, motivo, consultaSegue: true };
+    fatorSexo: fator, motivo, aviso: avisos.length ? avisos.join(". ") : null, consultaSegue: true };
 }
 
 export type AnalitoCritico = "NA" | "K" | "CA_TOTAL";
@@ -132,4 +159,33 @@ export function lembrarHbvC1D1(ciclo: number | null, dia: number | null, registr
   }) : [];
   return { estado: ciclo === null || (dia === null && ciclo !== 1) ? "PENDENTE" as const : faltantes.length ? "LEMBRETE" as const : "SEM_LEMBRETE" as const,
     aplicavel, faltantes, consultaSegue: true as const };
+}
+
+const HEPATICOS = ["paclitaxel", "docetaxel", "cabazitaxel", "irinotecan", "doxorrubicina", "doxorubicina", "epirrubicina", "epirubicina",
+  "daunorrubicina", "daunorubicina", "idarrubicina", "idarubicina", "gencitabina", "gemcitabina"];
+const ELETROLITOS = ["cisplatina", "cisplatin", "cetuximab"];
+
+function drogaChave(nome: string): string {
+  return nome.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+}
+
+/**
+ * Bilirrubina, TGO, TGP, magnésio, potássio e cálcio não têm corte curado.
+ * Com a droga que depende deles, a ausência ou o valor sem corte fica PENDENTE — nunca verde.
+ */
+export function analitosSemCortePorDroga(drogas: readonly string[], presentes: ReadonlySet<string>): { codigo: string; estado: "PENDENTE"; motivo: string }[] {
+  const chaves = drogas.map(drogaChave);
+  const pedeHepatico = chaves.some((d) => HEPATICOS.some((h) => d.includes(h)));
+  const pedeEletrolito = chaves.some((d) => ELETROLITOS.some((h) => d.includes(h)));
+  const pedidos = [
+    ...(pedeHepatico ? ["BILI", "AST", "ALT"] : []),
+    ...(pedeEletrolito ? ["MG", "K", "CA"] : []),
+  ];
+  return pedidos.map((codigo) => ({
+    codigo,
+    estado: "PENDENTE" as const,
+    motivo: presentes.has(codigo)
+      ? `${codigo} recebido; corte ligado à droga ainda não curado`
+      : `${codigo} ausente para a droga em curso; corte ainda não curado`,
+  }));
 }

@@ -21,6 +21,8 @@ export type { CorElegibilidade, NivelMotivoElegibilidade, OrigemElegibilidade, M
 
 
 
+const NUCLEO: ReadonlySet<OrigemElegibilidade> = new Set(["portaCiclo", "triagem", "ctcae", "plaquetas", "funcaoOrganica"]);
+
 const ORDEM: readonly OrigemElegibilidade[] = [
   "portaCiclo",
   "triagem",
@@ -73,7 +75,15 @@ export function elegibilidadeCiclo(entradas: EntradasElegibilidadeCiclo): SaidaE
       motivos: [...original.motivos, ...original.criterios.filter(c => c.estado !== "ATENDE").map((c): MotivoEntradaElegibilidade => ({ texto: c.texto }))]
         .filter((m, index, todos) => todos.findIndex(x => x.texto === m.texto) === index),
     } : original;
-    if (sinal === undefined) continue;
+    if (sinal === undefined) {
+      if (NUCLEO.has(origem)) {
+        total++;
+        pendentes++;
+        temPendente = true;
+        motivos.push({ origem, texto: "núcleo mínimo ausente: hemograma, função orgânica, toxicidade ou porta" });
+      }
+      continue;
+    }
     total++;
     if (sinal === null) {
       pendentes++;
@@ -81,9 +91,8 @@ export function elegibilidadeCiclo(entradas: EntradasElegibilidadeCiclo): SaidaE
       motivos.push({ origem, texto: "dado ausente para esta entrada" });
       continue;
     }
-    const comNivel = sinal.motivos.some((m) => m.nivel !== undefined);
-    // Interação/alerta com nível (moderada/atenção etc.) conta como VERMELHO, com o nível no texto.
-    if (sinal.estado === "VERMELHO" || comNivel) {
+    const sobeVermelho = sinal.estado === "VERMELHO" || sinal.motivos.some((m) => m.nivel === "importante" || m.nivel === "contraindicacao");
+    if (sobeVermelho) {
       temVermelho = true;
       const textos = motivosDe(origem, sinal);
       if (textos.length === 0) motivos.push({ origem, texto: "impedimento sem descrição" });
@@ -96,12 +105,15 @@ export function elegibilidadeCiclo(entradas: EntradasElegibilidadeCiclo): SaidaE
       const textos = motivosDe(origem, sinal);
       if (textos.length === 0) motivos.push({ origem, texto: "pendente sem descrição" });
       else motivos.push(...textos);
+      continue;
     }
+    motivos.push(...motivosDe(origem, sinal).filter((m) => m.nivel === "atencao"));
   }
 
   if (total === 0) temPendente = true;
   const cor: CorElegibilidade = temVermelho ? "VERMELHO" : temPendente ? "PENDENTE" : "VERDE";
-  return { cor, motivos: cor === "VERDE" ? [] : motivos, rotulo: ROTULO[cor],
+  const visiveis = cor === "VERDE" ? motivos.filter((m) => m.nivel === "atencao") : motivos;
+  return { cor, motivos: visiveis, rotulo: ROTULO[cor],
     cobertura: { avaliadas: total - pendentes, pendentes, total },
     ...(criterios.length ? { criterios, coberturaCriterios: {
       avaliados: criterios.filter(c => c.estado === "ATENDE" || c.estado === "NAO_ATENDE").length,

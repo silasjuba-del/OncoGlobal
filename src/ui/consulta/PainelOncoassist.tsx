@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { PainelSkillsClinicas } from "./PainelSkillsClinicas.js";
 import { ErroPorta, type PortaConsulta, type PedidoBundle } from "../api/porta.js";
 import {
   classificarCapacidade, classificarFontes, mensagemCapacidade, mensagemResultadoTecnico, rotuloCategoria,
@@ -205,6 +206,7 @@ export function PainelOncoassist({ porta, contexto }: { porta: PortaConsulta; co
 
   return <section aria-label="OncoAssist — documentos">
     <h3>OncoAssist</h3>
+    <PainelSkillsClinicas key={`${patientId}:${encounterId}:${tumorLotId ?? ""}`} porta={porta} contexto={contexto} />
     {mensagemSituacao ? <p role="status">{mensagemSituacao}</p> : null}
     {prontoParaClassificar ? <>
       <label>Documento <select aria-label="Documento para o OncoAssist" value={selecionada} disabled={executando}

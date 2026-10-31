@@ -77,12 +77,12 @@ describe("KIMI-18 · consumidores de data civil (APAC, hemograma, peso, interval
     expect(validadeHemograma("2026-10-05", "2026-10-02", rsSalao).estado).toBe("PENDENTE"); // futura
   });
 
-  it("peso · FN-06/A2: perda exatamente 5 kg em 60 dias passa; 5,1 kg dispara; informado sozinho ⇒ PENDENTE", () => {
+  it("peso · FN-06: perda abaixo de 5% passa; a partir de 5% dispara; informado sozinho ⇒ PENDENTE", () => {
     const medido = [{ data: "2026-08-03", kg: 70, origem: "MEDIDO" as const },
-      { data: "2026-10-02", kg: 65, origem: "MEDIDO" as const }]; // perda exatamente 5,0 em 60 dias
+      { data: "2026-10-02", kg: 67, origem: "MEDIDO" as const }];
     expect(avaliarPeso(medido, "2026-10-02", rsSalao).estado).toBe("VERDE");
     const perdaReal = [{ data: "2026-08-03", kg: 70, origem: "MEDIDO" as const },
-      { data: "2026-10-02", kg: 64.9, origem: "MEDIDO" as const }];
+      { data: "2026-10-02", kg: 66, origem: "MEDIDO" as const }];
     const r = avaliarPeso(perdaReal, "2026-10-02", rsSalao);
     expect(r.estado).toBe("VERMELHO");
     expect(r.acao).toEqual(["NUTRICAO", "QT_ADIADA", "CONSULTA_MEDICA"]);
