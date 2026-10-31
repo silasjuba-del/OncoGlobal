@@ -50,7 +50,12 @@ export function operarSkillsClinicas(raw: unknown, token: string, deps: Servidor
     const paciente = lerPaciente(deps.db, p.contexto.patientId);
     if (!paciente) throw new RecusaSkill("PACIENTE_NAO_ENCONTRADO");
     const corpus = deps.corpus?.jornadaPulmao ?? null;
-    const corpusHash = corpus ? hashCanonico(corpus) : null;
+    // A política de segurança também faz parte da entrada: uma regra RADS nova
+    // precisa invalidar o rascunho antigo mesmo se o paciente e o texto não mudaram.
+    const corpusHash = hashCanonico({ conhecimento:corpus, rads:deps.corpus?.rads ?? null,
+      feve:deps.corpus?.feveRuleset ?? null, salao:deps.salaoRuleset ?? null,
+      interacoes:deps.corpus?.interacoes ?? null, catalogo:deps.corpus?.catalogoInteracoes ?? null,
+      tetos:deps.corpus?.tetosCumulativos ?? null });
     const ledgerHash = () => hashCanonico(listarEventos(deps.db, contexto.patientId));
     const avaliacaoAtual = () => {
       const c = lerConsulta(deps.db, contexto.patientId, deps.agora(), sessao, contexto.tumorLotId,

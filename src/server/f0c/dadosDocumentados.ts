@@ -9,7 +9,13 @@ export function exameBasalDocumentado(raw: unknown, episodioId: string | null, l
   if (!raw || typeof raw !== "object" || Array.isArray(raw) || !episodioId) return null;
   const d = raw as Record<string, unknown>;
   if (d.episodioId !== episodioId || !DataCivil.safeParse(d.data).success || String(d.data) > limite
-    || d.negado === true || d.requiresConfirmation === true || ["PENDENTE", "SOLICITADO", "AGENDADO"].includes(String(d.estado))) return null;
+    || d.negado === true || d.requiresConfirmation === true || ["INFERRED","UNCERTAIN"].includes(String(d.evidence))
+    || ["PENDENTE", "SOLICITADO", "AGENDADO", "CANCELADO"].includes(String(d.estado))) return null;
+  if (d.qualificadores !== undefined) {
+    const q=FactQualifiers.safeParse(d.qualificadores);
+    if(!q.success || q.data.polaridade!=="AFIRMADA" || q.data.sujeito!=="PACIENTE"
+      || ["FUTURA","NAO_DETERMINADA"].includes(q.data.temporalidade)) return null;
+  }
   return d;
 }
 

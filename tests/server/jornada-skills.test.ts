@@ -1,6 +1,10 @@
 import {afterEach,it,expect} from 'vitest';
-import {abrirAmbiente,cadastrarPaciente,carregarConsulta,criarDiretorio,removerDiretorio,extrair,vincular,PACIENTE,ENCONTRO} from '../f0-fecha/fixtures/consulta-completa.js';
+import {abrirAmbiente,cadastrarPaciente,carregarConsulta,criarDiretorio,removerDiretorio,extrair,vincular,PACIENTE,ENCONTRO,AGORA} from '../f0-fecha/fixtures/consulta-completa.js';
 import {ResultadoSkillClinica} from '../../src/contracts/skillsClinicas.js';
+import {operarSkillsClinicas} from '../../src/server/skillsClinicas.js';
+import {carregarCorpusServidor} from '../../src/server/corpus.js';
+import type {ServidorDeps} from '../../src/server/rotas.js';
+import {criarGateway,memoriaIdempotencia} from '../../src/kernel/gateway/gateway.js';
 let app:Awaited<ReturnType<typeof abrirAmbiente>>|undefined,dir:string|undefined;
 afterEach(async()=>{await app?.close();if(dir)removerDiretorio(dir);app=undefined;dir=undefined;});
 const contexto={patientId:PACIENTE,encounterId:ENCONTRO,tumorLotId:null};
@@ -54,4 +58,14 @@ it('suspeita radiológica interrompe propostas eletivas sem apagar fonte nem vir
 it('referência inventada ou corpus indisponível não vira seleção aceita',async()=>{
  const a=await abrir();const r=await a.app.request('/consulta/skills',{...a.pedido,configuracao:{jornada:{cartoesIds:['INVENTADO']}}});
  expect(r.data.codigo).toBe('REFERENCIA_CORPUS_INDISPONIVEL');
+});
+it('mudança de regra RADS invalida rascunho mesmo com fonte e ledger inalterados',async()=>{
+ const a=await abrir();const r=await a.app.request('/consulta/skills',a.pedido);expect(r.status).toBe(200);
+ const corpus=carregarCorpusServidor();
+ const deps:ServidorDeps={db:a.app.db,sessoes:a.app.sessoes,agora:()=>AGORA,log:()=>{},corpus,salaoRuleset:corpus.ruleset,
+  gateway:criarGateway({agora:()=>AGORA,auditar:()=>{},store:memoriaIdempotencia(),executores:{}})};
+ const pedido={acao:'LER',contexto,execucaoId:r.data.execucao.execucaoId};
+ expect(operarSkillsClinicas(pedido,a.app.token,deps).body).toMatchObject({validade:'ATUAL'});
+ corpus.rads.versao='versao-sintetica-alterada';
+ expect(operarSkillsClinicas(pedido,a.app.token,deps).body).toMatchObject({validade:'ENTRADA_ALTERADA'});
 });

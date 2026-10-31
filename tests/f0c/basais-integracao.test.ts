@@ -20,7 +20,9 @@ it('eco basal chega à avaliação e queda relativa aparece no retorno',()=>{
   expect(r.avisosFlash.join(' ')).toContain('16 pontos');
   expect(r.elegibilidade.motivos.some(m=>m.texto.includes('eco basal ausente'))).toBe(false);
 });
-it.each([{...basal,data:'2026-12-01'},{...basal,data:'2026-02-30'},{...basal,episodioId:'ep-outro'},{...basal,metodo:null}])('basal inválido não elimina pendência (%j)',b=>{
+it.each([{...basal,data:'2026-12-01'},{...basal,data:'2026-02-30'},{...basal,episodioId:'ep-outro'},{...basal,metodo:null},
+ {...basal,evidence:'INFERRED'}, {...basal,qualificadores:{polaridade:'NEGADA',sujeito:'PACIENTE',temporalidade:'HISTORICA'}},
+ {...basal,qualificadores:{polaridade:'AFIRMADA',sujeito:'TERCEIRO',temporalidade:'ATUAL'}}])('basal inválido não elimina pendência (%j)',b=>{
   const r=avaliarConsulta({...base,eventos:[atual,fato('feveBasal',b)]});
   expect(r.avisosFlash.join(' ')).not.toContain('16 pontos');
   expect(r.elegibilidade.motivos.some(m=>m.texto.includes('basal'))).toBe(true);
