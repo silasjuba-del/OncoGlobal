@@ -17,6 +17,7 @@ import { alertarFeve, type RulesetAlertaFeve } from "../../rules/alertaFeve.js";
 import { analitosSemCortePorDroga, avaliarCriticos, avaliarValidadeExame, cockcroftGault, lembrarHbvC1D1,
   type RegistroHbv, type SorologiaHbv } from "../../rules/f0c/clinica.js";
 import { preRequisitosC1 } from "../../rules/preRequisitosC1.js";
+import { avaliarPeso } from "../../rules/peso.js";
 
 const key = (s: string) => s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 const aliases: Record<string, string> = { cr: "creatinina", creat: "creatinina", na: "sodio", k: "potassio",
@@ -125,6 +126,12 @@ export function avaliarConsulta(i: EntradaAvaliacaoConsulta) {
     .flatMap(e => { const p = Triagem.safeParse(dadosDoEvento(e)); return p.success && p.data.patientId===i.patientId && p.data.encounterId===i.encounterId ? [p.data] : []; });
   const triagem = triagens.length === 1 ? triagens[0]! : null;
   const rs = SalaoRuleset.safeParse(i.salaoRuleset);
+  const tendenciaPeso = rs.success ? avaliarPeso(pesos.flatMap(p=>{
+    const data=diaDaObservacao(p.data);
+    return data ? [{data,kg:p.kg,origem:"MEDIDO" as const,alturaCm:alturaParaRenal}] : [];
+  }),limiteClinico,rs.data) : null;
+  const avisoPeso = tendenciaPeso?.estado === "VERMELHO"
+    ? `Perda ponderal: ${tendenciaPeso.motivo}. Avaliação nutricional e decisão médica sobre QT; sem adiamento automático.` : null;
   const avalTriagem = triagem && rs.success ? avaliarTriagem(triagem, { hoje: i.hoje, prescricaoVigente: null,
     requisitosAplicaveis: ["pas","fc","spo2","tempDecimos","hbDgDl","anc","plq","coletaHemograma","ecog","grauCtcae"] }, rs.data) : null;
   const criticos = avaliarCriticos({ NA: medida("sodio"), K: medida("potassio"), CA_TOTAL: medida("calcio total") });
@@ -204,7 +211,7 @@ export function avaliarConsulta(i: EntradaAvaliacaoConsulta) {
       ])).map((a) => a.motivo)].join("; "))
       : pend(`função renal: ${renal.motivo ?? crValidade.motivo}`),
     emergencia: emergencia ? sinal("VERMELHO",["emergência na triagem"]) : avalTriagem ? sinal("VERDE",[]) : pend("triagem de emergência ausente"),
-    ...(avisosCriticos.length ? {intercorrencia:sinal("VERMELHO",avisosCriticos)} : {}),
+    ...(avisosCriticos.length || avisoPeso ? {intercorrencia:sinal("VERMELHO",[...avisosCriticos,...(avisoPeso?[avisoPeso]:[])])} : {}),
     feve: !i.ciclo ? pend("esquema do ciclo não definido para avaliar FEVE") : feve
       ? sinal(feve.estado === "ALERTA" ? "VERMELHO" : feve.estado === "PENDENTE" || feve.pendentes.length ? "PENDENTE" : "VERDE",[...feve.motivos,...feve.pendentes].map(m=>m.texto)) : pend("regra FEVE indisponível"),
     ...(hbv.aplicavel ? {basal: hbv.faltantes.length ? pend(`HBV: verificar ${hbv.faltantes.join(", ")}`) : sinal("VERDE",[])} : {}),
@@ -241,7 +248,7 @@ export function avaliarConsulta(i: EntradaAvaliacaoConsulta) {
     alturaCm: dadosCorporais.alturaCm, medidoEm: pesoNutricional?.data ?? null, sourceId: pesoNutricional?.sourceId ?? null,
     fontes: concordantes.flatMap(p => doPaciente.find(e => e.eventId === p.eventId)!.fontes
       .map(f => ({eventId:p.eventId,sourceId:f.sourceId,medidoEm:p.data}))) };
-  const avisosFlash = [...avisosCriticos,
+  const avisosFlash = [...avisosCriticos,...(avisoPeso?[avisoPeso]:[]),
     ...(peso && diaDaObservacao(peso.data) !== i.hoje ? [`Peso documentado em ${peso.data}: não foi medido hoje; confira antes de prescrever.`] : []),
     ...(variacaoPesoCiclo !== null && variacaoPesoCiclo >= 0.10 ? [`Variação de peso de pelo menos 10% desde o ciclo anterior (${pesoAnteriorCiclo!.kg} kg em ${pesoAnteriorCiclo!.medidoEm}): revisar prescrição`] : []),
     ...(numeroReferencia !== null && numeroReferencia > 0 && variacaoPesoCiclo === null ? ["Comparação de peso com o ciclo anterior indisponível: revisar a referência documentada."] : []),
@@ -253,6 +260,6 @@ export function avaliarConsulta(i: EntradaAvaliacaoConsulta) {
     ...(i.cumulativo?.estado === "VERMELHO" ? i.cumulativo.motivos.map(m => m.texto) : [])];
   const sugestoesLaboratorio = [...(interacoes.achados.some(a=>key(a.drogaA).includes("capecitabina") && key(a.drogaBouClasse).includes("varfarina")) ? ["INR"] : []),...hbv.faltantes,
     ...(!audioDocumentada && preRequisitosC1((i.ciclo?.itens ?? []).map(item=>item.droga), i.ciclo?.numero ?? null).some(t=>t.id === "AUDIOMETRIA_BASAL") ? ["Audiometria basal"] : [])];
-  return { elegibilidade, renal, dadosCorporais, dadosNutricionais, variacaoPeso, variacaoPesoCiclo, pesoAnteriorCiclo, criticos, hbv, interacoes, emergencia, avisosFlash, sugestoesLaboratorio,
+  return { elegibilidade, renal, dadosCorporais, dadosNutricionais, tendenciaPeso, variacaoPeso, variacaoPesoCiclo, pesoAnteriorCiclo, criticos, hbv, interacoes, emergencia, avisosFlash, sugestoesLaboratorio,
     lembrete: elegibilidade.motivos.map(m=>m.texto).filter((t,index,a)=>a.indexOf(t)===index).join("; ") };
 }

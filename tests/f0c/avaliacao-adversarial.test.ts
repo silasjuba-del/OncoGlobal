@@ -8,6 +8,19 @@ const base:EntradaAvaliacaoConsulta={eventos:[],patientId:paciente.patientId,tum
  interacoes:JSON.parse(readFileSync("corpus/rulesets/interacoes.v1.json","utf8")),catalogo:JSON.parse(readFileSync("corpus/f0c/classes-farmacos.v1.json","utf8"))};
 function evento(id:string,tipo:string,data:unknown):ClinicalEvent {return {eventId:id,operationId:`op-${id}`,eventIndex:0,patientId:base.patientId,encounterId:base.encounterId,tumorLotId:null,tipo,payload:{data},fontes:[fonteSintetica("fonte-medida")],revisao:"CONFIRMADO",criadoEm:"2026-10-10T10:00:00-03:00",criadoPor:{tipo:"SESSAO",id:"medico"},supersedesEventId:null};}
 const lab=(id:string,campo:string,valor:number,data="2026-10-09T10:00:00-03:00",unidade="mmol/L")=>evento(id,"LabResult",{campo,valor,data,unidade,sourceId:"fonte-medida"});
+it('corte percentual e IMC chegam aos avisos da consulta com altura documentada',()=>{
+ const salaoRuleset=JSON.parse(readFileSync('corpus/rulesets/salao-triagem.v1.json','utf8'));
+ const serie=(a:number,b:number,altura:number)=>[evento('altura','FATO',{campo:'alturaCm',valor:altura}),
+  evento('peso-anterior','Weight',{kg:a,origem:'MEDIDO',data:'2026-09-01',sourceId:'fonte-medida'}),
+  evento('peso-atual','Weight',{kg:b,origem:'MEDIDO',data:'2026-10-09',sourceId:'fonte-medida'})];
+ const magro=avaliarConsulta({...base,salaoRuleset,eventos:serie(52,50,170)});
+ expect(magro.tendenciaPeso?.estado).toBe('VERMELHO');
+ expect(magro.avisosFlash.join(' ')).toContain('corte 2%');
+ expect(magro.elegibilidade.motivos.some(m=>m.texto.includes('Perda ponderal'))).toBe(true);
+ const maior=avaliarConsulta({...base,salaoRuleset,eventos:serie(120,114.9,200)});
+ expect(maior.tendenciaPeso?.estado).toBe('VERDE');
+ expect(maior.avisosFlash.join(' ')).not.toContain('Perda ponderal');
+});
 describe("auditoria clínica adversarial da composição",()=>{
  it("preserva todas as fontes do envelope de um exame concordante",()=>{
   const e={...lab("multifonte","neutrofilos",2000,"2026-10-09T10:00:00-03:00","/uL"),fontes:[fonteSintetica("fonte-medida"),fonteSintetica("fonte-adicional")]};

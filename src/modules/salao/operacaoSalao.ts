@@ -129,8 +129,8 @@ export function criarEventoInterrupcaoSalao(entrada: {
 
 /**
  * S-F3-02 · Avalia tendência de peso no salão (FN-06 / Q24–Q25 / A2):
- * - Perda > 5,0 kg em 60 dias (ambas medidas) -> VERMELHO + recomendações de nutrição/adiamento pendentes de decisão médica;
- * - Perda exatamente 5,0 kg -> VERDE (passa);
+ * - Perda ≥5% em 90 dias, ou ≥2% com IMC <20, -> VERMELHO + recomendações pendentes de decisão médica;
+ * - Quilos absolutos não decidem mais a cor (decisão 30/10/2026);
  * - Peso informado × medido divergente -> PENDENTE (diferença incerta, médico confirma; nunca dispara vermelho sozinho).
  */
 export function avaliarDesfechoPesoSalao(entrada: {
