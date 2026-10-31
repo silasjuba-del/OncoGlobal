@@ -2,7 +2,7 @@
 
 Documento único para anexar ou colar em qualquer LLM. Identificador: CTX-ONCOGLOBAL-20261031-v1.
 
-**Atualizado:** 2026-10-31 15:15:03 -03:00 (America/Sao_Paulo). **Levantamento dos worktrees:** 2026-10-31 15:12:55 -03:00 (America/Sao_Paulo).
+**Atualizado:** 2026-10-31 15:17:46 -03:00 (America/Sao_Paulo). **Levantamento dos worktrees:** 2026-10-31 15:12:55 -03:00 (America/Sao_Paulo).
 **Assinatura técnica textual:** Codex, autor desta consolidação por solicitação expressa do Dr. Silas nesta conversa. Não é assinatura digital, aprovação médica nem certificação de trabalho de terceiros.
 
 ## 1. Leitura obrigatória e alcance
@@ -10,6 +10,8 @@ Documento único para anexar ou colar em qualquer LLM. Identificador: CTX-ONCOGL
 Antes de planejar, alterar ou publicar trabalho neste repositório, leia este documento e AGENTS.md. Siga também as instruções aplicáveis do ambiente e o pedido atual de Silas. Este documento não supera instruções de nível superior nem amplia uma autorização de tarefa.
 
 AGENTS.md, CLAUDE.md, GEMINI.md, .cursor/rules/00-contexto-obrigatorio.mdc e .github/copilot-instructions.md remetem a este mesmo contexto. São pontos de entrada convencionais, não uma barreira técnica universal: uma ferramenta que não carrega essas instruções precisa receber o documento como anexo/prompt. Não alegue que a leitura foi tecnicamente imposta a toda LLM.
+
+Os ponteiros desta entrega foram instalados na pasta canônica e no worktree documental. Worktrees preexistentes não foram alterados em massa: agentes que já atuam neles devem receber o endereço canônico deste documento ou seu anexo. A leitura obrigatória não implica que um processo já aberto tenha recarregado instruções.
 
 O contexto é uma fotografia datada. Antes de usar uma afirmação como atual, confira SHA, branch, PR, estado local e evidência correspondente. Se não houver acesso, escreva NÃO VERIFICADO e identifique o que falta. Não simule leitura, execução de testes ou memória persistente.
 
@@ -30,6 +32,8 @@ O contexto é uma fotografia datada. Antes de usar uma afirmação como atual, c
 | oncoMed | Projeto distinto. Seu repositório canônico não foi verificado nesta consolidação. O acervo ONCO-DOCS não prova essa localização. |
 
 O README do OncoGlobal declara: “Repo autônomo, do zero. Isolado. Não é ONCOMED.” Não escrever “OncoGlobal/oncoMed” como sistema único. OncoAssist deve ser identificado pelo módulo/integração efetivamente demonstrado no OncoGlobal, sem presumir equivalência com projetos homônimos.
+
+Arquitetura da versão examinada: monólito modular, monousuário na v1, Node 24, TypeScript strict, contratos Zod e SQLite. Contratos ficam em src/contracts; cálculos/regras em src/rules; ledger, projeções e fronteiras de execução em src/kernel; servidor e interface têm camadas próprias. A IA propõe, o código calcula/valida e o médico decide e assina. Servidor e ledger locais não dispensam verificar os contratos/consentimentos de integrações externas. Fonte: README e código da versão fixada nas referências.
 
 A presença deste documento na pasta canônica não atualiza seu código nem integra o PR #88 à main. A cópia local e a versão preparada no worktree documental têm o mesmo conteúdo nesta entrega. Para cópias futuras, confira versão, data e Git; não mantenha versões divergentes sob o mesmo identificador.
 
@@ -160,8 +164,9 @@ A assinatura é atribuição técnica textual. Datas de observação não são d
 | Registro | Data/hora e assinatura | Realizado | Pendente / não terminado |
 |---|---|---|---|
 | Entrega funcional #88 | Conferida em 2026-10-31 15:12:55 -03:00 (America/Sao_Paulo); Codex | SHA 6708aab7, 24 E2E e CI identificados; código de produto entregue para revisão | Revisão/merge por decisão humana; produção não verificada |
-| Abertura do worktree documental | Registrada em 2026-10-31 15:12:55 -03:00 (America/Sao_Paulo); Codex | codex-contexto-llms-20261031, base 6708aab7; somente documentação/instruções de entrada | Publicação documental e revisão acompanhadas na PR da branch; não implica merge da entrega funcional |
-| Consolidação de contexto | 2026-10-31 15:15:03 -03:00 (America/Sao_Paulo); Codex | Documento único, fontes, vetos, distinções, inventário e pontos de leitura preparados | Verificar a PR documental para estado posterior ao snapshot; propagação por merge ainda não autorizada |
+| Abertura do worktree documental | Registrada em 2026-10-31 15:12:55 -03:00 (America/Sao_Paulo); Codex | codex-contexto-llms-20261031, base 6708aab7; somente documentação/instruções de entrada | Publicação realizada na PR #89; revisão e merge pendentes; não implica merge da entrega funcional |
+| Consolidação de contexto | 2026-10-31 15:15:03 -03:00 (America/Sao_Paulo); Codex | Documento único, fontes, vetos, distinções, inventário e pontos de leitura instalados e validados | Verificar a PR documental para estado posterior ao snapshot; propagação por merge ainda não autorizada |
+| Publicação documental | 2026-10-31 15:17:46 -03:00 (America/Sao_Paulo); Codex | [PR #89](https://github.com/silasjuba-del/OncoGlobal/pull/89), base PR #88; primeiro commit documental d52f24f1. Cópia canônica e ponteiros instalados; links, igualdade e preservação conferidos | Revisão/merge pendentes. Novos clones da main só recebem as instruções depois da integração; esta entrega não a realizou |
 | Checkout principal e frentes existentes | Observados em 2026-10-31 15:12:55 -03:00 (America/Sao_Paulo); Codex, apenas observador | Inventário de 71 worktrees: 48 limpos e 23 com alterações antes desta escrita | WIP preservado; conclusão funcional e autoria de terceiros não auditadas |
 
 WRITE_SET documental: CONTEXTO-LLMS.md, AGENTS.md (bloco aditivo), README.md (ponte de leitura), CLAUDE.md, GEMINI.md, .cursor/rules/00-contexto-obrigatorio.mdc e .github/copilot-instructions.md. Nenhum código de produto, dado de paciente, ficha ou aprovação clínica faz parte desta tarefa.
