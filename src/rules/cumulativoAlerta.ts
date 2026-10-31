@@ -237,7 +237,20 @@ export function avaliarTetosExposicao(e: EntradaExposicaoCumulativa, limites: re
     const r = avaliarExposicaoCumulativa(e, null);
     return { ...r, pendencias: [...new Set([...r.pendencias, "LIMITE_AMBIGUO"])] };
   }
-  const partes = limites.map((l) => avaliarExposicaoCumulativa(e, l));
+  // Cada teto tem seu domínio de unidade. Uma unidade com outro teto explícito
+  // não é erro; uma unidade sem teto continua pendente, nunca é descartada.
+  const assinaturas = new Map<string, string>();
+  for (const a of e.administracoes) {
+    if (a.patientId !== e.patientId || chaveDroga(a.droga) !== chaveDroga(e.droga)) continue;
+    const assinatura = JSON.stringify([a.episodioId, a.status, a.quantidadeEfetivaMgM2, a.unidade, a.realizadaEm ?? null]);
+    if (assinaturas.has(a.adminId) && assinaturas.get(a.adminId) !== assinatura) {
+      const r = avaliarExposicaoCumulativa({ ...e, administracoes: [] }, null);
+      return { ...r, pendencias: [`CONFLITO_ADMINISTRACAO:${a.adminId}`] };
+    }
+    assinaturas.set(a.adminId, assinatura);
+  }
+  const partes = limites.map((l) => avaliarExposicaoCumulativa({ ...e,
+    administracoes: e.administracoes.filter(a => a.unidade === l.unidade || !unidades.includes(a.unidade)) }, l));
   const estado = partes.some((p) => p.estado === "AVISO") ? "AVISO"
     : partes.some((p) => p.estado === "PENDENTE") ? "PENDENTE"
     : partes.some((p) => p.estado === "ALARANJADO") ? "ALARANJADO"

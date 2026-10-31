@@ -8,7 +8,7 @@ import { avaliarTriagem } from "../../rules/triagem.js";
 import { idadeDoDado, PESO_VALIDADE_DIAS } from "../../rules/prescricao/index.js";
 import { hashCanonico, projetarRetrato } from "../../kernel/projections/retrato/index.js";
 import { diaDaObservacao, observacaoNoHorizonte, observacoesMaisRecentes } from "../../modules/consulta/observacoesTemporais.js";
-import { alturaDocumentada } from "./dadosDocumentados.js";
+import { alturaDocumentada, exameBasalDocumentado } from "./dadosDocumentados.js";
 import type { CriterioElegibilidade } from "../../contracts/api/criterioElegibilidade.js";
 import { semaforoInteracoes, type RulesetSemaforo } from "../../rules/semaforoInteracoes.js";
 import type { CatalogoInteracoes } from "../../contracts/f0c/interacoes.js";
@@ -153,8 +153,12 @@ export function avaliarConsulta(i: EntradaAvaliacaoConsulta) {
     if (p.valor < minimo) portaAlertas.push(`${nome} abaixo do corte do serviço (${minimo}/µL)`);
     if (avaliarValidadeExame("HEMOGRAMA",p.data,i.agora).estado !== "VALIDO") portaPendentes.push(`${nome}: validade não confirmada`);
   }
+  const episodioBasal = i.ciclo?.episodioId ?? i.episodio?.episodioId ?? null;
+  const audiometria = exameBasalDocumentado(campo("audiometriaBasal"), episodioBasal, limiteClinico);
+  const audioDocumentada = audiometria && typeof audiometria.resultado === "string" && audiometria.resultado.trim()
+    && audiometria.estado === "REALIZADO";
   for (const tarefa of preRequisitosC1((i.ciclo?.itens ?? []).map((item) => item.droga), i.ciclo?.numero ?? null)) {
-    if (tarefa.id === "AUDIOMETRIA_BASAL") portaPendentes.push(tarefa.texto);
+    if (tarefa.id === "AUDIOMETRIA_BASAL" && !audioDocumentada) portaPendentes.push(tarefa.texto);
   }
   const dadoGrau = triagem?.grauCtcae;
   const grau = dadoGrau?.campo === "PRESENTE" && (dadoGrau.revisao === "CONFIRMADO" || dadoGrau.revisao === "ASSINADO")
@@ -162,8 +166,11 @@ export function avaliarConsulta(i: EntradaAvaliacaoConsulta) {
   const ctcae = grau === null ? pend("toxicidade atual não graduada") : grau >= 2
     ? sinal("VERMELHO", ["toxicidade G2 ou maior: revisão médica, sem ajuste automático"]): sinal("VERDE",[]);
   const eco = obj(campo("feve"));
+  const ecoBasal = exameBasalDocumentado(campo("feveBasal"), episodioBasal, limiteClinico);
   const feve = i.feveRuleset ? alertarFeve({ hoje:i.hoje, feve: { percentual: typeof eco?.percentual === "number" ? eco.percentual : null,
     metodo: typeof eco?.metodo === "string" ? eco.metodo : null, data: typeof eco?.data === "string" ? eco.data : null },
+    feveBasal: ecoBasal ? { percentual: typeof ecoBasal.percentual === "number" ? ecoBasal.percentual : null,
+      metodo: typeof ecoBasal.metodo === "string" ? ecoBasal.metodo : null, data: String(ecoBasal.data) } : null,
     programados: (i.ciclo?.itens ?? []).map(item=>({nome:item.droga,classe:null})),
     numeroCiclo: i.ciclo?.numero ?? null },i.feveRuleset) : null;
   const registrosHbv: Partial<Record<SorologiaHbv,RegistroHbv>> = {};
@@ -244,7 +251,8 @@ export function avaliarConsulta(i: EntradaAvaliacaoConsulta) {
     ...(feve?.estado === "ALERTA" ? feve.motivos.map(m=>m.texto) : []),
     ...(hbv.faltantes.length ? [`Verificar sorologias: ${hbv.faltantes.join(", ")}`] : []),
     ...(i.cumulativo?.estado === "VERMELHO" ? i.cumulativo.motivos.map(m => m.texto) : [])];
-  const sugestoesLaboratorio = [...(interacoes.achados.some(a=>key(a.drogaA).includes("capecitabina") && key(a.drogaBouClasse).includes("varfarina")) ? ["INR"] : []),...hbv.faltantes];
+  const sugestoesLaboratorio = [...(interacoes.achados.some(a=>key(a.drogaA).includes("capecitabina") && key(a.drogaBouClasse).includes("varfarina")) ? ["INR"] : []),...hbv.faltantes,
+    ...(!audioDocumentada && preRequisitosC1((i.ciclo?.itens ?? []).map(item=>item.droga), i.ciclo?.numero ?? null).some(t=>t.id === "AUDIOMETRIA_BASAL") ? ["Audiometria basal"] : [])];
   return { elegibilidade, renal, dadosCorporais, dadosNutricionais, variacaoPeso, variacaoPesoCiclo, pesoAnteriorCiclo, criticos, hbv, interacoes, emergencia, avisosFlash, sugestoesLaboratorio,
     lembrete: elegibilidade.motivos.map(m=>m.texto).filter((t,index,a)=>a.indexOf(t)===index).join("; ") };
 }

@@ -224,7 +224,11 @@ export function alertarFeve(entrada: EntradaAlertaFeve, rs: RulesetAlertaFeve): 
     ));
   }
   const basalBruto = entrada.feveBasal?.percentual;
-  const basal = basalBruto === undefined ? null : percentualUtil(basalBruto);
+  const basalData = entrada.feveBasal?.data;
+  const basalValido = DataCivil.safeParse(basalData).success && limpo(entrada.feveBasal?.metodo ?? null) !== null
+    && data !== null && basalData! <= data && (entrada.hoje === undefined || basalData! <= entrada.hoje);
+  const basal = basalBruto === undefined || !basalValido ? null : percentualUtil(basalBruto);
+  if (entrada.feveBasal && basal === null) pendentes.push(motivo("pendente.feve.basalInvalido", "eco basal sem valor, método ou data válida anterior ao exame atual", rs));
   if (entrada.numeroCiclo === 1 && basal === null) {
     pendentes.push(motivo("pendente.feve.basal", `eco basal ausente antes do C1 com ${nomes} programado (${classes})`, rs));
   }

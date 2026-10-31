@@ -28,8 +28,14 @@ export function calcularDose(e: EntradaDose, rs: DoseRuleset): SaidaDose {
     };
   }
 
-  if (typeof e.referenciaMgM2 === "number" && e.referenciaMgM2 > 0 && e.pesoKg !== null && typeof e.alturaCm === "number" && e.alturaCm > 0) {
+  if (e.referenciaMgM2 !== undefined && e.referenciaMgM2 !== null) {
+    if (!Number.isFinite(e.referenciaMgM2) || e.referenciaMgM2 <= 0 || e.pesoKg === null
+      || typeof e.alturaCm !== "number" || !Number.isFinite(e.alturaCm) || e.alturaCm <= 0) {
+      return { doseMg: null, estado: "PENDENTE", motivo: "referência mg/m² exige peso e altura válidos; conferir protocolo",
+        ciclosSemPesoConsecutivos, rulesetVersao: versao };
+    }
     const produto = e.alturaCm * e.pesoKg;
+    // Mesma precisão de SC do prescritor (Mosteller em duas casas); mg arredondado ao final.
     const bsa = Number.isFinite(produto) ? Math.round(Math.sqrt(produto / 3600) * 100) / 100 : null;
     if (bsa === null || bsa <= 0) return {
       doseMg: null, estado: "PENDENTE", motivo: "SC atual não calculável",
@@ -51,7 +57,7 @@ export function calcularDose(e: EntradaDose, rs: DoseRuleset): SaidaDose {
     };
     const anterior = e.doseAdministradaAnteriorMg === null ? "dose anterior ausente" : `dose anterior ${e.doseAdministradaAnteriorMg} mg ao lado`;
     const nivel = e.nivelDose === undefined || e.nivelDose === null ? "" : `; nível ${e.nivelDose}`;
-    let motivo = `referência do protocolo × SC atual ${bsa} m²; ${anterior}${nivel}`;
+    let motivo = `referência do protocolo × SC atual ${bsa.toFixed(2)} m²; ${anterior}${nivel}`;
     if (typeof e.scAnteriorM2 === "number" && e.scAnteriorM2 > 0 && Math.abs(bsa - e.scAnteriorM2) / e.scAnteriorM2 >= 0.1 - 1e-9) {
       motivo += " — alerta: SC variou ≥ 10%";
     }

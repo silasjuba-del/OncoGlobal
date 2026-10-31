@@ -4,6 +4,15 @@ import { FactQualifiers } from "../../contracts/w10/extracao.js";
 import { montarFichaMinima } from "../../modules/consulta/revisaoClinica.js";
 import { dataCivilDoServico } from "../../rules/tempoServico.js";
 
+/** Basal explicitamente atribuído ao episódio. Presença de arquivo não prova exame realizado. */
+export function exameBasalDocumentado(raw: unknown, episodioId: string | null, limite: string): Record<string, unknown> | null {
+  if (!raw || typeof raw !== "object" || Array.isArray(raw) || !episodioId) return null;
+  const d = raw as Record<string, unknown>;
+  if (d.episodioId !== episodioId || !DataCivil.safeParse(d.data).success || String(d.data) > limite
+    || d.negado === true || d.requiresConfirmation === true || ["PENDENTE", "SOLICITADO", "AGENDADO"].includes(String(d.estado))) return null;
+  return d;
+}
+
 /** A altura usada na dose deve ser a documentada na mesma visão clínica, não um escalar sem data. */
 export function alturaDocumentada(retrato: Retrato, agora: string): number | null {
   const altura = montarFichaMinima(retrato).find(c => c.id === "alturaCm");

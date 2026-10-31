@@ -21,6 +21,8 @@ function limiarPercentual(rs: SalaoRuleset, bmi: number | null): number {
 /** FN-06 · janela inclusiva [hoje − janelaDias, hoje]. Alerta em perda ≥ 5% (ou ≥ 2% se IMC < 20). */
 export function avaliarPeso(serie: readonly Pesagem[], hoje: string, rs: SalaoRuleset): SaidaPeso {
   const versao = rs.header.versao;
+  if (serie.some(p => !Number.isFinite(p.kg) || p.kg <= 0)) return {
+    estado:"PENDENTE",perdaKg:null,motivo:"peso inválido; conferir medida",acao:[],rulesetVersao:versao };
   if(diferencaDiasCivis(hoje,hoje)===null||serie.some(p=>diferencaDiasCivis(p.data,hoje)===null))return {estado:"PENDENTE",perdaKg:null,motivo:"data civil invalida",acao:[],rulesetVersao:versao};
   const janela = rs.pesoVermelho.janelaDias;
   const naJanela = serie.filter((p) => {
@@ -45,6 +47,8 @@ export function avaliarPeso(serie: readonly Pesagem[], hoje: string, rs: SalaoRu
     else if (p.data === recente.data) recente = p;
     if (p.kg > pico.kg) pico = p;
   }
+  if (new Set(naJanela.filter(p=>p.data===recente.data).map(p=>p.kg)).size > 1) return {
+    estado:"PENDENTE",perdaKg:null,motivo:"pesagens divergentes na mesma data; conferir fontes",acao:[],rulesetVersao:versao };
 
   const perdaKg = pico.kg - recente.kg;
   if (pico.kg <= 0) return { estado: "PENDENTE", perdaKg: null, motivo: "peso de referência inválido", acao: [], rulesetVersao: versao };

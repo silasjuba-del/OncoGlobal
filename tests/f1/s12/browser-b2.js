@@ -15,6 +15,7 @@ import { jornadaReceitaNoNavegador } from './browser-receita.js';
 import { jornadaCanalNoNavegador,jornadaDemonstracaoCanal } from './browser-canal.js';
 import { jornadaContingenciaNoNavegador } from './browser-contingencia.js';
 import { jornadaConsultaConfiavel, TEXTO_FONTE_CONFIAVEL } from './browser-consulta-confiavel.js';
+import { jornadaSkillsNoNavegador } from './browser-skills.js';
 
 // Perfil completo preserva regressões dos módulos adiados; nova jornada M123 usa perfil MEDICO.
 process.env.VITE_ONCOGLOBAL_PERFIL = "LEGADO";
@@ -354,6 +355,8 @@ async function main() {
       evidenceDir,
     });
     log({ prova: 'CONSULTA_CONFIAVEL_PONTA_A_PONTA', ...consultaConfiavel });
+    log({prova:'CORPUS_SKILLS_HTTP_UI_SQLITE',...await jornadaSkillsNoNavegador(page2,{manifesto:manifesto2,
+      lerEventos:()=>listarEventos(demo.app.db,manifesto2.consultaConfiavel.patientId),evidenceDir})});
     log({prova:'CANAL_DEMONSTRACAO_WEBCRYPTO',...await jornadaDemonstracaoCanal(page2)});
     writeFileSync(join(evidenceDir, "resumo.json"), JSON.stringify({ manifesto: manifesto2, familias: FAMILIAS_B2, resultado, consultaConfiavel, reinicio: { documentosHistorico: qtd, propostasReabertas } }, null, 2));
     await demo.app.close();

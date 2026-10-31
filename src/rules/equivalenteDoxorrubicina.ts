@@ -1,5 +1,3 @@
-import { chaveDroga } from "./cumulativoAlerta.js";
-
 /** ESC 2022, tabela 5. Idarrubicina × 5 é razão de eficácia, não de cardiotoxicidade. */
 const FATOR: Record<string, number> = {
   doxorrubicina: 1,
@@ -10,7 +8,9 @@ const FATOR: Record<string, number> = {
 };
 
 function canon(nome: string): string {
-  const base = chaveDroga(nome);
+  const base = nome.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
+  if (base === "doxorubicina") return "doxorrubicina";
+  if (base === "epirubicina") return "epirrubicina";
   if (base === "idarubicina" || base === "idarrubicina") return "idarrubicina";
   if (base === "daunorubicina" || base === "daunorrubicina") return "daunorrubicina";
   if (base === "mitoxantrone" || base === "mitoxantrona") return "mitoxantrona";

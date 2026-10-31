@@ -18,6 +18,7 @@ import type { RegraInstrumento } from "../contracts/f0c/instrumentos.js";
 import type { RegraCondicional, RegraTermoComplementar } from "../contracts/f0c/condicionais.js";
 import type { EntradaControlado } from "../rules/prescricao/receituarioEspecial.js";
 import { lerTetosCumulativos } from "../rules/f0c/tetosCumulativos.js";
+import { CorpusJornada } from "../contracts/jornadaClinica.js";
 
 const CaixaEnvelope = z.object({ schemaVersion: z.string(), versao: z.string(), caixas: z.array(CaixaNumerada) }).strict();
 const EntradaRegulatoria = z.object({ nomes: z.array(z.string()), tipo: PrescriptionDocumentType, fonte: z.string() }).strict();
@@ -62,6 +63,8 @@ export function filtrarReceitasConsumiveis(input: unknown) {
 
 /** Load the checked-in, versioned local corpus. No default table is fabricated. */
 export function carregarCorpusServidor() {
+  let jornadaPulmao: CorpusJornada | null = null;
+  try { jornadaPulmao = CorpusJornada.parse(ler("jornadas/pulmao.v1.json")); } catch { /* corpus ausente/inválido: somente rascunho sem referência */ }
   let sigtap: TabelasSigtap = {};
   let sigtapEstado = "PENDENTE";
   try {
@@ -82,7 +85,7 @@ export function carregarCorpusServidor() {
   // W11-H22: limiar do alerta de plaquetas. Ausente ou inválido = alerta PENDENTE na visão, nunca silêncio.
   let limiarPlaquetas: LimiarAlertaPlaquetas | null = null;
   try { limiarPlaquetas = lerLimiarAlertaPlaquetas(ler("rulesets/lab-thresholds.v1.json")); } catch { /* PENDENTE na visão */ }
-  return { caixas: caixaEnvelope.caixas.filter((c) => c.chave.startsWith("config.")),
+  return { jornadaPulmao, caixas: caixaEnvelope.caixas.filter((c) => c.chave.startsWith("config.")),
     caixasTodas: caixaEnvelope.caixas, ruleset, regulatorio: table, receitasElegiveis,
     templatesProtocolo: lerTemplatesProtocolo(), propostasDoseReceita:lerPropostasDoseReceita(), rads, limiarPlaquetas,
     interacoes: ler("rulesets/interacoes.v1.json") as RulesetSemaforo,
