@@ -15,7 +15,13 @@ if ($LASTEXITCODE -ne 0) { throw 'Referências remotas não atualizadas' }
 node scripts/verificar-contexto-llms.mjs --referencia origin/main --remoto
 ~~~
 
-O verificador compara contexto, instruções, decisões, especificação e cenários com o commit de referência; verifica os ponteiros/importações e consulta a branch realmente anunciada pelo remoto. Retorna hashes, referência, HEAD local e quantidade de caminhos com WIP. Não altera arquivos, não faz fetch, não apaga WIP e não resolve divergências automaticamente. Sem --remoto, a referência é apenas o cache local. Erro de acesso significa NÃO VERIFICADO.
+Se o worktree histórico não tiver o script, execute a cópia de um checkout atualizado e indique o alvo com --repo. Exemplo após atualizar o worktree limpo:
+
+~~~powershell
+node "C:\Users\silas\Projects\OncoGlobal-wt\main-validado-20261031\scripts\verificar-contexto-llms.mjs" --repo "C:\Users\silas\Projects\OncoGlobal" --referencia origin/main --remoto
+~~~
+
+O verificador compara contexto, instruções, decisões, especificação e cenários com o commit de referência; verifica os ponteiros/importações e consulta a branch realmente anunciada pelo remoto. Retorna hashes, referência, HEAD local e quantidade de caminhos com WIP rastreados/não rastreados; arquivos ignorados não entram nessa contagem. Não altera arquivos, não faz fetch, não apaga WIP e não resolve divergências automaticamente. Sem --remoto, a referência é apenas o cache local. Erro de acesso significa NÃO VERIFICADO.
 
 **Igualdade documental não significa código ou processo do app atualizados.** HEAD divergente e WIP continuam explícitos. Numa PR documental em edição, uma divergência pode ser esperada: registrar a referência candidata e o motivo, sem copiar por cima do trabalho para obter verde. Não alegar que uma ferramenta ou sessão leu o documento sem conferir seu contexto.
 

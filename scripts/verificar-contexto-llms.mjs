@@ -11,16 +11,26 @@ export function verificarContexto(repo=process.cwd(),referencia='origin/main',op
  const git=args=>execFileSync('git',args,{cwd:repo,encoding:'utf8',stdio:['ignore','pipe','pipe']}).trim();
  const raiz=realpathSync(git(['rev-parse','--show-toplevel']));
  const refSha=git(['rev-parse','--verify','--end-of-options',referencia+'^{commit}']);
- const head=git(['rev-parse','HEAD']);const status=git(['status','--porcelain']);
+ const head=git(['rev-parse','HEAD']);const status=git(['status','--porcelain','--untracked-files=all']);
  const dentro=p=>{const r=relative(raiz,realpathSync(p));return r!== '..'&&!r.startsWith('..'+(process.platform==='win32'?'\\':'/'))&&!isAbsolute(r)};
  const arquivos=arquivosContexto.map(arquivo=>{
   const erros=[];let local=null,registrado=null;
   try{const p=resolve(raiz,arquivo);if(!dentro(p))throw Error();local=readFileSync(p,'utf8')}catch{erros.push('ARQUIVO_LOCAL_AUSENTE_OU_FORA_DA_RAIZ')}
   try{registrado=execFileSync('git',['show',refSha+':'+arquivo],{cwd:raiz,encoding:'utf8',stdio:['ignore','pipe','pipe']})}catch{erros.push('ARQUIVO_AUSENTE_NA_REFERENCIA')}
   if(local!==null&&registrado!==null&&hash(local)!==hash(registrado))erros.push('CONTEUDO_DIVERGENTE');
-  if(local!==null&&arquivo!=='CONTEXTO-LLMS.md'&&!fontesNormativas.includes(arquivo)&&!local.includes('CONTEXTO-LLMS.md'))erros.push('PONTEIRO_DE_LEITURA_AUSENTE');
+  if(local!==null&&arquivo!=='CONTEXTO-LLMS.md'&&!fontesNormativas.includes(arquivo)){
+   const alvoContexto=resolve(raiz,'CONTEXTO-LLMS.md');
+   const destinos=[...local.matchAll(/\]\(([^)]+)\)/g)].map(m=>m[1]);
+   if(['CLAUDE.md','GEMINI.md'].includes(arquivo)&&normalizar(local).startsWith('@./AGENTS.md\n@./CONTEXTO-LLMS.md\n'))destinos.push('./CONTEXTO-LLMS.md');
+   const aponta=destinos.some(link=>{if(/^(https?:|#)/.test(link))return false;try{return resolve(dirname(resolve(raiz,arquivo)),decodeURIComponent(link.split('#')[0].replace(/^<|>$/g,'')))===alvoContexto}catch{return false}});
+   if(!aponta)erros.push('PONTEIRO_DE_LEITURA_AUSENTE');
+  }
   if(local!==null&&['CLAUDE.md','GEMINI.md'].includes(arquivo)&&!normalizar(local).startsWith('@./AGENTS.md\n@./CONTEXTO-LLMS.md\n'))erros.push('IMPORTACAO_EXPLICITA_AUSENTE');
-  if(local!==null&&arquivo.endsWith('.mdc')&&!/^alwaysApply:\s*true\s*$/m.test(local))erros.push('CURSOR_NAO_APLICA_SEMPRE');
+  if(local!==null&&arquivo.endsWith('.mdc')){
+   const front=normalizar(local).match(/^---[ \t]*\n([\s\S]*?)\n---[ \t]*(?:\n|$)/)?.[1]??'';
+   const valores=[...front.matchAll(/^alwaysApply:[ \t]*(true|false)[ \t]*(?:#.*)?$/gm)].map(m=>m[1]);
+   if(valores.length!==1||valores[0]!=='true')erros.push('CURSOR_NAO_APLICA_SEMPRE');
+  }
   if(local!==null&&!fontesNormativas.includes(arquivo))for(const m of local.matchAll(/\]\(([^)]+)\)/g)){
    let link=m[1];if(/^(https?:|#)/.test(link))continue;
    try{link=decodeURIComponent(link.split('#')[0].replace(/^<|>$/g,''));const p=resolve(dirname(resolve(raiz,arquivo)),link);if(!existsSync(p)||!dentro(p))erros.push('LINK_LOCAL_INVALIDO:'+link)}catch{erros.push('LINK_LOCAL_INVALIDO')}
@@ -36,7 +46,7 @@ export function verificarContexto(repo=process.cwd(),referencia='origin/main',op
  }
  return{schema:'VerificacaoContexto@1',remoto,raiz,referencia,referenciaSha:refSha,headLocal:head,headCoincide:head===refSha,
   caminhosComWip:status?status.split(/\r?\n/).length:0,documentacaoCoincide:arquivos.every(a=>a.erros.length===0),arquivos,
-  escopo:'Somente leitura. Sem --remoto, a referência é apenas o cache local. --remoto compara com a branch anunciada por ls-remote. Não faz fetch nem sincroniza código, WIP ou arquivos. Igualdade documental não comprova atualização do código ou do processo do app.'};
+  escopo:'Somente leitura. Sem --remoto, a referência é apenas o cache local. --remoto compara com a branch anunciada por ls-remote. Não faz fetch nem sincroniza código, WIP ou arquivos. A contagem de WIP não inclui arquivos ignorados. Igualdade documental não comprova atualização do código ou do processo do app.'};
 }
 if(process.argv[1]&&import.meta.url===pathToFileURL(resolve(process.argv[1])).href){
  try{let repo=process.cwd(),ref='origin/main',live=false;for(let i=2;i<process.argv.length;i++){const a=process.argv[i];if(a==='--repo'&&process.argv[i+1])repo=process.argv[++i];else if(a==='--referencia'&&process.argv[i+1])ref=process.argv[++i];else if(a==='--remoto')live=true;else throw Error('ARGUMENTO_INVALIDO')}
