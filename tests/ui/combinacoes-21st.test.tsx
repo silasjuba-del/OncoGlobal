@@ -4,6 +4,7 @@ import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { BLOCOS_TUMOR_PACK } from "../../src/contracts/fase2/tumorPack.js";
+import { montarTelaRevisao } from "../../src/modules/consulta/telaRevisao.js";
 import { OncoassistLocal } from "../../src/ui/OncoassistLocal.js";
 import { criarPortaFalsa, ID } from "../../src/ui/api/fake.js";
 import { COMBINACOES_21ST } from "../../src/ui/oncochart/combinacoes21st.js";
@@ -128,6 +129,7 @@ describe("Aparência, agrupamento de seções e revisão clínica", () => {
       codigo: "REVISAO_CLINICA_CARREGADA",
       contexto: ctx,
       revisao: "r-bento",
+      tela: montarTelaRevisao({}),
       ficha: [
         {
           id: "ecog",
@@ -275,6 +277,7 @@ describe("Aparência, agrupamento de seções e revisão clínica", () => {
       codigo: "REVISAO_CLINICA_CARREGADA",
       contexto: ctx,
       revisao: "r-pack",
+      tela: montarTelaRevisao({}),
       ficha: [],
       preQt: { estado: "PENDENTE", autorizaTratamento: false, pendencias: [] },
       packs: [{ id: "pack-sintetico", titulo: "Pack sintético", estado: "RASCUNHO", cids: ["C50"] }],

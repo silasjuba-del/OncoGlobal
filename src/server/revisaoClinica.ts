@@ -1,6 +1,7 @@
 import { Retrato } from "../contracts/f1/retrato.js";
 import { RevisaoClinicaResposta } from "../contracts/fase2/revisaoClinica.js";
 import { montarFichaMinima, selecionarPack, packCorrespondeAoCid, cidsDaFicha } from "../modules/consulta/revisaoClinica.js";
+import { entradaDesdeFicha, montarTelaRevisao } from "../modules/consulta/telaRevisao.js";
 import type { CatalogoTumorPacks } from "../kernel/corpus/tumorPacks.js";
 import type { criarMotorF1 } from "../kernel/orquestracao/runtime.js";
 import { obterInvestigacao } from "./investigacao.js";
@@ -68,5 +69,5 @@ export async function obterRevisaoClinica(motor:Pick<ReturnType<typeof criarMoto
   return RevisaoClinicaResposta.parse({codigo:"REVISAO_CLINICA_CARREGADA",contexto,revisao:r.revisao,ficha,
     preQt:{estado:preQt.length?"PENDENTE":"AGUARDA_DECISAO_MEDICA",autorizaTratamento:false,pendencias:preQt},
     packs:catalogo.packs.map(p=>({id:p.referencia.id,titulo:p.titulo,estado:p.estado,cids:p.cids})),pack,
-    loteCompleto,pendencias,respostaTumoral,estadosDoenca});
+    loteCompleto,pendencias,respostaTumoral,estadosDoenca,tela:montarTelaRevisao(entradaDesdeFicha(ficha))});
 }

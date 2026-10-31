@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { flushSync } from "react-dom";
-import { RevisaoClinicaResposta, type CampoFichaMinima } from "../../contracts/fase2/revisaoClinica.js";
+import { RevisaoClinicaResposta, type CampoFichaMinima, type TelaRevisaoConsulta } from "../../contracts/fase2/revisaoClinica.js";
 import { BLOCOS_TUMOR_PACK } from "../../contracts/fase2/tumorPack.js";
 import type { PedidoBundle, PortaConsulta } from "../api/porta.js";
 import { EstadoDoenca } from './EstadoDoenca.js';
@@ -192,6 +192,7 @@ export function RevisaoClinica({
 
       {atual ? (
         <>
+          <TelaRevisaoBlocos tela={atual.tela} />
           <table className="ficha-bento-table">
             <caption>Dados mínimos da consulta</caption>
             <thead>
@@ -470,6 +471,69 @@ export function RevisaoClinica({
 }
 
 type FiltroFicha = "TODOS" | CampoFichaMinima["estado"];
+
+const ROTULO_ESTADO: Record<TelaRevisaoConsulta["identidade"]["cirurgia"]["estado"], string> = {
+  INFORMADO: "Informado",
+  AUSENTE_CONFIRMADO: "Ausência confirmada",
+  NAO_INFORMADO: "Não informado",
+};
+
+function LinhaCampo({ rotulo, estado, bloqueia, detalhe }: { rotulo: string; estado: keyof typeof ROTULO_ESTADO; bloqueia: boolean; detalhe: string | null }) {
+  return (
+    <li>
+      <span>{rotulo}: {ROTULO_ESTADO[estado]}{detalhe ? ` · ${detalhe}` : ""}</span>
+      {bloqueia ? <span> · Bloqueia a liberação</span> : null}
+    </li>
+  );
+}
+
+function TelaRevisaoBlocos({ tela }: { tela: TelaRevisaoConsulta }) {
+  const a = tela.aptidaoHoje;
+  const id = tela.identidade;
+  const f = tela.fechamento;
+  return (
+    <div aria-label="Revisão da consulta">
+      <p>Ausência confirmada não é o mesmo que não informado. Nenhum valor foi completado por padrão.</p>
+      <section aria-label="Identidade">
+        <h3>Identidade</h3>
+        <ul>
+          <LinhaCampo rotulo="Intenção" estado={id.intencao.estado} bloqueia={id.intencao.bloqueiaLiberacao} detalhe={id.intencao.valor} />
+          <LinhaCampo rotulo="Linha" estado={id.linha.estado} bloqueia={id.linha.bloqueiaLiberacao} detalhe={id.linha.valor === null ? null : String(id.linha.valor)} />
+          <LinhaCampo rotulo="Cirurgia" estado={id.cirurgia.estado} bloqueia={id.cirurgia.bloqueiaLiberacao} detalhe={null} />
+          <LinhaCampo rotulo="Biomarcadores" estado={id.biomarcadores.estado} bloqueia={id.biomarcadores.bloqueiaLiberacao} detalhe={id.biomarcadores.itens.map((i) => i.nome).join(", ") || null} />
+          <LinhaCampo rotulo="Data do diagnóstico anatomopatológico" estado={id.datasSUS.dataDiagnosticoAP.estado} bloqueia={id.datasSUS.dataDiagnosticoAP.bloqueiaLiberacao} detalhe={id.datasSUS.dataDiagnosticoAP.valor} />
+          <LinhaCampo rotulo="Início do tratamento" estado={id.datasSUS.dataInicioTratamento.estado} bloqueia={id.datasSUS.dataInicioTratamento.bloqueiaLiberacao} detalhe={id.datasSUS.dataInicioTratamento.valor} />
+          <LinhaCampo rotulo="Dias decorridos" estado={id.datasSUS.diasDecorridos.estado} bloqueia={id.datasSUS.diasDecorridos.bloqueiaLiberacao} detalhe={id.datasSUS.diasDecorridos.valor === null ? null : String(id.datasSUS.diasDecorridos.valor)} />
+          <LinhaCampo rotulo="Validade da APAC" estado={id.datasSUS.validadeAPAC.estado} bloqueia={id.datasSUS.validadeAPAC.bloqueiaLiberacao} detalhe={id.datasSUS.validadeAPAC.valor} />
+        </ul>
+      </section>
+      <section aria-label="Aptidão de hoje">
+        <h3>Aptidão de hoje</h3>
+        <ul>
+          <LinhaCampo rotulo="ECOG" estado={a.ecog.estado} bloqueia={a.ecog.bloqueiaLiberacao} detalhe={a.ecog.valor === null ? null : String(a.ecog.valor)} />
+          <LinhaCampo rotulo="Peso" estado={a.antropometria.peso.estado} bloqueia={a.antropometria.peso.bloqueiaLiberacao} detalhe={a.antropometria.peso.valor === null ? null : `${a.antropometria.peso.valor} kg`} />
+          <LinhaCampo rotulo="Altura" estado={a.antropometria.altura.estado} bloqueia={a.antropometria.altura.bloqueiaLiberacao} detalhe={a.antropometria.altura.valor === null ? null : `${a.antropometria.altura.valor} cm`} />
+          <LinhaCampo rotulo="Superfície corporal" estado={a.antropometria.sc.estado} bloqueia={a.antropometria.sc.bloqueiaLiberacao} detalhe={a.antropometria.sc.valor === null ? "calculada" : `${a.antropometria.sc.valor} m²`} />
+          <LinhaCampo rotulo="ClCr" estado={a.antropometria.clcr.estado} bloqueia={a.antropometria.clcr.bloqueiaLiberacao} detalhe={a.antropometria.clcr.valor === null ? "calculado" : `${a.antropometria.clcr.valor} mL/min`} />
+          <LinhaCampo rotulo="Variação de peso" estado={a.antropometria.variacaoPesoPct.estado} bloqueia={a.antropometria.variacaoPesoPct.bloqueiaLiberacao} detalhe={a.antropometria.variacaoPesoPct.alertaRecalculo ? "alerta de recálculo" : null} />
+          <LinhaCampo rotulo="Laboratório pré-ciclo" estado={a.labPreCiclo.estado} bloqueia={a.labPreCiclo.bloqueiaLiberacao} detalhe={null} />
+          <LinhaCampo rotulo="Toxicidade anterior" estado={a.toxicidadeAnterior.estado} bloqueia={a.toxicidadeAnterior.bloqueiaLiberacao} detalhe={a.toxicidadeAnterior.valor ? `grau ${a.toxicidadeAnterior.valor.grauMaximo}` : null} />
+          <LinhaCampo rotulo="Monitorização do esquema" estado={a.monitorizacaoEsquema.estado} bloqueia={a.monitorizacaoEsquema.bloqueiaLiberacao} detalhe={null} />
+          <LinhaCampo rotulo="Acesso venoso" estado={a.acessoVenoso.estado} bloqueia={a.acessoVenoso.bloqueiaLiberacao} detalhe={a.acessoVenoso.valor} />
+        </ul>
+      </section>
+      <section aria-label="Fechamento">
+        <h3>Fechamento</h3>
+        <ul>
+          <LinhaCampo rotulo="Resposta de doença" estado={f.respostaDoenca.estado} bloqueia={f.respostaDoenca.bloqueiaLiberacao} detalhe={f.respostaDoenca.valor ? `${f.respostaDoenca.valor.criterio} · ${f.respostaDoenca.valor.dataReavaliacao}` : null} />
+          <LinhaCampo rotulo="Próximo ciclo" estado={f.plano.proximoCiclo.estado} bloqueia={f.plano.proximoCiclo.bloqueiaLiberacao} detalhe={f.plano.proximoCiclo.valor ?? null} />
+          <LinhaCampo rotulo="Data de reestadiamento" estado={f.plano.dataReestadiamento.estado} bloqueia={f.plano.dataReestadiamento.bloqueiaLiberacao} detalhe={f.plano.dataReestadiamento.valor ?? null} />
+        </ul>
+      </section>
+    </div>
+  );
+}
+
 const GRUPOS_FICHA: readonly [Exclude<FiltroFicha, "TODOS">, string][] = [
   ["DOCUMENTADO", "Documentados"], ["CALCULADO", "Calculados"],
   ["CONFLITANTE", "Conflitantes"], ["PENDENTE", "Pendentes"],
