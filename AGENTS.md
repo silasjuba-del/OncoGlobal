@@ -32,3 +32,14 @@ Estas regras se aplicam a todo trabalho neste repositório e prevalecem sobre in
 - Usar a PR, inclusive draft, para tornar visível uma frente pronta para compartilhar: objetivo, escopo, evidências e pendências. Código, testes e docs selecionados podem ir ao remoto; dados sensíveis, cópias de preservação e WIP não triado não podem.
 - No encerramento, informar commit/branch e o que permanece apenas local. Não impor push automático nem apagar trabalho sem examinar dependências e verificar preservação recuperável.
 - Manter decisões em docs/DECISOES.md, orientação de entrada no README e specs vigentes no local existente. Não criar registro paralelo de sessão nem checkpoint documental para uma correção já autorizada.
+
+
+<!-- ONCOGLOBAL-CONTEXTO-LLMS:BEGIN -->
+## Leitura inicial obrigatória — contexto e continuidade
+
+Antes de planejar, editar ou publicar, leia [CONTEXTO-LLMS.md](CONTEXTO-LLMS.md) por inteiro e confira o estado real do checkout. A leitura é obrigatória para qualquer LLM que atue neste repositório, respeitando as instruções superiores e o pedido atual de Silas.
+
+O documento distingue OncoGlobal de oncoMed, implementação de proposta e entrega de merge; registra fontes, vetos, worktrees e estados com data/hora e assinatura técnica. Ao abrir um worktree ou concluir um lote, mantenha esse registro conforme seu escopo, preservando WIP e trabalho alheio. Não presuma que o snapshot está atualizado nem que arquivos locais sejam a main remota.
+
+Não agir como se tivesse lido quando não houver acesso: informar a lacuna e obter o documento. Nenhuma regra deste bloco autoriza merge, deploy, alteração clínica ou escrita fora da tarefa. Ferramentas que não carregam instruções do repositório devem receber o mesmo documento como anexo.
+<!-- ONCOGLOBAL-CONTEXTO-LLMS:END -->

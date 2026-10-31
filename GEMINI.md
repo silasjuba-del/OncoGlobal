@@ -1,0 +1,5 @@
+# Entrada obrigatória — OncoGlobal
+
+Antes de planejar ou executar qualquer tarefa, leia integralmente [o contexto único](CONTEXTO-LLMS.md) e [as regras do repositório](AGENTS.md). Respeite o pedido atual e as instruções superiores.
+
+Não misture OncoGlobal com oncoMed. Confira branch, SHA, PR e WIP antes de escrever. Registre abertura de worktree e resultado do lote com data/hora, assinatura técnica, realizado, pendente e iniciado não terminado conforme o documento central. Não copie este contexto para criar outra fonte de verdade. Sem acesso ao documento, declare a limitação; não simule leitura.
