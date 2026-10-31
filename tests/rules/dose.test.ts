@@ -2,6 +2,7 @@
 import { describe, expect, it } from "vitest";
 import type { EntradaDose, ReducaoPct } from "../../src/contracts/index.js";
 import { calcularDose } from "../../src/rules/index.js";
+import { mgAposReducao } from "../../src/contracts/doseReducao.js";
 import { doseRuleset } from "../fixtures/rulesets.js";
 
 const entradaDose = (over: Partial<EntradaDose> = {}): EntradaDose => ({
@@ -36,7 +37,15 @@ describe("FN-04 reduções e arredondamento", () => {
     }
   });
   it("base 125 com redução 30 → 88 (87,5 arredonda para cima, uma vez, após a redução)", () => {
+    expect(mgAposReducao(125, 30)).toBe(88);
     expect(calcularDose(entradaDose({ doseAdministradaAnteriorMg: 125, reducaoPct: 30 }), doseRuleset).doseMg).toBe(88);
+  });
+  it("resultado em (0, 1) mg não sobe para 1 e fica pendente", () => {
+    expect(mgAposReducao(0.7, 0)).toBe(0);
+    expect(mgAposReducao(1, 30)).toBe(0);
+    const r = calcularDose(entradaDose({ doseAdministradaAnteriorMg: 0.7, reducaoPct: 0 }), doseRuleset);
+    expect(r.doseMg).toBe(0);
+    expect(r.estado).toBe("PENDENTE");
   });
   it("base null → doseMg null e PENDENTE (nunca inventa)", () => {
     const r = calcularDose(entradaDose({ doseAdministradaAnteriorMg: null }), doseRuleset);
