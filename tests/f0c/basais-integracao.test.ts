@@ -15,6 +15,19 @@ function fato(campo:string,valor:unknown,id=campo):ClinicalEvent{return {eventId
   criadoEm:base.agora,criadoPor:{tipo:'SESSAO',id:'medico-sintetico'},supersedesEventId:null,fontes:[fonteSintetica('fonte-basal')],payload:{data:{campo,valor}}};}
 const atual=fato('feve',{percentual:52,metodo:'Simpson',data:'2026-10-09'});
 const basal={percentual:68,metodo:'Simpson',data:'2026-09-01',episodioId:'ep-basal'};
+it.each([{requiresConfirmation:true},{evidence:'UNCERTAIN'},{negado:true},
+ {qualificadores:{polaridade:'NEGADA',sujeito:'PACIENTE',temporalidade:'HISTORICA'}},
+ {qualificadores:{polaridade:'AFIRMADA',sujeito:'TERCEIRO',temporalidade:'ATUAL'}}])('metadado do evento não é perdido ao selecionar basal: %j',meta=>{
+ const b=fato('feveBasal',basal);
+ b.payload={data:{campo:'feveBasal',valor:basal,...meta}};
+ const r=avaliarConsulta({...base,eventos:[atual,b]});
+ expect(r.avisosFlash.join(' ')).not.toContain('16 pontos');
+ expect(r.elegibilidade.motivos.some(m=>m.texto.includes('basal'))).toBe(true);
+ const audio=fato('audiometriaBasal',{estado:'REALIZADO',resultado:'Laudo sintético',data:'2026-10-08',episodioId:'ep-basal'});
+ audio.payload={data:{...(audio.payload as {data:object}).data,...meta}};
+ const a=avaliarConsulta({...base,ciclo:{...base.ciclo!,itens:[{item:1,droga:'cisplatina',doseMg:100,reducaoPct:0}]},eventos:[audio]});
+ expect(a.sugestoesLaboratorio).toContain('Audiometria basal');
+});
 it('eco basal chega à avaliação e queda relativa aparece no retorno',()=>{
   const r=avaliarConsulta({...base,eventos:[atual,fato('feveBasal',basal)]});
   expect(r.avisosFlash.join(' ')).toContain('16 pontos');

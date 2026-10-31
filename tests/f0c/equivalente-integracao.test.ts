@@ -24,3 +24,11 @@ it('agravante desconhecido permanece pendente; RT documentada mantém aviso',()=
  expect(projetarEquivalenteClinico({...base,eventos:[d]})?.estado).toBe('PENDENTE');
  expect(projetarEquivalenteClinico({...base,eventos:[d,fato('rtMediastino',true)]})?.estado).toBe('ALARANJADO');
 });
+it.each([[600,480,'AVISO'],[325,260,'ALARANJADO'],[100,80,'PENDENTE']] as const)('subtotal conhecido com histórico incompleto preserva o alerta: %s', (n,equivalenteMgM2,estado)=>{
+ const d=dose('epirrubicina',n);
+ const payload=d.payload as {data:{campo:string;valor:{historicoCompleto:boolean}}};payload.data.valor.historicoCompleto=false;
+ const r=projetarEquivalenteClinico({...base,eventos:[d,fato('rtMediastino',false)]});
+ expect(r).toMatchObject({equivalenteMgM2,estado});
+ expect(r?.pendencias.length).toBeGreaterThan(0);
+ expect(r?.motivo).toContain('subtotal');
+});

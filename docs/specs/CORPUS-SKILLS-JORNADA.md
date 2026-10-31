@@ -53,3 +53,20 @@ Fatos confirmados `feveBasal` usam `{episodioId, data, percentual, metodo}`; `au
 ## Limites clínicos preservados
 
 Os dados do corpus continuam em RASCUNHO; L4/L5 sem evidência estruturada, acesso NCCN/ONCO PRO, tabela TNM para cálculo, cortes não curados e cobertura farmacológica incompleta permanecem explícitos. Critérios de elegibilidade e segurança são separados; nenhum estado indeterminado autoriza tratamento. Não há emissão de pedido, assinatura, administração ou mensagem ao paciente pela skill.
+
+## Auditoria final — 31/10/2026
+
+Base examinada: `9610e099`, idêntica no local e no PR, árvore local limpa; `origin/main` é ancestral (nenhum commit da base faltando). Ambiente local: Windows, Node 24.15.0 e npm 11.12.1. CI remoto: Linux com Node 24, conforme workflow `verify`. Escrita exclusiva nesta worktree, sem merge e sem alterações no checkout principal.
+
+As regressões sintéticas reproduziram 11 falhas em quatro arquivos antes das correções. Foram corrigidos:
+
+- Opções de leitura divergentes entre consulta e skill: uso do mesmo `opcoesLeituraConsulta`, incluindo condicionais, instrumentos e configurações, com hash de política completo. Alertas e avisos da consulta são conservados nos rascunhos.
+- Basal com valor positivo, mas evento negado, incerto ou de terceiro: conferência do envelope e do valor antes de aceitar FEVE/audiometria.
+- Equivalente cumulativo incompleto: o subtotal validado é mantido como limite inferior, inclusive alertas já atingidos; não se declara baixo risco. Todos os caminhos de soma sem teto recusam mistura de unidades.
+- Urgência: referências, divergências e critérios eletivos são retirados juntos; fonte documental original permanece. Falta de triagem/cobertura não aparece como avaliação concluída.
+- Variantes de nomes dos medicamentos conservam pendências dos analitos; dose por referência identifica peso informado pelo paciente.
+- Interface: resposta de contexto/ação incompatível é recusada, mudança da seleção retira a prévia antiga e falha ao recarregar histórico não transforma uma preparação bem-sucedida em falha de gravação.
+- Metadados: classificação por chaves reservadas explícitas, sem remover índices clínicos ou Hashimoto por coincidência de substring; conteúdo integral dos packs preservado.
+- Referências Q24/FN-06 na matriz corrigidas para o limiar vigente; Q25 conserva a ação na linha 47 e referencia também o limiar atual. A sugestão de mover a disposição PHI da linha 42 para 39 foi rejeitada: no arquivo e SHA examinados, o divisor sintético está na linha 42. As referências D-W9-75b/77d já apontavam para as linhas corretas.
+
+Cobertura de aceite ampliada: primeira consulta, retorno e follow-up por HTTP e Chromium; persistência após reinício, replay, leitura histórica após mudança de política, isolamento entre pacientes, alerta condicional preservado, urgência e ausência de assinatura/envio/administração. As evidências finais e o SHA entregue são registrados na descrição do PR; aprovação técnica não é aprovação clínica.

@@ -3,6 +3,12 @@ import { analitosSemCortePorDroga, cockcroftGault, type EntradaCockcroftGault, t
 import { preRequisitosC1 } from "../../src/rules/preRequisitosC1.js";
 
 const medida = (valor: number, unidade: string): MedidaClinica => ({ valor, unidade, fonte: "caso-sintetico" });
+it.each(['doxorubicina','epirubicina','daunorubicina','idarubicina','gemcitabina','irinotecan'])('variante %s conserva pendências hepáticas',droga=>{
+ expect(analitosSemCortePorDroga([droga],new Set()).map(a=>a.codigo)).toEqual(['BILI','AST','ALT']);
+});
+it('variante cetuximab conserva pendências de eletrólitos',()=>{
+ expect(analitosSemCortePorDroga(['cetuximab'],new Set()).map(a=>a.codigo)).toEqual(['MG','K','CA']);
+});
 const renal = (extra: Partial<EntradaCockcroftGault> = {}): EntradaCockcroftGault => ({
   idadeAnos: 68, sexoFormula: "MASCULINO", peso: medida(120, "kg"), creatinina: medida(1, "mg/dL"), ...extra,
 });

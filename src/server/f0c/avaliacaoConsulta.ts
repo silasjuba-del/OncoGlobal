@@ -8,7 +8,7 @@ import { avaliarTriagem } from "../../rules/triagem.js";
 import { idadeDoDado, PESO_VALIDADE_DIAS } from "../../rules/prescricao/index.js";
 import { hashCanonico, projetarRetrato } from "../../kernel/projections/retrato/index.js";
 import { diaDaObservacao, observacaoNoHorizonte, observacoesMaisRecentes } from "../../modules/consulta/observacoesTemporais.js";
-import { alturaDocumentada, exameBasalDocumentado } from "./dadosDocumentados.js";
+import { alturaDocumentada, exameBasalDocumentado, evidenciaBasalAfirmada } from "./dadosDocumentados.js";
 import type { CriterioElegibilidade } from "../../contracts/api/criterioElegibilidade.js";
 import { semaforoInteracoes, type RulesetSemaforo } from "../../rules/semaforoInteracoes.js";
 import type { CatalogoInteracoes } from "../../contracts/f0c/interacoes.js";
@@ -94,6 +94,10 @@ export function avaliarConsulta(i: EntradaAvaliacaoConsulta) {
   const atuaisSnapshot=projetarSnapshot(escopo.filter(e=>e.tipo==="FATO" && e.encounterId===i.encounterId),i.patientId,i.tumorLotId,i.encounterId,"f0c-atual-v1");
   const campo = (nome: string) => {
     const campoFonte=(nome==="medicamentos" ? atuaisSnapshot : snapshot).campos[nome];
+    if (["feveBasal","audiometriaBasal"].includes(nome) && (!campoFonte?.eventIds.length || campoFonte.eventIds.some(id=>{
+      const evento=atuais.find(e=>e.eventId===id);
+      return !evento || !["CONFIRMADO","ASSINADO"].includes(evento.revisao) || !evidenciaBasalAfirmada(dadosDoEvento(evento));
+    }))) return null;
     return campoFonte?.estado === "VERDE" && campoFonte.eventIds.every(id=>atuais.some(e=>e.eventId===id && e.fontes.length>0)) ? campoFonte.valor : null;
   };
   const labs = labSeries(medidasAtuais).filter(p => observacaoNoHorizonte(p.data, limiteClinico, horizonte)
@@ -260,6 +264,7 @@ export function avaliarConsulta(i: EntradaAvaliacaoConsulta) {
     ...(i.cumulativo?.estado === "VERMELHO" ? i.cumulativo.motivos.map(m => m.texto) : [])];
   const sugestoesLaboratorio = [...(interacoes.achados.some(a=>key(a.drogaA).includes("capecitabina") && key(a.drogaBouClasse).includes("varfarina")) ? ["INR"] : []),...hbv.faltantes,
     ...(!audioDocumentada && preRequisitosC1((i.ciclo?.itens ?? []).map(item=>item.droga), i.ciclo?.numero ?? null).some(t=>t.id === "AUDIOMETRIA_BASAL") ? ["Audiometria basal"] : [])];
-  return { elegibilidade, renal, dadosCorporais, dadosNutricionais, tendenciaPeso, variacaoPeso, variacaoPesoCiclo, pesoAnteriorCiclo, criticos, hbv, interacoes, emergencia, avisosFlash, sugestoesLaboratorio,
+  return { elegibilidade, renal, dadosCorporais, dadosNutricionais, tendenciaPeso, variacaoPeso, variacaoPesoCiclo, pesoAnteriorCiclo, criticos, hbv, interacoes, emergencia,
+    urgenciaAvaliada: avalTriagem !== null && avalTriagem.pendentes.length === 0, avisosFlash, sugestoesLaboratorio,
     lembrete: elegibilidade.motivos.map(m=>m.texto).filter((t,index,a)=>a.indexOf(t)===index).join("; ") };
 }

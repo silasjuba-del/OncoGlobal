@@ -7,31 +7,35 @@ export function prepararJornadaClinica(input: {
   execucaoId: string; contexto: ExecucaoSkill["contexto"]; nome: string; skillId: ExecucaoSkill["skillId"];
   configuracao: ConfiguracaoPrimeiraConsulta; fontes: ExecucaoSkill["fontes"]; facts: readonly ClinicalFact[];
   pendenciasFontes: readonly string[]; corpus: CorpusJornada | null; corpusHash: string | null; ledgerHash: string; avaliacaoHash: string;
-  alertas: ResultadoJornada["alertas"]; seguranca: string[]; mudancas: string[]; historico: string[];
+  alertas: ResultadoJornada["alertas"]; urgenciaAvaliada: boolean; seguranca: string[]; mudancas: string[]; historico: string[];
 }) {
   const tipo = input.skillId === "retorno" ? "RETORNO" : input.skillId === "follow-up" ? "FOLLOW_UP" : "PRIMEIRA_CONSULTA";
   const selecao = input.configuracao.jornada;
-  const cartoes = input.corpus?.cartoes.filter(c => selecao?.cartoesIds.includes(c.id)) ?? [];
-  const acoes = input.corpus?.acoes_consulta.filter(a => selecao?.acoesIds.includes(a.id)) ?? [];
+  const urgente = input.alertas.length > 0;
+  const cartoes = urgente ? [] : input.corpus?.cartoes.filter(c => selecao?.cartoesIds.includes(c.id)) ?? [];
+  const acoes = urgente ? [] : input.corpus?.acoes_consulta.filter(a => selecao?.acoesIds.includes(a.id)) ?? [];
   const divIds = new Set(cartoes.flatMap(c => c.divergencias));
   const divergencias = input.corpus?.divergencias.filter(d => divIds.has(d.id)) ?? [];
   const fonteIds = new Set([...cartoes.flatMap(c => [...c.fontes, ...Object.values(c.linhas).flatMap(l => l.fontes)]),
     ...acoes.flatMap(a => a.fontes), ...divergencias.flatMap(d => d.fontes)].map(f => f.fonte));
   const fontes = input.corpus?.fontes.filter(f => fonteIds.has(f.id)) ?? [];
-  const urgente = input.alertas.length > 0;
   const pendencias = [...input.pendenciasFontes,
     "Aplicabilidade dos cartões depende de revisão médica de estadiamento, subtipo, exposições e condições; a seleção não confirma fatos.",
     "Edição TNM não é presumida; recidiva pós-adjuvância não equivale automaticamente a L2.",
     ...(input.corpus ? [] : ["CORPUS INDISPONÍVEL: não há referência terapêutica recuperável."]),
     ...(divergencias.length ? ["DIVERGÊNCIAS DE FONTE: revisar antes de aplicar as opções."] : []),
     ...(urgente ? ["SUSPEITA URGENTE: avaliação médica prioritária; propostas eletivas interrompidas."] : []),
+    ...(!input.urgenciaAvaliada ? ["AVALIAÇÃO DE URGÊNCIA INCOMPLETA: conferir triagem clínica e cobertura radiológica disponível."] : []),
   ];
   const etapas: ResultadoJornada["etapas"] = [];
   const etapa = (id: string, titulo: string, estado: ResultadoJornada["etapas"][number]["estado"], motivo: string) => etapas.push({id,titulo,estado,motivo});
-  etapa("S00", "Identidade e proveniência", "EXECUTADA", "Fontes vinculadas ao encontro por decisão registrada, revisão e hash conferidos pelo servidor.");
-  etapa("S01", "Urgência clínica e radiológica", urgente ? "PENDENTE" : "EXECUTADA", urgente
+  etapa("S00", "Identidade e proveniência", "EXECUTADA", input.fontes.length
+    ? "Fontes vinculadas ao encontro por decisão registrada, revisão e hash conferidos pelo servidor."
+    : "Escopo da sessão e paciente conferidos; jornada sem novos documentos, apoiada no prontuário disponível.");
+  etapa("S01", "Urgência clínica e radiológica", urgente || !input.urgenciaAvaliada ? "PENDENTE" : "EXECUTADA", urgente
     ? "Sinal identificado; exige avaliação imediata. Não é diagnóstico confirmado."
-    : "Regras disponíveis avaliadas; ausência de achado não exclui emergências fora da cobertura.");
+    : !input.urgenciaAvaliada ? "Cobertura incompleta: ausência de achado não comprova ausência de urgência."
+      : "Regras disponíveis avaliadas; ausência de achado não exclui emergências fora da cobertura.");
   etapa("S02", "Extração e reconciliação", "EXECUTADA", `${input.facts.length} informações recebidas com fonte; valores divergentes e temporalidade preservados.`);
   etapa("S03", "AP, IHQ e biomarcadores", "PENDENTE", "Conferir laudos, amostra, variante, clone e pendências; ausente não equivale a negativo.");
   etapa("S04", "Imagem, estadiamento e ressecabilidade", "PENDENTE", "Preservar TNM recebido e edição; comparação radiológica e avaliação multidisciplinar dependem de revisão.");

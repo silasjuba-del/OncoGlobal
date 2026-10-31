@@ -135,10 +135,12 @@ export function projetarEquivalenteClinico(i: EntradaCumulativoClinico) {
     .map(e=>({...e,tumorLotId:i.tumorLotId,encounterId:i.encounterId})),i.patientId,i.tumorLotId,i.encounterId,'equivalente-rt-v1').campos.rtMediastino;
   const rtValida=rt?.estado==='VERDE' && typeof rt.valor==='boolean' && rt.eventIds.every(id=>vigentes.some(e=>e.eventId===id&&e.fontes.length));
   const pendencias=[...totais.pendencias,...drogas.filter(d=>unidadesIncompativeis.has(d)).map(d=>`UNIDADE_EQUIVALENTE_INVALIDA:${d}`),...(!rtValida?['RT_MEDIASTINAL_NAO_CONFERIDA']:[])];
-  const doses=totais.avaliacoes.map(a=>({droga:a.droga,mgM2:unidadesIncompativeis.has(chaveDroga(a.droga))?Number.NaN:a.avaliacao.totalMgM2 ?? Number.NaN}));
+  // O subtotal documentado é um limite inferior: incompletude nunca apaga um limiar já atingido.
+  const doses=totais.avaliacoes.filter(a=>!unidadesIncompativeis.has(chaveDroga(a.droga)) && a.avaliacao.totalConhecidoMgM2 !== null)
+    .map(a=>({droga:a.droga,mgM2:a.avaliacao.totalConhecidoMgM2!}));
   const r=equivalenteDoxorrubicina(doses,rtValida&&rt!.valor===true);
-  return {...r,estado:pendencias.length && r.estado!=='AVISO'?'PENDENTE' as const:r.estado,
+  return {...r,estado:pendencias.length && r.estado==='SEM_AVISO'?'PENDENTE' as const:r.estado,
     pendencias:[...new Set([...r.pendencias,...pendencias])],
-    motivo:r.motivo+(pendencias.length?' Histórico ou agravantes incompletos: não concluir baixo risco.':''),
+    motivo:r.motivo+(pendencias.length?' Valor é subtotal conhecido; histórico ou agravantes incompletos: não concluir baixo risco.':''),
     fontes:totais.avaliacoes.flatMap(a=>a.sourceIds)};
 }

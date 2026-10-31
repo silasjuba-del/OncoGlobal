@@ -3,6 +3,7 @@ import { ClinicalFact, EncounterSegment } from "../contracts/w10/extracao.js";
 import { MetodoCapturaTranscricao } from "../contracts/capturaTranscricao.js";
 import { PedidoSkillClinica, ExecucaoSkill, DocumentoSkill, ContextoSkill, TipoDocumentoSkill, ResultadoSkillClinica, SkillClinicaId } from "../contracts/skillsClinicas.js";
 import type { ResultadoJornada } from "../contracts/jornadaClinica.js";
+import { ehMetadadoTecnico } from "../contracts/metadadosTecnicos.js";
 import { lerDraft, listarDrafts, listarEventos, salvarDraft, transacao } from "../kernel/comandos/portas.js";
 import { dadosDoEvento } from "../kernel/projections/snapshot.js";
 import { executarPipelineExtracao } from "../kernel/extracao/pipeline.js";
@@ -10,6 +11,7 @@ import { prepararJornadaClinica } from "../modules/documentos/jornadaClinica.js"
 import { detectarEmergencias } from "../rules/radsEmergencias.js";
 import { hashCanonico } from "../modules/hash.js";
 import { lerPaciente, lerConsulta } from "./leituras.js";
+import { opcoesLeituraConsulta } from "./rotas/confirmacao.js";
 import type { ServidorDeps } from "./rotas.js";
 
 const Fonte = z.object({ kind: z.literal("EXTRACAO_RASCUNHO"),
@@ -50,29 +52,26 @@ export function operarSkillsClinicas(raw: unknown, token: string, deps: Servidor
     const paciente = lerPaciente(deps.db, p.contexto.patientId);
     if (!paciente) throw new RecusaSkill("PACIENTE_NAO_ENCONTRADO");
     const corpus = deps.corpus?.jornadaPulmao ?? null;
+    const opcoesLeitura = opcoesLeituraConsulta(deps,sessao);
     // A política de segurança também faz parte da entrada: uma regra RADS nova
     // precisa invalidar o rascunho antigo mesmo se o paciente e o texto não mudaram.
-    const corpusHash = hashCanonico({ conhecimento:corpus, rads:deps.corpus?.rads ?? null,
-      feve:deps.corpus?.feveRuleset ?? null, salao:deps.salaoRuleset ?? null,
-      interacoes:deps.corpus?.interacoes ?? null, catalogo:deps.corpus?.catalogoInteracoes ?? null,
-      tetos:deps.corpus?.tetosCumulativos ?? null });
+    const corpusHash = hashCanonico({ politicaJornada:"JORNADA-SEGURANCA@2", conhecimento:corpus,
+      rads:deps.corpus?.rads ?? null, leitura:opcoesLeitura });
     const ledgerHash = () => hashCanonico(listarEventos(deps.db, contexto.patientId));
     const avaliacaoAtual = () => {
       const c = lerConsulta(deps.db, contexto.patientId, deps.agora(), sessao, contexto.tumorLotId,
-        {encounterId:contexto.encounterId, salaoRuleset:deps.salaoRuleset,
-          ...(deps.corpus ? {interacoes:deps.corpus.interacoes,catalogo:deps.corpus.catalogoInteracoes,
-            feveRuleset:deps.corpus.feveRuleset,limiarPlaquetas:deps.corpus.limiarPlaquetas,
-            tetosCumulativos:deps.corpus.tetosCumulativos,templates:deps.corpus.templatesProtocolo} : {})});
+        {...opcoesLeitura,encounterId:contexto.encounterId});
       if (!("avaliacaoClinica" in c) || !c.avaliacaoClinica || !c.elegibilidade || !c.delta || !c.historicoTratamento)
-        return {seguranca:["AVALIAÇÃO CLÍNICA INDISPONÍVEL"],mudancas:[] as string[],historico:[] as string[],urgente:false};
+        return {seguranca:["AVALIAÇÃO CLÍNICA INDISPONÍVEL"],mudancas:[] as string[],historico:[] as string[],urgente:false,urgenciaAvaliada:false};
       const renal = c.avaliacaoClinica.renal;
-      return {seguranca:[...c.elegibilidade.motivos.map(m=>m.texto),
-        `Função renal: ${renal.estado}; Cockcroft peso real ${renal.clcrMlMin ?? "PENDENTE"}; peso ajustado ${renal.clcrPesoAjustadoMlMin ?? "não disponível"}. ${renal.aviso ?? ""}`],
-        mudancas:c.delta.itens.filter(d=>!/auditor|reconcil|indice|hash/i.test(d.rotulo))
+      return {seguranca:[...new Set([...c.elegibilidade.motivos.map(m=>m.texto),...c.flash.avisos,
+        `Função renal: ${renal.estado}; Cockcroft peso real ${renal.clcrMlMin ?? "PENDENTE"}; peso ajustado ${renal.clcrPesoAjustadoMlMin ?? "não disponível"}. ${renal.aviso ?? ""}`])],
+        mudancas:c.delta.itens.filter(d=>!ehMetadadoTecnico(d.rotulo))
           .map(d=>`${d.rotulo}: ${d.candidatos.map(v=>`${v.rotulo}: ${valorClinico(v.valorTexto)}`).join(" → ")}`),
         historico:[...(c.resumoConfirmadoParaDocumento ? [`Resumo previamente revisado: ${c.resumoConfirmadoParaDocumento}`] : []),
           ...c.historicoTratamento.linhas.map(l=>`${l.data ?? l.periodo?.inicio ?? "data não informada"}: ${l.tipo}; ${l.protocoloOuTipo ?? l.topografia ?? "descrição pendente"}${l.ciclo===null?"":`; ciclo ${l.ciclo}`}; ${l.estado}. ${l.observacao}`),
-          ...(c.flash.ultimoAdministrado ? [`Último administrado: ${c.flash.ultimoAdministrado}`] : [])],urgente:c.avaliacaoClinica.emergencia};
+          ...(c.flash.ultimoAdministrado ? [`Último administrado: ${c.flash.ultimoAdministrado}`] : [])],urgente:c.avaliacaoClinica.emergencia,
+        urgenciaAvaliada:c.avaliacaoClinica.urgenciaAvaliada};
     };
     if (p.acao === "FONTES") return ok({codigo:"SKILL_FONTES",fontes:listarDrafts(deps.db,contexto.patientId).flatMap(d=>{
       const f=Fonte.safeParse(d.payload);
@@ -109,6 +108,7 @@ export function operarSkillsClinicas(raw: unknown, token: string, deps: Servidor
       const fontes: ExecucaoSkill["fontes"] = [];
       const facts: z.infer<typeof ClinicalFact>[] = [], pendencias: string[] = [];
       const alertas: ResultadoJornada["alertas"] = [];
+      let temLaudoRadiologico=false;
       const selecao=p.configuracao.jornada;
       if (selecao && (selecao.cartoesIds.some(id=>!corpus?.cartoes.some(c=>c.id===id))
         || selecao.acoesIds.some(id=>!corpus?.acoes_consulta.some(a=>a.id===id)))) throw new RecusaSkill("REFERENCIA_CORPUS_INDISPONIVEL");
@@ -124,6 +124,7 @@ export function operarSkillsClinicas(raw: unknown, token: string, deps: Servidor
         const segmentos = f.state.segments.filter(s => s.id === link.segmentId && s.sourceId === draft.sourceId);
         if (segmentos.length !== 1) throw new RecusaSkill("SEGMENTO_SKILL_AMBIGUO");
         const segmento = segmentos[0]!;
+        temLaudoRadiologico ||= segmento.sourceType === "imaging_report";
         if (deps.corpus?.rads) alertas.push(...detectarEmergencias(segmento.rawTranscript,deps.corpus.rads).alertas
           .map(a=>({texto:a.nome,sourceId:draft.sourceId,trecho:a.trecho})));
         const prova = recibos.filter(e => {
@@ -160,7 +161,8 @@ export function operarSkillsClinicas(raw: unknown, token: string, deps: Servidor
       }
       const preparados = prepararJornadaClinica({ execucaoId, contexto: p.contexto, nome: paciente.nome,skillId:p.skillId,
         configuracao: p.configuracao, fontes, facts, pendenciasFontes: pendencias,corpus,corpusHash,ledgerHash:hashLedger,
-        avaliacaoHash:hashCanonico(clinica),alertas,seguranca:clinica.seguranca,mudancas:clinica.mudancas,historico:clinica.historico });
+        avaliacaoHash:hashCanonico(clinica),alertas,urgenciaAvaliada:clinica.urgenciaAvaliada && (!temLaudoRadiologico || !!deps.corpus?.rads),
+        seguranca:clinica.seguranca,mudancas:clinica.mudancas,historico:clinica.historico });
       const criadoEm = deps.agora();
       const execucao = ExecucaoSkill.parse({ kind: "SKILL_EXECUCAO_RASCUNHO", execucaoId, contexto: p.contexto,
         skillId: p.skillId, versao: p.versao, mecanismo: "COMPOSICAO_LOCAL_DETERMINISTICA", operationId: p.operationId,

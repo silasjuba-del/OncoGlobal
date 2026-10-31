@@ -41,3 +41,32 @@ it('resposta atrasada não aparece após mudar paciente',async()=>{
  resolver(preparada());await screen.findByRole('checkbox',{name:/Laudo sintético/});
  expect(screen.queryByText('Rascunhos preparados — revisão médica pendente.')).toBeNull();
 });
+it('resposta de outro paciente é recusada mesmo sem mudar a consulta na tela',async()=>{
+ const call=vi.fn(async(p:PedidoSkillClinica):Promise<ResultadoSkillClinica>=>{
+  if(p.acao==='CATALOGO')return catalogo;if(p.acao==='FONTES')return fontes;if(p.acao==='HISTORICO')return hist;
+  const r=preparada();if(r.codigo==='SKILL_PREPARADA')r.execucao.contexto.patientId='outro-paciente-sintetico';return r;
+ });
+ render(<PainelSkillsClinicas porta={{...criarPortaFalsa(),skillsClinicas:call}} contexto={contexto}/>);
+ fireEvent.click(screen.getByRole('button',{name:'Jornada por skills'}));await screen.findByRole('checkbox',{name:/Laudo sintético/});
+ await waitFor(()=>expect((screen.getByRole('combobox',{name:'Tipo de jornada'}) as HTMLSelectElement).disabled).toBe(false));
+ fireEvent.change(screen.getByRole('combobox',{name:'Tipo de jornada'}),{target:{value:'retorno'}});
+ fireEvent.click(screen.getByRole('button',{name:'Preparar rascunhos da jornada'}));
+ await screen.findByRole('alert');expect(screen.queryByRole('article',{name:'Resultado da jornada'})).toBeNull();
+});
+it('falha do histórico não apaga sucesso e alteração de seleção invalida a prévia',async()=>{
+ let consultas=0;
+ const call=vi.fn(async(p:PedidoSkillClinica):Promise<ResultadoSkillClinica>=>{
+  if(p.acao==='CATALOGO')return catalogo;if(p.acao==='FONTES')return fontes;
+  if(p.acao==='HISTORICO'){if(++consultas>1)throw Error('falha sintética de histórico');return hist;}return preparada();
+ });
+ render(<PainelSkillsClinicas porta={{...criarPortaFalsa(),skillsClinicas:call}} contexto={contexto}/>);
+ fireEvent.click(screen.getByRole('button',{name:'Jornada por skills'}));await screen.findByRole('checkbox',{name:/Laudo sintético/});
+ await waitFor(()=>expect((screen.getByRole('combobox',{name:'Tipo de jornada'}) as HTMLSelectElement).disabled).toBe(false));
+ fireEvent.change(screen.getByRole('combobox',{name:'Tipo de jornada'}),{target:{value:'retorno'}});
+ fireEvent.click(screen.getByRole('button',{name:'Preparar rascunhos da jornada'}));
+ await screen.findByText(/Rascunhos recuperados com sucesso/);
+ expect(screen.getByRole('article',{name:'Resultado da jornada'})).toBeTruthy();
+ fireEvent.click(screen.getByRole('checkbox',{name:'Incluir discussão do tratamento'}));
+ expect(screen.queryByRole('article',{name:'Resultado da jornada'})).toBeNull();
+ expect(call.mock.calls.filter(([p])=>p.acao==='EXECUTAR')).toHaveLength(1);
+});

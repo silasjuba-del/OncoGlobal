@@ -32,6 +32,18 @@ export async function jornadaSkillsNoNavegador(page,{manifesto,lerEventos,eviden
   await page.getByRole('button',{name:'Reabrir jornada',exact:true}).first().click();
   const rec=await(await leitura).json();assert.equal(rec.execucao.execucaoId,execucaoId);
   assert.deepEqual(rec.documentos,r.documentos);assert.equal(rec.validade,'ATUAL');
+  for(const skillId of ['retorno','follow-up']) {
+    await painel.getByLabel('Tipo de jornada',{exact:true}).selectOption(skillId);
+    await painel.getByLabel('Ações da jornada',{exact:true}).selectOption(skillId==='follow-up'?['FU-02']:['EX-08']);
+    const nova=page.waitForResponse(r=>r.url().endsWith('/consulta/skills')&&r.request().postDataJSON()?.acao==='EXECUTAR');
+    await painel.getByRole('button',{name:'Preparar rascunhos da jornada',exact:true}).click();
+    const http=await nova;assert.equal(http.status(),200);const doc=await http.json();
+    assert.equal(doc.execucao.skillId,skillId);
+    assert.equal(doc.execucao.jornada.etapas.some(e=>e.id==='S08'),false,'sem pedido de discussão não abre QT');
+    assert.equal(doc.execucao.jornada.etapas.some(e=>e.id===(skillId==='retorno'?'S06':'S09')),true);
+    await painel.getByText('Rascunhos preparados — revisão médica pendente.',{exact:true}).waitFor();
+    assert.deepEqual(lerEventos().map(e=>e.eventId).sort(),antes);
+  }
   await page.screenshot({path:join(evidenceDir,'jornada-skills-reaberta.png'),fullPage:true});
-  return {primeiraConsulta:true,corpusComFonte:true,pedidosSomenteRascunho:true,reaberturaIdentica:true,semEventoClinico:true};
+  return {primeiraConsulta:true,retorno:true,followUp:true,corpusComFonte:true,pedidosSomenteRascunho:true,reaberturaIdentica:true,semEventoClinico:true};
 }

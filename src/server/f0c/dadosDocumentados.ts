@@ -4,18 +4,26 @@ import { FactQualifiers } from "../../contracts/w10/extracao.js";
 import { montarFichaMinima } from "../../modules/consulta/revisaoClinica.js";
 import { dataCivilDoServico } from "../../rules/tempoServico.js";
 
-/** Basal explicitamente atribuído ao episódio. Presença de arquivo não prova exame realizado. */
-export function exameBasalDocumentado(raw: unknown, episodioId: string | null, limite: string): Record<string, unknown> | null {
-  if (!raw || typeof raw !== "object" || Array.isArray(raw) || !episodioId) return null;
-  const d = raw as Record<string, unknown>;
-  if (d.episodioId !== episodioId || !DataCivil.safeParse(d.data).success || String(d.data) > limite
-    || d.negado === true || d.requiresConfirmation === true || ["INFERRED","UNCERTAIN"].includes(String(d.evidence))
-    || ["PENDENTE", "SOLICITADO", "AGENDADO", "CANCELADO"].includes(String(d.estado))) return null;
+/** O qualificador canônico pode estar no envelope do evento ou dentro do valor. */
+export function evidenciaBasalAfirmada(raw: unknown): boolean {
+  if (!raw || typeof raw !== "object" || Array.isArray(raw)) return false;
+  const d=raw as Record<string,unknown>;
+  if (d.negado === true || d.negated === true || d.requiresConfirmation === true
+    || ["INFERRED","UNCERTAIN"].includes(String(d.evidence))
+    || ["PENDENTE", "SOLICITADO", "AGENDADO", "CANCELADO"].includes(String(d.estado))) return false;
   if (d.qualificadores !== undefined) {
     const q=FactQualifiers.safeParse(d.qualificadores);
     if(!q.success || q.data.polaridade!=="AFIRMADA" || q.data.sujeito!=="PACIENTE"
-      || ["FUTURA","NAO_DETERMINADA"].includes(q.data.temporalidade)) return null;
+      || ["FUTURA","NAO_DETERMINADA"].includes(q.data.temporalidade)) return false;
   }
+  return d.valor === undefined || evidenciaBasalAfirmada(d.valor);
+}
+
+/** Basal explicitamente atribuído ao episódio. Presença de arquivo não prova exame realizado. */
+export function exameBasalDocumentado(raw: unknown, episodioId: string | null, limite: string): Record<string, unknown> | null {
+  if (!raw || typeof raw !== "object" || Array.isArray(raw) || !episodioId || !evidenciaBasalAfirmada(raw)) return null;
+  const d = raw as Record<string, unknown>;
+  if (d.episodioId !== episodioId || !DataCivil.safeParse(d.data).success || String(d.data) > limite) return null;
   return d;
 }
 

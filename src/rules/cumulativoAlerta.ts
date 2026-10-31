@@ -192,6 +192,12 @@ export function avaliarExposicaoCumulativa(e: EntradaExposicaoCumulativa, limite
     if (!r.fontes.includes(a.fonte)) r.fontes.push(a.fonte);
   }
   if (!unicas.size) return { ...r, pendencias: unidadesDivergentes.length ? unidadesDivergentes : ["HISTORICO_AUSENTE"] };
+  if (!limite) {
+    const unidades=[...new Set([...unicas.values()].map(a=>a.unidade))];
+    if (unidades.length > 1) return {...r,pendencias:["UNIDADES_INCOMPATIVEIS_PARA_SOMA","LIMITE_CURADO_INCOMPATIVEL_OU_AUSENTE"]};
+    const unidade=unidades[0];
+    if (unidade === "mg/m2" || unidade === "U" || unidade === "U/m2") r.unidade=unidade;
+  }
   const efetivas = [...unicas.values()].filter((a) => a.status !== "OMITIDA");
   // Ordenação determinística para que replay e ordem de eventos não alterem a soma decimal.
   efetivas.sort((a, b) => a.adminId < b.adminId ? -1 : a.adminId > b.adminId ? 1 : 0);
@@ -273,7 +279,7 @@ export function calcularTotalExposicao(e: EntradaExposicaoCumulativa): Resultado
   const pendencias = r.pendencias.filter((p) => p !== "LIMITE_CURADO_INCOMPATIVEL_OU_AUSENTE");
   const unidades = [...new Set(e.administracoes.filter(a=>a.patientId===e.patientId && chaveDroga(a.droga)===chaveDroga(e.droga)).map(a=>a.unidade))];
   if (unidades.length > 1) return { ...r, totalMgM2:null, totalConhecidoMgM2:null,
-    pendencias:[...pendencias,"UNIDADES_INCOMPATIVEIS_PARA_SOMA"],estado:"PENDENTE",comparacao:"NAO_REALIZADA" };
+    pendencias:[...new Set([...pendencias,"UNIDADES_INCOMPATIVEIS_PARA_SOMA"])],estado:"PENDENTE",comparacao:"NAO_REALIZADA" };
   const unidade=unidades[0];
   if (unidade === "mg/m2" || unidade === "U" || unidade === "U/m2") r.unidade=unidade;
   return { ...r, pendencias, estado: pendencias.length ? "PENDENTE" : "TOTAL_DOCUMENTADO", comparacao: "NAO_REALIZADA" };

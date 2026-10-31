@@ -20,7 +20,7 @@ export function PainelSkillsClinicas({porta,contexto}:{porta:PortaConsulta;conte
   const chaveCtx=JSON.stringify(ctx);
   useEffect(()=>{
     const id=++geracao.current; const ctl=new AbortController(); req.current?.abort(); req.current=ctl;
-    setResultado(null);setFontes([]);setHistorico([]);setSelecionadas([]);setCartoes([]);setAcoes([]);setErro('');tentativa.current=null;
+    setResultado(null);setCatalogo(null);setFontes([]);setHistorico([]);setSelecionadas([]);setCartoes([]);setAcoes([]);setErro('');tentativa.current=null;
     if (!aberto||!porta.skillsClinicas) return ()=>{geracao.current++;ctl.abort();};
     busy.current=true;setOcupado(true);
     void Promise.all([porta.skillsClinicas({acao:'CATALOGO'},ctl.signal),porta.skillsClinicas({acao:'FONTES',contexto:ctx},ctl.signal),
@@ -40,9 +40,17 @@ export function PainelSkillsClinicas({porta,contexto}:{porta:PortaConsulta;conte
       const r=await porta.skillsClinicas(pedido,ctl.signal);
       if(id!==geracao.current||ctl.signal.aborted)return;
       if(r.codigo!=='SKILL_PREPARADA'&&r.codigo!=='SKILL_REPLAY'&&r.codigo!=='SKILL_CARREGADA')throw Error();
+      const mesmoContexto=(c:Preparado['execucao']['contexto'])=>c.patientId===ctx.patientId&&c.encounterId===ctx.encounterId&&c.tumorLotId===ctx.tumorLotId;
+      if(!mesmoContexto(r.execucao.contexto)||r.documentos.some(d=>!mesmoContexto(d.contexto)||d.execucaoId!==r.execucao.execucaoId)
+        ||(pedido.acao==='LER'&&(r.codigo!=='SKILL_CARREGADA'||r.execucao.execucaoId!==pedido.execucaoId))
+        ||(pedido.acao==='EXECUTAR'&&(r.codigo==='SKILL_CARREGADA'||r.execucao.skillId!==pedido.skillId))) throw Error();
       setResultado(r);tentativa.current=null;
-      const h=await porta.skillsClinicas({acao:'HISTORICO',contexto:ctx},ctl.signal);
-      if(id===geracao.current&&!ctl.signal.aborted&&h.codigo==='SKILLS_HISTORICO')setHistorico(h.execucoes);
+      try {
+        const h=await porta.skillsClinicas({acao:'HISTORICO',contexto:ctx},ctl.signal);
+        if(id===geracao.current&&!ctl.signal.aborted&&h.codigo==='SKILLS_HISTORICO')setHistorico(h.execucoes);
+      } catch {
+        if(id===geracao.current&&!ctl.signal.aborted)setErro('Rascunhos recuperados com sucesso; não foi possível atualizar a lista do histórico.');
+      }
     }catch{if(id===geracao.current&&!ctl.signal.aborted)setErro('Não foi possível concluir. Confira vínculo e revisão das fontes; repetir o mesmo pedido não duplica a operação.');}
     finally{if(id===geracao.current){busy.current=false;setOcupado(false);}}
   }
@@ -68,20 +76,20 @@ export function PainelSkillsClinicas({porta,contexto}:{porta:PortaConsulta;conte
       <fieldset disabled={ocupado} style={{minWidth:0,maxWidth:'100%',boxSizing:'border-box'}}><legend>Laudos e exames vinculados</legend>
         {!fontes.length&&<p>Vincule e revise as fontes da consulta para preparar a jornada.</p>}
         {fontes.map(f=><label key={f.draftId} style={{display:'block'}}><input type="checkbox" checked={selecionadas.includes(f.draftId)}
-          onChange={e=>setSelecionadas(s=>e.target.checked?[...s,f.draftId]:s.filter(id=>id!==f.draftId))}/>{f.sourceId} · revisão {f.revision}</label>)}
+          onChange={e=>{setSelecionadas(s=>e.target.checked?[...s,f.draftId]:s.filter(id=>id!==f.draftId));setResultado(null);}}/>{f.sourceId} · revisão {f.revision}</label>)}
       </fieldset>
       <label style={{display:'block'}}>Cenários do corpus — referências em revisão <select aria-label="Cenários de pulmão" multiple value={cartoes} disabled={ocupado}
         style={{display:'block',width:'100%',minWidth:0,maxWidth:'100%',boxSizing:'border-box',margin:0}}
-        onChange={e=>setCartoes(Array.from(e.target.selectedOptions,o=>o.value))}>
+        onChange={e=>{setCartoes(Array.from(e.target.selectedOptions,o=>o.value));setResultado(null);}}>
         {catalogo?.corpus?.cartoes.map(c=><option key={c.id} value={c.id}>{c.id} · {c.estadiamento} · {c.subtipo}</option>)}
       </select></label>
       <label style={{display:'block'}}>Exames e encaminhamentos — propostas condicionais <select aria-label="Ações da jornada" multiple value={acoes} disabled={ocupado}
         style={{display:'block',width:'100%',minWidth:0,maxWidth:'100%',boxSizing:'border-box',margin:0}}
-        onChange={e=>setAcoes(Array.from(e.target.selectedOptions,o=>o.value))}>
+        onChange={e=>{setAcoes(Array.from(e.target.selectedOptions,o=>o.value));setResultado(null);}}>
         {catalogo?.corpus?.acoes_consulta.map(a=><option key={a.id} value={a.id}>{a.id} · {a.contexto} · {a.rascunho}</option>)}
       </select></label>
       {!catalogo?.corpus&&<p>Corpus indisponível. A organização documental continua sem sugestões de referência.</p>}
-      <label><input type="checkbox" checked={tratamento} disabled={ocupado} onChange={e=>setTratamento(e.target.checked)}/>Incluir discussão do tratamento</label>
+      <label><input type="checkbox" checked={tratamento} disabled={ocupado} onChange={e=>{setTratamento(e.target.checked);setResultado(null);}}/>Incluir discussão do tratamento</label>
       <button type="button" className="oc-btn-primary" disabled={ocupado||(skill==='primeira-consulta'&&!selecionadas.length)||selecionadas.length>20||cartoes.length>12||acoes.length>20} onClick={preparar}>
         {ocupado?'Preparando…':'Preparar rascunhos da jornada'}</button>
       {resultado&&<article aria-label="Resultado da jornada">
