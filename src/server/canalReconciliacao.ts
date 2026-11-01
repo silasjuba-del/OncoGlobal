@@ -39,8 +39,14 @@ export type ClassificadorCanalLlm = (entrada: {
 
 let rulesetPadraoCache: RulesetAlarmeCanalEntrada | null = null;
 
+let corpusCtcaeTexto: string | null = null;
+
+/** Lê o arquivo uma vez; cada chamada recebe objeto novo, sem compartilhar estado entre mensagens. */
 function carregarCorpusCtcae(): unknown {
-  try { return JSON.parse(readFileSync(resolve(dirname(fileURLToPath(import.meta.url)),"../../corpus/rulesets/salao-ctcae.v1.json"), "utf8")); }
+  try {
+    corpusCtcaeTexto ??= readFileSync(resolve(dirname(fileURLToPath(import.meta.url)),"../../corpus/rulesets/salao-ctcae.v1.json"), "utf8");
+    return JSON.parse(corpusCtcaeTexto);
+  }
   catch { return null; }
 }
 
