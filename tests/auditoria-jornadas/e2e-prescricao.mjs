@@ -19,8 +19,9 @@ async function portaLivre() {
   const p = s.address().port; await new Promise(ok => s.close(ok)); return p;
 }
 
-export async function executar() {
-  const evid = mkdtempSync(join(tmpdir(), 'auditoria-prescricao-evid-')), dir = mkdtempSync(join(tmpdir(), 'e2e-b2-f1-'));
+/** `aposAssinatura` permite que outra prova continue do mesmo estado assinado (S1.2). */
+export async function executar({ aposAssinatura, prefixo = 'auditoria-prescricao-evid-' } = {}) {
+  const evid = mkdtempSync(join(tmpdir(), prefixo)), dir = mkdtempSync(join(tmpdir(), 'e2e-b2-f1-'));
   const resultados = [], ctx = {};
   const log = v => { const l = JSON.stringify({ t: new Date().toISOString(), ...v }); appendFileSync(join(evid, 'log.jsonl'), l + '\n'); console.log(l); };
   let page;
@@ -236,6 +237,7 @@ export async function executar() {
       return { adversarial: ctx.adversarial.status, carboplatina: ctx.carboplatina, assinados: ctx.assinadas, modoReaberto, itensReabertos, administracoes: administracoes().length };
     }, ['conferida']);
 
+    if (aposAssinatura) await aposAssinatura({ page, demo, fixture, dir, uiPort, prova, ctx, eventos, administracoes, abrirEditor, b2, evid });
     await prova('S1.1.sem_erros_de_pagina_nem_requisicoes_externas', async () => {
       assert.deepEqual(externas, []); assert.deepEqual(errosPagina, []); return true;
     });
@@ -248,4 +250,5 @@ export async function executar() {
     await vite?.close();
   }
 }
-executar().catch(e => { console.error(e); process.exitCode = 1; });
+if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url))
+  executar().catch(e => { console.error(e); process.exitCode = 1; });

@@ -37,3 +37,15 @@ Declarado antes da execução. Paciente sintético `Paciente SINTETICO Consulta 
 | Reinício | Backend reiniciado sobre o mesmo SQLite | Ciclo atual com os 8 itens assinados; zero administração |
 
 Os pré-requisitos (lote, medidas e exames) entram pela mesma porta de confirmação do produto, não pela interface. Exame só com data civil fica PENDENTE por falta de horário (`avaliarValidadeExame`). A exatidão de dose em µg está em `DOSE.D-F1-52_ug_positiva_pequena_nao_zera` (`e2e-jornadas.mjs`).
+
+## Administração após prescrição assinada (S1.2, `e2e-administracao.mjs`)
+
+Continua do estado assinado da S1.1, no mesmo backend e SQLite.
+
+| Prova | Esperado |
+|---|---|
+| Prescrito não vira administrado | "Setores da clínica" mostra nenhuma administração efetiva; ledger sem `TreatmentAdministration` |
+| Salão | Abre pela navegação médica com o paciente da prescrição |
+| Administração explícita | Um controle do Salão registra a administração efetiva, distinta da prescrição, e ela volta após reinício |
+
+A terceira prova falha hoje: a rota `/salao/registrar-administracao` (`src/server/dutos.ts`) existe e é testada por HTTP (`tests/f1/s10/http-dutos.test.ts`), mas nenhuma tela a chama. Por isso o script ainda não entra no `verify.yml`; entra junto com a correção (S1.3).
