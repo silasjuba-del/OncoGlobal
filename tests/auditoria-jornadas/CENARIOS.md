@@ -22,3 +22,18 @@ Extensões da auditoria:
 - PATH-MOL permanece em pedidos de exames; sinais de alarme permanecem em orientações.
 
 Todas as asserções originais permanecem. Falha ou cenário bloqueado produz código de saída não zero, para que o CI não confunda relatório produzido com jornada aprovada.
+
+## Prescrição de QT no perfil médico (S1.1, `e2e-prescricao.mjs`)
+
+Declarado antes da execução. Paciente sintético `Paciente SINTETICO Consulta Confiavel` (F, nascimento 1970-01-01, 56 anos na data da fixture), lote `lote-s11-rx-sintetico` (C80). Peso 70 kg e altura 170 cm medidos na data da fixture. Ficha `FICHA.primario-desconhecido-cup.carboplatina-paclitaxel-21-21-dias__nao-especificado@1.0.0` (D-F1-36), conferida por médico sintético apenas no SQLite temporário; o corpus continua RASCUNHO.
+
+| Prova | Entrada | Esperado (regra vigente) |
+|---|---|---|
+| Conferência | Conteúdo aberto, confirmação e motivo | Revisão `CONFERIR` registrada; "Usar ficha em rascunho" disponível |
+| Negativo | Sem creatinina | Carboplatina AUC sem dose, pendência renal explícita; preparo recusado com `SEGURANCA_FICHA_PENDENTE`; nada assinado |
+| Borda | Mosteller 70 kg/170 cm | Paclitaxel 200 mg/m² × 1,82 m² = 364 mg (D-F1-52) |
+| Positivo | Creatinina 1,0 mg/dL, neutrófilos e plaquetas com horário de coleta | Cockcroft-Gault 69,42 mL/min; Calvert AUC 6 × (69,42 + 25) = 566,5 mg (D-F1-52 mantém 0,5); prévia sem assinatura; assinatura explícita; zero administração |
+| Adversarial | Hash enviado diferente do exibido | Recusa; nada assinado |
+| Reinício | Backend reiniciado sobre o mesmo SQLite | Ciclo atual com os 8 itens assinados; zero administração |
+
+Os pré-requisitos (lote, medidas e exames) entram pela mesma porta de confirmação do produto, não pela interface. Exame só com data civil fica PENDENTE por falta de horário (`avaliarValidadeExame`). A exatidão de dose em µg está em `DOSE.D-F1-52_ug_positiva_pequena_nao_zera` (`e2e-jornadas.mjs`).

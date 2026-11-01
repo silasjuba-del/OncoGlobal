@@ -108,6 +108,10 @@ jobs:
         env:
           TMPDIR: ${{ runner.temp }}
         run: node tests/auditoria-jornadas/e2e-jornadas.mjs
+      - name: Validar prescrição de QT no perfil médico até assinatura e reinício
+        env:
+          TMPDIR: ${{ runner.temp }}
+        run: node tests/auditoria-jornadas/e2e-prescricao.mjs
       - name: Validar layout e movimento reduzido no Chromium
         run: node node_modules/vitest/vitest.mjs run --config tests/hostil-cursor/navegador/vitest.config.ts
       - name: Guardar evidencias sinteticas
@@ -119,6 +123,7 @@ jobs:
             ${{ runner.temp }}/s12-b2-evidence-*/
             ${{ runner.temp }}/medico-m123-evidence-*/
             ${{ runner.temp }}/auditoria-jornadas-evid-*/
+            ${{ runner.temp }}/auditoria-prescricao-evid-*/
             ${{ runner.temp }}/flash-evolucao-sintetica-*/resultado.json
             ${{ runner.temp }}/flash-evolucao-sintetica-*/*.png
           if-no-files-found: warn
