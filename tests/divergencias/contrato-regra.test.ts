@@ -56,6 +56,7 @@ describe("F1 avaliação por cartão e documento", () => {
     expect(avaliarDivergencias([d], ctx)[0]!.resultado).toBe("WARNING");
     expect(avaliarDivergencias([d], { ...ctx, itensComDose: ["OUTRO"] })[0]!.resultado).toBe("WARNING");
     expect(avaliarDivergencias([d], { ...ctx, itensComDose: ["ITEM-SINTETICO"] })[0]).toMatchObject({ resultado: "BLOCK_ARTEFATO", bloqueiaMedico: false, bloqueiaSalvar: false });
+    expect(avaliarDivergencias([d], { ...ctx, dadosDecisivosDisponiveis: null, itensComDose: ["ITEM-SINTETICO"] })[0]!.resultado).toBe("BLOCK_ARTEFATO");
   });
   it("decisão histórica aplica só no contexto original; outro paciente não recebe a decisão", () => {
     const d = Divergencia.parse({ ...aberta(), estado: "DECIDIDA", decisao });
