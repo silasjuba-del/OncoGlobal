@@ -1,0 +1,1962 @@
+{
+  "versao": "mama-e-transversais.v1-2026-11-01",
+  "fontes": [
+    {
+      "id": "SBOC-ESTAD",
+      "tipo": "SBOC",
+      "titulo": "SBOC Mama: Estadiamento",
+      "arquivo": null,
+      "url": null,
+      "sha256": null,
+      "edicao": "2026",
+      "consultadoEm": null,
+      "estado": "NAO_VERIFICADO",
+      "conferenciaDeclaradaEm": null
+    },
+    {
+      "id": "SBOC-NEO",
+      "tipo": "SBOC",
+      "titulo": "SBOC Mama: Neoadjuvancia",
+      "arquivo": null,
+      "url": null,
+      "sha256": null,
+      "edicao": "2026",
+      "consultadoEm": null,
+      "estado": "NAO_VERIFICADO",
+      "conferenciaDeclaradaEm": null
+    },
+    {
+      "id": "SBOC-ADJ",
+      "tipo": "SBOC",
+      "titulo": "SBOC Mama: Adjuvancia",
+      "arquivo": null,
+      "url": null,
+      "sha256": null,
+      "edicao": "2026",
+      "consultadoEm": null,
+      "estado": "NAO_VERIFICADO",
+      "conferenciaDeclaradaEm": null
+    },
+    {
+      "id": "SBOC-MET",
+      "tipo": "SBOC",
+      "titulo": "SBOC Mama: Doenca metastatica",
+      "arquivo": null,
+      "url": null,
+      "sha256": null,
+      "edicao": "2026",
+      "consultadoEm": null,
+      "estado": "NAO_VERIFICADO",
+      "conferenciaDeclaradaEm": null
+    },
+    {
+      "id": "NCCN-BREAST-V8-2026",
+      "tipo": "NCCN",
+      "titulo": "Conferencia pontual declarada pelo usuario; somente localizadores e parafrases",
+      "arquivo": null,
+      "url": null,
+      "sha256": null,
+      "edicao": "8.2026 (2026-10-08)",
+      "consultadoEm": null,
+      "estado": "NAO_VERIFICADO",
+      "conferenciaDeclaradaEm": "2026-11-01"
+    },
+    {
+      "id": "AULA-33",
+      "tipo": "AULA_SECUNDARIA",
+      "titulo": "Aula 33, Onco et al.; Tiecher R / Uratani LF; fonte secundaria",
+      "arquivo": null,
+      "url": null,
+      "sha256": null,
+      "edicao": "2025-2026",
+      "consultadoEm": null,
+      "estado": "NAO_VERIFICADO",
+      "conferenciaDeclaradaEm": null
+    },
+    {
+      "id": "AULA-34",
+      "tipo": "AULA_SECUNDARIA",
+      "titulo": "Aula 34, Onco et al.; Tiecher R / Uratani LF; fonte secundaria",
+      "arquivo": null,
+      "url": null,
+      "sha256": null,
+      "edicao": "2025-2026",
+      "consultadoEm": null,
+      "estado": "NAO_VERIFICADO",
+      "conferenciaDeclaradaEm": null
+    },
+    {
+      "id": "AULA-35",
+      "tipo": "AULA_SECUNDARIA",
+      "titulo": "Aula 35, Onco et al.; Tiecher R / Uratani LF; fonte secundaria",
+      "arquivo": null,
+      "url": null,
+      "sha256": null,
+      "edicao": "2025-2026",
+      "consultadoEm": null,
+      "estado": "NAO_VERIFICADO",
+      "conferenciaDeclaradaEm": null
+    },
+    {
+      "id": "AULA-36",
+      "tipo": "AULA_SECUNDARIA",
+      "titulo": "Aula 36, Onco et al.; Tiecher R / Uratani LF; fonte secundaria",
+      "arquivo": null,
+      "url": null,
+      "sha256": null,
+      "edicao": "2025-2026",
+      "consultadoEm": null,
+      "estado": "NAO_VERIFICADO",
+      "conferenciaDeclaradaEm": null
+    },
+    {
+      "id": "AULA-37",
+      "tipo": "AULA_SECUNDARIA",
+      "titulo": "Aula 37, Onco et al.; Tiecher R / Uratani LF; fonte secundaria",
+      "arquivo": null,
+      "url": null,
+      "sha256": null,
+      "edicao": "2025-2026",
+      "consultadoEm": null,
+      "estado": "NAO_VERIFICADO",
+      "conferenciaDeclaradaEm": null
+    },
+    {
+      "id": "AULA-38",
+      "tipo": "AULA_SECUNDARIA",
+      "titulo": "Aula 38, Onco et al.; Tiecher R / Uratani LF; fonte secundaria",
+      "arquivo": null,
+      "url": null,
+      "sha256": null,
+      "edicao": "2025-2026",
+      "consultadoEm": null,
+      "estado": "NAO_VERIFICADO",
+      "conferenciaDeclaradaEm": null
+    },
+    {
+      "id": "AULA-39",
+      "tipo": "AULA_SECUNDARIA",
+      "titulo": "Aula 39, Onco et al.; Tiecher R / Uratani LF; fonte secundaria",
+      "arquivo": null,
+      "url": null,
+      "sha256": null,
+      "edicao": "2025-2026",
+      "consultadoEm": null,
+      "estado": "NAO_VERIFICADO",
+      "conferenciaDeclaradaEm": null
+    },
+    {
+      "id": "AULA-40",
+      "tipo": "AULA_SECUNDARIA",
+      "titulo": "Aula 40, Onco et al.; Tiecher R / Uratani LF; fonte secundaria",
+      "arquivo": null,
+      "url": null,
+      "sha256": null,
+      "edicao": "2025-2026",
+      "consultadoEm": null,
+      "estado": "NAO_VERIFICADO",
+      "conferenciaDeclaradaEm": null
+    },
+    {
+      "id": "AULA-41",
+      "tipo": "AULA_SECUNDARIA",
+      "titulo": "Aula 41, Onco et al.; Tiecher R / Uratani LF; fonte secundaria",
+      "arquivo": null,
+      "url": null,
+      "sha256": null,
+      "edicao": "2025-2026",
+      "consultadoEm": null,
+      "estado": "NAO_VERIFICADO",
+      "conferenciaDeclaradaEm": null
+    },
+    {
+      "id": "ASCO-SSO-2024",
+      "tipo": "DIRETRIZ_EXTERNA",
+      "titulo": "Diretriz germinativa ASCO-SSO",
+      "arquivo": null,
+      "url": null,
+      "sha256": null,
+      "edicao": "2024",
+      "consultadoEm": null,
+      "estado": "NAO_VERIFICADO",
+      "conferenciaDeclaradaEm": null
+    },
+    {
+      "id": "FDA-2023",
+      "tipo": "REGULATORIA",
+      "titulo": "Rotulo FDA informado no anexo",
+      "arquivo": null,
+      "url": null,
+      "sha256": null,
+      "edicao": "2023",
+      "consultadoEm": null,
+      "estado": "NAO_VERIFICADO",
+      "conferenciaDeclaradaEm": null
+    },
+    {
+      "id": "USPSTF",
+      "tipo": "DIRETRIZ_EXTERNA",
+      "titulo": "Rastreamento USPSTF informado",
+      "arquivo": null,
+      "url": null,
+      "sha256": null,
+      "edicao": "NAO_VERIFICADO",
+      "consultadoEm": null,
+      "estado": "NAO_VERIFICADO",
+      "conferenciaDeclaradaEm": null
+    },
+    {
+      "id": "MS",
+      "tipo": "REGULATORIA",
+      "titulo": "Ministerio da Saude: rastreamento informado",
+      "arquivo": null,
+      "url": null,
+      "sha256": null,
+      "edicao": "NAO_VERIFICADO",
+      "consultadoEm": null,
+      "estado": "NAO_VERIFICADO",
+      "conferenciaDeclaradaEm": null
+    },
+    {
+      "id": "SERVICO",
+      "tipo": "INSTITUCIONAL",
+      "titulo": "Limiares do servico, conferir documento vigente",
+      "arquivo": null,
+      "url": null,
+      "sha256": null,
+      "edicao": "NAO_VERIFICADO",
+      "consultadoEm": null,
+      "estado": "NAO_VERIFICADO",
+      "conferenciaDeclaradaEm": null
+    },
+    {
+      "id": "BULA-OXALIPLATINA",
+      "tipo": "REGULATORIA",
+      "titulo": "Bula de oxaliplatina informada",
+      "arquivo": null,
+      "url": null,
+      "sha256": null,
+      "edicao": "NAO_VERIFICADO",
+      "consultadoEm": null,
+      "estado": "NAO_VERIFICADO",
+      "conferenciaDeclaradaEm": null
+    },
+    {
+      "id": "PROTOCOLOS-EXTERNOS",
+      "tipo": "DIRETRIZ_EXTERNA",
+      "titulo": "Protocolos externos nao identificados no anexo",
+      "arquivo": null,
+      "url": null,
+      "sha256": null,
+      "edicao": "NAO_VERIFICADO",
+      "consultadoEm": null,
+      "estado": "NAO_VERIFICADO",
+      "conferenciaDeclaradaEm": null
+    },
+    {
+      "id": "PROSTY",
+      "tipo": "ENSAIO",
+      "titulo": "Estudo PROSTY informado",
+      "arquivo": null,
+      "url": null,
+      "sha256": null,
+      "edicao": "NAO_VERIFICADO",
+      "consultadoEm": null,
+      "estado": "NAO_VERIFICADO",
+      "conferenciaDeclaradaEm": null
+    },
+    {
+      "id": "TAX327",
+      "tipo": "ENSAIO",
+      "titulo": "Estudo TAX 327 informado",
+      "arquivo": null,
+      "url": null,
+      "sha256": null,
+      "edicao": "NAO_VERIFICADO",
+      "consultadoEm": null,
+      "estado": "NAO_VERIFICADO",
+      "conferenciaDeclaradaEm": null
+    },
+    {
+      "id": "BULA-OSIMERTINIBE",
+      "tipo": "REGULATORIA",
+      "titulo": "Bula de osimertinibe informada",
+      "arquivo": null,
+      "url": null,
+      "sha256": null,
+      "edicao": "NAO_VERIFICADO",
+      "consultadoEm": null,
+      "estado": "NAO_VERIFICADO",
+      "conferenciaDeclaradaEm": null
+    },
+    {
+      "id": "OV05",
+      "tipo": "ENSAIO",
+      "titulo": "Estudo OV05 informado",
+      "arquivo": null,
+      "url": null,
+      "sha256": null,
+      "edicao": "NAO_VERIFICADO",
+      "consultadoEm": null,
+      "estado": "NAO_VERIFICADO",
+      "conferenciaDeclaradaEm": null
+    },
+    {
+      "id": "IMAGEM-CASO5",
+      "tipo": "HISTORICA",
+      "titulo": "Caso sintetico 5: imagem descrita pelo usuario",
+      "arquivo": null,
+      "url": null,
+      "sha256": null,
+      "edicao": "NAO_VERIFICADO",
+      "consultadoEm": null,
+      "estado": "NAO_VERIFICADO",
+      "conferenciaDeclaradaEm": null
+    },
+    {
+      "id": "COMPENDIO-DERIVADO",
+      "tipo": "COMPENDIO_DERIVADO",
+      "titulo": "Compendio derivado, cap01",
+      "arquivo": null,
+      "url": null,
+      "sha256": null,
+      "edicao": "NAO_VERIFICADO",
+      "consultadoEm": null,
+      "estado": "NAO_VERIFICADO",
+      "conferenciaDeclaradaEm": null
+    },
+    {
+      "id": "LIVRO-2018",
+      "tipo": "HISTORICA",
+      "titulo": "Livro de 2018, titulo nao informado",
+      "arquivo": null,
+      "url": null,
+      "sha256": null,
+      "edicao": "2018",
+      "consultadoEm": null,
+      "estado": "NAO_VERIFICADO",
+      "conferenciaDeclaradaEm": null
+    },
+    {
+      "id": "FONTE-AUSENTE",
+      "tipo": "AUSENTE",
+      "titulo": "Fonte ausente ou nao extraida",
+      "arquivo": null,
+      "url": null,
+      "sha256": null,
+      "edicao": "NAO_VERIFICADO",
+      "consultadoEm": null,
+      "estado": "NAO_VERIFICADO",
+      "conferenciaDeclaradaEm": null
+    }
+  ],
+  "divergencias": [
+    {
+      "id": "DIV-SBOC-IMG-II",
+      "tema": "Imagem sistemica no estadio II",
+      "tipo": "INTERNA",
+      "polos": [
+        {
+          "fonteId": "SBOC-ESTAD",
+          "localizador": "p.7",
+          "afirmacao": "O texto inclui estadios II e III no estadiamento sistemico.",
+          "edicao": "2026",
+          "natureza": "PARAFRASE",
+          "id": "DIV-SBOC-IMG-II:1",
+          "rotulo": "Polo 1 - SBOC-ESTAD"
+        },
+        {
+          "fonteId": "SBOC-ESTAD",
+          "localizador": "p.8",
+          "afirmacao": "O algoritmo dispensa rotina em I/IIA e permite considerar em IIB.",
+          "edicao": "2026",
+          "natureza": "PARAFRASE",
+          "id": "DIV-SBOC-IMG-II:2",
+          "rotulo": "Polo 2 - SBOC-ESTAD"
+        },
+        {
+          "fonteId": "NCCN-BREAST-V8-2026",
+          "localizador": "BINV-1",
+          "afirmacao": "O resumo fornecido restringe exames adicionais a sintomas ou risco clinico elevado.",
+          "edicao": "8.2026 (2026-10-08)",
+          "natureza": "PARAFRASE",
+          "id": "DIV-SBOC-IMG-II:3",
+          "rotulo": "Polo 3 - NCCN-BREAST-V8-2026"
+        }
+      ],
+      "cartaoIds": [
+        "MAMA-DX-ESTAD"
+      ],
+      "itensAfetados": [],
+      "estado": "ABERTA",
+      "decisao": null,
+      "efeitoNoMotor": "EXIBIR_AMBOS",
+      "superadaPor": null
+    },
+    {
+      "id": "DIV-GERMINATIVO",
+      "tema": "Criterios para investigacao germinativa",
+      "tipo": "EXTERNA",
+      "polos": [
+        {
+          "fonteId": "SBOC-ADJ",
+          "localizador": "p.23",
+          "afirmacao": "Selecao conforme criterios clinicos e familiares.",
+          "edicao": "2026",
+          "natureza": "PARAFRASE",
+          "id": "DIV-GERMINATIVO:1",
+          "rotulo": "Polo 1 - SBOC-ADJ"
+        },
+        {
+          "fonteId": "ASCO-SSO-2024",
+          "localizador": "NAO_VERIFICADO",
+          "afirmacao": "A informacao fornecida amplia a oferta ate 65 anos.",
+          "edicao": "2024",
+          "natureza": "PARAFRASE",
+          "id": "DIV-GERMINATIVO:2",
+          "rotulo": "Polo 2 - ASCO-SSO-2024"
+        },
+        {
+          "fonteId": "NCCN-BREAST-V8-2026",
+          "localizador": "NAO_VERIFICADO",
+          "afirmacao": "O resumo fornecido inclui triplo negativo independentemente da idade.",
+          "edicao": "8.2026 (2026-10-08)",
+          "natureza": "PARAFRASE",
+          "id": "DIV-GERMINATIVO:3",
+          "rotulo": "Polo 3 - NCCN-BREAST-V8-2026"
+        }
+      ],
+      "cartaoIds": [
+        "MAMA-DX-ESTAD",
+        "MAMA-TRANSVERSAL"
+      ],
+      "itensAfetados": [],
+      "estado": "ABERTA",
+      "decisao": null,
+      "efeitoNoMotor": "EXIBIR_AMBOS",
+      "superadaPor": null
+    },
+    {
+      "id": "DIV-DOCETAXEL-DOSE",
+      "tema": "Docetaxel: doses em contextos neo/adjuvantes",
+      "tipo": "INTERNA",
+      "polos": [
+        {
+          "fonteId": "SBOC-NEO",
+          "localizador": "p.8",
+          "afirmacao": "Referencia neoadjuvante informada: 75 mg/m2.",
+          "edicao": "2026",
+          "natureza": "PARAFRASE",
+          "id": "DIV-DOCETAXEL-DOSE:1",
+          "rotulo": "Polo 1 - SBOC-NEO"
+        },
+        {
+          "fonteId": "SBOC-ADJ",
+          "localizador": "p.9",
+          "afirmacao": "Referencia adjuvante informada: 100 mg/m2.",
+          "edicao": "2026",
+          "natureza": "PARAFRASE",
+          "id": "DIV-DOCETAXEL-DOSE:2",
+          "rotulo": "Polo 2 - SBOC-ADJ"
+        }
+      ],
+      "cartaoIds": [
+        "MAMA-I-III-LUMINAL",
+        "MAMA-I-III-HER2"
+      ],
+      "itensAfetados": [
+        "docetaxel"
+      ],
+      "estado": "ABERTA",
+      "decisao": null,
+      "efeitoNoMotor": "BLOQUEIA_DOCUMENTO_COM_DOSE",
+      "superadaPor": null
+    },
+    {
+      "id": "DIV-FILGRASTIM-DIA",
+      "tema": "Dias de filgrastima no AC dose-densa",
+      "tipo": "INTERNA",
+      "polos": [
+        {
+          "fonteId": "SBOC-NEO",
+          "localizador": "p.8",
+          "afirmacao": "A referencia informada inicia no D2 e termina no D10.",
+          "edicao": "2026",
+          "natureza": "PARAFRASE",
+          "id": "DIV-FILGRASTIM-DIA:1",
+          "rotulo": "Polo 1 - SBOC-NEO"
+        },
+        {
+          "fonteId": "SBOC-ADJ",
+          "localizador": "p.9",
+          "afirmacao": "A referencia informada inicia no D3 e termina no D10.",
+          "edicao": "2026",
+          "natureza": "PARAFRASE",
+          "id": "DIV-FILGRASTIM-DIA:2",
+          "rotulo": "Polo 2 - SBOC-ADJ"
+        }
+      ],
+      "cartaoIds": [
+        "MAMA-I-III-LUMINAL",
+        "MAMA-I-III-TN",
+        "MAMA-I-III-HER2"
+      ],
+      "itensAfetados": [
+        "filgrastima"
+      ],
+      "estado": "ABERTA",
+      "decisao": null,
+      "efeitoNoMotor": "BLOQUEIA_DOCUMENTO_COM_DOSE",
+      "superadaPor": null
+    },
+    {
+      "id": "DIV-CAPE",
+      "tema": "Duracao e referencia de capecitabina residual",
+      "tipo": "INTERNA",
+      "polos": [
+        {
+          "fonteId": "SBOC-NEO",
+          "localizador": "p.13 / SBOC ADJ p.18",
+          "afirmacao": "Fluxogramas informados indicam oito ciclos.",
+          "edicao": "2026",
+          "natureza": "PARAFRASE",
+          "id": "DIV-CAPE:1",
+          "rotulo": "Polo 1 - SBOC-NEO"
+        },
+        {
+          "fonteId": "SBOC-ADJ",
+          "localizador": "p.9",
+          "afirmacao": "Tabela informada permite seis a oito ciclos e intervalo 2.000-2.500 mg/m2; ressalva ocidental de 2.000.",
+          "edicao": "2026",
+          "natureza": "PARAFRASE",
+          "id": "DIV-CAPE:2",
+          "rotulo": "Polo 2 - SBOC-ADJ"
+        }
+      ],
+      "cartaoIds": [
+        "MAMA-I-III-TN"
+      ],
+      "itensAfetados": [
+        "capecitabina"
+      ],
+      "estado": "ABERTA",
+      "decisao": null,
+      "efeitoNoMotor": "BLOQUEIA_DOCUMENTO_COM_DOSE",
+      "superadaPor": null
+    },
+    {
+      "id": "DIV-ABEMA",
+      "tema": "Abemaciclibe: criterios de alto risco",
+      "tipo": "EXTERNA",
+      "polos": [
+        {
+          "fonteId": "SBOC-ADJ",
+          "localizador": "p.14",
+          "afirmacao": "O texto informado inclui 1-3 linfonodos e Ki-67 a partir de 20%.",
+          "edicao": "2026",
+          "natureza": "PARAFRASE",
+          "id": "DIV-ABEMA:1",
+          "rotulo": "Polo 1 - SBOC-ADJ"
+        },
+        {
+          "fonteId": "FDA-2023",
+          "localizador": "NAO_VERIFICADO",
+          "afirmacao": "O resumo informado restringe a coorte 1: quatro ou mais linfonodos, ou 1-3 com grau 3 ou tumor a partir de 5 cm.",
+          "edicao": "2023",
+          "natureza": "PARAFRASE",
+          "id": "DIV-ABEMA:2",
+          "rotulo": "Polo 2 - FDA-2023"
+        },
+        {
+          "fonteId": "NCCN-BREAST-V8-2026",
+          "localizador": "BINV-K 3/4",
+          "afirmacao": "A parafrase fornecida acompanha os criterios da coorte 1, sem Ki-67 isolado.",
+          "edicao": "8.2026 (2026-10-08)",
+          "natureza": "PARAFRASE",
+          "id": "DIV-ABEMA:3",
+          "rotulo": "Polo 3 - NCCN-BREAST-V8-2026"
+        }
+      ],
+      "cartaoIds": [
+        "MAMA-I-III-LUMINAL"
+      ],
+      "itensAfetados": [],
+      "estado": "ABERTA",
+      "decisao": null,
+      "efeitoNoMotor": "INDETERMINADO",
+      "superadaPor": null
+    },
+    {
+      "id": "DIV-RIBO-N0",
+      "tema": "Ribociclibe: abrangencia de N0",
+      "tipo": "INTERNA",
+      "polos": [
+        {
+          "fonteId": "SBOC-ADJ",
+          "localizador": "p.14",
+          "afirmacao": "A lista informada esta truncada e nao inclui T3/T4 N0.",
+          "edicao": "2026",
+          "natureza": "PARAFRASE",
+          "id": "DIV-RIBO-N0:1",
+          "rotulo": "Polo 1 - SBOC-ADJ"
+        },
+        {
+          "fonteId": "SBOC-ADJ",
+          "localizador": "p.15",
+          "afirmacao": "As consideracoes informadas incluem T3/T4.",
+          "edicao": "2026",
+          "natureza": "PARAFRASE",
+          "id": "DIV-RIBO-N0:2",
+          "rotulo": "Polo 2 - SBOC-ADJ"
+        },
+        {
+          "fonteId": "AULA-34",
+          "localizador": "NAO_VERIFICADO",
+          "afirmacao": "A aula informada cita T3N0; isso nao encerra a divergencia.",
+          "edicao": "2025-2026",
+          "natureza": "PARAFRASE",
+          "id": "DIV-RIBO-N0:3",
+          "rotulo": "Polo 3 - AULA-34"
+        }
+      ],
+      "cartaoIds": [
+        "MAMA-I-III-LUMINAL"
+      ],
+      "itensAfetados": [],
+      "estado": "ABERTA",
+      "decisao": null,
+      "efeitoNoMotor": "INDETERMINADO",
+      "superadaPor": null
+    },
+    {
+      "id": "DIV-HTNEO-DURACAO",
+      "tema": "Duracao da hormonioterapia neoadjuvante",
+      "tipo": "EXTERNA",
+      "polos": [
+        {
+          "fonteId": "SBOC-NEO",
+          "localizador": "p.12",
+          "afirmacao": "Duracao informada de pelo menos seis meses.",
+          "edicao": "2026",
+          "natureza": "PARAFRASE",
+          "id": "DIV-HTNEO-DURACAO:1",
+          "rotulo": "Polo 1 - SBOC-NEO"
+        },
+        {
+          "fonteId": "NCCN-BREAST-V8-2026",
+          "localizador": "BINV-L",
+          "afirmacao": "O resumo informado menciona quatro a seis meses.",
+          "edicao": "8.2026 (2026-10-08)",
+          "natureza": "PARAFRASE",
+          "id": "DIV-HTNEO-DURACAO:2",
+          "rotulo": "Polo 2 - NCCN-BREAST-V8-2026"
+        },
+        {
+          "fonteId": "AULA-34",
+          "localizador": "NAO_VERIFICADO",
+          "afirmacao": "Aula informa quatro a seis meses e possivel extensao para seis a doze.",
+          "edicao": "2025-2026",
+          "natureza": "PARAFRASE",
+          "id": "DIV-HTNEO-DURACAO:3",
+          "rotulo": "Polo 3 - AULA-34"
+        }
+      ],
+      "cartaoIds": [
+        "MAMA-I-III-LUMINAL"
+      ],
+      "itensAfetados": [],
+      "estado": "ABERTA",
+      "decisao": null,
+      "efeitoNoMotor": "EXIBIR_AMBOS",
+      "superadaPor": null
+    },
+    {
+      "id": "DIV-TN-T1C-FIRMEZA",
+      "tema": "Firmeza da neoadjuvancia em TN T1c N0",
+      "tipo": "EXTERNA",
+      "polos": [
+        {
+          "fonteId": "SBOC-NEO",
+          "localizador": "p.13",
+          "afirmacao": "O resumo informado recomenda neoadjuvancia nesse cenario.",
+          "edicao": "2026",
+          "natureza": "PARAFRASE",
+          "id": "DIV-TN-T1C-FIRMEZA:1",
+          "rotulo": "Polo 1 - SBOC-NEO"
+        },
+        {
+          "fonteId": "NCCN-BREAST-V8-2026",
+          "localizador": "BINV-L",
+          "afirmacao": "A parafrase fornecida apresenta a neoadjuvancia como opcao a considerar.",
+          "edicao": "8.2026 (2026-10-08)",
+          "natureza": "PARAFRASE",
+          "id": "DIV-TN-T1C-FIRMEZA:2",
+          "rotulo": "Polo 2 - NCCN-BREAST-V8-2026"
+        }
+      ],
+      "cartaoIds": [
+        "MAMA-I-III-TN"
+      ],
+      "itensAfetados": [],
+      "estado": "ABERTA",
+      "decisao": null,
+      "efeitoNoMotor": "EXIBIR_AMBOS",
+      "superadaPor": null
+    },
+    {
+      "id": "DIV-PEMBRO-PCR",
+      "tema": "Pembrolizumabe adjuvante apos resposta completa",
+      "tipo": "EXTERNA",
+      "polos": [
+        {
+          "fonteId": "SBOC-ADJ",
+          "localizador": "p.18",
+          "afirmacao": "O resumo informado mantem a proposta independentemente da resposta.",
+          "edicao": "2026",
+          "natureza": "PARAFRASE",
+          "id": "DIV-PEMBRO-PCR:1",
+          "rotulo": "Polo 1 - SBOC-ADJ"
+        },
+        {
+          "fonteId": "NCCN-BREAST-V8-2026",
+          "localizador": "BINV-16",
+          "afirmacao": "A parafrase fornecida ressalta alto risco apos resposta completa.",
+          "edicao": "8.2026 (2026-10-08)",
+          "natureza": "PARAFRASE",
+          "id": "DIV-PEMBRO-PCR:2",
+          "rotulo": "Polo 2 - NCCN-BREAST-V8-2026"
+        }
+      ],
+      "cartaoIds": [
+        "MAMA-I-III-TN"
+      ],
+      "itensAfetados": [],
+      "estado": "ABERTA",
+      "decisao": null,
+      "efeitoNoMotor": "EXIBIR_AMBOS",
+      "superadaPor": null
+    },
+    {
+      "id": "DIV-RESIDUAL-HER2",
+      "tema": "HER2 residual: recomendacao e regulacao brasileira",
+      "tipo": "REGULATORIA",
+      "polos": [
+        {
+          "fonteId": "SBOC-ADJ",
+          "localizador": "p.19-20",
+          "afirmacao": "O material informado cita T-DM1 e descreve T-DXd sem aprovacao brasileira.",
+          "edicao": "2026",
+          "natureza": "PARAFRASE",
+          "regulatorioBR": "NAO_APROVADO",
+          "id": "DIV-RESIDUAL-HER2:1",
+          "rotulo": "Polo 1 - SBOC-ADJ"
+        },
+        {
+          "fonteId": "NCCN-BREAST-V8-2026",
+          "localizador": "BINV-16",
+          "afirmacao": "A parafrase fornecida contempla T-DXd ou T-DM1; isso nao comprova aprovacao no Brasil.",
+          "edicao": "8.2026 (2026-10-08)",
+          "natureza": "PARAFRASE",
+          "regulatorioBR": "NAO_VERIFICADO",
+          "id": "DIV-RESIDUAL-HER2:2",
+          "rotulo": "Polo 2 - NCCN-BREAST-V8-2026"
+        }
+      ],
+      "cartaoIds": [
+        "MAMA-I-III-HER2"
+      ],
+      "itensAfetados": [],
+      "estado": "ABERTA",
+      "decisao": null,
+      "efeitoNoMotor": "EXIBIR_AMBOS",
+      "superadaPor": null
+    },
+    {
+      "id": "DIV-KI67",
+      "tema": "Ki-67: cortes para finalidades diferentes",
+      "tipo": "INTERNA",
+      "polos": [
+        {
+          "fonteId": "AULA-33",
+          "localizador": "NAO_VERIFICADO",
+          "afirmacao": "A aula informada usa 14% para descricao de subtipo luminal.",
+          "edicao": "2025-2026",
+          "natureza": "PARAFRASE",
+          "id": "DIV-KI67:1",
+          "rotulo": "Polo 1 - AULA-33"
+        },
+        {
+          "fonteId": "SBOC-ADJ",
+          "localizador": "p.6",
+          "afirmacao": "O resumo informado usa 20% como fator de risco. As finalidades devem ser conferidas antes de tratar os cortes como intercambiaveis.",
+          "edicao": "2026",
+          "natureza": "PARAFRASE",
+          "id": "DIV-KI67:2",
+          "rotulo": "Polo 2 - SBOC-ADJ"
+        }
+      ],
+      "cartaoIds": [
+        "MAMA-DX-ESTAD",
+        "MAMA-I-III-LUMINAL"
+      ],
+      "itensAfetados": [],
+      "estado": "ABERTA",
+      "decisao": null,
+      "efeitoNoMotor": "INDETERMINADO",
+      "superadaPor": null
+    },
+    {
+      "id": "DIV-LIMIAR-RISCO-CLINICO",
+      "tema": "Inclusao ou exclusao do valor exato do tamanho",
+      "tipo": "INTERNA",
+      "polos": [
+        {
+          "fonteId": "AULA-34",
+          "localizador": "NAO_VERIFICADO",
+          "afirmacao": "A aula informada usa maior que 1, 2 ou 3 cm, conforme grau.",
+          "edicao": "2025-2026",
+          "natureza": "PARAFRASE",
+          "id": "DIV-LIMIAR-RISCO-CLINICO:1",
+          "rotulo": "Polo 1 - AULA-34"
+        },
+        {
+          "fonteId": "SBOC-ADJ",
+          "localizador": "p.6",
+          "afirmacao": "O texto informado usa a partir de 1, 2 ou 3 cm, conforme grau.",
+          "edicao": "2026",
+          "natureza": "PARAFRASE",
+          "id": "DIV-LIMIAR-RISCO-CLINICO:2",
+          "rotulo": "Polo 2 - SBOC-ADJ"
+        }
+      ],
+      "cartaoIds": [
+        "MAMA-I-III-LUMINAL"
+      ],
+      "itensAfetados": [],
+      "estado": "ABERTA",
+      "decisao": null,
+      "efeitoNoMotor": "INDETERMINADO",
+      "superadaPor": null
+    },
+    {
+      "id": "DIV-RS-25",
+      "tema": "Oncotype: fronteira do escore 25",
+      "tipo": "INTERNA",
+      "polos": [
+        {
+          "fonteId": "AULA-34",
+          "localizador": "NAO_VERIFICADO",
+          "afirmacao": "A aula informada registra corte menor que 25.",
+          "edicao": "2025-2026",
+          "natureza": "PARAFRASE",
+          "id": "DIV-RS-25:1",
+          "rotulo": "Polo 1 - AULA-34"
+        },
+        {
+          "fonteId": "SBOC-ADJ",
+          "localizador": "p.7",
+          "afirmacao": "O resumo informado inclui o escore 25.",
+          "edicao": "2026",
+          "natureza": "PARAFRASE",
+          "id": "DIV-RS-25:2",
+          "rotulo": "Polo 2 - SBOC-ADJ"
+        },
+        {
+          "fonteId": "NCCN-BREAST-V8-2026",
+          "localizador": "NAO_VERIFICADO",
+          "afirmacao": "A parafrase recebida situa a fronteira seguinte em 26.",
+          "edicao": "8.2026 (2026-10-08)",
+          "natureza": "PARAFRASE",
+          "id": "DIV-RS-25:3",
+          "rotulo": "Polo 3 - NCCN-BREAST-V8-2026"
+        }
+      ],
+      "cartaoIds": [
+        "MAMA-I-III-LUMINAL"
+      ],
+      "itensAfetados": [],
+      "estado": "ABERTA",
+      "decisao": null,
+      "efeitoNoMotor": "INDETERMINADO",
+      "superadaPor": null
+    },
+    {
+      "id": "DIV-MONALEESA3-OS",
+      "tema": "MONALEESA-3: resultados e tempos de analise",
+      "tipo": "INTERNA",
+      "polos": [
+        {
+          "fonteId": "SBOC-MET",
+          "localizador": "p.12",
+          "afirmacao": "Resumo informado: 53,7 versus 41,5 meses, HR 0,73 e seguimento de 56 meses.",
+          "edicao": "2026",
+          "natureza": "PARAFRASE",
+          "id": "DIV-MONALEESA3-OS:1",
+          "rotulo": "Polo 1 - SBOC-MET"
+        },
+        {
+          "fonteId": "AULA-35",
+          "localizador": "NAO_VERIFICADO",
+          "afirmacao": "Aula informa 67,6 versus 51,8 meses e HR 0,67; conferir populacao e data da analise.",
+          "edicao": "2025-2026",
+          "natureza": "PARAFRASE",
+          "id": "DIV-MONALEESA3-OS:2",
+          "rotulo": "Polo 2 - AULA-35"
+        }
+      ],
+      "cartaoIds": [
+        "MAMA-IV"
+      ],
+      "itensAfetados": [],
+      "estado": "ABERTA",
+      "decisao": null,
+      "efeitoNoMotor": "EXIBIR_AMBOS",
+      "superadaPor": null
+    },
+    {
+      "id": "DIV-TN-PT1B",
+      "tema": "QT adjuvante em TN pT1b pN0",
+      "tipo": "EXTERNA",
+      "polos": [
+        {
+          "fonteId": "SBOC-ADJ",
+          "localizador": "p.6",
+          "afirmacao": "O resumo informado geralmente indica QT acima de 5 mm.",
+          "edicao": "2026",
+          "natureza": "PARAFRASE",
+          "id": "DIV-TN-PT1B:1",
+          "rotulo": "Polo 1 - SBOC-ADJ"
+        },
+        {
+          "fonteId": "AULA-39",
+          "localizador": "NAO_VERIFICADO",
+          "afirmacao": "A aula informada apresenta QT como consideracao em pT1b pN0.",
+          "edicao": "2025-2026",
+          "natureza": "PARAFRASE",
+          "id": "DIV-TN-PT1B:2",
+          "rotulo": "Polo 2 - AULA-39"
+        }
+      ],
+      "cartaoIds": [
+        "MAMA-I-III-TN"
+      ],
+      "itensAfetados": [],
+      "estado": "ABERTA",
+      "decisao": null,
+      "efeitoNoMotor": "EXIBIR_AMBOS",
+      "superadaPor": null
+    },
+    {
+      "id": "DIV-PLATINA-NEO",
+      "tema": "Carboplatina neoadjuvante no TN",
+      "tipo": "EXTERNA",
+      "polos": [
+        {
+          "fonteId": "SBOC-NEO",
+          "localizador": "p.15",
+          "afirmacao": "O resumo informado contempla carboplatina em II/III.",
+          "edicao": "2026",
+          "natureza": "PARAFRASE",
+          "id": "DIV-PLATINA-NEO:1",
+          "rotulo": "Polo 1 - SBOC-NEO"
+        },
+        {
+          "fonteId": "AULA-39",
+          "localizador": "NAO_VERIFICADO",
+          "afirmacao": "Aula cita maior resposta completa e toxicidade hematologica, com beneficio de sobrevida nao demonstrado na analise mencionada.",
+          "edicao": "2025-2026",
+          "natureza": "PARAFRASE",
+          "id": "DIV-PLATINA-NEO:2",
+          "rotulo": "Polo 2 - AULA-39"
+        }
+      ],
+      "cartaoIds": [
+        "MAMA-I-III-TN"
+      ],
+      "itensAfetados": [],
+      "estado": "ABERTA",
+      "decisao": null,
+      "efeitoNoMotor": "EXIBIR_AMBOS",
+      "superadaPor": null
+    },
+    {
+      "id": "DIV-PERTUZUMABE-N0",
+      "tema": "Pertuzumabe adjuvante em N0",
+      "tipo": "EXTERNA",
+      "polos": [
+        {
+          "fonteId": "SBOC-ADJ",
+          "localizador": "p.19",
+          "afirmacao": "O resumo informado reserva a proposta aos linfonodos positivos.",
+          "edicao": "2026",
+          "natureza": "PARAFRASE",
+          "id": "DIV-PERTUZUMABE-N0:1",
+          "rotulo": "Polo 1 - SBOC-ADJ"
+        },
+        {
+          "fonteId": "NCCN-BREAST-V8-2026",
+          "localizador": "BINV-9",
+          "afirmacao": "A parafrase fornecida descreve opcionalidade em pT2-T3, inclusive N0.",
+          "edicao": "8.2026 (2026-10-08)",
+          "natureza": "PARAFRASE",
+          "id": "DIV-PERTUZUMABE-N0:2",
+          "rotulo": "Polo 2 - NCCN-BREAST-V8-2026"
+        }
+      ],
+      "cartaoIds": [
+        "MAMA-I-III-HER2"
+      ],
+      "itensAfetados": [],
+      "estado": "ABERTA",
+      "decisao": null,
+      "efeitoNoMotor": "EXIBIR_AMBOS",
+      "superadaPor": null
+    },
+    {
+      "id": "DIV-TN-1L-2026",
+      "tema": "Novas propostas de primeira linha TN",
+      "tipo": "REGULATORIA",
+      "polos": [
+        {
+          "fonteId": "SBOC-MET",
+          "localizador": "p.23",
+          "afirmacao": "Alternativas de primeira linha conforme subtipo e biomarcadores no resumo informado.",
+          "edicao": "2026",
+          "natureza": "PARAFRASE",
+          "id": "DIV-TN-1L-2026:1",
+          "rotulo": "Polo 1 - SBOC-MET"
+        },
+        {
+          "fonteId": "AULA-40",
+          "localizador": "NAO_VERIFICADO",
+          "afirmacao": "Aula acrescenta combinacoes ou ADCs em primeira linha; aprovacao brasileira nao verificada.",
+          "edicao": "2025-2026",
+          "natureza": "PARAFRASE",
+          "regulatorioBR": "NAO_VERIFICADO",
+          "id": "DIV-TN-1L-2026:2",
+          "rotulo": "Polo 2 - AULA-40"
+        }
+      ],
+      "cartaoIds": [
+        "MAMA-IV"
+      ],
+      "itensAfetados": [],
+      "estado": "ABERTA",
+      "decisao": null,
+      "efeitoNoMotor": "EXIBIR_AMBOS",
+      "superadaPor": null
+    },
+    {
+      "id": "DIV-RASTREAMENTO",
+      "tema": "Idades e intervalos de rastreamento",
+      "tipo": "EXTERNA",
+      "polos": [
+        {
+          "fonteId": "SBOC-ESTAD",
+          "localizador": "NAO_VERIFICADO",
+          "afirmacao": "Resumo recebido: anual, 40-74 anos.",
+          "edicao": "2026",
+          "natureza": "PARAFRASE",
+          "id": "DIV-RASTREAMENTO:1",
+          "rotulo": "Polo 1 - SBOC-ESTAD"
+        },
+        {
+          "fonteId": "NCCN-BREAST-V8-2026",
+          "localizador": "NAO_VERIFICADO",
+          "afirmacao": "Parafrase recebida: anual a partir dos 40, com tomossintese.",
+          "edicao": "8.2026 (2026-10-08)",
+          "natureza": "PARAFRASE",
+          "id": "DIV-RASTREAMENTO:2",
+          "rotulo": "Polo 2 - NCCN-BREAST-V8-2026"
+        },
+        {
+          "fonteId": "USPSTF",
+          "localizador": "NAO_VERIFICADO",
+          "afirmacao": "Resumo recebido: bienal, 40-74 anos.",
+          "edicao": "NAO_VERIFICADO",
+          "natureza": "PARAFRASE",
+          "id": "DIV-RASTREAMENTO:3",
+          "rotulo": "Polo 3 - USPSTF"
+        },
+        {
+          "fonteId": "MS",
+          "localizador": "NAO_VERIFICADO",
+          "afirmacao": "Resumo recebido: bienal, 50-69 anos; atualidade normativa nao verificada.",
+          "edicao": "NAO_VERIFICADO",
+          "natureza": "PARAFRASE",
+          "id": "DIV-RASTREAMENTO:4",
+          "rotulo": "Polo 4 - MS"
+        }
+      ],
+      "cartaoIds": [
+        "MAMA-TRANSVERSAL"
+      ],
+      "itensAfetados": [],
+      "estado": "ABERTA",
+      "decisao": null,
+      "efeitoNoMotor": "EXIBIR_AMBOS",
+      "superadaPor": null
+    },
+    {
+      "id": "DIV-TE-DURACAO",
+      "tema": "Duracao da terapia endocrina estendida",
+      "tipo": "EXTERNA",
+      "polos": [
+        {
+          "fonteId": "SBOC-ADJ",
+          "localizador": "p.16",
+          "afirmacao": "Resumo informado considera sete anos de IA adequados em contexto selecionado.",
+          "edicao": "2026",
+          "natureza": "PARAFRASE",
+          "id": "DIV-TE-DURACAO:1",
+          "rotulo": "Polo 1 - SBOC-ADJ"
+        },
+        {
+          "fonteId": "AULA-34",
+          "localizador": "NAO_VERIFICADO",
+          "afirmacao": "Aula que atribui a NCCN propostas de cinco anos com extensao de tres a cinco; fonte secundaria, sem regra automatica.",
+          "edicao": "2025-2026",
+          "natureza": "PARAFRASE",
+          "id": "DIV-TE-DURACAO:2",
+          "rotulo": "Polo 2 - AULA-34"
+        }
+      ],
+      "cartaoIds": [
+        "MAMA-I-III-LUMINAL"
+      ],
+      "itensAfetados": [],
+      "estado": "ABERTA",
+      "decisao": null,
+      "efeitoNoMotor": "EXIBIR_AMBOS",
+      "superadaPor": null
+    },
+    {
+      "id": "DIV-GESTACAO-14SEM",
+      "tema": "Inicio da QT na gestacao",
+      "tipo": "INTERNA",
+      "polos": [
+        {
+          "fonteId": "AULA-41",
+          "localizador": "NAO_VERIFICADO",
+          "afirmacao": "Uma passagem informada apresenta intervalo de 12-14 semanas.",
+          "edicao": "2025-2026",
+          "natureza": "PARAFRASE",
+          "id": "DIV-GESTACAO-14SEM:1",
+          "rotulo": "Polo 1 - AULA-41"
+        },
+        {
+          "fonteId": "AULA-41",
+          "localizador": "NAO_VERIFICADO",
+          "afirmacao": "Outra passagem informada exclui inicio antes de 14 semanas; limiar permanece proposta.",
+          "edicao": "2025-2026",
+          "natureza": "PARAFRASE",
+          "id": "DIV-GESTACAO-14SEM:2",
+          "rotulo": "Polo 2 - AULA-41"
+        }
+      ],
+      "cartaoIds": [
+        "MAMA-GESTACAO-LACTACAO"
+      ],
+      "itensAfetados": [],
+      "estado": "ABERTA",
+      "decisao": null,
+      "efeitoNoMotor": "INDETERMINADO",
+      "superadaPor": null
+    },
+    {
+      "id": "LAC-LIMIAR-HEMOGRAMA",
+      "tema": "Fonte dos limiares para ciclo",
+      "tipo": "LACUNA",
+      "polos": [
+        {
+          "fonteId": "SBOC-ADJ",
+          "localizador": "NAO_VERIFICADO",
+          "afirmacao": "O material recebido nao localizou corte de neutrofilos e plaquetas nos capitulos.",
+          "edicao": "2026",
+          "natureza": "PARAFRASE",
+          "id": "LAC-LIMIAR-HEMOGRAMA:1",
+          "rotulo": "Polo 1 - SBOC-ADJ"
+        },
+        {
+          "fonteId": "FONTE-AUSENTE",
+          "localizador": "NAO_VERIFICADO",
+          "afirmacao": "Conferir politica institucional aplicavel; nao inventar valor.",
+          "edicao": "NAO_VERIFICADO",
+          "natureza": "PARAFRASE",
+          "id": "LAC-LIMIAR-HEMOGRAMA:2",
+          "rotulo": "Polo 2 - FONTE-AUSENTE"
+        }
+      ],
+      "cartaoIds": [
+        "MAMA-I-III-LUMINAL",
+        "MAMA-I-III-TN",
+        "MAMA-I-III-HER2"
+      ],
+      "itensAfetados": [],
+      "estado": "ABERTA",
+      "decisao": null,
+      "efeitoNoMotor": "INDETERMINADO",
+      "superadaPor": null
+    },
+    {
+      "id": "LAC-OSSO-METASTATICO",
+      "tema": "Fonte de posologia antirreabsortiva metastatica",
+      "tipo": "LACUNA",
+      "polos": [
+        {
+          "fonteId": "SBOC-MET",
+          "localizador": "NAO_VERIFICADO",
+          "afirmacao": "O material recebido nao localizou a posologia metastatica mencionada.",
+          "edicao": "2026",
+          "natureza": "PARAFRASE",
+          "id": "LAC-OSSO-METASTATICO:1",
+          "rotulo": "Polo 1 - SBOC-MET"
+        },
+        {
+          "fonteId": "FONTE-AUSENTE",
+          "localizador": "NAO_VERIFICADO",
+          "afirmacao": "BINV-R nao foi lido; falta fonte primaria de posologia. Nenhuma dose adjuvante deve ser herdada.",
+          "edicao": "NAO_VERIFICADO",
+          "natureza": "PARAFRASE",
+          "id": "LAC-OSSO-METASTATICO:2",
+          "rotulo": "Polo 2 - FONTE-AUSENTE"
+        }
+      ],
+      "cartaoIds": [
+        "MAMA-IV"
+      ],
+      "itensAfetados": [],
+      "estado": "ABERTA",
+      "decisao": null,
+      "efeitoNoMotor": "INDETERMINADO",
+      "superadaPor": null
+    },
+    {
+      "id": "LAC-NOMES",
+      "tema": "Grafia de nomes na ingestao",
+      "tipo": "LACUNA",
+      "polos": [
+        {
+          "fonteId": "COMPENDIO-DERIVADO",
+          "localizador": "NAO_VERIFICADO",
+          "afirmacao": "Grafias recebidas incluem Capivarsetibe, Carbopltaina e Perfilgrastim.",
+          "edicao": "NAO_VERIFICADO",
+          "natureza": "PARAFRASE",
+          "id": "LAC-NOMES:1",
+          "rotulo": "Polo 1 - COMPENDIO-DERIVADO"
+        },
+        {
+          "fonteId": "FONTE-AUSENTE",
+          "localizador": "NAO_VERIFICADO",
+          "afirmacao": "Conferir identidade no catalogo e na fonte original; diferenca lexical nao constitui divergencia clinica por si so.",
+          "edicao": "NAO_VERIFICADO",
+          "natureza": "PARAFRASE",
+          "id": "LAC-NOMES:2",
+          "rotulo": "Polo 2 - FONTE-AUSENTE"
+        }
+      ],
+      "cartaoIds": [
+        "MAMA-DX-ESTAD",
+        "MAMA-I-III-LUMINAL",
+        "MAMA-I-III-TN",
+        "MAMA-I-III-HER2",
+        "MAMA-IV"
+      ],
+      "itensAfetados": [],
+      "estado": "ABERTA",
+      "decisao": null,
+      "efeitoNoMotor": "EXIBIR_AMBOS",
+      "superadaPor": null
+    },
+    {
+      "id": "DIV-PLQ",
+      "tema": "Plaquetas: bula e servico",
+      "tipo": "EXTERNA",
+      "polos": [
+        {
+          "fonteId": "BULA-OXALIPLATINA",
+          "localizador": "NAO_VERIFICADO",
+          "afirmacao": "Corte de 75.000 informado no anexo.",
+          "edicao": "NAO_VERIFICADO",
+          "natureza": "PARAFRASE",
+          "id": "DIV-PLQ:1",
+          "rotulo": "Polo 1 - BULA-OXALIPLATINA"
+        },
+        {
+          "fonteId": "SERVICO",
+          "localizador": "lab-thresholds (versao e aplicabilidade a conferir)",
+          "afirmacao": "Corte de 100.000 atribuido ao servico; nao alterado nesta entrega.",
+          "edicao": "NAO_VERIFICADO",
+          "natureza": "PARAFRASE",
+          "id": "DIV-PLQ:2",
+          "rotulo": "Polo 2 - SERVICO"
+        }
+      ],
+      "cartaoIds": [
+        "COLON-PRECICLO-FOLFOX-ADJ"
+      ],
+      "itensAfetados": [],
+      "estado": "ABERTA",
+      "decisao": null,
+      "efeitoNoMotor": "EXIBIR_AMBOS",
+      "superadaPor": null
+    },
+    {
+      "id": "DIV-OXALI-NIVEL",
+      "tema": "Nivel de oxaliplatina por neuropatia",
+      "tipo": "EXTERNA",
+      "polos": [
+        {
+          "fonteId": "BULA-OXALIPLATINA",
+          "localizador": "NAO_VERIFICADO",
+          "afirmacao": "Nivel de 75 mg/m2 informado para neuropatia grau 2 persistente.",
+          "edicao": "NAO_VERIFICADO",
+          "natureza": "PARAFRASE",
+          "id": "DIV-OXALI-NIVEL:1",
+          "rotulo": "Polo 1 - BULA-OXALIPLATINA"
+        },
+        {
+          "fonteId": "PROTOCOLOS-EXTERNOS",
+          "localizador": "NAO_VERIFICADO",
+          "afirmacao": "Nivel alternativo de 65 mg/m2 informado; fonte e cenario pendentes.",
+          "edicao": "NAO_VERIFICADO",
+          "natureza": "PARAFRASE",
+          "id": "DIV-OXALI-NIVEL:2",
+          "rotulo": "Polo 2 - PROTOCOLOS-EXTERNOS"
+        }
+      ],
+      "cartaoIds": [
+        "COLON-PRECICLO-FOLFOX-ADJ"
+      ],
+      "itensAfetados": [
+        "oxaliplatina"
+      ],
+      "estado": "ABERTA",
+      "decisao": null,
+      "efeitoNoMotor": "BLOQUEIA_DOCUMENTO_COM_DOSE",
+      "superadaPor": null
+    },
+    {
+      "id": "DIV-DOCE-ESQUEMA-PROSTATA",
+      "tema": "Docetaxel: preservar cada esquema completo",
+      "tipo": "INTERNA",
+      "polos": [
+        {
+          "fonteId": "PROSTY",
+          "localizador": "NAO_VERIFICADO",
+          "afirmacao": "Esquema informado: 50 mg/m2 quinzenal e prednisolona 10 mg por dia.",
+          "edicao": "NAO_VERIFICADO",
+          "natureza": "PARAFRASE",
+          "id": "DIV-DOCE-ESQUEMA-PROSTATA:1",
+          "rotulo": "Polo 1 - PROSTY"
+        },
+        {
+          "fonteId": "TAX327",
+          "localizador": "NAO_VERIFICADO",
+          "afirmacao": "Esquema informado: 75 mg/m2 a cada tres semanas e prednisona 5 mg duas vezes ao dia. Nao combinar fragmentos dos esquemas.",
+          "edicao": "NAO_VERIFICADO",
+          "natureza": "PARAFRASE",
+          "id": "DIV-DOCE-ESQUEMA-PROSTATA:2",
+          "rotulo": "Polo 2 - TAX327"
+        }
+      ],
+      "cartaoIds": [
+        "PROST-REAV-MCRPC-OSSEO"
+      ],
+      "itensAfetados": [
+        "docetaxel",
+        "prednisona",
+        "prednisolona"
+      ],
+      "estado": "ABERTA",
+      "decisao": null,
+      "efeitoNoMotor": "BLOQUEIA_DOCUMENTO_COM_DOSE",
+      "superadaPor": null
+    },
+    {
+      "id": "DIV-RETOMADA-OSIMERTINIBE",
+      "tema": "Retomada de osimertinibe e criterio renal",
+      "tipo": "EXTERNA",
+      "polos": [
+        {
+          "fonteId": "BULA-OSIMERTINIBE",
+          "localizador": "NAO_VERIFICADO",
+          "afirmacao": "Material informado permite retomada em 40 mg apos melhora do evento; contexto deve ser conferido.",
+          "edicao": "NAO_VERIFICADO",
+          "natureza": "PARAFRASE",
+          "id": "DIV-RETOMADA-OSIMERTINIBE:1",
+          "rotulo": "Polo 1 - BULA-OSIMERTINIBE"
+        },
+        {
+          "fonteId": "BULA-OSIMERTINIBE",
+          "localizador": "NAO_VERIFICADO",
+          "afirmacao": "Material informado tambem permite 80 mg no contexto indicado; nao ha escolha automatica.",
+          "edicao": "NAO_VERIFICADO",
+          "natureza": "PARAFRASE",
+          "id": "DIV-RETOMADA-OSIMERTINIBE:2",
+          "rotulo": "Polo 2 - BULA-OSIMERTINIBE"
+        },
+        {
+          "fonteId": "SERVICO",
+          "localizador": "NAO_VERIFICADO",
+          "afirmacao": "Limiar renal de retomada nao possui fonte identificada e continua pendente.",
+          "edicao": "NAO_VERIFICADO",
+          "natureza": "PARAFRASE",
+          "id": "DIV-RETOMADA-OSIMERTINIBE:3",
+          "rotulo": "Polo 3 - SERVICO"
+        }
+      ],
+      "cartaoIds": [
+        "PULM-INTERC-TKI-EGFR"
+      ],
+      "itensAfetados": [
+        "osimertinibe"
+      ],
+      "estado": "ABERTA",
+      "decisao": null,
+      "efeitoNoMotor": "BLOQUEIA_DOCUMENTO_COM_DOSE",
+      "superadaPor": null
+    },
+    {
+      "id": "DIV-OV05-IMAGEM",
+      "tema": "Limite de aplicabilidade da evidencia de marcador",
+      "tipo": "EXTERNA",
+      "polos": [
+        {
+          "fonteId": "OV05",
+          "localizador": "NAO_VERIFICADO",
+          "afirmacao": "Resumo recebido nao apoia iniciar tratamento somente pela elevacao do marcador.",
+          "edicao": "NAO_VERIFICADO",
+          "natureza": "PARAFRASE",
+          "id": "DIV-OV05-IMAGEM:1",
+          "rotulo": "Polo 1 - OV05"
+        },
+        {
+          "fonteId": "IMAGEM-CASO5",
+          "localizador": "TC 24/10/2026 (caso sintetico)",
+          "afirmacao": "O caso tambem descreve lesao crescente em imagem; avaliar a diferenca de contexto sem confirmar recidiva automaticamente.",
+          "edicao": "NAO_VERIFICADO",
+          "natureza": "PARAFRASE",
+          "id": "DIV-OV05-IMAGEM:2",
+          "rotulo": "Polo 2 - IMAGEM-CASO5"
+        }
+      ],
+      "cartaoIds": [
+        "OVARIO-VIGIL-RECIDIVA-SUSPEITA"
+      ],
+      "itensAfetados": [],
+      "estado": "ABERTA",
+      "decisao": null,
+      "efeitoNoMotor": "EXIBIR_AMBOS",
+      "superadaPor": null
+    }
+  ],
+  "cartoes": [
+    {
+      "id": "MAMA-DX-ESTAD",
+      "estado": "RASCUNHO",
+      "fontes": [
+        "SBOC-ESTAD",
+        "SBOC-NEO",
+        "SBOC-ADJ",
+        "SBOC-MET",
+        "AULA-33",
+        "AULA-34",
+        "AULA-35",
+        "AULA-36",
+        "AULA-37",
+        "AULA-38",
+        "AULA-39",
+        "AULA-40",
+        "AULA-41"
+      ],
+      "conteudo": {
+        "textoSBOCRecebido": "id: MAMA-DX-ESTAD\ncenario: {tumor: mama, tipo: PRIMEIRA_CONSULTA, finalidade: \"confirmar diagnóstico, completar TNM e definir exames por risco\"}\nindispensaveis: [anamnese com status menopausal e história familiar mama/ovário, exame físico bimanual + LFN regionais, busca de sintomas de metástase]  # ESTAD p.5\nopcoes:\n  - O1 | \"Mamografia bilateral + USG de mamas e axilas\" | R | NE ALTO/FR FORTE | ESTAD p.5\n  - O2 | \"Core biopsy (USG ou estereotaxia); mamotomia como alternativa para lesões não palpáveis\" | R | ESTAD p.5, p.23\n  - O3 | \"AP + IHQ RE/RP/HER2/Ki-67 obrigatória\" | R | NE ALTO/FR FORTE | ESTAD p.5\n      regra: \"HER2 2+ → ISH (FISH/CISH/SISH)\"; \"ISH indeterminado → tratar como HER2 negativo\" (p.23); \"core e peça discordantes → prevalece o positivo\" (p.5)\n  - O4 | \"Reavaliar IHQ na peça se core RH- e HER2-\" | R | NE BAIXO/FR FORTE | ESTAD p.5\n  - O5 | \"USG axilar + PAAF ou core do LFN suspeito\" | R | NE MODERADO/FR FORTE (USG); NE BAIXO/FR FORTE (punção) | ESTAD p.6, p.25\n      condicao: \"especialmente quando N muda o manejo inicial (neoadjuvância HER2+/TN)\"\n  - O6 | \"RM de mamas\" | O | ESTAD p.6\n      condicao: \"jovem com mamas densas, lobular, multicêntrico, primário oculto, plano de neoadjuvância, discrepância clínica×imagem\"\n  - O7 | \"Laboratório mínimo: hemograma, função hepática e renal, FALC, cálcio\" | R | NE MUITO BAIXO/FR FORTE | ESTAD p.6\n  - O8 | \"Imagem sistêmica (TC tórax + TC/RM abdome-pelve + cintilografia ou PET/CT)\" | D\n      condicao_a: \"localmente avançado OU plano de neoadjuvância\" [p.7–8] → R\n      condicao_b: \"sintomas/FALC/enzimas alteradas → imagem dirigida\" [p.6] → R\n      condicao_c: \"pIIB sem sintomas → considerar, especialmente TN/HER2+\" [p.8] → O\n      condicao_d: \"I/IIA sem sintomas → sem indicação\" [p.8]\n      divergencia: DIV-SBOC-IMG-II\n      condicao: \"convencionais inconclusivos; localmente avançado; múltiplos LFN; alto grau\" | limite: \"menor sensibilidade em lobular e baixo grau\"\n  - O10 | \"RM de crânio\" | O | condicao: \"sintomas neurológicos; considerar TN/HER2+ localmente avançado\" | ESTAD p.7\n  - O11 | \"RX/TC de ossos captantes na cintilografia (ossos de carga)\" | R | condicao: \"cintilografia positiva sem PET\" | ESTAD p.7\n  - O12 | \"CEA e CA 15-3 no estadiamento\" | NAO_RECOMENDADO | ESTAD p.7\n  - O14 | \"β-hCG antes de iniciar tratamento em potencial fértil; suspender ACO hormonal\" | R | NE MODERADO/FR FORTE | ESTAD p.23–24\n  - O15 | \"Fertilidade: informar todas pré-menopausa; encaminhar se interesse; GnRHa concomitante à QT (neo)adjuvante, mesmo sem desejo reprodutivo\" | R | NE MODERADO/FR FORTE | ESTAD p.24\n  - O16 | \"Ecocardiograma se antraciclina, trastuzumabe ± pertuzumabe ou T-DM1\" | R | NE ALTO/FR FORTE | ESTAD p.23, p.25 | observacao: \"NÃO é regra para qualquer QT\"\n  - O17 | \"Aconselhamento genético\" | R | NE MODERADO/FR FORTE | ESTAD p.24 → critérios no cartão 8 | divergencia: DIV-GERMINATIVO\n  - O18 | \"Registrar intervalos assistenciais: suspeita, biópsia, AP, biomarcadores, 1ª consulta, estadiamento completo, início do tratamento\" | R | ESTAD p.25\ncalculos: [T pelo maior diâmetro (imagem, clínico e AP correlacionados em tumores pequenos — p.5, p.10); grupo prognóstico EXIGE grau+HER2+RE+RP (G8) — anatômico só sem biomarcadores (p.14)]\ndivergencias:\n  - DIV-SBOC-IMG-II: a: \"texto p.7 — estádios II e III → estadiamento sistêmico completo\"; b: \"algoritmo p.8 — IIA sem rotina, IIB considerar\"; tratamento: declarar; decisão por plano de neoadjuvância e sintomas\n  - DIV-GERMINATIVO: a: SBOC critérios clínicos (ADJ p.23); b: ASCO-SSO 2024 ≤65 anos [V]\nlimites: [\"não atribui estádio com N ou M ausente (prefixo c, componente PENDENTE)\", \"PD-L1 não é indicado na doença inicial (p.5)\", \"TILs são informação prognóstica, não decidem tratamento (p.5)\"]\nacoes: [pedido de exames (A), encaminhamento genética (A), encaminhamento reprodução (A), orientação (A)]\n",
+        "natureza": "TRANSCRICAO_DO_MATERIAL_FORNECIDO; NAO_E_LEITURA_DA_DIRETRIZ",
+        "anexoSha256": "44d4db033b01dbb975140dd52874d1dde2ef14b8479813b235cc4dca3458c63d",
+        "aulasRecebidas": [
+          {
+            "texto": "opcoes_adicionar:\n  - O22 | \"Biopsiar BI-RADS 4 e 5; core preferido; PAAF só para LFN; vácuo/estereotaxia para microcalcificação e distorção\" | R | [aula 33, converge ESTAD p.5]\n  - O23 | \"Subtipo por IHQ: RE/RP ≥1%; HER2 3+ ou 2+/ISH+; Ki-67 ≥14% separa luminal A-like de B-like\" | R | [aula 33] | divergencia: DIV-KI67\n  - O24 | \"Se β-hCG positivo → cartão MAMA-GESTACAO (substitui O8, O14, O15)\" | R | [aula 41]\nruleset_novo: her2-ish-ascocap2018.v1.json  # [aula 38]\n  grupo1: {razao: \">=2\", copias: \">=4\"} → POSITIVO (IHQ qualquer)\n  grupo2: {razao: \">=2\", copias: \"<4\"} → POSITIVO só se IHQ 3+; IHQ 0/1+/2+ → NEGATIVO\n  grupo3: {razao: \"<2\",  copias: \">=6\"} → POSITIVO se IHQ 2+ ou 3+; IHQ 0/1+ → NEGATIVO\n  grupo4: {razao: \"<2\",  copias: \"4 a <6\"} → POSITIVO só se IHQ 3+; IHQ 0/1+/2+ → NEGATIVO\n  grupo5: {razao: \"<2\",  copias: \"<4\"} → NEGATIVO\n  regra: \"ISH indeterminado → NEGATIVO para fins de estádio (ESTAD p.23); componente ausente → PENDENTE, nunca negativo\"\nhistologia_adicionar [aula 33]:\n  regra: \">90% das características → tipo específico; 10–90% → misto\"\n  melhor_prognostico: [tubular puro, mucinoso puro, cribriforme puro, adenoide cístico/secretório e salivares]\n  pior_prognostico: [micropapilífero, neuroendócrino, metaplásico de alto grau ou escamoso]\n  limite: \"carcinoma medular: coluna ambígua na extração → NAO_CLASSIFICADO\"\n  nota: \"secretório: rearranjo NTRK\"\ndivergencias_adicionar: [DIV-KI67]\n",
+            "natureza": "FONTE_SECUNDARIA; NAO_FECHA_REGRA"
+          }
+        ],
+        "conferenciasExternas": [
+          {
+            "divergenciaId": "DIV-SBOC-IMG-II",
+            "localizador": "BINV-1",
+            "afirmacao": "O resumo fornecido restringe exames adicionais a sintomas ou risco clinico elevado.",
+            "fonteId": "NCCN-BREAST-V8-2026"
+          },
+          {
+            "divergenciaId": "DIV-GERMINATIVO",
+            "localizador": "NAO_VERIFICADO",
+            "afirmacao": "O resumo fornecido inclui triplo negativo independentemente da idade.",
+            "fonteId": "NCCN-BREAST-V8-2026"
+          }
+        ]
+      },
+      "limites": [
+        "Conteudo documental recebido; nao executa criterio, dose ou recomendacao.",
+        "Passagens com NCCN nao foram transcritas; consultar polos parafraseados e localizadores."
+      ],
+      "dosesRtAprovadas": false
+    },
+    {
+      "id": "MAMA-TNM-AJCC8-REF",
+      "estado": "RASCUNHO",
+      "fontes": [
+        "SBOC-ESTAD",
+        "SBOC-NEO",
+        "SBOC-ADJ",
+        "SBOC-MET",
+        "AULA-33",
+        "AULA-34",
+        "AULA-35",
+        "AULA-36",
+        "AULA-37",
+        "AULA-38",
+        "AULA-39",
+        "AULA-40",
+        "AULA-41"
+      ],
+      "conteudo": {
+        "textoSBOCRecebido": "id: MAMA-TNM-AJCC8-REF\nfonte: ESTAD p.9–23 (reproduz AJCC 8ª ed.)\nT: {Tx, T0, Tis(CDIS), Tis(Paget), T1mi ≤1mm, T1a >1–5mm (1,0–1,9 arredonda p/ 2), T1b >5–10, T1c >10–20, T2 >20–50, T3 >50, T4a parede, T4b pele/satélites/edema, T4c, T4d inflamatório}\n  regras: \"maior dimensão\"; \"invasão de derme isolada não é T4\"; \"aderência ao peitoral sem parede não é T4\"\ncN: {cNx, cN0, cN1 móveis I/II, cN1mi (só se LFN ressecado antes do primário), cN2a fixos/coalescentes, cN2b mamária interna sem axila, cN3a infraclavicular, cN3b MI+axila, cN3c supraclavicular}; sufixos (sn)/(f)\npN: {pNx, pN0, pN0(i+), pN0(mol+), pN1mi, pN1a 1–3 com ≥1 >2mm, pN1b MI por BLS, pN1c, pN2a 4–9, pN2b, pN3a ≥10 ou infraclavicular, pN3b, pN3c}\nM: {M0, cM0(i+), cM1, pM1 (>0,2 mm em LFN não regional)}\ngrupos:\n  anatomico: \"usar apenas onde biomarcadores indisponíveis\" (p.14) — tabela p.14\n  clinico_prognostico: tabela p.15–17 (TNM × grau × HER2 × RE × RP); \"N1 inclui N1mi\"\n  patologico_prognostico: tabela p.18–22; genômico: T1–2 N0 M0, HER2-, RE+, Oncotype <11 → IA (p.23)\nregras_de_estadio (G8): [grupo prognóstico só com os 4 biomarcadores + grau; ISH indeterminado → HER2 negativo; LFN+ sem primário → biomarcadores do LFN; prognóstico pressupõe tratamento adequado com HT/QT/anti-HER2 (p.23)]\nobservacao_repo: \"corpus/rulesets precisa de `estadiamento-mama-ajcc8.v1.json` com as 3 tabelas; a função devolve PENDENTE se faltar componente — nunca grupo parcial\"\n",
+        "natureza": "TRANSCRICAO_DO_MATERIAL_FORNECIDO; NAO_E_LEITURA_DA_DIRETRIZ",
+        "anexoSha256": "44d4db033b01dbb975140dd52874d1dde2ef14b8479813b235cc4dca3458c63d",
+        "aulasRecebidas": [
+          {
+            "texto": "regras_adicionar [aula 33]:\n  - \"NÃO existe M0 patológico. pTNM usa cM0 ou pM1; 'pM0' é entrada INVÁLIDA no ruleset\"\n  - \"exames de imagem não são obrigatórios para atribuir cM0\"\n  - \"pN0(i+) e pN0(mol+): prognóstico mais próximo de N0 que de N1\"\n  - \"linfonodos regionais: axilares, intramamários, mamários internos, supraclaviculares ipsilaterais; demais (cervical, axilar contralateral) = metastáticos\"\n  - \"RE/RP positivos ≥1%; Ki-67 NÃO entra no estadiamento prognóstico; Oncotype só em T1–2 N0 RH+/HER2− <5 cm\"\n  - \"estádio prognóstico presume tratamento efetivo: HER2+ 'rebaixado' por presumir anti-HER2; RS baixo presume HT\"\n",
+            "natureza": "FONTE_SECUNDARIA; NAO_FECHA_REGRA"
+          }
+        ],
+        "conferenciasExternas": []
+      },
+      "limites": [
+        "Conteudo documental recebido; nao executa criterio, dose ou recomendacao.",
+        "Passagens com NCCN nao foram transcritas; consultar polos parafraseados e localizadores."
+      ],
+      "dosesRtAprovadas": false
+    },
+    {
+      "id": "MAMA-0-CDIS",
+      "estado": "RASCUNHO",
+      "fontes": [
+        "SBOC-ESTAD",
+        "SBOC-NEO",
+        "SBOC-ADJ",
+        "SBOC-MET"
+      ],
+      "conteudo": {
+        "textoSBOCRecebido": "id: MAMA-0-CDIS\ncenario: {extensaoLiteral: \"Tis N0 M0, inclui microinvasão sem foco >1 mm\", sistema: AJCC, edicao: 8, prefixo: p}\nopcoes:\n  - O1 | \"Cirurgia conservadora + RT de mama total OU mastectomia\" | R | NE ALTO/FR FORTE | ADJ p.21\n  - O2 | \"Margem ≥2 mm se conservadora + RT\" | R | NE MODERADO/FR FORTE | ADJ p.21\n  - O3 | \"BLS\" | O (não rotina) | NE MUITO BAIXO/FR FRACA | condicao: \"alto grau/volumoso, sobretudo mastectomia\" | ADJ p.21–22\n  - O4 | \"TMX 20 mg/d 5 anos, ou 10 mg dias alternados 3 anos (5 mg não existe no Brasil), ou anastrozol 1 mg 5 anos (pós-menopausa)\" | R | NE ALTO/FR FORTE | requisitos: [E: RH+; E: sem mastectomia bilateral] | ADJ p.21–22\n  - O5 | \"Anti-HER2\" | NAO_RECOMENDADO | NE MODERADO/FR FRACA | ADJ p.21\nlimites: [\"mastectomia preferida se multicêntrico, margem inadequada ou contraindicação a RT (p.22)\", \"HT reduz recidiva sem impacto em SG (p.22)\"]\n",
+        "natureza": "TRANSCRICAO_DO_MATERIAL_FORNECIDO; NAO_E_LEITURA_DA_DIRETRIZ",
+        "anexoSha256": "44d4db033b01dbb975140dd52874d1dde2ef14b8479813b235cc4dca3458c63d",
+        "aulasRecebidas": [],
+        "conferenciasExternas": []
+      },
+      "limites": [
+        "Conteudo documental recebido; nao executa criterio, dose ou recomendacao.",
+        "Passagens com NCCN nao foram transcritas; consultar polos parafraseados e localizadores.",
+        "Texto recebido agrupa microinvasao no cartao de estadio 0, mas o cartao TNM a descreve como T1mi: conferir; nao promover esse agrupamento a regra."
+      ],
+      "dosesRtAprovadas": false
+    },
+    {
+      "id": "MAMA-I-III-LUMINAL",
+      "estado": "RASCUNHO",
+      "fontes": [
+        "SBOC-ESTAD",
+        "SBOC-NEO",
+        "SBOC-ADJ",
+        "SBOC-MET",
+        "AULA-33",
+        "AULA-34",
+        "AULA-35",
+        "AULA-36",
+        "AULA-37",
+        "AULA-38",
+        "AULA-39",
+        "AULA-40",
+        "AULA-41"
+      ],
+      "conteudo": {
+        "textoSBOCRecebido": "id: MAMA-I-III-LUMINAL\ncenario: {subtipo: \"RH+/HER2−\", extensaoLiteral: \"I–III (cT1–T4, cN0–N3, M0)\", finalidade: \"sequência cirurgia × neoadjuvância; adjuvância por risco\"}\n# --- escolha da sequência ---\n  - O1 | \"Cirurgia primária (upfront)\" | R como padrão de I–II sem alto risco | NEO p.7; ADJ p.6\n  - O2 | \"QT neoadjuvante antracíclico + taxano, preferencialmente dose-densa; toda a QT antes da cirurgia\" | D\n      requisitos: [E: \"alto risco\" (localmente avançado: >5 cm, parede, pele, LFN fusionados, supraclavicular — NEO p.6; ou critérios de QT do cartão 8)]\n      limite: \"NÃO automática na pós-menopausa com cN0–cN1 (≤2 LFN), porque pode privar da omissão de QT por teste genômico\" | NEO p.7 | NE ALTO/FR FORTE\n      esquemas: [ACdd→T semanal ou Tdd (preferencial), AC→T ou D, EC→T ou D; inversão T→AC aceitável] | NEO p.11\n  - O3 | \"HT neoadjuvante com IA\" | O | condicao: \"pós-menopausa; G1–2, RE forte, RP+, Ki-67 baixo, HER2−; objetivo de ampliar opção cirúrgica; idosa/frágil/recusa QT\" | duracao: \"≥6 meses se resposta\" | NEO p.12 | limite: \"pré-menopausa só em ensaio; RPC não é desfecho — usar PEPI\"\n# --- adjuvância sistêmica (pós-cirurgia, por pTNM) ---\n  - O4 | \"QT adjuvante\" | R | requisitos (QUALQUER): [\"N+ com macrometástase, exceto pós-menopausa 1–3 LFN e risco genômico baixo\", \"N0 alto risco clínico (≥1 cm G3; ≥2 cm G2–3; ≥3 cm qualquer grau) sem genômico\", \"alto risco genômico\"] | ADJ p.6\n      esquemas: [TC (ALTO/FORTE), ACdd→T semanal/Tdd (ALTO/FORTE), AC→T/D (ALTO/FORTE), AC / CMF (MODERADO/FRACA)] | ADJ p.13\n      regra: \"≤2 cm N0 → CMF/AC/TC; ≥2 cm ou N+ → antracíclico + taxano; ≥4 LFN beneficia mais\" | ADJ p.13; \"5-FU não adiciona benefício\" (ALTO/FORTE)\n  - O5 | \"Teste genômico (Oncotype / MammaPrint)\" | O | requisitos: [E: RH+/HER2−; E: N0 ou 1–3 LFN] | ADJ p.7–8\n      regras_oncotype: [\"RS<11: só HT\", \"RS 11–15 <50a ou ≤25 >50a: só HT (ALTO/FORTE)\", \"≤50a RS 16–25: discutir QT (+1,6% / +6,5%) (MODERADO/FORTE)\", \"RS>25: QT (ALTO/FORTE)\", \"1–3 LFN pós-menopausa RS≤25: sem QT; pré-menopausa RS≤25: considerar QT (+5,2% SLDI)\"]\n      regras_mammaprint: [\"baixo risco clínico: não fazer\", \"pós-menopausa alto risco clínico N0: alto genômico → QT, baixo → omitir (ALTO/FORTE)\", \"<50a alto clínico + baixo genômico: não usar isolado (+5,0% com QT)\"]\n      limite: \"pode omitir painel se pós-menopausa, G1–2, RP ≥20%, pN0, <2 cm (p.8)\"\n  - O6 | \"HT pré-menopausa: TMX 5–10 anos; ou SO 2–5 anos + TMX/IA 5 anos\" | R | NE ALTO/FR FORTE | ADJ p.14 | condicao SO: \"indicação de QT ou <35 anos\"\n  - O7 | \"HT pós-menopausa: TMX, anastrozol, letrozol, exemestano 5–10 anos; ou IA 2–3a → TMX\" | R | NE ALTO/FR FORTE | ADJ p.14 | duracao: \"IA 7 anos parece adequado (ABCSG-16); CTS5 para estendida (MODERADO/FORTE)\" p.15–16\n  - O8 | \"Abemaciclibe 2 anos + HT\" | D | NE ALTO/FR FORTE | requisitos: [E: \"≥4 LFN\" OU \"1–3 LFN + (T≥5 cm OU G3 OU Ki-67 ≥20%)\"] | ADJ p.14 | divergencia: DIV-ABEMA\n  - O9 | \"Ribociclibe 400 mg D1–21 q28d, 3 anos + IA ± SO (não com TMX)\" | D | NE ALTO/FR FORTE | requisitos: [E: \"N+ qualquer\" OU \"N0 com T≥2 cm + G3\" OU \"N0 com T≥2 cm + (Ki-67 ≥20% ou alto risco genômico)\"] | ADJ p.12, p.14 | divergencia: DIV-RIBO-N0\n  - O10 | \"Olaparibe 1 ano\" | R | NE ALTO/FR FORTE | requisitos: [E: gBRCA1/2 patogênica; E: \"CPS-EG ≥3 após neoadjuvância\" OU \"≥4 LFN se QT adjuvante\"] | ADJ p.14\n  - O11 | \"Antirreabsortivo: zoledronato 4 mg semestral/anual 3–5 anos ou denosumabe 60 mg semestral 5 anos\" | R | NE ALTO/FR FORTE | requisitos: [E: pós-menopausa natural/induzida ou SO] | ADJ p.21 | seguimento: densitometria basal e 1–2 anos\n  - O12 | \"Exercício aeróbico + resistência durante tratamento curativo\" | R | NE MODERADO/FR FORTE | ADJ p.22\ntransicoes:\n  - de: neoadjuvância | condicao: \"doença residual + gBRCA\" | para: O10 | requerRevisaoMedica: true\n  - de: neoadjuvância | condicao: \"cN1 pós-menopausa, genômico disponível\" | para: reconsiderar O1+O5 antes de QT | requerRevisaoMedica: true\ndivergencias:\n  - DIV-ABEMA: a: SBOC inclui Ki-67 ≥20% (p.14); b: FDA 2023 só cohort 1 [V]; tratamento: declarar; serviço decide\n  - DIV-RIBO-N0: a: lista p.14 (omite T3/T4 N0, frase truncada); b: considerações p.15 (inclui T3/T4); c: NATALEE [V]\n  - DIV-DOCETAXEL-DOSE: a: 75 mg/m² (NEO p.8); b: 100 mg/m² (ADJ p.9)\n  - DIV-FILGRASTIM-DIA: a: D2–D10 (NEO); b: D3–D10 (ADJ)\nlimites: [\"Ki-67 isolado não indica QT; é fator de risco adicional (ADJ p.6)\", \"iCDK adjuvante exige patologia final\", \"homens: TMX preferido; IA só com GnRHa (ADJ p.5)\"]\n",
+        "natureza": "TRANSCRICAO_DO_MATERIAL_FORNECIDO; NAO_E_LEITURA_DA_DIRETRIZ",
+        "anexoSha256": "44d4db033b01dbb975140dd52874d1dde2ef14b8479813b235cc4dca3458c63d",
+        "aulasRecebidas": [
+          {
+            "texto": "  pos_menopausa_se (QUALQUER): [\"ooforectomia bilateral prévia\", \"idade ≥60\", \"<60 + amenorreia ≥12 m SEM QT/TMX/toremifeno/SO + FSH e E2 em faixa pós-menopausa\", \"<60 + amenorreia pós-QT ≥12 m + FSH/E2 pós-menopausa em avaliações seriadas\", \"<60 em TMX + FSH/E2 pós-menopausa\"]\n  indeterminado_se: [\"em supressão ovariana\", \"em TMX sem FSH/E2 documentados\", \"amenorreia isolada\"]\n  transicao: \"pré-menopausa ao diagnóstico, <60 a, em TMX, amenorreica → IA SOMENTE com SO (ou menopausa documentada pelos critérios acima)\" | TEOC 2025: resposta D\n  estado_padrao: INDETERMINADO  # G5: incerteza viaja\nquimioterapia_adicionar [aula 34]:\n  alto_risco_clinico_sem_genomico: [\"T>1 cm G3\", \"T>2 cm G2\", \"T>3 cm qualquer grau\", \"outros: pré-menopausa (esp. <35), invasão angiolinfática, RH baixos, Ki-67 ≥20%\"] | divergencia: DIV-LIMIAR-RISCO-CLINICO\n  oncotype_indicacao: {TAILORx: \"pT1c–2 (1,1–5,0 cm) qualquer grau, ou pT1b (0,6–1,0 cm) com G2–3\", RxPONDER: \"pós-menopausa, pT1–3, pN1\"}\n  excecao_QT_N+: \"pós-menopausa pN1 com RS ≤25 → sem QT\" | divergencia: DIV-RS-25\n  risco_distante_20a (Pan 2017): {N0: \"22%\", N1–3: \"31%\", N4–9: \"52%\"}; \">50% das recidivas após 5 anos\"\niCDK_adicionar [aula 34]:\n  NATALEE: {n: 5101, inclusao: \"IIA N1; IIA N0 só G3 | G2+Ki-67≥20% | alto risco genômico; IIB (N0/N1); III\", parceiro: \"IA (+SO se pré)\", dose: \"ribociclibe 400 mg D1–21 q28d\", duracao: \"3 anos\", iDFS_4a: \"88,5 vs 83,6% (HR 0,715)\", OS: \"HR 0,759, p=0,0563 (sem significância)\"}\n  monarchE: {n: 5637, coorte1: \"≥4 LFN, ou 1–3 LFN + T≥5 cm e/ou G3\", coorte2: \"1–3 LFN + Ki-67≥20%\", dose: \"abemaciclibe 150 mg 12/12 h\", duracao: \"2 anos\", iDFS_7a: \"77,4 vs 70,9% (HR 0,734)\", OS_7a: \"86,8 vs 85,0% (HR 0,842)\"}\n  negativos: [PALLAS (palbociclibe 2 anos), PENELOPE-B (palbociclibe 13 m)] → NAO_RECOMENDADO\n  eventos_adversos: {abemaciclibe: \"diarreia 75%, fadiga 38%, dor abdominal 34%\", ribociclibe: \"neutropenia 62%, artralgia 36%, alteração hepática 25%, QT longo 5,2%, pneumonite 1,5%\"}\n  resolucao: \"DIV-RIBO-N0 → lista p.14 SBOC incompleta (aula e p.15 concordam)\"\n  ressalva: \"tabela por estádio anatômico é aproximação; usar contagem de LFN\"\nnovo_O17 | \"Giredestrant adjuvante (lidERA, n=4170)\" | D | [aula 34] | iDFS: HR 0,70 (0,57–0,87), p=0,0014; eventos 6,7 vs 9,4%; seguimento 32,3 m; TMX HR 0,53, IA HR 0,73 | regulatorio_BR: NAO_VERIFICADO | estado: INFORMATIVO (fora da SBOC 2026)\nTE_adicionar [aula 34]:\n  SO: \"ideal 5 anos (SOFT/TEXT: SLD 15a 73,5% vs 67,0%); mínimo 2 anos; sem dados >5 anos\"\n  zoledronato: \"risco ≥intermediário + menopausa; −18% de mortalidade por câncer de mama\"\n  TE_neoadjuvante: \"pós-menopausa frágil/policomórbida/recusa QT, fortemente RH+; pré-menopausa NÃO padrão (preferir QT neo); IA > TMX; sem dados com terapia-alvo\" | divergencia: DIV-HTNEO-DURACAO\n  PEPI: NAO_CODIFICAR (definição do slide inconsistente [NR])\n",
+            "natureza": "FONTE_SECUNDARIA; NAO_FECHA_REGRA"
+          }
+        ],
+        "conferenciasExternas": [
+          {
+            "divergenciaId": "DIV-ABEMA",
+            "localizador": "BINV-K 3/4",
+            "afirmacao": "A parafrase fornecida acompanha os criterios da coorte 1, sem Ki-67 isolado.",
+            "fonteId": "NCCN-BREAST-V8-2026"
+          },
+          {
+            "divergenciaId": "DIV-HTNEO-DURACAO",
+            "localizador": "BINV-L",
+            "afirmacao": "O resumo informado menciona quatro a seis meses.",
+            "fonteId": "NCCN-BREAST-V8-2026"
+          },
+          {
+            "divergenciaId": "DIV-RS-25",
+            "localizador": "NAO_VERIFICADO",
+            "afirmacao": "A parafrase recebida situa a fronteira seguinte em 26.",
+            "fonteId": "NCCN-BREAST-V8-2026"
+          }
+        ]
+      },
+      "limites": [
+        "Conteudo documental recebido; nao executa criterio, dose ou recomendacao.",
+        "Passagens com NCCN nao foram transcritas; consultar polos parafraseados e localizadores."
+      ],
+      "dosesRtAprovadas": false
+    },
+    {
+      "id": "MAMA-I-III-TN",
+      "estado": "RASCUNHO",
+      "fontes": [
+        "SBOC-ESTAD",
+        "SBOC-NEO",
+        "SBOC-ADJ",
+        "SBOC-MET",
+        "AULA-33",
+        "AULA-34",
+        "AULA-35",
+        "AULA-36",
+        "AULA-37",
+        "AULA-38",
+        "AULA-39",
+        "AULA-40",
+        "AULA-41"
+      ],
+      "conteudo": {
+        "textoSBOCRecebido": "id: MAMA-I-III-TN\ncenario: {subtipo: \"TN ou ER-low (RE <10%; RE− com RP baixo também)\", extensaoLiteral: \"I–III, M0\"}\nregra_de_entrada: \"ER-low é manejado como TN, incluindo testagem genética\" | NEO p.13–14\nopcoes:\n  - O1 | \"T1a/T1b: cirurgia upfront + adjuvância\" | R | NEO p.13 | → esquemas do O6\n  - O2 | \"T1c N0 (1–2 cm): neoadjuvância ACdd→T/Tdd (preferencial) ou AC→T, AC→carbo+T, carbo+T\" | R | NE ALTO/FR FORTE (carbo+T: MODERADO) | NEO p.13–14\n  - O3 | \">2 cm ou N+ (II–III): Keynote-522 — carbo AUC5 q3s ou 1,5 semanal + paclitaxel 80 semanal + pembro 200 q3s ×4 → AC/EC + pembro ×4 (ou ACdd desvinculado) → cirurgia → pembro ×9\" | R | NE ALTO/FR FORTE | NEO p.10, p.13–14\n      dado: \"SG 5a 86,6% vs 81,7% (p=0,002), seguimento 75,1 m\" p.14\n  - O4 | \"Pembro indisponível: AC→T/Tdd (ALTO/FORTE) ou AC→carbotaxol (MODERADO/FORTE); carboplatina recomendada em II/III independentemente de pembro\" | R | NEO p.13, p.15\n  - O5 | \"Refratário/irressecável: RT + capecitabina radiossensibilizante\" | O | NE MODERADO/FR FORTE | NEO p.13, p.15\n  - O6 | \"Adjuvância se operado upfront: ACdd→T/Tdd, AC→T/D, carbo+paclitaxel (ALTO/FORTE); TC (MODERADO/FORTE); AC, CMF (MODERADO/FRACA)\" | R | ADJ p.18\n  - O7 | \"Doença residual pós-neo: capecitabina 2.000–2.500 mg/m² D1–14 q21d, 6–8 ciclos (ocidental: 2.000)\" | R | NE ALTO/FR FORTE | ADJ p.9, p.18 | divergencia: DIV-CAPE\n  - O8 | \"Pembro adjuvante ×9 (total 17) se usado na neo, independentemente da resposta\" | R | NE ALTO/FR FORTE | ADJ p.18 | limite: \"benefício após RPC questionado (p.19)\"\n  - O9 | \"Olaparibe 1 ano\" | R | NE ALTO/FR FORTE | requisitos: [E: gBRCA1/2; E: \"residual pós-neo\" OU \"≥T2 ou N+ se adjuvante\"] | ADJ p.18 | observacao: \"cape+pembro e olaparibe+pembro são combinações seguras (p.19)\"\n  - O10 | \"Outros checkpoints na (neo)adjuvância\" | NAO_RECOMENDADO | NEO p.14\ndivergencias: [DIV-CAPE: a: \"8 ciclos\" (NEO p.13, ADJ p.18); b: \"6–8 ciclos\" (ADJ p.9)]\nlimites: [\"RPC é desfecho substituto válido neste subtipo (NEO p.6–7)\", \"Oncotype/MammaPrint não se aplicam (ADJ p.8)\"]\n",
+        "natureza": "TRANSCRICAO_DO_MATERIAL_FORNECIDO; NAO_E_LEITURA_DA_DIRETRIZ",
+        "anexoSha256": "44d4db033b01dbb975140dd52874d1dde2ef14b8479813b235cc4dca3458c63d",
+        "aulasRecebidas": [
+          {
+            "texto": "regra_tempo (G10) [aula 39]:\n  alerta: \"intervalo cirurgia→QT adjuvante >30 d (ideal ≤4–6 sem); >60 d = +19% de risco de morte (IC 1,02–1,38)\"\n  limiar: \"42 dias = [PROP]; 60 dias = fonte da aula\"\n  vale_para: \"estádio III, TN e HER2+ (melhores desfechos ≤30 d); HRs de subgrupo NAO_EXTRAIDOS\"\nresumo_adicionar [aula 39]:\n  neo: \"cT1c cN0 → considerar; ≥cT2 ou cN+ → QT + pembro (KN522)\"\n  adj: \"pT1a pN0 observação; pT1b pN0 considerar QT; ≥pT1c ou pN+ QT\" | divergencia: DIV-TN-PT1B\n  regimes: \"ACdd→T ± carboplatina; docetaxel substitui paclitaxel se neuropatia; TC ×4 (menor risco) ou ×6 (≈AC-T, menos cardiotoxicidade); carbo+docetaxel se contraindicação a antraciclina (2A)\"\n  especiais: \"pCR → IO adjuvante; gBRCAm + ≥pT2 ou ≥pN1–3 → olaparibe; residual + gBRCA wt → capecitabina; cape+IO e olaparibe+IO seguros\"\n  RCB: \"0 = pCR; I, II, III estratificam SLE em 10 anos\"\ndivergencias_adicionar: [DIV-TN-PT1B, DIV-PLATINA-NEO]\nrecorrencia_locorregional: \"QT adjuvante (CALOR) — benefício por subtipo NAO_EXTRAIDO [NR: concentrado em RE−]\"\n",
+            "natureza": "FONTE_SECUNDARIA; NAO_FECHA_REGRA"
+          }
+        ],
+        "conferenciasExternas": [
+          {
+            "divergenciaId": "DIV-TN-T1C-FIRMEZA",
+            "localizador": "BINV-L",
+            "afirmacao": "A parafrase fornecida apresenta a neoadjuvancia como opcao a considerar.",
+            "fonteId": "NCCN-BREAST-V8-2026"
+          },
+          {
+            "divergenciaId": "DIV-PEMBRO-PCR",
+            "localizador": "BINV-16",
+            "afirmacao": "A parafrase fornecida ressalta alto risco apos resposta completa.",
+            "fonteId": "NCCN-BREAST-V8-2026"
+          }
+        ]
+      },
+      "limites": [
+        "Conteudo documental recebido; nao executa criterio, dose ou recomendacao.",
+        "Passagens com NCCN nao foram transcritas; consultar polos parafraseados e localizadores."
+      ],
+      "dosesRtAprovadas": false
+    },
+    {
+      "id": "MAMA-I-III-HER2",
+      "estado": "RASCUNHO",
+      "fontes": [
+        "SBOC-ESTAD",
+        "SBOC-NEO",
+        "SBOC-ADJ",
+        "SBOC-MET",
+        "AULA-33",
+        "AULA-34",
+        "AULA-35",
+        "AULA-36",
+        "AULA-37",
+        "AULA-38",
+        "AULA-39",
+        "AULA-40",
+        "AULA-41"
+      ],
+      "conteudo": {
+        "textoSBOCRecebido": "id: MAMA-I-III-HER2\ncenario: {subtipo: \"HER2+ (IHQ 3+ ou ISH+), RH qualquer\", extensaoLiteral: \"I–III, M0\"}\nopcoes:\n  - O1 | \"T1a/T1b: upfront + adjuvância\" | R | NEO p.16\n  - O2 | \"T1c: upfront+adjuvância OU neoadjuvância\" | D | NEO p.16\n  - O3 | \">2 cm ou localmente avançado: TCHP (preferencial)\" | R | NE ALTO/FR FORTE | NEO p.9, p.16–17 | dado: TRAIN-2 RPC 67 vs 68%, SLE 3a 93,5 vs 92,7%, menos cardiotoxicidade sem antraciclina\n      alternativas: [THP (MODERADO/FORTE), ACTH(P) (ALTO/FORTE), TH para frágeis/muito baixo risco (MODERADO/FORTE)]\n  - O4 | \"Adjuvância upfront: ACdd→TH, AC→TH, TCH (ALTO/FORTE); TH (MODERADO/FORTE)\" | R | ADJ p.19\n      regra: \"<2 cm N0 → TH 12 semanas é o regime de escolha (p.20)\"; \"contraindicação a antracíclico → TCH ×6\"\n  - O5 | \"RPC pós-neo: trastuzumabe até 1 ano; cN+ → trastuzumabe + pertuzumabe\" | R | NE ALTO/FR FORTE | NEO p.16; ADJ p.19 (APHINITY: benefício só LFN+)\n  - O6 | \"Residual invasivo pós-neo: T-DM1 3,6 mg/kg q3s ×14\" | R | NE ALTO/FR FORTE | ADJ p.19 | dado: SG 7a 89,1 vs 84,4%\n  - O7 | \"Neratinibe 240 mg 1 ano após 1 ano de trastuzumabe\" | O | NE ALTO/FR FRACA | requisitos: [E: HER2+/RH+, especialmente residual] | ADJ p.19–20 | limite: \"estudo não contemplou T-DM1\"\n  - O8 | \"Trastuzumabe 1 ano (6 meses não aceito)\" | R | NE ALTO/FR FORTE | ADJ p.20\n  - O9 | \"Monitorar FEVE 0, 3, 6, 9, 12 meses; queda >16% do basal ou 10–15% abaixo do LIN → pausa 4 semanas; sem recuperação → suspender\" | R | ADJ p.20 → regra para o safetyEngine (hoje alertaFeve.ts)\n  - O10 | \"T-DXd neo (DB-11) e adjuvante residual (DB-05)\" | NAO_RECOMENDADO_SEM_ANVISA | NEO p.17; ADJ p.20\n  - O11 | \"HT adjuvante se RH+ conforme cartão 4 (O6–O7); sem iCDK\" | R\nlimites: [\"HER2 2+ sem ISH não entra aqui (cartão 1 O3)\", \"antraciclina não é rotina no HER2+ (NEO p.17)\"]\n",
+        "natureza": "TRANSCRICAO_DO_MATERIAL_FORNECIDO; NAO_E_LEITURA_DA_DIRETRIZ",
+        "anexoSha256": "44d4db033b01dbb975140dd52874d1dde2ef14b8479813b235cc4dca3458c63d",
+        "aulasRecebidas": [
+          {
+            "texto": "divergencias_adicionar: [DIV-PERTUZUMABE-N0]\nISH: usar ruleset her2-ish-ascocap2018 (cartão 1)\ngestante: anti-HER2 PROIBIDO → cartão MAMA-GESTACAO; TEOC 2024 (22 sem, cT3N1 HER2 3+): AC neoadjuvante, anti-HER2 após o parto\naula_37: \"trials listados sem números (NOAH, NeoSphere, TRYPHAENA, TRAIN-2, KRISTINE, DB-11, KATHERINE, DB-05, HERA, PHARE, PERSEPHONE, APT, BCIRG-006, APHINITY, ExteNET) → NAO_EXTRAIDO; nada codificado\"\n",
+            "natureza": "FONTE_SECUNDARIA; NAO_FECHA_REGRA"
+          }
+        ],
+        "conferenciasExternas": [
+          {
+            "divergenciaId": "DIV-RESIDUAL-HER2",
+            "localizador": "BINV-16",
+            "afirmacao": "A parafrase fornecida contempla T-DXd ou T-DM1; isso nao comprova aprovacao no Brasil.",
+            "fonteId": "NCCN-BREAST-V8-2026"
+          },
+          {
+            "divergenciaId": "DIV-PERTUZUMABE-N0",
+            "localizador": "BINV-9",
+            "afirmacao": "A parafrase fornecida descreve opcionalidade em pT2-T3, inclusive N0.",
+            "fonteId": "NCCN-BREAST-V8-2026"
+          }
+        ]
+      },
+      "limites": [
+        "Conteudo documental recebido; nao executa criterio, dose ou recomendacao.",
+        "Passagens com NCCN nao foram transcritas; consultar polos parafraseados e localizadores."
+      ],
+      "dosesRtAprovadas": false
+    },
+    {
+      "id": "MAMA-IV",
+      "estado": "RASCUNHO",
+      "fontes": [
+        "SBOC-ESTAD",
+        "SBOC-NEO",
+        "SBOC-ADJ",
+        "SBOC-MET",
+        "AULA-33",
+        "AULA-34",
+        "AULA-35",
+        "AULA-36",
+        "AULA-37",
+        "AULA-38",
+        "AULA-39",
+        "AULA-40",
+        "AULA-41"
+      ],
+      "conteudo": {
+        "textoSBOCRecebido": "id: MAMA-IV\ncenario: {extensaoLiteral: \"cM1 ou pM1, de novo ou recidiva\", finalidade: \"linhas por subtipo\"}\nestadiamento_IV: [hemograma, renal, hepática, cálcio, FALC; TC tórax; TC/RM abdome; cintilografia; RM crânio se sintomas (considerar HER2+/TN); PET/CT se osso-exclusivo] | MET p.5\nbiomarcadores_IV: [biópsia do sítio metastático (sem histologia prévia; 1ª recidiva; reavaliar RH/HER2), gBRCA1/2 + PALB2, PIK3CA/AKT1/PTEN se RE+/HER2−, PD-L1 CPS (22C3) se TN, HER2-low/ultra-low em RE+ e HER2-low em TN] | MET p.5\nlinhas:\n  RH_POS_HER2_NEG:\n    L1: [\"IA + iCDK4/6 (R, ALTO/FORTE)\", \"fulvestranto + iCDK4/6 (alternativa)\", \"PIK3CA mut + recidiva ≤12 m da HT adjuvante → fulvestranto + palbociclibe + inavolisibe (R, ALTO/FORTE)\", \"HT isolada só em selecionadas (indolente, não visceral, de novo)\"] | MET p.8–10\n    L2: [\"PD >12 m em iCDK: via PIK3CA/AKT1/PTEN alterada → capivasertibe 400 mg 4d on/3d off + fulvestranto (alpelisibe se indisponível); sem alteração → everolimo + fulvestranto/exemestano\", \"PD a palbo+IA → abemaciclibe ou ribociclibe + fulvestranto\", \"gBRCA → olaparibe ou talazoparibe\", \"endócrino-refratária com HER2-low/ultra-low e indicação de citotóxico → T-DXd\", \"sem HER2-low, após ≥1 QT → sacituzumabe govitecana\"] | MET p.10–11, p.16\n    L3+: [\"QT mono ou combinada por necessidade de resposta\", \"sacituzumabe (MODERADO/FRACA) após T-DXd\", \"TMX/megestrol/estradiol baixa dose se sensibilidade endócrina persiste (ALTO/FRACA)\", \"Dato-DXd aprovado pela ANVISA (TROPION-Breast01)\"] | MET p.11, p.16\n    nao_aprovados_ANVISA: [elacestranto, imlunestranto]\n    crise_visceral: \"QT; sem gBRCA e HER2 0/1+/2+ISH− → QT ou T-DXd; gBRCA → iPARP; L2 sem biomarcador → sacituzumabe (após 2 QT, ≥1 metastática) ou QT; MSI-H/NTRK/RET/TMB-H → alvo (MODERADO/FORTE)\" | MET p.22\n  HER2_POS:\n    L1: [\"trastuzumabe + pertuzumabe + taxano (R, ALTO/FORTE); docetaxel ≥6 ciclos nas respondedoras, HP até PD\", \"recidiva <6 m do fim do trastuzumabe adjuvante → T-DXd em L1\", \"vinorelbina + HP se contraindicação a taxano\"] | MET p.17–18\n    L2: [\"T-DXd (R, ALTO/FORTE)\"] | MET p.17, p.21\n    L3+: [\"T-DM1\", \"T-DXd se não usado\", \"trastuzumabe + capecitabina\", \"lapatinibe + capecitabina\", \"trastuzumabe + lapatinibe\", \"trastuzumabe + outra QT (MODERADO/FORTE)\"] | MET p.17, p.21\n    manutencao_RH_pos: \"HT + anti-HER2 após indução; PATINA (palbociclibe) citado\" | MET p.18–19\n    nao_aprovado_ANVISA: [\"T-DXd + pertuzumabe L1 (DB-09)\"]\n  TRIPLO_NEG:\n    L1: [\"CPS ≥10 → pembrolizumabe + QT (paclitaxel, nab-paclitaxel ou carbo+gencitabina) (R, ALTO/FORTE), independentemente de BRCA\", \"CPS <10 sem gBRCA → QT ou Dato-DXd (preferencial) (ALTO/FORTE)\", \"CPS <10 + gBRCA → iPARP (ALTO/FORTE)\", \"atezolizumabe + nab-paclitaxel se CPS<10 e SP142 ≥1%\"] | MET p.23\n    L2: [\"gBRCA → iPARP\", \"qualquer → sacituzumabe govitecana (preferencial) ou QT\", \"HER2-low → T-DXd\"] | MET p.23\n    L3+: [\"alvo por biomarcador (MODERADO/FORTE)\", \"QT (MODERADO/FORTE)\"]\n  QT_agentes: {preferenciais_mono: [doxorrubicina, doxo lipossomal, paclitaxel, capecitabina, gencitabina, eribulina, vinorelbina], outros: [docetaxel, ciclofosfamida, epirrubicina, carboplatina, cisplatina], combinacoes: [AC, EC, CMF, docetaxel+cape, gencitabina+paclitaxel, carbo+gencitabina, cisplatina+gencitabina, carbo+paclitaxel]} | MET p.22\nfatores_de_decisao: [idade, menopausa, comorbidades, PS, preferências, tratamentos prévios, gBRCA, sítios, carga, sintomas/necessidade de resposta, SLP na adjuvância, resposta à linha anterior, toxicidade, interações, disponibilidade, custo, via, pesquisa clínica, condições sociais] | MET p.7\ndefinicoes: {resistencia_primaria: \"recidiva <2 anos de HT adjuvante ou PD <6 m de HT avançada\", secundaria: \"após esses prazos\"} | MET p.11\nlacunas_da_fonte: [\"antirreabsortivo 120 mg/4 sem em doença óssea: não localizado no capítulo (D9)\", \"oligometastática/cirurgia do primário: não localizado\", \"SNC: só indicação de RM\"]\nlimites: [\"sem doses de QT paliativa no capítulo (só agentes) → fichas por bula/[INST]\", \"linhas pressupõem biomarcador documentado; ausente → INDETERMINADO, não 'negativo'\"]\n",
+        "natureza": "TRANSCRICAO_DO_MATERIAL_FORNECIDO; NAO_E_LEITURA_DA_DIRETRIZ",
+        "anexoSha256": "44d4db033b01dbb975140dd52874d1dde2ef14b8479813b235cc4dca3458c63d",
+        "aulasRecebidas": [
+          {
+            "texto": "definicoes_adicionar [aula 36]:\n  HER2_low: \"IHQ 1+ ou 2+/ISH−\"\n  HER2_ultralow: \"IHQ >0 e <1+ (membrana fraca/incompleta ≤10% das células) em amostra METASTÁTICA\"\n  proporcao_RH+_HER2−: \"low 60–65%; ultralow 20–25%\"\n  biopsia: \"discordância de receptores ~15% vs primário\"\nprevalencia_molecular [aula 35]: {ESR1: \"<5% de novo; 25–40% após IA\", PIK3CA: \"~40%\", AKT1: \"~5%\", PTEN: \"~5%\"}\nADCs_RH+ (aula 36; Anvisa conforme a aula):\n  T-DXd: {DB-04_RH+: \"SLP 10,1 vs 5,4 m (HR 0,51); SG 23,9 vs 17,5 m (HR 0,64)\", DB-06: \"HER2-low SLP 13,2 vs 8,1 m (HR 0,62); ultralow 13,2 vs 8,3 m (HR 0,78); SG imatura\", elegibilidade_DB-06: \"sem QT metastática; PD ≤6 m de TE+iCDK em 1ª linha ou após ≥2 linhas de TE\", AE: \"pneumonite 10%, náusea\", posologia: \"q3s\"}\n  sacituzumabe: {TROPiCS-02: \"SLP 5,5 vs 4,0 m (HR 0,73); SG 14,4 vs 11,2 m (HR 0,79)\", anvisa: \"RH+/HER2− após TE e ≥2 terapias sistêmicas adicionais; mTNBC\", AE: \"neutropenia, diarreia\", posologia: \"D1 e D8 q21d\"}\n  Dato-DXd: {TROPION-Breast01: \"SLP 6,9 vs 4,9 m (HR 0,63); **SG 18,6 vs 18,3 m (HR 1,01)**\", anvisa: \"RH+/HER2− após TE e ≥1 QT metastática\", AE: \"pneumonite 4%, toxicidade ocular, estomatite\", posologia: \"q3s\"}\n  requisito_S_comum: \"pneumonite → alerta de intercorrência (cartão tipo INTERCORRENCIA); sintoma respiratório novo = passo 0\"\ntoxicidades_PI3K_AKT [aula 35]:\n  hiperglicemia_G3+: {alpelisibe: \"36,6%\", inavolisibe: \"5,6%\", capivasertibe: \"2,3%\"}\n  diarreia_G3+: {alpelisibe: \"6,7%\", inavolisibe: \"3,7%\", capivasertibe: \"9,3%\"}\n  INAVO120_elegibilidade: \"glicose <126 mg/dL e HbA1c <6%\" → requisito S de inavolisibe [estudo, não bula]\n  dados: {INAVO120: \"SLP 15,0 vs 7,3 m (HR 0,43); SG 34,0 vs 27,0 m (HR 0,67)\", CAPItello-291: \"SLP 7,2 vs 3,6 m (HR 0,60); via alterada 7,3 vs 3,1 m (HR 0,50)\", SOLAR-1: \"SLP 11,0 vs 5,7 m (HR 0,65)\", BOLERO-2: \"SLP 6,9 vs 2,8 m (HR 0,43)\"}\niCDK_metastatico [aula 35]: {PALOMA-2: \"SG HR 0,96 (sem ganho)\", MONALEESA-2: \"SG 63,9 vs 51,4 m\", MONARCH-3: \"SG 66,8 vs 53,7 m\", MONALEESA-7 (pré-menopausa, LHRHa): \"SG 58,7 vs 48,0 m\", MONARCH-2: \"SG 46,7 vs 37,3 m\", MONALEESA-3: \"SG 67,6 vs 51,8 m (HR 0,67)\"} | divergencia: DIV-MONALEESA3-OS\nPARP [aula 36]: {OlympiAD: \"SLP 7,0 vs 4,2 m (HR 0,58); SG HR 0,90 ns\", EMBRACA: \"SLP 8,6 vs 5,6 m (HR 0,54); SG HR 0,848 ns\", limite: \"fase 3 só gBRCA1/2; PALB2 e BRCA somático = estudos menores\"}\nTRIPLO_NEGATIVO_2026 [aula 40, Hennessy 2026]:\n  L1_CPS≥10: [\"pembro + QT\", \"pembro + sacituzumabe (pendente de aprovação)\"], independente de BRCA\n  L1_CPS<10_BRCA_wt: [\"QT\", \"Dato-DXd ou sacituzumabe\"]\n  L1_CPS<10_gBRCA: \"iPARP\"\n  L2: [\"QT\", \"sacituzumabe\", \"T-DXd se HER2-low\"]\n  L3+: [\"T-DXd (HER2-low)\", \"sacituzumabe\", \"QT\", \"alvo por biomarcador (MSI-H, TMB-H, NTRK, RET, BRCA somático, PALB2)\"]\n  ASCENT-03 (SG vs QT, 1ª linha, sem IO): \"SLP2 mediana ~18,2 vs 14,0 m (HR ~0,70; legibilidade parcial); SG imatura (21,5 vs 20,2 m)\"\n  ASCENT-04, TROPION-Breast02: \"só eventos adversos extraídos (Dato-DXd: estomatite 57%, náusea 45%, olho seco 24%); eficácia NAO_EXTRAIDA\"\n  regulatorio_BR: \"sacituzumabe em 1ª linha: NAO_VERIFICADO (indicação listada na aula 36 não especifica a linha)\"\n  platina_em_gBRCA: \"estudo TNT citado (slide); valores NAO_EXTRAIDOS\"\ndivergencias_adicionar: [DIV-TN-1L-2026, DIV-MONALEESA3-OS]\nHER2_POS_adicionar [aula 38]:\n  - \"manutenção 1ª linha após HP+QT: tucatinibe + HP (HER2CLIMB-05): SLP 24,9 vs 16,3 m, HR 0,641 (0,514–0,799), p<0,0001, Δ 8,6 m, avaliação do investigador\" | D | regulatorio_BR: NAO_VERIFICADO\n  - \"T-DXd 6 ciclos → HP SC de manutenção (DEMETHER, fase II braço único, n=165)\" | INFORMATIVO | \"no DB-09, 8,7% trocaram T-DXd+P por HP por eventos adversos\"\n  - \"SYSUCC-002: trastuzumabe + HT vs + QT em HER2+/RH+\" | INFORMATIVO (números NAO_EXTRAIDOS)\n  - \"3ª linha: TH3RESA, DB-02, HER2CLIMB (tucatinibe), NALA (neratinibe)\" | INFORMATIVO (números NAO_EXTRAIDOS)\n",
+            "natureza": "FONTE_SECUNDARIA; NAO_FECHA_REGRA"
+          }
+        ],
+        "conferenciasExternas": []
+      },
+      "limites": [
+        "Conteudo documental recebido; nao executa criterio, dose ou recomendacao.",
+        "Passagens com NCCN nao foram transcritas; consultar polos parafraseados e localizadores."
+      ],
+      "dosesRtAprovadas": false
+    },
+    {
+      "id": "MAMA-TRANSVERSAL",
+      "estado": "RASCUNHO",
+      "fontes": [
+        "SBOC-ESTAD",
+        "SBOC-NEO",
+        "SBOC-ADJ",
+        "SBOC-MET",
+        "AULA-33",
+        "AULA-34",
+        "AULA-35",
+        "AULA-36",
+        "AULA-37",
+        "AULA-38",
+        "AULA-39",
+        "AULA-40",
+        "AULA-41"
+      ],
+      "conteudo": {
+        "textoSBOCRecebido": "id: MAMA-TRANSVERSAL\ncriterios_QT_adjuvante (ADJ p.6): [\"TN >5 mm\", \"HER2+ >5 mm\", \"RH+/HER2− N+ macro (exceto pós-menopausa 1–3 LFN + genômico baixo)\", \"RH+/HER2− N0 alto risco clínico ou genômico\"]\nfatores_de_risco (ADJ p.6): [G3, TN, HER2+, Ki-67 ≥20%, assinatura alto risco, N+ (sobretudo >3), pré-menopausa, invasão angiolinfática, RH baixo]\naconselhamento_genetico (ADJ p.23): [\"≤50 anos\", \"história familiar desconhecida/limitada\", \"história pessoal de mama\", \"≥1 próximo (1º–3º grau, mesmo lado) com mama ≤50, ovário, próstata Gleason ≥7/intraductal, pâncreas\", \"≥3 familiares mama/próstata\", \"TN\", \"masculino\", \"múltiplos primários\", \"lobular + gástrico difuso\", \"possível iPARP (RH+/HER2− ou TN metastática ou localizada alto risco)\"] | divergencia: DIV-GERMINATIVO (ASCO-SSO ≤65)\nseguimento (ADJ p.23): [anamnese+exame 3–6 m ×3 anos → 6–12 m ×2 anos → anual; mamografia anual (≥6 m pós-RT); ginecologia anual; TMX + sangramento → antecipar]\nrastreamento (ESTAD p.4): \"mamografia anual 40–74 anos (ALTO/FORTE); ≥75 individualizar\"\ndieta: \"sem evidência para cetogênica/jejum/low-carb\" (ADJ p.22)",
+        "natureza": "TRANSCRICAO_DO_MATERIAL_FORNECIDO; NAO_E_LEITURA_DA_DIRETRIZ",
+        "anexoSha256": "44d4db033b01dbb975140dd52874d1dde2ef14b8479813b235cc4dca3458c63d",
+        "aulasRecebidas": [
+          {
+            "texto": "rastreamento_adicionar [aula 33]:\n  mamografia: \"reduz mortalidade 20–30%\"\n  alto_risco:\n    - \"risco vitalício ≥20% (BOADICEA, CanRisk, BRCAPRO, Tyrer-Cuzick): MMG tomossíntese + RM anuais; início aos 40 a ou 10 a antes do familiar mais jovem; RM não antes dos 25, MMG não antes dos 30\"\n    - \"RT torácica entre 10 e 30 a: MMG e RM anuais 8 a após a RT, não antes dos 25\"\n    - \"HDA/neoplasia lobular com risco residual ≥20%: MMG anual ao diagnóstico, não antes dos 30; RM considerar\"\n    - \"mamas extremamente densas isoladas: MMG a partir dos 40 (não antes dos 30); RM aos 50 (considerar aos 40)\"\n    - \"BRCA1/2 P/LP: RM a partir dos 25; MMG dos 30 aos 75\"\n    - \"Li-Fraumeni: RM a partir dos 20; MMG a partir dos 30\"\n  fatores_RR: {\"<2\": \"menarca precoce, menopausa tardia, nuliparidade, 1º parto >35 a, estrogênio+progesterona, densidade, álcool, obesidade pós-menopausa\", \"2–4\": \"parente 1º grau, CHEK2, doença proliferativa, radiação <30 a\", \">4\": \"BRCA1/2, PALB2, CLIS, hiperplasia atípica\"}",
+            "natureza": "FONTE_SECUNDARIA; NAO_FECHA_REGRA"
+          }
+        ],
+        "conferenciasExternas": [
+          {
+            "divergenciaId": "DIV-GERMINATIVO",
+            "localizador": "NAO_VERIFICADO",
+            "afirmacao": "O resumo fornecido inclui triplo negativo independentemente da idade.",
+            "fonteId": "NCCN-BREAST-V8-2026"
+          },
+          {
+            "divergenciaId": "DIV-RASTREAMENTO",
+            "localizador": "NAO_VERIFICADO",
+            "afirmacao": "Parafrase recebida: anual a partir dos 40, com tomossintese.",
+            "fonteId": "NCCN-BREAST-V8-2026"
+          }
+        ]
+      },
+      "limites": [
+        "Conteudo documental recebido; nao executa criterio, dose ou recomendacao.",
+        "Passagens com NCCN nao foram transcritas; consultar polos parafraseados e localizadores."
+      ],
+      "dosesRtAprovadas": false
+    },
+    {
+      "id": "MAMA-LOCORREGIONAL",
+      "estado": "RASCUNHO",
+      "fontes": [
+        "COMPENDIO-DERIVADO",
+        "LIVRO-2018",
+        "NCCN-BREAST-V8-2026"
+      ],
+      "dosesRtAprovadas": false,
+      "limites": [
+        "Nenhuma dose de RT aprovada; requer revisao medica.",
+        "Fonte historica nao substitui diretriz atual.",
+        "Texto cortado permanece NAO_EXTRAIDO."
+      ],
+      "conteudo": {
+        "localizadores": {
+          "compendio": "cap01",
+          "livro2018": "PDF p.89-91 e 104-109"
+        },
+        "cirurgia_2018": [
+          "conservadora = mastectomia em sobrevida, desde que haja RT",
+          "gBRCA1/2 com tumor inicial: discutir mastectomia bilateral",
+          "poupadora de pele/mamilo: sem RT adicional se sem outra indicacao classica",
+          "pos-neoadjuvancia: excisar so a carga remanescente; RM util para ver reducao concentrica ou dispersa"
+        ],
+        "axila_2018": [
+          "axila clinicamente comprometida (sem neoadjuvancia): disseccao",
+          "axila clinicamente negativa: BLS; recorrencia axilar aproximadamente 1%; falso-negativo ate 9%",
+          "BLS com ate 2 positivos, sem extensao extracapsular, com RT e tratamento sistemico: omitir disseccao; outros LFN em 27-38% dos dissecados",
+          "micrometastase no sentinela: sem disseccao e sem RT obrigatoria",
+          "pos-neo, cN+ que negativou: BLS pode evitar disseccao; texto cortado: NAO_EXTRAIDO"
+        ],
+        "radioterapia_2018": {
+          "conservadora": "toda invasiva: RT; EBCTCG: recidiva 10a 19% vs 35%, RR 0,52; morte por cancer de mama 15a 21% vs 25%, RR 0,82",
+          "omissao": "65 anos ou mais, menor que 3 cm, margem livre, RH+, N0, em HT; PRIME II: recidiva local 7a 1,3% vs 4,1%. RH fraco (Allred menor que 7, 1+ ou menor que 10%): recidiva local 10%; nao omitir, conforme texto historico recebido.",
+          "fracionamento": {
+            "convencional": "1,8-2 Gy/dia, 45-50,4 Gy",
+            "hipofracionado": "2,6-3,3 Gy/dia; total NAO_EXTRAIDO",
+            "cautela_hipofracionar": "menor que 50 anos, T3/T4 ou N2/N3, protese",
+            "boost": "10-16 Gy em 2-2,5 Gy/dia; opcional acima de 60 anos com bom prognostico"
+          },
+          "APBI": "mais recidiva local e axilar em 5 anos que mama inteira, conforme fonte historica recebida",
+          "pos_mastectomia": "T3/T4 e N+; considerar em T1-2 N1 com invasao angiolinfatica, RH negativo, HER2 positivo, G3, mais de um LFN positivo, menos de 45 anos",
+          "pos_neoadjuvancia": "conservadora: RT da mama remanescente; drenagens pelo estadiamento pre-neo; texto cortado"
+        },
+        "conferenciaExterna": {
+          "fonteId": "NCCN-BREAST-V8-2026",
+          "localizador": "BINV-2",
+          "afirmacao": "Resumo fornecido contempla omissao selecionada de RT em faixas a partir de 70 ou 65 anos, com criterios tumorais, nodais e hormonais distintos.",
+          "estadoConferencia": "NAO_CONFERIDO"
+        },
+        "lacunas_restantes": [
+          "totais do hipofracionamento",
+          "RT nodal regional: MA.20, SUPREMO",
+          "NCCN BINV-3/E nao lidas"
+        ]
+      }
+    },
+    {
+      "id": "MAMA-GESTACAO-LACTACAO",
+      "estado": "RASCUNHO",
+      "fontes": [
+        "AULA-41"
+      ],
+      "dosesRtAprovadas": false,
+      "limites": [
+        "Fonte secundaria; ESMO 2023 nao conferido.",
+        "Termos de seguranca dependem de dose fetal e trimestre.",
+        "Exame de alto risco exige decisao medica registrada.",
+        "Limiar de 14 semanas permanece PROP; nenhuma regra ativa foi alterada.",
+        "Proibicao e excecao de anti-PD(L)1 coexistem no texto recebido; nao harmonizadas."
+      ],
+      "conteudo": {
+        "cenario": {
+          "tipos": [
+            "PRIMEIRA_CONSULTA",
+            "INTERCORRENCIA"
+          ],
+          "definicao": "diagnostico na gestacao, ate 1 ano pos-parto ou durante lactacao",
+          "finalidade": "maxima seguranca materna sem prejuizo fetal"
+        },
+        "entrada": "beta-hCG positivo ou gestacao referida; referencia documental a O14/O21 do cartao de diagnostico",
+        "epidemiologia": "15-35/100.000 partos; ate 20% dos CM abaixo de 30 anos; ductal pouco diferenciado; RE/RP menos positivos; estadio mais avancado, sobretudo na lactacao; prognostico similar se mesmo subtipo e estadio na gestacao, possivelmente pior no primeiro ano pos-parto",
+        "imagem": {
+          "classificacaoRecebida": "Categorias da aula; nao validacao de seguranca pelo app",
+          "SEGURO": [
+            "US B/M menor que 30 min, limitar Doppler",
+            "RM sem gadolinio",
+            "Rx de torax",
+            "TC cranio/pescoco",
+            "TC torax 0,01-0,66 mGy se beneficio superar risco",
+            "mamografia menor que 0,03 mGy; sensibilidade menor"
+          ],
+          "MODERADO": [
+            "Rx de abdome somente se essencial"
+          ],
+          "ALTO": [
+            "cintilografia ossea 4-5 mGy",
+            "TC abdome/pelve 1,3-35 mGy",
+            "PET-CT 10-50 mGy"
+          ],
+          "regraInformada": "Preferir alternativas; exame de alto risco so se indispensavel, sem alternativa e com decisao medica registrada; hidratacao, protocolo de baixa dose e sondagem vesical constam no material recebido."
+        },
+        "tratamento": {
+          "cirurgia": "qualquer momento; acima de 20 semanas, deslocamento uterino para esquerda; sentinela com Tc-99 sem corante azul, conforme aula",
+          "quimioterapia": "aula: nunca antes de 14 semanas; primeiro trimestre: 22% de anomalias; AC descrito como primeira linha; taxanos, carboplatina preferida a cisplatina, vinca e inibidores de topoisomerase descritos para segundo/terceiro trimestres; suspender 3-4 semanas antes do parto previsto",
+          "limiar14semanas": "PROP, DIV-GESTACAO-14SEM aberta",
+          "dose": "PESO REAL conforme aula; dado documental, sem alterar politica de peso",
+          "corticoide": "aula prefere metilprednisolona ou prednisolona a dexametasona",
+          "G-CSF": "aula informa possibilidade de uso",
+          "PROIBIDOS": [
+            "metotrexato",
+            "anti-HER2: oligodramnio, hipoplasia pulmonar, morte fetal",
+            "anti-PD(L)1; a mesma aula descreve excecao se essencial entre 12-32 semanas",
+            "tamoxifeno, IA e GnRHa em qualquer trimestre",
+            "antiangiogenicos",
+            "ADCs: sem dados",
+            "iPARP"
+          ],
+          "radioterapia": "evitar; aula menciona excecao acima do diafragma no primeiro/segundo trimestre com protecao pelvica",
+          "HER2_positivo": "TEOC 2024 citado: AC neoadjuvante; anti-HER2 apos parto",
+          "RH_positivo": "sem HT na gestacao; iniciar apos parto, conforme aula"
+        },
+        "obstetricia": {
+          "interrupcao_eletiva": "nao melhora desfecho oncologico, conforme material recebido",
+          "parto": "possivel inducao com 37 semanas conforme tratamento pos-parto",
+          "seguimento_fetal": "US a cada 3-4 semanas",
+          "amamentacao": "nao durante QT, trastuzumabe, lapatinibe ou terapia endocrina, conforme aula"
+        },
+        "POSITIVE": {
+          "contexto": "gestacao apos cancer RH positivo; braco unico, n=518; TE por 18-30 meses; pausa ate 2 anos",
+          "BCFI_5a": "12,3% vs 13,2% em controles SOFT/TEXT; diferenca -0,9% (IC -4,2 a +2,6); DRFI 6,2 vs 8,3%",
+          "desfechos": "75,8% com pelo menos uma gestacao; 69% com pelo menos um nascido vivo; 82% retomaram TE",
+          "seguimento": "mediana 71 meses; longo prazo em curso"
+        },
+        "relacoes": [
+          {
+            "tipo": "ALERTA_DOCUMENTAL",
+            "cartaoId": "MAMA-I-III-LUMINAL",
+            "opcoes": [
+              "O6",
+              "O7"
+            ]
+          },
+          {
+            "tipo": "ALERTA_DOCUMENTAL",
+            "cartaoId": "MAMA-I-III-HER2",
+            "tema": "anti-HER2"
+          }
+        ],
+        "fontesCitadasNaAula": [
+          "ESMO Consensus 2023",
+          "UpToDate 2025",
+          "Loren JCO 2025",
+          "POSITIVE",
+          "TEOC 2024"
+        ],
+        "originaisConferidos": false
+      }
+    }
+  ]
+}

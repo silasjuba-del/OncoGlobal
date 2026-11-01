@@ -36,7 +36,7 @@ export const Divergencia = z.object({
 });
 export type Divergencia = z.infer<typeof Divergencia>;
 export const FonteDivergencia = FonteJornada.extend({
-  tipo: z.enum(["SBOC", "NCCN", "AULA_SECUNDARIA", "REGULATORIA", "ENSAIO", "INSTITUCIONAL", "HISTORICA", "COMPENDIO_DERIVADO", "AUSENTE"]),
+  tipo: z.enum(["SBOC", "NCCN", "DIRETRIZ_EXTERNA", "AULA_SECUNDARIA", "REGULATORIA", "ENSAIO", "INSTITUCIONAL", "HISTORICA", "COMPENDIO_DERIVADO", "AUSENTE"]),
   conferenciaDeclaradaEm: z.string().nullable().default(null),
 }).strict();
 export const CorpusDivergencias = z.object({
