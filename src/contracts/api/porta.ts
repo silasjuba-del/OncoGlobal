@@ -21,7 +21,7 @@ import type { DutosClinicaVisao } from './dutos.js';
 import type { z } from "zod";
 import type { EstadoOncoassist, FontesOncoassist, RespostaOncoassist } from "./oncoassist.js";
 import type { Fonte } from "../base.js";
-import type { Triagem, TumorLot } from "../clinico.js";
+import type { Triagem, TumorLot, TreatmentAdministration } from "../clinico.js";
 import type { Semaforo } from "../estados.js";
 import { ActionIntent, type Alerta, type Apac, type ConfirmarBloco } from "../operacao.js";
 import type { ContextoTriagem, SalaoRuleset } from "../regras.js";
@@ -427,6 +427,8 @@ export interface PortaConsulta {
   filaSalao(): Promise<SalaoVisao>;
   gerarContingenciaSalao?(pedido: import("./salaoContingencia.js").GerarContingenciaSalao): Promise<import("../f3/salaoOperacional.js").FolhaContingenciaSalao>;
   historicoContingenciaSalao?(contexto: { patientId: string; encounterId: string }): Promise<import("../f3/salaoOperacional.js").FolhaContingenciaSalao[]>;
+  /** Registro explícito da administração efetiva de um item da prescrição assinada (Salão). */
+  registrarAdministracao?(entrada:{contexto:{patientId:string;encounterId:string;tumorLotId:string|null;operationId:string};prescricao:{documentId:string;documentVersion:number};administracao:TreatmentAdministration}):Promise<{codigo:string;eventId?:string}>;
   revisarRelatoInfusao?(entrada:{contexto:{patientId:string;encounterId:string;tumorLotId:string|null;operationId:string};mensagemId:string;payloadSha256:string;decisao:string}):Promise<unknown>;
   // [SERVIDOR_PENDENTE]
   salvarTriagem(triagem: Triagem, expectedRevision?: number | null): Promise<SalaoVisao>;

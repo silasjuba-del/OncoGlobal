@@ -52,10 +52,10 @@ export async function executar({ aposAssinatura, prefixo = 'auditoria-prescricao
     const b2 = demo.manifesto.consultaConfiavel, AGORA = demo.manifesto.agora, DATA = AGORA.slice(0, 10);
     const eventos = () => listarEventos(demo.app.db, b2.patientId);
     let n = 0;
-    const confirmar = (tipo, payload, tumorLotId) => {
+    const confirmar = (tipo, payload, tumorLotId, encounterId = b2.encounterId) => {
       const id = `s11-rx-${tipo.toLowerCase()}-${++n}`;
       salvarDraft(demo.app.db, { draftId: id, patientId: b2.patientId, sourceId: id, rawRef: 'referencia-local-sintetica', payload: {}, diagnostics: [], revision: 0, criadoEm: AGORA });
-      const r = executarConfirmacao(demo.app.db, { patientId: b2.patientId, encounterId: b2.encounterId, tumorLotId, operationId: `op-${id}`,
+      const r = executarConfirmacao(demo.app.db, { patientId: b2.patientId, encounterId, tumorLotId, operationId: `op-${id}`,
         reviewDecisionId: `review-${id}`, sessao: demo.app.sessoes.obter(demo.app.token), em: AGORA,
         registros: [{ draftId: id, expectedRevision: 0, eventId: id, tipo, payload, fontes: [fonteSintetica(payload.sourceId ?? id)], revisao: 'CONFIRMADO', supersedesEventId: null }] });
       assert.equal(r.estado, 'GRAVADA', `semeadura ${tipo}: ${JSON.stringify(r)}`);
@@ -237,7 +237,8 @@ export async function executar({ aposAssinatura, prefixo = 'auditoria-prescricao
       return { adversarial: ctx.adversarial.status, carboplatina: ctx.carboplatina, assinados: ctx.assinadas, modoReaberto, itensReabertos, administracoes: administracoes().length };
     }, ['conferida']);
 
-    if (aposAssinatura) await aposAssinatura({ page, demo, fixture, dir, uiPort, prova, ctx, eventos, administracoes, abrirEditor, b2, evid });
+    const reiniciar = async () => { await demo.app.close(); demo = await fixture.bootServidorDemoB2(dir); };
+    if (aposAssinatura) await aposAssinatura({ page, demo: () => demo, reiniciar, confirmar, LOTE, DATA, AGORA, uiPort, prova, ctx, eventos, administracoes, abrirEditor, b2, evid });
     await prova('S1.1.sem_erros_de_pagina_nem_requisicoes_externas', async () => {
       assert.deepEqual(externas, []); assert.deepEqual(errosPagina, []); return true;
     });

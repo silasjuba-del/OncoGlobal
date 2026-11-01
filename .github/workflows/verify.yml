@@ -112,6 +112,10 @@ jobs:
         env:
           TMPDIR: ${{ runner.temp }}
         run: node tests/auditoria-jornadas/e2e-prescricao.mjs
+      - name: Validar prescrito → administrado e semáforo da intercorrência
+        env:
+          TMPDIR: ${{ runner.temp }}
+        run: node tests/auditoria-jornadas/e2e-administracao.mjs
       - name: Validar layout e movimento reduzido no Chromium
         run: node node_modules/vitest/vitest.mjs run --config tests/hostil-cursor/navegador/vitest.config.ts
       - name: Guardar evidencias sinteticas
@@ -124,6 +128,7 @@ jobs:
             ${{ runner.temp }}/medico-m123-evidence-*/
             ${{ runner.temp }}/auditoria-jornadas-evid-*/
             ${{ runner.temp }}/auditoria-prescricao-evid-*/
+            ${{ runner.temp }}/auditoria-administracao-evid-*/
             ${{ runner.temp }}/flash-evolucao-sintetica-*/resultado.json
             ${{ runner.temp }}/flash-evolucao-sintetica-*/*.png
           if-no-files-found: warn

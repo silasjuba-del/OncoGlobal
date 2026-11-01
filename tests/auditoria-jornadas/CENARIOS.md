@@ -38,14 +38,14 @@ Declarado antes da execução. Paciente sintético `Paciente SINTETICO Consulta 
 
 Os pré-requisitos (lote, medidas e exames) entram pela mesma porta de confirmação do produto, não pela interface. Exame só com data civil fica PENDENTE por falta de horário (`avaliarValidadeExame`). A exatidão de dose em µg está em `DOSE.D-F1-52_ug_positiva_pequena_nao_zera` (`e2e-jornadas.mjs`).
 
-## Administração após prescrição assinada (S1.2, `e2e-administracao.mjs`)
+## Prescrito → administrado (S1.2/S1.3, `e2e-administracao.mjs`)
 
-Continua do estado assinado da S1.1, no mesmo backend e SQLite.
+Continua do estado assinado da S1.1, no mesmo backend e SQLite. Regra do Dr. Silas (01/11/2026): administração parcial, interrompida, omitida ou com reação infusional exige justificativa e volta ao médico no encontro seguinte como semáforo vermelho; um clique abre o motivo.
 
-| Prova | Esperado |
-|---|---|
-| Prescrito não vira administrado | "Setores da clínica" mostra nenhuma administração efetiva; ledger sem `TreatmentAdministration` |
-| Salão | Abre pela navegação médica com o paciente da prescrição |
-| Administração explícita | Um controle do Salão registra a administração efetiva, distinta da prescrição, e ela volta após reinício |
-
-A terceira prova falha hoje: a rota `/salao/registrar-administracao` (`src/server/dutos.ts`) existe e é testada por HTTP (`tests/f1/s10/http-dutos.test.ts`), mas nenhuma tela a chama. Por isso o script ainda não entra no `verify.yml`; entra junto com a correção (S1.3).
+| Prova | Entrada | Esperado |
+|---|---|---|
+| Prescrito não vira administrado | Prescrição assinada | Nenhuma `TreatmentAdministration` |
+| Parcial com reação | Paclitaxel PARCIAL, 200 mg, 09:00–09:40, reação infusional | Sem justificativa o registro fica bloqueado; com justificativa grava PARCIAL, 200 mg informados (não os 364 prescritos), reação e motivo |
+| Completa | Carboplatina COMPLETA, 566,5 mg, 10:00–11:00 | Grava sem justificativa |
+| Reinício | Backend reiniciado | As duas administrações voltam; o semáforo não aparece no próprio encontro |
+| Encontro seguinte | Novo encontro do mesmo paciente | Semáforo vermelho "Intercorrência na administração anterior (1)"; o modal mostra Paclitaxel, Parcial, reação infusional e a justificativa; a carboplatina completa não alerta |

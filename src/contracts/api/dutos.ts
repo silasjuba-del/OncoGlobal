@@ -15,6 +15,8 @@ export const DutosClinicaVisao=z.object({
   total:z.number().finite().nullable(),pendentes:z.array(Id),administracoes:z.array(z.object({adminId:Id,mg:z.number().finite(),
    mgM2:z.number().finite().nullable(),fonte:Fonte,sc:z.object({valorM2:z.number().finite().positive(),fonte:Fonte}).nullable()}).strict())}).strict()).optional(),
  integridade:z.array(z.object({eventId:Id,codigo:Id}).strict()),
+ // Administrações não completas ou com reação infusional de encontros anteriores do mesmo paciente.
+ intercorrenciasAnteriores:z.array(z.object({eventId:Id,encounterId:Id,registradoEm:z.string(),dados:TreatmentAdministration}).strict()).optional(),
 }).strict().superRefine((v,c)=>{
  const mesmo=(x:{patientId:string;encounterId:string;tumorLotId:string|null})=>x.patientId===v.contexto.patientId&&x.encounterId===v.contexto.encounterId&&x.tumorLotId===v.contexto.tumorLotId;
  if(v.farmacia.some(f=>!mesmo(f.registro.prescricao))||v.tarefas.some(t=>!mesmo(t.tarefa))||v.apacs.some(a=>a.apac.tumorLotId!==v.contexto.tumorLotId||a.validacao&&!mesmo(a.validacao))||v.administracoes.some(a=>a.prescricao&&!mesmo(a.prescricao)))
