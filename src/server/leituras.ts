@@ -172,7 +172,7 @@ function pacientesDoSnapshot(all: ReturnType<typeof eventos>) {
     .filter(x => x.event.patientId === x.value.patientId).map(x => [x.value.patientId, x.value]));
 }
 export function lerPaciente(db: DatabaseSync, patientId: string) {
-  return pacientesDoSnapshot(eventos(db)).get(patientId) ?? null;
+  return pacientesDoSnapshot(lerEventosComIntegridade(db, patientId).itens).get(patientId) ?? null;
 }
 export function lerConsulta(db: DatabaseSync, patientId: string, agora: string, sessao: Sessao,
   tumorLotId?: string | null, config: { aoLer?: (leitura:ReturnType<typeof lerEventosComIntegridade>)=>void; encounterId?: string; offsetServico?: string; limiarPlaquetas?: LimiarAlertaPlaquetas | null; modeloFlash?: ModeloFlash | null;
@@ -500,7 +500,7 @@ export function lerConsulta(db: DatabaseSync, patientId: string, agora: string, 
   };
 }
 export function lerLotes(db: DatabaseSync, patientId: string) {
-  return porTipo(eventos(db), "TumorLot", TumorLot, ["TumorLot@1"])
+  return porTipo(lerEventosComIntegridade(db, patientId).itens, "TumorLot", TumorLot, ["TumorLot@1"])
     .filter((x) => x.event.patientId === patientId && x.value.patientId === patientId).map((x) => x.value);
 }
 export function lerAgenda(db: DatabaseSync, agora: string, offsetServico = FUSO_SERVICO, salaoRuleset?: unknown, snapshot?: ReturnType<typeof eventos>) {
