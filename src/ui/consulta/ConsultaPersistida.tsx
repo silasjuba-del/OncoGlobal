@@ -27,6 +27,8 @@ import { EditorPrescricaoExecutavel } from "./EditorPrescricaoExecutavel.js";
 import { FichasPrescricaoConsulta, mensagemErroFicha } from "./FichasPrescricaoConsulta.js";
 import { PrepararApacConsulta } from "./PrepararApacConsulta.js";
 import { RelatosCanalConsulta } from "./RelatosCanalConsulta.js";
+import { AdministracaoCiclo } from "./AdministracaoCiclo.js";
+import { AlertaIntercorrencias } from "./AlertaIntercorrencias.js";
 import type { InstanciacaoFichaResposta } from "../../contracts/api/fichasPrescricao.js";
 import type { BasePrescricaoExecutavelResposta, EdicaoPrescricaoExecutavel,
   PrescricaoExecutavelPreparada } from "../../contracts/api/operacaoPrescricaoExecutavel.js";
@@ -437,6 +439,7 @@ export function ConsultaPersistida({ pedidoAberturaFlash = 0, porta, contexto, a
     propsFlash.planoInicial=antigo?{...antigo,solicitacoes,propostasInvestigacao:referencias}:{acoesMarcadas:[],receitasMarcadas:[],apac:{...propsFlash.apac,emitir:false},retorno:propsFlash.retorno,solicitacoes,propostasInvestigacao:referencias};
   }
   return <section aria-label="Consulta persistida" className="consulta-persistida">
+    {visaoPronta?.dutos?.intercorrenciasAnteriores?.length ? <AlertaIntercorrencias intercorrencias={visaoPronta.dutos.intercorrenciasAnteriores} /> : null}
     {!visaoPronta ? <>
       <p {...(cargaAtual?.erro ? { role: "alert" } : {})} aria-live="polite">{cargaAtual?.erro || "Carregando consulta persistida…"}</p>
       {cargaAtual?.erro ? <button type="button" onClick={() => setVersao((v) => v + 1)}>Recarregar consulta</button> : null}
@@ -489,6 +492,7 @@ export function ConsultaPersistida({ pedidoAberturaFlash = 0, porta, contexto, a
       }} /> : null}
     <InvestigacaoMinima porta={porta} contexto={contexto} {...(visaoPronta.retrato?{revisaoEsperada:visaoPronta.retrato.revisao}:{})}
       aoPrepararPedido={(p,revisao)=>{setPedidoInvestigacao(p);setPedidoRevisao(revisao);setPreview(null);setFlash(true);}} />
+    <AdministracaoCiclo porta={porta} contexto={{ patientId, encounterId, tumorLotId }} aoRegistrado={() => setVersao(v => v + 1)} />
     <DutosClinica {...(visaoPronta.dutos?{dados:visaoPronta.dutos}:{})} />
     </>}
       saida={<>

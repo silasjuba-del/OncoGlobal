@@ -167,10 +167,17 @@ export const TreatmentAdministration = z.object({
   inicio: Instante.nullable(),
   fim: Instante.nullable(),
   fonte: Fonte,
+  // Decisão do Dr. Silas (01/11/2026): reação infusional exige justificativa e volta ao médico no encontro seguinte.
+  reacaoInfusional: z.boolean().optional(),
 }).strict().superRefine((a, ctx) => {
   if (a.status === "OMITIDA" && a.quantidadeEfetivaMg !== 0)
     ctx.addIssue({ code: "custom", message: "OMITIDA exige quantidade 0" });
-  if ((a.status === "PARCIAL" || a.status === "INTERROMPIDA" || a.status === "OMITIDA") && !a.motivo)
+  if ((a.status === "PARCIAL" || a.status === "INTERROMPIDA" || a.status === "OMITIDA") && !a.motivo?.trim())
     ctx.addIssue({ code: "custom", message: `${a.status} exige motivo` });
+  if (a.reacaoInfusional && !a.motivo?.trim())
+    ctx.addIssue({ code: "custom", message: "Reação infusional exige justificativa" });
 });
+
+/** Administração que precisa voltar ao médico: não completa ou com reação infusional. */
+export const exigeRetornoMedico = (a: TreatmentAdministration): boolean => a.status !== "COMPLETA" || a.reacaoInfusional === true;
 export type TreatmentAdministration = z.infer<typeof TreatmentAdministration>;

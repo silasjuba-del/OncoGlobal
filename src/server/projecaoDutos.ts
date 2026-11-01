@@ -1,6 +1,6 @@
 import { avisosAdministracao, exposicaoLocalMgM2 } from '../modules/salao/medidaAdministracao.js';
 import { Apac, type ClinicalEvent } from '../contracts/operacao.js';
-import { TreatmentAdministration } from '../contracts/clinico.js';
+import { TreatmentAdministration, exigeRetornoMedico } from '../contracts/clinico.js';
 import { ConferenciaFarmacia, ValidacaoApacPersistida, mesmaPrescricao } from '../contracts/f1/dutos.js';
 import { Tarefa } from '../contracts/f1/tarefa.js';
 import { DutosClinicaVisao, ContextoDutosVisao } from '../contracts/api/dutos.js';
@@ -44,5 +44,9 @@ export function projetarDutos(eventos:readonly ClinicalEvent[],ctx:{patientId:st
  });
  for(const a of out.administracoes)a.avisos=avisosAdministracao(a.dados,historico);
  out.exposicoesLocais=[...new Set(historico.map(a=>a.droga))].map(droga=>exposicaoLocalMgM2(historico,droga,provenienciaPendente));
+ out.intercorrenciasAnteriores=eventosVigentes(eventos).filter(e=>e.patientId===ctx.patientId&&e.encounterId!==ctx.encounterId&&e.tipo==='TreatmentAdministration'&&['CONFIRMADO','ASSINADO'].includes(e.revisao)).flatMap(e=>{
+  const a=TreatmentAdministration.safeParse(dadosDoEvento(e));
+  return a.success&&exigeRetornoMedico(a.data)?[{eventId:e.eventId,encounterId:e.encounterId,registradoEm:e.criadoEm,dados:a.data}]:[];
+ }).sort((x,y)=>y.registradoEm.localeCompare(x.registradoEm));
  return DutosClinicaVisao.parse(out);
 }
